@@ -41,3 +41,9 @@ layout: default
 * :warning: <a href="library/test.cpp.html">test.cpp</a>
 
 
+## Verify Files
+
+* :heavy_check_mark: <a href="verify/example.test.cpp.html">example.test.cpp</a>
+* :heavy_check_mark: <a href="verify/example2.test.cpp.html">example2.test.cpp</a>
+
+
