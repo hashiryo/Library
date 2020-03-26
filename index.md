@@ -38,7 +38,7 @@ layout: default
 
 ### DataStructure
 
-* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">DataStructure/UnionFind.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFindTree</a>
 
 
 ## Verify Files

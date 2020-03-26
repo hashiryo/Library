@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_1_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 12:31:03+09:00
+    - Last commit date: 2020-03-26 13:02:03+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/UnionFind.hpp.html">DataStructure/UnionFind.hpp</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/UnionFind.hpp.html">UnionFindTree</a>
 
 
 ## Code
@@ -90,8 +90,13 @@ using namespace std;
 
 #define call_from_test
 #line 1 "DataStructure/UnionFind.hpp"
+/**
+ * @title UnionFindTree
+ * @brief union_set(x,y) x が入っている集合と y が入っている集合を併合する．
+ */
 
-#line 3 "DataStructure/UnionFind.hpp"
+#ifndef call_from_test
+#line 8 "DataStructure/UnionFind.hpp"
 using namespace std;
 #endif
 
