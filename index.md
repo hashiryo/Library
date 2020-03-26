@@ -42,9 +42,17 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFindTree</a>
 
 
+<div id="27118326006d3829667a400ad23d5d98"></div>
+
+### String
+
+* :heavy_check_mark: <a href="library/String/z_algorithm.hpp.html">Z_algorithm</a>
+
+
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
 
 
