@@ -46,14 +46,14 @@ layout: default
 
 ### String
 
-* :x: <a href="library/String/RollingHash.hpp.html">RollingHash</a>
+* :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">RollingHash</a>
 * :heavy_check_mark: <a href="library/String/z_algorithm.hpp.html">Z_algorithm</a>
 
 
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
-* :x: <a href="verify/test/aoj/ALDS1_14_B.test.cpp.html">test/aoj/ALDS1_14_B.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.test.cpp.html">test/aoj/ALDS1_14_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
 

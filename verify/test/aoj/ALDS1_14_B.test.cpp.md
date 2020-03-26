@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/ALDS1_14_B.test.cpp
+# :heavy_check_mark: test/aoj/ALDS1_14_B.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 23:21:04+09:00
+    - Last commit date: 2020-03-26 23:28:11+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/String/RollingHash.hpp.html">RollingHash</a>
+* :heavy_check_mark: <a href="../../../library/String/RollingHash.hpp.html">RollingHash</a>
 
 
 ## Code
@@ -108,14 +108,14 @@ template <unsigned long long B> struct RollingHash {
     const ull MASK61 = MOD;
     vector<ull> hash, po;
     RollingHash() {}
-    RollingHash(vector<ll> vs) { init(vs); }
+    RollingHash(vector<long long> vs) { init(vs); }
     RollingHash(string &s) {
-        vector<ll> vs;
+        vector<long long> vs;
         for(char c : s)
             vs.emplace_back(c);
         init(vs);
     }
-    void init(vector<ll> vs) {
+    void init(vector<long long> vs) {
         int n = vs.size();
         hash.assign(n + 1, 0);
         po.assign(n + 1, 1);
