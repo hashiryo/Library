@@ -34,14 +34,6 @@ layout: default
 
 ## Library Files
 
-<div id="5058f1af8388633f609cadb75a75dc9d"></div>
-
-### .
-
-* :warning: <a href="library/test.cpp.html">test.cpp</a>
-* :warning: <a href="library/test2.cpp.html">test2.cpp</a>
-
-
 <div id="5e248f107086635fddcead5bf28943fc"></div>
 
 ### DataStructure
