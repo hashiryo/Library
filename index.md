@@ -38,11 +38,13 @@ layout: default
 
 ### DataStructure
 
+* :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">ポテンシャルUnionFindTree</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFindTree</a>
 
 
 ## Verify Files
 
+* :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
 
 
