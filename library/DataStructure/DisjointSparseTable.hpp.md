@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: DisjointSparseTable
+# :heavy_check_mark: DisjointSparseTable (01)
 
 <a href="../../index.html">Back to top page</a>
 

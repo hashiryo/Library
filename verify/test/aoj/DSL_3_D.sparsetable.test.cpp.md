@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
+# :heavy_check_mark: test/aoj/DSL_3_D.sparsetable.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.disjointsparsetable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-28 17:47:05+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.sparsetable.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-03-28 22:04:26+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable (01)</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/SparseTable.hpp.html">DisjointSparseTable (02)</a>
 
 
 ## Code
@@ -54,7 +54,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/DisjointSparseTable.hpp"
+#include "DataStructure/SparseTable.hpp"
 #undef call_from_test
 
 signed main() {
@@ -65,12 +65,11 @@ signed main() {
     vector<int> a(N);
     for(int i = 0; i < N; i++)
         cin >> a[i];
-    auto f = [](int a, int b) { return min(a, b); };
-    DisjointSparseTable<int> dst(a, f);
+    SparseTable<int> st(a);
     for(int i = 0; i + L <= N; i++) {
         if(i)
             cout << " ";
-        cout << dst.query(i, i + L);
+        cout << st.range_min(i, i + L);
     }
     cout << endl;
     return 0;
@@ -81,7 +80,7 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/DSL_3_D.disjointsparsetable.test.cpp"
+#line 1 "test/aoj/DSL_3_D.sparsetable.test.cpp"
 #define PROBLEM                                                                \
     "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
@@ -89,7 +88,7 @@ signed main() {
 using namespace std;
 
 #define call_from_test
-#line 1 "DataStructure/DisjointSparseTable.hpp"
+#line 1 "DataStructure/SparseTable.hpp"
 /**
  * @title DisjointSparseTable
  * @brief fは結合則をみたす二項演算
@@ -98,42 +97,28 @@ using namespace std;
  */
 
 #ifndef call_from_test
-#line 10 "DataStructure/DisjointSparseTable.hpp"
+#line 10 "DataStructure/SparseTable.hpp"
 using namespace std;
 #endif
 
-template <class T> struct DisjointSparseTable {
-    vector<vector<T>> ys;
-    using F = function<T(T, T)>;
-    const F f;
-    DisjointSparseTable(vector<T> xs, F f_) : f(f_) {
-        int n = 1;
-        while(n <= xs.size())
-            n *= 2;
-        xs.resize(n);
-        ys.push_back(xs);
-        for(int h = 1;; ++h) {
-            int range = (2 << h), half = range / 2;
-            if(range > n)
-                break;
-            ys.push_back(xs);
-            for(int i = half; i < n; i += range) {
-                for(int j = i - 2; j >= i - half; --j)
-                    ys[h][j] = f(ys[h][j], ys[h][j + 1]);
-                for(int j = i + 1; j < min(n, i + half); ++j)
-                    ys[h][j] = f(ys[h][j - 1], ys[h][j]);
-            }
-        }
+template <class T> struct SparseTable {
+    const vector<T> &x;
+    vector<vector<int>> table;
+    int argmin(int i, int j) { return x[i] < x[j] ? i : j; }
+    SparseTable(const vector<T> &x) : x(x) {
+        int logn = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(x.size());
+        table.assign(logn + 1, vector<int>(x.size()));
+        iota(table[0].begin(), table[0].end(), 0);
+        for(int h = 0; h + 1 <= logn; ++h)
+            for(int i = 0; i + (1 << h) < x.size(); ++i)
+                table[h + 1][i] = argmin(table[h][i], table[h][i + (1 << h)]);
     }
-    T query(int i, int j) { // [i, j)
-        --j;
-        if(i == j)
-            return ys[0][i];
-        int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);
-        return f(ys[h][i], ys[h][j]);
+    T range_min(int i, int j) { // = min x[i,j)
+        int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(j - i); // = log2
+        return x[argmin(table[h][i], table[h][j - (1 << h)])];
     }
 };
-#line 9 "test/aoj/DSL_3_D.disjointsparsetable.test.cpp"
+#line 9 "test/aoj/DSL_3_D.sparsetable.test.cpp"
 #undef call_from_test
 
 signed main() {
@@ -144,12 +129,11 @@ signed main() {
     vector<int> a(N);
     for(int i = 0; i < N; i++)
         cin >> a[i];
-    auto f = [](int a, int b) { return min(a, b); };
-    DisjointSparseTable<int> dst(a, f);
+    SparseTable<int> st(a);
     for(int i = 0; i + L <= N; i++) {
         if(i)
             cout << " ";
-        cout << dst.query(i, i + L);
+        cout << st.range_min(i, i + L);
     }
     cout << endl;
     return 0;
