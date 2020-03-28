@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SparseTable.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-28 22:24:44+09:00
+    - Last commit date: 2020-03-28 22:38:15+09:00
 
 
 
@@ -49,7 +49,7 @@ layout: default
 /**
  * @title SparseTable
  * @brief RmQ
- * @brief 前処理 O(n log n)
+ * @brief 構築 O(n log n)
  * @brief query O(1)
  */
 
@@ -85,7 +85,7 @@ template <class T> struct SparseTable {
 /**
  * @title SparseTable
  * @brief RmQ
- * @brief 前処理 O(n log n)
+ * @brief 構築 O(n log n)
  * @brief query O(1)
  */
 
