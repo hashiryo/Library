@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: DisjointSparseTable
+# :heavy_check_mark: DisjointSparseTable
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/DisjointSparseTable.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-28 16:59:28+09:00
+    - Last commit date: 2020-03-28 17:47:05+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
 
 
 ## Code
@@ -84,7 +84,7 @@ template <class T> struct DisjointSparseTable {
     T query(int i, int j) { // [i, j)
         --j;
         if(i == j)
-            return xs[i];
+            return ys[0][i];
         int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);
         return f(ys[h][i], ys[h][j]);
     }
@@ -134,7 +134,7 @@ template <class T> struct DisjointSparseTable {
     T query(int i, int j) { // [i, j)
         --j;
         if(i == j)
-            return xs[i];
+            return ys[0][i];
         int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);
         return f(ys[h][i], ys[h][j]);
     }
