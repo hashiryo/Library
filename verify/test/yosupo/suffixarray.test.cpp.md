@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/suffixarray.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-28 22:59:45+09:00
+    - Last commit date: 2020-03-29 00:08:22+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/suffixarray">https://judge.yosupo.jp/problem/suffixarray</a>
@@ -97,7 +97,6 @@ using namespace std;
 struct SuffixArray {
     vector<int> SA;
     const string s;
-
     SuffixArray(const string &str) : s(str) {
         SA.resize(s.size());
         iota(begin(SA), end(SA), 0);
@@ -125,6 +124,28 @@ struct SuffixArray {
         }
     }
     int operator[](int k) const { return (SA[k]); }
+
+    // O(|T|*log|S|)
+    int lower_bound(string &t) {
+        int low = -1, high = s.size();
+        while(high - low > 1) {
+            int m = (low + high) >> 1;
+            if(s.compare(SA[m], t.length(), t) < 0)
+                low = m;
+            else
+                high = m;
+        }
+        return high;
+    }
+
+    int upper_bound(string &t) {
+        t.back()++;
+        int res = lower_bound(t);
+        t.back()--;
+        return res;
+    }
+    // O(|T|*log|S|)
+    int count(string &T) { return upper_bound(T) - lower_bound(T); }
 };
 #line 8 "test/yosupo/suffixarray.test.cpp"
 #undef call_from_test
