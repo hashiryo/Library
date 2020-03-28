@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/suffixarray.test.cpp
+# :heavy_check_mark: test/yosupo/number_of_substrings.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/suffixarray.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/number_of_substrings.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-03-29 02:12:04+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/suffixarray">https://judge.yosupo.jp/problem/suffixarray</a>
+* see: <a href="https://judge.yosupo.jp/problem/number_of_substrings">https://judge.yosupo.jp/problem/number_of_substrings</a>
 
 
 ## Depends on
@@ -47,7 +47,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
+#define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -62,12 +62,13 @@ signed main() {
     string S;
     cin >> S;
     SuffixArray SA(S);
-    for(int i = 0; i < S.length(); i++) {
-        if(i)
-            cout << " ";
-        cout << SA[i];
+    int N = S.length();
+    auto LCP = SA.get_lcp();
+    long long ans = 0;
+    for(int i = 0; i < N; i++) {
+        ans += (N - SA[i]) - LCP[i];
     }
-    cout << endl;
+    cout << ans << endl;
     return 0;
 }
 ```
@@ -76,8 +77,8 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/yosupo/suffixarray.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
+#line 1 "test/yosupo/number_of_substrings.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -166,7 +167,7 @@ struct SuffixArray {
         return LCP;
     }
 };
-#line 8 "test/yosupo/suffixarray.test.cpp"
+#line 8 "test/yosupo/number_of_substrings.test.cpp"
 #undef call_from_test
 
 signed main() {
@@ -175,12 +176,13 @@ signed main() {
     string S;
     cin >> S;
     SuffixArray SA(S);
-    for(int i = 0; i < S.length(); i++) {
-        if(i)
-            cout << " ";
-        cout << SA[i];
+    int N = S.length();
+    auto LCP = SA.get_lcp();
+    long long ans = 0;
+    for(int i = 0; i < N; i++) {
+        ans += (N - SA[i]) - LCP[i];
     }
-    cout << endl;
+    cout << ans << endl;
     return 0;
 }
 
