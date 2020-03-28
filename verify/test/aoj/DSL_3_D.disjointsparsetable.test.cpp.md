@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable (01)</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable</a>
 
 
 ## Code

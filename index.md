@@ -38,9 +38,9 @@ layout: default
 
 ### DataStructure
 
-* :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable (01)</a>
+* :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable</a>
 * :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">ポテンシャルUnionFindTree</a>
-* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">DisjointSparseTable (02)</a>
+* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">SparseTable</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFindTree</a>
 
 
