@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/KnuthMorrisPratt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 14:43:20+09:00
+    - Last commit date: 2020-03-29 16:15:22+09:00
 
 
 
@@ -62,15 +62,15 @@ struct KnuthMorrisPratt {
     const string s;
     int n;
     KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
-        int n = s.size();
-        vector<int> knuth(n + 1, -1);
         KMP.resize(n + 1, -1);
         for(int i = 0, j = -1; i < n; i++) {
-            while(~j && s[i] != s[j])
-                j = knuth[j];
-            knuth[i + 1] = KMP[i + 1] = ++j;
-            if(i + 1 < n && s[i + 1] == s[j])
-                knuth[i + 1] = knuth[j];
+            while(j >= 0 && s[i] != s[j])
+                j = KMP[j];
+            j++;
+            if((i + 1 == n ? '*' : s[i + 1]) == (j == n ? '*' : s[j]))
+                KMP[i + 1] = KMP[j];
+            else
+                KMP[i + 1] = j;
         }
     }
 
@@ -114,15 +114,15 @@ struct KnuthMorrisPratt {
     const string s;
     int n;
     KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
-        int n = s.size();
-        vector<int> knuth(n + 1, -1);
         KMP.resize(n + 1, -1);
         for(int i = 0, j = -1; i < n; i++) {
-            while(~j && s[i] != s[j])
-                j = knuth[j];
-            knuth[i + 1] = KMP[i + 1] = ++j;
-            if(i + 1 < n && s[i + 1] == s[j])
-                knuth[i + 1] = knuth[j];
+            while(j >= 0 && s[i] != s[j])
+                j = KMP[j];
+            j++;
+            if((i + 1 == n ? '*' : s[i + 1]) == (j == n ? '*' : s[j]))
+                KMP[i + 1] = KMP[j];
+            else
+                KMP[i + 1] = j;
         }
     }
 
