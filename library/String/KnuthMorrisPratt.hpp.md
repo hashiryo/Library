@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/KnuthMorrisPratt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 16:19:04+09:00
+    - Last commit date: 2020-03-29 16:47:26+09:00
 
 
 
@@ -73,6 +73,9 @@ struct KnuthMorrisPratt {
                 KMP[i + 1] = j;
         }
     }
+
+    // the period of S[0:i]
+    int period(int i) { return i - KMP[i]; }
 
     // positions for T that match s
     // O(|T|)
@@ -125,6 +128,9 @@ struct KnuthMorrisPratt {
                 KMP[i + 1] = j;
         }
     }
+
+    // the period of S[0:i]
+    int period(int i) { return i - KMP[i]; }
 
     // positions for T that match s
     // O(|T|)
