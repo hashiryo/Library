@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/ALDS1_14_B.test.cpp
+# :heavy_check_mark: test/aoj/ALDS1_14_B.rollinghash.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 23:28:11+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.rollinghash.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-03-29 14:43:20+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -81,7 +81,7 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/ALDS1_14_B.test.cpp"
+#line 1 "test/aoj/ALDS1_14_B.rollinghash.test.cpp"
 #define PROBLEM                                                                \
     "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 
@@ -149,7 +149,7 @@ template <unsigned long long B> struct RollingHash {
         return CalcMod(res);
     }
 };
-#line 9 "test/aoj/ALDS1_14_B.test.cpp"
+#line 9 "test/aoj/ALDS1_14_B.rollinghash.test.cpp"
 #undef call_from_test
 
 signed main() {

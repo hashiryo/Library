@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/z_algorithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 16:32:30+09:00
+    - Last commit date: 2020-03-29 14:43:20+09:00
 
 
 
@@ -49,7 +49,7 @@ layout: default
 /**
  * @title Z_algorithm
  * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
- * @brief O(N)
+ * @brief O(|S|)
  */
 
 #ifndef call_from_test
@@ -83,7 +83,7 @@ vector<int> z_algorithm(const string &s) {
 /**
  * @title Z_algorithm
  * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
- * @brief O(N)
+ * @brief O(|S|)
  */
 
 #ifndef call_from_test

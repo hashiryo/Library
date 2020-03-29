@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/z_algorithm.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 16:32:30+09:00
+    - Last commit date: 2020-03-29 14:43:20+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/zalgorithm">https://judge.yosupo.jp/problem/zalgorithm</a>
@@ -84,7 +84,7 @@ using namespace std;
 /**
  * @title Z_algorithm
  * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
- * @brief O(N)
+ * @brief O(|S|)
  */
 
 #ifndef call_from_test
