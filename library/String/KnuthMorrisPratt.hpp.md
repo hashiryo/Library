@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/KnuthMorrisPratt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 16:15:22+09:00
+    - Last commit date: 2020-03-29 16:19:04+09:00
 
 
 
@@ -83,7 +83,7 @@ struct KnuthMorrisPratt {
             while(k >= 0 && T[i] != s[k])
                 k = KMP[k];
             if(++k == n) {
-                /* match at s[i-m+1 ... i] */
+                /* match at T[i-n+1 ... i] */
                 occur.push_back(i - n + 1);
             }
         }
@@ -135,7 +135,7 @@ struct KnuthMorrisPratt {
             while(k >= 0 && T[i] != s[k])
                 k = KMP[k];
             if(++k == n) {
-                /* match at s[i-m+1 ... i] */
+                /* match at T[i-n+1 ... i] */
                 occur.push_back(i - n + 1);
             }
         }

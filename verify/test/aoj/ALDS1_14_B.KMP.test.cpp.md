@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.KMP.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 16:15:22+09:00
+    - Last commit date: 2020-03-29 16:19:04+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -122,7 +122,7 @@ struct KnuthMorrisPratt {
             while(k >= 0 && T[i] != s[k])
                 k = KMP[k];
             if(++k == n) {
-                /* match at s[i-m+1 ... i] */
+                /* match at T[i-n+1 ... i] */
                 occur.push_back(i - n + 1);
             }
         }
