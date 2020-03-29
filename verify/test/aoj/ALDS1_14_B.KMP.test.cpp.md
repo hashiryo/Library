@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.KMP.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 16:47:26+09:00
+    - Last commit date: 2020-03-29 23:46:20+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -89,27 +89,26 @@ using namespace std;
  * @title KnuthMorrisPratt
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
+ * @brief period(i) verified :ARC060_F
  */
 
 #ifndef call_from_test
-#line 9 "String/KnuthMorrisPratt.hpp"
+#line 10 "String/KnuthMorrisPratt.hpp"
 using namespace std;
 #endif
-
 struct KnuthMorrisPratt {
     vector<int> KMP;
     const string s;
     int n;
     KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
         KMP.resize(n + 1, -1);
+        vector<int> knuth(n + 1, -1);
         for(int i = 0, j = -1; i < n; i++) {
-            while(j >= 0 && s[i] != s[j])
-                j = KMP[j];
-            j++;
-            if((i + 1 == n ? '*' : s[i + 1]) == (j == n ? '*' : s[j]))
-                KMP[i + 1] = KMP[j];
-            else
-                KMP[i + 1] = j;
+            while(~j && s[i] != s[j])
+                j = knuth[j];
+            knuth[i + 1] = KMP[i + 1] = ++j;
+            if(i + 1 < n && s[i + 1] == s[j])
+                knuth[i + 1] = knuth[j];
         }
     }
 

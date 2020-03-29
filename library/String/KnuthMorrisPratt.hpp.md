@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/KnuthMorrisPratt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 16:47:26+09:00
+    - Last commit date: 2020-03-29 23:46:20+09:00
 
 
 
@@ -50,27 +50,26 @@ layout: default
  * @title KnuthMorrisPratt
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
+ * @brief period(i) verified :ARC060_F
  */
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
-
 struct KnuthMorrisPratt {
     vector<int> KMP;
     const string s;
     int n;
     KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
         KMP.resize(n + 1, -1);
+        vector<int> knuth(n + 1, -1);
         for(int i = 0, j = -1; i < n; i++) {
-            while(j >= 0 && s[i] != s[j])
-                j = KMP[j];
-            j++;
-            if((i + 1 == n ? '*' : s[i + 1]) == (j == n ? '*' : s[j]))
-                KMP[i + 1] = KMP[j];
-            else
-                KMP[i + 1] = j;
+            while(~j && s[i] != s[j])
+                j = knuth[j];
+            knuth[i + 1] = KMP[i + 1] = ++j;
+            if(i + 1 < n && s[i + 1] == s[j])
+                knuth[i + 1] = knuth[j];
         }
     }
 
@@ -93,7 +92,6 @@ struct KnuthMorrisPratt {
         return occur;
     }
 };
-
 ```
 {% endraw %}
 
@@ -105,27 +103,26 @@ struct KnuthMorrisPratt {
  * @title KnuthMorrisPratt
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
+ * @brief period(i) verified :ARC060_F
  */
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
-
 struct KnuthMorrisPratt {
     vector<int> KMP;
     const string s;
     int n;
     KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
         KMP.resize(n + 1, -1);
+        vector<int> knuth(n + 1, -1);
         for(int i = 0, j = -1; i < n; i++) {
-            while(j >= 0 && s[i] != s[j])
-                j = KMP[j];
-            j++;
-            if((i + 1 == n ? '*' : s[i + 1]) == (j == n ? '*' : s[j]))
-                KMP[i + 1] = KMP[j];
-            else
-                KMP[i + 1] = j;
+            while(~j && s[i] != s[j])
+                j = knuth[j];
+            knuth[i + 1] = KMP[i + 1] = ++j;
+            if(i + 1 < n && s[i + 1] == s[j])
+                knuth[i + 1] = knuth[j];
         }
     }
 
