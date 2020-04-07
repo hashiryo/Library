@@ -25,24 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 形式的冪級数(任意素数MOD)
+# :heavy_check_mark: 形式的冪級数(任意素数MOD)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-07 19:37:34+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 
 
 ## Code
@@ -76,7 +76,7 @@ class Mod64 {
   }
 
  public:
-  static constexpr u64 inv = mul_inv(mod);
+  static constexpr u64 inv = mul_inv(mod, 6, 1);
   static constexpr u64 r2 = -u128(mod) % mod;
   static constexpr int level = __builtin_ctzll(mod - 1);
   static_assert(inv * mod == 1, "invalid 1/M modulo 2^64.");
@@ -580,7 +580,7 @@ class Mod64 {
   }
 
  public:
-  static constexpr u64 inv = mul_inv(mod);
+  static constexpr u64 inv = mul_inv(mod, 6, 1);
   static constexpr u64 r2 = -u128(mod) % mod;
   static constexpr int level = __builtin_ctzll(mod - 1);
   static_assert(inv * mod == 1, "invalid 1/M modulo 2^64.");
