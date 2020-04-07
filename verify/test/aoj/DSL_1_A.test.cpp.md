@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_1_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 13:56:53+09:00
+    - Last commit date: 2020-04-07 17:39:41+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
@@ -92,33 +92,33 @@ using namespace std;
 #line 1 "DataStructure/UnionFind.hpp"
 /**
  * @title UnionFindTree
+ * @category データ構造
  * @brief union_set(x,y) x が入っている集合と y が入っている集合を併合する．
  * @brief same(x,y) x と y が同じ集合に入っているかどうかを判定する．
  * @brief O(α(N))
  */
 
 #ifndef call_from_test
-#line 10 "DataStructure/UnionFind.hpp"
+#line 11 "DataStructure/UnionFind.hpp"
 using namespace std;
 #endif
 
 struct UnionFind {
-    vector<int> par;
-    UnionFind(int size) : par(size, -1) {}
-    bool unionSet(int x, int y) {
-        x = root(x);
-        y = root(y);
-        if(x != y) {
-            if(par[y] < par[x])
-                swap(x, y);
-            par[x] += par[y];
-            par[y] = x;
-        }
-        return x != y;
+  vector<int> par;
+  UnionFind(int size) : par(size, -1) {}
+  bool unionSet(int x, int y) {
+    x = root(x);
+    y = root(y);
+    if (x != y) {
+      if (par[y] < par[x]) swap(x, y);
+      par[x] += par[y];
+      par[y] = x;
     }
-    bool same(int x, int y) { return root(x) == root(y); }
-    int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
-    int size(int x) { return -par[root(x)]; }
+    return x != y;
+  }
+  bool same(int x, int y) { return root(x) == root(y); }
+  int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
+  int size(int x) { return -par[root(x)]; }
 };
 #line 9 "test/aoj/DSL_1_A.test.cpp"
 #undef call_from_test

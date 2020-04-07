@@ -34,9 +34,9 @@ layout: default
 
 ## Library Files
 
-<div id="5e248f107086635fddcead5bf28943fc"></div>
+<div id="c1c7278649b583761cecd13e0628181d"></div>
 
-### DataStructure
+### データ構造
 
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable</a>
 * :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">ポテンシャルUnionFindTree</a>
@@ -44,9 +44,16 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFindTree</a>
 
 
-<div id="27118326006d3829667a400ad23d5d98"></div>
+<div id="6e65831863dbf272b7a65cd8df1a440d"></div>
 
-### String
+### 数学
+
+* :x: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+
+
+<div id="a973a7fd4d27ccdfce027f329015f5da"></div>
+
+### 文字列
 
 * :heavy_check_mark: <a href="library/String/KnuthMorrisPratt.hpp.html">KnuthMorrisPratt</a>
 * :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">RollingHash</a>
@@ -63,7 +70,12 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>
+* :x: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
+* :x: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
+* :x: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :x: <a href="verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
+* :x: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
 

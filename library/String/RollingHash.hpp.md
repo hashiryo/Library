@@ -29,9 +29,9 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
+* category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/RollingHash.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 23:28:11+09:00
+    - Last commit date: 2020-04-07 17:39:41+09:00
 
 
 
@@ -48,6 +48,7 @@ layout: default
 ```cpp
 /**
  * @title RollingHash
+ * @category 文字列
  * @brief Mod は　2^61-1 で固定
  */
 
@@ -56,54 +57,54 @@ layout: default
 using namespace std;
 #endif
 
-template <unsigned long long B> struct RollingHash {
-    using ull = unsigned long long;
-    const ull MASK30 = (1UL << 30) - 1;
-    const ull MASK31 = (1UL << 31) - 1;
-    const ull MOD = (1UL << 61) - 1;
-    const ull MASK61 = MOD;
-    vector<ull> hash, po;
-    RollingHash() {}
-    RollingHash(vector<long long> vs) { init(vs); }
-    RollingHash(string &s) {
-        vector<long long> vs;
-        for(char c : s)
-            vs.emplace_back(c);
-        init(vs);
+template <unsigned long long B>
+struct RollingHash {
+  using ull = unsigned long long;
+  const ull MASK30 = (1UL << 30) - 1;
+  const ull MASK31 = (1UL << 31) - 1;
+  const ull MOD = (1UL << 61) - 1;
+  const ull MASK61 = MOD;
+  vector<ull> hash, po;
+  RollingHash() {}
+  RollingHash(vector<long long> vs) { init(vs); }
+  RollingHash(string &s) {
+    vector<long long> vs;
+    for (char c : s) vs.emplace_back(c);
+    init(vs);
+  }
+  void init(vector<long long> vs) {
+    int n = vs.size();
+    hash.assign(n + 1, 0);
+    po.assign(n + 1, 1);
+    for (int i = 0; i < n; i++) {
+      hash[i + 1] = CalcMod(Mul(hash[i], B) + vs[i]);
+      po[i + 1] = CalcMod(Mul(po[i], B));
     }
-    void init(vector<long long> vs) {
-        int n = vs.size();
-        hash.assign(n + 1, 0);
-        po.assign(n + 1, 1);
-        for(int i = 0; i < n; i++) {
-            hash[i + 1] = CalcMod(Mul(hash[i], B) + vs[i]);
-            po[i + 1] = CalcMod(Mul(po[i], B));
-        }
-    }
-    // a*b mod 2^61-1を返す関数(最後にModを取る)
-    ull Mul(ull a, ull b) {
-        ull au = a >> 31;
-        ull ad = a & MASK31;
-        ull bu = b >> 31;
-        ull bd = b & MASK31;
-        ull mid = ad * bu + au * bd;
-        ull midu = mid >> 30;
-        ull midd = mid & MASK30;
-        return au * bu * 2 + midu + (midd << 31) + ad * bd;
-    }
+  }
+  // a*b mod 2^61-1を返す関数(最後にModを取る)
+  ull Mul(ull a, ull b) {
+    ull au = a >> 31;
+    ull ad = a & MASK31;
+    ull bu = b >> 31;
+    ull bd = b & MASK31;
+    ull mid = ad * bu + au * bd;
+    ull midu = mid >> 30;
+    ull midd = mid & MASK30;
+    return au * bu * 2 + midu + (midd << 31) + ad * bd;
+  }
 
-    // mod 2^61-1を計算する関数
-    ull CalcMod(ull x) {
-        ull xu = x >> 61;
-        ull xd = x & MASK61;
-        ull res = xu + xd;
-        return res >= MOD ? res - MOD : res;
-    }
-    // S[l, r)
-    ull find(int l, int r) {
-        ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
-        return CalcMod(res);
-    }
+  // mod 2^61-1を計算する関数
+  ull CalcMod(ull x) {
+    ull xu = x >> 61;
+    ull xd = x & MASK61;
+    ull res = xu + xd;
+    return res >= MOD ? res - MOD : res;
+  }
+  // S[l, r)
+  ull find(int l, int r) {
+    ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
+    return CalcMod(res);
+  }
 };
 ```
 {% endraw %}
@@ -114,6 +115,7 @@ template <unsigned long long B> struct RollingHash {
 #line 1 "String/RollingHash.hpp"
 /**
  * @title RollingHash
+ * @category 文字列
  * @brief Mod は　2^61-1 で固定
  */
 
@@ -122,54 +124,54 @@ template <unsigned long long B> struct RollingHash {
 using namespace std;
 #endif
 
-template <unsigned long long B> struct RollingHash {
-    using ull = unsigned long long;
-    const ull MASK30 = (1UL << 30) - 1;
-    const ull MASK31 = (1UL << 31) - 1;
-    const ull MOD = (1UL << 61) - 1;
-    const ull MASK61 = MOD;
-    vector<ull> hash, po;
-    RollingHash() {}
-    RollingHash(vector<long long> vs) { init(vs); }
-    RollingHash(string &s) {
-        vector<long long> vs;
-        for(char c : s)
-            vs.emplace_back(c);
-        init(vs);
+template <unsigned long long B>
+struct RollingHash {
+  using ull = unsigned long long;
+  const ull MASK30 = (1UL << 30) - 1;
+  const ull MASK31 = (1UL << 31) - 1;
+  const ull MOD = (1UL << 61) - 1;
+  const ull MASK61 = MOD;
+  vector<ull> hash, po;
+  RollingHash() {}
+  RollingHash(vector<long long> vs) { init(vs); }
+  RollingHash(string &s) {
+    vector<long long> vs;
+    for (char c : s) vs.emplace_back(c);
+    init(vs);
+  }
+  void init(vector<long long> vs) {
+    int n = vs.size();
+    hash.assign(n + 1, 0);
+    po.assign(n + 1, 1);
+    for (int i = 0; i < n; i++) {
+      hash[i + 1] = CalcMod(Mul(hash[i], B) + vs[i]);
+      po[i + 1] = CalcMod(Mul(po[i], B));
     }
-    void init(vector<long long> vs) {
-        int n = vs.size();
-        hash.assign(n + 1, 0);
-        po.assign(n + 1, 1);
-        for(int i = 0; i < n; i++) {
-            hash[i + 1] = CalcMod(Mul(hash[i], B) + vs[i]);
-            po[i + 1] = CalcMod(Mul(po[i], B));
-        }
-    }
-    // a*b mod 2^61-1を返す関数(最後にModを取る)
-    ull Mul(ull a, ull b) {
-        ull au = a >> 31;
-        ull ad = a & MASK31;
-        ull bu = b >> 31;
-        ull bd = b & MASK31;
-        ull mid = ad * bu + au * bd;
-        ull midu = mid >> 30;
-        ull midd = mid & MASK30;
-        return au * bu * 2 + midu + (midd << 31) + ad * bd;
-    }
+  }
+  // a*b mod 2^61-1を返す関数(最後にModを取る)
+  ull Mul(ull a, ull b) {
+    ull au = a >> 31;
+    ull ad = a & MASK31;
+    ull bu = b >> 31;
+    ull bd = b & MASK31;
+    ull mid = ad * bu + au * bd;
+    ull midu = mid >> 30;
+    ull midd = mid & MASK30;
+    return au * bu * 2 + midu + (midd << 31) + ad * bd;
+  }
 
-    // mod 2^61-1を計算する関数
-    ull CalcMod(ull x) {
-        ull xu = x >> 61;
-        ull xd = x & MASK61;
-        ull res = xu + xd;
-        return res >= MOD ? res - MOD : res;
-    }
-    // S[l, r)
-    ull find(int l, int r) {
-        ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
-        return CalcMod(res);
-    }
+  // mod 2^61-1を計算する関数
+  ull CalcMod(ull x) {
+    ull xu = x >> 61;
+    ull xd = x & MASK61;
+    ull res = xu + xd;
+    return res >= MOD ? res - MOD : res;
+  }
+  // S[l, r)
+  ull find(int l, int r) {
+    ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
+    return CalcMod(res);
+  }
 };
 
 ```

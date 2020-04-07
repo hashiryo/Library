@@ -29,9 +29,9 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
+* category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/KnuthMorrisPratt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 23:46:20+09:00
+    - Last commit date: 2020-04-07 17:39:41+09:00
 
 
 
@@ -48,6 +48,7 @@ layout: default
 ```cpp
 /**
  * @title KnuthMorrisPratt
+ * @category 文字列
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
  * @brief period(i) verified :ARC060_F
@@ -58,39 +59,36 @@ layout: default
 using namespace std;
 #endif
 struct KnuthMorrisPratt {
-    vector<int> KMP;
-    const string s;
-    int n;
-    KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
-        KMP.resize(n + 1, -1);
-        vector<int> knuth(n + 1, -1);
-        for(int i = 0, j = -1; i < n; i++) {
-            while(~j && s[i] != s[j])
-                j = knuth[j];
-            knuth[i + 1] = KMP[i + 1] = ++j;
-            if(i + 1 < n && s[i + 1] == s[j])
-                knuth[i + 1] = knuth[j];
-        }
+  vector<int> KMP;
+  const string s;
+  int n;
+  KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
+    KMP.resize(n + 1, -1);
+    vector<int> knuth(n + 1, -1);
+    for (int i = 0, j = -1; i < n; i++) {
+      while (~j && s[i] != s[j]) j = knuth[j];
+      knuth[i + 1] = KMP[i + 1] = ++j;
+      if (i + 1 < n && s[i + 1] == s[j]) knuth[i + 1] = knuth[j];
     }
+  }
 
-    // the period of S[0:i]
-    int period(int i) { return i - KMP[i]; }
+  // the period of S[0:i]
+  int period(int i) { return i - KMP[i]; }
 
-    // positions for T that match s
-    // O(|T|)
-    vector<int> pattern_match(string T) {
-        int m = T.length();
-        vector<int> occur;
-        for(int i = 0, k = 0; i < m; ++i) {
-            while(k >= 0 && T[i] != s[k])
-                k = KMP[k];
-            if(++k == n) {
-                /* match at T[i-n+1 ... i] */
-                occur.push_back(i - n + 1);
-            }
-        }
-        return occur;
+  // positions for T that match s
+  // O(|T|)
+  vector<int> pattern_match(string T) {
+    int m = T.length();
+    vector<int> occur;
+    for (int i = 0, k = 0; i < m; ++i) {
+      while (k >= 0 && T[i] != s[k]) k = KMP[k];
+      if (++k == n) {
+        /* match at T[i-n+1 ... i] */
+        occur.push_back(i - n + 1);
+      }
     }
+    return occur;
+  }
 };
 ```
 {% endraw %}
@@ -101,6 +99,7 @@ struct KnuthMorrisPratt {
 #line 1 "String/KnuthMorrisPratt.hpp"
 /**
  * @title KnuthMorrisPratt
+ * @category 文字列
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
  * @brief period(i) verified :ARC060_F
@@ -111,39 +110,36 @@ struct KnuthMorrisPratt {
 using namespace std;
 #endif
 struct KnuthMorrisPratt {
-    vector<int> KMP;
-    const string s;
-    int n;
-    KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
-        KMP.resize(n + 1, -1);
-        vector<int> knuth(n + 1, -1);
-        for(int i = 0, j = -1; i < n; i++) {
-            while(~j && s[i] != s[j])
-                j = knuth[j];
-            knuth[i + 1] = KMP[i + 1] = ++j;
-            if(i + 1 < n && s[i + 1] == s[j])
-                knuth[i + 1] = knuth[j];
-        }
+  vector<int> KMP;
+  const string s;
+  int n;
+  KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
+    KMP.resize(n + 1, -1);
+    vector<int> knuth(n + 1, -1);
+    for (int i = 0, j = -1; i < n; i++) {
+      while (~j && s[i] != s[j]) j = knuth[j];
+      knuth[i + 1] = KMP[i + 1] = ++j;
+      if (i + 1 < n && s[i + 1] == s[j]) knuth[i + 1] = knuth[j];
     }
+  }
 
-    // the period of S[0:i]
-    int period(int i) { return i - KMP[i]; }
+  // the period of S[0:i]
+  int period(int i) { return i - KMP[i]; }
 
-    // positions for T that match s
-    // O(|T|)
-    vector<int> pattern_match(string T) {
-        int m = T.length();
-        vector<int> occur;
-        for(int i = 0, k = 0; i < m; ++i) {
-            while(k >= 0 && T[i] != s[k])
-                k = KMP[k];
-            if(++k == n) {
-                /* match at T[i-n+1 ... i] */
-                occur.push_back(i - n + 1);
-            }
-        }
-        return occur;
+  // positions for T that match s
+  // O(|T|)
+  vector<int> pattern_match(string T) {
+    int m = T.length();
+    vector<int> occur;
+    for (int i = 0, k = 0; i < m; ++i) {
+      while (k >= 0 && T[i] != s[k]) k = KMP[k];
+      if (++k == n) {
+        /* match at T[i-n+1 ... i] */
+        occur.push_back(i - n + 1);
+      }
     }
+    return occur;
+  }
 };
 
 ```

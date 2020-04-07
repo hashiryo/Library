@@ -29,9 +29,9 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
+* category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-26 13:56:53+09:00
+    - Last commit date: 2020-04-07 17:39:41+09:00
 
 
 
@@ -48,6 +48,7 @@ layout: default
 ```cpp
 /**
  * @title UnionFindTree
+ * @category データ構造
  * @brief union_set(x,y) x が入っている集合と y が入っている集合を併合する．
  * @brief same(x,y) x と y が同じ集合に入っているかどうかを判定する．
  * @brief O(α(N))
@@ -59,22 +60,21 @@ using namespace std;
 #endif
 
 struct UnionFind {
-    vector<int> par;
-    UnionFind(int size) : par(size, -1) {}
-    bool unionSet(int x, int y) {
-        x = root(x);
-        y = root(y);
-        if(x != y) {
-            if(par[y] < par[x])
-                swap(x, y);
-            par[x] += par[y];
-            par[y] = x;
-        }
-        return x != y;
+  vector<int> par;
+  UnionFind(int size) : par(size, -1) {}
+  bool unionSet(int x, int y) {
+    x = root(x);
+    y = root(y);
+    if (x != y) {
+      if (par[y] < par[x]) swap(x, y);
+      par[x] += par[y];
+      par[y] = x;
     }
-    bool same(int x, int y) { return root(x) == root(y); }
-    int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
-    int size(int x) { return -par[root(x)]; }
+    return x != y;
+  }
+  bool same(int x, int y) { return root(x) == root(y); }
+  int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
+  int size(int x) { return -par[root(x)]; }
 };
 ```
 {% endraw %}
@@ -85,6 +85,7 @@ struct UnionFind {
 #line 1 "DataStructure/UnionFind.hpp"
 /**
  * @title UnionFindTree
+ * @category データ構造
  * @brief union_set(x,y) x が入っている集合と y が入っている集合を併合する．
  * @brief same(x,y) x と y が同じ集合に入っているかどうかを判定する．
  * @brief O(α(N))
@@ -96,22 +97,21 @@ using namespace std;
 #endif
 
 struct UnionFind {
-    vector<int> par;
-    UnionFind(int size) : par(size, -1) {}
-    bool unionSet(int x, int y) {
-        x = root(x);
-        y = root(y);
-        if(x != y) {
-            if(par[y] < par[x])
-                swap(x, y);
-            par[x] += par[y];
-            par[y] = x;
-        }
-        return x != y;
+  vector<int> par;
+  UnionFind(int size) : par(size, -1) {}
+  bool unionSet(int x, int y) {
+    x = root(x);
+    y = root(y);
+    if (x != y) {
+      if (par[y] < par[x]) swap(x, y);
+      par[x] += par[y];
+      par[y] = x;
     }
-    bool same(int x, int y) { return root(x) == root(y); }
-    int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
-    int size(int x) { return -par[root(x)]; }
+    return x != y;
+  }
+  bool same(int x, int y) { return root(x) == root(y); }
+  int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
+  int size(int x) { return -par[root(x)]; }
 };
 
 ```

@@ -29,9 +29,9 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#27118326006d3829667a400ad23d5d98">String</a>
+* category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/z_algorithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-29 14:43:20+09:00
+    - Last commit date: 2020-04-07 17:39:41+09:00
 
 
 
@@ -48,6 +48,7 @@ layout: default
 ```cpp
 /**
  * @title Z_algorithm
+ * @category 文字列
  * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
  * @brief O(|S|)
  */
@@ -58,20 +59,19 @@ using namespace std;
 #endif
 
 vector<int> z_algorithm(const string &s) {
-    vector<int> prefix(s.size());
-    for(int i = 1, j = 0; i < s.size(); i++) {
-        if(i + prefix[i - j] < j + prefix[j]) {
-            prefix[i] = prefix[i - j];
-        } else {
-            int k = max(0, j + prefix[j] - i);
-            while(i + k < s.size() && s[k] == s[i + k])
-                ++k;
-            prefix[i] = k;
-            j = i;
-        }
+  vector<int> prefix(s.size());
+  for (int i = 1, j = 0; i < s.size(); i++) {
+    if (i + prefix[i - j] < j + prefix[j]) {
+      prefix[i] = prefix[i - j];
+    } else {
+      int k = max(0, j + prefix[j] - i);
+      while (i + k < s.size() && s[k] == s[i + k]) ++k;
+      prefix[i] = k;
+      j = i;
     }
-    prefix[0] = (int)s.size();
-    return prefix;
+  }
+  prefix[0] = (int)s.size();
+  return prefix;
 }
 ```
 {% endraw %}
@@ -82,6 +82,7 @@ vector<int> z_algorithm(const string &s) {
 #line 1 "String/z_algorithm.hpp"
 /**
  * @title Z_algorithm
+ * @category 文字列
  * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
  * @brief O(|S|)
  */
@@ -92,20 +93,19 @@ using namespace std;
 #endif
 
 vector<int> z_algorithm(const string &s) {
-    vector<int> prefix(s.size());
-    for(int i = 1, j = 0; i < s.size(); i++) {
-        if(i + prefix[i - j] < j + prefix[j]) {
-            prefix[i] = prefix[i - j];
-        } else {
-            int k = max(0, j + prefix[j] - i);
-            while(i + k < s.size() && s[k] == s[i + k])
-                ++k;
-            prefix[i] = k;
-            j = i;
-        }
+  vector<int> prefix(s.size());
+  for (int i = 1, j = 0; i < s.size(); i++) {
+    if (i + prefix[i - j] < j + prefix[j]) {
+      prefix[i] = prefix[i - j];
+    } else {
+      int k = max(0, j + prefix[j] - i);
+      while (i + k < s.size() && s[k] == s[i + k]) ++k;
+      prefix[i] = k;
+      j = i;
     }
-    prefix[0] = (int)s.size();
-    return prefix;
+  }
+  prefix[0] = (int)s.size();
+  return prefix;
 }
 
 ```
