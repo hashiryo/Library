@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+# :heavy_check_mark: test/aoj/ALDS1_14_B.rollinghash.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.rollinghash.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-08 12:57:42+09:00
+    - Last commit date: 2020-04-08 13:46:56+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/String/RollingHash.hpp.html">RollingHash</a>
+* :heavy_check_mark: <a href="../../../library/String/RollingHash.hpp.html">RollingHash</a>
 
 
 ## Code
@@ -47,8 +47,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -58,22 +58,22 @@ using namespace std;
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    string T, P;
-    cin >> T >> P;
-    using RH1 = RollingHash<2020031611>;
-    using RH2 = RollingHash<19990929>;
-    RH1 rt1(T), rp1(P);
-    RH2 rt2(T), rp2(P);
-    int N = P.length();
-    for(int i = 0; i + N <= T.length(); i++) {
-        if(rt1.find(i, i + N) == rp1.find(0, N)
-           && rt2.find(i, i + N) == rp2.find(0, N))
-            cout << i << "\n";
-    }
-    cout << flush;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string T, P;
+  cin >> T >> P;
+  using RH1 = RollingHash<2020031611>;
+  using RH2 = RollingHash<19990929>;
+  RH1 rt1(T), rp1(P);
+  RH2 rt2(T), rp2(P);
+  int N = P.length();
+  for (int i = 0; i + N <= T.length(); i++) {
+    if (rt1.get(i, i + N) == rp1.get(0, N)
+        && rt2.get(i, i + N) == rp2.get(0, N))
+      cout << i << "\n";
+  }
+  cout << flush;
+  return 0;
 }
 ```
 {% endraw %}
@@ -82,8 +82,8 @@ signed main() {
 {% raw %}
 ```cpp
 #line 1 "test/aoj/ALDS1_14_B.rollinghash.test.cpp"
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -160,22 +160,22 @@ struct RollingHash {
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    string T, P;
-    cin >> T >> P;
-    using RH1 = RollingHash<2020031611>;
-    using RH2 = RollingHash<19990929>;
-    RH1 rt1(T), rp1(P);
-    RH2 rt2(T), rp2(P);
-    int N = P.length();
-    for(int i = 0; i + N <= T.length(); i++) {
-        if(rt1.find(i, i + N) == rp1.find(0, N)
-           && rt2.find(i, i + N) == rp2.find(0, N))
-            cout << i << "\n";
-    }
-    cout << flush;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string T, P;
+  cin >> T >> P;
+  using RH1 = RollingHash<2020031611>;
+  using RH2 = RollingHash<19990929>;
+  RH1 rt1(T), rp1(P);
+  RH2 rt2(T), rp2(P);
+  int N = P.length();
+  for (int i = 0; i + N <= T.length(); i++) {
+    if (rt1.get(i, i + N) == rp1.get(0, N)
+        && rt2.get(i, i + N) == rp2.get(0, N))
+      cout << i << "\n";
+  }
+  cout << flush;
+  return 0;
 }
 
 ```
