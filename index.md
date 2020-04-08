@@ -49,6 +49,7 @@ layout: default
 ### 数学
 
 * :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+* :heavy_check_mark: <a href="library/Math/Kitamasa.hpp.html">高速きたまさ法</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -56,17 +57,18 @@ layout: default
 ### 文字列
 
 * :heavy_check_mark: <a href="library/String/KnuthMorrisPratt.hpp.html">KnuthMorrisPratt</a>
-* :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">RollingHash</a>
+* :x: <a href="library/String/RollingHash.hpp.html">RollingHash</a>
 * :heavy_check_mark: <a href="library/String/SuffixArray.hpp.html">SuffixArray</a>
 * :heavy_check_mark: <a href="library/String/z_algorithm.hpp.html">Z_algorithm</a>
 
 
 ## Verify Files
 
+* :heavy_check_mark: <a href="verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.KMP.test.cpp.html">test/aoj/ALDS1_14_B.KMP.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html">test/aoj/ALDS1_14_B.rollinghash.test.cpp</a>
+* :x: <a href="verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html">test/aoj/ALDS1_14_B.rollinghash.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>

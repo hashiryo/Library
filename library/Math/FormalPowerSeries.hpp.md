@@ -31,13 +31,19 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 19:37:34+09:00
+    - Last commit date: 2020-04-08 12:57:42+09:00
 
 
+
+
+## Required by
+
+* :heavy_check_mark: <a href="Kitamasa.hpp.html">高速きたまさ法</a>
 
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
@@ -212,7 +218,6 @@ class FormalPowerSeries {
     for (int i = beg; i < end; i++)
       if (i < f.size()) coefs[i - beg] = f[i];
   }
-  static u32 ilog2(u64 n) { return 63 - __builtin_clzll(n); }
   int size() const { return coefs.size(); }
   void resize(int s, R v = 0) { coefs.resize(s, v); }
   void push_back(R c) { coefs.push_back(c); }
@@ -224,21 +229,22 @@ class FormalPowerSeries {
   const R &operator[](int i) const { return coefs[i]; }
   R &operator[](int i) { return coefs[i]; }
 
- private:
-  static void add(R &a, R b) {
+ public:
+  static void mod_add(R &a, R b) {
     if ((a += b) >= mod) a -= mod;
   }
-  static void sub(R &a, R b) {
+  static void mod_sub(R &a, R b) {
     if (int(a -= b) < 0) a += mod;
   }
-  R mod_pow(R v, u64 exp) const {
+  static R mod_mul(R a, R b) { return a * b % fast_mod; }
+  static R mod_pow(R v, u64 exp) {
     R ret = 1;
-    for (R base = v; exp; exp >>= 1, base = base * base % fast_mod)
-      if (exp & 1) ret = ret * base % fast_mod;
+    for (R base = v; exp; exp >>= 1, base = mod_mul(base, base))
+      if (exp & 1) ret = mod_mul(ret, base);
     return ret;
   }
-  R mod_inverse(R v) const { return mod_pow(v, mod - 2); }
-  R mod_sqrt(R x) const {
+  static R mod_inverse(R v) { return mod_pow(v, mod - 2); }
+  static R mod_sqrt(R x) {
     if (x == 0 || mod == 2) return x;
     if (mod_pow(x, (mod - 1) >> 1) != 1) return 0;  // no solution
     R b = 2;
@@ -260,7 +266,7 @@ class FormalPowerSeries {
     return ret.first;
   }
 
- private:
+ public:
   struct fast_div {
     using u128 = __uint128_t;
     fast_div(){};
@@ -273,7 +279,7 @@ class FormalPowerSeries {
     u64 m, s, x;
   };
 
-  FPS mul_crt(int beg, int end) const {
+  static FPS mul_crt(int beg, int end) {
     using namespace ntt;
     auto inv = m64_2(m64_1::modulo()).inverse();
     auto mod1 = m64_1::modulo() % fast_mod;
@@ -305,6 +311,7 @@ class FormalPowerSeries {
     }
   }
 
+ private:
   FPS mul(const FPS &g) const {
     const auto &f = *this;
     if (f.size() == 0 || g.size() == 0) return FPS();
@@ -312,42 +319,11 @@ class FormalPowerSeries {
     return mul_crt(0, f.size() + g.size() - 1);
   }
 
-  FPS mul_cyclically(const FPS &g) const {
-    const auto &f = *this;
-    if (f.size() == 0 || g.size() == 0) return FPS();
-    mul2(f, g, true);
-    int s = max(f.size(), g.size()), size = 1;
-    while (size < s) size <<= 1;
-    return mul_crt(0, size);
-  }
-
   FPS middle_product(const FPS &g) const {
     const FPS &f = *this;
     if (f.size() == 0 || g.size() == 0) return FPS();
     mul2(f, g, true);
     return mul_crt(f.size(), g.size());
-  }
-  static FPS sub_mul(const FPS &f, const FPS &q, const FPS &d) {
-    int sq = q.size();
-    FPS p = q.mul_cyclically(d);
-    int mask = p.size() - 1;
-    for (int i = 0; i < sq; i++) sub(p[i & mask], f[i & mask]);
-    FPS r = FPS(f, sq, f.size());
-    for (int i = 0; i < (int)r.size(); i++) sub(r[i], p[(sq + i) & mask]);
-    return r;
-  }
-
-  pair<FPS, FPS> divrem_pre(const FPS &b, const FPS &inv) const {
-    if (size() < b.size()) return make_pair(FPS(), FPS(*this));
-    int sq = size() - b.size() + 1;
-    assert(size() >= sq && inv.size() >= sq);
-    FPS q = FPS(FPS(*this, sq) * FPS(inv, sq), sq);
-    FPS r = sub_mul(*this, q, b);
-    return make_pair(q, r);
-  }
-
-  FPS rem_pre(const FPS &f, const FPS &inv) const {
-    return divrem_pre(f, inv).second;
   }
 
   FPS inverse(int deg = -1) const {
@@ -362,7 +338,7 @@ class FormalPowerSeries {
   }
   FPS differentiation() const {
     FPS ret(max(0, size() - 1));
-    for (int i = 1; i < size(); i++) ret[i - 1] = i * (*this)[i] % fast_mod;
+    for (int i = 1; i < size(); i++) ret[i - 1] = mod_mul(i, (*this)[i]);
     return ret;
   }
 
@@ -370,7 +346,7 @@ class FormalPowerSeries {
     FPS ret(size() + 1);
     ret[0] = 0;
     for (int i = 0; i < size(); i++)
-      ret[i + 1] = inve[i + 1] * (*this)[i] % fast_mod;
+      ret[i + 1] = mod_mul(inve[i + 1], (*this)[i]);
     return ret;
   }
 
@@ -395,7 +371,7 @@ class FormalPowerSeries {
       h = ret.middle_product(FPS(c, nne));
       for (int i = ne; i < nne; i++) {
         ret.push_back(h[i - ne]);
-        retdif.push_back(i * h[i - ne] % fast_mod);
+        retdif.push_back(mod_mul(i, h[i - ne]));
       }
     }
     return ret;
@@ -419,7 +395,7 @@ class FormalPowerSeries {
     }
     R sqr = mod_sqrt((*this)[0]);
     if (sqr * 2 > mod) sqr = mod - sqr;
-    if (sqr * sqr % fast_mod != (*this)[0]) return FPS();  // no solution
+    if (mod_mul(sqr, sqr) != (*this)[0]) return FPS();  // no solution
     FPS ret(1, sqr);
     for (int i = 1; i < deg; i <<= 1) {
       ret = FPS(ret + (FPS(*this, i << 1) * ret.inverse(i << 1)), i << 1);
@@ -456,12 +432,12 @@ class FormalPowerSeries {
   }
   FPS &operator+=(const FPS &rhs) {
     if (size() < rhs.size()) resize(rhs.size());
-    for (int i = 0; i < (int)rhs.size(); i++) add((*this)[i], rhs[i]);
+    for (int i = 0; i < (int)rhs.size(); i++) mod_add((*this)[i], rhs[i]);
     return *this;
   }
   FPS &operator-=(const FPS &rhs) {
     if (size() < rhs.size()) resize(rhs.size());
-    for (int i = 0; i < (int)rhs.size(); i++) sub((*this)[i], rhs[i]);
+    for (int i = 0; i < (int)rhs.size(); i++) mod_sub((*this)[i], rhs[i]);
     return *this;
   }
   FPS &operator*=(const FPS &rhs) { return *this = *this * rhs; }
@@ -477,15 +453,15 @@ class FormalPowerSeries {
     return *this;
   }
   FPS &operator+=(const R &v) {
-    add((*this)[0], v);
+    mod_add((*this)[0], v);
     return *this;
   }
   FPS &operator-=(const R &v) {
-    sub((*this)[0], v);
+    mod_sub((*this)[0], v);
     return *this;
   }
   FPS &operator*=(const R &v) {
-    for (int k = 0; k < size(); k++) (*this)[k] = (*this)[k] * v % fast_mod;
+    for (int k = 0; k < size(); k++) (*this)[k] = mod_mul((*this)[k], v);
     return *this;
   }
   FPS operator>>(int sz) const {
@@ -512,22 +488,6 @@ class FormalPowerSeries {
   FPS exp(int deg = -1) const { return exponent(deg); }              // O(NlogN)
   FPS sqrt(int deg = -1) const { return square_root(deg); }          // O(NlogN)
   FPS pow(u64 k, int deg = -1) const { return power(k, deg); }       // O(NlogN)
-
-  // x^e (mod f)
-  static FPS x_pow_mod(u64 e, const FPS &f) {
-    if (e == 0) return FPS(1, 1);
-    FPS ret = FPS(vector<R>({1, 0}));
-    FPS inv = f.inverse(f.size());
-    ret = ret.rem_pre(f, inv);
-    u64 mask = (u64(1) << ilog2(e)) >> 1;
-    while (mask) {
-      ret *= ret;
-      if (e & mask) ret.push_back(0);
-      ret = ret.rem_pre(f, inv);
-      mask >>= 1;
-    }
-    return ret;
-  }
 
  public:
   vector<R> coefs;
@@ -716,7 +676,6 @@ class FormalPowerSeries {
     for (int i = beg; i < end; i++)
       if (i < f.size()) coefs[i - beg] = f[i];
   }
-  static u32 ilog2(u64 n) { return 63 - __builtin_clzll(n); }
   int size() const { return coefs.size(); }
   void resize(int s, R v = 0) { coefs.resize(s, v); }
   void push_back(R c) { coefs.push_back(c); }
@@ -728,21 +687,22 @@ class FormalPowerSeries {
   const R &operator[](int i) const { return coefs[i]; }
   R &operator[](int i) { return coefs[i]; }
 
- private:
-  static void add(R &a, R b) {
+ public:
+  static void mod_add(R &a, R b) {
     if ((a += b) >= mod) a -= mod;
   }
-  static void sub(R &a, R b) {
+  static void mod_sub(R &a, R b) {
     if (int(a -= b) < 0) a += mod;
   }
-  R mod_pow(R v, u64 exp) const {
+  static R mod_mul(R a, R b) { return a * b % fast_mod; }
+  static R mod_pow(R v, u64 exp) {
     R ret = 1;
-    for (R base = v; exp; exp >>= 1, base = base * base % fast_mod)
-      if (exp & 1) ret = ret * base % fast_mod;
+    for (R base = v; exp; exp >>= 1, base = mod_mul(base, base))
+      if (exp & 1) ret = mod_mul(ret, base);
     return ret;
   }
-  R mod_inverse(R v) const { return mod_pow(v, mod - 2); }
-  R mod_sqrt(R x) const {
+  static R mod_inverse(R v) { return mod_pow(v, mod - 2); }
+  static R mod_sqrt(R x) {
     if (x == 0 || mod == 2) return x;
     if (mod_pow(x, (mod - 1) >> 1) != 1) return 0;  // no solution
     R b = 2;
@@ -764,7 +724,7 @@ class FormalPowerSeries {
     return ret.first;
   }
 
- private:
+ public:
   struct fast_div {
     using u128 = __uint128_t;
     fast_div(){};
@@ -777,7 +737,7 @@ class FormalPowerSeries {
     u64 m, s, x;
   };
 
-  FPS mul_crt(int beg, int end) const {
+  static FPS mul_crt(int beg, int end) {
     using namespace ntt;
     auto inv = m64_2(m64_1::modulo()).inverse();
     auto mod1 = m64_1::modulo() % fast_mod;
@@ -809,6 +769,7 @@ class FormalPowerSeries {
     }
   }
 
+ private:
   FPS mul(const FPS &g) const {
     const auto &f = *this;
     if (f.size() == 0 || g.size() == 0) return FPS();
@@ -816,42 +777,11 @@ class FormalPowerSeries {
     return mul_crt(0, f.size() + g.size() - 1);
   }
 
-  FPS mul_cyclically(const FPS &g) const {
-    const auto &f = *this;
-    if (f.size() == 0 || g.size() == 0) return FPS();
-    mul2(f, g, true);
-    int s = max(f.size(), g.size()), size = 1;
-    while (size < s) size <<= 1;
-    return mul_crt(0, size);
-  }
-
   FPS middle_product(const FPS &g) const {
     const FPS &f = *this;
     if (f.size() == 0 || g.size() == 0) return FPS();
     mul2(f, g, true);
     return mul_crt(f.size(), g.size());
-  }
-  static FPS sub_mul(const FPS &f, const FPS &q, const FPS &d) {
-    int sq = q.size();
-    FPS p = q.mul_cyclically(d);
-    int mask = p.size() - 1;
-    for (int i = 0; i < sq; i++) sub(p[i & mask], f[i & mask]);
-    FPS r = FPS(f, sq, f.size());
-    for (int i = 0; i < (int)r.size(); i++) sub(r[i], p[(sq + i) & mask]);
-    return r;
-  }
-
-  pair<FPS, FPS> divrem_pre(const FPS &b, const FPS &inv) const {
-    if (size() < b.size()) return make_pair(FPS(), FPS(*this));
-    int sq = size() - b.size() + 1;
-    assert(size() >= sq && inv.size() >= sq);
-    FPS q = FPS(FPS(*this, sq) * FPS(inv, sq), sq);
-    FPS r = sub_mul(*this, q, b);
-    return make_pair(q, r);
-  }
-
-  FPS rem_pre(const FPS &f, const FPS &inv) const {
-    return divrem_pre(f, inv).second;
   }
 
   FPS inverse(int deg = -1) const {
@@ -866,7 +796,7 @@ class FormalPowerSeries {
   }
   FPS differentiation() const {
     FPS ret(max(0, size() - 1));
-    for (int i = 1; i < size(); i++) ret[i - 1] = i * (*this)[i] % fast_mod;
+    for (int i = 1; i < size(); i++) ret[i - 1] = mod_mul(i, (*this)[i]);
     return ret;
   }
 
@@ -874,7 +804,7 @@ class FormalPowerSeries {
     FPS ret(size() + 1);
     ret[0] = 0;
     for (int i = 0; i < size(); i++)
-      ret[i + 1] = inve[i + 1] * (*this)[i] % fast_mod;
+      ret[i + 1] = mod_mul(inve[i + 1], (*this)[i]);
     return ret;
   }
 
@@ -899,7 +829,7 @@ class FormalPowerSeries {
       h = ret.middle_product(FPS(c, nne));
       for (int i = ne; i < nne; i++) {
         ret.push_back(h[i - ne]);
-        retdif.push_back(i * h[i - ne] % fast_mod);
+        retdif.push_back(mod_mul(i, h[i - ne]));
       }
     }
     return ret;
@@ -923,7 +853,7 @@ class FormalPowerSeries {
     }
     R sqr = mod_sqrt((*this)[0]);
     if (sqr * 2 > mod) sqr = mod - sqr;
-    if (sqr * sqr % fast_mod != (*this)[0]) return FPS();  // no solution
+    if (mod_mul(sqr, sqr) != (*this)[0]) return FPS();  // no solution
     FPS ret(1, sqr);
     for (int i = 1; i < deg; i <<= 1) {
       ret = FPS(ret + (FPS(*this, i << 1) * ret.inverse(i << 1)), i << 1);
@@ -960,12 +890,12 @@ class FormalPowerSeries {
   }
   FPS &operator+=(const FPS &rhs) {
     if (size() < rhs.size()) resize(rhs.size());
-    for (int i = 0; i < (int)rhs.size(); i++) add((*this)[i], rhs[i]);
+    for (int i = 0; i < (int)rhs.size(); i++) mod_add((*this)[i], rhs[i]);
     return *this;
   }
   FPS &operator-=(const FPS &rhs) {
     if (size() < rhs.size()) resize(rhs.size());
-    for (int i = 0; i < (int)rhs.size(); i++) sub((*this)[i], rhs[i]);
+    for (int i = 0; i < (int)rhs.size(); i++) mod_sub((*this)[i], rhs[i]);
     return *this;
   }
   FPS &operator*=(const FPS &rhs) { return *this = *this * rhs; }
@@ -981,15 +911,15 @@ class FormalPowerSeries {
     return *this;
   }
   FPS &operator+=(const R &v) {
-    add((*this)[0], v);
+    mod_add((*this)[0], v);
     return *this;
   }
   FPS &operator-=(const R &v) {
-    sub((*this)[0], v);
+    mod_sub((*this)[0], v);
     return *this;
   }
   FPS &operator*=(const R &v) {
-    for (int k = 0; k < size(); k++) (*this)[k] = (*this)[k] * v % fast_mod;
+    for (int k = 0; k < size(); k++) (*this)[k] = mod_mul((*this)[k], v);
     return *this;
   }
   FPS operator>>(int sz) const {
@@ -1016,22 +946,6 @@ class FormalPowerSeries {
   FPS exp(int deg = -1) const { return exponent(deg); }              // O(NlogN)
   FPS sqrt(int deg = -1) const { return square_root(deg); }          // O(NlogN)
   FPS pow(u64 k, int deg = -1) const { return power(k, deg); }       // O(NlogN)
-
-  // x^e (mod f)
-  static FPS x_pow_mod(u64 e, const FPS &f) {
-    if (e == 0) return FPS(1, 1);
-    FPS ret = FPS(vector<R>({1, 0}));
-    FPS inv = f.inverse(f.size());
-    ret = ret.rem_pre(f, inv);
-    u64 mask = (u64(1) << ilog2(e)) >> 1;
-    while (mask) {
-      ret *= ret;
-      if (e & mask) ret.push_back(0);
-      ret = ret.rem_pre(f, inv);
-      mask >>= 1;
-    }
-    return ret;
-  }
 
  public:
   vector<R> coefs;

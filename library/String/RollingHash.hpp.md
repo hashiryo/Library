@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: RollingHash
+# :x: RollingHash
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/RollingHash.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-08 12:57:42+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html">test/aoj/ALDS1_14_B.rollinghash.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html">test/aoj/ALDS1_14_B.rollinghash.test.cpp</a>
 
 
 ## Code
@@ -60,11 +60,15 @@ using namespace std;
 template <unsigned long long B>
 struct RollingHash {
   using ull = unsigned long long;
+
+ private:
   const ull MASK30 = (1UL << 30) - 1;
   const ull MASK31 = (1UL << 31) - 1;
   const ull MOD = (1UL << 61) - 1;
   const ull MASK61 = MOD;
   vector<ull> hash, po;
+
+ public:
   RollingHash() {}
   RollingHash(vector<long long> vs) { init(vs); }
   RollingHash(string &s) {
@@ -81,6 +85,13 @@ struct RollingHash {
       po[i + 1] = CalcMod(Mul(po[i], B));
     }
   }
+  // S[l, r)
+  ull get(int l, int r) {
+    ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
+    return CalcMod(res);
+  }
+
+ private:
   // a*b mod 2^61-1を返す関数(最後にModを取る)
   ull Mul(ull a, ull b) {
     ull au = a >> 31;
@@ -99,11 +110,6 @@ struct RollingHash {
     ull xd = x & MASK61;
     ull res = xu + xd;
     return res >= MOD ? res - MOD : res;
-  }
-  // S[l, r)
-  ull find(int l, int r) {
-    ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
-    return CalcMod(res);
   }
 };
 ```
@@ -127,11 +133,15 @@ using namespace std;
 template <unsigned long long B>
 struct RollingHash {
   using ull = unsigned long long;
+
+ private:
   const ull MASK30 = (1UL << 30) - 1;
   const ull MASK31 = (1UL << 31) - 1;
   const ull MOD = (1UL << 61) - 1;
   const ull MASK61 = MOD;
   vector<ull> hash, po;
+
+ public:
   RollingHash() {}
   RollingHash(vector<long long> vs) { init(vs); }
   RollingHash(string &s) {
@@ -148,6 +158,13 @@ struct RollingHash {
       po[i + 1] = CalcMod(Mul(po[i], B));
     }
   }
+  // S[l, r)
+  ull get(int l, int r) {
+    ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
+    return CalcMod(res);
+  }
+
+ private:
   // a*b mod 2^61-1を返す関数(最後にModを取る)
   ull Mul(ull a, ull b) {
     ull au = a >> 31;
@@ -166,11 +183,6 @@ struct RollingHash {
     ull xd = x & MASK61;
     ull res = xu + xd;
     return res >= MOD ? res - MOD : res;
-  }
-  // S[l, r)
-  ull find(int l, int r) {
-    ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
-    return CalcMod(res);
   }
 };
 
