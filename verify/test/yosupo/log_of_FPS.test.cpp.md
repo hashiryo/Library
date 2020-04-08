@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+* :question: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
 
 
 ## Code

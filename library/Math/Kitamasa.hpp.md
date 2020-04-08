@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 高速きたまさ法
+# :question: 高速きたまさ法
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,12 +38,13 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 
 
 ## Code
