@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-08 22:43:18+09:00
+    - Last commit date: 2020-04-09 10:04:18+09:00
 
 
 
@@ -50,6 +50,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
 
 
 ## Code
@@ -196,7 +197,7 @@ void ntt_dit4(mod_t *A, int n, int sign, mod_t *roots) {
   }
 }
 
-const int size = 1 << 20;
+const int size = 1 << 22;
 using m64_1 = ntt::Mod64<34703335751681, 3>;
 using m64_2 = ntt::Mod64<35012573396993, 3>;
 m64_1 f1[size], g1[size];
@@ -677,7 +678,7 @@ void ntt_dit4(mod_t *A, int n, int sign, mod_t *roots) {
   }
 }
 
-const int size = 1 << 20;
+const int size = 1 << 22;
 using m64_1 = ntt::Mod64<34703335751681, 3>;
 using m64_2 = ntt::Mod64<35012573396993, 3>;
 m64_1 f1[size], g1[size];

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/log_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-08 22:43:18+09:00
+    - Last commit date: 2020-04-09 10:04:18+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/log_of_formal_power_series">https://judge.yosupo.jp/problem/log_of_formal_power_series</a>
@@ -224,7 +224,7 @@ void ntt_dit4(mod_t *A, int n, int sign, mod_t *roots) {
   }
 }
 
-const int size = 1 << 20;
+const int size = 1 << 22;
 using m64_1 = ntt::Mod64<34703335751681, 3>;
 using m64_2 = ntt::Mod64<35012573396993, 3>;
 m64_1 f1[size], g1[size];
