@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-09 10:04:18+09:00
+    - Last commit date: 2020-04-16 12:04:12+09:00
 
 
 
@@ -518,13 +518,12 @@ class FormalPowerSeries {
   vector<R> coefs;
   static R mod;
   static fast_div fast_mod;
-  static constexpr R SIZE = 1 << 20;
-  static R inve[SIZE];
+  static R inve[ntt::size];
   static void init(R m) {
     mod = m;
     fast_mod = fast_div(m);
     inve[1] = 1;
-    for (int i = 2; i < SIZE; ++i)
+    for (int i = 2; i < ntt::size; ++i)
       inve[i] = inve[mod % i] * (mod - mod / i) % fast_mod;
   }
 };
@@ -999,13 +998,12 @@ class FormalPowerSeries {
   vector<R> coefs;
   static R mod;
   static fast_div fast_mod;
-  static constexpr R SIZE = 1 << 20;
-  static R inve[SIZE];
+  static R inve[ntt::size];
   static void init(R m) {
     mod = m;
     fast_mod = fast_div(m);
     inve[1] = 1;
-    for (int i = 2; i < SIZE; ++i)
+    for (int i = 2; i < ntt::size; ++i)
       inve[i] = inve[mod % i] * (mod - mod / i) % fast_mod;
   }
 };
