@@ -39,6 +39,7 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="Kitamasa.hpp.html">高速きたまさ法</a>
+* :warning: <a href="../test/yukicoder/3046.cpp.html">test/yukicoder/3046.cpp</a>
 
 
 ## Verified with
