@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/convolution1000000007.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-17 22:39:58+09:00
+    - Last commit date: 2020-04-17 23:08:28+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -526,7 +526,7 @@ class FormalPowerSeries {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 250) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inverse();
+    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
     return *this = frev.div_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
@@ -534,7 +534,7 @@ class FormalPowerSeries {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 250) return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inverse();
+    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
     return *this = frev.rem_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator+=(const R &v) {
