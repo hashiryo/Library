@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-16 12:04:12+09:00
+    - Last commit date: 2020-04-17 22:39:58+09:00
 
 
 
@@ -45,6 +45,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 
 ## Code
@@ -76,51 +77,34 @@ R kitamasa(const vector<R> &c, const vector<R> &a, u64 k, R mod) {
   int N = a.size();
   if (k < N) return a[k];
   if (FPS::mod != mod) FPS::init(mod);
-  if (N < 64) {
-    FPS f(N + 1);
-    for (int i = 0; i < N; i++) f[i] = mod - c[i];
-    f[N] = 1;
-    FPS r(1, 1);
-    for (FPS base{vector<R>{0, 1}}; k; k >>= 1, (base *= base) %= f)
-      if (k & 1) (r *= base) %= f;
-    R ret = 0;
-    for (int i = 0; i < N; i++) FPS::mod_add(ret, FPS::mod_mul(r[i], a[i]));
-    return ret;
-  }
-  auto rem_pre = [&](const FPS &f, const FPS &b, const FPS &inv) {
-    if (f.size() < b.size()) return f;
-    int sq = f.size() - b.size() + 1;
-    FPS q = FPS(FPS(f, sq) * FPS(inv, sq), sq);
-    FPS::mul2(q, b, true);
-    int s = max(q.size(), b.size()), size = 1;
-    while (size < s) size <<= 1;
-    FPS p = FPS::mul_crt(0, size);
-    int mask = p.size() - 1;
-    for (int i = 0; i < sq; i++) FPS::mod_sub(p[i & mask], f[i & mask]);
-    FPS r = FPS(f, sq, f.size());
-    for (int i = 0; i < (int)r.size(); i++)
-      FPS::mod_sub(r[i], p[(sq + i) & mask]);
-    return r;
-  };
+  u64 mask = (u64(1) << (63 - __builtin_clzll(k))) >> 1;
   FPS f(N + 1);
   f[0] = 1;
   for (int i = 0; i < N; i++) f[N - i] = mod - c[i];
   FPS r(vector<R>({1, 0}));
-  FPS inv = f.inv(N);
-  r = rem_pre(r, f, inv);
-  u64 mask = (u64(1) << (63 - __builtin_clzll(k))) >> 1;
-  while (mask) {
-    r *= r;
-    if (k & mask) r.push_back(0);
-    r = rem_pre(r, f, inv);
-    mask >>= 1;
+  if (N < 250) {  // naive
+    r = r.divrem_rev_n(f).second;
+    while (mask) {
+      r *= r;
+      if (k & mask) r.push_back(0);
+      r = r.divrem_rev_n(f).second;
+      mask >>= 1;
+    }
+  } else {
+    FPS inv = f.inv(N);
+    r = r.rem_rev_pre(f, inv);
+    while (mask) {
+      r *= r;
+      if (k & mask) r.push_back(0);
+      r = r.rem_rev_pre(f, inv);
+      mask >>= 1;
+    }
   }
   R ret = 0;
   for (int i = 0; i < N; i++)
     FPS::mod_add(ret, FPS::mod_mul(r[N - i - 1], a[i]));
   return ret;
 }
-
 ```
 {% endraw %}
 
