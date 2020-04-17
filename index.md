@@ -34,13 +34,6 @@ layout: default
 
 ## Library Files
 
-<div id="de60e5ba474ac43bf7562c10f5977e2d"></div>
-
-### test/yukicoder
-
-* :warning: <a href="library/test/yukicoder/3046.cpp.html">test/yukicoder/3046.cpp</a>
-
-
 <div id="c1c7278649b583761cecd13e0628181d"></div>
 
 ### データ構造
@@ -74,6 +67,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.KMP.test.cpp.html">test/aoj/ALDS1_14_B.KMP.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html">test/aoj/ALDS1_14_B.rollinghash.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
@@ -88,6 +82,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
 
 
