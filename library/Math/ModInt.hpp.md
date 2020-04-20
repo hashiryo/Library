@@ -38,17 +38,17 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :x: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
-* :x: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
-* :x: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 
 ## Code
