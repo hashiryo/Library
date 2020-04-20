@@ -48,8 +48,9 @@ layout: default
 
 ### 数学
 
-* :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
-* :heavy_check_mark: <a href="library/Math/Kitamasa.hpp.html">高速きたまさ法</a>
+* :question: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+* :x: <a href="library/Math/Kitamasa.hpp.html">高速きたまさ法</a>
+* :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -64,7 +65,7 @@ layout: default
 
 ## Verify Files
 
-* :heavy_check_mark: <a href="verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :x: <a href="verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
@@ -78,12 +79,12 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :x: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 

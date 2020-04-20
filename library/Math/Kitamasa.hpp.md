@@ -25,27 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 高速きたまさ法
+# :x: 高速きたまさ法
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-17 23:08:28+09:00
+    - Last commit date: 2020-04-20 14:58:52+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 
 ## Code
@@ -72,17 +72,18 @@ using namespace std;
 // b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)
 // calc b[k]
 
-R kitamasa(const vector<R> &c, const vector<R> &a, u64 k, R mod) {
+template <class Mint>
+Mint kitamasa(const vector<Mint> &c, const vector<Mint> &a, uint64_t k) {
   assert(a.size() == c.size());
   int N = a.size();
   if (k < N) return a[k];
-  if (FPS::mod != mod) FPS::init(mod);
-  u64 mask = (u64(1) << (63 - __builtin_clzll(k))) >> 1;
+  using FPS = FormalPowerSeries<Mint>;
+  uint64_t mask = (u64(1) << (63 - __builtin_clzll(k))) >> 1;
   FPS f(N + 1);
   f[0] = 1;
-  for (int i = 0; i < N; i++) f[N - i] = mod - c[i];
-  FPS r(vector<R>({1, 0}));
-  if (N < 250) {  // naive
+  for (int i = 0; i < N; i++) f[N - i] = -c[i];
+  FPS r(vector<Mint>({1, 0}));
+  if (N < 1150) {  // naive
     r = r.divrem_rev_n(f).second;
     while (mask) {
       r *= r;
@@ -100,11 +101,11 @@ R kitamasa(const vector<R> &c, const vector<R> &a, u64 k, R mod) {
       mask >>= 1;
     }
   }
-  R ret = 0;
-  for (int i = 0; i < N; i++)
-    FPS::mod_add(ret, FPS::mod_mul(r[N - i - 1], a[i]));
+  Mint ret(0);
+  for (int i = 0; i < N; i++) ret += r[N - i - 1] * a[i];
   return ret;
 }
+
 ```
 {% endraw %}
 
