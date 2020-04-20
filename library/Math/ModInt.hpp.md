@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: ModInt
+# :heavy_check_mark: ModInt
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/ModInt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-20 14:58:52+09:00
+    - Last commit date: 2020-04-20 16:44:47+09:00
 
 
 
@@ -44,7 +44,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
@@ -84,7 +84,7 @@ struct ModInt {
     return *this;
   }
   ModInt &operator/=(const ModInt &p) { return *this *= p.inverse(); }
-  ModInt operator-() const { return ModInt(-x); }
+  ModInt operator-() const { return ModInt() - *this; }
   ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
   ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p; }
   ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p; }
@@ -93,10 +93,7 @@ struct ModInt {
   bool operator!=(const ModInt &p) const { return x != p.x; }
   ModInt inverse() const {
     int a = x, b = mod, u = 1, v = 0, t;
-    while (b > 0) {
-      t = a / b;
-      swap(a -= t * b, b), swap(u -= t * v, v);
-    }
+    while (b) t = a / b, swap(a -= t * b, b), swap(u -= t * v, v);
     return ModInt(u);
   }
   ModInt pow(int64_t e) const {
@@ -150,7 +147,7 @@ struct ModInt {
     return *this;
   }
   ModInt &operator/=(const ModInt &p) { return *this *= p.inverse(); }
-  ModInt operator-() const { return ModInt(-x); }
+  ModInt operator-() const { return ModInt() - *this; }
   ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
   ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p; }
   ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p; }
@@ -159,10 +156,7 @@ struct ModInt {
   bool operator!=(const ModInt &p) const { return x != p.x; }
   ModInt inverse() const {
     int a = x, b = mod, u = 1, v = 0, t;
-    while (b > 0) {
-      t = a / b;
-      swap(a -= t * b, b), swap(u -= t * v, v);
-    }
+    while (b) t = a / b, swap(a -= t * b, b), swap(u -= t * v, v);
     return ModInt(u);
   }
   ModInt pow(int64_t e) const {
