@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: ポテンシャルUnionFind
+# :heavy_check_mark: Union-Find(ポテンシャル)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/PotentializedUnionFind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:08:45+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind_Potential.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-23 02:23:27+09:00
 
 
 
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title ポテンシャルUnionFind
+ * @title Union-Find(ポテンシャル)
  * @category データ構造
  * @brief 各ノードにポテンシャルをもたせ、その差を求められる
  * @brief O(α(N))
@@ -58,11 +58,11 @@ layout: default
 using namespace std;
 #endif
 
-struct PotentializedUnionFind {
+struct UnionFind_Potential {
   typedef long long Weight;
   vector<int> par;
   vector<Weight> val;
-  PotentializedUnionFind(int size) : par(size, -1), val(size, 0) {}
+  UnionFind_Potential(int size) : par(size, -1), val(size, 0) {}
   bool unionSet(int y, int x, Weight w) {
     w += potential(x);
     w -= potential(y);
@@ -96,9 +96,9 @@ struct PotentializedUnionFind {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "DataStructure/PotentializedUnionFind.hpp"
+#line 1 "DataStructure/UnionFind_Potential.hpp"
 /**
- * @title ポテンシャルUnionFind
+ * @title Union-Find(ポテンシャル)
  * @category データ構造
  * @brief 各ノードにポテンシャルをもたせ、その差を求められる
  * @brief O(α(N))
@@ -109,11 +109,11 @@ struct PotentializedUnionFind {
 using namespace std;
 #endif
 
-struct PotentializedUnionFind {
+struct UnionFind_Potential {
   typedef long long Weight;
   vector<int> par;
   vector<Weight> val;
-  PotentializedUnionFind(int size) : par(size, -1), val(size, 0) {}
+  UnionFind_Potential(int size) : par(size, -1), val(size, 0) {}
   bool unionSet(int y, int x, Weight w) {
     w += potential(x);
     w -= potential(y);

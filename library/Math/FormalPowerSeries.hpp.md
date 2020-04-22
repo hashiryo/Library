@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="Kitamasa.hpp.html">高速きたまさ法</a>
+* :heavy_check_mark: <a href="kitamasa.hpp.html">高速きたまさ法</a>
 
 
 ## Verified with

@@ -38,29 +38,29 @@ layout: default
 
 ### データ構造
 
-* :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable</a>
-* :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">ポテンシャルUnionFind</a>
-* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">SparseTable</a>
-* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFind</a>
+* :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
+* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
 
 
 <div id="6e65831863dbf272b7a65cd8df1a440d"></div>
 
 ### 数学
 
-* :heavy_check_mark: <a href="library/Math/BitMatrix.hpp.html">行列(mod2)</a>
 * :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数mod)</a>
-* :heavy_check_mark: <a href="library/Math/Kitamasa.hpp.html">高速きたまさ法</a>
 * :heavy_check_mark: <a href="library/Math/Matrix.hpp.html">行列</a>
+* :heavy_check_mark: <a href="library/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
 * :heavy_check_mark: <a href="library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="library/Math/kitamasa.hpp.html">高速きたまさ法</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
 
 ### 文字列
 
-* :heavy_check_mark: <a href="library/String/KnuthMorrisPratt.hpp.html">KnuthMorrisPratt</a>
-* :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">RollingHash</a>
+* :heavy_check_mark: <a href="library/String/KnuthMorrisPratt.hpp.html">Knuth-Morris-Pratt</a>
+* :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">Rolling-Hash</a>
 * :heavy_check_mark: <a href="library/String/SuffixArray.hpp.html">接尾辞配列(SuffixArray)</a>
 * :heavy_check_mark: <a href="library/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
 

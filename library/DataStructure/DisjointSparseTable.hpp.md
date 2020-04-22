@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: DisjointSparseTable
+# :heavy_check_mark: Disjoint-Sparse-Table
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/DisjointSparseTable.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:39:51+09:00
+    - Last commit date: 2020-04-23 02:23:27+09:00
 
 
 
@@ -48,7 +48,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title DisjointSparseTable
+ * @title Disjoint-Sparse-Table
  * @category データ構造
  * @brief fは結合則をみたす二項演算
  * @brief 構築 O(n log n)
@@ -96,7 +96,7 @@ struct DisjointSparseTable {
 ```cpp
 #line 1 "DataStructure/DisjointSparseTable.hpp"
 /**
- * @title DisjointSparseTable
+ * @title Disjoint-Sparse-Table
  * @category データ構造
  * @brief fは結合則をみたす二項演算
  * @brief 構築 O(n log n)

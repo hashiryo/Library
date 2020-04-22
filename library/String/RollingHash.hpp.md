@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: RollingHash
+# :heavy_check_mark: Rolling-Hash
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/RollingHash.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 00:40:08+09:00
+    - Last commit date: 2020-04-23 02:23:27+09:00
 
 
 
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title RollingHash
+ * @title Rolling-Hash
  * @category 文字列
  * @brief Mod は　2^61-1 で固定
  */
@@ -79,18 +79,18 @@ struct RollingHash {
     hash.assign(n + 1, 0);
     po.assign(n + 1, 1);
     for (int i = 0; i < n; i++) {
-      hash[i + 1] = CalcMod(Mul(hash[i], B) + vs[i]);
-      po[i + 1] = CalcMod(Mul(po[i], B));
+      hash[i + 1] = calcmod(mul(hash[i], B) + vs[i]);
+      po[i + 1] = calcmod(mul(po[i], B));
     }
   }
   // S[l, r)
   uint64_t get_hash(int l, int r) {
-    uint64_t res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
-    return CalcMod(res);
+    uint64_t res = hash[r] + MOD * 3 - mul(hash[l], po[r - l]);
+    return calcmod(res);
   }
 
  private:
-  uint64_t Mul(uint64_t a, uint64_t b) {
+  uint64_t mul(uint64_t a, uint64_t b) {
     uint64_t au = a >> 31;
     uint64_t ad = a & MASK31;
     uint64_t bu = b >> 31;
@@ -101,7 +101,7 @@ struct RollingHash {
     return au * bu * 2 + midu + (midd << 31) + ad * bd;
   }
 
-  uint64_t CalcMod(uint64_t x) {
+  uint64_t calcmod(uint64_t x) {
     uint64_t xu = x >> 61;
     uint64_t xd = x & MASK61;
     uint64_t res = xu + xd;
@@ -116,7 +116,7 @@ struct RollingHash {
 ```cpp
 #line 1 "String/RollingHash.hpp"
 /**
- * @title RollingHash
+ * @title Rolling-Hash
  * @category 文字列
  * @brief Mod は　2^61-1 で固定
  */
@@ -148,18 +148,18 @@ struct RollingHash {
     hash.assign(n + 1, 0);
     po.assign(n + 1, 1);
     for (int i = 0; i < n; i++) {
-      hash[i + 1] = CalcMod(Mul(hash[i], B) + vs[i]);
-      po[i + 1] = CalcMod(Mul(po[i], B));
+      hash[i + 1] = calcmod(mul(hash[i], B) + vs[i]);
+      po[i + 1] = calcmod(mul(po[i], B));
     }
   }
   // S[l, r)
   uint64_t get_hash(int l, int r) {
-    uint64_t res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
-    return CalcMod(res);
+    uint64_t res = hash[r] + MOD * 3 - mul(hash[l], po[r - l]);
+    return calcmod(res);
   }
 
  private:
-  uint64_t Mul(uint64_t a, uint64_t b) {
+  uint64_t mul(uint64_t a, uint64_t b) {
     uint64_t au = a >> 31;
     uint64_t ad = a & MASK31;
     uint64_t bu = b >> 31;
@@ -170,7 +170,7 @@ struct RollingHash {
     return au * bu * 2 + midu + (midd << 31) + ad * bd;
   }
 
-  uint64_t CalcMod(uint64_t x) {
+  uint64_t calcmod(uint64_t x) {
     uint64_t xu = x >> 61;
     uint64_t xd = x & MASK61;
     uint64_t res = xu + xd;

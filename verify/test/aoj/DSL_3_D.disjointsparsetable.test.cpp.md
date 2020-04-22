@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.disjointsparsetable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:39:51+09:00
+    - Last commit date: 2020-04-23 02:23:27+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 
 
 ## Code
@@ -91,7 +91,7 @@ using namespace std;
 #define call_from_test
 #line 1 "DataStructure/DisjointSparseTable.hpp"
 /**
- * @title DisjointSparseTable
+ * @title Disjoint-Sparse-Table
  * @category データ構造
  * @brief fは結合則をみたす二項演算
  * @brief 構築 O(n log n)

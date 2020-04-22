@@ -30,8 +30,8 @@ layout: default
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Math/Kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:08:45+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/Math/kitamasa.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-23 02:36:10+09:00
 
 
 
@@ -103,6 +103,7 @@ Modint kitamasa(const vector<Modint> &c, const vector<Modint> &a, uint64_t k) {
   for (int i = 0; i < N; i++) ret += r[N - i - 1] * a[i];
   return ret;
 }
+
 ```
 {% endraw %}
 
@@ -116,7 +117,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/Kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: KnuthMorrisPratt
+# :heavy_check_mark: Knuth-Morris-Pratt
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/KnuthMorrisPratt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 02:23:27+09:00
 
 
 
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title KnuthMorrisPratt
+ * @title Knuth-Morris-Pratt
  * @category 文字列
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
@@ -98,7 +98,7 @@ struct KnuthMorrisPratt {
 ```cpp
 #line 1 "String/KnuthMorrisPratt.hpp"
 /**
- * @title KnuthMorrisPratt
+ * @title Knuth-Morris-Pratt
  * @category 文字列
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)

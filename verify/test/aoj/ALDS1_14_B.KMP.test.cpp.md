@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.KMP.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 02:23:27+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/String/KnuthMorrisPratt.hpp.html">KnuthMorrisPratt</a>
+* :heavy_check_mark: <a href="../../../library/String/KnuthMorrisPratt.hpp.html">Knuth-Morris-Pratt</a>
 
 
 ## Code
@@ -86,7 +86,7 @@ using namespace std;
 #define call_from_test
 #line 1 "String/KnuthMorrisPratt.hpp"
 /**
- * @title KnuthMorrisPratt
+ * @title Knuth-Morris-Pratt
  * @category 文字列
  * @brief テーブル構築 O(|S|)
  * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
