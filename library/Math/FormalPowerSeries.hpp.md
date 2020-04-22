@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-20 16:39:52+09:00
+    - Last commit date: 2020-04-22 23:44:10+09:00
 
 
 
@@ -67,7 +67,7 @@ layout: default
  * @brief MOD=998244353とかでないModInt<MOD>でも使える
  * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
-// verify用 https://loj.ac/problem/150
+// verify用: https://loj.ac/problem/150
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
@@ -288,7 +288,8 @@ struct FormalPowerSeries : vector<Modint> {
  public:
   static Modint mod_sqrt(Modint x) {
     if (x == 0 || Modint::modulo() == 2) return x;
-    if (x.pow((Modint::modulo() - 1) >> 1) != 1) return 0;  // no solution
+    if (x.pow((Modint::modulo() - 1) >> 1) != 1)
+      return Modint(0);  // no solutions
     Modint b(2);
     Modint w(b * b - x);
     while (w.pow((Modint::modulo() - 1) >> 1) == 1)
@@ -446,10 +447,10 @@ struct FormalPowerSeries : vector<Modint> {
     if ((*this)[0].x == 0) {
       for (int i = 1; i < this->size(); i++) {
         if ((*this)[i].x != 0) {
-          if (i & 1) return FPS();  // no solution
+          if (i & 1) return FPS();  // no solutions
           if (deg - i / 2 <= 0) break;
           auto ret = (*this >> i).square_root(deg - i / 2);
-          if (!ret.size()) return FPS();  // no solution
+          if (!ret.size()) return FPS();  // no solutions
           ret = ret << (i / 2);
           if (ret.size() < deg) ret.resize(deg, 0);
           return ret;
@@ -458,7 +459,7 @@ struct FormalPowerSeries : vector<Modint> {
       return FPS(deg, 0);
     }
     Modint sqr = mod_sqrt((*this)[0]);
-    if (sqr * sqr != (*this)[0]) return FPS();  // no solution
+    if (sqr * sqr != (*this)[0]) return FPS();  // no solutions
     FPS ret(1, sqr);
     Modint inv2 = Modint(2).inverse();
     for (int i = 1; i < deg; i <<= 1) {
@@ -503,7 +504,7 @@ struct FormalPowerSeries : vector<Modint> {
  * @brief MOD=998244353とかでないModInt<MOD>でも使える
  * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
-// verify用 https://loj.ac/problem/150
+// verify用: https://loj.ac/problem/150
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
@@ -724,7 +725,8 @@ struct FormalPowerSeries : vector<Modint> {
  public:
   static Modint mod_sqrt(Modint x) {
     if (x == 0 || Modint::modulo() == 2) return x;
-    if (x.pow((Modint::modulo() - 1) >> 1) != 1) return 0;  // no solution
+    if (x.pow((Modint::modulo() - 1) >> 1) != 1)
+      return Modint(0);  // no solutions
     Modint b(2);
     Modint w(b * b - x);
     while (w.pow((Modint::modulo() - 1) >> 1) == 1)
@@ -882,10 +884,10 @@ struct FormalPowerSeries : vector<Modint> {
     if ((*this)[0].x == 0) {
       for (int i = 1; i < this->size(); i++) {
         if ((*this)[i].x != 0) {
-          if (i & 1) return FPS();  // no solution
+          if (i & 1) return FPS();  // no solutions
           if (deg - i / 2 <= 0) break;
           auto ret = (*this >> i).square_root(deg - i / 2);
-          if (!ret.size()) return FPS();  // no solution
+          if (!ret.size()) return FPS();  // no solutions
           ret = ret << (i / 2);
           if (ret.size() < deg) ret.resize(deg, 0);
           return ret;
@@ -894,7 +896,7 @@ struct FormalPowerSeries : vector<Modint> {
       return FPS(deg, 0);
     }
     Modint sqr = mod_sqrt((*this)[0]);
-    if (sqr * sqr != (*this)[0]) return FPS();  // no solution
+    if (sqr * sqr != (*this)[0]) return FPS();  // no solutions
     FPS ret(1, sqr);
     Modint inv2 = Modint(2).inverse();
     for (int i = 1; i < deg; i <<= 1) {

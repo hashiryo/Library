@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/exp_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-20 16:44:47+09:00
+    - Last commit date: 2020-04-22 23:44:10+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/exp_of_formal_power_series">https://judge.yosupo.jp/problem/exp_of_formal_power_series</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -94,7 +94,7 @@ using namespace std;
  * @brief MOD=998244353とかでないModInt<MOD>でも使える
  * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
-// verify用 https://loj.ac/problem/150
+// verify用: https://loj.ac/problem/150
 
 #ifndef call_from_test
 #line 11 "Math/FormalPowerSeries.hpp"
@@ -315,7 +315,8 @@ struct FormalPowerSeries : vector<Modint> {
  public:
   static Modint mod_sqrt(Modint x) {
     if (x == 0 || Modint::modulo() == 2) return x;
-    if (x.pow((Modint::modulo() - 1) >> 1) != 1) return 0;  // no solution
+    if (x.pow((Modint::modulo() - 1) >> 1) != 1)
+      return Modint(0);  // no solutions
     Modint b(2);
     Modint w(b * b - x);
     while (w.pow((Modint::modulo() - 1) >> 1) == 1)
@@ -473,10 +474,10 @@ struct FormalPowerSeries : vector<Modint> {
     if ((*this)[0].x == 0) {
       for (int i = 1; i < this->size(); i++) {
         if ((*this)[i].x != 0) {
-          if (i & 1) return FPS();  // no solution
+          if (i & 1) return FPS();  // no solutions
           if (deg - i / 2 <= 0) break;
           auto ret = (*this >> i).square_root(deg - i / 2);
-          if (!ret.size()) return FPS();  // no solution
+          if (!ret.size()) return FPS();  // no solutions
           ret = ret << (i / 2);
           if (ret.size() < deg) ret.resize(deg, 0);
           return ret;
@@ -485,7 +486,7 @@ struct FormalPowerSeries : vector<Modint> {
       return FPS(deg, 0);
     }
     Modint sqr = mod_sqrt((*this)[0]);
-    if (sqr * sqr != (*this)[0]) return FPS();  // no solution
+    if (sqr * sqr != (*this)[0]) return FPS();  // no solutions
     FPS ret(1, sqr);
     Modint inv2 = Modint(2).inverse();
     for (int i = 1; i < deg; i <<= 1) {

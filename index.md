@@ -48,9 +48,11 @@ layout: default
 
 ### 数学
 
+* :heavy_check_mark: <a href="library/Math/BitMatrix.hpp.html">行列(mod2)</a>
 * :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
 * :heavy_check_mark: <a href="library/Math/Kitamasa.hpp.html">高速きたまさ法</a>
-* :heavy_check_mark: <a href="library/Math/ModInt.hpp.html">ModInt</a>
+* :x: <a href="library/Math/Matrix.hpp.html">行列</a>
+* :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -66,7 +68,11 @@ layout: default
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :x: <a href="verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
+* :x: <a href="verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.KMP.test.cpp.html">test/aoj/ALDS1_14_B.KMP.test.cpp</a>
@@ -77,7 +83,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :x: <a href="verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
+* :x: <a href="verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
@@ -86,5 +94,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 
 
