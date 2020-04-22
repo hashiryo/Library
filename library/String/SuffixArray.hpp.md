@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/SuffixArray.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 00:40:08+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/ALDS1_14_D.test.cpp.html">test/aoj/ALDS1_14_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 
@@ -54,6 +55,7 @@ layout: default
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
  * @brief LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
+ * @brief '$'は入れてない
  */
 
 #ifndef call_from_test
@@ -117,9 +119,8 @@ struct SuffixArray {
     for (int i = 0; i < SA.size(); i++) rank[SA[i]] = i;
     for (int i = 0, h = 0; i < SA.size(); i++) {
       if (rank[i] + 1 < SA.size()) {
-        for (int j = SA[rank[i] + 1];
-             max(i, j) + h < SA.size() && s[i + h] == s[j + h]; ++h)
-          ;
+        int j = SA[rank[i] + 1];
+        while (max(i, j) + h < SA.size() && s[i + h] == s[j + h]) ++h;
         LCP[rank[i] + 1] = h;
         if (h > 0) --h;
       }
@@ -140,6 +141,7 @@ struct SuffixArray {
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
  * @brief LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
+ * @brief '$'は入れてない
  */
 
 #ifndef call_from_test
@@ -203,9 +205,8 @@ struct SuffixArray {
     for (int i = 0; i < SA.size(); i++) rank[SA[i]] = i;
     for (int i = 0, h = 0; i < SA.size(); i++) {
       if (rank[i] + 1 < SA.size()) {
-        for (int j = SA[rank[i] + 1];
-             max(i, j) + h < SA.size() && s[i + h] == s[j + h]; ++h)
-          ;
+        int j = SA[rank[i] + 1];
+        while (max(i, j) + h < SA.size() && s[i + h] == s[j + h]) ++h;
         LCP[rank[i] + 1] = h;
         if (h > 0) --h;
       }

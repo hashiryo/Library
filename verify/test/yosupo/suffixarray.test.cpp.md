@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/suffixarray.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 00:40:08+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/suffixarray">https://judge.yosupo.jp/problem/suffixarray</a>
@@ -57,18 +57,16 @@ using namespace std;
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    string S;
-    cin >> S;
-    SuffixArray SA(S);
-    for(int i = 0; i < S.length(); i++) {
-        if(i)
-            cout << " ";
-        cout << SA[i];
-    }
-    cout << endl;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string S;
+  cin >> S;
+  SuffixArray SA(S);
+  for (int i = 0; i < S.length(); i++) {
+    cout << (i ? " " : "") << SA[i];
+  }
+  cout << endl;
+  return 0;
 }
 ```
 {% endraw %}
@@ -90,10 +88,11 @@ using namespace std;
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
  * @brief LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
+ * @brief '$'は入れてない
  */
 
 #ifndef call_from_test
-#line 11 "String/SuffixArray.hpp"
+#line 12 "String/SuffixArray.hpp"
 using namespace std;
 #endif
 
@@ -153,9 +152,8 @@ struct SuffixArray {
     for (int i = 0; i < SA.size(); i++) rank[SA[i]] = i;
     for (int i = 0, h = 0; i < SA.size(); i++) {
       if (rank[i] + 1 < SA.size()) {
-        for (int j = SA[rank[i] + 1];
-             max(i, j) + h < SA.size() && s[i + h] == s[j + h]; ++h)
-          ;
+        int j = SA[rank[i] + 1];
+        while (max(i, j) + h < SA.size() && s[i + h] == s[j + h]) ++h;
         LCP[rank[i] + 1] = h;
         if (h > 0) --h;
       }
@@ -167,18 +165,16 @@ struct SuffixArray {
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    string S;
-    cin >> S;
-    SuffixArray SA(S);
-    for(int i = 0; i < S.length(); i++) {
-        if(i)
-            cout << " ";
-        cout << SA[i];
-    }
-    cout << endl;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string S;
+  cin >> S;
+  SuffixArray SA(S);
+  for (int i = 0; i < S.length(); i++) {
+    cout << (i ? " " : "") << SA[i];
+  }
+  cout << endl;
+  return 0;
 }
 
 ```

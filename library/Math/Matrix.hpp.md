@@ -25,21 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 行列
+# :question: 行列
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Matrix.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-22 23:44:10+09:00
+    - Last commit date: 2020-04-23 00:40:08+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
 * :x: <a href="../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
 * :x: <a href="../../verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 
@@ -120,7 +120,7 @@ struct Matrix {
       for (int j = 0; j < m; j++) ret[i] += (*this)[i][j] * v[j];
     return ret;
   }
-  bool operator==(const BitMatrix &b) const { return a == b.a; }
+  bool operator==(const Matrix &b) const { return a == b.a; }
   template <typename T>
   using ET = enable_if<is_floating_point<T>::value>;
   template <typename T>
@@ -305,7 +305,7 @@ struct Matrix {
       for (int j = 0; j < m; j++) ret[i] += (*this)[i][j] * v[j];
     return ret;
   }
-  bool operator==(const BitMatrix &b) const { return a == b.a; }
+  bool operator==(const Matrix &b) const { return a == b.a; }
   template <typename T>
   using ET = enable_if<is_floating_point<T>::value>;
   template <typename T>

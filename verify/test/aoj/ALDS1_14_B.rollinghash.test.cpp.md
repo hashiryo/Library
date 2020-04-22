@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.rollinghash.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-08 13:46:56+09:00
+    - Last commit date: 2020-04-23 00:40:08+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -68,8 +68,8 @@ signed main() {
   RH2 rt2(T), rp2(P);
   int N = P.length();
   for (int i = 0; i + N <= T.length(); i++) {
-    if (rt1.get(i, i + N) == rp1.get(0, N)
-        && rt2.get(i, i + N) == rp2.get(0, N))
+    if (rt1.get_hash(i, i + N) == rp1.get_hash(0, N)
+        && rt2.get_hash(i, i + N) == rp2.get_hash(0, N))
       cout << i << "\n";
   }
   cout << flush;
@@ -103,14 +103,12 @@ using namespace std;
 
 template <unsigned long long B>
 struct RollingHash {
-  using ull = unsigned long long;
-
  private:
-  const ull MASK30 = (1UL << 30) - 1;
-  const ull MASK31 = (1UL << 31) - 1;
-  const ull MOD = (1UL << 61) - 1;
-  const ull MASK61 = MOD;
-  vector<ull> hash, po;
+  const uint64_t MASK30 = (1UL << 30) - 1;
+  const uint64_t MASK31 = (1UL << 31) - 1;
+  const uint64_t MOD = (1UL << 61) - 1;
+  const uint64_t MASK61 = MOD;
+  vector<uint64_t> hash, po;
 
  public:
   RollingHash() {}
@@ -130,29 +128,27 @@ struct RollingHash {
     }
   }
   // S[l, r)
-  ull get(int l, int r) {
-    ull res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
+  uint64_t get_hash(int l, int r) {
+    uint64_t res = hash[r] + MOD * 3 - Mul(hash[l], po[r - l]);
     return CalcMod(res);
   }
 
  private:
-  // a*b mod 2^61-1を返す関数(最後にModを取る)
-  ull Mul(ull a, ull b) {
-    ull au = a >> 31;
-    ull ad = a & MASK31;
-    ull bu = b >> 31;
-    ull bd = b & MASK31;
-    ull mid = ad * bu + au * bd;
-    ull midu = mid >> 30;
-    ull midd = mid & MASK30;
+  uint64_t Mul(uint64_t a, uint64_t b) {
+    uint64_t au = a >> 31;
+    uint64_t ad = a & MASK31;
+    uint64_t bu = b >> 31;
+    uint64_t bd = b & MASK31;
+    uint64_t mid = ad * bu + au * bd;
+    uint64_t midu = mid >> 30;
+    uint64_t midd = mid & MASK30;
     return au * bu * 2 + midu + (midd << 31) + ad * bd;
   }
 
-  // mod 2^61-1を計算する関数
-  ull CalcMod(ull x) {
-    ull xu = x >> 61;
-    ull xd = x & MASK61;
-    ull res = xu + xd;
+  uint64_t CalcMod(uint64_t x) {
+    uint64_t xu = x >> 61;
+    uint64_t xd = x & MASK61;
+    uint64_t res = xu + xd;
     return res >= MOD ? res - MOD : res;
   }
 };
@@ -170,8 +166,8 @@ signed main() {
   RH2 rt2(T), rp2(P);
   int N = P.length();
   for (int i = 0; i + N <= T.length(); i++) {
-    if (rt1.get(i, i + N) == rp1.get(0, N)
-        && rt2.get(i, i + N) == rp2.get(0, N))
+    if (rt1.get_hash(i, i + N) == rp1.get_hash(0, N)
+        && rt2.get_hash(i, i + N) == rp2.get_hash(0, N))
       cout << i << "\n";
   }
   cout << flush;

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/matrix_det.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-22 23:44:10+09:00
+    - Last commit date: 2020-04-23 00:40:08+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/matrix_det">https://judge.yosupo.jp/problem/matrix_det</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/Math/Matrix.hpp.html">行列</a>
+* :question: <a href="../../../library/Math/Matrix.hpp.html">行列</a>
 * :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
@@ -155,7 +155,7 @@ struct Matrix {
       for (int j = 0; j < m; j++) ret[i] += (*this)[i][j] * v[j];
     return ret;
   }
-  bool operator==(const BitMatrix &b) const { return a == b.a; }
+  bool operator==(const Matrix &b) const { return a == b.a; }
   template <typename T>
   using ET = enable_if<is_floating_point<T>::value>;
   template <typename T>

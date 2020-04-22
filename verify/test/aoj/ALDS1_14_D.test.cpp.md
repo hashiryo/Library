@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/number_of_substrings.test.cpp
+# :heavy_check_mark: test/aoj/ALDS1_14_D.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/number_of_substrings.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_D.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-04-23 00:40:08+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/number_of_substrings">https://judge.yosupo.jp/problem/number_of_substrings</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D</a>
 
 
 ## Depends on
@@ -47,7 +47,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -57,19 +58,20 @@ using namespace std;
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    string S;
-    cin >> S;
-    SuffixArray SA(S);
-    int N = S.length();
-    auto LCP = SA.get_lcp();
-    long long ans = 0;
-    for(int i = 0; i < N; i++) {
-        ans += (N - SA[i]) - LCP[i];
-    }
-    cout << ans << endl;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string t;
+  cin >> t;
+  SuffixArray sa(t);
+  int Q;
+  cin >> Q;
+  while (Q--) {
+    string p;
+    cin >> p;
+    cout << (sa.count(p) > 0) << "\n";
+  }
+  cout << flush;
+  return 0;
 }
 ```
 {% endraw %}
@@ -77,8 +79,9 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/yosupo/number_of_substrings.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
+#line 1 "test/aoj/ALDS1_14_D.test.cpp"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -164,23 +167,24 @@ struct SuffixArray {
     return LCP;
   }
 };
-#line 8 "test/yosupo/number_of_substrings.test.cpp"
+#line 9 "test/aoj/ALDS1_14_D.test.cpp"
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    string S;
-    cin >> S;
-    SuffixArray SA(S);
-    int N = S.length();
-    auto LCP = SA.get_lcp();
-    long long ans = 0;
-    for(int i = 0; i < N; i++) {
-        ans += (N - SA[i]) - LCP[i];
-    }
-    cout << ans << endl;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string t;
+  cin >> t;
+  SuffixArray sa(t);
+  int Q;
+  cin >> Q;
+  while (Q--) {
+    string p;
+    cin >> p;
+    cout << (sa.count(p) > 0) << "\n";
+  }
+  cout << flush;
+  return 0;
 }
 
 ```
