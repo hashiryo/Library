@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Z_algorithm
+# :heavy_check_mark: 最長共通接頭辞(Z-Algorithm)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/z_algorithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title Z_algorithm
+ * @title 最長共通接頭辞(Z-Algorithm)
  * @category 文字列
  * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
  * @brief O(|S|)
@@ -81,7 +81,7 @@ vector<int> z_algorithm(const string &s) {
 ```cpp
 #line 1 "String/z_algorithm.hpp"
 /**
- * @title Z_algorithm
+ * @title 最長共通接頭辞(Z-Algorithm)
  * @category 文字列
  * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
  * @brief O(|S|)

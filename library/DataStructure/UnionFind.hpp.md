@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: UnionFindTree
+# :heavy_check_mark: UnionFind
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title UnionFindTree
+ * @title UnionFind
  * @category データ構造
  * @brief union_set(x,y) x が入っている集合と y が入っている集合を併合する．
  * @brief same(x,y) x と y が同じ集合に入っているかどうかを判定する．
@@ -84,7 +84,7 @@ struct UnionFind {
 ```cpp
 #line 1 "DataStructure/UnionFind.hpp"
 /**
- * @title UnionFindTree
+ * @title UnionFind
  * @category データ構造
  * @brief union_set(x,y) x が入っている集合と y が入っている集合を併合する．
  * @brief same(x,y) x と y が同じ集合に入っているかどうかを判定する．

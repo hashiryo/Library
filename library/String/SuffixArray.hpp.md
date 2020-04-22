@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: SuffixArray
+# :heavy_check_mark: 接尾辞配列(SuffixArray)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/SuffixArray.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 00:40:08+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 
@@ -50,7 +50,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title SuffixArray
+ * @title 接尾辞配列(SuffixArray)
  * @category 文字列
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
@@ -136,7 +136,7 @@ struct SuffixArray {
 ```cpp
 #line 1 "String/SuffixArray.hpp"
 /**
- * @title SuffixArray
+ * @title 接尾辞配列(SuffixArray)
  * @category 文字列
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/log_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-22 23:44:10+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/log_of_formal_power_series">https://judge.yosupo.jp/problem/log_of_formal_power_series</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数mod)</a>
 * :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
@@ -89,9 +89,9 @@ using namespace std;
 #define call_from_test
 #line 1 "Math/FormalPowerSeries.hpp"
 /**
- * @title 形式的冪級数(任意素数MOD)
+ * @title 形式的冪級数(任意素数mod)
  * @category 数学
- * @brief MOD=998244353とかでないModInt<MOD>でも使える
+ * @brief mod=998244353とかでないModInt<mod>でも使える
  * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
 // verify用: https://loj.ac/problem/150

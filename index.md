@@ -39,9 +39,9 @@ layout: default
 ### データ構造
 
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">DisjointSparseTable</a>
-* :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">ポテンシャルUnionFindTree</a>
+* :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">ポテンシャルUnionFind</a>
 * :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">SparseTable</a>
-* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFindTree</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">UnionFind</a>
 
 
 <div id="6e65831863dbf272b7a65cd8df1a440d"></div>
@@ -49,7 +49,7 @@ layout: default
 ### 数学
 
 * :heavy_check_mark: <a href="library/Math/BitMatrix.hpp.html">行列(mod2)</a>
-* :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数MOD)</a>
+* :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数mod)</a>
 * :heavy_check_mark: <a href="library/Math/Kitamasa.hpp.html">高速きたまさ法</a>
 * :question: <a href="library/Math/Matrix.hpp.html">行列</a>
 * :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
@@ -61,8 +61,8 @@ layout: default
 
 * :heavy_check_mark: <a href="library/String/KnuthMorrisPratt.hpp.html">KnuthMorrisPratt</a>
 * :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">RollingHash</a>
-* :heavy_check_mark: <a href="library/String/SuffixArray.hpp.html">SuffixArray</a>
-* :heavy_check_mark: <a href="library/String/z_algorithm.hpp.html">Z_algorithm</a>
+* :heavy_check_mark: <a href="library/String/SuffixArray.hpp.html">接尾辞配列(SuffixArray)</a>
+* :heavy_check_mark: <a href="library/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
 
 
 ## Verify Files

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: ポテンシャルUnionFindTree
+# :heavy_check_mark: ポテンシャルUnionFind
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/PotentializedUnionFind.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title ポテンシャルUnionFindTree
+ * @title ポテンシャルUnionFind
  * @category データ構造
  * @brief 各ノードにポテンシャルをもたせ、その差を求められる
  * @brief O(α(N))
@@ -98,7 +98,7 @@ struct PotentializedUnionFind {
 ```cpp
 #line 1 "DataStructure/PotentializedUnionFind.hpp"
 /**
- * @title ポテンシャルUnionFindTree
+ * @title ポテンシャルUnionFind
  * @category データ構造
  * @brief 各ノードにポテンシャルをもたせ、その差を求められる
  * @brief O(α(N))

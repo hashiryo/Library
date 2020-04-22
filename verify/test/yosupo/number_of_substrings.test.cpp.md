@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/number_of_substrings.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 00:40:08+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/number_of_substrings">https://judge.yosupo.jp/problem/number_of_substrings</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/String/SuffixArray.hpp.html">SuffixArray</a>
+* :heavy_check_mark: <a href="../../../library/String/SuffixArray.hpp.html">接尾辞配列(SuffixArray)</a>
 
 
 ## Code
@@ -86,7 +86,7 @@ using namespace std;
 #define call_from_test
 #line 1 "String/SuffixArray.hpp"
 /**
- * @title SuffixArray
+ * @title 接尾辞配列(SuffixArray)
  * @category 文字列
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)

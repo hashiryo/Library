@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Matrix.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 00:59:14+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 
@@ -213,7 +213,7 @@ struct Matrix {
       int p = i;
       for (int j = i + 1; j < n; j++)
         if (compare(A[i][p], A[i][j])) p = j;
-      if (is_zero(A[i][p])) return 0;
+      if (p == n && is_zero(A[i][p])) return 0;
       if (p != i) ret = -ret;
       swap(A[p], A[i]);
       ret *= A[i][i];
@@ -396,7 +396,7 @@ struct Matrix {
       int p = i;
       for (int j = i + 1; j < n; j++)
         if (compare(A[i][p], A[i][j])) p = j;
-      if (is_zero(A[i][p])) return 0;
+      if (p == n && is_zero(A[i][p])) return 0;
       if (p != i) ret = -ret;
       swap(A[p], A[i]);
       ret *= A[i][i];

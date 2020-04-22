@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 形式的冪級数(任意素数MOD)
+# :heavy_check_mark: 形式的冪級数(任意素数mod)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-22 23:44:10+09:00
+    - Last commit date: 2020-04-23 01:08:45+09:00
 
 
 
@@ -62,9 +62,9 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title 形式的冪級数(任意素数MOD)
+ * @title 形式的冪級数(任意素数mod)
  * @category 数学
- * @brief MOD=998244353とかでないModInt<MOD>でも使える
+ * @brief mod=998244353とかでないModInt<mod>でも使える
  * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
 // verify用: https://loj.ac/problem/150
@@ -499,9 +499,9 @@ struct FormalPowerSeries : vector<Modint> {
 ```cpp
 #line 1 "Math/FormalPowerSeries.hpp"
 /**
- * @title 形式的冪級数(任意素数MOD)
+ * @title 形式的冪級数(任意素数mod)
  * @category 数学
- * @brief MOD=998244353とかでないModInt<MOD>でも使える
+ * @brief mod=998244353とかでないModInt<mod>でも使える
  * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
 // verify用: https://loj.ac/problem/150
