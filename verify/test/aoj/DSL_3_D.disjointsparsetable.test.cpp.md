@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.disjointsparsetable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-07 17:39:41+09:00
+    - Last commit date: 2020-04-23 01:39:51+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
@@ -126,8 +126,7 @@ struct DisjointSparseTable {
     }
   }
   T query(int i, int j) {  // [i, j)
-    --j;
-    if (i == j) return ys[0][i];
+    if (i == --j) return ys[0][i];
     int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);
     return f(ys[h][i], ys[h][j]);
   }

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/matrix_det.test.cpp
+# :heavy_check_mark: test/yosupo/matrix_det.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/matrix_det.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:08:45+09:00
+    - Last commit date: 2020-04-23 01:39:51+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/matrix_det">https://judge.yosupo.jp/problem/matrix_det</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/Math/Matrix.hpp.html">行列</a>
-* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/Math/Matrix.hpp.html">行列</a>
+* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -247,8 +247,8 @@ struct Matrix {
     for (int i = 0; i < n; i++) {
       int p = i;
       for (int j = i + 1; j < n; j++)
-        if (compare(A[i][p], A[i][j])) p = j;
-      if (p == n && is_zero(A[i][p])) return 0;
+        if (compare(A[p][i], A[j][i])) p = j;
+      if (is_zero(A[p][i])) return 0;
       if (p != i) ret = -ret;
       swap(A[p], A[i]);
       ret *= A[i][i];

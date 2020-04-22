@@ -51,8 +51,8 @@ layout: default
 * :heavy_check_mark: <a href="library/Math/BitMatrix.hpp.html">行列(mod2)</a>
 * :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数(任意素数mod)</a>
 * :heavy_check_mark: <a href="library/Math/Kitamasa.hpp.html">高速きたまさ法</a>
-* :question: <a href="library/Math/Matrix.hpp.html">行列</a>
-* :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="library/Math/Matrix.hpp.html">行列</a>
+* :heavy_check_mark: <a href="library/Math/ModInt.hpp.html">ModInt</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -86,7 +86,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>

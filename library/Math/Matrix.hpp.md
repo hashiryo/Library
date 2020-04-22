@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: 行列
+# :heavy_check_mark: 行列
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Matrix.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:08:45+09:00
+    - Last commit date: 2020-04-23 01:39:51+09:00
 
 
 
@@ -41,7 +41,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 
 
 ## Code
@@ -212,8 +212,8 @@ struct Matrix {
     for (int i = 0; i < n; i++) {
       int p = i;
       for (int j = i + 1; j < n; j++)
-        if (compare(A[i][p], A[i][j])) p = j;
-      if (p == n && is_zero(A[i][p])) return 0;
+        if (compare(A[p][i], A[j][i])) p = j;
+      if (is_zero(A[p][i])) return 0;
       if (p != i) ret = -ret;
       swap(A[p], A[i]);
       ret *= A[i][i];
@@ -225,6 +225,7 @@ struct Matrix {
     return ret;
   }
 };
+
 ```
 {% endraw %}
 
@@ -395,8 +396,8 @@ struct Matrix {
     for (int i = 0; i < n; i++) {
       int p = i;
       for (int j = i + 1; j < n; j++)
-        if (compare(A[i][p], A[i][j])) p = j;
-      if (p == n && is_zero(A[i][p])) return 0;
+        if (compare(A[p][i], A[j][i])) p = j;
+      if (is_zero(A[p][i])) return 0;
       if (p != i) ret = -ret;
       swap(A[p], A[i]);
       ret *= A[i][i];
