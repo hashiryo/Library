@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/linear_equations.test.cpp
+# :heavy_check_mark: test/yosupo/linear_equations.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/linear_equations.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 00:40:08+09:00
+    - Last commit date: 2020-04-23 00:59:14+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/system_of_linear_equations">https://judge.yosupo.jp/problem/system_of_linear_equations</a>
@@ -204,8 +204,7 @@ struct Matrix {
       for (int j = 0; j < m; j++) c[i][j] = a[i][j];
     for (int i = 0; i < n; i++)
       for (int j = 0; j < l; j++) c[i][j + m] = b[i][j];
-    int d = 0;
-    for (int j = 0; j < m; j++) {
+    for (int j = 0, d = 0; j < m && d < n; j++) {
       int p = d;
       for (int i = d + 1; i < n; i++)
         if (compare(c[p][j], c[i][j])) p = i;
