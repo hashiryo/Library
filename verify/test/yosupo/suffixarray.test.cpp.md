@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/suffixarray.test.cpp
+# :x: test/yosupo/suffixarray.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/suffixarray.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:08:45+09:00
+    - Last commit date: 2020-04-24 16:54:44+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/suffixarray">https://judge.yosupo.jp/problem/suffixarray</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/String/SuffixArray.hpp.html">接尾辞配列(SuffixArray)</a>
+* :question: <a href="../../../library/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
 
 
 ## Code
@@ -83,7 +83,7 @@ using namespace std;
 #define call_from_test
 #line 1 "String/SuffixArray.hpp"
 /**
- * @title 接尾辞配列(SuffixArray)
+ * @title 接尾辞配列(Suffix-Array)
  * @category 文字列
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
@@ -125,7 +125,7 @@ struct SuffixArray {
   }
   int operator[](int k) const { return (SA[k]); }
 
-  // O(|T|*log|S|)
+  // O(|T|log|S|)
   int lower_bound(string &T) {
     int low = -1, high = s.size();
     while (high - low > 1) {
@@ -143,7 +143,7 @@ struct SuffixArray {
     T.back()--;
     return res;
   }
-  // O(|T|*log|S|)
+  // O(|T|log|S|)
   int count(string &T) { return upper_bound(T) - lower_bound(T); }
 
   // O(|S|)

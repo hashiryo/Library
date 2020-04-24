@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Matrix.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:39:51+09:00
+    - Last commit date: 2020-04-24 16:54:44+09:00
 
 
 
@@ -51,9 +51,9 @@ layout: default
 ```cpp
 /**
  * @title 行列
+ * @category 数学
  * @brief Gauss_Jordan(A,B) 拡大係数行列に対するガウスジョルダン法
  * @brief linear_equations(A,b) 返り値 {解のうちの一つ,解空間の基底ベクトル}
- * @category 数学
  */
 
 #ifndef call_from_test
@@ -235,9 +235,9 @@ struct Matrix {
 #line 1 "Math/Matrix.hpp"
 /**
  * @title 行列
+ * @category 数学
  * @brief Gauss_Jordan(A,B) 拡大係数行列に対するガウスジョルダン法
  * @brief linear_equations(A,b) 返り値 {解のうちの一つ,解空間の基底ベクトル}
- * @category 数学
  */
 
 #ifndef call_from_test

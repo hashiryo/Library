@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 接尾辞配列(SuffixArray)
+# :question: 接尾辞配列(Suffix-Array)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/String/SuffixArray.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 01:08:45+09:00
+    - Last commit date: 2020-04-24 16:54:44+09:00
 
 
 
@@ -41,7 +41,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/ALDS1_14_D.test.cpp.html">test/aoj/ALDS1_14_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 
 
 ## Code
@@ -50,7 +50,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title 接尾辞配列(SuffixArray)
+ * @title 接尾辞配列(Suffix-Array)
  * @category 文字列
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
@@ -92,7 +92,7 @@ struct SuffixArray {
   }
   int operator[](int k) const { return (SA[k]); }
 
-  // O(|T|*log|S|)
+  // O(|T|log|S|)
   int lower_bound(string &T) {
     int low = -1, high = s.size();
     while (high - low > 1) {
@@ -110,7 +110,7 @@ struct SuffixArray {
     T.back()--;
     return res;
   }
-  // O(|T|*log|S|)
+  // O(|T|log|S|)
   int count(string &T) { return upper_bound(T) - lower_bound(T); }
 
   // O(|S|)
@@ -136,7 +136,7 @@ struct SuffixArray {
 ```cpp
 #line 1 "String/SuffixArray.hpp"
 /**
- * @title 接尾辞配列(SuffixArray)
+ * @title 接尾辞配列(Suffix-Array)
  * @category 文字列
  * @brief 構築 O(|S| log |S|)
  * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
@@ -178,7 +178,7 @@ struct SuffixArray {
   }
   int operator[](int k) const { return (SA[k]); }
 
-  // O(|T|*log|S|)
+  // O(|T|log|S|)
   int lower_bound(string &T) {
     int low = -1, high = s.size();
     while (high - low > 1) {
@@ -196,7 +196,7 @@ struct SuffixArray {
     T.back()--;
     return res;
   }
-  // O(|T|*log|S|)
+  // O(|T|log|S|)
   int count(string &T) { return upper_bound(T) - lower_bound(T); }
 
   // O(|S|)

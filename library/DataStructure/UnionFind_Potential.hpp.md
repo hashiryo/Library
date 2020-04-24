@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind_Potential.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 02:23:27+09:00
+    - Last commit date: 2020-04-24 16:54:44+09:00
 
 
 
@@ -64,15 +64,12 @@ struct UnionFind_Potential {
   vector<Weight> val;
   UnionFind_Potential(int size) : par(size, -1), val(size, 0) {}
   bool unionSet(int y, int x, Weight w) {
-    w += potential(x);
-    w -= potential(y);
-    x = root(x);
-    y = root(y);
+    w += potential(x) - potential(y);
+    x = root(x), y = root(y);
     if (x != y) {
       if (par[y] < par[x]) swap(x, y), w = -w;
       par[x] += par[y];
-      par[y] = x;
-      val[y] = w;
+      par[y] = x, val[y] = w;
     }
     return x != y;
   }
@@ -115,15 +112,12 @@ struct UnionFind_Potential {
   vector<Weight> val;
   UnionFind_Potential(int size) : par(size, -1), val(size, 0) {}
   bool unionSet(int y, int x, Weight w) {
-    w += potential(x);
-    w -= potential(y);
-    x = root(x);
-    y = root(y);
+    w += potential(x) - potential(y);
+    x = root(x), y = root(y);
     if (x != y) {
       if (par[y] < par[x]) swap(x, y), w = -w;
       par[x] += par[y];
-      par[y] = x;
-      val[y] = w;
+      par[y] = x, val[y] = w;
     }
     return x != y;
   }

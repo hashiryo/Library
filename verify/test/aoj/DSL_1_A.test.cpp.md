@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_1_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 02:23:27+09:00
+    - Last commit date: 2020-04-24 16:54:44+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
@@ -107,8 +107,7 @@ struct UnionFind {
   vector<int> par;
   UnionFind(int size) : par(size, -1) {}
   bool unionSet(int x, int y) {
-    x = root(x);
-    y = root(y);
+    x = root(x), y = root(y);
     if (x != y) {
       if (par[y] < par[x]) swap(x, y);
       par[x] += par[y];

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 行列(mod2)
+# :question: 行列(mod2)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Matrix_mod2.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 02:22:21+09:00
+    - Last commit date: 2020-04-24 16:54:44+09:00
 
 
 
@@ -40,8 +40,8 @@ layout: default
 
 * :heavy_check_mark: <a href="../../verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 
 
 ## Code
@@ -51,9 +51,9 @@ layout: default
 ```cpp
 /**
  * @title 行列(mod2)
+ * @category 数学
  * @brief Gauss_Jordan(A,B) 拡大係数行列に対するガウスジョルダン法
  * @brief linear_equations 返り値 {解のうちの一つ,解空間の基底ベクトル}
- * @category 数学
  */
 // verify用:
 // https://atcoder.jp/contests/bitflyer2018-final-open/tasks/bitflyer2018_final_d
@@ -207,9 +207,9 @@ struct Matrix_mod2 {
 #line 1 "Math/Matrix_mod2.hpp"
 /**
  * @title 行列(mod2)
+ * @category 数学
  * @brief Gauss_Jordan(A,B) 拡大係数行列に対するガウスジョルダン法
  * @brief linear_equations 返り値 {解のうちの一つ,解空間の基底ベクトル}
- * @category 数学
  */
 // verify用:
 // https://atcoder.jp/contests/bitflyer2018-final-open/tasks/bitflyer2018_final_d
