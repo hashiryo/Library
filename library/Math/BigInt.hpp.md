@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 多倍長整数
+# :heavy_check_mark: 多倍長整数
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/BigInt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 22:39:23+09:00
+    - Last commit date: 2020-04-24 23:09:00+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
 
 
 ## Code
@@ -208,7 +208,7 @@ struct BigInt {
     dat.clear();
     ll pos = 0;
     while (pos < (ll)s.size() && (s[pos] == '-' || s[pos] == '+')) {
-      if (s[pos] == '-') minus = ~minus;
+      if (s[pos] == '-') minus = !minus;
       ++pos;
     }
     for (ll i = s.size() - 1; i >= pos; i -= base_digits) {
@@ -367,11 +367,11 @@ struct BigInt {
   }
   BigInt operator-() const {
     BigInt res = *this;
-    res.minus = ~res.minus;
+    res.minus = !res.minus;
     return res;
   }
   BigInt &operator*=(ll v) {
-    if (v < 0) minus = ~minus, v = -v;
+    if (v < 0) minus = !minus, v = -v;
     for (ll i = 0, carry = 0; i < (ll)dat.size() || carry; ++i) {
       if (i == (ll)dat.size()) dat.push_back(0);
       ll cur = dat[i] * (ll)v + carry;
@@ -383,7 +383,7 @@ struct BigInt {
   }
   BigInt operator*(ll v) const { return BigInt(*this) *= v; }
   BigInt &operator/=(ll v) {
-    if (v < 0) minus = ~minus, v = -v;
+    if (v < 0) minus = !minus, v = -v;
     for (ll i = (ll)dat.size() - 1, rem = 0; i >= 0; --i) {
       ll cur = dat[i] + rem * (ll)base;
       dat[i] = (ll)(cur / v);
@@ -434,7 +434,6 @@ struct BigInt {
   BigInt &operator/=(const BigInt &v) { return *this = *this / v; }
   BigInt &operator%=(const BigInt &v) { return *this = *this % v; }
 };
-
 ```
 {% endraw %}
 
@@ -599,7 +598,7 @@ struct BigInt {
     dat.clear();
     ll pos = 0;
     while (pos < (ll)s.size() && (s[pos] == '-' || s[pos] == '+')) {
-      if (s[pos] == '-') minus = ~minus;
+      if (s[pos] == '-') minus = !minus;
       ++pos;
     }
     for (ll i = s.size() - 1; i >= pos; i -= base_digits) {
@@ -758,11 +757,11 @@ struct BigInt {
   }
   BigInt operator-() const {
     BigInt res = *this;
-    res.minus = ~res.minus;
+    res.minus = !res.minus;
     return res;
   }
   BigInt &operator*=(ll v) {
-    if (v < 0) minus = ~minus, v = -v;
+    if (v < 0) minus = !minus, v = -v;
     for (ll i = 0, carry = 0; i < (ll)dat.size() || carry; ++i) {
       if (i == (ll)dat.size()) dat.push_back(0);
       ll cur = dat[i] * (ll)v + carry;
@@ -774,7 +773,7 @@ struct BigInt {
   }
   BigInt operator*(ll v) const { return BigInt(*this) *= v; }
   BigInt &operator/=(ll v) {
-    if (v < 0) minus = ~minus, v = -v;
+    if (v < 0) minus = !minus, v = -v;
     for (ll i = (ll)dat.size() - 1, rem = 0; i >= 0; --i) {
       ll cur = dat[i] + rem * (ll)base;
       dat[i] = (ll)(cur / v);

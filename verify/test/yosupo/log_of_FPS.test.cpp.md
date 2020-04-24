@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code

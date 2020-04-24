@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
+* :heavy_check_mark: <a href="../../../library/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
 
 
 ## Code

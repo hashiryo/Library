@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/NTL_2_F.test.cpp
+# :heavy_check_mark: test/aoj/NTL_2_F.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/NTL_2_F.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 22:39:23+09:00
+    - Last commit date: 2020-04-24 23:09:00+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_F</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/Math/BigInt.hpp.html">多倍長整数</a>
+* :heavy_check_mark: <a href="../../../library/Math/BigInt.hpp.html">多倍長整数</a>
 
 
 ## Code
@@ -237,7 +237,7 @@ struct BigInt {
     dat.clear();
     ll pos = 0;
     while (pos < (ll)s.size() && (s[pos] == '-' || s[pos] == '+')) {
-      if (s[pos] == '-') minus = ~minus;
+      if (s[pos] == '-') minus = !minus;
       ++pos;
     }
     for (ll i = s.size() - 1; i >= pos; i -= base_digits) {
@@ -396,11 +396,11 @@ struct BigInt {
   }
   BigInt operator-() const {
     BigInt res = *this;
-    res.minus = ~res.minus;
+    res.minus = !res.minus;
     return res;
   }
   BigInt &operator*=(ll v) {
-    if (v < 0) minus = ~minus, v = -v;
+    if (v < 0) minus = !minus, v = -v;
     for (ll i = 0, carry = 0; i < (ll)dat.size() || carry; ++i) {
       if (i == (ll)dat.size()) dat.push_back(0);
       ll cur = dat[i] * (ll)v + carry;
@@ -412,7 +412,7 @@ struct BigInt {
   }
   BigInt operator*(ll v) const { return BigInt(*this) *= v; }
   BigInt &operator/=(ll v) {
-    if (v < 0) minus = ~minus, v = -v;
+    if (v < 0) minus = !minus, v = -v;
     for (ll i = (ll)dat.size() - 1, rem = 0; i >= 0; --i) {
       ll cur = dat[i] + rem * (ll)base;
       dat[i] = (ll)(cur / v);
