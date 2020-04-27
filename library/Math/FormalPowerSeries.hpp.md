@@ -25,20 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 形式的冪級数
+# :question: 形式的冪級数
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 16:54:44+09:00
+    - Last commit date: 2020-04-27 14:13:41+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="kitamasa.hpp.html">高速きたまさ法</a>
+* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :question: <a href="kitamasa.hpp.html">高速きたまさ法</a>
 
 
 ## Verified with
@@ -49,11 +50,13 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 
 ## Code
@@ -284,6 +287,11 @@ struct FormalPowerSeries : vector<Modint> {
   FPS operator*(const FPS &rhs) const { return this->mul(rhs); }     // O(NlogN)
   FPS operator/(const FPS &rhs) const { return FPS(*this) /= rhs; }  // O(NlogN)
   FPS operator%(const FPS &rhs) const { return FPS(*this) %= rhs; }  // O(NlogN)
+  Modint eval(Modint x) {
+    Modint res, w = 1;
+    for (auto &v : *this) res += w * v, w *= x;
+    return res;
+  }
 
  public:
   static Modint mod_sqrt(Modint x) {
@@ -721,6 +729,11 @@ struct FormalPowerSeries : vector<Modint> {
   FPS operator*(const FPS &rhs) const { return this->mul(rhs); }     // O(NlogN)
   FPS operator/(const FPS &rhs) const { return FPS(*this) /= rhs; }  // O(NlogN)
   FPS operator%(const FPS &rhs) const { return FPS(*this) %= rhs; }  // O(NlogN)
+  Modint eval(Modint x) {
+    Modint res, w = 1;
+    for (auto &v : *this) res += w * v, w *= x;
+    return res;
+  }
 
  public:
   static Modint mod_sqrt(Modint x) {

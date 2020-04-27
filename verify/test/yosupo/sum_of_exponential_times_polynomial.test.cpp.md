@@ -1,0 +1,340 @@
+---
+layout: default
+---
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "AMS" }},
+    tex2jax: {
+      inlineMath: [ ['$','$'] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { matchFontHeight: false },
+    displayAlign: "left",
+    displayIndent: "2em"
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
+
+
+# :heavy_check_mark: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+
+<a href="../../../index.html">Back to top page</a>
+
+* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-27 14:13:41+09:00
+
+
+* see: <a href="https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial">https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial</a>
+
+
+## Depends on
+
+* :question: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
+
+
+## Code
+
+<a id="unbundled"></a>
+{% raw %}
+```cpp
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#include "Math/Combination.hpp"
+#include "Math/ModInt.hpp"
+#include "Math/lagrange_interpolation.hpp"
+#undef call_from_test
+
+template <class Modint>
+vector<Modint> pow_d_list(int n, long long d) {
+  vector<int> pdiv(n);
+  for (int i = 2; i < n; i++) pdiv[i] = i & 1 ? i : 2;
+  for (int p = 3; p * p < n; p += 2)
+    if (pdiv[p] == p)
+      for (int q = p * p; q < n; q += 2 * p) pdiv[q] = p;
+
+  vector<Modint> res(n);
+  if (d == 0) res[0] = 1;
+  if (n >= 2) res[1] = 1;
+  for (int i = 2; i < n; i++) {
+    if (pdiv[i] == i)
+      res[i] = Modint(i).pow(d);
+    else
+      res[i] = res[pdiv[i]] * res[i / pdiv[i]];
+  }
+  return res;
+}
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  using Mint = ModInt<998244353>;
+  using C = Combination<Mint>;
+  long long r, d, n;
+  cin >> r >> d >> n;
+  if (--n < 0) {
+    cout << 0 << endl;
+    return 0;
+  }
+  vector<Mint> sum(d + 2), rpow(d + 2), pd = pow_d_list<Mint>(d + 2, d);
+  rpow[0] = 1, sum[0] = rpow[0] * pd[0];
+  for (int i = 1; i <= d + 1; i++) rpow[i] = rpow[i - 1] * r;
+  for (int i = 1; i <= d + 1; i++) sum[i] = sum[i - 1] + rpow[i] * pd[i];
+  Mint ans = 0;
+  if (r == 1)
+    ans = lagrange_interpolation<Mint>(sum, n);
+  else {
+    C::init(d + 1);
+    for (int i = 0; i <= d; i++) {
+      if ((d - i) & 1)
+        ans -= C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+      else
+        ans += C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+    }
+    ans /= Mint(1 - r).pow(d + 1);
+    vector<Mint> y(d + 1);
+    Mint rinv = Mint(r).inverse(), rinvpow = 1;
+    for (int i = 0; i <= d; i++) {
+      y[i] = Mint(sum[i] - ans) * rinvpow;
+      rinvpow *= rinv;
+    }
+    ans += Mint(r).pow(n) * lagrange_interpolation<Mint>(y, n);
+  }
+  cout << ans << endl;
+  return 0;
+}
+```
+{% endraw %}
+
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "test/yosupo/sum_of_exponential_times_polynomial.test.cpp"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "Math/Combination.hpp"
+/**
+ * @title 組み合わせ
+ * @category 数学
+ */
+
+#ifndef call_from_test
+#line 8 "Math/Combination.hpp"
+using namespace std;
+#endif
+
+template <class Modint>
+struct Combination {
+  static vector<Modint> _fact, _finv, _inv;
+  static void init(int sz) {
+    int n = min(sz, Modint::modulo() - 1);
+    _fact.resize(n + 1), _finv.resize(n + 1), _inv.resize(n + 1);
+    for (int i = 0; i <= n; ++i) _fact[i] = i ? Modint(i) * _fact[i - 1] : 1;
+    _finv[n] = _fact[n].inverse();
+    for (int i = n; i; --i) _finv[i - 1] = Modint(i) * _finv[i];
+    for (int i = 1; i <= n; ++i) _inv[i] = _finv[i] * _fact[i - 1];
+  }
+  static Modint inv(int n) { return _inv[n]; }
+  static Modint fact(int n) { return _fact[n]; }
+  static Modint fact_inv(int n) { return _finv[n]; }
+  static Modint C(int n, int k) {
+    if (n < k || k < 0) return Modint(0);
+    return _fact[n] * _finv[n - k] * _finv[k];
+  }
+  static Modint P(int n, int k) {
+    if (n < k || k < 0) return Modint(0);
+    return _fact[n] * _finv[n - k];
+  }
+  static Modint H(int n, int k) {
+    if (n < 0 || k < 0) return Modint(0);
+    if (!n && !k) return Modint(1);
+    return C(n + k - 1, n);
+  }
+  static size_t size() { return _inv.size(); }
+};
+template <class Modint>
+vector<Modint> Combination<Modint>::_fact;
+template <class Modint>
+vector<Modint> Combination<Modint>::_finv;
+template <class Modint>
+vector<Modint> Combination<Modint>::_inv;
+#line 1 "Math/ModInt.hpp"
+/**
+ * @title ModInt
+ * @category 数学
+ */
+
+#ifndef call_from_test
+#line 8 "Math/ModInt.hpp"
+using namespace std;
+#endif
+
+template <int mod>
+struct ModInt {
+  int x;
+  ModInt() : x(0) {}
+  ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod)) {}
+  ModInt &operator+=(const ModInt &p) {
+    if ((x += p.x) >= mod) x -= mod;
+    return *this;
+  }
+  ModInt &operator-=(const ModInt &p) {
+    if ((x += mod - p.x) >= mod) x -= mod;
+    return *this;
+  }
+  ModInt &operator*=(const ModInt &p) {
+    x = (int)(1LL * x * p.x % mod);
+    return *this;
+  }
+  ModInt &operator/=(const ModInt &p) { return *this *= p.inverse(); }
+  ModInt operator-() const { return ModInt() - *this; }
+  ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
+  ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p; }
+  ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p; }
+  ModInt operator/(const ModInt &p) const { return ModInt(*this) /= p; }
+  bool operator==(const ModInt &p) const { return x == p.x; }
+  bool operator!=(const ModInt &p) const { return x != p.x; }
+  ModInt inverse() const {
+    int a = x, b = mod, u = 1, v = 0, t;
+    while (b) t = a / b, swap(a -= t * b, b), swap(u -= t * v, v);
+    return ModInt(u);
+  }
+  ModInt pow(int64_t e) const {
+    ModInt ret(1);
+    for (ModInt b = *this; e; e >>= 1, b *= b)
+      if (e & 1) ret *= b;
+    return ret;
+  }
+  friend ostream &operator<<(ostream &os, const ModInt &p) { return os << p.x; }
+  friend istream &operator>>(istream &is, ModInt &a) {
+    int64_t t;
+    is >> t;
+    a = ModInt<mod>(t);
+    return (is);
+  }
+  static int modulo() { return mod; }
+};
+#line 1 "Math/lagrange_interpolation.hpp"
+/**
+ * @title ラグランジュ補間
+ * @category 数学
+ * @brief x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
+ * @brief O(N)
+ */
+
+#ifndef call_from_test
+#line 10 "Math/lagrange_interpolation.hpp"
+using namespace std;
+#endif
+
+// verify用:http://codeforces.com/contest/622/problem/F
+
+template <typename K>
+K lagrange_interpolation(vector<K> &y, K t) {
+  int n = y.size() - 1;
+  vector<K> pro(n + 1, 1), orp(n + 1, 1);
+  for (int i = 0; i < n; i++) pro[i + 1] = pro[i] * (t - K(i));
+  for (int i = n; i > 0; i--) orp[i - 1] = orp[i] * (t - K(i));
+  K fact = K(1);
+  for (int i = 1; i <= n; i++) fact *= K(i);
+  vector<K> finv(n + 1, 1);
+  finv[n] = K(1) / fact;
+  for (int i = n; i >= 1; i--) finv[i - 1] = finv[i] * K(i);
+  K res(0);
+  for (int i = 0; i <= n; i++) {
+    K tmp = y[i] * pro[i] * orp[i] * finv[i] * finv[n - i];
+    if ((n - i) & 1)
+      res -= tmp;
+    else
+      res += tmp;
+  }
+  return res;
+}
+#line 11 "test/yosupo/sum_of_exponential_times_polynomial.test.cpp"
+#undef call_from_test
+
+template <class Modint>
+vector<Modint> pow_d_list(int n, long long d) {
+  vector<int> pdiv(n);
+  for (int i = 2; i < n; i++) pdiv[i] = i & 1 ? i : 2;
+  for (int p = 3; p * p < n; p += 2)
+    if (pdiv[p] == p)
+      for (int q = p * p; q < n; q += 2 * p) pdiv[q] = p;
+
+  vector<Modint> res(n);
+  if (d == 0) res[0] = 1;
+  if (n >= 2) res[1] = 1;
+  for (int i = 2; i < n; i++) {
+    if (pdiv[i] == i)
+      res[i] = Modint(i).pow(d);
+    else
+      res[i] = res[pdiv[i]] * res[i / pdiv[i]];
+  }
+  return res;
+}
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  using Mint = ModInt<998244353>;
+  using C = Combination<Mint>;
+  long long r, d, n;
+  cin >> r >> d >> n;
+  if (--n < 0) {
+    cout << 0 << endl;
+    return 0;
+  }
+  vector<Mint> sum(d + 2), rpow(d + 2), pd = pow_d_list<Mint>(d + 2, d);
+  rpow[0] = 1, sum[0] = rpow[0] * pd[0];
+  for (int i = 1; i <= d + 1; i++) rpow[i] = rpow[i - 1] * r;
+  for (int i = 1; i <= d + 1; i++) sum[i] = sum[i - 1] + rpow[i] * pd[i];
+  Mint ans = 0;
+  if (r == 1)
+    ans = lagrange_interpolation<Mint>(sum, n);
+  else {
+    C::init(d + 1);
+    for (int i = 0; i <= d; i++) {
+      if ((d - i) & 1)
+        ans -= C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+      else
+        ans += C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+    }
+    ans /= Mint(1 - r).pow(d + 1);
+    vector<Mint> y(d + 1);
+    Mint rinv = Mint(r).inverse(), rinvpow = 1;
+    for (int i = 0; i <= d; i++) {
+      y[i] = Mint(sum[i] - ans) * rinvpow;
+      rinvpow *= rinv;
+    }
+    ans += Mint(r).pow(n) * lagrange_interpolation<Mint>(y, n);
+  }
+  cout << ans << endl;
+  return 0;
+}
+
+```
+{% endraw %}
+
+<a href="../../../index.html">Back to top page</a>
+

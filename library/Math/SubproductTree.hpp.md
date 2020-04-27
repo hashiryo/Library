@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: 高速きたまさ法
+# :heavy_check_mark: 複数の値代入と多項式補間
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Math/kitamasa.hpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/Math/SubproductTree.hpp">View this file on GitHub</a>
     - Last commit date: 2020-04-27 14:13:41+09:00
 
 
@@ -43,9 +43,8 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :x: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :x: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 
 
 ## Code
@@ -54,9 +53,10 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title 高速きたまさ法
+ * @title 複数の値代入と多項式補間
  * @category 数学
- * @brief O(NlogNlogk)
+ * @brief どちらもO(N log^2 N)
+ * @brief 多項式補間はxが等差数列ならラグランジュ補間のほうがO(N)で速い
  */
 
 #ifndef call_from_test
@@ -68,41 +68,54 @@ using namespace std;
 #undef call_from_test
 #endif
 
-// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]
-// b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)
-// calc b[k]
-
-template <class Modint>
-Modint kitamasa(const vector<Modint> &c, const vector<Modint> &a, uint64_t k) {
-  assert(a.size() == c.size());
-  int N = a.size();
-  if (k < N) return a[k];
+template <typename Modint>
+struct SubproductTree {
   using FPS = FormalPowerSeries<Modint>;
-  uint64_t mask = (uint64_t(1) << (63 - __builtin_clzll(k))) >> 1;
-  FPS f(N + 1);
-  f[0] = 1;
-  for (int i = 0; i < N; i++) f[N - i] = -c[i];
-  FPS r({1, 0});
-  if (N < 1150) {  // naive
-    r = r.divrem_rev_n(f).second;
-    for (; mask; mask >>= 1) {
-      r *= r;
-      if (k & mask) r.push_back(0);
-      r = r.divrem_rev_n(f).second;
-    }
-  } else {
-    FPS inv = f.inv(N);
-    r = r.rem_rev_pre(f, inv);
-    for (; mask; mask >>= 1) {
-      r *= r;
-      if (k & mask) r.push_back(0);
-      r = r.rem_rev_pre(f, inv);
-    }
+  int n;
+  vector<Modint> xs;
+  vector<FPS> buf;
+  SubproductTree() {}
+  SubproductTree(const vector<Modint> &_xs)
+      : n(_xs.size()), xs(_xs), buf(4 * n) {
+    pre(0, n, 1);
   }
-  Modint ret(0);
-  for (int i = 0; i < N; i++) ret += r[N - i - 1] * a[i];
-  return ret;
-}
+  void pre(int l, int r, int k) {
+    if (r - l == 1) {
+      buf[k] = {-xs[l], 1};
+      return;
+    }
+    int m = (l + r) >> 1;
+    pre(l, m, k * 2), pre(m, r, k * 2 + 1);
+    buf[k] = buf[k * 2] * buf[k * 2 + 1];
+  }
+  vector<Modint> multi_eval(const FPS &f) {
+    vector<Modint> res(n);
+    function<void(FPS, int, int, int)> dfs = [&](FPS g, int l, int r, int k) {
+      g %= buf[k];
+      if (r - l <= 128) {
+        for (int i = l; i < r; i++) res[i] = g.eval(xs[i]);
+        return;
+      }
+      int m = (l + r) >> 1;
+      dfs(g, l, m, k * 2), dfs(g, m, r, k * 2 + 1);
+    };
+    dfs(f, 0, n, 1);
+    return res;
+  }
+  FPS interpolate(const vector<Modint> &ys) {
+    FPS w = buf[1].diff();
+    vector<Modint> vs = multi_eval(w);
+    function<FPS(int, int, int)> dfs = [&](int l, int r, int k) {
+      if (r - l == 1) return FPS({ys[l] / vs[l]});
+      int m = (l + r) >> 1;
+      return buf[k * 2 + 1] * dfs(l, m, k * 2)
+             + buf[k * 2] * dfs(m, r, k * 2 + 1);
+    };
+    FPS res = dfs(0, n, 1);
+    res.resize(n);
+    return res;
+  }
+};
 
 ```
 {% endraw %}
@@ -117,7 +130,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/SubproductTree.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yukicoder/1973.test.cpp
+# :heavy_check_mark: test/yosupo/polynomial_interpolation.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#de60e5ba474ac43bf7562c10f5977e2d">test/yukicoder</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yukicoder/1973.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/polynomial_interpolation.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-04-27 14:13:41+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/1973">https://yukicoder.me/problems/1973</a>
+* see: <a href="https://judge.yosupo.jp/problem/polynomial_interpolation">https://judge.yosupo.jp/problem/polynomial_interpolation</a>
 
 
 ## Depends on
 
 * :question: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :question: <a href="../../../library/Math/kitamasa.hpp.html">高速きたまさ法</a>
+* :heavy_check_mark: <a href="../../../library/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/1973"
+#define PROBLEM "https://judge.yosupo.jp/problem/polynomial_interpolation"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -57,20 +57,22 @@ using namespace std;
 #define call_from_test
 #include "Math/FormalPowerSeries.hpp"
 #include "Math/ModInt.hpp"
-#include "Math/kitamasa.hpp"
+#include "Math/SubproductTree.hpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int Q;
-  cin >> Q;
-  while (Q--) {
-    long long n;
-    cin >> n;
-    cout << kitamasa<ModInt<17>>({1, 1, 1, 1}, {0, 0, 0, 1}, n - 1) << "\n";
-  }
-  cout << flush;
+  using Mint = ModInt<998244353>;
+  using FPS = FormalPowerSeries<Mint>;
+  int N;
+  cin >> N;
+  vector<Mint> x(N), y(N);
+  for (int i = 0; i < N; i++) cin >> x[i];
+  for (int i = 0; i < N; i++) cin >> y[i];
+  FPS f = SubproductTree<Mint>(x).interpolate(y);
+  for (int i = 0; i < N; i++) cout << (i ? " " : "") << f[i];
+  cout << endl;
   return 0;
 }
 ```
@@ -88,7 +90,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/SubproductTree.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

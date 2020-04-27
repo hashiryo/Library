@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sqrt_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 16:54:44+09:00
+    - Last commit date: 2020-04-27 14:13:41+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sqrt_of_formal_power_series">https://judge.yosupo.jp/problem/sqrt_of_formal_power_series</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -315,6 +315,11 @@ struct FormalPowerSeries : vector<Modint> {
   FPS operator*(const FPS &rhs) const { return this->mul(rhs); }     // O(NlogN)
   FPS operator/(const FPS &rhs) const { return FPS(*this) /= rhs; }  // O(NlogN)
   FPS operator%(const FPS &rhs) const { return FPS(*this) %= rhs; }  // O(NlogN)
+  Modint eval(Modint x) {
+    Modint res, w = 1;
+    for (auto &v : *this) res += w * v, w *= x;
+    return res;
+  }
 
  public:
   static Modint mod_sqrt(Modint x) {

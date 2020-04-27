@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/DPL_5_D.test.cpp
+# :x: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DPL_5_D.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 16:54:44+09:00
+* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-27 14:13:41+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D</a>
+* see: <a href="https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit">https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit</a>
 
 
 ## Depends on
@@ -49,7 +49,7 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D"
+  "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -59,27 +59,58 @@ using namespace std;
 #include "Math/ModInt.hpp"
 #undef call_from_test
 
-signed main() {
-  cin.tie(0);
-  ios::sync_with_stdio(false);
-  int n, k;
-  cin >> n >> k;
-  using Mint = ModInt<int(1e9 + 7)>;
-  using C = Combination<Mint>;
-  C::init(n + k);
-  cout << C::H(n, k) << endl;
-  return 0;
+template <class Modint>
+vector<Modint> pow_d_list(int n, long long d) {
+  vector<int> pdiv(n);
+  for (int i = 2; i < n; i++) pdiv[i] = i & 1 ? i : 2;
+  for (int p = 3; p * p < n; p += 2)
+    if (pdiv[p] == p)
+      for (int q = p * p; q < n; q += 2 * p) pdiv[q] = p;
+
+  vector<Modint> res(n);
+  if (d == 0) res[0] = 1;
+  if (n >= 2) res[1] = 1;
+  for (int i = 2; i < n; i++) {
+    if (pdiv[i] == i)
+      res[i] = Modint(i).pow(d);
+    else
+      res[i] = res[pdiv[i]] * res[i / pdiv[i]];
+  }
+  return res;
 }
 
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  using Mint = ModInt<998244353>;
+  using C = Combination<Mint>;
+  long long r, d;
+  cin >> r >> d;
+  vector<Mint> sum(d + 1), rpow(d + 1), pd = pow_d_list<Mint>(d + 1, d);
+  rpow[0] = 1, sum[0] = rpow[0] * pd[0];
+  for (int i = 1; i <= d; i++) rpow[i] = rpow[i - 1] * r;
+  for (int i = 1; i <= d; i++) sum[i] = sum[i - 1] + rpow[i] * pd[i];
+  Mint ans = 0;
+  C::init(d + 1);
+  for (int i = 0; i <= d; i++) {
+    if ((d - i) & 1)
+      ans -= C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+    else
+      ans += C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+  }
+  ans /= Mint(1 - r).pow(d + 1);
+  cout << ans << endl;
+  return 0;
+}
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/DPL_5_D.test.cpp"
+#line 1 "test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D"
+  "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -187,18 +218,50 @@ struct ModInt {
   }
   static int modulo() { return mod; }
 };
-#line 10 "test/aoj/DPL_5_D.test.cpp"
+#line 10 "test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp"
 #undef call_from_test
+
+template <class Modint>
+vector<Modint> pow_d_list(int n, long long d) {
+  vector<int> pdiv(n);
+  for (int i = 2; i < n; i++) pdiv[i] = i & 1 ? i : 2;
+  for (int p = 3; p * p < n; p += 2)
+    if (pdiv[p] == p)
+      for (int q = p * p; q < n; q += 2 * p) pdiv[q] = p;
+
+  vector<Modint> res(n);
+  if (d == 0) res[0] = 1;
+  if (n >= 2) res[1] = 1;
+  for (int i = 2; i < n; i++) {
+    if (pdiv[i] == i)
+      res[i] = Modint(i).pow(d);
+    else
+      res[i] = res[pdiv[i]] * res[i / pdiv[i]];
+  }
+  return res;
+}
 
 signed main() {
   cin.tie(0);
-  ios::sync_with_stdio(false);
-  int n, k;
-  cin >> n >> k;
-  using Mint = ModInt<int(1e9 + 7)>;
+  ios::sync_with_stdio(0);
+  using Mint = ModInt<998244353>;
   using C = Combination<Mint>;
-  C::init(n + k);
-  cout << C::H(n, k) << endl;
+  long long r, d;
+  cin >> r >> d;
+  vector<Mint> sum(d + 1), rpow(d + 1), pd = pow_d_list<Mint>(d + 1, d);
+  rpow[0] = 1, sum[0] = rpow[0] * pd[0];
+  for (int i = 1; i <= d; i++) rpow[i] = rpow[i - 1] * r;
+  for (int i = 1; i <= d; i++) sum[i] = sum[i - 1] + rpow[i] * pd[i];
+  Mint ans = 0;
+  C::init(d + 1);
+  for (int i = 0; i <= d; i++) {
+    if ((d - i) & 1)
+      ans -= C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+    else
+      ans += C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+  }
+  ans /= Mint(1 - r).pow(d + 1);
+  cout << ans << endl;
   return 0;
 }
 
