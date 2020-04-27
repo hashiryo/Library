@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/log_of_FPS.test.cpp
+# :heavy_check_mark: test/yosupo/pow_of_FPS.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/log_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-27 14:13:41+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/pow_of_FPS.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-27 15:19:38+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/log_of_formal_power_series">https://judge.yosupo.jp/problem/log_of_formal_power_series</a>
+* see: <a href="https://judge.yosupo.jp/problem/pow_of_formal_power_series">https://judge.yosupo.jp/problem/pow_of_formal_power_series</a>
 
 
 ## Depends on
@@ -48,7 +48,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/log_of_formal_power_series"
+#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -61,13 +61,13 @@ using namespace std;
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int N;
-  cin >> N;
+  int N, M;
+  cin >> N >> M;
   using Mint = ModInt<998244353>;
   using FPS = FormalPowerSeries<Mint>;
   FPS a(N);
   for (int i = 0; i < N; i++) cin >> a[i];
-  auto b = a.log();
+  auto b = a.pow(M);
   for (int i = 0; i < N; i++) {
     cout << b[i] << (i < N - 1 ? " " : "\n");
   }
@@ -80,8 +80,8 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/yosupo/log_of_FPS.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/log_of_formal_power_series"
+#line 1 "test/yosupo/pow_of_FPS.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -579,19 +579,19 @@ struct ModInt {
   }
   static int modulo() { return mod; }
 };
-#line 9 "test/yosupo/log_of_FPS.test.cpp"
+#line 9 "test/yosupo/pow_of_FPS.test.cpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int N;
-  cin >> N;
+  int N, M;
+  cin >> N >> M;
   using Mint = ModInt<998244353>;
   using FPS = FormalPowerSeries<Mint>;
   FPS a(N);
   for (int i = 0; i < N; i++) cin >> a[i];
-  auto b = a.log();
+  auto b = a.pow(M);
   for (int i = 0; i < N; i++) {
     cout << b[i] << (i < N - 1 ? " " : "\n");
   }
