@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_add_range_sum.BIT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-28 23:59:27+09:00
+    - Last commit date: 2020-04-29 00:25:18+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
@@ -115,8 +115,7 @@ struct BinaryIndexedTree {
   void add(int k, long long a) {
     for (++k; k < dat.size(); k += k & -k) dat[k] += a;
   }
-  // sum [0,k)
-  long long operator[](int k) {
+  long long operator[](int k) {  // sum [0,k)
     long long s = 0;
     for (; k > 0; k &= k - 1) s += dat[k];
     return s;

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryIndexedTree_RangeAdd.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-28 22:54:22+09:00
+    - Last commit date: 2020-04-29 00:25:18+09:00
 
 
 
@@ -62,15 +62,13 @@ struct BinaryIndexedTree_RangeAdd {
   vector<long long> dat1;
   vector<long long> dat2;
   BinaryIndexedTree_RangeAdd(int n) : dat1(n + 1, 0), dat2(n + 1, 0) {}
-  // add w [l,r)
-  void add_range(int l, int r, long long w) {
+  void add_range(int l, int r, long long w) {  // add w [l,r)
     for (int k = l + 1; k < (int)dat1.size(); k += k & -k) dat1[k] -= w * l;
     for (int k = r + 1; k < (int)dat1.size(); k += k & -k) dat1[k] += w * r;
     for (int k = l + 1; k < (int)dat2.size(); k += k & -k) dat2[k] += w;
     for (int k = r + 1; k < (int)dat2.size(); k += k & -k) dat2[k] -= w;
   }
-  // sum [0,x)
-  long long operator[](int x) {
+  long long operator[](int x) {  // sum [0,x)
     long long s = 0;
     for (int k = x; k > 0; k &= k - 1) s += dat1[k];
     for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;
@@ -101,15 +99,13 @@ struct BinaryIndexedTree_RangeAdd {
   vector<long long> dat1;
   vector<long long> dat2;
   BinaryIndexedTree_RangeAdd(int n) : dat1(n + 1, 0), dat2(n + 1, 0) {}
-  // add w [l,r)
-  void add_range(int l, int r, long long w) {
+  void add_range(int l, int r, long long w) {  // add w [l,r)
     for (int k = l + 1; k < (int)dat1.size(); k += k & -k) dat1[k] -= w * l;
     for (int k = r + 1; k < (int)dat1.size(); k += k & -k) dat1[k] += w * r;
     for (int k = l + 1; k < (int)dat2.size(); k += k & -k) dat2[k] += w;
     for (int k = r + 1; k < (int)dat2.size(); k += k & -k) dat2[k] -= w;
   }
-  // sum [0,x)
-  long long operator[](int x) {
+  long long operator[](int x) {  // sum [0,x)
     long long s = 0;
     for (int k = x; k > 0; k &= k - 1) s += dat1[k];
     for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;

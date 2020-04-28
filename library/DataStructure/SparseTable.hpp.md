@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Sparse-Table
+# :heavy_check_mark: Sparse-Table(区間min)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SparseTable.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 02:23:27+09:00
+    - Last commit date: 2020-04-29 00:25:18+09:00
 
 
 
@@ -47,7 +47,7 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title Sparse-Table
+ * @title Sparse-Table(区間min)
  * @category データ構造
  * @brief RmQ
  * @brief 構築 O(n log n)
@@ -85,7 +85,7 @@ struct SparseTable {
 ```cpp
 #line 1 "DataStructure/SparseTable.hpp"
 /**
- * @title Sparse-Table
+ * @title Sparse-Table(区間min)
  * @category データ構造
  * @brief RmQ
  * @brief 構築 O(n log n)

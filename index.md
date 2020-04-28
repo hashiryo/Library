@@ -43,10 +43,10 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 * :heavy_check_mark: <a href="library/DataStructure/PersistentArray.hpp.html">永続配列</a>
-* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table</a>
+* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
-* :heavy_check_mark: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
+* :x: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
 
 
 <div id="6e65831863dbf272b7a65cd8df1a440d"></div>
@@ -79,7 +79,7 @@ layout: default
 
 * :heavy_check_mark: <a href="verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
+* :x: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>

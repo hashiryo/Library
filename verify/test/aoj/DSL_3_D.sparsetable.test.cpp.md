@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.sparsetable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 02:23:27+09:00
+    - Last commit date: 2020-04-29 00:25:18+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/SparseTable.hpp.html">Sparse-Table</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 
 
 ## Code
@@ -90,7 +90,7 @@ using namespace std;
 #define call_from_test
 #line 1 "DataStructure/SparseTable.hpp"
 /**
- * @title Sparse-Table
+ * @title Sparse-Table(区間min)
  * @category データ構造
  * @brief RmQ
  * @brief 構築 O(n log n)

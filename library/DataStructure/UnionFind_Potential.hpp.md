@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Union-Find(ポテンシャル)
+# :x: Union-Find(ポテンシャル)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind_Potential.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-28 23:59:27+09:00
+    - Last commit date: 2020-04-29 00:25:18+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 
 
 ## Code
@@ -73,9 +73,8 @@ struct UnionFind_Potential {
   bool same(int u, int v) { return root(u) == root(v); }
   int root(int u) {
     if (par[u] < 0) return u;
-    int r = root(par[u]);
     val[u] += val[par[u]];
-    return par[u] = r;
+    return par[u] = root(par[u]);
   }
   int size(int u) { return -par[root(u)]; }
   Weight potential(int u) {
@@ -118,9 +117,8 @@ struct UnionFind_Potential {
   bool same(int u, int v) { return root(u) == root(v); }
   int root(int u) {
     if (par[u] < 0) return u;
-    int r = root(par[u]);
     val[u] += val[par[u]];
-    return par[u] = r;
+    return par[u] = root(par[u]);
   }
   int size(int u) { return -par[root(u)]; }
   Weight potential(int u) {
