@@ -34,14 +34,25 @@ layout: default
 
 ## Library Files
 
+<div id="5e248f107086635fddcead5bf28943fc"></div>
+
+### DataStructure
+
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
+
+
 <div id="c1c7278649b583761cecd13e0628181d"></div>
 
 ### データ構造
 
+* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
+* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
+* :heavy_check_mark: <a href="library/DataStructure/PersistentArray.hpp.html">永続配列</a>
 * :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
-* :heavy_check_mark: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
 
 
 <div id="6e65831863dbf272b7a65cd8df1a440d"></div>
@@ -79,6 +90,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2842.BIT_2D.test.cpp.html">test/aoj/2842.BIT_2D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.KMP.test.cpp.html">test/aoj/ALDS1_14_B.KMP.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html">test/aoj/ALDS1_14_B.rollinghash.test.cpp</a>
@@ -88,6 +100,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_E.test.cpp.html">test/aoj/DPL_5_E.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_F.test.cpp.html">test/aoj/DPL_5_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
@@ -105,6 +118,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>

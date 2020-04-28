@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_1_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 16:54:44+09:00
+    - Last commit date: 2020-04-28 22:54:22+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
@@ -47,8 +47,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -58,22 +58,22 @@ using namespace std;
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
+  cin.tie(0);
+  ios::sync_with_stdio(0);
 
-    int n, q;
-    cin >> n >> q;
-    UnionFind uf(n);
-    for(int i = 0; i < q; i++) {
-        int c, x, y;
-        cin >> c >> x >> y;
-        if(c)
-            cout << uf.same(x, y) << "\n";
-        else
-            uf.unionSet(x, y);
-    }
-    cout << flush;
-    return 0;
+  int n, q;
+  cin >> n >> q;
+  UnionFind uf(n);
+  for (int i = 0; i < q; i++) {
+    int c, x, y;
+    cin >> c >> x >> y;
+    if (c)
+      cout << uf.same(x, y) << "\n";
+    else
+      uf.unite(x, y);
+  }
+  cout << flush;
+  return 0;
 }
 ```
 {% endraw %}
@@ -82,8 +82,8 @@ signed main() {
 {% raw %}
 ```cpp
 #line 1 "test/aoj/DSL_1_A.test.cpp"
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -93,7 +93,7 @@ using namespace std;
 /**
  * @title Union-Find
  * @category データ構造
- * @brief union_set(x,y) x が入っている集合と y が入っている集合を併合する．
+ * @brief unite(x,y) x が入っている集合と y が入っている集合を併合する．
  * @brief same(x,y) x と y が同じ集合に入っているかどうかを判定する．
  * @brief O(α(N))
  */
@@ -106,39 +106,36 @@ using namespace std;
 struct UnionFind {
   vector<int> par;
   UnionFind(int size) : par(size, -1) {}
-  bool unionSet(int x, int y) {
-    x = root(x), y = root(y);
-    if (x != y) {
-      if (par[y] < par[x]) swap(x, y);
-      par[x] += par[y];
-      par[y] = x;
-    }
-    return x != y;
+  bool unite(int u, int v) {
+    if ((u = root(u)) == (v = root(v))) return false;
+    if (par[u] > par[v]) swap(u, v);
+    par[u] += par[v], par[v] = u;
+    return true;
   }
-  bool same(int x, int y) { return root(x) == root(y); }
-  int root(int x) { return par[x] < 0 ? x : par[x] = root(par[x]); }
-  int size(int x) { return -par[root(x)]; }
+  bool same(int u, int v) { return root(u) == root(v); }
+  int root(int u) { return par[u] < 0 ? u : par[u] = root(par[u]); }
+  int size(int u) { return -par[root(u)]; }
 };
 #line 9 "test/aoj/DSL_1_A.test.cpp"
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
+  cin.tie(0);
+  ios::sync_with_stdio(0);
 
-    int n, q;
-    cin >> n >> q;
-    UnionFind uf(n);
-    for(int i = 0; i < q; i++) {
-        int c, x, y;
-        cin >> c >> x >> y;
-        if(c)
-            cout << uf.same(x, y) << "\n";
-        else
-            uf.unionSet(x, y);
-    }
-    cout << flush;
-    return 0;
+  int n, q;
+  cin >> n >> q;
+  UnionFind uf(n);
+  for (int i = 0; i < q; i++) {
+    int c, x, y;
+    cin >> c >> x >> y;
+    if (c)
+      cout << uf.same(x, y) << "\n";
+    else
+      uf.unite(x, y);
+  }
+  cout << flush;
+  return 0;
 }
 
 ```
