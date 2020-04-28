@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-28 22:54:22+09:00
+    - Last commit date: 2020-04-28 23:59:27+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 
 
 ## Code
@@ -51,7 +52,6 @@ layout: default
  * @category データ構造
  * @brief O(logN)
  * @brief 0-indexed
- * @brief lower_bound(a): min { k : sum(k) >= a }
  */
 
 #ifndef call_from_test
@@ -77,11 +77,12 @@ struct BinaryIndexedTree {
     for (; k > 0; k &= k - 1) s += dat[k];
     return s;
   }
+  // min{ k : sum(k) >= a }
   int lower_bound(long long a) const {
     int k = 0;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
       if (k + p < dat.size() && dat[k + p] < a) a -= dat[k += p];
-    return k;
+    return k + 1 == dat.size() ? -1 : k;  // -1 => no solution
   }
 };
 
@@ -97,7 +98,6 @@ struct BinaryIndexedTree {
  * @category データ構造
  * @brief O(logN)
  * @brief 0-indexed
- * @brief lower_bound(a): min { k : sum(k) >= a }
  */
 
 #ifndef call_from_test
@@ -123,11 +123,12 @@ struct BinaryIndexedTree {
     for (; k > 0; k &= k - 1) s += dat[k];
     return s;
   }
+  // min{ k : sum(k) >= a }
   int lower_bound(long long a) const {
     int k = 0;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
       if (k + p < dat.size() && dat[k + p] < a) a -= dat[k += p];
-    return k;
+    return k + 1 == dat.size() ? -1 : k;  // -1 => no solution
   }
 };
 

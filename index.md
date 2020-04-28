@@ -34,13 +34,6 @@ layout: default
 
 ## Library Files
 
-<div id="5e248f107086635fddcead5bf28943fc"></div>
-
-### DataStructure
-
-* :heavy_check_mark: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
-
-
 <div id="c1c7278649b583761cecd13e0628181d"></div>
 
 ### データ構造
@@ -53,6 +46,7 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
 
 
 <div id="6e65831863dbf272b7a65cd8df1a440d"></div>
@@ -133,6 +127,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 

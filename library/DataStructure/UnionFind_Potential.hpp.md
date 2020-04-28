@@ -29,9 +29,9 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
+* category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind_Potential.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-28 22:54:22+09:00
+    - Last commit date: 2020-04-28 23:59:27+09:00
 
 
 
@@ -48,7 +48,7 @@ layout: default
 ```cpp
 /**
  * @title Union-Find(ポテンシャル)
- * @categorv データ構造
+ * @category データ構造
  * @brief 各ノードにポテンシャルをもたせ、その差を求められる
  * @brief O(α(N))
  */
@@ -93,7 +93,7 @@ struct UnionFind_Potential {
 #line 1 "DataStructure/UnionFind_Potential.hpp"
 /**
  * @title Union-Find(ポテンシャル)
- * @categorv データ構造
+ * @category データ構造
  * @brief 各ノードにポテンシャルをもたせ、その差を求められる
  * @brief O(α(N))
  */
