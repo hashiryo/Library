@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: ラグランジュ補間
+# :x: ラグランジュ補間
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/lagrange_interpolation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-27 14:13:41+09:00
+    - Last commit date: 2020-04-29 23:49:16+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
 
 
 ## Code
@@ -76,10 +76,7 @@ K lagrange_interpolation(vector<K> &y, K t) {
   K res(0);
   for (int i = 0; i <= n; i++) {
     K tmp = y[i] * pro[i] * orp[i] * finv[i] * finv[n - i];
-    if ((n - i) & 1)
-      res -= tmp;
-    else
-      res += tmp;
+    res += (n - i) & 1 ? -tmp : tmp;
   }
   return res;
 }
@@ -119,10 +116,7 @@ K lagrange_interpolation(vector<K> &y, K t) {
   K res(0);
   for (int i = 0; i <= n; i++) {
     K tmp = y[i] * pro[i] * orp[i] * finv[i] * finv[n - i];
-    if ((n - i) & 1)
-      res -= tmp;
-    else
-      res += tmp;
+    res += (n - i) & 1 ? -tmp : tmp;
   }
   return res;
 }

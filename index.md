@@ -54,15 +54,15 @@ layout: default
 ### 数学
 
 * :heavy_check_mark: <a href="library/Math/BigInt.hpp.html">多倍長整数</a>
-* :heavy_check_mark: <a href="library/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="library/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :heavy_check_mark: <a href="library/Math/Matrix.hpp.html">行列</a>
 * :heavy_check_mark: <a href="library/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
-* :heavy_check_mark: <a href="library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="library/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :heavy_check_mark: <a href="library/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
-* :heavy_check_mark: <a href="library/Math/kitamasa.hpp.html">高速きたまさ法</a>
-* :heavy_check_mark: <a href="library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
+* :question: <a href="library/Math/kitamasa.hpp.html">高速きたまさ法</a>
+* :x: <a href="library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -116,19 +116,19 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :x: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
+* :x: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
+* :x: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 
 

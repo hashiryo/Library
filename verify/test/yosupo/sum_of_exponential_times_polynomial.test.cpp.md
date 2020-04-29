@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+# :x: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-27 14:13:41+09:00
+    - Last commit date: 2020-04-29 23:49:16+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial">https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :heavy_check_mark: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
+* :question: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :x: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 
 
 ## Code
@@ -102,10 +102,8 @@ signed main() {
   else {
     C::init(d + 1);
     for (int i = 0; i <= d; i++) {
-      if ((d - i) & 1)
-        ans -= C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
-      else
-        ans += C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+      Mint tmp = C::nCr(d + 1, i + 1) * rpow[d - i] * sum[i];
+      ans += (d - i) & 1 ? -tmp : tmp;
     }
     ans /= Mint(1 - r).pow(d + 1);
     vector<Mint> y(d + 1);
@@ -158,19 +156,12 @@ struct Combination {
   static Modint inv(int n) { return _inv[n]; }
   static Modint fact(int n) { return _fact[n]; }
   static Modint fact_inv(int n) { return _finv[n]; }
-  static Modint C(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k] * _finv[k];
+  static Modint nPr(int n, int r) {
+    if (n < r || r < 0) return Modint(0);
+    return _fact[n] * _finv[n - r];
   }
-  static Modint P(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k];
-  }
-  static Modint H(int n, int k) {
-    if (n < 0 || k < 0) return Modint(0);
-    if (!n && !k) return Modint(1);
-    return C(n + k - 1, n);
-  }
+  static Modint nCr(int n, int r) { return nPr(n, r) * _finv[r]; }
+  static Modint nHr(int n, int r) { return !r ? Modint(1) : nCr(n + r - 1, r); }
   static size_t size() { return _inv.size(); }
 };
 template <class Modint>
@@ -264,10 +255,7 @@ K lagrange_interpolation(vector<K> &y, K t) {
   K res(0);
   for (int i = 0; i <= n; i++) {
     K tmp = y[i] * pro[i] * orp[i] * finv[i] * finv[n - i];
-    if ((n - i) & 1)
-      res -= tmp;
-    else
-      res += tmp;
+    res += (n - i) & 1 ? -tmp : tmp;
   }
   return res;
 }
@@ -315,10 +303,8 @@ signed main() {
   else {
     C::init(d + 1);
     for (int i = 0; i <= d; i++) {
-      if ((d - i) & 1)
-        ans -= C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
-      else
-        ans += C::C(d + 1, i + 1) * rpow[d - i] * sum[i];
+      Mint tmp = C::nCr(d + 1, i + 1) * rpow[d - i] * sum[i];
+      ans += (d - i) & 1 ? -tmp : tmp;
     }
     ans /= Mint(1 - r).pow(d + 1);
     vector<Mint> y(d + 1);

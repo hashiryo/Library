@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DPL_5_D.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 16:54:44+09:00
+    - Last commit date: 2020-04-29 23:49:16+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -67,7 +67,7 @@ signed main() {
   using Mint = ModInt<int(1e9 + 7)>;
   using C = Combination<Mint>;
   C::init(n + k);
-  cout << C::H(n, k) << endl;
+  cout << C::nHr(k, n) << endl;
   return 0;
 }
 
@@ -110,19 +110,12 @@ struct Combination {
   static Modint inv(int n) { return _inv[n]; }
   static Modint fact(int n) { return _fact[n]; }
   static Modint fact_inv(int n) { return _finv[n]; }
-  static Modint C(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k] * _finv[k];
+  static Modint nPr(int n, int r) {
+    if (n < r || r < 0) return Modint(0);
+    return _fact[n] * _finv[n - r];
   }
-  static Modint P(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k];
-  }
-  static Modint H(int n, int k) {
-    if (n < 0 || k < 0) return Modint(0);
-    if (!n && !k) return Modint(1);
-    return C(n + k - 1, n);
-  }
+  static Modint nCr(int n, int r) { return nPr(n, r) * _finv[r]; }
+  static Modint nHr(int n, int r) { return !r ? Modint(1) : nCr(n + r - 1, r); }
   static size_t size() { return _inv.size(); }
 };
 template <class Modint>
@@ -198,7 +191,7 @@ signed main() {
   using Mint = ModInt<int(1e9 + 7)>;
   using C = Combination<Mint>;
   C::init(n + k);
-  cout << C::H(n, k) << endl;
+  cout << C::nHr(k, n) << endl;
   return 0;
 }
 

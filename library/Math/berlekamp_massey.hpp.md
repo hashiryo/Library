@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/berlekamp_massey.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 16:54:44+09:00
+    - Last commit date: 2020-04-29 23:49:16+09:00
 
 
 
@@ -70,11 +70,10 @@ vector<T> berlekamp_massey(const vector<T> &a) {
   vector<T> b = {T(-1)}, c = {T(-1)};
   T y = T(1);
   for (int ed = 1; ed <= N; ed++) {
-    int l = int(c.size()), m = int(b.size());
+    int l = int(c.size()), m = int(b.size()) + 1;
     T x = 0;
     for (int i = 0; i < l; i++) x += c[i] * a[ed - l + i];
     b.emplace_back(0);
-    m++;
     if (x == T(0)) continue;
     T freq = x / y;
     if (l < m) {
@@ -121,11 +120,10 @@ vector<T> berlekamp_massey(const vector<T> &a) {
   vector<T> b = {T(-1)}, c = {T(-1)};
   T y = T(1);
   for (int ed = 1; ed <= N; ed++) {
-    int l = int(c.size()), m = int(b.size());
+    int l = int(c.size()), m = int(b.size()) + 1;
     T x = 0;
     for (int i = 0; i < l; i++) x += c[i] * a[ed - l + i];
     b.emplace_back(0);
-    m++;
     if (x == T(0)) continue;
     T freq = x / y;
     if (l < m) {

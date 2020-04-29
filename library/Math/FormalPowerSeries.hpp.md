@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 形式的冪級数
+# :question: 形式的冪級数
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-27 14:13:41+09:00
+    - Last commit date: 2020-04-29 23:49:16+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
-* :heavy_check_mark: <a href="kitamasa.hpp.html">高速きたまさ法</a>
+* :question: <a href="kitamasa.hpp.html">高速きたまさ法</a>
 
 
 ## Verified with
@@ -53,11 +53,11 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 
 ## Code
@@ -204,8 +204,6 @@ m64_2 f2[size], g2[size];
 template <typename Modint>
 struct FormalPowerSeries : vector<Modint> {
   using FPS = FormalPowerSeries;
-
- public:
   using vector<Modint>::vector;
 
  public:
@@ -646,8 +644,6 @@ m64_2 f2[size], g2[size];
 template <typename Modint>
 struct FormalPowerSeries : vector<Modint> {
   using FPS = FormalPowerSeries;
-
- public:
   using vector<Modint>::vector;
 
  public:

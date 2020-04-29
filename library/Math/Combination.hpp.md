@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 組み合わせ
+# :question: 組み合わせ
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Combination.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-24 16:54:44+09:00
+    - Last commit date: 2020-04-29 23:49:16+09:00
 
 
 
@@ -42,8 +42,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/aoj/DPL_5_D.test.cpp.html">test/aoj/DPL_5_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/DPL_5_E.test.cpp.html">test/aoj/DPL_5_E.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/DPL_5_F.test.cpp.html">test/aoj/DPL_5_F.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
 
 
 ## Code
@@ -75,19 +75,12 @@ struct Combination {
   static Modint inv(int n) { return _inv[n]; }
   static Modint fact(int n) { return _fact[n]; }
   static Modint fact_inv(int n) { return _finv[n]; }
-  static Modint C(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k] * _finv[k];
+  static Modint nPr(int n, int r) {
+    if (n < r || r < 0) return Modint(0);
+    return _fact[n] * _finv[n - r];
   }
-  static Modint P(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k];
-  }
-  static Modint H(int n, int k) {
-    if (n < 0 || k < 0) return Modint(0);
-    if (!n && !k) return Modint(1);
-    return C(n + k - 1, n);
-  }
+  static Modint nCr(int n, int r) { return nPr(n, r) * _finv[r]; }
+  static Modint nHr(int n, int r) { return !r ? Modint(1) : nCr(n + r - 1, r); }
   static size_t size() { return _inv.size(); }
 };
 template <class Modint>
@@ -127,19 +120,12 @@ struct Combination {
   static Modint inv(int n) { return _inv[n]; }
   static Modint fact(int n) { return _fact[n]; }
   static Modint fact_inv(int n) { return _finv[n]; }
-  static Modint C(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k] * _finv[k];
+  static Modint nPr(int n, int r) {
+    if (n < r || r < 0) return Modint(0);
+    return _fact[n] * _finv[n - r];
   }
-  static Modint P(int n, int k) {
-    if (n < k || k < 0) return Modint(0);
-    return _fact[n] * _finv[n - k];
-  }
-  static Modint H(int n, int k) {
-    if (n < 0 || k < 0) return Modint(0);
-    if (!n && !k) return Modint(1);
-    return C(n + k - 1, n);
-  }
+  static Modint nCr(int n, int r) { return nPr(n, r) * _finv[r]; }
+  static Modint nHr(int n, int r) { return !r ? Modint(1) : nCr(n + r - 1, r); }
   static size_t size() { return _inv.size(); }
 };
 template <class Modint>
