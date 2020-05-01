@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 00:25:18+09:00
+    - Last commit date: 2020-05-01 23:22:39+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
@@ -68,7 +68,7 @@ signed main() {
     cin >> op >> s >> t;
     s--, t--;
     if (op)
-      cout << bit[t + 1] - bit[s] << endl;
+      cout << bit.sum(t + 1) - bit.sum(s) << endl;
     else {
       long long x;
       cin >> x;
@@ -114,7 +114,7 @@ struct BinaryIndexedTree_RangeAdd {
     for (int k = l + 1; k < (int)dat2.size(); k += k & -k) dat2[k] += w;
     for (int k = r + 1; k < (int)dat2.size(); k += k & -k) dat2[k] -= w;
   }
-  long long operator[](int x) {  // sum [0,x)
+  long long sum(int x) {  // sum [0,x)
     long long s = 0;
     for (int k = x; k > 0; k &= k - 1) s += dat1[k];
     for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;
@@ -135,7 +135,7 @@ signed main() {
     cin >> op >> s >> t;
     s--, t--;
     if (op)
-      cout << bit[t + 1] - bit[s] << endl;
+      cout << bit.sum(t + 1) - bit.sum(s) << endl;
     else {
       long long x;
       cin >> x;

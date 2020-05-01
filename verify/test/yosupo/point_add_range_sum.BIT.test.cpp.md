@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_add_range_sum.BIT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 00:25:18+09:00
+    - Last commit date: 2020-05-01 23:22:39+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :question: <a href="../../../library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 
 ## Code
@@ -71,7 +71,7 @@ signed main() {
     int t, a, b;
     cin >> t >> a >> b;
     if (t)
-      cout << bit[b] - bit[a] << endl;
+      cout << bit.sum(b) - bit.sum(a) << endl;
     else
       bit.add(a, b);
   }
@@ -109,23 +109,24 @@ struct BinaryIndexedTree {
   BinaryIndexedTree(int n, long long a)
       : BinaryIndexedTree(vector<long long>(n, a)) {}
   BinaryIndexedTree(vector<long long> y) : dat(y.size() + 1) {
-    for (int k = 0; k < y.size(); ++k) dat[k + 1] = y[k];
-    for (int k = 1; k + (k & -k) < dat.size(); ++k) dat[k + (k & -k)] += dat[k];
+    for (int i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
+    for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
   }
-  void add(int k, long long a) {
-    for (++k; k < dat.size(); k += k & -k) dat[k] += a;
+  void add(int i, long long a = 1) {
+    for (++i; i < dat.size(); i += i & -i) dat[i] += a;
   }
-  long long operator[](int k) {  // sum [0,k)
+  long long sum(int i) {  // sum [0,i)
     long long s = 0;
-    for (; k > 0; k &= k - 1) s += dat[k];
+    for (; i > 0; i &= i - 1) s += dat[i];
     return s;
   }
-  // min{ k : sum(k) >= a }
-  int lower_bound(long long a) const {
-    int k = 0;
+  // min { i : sum(i) > k } => kth element(0-indexed)
+  int find(long long k) const {
+    if (dat.back() <= k++) return -1;  // -1 => no solution
+    int i = 0;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
-      if (k + p < dat.size() && dat[k + p] < a) a -= dat[k += p];
-    return k + 1 == dat.size() ? -1 : k;  // -1 => no solution
+      if (i + p < dat.size() && dat[i + p] < k) k -= dat[i += p];
+    return i;
   }
 };
 #line 8 "test/yosupo/point_add_range_sum.BIT.test.cpp"
@@ -146,7 +147,7 @@ signed main() {
     int t, a, b;
     cin >> t >> a >> b;
     if (t)
-      cout << bit[b] - bit[a] << endl;
+      cout << bit.sum(b) - bit.sum(a) << endl;
     else
       bit.add(a, b);
   }
