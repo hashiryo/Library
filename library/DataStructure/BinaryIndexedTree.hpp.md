@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: Binary-Indexed-Tree
+# :heavy_check_mark: Binary-Indexed-Tree
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:22:39+09:00
+    - Last commit date: 2020-05-01 23:42:31+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
-* :x: <a href="../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 
 
 ## Code
@@ -78,11 +78,11 @@ struct BinaryIndexedTree {
   }
   // min { i : sum(i) > k } => kth element(0-indexed)
   int find(long long k) const {
-    if (dat.back() <= k++) return -1;  // -1 => no solution
     int i = 0;
+    k++;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
       if (i + p < dat.size() && dat[i + p] < k) k -= dat[i += p];
-    return i;
+    return i + 1 == dat.size() ? -1 : i;  // -1 => no solutions
   }
 };
 
@@ -124,11 +124,11 @@ struct BinaryIndexedTree {
   }
   // min { i : sum(i) > k } => kth element(0-indexed)
   int find(long long k) const {
-    if (dat.back() <= k++) return -1;  // -1 => no solution
     int i = 0;
+    k++;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
       if (i + p < dat.size() && dat[i + p] < k) k -= dat[i += p];
-    return i;
+    return i + 1 == dat.size() ? -1 : i;  // -1 => no solutions
   }
 };
 

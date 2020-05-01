@@ -38,7 +38,7 @@ layout: default
 
 ### データ構造
 
-* :question: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
@@ -133,7 +133,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
