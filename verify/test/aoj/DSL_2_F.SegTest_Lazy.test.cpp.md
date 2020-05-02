@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_F.SegTest_Lazy.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-03 00:26:14+09:00
+    - Last commit date: 2020-05-03 01:15:16+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
@@ -196,7 +196,7 @@ struct SegmentTree_Lazy {
   T operator[](const int k) { return query(k, k + 1); }
   // min { i : check(query(a,i+1)) = true }
   template <typename C>
-  int find_first(const C& check, int a) {
+  int find_first(const C& check, int a = 0) {
     T vl = M::ti();
     if (a <= 0) {
       if (check(M::f(vl, reflect(1)))) return find_subtree(1, check, vl, false);
@@ -215,7 +215,8 @@ struct SegmentTree_Lazy {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(const C& check, int b) {
+  int find_last(const C& check, int b = -1) {
+    if (b < 0) b = n;
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(reflect(1), vr))) return find_subtree(1, check, vr, true);

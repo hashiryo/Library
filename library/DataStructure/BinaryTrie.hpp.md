@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryTrie.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-03 00:26:14+09:00
+    - Last commit date: 2020-05-03 01:15:16+09:00
 
 
 
@@ -75,7 +75,7 @@ struct RsumQ {
   static T ti() { return 0; }
   static T f(const T &l, const T &r) { return l + r; }
 };
-struct BinaryTrie : SegmentTree_Dynamic<RsumQ> {
+struct BinaryTrie : public SegmentTree_Dynamic<RsumQ> {
   using ll = long long;
   using U = unsigned long long;
   BinaryTrie(ll max_val = INT_MAX) : SegmentTree_Dynamic<RsumQ>(max_val) {}

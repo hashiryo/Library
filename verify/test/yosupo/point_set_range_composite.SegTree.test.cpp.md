@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/point_set_range_composite.SegTree.test.cpp
+# :heavy_check_mark: test/yosupo/point_set_range_composite.SegTree.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_set_range_composite.SegTree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-03 00:26:14+09:00
+    - Last commit date: 2020-05-03 01:15:16+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_set_range_composite">https://judge.yosupo.jp/problem/point_set_range_composite</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
-* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
+* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -188,7 +188,8 @@ struct SegmentTree {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(const C &check, int b = n) {
+  int find_last(const C &check, int b = -1) {
+    if (b < 0) b = n;
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(dat[1], vr))) return find_subtree(1, check, vr, true);

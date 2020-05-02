@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: Segment-Tree
+# :heavy_check_mark: Segment-Tree
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegmentTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-03 00:26:14+09:00
+    - Last commit date: 2020-05-03 01:15:16+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
-* :x: <a href="../../verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
 
 
 ## Code
@@ -124,7 +124,8 @@ struct SegmentTree {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(const C &check, int b = n) {
+  int find_last(const C &check, int b = -1) {
+    if (b < 0) b = n;
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(dat[1], vr))) return find_subtree(1, check, vr, true);
@@ -223,7 +224,8 @@ struct SegmentTree {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(const C &check, int b = n) {
+  int find_last(const C &check, int b = -1) {
+    if (b < 0) b = n;
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(dat[1], vr))) return find_subtree(1, check, vr, true);
