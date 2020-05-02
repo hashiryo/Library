@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:22:39+09:00
+    - Last commit date: 2020-05-03 00:26:14+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/range_affine_range_sum">https://judge.yosupo.jp/problem/range_affine_range_sum</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -133,13 +133,16 @@ using namespace std;
 #endif
 
 template <typename M>
-class SegmentTree_Lazy {
- private:
+struct SegmentTree_Lazy {
   using T = typename M::T;
   using E = typename M::E;
-  int height, n;
+
+ private:
+  const int height, n;
   vector<T> dat;
   vector<E> laz;
+
+ private:
   inline T reflect(int k) {
     return laz[k] == M::ei() ? dat[k] : M::g(dat[k], laz[k]);
   }
@@ -210,9 +213,9 @@ class SegmentTree_Lazy {
     return M::f(vl, vr);
   }
   T operator[](const int k) { return query(k, k + 1); }
-  // min { i : check(query(a,i)) = true }
+  // min { i : check(query(a,i+1)) = true }
   template <typename C>
-  int find_first(int a, const C& check) {
+  int find_first(const C& check, int a) {
     T vl = M::ti();
     if (a <= 0) {
       if (check(M::f(vl, reflect(1)))) return find_subtree(1, check, vl, false);
@@ -231,7 +234,7 @@ class SegmentTree_Lazy {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(int b, const C& check) {
+  int find_last(const C& check, int b) {
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(reflect(1), vr))) return find_subtree(1, check, vr, true);

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/point_set_range_composite.SegTree.test.cpp
+# :x: test/yosupo/point_set_range_composite.SegTree.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_set_range_composite.SegTree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:22:39+09:00
+    - Last commit date: 2020-05-03 00:26:14+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_set_range_composite">https://judge.yosupo.jp/problem/point_set_range_composite</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :x: <a href="../../../library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -125,10 +125,13 @@ using namespace std;
 
 template <typename M>
 struct SegmentTree {
- private:
   using T = typename M::T;
-  int n;
+
+ private:
+  const int n;
   vector<T> dat;
+
+ private:
   template <typename C>
   int find_subtree(int a, const C &check, T &cur, bool type) {
     while (a < n) {
@@ -165,9 +168,9 @@ struct SegmentTree {
     return M::f(vl, vr);
   }
   T operator[](const int &k) const { return dat[k + n]; }
-  // min { i : check(query(a,i)) = true }
+  // min { i : check(query(a,i+1)) = true }
   template <typename C>
-  int find_first(int a, const C &check) {
+  int find_first(const C &check, int a = 0) {
     T vl = M::ti();
     if (a <= 0) {
       if (check(M::f(vl, dat[1]))) return find_subtree(1, check, vl, false);
@@ -185,7 +188,7 @@ struct SegmentTree {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(int b, const C &check) {
+  int find_last(const C &check, int b = n) {
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(dat[1], vr))) return find_subtree(1, check, vr, true);

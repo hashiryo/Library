@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:42:31+09:00
+    - Last commit date: 2020-05-03 00:26:14+09:00
 
 
 
@@ -76,13 +76,12 @@ struct BinaryIndexedTree {
     for (; i > 0; i &= i - 1) s += dat[i];
     return s;
   }
-  // min { i : sum(i) > k } => kth element(0-indexed)
+  // min { i : sum(i+1) > k } -> kth element(0-indexed)
   int find(long long k) const {
     int i = 0;
-    k++;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
-      if (i + p < dat.size() && dat[i + p] < k) k -= dat[i += p];
-    return i + 1 == dat.size() ? -1 : i;  // -1 => no solutions
+      if (i + p < dat.size() && dat[i + p] <= k) k -= dat[i += p];
+    return i + 1 == dat.size() ? -1 : i;  // -1 -> no solutions
   }
 };
 
@@ -122,13 +121,12 @@ struct BinaryIndexedTree {
     for (; i > 0; i &= i - 1) s += dat[i];
     return s;
   }
-  // min { i : sum(i) > k } => kth element(0-indexed)
+  // min { i : sum(i+1) > k } -> kth element(0-indexed)
   int find(long long k) const {
     int i = 0;
-    k++;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
-      if (i + p < dat.size() && dat[i + p] < k) k -= dat[i += p];
-    return i + 1 == dat.size() ? -1 : i;  // -1 => no solutions
+      if (i + p < dat.size() && dat[i + p] <= k) k -= dat[i += p];
+    return i + 1 == dat.size() ? -1 : i;  // -1 -> no solutions
   }
 };
 

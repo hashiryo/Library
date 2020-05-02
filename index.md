@@ -41,9 +41,11 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
+* :x: <a href="library/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 * :heavy_check_mark: <a href="library/DataStructure/PersistentArray.hpp.html">永続配列</a>
-* :heavy_check_mark: <a href="library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
+* :x: <a href="library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
+* :question: <a href="library/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
@@ -60,7 +62,7 @@ layout: default
 * :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :heavy_check_mark: <a href="library/Math/Matrix.hpp.html">行列</a>
 * :heavy_check_mark: <a href="library/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
-* :heavy_check_mark: <a href="library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="library/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :heavy_check_mark: <a href="library/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 * :heavy_check_mark: <a href="library/Math/kitamasa.hpp.html">高速きたまさ法</a>
@@ -96,7 +98,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_E.test.cpp.html">test/aoj/DPL_5_E.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_F.test.cpp.html">test/aoj/DPL_5_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
+* :x: <a href="verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_F.SegTest_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTest_Lazy.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
@@ -118,7 +120,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/number_of_substrings.test.cpp.html">test/yosupo/number_of_substrings.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
+* :x: <a href="verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp.html">test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp</a>
@@ -134,7 +136,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree_Dynamic.test.cpp.html">test/yukicoder/649.SegTree_Dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 

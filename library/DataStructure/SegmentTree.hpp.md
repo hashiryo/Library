@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Segment-Tree
+# :x: Segment-Tree
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegmentTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:22:39+09:00
+    - Last commit date: 2020-05-03 00:26:14+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
 
 
 ## Code
@@ -61,10 +61,13 @@ using namespace std;
 
 template <typename M>
 struct SegmentTree {
- private:
   using T = typename M::T;
-  int n;
+
+ private:
+  const int n;
   vector<T> dat;
+
+ private:
   template <typename C>
   int find_subtree(int a, const C &check, T &cur, bool type) {
     while (a < n) {
@@ -101,9 +104,9 @@ struct SegmentTree {
     return M::f(vl, vr);
   }
   T operator[](const int &k) const { return dat[k + n]; }
-  // min { i : check(query(a,i)) = true }
+  // min { i : check(query(a,i+1)) = true }
   template <typename C>
-  int find_first(int a, const C &check) {
+  int find_first(const C &check, int a = 0) {
     T vl = M::ti();
     if (a <= 0) {
       if (check(M::f(vl, dat[1]))) return find_subtree(1, check, vl, false);
@@ -121,7 +124,7 @@ struct SegmentTree {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(int b, const C &check) {
+  int find_last(const C &check, int b = n) {
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(dat[1], vr))) return find_subtree(1, check, vr, true);
@@ -157,10 +160,13 @@ using namespace std;
 
 template <typename M>
 struct SegmentTree {
- private:
   using T = typename M::T;
-  int n;
+
+ private:
+  const int n;
   vector<T> dat;
+
+ private:
   template <typename C>
   int find_subtree(int a, const C &check, T &cur, bool type) {
     while (a < n) {
@@ -197,9 +203,9 @@ struct SegmentTree {
     return M::f(vl, vr);
   }
   T operator[](const int &k) const { return dat[k + n]; }
-  // min { i : check(query(a,i)) = true }
+  // min { i : check(query(a,i+1)) = true }
   template <typename C>
-  int find_first(int a, const C &check) {
+  int find_first(const C &check, int a = 0) {
     T vl = M::ti();
     if (a <= 0) {
       if (check(M::f(vl, dat[1]))) return find_subtree(1, check, vl, false);
@@ -217,7 +223,7 @@ struct SegmentTree {
   }
   // max { i : check(query(i,b)) = true }
   template <typename C>
-  int find_last(int b, const C &check) {
+  int find_last(const C &check, int b = n) {
     T vr = M::ti();
     if (b >= n) {
       if (check(M::f(dat[1], vr))) return find_subtree(1, check, vr, true);
