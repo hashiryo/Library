@@ -41,11 +41,11 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
-* :x: <a href="library/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
+* :heavy_check_mark: <a href="library/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 * :heavy_check_mark: <a href="library/DataStructure/PersistentArray.hpp.html">永続配列</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
-* :question: <a href="library/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
+* :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
@@ -136,7 +136,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree_Dynamic.test.cpp.html">test/yukicoder/649.SegTree_Dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
