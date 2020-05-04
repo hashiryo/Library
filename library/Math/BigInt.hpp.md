@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/BigInt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-27 14:13:41+09:00
+    - Last commit date: 2020-05-04 14:35:47+09:00
 
 
 
@@ -55,7 +55,6 @@ layout: default
  * @title 多倍長整数
  * @category 数学
  * @brief javaやpythonの多倍長整数を使うべき
- * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
 
 #ifndef call_from_test
@@ -446,7 +445,6 @@ struct BigInt {
  * @title 多倍長整数
  * @category 数学
  * @brief javaやpythonの多倍長整数を使うべき
- * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
 
 #ifndef call_from_test

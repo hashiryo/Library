@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:22:39+09:00
+    - Last commit date: 2020-05-04 14:35:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
@@ -62,7 +62,7 @@ signed main() {
   ios::sync_with_stdio(0);
   int N, Q;
   cin >> N >> Q;
-  BinaryIndexedTree_RangeAdd bit(N);
+  BinaryIndexedTree_RangeAdd<long long> bit(N);
   while (Q--) {
     int op, s, t;
     cin >> op >> s >> t;
@@ -104,18 +104,19 @@ using namespace std;
 using namespace std;
 #endif
 
+template <typename T = long long>
 struct BinaryIndexedTree_RangeAdd {
-  vector<long long> dat1;
-  vector<long long> dat2;
+  vector<T> dat1;
+  vector<T> dat2;
   BinaryIndexedTree_RangeAdd(int n) : dat1(n + 1, 0), dat2(n + 1, 0) {}
-  void add_range(int l, int r, long long w) {  // add w [l,r)
+  void add_range(int l, int r, T w) {  // add w [l,r)
     for (int k = l + 1; k < (int)dat1.size(); k += k & -k) dat1[k] -= w * l;
     for (int k = r + 1; k < (int)dat1.size(); k += k & -k) dat1[k] += w * r;
     for (int k = l + 1; k < (int)dat2.size(); k += k & -k) dat2[k] += w;
     for (int k = r + 1; k < (int)dat2.size(); k += k & -k) dat2[k] -= w;
   }
-  long long sum(int x) {  // sum [0,x)
-    long long s = 0;
+  T sum(int x) {  // sum [0,x)
+    T s = 0;
     for (int k = x; k > 0; k &= k - 1) s += dat1[k];
     for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;
     return s;
@@ -129,7 +130,7 @@ signed main() {
   ios::sync_with_stdio(0);
   int N, Q;
   cin >> N >> Q;
-  BinaryIndexedTree_RangeAdd bit(N);
+  BinaryIndexedTree_RangeAdd<long long> bit(N);
   while (Q--) {
     int op, s, t;
     cin >> op >> s >> t;

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.sparsetable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 00:25:18+09:00
+    - Last commit date: 2020-05-04 14:35:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
@@ -47,8 +47,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -58,21 +58,18 @@ using namespace std;
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    int N, L;
-    cin >> N >> L;
-    vector<int> a(N);
-    for(int i = 0; i < N; i++)
-        cin >> a[i];
-    SparseTable<int> st(a);
-    for(int i = 0; i + L <= N; i++) {
-        if(i)
-            cout << " ";
-        cout << st.range_min(i, i + L);
-    }
-    cout << endl;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int N, L;
+  cin >> N >> L;
+  vector<int> a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  SparseTable<int> st(a);
+  for (int i = 0; i + L <= N; i++) {
+    cout << (i ? " " : "") << st.range_min(i, i + L);
+  }
+  cout << endl;
+  return 0;
 }
 ```
 {% endraw %}
@@ -81,8 +78,8 @@ signed main() {
 {% raw %}
 ```cpp
 #line 1 "test/aoj/DSL_3_D.sparsetable.test.cpp"
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -124,21 +121,18 @@ struct SparseTable {
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    int N, L;
-    cin >> N >> L;
-    vector<int> a(N);
-    for(int i = 0; i < N; i++)
-        cin >> a[i];
-    SparseTable<int> st(a);
-    for(int i = 0; i + L <= N; i++) {
-        if(i)
-            cout << " ";
-        cout << st.range_min(i, i + L);
-    }
-    cout << endl;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int N, L;
+  cin >> N >> L;
+  vector<int> a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  SparseTable<int> st(a);
+  for (int i = 0; i + L <= N; i++) {
+    cout << (i ? " " : "") << st.range_min(i, i + L);
+  }
+  cout << endl;
+  return 0;
 }
 
 ```

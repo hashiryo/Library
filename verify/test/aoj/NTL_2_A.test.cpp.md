@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/NTL_2_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-27 14:13:41+09:00
+    - Last commit date: 2020-05-04 14:35:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_A</a>
@@ -84,11 +84,10 @@ using namespace std;
  * @title 多倍長整数
  * @category 数学
  * @brief javaやpythonの多倍長整数を使うべき
- * @brief nttの配列のサイズに注意(REの原因になりがち)
  */
 
 #ifndef call_from_test
-#line 10 "Math/BigInt.hpp"
+#line 9 "Math/BigInt.hpp"
 using namespace std;
 #endif
 

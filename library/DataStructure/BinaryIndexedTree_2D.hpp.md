@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryIndexedTree_2D.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 00:25:18+09:00
+    - Last commit date: 2020-05-04 14:35:47+09:00
 
 
 
@@ -58,21 +58,22 @@ layout: default
 using namespace std;
 #endif
 
+template <typename T = long long>
 struct BinaryIndexedTree_2D {
-  using vll = vector<long long>;
-  vector<vll> dat;
-  BinaryIndexedTree_2D(int H, int W) : dat(vector<vll>(H + 1, vll(W + 1, 0))) {}
-  void add(int y, int x, long long v) {
+  using vT = vector<T>;
+  vector<vT> dat;
+  BinaryIndexedTree_2D(int H, int W) : dat(vector<vT>(H + 1, vT(W + 1, 0))) {}
+  void add(int y, int x, T v) {
     for (int i = y; i < dat.size(); i += i & -i)
       for (int j = x; j < dat[i].size(); j += j & -j) dat[i][j] += v;
   }
-  long long sum(int y, int x) {  // sum (0,y] * (0,x]
-    long long ret = 0;
+  T sum(int y, int x) {  // sum (0,y] * (0,x]
+    T ret = 0;
     for (int i = y; i > 0; i -= i & -i)
       for (int j = x; j > 0; j -= j & -j) ret += dat[i][j];
     return ret;
   }
-  long long sum(int sy, int sx, int ty, int tx) {  // sum (sy,ty] * (sx,tx]
+  T sum(int sy, int sx, int ty, int tx) {  // sum (sy,ty] * (sx,tx]
     return sum(ty, tx) - sum(ty, sx) - sum(sy, tx) + sum(sy, sx);
   }
 };
@@ -95,21 +96,22 @@ struct BinaryIndexedTree_2D {
 using namespace std;
 #endif
 
+template <typename T = long long>
 struct BinaryIndexedTree_2D {
-  using vll = vector<long long>;
-  vector<vll> dat;
-  BinaryIndexedTree_2D(int H, int W) : dat(vector<vll>(H + 1, vll(W + 1, 0))) {}
-  void add(int y, int x, long long v) {
+  using vT = vector<T>;
+  vector<vT> dat;
+  BinaryIndexedTree_2D(int H, int W) : dat(vector<vT>(H + 1, vT(W + 1, 0))) {}
+  void add(int y, int x, T v) {
     for (int i = y; i < dat.size(); i += i & -i)
       for (int j = x; j < dat[i].size(); j += j & -j) dat[i][j] += v;
   }
-  long long sum(int y, int x) {  // sum (0,y] * (0,x]
-    long long ret = 0;
+  T sum(int y, int x) {  // sum (0,y] * (0,x]
+    T ret = 0;
     for (int i = y; i > 0; i -= i & -i)
       for (int j = x; j > 0; j -= j & -j) ret += dat[i][j];
     return ret;
   }
-  long long sum(int sy, int sx, int ty, int tx) {  // sum (sy,ty] * (sx,tx]
+  T sum(int sy, int sx, int ty, int tx) {  // sum (sy,ty] * (sx,tx]
     return sum(ty, tx) - sum(ty, sx) - sum(sy, tx) + sum(sy, sx);
   }
 };
