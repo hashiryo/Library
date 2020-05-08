@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Union-Find(完全永続)
+# :heavy_check_mark: 赤黒木(永続)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind_Persistent.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:22:39+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/RedBlackTree_Persistent.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-05-08 16:09:14+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="PersistentArray.hpp.html">永続配列</a>
+* :heavy_check_mark: <a href="RedBlackTree.hpp.html">赤黒木</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/persistent_queue.RBTP.test.cpp.html">test/yosupo/persistent_queue.RBTP.test.cpp</a>
 
 
 ## Code
@@ -52,35 +52,57 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title Union-Find(完全永続)
+ * @title 赤黒木(永続)
  * @category データ構造
- * @brief 経路圧縮なし O(logN)
+ * @brief O(logN)
  */
 // verify用:
-// https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h
+// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/PersistentArray.hpp"
+#include "DataStructure/RedBlackTree.hpp"
 #undef call_from_test
 #endif
 
-struct UnionFind_Persistent {
-  PersistentArray<int> par;
-  UnionFind_Persistent() {}
-  UnionFind_Persistent(int n) : par(n, -1) {}
-  bool unite(int u, int v) {
-    if ((u = root(u)) == (v = root(v))) return false;
-    if (par.get(u) > par.get(v)) swap(u, v);
-    par[u] += par.get(v), par[v] = u;
-    return true;
+template <typename M, size_t LIM = 1 << 22, size_t FULL = 1000>
+struct RedBlackTree_Persistent : RedBlackTree<M, LIM> {
+  using RBT = RedBlackTree<M, LIM>;
+  using RBT::RedBlackTree;
+  using Node = typename RBT::Node;
+  using RBTP = RedBlackTree_Persistent;
+
+ private:
+  Node *clone(Node *t) override { return &(*RBT::pool.alloc() = *t); }
+
+ public:
+  // merge
+  RBTP operator+(const RBTP &r) {
+    if (!this->root || !r.root) return this->root ? *this : r;
+    Node *c = RBT::submerge(this->root, r.root);
+    c->color = RBT::BLACK;
+    return RBTP(c);
   }
-  bool same(int u, int v) { return root(u) == root(v); }
-  int root(int u) { return par.get(u) < 0 ? u : root(par.get(u)); }
-  int size(int u) { return -par.get(root(u)); }
+  // [0,k) [k,size)
+  pair<RBTP, RBTP> split(int k) {
+    auto tmp = RBT::split(this->root, k);
+    return make_pair(RBTP(tmp.first), RBTP(tmp.second));
+  }
+  // [0,a) [a,b) [b,size)
+  tuple<RBTP, RBTP, RBTP> split3(int a, int b) {
+    auto x = RBT::split(this->root, a);
+    auto y = RBT::split(x.second, b - a);
+    return make_tuple(RBTP(x.first), RBTP(y.first), RBTP(y.second));
+  }
+  void rebuild() {
+    auto ret = RBT::dump();
+    RBT::pool.clear();
+    RBT::build(ret);
+  }
+  static bool almost_full() { return RBT::pool.ptr < FULL; }
 };
 
 ```
@@ -96,7 +118,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: DataStructure/UnionFind_Persistent.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: DataStructure/RedBlackTree_Persistent.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Union-Find(完全永続)
+# :heavy_check_mark: 赤黒木(永続遅延伝搬)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind_Persistent.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-01 23:22:39+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/RedBlackTree_PersistentLazy.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-05-08 16:09:14+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="PersistentArray.hpp.html">永続配列</a>
+* :heavy_check_mark: <a href="RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/persistent_queue.RBTPL.test.cpp.html">test/yosupo/persistent_queue.RBTPL.test.cpp</a>
 
 
 ## Code
@@ -52,35 +52,55 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title Union-Find(完全永続)
+ * @title 赤黒木(永続遅延伝搬)
  * @category データ構造
- * @brief 経路圧縮なし O(logN)
+ * @brief O(logN)
  */
-// verify用:
-// https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/PersistentArray.hpp"
+#include "DataStructure/RedBlackTree_Lazy.hpp"
 #undef call_from_test
 #endif
 
-struct UnionFind_Persistent {
-  PersistentArray<int> par;
-  UnionFind_Persistent() {}
-  UnionFind_Persistent(int n) : par(n, -1) {}
-  bool unite(int u, int v) {
-    if ((u = root(u)) == (v = root(v))) return false;
-    if (par.get(u) > par.get(v)) swap(u, v);
-    par[u] += par.get(v), par[v] = u;
-    return true;
+template <typename M, size_t LIM = 1 << 22, size_t FULL = 1000>
+struct RedBlackTree_PersistentLazy : RedBlackTree_Lazy<M, LIM> {
+  using RBTL = RedBlackTree_Lazy<M, LIM>;
+  using RBTL::RedBlackTree_Lazy;
+  using Node = typename RBTL::Node;
+  using RBTPL = RedBlackTree_PersistentLazy;
+
+ private:
+  Node *clone(Node *t) override { return &(*RBTL::pool.alloc() = *t); }
+
+ public:
+  // merge
+  RBTPL operator+(const RBTPL &r) {
+    if (!this->root || !r.root) return this->root ? *this : r;
+    Node *c = RBTL::submerge(this->root, r.root);
+    c->color = RBTL::BLACK;
+    return RBTPL(c);
   }
-  bool same(int u, int v) { return root(u) == root(v); }
-  int root(int u) { return par.get(u) < 0 ? u : root(par.get(u)); }
-  int size(int u) { return -par.get(root(u)); }
+  // [0,k) [k,size)
+  pair<RBTPL, RBTPL> split(int k) {
+    auto tmp = RBTL::split(this->root, k);
+    return make_pair(RBTPL(tmp.first), RBTPL(tmp.second));
+  }
+  // [0,a) [a,b) [b,size)
+  tuple<RBTPL, RBTPL, RBTPL> split3(int a, int b) {
+    auto x = RBTL::split(this->root, a);
+    auto y = RBTL::split(x.second, b - a);
+    return make_tuple(RBTPL(x.first), RBTPL(y.first), RBTPL(y.second));
+  }
+  void rebuild() {
+    auto ret = RBTL::dump();
+    RBTL::pool.clear();
+    RBTL::build(ret);
+  }
+  static bool almost_full() { return RBTL::pool.ptr < FULL; }
 };
 
 ```
@@ -96,7 +116,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: DataStructure/UnionFind_Persistent.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: DataStructure/RedBlackTree_PersistentLazy.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -25,23 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yukicoder/444.test.cpp
+# :heavy_check_mark: test/yosupo/persistent_queue.RBTP.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#de60e5ba474ac43bf7562c10f5977e2d">test/yukicoder</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yukicoder/444.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 23:49:16+09:00
+* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/persistent_queue.RBTP.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-05-08 16:09:14+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/444">https://yukicoder.me/problems/444</a>
+* see: <a href="https://judge.yosupo.jp/problem/persistent_queue">https://judge.yosupo.jp/problem/persistent_queue</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :heavy_check_mark: <a href="../../../library/Math/kitamasa.hpp.html">高速きたまさ法</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/RedBlackTree.hpp.html">赤黒木</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/RedBlackTree_Persistent.hpp.html">赤黒木(永続)</a>
 
 
 ## Code
@@ -49,57 +48,45 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/444"
+#define PROBLEM "https://judge.yosupo.jp/problem/persistent_queue"
+
+// 永続性のverify
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "Math/FormalPowerSeries.hpp"
-#include "Math/ModInt.hpp"
-#include "Math/kitamasa.hpp"
+#include "DataStructure/RedBlackTree.hpp"
+#include "DataStructure/RedBlackTree_Persistent.hpp"
 #undef call_from_test
 
-using Mint = ModInt<int(1e9 + 7)>;
-Mint dp1[301][300 * 13 + 1];
-Mint dp2[301][300 * 12 + 1];
+struct Monoid {
+  using T = int;
+  static T ti() { return 0; }
+  static T f(const T &l, const T &r) { return l; }
+};
 
 signed main() {
   cin.tie(0);
-  ios::sync_with_stdio(false);
-  using FPS = FormalPowerSeries<Mint>;
-  long long N;
-  int P, C;
-  cin >> N >> P >> C;
-  int max_p = 13 * P + 1, max_c = 12 * C + 1;
-  dp1[0][0] = 1;
-  dp2[0][0] = 1;
-  for (int v : {2, 3, 5, 7, 11, 13}) {
-    for (int i = 0; i < P; i++) {
-      for (int j = 0; j < max_p; j++) {
-        if (j + v < max_p) dp1[i + 1][j + v] += dp1[i][j];
-      }
+  ios::sync_with_stdio(0);
+  using RBTP = RedBlackTree_Persistent<Monoid, 1 << 25>;
+  int Q;
+  cin >> Q;
+  vector<RBTP> S(Q + 1);
+  for (int i = 1; i <= Q; i++) {
+    int op, t;
+    cin >> op >> t;
+    S[i] = S[++t];
+    if (op) {
+      cout << S[i].pop_front() << endl;
+    } else {
+      int x;
+      cin >> x;
+      S[i].push_back(x);
     }
   }
-  for (int v : {4, 6, 8, 9, 10, 12}) {
-    for (int i = 0; i < C; i++) {
-      for (int j = 0; j < max_c; j++) {
-        if (j + v < max_c) dp2[i + 1][j + v] += dp2[i][j];
-      }
-    }
-  }
-  FPS p(max_p), c(max_c);
-  for (int i = 0; i < max_p; i++) p[i] = dp1[P][i];
-  for (int i = 0; i < max_c; i++) c[i] = dp2[C][i];
-  FPS pc = p * c;
-  vector<Mint> coefs(pc.size() - 1), a(pc.size() - 1, 1);
-  for (int i = 0; i < pc.size() - 1; i++) {
-    coefs[i] = pc[pc.size() - 1 - i];
-  }
-  cout << kitamasa(coefs, a, N + a.size() - 1) << endl;
   return 0;
 }
-
 ```
 {% endraw %}
 
@@ -115,7 +102,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: DataStructure/RedBlackTree_Persistent.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
