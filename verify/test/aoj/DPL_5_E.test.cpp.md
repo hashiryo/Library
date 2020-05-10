@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DPL_5_E.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 23:49:16+09:00
+    - Last commit date: 2020-05-10 19:44:41+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_E</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -107,9 +107,8 @@ struct Combination {
     for (int i = n; i; --i) _finv[i - 1] = Modint(i) * _finv[i];
     for (int i = 1; i <= n; ++i) _inv[i] = _finv[i] * _fact[i - 1];
   }
-  static Modint inv(int n) { return _inv[n]; }
-  static Modint fact(int n) { return _fact[n]; }
-  static Modint fact_inv(int n) { return _finv[n]; }
+  static Modint inverse(int n) { return _inv[n]; }
+  static Modint fact(int n, bool inv = 0) { return inv ? _finv[n] : _fact[n]; }
   static Modint nPr(int n, int r) {
     if (n < r || r < 0) return Modint(0);
     return _fact[n] * _finv[n - r];

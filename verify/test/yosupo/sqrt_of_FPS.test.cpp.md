@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/sqrt_of_FPS.test.cpp
+# :x: test/yosupo/sqrt_of_FPS.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sqrt_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 23:49:16+09:00
+    - Last commit date: 2020-05-10 19:44:41+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sqrt_of_formal_power_series">https://judge.yosupo.jp/problem/sqrt_of_formal_power_series</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -430,7 +430,7 @@ struct FormalPowerSeries : vector<Modint> {
  private:
   FPS inverse(int deg = -1) const {
     if (deg < 0) deg = this->size();
-    FPS ret(1, (*this)[0].inverse());
+    FPS ret(1, Modint(1) / (*this)[0]);
     for (int e = 1, ne; e < deg; e = ne) {
       ne = min(2 * e, deg);
       FPS h = ret.part(ne - e) * -ret.middle_product(this->part(ne));
@@ -495,7 +495,7 @@ struct FormalPowerSeries : vector<Modint> {
     Modint sqr = mod_sqrt((*this)[0]);
     if (sqr * sqr != (*this)[0]) return FPS();  // no solutions
     FPS ret(1, sqr);
-    Modint inv2 = Modint(2).inverse();
+    Modint inv2 = Modint(1) / Modint(2);
     for (int i = 1; i < deg; i <<= 1) {
       ret += this->part(i << 1) * ret.inverse(i << 1);
       ret = ret.part(i << 1) * inv2;
@@ -507,7 +507,7 @@ struct FormalPowerSeries : vector<Modint> {
     for (int i = 0; i < this->size(); i++) {
       if ((*this)[i].x != 0) {
         if (i * k > deg) return FPS(deg, 0);
-        Modint inv = (*this)[i].inverse();
+        Modint inv = Modint(1) / (*this)[i];
         FPS ret = (((*this * inv) >> i).logarithm() * k).exponent()
                   * (*this)[i].pow(k);
         return (ret << (i * k)).part(deg);

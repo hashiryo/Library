@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/log_of_FPS.test.cpp
+# :x: test/yosupo/sharp_p_subset_sum.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/log_of_FPS.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sharp_p_subset_sum.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-05-10 19:44:41+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/log_of_formal_power_series">https://judge.yosupo.jp/problem/log_of_formal_power_series</a>
+* see: <a href="https://judge.yosupo.jp/problem/sharp_p_subset_sum">https://judge.yosupo.jp/problem/sharp_p_subset_sum</a>
 
 
 ## Depends on
@@ -48,7 +48,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/log_of_formal_power_series"
+#define PROBLEM "https://judge.yosupo.jp/problem/sharp_p_subset_sum"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -58,20 +58,34 @@ using namespace std;
 #include "Math/ModInt.hpp"
 #undef call_from_test
 
+// log(1+x^s_1)(1+x^s_2)...(1+x^s_N)=log(1+x^s_1)+log(1+x^s_2)+...log(1+x^s_N)
+// log(1+x)=x-x^2/2+x^3/3-x^4/4...
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int N;
-  cin >> N;
   using Mint = ModInt<998244353>;
   using FPS = FormalPowerSeries<Mint>;
-  FPS a(N);
-  for (int i = 0; i < N; i++) cin >> a[i];
-  auto b = a.log();
+  int N, T;
+  cin >> N >> T;
+  int c[T + 1] = {};
   for (int i = 0; i < N; i++) {
-    cout << b[i] << (i < N - 1 ? " " : "\n");
+    int s;
+    cin >> s;
+    c[s]++;
   }
-  cout << flush;
+  FPS a(T + 1);
+  for (int t = 1; t <= T; t++)
+    if (c[t]) {
+      for (int j = 1; j * t <= T; j++) {
+        Mint tmp = Mint(c[t]) / Mint(j);
+        a[j * t] += j & 1 ? tmp : -tmp;
+      }
+    }
+  FPS ans = a.exp();
+  for (int t = 1; t <= T; t++) {
+    cout << (t ? " " : "") << ans[t];
+  }
+  cout << endl;
   return 0;
 }
 ```
@@ -80,8 +94,8 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/yosupo/log_of_FPS.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/log_of_formal_power_series"
+#line 1 "test/yosupo/sharp_p_subset_sum.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/sharp_p_subset_sum"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -577,23 +591,37 @@ struct ModInt {
   }
   static int modulo() { return mod; }
 };
-#line 9 "test/yosupo/log_of_FPS.test.cpp"
+#line 9 "test/yosupo/sharp_p_subset_sum.test.cpp"
 #undef call_from_test
 
+// log(1+x^s_1)(1+x^s_2)...(1+x^s_N)=log(1+x^s_1)+log(1+x^s_2)+...log(1+x^s_N)
+// log(1+x)=x-x^2/2+x^3/3-x^4/4...
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int N;
-  cin >> N;
   using Mint = ModInt<998244353>;
   using FPS = FormalPowerSeries<Mint>;
-  FPS a(N);
-  for (int i = 0; i < N; i++) cin >> a[i];
-  auto b = a.log();
+  int N, T;
+  cin >> N >> T;
+  int c[T + 1] = {};
   for (int i = 0; i < N; i++) {
-    cout << b[i] << (i < N - 1 ? " " : "\n");
+    int s;
+    cin >> s;
+    c[s]++;
   }
-  cout << flush;
+  FPS a(T + 1);
+  for (int t = 1; t <= T; t++)
+    if (c[t]) {
+      for (int j = 1; j * t <= T; j++) {
+        Mint tmp = Mint(c[t]) / Mint(j);
+        a[j * t] += j & 1 ? tmp : -tmp;
+      }
+    }
+  FPS ans = a.exp();
+  for (int t = 1; t <= T; t++) {
+    cout << (t ? " " : "") << ans[t];
+  }
+  cout << endl;
   return 0;
 }
 

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 組み合わせ
+# :question: 組み合わせ
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Combination.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 23:49:16+09:00
+    - Last commit date: 2020-05-10 19:44:41+09:00
 
 
 
@@ -42,8 +42,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/test/aoj/DPL_5_D.test.cpp.html">test/aoj/DPL_5_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/DPL_5_E.test.cpp.html">test/aoj/DPL_5_E.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/DPL_5_F.test.cpp.html">test/aoj/DPL_5_F.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
 
 
 ## Code
@@ -72,9 +72,8 @@ struct Combination {
     for (int i = n; i; --i) _finv[i - 1] = Modint(i) * _finv[i];
     for (int i = 1; i <= n; ++i) _inv[i] = _finv[i] * _fact[i - 1];
   }
-  static Modint inv(int n) { return _inv[n]; }
-  static Modint fact(int n) { return _fact[n]; }
-  static Modint fact_inv(int n) { return _finv[n]; }
+  static Modint inverse(int n) { return _inv[n]; }
+  static Modint fact(int n, bool inv = 0) { return inv ? _finv[n] : _fact[n]; }
   static Modint nPr(int n, int r) {
     if (n < r || r < 0) return Modint(0);
     return _fact[n] * _finv[n - r];
@@ -117,9 +116,8 @@ struct Combination {
     for (int i = n; i; --i) _finv[i - 1] = Modint(i) * _finv[i];
     for (int i = 1; i <= n; ++i) _inv[i] = _finv[i] * _fact[i - 1];
   }
-  static Modint inv(int n) { return _inv[n]; }
-  static Modint fact(int n) { return _fact[n]; }
-  static Modint fact_inv(int n) { return _finv[n]; }
+  static Modint inverse(int n) { return _inv[n]; }
+  static Modint fact(int n, bool inv = 0) { return inv ? _finv[n] : _fact[n]; }
   static Modint nPr(int n, int r) {
     if (n < r || r < 0) return Modint(0);
     return _fact[n] * _finv[n - r];

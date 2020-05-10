@@ -25,23 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+# :x: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 23:49:16+09:00
+    - Last commit date: 2020-05-10 19:44:41+09:00
 
 
+* see: <a href="https://min-25.hatenablog.com/entry/2015/04/24/031413">https://min-25.hatenablog.com/entry/2015/04/24/031413</a>
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial">https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :heavy_check_mark: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
+* :question: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 
 
 ## Code
@@ -51,6 +52,9 @@ layout: default
 ```cpp
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial"
+
+/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413
+ */
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -127,6 +131,9 @@ signed main() {
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial"
 
+/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413
+ */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -153,9 +160,8 @@ struct Combination {
     for (int i = n; i; --i) _finv[i - 1] = Modint(i) * _finv[i];
     for (int i = 1; i <= n; ++i) _inv[i] = _finv[i] * _fact[i - 1];
   }
-  static Modint inv(int n) { return _inv[n]; }
-  static Modint fact(int n) { return _fact[n]; }
-  static Modint fact_inv(int n) { return _finv[n]; }
+  static Modint inverse(int n) { return _inv[n]; }
+  static Modint fact(int n, bool inv = 0) { return inv ? _finv[n] : _fact[n]; }
   static Modint nPr(int n, int r) {
     if (n < r || r < 0) return Modint(0);
     return _fact[n] * _finv[n - r];
@@ -259,7 +265,7 @@ K lagrange_interpolation(vector<K> &y, K t) {
   }
   return res;
 }
-#line 11 "test/yosupo/sum_of_exponential_times_polynomial.test.cpp"
+#line 14 "test/yosupo/sum_of_exponential_times_polynomial.test.cpp"
 #undef call_from_test
 
 template <class Modint>

@@ -25,22 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+# :x: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 23:49:16+09:00
+    - Last commit date: 2020-05-10 19:44:41+09:00
 
 
+* see: <a href="https://min-25.hatenablog.com/entry/2015/04/24/031413">https://min-25.hatenablog.com/entry/2015/04/24/031413</a>
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit">https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -51,6 +52,8 @@ layout: default
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit"
 
+/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -110,6 +113,8 @@ signed main() {
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit"
 
+/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413
+ */
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -136,9 +141,8 @@ struct Combination {
     for (int i = n; i; --i) _finv[i - 1] = Modint(i) * _finv[i];
     for (int i = 1; i <= n; ++i) _inv[i] = _finv[i] * _fact[i - 1];
   }
-  static Modint inv(int n) { return _inv[n]; }
-  static Modint fact(int n) { return _fact[n]; }
-  static Modint fact_inv(int n) { return _finv[n]; }
+  static Modint inverse(int n) { return _inv[n]; }
+  static Modint fact(int n, bool inv = 0) { return inv ? _finv[n] : _fact[n]; }
   static Modint nPr(int n, int r) {
     if (n < r || r < 0) return Modint(0);
     return _fact[n] * _finv[n - r];
@@ -209,7 +213,7 @@ struct ModInt {
   }
   static int modulo() { return mod; }
 };
-#line 10 "test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp"
+#line 12 "test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp"
 #undef call_from_test
 
 template <class Modint>
