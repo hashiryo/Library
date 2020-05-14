@@ -75,10 +75,10 @@ layout: default
 
 * :heavy_check_mark: <a href="library/Math/BigInt.hpp.html">多倍長整数</a>
 * :heavy_check_mark: <a href="library/Math/Combination.hpp.html">組み合わせ</a>
-* :question: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :heavy_check_mark: <a href="library/Math/Matrix.hpp.html">行列</a>
 * :heavy_check_mark: <a href="library/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
-* :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="library/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="library/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :heavy_check_mark: <a href="library/Math/TwoSatisfiability.hpp.html">2-SAT</a>
 * :heavy_check_mark: <a href="library/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
@@ -155,7 +155,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/range_affine_range_sum.RBTL.test.cpp.html">test/yosupo/range_affine_range_sum.RBTL.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp.html">test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/scc.test.cpp.html">test/yosupo/scc.test.cpp</a>
-* :x: <a href="verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/sharp_p_subset_sum.test.cpp
+# :heavy_check_mark: test/yosupo/sharp_p_subset_sum.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sharp_p_subset_sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-10 19:44:41+09:00
+    - Last commit date: 2020-05-14 22:10:01+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sharp_p_subset_sum">https://judge.yosupo.jp/problem/sharp_p_subset_sum</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -67,7 +67,8 @@ signed main() {
   using FPS = FormalPowerSeries<Mint>;
   int N, T;
   cin >> N >> T;
-  int c[T + 1] = {};
+  int c[T + 1];
+  fill(c, c + T + 1, 0);
   for (int i = 0; i < N; i++) {
     int s;
     cin >> s;
@@ -603,7 +604,8 @@ signed main() {
   using FPS = FormalPowerSeries<Mint>;
   int N, T;
   cin >> N >> T;
-  int c[T + 1] = {};
+  int c[T + 1];
+  fill(c, c + T + 1, 0);
   for (int i = 0; i < N; i++) {
     int s;
     cin >> s;
