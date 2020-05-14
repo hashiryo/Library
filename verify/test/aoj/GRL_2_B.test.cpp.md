@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/GRL_2_B.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-14 17:58:05+09:00
+    - Last commit date: 2020-05-14 21:58:30+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
-* :question: <a href="../../../library/DataStructure/UnionFind.hpp.html">Union-Find</a>
-* :question: <a href="../../../library/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :heavy_check_mark: <a href="../../../library/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 
 
 ## Code

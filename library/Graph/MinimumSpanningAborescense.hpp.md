@@ -25,28 +25,28 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: 最小全域有向木
+# :heavy_check_mark: 最小全域有向木
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MinimumSpanningAborescense.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-14 17:58:05+09:00
+    - Last commit date: 2020-05-14 21:58:30+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
-* :question: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :heavy_check_mark: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :heavy_check_mark: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
 ## Code
@@ -75,10 +75,10 @@ using namespace std;
 template <typename T>
 struct MinimumSpanningAborescense {
   struct Edge {
-    int src, dst;
+    int src, dst, id;
     T weight;
     Edge() {}
-    Edge(int s, int d, int w) : src(s), dst(d), weight(w) {}
+    Edge(int s, int d, int i, int w) : src(s), dst(d), id(i), weight(w) {}
   };
 
  private:
@@ -89,33 +89,40 @@ struct MinimumSpanningAborescense {
  public:
   MinimumSpanningAborescense(int sz) : n(sz) {}
   void add_edge(int src, int dst, T weight) {
-    edges.emplace_back(src, dst, weight);
+    edges.emplace_back(src, dst, edges.size(), weight);
   }
   pair<T, vector<int>> get_MSA(int root) {
     UnionFind uf(n);
     auto comp
         = [](const Edge &a, const Edge &b) { return a.weight > b.weight; };
     auto g = [](const Edge &a, const T &b) {
-      return Edge(a.src, a.dst, a.weight + b);
+      return Edge(a.src, a.dst, a.id, a.weight + b);
     };
     vector<Heap> heap(n, Heap(comp, g));
     for (auto &e : edges) heap[e.dst].push(e);
     T score = 0;
-    vector<int> seen(n, -1);
+    int m = edges.size();
+    vector<int> seen(n, -1), paredge(m), ei, leaf(n, -1), par(n), usede(m);
     seen[root] = root;
-    vector<int> par(n, -1);
-    par[root] = root;
     for (int s = 0; s < n; ++s) {
-      vector<int> path;
+      vector<int> path, ch;
+      int cyc = 0;
       for (int u = s; seen[u] < 0;) {
         path.push_back(u);
         seen[u] = s;
         if (heap[u].empty()) return {-1, vector<int>()};
         Edge min_e = heap[u].top();
-        par[min_e.dst] = min_e.src;
         score += min_e.weight;
         heap[u].add(-min_e.weight);
         heap[u].pop();
+        ei.push_back(min_e.id);
+        if (leaf[min_e.dst] == -1) leaf[min_e.dst] = min_e.id;
+        while (cyc) {
+          paredge[ch.back()] = min_e.id;
+          ch.pop_back();
+          cyc--;
+        }
+        ch.push_back(min_e.id);
         int v = uf.root(min_e.src);
         if (seen[v] == s) {
           Heap new_heap(comp, g);
@@ -123,12 +130,24 @@ struct MinimumSpanningAborescense {
             int w = path.back();
             path.pop_back();
             new_heap.merge(heap[w]);
+            cyc++;
             if (!uf.unite(v, w)) break;
           }
           heap[uf.root(v)] = new_heap;
           seen[uf.root(v)] = -1;
         }
         u = uf.root(v);
+      }
+    }
+    reverse(ei.begin(), ei.end());
+    par[root] = root;
+    for (auto i : ei) {
+      if (usede[i]) continue;
+      par[edges[i].dst] = edges[i].src;
+      int x = leaf[edges[i].dst];
+      while (x != i) {
+        usede[x] = 1;
+        x = paredge[x];
       }
     }
     return {score, par};
