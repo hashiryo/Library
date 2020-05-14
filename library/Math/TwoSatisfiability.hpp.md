@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 線形漸化式の高速計算
+# :heavy_check_mark: 2-SAT
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Math/kitamasa.hpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/Math/TwoSatisfiability.hpp">View this file on GitHub</a>
     - Last commit date: 2020-05-14 17:58:05+09:00
 
 
@@ -38,14 +38,12 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="../Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 
 
 ## Code
@@ -54,9 +52,10 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title 線形漸化式の高速計算
+ * @title 2-SAT
  * @category 数学
- * @brief O(NlogNlogk)
+ * @brief 強連結成分分解を用いる
+ * @brief solve():真偽値の割当を返す(充足不可能なら空)
  */
 
 #ifndef call_from_test
@@ -64,45 +63,36 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "Math/FormalPowerSeries.hpp"
+#include "Graph/StronglyConnectedComponents.hpp"
 #undef call_from_test
 #endif
 
-// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]
-// b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)
-// calc b[k]
+struct TwoSatisfiability {
+ private:
+  int sz;
+  StronglyConnectedComponents scc;
 
-template <class Modint>
-Modint kitamasa(const vector<Modint> &c, const vector<Modint> &a, uint64_t k) {
-  assert(a.size() == c.size());
-  int N = a.size();
-  if (k < N) return a[k];
-  using FPS = FormalPowerSeries<Modint>;
-  uint64_t mask = (uint64_t(1) << (63 - __builtin_clzll(k))) >> 1;
-  FPS f(N + 1);
-  f[0] = 1;
-  for (int i = 0; i < N; i++) f[N - i] = -c[i];
-  FPS r({1, 0});
-  if (N < 1150) {  // naive
-    r = r.divrem_rev_n(f).second;
-    for (; mask; mask >>= 1) {
-      r *= r;
-      if (k & mask) r.push_back(0);
-      r = r.divrem_rev_n(f).second;
+ public:
+  TwoSatisfiability(int n) : sz(n), scc(2 * n) {}
+  void add_if(int u, int v) {
+    scc.add_edge(u, v);
+    scc.add_edge(neg(v), neg(u));
+  }                                                   // u -> v <=> !v -> !u
+  void add_or(int u, int v) { add_if(neg(u), v); }    // u or v <=> !u -> v
+  void add_nand(int u, int v) { add_if(u, neg(v)); }  // u nand v <=> u -> !v
+  void set_true(int u) { scc.add_edge(neg(u), u); }   // u <=> !u -> u
+  void set_false(int u) { scc.add_edge(u, neg(u)); }  // !u <=> u -> !u
+  inline int neg(int x) { return x >= sz ? x - sz : x + sz; }
+  vector<short> solve() {
+    vector<int> I = scc.get_SCC().second;
+    vector<short> ret(sz);
+    for (int i = 0; i < sz; i++) {
+      if (I[i] == I[neg(i)]) return {};
+      ret[i] = I[i] > I[neg(i)];
     }
-  } else {
-    FPS inv = f.inv(N);
-    r = r.rem_rev_pre(f, inv);
-    for (; mask; mask >>= 1) {
-      r *= r;
-      if (k & mask) r.push_back(0);
-      r = r.rem_rev_pre(f, inv);
-    }
+    return ret;
   }
-  Modint ret(0);
-  for (int i = 0; i < N; i++) ret += r[N - i - 1] * a[i];
-  return ret;
-}
+};
 
 ```
 {% endraw %}
@@ -117,7 +107,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/TwoSatisfiability.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

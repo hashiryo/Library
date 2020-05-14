@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yukicoder/1973.test.cpp
+# :heavy_check_mark: test/aoj/GRL_2_B.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#de60e5ba474ac43bf7562c10f5977e2d">test/yukicoder</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yukicoder/1973.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/GRL_2_B.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-05-14 17:58:05+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/1973">https://yukicoder.me/problems/1973</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B</a>
 
 
 ## Depends on
 
-* :question: <a href="../../../library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :heavy_check_mark: <a href="../../../library/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
+* :question: <a href="../../../library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :question: <a href="../../../library/DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :question: <a href="../../../library/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 
 
 ## Code
@@ -49,28 +49,30 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/1973"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_B"
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "Math/FormalPowerSeries.hpp"
-#include "Math/ModInt.hpp"
-#include "Math/kitamasa.hpp"
+#include "DataStructure/UnionFind.hpp"
+#include "DataStructure/SkewHeap.hpp"
+#include "Graph/MinimumSpanningAborescense.hpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int Q;
-  cin >> Q;
-  while (Q--) {
-    long long n;
-    cin >> n;
-    cout << kitamasa<ModInt<17>>({1, 1, 1, 1}, {0, 0, 0, 1}, n - 1) << "\n";
+  int N, M, r;
+  cin >> N >> M >> r;
+  MinimumSpanningAborescense<int> graph(N);
+  for (int i = 0; i < M; i++) {
+    int s, t, w;
+    cin >> s >> t >> w;
+    graph.add_edge(s, t, w);
   }
-  cout << flush;
+  cout << graph.get_MSA(r).first << endl;
   return 0;
 }
 ```
@@ -88,7 +90,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
     raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: Math/kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleError: Graph/MinimumSpanningAborescense.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+# :heavy_check_mark: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -40,9 +40,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
+* :heavy_check_mark: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
 * :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :question: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
+* :heavy_check_mark: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 
 
 ## Code

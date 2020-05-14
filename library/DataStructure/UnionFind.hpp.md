@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Union-Find
+# :question: Union-Find
 
 <a href="../../index.html">Back to top page</a>
 
@@ -36,9 +36,17 @@ layout: default
 
 
 
+## Required by
+
+* :question: <a href="../Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
+
+
 ## Verified with
 
+* :x: <a href="../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
 ## Code
