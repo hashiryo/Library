@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_9_C.SkewHeap.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-14 17:58:05+09:00
+    - Last commit date: 2020-05-15 20:49:13+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C</a>
@@ -101,15 +101,18 @@ using namespace std;
 using namespace std;
 #endif
 
-template <typename T, typename E = T>
+template <typename T>
+struct Op_add {
+  using E = T;
+  static E ei() { return 0; }
+  static T g(const T &l, const E &r) { return l + r; }
+  static E h(const E &l, const E &r) { return l + r; }
+};
+
+template <typename T, typename Op = Op_add<T>, typename Compare = less<T>>
 struct SkewHeap {
-  using C = function<bool(T, T)>;
-  using G = function<T(T, E)>;
-  using H = function<E(E, E)>;
-  C comp;
-  G g;
-  H h;
-  E ei;
+  using E = typename Op::E;
+  Compare comp;
   struct Node {
     Node *ch[2];
     T key;
@@ -120,11 +123,11 @@ struct SkewHeap {
 
  private:
   void propagate(Node *a) {
-    if (a->lazy != ei) {
-      a->key = g(a->key, a->lazy);
-      if (a->ch[0]) a->ch[0]->lazy = h(a->ch[0]->lazy, a->lazy);
-      if (a->ch[1]) a->ch[1]->lazy = h(a->ch[1]->lazy, a->lazy);
-      a->lazy = ei;
+    if (a->lazy != Op::ei()) {
+      a->key = Op::g(a->key, a->lazy);
+      if (a->ch[0]) a->ch[0]->lazy = Op::h(a->ch[0]->lazy, a->lazy);
+      if (a->ch[1]) a->ch[1]->lazy = Op::h(a->ch[1]->lazy, a->lazy);
+      a->lazy = Op::ei();
     }
   }
   Node *merge(Node *a, Node *b) {
@@ -138,13 +141,10 @@ struct SkewHeap {
   }
 
  public:
-  SkewHeap(
-      C c = [](const T &a, const T &b) { return a < b; } /* max heap */,
-      G g = [](const T &a, const E &b) { return a + b; },
-      H h = [](const E &a, const E &b) { return a + b; }, E ei = 0)
-      : comp(c), g(g), h(h), ei(ei), root(nullptr) {}
+  /* max heap */
+  SkewHeap(const Compare &c = Compare()) : comp(c), root(nullptr) {}
   void push(T key) {
-    Node *n = new Node(key, ei);
+    Node *n = new Node(key, Op::ei());
     root = merge(root, n);
   }
   T pop() {
@@ -160,7 +160,7 @@ struct SkewHeap {
     return root->key;
   }
   bool empty() { return !root; }
-  void add(E v) { root->lazy = h(root->lazy, v); }
+  void add(E v) { root->lazy = Op::h(root->lazy, v); }
   void merge(SkewHeap x) { root = merge(root, x.root); }
 };
 #line 9 "test/aoj/ALDS1_9_C.SkewHeap.test.cpp"

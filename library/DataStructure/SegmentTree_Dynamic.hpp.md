@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegmentTree_Dynamic.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-04 14:35:47+09:00
+    - Last commit date: 2020-05-15 20:49:13+09:00
 
 
 
@@ -80,8 +80,8 @@ struct SegmentTree_Dynamic {
   };
 
  protected:
-  const int height;
-  const ll n;
+  int height;
+  ll n;
   static int node_count;
   Node *root;
 
@@ -93,7 +93,7 @@ struct SegmentTree_Dynamic {
     t->xor_lazy = 0;
   }
   T value(Node *t) { return t ? t->dat : M::ti(); }
-  Node *set_Node(Node *t, U pos, T val, ll b) {
+  Node *set_Node(Node *t, const U &pos, const T &val, ll b) {
     if (t == nullptr) t = new Node();
     if (b < 0) {
       t->dat = val;
@@ -105,7 +105,8 @@ struct SegmentTree_Dynamic {
     t->dat = M::f(value(t->ch[0]), value(t->ch[1]));
     return t;
   }
-  T query_Node(ll l, ll r, Node *t, ll lb, ll ub, ll b) {
+  T query_Node(const ll &l, const ll &r, Node *t, const ll &lb, const ll &ub,
+               ll b) {
     if (t == nullptr || ub <= l || r <= lb) return M::ti();
     push(t, b);
     if (l <= lb && ub <= r) return t->dat;
@@ -189,8 +190,8 @@ struct SegmentTree_Dynamic {
   };
 
  protected:
-  const int height;
-  const ll n;
+  int height;
+  ll n;
   static int node_count;
   Node *root;
 
@@ -202,7 +203,7 @@ struct SegmentTree_Dynamic {
     t->xor_lazy = 0;
   }
   T value(Node *t) { return t ? t->dat : M::ti(); }
-  Node *set_Node(Node *t, U pos, T val, ll b) {
+  Node *set_Node(Node *t, const U &pos, const T &val, ll b) {
     if (t == nullptr) t = new Node();
     if (b < 0) {
       t->dat = val;
@@ -214,7 +215,8 @@ struct SegmentTree_Dynamic {
     t->dat = M::f(value(t->ch[0]), value(t->ch[1]));
     return t;
   }
-  T query_Node(ll l, ll r, Node *t, ll lb, ll ub, ll b) {
+  T query_Node(const ll &l, const ll &r, Node *t, const ll &lb, const ll &ub,
+               ll b) {
     if (t == nullptr || ub <= l || r <= lb) return M::ti();
     push(t, b);
     if (l <= lb && ub <= r) return t->dat;
