@@ -25,28 +25,28 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Skew-Heap
+# :x: Skew-Heap
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SkewHeap.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-15 20:49:13+09:00
+    - Last commit date: 2020-05-18 11:25:35+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="../Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
+* :x: <a href="../Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/aoj/ALDS1_9_C.SkewHeap.test.cpp.html">test/aoj/ALDS1_9_C.SkewHeap.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/ALDS1_9_C.SkewHeap.test.cpp.html">test/aoj/ALDS1_9_C.SkewHeap.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
 ## Code
@@ -75,9 +75,10 @@ struct Op_add {
   static E h(const E &l, const E &r) { return l + r; }
 };
 
-template <typename T, typename Op = Op_add<T>, typename Compare = less<T>>
+template <typename T, typename Op = Op_add<T>>
 struct SkewHeap {
   using E = typename Op::E;
+  using Compare = typename less<T>;
   Compare comp;
   struct Node {
     Node *ch[2];
@@ -157,9 +158,10 @@ struct Op_add {
   static E h(const E &l, const E &r) { return l + r; }
 };
 
-template <typename T, typename Op = Op_add<T>, typename Compare = less<T>>
+template <typename T, typename Op = Op_add<T>>
 struct SkewHeap {
   using E = typename Op::E;
+  using Compare = typename less<T>;
   Compare comp;
   struct Node {
     Node *ch[2];
