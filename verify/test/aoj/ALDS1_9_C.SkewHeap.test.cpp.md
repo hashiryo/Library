@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
+# :heavy_check_mark: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_9_C.SkewHeap.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-18 11:25:35+09:00
+    - Last commit date: 2020-05-18 11:50:31+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 
 
 ## Code
@@ -109,10 +109,9 @@ struct Op_add {
   static E h(const E &l, const E &r) { return l + r; }
 };
 
-template <typename T, typename Op = Op_add<T>>
+template <typename T, typename Op = Op_add<T>, typename Compare = less<T>>
 struct SkewHeap {
   using E = typename Op::E;
-  using Compare = typename less<T>;
   Compare comp;
   struct Node {
     Node *ch[2];
