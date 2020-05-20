@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/line_add_get_min.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-15 20:49:13+09:00
+    - Last commit date: 2020-05-20 14:20:17+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/line_add_get_min">https://judge.yosupo.jp/problem/line_add_get_min</a>
@@ -111,7 +111,7 @@ using namespace std;
 #endif
 
 template <typename T, T x_low = -(1 << 30), T x_high = (1 << 30),
-          T INF = numeric_limits<T>::max(), size_t LIM = (1 << 23)>
+          size_t LIM = (1 << 23)>
 struct LiChaoTree {
   struct Line {
     T a, b;
@@ -130,6 +130,7 @@ struct LiChaoTree {
   };
 
  private:
+  static constexpr T INF = numeric_limits<T>::max() / 2;
   static int node_count;
   Node *root;
 
@@ -212,8 +213,8 @@ struct LiChaoTree {
   }
   T query(T x) const { return query(root, x_low, x_high, x); }
 };
-template <typename T, T x_low, T x_high, T INF, size_t LIM>
-int LiChaoTree<T, x_low, x_high, INF, LIM>::node_count = 0;
+template <typename T, T x_low, T x_high, size_t LIM>
+int LiChaoTree<T, x_low, x_high, LIM>::node_count = 0;
 #line 8 "test/yosupo/line_add_get_min.test.cpp"
 #undef call_from_test
 
