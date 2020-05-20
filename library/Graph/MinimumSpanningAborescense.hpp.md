@@ -25,28 +25,28 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 最小全域有向木
+# :heavy_check_mark: 最小全域有向木
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MinimumSpanningAborescense.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-20 14:20:17+09:00
+    - Last commit date: 2020-05-20 15:02:13+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
-* :question: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :heavy_check_mark: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :heavy_check_mark: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
-* :x: <a href="../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
 ## Code
@@ -101,7 +101,7 @@ struct MinimumSpanningAborescense {
   void add_edge(int src, int dst, cost_t weight) {
     edges.emplace_back(src, dst, edges.size(), weight);
   }
-  pair<T, vector<int>> get_MSA(int root) {
+  pair<cost_t, vector<int>> get_MSA(int root) {
     UnionFind uf(n);
     vector<Heap> heap(n);
     for (auto &e : edges) heap[e.dst].push(e);

@@ -39,8 +39,8 @@ layout: default
 ### グラフ
 
 * :heavy_check_mark: <a href="library/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
-* :x: <a href="library/Graph/MinCostFlow.hpp.html">最小費用流</a>
-* :x: <a href="library/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
+* :heavy_check_mark: <a href="library/Graph/MinCostFlow.hpp.html">最小費用流</a>
+* :heavy_check_mark: <a href="library/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 * :heavy_check_mark: <a href="library/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 * :heavy_check_mark: <a href="library/Graph/Tree_DP.hpp.html">木DP</a>
 
@@ -66,9 +66,9 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
-* :question: <a href="library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :heavy_check_mark: <a href="library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 * :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
-* :question: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">Union-Find</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
 * :heavy_check_mark: <a href="library/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
 
@@ -112,7 +112,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
-* :x: <a href="verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2842.BIT_2D.test.cpp.html">test/aoj/2842.BIT_2D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.KMP.test.cpp.html">test/aoj/ALDS1_14_B.KMP.test.cpp</a>
@@ -129,9 +129,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
@@ -140,7 +140,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
-* :x: <a href="verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>

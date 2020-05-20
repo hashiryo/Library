@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 最小費用流
+# :heavy_check_mark: 最小費用流
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MinCostFlow.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-20 14:20:17+09:00
+    - Last commit date: 2020-05-20 15:02:13+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
 
 
 ## Code
@@ -52,6 +52,7 @@ layout: default
  * @brief PrimalDual
  * @brief O((f+F')ElogV)
  * @brief 負辺除去あり
+ * @brief 返り値:{流量f流したときの最小コスト,そもそも流量f流せたか(bool)}
  */
 // verify用: https://codeforces.com/contest/316/problem/C2
 
@@ -131,7 +132,7 @@ struct MinCostFlow {
       }
     }
   }
-  cost_t flow(vector<flow_t> d0) {
+  pair<cost_t, bool> flow(vector<flow_t> d0) {
     cost_t res = 0;
     p.assign(n, 0);
     preve.assign(n, -1);
@@ -146,7 +147,7 @@ struct MinCostFlow {
     }
     while (f > 0) {
       dijkstra();
-      if (dist[T] == COST_MAX) return COST_MAX;  // no solution
+      if (dist[T] == COST_MAX) return {0, false};  // no solution
       for (int v = 0; v < n; v++)
         if (dist[v] < dist[T]) p[v] += dist[v] - dist[T];
       flow_t d = f;
@@ -160,7 +161,7 @@ struct MinCostFlow {
         graph[v][e.rev].capacity += d;
       }
     }
-    return neg + res;
+    return {neg + res, true};
   }
 
  public:
@@ -177,7 +178,7 @@ struct MinCostFlow {
       add_edge(dst, src, cap, -cost);
     }
   }
-  cost_t min_cost_flow(int s, int t, flow_t f) {
+  pair<cost_t, bool> min_cost_flow(int s, int t, flow_t f) {
     vector<flow_t> d0(n);
     d0[s] = f, d0[t] = -f;
     return flow(d0);
@@ -205,6 +206,7 @@ struct MinCostFlow {
  * @brief PrimalDual
  * @brief O((f+F')ElogV)
  * @brief 負辺除去あり
+ * @brief 返り値:{流量f流したときの最小コスト,そもそも流量f流せたか(bool)}
  */
 // verify用: https://codeforces.com/contest/316/problem/C2
 
@@ -284,7 +286,7 @@ struct MinCostFlow {
       }
     }
   }
-  cost_t flow(vector<flow_t> d0) {
+  pair<cost_t, bool> flow(vector<flow_t> d0) {
     cost_t res = 0;
     p.assign(n, 0);
     preve.assign(n, -1);
@@ -299,7 +301,7 @@ struct MinCostFlow {
     }
     while (f > 0) {
       dijkstra();
-      if (dist[T] == COST_MAX) return COST_MAX;  // no solution
+      if (dist[T] == COST_MAX) return {0, false};  // no solution
       for (int v = 0; v < n; v++)
         if (dist[v] < dist[T]) p[v] += dist[v] - dist[T];
       flow_t d = f;
@@ -313,7 +315,7 @@ struct MinCostFlow {
         graph[v][e.rev].capacity += d;
       }
     }
-    return neg + res;
+    return {neg + res, true};
   }
 
  public:
@@ -330,7 +332,7 @@ struct MinCostFlow {
       add_edge(dst, src, cap, -cost);
     }
   }
-  cost_t min_cost_flow(int s, int t, flow_t f) {
+  pair<cost_t, bool> min_cost_flow(int s, int t, flow_t f) {
     vector<flow_t> d0(n);
     d0[s] = f, d0[t] = -f;
     return flow(d0);
