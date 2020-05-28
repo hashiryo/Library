@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegmentTree_Lazy.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-03 01:15:16+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
@@ -128,6 +128,7 @@ struct SegmentTree_Lazy {
     laz[a] = M::ei();
     recalc(a);
   }
+  //[a,b)
   T query(int a, int b) {
     thrust(a += n);
     thrust(b += n - 1);
@@ -266,6 +267,7 @@ struct SegmentTree_Lazy {
     laz[a] = M::ei();
     recalc(a);
   }
+  //[a,b)
   T query(int a, int b) {
     thrust(a += n);
     thrust(b += n - 1);

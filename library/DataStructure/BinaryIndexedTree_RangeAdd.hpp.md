@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryIndexedTree_RangeAdd.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-04 14:35:47+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
@@ -58,7 +58,7 @@ layout: default
 using namespace std;
 #endif
 
-template <typename T = long long>
+template <typename T>
 struct BinaryIndexedTree_RangeAdd {
   vector<T> dat1;
   vector<T> dat2;
@@ -96,7 +96,7 @@ struct BinaryIndexedTree_RangeAdd {
 using namespace std;
 #endif
 
-template <typename T = long long>
+template <typename T>
 struct BinaryIndexedTree_RangeAdd {
   vector<T> dat1;
   vector<T> dat2;

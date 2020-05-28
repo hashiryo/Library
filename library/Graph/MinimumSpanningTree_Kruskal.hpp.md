@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 赤黒木(永続)
+# :heavy_check_mark: 最小全域木(Kruskal)
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
-* <a href="{{ site.github.repository_url }}/blob/master/DataStructure/RedBlackTree_Persistent.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-08 16:09:14+09:00
+* category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
+* <a href="{{ site.github.repository_url }}/blob/master/Graph/MinimumSpanningTree_Kruskal.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="RedBlackTree.hpp.html">赤黒木</a>
+* :heavy_check_mark: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/yosupo/persistent_queue.RBTP.test.cpp.html">test/yosupo/persistent_queue.RBTP.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
 
 
 ## Code
@@ -52,59 +52,53 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title 赤黒木(永続)
- * @category データ構造
- * @brief O(logN)
+ * @title 最小全域木(Kruskal)
+ * @category グラフ
+ * @brief O(m log n)
+ * @brief 返り値:{全域木のコスト総和,全域木に使用する辺}
  */
-// verify用:
-// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/RedBlackTree.hpp"
+#include "DataStructure/UnionFind.hpp"
 #undef call_from_test
 #endif
 
-template <typename M, size_t LIM = 1 << 22, size_t FULL = 1000>
-struct RedBlackTree_Persistent : RedBlackTree<M, LIM> {
-  using RBT = RedBlackTree<M, LIM>;
-  using RBT::RedBlackTree;
-  using Node = typename RBT::Node;
-  using RBTP = RedBlackTree_Persistent;
+template <typename cost_t>
+struct MinimumSpanningTree_Kruskal {
+  struct Edge {
+    int src, dst, id;
+    cost_t cost;
+    bool operator<(const Edge &rhs) const { return this->cost < rhs.cost; }
+    Edge() {}
+    Edge(int s, int d, int i, int c) : src(s), dst(d), id(i), cost(c) {}
+  };
 
  private:
-  Node *clone(Node *t) override { return &(*RBT::pool.alloc() = *t); }
+  int n;
+  vector<Edge> edges;
 
  public:
-  // merge
-  RBTP operator+(const RBTP &r) {
-    if (!this->root || !r.root) return this->root ? *this : r;
-    Node *c = RBT::submerge(this->root, r.root);
-    c->color = RBT::BLACK;
-    return RBTP(c);
+  MinimumSpanningTree_Kruskal(int n) : n(n) {}
+  void add_edge(int src, int dst, cost_t cost) {
+    edges.emplace_back(src, dst, edges.size(), cost);
   }
-  // [0,k) [k,size)
-  pair<RBTP, RBTP> split(int k) {
-    auto tmp = RBT::split(this->root, k);
-    return make_pair(RBTP(tmp.first), RBTP(tmp.second));
+  pair<cost_t, vector<Edge>> get_MST() {
+    UnionFind uf(n);
+    sort(begin(edges), end(edges));
+    cost_t total = cost_t();
+    vector<Edge> es;
+    for (auto &e : edges)
+      if (uf.unite(e.src, e.dst)) {
+        es.emplace_back(e);
+        total += e.cost;
+      }
+    return {total, es};
   }
-  // [0,a) [a,b) [b,size)
-  tuple<RBTP, RBTP, RBTP> split3(int a, int b) {
-    auto x = RBT::split(this->root, a);
-    auto y = RBT::split(x.second, b - a);
-    return make_tuple(RBTP(x.first), RBTP(y.first), RBTP(y.second));
-  }
-  void rebuild() {
-    auto ret = RBT::dump();
-    RBT::pool.clear();
-    RBT::build(ret);
-  }
-  static bool almost_full() { return RBT::pool.ptr < FULL; }
 };
-
 ```
 {% endraw %}
 
@@ -118,7 +112,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/RedBlackTree_Persistent.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Graph/MinimumSpanningTree_Kruskal.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

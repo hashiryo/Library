@@ -25,23 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/2647.test.cpp
+# :heavy_check_mark: test/aoj/GRL_2_A.kruskal.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/2647.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/GRL_2_A.kruskal.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-05-29 00:58:18+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2647">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2647</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 * :heavy_check_mark: <a href="../../../library/DataStructure/UnionFind.hpp.html">Union-Find</a>
-* :heavy_check_mark: <a href="../../../library/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
+* :heavy_check_mark: <a href="../../../library/Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
 
 
 ## Code
@@ -49,48 +48,29 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2647"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
 #include "DataStructure/UnionFind.hpp"
-#include "DataStructure/SkewHeap.hpp"
-#include "Graph/MinimumSpanningAborescense.hpp"
+#include "Graph/MinimumSpanningTree_Kruskal.hpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
-  ios::sync_with_stdio(0);
+  ios::sync_with_stdio(false);
   int N, M;
   cin >> N >> M;
-  MinimumSpanningAborescense<int> graph(N);
-  bool able[N];
-  fill(able, able + N, true);
+  MinimumSpanningTree_Kruskal<int> graph(N);
   for (int i = 0; i < M; i++) {
-    int a, b;
-    cin >> a >> b;
-    able[b] = false;
-    graph.add_edge(a, b, 0);
-    graph.add_edge(b, a, 1);
+    int s, t, w;
+    cin >> s >> t >> w;
+    graph.add_edge(s, t, w);
   }
-  int min_cost = INT_MAX;
-  vector<int> capitals;
-  for (int i = 0; i < N; i++)
-    if (able[i]) {
-      int cost = graph.get_MSA(i).first;
-      if (cost < min_cost) {
-        min_cost = cost;
-        capitals = {i};
-      } else if (cost == min_cost) {
-        capitals.push_back(i);
-      }
-    }
-  cout << capitals.size() << " " << min_cost << endl;
-  for (int i = 0; i < capitals.size(); i++)
-    cout << (i ? " " : "") << capitals[i];
-  cout << endl;
+  cout << graph.get_MST().first << endl;
   return 0;
 }
 ```
@@ -108,7 +88,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Graph/MinimumSpanningAborescense.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Graph/MinimumSpanningTree_Kruskal.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

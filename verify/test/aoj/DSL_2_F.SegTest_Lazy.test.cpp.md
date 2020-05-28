@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_F.SegTest_Lazy.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-03 01:15:16+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
@@ -183,6 +183,7 @@ struct SegmentTree_Lazy {
     laz[a] = M::ei();
     recalc(a);
   }
+  //[a,b)
   T query(int a, int b) {
     thrust(a += n);
     thrust(b += n - 1);

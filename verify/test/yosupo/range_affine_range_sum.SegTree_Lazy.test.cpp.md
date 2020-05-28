@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-03 01:15:16+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/range_affine_range_sum">https://judge.yosupo.jp/problem/range_affine_range_sum</a>
@@ -202,6 +202,7 @@ struct SegmentTree_Lazy {
     laz[a] = M::ei();
     recalc(a);
   }
+  //[a,b)
   T query(int a, int b) {
     thrust(a += n);
     thrust(b += n - 1);

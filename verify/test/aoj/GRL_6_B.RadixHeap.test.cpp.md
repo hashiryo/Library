@@ -25,23 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/2647.test.cpp
+# :x: test/aoj/GRL_6_B.RadixHeap.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/2647.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 00:58:18+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/GRL_6_B.RadixHeap.test.cpp">View this file on GitHub</a>
+    - Last commit date: 1970-01-01 00:00:00+00:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2647">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2647</a>
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../../../library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
-* :heavy_check_mark: <a href="../../../library/DataStructure/UnionFind.hpp.html">Union-Find</a>
-* :heavy_check_mark: <a href="../../../library/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 
 
 ## Code
@@ -49,48 +41,30 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2647"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/UnionFind.hpp"
-#include "DataStructure/SkewHeap.hpp"
-#include "Graph/MinimumSpanningAborescense.hpp"
+#include "Graph/MinCostFlow.hpp"
+#include "Datastructure/RadixHeap.hpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int N, M;
-  cin >> N >> M;
-  MinimumSpanningAborescense<int> graph(N);
-  bool able[N];
-  fill(able, able + N, true);
-  for (int i = 0; i < M; i++) {
-    int a, b;
-    cin >> a >> b;
-    able[b] = false;
-    graph.add_edge(a, b, 0);
-    graph.add_edge(b, a, 1);
+  int V, E, F;
+  cin >> V >> E >> F;
+  MinCostFlow<int, int, RadixHeap<int, int>> graph(V);
+  while (E--) {
+    int u, v, c, d;
+    cin >> u >> v >> c >> d;
+    graph.add_edge(u, v, c, d);
   }
-  int min_cost = INT_MAX;
-  vector<int> capitals;
-  for (int i = 0; i < N; i++)
-    if (able[i]) {
-      int cost = graph.get_MSA(i).first;
-      if (cost < min_cost) {
-        min_cost = cost;
-        capitals = {i};
-      } else if (cost == min_cost) {
-        capitals.push_back(i);
-      }
-    }
-  cout << capitals.size() << " " << min_cost << endl;
-  for (int i = 0; i < capitals.size(); i++)
-    cout << (i ? " " : "") << capitals[i];
-  cout << endl;
+  auto ans = graph.min_cost_flow(0, V - 1, F);
+  cout << (ans.second ? ans.first : -1) << endl;
   return 0;
 }
 ```
@@ -106,9 +80,9 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
     self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Graph/MinimumSpanningAborescense.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
+    raise BundleErrorAt(path, -1, "no such header")
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Datastructure/RadixHeap.hpp: line -1: no such header
 
 ```
 {% endraw %}

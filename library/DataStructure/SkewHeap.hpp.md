@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SkewHeap.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-18 11:50:31+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
@@ -68,17 +68,16 @@ using namespace std;
 #endif
 
 template <typename T>
-struct Op_add {
+struct Op_RaddQ {
   using E = T;
   static E ei() { return 0; }
   static T g(const T &l, const E &r) { return l + r; }
   static E h(const E &l, const E &r) { return l + r; }
 };
 
-template <typename T, typename Op = Op_add<T>, typename Compare = less<T>>
+template <typename T, typename Compare = less<T>, typename Op = Op_RaddQ<T>>
 struct SkewHeap {
   using E = typename Op::E;
-  Compare comp;
   struct Node {
     Node *ch[2];
     T key;
@@ -100,7 +99,7 @@ struct SkewHeap {
     if (!a || !b) return a ? a : b;
     propagate(a);
     propagate(b);
-    if (comp(a->key, b->key)) swap(a, b);
+    if (Compare()(a->key, b->key)) swap(a, b);
     a->ch[1] = merge(b, a->ch[1]);
     swap(a->ch[0], a->ch[1]);
     return a;
@@ -108,7 +107,7 @@ struct SkewHeap {
 
  public:
   /* max heap */
-  SkewHeap(const Compare &c = Compare()) : comp(c), root(nullptr) {}
+  SkewHeap() : root(nullptr) {}
   void push(T key) {
     Node *n = new Node(key, Op::ei());
     root = merge(root, n);
@@ -150,17 +149,16 @@ using namespace std;
 #endif
 
 template <typename T>
-struct Op_add {
+struct Op_RaddQ {
   using E = T;
   static E ei() { return 0; }
   static T g(const T &l, const E &r) { return l + r; }
   static E h(const E &l, const E &r) { return l + r; }
 };
 
-template <typename T, typename Op = Op_add<T>, typename Compare = less<T>>
+template <typename T, typename Compare = less<T>, typename Op = Op_RaddQ<T>>
 struct SkewHeap {
   using E = typename Op::E;
-  Compare comp;
   struct Node {
     Node *ch[2];
     T key;
@@ -182,7 +180,7 @@ struct SkewHeap {
     if (!a || !b) return a ? a : b;
     propagate(a);
     propagate(b);
-    if (comp(a->key, b->key)) swap(a, b);
+    if (Compare()(a->key, b->key)) swap(a, b);
     a->ch[1] = merge(b, a->ch[1]);
     swap(a->ch[0], a->ch[1]);
     return a;
@@ -190,7 +188,7 @@ struct SkewHeap {
 
  public:
   /* max heap */
-  SkewHeap(const Compare &c = Compare()) : comp(c), root(nullptr) {}
+  SkewHeap() : root(nullptr) {}
   void push(T key) {
     Node *n = new Node(key, Op::ei());
     root = merge(root, n);

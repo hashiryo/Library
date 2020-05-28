@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MinimumSpanningAborescense.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-20 15:02:13+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
@@ -59,7 +59,7 @@ layout: default
  * @category グラフ
  * @brief Chu-Liu/Edmonds
  * @brief O(m log n)
- * @brief 返り値:{木の重み,木の各ノードの親(根の親は根自身)}
+ * @brief 返り値:{全域木のコスト総和,全域木に使用する辺}
  */
 
 #ifndef call_from_test
@@ -76,32 +76,31 @@ template <typename cost_t>
 struct MinimumSpanningAborescense {
   struct Edge {
     int src, dst, id;
-    cost_t weight;
-    /* inverse */
-    bool operator<(const Edge &r) const { return this->weight > r.weight; }
+    cost_t cost;
+    bool operator>(const Edge &r) const { return this->cost > r.cost; }
     Edge() {}
-    Edge(int s, int d, int i, int w) : src(s), dst(d), id(i), weight(w) {}
+    Edge(int s, int d, int i, int c) : src(s), dst(d), id(i), cost(c) {}
   };
   struct Op_Edge_add {
     using E = cost_t;
     static E ei() { return 0; }
     static Edge g(const Edge &l, const E &r) {
-      return Edge(l.src, l.dst, l.id, l.weight + r);
+      return Edge(l.src, l.dst, l.id, l.cost + r);
     }
     static E h(const E &l, const E &r) { return l + r; }
   };
 
  private:
   vector<Edge> edges;
-  using Heap = SkewHeap<Edge, Op_Edge_add>;
+  using Heap = SkewHeap<Edge, greater<Edge>, Op_Edge_add>;
   int n;
 
  public:
   MinimumSpanningAborescense(int n) : n(n) {}
-  void add_edge(int src, int dst, cost_t weight) {
-    edges.emplace_back(src, dst, edges.size(), weight);
+  void add_edge(int src, int dst, cost_t cost) {
+    edges.emplace_back(src, dst, edges.size(), cost);
   }
-  pair<cost_t, vector<int>> get_MSA(int root) {
+  pair<cost_t, vector<Edge>> get_MSA(int root) {
     UnionFind uf(n);
     vector<Heap> heap(n);
     for (auto &e : edges) heap[e.dst].push(e);
@@ -115,10 +114,10 @@ struct MinimumSpanningAborescense {
       for (int u = s; seen[u] < 0;) {
         path.push_back(u);
         seen[u] = s;
-        if (heap[u].empty()) return {-1, vector<int>()};
+        if (heap[u].empty()) return {-1, vector<Edge>()};
         Edge min_e = heap[u].top();
-        score += min_e.weight;
-        heap[u].add(-min_e.weight);
+        score += min_e.cost;
+        heap[u].add(-min_e.cost);
         heap[u].pop();
         ei.push_back(min_e.id);
         if (leaf[min_e.dst] == -1) leaf[min_e.dst] = min_e.id;
@@ -145,17 +144,17 @@ struct MinimumSpanningAborescense {
       }
     }
     reverse(ei.begin(), ei.end());
-    par[root] = root;
+    vector<Edge> es;
     for (auto i : ei) {
       if (usede[i]) continue;
-      par[edges[i].dst] = edges[i].src;
+      es.emplace_back(edges[i]);
       int x = leaf[edges[i].dst];
       while (x != i) {
         usede[x] = 1;
         x = paredge[x];
       }
     }
-    return {score, par};
+    return {score, es};
   }
 };
 ```
@@ -165,13 +164,13 @@ struct MinimumSpanningAborescense {
 {% raw %}
 ```cpp
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 172, in bundle
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.2/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 281, in update
-    raise BundleError(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleError: Graph/MinimumSpanningAborescense.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
+    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Graph/MinimumSpanningAborescense.hpp: line 14: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

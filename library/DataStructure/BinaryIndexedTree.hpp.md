@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Binary-Indexed-Tree
+# :question: Binary-Indexed-Tree
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-04 14:35:47+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
+* :x: <a href="../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 
 
@@ -59,7 +59,7 @@ layout: default
 using namespace std;
 #endif
 
-template <typename T = long long>
+template <typename T>
 struct BinaryIndexedTree {
   vector<T> dat;
   BinaryIndexedTree(int n) : dat(n + 1, 0) {}
@@ -104,7 +104,7 @@ struct BinaryIndexedTree {
 using namespace std;
 #endif
 
-template <typename T = long long>
+template <typename T>
 struct BinaryIndexedTree {
   vector<T> dat;
   BinaryIndexedTree(int n) : dat(n + 1, 0) {}

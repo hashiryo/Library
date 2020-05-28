@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/UnionFind_Potential.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-29 01:45:15+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
@@ -58,8 +58,8 @@ layout: default
 using namespace std;
 #endif
 
+template <typename Weight>
 struct UnionFind_Potential {
-  using Weight = long long;
   vector<int> par;
   vector<Weight> val;
   UnionFind_Potential(int size) : par(size, -1), val(size, 0) {}
@@ -103,8 +103,8 @@ struct UnionFind_Potential {
 using namespace std;
 #endif
 
+template <typename Weight>
 struct UnionFind_Potential {
-  using Weight = long long;
   vector<int> par;
   vector<Weight> val;
   UnionFind_Potential(int size) : par(size, -1), val(size, 0) {}

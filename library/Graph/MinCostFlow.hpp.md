@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MinCostFlow.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-20 15:02:13+09:00
+    - Last commit date: 2020-05-29 00:58:18+09:00
 
 
 
@@ -54,14 +54,19 @@ layout: default
  * @brief 負辺除去あり
  * @brief 返り値:{流量f流したときの最小コスト,そもそも流量f流せたか(bool)}
  */
-// verify用: https://codeforces.com/contest/316/problem/C2
+// verify用:
+// https://codeforces.com/contest/316/problem/C2 (Radix-HeapでないとTLEした)
+// https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b (コスト実数)
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
 
-template <typename flow_t, typename cost_t>
+template <typename flow_t, typename cost_t,
+          typename Heap
+          = priority_queue<pair<cost_t, int>, vector<pair<cost_t, int>>,
+                           greater<pair<cost_t, int>>>>
 struct MinCostFlow {
   struct Edge {
     int dst;
@@ -70,73 +75,44 @@ struct MinCostFlow {
     size_t rev;
     bool isrev;
   };
-  struct RadixHeap {
-    static constexpr int bit = sizeof(cost_t) * 8;
-    array<vector<pair<cost_t, int>>, bit> vs;
-    size_t sz;
-    cost_t last;
-    RadixHeap() : sz(0), last(0) {}
-    bool empty() const { return sz == 0; }
-    inline int getbit(int a) const { return a ? bit - __builtin_clz(a) : 0; }
-    inline int getbit(long long a) const {
-      return a ? bit - __builtin_clzll(a) : 0;
-    }
-    void push(cost_t key, int val) {
-      sz++;
-      vs[getbit(key ^ last)].emplace_back(key, val);
-    }
-    pair<cost_t, int> pop() {
-      if (vs[0].empty()) {
-        int idx = 1;
-        while (vs[idx].empty()) idx++;
-        last = min_element(vs[idx].begin(), vs[idx].end())->first;
-        for (auto &p : vs[idx]) vs[getbit(p.first ^ last)].emplace_back(p);
-        vs[idx].clear();
-      }
-      --sz;
-      auto res = vs[0].back();
-      vs[0].pop_back();
-      return res;
-    }
-  };
 
  private:
-  const cost_t COST_MAX = numeric_limits<cost_t>::max() / 2;
+  static constexpr double EPS = 1e-7;
   int n, S, T;
   cost_t neg;
-  vector<vector<Edge>> graph;
+  vector<vector<Edge>> adj;
   vector<flow_t> d;
-  vector<cost_t> p, dist;
-  vector<int> prevv, preve;
+  vector<cost_t> potential, dist;
+  vector<int> prev;
 
  private:
   void dijkstra() {
-    RadixHeap que;
-    dist.assign(n, COST_MAX);
+    Heap que;
+    dist.assign(n, -2);
     dist[S] = 0;
-    que.push(0, S);
+    que.emplace(0, S);
     while (!que.empty()) {
-      auto a = que.pop();
+      auto a = que.top();
+      que.pop();
       int v = a.second;
-      if (v == T) break;
       if (dist[v] < a.first) continue;
-      for (int i = 0; i < graph[v].size(); i++) {
-        Edge &e = graph[v][i];
-        if (e.capacity > 0
-            && dist[e.dst] > dist[v] + e.cost + p[v] - p[e.dst]) {
-          dist[e.dst] = dist[v] + e.cost + p[v] - p[e.dst];
-          prevv[e.dst] = v;
-          preve[e.dst] = i;
-          que.push(dist[e.dst], e.dst);
+      if (v == T) break;
+      for (Edge &e : adj[v]) {
+        cost_t nextcost = e.cost + potential[v] - potential[e.dst];
+        if (e.capacity == 0) continue;
+        if (abs(nextcost) < EPS) nextcost = 0;
+        if ((dist[e.dst] < -1 || dist[e.dst] > dist[v] + nextcost)) {
+          dist[e.dst] = dist[v] + nextcost;
+          prev[e.dst] = e.rev;
+          que.emplace(dist[v] + nextcost, e.dst);
         }
       }
     }
   }
   pair<cost_t, bool> flow(vector<flow_t> d0) {
     cost_t res = 0;
-    p.assign(n, 0);
-    preve.assign(n, -1);
-    prevv.assign(n, -1);
+    potential.assign(n, 0);
+    prev.assign(n, -1);
     flow_t f = 0;
     for (int i = 0; i < d.size(); i++) {
       if (i < d0.size()) d[i] += d0[i];
@@ -147,18 +123,26 @@ struct MinCostFlow {
     }
     while (f > 0) {
       dijkstra();
-      if (dist[T] == COST_MAX) return {0, false};  // no solution
-      for (int v = 0; v < n; v++)
-        if (dist[v] < dist[T]) p[v] += dist[v] - dist[T];
-      flow_t d = f;
-      for (int v = T; v != S; v = prevv[v])
-        d = min(d, graph[prevv[v]][preve[v]].capacity);
-      f -= d;
-      res += d * (p[T] - p[S]);
-      for (int v = T; v != S; v = prevv[v]) {
-        Edge &e = graph[prevv[v]][preve[v]];
-        e.capacity -= d;
-        graph[v][e.rev].capacity += d;
+      if (dist[T] < -1) return {0, false};  // no solution
+      for (int v = 0; v < n; v++) {
+        if (dist[v] > -1 && dist[v] < dist[T] + EPS)
+          potential[v] += dist[v] - dist[T];
+        // if (dist[v] > -1) potential[v] += dist[v];
+      }
+
+      flow_t addflow = f;
+      for (int v = T; v != S;) {
+        Edge &r = adj[v][prev[v]], &e = adj[r.dst][r.rev];
+        addflow = min(addflow, e.capacity);
+        v = r.dst;
+      }
+      f -= addflow;
+      res += addflow * (potential[T] - potential[S]);
+      for (int v = T; v != S;) {
+        Edge &r = adj[v][prev[v]], &e = adj[r.dst][r.rev];
+        e.capacity -= addflow;
+        r.capacity += addflow;
+        v = r.dst;
       }
     }
     return {neg + res, true};
@@ -166,11 +150,11 @@ struct MinCostFlow {
 
  public:
   MinCostFlow(int n_)
-      : n(n_ + 2), S(n_), T(n_ + 1), neg(0), graph(n_ + 2), d(n_ + 2) {}
+      : n(n_ + 2), S(n_), T(n_ + 1), neg(0), adj(n_ + 2), d(n_ + 2) {}
   void add_edge(int src, int dst, flow_t cap, cost_t cost) {
     if (cost >= 0) {
-      graph[src].emplace_back((Edge){dst, cap, cost, graph[dst].size(), 0});
-      graph[dst].emplace_back((Edge){src, 0, -cost, graph[src].size() - 1, 1});
+      adj[src].emplace_back((Edge){dst, cap, cost, adj[dst].size(), 0});
+      adj[dst].emplace_back((Edge){src, 0, -cost, adj[src].size() - 1, 1});
     } else {
       d[src] -= cap;
       d[dst] += cap;
@@ -184,10 +168,10 @@ struct MinCostFlow {
     return flow(d0);
   }
   void output() {
-    for (int i = 0; i < graph.size(); i++)
-      for (auto &e : graph[i]) {
+    for (int i = 0; i < adj.size(); i++)
+      for (auto &e : adj[i]) {
         if (e.isrev) continue;
-        auto &rev_e = graph[e.dst][e.rev];
+        auto &rev_e = adj[e.dst][e.rev];
         cerr << i << "->" << e.dst << " (flow: " << rev_e.capacity << "/"
              << e.capacity + rev_e.capacity << ") cost:" << e.cost << endl;
       }
@@ -208,14 +192,19 @@ struct MinCostFlow {
  * @brief 負辺除去あり
  * @brief 返り値:{流量f流したときの最小コスト,そもそも流量f流せたか(bool)}
  */
-// verify用: https://codeforces.com/contest/316/problem/C2
+// verify用:
+// https://codeforces.com/contest/316/problem/C2 (Radix-HeapでないとTLEした)
+// https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b (コスト実数)
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
 
-template <typename flow_t, typename cost_t>
+template <typename flow_t, typename cost_t,
+          typename Heap
+          = priority_queue<pair<cost_t, int>, vector<pair<cost_t, int>>,
+                           greater<pair<cost_t, int>>>>
 struct MinCostFlow {
   struct Edge {
     int dst;
@@ -224,73 +213,44 @@ struct MinCostFlow {
     size_t rev;
     bool isrev;
   };
-  struct RadixHeap {
-    static constexpr int bit = sizeof(cost_t) * 8;
-    array<vector<pair<cost_t, int>>, bit> vs;
-    size_t sz;
-    cost_t last;
-    RadixHeap() : sz(0), last(0) {}
-    bool empty() const { return sz == 0; }
-    inline int getbit(int a) const { return a ? bit - __builtin_clz(a) : 0; }
-    inline int getbit(long long a) const {
-      return a ? bit - __builtin_clzll(a) : 0;
-    }
-    void push(cost_t key, int val) {
-      sz++;
-      vs[getbit(key ^ last)].emplace_back(key, val);
-    }
-    pair<cost_t, int> pop() {
-      if (vs[0].empty()) {
-        int idx = 1;
-        while (vs[idx].empty()) idx++;
-        last = min_element(vs[idx].begin(), vs[idx].end())->first;
-        for (auto &p : vs[idx]) vs[getbit(p.first ^ last)].emplace_back(p);
-        vs[idx].clear();
-      }
-      --sz;
-      auto res = vs[0].back();
-      vs[0].pop_back();
-      return res;
-    }
-  };
 
  private:
-  const cost_t COST_MAX = numeric_limits<cost_t>::max() / 2;
+  static constexpr double EPS = 1e-7;
   int n, S, T;
   cost_t neg;
-  vector<vector<Edge>> graph;
+  vector<vector<Edge>> adj;
   vector<flow_t> d;
-  vector<cost_t> p, dist;
-  vector<int> prevv, preve;
+  vector<cost_t> potential, dist;
+  vector<int> prev;
 
  private:
   void dijkstra() {
-    RadixHeap que;
-    dist.assign(n, COST_MAX);
+    Heap que;
+    dist.assign(n, -2);
     dist[S] = 0;
-    que.push(0, S);
+    que.emplace(0, S);
     while (!que.empty()) {
-      auto a = que.pop();
+      auto a = que.top();
+      que.pop();
       int v = a.second;
-      if (v == T) break;
       if (dist[v] < a.first) continue;
-      for (int i = 0; i < graph[v].size(); i++) {
-        Edge &e = graph[v][i];
-        if (e.capacity > 0
-            && dist[e.dst] > dist[v] + e.cost + p[v] - p[e.dst]) {
-          dist[e.dst] = dist[v] + e.cost + p[v] - p[e.dst];
-          prevv[e.dst] = v;
-          preve[e.dst] = i;
-          que.push(dist[e.dst], e.dst);
+      if (v == T) break;
+      for (Edge &e : adj[v]) {
+        cost_t nextcost = e.cost + potential[v] - potential[e.dst];
+        if (e.capacity == 0) continue;
+        if (abs(nextcost) < EPS) nextcost = 0;
+        if ((dist[e.dst] < -1 || dist[e.dst] > dist[v] + nextcost)) {
+          dist[e.dst] = dist[v] + nextcost;
+          prev[e.dst] = e.rev;
+          que.emplace(dist[v] + nextcost, e.dst);
         }
       }
     }
   }
   pair<cost_t, bool> flow(vector<flow_t> d0) {
     cost_t res = 0;
-    p.assign(n, 0);
-    preve.assign(n, -1);
-    prevv.assign(n, -1);
+    potential.assign(n, 0);
+    prev.assign(n, -1);
     flow_t f = 0;
     for (int i = 0; i < d.size(); i++) {
       if (i < d0.size()) d[i] += d0[i];
@@ -301,18 +261,26 @@ struct MinCostFlow {
     }
     while (f > 0) {
       dijkstra();
-      if (dist[T] == COST_MAX) return {0, false};  // no solution
-      for (int v = 0; v < n; v++)
-        if (dist[v] < dist[T]) p[v] += dist[v] - dist[T];
-      flow_t d = f;
-      for (int v = T; v != S; v = prevv[v])
-        d = min(d, graph[prevv[v]][preve[v]].capacity);
-      f -= d;
-      res += d * (p[T] - p[S]);
-      for (int v = T; v != S; v = prevv[v]) {
-        Edge &e = graph[prevv[v]][preve[v]];
-        e.capacity -= d;
-        graph[v][e.rev].capacity += d;
+      if (dist[T] < -1) return {0, false};  // no solution
+      for (int v = 0; v < n; v++) {
+        if (dist[v] > -1 && dist[v] < dist[T] + EPS)
+          potential[v] += dist[v] - dist[T];
+        // if (dist[v] > -1) potential[v] += dist[v];
+      }
+
+      flow_t addflow = f;
+      for (int v = T; v != S;) {
+        Edge &r = adj[v][prev[v]], &e = adj[r.dst][r.rev];
+        addflow = min(addflow, e.capacity);
+        v = r.dst;
+      }
+      f -= addflow;
+      res += addflow * (potential[T] - potential[S]);
+      for (int v = T; v != S;) {
+        Edge &r = adj[v][prev[v]], &e = adj[r.dst][r.rev];
+        e.capacity -= addflow;
+        r.capacity += addflow;
+        v = r.dst;
       }
     }
     return {neg + res, true};
@@ -320,11 +288,11 @@ struct MinCostFlow {
 
  public:
   MinCostFlow(int n_)
-      : n(n_ + 2), S(n_), T(n_ + 1), neg(0), graph(n_ + 2), d(n_ + 2) {}
+      : n(n_ + 2), S(n_), T(n_ + 1), neg(0), adj(n_ + 2), d(n_ + 2) {}
   void add_edge(int src, int dst, flow_t cap, cost_t cost) {
     if (cost >= 0) {
-      graph[src].emplace_back((Edge){dst, cap, cost, graph[dst].size(), 0});
-      graph[dst].emplace_back((Edge){src, 0, -cost, graph[src].size() - 1, 1});
+      adj[src].emplace_back((Edge){dst, cap, cost, adj[dst].size(), 0});
+      adj[dst].emplace_back((Edge){src, 0, -cost, adj[src].size() - 1, 1});
     } else {
       d[src] -= cap;
       d[dst] += cap;
@@ -338,10 +306,10 @@ struct MinCostFlow {
     return flow(d0);
   }
   void output() {
-    for (int i = 0; i < graph.size(); i++)
-      for (auto &e : graph[i]) {
+    for (int i = 0; i < adj.size(); i++)
+      for (auto &e : adj[i]) {
         if (e.isrev) continue;
-        auto &rev_e = graph[e.dst][e.rev];
+        auto &rev_e = adj[e.dst][e.rev];
         cerr << i << "->" << e.dst << " (flow: " << rev_e.capacity << "/"
              << e.capacity + rev_e.capacity << ") cost:" << e.cost << endl;
       }
