@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MatchingBipartite.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 20:46:33+09:00
+    - Last commit date: 2020-05-29 23:40:33+09:00
 
 
 * see: <a href="https://snuke.hatenablog.com/entry/2019/05/07/013609">https://snuke.hatenablog.com/entry/2019/05/07/013609</a>
@@ -52,7 +52,7 @@ layout: default
  * @title 最大マッチング(二部グラフ)
  * @category グラフ
  * @brief  O(VE)
- * @brief 速い(O(V√E)並?)
+ * @brief 速い(O(E√V)並?)
  * @brief 返り値:{マッチング数,{左の相方(いないなら-1),右の相方(いないなら-1)}}
  * @see https://snuke.hatenablog.com/entry/2019/05/07/013609
  */
@@ -122,7 +122,7 @@ struct MatchingBipartite {
  * @title 最大マッチング(二部グラフ)
  * @category グラフ
  * @brief  O(VE)
- * @brief 速い(O(V√E)並?)
+ * @brief 速い(O(E√V)並?)
  * @brief 返り値:{マッチング数,{左の相方(いないなら-1),右の相方(いないなら-1)}}
  * @see https://snuke.hatenablog.com/entry/2019/05/07/013609
  */

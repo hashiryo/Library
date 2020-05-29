@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/bipartitematching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 20:46:33+09:00
+    - Last commit date: 2020-05-29 23:40:33+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/bipartitematching">https://judge.yosupo.jp/problem/bipartitematching</a>
@@ -94,7 +94,7 @@ using namespace std;
  * @title 最大マッチング(二部グラフ)
  * @category グラフ
  * @brief  O(VE)
- * @brief 速い(O(V√E)並?)
+ * @brief 速い(O(E√V)並?)
  * @brief 返り値:{マッチング数,{左の相方(いないなら-1),右の相方(いないなら-1)}}
  * @see https://snuke.hatenablog.com/entry/2019/05/07/013609
  */
