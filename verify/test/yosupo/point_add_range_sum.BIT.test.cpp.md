@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/point_add_range_sum.BIT.test.cpp
+# :heavy_check_mark: test/yosupo/point_add_range_sum.BIT.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_add_range_sum.BIT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 00:58:18+09:00
+    - Last commit date: 2020-05-29 12:06:16+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="../../../library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 
 ## Code
@@ -61,7 +61,7 @@ signed main() {
   ios::sync_with_stdio(0);
   int N, Q;
   cin >> N >> Q;
-  BinaryIndexedTree bit(N);
+  BinaryIndexedTree<long long> bit(N);
   for (int i = 0; i < N; i++) {
     long long a;
     cin >> a;
@@ -136,7 +136,7 @@ signed main() {
   ios::sync_with_stdio(0);
   int N, Q;
   cin >> N >> Q;
-  BinaryIndexedTree bit(N);
+  BinaryIndexedTree<long long> bit(N);
   for (int i = 0; i < N; i++) {
     long long a;
     cin >> a;

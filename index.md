@@ -50,7 +50,7 @@ layout: default
 
 ### データ構造
 
-* :question: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
@@ -66,6 +66,7 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/RedBlackTree_Persistent.hpp.html">赤黒木(永続)</a>
 * :heavy_check_mark: <a href="library/DataStructure/RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
+* :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Dual.hpp.html">Segment-Tree(双対)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
@@ -127,6 +128,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_F.test.cpp.html">test/aoj/DPL_5_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_D.SegTree_Dual.test.cpp.html">test/aoj/DSL_2_D.SegTree_Dual.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_F.SegTree_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTree_Lazy.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
@@ -160,7 +162,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/persistent_queue.RBTP.test.cpp.html">test/yosupo/persistent_queue.RBTP.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/persistent_queue.RBTPL.test.cpp.html">test/yosupo/persistent_queue.RBTPL.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>
-* :x: <a href="verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
