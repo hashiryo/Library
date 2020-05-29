@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/DSL_2_F.SegTest_Lazy.test.cpp
+# :heavy_check_mark: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_F.SegTest_Lazy.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 00:58:18+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_F.SegTree_Lazy.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-05-29 12:03:39+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
@@ -93,7 +93,7 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/DSL_2_F.SegTest_Lazy.test.cpp"
+#line 1 "test/aoj/DSL_2_F.SegTree_Lazy.test.cpp"
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
 
@@ -234,7 +234,7 @@ struct SegmentTree_Lazy {
     return -1;
   }
 };
-#line 9 "test/aoj/DSL_2_F.SegTest_Lazy.test.cpp"
+#line 9 "test/aoj/DSL_2_F.SegTree_Lazy.test.cpp"
 #undef call_from_test
 
 struct RupdQ_RminQ {

@@ -127,7 +127,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_F.test.cpp.html">test/aoj/DPL_5_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_F.SegTest_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTest_Lazy.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_F.SegTree_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTree_Lazy.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>

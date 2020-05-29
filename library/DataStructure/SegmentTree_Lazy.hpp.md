@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/DSL_2_F.SegTest_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTest_Lazy.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/DSL_2_F.SegTree_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTree_Lazy.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp.html">test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp</a>
 
 
