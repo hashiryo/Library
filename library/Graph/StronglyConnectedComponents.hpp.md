@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/StronglyConnectedComponents.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-14 17:58:05+09:00
+    - Last commit date: 2020-05-29 20:46:33+09:00
 
 
 
@@ -57,7 +57,7 @@ layout: default
  * @title 強連結成分分解
  * @category グラフ
  * @brief Gabow
- * @brief O(n + m)
+ * @brief O(V + E)
  * @brief 返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
  */
 
@@ -98,7 +98,7 @@ struct StronglyConnectedComponents {
     for (int u = 0; u < n; ++u)
       if (!I[u]) dfs(u);
     for (int u = 0; u < n; ++u) I[u] -= n + 1;
-    return {scc, I};
+    return make_pair(scc, I);
   }
 };
 
@@ -113,7 +113,7 @@ struct StronglyConnectedComponents {
  * @title 強連結成分分解
  * @category グラフ
  * @brief Gabow
- * @brief O(n + m)
+ * @brief O(V + E)
  * @brief 返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
  */
 
@@ -154,7 +154,7 @@ struct StronglyConnectedComponents {
     for (int u = 0; u < n; ++u)
       if (!I[u]) dfs(u);
     for (int u = 0; u < n; ++u) I[u] -= n + 1;
-    return {scc, I};
+    return make_pair(scc, I);
   }
 };
 

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/scc.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-14 17:58:05+09:00
+    - Last commit date: 2020-05-29 20:46:33+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/scc">https://judge.yosupo.jp/problem/scc</a>
@@ -94,7 +94,7 @@ using namespace std;
  * @title 強連結成分分解
  * @category グラフ
  * @brief Gabow
- * @brief O(n + m)
+ * @brief O(V + E)
  * @brief 返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
  */
 
@@ -135,7 +135,7 @@ struct StronglyConnectedComponents {
     for (int u = 0; u < n; ++u)
       if (!I[u]) dfs(u);
     for (int u = 0; u < n; ++u) I[u] -= n + 1;
-    return {scc, I};
+    return make_pair(scc, I);
   }
 };
 #line 8 "test/yosupo/scc.test.cpp"

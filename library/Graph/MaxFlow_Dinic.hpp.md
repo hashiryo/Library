@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MaxFlow_Dinic.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-20 14:20:17+09:00
+    - Last commit date: 2020-05-29 20:46:33+09:00
 
 
 
@@ -50,11 +50,12 @@ layout: default
 /**
  * @title 最大流(Dinic)
  * @category グラフ
- * @brief  O(n^2 m)
+ * @brief  O(V^2 E)
  * @brief link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
  * @brief cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
  */
 
+// 最小流量制限付き最大流 https://snuke.hatenablog.com/entry/2016/07/10/043918
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
@@ -176,11 +177,12 @@ struct MaxFlow_Dinic {
 /**
  * @title 最大流(Dinic)
  * @category グラフ
- * @brief  O(n^2 m)
+ * @brief  O(V^2 E)
  * @brief link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
  * @brief cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
  */
 
+// 最小流量制限付き最大流 https://snuke.hatenablog.com/entry/2016/07/10/043918
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
