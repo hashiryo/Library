@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/LinkCutTree_Monoid.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-04 14:35:47+09:00
+    - Last commit date: 2020-05-29 15:26:05+09:00
 
 
 
@@ -65,7 +65,7 @@ struct LinkCutTree_Monoid {
     Node *ch[2], *par;
     bool rev;
     T val, dat, rdat;
-    Node() : rev(false), val(M::ti()), dat(M::ti()), rdat(M::ti()) {
+    Node(T init = M::ti()) : rev(false), val(init), dat(init), rdat(init) {
       ch[0] = ch[1] = par = nullptr;
     }
   };
@@ -142,7 +142,7 @@ struct LinkCutTree_Monoid {
   vector<Node> ns;
 
  public:
-  LinkCutTree_Monoid(int n) : ns(n) {}
+  LinkCutTree_Monoid(int n, T init = M::ti()) : ns(n, init) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);
@@ -208,7 +208,7 @@ struct LinkCutTree_Monoid {
     Node *ch[2], *par;
     bool rev;
     T val, dat, rdat;
-    Node() : rev(false), val(M::ti()), dat(M::ti()), rdat(M::ti()) {
+    Node(T init = M::ti()) : rev(false), val(init), dat(init), rdat(init) {
       ch[0] = ch[1] = par = nullptr;
     }
   };
@@ -285,7 +285,7 @@ struct LinkCutTree_Monoid {
   vector<Node> ns;
 
  public:
-  LinkCutTree_Monoid(int n) : ns(n) {}
+  LinkCutTree_Monoid(int n, T init = M::ti()) : ns(n, init) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);

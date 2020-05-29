@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-04 14:51:32+09:00
+    - Last commit date: 2020-05-29 15:26:05+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite">https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite</a>
@@ -141,7 +141,7 @@ struct LinkCutTree_Monoid {
     Node *ch[2], *par;
     bool rev;
     T val, dat, rdat;
-    Node() : rev(false), val(M::ti()), dat(M::ti()), rdat(M::ti()) {
+    Node(T init = M::ti()) : rev(false), val(init), dat(init), rdat(init) {
       ch[0] = ch[1] = par = nullptr;
     }
   };
@@ -218,7 +218,7 @@ struct LinkCutTree_Monoid {
   vector<Node> ns;
 
  public:
-  LinkCutTree_Monoid(int n) : ns(n) {}
+  LinkCutTree_Monoid(int n, T init = M::ti()) : ns(n, init) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);

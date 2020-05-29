@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MinimumSpanningTree_Kruskal.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 00:58:18+09:00
+    - Last commit date: 2020-05-29 15:26:05+09:00
 
 
 
@@ -43,6 +43,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/test/aoj/2559.LCT_Dual.test.cpp.html">test/aoj/2559.LCT_Dual.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
 
 
@@ -79,6 +80,8 @@ struct MinimumSpanningTree_Kruskal {
 
  private:
   int n;
+
+ public:
   vector<Edge> edges;
 
  public:
@@ -99,6 +102,7 @@ struct MinimumSpanningTree_Kruskal {
     return {total, es};
   }
 };
+
 ```
 {% endraw %}
 

@@ -58,9 +58,10 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 * :heavy_check_mark: <a href="library/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
 * :heavy_check_mark: <a href="library/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
+* :heavy_check_mark: <a href="library/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
 * :heavy_check_mark: <a href="library/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/DataStructure/PersistentArray.hpp.html">永続配列</a>
-* :warning: <a href="library/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
+* :heavy_check_mark: <a href="library/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
 * :heavy_check_mark: <a href="library/DataStructure/RedBlackTree.hpp.html">赤黒木</a>
 * :heavy_check_mark: <a href="library/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/DataStructure/RedBlackTree_Persistent.hpp.html">赤黒木(永続)</a>
@@ -113,6 +114,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2450.LCT.test.cpp.html">test/aoj/2450.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2559.LCT_Dual.test.cpp.html">test/aoj/2559.LCT_Dual.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
@@ -136,7 +138,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>

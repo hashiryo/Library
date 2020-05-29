@@ -38,6 +38,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
 
 

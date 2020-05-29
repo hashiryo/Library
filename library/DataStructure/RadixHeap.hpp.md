@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: Radix-Heap
+# :heavy_check_mark: Radix-Heap
 
 <a href="../../index.html">Back to top page</a>
 
@@ -35,6 +35,11 @@ layout: default
 
 
 * see: <a href="https://github.com/iwiwi/radix-heap/blob/master/README_ja.md">https://github.com/iwiwi/radix-heap/blob/master/README_ja.md</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
 
 
 ## Code
