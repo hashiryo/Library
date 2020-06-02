@@ -46,7 +46,7 @@ layout: default
 * :heavy_check_mark: <a href="library/Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
 * :heavy_check_mark: <a href="library/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 * :heavy_check_mark: <a href="library/Graph/Tree_DP.hpp.html">木DP</a>
-* :question: <a href="library/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
+* :heavy_check_mark: <a href="library/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
 
 
 <div id="c1c7278649b583761cecd13e0628181d"></div>
@@ -60,7 +60,7 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 * :heavy_check_mark: <a href="library/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 * :heavy_check_mark: <a href="library/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
-* :question: <a href="library/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
+* :heavy_check_mark: <a href="library/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
 * :heavy_check_mark: <a href="library/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
 * :heavy_check_mark: <a href="library/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/DataStructure/PersistentArray.hpp.html">永続配列</a>
@@ -186,7 +186,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/general_matching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-02 14:58:00+09:00
+    - Last commit date: 2020-06-02 18:22:22+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/general_matching">https://judge.yosupo.jp/problem/general_matching</a>
@@ -182,7 +182,7 @@ struct MatchingGeneral {
 
  public:
   MatchingGeneral(int n)
-      : adj(n), n(n), res(0), mate(n, -1), idx(n, -1), p(n), es(n) {}
+      : n(n), res(0), adj(n), mate(n, -1), idx(n, -1), p(n), es(n) {}
   void add_edge(int u, int v) {
     adj[u].emplace_back(v);
     adj[v].emplace_back(u);
