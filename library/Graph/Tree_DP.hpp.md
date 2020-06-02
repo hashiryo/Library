@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/Tree_DP.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 20:46:33+09:00
+    - Last commit date: 2020-06-02 14:58:00+09:00
 
 
 * see: <a href="https://ei1333.hateblo.jp/entry/2018/12/21/004022">https://ei1333.hateblo.jp/entry/2018/12/21/004022</a>
@@ -74,7 +74,7 @@ struct Tree_DP {
   using G = function<T(T, E)>;
 
  private:
-  vector<vector<Edge>> graph;
+  vector<vector<Edge>> adj;
   vector<T> subdp, dp;
   const T init;
   const F f;
@@ -82,7 +82,7 @@ struct Tree_DP {
 
  private:
   void dfs_sub(int idx, int par) {
-    for (auto &e : graph[idx]) {
+    for (auto &e : adj[idx]) {
       if (e.to == par) continue;
       dfs_sub(e.to, idx);
       subdp[idx] = f(subdp[idx], g(subdp[e.to], e.data));
@@ -91,16 +91,16 @@ struct Tree_DP {
 
   void dfs_all(int idx, int par, const T &top) {
     T buff{init};
-    for (int i = 0; i < (int)graph[idx].size(); i++) {
-      auto &e = graph[idx][i];
+    for (int i = 0; i < (int)adj[idx].size(); i++) {
+      auto &e = adj[idx][i];
       e.ndp = buff;
       e.dp = g(par == e.to ? top : subdp[e.to], e.data);
       buff = f(buff, e.dp);
     }
     dp[idx] = buff;
     buff = init;
-    for (int i = (int)graph[idx].size() - 1; i >= 0; i--) {
-      auto &e = graph[idx][i];
+    for (int i = (int)adj[idx].size() - 1; i >= 0; i--) {
+      auto &e = adj[idx][i];
       if (e.to != par) dfs_all(e.to, idx, f(e.ndp, buff));
       e.ndp = f(e.ndp, buff);
       buff = f(buff, e.dp);
@@ -111,10 +111,10 @@ struct Tree_DP {
   Tree_DP(
       int V, const F &f, T init,
       const G &g = [](const T &dp, const E &dat) { return dp; })
-      : graph(V), f(f), g(g), init(init), subdp(V, init), dp(V, init) {}
+      : adj(V), f(f), g(g), init(init), subdp(V, init), dp(V, init) {}
 
   void add_edge(int src, int dst, E d = E()) {
-    graph[src].emplace_back((Edge){dst, d, init, init});
+    adj[src].emplace_back((Edge){dst, d, init, init});
   }
 
   T run(int root) {
@@ -159,7 +159,7 @@ struct Tree_DP {
   using G = function<T(T, E)>;
 
  private:
-  vector<vector<Edge>> graph;
+  vector<vector<Edge>> adj;
   vector<T> subdp, dp;
   const T init;
   const F f;
@@ -167,7 +167,7 @@ struct Tree_DP {
 
  private:
   void dfs_sub(int idx, int par) {
-    for (auto &e : graph[idx]) {
+    for (auto &e : adj[idx]) {
       if (e.to == par) continue;
       dfs_sub(e.to, idx);
       subdp[idx] = f(subdp[idx], g(subdp[e.to], e.data));
@@ -176,16 +176,16 @@ struct Tree_DP {
 
   void dfs_all(int idx, int par, const T &top) {
     T buff{init};
-    for (int i = 0; i < (int)graph[idx].size(); i++) {
-      auto &e = graph[idx][i];
+    for (int i = 0; i < (int)adj[idx].size(); i++) {
+      auto &e = adj[idx][i];
       e.ndp = buff;
       e.dp = g(par == e.to ? top : subdp[e.to], e.data);
       buff = f(buff, e.dp);
     }
     dp[idx] = buff;
     buff = init;
-    for (int i = (int)graph[idx].size() - 1; i >= 0; i--) {
-      auto &e = graph[idx][i];
+    for (int i = (int)adj[idx].size() - 1; i >= 0; i--) {
+      auto &e = adj[idx][i];
       if (e.to != par) dfs_all(e.to, idx, f(e.ndp, buff));
       e.ndp = f(e.ndp, buff);
       buff = f(buff, e.dp);
@@ -196,10 +196,10 @@ struct Tree_DP {
   Tree_DP(
       int V, const F &f, T init,
       const G &g = [](const T &dp, const E &dat) { return dp; })
-      : graph(V), f(f), g(g), init(init), subdp(V, init), dp(V, init) {}
+      : adj(V), f(f), g(g), init(init), subdp(V, init), dp(V, init) {}
 
   void add_edge(int src, int dst, E d = E()) {
-    graph[src].emplace_back((Edge){dst, d, init, init});
+    adj[src].emplace_back((Edge){dst, d, init, init});
   }
 
   T run(int root) {

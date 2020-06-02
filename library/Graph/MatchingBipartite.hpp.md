@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MatchingBipartite.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 23:40:33+09:00
+    - Last commit date: 2020-06-02 14:58:00+09:00
 
 
 * see: <a href="https://snuke.hatenablog.com/entry/2019/05/07/013609">https://snuke.hatenablog.com/entry/2019/05/07/013609</a>
@@ -64,10 +64,10 @@ using namespace std;
 #endif
 
 struct MatchingBipartite {
-  vector<vector<int>> to;
+  vector<vector<int>> adj;
   int n, m;
-  MatchingBipartite(int n, int m) : to(n), n(n), m(m) {}
-  void add_edge(int l, int r) { to[l].push_back(r); }
+  MatchingBipartite(int n, int m) : adj(n), n(n), m(m) {}
+  void add_edge(int l, int r) { adj[l].push_back(r); }
   pair<int, pair<vector<int>, vector<int>>> get_matching() {
     vector<int> pre(n, -1), root(n, -1);
     vector<int> leftmate(n, -1), rightmate(m, -1);
@@ -86,8 +86,8 @@ struct MatchingBipartite {
         int v = s.front();
         s.pop();
         if (leftmate[root[v]] != -1) continue;
-        for (int i = 0; i < (int)to[v].size(); ++i) {
-          int u = to[v][i];
+        for (int i = 0; i < (int)adj[v].size(); ++i) {
+          int u = adj[v][i];
           if (rightmate[u] == -1) {
             while (u != -1) {
               rightmate[u] = v;
@@ -134,10 +134,10 @@ using namespace std;
 #endif
 
 struct MatchingBipartite {
-  vector<vector<int>> to;
+  vector<vector<int>> adj;
   int n, m;
-  MatchingBipartite(int n, int m) : to(n), n(n), m(m) {}
-  void add_edge(int l, int r) { to[l].push_back(r); }
+  MatchingBipartite(int n, int m) : adj(n), n(n), m(m) {}
+  void add_edge(int l, int r) { adj[l].push_back(r); }
   pair<int, pair<vector<int>, vector<int>>> get_matching() {
     vector<int> pre(n, -1), root(n, -1);
     vector<int> leftmate(n, -1), rightmate(m, -1);
@@ -156,8 +156,8 @@ struct MatchingBipartite {
         int v = s.front();
         s.pop();
         if (leftmate[root[v]] != -1) continue;
-        for (int i = 0; i < (int)to[v].size(); ++i) {
-          int u = to[v][i];
+        for (int i = 0; i < (int)adj[v].size(); ++i) {
+          int u = adj[v][i];
           if (rightmate[u] == -1) {
             while (u != -1) {
               rightmate[u] = v;
