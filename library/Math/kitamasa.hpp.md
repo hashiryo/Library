@@ -25,27 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 線形漸化式の高速計算
+# :question: 線形漸化式の高速計算
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-14 17:58:05+09:00
+    - Last commit date: 2020-06-19 17:39:38+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 
 ## Code
@@ -59,6 +59,10 @@ layout: default
  * @brief O(NlogNlogk)
  */
 
+// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]
+// b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)
+// calc b[k]
+
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
@@ -67,10 +71,6 @@ using namespace std;
 #include "Math/FormalPowerSeries.hpp"
 #undef call_from_test
 #endif
-
-// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]
-// b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)
-// calc b[k]
 
 template <class Modint>
 Modint kitamasa(const vector<Modint> &c, const vector<Modint> &a, uint64_t k) {
@@ -117,7 +117,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Math/kitamasa.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Math/kitamasa.hpp: line 16: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-10 19:44:41+09:00
+    - Last commit date: 2020-06-19 17:39:38+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/24/031413">https://min-25.hatenablog.com/entry/2015/04/24/031413</a>
@@ -41,7 +41,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="../../../library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 
 
@@ -153,7 +153,7 @@ template <class Modint>
 struct Combination {
   static vector<Modint> _fact, _finv, _inv;
   static void init(int sz) {
-    int n = min(sz, Modint::modulo() - 1);
+    int n = min(2 * sz, Modint::modulo() - 1);
     _fact.resize(n + 1), _finv.resize(n + 1), _inv.resize(n + 1);
     for (int i = 0; i <= n; ++i) _fact[i] = i ? Modint(i) * _fact[i - 1] : 1;
     _finv[n] = _fact[n].inverse();

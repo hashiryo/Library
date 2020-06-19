@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/Combination.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-10 19:44:41+09:00
+    - Last commit date: 2020-06-19 17:39:38+09:00
 
 
 
@@ -65,7 +65,7 @@ template <class Modint>
 struct Combination {
   static vector<Modint> _fact, _finv, _inv;
   static void init(int sz) {
-    int n = min(sz, Modint::modulo() - 1);
+    int n = min(2 * sz, Modint::modulo() - 1);
     _fact.resize(n + 1), _finv.resize(n + 1), _inv.resize(n + 1);
     for (int i = 0; i <= n; ++i) _fact[i] = i ? Modint(i) * _fact[i - 1] : 1;
     _finv[n] = _fact[n].inverse();
@@ -109,7 +109,7 @@ template <class Modint>
 struct Combination {
   static vector<Modint> _fact, _finv, _inv;
   static void init(int sz) {
-    int n = min(sz, Modint::modulo() - 1);
+    int n = min(2 * sz, Modint::modulo() - 1);
     _fact.resize(n + 1), _finv.resize(n + 1), _inv.resize(n + 1);
     for (int i = 0; i <= n; ++i) _fact[i] = i ? Modint(i) * _fact[i - 1] : 1;
     _finv[n] = _fact[n].inverse();

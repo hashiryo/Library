@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
 
 
 ## Verified with
