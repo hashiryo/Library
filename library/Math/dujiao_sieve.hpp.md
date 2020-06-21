@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/dujiao_sieve.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 00:42:03+09:00
+    - Last commit date: 2020-06-22 07:59:43+09:00
 
 
 * see: <a href="https://maspypy.com/yukicoder-no-886-direct">https://maspypy.com/yukicoder-no-886-direct</a>
@@ -82,21 +82,19 @@ using namespace std;
 template <typename T, typename G, typename A>
 T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
                map<pair<int64_t, int64_t>, T> &memo, int k = 1) {
-    if(memo.count(make_pair(H, W)))
-        return memo[make_pair(H, W)];
-    T ret = g(H, W);
-    int64_t d = 2;
-    while(true) {
-        int64_t Hd = H / pow(d, k), Wd = W / pow(d, k);
-        if(!Hd || !Wd)
-            break;
-        int64_t next_d =
-            min(pow(1. * H / Hd, 1. / k), pow(1. * W / Wd, 1. / k)) + 1;
-        T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);
-        ret -= r * (b(next_d - 1) - b(d - 1));
-        d = next_d;
-    }
-    return memo[make_pair(H, W)] = ret;
+  if (memo.count(make_pair(H, W))) return memo[make_pair(H, W)];
+  T ret = g(H, W);
+  int64_t d = 2;
+  while (true) {
+    int64_t Hd = H / pow(d, k), Wd = W / pow(d, k);
+    if (!Hd || !Wd) break;
+    int64_t next_d
+        = min(pow(1. * H / Hd, 1. / k), pow(1. * W / Wd, 1. / k)) + 1;
+    T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);
+    ret -= r * (b(next_d - 1) - b(d - 1));
+    d = next_d;
+  }
+  return memo[make_pair(H, W)] = ret;
 }
 
 ```
@@ -134,21 +132,19 @@ using namespace std;
 template <typename T, typename G, typename A>
 T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
                map<pair<int64_t, int64_t>, T> &memo, int k = 1) {
-    if(memo.count(make_pair(H, W)))
-        return memo[make_pair(H, W)];
-    T ret = g(H, W);
-    int64_t d = 2;
-    while(true) {
-        int64_t Hd = H / pow(d, k), Wd = W / pow(d, k);
-        if(!Hd || !Wd)
-            break;
-        int64_t next_d =
-            min(pow(1. * H / Hd, 1. / k), pow(1. * W / Wd, 1. / k)) + 1;
-        T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);
-        ret -= r * (b(next_d - 1) - b(d - 1));
-        d = next_d;
-    }
-    return memo[make_pair(H, W)] = ret;
+  if (memo.count(make_pair(H, W))) return memo[make_pair(H, W)];
+  T ret = g(H, W);
+  int64_t d = 2;
+  while (true) {
+    int64_t Hd = H / pow(d, k), Wd = W / pow(d, k);
+    if (!Hd || !Wd) break;
+    int64_t next_d
+        = min(pow(1. * H / Hd, 1. / k), pow(1. * W / Wd, 1. / k)) + 1;
+    T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);
+    ret -= r * (b(next_d - 1) - b(d - 1));
+    d = next_d;
+  }
+  return memo[make_pair(H, W)] = ret;
 }
 
 ```

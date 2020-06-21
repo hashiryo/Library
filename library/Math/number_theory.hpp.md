@@ -31,10 +31,10 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/number_theory.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-19 17:39:38+09:00
+    - Last commit date: 2020-06-22 07:59:43+09:00
 
 
-* see: <a href=""></a>
+* see: <a href="https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5">https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5</a>
 * see: <a href="https://en.wikipedia.org/wiki/Dirichlet_convolution">https://en.wikipedia.org/wiki/Dirichlet_convolution</a>
 
 
@@ -56,8 +56,7 @@ layout: default
  * @brief 約数や倍数についてのゼータ変換やメビウス変換
  * @brief をもとに数論的関数やgcd畳み込みなどを実現
  * @brief O(N log log N)
- * @see
- * https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5#_reference-6897e76b2cb2ee712901
+ * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */
 
@@ -182,8 +181,7 @@ static vector<T> gcd_convolution(vector<T> a, vector<T> b) {
  * @brief 約数や倍数についてのゼータ変換やメビウス変換
  * @brief をもとに数論的関数やgcd畳み込みなどを実現
  * @brief O(N log log N)
- * @see
- * https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5#_reference-6897e76b2cb2ee712901
+ * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */
 

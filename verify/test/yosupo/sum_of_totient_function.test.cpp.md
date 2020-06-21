@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_totient_function.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 00:42:03+09:00
+    - Last commit date: 2020-06-22 07:59:43+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_totient_function">https://judge.yosupo.jp/problem/sum_of_totient_function</a>
@@ -61,24 +61,22 @@ using namespace std;
 #undef call_from_test
 
 void yosupo_phi() {
-    using Mint = ModInt<998244353>;
-    using namespace number_theory;
-    const int M = 1 << (200 / 9);
-    init(M);
-    auto phi = get_phi<Mint>(M);
-    for(int i = 2; i < M; i++)
-        phi[i] += phi[i - 1];
-    auto g = [](int64_t N, int64_t dummy) {
-        return Mint(N) * Mint(N + 1) / Mint(2);
-    };
-    auto b = [](int64_t d) { return Mint(d); };
-    map<pair<int64_t, int64_t>, Mint> memo;
-    for(int i = 1; i < M; i++)
-        memo[make_pair(i, i)] = phi[i];
-    int64_t N;
-    cin >> N;
-    Mint ans = dujiao_sieve<Mint>(N, N, g, b, memo);
-    cout << ans << endl;
+  using Mint = ModInt<998244353>;
+  using namespace number_theory;
+  const int M = 1 << (200 / 9);
+  init(M);
+  auto phi = get_phi<Mint>(M);
+  for (int i = 2; i < M; i++) phi[i] += phi[i - 1];
+  auto g = [](int64_t N, int64_t dummy) {
+    return Mint(N) * Mint(N + 1) / Mint(2);
+  };
+  auto b = [](int64_t d) { return Mint(d); };
+  map<pair<int64_t, int64_t>, Mint> memo;
+  for (int i = 1; i < M; i++) memo[make_pair(i, i)] = phi[i];
+  int64_t N;
+  cin >> N;
+  Mint ans = dujiao_sieve<Mint>(N, N, g, b, memo);
+  cout << ans << endl;
 }
 ```
 {% endraw %}
@@ -178,21 +176,19 @@ using namespace std;
 template <typename T, typename G, typename A>
 T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
                map<pair<int64_t, int64_t>, T> &memo, int k = 1) {
-    if(memo.count(make_pair(H, W)))
-        return memo[make_pair(H, W)];
-    T ret = g(H, W);
-    int64_t d = 2;
-    while(true) {
-        int64_t Hd = H / pow(d, k), Wd = W / pow(d, k);
-        if(!Hd || !Wd)
-            break;
-        int64_t next_d =
-            min(pow(1. * H / Hd, 1. / k), pow(1. * W / Wd, 1. / k)) + 1;
-        T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);
-        ret -= r * (b(next_d - 1) - b(d - 1));
-        d = next_d;
-    }
-    return memo[make_pair(H, W)] = ret;
+  if (memo.count(make_pair(H, W))) return memo[make_pair(H, W)];
+  T ret = g(H, W);
+  int64_t d = 2;
+  while (true) {
+    int64_t Hd = H / pow(d, k), Wd = W / pow(d, k);
+    if (!Hd || !Wd) break;
+    int64_t next_d
+        = min(pow(1. * H / Hd, 1. / k), pow(1. * W / Wd, 1. / k)) + 1;
+    T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);
+    ret -= r * (b(next_d - 1) - b(d - 1));
+    d = next_d;
+  }
+  return memo[make_pair(H, W)] = ret;
 }
 #line 1 "Math/number_theory.hpp"
 /**
@@ -201,13 +197,12 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
  * @brief 約数や倍数についてのゼータ変換やメビウス変換
  * @brief をもとに数論的関数やgcd畳み込みなどを実現
  * @brief O(N log log N)
- * @see
- * https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5#_reference-6897e76b2cb2ee712901
+ * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */
 
 #ifndef call_from_test
-#line 14 "Math/number_theory.hpp"
+#line 13 "Math/number_theory.hpp"
 using namespace std;
 #endif
 
@@ -317,24 +312,22 @@ static vector<T> gcd_convolution(vector<T> a, vector<T> b) {
 #undef call_from_test
 
 void yosupo_phi() {
-    using Mint = ModInt<998244353>;
-    using namespace number_theory;
-    const int M = 1 << (200 / 9);
-    init(M);
-    auto phi = get_phi<Mint>(M);
-    for(int i = 2; i < M; i++)
-        phi[i] += phi[i - 1];
-    auto g = [](int64_t N, int64_t dummy) {
-        return Mint(N) * Mint(N + 1) / Mint(2);
-    };
-    auto b = [](int64_t d) { return Mint(d); };
-    map<pair<int64_t, int64_t>, Mint> memo;
-    for(int i = 1; i < M; i++)
-        memo[make_pair(i, i)] = phi[i];
-    int64_t N;
-    cin >> N;
-    Mint ans = dujiao_sieve<Mint>(N, N, g, b, memo);
-    cout << ans << endl;
+  using Mint = ModInt<998244353>;
+  using namespace number_theory;
+  const int M = 1 << (200 / 9);
+  init(M);
+  auto phi = get_phi<Mint>(M);
+  for (int i = 2; i < M; i++) phi[i] += phi[i - 1];
+  auto g = [](int64_t N, int64_t dummy) {
+    return Mint(N) * Mint(N + 1) / Mint(2);
+  };
+  auto b = [](int64_t d) { return Mint(d); };
+  map<pair<int64_t, int64_t>, Mint> memo;
+  for (int i = 1; i < M; i++) memo[make_pair(i, i)] = phi[i];
+  int64_t N;
+  cin >> N;
+  Mint ans = dujiao_sieve<Mint>(N, N, g, b, memo);
+  cout << ans << endl;
 }
 
 ```
