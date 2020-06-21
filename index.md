@@ -89,14 +89,14 @@ layout: default
 * :heavy_check_mark: <a href="library/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :heavy_check_mark: <a href="library/Math/Matrix.hpp.html">行列</a>
 * :heavy_check_mark: <a href="library/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
-* :question: <a href="library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="library/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="library/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :heavy_check_mark: <a href="library/Math/TwoSatisfiability.hpp.html">2-SAT</a>
 * :heavy_check_mark: <a href="library/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
-* :question: <a href="library/Math/dujiao_sieve.hpp.html">杜教筛</a>
+* :heavy_check_mark: <a href="library/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :heavy_check_mark: <a href="library/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
 * :heavy_check_mark: <a href="library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
-* :question: <a href="library/Math/number_theory.hpp.html">数論</a>
+* :heavy_check_mark: <a href="library/Math/number_theory.hpp.html">数論</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -186,7 +186,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
-* :x: <a href="verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>

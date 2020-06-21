@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/sum_of_totient_function.test.cpp
+# :heavy_check_mark: test/yosupo/sum_of_totient_function.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_totient_function.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 07:59:43+09:00
+    - Last commit date: 2020-06-22 08:25:52+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_totient_function">https://judge.yosupo.jp/problem/sum_of_totient_function</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :question: <a href="../../../library/Math/dujiao_sieve.hpp.html">杜教筛</a>
-* :question: <a href="../../../library/Math/number_theory.hpp.html">数論</a>
+* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/Math/dujiao_sieve.hpp.html">杜教筛</a>
+* :heavy_check_mark: <a href="../../../library/Math/number_theory.hpp.html">数論</a>
 
 
 ## Code
@@ -60,7 +60,9 @@ using namespace std;
 #include "Math/number_theory.hpp"
 #undef call_from_test
 
-void yosupo_phi() {
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(false);
   using Mint = ModInt<998244353>;
   using namespace number_theory;
   const int M = 1 << (200 / 9);
@@ -77,6 +79,7 @@ void yosupo_phi() {
   cin >> N;
   Mint ans = dujiao_sieve<Mint>(N, N, g, b, memo);
   cout << ans << endl;
+  return 0;
 }
 ```
 {% endraw %}
@@ -311,7 +314,9 @@ static vector<T> gcd_convolution(vector<T> a, vector<T> b) {
 #line 10 "test/yosupo/sum_of_totient_function.test.cpp"
 #undef call_from_test
 
-void yosupo_phi() {
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(false);
   using Mint = ModInt<998244353>;
   using namespace number_theory;
   const int M = 1 << (200 / 9);
@@ -328,6 +333,7 @@ void yosupo_phi() {
   cin >> N;
   Mint ans = dujiao_sieve<Mint>(N, N, g, b, memo);
   cout << ans << endl;
+  return 0;
 }
 
 ```
