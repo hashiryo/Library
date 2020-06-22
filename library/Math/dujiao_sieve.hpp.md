@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 杜教筛
+# :question: 杜教筛
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/dujiao_sieve.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 07:59:43+09:00
+    - Last commit date: 2020-06-22 09:47:33+09:00
 
 
 * see: <a href="https://maspypy.com/yukicoder-no-886-direct">https://maspypy.com/yukicoder-no-886-direct</a>
@@ -45,8 +45,8 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
 
 
 ## Code
@@ -70,7 +70,7 @@ layout: default
  */
 
 // input H,W,g,b,k
-// output a(1)f(H,W)
+// output f(H,W)
 //  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
 //       b(d) = a(1)+a(2)+...+a(d)
 
@@ -94,7 +94,7 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
     ret -= r * (b(next_d - 1) - b(d - 1));
     d = next_d;
   }
-  return memo[make_pair(H, W)] = ret;
+  return memo[make_pair(H, W)] = ret / b(1);
 }
 
 ```
@@ -120,7 +120,7 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
  */
 
 // input H,W,g,b,k
-// output a(1)f(H,W)
+// output f(H,W)
 //  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
 //       b(d) = a(1)+a(2)+...+a(d)
 
@@ -144,7 +144,7 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
     ret -= r * (b(next_d - 1) - b(d - 1));
     d = next_d;
   }
-  return memo[make_pair(H, W)] = ret;
+  return memo[make_pair(H, W)] = ret / b(1);
 }
 
 ```

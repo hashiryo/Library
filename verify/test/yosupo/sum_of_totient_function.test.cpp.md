@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_totient_function.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 08:25:52+09:00
+    - Last commit date: 2020-06-22 09:47:33+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_totient_function">https://judge.yosupo.jp/problem/sum_of_totient_function</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
-* :heavy_check_mark: <a href="../../../library/Math/dujiao_sieve.hpp.html">杜教筛</a>
+* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :heavy_check_mark: <a href="../../../library/Math/number_theory.hpp.html">数論</a>
 
 
@@ -167,7 +167,7 @@ struct ModInt {
  */
 
 // input H,W,g,b,k
-// output a(1)f(H,W)
+// output f(H,W)
 //  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
 //       b(d) = a(1)+a(2)+...+a(d)
 
@@ -191,7 +191,7 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
     ret -= r * (b(next_d - 1) - b(d - 1));
     d = next_d;
   }
-  return memo[make_pair(H, W)] = ret;
+  return memo[make_pair(H, W)] = ret / b(1);
 }
 #line 1 "Math/number_theory.hpp"
 /**
