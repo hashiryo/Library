@@ -96,7 +96,7 @@ layout: default
 * :question: <a href="library/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :heavy_check_mark: <a href="library/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
 * :heavy_check_mark: <a href="library/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
-* :heavy_check_mark: <a href="library/Math/number_theory.hpp.html">数論</a>
+* :question: <a href="library/Math/number_theory.hpp.html">数論</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -201,7 +201,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/417.test.cpp.html">test/yukicoder/417.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
@@ -211,6 +211,6 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/768.test.cpp.html">test/yukicoder/768.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 * :x: <a href="verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
 
 

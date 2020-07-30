@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 数論
+# :question: 数論
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/number_theory.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 07:59:43+09:00
+    - Last commit date: 2020-07-30 18:22:54+09:00
 
 
 * see: <a href="https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5">https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5</a>
@@ -41,8 +41,8 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
+* :x: <a href="../../verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
 
 
 ## Code
@@ -59,6 +59,9 @@ layout: default
  * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */
+
+// verify用:
+// https://atcoder.jp/contests/agc038/tasks/agc038_c
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
@@ -81,6 +84,7 @@ void init(int n) {
 template <typename T>
 void divisor_zeta(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = 1; p * i < n; i++) f[p * i] += f[i];
@@ -90,6 +94,7 @@ void divisor_zeta(vector<T> &f) {
 template <typename T>
 void divisor_mobius(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = (n - 1) / p; i > 0; i--) f[p * i] -= f[i];
@@ -141,6 +146,7 @@ static vector<T> lcm_convolution(vector<T> a, vector<T> b) {
 template <typename T>
 static void multiple_zeta(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = (n - 1) / p; i > 0; i--) f[i] += f[p * i];
@@ -150,6 +156,7 @@ static void multiple_zeta(vector<T> &f) {
 template <typename T>
 static void multiple_mobius(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = 1; p * i < n; i++) f[i] -= f[p * i];
@@ -185,6 +192,9 @@ static vector<T> gcd_convolution(vector<T> a, vector<T> b) {
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */
 
+// verify用:
+// https://atcoder.jp/contests/agc038/tasks/agc038_c
+
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
@@ -206,6 +216,7 @@ void init(int n) {
 template <typename T>
 void divisor_zeta(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = 1; p * i < n; i++) f[p * i] += f[i];
@@ -215,6 +226,7 @@ void divisor_zeta(vector<T> &f) {
 template <typename T>
 void divisor_mobius(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = (n - 1) / p; i > 0; i--) f[p * i] -= f[i];
@@ -266,6 +278,7 @@ static vector<T> lcm_convolution(vector<T> a, vector<T> b) {
 template <typename T>
 static void multiple_zeta(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = (n - 1) / p; i > 0; i--) f[i] += f[p * i];
@@ -275,6 +288,7 @@ static void multiple_zeta(vector<T> &f) {
 template <typename T>
 static void multiple_mobius(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = 1; p * i < n; i++) f[i] -= f[p * i];

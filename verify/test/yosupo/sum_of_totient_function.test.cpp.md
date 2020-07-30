@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_totient_function.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 09:47:33+09:00
+    - Last commit date: 2020-07-30 18:22:54+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_totient_function">https://judge.yosupo.jp/problem/sum_of_totient_function</a>
@@ -41,7 +41,7 @@ layout: default
 
 * :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 * :question: <a href="../../../library/Math/dujiao_sieve.hpp.html">杜教筛</a>
-* :heavy_check_mark: <a href="../../../library/Math/number_theory.hpp.html">数論</a>
+* :question: <a href="../../../library/Math/number_theory.hpp.html">数論</a>
 
 
 ## Code
@@ -161,9 +161,8 @@ struct ModInt {
  * @see https://oi-wiki.org/math/du/
  * @see https://blog.bill.moe/multiplicative-function-sieves-notes/
  * @brief メモ化再帰で実装(map使ってるのでlogがつく)
- * @brief k==1ならO(N^(3/4)) (g,bの計算量無視)
+ * @brief k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
  * @brief 前処理でN^(2/3)まで計算できるならO(N^(2/3))
- * @brief O(N^((k+2)/(k+1)^2))ぐらい?
  */
 
 // input H,W,g,b,k
@@ -172,7 +171,7 @@ struct ModInt {
 //       b(d) = a(1)+a(2)+...+a(d)
 
 #ifndef call_from_test
-#line 23 "Math/dujiao_sieve.hpp"
+#line 22 "Math/dujiao_sieve.hpp"
 using namespace std;
 #endif
 
@@ -204,8 +203,11 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */
 
+// verify用:
+// https://atcoder.jp/contests/agc038/tasks/agc038_c
+
 #ifndef call_from_test
-#line 13 "Math/number_theory.hpp"
+#line 16 "Math/number_theory.hpp"
 using namespace std;
 #endif
 
@@ -225,6 +227,7 @@ void init(int n) {
 template <typename T>
 void divisor_zeta(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = 1; p * i < n; i++) f[p * i] += f[i];
@@ -234,6 +237,7 @@ void divisor_zeta(vector<T> &f) {
 template <typename T>
 void divisor_mobius(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = (n - 1) / p; i > 0; i--) f[p * i] -= f[i];
@@ -285,6 +289,7 @@ static vector<T> lcm_convolution(vector<T> a, vector<T> b) {
 template <typename T>
 static void multiple_zeta(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = (n - 1) / p; i > 0; i--) f[i] += f[p * i];
@@ -294,6 +299,7 @@ static void multiple_zeta(vector<T> &f) {
 template <typename T>
 static void multiple_mobius(vector<T> &f) {
   int n = f.size();
+  if (!primes.size()) init(n);
   for (int p : primes) {
     if (p > n) break;
     for (int i = 1; p * i < n; i++) f[i] -= f[p * i];

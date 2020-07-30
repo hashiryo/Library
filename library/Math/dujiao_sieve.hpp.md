@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Math/dujiao_sieve.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-22 09:47:33+09:00
+    - Last commit date: 2020-07-30 18:22:54+09:00
 
 
 * see: <a href="https://maspypy.com/yukicoder-no-886-direct">https://maspypy.com/yukicoder-no-886-direct</a>
@@ -64,9 +64,8 @@ layout: default
  * @see https://oi-wiki.org/math/du/
  * @see https://blog.bill.moe/multiplicative-function-sieves-notes/
  * @brief メモ化再帰で実装(map使ってるのでlogがつく)
- * @brief k==1ならO(N^(3/4)) (g,bの計算量無視)
+ * @brief k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
  * @brief 前処理でN^(2/3)まで計算できるならO(N^(2/3))
- * @brief O(N^((k+2)/(k+1)^2))ぐらい?
  */
 
 // input H,W,g,b,k
@@ -114,9 +113,8 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
  * @see https://oi-wiki.org/math/du/
  * @see https://blog.bill.moe/multiplicative-function-sieves-notes/
  * @brief メモ化再帰で実装(map使ってるのでlogがつく)
- * @brief k==1ならO(N^(3/4)) (g,bの計算量無視)
+ * @brief k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
  * @brief 前処理でN^(2/3)まで計算できるならO(N^(2/3))
- * @brief O(N^((k+2)/(k+1)^2))ぐらい?
  */
 
 // input H,W,g,b,k
