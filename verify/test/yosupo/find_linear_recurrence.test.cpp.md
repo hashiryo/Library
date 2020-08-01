@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="../../../library/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 
 

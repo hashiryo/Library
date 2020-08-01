@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Radix-Heap
+# :x: Radix-Heap
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/RadixHeap.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-29 00:58:18+09:00
+    - Last commit date: 2020-08-01 13:12:01+09:00
 
 
 * see: <a href="https://github.com/iwiwi/radix-heap/blob/master/README_ja.md">https://github.com/iwiwi/radix-heap/blob/master/README_ja.md</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
+* :x: <a href="../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
 
 
 ## Code
@@ -62,7 +62,8 @@ using namespace std;
 #endif
 
 // verify用:
-// https://codeforces.com/contest/316/problem/C2 (Radix-HeapでないとTLEした)
+// https://codeforces.com/contest/316/problem/C2
+// (Radix-HeapでないとTLEした -> 容量スケーリングならTLEしない)
 
 namespace internal {
 template <bool Is64bit>
@@ -222,7 +223,8 @@ using namespace std;
 #endif
 
 // verify用:
-// https://codeforces.com/contest/316/problem/C2 (Radix-HeapでないとTLEした)
+// https://codeforces.com/contest/316/problem/C2
+// (Radix-HeapでないとTLEした -> 容量スケーリングならTLEしない)
 
 namespace internal {
 template <bool Is64bit>
