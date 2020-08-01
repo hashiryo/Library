@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/min_cost_b_flow.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 15:20:04+09:00
+    - Last commit date: 2020-08-02 00:41:34+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/min_cost_b_flow">https://judge.yosupo.jp/problem/min_cost_b_flow</a>
@@ -189,7 +189,7 @@ class MinCostFlow {
  public:
   MinCostFlow() : n(0) {}
   int add_vertex() {
-    ++n;
+    n++;
     adj.resize(n);
     b.resize(n);
     return n - 1;
@@ -249,7 +249,7 @@ class MinCostFlow {
       pq.pop();
       if (dist[u] - d + EPS < 0) continue;
       farthest = d;
-      if (b[u] <= -delta) ++deficit_count;
+      if (b[u] <= -delta) deficit_count++;
       if (deficit_count >= deficit_vs.size()) break;
       for (auto &e : adj[u]) {
         if (e.residual_cap() < delta) continue;
@@ -261,7 +261,7 @@ class MinCostFlow {
       }
     }
     pq = decltype(pq)();
-    for (int v = 0; v < n; ++v) potential[v] += min(dist[v], farthest);
+    for (int v = 0; v < n; v++) potential[v] += min(dist[v], farthest);
     return deficit_count > 0;
   }
   void primal(const flow_t delta) {
@@ -302,7 +302,7 @@ class MinCostFlow {
           b[dst] += rcap;
         }
       }
-    for (int v = 0; v < n; ++v)
+    for (int v = 0; v < n; v++)
       if (b[v] != 0) (b[v] > 0 ? excess_vs : deficit_vs).emplace_back(v);
   }
 
@@ -363,7 +363,7 @@ class MinCostFlow {
   }
   vector<cost_t> get_potential() {
     fill(begin(potential), end(potential), 0);
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < n; i++)
       for (const auto &es : adj)
         for (const auto &e : es)
           if (e.residual_cap() > 0)
