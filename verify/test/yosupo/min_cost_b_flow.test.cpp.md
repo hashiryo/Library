@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/GRL_6_B.test.cpp
+# :heavy_check_mark: test/yosupo/min_cost_b_flow.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/GRL_6_B.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/min_cost_b_flow.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-01 15:20:04+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B</a>
+* see: <a href="https://judge.yosupo.jp/problem/min_cost_b_flow">https://judge.yosupo.jp/problem/min_cost_b_flow</a>
 
 
 ## Depends on
@@ -47,8 +47,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
+#define PROBLEM "https://judge.yosupo.jp/problem/min_cost_b_flow"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -57,31 +56,64 @@ using namespace std;
 #include "Graph/MinCostFlow.hpp"
 #undef call_from_test
 
+ostream &operator<<(ostream &stream, const __int128_t &v) {
+  if (v == 0) stream << "0";
+  __int128_t tmp;
+  if (v < 0) {
+    stream << "-";
+    tmp = -v;
+  } else {
+    tmp = v;
+  }
+  std::string s;
+  while (tmp) {
+    s += '0' + (tmp % 10);
+    tmp /= 10;
+  }
+  std::reverse(s.begin(), s.end());
+  stream << s;
+  return stream;
+}
+
 signed main() {
   cin.tie(0);
-  ios::sync_with_stdio(0);
-  int V, E, F;
-  cin >> V >> E >> F;
-  MinCostFlow<int, int> graph;
-  graph.add_vertices(V);
-  while (E--) {
-    int u, v, c, d;
-    cin >> u >> v >> c >> d;
-    graph.add_edge(u, v, 0, c, d);
+  ios::sync_with_stdio(false);
+  using MCF = MinCostFlow<long long, long long>;
+  MCF graph;
+  vector<MCF::EdgePtr> edges;
+  int N, M;
+  cin >> N >> M;
+  graph.add_vertices(N);
+  for (int i = 0; i < N; i++) {
+    long long b;
+    cin >> b;
+    graph.add_supply(i, b);
   }
-  auto ans = graph.st_flow_run(0, V - 1, F);
-  cout << (ans.first ? ans.second : -1) << endl;
+  for (int i = 0; i < M; i++) {
+    long long s, t, l, u, c;
+    cin >> s >> t >> l >> u >> c;
+    edges.emplace_back(graph.add_edge(s, t, l, u, c));
+  }
+  bool isok = graph.flow_run().first;
+  if (isok) {
+    cout << graph.get_result_value<__int128_t>() << endl;
+    auto potential = graph.get_potential();
+    for (auto p : potential) cout << p << endl;
+    for (auto &e : edges) cout << e.flow() << endl;
+  } else {
+    cout << "infeasible" << endl;
+  }
   return 0;
 }
+
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/GRL_6_B.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B"
+#line 1 "test/yosupo/min_cost_b_flow.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/min_cost_b_flow"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -355,23 +387,56 @@ template <class flow_t, class cost_t,
           typename Heap = priority_queue<pair<cost_t, int>,
                                          vector<pair<cost_t, int>>, greater<>>>
 using MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;
-#line 9 "test/aoj/GRL_6_B.test.cpp"
+#line 8 "test/yosupo/min_cost_b_flow.test.cpp"
 #undef call_from_test
+
+ostream &operator<<(ostream &stream, const __int128_t &v) {
+  if (v == 0) stream << "0";
+  __int128_t tmp;
+  if (v < 0) {
+    stream << "-";
+    tmp = -v;
+  } else {
+    tmp = v;
+  }
+  std::string s;
+  while (tmp) {
+    s += '0' + (tmp % 10);
+    tmp /= 10;
+  }
+  std::reverse(s.begin(), s.end());
+  stream << s;
+  return stream;
+}
 
 signed main() {
   cin.tie(0);
-  ios::sync_with_stdio(0);
-  int V, E, F;
-  cin >> V >> E >> F;
-  MinCostFlow<int, int> graph;
-  graph.add_vertices(V);
-  while (E--) {
-    int u, v, c, d;
-    cin >> u >> v >> c >> d;
-    graph.add_edge(u, v, 0, c, d);
+  ios::sync_with_stdio(false);
+  using MCF = MinCostFlow<long long, long long>;
+  MCF graph;
+  vector<MCF::EdgePtr> edges;
+  int N, M;
+  cin >> N >> M;
+  graph.add_vertices(N);
+  for (int i = 0; i < N; i++) {
+    long long b;
+    cin >> b;
+    graph.add_supply(i, b);
   }
-  auto ans = graph.st_flow_run(0, V - 1, F);
-  cout << (ans.first ? ans.second : -1) << endl;
+  for (int i = 0; i < M; i++) {
+    long long s, t, l, u, c;
+    cin >> s >> t >> l >> u >> c;
+    edges.emplace_back(graph.add_edge(s, t, l, u, c));
+  }
+  bool isok = graph.flow_run().first;
+  if (isok) {
+    cout << graph.get_result_value<__int128_t>() << endl;
+    auto potential = graph.get_potential();
+    for (auto p : potential) cout << p << endl;
+    for (auto &e : edges) cout << e.flow() << endl;
+  } else {
+    cout << "infeasible" << endl;
+  }
   return 0;
 }
 

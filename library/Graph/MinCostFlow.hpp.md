@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MinCostFlow.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:12:01+09:00
+    - Last commit date: 2020-08-01 15:20:04+09:00
 
 
 * see: <a href="https://misawa.github.io/others/flow/library_design.html">https://misawa.github.io/others/flow/library_design.html</a>
@@ -41,6 +41,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/yosupo/min_cost_b_flow.test.cpp.html">test/yosupo/min_cost_b_flow.test.cpp</a>
 
 
 ## Code
@@ -298,6 +299,16 @@ class MinCostFlow {
             potential[e.dst] = min(potential[e.dst],
                                    potential[adj[e.dst][e.rev].dst] + e.cost);
     return potential;
+  }
+  template <class T>
+  T get_result_value() {
+    T value = 0;
+    for (const auto &es : adj)
+      for (const auto &e : es) {
+        value += (T)(e.flow) * (T)(e.cost);
+      }
+    value /= (T)2;
+    return value;
   }
 };
 
@@ -563,6 +574,16 @@ class MinCostFlow {
             potential[e.dst] = min(potential[e.dst],
                                    potential[adj[e.dst][e.rev].dst] + e.cost);
     return potential;
+  }
+  template <class T>
+  T get_result_value() {
+    T value = 0;
+    for (const auto &es : adj)
+      for (const auto &e : es) {
+        value += (T)(e.flow) * (T)(e.cost);
+      }
+    value /= (T)2;
+    return value;
   }
 };
 
