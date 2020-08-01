@@ -153,6 +153,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/assignment.mcf.test.cpp.html">test/yosupo/assignment.mcf.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
