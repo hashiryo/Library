@@ -25,21 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 最大流(Dinic)
+# :heavy_check_mark: 最大流(Dinic)
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Graph/MaxFlow_Dinic.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 14:16:07+09:00
+    - Last commit date: 2020-08-01 14:30:22+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../verify/test/aoj/2313.test.cpp.html">test/aoj/2313.test.cpp</a>
-* :x: <a href="../../verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/2313.test.cpp.html">test/aoj/2313.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
 
 
 ## Code
@@ -131,8 +131,8 @@ struct MaxFlow_Dinic {
     return ret;
   }
   void add_edge(int src, int dst, flow_t cap) {
-    adj[src].emplace_back((Edge){dst, cap, adj[dst].size(), 0});
-    adj[dst].emplace_back((Edge){src, 0, adj[src].size() - 1, 1});
+    adj[src].emplace_back((Edge){dst, cap, (int)adj[dst].size(), 0});
+    adj[dst].emplace_back((Edge){src, 0, (int)adj[src].size() - 1, 1});
   }
   flow_t max_flow(int s, int t, flow_t lim = FLOW_MAX) {
     flow_t flow = 0;
@@ -270,8 +270,8 @@ struct MaxFlow_Dinic {
     return ret;
   }
   void add_edge(int src, int dst, flow_t cap) {
-    adj[src].emplace_back((Edge){dst, cap, adj[dst].size(), 0});
-    adj[dst].emplace_back((Edge){src, 0, adj[src].size() - 1, 1});
+    adj[src].emplace_back((Edge){dst, cap, (int)adj[dst].size(), 0});
+    adj[dst].emplace_back((Edge){src, 0, (int)adj[src].size() - 1, 1});
   }
   flow_t max_flow(int s, int t, flow_t lim = FLOW_MAX) {
     flow_t flow = 0;
