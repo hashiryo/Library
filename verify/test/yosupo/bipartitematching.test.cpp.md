@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/bipartitematching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-02 14:58:00+09:00
+    - Last commit date: 2020-08-07 12:14:16+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/bipartitematching">https://judge.yosupo.jp/problem/bipartitematching</a>
@@ -114,30 +114,28 @@ struct MatchingBipartite {
     vector<int> pre(n, -1), root(n, -1);
     vector<int> leftmate(n, -1), rightmate(m, -1);
     int res = 0;
-    bool upd = true;
-    while (upd) {
-      upd = false;
+    bool update = true;
+    while (update) {
+      update = false;
       queue<int> s;
-      for (int i = 0; i < n; ++i) {
+      for (int i = 0; i < n; ++i)
         if (leftmate[i] == -1) {
           root[i] = i;
           s.push(i);
         }
-      }
       while (!s.empty()) {
         int v = s.front();
         s.pop();
         if (leftmate[root[v]] != -1) continue;
-        for (int i = 0; i < (int)adj[v].size(); ++i) {
-          int u = adj[v][i];
+        for (int u : adj[v]) {
           if (rightmate[u] == -1) {
             while (u != -1) {
               rightmate[u] = v;
               swap(leftmate[v], u);
               v = pre[v];
             }
-            upd = true;
-            ++res;
+            update = true;
+            res++;
             break;
           }
           u = rightmate[u];
@@ -147,7 +145,7 @@ struct MatchingBipartite {
           s.push(u);
         }
       }
-      if (upd)
+      if (update)
         fill(pre.begin(), pre.end(), -1), fill(root.begin(), root.end(), -1);
     }
     return make_pair(res, make_pair(leftmate, rightmate));
