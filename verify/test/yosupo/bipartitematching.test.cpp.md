@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/bipartitematching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-07 12:14:16+09:00
+    - Last commit date: 2020-08-07 12:18:23+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/bipartitematching">https://judge.yosupo.jp/problem/bipartitematching</a>
@@ -117,15 +117,15 @@ struct MatchingBipartite {
     bool update = true;
     while (update) {
       update = false;
-      queue<int> s;
+      queue<int> que;
       for (int i = 0; i < n; ++i)
         if (leftmate[i] == -1) {
           root[i] = i;
-          s.push(i);
+          que.push(i);
         }
-      while (!s.empty()) {
-        int v = s.front();
-        s.pop();
+      while (!que.empty()) {
+        int v = que.front();
+        que.pop();
         if (leftmate[root[v]] != -1) continue;
         for (int u : adj[v]) {
           if (rightmate[u] == -1) {
@@ -142,7 +142,7 @@ struct MatchingBipartite {
           if (pre[u] != -1) continue;
           pre[u] = v;
           root[u] = root[v];
-          s.push(u);
+          que.push(u);
         }
       }
       if (update)
