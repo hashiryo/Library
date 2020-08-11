@@ -40,7 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/ALDS1_9_C.SkewHeap.test.cpp.html">test/aoj/ALDS1_9_C.SkewHeap.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 

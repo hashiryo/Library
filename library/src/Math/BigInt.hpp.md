@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 多倍長整数
+# :question: 多倍長整数
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/BigInt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
@@ -54,7 +54,7 @@ layout: default
 /**
  * @title 多倍長整数
  * @category 数学
- * @brief javaやpythonの多倍長整数を使うべき
+ * javaやpythonの多倍長整数を使うべき
  */
 
 #ifndef call_from_test
@@ -444,7 +444,7 @@ struct BigInt {
 /**
  * @title 多倍長整数
  * @category 数学
- * @brief javaやpythonの多倍長整数を使うべき
+ * javaやpythonの多倍長整数を使うべき
  */
 
 #ifndef call_from_test

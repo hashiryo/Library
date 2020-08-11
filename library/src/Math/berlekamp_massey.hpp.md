@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/berlekamp_massey.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
@@ -49,8 +49,8 @@ layout: default
 /**
  * @title Berlekamp-Massey
  * @category 数学
- * @brief　数列の最初のN項から、その数列を生成するN/2次以下の最小の線形漸化式を求める
- * @brief O(N^2)
+ * 数列の最初のN項から、その数列を生成するN/2次以下の最小の線形漸化式を求める
+ *  O(N^2)
  */
 
 // verify用:
@@ -99,8 +99,8 @@ vector<T> berlekamp_massey(const vector<T> &a) {
 /**
  * @title Berlekamp-Massey
  * @category 数学
- * @brief　数列の最初のN項から、その数列を生成するN/2次以下の最小の線形漸化式を求める
- * @brief O(N^2)
+ * 数列の最初のN項から、その数列を生成するN/2次以下の最小の線形漸化式を求める
+ *  O(N^2)
  */
 
 // verify用:

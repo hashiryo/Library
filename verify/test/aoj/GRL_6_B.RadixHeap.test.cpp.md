@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/GRL_6_B.RadixHeap.test.cpp
+# :heavy_check_mark: test/aoj/GRL_6_B.RadixHeap.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/GRL_6_B.RadixHeap.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_B</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
-* :x: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
+* :question: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 
 
 ## Code
@@ -93,8 +93,8 @@ using namespace std;
 /**
  * @title 最小費用流
  * @category グラフ
- * @brief PrimalDual(容量スケーリング)
- * @brief O(m^2 log U log n)
+ *  PrimalDual(容量スケーリング)
+ *  O(m^2 log U log n)
  * @see https://misawa.github.io/others/flow/library_design.html
  */
 // verify用:

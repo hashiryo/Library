@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/number_theory.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5">https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5</a>
@@ -53,9 +53,9 @@ layout: default
 /**
  * @title 数論
  * @category 数学
- * @brief 約数や倍数についてのゼータ変換やメビウス変換
- * @brief をもとに数論的関数やgcd畳み込みなどを実現
- * @brief O(N log log N)
+ *  約数や倍数についてのゼータ変換やメビウス変換
+ *  をもとに数論的関数やgcd畳み込みなどを実現
+ *  O(N log log N)
  * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */
@@ -185,9 +185,9 @@ static vector<T> gcd_convolution(vector<T> a, vector<T> b) {
 /**
  * @title 数論
  * @category 数学
- * @brief 約数や倍数についてのゼータ変換やメビウス変換
- * @brief をもとに数論的関数やgcd畳み込みなどを実現
- * @brief O(N log log N)
+ *  約数や倍数についてのゼータ変換やメビウス変換
+ *  をもとに数論的関数やgcd畳み込みなどを実現
+ *  O(N log log N)
  * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: Segment-Tree(双対)
+# :heavy_check_mark: Segment-Tree(双対)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/DSL_2_D.SegTree_Dual.test.cpp.html">test/aoj/DSL_2_D.SegTree_Dual.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/DSL_2_D.SegTree_Dual.test.cpp.html">test/aoj/DSL_2_D.SegTree_Dual.test.cpp</a>
 
 
 ## Code

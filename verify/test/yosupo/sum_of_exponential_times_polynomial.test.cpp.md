@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/24/031413">https://min-25.hatenablog.com/entry/2015/04/24/031413</a>
@@ -236,16 +236,16 @@ struct ModInt {
 /**
  * @title ラグランジュ補間
  * @category 数学
- * @brief x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
- * @brief O(N)
+ *  x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
+ *  O(N)
  */
 
+// verify用:http://codeforces.com/contest/622/problem/F
+
 #ifndef call_from_test
-#line 10 "src/Math/lagrange_interpolation.hpp"
+#line 12 "src/Math/lagrange_interpolation.hpp"
 using namespace std;
 #endif
-
-// verify用:http://codeforces.com/contest/622/problem/F
 
 template <typename K>
 K lagrange_interpolation(vector<K> &y, K t) {

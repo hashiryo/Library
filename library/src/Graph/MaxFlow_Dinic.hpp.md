@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 最大流(Dinic)
+# :heavy_check_mark: 最大流(Dinic)
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/MaxFlow_Dinic.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2313.test.cpp.html">test/aoj/2313.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
 
 
 ## Code
@@ -50,9 +50,9 @@ layout: default
 /**
  * @title 最大流(Dinic)
  * @category グラフ
- * @brief  O(V^2 E)
- * @brief link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
- * @brief cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
+ *   O(V^2 E)
+ *  link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
+ *  cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
  */
 
 // 最小流量制限付き最大流 https://snuke.hatenablog.com/entry/2016/07/10/043918
@@ -189,9 +189,9 @@ struct MaxFlow_Dinic {
 /**
  * @title 最大流(Dinic)
  * @category グラフ
- * @brief  O(V^2 E)
- * @brief link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
- * @brief cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
+ *   O(V^2 E)
+ *  link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
+ *  cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
  */
 
 // 最小流量制限付き最大流 https://snuke.hatenablog.com/entry/2016/07/10/043918

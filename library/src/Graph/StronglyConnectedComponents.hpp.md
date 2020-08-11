@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/StronglyConnectedComponents.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
@@ -51,9 +51,9 @@ layout: default
 /**
  * @title 強連結成分分解
  * @category グラフ
- * @brief Gabow
- * @brief O(V + E)
- * @brief 返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
+ *  Gabow
+ *  O(V + E)
+ *  返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
  */
 
 #ifndef call_from_test
@@ -107,9 +107,9 @@ struct StronglyConnectedComponents {
 /**
  * @title 強連結成分分解
  * @category グラフ
- * @brief Gabow
- * @brief O(V + E)
- * @brief 返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
+ *  Gabow
+ *  O(V + E)
+ *  返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
  */
 
 #ifndef call_from_test

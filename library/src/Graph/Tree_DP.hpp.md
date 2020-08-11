@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/Tree_DP.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://ei1333.hateblo.jp/entry/2018/12/21/004022">https://ei1333.hateblo.jp/entry/2018/12/21/004022</a>
@@ -53,8 +53,8 @@ layout: default
 /**
  * @title 木DP
  * @category グラフ
- * @brief run(root):木dp
- * @brief run_rerooting():全方位木dp
+ *  run(root):木dp
+ *  run_rerooting():全方位木dp
  * @see https://ei1333.hateblo.jp/entry/2018/12/21/004022
  */
 
@@ -138,8 +138,8 @@ struct Tree_DP {
 /**
  * @title 木DP
  * @category グラフ
- * @brief run(root):木dp
- * @brief run_rerooting():全方位木dp
+ *  run(root):木dp
+ *  run_rerooting():全方位木dp
  * @see https://ei1333.hateblo.jp/entry/2018/12/21/004022
  */
 

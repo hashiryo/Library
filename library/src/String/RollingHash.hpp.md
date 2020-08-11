@@ -31,9 +31,10 @@ layout: default
 
 * category: <a href="../../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/String/RollingHash.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
+* see: <a href="https://qiita.com/keymoon/items/11fac5627672a6d6a9f6">https://qiita.com/keymoon/items/11fac5627672a6d6a9f6</a>
 
 
 ## Verified with
@@ -49,7 +50,8 @@ layout: default
 /**
  * @title Rolling-Hash
  * @category 文字列
- * @brief Mod は　2^61-1 で固定
+ *  Mod は　2^61-1 で固定
+ * @see https://qiita.com/keymoon/items/11fac5627672a6d6a9f6
  */
 
 #ifndef call_from_test
@@ -60,10 +62,9 @@ using namespace std;
 template <unsigned long long B>
 struct RollingHash {
  private:
-  const uint64_t MASK30 = (1UL << 30) - 1;
-  const uint64_t MASK31 = (1UL << 31) - 1;
-  const uint64_t MOD = (1UL << 61) - 1;
-  const uint64_t MASK61 = MOD;
+  static constexpr uint64_t MASK30 = (1UL << 30) - 1, MASK31 = (1UL << 31) - 1,
+                            MASK61 = (1UL << 61) - 1;
+  static constexpr uint64_t MOD = (1UL << 61) - 1;
   vector<uint64_t> hash, po;
 
  public:
@@ -91,20 +92,15 @@ struct RollingHash {
 
  private:
   uint64_t mul(uint64_t a, uint64_t b) {
-    uint64_t au = a >> 31;
-    uint64_t ad = a & MASK31;
-    uint64_t bu = b >> 31;
-    uint64_t bd = b & MASK31;
+    uint64_t au = a >> 31, ad = a & MASK31;
+    uint64_t bu = b >> 31, bd = b & MASK31;
     uint64_t mid = ad * bu + au * bd;
-    uint64_t midu = mid >> 30;
-    uint64_t midd = mid & MASK30;
+    uint64_t midu = mid >> 30, midd = mid & MASK30;
     return au * bu * 2 + midu + (midd << 31) + ad * bd;
   }
 
   uint64_t calcmod(uint64_t x) {
-    uint64_t xu = x >> 61;
-    uint64_t xd = x & MASK61;
-    uint64_t res = xu + xd;
+    uint64_t res = (x >> 61) + (x & MASK61);
     return res >= MOD ? res - MOD : res;
   }
 };
@@ -118,7 +114,8 @@ struct RollingHash {
 /**
  * @title Rolling-Hash
  * @category 文字列
- * @brief Mod は　2^61-1 で固定
+ *  Mod は　2^61-1 で固定
+ * @see https://qiita.com/keymoon/items/11fac5627672a6d6a9f6
  */
 
 #ifndef call_from_test
@@ -129,10 +126,9 @@ using namespace std;
 template <unsigned long long B>
 struct RollingHash {
  private:
-  const uint64_t MASK30 = (1UL << 30) - 1;
-  const uint64_t MASK31 = (1UL << 31) - 1;
-  const uint64_t MOD = (1UL << 61) - 1;
-  const uint64_t MASK61 = MOD;
+  static constexpr uint64_t MASK30 = (1UL << 30) - 1, MASK31 = (1UL << 31) - 1,
+                            MASK61 = (1UL << 61) - 1;
+  static constexpr uint64_t MOD = (1UL << 61) - 1;
   vector<uint64_t> hash, po;
 
  public:
@@ -160,20 +156,15 @@ struct RollingHash {
 
  private:
   uint64_t mul(uint64_t a, uint64_t b) {
-    uint64_t au = a >> 31;
-    uint64_t ad = a & MASK31;
-    uint64_t bu = b >> 31;
-    uint64_t bd = b & MASK31;
+    uint64_t au = a >> 31, ad = a & MASK31;
+    uint64_t bu = b >> 31, bd = b & MASK31;
     uint64_t mid = ad * bu + au * bd;
-    uint64_t midu = mid >> 30;
-    uint64_t midd = mid & MASK30;
+    uint64_t midu = mid >> 30, midd = mid & MASK30;
     return au * bu * 2 + midu + (midd << 31) + ad * bd;
   }
 
   uint64_t calcmod(uint64_t x) {
-    uint64_t xu = x >> 61;
-    uint64_t xd = x & MASK61;
-    uint64_t res = xu + xd;
+    uint64_t res = (x >> 61) + (x & MASK61);
     return res >= MOD ? res - MOD : res;
   }
 };

@@ -40,10 +40,10 @@ layout: default
 
 * :x: <a href="library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
 * :question: <a href="library/src/Graph/MatchingGeneral.hpp.html">最大マッチング(一般グラフ)</a>
-* :question: <a href="library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
-* :x: <a href="library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
+* :heavy_check_mark: <a href="library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
+* :question: <a href="library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 * :question: <a href="library/src/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
-* :question: <a href="library/src/Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
+* :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
 * :x: <a href="library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 * :x: <a href="library/src/Graph/Tree_DP.hpp.html">木DP</a>
 * :x: <a href="library/src/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
@@ -55,26 +55,26 @@ layout: default
 
 * :x: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
-* :x: <a href="library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :x: <a href="library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
-* :question: <a href="library/src/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 * :x: <a href="library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 * :x: <a href="library/src/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
 * :x: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
 * :x: <a href="library/src/DataStructure/PersistentArray.hpp.html">永続配列</a>
-* :x: <a href="library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
 * :question: <a href="library/src/DataStructure/RedBlackTree.hpp.html">赤黒木</a>
 * :x: <a href="library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
 * :x: <a href="library/src/DataStructure/RedBlackTree_Persistent.hpp.html">赤黒木(永続)</a>
 * :x: <a href="library/src/DataStructure/RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
-* :x: <a href="library/src/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
-* :x: <a href="library/src/DataStructure/SegmentTree_Dual.hpp.html">Segment-Tree(双対)</a>
+* :question: <a href="library/src/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree_Dual.hpp.html">Segment-Tree(双対)</a>
 * :x: <a href="library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
-* :x: <a href="library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
+* :question: <a href="library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 * :question: <a href="library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
-* :x: <a href="library/src/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 * :question: <a href="library/src/DataStructure/UnionFind.hpp.html">Union-Find</a>
 * :x: <a href="library/src/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
@@ -84,7 +84,7 @@ layout: default
 
 ### 数学
 
-* :x: <a href="library/src/Math/BigInt.hpp.html">多倍長整数</a>
+* :question: <a href="library/src/Math/BigInt.hpp.html">多倍長整数</a>
 * :question: <a href="library/src/Math/Combination.hpp.html">組み合わせ</a>
 * :question: <a href="library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="library/src/Math/Matrix.hpp.html">行列</a>
@@ -135,18 +135,18 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_E.test.cpp.html">test/aoj/DPL_5_E.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_F.test.cpp.html">test/aoj/DPL_5_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
-* :x: <a href="verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
-* :x: <a href="verify/test/aoj/DSL_2_D.SegTree_Dual.test.cpp.html">test/aoj/DSL_2_D.SegTree_Dual.test.cpp</a>
-* :x: <a href="verify/test/aoj/DSL_2_F.SegTree_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTree_Lazy.test.cpp</a>
-* :x: <a href="verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
-* :x: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
-* :x: <a href="verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
-* :x: <a href="verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
-* :x: <a href="verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_D.SegTree_Dual.test.cpp.html">test/aoj/DSL_2_D.SegTree_Dual.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_F.SegTree_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTree_Lazy.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.disjointsparsetable.test.cpp.html">test/aoj/DSL_3_D.disjointsparsetable.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
 * :x: <a href="verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
 * :x: <a href="verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
 * :x: <a href="verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>

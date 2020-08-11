@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/find_linear_recurrence.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/find_linear_recurrence">https://judge.yosupo.jp/problem/find_linear_recurrence</a>
@@ -146,8 +146,8 @@ struct ModInt {
 /**
  * @title Berlekamp-Massey
  * @category 数学
- * @brief　数列の最初のN項から、その数列を生成するN/2次以下の最小の線形漸化式を求める
- * @brief O(N^2)
+ * 数列の最初のN項から、その数列を生成するN/2次以下の最小の線形漸化式を求める
+ *  O(N^2)
  */
 
 // verify用:

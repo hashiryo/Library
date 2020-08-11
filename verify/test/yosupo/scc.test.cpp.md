@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/scc.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/scc">https://judge.yosupo.jp/problem/scc</a>
@@ -93,9 +93,9 @@ using namespace std;
 /**
  * @title 強連結成分分解
  * @category グラフ
- * @brief Gabow
- * @brief O(V + E)
- * @brief 返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
+ *  Gabow
+ *  O(V + E)
+ *  返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
  */
 
 #ifndef call_from_test

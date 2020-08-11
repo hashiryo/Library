@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/lagrange_interpolation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
@@ -51,16 +51,16 @@ layout: default
 /**
  * @title ラグランジュ補間
  * @category 数学
- * @brief x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
- * @brief O(N)
+ *  x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
+ *  O(N)
  */
+
+// verify用:http://codeforces.com/contest/622/problem/F
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
-
-// verify用:http://codeforces.com/contest/622/problem/F
 
 template <typename K>
 K lagrange_interpolation(vector<K> &y, K t) {
@@ -91,16 +91,16 @@ K lagrange_interpolation(vector<K> &y, K t) {
 /**
  * @title ラグランジュ補間
  * @category 数学
- * @brief x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
- * @brief O(N)
+ *  x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
+ *  O(N)
  */
+
+// verify用:http://codeforces.com/contest/622/problem/F
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
-
-// verify用:http://codeforces.com/contest/622/problem/F
 
 template <typename K>
 K lagrange_interpolation(vector<K> &y, K t) {

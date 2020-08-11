@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/two_edge_connected_components.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/two_edge_connected_components">https://judge.yosupo.jp/problem/two_edge_connected_components</a>
@@ -93,8 +93,8 @@ using namespace std;
 /**
  * @title 二重辺連結成分分解
  * @category グラフ
- * @brief O(V + E)
- * @brief 返り値:{二重辺連結成分,ノードの属する成分の添字}
+ *  O(V + E)
+ *  返り値:{二重辺連結成分,ノードの属する成分の添字}
  */
 
 #ifndef call_from_test

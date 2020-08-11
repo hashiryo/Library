@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/String/SuffixArray.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
@@ -52,10 +52,10 @@ layout: default
 /**
  * @title 接尾辞配列(Suffix-Array)
  * @category 文字列
- * @brief 構築 O(|S| log |S|)
- * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
- * @brief LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
- * @brief '$'は入れてない
+ *  構築 O(|S| log |S|)
+ *  lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
+ *  LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
+ *  '$'は入れてない
  */
 
 #ifndef call_from_test
@@ -138,10 +138,10 @@ struct SuffixArray {
 /**
  * @title 接尾辞配列(Suffix-Array)
  * @category 文字列
- * @brief 構築 O(|S| log |S|)
- * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
- * @brief LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
- * @brief '$'は入れてない
+ *  構築 O(|S| log |S|)
+ *  lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
+ *  LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
+ *  '$'は入れてない
  */
 
 #ifndef call_from_test

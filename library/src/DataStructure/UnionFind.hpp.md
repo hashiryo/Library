@@ -41,8 +41,8 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2559.LCT_Dual.test.cpp.html">test/aoj/2559.LCT_Dual.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/DSL_1_A.test.cpp.html">test/aoj/DSL_1_A.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 

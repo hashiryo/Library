@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/dujiao_sieve.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://maspypy.com/yukicoder-no-886-direct">https://maspypy.com/yukicoder-no-886-direct</a>
@@ -63,20 +63,20 @@ layout: default
  * @see https://yukicoder.me/wiki/sum_totient
  * @see https://oi-wiki.org/math/du/
  * @see https://blog.bill.moe/multiplicative-function-sieves-notes/
- * @brief メモ化再帰で実装(map使ってるのでlogがつく)
- * @brief k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
- * @brief 前処理でN^(2/3)まで計算できるならO(N^(2/3))
+ *  メモ化再帰で実装(map使ってるのでlogがつく)
+ *  k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
+ *  前処理でN^(2/3)まで計算できるならO(N^(2/3))
  */
-
-// input H,W,g,b,k
-// output f(H,W)
-//  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
-//       b(d) = a(1)+a(2)+...+a(d)
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
+
+// input H,W,g,b,k
+// output f(H,W)
+//  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
+//       b(d) = a(1)+a(2)+...+a(d)
 
 template <typename T, typename G, typename A>
 T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
@@ -112,20 +112,20 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
  * @see https://yukicoder.me/wiki/sum_totient
  * @see https://oi-wiki.org/math/du/
  * @see https://blog.bill.moe/multiplicative-function-sieves-notes/
- * @brief メモ化再帰で実装(map使ってるのでlogがつく)
- * @brief k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
- * @brief 前処理でN^(2/3)まで計算できるならO(N^(2/3))
+ *  メモ化再帰で実装(map使ってるのでlogがつく)
+ *  k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
+ *  前処理でN^(2/3)まで計算できるならO(N^(2/3))
  */
-
-// input H,W,g,b,k
-// output f(H,W)
-//  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
-//       b(d) = a(1)+a(2)+...+a(d)
 
 #ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 #endif
+
+// input H,W,g,b,k
+// output f(H,W)
+//  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
+//       b(d) = a(1)+a(2)+...+a(d)
 
 template <typename T, typename G, typename A>
 T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,

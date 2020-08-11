@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/general_matching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/general_matching">https://judge.yosupo.jp/problem/general_matching</a>
@@ -90,9 +90,9 @@ using namespace std;
 /**
  * @title 最大マッチング(一般グラフ)
  * @category グラフ
- * @brief  O(VE log V)
- * @brief GabowのEdmonds' Algorithm
- * @brief 返り値:{マッチング数,各頂点の相方(いないなら-1）}
+ *   O(VE log V)
+ *  GabowのEdmonds' Algorithm
+ *  返り値:{マッチング数,各頂点の相方(いないなら-1）}
  */
 
 #ifndef call_from_test
@@ -113,8 +113,7 @@ struct MatchingGeneral {
     mate[u] = v;
     if (w == -1 || mate[w] != u) return;
     if (edges[u].second == -1) {
-      mate[w] = edges[u].first;
-      rematch(edges[u].first, w);
+      rematch(mate[w] = edges[u].first, w);
     } else {
       rematch(edges[u].first, edges[u].second);
       rematch(edges[u].second, edges[u].first);
@@ -125,26 +124,15 @@ struct MatchingGeneral {
       return (idx[x] != res || p[x] == -1) ? x : (p[x] = f(p[x]));
     };
     queue<int> que;
-    que.push(root);
-    p[root] = -1;
-    idx[root] = res;
     edges[root] = {-1, -1};
-    function<void(int, int)> g = [&](int t, int w) {
-      while (t != w) {
-        idx[t] = res;
-        p[t] = w;
-        que.push(t);
-        t = f(edges[mate[t]].first);
-      }
-    };
+    idx[root] = res, p[root] = -1, que.push(root);
     while (!que.empty()) {
       int x = que.front();
       que.pop();
       for (int y : adj[x])
         if (y != root) {
           if (mate[y] == -1) {
-            mate[y] = x;
-            rematch(x, y);
+            rematch(mate[y] = x, y);
             return true;
           } else if (idx[y] == res) {
             int u = f(x), v = f(y), w = root;
@@ -158,14 +146,14 @@ struct MatchingGeneral {
               edges[u] = {x, y};
               u = f(edges[mate[u]].first);
             }
-            g(f(x), w);
-            g(f(y), w);
+            for (int t = f(x); t != w; t = f(edges[mate[t]].first))
+              idx[t] = res, p[t] = w, que.push(t);
+            for (int t = f(y); t != w; t = f(edges[mate[t]].first))
+              idx[t] = res, p[t] = w, que.push(t);
           } else if (idx[mate[y]] != res) {
             edges[y] = {-1, -1};
-            idx[mate[y]] = res;
-            p[mate[y]] = y;
             edges[mate[y]] = {x, -1};
-            que.push(mate[y]);
+            idx[mate[y]] = res, p[mate[y]] = y, que.push(mate[y]);
           }
         }
     }

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sharp_p_subset_sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sharp_p_subset_sum">https://judge.yosupo.jp/problem/sharp_p_subset_sum</a>
@@ -106,8 +106,8 @@ using namespace std;
 /**
  * @title 形式的冪級数
  * @category 数学
- * @brief mod=998244353とかでない素数modのModInt<mod>でも使える
- * @brief nttの配列のサイズに注意(REの原因になりがち)
+ *  mod=998244353とかでない素数modのModInt<mod>でも使える
+ *  nttの配列のサイズに注意(REの原因になりがち)
  */
 // verify用: https://loj.ac/problem/150
 

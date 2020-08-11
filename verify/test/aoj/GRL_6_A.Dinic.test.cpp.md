@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/GRL_6_A.Dinic.test.cpp
+# :heavy_check_mark: test/aoj/GRL_6_A.Dinic.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/GRL_6_A.Dinic.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
+* :heavy_check_mark: <a href="../../../library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
 
 
 ## Code
@@ -91,9 +91,9 @@ using namespace std;
 /**
  * @title 最大流(Dinic)
  * @category グラフ
- * @brief  O(V^2 E)
- * @brief link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
- * @brief cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
+ *   O(V^2 E)
+ *  link: s->tフローで辺(src,dst)の容量を1増やしたときの最大流の変化
+ *  cut: s->tフローで辺(src,dst)の容量を1減らしたときの最大流の変化
  */
 
 // 最小流量制限付き最大流 https://snuke.hatenablog.com/entry/2016/07/10/043918

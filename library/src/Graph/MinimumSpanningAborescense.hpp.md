@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
@@ -51,9 +51,9 @@ layout: default
 /**
  * @title 最小全域有向木
  * @category グラフ
- * @brief Chu-Liu/Edmonds
- * @brief O(E log V)
- * @brief 返り値:{全域木のコスト総和,全域木に使用する辺}
+ *  Chu-Liu/Edmonds
+ *  O(E log V)
+ *  返り値:{全域木のコスト総和,全域木に使用する辺}
  */
 
 #ifndef call_from_test

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_totient_function.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_totient_function">https://judge.yosupo.jp/problem/sum_of_totient_function</a>
@@ -160,20 +160,20 @@ struct ModInt {
  * @see https://yukicoder.me/wiki/sum_totient
  * @see https://oi-wiki.org/math/du/
  * @see https://blog.bill.moe/multiplicative-function-sieves-notes/
- * @brief メモ化再帰で実装(map使ってるのでlogがつく)
- * @brief k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
- * @brief 前処理でN^(2/3)まで計算できるならO(N^(2/3))
+ *  メモ化再帰で実装(map使ってるのでlogがつく)
+ *  k==1ならO(N^(3/4)) (g,bの計算量をO(1)として)
+ *  前処理でN^(2/3)まで計算できるならO(N^(2/3))
  */
+
+#ifndef call_from_test
+#line 17 "src/Math/dujiao_sieve.hpp"
+using namespace std;
+#endif
 
 // input H,W,g,b,k
 // output f(H,W)
 //  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])
 //       b(d) = a(1)+a(2)+...+a(d)
-
-#ifndef call_from_test
-#line 22 "src/Math/dujiao_sieve.hpp"
-using namespace std;
-#endif
 
 template <typename T, typename G, typename A>
 T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
@@ -196,9 +196,9 @@ T dujiao_sieve(int64_t H, int64_t W, const G &g, const A &b,
 /**
  * @title 数論
  * @category 数学
- * @brief 約数や倍数についてのゼータ変換やメビウス変換
- * @brief をもとに数論的関数やgcd畳み込みなどを実現
- * @brief O(N log log N)
+ *  約数や倍数についてのゼータ変換やメビウス変換
+ *  をもとに数論的関数やgcd畳み込みなどを実現
+ *  O(N log log N)
  * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5
  * @see https://en.wikipedia.org/wiki/Dirichlet_convolution
  */

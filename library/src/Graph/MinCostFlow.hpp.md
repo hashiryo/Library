@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 最小費用流
+# :question: 最小費用流
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/MinCostFlow.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://misawa.github.io/others/flow/library_design.html">https://misawa.github.io/others/flow/library_design.html</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/assignment.mcf.test.cpp.html">test/yosupo/assignment.mcf.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/min_cost_b_flow.test.cpp.html">test/yosupo/min_cost_b_flow.test.cpp</a>
 
@@ -53,8 +53,8 @@ layout: default
 /**
  * @title 最小費用流
  * @category グラフ
- * @brief PrimalDual(容量スケーリング)
- * @brief O(m^2 log U log n)
+ *  PrimalDual(容量スケーリング)
+ *  O(m^2 log U log n)
  * @see https://misawa.github.io/others/flow/library_design.html
  */
 // verify用:
@@ -328,8 +328,8 @@ using MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;
 /**
  * @title 最小費用流
  * @category グラフ
- * @brief PrimalDual(容量スケーリング)
- * @brief O(m^2 log U log n)
+ *  PrimalDual(容量スケーリング)
+ *  O(m^2 log U log n)
  * @see https://misawa.github.io/others/flow/library_design.html
  */
 // verify用:

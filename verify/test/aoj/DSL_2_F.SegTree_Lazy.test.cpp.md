@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
+# :heavy_check_mark: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
+* :question: <a href="../../../library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 
 
 ## Code

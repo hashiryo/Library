@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
@@ -63,8 +63,8 @@ layout: default
 /**
  * @title 形式的冪級数
  * @category 数学
- * @brief mod=998244353とかでない素数modのModInt<mod>でも使える
- * @brief nttの配列のサイズに注意(REの原因になりがち)
+ *  mod=998244353とかでない素数modのModInt<mod>でも使える
+ *  nttの配列のサイズに注意(REの原因になりがち)
  */
 // verify用: https://loj.ac/problem/150
 
@@ -504,8 +504,8 @@ struct FormalPowerSeries : vector<Modint> {
 /**
  * @title 形式的冪級数
  * @category 数学
- * @brief mod=998244353とかでない素数modのModInt<mod>でも使える
- * @brief nttの配列のサイズに注意(REの原因になりがち)
+ *  mod=998244353とかでない素数modのModInt<mod>でも使える
+ *  nttの配列のサイズに注意(REの原因になりがち)
  */
 // verify用: https://loj.ac/problem/150
 

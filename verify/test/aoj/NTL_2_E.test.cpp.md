@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/NTL_2_E.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_E</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/Math/BigInt.hpp.html">多倍長整数</a>
+* :question: <a href="../../../library/src/Math/BigInt.hpp.html">多倍長整数</a>
 
 
 ## Code
@@ -83,7 +83,7 @@ using namespace std;
 /**
  * @title 多倍長整数
  * @category 数学
- * @brief javaやpythonの多倍長整数を使うべき
+ * javaやpythonの多倍長整数を使うべき
  */
 
 #ifndef call_from_test

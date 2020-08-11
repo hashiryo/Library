@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.KMP.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -88,9 +88,9 @@ using namespace std;
 /**
  * @title Knuth-Morris-Pratt
  * @category 文字列
- * @brief テーブル構築 O(|S|)
- * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
- * @brief period(i) verified :ARC060_F
+ *  テーブル構築 O(|S|)
+ *  pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
+ *  period(i) verified :ARC060_F
  */
 
 #ifndef call_from_test

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/suffixarray.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/suffixarray">https://judge.yosupo.jp/problem/suffixarray</a>
@@ -85,10 +85,10 @@ using namespace std;
 /**
  * @title 接尾辞配列(Suffix-Array)
  * @category 文字列
- * @brief 構築 O(|S| log |S|)
- * @brief lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
- * @brief LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
- * @brief '$'は入れてない
+ *  構築 O(|S| log |S|)
+ *  lower_bound(T) 文字列Tを含む接尾辞のindexの下限 O(|T| log |S|)
+ *  LongestCommonPrefix配列（高さ配列） 構築 O(|S|)
+ *  '$'は入れてない
  */
 
 #ifndef call_from_test

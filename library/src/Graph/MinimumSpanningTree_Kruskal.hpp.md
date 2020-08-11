@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 最小全域木(Kruskal)
+# :heavy_check_mark: 最小全域木(Kruskal)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2559.LCT_Dual.test.cpp.html">test/aoj/2559.LCT_Dual.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
 
 
 ## Code
@@ -50,8 +50,8 @@ layout: default
 /**
  * @title 最小全域木(Kruskal)
  * @category グラフ
- * @brief O(E log V)
- * @brief 返り値:{全域木のコスト総和,全域木に使用する辺}
+ *  O(E log V)
+ *  返り値:{全域木のコスト総和,全域木に使用する辺}
  */
 
 #ifndef call_from_test

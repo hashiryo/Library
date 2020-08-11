@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/String/z_algorithm.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 
@@ -49,8 +49,8 @@ layout: default
 /**
  * @title 最長共通接頭辞(Z-Algorithm)
  * @category 文字列
- * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
- * @brief O(|S|)
+ *  $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
+ *  O(|S|)
  */
 
 #ifndef call_from_test
@@ -83,8 +83,8 @@ vector<int> z_algorithm(const string &s) {
 /**
  * @title 最長共通接頭辞(Z-Algorithm)
  * @category 文字列
- * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
- * @brief O(|S|)
+ *  $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
+ *  O(|S|)
  */
 
 #ifndef call_from_test

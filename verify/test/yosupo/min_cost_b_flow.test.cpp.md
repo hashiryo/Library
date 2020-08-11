@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/min_cost_b_flow.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-11 20:23:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/min_cost_b_flow">https://judge.yosupo.jp/problem/min_cost_b_flow</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
+* :question: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 
 
 ## Code
@@ -123,8 +123,8 @@ using namespace std;
 /**
  * @title 最小費用流
  * @category グラフ
- * @brief PrimalDual(容量スケーリング)
- * @brief O(m^2 log U log n)
+ *  PrimalDual(容量スケーリング)
+ *  O(m^2 log U log n)
  * @see https://misawa.github.io/others/flow/library_design.html
  */
 // verify用:
