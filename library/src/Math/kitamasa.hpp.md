@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 線形漸化式の高速計算
+# :question: 線形漸化式の高速計算
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,13 @@ layout: default
     - Last commit date: 1970-01-01 00:00:00+00:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 
 
 ## Code

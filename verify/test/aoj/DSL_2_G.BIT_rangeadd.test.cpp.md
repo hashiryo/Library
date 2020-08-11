@@ -31,9 +31,15 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
+
+
+## Depends on
+
+* :x: <a href="../../../library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 
 
 ## Code
@@ -48,7 +54,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
+#include "src/DataStructure/BinaryIndexedTree_RangeAdd.hpp"
 #undef call_from_test
 
 signed main() {
@@ -77,16 +83,67 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/BinaryIndexedTree_RangeAdd.hpp: line -1: no such header
+#line 1 "test/aoj/DSL_2_G.BIT_rangeadd.test.cpp"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/DataStructure/BinaryIndexedTree_RangeAdd.hpp"
+/**
+ * @title Binary-Indexed-Tree(区間加算)
+ * @category データ構造
+ * @brief O(logN)
+ * @brief 0-indexed
+ */
+
+#ifndef call_from_test
+#line 10 "src/DataStructure/BinaryIndexedTree_RangeAdd.hpp"
+using namespace std;
+#endif
+
+template <typename T>
+struct BinaryIndexedTree_RangeAdd {
+  vector<T> dat1;
+  vector<T> dat2;
+  BinaryIndexedTree_RangeAdd(int n) : dat1(n + 1, 0), dat2(n + 1, 0) {}
+  void add_range(int l, int r, T w) {  // add w [l,r)
+    for (int k = l + 1; k < (int)dat1.size(); k += k & -k) dat1[k] -= w * l;
+    for (int k = r + 1; k < (int)dat1.size(); k += k & -k) dat1[k] += w * r;
+    for (int k = l + 1; k < (int)dat2.size(); k += k & -k) dat2[k] += w;
+    for (int k = r + 1; k < (int)dat2.size(); k += k & -k) dat2[k] -= w;
+  }
+  T sum(int x) {  // sum [0,x)
+    T s = 0;
+    for (int k = x; k > 0; k &= k - 1) s += dat1[k];
+    for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;
+    return s;
+  }
+};
+#line 9 "test/aoj/DSL_2_G.BIT_rangeadd.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int N, Q;
+  cin >> N >> Q;
+  BinaryIndexedTree_RangeAdd<long long> bit(N);
+  while (Q--) {
+    int op, s, t;
+    cin >> op >> s >> t;
+    s--, t--;
+    if (op)
+      cout << bit.sum(t + 1) - bit.sum(s) << endl;
+    else {
+      long long x;
+      cin >> x;
+      bit.add_range(s, t + 1, x);
+    }
+  }
+}
 
 ```
 {% endraw %}

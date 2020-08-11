@@ -31,9 +31,16 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/find_linear_recurrence.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/find_linear_recurrence">https://judge.yosupo.jp/problem/find_linear_recurrence</a>
+
+
+## Depends on
+
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :x: <a href="../../../library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 
 
 ## Code
@@ -47,8 +54,8 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "Math/ModInt.hpp"
-#include "Math/berlekamp_massey.hpp"
+#include "src/Math/ModInt.hpp"
+#include "src/Math/berlekamp_massey.hpp"
 #undef call_from_test
 
 signed main() {
@@ -72,16 +79,131 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Math/ModInt.hpp: line -1: no such header
+#line 1 "test/yosupo/find_linear_recurrence.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/Math/ModInt.hpp"
+/**
+ * @title ModInt
+ * @category 数学
+ */
+
+#ifndef call_from_test
+#line 8 "src/Math/ModInt.hpp"
+using namespace std;
+#endif
+
+template <int mod>
+struct ModInt {
+  int x;
+  ModInt() : x(0) {}
+  ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod)) {}
+  ModInt &operator+=(const ModInt &p) {
+    if ((x += p.x) >= mod) x -= mod;
+    return *this;
+  }
+  ModInt &operator-=(const ModInt &p) {
+    if ((x += mod - p.x) >= mod) x -= mod;
+    return *this;
+  }
+  ModInt &operator*=(const ModInt &p) {
+    x = (int)(1LL * x * p.x % mod);
+    return *this;
+  }
+  ModInt &operator/=(const ModInt &p) { return *this *= p.inverse(); }
+  ModInt operator-() const { return ModInt() - *this; }
+  ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
+  ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p; }
+  ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p; }
+  ModInt operator/(const ModInt &p) const { return ModInt(*this) /= p; }
+  bool operator==(const ModInt &p) const { return x == p.x; }
+  bool operator!=(const ModInt &p) const { return x != p.x; }
+  ModInt inverse() const {
+    int a = x, b = mod, u = 1, v = 0, t;
+    while (b) t = a / b, swap(a -= t * b, b), swap(u -= t * v, v);
+    return ModInt(u);
+  }
+  ModInt pow(int64_t e) const {
+    ModInt ret(1);
+    for (ModInt b = *this; e; e >>= 1, b *= b)
+      if (e & 1) ret *= b;
+    return ret;
+  }
+  friend ostream &operator<<(ostream &os, const ModInt &p) { return os << p.x; }
+  friend istream &operator>>(istream &is, ModInt &a) {
+    int64_t t;
+    is >> t;
+    a = ModInt<mod>(t);
+    return (is);
+  }
+  static int modulo() { return mod; }
+};
+#line 1 "src/Math/berlekamp_massey.hpp"
+/**
+ * @title Berlekamp-Massey
+ * @category 数学
+ * @brief　数列の最初のN項から、その数列を生成するN/2次以下の最小の線形漸化式を求める
+ * @brief O(N^2)
+ */
+
+// verify用:
+// https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c
+
+#ifndef call_from_test
+#line 13 "src/Math/berlekamp_massey.hpp"
+using namespace std;
+#endif
+
+// a[n] = c[0] * a[n-N] + c[1] * a[n-N+1] + ... + c[N-1] * a[n-1]
+// return c
+
+template <class T>
+vector<T> berlekamp_massey(const vector<T> &a) {
+  const int N = (int)a.size();
+  vector<T> b = {T(-1)}, c = {T(-1)};
+  T y = T(1);
+  for (int ed = 1; ed <= N; ed++) {
+    int l = int(c.size()), m = int(b.size()) + 1;
+    T x = 0;
+    for (int i = 0; i < l; i++) x += c[i] * a[ed - l + i];
+    b.emplace_back(0);
+    if (x == T(0)) continue;
+    T freq = x / y;
+    if (l < m) {
+      auto tmp = c;
+      c.insert(begin(c), m - l, T(0));
+      for (int i = 0; i < m; i++) c[m - 1 - i] -= freq * b[m - 1 - i];
+      b = tmp;
+      y = x;
+    } else {
+      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];
+    }
+  }
+  c.pop_back();
+  return c;
+}
+#line 9 "test/yosupo/find_linear_recurrence.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  using Mint = ModInt<998244353>;
+  int N;
+  cin >> N;
+  vector<Mint> a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  vector<Mint> c = berlekamp_massey(a);
+  int d = c.size();
+  cout << d << endl;
+  for (int i = 0; i < d; i++) cout << (i ? " " : "") << c[d - 1 - i];
+  cout << endl;
+  return 0;
+}
 
 ```
 {% endraw %}

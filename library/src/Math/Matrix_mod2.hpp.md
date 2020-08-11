@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 行列(mod2)
+# :question: 行列(mod2)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,14 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 最大マッチング(二部グラフ)
+# :x: 最大マッチング(二部グラフ)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -35,6 +35,12 @@ layout: default
 
 
 * see: <a href="https://snuke.hatenablog.com/entry/2019/05/07/013609">https://snuke.hatenablog.com/entry/2019/05/07/013609</a>
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/277.test.cpp.html">test/yukicoder/277.test.cpp</a>
 
 
 ## Code

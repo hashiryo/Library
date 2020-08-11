@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Sparse-Table(区間min)
+# :x: Sparse-Table(区間min)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/aoj/DSL_3_D.sparsetable.test.cpp.html">test/aoj/DSL_3_D.sparsetable.test.cpp</a>
 
 
 ## Code

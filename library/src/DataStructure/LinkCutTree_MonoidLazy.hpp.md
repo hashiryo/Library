@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Link-Cut-Tree(モノイド遅延伝搬)
+# :heavy_check_mark: Link-Cut-Tree(モノイド遅延伝搬)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2450.LCT.test.cpp.html">test/aoj/2450.LCT.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 2-SAT
+# :x: 2-SAT
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 1970-01-01 00:00:00+00:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 強連結成分分解
+# :x: 強連結成分分解
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,13 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/scc.test.cpp.html">test/yosupo/scc.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 
 
 ## Code

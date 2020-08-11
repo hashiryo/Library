@@ -31,9 +31,15 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.disjointsparsetable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
+
+
+## Depends on
+
+* :question: <a href="../../../library/src/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 
 
 ## Code
@@ -41,33 +47,31 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/DisjointSparseTable.hpp"
+#include "src/DataStructure/DisjointSparseTable.hpp"
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    int N, L;
-    cin >> N >> L;
-    vector<int> a(N);
-    for(int i = 0; i < N; i++)
-        cin >> a[i];
-    auto f = [](int a, int b) { return min(a, b); };
-    DisjointSparseTable<int> dst(a, f);
-    for(int i = 0; i + L <= N; i++) {
-        if(i)
-            cout << " ";
-        cout << dst.query(i, i + L);
-    }
-    cout << endl;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int N, L;
+  cin >> N >> L;
+  vector<int> a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  auto f = [](int a, int b) { return min(a, b); };
+  DisjointSparseTable<int> dst(a, f);
+  for (int i = 0; i + L <= N; i++) {
+    if (i) cout << " ";
+    cout << dst.query(i, i + L);
+  }
+  cout << endl;
+  return 0;
 }
 ```
 {% endraw %}
@@ -75,16 +79,75 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/DisjointSparseTable.hpp: line -1: no such header
+#line 1 "test/aoj/DSL_3_D.disjointsparsetable.test.cpp"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/DataStructure/DisjointSparseTable.hpp"
+/**
+ * @title Disjoint-Sparse-Table
+ * @category データ構造
+ * @brief fは結合則をみたす二項演算
+ * @brief 構築 O(n log n)
+ * @brief query O(1)
+ */
+
+#ifndef call_from_test
+#line 11 "src/DataStructure/DisjointSparseTable.hpp"
+using namespace std;
+#endif
+
+template <class T>
+struct DisjointSparseTable {
+  vector<vector<T>> ys;
+  using F = function<T(T, T)>;
+  const F f;
+  DisjointSparseTable(vector<T> xs, F f_) : f(f_) {
+    int n = 1;
+    while (n <= xs.size()) n *= 2;
+    xs.resize(n);
+    ys.push_back(xs);
+    for (int h = 1;; ++h) {
+      int range = (2 << h), half = range / 2;
+      if (range > n) break;
+      ys.push_back(xs);
+      for (int i = half; i < n; i += range) {
+        for (int j = i - 2; j >= i - half; --j)
+          ys[h][j] = f(ys[h][j], ys[h][j + 1]);
+        for (int j = i + 1; j < min(n, i + half); ++j)
+          ys[h][j] = f(ys[h][j - 1], ys[h][j]);
+      }
+    }
+  }
+  T query(int i, int j) {  // [i, j)
+    if (i == --j) return ys[0][i];
+    int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);
+    return f(ys[h][i], ys[h][j]);
+  }
+};
+#line 9 "test/aoj/DSL_3_D.disjointsparsetable.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int N, L;
+  cin >> N >> L;
+  vector<int> a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  auto f = [](int a, int b) { return min(a, b); };
+  DisjointSparseTable<int> dst(a, f);
+  for (int i = 0; i + L <= N; i++) {
+    if (i) cout << " ";
+    cout << dst.query(i, i + L);
+  }
+  cout << endl;
+  return 0;
+}
 
 ```
 {% endraw %}

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 数論
+# :x: 数論
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -36,6 +36,13 @@ layout: default
 
 * see: <a href="https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5">https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5</a>
 * see: <a href="https://en.wikipedia.org/wiki/Dirichlet_convolution">https://en.wikipedia.org/wiki/Dirichlet_convolution</a>
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
 
 
 ## Code

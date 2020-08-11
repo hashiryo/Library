@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 木DP
+# :x: 木DP
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -35,6 +35,14 @@ layout: default
 
 
 * see: <a href="https://ei1333.hateblo.jp/entry/2018/12/21/004022">https://ei1333.hateblo.jp/entry/2018/12/21/004022</a>
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/417.test.cpp.html">test/yukicoder/417.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/763.test.cpp.html">test/yukicoder/763.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/768.test.cpp.html">test/yukicoder/768.test.cpp</a>
 
 
 ## Code

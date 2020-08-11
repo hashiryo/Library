@@ -31,9 +31,15 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/z_algorithm.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/zalgorithm">https://judge.yosupo.jp/problem/zalgorithm</a>
+
+
+## Depends on
+
+* :x: <a href="../../../library/src/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
 
 
 ## Code
@@ -47,7 +53,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "String/z_algorithm.hpp"
+#include "src/String/z_algorithm.hpp"
 #undef call_from_test
 
 signed main() {
@@ -68,16 +74,56 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: String/z_algorithm.hpp: line -1: no such header
+#line 1 "test/yosupo/z_algorithm.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/String/z_algorithm.hpp"
+/**
+ * @title 最長共通接頭辞(Z-Algorithm)
+ * @category 文字列
+ * @brief $prefix_i$ は、$S$ と $S.substr(i)$ の LCP(longest common prefix)
+ * @brief O(|S|)
+ */
+
+#ifndef call_from_test
+#line 10 "src/String/z_algorithm.hpp"
+using namespace std;
+#endif
+
+vector<int> z_algorithm(const string &s) {
+  vector<int> prefix(s.size());
+  for (int i = 1, j = 0; i < s.size(); i++) {
+    if (i + prefix[i - j] < j + prefix[j]) {
+      prefix[i] = prefix[i - j];
+    } else {
+      int k = max(0, j + prefix[j] - i);
+      while (i + k < s.size() && s[k] == s[i + k]) ++k;
+      prefix[i] = k;
+      j = i;
+    }
+  }
+  prefix[0] = (int)s.size();
+  return prefix;
+}
+#line 8 "test/yosupo/z_algorithm.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string s;
+  cin >> s;
+  vector<int> ans = z_algorithm(s);
+  for (int i = 0; i < s.size(); i++) {
+    cout << (i ? " " : "") << ans[i];
+  }
+  cout << endl;
+  return 0;
+}
 
 ```
 {% endraw %}

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Binary-Indexed-Tree(2次元)
+# :heavy_check_mark: Binary-Indexed-Tree(2次元)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2842.BIT_2D.test.cpp.html">test/aoj/2842.BIT_2D.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 複数の値代入と多項式補間
+# :x: 複数の値代入と多項式補間
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,12 @@ layout: default
     - Last commit date: 1970-01-01 00:00:00+00:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 
 
 ## Code

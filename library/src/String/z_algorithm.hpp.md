@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 最長共通接頭辞(Z-Algorithm)
+# :x: 最長共通接頭辞(Z-Algorithm)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 最大流(Dinic)
+# :question: 最大流(Dinic)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,12 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2313.test.cpp.html">test/aoj/2313.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/GRL_6_A.Dinic.test.cpp.html">test/aoj/GRL_6_A.Dinic.test.cpp</a>
 
 
 ## Code

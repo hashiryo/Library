@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 杜教筛
+# :x: 杜教筛
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -40,6 +40,13 @@ layout: default
 * see: <a href="https://yukicoder.me/wiki/sum_totient">https://yukicoder.me/wiki/sum_totient</a>
 * see: <a href="https://oi-wiki.org/math/du/">https://oi-wiki.org/math/du/</a>
 * see: <a href="https://blog.bill.moe/multiplicative-function-sieves-notes/">https://blog.bill.moe/multiplicative-function-sieves-notes/</a>
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
 
 
 ## Code

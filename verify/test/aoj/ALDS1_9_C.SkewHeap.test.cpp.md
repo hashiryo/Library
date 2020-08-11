@@ -25,15 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
+# :heavy_check_mark: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_9_C.SkewHeap.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C</a>
+
+
+## Depends on
+
+* :question: <a href="../../../library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 
 
 ## Code
@@ -48,7 +54,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/SkewHeap.hpp"
+#include "src/DataStructure/SkewHeap.hpp"
 #undef call_from_test
 
 signed main() {
@@ -73,16 +79,108 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/SkewHeap.hpp: line -1: no such header
+#line 1 "test/aoj/ALDS1_9_C.SkewHeap.test.cpp"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/DataStructure/SkewHeap.hpp"
+/**
+ * @title Skew-Heap
+ * @category データ構造
+ * @brief マージできるヒープ
+ * @brief top: O(1), pop, push, merge: O(logN)
+ * @brief add(v): 全体に作用素vを適用
+ */
+
+#ifndef call_from_test
+#line 11 "src/DataStructure/SkewHeap.hpp"
+using namespace std;
+#endif
+
+template <typename T>
+struct Op_RaddQ {
+  using E = T;
+  static E ei() { return 0; }
+  static T g(const T &l, const E &r) { return l + r; }
+  static E h(const E &l, const E &r) { return l + r; }
+};
+
+template <typename T, typename Compare = less<T>, typename Op = Op_RaddQ<T>>
+struct SkewHeap {
+  using E = typename Op::E;
+  struct Node {
+    Node *ch[2];
+    T key;
+    E lazy;
+    Node() {}
+    Node(T k, E laz) : ch{nullptr, nullptr}, key(k), lazy(laz) {}
+  } * root;
+
+ private:
+  void propagate(Node *a) {
+    if (a->lazy != Op::ei()) {
+      a->key = Op::g(a->key, a->lazy);
+      if (a->ch[0]) a->ch[0]->lazy = Op::h(a->ch[0]->lazy, a->lazy);
+      if (a->ch[1]) a->ch[1]->lazy = Op::h(a->ch[1]->lazy, a->lazy);
+      a->lazy = Op::ei();
+    }
+  }
+  Node *merge(Node *a, Node *b) {
+    if (!a || !b) return a ? a : b;
+    propagate(a);
+    propagate(b);
+    if (Compare()(a->key, b->key)) swap(a, b);
+    a->ch[1] = merge(b, a->ch[1]);
+    swap(a->ch[0], a->ch[1]);
+    return a;
+  }
+
+ public:
+  /* max heap */
+  SkewHeap() : root(nullptr) {}
+  void push(T key) {
+    Node *n = new Node(key, Op::ei());
+    root = merge(root, n);
+  }
+  T pop() {
+    propagate(root);
+    T ret = root->key;
+    Node *temp = root;
+    root = merge(root->ch[0], root->ch[1]);
+    delete temp;
+    return ret;
+  }
+  T top() {
+    propagate(root);
+    return root->key;
+  }
+  bool empty() { return !root; }
+  void add(E v) { root->lazy = Op::h(root->lazy, v); }
+  void merge(SkewHeap x) { root = merge(root, x.root); }
+};
+#line 9 "test/aoj/ALDS1_9_C.SkewHeap.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  SkewHeap<int> S;
+  string op;
+  while (cin >> op && op != "end") {
+    if (op[0] == 'i') {
+      int k;
+      cin >> k;
+      S.push(k);
+    } else {
+      cout << S.pop() << endl;
+    }
+  }
+  return 0;
+}
 
 ```
 {% endraw %}

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Segment-Tree(動的)
+# :x: Segment-Tree(動的)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,13 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/set_xor_min.test.cpp.html">test/yosupo/set_xor_min.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/649.SegTree_Dynamic.test.cpp.html">test/yukicoder/649.SegTree_Dynamic.test.cpp</a>
 
 
 ## Code

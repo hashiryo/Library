@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 最小費用流
+# :x: 最小費用流
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -35,6 +35,14 @@ layout: default
 
 
 * see: <a href="https://misawa.github.io/others/flow/library_design.html">https://misawa.github.io/others/flow/library_design.html</a>
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/aoj/GRL_6_B.RadixHeap.test.cpp.html">test/aoj/GRL_6_B.RadixHeap.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/GRL_6_B.test.cpp.html">test/aoj/GRL_6_B.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/assignment.mcf.test.cpp.html">test/yosupo/assignment.mcf.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/min_cost_b_flow.test.cpp.html">test/yosupo/min_cost_b_flow.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Segment-Tree
+# :x: Segment-Tree
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,13 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/aoj/DSL_2_A.SegTree.test.cpp.html">test/aoj/DSL_2_A.SegTree.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 赤黒木
+# :question: 赤黒木
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,12 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1508.RBT.test.cpp.html">test/aoj/1508.RBT.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/persistent_queue.RBTP.test.cpp.html">test/yosupo/persistent_queue.RBTP.test.cpp</a>
 
 
 ## Code

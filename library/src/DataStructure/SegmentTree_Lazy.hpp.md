@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Segment-Tree(遅延伝搬)
+# :x: Segment-Tree(遅延伝搬)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,12 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/aoj/DSL_2_F.SegTree_Lazy.test.cpp.html">test/aoj/DSL_2_F.SegTree_Lazy.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp.html">test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 多倍長整数
+# :x: 多倍長整数
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,16 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
 
 
 ## Code

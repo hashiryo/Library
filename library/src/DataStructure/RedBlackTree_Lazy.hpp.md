@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 赤黒木(遅延伝搬)
+# :x: 赤黒木(遅延伝搬)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,12 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/persistent_queue.RBTPL.test.cpp.html">test/yosupo/persistent_queue.RBTPL.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/range_affine_range_sum.RBTL.test.cpp.html">test/yosupo/range_affine_range_sum.RBTL.test.cpp</a>
 
 
 ## Code

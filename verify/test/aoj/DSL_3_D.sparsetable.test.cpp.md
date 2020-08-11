@@ -31,9 +31,15 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_3_D.sparsetable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
+
+
+## Depends on
+
+* :x: <a href="../../../library/src/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 
 
 ## Code
@@ -48,7 +54,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/SparseTable.hpp"
+#include "src/DataStructure/SparseTable.hpp"
 #undef call_from_test
 
 signed main() {
@@ -71,16 +77,63 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/SparseTable.hpp: line -1: no such header
+#line 1 "test/aoj/DSL_3_D.sparsetable.test.cpp"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/DataStructure/SparseTable.hpp"
+/**
+ * @title Sparse-Table(区間min)
+ * @category データ構造
+ * @brief RmQ
+ * @brief 構築 O(n log n)
+ * @brief query O(1)
+ */
+
+#ifndef call_from_test
+#line 11 "src/DataStructure/SparseTable.hpp"
+using namespace std;
+#endif
+
+template <class T>
+struct SparseTable {
+  const vector<T> &x;
+  vector<vector<int>> table;
+  int argmin(int i, int j) { return x[i] < x[j] ? i : j; }
+  SparseTable(const vector<T> &x) : x(x) {
+    int logn = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(x.size());
+    table.assign(logn + 1, vector<int>(x.size()));
+    iota(table[0].begin(), table[0].end(), 0);
+    for (int h = 0; h + 1 <= logn; ++h)
+      for (int i = 0; i + (1 << h) < x.size(); ++i)
+        table[h + 1][i] = argmin(table[h][i], table[h][i + (1 << h)]);
+  }
+  T range_min(int i, int j) {  // = min x[i,j)
+    int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(j - i);  // = log2
+    return x[argmin(table[h][i], table[h][j - (1 << h)])];
+  }
+};
+#line 9 "test/aoj/DSL_3_D.sparsetable.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int N, L;
+  cin >> N >> L;
+  vector<int> a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  SparseTable<int> st(a);
+  for (int i = 0; i + L <= N; i++) {
+    cout << (i ? " " : "") << st.range_min(i, i + L);
+  }
+  cout << endl;
+  return 0;
+}
 
 ```
 {% endraw %}

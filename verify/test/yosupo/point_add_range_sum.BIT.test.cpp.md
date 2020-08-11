@@ -31,9 +31,15 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_add_range_sum.BIT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
+
+
+## Depends on
+
+* :x: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 
 ## Code
@@ -47,7 +53,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/BinaryIndexedTree.hpp"
+#include "src/DataStructure/BinaryIndexedTree.hpp"
 #undef call_from_test
 
 signed main() {
@@ -77,16 +83,74 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/BinaryIndexedTree.hpp: line -1: no such header
+#line 1 "test/yosupo/point_add_range_sum.BIT.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/DataStructure/BinaryIndexedTree.hpp"
+/**
+ * @title Binary-Indexed-Tree
+ * @category データ構造
+ * @brief O(logN)
+ * @brief 0-indexed
+ */
+
+#ifndef call_from_test
+#line 10 "src/DataStructure/BinaryIndexedTree.hpp"
+using namespace std;
+#endif
+
+template <typename T>
+struct BinaryIndexedTree {
+  vector<T> dat;
+  BinaryIndexedTree(int n) : dat(n + 1, 0) {}
+  BinaryIndexedTree(int n, T a) : BinaryIndexedTree(vector<T>(n, a)) {}
+  BinaryIndexedTree(vector<T> y) : dat(y.size() + 1) {
+    for (int i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
+    for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
+  }
+  void add(int i, T a = 1) {
+    for (++i; i < dat.size(); i += i & -i) dat[i] += a;
+  }
+  T sum(int i) {  // sum [0,i)
+    T s = 0;
+    for (; i > 0; i &= i - 1) s += dat[i];
+    return s;
+  }
+  // min { i : sum(i+1) > k } -> kth element(0-indexed)
+  int find(T k) const {
+    int i = 0;
+    for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
+      if (i + p < dat.size() && dat[i + p] <= k) k -= dat[i += p];
+    return i + 1 == dat.size() ? -1 : i;  // -1 -> no solutions
+  }
+};
+#line 8 "test/yosupo/point_add_range_sum.BIT.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int N, Q;
+  cin >> N >> Q;
+  BinaryIndexedTree<long long> bit(N);
+  for (int i = 0; i < N; i++) {
+    long long a;
+    cin >> a;
+    bit.add(i, a);
+  }
+  while (Q--) {
+    int t, a, b;
+    cin >> t >> a >> b;
+    if (t)
+      cout << bit.sum(b) - bit.sum(a) << endl;
+    else
+      bit.add(a, b);
+  }
+}
 
 ```
 {% endraw %}

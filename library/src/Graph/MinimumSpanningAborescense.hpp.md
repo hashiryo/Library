@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 最小全域有向木
+# :question: 最小全域有向木
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,13 @@ layout: default
     - Last commit date: 1970-01-01 00:00:00+00:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
 ## Code

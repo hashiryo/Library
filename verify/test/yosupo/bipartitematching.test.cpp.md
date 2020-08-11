@@ -31,9 +31,15 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/bipartitematching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/bipartitematching">https://judge.yosupo.jp/problem/bipartitematching</a>
+
+
+## Depends on
+
+* :x: <a href="../../../library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
 
 
 ## Code
@@ -47,7 +53,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "Graph/MatchingBipartite.hpp"
+#include "src/Graph/MatchingBipartite.hpp"
 #undef call_from_test
 
 signed main() {
@@ -76,16 +82,98 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Graph/MatchingBipartite.hpp: line -1: no such header
+#line 1 "test/yosupo/bipartitematching.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/Graph/MatchingBipartite.hpp"
+/**
+ * @title 最大マッチング(二部グラフ)
+ * @category グラフ
+ * @brief  O(VE)
+ * @brief 速い(O(E√V)並?)
+ * @brief 返り値:{マッチング数,{左の相方(いないなら-1),右の相方(いないなら-1)}}
+ * @see https://snuke.hatenablog.com/entry/2019/05/07/013609
+ */
+// 被覆問題との関係 https://qiita.com/drken/items/7f98315b56c95a6181a4
+
+#ifndef call_from_test
+#line 13 "src/Graph/MatchingBipartite.hpp"
+using namespace std;
+#endif
+
+struct MatchingBipartite {
+  vector<vector<int>> adj;
+  int n, m;
+  MatchingBipartite(int n, int m) : adj(n), n(n), m(m) {}
+  void add_edge(int l, int r) { adj[l].push_back(r); }
+  pair<int, pair<vector<int>, vector<int>>> get_matching() {
+    vector<int> pre(n, -1), root(n, -1);
+    vector<int> leftmate(n, -1), rightmate(m, -1);
+    int res = 0;
+    bool update = true;
+    while (update) {
+      update = false;
+      queue<int> que;
+      for (int i = 0; i < n; ++i)
+        if (leftmate[i] == -1) {
+          root[i] = i;
+          que.push(i);
+        }
+      while (!que.empty()) {
+        int v = que.front();
+        que.pop();
+        if (leftmate[root[v]] != -1) continue;
+        for (int u : adj[v]) {
+          if (rightmate[u] == -1) {
+            while (u != -1) {
+              rightmate[u] = v;
+              swap(leftmate[v], u);
+              v = pre[v];
+            }
+            update = true;
+            res++;
+            break;
+          }
+          u = rightmate[u];
+          if (pre[u] != -1) continue;
+          pre[u] = v;
+          root[u] = root[v];
+          que.push(u);
+        }
+      }
+      if (update)
+        fill(pre.begin(), pre.end(), -1), fill(root.begin(), root.end(), -1);
+    }
+    return make_pair(res, make_pair(leftmate, rightmate));
+  }
+};
+#line 8 "test/yosupo/bipartitematching.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  int L, R, M;
+  cin >> L >> R >> M;
+  MatchingBipartite graph(L, R);
+  while (M--) {
+    int a, b;
+    cin >> a >> b;
+    graph.add_edge(a, b);
+  }
+  auto ans = graph.get_matching();
+  auto left = ans.second.first;
+  cout << ans.first << endl;
+  for (int i = 0; i < left.size(); i++)
+    if (left[i] != -1) {
+      cout << i << " " << left[i] << endl;
+    }
+  return 0;
+}
 
 ```
 {% endraw %}

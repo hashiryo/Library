@@ -31,10 +31,18 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/24/031413">https://min-25.hatenablog.com/entry/2015/04/24/031413</a>
+* see: <a href="https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial">https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial</a>
+
+
+## Depends on
+
+* :question: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :x: <a href="../../../library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 
 
 ## Code
@@ -52,9 +60,9 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "Math/Combination.hpp"
-#include "Math/ModInt.hpp"
-#include "Math/lagrange_interpolation.hpp"
+#include "src/Math/Combination.hpp"
+#include "src/Math/ModInt.hpp"
+#include "src/Math/lagrange_interpolation.hpp"
 #undef call_from_test
 
 template <class Modint>
@@ -119,16 +127,203 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Math/Combination.hpp: line -1: no such header
+#line 1 "test/yosupo/sum_of_exponential_times_polynomial.test.cpp"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial"
+
+/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/Math/Combination.hpp"
+/**
+ * @title 組み合わせ
+ * @category 数学
+ */
+
+#ifndef call_from_test
+#line 8 "src/Math/Combination.hpp"
+using namespace std;
+#endif
+
+template <class Modint>
+struct Combination {
+  static vector<Modint> _fact, _finv, _inv;
+  static void init(int sz) {
+    int n = min(2 * sz, Modint::modulo() - 1);
+    _fact.resize(n + 1), _finv.resize(n + 1), _inv.resize(n + 1);
+    for (int i = 0; i <= n; ++i) _fact[i] = i ? Modint(i) * _fact[i - 1] : 1;
+    _finv[n] = _fact[n].inverse();
+    for (int i = n; i; --i) _finv[i - 1] = Modint(i) * _finv[i];
+    for (int i = 1; i <= n; ++i) _inv[i] = _finv[i] * _fact[i - 1];
+  }
+  static Modint inverse(int n) { return _inv[n]; }
+  static Modint fact(int n, bool inv = 0) { return inv ? _finv[n] : _fact[n]; }
+  static Modint nPr(int n, int r) {
+    if (n < r || r < 0) return Modint(0);
+    return _fact[n] * _finv[n - r];
+  }
+  static Modint nCr(int n, int r) { return nPr(n, r) * _finv[r]; }
+  static Modint nHr(int n, int r) { return !r ? Modint(1) : nCr(n + r - 1, r); }
+  static size_t size() { return _inv.size(); }
+};
+template <class Modint>
+vector<Modint> Combination<Modint>::_fact;
+template <class Modint>
+vector<Modint> Combination<Modint>::_finv;
+template <class Modint>
+vector<Modint> Combination<Modint>::_inv;
+#line 1 "src/Math/ModInt.hpp"
+/**
+ * @title ModInt
+ * @category 数学
+ */
+
+#ifndef call_from_test
+#line 8 "src/Math/ModInt.hpp"
+using namespace std;
+#endif
+
+template <int mod>
+struct ModInt {
+  int x;
+  ModInt() : x(0) {}
+  ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod)) {}
+  ModInt &operator+=(const ModInt &p) {
+    if ((x += p.x) >= mod) x -= mod;
+    return *this;
+  }
+  ModInt &operator-=(const ModInt &p) {
+    if ((x += mod - p.x) >= mod) x -= mod;
+    return *this;
+  }
+  ModInt &operator*=(const ModInt &p) {
+    x = (int)(1LL * x * p.x % mod);
+    return *this;
+  }
+  ModInt &operator/=(const ModInt &p) { return *this *= p.inverse(); }
+  ModInt operator-() const { return ModInt() - *this; }
+  ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
+  ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p; }
+  ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p; }
+  ModInt operator/(const ModInt &p) const { return ModInt(*this) /= p; }
+  bool operator==(const ModInt &p) const { return x == p.x; }
+  bool operator!=(const ModInt &p) const { return x != p.x; }
+  ModInt inverse() const {
+    int a = x, b = mod, u = 1, v = 0, t;
+    while (b) t = a / b, swap(a -= t * b, b), swap(u -= t * v, v);
+    return ModInt(u);
+  }
+  ModInt pow(int64_t e) const {
+    ModInt ret(1);
+    for (ModInt b = *this; e; e >>= 1, b *= b)
+      if (e & 1) ret *= b;
+    return ret;
+  }
+  friend ostream &operator<<(ostream &os, const ModInt &p) { return os << p.x; }
+  friend istream &operator>>(istream &is, ModInt &a) {
+    int64_t t;
+    is >> t;
+    a = ModInt<mod>(t);
+    return (is);
+  }
+  static int modulo() { return mod; }
+};
+#line 1 "src/Math/lagrange_interpolation.hpp"
+/**
+ * @title ラグランジュ補間
+ * @category 数学
+ * @brief x=0,1,..,N-1とy=f(0),f(1),...,f(N-1)が与えられたときのf(t)を計算
+ * @brief O(N)
+ */
+
+#ifndef call_from_test
+#line 10 "src/Math/lagrange_interpolation.hpp"
+using namespace std;
+#endif
+
+// verify用:http://codeforces.com/contest/622/problem/F
+
+template <typename K>
+K lagrange_interpolation(vector<K> &y, K t) {
+  int n = y.size() - 1;
+  vector<K> pro(n + 1, 1), orp(n + 1, 1);
+  for (int i = 0; i < n; i++) pro[i + 1] = pro[i] * (t - K(i));
+  for (int i = n; i > 0; i--) orp[i - 1] = orp[i] * (t - K(i));
+  K fact = K(1);
+  for (int i = 1; i <= n; i++) fact *= K(i);
+  vector<K> finv(n + 1, 1);
+  finv[n] = K(1) / fact;
+  for (int i = n; i >= 1; i--) finv[i - 1] = finv[i] * K(i);
+  K res(0);
+  for (int i = 0; i <= n; i++) {
+    K tmp = y[i] * pro[i] * orp[i] * finv[i] * finv[n - i];
+    res += (n - i) & 1 ? -tmp : tmp;
+  }
+  return res;
+}
+#line 14 "test/yosupo/sum_of_exponential_times_polynomial.test.cpp"
+#undef call_from_test
+
+template <class Modint>
+vector<Modint> pow_d_list(int n, long long d) {
+  vector<int> pdiv(n);
+  for (int i = 2; i < n; i++) pdiv[i] = i & 1 ? i : 2;
+  for (int p = 3; p * p < n; p += 2)
+    if (pdiv[p] == p)
+      for (int q = p * p; q < n; q += 2 * p) pdiv[q] = p;
+
+  vector<Modint> res(n);
+  if (d == 0) res[0] = 1;
+  if (n >= 2) res[1] = 1;
+  for (int i = 2; i < n; i++) {
+    if (pdiv[i] == i)
+      res[i] = Modint(i).pow(d);
+    else
+      res[i] = res[pdiv[i]] * res[i / pdiv[i]];
+  }
+  return res;
+}
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  using Mint = ModInt<998244353>;
+  using C = Combination<Mint>;
+  long long r, d, n;
+  cin >> r >> d >> n;
+  if (--n < 0) {
+    cout << 0 << endl;
+    return 0;
+  }
+  vector<Mint> sum(d + 2), rpow(d + 2), pd = pow_d_list<Mint>(d + 2, d);
+  rpow[0] = 1, sum[0] = rpow[0] * pd[0];
+  for (int i = 1; i <= d + 1; i++) rpow[i] = rpow[i - 1] * r;
+  for (int i = 1; i <= d + 1; i++) sum[i] = sum[i - 1] + rpow[i] * pd[i];
+  Mint ans = 0;
+  if (r == 1)
+    ans = lagrange_interpolation<Mint>(sum, n);
+  else {
+    C::init(d + 1);
+    for (int i = 0; i <= d; i++) {
+      Mint tmp = C::nCr(d + 1, i + 1) * rpow[d - i] * sum[i];
+      ans += (d - i) & 1 ? -tmp : tmp;
+    }
+    ans /= Mint(1 - r).pow(d + 1);
+    vector<Mint> y(d + 1);
+    Mint rinv = Mint(r).inverse(), rinvpow = 1;
+    for (int i = 0; i <= d; i++) {
+      y[i] = Mint(sum[i] - ans) * rinvpow;
+      rinvpow *= rinv;
+    }
+    ans += Mint(r).pow(n) * lagrange_interpolation<Mint>(y, n);
+  }
+  cout << ans << endl;
+  return 0;
+}
 
 ```
 {% endraw %}

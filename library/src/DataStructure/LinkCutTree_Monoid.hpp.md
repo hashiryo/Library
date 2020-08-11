@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Link-Cut-Tree(モノイド)
+# :x: Link-Cut-Tree(モノイド)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,13 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
 
 
 ## Code

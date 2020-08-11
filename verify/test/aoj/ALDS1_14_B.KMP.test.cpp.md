@@ -25,15 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/ALDS1_14_B.KMP.test.cpp
+# :heavy_check_mark: test/aoj/ALDS1_14_B.KMP.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.KMP.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
+
+
+## Depends on
+
+* :heavy_check_mark: <a href="../../../library/src/String/KnuthMorrisPratt.hpp.html">Knuth-Morris-Pratt</a>
 
 
 ## Code
@@ -41,28 +47,28 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM                                                                \
-    "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "String/KnuthMorrisPratt.hpp"
+#include "src/String/KnuthMorrisPratt.hpp"
 #undef call_from_test
 
 signed main() {
-    cin.tie(0);
-    ios::sync_with_stdio(0);
-    string T, P;
-    cin >> T >> P;
-    KnuthMorrisPratt KMP(P);
-    auto ans = KMP.pattern_match(T);
-    for(auto a : ans) {
-        cout << a << "\n";
-    }
-    cout << flush;
-    return 0;
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string T, P;
+  cin >> T >> P;
+  KnuthMorrisPratt KMP(P);
+  auto ans = KMP.pattern_match(T);
+  for (auto a : ans) {
+    cout << a << "\n";
+  }
+  cout << flush;
+  return 0;
 }
 ```
 {% endraw %}
@@ -70,16 +76,75 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: String/KnuthMorrisPratt.hpp: line -1: no such header
+#line 1 "test/aoj/ALDS1_14_B.KMP.test.cpp"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define call_from_test
+#line 1 "src/String/KnuthMorrisPratt.hpp"
+/**
+ * @title Knuth-Morris-Pratt
+ * @category 文字列
+ * @brief テーブル構築 O(|S|)
+ * @brief pattern_match(T) Tの中からSと一致する部分を検索 O(|T|)
+ * @brief period(i) verified :ARC060_F
+ */
+
+#ifndef call_from_test
+#line 11 "src/String/KnuthMorrisPratt.hpp"
+using namespace std;
+#endif
+struct KnuthMorrisPratt {
+  vector<int> KMP;
+  const string s;
+  int n;
+  KnuthMorrisPratt(const string &str) : s(str), n(s.length()) {
+    KMP.resize(n + 1, -1);
+    vector<int> knuth(n + 1, -1);
+    for (int i = 0, j = -1; i < n; i++) {
+      while (~j && s[i] != s[j]) j = knuth[j];
+      knuth[i + 1] = KMP[i + 1] = ++j;
+      if (i + 1 < n && s[i + 1] == s[j]) knuth[i + 1] = knuth[j];
+    }
+  }
+
+  // the period of S[0:i]
+  int period(int i) { return i - KMP[i]; }
+
+  // positions for T that match s
+  // O(|T|)
+  vector<int> pattern_match(string T) {
+    int m = T.length();
+    vector<int> occur;
+    for (int i = 0, k = 0; i < m; ++i) {
+      while (k >= 0 && T[i] != s[k]) k = KMP[k];
+      if (++k == n) {
+        /* match at T[i-n+1 ... i] */
+        occur.push_back(i - n + 1);
+      }
+    }
+    return occur;
+  }
+};
+#line 9 "test/aoj/ALDS1_14_B.KMP.test.cpp"
+#undef call_from_test
+
+signed main() {
+  cin.tie(0);
+  ios::sync_with_stdio(0);
+  string T, P;
+  cin >> T >> P;
+  KnuthMorrisPratt KMP(P);
+  auto ans = KMP.pattern_match(T);
+  for (auto a : ans) {
+    cout << a << "\n";
+  }
+  cout << flush;
+  return 0;
+}
 
 ```
 {% endraw %}

@@ -31,9 +31,16 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/set_xor_min.test.cpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-11 17:25:27+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/set_xor_min">https://judge.yosupo.jp/problem/set_xor_min</a>
+
+
+## Depends on
+
+* :x: <a href="../../../library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
+* :x: <a href="../../../library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 
 
 ## Code
@@ -47,8 +54,8 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/SegmentTree_Dynamic.hpp"
-#include "DataStructure/BinaryTrie.hpp"
+#include "src/DataStructure/SegmentTree_Dynamic.hpp"
+#include "src/DataStructure/BinaryTrie.hpp"
 #undef call_from_test
 
 signed main() {
@@ -83,9 +90,9 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
     self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
-    raise BundleErrorAt(path, -1, "no such header")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/SegmentTree_Dynamic.hpp: line -1: no such header
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
+    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/DataStructure/BinaryTrie.hpp: line 16: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

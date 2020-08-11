@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 二重辺連結成分分解
+# :x: 二重辺連結成分分解
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,12 @@ layout: default
     - Last commit date: 2020-08-11 16:57:43+09:00
 
 
+
+
+## Verified with
+
+* :x: <a href="../../../verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
 
 
 ## Code
