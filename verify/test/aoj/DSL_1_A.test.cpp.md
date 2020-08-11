@@ -25,21 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/DSL_1_A.test.cpp
+# :x: test/aoj/DSL_1_A.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_1_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-28 22:54:22+09:00
+    - Last commit date: 1970-01-01 00:00:00+00:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../../../library/DataStructure/UnionFind.hpp.html">Union-Find</a>
 
 
 ## Code
@@ -81,62 +75,16 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/DSL_1_A.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
-
-#include <bits/stdc++.h>
-using namespace std;
-
-#define call_from_test
-#line 1 "DataStructure/UnionFind.hpp"
-/**
- * @title Union-Find
- * @category データ構造
- * @brief unite(x,y) x が入っている集合と y が入っている集合を併合する．
- * @brief same(x,y) x と y が同じ集合に入っているかどうかを判定する．
- * @brief O(α(N))
- */
-
-#ifndef call_from_test
-#line 11 "DataStructure/UnionFind.hpp"
-using namespace std;
-#endif
-
-struct UnionFind {
-  vector<int> par;
-  UnionFind(int size) : par(size, -1) {}
-  bool unite(int u, int v) {
-    if ((u = root(u)) == (v = root(v))) return false;
-    if (par[u] > par[v]) swap(u, v);
-    par[u] += par[v], par[v] = u;
-    return true;
-  }
-  bool same(int u, int v) { return root(u) == root(v); }
-  int root(int u) { return par[u] < 0 ? u : par[u] = root(par[u]); }
-  int size(int u) { return -par[root(u)]; }
-};
-#line 9 "test/aoj/DSL_1_A.test.cpp"
-#undef call_from_test
-
-signed main() {
-  cin.tie(0);
-  ios::sync_with_stdio(0);
-
-  int n, q;
-  cin >> n >> q;
-  UnionFind uf(n);
-  for (int i = 0; i < q; i++) {
-    int c, x, y;
-    cin >> c >> x >> y;
-    if (c)
-      cout << uf.same(x, y) << "\n";
-    else
-      uf.unite(x, y);
-  }
-  cout << flush;
-  return 0;
-}
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
+    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
+    bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
+    raise BundleErrorAt(path, -1, "no such header")
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: DataStructure/UnionFind.hpp: line -1: no such header
 
 ```
 {% endraw %}

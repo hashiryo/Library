@@ -25,21 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+# :x: test/aoj/ALDS1_14_B.rollinghash.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.rollinghash.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-23 02:23:27+09:00
+    - Last commit date: 1970-01-01 00:00:00+00:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../../../library/String/RollingHash.hpp.html">Rolling-Hash</a>
 
 
 ## Code
@@ -81,98 +75,16 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/ALDS1_14_B.rollinghash.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
-
-#include <bits/stdc++.h>
-using namespace std;
-
-#define call_from_test
-#line 1 "String/RollingHash.hpp"
-/**
- * @title Rolling-Hash
- * @category 文字列
- * @brief Mod は　2^61-1 で固定
- */
-
-#ifndef call_from_test
-#line 9 "String/RollingHash.hpp"
-using namespace std;
-#endif
-
-template <unsigned long long B>
-struct RollingHash {
- private:
-  const uint64_t MASK30 = (1UL << 30) - 1;
-  const uint64_t MASK31 = (1UL << 31) - 1;
-  const uint64_t MOD = (1UL << 61) - 1;
-  const uint64_t MASK61 = MOD;
-  vector<uint64_t> hash, po;
-
- public:
-  RollingHash() {}
-  RollingHash(vector<long long> vs) { init(vs); }
-  RollingHash(string &s) {
-    vector<long long> vs;
-    for (char c : s) vs.emplace_back(c);
-    init(vs);
-  }
-  void init(vector<long long> vs) {
-    int n = vs.size();
-    hash.assign(n + 1, 0);
-    po.assign(n + 1, 1);
-    for (int i = 0; i < n; i++) {
-      hash[i + 1] = calcmod(mul(hash[i], B) + vs[i]);
-      po[i + 1] = calcmod(mul(po[i], B));
-    }
-  }
-  // S[l, r)
-  uint64_t get_hash(int l, int r) {
-    uint64_t res = hash[r] + MOD * 3 - mul(hash[l], po[r - l]);
-    return calcmod(res);
-  }
-
- private:
-  uint64_t mul(uint64_t a, uint64_t b) {
-    uint64_t au = a >> 31;
-    uint64_t ad = a & MASK31;
-    uint64_t bu = b >> 31;
-    uint64_t bd = b & MASK31;
-    uint64_t mid = ad * bu + au * bd;
-    uint64_t midu = mid >> 30;
-    uint64_t midd = mid & MASK30;
-    return au * bu * 2 + midu + (midd << 31) + ad * bd;
-  }
-
-  uint64_t calcmod(uint64_t x) {
-    uint64_t xu = x >> 61;
-    uint64_t xd = x & MASK61;
-    uint64_t res = xu + xd;
-    return res >= MOD ? res - MOD : res;
-  }
-};
-#line 9 "test/aoj/ALDS1_14_B.rollinghash.test.cpp"
-#undef call_from_test
-
-signed main() {
-  cin.tie(0);
-  ios::sync_with_stdio(0);
-  string T, P;
-  cin >> T >> P;
-  using RH1 = RollingHash<2020031611>;
-  using RH2 = RollingHash<19990929>;
-  RH1 rt1(T), rp1(P);
-  RH2 rt2(T), rp2(P);
-  int N = P.length();
-  for (int i = 0; i + N <= T.length(); i++) {
-    if (rt1.get_hash(i, i + N) == rp1.get_hash(0, N)
-        && rt2.get_hash(i, i + N) == rp2.get_hash(0, N))
-      cout << i << "\n";
-  }
-  cout << flush;
-  return 0;
-}
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
+    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
+    bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
+    raise BundleErrorAt(path, -1, "no such header")
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: String/RollingHash.hpp: line -1: no such header
 
 ```
 {% endraw %}

@@ -25,21 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/scc.test.cpp
+# :x: test/yosupo/scc.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/scc.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-02 14:58:00+09:00
+    - Last commit date: 1970-01-01 00:00:00+00:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/scc">https://judge.yosupo.jp/problem/scc</a>
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../../../library/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 
 
 ## Code
@@ -82,85 +76,16 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/yosupo/scc.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/scc"
-
-#include <bits/stdc++.h>
-using namespace std;
-
-#define call_from_test
-#line 1 "Graph/StronglyConnectedComponents.hpp"
-/**
- * @title 強連結成分分解
- * @category グラフ
- * @brief Gabow
- * @brief O(V + E)
- * @brief 返り値:{強連結成分(トポロジカルソート),ノードの属する成分の添字}
- */
-
-#ifndef call_from_test
-#line 11 "Graph/StronglyConnectedComponents.hpp"
-using namespace std;
-#endif
-
-struct StronglyConnectedComponents {
- private:
-  int n;
-  vector<vector<int>> radj;
-
- public:
-  StronglyConnectedComponents(int n) : n(n), radj(n) {}
-  void add_edge(int src, int dst) { radj[dst].push_back(src); }
-  pair<vector<vector<int>>, vector<int>> get_SCC() {
-    vector<vector<int>> scc;
-    vector<int> S, B, index(n);
-    function<void(int)> dfs = [&](int u) {
-      B.push_back(index[u] = S.size());
-      S.push_back(u);
-      for (int v : radj[u]) {
-        if (!index[v])
-          dfs(v);
-        else
-          while (index[v] < B.back()) B.pop_back();
-      }
-      if (index[u] == B.back()) {
-        scc.push_back({});
-        B.pop_back();
-        for (; index[u] < S.size(); S.pop_back()) {
-          scc.back().push_back(S.back());
-          index[S.back()] = n + scc.size();
-        }
-      }
-    };
-    for (int u = 0; u < n; ++u)
-      if (!index[u]) dfs(u);
-    for (int u = 0; u < n; ++u) index[u] -= n + 1;
-    return make_pair(scc, index);
-  }
-};
-#line 8 "test/yosupo/scc.test.cpp"
-#undef call_from_test
-
-signed main() {
-  cin.tie(0);
-  ios::sync_with_stdio(0);
-  int N, M;
-  cin >> N >> M;
-  StronglyConnectedComponents graph(N);
-  for (int i = 0; i < M; i++) {
-    int a, b;
-    cin >> a >> b;
-    graph.add_edge(a, b);
-  }
-  auto ans = graph.get_SCC().first;
-  cout << ans.size() << endl;
-  for (auto &a : ans) {
-    cout << a.size();
-    for (int &v : a) cout << " " << v;
-    cout << endl;
-  }
-  return 0;
-}
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
+    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
+    bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
+    raise BundleErrorAt(path, -1, "no such header")
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: Graph/StronglyConnectedComponents.hpp: line -1: no such header
 
 ```
 {% endraw %}
