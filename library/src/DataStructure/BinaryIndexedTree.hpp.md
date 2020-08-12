@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-13 00:39:34+09:00
 
 
 
@@ -50,8 +50,8 @@ layout: default
 /**
  * @title Binary-Indexed-Tree
  * @category データ構造
- * @brief O(logN)
- * @brief 0-indexed
+ *  O(logN)
+ *  0-indexed
  */
 
 #ifndef call_from_test
@@ -95,8 +95,8 @@ struct BinaryIndexedTree {
 /**
  * @title Binary-Indexed-Tree
  * @category データ構造
- * @brief O(logN)
- * @brief 0-indexed
+ *  O(logN)
+ *  0-indexed
  */
 
 #ifndef call_from_test

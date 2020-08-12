@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_add_range_sum.BIT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-13 00:39:34+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
@@ -94,8 +94,8 @@ using namespace std;
 /**
  * @title Binary-Indexed-Tree
  * @category データ構造
- * @brief O(logN)
- * @brief 0-indexed
+ *  O(logN)
+ *  0-indexed
  */
 
 #ifndef call_from_test

@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Math/BigInt.hpp.html">多倍長整数</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/BigInt.hpp.html">多倍長整数</a>
 
 
 ## Code

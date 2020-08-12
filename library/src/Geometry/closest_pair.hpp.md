@@ -25,22 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/two_sat.test.cpp
+# :x: 最近点対
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/two_sat.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 20:23:42+09:00
+* category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
+* <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/closest_pair.hpp">View this file on GitHub</a>
+    - Last commit date: 1970-01-01 00:00:00+00:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/two_sat">https://judge.yosupo.jp/problem/two_sat</a>
 
 
-## Depends on
+## Verified with
 
-* :question: <a href="../../../library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
-* :x: <a href="../../../library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
+* :x: <a href="../../../verify/test/aoj/CGL_5.test.cpp.html">test/aoj/CGL_5.test.cpp</a>
 
 
 ## Code
@@ -48,45 +46,59 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
+/**
+ * @title 最近点対
+ * @category 幾何
+ */
 
+#ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
-#include "src/Graph/StronglyConnectedComponents.hpp"
-#include "src/Math/TwoSatisfiability.hpp"
+#include "Geometry/_geometry_temp.hpp"
 #undef call_from_test
+#endif
 
-signed main() {
-  cin.tie(0);
-  ios::sync_with_stdio(0);
-  string s;
-  cin >> s >> s;
-  int N, M;
-  cin >> N >> M;
-  TwoSatisfiability sat(N + 1);
-  for (int i = 0; i < M; i++) {
-    int a, b;
-    cin >> a >> b >> s;
-    if (a < 0) a = sat.neg(-a);
-    if (b < 0) b = sat.neg(-b);
-    sat.add_or(a, b);
-  }
-  auto ans = sat.solve();
-  cout << "s ";
-  if (ans.size()) {
-    cout << "SATISFIABLE" << endl;
-    cout << "v ";
-    for (int i = 1; i <= N; i++) {
-      cout << (ans[i] ? i : -i) << " ";
+namespace geometry {
+pair<Point, Point> closest_pair(vector<Point> ps) {
+  sort(ps.begin(), ps.end(), [](Point p, Point q) { return p.y < q.y; });
+  Point u = ps[0], v = ps[1];
+  Real best = dist(u, v);
+  auto update = [&](Point p, Point q) {
+    Real dis = dist(p, q);
+    if (best > dis) best = dis, u = p, v = q;
+  };
+  function<void(int, int)> rec = [&](int l, int r) {
+    if (r - l <= 1) {
+      for (int i = l; i < r; ++i)
+        for (int j = i + 1; j < r; ++j) update(ps[i], ps[j]);
+      stable_sort(&ps[l], &ps[r]);
+    } else {
+      int m = (l + r) / 2;
+      Real y = ps[m].y;
+      rec(l, m);
+      rec(m, r);
+      inplace_merge(&ps[l], &ps[m], &ps[r]);
+      vector<Point> qs;
+      for (int i = l; i < r; ++i) {
+        if ((ps[i].y - y) * (ps[i].y - y) >= best) continue;
+        for (int j = (int)qs.size() - 1; j >= 0; --j) {
+          if ((qs[j].x - ps[i].x) * (qs[j].x - ps[i].x) >= best) break;
+          update(qs[j], ps[i]);
+        }
+        qs.push_back(ps[i]);
+      }
     }
-    cout << 0 << endl;
-  } else {
-    cout << "UNSATISFIABLE" << endl;
-  }
-  return 0;
+  };
+  rec(0, ps.size());
+  return {u, v};
 }
+
+pair<Point, Point> farthest_pair(vector<Point> ps) {
+  return convex_hull(ps).farthest();
+}
+}  // namespace geometry
 ```
 {% endraw %}
 
@@ -98,11 +110,9 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Math/TwoSatisfiability.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/closest_pair.hpp: line 11: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
+* :question: <a href="../../../library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 
 
 ## Code
