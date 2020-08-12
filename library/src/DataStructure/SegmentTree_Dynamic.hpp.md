@@ -36,6 +36,11 @@ layout: default
 
 
 
+## Required by
+
+* :x: <a href="BinaryTrie.hpp.html">二分Trie</a>
+
+
 ## Verified with
 
 * :x: <a href="../../../verify/test/yosupo/set_xor_min.test.cpp.html">test/yosupo/set_xor_min.test.cpp</a>

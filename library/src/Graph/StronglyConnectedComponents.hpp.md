@@ -36,6 +36,11 @@ layout: default
 
 
 
+## Required by
+
+* :x: <a href="../Math/TwoSatisfiability.hpp.html">2-SAT</a>
+
+
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>

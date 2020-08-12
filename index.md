@@ -38,11 +38,11 @@ layout: default
 
 ### グラフ
 
-* :x: <a href="library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
+* :question: <a href="library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
 * :question: <a href="library/src/Graph/MatchingGeneral.hpp.html">最大マッチング(一般グラフ)</a>
 * :heavy_check_mark: <a href="library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
 * :question: <a href="library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
-* :question: <a href="library/src/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
+* :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 * :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
 * :question: <a href="library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 * :x: <a href="library/src/Graph/Tree_DP.hpp.html">木DP</a>
@@ -60,7 +60,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 * :x: <a href="library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 * :x: <a href="library/src/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
-* :x: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
+* :question: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
 * :x: <a href="library/src/DataStructure/PersistentArray.hpp.html">永続配列</a>
@@ -73,9 +73,9 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree_Dual.hpp.html">Segment-Tree(双対)</a>
 * :x: <a href="library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 * :question: <a href="library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
-* :question: <a href="library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
-* :question: <a href="library/src/DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/UnionFind.hpp.html">Union-Find</a>
 * :x: <a href="library/src/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
 
@@ -189,12 +189,12 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>
 * :x: <a href="verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/assignment.mcf.test.cpp.html">test/yosupo/assignment.mcf.test.cpp</a>
-* :x: <a href="verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
-* :x: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
-* :x: <a href="verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
-* :x: <a href="verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp</a>
-* :x: <a href="verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
-* :x: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :x: <a href="verify/test/yosupo/find_linear_recurrence.test.cpp.html">test/yosupo/find_linear_recurrence.test.cpp</a>
 * :x: <a href="verify/test/yosupo/general_matching.test.cpp.html">test/yosupo/general_matching.test.cpp</a>
 * :x: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>

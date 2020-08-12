@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 最大マッチング(二部グラフ)
+# :question: 最大マッチング(二部グラフ)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/277.test.cpp.html">test/yukicoder/277.test.cpp</a>
 
 

@@ -36,6 +36,11 @@ layout: default
 
 
 
+## Required by
+
+* :x: <a href="RedBlackTree_Persistent.hpp.html">赤黒木(永続)</a>
+
+
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1508.RBT.test.cpp.html">test/aoj/1508.RBT.test.cpp</a>

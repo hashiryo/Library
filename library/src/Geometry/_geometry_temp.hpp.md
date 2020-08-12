@@ -36,6 +36,13 @@ layout: default
 
 
 
+## Required by
+
+* :x: <a href="closest_pair.hpp.html">最近点対</a>
+* :x: <a href="intersection_area.hpp.html">共通部分の面積</a>
+* :x: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
+
+
 ## Verified with
 
 * :x: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>

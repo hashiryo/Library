@@ -36,6 +36,11 @@ layout: default
 
 
 
+## Required by
+
+* :x: <a href="RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
+
+
 ## Verified with
 
 * :x: <a href="../../../verify/test/yosupo/persistent_queue.RBTPL.test.cpp.html">test/yosupo/persistent_queue.RBTPL.test.cpp</a>

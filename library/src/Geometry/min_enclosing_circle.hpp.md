@@ -31,9 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/min_enclosing_circle.hpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-13 01:05:53+09:00
 
 
+
+
+## Depends on
+
+* :question: <a href="_geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Verified with
@@ -57,7 +62,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "Geometry/_geometry_temp.hpp"
+#include "src/Geometry/_geometry_temp.hpp"
 #undef call_from_test
 #endif
 

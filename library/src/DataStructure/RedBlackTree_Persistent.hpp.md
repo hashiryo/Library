@@ -31,9 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/RedBlackTree_Persistent.hpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-13 01:05:53+09:00
 
 
+
+
+## Depends on
+
+* :question: <a href="RedBlackTree.hpp.html">赤黒木</a>
 
 
 ## Verified with
@@ -49,7 +54,7 @@ layout: default
 /**
  * @title 赤黒木(永続)
  * @category データ構造
- * @brief O(logN)
+ * O(logN)
  */
 // verify用:
 // https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste
@@ -59,7 +64,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/RedBlackTree.hpp"
+#include "src/DataStructure/RedBlackTree.hpp"
 #undef call_from_test
 #endif
 

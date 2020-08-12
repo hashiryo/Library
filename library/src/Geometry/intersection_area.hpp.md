@@ -31,9 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/intersection_area.hpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-13 01:05:53+09:00
 
 
+
+
+## Depends on
+
+* :question: <a href="_geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Verified with
@@ -57,7 +62,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "Geometry/_geometry_temp.hpp"
+#include "src/Geometry/_geometry_temp.hpp"
 #undef call_from_test
 #endif
 
@@ -79,16 +84,16 @@ Real intersection_area(Circle c, Circle d) {
 Real intersection_area(Polygon g, Circle c) {
   auto tri = [&](Point p, Point q) {
     Point d = q - p;
-    auto a = dot(d, p) / dot(d, d), b = (dot(p, p) - c.r * c.r) / dot(d, d);
-    auto det = a * a - b;
+    Real a = dot(d, p) / dot(d, d), b = (dot(p, p) - c.r * c.r) / dot(d, d);
+    Real det = a * a - b;
     if (det <= 0) return arg(p, q) * c.r * c.r / 2;
-    auto s = max(0., -a - sqrt(det)), t = min(1., -a + sqrt(det));
+    Real s = max(0., -a - sqrt(det)), t = min(1., -a + sqrt(det));
     if (t < 0 || 1 <= s) return c.r * c.r * arg(p, q) / 2;
     Point u = p + s * d, v = p + t * d;
     return arg(p, u) * c.r * c.r / 2 + cross(u, v) / 2
            + arg(v, q) * c.r * c.r / 2;
   };
-  auto sum = 0.0;
+  Real sum = 0.0;
   for (int i = 0; i < g.size(); ++i) sum += tri(g[i] - c.o, g[g.next(i)] - c.o);
   return sum;
 }
