@@ -40,7 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 
 

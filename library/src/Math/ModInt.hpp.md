@@ -49,9 +49,9 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/find_linear_recurrence.test.cpp.html">test/yosupo/find_linear_recurrence.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/find_linear_recurrence.test.cpp.html">test/yosupo/find_linear_recurrence.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>

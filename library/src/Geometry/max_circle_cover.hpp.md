@@ -25,22 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/CGL_5.test.cpp
+# :heavy_check_mark: 半径固定の円の最大被覆点数
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_5.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 01:24:59+09:00
+* category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
+* <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/max_circle_cover.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-13 01:32:09+09:00
 
 
-* see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5</a>
 
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
-* :x: <a href="../../../library/src/Geometry/closest_pair.hpp.html">最近点対</a>
+* :question: <a href="_geometry_temp.hpp.html">幾何テンプレ</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 
 
 ## Code
@@ -48,28 +51,57 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5"
+/**
+ * @title 半径固定の円の最大被覆点数
+ * @category 幾何
+ */
 
+#ifndef call_from_test
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
 #include "src/Geometry/_geometry_temp.hpp"
-#include "src/Geometry/closest_pair.hpp"
 #undef call_from_test
+#endif
 
-signed main() {
-  cin.tie(0);
-  ios::sync_with_stdio(false);
-  using namespace geometry;
-  int n;
-  cin >> n;
-  vector<Point> ps(n);
-  for (int i = 0; i < n; i++) cin >> ps[i];
-  auto pp = closest_pair(ps);
-  cout << fixed << setprecision(12) << dist(pp.first, pp.second) << endl;
-  return 0;
+namespace geometry {
+pair<int, Point> max_circle_cover(vector<Point> ps, Real r) {
+  const Real dx[4] = {1, -1, -1, 1}, dy[4] = {1, 1, -1, -1};
+  Point best_p;
+  int best = 0;
+  function<void(Point, Real, vector<Point>)> rec
+      = [&](Point p, Real w, vector<Point> ps) {
+          w /= 2;
+          Point qs[4];
+          vector<Point> pss[4];
+          for (int i = 0; i < 4; ++i) {
+            qs[i] = p + w * Point({dx[i], dy[i]});
+            int lo = 0;
+            for (Point q : ps) {
+              Real d = dist(qs[i], q);
+              if (sgn(d - r) <= 0) ++lo;
+              if (sgn(d - w * sqrt(2) - r) <= 0) pss[i].push_back(q);
+            }
+            if (lo > best) {
+              best = lo;
+              best_p = qs[i];
+            }
+          }
+          for (int i = 0; i < 4; ++i) {
+            for (int j = i + 1; j < 4; ++j)
+              if (pss[i].size() < pss[j].size())
+                swap(pss[i], pss[j]), swap(qs[i], qs[j]);
+            if (pss[i].size() <= best) break;
+            rec(qs[i], w, pss[i]);
+          }
+        };
+  Real w = 0;
+  for (Point p : ps) w = max({w, abs(p.x), abs(p.y)});
+  rec({0, 0}, w, ps);
+  return {best, best_p};
 }
+}  // namespace geometry
 ```
 {% endraw %}
 
@@ -81,11 +113,9 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
-    self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/closest_pair.hpp: line 11: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/max_circle_cover.hpp: line 11: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

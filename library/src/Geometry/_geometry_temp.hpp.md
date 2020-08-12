@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/_geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 00:39:34+09:00
+    - Last commit date: 2020-08-13 01:21:15+09:00
 
 
 
@@ -40,11 +40,13 @@ layout: default
 
 * :x: <a href="closest_pair.hpp.html">最近点対</a>
 * :x: <a href="intersection_area.hpp.html">共通部分の面積</a>
+* :heavy_check_mark: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :x: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
 
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
@@ -57,7 +59,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_5.test.cpp.html">test/aoj/CGL_5.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
@@ -140,9 +142,9 @@ Point operator/(Point p, Real a) { return p /= a; }
 Real dot(Point p, Point q) { return p.x * q.x + p.y * q.y; }
 Real cross(Point p, Point q) { return p.x * q.y - p.y * q.x; }  // left turn > 0
 Real norm2(Point p) { return dot(p, p); }
-Real abs(Point p) { return sqrt(norm2(p)); }
+Real norm(Point p) { return sqrt(norm2(p)); }
 Real arg(Point p) { return atan2(p.y, p.x); }
-Real dist(Point p, Point q) { return abs(p - q); }
+Real dist(Point p, Point q) { return norm(p - q); }
 Real arg(Point p, Point q) { return atan2(cross(p, q), dot(p, q)); }
 Point orth(Point p) { return {-p.y, p.x}; }
 Point rotate(Real theta, Point p) {
@@ -525,9 +527,9 @@ Point operator/(Point p, Real a) { return p /= a; }
 Real dot(Point p, Point q) { return p.x * q.x + p.y * q.y; }
 Real cross(Point p, Point q) { return p.x * q.y - p.y * q.x; }  // left turn > 0
 Real norm2(Point p) { return dot(p, p); }
-Real abs(Point p) { return sqrt(norm2(p)); }
+Real norm(Point p) { return sqrt(norm2(p)); }
 Real arg(Point p) { return atan2(p.y, p.x); }
-Real dist(Point p, Point q) { return abs(p - q); }
+Real dist(Point p, Point q) { return norm(p - q); }
 Real arg(Point p, Point q) { return atan2(cross(p, q), dot(p, q)); }
 Point orth(Point p) { return {-p.y, p.x}; }
 Point rotate(Real theta, Point p) {

@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
+* :question: <a href="../../../library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 
 
 ## Code

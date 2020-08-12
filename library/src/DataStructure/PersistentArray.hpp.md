@@ -36,6 +36,11 @@ layout: default
 
 
 
+## Required by
+
+* :x: <a href="UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
+
+
 ## Verified with
 
 * :x: <a href="../../../verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>

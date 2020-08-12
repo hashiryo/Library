@@ -39,6 +39,7 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="../Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
+* :heavy_check_mark: <a href="../Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
 
 
 ## Verified with

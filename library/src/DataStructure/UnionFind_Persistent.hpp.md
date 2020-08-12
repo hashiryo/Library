@@ -31,9 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/UnionFind_Persistent.hpp">View this file on GitHub</a>
-    - Last commit date: 1970-01-01 00:00:00+00:00
+    - Last commit date: 2020-08-13 01:21:15+09:00
 
 
+
+
+## Depends on
+
+* :x: <a href="PersistentArray.hpp.html">永続配列</a>
 
 
 ## Verified with
@@ -49,7 +54,7 @@ layout: default
 /**
  * @title Union-Find(完全永続)
  * @category データ構造
- * @brief 経路圧縮なし O(logN)
+ * 経路圧縮なし O(logN)
  */
 // verify用:
 // https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h
@@ -59,7 +64,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "DataStructure/PersistentArray.hpp"
+#include "src/DataStructure/PersistentArray.hpp"
 #undef call_from_test
 #endif
 

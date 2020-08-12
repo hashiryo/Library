@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: Link-Cut-Tree(シンプル)
+# :heavy_check_mark: Link-Cut-Tree(シンプル)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/lca.LCT.test.cpp.html">test/yosupo/lca.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/lca.LCT.test.cpp.html">test/yosupo/lca.LCT.test.cpp</a>
 
 
 ## Code

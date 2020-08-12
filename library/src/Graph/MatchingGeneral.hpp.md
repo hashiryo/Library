@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 最大マッチング(一般グラフ)
+# :heavy_check_mark: 最大マッチング(一般グラフ)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3032.test.cpp.html">test/aoj/3032.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/general_matching.test.cpp.html">test/yosupo/general_matching.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/general_matching.test.cpp.html">test/yosupo/general_matching.test.cpp</a>
 
 
 ## Code

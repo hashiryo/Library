@@ -39,7 +39,7 @@ layout: default
 ### グラフ
 
 * :question: <a href="library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
-* :question: <a href="library/src/Graph/MatchingGeneral.hpp.html">最大マッチング(一般グラフ)</a>
+* :heavy_check_mark: <a href="library/src/Graph/MatchingGeneral.hpp.html">最大マッチング(一般グラフ)</a>
 * :heavy_check_mark: <a href="library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
 * :question: <a href="library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 * :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
@@ -58,8 +58,8 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :x: <a href="library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
-* :x: <a href="library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
-* :x: <a href="library/src/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
+* :question: <a href="library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
 * :question: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
@@ -87,6 +87,7 @@ layout: default
 * :question: <a href="library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
 * :x: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
 * :x: <a href="library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
+* :heavy_check_mark: <a href="library/src/Geometry/max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :x: <a href="library/src/Geometry/min_enclosing_circle.hpp.html">最小包含円</a>
 
 
@@ -102,7 +103,7 @@ layout: default
 * :question: <a href="library/src/Math/ModInt.hpp.html">ModInt</a>
 * :x: <a href="library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :x: <a href="library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
-* :x: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
+* :heavy_check_mark: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 * :x: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :question: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
 * :x: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
@@ -122,6 +123,7 @@ layout: default
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1508.RBT.test.cpp.html">test/aoj/1508.RBT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
@@ -152,7 +154,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
 * :x: <a href="verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
 * :x: <a href="verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
 * :x: <a href="verify/test/aoj/CGL_5.test.cpp.html">test/aoj/CGL_5.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
@@ -195,12 +197,12 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/find_linear_recurrence.test.cpp.html">test/yosupo/find_linear_recurrence.test.cpp</a>
-* :x: <a href="verify/test/yosupo/general_matching.test.cpp.html">test/yosupo/general_matching.test.cpp</a>
-* :x: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/lca.LCT.test.cpp.html">test/yosupo/lca.LCT.test.cpp</a>
-* :x: <a href="verify/test/yosupo/line_add_get_min.test.cpp.html">test/yosupo/line_add_get_min.test.cpp</a>
-* :x: <a href="verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/find_linear_recurrence.test.cpp.html">test/yosupo/find_linear_recurrence.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/general_matching.test.cpp.html">test/yosupo/general_matching.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/lca.LCT.test.cpp.html">test/yosupo/lca.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/line_add_get_min.test.cpp.html">test/yosupo/line_add_get_min.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
 * :x: <a href="verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :x: <a href="verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 * :x: <a href="verify/test/yosupo/min_cost_b_flow.test.cpp.html">test/yosupo/min_cost_b_flow.test.cpp</a>

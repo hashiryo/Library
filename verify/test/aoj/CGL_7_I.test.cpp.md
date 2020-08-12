@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_7_I.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 01:05:53+09:00
+    - Last commit date: 2020-08-13 01:24:59+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I</a>
@@ -66,7 +66,7 @@ signed main() {
   Circle c, d;
   cin >> c.o >> c.r;
   cin >> d.o >> d.r;
-  cout << intersection_area(c, d) << endl;
+  cout << fixed << setprecision(12) << intersection_area(c, d) << endl;
   return 0;
 }
 ```
