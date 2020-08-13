@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/_geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 16:28:26+09:00
+    - Last commit date: 2020-08-13 17:29:18+09:00
 
 
 
@@ -93,7 +93,7 @@ namespace geometry {
 
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-10;
+  static constexpr Real EPS = 1e-8;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -163,14 +163,17 @@ ostream &operator<<(ostream &os, Point p) {
   return os;
 }
 // usage: sort(ps.begin(),ps.end(), polar_angle(origin, direction));
+// (-PI,PI]
 struct polar_angle {
   const Point o;
   const int s;  // +1 for ccw, -1 for cw
   polar_angle(Point origin = {0, 0}, int dir = +1) : o(origin), s(dir) {}
   int quad(Point p) const {
-    for (int i = 1; i <= 4; ++i, swap(p.x = -p.x, p.y))
-      if (p.x <= 0 && p.y < 0) return i;
-    return 3;
+    for (int i = 0; i < 4; ++i, swap(p.x = -p.x, p.y))
+      if (p.x < 0 && p.y < 0) return 2 * i;
+    for (int i = 0; i < 4; ++i, swap(p.x = -p.x, p.y))
+      if (p.x == 0 && p.y < 0) return 2 * i + 1;
+    return 3;  // arg(0,0) = 0
   }
   bool operator()(Point p, Point q) const {
     p = p - o;
@@ -481,7 +484,7 @@ namespace geometry {
 
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-10;
+  static constexpr Real EPS = 1e-8;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -551,14 +554,17 @@ ostream &operator<<(ostream &os, Point p) {
   return os;
 }
 // usage: sort(ps.begin(),ps.end(), polar_angle(origin, direction));
+// (-PI,PI]
 struct polar_angle {
   const Point o;
   const int s;  // +1 for ccw, -1 for cw
   polar_angle(Point origin = {0, 0}, int dir = +1) : o(origin), s(dir) {}
   int quad(Point p) const {
-    for (int i = 1; i <= 4; ++i, swap(p.x = -p.x, p.y))
-      if (p.x <= 0 && p.y < 0) return i;
-    return 3;
+    for (int i = 0; i < 4; ++i, swap(p.x = -p.x, p.y))
+      if (p.x < 0 && p.y < 0) return 2 * i;
+    for (int i = 0; i < 4; ++i, swap(p.x = -p.x, p.y))
+      if (p.x == 0 && p.y < 0) return 2 * i + 1;
+    return 3;  // arg(0,0) = 0
   }
   bool operator()(Point p, Point q) const {
     p = p - o;

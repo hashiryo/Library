@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
+* :heavy_check_mark: <a href="../../../library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
 
 
 ## Code
