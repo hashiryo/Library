@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/_geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 17:29:18+09:00
+    - Last commit date: 2020-08-13 18:39:27+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
-* :heavy_check_mark: <a href="intersection_area.hpp.html">共通部分の面積</a>
+* :x: <a href="intersection_area.hpp.html">共通部分の面積</a>
 * :heavy_check_mark: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :heavy_check_mark: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
 
@@ -69,9 +69,9 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 
 
 ## Code
@@ -91,7 +91,7 @@ using namespace std;
 
 namespace geometry {
 
-using Real = double;
+using Real = long double;
 int sgn(Real x) {
   static constexpr Real EPS = 1e-8;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
@@ -144,11 +144,9 @@ Real dot(Point p, Point q) { return p.x * q.x + p.y * q.y; }
 Real cross(Point p, Point q) { return p.x * q.y - p.y * q.x; }  // left turn > 0
 Real norm2(Point p) { return dot(p, p); }
 Real norm(Point p) { return sqrt(norm2(p)); }
-Real arg(Point p) { return atan2((long double)p.y, (long double)p.x); }
+Real arg(Point p) { return atan2(p.y, p.x); }
 Real dist(Point p, Point q) { return norm(p - q); }
-Real arg(Point p, Point q) {
-  return atan2((long double)cross(p, q), (long double)dot(p, q));
-}
+Real arg(Point p, Point q) { return atan2(cross(p, q), dot(p, q)); }
 Point orth(Point p) { return {-p.y, p.x}; }
 Point rotate(Real theta, Point p) {
   return {cos(theta) * p.x - sin(theta) * p.y,
@@ -180,8 +178,7 @@ struct polar_angle {
     q = q - o;
     if (quad(p) != quad(q)) return s * quad(p) < s * quad(q);
     if (cross(p, q)) return s * cross(p, q) > 0;
-    // return norm2(p) < norm2(q);  // closer first
-    return p < q;
+    return norm2(p) < norm2(q);  // closer first
   }
 };
 
@@ -482,7 +479,7 @@ using namespace std;
 
 namespace geometry {
 
-using Real = double;
+using Real = long double;
 int sgn(Real x) {
   static constexpr Real EPS = 1e-8;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
@@ -535,11 +532,9 @@ Real dot(Point p, Point q) { return p.x * q.x + p.y * q.y; }
 Real cross(Point p, Point q) { return p.x * q.y - p.y * q.x; }  // left turn > 0
 Real norm2(Point p) { return dot(p, p); }
 Real norm(Point p) { return sqrt(norm2(p)); }
-Real arg(Point p) { return atan2((long double)p.y, (long double)p.x); }
+Real arg(Point p) { return atan2(p.y, p.x); }
 Real dist(Point p, Point q) { return norm(p - q); }
-Real arg(Point p, Point q) {
-  return atan2((long double)cross(p, q), (long double)dot(p, q));
-}
+Real arg(Point p, Point q) { return atan2(cross(p, q), dot(p, q)); }
 Point orth(Point p) { return {-p.y, p.x}; }
 Point rotate(Real theta, Point p) {
   return {cos(theta) * p.x - sin(theta) * p.y,
@@ -571,8 +566,7 @@ struct polar_angle {
     q = q - o;
     if (quad(p) != quad(q)) return s * quad(p) < s * quad(q);
     if (cross(p, q)) return s * cross(p, q) > 0;
-    // return norm2(p) < norm2(q);  // closer first
-    return p < q;
+    return norm2(p) < norm2(q);  // closer first
   }
 };
 
