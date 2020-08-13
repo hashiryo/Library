@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
+* :heavy_check_mark: <a href="../../../library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Code

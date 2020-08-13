@@ -25,26 +25,26 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 共通部分の面積
+# :heavy_check_mark: 共通部分の面積
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/intersection_area.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 18:39:27+09:00
+    - Last commit date: 2020-08-13 18:54:10+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="_geometry_temp.hpp.html">幾何テンプレ</a>
+* :heavy_check_mark: <a href="_geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
 
 
 ## Code
@@ -70,7 +70,7 @@ namespace geometry {
 
 Real intersection_area(Circle c, Circle d) {
   if (c.r < d.r) swap(c, d);
-  auto A = [&](long double r, long double h) {
+  auto A = [&](Real r, Real h) {
     return r * r * acos(h / r) - h * sqrt(r * r - h * h);
   };
   Real l = dist(c.o, d.o);
@@ -89,7 +89,7 @@ Real intersection_area(Polygon g, Circle c) {
     Real a = dot(d, p) / dot(d, d), b = (dot(p, p) - c.r * c.r) / dot(d, d);
     Real det = a * a - b;
     if (det <= 0) return arg(p, q) * c.r * c.r / 2;
-    Real s = max(0., -a - sqrt(det)), t = min(1., -a + sqrt(det));
+    Real s = max((Real)0., -a - sqrt(det)), t = min((Real)1., -a + sqrt(det));
     if (t < 0 || 1 <= s) return c.r * c.r * arg(p, q) / 2;
     Point u = p + s * d, v = p + t * d;
     return arg(p, u) * c.r * c.r / 2 + cross(u, v) / 2
@@ -100,8 +100,8 @@ Real intersection_area(Polygon g, Circle c) {
   return sum;
 }
 Real intersection_area(Circle c, Polygon g) { return intersection_area(g, c); }
-
 }  // namespace geometry
+
 ```
 {% endraw %}
 
