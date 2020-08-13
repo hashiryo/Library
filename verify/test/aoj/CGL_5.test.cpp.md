@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_5.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 11:52:23+09:00
+    - Last commit date: 2020-08-13 12:15:58+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5</a>
@@ -49,6 +49,8 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5"
+
+#define ERROR "0.00000001"
 
 #include <bits/stdc++.h>
 using namespace std;

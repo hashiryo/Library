@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/point_set_range_composite.SegTree.test.cpp
+# :heavy_check_mark: test/yosupo/point_set_range_composite.SegTree.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 

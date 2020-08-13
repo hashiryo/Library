@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/CGL_1_B.test.cpp
+# :heavy_check_mark: test/aoj/CGL_1_B.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_1_B.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 11:52:23+09:00
+    - Last commit date: 2020-08-13 12:15:58+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_B">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_B</a>
@@ -49,6 +49,8 @@ layout: default
 ```cpp
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_B"
+
+#define ERROR "0.00000001"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -82,6 +84,8 @@ signed main() {
 #define PROBLEM \
   "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_B"
 
+#define ERROR "0.00000001"
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -100,7 +104,7 @@ using namespace std;
 namespace geometry {
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-10;
+  static constexpr Real EPS = 1e-8;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -418,8 +422,8 @@ struct Convex : Polygon {
     Real max_dist = 0;
     Point p, q;
     for (int si = i, sj = j; i != sj || j != si;) {
-      if (max_dist < dist((*this)[i], (*this)[j])) {
-        max_dist = dist((*this)[i], (*this)[j]);
+      if (max_dist < norm2((*this)[i] - (*this)[j])) {
+        max_dist = norm2((*this)[i] - (*this)[j]);
         p = (*this)[i];
         q = (*this)[j];
       }
@@ -464,7 +468,7 @@ Convex convex_hull(vector<Point> ps) {
 }
 
 }  // namespace geometry
-#line 9 "test/aoj/CGL_1_B.test.cpp"
+#line 11 "test/aoj/CGL_1_B.test.cpp"
 #undef call_from_test
 
 signed main() {

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: Union-Find(完全永続)
+# :heavy_check_mark: Union-Find(完全永続)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="PersistentArray.hpp.html">永続配列</a>
+* :heavy_check_mark: <a href="PersistentArray.hpp.html">永続配列</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/persistent_unionfind.test.cpp.html">test/yosupo/persistent_unionfind.test.cpp</a>
 
 
 ## Code

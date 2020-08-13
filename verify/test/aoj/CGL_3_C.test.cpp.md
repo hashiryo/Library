@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_3_C.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 11:52:23+09:00
+    - Last commit date: 2020-08-13 12:15:58+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_C">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_C</a>
@@ -102,7 +102,7 @@ using namespace std;
 namespace geometry {
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-10;
+  static constexpr Real EPS = 1e-8;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -420,8 +420,8 @@ struct Convex : Polygon {
     Real max_dist = 0;
     Point p, q;
     for (int si = i, sj = j; i != sj || j != si;) {
-      if (max_dist < dist((*this)[i], (*this)[j])) {
-        max_dist = dist((*this)[i], (*this)[j]);
+      if (max_dist < norm2((*this)[i] - (*this)[j])) {
+        max_dist = norm2((*this)[i] - (*this)[j]);
         p = (*this)[i];
         q = (*this)[j];
       }

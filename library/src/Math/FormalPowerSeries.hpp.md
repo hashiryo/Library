@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :question: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
 
@@ -51,7 +51,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>

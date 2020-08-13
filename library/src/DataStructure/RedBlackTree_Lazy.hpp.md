@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 赤黒木(遅延伝搬)
+# :question: 赤黒木(遅延伝搬)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Required by
 
-* :x: <a href="RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
+* :heavy_check_mark: <a href="RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/persistent_queue.RBTPL.test.cpp.html">test/yosupo/persistent_queue.RBTPL.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/persistent_queue.RBTPL.test.cpp.html">test/yosupo/persistent_queue.RBTPL.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/range_affine_range_sum.RBTL.test.cpp.html">test/yosupo/range_affine_range_sum.RBTL.test.cpp</a>
 
 

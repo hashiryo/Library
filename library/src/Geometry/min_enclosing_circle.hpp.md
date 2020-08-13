@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 最小包含円
+# :heavy_check_mark: 最小包含円
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/min_enclosing_circle.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 11:52:23+09:00
+    - Last commit date: 2020-08-13 12:15:58+09:00
 
 
 
@@ -43,7 +43,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
 
 
 ## Code
