@@ -86,7 +86,7 @@ layout: default
 
 * :question: <a href="library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
 * :heavy_check_mark: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
-* :question: <a href="library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
+* :heavy_check_mark: <a href="library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
 * :heavy_check_mark: <a href="library/src/Geometry/max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :heavy_check_mark: <a href="library/src/Geometry/min_enclosing_circle.hpp.html">最小包含円</a>
 
@@ -96,7 +96,7 @@ layout: default
 ### 数学
 
 * :heavy_check_mark: <a href="library/src/Math/BigInt.hpp.html">多倍長整数</a>
-* :question: <a href="library/src/Math/Combination.hpp.html">組み合わせ</a>
+* :heavy_check_mark: <a href="library/src/Math/Combination.hpp.html">組み合わせ</a>
 * :question: <a href="library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :heavy_check_mark: <a href="library/src/Math/Matrix.hpp.html">行列</a>
 * :question: <a href="library/src/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
@@ -104,10 +104,10 @@ layout: default
 * :heavy_check_mark: <a href="library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :x: <a href="library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
 * :heavy_check_mark: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
-* :x: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
+* :question: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :question: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
 * :question: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
-* :x: <a href="library/src/Math/number_theory.hpp.html">数論</a>
+* :question: <a href="library/src/Math/number_theory.hpp.html">数論</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -153,7 +153,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
@@ -165,7 +165,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
 * :x: <a href="verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_B.test.cpp.html">test/aoj/DPL_5_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_D.test.cpp.html">test/aoj/DPL_5_D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_E.test.cpp.html">test/aoj/DPL_5_E.test.cpp</a>
@@ -224,8 +224,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
-* :x: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
-* :x: <a href="verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
 * :x: <a href="verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
 * :x: <a href="verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 * :x: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>

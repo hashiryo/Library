@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_3_B.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:44:19+09:00
+    - Last commit date: 2020-08-13 15:10:11+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B</a>
@@ -94,6 +94,7 @@ using namespace std;
 #endif
 
 namespace geometry {
+
 using Real = double;
 int sgn(Real x) {
   static constexpr Real EPS = 1e-10;
@@ -147,9 +148,11 @@ Real dot(Point p, Point q) { return p.x * q.x + p.y * q.y; }
 Real cross(Point p, Point q) { return p.x * q.y - p.y * q.x; }  // left turn > 0
 Real norm2(Point p) { return dot(p, p); }
 Real norm(Point p) { return sqrt(norm2(p)); }
-Real arg(Point p) { return atan2(p.y, p.x); }
+Real arg(Point p) { return atan2((long double)p.y, (long double)p.x); }
 Real dist(Point p, Point q) { return norm(p - q); }
-Real arg(Point p, Point q) { return atan2(cross(p, q), dot(p, q)); }
+Real arg(Point p, Point q) {
+  return atan2((long double)cross(p, q), (long double)dot(p, q));
+}
 Point orth(Point p) { return {-p.y, p.x}; }
 Point rotate(Real theta, Point p) {
   return {cos(theta) * p.x - sin(theta) * p.y,
@@ -178,7 +181,8 @@ struct polar_angle {
     q = q - o;
     if (quad(p) != quad(q)) return s * quad(p) < s * quad(q);
     if (cross(p, q)) return s * cross(p, q) > 0;
-    return norm2(p) < norm2(q);  // closer first
+    // return norm2(p) < norm2(q);  // closer first
+    return p < q;
   }
 };
 
@@ -320,7 +324,6 @@ Circle circumscribed_circle(Point A, Point B, Point C) {
 }
 
 vector<Line> tangent(Circle c, Circle d) {
-  if (c.r < d.r) swap(c, d);
   Real dis = dist(c.o, d.o);
   if (sgn(dis) == 0) return {};  // same origin
   Point u = (d.o - c.o) / dis, v = orth(u);
@@ -331,8 +334,8 @@ vector<Line> tangent(Circle c, Circle d) {
       ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
-      ls.emplace_back(Line{d.o - d.r * (uu + vv) * s, c.o + c.r * (uu + vv)});
-      ls.emplace_back(Line{d.o - d.r * (uu - vv) * s, c.o + c.r * (uu - vv)});
+      ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});
+      ls.emplace_back(Line{c.o + c.r * (uu - vv), d.o - d.r * (uu - vv) * s});
     }
   }
   return ls;

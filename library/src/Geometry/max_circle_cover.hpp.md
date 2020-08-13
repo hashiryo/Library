@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/max_circle_cover.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:44:19+09:00
+    - Last commit date: 2020-08-13 15:10:11+09:00
 
 
 
@@ -67,6 +67,7 @@ using namespace std;
 #endif
 
 namespace geometry {
+
 pair<int, Point> max_circle_cover(vector<Point> ps, Real r) {
   const Real dx[4] = {1, -1, -1, 1}, dy[4] = {1, 1, -1, -1};
   Point best_p;
@@ -102,6 +103,7 @@ pair<int, Point> max_circle_cover(vector<Point> ps, Real r) {
   rec({0, 0}, w, ps);
   return {best, best_p};
 }
+
 }  // namespace geometry
 ```
 {% endraw %}

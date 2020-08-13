@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 共通部分の面積
+# :heavy_check_mark: 共通部分の面積
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/intersection_area.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:44:19+09:00
+    - Last commit date: 2020-08-13 15:10:11+09:00
 
 
 
@@ -44,7 +44,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
 
 
 ## Code
@@ -67,12 +67,14 @@ using namespace std;
 #endif
 
 namespace geometry {
+
 Real intersection_area(Circle c, Circle d) {
   if (c.r < d.r) swap(c, d);
-  auto A = [&](Real r, Real h) {
+  auto A = [&](long double r, long double h) {
     return r * r * acos(h / r) - h * sqrt(r * r - h * h);
   };
-  auto l = dist(c.o, d.o), a = (l * l + c.r * c.r - d.r * d.r) / (2 * l);
+  Real l = dist(c.o, d.o);
+  Real a = (l * l + c.r * c.r - d.r * d.r) / (2 * l);
   if (sgn(l - c.r - d.r) >= 0) return 0;  // far away
   if (sgn(l - c.r + d.r) <= 0) return PI * d.r * d.r;
   if (sgn(l - c.r) >= 0)
@@ -98,6 +100,7 @@ Real intersection_area(Polygon g, Circle c) {
   return sum;
 }
 Real intersection_area(Circle c, Polygon g) { return intersection_area(g, c); }
+
 }  // namespace geometry
 ```
 {% endraw %}

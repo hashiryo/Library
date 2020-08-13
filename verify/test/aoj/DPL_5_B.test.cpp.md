@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 

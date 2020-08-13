@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/closest_pair.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 13:12:40+09:00
+    - Last commit date: 2020-08-13 15:10:11+09:00
 
 
 
@@ -66,6 +66,7 @@ using namespace std;
 #endif
 
 namespace geometry {
+
 pair<Point, Point> closest_pair(vector<Point> ps) {
   sort(ps.begin(), ps.end(), [](Point p, Point q) { return p.y < q.y; });
   Point u = ps[0], v = ps[1];
@@ -103,6 +104,7 @@ pair<Point, Point> closest_pair(vector<Point> ps) {
 pair<Point, Point> farthest_pair(vector<Point> ps) {
   return convex_hull(ps).farthest();
 }
+
 }  // namespace geometry
 ```
 {% endraw %}

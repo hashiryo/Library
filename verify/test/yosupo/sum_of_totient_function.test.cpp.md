@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/sum_of_totient_function.test.cpp
+# :heavy_check_mark: test/yosupo/sum_of_totient_function.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -40,8 +40,8 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :x: <a href="../../../library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
-* :x: <a href="../../../library/src/Math/number_theory.hpp.html">数論</a>
+* :question: <a href="../../../library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
+* :question: <a href="../../../library/src/Math/number_theory.hpp.html">数論</a>
 
 
 ## Code
