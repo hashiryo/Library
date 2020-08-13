@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
-* :question: <a href="../../../library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 
 
 ## Code

@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/src/Math/Matrix.hpp.html">行列</a>
-* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code

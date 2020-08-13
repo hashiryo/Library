@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: ModInt
+# :heavy_check_mark: ModInt
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -71,12 +71,12 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
 
 
 ## Code
