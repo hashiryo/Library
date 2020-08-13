@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: Segment-Tree(動的)
+# :question: Segment-Tree(動的)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Required by
 
-* :x: <a href="BinaryTrie.hpp.html">二分Trie</a>
+* :question: <a href="BinaryTrie.hpp.html">二分Trie</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/set_xor_min.test.cpp.html">test/yosupo/set_xor_min.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/set_xor_min.test.cpp.html">test/yosupo/set_xor_min.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/649.SegTree_Dynamic.test.cpp.html">test/yukicoder/649.SegTree_Dynamic.test.cpp</a>
 

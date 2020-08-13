@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 最近点対
+# :heavy_check_mark: 最近点対
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/closest_pair.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:44:19+09:00
+    - Last commit date: 2020-08-13 13:12:40+09:00
 
 
 
@@ -43,7 +43,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
 
 
 ## Code
@@ -69,9 +69,9 @@ namespace geometry {
 pair<Point, Point> closest_pair(vector<Point> ps) {
   sort(ps.begin(), ps.end(), [](Point p, Point q) { return p.y < q.y; });
   Point u = ps[0], v = ps[1];
-  Real best = dist(u, v);
+  Real best = norm2(u - v);
   auto update = [&](Point p, Point q) {
-    Real dis = dist(p, q);
+    Real dis = norm2(p - q);
     if (best > dis) best = dis, u = p, v = q;
   };
   function<void(int, int)> rec = [&](int l, int r) {

@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
 * :heavy_check_mark: <a href="../../../library/src/DataStructure/RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
 
 

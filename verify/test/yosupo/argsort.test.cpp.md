@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/argsort.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:44:19+09:00
+    - Last commit date: 2020-08-13 13:06:48+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sort_points_by_argument">https://judge.yosupo.jp/problem/sort_points_by_argument</a>
@@ -48,6 +48,8 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
+
+#define ERROR "0.00000001"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -76,6 +78,8 @@ signed main() {
 ```cpp
 #line 1 "test/yosupo/argsort.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
+
+#define ERROR "0.00000001"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -459,7 +463,7 @@ Convex convex_hull(vector<Point> ps) {
 }
 
 }  // namespace geometry
-#line 8 "test/yosupo/argsort.test.cpp"
+#line 10 "test/yosupo/argsort.test.cpp"
 #undef call_from_test
 
 signed main() {

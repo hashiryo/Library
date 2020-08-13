@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+# :heavy_check_mark: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 

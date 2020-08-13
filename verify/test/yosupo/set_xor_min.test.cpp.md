@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/set_xor_min.test.cpp
+# :heavy_check_mark: test/yosupo/set_xor_min.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
-* :x: <a href="../../../library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
+* :question: <a href="../../../library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
+* :question: <a href="../../../library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
 
 
 ## Code

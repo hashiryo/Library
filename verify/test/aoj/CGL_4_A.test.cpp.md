@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_4_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:44:19+09:00
+    - Last commit date: 2020-08-13 13:06:48+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A</a>
@@ -70,9 +70,9 @@ signed main() {
   Convex g = convex_hull(ps);
   cout << g.size() << endl;
   int st = 0;
-  for (int i = 0; i < g.size(); i++)
-    if (g[st].y > g[st].y || (g[st].y == g[i].y && g[st].x > g[i].x)) st = i;
-  for (int i = 0; i < g.size(); i++) cout << g[st + i] << endl;
+  for (int i = 0; i < (int)g.size(); i++)
+    if (g[st].y > g[i].y || (g[st].y == g[i].y && g[st].x > g[i].x)) st = i;
+  for (int i = 0; i < (int)g.size(); i++) cout << g[st + i] << endl;
   return 0;
 }
 ```
@@ -483,9 +483,9 @@ signed main() {
   Convex g = convex_hull(ps);
   cout << g.size() << endl;
   int st = 0;
-  for (int i = 0; i < g.size(); i++)
-    if (g[st].y > g[st].y || (g[st].y == g[i].y && g[st].x > g[i].x)) st = i;
-  for (int i = 0; i < g.size(); i++) cout << g[st + i] << endl;
+  for (int i = 0; i < (int)g.size(); i++)
+    if (g[st].y > g[i].y || (g[st].y == g[i].y && g[st].x > g[i].x)) st = i;
+  for (int i = 0; i < (int)g.size(); i++) cout << g[st + i] << endl;
   return 0;
 }
 

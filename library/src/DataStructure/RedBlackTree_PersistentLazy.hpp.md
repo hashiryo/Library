@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
+* :heavy_check_mark: <a href="RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
 
 
 ## Verified with

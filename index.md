@@ -56,9 +56,9 @@ layout: default
 * :question: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
-* :x: <a href="library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
+* :question: <a href="library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
-* :question: <a href="library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
 * :question: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
@@ -66,13 +66,13 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/PersistentArray.hpp.html">永続配列</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree.hpp.html">赤黒木</a>
-* :question: <a href="library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree_Persistent.hpp.html">赤黒木(永続)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
 * :question: <a href="library/src/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree_Dual.hpp.html">Segment-Tree(双対)</a>
-* :x: <a href="library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
-* :question: <a href="library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
+* :question: <a href="library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind.hpp.html">Union-Find</a>
@@ -85,7 +85,7 @@ layout: default
 ### 幾何
 
 * :question: <a href="library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
-* :x: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
+* :heavy_check_mark: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
 * :question: <a href="library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
 * :heavy_check_mark: <a href="library/src/Geometry/max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :heavy_check_mark: <a href="library/src/Geometry/min_enclosing_circle.hpp.html">最小包含円</a>
@@ -106,7 +106,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 * :x: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :question: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
-* :x: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
+* :question: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 * :x: <a href="library/src/Math/number_theory.hpp.html">数論</a>
 
 
@@ -116,7 +116,7 @@ layout: default
 
 * :heavy_check_mark: <a href="library/src/String/KnuthMorrisPratt.hpp.html">Knuth-Morris-Pratt</a>
 * :heavy_check_mark: <a href="library/src/String/RollingHash.hpp.html">Rolling-Hash</a>
-* :question: <a href="library/src/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
+* :heavy_check_mark: <a href="library/src/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
 * :x: <a href="library/src/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
 
 
@@ -156,7 +156,7 @@ layout: default
 * :x: <a href="verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
@@ -215,15 +215,15 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/range_affine_range_sum.RBTL.test.cpp.html">test/yosupo/range_affine_range_sum.RBTL.test.cpp</a>
-* :x: <a href="verify/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp.html">test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp</a>
-* :x: <a href="verify/test/yosupo/scc.test.cpp.html">test/yosupo/scc.test.cpp</a>
-* :x: <a href="verify/test/yosupo/segment_add_get_min.test.cpp.html">test/yosupo/segment_add_get_min.test.cpp</a>
-* :x: <a href="verify/test/yosupo/set_xor_min.test.cpp.html">test/yosupo/set_xor_min.test.cpp</a>
-* :x: <a href="verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
-* :x: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
-* :x: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/range_affine_range_sum.RBTL.test.cpp.html">test/yosupo/range_affine_range_sum.RBTL.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp.html">test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/scc.test.cpp.html">test/yosupo/scc.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/segment_add_get_min.test.cpp.html">test/yosupo/segment_add_get_min.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/set_xor_min.test.cpp.html">test/yosupo/set_xor_min.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
 * :x: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
 * :x: <a href="verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
 * :x: <a href="verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>

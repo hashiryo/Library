@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :x: <a href="closest_pair.hpp.html">最近点対</a>
+* :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
 * :question: <a href="intersection_area.hpp.html">共通部分の面積</a>
 * :heavy_check_mark: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :heavy_check_mark: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
@@ -61,7 +61,7 @@ layout: default
 * :x: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>

@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 
 
 ## Code

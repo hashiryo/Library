@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/suffixarray.test.cpp
+# :heavy_check_mark: test/yosupo/suffixarray.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
+* :heavy_check_mark: <a href="../../../library/src/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
 
 
 ## Code
