@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 強連結成分分解
+# :heavy_check_mark: 強連結成分分解
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,14 +38,14 @@ layout: default
 
 ## Required by
 
-* :x: <a href="../Math/TwoSatisfiability.hpp.html">2-SAT</a>
+* :heavy_check_mark: <a href="../Math/TwoSatisfiability.hpp.html">2-SAT</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/scc.test.cpp.html">test/yosupo/scc.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 
 
 ## Code

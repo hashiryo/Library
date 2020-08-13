@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 2-SAT
+# :heavy_check_mark: 2-SAT
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
+* :heavy_check_mark: <a href="../Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 
 
 ## Code

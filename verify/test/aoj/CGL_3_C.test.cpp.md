@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_3_C.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 15:10:11+09:00
+    - Last commit date: 2020-08-13 16:28:26+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_C">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_C</a>
@@ -337,7 +337,7 @@ vector<Line> tangent(Circle c, Circle d) {
   for (int s = +1; s >= -1; s -= 2) {
     Real h = (c.r + s * d.r) / dis;
     if (sgn(1 - h * h) == 0) {  // touch inner/outer
-      ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
+      ls.emplace_back(Line{c.o + h * c.r * u, c.o + h * c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
       ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});

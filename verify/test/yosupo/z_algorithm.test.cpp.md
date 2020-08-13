@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/z_algorithm.test.cpp
+# :heavy_check_mark: test/yosupo/z_algorithm.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
+* :heavy_check_mark: <a href="../../../library/src/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
 
 
 ## Code

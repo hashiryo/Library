@@ -44,9 +44,9 @@ layout: default
 * :heavy_check_mark: <a href="library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 * :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 * :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
-* :question: <a href="library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
+* :heavy_check_mark: <a href="library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
 * :x: <a href="library/src/Graph/Tree_DP.hpp.html">木DP</a>
-* :x: <a href="library/src/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
+* :heavy_check_mark: <a href="library/src/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
 
 
 <div id="c1c7278649b583761cecd13e0628181d"></div>
@@ -60,7 +60,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/DisjointSparseTable.hpp.html">Disjoint-Sparse-Table</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LiChaoTree.hpp.html">Li-Chao-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
-* :question: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/PersistentArray.hpp.html">永続配列</a>
@@ -102,7 +102,7 @@ layout: default
 * :question: <a href="library/src/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
 * :question: <a href="library/src/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
-* :x: <a href="library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
+* :heavy_check_mark: <a href="library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
 * :heavy_check_mark: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 * :question: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :question: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
@@ -117,7 +117,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/String/KnuthMorrisPratt.hpp.html">Knuth-Morris-Pratt</a>
 * :heavy_check_mark: <a href="library/src/String/RollingHash.hpp.html">Rolling-Hash</a>
 * :heavy_check_mark: <a href="library/src/String/SuffixArray.hpp.html">接尾辞配列(Suffix-Array)</a>
-* :x: <a href="library/src/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
+* :heavy_check_mark: <a href="library/src/String/z_algorithm.hpp.html">最長共通接頭辞(Z-Algorithm)</a>
 
 
 ## Verify Files
@@ -163,7 +163,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_B.test.cpp.html">test/aoj/DPL_5_B.test.cpp</a>
@@ -226,11 +226,11 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
-* :x: <a href="verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
-* :x: <a href="verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
-* :x: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
 * :x: <a href="verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
 * :x: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :x: <a href="verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>

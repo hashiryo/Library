@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/two_edge_connected_components.test.cpp
+# :heavy_check_mark: test/yosupo/two_edge_connected_components.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
+* :heavy_check_mark: <a href="../../../library/src/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
 
 
 ## Code

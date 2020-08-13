@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/_geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 15:10:11+09:00
+    - Last commit date: 2020-08-13 16:28:26+09:00
 
 
 
@@ -68,7 +68,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
@@ -327,7 +327,7 @@ vector<Line> tangent(Circle c, Circle d) {
   for (int s = +1; s >= -1; s -= 2) {
     Real h = (c.r + s * d.r) / dis;
     if (sgn(1 - h * h) == 0) {  // touch inner/outer
-      ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
+      ls.emplace_back(Line{c.o + h * c.r * u, c.o + h * c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
       ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});
@@ -715,7 +715,7 @@ vector<Line> tangent(Circle c, Circle d) {
   for (int s = +1; s >= -1; s -= 2) {
     Real h = (c.r + s * d.r) / dis;
     if (sgn(1 - h * h) == 0) {  // touch inner/outer
-      ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
+      ls.emplace_back(Line{c.o + h * c.r * u, c.o + h * c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
       ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});
