@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/CGL_2_C.test.cpp
+# :heavy_check_mark: test/aoj/CGL_2_C.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_2_C.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:15:58+09:00
+    - Last commit date: 2020-08-13 12:44:19+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/2/CGL_2_C">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/2/CGL_2_C</a>
@@ -63,9 +63,13 @@ signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   using namespace geometry;
-  Segment s, t;
-  cin >> s.p1 >> s.p2 >> t.p1 >> t.p2;
-  cout << cross_points(s, t)[0] << endl;
+  int q;
+  cin >> q;
+  while (q--) {
+    Segment s, t;
+    cin >> s.p1 >> s.p2 >> t.p1 >> t.p2;
+    cout << cross_points(s, t)[0] << endl;
+  }
   return 0;
 }
 ```
@@ -98,7 +102,7 @@ using namespace std;
 namespace geometry {
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-8;
+  static constexpr Real EPS = 1e-10;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -333,8 +337,8 @@ vector<Line> tangent(Circle c, Circle d) {
       ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
-      ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});
-      ls.emplace_back(Line{c.o + c.r * (uu - vv), d.o - d.r * (uu - vv) * s});
+      ls.emplace_back(Line{d.o - d.r * (uu + vv) * s, c.o + c.r * (uu + vv)});
+      ls.emplace_back(Line{d.o - d.r * (uu - vv) * s, c.o + c.r * (uu - vv)});
     }
   }
   return ls;
@@ -469,9 +473,13 @@ signed main() {
   cin.tie(0);
   ios::sync_with_stdio(false);
   using namespace geometry;
-  Segment s, t;
-  cin >> s.p1 >> s.p2 >> t.p1 >> t.p2;
-  cout << cross_points(s, t)[0] << endl;
+  int q;
+  cin >> q;
+  while (q--) {
+    Segment s, t;
+    cin >> s.p1 >> s.p2 >> t.p1 >> t.p2;
+    cout << cross_points(s, t)[0] << endl;
+  }
   return 0;
 }
 

@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/CGL_5.test.cpp
+# :x: test/aoj/CGL_5_A.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_5.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:15:58+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_5_A.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-13 12:44:19+09:00
 
 
-* see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5</a>
+* see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A</a>
 
 
 ## Depends on
@@ -48,7 +48,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5"
+#define PROBLEM \
+  "https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A"
 
 #define ERROR "0.00000001"
 

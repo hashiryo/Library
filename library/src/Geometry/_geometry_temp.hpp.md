@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/_geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:15:58+09:00
+    - Last commit date: 2020-08-13 12:44:19+09:00
 
 
 
@@ -51,20 +51,20 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_5.test.cpp.html">test/aoj/CGL_5.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
@@ -92,7 +92,7 @@ using namespace std;
 namespace geometry {
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-8;
+  static constexpr Real EPS = 1e-10;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -327,8 +327,8 @@ vector<Line> tangent(Circle c, Circle d) {
       ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
-      ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});
-      ls.emplace_back(Line{c.o + c.r * (uu - vv), d.o - d.r * (uu - vv) * s});
+      ls.emplace_back(Line{d.o - d.r * (uu + vv) * s, c.o + c.r * (uu + vv)});
+      ls.emplace_back(Line{d.o - d.r * (uu - vv) * s, c.o + c.r * (uu - vv)});
     }
   }
   return ls;
@@ -456,6 +456,7 @@ Convex convex_hull(vector<Point> ps) {
 }
 
 }  // namespace geometry
+
 ```
 {% endraw %}
 
@@ -476,7 +477,7 @@ using namespace std;
 namespace geometry {
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-8;
+  static constexpr Real EPS = 1e-10;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -711,8 +712,8 @@ vector<Line> tangent(Circle c, Circle d) {
       ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
-      ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});
-      ls.emplace_back(Line{c.o + c.r * (uu - vv), d.o - d.r * (uu - vv) * s});
+      ls.emplace_back(Line{d.o - d.r * (uu + vv) * s, c.o + c.r * (uu + vv)});
+      ls.emplace_back(Line{d.o - d.r * (uu - vv) * s, c.o + c.r * (uu - vv)});
     }
   }
   return ls;

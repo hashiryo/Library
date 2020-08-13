@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_4_B.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:15:58+09:00
+    - Last commit date: 2020-08-13 12:44:19+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_B">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_B</a>
@@ -100,7 +100,7 @@ using namespace std;
 namespace geometry {
 using Real = double;
 int sgn(Real x) {
-  static constexpr Real EPS = 1e-8;
+  static constexpr Real EPS = 1e-10;
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
@@ -335,8 +335,8 @@ vector<Line> tangent(Circle c, Circle d) {
       ls.emplace_back(Line{c.o + c.r * u, c.o + c.r * (u + v)});
     } else if (sgn(1 - h * h) > 0) {  // properly intersect
       Point uu = h * u, vv = sqrt(1 - h * h) * v;
-      ls.emplace_back(Line{c.o + c.r * (uu + vv), d.o - d.r * (uu + vv) * s});
-      ls.emplace_back(Line{c.o + c.r * (uu - vv), d.o - d.r * (uu - vv) * s});
+      ls.emplace_back(Line{d.o - d.r * (uu + vv) * s, c.o + c.r * (uu + vv)});
+      ls.emplace_back(Line{d.o - d.r * (uu - vv) * s, c.o + c.r * (uu - vv)});
     }
   }
   return ls;

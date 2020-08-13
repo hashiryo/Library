@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/min_enclosing_circle.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 12:15:58+09:00
+    - Last commit date: 2020-08-13 12:44:19+09:00
 
 
 
