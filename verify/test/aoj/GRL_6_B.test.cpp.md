@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
+* :heavy_check_mark: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 
 
 ## Code

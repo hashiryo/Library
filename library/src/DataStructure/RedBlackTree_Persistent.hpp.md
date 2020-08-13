@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 赤黒木(永続)
+# :heavy_check_mark: 赤黒木(永続)
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="RedBlackTree.hpp.html">赤黒木</a>
+* :heavy_check_mark: <a href="RedBlackTree.hpp.html">赤黒木</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/persistent_queue.RBTP.test.cpp.html">test/yosupo/persistent_queue.RBTP.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/persistent_queue.RBTP.test.cpp.html">test/yosupo/persistent_queue.RBTP.test.cpp</a>
 
 
 ## Code

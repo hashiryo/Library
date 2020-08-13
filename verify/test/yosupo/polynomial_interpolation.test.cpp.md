@@ -41,7 +41,7 @@ layout: default
 
 * :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :x: <a href="../../../library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :question: <a href="../../../library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 
 
 ## Code

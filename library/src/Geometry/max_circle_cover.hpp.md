@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/max_circle_cover.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 01:32:09+09:00
+    - Last commit date: 2020-08-13 11:52:23+09:00
 
 
 
@@ -54,6 +54,7 @@ layout: default
 /**
  * @title 半径固定の円の最大被覆点数
  * @category 幾何
+ * ４分木
  */
 
 #ifndef call_from_test
@@ -115,7 +116,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/max_circle_cover.hpp: line 11: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/max_circle_cover.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

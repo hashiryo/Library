@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/min_cost_b_flow.test.cpp
+# :heavy_check_mark: test/yosupo/min_cost_b_flow.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
+* :heavy_check_mark: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 
 
 ## Code

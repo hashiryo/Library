@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
-* :question: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
+* :heavy_check_mark: <a href="../../../library/src/Graph/MinCostFlow.hpp.html">最小費用流</a>
 
 
 ## Code
