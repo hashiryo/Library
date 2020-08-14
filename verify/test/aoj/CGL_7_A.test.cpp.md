@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/CGL_7_A.test.cpp
+# :heavy_check_mark: test/aoj/CGL_7_A.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_7_A.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 14:07:28+09:00
+    - Last commit date: 2020-08-14 20:40:49+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_A">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_A</a>
@@ -64,7 +64,7 @@ signed main() {
   Circle c, d;
   cin >> c.o >> c.r;
   cin >> d.o >> d.r;
-  cout << tangent(c, d).size() << endl;
+  cout << common_tangent(c, d).size() << endl;
   return 0;
 }
 ```
@@ -162,7 +162,7 @@ istream &operator>>(istream &is, Point &p) {
   return is;
 }
 ostream &operator<<(ostream &os, Point p) {
-  os << fixed << setprecision(12) << p.x << " " << p.y;
+  os << p.x << " " << p.y;
   return os;
 }
 // usage: sort(ps.begin(),ps.end(), polar_angle(origin, direction));
@@ -206,6 +206,10 @@ struct Line {
     return !sgn(cross(p1 - p2, l.p1 - l.p2)) && !sgn(cross(p1 - p2, l.p1 - p1));
   }
   bool is_on(Point p) { return !sgn(cross(p1 - p, p2 - p)); }
+  tuple<Real, Real, Real> coef() {  // return  A,B,C of Ax+By=C
+    auto n = orth(p2 - p1);
+    return make_tuple(n.x, n.y, dot(n, p1));
+  }
   Point project(Point p) {
     Point v = p2 - p1;
     return p1 + dot(p - p1, v) / dot(v, v) * v;
@@ -435,7 +439,7 @@ struct Convex : Polygon {
     Convex g;
     for (int i = 0; i < (int)this->size(); i++) {
       Point p = (*this)[i], q = (*this)[next(i)];
-      if (sgn(cross(l.p1 - p, l.p2 - p) >= 0)) g.push_back(p);
+      if (sgn(cross(l.p1 - p, l.p2 - p)) >= 0) g.push_back(p);
       if (sgn(cross(l.p1 - p, l.p2 - p)) * sgn(cross(l.p1 - q, l.p2 - q)) < 0) {
         Real a = cross(q - p, l.p2 - l.p1);
         Real b = cross(l.p1 - p, l.p2 - l.p1);
@@ -458,6 +462,41 @@ Convex convex_hull(vector<Point> ps) {
   return ch;
 }
 
+//-----------------------------------------------------------------------------
+// visualizer
+// use https://csacademy.com/app/geometry_widget/
+//-----------------------------------------------------------------------------
+struct Visualizer {
+  ofstream ofs;
+  Visualizer(string s = "visualize.txt") : ofs(s) {
+    ofs << fixed << setprecision(10);
+  }
+  Visualizer &operator<<(Point p) {
+    ofs << p << endl;
+    return *this;
+  }
+  Visualizer &operator<<(Line l) {
+    Real A, B, C;
+    tie(A, B, C) = l.coef();
+    ofs << "Line " << A << " " << B << " " << C << endl;
+    return *this;
+  }
+  Visualizer &operator<<(Segment s) {
+    ofs << "Segment " << s.p1 << " " << s.p2 << endl;
+    return *this;
+  }
+  Visualizer &operator<<(Circle c) {
+    ofs << "Circle " << c.o << " " << c.r << endl;
+    return *this;
+  }
+  Visualizer &operator<<(Polygon g) {
+    ofs << "Polygon" << endl;
+    for (Point p : g) ofs << p << endl;
+    ofs << "..." << endl;
+    return *this;
+  }
+};
+
 }  // namespace geometry
 #line 9 "test/aoj/CGL_7_A.test.cpp"
 #undef call_from_test
@@ -469,7 +508,7 @@ signed main() {
   Circle c, d;
   cin >> c.o >> c.r;
   cin >> d.o >> d.r;
-  cout << tangent(c, d).size() << endl;
+  cout << common_tangent(c, d).size() << endl;
   return 0;
 }
 
