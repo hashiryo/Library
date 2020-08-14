@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/_geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 20:33:35+09:00
+    - Last commit date: 2020-08-14 14:07:28+09:00
 
 
 
@@ -49,6 +49,8 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2442.test.cpp.html">test/aoj/2442.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
@@ -99,6 +101,8 @@ int sgn(Real x) {
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
+Real radian_to_degree(Real r) { return (r * 180.0 / PI); }
+Real degree_to_radian(Real d) { return (d * PI / 180.0); }
 enum {
   COUNTER_CLOCKWISE = +1,
   CLOCKWISE = -1,
@@ -482,6 +486,8 @@ int sgn(Real x) {
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
+Real radian_to_degree(Real r) { return (r * 180.0 / PI); }
+Real degree_to_radian(Real d) { return (d * PI / 180.0); }
 enum {
   COUNTER_CLOCKWISE = +1,
   CLOCKWISE = -1,

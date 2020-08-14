@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/argsort.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 20:33:35+09:00
+    - Last commit date: 2020-08-14 14:07:28+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sort_points_by_argument">https://judge.yosupo.jp/problem/sort_points_by_argument</a>
@@ -100,6 +100,8 @@ int sgn(Real x) {
   return x < -EPS ? -1 : x > +EPS ? 1 : 0;
 }
 const Real PI = acos(-1.0);
+Real radian_to_degree(Real r) { return (r * 180.0 / PI); }
+Real degree_to_radian(Real d) { return (d * PI / 180.0); }
 enum {
   COUNTER_CLOCKWISE = +1,
   CLOCKWISE = -1,
