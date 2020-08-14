@@ -40,13 +40,15 @@ layout: default
 
 * :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
 * :heavy_check_mark: <a href="intersection_area.hpp.html">共通部分の面積</a>
-* :warning: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
+* :heavy_check_mark: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :warning: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
 
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2442.test.cpp.html">test/aoj/2442.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>

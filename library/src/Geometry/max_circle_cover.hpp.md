@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: 半径固定の円の最大被覆点数
+# :heavy_check_mark: 半径固定の円の最大被覆点数
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,6 +39,11 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="!geometry_temp.hpp.html">幾何テンプレ</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 
 
 ## Code
