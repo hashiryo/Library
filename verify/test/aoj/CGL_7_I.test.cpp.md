@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
+* :heavy_check_mark: <a href="../../../library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
 * :heavy_check_mark: <a href="../../../library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
 
 
