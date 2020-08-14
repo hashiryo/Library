@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/intersection_area.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 20:40:49+09:00
+    - Last commit date: 2020-08-14 21:08:59+09:00
 
 
 
@@ -96,7 +96,8 @@ Real intersection_area(Polygon g, Circle c) {
            + arg(v, q) * c.r * c.r / 2;
   };
   Real sum = 0.0;
-  for (int i = 0; i < g.size(); ++i) sum += tri(g[i] - c.o, g[g.next(i)] - c.o);
+  for (int i = 0; i < (int)g.size(); ++i)
+    sum += tri(g[i] - c.o, g[g.next(i)] - c.o);
   return sum;
 }
 Real intersection_area(Circle c, Polygon g) { return intersection_area(g, c); }
