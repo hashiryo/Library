@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 幾何テンプレ
+# :question: 幾何テンプレ
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/!geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 23:48:56+09:00
+    - Last commit date: 2020-08-15 01:00:29+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
-* :heavy_check_mark: <a href="intersection_area.hpp.html">共通部分の面積</a>
+* :x: <a href="closest_pair.hpp.html">最近点対</a>
+* :x: <a href="intersection_area.hpp.html">共通部分の面積</a>
 * :heavy_check_mark: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
-* :warning: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
+* :heavy_check_mark: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
 
 
 ## Verified with
@@ -51,27 +51,32 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2442.test.cpp.html">test/aoj/2442.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/3056.test.cpp.html">test/aoj/3056.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 
 
 ## Code
@@ -150,7 +155,7 @@ Real arg(Point p) { return atan2(p.y, p.x); }
 Real dist(Point p, Point q) { return norm(p - q); }
 Real arg(Point p, Point q) { return atan2(cross(p, q), dot(p, q)); }
 Point orth(Point p) { return {-p.y, p.x}; }
-Point rotate(Real theta, Point p) {
+Point rotate(Point p, Real theta) {
   return {cos(theta) * p.x - sin(theta) * p.y,
           sin(theta) * p.x + cos(theta) * p.y};
 }
@@ -239,6 +244,15 @@ bool is_parallel(Line l, Line m) {
   return !sgn(cross(l.p1 - l.p2, m.p1 - m.p2));
 }
 
+Line translate(Line l, Point v) { return {l.p1 + v, l.p2 + v}; }
+Line rotate(Line l, Real theta) {
+  return {rotate(l.p1, theta), rotate(l.p2, theta)};
+}
+Segment translate(Segment s, Point v) { return {s.p1 + v, s.p2 + v}; }
+Segment rotate(Segment s, Real theta) {
+  return {rotate(s.p1, theta), rotate(s.p2, theta)};
+}
+
 vector<Point> cross_points(Line l, Line m) {
   Real a = cross(m.p2 - m.p1, l.p2 - l.p1);
   Real b = cross(l.p1 - m.p1, l.p2 - l.p1);
@@ -313,6 +327,9 @@ struct Circle {
     return {{p, o + u - v}, {p, o + u + v}};
   }
 };
+
+Circle translate(Circle c, Point v) { return {c.o + v, c.r}; }
+Circle rotate(Circle c, Real theta) { return {rotate(c.o, theta), c.r}; }
 
 Circle inscribed_circle(Point A, Point B, Point C) {
   Real a = dist(B, C), b = dist(C, A), c = dist(A, B);
@@ -408,13 +425,24 @@ struct Polygon : vector<Point> {
   }
 };
 
+Polygon translate(Polygon g, Point v) {
+  Polygon h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;
+  return h;
+}
+Polygon rotate(Polygon g, Real theta) {
+  Polygon h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = rotate(g[i], theta);
+  return h;
+}
+
 struct Convex : Polygon {
   using Polygon::Polygon;
   pair<Point, Point> farthest() {
     int u = 0, v = 1;
     Real best = -1;
     for (int i = 0, j = 1; i < (int)this->size(); ++i) {
-      while (1) {
+      while (true) {
         int k = next(j);
         Real len = norm2((*this)[j] - (*this)[i]);
         if (sgn(len - norm2((*this)[k] - (*this)[i])) <= 0)
@@ -461,7 +489,7 @@ Convex convex_hull(vector<Point> ps) {
 
 //-----------------------------------------------------------------------------
 // visualizer
-// use https://csacademy.com/app/geometry_widget/
+// to use https://csacademy.com/app/geometry_widget/
 //-----------------------------------------------------------------------------
 struct Visualizer {
   ofstream ofs;
@@ -574,7 +602,7 @@ Real arg(Point p) { return atan2(p.y, p.x); }
 Real dist(Point p, Point q) { return norm(p - q); }
 Real arg(Point p, Point q) { return atan2(cross(p, q), dot(p, q)); }
 Point orth(Point p) { return {-p.y, p.x}; }
-Point rotate(Real theta, Point p) {
+Point rotate(Point p, Real theta) {
   return {cos(theta) * p.x - sin(theta) * p.y,
           sin(theta) * p.x + cos(theta) * p.y};
 }
@@ -663,6 +691,15 @@ bool is_parallel(Line l, Line m) {
   return !sgn(cross(l.p1 - l.p2, m.p1 - m.p2));
 }
 
+Line translate(Line l, Point v) { return {l.p1 + v, l.p2 + v}; }
+Line rotate(Line l, Real theta) {
+  return {rotate(l.p1, theta), rotate(l.p2, theta)};
+}
+Segment translate(Segment s, Point v) { return {s.p1 + v, s.p2 + v}; }
+Segment rotate(Segment s, Real theta) {
+  return {rotate(s.p1, theta), rotate(s.p2, theta)};
+}
+
 vector<Point> cross_points(Line l, Line m) {
   Real a = cross(m.p2 - m.p1, l.p2 - l.p1);
   Real b = cross(l.p1 - m.p1, l.p2 - l.p1);
@@ -737,6 +774,9 @@ struct Circle {
     return {{p, o + u - v}, {p, o + u + v}};
   }
 };
+
+Circle translate(Circle c, Point v) { return {c.o + v, c.r}; }
+Circle rotate(Circle c, Real theta) { return {rotate(c.o, theta), c.r}; }
 
 Circle inscribed_circle(Point A, Point B, Point C) {
   Real a = dist(B, C), b = dist(C, A), c = dist(A, B);
@@ -832,13 +872,24 @@ struct Polygon : vector<Point> {
   }
 };
 
+Polygon translate(Polygon g, Point v) {
+  Polygon h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;
+  return h;
+}
+Polygon rotate(Polygon g, Real theta) {
+  Polygon h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = rotate(g[i], theta);
+  return h;
+}
+
 struct Convex : Polygon {
   using Polygon::Polygon;
   pair<Point, Point> farthest() {
     int u = 0, v = 1;
     Real best = -1;
     for (int i = 0, j = 1; i < (int)this->size(); ++i) {
-      while (1) {
+      while (true) {
         int k = next(j);
         Real len = norm2((*this)[j] - (*this)[i]);
         if (sgn(len - norm2((*this)[k] - (*this)[i])) <= 0)
@@ -885,7 +936,7 @@ Convex convex_hull(vector<Point> ps) {
 
 //-----------------------------------------------------------------------------
 // visualizer
-// use https://csacademy.com/app/geometry_widget/
+// to use https://csacademy.com/app/geometry_widget/
 //-----------------------------------------------------------------------------
 struct Visualizer {
   ofstream ofs;

@@ -84,11 +84,11 @@ layout: default
 
 ### 幾何
 
-* :heavy_check_mark: <a href="library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
-* :heavy_check_mark: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
-* :heavy_check_mark: <a href="library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
+* :question: <a href="library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :x: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
+* :x: <a href="library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
 * :heavy_check_mark: <a href="library/src/Geometry/max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
-* :warning: <a href="library/src/Geometry/min_enclosing_circle.hpp.html">最小包含円</a>
+* :heavy_check_mark: <a href="library/src/Geometry/min_enclosing_circle.hpp.html">最小包含円</a>
 
 
 <div id="6e65831863dbf272b7a65cd8df1a440d"></div>
@@ -141,35 +141,36 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2842.BIT_2D.test.cpp.html">test/aoj/2842.BIT_2D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3032.test.cpp.html">test/aoj/3032.test.cpp</a>
-* :x: <a href="verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/3056.test.cpp.html">test/aoj/3056.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.KMP.test.cpp.html">test/aoj/ALDS1_14_B.KMP.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html">test/aoj/ALDS1_14_B.rollinghash.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_D.test.cpp.html">test/aoj/ALDS1_14_D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_9_C.SkewHeap.test.cpp.html">test/aoj/ALDS1_9_C.SkewHeap.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
-* :x: <a href="verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
+* :x: <a href="verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_B.test.cpp.html">test/aoj/DPL_5_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_D.test.cpp.html">test/aoj/DPL_5_D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/DPL_5_E.test.cpp.html">test/aoj/DPL_5_E.test.cpp</a>
@@ -193,7 +194,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :x: <a href="verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/assignment.mcf.test.cpp.html">test/yosupo/assignment.mcf.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
