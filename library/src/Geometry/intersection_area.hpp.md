@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/intersection_area.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 21:26:36+09:00
+    - Last commit date: 2020-08-14 23:48:56+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="_geometry_temp.hpp.html">幾何テンプレ</a>
+* :heavy_check_mark: <a href="!geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Verified with
@@ -62,7 +62,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "src/Geometry/_geometry_temp.hpp"
+#include "src/Geometry/!geometry_temp.hpp"
 #undef call_from_test
 #endif
 

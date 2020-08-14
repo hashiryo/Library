@@ -30,8 +30,8 @@ layout: default
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
-* <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/_geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 21:26:36+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/!geometry_temp.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-14 23:48:56+09:00
 
 
 
@@ -40,21 +40,15 @@ layout: default
 
 * :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
 * :heavy_check_mark: <a href="intersection_area.hpp.html">共通部分の面積</a>
-* :heavy_check_mark: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
-* :heavy_check_mark: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
+* :warning: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
+* :warning: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2442.test.cpp.html">test/aoj/2442.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
@@ -506,7 +500,7 @@ struct Visualizer {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "src/Geometry/_geometry_temp.hpp"
+#line 1 "src/Geometry/!geometry_temp.hpp"
 /**
  * @title 幾何テンプレ
  * @category 幾何

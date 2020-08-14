@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/argsort.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 21:26:36+09:00
+    - Last commit date: 2020-08-14 23:48:56+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sort_points_by_argument">https://judge.yosupo.jp/problem/sort_points_by_argument</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
+* :heavy_check_mark: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Code
@@ -53,7 +53,7 @@ layout: default
 using namespace std;
 
 #define call_from_test
-#include "src/Geometry/_geometry_temp.hpp"
+#include "src/Geometry/!geometry_temp.hpp"
 #undef call_from_test
 
 signed main() {
@@ -81,14 +81,14 @@ signed main() {
 using namespace std;
 
 #define call_from_test
-#line 1 "src/Geometry/_geometry_temp.hpp"
+#line 1 "src/Geometry/!geometry_temp.hpp"
 /**
  * @title 幾何テンプレ
  * @category 幾何
  */
 
 #ifndef call_from_test
-#line 8 "src/Geometry/_geometry_temp.hpp"
+#line 8 "src/Geometry/!geometry_temp.hpp"
 using namespace std;
 #endif
 

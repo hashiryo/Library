@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../index.html#5058f1af8388633f609cadb75a75dc9d">.</a>
 * <a href="{{ site.github.repository_url }}/blob/master/!hoge.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 21:29:23+09:00
+    - Last commit date: 2020-08-14 23:48:56+09:00
 
 
 
@@ -41,6 +41,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#define IGNORE
 // test
 ```
 {% endraw %}
@@ -49,6 +50,7 @@ layout: default
 {% raw %}
 ```cpp
 #line 1 "!hoge.hpp"
+#define IGNORE
 // test
 
 ```
