@@ -25,22 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/CGL_7_I.test.cpp
+# :x: test/aoj/CGL_7_I.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_7_I.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 21:08:59+09:00
+    - Last commit date: 1970-01-01 00:00:00+00:00
 
 
-* see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I</a>
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../../../library/src/Geometry/_geometry_temp.hpp.html">幾何テンプレ</a>
-* :heavy_check_mark: <a href="../../../library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
 
 
 ## Code
@@ -84,9 +77,9 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
     self.update(self._resolve(pathlib.Path(included), included_from=path))
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/intersection_area.hpp: line 11: unable to process #include in #if / #ifdef / #ifndef other than include guards
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 187, in _resolve
+    raise BundleErrorAt(path, -1, "no such header")
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/_geometry_temp.hpp: line -1: no such header
 
 ```
 {% endraw %}

@@ -25,25 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 最近点対
+# :warning: 最近点対
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/closest_pair.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 20:40:49+09:00
+    - Last commit date: 1970-01-01 00:00:00+00:00
 
 
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="_geometry_temp.hpp.html">幾何テンプレ</a>
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
 
 
 ## Code
