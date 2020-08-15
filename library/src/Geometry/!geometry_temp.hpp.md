@@ -31,15 +31,15 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/!geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 01:00:29+09:00
+    - Last commit date: 2020-08-15 20:15:47+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
-* :heavy_check_mark: <a href="intersection_area.hpp.html">共通部分の面積</a>
+* :x: <a href="closest_pair.hpp.html">最近点対</a>
+* :x: <a href="intersection_area.hpp.html">共通部分の面積</a>
 * :heavy_check_mark: <a href="max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
 * :heavy_check_mark: <a href="min_enclosing_circle.hpp.html">最小包含円</a>
 
@@ -47,7 +47,9 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/1157.test.cpp.html">test/aoj/1157.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2003.test.cpp.html">test/aoj/2003.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2423.test.cpp.html">test/aoj/2423.test.cpp</a>
@@ -57,28 +59,28 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3056.test.cpp.html">test/aoj/3056.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 
 
 ## Code
@@ -206,6 +208,10 @@ int ccw(Point p0, Point p1, Point p2) {
 //-----------------------------------------------------------------------------
 struct Line {
   Point p1, p2;
+  Point &operator[](int i) {
+    assert(0 <= i && i <= 1);
+    return i ? p2 : p1;
+  }
   bool operator==(Line l) const {
     return !sgn(cross(p1 - p2, l.p1 - l.p2)) && !sgn(cross(p1 - p2, l.p1 - p1));
   }
@@ -223,6 +229,10 @@ struct Line {
 
 struct Segment {
   Point p1, p2;
+  Point &operator[](int i) {
+    assert(0 <= i && i <= 1);
+    return i ? p2 : p1;
+  }
   bool operator==(Segment s) const {  // do not consider the direction
     return (p1 == s.p1 && p2 == s.p2) || (p1 == s.p2 && p2 == s.p1);
   }
@@ -477,6 +487,36 @@ struct Convex : Polygon {
   }
 };
 
+Real dist(Polygon g, Point p) {
+  if (g.contains(p) != OUT) return 0;
+  Real res = dist(Segment({g.back(), g[0]}), p);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), p));
+  return res;
+}
+Real dist(Point p, Polygon g) { return dist(g, p); }
+Real dist(Polygon g, Line l) {
+  Real res = dist(Segment({g.back(), g[0]}), l);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), l));
+  return res;
+}
+Real dist(Line l, Polygon g) { return dist(g, l); }
+Real dist(Polygon g, Segment s) {
+  if (g.contains(s.p1) != OUT || g.contains(s.p2) != OUT) return 0;
+  Real res = dist(Segment({g.back(), g[0]}), s);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), s));
+  return res;
+}
+Real dist(Segment s, Polygon g) { return dist(g, s); }
+Real dist(Polygon g, Polygon h) {
+  Real res = dist(Segment({g.back(), g[0]}), h);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), h));
+  return res;
+}
+
 Convex convex_hull(vector<Point> ps) {
   int n = ps.size(), k = 0;
   sort(ps.begin(), ps.end());
@@ -525,7 +565,6 @@ struct Visualizer {
 };
 
 }  // namespace geometry
-
 ```
 {% endraw %}
 
@@ -653,6 +692,10 @@ int ccw(Point p0, Point p1, Point p2) {
 //-----------------------------------------------------------------------------
 struct Line {
   Point p1, p2;
+  Point &operator[](int i) {
+    assert(0 <= i && i <= 1);
+    return i ? p2 : p1;
+  }
   bool operator==(Line l) const {
     return !sgn(cross(p1 - p2, l.p1 - l.p2)) && !sgn(cross(p1 - p2, l.p1 - p1));
   }
@@ -670,6 +713,10 @@ struct Line {
 
 struct Segment {
   Point p1, p2;
+  Point &operator[](int i) {
+    assert(0 <= i && i <= 1);
+    return i ? p2 : p1;
+  }
   bool operator==(Segment s) const {  // do not consider the direction
     return (p1 == s.p1 && p2 == s.p2) || (p1 == s.p2 && p2 == s.p1);
   }
@@ -923,6 +970,36 @@ struct Convex : Polygon {
     return g;
   }
 };
+
+Real dist(Polygon g, Point p) {
+  if (g.contains(p) != OUT) return 0;
+  Real res = dist(Segment({g.back(), g[0]}), p);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), p));
+  return res;
+}
+Real dist(Point p, Polygon g) { return dist(g, p); }
+Real dist(Polygon g, Line l) {
+  Real res = dist(Segment({g.back(), g[0]}), l);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), l));
+  return res;
+}
+Real dist(Line l, Polygon g) { return dist(g, l); }
+Real dist(Polygon g, Segment s) {
+  if (g.contains(s.p1) != OUT || g.contains(s.p2) != OUT) return 0;
+  Real res = dist(Segment({g.back(), g[0]}), s);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), s));
+  return res;
+}
+Real dist(Segment s, Polygon g) { return dist(g, s); }
+Real dist(Polygon g, Polygon h) {
+  Real res = dist(Segment({g.back(), g[0]}), h);
+  for (int i = 0; i + 1 < (int)g.size(); i++)
+    res = min(res, dist(Segment({g[i], g[i + 1]}), h));
+  return res;
+}
 
 Convex convex_hull(vector<Point> ps) {
   int n = ps.size(), k = 0;
