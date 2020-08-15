@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/CGL_7_H.test.cpp
+# :heavy_check_mark: test/aoj/CGL_7_H.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
-* :x: <a href="../../../library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
+* :heavy_check_mark: <a href="../../../library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
 
 
 ## Code

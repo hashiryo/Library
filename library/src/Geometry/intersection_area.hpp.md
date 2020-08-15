@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 共通部分の面積
+# :heavy_check_mark: 共通部分の面積
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -43,8 +43,8 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
 
 
 ## Code
