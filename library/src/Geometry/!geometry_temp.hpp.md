@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 幾何テンプレ
+# :heavy_check_mark: 幾何テンプレ
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -47,9 +47,10 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/1157.test.cpp.html">test/aoj/1157.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1157.test.cpp.html">test/aoj/1157.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2003.test.cpp.html">test/aoj/2003.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2009.test.cpp.html">test/aoj/2009.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2423.test.cpp.html">test/aoj/2423.test.cpp</a>
