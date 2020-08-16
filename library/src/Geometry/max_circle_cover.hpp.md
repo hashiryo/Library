@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/max_circle_cover.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 20:15:47+09:00
+    - Last commit date: 2020-08-16 21:27:30+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="!geometry_temp.hpp.html">幾何テンプレ</a>
+* :question: <a href="!geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Verified with

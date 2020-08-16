@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/CGL_7_I.test.cpp
+# :x: test/aoj/CGL_7_I.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_7_I.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 20:15:47+09:00
+    - Last commit date: 2020-08-16 21:27:30+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
-* :heavy_check_mark: <a href="../../../library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
+* :question: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :x: <a href="../../../library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
 
 
 ## Code
