@@ -125,6 +125,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/0334.test.cpp.html">test/aoj/0334.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1157.test.cpp.html">test/aoj/1157.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/1171.test.cpp.html">test/aoj/1171.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1190.test.cpp.html">test/aoj/1190.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1242.test.cpp.html">test/aoj/1242.test.cpp</a>
@@ -133,7 +134,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/1508.RBT.test.cpp.html">test/aoj/1508.RBT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2003.test.cpp.html">test/aoj/2003.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2009.test.cpp.html">test/aoj/2009.test.cpp</a>
-* :x: <a href="verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2256.test.cpp.html">test/aoj/2256.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2313.test.cpp.html">test/aoj/2313.test.cpp</a>
@@ -146,7 +147,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2559.LCT_Dual.test.cpp.html">test/aoj/2559.LCT_Dual.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
-* :x: <a href="verify/test/aoj/2626.test.cpp.html">test/aoj/2626.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2626.test.cpp.html">test/aoj/2626.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2635.test.cpp.html">test/aoj/2635.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/!geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-18 10:01:04+09:00
+    - Last commit date: 2020-08-18 15:33:40+09:00
 
 
 
@@ -47,19 +47,20 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1157.test.cpp.html">test/aoj/1157.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1171.test.cpp.html">test/aoj/1171.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1190.test.cpp.html">test/aoj/1190.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1242.test.cpp.html">test/aoj/1242.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1342.test.cpp.html">test/aoj/1342.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2003.test.cpp.html">test/aoj/2003.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2009.test.cpp.html">test/aoj/2009.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2256.test.cpp.html">test/aoj/2256.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2423.test.cpp.html">test/aoj/2423.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2442.test.cpp.html">test/aoj/2442.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2514.test.cpp.html">test/aoj/2514.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/2626.test.cpp.html">test/aoj/2626.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2626.test.cpp.html">test/aoj/2626.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2635.test.cpp.html">test/aoj/2635.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2972.test.cpp.html">test/aoj/2972.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
@@ -104,7 +105,6 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 #endif
-
 namespace geometry {
 
 using Real = long double;
@@ -122,13 +122,8 @@ enum {
   ONLINE_FRONT = -2,
   ON_SEGMENT = 0
 };
-enum {
-  ON = 0,
-  LEFT = +1,
-  RIGHT = -1,
-  IN = +2,
-  OUT = -2,
-};
+enum { ON = 0, LEFT = +1, RIGHT = -1, IN = +2, OUT = -2 };
+enum { DISJOINT = 0, TOUCH = 1, CROSSING = 2, OVERLAP = 3 };
 //-----------------------------------------------------------------------------
 // Point
 //-----------------------------------------------------------------------------
@@ -184,7 +179,6 @@ ostream &operator<<(ostream &os, Point p) {
   os << p.x << " " << p.y;
   return os;
 }
-
 int ccw(Point p0, Point p1, Point p2) {
   Point a = p1 - p0, b = p2 - p0;
   if (sgn(cross(a, b)) > 0) return COUNTER_CLOCKWISE;
@@ -193,7 +187,6 @@ int ccw(Point p0, Point p1, Point p2) {
   if (norm2(a) < norm2(b)) return ONLINE_FRONT;
   return ON_SEGMENT;
 }
-
 //-----------------------------------------------------------------------------
 // Line and Segment
 //-----------------------------------------------------------------------------
@@ -265,8 +258,6 @@ struct Segment {
     return p1 + b / a * v;
   }
 };
-Segment Line::reflect(Segment s) { return {reflect(s.p1), reflect(s.p2)}; }
-
 bool is_orthogonal(Line l, Line m) {
   return !sgn(dot(l.p1 - l.p2, m.p1 - m.p2));
 }
@@ -278,6 +269,8 @@ Line translate(Line l, Point v) { return {l.p1 + v, l.p2 + v}; }
 Line rotate(Line l, Real theta) {
   return {rotate(l.p1, theta), rotate(l.p2, theta)};
 }
+
+Segment Line::reflect(Segment s) { return {reflect(s.p1), reflect(s.p2)}; }
 Segment translate(Segment s, Point v) { return {s.p1 + v, s.p2 + v}; }
 Segment rotate(Segment s, Real theta) {
   return {rotate(s.p1, theta), rotate(s.p2, theta)};
@@ -319,6 +312,15 @@ vector<Point> cross_points(Segment s, Segment t) {
   if (sgn(dot(t.p1 - s.p1, t.p2 - s.p1)) <= 0) insert_if_possible(s.p1);
   if (sgn(dot(t.p1 - s.p2, t.p2 - s.p2)) <= 0) insert_if_possible(s.p2);
   return ps;
+}
+
+int intersect(Segment s, Segment t) {
+  auto cp = cross_points(s, t);
+  if (cp.size() == 0) return DISJOINT;
+  if (cp.size() > 1) return OVERLAP;
+  if ((cp[0] == s.p1 || cp[0] == s.p2 || cp[0] == t.p1 || cp[0] == t.p2))
+    return TOUCH;
+  return CROSSING;
 }
 
 Real dist(Line l, Point p) { return dist(p, l.project(p)); }
@@ -583,7 +585,6 @@ struct Visualizer {
 };
 
 }  // namespace geometry
-
 ```
 {% endraw %}
 
@@ -600,7 +601,6 @@ struct Visualizer {
 #include <bits/stdc++.h>
 using namespace std;
 #endif
-
 namespace geometry {
 
 using Real = long double;
@@ -618,13 +618,8 @@ enum {
   ONLINE_FRONT = -2,
   ON_SEGMENT = 0
 };
-enum {
-  ON = 0,
-  LEFT = +1,
-  RIGHT = -1,
-  IN = +2,
-  OUT = -2,
-};
+enum { ON = 0, LEFT = +1, RIGHT = -1, IN = +2, OUT = -2 };
+enum { DISJOINT = 0, TOUCH = 1, CROSSING = 2, OVERLAP = 3 };
 //-----------------------------------------------------------------------------
 // Point
 //-----------------------------------------------------------------------------
@@ -680,7 +675,6 @@ ostream &operator<<(ostream &os, Point p) {
   os << p.x << " " << p.y;
   return os;
 }
-
 int ccw(Point p0, Point p1, Point p2) {
   Point a = p1 - p0, b = p2 - p0;
   if (sgn(cross(a, b)) > 0) return COUNTER_CLOCKWISE;
@@ -689,7 +683,6 @@ int ccw(Point p0, Point p1, Point p2) {
   if (norm2(a) < norm2(b)) return ONLINE_FRONT;
   return ON_SEGMENT;
 }
-
 //-----------------------------------------------------------------------------
 // Line and Segment
 //-----------------------------------------------------------------------------
@@ -761,8 +754,6 @@ struct Segment {
     return p1 + b / a * v;
   }
 };
-Segment Line::reflect(Segment s) { return {reflect(s.p1), reflect(s.p2)}; }
-
 bool is_orthogonal(Line l, Line m) {
   return !sgn(dot(l.p1 - l.p2, m.p1 - m.p2));
 }
@@ -774,6 +765,8 @@ Line translate(Line l, Point v) { return {l.p1 + v, l.p2 + v}; }
 Line rotate(Line l, Real theta) {
   return {rotate(l.p1, theta), rotate(l.p2, theta)};
 }
+
+Segment Line::reflect(Segment s) { return {reflect(s.p1), reflect(s.p2)}; }
 Segment translate(Segment s, Point v) { return {s.p1 + v, s.p2 + v}; }
 Segment rotate(Segment s, Real theta) {
   return {rotate(s.p1, theta), rotate(s.p2, theta)};
@@ -815,6 +808,15 @@ vector<Point> cross_points(Segment s, Segment t) {
   if (sgn(dot(t.p1 - s.p1, t.p2 - s.p1)) <= 0) insert_if_possible(s.p1);
   if (sgn(dot(t.p1 - s.p2, t.p2 - s.p2)) <= 0) insert_if_possible(s.p2);
   return ps;
+}
+
+int intersect(Segment s, Segment t) {
+  auto cp = cross_points(s, t);
+  if (cp.size() == 0) return DISJOINT;
+  if (cp.size() > 1) return OVERLAP;
+  if ((cp[0] == s.p1 || cp[0] == s.p2 || cp[0] == t.p1 || cp[0] == t.p2))
+    return TOUCH;
+  return CROSSING;
 }
 
 Real dist(Line l, Point p) { return dist(p, l.project(p)); }
