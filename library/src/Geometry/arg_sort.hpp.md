@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 半径固定の円の最大被覆点数
+# :x: 偏角ソート
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
-* <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/max_circle_cover.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-16 21:27:30+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/arg_sort.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-18 10:01:04+09:00
 
 
 
@@ -43,7 +43,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 
 
 ## Code
@@ -52,9 +52,8 @@ layout: default
 {% raw %}
 ```cpp
 /**
- * @title 半径固定の円の最大被覆点数
+ * @title 偏角ソート
  * @category 幾何
- * ４分木
  */
 
 #ifndef call_from_test
@@ -67,43 +66,27 @@ using namespace std;
 #endif
 
 namespace geometry {
-
-pair<int, Point> max_circle_cover(vector<Point> ps, Real r) {
-  const Real dx[4] = {1, -1, -1, 1}, dy[4] = {1, 1, -1, -1};
-  Point best_p;
-  int best = 0;
-  function<void(Point, Real, vector<Point>)> rec
-      = [&](Point p, Real w, vector<Point> ps) {
-          w /= 2;
-          Point qs[4];
-          vector<Point> pss[4];
-          for (int i = 0; i < 4; ++i) {
-            qs[i] = p + w * Point({dx[i], dy[i]});
-            int lo = 0;
-            for (Point q : ps) {
-              Real d = dist(qs[i], q);
-              if (sgn(d - r) <= 0) ++lo;
-              if (sgn(d - w * sqrt(2) - r) <= 0) pss[i].push_back(q);
-            }
-            if (lo > best) {
-              best = lo;
-              best_p = qs[i];
-            }
-          }
-          for (int i = 0; i < 4; ++i) {
-            for (int j = i + 1; j < 4; ++j)
-              if (pss[i].size() < pss[j].size())
-                swap(pss[i], pss[j]), swap(qs[i], qs[j]);
-            if (pss[i].size() <= best) break;
-            rec(qs[i], w, pss[i]);
-          }
-        };
-  Real w = 0;
-  for (Point p : ps) w = max({w, abs(p.x), abs(p.y)});
-  rec({0, 0}, w, ps);
-  return {best, best_p};
-}
-
+// usage: sort(ps.begin(),ps.end(), polar_angle(origin, direction));
+// (-PI,PI]
+struct polar_angle {
+  const Point o;
+  const int s;  // +1 for ccw, -1 for cw
+  polar_angle(Point origin = {0, 0}, int dir = +1) : o(origin), s(dir) {}
+  int quad(Point p) const {
+    for (int i = 0; i < 4; ++i, swap(p.x = -p.x, p.y))
+      if (p.x < 0 && p.y < 0) return 2 * i;
+    for (int i = 0; i < 4; ++i, swap(p.x = -p.x, p.y))
+      if (p.x == 0 && p.y < 0) return 2 * i + 1;
+    return 3;  // arg(0,0) = 0
+  }
+  bool operator()(Point p, Point q) const {
+    p = p - o;
+    q = q - o;
+    if (quad(p) != quad(q)) return s * quad(p) < s * quad(q);
+    if (cross(p, q)) return s * cross(p, q) > 0;
+    return norm2(p) < norm2(q);  // closer first
+  }
+};
 }  // namespace geometry
 ```
 {% endraw %}
@@ -118,7 +101,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/max_circle_cover.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Geometry/arg_sort.hpp: line 11: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

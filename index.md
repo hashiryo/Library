@@ -85,10 +85,9 @@ layout: default
 ### 幾何
 
 * :question: <a href="library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :x: <a href="library/src/Geometry/arg_sort.hpp.html">偏角ソート</a>
+* :question: <a href="library/src/Geometry/circle_functions.hpp.html">円のあれこれ</a>
 * :x: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
-* :x: <a href="library/src/Geometry/intersection_area.hpp.html">共通部分の面積</a>
-* :heavy_check_mark: <a href="library/src/Geometry/max_circle_cover.hpp.html">半径固定の円の最大被覆点数</a>
-* :heavy_check_mark: <a href="library/src/Geometry/min_enclosing_circle.hpp.html">最小包含円</a>
 
 
 <div id="6e65831863dbf272b7a65cd8df1a440d"></div>
@@ -134,7 +133,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/1508.RBT.test.cpp.html">test/aoj/1508.RBT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2003.test.cpp.html">test/aoj/2003.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2009.test.cpp.html">test/aoj/2009.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
+* :x: <a href="verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2207.test.cpp.html">test/aoj/2207.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2256.test.cpp.html">test/aoj/2256.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2313.test.cpp.html">test/aoj/2313.test.cpp</a>
@@ -143,9 +142,12 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2423.test.cpp.html">test/aoj/2423.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2442.test.cpp.html">test/aoj/2442.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2450.LCT.test.cpp.html">test/aoj/2450.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2514.test.cpp.html">test/aoj/2514.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2559.LCT_Dual.test.cpp.html">test/aoj/2559.LCT_Dual.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
+* :x: <a href="verify/test/aoj/2626.test.cpp.html">test/aoj/2626.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2635.test.cpp.html">test/aoj/2635.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2842.BIT_2D.test.cpp.html">test/aoj/2842.BIT_2D.test.cpp</a>
