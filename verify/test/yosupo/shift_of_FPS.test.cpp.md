@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/3072.test.cpp
+# :x: test/yosupo/shift_of_FPS.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/aoj/3072.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/shift_of_FPS.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-19 19:13:29+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3072">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3072</a>
+* see: <a href="https://judge.yosupo.jp/problem/polynomial_taylor_shift">https://judge.yosupo.jp/problem/polynomial_taylor_shift</a>
 
 
 ## Depends on
@@ -48,7 +48,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3072"
+#define PROBLEM "https://judge.yosupo.jp/problem/polynomial_taylor_shift"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -60,32 +60,26 @@ using namespace std;
 
 signed main() {
   cin.tie(0);
-  ios::sync_with_stdio(false);
+  ios::sync_with_stdio(0);
   using Mint = ModInt<998244353>;
   using FPS = FormalPowerSeries<Mint>;
-  int N, K, P;
-  cin >> N >> K >> P;
-  Mint p = Mint(P) / Mint(100);
-  Mint q = Mint(1) - p;
-  FPS f(N + 1, -p * p / Mint(N));
-  f[0] = p;
-  auto g = f.inv(K);
-  Mint ans(1);
-  for (int i = 1; i < K; i++) {
-    ans -= g[i] * q;
-  }
-  cout << ans << endl;
+  int N, c;
+  cin >> N >> c;
+  FPS a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  auto b = a.shift(c);
+  for (int i = 0; i < N; i++) cout << (i ? " " : "") << b[i];
+  cout << endl;
   return 0;
 }
-
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/aoj/3072.test.cpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3072"
+#line 1 "test/yosupo/shift_of_FPS.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/polynomial_taylor_shift"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -585,26 +579,21 @@ struct ModInt {
   }
   static int modulo() { return mod; }
 };
-#line 9 "test/aoj/3072.test.cpp"
+#line 9 "test/yosupo/shift_of_FPS.test.cpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
-  ios::sync_with_stdio(false);
+  ios::sync_with_stdio(0);
   using Mint = ModInt<998244353>;
   using FPS = FormalPowerSeries<Mint>;
-  int N, K, P;
-  cin >> N >> K >> P;
-  Mint p = Mint(P) / Mint(100);
-  Mint q = Mint(1) - p;
-  FPS f(N + 1, -p * p / Mint(N));
-  f[0] = p;
-  auto g = f.inv(K);
-  Mint ans(1);
-  for (int i = 1; i < K; i++) {
-    ans -= g[i] * q;
-  }
-  cout << ans << endl;
+  int N, c;
+  cin >> N >> c;
+  FPS a(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  auto b = a.shift(c);
+  for (int i = 0; i < N; i++) cout << (i ? " " : "") << b[i];
+  cout << endl;
   return 0;
 }
 

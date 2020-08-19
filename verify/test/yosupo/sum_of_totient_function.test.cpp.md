@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="../../../library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :heavy_check_mark: <a href="../../../library/src/Math/number_theory.hpp.html">数論</a>
 
