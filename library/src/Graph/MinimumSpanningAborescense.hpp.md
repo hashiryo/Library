@@ -25,28 +25,28 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 最小全域有向木
+# :heavy_check_mark: 最小全域有向木
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/MinimumSpanningAborescense.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 15:34:23+09:00
+    - Last commit date: 2020-08-19 16:25:01+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
-* :question: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :heavy_check_mark: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :heavy_check_mark: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
 ## Code
@@ -83,7 +83,7 @@ struct MinimumSpanningAborescense {
     using E = cost_t;
     static E ei() { return 0; }
     static Edge g(const Edge &l, const E &r) {
-      return Edge(l.src, l.dst, l.id, l.cost + r);
+      return Edge({l.src, l.dst, l.id, l.cost + r});
     }
     static E h(const E &l, const E &r) { return l + r; }
   };

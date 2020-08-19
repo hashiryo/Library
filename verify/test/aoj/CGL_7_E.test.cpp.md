@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/CGL_7_E.test.cpp
+# :heavy_check_mark: test/aoj/CGL_7_E.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
