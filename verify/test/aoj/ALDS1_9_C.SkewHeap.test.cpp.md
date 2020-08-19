@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :question: <a href="../../../library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 
 
 ## Code

@@ -25,26 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 最小全域木(Kruskal)
+# :question: 最小全域木(Kruskal)
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/MinimumSpanningTree_Kruskal.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 01:21:15+09:00
+    - Last commit date: 2020-08-19 15:34:23+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :question: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
 
 
 ## Verified with
 
+* :x: <a href="../../../verify/test/aoj/0342.test.cpp.html">test/aoj/0342.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2559.LCT_Dual.test.cpp.html">test/aoj/2559.LCT_Dual.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/GRL_2_A.kruskal.test.cpp.html">test/aoj/GRL_2_A.kruskal.test.cpp</a>
 
 
 ## Code
@@ -74,8 +75,6 @@ struct MinimumSpanningTree_Kruskal {
     int u, v, id;
     cost_t cost;
     bool operator<(const Edge &rhs) const { return this->cost < rhs.cost; }
-    Edge() {}
-    Edge(int s, int d, int i, int c) : u(s), v(d), id(i), cost(c) {}
   };
 
  private:
@@ -87,7 +86,7 @@ struct MinimumSpanningTree_Kruskal {
  public:
   MinimumSpanningTree_Kruskal(int n) : n(n) {}
   void add_edge(int u, int v, cost_t cost) {
-    edges.emplace_back(u, v, edges.size(), cost);
+    edges.emplace_back(Edge{u, v, (int)edges.size(), cost});
   }
   pair<cost_t, vector<Edge>> get_MST() {
     UnionFind uf(n);
@@ -102,7 +101,6 @@ struct MinimumSpanningTree_Kruskal {
     return {total, es};
   }
 };
-
 ```
 {% endraw %}
 

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/!geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-18 15:33:40+09:00
+    - Last commit date: 2020-08-19 15:34:23+09:00
 
 
 
@@ -45,6 +45,8 @@ layout: default
 
 ## Verified with
 
+* :x: <a href="../../../verify/test/aoj/0153.test.cpp.html">test/aoj/0153.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/0342.test.cpp.html">test/aoj/0342.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1132.test.cpp.html">test/aoj/1132.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1157.test.cpp.html">test/aoj/1157.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1171.test.cpp.html">test/aoj/1171.test.cpp</a>
@@ -54,6 +56,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1342.test.cpp.html">test/aoj/1342.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2003.test.cpp.html">test/aoj/2003.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2009.test.cpp.html">test/aoj/2009.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2159.test.cpp.html">test/aoj/2159.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2201.test.cpp.html">test/aoj/2201.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2256.test.cpp.html">test/aoj/2256.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2402.test.cpp.html">test/aoj/2402.test.cpp</a>
@@ -64,6 +67,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2635.test.cpp.html">test/aoj/2635.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2972.test.cpp.html">test/aoj/2972.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/3049.test.cpp.html">test/aoj/3049.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3056.test.cpp.html">test/aoj/3056.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
 * :x: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
@@ -105,6 +109,7 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 #endif
+
 namespace geometry {
 
 using Real = long double;
@@ -192,6 +197,8 @@ int ccw(Point p0, Point p1, Point p2) {
 //-----------------------------------------------------------------------------
 struct Segment;
 struct Circle;
+struct Polygon;
+struct Convex;
 struct Line {
   Point p1, p2;
   Line() {}
@@ -229,13 +236,14 @@ struct Line {
   Line reflect(Line l) { return {reflect(l.p1), reflect(l.p2)}; }
   Segment reflect(Segment s);
   Circle reflect(Circle c);
-  vector<Point> reflect(vector<Point> ps) {
-    reverse(ps.begin(), ps.end());
-    vector<Point> res;
-    for (Point p : ps) res.push_back(reflect(p));
-    return res;
-  }
+  Polygon reflect(Polygon g);
+  Convex reflect(Convex g);
 };
+
+Line bisector(Point p, Point q) {  // p on leftside
+  Point m = (p + q) / 2;
+  return {m, m + orth(q - p)};
+}
 
 struct Segment {
   Point p1, p2;
@@ -356,7 +364,7 @@ struct Circle {
     if (sgn(len) == 0) return {{p, p + v}};
     u *= r * r / norm2(u);
     v *= r * sqrt(len) / norm2(v);
-    return {{p, o + u - v}, {p, o + u + v}};
+    return {{p, o + u + v}, {p, o + u - v}};
   }
 };
 
@@ -414,8 +422,6 @@ vector<Point> cross_points(Segment s, Circle c) { return cross_points(c, s); }
 //-----------------------------------------------------------------------------
 struct Polygon : vector<Point> {
   using vector<Point>::vector;
-  Polygon() : vector<Point>() {}
-  Polygon(vector<Point> ps) : vector<Point>(ps) {}
   int prev(int i) { return i ? i - 1 : (int)this->size() - 1; }
   int next(int i) { return (i + 1 == (int)this->size() ? 0 : i + 1); }
   bool is_convex() {
@@ -458,6 +464,12 @@ struct Polygon : vector<Point> {
   }
 };
 
+Polygon Line::reflect(Polygon g) {
+  reverse(g.begin(), g.end());
+  Polygon res;
+  for (Point p : g) res.push_back(reflect(p));
+  return res;
+}
 Polygon translate(Polygon g, Point v) {
   Polygon h(g.size());
   for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;
@@ -507,6 +519,23 @@ struct Convex : Polygon {
     return g;
   }
 };
+
+Convex Line::reflect(Convex g) {
+  reverse(g.begin(), g.end());
+  Convex res;
+  for (Point p : g) res.push_back(reflect(p));
+  return res;
+}
+Convex translate(Convex g, Point v) {
+  Convex h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;
+  return h;
+}
+Convex rotate(Convex g, Real theta) {
+  Convex h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = rotate(g[i], theta);
+  return h;
+}
 
 Real dist(Polygon g, Point p) {
   if (g.where(p) != OUT) return 0;
@@ -601,6 +630,7 @@ struct Visualizer {
 #include <bits/stdc++.h>
 using namespace std;
 #endif
+
 namespace geometry {
 
 using Real = long double;
@@ -688,6 +718,8 @@ int ccw(Point p0, Point p1, Point p2) {
 //-----------------------------------------------------------------------------
 struct Segment;
 struct Circle;
+struct Polygon;
+struct Convex;
 struct Line {
   Point p1, p2;
   Line() {}
@@ -725,13 +757,14 @@ struct Line {
   Line reflect(Line l) { return {reflect(l.p1), reflect(l.p2)}; }
   Segment reflect(Segment s);
   Circle reflect(Circle c);
-  vector<Point> reflect(vector<Point> ps) {
-    reverse(ps.begin(), ps.end());
-    vector<Point> res;
-    for (Point p : ps) res.push_back(reflect(p));
-    return res;
-  }
+  Polygon reflect(Polygon g);
+  Convex reflect(Convex g);
 };
+
+Line bisector(Point p, Point q) {  // p on leftside
+  Point m = (p + q) / 2;
+  return {m, m + orth(q - p)};
+}
 
 struct Segment {
   Point p1, p2;
@@ -852,7 +885,7 @@ struct Circle {
     if (sgn(len) == 0) return {{p, p + v}};
     u *= r * r / norm2(u);
     v *= r * sqrt(len) / norm2(v);
-    return {{p, o + u - v}, {p, o + u + v}};
+    return {{p, o + u + v}, {p, o + u - v}};
   }
 };
 
@@ -910,8 +943,6 @@ vector<Point> cross_points(Segment s, Circle c) { return cross_points(c, s); }
 //-----------------------------------------------------------------------------
 struct Polygon : vector<Point> {
   using vector<Point>::vector;
-  Polygon() : vector<Point>() {}
-  Polygon(vector<Point> ps) : vector<Point>(ps) {}
   int prev(int i) { return i ? i - 1 : (int)this->size() - 1; }
   int next(int i) { return (i + 1 == (int)this->size() ? 0 : i + 1); }
   bool is_convex() {
@@ -954,6 +985,12 @@ struct Polygon : vector<Point> {
   }
 };
 
+Polygon Line::reflect(Polygon g) {
+  reverse(g.begin(), g.end());
+  Polygon res;
+  for (Point p : g) res.push_back(reflect(p));
+  return res;
+}
 Polygon translate(Polygon g, Point v) {
   Polygon h(g.size());
   for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;
@@ -1003,6 +1040,23 @@ struct Convex : Polygon {
     return g;
   }
 };
+
+Convex Line::reflect(Convex g) {
+  reverse(g.begin(), g.end());
+  Convex res;
+  for (Point p : g) res.push_back(reflect(p));
+  return res;
+}
+Convex translate(Convex g, Point v) {
+  Convex h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;
+  return h;
+}
+Convex rotate(Convex g, Real theta) {
+  Convex h(g.size());
+  for (int i = 0; i < (int)g.size(); i++) h[i] = rotate(g[i], theta);
+  return h;
+}
 
 Real dist(Polygon g, Point p) {
   if (g.where(p) != OUT) return 0;

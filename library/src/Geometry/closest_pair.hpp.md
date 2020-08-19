@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/closest_pair.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-18 15:33:40+09:00
+    - Last commit date: 2020-08-19 15:34:23+09:00
 
 
 

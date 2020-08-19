@@ -25,28 +25,28 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 最小全域有向木
+# :x: 最小全域有向木
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/MinimumSpanningAborescense.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 01:05:53+09:00
+    - Last commit date: 2020-08-19 15:34:23+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
-* :heavy_check_mark: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
+* :question: <a href="../DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
+* :question: <a href="../DataStructure/UnionFind.hpp.html">Union-Find</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/GRL_2_B.test.cpp.html">test/aoj/GRL_2_B.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 
 
 ## Code
@@ -78,8 +78,6 @@ struct MinimumSpanningAborescense {
     int src, dst, id;
     cost_t cost;
     bool operator>(const Edge &r) const { return this->cost > r.cost; }
-    Edge() {}
-    Edge(int s, int d, int i, int c) : src(s), dst(d), id(i), cost(c) {}
   };
   struct Op_Edge_add {
     using E = cost_t;
@@ -100,7 +98,7 @@ struct MinimumSpanningAborescense {
  public:
   MinimumSpanningAborescense(int n) : n(n) {}
   void add_edge(int src, int dst, cost_t cost) {
-    edges.emplace_back(src, dst, edges.size(), cost);
+    edges.emplace_back(Edge{src, dst, (int)edges.size(), cost});
   }
   pair<cost_t, vector<Edge>> get_MSA(int root) {
     UnionFind uf(n);
