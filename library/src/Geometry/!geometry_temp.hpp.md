@@ -39,7 +39,7 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="arg_sort.hpp.html">偏角ソート</a>
-* :question: <a href="circle_functions.hpp.html">円のあれこれ</a>
+* :heavy_check_mark: <a href="circle_functions.hpp.html">円のあれこれ</a>
 * :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
 
 
@@ -83,7 +83,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>

@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 19:13:29+09:00
+    - Last commit date: 2020-08-19 21:48:56+09:00
 
 
 
 
 ## Required by
 
-* :x: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
 
@@ -50,10 +50,10 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
@@ -268,7 +268,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
     return *this = frev.div_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
@@ -277,7 +277,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150)
       return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inverse(frev.size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
     return *this = frev.rem_rev_pre(rhsrev, inv).rev();
   }
   FPS operator+(const Modint &v) const { return FPS(*this) += v; }   // O(1)
@@ -384,7 +384,7 @@ struct FormalPowerSeries : vector<Modint> {
     if (frev.size() < brev.size()) return make_pair(FPS(), frev);
     int sq = frev.size() - brev.size() + 1;
     FPS qrev(sq, 0);
-    Modint inv = brev[0].inverse();
+    Modint inv = Modint(1) / brev[0];
     for (int i = 0; i < qrev.size(); ++i) {
       qrev[i] = frev[i] * inv;
       for (int j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
@@ -453,7 +453,7 @@ struct FormalPowerSeries : vector<Modint> {
   FPS sqrt(int deg = -1) const {  // O(NlogN)
     if (deg < 0) deg = this->size();
     if ((*this)[0].x == 0) {
-      for (int i = 1; i < this->size(); i++) {
+      for (int i = 1; i < this->size(); i++)
         if ((*this)[i].x != 0) {
           if (i & 1) return FPS();  // no solutions
           if (deg - i / 2 <= 0) break;
@@ -463,29 +463,25 @@ struct FormalPowerSeries : vector<Modint> {
           if (ret.size() < deg) ret.resize(deg, 0);
           return ret;
         }
-      }
       return FPS(deg, 0);
     }
     Modint sqr = mod_sqrt((*this)[0]);
     if (sqr * sqr != (*this)[0]) return FPS();  // no solutions
     FPS ret(1, sqr);
     Modint inv2 = Modint(1) / Modint(2);
-    for (int i = 1; i < deg; i <<= 1) {
-      ret += this->part(i << 1) * ret.inv(i << 1);
-      ret = ret.part(i << 1) * inv2;
-    }
+    for (int i = 1; i < deg; i <<= 1)
+      ret = (ret + this->part(i << 1) * ret.inv(i << 1)).part(i << 1) * inv2;
     return ret;
   }
   FPS pow(uint64_t k, int deg = -1) const {  // O(NlogN)
     if (deg < 0) deg = this->size();
-    for (int i = 0; i < this->size(); i++) {
+    for (int i = 0; i < this->size(); i++)
       if ((*this)[i].x != 0) {
         if (i * k > deg) return FPS(deg, 0);
         Modint inv = Modint(1) / (*this)[i];
         FPS ret = (((*this * inv) >> i).log() * k).exp() * (*this)[i].pow(k);
         return (ret << (i * k)).part(deg);
       }
-    }
     return *this;
   }
   FPS shift(Modint c) const {  // O(NlogN)
@@ -496,10 +492,7 @@ struct FormalPowerSeries : vector<Modint> {
     Modint finv = Modint(n) / fact;
     for (int i = n; i > 0; i--) p[i - 1] = i == n ? finv : p[i] * i;
     for (int i = 0; i < n; i++, cpw *= c) p[i] *= cpw;
-    reverse(begin(ret), end(ret));
-    ret *= p;
-    ret.resize(n);
-    reverse(begin(ret), end(ret));
+    ret = (ret.rev() * p).part(n).rev();
     for (int i = n - 1; i >= 0; finv *= (i--)) ret[i] *= finv;
     return ret;
   }
@@ -713,7 +706,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
     return *this = frev.div_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
@@ -722,7 +715,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150)
       return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inverse(frev.size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
     return *this = frev.rem_rev_pre(rhsrev, inv).rev();
   }
   FPS operator+(const Modint &v) const { return FPS(*this) += v; }   // O(1)
@@ -829,7 +822,7 @@ struct FormalPowerSeries : vector<Modint> {
     if (frev.size() < brev.size()) return make_pair(FPS(), frev);
     int sq = frev.size() - brev.size() + 1;
     FPS qrev(sq, 0);
-    Modint inv = brev[0].inverse();
+    Modint inv = Modint(1) / brev[0];
     for (int i = 0; i < qrev.size(); ++i) {
       qrev[i] = frev[i] * inv;
       for (int j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
@@ -898,7 +891,7 @@ struct FormalPowerSeries : vector<Modint> {
   FPS sqrt(int deg = -1) const {  // O(NlogN)
     if (deg < 0) deg = this->size();
     if ((*this)[0].x == 0) {
-      for (int i = 1; i < this->size(); i++) {
+      for (int i = 1; i < this->size(); i++)
         if ((*this)[i].x != 0) {
           if (i & 1) return FPS();  // no solutions
           if (deg - i / 2 <= 0) break;
@@ -908,29 +901,25 @@ struct FormalPowerSeries : vector<Modint> {
           if (ret.size() < deg) ret.resize(deg, 0);
           return ret;
         }
-      }
       return FPS(deg, 0);
     }
     Modint sqr = mod_sqrt((*this)[0]);
     if (sqr * sqr != (*this)[0]) return FPS();  // no solutions
     FPS ret(1, sqr);
     Modint inv2 = Modint(1) / Modint(2);
-    for (int i = 1; i < deg; i <<= 1) {
-      ret += this->part(i << 1) * ret.inv(i << 1);
-      ret = ret.part(i << 1) * inv2;
-    }
+    for (int i = 1; i < deg; i <<= 1)
+      ret = (ret + this->part(i << 1) * ret.inv(i << 1)).part(i << 1) * inv2;
     return ret;
   }
   FPS pow(uint64_t k, int deg = -1) const {  // O(NlogN)
     if (deg < 0) deg = this->size();
-    for (int i = 0; i < this->size(); i++) {
+    for (int i = 0; i < this->size(); i++)
       if ((*this)[i].x != 0) {
         if (i * k > deg) return FPS(deg, 0);
         Modint inv = Modint(1) / (*this)[i];
         FPS ret = (((*this * inv) >> i).log() * k).exp() * (*this)[i].pow(k);
         return (ret << (i * k)).part(deg);
       }
-    }
     return *this;
   }
   FPS shift(Modint c) const {  // O(NlogN)
@@ -941,10 +930,7 @@ struct FormalPowerSeries : vector<Modint> {
     Modint finv = Modint(n) / fact;
     for (int i = n; i > 0; i--) p[i - 1] = i == n ? finv : p[i] * i;
     for (int i = 0; i < n; i++, cpw *= c) p[i] *= cpw;
-    reverse(begin(ret), end(ret));
-    ret *= p;
-    ret.resize(n);
-    reverse(begin(ret), end(ret));
+    ret = (ret.rev() * p).part(n).rev();
     for (int i = n - 1; i >= 0; finv *= (i--)) ret[i] *= finv;
     return ret;
   }

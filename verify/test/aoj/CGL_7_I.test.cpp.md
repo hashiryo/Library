@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_7_I.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 15:34:23+09:00
+    - Last commit date: 2020-08-19 21:48:56+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_I</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
-* :question: <a href="../../../library/src/Geometry/circle_functions.hpp.html">円のあれこれ</a>
+* :heavy_check_mark: <a href="../../../library/src/Geometry/circle_functions.hpp.html">円のあれこれ</a>
 
 
 ## Code

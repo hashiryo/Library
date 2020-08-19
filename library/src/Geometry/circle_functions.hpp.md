@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 円のあれこれ
+# :heavy_check_mark: 円のあれこれ
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/circle_functions.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 15:34:23+09:00
+    - Last commit date: 2020-08-19 21:48:56+09:00
 
 
 
@@ -49,7 +49,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2514.test.cpp.html">test/aoj/2514.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
@@ -79,9 +79,9 @@ namespace geometry {
 
 Circle inscribed_circle(Point A, Point B, Point C) {
   Real a = dist(B, C), b = dist(C, A), c = dist(A, B);
-  Real s = a + b + c;
-  Point o = (a * A + b * B + c * C) / s;
-  Real r = sqrt((s - a) * (s - b) * (s - c) / s) / 2;
+  Real s = (a + b + c) / 2;
+  Point o = (a * A + b * B + c * C) / (a + b + c);
+  Real r = sqrt((s - a) * (s - b) * (s - c) / s);
   return {o, r};
 }
 
