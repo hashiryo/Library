@@ -84,7 +84,7 @@ layout: default
 
 ### 幾何
 
-* :question: <a href="library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :heavy_check_mark: <a href="library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
 * :heavy_check_mark: <a href="library/src/Geometry/arg_sort.hpp.html">偏角ソート</a>
 * :heavy_check_mark: <a href="library/src/Geometry/circle_functions.hpp.html">円のあれこれ</a>
 * :heavy_check_mark: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
@@ -96,15 +96,15 @@ layout: default
 
 * :heavy_check_mark: <a href="library/src/Math/BigInt.hpp.html">多倍長整数</a>
 * :heavy_check_mark: <a href="library/src/Math/Combination.hpp.html">組み合わせ</a>
-* :question: <a href="library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :heavy_check_mark: <a href="library/src/Math/Matrix.hpp.html">行列</a>
 * :heavy_check_mark: <a href="library/src/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
-* :question: <a href="library/src/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="library/src/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :heavy_check_mark: <a href="library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
 * :heavy_check_mark: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 * :heavy_check_mark: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
-* :question: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
+* :heavy_check_mark: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
 * :heavy_check_mark: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 * :heavy_check_mark: <a href="library/src/Math/number_theory.hpp.html">数論</a>
 
@@ -157,7 +157,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2972.test.cpp.html">test/aoj/2972.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3032.test.cpp.html">test/aoj/3032.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
-* :x: <a href="verify/test/aoj/3049.test.cpp.html">test/aoj/3049.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/3049.test.cpp.html">test/aoj/3049.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3056.test.cpp.html">test/aoj/3056.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/ALDS1_14_B.KMP.test.cpp.html">test/aoj/ALDS1_14_B.KMP.test.cpp</a>
@@ -260,7 +260,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/417.test.cpp.html">test/yukicoder/417.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
