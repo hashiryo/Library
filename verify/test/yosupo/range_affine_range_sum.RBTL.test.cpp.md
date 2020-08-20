@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
-* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code

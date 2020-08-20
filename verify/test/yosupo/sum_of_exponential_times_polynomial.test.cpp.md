@@ -41,7 +41,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="../../../library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 
 

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/ALDS1_14_B.KMP.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 20:23:42+09:00
+    - Last commit date: 2020-08-20 16:30:53+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -97,6 +97,7 @@ using namespace std;
 #line 11 "src/String/KnuthMorrisPratt.hpp"
 using namespace std;
 #endif
+
 struct KnuthMorrisPratt {
   vector<int> KMP;
   const string s;

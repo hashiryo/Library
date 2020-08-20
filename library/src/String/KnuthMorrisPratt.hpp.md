@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#a973a7fd4d27ccdfce027f329015f5da">文字列</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/String/KnuthMorrisPratt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 20:23:42+09:00
+    - Last commit date: 2020-08-20 16:30:53+09:00
 
 
 
@@ -58,6 +58,7 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 #endif
+
 struct KnuthMorrisPratt {
   vector<int> KMP;
   const string s;
@@ -109,6 +110,7 @@ struct KnuthMorrisPratt {
 #include <bits/stdc++.h>
 using namespace std;
 #endif
+
 struct KnuthMorrisPratt {
   vector<int> KMP;
   const string s;

@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yukicoder/3046.test.cpp
+# :heavy_check_mark: test/yosupo/comp_of_FPS.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#de60e5ba474ac43bf7562c10f5977e2d">test/yukicoder</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yukicoder/3046.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/comp_of_FPS.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-20 16:30:53+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/3046">https://yukicoder.me/problems/no/3046</a>
+* see: <a href="https://judge.yosupo.jp/problem/composition_of_formal_power_series">https://judge.yosupo.jp/problem/composition_of_formal_power_series</a>
 
 
 ## Depends on
@@ -48,7 +48,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/no/3046"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -61,21 +62,16 @@ using namespace std;
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int K;
-  cin >> K;
+  using Mint = ModInt<998244353>;
+  using FPS = FormalPowerSeries<Mint>;
   int N;
   cin >> N;
-  using Mint = ModInt<int(1e9 + 7)>;
-  using FPS = FormalPowerSeries<Mint>;
-  FPS f(1e5 + 10, 0);
-  for (int i = 0; i < N; i++) {
-    int x;
-    cin >> x;
-    f[x] = -1;
-  }
-  f[0] = 1;
-  FPS ans = f.inv(K + 1);
-  cout << ans[K] << endl;
+  FPS a(N), b(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  for (int i = 0; i < N; i++) cin >> b[i];
+  FPS c = a.comp(b);
+  for (int i = 0; i < N; i++) cout << (i ? " " : "") << c[i];
+  cout << endl;
   return 0;
 }
 ```
@@ -84,8 +80,9 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "test/yukicoder/3046.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/3046"
+#line 1 "test/yosupo/comp_of_FPS.test.cpp"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -641,27 +638,22 @@ struct ModInt {
   }
   static int modulo() { return mod; }
 };
-#line 9 "test/yukicoder/3046.test.cpp"
+#line 10 "test/yosupo/comp_of_FPS.test.cpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
-  int K;
-  cin >> K;
+  using Mint = ModInt<998244353>;
+  using FPS = FormalPowerSeries<Mint>;
   int N;
   cin >> N;
-  using Mint = ModInt<int(1e9 + 7)>;
-  using FPS = FormalPowerSeries<Mint>;
-  FPS f(1e5 + 10, 0);
-  for (int i = 0; i < N; i++) {
-    int x;
-    cin >> x;
-    f[x] = -1;
-  }
-  f[0] = 1;
-  FPS ans = f.inv(K + 1);
-  cout << ans[K] << endl;
+  FPS a(N), b(N);
+  for (int i = 0; i < N; i++) cin >> a[i];
+  for (int i = 0; i < N; i++) cin >> b[i];
+  FPS c = a.comp(b);
+  for (int i = 0; i < N; i++) cout << (i ? " " : "") << c[i];
+  cout << endl;
   return 0;
 }
 
