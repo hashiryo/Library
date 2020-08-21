@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 14:09:42+09:00
+    - Last commit date: 2020-08-21 21:09:26+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :x: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :question: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 * :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
@@ -53,9 +53,9 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
@@ -63,6 +63,8 @@ layout: default
 * :x: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
@@ -292,7 +294,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
+    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
     return *this = frev.div_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
@@ -301,7 +303,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150)
       return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
+    FPS inv = rhsrev.inverse(frev.size() - rhs.size() + 1);
     return *this = frev.rem_rev_pre(rhsrev, inv).rev();
   }
   FPS operator+(const Modint &v) const { return FPS(*this) += v; }   // O(1)
@@ -313,7 +315,7 @@ struct FormalPowerSeries : vector<Modint> {
   FPS operator*(const FPS &rhs) const { return FPS(*this) *= rhs; }  // O(NlogN)
   FPS operator/(const FPS &rhs) const { return FPS(*this) /= rhs; }  // O(NlogN)
   FPS operator%(const FPS &rhs) const { return FPS(*this) %= rhs; }  // O(NlogN)
-  Modint eval(Modint x) {
+  Modint eval(Modint x) const {
     Modint res, w = 1;
     for (auto &v : *this) res += w * v, w *= x;
     return res;
@@ -403,7 +405,7 @@ struct FormalPowerSeries : vector<Modint> {
     for (int i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
     return r;
   }
-  FPS comp_dc(const FPS &g, int deg = -1) {
+  FPS comp_dc(const FPS &g, int deg = -1) const {
     if (deg < 0) deg = max(this->size(), g.size());
     if (this->size() <= 8) {
       FPS ret = {this->back()};
@@ -499,6 +501,12 @@ struct FormalPowerSeries : vector<Modint> {
     }
     return ret;
   }
+  pair<FPS, FPS> cos_and_sin(int deg = -1) const {  // O(NlogN)
+    if (deg < 0) deg = this->size();
+    Modint i = mod_sqrt(-1);
+    FPS a = (*this * i).exp(deg), b = (*this * (-i)).exp(deg);
+    return make_pair((a + b) / Modint(2), (a - b) / (Modint(2) * i));
+  }
   FPS sqrt(int deg = -1) const {  // O(NlogN)
     if (deg < 0) deg = this->size();
     if ((*this)[0].x == 0) {
@@ -547,7 +555,7 @@ struct FormalPowerSeries : vector<Modint> {
     for (int i = n - 1; i >= 0; finv *= (i--)) ret[i] *= finv;
     return ret;
   }
-  FPS comp(const FPS &g, int deg = -1) {  // O((NlogN)^(1.5)?)
+  FPS comp(const FPS &g, int deg = -1) const {  // O((NlogN)^(1.5)?)
     if (deg < 0) deg = max(this->size(), g.size());
     if (this->size() == 0 || g.size() == 0) return FPS(deg, 0);
     if (g.size() == 1) return FPS({eval(g[0])}).part(deg);
@@ -566,6 +574,7 @@ struct FormalPowerSeries : vector<Modint> {
     return ret.part(deg);
   }
 };
+
 ```
 {% endraw %}
 
@@ -791,7 +800,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
+    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
     return *this = frev.div_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
@@ -800,7 +809,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150)
       return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
+    FPS inv = rhsrev.inverse(frev.size() - rhs.size() + 1);
     return *this = frev.rem_rev_pre(rhsrev, inv).rev();
   }
   FPS operator+(const Modint &v) const { return FPS(*this) += v; }   // O(1)
@@ -812,7 +821,7 @@ struct FormalPowerSeries : vector<Modint> {
   FPS operator*(const FPS &rhs) const { return FPS(*this) *= rhs; }  // O(NlogN)
   FPS operator/(const FPS &rhs) const { return FPS(*this) /= rhs; }  // O(NlogN)
   FPS operator%(const FPS &rhs) const { return FPS(*this) %= rhs; }  // O(NlogN)
-  Modint eval(Modint x) {
+  Modint eval(Modint x) const {
     Modint res, w = 1;
     for (auto &v : *this) res += w * v, w *= x;
     return res;
@@ -902,7 +911,7 @@ struct FormalPowerSeries : vector<Modint> {
     for (int i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
     return r;
   }
-  FPS comp_dc(const FPS &g, int deg = -1) {
+  FPS comp_dc(const FPS &g, int deg = -1) const {
     if (deg < 0) deg = max(this->size(), g.size());
     if (this->size() <= 8) {
       FPS ret = {this->back()};
@@ -998,6 +1007,12 @@ struct FormalPowerSeries : vector<Modint> {
     }
     return ret;
   }
+  pair<FPS, FPS> cos_and_sin(int deg = -1) const {  // O(NlogN)
+    if (deg < 0) deg = this->size();
+    Modint i = mod_sqrt(-1);
+    FPS a = (*this * i).exp(deg), b = (*this * (-i)).exp(deg);
+    return make_pair((a + b) / Modint(2), (a - b) / (Modint(2) * i));
+  }
   FPS sqrt(int deg = -1) const {  // O(NlogN)
     if (deg < 0) deg = this->size();
     if ((*this)[0].x == 0) {
@@ -1046,7 +1061,7 @@ struct FormalPowerSeries : vector<Modint> {
     for (int i = n - 1; i >= 0; finv *= (i--)) ret[i] *= finv;
     return ret;
   }
-  FPS comp(const FPS &g, int deg = -1) {  // O((NlogN)^(1.5)?)
+  FPS comp(const FPS &g, int deg = -1) const {  // O((NlogN)^(1.5)?)
     if (deg < 0) deg = max(this->size(), g.size());
     if (this->size() == 0 || g.size() == 0) return FPS(deg, 0);
     if (g.size() == 1) return FPS({eval(g[0])}).part(deg);

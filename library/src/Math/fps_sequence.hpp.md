@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/fps_sequence.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 14:09:42+09:00
+    - Last commit date: 2020-08-21 21:09:26+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/07/160154">https://min-25.hatenablog.com/entry/2015/04/07/160154</a>
@@ -149,7 +149,7 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
+  File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 398, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
 onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Math/fps_sequence.hpp: line 17: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
