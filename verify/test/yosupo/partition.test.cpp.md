@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/polynomial_interpolation.test.cpp
+# :heavy_check_mark: test/yosupo/partition.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
-* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/polynomial_interpolation.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/partition.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-21 14:09:42+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/polynomial_interpolation">https://judge.yosupo.jp/problem/polynomial_interpolation</a>
+* see: <a href="https://judge.yosupo.jp/problem/partition_function">https://judge.yosupo.jp/problem/partition_function</a>
 
 
 ## Depends on
 
 * :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :heavy_check_mark: <a href="../../../library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :question: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 
 
 ## Code
@@ -49,29 +49,25 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/polynomial_interpolation"
+#define PROBLEM "https://judge.yosupo.jp/problem/partition_function"
 
 #include <bits/stdc++.h>
 using namespace std;
 
 #define call_from_test
 #include "src/Math/FormalPowerSeries.hpp"
+#include "src/Math/fps_sequence.hpp"
 #include "src/Math/ModInt.hpp"
-#include "src/Math/SubproductTree.hpp"
 #undef call_from_test
 
 signed main() {
   cin.tie(0);
   ios::sync_with_stdio(0);
   using Mint = ModInt<998244353>;
-  using FPS = FormalPowerSeries<Mint>;
   int N;
   cin >> N;
-  vector<Mint> x(N), y(N);
-  for (int i = 0; i < N; i++) cin >> x[i];
-  for (int i = 0; i < N; i++) cin >> y[i];
-  FPS f = SubproductTree<Mint>(x).interpolate(y);
-  for (int i = 0; i < N; i++) cout << (i ? " " : "") << f[i];
+  auto p = partition<Mint>(N);
+  for (int i = 0; i <= N; i++) cout << (i ? " " : "") << p[i];
   cout << endl;
   return 0;
 }
@@ -90,7 +86,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Math/SubproductTree.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Math/fps_sequence.hpp: line 17: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-20 17:30:48+09:00
+    - Last commit date: 2020-08-21 14:09:42+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :question: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 * :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
 
@@ -46,17 +47,22 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
@@ -368,7 +374,8 @@ struct FormalPowerSeries : vector<Modint> {
   }
   FPS mul(const FPS &g) const {
     if (this->size() == 0 || g.size() == 0) return FPS();
-    if (this->size() + g.size() < 750) return mul_n(g);
+    if (this->size() + g.size() < 750 || this->size() < 8 || g.size() < 8)
+      return mul_n(g);
     const FPS &f = *this;
     mul2(f, g, false);
     return mul_crt(0, int(f.size() + g.size() - 1));
@@ -866,7 +873,8 @@ struct FormalPowerSeries : vector<Modint> {
   }
   FPS mul(const FPS &g) const {
     if (this->size() == 0 || g.size() == 0) return FPS();
-    if (this->size() + g.size() < 750) return mul_n(g);
+    if (this->size() + g.size() < 750 || this->size() < 8 || g.size() < 8)
+      return mul_n(g);
     const FPS &f = *this;
     mul2(f, g, false);
     return mul_crt(0, int(f.size() + g.size() - 1));

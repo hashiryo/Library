@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/log_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-20 17:30:48+09:00
+    - Last commit date: 2020-08-21 14:09:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/log_of_formal_power_series">https://judge.yosupo.jp/problem/log_of_formal_power_series</a>
@@ -386,7 +386,8 @@ struct FormalPowerSeries : vector<Modint> {
   }
   FPS mul(const FPS &g) const {
     if (this->size() == 0 || g.size() == 0) return FPS();
-    if (this->size() + g.size() < 750) return mul_n(g);
+    if (this->size() + g.size() < 750 || this->size() < 8 || g.size() < 8)
+      return mul_n(g);
     const FPS &f = *this;
     mul2(f, g, false);
     return mul_crt(0, int(f.size() + g.size() - 1));

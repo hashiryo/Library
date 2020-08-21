@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/multipoint_evaluation.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-20 17:30:48+09:00
+    - Last commit date: 2020-08-21 14:09:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/multipoint_evaluation">https://judge.yosupo.jp/problem/multipoint_evaluation</a>
