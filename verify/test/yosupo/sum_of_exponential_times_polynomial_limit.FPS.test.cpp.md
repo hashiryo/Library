@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 21:09:26+09:00
+    - Last commit date: 2020-08-21 21:43:18+09:00
 
 
 * see: <a href="https://en.m.wikipedia.org/wiki/Eulerian_number">https://en.m.wikipedia.org/wiki/Eulerian_number</a>

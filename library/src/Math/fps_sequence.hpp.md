@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/fps_sequence.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 21:09:26+09:00
+    - Last commit date: 2020-08-21 21:43:18+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/07/160154">https://min-25.hatenablog.com/entry/2015/04/07/160154</a>

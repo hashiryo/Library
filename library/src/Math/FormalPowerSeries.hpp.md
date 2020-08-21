@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 21:09:26+09:00
+    - Last commit date: 2020-08-21 21:43:18+09:00
 
 
 
 
 ## Required by
 
-* :x: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :question: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 * :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
@@ -53,9 +53,9 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
@@ -294,7 +294,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
     return *this = frev.div_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
@@ -303,7 +303,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150)
       return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inverse(frev.size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
     return *this = frev.rem_rev_pre(rhsrev, inv).rev();
   }
   FPS operator+(const Modint &v) const { return FPS(*this) += v; }   // O(1)
@@ -800,7 +800,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS frev = this->rev();
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inverse(this->size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
     return *this = frev.div_rev_pre(rhsrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
@@ -809,7 +809,7 @@ struct FormalPowerSeries : vector<Modint> {
     FPS rhsrev = rhs.rev();
     if (rhs.size() < 1150)
       return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inverse(frev.size() - rhs.size() + 1);
+    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
     return *this = frev.rem_rev_pre(rhsrev, inv).rev();
   }
   FPS operator+(const Modint &v) const { return FPS(*this) += v; }   // O(1)

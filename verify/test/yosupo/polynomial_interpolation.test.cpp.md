@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/polynomial_interpolation.test.cpp
+# :heavy_check_mark: test/yosupo/polynomial_interpolation.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/polynomial_interpolation.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 21:09:26+09:00
+    - Last commit date: 2020-08-21 21:43:18+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/polynomial_interpolation">https://judge.yosupo.jp/problem/polynomial_interpolation</a>
@@ -41,7 +41,7 @@ layout: default
 
 * :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :x: <a href="../../../library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 
 
 ## Code
