@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/LinkCutTree_MonoidDual.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-25 17:42:49+09:00
 
 
 
@@ -137,8 +137,11 @@ struct LinkCutTree_MonoidDual {
  public:
   vector<Node> ns;
 
+ private:
+  int linkcnt;
+
  public:
-  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n, init) {}
+  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n, init), linkcnt(0) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);
@@ -147,6 +150,7 @@ struct LinkCutTree_MonoidDual {
   }
   // add link from c to p
   void link(int c, int p) {
+    assert(linkcnt++ < ns.size() - 1);
     evert(c);
     expose(&ns[p]);
     ns[p].ch[1] = &ns[c];
@@ -154,6 +158,7 @@ struct LinkCutTree_MonoidDual {
   }
   // cut link from c to p
   void cut(int c, int p) {
+    linkcnt--;
     evert(p);
     expose(&ns[c]);
     Node *y = ns[c].ch[0];
@@ -279,8 +284,11 @@ struct LinkCutTree_MonoidDual {
  public:
   vector<Node> ns;
 
+ private:
+  int linkcnt;
+
  public:
-  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n, init) {}
+  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n, init), linkcnt(0) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);
@@ -289,6 +297,7 @@ struct LinkCutTree_MonoidDual {
   }
   // add link from c to p
   void link(int c, int p) {
+    assert(linkcnt++ < ns.size() - 1);
     evert(c);
     expose(&ns[p]);
     ns[p].ch[1] = &ns[c];
@@ -296,6 +305,7 @@ struct LinkCutTree_MonoidDual {
   }
   // cut link from c to p
   void cut(int c, int p) {
+    linkcnt--;
     evert(p);
     expose(&ns[c]);
     Node *y = ns[c].ch[0];

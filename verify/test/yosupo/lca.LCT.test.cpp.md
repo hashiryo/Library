@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/lca.LCT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-25 17:42:49+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/lca">https://judge.yosupo.jp/problem/lca</a>
@@ -105,7 +105,6 @@ struct LinkCutTree {
   struct Node {
     Node *ch[2], *par;
     bool rev;
-    Node() : rev(false) { ch[0] = ch[1] = par = nullptr; }
   };
 
  private:
@@ -162,9 +161,10 @@ struct LinkCutTree {
 
  private:
   vector<Node> ns;
+  int linkcnt;
 
  public:
-  LinkCutTree(int n) : ns(n) {}
+  LinkCutTree(int n) : ns(n), linkcnt(0) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);
@@ -173,6 +173,7 @@ struct LinkCutTree {
   }
   // add link from c to p
   void link(int c, int p) {
+    assert(linkcnt++ < ns.size() - 1);
     evert(c);
     expose(&ns[p]);
     ns[p].ch[1] = &ns[c];
@@ -180,6 +181,7 @@ struct LinkCutTree {
   }
   // cut link from c (to the root direction)
   void cut(int c, int p) {
+    linkcnt--;
     evert(p);
     expose(&ns[c]);
     Node *y = ns[c].ch[0];

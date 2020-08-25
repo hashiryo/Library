@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/LinkCutTree_MonoidLazy.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-25 17:42:49+09:00
 
 
 
@@ -154,8 +154,11 @@ struct LinkCutTree_MonoidLazy {
  public:
   vector<Node> ns;
 
+ private:
+  int linkcnt;
+
  public:
-  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n, init) {}
+  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n, init), linkcnt(0) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);
@@ -164,6 +167,7 @@ struct LinkCutTree_MonoidLazy {
   }
   // add link from c to p
   void link(int c, int p) {
+    assert(linkcnt++ < ns.size() - 1);
     evert(c);
     expose(&ns[p]);
     ns[p].ch[1] = &ns[c];
@@ -172,6 +176,7 @@ struct LinkCutTree_MonoidLazy {
   }
   // cut link from c to p
   void cut(int c, int p) {
+    linkcnt--;
     evert(p);
     expose(&ns[c]);
     Node *y = ns[c].ch[0];
@@ -320,8 +325,11 @@ struct LinkCutTree_MonoidLazy {
  public:
   vector<Node> ns;
 
+ private:
+  int linkcnt;
+
  public:
-  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n, init) {}
+  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n, init), linkcnt(0) {}
   // make k the root
   void evert(int k) {
     expose(&ns[k]);
@@ -330,6 +338,7 @@ struct LinkCutTree_MonoidLazy {
   }
   // add link from c to p
   void link(int c, int p) {
+    assert(linkcnt++ < ns.size() - 1);
     evert(c);
     expose(&ns[p]);
     ns[p].ch[1] = &ns[c];
@@ -338,6 +347,7 @@ struct LinkCutTree_MonoidLazy {
   }
   // cut link from c to p
   void cut(int c, int p) {
+    linkcnt--;
     evert(p);
     expose(&ns[c]);
     Node *y = ns[c].ch[0];
