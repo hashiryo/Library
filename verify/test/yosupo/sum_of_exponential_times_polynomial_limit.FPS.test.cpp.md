@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 11:16:08+09:00
+    - Last commit date: 2020-08-25 20:06:24+09:00
 
 
 * see: <a href="https://en.m.wikipedia.org/wiki/Eulerian_number">https://en.m.wikipedia.org/wiki/Eulerian_number</a>
@@ -71,11 +71,15 @@ signed main() {
   using Mint = ModInt<998244353>;
   int r, d;
   cin >> r >> d;
-  auto A = eulerian<Mint>(d);
-  Mint ans = 0, rpw = r;
-  for (int i = 0; i < d; i++, rpw *= r) ans += A[i] * rpw;
-  ans /= Mint(1 - r).pow(d + 1);
-  cout << ans << endl;
+  if (r == 0 && d == 0) {
+    cout << 1 << endl;
+  } else {
+    auto A = eulerian<Mint>(d);
+    Mint ans = 0, rpw = r;
+    for (int i = 0; i <= d; i++, rpw *= r) ans += A[i] * rpw;
+    ans /= Mint(1 - r).pow(d + 1);
+    cout << ans << endl;
+  }
   return 0;
 }
 ```

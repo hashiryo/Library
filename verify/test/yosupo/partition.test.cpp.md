@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/partition.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 11:16:08+09:00
+    - Last commit date: 2020-08-25 20:06:24+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/partition_function">https://judge.yosupo.jp/problem/partition_function</a>
