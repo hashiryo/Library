@@ -45,6 +45,7 @@ layout: default
 
 ### グラフ
 
+* :heavy_check_mark: <a href="library/src/Graph/HeavyLightDecomposition.hpp.html">HL分解</a>
 * :heavy_check_mark: <a href="library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
 * :heavy_check_mark: <a href="library/src/Graph/MatchingGeneral.hpp.html">最大マッチング(一般グラフ)</a>
 * :heavy_check_mark: <a href="library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
@@ -162,6 +163,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/2635.test.cpp.html">test/aoj/2635.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2644.test.cpp.html">test/aoj/2644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2647.test.cpp.html">test/aoj/2647.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/2667.HLD.test.cpp.html">test/aoj/2667.HLD.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2842.BIT_2D.test.cpp.html">test/aoj/2842.BIT_2D.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/2972.test.cpp.html">test/aoj/2972.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/3032.test.cpp.html">test/aoj/3032.test.cpp</a>
@@ -279,6 +281,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/417.test.cpp.html">test/yukicoder/417.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/640.HLD.test.cpp.html">test/yukicoder/640.HLD.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/640.LCT.test.cpp.html">test/yukicoder/640.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>

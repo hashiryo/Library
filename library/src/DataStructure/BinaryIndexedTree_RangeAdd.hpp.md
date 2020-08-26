@@ -38,6 +38,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../../verify/test/aoj/2667.HLD.test.cpp.html">test/aoj/2667.HLD.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp.html">test/aoj/DSL_2_G.BIT_rangeadd.test.cpp</a>
 
 
