@@ -38,7 +38,7 @@ layout: default
 
 ### アルゴリズム
 
-* :question: <a href="library/src/Algorithm/Mo.hpp.html">Mo</a>
+* :heavy_check_mark: <a href="library/src/Algorithm/Mo.hpp.html">Mo</a>
 
 
 <div id="5a834e14ea57a0cf726f79f1ab2dcc39"></div>
@@ -60,7 +60,7 @@ layout: default
 
 ### データ構造
 
-* :question: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
@@ -256,7 +256,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/static_range_inversions_query.mo.test.cpp.html">test/yosupo/static_range_inversions_query.mo.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/static_range_inversions_query.mo.test.cpp.html">test/yosupo/static_range_inversions_query.mo.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/suffixarray.test.cpp.html">test/yosupo/suffixarray.test.cpp</a>

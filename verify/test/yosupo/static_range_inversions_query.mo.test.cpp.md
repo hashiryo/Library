@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/static_range_inversions_query.mo.test.cpp
+# :heavy_check_mark: test/yosupo/static_range_inversions_query.mo.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/static_range_inversions_query.mo.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 16:30:08+09:00
+    - Last commit date: 2020-08-26 16:56:26+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/static_range_inversions_query">https://judge.yosupo.jp/problem/static_range_inversions_query</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Algorithm/Mo.hpp.html">Mo</a>
-* :question: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="../../../library/src/Algorithm/Mo.hpp.html">Mo</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 
 ## Code
@@ -148,7 +148,8 @@ struct Mo {
     sort(begin(ord), end(ord), [&](int a, int b) {
       int ablock = lr[a].first / bs, bblock = lr[b].first / bs;
       if (ablock != bblock) return ablock < bblock;
-      return bool((ablock & 1) ^ (lr[a].second < lr[b].second));
+      return (ablock & 1) ? lr[a].second > lr[b].second
+                          : lr[a].second < lr[b].second;
     });
     int l = 0, r = 0;
     for (auto idx : ord) {
