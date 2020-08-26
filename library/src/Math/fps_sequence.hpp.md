@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/fps_sequence.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 20:06:24+09:00
+    - Last commit date: 2020-08-26 15:44:51+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/07/160154">https://min-25.hatenablog.com/entry/2015/04/07/160154</a>
@@ -122,6 +122,7 @@ FormalPowerSeries<mint> stirling_second(int N) {
 
 template <typename mint>
 FormalPowerSeries<mint> eulerian(int N) {
+  if (N == 0) return FormalPowerSeries<mint>({1});
   vector<mint> fact(N + 2), finv(N + 2);
   fact[0] = finv[N + 1] = 1;
   for (int i = 1; i <= N + 1; i++) fact[i] = fact[i - 1] * i;
@@ -134,6 +135,7 @@ FormalPowerSeries<mint> eulerian(int N) {
   }
   FormalPowerSeries<mint> ret = (a * b).part(N + 1);
   for (int i = 0; i <= N / 2; i++) ret[N - i - 1] = ret[i];
+  ret[N] = 0;
   return ret;
 }
 
