@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
-* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code

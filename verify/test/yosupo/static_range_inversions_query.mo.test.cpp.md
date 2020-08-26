@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/static_range_inversions_query.mo.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 15:44:51+09:00
+    - Last commit date: 2020-08-26 16:30:08+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/static_range_inversions_query">https://judge.yosupo.jp/problem/static_range_inversions_query</a>
@@ -76,8 +76,8 @@ signed main() {
     cin >> l >> r;
     mo.query(l, r);
   }
-  BinaryIndexedTree<int> bit(N + 1);
-  int inv = 0, total = 0;
+  BinaryIndexedTree<long long> bit(N + 1);
+  long long inv = 0, total = 0;
   auto addl = [&](int i) {
     inv += bit.sum(A[i]);
     bit.add(A[i], 1);
@@ -98,7 +98,7 @@ signed main() {
     bit.add(A[i], -1);
     total--;
   };
-  int ans[Q];
+  long long ans[Q];
   auto out = [&](int q) { ans[q] = inv; };
   mo.run(addl, addr, erasel, eraser, out);
   for (int q = 0; q < Q; q++) cout << ans[q] << "\n";
@@ -223,8 +223,8 @@ signed main() {
     cin >> l >> r;
     mo.query(l, r);
   }
-  BinaryIndexedTree<int> bit(N + 1);
-  int inv = 0, total = 0;
+  BinaryIndexedTree<long long> bit(N + 1);
+  long long inv = 0, total = 0;
   auto addl = [&](int i) {
     inv += bit.sum(A[i]);
     bit.add(A[i], 1);
@@ -245,7 +245,7 @@ signed main() {
     bit.add(A[i], -1);
     total--;
   };
-  int ans[Q];
+  long long ans[Q];
   auto out = [&](int q) { ans[q] = inv; };
   mo.run(addl, addr, erasel, eraser, out);
   for (int q = 0; q < Q; q++) cout << ans[q] << "\n";

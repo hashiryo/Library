@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/stirling_second.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 15:44:51+09:00
+    - Last commit date: 2020-08-26 16:30:08+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind">https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :question: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 
 
 ## Code

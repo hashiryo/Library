@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 数列(形式的冪級数使用)
+# :heavy_check_mark: 数列(形式的冪級数使用)
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/fps_sequence.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 15:44:51+09:00
+    - Last commit date: 2020-08-26 16:30:08+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/07/160154">https://min-25.hatenablog.com/entry/2015/04/07/160154</a>
@@ -43,7 +43,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
 
 
 ## Verified with
@@ -52,7 +52,6 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial_limit.FPS.test.cpp</a>
 
 
 ## Code
@@ -118,25 +117,6 @@ FormalPowerSeries<mint> stirling_second(int N) {
   for (int i = 0; i <= N; finv /= (++i))
     a[i] = mint(i).pow(N) * finv, b[i] = i & 1 ? -finv : finv;
   return (a * b).part(N + 1);
-}
-
-template <typename mint>
-FormalPowerSeries<mint> eulerian(int N) {
-  if (N == 0) return FormalPowerSeries<mint>({1});
-  vector<mint> fact(N + 2), finv(N + 2);
-  fact[0] = finv[N + 1] = 1;
-  for (int i = 1; i <= N + 1; i++) fact[i] = fact[i - 1] * i;
-  finv[N + 1] /= fact[N + 1];
-  for (int i = N; i >= 0; i--) finv[i] = finv[i + 1] * (i + 1);
-  FormalPowerSeries<mint> a(N / 2 + 1), b(N / 2 + 1);
-  for (int i = 0; i <= N / 2; i++) {
-    a[i] = i & 1 ? -finv[i] * finv[N + 1 - i] : finv[i] * finv[N + 1 - i];
-    b[i] = mint(i + 1).pow(N) * fact[N + 1];
-  }
-  FormalPowerSeries<mint> ret = (a * b).part(N + 1);
-  for (int i = 0; i <= N / 2; i++) ret[N - i - 1] = ret[i];
-  ret[N] = 0;
-  return ret;
 }
 
 ```
