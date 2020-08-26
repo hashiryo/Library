@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_add_range_sum.BIT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 00:39:34+09:00
+    - Last commit date: 2020-08-26 15:06:52+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :question: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 
 ## Code
@@ -113,7 +113,7 @@ struct BinaryIndexedTree {
     for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
   }
   void add(int i, T a = 1) {
-    for (++i; i < dat.size(); i += i & -i) dat[i] += a;
+    for (++i; i < (int)dat.size(); i += i & -i) dat[i] += a;
   }
   T sum(int i) {  // sum [0,i)
     T s = 0;

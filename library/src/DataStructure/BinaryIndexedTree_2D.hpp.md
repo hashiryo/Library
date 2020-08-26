@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryIndexedTree_2D.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-26 15:06:52+09:00
 
 
 
@@ -49,8 +49,8 @@ layout: default
 /**
  * @title Binary-Indexed-Tree(2次元)
  * @category データ構造
- * @brief O(logHW)
- * @brief 1-indexed
+ * O(logHW)
+ * 1-indexed
  */
 
 #ifndef call_from_test
@@ -64,8 +64,8 @@ struct BinaryIndexedTree_2D {
   vector<vT> dat;
   BinaryIndexedTree_2D(int H, int W) : dat(vector<vT>(H + 1, vT(W + 1, 0))) {}
   void add(int y, int x, T v) {
-    for (int i = y; i < dat.size(); i += i & -i)
-      for (int j = x; j < dat[i].size(); j += j & -j) dat[i][j] += v;
+    for (int i = y; i < (int)dat.size(); i += i & -i)
+      for (int j = x; j < (int)dat[i].size(); j += j & -j) dat[i][j] += v;
   }
   T sum(int y, int x) {  // sum (0,y] * (0,x]
     T ret = 0;
@@ -87,8 +87,8 @@ struct BinaryIndexedTree_2D {
 /**
  * @title Binary-Indexed-Tree(2次元)
  * @category データ構造
- * @brief O(logHW)
- * @brief 1-indexed
+ * O(logHW)
+ * 1-indexed
  */
 
 #ifndef call_from_test
@@ -102,8 +102,8 @@ struct BinaryIndexedTree_2D {
   vector<vT> dat;
   BinaryIndexedTree_2D(int H, int W) : dat(vector<vT>(H + 1, vT(W + 1, 0))) {}
   void add(int y, int x, T v) {
-    for (int i = y; i < dat.size(); i += i & -i)
-      for (int j = x; j < dat[i].size(); j += j & -j) dat[i][j] += v;
+    for (int i = y; i < (int)dat.size(); i += i & -i)
+      for (int j = x; j < (int)dat[i].size(); j += j & -j) dat[i][j] += v;
   }
   T sum(int y, int x) {  // sum (0,y] * (0,x]
     T ret = 0;

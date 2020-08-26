@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Binary-Indexed-Tree
+# :question: Binary-Indexed-Tree
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 00:39:34+09:00
+    - Last commit date: 2020-08-26 15:06:52+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/static_range_inversions_query.mo.test.cpp.html">test/yosupo/static_range_inversions_query.mo.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 
 
@@ -69,7 +70,7 @@ struct BinaryIndexedTree {
     for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
   }
   void add(int i, T a = 1) {
-    for (++i; i < dat.size(); i += i & -i) dat[i] += a;
+    for (++i; i < (int)dat.size(); i += i & -i) dat[i] += a;
   }
   T sum(int i) {  // sum [0,i)
     T s = 0;
@@ -114,7 +115,7 @@ struct BinaryIndexedTree {
     for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
   }
   void add(int i, T a = 1) {
-    for (++i; i < dat.size(); i += i & -i) dat[i] += a;
+    for (++i; i < (int)dat.size(); i += i & -i) dat[i] += a;
   }
   T sum(int i) {  // sum [0,i)
     T s = 0;
