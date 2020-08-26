@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/TwoSatisfiability.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 01:05:53+09:00
+    - Last commit date: 2020-08-26 21:11:40+09:00
 
 
 
