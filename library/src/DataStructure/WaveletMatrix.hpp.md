@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: Wavelet行列
+# :heavy_check_mark: Wavelet行列
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/WaveletMatrix.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-27 16:28:05+09:00
+    - Last commit date: 2020-08-27 16:59:24+09:00
 
 
 
@@ -41,7 +41,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1549.WM.test.cpp.html">test/aoj/1549.WM.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2674.WM.test.cpp.html">test/aoj/2674.WM.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/range_kth_smallest.WM.test.cpp.html">test/yosupo/range_kth_smallest.WM.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/1937.WM.test.cpp.html">test/yukicoder/1937.WM.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/1937.WM.test.cpp.html">test/yukicoder/1937.WM.test.cpp</a>
 
 
 ## Code
@@ -102,7 +102,7 @@ struct WaveletMatrix {
   WaveletMatrix(vector<int> v)
       : WaveletMatrix(v, *max_element(v.begin(), v.end()) + 1) {}
   WaveletMatrix(vector<int> v, unsigned s) : sigma(s), length(v.size()) {
-    height = (sigma == 1) ? 1 : (32 - __builtin_clz(sigma - 1));
+    height = 32 - __builtin_clz(sigma);
     matrix.resize(height);
     mid.resize(height);
     vector<int> l(length), r(length);
@@ -242,7 +242,7 @@ struct WaveletMatrix {
   WaveletMatrix(vector<int> v)
       : WaveletMatrix(v, *max_element(v.begin(), v.end()) + 1) {}
   WaveletMatrix(vector<int> v, unsigned s) : sigma(s), length(v.size()) {
-    height = (sigma == 1) ? 1 : (32 - __builtin_clz(sigma - 1));
+    height = 32 - __builtin_clz(sigma);
     matrix.resize(height);
     mid.resize(height);
     vector<int> l(length), r(length);

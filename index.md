@@ -61,7 +61,7 @@ layout: default
 
 ### データ構造
 
-* :question: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
@@ -86,7 +86,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind.hpp.html">Union-Find</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
-* :question: <a href="library/src/DataStructure/WaveletMatrix.hpp.html">Wavelet行列</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/WaveletMatrix.hpp.html">Wavelet行列</a>
 
 
 <div id="8f833136c094b0b1f887309fa147399d"></div>
@@ -276,8 +276,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1732.BIT.test.cpp.html">test/yukicoder/1732.BIT.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1937.WM.test.cpp.html">test/yukicoder/1937.WM.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1732.BIT.test.cpp.html">test/yukicoder/1732.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1937.WM.test.cpp.html">test/yukicoder/1937.WM.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>
