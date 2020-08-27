@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Binary-Indexed-Tree
+# :question: Binary-Indexed-Tree
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 15:06:52+09:00
+    - Last commit date: 2020-08-27 16:28:05+09:00
 
 
 
@@ -40,6 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/static_range_inversions_query.mo.test.cpp.html">test/yosupo/static_range_inversions_query.mo.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1732.BIT.test.cpp.html">test/yukicoder/1732.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 
 
@@ -81,11 +82,10 @@ struct BinaryIndexedTree {
   int find(T k) const {
     int i = 0;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
-      if (i + p < dat.size() && dat[i + p] <= k) k -= dat[i += p];
-    return i + 1 == dat.size() ? -1 : i;  // -1 -> no solutions
+      if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
+    return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
 };
-
 ```
 {% endraw %}
 
@@ -126,8 +126,8 @@ struct BinaryIndexedTree {
   int find(T k) const {
     int i = 0;
     for (int p = 1 << (__lg(dat.size() - 1) + 1); p > 0; p >>= 1)
-      if (i + p < dat.size() && dat[i + p] <= k) k -= dat[i += p];
-    return i + 1 == dat.size() ? -1 : i;  // -1 -> no solutions
+      if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
+    return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
 };
 

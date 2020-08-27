@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/SegmentTree_Dynamic.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 16:57:43+09:00
+    - Last commit date: 2020-08-27 16:28:05+09:00
 
 
 
@@ -56,7 +56,7 @@ layout: default
 /**
  * @title Segment-Tree(動的)
  * @category データ構造
- * @brief O(logN)
+ * O(logN)
  */
 
 #ifndef call_from_test
@@ -145,8 +145,8 @@ struct SegmentTree_Dynamic {
     if (root != nullptr) root->xor_lazy ^= key;
   }
   void set_val(ll k, T x) { root = set_Node(root, k, x, height - 1); }
-  //[a,b)
-  T query(ll a, ll b) { return query_Node(a, b, root, 0, n, height - 1); }
+  //[l,r)
+  T query(ll l, ll r) { return query_Node(l, r, root, 0, n, height - 1); }
   T operator[](ll k) { return query(k, k + 1); }
   // min { i : check(query(0,i+1)) = true }
   template <typename C>
@@ -166,7 +166,7 @@ int SegmentTree_Dynamic<M, LIM>::node_count = 0;
 /**
  * @title Segment-Tree(動的)
  * @category データ構造
- * @brief O(logN)
+ * O(logN)
  */
 
 #ifndef call_from_test
@@ -255,8 +255,8 @@ struct SegmentTree_Dynamic {
     if (root != nullptr) root->xor_lazy ^= key;
   }
   void set_val(ll k, T x) { root = set_Node(root, k, x, height - 1); }
-  //[a,b)
-  T query(ll a, ll b) { return query_Node(a, b, root, 0, n, height - 1); }
+  //[l,r)
+  T query(ll l, ll r) { return query_Node(l, r, root, 0, n, height - 1); }
   T operator[](ll k) { return query(k, k + 1); }
   // min { i : check(query(0,i+1)) = true }
   template <typename C>

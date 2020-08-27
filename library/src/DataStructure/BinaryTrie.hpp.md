@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryTrie.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 01:05:53+09:00
+    - Last commit date: 2020-08-27 16:28:05+09:00
 
 
 
@@ -55,8 +55,8 @@ layout: default
 /**
  * @title 二分Trie
  * @category データ構造
- * @brief O(logN)
- * @brief multiset的な仕様(内部は動的セグ木)
+ *  O(logN)
+ *  multiset的な仕様(内部は動的セグ木)
  */
 // verify用:
 // https://codeforces.com/contest/947/problem/C
@@ -74,7 +74,7 @@ using namespace std;
 struct RsumQ {
   using T = int;
   static T ti() { return 0; }
-  static T f(const T &l, const T &r) { return l + r; }
+  static T f(const T &vl, const T &vr) { return vl + vr; }
 };
 struct BinaryTrie : public SegmentTree_Dynamic<RsumQ> {
   using ll = long long;
