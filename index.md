@@ -86,7 +86,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind.hpp.html">Union-Find</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind_Persistent.hpp.html">Union-Find(完全永続)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind_Potential.hpp.html">Union-Find(ポテンシャル)</a>
-* :heavy_check_mark: <a href="library/src/DataStructure/WaveletMatrix.hpp.html">Wavelet行列</a>
+* :question: <a href="library/src/DataStructure/WaveletMatrix.hpp.html">Wavelet行列</a>
 
 
 <div id="8f833136c094b0b1f887309fa147399d"></div>
@@ -275,30 +275,31 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/1732.BIT.test.cpp.html">test/yukicoder/1732.BIT.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/1937.WM.test.cpp.html">test/yukicoder/1937.WM.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/184.test.cpp.html">test/yukicoder/184.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/22.test.cpp.html">test/yukicoder/22.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/277.test.cpp.html">test/yukicoder/277.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/235.HLD.test.cpp.html">test/yukicoder/235.HLD.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/235.LCT.test.cpp.html">test/yukicoder/235.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/3211.test.cpp.html">test/yukicoder/3211.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/417.test.cpp.html">test/yukicoder/417.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/640.HLD.test.cpp.html">test/yukicoder/640.HLD.test.cpp</a>
-* :heavy_check_mark: <a href="verify/test/yukicoder/640.LCT.test.cpp.html">test/yukicoder/640.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/42.test.cpp.html">test/yukicoder/42.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/421.test.cpp.html">test/yukicoder/421.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/529.LCT.test.cpp.html">test/yukicoder/529.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree_Dynamic.test.cpp.html">test/yukicoder/649.SegTree_Dynamic.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/738.BIT.test.cpp.html">test/yukicoder/738.BIT.test.cpp</a>
+* :x: <a href="verify/test/yukicoder/738.WM.test.cpp.html">test/yukicoder/738.WM.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/763.test.cpp.html">test/yukicoder/763.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/768.test.cpp.html">test/yukicoder/768.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/919.WM.test.cpp.html">test/yukicoder/919.WM.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/980.test.cpp.html">test/yukicoder/980.test.cpp</a>
 
 

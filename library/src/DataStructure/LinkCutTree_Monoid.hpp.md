@@ -40,7 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/529.LCT.test.cpp.html">test/yukicoder/529.LCT.test.cpp</a>
 
 
 ## Code

@@ -40,7 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2530.test.cpp.html">test/aoj/2530.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2624.test.cpp.html">test/aoj/2624.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/481.test.cpp.html">test/yukicoder/481.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/184.test.cpp.html">test/yukicoder/184.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
 
 

@@ -44,8 +44,8 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/1973.test.cpp.html">test/yukicoder/1973.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/444.test.cpp.html">test/yukicoder/444.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
 
 
 ## Code

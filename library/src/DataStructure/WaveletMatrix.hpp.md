@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Wavelet行列
+# :question: Wavelet行列
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -41,7 +41,8 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/1549.WM.test.cpp.html">test/aoj/1549.WM.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2674.WM.test.cpp.html">test/aoj/2674.WM.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/range_kth_smallest.WM.test.cpp.html">test/yosupo/range_kth_smallest.WM.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/1937.WM.test.cpp.html">test/yukicoder/1937.WM.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/738.WM.test.cpp.html">test/yukicoder/738.WM.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/919.WM.test.cpp.html">test/yukicoder/919.WM.test.cpp</a>
 
 
 ## Code

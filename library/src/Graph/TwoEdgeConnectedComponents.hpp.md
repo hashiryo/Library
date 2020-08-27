@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/1290.LCT.test.cpp.html">test/yukicoder/1290.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/529.LCT.test.cpp.html">test/yukicoder/529.LCT.test.cpp</a>
 
 
 ## Code

@@ -42,7 +42,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/0334.test.cpp.html">test/aoj/0334.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2423.test.cpp.html">test/aoj/2423.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/277.test.cpp.html">test/yukicoder/277.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/421.test.cpp.html">test/yukicoder/421.test.cpp</a>
 
 
 ## Code
