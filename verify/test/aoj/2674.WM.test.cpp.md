@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/DataStructure/WaveletMatrix.hpp.html">Wavelet行列</a>
+* :heavy_check_mark: <a href="../../../library/src/DataStructure/WaveletMatrix.hpp.html">Wavelet行列</a>
 
 
 ## Code
