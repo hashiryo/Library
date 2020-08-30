@@ -25,49 +25,49 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 形式的冪級数
+# :x: 形式的冪級数
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 20:06:24+09:00
+    - Last commit date: 2020-08-30 17:41:10+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
-* :heavy_check_mark: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
-* :heavy_check_mark: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
+* :x: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :x: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :x: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/980.test.cpp.html">test/yukicoder/980.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/980.test.cpp.html">test/yukicoder/980.test.cpp</a>
 
 
 ## Code
@@ -230,7 +230,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i].x != 0) return i;
+      if ((*this)[i] = mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {
@@ -328,18 +328,20 @@ struct FormalPowerSeries : vector<mint> {
     auto ret = make_pair(mint(1), mint(0));
     for (auto bs = make_pair(b, mint(1)); e; e >>= 1, bs = mul(bs, bs))
       if (e & 1) ret = mul(ret, bs);
-    return ret.first.x * 2 < mint::modulo() ? ret.first : -ret.first;
+    return ret.first.get() * 2 < mint::modulo() ? ret.first : -ret.first;
   }
 
  private:
   static void mul2(const FPS &f, const FPS &g, bool cyclic = false) {
     using namespace ntt;
-    for (int i = 0; i < (int)f.size(); i++) f1[i] = f[i].x, f2[i] = f[i].x;
+    for (int i = 0; i < (int)f.size(); i++)
+      f1[i] = f[i].get(), f2[i] = f[i].get();
     if (&f == &g) {
       convolute(f1, f.size(), f1, f.size(), cyclic);
       convolute(f2, f.size(), f2, f.size(), cyclic);
     } else {
-      for (int i = 0; i < (int)g.size(); i++) g1[i] = g[i].x, g2[i] = g[i].x;
+      for (int i = 0; i < (int)g.size(); i++)
+        g1[i] = g[i].get(), g2[i] = g[i].get();
       convolute(f1, f.size(), g1, g.size(), cyclic);
       convolute(f2, f.size(), g2, g.size(), cyclic);
     }
@@ -449,7 +451,7 @@ struct FormalPowerSeries : vector<mint> {
 
  public:
   FPS inv(int deg = -1) const {  // O(NlogN)
-    assert((*this)[0].x != 0);
+    assert((*this)[0] != mint(0));
     if (deg < 0) deg = this->size();
     FPS ret(1, mint(1) / (*this)[0]);
     for (int e = 1, ne; e < deg; e = ne) {
@@ -472,12 +474,12 @@ struct FormalPowerSeries : vector<mint> {
     return ret;
   }
   FPS log(int deg = -1) const {  // O(NlogN)
-    assert((*this)[0].x == 1);
+    assert((*this)[0] == mint(1));
     if (deg < 0) deg = this->size();
     return ((this->diff() * this->inv(deg)).part(deg - 1)).inte();
   }
   FPS exp(int deg = -1) const {  // O(NlogN)
-    assert((*this)[0].x == 0);
+    assert((*this)[0] == mint(0));
     if (deg < 0) deg = this->size();
     FPS ret({1, 1 < this->size() ? (*this)[1] : 0}), retinv(1, 1);
     FPS f = this->diff();
@@ -723,7 +725,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i].x != 0) return i;
+      if ((*this)[i] = mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {
@@ -821,18 +823,20 @@ struct FormalPowerSeries : vector<mint> {
     auto ret = make_pair(mint(1), mint(0));
     for (auto bs = make_pair(b, mint(1)); e; e >>= 1, bs = mul(bs, bs))
       if (e & 1) ret = mul(ret, bs);
-    return ret.first.x * 2 < mint::modulo() ? ret.first : -ret.first;
+    return ret.first.get() * 2 < mint::modulo() ? ret.first : -ret.first;
   }
 
  private:
   static void mul2(const FPS &f, const FPS &g, bool cyclic = false) {
     using namespace ntt;
-    for (int i = 0; i < (int)f.size(); i++) f1[i] = f[i].x, f2[i] = f[i].x;
+    for (int i = 0; i < (int)f.size(); i++)
+      f1[i] = f[i].get(), f2[i] = f[i].get();
     if (&f == &g) {
       convolute(f1, f.size(), f1, f.size(), cyclic);
       convolute(f2, f.size(), f2, f.size(), cyclic);
     } else {
-      for (int i = 0; i < (int)g.size(); i++) g1[i] = g[i].x, g2[i] = g[i].x;
+      for (int i = 0; i < (int)g.size(); i++)
+        g1[i] = g[i].get(), g2[i] = g[i].get();
       convolute(f1, f.size(), g1, g.size(), cyclic);
       convolute(f2, f.size(), g2, g.size(), cyclic);
     }
@@ -942,7 +946,7 @@ struct FormalPowerSeries : vector<mint> {
 
  public:
   FPS inv(int deg = -1) const {  // O(NlogN)
-    assert((*this)[0].x != 0);
+    assert((*this)[0] != mint(0));
     if (deg < 0) deg = this->size();
     FPS ret(1, mint(1) / (*this)[0]);
     for (int e = 1, ne; e < deg; e = ne) {
@@ -965,12 +969,12 @@ struct FormalPowerSeries : vector<mint> {
     return ret;
   }
   FPS log(int deg = -1) const {  // O(NlogN)
-    assert((*this)[0].x == 1);
+    assert((*this)[0] == mint(1));
     if (deg < 0) deg = this->size();
     return ((this->diff() * this->inv(deg)).part(deg - 1)).inte();
   }
   FPS exp(int deg = -1) const {  // O(NlogN)
-    assert((*this)[0].x == 0);
+    assert((*this)[0] == mint(0));
     if (deg < 0) deg = this->size();
     FPS ret({1, 1 < this->size() ? (*this)[1] : 0}), retinv(1, 1);
     FPS f = this->diff();

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/sum_of_totient_function.test.cpp
+# :x: test/yosupo/sum_of_totient_function.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_totient_function.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 20:23:42+09:00
+    - Last commit date: 2020-08-30 17:41:10+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sum_of_totient_function">https://judge.yosupo.jp/problem/sum_of_totient_function</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :heavy_check_mark: <a href="../../../library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
-* :heavy_check_mark: <a href="../../../library/src/Math/number_theory.hpp.html">数論</a>
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :x: <a href="../../../library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
+* :x: <a href="../../../library/src/Math/number_theory.hpp.html">数論</a>
 
 
 ## Code
@@ -149,6 +149,7 @@ struct ModInt {
     return (is);
   }
   static int modulo() { return mod; }
+  int get() const { return x; }
 };
 #line 1 "src/Math/dujiao_sieve.hpp"
 /**
@@ -213,16 +214,31 @@ using namespace std;
 
 namespace number_theory {
 vector<int> primes;
+const int MAX_N = 1 << 24;
+int mpf[MAX_N];  // minimum prime factor
 void init(int n) {
   primes.push_back(2);
-  bool is_prime[n + 1];
-  fill(is_prime, is_prime + n + 1, true);
+  for (int i = 2; i <= n; i += 2) mpf[i] = 2;
   for (long long p = 3; p <= n; p += 2)
-    if (is_prime[p]) {
+    if (!mpf[p]) {
+      mpf[p] = p;
       primes.push_back(p);
-      for (long long i = p * p; i <= n; i += p) is_prime[i] = false;
+      for (long long i = p * p; i <= n; i += 2 * p)
+        if (!mpf[i]) mpf[i] = p;
     }
 }
+
+vector<pair<int, int>> prime_factorize(int n) {  // O(log n)
+  vector<pair<int, int>> res;
+  while (n > 1) {
+    int p = mpf[n];
+    int e = 0;
+    while (mpf[n] == p) e++, n /= p;
+    res.push_back(make_pair(p, e));
+  }
+  return res;
+}
+
 // f -> g s.t. g(n) = sum_{m|n} f(m)
 template <typename T>
 void divisor_zeta(vector<T> &f) {

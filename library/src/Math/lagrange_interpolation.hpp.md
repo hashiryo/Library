@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: ラグランジュ補間
+# :x: ラグランジュ補間
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,9 +38,9 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/42.test.cpp.html">test/yukicoder/42.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/sum_of_exponential_times_polynomial.test.cpp.html">test/yosupo/sum_of_exponential_times_polynomial.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/42.test.cpp.html">test/yukicoder/42.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
 
 
 ## Code

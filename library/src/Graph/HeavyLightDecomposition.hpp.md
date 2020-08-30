@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: HL分解
+# :question: HL分解
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#5a834e14ea57a0cf726f79f1ab2dcc39">グラフ</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Graph/HeavyLightDecomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 20:37:18+09:00
+    - Last commit date: 2020-08-30 17:41:10+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2667.HLD.test.cpp.html">test/aoj/2667.HLD.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/235.HLD.test.cpp.html">test/yukicoder/235.HLD.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/235.HLD.test.cpp.html">test/yukicoder/235.HLD.test.cpp</a>
 
 
 ## Code
@@ -73,7 +73,7 @@ struct HeavyLightDecomposition {
     out.assign(adj.size(), 0);
     head.assign(adj.size(), 0);
     par.assign(adj.size(), 0);
-    dfs_sz(rt, -1, 0);
+    dfs_sz(rt, -1);
     int t = 0;
     dfs_hld(rt, -1, t);
   }
@@ -114,11 +114,11 @@ struct HeavyLightDecomposition {
   }
 
  private:
-  void dfs_sz(int v, int p, int d) {
+  void dfs_sz(int v, int p) {
     if (adj[v].size() && adj[v][0] == p) swap(adj[v][0], adj[v].back());
     for (auto &u : adj[v])
       if (u != p) {
-        dfs_sz(u, v, d + 1);
+        dfs_sz(u, v);
         sz[v] += sz[u];
         if (sz[adj[v][0]] < sz[u]) swap(adj[v][0], u);
       }
@@ -168,7 +168,7 @@ struct HeavyLightDecomposition {
     out.assign(adj.size(), 0);
     head.assign(adj.size(), 0);
     par.assign(adj.size(), 0);
-    dfs_sz(rt, -1, 0);
+    dfs_sz(rt, -1);
     int t = 0;
     dfs_hld(rt, -1, t);
   }
@@ -209,11 +209,11 @@ struct HeavyLightDecomposition {
   }
 
  private:
-  void dfs_sz(int v, int p, int d) {
+  void dfs_sz(int v, int p) {
     if (adj[v].size() && adj[v][0] == p) swap(adj[v][0], adj[v].back());
     for (auto &u : adj[v])
       if (u != p) {
-        dfs_sz(u, v, d + 1);
+        dfs_sz(u, v);
         sz[v] += sz[u];
         if (sz[adj[v][0]] < sz[u]) swap(adj[v][0], u);
       }

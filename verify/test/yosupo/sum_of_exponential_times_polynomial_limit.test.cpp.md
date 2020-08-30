@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+# :x: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-30 17:41:10+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/24/031413">https://min-25.hatenablog.com/entry/2015/04/24/031413</a>
@@ -40,8 +40,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -212,6 +212,7 @@ struct ModInt {
     return (is);
   }
   static int modulo() { return mod; }
+  int get() const { return x; }
 };
 #line 12 "test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp"
 #undef call_from_test

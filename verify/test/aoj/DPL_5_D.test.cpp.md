@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DPL_5_D.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 17:25:27+09:00
+    - Last commit date: 2020-08-30 17:41:10+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_5_D</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
-* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :question: <a href="../../../library/src/Math/Combination.hpp.html">組み合わせ</a>
+* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 
 ## Code
@@ -178,6 +178,7 @@ struct ModInt {
     return (is);
   }
   static int modulo() { return mod; }
+  int get() const { return x; }
 };
 #line 10 "test/aoj/DPL_5_D.test.cpp"
 #undef call_from_test
