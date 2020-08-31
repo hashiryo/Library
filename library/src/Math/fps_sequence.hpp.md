@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 数列(形式的冪級数使用)
+# :question: 数列(形式的冪級数使用)
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/fps_sequence.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 09:46:56+09:00
+    - Last commit date: 2020-08-31 10:23:26+09:00
 
 
 * see: <a href="https://min-25.hatenablog.com/entry/2015/04/07/160154">https://min-25.hatenablog.com/entry/2015/04/07/160154</a>
@@ -43,13 +43,13 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
 

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/shift_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 09:46:56+09:00
+    - Last commit date: 2020-08-31 10:23:26+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/polynomial_taylor_shift">https://judge.yosupo.jp/problem/polynomial_taylor_shift</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 
 
@@ -241,7 +241,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i] == mint(0)) return i;
+      if ((*this)[i] != mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {
@@ -345,13 +345,13 @@ struct FormalPowerSeries : vector<mint> {
  private:
   static void mul2(const FPS &f, const FPS &g, bool cyclic = false) {
     using namespace ntt;
-    for (int i = 0; i < (int)f.size(); i++)
+    for (size_t i = 0; i < f.size(); i++)
       f1[i] = f[i].get(), f2[i] = f[i].get();
     if (&f == &g) {
       convolute(f1, f.size(), f1, f.size(), cyclic);
       convolute(f2, f.size(), f2, f.size(), cyclic);
     } else {
-      for (int i = 0; i < (int)g.size(); i++)
+      for (size_t i = 0; i < g.size(); i++)
         g1[i] = g[i].get(), g2[i] = g[i].get();
       convolute(f1, f.size(), g1, g.size(), cyclic);
       convolute(f2, f.size(), g2, g.size(), cyclic);
@@ -443,15 +443,15 @@ struct FormalPowerSeries : vector<mint> {
     int sq = frev.size() - brev.size() + 1;
     FPS qrev(sq, 0);
     mint inv = brev[0].inverse();
-    for (int i = 0; i < qrev.size(); ++i) {
+    for (size_t i = 0; i < qrev.size(); ++i) {
       qrev[i] = frev[i] * inv;
-      for (int j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
+      for (size_t j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
     }
     return {qrev, frev.part(sq, frev.size())};
   }
   FPS div_rev_pre(const FPS &brev, const FPS &brevinv) const {
     if (this->size() < brev.size()) return FPS();
-    int sq = this->size() - brev.size() + 1;
+    size_t sq = this->size() - brev.size() + 1;
     assert(this->size() >= sq && brevinv.size() >= sq);
     return (this->part(sq) * brevinv.part(sq)).part(sq);
   }

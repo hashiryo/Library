@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 線形漸化式の高速計算
+# :question: 線形漸化式の高速計算
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 09:46:56+09:00
+    - Last commit date: 2020-08-31 10:23:26+09:00
 
 
 
 
 ## Depends on
 
-* :x: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
 

@@ -25,38 +25,38 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: 形式的冪級数
+# :question: 形式的冪級数
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 09:46:56+09:00
+    - Last commit date: 2020-08-31 10:23:26+09:00
 
 
 
 
 ## Required by
 
-* :x: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
-* :x: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
-* :x: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
+* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :question: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
@@ -230,7 +230,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i] == mint(0)) return i;
+      if ((*this)[i] != mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {
@@ -334,13 +334,13 @@ struct FormalPowerSeries : vector<mint> {
  private:
   static void mul2(const FPS &f, const FPS &g, bool cyclic = false) {
     using namespace ntt;
-    for (int i = 0; i < (int)f.size(); i++)
+    for (size_t i = 0; i < f.size(); i++)
       f1[i] = f[i].get(), f2[i] = f[i].get();
     if (&f == &g) {
       convolute(f1, f.size(), f1, f.size(), cyclic);
       convolute(f2, f.size(), f2, f.size(), cyclic);
     } else {
-      for (int i = 0; i < (int)g.size(); i++)
+      for (size_t i = 0; i < g.size(); i++)
         g1[i] = g[i].get(), g2[i] = g[i].get();
       convolute(f1, f.size(), g1, g.size(), cyclic);
       convolute(f2, f.size(), g2, g.size(), cyclic);
@@ -432,15 +432,15 @@ struct FormalPowerSeries : vector<mint> {
     int sq = frev.size() - brev.size() + 1;
     FPS qrev(sq, 0);
     mint inv = brev[0].inverse();
-    for (int i = 0; i < qrev.size(); ++i) {
+    for (size_t i = 0; i < qrev.size(); ++i) {
       qrev[i] = frev[i] * inv;
-      for (int j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
+      for (size_t j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
     }
     return {qrev, frev.part(sq, frev.size())};
   }
   FPS div_rev_pre(const FPS &brev, const FPS &brevinv) const {
     if (this->size() < brev.size()) return FPS();
-    int sq = this->size() - brev.size() + 1;
+    size_t sq = this->size() - brev.size() + 1;
     assert(this->size() >= sq && brevinv.size() >= sq);
     return (this->part(sq) * brevinv.part(sq)).part(sq);
   }
@@ -725,7 +725,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i] == mint(0)) return i;
+      if ((*this)[i] != mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {
@@ -829,13 +829,13 @@ struct FormalPowerSeries : vector<mint> {
  private:
   static void mul2(const FPS &f, const FPS &g, bool cyclic = false) {
     using namespace ntt;
-    for (int i = 0; i < (int)f.size(); i++)
+    for (size_t i = 0; i < f.size(); i++)
       f1[i] = f[i].get(), f2[i] = f[i].get();
     if (&f == &g) {
       convolute(f1, f.size(), f1, f.size(), cyclic);
       convolute(f2, f.size(), f2, f.size(), cyclic);
     } else {
-      for (int i = 0; i < (int)g.size(); i++)
+      for (size_t i = 0; i < g.size(); i++)
         g1[i] = g[i].get(), g2[i] = g[i].get();
       convolute(f1, f.size(), g1, g.size(), cyclic);
       convolute(f2, f.size(), g2, g.size(), cyclic);
@@ -927,15 +927,15 @@ struct FormalPowerSeries : vector<mint> {
     int sq = frev.size() - brev.size() + 1;
     FPS qrev(sq, 0);
     mint inv = brev[0].inverse();
-    for (int i = 0; i < qrev.size(); ++i) {
+    for (size_t i = 0; i < qrev.size(); ++i) {
       qrev[i] = frev[i] * inv;
-      for (int j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
+      for (size_t j = 0; j < brev.size(); ++j) frev[j + i] -= brev[j] * qrev[i];
     }
     return {qrev, frev.part(sq, frev.size())};
   }
   FPS div_rev_pre(const FPS &brev, const FPS &brevinv) const {
     if (this->size() < brev.size()) return FPS();
-    int sq = this->size() - brev.size() + 1;
+    size_t sq = this->size() - brev.size() + 1;
     assert(this->size() >= sq && brevinv.size() >= sq);
     return (this->part(sq) * brevinv.part(sq)).part(sq);
   }
