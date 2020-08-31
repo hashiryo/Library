@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/inv_of_FPS.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-30 17:41:10+09:00
+    - Last commit date: 2020-08-31 09:46:56+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/inv_of_formal_power_series">https://judge.yosupo.jp/problem/inv_of_formal_power_series</a>
@@ -241,7 +241,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i] = mint(0)) return i;
+      if ((*this)[i] == mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {

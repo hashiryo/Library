@@ -74,7 +74,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/PersistentArray.hpp.html">永続配列</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree.hpp.html">赤黒木</a>
-* :question: <a href="library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree_Lazy.hpp.html">赤黒木(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree_Persistent.hpp.html">赤黒木(永続)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree_PersistentLazy.hpp.html">赤黒木(永続遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
@@ -253,7 +253,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/point_set_range_composite.SegTree.test.cpp.html">test/yosupo/point_set_range_composite.SegTree.test.cpp</a>
 * :x: <a href="verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :x: <a href="verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/range_affine_range_sum.RBTL.test.cpp.html">test/yosupo/range_affine_range_sum.RBTL.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/range_affine_range_sum.RBTL.test.cpp.html">test/yosupo/range_affine_range_sum.RBTL.test.cpp</a>
 * :x: <a href="verify/test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp.html">test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/range_kth_smallest.WM.test.cpp.html">test/yosupo/range_kth_smallest.WM.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/scc.test.cpp.html">test/yosupo/scc.test.cpp</a>

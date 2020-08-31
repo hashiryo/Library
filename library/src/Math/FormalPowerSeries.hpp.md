@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-30 17:41:10+09:00
+    - Last commit date: 2020-08-31 09:46:56+09:00
 
 
 
@@ -230,7 +230,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i] = mint(0)) return i;
+      if ((*this)[i] == mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {
@@ -725,7 +725,7 @@ struct FormalPowerSeries : vector<mint> {
   }
   size_t ctz() const {
     for (size_t i = 0; i < this->size(); i++)
-      if ((*this)[i] = mint(0)) return i;
+      if ((*this)[i] == mint(0)) return i;
     return this->size();
   }
   FPS operator>>(size_t size) const {
