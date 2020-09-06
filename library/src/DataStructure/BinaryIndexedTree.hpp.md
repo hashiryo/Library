@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Binary-Indexed-Tree
+# :x: Binary-Indexed-Tree
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-27 16:28:05+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/static_range_inversions_query.mo.test.cpp.html">test/yosupo/static_range_inversions_query.mo.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yukicoder/738.BIT.test.cpp.html">test/yukicoder/738.BIT.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/static_range_inversions_query.mo.test.cpp.html">test/yosupo/static_range_inversions_query.mo.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
+* :x: <a href="../../../verify/test/yukicoder/738.BIT.test.cpp.html">test/yukicoder/738.BIT.test.cpp</a>
 
 
 ## Code
@@ -85,6 +85,7 @@ struct BinaryIndexedTree {
       if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
     return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 ```
 {% endraw %}
@@ -129,6 +130,7 @@ struct BinaryIndexedTree {
       if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
     return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 
 ```

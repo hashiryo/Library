@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/bernoulli.test.cpp
+# :x: test/yosupo/bernoulli.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/bernoulli.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 10:23:26+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/bernoulli_number">https://judge.yosupo.jp/problem/bernoulli_number</a>
@@ -41,7 +41,7 @@ layout: default
 
 * :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :question: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :x: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 
 
 ## Code

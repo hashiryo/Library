@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 幾何テンプレ
+# :question: 幾何テンプレ
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/!geometry_temp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 15:34:23+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="arg_sort.hpp.html">偏角ソート</a>
-* :heavy_check_mark: <a href="circle_functions.hpp.html">円のあれこれ</a>
-* :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
+* :x: <a href="arg_sort.hpp.html">偏角ソート</a>
+* :question: <a href="circle_functions.hpp.html">円のあれこれ</a>
+* :x: <a href="closest_pair.hpp.html">最近点対</a>
 
 
 ## Verified with
@@ -68,30 +68,30 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3034.test.cpp.html">test/aoj/3034.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3049.test.cpp.html">test/aoj/3049.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/3056.test.cpp.html">test/aoj/3056.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_1_A.test.cpp.html">test/aoj/CGL_1_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_1_B.test.cpp.html">test/aoj/CGL_1_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_1_C.test.cpp.html">test/aoj/CGL_1_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_A.test.cpp.html">test/aoj/CGL_2_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_B.test.cpp.html">test/aoj/CGL_2_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_C.test.cpp.html">test/aoj/CGL_2_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_2_D.test.cpp.html">test/aoj/CGL_2_D.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_3_A.test.cpp.html">test/aoj/CGL_3_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_3_B.test.cpp.html">test/aoj/CGL_3_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_3_C.test.cpp.html">test/aoj/CGL_3_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_A.test.cpp.html">test/aoj/CGL_4_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_B.test.cpp.html">test/aoj/CGL_4_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_4_C.test.cpp.html">test/aoj/CGL_4_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_5_A.test.cpp.html">test/aoj/CGL_5_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_A.test.cpp.html">test/aoj/CGL_7_A.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_B.test.cpp.html">test/aoj/CGL_7_B.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_C.test.cpp.html">test/aoj/CGL_7_C.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_D.test.cpp.html">test/aoj/CGL_7_D.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_E.test.cpp.html">test/aoj/CGL_7_E.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_F.test.cpp.html">test/aoj/CGL_7_F.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 
 
 ## Code
@@ -485,7 +485,7 @@ struct Convex : Polygon {
   pair<Point, Point> farthest() {
     int u = 0, v = 1;
     Real best = -1;
-    for (int i = 0, j = 1; i < (int)this->size(); ++i) {
+    for (int i = 0, j = 1; i < (int)this->size(); ++i)
       while (true) {
         int k = next(j);
         Real len = norm2((*this)[j] - (*this)[i]);
@@ -496,7 +496,6 @@ struct Convex : Polygon {
           break;
         }
       }
-    }
     return make_pair((*this)[u], (*this)[v]);
   }
   Real diameter() {
@@ -1006,7 +1005,7 @@ struct Convex : Polygon {
   pair<Point, Point> farthest() {
     int u = 0, v = 1;
     Real best = -1;
-    for (int i = 0, j = 1; i < (int)this->size(); ++i) {
+    for (int i = 0, j = 1; i < (int)this->size(); ++i)
       while (true) {
         int k = next(j);
         Real len = norm2((*this)[j] - (*this)[i]);
@@ -1017,7 +1016,6 @@ struct Convex : Polygon {
           break;
         }
       }
-    }
     return make_pair((*this)[u], (*this)[v]);
   }
   Real diameter() {

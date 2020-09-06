@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 複数の値代入と多項式補間
+# :x: 複数の値代入と多項式補間
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/SubproductTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 10:23:26+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 
@@ -43,8 +43,8 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 
 
 ## Code
@@ -56,7 +56,6 @@ layout: default
  * @title 複数の値代入と多項式補間
  * @category 数学
  *  どちらもO(N log^2 N)
- *  多項式補間はxが等差数列ならラグランジュ補間のほうがO(N)で速い
  */
 
 #ifndef call_from_test
@@ -130,7 +129,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 398, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Math/SubproductTree.hpp: line 13: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Math/SubproductTree.hpp: line 12: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

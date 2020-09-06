@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 偏角ソート
+# :x: 偏角ソート
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#8f833136c094b0b1f887309fa147399d">幾何</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Geometry/arg_sort.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 15:34:23+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="!geometry_temp.hpp.html">幾何テンプレ</a>
+* :question: <a href="!geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 
 
 ## Code

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/convolution1000000007.test.cpp
+# :x: test/yosupo/convolution1000000007.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/convolution1000000007.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 10:23:26+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -402,12 +402,12 @@ struct FormalPowerSeries : vector<mint> {
     return mul_crt(0, size);
   }
   static FPS sub_mul(const FPS &f, const FPS &q, const FPS &d) {
-    int sq = q.size();
+    size_t sq = q.size();
     FPS p = q.mul_cyclically(d);
-    int mask = p.size() - 1;
-    for (int i = 0; i < sq; i++) p[i & mask] -= f[i & mask];
+    size_t mask = p.size() - 1;
+    for (size_t i = 0; i < sq; i++) p[i & mask] -= f[i & mask];
     FPS r = f.part(sq, f.size());
-    for (int i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
+    for (size_t i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
     return r;
   }
   FPS comp_dc(const FPS &g, int deg = -1) const {

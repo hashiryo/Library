@@ -31,32 +31,32 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 10:23:26+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
-* :question: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :x: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
+* :x: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 * :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
-* :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/partition.test.cpp.html">test/yosupo/partition.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
+* :x: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
@@ -388,12 +388,12 @@ struct FormalPowerSeries : vector<mint> {
     return mul_crt(0, size);
   }
   static FPS sub_mul(const FPS &f, const FPS &q, const FPS &d) {
-    int sq = q.size();
+    size_t sq = q.size();
     FPS p = q.mul_cyclically(d);
-    int mask = p.size() - 1;
-    for (int i = 0; i < sq; i++) p[i & mask] -= f[i & mask];
+    size_t mask = p.size() - 1;
+    for (size_t i = 0; i < sq; i++) p[i & mask] -= f[i & mask];
     FPS r = f.part(sq, f.size());
-    for (int i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
+    for (size_t i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
     return r;
   }
   FPS comp_dc(const FPS &g, int deg = -1) const {
@@ -563,6 +563,7 @@ struct FormalPowerSeries : vector<mint> {
     return ret.part(deg);
   }
 };
+
 ```
 {% endraw %}
 
@@ -883,12 +884,12 @@ struct FormalPowerSeries : vector<mint> {
     return mul_crt(0, size);
   }
   static FPS sub_mul(const FPS &f, const FPS &q, const FPS &d) {
-    int sq = q.size();
+    size_t sq = q.size();
     FPS p = q.mul_cyclically(d);
-    int mask = p.size() - 1;
-    for (int i = 0; i < sq; i++) p[i & mask] -= f[i & mask];
+    size_t mask = p.size() - 1;
+    for (size_t i = 0; i < sq; i++) p[i & mask] -= f[i & mask];
     FPS r = f.part(sq, f.size());
-    for (int i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
+    for (size_t i = 0; i < r.size(); i++) r[i] -= p[(sq + i) & mask];
     return r;
   }
   FPS comp_dc(const FPS &g, int deg = -1) const {

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/CGL_7_B.test.cpp
+# :x: test/aoj/CGL_7_B.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_7_B.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 21:48:56+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_B">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_B</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
-* :heavy_check_mark: <a href="../../../library/src/Geometry/circle_functions.hpp.html">円のあれこれ</a>
+* :question: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :question: <a href="../../../library/src/Geometry/circle_functions.hpp.html">円のあれこれ</a>
 
 
 ## Code

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/static_range_inversions_query.mo.test.cpp
+# :x: test/yosupo/static_range_inversions_query.mo.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/static_range_inversions_query.mo.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-27 16:28:05+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/static_range_inversions_query">https://judge.yosupo.jp/problem/static_range_inversions_query</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Algorithm/Mo.hpp.html">Mo</a>
-* :heavy_check_mark: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :question: <a href="../../../library/src/Algorithm/Mo.hpp.html">Mo</a>
+* :x: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 
 ## Code
@@ -202,6 +202,7 @@ struct BinaryIndexedTree {
       if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
     return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 #line 9 "test/yosupo/static_range_inversions_query.mo.test.cpp"
 #undef call_from_test

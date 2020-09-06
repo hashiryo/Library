@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/aoj/CGL_7_F.test.cpp
+# :x: test/aoj/CGL_7_F.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/CGL_7_F.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 15:34:23+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_F">https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_F</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :question: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
 
 
 ## Code
@@ -476,7 +476,7 @@ struct Convex : Polygon {
   pair<Point, Point> farthest() {
     int u = 0, v = 1;
     Real best = -1;
-    for (int i = 0, j = 1; i < (int)this->size(); ++i) {
+    for (int i = 0, j = 1; i < (int)this->size(); ++i)
       while (true) {
         int k = next(j);
         Real len = norm2((*this)[j] - (*this)[i]);
@@ -487,7 +487,6 @@ struct Convex : Polygon {
           break;
         }
       }
-    }
     return make_pair((*this)[u], (*this)[v]);
   }
   Real diameter() {

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: test/yosupo/argsort.test.cpp
+# :x: test/yosupo/argsort.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/argsort.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 15:34:23+09:00
+    - Last commit date: 2020-09-06 22:06:06+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sort_points_by_argument">https://judge.yosupo.jp/problem/sort_points_by_argument</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
-* :heavy_check_mark: <a href="../../../library/src/Geometry/arg_sort.hpp.html">偏角ソート</a>
+* :question: <a href="../../../library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :x: <a href="../../../library/src/Geometry/arg_sort.hpp.html">偏角ソート</a>
 
 
 ## Code
