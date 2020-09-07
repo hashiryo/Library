@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/FormalPowerSeries.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-06 22:06:06+09:00
+    - Last commit date: 2020-09-08 01:13:46+09:00
 
 
 
@@ -46,7 +46,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/3072.test.cpp.html">test/aoj/3072.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
@@ -283,19 +283,18 @@ struct FormalPowerSeries : vector<mint> {
   FPS &operator/=(const FPS &rhs) {
     if (this->size() < rhs.size()) return *this = FPS();
     FPS frev = this->rev();
-    FPS rhsrev = rhs.rev();
-    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
-    return *this = frev.div_rev_pre(rhsrev, inv).rev();
+    FPS rrev = rhs.rev();
+    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rrev).first.rev();
+    FPS inv = rrev.inv(this->size() - rhs.size() + 1);
+    return *this = frev.div_rev_pre(rrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
     if (this->size() < rhs.size()) return *this;
     FPS frev = this->rev();
-    FPS rhsrev = rhs.rev();
-    if (rhs.size() < 1150)
-      return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
-    return *this = frev.rem_rev_pre(rhsrev, inv).rev();
+    FPS rrev = rhs.rev();
+    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rrev).second.rev();
+    FPS inv = rrev.inv(frev.size() - rhs.size() + 1);
+    return *this = frev.rem_rev_pre(rrev, inv).rev();
   }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }     // O(1)
   FPS operator-(const mint &v) const { return FPS(*this) -= v; }     // O(1)
@@ -779,19 +778,18 @@ struct FormalPowerSeries : vector<mint> {
   FPS &operator/=(const FPS &rhs) {
     if (this->size() < rhs.size()) return *this = FPS();
     FPS frev = this->rev();
-    FPS rhsrev = rhs.rev();
-    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rhsrev).first.rev();
-    FPS inv = rhsrev.inv(this->size() - rhs.size() + 1);
-    return *this = frev.div_rev_pre(rhsrev, inv).rev();
+    FPS rrev = rhs.rev();
+    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rrev).first.rev();
+    FPS inv = rrev.inv(this->size() - rhs.size() + 1);
+    return *this = frev.div_rev_pre(rrev, inv).rev();
   }
   FPS &operator%=(const FPS &rhs) {
     if (this->size() < rhs.size()) return *this;
     FPS frev = this->rev();
-    FPS rhsrev = rhs.rev();
-    if (rhs.size() < 1150)
-      return *this = frev.divrem_rev_n(rhsrev).second.rev();
-    FPS inv = rhsrev.inv(frev.size() - rhs.size() + 1);
-    return *this = frev.rem_rev_pre(rhsrev, inv).rev();
+    FPS rrev = rhs.rev();
+    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rrev).second.rev();
+    FPS inv = rrev.inv(frev.size() - rhs.size() + 1);
+    return *this = frev.rem_rev_pre(rrev, inv).rev();
   }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }     // O(1)
   FPS operator-(const mint &v) const { return FPS(*this) -= v; }     // O(1)

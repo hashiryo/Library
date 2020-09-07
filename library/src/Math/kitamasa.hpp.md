@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-06 22:06:06+09:00
+    - Last commit date: 2020-09-08 01:13:46+09:00
 
 
 
@@ -70,7 +70,7 @@ using namespace std;
 
 // b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]
 // b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)
-// calc b[k]
+// return b[k]
 
 template <class Modint>
 Modint kitamasa(const vector<Modint> &c, const vector<Modint> &a, uint64_t k) {
