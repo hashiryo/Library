@@ -93,8 +93,8 @@ layout: default
 
 ### 幾何
 
-* :question: <a href="library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
-* :x: <a href="library/src/Geometry/arg_sort.hpp.html">偏角ソート</a>
+* :heavy_check_mark: <a href="library/src/Geometry/!geometry_temp.hpp.html">幾何テンプレ</a>
+* :heavy_check_mark: <a href="library/src/Geometry/arg_sort.hpp.html">偏角ソート</a>
 * :heavy_check_mark: <a href="library/src/Geometry/circle_functions.hpp.html">円のあれこれ</a>
 * :heavy_check_mark: <a href="library/src/Geometry/closest_pair.hpp.html">最近点対</a>
 
@@ -103,7 +103,7 @@ layout: default
 
 ### 数学
 
-* :question: <a href="library/src/Math/BigInt.hpp.html">多倍長整数</a>
+* :heavy_check_mark: <a href="library/src/Math/BigInt.hpp.html">多倍長整数</a>
 * :question: <a href="library/src/Math/Combination.hpp.html">組み合わせ</a>
 * :question: <a href="library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="library/src/Math/Matrix.hpp.html">行列</a>
@@ -113,7 +113,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
 * :heavy_check_mark: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
 * :x: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
-* :x: <a href="library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :question: <a href="library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 * :question: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
 * :x: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
 * :x: <a href="library/src/Math/number_theory.hpp.html">数論</a>
@@ -141,7 +141,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/1183.test.cpp.html">test/aoj/1183.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1190.test.cpp.html">test/aoj/1190.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1242.test.cpp.html">test/aoj/1242.test.cpp</a>
-* :x: <a href="verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1342.test.cpp.html">test/aoj/1342.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1508.RBT.test.cpp.html">test/aoj/1508.RBT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/1549.WM.test.cpp.html">test/aoj/1549.WM.test.cpp</a>
@@ -220,27 +220,27 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
-* :x: <a href="verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
-* :x: <a href="verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
-* :x: <a href="verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/aoj/PCK0366.test.cpp.html">test/aoj/PCK0366.test.cpp</a>
-* :x: <a href="verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/assignment.mcf.test.cpp.html">test/yosupo/assignment.mcf.test.cpp</a>
-* :x: <a href="verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/bernoulli.test.cpp.html">test/yosupo/bernoulli.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/bipartitematching.test.cpp.html">test/yosupo/bipartitematching.test.cpp</a>
-* :x: <a href="verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
-* :x: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/comp_of_FPS.test.cpp.html">test/yosupo/comp_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/convolution1000000007.test.cpp.html">test/yosupo/convolution1000000007.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/directedmst.test.cpp.html">test/yosupo/directedmst.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp.html">test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp</a>
-* :x: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/exp_of_FPS.test.cpp.html">test/yosupo/exp_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/find_linear_recurrence.test.cpp.html">test/yosupo/find_linear_recurrence.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/general_matching.test.cpp.html">test/yosupo/general_matching.test.cpp</a>
-* :x: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/inv_of_FPS.test.cpp.html">test/yosupo/inv_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/lca.LCT.test.cpp.html">test/yosupo/lca.LCT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/line_add_get_min.test.cpp.html">test/yosupo/line_add_get_min.test.cpp</a>
-* :x: <a href="verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
-* :x: <a href="verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yosupo/log_of_FPS.test.cpp.html">test/yosupo/log_of_FPS.test.cpp</a>
 * :x: <a href="verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/min_cost_b_flow.test.cpp.html">test/yosupo/min_cost_b_flow.test.cpp</a>
 * :x: <a href="verify/test/yosupo/multipoint_evaluation.test.cpp.html">test/yosupo/multipoint_evaluation.test.cpp</a>

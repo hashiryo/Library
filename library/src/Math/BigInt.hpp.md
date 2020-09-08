@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 多倍長整数
+# :heavy_check_mark: 多倍長整数
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/BigInt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-08 01:13:46+09:00
+    - Last commit date: 2020-09-08 12:38:30+09:00
 
 
 
@@ -41,9 +41,9 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/NTL_2_A.test.cpp.html">test/aoj/NTL_2_A.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/NTL_2_B.test.cpp.html">test/aoj/NTL_2_B.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/NTL_2_C.test.cpp.html">test/aoj/NTL_2_C.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
-* :x: <a href="../../../verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/NTL_2_D.test.cpp.html">test/aoj/NTL_2_D.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/NTL_2_E.test.cpp.html">test/aoj/NTL_2_E.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/NTL_2_F.test.cpp.html">test/aoj/NTL_2_F.test.cpp</a>
 
 
 ## Code
@@ -369,9 +369,10 @@ struct BigInt {
         blim = next_blim;
       }
     }
-    BigInt ret = (*this) * t;
+    BigInt ret = this->abs() * t;
     ret.dat = vector<int64_t>(ret.dat.begin() + dat.size(), ret.dat.end());
-    while ((ret + BigInt(1)) * b <= (*this)) ret += BigInt(1);
+    while ((ret + BigInt(1)) * b <= this->abs()) ret += BigInt(1);
+    ret.minus = this->minus ^ b.minus;
     ret.shrink();
     return ret;
   }
@@ -469,11 +470,11 @@ struct BigInt {
   }
   BigInt operator*(const BigInt &v) const { return this->mul(v); }
   BigInt operator/(const BigInt &v) const {
-    if (*this < v) return BigInt(0);
+    if (this->abs() < v.abs()) return BigInt(0);
     return dat.size() < 730 ? divmod(*this, v).first : quo(v);
   }
   BigInt operator%(const BigInt &v) const {
-    if (*this < v) return *this;
+    if (this->abs() < v.abs()) return *this;
     return dat.size() < 730 ? divmod(*this, v).second : *this - v * quo(v);
   }
   BigInt &operator+=(const BigInt &v) { return *this = *this + v; }
@@ -807,9 +808,10 @@ struct BigInt {
         blim = next_blim;
       }
     }
-    BigInt ret = (*this) * t;
+    BigInt ret = this->abs() * t;
     ret.dat = vector<int64_t>(ret.dat.begin() + dat.size(), ret.dat.end());
-    while ((ret + BigInt(1)) * b <= (*this)) ret += BigInt(1);
+    while ((ret + BigInt(1)) * b <= this->abs()) ret += BigInt(1);
+    ret.minus = this->minus ^ b.minus;
     ret.shrink();
     return ret;
   }
@@ -907,11 +909,11 @@ struct BigInt {
   }
   BigInt operator*(const BigInt &v) const { return this->mul(v); }
   BigInt operator/(const BigInt &v) const {
-    if (*this < v) return BigInt(0);
+    if (this->abs() < v.abs()) return BigInt(0);
     return dat.size() < 730 ? divmod(*this, v).first : quo(v);
   }
   BigInt operator%(const BigInt &v) const {
-    if (*this < v) return *this;
+    if (this->abs() < v.abs()) return *this;
     return dat.size() < 730 ? divmod(*this, v).second : *this - v * quo(v);
   }
   BigInt &operator+=(const BigInt &v) { return *this = *this + v; }

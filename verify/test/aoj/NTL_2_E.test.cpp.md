@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/aoj/NTL_2_E.test.cpp
+# :heavy_check_mark: test/aoj/NTL_2_E.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/NTL_2_E.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-08 01:13:46+09:00
+    - Last commit date: 2020-09-08 12:38:30+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_E</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Math/BigInt.hpp.html">多倍長整数</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/BigInt.hpp.html">多倍長整数</a>
 
 
 ## Code
@@ -398,9 +398,10 @@ struct BigInt {
         blim = next_blim;
       }
     }
-    BigInt ret = (*this) * t;
+    BigInt ret = this->abs() * t;
     ret.dat = vector<int64_t>(ret.dat.begin() + dat.size(), ret.dat.end());
-    while ((ret + BigInt(1)) * b <= (*this)) ret += BigInt(1);
+    while ((ret + BigInt(1)) * b <= this->abs()) ret += BigInt(1);
+    ret.minus = this->minus ^ b.minus;
     ret.shrink();
     return ret;
   }
@@ -498,11 +499,11 @@ struct BigInt {
   }
   BigInt operator*(const BigInt &v) const { return this->mul(v); }
   BigInt operator/(const BigInt &v) const {
-    if (*this < v) return BigInt(0);
+    if (this->abs() < v.abs()) return BigInt(0);
     return dat.size() < 730 ? divmod(*this, v).first : quo(v);
   }
   BigInt operator%(const BigInt &v) const {
-    if (*this < v) return *this;
+    if (this->abs() < v.abs()) return *this;
     return dat.size() < 730 ? divmod(*this, v).second : *this - v * quo(v);
   }
   BigInt &operator+=(const BigInt &v) { return *this = *this + v; }

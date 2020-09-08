@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 幾何テンプレ
+# :heavy_check_mark: 幾何テンプレ
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :x: <a href="arg_sort.hpp.html">偏角ソート</a>
+* :heavy_check_mark: <a href="arg_sort.hpp.html">偏角ソート</a>
 * :heavy_check_mark: <a href="circle_functions.hpp.html">円のあれこれ</a>
 * :heavy_check_mark: <a href="closest_pair.hpp.html">最近点対</a>
 
@@ -91,7 +91,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_G.test.cpp.html">test/aoj/CGL_7_G.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_H.test.cpp.html">test/aoj/CGL_7_H.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/CGL_7_I.test.cpp.html">test/aoj/CGL_7_I.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/argsort.test.cpp.html">test/yosupo/argsort.test.cpp</a>
 
 
 ## Code

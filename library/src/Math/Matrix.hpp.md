@@ -31,16 +31,16 @@ layout: default
 
 * category: <a href="../../../index.html#6e65831863dbf272b7a65cd8df1a440d">数学</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/Math/Matrix.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-06 22:06:06+09:00
+    - Last commit date: 2020-09-08 12:38:30+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/aoj/1328.test.cpp.html">test/aoj/1328.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/aoj/2397.test.cpp.html">test/aoj/2397.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/linear_equations.test.cpp.html">test/yosupo/linear_equations.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/matrix_det.test.cpp.html">test/yosupo/matrix_det.test.cpp</a>
 
 
@@ -160,7 +160,7 @@ struct Matrix {
       for (size_t k = j; k < m + l; k++) c[d][k] *= invc;
       for (size_t i = 0; i < n; i++) {
         if (i == d) continue;
-        for (size_t k = m + l - 1; k >= j; k--) c[i][k] -= c[i][j] * c[d][k];
+        for (int k = m + l - 1; k >= (int)j; k--) c[i][k] -= c[i][j] * c[d][k];
       }
       d++;
     }
@@ -341,7 +341,7 @@ struct Matrix {
       for (size_t k = j; k < m + l; k++) c[d][k] *= invc;
       for (size_t i = 0; i < n; i++) {
         if (i == d) continue;
-        for (size_t k = m + l - 1; k >= j; k--) c[i][k] -= c[i][j] * c[d][k];
+        for (int k = m + l - 1; k >= (int)j; k--) c[i][k] -= c[i][j] * c[d][k];
       }
       d++;
     }
