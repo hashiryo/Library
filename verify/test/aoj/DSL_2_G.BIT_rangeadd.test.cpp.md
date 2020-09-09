@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0d0c91c0cca30af9c1c9faef0cf04aa9">test/aoj</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/aoj/DSL_2_G.BIT_rangeadd.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 15:06:52+09:00
+    - Last commit date: 2020-09-09 18:34:56+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
@@ -121,6 +121,9 @@ struct BinaryIndexedTree_RangeAdd {
     for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;
     return s;
   }
+  // sum [l,r)
+  T sum(int l, int r) { return sum(r) - sum(l); }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 #line 9 "test/aoj/DSL_2_G.BIT_rangeadd.test.cpp"
 #undef call_from_test

@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: Binary-Indexed-Tree
+# :question: Binary-Indexed-Tree
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryIndexedTree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-06 22:06:06+09:00
+    - Last commit date: 2020-09-09 18:34:56+09:00
 
 
 
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/point_add_range_sum.BIT.test.cpp.html">test/yosupo/point_add_range_sum.BIT.test.cpp</a>
 * :x: <a href="../../../verify/test/yosupo/static_range_inversions_query.mo.test.cpp.html">test/yosupo/static_range_inversions_query.mo.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/738.BIT.test.cpp.html">test/yukicoder/738.BIT.test.cpp</a>
@@ -66,9 +66,10 @@ struct BinaryIndexedTree {
   vector<T> dat;
   BinaryIndexedTree(int n) : dat(n + 1, 0) {}
   BinaryIndexedTree(int n, T a) : BinaryIndexedTree(vector<T>(n, a)) {}
-  BinaryIndexedTree(vector<T> y) : dat(y.size() + 1) {
-    for (int i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
-    for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
+  BinaryIndexedTree(vector<T> y) : dat(y.size() + 1, 0) {
+    for (size_t i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
+    for (int i = 1; i < (int)dat.size(); ++i)
+      if (i + (i & -i) < (int)dat.size()) dat[i + (i & -i)] += dat[i];
   }
   void add(int i, T a = 1) {
     for (++i; i < (int)dat.size(); i += i & -i) dat[i] += a;
@@ -78,6 +79,9 @@ struct BinaryIndexedTree {
     for (; i > 0; i &= i - 1) s += dat[i];
     return s;
   }
+  // sum [l,r)
+  T sum(int l, int r) { return sum(r) - sum(l); }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
   // min { i : sum(i+1) > k } -> kth element(0-indexed)
   int find(T k) const {
     int i = 0;
@@ -85,7 +89,6 @@ struct BinaryIndexedTree {
       if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
     return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
-  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 ```
 {% endraw %}
@@ -111,9 +114,10 @@ struct BinaryIndexedTree {
   vector<T> dat;
   BinaryIndexedTree(int n) : dat(n + 1, 0) {}
   BinaryIndexedTree(int n, T a) : BinaryIndexedTree(vector<T>(n, a)) {}
-  BinaryIndexedTree(vector<T> y) : dat(y.size() + 1) {
-    for (int i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
-    for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
+  BinaryIndexedTree(vector<T> y) : dat(y.size() + 1, 0) {
+    for (size_t i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
+    for (int i = 1; i < (int)dat.size(); ++i)
+      if (i + (i & -i) < (int)dat.size()) dat[i + (i & -i)] += dat[i];
   }
   void add(int i, T a = 1) {
     for (++i; i < (int)dat.size(); i += i & -i) dat[i] += a;
@@ -123,6 +127,9 @@ struct BinaryIndexedTree {
     for (; i > 0; i &= i - 1) s += dat[i];
     return s;
   }
+  // sum [l,r)
+  T sum(int l, int r) { return sum(r) - sum(l); }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
   // min { i : sum(i+1) > k } -> kth element(0-indexed)
   int find(T k) const {
     int i = 0;
@@ -130,7 +137,6 @@ struct BinaryIndexedTree {
       if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
     return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
-  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 
 ```

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/point_add_range_sum.BIT.test.cpp
+# :heavy_check_mark: test/yosupo/point_add_range_sum.BIT.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#0b58406058f6619a0f31a172defc0230">test/yosupo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/test/yosupo/point_add_range_sum.BIT.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-06 22:06:06+09:00
+    - Last commit date: 2020-09-09 18:34:56+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :question: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 
 ## Code
@@ -108,9 +108,10 @@ struct BinaryIndexedTree {
   vector<T> dat;
   BinaryIndexedTree(int n) : dat(n + 1, 0) {}
   BinaryIndexedTree(int n, T a) : BinaryIndexedTree(vector<T>(n, a)) {}
-  BinaryIndexedTree(vector<T> y) : dat(y.size() + 1) {
-    for (int i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
-    for (int i = 1; i + (i & -i) < dat.size(); ++i) dat[i + (i & -i)] += dat[i];
+  BinaryIndexedTree(vector<T> y) : dat(y.size() + 1, 0) {
+    for (size_t i = 0; i < y.size(); ++i) dat[i + 1] = y[i];
+    for (int i = 1; i < (int)dat.size(); ++i)
+      if (i + (i & -i) < (int)dat.size()) dat[i + (i & -i)] += dat[i];
   }
   void add(int i, T a = 1) {
     for (++i; i < (int)dat.size(); i += i & -i) dat[i] += a;
@@ -120,6 +121,9 @@ struct BinaryIndexedTree {
     for (; i > 0; i &= i - 1) s += dat[i];
     return s;
   }
+  // sum [l,r)
+  T sum(int l, int r) { return sum(r) - sum(l); }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
   // min { i : sum(i+1) > k } -> kth element(0-indexed)
   int find(T k) const {
     int i = 0;
@@ -127,7 +131,6 @@ struct BinaryIndexedTree {
       if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i += p];
     return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions
   }
-  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 #line 8 "test/yosupo/point_add_range_sum.BIT.test.cpp"
 #undef call_from_test

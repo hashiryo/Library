@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#c1c7278649b583761cecd13e0628181d">データ構造</a>
 * <a href="{{ site.github.repository_url }}/blob/master/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 15:06:52+09:00
+    - Last commit date: 2020-09-09 18:34:56+09:00
 
 
 
@@ -76,6 +76,9 @@ struct BinaryIndexedTree_RangeAdd {
     for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;
     return s;
   }
+  // sum [l,r)
+  T sum(int l, int r) { return sum(r) - sum(l); }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 
 ```
@@ -114,6 +117,9 @@ struct BinaryIndexedTree_RangeAdd {
     for (int k = x; k > 0; k &= k - 1) s += dat2[k] * x;
     return s;
   }
+  // sum [l,r)
+  T sum(int l, int r) { return sum(r) - sum(l); }
+  T operator[](size_t k) { return sum(k + 1) - sum(k); }
 };
 
 ```
