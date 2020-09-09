@@ -39,7 +39,7 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="SubproductTree.hpp.html">複数の値代入と多項式補間</a>
-* :question: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :heavy_check_mark: <a href="fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 * :question: <a href="kitamasa.hpp.html">線形漸化式の高速計算</a>
 
 
@@ -58,10 +58,10 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/polynomial_interpolation.test.cpp.html">test/yosupo/polynomial_interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/pow_of_FPS.test.cpp.html">test/yosupo/pow_of_FPS.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/sharp_p_subset_sum.test.cpp.html">test/yosupo/sharp_p_subset_sum.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
-* :x: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/shift_of_FPS.test.cpp.html">test/yosupo/shift_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/sqrt_of_FPS.test.cpp.html">test/yosupo/sqrt_of_FPS.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/stirling_first.test.cpp.html">test/yosupo/stirling_first.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yosupo/stirling_second.test.cpp.html">test/yosupo/stirling_second.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
 * :x: <a href="../../../verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>

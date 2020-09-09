@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/static_range_inversions_query.mo.test.cpp
+# :heavy_check_mark: test/yosupo/static_range_inversions_query.mo.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Algorithm/Mo.hpp.html">Mo</a>
+* :heavy_check_mark: <a href="../../../library/src/Algorithm/Mo.hpp.html">Mo</a>
 * :question: <a href="../../../library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 
 

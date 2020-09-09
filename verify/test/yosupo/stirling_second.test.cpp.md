@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: test/yosupo/stirling_second.test.cpp
+# :heavy_check_mark: test/yosupo/stirling_second.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -41,7 +41,7 @@ layout: default
 
 * :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
-* :question: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 
 
 ## Code
