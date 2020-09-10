@@ -45,7 +45,7 @@ layout: default
 
 ### グラフ
 
-* :question: <a href="library/src/Graph/HeavyLightDecomposition.hpp.html">HL分解</a>
+* :heavy_check_mark: <a href="library/src/Graph/HeavyLightDecomposition.hpp.html">HL分解</a>
 * :heavy_check_mark: <a href="library/src/Graph/MatchingBipartite.hpp.html">最大マッチング(二部グラフ)</a>
 * :heavy_check_mark: <a href="library/src/Graph/MatchingGeneral.hpp.html">最大マッチング(一般グラフ)</a>
 * :heavy_check_mark: <a href="library/src/Graph/MaxFlow_Dinic.hpp.html">最大流(Dinic)</a>
@@ -53,7 +53,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningAborescense.hpp.html">最小全域有向木</a>
 * :heavy_check_mark: <a href="library/src/Graph/MinimumSpanningTree_Kruskal.hpp.html">最小全域木(Kruskal)</a>
 * :heavy_check_mark: <a href="library/src/Graph/StronglyConnectedComponents.hpp.html">強連結成分分解</a>
-* :question: <a href="library/src/Graph/Tree_DP.hpp.html">木DP</a>
+* :heavy_check_mark: <a href="library/src/Graph/Tree_DP.hpp.html">木DP</a>
 * :heavy_check_mark: <a href="library/src/Graph/TwoEdgeConnectedComponents.hpp.html">二重辺連結成分分解</a>
 
 
@@ -61,7 +61,7 @@ layout: default
 
 ### データ構造
 
-* :question: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree.hpp.html">Binary-Indexed-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_2D.hpp.html">Binary-Indexed-Tree(2次元)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">Binary-Indexed-Tree(区間加算)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/BinaryTrie.hpp.html">二分Trie</a>
@@ -70,7 +70,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree.hpp.html">Link-Cut-Tree(シンプル)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_Monoid.hpp.html">Link-Cut-Tree(モノイド)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidDual.hpp.html">Link-Cut-Tree(モノイド双対)</a>
-* :question: <a href="library/src/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/LinkCutTree_MonoidLazy.hpp.html">Link-Cut-Tree(モノイド遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/PersistentArray.hpp.html">永続配列</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RadixHeap.hpp.html">Radix-Heap</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/RedBlackTree.hpp.html">赤黒木</a>
@@ -80,7 +80,7 @@ layout: default
 * :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree.hpp.html">Segment-Tree</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree_Dual.hpp.html">Segment-Tree(双対)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree_Dynamic.hpp.html">Segment-Tree(動的)</a>
-* :question: <a href="library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
+* :heavy_check_mark: <a href="library/src/DataStructure/SegmentTree_Lazy.hpp.html">Segment-Tree(遅延伝搬)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SkewHeap.hpp.html">Skew-Heap</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/SparseTable.hpp.html">Sparse-Table(区間min)</a>
 * :heavy_check_mark: <a href="library/src/DataStructure/UnionFind.hpp.html">Union-Find</a>
@@ -105,18 +105,18 @@ layout: default
 
 * :heavy_check_mark: <a href="library/src/Math/BigInt.hpp.html">多倍長整数</a>
 * :heavy_check_mark: <a href="library/src/Math/Combination.hpp.html">組み合わせ</a>
-* :question: <a href="library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
 * :heavy_check_mark: <a href="library/src/Math/Matrix.hpp.html">行列</a>
-* :question: <a href="library/src/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
-* :question: <a href="library/src/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="library/src/Math/Matrix_mod2.hpp.html">行列(mod2)</a>
+* :heavy_check_mark: <a href="library/src/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="library/src/Math/SubproductTree.hpp.html">複数の値代入と多項式補間</a>
 * :heavy_check_mark: <a href="library/src/Math/TwoSatisfiability.hpp.html">2-SAT</a>
 * :heavy_check_mark: <a href="library/src/Math/berlekamp_massey.hpp.html">Berlekamp-Massey</a>
-* :question: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
+* :heavy_check_mark: <a href="library/src/Math/dujiao_sieve.hpp.html">杜教筛</a>
 * :heavy_check_mark: <a href="library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
-* :question: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
-* :question: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
-* :question: <a href="library/src/Math/number_theory.hpp.html">数論</a>
+* :heavy_check_mark: <a href="library/src/Math/kitamasa.hpp.html">線形漸化式の高速計算</a>
+* :heavy_check_mark: <a href="library/src/Math/lagrange_interpolation.hpp.html">ラグランジュ補間</a>
+* :heavy_check_mark: <a href="library/src/Math/number_theory.hpp.html">数論</a>
 
 
 <div id="a973a7fd4d27ccdfce027f329015f5da"></div>
@@ -272,34 +272,34 @@ layout: default
 * :heavy_check_mark: <a href="verify/test/yosupo/two_edge_connected_components.test.cpp.html">test/yosupo/two_edge_connected_components.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/two_sat.test.cpp.html">test/yosupo/two_sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yosupo/z_algorithm.test.cpp.html">test/yosupo/z_algorithm.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/184.test.cpp.html">test/yukicoder/184.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/235.HLD.test.cpp.html">test/yukicoder/235.HLD.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/235.LCT.test.cpp.html">test/yukicoder/235.LCT.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1019.dujiao.test.cpp.html">test/yukicoder/1019.dujiao.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1080.test.cpp.html">test/yukicoder/1080.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/1145.test.cpp.html">test/yukicoder/1145.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/184.test.cpp.html">test/yukicoder/184.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/235.HLD.test.cpp.html">test/yukicoder/235.HLD.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/235.LCT.test.cpp.html">test/yukicoder/235.LCT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/3046.test.cpp.html">test/yukicoder/3046.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/417.test.cpp.html">test/yukicoder/417.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/42.test.cpp.html">test/yukicoder/42.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/42.test.cpp.html">test/yukicoder/42.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/421.test.cpp.html">test/yukicoder/421.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/529.LCT.test.cpp.html">test/yukicoder/529.LCT.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/649.BIT.test.cpp.html">test/yukicoder/649.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.BinaryTrie.test.cpp.html">test/yukicoder/649.BinaryTrie.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree.test.cpp.html">test/yukicoder/649.SegTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/649.SegTree_Dynamic.test.cpp.html">test/yukicoder/649.SegTree_Dynamic.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/665.test.cpp.html">test/yukicoder/665.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/728.WM.test.cpp.html">test/yukicoder/728.WM.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/738.BIT.test.cpp.html">test/yukicoder/738.BIT.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/738.BIT.test.cpp.html">test/yukicoder/738.BIT.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/763.test.cpp.html">test/yukicoder/763.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/768.test.cpp.html">test/yukicoder/768.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/803.test.cpp.html">test/yukicoder/803.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/886.dujiao.test.cpp.html">test/yukicoder/886.dujiao.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
 * :heavy_check_mark: <a href="verify/test/yukicoder/919.WM.test.cpp.html">test/yukicoder/919.WM.test.cpp</a>
-* :x: <a href="verify/test/yukicoder/980.test.cpp.html">test/yukicoder/980.test.cpp</a>
+* :heavy_check_mark: <a href="verify/test/yukicoder/980.test.cpp.html">test/yukicoder/980.test.cpp</a>
 
 

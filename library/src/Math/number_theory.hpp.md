@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 数論
+# :heavy_check_mark: 数論
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -41,8 +41,8 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/yosupo/sum_of_totient_function.test.cpp.html">test/yosupo/sum_of_totient_function.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/644.test.cpp.html">test/yukicoder/644.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/886.numth.test.cpp.html">test/yukicoder/886.numth.test.cpp</a>
 
 
 ## Code

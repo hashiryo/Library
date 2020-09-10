@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 線形漸化式の高速計算
+# :heavy_check_mark: 線形漸化式の高速計算
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,14 +38,14 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="FormalPowerSeries.hpp.html">形式的冪級数</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/test/aoj/0168.test.cpp.html">test/aoj/0168.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
-* :x: <a href="../../../verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/215.test.cpp.html">test/yukicoder/215.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/658.test.cpp.html">test/yukicoder/658.test.cpp</a>
 
 
 ## Code

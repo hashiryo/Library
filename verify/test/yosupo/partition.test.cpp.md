@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
-* :question: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/FormalPowerSeries.hpp.html">形式的冪級数</a>
+* :heavy_check_mark: <a href="../../../library/src/Math/ModInt.hpp.html">ModInt</a>
 * :heavy_check_mark: <a href="../../../library/src/Math/fps_sequence.hpp.html">数列(形式的冪級数使用)</a>
 
 

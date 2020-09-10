@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :question: 木DP
+# :heavy_check_mark: 木DP
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/test/yukicoder/196.test.cpp.html">test/yukicoder/196.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/417.test.cpp.html">test/yukicoder/417.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/763.test.cpp.html">test/yukicoder/763.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/test/yukicoder/768.test.cpp.html">test/yukicoder/768.test.cpp</a>
