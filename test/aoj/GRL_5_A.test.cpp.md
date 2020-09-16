@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/ReRooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
@@ -36,7 +36,7 @@ data:
     \ return dp; })\n      : adj(N), op(op_), id(id_), lift(lift_), subdp(N, id_),\
     \ dp(N, id_) {}\n  void add_edge(int src, int dst, E d = E()) {\n    adj[src].emplace_back((Edge){dst,\
     \ d, id, id});\n  }\n  vector<T> run() {\n    dfs_sub(0, -1);\n    dfs_all(0,\
-    \ -1, e);\n    return dp;\n  }\n};\n#line 9 \"test/aoj/GRL_5_A.test.cpp\"\n#undef\
+    \ -1, id);\n    return dp;\n  }\n};\n#line 9 \"test/aoj/GRL_5_A.test.cpp\"\n#undef\
     \ call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int n;\n  cin >> n;\n  auto op = [](long long l, long long r) { return max(l,\
     \ r); };\n  auto lift = [](long long l, long long dat) { return l + dat; };\n\
@@ -61,8 +61,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_5_A.test.cpp
   requiredBy: []
-  timestamp: '2020-09-16 21:11:30+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-09-16 22:24:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_5_A.test.cpp
 layout: document

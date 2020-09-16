@@ -3,17 +3,17 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
   - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u5168\u65B9\u4F4D\u6728DP"
@@ -40,7 +40,7 @@ data:
     \ return dp; })\n      : adj(N), op(op_), id(id_), lift(lift_), subdp(N, id_),\
     \ dp(N, id_) {}\n  void add_edge(int src, int dst, E d = E()) {\n    adj[src].emplace_back((Edge){dst,\
     \ d, id, id});\n  }\n  vector<T> run() {\n    dfs_sub(0, -1);\n    dfs_all(0,\
-    \ -1, e);\n    return dp;\n  }\n};\n"
+    \ -1, id);\n    return dp;\n  }\n};\n"
   code: "/**\n * @title \u5168\u65B9\u4F4D\u6728DP\n * @category \u30B0\u30E9\u30D5\
     \n * @see https://ei1333.hateblo.jp/entry/2018/12/21/004022\n */\n\n#ifndef call_from_test\n\
     #include <bits/stdc++.h>\nusing namespace std;\n#endif\n\ntemplate <typename T,\
@@ -61,13 +61,13 @@ data:
     \ const E &dat) { return dp; })\n      : adj(N), op(op_), id(id_), lift(lift_),\
     \ subdp(N, id_), dp(N, id_) {}\n  void add_edge(int src, int dst, E d = E()) {\n\
     \    adj[src].emplace_back((Edge){dst, d, id, id});\n  }\n  vector<T> run() {\n\
-    \    dfs_sub(0, -1);\n    dfs_all(0, -1, e);\n    return dp;\n  }\n};\n"
+    \    dfs_sub(0, -1);\n    dfs_all(0, -1, id);\n    return dp;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/ReRooting.hpp
   requiredBy: []
-  timestamp: '2020-09-16 21:11:30+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-09-16 22:24:40+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp

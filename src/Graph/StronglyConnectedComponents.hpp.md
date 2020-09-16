@@ -7,8 +7,8 @@ data:
     title: 2-SAT
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/PCK0366.test.cpp
-    title: test/aoj/PCK0366.test.cpp
+    path: test/aoj/0366.test.cpp
+    title: test/aoj/0366.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
@@ -67,7 +67,7 @@ data:
   timestamp: '2020-08-26 21:11:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/PCK0366.test.cpp
+  - test/aoj/0366.test.cpp
   - test/yosupo/scc.test.cpp
   - test/yosupo/two_sat.test.cpp
 documentation_of: src/Graph/StronglyConnectedComponents.hpp
