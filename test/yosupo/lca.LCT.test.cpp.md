@@ -1,0 +1,73 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: src/DataStructure/LinkCutTree.hpp
+    title: "Link-Cut-Tree(\u30B7\u30F3\u30D7\u30EB)"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/lca
+    links:
+    - https://judge.yosupo.jp/problem/lca
+  bundledCode: "#line 1 \"test/yosupo/lca.LCT.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
+    \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#define call_from_test\n\
+    #line 1 \"src/DataStructure/LinkCutTree.hpp\"\n/**\n * @title Link-Cut-Tree(\u30B7\
+    \u30F3\u30D7\u30EB)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n\
+    \ */\n\n#ifndef call_from_test\n#line 9 \"src/DataStructure/LinkCutTree.hpp\"\n\
+    using namespace std;\n#endif\n\nstruct LinkCutTree {\n  struct Node {\n    Node\
+    \ *ch[2], *par;\n    bool rev;\n  };\n\n private:\n  bool is_root(Node *x) {\n\
+    \    return !x->par || (x->par->ch[0] != x && x->par->ch[1] != x);\n  }\n  bool\
+    \ dir(Node *x) { return x->par && x->par->ch[1] == x; }\n  void rot(Node *t) {\n\
+    \    Node *p = t->par;\n    bool d = dir(t);\n    if ((p->ch[d] = t->ch[!d]))\
+    \ t->ch[!d]->par = p;\n    t->ch[!d] = p;\n    t->par = p->par;\n    if (!is_root(p))\
+    \ p->par->ch[dir(p)] = t;\n    p->par = t;\n  }\n  void splay(Node *x) {\n   \
+    \ eval(x);\n    while (!is_root(x)) {\n      if (!is_root(x->par)) eval(x->par->par);\n\
+    \      eval(x->par);\n      eval(x);\n      if (!is_root(x->par)) {\n        if\
+    \ (dir(x) == dir(x->par))\n          rot(x->par);\n        else\n          rot(x);\n\
+    \      }\n      rot(x);\n    }\n  }\n  Node *expose(Node *x) {\n    Node *r =\
+    \ nullptr;\n    for (Node *p = x; p; p = p->par) {\n      splay(p);\n      p->ch[1]\
+    \ = r;\n      r = p;\n    }\n    splay(x);\n    return r;\n  }\n  void toggle(Node\
+    \ *t) {\n    swap(t->ch[0], t->ch[1]);\n    t->rev ^= true;\n  }\n  Node *eval(Node\
+    \ *t) {\n    if (t->rev) {\n      if (t->ch[0]) toggle(t->ch[0]);\n      if (t->ch[1])\
+    \ toggle(t->ch[1]);\n      t->rev = false;\n    }\n    return t;\n  }\n\n private:\n\
+    \  vector<Node> ns;\n  int linkcnt;\n\n public:\n  LinkCutTree(int n) : ns(n),\
+    \ linkcnt(0) {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n\
+    \    toggle(&ns[k]);\n    eval(&ns[k]);\n  }\n  // add link from c to p\n  void\
+    \ link(int c, int p) {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n\
+    \    expose(&ns[p]);\n    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n  }\n\
+    \  // cut link from c (to the root direction)\n  void cut(int c, int p) {\n  \
+    \  linkcnt--;\n    evert(p);\n    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n\
+    \    ns[c].ch[0] = y->par = nullptr;\n  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n\
+    \    Node *u = expose(&ns[y]);\n    return ns[x].par ? u - &ns[0] : -1;\n  }\n\
+    };\n#line 8 \"test/yosupo/lca.LCT.test.cpp\"\n#undef call_from_test\n\nsigned\
+    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N\
+    \ >> Q;\n  LinkCutTree lct(N);\n  for (int i = 1; i < N; i++) {\n    int p;\n\
+    \    cin >> p;\n    lct.link(i, p);\n  }\n  lct.evert(0);\n  while (Q--) {\n \
+    \   int u, v;\n    cin >> u >> v;\n    cout << lct.lca(u, v) << endl;\n  }\n \
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include <bits/stdc++.h>\n\
+    using namespace std;\n\n#define call_from_test\n#include \"src/DataStructure/LinkCutTree.hpp\"\
+    \n#undef call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree lct(N);\n  for (int i = 1; i < N;\
+    \ i++) {\n    int p;\n    cin >> p;\n    lct.link(i, p);\n  }\n  lct.evert(0);\n\
+    \  while (Q--) {\n    int u, v;\n    cin >> u >> v;\n    cout << lct.lca(u, v)\
+    \ << endl;\n  }\n  return 0;\n}\n"
+  dependsOn:
+  - src/DataStructure/LinkCutTree.hpp
+  isVerificationFile: true
+  path: test/yosupo/lca.LCT.test.cpp
+  requiredBy: []
+  timestamp: '2020-08-25 17:42:49+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: test/yosupo/lca.LCT.test.cpp
+layout: document
+redirect_from:
+- /verify/test/yosupo/lca.LCT.test.cpp
+- /verify/test/yosupo/lca.LCT.test.cpp.html
+title: test/yosupo/lca.LCT.test.cpp
+---
