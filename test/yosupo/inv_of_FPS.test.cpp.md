@@ -29,90 +29,93 @@ data:
     \ mul_inv(uint64_t n, int e = 6, uint64_t x = 1) {\n    return e == 0 ? x : mul_inv(n,\
     \ e - 1, x * (2 - x * n));\n  }\n\n public:\n  static constexpr uint64_t inv =\
     \ mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2 = -u128(mod) % mod;\n  static\
-    \ constexpr int level = __builtin_ctzll(mod - 1);\n  static_assert(inv * mod ==\
-    \ 1, \"invalid 1/M modulo 2^64.\");\n  Mod64() {}\n  Mod64(uint64_t n) : x(init(n)){};\n\
-    \  static uint64_t modulo() { return mod; }\n  static uint64_t init(uint64_t w)\
-    \ { return reduce(u128(w) * r2); }\n  static uint64_t reduce(const u128 w) {\n\
-    \    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w) * inv) * mod) >> 64);\n\
-    \  }\n  static Mod64 omega() { return Mod64(prim_root).pow((mod - 1) >> level);\
-    \ }\n  Mod64 &operator+=(Mod64 rhs) {\n    this->x += rhs.x;\n    return *this;\n\
-    \  }\n  Mod64 &operator-=(Mod64 rhs) {\n    this->x += 2 * mod - rhs.x;\n    return\
-    \ *this;\n  }\n  Mod64 &operator*=(Mod64 rhs) {\n    this->x = reduce(u128(this->x)\
-    \ * rhs.x);\n    return *this;\n  }\n  Mod64 operator+(Mod64 rhs) const { return\
-    \ Mod64(*this) += rhs; }\n  Mod64 operator-(Mod64 rhs) const { return Mod64(*this)\
-    \ -= rhs; }\n  Mod64 operator*(Mod64 rhs) const { return Mod64(*this) *= rhs;\
+    \ constexpr int level = __builtin_ctzll(mod - 1);\n  Mod64() {}\n  Mod64(uint64_t\
+    \ n) : x(init(n)){};\n  static uint64_t modulo() { return mod; }\n  static uint64_t\
+    \ init(uint64_t w) { return reduce(u128(w) * r2); }\n  static uint64_t reduce(const\
+    \ u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w) * inv) *\
+    \ mod) >> 64);\n  }\n  static Mod64 omega() { return Mod64(prim_root).pow((mod\
+    \ - 1) >> level); }\n  Mod64 &operator+=(Mod64 rhs) {\n    this->x += rhs.x;\n\
+    \    return *this;\n  }\n  Mod64 &operator-=(Mod64 rhs) {\n    this->x += 2 *\
+    \ mod - rhs.x;\n    return *this;\n  }\n  Mod64 &operator*=(Mod64 rhs) {\n   \
+    \ this->x = reduce(u128(this->x) * rhs.x);\n    return *this;\n  }\n  Mod64 &operator/=(Mod64\
+    \ rhs) { return *this *= rhs.inverse(); }\n  Mod64 operator+(Mod64 rhs) const\
+    \ { return Mod64(*this) += rhs; }\n  Mod64 operator-(Mod64 rhs) const { return\
+    \ Mod64(*this) -= rhs; }\n  Mod64 operator*(Mod64 rhs) const { return Mod64(*this)\
+    \ *= rhs; }\n  Mod64 operator/(Mod64 rhs) const { return Mod64(*this) /= rhs;\
     \ }\n  uint64_t get() const { return reduce(this->x) % mod; }\n  void set(uint64_t\
     \ n) const { this->x = n; }\n  Mod64 pow(uint64_t exp) const {\n    Mod64 ret\
     \ = Mod64(1);\n    for (Mod64 base = *this; exp; exp >>= 1, base *= base)\n  \
     \    if (exp & 1) ret *= base;\n    return ret;\n  }\n  Mod64 inverse() const\
-    \ { return pow(mod - 2); }\n  uint64_t x;\n};\ntemplate <typename mod_t>\nvoid\
-    \ convolute(mod_t *A, int s1, mod_t *B, int s2, bool cyclic = false) {\n  int\
-    \ s = (cyclic ? max(s1, s2) : s1 + s2 - 1);\n  int size = 1;\n  while (size <\
-    \ s) size <<= 1;\n  mod_t roots[mod_t::level] = {mod_t::omega()};\n  for (int\
-    \ i = 1; i < mod_t::level; i++) roots[i] = roots[i - 1] * roots[i - 1];\n  fill(A\
-    \ + s1, A + size, 0);\n  ntt_dit4(A, size, 1, roots);\n  if (A == B && s1 == s2)\
-    \ {\n    for (int i = 0; i < size; i++) A[i] *= A[i];\n  } else {\n    fill(B\
-    \ + s2, B + size, 0);\n    ntt_dit4(B, size, 1, roots);\n    for (int i = 0; i\
-    \ < size; i++) A[i] *= B[i];\n  }\n  ntt_dit4(A, size, -1, roots);\n  mod_t inv\
-    \ = mod_t(size).inverse();\n  for (int i = 0; i < (cyclic ? size : s); i++) A[i]\
-    \ *= inv;\n}\ntemplate <typename mod_t>\nvoid rev_permute(mod_t *A, int n) {\n\
-    \  int r = 0, nh = n >> 1;\n  for (int i = 1; i < n; i++) {\n    int h = nh;\n\
-    \    while (!((r ^= h) & h)) h >>= 1;\n    if (r > i) swap(A[i], A[r]);\n  }\n\
-    }\ntemplate <typename mod_t>\nvoid ntt_dit4(mod_t *A, int n, int sign, mod_t *roots)\
-    \ {\n  rev_permute(A, n);\n  int logn = __builtin_ctz(n);\n  if (logn & 1)\n \
-    \   for (int i = 0; i < n; i += 2) {\n      mod_t a = A[i], b = A[i + 1];\n  \
-    \    A[i] = a + b, A[i + 1] = a - b;\n    }\n  mod_t imag = roots[mod_t::level\
-    \ - 2];\n  if (sign < 0) imag = imag.inverse();\n  mod_t one = mod_t(1);\n  for\
-    \ (int e = 2 + (logn & 1); e < logn + 1; e += 2) {\n    const int m = 1 << e;\n\
-    \    const int m4 = m >> 2;\n    mod_t dw = roots[mod_t::level - e];\n    if (sign\
-    \ < 0) dw = dw.inverse();\n    const int block_size = max(m, (1 << 15) / int(sizeof(A[0])));\n\
-    \    for (int k = 0; k < n; k += block_size) {\n      mod_t w = one, w2 = one,\
-    \ w3 = one;\n      for (int j = 0; j < m4; j++) {\n        for (int i = k + j;\
-    \ i < k + block_size; i += m) {\n          mod_t a0 = A[i + m4 * 0] * one, a2\
-    \ = A[i + m4 * 1] * w2;\n          mod_t a1 = A[i + m4 * 2] * w, a3 = A[i + m4\
-    \ * 3] * w3;\n          mod_t t02 = a0 + a2, t13 = a1 + a3;\n          A[i + m4\
-    \ * 0] = t02 + t13, A[i + m4 * 2] = t02 - t13;\n          t02 = a0 - a2, t13 =\
-    \ (a1 - a3) * imag;\n          A[i + m4 * 1] = t02 + t13, A[i + m4 * 3] = t02\
-    \ - t13;\n        }\n        w *= dw, w2 = w * w, w3 = w2 * w;\n      }\n    }\n\
-    \  }\n}\nconst int size = 1 << 22;\nusing m64_1 = ntt::Mod64<34703335751681, 3>;\n\
-    using m64_2 = ntt::Mod64<35012573396993, 3>;\nm64_1 f1[size], g1[size];\nm64_2\
-    \ f2[size], g2[size];\n\n}  // namespace ntt\n\ntemplate <typename mint>\nstruct\
-    \ FormalPowerSeries : vector<mint> {\n  using FPS = FormalPowerSeries;\n  using\
-    \ vector<mint>::vector;\n\n public:\n  void shrink() {\n    while (this->size()\
-    \ && this->back() == mint(0)) this->pop_back();\n  }\n  FPS part(int beg, int\
-    \ end = -1) const {\n    if (end < 0) end = beg, beg = 0;\n    FPS ret(end - beg);\n\
-    \    for (int i = beg; i < min(end, int(this->size())); i++)\n      ret[i - beg]\
-    \ = (*this)[i];\n    return ret;\n  }\n  FPS pre(int sz) const {\n    FPS ret(this->begin(),\
-    \ this->begin() + min(sz, int(this->size())));\n    ret.shrink();\n    return\
-    \ ret;\n  }\n  size_t ctz() const {\n    for (size_t i = 0; i < this->size();\
-    \ i++)\n      if ((*this)[i] != mint(0)) return i;\n    return this->size();\n\
-    \  }\n  FPS operator>>(size_t size) const {\n    if (this->size() <= size) return\
-    \ {};\n    return FPS(this->begin() + size, this->end());\n  }\n  FPS operator<<(size_t\
-    \ size) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(), size, mint(0));\n\
-    \    return ret;\n  }\n  FPS rev() const { return FPS(this->rbegin(), this->rend());\
-    \ }\n  FPS operator-() {\n    FPS ret(*this);\n    for (int i = 0; i < (int)ret.size();\
-    \ i++) ret[i] = -ret[i];\n    return ret;\n  }\n  FPS &operator+=(const mint &v)\
-    \ {\n    (*this)[0] += v;\n    return *this;\n  }\n  FPS &operator-=(const mint\
-    \ &v) {\n    (*this)[0] -= v;\n    return *this;\n  }\n  FPS &operator*=(const\
-    \ mint &v) {\n    for (size_t k = 0; k < this->size(); k++) (*this)[k] *= v;\n\
-    \    return *this;\n  }\n  FPS &operator/=(const mint &v) {\n    *this *= mint(1)\
-    \ / v;\n    return *this;\n  }\n  FPS &operator+=(const FPS &rhs) {\n    if (this->size()\
-    \ < rhs.size()) this->resize(rhs.size());\n    for (int i = 0; i < (int)rhs.size();\
-    \ i++) (*this)[i] += rhs[i];\n    return *this;\n  }\n  FPS &operator-=(const\
-    \ FPS &rhs) {\n    if (this->size() < rhs.size()) this->resize(rhs.size());\n\
-    \    for (int i = 0; i < (int)rhs.size(); i++) (*this)[i] -= rhs[i];\n    return\
-    \ *this;\n  }\n  FPS &operator*=(const FPS &rhs) {\n    size_t f_min = this->ctz(),\
-    \ g_min = rhs.ctz();\n    if (f_min == this->size() || g_min == rhs.size())\n\
-    \      return *this = FPS(this->size() + rhs.size());\n    return *this = ((*this\
-    \ >> f_min).mul(rhs >> g_min) << (f_min + g_min));\n  }\n  FPS &operator/=(const\
-    \ FPS &rhs) {\n    if (this->size() < rhs.size()) return *this = FPS();\n    FPS\
-    \ frev = this->rev();\n    FPS rrev = rhs.rev();\n    if (rhs.size() < 1150) return\
-    \ *this = frev.divrem_rev_n(rrev).first.rev();\n    FPS inv = rrev.inv(this->size()\
-    \ - rhs.size() + 1);\n    return *this = frev.div_rev_pre(rrev, inv).rev();\n\
-    \  }\n  FPS &operator%=(const FPS &rhs) {\n    if (this->size() < rhs.size())\
-    \ return *this;\n    FPS frev = this->rev();\n    FPS rrev = rhs.rev();\n    if\
-    \ (rhs.size() < 1150) return *this = frev.divrem_rev_n(rrev).second.rev();\n \
-    \   FPS inv = rrev.inv(frev.size() - rhs.size() + 1);\n    return *this = frev.rem_rev_pre(rrev,\
+    \ { return pow(mod - 2); }\n  uint64_t x;\n  friend ostream &operator<<(ostream\
+    \ &os, const Mod64 &p) {\n    return os << p.get();\n  }\n  friend istream &operator>>(istream\
+    \ &is, Mod64 &a) {\n    int64_t t;\n    is >> t;\n    a = Mod64<mod, prim_root>(t);\n\
+    \    return (is);\n  }\n};\ntemplate <typename mod_t>\nvoid convolute(mod_t *A,\
+    \ int s1, mod_t *B, int s2, bool cyclic = false) {\n  int s = (cyclic ? max(s1,\
+    \ s2) : s1 + s2 - 1);\n  int size = 1;\n  while (size < s) size <<= 1;\n  mod_t\
+    \ roots[mod_t::level] = {mod_t::omega()};\n  for (int i = 1; i < mod_t::level;\
+    \ i++) roots[i] = roots[i - 1] * roots[i - 1];\n  fill(A + s1, A + size, 0);\n\
+    \  ntt_dit4(A, size, 1, roots);\n  if (A == B && s1 == s2) {\n    for (int i =\
+    \ 0; i < size; i++) A[i] *= A[i];\n  } else {\n    fill(B + s2, B + size, 0);\n\
+    \    ntt_dit4(B, size, 1, roots);\n    for (int i = 0; i < size; i++) A[i] *=\
+    \ B[i];\n  }\n  ntt_dit4(A, size, -1, roots);\n  mod_t inv = mod_t(size).inverse();\n\
+    \  for (int i = 0; i < (cyclic ? size : s); i++) A[i] *= inv;\n}\ntemplate <typename\
+    \ mod_t>\nvoid rev_permute(mod_t *A, int n) {\n  int r = 0, nh = n >> 1;\n  for\
+    \ (int i = 1; i < n; i++) {\n    int h = nh;\n    while (!((r ^= h) & h)) h >>=\
+    \ 1;\n    if (r > i) swap(A[i], A[r]);\n  }\n}\ntemplate <typename mod_t>\nvoid\
+    \ ntt_dit4(mod_t *A, int n, int sign, mod_t *roots) {\n  rev_permute(A, n);\n\
+    \  int logn = __builtin_ctz(n);\n  if (logn & 1)\n    for (int i = 0; i < n; i\
+    \ += 2) {\n      mod_t a = A[i], b = A[i + 1];\n      A[i] = a + b, A[i + 1] =\
+    \ a - b;\n    }\n  mod_t imag = roots[mod_t::level - 2];\n  if (sign < 0) imag\
+    \ = imag.inverse();\n  mod_t one = mod_t(1);\n  for (int e = 2 + (logn & 1); e\
+    \ < logn + 1; e += 2) {\n    const int m = 1 << e;\n    const int m4 = m >> 2;\n\
+    \    mod_t dw = roots[mod_t::level - e];\n    if (sign < 0) dw = dw.inverse();\n\
+    \    const int block_size = max(m, (1 << 15) / int(sizeof(A[0])));\n    for (int\
+    \ k = 0; k < n; k += block_size) {\n      mod_t w = one, w2 = one, w3 = one;\n\
+    \      for (int j = 0; j < m4; j++) {\n        for (int i = k + j; i < k + block_size;\
+    \ i += m) {\n          mod_t a0 = A[i + m4 * 0] * one, a2 = A[i + m4 * 1] * w2;\n\
+    \          mod_t a1 = A[i + m4 * 2] * w, a3 = A[i + m4 * 3] * w3;\n          mod_t\
+    \ t02 = a0 + a2, t13 = a1 + a3;\n          A[i + m4 * 0] = t02 + t13, A[i + m4\
+    \ * 2] = t02 - t13;\n          t02 = a0 - a2, t13 = (a1 - a3) * imag;\n      \
+    \    A[i + m4 * 1] = t02 + t13, A[i + m4 * 3] = t02 - t13;\n        }\n      \
+    \  w *= dw, w2 = w * w, w3 = w2 * w;\n      }\n    }\n  }\n}\nconst int size =\
+    \ 1 << 22;\nusing m64_1 = ntt::Mod64<34703335751681, 3>;\nusing m64_2 = ntt::Mod64<35012573396993,\
+    \ 3>;\nm64_1 f1[size], g1[size];\nm64_2 f2[size], g2[size];\n\n}  // namespace\
+    \ ntt\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
+    \  using FPS = FormalPowerSeries;\n  using vector<mint>::vector;\n\n public:\n\
+    \  void shrink() {\n    while (this->size() && this->back() == mint(0)) this->pop_back();\n\
+    \  }\n  FPS part(int beg, int end = -1) const {\n    if (end < 0) end = beg, beg\
+    \ = 0;\n    FPS ret(end - beg);\n    for (int i = beg; i < min(end, int(this->size()));\
+    \ i++)\n      ret[i - beg] = (*this)[i];\n    return ret;\n  }\n  FPS pre(int\
+    \ sz) const {\n    FPS ret(this->begin(), this->begin() + min(sz, int(this->size())));\n\
+    \    ret.shrink();\n    return ret;\n  }\n  size_t ctz() const {\n    for (size_t\
+    \ i = 0; i < this->size(); i++)\n      if ((*this)[i].get() != 0) return i;\n\
+    \    return this->size();\n  }\n  FPS operator>>(size_t size) const {\n    if\
+    \ (this->size() <= size) return {};\n    return FPS(this->begin() + size, this->end());\n\
+    \  }\n  FPS operator<<(size_t size) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
+    \ size, mint(0));\n    return ret;\n  }\n  FPS rev() const { return FPS(this->rbegin(),\
+    \ this->rend()); }\n  FPS operator-() {\n    FPS ret(*this);\n    for (int i =\
+    \ 0; i < (int)ret.size(); i++) ret[i] = -ret[i];\n    return ret;\n  }\n  FPS\
+    \ &operator+=(const mint &v) {\n    (*this)[0] += v;\n    return *this;\n  }\n\
+    \  FPS &operator-=(const mint &v) {\n    (*this)[0] -= v;\n    return *this;\n\
+    \  }\n  FPS &operator*=(const mint &v) {\n    for (size_t k = 0; k < this->size();\
+    \ k++) (*this)[k] *= v;\n    return *this;\n  }\n  FPS &operator/=(const mint\
+    \ &v) {\n    *this *= mint(1) / v;\n    return *this;\n  }\n  FPS &operator+=(const\
+    \ FPS &rhs) {\n    if (this->size() < rhs.size()) this->resize(rhs.size(), mint(0));\n\
+    \    for (int i = 0; i < (int)rhs.size(); i++) (*this)[i] += rhs[i];\n    return\
+    \ *this;\n  }\n  FPS &operator-=(const FPS &rhs) {\n    if (this->size() < rhs.size())\
+    \ this->resize(rhs.size(), mint(0));\n    for (int i = 0; i < (int)rhs.size();\
+    \ i++) (*this)[i] -= rhs[i];\n    return *this;\n  }\n  FPS &operator*=(const\
+    \ FPS &rhs) {\n    size_t f_min = this->ctz(), g_min = rhs.ctz();\n    if (f_min\
+    \ == this->size() || g_min == rhs.size())\n      return *this = FPS(this->size()\
+    \ + rhs.size());\n    return *this = ((*this >> f_min).mul(rhs >> g_min) << (f_min\
+    \ + g_min));\n  }\n  FPS &operator/=(const FPS &rhs) {\n    if (this->size() <\
+    \ rhs.size()) return *this = FPS();\n    FPS frev = this->rev();\n    FPS rrev\
+    \ = rhs.rev();\n    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rrev).first.rev();\n\
+    \    FPS inv = rrev.inv(this->size() - rhs.size() + 1);\n    return *this = frev.div_rev_pre(rrev,\
+    \ inv).rev();\n  }\n  FPS &operator%=(const FPS &rhs) {\n    if (this->size()\
+    \ < rhs.size()) return *this;\n    FPS frev = this->rev();\n    FPS rrev = rhs.rev();\n\
+    \    if (rhs.size() < 1150) return *this = frev.divrem_rev_n(rrev).second.rev();\n\
+    \    FPS inv = rrev.inv(frev.size() - rhs.size() + 1);\n    return *this = frev.rem_rev_pre(rrev,\
     \ inv).rev();\n  }\n  FPS operator+(const mint &v) const { return FPS(*this) +=\
     \ v; }     // O(1)\n  FPS operator-(const mint &v) const { return FPS(*this) -=\
     \ v; }     // O(1)\n  FPS operator*(const mint &v) const { return FPS(*this) *=\
@@ -284,7 +287,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2020-09-16 21:11:30+09:00'
+  timestamp: '2020-09-20 18:21:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_FPS.test.cpp

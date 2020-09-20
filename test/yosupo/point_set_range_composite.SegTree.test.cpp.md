@@ -24,7 +24,8 @@ data:
     \u3066\u3044\u306A\u3044(\u30E1\u30E2\u30EA\u7BC0\u7D04)\n */\n\n// 2\u51AA\u306B\
     \u3059\u308B\u306E\u3084\u3081\u3066\u4E8C\u6B21\u5143array(10x10)\u3092\u306E\
     \u305B\u308B\u3053\u3068\u306B\u6210\u529F\n// https://atcoder.jp/contests/arc027/tasks/arc027_4\n\
-    \n#ifndef call_from_test\n#line 13 \"src/DataStructure/SegmentTree.hpp\"\nusing\
+    \n// find_left, find_right verify\n// https://atcoder.jp/contests/code-festival-2014-qualb/tasks/code_festival_qualB_d\n\
+    \n#ifndef call_from_test\n#line 16 \"src/DataStructure/SegmentTree.hpp\"\nusing\
     \ namespace std;\n#endif\n\ntemplate <typename M>\nstruct SegmentTree {\n  using\
     \ T = typename M::T;\n\n private:\n  const int n;\n  vector<T> dat;\n\n public:\n\
     \  SegmentTree() {}\n  SegmentTree(int n_) : n(n_), dat(n << 1, M::ti()) {}\n\
@@ -115,7 +116,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2020-09-16 21:11:30+09:00'
+  timestamp: '2020-09-20 18:21:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp

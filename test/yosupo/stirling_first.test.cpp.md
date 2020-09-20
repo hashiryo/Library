@@ -44,7 +44,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_first.test.cpp
   requiredBy: []
-  timestamp: '2020-09-16 21:11:30+09:00'
+  timestamp: '2020-09-20 18:21:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_first.test.cpp

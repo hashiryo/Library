@@ -4,49 +4,47 @@ data:
   - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':question:'
-    path: src/Math/ModInt.hpp
-    title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/980
+    PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
     links:
-    - https://yukicoder.me/problems/no/980
-  bundledCode: "#line 1 \"test/yukicoder/980.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/980\"\
-    \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#define call_from_test\n\
-    #line 1 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
-    \u7D1A\u6570\n * @category \u6570\u5B66\n *  mod=998244353\u3068\u304B\u3067\u306A\
-    \u3044\u7D20\u6570mod\u306EModInt<mod>\u3067\u3082\u4F7F\u3048\u308B\n *  ntt\u306E\
-    \u914D\u5217\u306E\u30B5\u30A4\u30BA\u306B\u6CE8\u610F(RE\u306E\u539F\u56E0\u306B\
-    \u306A\u308A\u304C\u3061)\n */\n// verify\u7528: https://loj.ac/problem/150\n\n\
-    #ifndef call_from_test\n#line 11 \"src/Math/FormalPowerSeries.hpp\"\nusing namespace\
-    \ std;\n#endif\n\nnamespace ntt {\ntemplate <uint64_t mod, uint64_t prim_root>\n\
-    class Mod64 {\n private:\n  using u128 = __uint128_t;\n  static constexpr uint64_t\
-    \ mul_inv(uint64_t n, int e = 6, uint64_t x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n\n public:\n  static constexpr uint64_t inv =\
-    \ mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2 = -u128(mod) % mod;\n  static\
-    \ constexpr int level = __builtin_ctzll(mod - 1);\n  Mod64() {}\n  Mod64(uint64_t\
-    \ n) : x(init(n)){};\n  static uint64_t modulo() { return mod; }\n  static uint64_t\
-    \ init(uint64_t w) { return reduce(u128(w) * r2); }\n  static uint64_t reduce(const\
-    \ u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w) * inv) *\
-    \ mod) >> 64);\n  }\n  static Mod64 omega() { return Mod64(prim_root).pow((mod\
-    \ - 1) >> level); }\n  Mod64 &operator+=(Mod64 rhs) {\n    this->x += rhs.x;\n\
-    \    return *this;\n  }\n  Mod64 &operator-=(Mod64 rhs) {\n    this->x += 2 *\
-    \ mod - rhs.x;\n    return *this;\n  }\n  Mod64 &operator*=(Mod64 rhs) {\n   \
-    \ this->x = reduce(u128(this->x) * rhs.x);\n    return *this;\n  }\n  Mod64 &operator/=(Mod64\
-    \ rhs) { return *this *= rhs.inverse(); }\n  Mod64 operator+(Mod64 rhs) const\
-    \ { return Mod64(*this) += rhs; }\n  Mod64 operator-(Mod64 rhs) const { return\
-    \ Mod64(*this) -= rhs; }\n  Mod64 operator*(Mod64 rhs) const { return Mod64(*this)\
-    \ *= rhs; }\n  Mod64 operator/(Mod64 rhs) const { return Mod64(*this) /= rhs;\
-    \ }\n  uint64_t get() const { return reduce(this->x) % mod; }\n  void set(uint64_t\
-    \ n) const { this->x = n; }\n  Mod64 pow(uint64_t exp) const {\n    Mod64 ret\
-    \ = Mod64(1);\n    for (Mod64 base = *this; exp; exp >>= 1, base *= base)\n  \
-    \    if (exp & 1) ret *= base;\n    return ret;\n  }\n  Mod64 inverse() const\
-    \ { return pow(mod - 2); }\n  uint64_t x;\n  friend ostream &operator<<(ostream\
+    - https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
+  bundledCode: "#line 1 \"test/yosupo/frequency_table_of_tree_distance.test.cpp\"\n\
+    #define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
+    \n\n// \u6728\u306E\u91CD\u5FC3\u5206\u89E3\n\n#include <bits/stdc++.h>\nusing\
+    \ namespace std;\n\n#define call_from_test\n#line 1 \"src/Math/FormalPowerSeries.hpp\"\
+    \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
+    \n *  mod=998244353\u3068\u304B\u3067\u306A\u3044\u7D20\u6570mod\u306EModInt<mod>\u3067\
+    \u3082\u4F7F\u3048\u308B\n *  ntt\u306E\u914D\u5217\u306E\u30B5\u30A4\u30BA\u306B\
+    \u6CE8\u610F(RE\u306E\u539F\u56E0\u306B\u306A\u308A\u304C\u3061)\n */\n// verify\u7528\
+    : https://loj.ac/problem/150\n\n#ifndef call_from_test\n#line 11 \"src/Math/FormalPowerSeries.hpp\"\
+    \nusing namespace std;\n#endif\n\nnamespace ntt {\ntemplate <uint64_t mod, uint64_t\
+    \ prim_root>\nclass Mod64 {\n private:\n  using u128 = __uint128_t;\n  static\
+    \ constexpr uint64_t mul_inv(uint64_t n, int e = 6, uint64_t x = 1) {\n    return\
+    \ e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n\n public:\n  static\
+    \ constexpr uint64_t inv = mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2\
+    \ = -u128(mod) % mod;\n  static constexpr int level = __builtin_ctzll(mod - 1);\n\
+    \  Mod64() {}\n  Mod64(uint64_t n) : x(init(n)){};\n  static uint64_t modulo()\
+    \ { return mod; }\n  static uint64_t init(uint64_t w) { return reduce(u128(w)\
+    \ * r2); }\n  static uint64_t reduce(const u128 w) {\n    return uint64_t(w >>\
+    \ 64) + mod - ((u128(uint64_t(w) * inv) * mod) >> 64);\n  }\n  static Mod64 omega()\
+    \ { return Mod64(prim_root).pow((mod - 1) >> level); }\n  Mod64 &operator+=(Mod64\
+    \ rhs) {\n    this->x += rhs.x;\n    return *this;\n  }\n  Mod64 &operator-=(Mod64\
+    \ rhs) {\n    this->x += 2 * mod - rhs.x;\n    return *this;\n  }\n  Mod64 &operator*=(Mod64\
+    \ rhs) {\n    this->x = reduce(u128(this->x) * rhs.x);\n    return *this;\n  }\n\
+    \  Mod64 &operator/=(Mod64 rhs) { return *this *= rhs.inverse(); }\n  Mod64 operator+(Mod64\
+    \ rhs) const { return Mod64(*this) += rhs; }\n  Mod64 operator-(Mod64 rhs) const\
+    \ { return Mod64(*this) -= rhs; }\n  Mod64 operator*(Mod64 rhs) const { return\
+    \ Mod64(*this) *= rhs; }\n  Mod64 operator/(Mod64 rhs) const { return Mod64(*this)\
+    \ /= rhs; }\n  uint64_t get() const { return reduce(this->x) % mod; }\n  void\
+    \ set(uint64_t n) const { this->x = n; }\n  Mod64 pow(uint64_t exp) const {\n\
+    \    Mod64 ret = Mod64(1);\n    for (Mod64 base = *this; exp; exp >>= 1, base\
+    \ *= base)\n      if (exp & 1) ret *= base;\n    return ret;\n  }\n  Mod64 inverse()\
+    \ const { return pow(mod - 2); }\n  uint64_t x;\n  friend ostream &operator<<(ostream\
     \ &os, const Mod64 &p) {\n    return os << p.get();\n  }\n  friend istream &operator>>(istream\
     \ &is, Mod64 &a) {\n    int64_t t;\n    is >> t;\n    a = Mod64<mod, prim_root>(t);\n\
     \    return (is);\n  }\n};\ntemplate <typename mod_t>\nvoid convolute(mod_t *A,\
@@ -244,58 +242,64 @@ data:
     \ FPS ret;\n    for (int i = 0, b = deg / k + 1; i < b; i++) {\n      ret += (fp\
     \ * qpw).pre(deg) / fact;\n      fp = ((fp.diff() >> xpw) * tmp).pre(deg);\n \
     \     qpw = (qpw * q).pre(deg);\n      fact *= i + 1;\n    }\n    return ret.part(deg);\n\
-    \  }\n};\n#line 1 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category\
-    \ \u6570\u5B66\n */\n\n#ifndef call_from_test\n#line 8 \"src/Math/ModInt.hpp\"\
-    \nusing namespace std;\n#endif\n\ntemplate <int mod>\nstruct ModInt {\n  int64_t\
-    \ x;\n  ModInt() : x(0) {}\n  ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod -\
-    \ (-y) % mod)) {}\n  ModInt &operator+=(const ModInt &p) {\n    if ((x += p.x)\
-    \ >= mod) x -= mod;\n    return *this;\n  }\n  ModInt &operator-=(const ModInt\
-    \ &p) {\n    if ((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\
-    \  ModInt &operator*=(const ModInt &p) {\n    x = (int)(1LL * x * p.x % mod);\n\
-    \    return *this;\n  }\n  ModInt &operator/=(const ModInt &p) { return *this\
-    \ *= p.inverse(); }\n  ModInt operator-() const { return ModInt() - *this; }\n\
-    \  ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }\n  ModInt\
-    \ operator-(const ModInt &p) const { return ModInt(*this) -= p; }\n  ModInt operator*(const\
-    \ ModInt &p) const { return ModInt(*this) *= p; }\n  ModInt operator/(const ModInt\
-    \ &p) const { return ModInt(*this) /= p; }\n  bool operator==(const ModInt &p)\
-    \ const { return x == p.x; }\n  bool operator!=(const ModInt &p) const { return\
-    \ x != p.x; }\n  ModInt inverse() const {\n    int a = x, b = mod, u = 1, v =\
-    \ 0, t;\n    while (b) t = a / b, swap(a -= t * b, b), swap(u -= t * v, v);\n\
-    \    return ModInt(u);\n  }\n  ModInt pow(int64_t e) const {\n    ModInt ret(1);\n\
-    \    for (ModInt b = *this; e; e >>= 1, b *= b)\n      if (e & 1) ret *= b;\n\
-    \    return ret;\n  }\n  friend ostream &operator<<(ostream &os, const ModInt\
-    \ &p) { return os << p.x; }\n  friend istream &operator>>(istream &is, ModInt\
-    \ &a) {\n    int64_t t;\n    is >> t;\n    a = ModInt<mod>(t);\n    return (is);\n\
-    \  }\n  static int modulo() { return mod; }\n  int get() const { return x; }\n\
-    };\n#line 9 \"test/yukicoder/980.test.cpp\"\n#undef call_from_test\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<int(1e9\
-    \ + 7)>;\n  using FPS = FormalPowerSeries<Mint>;\n  Mint p;\n  cin >> p;\n  int\
-    \ q_max = 2000000;\n  FPS a(q_max);\n  a[0] = 0;\n  a[1] = 1;\n  for (int i =\
-    \ 2; i < q_max; i++) {\n    a[i] = p * a[i - 1] + a[i - 2];\n  }\n  FPS b = a\
-    \ * a;\n  int Q;\n  cin >> Q;\n  while (Q--) {\n    int q;\n    cin >> q;\n  \
-    \  cout << b[q - 2] << endl;\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/980\"\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#define call_from_test\n#include \"src/Math/FormalPowerSeries.hpp\"\
-    \n#include \"src/Math/ModInt.hpp\"\n#undef call_from_test\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<int(1e9 + 7)>;\n\
-    \  using FPS = FormalPowerSeries<Mint>;\n  Mint p;\n  cin >> p;\n  int q_max =\
-    \ 2000000;\n  FPS a(q_max);\n  a[0] = 0;\n  a[1] = 1;\n  for (int i = 2; i < q_max;\
-    \ i++) {\n    a[i] = p * a[i - 1] + a[i - 2];\n  }\n  FPS b = a * a;\n  int Q;\n\
-    \  cin >> Q;\n  while (Q--) {\n    int q;\n    cin >> q;\n    cout << b[q - 2]\
-    \ << endl;\n  }\n  return 0;\n}\n"
+    \  }\n};\n#line 11 \"test/yosupo/frequency_table_of_tree_distance.test.cpp\"\n\
+    #undef call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using FPS = FormalPowerSeries<ntt::m64_2>;\n  int N;\n  cin >> N;\n  vector<int>\
+    \ tree[N];\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >>\
+    \ v;\n    tree[u].push_back(v);\n    tree[v].push_back(u);\n  }\n\n  bool used[N];\n\
+    \  fill(used, used + N, false);\n  int sz[N];\n  function<int(int, int)> sz_dfs\
+    \ = [&](int v, int p) {\n    sz[v] = 1;\n    for (int u : tree[v])\n      if (u\
+    \ != p && !used[u]) sz[v] += sz_dfs(u, v);\n    return sz[v];\n  };\n  function<int(int,\
+    \ int, int)> centroid = [&](int v, int p, int mid) {\n    for (int u : tree[v])\n\
+    \      if (u != p && !used[u] && sz[u] > mid) return centroid(u, v, mid);\n  \
+    \  return v;\n  };\n\n  FPS ans(N + 1);\n  function<void(int)> dfs = [&](int rt)\
+    \ {\n    int c = centroid(rt, -1, sz_dfs(rt, -1) / 2);\n    used[c] = true;\n\
+    \    FPS cnt({1});\n    for (int ch : tree[c])\n      if (!used[ch]) {\n     \
+    \   queue<tuple<int, int, int>> que;\n        que.emplace(ch, c, 1);\n       \
+    \ FPS num;\n        while (!que.empty()) {\n          int v, p, d;\n         \
+    \ tie(v, p, d) = que.front();\n          que.pop();\n          if (d >= (int)num.size())\
+    \ num.resize(d + 1, 0);\n          num[d] += 1;\n          for (int u : tree[v])\n\
+    \            if (u != p && !used[u]) que.emplace(u, v, d + 1);\n        }\n  \
+    \      cnt += num;\n        ans -= num * num;\n      }\n    ans += cnt * cnt;\n\
+    \    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n  dfs(0);\n\
+    \  ans /= 2;\n  for (int i = 1; i <= N; i++) cout << (i ? \" \" : \"\") << ans[i];\n\
+    \  cout << '\\n';\n  return 0;\n}\n"
+  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
+    \n\n// \u6728\u306E\u91CD\u5FC3\u5206\u89E3\n\n#include <bits/stdc++.h>\nusing\
+    \ namespace std;\n\n#define call_from_test\n#include \"src/Math/FormalPowerSeries.hpp\"\
+    \n#undef call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using FPS = FormalPowerSeries<ntt::m64_2>;\n  int N;\n  cin >> N;\n  vector<int>\
+    \ tree[N];\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >>\
+    \ v;\n    tree[u].push_back(v);\n    tree[v].push_back(u);\n  }\n\n  bool used[N];\n\
+    \  fill(used, used + N, false);\n  int sz[N];\n  function<int(int, int)> sz_dfs\
+    \ = [&](int v, int p) {\n    sz[v] = 1;\n    for (int u : tree[v])\n      if (u\
+    \ != p && !used[u]) sz[v] += sz_dfs(u, v);\n    return sz[v];\n  };\n  function<int(int,\
+    \ int, int)> centroid = [&](int v, int p, int mid) {\n    for (int u : tree[v])\n\
+    \      if (u != p && !used[u] && sz[u] > mid) return centroid(u, v, mid);\n  \
+    \  return v;\n  };\n\n  FPS ans(N + 1);\n  function<void(int)> dfs = [&](int rt)\
+    \ {\n    int c = centroid(rt, -1, sz_dfs(rt, -1) / 2);\n    used[c] = true;\n\
+    \    FPS cnt({1});\n    for (int ch : tree[c])\n      if (!used[ch]) {\n     \
+    \   queue<tuple<int, int, int>> que;\n        que.emplace(ch, c, 1);\n       \
+    \ FPS num;\n        while (!que.empty()) {\n          int v, p, d;\n         \
+    \ tie(v, p, d) = que.front();\n          que.pop();\n          if (d >= (int)num.size())\
+    \ num.resize(d + 1, 0);\n          num[d] += 1;\n          for (int u : tree[v])\n\
+    \            if (u != p && !used[u]) que.emplace(u, v, d + 1);\n        }\n  \
+    \      cnt += num;\n        ans -= num * num;\n      }\n    ans += cnt * cnt;\n\
+    \    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n  dfs(0);\n\
+    \  ans /= 2;\n  for (int i = 1; i <= N; i++) cout << (i ? \" \" : \"\") << ans[i];\n\
+    \  cout << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/FormalPowerSeries.hpp
-  - src/Math/ModInt.hpp
   isVerificationFile: true
-  path: test/yukicoder/980.test.cpp
+  path: test/yosupo/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
   timestamp: '2020-09-20 18:21:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yukicoder/980.test.cpp
+documentation_of: test/yosupo/frequency_table_of_tree_distance.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/980.test.cpp
-- /verify/test/yukicoder/980.test.cpp.html
-title: test/yukicoder/980.test.cpp
+- /verify/test/yosupo/frequency_table_of_tree_distance.test.cpp
+- /verify/test/yosupo/frequency_table_of_tree_distance.test.cpp.html
+title: test/yosupo/frequency_table_of_tree_distance.test.cpp
 ---
