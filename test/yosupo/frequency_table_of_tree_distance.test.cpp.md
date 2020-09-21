@@ -262,7 +262,7 @@ data:
     \            if (u != p && !used[u]) que.emplace(u, v, d + 1);\n        }\n  \
     \      cnt += num;\n        ans -= num * num;\n      }\n    ans += cnt * cnt;\n\
     \    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n  dfs(0);\n\
-    \  ans /= 2;\n  for (int i = 1; i <= N; i++) cout << (i > 1 ? \" \" : \"\") <<\
+    \  ans /= 2;\n  for (int i = 1; i < N; i++) cout << (i > 1 ? \" \" : \"\") <<\
     \ ans[i];\n  cout << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
     \n\n// \u6728\u306E\u91CD\u5FC3\u5206\u89E3\n\n#include <bits/stdc++.h>\nusing\
@@ -286,14 +286,14 @@ data:
     \            if (u != p && !used[u]) que.emplace(u, v, d + 1);\n        }\n  \
     \      cnt += num;\n        ans -= num * num;\n      }\n    ans += cnt * cnt;\n\
     \    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n  dfs(0);\n\
-    \  ans /= 2;\n  for (int i = 1; i <= N; i++) cout << (i > 1 ? \" \" : \"\") <<\
+    \  ans /= 2;\n  for (int i = 1; i < N; i++) cout << (i > 1 ? \" \" : \"\") <<\
     \ ans[i];\n  cout << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 23:11:33+09:00'
+  timestamp: '2020-09-22 01:26:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/frequency_table_of_tree_distance.test.cpp

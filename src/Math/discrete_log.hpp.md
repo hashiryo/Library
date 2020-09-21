@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u96E2\u6563\u5BFE\u6570"
@@ -24,8 +24,8 @@ data:
     \  if (b % g != 0) return -1;  // no solution\n    b /= g, mod /= g;\n    b =\
     \ 1ull * mod_inv(a / g, mod) * b % mod;\n  }\n  unsigned middle = ceil(sqrt(mod));\n\
     \  unordered_map<unsigned int, unsigned int> mp;\n  unsigned int baby = 1;\n \
-    \ for (unsigned i = 0; i < middle; i++, baby = 1ull * baby * a % mod)\n    mp[baby]\
-    \ = i;\n  unsigned int inv = mod_inv(baby, mod);\n  unsigned int giant = b;\n\
+    \ for (unsigned i = 0; i < middle; i++, baby = 1ull * baby * a % mod)\n    mp.insert({baby,\
+    \ i});\n  unsigned int inv = mod_inv(baby, mod);\n  unsigned int giant = b;\n\
     \  for (unsigned i = 0; i < middle; i++) {\n    auto it = mp.find(giant);\n  \
     \  if (it != mp.end()) return cnt + i * middle + it->second;\n    giant = 1ull\
     \ * giant * inv % mod;\n  }\n  return -1;  // no solution\n}\n"
@@ -41,16 +41,17 @@ data:
     \ g, mod /= g;\n    b = 1ull * mod_inv(a / g, mod) * b % mod;\n  }\n  unsigned\
     \ middle = ceil(sqrt(mod));\n  unordered_map<unsigned int, unsigned int> mp;\n\
     \  unsigned int baby = 1;\n  for (unsigned i = 0; i < middle; i++, baby = 1ull\
-    \ * baby * a % mod)\n    mp[baby] = i;\n  unsigned int inv = mod_inv(baby, mod);\n\
-    \  unsigned int giant = b;\n  for (unsigned i = 0; i < middle; i++) {\n    auto\
-    \ it = mp.find(giant);\n    if (it != mp.end()) return cnt + i * middle + it->second;\n\
-    \    giant = 1ull * giant * inv % mod;\n  }\n  return -1;  // no solution\n}"
+    \ * baby * a % mod)\n    mp.insert({baby, i});\n  unsigned int inv = mod_inv(baby,\
+    \ mod);\n  unsigned int giant = b;\n  for (unsigned i = 0; i < middle; i++) {\n\
+    \    auto it = mp.find(giant);\n    if (it != mp.end()) return cnt + i * middle\
+    \ + it->second;\n    giant = 1ull * giant * inv % mod;\n  }\n  return -1;  //\
+    \ no solution\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/discrete_log.hpp
   requiredBy: []
-  timestamp: '2020-09-21 23:11:33+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-09-22 01:26:59+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Math/discrete_log.hpp

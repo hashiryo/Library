@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/discrete_log.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/discrete_logarithm_mod
@@ -28,12 +28,12 @@ data:
     \ solution\n    b /= g, mod /= g;\n    b = 1ull * mod_inv(a / g, mod) * b % mod;\n\
     \  }\n  unsigned middle = ceil(sqrt(mod));\n  unordered_map<unsigned int, unsigned\
     \ int> mp;\n  unsigned int baby = 1;\n  for (unsigned i = 0; i < middle; i++,\
-    \ baby = 1ull * baby * a % mod)\n    mp[baby] = i;\n  unsigned int inv = mod_inv(baby,\
-    \ mod);\n  unsigned int giant = b;\n  for (unsigned i = 0; i < middle; i++) {\n\
-    \    auto it = mp.find(giant);\n    if (it != mp.end()) return cnt + i * middle\
-    \ + it->second;\n    giant = 1ull * giant * inv % mod;\n  }\n  return -1;  //\
-    \ no solution\n}\n#line 8 \"test/yosupo/discrete_logarithm_mod.test.cpp\"\n#undef\
-    \ call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ baby = 1ull * baby * a % mod)\n    mp.insert({baby, i});\n  unsigned int inv\
+    \ = mod_inv(baby, mod);\n  unsigned int giant = b;\n  for (unsigned i = 0; i <\
+    \ middle; i++) {\n    auto it = mp.find(giant);\n    if (it != mp.end()) return\
+    \ cnt + i * middle + it->second;\n    giant = 1ull * giant * inv % mod;\n  }\n\
+    \  return -1;  // no solution\n}\n#line 8 \"test/yosupo/discrete_logarithm_mod.test.cpp\"\
+    \n#undef call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int T;\n  cin >> T;\n  while (T--) {\n    int X, Y, M;\n    cin >> X >> Y >>\
     \ M;\n    cout << discrete_log(X, Y, M) << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\
@@ -47,8 +47,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/discrete_logarithm_mod.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 23:11:33+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-09-22 01:26:59+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/discrete_logarithm_mod.test.cpp
 layout: document
