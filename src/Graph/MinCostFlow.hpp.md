@@ -73,7 +73,7 @@ data:
     \               end(excess_vs));\n    deficit_vs.erase(remove_if(begin(deficit_vs),\
     \ end(deficit_vs),\n                               [&](const int v) { return b[v]\
     \ > -delta; }),\n                     end(deficit_vs));\n    for (const auto v\
-    \ : excess_vs) pq.emplace(dist[v] = 0, v);\n    farthest = 0;\n    int deficit_count\
+    \ : excess_vs) pq.emplace(dist[v] = 0, v);\n    farthest = 0;\n    size_t deficit_count\
     \ = 0;\n    while (!pq.empty()) {\n      cost_t d;\n      int u;\n      tie(d,\
     \ u) = pq.top();\n      pq.pop();\n      if (dist[u] - d + EPS < 0) continue;\n\
     \      farthest = d;\n      if (b[u] <= -delta) deficit_count++;\n      if (deficit_count\
@@ -179,7 +179,7 @@ data:
     \               end(excess_vs));\n    deficit_vs.erase(remove_if(begin(deficit_vs),\
     \ end(deficit_vs),\n                               [&](const int v) { return b[v]\
     \ > -delta; }),\n                     end(deficit_vs));\n    for (const auto v\
-    \ : excess_vs) pq.emplace(dist[v] = 0, v);\n    farthest = 0;\n    int deficit_count\
+    \ : excess_vs) pq.emplace(dist[v] = 0, v);\n    farthest = 0;\n    size_t deficit_count\
     \ = 0;\n    while (!pq.empty()) {\n      cost_t d;\n      int u;\n      tie(d,\
     \ u) = pq.top();\n      pq.pop();\n      if (dist[u] - d + EPS < 0) continue;\n\
     \      farthest = d;\n      if (b[u] <= -delta) deficit_count++;\n      if (deficit_count\
@@ -235,12 +235,12 @@ data:
     \ * (T)(e.cost);\n      }\n    value /= (T)2;\n    return value;\n  }\n};\n\n\
     template <class flow_t, class cost_t,\n          typename Heap = priority_queue<pair<cost_t,\
     \ int>,\n                                         vector<pair<cost_t, int>>, greater<>>>\n\
-    using MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;\n"
+    using MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/MinCostFlow.hpp
   requiredBy: []
-  timestamp: '2020-08-11 20:23:42+09:00'
+  timestamp: '2020-09-21 23:11:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/GRL_6_B.test.cpp

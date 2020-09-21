@@ -65,7 +65,7 @@ data:
     \               end(excess_vs));\n    deficit_vs.erase(remove_if(begin(deficit_vs),\
     \ end(deficit_vs),\n                               [&](const int v) { return b[v]\
     \ > -delta; }),\n                     end(deficit_vs));\n    for (const auto v\
-    \ : excess_vs) pq.emplace(dist[v] = 0, v);\n    farthest = 0;\n    int deficit_count\
+    \ : excess_vs) pq.emplace(dist[v] = 0, v);\n    farthest = 0;\n    size_t deficit_count\
     \ = 0;\n    while (!pq.empty()) {\n      cost_t d;\n      int u;\n      tie(d,\
     \ u) = pq.top();\n      pq.pop();\n      if (dist[u] - d + EPS < 0) continue;\n\
     \      farthest = d;\n      if (b[u] <= -delta) deficit_count++;\n      if (deficit_count\
@@ -160,7 +160,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2020-08-11 20:23:42+09:00'
+  timestamp: '2020-09-21 23:11:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/min_cost_b_flow.test.cpp
