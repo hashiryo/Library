@@ -7,7 +7,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -258,10 +258,10 @@ data:
     \ tie(v, p, d) = que.front();\n          que.pop();\n          if (d >= (int)num.size())\
     \ num.resize(d + 1, 0);\n          num[d] += 1;\n          for (int u : tree[v])\n\
     \            if (u != p && !used[u]) que.emplace(u, v, d + 1);\n        }\n  \
-    \      cnt += num;\n        ans -= num * num / 2;\n      }\n    ans += cnt * cnt\
-    \ / 2;\n    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n\
-    \  dfs(0);\n  for (int i = 1; i < N; i++) cout << (i > 1 ? \" \" : \"\") << ans[i];\n\
-    \  cout << '\\n';\n  return 0;\n}\n"
+    \      cnt += num;\n        ans -= num * num;\n      }\n    ans += cnt * cnt;\n\
+    \    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n  dfs(0);\n\
+    \  ans /= 2;\n  for (int i = 1; i < N; i++) cout << (i > 1 ? \" \" : \"\") <<\
+    \ ans[i];\n  cout << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
     \n\n// \u6728\u306E\u91CD\u5FC3\u5206\u89E3\n\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#define call_from_test\n#include \"src/Math/FormalPowerSeries.hpp\"\
@@ -282,17 +282,17 @@ data:
     \ tie(v, p, d) = que.front();\n          que.pop();\n          if (d >= (int)num.size())\
     \ num.resize(d + 1, 0);\n          num[d] += 1;\n          for (int u : tree[v])\n\
     \            if (u != p && !used[u]) que.emplace(u, v, d + 1);\n        }\n  \
-    \      cnt += num;\n        ans -= num * num / 2;\n      }\n    ans += cnt * cnt\
-    \ / 2;\n    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n\
-    \  dfs(0);\n  for (int i = 1; i < N; i++) cout << (i > 1 ? \" \" : \"\") << ans[i];\n\
-    \  cout << '\\n';\n  return 0;\n}"
+    \      cnt += num;\n        ans -= num * num;\n      }\n    ans += cnt * cnt;\n\
+    \    for (int next : tree[c])\n      if (!used[next]) dfs(next);\n  };\n  dfs(0);\n\
+    \  ans /= 2;\n  for (int i = 1; i < N; i++) cout << (i > 1 ? \" \" : \"\") <<\
+    \ ans[i];\n  cout << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2020-09-23 21:17:56+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-09-23 22:31:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/frequency_table_of_tree_distance.test.cpp
 layout: document
