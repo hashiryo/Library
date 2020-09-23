@@ -32,13 +32,13 @@ data:
     \ : base(base) {\n    hash.assign(s.size() + 1, 0);\n    pw.assign(s.size() +\
     \ 1, 0);\n    pw[0] = 1;\n    for (size_t i = 0; i < s.size(); i++) {\n      pw[i\
     \ + 1] = mul(pw[i], base);\n      hash[i + 1] = add(mul(hash[i], base), s[i]);\n\
-    \    }\n  }\n  // S[l, r)\n  uint64_t get_hash(int l, int r) const {\n    return\
-    \ add(hash[r], mod - mul(hash[l], pw[r - l]));\n  }\n  uint64_t combine_hash(uint64_t\
-    \ hash1, uint64_t hash2, int hash2len) {\n    return add(mul(hash1, pw[hash2len]),\
-    \ hash2);\n  }\n};\n\ntemplate <size_t SIZE>\nstruct RollingHash_MultiBase {\n\
-    \  using Array = array<uint64_t, SIZE>;\n  array<RollingHash, SIZE> rhs;\n  Array\
-    \ bases;\n  RollingHash_MultiBase() = default;\n  RollingHash_MultiBase(const\
-    \ string& s, Array bs)\n      : RollingHash_MultiBase(vector<char>(s.begin(),\
+    \    }\n  }\n  // S[l, r)\n  uint64_t get_hash(int l = 0, int r = -1) const {\n\
+    \    if (r < 0) r = pw.size() - 1;\n    return add(hash[r], mod - mul(hash[l],\
+    \ pw[r - l]));\n  }\n  uint64_t combine_hash(uint64_t hash1, uint64_t hash2, int\
+    \ hash2len) {\n    return add(mul(hash1, pw[hash2len]), hash2);\n  }\n};\n\ntemplate\
+    \ <size_t SIZE>\nstruct RollingHash_MultiBase {\n  using Array = array<uint64_t,\
+    \ SIZE>;\n  array<RollingHash, SIZE> rhs;\n  Array bases;\n  RollingHash_MultiBase()\
+    \ = default;\n  RollingHash_MultiBase(const string& s, Array bs)\n      : RollingHash_MultiBase(vector<char>(s.begin(),\
     \ s.end()), bs) {}\n  template <typename T>\n  RollingHash_MultiBase(const vector<T>&\
     \ s, Array bs) : bases(bs) {\n    for (size_t i = 0; i < SIZE; i++) rhs[i] = RollingHash(s,\
     \ bases[i]);\n  }\n  Array get_hash(int l, int r) const {\n    Array ret;\n  \
@@ -72,13 +72,13 @@ data:
     \ : base(base) {\n    hash.assign(s.size() + 1, 0);\n    pw.assign(s.size() +\
     \ 1, 0);\n    pw[0] = 1;\n    for (size_t i = 0; i < s.size(); i++) {\n      pw[i\
     \ + 1] = mul(pw[i], base);\n      hash[i + 1] = add(mul(hash[i], base), s[i]);\n\
-    \    }\n  }\n  // S[l, r)\n  uint64_t get_hash(int l, int r) const {\n    return\
-    \ add(hash[r], mod - mul(hash[l], pw[r - l]));\n  }\n  uint64_t combine_hash(uint64_t\
-    \ hash1, uint64_t hash2, int hash2len) {\n    return add(mul(hash1, pw[hash2len]),\
-    \ hash2);\n  }\n};\n\ntemplate <size_t SIZE>\nstruct RollingHash_MultiBase {\n\
-    \  using Array = array<uint64_t, SIZE>;\n  array<RollingHash, SIZE> rhs;\n  Array\
-    \ bases;\n  RollingHash_MultiBase() = default;\n  RollingHash_MultiBase(const\
-    \ string& s, Array bs)\n      : RollingHash_MultiBase(vector<char>(s.begin(),\
+    \    }\n  }\n  // S[l, r)\n  uint64_t get_hash(int l = 0, int r = -1) const {\n\
+    \    if (r < 0) r = pw.size() - 1;\n    return add(hash[r], mod - mul(hash[l],\
+    \ pw[r - l]));\n  }\n  uint64_t combine_hash(uint64_t hash1, uint64_t hash2, int\
+    \ hash2len) {\n    return add(mul(hash1, pw[hash2len]), hash2);\n  }\n};\n\ntemplate\
+    \ <size_t SIZE>\nstruct RollingHash_MultiBase {\n  using Array = array<uint64_t,\
+    \ SIZE>;\n  array<RollingHash, SIZE> rhs;\n  Array bases;\n  RollingHash_MultiBase()\
+    \ = default;\n  RollingHash_MultiBase(const string& s, Array bs)\n      : RollingHash_MultiBase(vector<char>(s.begin(),\
     \ s.end()), bs) {}\n  template <typename T>\n  RollingHash_MultiBase(const vector<T>&\
     \ s, Array bs) : bases(bs) {\n    for (size_t i = 0; i < SIZE; i++) rhs[i] = RollingHash(s,\
     \ bases[i]);\n  }\n  Array get_hash(int l, int r) const {\n    Array ret;\n  \
@@ -99,7 +99,7 @@ data:
   isVerificationFile: false
   path: src/String/RollingHash.hpp
   requiredBy: []
-  timestamp: '2020-09-14 13:17:44+09:00'
+  timestamp: '2020-09-23 13:43:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/ALDS1_14_B.rollinghash.test.cpp

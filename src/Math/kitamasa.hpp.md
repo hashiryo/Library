@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':x:'
@@ -16,7 +16,7 @@ data:
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
@@ -51,8 +51,8 @@ data:
   isVerificationFile: false
   path: src/Math/kitamasa.hpp
   requiredBy: []
-  timestamp: '2020-09-20 18:21:49+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2020-09-23 13:43:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/0168.test.cpp
   - test/yukicoder/658.test.cpp
