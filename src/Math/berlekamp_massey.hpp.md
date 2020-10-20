@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: Berlekamp-Massey
     links:
     - https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c
@@ -52,7 +51,7 @@ data:
   path: src/Math/berlekamp_massey.hpp
   requiredBy: []
   timestamp: '2020-08-11 20:23:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/find_linear_recurrence.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp

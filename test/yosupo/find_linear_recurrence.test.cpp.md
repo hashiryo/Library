@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -20,32 +20,44 @@ data:
     \ \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#define call_from_test\n#line 1 \"src/Math/ModInt.hpp\"\
     \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n#ifndef call_from_test\n\
-    #line 8 \"src/Math/ModInt.hpp\"\nusing namespace std;\n#endif\n\ntemplate <int\
-    \ mod>\nstruct ModInt {\n  int64_t x;\n  ModInt() : x(0) {}\n  ModInt(int64_t\
-    \ y) : x(y >= 0 ? y % mod : (mod - (-y) % mod)) {}\n  ModInt &operator+=(const\
-    \ ModInt &p) {\n    if ((x += p.x) >= mod) x -= mod;\n    return *this;\n  }\n\
-    \  ModInt &operator-=(const ModInt &p) {\n    if ((x += mod - p.x) >= mod) x -=\
-    \ mod;\n    return *this;\n  }\n  ModInt &operator*=(const ModInt &p) {\n    x\
-    \ = (int)(1LL * x * p.x % mod);\n    return *this;\n  }\n  ModInt &operator/=(const\
-    \ ModInt &p) { return *this *= p.inverse(); }\n  ModInt operator-() const { return\
-    \ ModInt() - *this; }\n  ModInt operator+(const ModInt &p) const { return ModInt(*this)\
-    \ += p; }\n  ModInt operator-(const ModInt &p) const { return ModInt(*this) -=\
-    \ p; }\n  ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p;\
-    \ }\n  ModInt operator/(const ModInt &p) const { return ModInt(*this) /= p; }\n\
-    \  bool operator==(const ModInt &p) const { return x == p.x; }\n  bool operator!=(const\
-    \ ModInt &p) const { return x != p.x; }\n  ModInt inverse() const {\n    int a\
-    \ = x, b = mod, u = 1, v = 0, t;\n    while (b) t = a / b, swap(a -= t * b, b),\
-    \ swap(u -= t * v, v);\n    return ModInt(u);\n  }\n  ModInt pow(int64_t e) const\
-    \ {\n    ModInt ret(1);\n    for (ModInt b = *this; e; e >>= 1, b *= b)\n    \
-    \  if (e & 1) ret *= b;\n    return ret;\n  }\n  friend ostream &operator<<(ostream\
-    \ &os, const ModInt &p) { return os << p.x; }\n  friend istream &operator>>(istream\
-    \ &is, ModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ModInt<mod>(t);\n \
-    \   return (is);\n  }\n  static int modulo() { return mod; }\n  int get() const\
-    \ { return x; }\n};\n#line 1 \"src/Math/berlekamp_massey.hpp\"\n/**\n * @title\
-    \ Berlekamp-Massey\n * @category \u6570\u5B66\n * \u6570\u5217\u306E\u6700\u521D\
-    \u306EN\u9805\u304B\u3089\u3001\u305D\u306E\u6570\u5217\u3092\u751F\u6210\u3059\
-    \u308BN/2\u6B21\u4EE5\u4E0B\u306E\u6700\u5C0F\u306E\u7DDA\u5F62\u6F38\u5316\u5F0F\
-    \u3092\u6C42\u3081\u308B\n *  O(N^2)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c\n\
+    #line 8 \"src/Math/ModInt.hpp\"\nusing namespace std;\n#endif\n\ntemplate <uint64_t\
+    \ mod, uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u128 = __uint128_t;\n\
+    \  static constexpr uint64_t mul_inv(uint64_t n, int e = 6, uint64_t x = 1) {\n\
+    \    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr\
+    \ uint64_t inv = mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2 = -u128(mod)\
+    \ % mod;\n  static constexpr uint64_t m2 = mod << 1;\n\n public:\n  static constexpr\
+    \ int level = __builtin_ctzll(mod - 1);\n  ModInt() = default;\n  ~ModInt() =\
+    \ default;\n  constexpr ModInt(uint64_t n) : x(init(n)){};\n  static constexpr\
+    \ uint64_t modulo() { return mod; }\n  static constexpr uint64_t init(uint64_t\
+    \ w) { return reduce(u128(w) * r2); }\n  static constexpr uint64_t reduce(const\
+    \ u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w) * inv) *\
+    \ mod) >> 64);\n  }\n  static constexpr uint64_t pr_rt() { return prim_root; }\n\
+    \  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x = (m2\
+    \ & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs)\
+    \ {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n  }\n  constexpr\
+    \ ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += m2 & -(x\
+    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
+    \   return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt\
+    \ &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return x == rhs.x; }\n  bool\
+    \ operator!=(const ModInt &rhs) const { return x != rhs.x; }\n  uint64_t get()\
+    \ const {\n    uint64_t ret = reduce(x) - mod;\n    return ret + (mod & -(ret\
+    \ >> 63));\n  }\n  void set(uint64_t n) const { this->x = n; }\n  constexpr ModInt\
+    \ pow(uint64_t k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base =\
+    \ *this; k; k >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return\
+    \ ret;\n  }\n  constexpr ModInt inverse() const { return pow(mod - 2); }\n  friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
+    \ rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  uint64_t x;\n\
+    };\n#line 1 \"src/Math/berlekamp_massey.hpp\"\n/**\n * @title Berlekamp-Massey\n\
+    \ * @category \u6570\u5B66\n * \u6570\u5217\u306E\u6700\u521D\u306EN\u9805\u304B\
+    \u3089\u3001\u305D\u306E\u6570\u5217\u3092\u751F\u6210\u3059\u308BN/2\u6B21\u4EE5\
+    \u4E0B\u306E\u6700\u5C0F\u306E\u7DDA\u5F62\u6F38\u5316\u5F0F\u3092\u6C42\u3081\
+    \u308B\n *  O(N^2)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c\n\
     \n#ifndef call_from_test\n#line 13 \"src/Math/berlekamp_massey.hpp\"\nusing namespace\
     \ std;\n#endif\n\n// a[n] = c[0] * a[n-N] + c[1] * a[n-N+1] + ... + c[N-1] * a[n-1]\n\
     // return c\n\ntemplate <class T>\nvector<T> berlekamp_massey(const vector<T>\
@@ -77,8 +89,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2020-09-16 21:11:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-17 15:44:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/find_linear_recurrence.test.cpp
 layout: document

@@ -6,13 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2450.LCT.test.cpp
     title: test/aoj/2450.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9\u9045\u5EF6\u4F1D\u642C\
       )"
     links: []
@@ -47,22 +46,22 @@ data:
     \ (t->ch[0]) propagate(t->ch[0], t->laz);\n      if (t->ch[1]) propagate(t->ch[1],\
     \ t->laz);\n      t->laz = M::ei();\n    }\n    if (t->rev) {\n      if (t->ch[0])\
     \ toggle(t->ch[0]);\n      if (t->ch[1]) toggle(t->ch[1]);\n      t->rev = false;\n\
-    \    }\n    return t;\n  }\n\n public:\n  vector<Node> ns;\n\n private:\n  int\
-    \ linkcnt;\n\n public:\n  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n,\
-    \ init), linkcnt(0) {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n\
-    \    toggle(&ns[k]);\n    eval(&ns[k]);\n  }\n  // add link from c to p\n  void\
-    \ link(int c, int p) {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n\
-    \    expose(&ns[p]);\n    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n   \
-    \ pushup(&ns[p]);\n  }\n  // cut link from c to p\n  void cut(int c, int p) {\n\
-    \    linkcnt--;\n    evert(p);\n    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n\
-    \    ns[c].ch[0] = y->par = nullptr;\n    pushup(&ns[c]);\n  }\n  int lca(int\
-    \ x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n    return\
-    \ ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) {\n    expose(&ns[k]);\n\
-    \    return ns[k].val;\n  }\n  // [a,b] closed section\n  T query(int a, int b)\
-    \ {\n    evert(a);\n    expose(&ns[b]);\n    return ns[b].dat;\n  }\n  void update(int\
-    \ a, int b, E v) {\n    evert(a);\n    expose(&ns[b]);\n    propagate(&ns[b],\
-    \ v);\n    eval(&ns[b]);\n  }\n  void set_val(int k, T v) {\n    expose(&ns[k]);\n\
-    \    ns[k].val = v;\n    eval(&ns[k]);\n  }\n};\n"
+    \    }\n    return t;\n  }\n\n private:\n  vector<Node> ns;\n  size_t linkcnt;\n\
+    \n public:\n  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n, init), linkcnt(0)\
+    \ {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n\
+    \    eval(&ns[k]);\n  }\n  // add link from c to p\n  void link(int c, int p)\
+    \ {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n\
+    \    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n    pushup(&ns[p]);\n  }\n\
+    \  // cut link from c to p\n  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n\
+    \    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n\
+    \    pushup(&ns[c]);\n  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n  \
+    \  Node *u = expose(&ns[y]);\n    return ns[x].par ? u - &ns[0] : -1;\n  }\n \
+    \ T operator[](int k) {\n    expose(&ns[k]);\n    return ns[k].val;\n  }\n  //\
+    \ [a,b] closed section\n  T query(int a, int b) {\n    evert(a);\n    expose(&ns[b]);\n\
+    \    return ns[b].dat;\n  }\n  void update(int a, int b, E v) {\n    evert(a);\n\
+    \    expose(&ns[b]);\n    propagate(&ns[b], v);\n    eval(&ns[b]);\n  }\n  void\
+    \ set_val(int k, T v) {\n    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n\
+    \  }\n};\n"
   code: "/**\n * @title Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9\u9045\u5EF6\u4F1D\u642C\
     )\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n */\n\n#ifndef\
     \ call_from_test\n#include <bits/stdc++.h>\nusing namespace std;\n#endif\n\ntemplate\
@@ -94,31 +93,31 @@ data:
     \ (t->ch[0]) propagate(t->ch[0], t->laz);\n      if (t->ch[1]) propagate(t->ch[1],\
     \ t->laz);\n      t->laz = M::ei();\n    }\n    if (t->rev) {\n      if (t->ch[0])\
     \ toggle(t->ch[0]);\n      if (t->ch[1]) toggle(t->ch[1]);\n      t->rev = false;\n\
-    \    }\n    return t;\n  }\n\n public:\n  vector<Node> ns;\n\n private:\n  int\
-    \ linkcnt;\n\n public:\n  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n,\
-    \ init), linkcnt(0) {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n\
-    \    toggle(&ns[k]);\n    eval(&ns[k]);\n  }\n  // add link from c to p\n  void\
-    \ link(int c, int p) {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n\
-    \    expose(&ns[p]);\n    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n   \
-    \ pushup(&ns[p]);\n  }\n  // cut link from c to p\n  void cut(int c, int p) {\n\
-    \    linkcnt--;\n    evert(p);\n    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n\
-    \    ns[c].ch[0] = y->par = nullptr;\n    pushup(&ns[c]);\n  }\n  int lca(int\
-    \ x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n    return\
-    \ ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) {\n    expose(&ns[k]);\n\
-    \    return ns[k].val;\n  }\n  // [a,b] closed section\n  T query(int a, int b)\
-    \ {\n    evert(a);\n    expose(&ns[b]);\n    return ns[b].dat;\n  }\n  void update(int\
-    \ a, int b, E v) {\n    evert(a);\n    expose(&ns[b]);\n    propagate(&ns[b],\
-    \ v);\n    eval(&ns[b]);\n  }\n  void set_val(int k, T v) {\n    expose(&ns[k]);\n\
-    \    ns[k].val = v;\n    eval(&ns[k]);\n  }\n};"
+    \    }\n    return t;\n  }\n\n private:\n  vector<Node> ns;\n  size_t linkcnt;\n\
+    \n public:\n  LinkCutTree_MonoidLazy(int n, T init = M::ti()) : ns(n, init), linkcnt(0)\
+    \ {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n\
+    \    eval(&ns[k]);\n  }\n  // add link from c to p\n  void link(int c, int p)\
+    \ {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n\
+    \    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n    pushup(&ns[p]);\n  }\n\
+    \  // cut link from c to p\n  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n\
+    \    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n\
+    \    pushup(&ns[c]);\n  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n  \
+    \  Node *u = expose(&ns[y]);\n    return ns[x].par ? u - &ns[0] : -1;\n  }\n \
+    \ T operator[](int k) {\n    expose(&ns[k]);\n    return ns[k].val;\n  }\n  //\
+    \ [a,b] closed section\n  T query(int a, int b) {\n    evert(a);\n    expose(&ns[b]);\n\
+    \    return ns[b].dat;\n  }\n  void update(int a, int b, E v) {\n    evert(a);\n\
+    \    expose(&ns[b]);\n    propagate(&ns[b], v);\n    eval(&ns[b]);\n  }\n  void\
+    \ set_val(int k, T v) {\n    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n\
+    \  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree_MonoidLazy.hpp
   requiredBy: []
-  timestamp: '2020-08-25 17:42:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-17 15:44:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2450.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/aoj/2450.LCT.test.cpp
 documentation_of: src/DataStructure/LinkCutTree_MonoidLazy.hpp
 layout: document
 redirect_from:

@@ -4,18 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_5_A.test.cpp
-    title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_5_A.test.cpp
+    title: test/aoj/GRL_5_A.test.cpp
   - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u5168\u65B9\u4F4D\u6728DP"
     links:
     - https://ei1333.hateblo.jp/entry/2018/12/21/004022
@@ -69,9 +68,9 @@ data:
   timestamp: '2020-09-16 22:24:40+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/GRL_5_A.test.cpp
-  - test/aoj/1595.test.cpp
   - test/yukicoder/768.test.cpp
+  - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
 documentation_of: src/Graph/ReRooting.hpp
 layout: document
 redirect_from:

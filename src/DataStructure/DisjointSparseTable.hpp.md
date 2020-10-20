@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: Disjoint-Sparse-Table
     links: []
   bundledCode: "#line 1 \"src/DataStructure/DisjointSparseTable.hpp\"\n/**\n * @title\

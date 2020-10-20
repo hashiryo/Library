@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"!hoge.hpp\"\n/**\n * @ignore\n */\n// test\n"
   code: "/**\n * @ignore\n */\n// test"

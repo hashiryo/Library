@@ -4,21 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2423.test.cpp
-    title: test/aoj/2423.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/0334.test.cpp
     title: test/aoj/0334.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/421.test.cpp
-    title: test/yukicoder/421.test.cpp
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.test.cpp
     title: test/yosupo/bipartitematching.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/421.test.cpp
+    title: test/yukicoder/421.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E8C\u90E8\u30B0\
       \u30E9\u30D5)"
     links:
@@ -96,9 +95,9 @@ data:
   timestamp: '2020-08-15 16:22:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/421.test.cpp
   - test/aoj/2423.test.cpp
   - test/aoj/0334.test.cpp
-  - test/yukicoder/421.test.cpp
   - test/yosupo/bipartitematching.test.cpp
 documentation_of: src/Graph/MatchingBipartite.hpp
 layout: document

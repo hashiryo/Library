@@ -6,16 +6,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
     title: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/235.HLD.test.cpp
-    title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/235.HLD.test.cpp
+    title: test/yukicoder/235.HLD.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Segment-Tree(\u9045\u5EF6\u4F1D\u642C)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/SegmentTree_Lazy.hpp\"\n/**\n * @title\
@@ -79,10 +78,10 @@ data:
   path: src/DataStructure/SegmentTree_Lazy.hpp
   requiredBy: []
   timestamp: '2020-09-10 14:00:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Lazy.hpp
 layout: document

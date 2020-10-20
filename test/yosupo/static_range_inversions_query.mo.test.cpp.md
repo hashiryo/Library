@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Algorithm/Mo.hpp
     title: Mo
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/BinaryIndexedTree.hpp
     title: Binary-Indexed-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
@@ -41,7 +41,7 @@ data:
     /**\n * @title Binary-Indexed-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\
     \n *  O(logN)\n *  0-indexed\n */\n\n#ifndef call_from_test\n#line 10 \"src/DataStructure/BinaryIndexedTree.hpp\"\
     \nusing namespace std;\n#endif\n\ntemplate <typename T>\nstruct BinaryIndexedTree\
-    \ {\n  vector<T> dat;\n  BinaryIndexedTree(int n) : dat(n + 1, 0) {}\n  BinaryIndexedTree(int\
+    \ {\n  vector<T> dat;\n  BinaryIndexedTree(int n) : dat(n + 1, T(0)) {}\n  BinaryIndexedTree(int\
     \ n, T a) : BinaryIndexedTree(vector<T>(n, a)) {}\n  BinaryIndexedTree(vector<T>\
     \ y) : dat(y.size() + 1, 0) {\n    for (size_t i = 0; i < y.size(); ++i) dat[i\
     \ + 1] = y[i];\n    for (int i = 1; i < (int)dat.size(); ++i)\n      if (i + (i\
@@ -94,8 +94,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/static_range_inversions_query.mo.test.cpp
   requiredBy: []
-  timestamp: '2020-09-09 18:34:56+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-17 15:44:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/static_range_inversions_query.mo.test.cpp
 layout: document

@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_6_A.Dinic.test.cpp
-    title: test/aoj/GRL_6_A.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/2313.test.cpp
     title: test/aoj/2313.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_6_A.Dinic.test.cpp
+    title: test/aoj/GRL_6_A.Dinic.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u6700\u5927\u6D41(Dinic)"
     links:
     - https://snuke.hatenablog.com/entry/2016/07/10/043918

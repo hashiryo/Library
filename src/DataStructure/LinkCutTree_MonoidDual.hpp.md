@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9\u53CC\u5BFE)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/LinkCutTree_MonoidDual.hpp\"\n/**\n *\
@@ -37,16 +36,16 @@ data:
     \      if (t->ch[0]) propagate(t->ch[0], t->laz);\n      if (t->ch[1]) propagate(t->ch[1],\
     \ t->laz);\n      t->laz = M::ei();\n    }\n    if (t->rev) {\n      if (t->ch[0])\
     \ toggle(t->ch[0]);\n      if (t->ch[1]) toggle(t->ch[1]);\n      t->rev = false;\n\
-    \    }\n    return t;\n  }\n\n public:\n  vector<Node> ns;\n\n private:\n  int\
-    \ linkcnt;\n\n public:\n  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n,\
-    \ init), linkcnt(0) {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n\
-    \    toggle(&ns[k]);\n    eval(&ns[k]);\n  }\n  // add link from c to p\n  void\
-    \ link(int c, int p) {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n\
-    \    expose(&ns[p]);\n    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n  }\n\
-    \  // cut link from c to p\n  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n\
-    \    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n\
-    \  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
-    \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) {\n    expose(&ns[k]);\n\
+    \    }\n    return t;\n  }\n\n private:\n  vector<Node> ns;\n  size_t linkcnt;\n\
+    \n public:\n  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n, init), linkcnt(0)\
+    \ {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n\
+    \    eval(&ns[k]);\n  }\n  // add link from c to p\n  void link(int c, int p)\
+    \ {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n\
+    \    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n  }\n  // cut link from c\
+    \ to p\n  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n    expose(&ns[c]);\n\
+    \    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n  }\n  int lca(int\
+    \ x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n    return\
+    \ ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) {\n    expose(&ns[k]);\n\
     \    return ns[k].val;\n  }\n  void update(int a, int b, E v) {\n    evert(a);\n\
     \    expose(&ns[b]);\n    propagate(&ns[b], v);\n    eval(&ns[b]);\n  }\n  void\
     \ set_val(int k, T v) {\n    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n\
@@ -75,16 +74,16 @@ data:
     \      if (t->ch[0]) propagate(t->ch[0], t->laz);\n      if (t->ch[1]) propagate(t->ch[1],\
     \ t->laz);\n      t->laz = M::ei();\n    }\n    if (t->rev) {\n      if (t->ch[0])\
     \ toggle(t->ch[0]);\n      if (t->ch[1]) toggle(t->ch[1]);\n      t->rev = false;\n\
-    \    }\n    return t;\n  }\n\n public:\n  vector<Node> ns;\n\n private:\n  int\
-    \ linkcnt;\n\n public:\n  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n,\
-    \ init), linkcnt(0) {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n\
-    \    toggle(&ns[k]);\n    eval(&ns[k]);\n  }\n  // add link from c to p\n  void\
-    \ link(int c, int p) {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n\
-    \    expose(&ns[p]);\n    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n  }\n\
-    \  // cut link from c to p\n  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n\
-    \    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n\
-    \  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
-    \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) {\n    expose(&ns[k]);\n\
+    \    }\n    return t;\n  }\n\n private:\n  vector<Node> ns;\n  size_t linkcnt;\n\
+    \n public:\n  LinkCutTree_MonoidDual(int n, T init = T()) : ns(n, init), linkcnt(0)\
+    \ {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n\
+    \    eval(&ns[k]);\n  }\n  // add link from c to p\n  void link(int c, int p)\
+    \ {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n\
+    \    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n  }\n  // cut link from c\
+    \ to p\n  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n    expose(&ns[c]);\n\
+    \    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n  }\n  int lca(int\
+    \ x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n    return\
+    \ ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) {\n    expose(&ns[k]);\n\
     \    return ns[k].val;\n  }\n  void update(int a, int b, E v) {\n    evert(a);\n\
     \    expose(&ns[b]);\n    propagate(&ns[b], v);\n    eval(&ns[b]);\n  }\n  void\
     \ set_val(int k, T v) {\n    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n\
@@ -93,7 +92,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree_MonoidDual.hpp
   requiredBy: []
-  timestamp: '2020-08-25 17:42:49+09:00'
+  timestamp: '2020-10-17 15:44:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2559.LCT_Dual.test.cpp

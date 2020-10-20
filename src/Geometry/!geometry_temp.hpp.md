@@ -3,96 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: src/Geometry/closest_pair.hpp
-    title: "\u6700\u8FD1\u70B9\u5BFE"
+    path: src/Geometry/arg_sort.hpp
+    title: "\u504F\u89D2\u30BD\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: src/Geometry/circle_functions.hpp
     title: "\u5186\u306E\u3042\u308C\u3053\u308C"
   - icon: ':heavy_check_mark:'
-    path: src/Geometry/arg_sort.hpp
-    title: "\u504F\u89D2\u30BD\u30FC\u30C8"
+    path: src/Geometry/closest_pair.hpp
+    title: "\u6700\u8FD1\u70B9\u5BFE"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3056.test.cpp
-    title: test/aoj/3056.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/1242.test.cpp
-    title: test/aoj/1242.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_H.test.cpp
-    title: test/aoj/CGL_7_H.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_E.test.cpp
-    title: test/aoj/CGL_7_E.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_1_A.test.cpp
-    title: test/aoj/CGL_1_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_3_B.test.cpp
-    title: test/aoj/CGL_3_B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_4_C.test.cpp
-    title: test/aoj/CGL_4_C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2442.test.cpp
-    title: test/aoj/2442.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_2_A.test.cpp
-    title: test/aoj/CGL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_2_C.test.cpp
-    title: test/aoj/CGL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3049.test.cpp
-    title: test/aoj/3049.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2635.test.cpp
-    title: test/aoj/2635.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_2_D.test.cpp
-    title: test/aoj/CGL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3034.test.cpp
-    title: test/aoj/3034.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_2_B.test.cpp
-    title: test/aoj/CGL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/1171.test.cpp
-    title: test/aoj/1171.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_A.test.cpp
-    title: test/aoj/CGL_7_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_C.test.cpp
-    title: test/aoj/CGL_7_C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_4_A.test.cpp
-    title: test/aoj/CGL_4_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_3_A.test.cpp
-    title: test/aoj/CGL_3_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_F.test.cpp
-    title: test/aoj/CGL_7_F.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2003.test.cpp
-    title: test/aoj/2003.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2423.test.cpp
-    title: test/aoj/2423.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2159.test.cpp
-    title: test/aoj/2159.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2201.test.cpp
-    title: test/aoj/2201.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2514.test.cpp
-    title: test/aoj/2514.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_B.test.cpp
-    title: test/aoj/CGL_7_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
@@ -100,63 +19,143 @@ data:
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_3_C.test.cpp
-    title: test/aoj/CGL_3_C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2256.test.cpp
-    title: test/aoj/2256.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/1157.test.cpp
     title: test/aoj/1157.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_D.test.cpp
-    title: test/aoj/CGL_7_D.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2009.test.cpp
-    title: test/aoj/2009.test.cpp
+    path: test/aoj/1171.test.cpp
+    title: test/aoj/1171.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1183.test.cpp
     title: test/aoj/1183.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2972.test.cpp
-    title: test/aoj/2972.test.cpp
+    path: test/aoj/1190.test.cpp
+    title: test/aoj/1190.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_1_B.test.cpp
-    title: test/aoj/CGL_1_B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_G.test.cpp
-    title: test/aoj/CGL_7_G.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_I.test.cpp
-    title: test/aoj/CGL_7_I.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2402.test.cpp
-    title: test/aoj/2402.test.cpp
+    path: test/aoj/1242.test.cpp
+    title: test/aoj/1242.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1342.test.cpp
     title: test/aoj/1342.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/1190.test.cpp
-    title: test/aoj/1190.test.cpp
+    path: test/aoj/2003.test.cpp
+    title: test/aoj/2003.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2009.test.cpp
+    title: test/aoj/2009.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2159.test.cpp
+    title: test/aoj/2159.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2201.test.cpp
+    title: test/aoj/2201.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2256.test.cpp
+    title: test/aoj/2256.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2402.test.cpp
+    title: test/aoj/2402.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2442.test.cpp
+    title: test/aoj/2442.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2514.test.cpp
+    title: test/aoj/2514.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2626.test.cpp
     title: test/aoj/2626.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2635.test.cpp
+    title: test/aoj/2635.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2972.test.cpp
+    title: test/aoj/2972.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3034.test.cpp
+    title: test/aoj/3034.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3049.test.cpp
+    title: test/aoj/3049.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3056.test.cpp
+    title: test/aoj/3056.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_1_A.test.cpp
+    title: test/aoj/CGL_1_A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_1_B.test.cpp
+    title: test/aoj/CGL_1_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_1_C.test.cpp
+    title: test/aoj/CGL_1_C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_2_A.test.cpp
+    title: test/aoj/CGL_2_A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_2_B.test.cpp
+    title: test/aoj/CGL_2_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_2_C.test.cpp
+    title: test/aoj/CGL_2_C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_2_D.test.cpp
+    title: test/aoj/CGL_2_D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_3_A.test.cpp
+    title: test/aoj/CGL_3_A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_3_B.test.cpp
+    title: test/aoj/CGL_3_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_3_C.test.cpp
+    title: test/aoj/CGL_3_C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_4_A.test.cpp
+    title: test/aoj/CGL_4_A.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_B.test.cpp
     title: test/aoj/CGL_4_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_4_C.test.cpp
+    title: test/aoj/CGL_4_C.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_5_A.test.cpp
     title: test/aoj/CGL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_1_C.test.cpp
-    title: test/aoj/CGL_1_C.test.cpp
+    path: test/aoj/CGL_7_A.test.cpp
+    title: test/aoj/CGL_7_A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_B.test.cpp
+    title: test/aoj/CGL_7_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_C.test.cpp
+    title: test/aoj/CGL_7_C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_D.test.cpp
+    title: test/aoj/CGL_7_D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_E.test.cpp
+    title: test/aoj/CGL_7_E.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_F.test.cpp
+    title: test/aoj/CGL_7_F.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_G.test.cpp
+    title: test/aoj/CGL_7_G.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_H.test.cpp
+    title: test/aoj/CGL_7_H.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_I.test.cpp
+    title: test/aoj/CGL_7_I.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/argsort.test.cpp
     title: test/yosupo/argsort.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
     links:
     - https://csacademy.com/app/geometry_widget/
@@ -600,58 +599,58 @@ data:
   isVerificationFile: false
   path: src/Geometry/!geometry_temp.hpp
   requiredBy:
-  - src/Geometry/closest_pair.hpp
   - src/Geometry/circle_functions.hpp
   - src/Geometry/arg_sort.hpp
+  - src/Geometry/closest_pair.hpp
   timestamp: '2020-09-06 22:06:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/3056.test.cpp
-  - test/aoj/1242.test.cpp
-  - test/aoj/CGL_7_H.test.cpp
-  - test/aoj/CGL_7_E.test.cpp
-  - test/aoj/CGL_1_A.test.cpp
-  - test/aoj/CGL_3_B.test.cpp
-  - test/aoj/CGL_4_C.test.cpp
-  - test/aoj/2442.test.cpp
-  - test/aoj/CGL_2_A.test.cpp
-  - test/aoj/CGL_2_C.test.cpp
-  - test/aoj/3049.test.cpp
-  - test/aoj/2635.test.cpp
-  - test/aoj/CGL_2_D.test.cpp
-  - test/aoj/3034.test.cpp
-  - test/aoj/CGL_2_B.test.cpp
-  - test/aoj/1171.test.cpp
-  - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_7_C.test.cpp
-  - test/aoj/CGL_4_A.test.cpp
-  - test/aoj/CGL_3_A.test.cpp
-  - test/aoj/CGL_7_F.test.cpp
-  - test/aoj/2003.test.cpp
-  - test/aoj/2423.test.cpp
-  - test/aoj/2159.test.cpp
-  - test/aoj/2201.test.cpp
-  - test/aoj/2514.test.cpp
   - test/aoj/CGL_7_B.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/1132.test.cpp
-  - test/aoj/CGL_3_C.test.cpp
-  - test/aoj/2256.test.cpp
-  - test/aoj/1157.test.cpp
-  - test/aoj/CGL_7_D.test.cpp
-  - test/aoj/2009.test.cpp
-  - test/aoj/1183.test.cpp
-  - test/aoj/2972.test.cpp
   - test/aoj/CGL_1_B.test.cpp
-  - test/aoj/CGL_7_G.test.cpp
+  - test/aoj/2256.test.cpp
+  - test/aoj/CGL_7_A.test.cpp
+  - test/aoj/CGL_3_C.test.cpp
+  - test/aoj/3056.test.cpp
+  - test/aoj/CGL_2_C.test.cpp
+  - test/aoj/CGL_7_D.test.cpp
+  - test/aoj/CGL_1_A.test.cpp
+  - test/aoj/CGL_2_B.test.cpp
+  - test/aoj/CGL_2_D.test.cpp
+  - test/aoj/2972.test.cpp
   - test/aoj/CGL_7_I.test.cpp
+  - test/aoj/3034.test.cpp
+  - test/aoj/1132.test.cpp
+  - test/aoj/2442.test.cpp
+  - test/aoj/2423.test.cpp
+  - test/aoj/1171.test.cpp
+  - test/aoj/1183.test.cpp
+  - test/aoj/CGL_7_G.test.cpp
+  - test/aoj/CGL_4_C.test.cpp
+  - test/aoj/2635.test.cpp
+  - test/aoj/1242.test.cpp
   - test/aoj/2402.test.cpp
-  - test/aoj/1342.test.cpp
-  - test/aoj/1190.test.cpp
+  - test/aoj/CGL_4_A.test.cpp
   - test/aoj/2626.test.cpp
-  - test/aoj/CGL_4_B.test.cpp
-  - test/aoj/CGL_5_A.test.cpp
   - test/aoj/CGL_1_C.test.cpp
+  - test/aoj/CGL_3_B.test.cpp
+  - test/aoj/CGL_2_A.test.cpp
+  - test/aoj/2201.test.cpp
+  - test/aoj/CGL_7_E.test.cpp
+  - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/1157.test.cpp
+  - test/aoj/2003.test.cpp
+  - test/aoj/CGL_3_A.test.cpp
+  - test/aoj/3049.test.cpp
+  - test/aoj/2514.test.cpp
+  - test/aoj/1342.test.cpp
+  - test/aoj/CGL_4_B.test.cpp
+  - test/aoj/2159.test.cpp
+  - test/aoj/CGL_5_A.test.cpp
+  - test/aoj/1190.test.cpp
+  - test/aoj/CGL_7_F.test.cpp
+  - test/aoj/0342.test.cpp
+  - test/aoj/2009.test.cpp
   - test/yosupo/argsort.test.cpp
 documentation_of: src/Geometry/!geometry_temp.hpp
 layout: document

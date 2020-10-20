@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Link-Cut-Tree(\u30B7\u30F3\u30D7\u30EB)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/LinkCutTree.hpp\"\n/**\n * @title Link-Cut-Tree(\u30B7\
@@ -31,8 +30,8 @@ data:
     \ t->ch[1]);\n    t->rev ^= true;\n  }\n  Node *eval(Node *t) {\n    if (t->rev)\
     \ {\n      if (t->ch[0]) toggle(t->ch[0]);\n      if (t->ch[1]) toggle(t->ch[1]);\n\
     \      t->rev = false;\n    }\n    return t;\n  }\n\n private:\n  vector<Node>\
-    \ ns;\n  int linkcnt;\n\n public:\n  LinkCutTree(int n) : ns(n), linkcnt(0) {}\n\
-    \  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n\
+    \ ns;\n  size_t linkcnt;\n\n public:\n  LinkCutTree(int n) : ns(n), linkcnt(0)\
+    \ {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n\
     \    eval(&ns[k]);\n  }\n  // add link from c to p\n  void link(int c, int p)\
     \ {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n\
     \    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n  }\n  // cut link from c\
@@ -58,7 +57,7 @@ data:
     \ *t) {\n    swap(t->ch[0], t->ch[1]);\n    t->rev ^= true;\n  }\n  Node *eval(Node\
     \ *t) {\n    if (t->rev) {\n      if (t->ch[0]) toggle(t->ch[0]);\n      if (t->ch[1])\
     \ toggle(t->ch[1]);\n      t->rev = false;\n    }\n    return t;\n  }\n\n private:\n\
-    \  vector<Node> ns;\n  int linkcnt;\n\n public:\n  LinkCutTree(int n) : ns(n),\
+    \  vector<Node> ns;\n  size_t linkcnt;\n\n public:\n  LinkCutTree(int n) : ns(n),\
     \ linkcnt(0) {}\n  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n\
     \    toggle(&ns[k]);\n    eval(&ns[k]);\n  }\n  // add link from c to p\n  void\
     \ link(int c, int p) {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n\
@@ -72,8 +71,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree.hpp
   requiredBy: []
-  timestamp: '2020-08-25 17:42:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-17 15:44:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/lca.LCT.test.cpp
 documentation_of: src/DataStructure/LinkCutTree.hpp

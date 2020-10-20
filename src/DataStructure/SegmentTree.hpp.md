@@ -7,15 +7,14 @@ data:
     path: test/aoj/DSL_2_A.SegTree.test.cpp
     title: test/aoj/DSL_2_A.SegTree.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/649.SegTree.test.cpp
-    title: test/yukicoder/649.SegTree.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_set_range_composite.SegTree.test.cpp
     title: test/yosupo/point_set_range_composite.SegTree.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/649.SegTree.test.cpp
+    title: test/yukicoder/649.SegTree.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: Segment-Tree
     links:
     - https://atcoder.jp/contests/arc027/tasks/arc027_4
@@ -107,8 +106,8 @@ data:
   timestamp: '2020-09-20 18:21:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/DSL_2_A.SegTree.test.cpp
   - test/yukicoder/649.SegTree.test.cpp
+  - test/aoj/DSL_2_A.SegTree.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
 documentation_of: src/DataStructure/SegmentTree.hpp
 layout: document

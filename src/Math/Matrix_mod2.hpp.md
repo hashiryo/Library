@@ -4,11 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2624.test.cpp
-    title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2624.test.cpp
+    title: test/aoj/2624.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
@@ -18,7 +18,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u884C\u5217(mod2)"
     links:
     - https://atcoder.jp/contests/bitflyer2018-final-open/tasks/bitflyer2018_final_d
@@ -162,10 +161,10 @@ data:
   timestamp: '2020-09-06 22:06:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2624.test.cpp
-  - test/aoj/2530.test.cpp
   - test/yukicoder/184.test.cpp
   - test/yukicoder/803.test.cpp
+  - test/aoj/2530.test.cpp
+  - test/aoj/2624.test.cpp
 documentation_of: src/Math/Matrix_mod2.hpp
 layout: document
 redirect_from:

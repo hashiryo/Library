@@ -1,27 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
+  - icon: ':question:'
+    path: src/Math/ModInt.hpp
+    title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_first.test.cpp
-    title: test/yosupo/stirling_first.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_second.test.cpp
-    title: test/yosupo/stirling_second.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/partition.test.cpp
-    title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/partition.test.cpp
+    title: test/yosupo/partition.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/stirling_first.test.cpp
+    title: test/yosupo/stirling_first.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/stirling_second.test.cpp
+    title: test/yosupo/stirling_second.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
       )"
     links:
@@ -30,10 +32,10 @@ data:
     - https://en.wikipedia.org/wiki/Partition_function_(number_theory)
     - https://en.wikipedia.org/wiki/Stirling_number
     - https://min-25.hatenablog.com/entry/2015/04/07/160154
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/documentation/build.py\"\
-    , line 70, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir).decode()\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
-    , line 191, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
+    , line 191, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 398, in update\n    raise BundleErrorAt(path, i + 1, \"unable to process\
     \ #include in #if / #ifdef / #ifndef other than include guards\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ src/Math/fps_sequence.hpp: line 17: unable to process #include in #if / #ifdef\
@@ -43,8 +45,8 @@ data:
     \ * @see https://en.wikipedia.org/wiki/Bernoulli_number\n * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n\
     \ * @see https://en.wikipedia.org/wiki/Stirling_number\n * @see https://en.m.wikipedia.org/wiki/Eulerian_number\n\
     \ */\n\n#ifndef call_from_test\n#include <bits/stdc++.h>\nusing namespace std;\n\
-    \n#define call_from_test\n#include \"src/Math/FormalPowerSeries.hpp\"\n#undef\
-    \ call_from_test\n#endif\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \n#define call_from_test\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
+    \n#undef call_from_test\n#endif\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ bernoulli(int N) {\n  FormalPowerSeries<mint> ret(N + 1);\n  ret[0] = 1;\n \
     \ for (int i = 1; i <= N; i++) ret[i] = ret[i - 1] / mint(i + 1);\n  ret = ret.inv();\n\
     \  mint fact = 1;\n  for (int i = 1; i <= N; fact *= (++i)) ret[i] *= fact;\n\
@@ -60,17 +62,18 @@ data:
     \ finv = 1;\n  for (int i = 0; i <= N; finv /= (++i))\n    a[i] = mint(i).pow(N)\
     \ * finv, b[i] = i & 1 ? -finv : finv;\n  return (a * b).part(N + 1);\n}\n"
   dependsOn:
+  - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-09-23 21:17:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-20 16:49:33+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/stirling_second.test.cpp
   - test/yosupo/partition.test.cpp
   - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/stirling_second.test.cpp
 documentation_of: src/Math/fps_sequence.hpp
 layout: document
 redirect_from:

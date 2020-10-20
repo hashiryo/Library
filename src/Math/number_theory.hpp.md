@@ -4,18 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
+    path: test/yosupo/sum_of_totient_function.test.cpp
+    title: test/yosupo/sum_of_totient_function.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
   - icon: ':x:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/sum_of_totient_function.test.cpp
-    title: test/yosupo/sum_of_totient_function.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u6570\u8AD6"
     links:
     - https://atcoder.jp/contests/agc038/tasks/agc038_c
@@ -119,10 +118,10 @@ data:
   path: src/Math/number_theory.hpp
   requiredBy: []
   timestamp: '2020-08-30 17:41:10+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/644.test.cpp
   - test/yukicoder/886.numth.test.cpp
+  - test/yukicoder/644.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
 documentation_of: src/Math/number_theory.hpp
 layout: document

@@ -7,8 +7,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_H.test.cpp
-    title: test/aoj/CGL_7_H.test.cpp
+    path: test/aoj/1132.test.cpp
+    title: test/aoj/1132.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2201.test.cpp
+    title: test/aoj/2201.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2514.test.cpp
+    title: test/aoj/2514.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3034.test.cpp
     title: test/aoj/3034.test.cpp
@@ -16,39 +25,29 @@ data:
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_7_C.test.cpp
-    title: test/aoj/CGL_7_C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2423.test.cpp
-    title: test/aoj/2423.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2201.test.cpp
-    title: test/aoj/2201.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2514.test.cpp
-    title: test/aoj/2514.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_B.test.cpp
     title: test/aoj/CGL_7_B.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/1132.test.cpp
-    title: test/aoj/1132.test.cpp
+    path: test/aoj/CGL_7_C.test.cpp
+    title: test/aoj/CGL_7_C.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_G.test.cpp
     title: test/aoj/CGL_7_G.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/CGL_7_H.test.cpp
+    title: test/aoj/CGL_7_H.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u5186\u306E\u3042\u308C\u3053\u308C"
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/documentation/build.py\"\
-    , line 70, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir).decode()\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
-    , line 191, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
+    , line 191, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
     , line 398, in update\n    raise BundleErrorAt(path, i + 1, \"unable to process\
     \ #include in #if / #ifdef / #ifndef other than include guards\")\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt:\
     \ src/Geometry/circle_functions.hpp: line 11: unable to process #include in #if\
@@ -120,17 +119,17 @@ data:
   timestamp: '2020-09-06 22:06:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/CGL_7_H.test.cpp
-  - test/aoj/3034.test.cpp
-  - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_7_C.test.cpp
-  - test/aoj/2423.test.cpp
-  - test/aoj/2201.test.cpp
-  - test/aoj/2514.test.cpp
   - test/aoj/CGL_7_B.test.cpp
-  - test/aoj/1132.test.cpp
-  - test/aoj/CGL_7_G.test.cpp
+  - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_7_I.test.cpp
+  - test/aoj/3034.test.cpp
+  - test/aoj/1132.test.cpp
+  - test/aoj/2423.test.cpp
+  - test/aoj/CGL_7_G.test.cpp
+  - test/aoj/2201.test.cpp
+  - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/2514.test.cpp
 documentation_of: src/Geometry/circle_functions.hpp
 layout: document
 redirect_from:

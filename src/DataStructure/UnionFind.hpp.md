@@ -10,30 +10,29 @@ data:
     title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0342.test.cpp
+    title: test/aoj/0342.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_1_A.test.cpp
-    title: test/aoj/DSL_1_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_2_B.test.cpp
-    title: test/aoj/GRL_2_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/0342.test.cpp
-    title: test/aoj/0342.test.cpp
+    path: test/aoj/DSL_1_A.test.cpp
+    title: test/aoj/DSL_1_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_A.kruskal.test.cpp
     title: test/aoj/GRL_2_A.kruskal.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_B.test.cpp
+    title: test/aoj/GRL_2_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: Union-Find
     links: []
   bundledCode: "#line 1 \"src/DataStructure/UnionFind.hpp\"\n/**\n * @title Union-Find\n\
@@ -65,17 +64,17 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
-  - src/Graph/MinimumSpanningAborescense.hpp
   - src/Graph/MinimumSpanningTree_Kruskal.hpp
+  - src/Graph/MinimumSpanningAborescense.hpp
   timestamp: '2020-08-11 16:57:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/DSL_1_A.test.cpp
-  - test/aoj/GRL_2_B.test.cpp
-  - test/aoj/2647.test.cpp
-  - test/aoj/0342.test.cpp
   - test/aoj/GRL_2_A.kruskal.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/2647.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/0342.test.cpp
   - test/yosupo/directedmst.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document

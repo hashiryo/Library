@@ -4,27 +4,26 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_F.test.cpp
-    title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_E.test.cpp
-    title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_D.test.cpp
-    title: test/aoj/NTL_2_D.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/NTL_2_D.test.cpp
+    title: test/aoj/NTL_2_D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/NTL_2_E.test.cpp
+    title: test/aoj/NTL_2_E.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/NTL_2_F.test.cpp
+    title: test/aoj/NTL_2_F.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
   bundledCode: "#line 1 \"src/Math/BigInt.hpp\"\n/**\n * @title \u591A\u500D\u9577\
@@ -410,12 +409,12 @@ data:
   timestamp: '2020-09-08 12:38:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/NTL_2_F.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
-  - test/aoj/NTL_2_B.test.cpp
   - test/aoj/NTL_2_C.test.cpp
+  - test/aoj/NTL_2_B.test.cpp
+  - test/aoj/NTL_2_D.test.cpp
+  - test/aoj/NTL_2_E.test.cpp
+  - test/aoj/NTL_2_F.test.cpp
+  - test/aoj/NTL_2_A.test.cpp
 documentation_of: src/Math/BigInt.hpp
 layout: document
 redirect_from:

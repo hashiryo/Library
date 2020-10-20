@@ -10,15 +10,14 @@ data:
     path: test/aoj/ALDS1_14_D.test.cpp
     title: test/aoj/ALDS1_14_D.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/suffixarray.test.cpp
-    title: test/yosupo/suffixarray.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/number_of_substrings.test.cpp
     title: test/yosupo/number_of_substrings.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/suffixarray.test.cpp
+    title: test/yosupo/suffixarray.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
     links: []
   bundledCode: "#line 1 \"src/String/SuffixArray.hpp\"\n/**\n * @title \u63A5\u5C3E\

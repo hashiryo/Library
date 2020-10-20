@@ -3,29 +3,28 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/738.BIT.test.cpp
-    title: test/yukicoder/738.BIT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/649.BIT.test.cpp
-    title: test/yukicoder/649.BIT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/static_range_inversions_query.mo.test.cpp
-    title: test/yosupo/static_range_inversions_query.mo.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_add_range_sum.BIT.test.cpp
     title: test/yosupo/point_add_range_sum.BIT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/static_range_inversions_query.mo.test.cpp
+    title: test/yosupo/static_range_inversions_query.mo.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/649.BIT.test.cpp
+    title: test/yukicoder/649.BIT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/738.BIT.test.cpp
+    title: test/yukicoder/738.BIT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: Binary-Indexed-Tree
     links: []
   bundledCode: "#line 1 \"src/DataStructure/BinaryIndexedTree.hpp\"\n/**\n * @title\
     \ Binary-Indexed-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n *  O(logN)\n\
     \ *  0-indexed\n */\n\n#ifndef call_from_test\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n#endif\n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n\
-    \  vector<T> dat;\n  BinaryIndexedTree(int n) : dat(n + 1, 0) {}\n  BinaryIndexedTree(int\
+    \  vector<T> dat;\n  BinaryIndexedTree(int n) : dat(n + 1, T(0)) {}\n  BinaryIndexedTree(int\
     \ n, T a) : BinaryIndexedTree(vector<T>(n, a)) {}\n  BinaryIndexedTree(vector<T>\
     \ y) : dat(y.size() + 1, 0) {\n    for (size_t i = 0; i < y.size(); ++i) dat[i\
     \ + 1] = y[i];\n    for (int i = 1; i < (int)dat.size(); ++i)\n      if (i + (i\
@@ -42,7 +41,7 @@ data:
   code: "/**\n * @title Binary-Indexed-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\
     \u9020\n *  O(logN)\n *  0-indexed\n */\n\n#ifndef call_from_test\n#include <bits/stdc++.h>\n\
     using namespace std;\n#endif\n\ntemplate <typename T>\nstruct BinaryIndexedTree\
-    \ {\n  vector<T> dat;\n  BinaryIndexedTree(int n) : dat(n + 1, 0) {}\n  BinaryIndexedTree(int\
+    \ {\n  vector<T> dat;\n  BinaryIndexedTree(int n) : dat(n + 1, T(0)) {}\n  BinaryIndexedTree(int\
     \ n, T a) : BinaryIndexedTree(vector<T>(n, a)) {}\n  BinaryIndexedTree(vector<T>\
     \ y) : dat(y.size() + 1, 0) {\n    for (size_t i = 0; i < y.size(); ++i) dat[i\
     \ + 1] = y[i];\n    for (int i = 1; i < (int)dat.size(); ++i)\n      if (i + (i\
@@ -60,11 +59,11 @@ data:
   isVerificationFile: false
   path: src/DataStructure/BinaryIndexedTree.hpp
   requiredBy: []
-  timestamp: '2020-09-09 18:34:56+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-17 15:44:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/738.BIT.test.cpp
   - test/yukicoder/649.BIT.test.cpp
+  - test/yukicoder/738.BIT.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/point_add_range_sum.BIT.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree.hpp

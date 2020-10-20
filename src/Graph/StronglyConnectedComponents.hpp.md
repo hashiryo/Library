@@ -18,7 +18,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
     links: []
   bundledCode: "#line 1 \"src/Graph/StronglyConnectedComponents.hpp\"\n/**\n * @title\
@@ -68,8 +67,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/0366.test.cpp
-  - test/yosupo/scc.test.cpp
   - test/yosupo/two_sat.test.cpp
+  - test/yosupo/scc.test.cpp
 documentation_of: src/Graph/StronglyConnectedComponents.hpp
 layout: document
 redirect_from:

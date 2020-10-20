@@ -7,18 +7,17 @@ data:
     title: "\u4E8C\u5206Trie"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/649.SegTree_Dynamic.test.cpp
-    title: test/yukicoder/649.SegTree_Dynamic.test.cpp
+    path: test/yosupo/set_xor_min.test.cpp
+    title: test/yosupo/set_xor_min.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.BinaryTrie.test.cpp
     title: test/yukicoder/649.BinaryTrie.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/set_xor_min.test.cpp
-    title: test/yosupo/set_xor_min.test.cpp
+    path: test/yukicoder/649.SegTree_Dynamic.test.cpp
+    title: test/yukicoder/649.SegTree_Dynamic.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Segment-Tree(\u52D5\u7684)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n/**\n * @title\
@@ -103,8 +102,8 @@ data:
   timestamp: '2020-08-27 16:28:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/649.SegTree_Dynamic.test.cpp
   - test/yukicoder/649.BinaryTrie.test.cpp
+  - test/yukicoder/649.SegTree_Dynamic.test.cpp
   - test/yosupo/set_xor_min.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document

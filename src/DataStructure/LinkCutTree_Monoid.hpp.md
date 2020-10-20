@@ -4,18 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/529.LCT.test.cpp
-    title: test/yukicoder/529.LCT.test.cpp
+    path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+    title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-    title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/529.LCT.test.cpp
+    title: test/yukicoder/529.LCT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/LinkCutTree_Monoid.hpp\"\n/**\n * @title\
@@ -44,20 +43,19 @@ data:
     \ {\n    swap(t->ch[0], t->ch[1]);\n    swap(t->dat, t->rdat);\n    t->rev ^=\
     \ 1;\n  }\n  Node *eval(Node *t) {\n    if (t->rev) {\n      if (t->ch[0]) toggle(t->ch[0]);\n\
     \      if (t->ch[1]) toggle(t->ch[1]);\n      t->rev = false;\n    }\n    return\
-    \ t;\n  }\n\n public:\n  vector<Node> ns;\n\n private:\n  int linkcnt;\n\n public:\n\
-    \  LinkCutTree_Monoid(int n, T init = M::ti()) : ns(n, init), linkcnt(0) {}\n\
-    \  // make k the root\n  void evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n\
-    \    eval(&ns[k]);\n  }\n  // add link from c to p\n  void link(int c, int p)\
-    \ {\n    assert(linkcnt++ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n\
-    \    ns[p].ch[1] = &ns[c];\n    ns[c].par = &ns[p];\n    pushup(&ns[p]);\n  }\n\
-    \  // cut link from c to p\n  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n\
-    \    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n\
-    \    pushup(&ns[c]);\n  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n  \
-    \  Node *u = expose(&ns[y]);\n    return ns[x].par ? u - &ns[0] : -1;\n  }\n \
-    \ T operator[](int k) { return ns[k].val; }\n  // [a,b] closed section\n  T query(int\
-    \ a, int b) {\n    evert(a);\n    expose(&ns[b]);\n    return ns[b].dat;\n  }\n\
-    \  void set_val(int k, T v) {\n    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n\
-    \  }\n};\n"
+    \ t;\n  }\n\n private:\n  vector<Node> ns;\n  size_t linkcnt;\n\n public:\n  LinkCutTree_Monoid(int\
+    \ n, T init = M::ti()) : ns(n, init), linkcnt(0) {}\n  // make k the root\n  void\
+    \ evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n    eval(&ns[k]);\n\
+    \  }\n  // add link from c to p\n  void link(int c, int p) {\n    assert(linkcnt++\
+    \ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n    ns[p].ch[1] = &ns[c];\n\
+    \    ns[c].par = &ns[p];\n    pushup(&ns[p]);\n  }\n  // cut link from c to p\n\
+    \  void cut(int c, int p) {\n    linkcnt--;\n    evert(p);\n    expose(&ns[c]);\n\
+    \    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n    pushup(&ns[c]);\n\
+    \  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
+    \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) { return\
+    \ ns[k].val; }\n  // [a,b] closed section\n  T query(int a, int b) {\n    evert(a);\n\
+    \    expose(&ns[b]);\n    return ns[b].dat;\n  }\n  void set_val(int k, T v) {\n\
+    \    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n  }\n};\n"
   code: "/**\n * @title Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)\n * @category \u30C7\
     \u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n */\n\n#ifndef call_from_test\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n#endif\n\ntemplate <typename M>\nstruct\
@@ -83,9 +81,9 @@ data:
     \   return r;\n  }\n  void toggle(Node *t) {\n    swap(t->ch[0], t->ch[1]);\n\
     \    swap(t->dat, t->rdat);\n    t->rev ^= 1;\n  }\n  Node *eval(Node *t) {\n\
     \    if (t->rev) {\n      if (t->ch[0]) toggle(t->ch[0]);\n      if (t->ch[1])\
-    \ toggle(t->ch[1]);\n      t->rev = false;\n    }\n    return t;\n  }\n\n public:\n\
-    \  vector<Node> ns;\n\n private:\n  int linkcnt;\n\n public:\n  LinkCutTree_Monoid(int\
-    \ n, T init = M::ti()) : ns(n, init), linkcnt(0) {}\n  // make k the root\n  void\
+    \ toggle(t->ch[1]);\n      t->rev = false;\n    }\n    return t;\n  }\n\n private:\n\
+    \  vector<Node> ns;\n  size_t linkcnt;\n\n public:\n  LinkCutTree_Monoid(int n,\
+    \ T init = M::ti()) : ns(n, init), linkcnt(0) {}\n  // make k the root\n  void\
     \ evert(int k) {\n    expose(&ns[k]);\n    toggle(&ns[k]);\n    eval(&ns[k]);\n\
     \  }\n  // add link from c to p\n  void link(int c, int p) {\n    assert(linkcnt++\
     \ < ns.size() - 1);\n    evert(c);\n    expose(&ns[p]);\n    ns[p].ch[1] = &ns[c];\n\
@@ -101,12 +99,12 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree_Monoid.hpp
   requiredBy: []
-  timestamp: '2020-08-25 17:42:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-17 15:44:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/529.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
 documentation_of: src/DataStructure/LinkCutTree_Monoid.hpp
 layout: document
 redirect_from:

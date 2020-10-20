@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u96E2\u6563\u5BFE\u6570"
     links: []
   bundledCode: "#line 1 \"src/Math/discrete_log.hpp\"\n/**\n * @title \u96E2\u6563\

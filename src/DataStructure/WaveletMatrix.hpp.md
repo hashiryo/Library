@@ -4,24 +4,23 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2674.WM.test.cpp
-    title: test/aoj/2674.WM.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/1549.WM.test.cpp
     title: test/aoj/1549.WM.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/919.WM.test.cpp
-    title: test/yukicoder/919.WM.test.cpp
+    path: test/aoj/2674.WM.test.cpp
+    title: test/aoj/2674.WM.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/range_kth_smallest.WM.test.cpp
+    title: test/yosupo/range_kth_smallest.WM.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.WM.test.cpp
     title: test/yukicoder/728.WM.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/range_kth_smallest.WM.test.cpp
-    title: test/yosupo/range_kth_smallest.WM.test.cpp
+    path: test/yukicoder/919.WM.test.cpp
+    title: test/yukicoder/919.WM.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Wavelet\u884C\u5217"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/WaveletMatrix.hpp\"\n/**\n * @title Wavelet\u884C\
@@ -140,10 +139,10 @@ data:
   timestamp: '2020-08-27 16:59:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2674.WM.test.cpp
-  - test/aoj/1549.WM.test.cpp
   - test/yukicoder/919.WM.test.cpp
   - test/yukicoder/728.WM.test.cpp
+  - test/aoj/2674.WM.test.cpp
+  - test/aoj/1549.WM.test.cpp
   - test/yosupo/range_kth_smallest.WM.test.cpp
 documentation_of: src/DataStructure/WaveletMatrix.hpp
 layout: document

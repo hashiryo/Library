@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Sparse-Table(\u533A\u9593min)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/SparseTable.hpp\"\n/**\n * @title Sparse-Table(\u533A\

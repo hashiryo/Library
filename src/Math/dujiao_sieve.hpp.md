@@ -3,19 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/sum_of_totient_function.test.cpp
+    title: test/yosupo/sum_of_totient_function.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1019.dujiao.test.cpp
     title: test/yukicoder/1019.dujiao.test.cpp
   - icon: ':x:'
     path: test/yukicoder/886.dujiao.test.cpp
     title: test/yukicoder/886.dujiao.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/sum_of_totient_function.test.cpp
-    title: test/yosupo/sum_of_totient_function.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u675C\u6559\u7B5B"
     links:
     - https://blog.bill.moe/multiplicative-function-sieves-notes/
@@ -68,7 +67,7 @@ data:
   path: src/Math/dujiao_sieve.hpp
   requiredBy: []
   timestamp: '2020-08-11 20:23:42+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1019.dujiao.test.cpp
   - test/yukicoder/886.dujiao.test.cpp

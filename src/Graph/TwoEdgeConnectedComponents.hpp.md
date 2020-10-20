@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/529.LCT.test.cpp
-    title: test/yukicoder/529.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/two_edge_connected_components.test.cpp
     title: test/yosupo/two_edge_connected_components.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/529.LCT.test.cpp
+    title: test/yukicoder/529.LCT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
     links: []
   bundledCode: "#line 1 \"src/Graph/TwoEdgeConnectedComponents.hpp\"\n/**\n * @title\
@@ -69,7 +68,7 @@ data:
   path: src/Graph/TwoEdgeConnectedComponents.hpp
   requiredBy: []
   timestamp: '2020-08-11 20:23:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/529.LCT.test.cpp
   - test/yosupo/two_edge_connected_components.test.cpp

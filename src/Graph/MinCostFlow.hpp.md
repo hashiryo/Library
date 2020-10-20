@@ -4,21 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_6_B.test.cpp
-    title: test/aoj/GRL_6_B.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_B.RadixHeap.test.cpp
     title: test/aoj/GRL_6_B.RadixHeap.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/min_cost_b_flow.test.cpp
-    title: test/yosupo/min_cost_b_flow.test.cpp
+    path: test/aoj/GRL_6_B.test.cpp
+    title: test/aoj/GRL_6_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/min_cost_b_flow.test.cpp
+    title: test/yosupo/min_cost_b_flow.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
     links:
     - https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b
@@ -245,8 +244,8 @@ data:
   verifiedWith:
   - test/aoj/GRL_6_B.test.cpp
   - test/aoj/GRL_6_B.RadixHeap.test.cpp
-  - test/yosupo/min_cost_b_flow.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
+  - test/yosupo/min_cost_b_flow.test.cpp
 documentation_of: src/Graph/MinCostFlow.hpp
 layout: document
 redirect_from:

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: Knuth-Morris-Pratt
     links: []
   bundledCode: "#line 1 \"src/String/KnuthMorrisPratt.hpp\"\n/**\n * @title Knuth-Morris-Pratt\n\

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Segment-Tree(\u53CC\u5BFE)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/SegmentTree_Dual.hpp\"\n/**\n * @title\

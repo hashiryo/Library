@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
     links: []
   bundledCode: "#line 1 \"src/DataStructure/UnionFind_Potential.hpp\"\n/**\n * @title\

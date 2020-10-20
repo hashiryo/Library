@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: Rolling-Hash
     links:
     - https://atcoder.jp/contests/arc050/tasks/arc050_d
