@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -9,7 +9,7 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':x:'
@@ -22,7 +22,7 @@ data:
     path: test/yosupo/stirling_second.test.cpp
     title: test/yosupo/stirling_second.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
       )"
@@ -67,12 +67,12 @@ data:
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-10-20 16:49:33+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-21 15:03:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/partition.test.cpp
   - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_first.test.cpp
   - test/yosupo/stirling_second.test.cpp
 documentation_of: src/Math/fps_sequence.hpp
 layout: document

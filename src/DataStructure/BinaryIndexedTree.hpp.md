@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_range_sum.BIT.test.cpp
     title: test/yosupo/point_add_range_sum.BIT.test.cpp
   - icon: ':x:'
@@ -16,7 +16,7 @@ data:
     path: test/yukicoder/738.BIT.test.cpp
     title: test/yukicoder/738.BIT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Binary-Indexed-Tree
     links: []
@@ -60,10 +60,10 @@ data:
   path: src/DataStructure/BinaryIndexedTree.hpp
   requiredBy: []
   timestamp: '2020-10-17 15:44:25+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/649.BIT.test.cpp
   - test/yukicoder/738.BIT.test.cpp
+  - test/yukicoder/649.BIT.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/point_add_range_sum.BIT.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree.hpp

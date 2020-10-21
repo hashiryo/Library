@@ -8,7 +8,10 @@ data:
   - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: src/Math/exgcd.hpp
+    title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
+  - icon: ':question:'
     path: src/Math/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
   - icon: ':x:'
@@ -21,7 +24,7 @@ data:
   - icon: ':x:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':x:'
@@ -30,15 +33,18 @@ data:
   - icon: ':x:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/inv_of_Poly.test.cpp
+    title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
@@ -88,7 +94,7 @@ data:
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -147,7 +153,7 @@ data:
     \ = 2;\n      for (int j = lim; j <= i; j++) INV[j] = INV[mod % j] * (mod - mod\
     \ / j);\n      lim = i + 1;\n    }\n    return INV[i];\n  }\n\n public:\n  int\
     \ deg() const {\n    int n = int(this->size()) - 1;\n    while (n >= 0 && (*this)[n]\
-    \ == 0) n--;\n    return n;\n  }\n  FPS &norm() { return this->resize(max(this->deg()\
+    \ == mint(0)) n--;\n    return n;\n  }\n  FPS &norm() { return this->resize(max(this->deg()\
     \ + 1, 1)), *this; }\n  uint64_t inline get_len(uint64_t n) const {\n    return\
     \ --n, n |= n >> 1, n |= n >> 2, n |= n >> 4, n |= n >> 8,\n           n |= n\
     \ >> 16, n |= n >> 32, ++n;\n  }\n  FPS mul(const FPS &y) const {\n    if (deg()\
@@ -175,76 +181,67 @@ data:
     \ i, ret.data());\n      for (int j = i >> 1; j < i; j++) ret[j] = -ret[j];\n\
     \    }\n    return ret.resize(n), ret;\n  }\n  inline FPS div_con(const FPS &g,\
     \ const FPS &g0) const {\n    if (this->size() == 1) return {(*this)[0] * g[0].inverse()};\n\
-    \    int n = this->size(), len = get_len(n), len2 = len >> 1;\n    FPS ret(n);\n\
-    \    copy_n(this->begin(), n, bf1), fill(bf1 + n, bf1 + len, 0);\n    copy_n(g.begin(),\
-    \ n, bf2), fill(bf2 + n, bf2 + len, 0);\n    subst(a1, a2, 0, len2, g0.data()),\
-    \ subst(b1, b2, 0, len2, bf1);\n    fill(a1 + len2, a1 + len, 0), fill(a2 + len2,\
-    \ a2 + len, 0);\n    fill(b1 + len2, b1 + len, 0), fill(b2 + len2, b2 + len, 0);\n\
-    \    dft(len, a1), dft(len, b1), dft(len, a2), dft(len, b2);\n    for (int i =\
-    \ 0; i < len; i++) b1[i] *= a1[i], b2[i] *= a2[i];\n    idft(len, b1), idft(len,\
-    \ b2), crt(b1, b2, 0, len >> 1, ret.data());\n    subst(b1, b2, 0, len2, ret.data()),\
-    \ subst(c1, c2, 0, len, bf2);\n    fill(b1 + len2, b1 + len, 0), fill(b2 + len2,\
-    \ b2 + len, 0);\n    dft(len, c1), dft(len, b1), dft(len, c2), dft(len, b2);\n\
-    \    for (int i = 0; i < len; i++) c1[i] *= b1[i], c2[i] *= b2[i];\n    idft(len,\
-    \ c1), idft(len, c2), crt(c1 + len2, c2 + len2, 0, len2, bf1);\n    for (int i\
-    \ = len2; i < len; i++) bf1[i] -= bf1[i - len2];\n    subst(c1, c2, len2, len,\
-    \ bf1);\n    fill_n(c1, len2, 0), fill_n(c2, len2, 0), dft(len, c1), dft(len,\
-    \ c2);\n    for (int i = len; i >= 0; i--) c1[i] *= a1[i], c2[i] *= a2[i];\n \
-    \   idft(len, c1), idft(len, c2), crt(c1, c2, len2, n, ret.data());\n    return\
-    \ ret;\n  }\n  inline pair<FPS, FPS> quorem_rev_con(const FPS &yr, const FPS &g0r)\
-    \ const {\n    if (this->size() < yr.size()) return make_pair(FPS({0}), *this);\n\
-    \    int sq = this->size() - yr.size() + 1, len = get_len(sq);\n    FPS qr = FPS(this->begin(),\
-    \ this->begin() + sq).div_con(yr, g0r);\n    if (yr.size() == 1) return make_pair(qr,\
-    \ FPS({0}));\n    len = get_len(max(qr.size(), yr.size()));\n    int mask = len\
-    \ - 1;\n    subst(a1, a2, 0, sq, qr.data()), subst(b1, b2, 0, yr.size(), yr.data());\n\
-    \    fill(a1 + sq, a1 + len, 0), fill(a2 + sq, a2 + len, 0);\n    fill(b1 + yr.size(),\
-    \ b1 + len, 0), fill(b2 + yr.size(), b2 + len, 0);\n    dft(len, a1), dft(len,\
-    \ a2), dft(len, b1), dft(len, b2);\n    for (int i = len - 1; i >= 0; i--) a1[i]\
-    \ *= b1[i], a2[i] *= b2[i];\n    idft(len, a1), idft(len, a2), crt(a1, a2, 0,\
-    \ len, bf1);\n    for (int i = sq - 1; i >= 0; i--) bf1[i & mask] -= (*this)[i\
-    \ & mask];\n    FPS rem(this->begin() + sq, this->end());\n    for (int i = rem.size()\
-    \ - 1; i >= 0; i--) rem[i] -= bf1[(sq + i) & mask];\n    return make_pair(qr,\
-    \ rem);\n  }\n  inline pair<FPS, FPS> quorem_rev_n(const FPS &yr) const {\n  \
-    \  if (this->size() < yr.size()) return make_pair(FPS({0}), *this);\n    int sq\
-    \ = this->size() - yr.size() + 1;\n    copy_n(this->begin(), this->size(), bf1);\n\
-    \    FPS qr(sq, 0);\n    mint iv = yr[0].inverse();\n    for (int i = 0; i < sq;\
-    \ i++) {\n      qr[i] = bf1[i] * iv;\n      for (int j = 0; j < (int)yr.size();\
-    \ j++) bf1[j + i] -= yr[j] * qr[i];\n    }\n    return make_pair(qr, FPS(bf1 +\
-    \ sq, bf1 + this->size()));\n  }\n  FPS div(const FPS &y) const {\n    if (this->size()\
-    \ == 1) return {(*this)[0] * y[0].inverse()};\n    int len = get_len(this->size()),\
-    \ len2 = len >> 1;\n    return div_con(y, FPS(y.begin(), y.begin() + len2).inv());\n\
-    \  }\n  FPS quo(FPS y) const {\n    FPS x(*this);\n    x.norm(), y.norm();\n \
-    \   if (x.size() < y.size()) return FPS({0});\n    reverse(x.begin(), x.end()),\
-    \ reverse(y.begin(), y.end());\n    FPS ret = y.size() < 512 ? x.quorem_rev_n(y).first\n\
-    \                             : (x.resize(x.size() - y.size() + 1), x.div(y));\n\
-    \    reverse(ret.begin(), ret.end());\n    return ret;\n  }\n  FPS quorem(FPS\
+    \    int n = this->size(), len = get_len(n), len2 = len >> 1,\n        m = min<int>(n,\
+    \ g.size());\n    FPS ret(n);\n    copy_n(this->begin(), n, bf1), fill(bf1 + n,\
+    \ bf1 + len, 0);\n    copy_n(g.begin(), m, bf2), fill(bf2 + m, bf2 + len, 0);\n\
+    \    subst(a1, a2, 0, len2, g0.data()), subst(b1, b2, 0, len2, bf1);\n    fill(a1\
+    \ + len2, a1 + len, 0), fill(a2 + len2, a2 + len, 0);\n    fill(b1 + len2, b1\
+    \ + len, 0), fill(b2 + len2, b2 + len, 0);\n    dft(len, a1), dft(len, b1), dft(len,\
+    \ a2), dft(len, b2);\n    for (int i = 0; i < len; i++) b1[i] *= a1[i], b2[i]\
+    \ *= a2[i];\n    idft(len, b1), idft(len, b2), crt(b1, b2, 0, len >> 1, ret.data());\n\
+    \    subst(b1, b2, 0, len2, ret.data()), subst(c1, c2, 0, len, bf2);\n    fill(b1\
+    \ + len2, b1 + len, 0), fill(b2 + len2, b2 + len, 0);\n    dft(len, c1), dft(len,\
+    \ b1), dft(len, c2), dft(len, b2);\n    for (int i = 0; i < len; i++) c1[i] *=\
+    \ b1[i], c2[i] *= b2[i];\n    idft(len, c1), idft(len, c2), crt(c1 + len2, c2\
+    \ + len2, 0, len2, bf1);\n    for (int i = len2; i < len; i++) bf1[i] -= bf1[i\
+    \ - len2];\n    subst(c1, c2, len2, len, bf1);\n    fill_n(c1, len2, 0), fill_n(c2,\
+    \ len2, 0), dft(len, c1), dft(len, c2);\n    for (int i = len; i >= 0; i--) c1[i]\
+    \ *= a1[i], c2[i] *= a2[i];\n    idft(len, c1), idft(len, c2), crt(c1, c2, len2,\
+    \ n, ret.data());\n    return ret;\n  }\n  inline pair<FPS, FPS> quorem_rev_con(const\
+    \ FPS &yr, const FPS &g0r) const {\n    if (this->size() < yr.size()) return make_pair(FPS{0},\
+    \ *this);\n    int sq = this->size() - yr.size() + 1, len = get_len(sq);\n   \
+    \ FPS qr = FPS(this->begin(), this->begin() + sq).div_con(yr, g0r);\n    if (yr.size()\
+    \ == 1) return make_pair(qr, FPS{0});\n    len = get_len(max(qr.size(), yr.size()));\n\
+    \    int mask = len - 1;\n    subst(a1, a2, 0, sq, qr.data()), subst(b1, b2, 0,\
+    \ yr.size(), yr.data());\n    fill(a1 + sq, a1 + len, 0), fill(a2 + sq, a2 + len,\
+    \ 0);\n    fill(b1 + yr.size(), b1 + len, 0), fill(b2 + yr.size(), b2 + len, 0);\n\
+    \    dft(len, a1), dft(len, a2), dft(len, b1), dft(len, b2);\n    for (int i =\
+    \ len - 1; i >= 0; i--) a1[i] *= b1[i], a2[i] *= b2[i];\n    idft(len, a1), idft(len,\
+    \ a2), crt(a1, a2, 0, len, bf1);\n    for (int i = sq - 1; i >= 0; i--) bf1[i\
+    \ & mask] -= (*this)[i & mask];\n    FPS rem(this->begin() + sq, this->end());\n\
+    \    for (int i = rem.size() - 1; i >= 0; i--) rem[i] -= bf1[(sq + i) & mask];\n\
+    \    return make_pair(qr, rem);\n  }\n  inline pair<FPS, FPS> quorem_rev_n(const\
+    \ FPS &yr) const {\n    if (this->size() < yr.size()) return make_pair(FPS{0},\
+    \ *this);\n    int sq = this->size() - yr.size() + 1;\n    copy_n(this->begin(),\
+    \ this->size(), bf1);\n    FPS qr(sq, 0);\n    mint iv = yr[0].inverse();\n  \
+    \  for (int i = 0; i < sq; i++) {\n      qr[i] = bf1[i] * iv;\n      for (int\
+    \ j = 0; j < (int)yr.size(); j++) bf1[j + i] -= yr[j] * qr[i];\n    }\n    return\
+    \ make_pair(qr, FPS(bf1 + sq, bf1 + this->size()));\n  }\n  FPS div(const FPS\
+    \ &y) const {\n    if (this->size() == 1) return {(*this)[0] * y[0].inverse()};\n\
+    \    int len2 = get_len(this->size()) / 2;\n    FPS g(len2);\n    for (int i =\
+    \ min<int>(y.size(), len2) - 1; i >= 0; i--) g[i] = y[i];\n    return div_con(y,\
+    \ g.inv());\n  }\n  FPS quo(FPS y) const {\n    FPS x(*this);\n    x.norm(), y.norm();\n\
+    \    if (x.size() < y.size()) return FPS{0};\n    if (x.size() == y.size()) return\
+    \ FPS{x.back() / y.back()};\n    reverse(x.begin(), x.end()), reverse(y.begin(),\
+    \ y.end());\n    FPS ret = y.size() < 1024 ? x.quorem_rev_n(y).first\n       \
+    \                       : (x.resize(x.size() - y.size() + 1), x.div(y));\n   \
+    \ reverse(ret.begin(), ret.end());\n    return ret;\n  }\n  pair<FPS, FPS> quorem(FPS\
     \ y) const {\n    FPS x(*this);\n    x.norm(), y.norm();\n    if (x.size() < y.size())\
-    \ return make_pair(FPS({0}), x);\n    reverse(x.begin(), x.end()), reverse(y.begin(),\
-    \ y.end());\n    int len = get_len(x.size()), len2 = len >> 1;\n    FPS q, r;\n\
-    \    tie(q, r) = y.size() < 512 ? x.quorem_rev_n(y)\n                        \
-    \       : x.quorem_rev_con(\n                                   y, FPS(y.begin(),\
-    \ y.begin() + len2).inv());\n    reverse(q.begin(), q.end()), reverse(r.begin(),\
-    \ r.end());\n    return make_pair(q, r.norm());\n  }\n  // pair<FPS, FPS> quorem(FPS\
-    \ y) const {\n  //   if (this->size() < y.size()) return make_pair(FPS({0}), *this);\n\
-    \  //   FPS q = this->quo(y), rem(y.size() - 1);\n  //   if (y.size() == 1) return\
-    \ make_pair(q, FPS({0}));\n  //   int len = get_len(max(q.size(), y.size()));\n\
-    \  //   int overlap = q.size() + y.size() - 1 - len;\n  //   subst(a1, a2, 0,\
-    \ q.size(), q), subst(b1, b2, 0, y.size(), y);\n  //   fill(a1 + q.size(), a1\
-    \ + len, 0), fill(a2 + q.size(), a2 + len, 0);\n  //   fill(b1 + q.size(), b1\
-    \ + len, 0), fill(b2 + q.size(), b2 + len, 0);\n  //   dft(len, a1), dft(len,\
-    \ a2), dft(len, b1), dft(len, b2);\n  //   for (int i = len - 1; i >= 0; i--)\
-    \ a1[i] *= b1[i], a2[i] *= b2[i];\n  //   idft(len, a1), idft(len, a2), crt(a1,\
-    \ a2, 0, rem.size(), rem.data());\n  //   if (overlap > 0)\n  //     for (int\
-    \ i = min<int>(rem.size(), overlap); i >= 0; i--)\n  //       rem[i] -= (*this)[len\
-    \ + i];\n  //   for (int i = rem.size() - 1; i >= 0; i--) rem[i] = (*this)[i]\
-    \ - rem[i];\n  //   return make_pair(q, rem.norm());\n  // }\n  FPS diff() const\
-    \ {\n    FPS ret(max(0, int(this->size() - 1)));\n    for (int i = this->size()\
-    \ - 1; i > 0; i--) ret[i - 1] = (*this)[i] * i;\n    return ret;\n  }\n  FPS inte()\
-    \ const {\n    int len = this->size() + 1;\n    FPS ret(len);\n    ret[0] = 0;\n\
-    \    for (int i = len - 1; i >= 1; i--) ret[i] = (*this)[i - 1] * get_inv(i);\n\
-    \    return ret;\n  }\n  FPS log() const {\n    assert((*this)[0] == mint(1));\n\
-    \    return this->size() == 1 ? FPS({0}) : this->diff().div(*this).inte();\n \
-    \ }\n  FPS exp() const {\n    assert((*this)[0] == mint(0));\n    int n = this->size(),\
+    \ return make_pair(FPS{0}, x);\n    if (x.size() == y.size()) {\n      mint tmp\
+    \ = x.back() / y.back();\n      return make_pair(FPS{tmp}, x - y * tmp);\n   \
+    \ }\n    reverse(x.begin(), x.end()), reverse(y.begin(), y.end());\n    FPS q,\
+    \ r;\n    if (y.size() < 1024)\n      tie(q, r) = x.quorem_rev_n(y);\n    else\
+    \ {\n      int len2 = get_len(x.size() - y.size() + 1) / 2;\n      FPS gr(len2);\n\
+    \      for (int i = min<int>(y.size(), len2) - 1; i >= 0; i--) gr[i] = y[i];\n\
+    \      tie(q, r) = x.quorem_rev_con(y, gr.inv());\n    }\n    reverse(q.begin(),\
+    \ q.end()), reverse(r.begin(), r.end());\n    return make_pair(q, r.norm());\n\
+    \  }\n  FPS diff() const {\n    FPS ret(max(0, int(this->size() - 1)));\n    for\
+    \ (int i = this->size() - 1; i > 0; i--) ret[i - 1] = (*this)[i] * i;\n    return\
+    \ ret;\n  }\n  FPS inte() const {\n    int len = this->size() + 1;\n    FPS ret(len);\n\
+    \    ret[0] = 0;\n    for (int i = len - 1; i >= 1; i--) ret[i] = (*this)[i -\
+    \ 1] * get_inv(i);\n    return ret;\n  }\n  FPS log() const {\n    assert((*this)[0]\
+    \ == mint(1));\n    return this->size() == 1 ? FPS({0}) : this->diff().div(*this).inte();\n\
+    \  }\n  FPS exp() const {\n    assert((*this)[0] == mint(0));\n    int n = this->size(),\
     \ len = get_len(n);\n    if (n == 1) return {1};\n    static mint b[1 << 21],\
     \ f[1 << 21];\n    copy_n(this->data(), n, bf1), fill(bf1 + n, bf1 + len, 0);\n\
     \    FPS ret(len, 0);\n    fill_n(bf2, len, 0), fill_n(c1, len, 0), fill_n(c2,\
@@ -277,18 +274,18 @@ data:
     \ b2), crt(b1, b2, i2, i, bf2);\n        for (int j = i2; j < i; j++) bf2[j] =\
     \ -bf2[j];\n      }\n    }\n    return ret.resize(n), ret;\n  }\n  FPS pow(uint64_t\
     \ k) const {\n    int n = this->size(), cnt = 0;\n    while (cnt < n && (*this)[cnt]\
-    \ == 0) cnt++;\n    if (k * cnt >= (uint64_t)n) return FPS(n, 0);\n    FPS ret(n,\
-    \ 0);\n    mint iv = (*this)[cnt].inverse();\n    FPS pt = ((FPS(this->begin()\
-    \ + cnt, this->end()) * iv).log() * k).exp()\n             * (*this)[cnt].pow(k);\n\
-    \    for (int i = k * cnt, j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return\
-    \ ret;\n  }\n  pair<FPS, FPS> cos_and_sin() const {\n    static constexpr mint\
-    \ imag = mint(-1).sqrt();\n    static constexpr mint iv2 = mint(mint::modulo()\
+    \ == mint(0)) cnt++;\n    if (k * cnt >= (uint64_t)n) return FPS(n, 0);\n    mint\
+    \ iv = (*this)[cnt].inverse();\n    FPS pt = ((FPS(this->begin() + cnt, this->end())\
+    \ * iv).log() * k).exp()\n             * (*this)[cnt].pow(k),\n        ret(n,\
+    \ 0);\n    for (int i = k * cnt, j = 0; i < n; i++, j++) ret[i] = pt[j];\n   \
+    \ return ret;\n  }\n  pair<FPS, FPS> cos_and_sin() const {\n    static constexpr\
+    \ mint imag = mint(-1).sqrt();\n    static constexpr mint iv2 = mint(mint::modulo()\
     \ - (mint::modulo() - 1) / 2);\n    FPS a = (*this * imag).exp(), b = (*this *\
     \ (-imag)).exp();\n    return make_pair((a + b) * iv2, (a - b) * iv2 / imag);\n\
     \  }\n  FPS sqrt() const {\n    static constexpr mint iv2 = mint(mint::modulo()\
     \ - (mint::modulo() - 1) / 2);\n    int n = this->size(), cnt = 0;\n    while\
-    \ (cnt < n && (*this)[cnt] == 0) cnt++;\n    if (cnt == n) return FPS(n, 0);\n\
-    \    if (cnt & 1) return FPS();  // no solution\n    mint sqr = (*this)[cnt].sqrt();\n\
+    \ (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (cnt == n) return FPS(n,\
+    \ 0);\n    if (cnt & 1) return FPS();  // no solution\n    mint sqr = (*this)[cnt].sqrt();\n\
     \    if (sqr * sqr != (*this)[cnt]) return FPS();  // no solution\n    int len\
     \ = get_len(n - cnt / 2);\n    FPS ret({sqr});\n    ret.resize(len);\n    copy_n(this->begin()\
     \ + cnt, n - cnt, bf1),\n        fill(bf1 + n - cnt, bf1 + len, 0);\n    fill_n(bf2,\
@@ -328,56 +325,62 @@ data:
     \        tmp += gpw[j] * (*this)[i * d + j];\n      tmp *= gd;\n      for (int\
     \ j = min<int>(n, tmp.size()) - 1; j >= 0; j--) ret[j] += tmp[j];\n      gd *=\
     \ gpw[d];\n      if ((int)gd.size() > n) gd.resize(n);\n    }\n    return ret;\n\
-    \  }\n\n  FPS &operator*=(const mint &v) {\n    for (int i = this->size() - 1;\
-    \ i >= 0; i--) (*this)[i] *= v;\n    return *this;\n  }\n  FPS &operator+=(const\
-    \ FPS &rhs) {\n    if (this->size() < rhs.size()) this->resize(rhs.size(), 0);\n\
-    \    for (int i = rhs.size() - 1; i >= 0; i--) (*this)[i] += rhs[i];\n    return\
-    \ *this;\n  }\n  FPS &operator-=(const FPS &rhs) {\n    if (this->size() < rhs.size())\
-    \ this->resize(rhs.size(), 0);\n    for (int i = rhs.size() - 1; i >= 0; i--)\
-    \ (*this)[i] -= rhs[i];\n    return *this;\n  }\n  FPS &operator*=(const FPS &rhs)\
-    \ { return *this = this->mul(rhs); }\n  FPS &operator/=(const FPS &rhs) { return\
-    \ *this = this->quo(rhs); }\n  FPS &operator%=(const FPS &rhs) { return *this\
-    \ = this->quorem(rhs).second; }\n  FPS operator*(const mint &v) const { return\
-    \ FPS(*this) *= v; }\n  FPS operator+(const FPS &rhs) const { return FPS(*this)\
-    \ += rhs; }\n  FPS operator-(const FPS &rhs) const { return FPS(*this) -= rhs;\
-    \ }\n  FPS operator*(const FPS &rhs) const { return this->mul(rhs); }\n  FPS operator/(const\
-    \ FPS &rhs) const { return this->quo(rhs); }\n  FPS operator%(const FPS &rhs)\
-    \ const { return this->quorem(rhs).second; }\n};"
+    \  }\n  FPS operator-() {\n    FPS ret(this->size());\n    for (int i = ret.size()\
+    \ - 1; i >= 0; i--) ret[i] = -(*this)[i];\n    return ret;\n  }\n  FPS &operator*=(const\
+    \ mint &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] *= v;\n\
+    \    return *this;\n  }\n  FPS &operator/=(const mint &v) {\n    for (int i =\
+    \ this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n    return *this;\n  }\n  FPS\
+    \ &operator+=(const FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(),\
+    \ 0);\n    for (int i = r.size() - 1; i >= 0; i--) (*this)[i] += r[i];\n    return\
+    \ this->norm();\n  }\n  FPS &operator-=(const FPS &r) {\n    if (this->size()\
+    \ < r.size()) this->resize(r.size(), 0);\n    for (int i = r.size() - 1; i >=\
+    \ 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n  }\n  FPS &operator*=(const\
+    \ FPS &r) { return *this = norm().mul(FPS(r).norm()); }\n  FPS &operator/=(const\
+    \ FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const FPS &r) {\
+    \ return *this = this->quorem(r).second; }\n  FPS operator*(const mint &v) const\
+    \ { return FPS(*this) *= v; }\n  FPS operator/(const mint &v) const { return FPS(*this)\
+    \ /= v; }\n  FPS operator+(const FPS &r) const { return FPS(*this) += r; }\n \
+    \ FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator*(const\
+    \ FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const FPS &r) const\
+    \ { return this->quo(r); }\n  FPS operator%(const FPS &r) const { return this->quorem(r).second;\
+    \ }\n};"
   dependsOn:
   - src/Math/ModInt.hpp
   isVerificationFile: false
   path: src/Math/FormalPowerSeries.hpp
   requiredBy:
-  - src/Math/kitamasa.hpp
-  - src/Math/fps_sequence.hpp
   - src/Math/SubproductTree.hpp
-  timestamp: '2020-10-20 16:49:33+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  - src/Math/kitamasa.hpp
+  - src/Math/exgcd.hpp
+  - src/Math/fps_sequence.hpp
+  timestamp: '2020-10-21 15:03:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
-  - test/yukicoder/3046.test.cpp
   - test/yukicoder/980.test.cpp
-  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/3046.test.cpp
   - test/yukicoder/215.test.cpp
+  - test/yukicoder/1145.test.cpp
   - test/yukicoder/1080.test.cpp
-  - test/aoj/0168.test.cpp
   - test/aoj/3072.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/inv_of_FPS.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/convolution1000000007.test.cpp
+  - test/aoj/0168.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/stirling_second.test.cpp
 documentation_of: src/Math/FormalPowerSeries.hpp
 layout: document
 redirect_from:

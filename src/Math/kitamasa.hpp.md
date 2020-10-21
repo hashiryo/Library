@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -41,21 +41,21 @@ data:
     \ vector<mint> &a, uint64_t k) {\n  assert(a.size() == c.size());\n  int N = a.size();\n\
     \  if (k < (uint64_t)N) return a[k];\n  uint64_t mask = (uint64_t(1) << (63 -\
     \ __builtin_clzll(k))) >> 1;\n  FormalPowerSeries<mint> f(N + 1), r({1, 0});\n\
-    \  f[0] = 1;\n  for (int i = 0; i < N; i++) f[N - i] = -c[i];\n  if (N < 512)\
+    \  f[0] = 1;\n  for (int i = 0; i < N; i++) f[N - i] = -c[i];\n  if (N < 1024)\
     \ {  // naive\n    r = r.quorem_rev_n(f).second;\n    for (; mask; mask >>= 1)\
-    \ {\n      r *= r;\n      if (k & mask) r.push_back(0);\n      r = r.quorem_rev_n(f).second;\n\
+    \ {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n      r = r.quorem_rev_n(f).second;\n\
     \    }\n  } else {\n    FormalPowerSeries<mint> inv = f.inv();\n    r = r.quorem_rev_con(f,\
-    \ inv).second;\n    for (; mask; mask >>= 1) {\n      r *= r;\n      if (k & mask)\
-    \ r.push_back(0);\n      r = r.quorem_rev_con(f, inv).second;\n    }\n  }\n  mint\
-    \ ret(0);\n  for (int i = 0; i < N; i++) ret += r[N - i - 1] * a[i];\n  return\
-    \ ret;\n}\n"
+    \ inv).second;\n    for (; mask; mask >>= 1) {\n      r = r.mul(r);\n      if\
+    \ (k & mask) r.push_back(0);\n      r = r.quorem_rev_con(f, inv).second;\n   \
+    \ }\n  }\n  mint ret(0);\n  for (int i = 0; i < N; i++) ret += r[N - i - 1] *\
+    \ a[i];\n  return ret;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: false
   path: src/Math/kitamasa.hpp
   requiredBy: []
-  timestamp: '2020-10-20 16:49:33+09:00'
+  timestamp: '2020-10-21 15:03:25+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp

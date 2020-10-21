@@ -69,8 +69,8 @@ data:
   timestamp: '2020-08-11 20:23:42+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/1019.dujiao.test.cpp
   - test/yukicoder/886.dujiao.test.cpp
+  - test/yukicoder/1019.dujiao.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
 documentation_of: src/Math/dujiao_sieve.hpp
 layout: document

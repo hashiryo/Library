@@ -50,8 +50,8 @@ data:
   timestamp: '2020-10-17 15:44:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2667.HLD.test.cpp
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
+  - test/aoj/2667.HLD.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
 layout: document
 redirect_from:

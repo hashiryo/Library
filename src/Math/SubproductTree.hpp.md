@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -58,11 +58,11 @@ data:
   isVerificationFile: false
   path: src/Math/SubproductTree.hpp
   requiredBy: []
-  timestamp: '2020-10-20 16:49:33+09:00'
+  timestamp: '2020-10-21 15:03:25+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
 documentation_of: src/Math/SubproductTree.hpp
 layout: document
 redirect_from:

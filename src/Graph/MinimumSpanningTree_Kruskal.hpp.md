@@ -51,9 +51,9 @@ data:
   timestamp: '2020-08-19 15:34:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_2_A.kruskal.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/0342.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/GRL_2_A.kruskal.test.cpp
 documentation_of: src/Graph/MinimumSpanningTree_Kruskal.hpp
 layout: document
 redirect_from:

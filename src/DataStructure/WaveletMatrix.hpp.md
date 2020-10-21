@@ -139,8 +139,8 @@ data:
   timestamp: '2020-08-27 16:59:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/919.WM.test.cpp
   - test/yukicoder/728.WM.test.cpp
+  - test/yukicoder/919.WM.test.cpp
   - test/aoj/2674.WM.test.cpp
   - test/aoj/1549.WM.test.cpp
   - test/yosupo/range_kth_smallest.WM.test.cpp

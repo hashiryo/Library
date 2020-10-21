@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -28,7 +28,7 @@ data:
     \ #ifdef / #ifndef other than include guards\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/composition_of_formal_power_series\"\
     \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#define call_from_test\n\
-    #include \"src/Math/FormalPowerSeries.hpp\"\n#include \"src/Math/ModInt.hpp\"\n\
+    #include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\n\
     #undef call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n \
     \ int N;\n  cin >> N;\n  FPS a(N), b(N);\n  for (int i = 0; i < N; i++) cin >>\
@@ -36,12 +36,12 @@ data:
     \ (int i = 0; i < N; i++) cout << (i ? \" \" : \"\") << c[i];\n  cout << endl;\n\
     \  return 0;\n}"
   dependsOn:
-  - src/Math/FormalPowerSeries.hpp
   - src/Math/ModInt.hpp
+  - src/Math/FormalPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/comp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2020-10-20 16:49:33+09:00'
+  timestamp: '2020-10-21 15:03:25+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/comp_of_FPS.test.cpp

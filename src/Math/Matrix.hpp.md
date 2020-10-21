@@ -178,8 +178,8 @@ data:
   timestamp: '2020-09-10 01:01:38+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/1328.test.cpp
   - test/aoj/2397.test.cpp
+  - test/aoj/1328.test.cpp
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/linear_equations.test.cpp
 documentation_of: src/Math/Matrix.hpp
