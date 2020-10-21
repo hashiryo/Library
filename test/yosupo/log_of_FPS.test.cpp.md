@@ -32,15 +32,15 @@ data:
     #undef call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N;\n  cin >> N;\n  using Mint = ModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n\
     \  FPS a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = a.log();\n\
-    \  for (int i = 0; i < N; i++) cout << b[i] << (i < N - 1 ? \" \" : \"\\n\");\n\
-    \  cout << flush;\n  return 0;\n}"
+    \  for (int i = 0; i < N; i++) cout << (i ? \" \" : \"\") << b[i];\n  cout <<\
+    \ '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/log_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 17:49:35+09:00'
+  timestamp: '2020-10-21 18:58:41+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/log_of_FPS.test.cpp

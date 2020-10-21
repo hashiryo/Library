@@ -43,7 +43,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bernoulli.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 17:49:35+09:00'
+  timestamp: '2020-10-21 18:58:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/bernoulli.test.cpp
