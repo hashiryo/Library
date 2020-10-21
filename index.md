@@ -174,7 +174,7 @@ data:
     - icon: ':x:'
       path: src/Math/dujiao_sieve.hpp
       title: "\u675C\u6559\u7B5B"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/exgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     - icon: ':question:'
@@ -508,7 +508,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution1000000007.test.cpp
       title: test/yosupo/convolution1000000007.test.cpp
     - icon: ':heavy_check_mark:'
@@ -535,10 +535,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.test.cpp
       title: test/yosupo/inv_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
     - icon: ':heavy_check_mark:'
@@ -547,7 +547,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/line_add_get_min.test.cpp
       title: test/yosupo/line_add_get_min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/linear_equations.test.cpp
       title: test/yosupo/linear_equations.test.cpp
     - icon: ':x:'

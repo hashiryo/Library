@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/exp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 16:47:37+09:00'
+  timestamp: '2020-10-21 17:49:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/exp_of_FPS.test.cpp

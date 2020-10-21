@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_1000000007
@@ -30,19 +30,20 @@ data:
     \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#define call_from_test\n\
     #include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\n\
     #undef call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, M;\n  cin >> N >> M;\n  using Mint = ModInt<int(1e9 + 7)>;\n  using\
-    \ FPS = FormalPowerSeries<Mint>;\n  FPS a(N), b(M);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  for (int j = 0; j < M; j++) cin >> b[j];\n  auto c = a\
-    \ * b;\n  for (int k = 0; k < N + M - 1; k++) {\n    cout << c[k] << (k < N +\
-    \ M - 2 ? \" \" : \"\\n\");\n  }\n  cout << flush;\n  return 0;\n}"
+    \  using Mint = ModInt<int(1e9 + 7)>;\n  using FPS = FormalPowerSeries<Mint>;\n\
+    \  int N, M;\n  cin >> N >> M;\n  FPS a(N), b(M);\n  for (int i = 0; i < N; i++)\
+    \ cin >> a[i];\n  for (int j = 0; j < M; j++) cin >> b[j];\n  auto c = a * b;\n\
+    \  c.resize(N + M - 1);\n  for (int k = 0; k < N + M - 1; k++) {\n    cout <<\
+    \ c[k] << (k < N + M - 2 ? \" \" : \"\\n\");\n  }\n  cout << flush;\n  return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/convolution1000000007.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 16:47:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-21 17:49:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/convolution1000000007.test.cpp
 layout: document

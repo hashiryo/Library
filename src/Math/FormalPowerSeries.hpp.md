@@ -8,7 +8,7 @@ data:
   - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/exgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
@@ -30,7 +30,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
   - icon: ':heavy_check_mark:'
@@ -39,10 +39,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
@@ -317,11 +317,11 @@ data:
     \ (int i = 0; i < n; i++, cpw *= c) p[i] *= cpw;\n    p *= ret;\n    reverse_copy(p.begin(),\
     \ p.begin() + n, ret.begin());\n    for (int i = n - 1; i >= 2; f *= i--) ret[i]\
     \ *= f;\n    return ret;\n  }\n  FPS comp(const FPS &g) const {\n    int n = this->size(),\
-    \ k = std::sqrt(n);\n    if (k * k < n) k++;\n    int d = n / k;\n    if (k *\
-    \ d < n) d++;\n    vector<FPS> gpw(k + 1, {1});\n    for (int i = 1; i <= k; i++)\
-    \ {\n      gpw[i] = gpw[i - 1] * g;\n      if ((int)gpw[i].size() > n) gpw[i].resize(n);\n\
-    \    }\n    FPS ret(n, 0), gd({1}), tmp;\n    for (int i = 0; i < k; i++) {\n\
-    \      tmp.assign(n, 0);\n      for (int j = 0; j < d && i * d + j < n; j++)\n\
+    \ k = std::sqrt(1. * n);\n    if (k * k < n) k++;\n    int d = (n - 1 + k) / k;\n\
+    \    vector<FPS> gpw(d + 1, {1});\n    for (int i = 1; i <= d; i++) {\n      gpw[i]\
+    \ = gpw[i - 1] * g;\n      if ((int)gpw[i].size() > n) gpw[i].resize(n);\n   \
+    \ }\n    FPS ret(n, 0), gd({1}), tmp;\n    for (int i = 0; i < k; i++) {\n   \
+    \   tmp = {(*this)[i * d]};\n      for (int j = 1; j < d && i * d + j < n; j++)\n\
     \        tmp += gpw[j] * (*this)[i * d + j];\n      tmp *= gd;\n      for (int\
     \ j = min<int>(n, tmp.size()) - 1; j >= 0; j--) ret[j] += tmp[j];\n      gd *=\
     \ gpw[d];\n      if ((int)gd.size() > n) gd.resize(n);\n    }\n    return ret;\n\
@@ -343,7 +343,7 @@ data:
     \ FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator*(const\
     \ FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const FPS &r) const\
     \ { return this->quo(r); }\n  FPS operator%(const FPS &r) const { return this->quorem(r).second;\
-    \ }\n};"
+    \ }\n};\n"
   dependsOn:
   - src/Math/ModInt.hpp
   isVerificationFile: false
@@ -353,7 +353,7 @@ data:
   - src/Math/kitamasa.hpp
   - src/Math/exgcd.hpp
   - src/Math/fps_sequence.hpp
-  timestamp: '2020-10-21 16:47:37+09:00'
+  timestamp: '2020-10-21 17:49:35+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp

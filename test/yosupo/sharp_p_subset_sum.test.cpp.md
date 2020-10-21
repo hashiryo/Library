@@ -45,7 +45,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 16:47:37+09:00'
+  timestamp: '2020-10-21 17:49:35+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.test.cpp
