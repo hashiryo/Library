@@ -45,59 +45,60 @@ data:
     \ ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr uint64_t\
     \ inv = mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2 = -u128(mod) % mod;\n\
     \  static constexpr uint64_t m2 = mod << 1;\n\n public:\n  static constexpr int\
-    \ level = __builtin_ctzll(mod - 1);\n  ModInt() = default;\n  ~ModInt() = default;\n\
-    \  constexpr ModInt(uint64_t n) : x(init(n)){};\n  static constexpr uint64_t modulo()\
-    \ { return mod; }\n  static constexpr uint64_t init(uint64_t w) { return reduce(u128(w)\
-    \ * r2); }\n  static constexpr uint64_t reduce(const u128 w) {\n    return uint64_t(w\
-    \ >> 64) + mod - ((u128(uint64_t(w) * inv) * mod) >> 64);\n  }\n  static constexpr\
-    \ uint64_t norm(uint64_t x) { return x - (mod & -(x >= mod)); }\n  static constexpr\
-    \ uint64_t pr_rt() { return prim_root; }\n  constexpr ModInt operator-() const\
-    \ {\n    ModInt ret;\n    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr\
-    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - m2, x += m2\
-    \ & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const ModInt &rhs)\
-    \ {\n    return x -= rhs.x, x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt\
-    \ &operator*=(const ModInt &rhs) {\n    return this->x = reduce(u128(this->x)\
-    \ * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
-    \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
-    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
-    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
-    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
-    \ &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const ModInt\
-    \ &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const ModInt\
-    \ &rhs) const { return norm(x) != norm(rhs.x); }\n  uint64_t get() const {\n \
-    \   uint64_t ret = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n\
-    \  }\n  constexpr ModInt pow(uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
-    \    for (ModInt base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret\
-    \ *= base;\n    return ret;\n  }\n  constexpr ModInt inverse() const { return\
-    \ pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0)\
-    \ || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return ModInt(0);\
-    \  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod\
-    \ - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto mul = [&](pair<ModInt,\
-    \ ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a = (u.first * v.first +\
-    \ u.second * v.second * w);\n      ModInt b = (u.first * v.second + u.second *\
-    \ v.first);\n      return make_pair(a, b);\n    };\n    uint64_t e = (mod + 1)\
-    \ >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for (auto bs = make_pair(b,\
-    \ ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1) ret = mul(ret, bs);\n\
-    \    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n  }\n  friend\
-    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  uint64_t x;\n\
-    };\n#line 1 \"src/Math/lagrange_interpolation.hpp\"\n/**\n * @title \u30E9\u30B0\
-    \u30E9\u30F3\u30B8\u30E5\u88DC\u9593\n * @category \u6570\u5B66\n *  x=0,1,..,N-1\u3068\
-    y=f(0),f(1),...,f(N-1)\u304C\u4E0E\u3048\u3089\u308C\u305F\u3068\u304D\u306Ef(t)\u3092\
-    \u8A08\u7B97\n *  O(N)\n */\n\n// verify\u7528:http://codeforces.com/contest/622/problem/F\n\
-    \n#ifndef call_from_test\n#line 12 \"src/Math/lagrange_interpolation.hpp\"\nusing\
-    \ namespace std;\n#endif\n\ntemplate <typename K>\nK lagrange_interpolation(vector<K>\
-    \ &y, K t) {\n  int n = y.size() - 1;\n  vector<K> pro(n + 1, 1), orp(n + 1, 1);\n\
-    \  for (int i = 0; i < n; i++) pro[i + 1] = pro[i] * (t - K(i));\n  for (int i\
-    \ = n; i > 0; i--) orp[i - 1] = orp[i] * (t - K(i));\n  K fact = K(1);\n  for\
-    \ (int i = 1; i <= n; i++) fact *= K(i);\n  vector<K> finv(n + 1, 1);\n  finv[n]\
-    \ = K(1) / fact;\n  for (int i = n; i >= 1; i--) finv[i - 1] = finv[i] * K(i);\n\
-    \  K res(0);\n  for (int i = 0; i <= n; i++) {\n    K tmp = y[i] * pro[i] * orp[i]\
-    \ * finv[i] * finv[n - i];\n    res += (n - i) & 1 ? -tmp : tmp;\n  }\n  return\
-    \ res;\n}\n#line 14 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
-    \n#undef call_from_test\n\ntemplate <class Modint>\nvector<Modint> pow_d_list(int\
-    \ n, long long d) {\n  vector<int> pdiv(n);\n  for (int i = 2; i < n; i++) pdiv[i]\
+    \ level = __builtin_ctzll(mod - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr\
+    \ ModInt(int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() =\
+    \ default;\n  static constexpr uint64_t modulo() { return mod; }\n  static constexpr\
+    \ uint64_t init(uint64_t w) { return reduce(u128(w) * r2); }\n  static constexpr\
+    \ uint64_t reduce(const u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w)\
+    \ * inv) * mod) >> 64);\n  }\n  static constexpr uint64_t norm(uint64_t x) { return\
+    \ x - (mod & -(x >= mod)); }\n  static constexpr uint64_t pr_rt() { return prim_root;\
+    \ }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x\
+    \ = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt\
+    \ &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n  }\n  constexpr\
+    \ ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += m2 & -(x\
+    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
+    \   return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt\
+    \ &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
+    \ }\n  bool operator!=(const ModInt &rhs) const { return norm(x) != norm(rhs.x);\
+    \ }\n  uint64_t get() const {\n    uint64_t ret = reduce(x) - mod;\n    return\
+    \ ret + (mod & -(ret >> 63));\n  }\n  constexpr ModInt pow(uint64_t k) const {\n\
+    \    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k >>= 1, base *=\
+    \ base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n  constexpr ModInt\
+    \ inverse() const { return pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n\
+    \    if (*this == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1)\
+    \ >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b\
+    \ * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b\
+    \ - *this;\n    auto mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v)\
+    \ {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt\
+    \ b = (u.first * v.second + u.second * v.first);\n      return make_pair(a, b);\n\
+    \    };\n    uint64_t e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if\
+    \ (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  uint64_t x;\n};\n#line 1 \"src/Math/lagrange_interpolation.hpp\"\n/**\n\
+    \ * @title \u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593\n * @category \u6570\
+    \u5B66\n *  x=0,1,..,N-1\u3068y=f(0),f(1),...,f(N-1)\u304C\u4E0E\u3048\u3089\u308C\
+    \u305F\u3068\u304D\u306Ef(t)\u3092\u8A08\u7B97\n *  O(N)\n */\n\n// verify\u7528\
+    :http://codeforces.com/contest/622/problem/F\n\n#ifndef call_from_test\n#line\
+    \ 12 \"src/Math/lagrange_interpolation.hpp\"\nusing namespace std;\n#endif\n\n\
+    template <typename K>\nK lagrange_interpolation(vector<K> &y, K t) {\n  int n\
+    \ = y.size() - 1;\n  vector<K> pro(n + 1, 1), orp(n + 1, 1);\n  for (int i = 0;\
+    \ i < n; i++) pro[i + 1] = pro[i] * (t - K(i));\n  for (int i = n; i > 0; i--)\
+    \ orp[i - 1] = orp[i] * (t - K(i));\n  K fact = K(1);\n  for (int i = 1; i <=\
+    \ n; i++) fact *= K(i);\n  vector<K> finv(n + 1, 1);\n  finv[n] = K(1) / fact;\n\
+    \  for (int i = n; i >= 1; i--) finv[i - 1] = finv[i] * K(i);\n  K res(0);\n \
+    \ for (int i = 0; i <= n; i++) {\n    K tmp = y[i] * pro[i] * orp[i] * finv[i]\
+    \ * finv[n - i];\n    res += (n - i) & 1 ? -tmp : tmp;\n  }\n  return res;\n}\n\
+    #line 14 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\n#undef\
+    \ call_from_test\n\ntemplate <class Modint>\nvector<Modint> pow_d_list(int n,\
+    \ long long d) {\n  vector<int> pdiv(n);\n  for (int i = 2; i < n; i++) pdiv[i]\
     \ = i & 1 ? i : 2;\n  for (int p = 3; p * p < n; p += 2)\n    if (pdiv[p] == p)\n\
     \      for (int q = p * p; q < n; q += 2 * p) pdiv[q] = p;\n\n  vector<Modint>\
     \ res(n);\n  if (d == 0) res[0] = 1;\n  if (n >= 2) res[1] = 1;\n  for (int i\
@@ -149,7 +150,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 15:03:25+09:00'
+  timestamp: '2020-10-21 16:47:37+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp

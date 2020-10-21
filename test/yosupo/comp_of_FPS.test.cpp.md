@@ -33,7 +33,7 @@ data:
     \  using Mint = ModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n \
     \ int N;\n  cin >> N;\n  FPS a(N), b(N);\n  for (int i = 0; i < N; i++) cin >>\
     \ a[i];\n  for (int i = 0; i < N; i++) cin >> b[i];\n  FPS c = a.comp(b);\n  for\
-    \ (int i = 0; i < N; i++) cout << (i ? \" \" : \"\") << c[i];\n  cout << endl;\n\
+    \ (int i = 0; i < N; i++) cout << (i ? \" \" : \"\") << c[i];\n  cout << '\\n';\n\
     \  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
@@ -41,7 +41,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/comp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 15:03:25+09:00'
+  timestamp: '2020-10-21 16:47:37+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/comp_of_FPS.test.cpp

@@ -58,7 +58,7 @@ data:
   isVerificationFile: false
   path: src/Math/SubproductTree.hpp
   requiredBy: []
-  timestamp: '2020-10-21 15:03:25+09:00'
+  timestamp: '2020-10-21 16:47:37+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/polynomial_interpolation.test.cpp

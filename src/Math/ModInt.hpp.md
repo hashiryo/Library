@@ -8,7 +8,7 @@ data:
   - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/exgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
@@ -57,25 +57,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
   - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
   - icon: ':x:'
@@ -84,13 +84,13 @@ data:
   - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_set_range_composite.SegTree.test.cpp
     title: test/yosupo/point_set_range_composite.SegTree.test.cpp
   - icon: ':x:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
   - icon: ':x:'
@@ -181,53 +181,8 @@ data:
     \ e - 1, x * (2 - x * n));\n  }\n  static constexpr uint64_t inv = mul_inv(mod,\
     \ 6, 1);\n  static constexpr uint64_t r2 = -u128(mod) % mod;\n  static constexpr\
     \ uint64_t m2 = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
-    \ - 1);\n  ModInt() = default;\n  ~ModInt() = default;\n  constexpr ModInt(uint64_t\
-    \ n) : x(init(n)){};\n  static constexpr uint64_t modulo() { return mod; }\n \
-    \ static constexpr uint64_t init(uint64_t w) { return reduce(u128(w) * r2); }\n\
-    \  static constexpr uint64_t reduce(const u128 w) {\n    return uint64_t(w >>\
-    \ 64) + mod - ((u128(uint64_t(w) * inv) * mod) >> 64);\n  }\n  static constexpr\
-    \ uint64_t norm(uint64_t x) { return x - (mod & -(x >= mod)); }\n  static constexpr\
-    \ uint64_t pr_rt() { return prim_root; }\n  constexpr ModInt operator-() const\
-    \ {\n    ModInt ret;\n    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr\
-    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - m2, x += m2\
-    \ & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const ModInt &rhs)\
-    \ {\n    return x -= rhs.x, x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt\
-    \ &operator*=(const ModInt &rhs) {\n    return this->x = reduce(u128(this->x)\
-    \ * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
-    \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
-    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
-    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
-    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
-    \ &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const ModInt\
-    \ &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const ModInt\
-    \ &rhs) const { return norm(x) != norm(rhs.x); }\n  uint64_t get() const {\n \
-    \   uint64_t ret = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n\
-    \  }\n  constexpr ModInt pow(uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
-    \    for (ModInt base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret\
-    \ *= base;\n    return ret;\n  }\n  constexpr ModInt inverse() const { return\
-    \ pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0)\
-    \ || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return ModInt(0);\
-    \  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod\
-    \ - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto mul = [&](pair<ModInt,\
-    \ ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a = (u.first * v.first +\
-    \ u.second * v.second * w);\n      ModInt b = (u.first * v.second + u.second *\
-    \ v.first);\n      return make_pair(a, b);\n    };\n    uint64_t e = (mod + 1)\
-    \ >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for (auto bs = make_pair(b,\
-    \ ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1) ret = mul(ret, bs);\n\
-    \    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n  }\n  friend\
-    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  uint64_t x;\n\
-    };\n"
-  code: "/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n#ifndef call_from_test\n\
-    #include <bits/stdc++.h>\nusing namespace std;\n#endif\n\ntemplate <uint64_t mod,\
-    \ uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u128 = __uint128_t;\n\
-    \  static constexpr uint64_t mul_inv(uint64_t n, int e = 6, uint64_t x = 1) {\n\
-    \    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr\
-    \ uint64_t inv = mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2 = -u128(mod)\
-    \ % mod;\n  static constexpr uint64_t m2 = mod << 1;\n\n public:\n  static constexpr\
-    \ int level = __builtin_ctzll(mod - 1);\n  ModInt() = default;\n  ~ModInt() =\
-    \ default;\n  constexpr ModInt(uint64_t n) : x(init(n)){};\n  static constexpr\
+    \ - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(int64_t n) : x(init(n\
+    \ < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr\
     \ uint64_t modulo() { return mod; }\n  static constexpr uint64_t init(uint64_t\
     \ w) { return reduce(u128(w) * r2); }\n  static constexpr uint64_t reduce(const\
     \ u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w) * inv) *\
@@ -263,7 +218,52 @@ data:
     \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
     \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
     \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
-    \  }\n  uint64_t x;\n};"
+    \  }\n  uint64_t x;\n};\n"
+  code: "/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n#ifndef call_from_test\n\
+    #include <bits/stdc++.h>\nusing namespace std;\n#endif\n\ntemplate <uint64_t mod,\
+    \ uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u128 = __uint128_t;\n\
+    \  static constexpr uint64_t mul_inv(uint64_t n, int e = 6, uint64_t x = 1) {\n\
+    \    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr\
+    \ uint64_t inv = mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2 = -u128(mod)\
+    \ % mod;\n  static constexpr uint64_t m2 = mod << 1;\n\n public:\n  static constexpr\
+    \ int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr\
+    \ ModInt(int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() =\
+    \ default;\n  static constexpr uint64_t modulo() { return mod; }\n  static constexpr\
+    \ uint64_t init(uint64_t w) { return reduce(u128(w) * r2); }\n  static constexpr\
+    \ uint64_t reduce(const u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w)\
+    \ * inv) * mod) >> 64);\n  }\n  static constexpr uint64_t norm(uint64_t x) { return\
+    \ x - (mod & -(x >= mod)); }\n  static constexpr uint64_t pr_rt() { return prim_root;\
+    \ }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x\
+    \ = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt\
+    \ &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n  }\n  constexpr\
+    \ ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += m2 & -(x\
+    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
+    \   return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt\
+    \ &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
+    \ }\n  bool operator!=(const ModInt &rhs) const { return norm(x) != norm(rhs.x);\
+    \ }\n  uint64_t get() const {\n    uint64_t ret = reduce(x) - mod;\n    return\
+    \ ret + (mod & -(ret >> 63));\n  }\n  constexpr ModInt pow(uint64_t k) const {\n\
+    \    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k >>= 1, base *=\
+    \ base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n  constexpr ModInt\
+    \ inverse() const { return pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n\
+    \    if (*this == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1)\
+    \ >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b\
+    \ * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b\
+    \ - *this;\n    auto mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v)\
+    \ {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt\
+    \ b = (u.first * v.second + u.second * v.first);\n      return make_pair(a, b);\n\
+    \    };\n    uint64_t e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if\
+    \ (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  uint64_t x;\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/ModInt.hpp
@@ -273,7 +273,7 @@ data:
   - src/Math/exgcd.hpp
   - src/Math/FormalPowerSeries.hpp
   - src/Math/fps_sequence.hpp
-  timestamp: '2020-10-21 15:03:25+09:00'
+  timestamp: '2020-10-21 16:47:37+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp

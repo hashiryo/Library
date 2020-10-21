@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -26,13 +26,13 @@ data:
     \    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr\
     \ uint64_t inv = mul_inv(mod, 6, 1);\n  static constexpr uint64_t r2 = -u128(mod)\
     \ % mod;\n  static constexpr uint64_t m2 = mod << 1;\n\n public:\n  static constexpr\
-    \ int level = __builtin_ctzll(mod - 1);\n  ModInt() = default;\n  ~ModInt() =\
-    \ default;\n  constexpr ModInt(uint64_t n) : x(init(n)){};\n  static constexpr\
-    \ uint64_t modulo() { return mod; }\n  static constexpr uint64_t init(uint64_t\
-    \ w) { return reduce(u128(w) * r2); }\n  static constexpr uint64_t reduce(const\
-    \ u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w) * inv) *\
-    \ mod) >> 64);\n  }\n  static constexpr uint64_t norm(uint64_t x) { return x -\
-    \ (mod & -(x >= mod)); }\n  static constexpr uint64_t pr_rt() { return prim_root;\
+    \ int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr\
+    \ ModInt(int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() =\
+    \ default;\n  static constexpr uint64_t modulo() { return mod; }\n  static constexpr\
+    \ uint64_t init(uint64_t w) { return reduce(u128(w) * r2); }\n  static constexpr\
+    \ uint64_t reduce(const u128 w) {\n    return uint64_t(w >> 64) + mod - ((u128(uint64_t(w)\
+    \ * inv) * mod) >> 64);\n  }\n  static constexpr uint64_t norm(uint64_t x) { return\
+    \ x - (mod & -(x >= mod)); }\n  static constexpr uint64_t pr_rt() { return prim_root;\
     \ }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x\
     \ = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt\
     \ &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n  }\n  constexpr\
@@ -99,8 +99,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 15:03:25+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-21 16:47:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/find_linear_recurrence.test.cpp
 layout: document

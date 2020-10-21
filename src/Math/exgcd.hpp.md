@@ -9,11 +9,11 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     links:
@@ -72,8 +72,8 @@ data:
   isVerificationFile: false
   path: src/Math/exgcd.hpp
   requiredBy: []
-  timestamp: '2020-10-21 15:28:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-21 16:47:37+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp
 documentation_of: src/Math/exgcd.hpp
