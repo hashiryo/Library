@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,7 +45,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
   - icon: ':x:'
@@ -240,7 +240,7 @@ data:
     \ ret;\n  }\n  FPS inte() const {\n    int len = this->size() + 1;\n    FPS ret(len);\n\
     \    ret[0] = 0;\n    for (int i = len - 1; i >= 1; i--) ret[i] = (*this)[i -\
     \ 1] * get_inv(i);\n    return ret;\n  }\n  FPS log() const {\n    assert((*this)[0]\
-    \ == mint(1));\n    return this->size() == 1 ? FPS({0}) : this->diff().div(*this).inte();\n\
+    \ == mint(1));\n    return this->size() == 1 ? FPS{0} : this->diff().div(*this).inte();\n\
     \  }\n  FPS exp() const {\n    assert((*this)[0] == mint(0));\n    int n = this->size(),\
     \ len = get_len(n);\n    if (n == 1) return {1};\n    static mint b[1 << 21],\
     \ f[1 << 21];\n    copy_n(this->data(), n, bf1), fill(bf1 + n, bf1 + len, 0);\n\
@@ -320,30 +320,30 @@ data:
     \ k = std::sqrt(1. * n);\n    if (k * k < n) k++;\n    int d = (n - 1 + k) / k;\n\
     \    vector<FPS> gpw(d + 1);\n    gpw[0] = {1};\n    for (int i = 1; i <= d; i++)\
     \ {\n      gpw[i] = gpw[i - 1] * g;\n      if ((int)gpw[i].size() > n) gpw[i].resize(n);\n\
-    \    }\n    FPS ret(n, 0), gd({1}), tmp;\n    for (int i = 0; i < k; i++) {\n\
-    \      tmp = {(*this)[i * d]};\n      for (int j = 1; j < d && i * d + j < n;\
-    \ j++)\n        tmp += gpw[j] * (*this)[i * d + j];\n      tmp *= gd;\n      for\
-    \ (int j = min<int>(n, tmp.size()) - 1; j >= 0; j--) ret[j] += tmp[j];\n     \
-    \ gd *= gpw[d];\n      if ((int)gd.size() > n) gd.resize(n);\n    }\n    return\
-    \ ret;\n  }\n  FPS operator-() {\n    FPS ret(this->size());\n    for (int i =\
-    \ ret.size() - 1; i >= 0; i--) ret[i] = -(*this)[i];\n    return ret;\n  }\n \
-    \ FPS &operator*=(const mint &v) {\n    for (int i = this->size() - 1; i >= 0;\
-    \ i--) (*this)[i] *= v;\n    return *this;\n  }\n  FPS &operator/=(const mint\
-    \ &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n  \
-    \  return *this;\n  }\n  FPS &operator+=(const FPS &r) {\n    if (this->size()\
+    \    }\n    FPS ret(n, 0), gd{1}, tmp;\n    for (int i = 0; i < k; i++) {\n  \
+    \    tmp = {(*this)[i * d]};\n      for (int j = 1; j < d && i * d + j < n; j++)\n\
+    \        tmp += gpw[j] * (*this)[i * d + j];\n      tmp *= gd;\n      for (int\
+    \ j = min<int>(n, tmp.size()) - 1; j >= 0; j--) ret[j] += tmp[j];\n      gd *=\
+    \ gpw[d];\n      if ((int)gd.size() > n) gd.resize(n);\n    }\n    return ret;\n\
+    \  }\n  FPS operator-() {\n    FPS ret(this->size());\n    for (int i = ret.size()\
+    \ - 1; i >= 0; i--) ret[i] = -(*this)[i];\n    return ret;\n  }\n  FPS &operator*=(const\
+    \ mint &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] *= v;\n\
+    \    return *this;\n  }\n  FPS &operator/=(const mint &v) {\n    for (int i =\
+    \ this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n    return *this;\n  }\n  FPS\
+    \ &operator+=(const FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(),\
+    \ 0);\n    for (int i = r.size() - 1; i >= 0; i--) (*this)[i] += r[i];\n    return\
+    \ this->norm();\n  }\n  FPS &operator-=(const FPS &r) {\n    if (this->size()\
     \ < r.size()) this->resize(r.size(), 0);\n    for (int i = r.size() - 1; i >=\
-    \ 0; i--) (*this)[i] += r[i];\n    return this->norm();\n  }\n  FPS &operator-=(const\
-    \ FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(), 0);\n   \
-    \ for (int i = r.size() - 1; i >= 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n\
-    \  }\n  FPS &operator*=(const FPS &r) { return *this = norm().mul(FPS(r).norm());\
-    \ }\n  FPS &operator/=(const FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const\
-    \ FPS &r) { return *this = this->quorem(r).second; }\n  FPS operator*(const mint\
-    \ &v) const { return FPS(*this) *= v; }\n  FPS operator/(const mint &v) const\
-    \ { return FPS(*this) /= v; }\n  FPS operator+(const FPS &r) const { return FPS(*this)\
-    \ += r; }\n  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n \
-    \ FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const\
-    \ FPS &r) const { return this->quo(r); }\n  FPS operator%(const FPS &r) const\
-    \ { return this->quorem(r).second; }\n};\n"
+    \ 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n  }\n  FPS &operator*=(const\
+    \ FPS &r) { return *this = norm().mul(FPS(r).norm()); }\n  FPS &operator/=(const\
+    \ FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const FPS &r) {\
+    \ return *this = this->quorem(r).second; }\n  FPS operator*(const mint &v) const\
+    \ { return FPS(*this) *= v; }\n  FPS operator/(const mint &v) const { return FPS(*this)\
+    \ /= v; }\n  FPS operator+(const FPS &r) const { return FPS(*this) += r; }\n \
+    \ FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator*(const\
+    \ FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const FPS &r) const\
+    \ { return this->quo(r); }\n  FPS operator%(const FPS &r) const { return this->quorem(r).second;\
+    \ }\n};\n"
   dependsOn:
   - src/Math/ModInt.hpp
   isVerificationFile: false
@@ -353,7 +353,7 @@ data:
   - src/Math/kitamasa.hpp
   - src/Math/exgcd.hpp
   - src/Math/fps_sequence.hpp
-  timestamp: '2020-10-21 18:58:41+09:00'
+  timestamp: '2020-10-21 19:28:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp

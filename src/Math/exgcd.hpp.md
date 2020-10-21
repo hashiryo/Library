@@ -72,7 +72,7 @@ data:
   isVerificationFile: false
   path: src/Math/exgcd.hpp
   requiredBy: []
-  timestamp: '2020-10-21 18:58:41+09:00'
+  timestamp: '2020-10-21 19:28:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp

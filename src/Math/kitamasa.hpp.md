@@ -55,7 +55,7 @@ data:
   isVerificationFile: false
   path: src/Math/kitamasa.hpp
   requiredBy: []
-  timestamp: '2020-10-21 18:58:41+09:00'
+  timestamp: '2020-10-21 19:28:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
