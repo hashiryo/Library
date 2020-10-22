@@ -40,7 +40,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/shift_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2020-10-21 19:28:13+09:00'
+  timestamp: '2020-10-22 09:30:26+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/shift_of_FPS.test.cpp

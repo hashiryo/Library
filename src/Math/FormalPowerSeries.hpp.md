@@ -325,25 +325,26 @@ data:
     \        tmp += gpw[j] * (*this)[i * d + j];\n      tmp *= gd;\n      for (int\
     \ j = min<int>(n, tmp.size()) - 1; j >= 0; j--) ret[j] += tmp[j];\n      gd *=\
     \ gpw[d];\n      if ((int)gd.size() > n) gd.resize(n);\n    }\n    return ret;\n\
-    \  }\n  FPS operator-() {\n    FPS ret(this->size());\n    for (int i = ret.size()\
-    \ - 1; i >= 0; i--) ret[i] = -(*this)[i];\n    return ret;\n  }\n  FPS &operator*=(const\
-    \ mint &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] *= v;\n\
-    \    return *this;\n  }\n  FPS &operator/=(const mint &v) {\n    for (int i =\
-    \ this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n    return *this;\n  }\n  FPS\
-    \ &operator+=(const FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(),\
-    \ 0);\n    for (int i = r.size() - 1; i >= 0; i--) (*this)[i] += r[i];\n    return\
-    \ this->norm();\n  }\n  FPS &operator-=(const FPS &r) {\n    if (this->size()\
+    \  }\n  mint eval(mint x) const {\n    mint res, w = 1;\n    for (auto &v : *this)\
+    \ res += w * v, w *= x;\n    return res;\n  }\n  FPS operator-() {\n    FPS ret(this->size());\n\
+    \    for (int i = ret.size() - 1; i >= 0; i--) ret[i] = -(*this)[i];\n    return\
+    \ ret;\n  }\n  FPS &operator*=(const mint &v) {\n    for (int i = this->size()\
+    \ - 1; i >= 0; i--) (*this)[i] *= v;\n    return *this;\n  }\n  FPS &operator/=(const\
+    \ mint &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n\
+    \    return *this;\n  }\n  FPS &operator+=(const FPS &r) {\n    if (this->size()\
     \ < r.size()) this->resize(r.size(), 0);\n    for (int i = r.size() - 1; i >=\
-    \ 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n  }\n  FPS &operator*=(const\
-    \ FPS &r) { return *this = norm().mul(FPS(r).norm()); }\n  FPS &operator/=(const\
-    \ FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const FPS &r) {\
-    \ return *this = this->quorem(r).second; }\n  FPS operator*(const mint &v) const\
-    \ { return FPS(*this) *= v; }\n  FPS operator/(const mint &v) const { return FPS(*this)\
-    \ /= v; }\n  FPS operator+(const FPS &r) const { return FPS(*this) += r; }\n \
-    \ FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator*(const\
-    \ FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const FPS &r) const\
-    \ { return this->quo(r); }\n  FPS operator%(const FPS &r) const { return this->quorem(r).second;\
-    \ }\n};\n"
+    \ 0; i--) (*this)[i] += r[i];\n    return this->norm();\n  }\n  FPS &operator-=(const\
+    \ FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(), 0);\n   \
+    \ for (int i = r.size() - 1; i >= 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n\
+    \  }\n  FPS &operator*=(const FPS &r) { return *this = norm().mul(FPS(r).norm());\
+    \ }\n  FPS &operator/=(const FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const\
+    \ FPS &r) { return *this = this->quorem(r).second; }\n  FPS operator*(const mint\
+    \ &v) const { return FPS(*this) *= v; }\n  FPS operator/(const mint &v) const\
+    \ { return FPS(*this) /= v; }\n  FPS operator+(const FPS &r) const { return FPS(*this)\
+    \ += r; }\n  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n \
+    \ FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const\
+    \ FPS &r) const { return this->quo(r); }\n  FPS operator%(const FPS &r) const\
+    \ { return this->quorem(r).second; }\n};\n"
   dependsOn:
   - src/Math/ModInt.hpp
   isVerificationFile: false
@@ -353,7 +354,7 @@ data:
   - src/Math/kitamasa.hpp
   - src/Math/exgcd.hpp
   - src/Math/fps_sequence.hpp
-  timestamp: '2020-10-21 19:28:13+09:00'
+  timestamp: '2020-10-22 09:30:26+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp

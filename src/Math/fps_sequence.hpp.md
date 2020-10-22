@@ -60,14 +60,15 @@ data:
     \ & 1) ret *= {N - 1, 1};\n  return ret;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ stirling_second(int N) {\n  FormalPowerSeries<mint> a(N + 1), b(N + 1);\n  mint\
     \ finv = 1;\n  for (int i = 0; i <= N; finv /= (++i))\n    a[i] = mint(i).pow(N)\
-    \ * finv, b[i] = i & 1 ? -finv : finv;\n  return (a * b).part(N + 1);\n}\n"
+    \ * finv, b[i] = i & 1 ? -finv : finv;\n  auto ret = a * b;\n  return ret.resize(N\
+    \ + 1), ret;\n}\n"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-10-21 19:28:13+09:00'
+  timestamp: '2020-10-22 09:30:26+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/bernoulli.test.cpp

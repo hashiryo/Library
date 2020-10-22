@@ -34,31 +34,31 @@ data:
     \ N)\n */\n\n#ifndef call_from_test\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\n#define call_from_test\n#include \"src/Math/ModInt.hpp\"\n#include \"\
     src/Math/FormalPowerSeries.hpp\"\n#undef call_from_test\n#endif\n\ntemplate <typename\
-    \ Modint>\nstruct SubproductTree {\n  using FPS = FormalPowerSeries<Modint>;\n\
-    \  int n;\n  vector<Modint> xs;\n  vector<FPS> buf;\n  SubproductTree() {}\n \
-    \ SubproductTree(const vector<Modint> &_xs)\n      : n(_xs.size()), xs(_xs), buf(4\
-    \ * n) {\n    pre(0, n, 1);\n  }\n  void pre(int l, int r, int k) {\n    if (r\
-    \ - l == 1) {\n      buf[k] = {-xs[l], 1};\n      return;\n    }\n    int m =\
-    \ (l + r) >> 1;\n    pre(l, m, k * 2), pre(m, r, k * 2 + 1);\n    buf[k] = buf[k\
-    \ * 2] * buf[k * 2 + 1];\n  }\n  vector<Modint> multi_eval(const FPS &f) {\n \
-    \   vector<Modint> res(n);\n    function<void(FPS, int, int, int)> dfs = [&](FPS\
-    \ g, int l, int r, int k) {\n      g %= buf[k];\n      if (r - l <= 128) {\n \
-    \       for (int i = l; i < r; i++) res[i] = g.eval(xs[i]);\n        return;\n\
+    \ Modint>\nstruct SubproductTree {\n  using poly = FormalPowerSeries<Modint>;\n\
+    \  int n;\n  vector<Modint> xs;\n  vector<poly> buf;\n  SubproductTree() {}\n\
+    \  SubproductTree(const vector<Modint> &_xs)\n      : n(_xs.size()), xs(_xs),\
+    \ buf(4 * n) {\n    pre(0, n, 1);\n  }\n  void pre(int l, int r, int k) {\n  \
+    \  if (r - l == 1) {\n      buf[k] = {-xs[l], 1};\n      return;\n    }\n    int\
+    \ m = (l + r) >> 1;\n    pre(l, m, k * 2), pre(m, r, k * 2 + 1);\n    buf[k] =\
+    \ buf[k * 2] * buf[k * 2 + 1];\n  }\n  vector<Modint> multi_eval(const poly &f)\
+    \ {\n    vector<Modint> res(n);\n    function<void(poly, int, int, int)> dfs =\
+    \ [&](poly g, int l, int r, int k) {\n      g %= buf[k];\n      if (r - l <= 128)\
+    \ {\n        for (int i = l; i < r; i++) res[i] = g.eval(xs[i]);\n        return;\n\
     \      }\n      int m = (l + r) >> 1;\n      dfs(g, l, m, k * 2), dfs(g, m, r,\
-    \ k * 2 + 1);\n    };\n    dfs(f, 0, n, 1);\n    return res;\n  }\n  FPS interpolate(const\
-    \ vector<Modint> &ys) {\n    FPS w = buf[1].diff();\n    vector<Modint> vs = multi_eval(w);\n\
-    \    function<FPS(int, int, int)> dfs = [&](int l, int r, int k) {\n      if (r\
-    \ - l == 1) return FPS({ys[l] / vs[l]});\n      int m = (l + r) >> 1;\n      return\
-    \ buf[k * 2 + 1] * dfs(l, m, k * 2)\n             + buf[k * 2] * dfs(m, r, k *\
-    \ 2 + 1);\n    };\n    FPS res = dfs(0, n, 1);\n    res.resize(n);\n    return\
-    \ res;\n  }\n};\n"
+    \ k * 2 + 1);\n    };\n    dfs(f, 0, n, 1);\n    return res;\n  }\n  poly interpolate(const\
+    \ vector<Modint> &ys) {\n    poly w = buf[1].diff();\n    vector<Modint> vs =\
+    \ multi_eval(w);\n    function<poly(int, int, int)> dfs = [&](int l, int r, int\
+    \ k) {\n      if (r - l == 1) return poly({ys[l] / vs[l]});\n      int m = (l\
+    \ + r) >> 1;\n      return buf[k * 2 + 1] * dfs(l, m, k * 2)\n             + buf[k\
+    \ * 2] * dfs(m, r, k * 2 + 1);\n    };\n    poly res = dfs(0, n, 1);\n    res.resize(n);\n\
+    \    return res;\n  }\n};\n"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: false
   path: src/Math/SubproductTree.hpp
   requiredBy: []
-  timestamp: '2020-10-21 19:28:13+09:00'
+  timestamp: '2020-10-22 09:30:26+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/polynomial_interpolation.test.cpp
