@@ -93,28 +93,29 @@ data:
     \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
     \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
     \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a\
-    \ = (u.first * v.first + u.second * v.second * w);\n      ModInt b = (u.first\
-    \ * v.second + u.second * v.first);\n      return make_pair(a, b);\n    };\n \
-    \   u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for\
-    \ (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
-    \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
-    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n\
-    #line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\nusing namespace\
-    \ std;\n\nusing Mint = ModInt<998244353>;\nstruct RcompositeQ {\n  using T = pair<Mint,\
-    \ Mint>;\n  static T ti() { return make_pair(Mint(1), Mint(0)); }\n  static T\
-    \ f(const T &l, const T &r) {\n    return make_pair(r.first * l.first, r.first\
-    \ * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<RcompositeQ::T> v(N);\n  for (int i =\
-    \ 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n    v[i] = {a, b};\n \
-    \ }\n  SegmentTree<RcompositeQ> seg(v);\n  while (Q--) {\n    bool op;\n    cin\
-    \ >> op;\n    if (op) {\n      int l, r;\n      Mint x;\n      cin >> l >> r >>\
-    \ x;\n      auto ans = seg.query(l, r);\n      cout << ans.first * x + ans.second\
-    \ << endl;\n    } else {\n      int p;\n      Mint c, d;\n      cin >> p >> c\
-    \ >> d;\n      seg.set_val(p, {c, d});\n    }\n  }\n  return 0;\n}\n"
+    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
+    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
+    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
+    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
+    \ T>;\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\nusing\
+    \ namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct RcompositeQ {\n  using\
+    \ T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1), Mint(0));\
+    \ }\n  static T f(const T &l, const T &r) {\n    return make_pair(r.first * l.first,\
+    \ r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
+    \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  vector<RcompositeQ::T>\
+    \ v(N);\n  for (int i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n\
+    \    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ> seg(v);\n  while (Q--) {\n\
+    \    bool op;\n    cin >> op;\n    if (op) {\n      int l, r;\n      Mint x;\n\
+    \      cin >> l >> r >> x;\n      auto ans = seg.query(l, r);\n      cout << ans.first\
+    \ * x + ans.second << endl;\n    } else {\n      int p;\n      Mint c, d;\n  \
+    \    cin >> p >> c >> d;\n      seg.set_val(p, {c, d});\n    }\n  }\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree.hpp\"\n#include\
     \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint = ModInt<998244353>;\n\
@@ -135,7 +136,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 00:25:59+09:00'
+  timestamp: '2020-10-24 01:18:43+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp

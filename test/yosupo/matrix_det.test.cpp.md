@@ -133,18 +133,18 @@ data:
     \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
     \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
     \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a\
-    \ = (u.first * v.first + u.second * v.second * w);\n      ModInt b = (u.first\
-    \ * v.second + u.second * v.first);\n      return make_pair(a, b);\n    };\n \
-    \   u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for\
-    \ (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
-    \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
-    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n\
-    #line 5 \"test/yosupo/matrix_det.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
+    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
+    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
+    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
+    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
+    \ T>;\n#line 5 \"test/yosupo/matrix_det.test.cpp\"\nusing namespace std;\n\nsigned\
+    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  int N;\n  cin >> N;\n  Matrix<Mint> A(N);\n  for (int i = 0; i < N; i++)\n\
     \    for (int j = 0; j < N; j++) cin >> A[i][j];\n  cout << A.det() << endl;\n\
     \  return 0;\n}\n"
@@ -160,7 +160,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 00:25:59+09:00'
+  timestamp: '2020-10-24 01:18:43+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/matrix_det.test.cpp

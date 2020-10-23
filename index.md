@@ -93,7 +93,7 @@ data:
       title: "Wavelet\u884C\u5217"
   - name: src/Geometry
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Geometry/!geometry_temp.hpp
       title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
     - icon: ':x:'
@@ -224,25 +224,25 @@ data:
     - icon: ':x:'
       path: test/aoj/1132.test.cpp
       title: test/aoj/1132.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1157.test.cpp
       title: test/aoj/1157.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1171.test.cpp
       title: test/aoj/1171.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1183.test.cpp
       title: test/aoj/1183.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1190.test.cpp
       title: test/aoj/1190.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1242.test.cpp
       title: test/aoj/1242.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
     - icon: ':x:'
@@ -254,13 +254,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1595.test.cpp
       title: test/aoj/1595.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2003.test.cpp
       title: test/aoj/2003.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2009.test.cpp
       title: test/aoj/2009.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2159.test.cpp
       title: test/aoj/2159.test.cpp
     - icon: ':x:'
@@ -269,7 +269,7 @@ data:
     - icon: ':x:'
       path: test/aoj/2207.test.cpp
       title: test/aoj/2207.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2256.test.cpp
       title: test/aoj/2256.test.cpp
     - icon: ':x:'
@@ -278,13 +278,13 @@ data:
     - icon: ':x:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2402.test.cpp
       title: test/aoj/2402.test.cpp
     - icon: ':x:'
       path: test/aoj/2423.test.cpp
       title: test/aoj/2423.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2442.test.cpp
       title: test/aoj/2442.test.cpp
     - icon: ':heavy_check_mark:'
@@ -302,10 +302,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2626.test.cpp
       title: test/aoj/2626.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2635.test.cpp
       title: test/aoj/2635.test.cpp
     - icon: ':heavy_check_mark:'
@@ -323,7 +323,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2842.BIT_2D.test.cpp
       title: test/aoj/2842.BIT_2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
     - icon: ':x:'
@@ -332,10 +332,10 @@ data:
     - icon: ':x:'
       path: test/aoj/3034.test.cpp
       title: test/aoj/3034.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3049.test.cpp
       title: test/aoj/3049.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3056.test.cpp
       title: test/aoj/3056.test.cpp
     - icon: ':x:'

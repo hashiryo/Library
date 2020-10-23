@@ -209,16 +209,17 @@ data:
     \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
     \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
     \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a\
-    \ = (u.first * v.first + u.second * v.second * w);\n      ModInt b = (u.first\
-    \ * v.second + u.second * v.first);\n      return make_pair(a, b);\n    };\n \
-    \   u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for\
-    \ (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
-    \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
-    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n"
+    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
+    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
+    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
+    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
+    \ T>;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title ModInt\n * @category\
     \ \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\nstruct modint_base\
     \ {};\n}  // namespace internal\n\ntemplate <std::uint64_t mod, std::uint64_t\
@@ -255,16 +256,17 @@ data:
     \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
     \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
     \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a\
-    \ = (u.first * v.first + u.second * v.second * w);\n      ModInt b = (u.first\
-    \ * v.second + u.second * v.first);\n      return make_pair(a, b);\n    };\n \
-    \   u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for\
-    \ (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
-    \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
-    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;"
+    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
+    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
+    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
+    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
+    \ T>;"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/ModInt.hpp
@@ -274,7 +276,7 @@ data:
   - src/Math/exgcd.hpp
   - src/Math/FormalPowerSeries.hpp
   - src/Math/fps_sequence.hpp
-  timestamp: '2020-10-24 00:25:59+09:00'
+  timestamp: '2020-10-24 01:18:43+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp

@@ -81,24 +81,24 @@ data:
     \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
     \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
     \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a\
-    \ = (u.first * v.first + u.second * v.second * w);\n      ModInt b = (u.first\
-    \ * v.second + u.second * v.first);\n      return make_pair(a, b);\n    };\n \
-    \   u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for\
-    \ (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
-    \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
-    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n\
-    #line 5 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\nusing namespace\
-    \ std;\n\nusing Mint = ModInt<998244353>;\n// RsumQ\u306F\u30E2\u30CE\u30A4\u30C9\
-    \u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\u3066\u304A\u304F\nstruct RaffineQ_RsumQ\
-    \ {\n  struct T {\n    Mint val;\n    int size;\n    T(Mint v = 0, int s = 1)\
-    \ : val(v), size(s) {}\n  };\n  using E = pair<Mint, Mint>;\n  static T ti() {\
-    \ return T(0, 0); }\n  static E ei() { return make_pair(Mint(1), Mint(0)); }\n\
-    \  static T f(const T &l, const T &r) {\n    return T(l.val + r.val, l.size +\
-    \ r.size);\n  }\n  static T g(const T &l, const E &r) {\n    return T(r.first\
+    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
+    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
+    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
+    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
+    \ T>;\n#line 5 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\n\
+    using namespace std;\n\nusing Mint = ModInt<998244353>;\n// RsumQ\u306F\u30E2\u30CE\
+    \u30A4\u30C9\u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\u3066\u304A\u304F\nstruct\
+    \ RaffineQ_RsumQ {\n  struct T {\n    Mint val;\n    int size;\n    T(Mint v =\
+    \ 0, int s = 1) : val(v), size(s) {}\n  };\n  using E = pair<Mint, Mint>;\n  static\
+    \ T ti() { return T(0, 0); }\n  static E ei() { return make_pair(Mint(1), Mint(0));\
+    \ }\n  static T f(const T &l, const T &r) {\n    return T(l.val + r.val, l.size\
+    \ + r.size);\n  }\n  static T g(const T &l, const E &r) {\n    return T(r.first\
     \ * l.val + r.second * l.size, l.size);\n  }\n  static E h(const E &l, const E\
     \ &r) {\n    return make_pair(r.first * l.first, r.first * l.second + r.second);\n\
     \  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int\
@@ -133,7 +133,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 00:25:59+09:00'
+  timestamp: '2020-10-24 01:18:43+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

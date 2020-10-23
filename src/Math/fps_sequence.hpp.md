@@ -69,18 +69,18 @@ data:
     \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
     \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
     \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a\
-    \ = (u.first * v.first + u.second * v.second * w);\n      ModInt b = (u.first\
-    \ * v.second + u.second * v.first);\n      return make_pair(a, b);\n    };\n \
-    \   u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for\
-    \ (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
-    \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
-    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n\
-    #line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
-    \u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
+    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
+    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
+    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
+    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
+    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
+    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
+    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
+    \ T>;\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\
+    \u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
     \n// BEGIN CUT HERE\n\ntemplate <class mint>\nstruct FormalPowerSeries : std::vector<mint>\
     \ {\n  using FPS = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n\
     \  using m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993,\
@@ -125,10 +125,10 @@ data:
     \ % j] * (mod - mod / j);\n      lim = i + 1;\n    }\n    return INV[i];\n  }\n\
     \n public:\n  int deg() const {\n    int n = int(this->size()) - 1;\n    while\
     \ (n >= 0 && (*this)[n] == mint(0)) n--;\n    return n;\n  }\n  FPS &norm() {\
-    \ return this->resize(max(this->deg() + 1, 1)), *this; }\n  std::uint64_t inline\
-    \ get_len(std::uint64_t n) const {\n    return --n, n |= n >> 1, n |= n >> 2,\
-    \ n |= n >> 4, n |= n >> 8,\n           n |= n >> 16, n |= n >> 32, ++n;\n  }\n\
-    \  FPS mul(const FPS &y) const {\n    if (deg() == -1 || y.deg() == -1) return\
+    \ return this->resize(std::max(this->deg() + 1, 1)), *this; }\n  std::uint64_t\
+    \ inline get_len(std::uint64_t n) const {\n    return --n, n |= n >> 1, n |= n\
+    \ >> 2, n |= n >> 4, n |= n >> 8,\n           n |= n >> 16, n |= n >> 32, ++n;\n\
+    \  }\n  FPS mul(const FPS &y) const {\n    if (deg() == -1 || y.deg() == -1) return\
     \ {0};\n    int n = this->size(), m = y.size(), sz = n + m - 1;\n    FPS ret(sz,\
     \ 0);\n    if (std::min(n, m) <= 8) {\n      for (int i = 0; i < n; i++)\n   \
     \     for (int j = 0; j < m; j++) ret[i + j] += (*this)[i] * y[j];\n    } else\
@@ -176,7 +176,7 @@ data:
     \ return std::make_pair(FPS{0}, *this);\n    int sq = this->size() - yr.size()\
     \ + 1, len = get_len(sq);\n    FPS qr = FPS(this->begin(), this->begin() + sq).div_con(yr,\
     \ g0r);\n    if (yr.size() == 1) return std::make_pair(qr, FPS{0});\n    len =\
-    \ get_len(max(qr.size(), yr.size()));\n    int mask = len - 1;\n    subst(a1,\
+    \ get_len(std::max(qr.size(), yr.size()));\n    int mask = len - 1;\n    subst(a1,\
     \ a2, 0, sq, qr.data()), subst(b1, b2, 0, yr.size(), yr.data());\n    std::fill(a1\
     \ + sq, a1 + len, 0), std::fill(a2 + sq, a2 + len, 0);\n    std::fill(b1 + yr.size(),\
     \ b1 + len, 0),\n        std::fill(b2 + yr.size(), b2 + len, 0);\n    dft(len,\
@@ -210,8 +210,8 @@ data:
     \ gr(len2);\n      for (int i = std::min<int>(y.size(), len2) - 1; i >= 0; i--)\
     \ gr[i] = y[i];\n      tie(q, r) = x.quorem_rev_con(y, gr.inv());\n    }\n   \
     \ reverse(q.begin(), q.end()), reverse(r.begin(), r.end());\n    return std::make_pair(q,\
-    \ r.norm());\n  }\n  FPS diff() const {\n    FPS ret(max(0, int(this->size() -\
-    \ 1)));\n    for (int i = this->size() - 1; i > 0; i--) ret[i - 1] = (*this)[i]\
+    \ r.norm());\n  }\n  FPS diff() const {\n    FPS ret(std::max(0, int(this->size()\
+    \ - 1)));\n    for (int i = this->size() - 1; i > 0; i--) ret[i - 1] = (*this)[i]\
     \ * i;\n    return ret;\n  }\n  FPS inte() const {\n    int len = this->size()\
     \ + 1;\n    FPS ret(len);\n    ret[0] = 0;\n    for (int i = len - 1; i >= 1;\
     \ i--) ret[i] = (*this)[i - 1] * get_inv(i);\n    return ret;\n  }\n  FPS log()\
@@ -371,7 +371,7 @@ data:
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-10-24 00:25:59+09:00'
+  timestamp: '2020-10-24 01:18:43+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/bernoulli.test.cpp
