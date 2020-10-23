@@ -1,31 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_C
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_C
   bundledCode: "#line 1 \"test/aoj/CGL_1_C.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_C\"\
-    \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#define call_from_test\n\
-    #line 1 \"src/Geometry/!geometry_temp.hpp\"\n/**\n * @title \u5E7E\u4F55\u30C6\
-    \u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\n */\n\n#ifndef call_from_test\n\
-    #line 8 \"src/Geometry/!geometry_temp.hpp\"\nusing namespace std;\n#endif\n\n\
-    namespace geometry {\n\nusing Real = long double;\nint sgn(Real x) {\n  static\
-    \ constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1 : x > +EPS ? 1 : 0;\n}\n\
-    const Real PI = acos(-1.0);\nReal radian_to_degree(Real r) { return (r * 180.0\
-    \ / PI); }\nReal degree_to_radian(Real d) { return (d * PI / 180.0); }\nenum {\n\
-    \  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK = +2,\n  ONLINE_FRONT\
-    \ = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1, RIGHT = -1, IN = +2,\
-    \ OUT = -2 };\nenum { DISJOINT = 0, TOUCH = 1, CROSSING = 2, OVERLAP = 3 };\n\
-    //-----------------------------------------------------------------------------\n\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Geometry/!geometry_temp.hpp\"\n/**\n\
+    \ * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\n */\n\
+    \n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\nint\
+    \ sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1 :\
+    \ x > +EPS ? 1 : 0;\n}\nconst Real PI = acos(-1.0);\nReal radian_to_degree(Real\
+    \ r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real d) { return (d *\
+    \ PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK\
+    \ = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1,\
+    \ RIGHT = -1, IN = +2, OUT = -2 };\nenum { DISJOINT = 0, TOUCH = 1, CROSSING =\
+    \ 2, OVERLAP = 3 };\n//-----------------------------------------------------------------------------\n\
     // Point\n//-----------------------------------------------------------------------------\n\
     struct Point {\n  Real x, y;\n  Point &operator+=(Point p) {\n    x += p.x;\n\
     \    y += p.y;\n    return *this;\n  }\n  Point &operator-=(Point p) {\n    x\
@@ -87,52 +85,53 @@ data:
     \ theta), rotate(l.p2, theta)};\n}\n\nSegment Line::reflect(Segment s) { return\
     \ {reflect(s.p1), reflect(s.p2)}; }\nSegment translate(Segment s, Point v) { return\
     \ {s.p1 + v, s.p2 + v}; }\nSegment rotate(Segment s, Real theta) {\n  return {rotate(s.p1,\
-    \ theta), rotate(s.p2, theta)};\n}\n\nvector<Point> cross_points(Line l, Line\
-    \ m) {\n  Real a = cross(m.p2 - m.p1, l.p2 - l.p1);\n  Real b = cross(l.p1 - m.p1,\
-    \ l.p2 - l.p1);\n  if (sgn(a)) return {m.p1 + b / a * (m.p2 - m.p1)};  // properly\
-    \ crossing\n  if (!sgn(b)) return {m.p1, m.p2};                   // same line\n\
-    \  return {};                                          // disjoint parallel\n\
-    }\nvector<Point> cross_points(Line l, Segment s) {\n  Real a = cross(s.p2 - s.p1,\
-    \ l.p2 - l.p1);\n  Real b = cross(l.p1 - s.p1, l.p2 - l.p1);\n  if (a < 0) a =\
-    \ -a, b = -b;\n  if (sgn(b) < 0 || sgn(a - b) < 0) return {};        // no intersect\n\
+    \ theta), rotate(s.p2, theta)};\n}\n\nstd::vector<Point> cross_points(Line l,\
+    \ Line m) {\n  Real a = cross(m.p2 - m.p1, l.p2 - l.p1);\n  Real b = cross(l.p1\
+    \ - m.p1, l.p2 - l.p1);\n  if (sgn(a)) return {m.p1 + b / a * (m.p2 - m.p1)};\
+    \  // properly crossing\n  if (!sgn(b)) return {m.p1, m.p2};                 \
+    \  // same line\n  return {};                                          // disjoint\
+    \ parallel\n}\nstd::vector<Point> cross_points(Line l, Segment s) {\n  Real a\
+    \ = cross(s.p2 - s.p1, l.p2 - l.p1);\n  Real b = cross(l.p1 - s.p1, l.p2 - l.p1);\n\
+    \  if (a < 0) a = -a, b = -b;\n  if (sgn(b) < 0 || sgn(a - b) < 0) return {};\
+    \        // no intersect\n  if (sgn(a)) return {s.p1 + b / a * (s.p2 - s.p1)};\
+    \  // properly crossing\n  if (!sgn(b)) return {s.p1, s.p2};                 \
+    \  // same line\n  return {};                                          // disjoint\
+    \ parallel\n}\nstd::vector<Point> cross_points(Segment s, Line l) {\n  return\
+    \ cross_points(l, s);\n}\nstd::vector<Point> cross_points(Segment s, Segment t)\
+    \ {\n  Real a = cross(s.p2 - s.p1, t.p2 - t.p1);\n  Real b = cross(t.p1 - s.p1,\
+    \ t.p2 - t.p1);\n  Real c = cross(s.p2 - s.p1, s.p1 - t.p1);\n  if (a < 0) a =\
+    \ -a, b = -b, c = -c;\n  if (sgn(b) < 0 || sgn(a - b) < 0 || sgn(c) < 0 || sgn(a\
+    \ - c) < 0)\n    return {};                                        // disjoint\n\
     \  if (sgn(a)) return {s.p1 + b / a * (s.p2 - s.p1)};  // properly crossing\n\
-    \  if (!sgn(b)) return {s.p1, s.p2};                   // same line\n  return\
-    \ {};                                          // disjoint parallel\n}\nvector<Point>\
-    \ cross_points(Segment s, Line l) { return cross_points(l, s); }\nvector<Point>\
-    \ cross_points(Segment s, Segment t) {\n  Real a = cross(s.p2 - s.p1, t.p2 - t.p1);\n\
-    \  Real b = cross(t.p1 - s.p1, t.p2 - t.p1);\n  Real c = cross(s.p2 - s.p1, s.p1\
-    \ - t.p1);\n  if (a < 0) a = -a, b = -b, c = -c;\n  if (sgn(b) < 0 || sgn(a -\
-    \ b) < 0 || sgn(c) < 0 || sgn(a - c) < 0)\n    return {};                    \
-    \                    // disjoint\n  if (sgn(a)) return {s.p1 + b / a * (s.p2 -\
-    \ s.p1)};  // properly crossing\n  vector<Point> ps;                         \
-    \          // same line\n  auto insert_if_possible = [&](Point p) {\n    for (auto\
-    \ q : ps)\n      if (sgn(dot(p - q, p - q)) == 0) return;\n    ps.push_back(p);\n\
-    \  };\n  if (sgn(dot(s.p1 - t.p1, s.p2 - t.p1)) <= 0) insert_if_possible(t.p1);\n\
-    \  if (sgn(dot(s.p1 - t.p2, s.p2 - t.p2)) <= 0) insert_if_possible(t.p2);\n  if\
-    \ (sgn(dot(t.p1 - s.p1, t.p2 - s.p1)) <= 0) insert_if_possible(s.p1);\n  if (sgn(dot(t.p1\
-    \ - s.p2, t.p2 - s.p2)) <= 0) insert_if_possible(s.p2);\n  return ps;\n}\n\nint\
-    \ intersect(Segment s, Segment t) {\n  auto cp = cross_points(s, t);\n  if (cp.size()\
-    \ == 0) return DISJOINT;\n  if (cp.size() > 1) return OVERLAP;\n  if ((cp[0] ==\
-    \ s.p1 || cp[0] == s.p2 || cp[0] == t.p1 || cp[0] == t.p2))\n    return TOUCH;\n\
-    \  return CROSSING;\n}\n\nReal dist(Line l, Point p) { return dist(p, l.project(p));\
-    \ }\nReal dist(Point p, Line l) { return dist(l, p); }\nReal dist(Line l, Line\
-    \ m) {\n  return sgn(cross(l.p1 - l.p2, m.p1 - m.p2)) ? 0 : dist(l.p1, m);\n}\n\
-    Real dist(Segment s, Point p) { return dist(p, s.closest_point(p)); }\nReal dist(Point\
-    \ p, Segment s) { return dist(s, p); }\nReal dist(Line l, Segment s) {\n  return\
-    \ cross_points(l, s).size() ? 0 : min(dist(l, s.p1), dist(l, s.p2));\n}\nReal\
-    \ dist(Segment s, Line l) { return dist(l, s); }\nReal dist(Segment s, Segment\
-    \ t) {\n  if (cross_points(s, t).size()) return 0;\n  return min({dist(s.p1, t),\
-    \ dist(s.p2, t), dist(t.p1, s), dist(t.p2, s)});\n}\n//-----------------------------------------------------------------------------\n\
+    \  std::vector<Point> ps;                              // same line\n  auto insert_if_possible\
+    \ = [&](Point p) {\n    for (auto q : ps)\n      if (sgn(dot(p - q, p - q)) ==\
+    \ 0) return;\n    ps.emplace_back(p);\n  };\n  if (sgn(dot(s.p1 - t.p1, s.p2 -\
+    \ t.p1)) <= 0) insert_if_possible(t.p1);\n  if (sgn(dot(s.p1 - t.p2, s.p2 - t.p2))\
+    \ <= 0) insert_if_possible(t.p2);\n  if (sgn(dot(t.p1 - s.p1, t.p2 - s.p1)) <=\
+    \ 0) insert_if_possible(s.p1);\n  if (sgn(dot(t.p1 - s.p2, t.p2 - s.p2)) <= 0)\
+    \ insert_if_possible(s.p2);\n  return ps;\n}\n\nint intersect(Segment s, Segment\
+    \ t) {\n  auto cp = cross_points(s, t);\n  if (cp.size() == 0) return DISJOINT;\n\
+    \  if (cp.size() > 1) return OVERLAP;\n  if ((cp[0] == s.p1 || cp[0] == s.p2 ||\
+    \ cp[0] == t.p1 || cp[0] == t.p2))\n    return TOUCH;\n  return CROSSING;\n}\n\
+    \nReal dist(Line l, Point p) { return dist(p, l.project(p)); }\nReal dist(Point\
+    \ p, Line l) { return dist(l, p); }\nReal dist(Line l, Line m) {\n  return sgn(cross(l.p1\
+    \ - l.p2, m.p1 - m.p2)) ? 0 : dist(l.p1, m);\n}\nReal dist(Segment s, Point p)\
+    \ { return dist(p, s.closest_point(p)); }\nReal dist(Point p, Segment s) { return\
+    \ dist(s, p); }\nReal dist(Line l, Segment s) {\n  return cross_points(l, s).size()\
+    \ ? 0 : min(dist(l, s.p1), dist(l, s.p2));\n}\nReal dist(Segment s, Line l) {\
+    \ return dist(l, s); }\nReal dist(Segment s, Segment t) {\n  if (cross_points(s,\
+    \ t).size()) return 0;\n  return min({dist(s.p1, t), dist(s.p2, t), dist(t.p1,\
+    \ s), dist(t.p2, s)});\n}\n//-----------------------------------------------------------------------------\n\
     // Circle\n//-----------------------------------------------------------------------------\n\
     struct Circle {\n  Point o;\n  Real r;\n  Real area() { return PI * r * r; }\n\
     \  int where(Point p) {\n    int s = sgn(norm2(p - o) - r * r);\n    return s\
-    \ < 0 ? IN : s == 0 ? ON : OUT;\n  }\n  vector<Line> tangent(Point p) {\n    Point\
-    \ u = p - o, v = orth(u);\n    Real len = norm2(u) - r * r;\n    if (sgn(len)\
+    \ < 0 ? IN : s == 0 ? ON : OUT;\n  }\n  std::vector<Line> tangent(Point p) {\n\
+    \    Point u = p - o, v = orth(u);\n    Real len = norm2(u) - r * r;\n    if (sgn(len)\
     \ < 0) return {};\n    if (sgn(len) == 0) return {{p, p + v}};\n    u *= r * r\
     \ / norm2(u);\n    v *= r * sqrt(len) / norm2(v);\n    return {{p, o + u + v},\
     \ {p, o + u - v}};\n  }\n};\n\nCircle Line::reflect(Circle c) { return {reflect(c.o),\
     \ c.r}; }\nCircle translate(Circle c, Point v) { return {c.o + v, c.r}; }\nCircle\
-    \ rotate(Circle c, Real theta) { return {rotate(c.o, theta), c.r}; }\n\nvector<Point>\
+    \ rotate(Circle c, Real theta) { return {rotate(c.o, theta), c.r}; }\n\nstd::vector<Point>\
     \ cross_points(Circle c, Circle d) {\n  if (c.r < d.r) swap(c, d);\n  Real g =\
     \ norm2(c.o - d.o);\n  if (sgn(g) == 0) {\n    if (sgn(c.r - d.r)) return {};\n\
     \    return {{c.o.x + c.r, c.o.y},\n            {c.o.x, c.o.y + c.r},\n      \
@@ -142,64 +141,66 @@ data:
     \ / (c.r - d.r)};\n  if (outer == 0) return {(c.r * d.o + d.r * c.o) / (c.r +\
     \ d.r)};\n  Real eta = (c.r * c.r - d.r * d.r + g) / (2 * g);\n  Real mu = sqrt(c.r\
     \ * c.r / g - eta * eta);\n  Point q = c.o + eta * (d.o - c.o), v = mu * orth(d.o\
-    \ - c.o);\n  return {q + v, q - v};\n}\nvector<Point> cross_points(Circle c, Line\
-    \ l) {\n  Point u = l.p2 - l.p1, v = l.p1 - c.o;\n  Real a = norm2(u), b = dot(u,\
-    \ v) / a, t = (norm2(v) - c.r * c.r) / a;\n  Real det = b * b - t;\n  if (sgn(det)\
-    \ < 0) return {};               // no solution\n  if (sgn(det) == 0) return {l.p1\
-    \ - b * u};  // touch inner/outer\n  return {l.p1 - (b + sqrt(det)) * u,     \
-    \   // properly intersect\n          l.p1 - (b - sqrt(det)) * u};\n}\nvector<Point>\
-    \ cross_points(Line l, Circle c) { return cross_points(c, l); }\nvector<Point>\
-    \ cross_points(Circle c, Segment s) {\n  Point u = s.p2 - s.p1, v = s.p1 - c.o;\n\
-    \  Real a = norm2(u), b = dot(u, v) / a, t = (norm2(v) - c.r * c.r) / a;\n  Real\
-    \ det = b * b - t;\n  if (sgn(det) < 0) return {};  // no solution\n  if (sgn(det)\
-    \ == 0 && sgn(-b) >= 0 && sgn(1 - (-b)) >= 0)\n    return {s.p1 - b * u};  //\
-    \ touch\n  Real t1 = -b - sqrt(det), t2 = -b + sqrt(det);\n  vector<Point> qs;\n\
-    \  if (sgn(t1) >= 0 && sgn(1 - t1) >= 0) qs.push_back(s.p1 + t1 * u);\n  if (sgn(t2)\
-    \ >= 0 && sgn(1 - t2) >= 0) qs.push_back(s.p1 + t2 * u);\n  return qs;\n}\nvector<Point>\
-    \ cross_points(Segment s, Circle c) { return cross_points(c, s); }\n\n//-----------------------------------------------------------------------------\n\
+    \ - c.o);\n  return {q + v, q - v};\n}\nstd::vector<Point> cross_points(Circle\
+    \ c, Line l) {\n  Point u = l.p2 - l.p1, v = l.p1 - c.o;\n  Real a = norm2(u),\
+    \ b = dot(u, v) / a, t = (norm2(v) - c.r * c.r) / a;\n  Real det = b * b - t;\n\
+    \  if (sgn(det) < 0) return {};               // no solution\n  if (sgn(det) ==\
+    \ 0) return {l.p1 - b * u};  // touch inner/outer\n  return {l.p1 - (b + sqrt(det))\
+    \ * u,        // properly intersect\n          l.p1 - (b - sqrt(det)) * u};\n\
+    }\nstd::vector<Point> cross_points(Line l, Circle c) { return cross_points(c,\
+    \ l); }\nstd::vector<Point> cross_points(Circle c, Segment s) {\n  Point u = s.p2\
+    \ - s.p1, v = s.p1 - c.o;\n  Real a = norm2(u), b = dot(u, v) / a, t = (norm2(v)\
+    \ - c.r * c.r) / a;\n  Real det = b * b - t;\n  if (sgn(det) < 0) return {}; \
+    \ // no solution\n  if (sgn(det) == 0 && sgn(-b) >= 0 && sgn(1 - (-b)) >= 0)\n\
+    \    return {s.p1 - b * u};  // touch\n  Real t1 = -b - sqrt(det), t2 = -b + sqrt(det);\n\
+    \  std::vector<Point> qs;\n  if (sgn(t1) >= 0 && sgn(1 - t1) >= 0) qs.emplace_back(s.p1\
+    \ + t1 * u);\n  if (sgn(t2) >= 0 && sgn(1 - t2) >= 0) qs.emplace_back(s.p1 + t2\
+    \ * u);\n  return qs;\n}\nstd::vector<Point> cross_points(Segment s, Circle c)\
+    \ {\n  return cross_points(c, s);\n}\n\n//-----------------------------------------------------------------------------\n\
     // Polygon\n// assuming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
-    struct Polygon : vector<Point> {\n  using vector<Point>::vector;\n  int prev(int\
-    \ i) { return i ? i - 1 : (int)this->size() - 1; }\n  int next(int i) { return\
-    \ (i + 1 == (int)this->size() ? 0 : i + 1); }\n  bool is_convex() {\n    for (int\
-    \ i = 0; i < (int)this->size(); i++)\n      if (ccw((*this)[prev(i)], (*this)[i],\
-    \ (*this)[next(i)]) == CLOCKWISE)\n        return false;\n    return true;\n \
-    \ }\n  Real area() {\n    if (this->size() <= 2) return 0;\n    Real a = cross(this->back(),\
-    \ (*this)[0]);\n    for (int i = 0; i + 1 < (int)this->size(); i++)\n      a +=\
-    \ cross((*this)[i], (*this)[i + 1]);\n    return a / 2;\n  }\n  int where(Point\
-    \ p) {\n    bool in = false;\n    for (int i = 0; i < (int)this->size(); i++)\
-    \ {\n      Point a = (*this)[i] - p, b = (*this)[next(i)] - p;\n      if (a.y\
-    \ > b.y) std::swap(a, b);\n      if (a.y <= 0 && 0 < b.y && cross(a, b) < 0) in\
-    \ = !in;\n      if (!sgn(cross(a, b)) && sgn(dot(a, b)) <= 0)\n        return\
+    struct Polygon : std::vector<Point> {\n  using std::vector<Point>::vector;\n \
+    \ int prev(int i) { return i ? i - 1 : (int)this->size() - 1; }\n  int next(int\
+    \ i) { return (i + 1 == (int)this->size() ? 0 : i + 1); }\n  bool is_convex()\
+    \ {\n    for (int i = 0; i < (int)this->size(); i++)\n      if (ccw((*this)[prev(i)],\
+    \ (*this)[i], (*this)[next(i)]) == CLOCKWISE)\n        return false;\n    return\
+    \ true;\n  }\n  Real area() {\n    if (this->size() <= 2) return 0;\n    Real\
+    \ a = cross(this->back(), (*this)[0]);\n    for (int i = 0; i + 1 < (int)this->size();\
+    \ i++)\n      a += cross((*this)[i], (*this)[i + 1]);\n    return a / 2;\n  }\n\
+    \  int where(Point p) {\n    bool in = false;\n    for (int i = 0; i < (int)this->size();\
+    \ i++) {\n      Point a = (*this)[i] - p, b = (*this)[next(i)] - p;\n      if\
+    \ (a.y > b.y) std::swap(a, b);\n      if (a.y <= 0 && 0 < b.y && cross(a, b) <\
+    \ 0) in = !in;\n      if (!sgn(cross(a, b)) && sgn(dot(a, b)) <= 0)\n        return\
     \ ON;  // Point on the edge\n    }\n    return in ? IN : OUT;  // Point in:out\
     \ the Polygon\n  }\n  bool contains(Segment s, int side = IN) {  // +2 for in,\
     \ -2 for out\n    int opp = side == IN ? OUT : IN;\n    if (where(s.p1) == opp\
-    \ || where(s.p2) == opp) return false;\n    vector<Point> ps = {s.p1, s.p2};\n\
+    \ || where(s.p2) == opp) return false;\n    std::vector<Point> ps = {s.p1, s.p2};\n\
     \    for (int i = 0; i < (int)this->size(); i++)\n      for (Point p : cross_points(s,\
-    \ Segment({(*this)[i], (*this)[next(i)]})))\n        ps.push_back(p);\n    int\
-    \ n = ps.size();\n    sort(ps.begin(), ps.end());\n    for (int i = 0; i + 1 <\
-    \ n; i++) ps.push_back((ps[i] + ps[i + 1]) / 2);\n    for (Point p : ps)\n   \
-    \   if (where(p) == opp) return false;\n    return true;\n  }\n};\n\nPolygon Line::reflect(Polygon\
-    \ g) {\n  reverse(g.begin(), g.end());\n  Polygon res;\n  for (Point p : g) res.push_back(reflect(p));\n\
-    \  return res;\n}\nPolygon translate(Polygon g, Point v) {\n  Polygon h(g.size());\n\
-    \  for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;\n  return h;\n}\n\
-    Polygon rotate(Polygon g, Real theta) {\n  Polygon h(g.size());\n  for (int i\
-    \ = 0; i < (int)g.size(); i++) h[i] = rotate(g[i], theta);\n  return h;\n}\n\n\
-    struct Convex : Polygon {\n  using Polygon::Polygon;\n  pair<Point, Point> farthest()\
-    \ {\n    int u = 0, v = 1;\n    Real best = -1;\n    for (int i = 0, j = 1; i\
-    \ < (int)this->size(); ++i)\n      while (true) {\n        int k = next(j);\n\
-    \        Real len = norm2((*this)[j] - (*this)[i]);\n        if (sgn(len - norm2((*this)[k]\
-    \ - (*this)[i])) <= 0)\n          j = k;\n        else {\n          if (best <\
-    \ len) best = len, u = i, v = j;\n          break;\n        }\n      }\n    return\
-    \ make_pair((*this)[u], (*this)[v]);\n  }\n  Real diameter() {\n    Point p, q;\n\
-    \    tie(p, q) = farthest();\n    return dist(p, q);\n  }\n  Convex cut(Line l,\
-    \ int side = LEFT) {  // +1 for left, -1 for right\n    Convex g;\n    for (int\
-    \ i = 0; i < (int)this->size(); i++) {\n      Point p = (*this)[i], q = (*this)[next(i)];\n\
-    \      if (l.where(p) * side >= 0) g.push_back(p);\n      if (l.where(p) * l.where(q)\
-    \ < 0) {\n        Real a = cross(q - p, l.p2 - l.p1);\n        Real b = cross(l.p1\
-    \ - p, l.p2 - l.p1);\n        g.push_back(p + b / a * (q - p));\n      }\n   \
-    \ }\n    return g;\n  }\n};\n\nConvex Line::reflect(Convex g) {\n  reverse(g.begin(),\
-    \ g.end());\n  Convex res;\n  for (Point p : g) res.push_back(reflect(p));\n \
-    \ return res;\n}\nConvex translate(Convex g, Point v) {\n  Convex h(g.size());\n\
+    \ Segment({(*this)[i], (*this)[next(i)]})))\n        ps.emplace_back(p);\n   \
+    \ int n = ps.size();\n    sort(ps.begin(), ps.end());\n    for (int i = 0; i +\
+    \ 1 < n; i++) ps.emplace_back((ps[i] + ps[i + 1]) / 2);\n    for (Point p : ps)\n\
+    \      if (where(p) == opp) return false;\n    return true;\n  }\n};\n\nPolygon\
+    \ Line::reflect(Polygon g) {\n  reverse(g.begin(), g.end());\n  Polygon res;\n\
+    \  for (Point p : g) res.emplace_back(reflect(p));\n  return res;\n}\nPolygon\
+    \ translate(Polygon g, Point v) {\n  Polygon h(g.size());\n  for (int i = 0; i\
+    \ < (int)g.size(); i++) h[i] = g[i] + v;\n  return h;\n}\nPolygon rotate(Polygon\
+    \ g, Real theta) {\n  Polygon h(g.size());\n  for (int i = 0; i < (int)g.size();\
+    \ i++) h[i] = rotate(g[i], theta);\n  return h;\n}\n\nstruct Convex : Polygon\
+    \ {\n  using Polygon::Polygon;\n  std::pair<Point, Point> farthest() {\n    int\
+    \ u = 0, v = 1;\n    Real best = -1;\n    for (int i = 0, j = 1; i < (int)this->size();\
+    \ ++i)\n      while (true) {\n        int k = next(j);\n        Real len = norm2((*this)[j]\
+    \ - (*this)[i]);\n        if (sgn(len - norm2((*this)[k] - (*this)[i])) <= 0)\n\
+    \          j = k;\n        else {\n          if (best < len) best = len, u = i,\
+    \ v = j;\n          break;\n        }\n      }\n    return std::make_pair((*this)[u],\
+    \ (*this)[v]);\n  }\n  Real diameter() {\n    Point p, q;\n    tie(p, q) = farthest();\n\
+    \    return dist(p, q);\n  }\n  Convex cut(Line l, int side = LEFT) {  // +1 for\
+    \ left, -1 for right\n    Convex g;\n    for (int i = 0; i < (int)this->size();\
+    \ i++) {\n      Point p = (*this)[i], q = (*this)[next(i)];\n      if (l.where(p)\
+    \ * side >= 0) g.emplace_back(p);\n      if (l.where(p) * l.where(q) < 0) {\n\
+    \        Real a = cross(q - p, l.p2 - l.p1);\n        Real b = cross(l.p1 - p,\
+    \ l.p2 - l.p1);\n        g.emplace_back(p + b / a * (q - p));\n      }\n    }\n\
+    \    return g;\n  }\n};\n\nConvex Line::reflect(Convex g) {\n  reverse(g.begin(),\
+    \ g.end());\n  Convex res;\n  for (Point p : g) res.emplace_back(reflect(p));\n\
+    \  return res;\n}\nConvex translate(Convex g, Point v) {\n  Convex h(g.size());\n\
     \  for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;\n  return h;\n}\n\
     Convex rotate(Convex g, Real theta) {\n  Convex h(g.size());\n  for (int i = 0;\
     \ i < (int)g.size(); i++) h[i] = rotate(g[i], theta);\n  return h;\n}\n\nReal\
@@ -216,7 +217,7 @@ data:
     \ + 1]}), s));\n  return res;\n}\nReal dist(Segment s, Polygon g) { return dist(g,\
     \ s); }\nReal dist(Polygon g, Polygon h) {\n  Real res = dist(Segment({g.back(),\
     \ g[0]}), h);\n  for (int i = 0; i + 1 < (int)g.size(); i++)\n    res = min(res,\
-    \ dist(Segment({g[i], g[i + 1]}), h));\n  return res;\n}\n\nConvex convex_hull(vector<Point>\
+    \ dist(Segment({g[i], g[i + 1]}), h));\n  return res;\n}\n\nConvex convex_hull(std::vector<Point>\
     \ ps) {\n  int n = ps.size(), k = 0;\n  sort(ps.begin(), ps.end());\n  Convex\
     \ ch(2 * n);\n  for (int i = 0; i < n; ch[k++] = ps[i++])\n    while (k >= 2 &&\
     \ ccw(ch[k - 2], ch[k - 1], ps[i]) == CLOCKWISE) k--;\n  for (int i = n - 2, t\
@@ -233,8 +234,19 @@ data:
     \ << \"Circle \" << c.o << \" \" << c.r << endl;\n    return *this;\n  }\n  Visualizer\
     \ &operator<<(Polygon g) {\n    ofs << \"Polygon\" << endl;\n    for (Point p\
     \ : g) ofs << p << endl;\n    ofs << \"...\" << endl;\n    return *this;\n  }\n\
-    };\n\n}  // namespace geometry\n#line 9 \"test/aoj/CGL_1_C.test.cpp\"\n#undef\
-    \ call_from_test\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    };\n\n}  // namespace geometry\n#line 5 \"test/aoj/CGL_1_C.test.cpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ namespace geometry;\n  Point p0, p1;\n  cin >> p0 >> p1;\n  int q;\n  cin >>\
+    \ q;\n  while (q--) {\n    Point p2;\n    cin >> p2;\n    switch (ccw(p0, p1,\
+    \ p2)) {\n      case COUNTER_CLOCKWISE:\n        cout << \"COUNTER_CLOCKWISE\"\
+    \ << endl;\n        break;\n      case CLOCKWISE:\n        cout << \"CLOCKWISE\"\
+    \ << endl;\n        break;\n      case ONLINE_BACK:\n        cout << \"ONLINE_BACK\"\
+    \ << endl;\n        break;\n      case ONLINE_FRONT:\n        cout << \"ONLINE_FRONT\"\
+    \ << endl;\n        break;\n      case ON_SEGMENT:\n        cout << \"ON_SEGMENT\"\
+    \ << endl;\n        break;\n    }\n  }\n  return 0;\n}\n"
+  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_C\"\
+    \n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\nusing\
+    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using namespace geometry;\n  Point p0, p1;\n  cin >> p0 >> p1;\n  int q;\n\
     \  cin >> q;\n  while (q--) {\n    Point p2;\n    cin >> p2;\n    switch (ccw(p0,\
     \ p1, p2)) {\n      case COUNTER_CLOCKWISE:\n        cout << \"COUNTER_CLOCKWISE\"\
@@ -242,26 +254,14 @@ data:
     \ << endl;\n        break;\n      case ONLINE_BACK:\n        cout << \"ONLINE_BACK\"\
     \ << endl;\n        break;\n      case ONLINE_FRONT:\n        cout << \"ONLINE_FRONT\"\
     \ << endl;\n        break;\n      case ON_SEGMENT:\n        cout << \"ON_SEGMENT\"\
-    \ << endl;\n        break;\n    }\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_C\"\
-    \n\n#include <bits/stdc++.h>\nusing namespace std;\n\n#define call_from_test\n\
-    #include \"src/Geometry/!geometry_temp.hpp\"\n#undef call_from_test\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using namespace geometry;\n\
-    \  Point p0, p1;\n  cin >> p0 >> p1;\n  int q;\n  cin >> q;\n  while (q--) {\n\
-    \    Point p2;\n    cin >> p2;\n    switch (ccw(p0, p1, p2)) {\n      case COUNTER_CLOCKWISE:\n\
-    \        cout << \"COUNTER_CLOCKWISE\" << endl;\n        break;\n      case CLOCKWISE:\n\
-    \        cout << \"CLOCKWISE\" << endl;\n        break;\n      case ONLINE_BACK:\n\
-    \        cout << \"ONLINE_BACK\" << endl;\n        break;\n      case ONLINE_FRONT:\n\
-    \        cout << \"ONLINE_FRONT\" << endl;\n        break;\n      case ON_SEGMENT:\n\
-    \        cout << \"ON_SEGMENT\" << endl;\n        break;\n    }\n  }\n  return\
-    \ 0;\n}"
+    \ << endl;\n        break;\n    }\n  }\n  return 0;\n}"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   isVerificationFile: true
   path: test/aoj/CGL_1_C.test.cpp
   requiredBy: []
-  timestamp: '2020-09-06 22:06:06+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-23 23:21:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_1_C.test.cpp
 layout: document

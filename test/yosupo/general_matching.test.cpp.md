@@ -1,36 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Graph/MatchingGeneral.hpp
     title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
       )"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_matching
     links:
     - https://judge.yosupo.jp/problem/general_matching
   bundledCode: "#line 1 \"test/yosupo/general_matching.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/general_matching\"\n\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#define call_from_test\n#line 1 \"src/Graph/MatchingGeneral.hpp\"\
-    \n/**\n * @title \u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\
-    \u30E9\u30D5)\n * @category \u30B0\u30E9\u30D5\n *   O(VE log V)\n *  Gabow\u306E\
-    Edmonds' Algorithm\n *  \u8FD4\u308A\u5024:{\u30DE\u30C3\u30C1\u30F3\u30B0\u6570\
-    ,\u5404\u9802\u70B9\u306E\u76F8\u65B9(\u3044\u306A\u3044\u306A\u3089-1\uFF09}\n\
-    \ */\n\n#ifndef call_from_test\n#line 11 \"src/Graph/MatchingGeneral.hpp\"\nusing\
-    \ namespace std;\n#endif\n\nstruct MatchingGeneral {\n private:\n  int n, res;\n\
-    \  vector<vector<int>> adj;\n  vector<int> mate, idx, p;\n  vector<pair<int, int>>\
-    \ edges;\n\n private:\n  void rematch(int u, int v) {\n    int w = mate[u];\n\
-    \    mate[u] = v;\n    if (w == -1 || mate[w] != u) return;\n    if (edges[u].second\
-    \ == -1) {\n      rematch(mate[w] = edges[u].first, w);\n    } else {\n      rematch(edges[u].first,\
-    \ edges[u].second);\n      rematch(edges[u].second, edges[u].first);\n    }\n\
-    \  }\n  bool check(int root) {\n    function<int(int)> f = [&](int x) {\n    \
-    \  return (idx[x] != res || p[x] == -1) ? x : (p[x] = f(p[x]));\n    };\n    queue<int>\
-    \ que;\n    edges[root] = {-1, -1};\n    idx[root] = res, p[root] = -1, que.push(root);\n\
+    \ \"https://judge.yosupo.jp/problem/general_matching\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Graph/MatchingGeneral.hpp\"\n/**\n * @title \u6700\u5927\u30DE\u30C3\
+    \u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5)\n * @category \u30B0\u30E9\u30D5\
+    \n *   O(VE log V)\n *  Gabow\u306EEdmonds' Algorithm\n *  \u8FD4\u308A\u5024\
+    :{\u30DE\u30C3\u30C1\u30F3\u30B0\u6570,\u5404\u9802\u70B9\u306E\u76F8\u65B9(\u3044\
+    \u306A\u3044\u306A\u3089-1\uFF09}\n */\n\n// BEGIN CUT HERE\n\nstruct MatchingGeneral\
+    \ {\n private:\n  int n, res;\n  std::vector<std::vector<int>> adj;\n  std::vector<int>\
+    \ mate, idx, p;\n  std::vector<std::pair<int, int>> edges;\n\n private:\n  void\
+    \ rematch(int u, int v) {\n    int w = mate[u];\n    mate[u] = v;\n    if (w ==\
+    \ -1 || mate[w] != u) return;\n    if (edges[u].second == -1) {\n      rematch(mate[w]\
+    \ = edges[u].first, w);\n    } else {\n      rematch(edges[u].first, edges[u].second);\n\
+    \      rematch(edges[u].second, edges[u].first);\n    }\n  }\n  bool check(int\
+    \ root) {\n    std::function<int(int)> f = [&](int x) {\n      return (idx[x]\
+    \ != res || p[x] == -1) ? x : (p[x] = f(p[x]));\n    };\n    std::queue<int> que;\n\
+    \    edges[root] = {-1, -1};\n    idx[root] = res, p[root] = -1, que.push(root);\n\
     \    while (!que.empty()) {\n      int x = que.front();\n      que.pop();\n  \
     \    for (int y : adj[x])\n        if (y != root) {\n          if (mate[y] ==\
     \ -1) {\n            rematch(mate[y] = x, y);\n            return true;\n    \
@@ -47,30 +46,29 @@ data:
     \ = res, p[mate[y]] = y, que.push(mate[y]);\n          }\n        }\n    }\n \
     \   return false;\n  }\n\n public:\n  MatchingGeneral(int n)\n      : n(n), res(0),\
     \ adj(n), mate(n, -1), idx(n, -1), p(n), edges(n) {}\n  void add_edge(int u, int\
-    \ v) {\n    adj[u].emplace_back(v);\n    adj[v].emplace_back(u);\n  }\n  pair<int,\
-    \ vector<int>> get_matching() {\n    for (int i = 0; i < n; i++)\n      if (mate[i]\
-    \ == -1) res += check(i);\n    return make_pair(res, mate);\n  }\n};\n#line 8\
-    \ \"test/yosupo/general_matching.test.cpp\"\n#undef call_from_test\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin >> N >> M;\n\
-    \  MatchingGeneral graph(N);\n  while (M--) {\n    int u, v;\n    cin >> u >>\
-    \ v;\n    graph.add_edge(u, v);\n  }\n  auto ans = graph.get_matching();\n  cout\
-    \ << ans.first << endl;\n  for (int i = 0; i < N; i++)\n    if (i < ans.second[i])\
+    \ v) {\n    adj[u].emplace_back(v);\n    adj[v].emplace_back(u);\n  }\n  std::pair<int,\
+    \ std::vector<int>> get_matching() {\n    for (int i = 0; i < n; i++)\n      if\
+    \ (mate[i] == -1) res += check(i);\n    return std::make_pair(res, mate);\n  }\n\
+    };\n#line 4 \"test/yosupo/general_matching.test.cpp\"\nusing namespace std;\n\n\
+    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin\
+    \ >> N >> M;\n  MatchingGeneral graph(N);\n  while (M--) {\n    int u, v;\n  \
+    \  cin >> u >> v;\n    graph.add_edge(u, v);\n  }\n  auto ans = graph.get_matching();\n\
+    \  cout << ans.first << endl;\n  for (int i = 0; i < N; i++)\n    if (i < ans.second[i])\
     \ cout << i << \" \" << ans.second[i] << endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\n\n\
-    #include <bits/stdc++.h>\nusing namespace std;\n\n#define call_from_test\n#include\
-    \ \"src/Graph/MatchingGeneral.hpp\"\n#undef call_from_test\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin >> N >> M;\n  MatchingGeneral\
-    \ graph(N);\n  while (M--) {\n    int u, v;\n    cin >> u >> v;\n    graph.add_edge(u,\
-    \ v);\n  }\n  auto ans = graph.get_matching();\n  cout << ans.first << endl;\n\
-    \  for (int i = 0; i < N; i++)\n    if (i < ans.second[i]) cout << i << \" \"\
-    \ << ans.second[i] << endl;\n  return 0;\n}"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\n#include\
+    \ <bits/stdc++.h>\n#include \"src/Graph/MatchingGeneral.hpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N,\
+    \ M;\n  cin >> N >> M;\n  MatchingGeneral graph(N);\n  while (M--) {\n    int\
+    \ u, v;\n    cin >> u >> v;\n    graph.add_edge(u, v);\n  }\n  auto ans = graph.get_matching();\n\
+    \  cout << ans.first << endl;\n  for (int i = 0; i < N; i++)\n    if (i < ans.second[i])\
+    \ cout << i << \" \" << ans.second[i] << endl;\n  return 0;\n}"
   dependsOn:
   - src/Graph/MatchingGeneral.hpp
   isVerificationFile: true
   path: test/yosupo/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2020-08-11 20:23:42+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-23 23:21:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/general_matching.test.cpp
 layout: document

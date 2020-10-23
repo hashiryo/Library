@@ -2,35 +2,35 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/BinaryTrie.hpp
     title: "\u4E8C\u5206Trie"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/set_xor_min.test.cpp
     title: test/yosupo/set_xor_min.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/649.BinaryTrie.test.cpp
     title: test/yukicoder/649.BinaryTrie.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/649.SegTree_Dynamic.test.cpp
     title: test/yukicoder/649.SegTree_Dynamic.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "Segment-Tree(\u52D5\u7684)"
     links: []
-  bundledCode: "#line 1 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n/**\n * @title\
-    \ Segment-Tree(\u52D5\u7684)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n *\
-    \ O(logN)\n */\n\n#ifndef call_from_test\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n#endif\n\ntemplate <typename M, size_t LIM = 1 << 23>\nstruct SegmentTree_Dynamic\
-    \ {\n  using T = typename M::T;\n  using ll = long long;\n  using U = unsigned\
-    \ long long;\n  struct Node {\n    T dat;\n    U xor_lazy;\n    Node *ch[2];\n\
-    \    Node() : dat(M::ti()), xor_lazy(0), ch{nullptr, nullptr} {}\n    void *operator\
-    \ new(size_t) {\n      static vector<Node> pool(LIM);\n      return &pool[node_count++];\n\
-    \    }\n  };\n\n protected:\n  int height;\n  ll n;\n  static int node_count;\n\
-    \  Node *root;\n\n private:\n  inline void push(Node *t, ll b) {\n    if ((t->xor_lazy\
-    \ >> (U)b) & (U)1) swap(t->ch[0], t->ch[1]);\n    if (t->ch[0] != nullptr) t->ch[0]->xor_lazy\
+  bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title Segment-Tree(\u52D5\u7684)\n * @category \u30C7\u30FC\u30BF\u69CB\
+    \u9020\n * O(logN)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename M, std::size_t\
+    \ LIM = 1 << 23>\nstruct SegmentTree_Dynamic {\n  using T = typename M::T;\n \
+    \ using ll = long long;\n  using U = unsigned long long;\n  struct Node {\n  \
+    \  T dat;\n    U xor_lazy;\n    Node *ch[2];\n    Node() : dat(M::ti()), xor_lazy(0),\
+    \ ch{nullptr, nullptr} {}\n    void *operator new(std::size_t) {\n      static\
+    \ std::vector<Node> pool(LIM);\n      return &pool[node_count++];\n    }\n  };\n\
+    \n protected:\n  int height;\n  ll n;\n  static int node_count;\n  Node *root;\n\
+    \n private:\n  inline void push(Node *t, ll b) {\n    if ((t->xor_lazy >> (U)b)\
+    \ & (U)1) swap(t->ch[0], t->ch[1]);\n    if (t->ch[0] != nullptr) t->ch[0]->xor_lazy\
     \ ^= t->xor_lazy;\n    if (t->ch[1] != nullptr) t->ch[1]->xor_lazy ^= t->xor_lazy;\n\
     \    t->xor_lazy = 0;\n  }\n  T value(Node *t) { return t ? t->dat : M::ti();\
     \ }\n  Node *set_Node(Node *t, const U &pos, const T &val, ll b) {\n    if (t\
@@ -56,21 +56,22 @@ data:
     \ n, height - 1); }\n  T operator[](ll k) { return query(k, k + 1); }\n  // min\
     \ { i : check(query(0,i+1)) = true }\n  template <typename C>\n  ll find_first(C\
     \ &check, U bias = 0) {\n    return find(root, check, bias);\n  }\n};\ntemplate\
-    \ <typename M, size_t LIM>\nint SegmentTree_Dynamic<M, LIM>::node_count = 0;\n"
-  code: "/**\n * @title Segment-Tree(\u52D5\u7684)\n * @category \u30C7\u30FC\u30BF\
-    \u69CB\u9020\n * O(logN)\n */\n\n#ifndef call_from_test\n#include <bits/stdc++.h>\n\
-    using namespace std;\n#endif\n\ntemplate <typename M, size_t LIM = 1 << 23>\n\
-    struct SegmentTree_Dynamic {\n  using T = typename M::T;\n  using ll = long long;\n\
-    \  using U = unsigned long long;\n  struct Node {\n    T dat;\n    U xor_lazy;\n\
-    \    Node *ch[2];\n    Node() : dat(M::ti()), xor_lazy(0), ch{nullptr, nullptr}\
-    \ {}\n    void *operator new(size_t) {\n      static vector<Node> pool(LIM);\n\
-    \      return &pool[node_count++];\n    }\n  };\n\n protected:\n  int height;\n\
-    \  ll n;\n  static int node_count;\n  Node *root;\n\n private:\n  inline void\
-    \ push(Node *t, ll b) {\n    if ((t->xor_lazy >> (U)b) & (U)1) swap(t->ch[0],\
-    \ t->ch[1]);\n    if (t->ch[0] != nullptr) t->ch[0]->xor_lazy ^= t->xor_lazy;\n\
-    \    if (t->ch[1] != nullptr) t->ch[1]->xor_lazy ^= t->xor_lazy;\n    t->xor_lazy\
-    \ = 0;\n  }\n  T value(Node *t) { return t ? t->dat : M::ti(); }\n  Node *set_Node(Node\
-    \ *t, const U &pos, const T &val, ll b) {\n    if (t == nullptr) t = new Node();\n\
+    \ <typename M, std::size_t LIM>\nint SegmentTree_Dynamic<M, LIM>::node_count =\
+    \ 0;\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Segment-Tree(\u52D5\
+    \u7684)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * O(logN)\n */\n\n// BEGIN\
+    \ CUT HERE\n\ntemplate <typename M, std::size_t LIM = 1 << 23>\nstruct SegmentTree_Dynamic\
+    \ {\n  using T = typename M::T;\n  using ll = long long;\n  using U = unsigned\
+    \ long long;\n  struct Node {\n    T dat;\n    U xor_lazy;\n    Node *ch[2];\n\
+    \    Node() : dat(M::ti()), xor_lazy(0), ch{nullptr, nullptr} {}\n    void *operator\
+    \ new(std::size_t) {\n      static std::vector<Node> pool(LIM);\n      return\
+    \ &pool[node_count++];\n    }\n  };\n\n protected:\n  int height;\n  ll n;\n \
+    \ static int node_count;\n  Node *root;\n\n private:\n  inline void push(Node\
+    \ *t, ll b) {\n    if ((t->xor_lazy >> (U)b) & (U)1) swap(t->ch[0], t->ch[1]);\n\
+    \    if (t->ch[0] != nullptr) t->ch[0]->xor_lazy ^= t->xor_lazy;\n    if (t->ch[1]\
+    \ != nullptr) t->ch[1]->xor_lazy ^= t->xor_lazy;\n    t->xor_lazy = 0;\n  }\n\
+    \  T value(Node *t) { return t ? t->dat : M::ti(); }\n  Node *set_Node(Node *t,\
+    \ const U &pos, const T &val, ll b) {\n    if (t == nullptr) t = new Node();\n\
     \    if (b < 0) {\n      t->dat = val;\n      return t;\n    }\n    push(t, b);\n\
     \    bool f = (pos >> (U)b) & (U)1;\n    t->ch[f] = set_Node(t->ch[f], pos, val,\
     \ b - 1);\n    t->dat = M::f(value(t->ch[0]), value(t->ch[1]));\n    return t;\n\
@@ -92,15 +93,15 @@ data:
     \  //[l,r)\n  T query(ll l, ll r) { return query_Node(l, r, root, 0, n, height\
     \ - 1); }\n  T operator[](ll k) { return query(k, k + 1); }\n  // min { i : check(query(0,i+1))\
     \ = true }\n  template <typename C>\n  ll find_first(C &check, U bias = 0) {\n\
-    \    return find(root, check, bias);\n  }\n};\ntemplate <typename M, size_t LIM>\n\
-    int SegmentTree_Dynamic<M, LIM>::node_count = 0;"
+    \    return find(root, check, bias);\n  }\n};\ntemplate <typename M, std::size_t\
+    \ LIM>\nint SegmentTree_Dynamic<M, LIM>::node_count = 0;"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy:
   - src/DataStructure/BinaryTrie.hpp
-  timestamp: '2020-08-27 16:28:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-23 23:21:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/649.BinaryTrie.test.cpp
   - test/yukicoder/649.SegTree_Dynamic.test.cpp
