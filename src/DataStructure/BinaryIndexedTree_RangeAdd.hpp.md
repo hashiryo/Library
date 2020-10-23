@@ -3,14 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':x:'
     path: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
     title: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
     links: []
@@ -48,7 +48,7 @@ data:
   path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
   - test/aoj/2667.HLD.test.cpp

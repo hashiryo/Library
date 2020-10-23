@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/Matrix.hpp
     title: "\u884C\u5217"
   - icon: ':x:'
@@ -53,19 +53,19 @@ data:
     \    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j = 0; j < m;\
     \ j++) ret[i] += (*this)[i][j] * v[j];\n    return ret;\n  }\n  bool operator==(const\
     \ Matrix &b) const { return a == b.a; }\n  template <typename T>\n  using ET =\
-    \ enable_if<is_floating_point<T>::value>;\n  template <typename T>\n  using EF\
-    \ = enable_if<!is_floating_point<T>::value>;\n  template <typename T, typename\
-    \ ET<T>::type * = nullptr>\n  static bool is_zero(T x) {\n    return std::abs(x)\
-    \ < 1e-8;\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n  static\
-    \ bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <typename T, typename\
-    \ ET<T>::type * = nullptr>\n  static bool compare(T x, T y) {\n    return std::abs(x)\
-    \ < std::abs(y);\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n\
-    \  static bool compare(T x, T y) {\n    (void)x;\n    return y != T(0);\n  }\n\
-    \  // O(nm(m+l))\n  static std::pair<Matrix, Matrix> Gauss_Jordan(const Matrix\
-    \ &a,\n                                                const Matrix &b) {\n  \
-    \  std::size_t n = a.height(), m = a.width(), l = b.width();\n    Matrix c(n,\
-    \ m + l);\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j =\
-    \ 0; j < m; j++) c[i][j] = a[i][j];\n    for (std::size_t i = 0; i < n; i++)\n\
+    \ std::enable_if<std::is_floating_point<T>::value>;\n  template <typename T>\n\
+    \  using EF = std::enable_if<!std::is_floating_point<T>::value>;\n  template <typename\
+    \ T, typename ET<T>::type * = nullptr>\n  static bool is_zero(T x) {\n    return\
+    \ std::abs(x) < 1e-8;\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n\
+    \  static bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <typename\
+    \ T, typename ET<T>::type * = nullptr>\n  static bool compare(T x, T y) {\n  \
+    \  return std::abs(x) < std::abs(y);\n  }\n  template <typename T, typename EF<T>::type\
+    \ * = nullptr>\n  static bool compare(T x, T y) {\n    (void)x;\n    return y\
+    \ != T(0);\n  }\n  // O(nm(m+l))\n  static std::pair<Matrix, Matrix> Gauss_Jordan(const\
+    \ Matrix &a,\n                                                const Matrix &b)\
+    \ {\n    std::size_t n = a.height(), m = a.width(), l = b.width();\n    Matrix\
+    \ c(n, m + l);\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t\
+    \ j = 0; j < m; j++) c[i][j] = a[i][j];\n    for (std::size_t i = 0; i < n; i++)\n\
     \      for (std::size_t j = 0; j < l; j++) c[i][j + m] = b[i][j];\n    for (std::size_t\
     \ j = 0, d = 0; j < m && d < n; j++) {\n      int p = d;\n      for (std::size_t\
     \ i = d + 1; i < n; i++)\n        if (compare(c[p][j], c[i][j])) p = i;\n    \
@@ -99,8 +99,9 @@ data:
     \ j = i + 1; j < n; j++)\n        for (int k = n - 1; k >= i; k--) A[j][k] -=\
     \ inva * A[j][i] * A[i][k];\n    }\n    return ret;\n  }\n};\n#line 3 \"src/Math/ModInt.hpp\"\
     \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt {\n\
-    \ private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
+    namespace internal {\nstruct modint_base {};\n}  // namespace internal\n\ntemplate\
+    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt : modint_base\
+    \ {\n private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
     \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
     \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
     \ 6, 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64\
@@ -140,7 +141,8 @@ data:
     \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
     \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
     \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
+    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n\
     #line 5 \"test/yosupo/matrix_det.test.cpp\"\nusing namespace std;\n\nsigned main()\
     \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  int N;\n  cin >> N;\n  Matrix<Mint> A(N);\n  for (int i = 0; i < N; i++)\n\
@@ -158,7 +160,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 00:25:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/matrix_det.test.cpp

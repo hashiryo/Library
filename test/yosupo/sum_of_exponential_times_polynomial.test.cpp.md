@@ -37,8 +37,9 @@ data:
     \ mint nCr(int n, int r) { return nPr(n, r) * finv(r); }\n  static mint nHr(int\
     \ n, int r) { return !r ? mint(1) : nCr(n + r - 1, r); }\n};\n#line 3 \"src/Math/ModInt.hpp\"\
     \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt {\n\
-    \ private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
+    namespace internal {\nstruct modint_base {};\n}  // namespace internal\n\ntemplate\
+    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt : modint_base\
+    \ {\n private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
     \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
     \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
     \ 6, 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64\
@@ -78,7 +79,8 @@ data:
     \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
     \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
     \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
+    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n\
     #line 3 \"src/Math/lagrange_interpolation.hpp\"\n/**\n * @title \u30E9\u30B0\u30E9\
     \u30F3\u30B8\u30E5\u88DC\u9593\n * @category \u6570\u5B66\n *  x=0,1,..,N-1\u3068\
     y=f(0),f(1),...,f(N-1)\u304C\u4E0E\u3048\u3089\u308C\u305F\u3068\u304D\u306Ef(t)\u3092\
@@ -144,7 +146,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 00:25:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp

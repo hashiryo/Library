@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.KMP.test.cpp
     title: test/aoj/ALDS1_14_B.KMP.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Knuth-Morris-Pratt
     links: []
@@ -48,7 +48,7 @@ data:
   path: src/String/KnuthMorrisPratt.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/ALDS1_14_B.KMP.test.cpp
 documentation_of: src/String/KnuthMorrisPratt.hpp

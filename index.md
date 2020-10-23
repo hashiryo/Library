@@ -8,7 +8,7 @@ data:
       title: '!hoge.hpp'
   - name: src/Algorithm
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Algorithm/Mo.hpp
       title: Mo
   - name: src/DataStructure
@@ -16,10 +16,10 @@ data:
     - icon: ':x:'
       path: src/DataStructure/BinaryIndexedTree.hpp
       title: Binary-Indexed-Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_2D.hpp
       title: "Binary-Indexed-Tree(2\u6B21\u5143)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
     - icon: ':x:'
@@ -107,7 +107,7 @@ data:
       title: "\u6700\u8FD1\u70B9\u5BFE"
   - name: src/Graph
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "HL\u5206\u89E3"
     - icon: ':x:'
@@ -150,7 +150,7 @@ data:
     - icon: ':x:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
     - icon: ':question:'
@@ -159,7 +159,7 @@ data:
     - icon: ':x:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/Math/SubproductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
     - icon: ':x:'
@@ -191,7 +191,7 @@ data:
       title: "\u6570\u8AD6"
   - name: src/String
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/String/KnuthMorrisPratt.hpp
       title: Knuth-Morris-Pratt
     - icon: ':x:'
@@ -218,7 +218,7 @@ data:
     - icon: ':x:'
       path: test/aoj/0366.test.cpp
       title: test/aoj/0366.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0425.test.cpp
       title: test/aoj/0425.test.cpp
     - icon: ':x:'
@@ -239,7 +239,7 @@ data:
     - icon: ':x:'
       path: test/aoj/1242.test.cpp
       title: test/aoj/1242.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
     - icon: ':x:'
@@ -314,13 +314,13 @@ data:
     - icon: ':x:'
       path: test/aoj/2647.test.cpp
       title: test/aoj/2647.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2667.HLD.test.cpp
       title: test/aoj/2667.HLD.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2674.WM.test.cpp
       title: test/aoj/2674.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2842.BIT_2D.test.cpp
       title: test/aoj/2842.BIT_2D.test.cpp
     - icon: ':x:'
@@ -341,7 +341,7 @@ data:
     - icon: ':x:'
       path: test/aoj/3072.test.cpp
       title: test/aoj/3072.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.KMP.test.cpp
       title: test/aoj/ALDS1_14_B.KMP.test.cpp
     - icon: ':x:'

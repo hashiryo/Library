@@ -34,146 +34,149 @@ data:
     - https://min-25.hatenablog.com/entry/2015/04/07/160154
   bundledCode: "#line 2 \"src/Math/fps_sequence.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
-    \n */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root\
-    \ = 0>\nclass ModInt {\n private:\n  using u64 = std::uint64_t;\n  using u128\
-    \ = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1)\
-    \ {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static\
-    \ constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64 r2 = -u128(mod)\
-    \ % mod;\n  static constexpr u64 m2 = mod << 1;\n\n public:\n  static constexpr\
-    \ int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr\
-    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt()\
-    \ = default;\n  static constexpr u64 modulo() { return mod; }\n  static constexpr\
-    \ u64 init(u64 w) { return reduce(u128(w) * r2); }\n  static constexpr u64 reduce(const\
-    \ u128 w) {\n    return u64(w >> 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n\
-    \  }\n  static constexpr u64 norm(u64 x) { return x - (mod & -(x >= mod)); }\n\
-    \  static constexpr u64 pr_rt() { return prim_root; }\n  constexpr ModInt operator-()\
-    \ const {\n    ModInt ret;\n    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n\
-    \  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x -\
-    \ m2, x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &rhs) {\n    return x -= rhs.x, x += m2 & -(x >> 63), *this;\n  }\n \
-    \ constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x = reduce(u128(this->x)\
-    \ * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
-    \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
-    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
-    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
-    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
-    \ &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const ModInt\
-    \ &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const ModInt\
-    \ &rhs) const { return norm(x) != norm(rhs.x); }\n  u64 get() const {\n    u64\
-    \ ret = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  constexpr\
-    \ ModInt pow(u64 k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base\
-    \ = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return\
-    \ ret;\n  }\n  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr\
-    \ ModInt sqrt() const {\n    if (*this == ModInt(0) || mod == 2) return *this;\n\
-    \    if (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt\
-    \ ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b\
-    \ += ONE, w = b * b - *this;\n    auto mul = [&](pair<ModInt, ModInt> u, pair<ModInt,\
-    \ ModInt> v) {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n\
-    \      ModInt b = (u.first * v.second + u.second * v.first);\n      return make_pair(a,\
-    \ b);\n    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n\
-    \    for (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if\
-    \ (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
-    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
-    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
-    \  }\n  u64 x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title\
-    \ \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528\
-    : https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate <class mint>\nstruct\
-    \ FormalPowerSeries : std::vector<mint> {\n  using FPS = FormalPowerSeries<mint>;\n\
-    \  using std::vector<mint>::vector;\n  using m64_1 = ModInt<34703335751681, 3>;\n\
-    \  using m64_2 = ModInt<35012573396993, 3>;\n\n private:\n  static inline m64_1\
-    \ a1[1 << 21], b1[1 << 21], c1[1 << 21];\n  static inline m64_2 a2[1 << 21], b2[1\
-    \ << 21], c2[1 << 21];\n  static inline mint bf1[1 << 21], bf2[1 << 21];\n  template\
-    \ <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n    static mod_t\
-    \ iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n  \
-    \  static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
-    \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
-    \ iW[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
-    \ idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++)\
-    \ iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n    }\n    for (int m = 1; m <\
-    \ n; m *= 2)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for\
-    \ (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v =\
-    \ x[j];\n          x[i] = u + v, x[j] = (u - v) * iW[k];\n        }\n    mod_t\
-    \ iv(mod - (mod - 1) / n);\n    for (int i = 0; i < n; i++) x[i] *= iv;\n  }\n\
-    \  template <class mod_t>\n  static inline void dft(int n, mod_t x[]) {\n    static\
-    \ mod_t W[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
-    \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
-    \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
-    \ W[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
-    \ dw = G.pow((mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++) W[m + i]\
-    \ = W[i] * dw;\n      lim = n / 2;\n    }\n    for (int m = n; m >>= 1;)\n   \
-    \   for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for (int i = s, j\
-    \ = s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v = x[j] * W[k];\n\
-    \          x[i] = u + v, x[j] = u - v;\n        }\n  }\n  static inline void crt(m64_1\
-    \ f1[], m64_2 f2[], int b, int e, mint ret[]) {\n    static constexpr m64_2 iv\
-    \ = m64_2(m64_1::modulo()).inverse();\n    static constexpr mint mod1 = m64_1::modulo();\n\
-    \    for (int i = b; i < e; i++) {\n      std::uint64_t r1 = f1[i].get(), r2 =\
-    \ f2[i].get();\n      ret[i] = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo()\
-    \ - r1) * iv).get()) * mod1;\n    }\n  }\n  template <typename T,\n          \
-    \  typename enable_if<is_integral<T>::value>::type * = nullptr>\n  static inline\
-    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
-    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
-    \ T,\n            typename enable_if<!is_integral<T>::value>::type * = nullptr>\n\
-    \  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n\
-    \    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp = ret[i].get(), f1[i]\
-    \ = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int i) {\n    static\
-    \ mint INV[1 << 21];\n    static int lim = 0;\n    static constexpr std::uint64_t\
-    \ mod = mint::modulo();\n    if (lim <= i) {\n      if (lim == 0) INV[1] = 1,\
-    \ lim = 2;\n      for (int j = lim; j <= i; j++) INV[j] = INV[mod % j] * (mod\
-    \ - mod / j);\n      lim = i + 1;\n    }\n    return INV[i];\n  }\n\n public:\n\
-    \  int deg() const {\n    int n = int(this->size()) - 1;\n    while (n >= 0 &&\
-    \ (*this)[n] == mint(0)) n--;\n    return n;\n  }\n  FPS &norm() { return this->resize(max(this->deg()\
-    \ + 1, 1)), *this; }\n  std::uint64_t inline get_len(std::uint64_t n) const {\n\
-    \    return --n, n |= n >> 1, n |= n >> 2, n |= n >> 4, n |= n >> 8,\n       \
-    \    n |= n >> 16, n |= n >> 32, ++n;\n  }\n  FPS mul(const FPS &y) const {\n\
-    \    if (deg() == -1 || y.deg() == -1) return {0};\n    int n = this->size(),\
-    \ m = y.size(), sz = n + m - 1;\n    FPS ret(sz, 0);\n    if (std::min(n, m) <=\
-    \ 8) {\n      for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\
-    \ ret[i + j] += (*this)[i] * y[j];\n    } else {\n      subst(a1, a2, 0, n, this->data()),\
-    \ subst(b1, b2, 0, m, y.data());\n      int len = get_len(sz);\n      std::fill(a1\
-    \ + n, a1 + len, 0), std::fill(b1 + m, b1 + len, 0);\n      std::fill(a2 + n,\
-    \ a2 + len, 0), std::fill(b2 + m, b2 + len, 0);\n      dft(len, a1), dft(len,\
-    \ b1), dft(len, a2), dft(len, b2);\n      for (int i = 0; i < len; i++) a1[i]\
-    \ *= b1[i], a2[i] *= b2[i];\n      idft(len, a1), idft(len, a2), crt(a1, a2, 0,\
-    \ sz, ret.data());\n    }\n    return ret;\n  }\n  FPS inv() const {\n    assert(!this->empty()\
-    \ && (*this)[0] != mint(0));\n    int n = this->size(), len = get_len(n);\n  \
-    \  std::copy_n(this->begin(), n, bf1), std::fill(bf1 + n, bf1 + len, 0);\n   \
-    \ FPS ret(len, 0);\n    ret[0] = bf1[0].inverse();\n    for (int i = 1; i < 32\
-    \ && i < n; i++) {\n      for (int j = 1; j <= i; j++) ret[i] += bf1[j] * ret[i\
-    \ - j];\n      ret[i] *= -ret[0];\n    }\n    for (int i = 64; i <= len; i <<=\
-    \ 1) {\n      subst(a1, a2, 0, i, bf1), subst(b1, b2, 0, i, ret.data());\n   \
-    \   dft(i, a1), dft(i, b1), dft(i, a2), dft(i, b2);\n      for (int j = i - 1;\
-    \ j >= 0; j--) a1[j] *= b1[j], a2[j] *= b2[j];\n      idft(i, a1), idft(i, a2);\n\
-    \      crt(a1, a2, i >> 1, i, ret.data()), subst(a1, a2, i >> 1, i, ret.data());\n\
-    \      std::fill_n(a1, i >> 1, 0), std::fill_n(a2, i >> 1, 0), dft(i, a1),\n \
-    \         dft(i, a2);\n      for (int j = i - 1; j >= 0; j--) a1[j] *= b1[j],\
-    \ a2[j] *= b2[j];\n      idft(i, a1), idft(i, a2), crt(a1, a2, i >> 1, i, ret.data());\n\
-    \      for (int j = i >> 1; j < i; j++) ret[j] = -ret[j];\n    }\n    return ret.resize(n),\
-    \ ret;\n  }\n  inline FPS div_con(const FPS &g, const FPS &g0) const {\n    if\
-    \ (this->size() == 1) return {(*this)[0] * g[0].inverse()};\n    int n = this->size(),\
-    \ len = get_len(n), len2 = len >> 1,\n        m = std::min<int>(n, g.size());\n\
-    \    FPS ret(n);\n    std::copy_n(this->begin(), n, bf1), std::fill(bf1 + n, bf1\
-    \ + len, 0);\n    std::copy_n(g.begin(), m, bf2), std::fill(bf2 + m, bf2 + len,\
-    \ 0);\n    subst(a1, a2, 0, len2, g0.data()), subst(b1, b2, 0, len2, bf1);\n \
-    \   std::fill(a1 + len2, a1 + len, 0), std::fill(a2 + len2, a2 + len, 0);\n  \
-    \  std::fill(b1 + len2, b1 + len, 0), std::fill(b2 + len2, b2 + len, 0);\n   \
-    \ dft(len, a1), dft(len, b1), dft(len, a2), dft(len, b2);\n    for (int i = 0;\
-    \ i < len; i++) b1[i] *= a1[i], b2[i] *= a2[i];\n    idft(len, b1), idft(len,\
-    \ b2), crt(b1, b2, 0, len >> 1, ret.data());\n    subst(b1, b2, 0, len2, ret.data()),\
-    \ subst(c1, c2, 0, len, bf2);\n    std::fill(b1 + len2, b1 + len, 0), std::fill(b2\
-    \ + len2, b2 + len, 0);\n    dft(len, c1), dft(len, b1), dft(len, c2), dft(len,\
-    \ b2);\n    for (int i = 0; i < len; i++) c1[i] *= b1[i], c2[i] *= b2[i];\n  \
-    \  idft(len, c1), idft(len, c2), crt(c1 + len2, c2 + len2, 0, len2, bf1);\n  \
-    \  for (int i = len2; i < len; i++) bf1[i] -= bf1[i - len2];\n    subst(c1, c2,\
-    \ len2, len, bf1);\n    std::fill_n(c1, len2, 0), std::fill_n(c2, len2, 0), dft(len,\
-    \ c1),\n        dft(len, c2);\n    for (int i = len; i >= 0; i--) c1[i] *= a1[i],\
-    \ c2[i] *= a2[i];\n    idft(len, c1), idft(len, c2), crt(c1, c2, len2, n, ret.data());\n\
-    \    return ret;\n  }\n  inline std::pair<FPS, FPS> quorem_rev_con(const FPS &yr,\n\
-    \                                            const FPS &g0r) const {\n    if (this->size()\
-    \ < yr.size()) return std::make_pair(FPS{0}, *this);\n    int sq = this->size()\
-    \ - yr.size() + 1, len = get_len(sq);\n    FPS qr = FPS(this->begin(), this->begin()\
-    \ + sq).div_con(yr, g0r);\n    if (yr.size() == 1) return std::make_pair(qr, FPS{0});\n\
-    \    len = get_len(max(qr.size(), yr.size()));\n    int mask = len - 1;\n    subst(a1,\
+    \n */\n\n// BEGIN CUT HERE\nnamespace internal {\nstruct modint_base {};\n}  //\
+    \ namespace internal\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root =\
+    \ 0>\nclass ModInt : modint_base {\n private:\n  using u64 = std::uint64_t;\n\
+    \  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
+    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
+    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64\
+    \ r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\n public:\n\
+    \  static constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt()\
+    \ : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) %\
+    \ mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo() { return\
+    \ mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n\
+    \  static constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod\
+    \ - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64 norm(u64\
+    \ x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt() { return\
+    \ prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return\
+    \ ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
+    \ ModInt &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n \
+    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
+    \ x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt\
+    \ &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n \
+    \ constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
+    \ }\n  bool operator!=(const ModInt &rhs) const { return norm(x) != norm(rhs.x);\
+    \ }\n  u64 get() const {\n    u64 ret = reduce(x) - mod;\n    return ret + (mod\
+    \ & -(ret >> 63));\n  }\n  constexpr ModInt pow(u64 k) const {\n    ModInt ret\
+    \ = ModInt(1);\n    for (ModInt base = *this; k; k >>= 1, base *= base)\n    \
+    \  if (k & 1) ret *= base;\n    return ret;\n  }\n  constexpr ModInt inverse()\
+    \ const { return pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this\
+    \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
+    \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
+    \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
+    \ mul = [&](pair<ModInt, ModInt> u, pair<ModInt, ModInt> v) {\n      ModInt a\
+    \ = (u.first * v.first + u.second * v.second * w);\n      ModInt b = (u.first\
+    \ * v.second + u.second * v.first);\n      return make_pair(a, b);\n    };\n \
+    \   u64 e = (mod + 1) >> 1;\n    auto ret = make_pair(ONE, ModInt(0));\n    for\
+    \ (auto bs = make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
+    \ ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first : -ret.first;\n\
+    \  }\n  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n   \
+    \ return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.get();\n  }\n  u64 x;\n};\n\n\
+    template <class T>\nusing is_modint = std::is_base_of<internal::modint_base, T>;\n\
+    #line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
+    \u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
+    \n// BEGIN CUT HERE\n\ntemplate <class mint>\nstruct FormalPowerSeries : std::vector<mint>\
+    \ {\n  using FPS = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n\
+    \  using m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993,\
+    \ 3>;\n\n private:\n  static inline m64_1 a1[1 << 21], b1[1 << 21], c1[1 << 21];\n\
+    \  static inline m64_2 a2[1 << 21], b2[1 << 21], c2[1 << 21];\n  static inline\
+    \ mint bf1[1 << 21], bf2[1 << 21];\n  template <class mod_t>\n  static inline\
+    \ void idft(int n, mod_t x[]) {\n    static mod_t iW[1 << 20];\n    static constexpr\
+    \ std::uint64_t mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
+    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
+    \ lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n\
+    \ / 2; m *= 2) {\n      mod_t idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n  \
+    \    for (int i = 0; i < m; i++) iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n\
+    \    }\n    for (int m = 1; m < n; m *= 2)\n      for (int s = 0, k = 0; s < n;\
+    \ s += 2 * m, ++k)\n        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n\
+    \          mod_t u = x[i], v = x[j];\n          x[i] = u + v, x[j] = (u - v) *\
+    \ iW[k];\n        }\n    mod_t iv(mod - (mod - 1) / n);\n    for (int i = 0; i\
+    \ < n; i++) x[i] *= iv;\n  }\n  template <class mod_t>\n  static inline void dft(int\
+    \ n, mod_t x[]) {\n    static mod_t W[1 << 20];\n    static constexpr std::uint64_t\
+    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
+    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
+    \ lim = 0;\n    if (lim == 0) W[0] = 1, lim = 1;\n    for (int m = lim; m < n\
+    \ / 2; m *= 2) {\n      mod_t dw = G.pow((mod - 1) / (4 * m));\n      for (int\
+    \ i = 0; i < m; i++) W[m + i] = W[i] * dw;\n      lim = n / 2;\n    }\n    for\
+    \ (int m = n; m >>= 1;)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n\
+    \        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u\
+    \ = x[i], v = x[j] * W[k];\n          x[i] = u + v, x[j] = u - v;\n        }\n\
+    \  }\n  static inline void crt(m64_1 f1[], m64_2 f2[], int b, int e, mint ret[])\
+    \ {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n    static\
+    \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
+    \      std::uint64_t r1 = f1[i].get(), r2 = f2[i].get();\n      ret[i] = mint(r1)\n\
+    \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).get()) * mod1;\n\
+    \    }\n  }\n  template <typename T,\n            typename std::enable_if<!is_modint<T>::value>::type\
+    \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
+    \ e, T ret[]) {\n    for (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n\
+    \  }\n  template <typename T,\n            typename std::enable_if<is_modint<T>::value>::type\
+    \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
+    \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
+    \ ret[i].get(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
+    \ i) {\n    static mint INV[1 << 21];\n    static int lim = 0;\n    static constexpr\
+    \ std::uint64_t mod = mint::modulo();\n    if (lim <= i) {\n      if (lim == 0)\
+    \ INV[1] = 1, lim = 2;\n      for (int j = lim; j <= i; j++) INV[j] = INV[mod\
+    \ % j] * (mod - mod / j);\n      lim = i + 1;\n    }\n    return INV[i];\n  }\n\
+    \n public:\n  int deg() const {\n    int n = int(this->size()) - 1;\n    while\
+    \ (n >= 0 && (*this)[n] == mint(0)) n--;\n    return n;\n  }\n  FPS &norm() {\
+    \ return this->resize(max(this->deg() + 1, 1)), *this; }\n  std::uint64_t inline\
+    \ get_len(std::uint64_t n) const {\n    return --n, n |= n >> 1, n |= n >> 2,\
+    \ n |= n >> 4, n |= n >> 8,\n           n |= n >> 16, n |= n >> 32, ++n;\n  }\n\
+    \  FPS mul(const FPS &y) const {\n    if (deg() == -1 || y.deg() == -1) return\
+    \ {0};\n    int n = this->size(), m = y.size(), sz = n + m - 1;\n    FPS ret(sz,\
+    \ 0);\n    if (std::min(n, m) <= 8) {\n      for (int i = 0; i < n; i++)\n   \
+    \     for (int j = 0; j < m; j++) ret[i + j] += (*this)[i] * y[j];\n    } else\
+    \ {\n      subst(a1, a2, 0, n, this->data()), subst(b1, b2, 0, m, y.data());\n\
+    \      int len = get_len(sz);\n      std::fill(a1 + n, a1 + len, 0), std::fill(b1\
+    \ + m, b1 + len, 0);\n      std::fill(a2 + n, a2 + len, 0), std::fill(b2 + m,\
+    \ b2 + len, 0);\n      dft(len, a1), dft(len, b1), dft(len, a2), dft(len, b2);\n\
+    \      for (int i = 0; i < len; i++) a1[i] *= b1[i], a2[i] *= b2[i];\n      idft(len,\
+    \ a1), idft(len, a2), crt(a1, a2, 0, sz, ret.data());\n    }\n    return ret;\n\
+    \  }\n  FPS inv() const {\n    assert(!this->empty() && (*this)[0] != mint(0));\n\
+    \    int n = this->size(), len = get_len(n);\n    std::copy_n(this->begin(), n,\
+    \ bf1), std::fill(bf1 + n, bf1 + len, 0);\n    FPS ret(len, 0);\n    ret[0] =\
+    \ bf1[0].inverse();\n    for (int i = 1; i < 32 && i < n; i++) {\n      for (int\
+    \ j = 1; j <= i; j++) ret[i] += bf1[j] * ret[i - j];\n      ret[i] *= -ret[0];\n\
+    \    }\n    for (int i = 64; i <= len; i <<= 1) {\n      subst(a1, a2, 0, i, bf1),\
+    \ subst(b1, b2, 0, i, ret.data());\n      dft(i, a1), dft(i, b1), dft(i, a2),\
+    \ dft(i, b2);\n      for (int j = i - 1; j >= 0; j--) a1[j] *= b1[j], a2[j] *=\
+    \ b2[j];\n      idft(i, a1), idft(i, a2);\n      crt(a1, a2, i >> 1, i, ret.data()),\
+    \ subst(a1, a2, i >> 1, i, ret.data());\n      std::fill_n(a1, i >> 1, 0), std::fill_n(a2,\
+    \ i >> 1, 0), dft(i, a1),\n          dft(i, a2);\n      for (int j = i - 1; j\
+    \ >= 0; j--) a1[j] *= b1[j], a2[j] *= b2[j];\n      idft(i, a1), idft(i, a2),\
+    \ crt(a1, a2, i >> 1, i, ret.data());\n      for (int j = i >> 1; j < i; j++)\
+    \ ret[j] = -ret[j];\n    }\n    return ret.resize(n), ret;\n  }\n  inline FPS\
+    \ div_con(const FPS &g, const FPS &g0) const {\n    if (this->size() == 1) return\
+    \ {(*this)[0] * g[0].inverse()};\n    int n = this->size(), len = get_len(n),\
+    \ len2 = len >> 1,\n        m = std::min<int>(n, g.size());\n    FPS ret(n);\n\
+    \    std::copy_n(this->begin(), n, bf1), std::fill(bf1 + n, bf1 + len, 0);\n \
+    \   std::copy_n(g.begin(), m, bf2), std::fill(bf2 + m, bf2 + len, 0);\n    subst(a1,\
+    \ a2, 0, len2, g0.data()), subst(b1, b2, 0, len2, bf1);\n    std::fill(a1 + len2,\
+    \ a1 + len, 0), std::fill(a2 + len2, a2 + len, 0);\n    std::fill(b1 + len2, b1\
+    \ + len, 0), std::fill(b2 + len2, b2 + len, 0);\n    dft(len, a1), dft(len, b1),\
+    \ dft(len, a2), dft(len, b2);\n    for (int i = 0; i < len; i++) b1[i] *= a1[i],\
+    \ b2[i] *= a2[i];\n    idft(len, b1), idft(len, b2), crt(b1, b2, 0, len >> 1,\
+    \ ret.data());\n    subst(b1, b2, 0, len2, ret.data()), subst(c1, c2, 0, len,\
+    \ bf2);\n    std::fill(b1 + len2, b1 + len, 0), std::fill(b2 + len2, b2 + len,\
+    \ 0);\n    dft(len, c1), dft(len, b1), dft(len, c2), dft(len, b2);\n    for (int\
+    \ i = 0; i < len; i++) c1[i] *= b1[i], c2[i] *= b2[i];\n    idft(len, c1), idft(len,\
+    \ c2), crt(c1 + len2, c2 + len2, 0, len2, bf1);\n    for (int i = len2; i < len;\
+    \ i++) bf1[i] -= bf1[i - len2];\n    subst(c1, c2, len2, len, bf1);\n    std::fill_n(c1,\
+    \ len2, 0), std::fill_n(c2, len2, 0), dft(len, c1),\n        dft(len, c2);\n \
+    \   for (int i = len; i >= 0; i--) c1[i] *= a1[i], c2[i] *= a2[i];\n    idft(len,\
+    \ c1), idft(len, c2), crt(c1, c2, len2, n, ret.data());\n    return ret;\n  }\n\
+    \  inline std::pair<FPS, FPS> quorem_rev_con(const FPS &yr,\n                \
+    \                            const FPS &g0r) const {\n    if (this->size() < yr.size())\
+    \ return std::make_pair(FPS{0}, *this);\n    int sq = this->size() - yr.size()\
+    \ + 1, len = get_len(sq);\n    FPS qr = FPS(this->begin(), this->begin() + sq).div_con(yr,\
+    \ g0r);\n    if (yr.size() == 1) return std::make_pair(qr, FPS{0});\n    len =\
+    \ get_len(max(qr.size(), yr.size()));\n    int mask = len - 1;\n    subst(a1,\
     \ a2, 0, sq, qr.data()), subst(b1, b2, 0, yr.size(), yr.data());\n    std::fill(a1\
     \ + sq, a1 + len, 0), std::fill(a2 + sq, a2 + len, 0);\n    std::fill(b1 + yr.size(),\
     \ b1 + len, 0),\n        std::fill(b2 + yr.size(), b2 + len, 0);\n    dft(len,\
@@ -368,7 +371,7 @@ data:
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 00:25:59+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/bernoulli.test.cpp

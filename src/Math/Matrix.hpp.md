@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
   - icon: ':x:'
@@ -16,7 +16,7 @@ data:
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u884C\u5217"
     links: []
@@ -56,19 +56,19 @@ data:
     \    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j = 0; j < m;\
     \ j++) ret[i] += (*this)[i][j] * v[j];\n    return ret;\n  }\n  bool operator==(const\
     \ Matrix &b) const { return a == b.a; }\n  template <typename T>\n  using ET =\
-    \ enable_if<is_floating_point<T>::value>;\n  template <typename T>\n  using EF\
-    \ = enable_if<!is_floating_point<T>::value>;\n  template <typename T, typename\
-    \ ET<T>::type * = nullptr>\n  static bool is_zero(T x) {\n    return std::abs(x)\
-    \ < 1e-8;\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n  static\
-    \ bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <typename T, typename\
-    \ ET<T>::type * = nullptr>\n  static bool compare(T x, T y) {\n    return std::abs(x)\
-    \ < std::abs(y);\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n\
-    \  static bool compare(T x, T y) {\n    (void)x;\n    return y != T(0);\n  }\n\
-    \  // O(nm(m+l))\n  static std::pair<Matrix, Matrix> Gauss_Jordan(const Matrix\
-    \ &a,\n                                                const Matrix &b) {\n  \
-    \  std::size_t n = a.height(), m = a.width(), l = b.width();\n    Matrix c(n,\
-    \ m + l);\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j =\
-    \ 0; j < m; j++) c[i][j] = a[i][j];\n    for (std::size_t i = 0; i < n; i++)\n\
+    \ std::enable_if<std::is_floating_point<T>::value>;\n  template <typename T>\n\
+    \  using EF = std::enable_if<!std::is_floating_point<T>::value>;\n  template <typename\
+    \ T, typename ET<T>::type * = nullptr>\n  static bool is_zero(T x) {\n    return\
+    \ std::abs(x) < 1e-8;\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n\
+    \  static bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <typename\
+    \ T, typename ET<T>::type * = nullptr>\n  static bool compare(T x, T y) {\n  \
+    \  return std::abs(x) < std::abs(y);\n  }\n  template <typename T, typename EF<T>::type\
+    \ * = nullptr>\n  static bool compare(T x, T y) {\n    (void)x;\n    return y\
+    \ != T(0);\n  }\n  // O(nm(m+l))\n  static std::pair<Matrix, Matrix> Gauss_Jordan(const\
+    \ Matrix &a,\n                                                const Matrix &b)\
+    \ {\n    std::size_t n = a.height(), m = a.width(), l = b.width();\n    Matrix\
+    \ c(n, m + l);\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t\
+    \ j = 0; j < m; j++) c[i][j] = a[i][j];\n    for (std::size_t i = 0; i < n; i++)\n\
     \      for (std::size_t j = 0; j < l; j++) c[i][j + m] = b[i][j];\n    for (std::size_t\
     \ j = 0, d = 0; j < m && d < n; j++) {\n      int p = d;\n      for (std::size_t\
     \ i = d + 1; i < n; i++)\n        if (compare(c[p][j], c[i][j])) p = i;\n    \
@@ -136,19 +136,19 @@ data:
     \    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j = 0; j < m;\
     \ j++) ret[i] += (*this)[i][j] * v[j];\n    return ret;\n  }\n  bool operator==(const\
     \ Matrix &b) const { return a == b.a; }\n  template <typename T>\n  using ET =\
-    \ enable_if<is_floating_point<T>::value>;\n  template <typename T>\n  using EF\
-    \ = enable_if<!is_floating_point<T>::value>;\n  template <typename T, typename\
-    \ ET<T>::type * = nullptr>\n  static bool is_zero(T x) {\n    return std::abs(x)\
-    \ < 1e-8;\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n  static\
-    \ bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <typename T, typename\
-    \ ET<T>::type * = nullptr>\n  static bool compare(T x, T y) {\n    return std::abs(x)\
-    \ < std::abs(y);\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n\
-    \  static bool compare(T x, T y) {\n    (void)x;\n    return y != T(0);\n  }\n\
-    \  // O(nm(m+l))\n  static std::pair<Matrix, Matrix> Gauss_Jordan(const Matrix\
-    \ &a,\n                                                const Matrix &b) {\n  \
-    \  std::size_t n = a.height(), m = a.width(), l = b.width();\n    Matrix c(n,\
-    \ m + l);\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j =\
-    \ 0; j < m; j++) c[i][j] = a[i][j];\n    for (std::size_t i = 0; i < n; i++)\n\
+    \ std::enable_if<std::is_floating_point<T>::value>;\n  template <typename T>\n\
+    \  using EF = std::enable_if<!std::is_floating_point<T>::value>;\n  template <typename\
+    \ T, typename ET<T>::type * = nullptr>\n  static bool is_zero(T x) {\n    return\
+    \ std::abs(x) < 1e-8;\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n\
+    \  static bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <typename\
+    \ T, typename ET<T>::type * = nullptr>\n  static bool compare(T x, T y) {\n  \
+    \  return std::abs(x) < std::abs(y);\n  }\n  template <typename T, typename EF<T>::type\
+    \ * = nullptr>\n  static bool compare(T x, T y) {\n    (void)x;\n    return y\
+    \ != T(0);\n  }\n  // O(nm(m+l))\n  static std::pair<Matrix, Matrix> Gauss_Jordan(const\
+    \ Matrix &a,\n                                                const Matrix &b)\
+    \ {\n    std::size_t n = a.height(), m = a.width(), l = b.width();\n    Matrix\
+    \ c(n, m + l);\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t\
+    \ j = 0; j < m; j++) c[i][j] = a[i][j];\n    for (std::size_t i = 0; i < n; i++)\n\
     \      for (std::size_t j = 0; j < l; j++) c[i][j + m] = b[i][j];\n    for (std::size_t\
     \ j = 0, d = 0; j < m && d < n; j++) {\n      int p = d;\n      for (std::size_t\
     \ i = d + 1; i < n; i++)\n        if (compare(c[p][j], c[i][j])) p = i;\n    \
@@ -185,8 +185,8 @@ data:
   isVerificationFile: false
   path: src/Math/Matrix.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 00:25:59+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2397.test.cpp
   - test/aoj/1328.test.cpp
