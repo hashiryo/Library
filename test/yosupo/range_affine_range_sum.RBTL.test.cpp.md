@@ -45,9 +45,9 @@ data:
     \    Node *s;\n    s = propagate(t->ch[!b]);\n    t->ch[!b] = s->ch[b];\n    s->ch[b]\
     \ = t;\n    pushup(t);\n    return pushup(s);\n  }\n  Node *submerge(Node *l,\
     \ Node *r) {\n    if (l->level == r->level) return alloc(l, r);\n    bool b =\
-    \ l->level < r->level;\n    if (!b) swap(l, r);\n    r = propagate(r);\n    Node\
-    \ *c = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1], l));\n    if\
-    \ (r->color == BLACK && c->color == RED && c->ch[!b]\n        && c->ch[!b]->color\
+    \ l->level < r->level;\n    if (!b) std::swap(l, r);\n    r = propagate(r);\n\
+    \    Node *c = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1], l));\n\
+    \    if (r->color == BLACK && c->color == RED && c->ch[!b]\n        && c->ch[!b]->color\
     \ == RED) {\n      r->color = RED;\n      c->color = BLACK;\n      if (r->ch[b]->color\
     \ == BLACK) return rotate(r, b);\n      r->ch[b]->color = BLACK;\n    }\n    return\
     \ pushup(r);\n  }\n  Node *build(int l, int r, const std::vector<T> &v) {\n  \
@@ -195,7 +195,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.RBTL.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 14:33:30+09:00'
+  timestamp: '2020-10-24 15:28:45+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.RBTL.test.cpp

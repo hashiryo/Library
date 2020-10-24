@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/argsort.test.cpp
     title: test/yosupo/argsort.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u504F\u89D2\u30BD\u30FC\u30C8"
     links: []
@@ -267,7 +267,7 @@ data:
   path: src/Geometry/arg_sort.hpp
   requiredBy: []
   timestamp: '2020-10-24 12:08:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/argsort.test.cpp
 documentation_of: src/Geometry/arg_sort.hpp

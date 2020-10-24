@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MaxFlow_Dinic.hpp
     title: "\u6700\u5927\u6D41(Dinic)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
@@ -35,26 +35,27 @@ data:
     \ int &t, flow_t cur) {\n    if (u == t) return cur;\n    for (int &i = iter[u];\
     \ i < adj[u].size(); ++i) {\n      Edge &e = adj[u][i], &r = adj[e.dst][e.rev];\n\
     \      if (e.cap > 0 && level[u] < level[e.dst]) {\n        flow_t f = dfs(e.dst,\
-    \ t, min(cur, e.cap));\n        if (f > 0) {\n          e.cap -= f;\n        \
-    \  r.cap += f;\n          return f;\n        }\n      }\n    }\n    return flow_t(0);\n\
-    \  }\n  flow_t flow(int s, int t) {\n    if (levelize(s, t) < 0) return 0;\n \
-    \   iter.assign(adj.size(), 0);\n    return dfs(s, t, 1);\n  }\n\n public:\n \
-    \ MaxFlow_Dinic() : n(0) {}\n  int add_vertex() {\n    adj.resize(++n);\n    return\
-    \ n - 1;\n  }\n  std::vector<int> add_vertices(const int size) {\n    std::vector<int>\
-    \ ret(size);\n    std::iota(ret.begin(), ret.end(), n);\n    n += size;\n    adj.resize(n);\n\
-    \    return ret;\n  }\n  void add_edge(int src, int dst, flow_t cap) {\n    adj[src].emplace_back((Edge){dst,\
-    \ cap, (int)adj[dst].size(), 0});\n    adj[dst].emplace_back((Edge){src, 0, (int)adj[src].size()\
-    \ - 1, 1});\n  }\n  flow_t max_flow(int s, int t, flow_t lim = FLOW_MAX) {\n \
-    \   flow_t flow = 0;\n    while (levelize(s, t) >= 0) {\n      iter.assign(n,\
-    \ 0);\n      for (flow_t f; (f = dfs(s, t, lim)) > 0;) flow += f, lim -= f;\n\
-    \    }\n    return flow;\n  }\n  flow_t link(int src, int dst, int s, int t) {\n\
-    \    for (auto &e : adj[src])\n      if (e.dst == dst && !e.isrev) {\n       \
-    \ e.cap += 1;\n        break;\n      }\n    return flow(s, t);\n  }\n  flow_t\
-    \ cut(int src, int dst, int s, int t) {\n    for (auto &e : adj[src])\n      if\
-    \ (e.dst == dst && !e.isrev) {\n        flow_t diff = 0;\n        if (e.cap ==\
-    \ 0) {\n          if (flow(src, dst) == 0) {\n            flow(t, dst);\n    \
-    \        flow(src, s);\n            diff = -1;\n          }\n          adj[e.dst][e.rev].cap\
-    \ -= 1;\n        } else {\n          e.cap -= 1;\n        }\n        return diff;\n\
+    \ t, std::min(cur, e.cap));\n        if (f > 0) {\n          e.cap -= f;\n   \
+    \       r.cap += f;\n          return f;\n        }\n      }\n    }\n    return\
+    \ flow_t(0);\n  }\n  flow_t flow(int s, int t) {\n    if (levelize(s, t) < 0)\
+    \ return 0;\n    iter.assign(adj.size(), 0);\n    return dfs(s, t, 1);\n  }\n\n\
+    \ public:\n  MaxFlow_Dinic() : n(0) {}\n  int add_vertex() {\n    adj.resize(++n);\n\
+    \    return n - 1;\n  }\n  std::vector<int> add_vertices(const int size) {\n \
+    \   std::vector<int> ret(size);\n    std::iota(ret.begin(), ret.end(), n);\n \
+    \   n += size;\n    adj.resize(n);\n    return ret;\n  }\n  void add_edge(int\
+    \ src, int dst, flow_t cap) {\n    adj[src].emplace_back((Edge){dst, cap, (int)adj[dst].size(),\
+    \ 0});\n    adj[dst].emplace_back((Edge){src, 0, (int)adj[src].size() - 1, 1});\n\
+    \  }\n  flow_t max_flow(int s, int t, flow_t lim = FLOW_MAX) {\n    flow_t flow\
+    \ = 0;\n    while (levelize(s, t) >= 0) {\n      iter.assign(n, 0);\n      for\
+    \ (flow_t f; (f = dfs(s, t, lim)) > 0;) flow += f, lim -= f;\n    }\n    return\
+    \ flow;\n  }\n  flow_t link(int src, int dst, int s, int t) {\n    for (auto &e\
+    \ : adj[src])\n      if (e.dst == dst && !e.isrev) {\n        e.cap += 1;\n  \
+    \      break;\n      }\n    return flow(s, t);\n  }\n  flow_t cut(int src, int\
+    \ dst, int s, int t) {\n    for (auto &e : adj[src])\n      if (e.dst == dst &&\
+    \ !e.isrev) {\n        flow_t diff = 0;\n        if (e.cap == 0) {\n         \
+    \ if (flow(src, dst) == 0) {\n            flow(t, dst);\n            flow(src,\
+    \ s);\n            diff = -1;\n          }\n          adj[e.dst][e.rev].cap -=\
+    \ 1;\n        } else {\n          e.cap -= 1;\n        }\n        return diff;\n\
     \      }\n    assert(false);  // no edge\n  }\n  void output() {\n    for (int\
     \ i = 0; i < adj.size(); i++) {\n      for (auto &e : adj[i]) {\n        if (e.isrev)\
     \ continue;\n        auto &rev_e = adj[e.dst][e.rev];\n        std::cerr << i\
@@ -77,8 +78,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_A.Dinic.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 15:09:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-24 15:28:45+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_A.Dinic.test.cpp
 layout: document

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedRequiredBy: []

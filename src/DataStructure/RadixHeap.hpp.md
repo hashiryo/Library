@@ -57,14 +57,14 @@ data:
     \ size_(0), last_(), buckets_() {\n    buckets_min_.fill(std::numeric_limits<ukey_t>::max());\n\
     \  }\n\n  void push(key_t key, val_t value) {\n    const ukey_t x = encoder_t::encode(key);\n\
     \    assert(last_ <= x);\n    ++size_;\n    const std::size_t k = internal::find_bucket(x,\
-    \ last_);\n    buckets_[k].emplace_back(x, value);\n    buckets_min_[k] = min(buckets_min_[k],\
+    \ last_);\n    buckets_[k].emplace_back(x, value);\n    buckets_min_[k] = std::min(buckets_min_[k],\
     \ x);\n  }\n  void emplace(key_t key, val_t value) { push(key, value); }\n  std::pair<key_t,\
     \ val_t> top() {\n    pull();\n    return make_pair(encoder_t::decode(last_),\
     \ buckets_[0].back().second);\n  }\n  std::pair<key_t, val_t> pop() {\n    pull();\n\
-    \    --size_;\n    auto ret = make_pair(encoder_t::decode(last_), buckets_[0].back().second);\n\
-    \    buckets_[0].pop_back();\n    return ret;\n  }\n  std::size_t size() const\
-    \ { return size_; }\n  bool empty() const { return size_ == 0; }\n\n private:\n\
-    \  std::size_t size_;\n  ukey_t last_;\n  std::array<std::vector<pair<ukey_t,\
+    \    --size_;\n    auto ret\n        = std::make_pair(encoder_t::decode(last_),\
+    \ buckets_[0].back().second);\n    buckets_[0].pop_back();\n    return ret;\n\
+    \  }\n  std::size_t size() const { return size_; }\n  bool empty() const { return\
+    \ size_ == 0; }\n\n private:\n  std::size_t size_;\n  ukey_t last_;\n  std::array<std::vector<std::pair<ukey_t,\
     \ val_t>>,\n             std::numeric_limits<ukey_t>::digits + 1>\n      buckets_;\n\
     \  std::array<ukey_t, std::numeric_limits<ukey_t>::digits + 1> buckets_min_;\n\
     \n  void pull() {\n    assert(size_ > 0);\n    if (!buckets_[0].empty()) return;\n\
@@ -72,7 +72,7 @@ data:
     \    for (std::size_t j = 0; j < buckets_[i].size(); ++j) {\n      const ukey_t\
     \ x = buckets_[i][j].first;\n      const std::size_t k = internal::find_bucket(x,\
     \ last_);\n      buckets_[k].emplace_back(move(buckets_[i][j]));\n      buckets_min_[k]\
-    \ = min(buckets_min_[k], x);\n    }\n    buckets_[i].clear();\n    buckets_min_[i]\
+    \ = std::min(buckets_min_[k], x);\n    }\n    buckets_[i].clear();\n    buckets_min_[i]\
     \ = std::numeric_limits<ukey_t>::max();\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Radix-Heap\n * @category\
     \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief dijkstra\u306E\u9AD8\u901F\u5316\u306B\
@@ -117,14 +117,14 @@ data:
     \ size_(0), last_(), buckets_() {\n    buckets_min_.fill(std::numeric_limits<ukey_t>::max());\n\
     \  }\n\n  void push(key_t key, val_t value) {\n    const ukey_t x = encoder_t::encode(key);\n\
     \    assert(last_ <= x);\n    ++size_;\n    const std::size_t k = internal::find_bucket(x,\
-    \ last_);\n    buckets_[k].emplace_back(x, value);\n    buckets_min_[k] = min(buckets_min_[k],\
+    \ last_);\n    buckets_[k].emplace_back(x, value);\n    buckets_min_[k] = std::min(buckets_min_[k],\
     \ x);\n  }\n  void emplace(key_t key, val_t value) { push(key, value); }\n  std::pair<key_t,\
     \ val_t> top() {\n    pull();\n    return make_pair(encoder_t::decode(last_),\
     \ buckets_[0].back().second);\n  }\n  std::pair<key_t, val_t> pop() {\n    pull();\n\
-    \    --size_;\n    auto ret = make_pair(encoder_t::decode(last_), buckets_[0].back().second);\n\
-    \    buckets_[0].pop_back();\n    return ret;\n  }\n  std::size_t size() const\
-    \ { return size_; }\n  bool empty() const { return size_ == 0; }\n\n private:\n\
-    \  std::size_t size_;\n  ukey_t last_;\n  std::array<std::vector<pair<ukey_t,\
+    \    --size_;\n    auto ret\n        = std::make_pair(encoder_t::decode(last_),\
+    \ buckets_[0].back().second);\n    buckets_[0].pop_back();\n    return ret;\n\
+    \  }\n  std::size_t size() const { return size_; }\n  bool empty() const { return\
+    \ size_ == 0; }\n\n private:\n  std::size_t size_;\n  ukey_t last_;\n  std::array<std::vector<std::pair<ukey_t,\
     \ val_t>>,\n             std::numeric_limits<ukey_t>::digits + 1>\n      buckets_;\n\
     \  std::array<ukey_t, std::numeric_limits<ukey_t>::digits + 1> buckets_min_;\n\
     \n  void pull() {\n    assert(size_ > 0);\n    if (!buckets_[0].empty()) return;\n\
@@ -132,13 +132,13 @@ data:
     \    for (std::size_t j = 0; j < buckets_[i].size(); ++j) {\n      const ukey_t\
     \ x = buckets_[i][j].first;\n      const std::size_t k = internal::find_bucket(x,\
     \ last_);\n      buckets_[k].emplace_back(move(buckets_[i][j]));\n      buckets_min_[k]\
-    \ = min(buckets_min_[k], x);\n    }\n    buckets_[i].clear();\n    buckets_min_[i]\
+    \ = std::min(buckets_min_[k], x);\n    }\n    buckets_[i].clear();\n    buckets_min_[i]\
     \ = std::numeric_limits<ukey_t>::max();\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/RadixHeap.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 15:28:45+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/GRL_6_B.RadixHeap.test.cpp

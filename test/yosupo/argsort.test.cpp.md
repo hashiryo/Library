@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/arg_sort.hpp
     title: "\u504F\u89D2\u30BD\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
@@ -270,7 +270,7 @@ data:
   path: test/yosupo/argsort.test.cpp
   requiredBy: []
   timestamp: '2020-10-24 12:08:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/argsort.test.cpp
 layout: document

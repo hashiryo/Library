@@ -6,14 +6,14 @@ data:
     path: src/DataStructure/RedBlackTree_Persistent.hpp
     title: "\u8D64\u9ED2\u6728(\u6C38\u7D9A)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1508.RBT.test.cpp
     title: test/aoj/1508.RBT.test.cpp
   - icon: ':x:'
     path: test/yosupo/persistent_queue.RBTP.test.cpp
     title: test/yosupo/persistent_queue.RBTP.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u8D64\u9ED2\u6728"
     links: []
@@ -36,8 +36,8 @@ data:
     \ *rotate(Node *t, bool b) {\n    t = clone(t);\n    Node *s;\n    s = clone(t->ch[!b]);\n\
     \    t->ch[!b] = s->ch[b];\n    s->ch[b] = t;\n    pushup(t);\n    return pushup(s);\n\
     \  }\n  Node *submerge(Node *l, Node *r) {\n    if (l->level == r->level) return\
-    \ alloc(l, r);\n    bool b = l->level < r->level;\n    if (!b) swap(l, r);\n \
-    \   r = clone(r);\n    Node *c = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1],\
+    \ alloc(l, r);\n    bool b = l->level < r->level;\n    if (!b) std::swap(l, r);\n\
+    \    r = clone(r);\n    Node *c = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1],\
     \ l));\n    if (r->color == BLACK && c->color == RED && c->ch[!b]\n        &&\
     \ c->ch[!b]->color == RED) {\n      r->color = RED;\n      c->color = BLACK;\n\
     \      if (r->ch[b]->color == BLACK) return rotate(r, b);\n      r->ch[b]->color\
@@ -115,10 +115,10 @@ data:
     \  Node *s;\n    s = clone(t->ch[!b]);\n    t->ch[!b] = s->ch[b];\n    s->ch[b]\
     \ = t;\n    pushup(t);\n    return pushup(s);\n  }\n  Node *submerge(Node *l,\
     \ Node *r) {\n    if (l->level == r->level) return alloc(l, r);\n    bool b =\
-    \ l->level < r->level;\n    if (!b) swap(l, r);\n    r = clone(r);\n    Node *c\
-    \ = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1], l));\n    if (r->color\
-    \ == BLACK && c->color == RED && c->ch[!b]\n        && c->ch[!b]->color == RED)\
-    \ {\n      r->color = RED;\n      c->color = BLACK;\n      if (r->ch[b]->color\
+    \ l->level < r->level;\n    if (!b) std::swap(l, r);\n    r = clone(r);\n    Node\
+    \ *c = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1], l));\n    if\
+    \ (r->color == BLACK && c->color == RED && c->ch[!b]\n        && c->ch[!b]->color\
+    \ == RED) {\n      r->color = RED;\n      c->color = BLACK;\n      if (r->ch[b]->color\
     \ == BLACK) return rotate(r, b);\n      r->ch[b]->color = BLACK;\n    }\n    return\
     \ pushup(r);\n  }\n  Node *build(int l, int r, const std::vector<T> &v) {\n  \
     \  if (l + 1 >= r) return alloc(v[l]);\n    return merge(build(l, (l + r) >> 1,\
@@ -180,8 +180,8 @@ data:
   path: src/DataStructure/RedBlackTree.hpp
   requiredBy:
   - src/DataStructure/RedBlackTree_Persistent.hpp
-  timestamp: '2020-10-24 15:09:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 15:28:45+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1508.RBT.test.cpp
   - test/yosupo/persistent_queue.RBTP.test.cpp

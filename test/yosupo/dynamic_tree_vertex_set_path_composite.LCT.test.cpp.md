@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/LinkCutTree_Monoid.hpp
     title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite
@@ -143,7 +143,7 @@ data:
   path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   requiredBy: []
   timestamp: '2020-10-24 14:33:30+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
 layout: document

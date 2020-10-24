@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/RedBlackTree.hpp
     title: "\u8D64\u9ED2\u6728"
   _extendedRequiredBy: []
@@ -35,50 +35,50 @@ data:
     \ b) {\n    t = clone(t);\n    Node *s;\n    s = clone(t->ch[!b]);\n    t->ch[!b]\
     \ = s->ch[b];\n    s->ch[b] = t;\n    pushup(t);\n    return pushup(s);\n  }\n\
     \  Node *submerge(Node *l, Node *r) {\n    if (l->level == r->level) return alloc(l,\
-    \ r);\n    bool b = l->level < r->level;\n    if (!b) swap(l, r);\n    r = clone(r);\n\
-    \    Node *c = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1], l));\n\
-    \    if (r->color == BLACK && c->color == RED && c->ch[!b]\n        && c->ch[!b]->color\
-    \ == RED) {\n      r->color = RED;\n      c->color = BLACK;\n      if (r->ch[b]->color\
-    \ == BLACK) return rotate(r, b);\n      r->ch[b]->color = BLACK;\n    }\n    return\
-    \ pushup(r);\n  }\n  Node *build(int l, int r, const std::vector<T> &v) {\n  \
-    \  if (l + 1 >= r) return alloc(v[l]);\n    return merge(build(l, (l + r) >> 1,\
-    \ v), build((l + r) >> 1, r, v));\n  }\n  Node *pushup(Node *t) {\n    t->cnt\
-    \ = count(t->ch[0]) + count(t->ch[1]) + !t->ch[0];\n    t->level = t->ch[0] ?\
-    \ t->ch[0]->level + (t->ch[0]->color == BLACK) : 0;\n    t->dat = M::f(M::f(dat(t->ch[0]),\
-    \ t->val), dat(t->ch[1]));\n    return t;\n  }\n  void dump(Node *r, typename\
-    \ std::vector<T>::iterator &it) {\n    if (r->ch[0] == nullptr) {\n      *it++\
-    \ = r->val;\n      return;\n    }\n    dump(r->ch[0], it);\n    dump(r->ch[1],\
-    \ it);\n  }\n  inline Node *alloc(const T &val) { return &(*pool.alloc() = Node(val));\
-    \ }\n  inline int count(const Node *t) { return t ? t->cnt : 0; }\n  inline const\
-    \ T dat(const Node *t) { return t ? t->dat : M::ti(); }\n  std::pair<Node *, Node\
-    \ *> split(Node *t, int k) {\n    if (!t) return {nullptr, nullptr};\n    if (k\
-    \ == 0) return {nullptr, t};\n    if (k >= count(t)) return {t, nullptr};\n  \
-    \  t = clone(t);\n    Node *l = t->ch[0], *r = t->ch[1];\n    pool.free(t);\n\
-    \    if (k < count(l)) {\n      auto pp = split(l, k);\n      return {pp.first,\
-    \ merge(pp.second, r)};\n    }\n    if (k > count(l)) {\n      auto pp = split(r,\
-    \ k - count(l));\n      return {merge(l, pp.first), pp.second};\n    }\n    return\
-    \ {l, r};\n  }\n  Node *merge(Node *l, Node *r) {\n    if (!l || !r) return l\
-    \ ? l : r;\n    Node *c = submerge(l, r);\n    c->color = BLACK;\n    return c;\n\
-    \  }\n  void set_val(Node *&t, int k, const T &x) {\n    t = clone(t);\n    if\
-    \ (!t->ch[0]) {\n      t->val = t->dat = x;\n      return;\n    }\n    if (k <\
-    \ count(t->ch[0]))\n      set_val(t->ch[0], k, x);\n    else\n      set_val(t->ch[1],\
-    \ k - count(t->ch[0]), x);\n    t = pushup(t);\n  }\n  T get(Node *&t, int k)\
-    \ {\n    if (!t->ch[0]) return t->val;\n    return k < count(t->ch[0]) ? get(t->ch[0],\
-    \ k)\n                               : get(t->ch[1], k - count(t->ch[0]));\n \
-    \ }\n  RedBlackTree(Node *t) : root(t) {}\n\n protected:\n  static nPool pool;\n\
-    \  Node *root;\n\n public:\n  RedBlackTree() : root(nullptr) {}\n  RedBlackTree(int\
-    \ n, T val = M::ti()) : RedBlackTree(std::vector<T>(n, val)) {}\n  RedBlackTree(const\
-    \ std::vector<T> &v) { root = build(0, (int)v.size(), v); }\n  void build(const\
-    \ std::vector<T> &v) { root = build(0, (int)v.size(), v); }\n  void push_front(const\
-    \ T &v) { root = merge(alloc(v), root); }\n  void push_back(const T &v) { root\
-    \ = merge(root, alloc(v)); }\n  T pop_front() {\n    auto ret = split(root, 1);\n\
-    \    root = ret.second;\n    return ret.first->val;\n  }\n  T pop_back() {\n \
-    \   auto ret = split(root, count(root) - 1);\n    root = ret.first;\n    return\
-    \ ret.second->val;\n  }\n  // merge\n  RedBlackTree operator+(const RedBlackTree\
-    \ &r) {\n    if (!this->root || !r.root) return this->root ? *this : r;\n    Node\
-    \ *c = submerge(this->root, r.root);\n    c->color = BLACK;\n    return RedBlackTree(c);\n\
-    \  }\n  // [0,k) [k,size)\n  std::pair<RedBlackTree, RedBlackTree> split(int k)\
-    \ {\n    auto tmp = split(root, k);\n    return std::make_pair(RedBlackTree(tmp.first),\
+    \ r);\n    bool b = l->level < r->level;\n    if (!b) std::swap(l, r);\n    r\
+    \ = clone(r);\n    Node *c = (r->ch[!b] = b ? submerge(l, r->ch[0]) : submerge(r->ch[1],\
+    \ l));\n    if (r->color == BLACK && c->color == RED && c->ch[!b]\n        &&\
+    \ c->ch[!b]->color == RED) {\n      r->color = RED;\n      c->color = BLACK;\n\
+    \      if (r->ch[b]->color == BLACK) return rotate(r, b);\n      r->ch[b]->color\
+    \ = BLACK;\n    }\n    return pushup(r);\n  }\n  Node *build(int l, int r, const\
+    \ std::vector<T> &v) {\n    if (l + 1 >= r) return alloc(v[l]);\n    return merge(build(l,\
+    \ (l + r) >> 1, v), build((l + r) >> 1, r, v));\n  }\n  Node *pushup(Node *t)\
+    \ {\n    t->cnt = count(t->ch[0]) + count(t->ch[1]) + !t->ch[0];\n    t->level\
+    \ = t->ch[0] ? t->ch[0]->level + (t->ch[0]->color == BLACK) : 0;\n    t->dat =\
+    \ M::f(M::f(dat(t->ch[0]), t->val), dat(t->ch[1]));\n    return t;\n  }\n  void\
+    \ dump(Node *r, typename std::vector<T>::iterator &it) {\n    if (r->ch[0] ==\
+    \ nullptr) {\n      *it++ = r->val;\n      return;\n    }\n    dump(r->ch[0],\
+    \ it);\n    dump(r->ch[1], it);\n  }\n  inline Node *alloc(const T &val) { return\
+    \ &(*pool.alloc() = Node(val)); }\n  inline int count(const Node *t) { return\
+    \ t ? t->cnt : 0; }\n  inline const T dat(const Node *t) { return t ? t->dat :\
+    \ M::ti(); }\n  std::pair<Node *, Node *> split(Node *t, int k) {\n    if (!t)\
+    \ return {nullptr, nullptr};\n    if (k == 0) return {nullptr, t};\n    if (k\
+    \ >= count(t)) return {t, nullptr};\n    t = clone(t);\n    Node *l = t->ch[0],\
+    \ *r = t->ch[1];\n    pool.free(t);\n    if (k < count(l)) {\n      auto pp =\
+    \ split(l, k);\n      return {pp.first, merge(pp.second, r)};\n    }\n    if (k\
+    \ > count(l)) {\n      auto pp = split(r, k - count(l));\n      return {merge(l,\
+    \ pp.first), pp.second};\n    }\n    return {l, r};\n  }\n  Node *merge(Node *l,\
+    \ Node *r) {\n    if (!l || !r) return l ? l : r;\n    Node *c = submerge(l, r);\n\
+    \    c->color = BLACK;\n    return c;\n  }\n  void set_val(Node *&t, int k, const\
+    \ T &x) {\n    t = clone(t);\n    if (!t->ch[0]) {\n      t->val = t->dat = x;\n\
+    \      return;\n    }\n    if (k < count(t->ch[0]))\n      set_val(t->ch[0], k,\
+    \ x);\n    else\n      set_val(t->ch[1], k - count(t->ch[0]), x);\n    t = pushup(t);\n\
+    \  }\n  T get(Node *&t, int k) {\n    if (!t->ch[0]) return t->val;\n    return\
+    \ k < count(t->ch[0]) ? get(t->ch[0], k)\n                               : get(t->ch[1],\
+    \ k - count(t->ch[0]));\n  }\n  RedBlackTree(Node *t) : root(t) {}\n\n protected:\n\
+    \  static nPool pool;\n  Node *root;\n\n public:\n  RedBlackTree() : root(nullptr)\
+    \ {}\n  RedBlackTree(int n, T val = M::ti()) : RedBlackTree(std::vector<T>(n,\
+    \ val)) {}\n  RedBlackTree(const std::vector<T> &v) { root = build(0, (int)v.size(),\
+    \ v); }\n  void build(const std::vector<T> &v) { root = build(0, (int)v.size(),\
+    \ v); }\n  void push_front(const T &v) { root = merge(alloc(v), root); }\n  void\
+    \ push_back(const T &v) { root = merge(root, alloc(v)); }\n  T pop_front() {\n\
+    \    auto ret = split(root, 1);\n    root = ret.second;\n    return ret.first->val;\n\
+    \  }\n  T pop_back() {\n    auto ret = split(root, count(root) - 1);\n    root\
+    \ = ret.first;\n    return ret.second->val;\n  }\n  // merge\n  RedBlackTree operator+(const\
+    \ RedBlackTree &r) {\n    if (!this->root || !r.root) return this->root ? *this\
+    \ : r;\n    Node *c = submerge(this->root, r.root);\n    c->color = BLACK;\n \
+    \   return RedBlackTree(c);\n  }\n  // [0,k) [k,size)\n  std::pair<RedBlackTree,\
+    \ RedBlackTree> split(int k) {\n    auto tmp = split(root, k);\n    return std::make_pair(RedBlackTree(tmp.first),\
     \ RedBlackTree(tmp.first));\n  }\n  // [0,a) [a,b) [b,size)\n  std::tuple<RedBlackTree,\
     \ RedBlackTree, RedBlackTree> split3(int a, int b) {\n    auto x = split(root,\
     \ a);\n    auto y = split(x.second, b - a);\n    return std::make_tuple(RedBlackTree(x.first),\
@@ -135,7 +135,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/RedBlackTree_Persistent.hpp
   requiredBy: []
-  timestamp: '2020-10-24 15:09:02+09:00'
+  timestamp: '2020-10-24 15:28:45+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/persistent_queue.RBTP.test.cpp
