@@ -54,7 +54,7 @@ data:
     \ * obj, re});\n    adj[dst].emplace_back(Edge{src, -lower, -cost * obj, e});\n\
     \    return EdgePtr{this, src, e};\n  }\n  void add_supply(const int v, const\
     \ flow_t amount) { b[v] += amount; }\n  void add_demand(const int v, const flow_t\
-    \ amount) { b[v] -= amount; }\n\n private:\n  const cost_t UNREACHABLE = numeric_limits<cost_t>::max();\n\
+    \ amount) { b[v] -= amount; }\n\n private:\n  const cost_t UNREACHABLE = std::numeric_limits<cost_t>::max();\n\
     \  const cost_t EPS = 1e-7;\n  cost_t farthest;\n  std::vector<cost_t> potential;\n\
     \  std::vector<cost_t> dist;\n  std::vector<int> excess_vs, deficit_vs;\n  std::vector<int>\
     \ prev;\n  Heap pq;\n  Edge &rev(const Edge &e) { return adj[e.dst][e.rev]; }\n\
@@ -76,29 +76,29 @@ data:
     \        const auto new_dist = d + residual_cost_t(u, v, e);\n        if (new_dist\
     \ - dist[v] + EPS >= 0) continue;\n        pq.emplace(dist[v] = new_dist, v);\n\
     \        prev[v] = e.rev;\n      }\n    }\n    pq = decltype(pq)();\n    for (int\
-    \ v = 0; v < n; v++) potential[v] += min(dist[v], farthest);\n    return deficit_count\
-    \ > 0;\n  }\n  void primal(const flow_t delta) {\n    for (const auto t : deficit_vs)\
-    \ {\n      if (dist[t] - farthest - EPS > 0) continue;\n      flow_t f = -b[t];\n\
-    \      int v;\n      for (v = t; prev[v] != -1;) {\n        Edge &r = adj[v][prev[v]],\
-    \ &e = adj[r.dst][r.rev];\n        f = min(f, e.residual_cap());\n        v =\
-    \ r.dst;\n      }\n      f = min(f, b[v]);\n      f -= f % delta;\n      if (f\
-    \ <= 0) continue;\n      for (v = t; prev[v] != -1;) {\n        Edge &r = adj[v][prev[v]],\
-    \ &e = adj[r.dst][r.rev];\n        push(e, f);\n        if (e.residual_cap() <=\
-    \ 0) prev[v] = -1;\n        v = r.dst;\n      }\n      b[t] += f;\n      b[v]\
-    \ -= f;\n    }\n  }\n  void saturate_negative(const flow_t delta) {\n    excess_vs.clear();\n\
-    \    deficit_vs.clear();\n    for (auto &es : adj)\n      for (auto &e : es) {\n\
-    \        flow_t rcap = e.residual_cap();\n        rcap -= rcap % delta;\n    \
-    \    int src = adj[e.dst][e.rev].dst, dst = e.dst;\n        const cost_t rcost_t\
-    \ = residual_cost_t(src, dst, e);\n        if (rcost_t + EPS < 0 || rcap < 0)\
-    \ {\n          push(e, rcap);\n          b[src] -= rcap;\n          b[dst] +=\
-    \ rcap;\n        }\n      }\n    for (int v = 0; v < n; v++)\n      if (b[v] !=\
-    \ 0) (b[v] > 0 ? excess_vs : deficit_vs).emplace_back(v);\n  }\n\n public:\n \
-    \ std::pair<bool, cost_t> flow_run() {\n    potential.resize(n);\n    flow_t inf_flow\
-    \ = 1;\n    for (const auto t : b) inf_flow = std::max({inf_flow, t, -t});\n \
-    \   for (const auto &es : adj)\n      for (const auto &e : es)\n        inf_flow\
-    \ = std::max({inf_flow, e.residual_cap(), -e.residual_cap()});\n    flow_t delta\
-    \ = 1;\n    while (delta < inf_flow) delta *= 2;\n    for (; delta; delta /= 2)\
-    \ {\n      saturate_negative(delta);\n      while (dual(delta)) primal(delta);\n\
+    \ v = 0; v < n; v++) potential[v] += std::min(dist[v], farthest);\n    return\
+    \ deficit_count > 0;\n  }\n  void primal(const flow_t delta) {\n    for (const\
+    \ auto t : deficit_vs) {\n      if (dist[t] - farthest - EPS > 0) continue;\n\
+    \      flow_t f = -b[t];\n      int v;\n      for (v = t; prev[v] != -1;) {\n\
+    \        Edge &r = adj[v][prev[v]], &e = adj[r.dst][r.rev];\n        f = std::min(f,\
+    \ e.residual_cap());\n        v = r.dst;\n      }\n      f = std::min(f, b[v]);\n\
+    \      f -= f % delta;\n      if (f <= 0) continue;\n      for (v = t; prev[v]\
+    \ != -1;) {\n        Edge &r = adj[v][prev[v]], &e = adj[r.dst][r.rev];\n    \
+    \    push(e, f);\n        if (e.residual_cap() <= 0) prev[v] = -1;\n        v\
+    \ = r.dst;\n      }\n      b[t] += f;\n      b[v] -= f;\n    }\n  }\n  void saturate_negative(const\
+    \ flow_t delta) {\n    excess_vs.clear();\n    deficit_vs.clear();\n    for (auto\
+    \ &es : adj)\n      for (auto &e : es) {\n        flow_t rcap = e.residual_cap();\n\
+    \        rcap -= rcap % delta;\n        int src = adj[e.dst][e.rev].dst, dst =\
+    \ e.dst;\n        const cost_t rcost_t = residual_cost_t(src, dst, e);\n     \
+    \   if (rcost_t + EPS < 0 || rcap < 0) {\n          push(e, rcap);\n         \
+    \ b[src] -= rcap;\n          b[dst] += rcap;\n        }\n      }\n    for (int\
+    \ v = 0; v < n; v++)\n      if (b[v] != 0) (b[v] > 0 ? excess_vs : deficit_vs).emplace_back(v);\n\
+    \  }\n\n public:\n  std::pair<bool, cost_t> flow_run() {\n    potential.resize(n);\n\
+    \    flow_t inf_flow = 1;\n    for (const auto t : b) inf_flow = std::max({inf_flow,\
+    \ t, -t});\n    for (const auto &es : adj)\n      for (const auto &e : es)\n \
+    \       inf_flow = std::max({inf_flow, e.residual_cap(), -e.residual_cap()});\n\
+    \    flow_t delta = 1;\n    while (delta < inf_flow) delta *= 2;\n    for (; delta;\
+    \ delta /= 2) {\n      saturate_negative(delta);\n      while (dual(delta)) primal(delta);\n\
     \    }\n    cost_t value = 0;\n    for (const auto &es : adj)\n      for (const\
     \ auto &e : es) value += e.flow * e.cost;\n    value /= 2;\n    if (excess_vs.empty()\
     \ && deficit_vs.empty()) {\n      return {true, value / obj};\n    } else {\n\
@@ -117,8 +117,8 @@ data:
     \    return {true, mf_value, b[t]};\n  }\n  std::vector<cost_t> get_potential()\
     \ {\n    std::fill(potential.begin(), potential.end(), 0);\n    for (int i = 0;\
     \ i < n; i++)\n      for (const auto &es : adj)\n        for (const auto &e :\
-    \ es)\n          if (e.residual_cap() > 0)\n            potential[e.dst] = min(potential[e.dst],\n\
-    \                                   potential[adj[e.dst][e.rev].dst] + e.cost);\n\
+    \ es)\n          if (e.residual_cap() > 0)\n            potential[e.dst] = std::min(\n\
+    \                potential[e.dst], potential[adj[e.dst][e.rev].dst] + e.cost);\n\
     \    return potential;\n  }\n  template <class T>\n  T get_result_value() {\n\
     \    T value = 0;\n    for (const auto &es : adj)\n      for (const auto &e :\
     \ es) {\n        value += (T)(e.flow) * (T)(e.cost);\n      }\n    value /= (T)2;\n\
@@ -206,7 +206,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_B.RadixHeap.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:01:59+09:00'
+  timestamp: '2020-10-24 17:22:56+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_B.RadixHeap.test.cpp

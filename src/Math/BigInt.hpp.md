@@ -65,7 +65,7 @@ data:
     \  for (int i = 0; i < (cyclic ? size : s); i++) A[i] *= inv;\n}\n\ntemplate <typename\
     \ mod_t>\nvoid rev_permute(mod_t *A, int n) {\n  int r = 0, nh = n >> 1;\n  for\
     \ (int i = 1; i < n; i++) {\n    int h = nh;\n    while (!((r ^= h) & h)) h >>=\
-    \ 1;\n    if (r > i) swap(A[i], A[r]);\n  }\n}\n\ntemplate <typename mod_t>\n\
+    \ 1;\n    if (r > i) srd::swap(A[i], A[r]);\n  }\n}\n\ntemplate <typename mod_t>\n\
     void ntt_dit4(mod_t *A, int n, int sign, mod_t *roots) {\n  rev_permute(A, n);\n\
     \  int logn = __builtin_ctz(n);\n  if (logn & 1)\n    for (int i = 0; i < n; i\
     \ += 2) {\n      mod_t a = A[i], b = A[i + 1];\n      A[i] = a + b, A[i + 1] =\
@@ -261,7 +261,7 @@ data:
     \  for (int i = 0; i < (cyclic ? size : s); i++) A[i] *= inv;\n}\n\ntemplate <typename\
     \ mod_t>\nvoid rev_permute(mod_t *A, int n) {\n  int r = 0, nh = n >> 1;\n  for\
     \ (int i = 1; i < n; i++) {\n    int h = nh;\n    while (!((r ^= h) & h)) h >>=\
-    \ 1;\n    if (r > i) swap(A[i], A[r]);\n  }\n}\n\ntemplate <typename mod_t>\n\
+    \ 1;\n    if (r > i) srd::swap(A[i], A[r]);\n  }\n}\n\ntemplate <typename mod_t>\n\
     void ntt_dit4(mod_t *A, int n, int sign, mod_t *roots) {\n  rev_permute(A, n);\n\
     \  int logn = __builtin_ctz(n);\n  if (logn & 1)\n    for (int i = 0; i < n; i\
     \ += 2) {\n      mod_t a = A[i], b = A[i + 1];\n      A[i] = a + b, A[i + 1] =\
@@ -422,7 +422,7 @@ data:
   isVerificationFile: false
   path: src/Math/BigInt.hpp
   requiredBy: []
-  timestamp: '2020-10-24 17:01:59+09:00'
+  timestamp: '2020-10-24 17:22:56+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/NTL_2_E.test.cpp
