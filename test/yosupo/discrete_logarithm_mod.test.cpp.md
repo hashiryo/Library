@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/discrete_log.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/discrete_logarithm_mod
@@ -22,7 +22,7 @@ data:
     \ x, unsigned mod) {\n    int a = x, b = mod, u = 1, v = 0, t;\n    while (b)\
     \ t = a / b, std::swap(a -= t * b, b), std::swap(u -= t * v, v);\n    return u\
     \ >= 0 ? u % mod : (mod - (-u) % mod);\n  };\n  unsigned cnt = 0;\n  for (unsigned\
-    \ g;; cnt++) {\n    if ((b == 1) || (mod == 1)) return cnt;\n    if ((g = __gcd(a,\
+    \ g;; cnt++) {\n    if ((b == 1) || (mod == 1)) return cnt;\n    if ((g = std::gcd(a,\
     \ mod)) == 1) break;\n    if (b % g != 0) return -1;  // no solution\n    b /=\
     \ g, mod /= g;\n    b = 1ull * mod_inv(a / g, mod) * b % mod;\n  }\n  unsigned\
     \ middle = std::ceil(std::sqrt(mod));\n  std::unordered_map<unsigned int, unsigned\
@@ -45,8 +45,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/discrete_logarithm_mod.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-24 16:23:38+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/discrete_logarithm_mod.test.cpp
 layout: document

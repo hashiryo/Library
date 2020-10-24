@@ -42,14 +42,14 @@ data:
     \    return ret;\n  }\n  ModB inverse() const { return pow(mod - 2); }\n  bool\
     \ operator==(const ModB &p) const { return x == p.x; }\n  bool operator!=(const\
     \ ModB &p) const { return x != p.x; }\n};\n\ntemplate <typename mod_t>\nvoid convolute(mod_t\
-    \ *A, int s1, mod_t *B, int s2, bool cyclic = false) {\n  int s = (cyclic ? max(s1,\
+    \ *A, int s1, mod_t *B, int s2, bool cyclic = false) {\n  int s = (cyclic ? std::max(s1,\
     \ s2) : s1 + s2 - 1);\n  int size = 1;\n  while (size < s) size <<= 1;\n  mod_t\
     \ roots[mod_t::level] = {mod_t::omega()};\n  for (int i = 1; i < mod_t::level;\
-    \ i++) roots[i] = roots[i - 1] * roots[i - 1];\n  fill(A + s1, A + size, 0);\n\
-    \  ntt_dit4(A, size, 1, roots);\n  if (A == B && s1 == s2) {\n    for (int i =\
-    \ 0; i < size; i++) A[i] *= A[i];\n  } else {\n    fill(B + s2, B + size, 0);\n\
-    \    ntt_dit4(B, size, 1, roots);\n    for (int i = 0; i < size; i++) A[i] *=\
-    \ B[i];\n  }\n  ntt_dit4(A, size, -1, roots);\n  mod_t inv = mod_t(size).inverse();\n\
+    \ i++) roots[i] = roots[i - 1] * roots[i - 1];\n  std::fill(A + s1, A + size,\
+    \ 0);\n  ntt_dit4(A, size, 1, roots);\n  if (A == B && s1 == s2) {\n    for (int\
+    \ i = 0; i < size; i++) A[i] *= A[i];\n  } else {\n    std::fill(B + s2, B + size,\
+    \ 0);\n    ntt_dit4(B, size, 1, roots);\n    for (int i = 0; i < size; i++) A[i]\
+    \ *= B[i];\n  }\n  ntt_dit4(A, size, -1, roots);\n  mod_t inv = mod_t(size).inverse();\n\
     \  for (int i = 0; i < (cyclic ? size : s); i++) A[i] *= inv;\n}\n\ntemplate <typename\
     \ mod_t>\nvoid rev_permute(mod_t *A, int n) {\n  int r = 0, nh = n >> 1;\n  for\
     \ (int i = 1; i < n; i++) {\n    int h = nh;\n    while (!((r ^= h) & h)) h >>=\
@@ -61,8 +61,8 @@ data:
     \ = imag.inverse();\n  mod_t one = mod_t(1);\n  for (int e = 2 + (logn & 1); e\
     \ < logn + 1; e += 2) {\n    const int m = 1 << e;\n    const int m4 = m >> 2;\n\
     \    mod_t dw = roots[mod_t::level - e];\n    if (sign < 0) dw = dw.inverse();\n\
-    \    const int block_size = max(m, (1 << 15) / int(sizeof(A[0])));\n    for (int\
-    \ k = 0; k < n; k += block_size) {\n      mod_t w = one, w2 = one, w3 = one;\n\
+    \    const int block_size = std::max(m, (1 << 15) / int(sizeof(A[0])));\n    for\
+    \ (int k = 0; k < n; k += block_size) {\n      mod_t w = one, w2 = one, w3 = one;\n\
     \      for (int j = 0; j < m4; j++) {\n        for (int i = k + j; i < k + block_size;\
     \ i += m) {\n          mod_t a0 = A[i + m4 * 0] * one, a2 = A[i + m4 * 1] * w2;\n\
     \          mod_t a1 = A[i + m4 * 2] * w, a3 = A[i + m4 * 3] * w3;\n          mod_t\
@@ -84,15 +84,15 @@ data:
     \        x = x * 10 + s[j] - '0';\n      dat.push_back(x);\n    }\n    shrink();\n\
     \  }\n  std::string to_string() const {\n    std::stringstream ss;\n    if (minus)\
     \ ss << '-';\n    ss << (dat.empty() ? 0 : dat.back());\n    for (int64_t i =\
-    \ (int64_t)dat.size() - 2; i >= 0; --i)\n      ss << setw(base_digits) << setfill('0')\
-    \ << dat[i];\n    std::string ret;\n    ss >> ret;\n    return ret;\n  }\n  int\
-    \ convert_int() const { return stoi(this->to_string()); }\n  long long convert_ll()\
-    \ const { return stoll(this->to_string()); }\n  BigInt &operator=(int64_t v) {\n\
-    \    minus = false;\n    dat.clear();\n    if (v < 0) minus = true, v = -v;\n\
-    \    for (; v > 0; v = v / base) dat.push_back(v % base);\n    return *this;\n\
-    \  }\n  bool is_zero() const { return dat.empty() || (dat.size() == 1 && !dat[0]);\
-    \ }\n  BigInt operator>>(std::size_t size) const {\n    if (dat.size() <= size)\
-    \ return {};\n    BigInt ret;\n    ret.dat = std::vector<int64_t>(dat.begin()\
+    \ (int64_t)dat.size() - 2; i >= 0; --i)\n      ss << std::setw(base_digits) <<\
+    \ std::setfill('0') << dat[i];\n    std::string ret;\n    ss >> ret;\n    return\
+    \ ret;\n  }\n  int convert_int() const { return stoi(this->to_string()); }\n \
+    \ long long convert_ll() const { return stoll(this->to_string()); }\n  BigInt\
+    \ &operator=(int64_t v) {\n    minus = false;\n    dat.clear();\n    if (v < 0)\
+    \ minus = true, v = -v;\n    for (; v > 0; v = v / base) dat.push_back(v % base);\n\
+    \    return *this;\n  }\n  bool is_zero() const { return dat.empty() || (dat.size()\
+    \ == 1 && !dat[0]); }\n  BigInt operator>>(std::size_t size) const {\n    if (dat.size()\
+    \ <= size) return {};\n    BigInt ret;\n    ret.dat = std::vector<int64_t>(dat.begin()\
     \ + size, dat.end());\n    return ret;\n  }\n  BigInt operator<<(std::size_t size)\
     \ const {\n    BigInt ret(*this);\n    ret.dat.insert(ret.dat.begin(), size, 0);\n\
     \    return ret;\n  }\n\n private:\n  static std::vector<int64_t> mul_n(const\
@@ -107,7 +107,7 @@ data:
     \     convolute(ff, f.size(), gg, g.size(), cyclic);\n    }\n  }\n  static std::vector<int64_t>\
     \ convert_base(const std::vector<int64_t> &a,\n                              \
     \             std::int64_t old_digits,\n                                     \
-    \      std::int64_t new_digits) {\n    std::vector<int64_t> p(max(old_digits,\
+    \      std::int64_t new_digits) {\n    std::vector<int64_t> p(std::max(old_digits,\
     \ new_digits) + 1);\n    p[0] = 1;\n    for (int64_t i = 1; i < (int64_t)p.size();\
     \ i++) p[i] = p[i - 1] * 10;\n    std::vector<int64_t> res;\n    std::int64_t\
     \ cur = 0;\n    std::int64_t cur_digits = 0;\n    for (int64_t i = 0; i < (int64_t)a.size();\
@@ -187,7 +187,7 @@ data:
     \ ret = 0;\n    for (int64_t i = dat.size() - 1; i >= 0; --i)\n      ret = (dat[i]\
     \ + ret * (int64_t)base) % v;\n    return ret;\n  }\n  BigInt operator+(const\
     \ BigInt &v) const {\n    if (minus != v.minus) return *this - (-v);\n    BigInt\
-    \ res = v;\n    for (int64_t i = 0, carry = 0;\n         i < (int64_t)max(dat.size(),\
+    \ res = v;\n    for (int64_t i = 0, carry = 0;\n         i < (int64_t)std::max(dat.size(),\
     \ v.dat.size()) || carry; ++i) {\n      if (i == (int64_t)res.dat.size()) res.dat.push_back(0);\n\
     \      res.dat[i] += carry + (i < (int64_t)dat.size() ? dat[i] : 0);\n      carry\
     \ = res.dat[i] >= base;\n      if (carry) res.dat[i] -= base;\n    }\n    return\
@@ -218,7 +218,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_A.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 16:23:38+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_A.test.cpp

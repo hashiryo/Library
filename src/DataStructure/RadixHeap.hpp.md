@@ -59,7 +59,7 @@ data:
     \    assert(last_ <= x);\n    ++size_;\n    const std::size_t k = internal::find_bucket(x,\
     \ last_);\n    buckets_[k].emplace_back(x, value);\n    buckets_min_[k] = std::min(buckets_min_[k],\
     \ x);\n  }\n  void emplace(key_t key, val_t value) { push(key, value); }\n  std::pair<key_t,\
-    \ val_t> top() {\n    pull();\n    return make_pair(encoder_t::decode(last_),\
+    \ val_t> top() {\n    pull();\n    return std::make_pair(encoder_t::decode(last_),\
     \ buckets_[0].back().second);\n  }\n  std::pair<key_t, val_t> pop() {\n    pull();\n\
     \    --size_;\n    auto ret\n        = std::make_pair(encoder_t::decode(last_),\
     \ buckets_[0].back().second);\n    buckets_[0].pop_back();\n    return ret;\n\
@@ -119,7 +119,7 @@ data:
     \    assert(last_ <= x);\n    ++size_;\n    const std::size_t k = internal::find_bucket(x,\
     \ last_);\n    buckets_[k].emplace_back(x, value);\n    buckets_min_[k] = std::min(buckets_min_[k],\
     \ x);\n  }\n  void emplace(key_t key, val_t value) { push(key, value); }\n  std::pair<key_t,\
-    \ val_t> top() {\n    pull();\n    return make_pair(encoder_t::decode(last_),\
+    \ val_t> top() {\n    pull();\n    return std::make_pair(encoder_t::decode(last_),\
     \ buckets_[0].back().second);\n  }\n  std::pair<key_t, val_t> pop() {\n    pull();\n\
     \    --size_;\n    auto ret\n        = std::make_pair(encoder_t::decode(last_),\
     \ buckets_[0].back().second);\n    buckets_[0].pop_back();\n    return ret;\n\
@@ -138,7 +138,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/RadixHeap.hpp
   requiredBy: []
-  timestamp: '2020-10-24 15:28:45+09:00'
+  timestamp: '2020-10-24 16:23:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/GRL_6_B.RadixHeap.test.cpp
