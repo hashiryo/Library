@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/RadixHeap.hpp
     title: Radix-Heap
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MinCostFlow.hpp
     title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
@@ -137,33 +137,34 @@ data:
     \ {\n public:\n  static inline constexpr std::size_t find_bucket(uint32_t x, uint32_t\
     \ last) {\n    return x == last ? 0 : 32 - __builtin_clz(x ^ last);\n  }\n};\n\
     template <>\nclass find_bucket_impl<true> {\n public:\n  static inline constexpr\
-    \ std::size_t find_bucket(uint64_t x, uint64_t last) {\n    return x == last ?\
-    \ 0 : 64 - __builtin_clzll(x ^ last);\n  }\n};\ntemplate <typename T>\ninline\
-    \ constexpr std::size_t find_bucket(T x, T last) {\n  return find_bucket_impl<sizeof(T)\
-    \ == 8>::find_bucket(x, last);\n}\ntemplate <typename key_t, bool IsSigned>\n\
-    class encoder_impl_integer;\ntemplate <typename key_t>\nclass encoder_impl_integer<key_t,\
-    \ false> {\n public:\n  using ukey_t = key_t;\n  inline static constexpr ukey_t\
-    \ encode(key_t x) { return x; }\n  inline static constexpr key_t decode(ukey_t\
-    \ x) { return x; }\n};\ntemplate <typename key_t>\nclass encoder_impl_integer<key_t,\
-    \ true> {\n public:\n  typedef typename make_unsigned<key_t>::type ukey_t;\n \
-    \ inline static constexpr ukey_t encode(key_t x) {\n    return static_cast<ukey_t>(x)\n\
-    \           ^ (ukey_t(1) << ukey_t(std::numeric_limits<ukey_t>::digits - 1));\n\
-    \  }\n  inline static constexpr key_t decode(ukey_t x) {\n    return static_cast<key_t>(\n\
-    \        x ^ (ukey_t(1) << (std::numeric_limits<ukey_t>::digits - 1)));\n  }\n\
-    };\ntemplate <typename key_t, typename ukey_t>\nclass encoder_impl_decimal {\n\
-    \ public:\n  inline static constexpr ukey_t encode(key_t x) {\n    return raw_cast<key_t,\
-    \ ukey_t>(x)\n           ^ ((-(raw_cast<key_t, ukey_t>(x)\n                 >>\
-    \ (std::numeric_limits<ukey_t>::digits - 1)))\n              | (ukey_t(1) << (std::numeric_limits<ukey_t>::digits\
-    \ - 1)));\n  }\n  inline static constexpr key_t decode(ukey_t x) {\n    return\
-    \ raw_cast<ukey_t, key_t>(\n        x\n        ^ (((x >> (std::numeric_limits<ukey_t>::digits\
-    \ - 1)) - 1)\n           | (ukey_t(1) << (std::numeric_limits<ukey_t>::digits\
-    \ - 1))));\n  }\n\n private:\n  template <typename T, typename U>\n  union raw_cast\
+    \ std::size_t find_bucket(std::uint64_t x,\n                                 \
+    \                 std::uint64_t last) {\n    return x == last ? 0 : 64 - __builtin_clzll(x\
+    \ ^ last);\n  }\n};\ntemplate <typename T>\ninline constexpr std::size_t find_bucket(T\
+    \ x, T last) {\n  return find_bucket_impl<sizeof(T) == 8>::find_bucket(x, last);\n\
+    }\ntemplate <typename key_t, bool IsSigned>\nclass encoder_impl_integer;\ntemplate\
+    \ <typename key_t>\nclass encoder_impl_integer<key_t, false> {\n public:\n  using\
+    \ ukey_t = key_t;\n  inline static constexpr ukey_t encode(key_t x) { return x;\
+    \ }\n  inline static constexpr key_t decode(ukey_t x) { return x; }\n};\ntemplate\
+    \ <typename key_t>\nclass encoder_impl_integer<key_t, true> {\n public:\n  typedef\
+    \ typename std::make_unsigned<key_t>::type ukey_t;\n  inline static constexpr\
+    \ ukey_t encode(key_t x) {\n    return static_cast<ukey_t>(x)\n           ^ (ukey_t(1)\
+    \ << ukey_t(std::numeric_limits<ukey_t>::digits - 1));\n  }\n  inline static constexpr\
+    \ key_t decode(ukey_t x) {\n    return static_cast<key_t>(\n        x ^ (ukey_t(1)\
+    \ << (std::numeric_limits<ukey_t>::digits - 1)));\n  }\n};\ntemplate <typename\
+    \ key_t, typename ukey_t>\nclass encoder_impl_decimal {\n public:\n  inline static\
+    \ constexpr ukey_t encode(key_t x) {\n    return raw_cast<key_t, ukey_t>(x)\n\
+    \           ^ ((-(raw_cast<key_t, ukey_t>(x)\n                 >> (std::numeric_limits<ukey_t>::digits\
+    \ - 1)))\n              | (ukey_t(1) << (std::numeric_limits<ukey_t>::digits -\
+    \ 1)));\n  }\n  inline static constexpr key_t decode(ukey_t x) {\n    return raw_cast<ukey_t,\
+    \ key_t>(\n        x\n        ^ (((x >> (std::numeric_limits<ukey_t>::digits -\
+    \ 1)) - 1)\n           | (ukey_t(1) << (std::numeric_limits<ukey_t>::digits -\
+    \ 1))));\n  }\n\n private:\n  template <typename T, typename U>\n  union raw_cast\
     \ {\n   public:\n    constexpr raw_cast(T t) : t_(t) {}\n    operator U() const\
     \ { return u_; }\n\n   private:\n    T t_;\n    U u_;\n  };\n};\ntemplate <typename\
-    \ key_t>\nclass encoder : public encoder_impl_integer<key_t, is_signed<key_t>::value>\
+    \ key_t>\nclass encoder\n    : public encoder_impl_integer<key_t, std::is_signed<key_t>::value>\
     \ {};\ntemplate <>\nclass encoder<float> : public encoder_impl_decimal<float,\
     \ uint32_t> {};\ntemplate <>\nclass encoder<double> : public encoder_impl_decimal<double,\
-    \ uint64_t> {};\n}  // namespace internal\n\ntemplate <typename key_t, typename\
+    \ std::uint64_t> {};\n}  // namespace internal\n\ntemplate <typename key_t, typename\
     \ val_t,\n          typename encoder_t = internal::encoder<key_t>>\nclass RadixHeap\
     \ {\n public:\n  typedef typename encoder_t::ukey_t ukey_t;\n\n  RadixHeap() :\
     \ size_(0), last_(), buckets_() {\n    buckets_min_.fill(std::numeric_limits<ukey_t>::max());\n\
@@ -183,7 +184,7 @@ data:
     \    std::size_t i = 1;\n    while (buckets_[i].empty()) ++i;\n    last_ = buckets_min_[i];\n\
     \    for (std::size_t j = 0; j < buckets_[i].size(); ++j) {\n      const ukey_t\
     \ x = buckets_[i][j].first;\n      const std::size_t k = internal::find_bucket(x,\
-    \ last_);\n      buckets_[k].emplace_back(move(buckets_[i][j]));\n      buckets_min_[k]\
+    \ last_);\n      buckets_[k].emplace_back(std::move(buckets_[i][j]));\n      buckets_min_[k]\
     \ = std::min(buckets_min_[k], x);\n    }\n    buckets_[i].clear();\n    buckets_min_[i]\
     \ = std::numeric_limits<ukey_t>::max();\n  }\n};\n#line 6 \"test/aoj/GRL_6_B.RadixHeap.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -206,8 +207,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_B.RadixHeap.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-24 18:38:03+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_B.RadixHeap.test.cpp
 layout: document

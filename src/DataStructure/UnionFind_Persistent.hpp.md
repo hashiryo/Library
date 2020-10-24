@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/PersistentArray.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_unionfind.test.cpp
     title: test/yosupo/persistent_unionfind.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Union-Find(\u5B8C\u5168\u6C38\u7D9A)"
     links:
@@ -62,7 +62,7 @@ data:
   path: src/DataStructure/UnionFind_Persistent.hpp
   requiredBy: []
   timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/persistent_unionfind.test.cpp
 documentation_of: src/DataStructure/UnionFind_Persistent.hpp

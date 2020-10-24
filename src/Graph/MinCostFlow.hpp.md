@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_B.RadixHeap.test.cpp
     title: test/aoj/GRL_6_B.RadixHeap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -12,11 +12,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
     links:
@@ -245,7 +245,7 @@ data:
   path: src/Graph/MinCostFlow.hpp
   requiredBy: []
   timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/GRL_6_B.test.cpp
   - test/aoj/GRL_6_B.RadixHeap.test.cpp
