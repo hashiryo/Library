@@ -99,7 +99,7 @@ data:
     - icon: ':x:'
       path: src/Geometry/arg_sort.hpp
       title: "\u504F\u89D2\u30BD\u30FC\u30C8"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Geometry/circle_functions.hpp
       title: "\u5186\u306E\u3042\u308C\u3053\u308C"
     - icon: ':x:'
@@ -221,7 +221,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0425.test.cpp
       title: test/aoj/0425.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1132.test.cpp
       title: test/aoj/1132.test.cpp
     - icon: ':heavy_check_mark:'
@@ -263,7 +263,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2159.test.cpp
       title: test/aoj/2159.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2201.test.cpp
       title: test/aoj/2201.test.cpp
     - icon: ':x:'
@@ -290,7 +290,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2450.LCT.test.cpp
       title: test/aoj/2450.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2514.test.cpp
       title: test/aoj/2514.test.cpp
     - icon: ':x:'
@@ -329,7 +329,7 @@ data:
     - icon: ':x:'
       path: test/aoj/3032.test.cpp
       title: test/aoj/3032.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3034.test.cpp
       title: test/aoj/3034.test.cpp
     - icon: ':heavy_check_mark:'

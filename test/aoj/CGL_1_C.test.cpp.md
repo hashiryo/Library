@@ -18,7 +18,7 @@ data:
     \ * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\n */\n\
     \n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\nint\
     \ sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1 :\
-    \ x > +EPS ? 1 : 0;\n}\nconst Real PI = acos(-1.0);\nReal radian_to_degree(Real\
+    \ x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
     \ r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real d) { return (d *\
     \ PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK\
     \ = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1,\
@@ -261,7 +261,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_1_C.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 01:18:43+09:00'
+  timestamp: '2020-10-24 12:08:04+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_1_C.test.cpp

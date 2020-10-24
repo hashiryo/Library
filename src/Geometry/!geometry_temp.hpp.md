@@ -5,7 +5,7 @@ data:
   - icon: ':x:'
     path: src/Geometry/arg_sort.hpp
     title: "\u504F\u89D2\u30BD\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Geometry/circle_functions.hpp
     title: "\u5186\u306E\u3042\u308C\u3053\u308C"
   - icon: ':x:'
@@ -15,7 +15,7 @@ data:
   - icon: ':x:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,7 +45,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2159.test.cpp
     title: test/aoj/2159.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2201.test.cpp
     title: test/aoj/2201.test.cpp
   - icon: ':heavy_check_mark:'
@@ -60,7 +60,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2442.test.cpp
     title: test/aoj/2442.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
   - icon: ':heavy_check_mark:'
@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2972.test.cpp
     title: test/aoj/2972.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3034.test.cpp
     title: test/aoj/3034.test.cpp
   - icon: ':heavy_check_mark:'
@@ -163,7 +163,7 @@ data:
     /**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
     \n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\n\
     int sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1\
-    \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = acos(-1.0);\nReal radian_to_degree(Real\
+    \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
     \ r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real d) { return (d *\
     \ PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK\
     \ = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1,\
@@ -385,8 +385,8 @@ data:
     \u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\n */\n\n// BEGIN CUT HERE\n\nnamespace\
     \ geometry {\n\nusing Real = long double;\nint sgn(Real x) {\n  static constexpr\
     \ Real EPS = 1e-8;\n  return x < -EPS ? -1 : x > +EPS ? 1 : 0;\n}\nconst Real\
-    \ PI = acos(-1.0);\nReal radian_to_degree(Real r) { return (r * 180.0 / PI); }\n\
-    Real degree_to_radian(Real d) { return (d * PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE\
+    \ PI = std::acos(-1.0);\nReal radian_to_degree(Real r) { return (r * 180.0 / PI);\
+    \ }\nReal degree_to_radian(Real d) { return (d * PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE\
     \ = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT\
     \ = 0\n};\nenum { ON = 0, LEFT = +1, RIGHT = -1, IN = +2, OUT = -2 };\nenum {\
     \ DISJOINT = 0, TOUCH = 1, CROSSING = 2, OVERLAP = 3 };\n//-----------------------------------------------------------------------------\n\
@@ -609,7 +609,7 @@ data:
   - src/Geometry/closest_pair.hpp
   - src/Geometry/circle_functions.hpp
   - src/Geometry/arg_sort.hpp
-  timestamp: '2020-10-24 01:18:43+09:00'
+  timestamp: '2020-10-24 12:08:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2972.test.cpp

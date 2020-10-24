@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Geometry/circle_functions.hpp
     title: "\u5186\u306E\u3042\u308C\u3053\u308C"
   _extendedRequiredBy: []
@@ -22,7 +22,7 @@ data:
     \n/**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
     \n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\n\
     int sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1\
-    \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = acos(-1.0);\nReal radian_to_degree(Real\
+    \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
     \ r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real d) { return (d *\
     \ PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK\
     \ = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1,\
@@ -295,10 +295,10 @@ data:
     \ = qs[i];\n            }\n          }\n          for (int i = 0; i < 4; ++i)\
     \ {\n            for (int j = i + 1; j < 4; ++j)\n              if (pss[i].size()\
     \ < pss[j].size())\n                std::swap(pss[i], pss[j]), std::swap(qs[i],\
-    \ qs[j]);\n            if (pss[i].size() <= best) break;\n            rec(qs[i],\
+    \ qs[j]);\n            if ((int)pss[i].size() <= best) break;\n            rec(qs[i],\
     \ w, pss[i]);\n          }\n        };\n  Real w = 0;\n  for (Point p : ps) w\
-    \ = std::max({w, abs(p.x), abs(p.y)});\n  rec({0, 0}, w, ps);\n  return {best,\
-    \ best_p};\n}\n\n}  // namespace geometry\n#line 7 \"test/aoj/CGL_7_H.test.cpp\"\
+    \ = std::max({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n  return\
+    \ {best, best_p};\n}\n\n}  // namespace geometry\n#line 7 \"test/aoj/CGL_7_H.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using namespace geometry;\n  Circle c;\n  int n;\n  cin >> n >> c.r;\n  c.o\
     \ = {0, 0};\n  Polygon g(n);\n  for (int i = 0; i < n; i++) cin >> g[i];\n  cout\
@@ -317,7 +317,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_7_H.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 01:18:43+09:00'
+  timestamp: '2020-10-24 12:08:04+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_H.test.cpp
