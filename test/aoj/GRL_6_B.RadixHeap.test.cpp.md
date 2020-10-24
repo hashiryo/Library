@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: src/DataStructure/RadixHeap.hpp
     title: Radix-Heap
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/MinCostFlow.hpp
     title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
@@ -104,7 +104,7 @@ data:
     \ && deficit_vs.empty()) {\n      return {true, value / obj};\n    } else {\n\
     \      return {false, value / obj};\n    }\n  }\n  std::pair<bool, cost_t> st_flow_run(const\
     \ int s, const int t, flow_t flow) {\n    add_supply(s, flow);\n    add_demand(t,\
-    \ flow);\n    return flow_run();\n  }\n  tuple<bool, cost_t, flow_t> max_flow_run(const\
+    \ flow);\n    return flow_run();\n  }\n  std::tuple<bool, cost_t, flow_t> max_flow_run(const\
     \ int s, const int t) {\n    assert(s != t);\n    flow_t inf_flow = abs(b[s]);\n\
     \    for (const auto &e : adj[s])\n      inf_flow += std::max(e.cap, static_cast<flow_t>(0));\n\
     \    add_edge(t, s, 0, inf_flow, 0);\n    bool status;\n    cost_t circulation_value;\n\
@@ -206,7 +206,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_B.RadixHeap.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:22:56+09:00'
+  timestamp: '2020-10-24 17:49:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_B.RadixHeap.test.cpp

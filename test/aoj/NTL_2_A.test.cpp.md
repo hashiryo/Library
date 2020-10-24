@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A
@@ -53,7 +53,7 @@ data:
     \  for (int i = 0; i < (cyclic ? size : s); i++) A[i] *= inv;\n}\n\ntemplate <typename\
     \ mod_t>\nvoid rev_permute(mod_t *A, int n) {\n  int r = 0, nh = n >> 1;\n  for\
     \ (int i = 1; i < n; i++) {\n    int h = nh;\n    while (!((r ^= h) & h)) h >>=\
-    \ 1;\n    if (r > i) srd::swap(A[i], A[r]);\n  }\n}\n\ntemplate <typename mod_t>\n\
+    \ 1;\n    if (r > i) std::swap(A[i], A[r]);\n  }\n}\n\ntemplate <typename mod_t>\n\
     void ntt_dit4(mod_t *A, int n, int sign, mod_t *roots) {\n  rev_permute(A, n);\n\
     \  int logn = __builtin_ctz(n);\n  if (logn & 1)\n    for (int i = 0; i < n; i\
     \ += 2) {\n      mod_t a = A[i], b = A[i + 1];\n      A[i] = a + b, A[i + 1] =\
@@ -142,20 +142,20 @@ data:
     \  }\n    q.minus = a1.minus ^ b1.minus;\n    r.minus = a1.minus;\n    q.shrink(),\
     \ r.shrink();\n    return std::make_pair(q, r / norm);\n  }\n  BigInt quo(const\
     \ BigInt &b) const {\n    std::size_t preci = dat.size() - b.dat.size();\n   \
-    \ BigInt t(1);\n    BigInt pre;\n    std::size_t lim = min(int(preci), 3);\n \
-    \   std::size_t blim = min(int(b.dat.size()), 6);\n    t = t << lim;\n    while\
-    \ (pre != t) {\n      BigInt rb = b >> (b.dat.size() - blim);\n      if (blim\
-    \ != b.dat.size()) rb += BigInt(1);\n      pre = t;\n      t *= (BigInt(2) <<\
-    \ (blim + lim)) - rb * t;\n      t.dat\n          = std::vector<std::int64_t>(t.dat.begin()\
+    \ BigInt t(1);\n    BigInt pre;\n    std::size_t lim = std::min(int(preci), 3);\n\
+    \    std::size_t blim = std::min(int(b.dat.size()), 6);\n    t = t << lim;\n \
+    \   while (pre != t) {\n      BigInt rb = b >> (b.dat.size() - blim);\n      if\
+    \ (blim != b.dat.size()) rb += BigInt(1);\n      pre = t;\n      t *= (BigInt(2)\
+    \ << (blim + lim)) - rb * t;\n      t.dat\n          = std::vector<std::int64_t>(t.dat.begin()\
     \ + lim + blim, t.dat.end());\n    }\n    if (lim != preci) {\n      pre = BigInt();\n\
     \      while (pre != t) {\n        BigInt rb = b >> (b.dat.size() - blim);\n \
     \       if (blim != b.dat.size()) rb += BigInt({1});\n        pre = t;\n     \
     \   t *= (BigInt(2) << (blim + lim)) - rb * t;\n        t.dat = std::vector<std::int64_t>(t.dat.begin()\
     \ + lim + blim,\n                                          t.dat.end());\n   \
-    \     std::size_t next_lim = min(lim * 2 + 1, preci);\n        if (next_lim !=\
-    \ lim) t = t << next_lim - lim;\n        std::size_t next_blim = min(blim * 2\
-    \ + 1, b.dat.size());\n        lim = next_lim;\n        blim = next_blim;\n  \
-    \    }\n    }\n    BigInt ret = this->abs() * t;\n    ret.dat = std::vector<std::int64_t>(ret.dat.begin()\
+    \     std::size_t next_lim = std::min(lim * 2 + 1, preci);\n        if (next_lim\
+    \ != lim) t = t << next_lim - lim;\n        std::size_t next_blim = std::min(blim\
+    \ * 2 + 1, b.dat.size());\n        lim = next_lim;\n        blim = next_blim;\n\
+    \      }\n    }\n    BigInt ret = this->abs() * t;\n    ret.dat = std::vector<std::int64_t>(ret.dat.begin()\
     \ + dat.size(),\n                                        ret.dat.end());\n   \
     \ while ((ret + BigInt(1)) * b <= this->abs()) ret += BigInt(1);\n    ret.minus\
     \ = this->minus ^ b.minus;\n    ret.shrink();\n    return ret;\n  }\n\n public:\n\
@@ -221,8 +221,8 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_A.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:22:56+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-24 17:49:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_A.test.cpp
 layout: document

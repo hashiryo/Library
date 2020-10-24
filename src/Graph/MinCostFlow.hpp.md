@@ -6,17 +6,17 @@ data:
   - icon: ':x:'
     path: test/aoj/GRL_6_B.RadixHeap.test.cpp
     title: test/aoj/GRL_6_B.RadixHeap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_B.test.cpp
     title: test/aoj/GRL_6_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
   - icon: ':x:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
     links:
@@ -110,7 +110,7 @@ data:
     \ && deficit_vs.empty()) {\n      return {true, value / obj};\n    } else {\n\
     \      return {false, value / obj};\n    }\n  }\n  std::pair<bool, cost_t> st_flow_run(const\
     \ int s, const int t, flow_t flow) {\n    add_supply(s, flow);\n    add_demand(t,\
-    \ flow);\n    return flow_run();\n  }\n  tuple<bool, cost_t, flow_t> max_flow_run(const\
+    \ flow);\n    return flow_run();\n  }\n  std::tuple<bool, cost_t, flow_t> max_flow_run(const\
     \ int s, const int t) {\n    assert(s != t);\n    flow_t inf_flow = abs(b[s]);\n\
     \    for (const auto &e : adj[s])\n      inf_flow += std::max(e.cap, static_cast<flow_t>(0));\n\
     \    add_edge(t, s, 0, inf_flow, 0);\n    bool status;\n    cost_t circulation_value;\n\
@@ -218,7 +218,7 @@ data:
     \ && deficit_vs.empty()) {\n      return {true, value / obj};\n    } else {\n\
     \      return {false, value / obj};\n    }\n  }\n  std::pair<bool, cost_t> st_flow_run(const\
     \ int s, const int t, flow_t flow) {\n    add_supply(s, flow);\n    add_demand(t,\
-    \ flow);\n    return flow_run();\n  }\n  tuple<bool, cost_t, flow_t> max_flow_run(const\
+    \ flow);\n    return flow_run();\n  }\n  std::tuple<bool, cost_t, flow_t> max_flow_run(const\
     \ int s, const int t) {\n    assert(s != t);\n    flow_t inf_flow = abs(b[s]);\n\
     \    for (const auto &e : adj[s])\n      inf_flow += std::max(e.cap, static_cast<flow_t>(0));\n\
     \    add_edge(t, s, 0, inf_flow, 0);\n    bool status;\n    cost_t circulation_value;\n\
@@ -244,8 +244,8 @@ data:
   isVerificationFile: false
   path: src/Graph/MinCostFlow.hpp
   requiredBy: []
-  timestamp: '2020-10-24 17:22:56+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 17:49:23+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/GRL_6_B.test.cpp
   - test/aoj/GRL_6_B.RadixHeap.test.cpp

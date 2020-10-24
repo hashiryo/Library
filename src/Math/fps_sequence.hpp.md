@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
   - icon: ':x:'
@@ -292,7 +292,7 @@ data:
     \ cpw = 1;\n    for (int i = 0; i < n; f *= ++i) ret[n - i - 1] = (*this)[i] *\
     \ f;\n    f = mint(n) / f;\n    for (int i = n; i > 0; i--) p[i - 1] = i == n\
     \ ? f : p[i] * i;\n    for (int i = 0; i < n; i++, cpw *= c) p[i] *= cpw;\n  \
-    \  p *= ret;\n    std::reverse_copy(p.begin(), p.begin() + n, ret.begin());\n\
+    \  p *= ret, p.resize(n);\n    std::reverse_copy(p.begin(), p.begin() + n, ret.begin());\n\
     \    for (int i = n - 1; i >= 2; f *= i--) ret[i] *= f;\n    return ret;\n  }\n\
     \  FPS comp(const FPS &g) const {\n    int n = this->size(), k = std::sqrt(1.\
     \ * n);\n    if (k * k < n) k++;\n    int d = (n - 1 + k) / k;\n    std::vector<FPS>\
@@ -371,7 +371,7 @@ data:
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-10-24 14:33:30+09:00'
+  timestamp: '2020-10-24 17:49:23+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/bernoulli.test.cpp

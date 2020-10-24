@@ -30,10 +30,10 @@ data:
     \ = nullptr;\n    for (int i = 0; i < v.size(); i++) reference_get(i, true) =\
     \ v[i];\n  }\n\n private:\n  T get(Node *t, int k) const {\n    if (!t) return\
     \ T();\n    if (k == 0) return t->data;\n    return get(t->child[k & ((1 << LOG)\
-    \ - 1)], k >> LOG);\n  }\n  pair<Node *, T &> reference_get(Node *t, int k, bool\
-    \ destruct = false) {\n    t = t ? (destruct ? t : new Node(*t)) : new Node();\n\
-    \    if (k == 0) return {t, t->data};\n    auto p = reference_get(t->child[k &\
-    \ ((1 << LOG) - 1)], k >> LOG, destruct);\n    t->child[k & ((1 << LOG) - 1)]\
+    \ - 1)], k >> LOG);\n  }\n  std::pair<Node *, T &> reference_get(Node *t, int\
+    \ k, bool destruct = false) {\n    t = t ? (destruct ? t : new Node(*t)) : new\
+    \ Node();\n    if (k == 0) return {t, t->data};\n    auto p = reference_get(t->child[k\
+    \ & ((1 << LOG) - 1)], k >> LOG, destruct);\n    t->child[k & ((1 << LOG) - 1)]\
     \ = p.first;\n    return {t, p.second};\n  }\n  T &reference_get(const int &k,\
     \ bool destruct = false) {\n    auto ret = reference_get(root, k, destruct);\n\
     \    root = ret.first;\n    return ret.second;\n  }\n};\n#line 4 \"src/DataStructure/UnionFind_Persistent.hpp\"\
@@ -67,7 +67,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/persistent_unionfind.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 12:39:10+09:00'
+  timestamp: '2020-10-24 17:49:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/persistent_unionfind.test.cpp

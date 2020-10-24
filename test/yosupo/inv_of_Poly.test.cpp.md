@@ -7,13 +7,13 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/exgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
@@ -279,7 +279,7 @@ data:
     \ cpw = 1;\n    for (int i = 0; i < n; f *= ++i) ret[n - i - 1] = (*this)[i] *\
     \ f;\n    f = mint(n) / f;\n    for (int i = n; i > 0; i--) p[i - 1] = i == n\
     \ ? f : p[i] * i;\n    for (int i = 0; i < n; i++, cpw *= c) p[i] *= cpw;\n  \
-    \  p *= ret;\n    std::reverse_copy(p.begin(), p.begin() + n, ret.begin());\n\
+    \  p *= ret, p.resize(n);\n    std::reverse_copy(p.begin(), p.begin() + n, ret.begin());\n\
     \    for (int i = n - 1; i >= 2; f *= i--) ret[i] *= f;\n    return ret;\n  }\n\
     \  FPS comp(const FPS &g) const {\n    int n = this->size(), k = std::sqrt(1.\
     \ * n);\n    if (k * k < n) k++;\n    int d = (n - 1 + k) / k;\n    std::vector<FPS>\
@@ -375,8 +375,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:01:59+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-24 17:49:23+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
 layout: document
