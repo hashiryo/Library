@@ -5,7 +5,7 @@ data:
   - icon: ':question:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningTree_Kruskal.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
   _extendedVerifiedWith:
@@ -18,13 +18,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_1_A.test.cpp
     title: test/aoj/DSL_1_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_A.kruskal.test.cpp
     title: test/aoj/GRL_2_A.kruskal.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
   - icon: ':x:'

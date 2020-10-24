@@ -7,7 +7,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
@@ -240,22 +240,22 @@ data:
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using namespace geometry;\n  Point p;\n  cin >> p;\n  Circle c;\n  cin >> c.o\
     \ >> c.r;\n  auto ls = c.tangent(p);\n  Point p1 = ls[0].p2, p2 = ls[1].p2;\n\
-    \  if (p2 < p1) swap(p1, p2);\n  cout << fixed << setprecision(12) << p1 << \"\
-    \ \" << p2 << endl;\n  return 0;\n}\n"
+    \  if (p2 < p1) swap(p1, p2);\n  cout << fixed << setprecision(12) << p1 << '\\\
+    n' << p2 << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_F\"\
     \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using namespace geometry;\n  Point p;\n  cin >> p;\n  Circle c;\n  cin >> c.o\
     \ >> c.r;\n  auto ls = c.tangent(p);\n  Point p1 = ls[0].p2, p2 = ls[1].p2;\n\
-    \  if (p2 < p1) swap(p1, p2);\n  cout << fixed << setprecision(12) << p1 << \"\
-    \ \" << p2 << endl;\n  return 0;\n}"
+    \  if (p2 < p1) swap(p1, p2);\n  cout << fixed << setprecision(12) << p1 << '\\\
+    n' << p2 << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   isVerificationFile: true
   path: test/aoj/CGL_7_F.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 12:08:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-24 15:09:02+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_F.test.cpp
 layout: document

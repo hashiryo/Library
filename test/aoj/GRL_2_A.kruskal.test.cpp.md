@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningTree_Kruskal.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A
@@ -63,7 +63,7 @@ data:
   path: test/aoj/GRL_2_A.kruskal.test.cpp
   requiredBy: []
   timestamp: '2020-10-24 12:39:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_2_A.kruskal.test.cpp
 layout: document

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/circle_functions.hpp
     title: "\u5186\u306E\u3042\u308C\u3053\u308C"
   _extendedRequiredBy: []
@@ -276,7 +276,7 @@ data:
     \ c); }\n\nCircle min_enclosing_circle(std::vector<Point> ps) {\n  assert(ps.size());\n\
     \  if (ps.size() == 1) return {ps[0], 0.};\n  std::random_device seed_gen;\n \
     \ std::mt19937 mt(seed_gen());\n  std::shuffle(ps.begin(), ps.end(), mt);\n  Circle\
-    \ c = {(ps[0] + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n  for (int i = 2; i < ps.size();\
+    \ c = {(ps[0] + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n  for (int i = 2; i < (int)ps.size();\
     \ i++)\n    if (c.where(ps[i]) == OUT) {\n      c = {(ps[0] + ps[i]) / 2, dist(ps[0],\
     \ ps[i]) / 2};\n      for (int j = 1; j < i; j++)\n        if (c.where(ps[j])\
     \ == OUT) {\n          c = {(ps[i] + ps[j]) / 2, dist(ps[i], ps[j]) / 2};\n  \
@@ -316,7 +316,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_7_B.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 12:39:10+09:00'
+  timestamp: '2020-10-24 15:09:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_B.test.cpp

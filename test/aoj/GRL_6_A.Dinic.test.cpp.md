@@ -24,25 +24,25 @@ data:
     \u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41 https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
     \n// BEGIN CUT HERE\n\ntemplate <typename flow_t>\nstruct MaxFlow_Dinic {\n private:\n\
     \  struct Edge {\n    int dst;\n    flow_t cap;\n    int rev;\n    bool isrev;\n\
-    \  };\n\n private:\n  static constexpr flow_t FLOW_MAX = numeric_limits<flow_t>::max()\
+    \  };\n\n private:\n  static constexpr flow_t FLOW_MAX = std::numeric_limits<flow_t>::max()\
     \ / 2;\n  int n;\n  std::vector<std::vector<Edge>> adj;\n  std::vector<int> level,\
     \ iter;\n\n private:\n  int levelize(const int &s, const int &t) {\n    level.assign(n,\
-    \ -1);\n    level[s] = 0;\n    queue<int> que;\n    que.push(s);\n    while (!que.empty())\
-    \ {\n      int u = que.front();\n      que.pop();\n      if (u == t) break;\n\
-    \      for (auto &e : adj[u]) {\n        if (e.cap > 0 && level[e.dst] < 0) {\n\
-    \          que.push(e.dst);\n          level[e.dst] = level[u] + 1;\n        }\n\
-    \      }\n    }\n    return level[t];\n  }\n  flow_t dfs(int u, const int &t,\
-    \ flow_t cur) {\n    if (u == t) return cur;\n    for (int &i = iter[u]; i < adj[u].size();\
-    \ ++i) {\n      Edge &e = adj[u][i], &r = adj[e.dst][e.rev];\n      if (e.cap\
-    \ > 0 && level[u] < level[e.dst]) {\n        flow_t f = dfs(e.dst, t, min(cur,\
-    \ e.cap));\n        if (f > 0) {\n          e.cap -= f;\n          r.cap += f;\n\
-    \          return f;\n        }\n      }\n    }\n    return flow_t(0);\n  }\n\
-    \  flow_t flow(int s, int t) {\n    if (levelize(s, t) < 0) return 0;\n    iter.assign(adj.size(),\
-    \ 0);\n    return dfs(s, t, 1);\n  }\n\n public:\n  MaxFlow_Dinic() : n(0) {}\n\
-    \  int add_vertex() {\n    adj.resize(++n);\n    return n - 1;\n  }\n  std::vector<int>\
-    \ add_vertices(const int size) {\n    std::vector<int> ret(size);\n    iota(begin(ret),\
-    \ end(ret), n);\n    n += size;\n    adj.resize(n);\n    return ret;\n  }\n  void\
-    \ add_edge(int src, int dst, flow_t cap) {\n    adj[src].emplace_back((Edge){dst,\
+    \ -1);\n    level[s] = 0;\n    std::queue<int> que;\n    que.push(s);\n    while\
+    \ (!que.empty()) {\n      int u = que.front();\n      que.pop();\n      if (u\
+    \ == t) break;\n      for (auto &e : adj[u]) {\n        if (e.cap > 0 && level[e.dst]\
+    \ < 0) {\n          que.push(e.dst);\n          level[e.dst] = level[u] + 1;\n\
+    \        }\n      }\n    }\n    return level[t];\n  }\n  flow_t dfs(int u, const\
+    \ int &t, flow_t cur) {\n    if (u == t) return cur;\n    for (int &i = iter[u];\
+    \ i < adj[u].size(); ++i) {\n      Edge &e = adj[u][i], &r = adj[e.dst][e.rev];\n\
+    \      if (e.cap > 0 && level[u] < level[e.dst]) {\n        flow_t f = dfs(e.dst,\
+    \ t, min(cur, e.cap));\n        if (f > 0) {\n          e.cap -= f;\n        \
+    \  r.cap += f;\n          return f;\n        }\n      }\n    }\n    return flow_t(0);\n\
+    \  }\n  flow_t flow(int s, int t) {\n    if (levelize(s, t) < 0) return 0;\n \
+    \   iter.assign(adj.size(), 0);\n    return dfs(s, t, 1);\n  }\n\n public:\n \
+    \ MaxFlow_Dinic() : n(0) {}\n  int add_vertex() {\n    adj.resize(++n);\n    return\
+    \ n - 1;\n  }\n  std::vector<int> add_vertices(const int size) {\n    std::vector<int>\
+    \ ret(size);\n    std::iota(ret.begin(), ret.end(), n);\n    n += size;\n    adj.resize(n);\n\
+    \    return ret;\n  }\n  void add_edge(int src, int dst, flow_t cap) {\n    adj[src].emplace_back((Edge){dst,\
     \ cap, (int)adj[dst].size(), 0});\n    adj[dst].emplace_back((Edge){src, 0, (int)adj[src].size()\
     \ - 1, 1});\n  }\n  flow_t max_flow(int s, int t, flow_t lim = FLOW_MAX) {\n \
     \   flow_t flow = 0;\n    while (levelize(s, t) >= 0) {\n      iter.assign(n,\
@@ -57,14 +57,14 @@ data:
     \ -= 1;\n        } else {\n          e.cap -= 1;\n        }\n        return diff;\n\
     \      }\n    assert(false);  // no edge\n  }\n  void output() {\n    for (int\
     \ i = 0; i < adj.size(); i++) {\n      for (auto &e : adj[i]) {\n        if (e.isrev)\
-    \ continue;\n        auto &rev_e = adj[e.dst][e.rev];\n        cerr << i << \"\
-    ->\" << e.dst << \" (flow: \" << rev_e.cap << \"/\"\n             << e.cap + rev_e.cap\
-    \ << \")\" << endl;\n      }\n    }\n  }\n};\n#line 5 \"test/aoj/GRL_6_A.Dinic.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, M;\n  cin >> N >> M;\n  MaxFlow_Dinic<long long> graph;\n  graph.add_vertices(N);\n\
-    \  for (int i = 0; i < M; i++) {\n    int u, v;\n    long long c;\n    cin >>\
-    \ u >> v >> c;\n    graph.add_edge(u, v, c);\n  }\n  cout << graph.max_flow(0,\
-    \ N - 1) << endl;\n  return 0;\n}\n"
+    \ continue;\n        auto &rev_e = adj[e.dst][e.rev];\n        std::cerr << i\
+    \ << \"->\" << e.dst << \" (flow: \" << rev_e.cap << \"/\"\n                 \
+    \ << e.cap + rev_e.cap << \")\" << '\\n';\n      }\n    }\n  }\n};\n#line 5 \"\
+    test/aoj/GRL_6_A.Dinic.test.cpp\"\nusing namespace std;\n\nsigned main() {\n \
+    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin >> N >> M;\n  MaxFlow_Dinic<long\
+    \ long> graph;\n  graph.add_vertices(N);\n  for (int i = 0; i < M; i++) {\n  \
+    \  int u, v;\n    long long c;\n    cin >> u >> v >> c;\n    graph.add_edge(u,\
+    \ v, c);\n  }\n  cout << graph.max_flow(0, N - 1) << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\
     \n#include <bits/stdc++.h>\n#include \"src/Graph/MaxFlow_Dinic.hpp\"\nusing namespace\
     \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N,\
@@ -77,7 +77,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_A.Dinic.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 15:09:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_A.Dinic.test.cpp

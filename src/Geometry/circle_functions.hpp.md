@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2201.test.cpp
     title: test/aoj/2201.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2423.test.cpp
     title: test/aoj/2423.test.cpp
   - icon: ':heavy_check_mark:'
@@ -40,7 +40,7 @@ data:
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5186\u306E\u3042\u308C\u3053\u308C"
     links: []
@@ -302,7 +302,7 @@ data:
     \ c); }\n\nCircle min_enclosing_circle(std::vector<Point> ps) {\n  assert(ps.size());\n\
     \  if (ps.size() == 1) return {ps[0], 0.};\n  std::random_device seed_gen;\n \
     \ std::mt19937 mt(seed_gen());\n  std::shuffle(ps.begin(), ps.end(), mt);\n  Circle\
-    \ c = {(ps[0] + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n  for (int i = 2; i < ps.size();\
+    \ c = {(ps[0] + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n  for (int i = 2; i < (int)ps.size();\
     \ i++)\n    if (c.where(ps[i]) == OUT) {\n      c = {(ps[0] + ps[i]) / 2, dist(ps[0],\
     \ ps[i]) / 2};\n      for (int j = 1; j < i; j++)\n        if (c.where(ps[j])\
     \ == OUT) {\n          c = {(ps[i] + ps[j]) / 2, dist(ps[i], ps[j]) / 2};\n  \
@@ -362,7 +362,7 @@ data:
     \ c); }\n\nCircle min_enclosing_circle(std::vector<Point> ps) {\n  assert(ps.size());\n\
     \  if (ps.size() == 1) return {ps[0], 0.};\n  std::random_device seed_gen;\n \
     \ std::mt19937 mt(seed_gen());\n  std::shuffle(ps.begin(), ps.end(), mt);\n  Circle\
-    \ c = {(ps[0] + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n  for (int i = 2; i < ps.size();\
+    \ c = {(ps[0] + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n  for (int i = 2; i < (int)ps.size();\
     \ i++)\n    if (c.where(ps[i]) == OUT) {\n      c = {(ps[0] + ps[i]) / 2, dist(ps[0],\
     \ ps[i]) / 2};\n      for (int j = 1; j < i; j++)\n        if (c.where(ps[j])\
     \ == OUT) {\n          c = {(ps[i] + ps[j]) / 2, dist(ps[i], ps[j]) / 2};\n  \
@@ -390,8 +390,8 @@ data:
   isVerificationFile: false
   path: src/Geometry/circle_functions.hpp
   requiredBy: []
-  timestamp: '2020-10-24 12:39:10+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2020-10-24 15:09:02+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2201.test.cpp
   - test/aoj/CGL_7_B.test.cpp

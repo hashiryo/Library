@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_A.SegTree.test.cpp
     title: test/aoj/DSL_2_A.SegTree.test.cpp
   - icon: ':x:'
@@ -13,7 +13,7 @@ data:
     path: test/yukicoder/649.SegTree.test.cpp
     title: test/yukicoder/649.SegTree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Segment-Tree
     links:
@@ -104,7 +104,7 @@ data:
   path: src/DataStructure/SegmentTree.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/649.SegTree.test.cpp
   - test/aoj/DSL_2_A.SegTree.test.cpp

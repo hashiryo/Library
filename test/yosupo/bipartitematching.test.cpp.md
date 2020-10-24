@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/MatchingBipartite.hpp
     title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E8C\u90E8\u30B0\u30E9\u30D5\
       )"
@@ -37,24 +37,25 @@ data:
     \  if (lmate[i] == -1) que.push(rt[i] = i);\n      while (!que.empty()) {\n  \
     \      int v = que.front();\n        que.pop();\n        if (lmate[rt[v]] != -1)\
     \ continue;\n        for (int u : adj[v]) {\n          if (rmate[u] == -1) {\n\
-    \            for (; u != -1; v = pre[v]) rmate[u] = v, swap(lmate[v], u);\n  \
-    \          update = true;\n            res++;\n            break;\n          }\n\
-    \          u = rmate[u];\n          if (pre[u] != -1) continue;\n          rt[u]\
-    \ = rt[pre[u] = v];\n          que.push(u);\n        }\n      }\n      if (update)\n\
-    \        std::fill(pre.begin(), pre.end(), -1), fill(rt.begin(), rt.end(), -1);\n\
-    \    }\n    return std::make_pair(res, std::make_pair(lmate, rmate));\n  }\n \
-    \ std::pair<int, std::pair<std::vector<int>, std::vector<int>>>\n  lexicographically_matching()\
-    \ {\n    int res = get_matching().first;\n    int tstamp = -2;\n    for (int i\
-    \ = 0; i < (int)adj.size(); i++) {\n      if (lmate[i] != -1) {\n        rmate[lmate[i]]\
-    \ = -1;\n        lmate[i] = -1;\n        dfs(i, --tstamp);\n        rt[i] = -2;\n\
-    \      }\n    }\n    return std::make_pair(res, std::make_pair(lmate, rmate));\n\
-    \  }\n};\n#line 4 \"test/yosupo/bipartitematching.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int L,\
-    \ R, M;\n  cin >> L >> R >> M;\n  MatchingBipartite graph(L, R);\n  while (M--)\
-    \ {\n    int a, b;\n    cin >> a >> b;\n    graph.add_edge(a, b);\n  }\n  auto\
-    \ ans = graph.get_matching();\n  auto left = ans.second.first;\n  cout << ans.first\
-    \ << endl;\n  for (int i = 0; i < left.size(); i++)\n    if (left[i] != -1) {\n\
-    \      cout << i << \" \" << left[i] << endl;\n    }\n  return 0;\n}\n"
+    \            for (; u != -1; v = pre[v]) rmate[u] = v, std::swap(lmate[v], u);\n\
+    \            update = true;\n            res++;\n            break;\n        \
+    \  }\n          u = rmate[u];\n          if (pre[u] != -1) continue;\n       \
+    \   rt[u] = rt[pre[u] = v];\n          que.push(u);\n        }\n      }\n    \
+    \  if (update)\n        std::fill(pre.begin(), pre.end(), -1), fill(rt.begin(),\
+    \ rt.end(), -1);\n    }\n    return std::make_pair(res, std::make_pair(lmate,\
+    \ rmate));\n  }\n  std::pair<int, std::pair<std::vector<int>, std::vector<int>>>\n\
+    \  lexicographically_matching() {\n    int res = get_matching().first;\n    int\
+    \ tstamp = -2;\n    for (int i = 0; i < (int)adj.size(); i++) {\n      if (lmate[i]\
+    \ != -1) {\n        rmate[lmate[i]] = -1;\n        lmate[i] = -1;\n        dfs(i,\
+    \ --tstamp);\n        rt[i] = -2;\n      }\n    }\n    return std::make_pair(res,\
+    \ std::make_pair(lmate, rmate));\n  }\n};\n#line 4 \"test/yosupo/bipartitematching.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int L, R, M;\n  cin >> L >> R >> M;\n  MatchingBipartite graph(L, R);\n  while\
+    \ (M--) {\n    int a, b;\n    cin >> a >> b;\n    graph.add_edge(a, b);\n  }\n\
+    \  auto ans = graph.get_matching();\n  auto left = ans.second.first;\n  cout <<\
+    \ ans.first << endl;\n  for (int i = 0; i < left.size(); i++)\n    if (left[i]\
+    \ != -1) {\n      cout << i << \" \" << left[i] << endl;\n    }\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Graph/MatchingBipartite.hpp\"\nusing namespace\
     \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int L,\
@@ -68,7 +69,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 14:33:30+09:00'
+  timestamp: '2020-10-24 15:09:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.test.cpp
