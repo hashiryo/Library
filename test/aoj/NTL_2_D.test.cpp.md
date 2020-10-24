@@ -72,134 +72,137 @@ data:
     \  w *= dw, w2 = w * w, w3 = w2 * w;\n      }\n    }\n  }\n}\n\nconst int size\
     \ = 1 << 22;\nModB ff[size], gg[size];\n}  // namespace ntt\n\nstruct BigInt {\n\
     \  constexpr static std::int64_t base = 1000000000, base_digits = 9;\n\n private:\n\
-    \  bool minus;\n  std::vector<int64_t> dat;\n\n public:\n  BigInt() : minus(false),\
-    \ dat() {}\n  BigInt(int64_t v) { *this = v; }\n  BigInt(const std::string &s)\
-    \ { read(s); }\n\n public:\n  void shrink() {\n    while (dat.size() && !dat.back())\
+    \  bool minus;\n  std::vector<std::int64_t> dat;\n\n public:\n  BigInt() : minus(false),\
+    \ dat() {}\n  BigInt(std::int64_t v) { *this = v; }\n  BigInt(const std::string\
+    \ &s) { read(s); }\n\n public:\n  void shrink() {\n    while (dat.size() && !dat.back())\
     \ dat.pop_back();\n    if (dat.empty()) minus = false;\n  }\n  void read(const\
     \ std::string &s) {\n    minus = false;\n    dat.clear();\n    std::int64_t pos\
-    \ = 0;\n    while (pos < (int64_t)s.size() && (s[pos] == '-' || s[pos] == '+'))\
-    \ {\n      if (s[pos] == '-') minus = !minus;\n      ++pos;\n    }\n    for (std::int64_t\
-    \ i = s.size() - 1; i >= pos; i -= base_digits) {\n      std::int64_t x = 0;\n\
-    \      for (std::int64_t j = std::max(pos, i - base_digits + 1); j <= i; j++)\n\
-    \        x = x * 10 + s[j] - '0';\n      dat.push_back(x);\n    }\n    shrink();\n\
-    \  }\n  std::string to_string() const {\n    std::stringstream ss;\n    if (minus)\
-    \ ss << '-';\n    ss << (dat.empty() ? 0 : dat.back());\n    for (int64_t i =\
-    \ (int64_t)dat.size() - 2; i >= 0; --i)\n      ss << std::setw(base_digits) <<\
-    \ std::setfill('0') << dat[i];\n    std::string ret;\n    ss >> ret;\n    return\
-    \ ret;\n  }\n  int convert_int() const { return stoi(this->to_string()); }\n \
-    \ long long convert_ll() const { return stoll(this->to_string()); }\n  BigInt\
-    \ &operator=(int64_t v) {\n    minus = false;\n    dat.clear();\n    if (v < 0)\
-    \ minus = true, v = -v;\n    for (; v > 0; v = v / base) dat.push_back(v % base);\n\
-    \    return *this;\n  }\n  bool is_zero() const { return dat.empty() || (dat.size()\
-    \ == 1 && !dat[0]); }\n  BigInt operator>>(std::size_t size) const {\n    if (dat.size()\
-    \ <= size) return {};\n    BigInt ret;\n    ret.dat = std::vector<int64_t>(dat.begin()\
+    \ = 0;\n    while (pos < (std::int64_t)s.size() && (s[pos] == '-' || s[pos] ==\
+    \ '+')) {\n      if (s[pos] == '-') minus = !minus;\n      ++pos;\n    }\n   \
+    \ for (std::int64_t i = s.size() - 1; i >= pos; i -= base_digits) {\n      std::int64_t\
+    \ x = 0;\n      for (std::int64_t j = std::max(pos, i - base_digits + 1); j <=\
+    \ i; j++)\n        x = x * 10 + s[j] - '0';\n      dat.push_back(x);\n    }\n\
+    \    shrink();\n  }\n  std::string to_string() const {\n    std::stringstream\
+    \ ss;\n    if (minus) ss << '-';\n    ss << (dat.empty() ? 0 : dat.back());\n\
+    \    for (std::int64_t i = (std::int64_t)dat.size() - 2; i >= 0; --i)\n      ss\
+    \ << std::setw(base_digits) << std::setfill('0') << dat[i];\n    std::string ret;\n\
+    \    ss >> ret;\n    return ret;\n  }\n  int convert_int() const { return stoi(this->to_string());\
+    \ }\n  long long convert_ll() const { return stoll(this->to_string()); }\n  BigInt\
+    \ &operator=(std::int64_t v) {\n    minus = false;\n    dat.clear();\n    if (v\
+    \ < 0) minus = true, v = -v;\n    for (; v > 0; v = v / base) dat.push_back(v\
+    \ % base);\n    return *this;\n  }\n  bool is_zero() const { return dat.empty()\
+    \ || (dat.size() == 1 && !dat[0]); }\n  BigInt operator>>(std::size_t size) const\
+    \ {\n    if (dat.size() <= size) return {};\n    BigInt ret;\n    ret.dat = std::vector<std::int64_t>(dat.begin()\
     \ + size, dat.end());\n    return ret;\n  }\n  BigInt operator<<(std::size_t size)\
     \ const {\n    BigInt ret(*this);\n    ret.dat.insert(ret.dat.begin(), size, 0);\n\
-    \    return ret;\n  }\n\n private:\n  static std::vector<int64_t> mul_n(const\
-    \ std::vector<int64_t> &f,\n                                    const std::vector<int64_t>\
-    \ &g) {\n    std::vector<int64_t> ret(f.size() + g.size() - 1, 0);\n    for (std::size_t\
-    \ i = 0; i < f.size(); i++)\n      for (std::size_t j = 0; j < g.size(); j++)\
-    \ ret[i + j] += f[i] * g[j];\n    return ret;\n  }\n  static void conv(const std::vector<int64_t>\
-    \ &f, const std::vector<int64_t> &g,\n                   bool cyclic = false)\
-    \ {\n    using namespace ntt;\n    for (int i = 0; i < (int)f.size(); i++) ff[i]\
-    \ = f[i];\n    if (&f == &g) {\n      convolute(ff, f.size(), ff, f.size(), cyclic);\n\
-    \    } else {\n      for (int i = 0; i < (int)g.size(); i++) gg[i] = g[i];\n \
-    \     convolute(ff, f.size(), gg, g.size(), cyclic);\n    }\n  }\n  static std::vector<int64_t>\
-    \ convert_base(const std::vector<int64_t> &a,\n                              \
-    \             std::int64_t old_digits,\n                                     \
-    \      std::int64_t new_digits) {\n    std::vector<int64_t> p(std::max(old_digits,\
-    \ new_digits) + 1);\n    p[0] = 1;\n    for (int64_t i = 1; i < (int64_t)p.size();\
-    \ i++) p[i] = p[i - 1] * 10;\n    std::vector<int64_t> res;\n    std::int64_t\
-    \ cur = 0;\n    std::int64_t cur_digits = 0;\n    for (int64_t i = 0; i < (int64_t)a.size();\
-    \ i++) {\n      cur += a[i] * p[cur_digits];\n      cur_digits += old_digits;\n\
-    \      while (cur_digits >= new_digits) {\n        res.push_back((cur % p[new_digits]));\n\
-    \        cur /= p[new_digits];\n        cur_digits -= new_digits;\n      }\n \
-    \   }\n    res.push_back(cur);\n    while (!res.empty() && !res.back()) res.pop_back();\n\
-    \    return res;\n  }\n  BigInt mul(const BigInt &v) const {\n    if (this->is_zero()\
-    \ || v.is_zero()) return BigInt();\n    constexpr static std::int64_t nbase =\
-    \ 10000, nbase_digits = 4;\n    std::vector<int64_t> f = convert_base(this->dat,\
-    \ base_digits, nbase_digits);\n    std::vector<int64_t> g = convert_base(v.dat,\
-    \ base_digits, nbase_digits);\n    while (f.size() < g.size()) f.push_back(0);\n\
-    \    while (g.size() < f.size()) g.push_back(0);\n    while (f.size() & (f.size()\
-    \ - 1)) f.push_back(0), g.push_back(0);\n    std::vector<int64_t> h;\n    if (f.size()\
-    \ + g.size() < 750 || f.size() < 8 || g.size() < 8) {\n      h = mul_n(f, g);\n\
-    \    } else {\n      using namespace ntt;\n      h.resize(f.size() + g.size()\
-    \ - 1);\n      conv(f, g, false);\n      for (std::size_t i = 0; i < h.size();\
-    \ i++) h[i] = ff[i].get();\n    }\n    BigInt res = 0;\n    res.minus = minus\
-    \ ^ v.minus;\n    for (int64_t i = 0, carry = 0; i < (int64_t)h.size(); i++) {\n\
-    \      std::int64_t cur = h[i] + carry;\n      res.dat.push_back((int64_t)(cur\
-    \ % nbase));\n      carry = (int64_t)(cur / nbase);\n      if (i + 1 == (int)h.size()\
+    \    return ret;\n  }\n\n private:\n  static std::vector<std::int64_t> mul_n(const\
+    \ std::vector<std::int64_t> &f,\n                                         const\
+    \ std::vector<std::int64_t> &g) {\n    std::vector<std::int64_t> ret(f.size()\
+    \ + g.size() - 1, 0);\n    for (std::size_t i = 0; i < f.size(); i++)\n      for\
+    \ (std::size_t j = 0; j < g.size(); j++) ret[i + j] += f[i] * g[j];\n    return\
+    \ ret;\n  }\n  static void conv(const std::vector<std::int64_t> &f,\n        \
+    \           const std::vector<std::int64_t> &g, bool cyclic = false) {\n    using\
+    \ namespace ntt;\n    for (int i = 0; i < (int)f.size(); i++) ff[i] = f[i];\n\
+    \    if (&f == &g) {\n      convolute(ff, f.size(), ff, f.size(), cyclic);\n \
+    \   } else {\n      for (int i = 0; i < (int)g.size(); i++) gg[i] = g[i];\n  \
+    \    convolute(ff, f.size(), gg, g.size(), cyclic);\n    }\n  }\n  static std::vector<std::int64_t>\
+    \ convert_base(\n      const std::vector<std::int64_t> &a, std::int64_t old_digits,\n\
+    \      std::int64_t new_digits) {\n    std::vector<std::int64_t> p(std::max(old_digits,\
+    \ new_digits) + 1);\n    p[0] = 1;\n    for (std::int64_t i = 1; i < (std::int64_t)p.size();\
+    \ i++)\n      p[i] = p[i - 1] * 10;\n    std::vector<std::int64_t> res;\n    std::int64_t\
+    \ cur = 0;\n    std::int64_t cur_digits = 0;\n    for (std::int64_t i = 0; i <\
+    \ (std::int64_t)a.size(); i++) {\n      cur += a[i] * p[cur_digits];\n      cur_digits\
+    \ += old_digits;\n      while (cur_digits >= new_digits) {\n        res.push_back((cur\
+    \ % p[new_digits]));\n        cur /= p[new_digits];\n        cur_digits -= new_digits;\n\
+    \      }\n    }\n    res.push_back(cur);\n    while (!res.empty() && !res.back())\
+    \ res.pop_back();\n    return res;\n  }\n  BigInt mul(const BigInt &v) const {\n\
+    \    if (this->is_zero() || v.is_zero()) return BigInt();\n    constexpr static\
+    \ std::int64_t nbase = 10000, nbase_digits = 4;\n    std::vector<std::int64_t>\
+    \ f\n        = convert_base(this->dat, base_digits, nbase_digits);\n    std::vector<std::int64_t>\
+    \ g\n        = convert_base(v.dat, base_digits, nbase_digits);\n    while (f.size()\
+    \ < g.size()) f.push_back(0);\n    while (g.size() < f.size()) g.push_back(0);\n\
+    \    while (f.size() & (f.size() - 1)) f.push_back(0), g.push_back(0);\n    std::vector<std::int64_t>\
+    \ h;\n    if (f.size() + g.size() < 750 || f.size() < 8 || g.size() < 8) {\n \
+    \     h = mul_n(f, g);\n    } else {\n      using namespace ntt;\n      h.resize(f.size()\
+    \ + g.size() - 1);\n      conv(f, g, false);\n      for (std::size_t i = 0; i\
+    \ < h.size(); i++) h[i] = ff[i].get();\n    }\n    BigInt res = 0;\n    res.minus\
+    \ = minus ^ v.minus;\n    for (std::int64_t i = 0, carry = 0; i < (std::int64_t)h.size();\
+    \ i++) {\n      std::int64_t cur = h[i] + carry;\n      res.dat.push_back((std::int64_t)(cur\
+    \ % nbase));\n      carry = (std::int64_t)(cur / nbase);\n      if (i + 1 == (int)h.size()\
     \ && carry > 0) h.push_back(0);\n    }\n    res.dat = convert_base(res.dat, nbase_digits,\
     \ base_digits);\n    res.shrink();\n    return res;\n  }\n  static std::pair<BigInt,\
     \ BigInt> divmod(const BigInt &a1, const BigInt &b1) {\n    std::int64_t norm\
     \ = base / (b1.dat.back() + 1);\n    BigInt a = a1.abs() * norm;\n    BigInt b\
     \ = b1.abs() * norm;\n    BigInt q, r;\n    q.dat.resize(a.dat.size());\n    for\
-    \ (int64_t i = a.dat.size() - 1; i >= 0; i--) {\n      r *= base;\n      r +=\
-    \ a.dat[i];\n      std::int64_t s1 = r.dat.size() <= b.dat.size() ? 0 : r.dat[b.dat.size()];\n\
+    \ (std::int64_t i = a.dat.size() - 1; i >= 0; i--) {\n      r *= base;\n     \
+    \ r += a.dat[i];\n      std::int64_t s1 = r.dat.size() <= b.dat.size() ? 0 : r.dat[b.dat.size()];\n\
     \      std::int64_t s2\n          = r.dat.size() <= b.dat.size() - 1 ? 0 : r.dat[b.dat.size()\
-    \ - 1];\n      std::int64_t d = ((int64_t)base * s1 + s2) / b.dat.back();\n  \
-    \    r -= b * d;\n      while (r < 0) r += b, --d;\n      q.dat[i] = d;\n    }\n\
-    \    q.minus = a1.minus ^ b1.minus;\n    r.minus = a1.minus;\n    q.shrink(),\
+    \ - 1];\n      std::int64_t d = ((std::int64_t)base * s1 + s2) / b.dat.back();\n\
+    \      r -= b * d;\n      while (r < 0) r += b, --d;\n      q.dat[i] = d;\n  \
+    \  }\n    q.minus = a1.minus ^ b1.minus;\n    r.minus = a1.minus;\n    q.shrink(),\
     \ r.shrink();\n    return std::make_pair(q, r / norm);\n  }\n  BigInt quo(const\
     \ BigInt &b) const {\n    std::size_t preci = dat.size() - b.dat.size();\n   \
     \ BigInt t(1);\n    BigInt pre;\n    std::size_t lim = min(int(preci), 3);\n \
     \   std::size_t blim = min(int(b.dat.size()), 6);\n    t = t << lim;\n    while\
     \ (pre != t) {\n      BigInt rb = b >> (b.dat.size() - blim);\n      if (blim\
     \ != b.dat.size()) rb += BigInt(1);\n      pre = t;\n      t *= (BigInt(2) <<\
-    \ (blim + lim)) - rb * t;\n      t.dat = std::vector<int64_t>(t.dat.begin() +\
-    \ lim + blim, t.dat.end());\n    }\n    if (lim != preci) {\n      pre = BigInt();\n\
+    \ (blim + lim)) - rb * t;\n      t.dat\n          = std::vector<std::int64_t>(t.dat.begin()\
+    \ + lim + blim, t.dat.end());\n    }\n    if (lim != preci) {\n      pre = BigInt();\n\
     \      while (pre != t) {\n        BigInt rb = b >> (b.dat.size() - blim);\n \
     \       if (blim != b.dat.size()) rb += BigInt({1});\n        pre = t;\n     \
-    \   t *= (BigInt(2) << (blim + lim)) - rb * t;\n        t.dat = std::vector<int64_t>(t.dat.begin()\
-    \ + lim + blim, t.dat.end());\n        std::size_t next_lim = min(lim * 2 + 1,\
-    \ preci);\n        if (next_lim != lim) t = t << next_lim - lim;\n        std::size_t\
-    \ next_blim = min(blim * 2 + 1, b.dat.size());\n        lim = next_lim;\n    \
-    \    blim = next_blim;\n      }\n    }\n    BigInt ret = this->abs() * t;\n  \
-    \  ret.dat = std::vector<int64_t>(ret.dat.begin() + dat.size(), ret.dat.end());\n\
-    \    while ((ret + BigInt(1)) * b <= this->abs()) ret += BigInt(1);\n    ret.minus\
+    \   t *= (BigInt(2) << (blim + lim)) - rb * t;\n        t.dat = std::vector<std::int64_t>(t.dat.begin()\
+    \ + lim + blim,\n                                          t.dat.end());\n   \
+    \     std::size_t next_lim = min(lim * 2 + 1, preci);\n        if (next_lim !=\
+    \ lim) t = t << next_lim - lim;\n        std::size_t next_blim = min(blim * 2\
+    \ + 1, b.dat.size());\n        lim = next_lim;\n        blim = next_blim;\n  \
+    \    }\n    }\n    BigInt ret = this->abs() * t;\n    ret.dat = std::vector<std::int64_t>(ret.dat.begin()\
+    \ + dat.size(),\n                                        ret.dat.end());\n   \
+    \ while ((ret + BigInt(1)) * b <= this->abs()) ret += BigInt(1);\n    ret.minus\
     \ = this->minus ^ b.minus;\n    ret.shrink();\n    return ret;\n  }\n\n public:\n\
     \  bool operator<(const BigInt &v) const {\n    if (minus != v.minus) return minus;\n\
     \    if (dat.size() != v.dat.size()) return (dat.size() < v.dat.size()) ^ minus;\n\
-    \    for (int64_t i = dat.size() - 1; i >= 0; i--)\n      if (dat[i] != v.dat[i])\
+    \    for (std::int64_t i = dat.size() - 1; i >= 0; i--)\n      if (dat[i] != v.dat[i])\
     \ return (dat[i] < v.dat[i]) ^ minus;\n    return false;\n  }\n  bool operator>(const\
     \ BigInt &v) const { return v < *this; }\n  bool operator<=(const BigInt &v) const\
     \ { return !(v < *this); }\n  bool operator>=(const BigInt &v) const { return\
     \ !(*this < v); }\n  bool operator==(const BigInt &v) const {\n    return minus\
     \ == v.minus && dat == v.dat;\n  }\n  bool operator!=(const BigInt &v) const {\
-    \ return !(*this == v); }\n\n public:\n  friend istream &operator>>(istream &stream,\
-    \ BigInt &v) {\n    std::string s;\n    stream >> s;\n    v.read(s);\n    return\
-    \ stream;\n  }\n  friend ostream &operator<<(ostream &stream, const BigInt &v)\
-    \ {\n    stream << v.to_string();\n    return stream;\n  }\n  BigInt abs() const\
-    \ {\n    BigInt res = *this;\n    res.minus = false;\n    return res;\n  }\n \
-    \ BigInt operator-() const {\n    BigInt res = *this;\n    res.minus = !res.minus;\n\
-    \    return res;\n  }\n  BigInt &operator*=(int64_t v) {\n    if (v < 0) minus\
-    \ = !minus, v = -v;\n    for (int64_t i = 0, carry = 0; i < (int64_t)dat.size()\
-    \ || carry; ++i) {\n      if (i == (int64_t)dat.size()) dat.push_back(0);\n  \
-    \    std::int64_t cur = dat[i] * (int64_t)v + carry;\n      carry = (int64_t)(cur\
-    \ / base);\n      dat[i] = (int64_t)(cur % base);\n    }\n    shrink();\n    return\
-    \ *this;\n  }\n  BigInt operator*(int64_t v) const { return BigInt(*this) *= v;\
-    \ }\n  BigInt &operator/=(int64_t v) {\n    if (v < 0) minus = !minus, v = -v;\n\
-    \    for (int64_t i = (int64_t)dat.size() - 1, rem = 0; i >= 0; --i) {\n     \
-    \ std::int64_t cur = dat[i] + rem * (int64_t)base;\n      dat[i] = (int64_t)(cur\
-    \ / v);\n      rem = (int64_t)(cur % v);\n    }\n    shrink();\n    return *this;\n\
-    \  }\n  BigInt operator/(int64_t v) const { return BigInt(*this) /= v; }\n  std::int64_t\
-    \ operator%(int64_t v) const {\n    assert(v > 0 && !minus);\n    std::int64_t\
-    \ ret = 0;\n    for (int64_t i = dat.size() - 1; i >= 0; --i)\n      ret = (dat[i]\
-    \ + ret * (int64_t)base) % v;\n    return ret;\n  }\n  BigInt operator+(const\
-    \ BigInt &v) const {\n    if (minus != v.minus) return *this - (-v);\n    BigInt\
-    \ res = v;\n    for (int64_t i = 0, carry = 0;\n         i < (int64_t)std::max(dat.size(),\
-    \ v.dat.size()) || carry; ++i) {\n      if (i == (int64_t)res.dat.size()) res.dat.push_back(0);\n\
-    \      res.dat[i] += carry + (i < (int64_t)dat.size() ? dat[i] : 0);\n      carry\
-    \ = res.dat[i] >= base;\n      if (carry) res.dat[i] -= base;\n    }\n    return\
-    \ res;\n  }\n  BigInt operator-(const BigInt &v) const {\n    if (minus != v.minus)\
-    \ return *this + (-v);\n    if (abs() < v.abs()) return -(v - *this);\n    BigInt\
-    \ res = *this;\n    for (int64_t i = 0, carry = 0; i < (int64_t)v.dat.size() ||\
-    \ carry; ++i) {\n      res.dat[i] -= carry + (i < (int64_t)v.dat.size() ? v.dat[i]\
-    \ : 0);\n      carry = res.dat[i] < 0;\n      if (carry) res.dat[i] += base;\n\
-    \    }\n    res.shrink();\n    return res;\n  }\n  BigInt operator*(const BigInt\
-    \ &v) const { return this->mul(v); }\n  BigInt operator/(const BigInt &v) const\
-    \ {\n    if (this->abs() < v.abs()) return BigInt(0);\n    return dat.size() <\
-    \ 730 ? divmod(*this, v).first : quo(v);\n  }\n  BigInt operator%(const BigInt\
+    \ return !(*this == v); }\n\n public:\n  friend std::istream &operator>>(std::istream\
+    \ &stream, BigInt &v) {\n    std::string s;\n    stream >> s;\n    v.read(s);\n\
+    \    return stream;\n  }\n  friend std::ostream &operator<<(std::ostream &stream,\
+    \ const BigInt &v) {\n    stream << v.to_string();\n    return stream;\n  }\n\
+    \  BigInt abs() const {\n    BigInt res = *this;\n    res.minus = false;\n   \
+    \ return res;\n  }\n  BigInt operator-() const {\n    BigInt res = *this;\n  \
+    \  res.minus = !res.minus;\n    return res;\n  }\n  BigInt &operator*=(std::int64_t\
+    \ v) {\n    if (v < 0) minus = !minus, v = -v;\n    for (std::int64_t i = 0, carry\
+    \ = 0; i < (std::int64_t)dat.size() || carry;\n         ++i) {\n      if (i ==\
+    \ (std::int64_t)dat.size()) dat.push_back(0);\n      std::int64_t cur = dat[i]\
+    \ * (std::int64_t)v + carry;\n      carry = (std::int64_t)(cur / base);\n    \
+    \  dat[i] = (std::int64_t)(cur % base);\n    }\n    shrink();\n    return *this;\n\
+    \  }\n  BigInt operator*(std::int64_t v) const { return BigInt(*this) *= v; }\n\
+    \  BigInt &operator/=(std::int64_t v) {\n    if (v < 0) minus = !minus, v = -v;\n\
+    \    for (std::int64_t i = (std::int64_t)dat.size() - 1, rem = 0; i >= 0; --i)\
+    \ {\n      std::int64_t cur = dat[i] + rem * (std::int64_t)base;\n      dat[i]\
+    \ = (std::int64_t)(cur / v);\n      rem = (std::int64_t)(cur % v);\n    }\n  \
+    \  shrink();\n    return *this;\n  }\n  BigInt operator/(std::int64_t v) const\
+    \ { return BigInt(*this) /= v; }\n  std::int64_t operator%(std::int64_t v) const\
+    \ {\n    assert(v > 0 && !minus);\n    std::int64_t ret = 0;\n    for (std::int64_t\
+    \ i = dat.size() - 1; i >= 0; --i)\n      ret = (dat[i] + ret * (std::int64_t)base)\
+    \ % v;\n    return ret;\n  }\n  BigInt operator+(const BigInt &v) const {\n  \
+    \  if (minus != v.minus) return *this - (-v);\n    BigInt res = v;\n    for (std::int64_t\
+    \ i = 0, carry = 0;\n         i < (std::int64_t)std::max(dat.size(), v.dat.size())\
+    \ || carry; ++i) {\n      if (i == (std::int64_t)res.dat.size()) res.dat.push_back(0);\n\
+    \      res.dat[i] += carry + (i < (std::int64_t)dat.size() ? dat[i] : 0);\n  \
+    \    carry = res.dat[i] >= base;\n      if (carry) res.dat[i] -= base;\n    }\n\
+    \    return res;\n  }\n  BigInt operator-(const BigInt &v) const {\n    if (minus\
+    \ != v.minus) return *this + (-v);\n    if (abs() < v.abs()) return -(v - *this);\n\
+    \    BigInt res = *this;\n    for (std::int64_t i = 0, carry = 0; i < (std::int64_t)v.dat.size()\
+    \ || carry;\n         ++i) {\n      res.dat[i] -= carry + (i < (std::int64_t)v.dat.size()\
+    \ ? v.dat[i] : 0);\n      carry = res.dat[i] < 0;\n      if (carry) res.dat[i]\
+    \ += base;\n    }\n    res.shrink();\n    return res;\n  }\n  BigInt operator*(const\
+    \ BigInt &v) const { return this->mul(v); }\n  BigInt operator/(const BigInt &v)\
+    \ const {\n    if (this->abs() < v.abs()) return BigInt(0);\n    return dat.size()\
+    \ < 730 ? divmod(*this, v).first : quo(v);\n  }\n  BigInt operator%(const BigInt\
     \ &v) const {\n    if (this->abs() < v.abs()) return *this;\n    return dat.size()\
     \ < 730 ? divmod(*this, v).second : *this - v * quo(v);\n  }\n  BigInt &operator+=(const\
     \ BigInt &v) { return *this = *this + v; }\n  BigInt &operator-=(const BigInt\
@@ -218,7 +221,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_D.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 16:23:38+09:00'
+  timestamp: '2020-10-24 17:01:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_D.test.cpp

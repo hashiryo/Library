@@ -94,58 +94,59 @@ data:
     \ rcap;\n        }\n      }\n    for (int v = 0; v < n; v++)\n      if (b[v] !=\
     \ 0) (b[v] > 0 ? excess_vs : deficit_vs).emplace_back(v);\n  }\n\n public:\n \
     \ std::pair<bool, cost_t> flow_run() {\n    potential.resize(n);\n    flow_t inf_flow\
-    \ = 1;\n    for (const auto t : b) inf_flow = max({inf_flow, t, -t});\n    for\
-    \ (const auto &es : adj)\n      for (const auto &e : es)\n        inf_flow = max({inf_flow,\
-    \ e.residual_cap(), -e.residual_cap()});\n    flow_t delta = 1;\n    while (delta\
-    \ < inf_flow) delta *= 2;\n    for (; delta; delta /= 2) {\n      saturate_negative(delta);\n\
-    \      while (dual(delta)) primal(delta);\n    }\n    cost_t value = 0;\n    for\
-    \ (const auto &es : adj)\n      for (const auto &e : es) value += e.flow * e.cost;\n\
-    \    value /= 2;\n    if (excess_vs.empty() && deficit_vs.empty()) {\n      return\
-    \ {true, value / obj};\n    } else {\n      return {false, value / obj};\n   \
-    \ }\n  }\n  std::pair<bool, cost_t> st_flow_run(const int s, const int t, flow_t\
-    \ flow) {\n    add_supply(s, flow);\n    add_demand(t, flow);\n    return flow_run();\n\
-    \  }\n  tuple<bool, cost_t, flow_t> max_flow_run(const int s, const int t) {\n\
-    \    assert(s != t);\n    flow_t inf_flow = abs(b[s]);\n    for (const auto &e\
-    \ : adj[s]) inf_flow += max(e.cap, static_cast<flow_t>(0));\n    add_edge(t, s,\
-    \ 0, inf_flow, 0);\n    bool status;\n    cost_t circulation_value;\n    std::tie(status,\
-    \ circulation_value) = flow_run();\n    if (!status) {\n      adj[s].pop_back();\n\
-    \      adj[t].pop_back();\n      return {status, circulation_value, 0};\n    }\n\
-    \    inf_flow = abs(b[s]);\n    for (const auto &e : adj[s]) inf_flow += e.residual_cap();\n\
-    \    b[s] += inf_flow;\n    b[t] -= inf_flow;\n    bool mf_status;\n    cost_t\
-    \ mf_value;\n    std::tie(mf_status, mf_value) = flow_run();\n    b[s] -= inf_flow;\n\
-    \    b[t] += inf_flow;\n    adj[s].pop_back();\n    adj[t].pop_back();\n    return\
-    \ {true, mf_value, b[t]};\n  }\n  std::vector<cost_t> get_potential() {\n    std::fill(potential.begin(),\
-    \ potential.end(), 0);\n    for (int i = 0; i < n; i++)\n      for (const auto\
-    \ &es : adj)\n        for (const auto &e : es)\n          if (e.residual_cap()\
-    \ > 0)\n            potential[e.dst] = min(potential[e.dst],\n               \
-    \                    potential[adj[e.dst][e.rev].dst] + e.cost);\n    return potential;\n\
-    \  }\n  template <class T>\n  T get_result_value() {\n    T value = 0;\n    for\
-    \ (const auto &es : adj)\n      for (const auto &e : es) {\n        value += (T)(e.flow)\
-    \ * (T)(e.cost);\n      }\n    value /= (T)2;\n    return value;\n  }\n};\n\n\
-    template <class flow_t, class cost_t,\n          typename Heap = std::priority_queue<\n\
-    \              std::pair<cost_t, int>, std::vector<std::pair<cost_t, int>>,\n\
-    \              std::greater<>>>\nusing MaxGainFlow = MinCostFlow<flow_t, cost_t,\
-    \ Heap, -1>;\n#line 3 \"src/DataStructure/RadixHeap.hpp\"\n/**\n * @title Radix-Heap\n\
-    \ * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief dijkstra\u306E\u9AD8\u901F\
-    \u5316\u306B\u4F7F\u7528\n * @brief \u6D6E\u52D5\u5C0F\u6570\u70B9\u6570\u3082\
-    \u4F7F\u3048\u308B\n * @brief \u5C0F\u3055\u3044\u9806\n * @see https://github.com/iwiwi/radix-heap/blob/master/README_ja.md\n\
-    \ */\n\n// verify\u7528:\n// https://codeforces.com/contest/316/problem/C2\n//\
-    \ (Radix-Heap\u3067\u306A\u3044\u3068TLE\u3057\u305F -> \u5BB9\u91CF\u30B9\u30B1\
-    \u30FC\u30EA\u30F3\u30B0\u306A\u3089TLE\u3057\u306A\u3044)\n\n// BEGIN CUT HERE\n\
-    \nnamespace internal {\ntemplate <bool Is64bit>\nclass find_bucket_impl;\ntemplate\
-    \ <>\nclass find_bucket_impl<false> {\n public:\n  static inline constexpr std::size_t\
-    \ find_bucket(uint32_t x, uint32_t last) {\n    return x == last ? 0 : 32 - __builtin_clz(x\
-    \ ^ last);\n  }\n};\ntemplate <>\nclass find_bucket_impl<true> {\n public:\n \
-    \ static inline constexpr std::size_t find_bucket(uint64_t x, uint64_t last) {\n\
-    \    return x == last ? 0 : 64 - __builtin_clzll(x ^ last);\n  }\n};\ntemplate\
-    \ <typename T>\ninline constexpr std::size_t find_bucket(T x, T last) {\n  return\
-    \ find_bucket_impl<sizeof(T) == 8>::find_bucket(x, last);\n}\ntemplate <typename\
-    \ key_t, bool IsSigned>\nclass encoder_impl_integer;\ntemplate <typename key_t>\n\
-    class encoder_impl_integer<key_t, false> {\n public:\n  using ukey_t = key_t;\n\
-    \  inline static constexpr ukey_t encode(key_t x) { return x; }\n  inline static\
-    \ constexpr key_t decode(ukey_t x) { return x; }\n};\ntemplate <typename key_t>\n\
-    class encoder_impl_integer<key_t, true> {\n public:\n  typedef typename make_unsigned<key_t>::type\
-    \ ukey_t;\n  inline static constexpr ukey_t encode(key_t x) {\n    return static_cast<ukey_t>(x)\n\
+    \ = 1;\n    for (const auto t : b) inf_flow = std::max({inf_flow, t, -t});\n \
+    \   for (const auto &es : adj)\n      for (const auto &e : es)\n        inf_flow\
+    \ = std::max({inf_flow, e.residual_cap(), -e.residual_cap()});\n    flow_t delta\
+    \ = 1;\n    while (delta < inf_flow) delta *= 2;\n    for (; delta; delta /= 2)\
+    \ {\n      saturate_negative(delta);\n      while (dual(delta)) primal(delta);\n\
+    \    }\n    cost_t value = 0;\n    for (const auto &es : adj)\n      for (const\
+    \ auto &e : es) value += e.flow * e.cost;\n    value /= 2;\n    if (excess_vs.empty()\
+    \ && deficit_vs.empty()) {\n      return {true, value / obj};\n    } else {\n\
+    \      return {false, value / obj};\n    }\n  }\n  std::pair<bool, cost_t> st_flow_run(const\
+    \ int s, const int t, flow_t flow) {\n    add_supply(s, flow);\n    add_demand(t,\
+    \ flow);\n    return flow_run();\n  }\n  tuple<bool, cost_t, flow_t> max_flow_run(const\
+    \ int s, const int t) {\n    assert(s != t);\n    flow_t inf_flow = abs(b[s]);\n\
+    \    for (const auto &e : adj[s])\n      inf_flow += std::max(e.cap, static_cast<flow_t>(0));\n\
+    \    add_edge(t, s, 0, inf_flow, 0);\n    bool status;\n    cost_t circulation_value;\n\
+    \    std::tie(status, circulation_value) = flow_run();\n    if (!status) {\n \
+    \     adj[s].pop_back();\n      adj[t].pop_back();\n      return {status, circulation_value,\
+    \ 0};\n    }\n    inf_flow = abs(b[s]);\n    for (const auto &e : adj[s]) inf_flow\
+    \ += e.residual_cap();\n    b[s] += inf_flow;\n    b[t] -= inf_flow;\n    bool\
+    \ mf_status;\n    cost_t mf_value;\n    std::tie(mf_status, mf_value) = flow_run();\n\
+    \    b[s] -= inf_flow;\n    b[t] += inf_flow;\n    adj[s].pop_back();\n    adj[t].pop_back();\n\
+    \    return {true, mf_value, b[t]};\n  }\n  std::vector<cost_t> get_potential()\
+    \ {\n    std::fill(potential.begin(), potential.end(), 0);\n    for (int i = 0;\
+    \ i < n; i++)\n      for (const auto &es : adj)\n        for (const auto &e :\
+    \ es)\n          if (e.residual_cap() > 0)\n            potential[e.dst] = min(potential[e.dst],\n\
+    \                                   potential[adj[e.dst][e.rev].dst] + e.cost);\n\
+    \    return potential;\n  }\n  template <class T>\n  T get_result_value() {\n\
+    \    T value = 0;\n    for (const auto &es : adj)\n      for (const auto &e :\
+    \ es) {\n        value += (T)(e.flow) * (T)(e.cost);\n      }\n    value /= (T)2;\n\
+    \    return value;\n  }\n};\n\ntemplate <class flow_t, class cost_t,\n       \
+    \   typename Heap = std::priority_queue<\n              std::pair<cost_t, int>,\
+    \ std::vector<std::pair<cost_t, int>>,\n              std::greater<>>>\nusing\
+    \ MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;\n#line 3 \"src/DataStructure/RadixHeap.hpp\"\
+    \n/**\n * @title Radix-Heap\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
+    \ dijkstra\u306E\u9AD8\u901F\u5316\u306B\u4F7F\u7528\n * @brief \u6D6E\u52D5\u5C0F\
+    \u6570\u70B9\u6570\u3082\u4F7F\u3048\u308B\n * @brief \u5C0F\u3055\u3044\u9806\
+    \n * @see https://github.com/iwiwi/radix-heap/blob/master/README_ja.md\n */\n\n\
+    // verify\u7528:\n// https://codeforces.com/contest/316/problem/C2\n// (Radix-Heap\u3067\
+    \u306A\u3044\u3068TLE\u3057\u305F -> \u5BB9\u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\
+    \u30B0\u306A\u3089TLE\u3057\u306A\u3044)\n\n// BEGIN CUT HERE\n\nnamespace internal\
+    \ {\ntemplate <bool Is64bit>\nclass find_bucket_impl;\ntemplate <>\nclass find_bucket_impl<false>\
+    \ {\n public:\n  static inline constexpr std::size_t find_bucket(uint32_t x, uint32_t\
+    \ last) {\n    return x == last ? 0 : 32 - __builtin_clz(x ^ last);\n  }\n};\n\
+    template <>\nclass find_bucket_impl<true> {\n public:\n  static inline constexpr\
+    \ std::size_t find_bucket(uint64_t x, uint64_t last) {\n    return x == last ?\
+    \ 0 : 64 - __builtin_clzll(x ^ last);\n  }\n};\ntemplate <typename T>\ninline\
+    \ constexpr std::size_t find_bucket(T x, T last) {\n  return find_bucket_impl<sizeof(T)\
+    \ == 8>::find_bucket(x, last);\n}\ntemplate <typename key_t, bool IsSigned>\n\
+    class encoder_impl_integer;\ntemplate <typename key_t>\nclass encoder_impl_integer<key_t,\
+    \ false> {\n public:\n  using ukey_t = key_t;\n  inline static constexpr ukey_t\
+    \ encode(key_t x) { return x; }\n  inline static constexpr key_t decode(ukey_t\
+    \ x) { return x; }\n};\ntemplate <typename key_t>\nclass encoder_impl_integer<key_t,\
+    \ true> {\n public:\n  typedef typename make_unsigned<key_t>::type ukey_t;\n \
+    \ inline static constexpr ukey_t encode(key_t x) {\n    return static_cast<ukey_t>(x)\n\
     \           ^ (ukey_t(1) << ukey_t(std::numeric_limits<ukey_t>::digits - 1));\n\
     \  }\n  inline static constexpr key_t decode(ukey_t x) {\n    return static_cast<key_t>(\n\
     \        x ^ (ukey_t(1) << (std::numeric_limits<ukey_t>::digits - 1)));\n  }\n\
@@ -205,7 +206,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_B.RadixHeap.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 16:23:38+09:00'
+  timestamp: '2020-10-24 17:01:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_B.RadixHeap.test.cpp

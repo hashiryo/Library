@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/RedBlackTree.hpp
     title: "\u8D64\u9ED2\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_queue.RBTP.test.cpp
     title: test/yosupo/persistent_queue.RBTP.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u8D64\u9ED2\u6728(\u6C38\u7D9A)"
     links:
@@ -136,7 +136,7 @@ data:
   path: src/DataStructure/RedBlackTree_Persistent.hpp
   requiredBy: []
   timestamp: '2020-10-24 15:28:45+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/persistent_queue.RBTP.test.cpp
 documentation_of: src/DataStructure/RedBlackTree_Persistent.hpp

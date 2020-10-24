@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/RedBlackTree.hpp
     title: "\u8D64\u9ED2\u6728"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/RedBlackTree_Persistent.hpp
     title: "\u8D64\u9ED2\u6728(\u6C38\u7D9A)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_queue
@@ -138,7 +138,7 @@ data:
   path: test/yosupo/persistent_queue.RBTP.test.cpp
   requiredBy: []
   timestamp: '2020-10-24 15:28:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.RBTP.test.cpp
 layout: document

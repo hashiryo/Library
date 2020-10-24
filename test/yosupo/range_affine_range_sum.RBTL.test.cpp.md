@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/RedBlackTree_Lazy.hpp
     title: "\u8D64\u9ED2\u6728(\u9045\u5EF6\u4F1D\u642C)"
   - icon: ':question:'

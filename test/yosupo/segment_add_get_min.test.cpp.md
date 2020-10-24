@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/LiChaoTree.hpp
     title: Li-Chao-Tree
   _extendedRequiredBy: []
@@ -51,21 +51,21 @@ data:
     \ m + 1, r, x_m + x.a, x_r);\n    return t;\n  }\n  T query(const Node *t, const\
     \ T &l, const T &r, const T &x) const {\n    if (!t) return INF;\n    if (l ==\
     \ r) return t->x.get(x);\n    T m = (l + r) / 2;\n    if (m == r) --m;\n    if\
-    \ (x <= m)\n      return min(t->x.get(x), query(t->ch[0], l, m, x));\n    else\n\
-    \      return min(t->x.get(x), query(t->ch[1], m + 1, r, x));\n  }\n\n public:\n\
-    \  LiChaoTree() : root{nullptr} {}\n  T get_inf() { return INF; }\n  void clear()\
-    \ {\n    node_count = 0;\n    root = nullptr;\n  }\n  void insert_line(T a, T\
-    \ b) {\n    Line x(a, b);\n    root = insert_line(root, x, x_low, x_high, x.get(x_low),\
-    \ x.get(x_high));\n  }\n  // [l,r)\n  void insert_segment(T l, T r, T a, T b)\
-    \ {\n    Line x(a, b);\n    root = insert_segment(root, x, l, r - 1, x_low, x_high,\
-    \ x.get(x_low),\n                          x.get(x_high));\n  }\n  T query(T x)\
-    \ const { return query(root, x_low, x_high, x); }\n};\ntemplate <typename T, T\
-    \ x_low, T x_high, size_t LIM>\nint LiChaoTree<T, x_low, x_high, LIM>::node_count\
-    \ = 0;\n#line 4 \"test/yosupo/segment_add_get_min.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N,\
-    \ Q;\n  cin >> N >> Q;\n  LiChaoTree<long long> cht;\n  while (N--) {\n    long\
-    \ long l, r, a, b;\n    cin >> l >> r >> a >> b;\n    cht.insert_segment(l, r,\
-    \ a, b);\n  }\n  while (Q--) {\n    bool op;\n    cin >> op;\n    if (op) {\n\
+    \ (x <= m)\n      return std::min(t->x.get(x), query(t->ch[0], l, m, x));\n  \
+    \  else\n      return std::min(t->x.get(x), query(t->ch[1], m + 1, r, x));\n \
+    \ }\n\n public:\n  LiChaoTree() : root{nullptr} {}\n  T get_inf() { return INF;\
+    \ }\n  void clear() {\n    node_count = 0;\n    root = nullptr;\n  }\n  void insert_line(T\
+    \ a, T b) {\n    Line x(a, b);\n    root = insert_line(root, x, x_low, x_high,\
+    \ x.get(x_low), x.get(x_high));\n  }\n  // [l,r)\n  void insert_segment(T l, T\
+    \ r, T a, T b) {\n    Line x(a, b);\n    root = insert_segment(root, x, l, r -\
+    \ 1, x_low, x_high, x.get(x_low),\n                          x.get(x_high));\n\
+    \  }\n  T query(T x) const { return query(root, x_low, x_high, x); }\n};\ntemplate\
+    \ <typename T, T x_low, T x_high, size_t LIM>\nint LiChaoTree<T, x_low, x_high,\
+    \ LIM>::node_count = 0;\n#line 4 \"test/yosupo/segment_add_get_min.test.cpp\"\n\
+    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int N, Q;\n  cin >> N >> Q;\n  LiChaoTree<long long> cht;\n  while (N--) {\n\
+    \    long long l, r, a, b;\n    cin >> l >> r >> a >> b;\n    cht.insert_segment(l,\
+    \ r, a, b);\n  }\n  while (Q--) {\n    bool op;\n    cin >> op;\n    if (op) {\n\
     \      long long p;\n      cin >> p;\n      long long ans = cht.query(p);\n  \
     \    if (ans == cht.get_inf()) {\n        cout << \"INFINITY\" << endl;\n    \
     \  } else {\n        cout << ans << endl;\n      }\n    } else {\n      long long\
@@ -87,7 +87,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/segment_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 17:01:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/segment_add_get_min.test.cpp

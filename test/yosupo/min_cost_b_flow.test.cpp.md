@@ -91,42 +91,42 @@ data:
     \ rcap;\n        }\n      }\n    for (int v = 0; v < n; v++)\n      if (b[v] !=\
     \ 0) (b[v] > 0 ? excess_vs : deficit_vs).emplace_back(v);\n  }\n\n public:\n \
     \ std::pair<bool, cost_t> flow_run() {\n    potential.resize(n);\n    flow_t inf_flow\
-    \ = 1;\n    for (const auto t : b) inf_flow = max({inf_flow, t, -t});\n    for\
-    \ (const auto &es : adj)\n      for (const auto &e : es)\n        inf_flow = max({inf_flow,\
-    \ e.residual_cap(), -e.residual_cap()});\n    flow_t delta = 1;\n    while (delta\
-    \ < inf_flow) delta *= 2;\n    for (; delta; delta /= 2) {\n      saturate_negative(delta);\n\
-    \      while (dual(delta)) primal(delta);\n    }\n    cost_t value = 0;\n    for\
-    \ (const auto &es : adj)\n      for (const auto &e : es) value += e.flow * e.cost;\n\
-    \    value /= 2;\n    if (excess_vs.empty() && deficit_vs.empty()) {\n      return\
-    \ {true, value / obj};\n    } else {\n      return {false, value / obj};\n   \
-    \ }\n  }\n  std::pair<bool, cost_t> st_flow_run(const int s, const int t, flow_t\
-    \ flow) {\n    add_supply(s, flow);\n    add_demand(t, flow);\n    return flow_run();\n\
-    \  }\n  tuple<bool, cost_t, flow_t> max_flow_run(const int s, const int t) {\n\
-    \    assert(s != t);\n    flow_t inf_flow = abs(b[s]);\n    for (const auto &e\
-    \ : adj[s]) inf_flow += max(e.cap, static_cast<flow_t>(0));\n    add_edge(t, s,\
-    \ 0, inf_flow, 0);\n    bool status;\n    cost_t circulation_value;\n    std::tie(status,\
-    \ circulation_value) = flow_run();\n    if (!status) {\n      adj[s].pop_back();\n\
-    \      adj[t].pop_back();\n      return {status, circulation_value, 0};\n    }\n\
-    \    inf_flow = abs(b[s]);\n    for (const auto &e : adj[s]) inf_flow += e.residual_cap();\n\
-    \    b[s] += inf_flow;\n    b[t] -= inf_flow;\n    bool mf_status;\n    cost_t\
-    \ mf_value;\n    std::tie(mf_status, mf_value) = flow_run();\n    b[s] -= inf_flow;\n\
-    \    b[t] += inf_flow;\n    adj[s].pop_back();\n    adj[t].pop_back();\n    return\
-    \ {true, mf_value, b[t]};\n  }\n  std::vector<cost_t> get_potential() {\n    std::fill(potential.begin(),\
-    \ potential.end(), 0);\n    for (int i = 0; i < n; i++)\n      for (const auto\
-    \ &es : adj)\n        for (const auto &e : es)\n          if (e.residual_cap()\
-    \ > 0)\n            potential[e.dst] = min(potential[e.dst],\n               \
-    \                    potential[adj[e.dst][e.rev].dst] + e.cost);\n    return potential;\n\
-    \  }\n  template <class T>\n  T get_result_value() {\n    T value = 0;\n    for\
-    \ (const auto &es : adj)\n      for (const auto &e : es) {\n        value += (T)(e.flow)\
-    \ * (T)(e.cost);\n      }\n    value /= (T)2;\n    return value;\n  }\n};\n\n\
-    template <class flow_t, class cost_t,\n          typename Heap = std::priority_queue<\n\
-    \              std::pair<cost_t, int>, std::vector<std::pair<cost_t, int>>,\n\
-    \              std::greater<>>>\nusing MaxGainFlow = MinCostFlow<flow_t, cost_t,\
-    \ Heap, -1>;\n#line 4 \"test/yosupo/min_cost_b_flow.test.cpp\"\nusing namespace\
-    \ std;\n\nostream &operator<<(ostream &stream, const __int128_t &v) {\n  if (v\
-    \ == 0) stream << \"0\";\n  __int128_t tmp;\n  if (v < 0) {\n    stream << \"\
-    -\";\n    tmp = -v;\n  } else {\n    tmp = v;\n  }\n  std::string s;\n  while\
-    \ (tmp) {\n    s += '0' + (tmp % 10);\n    tmp /= 10;\n  }\n  std::reverse(s.begin(),\
+    \ = 1;\n    for (const auto t : b) inf_flow = std::max({inf_flow, t, -t});\n \
+    \   for (const auto &es : adj)\n      for (const auto &e : es)\n        inf_flow\
+    \ = std::max({inf_flow, e.residual_cap(), -e.residual_cap()});\n    flow_t delta\
+    \ = 1;\n    while (delta < inf_flow) delta *= 2;\n    for (; delta; delta /= 2)\
+    \ {\n      saturate_negative(delta);\n      while (dual(delta)) primal(delta);\n\
+    \    }\n    cost_t value = 0;\n    for (const auto &es : adj)\n      for (const\
+    \ auto &e : es) value += e.flow * e.cost;\n    value /= 2;\n    if (excess_vs.empty()\
+    \ && deficit_vs.empty()) {\n      return {true, value / obj};\n    } else {\n\
+    \      return {false, value / obj};\n    }\n  }\n  std::pair<bool, cost_t> st_flow_run(const\
+    \ int s, const int t, flow_t flow) {\n    add_supply(s, flow);\n    add_demand(t,\
+    \ flow);\n    return flow_run();\n  }\n  tuple<bool, cost_t, flow_t> max_flow_run(const\
+    \ int s, const int t) {\n    assert(s != t);\n    flow_t inf_flow = abs(b[s]);\n\
+    \    for (const auto &e : adj[s])\n      inf_flow += std::max(e.cap, static_cast<flow_t>(0));\n\
+    \    add_edge(t, s, 0, inf_flow, 0);\n    bool status;\n    cost_t circulation_value;\n\
+    \    std::tie(status, circulation_value) = flow_run();\n    if (!status) {\n \
+    \     adj[s].pop_back();\n      adj[t].pop_back();\n      return {status, circulation_value,\
+    \ 0};\n    }\n    inf_flow = abs(b[s]);\n    for (const auto &e : adj[s]) inf_flow\
+    \ += e.residual_cap();\n    b[s] += inf_flow;\n    b[t] -= inf_flow;\n    bool\
+    \ mf_status;\n    cost_t mf_value;\n    std::tie(mf_status, mf_value) = flow_run();\n\
+    \    b[s] -= inf_flow;\n    b[t] += inf_flow;\n    adj[s].pop_back();\n    adj[t].pop_back();\n\
+    \    return {true, mf_value, b[t]};\n  }\n  std::vector<cost_t> get_potential()\
+    \ {\n    std::fill(potential.begin(), potential.end(), 0);\n    for (int i = 0;\
+    \ i < n; i++)\n      for (const auto &es : adj)\n        for (const auto &e :\
+    \ es)\n          if (e.residual_cap() > 0)\n            potential[e.dst] = min(potential[e.dst],\n\
+    \                                   potential[adj[e.dst][e.rev].dst] + e.cost);\n\
+    \    return potential;\n  }\n  template <class T>\n  T get_result_value() {\n\
+    \    T value = 0;\n    for (const auto &es : adj)\n      for (const auto &e :\
+    \ es) {\n        value += (T)(e.flow) * (T)(e.cost);\n      }\n    value /= (T)2;\n\
+    \    return value;\n  }\n};\n\ntemplate <class flow_t, class cost_t,\n       \
+    \   typename Heap = std::priority_queue<\n              std::pair<cost_t, int>,\
+    \ std::vector<std::pair<cost_t, int>>,\n              std::greater<>>>\nusing\
+    \ MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;\n#line 4 \"test/yosupo/min_cost_b_flow.test.cpp\"\
+    \nusing namespace std;\n\nostream &operator<<(ostream &stream, const __int128_t\
+    \ &v) {\n  if (v == 0) stream << \"0\";\n  __int128_t tmp;\n  if (v < 0) {\n \
+    \   stream << \"-\";\n    tmp = -v;\n  } else {\n    tmp = v;\n  }\n  std::string\
+    \ s;\n  while (tmp) {\n    s += '0' + (tmp % 10);\n    tmp /= 10;\n  }\n  std::reverse(s.begin(),\
     \ s.end());\n  stream << s;\n  return stream;\n}\n\nsigned main() {\n  cin.tie(0);\n\
     \  ios::sync_with_stdio(false);\n  using MCF = MinCostFlow<long long, long long>;\n\
     \  MCF graph;\n  vector<MCF::EdgePtr> edges;\n  int N, M;\n  cin >> N >> M;\n\
@@ -160,7 +160,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 16:23:38+09:00'
+  timestamp: '2020-10-24 17:01:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/min_cost_b_flow.test.cpp

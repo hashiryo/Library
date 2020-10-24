@@ -3,14 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.test.cpp
     title: test/yosupo/line_add_get_min.test.cpp
   - icon: ':x:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Li-Chao-Tree
     links: []
@@ -50,17 +50,17 @@ data:
     \ m + 1, r, x_m + x.a, x_r);\n    return t;\n  }\n  T query(const Node *t, const\
     \ T &l, const T &r, const T &x) const {\n    if (!t) return INF;\n    if (l ==\
     \ r) return t->x.get(x);\n    T m = (l + r) / 2;\n    if (m == r) --m;\n    if\
-    \ (x <= m)\n      return min(t->x.get(x), query(t->ch[0], l, m, x));\n    else\n\
-    \      return min(t->x.get(x), query(t->ch[1], m + 1, r, x));\n  }\n\n public:\n\
-    \  LiChaoTree() : root{nullptr} {}\n  T get_inf() { return INF; }\n  void clear()\
-    \ {\n    node_count = 0;\n    root = nullptr;\n  }\n  void insert_line(T a, T\
-    \ b) {\n    Line x(a, b);\n    root = insert_line(root, x, x_low, x_high, x.get(x_low),\
-    \ x.get(x_high));\n  }\n  // [l,r)\n  void insert_segment(T l, T r, T a, T b)\
-    \ {\n    Line x(a, b);\n    root = insert_segment(root, x, l, r - 1, x_low, x_high,\
-    \ x.get(x_low),\n                          x.get(x_high));\n  }\n  T query(T x)\
-    \ const { return query(root, x_low, x_high, x); }\n};\ntemplate <typename T, T\
-    \ x_low, T x_high, size_t LIM>\nint LiChaoTree<T, x_low, x_high, LIM>::node_count\
-    \ = 0;\n"
+    \ (x <= m)\n      return std::min(t->x.get(x), query(t->ch[0], l, m, x));\n  \
+    \  else\n      return std::min(t->x.get(x), query(t->ch[1], m + 1, r, x));\n \
+    \ }\n\n public:\n  LiChaoTree() : root{nullptr} {}\n  T get_inf() { return INF;\
+    \ }\n  void clear() {\n    node_count = 0;\n    root = nullptr;\n  }\n  void insert_line(T\
+    \ a, T b) {\n    Line x(a, b);\n    root = insert_line(root, x, x_low, x_high,\
+    \ x.get(x_low), x.get(x_high));\n  }\n  // [l,r)\n  void insert_segment(T l, T\
+    \ r, T a, T b) {\n    Line x(a, b);\n    root = insert_segment(root, x, l, r -\
+    \ 1, x_low, x_high, x.get(x_low),\n                          x.get(x_high));\n\
+    \  }\n  T query(T x) const { return query(root, x_low, x_high, x); }\n};\ntemplate\
+    \ <typename T, T x_low, T x_high, size_t LIM>\nint LiChaoTree<T, x_low, x_high,\
+    \ LIM>::node_count = 0;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Li-Chao-Tree\n * @category\
     \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief \u76F4\u7DDA\u633F\u5165:O(n log n)\n\
     \ * @brief \u7DDA\u5206\u633F\u5165:O(n log^2 n)\n * @brief \u6700\u5C0F\u5024\
@@ -97,23 +97,23 @@ data:
     \ m + 1, r, x_m + x.a, x_r);\n    return t;\n  }\n  T query(const Node *t, const\
     \ T &l, const T &r, const T &x) const {\n    if (!t) return INF;\n    if (l ==\
     \ r) return t->x.get(x);\n    T m = (l + r) / 2;\n    if (m == r) --m;\n    if\
-    \ (x <= m)\n      return min(t->x.get(x), query(t->ch[0], l, m, x));\n    else\n\
-    \      return min(t->x.get(x), query(t->ch[1], m + 1, r, x));\n  }\n\n public:\n\
-    \  LiChaoTree() : root{nullptr} {}\n  T get_inf() { return INF; }\n  void clear()\
-    \ {\n    node_count = 0;\n    root = nullptr;\n  }\n  void insert_line(T a, T\
-    \ b) {\n    Line x(a, b);\n    root = insert_line(root, x, x_low, x_high, x.get(x_low),\
-    \ x.get(x_high));\n  }\n  // [l,r)\n  void insert_segment(T l, T r, T a, T b)\
-    \ {\n    Line x(a, b);\n    root = insert_segment(root, x, l, r - 1, x_low, x_high,\
-    \ x.get(x_low),\n                          x.get(x_high));\n  }\n  T query(T x)\
-    \ const { return query(root, x_low, x_high, x); }\n};\ntemplate <typename T, T\
-    \ x_low, T x_high, size_t LIM>\nint LiChaoTree<T, x_low, x_high, LIM>::node_count\
-    \ = 0;"
+    \ (x <= m)\n      return std::min(t->x.get(x), query(t->ch[0], l, m, x));\n  \
+    \  else\n      return std::min(t->x.get(x), query(t->ch[1], m + 1, r, x));\n \
+    \ }\n\n public:\n  LiChaoTree() : root{nullptr} {}\n  T get_inf() { return INF;\
+    \ }\n  void clear() {\n    node_count = 0;\n    root = nullptr;\n  }\n  void insert_line(T\
+    \ a, T b) {\n    Line x(a, b);\n    root = insert_line(root, x, x_low, x_high,\
+    \ x.get(x_low), x.get(x_high));\n  }\n  // [l,r)\n  void insert_segment(T l, T\
+    \ r, T a, T b) {\n    Line x(a, b);\n    root = insert_segment(root, x, l, r -\
+    \ 1, x_low, x_high, x.get(x_low),\n                          x.get(x_high));\n\
+    \  }\n  T query(T x) const { return query(root, x_low, x_high, x); }\n};\ntemplate\
+    \ <typename T, T x_low, T x_high, size_t LIM>\nint LiChaoTree<T, x_low, x_high,\
+    \ LIM>::node_count = 0;"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 17:01:59+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/segment_add_get_min.test.cpp
   - test/yosupo/line_add_get_min.test.cpp

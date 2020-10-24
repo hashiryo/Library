@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Algorithm/Mo.hpp
     title: Mo
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/BinaryIndexedTree.hpp
     title: Binary-Indexed-Tree
   _extendedRequiredBy: []
