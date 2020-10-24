@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_9_C
@@ -22,16 +22,16 @@ data:
     \u9069\u7528\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename T>\nstruct Op_RaddQ\
     \ {\n  using E = T;\n  static E ei() { return 0; }\n  static T g(const T &l, const\
     \ E &r) { return l + r; }\n  static E h(const E &l, const E &r) { return l + r;\
-    \ }\n};\n\ntemplate <typename T, typename Compare = less<T>, typename Op = Op_RaddQ<T>>\n\
-    struct SkewHeap {\n  using E = typename Op::E;\n  struct Node {\n    Node *ch[2];\n\
-    \    T key;\n    E lazy;\n    Node() {}\n    Node(T k, E laz) : ch{nullptr, nullptr},\
-    \ key(k), lazy(laz) {}\n  } * root;\n\n private:\n  void propagate(Node *a) {\n\
-    \    if (a->lazy != Op::ei()) {\n      a->key = Op::g(a->key, a->lazy);\n    \
-    \  if (a->ch[0]) a->ch[0]->lazy = Op::h(a->ch[0]->lazy, a->lazy);\n      if (a->ch[1])\
-    \ a->ch[1]->lazy = Op::h(a->ch[1]->lazy, a->lazy);\n      a->lazy = Op::ei();\n\
-    \    }\n  }\n  Node *merge(Node *a, Node *b) {\n    if (!a || !b) return a ? a\
-    \ : b;\n    propagate(a);\n    propagate(b);\n    if (Compare()(a->key, b->key))\
-    \ std::swap(a, b);\n    a->ch[1] = merge(b, a->ch[1]);\n    std::swap(a->ch[0],\
+    \ }\n};\n\ntemplate <typename T, typename Compare = std::less<T>,\n          typename\
+    \ Op = Op_RaddQ<T>>\nstruct SkewHeap {\n  using E = typename Op::E;\n  struct\
+    \ Node {\n    Node *ch[2];\n    T key;\n    E lazy;\n    Node() {}\n    Node(T\
+    \ k, E laz) : ch{nullptr, nullptr}, key(k), lazy(laz) {}\n  } * root;\n\n private:\n\
+    \  void propagate(Node *a) {\n    if (a->lazy != Op::ei()) {\n      a->key = Op::g(a->key,\
+    \ a->lazy);\n      if (a->ch[0]) a->ch[0]->lazy = Op::h(a->ch[0]->lazy, a->lazy);\n\
+    \      if (a->ch[1]) a->ch[1]->lazy = Op::h(a->ch[1]->lazy, a->lazy);\n      a->lazy\
+    \ = Op::ei();\n    }\n  }\n  Node *merge(Node *a, Node *b) {\n    if (!a || !b)\
+    \ return a ? a : b;\n    propagate(a);\n    propagate(b);\n    if (Compare()(a->key,\
+    \ b->key)) std::swap(a, b);\n    a->ch[1] = merge(b, a->ch[1]);\n    std::swap(a->ch[0],\
     \ a->ch[1]);\n    return a;\n  }\n\n public:\n  /* max heap */\n  SkewHeap() :\
     \ root(nullptr) {}\n  void push(T key) {\n    Node *n = new Node(key, Op::ei());\n\
     \    root = merge(root, n);\n  }\n  T pop() {\n    propagate(root);\n    T ret\
@@ -55,8 +55,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-24 12:39:10+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
 layout: document

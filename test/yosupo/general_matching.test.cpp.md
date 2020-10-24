@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/MatchingGeneral.hpp
     title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
       )"
@@ -35,7 +35,7 @@ data:
     \ -1) {\n            rematch(mate[y] = x, y);\n            return true;\n    \
     \      } else if (idx[y] == res) {\n            int u = f(x), v = f(y), w = root;\n\
     \            if (u == v) continue;\n            while (u != root || v != root)\
-    \ {\n              if (v != root) swap(u, v);\n              if (edges[u].first\
+    \ {\n              if (v != root) std::swap(u, v);\n              if (edges[u].first\
     \ == x && edges[u].second == y) {\n                w = u;\n                break;\n\
     \              }\n              edges[u] = {x, y};\n              u = f(edges[mate[u]].first);\n\
     \            }\n            for (int t = f(x); t != w; t = f(edges[mate[t]].first))\n\
@@ -67,7 +67,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/general_matching.test.cpp

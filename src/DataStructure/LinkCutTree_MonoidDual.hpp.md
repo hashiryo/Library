@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9\u53CC\u5BFE)"
     links: []
@@ -92,7 +92,7 @@ data:
   path: src/DataStructure/LinkCutTree_MonoidDual.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2559.LCT_Dual.test.cpp
 documentation_of: src/DataStructure/LinkCutTree_MonoidDual.hpp

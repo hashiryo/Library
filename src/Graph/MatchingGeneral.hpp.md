@@ -3,14 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
   - icon: ':x:'
     path: test/yosupo/general_matching.test.cpp
     title: test/yosupo/general_matching.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\
       \u30E9\u30D5)"
@@ -34,12 +34,12 @@ data:
     \      if (mate[y] == -1) {\n            rematch(mate[y] = x, y);\n          \
     \  return true;\n          } else if (idx[y] == res) {\n            int u = f(x),\
     \ v = f(y), w = root;\n            if (u == v) continue;\n            while (u\
-    \ != root || v != root) {\n              if (v != root) swap(u, v);\n        \
-    \      if (edges[u].first == x && edges[u].second == y) {\n                w =\
-    \ u;\n                break;\n              }\n              edges[u] = {x, y};\n\
-    \              u = f(edges[mate[u]].first);\n            }\n            for (int\
-    \ t = f(x); t != w; t = f(edges[mate[t]].first))\n              idx[t] = res,\
-    \ p[t] = w, que.push(t);\n            for (int t = f(y); t != w; t = f(edges[mate[t]].first))\n\
+    \ != root || v != root) {\n              if (v != root) std::swap(u, v);\n   \
+    \           if (edges[u].first == x && edges[u].second == y) {\n             \
+    \   w = u;\n                break;\n              }\n              edges[u] =\
+    \ {x, y};\n              u = f(edges[mate[u]].first);\n            }\n       \
+    \     for (int t = f(x); t != w; t = f(edges[mate[t]].first))\n              idx[t]\
+    \ = res, p[t] = w, que.push(t);\n            for (int t = f(y); t != w; t = f(edges[mate[t]].first))\n\
     \              idx[t] = res, p[t] = w, que.push(t);\n          } else if (idx[mate[y]]\
     \ != res) {\n            edges[y] = {-1, -1};\n            edges[mate[y]] = {x,\
     \ -1};\n            idx[mate[y]] = res, p[mate[y]] = y, que.push(mate[y]);\n \
@@ -68,7 +68,7 @@ data:
     \ -1) {\n            rematch(mate[y] = x, y);\n            return true;\n    \
     \      } else if (idx[y] == res) {\n            int u = f(x), v = f(y), w = root;\n\
     \            if (u == v) continue;\n            while (u != root || v != root)\
-    \ {\n              if (v != root) swap(u, v);\n              if (edges[u].first\
+    \ {\n              if (v != root) std::swap(u, v);\n              if (edges[u].first\
     \ == x && edges[u].second == y) {\n                w = u;\n                break;\n\
     \              }\n              edges[u] = {x, y};\n              u = f(edges[mate[u]].first);\n\
     \            }\n            for (int t = f(x); t != w; t = f(edges[mate[t]].first))\n\
@@ -87,8 +87,8 @@ data:
   isVerificationFile: false
   path: src/Graph/MatchingGeneral.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 12:39:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3032.test.cpp
   - test/yosupo/general_matching.test.cpp

@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2644.test.cpp
     title: test/aoj/2644.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_D.test.cpp
     title: test/aoj/ALDS1_14_D.test.cpp
   - icon: ':x:'

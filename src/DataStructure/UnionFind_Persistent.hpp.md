@@ -41,7 +41,7 @@ data:
     \n// BEGIN CUT HERE\n\nstruct UnionFind_Persistent {\n  PersistentArray<int> par;\n\
     \  UnionFind_Persistent() {}\n  UnionFind_Persistent(int n) : par(n, -1) {}\n\
     \  bool unite(int u, int v) {\n    if ((u = root(u)) == (v = root(v))) return\
-    \ false;\n    if (par.get(u) > par.get(v)) swap(u, v);\n    par[u] += par.get(v),\
+    \ false;\n    if (par.get(u) > par.get(v)) std::swap(u, v);\n    par[u] += par.get(v),\
     \ par[v] = u;\n    return true;\n  }\n  bool same(int u, int v) { return root(u)\
     \ == root(v); }\n  int root(int u) { return par.get(u) < 0 ? u : root(par.get(u));\
     \ }\n  int size(int u) { return -par.get(root(u)); }\n};\n"
@@ -52,7 +52,7 @@ data:
     \n// BEGIN CUT HERE\n\nstruct UnionFind_Persistent {\n  PersistentArray<int> par;\n\
     \  UnionFind_Persistent() {}\n  UnionFind_Persistent(int n) : par(n, -1) {}\n\
     \  bool unite(int u, int v) {\n    if ((u = root(u)) == (v = root(v))) return\
-    \ false;\n    if (par.get(u) > par.get(v)) swap(u, v);\n    par[u] += par.get(v),\
+    \ false;\n    if (par.get(u) > par.get(v)) std::swap(u, v);\n    par[u] += par.get(v),\
     \ par[v] = u;\n    return true;\n  }\n  bool same(int u, int v) { return root(u)\
     \ == root(v); }\n  int root(int u) { return par.get(u) < 0 ? u : root(par.get(u));\
     \ }\n  int size(int u) { return -par.get(root(u)); }\n};\n"
@@ -61,7 +61,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind_Persistent.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/persistent_unionfind.test.cpp

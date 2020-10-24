@@ -323,8 +323,8 @@ data:
     \ < pss[j].size())\n                std::swap(pss[i], pss[j]), std::swap(qs[i],\
     \ qs[j]);\n            if ((int)pss[i].size() <= best) break;\n            rec(qs[i],\
     \ w, pss[i]);\n          }\n        };\n  Real w = 0;\n  for (Point p : ps) w\
-    \ = std::max({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n  return\
-    \ {best, best_p};\n}\n\n}  // namespace geometry\n"
+    \ = std::max<Real>({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n\
+    \  return {best, best_p};\n}\n\n}  // namespace geometry\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\
     \n/**\n * @title \u5186\u306E\u3042\u308C\u3053\u308C\n * @category \u5E7E\u4F55\
     \n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\nCircle inscribed_circle(Point\
@@ -383,14 +383,14 @@ data:
     \ < pss[j].size())\n                std::swap(pss[i], pss[j]), std::swap(qs[i],\
     \ qs[j]);\n            if ((int)pss[i].size() <= best) break;\n            rec(qs[i],\
     \ w, pss[i]);\n          }\n        };\n  Real w = 0;\n  for (Point p : ps) w\
-    \ = std::max({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n  return\
-    \ {best, best_p};\n}\n\n}  // namespace geometry\n"
+    \ = std::max<Real>({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n\
+    \  return {best, best_p};\n}\n\n}  // namespace geometry\n"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   isVerificationFile: false
   path: src/Geometry/circle_functions.hpp
   requiredBy: []
-  timestamp: '2020-10-24 12:08:04+09:00'
+  timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2201.test.cpp

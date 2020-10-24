@@ -296,8 +296,8 @@ data:
     \ < pss[j].size())\n                std::swap(pss[i], pss[j]), std::swap(qs[i],\
     \ qs[j]);\n            if ((int)pss[i].size() <= best) break;\n            rec(qs[i],\
     \ w, pss[i]);\n          }\n        };\n  Real w = 0;\n  for (Point p : ps) w\
-    \ = std::max({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n  return\
-    \ {best, best_p};\n}\n\n}  // namespace geometry\n#line 6 \"test/aoj/CGL_7_A.test.cpp\"\
+    \ = std::max<Real>({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n\
+    \  return {best, best_p};\n}\n\n}  // namespace geometry\n#line 6 \"test/aoj/CGL_7_A.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using namespace geometry;\n  Circle c, d;\n  cin >> c.o >> c.r;\n  cin >> d.o\
     \ >> d.r;\n  cout << common_tangent(c, d).size() << endl;\n  return 0;\n}\n"
@@ -313,7 +313,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_7_A.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 12:08:04+09:00'
+  timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_A.test.cpp

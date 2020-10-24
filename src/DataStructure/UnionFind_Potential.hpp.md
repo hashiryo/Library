@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2207.test.cpp
     title: test/aoj/2207.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
     links: []
@@ -20,12 +20,12 @@ data:
     \ par;\n  std::vector<Weight> val;\n  UnionFind_Potential(int size) : par(size,\
     \ -1), val(size, 0) {}\n  bool unite(int v, int u, Weight w) {\n    w += potential(u)\
     \ - potential(v);\n    if ((u = root(u)) == (v = root(v))) return false;\n   \
-    \ if (par[u] > par[v]) swap(u, v), w = -w;\n    par[u] += par[v], par[v] = u,\
-    \ val[v] = w;\n    return true;\n  }\n  bool same(int u, int v) { return root(u)\
-    \ == root(v); }\n  int root(int u) {\n    if (par[u] < 0) return u;\n    int r\
-    \ = root(par[u]);\n    val[u] += val[par[u]];\n    return par[u] = r;\n  }\n \
-    \ int size(int u) { return -par[root(u)]; }\n  Weight potential(int u) {\n   \
-    \ root(u);\n    return val[u];\n  }\n  Weight diff(int u, int v) { return potential(u)\
+    \ if (par[u] > par[v]) std::swap(u, v), w = -w;\n    par[u] += par[v], par[v]\
+    \ = u, val[v] = w;\n    return true;\n  }\n  bool same(int u, int v) { return\
+    \ root(u) == root(v); }\n  int root(int u) {\n    if (par[u] < 0) return u;\n\
+    \    int r = root(par[u]);\n    val[u] += val[par[u]];\n    return par[u] = r;\n\
+    \  }\n  int size(int u) { return -par[root(u)]; }\n  Weight potential(int u) {\n\
+    \    root(u);\n    return val[u];\n  }\n  Weight diff(int u, int v) { return potential(u)\
     \ - potential(v); }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Union-Find(\u30DD\u30C6\
     \u30F3\u30B7\u30E3\u30EB)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
@@ -35,10 +35,10 @@ data:
     \ UnionFind_Potential {\n  std::vector<int> par;\n  std::vector<Weight> val;\n\
     \  UnionFind_Potential(int size) : par(size, -1), val(size, 0) {}\n  bool unite(int\
     \ v, int u, Weight w) {\n    w += potential(u) - potential(v);\n    if ((u = root(u))\
-    \ == (v = root(v))) return false;\n    if (par[u] > par[v]) swap(u, v), w = -w;\n\
-    \    par[u] += par[v], par[v] = u, val[v] = w;\n    return true;\n  }\n  bool\
-    \ same(int u, int v) { return root(u) == root(v); }\n  int root(int u) {\n   \
-    \ if (par[u] < 0) return u;\n    int r = root(par[u]);\n    val[u] += val[par[u]];\n\
+    \ == (v = root(v))) return false;\n    if (par[u] > par[v]) std::swap(u, v), w\
+    \ = -w;\n    par[u] += par[v], par[v] = u, val[v] = w;\n    return true;\n  }\n\
+    \  bool same(int u, int v) { return root(u) == root(v); }\n  int root(int u) {\n\
+    \    if (par[u] < 0) return u;\n    int r = root(par[u]);\n    val[u] += val[par[u]];\n\
     \    return par[u] = r;\n  }\n  int size(int u) { return -par[root(u)]; }\n  Weight\
     \ potential(int u) {\n    root(u);\n    return val[u];\n  }\n  Weight diff(int\
     \ u, int v) { return potential(u) - potential(v); }\n};"
@@ -46,8 +46,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind_Potential.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 12:39:10+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2207.test.cpp
 documentation_of: src/DataStructure/UnionFind_Potential.hpp

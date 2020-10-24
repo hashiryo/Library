@@ -2,20 +2,20 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/MinimumSpanningTree_Kruskal.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
   - icon: ':x:'
@@ -31,7 +31,7 @@ data:
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Union-Find
     links: []
@@ -44,10 +44,10 @@ data:
     \n * @brief O(\u03B1(N))\n */\n\n// BEGIN CUT HERE\n\nstruct UnionFind {\n  std::vector<int>\
     \ par;\n  UnionFind(int size) : par(size, -1) {}\n  bool unite(int u, int v) {\n\
     \    if ((u = root(u)) == (v = root(v))) return false;\n    if (par[u] > par[v])\
-    \ swap(u, v);\n    par[u] += par[v], par[v] = u;\n    return true;\n  }\n  bool\
-    \ same(int u, int v) { return root(u) == root(v); }\n  int root(int u) { return\
-    \ par[u] < 0 ? u : par[u] = root(par[u]); }\n  int size(int u) { return -par[root(u)];\
-    \ }\n};\n"
+    \ std::swap(u, v);\n    par[u] += par[v], par[v] = u;\n    return true;\n  }\n\
+    \  bool same(int u, int v) { return root(u) == root(v); }\n  int root(int u) {\
+    \ return par[u] < 0 ? u : par[u] = root(par[u]); }\n  int size(int u) { return\
+    \ -par[root(u)]; }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Union-Find\n * @category\
     \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief unite(x,y) x \u304C\u5165\u3063\u3066\
     \u3044\u308B\u96C6\u5408\u3068 y \u304C\u5165\u3063\u3066\u3044\u308B\u96C6\u5408\
@@ -56,7 +56,7 @@ data:
     \u3092\u5224\u5B9A\u3059\u308B\uFF0E\n * @brief O(\u03B1(N))\n */\n\n// BEGIN\
     \ CUT HERE\n\nstruct UnionFind {\n  std::vector<int> par;\n  UnionFind(int size)\
     \ : par(size, -1) {}\n  bool unite(int u, int v) {\n    if ((u = root(u)) == (v\
-    \ = root(v))) return false;\n    if (par[u] > par[v]) swap(u, v);\n    par[u]\
+    \ = root(v))) return false;\n    if (par[u] > par[v]) std::swap(u, v);\n    par[u]\
     \ += par[v], par[v] = u;\n    return true;\n  }\n  bool same(int u, int v) { return\
     \ root(u) == root(v); }\n  int root(int u) { return par[u] < 0 ? u : par[u] =\
     \ root(par[u]); }\n  int size(int u) { return -par[root(u)]; }\n};"
@@ -66,8 +66,8 @@ data:
   requiredBy:
   - src/Graph/MinimumSpanningTree_Kruskal.hpp
   - src/Graph/MinimumSpanningAborescense.hpp
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 12:39:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/GRL_2_B.test.cpp
   - test/aoj/DSL_1_A.test.cpp
