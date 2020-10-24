@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':heavy_check_mark:'
@@ -65,7 +65,7 @@ data:
     \    else {\n        std::vector<int> v(m);\n        v[j] = 1;\n        for (std::size_t\
     \ i = 0; i < n; i++)\n          if (jdx[i] != -1) v[jdx[i]] = p.first[i][j];\n\
     \        d.push_back(v);\n      }\n    }\n    return std::make_pair(c, d);\n \
-    \ }\n  int rank() const {\n    int n = height(), m = width();\n    Matrix_mod2\
+    \ }\n  int rank() const {\n    std::size_t n = height(), m = width();\n    Matrix_mod2\
     \ b(n, 0);\n    Matrix_mod2 p = Gauss_Jordan(*this, b).first;\n    for (std::size_t\
     \ i = 0, j; i < n; i++) {\n      for (j = 0; j < m; j++)\n        if (p[i][j]\
     \ != 0) break;\n      if (j == m) return i;\n    }\n    return n;\n  }\n\n private:\n\
@@ -135,7 +135,7 @@ data:
     \    else {\n        std::vector<int> v(m);\n        v[j] = 1;\n        for (std::size_t\
     \ i = 0; i < n; i++)\n          if (jdx[i] != -1) v[jdx[i]] = p.first[i][j];\n\
     \        d.push_back(v);\n      }\n    }\n    return std::make_pair(c, d);\n \
-    \ }\n  int rank() const {\n    int n = height(), m = width();\n    Matrix_mod2\
+    \ }\n  int rank() const {\n    std::size_t n = height(), m = width();\n    Matrix_mod2\
     \ b(n, 0);\n    Matrix_mod2 p = Gauss_Jordan(*this, b).first;\n    for (std::size_t\
     \ i = 0, j; i < n; i++) {\n      for (j = 0; j < m; j++)\n        if (p[i][j]\
     \ != 0) break;\n      if (j == m) return i;\n    }\n    return n;\n  }\n\n private:\n\
@@ -165,7 +165,7 @@ data:
   isVerificationFile: false
   path: src/Math/Matrix_mod2.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 14:33:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/803.test.cpp

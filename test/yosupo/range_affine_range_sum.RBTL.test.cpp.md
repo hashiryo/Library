@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: src/DataStructure/RedBlackTree_Lazy.hpp
     title: "\u8D64\u9ED2\u6728(\u9045\u5EF6\u4F1D\u642C)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -110,7 +110,7 @@ data:
     \ LIM>::nPool RedBlackTree_Lazy<M, LIM>::pool(LIM);\n#line 3 \"src/Math/ModInt.hpp\"\
     \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
     namespace internal {\nstruct modint_base {};\n}  // namespace internal\n\ntemplate\
-    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt : modint_base\
+    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt : internal::modint_base\
     \ {\n private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
     \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
     \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
@@ -195,7 +195,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.RBTL.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 01:18:43+09:00'
+  timestamp: '2020-10-24 14:33:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.RBTL.test.cpp

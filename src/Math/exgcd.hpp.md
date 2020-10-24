@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -22,7 +22,7 @@ data:
     \ \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
     \ */\n\n// BEGIN CUT HERE\nnamespace internal {\nstruct modint_base {};\n}  //\
     \ namespace internal\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root =\
-    \ 0>\nclass ModInt : modint_base {\n private:\n  using u64 = std::uint64_t;\n\
+    \ 0>\nclass ModInt : internal::modint_base {\n private:\n  using u64 = std::uint64_t;\n\
     \  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
     \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
     \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64\
@@ -394,7 +394,7 @@ data:
   isVerificationFile: false
   path: src/Math/exgcd.hpp
   requiredBy: []
-  timestamp: '2020-10-24 01:18:43+09:00'
+  timestamp: '2020-10-24 14:33:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp

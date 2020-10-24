@@ -25,30 +25,31 @@ data:
     \ SA.end(), 0);\n    std::sort(SA.begin(), SA.end(),\n              [&](int a,\
     \ int b) { return s[a] == s[b] ? a > b : s[a] < s[b]; });\n    std::vector<int>\
     \ classes(s.size()), c(s.begin(), s.end()), cnt(s.size());\n    for (int len =\
-    \ 1; len < s.size(); len <<= 1) {\n      for (int i = 0; i < s.size(); i++) {\n\
-    \        if (i > 0 && c[SA[i - 1]] == c[SA[i]] && SA[i - 1] + len < s.size()\n\
+    \ 1; len < (int)s.size(); len <<= 1) {\n      for (int i = 0; i < (int)s.size();\
+    \ i++) {\n        if (i > 0 && c[SA[i - 1]] == c[SA[i]] && SA[i - 1] + len < s.size()\n\
     \            && c[SA[i - 1] + len / 2] == c[SA[i] + len / 2]) {\n          classes[SA[i]]\
     \ = classes[SA[i - 1]];\n        } else {\n          classes[SA[i]] = i;\n   \
     \     }\n      }\n      std::iota(cnt.begin(), cnt.end(), 0);\n      std::copy(SA.begin(),\
-    \ SA.end(), c.begin());\n      for (int i = 0; i < s.size(); i++) {\n        int\
-    \ s1 = c[i] - len;\n        if (s1 >= 0) SA[cnt[classes[s1]]++] = s1;\n      }\n\
-    \      classes.swap(c);\n    }\n  }\n  int operator[](int k) const { return (SA[k]);\
-    \ }\n\n  // O(|T|log|S|)\n  int lower_bound(std::string &T) {\n    int low = -1,\
-    \ high = s.size();\n    while (high - low > 1) {\n      int m = (low + high) >>\
-    \ 1;\n      if (s.compare(SA[m], T.length(), T) < 0)\n        low = m;\n     \
-    \ else\n        high = m;\n    }\n    return high;\n  }\n  int upper_bound(std::string\
-    \ &T) {\n    T.back()++;\n    int res = lower_bound(T);\n    T.back()--;\n   \
-    \ return res;\n  }\n  // O(|T|log|S|)\n  int count(std::string &T) { return upper_bound(T)\
-    \ - lower_bound(T); }\n\n  // O(|S|)\n  std::vector<int> get_lcp() {\n    std::vector<int>\
-    \ rank(SA.size()), LCP(SA.size());\n    for (int i = 0; i < SA.size(); i++) rank[SA[i]]\
-    \ = i;\n    for (int i = 0, h = 0; i < SA.size(); i++) {\n      if (rank[i] +\
-    \ 1 < SA.size()) {\n        int j = SA[rank[i] + 1];\n        while (std::max(i,\
-    \ j) + h < SA.size() && s[i + h] == s[j + h]) ++h;\n        LCP[rank[i] + 1] =\
-    \ h;\n        if (h > 0) --h;\n      }\n    }\n    return LCP;\n  }\n};\n#line\
-    \ 4 \"test/yosupo/suffixarray.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  string S;\n  cin >> S;\n  SuffixArray\
-    \ SA(S);\n  for (int i = 0; i < S.length(); i++) {\n    cout << (i ? \" \" : \"\
-    \") << SA[i];\n  }\n  cout << endl;\n  return 0;\n}\n"
+    \ SA.end(), c.begin());\n      for (int i = 0; i < (int)s.size(); i++) {\n   \
+    \     int s1 = c[i] - len;\n        if (s1 >= 0) SA[cnt[classes[s1]]++] = s1;\n\
+    \      }\n      classes.swap(c);\n    }\n  }\n  int operator[](int k) const {\
+    \ return (SA[k]); }\n\n  // O(|T|log|S|)\n  int lower_bound(std::string &T) {\n\
+    \    int low = -1, high = s.size();\n    while (high - low > 1) {\n      int m\
+    \ = (low + high) >> 1;\n      if (s.compare(SA[m], T.length(), T) < 0)\n     \
+    \   low = m;\n      else\n        high = m;\n    }\n    return high;\n  }\n  int\
+    \ upper_bound(std::string &T) {\n    T.back()++;\n    int res = lower_bound(T);\n\
+    \    T.back()--;\n    return res;\n  }\n  // O(|T|log|S|)\n  int count(std::string\
+    \ &T) { return upper_bound(T) - lower_bound(T); }\n\n  // O(|S|)\n  std::vector<int>\
+    \ get_lcp() {\n    std::vector<int> rank(SA.size()), LCP(SA.size());\n    for\
+    \ (int i = 0; i < (int)SA.size(); i++) rank[SA[i]] = i;\n    for (int i = 0, h\
+    \ = 0; i < (int)SA.size(); i++) {\n      if (rank[i] + 1 < (int)SA.size()) {\n\
+    \        int j = SA[rank[i] + 1];\n        while (std::max(i, j) + h < (int)SA.size()\
+    \ && s[i + h] == s[j + h]) ++h;\n        LCP[rank[i] + 1] = h;\n        if (h\
+    \ > 0) --h;\n      }\n    }\n    return LCP;\n  }\n};\n#line 4 \"test/yosupo/suffixarray.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  string S;\n  cin >> S;\n  SuffixArray SA(S);\n  for (int i = 0; i < S.length();\
+    \ i++) {\n    cout << (i ? \" \" : \"\") << SA[i];\n  }\n  cout << endl;\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/String/SuffixArray.hpp\"\nusing namespace std;\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  string S;\n  cin\
@@ -59,7 +60,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/suffixarray.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-10-24 14:33:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/suffixarray.test.cpp

@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':x:'
@@ -19,7 +19,7 @@ data:
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
@@ -27,7 +27,7 @@ data:
     \ 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
     \ */\n\n// BEGIN CUT HERE\nnamespace internal {\nstruct modint_base {};\n}  //\
     \ namespace internal\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root =\
-    \ 0>\nclass ModInt : modint_base {\n private:\n  using u64 = std::uint64_t;\n\
+    \ 0>\nclass ModInt : internal::modint_base {\n private:\n  using u64 = std::uint64_t;\n\
     \  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
     \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
     \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64\
@@ -353,8 +353,8 @@ data:
   isVerificationFile: false
   path: src/Math/kitamasa.hpp
   requiredBy: []
-  timestamp: '2020-10-24 01:18:43+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 14:33:30+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/215.test.cpp

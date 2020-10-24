@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':x:'
@@ -23,12 +23,12 @@ data:
     \n\n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title\
     \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal\
     \ {\nstruct modint_base {};\n}  // namespace internal\n\ntemplate <std::uint64_t\
-    \ mod, std::uint64_t prim_root = 0>\nclass ModInt : modint_base {\n private:\n\
-    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2\
-    \ = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
+    \ mod, std::uint64_t prim_root = 0>\nclass ModInt : internal::modint_base {\n\
+    \ private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
+    \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
+    \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
+    \ 6, 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64\
+    \ m2 = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) :\
     \ x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr\
     \ u64 modulo() { return mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
@@ -347,7 +347,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/partition.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 01:18:43+09:00'
+  timestamp: '2020-10-24 14:33:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/partition.test.cpp

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -14,26 +14,26 @@ data:
   - icon: ':x:'
     path: src/Math/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_D.test.cpp
     title: test/aoj/DPL_5_D.test.cpp
   - icon: ':x:'
@@ -169,19 +169,19 @@ data:
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: ModInt
     links: []
   bundledCode: "#line 2 \"src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n/**\n *\
     \ @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace\
     \ internal {\nstruct modint_base {};\n}  // namespace internal\n\ntemplate <std::uint64_t\
-    \ mod, std::uint64_t prim_root = 0>\nclass ModInt : modint_base {\n private:\n\
-    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2\
-    \ = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
+    \ mod, std::uint64_t prim_root = 0>\nclass ModInt : internal::modint_base {\n\
+    \ private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
+    \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
+    \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
+    \ 6, 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64\
+    \ m2 = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) :\
     \ x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr\
     \ u64 modulo() { return mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
@@ -223,20 +223,20 @@ data:
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title ModInt\n * @category\
     \ \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\nstruct modint_base\
     \ {};\n}  // namespace internal\n\ntemplate <std::uint64_t mod, std::uint64_t\
-    \ prim_root = 0>\nclass ModInt : modint_base {\n private:\n  using u64 = std::uint64_t;\n\
-    \  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
-    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
-    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64\
-    \ r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\n public:\n\
-    \  static constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt()\
-    \ : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) %\
-    \ mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo() { return\
-    \ mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n\
-    \  static constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod\
-    \ - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64 norm(u64\
-    \ x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt() { return\
-    \ prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return\
-    \ ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
+    \ prim_root = 0>\nclass ModInt : internal::modint_base {\n private:\n  using u64\
+    \ = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
+    \ n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2\
+    \ - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static\
+    \ constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\
+    \n public:\n  static constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr\
+    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
+    \ - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo()\
+    \ { return mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
+    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
+    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64\
+    \ norm(u64 x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt()\
+    \ { return prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n\
+    \    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
     \ ModInt &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n \
     \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
     \ x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt\
@@ -276,8 +276,8 @@ data:
   - src/Math/exgcd.hpp
   - src/Math/FormalPowerSeries.hpp
   - src/Math/fps_sequence.hpp
-  timestamp: '2020-10-24 01:18:43+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-24 14:33:30+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/42.test.cpp
