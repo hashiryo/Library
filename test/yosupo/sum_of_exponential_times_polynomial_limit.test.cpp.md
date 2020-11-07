@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
@@ -22,7 +22,7 @@ data:
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\n/**\n * @title \u7D44\
     \u307F\u5408\u308F\u305B\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <class mint, std::size_t LIM = (1 << 23)>\nstruct Combination {\n private:\n\
+    \ntemplate <class mint, std::size_t LIM = (1 << 24)>\nstruct Combination {\n private:\n\
     \  static inline mint _fact[LIM], _finv[LIM];\n  static inline void set(int sz)\
     \ {\n    static int lim = 0;\n    if (lim <= sz) {\n      if (lim == 0) _fact[0]\
     \ = _finv[0] = 1, lim = 1;\n      for (int i = lim; i <= sz; i++) _fact[i] = _fact[i\
@@ -121,8 +121,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2020-11-07 14:59:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-07 15:26:25+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
 layout: document

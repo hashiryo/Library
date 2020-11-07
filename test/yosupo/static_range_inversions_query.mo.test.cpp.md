@@ -50,11 +50,11 @@ data:
     \ 1) s += dat[i];\n    return s;\n  }\n  // sum [l,r)\n  T sum(int l, int r) {\
     \ return sum(r) - sum(l); }\n  T operator[](size_t k) { return sum(k + 1) - sum(k);\
     \ }\n  // min { i : sum(i+1) > k } -> kth element(0-indexed)\n  int find(T k)\
-    \ const {\n    int i = 0;\n    for (int p = 1 << (__lg(dat.size() - 1) + 1); p\
-    \ > 0; p >>= 1)\n      if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i\
-    \ += p];\n    return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions\n\
-    \  }\n};\n#line 5 \"test/yosupo/static_range_inversions_query.mo.test.cpp\"\n\
-    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ const {\n    int i = 0;\n    for (int p = 1 << (std::__lg(dat.size() - 1) +\
+    \ 1); p > 0; p >>= 1)\n      if (i + p < (int)dat.size() && dat[i + p] <= k) k\
+    \ -= dat[i += p];\n    return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no\
+    \ solutions\n  }\n};\n#line 5 \"test/yosupo/static_range_inversions_query.mo.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  int A[N];\n  for (int i = 0; i < N; i++) cin\
     \ >> A[i];\n  vector<int> v(A, A + N);\n  sort(v.begin(), v.end());\n  v.erase(unique(v.begin(),\
     \ v.end()), v.end());\n  for (int i = 0; i < N; i++)\n    A[i] = lower_bound(v.begin(),\
@@ -92,7 +92,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/static_range_inversions_query.mo.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 00:25:59+09:00'
+  timestamp: '2020-11-07 15:26:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/static_range_inversions_query.mo.test.cpp

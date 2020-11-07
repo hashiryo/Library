@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
   - icon: ':question:'
@@ -19,7 +19,7 @@ data:
   bundledCode: "#line 1 \"test/aoj/DPL_5_F.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\n/**\n * @title\
     \ \u7D44\u307F\u5408\u308F\u305B\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT\
-    \ HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 23)>\nstruct Combination\
+    \ HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 24)>\nstruct Combination\
     \ {\n private:\n  static inline mint _fact[LIM], _finv[LIM];\n  static inline\
     \ void set(int sz) {\n    static int lim = 0;\n    if (lim <= sz) {\n      if\
     \ (lim == 0) _fact[0] = _finv[0] = 1, lim = 1;\n      for (int i = lim; i <= sz;\
@@ -92,7 +92,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_F.test.cpp
   requiredBy: []
-  timestamp: '2020-11-07 14:59:22+09:00'
+  timestamp: '2020-11-07 15:26:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_F.test.cpp

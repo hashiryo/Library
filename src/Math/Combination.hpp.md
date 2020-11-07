@@ -15,20 +15,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u7D44\u307F\u5408\u308F\u305B"
     links: []
   bundledCode: "#line 2 \"src/Math/Combination.hpp\"\n#include <bits/stdc++.h>\n/**\n\
     \ * @title \u7D44\u307F\u5408\u308F\u305B\n * @category \u6570\u5B66\n */\n\n\
-    // BEGIN CUT HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 23)>\nstruct\
+    // BEGIN CUT HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 24)>\nstruct\
     \ Combination {\n private:\n  static inline mint _fact[LIM], _finv[LIM];\n  static\
     \ inline void set(int sz) {\n    static int lim = 0;\n    if (lim <= sz) {\n \
     \     if (lim == 0) _fact[0] = _finv[0] = 1, lim = 1;\n      for (int i = lim;\
@@ -42,7 +42,7 @@ data:
     \ + r - 1, r); }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u7D44\u307F\u5408\
     \u308F\u305B\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\ntemplate\
-    \ <class mint, std::size_t LIM = (1 << 23)>\nstruct Combination {\n private:\n\
+    \ <class mint, std::size_t LIM = (1 << 24)>\nstruct Combination {\n private:\n\
     \  static inline mint _fact[LIM], _finv[LIM];\n  static inline void set(int sz)\
     \ {\n    static int lim = 0;\n    if (lim <= sz) {\n      if (lim == 0) _fact[0]\
     \ = _finv[0] = 1, lim = 1;\n      for (int i = lim; i <= sz; i++) _fact[i] = _fact[i\
@@ -57,8 +57,8 @@ data:
   isVerificationFile: false
   path: src/Math/Combination.hpp
   requiredBy: []
-  timestamp: '2020-11-07 14:59:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2020-11-07 15:26:25+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DPL_5_B.test.cpp
   - test/aoj/DPL_5_E.test.cpp

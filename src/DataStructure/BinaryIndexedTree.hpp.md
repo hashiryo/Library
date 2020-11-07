@@ -33,7 +33,7 @@ data:
     \    for (; i > 0; i &= i - 1) s += dat[i];\n    return s;\n  }\n  // sum [l,r)\n\
     \  T sum(int l, int r) { return sum(r) - sum(l); }\n  T operator[](size_t k) {\
     \ return sum(k + 1) - sum(k); }\n  // min { i : sum(i+1) > k } -> kth element(0-indexed)\n\
-    \  int find(T k) const {\n    int i = 0;\n    for (int p = 1 << (__lg(dat.size()\
+    \  int find(T k) const {\n    int i = 0;\n    for (int p = 1 << (std::__lg(dat.size()\
     \ - 1) + 1); p > 0; p >>= 1)\n      if (i + p < (int)dat.size() && dat[i + p]\
     \ <= k) k -= dat[i += p];\n    return i + 1 == (int)dat.size() ? -1 : i;  // -1\
     \ -> no solutions\n  }\n};\n"
@@ -50,15 +50,15 @@ data:
     \ 1) s += dat[i];\n    return s;\n  }\n  // sum [l,r)\n  T sum(int l, int r) {\
     \ return sum(r) - sum(l); }\n  T operator[](size_t k) { return sum(k + 1) - sum(k);\
     \ }\n  // min { i : sum(i+1) > k } -> kth element(0-indexed)\n  int find(T k)\
-    \ const {\n    int i = 0;\n    for (int p = 1 << (__lg(dat.size() - 1) + 1); p\
-    \ > 0; p >>= 1)\n      if (i + p < (int)dat.size() && dat[i + p] <= k) k -= dat[i\
-    \ += p];\n    return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no solutions\n\
-    \  }\n};"
+    \ const {\n    int i = 0;\n    for (int p = 1 << (std::__lg(dat.size() - 1) +\
+    \ 1); p > 0; p >>= 1)\n      if (i + p < (int)dat.size() && dat[i + p] <= k) k\
+    \ -= dat[i += p];\n    return i + 1 == (int)dat.size() ? -1 : i;  // -1 -> no\
+    \ solutions\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/BinaryIndexedTree.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2020-11-07 15:26:25+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/738.BIT.test.cpp

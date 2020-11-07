@@ -100,14 +100,14 @@ data:
     \  for (int i = 2; i <= n; i += 2) mpf[i] = 2;\n  for (long long p = 3; p <= n;\
     \ p += 2)\n    if (!mpf[p]) {\n      mpf[p] = p;\n      primes.push_back(p);\n\
     \      for (long long i = p * p; i <= n; i += 2 * p)\n        if (!mpf[i]) mpf[i]\
-    \ = p;\n    }\n}\n\nstd::vector<pair<int, int>> prime_factorize(int n) {  // O(log\
-    \ n)\n  std::vector<pair<int, int>> res;\n  while (n > 1) {\n    int p = mpf[n];\n\
-    \    int e = 0;\n    while (mpf[n] == p) e++, n /= p;\n    res.push_back(make_pair(p,\
-    \ e));\n  }\n  return res;\n}\n\n// f -> g s.t. g(n) = sum_{m|n} f(m)\ntemplate\
-    \ <typename T>\nvoid divisor_zeta(std::vector<T> &f) {\n  int n = f.size();\n\
-    \  if (!primes.size()) init(n);\n  for (int p : primes) {\n    if (p > n) break;\n\
-    \    for (int i = 1; p * i < n; i++) f[p * i] += f[i];\n  }\n}\n// f -> h s.t.\
-    \ f(n) = sum_{m|n} h(m)\ntemplate <typename T>\nvoid divisor_mobius(std::vector<T>\
+    \ = p;\n    }\n}\n\nstd::vector<std::pair<int, int>> prime_factorize(int n) {\
+    \  // O(log n)\n  std::vector<std::pair<int, int>> res;\n  while (n > 1) {\n \
+    \   int p = mpf[n];\n    int e = 0;\n    while (mpf[n] == p) e++, n /= p;\n  \
+    \  res.push_back(std::make_pair(p, e));\n  }\n  return res;\n}\n\n// f -> g s.t.\
+    \ g(n) = sum_{m|n} f(m)\ntemplate <typename T>\nvoid divisor_zeta(std::vector<T>\
+    \ &f) {\n  int n = f.size();\n  if (!primes.size()) init(n);\n  for (int p : primes)\
+    \ {\n    if (p > n) break;\n    for (int i = 1; p * i < n; i++) f[p * i] += f[i];\n\
+    \  }\n}\n// f -> h s.t. f(n) = sum_{m|n} h(m)\ntemplate <typename T>\nvoid divisor_mobius(std::vector<T>\
     \ &f) {\n  int n = f.size();\n  if (!primes.size()) init(n);\n  for (int p : primes)\
     \ {\n    if (p > n) break;\n    for (int i = (n - 1) / p; i > 0; i--) f[p * i]\
     \ -= f[i];\n  }\n}\n// get table of Mobius function\ntemplate <typename T = int>\n\
@@ -162,7 +162,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 14:33:30+09:00'
+  timestamp: '2020-11-07 15:26:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
