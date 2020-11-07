@@ -12,11 +12,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/number_of_substrings.test.cpp
     title: test/yosupo/number_of_substrings.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/suffixarray.test.cpp
     title: test/yosupo/suffixarray.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
     links: []
@@ -89,7 +89,7 @@ data:
   path: src/String/SuffixArray.hpp
   requiredBy: []
   timestamp: '2020-10-24 14:33:30+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2644.test.cpp
   - test/aoj/ALDS1_14_D.test.cpp

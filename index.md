@@ -8,7 +8,7 @@ data:
       title: '!hoge.hpp'
   - name: src/Algorithm
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Algorithm/Mo.hpp
       title: Mo
   - name: src/DataStructure
@@ -171,13 +171,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/discrete_log.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/dujiao_sieve.hpp
       title: "\u675C\u6559\u7B5B"
     - icon: ':heavy_check_mark:'
       path: src/Math/exgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/fps_sequence.hpp
       title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
     - icon: ':question:'
@@ -186,7 +186,7 @@ data:
     - icon: ':x:'
       path: src/Math/lagrange_interpolation.hpp
       title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/number_theory.hpp
       title: "\u6570\u8AD6"
   - name: src/String
@@ -197,7 +197,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/String/SuffixArray.hpp
       title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
     - icon: ':x:'
@@ -607,25 +607,25 @@ data:
     - icon: ':x:'
       path: test/yosupo/set_xor_min.test.cpp
       title: test/yosupo/set_xor_min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sharp_p_subset_sum.test.cpp
       title: test/yosupo/sharp_p_subset_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/shift_of_FPS.test.cpp
       title: test/yosupo/shift_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_of_FPS.test.cpp
       title: test/yosupo/sqrt_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_inversions_query.mo.test.cpp
       title: test/yosupo/static_range_inversions_query.mo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/stirling_first.test.cpp
       title: test/yosupo/stirling_first.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/stirling_second.test.cpp
       title: test/yosupo/stirling_second.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/suffixarray.test.cpp
       title: test/yosupo/suffixarray.test.cpp
     - icon: ':x:'
@@ -634,7 +634,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
       title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.test.cpp
       title: test/yosupo/sum_of_totient_function.test.cpp
     - icon: ':x:'
