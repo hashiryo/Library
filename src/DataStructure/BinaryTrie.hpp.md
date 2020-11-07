@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.test.cpp
     title: test/yosupo/set_xor_min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.BinaryTrie.test.cpp
     title: test/yukicoder/649.BinaryTrie.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u4E8C\u5206Trie"
     links:
@@ -29,7 +29,7 @@ data:
     \ new(std::size_t) {\n      static std::vector<Node> pool(LIM);\n      return\
     \ &pool[node_count++];\n    }\n  };\n\n protected:\n  int height;\n  ll n;\n \
     \ static int node_count;\n  Node *root;\n\n private:\n  inline void push(Node\
-    \ *t, ll b) {\n    if ((t->xor_lazy >> (U)b) & (U)1) swap(t->ch[0], t->ch[1]);\n\
+    \ *t, ll b) {\n    if ((t->xor_lazy >> (U)b) & (U)1) std::swap(t->ch[0], t->ch[1]);\n\
     \    if (t->ch[0] != nullptr) t->ch[0]->xor_lazy ^= t->xor_lazy;\n    if (t->ch[1]\
     \ != nullptr) t->ch[1]->xor_lazy ^= t->xor_lazy;\n    t->xor_lazy = 0;\n  }\n\
     \  T value(Node *t) { return t ? t->dat : M::ti(); }\n  Node *set_Node(Node *t,\
@@ -95,8 +95,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/BinaryTrie.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-11-07 14:59:22+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/649.BinaryTrie.test.cpp
   - test/yosupo/set_xor_min.test.cpp

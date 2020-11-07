@@ -12,11 +12,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.test.cpp
     title: test/yosupo/bipartitematching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/421.test.cpp
     title: test/yukicoder/421.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E8C\u90E8\u30B0\
       \u30E9\u30D5)"
@@ -95,7 +95,7 @@ data:
   path: src/Graph/MatchingBipartite.hpp
   requiredBy: []
   timestamp: '2020-10-24 15:09:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/421.test.cpp
   - test/aoj/2423.test.cpp

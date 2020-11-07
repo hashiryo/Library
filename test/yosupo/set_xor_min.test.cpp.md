@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/BinaryTrie.hpp
     title: "\u4E8C\u5206Trie"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/set_xor_min
@@ -27,7 +27,7 @@ data:
     \ std::vector<Node> pool(LIM);\n      return &pool[node_count++];\n    }\n  };\n\
     \n protected:\n  int height;\n  ll n;\n  static int node_count;\n  Node *root;\n\
     \n private:\n  inline void push(Node *t, ll b) {\n    if ((t->xor_lazy >> (U)b)\
-    \ & (U)1) swap(t->ch[0], t->ch[1]);\n    if (t->ch[0] != nullptr) t->ch[0]->xor_lazy\
+    \ & (U)1) std::swap(t->ch[0], t->ch[1]);\n    if (t->ch[0] != nullptr) t->ch[0]->xor_lazy\
     \ ^= t->xor_lazy;\n    if (t->ch[1] != nullptr) t->ch[1]->xor_lazy ^= t->xor_lazy;\n\
     \    t->xor_lazy = 0;\n  }\n  T value(Node *t) { return t ? t->dat : M::ti();\
     \ }\n  Node *set_Node(Node *t, const U &pos, const T &val, ll b) {\n    if (t\
@@ -89,8 +89,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/set_xor_min.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-07 14:59:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/set_xor_min.test.cpp
 layout: document
