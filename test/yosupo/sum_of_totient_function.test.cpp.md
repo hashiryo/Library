@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/number_theory.hpp
     title: "\u6570\u8AD6"
   _extendedRequiredBy: []

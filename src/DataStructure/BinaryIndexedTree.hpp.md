@@ -9,14 +9,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.BIT.test.cpp
     title: test/yukicoder/649.BIT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/738.BIT.test.cpp
     title: test/yukicoder/738.BIT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Binary-Indexed-Tree
     links: []
@@ -59,7 +59,7 @@ data:
   path: src/DataStructure/BinaryIndexedTree.hpp
   requiredBy: []
   timestamp: '2020-11-07 15:26:25+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/738.BIT.test.cpp
   - test/yukicoder/649.BIT.test.cpp
