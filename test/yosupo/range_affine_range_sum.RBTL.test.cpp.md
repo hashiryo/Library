@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/RedBlackTree_Lazy.hpp
     title: "\u8D64\u9ED2\u6728(\u9045\u5EF6\u4F1D\u642C)"
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -109,13 +109,12 @@ data:
     \ { return count(root); }\n};\ntemplate <typename M, size_t LIM>\ntypename RedBlackTree_Lazy<M,\
     \ LIM>::nPool RedBlackTree_Lazy<M, LIM>::pool(LIM);\n#line 3 \"src/Math/ModInt.hpp\"\
     \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    namespace internal {\nstruct modint_base {};\n}  // namespace internal\n\ntemplate\
-    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt : internal::modint_base\
-    \ {\n private:\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static\
-    \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
-    \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
-    \ 6, 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64\
-    \ m2 = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
+    template <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt {\n private:\n\
+    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
+    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
+    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
+    \ 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2\
+    \ = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) :\
     \ x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr\
     \ u64 modulo() { return mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
@@ -135,7 +134,7 @@ data:
     \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
     \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
     \ }\n  bool operator!=(const ModInt &rhs) const { return norm(x) != norm(rhs.x);\
-    \ }\n  u64 get() const {\n    u64 ret = reduce(x) - mod;\n    return ret + (mod\
+    \ }\n  u64 val() const {\n    u64 ret = reduce(x) - mod;\n    return ret + (mod\
     \ & -(ret >> 63));\n  }\n  constexpr ModInt pow(u64 k) const {\n    ModInt ret\
     \ = ModInt(1);\n    for (ModInt base = *this; k; k >>= 1, base *= base)\n    \
     \  if (k & 1) ret *= base;\n    return ret;\n  }\n  constexpr ModInt inverse()\
@@ -148,19 +147,18 @@ data:
     \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
     \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
     \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
-    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 < mod ? ret.first\
     \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
     \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
-    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
-    \ T>;\n#line 6 \"test/yosupo/range_affine_range_sum.RBTL.test.cpp\"\nusing namespace\
-    \ std;\n\nusing Mint = ModInt<998244353>;\n// RsumQ\u306F\u30E2\u30CE\u30A4\u30C9\
-    \u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\u3066\u304A\u304F\nstruct RaffineQ_RsumQ\
-    \ {\n  struct T {\n    Mint val;\n    int size;\n    T(Mint v = 0, int s = 1)\
-    \ : val(v), size(s) {}\n  };\n  using E = pair<Mint, Mint>;\n  static T ti() {\
-    \ return T(0, 0); }\n  static E ei() { return make_pair(Mint(1), Mint(0)); }\n\
-    \  static T f(const T &l, const T &r) {\n    return T(l.val + r.val, l.size +\
-    \ r.size);\n  }\n  static T g(const T &l, const E &r) {\n    return T(r.first\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
+    \  }\n  u64 x;\n};\n#line 6 \"test/yosupo/range_affine_range_sum.RBTL.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\n// RsumQ\u306F\u30E2\
+    \u30CE\u30A4\u30C9\u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\u3066\u304A\u304F\
+    \nstruct RaffineQ_RsumQ {\n  struct T {\n    Mint val;\n    int size;\n    T(Mint\
+    \ v = 0, int s = 1) : val(v), size(s) {}\n  };\n  using E = pair<Mint, Mint>;\n\
+    \  static T ti() { return T(0, 0); }\n  static E ei() { return make_pair(Mint(1),\
+    \ Mint(0)); }\n  static T f(const T &l, const T &r) {\n    return T(l.val + r.val,\
+    \ l.size + r.size);\n  }\n  static T g(const T &l, const E &r) {\n    return T(r.first\
     \ * l.val + r.second * l.size, l.size);\n  }\n  static E h(const E &l, const E\
     \ &r) {\n    return make_pair(r.first * l.first, r.first * l.second + r.second);\n\
     \  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int\
@@ -195,8 +193,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.RBTL.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 15:28:45+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-11 20:34:57+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.RBTL.test.cpp
 layout: document

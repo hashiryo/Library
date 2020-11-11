@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -9,64 +9,62 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     links:
     - https://loj.ac/article/2773
   bundledCode: "#line 2 \"src/Math/exgcd.hpp\"\n#include <bits/stdc++.h>\n#line 3\
     \ \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
-    \ */\n\n// BEGIN CUT HERE\nnamespace internal {\nstruct modint_base {};\n}  //\
-    \ namespace internal\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root =\
-    \ 0>\nclass ModInt : internal::modint_base {\n private:\n  using u64 = std::uint64_t;\n\
-    \  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
-    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
-    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64\
-    \ r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\n public:\n\
-    \  static constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt()\
-    \ : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) %\
-    \ mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo() { return\
-    \ mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n\
-    \  static constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod\
-    \ - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64 norm(u64\
-    \ x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt() { return\
-    \ prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return\
-    \ ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
-    \ ModInt &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n \
-    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
-    \ x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt\
-    \ &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n \
-    \ constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
-    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
-    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
-    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
-    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
-    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
-    \ }\n  bool operator!=(const ModInt &rhs) const { return norm(x) != norm(rhs.x);\
-    \ }\n  u64 get() const {\n    u64 ret = reduce(x) - mod;\n    return ret + (mod\
-    \ & -(ret >> 63));\n  }\n  constexpr ModInt pow(u64 k) const {\n    ModInt ret\
-    \ = ModInt(1);\n    for (ModInt base = *this; k; k >>= 1, base *= base)\n    \
-    \  if (k & 1) ret *= base;\n    return ret;\n  }\n  constexpr ModInt inverse()\
-    \ const { return pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this\
-    \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
-    \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
-    \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
-    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
-    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
-    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
-    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
-    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
-    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
-    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
-    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
-    \ T>;\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\
-    \u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
+    \ */\n\n// BEGIN CUT HERE\ntemplate <std::uint64_t mod, std::uint64_t prim_root\
+    \ = 0>\nclass ModInt {\n private:\n  using u64 = std::uint64_t;\n  using u128\
+    \ = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1)\
+    \ {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static\
+    \ constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64 r2 = -u128(mod)\
+    \ % mod;\n  static constexpr u64 m2 = mod << 1;\n\n public:\n  static constexpr\
+    \ int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr\
+    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt()\
+    \ = default;\n  static constexpr u64 modulo() { return mod; }\n  static constexpr\
+    \ u64 init(u64 w) { return reduce(u128(w) * r2); }\n  static constexpr u64 reduce(const\
+    \ u128 w) {\n    return u64(w >> 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n\
+    \  }\n  static constexpr u64 norm(u64 x) { return x - (mod & -(x >= mod)); }\n\
+    \  static constexpr u64 pr_rt() { return prim_root; }\n  constexpr ModInt operator-()\
+    \ const {\n    ModInt ret;\n    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n\
+    \  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x -\
+    \ m2, x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
+    \ ModInt &rhs) {\n    return x -= rhs.x, x += m2 & -(x >> 63), *this;\n  }\n \
+    \ constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x = reduce(u128(this->x)\
+    \ * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
+    \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
+    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
+    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
+    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
+    \ &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const ModInt\
+    \ &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const ModInt\
+    \ &rhs) const { return norm(x) != norm(rhs.x); }\n  u64 val() const {\n    u64\
+    \ ret = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  constexpr\
+    \ ModInt pow(u64 k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base\
+    \ = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return\
+    \ ret;\n  }\n  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr\
+    \ ModInt sqrt() const {\n    if (*this == ModInt(0) || mod == 2) return *this;\n\
+    \    if (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt\
+    \ ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b\
+    \ += ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt, ModInt> u,\
+    \ std::pair<ModInt, ModInt> v) {\n      ModInt a = (u.first * v.first + u.second\
+    \ * v.second * w);\n      ModInt b = (u.first * v.second + u.second * v.first);\n\
+    \      return std::make_pair(a, b);\n    };\n    u64 e = (mod + 1) >> 1;\n   \
+    \ auto ret = std::make_pair(ONE, ModInt(0));\n    for (auto bs = std::make_pair(b,\
+    \ ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1) ret = mul(ret, bs);\n\
+    \    return ret.first.val() * 2 < mod ? ret.first : -ret.first;\n  }\n  friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
+    \ rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n  u64 x;\n};\n\
+    #line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
+    \u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
     \n// BEGIN CUT HERE\n\ntemplate <class mint>\nstruct FormalPowerSeries : std::vector<mint>\
     \ {\n  using FPS = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n\
     \  using m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993,\
@@ -96,15 +94,15 @@ data:
     \  }\n  static inline void crt(m64_1 f1[], m64_2 f2[], int b, int e, mint ret[])\
     \ {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n    static\
     \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
-    \      std::uint64_t r1 = f1[i].get(), r2 = f2[i].get();\n      ret[i] = mint(r1)\n\
-    \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).get()) * mod1;\n\
-    \    }\n  }\n  template <typename T,\n            typename std::enable_if<!is_modint<T>::value>::type\
+    \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] = mint(r1)\n\
+    \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
+    \    }\n  }\n  template <typename T,\n            typename std::enable_if<is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    for (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n\
-    \  }\n  template <typename T,\n            typename std::enable_if<is_modint<T>::value>::type\
+    \  }\n  template <typename T,\n            typename std::enable_if<!is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
-    \ ret[i].get(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
+    \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
     \ i) {\n    static mint INV[1 << 21];\n    static int lim = 0;\n    static constexpr\
     \ std::uint64_t mod = mint::modulo();\n    if (lim <= i) {\n      if (lim == 0)\
     \ INV[1] = 1, lim = 2;\n      for (int j = lim; j <= i; j++) INV[j] = INV[mod\
@@ -215,9 +213,9 @@ data:
     \ 0;\n      dft(i2, b1), dft(i2, b2);\n      for (int j = i2 - 1; j >= 0; j--)\
     \ b1[j] *= c1[j], b2[j] *= c2[j];\n      idft(i2, b1), idft(i2, b2), crt(b1, b2,\
     \ 0, i2, bf1);\n      for (int j = i2 - 3; j >= 0; j--)\n        tmp = (f[j] -\
-    \ bf1[j]).get(), b1[j + i2] = tmp, b2[j + i2] = tmp;\n      tmp = (bf1[i2 - 2]\
-    \ - f[i2 - 2]).get(), b1[i2 - 2] = tmp, b2[i2 - 2] = tmp;\n      tmp = (-bf1[i2\
-    \ - 1]).get(), b1[i2 - 1] = tmp, b2[i2 - 1] = tmp;\n      std::fill_n(b1, i2 -\
+    \ bf1[j]).val(), b1[j + i2] = tmp, b2[j + i2] = tmp;\n      tmp = (bf1[i2 - 2]\
+    \ - f[i2 - 2]).val(), b1[i2 - 2] = tmp, b2[i2 - 2] = tmp;\n      tmp = (-bf1[i2\
+    \ - 1]).val(), b1[i2 - 1] = tmp, b2[i2 - 1] = tmp;\n      std::fill_n(b1, i2 -\
     \ 2, 0), std::fill_n(b2, i2 - 2, 0);\n      b1[i - 2] = b1[i - 1] = 0, b2[i -\
     \ 2] = b2[i - 1] = 0;\n      subst(a1, a2, 0, i, bf2), dft(i, a1), dft(i, a2),\
     \ dft(i, b1), dft(i, b2);\n      for (int j = 0; j < i; j++) b1[j] *= a1[j], b2[j]\
@@ -252,14 +250,14 @@ data:
     \ FPS();  // no solution\n    int len = get_len(n - cnt / 2);\n    FPS ret({sqr});\n\
     \    ret.resize(len);\n    std::copy_n(this->begin() + cnt, n - cnt, bf1),\n \
     \       std::fill(bf1 + n - cnt, bf1 + len, 0);\n    std::fill_n(bf2, len, 0),\
-    \ bf2[0] = ret[0].inverse();\n    std::uint64_t tmp;\n    tmp = ret[0].get(),\
+    \ bf2[0] = ret[0].inverse();\n    std::uint64_t tmp;\n    tmp = ret[0].val(),\
     \ b1[0] = tmp, b2[0] = tmp, b1[1] = 0, b2[1] = 0;\n    dft(2, b1), dft(2, b2);\n\
     \    for (int i = 2, i2 = 1; i <= len; i <<= 1, i2 <<= 1) {\n      for (int j\
     \ = i2 - 1; j >= 0; j--)\n        c1[j] = b1[j] * b1[j], c2[j] = b2[j] * b2[j];\n\
     \      idft(i2, c1), idft(i2, c2), crt(c1, c2, 0, i2, ret.data() + i2);\n    \
-    \  for (int j = i - 2; j >= i2; j--)\n        tmp = (ret[j] - bf1[j - i2] - bf1[j]).get(),\
-    \ c1[j] = tmp, c2[j] = tmp;\n      tmp = (ret[i - 1] - bf1[i2 - 1]).get(), c1[i2\
-    \ - 1] = tmp,\n      c2[i2 - 1] = tmp;\n      tmp = (-bf1[i - 1]).get(), c1[i\
+    \  for (int j = i - 2; j >= i2; j--)\n        tmp = (ret[j] - bf1[j - i2] - bf1[j]).val(),\
+    \ c1[j] = tmp, c2[j] = tmp;\n      tmp = (ret[i - 1] - bf1[i2 - 1]).val(), c1[i2\
+    \ - 1] = tmp,\n      c2[i2 - 1] = tmp;\n      tmp = (-bf1[i - 1]).val(), c1[i\
     \ - 1] = tmp, c2[i - 1] = tmp;\n      std::fill_n(c1, i2 - 1, 0), std::fill_n(c2,\
     \ i2 - 1, 0),\n          subst(a1, a2, 0, i, bf2);\n      dft(i, a1), dft(i, a2),\
     \ dft(i, c1), dft(i, c2);\n      for (int j = i - 1; j >= 0; j--) c1[j] *= a1[j],\
@@ -394,8 +392,8 @@ data:
   isVerificationFile: false
   path: src/Math/exgcd.hpp
   requiredBy: []
-  timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-11 20:34:57+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp
 documentation_of: src/Math/exgcd.hpp

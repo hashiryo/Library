@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/DataStructure/LiChaoTree.hpp
     title: Li-Chao-Tree
   _extendedRequiredBy: []
@@ -16,9 +16,9 @@ data:
   bundledCode: "#line 1 \"test/yosupo/line_add_get_min.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/line_add_get_min\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/DataStructure/LiChaoTree.hpp\"\n/**\n * @title Li-Chao-Tree\n *\
-    \ @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u76F4\u7DDA\u633F\u5165:O(n log\
-    \ n)\n * \u7DDA\u5206\u633F\u5165:O(n log^2 n)\n * \u6700\u5C0F\u5024\u53D6\u5F97\
-    :O(n log n)\n * \u6700\u5927\u5024\u53D6\u5F97\u3057\u305F\u3044\u306A\u3089(-a,-b)\u3092\
+    \ @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u76F4\u7DDA\u633F\u5165:O(log\
+    \ n)\n * \u7DDA\u5206\u633F\u5165:O(log^2 n)\n * \u6700\u5C0F\u5024\u53D6\u5F97\
+    :O(log n)\n * \u6700\u5927\u5024\u53D6\u5F97\u3057\u305F\u3044\u306A\u3089(-a,-b)\u3092\
     \u633F\u5165\u3057\u3066-\u6700\u5C0F\u5024\u3092\u53D6\u5F97\n * \u6D6E\u52D5\
     \u5C0F\u6570\u70B9\u3082\u884C\u3051\u308B\u306F\u305A\n */\n// double\u578B\u3067\
     \u306E\u4F7F\u7528 : https://atcoder.jp/contests/arc051/tasks/arc051_d\n// BEGIN\
@@ -77,7 +77,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/line_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2020-11-08 01:43:03+09:00'
+  timestamp: '2020-11-11 20:34:57+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/line_add_get_min.test.cpp

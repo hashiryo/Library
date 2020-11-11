@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
   - icon: ':question:'
@@ -31,10 +31,9 @@ data:
     \ fact(n) * finv(n - r); }\n  static mint nCr(int n, int r) { return nPr(n, r)\
     \ * finv(r); }\n  static mint nHr(int n, int r) { return !r ? mint(1) : nCr(n\
     \ + r - 1, r); }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
-    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\nstruct\
-    \ modint_base {};\n}  // namespace internal\n\ntemplate <std::uint64_t mod, std::uint64_t\
-    \ prim_root = 0>\nclass ModInt : internal::modint_base {\n private:\n  using u64\
-    \ = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
+    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <std::uint64_t\
+    \ mod, std::uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u64 =\
+    \ std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
     \ n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2\
     \ - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static\
     \ constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\
@@ -58,7 +57,7 @@ data:
     \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
     \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
     \ }\n  bool operator!=(const ModInt &rhs) const { return norm(x) != norm(rhs.x);\
-    \ }\n  u64 get() const {\n    u64 ret = reduce(x) - mod;\n    return ret + (mod\
+    \ }\n  u64 val() const {\n    u64 ret = reduce(x) - mod;\n    return ret + (mod\
     \ & -(ret >> 63));\n  }\n  constexpr ModInt pow(u64 k) const {\n    ModInt ret\
     \ = ModInt(1);\n    for (ModInt base = *this; k; k >>= 1, base *= base)\n    \
     \  if (k & 1) ret *= base;\n    return ret;\n  }\n  constexpr ModInt inverse()\
@@ -71,15 +70,14 @@ data:
     \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
     \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
     \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
-    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.get() * 2 < mod ? ret.first\
+    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 < mod ? ret.first\
     \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
     \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.get();\n\
-    \  }\n  u64 x;\n};\n\ntemplate <class T>\nusing is_modint = std::is_base_of<internal::modint_base,\
-    \ T>;\n#line 6 \"test/aoj/DPL_5_F.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int n, k;\n  cin >> n >>\
-    \ k;\n  using Mint = ModInt<int(1e9 + 7)>;\n  using C = Combination<Mint>;\n \
-    \ cout << C::nHr(k, n - k) << endl;\n  return 0;\n}\n"
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
+    \  }\n  u64 x;\n};\n#line 6 \"test/aoj/DPL_5_F.test.cpp\"\nusing namespace std;\n\
+    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int n, k;\n\
+    \  cin >> n >> k;\n  using Mint = ModInt<int(1e9 + 7)>;\n  using C = Combination<Mint>;\n\
+    \  cout << C::nHr(k, n - k) << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/Combination.hpp\"\n#include \"\
     src/Math/ModInt.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
@@ -92,7 +90,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_F.test.cpp
   requiredBy: []
-  timestamp: '2020-11-07 15:26:25+09:00'
+  timestamp: '2020-11-11 20:34:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_F.test.cpp
