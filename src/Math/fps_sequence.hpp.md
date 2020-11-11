@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -9,7 +9,7 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':x:'
@@ -22,7 +22,7 @@ data:
     path: test/yosupo/stirling_second.test.cpp
     title: test/yosupo/stirling_second.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
       )"
@@ -110,10 +110,11 @@ data:
     \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
     \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] = mint(r1)\n\
     \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
-    \    }\n  }\n  template <typename T,\n            typename std::enable_if<is_integral<T>::value>::type\
-    \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
-    \ e, T ret[]) {\n    for (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n\
-    \  }\n  template <typename T,\n            typename std::enable_if<!is_integral<T>::value>::type\
+    \    }\n  }\n  template <typename T, typename std::enable_if<\n              \
+    \              std::is_integral<T>::value>::type * = nullptr>\n  static inline\
+    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
+    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
+    \ T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
     \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
@@ -369,8 +370,8 @@ data:
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-11-11 20:34:57+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-11-11 23:03:18+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/partition.test.cpp

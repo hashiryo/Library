@@ -8,10 +8,10 @@ data:
   - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/exgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
   - icon: ':x:'
@@ -21,28 +21,28 @@ data:
   - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
@@ -94,7 +94,7 @@ data:
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -177,10 +177,11 @@ data:
     \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
     \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] = mint(r1)\n\
     \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
-    \    }\n  }\n  template <typename T,\n            typename std::enable_if<is_integral<T>::value>::type\
-    \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
-    \ e, T ret[]) {\n    for (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n\
-    \  }\n  template <typename T,\n            typename std::enable_if<!is_integral<T>::value>::type\
+    \    }\n  }\n  template <typename T, typename std::enable_if<\n              \
+    \              std::is_integral<T>::value>::type * = nullptr>\n  static inline\
+    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
+    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
+    \ T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
     \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
@@ -422,10 +423,11 @@ data:
     \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
     \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] = mint(r1)\n\
     \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
-    \    }\n  }\n  template <typename T,\n            typename std::enable_if<is_integral<T>::value>::type\
-    \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
-    \ e, T ret[]) {\n    for (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n\
-    \  }\n  template <typename T,\n            typename std::enable_if<!is_integral<T>::value>::type\
+    \    }\n  }\n  template <typename T, typename std::enable_if<\n              \
+    \              std::is_integral<T>::value>::type * = nullptr>\n  static inline\
+    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
+    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
+    \ T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
     \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
@@ -642,8 +644,8 @@ data:
   - src/Math/kitamasa.hpp
   - src/Math/exgcd.hpp
   - src/Math/fps_sequence.hpp
-  timestamp: '2020-11-11 20:34:57+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-11-11 23:03:18+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/980.test.cpp
