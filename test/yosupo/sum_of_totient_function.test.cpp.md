@@ -4,16 +4,16 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/number_theory.hpp
     title: "\u6570\u8AD6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -161,7 +161,7 @@ data:
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
   timestamp: '2020-11-11 20:34:57+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
 layout: document
