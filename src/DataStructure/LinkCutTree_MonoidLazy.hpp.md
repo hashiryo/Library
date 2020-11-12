@@ -6,11 +6,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2450.LCT.test.cpp
     title: test/aoj/2450.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9\u9045\u5EF6\u4F1D\u642C\
       )"
@@ -113,7 +113,7 @@ data:
   path: src/DataStructure/LinkCutTree_MonoidLazy.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/235.LCT.test.cpp
   - test/aoj/2450.LCT.test.cpp

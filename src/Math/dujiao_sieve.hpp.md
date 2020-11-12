@@ -6,14 +6,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.dujiao.test.cpp
     title: test/yukicoder/1019.dujiao.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.dujiao.test.cpp
     title: test/yukicoder/886.dujiao.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u675C\u6559\u7B5B"
     links:
@@ -70,7 +70,7 @@ data:
   path: src/Math/dujiao_sieve.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/886.dujiao.test.cpp
   - test/yukicoder/1019.dujiao.test.cpp
