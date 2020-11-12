@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/LiChaoTree.hpp
     title: Li-Chao-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/segment_add_get_min
@@ -30,41 +30,42 @@ data:
     \ pool(LIM);\n      return &pool[node_count++];\n    }\n  };\n\n private:\n  static\
     \ constexpr T lower = -2e9, upper = 2e9;\n  static constexpr T INF = std::numeric_limits<T>::max()\
     \ / 2;\n  static inline int node_count;\n  Node *root;\n\n private:\n  int sgn(const\
-    \ T &x) const {\n    static constexpr T EPS = 1e-12;\n    return x < -EPS ? -1\
+    \ T &x) const {\n    static constexpr T EPS = 1e-10;\n    return x < -EPS ? -1\
     \ : x > +EPS ? 1 : 0;\n  }\n  Node *addl(Node *t, Line f, const T &x_l, const\
     \ T &x_r) {\n    if (!t) return new Node(f);\n    int dif_l = sgn(t->f.get(x_l)\
     \ - f.get(x_l)),\n        dif_r = sgn(t->f.get(x_r) - f.get(x_r));\n    if (dif_l\
     \ <= 0 && dif_r <= 0) return t;\n    if (dif_l >= 0 && dif_r >= 0) return t->f\
     \ = f, t;\n    T x_m = (x_l + x_r) / 2;\n    int dif_m = sgn(t->f.get(x_m) - f.get(x_m));\n\
-    \    if (dif_m > 0) std::swap(t->f, f), dif_l = -dif_l;\n    if (dif_l > 0) t->ch[0]\
-    \ = addl(t->ch[0], f, x_l, x_m);\n    if (dif_l < 0) t->ch[1] = addl(t->ch[1],\
-    \ f, x_m, x_r);\n    return t;\n  }\n  Node *adds(Node *t, const Line &f, const\
-    \ T &l, const T &r, const T &x_l,\n             const T &x_r) {\n    if (sgn(x_r\
-    \ - l) <= 0 || 0 <= sgn(x_l - r)) return t;\n    if (0 <= sgn(x_l - l) && sgn(x_r\
-    \ - r) <= 0) return addl(t, f, x_l, x_r);\n    if (t && sgn(t->f.get(x_l) - f.get(x_l))\
-    \ <= 0\n        && sgn(t->f.get(x_r) - f.get(x_r)) <= 0)\n      return t;\n  \
-    \  if (!t) t = new Node(Line(0, INF));\n    T x_m = (x_l + x_r) / 2;\n    t->ch[0]\
-    \ = adds(t->ch[0], f, l, r, x_l, x_m);\n    t->ch[1] = adds(t->ch[1], f, l, r,\
-    \ x_m, x_r);\n    return t;\n  }\n  T query(const Node *t, const T &x_l, const\
-    \ T &x_r, const T &x) const {\n    if (!t) return INF;\n    if (sgn(x_l - x_r)\
-    \ == 0) return t->f.get(x);\n    T x_m = (x_l + x_r) / 2;\n    return std::min(t->f.get(x),\
-    \ sgn(x - x_m) < 0\n                                     ? query(t->ch[0], x_l,\
-    \ x_m, x)\n                                     : query(t->ch[1], x_m, x_r, x));\n\
-    \  }\n\n public:\n  LiChaoTree() : root{nullptr} {}\n  T get_inf() { return INF;\
-    \ }\n  void clear() { node_count = 0, root = nullptr; }\n  // ax+b\n  void insert_line(T\
-    \ a, T b) { root = addl(root, Line(a, b), lower, upper); }\n  // ax+b for x in\
-    \ [l,r)\n  void insert_segment(T l, T r, T a, T b) {\n    root = adds(root, Line(a,\
-    \ b), l, r, lower, upper);\n  }\n  T query(T x) const { return query(root, lower,\
-    \ upper, x); }\n};\n#line 4 \"test/yosupo/segment_add_get_min.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  LiChaoTree<long long> cht;\n  while (N--) {\n\
-    \    long long l, r, a, b;\n    cin >> l >> r >> a >> b;\n    cht.insert_segment(l,\
-    \ r, a, b);\n  }\n  while (Q--) {\n    bool op;\n    cin >> op;\n    if (op) {\n\
-    \      long long p;\n      cin >> p;\n      long long ans = cht.query(p);\n  \
-    \    if (ans == cht.get_inf()) {\n        cout << \"INFINITY\" << endl;\n    \
-    \  } else {\n        cout << ans << endl;\n      }\n    } else {\n      long long\
-    \ l, r, a, b;\n      cin >> l >> r >> a >> b;\n      cht.insert_segment(l, r,\
-    \ a, b);\n    }\n  }\n  return 0;\n}\n"
+    \    if (dif_m > 0) std::swap(t->f, f), dif_l = -dif_l;\n    if (sgn(x_l - x_m)\
+    \ == 0) return t;\n    if (dif_l > 0) t->ch[0] = addl(t->ch[0], f, x_l, x_m);\n\
+    \    if (dif_l < 0) t->ch[1] = addl(t->ch[1], f, x_m, x_r);\n    return t;\n \
+    \ }\n  Node *adds(Node *t, const Line &f, const T &l, const T &r, const T &x_l,\n\
+    \             const T &x_r) {\n    if (sgn(x_r - l) <= 0 || 0 <= sgn(x_l - r))\
+    \ return t;\n    if (0 <= sgn(x_l - l) && sgn(x_r - r) <= 0) return addl(t, f,\
+    \ x_l, x_r);\n    if (t && sgn(t->f.get(x_l) - f.get(x_l)) <= 0\n        && sgn(t->f.get(x_r)\
+    \ - f.get(x_r)) <= 0)\n      return t;\n    if (!t) t = new Node(Line(0, INF));\n\
+    \    T x_m = (x_l + x_r) / 2;\n    t->ch[0] = adds(t->ch[0], f, l, r, x_l, x_m);\n\
+    \    t->ch[1] = adds(t->ch[1], f, l, r, x_m, x_r);\n    return t;\n  }\n  T query(const\
+    \ Node *t, const T &x_l, const T &x_r, const T &x) const {\n    if (!t) return\
+    \ INF;\n    if (sgn(x_l - x_r) == 0) return t->f.get(x);\n    T x_m = (x_l + x_r)\
+    \ / 2;\n    return std::min(t->f.get(x), sgn(x - x_m) < 0\n                  \
+    \                   ? query(t->ch[0], x_l, x_m, x)\n                         \
+    \            : query(t->ch[1], x_m, x_r, x));\n  }\n\n public:\n  LiChaoTree()\
+    \ : root{nullptr} {}\n  T get_inf() { return INF; }\n  void clear() { node_count\
+    \ = 0, root = nullptr; }\n  // ax+b\n  void insert_line(T a, T b) { root = addl(root,\
+    \ Line(a, b), lower, upper); }\n  // ax+b for x in [l,r)\n  void insert_segment(T\
+    \ l, T r, T a, T b) {\n    root = adds(root, Line(a, b), l, r, lower, upper);\n\
+    \  }\n  T query(T x) const { return query(root, lower, upper, x); }\n};\n#line\
+    \ 4 \"test/yosupo/segment_add_get_min.test.cpp\"\nusing namespace std;\n\nsigned\
+    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N\
+    \ >> Q;\n  LiChaoTree<long long> cht;\n  while (N--) {\n    long long l, r, a,\
+    \ b;\n    cin >> l >> r >> a >> b;\n    cht.insert_segment(l, r, a, b);\n  }\n\
+    \  while (Q--) {\n    bool op;\n    cin >> op;\n    if (op) {\n      long long\
+    \ p;\n      cin >> p;\n      long long ans = cht.query(p);\n      if (ans == cht.get_inf())\
+    \ {\n        cout << \"INFINITY\" << endl;\n      } else {\n        cout << ans\
+    \ << endl;\n      }\n    } else {\n      long long l, r, a, b;\n      cin >> l\
+    \ >> r >> a >> b;\n      cht.insert_segment(l, r, a, b);\n    }\n  }\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/segment_add_get_min\"\n\
     #include <bits/stdc++.h>\n#include \"src/DataStructure/LiChaoTree.hpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -81,8 +82,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/segment_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2020-11-11 20:34:57+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-12 12:47:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/segment_add_get_min.test.cpp
 layout: document
