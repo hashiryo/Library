@@ -102,9 +102,9 @@ data:
   timestamp: '2020-10-23 23:21:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
 documentation_of: src/DataStructure/LinkCutTree_Monoid.hpp
 layout: document
 redirect_from:

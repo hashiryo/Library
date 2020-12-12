@@ -90,8 +90,8 @@ data:
   timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/3032.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/aoj/3032.test.cpp
 documentation_of: src/Graph/MatchingGeneral.hpp
 layout: document
 redirect_from:

@@ -7,13 +7,13 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/polynomial_interpolation
@@ -22,21 +22,21 @@ data:
   bundledCode: "#line 1 \"test/yosupo/polynomial_interpolation.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/polynomial_interpolation\"\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n *\
-    \ @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <std::uint64_t mod,\
-    \ std::uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u64 = std::uint64_t;\n\
-    \  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
-    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
-    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64\
-    \ r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\n public:\n\
-    \  static constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt()\
-    \ : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) %\
-    \ mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo() { return\
-    \ mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n\
-    \  static constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod\
-    \ - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64 norm(u64\
-    \ x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt() { return\
-    \ prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return\
-    \ ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
+    \ @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t\
+    \ mod, std::uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u64 =\
+    \ std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
+    \ n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2\
+    \ - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static\
+    \ constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\
+    \n public:\n  static constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr\
+    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
+    \ - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo()\
+    \ { return mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
+    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
+    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64\
+    \ norm(u64 x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt()\
+    \ { return prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n\
+    \    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
     \ ModInt &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n \
     \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
     \ x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt\
@@ -67,15 +67,15 @@ data:
     \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
     \  }\n  u64 x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title\
     \ \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528\
-    : https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate <class mint>\nstruct\
-    \ FormalPowerSeries : std::vector<mint> {\n  using FPS = FormalPowerSeries<mint>;\n\
-    \  using std::vector<mint>::vector;\n  using m64_1 = ModInt<34703335751681, 3>;\n\
-    \  using m64_2 = ModInt<35012573396993, 3>;\n\n private:\n  static inline m64_1\
-    \ a1[1 << 21], b1[1 << 21], c1[1 << 21];\n  static inline m64_2 a2[1 << 21], b2[1\
-    \ << 21], c2[1 << 21];\n  static inline mint bf1[1 << 21], bf2[1 << 21];\n  template\
-    \ <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n    static mod_t\
-    \ iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n  \
-    \  static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
+    : https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate <class mint, int\
+    \ LIM = (1 << 22)>\nstruct FormalPowerSeries : std::vector<mint> {\n  using FPS\
+    \ = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n  using m64_1\
+    \ = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n\n\
+    \ private:\n  static inline m64_1 a1[LIM], b1[LIM], c1[LIM];\n  static inline\
+    \ m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static inline mint bf1[LIM], bf2[LIM];\n\
+    \  template <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n   \
+    \ static mod_t iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
+    \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
     \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
     \ iW[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
     \ idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++)\
@@ -106,7 +106,7 @@ data:
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
     \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
-    \ i) {\n    static mint INV[1 << 21];\n    static int lim = 0;\n    static constexpr\
+    \ i) {\n    static mint INV[LIM];\n    static int lim = 0;\n    static constexpr\
     \ std::uint64_t mod = mint::modulo();\n    if (lim <= i) {\n      if (lim == 0)\
     \ INV[1] = 1, lim = 2;\n      for (int j = lim; j <= i; j++) INV[j] = INV[mod\
     \ % j] * (mod - mod / j);\n      lim = i + 1;\n    }\n    return INV[i];\n  }\n\
@@ -205,8 +205,8 @@ data:
     \ const {\n    assert((*this)[0] == mint(1));\n    return this->size() == 1 ?\
     \ FPS{0} : this->diff().div(*this).inte();\n  }\n  FPS exp() const {\n    assert((*this)[0]\
     \ == mint(0));\n    int n = this->size(), len = get_len(n);\n    if (n == 1) return\
-    \ {1};\n    static mint b[1 << 21], f[1 << 21];\n    std::copy_n(this->data(),\
-    \ n, bf1), std::fill(bf1 + n, bf1 + len, 0);\n    FPS ret(len, 0);\n    std::fill_n(bf2,\
+    \ {1};\n    static mint b[LIM], f[LIM];\n    std::copy_n(this->data(), n, bf1),\
+    \ std::fill(bf1 + n, bf1 + len, 0);\n    FPS ret(len, 0);\n    std::fill_n(bf2,\
     \ len, 0), std::fill_n(c1, len, 0), std::fill_n(c2, len, 0);\n    ret[0] = 1,\
     \ ret[1] = bf1[1], bf2[0] = 1, bf2[1] = -bf1[1];\n    for (int i = 1; i != len;\
     \ ++i) b[i - 1] = mint(i) * bf1[i];\n    subst(c1, c2, 0, 2, ret.data()), dft(4,\
@@ -354,8 +354,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2020-11-11 23:03:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-11 13:30:53+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/polynomial_interpolation.test.cpp
 layout: document

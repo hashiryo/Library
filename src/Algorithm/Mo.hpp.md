@@ -61,8 +61,8 @@ data:
   timestamp: '2020-10-24 00:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/0425.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
+  - test/aoj/0425.test.cpp
 documentation_of: src/Algorithm/Mo.hpp
 layout: document
 redirect_from:

@@ -115,8 +115,8 @@ data:
   timestamp: '2020-10-24 15:28:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_6_A.Dinic.test.cpp
   - test/aoj/2313.test.cpp
+  - test/aoj/GRL_6_A.Dinic.test.cpp
 documentation_of: src/Graph/MaxFlow_Dinic.hpp
 layout: document
 redirect_from:

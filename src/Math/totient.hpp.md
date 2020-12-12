@@ -54,8 +54,8 @@ data:
   timestamp: '2020-11-12 17:47:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/NTL_1_D.test.cpp
   - test/yosupo/tetration_mod.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
 documentation_of: src/Math/totient.hpp
 layout: document
 redirect_from:

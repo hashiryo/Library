@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sharp_p_subset_sum
@@ -19,7 +19,7 @@ data:
   bundledCode: "#line 1 \"test/yosupo/sharp_p_subset_sum.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
-    \n */\n\n// BEGIN CUT HERE\ntemplate <std::uint64_t mod, std::uint64_t prim_root\
+    \n */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root\
     \ = 0>\nclass ModInt {\n private:\n  using u64 = std::uint64_t;\n  using u128\
     \ = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1)\
     \ {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static\
@@ -64,46 +64,45 @@ data:
     \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n  u64 x;\n};\n\
     #line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
     \u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
-    \n// BEGIN CUT HERE\n\ntemplate <class mint>\nstruct FormalPowerSeries : std::vector<mint>\
-    \ {\n  using FPS = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n\
+    \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries\
+    \ : std::vector<mint> {\n  using FPS = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n\
     \  using m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993,\
-    \ 3>;\n\n private:\n  static inline m64_1 a1[1 << 21], b1[1 << 21], c1[1 << 21];\n\
-    \  static inline m64_2 a2[1 << 21], b2[1 << 21], c2[1 << 21];\n  static inline\
-    \ mint bf1[1 << 21], bf2[1 << 21];\n  template <class mod_t>\n  static inline\
-    \ void idft(int n, mod_t x[]) {\n    static mod_t iW[1 << 20];\n    static constexpr\
-    \ std::uint64_t mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
-    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
-    \ lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n\
-    \ / 2; m *= 2) {\n      mod_t idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n  \
-    \    for (int i = 0; i < m; i++) iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n\
-    \    }\n    for (int m = 1; m < n; m *= 2)\n      for (int s = 0, k = 0; s < n;\
-    \ s += 2 * m, ++k)\n        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n\
-    \          mod_t u = x[i], v = x[j];\n          x[i] = u + v, x[j] = (u - v) *\
-    \ iW[k];\n        }\n    mod_t iv(mod - (mod - 1) / n);\n    for (int i = 0; i\
-    \ < n; i++) x[i] *= iv;\n  }\n  template <class mod_t>\n  static inline void dft(int\
-    \ n, mod_t x[]) {\n    static mod_t W[1 << 20];\n    static constexpr std::uint64_t\
-    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
-    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
-    \ lim = 0;\n    if (lim == 0) W[0] = 1, lim = 1;\n    for (int m = lim; m < n\
-    \ / 2; m *= 2) {\n      mod_t dw = G.pow((mod - 1) / (4 * m));\n      for (int\
-    \ i = 0; i < m; i++) W[m + i] = W[i] * dw;\n      lim = n / 2;\n    }\n    for\
-    \ (int m = n; m >>= 1;)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n\
-    \        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u\
-    \ = x[i], v = x[j] * W[k];\n          x[i] = u + v, x[j] = u - v;\n        }\n\
-    \  }\n  static inline void crt(m64_1 f1[], m64_2 f2[], int b, int e, mint ret[])\
-    \ {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n    static\
-    \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
-    \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] = mint(r1)\n\
-    \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
-    \    }\n  }\n  template <typename T, typename std::enable_if<\n              \
-    \              std::is_integral<T>::value>::type * = nullptr>\n  static inline\
-    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
-    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
-    \ T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
+    \ 3>;\n\n private:\n  static inline m64_1 a1[LIM], b1[LIM], c1[LIM];\n  static\
+    \ inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static inline mint bf1[LIM], bf2[LIM];\n\
+    \  template <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n   \
+    \ static mod_t iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
+    \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
+    \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
+    \ iW[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
+    \ idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++)\
+    \ iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n    }\n    for (int m = 1; m <\
+    \ n; m *= 2)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for\
+    \ (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v =\
+    \ x[j];\n          x[i] = u + v, x[j] = (u - v) * iW[k];\n        }\n    mod_t\
+    \ iv(mod - (mod - 1) / n);\n    for (int i = 0; i < n; i++) x[i] *= iv;\n  }\n\
+    \  template <class mod_t>\n  static inline void dft(int n, mod_t x[]) {\n    static\
+    \ mod_t W[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
+    \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
+    \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
+    \ W[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
+    \ dw = G.pow((mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++) W[m + i]\
+    \ = W[i] * dw;\n      lim = n / 2;\n    }\n    for (int m = n; m >>= 1;)\n   \
+    \   for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for (int i = s, j\
+    \ = s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v = x[j] * W[k];\n\
+    \          x[i] = u + v, x[j] = u - v;\n        }\n  }\n  static inline void crt(m64_1\
+    \ f1[], m64_2 f2[], int b, int e, mint ret[]) {\n    static constexpr m64_2 iv\
+    \ = m64_2(m64_1::modulo()).inverse();\n    static constexpr mint mod1 = m64_1::modulo();\n\
+    \    for (int i = b; i < e; i++) {\n      std::uint64_t r1 = f1[i].val(), r2 =\
+    \ f2[i].val();\n      ret[i] = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo()\
+    \ - r1) * iv).val()) * mod1;\n    }\n  }\n  template <typename T, typename std::enable_if<\n\
+    \                            std::is_integral<T>::value>::type * = nullptr>\n\
+    \  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n\
+    \    for (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template\
+    \ <typename T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
     \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
-    \ i) {\n    static mint INV[1 << 21];\n    static int lim = 0;\n    static constexpr\
+    \ i) {\n    static mint INV[LIM];\n    static int lim = 0;\n    static constexpr\
     \ std::uint64_t mod = mint::modulo();\n    if (lim <= i) {\n      if (lim == 0)\
     \ INV[1] = 1, lim = 2;\n      for (int j = lim; j <= i; j++) INV[j] = INV[mod\
     \ % j] * (mod - mod / j);\n      lim = i + 1;\n    }\n    return INV[i];\n  }\n\
@@ -202,8 +201,8 @@ data:
     \ const {\n    assert((*this)[0] == mint(1));\n    return this->size() == 1 ?\
     \ FPS{0} : this->diff().div(*this).inte();\n  }\n  FPS exp() const {\n    assert((*this)[0]\
     \ == mint(0));\n    int n = this->size(), len = get_len(n);\n    if (n == 1) return\
-    \ {1};\n    static mint b[1 << 21], f[1 << 21];\n    std::copy_n(this->data(),\
-    \ n, bf1), std::fill(bf1 + n, bf1 + len, 0);\n    FPS ret(len, 0);\n    std::fill_n(bf2,\
+    \ {1};\n    static mint b[LIM], f[LIM];\n    std::copy_n(this->data(), n, bf1),\
+    \ std::fill(bf1 + n, bf1 + len, 0);\n    FPS ret(len, 0);\n    std::fill_n(bf2,\
     \ len, 0), std::fill_n(c1, len, 0), std::fill_n(c2, len, 0);\n    ret[0] = 1,\
     \ ret[1] = bf1[1], bf2[0] = 1, bf2[1] = -bf1[1];\n    for (int i = 1; i != len;\
     \ ++i) b[i - 1] = mint(i) * bf1[i];\n    subst(c1, c2, 0, 2, ret.data()), dft(4,\
@@ -335,8 +334,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-11 23:03:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-11 13:30:53+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.test.cpp
 layout: document

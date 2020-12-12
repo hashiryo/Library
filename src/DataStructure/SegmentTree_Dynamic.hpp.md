@@ -103,9 +103,9 @@ data:
   timestamp: '2020-11-07 14:59:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/649.BinaryTrie.test.cpp
-  - test/yukicoder/649.SegTree_Dynamic.test.cpp
   - test/yosupo/set_xor_min.test.cpp
+  - test/yukicoder/649.SegTree_Dynamic.test.cpp
+  - test/yukicoder/649.BinaryTrie.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document
 redirect_from:

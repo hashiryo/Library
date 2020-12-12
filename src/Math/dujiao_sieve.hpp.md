@@ -3,17 +3,17 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1019.dujiao.test.cpp
     title: test/yukicoder/1019.dujiao.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/886.dujiao.test.cpp
     title: test/yukicoder/886.dujiao.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u675C\u6559\u7B5B"
     links:
@@ -70,11 +70,11 @@ data:
   path: src/Math/dujiao_sieve.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/886.dujiao.test.cpp
-  - test/yukicoder/1019.dujiao.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
+  - test/yukicoder/1019.dujiao.test.cpp
+  - test/yukicoder/886.dujiao.test.cpp
 documentation_of: src/Math/dujiao_sieve.hpp
 layout: document
 redirect_from:

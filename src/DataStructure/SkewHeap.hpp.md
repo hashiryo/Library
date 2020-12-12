@@ -81,10 +81,10 @@ data:
   timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_2_B.test.cpp
+  - test/yosupo/directedmst.test.cpp
   - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   - test/aoj/2647.test.cpp
-  - test/yosupo/directedmst.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
 documentation_of: src/DataStructure/SkewHeap.hpp
 layout: document
 redirect_from:

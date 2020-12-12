@@ -91,10 +91,10 @@ data:
   timestamp: '2020-10-24 14:33:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2644.test.cpp
-  - test/aoj/ALDS1_14_D.test.cpp
   - test/yosupo/number_of_substrings.test.cpp
   - test/yosupo/suffixarray.test.cpp
+  - test/aoj/ALDS1_14_D.test.cpp
+  - test/aoj/2644.test.cpp
 documentation_of: src/String/SuffixArray.hpp
 layout: document
 redirect_from:

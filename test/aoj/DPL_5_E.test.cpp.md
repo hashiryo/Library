@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
   - icon: ':question:'
@@ -31,7 +31,7 @@ data:
     \ fact(n) * finv(n - r); }\n  static mint nCr(int n, int r) { return nPr(n, r)\
     \ * finv(r); }\n  static mint nHr(int n, int r) { return !r ? mint(1) : nCr(n\
     \ + r - 1, r); }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
-    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <std::uint64_t\
+    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t\
     \ mod, std::uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u64 =\
     \ std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
     \ n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2\
@@ -90,7 +90,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_E.test.cpp
   requiredBy: []
-  timestamp: '2020-11-11 20:34:57+09:00'
+  timestamp: '2020-12-11 13:30:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_E.test.cpp
