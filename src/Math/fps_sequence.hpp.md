@@ -80,40 +80,41 @@ data:
     #line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
     \u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
     \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries\
-    \ : std::vector<mint> {\n  using FPS = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n\
-    \  using m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993,\
-    \ 3>;\n\n private:\n  static inline m64_1 a1[LIM], b1[LIM], c1[LIM];\n  static\
-    \ inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static inline mint bf1[LIM], bf2[LIM];\n\
-    \  template <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n   \
-    \ static mod_t iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
-    \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
-    \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
-    \ iW[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
-    \ idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++)\
-    \ iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n    }\n    for (int m = 1; m <\
-    \ n; m *= 2)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for\
-    \ (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v =\
-    \ x[j];\n          x[i] = u + v, x[j] = (u - v) * iW[k];\n        }\n    mod_t\
-    \ iv(mod - (mod - 1) / n);\n    for (int i = 0; i < n; i++) x[i] *= iv;\n  }\n\
-    \  template <class mod_t>\n  static inline void dft(int n, mod_t x[]) {\n    static\
-    \ mod_t W[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
-    \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
-    \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
-    \ W[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
-    \ dw = G.pow((mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++) W[m + i]\
-    \ = W[i] * dw;\n      lim = n / 2;\n    }\n    for (int m = n; m >>= 1;)\n   \
-    \   for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for (int i = s, j\
-    \ = s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v = x[j] * W[k];\n\
-    \          x[i] = u + v, x[j] = u - v;\n        }\n  }\n  static inline void crt(m64_1\
-    \ f1[], m64_2 f2[], int b, int e, mint ret[]) {\n    static constexpr m64_2 iv\
-    \ = m64_2(m64_1::modulo()).inverse();\n    static constexpr mint mod1 = m64_1::modulo();\n\
-    \    for (int i = b; i < e; i++) {\n      std::uint64_t r1 = f1[i].val(), r2 =\
-    \ f2[i].val();\n      ret[i] = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo()\
-    \ - r1) * iv).val()) * mod1;\n    }\n  }\n  template <typename T, typename std::enable_if<\n\
-    \                            std::is_integral<T>::value>::type * = nullptr>\n\
-    \  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n\
-    \    for (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template\
-    \ <typename T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
+    \ : std::vector<mint> {\n  using FPS = FormalPowerSeries<mint, LIM>;\n  using\
+    \ std::vector<mint>::vector;\n  using m64_1 = ModInt<34703335751681, 3>;\n  using\
+    \ m64_2 = ModInt<35012573396993, 3>;\n\n private:\n  static inline m64_1 a1[LIM],\
+    \ b1[LIM], c1[LIM];\n  static inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static\
+    \ inline mint bf1[LIM], bf2[LIM];\n  template <class mod_t>\n  static inline void\
+    \ idft(int n, mod_t x[]) {\n    static mod_t iW[LIM];\n    static constexpr std::uint64_t\
+    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
+    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
+    \ lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n\
+    \ / 2; m *= 2) {\n      mod_t idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n  \
+    \    for (int i = 0; i < m; i++) iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n\
+    \    }\n    for (int m = 1; m < n; m *= 2)\n      for (int s = 0, k = 0; s < n;\
+    \ s += 2 * m, ++k)\n        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n\
+    \          mod_t u = x[i], v = x[j];\n          x[i] = u + v, x[j] = (u - v) *\
+    \ iW[k];\n        }\n    mod_t iv(mod - (mod - 1) / n);\n    for (int i = 0; i\
+    \ < n; i++) x[i] *= iv;\n  }\n  template <class mod_t>\n  static inline void dft(int\
+    \ n, mod_t x[]) {\n    static mod_t W[LIM];\n    static constexpr std::uint64_t\
+    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
+    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
+    \ lim = 0;\n    if (lim == 0) W[0] = 1, lim = 1;\n    for (int m = lim; m < n\
+    \ / 2; m *= 2) {\n      mod_t dw = G.pow((mod - 1) / (4 * m));\n      for (int\
+    \ i = 0; i < m; i++) W[m + i] = W[i] * dw;\n      lim = n / 2;\n    }\n    for\
+    \ (int m = n; m >>= 1;)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n\
+    \        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u\
+    \ = x[i], v = x[j] * W[k];\n          x[i] = u + v, x[j] = u - v;\n        }\n\
+    \  }\n  static inline void crt(m64_1 f1[], m64_2 f2[], int b, int e, mint ret[])\
+    \ {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n    static\
+    \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
+    \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] = mint(r1)\n\
+    \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
+    \    }\n  }\n  template <typename T, typename std::enable_if<\n              \
+    \              std::is_integral<T>::value>::type * = nullptr>\n  static inline\
+    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
+    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
+    \ T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
     \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
@@ -369,7 +370,7 @@ data:
   isVerificationFile: false
   path: src/Math/fps_sequence.hpp
   requiredBy: []
-  timestamp: '2020-12-11 13:30:53+09:00'
+  timestamp: '2020-12-12 17:12:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/bernoulli.test.cpp

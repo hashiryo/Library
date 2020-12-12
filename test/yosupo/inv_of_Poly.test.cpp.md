@@ -7,13 +7,13 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/exgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
@@ -68,12 +68,12 @@ data:
     \ \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528\
     : https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate <class mint, int\
     \ LIM = (1 << 22)>\nstruct FormalPowerSeries : std::vector<mint> {\n  using FPS\
-    \ = FormalPowerSeries<mint>;\n  using std::vector<mint>::vector;\n  using m64_1\
-    \ = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n\n\
-    \ private:\n  static inline m64_1 a1[LIM], b1[LIM], c1[LIM];\n  static inline\
+    \ = FormalPowerSeries<mint, LIM>;\n  using std::vector<mint>::vector;\n  using\
+    \ m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n\
+    \n private:\n  static inline m64_1 a1[LIM], b1[LIM], c1[LIM];\n  static inline\
     \ m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static inline mint bf1[LIM], bf2[LIM];\n\
     \  template <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n   \
-    \ static mod_t iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
+    \ static mod_t iW[LIM];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
     \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
     \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
     \ iW[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
@@ -84,8 +84,8 @@ data:
     \ x[j];\n          x[i] = u + v, x[j] = (u - v) * iW[k];\n        }\n    mod_t\
     \ iv(mod - (mod - 1) / n);\n    for (int i = 0; i < n; i++) x[i] *= iv;\n  }\n\
     \  template <class mod_t>\n  static inline void dft(int n, mod_t x[]) {\n    static\
-    \ mod_t W[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
-    \    static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
+    \ mod_t W[LIM];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n \
+    \   static constexpr unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n\
     \    static constexpr mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0)\
     \ W[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
     \ dw = G.pow((mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++) W[m + i]\
@@ -374,8 +374,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2020-12-11 13:30:53+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-12 17:12:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
 layout: document
