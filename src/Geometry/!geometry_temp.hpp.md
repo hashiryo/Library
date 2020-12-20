@@ -606,58 +606,58 @@ data:
   isVerificationFile: false
   path: src/Geometry/!geometry_temp.hpp
   requiredBy:
+  - src/Geometry/closest_pair.hpp
   - src/Geometry/arg_sort.hpp
   - src/Geometry/circle_functions.hpp
-  - src/Geometry/closest_pair.hpp
   timestamp: '2020-10-24 12:08:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/argsort.test.cpp
   - test/aoj/1183.test.cpp
-  - test/aoj/3056.test.cpp
-  - test/aoj/1242.test.cpp
-  - test/aoj/CGL_7_F.test.cpp
-  - test/aoj/3034.test.cpp
-  - test/aoj/2514.test.cpp
-  - test/aoj/CGL_5_A.test.cpp
-  - test/aoj/CGL_7_B.test.cpp
-  - test/aoj/CGL_7_D.test.cpp
-  - test/aoj/2003.test.cpp
-  - test/aoj/1132.test.cpp
-  - test/aoj/2423.test.cpp
-  - test/aoj/CGL_7_E.test.cpp
-  - test/aoj/2159.test.cpp
-  - test/aoj/CGL_4_B.test.cpp
-  - test/aoj/2009.test.cpp
-  - test/aoj/1190.test.cpp
-  - test/aoj/3049.test.cpp
-  - test/aoj/2201.test.cpp
-  - test/aoj/CGL_1_C.test.cpp
-  - test/aoj/CGL_7_G.test.cpp
-  - test/aoj/1157.test.cpp
-  - test/aoj/1342.test.cpp
-  - test/aoj/CGL_4_C.test.cpp
-  - test/aoj/2256.test.cpp
-  - test/aoj/CGL_7_I.test.cpp
-  - test/aoj/2972.test.cpp
-  - test/aoj/CGL_1_A.test.cpp
-  - test/aoj/2626.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/CGL_4_A.test.cpp
-  - test/aoj/2402.test.cpp
-  - test/aoj/CGL_2_C.test.cpp
   - test/aoj/CGL_2_B.test.cpp
-  - test/aoj/CGL_1_B.test.cpp
-  - test/aoj/CGL_7_C.test.cpp
-  - test/aoj/CGL_2_D.test.cpp
-  - test/aoj/CGL_2_A.test.cpp
-  - test/aoj/CGL_3_B.test.cpp
-  - test/aoj/2635.test.cpp
-  - test/aoj/1171.test.cpp
-  - test/aoj/CGL_3_C.test.cpp
+  - test/aoj/CGL_7_G.test.cpp
+  - test/aoj/CGL_1_A.test.cpp
+  - test/aoj/2256.test.cpp
+  - test/aoj/3034.test.cpp
+  - test/aoj/CGL_4_A.test.cpp
+  - test/aoj/3049.test.cpp
   - test/aoj/CGL_3_A.test.cpp
-  - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/2626.test.cpp
+  - test/aoj/CGL_2_A.test.cpp
+  - test/aoj/CGL_1_C.test.cpp
+  - test/aoj/1190.test.cpp
+  - test/aoj/CGL_2_D.test.cpp
+  - test/aoj/1242.test.cpp
+  - test/aoj/2402.test.cpp
+  - test/aoj/0342.test.cpp
+  - test/aoj/CGL_4_B.test.cpp
   - test/aoj/CGL_7_A.test.cpp
+  - test/aoj/CGL_3_B.test.cpp
+  - test/aoj/2201.test.cpp
+  - test/aoj/CGL_7_C.test.cpp
+  - test/aoj/CGL_1_B.test.cpp
+  - test/aoj/CGL_5_A.test.cpp
+  - test/aoj/3056.test.cpp
+  - test/aoj/1132.test.cpp
+  - test/aoj/2972.test.cpp
+  - test/aoj/CGL_2_C.test.cpp
+  - test/aoj/CGL_3_C.test.cpp
+  - test/aoj/2003.test.cpp
+  - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/2514.test.cpp
+  - test/aoj/2423.test.cpp
+  - test/aoj/2159.test.cpp
+  - test/aoj/1171.test.cpp
+  - test/aoj/2009.test.cpp
+  - test/aoj/1342.test.cpp
+  - test/aoj/2635.test.cpp
+  - test/aoj/CGL_7_F.test.cpp
+  - test/aoj/CGL_4_C.test.cpp
+  - test/aoj/CGL_7_E.test.cpp
+  - test/aoj/CGL_7_B.test.cpp
+  - test/aoj/1157.test.cpp
+  - test/aoj/CGL_7_I.test.cpp
+  - test/aoj/CGL_7_D.test.cpp
   - test/aoj/2442.test.cpp
 documentation_of: src/Geometry/!geometry_temp.hpp
 layout: document

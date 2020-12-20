@@ -168,10 +168,10 @@ data:
   timestamp: '2020-10-24 14:33:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/184.test.cpp
-  - test/yukicoder/803.test.cpp
   - test/aoj/2530.test.cpp
   - test/aoj/2624.test.cpp
+  - test/yukicoder/184.test.cpp
+  - test/yukicoder/803.test.cpp
 documentation_of: src/Math/Matrix_mod2.hpp
 layout: document
 redirect_from:

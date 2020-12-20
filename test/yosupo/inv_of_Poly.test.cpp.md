@@ -8,7 +8,7 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'
-    path: src/Math/exgcd.hpp
+    path: src/Math/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -308,25 +308,26 @@ data:
     \ += r; }\n  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n \
     \ FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const\
     \ FPS &r) const { return this->quo(r); }\n  FPS operator%(const FPS &r) const\
-    \ { return this->quorem(r).second; }\n};\n#line 5 \"src/Math/exgcd.hpp\"\n/**\n\
+    \ { return this->quorem(r).second; }\n};\n#line 5 \"src/Math/extgcd.hpp\"\n/**\n\
     \ * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
     \ \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n */\n\n//\
-    \ BEGIN CUT HERE\n\ntemplate <class mint>\nFormalPowerSeries<mint> exgcd(\n  \
-    \  FormalPowerSeries<mint> a, FormalPowerSeries<mint> b,\n    FormalPowerSeries<mint>\
-    \ &x,\n    FormalPowerSeries<mint> &y) {  // ax + by = gcd(a, b)\n  using poly\
-    \ = FormalPowerSeries<mint>;\n  using pv = std::array<poly, 2>;\n  using pm =\
-    \ std::array<pv, 2>;\n  assert(a.deg() >= 0);\n  assert(b.deg() >= 0);\n  auto\
-    \ isI = [](const pm &m) {\n    static constexpr mint ONE(1);\n    return m[0][1].deg()\
-    \ == -1 && m[1][0].deg() == -1 && m[0][0].deg() == 0\n           && m[0][0][0]\
-    \ == ONE && m[1][1].deg() == 0 && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const\
-    \ pm &lhs, const pv &rhs) {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0]\
-    \ * rhs[0] + lhs[0][1] * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1]\
-    \ * rhs[1]};\n  };\n  auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs))\
-    \ return rhs;\n    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0]\
-    \ + lhs[0][1] * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1]\
-    \ * rhs[1][1]},\n              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n\
-    \                 lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto\
-    \ mulQ_l = [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
+    \ BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ extgcd(FormalPowerSeries<mint> a,\n                               FormalPowerSeries<mint>\
+    \ b,\n                               FormalPowerSeries<mint> &x,\n           \
+    \                    FormalPowerSeries<mint> &y) {\n  using poly = FormalPowerSeries<mint>;\n\
+    \  using pv = std::array<poly, 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg()\
+    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const pm &m) {\n    static\
+    \ constexpr mint ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1\
+    \ && m[0][0].deg() == 0\n           && m[0][0][0] == ONE && m[1][1].deg() == 0\
+    \ && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const pm &lhs, const pv &rhs)\
+    \ {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1]\
+    \ * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n \
+    \ auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0] + lhs[0][1]\
+    \ * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n\
+    \              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n           \
+    \      lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l =\
+    \ [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
     \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
     \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
     \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
@@ -351,30 +352,30 @@ data:
     \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  using Poly = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  Poly\
     \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
-    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = exgcd(f, g, x, y);\n  if (d.deg()\
-    \ != 0) {\n    cout << -1 << '\\n';\n  } else {\n    if (x.deg() == -1) {\n  \
-    \    cout << 0 << '\\n';\n    } else {\n      cout << x.size() << '\\n';\n   \
-    \   x /= d[0];\n      for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \"\
-    \ : \"\") << x[i];\n      cout << '\\n';\n    }\n  }\n  return 0;\n}\n"
+    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = extgcd(f, g, x, y);\n  if (d.deg()\
+    \ != 0) {\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout <<\
+    \ 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n  \
+    \  for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \" : \"\") << x[i];\n\
+    \    cout << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
-    \n#include \"src/Math/exgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
+    \n#include \"src/Math/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n\
+    \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  using Poly = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  Poly\
     \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
-    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = exgcd(f, g, x, y);\n  if (d.deg()\
-    \ != 0) {\n    cout << -1 << '\\n';\n  } else {\n    if (x.deg() == -1) {\n  \
-    \    cout << 0 << '\\n';\n    } else {\n      cout << x.size() << '\\n';\n   \
-    \   x /= d[0];\n      for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \"\
-    \ : \"\") << x[i];\n      cout << '\\n';\n    }\n  }\n  return 0;\n}"
+    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = extgcd(f, g, x, y);\n  if (d.deg()\
+    \ != 0) {\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout <<\
+    \ 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n  \
+    \  for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \" : \"\") << x[i];\n\
+    \    cout << '\\n';\n  }\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
-  - src/Math/exgcd.hpp
+  - src/Math/extgcd.hpp
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2020-12-12 17:12:08+09:00'
+  timestamp: '2020-12-20 11:37:51+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp

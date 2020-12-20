@@ -355,9 +355,9 @@ data:
   timestamp: '2020-12-12 17:12:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/658.test.cpp
   - test/aoj/0168.test.cpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/215.test.cpp
 documentation_of: src/Math/kitamasa.hpp
 layout: document
 redirect_from:

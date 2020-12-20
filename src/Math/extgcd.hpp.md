@@ -18,7 +18,7 @@ data:
     document_title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     links:
     - https://loj.ac/article/2773
-  bundledCode: "#line 2 \"src/Math/exgcd.hpp\"\n#include <bits/stdc++.h>\n#line 3\
+  bundledCode: "#line 2 \"src/Math/extgcd.hpp\"\n#include <bits/stdc++.h>\n#line 3\
     \ \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root\
     \ = 0>\nclass ModInt {\n private:\n  using u64 = std::uint64_t;\n  using u128\
@@ -307,25 +307,26 @@ data:
     \ += r; }\n  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n \
     \ FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator/(const\
     \ FPS &r) const { return this->quo(r); }\n  FPS operator%(const FPS &r) const\
-    \ { return this->quorem(r).second; }\n};\n#line 5 \"src/Math/exgcd.hpp\"\n/**\n\
+    \ { return this->quorem(r).second; }\n};\n#line 5 \"src/Math/extgcd.hpp\"\n/**\n\
     \ * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
     \ \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n */\n\n//\
-    \ BEGIN CUT HERE\n\ntemplate <class mint>\nFormalPowerSeries<mint> exgcd(\n  \
-    \  FormalPowerSeries<mint> a, FormalPowerSeries<mint> b,\n    FormalPowerSeries<mint>\
-    \ &x,\n    FormalPowerSeries<mint> &y) {  // ax + by = gcd(a, b)\n  using poly\
-    \ = FormalPowerSeries<mint>;\n  using pv = std::array<poly, 2>;\n  using pm =\
-    \ std::array<pv, 2>;\n  assert(a.deg() >= 0);\n  assert(b.deg() >= 0);\n  auto\
-    \ isI = [](const pm &m) {\n    static constexpr mint ONE(1);\n    return m[0][1].deg()\
-    \ == -1 && m[1][0].deg() == -1 && m[0][0].deg() == 0\n           && m[0][0][0]\
-    \ == ONE && m[1][1].deg() == 0 && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const\
-    \ pm &lhs, const pv &rhs) {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0]\
-    \ * rhs[0] + lhs[0][1] * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1]\
-    \ * rhs[1]};\n  };\n  auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs))\
-    \ return rhs;\n    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0]\
-    \ + lhs[0][1] * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1]\
-    \ * rhs[1][1]},\n              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n\
-    \                 lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto\
-    \ mulQ_l = [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
+    \ BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ extgcd(FormalPowerSeries<mint> a,\n                               FormalPowerSeries<mint>\
+    \ b,\n                               FormalPowerSeries<mint> &x,\n           \
+    \                    FormalPowerSeries<mint> &y) {\n  using poly = FormalPowerSeries<mint>;\n\
+    \  using pv = std::array<poly, 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg()\
+    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const pm &m) {\n    static\
+    \ constexpr mint ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1\
+    \ && m[0][0].deg() == 0\n           && m[0][0][0] == ONE && m[1][1].deg() == 0\
+    \ && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const pm &lhs, const pv &rhs)\
+    \ {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1]\
+    \ * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n \
+    \ auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0] + lhs[0][1]\
+    \ * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n\
+    \              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n           \
+    \      lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l =\
+    \ [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
     \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
     \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
     \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
@@ -350,34 +351,36 @@ data:
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
     #include \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u591A\u9805\u5F0F\
     \u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category \u6570\u5B66\n *  O(Nlog^2N)\n\
-    \ * @see https://loj.ac/article/2773\n */\n\n// BEGIN CUT HERE\n\ntemplate <class\
-    \ mint>\nFormalPowerSeries<mint> exgcd(\n    FormalPowerSeries<mint> a, FormalPowerSeries<mint>\
-    \ b,\n    FormalPowerSeries<mint> &x,\n    FormalPowerSeries<mint> &y) {  // ax\
-    \ + by = gcd(a, b)\n  using poly = FormalPowerSeries<mint>;\n  using pv = std::array<poly,\
-    \ 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg() >= 0);\n  assert(b.deg()\
-    \ >= 0);\n  auto isI = [](const pm &m) {\n    static constexpr mint ONE(1);\n\
-    \    return m[0][1].deg() == -1 && m[1][0].deg() == -1 && m[0][0].deg() == 0\n\
-    \           && m[0][0][0] == ONE && m[1][1].deg() == 0 && m[1][1][0] == ONE;\n\
-    \  };\n  auto mulv = [&](const pm &lhs, const pv &rhs) {\n    if (isI(lhs)) return\
-    \ rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1] * rhs[1],\n             \
-    \ lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n  auto mul = [&](const pm &lhs,\
-    \ const pm &rhs) {\n    if (isI(lhs)) return rhs;\n    if (isI(rhs)) return lhs;\n\
-    \    return pm{pv{lhs[0][0] * rhs[0][0] + lhs[0][1] * rhs[1][0],\n           \
-    \      lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n              pv{lhs[1][0]\
-    \ * rhs[0][0] + lhs[1][1] * rhs[1][0],\n                 lhs[1][0] * rhs[0][1]\
-    \ + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l = [&](const poly &q, const pm\
-    \ &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n              pv{rhs[0][0]\
-    \ - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n  auto mulQ_r = [&](const\
-    \ pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1], lhs[0][0] - lhs[0][1]\
-    \ * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1] * q}};\n  };\n  std::function<pm(poly,\
-    \ poly)> hgcd = [&](const poly &p0, const poly &p1) {\n    assert(p0.deg() > p1.deg());\n\
-    \    int m = ((p0.deg() - 1) >> 1) + 1, n = p1.deg();\n    if (n < m) return pm{pv{poly{1},\
-    \ poly{}}, pv{poly{}, poly{1}}};\n    pm R(hgcd(poly(p0.begin() + m, p0.end()),\
-    \ poly(p1.begin() + m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n    if (ab[1].deg()\
-    \ < m) return R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n    int\
-    \ k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first,\
-    \ R);\n    return mul(hgcd(poly(ab[1].begin() + k, ab[1].end()),\n           \
-    \         poly(qr.second.begin() + k, qr.second.end())),\n               mulQ_l(qr.first,\
+    \ * @see https://loj.ac/article/2773\n */\n\n// BEGIN CUT HERE\n\n// ax + by =\
+    \ gcd(a, b)\ntemplate <class mint>\nFormalPowerSeries<mint> extgcd(FormalPowerSeries<mint>\
+    \ a,\n                               FormalPowerSeries<mint> b,\n            \
+    \                   FormalPowerSeries<mint> &x,\n                            \
+    \   FormalPowerSeries<mint> &y) {\n  using poly = FormalPowerSeries<mint>;\n \
+    \ using pv = std::array<poly, 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg()\
+    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const pm &m) {\n    static\
+    \ constexpr mint ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1\
+    \ && m[0][0].deg() == 0\n           && m[0][0][0] == ONE && m[1][1].deg() == 0\
+    \ && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const pm &lhs, const pv &rhs)\
+    \ {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1]\
+    \ * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n \
+    \ auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0] + lhs[0][1]\
+    \ * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n\
+    \              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n           \
+    \      lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l =\
+    \ [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
+    \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
+    \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
+    \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
+    \ * q}};\n  };\n  std::function<pm(poly, poly)> hgcd = [&](const poly &p0, const\
+    \ poly &p1) {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >>\
+    \ 1) + 1, n = p1.deg();\n    if (n < m) return pm{pv{poly{1}, poly{}}, pv{poly{},\
+    \ poly{1}}};\n    pm R(hgcd(poly(p0.begin() + m, p0.end()), poly(p1.begin() +\
+    \ m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n    if (ab[1].deg() < m) return\
+    \ R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n    int k = 2 * m -\
+    \ ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first, R);\n\
+    \    return mul(hgcd(poly(ab[1].begin() + k, ab[1].end()),\n                 \
+    \   poly(qr.second.begin() + k, qr.second.end())),\n               mulQ_l(qr.first,\
     \ R));\n  };\n  std::function<pm(poly, poly)> cogcd = [&](const poly &p0, const\
     \ poly &p1) {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(p0, p1));\n   \
     \ pv p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return M;\n    std::pair<poly,\
@@ -391,16 +394,16 @@ data:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
   isVerificationFile: false
-  path: src/Math/exgcd.hpp
+  path: src/Math/extgcd.hpp
   requiredBy: []
-  timestamp: '2020-12-12 17:12:08+09:00'
+  timestamp: '2020-12-20 11:37:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp
-documentation_of: src/Math/exgcd.hpp
+documentation_of: src/Math/extgcd.hpp
 layout: document
 redirect_from:
-- /library/src/Math/exgcd.hpp
-- /library/src/Math/exgcd.hpp.html
+- /library/src/Math/extgcd.hpp
+- /library/src/Math/extgcd.hpp.html
 title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
 ---

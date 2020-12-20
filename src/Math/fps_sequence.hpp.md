@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
   - icon: ':x:'
@@ -373,9 +373,9 @@ data:
   timestamp: '2020-12-12 17:12:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/partition.test.cpp
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/partition.test.cpp
   - test/yosupo/stirling_second.test.cpp
 documentation_of: src/Math/fps_sequence.hpp
 layout: document

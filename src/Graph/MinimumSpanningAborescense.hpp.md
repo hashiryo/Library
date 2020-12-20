@@ -142,8 +142,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/directedmst.test.cpp
-  - test/aoj/2647.test.cpp
   - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/2647.test.cpp
 documentation_of: src/Graph/MinimumSpanningAborescense.hpp
 layout: document
 redirect_from:

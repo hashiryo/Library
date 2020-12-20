@@ -73,8 +73,8 @@ data:
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
-  - test/yukicoder/1019.dujiao.test.cpp
   - test/yukicoder/886.dujiao.test.cpp
+  - test/yukicoder/1019.dujiao.test.cpp
 documentation_of: src/Math/dujiao_sieve.hpp
 layout: document
 redirect_from:
