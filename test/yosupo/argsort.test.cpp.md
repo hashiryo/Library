@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/arg_sort.hpp
     title: "\u504F\u89D2\u30BD\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
@@ -28,33 +28,32 @@ data:
     \ RIGHT = -1, IN = +2, OUT = -2 };\nenum { DISJOINT = 0, TOUCH = 1, CROSSING =\
     \ 2, OVERLAP = 3 };\n//-----------------------------------------------------------------------------\n\
     // Point\n//-----------------------------------------------------------------------------\n\
-    struct Point {\n  Real x, y;\n  Point &operator+=(Point p) {\n    x += p.x;\n\
-    \    y += p.y;\n    return *this;\n  }\n  Point &operator-=(Point p) {\n    x\
-    \ -= p.x;\n    y -= p.y;\n    return *this;\n  }\n  Point &operator*=(Real a)\
-    \ {\n    x *= a;\n    y *= a;\n    return *this;\n  }\n  Point &operator/=(Real\
-    \ a) { return *this *= (1.0 / a); }\n  Point operator-() const { return {-x, -y};\
-    \ }\n  bool operator<(Point p) const {\n    int s = sgn(x - p.x);\n    return\
-    \ s ? s < 0 : sgn(y - p.y) < 0;\n  }\n};\nbool operator==(Point p, Point q) {\
-    \ return !(p < q) && !(q < p); }\nbool operator!=(Point p, Point q) { return p\
-    \ < q || q < p; }\nbool operator<=(Point p, Point q) { return !(q < p); }\nPoint\
-    \ operator+(Point p, Point q) { return p += q; }\nPoint operator-(Point p, Point\
-    \ q) { return p -= q; }\nPoint operator*(Real a, Point p) { return p *= a; }\n\
-    Point operator*(Point p, Real a) { return p *= a; }\nPoint operator/(Point p,\
-    \ Real a) { return p /= a; }\nReal dot(Point p, Point q) { return p.x * q.x +\
-    \ p.y * q.y; }\nReal cross(Point p, Point q) { return p.x * q.y - p.y * q.x; }\
-    \  // left turn > 0\nReal norm2(Point p) { return dot(p, p); }\nReal norm(Point\
+    struct Point {\n  Real x, y;\n  Point &operator+=(Point p) { return x += p.x,\
+    \ y += p.y, *this; }\n  Point &operator-=(Point p) { return x -= p.x, y -= p.y,\
+    \ *this; }\n  Point &operator*=(Real a) { return x *= a, y *= a, *this; }\n  Point\
+    \ &operator/=(Real a) { return *this *= (1.0 / a); }\n  Point operator-() const\
+    \ { return {-x, -y}; }\n  bool operator<(Point p) const {\n    return sgn(x -\
+    \ p.x) ? sgn(x - p.x) < 0 : sgn(y - p.y) < 0;\n  }\n};\nbool operator==(Point\
+    \ p, Point q) { return !(p < q) && !(q < p); }\nbool operator!=(Point p, Point\
+    \ q) { return p < q || q < p; }\nbool operator<=(Point p, Point q) { return !(q\
+    \ < p); }\nPoint operator+(Point p, Point q) { return p += q; }\nPoint operator-(Point\
+    \ p, Point q) { return p -= q; }\nPoint operator*(Real a, Point p) { return p\
+    \ *= a; }\nPoint operator*(Point p, Real a) { return p *= a; }\nPoint operator/(Point\
+    \ p, Real a) { return p /= a; }\nReal dot(Point p, Point q) { return p.x * q.x\
+    \ + p.y * q.y; }\nReal cross(Point p, Point q) { return p.x * q.y - p.y * q.x;\
+    \ }  // left turn > 0\nReal norm2(Point p) { return dot(p, p); }\nReal norm(Point\
     \ p) { return std::sqrt(norm2(p)); }\nReal arg(Point p) { return std::atan2(p.y,\
     \ p.x); }\nReal dist(Point p, Point q) { return norm(p - q); }\nReal arg(Point\
     \ p, Point q) { return std::atan2(cross(p, q), dot(p, q)); }\nPoint orth(Point\
     \ p) { return {-p.y, p.x}; }\nPoint rotate(Point p, Real theta) {\n  return {std::cos(theta)\
     \ * p.x - std::sin(theta) * p.y,\n          std::sin(theta) * p.x + std::cos(theta)\
-    \ * p.y};\n}\nstd::istream &operator>>(std::istream &is, Point &p) {\n  is >>\
-    \ p.x >> p.y;\n  return is;\n}\nstd::ostream &operator<<(std::ostream &os, Point\
-    \ p) {\n  os << p.x << \" \" << p.y;\n  return os;\n}\nint ccw(Point p0, Point\
-    \ p1, Point p2) {\n  Point a = p1 - p0, b = p2 - p0;\n  if (sgn(cross(a, b)) >\
-    \ 0) return COUNTER_CLOCKWISE;\n  if (sgn(cross(a, b)) < 0) return CLOCKWISE;\n\
-    \  if (sgn(dot(a, b)) < 0) return ONLINE_BACK;\n  if (norm2(a) < norm2(b)) return\
-    \ ONLINE_FRONT;\n  return ON_SEGMENT;\n}\n//-----------------------------------------------------------------------------\n\
+    \ * p.y};\n}\nstd::istream &operator>>(std::istream &is, Point &p) {\n  return\
+    \ is >> p.x >> p.y, is;\n}\nstd::ostream &operator<<(std::ostream &os, Point p)\
+    \ {\n  return os << p.x << \" \" << p.y, os;\n}\nint ccw(Point p0, Point p1, Point\
+    \ p2) {\n  Point a = p1 - p0, b = p2 - p0;\n  if (sgn(cross(a, b)) > 0) return\
+    \ COUNTER_CLOCKWISE;\n  if (sgn(cross(a, b)) < 0) return CLOCKWISE;\n  if (sgn(dot(a,\
+    \ b)) < 0) return ONLINE_BACK;\n  if (norm2(a) < norm2(b)) return ONLINE_FRONT;\n\
+    \  return ON_SEGMENT;\n}\n//-----------------------------------------------------------------------------\n\
     // Line and Segment\n//-----------------------------------------------------------------------------\n\
     struct Segment;\nstruct Circle;\nstruct Polygon;\nstruct Convex;\nstruct Line\
     \ {\n  Point p1, p2;\n  Line() {}\n  Line(Point p, Point q) : p1(p), p2(q) {}\n\
@@ -73,35 +72,35 @@ data:
     \  }\n  Point reflect(Point p) { return 2 * project(p) - p; }\n  Line reflect(Line\
     \ l) { return {reflect(l.p1), reflect(l.p2)}; }\n  Segment reflect(Segment s);\n\
     \  Circle reflect(Circle c);\n  Polygon reflect(Polygon g);\n  Convex reflect(Convex\
-    \ g);\n};\n\nLine bisector(Point p, Point q) {  // p on leftside\n  Point m =\
-    \ (p + q) / 2;\n  return {m, m + orth(q - p)};\n}\n\nstruct Segment {\n  Point\
-    \ p1, p2;\n  Point &operator[](int i) {\n    assert(0 <= i && i <= 1);\n    return\
-    \ i ? p2 : p1;\n  }\n  bool operator==(Segment s) const {  // do not consider\
-    \ the direction\n    return (p1 == s.p1 && p2 == s.p2) || (p1 == s.p2 && p2 ==\
-    \ s.p1);\n  }\n  int is_on(Point p) {\n    if (p1 == p || p2 == p) return 2; \
-    \ // end Point\n    return !sgn(cross(p1 - p, p2 - p)) && sgn(dot(p1 - p, p2 -\
-    \ p) < 0);\n  }\n  Point closest_point(Point p) {\n    Point v = p2 - p1;\n  \
-    \  Real a = dot(v, v), b = dot(p - p1, v);\n    if (sgn(b) < 0) return p1;\n \
-    \   if (sgn(a - b) < 0) return p2;\n    return p1 + b / a * v;\n  }\n};\nbool\
-    \ is_orthogonal(Line l, Line m) {\n  return !sgn(dot(l.p1 - l.p2, m.p1 - m.p2));\n\
-    }\nbool is_parallel(Line l, Line m) {\n  return !sgn(cross(l.p1 - l.p2, m.p1 -\
-    \ m.p2));\n}\n\nLine translate(Line l, Point v) { return {l.p1 + v, l.p2 + v};\
-    \ }\nLine rotate(Line l, Real theta) {\n  return {rotate(l.p1, theta), rotate(l.p2,\
-    \ theta)};\n}\n\nSegment Line::reflect(Segment s) { return {reflect(s.p1), reflect(s.p2)};\
-    \ }\nSegment translate(Segment s, Point v) { return {s.p1 + v, s.p2 + v}; }\n\
-    Segment rotate(Segment s, Real theta) {\n  return {rotate(s.p1, theta), rotate(s.p2,\
-    \ theta)};\n}\n\nstd::vector<Point> cross_points(Line l, Line m) {\n  Real a =\
-    \ cross(m.p2 - m.p1, l.p2 - l.p1);\n  Real b = cross(l.p1 - m.p1, l.p2 - l.p1);\n\
-    \  if (sgn(a)) return {m.p1 + b / a * (m.p2 - m.p1)};  // properly crossing\n\
-    \  if (!sgn(b)) return {m.p1, m.p2};                   // same line\n  return\
-    \ {};                                          // disjoint parallel\n}\nstd::vector<Point>\
-    \ cross_points(Line l, Segment s) {\n  Real a = cross(s.p2 - s.p1, l.p2 - l.p1);\n\
-    \  Real b = cross(l.p1 - s.p1, l.p2 - l.p1);\n  if (a < 0) a = -a, b = -b;\n \
-    \ if (sgn(b) < 0 || sgn(a - b) < 0) return {};        // no intersect\n  if (sgn(a))\
-    \ return {s.p1 + b / a * (s.p2 - s.p1)};  // properly crossing\n  if (!sgn(b))\
-    \ return {s.p1, s.p2};                   // same line\n  return {};          \
-    \                                // disjoint parallel\n}\nstd::vector<Point> cross_points(Segment\
-    \ s, Line l) {\n  return cross_points(l, s);\n}\nstd::vector<Point> cross_points(Segment\
+    \ g);\n};\n\n// p on leftside\nLine bisector(Point p, Point q) {\n  return {(p\
+    \ + q) / 2, (p + q) / 2 + orth(q - p)};\n}\n\nstruct Segment {\n  Point p1, p2;\n\
+    \  Point &operator[](int i) {\n    assert(0 <= i && i <= 1);\n    return i ? p2\
+    \ : p1;\n  }\n  bool operator==(Segment s) const {  // do not consider the direction\n\
+    \    return (p1 == s.p1 && p2 == s.p2) || (p1 == s.p2 && p2 == s.p1);\n  }\n \
+    \ int is_on(Point p) {\n    if (p1 == p || p2 == p) return 2;  // end Point\n\
+    \    return !sgn(cross(p1 - p, p2 - p)) && sgn(dot(p1 - p, p2 - p) < 0);\n  }\n\
+    \  Point closest_point(Point p) {\n    Point v = p2 - p1;\n    Real a = dot(v,\
+    \ v), b = dot(p - p1, v);\n    if (sgn(b) < 0) return p1;\n    if (sgn(a - b)\
+    \ < 0) return p2;\n    return p1 + b / a * v;\n  }\n};\nbool is_orthogonal(Line\
+    \ l, Line m) {\n  return !sgn(dot(l.p1 - l.p2, m.p1 - m.p2));\n}\nbool is_parallel(Line\
+    \ l, Line m) {\n  return !sgn(cross(l.p1 - l.p2, m.p1 - m.p2));\n}\n\nLine translate(Line\
+    \ l, Point v) { return {l.p1 + v, l.p2 + v}; }\nLine rotate(Line l, Real theta)\
+    \ {\n  return {rotate(l.p1, theta), rotate(l.p2, theta)};\n}\n\nSegment Line::reflect(Segment\
+    \ s) { return {reflect(s.p1), reflect(s.p2)}; }\nSegment translate(Segment s,\
+    \ Point v) { return {s.p1 + v, s.p2 + v}; }\nSegment rotate(Segment s, Real theta)\
+    \ {\n  return {rotate(s.p1, theta), rotate(s.p2, theta)};\n}\n\nstd::vector<Point>\
+    \ cross_points(Line l, Line m) {\n  Real a = cross(m.p2 - m.p1, l.p2 - l.p1);\n\
+    \  Real b = cross(l.p1 - m.p1, l.p2 - l.p1);\n  if (sgn(a)) return {m.p1 + b /\
+    \ a * (m.p2 - m.p1)};  // properly crossing\n  if (!sgn(b)) return {m.p1, m.p2};\
+    \                   // same line\n  return {};                               \
+    \           // disjoint parallel\n}\nstd::vector<Point> cross_points(Line l, Segment\
+    \ s) {\n  Real a = cross(s.p2 - s.p1, l.p2 - l.p1);\n  Real b = cross(l.p1 - s.p1,\
+    \ l.p2 - l.p1);\n  if (a < 0) a = -a, b = -b;\n  if (sgn(b) < 0 || sgn(a - b)\
+    \ < 0) return {};        // no intersect\n  if (sgn(a)) return {s.p1 + b / a *\
+    \ (s.p2 - s.p1)};  // properly crossing\n  if (!sgn(b)) return {s.p1, s.p2}; \
+    \                  // same line\n  return {};                                \
+    \          // disjoint parallel\n}\nstd::vector<Point> cross_points(Segment s,\
+    \ Line l) {\n  return cross_points(l, s);\n}\nstd::vector<Point> cross_points(Segment\
     \ s, Segment t) {\n  Real a = cross(s.p2 - s.p1, t.p2 - t.p1);\n  Real b = cross(t.p1\
     \ - s.p1, t.p2 - t.p1);\n  Real c = cross(s.p2 - s.p1, s.p1 - t.p1);\n  if (a\
     \ < 0) a = -a, b = -b, c = -c;\n  if (sgn(b) < 0 || sgn(a - b) < 0 || sgn(c) <\
@@ -117,15 +116,19 @@ data:
     \ s, Segment t) {\n  auto cp = cross_points(s, t);\n  if (cp.size() == 0) return\
     \ DISJOINT;\n  if (cp.size() > 1) return OVERLAP;\n  if ((cp[0] == s.p1 || cp[0]\
     \ == s.p2 || cp[0] == t.p1 || cp[0] == t.p2))\n    return TOUCH;\n  return CROSSING;\n\
-    }\n\nReal dist(Line l, Point p) { return dist(p, l.project(p)); }\nReal dist(Point\
-    \ p, Line l) { return dist(l, p); }\nReal dist(Line l, Line m) {\n  return sgn(cross(l.p1\
-    \ - l.p2, m.p1 - m.p2)) ? 0 : dist(l.p1, m);\n}\nReal dist(Segment s, Point p)\
-    \ { return dist(p, s.closest_point(p)); }\nReal dist(Point p, Segment s) { return\
-    \ dist(s, p); }\nReal dist(Line l, Segment s) {\n  return cross_points(l, s).size()\
-    \ ? 0 : std::min(dist(l, s.p1), dist(l, s.p2));\n}\nReal dist(Segment s, Line\
-    \ l) { return dist(l, s); }\nReal dist(Segment s, Segment t) {\n  if (cross_points(s,\
-    \ t).size()) return 0;\n  return std::min({dist(s.p1, t), dist(s.p2, t), dist(t.p1,\
-    \ s), dist(t.p2, s)});\n}\n//-----------------------------------------------------------------------------\n\
+    }\n\n// angle\nstd::vector<Line> bisector(Line l, Line m) {\n  auto cp = cross_points(l,\
+    \ m);\n  if (cp.size() > 1) return {};\n  if (cp.size() == 0) return {Line{(l.p1\
+    \ + m.p1) / 2, (l.p2 + m.p1) / 2}};\n  auto p = l.p1 - l.p2, q = m.p1 - m.p2;\n\
+    \  p /= norm(p), q /= norm(q);\n  return {Line{cp[0], cp[0] + p + q}, Line{cp[0],\
+    \ cp[0] + p - q}};\n}\n\nReal dist(Line l, Point p) { return dist(p, l.project(p));\
+    \ }\nReal dist(Point p, Line l) { return dist(l, p); }\nReal dist(Line l, Line\
+    \ m) {\n  return sgn(cross(l.p1 - l.p2, m.p1 - m.p2)) ? 0 : dist(l.p1, m);\n}\n\
+    Real dist(Segment s, Point p) { return dist(p, s.closest_point(p)); }\nReal dist(Point\
+    \ p, Segment s) { return dist(s, p); }\nReal dist(Line l, Segment s) {\n  return\
+    \ cross_points(l, s).size() ? 0 : std::min(dist(l, s.p1), dist(l, s.p2));\n}\n\
+    Real dist(Segment s, Line l) { return dist(l, s); }\nReal dist(Segment s, Segment\
+    \ t) {\n  if (cross_points(s, t).size()) return 0;\n  return std::min({dist(s.p1,\
+    \ t), dist(s.p2, t), dist(t.p1, s), dist(t.p2, s)});\n}\n//-----------------------------------------------------------------------------\n\
     // Circle\n//-----------------------------------------------------------------------------\n\
     struct Circle {\n  Point o;\n  Real r;\n  Real area() { return PI * r * r; }\n\
     \  int where(Point p) {\n    int s = sgn(norm2(p - o) - r * r);\n    return s\
@@ -195,67 +198,67 @@ data:
     \ - (*this)[i]);\n        if (sgn(len - norm2((*this)[k] - (*this)[i])) <= 0)\n\
     \          j = k;\n        else {\n          if (best < len) best = len, u = i,\
     \ v = j;\n          break;\n        }\n      }\n    return std::make_pair((*this)[u],\
-    \ (*this)[v]);\n  }\n  Real diameter() {\n    Point p, q;\n    std::tie(p, q)\
-    \ = farthest();\n    return dist(p, q);\n  }\n  Convex cut(Line l, int side =\
-    \ LEFT) {  // +1 for left, -1 for right\n    Convex g;\n    for (int i = 0; i\
-    \ < (int)this->size(); i++) {\n      Point p = (*this)[i], q = (*this)[next(i)];\n\
-    \      if (l.where(p) * side >= 0) g.emplace_back(p);\n      if (l.where(p) *\
-    \ l.where(q) < 0) {\n        Real a = cross(q - p, l.p2 - l.p1);\n        Real\
-    \ b = cross(l.p1 - p, l.p2 - l.p1);\n        g.emplace_back(p + b / a * (q - p));\n\
-    \      }\n    }\n    return g;\n  }\n};\n\nConvex Line::reflect(Convex g) {\n\
-    \  reverse(g.begin(), g.end());\n  Convex res;\n  for (Point p : g) res.emplace_back(reflect(p));\n\
-    \  return res;\n}\nConvex translate(Convex g, Point v) {\n  Convex h(g.size());\n\
-    \  for (int i = 0; i < (int)g.size(); i++) h[i] = g[i] + v;\n  return h;\n}\n\
-    Convex rotate(Convex g, Real theta) {\n  Convex h(g.size());\n  for (int i = 0;\
-    \ i < (int)g.size(); i++) h[i] = rotate(g[i], theta);\n  return h;\n}\n\nReal\
-    \ dist(Polygon g, Point p) {\n  if (g.where(p) != OUT) return 0;\n  Real res =\
-    \ dist(Segment({g.back(), g[0]}), p);\n  for (int i = 0; i + 1 < (int)g.size();\
-    \ i++)\n    res = std::min(res, dist(Segment({g[i], g[i + 1]}), p));\n  return\
-    \ res;\n}\nReal dist(Point p, Polygon g) { return dist(g, p); }\nReal dist(Polygon\
-    \ g, Line l) {\n  Real res = dist(Segment({g.back(), g[0]}), l);\n  for (int i\
-    \ = 0; i + 1 < (int)g.size(); i++)\n    res = std::min(res, dist(Segment({g[i],\
-    \ g[i + 1]}), l));\n  return res;\n}\nReal dist(Line l, Polygon g) { return dist(g,\
-    \ l); }\nReal dist(Polygon g, Segment s) {\n  if (g.where(s.p1) != OUT || g.where(s.p2)\
-    \ != OUT) return 0;\n  Real res = dist(Segment({g.back(), g[0]}), s);\n  for (int\
-    \ i = 0; i + 1 < (int)g.size(); i++)\n    res = std::min(res, dist(Segment({g[i],\
-    \ g[i + 1]}), s));\n  return res;\n}\nReal dist(Segment s, Polygon g) { return\
-    \ dist(g, s); }\nReal dist(Polygon g, Polygon h) {\n  Real res = dist(Segment({g.back(),\
-    \ g[0]}), h);\n  for (int i = 0; i + 1 < (int)g.size(); i++)\n    res = std::min(res,\
-    \ dist(Segment({g[i], g[i + 1]}), h));\n  return res;\n}\n\nConvex convex_hull(std::vector<Point>\
-    \ ps) {\n  int n = ps.size(), k = 0;\n  sort(ps.begin(), ps.end());\n  Convex\
-    \ ch(2 * n);\n  for (int i = 0; i < n; ch[k++] = ps[i++])\n    while (k >= 2 &&\
-    \ ccw(ch[k - 2], ch[k - 1], ps[i]) == CLOCKWISE) k--;\n  for (int i = n - 2, t\
-    \ = k + 1; i >= 0; ch[k++] = ps[i--])\n    while (k >= t && ccw(ch[k - 2], ch[k\
-    \ - 1], ps[i]) == CLOCKWISE) k--;\n  ch.resize(k - 1);\n  return ch;\n}\n//-----------------------------------------------------------------------------\n\
+    \ (*this)[v]);\n  }\n  Real diameter() {\n    auto [p, q] = farthest();\n    return\
+    \ dist(p, q);\n  }\n  Convex cut(Line l, int side = LEFT) {  // +1 for left, -1\
+    \ for right\n    Convex g;\n    for (int i = 0; i < (int)this->size(); i++) {\n\
+    \      Point p = (*this)[i], q = (*this)[next(i)];\n      if (l.where(p) * side\
+    \ >= 0) g.emplace_back(p);\n      if (l.where(p) * l.where(q) < 0) {\n       \
+    \ Real a = cross(q - p, l.p2 - l.p1);\n        Real b = cross(l.p1 - p, l.p2 -\
+    \ l.p1);\n        g.emplace_back(p + b / a * (q - p));\n      }\n    }\n    return\
+    \ g;\n  }\n};\n\nConvex Line::reflect(Convex g) {\n  reverse(g.begin(), g.end());\n\
+    \  Convex res;\n  for (Point p : g) res.emplace_back(reflect(p));\n  return res;\n\
+    }\nConvex translate(Convex g, Point v) {\n  Convex h(g.size());\n  for (int i\
+    \ = 0; i < (int)g.size(); i++) h[i] = g[i] + v;\n  return h;\n}\nConvex rotate(Convex\
+    \ g, Real theta) {\n  Convex h(g.size());\n  for (int i = 0; i < (int)g.size();\
+    \ i++) h[i] = rotate(g[i], theta);\n  return h;\n}\n\nReal dist(Polygon g, Point\
+    \ p) {\n  if (g.where(p) != OUT) return 0;\n  Real res = dist(Segment({g.back(),\
+    \ g[0]}), p);\n  for (int i = 0; i + 1 < (int)g.size(); i++)\n    res = std::min(res,\
+    \ dist(Segment({g[i], g[i + 1]}), p));\n  return res;\n}\nReal dist(Point p, Polygon\
+    \ g) { return dist(g, p); }\nReal dist(Polygon g, Line l) {\n  Real res = dist(Segment({g.back(),\
+    \ g[0]}), l);\n  for (int i = 0; i + 1 < (int)g.size(); i++)\n    res = std::min(res,\
+    \ dist(Segment({g[i], g[i + 1]}), l));\n  return res;\n}\nReal dist(Line l, Polygon\
+    \ g) { return dist(g, l); }\nReal dist(Polygon g, Segment s) {\n  if (g.where(s.p1)\
+    \ != OUT || g.where(s.p2) != OUT) return 0;\n  Real res = dist(Segment({g.back(),\
+    \ g[0]}), s);\n  for (int i = 0; i + 1 < (int)g.size(); i++)\n    res = std::min(res,\
+    \ dist(Segment({g[i], g[i + 1]}), s));\n  return res;\n}\nReal dist(Segment s,\
+    \ Polygon g) { return dist(g, s); }\nReal dist(Polygon g, Polygon h) {\n  Real\
+    \ res = dist(Segment({g.back(), g[0]}), h);\n  for (int i = 0; i + 1 < (int)g.size();\
+    \ i++)\n    res = std::min(res, dist(Segment({g[i], g[i + 1]}), h));\n  return\
+    \ res;\n}\n\nConvex convex_hull(std::vector<Point> ps) {\n  int n = ps.size(),\
+    \ k = 0;\n  sort(ps.begin(), ps.end());\n  Convex ch(2 * n);\n  for (int i = 0;\
+    \ i < n; ch[k++] = ps[i++])\n    while (k >= 2 && ccw(ch[k - 2], ch[k - 1], ps[i])\
+    \ == CLOCKWISE) k--;\n  for (int i = n - 2, t = k + 1; i >= 0; ch[k++] = ps[i--])\n\
+    \    while (k >= t && ccw(ch[k - 2], ch[k - 1], ps[i]) == CLOCKWISE) k--;\n  ch.resize(k\
+    \ - 1);\n  return ch;\n}\n//-----------------------------------------------------------------------------\n\
     // visualizer\n// to use https://csacademy.com/app/geometry_widget/\n//-----------------------------------------------------------------------------\n\
     struct Visualizer {\n  std::ofstream ofs;\n  Visualizer(std::string s = \"visualize.txt\"\
     ) : ofs(s) {\n    ofs << std::fixed << std::setprecision(10);\n  }\n  Visualizer\
-    \ &operator<<(Point p) {\n    ofs << p << '\\n';\n    return *this;\n  }\n  Visualizer\
-    \ &operator<<(Line l) {\n    Real A, B, C;\n    std::tie(A, B, C) = l.coef();\n\
-    \    ofs << \"Line \" << A << \" \" << B << \" \" << C << '\\n';\n    return *this;\n\
-    \  }\n  Visualizer &operator<<(Segment s) {\n    ofs << \"Segment \" << s.p1 <<\
-    \ \" \" << s.p2 << '\\n';\n    return *this;\n  }\n  Visualizer &operator<<(Circle\
-    \ c) {\n    ofs << \"Circle \" << c.o << \" \" << c.r << '\\n';\n    return *this;\n\
-    \  }\n  Visualizer &operator<<(Polygon g) {\n    ofs << \"Polygon\" << '\\n';\n\
-    \    for (Point p : g) ofs << p << '\\n';\n    ofs << \"...\" << '\\n';\n    return\
-    \ *this;\n  }\n};\n\n}  // namespace geometry\n#line 4 \"src/Geometry/arg_sort.hpp\"\
-    \n/**\n * @title \u504F\u89D2\u30BD\u30FC\u30C8\n * @category \u5E7E\u4F55\n */\n\
-    \n// BEGIN CUT HERE\n\nnamespace geometry {\n// usage: sort(ps.begin(),ps.end(),\
-    \ polar_angle(origin, direction));\n// (-PI,PI]\nstruct polar_angle {\n  const\
-    \ Point o;\n  const int s;  // +1 for ccw, -1 for cw\n  polar_angle(Point origin\
-    \ = {0, 0}, int dir = +1) : o(origin), s(dir) {}\n  int quad(Point p) const {\n\
-    \    for (int i = 0; i < 4; ++i, std::swap(p.x = -p.x, p.y))\n      if (p.x <\
-    \ 0 && p.y < 0) return 2 * i;\n    for (int i = 0; i < 4; ++i, std::swap(p.x =\
-    \ -p.x, p.y))\n      if (p.x == 0 && p.y < 0) return 2 * i + 1;\n    return 3;\
-    \  // arg(0,0) = 0\n  }\n  bool operator()(Point p, Point q) const {\n    p =\
-    \ p - o;\n    q = q - o;\n    if (quad(p) != quad(q)) return s * quad(p) < s *\
-    \ quad(q);\n    if (cross(p, q)) return s * cross(p, q) > 0;\n    return norm2(p)\
-    \ < norm2(q);  // closer first\n  }\n};\n}  // namespace geometry\n#line 5 \"\
-    test/yosupo/argsort.test.cpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  using namespace geometry;\n  int N;\n  cin >> N;\n\
-    \  vector<Point> ps(N);\n  for (int i = 0; i < N; i++) cin >> ps[i];\n  sort(ps.begin(),\
-    \ ps.end(), polar_angle());\n  for (Point p : ps) cout << (long long)p.x << \"\
-    \ \" << (long long)p.y << endl;\n  return 0;\n}\n"
+    \ &operator<<(Point p) { return ofs << p << '\\n', *this; }\n  Visualizer &operator<<(Line\
+    \ l) {\n    auto [A, B, C] = l.coef();\n    return ofs << \"Line \" << A << \"\
+    \ \" << B << \" \" << C << '\\n', *this;\n  }\n  Visualizer &operator<<(Segment\
+    \ s) {\n    return ofs << \"Segment \" << s.p1 << \" \" << s.p2 << '\\n', *this;\n\
+    \  }\n  Visualizer &operator<<(Circle c) {\n    return ofs << \"Circle \" << c.o\
+    \ << \" \" << c.r << '\\n', *this;\n  }\n  Visualizer &operator<<(Polygon g) {\n\
+    \    ofs << \"Polygon\" << '\\n';\n    for (Point p : g) ofs << p << '\\n';\n\
+    \    ofs << \"...\" << '\\n';\n    return *this;\n  }\n};\n\n}  // namespace geometry\n\
+    #line 4 \"src/Geometry/arg_sort.hpp\"\n/**\n * @title \u504F\u89D2\u30BD\u30FC\
+    \u30C8\n * @category \u5E7E\u4F55\n */\n\n// BEGIN CUT HERE\n\nnamespace geometry\
+    \ {\n// usage: sort(ps.begin(),ps.end(), polar_angle(origin, direction));\n//\
+    \ (-PI,PI]\nstruct polar_angle {\n  const Point o;\n  const int s;  // +1 for\
+    \ ccw, -1 for cw\n  polar_angle(Point origin = {0, 0}, int dir = +1) : o(origin),\
+    \ s(dir) {}\n  int quad(Point p) const {\n    for (int i = 0; i < 4; ++i, std::swap(p.x\
+    \ = -p.x, p.y))\n      if (p.x < 0 && p.y < 0) return 2 * i;\n    for (int i =\
+    \ 0; i < 4; ++i, std::swap(p.x = -p.x, p.y))\n      if (p.x == 0 && p.y < 0) return\
+    \ 2 * i + 1;\n    return 3;  // arg(0,0) = 0\n  }\n  bool operator()(Point p,\
+    \ Point q) const {\n    p = p - o;\n    q = q - o;\n    if (quad(p) != quad(q))\
+    \ return s * quad(p) < s * quad(q);\n    if (cross(p, q)) return s * cross(p,\
+    \ q) > 0;\n    return norm2(p) < norm2(q);  // closer first\n  }\n};\n}  // namespace\
+    \ geometry\n#line 5 \"test/yosupo/argsort.test.cpp\"\nusing namespace std;\n\n\
+    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using namespace\
+    \ geometry;\n  int N;\n  cin >> N;\n  vector<Point> ps(N);\n  for (int i = 0;\
+    \ i < N; i++) cin >> ps[i];\n  sort(ps.begin(), ps.end(), polar_angle());\n  for\
+    \ (Point p : ps) cout << (long long)p.x << \" \" << (long long)p.y << endl;\n\
+    \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
     \n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\n#include\
     \ \"src/Geometry/arg_sort.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
@@ -269,8 +272,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/argsort.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 12:08:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-29 14:38:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/argsort.test.cpp
 layout: document
