@@ -18,6 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -142,8 +143,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/directedmst.test.cpp
-  - test/aoj/GRL_2_B.test.cpp
   - test/aoj/2647.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
 documentation_of: src/Graph/MinimumSpanningAborescense.hpp
 layout: document
 redirect_from:

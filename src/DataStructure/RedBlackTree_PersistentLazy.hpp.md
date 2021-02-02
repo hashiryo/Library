@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/RedBlackTree_Lazy.hpp
     title: "\u8D64\u9ED2\u6728(\u9045\u5EF6\u4F1D\u642C)"
   _extendedRequiredBy: []
@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_queue.RBTPL.test.cpp
     title: test/yosupo/persistent_queue.RBTPL.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

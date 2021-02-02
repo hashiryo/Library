@@ -1,0 +1,130 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/yosupo/counting_primes.test.cpp
+    title: test/yosupo/counting_primes.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+    title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
+  attributes:
+    document_title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u3084\u4E57\u6CD5\u7684\u95A2\
+      \u6570\u306E\u548C"
+    links:
+    - https://atcoder.jp/contests/abc172/tasks/abc172_d
+  bundledCode: "#line 2 \"src/Math/multiplicative_sum.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title \u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u3084\u4E57\u6CD5\u7684\u95A2\
+    \u6570\u306E\u548C\n * @category \u6570\u5B66\n */\n\n// verify\u7528: https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
+    \n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log N) d := degre of polynomial\n\
+    template <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
+    \ N, const std::vector<T> &poly) {\n  const int sqrtN = std::sqrt(N), d = poly.size();\n\
+    \  std::vector<T> primes, small(sqrtN + 1, 0), large(sqrtN + 1, 0);\n  std::vector<std::vector<T>>\
+    \ s(d, std::vector<T>(sqrtN + 1)),\n      l(d, std::vector<T>(sqrtN + 1));\n \
+    \ for (int n = 1, k = 0; n <= sqrtN; n++, k = 0)\n    for (T prd = n; k < d; prd\
+    \ *= (n + ++k)) s[k][n] = prd / (k + 1);\n  for (int n = 1, k = 0; n <= sqrtN;\
+    \ n++, k = 0)\n    for (T prd = N / n; k < d; prd *= ((N / n) + ++k)) l[k][n]\
+    \ = prd / (k + 1);\n  if (d > 2) {\n    std::vector<T> stir(d, 0);\n    stir[1]\
+    \ = 1;\n    for (int k = 2; k < d; stir[k++] = 1) {\n      for (int j = k - 1;\
+    \ j; j--) stir[j] = stir[j - 1] + stir[j] * (k - 1);\n      for (int n = 1; n\
+    \ <= sqrtN; n++)\n        for (int j = 1; j < k; j++)\n          s[k][n] -= stir[j]\
+    \ * s[j][n], l[k][n] -= stir[j] * l[j][n];\n    }\n  }\n  for (int k = 0; k <\
+    \ d; k++)\n    for (int n = 1; n <= sqrtN; n++) s[k][n] -= 1, l[k][n] -= 1;\n\
+    \  for (int p = 2, k = 0; p <= sqrtN; p++, k = 0)\n    if (s[0][p] > s[0][p -\
+    \ 1]) {\n      primes.emplace_back(p);\n      std::uint64_t q = std::uint64_t(p)\
+    \ * p, M = N / p;\n      int t = sqrtN / p, u = min<std::uint64_t>(sqrtN, N /\
+    \ q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k] !=\
+    \ T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t; i++)\
+    \ l[k][i] -= (l[k][i * p] - tk) * pw;\n          for (int i = t + 1; i <= u; i++)\n\
+    \            l[k][i] -= (s[k][double(M) / i] - tk) * pw;\n          for (int i\
+    \ = sqrtN; (std::uint64_t)i >= q; i--)\n            s[k][i] -= (s[k][double(i)\
+    \ / p] - tk) * pw;\n        }\n    }\n  for (int n = 1; n <= sqrtN; n++)\n   \
+    \ for (int k = 0; k < d; k++)\n      small[n] += s[k][n] * poly[k], large[n] +=\
+    \ l[k][n] * poly[k];\n  return std::make_tuple(primes, small, large);\n}\n\ntemplate\
+    \ <class T>\nT polynomial_prime_sum(std::uint64_t N, const std::vector<T> &poly)\
+    \ {\n  return std::get<2>(polynomial_prime_sum_table<T>(N, poly))[1];\n}\n\nstd::uint64_t\
+    \ prime_count(std::uint64_t N) {\n  return polynomial_prime_sum<std::uint64_t>(N,\
+    \ {1});\n}\n\ntemplate <class T = __int128_t, class F>\nT multiplicative_sum(std::uint64_t\
+    \ N, const F &f, const std::vector<T> &poly) {\n  const std::uint64_t sqrtN =\
+    \ sqrt(N);\n  auto [primes, s, l] = polynomial_prime_sum_table<T>(N, poly);\n\
+    \  for (auto it = primes.rbegin(); it != primes.rend(); it++) {\n    std::uint64_t\
+    \ p = *it, M = N / p, q = p * p;\n    int t = sqrtN / p, u = min(sqrtN, N / q);\n\
+    \    T tk = s[p - 1];\n    for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i)\
+    \ / p] - tk) * f(p, 1);\n    for (int i = u; i > t; i--) l[i] += (s[double(M)\
+    \ / i] - tk) * f(p, 1);\n    for (int i = t; i >= 1; i--) l[i] += (l[i * p] -\
+    \ tk) * f(p, 1);\n  }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n\
+    \  auto dfs = [&](auto rc, std::uint64_t n, std::size_t bg, T cf) -> T {\n   \
+    \ if (cf == T(0)) return T(0);\n    T ret = cf * (n > sqrtN ? l[double(N) / n]\
+    \ : s[n]);\n    for (auto i = bg; i < primes.size(); i++) {\n      std::uint64_t\
+    \ p = primes[i], q = p * p, nn = double(n) / q;\n      if (!nn) break;\n     \
+    \ for (int e = 2; nn; nn = double(nn) / p, e++)\n        ret += rc(rc, nn, i +\
+    \ 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n\
+    \  return dfs(dfs, N, 0, 1);\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u7D20\u6570\u30AB\
+    \u30A6\u30F3\u30C8\u3084\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C\n * @category\
+    \ \u6570\u5B66\n */\n\n// verify\u7528: https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
+    \n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log N) d := degre of polynomial\n\
+    template <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
+    \ N, const std::vector<T> &poly) {\n  const int sqrtN = std::sqrt(N), d = poly.size();\n\
+    \  std::vector<T> primes, small(sqrtN + 1, 0), large(sqrtN + 1, 0);\n  std::vector<std::vector<T>>\
+    \ s(d, std::vector<T>(sqrtN + 1)),\n      l(d, std::vector<T>(sqrtN + 1));\n \
+    \ for (int n = 1, k = 0; n <= sqrtN; n++, k = 0)\n    for (T prd = n; k < d; prd\
+    \ *= (n + ++k)) s[k][n] = prd / (k + 1);\n  for (int n = 1, k = 0; n <= sqrtN;\
+    \ n++, k = 0)\n    for (T prd = N / n; k < d; prd *= ((N / n) + ++k)) l[k][n]\
+    \ = prd / (k + 1);\n  if (d > 2) {\n    std::vector<T> stir(d, 0);\n    stir[1]\
+    \ = 1;\n    for (int k = 2; k < d; stir[k++] = 1) {\n      for (int j = k - 1;\
+    \ j; j--) stir[j] = stir[j - 1] + stir[j] * (k - 1);\n      for (int n = 1; n\
+    \ <= sqrtN; n++)\n        for (int j = 1; j < k; j++)\n          s[k][n] -= stir[j]\
+    \ * s[j][n], l[k][n] -= stir[j] * l[j][n];\n    }\n  }\n  for (int k = 0; k <\
+    \ d; k++)\n    for (int n = 1; n <= sqrtN; n++) s[k][n] -= 1, l[k][n] -= 1;\n\
+    \  for (int p = 2, k = 0; p <= sqrtN; p++, k = 0)\n    if (s[0][p] > s[0][p -\
+    \ 1]) {\n      primes.emplace_back(p);\n      std::uint64_t q = std::uint64_t(p)\
+    \ * p, M = N / p;\n      int t = sqrtN / p, u = min<std::uint64_t>(sqrtN, N /\
+    \ q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k] !=\
+    \ T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t; i++)\
+    \ l[k][i] -= (l[k][i * p] - tk) * pw;\n          for (int i = t + 1; i <= u; i++)\n\
+    \            l[k][i] -= (s[k][double(M) / i] - tk) * pw;\n          for (int i\
+    \ = sqrtN; (std::uint64_t)i >= q; i--)\n            s[k][i] -= (s[k][double(i)\
+    \ / p] - tk) * pw;\n        }\n    }\n  for (int n = 1; n <= sqrtN; n++)\n   \
+    \ for (int k = 0; k < d; k++)\n      small[n] += s[k][n] * poly[k], large[n] +=\
+    \ l[k][n] * poly[k];\n  return std::make_tuple(primes, small, large);\n}\n\ntemplate\
+    \ <class T>\nT polynomial_prime_sum(std::uint64_t N, const std::vector<T> &poly)\
+    \ {\n  return std::get<2>(polynomial_prime_sum_table<T>(N, poly))[1];\n}\n\nstd::uint64_t\
+    \ prime_count(std::uint64_t N) {\n  return polynomial_prime_sum<std::uint64_t>(N,\
+    \ {1});\n}\n\ntemplate <class T = __int128_t, class F>\nT multiplicative_sum(std::uint64_t\
+    \ N, const F &f, const std::vector<T> &poly) {\n  const std::uint64_t sqrtN =\
+    \ sqrt(N);\n  auto [primes, s, l] = polynomial_prime_sum_table<T>(N, poly);\n\
+    \  for (auto it = primes.rbegin(); it != primes.rend(); it++) {\n    std::uint64_t\
+    \ p = *it, M = N / p, q = p * p;\n    int t = sqrtN / p, u = min(sqrtN, N / q);\n\
+    \    T tk = s[p - 1];\n    for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i)\
+    \ / p] - tk) * f(p, 1);\n    for (int i = u; i > t; i--) l[i] += (s[double(M)\
+    \ / i] - tk) * f(p, 1);\n    for (int i = t; i >= 1; i--) l[i] += (l[i * p] -\
+    \ tk) * f(p, 1);\n  }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n\
+    \  auto dfs = [&](auto rc, std::uint64_t n, std::size_t bg, T cf) -> T {\n   \
+    \ if (cf == T(0)) return T(0);\n    T ret = cf * (n > sqrtN ? l[double(N) / n]\
+    \ : s[n]);\n    for (auto i = bg; i < primes.size(); i++) {\n      std::uint64_t\
+    \ p = primes[i], q = p * p, nn = double(n) / q;\n      if (!nn) break;\n     \
+    \ for (int e = 2; nn; nn = double(nn) / p, e++)\n        ret += rc(rc, nn, i +\
+    \ 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n\
+    \  return dfs(dfs, N, 0, 1);\n}\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: src/Math/multiplicative_sum.hpp
+  requiredBy: []
+  timestamp: '2021-02-02 14:03:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/yosupo/counting_primes.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+documentation_of: src/Math/multiplicative_sum.hpp
+layout: document
+redirect_from:
+- /library/src/Math/multiplicative_sum.hpp
+- /library/src/Math/multiplicative_sum.hpp.html
+title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u3084\u4E57\u6CD5\u7684\u95A2\u6570\u306E\
+  \u548C"
+---

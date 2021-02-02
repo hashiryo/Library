@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.Dinic.test.cpp
     title: test/aoj/GRL_6_A.Dinic.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

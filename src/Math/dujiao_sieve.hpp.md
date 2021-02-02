@@ -9,15 +9,13 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1019.dujiao.test.cpp
     title: test/yukicoder/1019.dujiao.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/886.dujiao.test.cpp
-    title: test/yukicoder/886.dujiao.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u675C\u6559\u7B5B"
     links:
-    - https://blog.bill.moe/multiplicative-function-sieves-notes/
+    - https://atcoder.jp/contests/abc172/tasks/abc172_d
     - https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula
     - https://maspypy.com/yukicoder-no-886-direct
     - https://oi-wiki.org/math/du/
@@ -27,53 +25,52 @@ data:
     /**\n * @title \u675C\u6559\u7B5B\n * @category \u6570\u5B66\n * @see https://maspypy.com/yukicoder-no-886-direct\n\
     \ * @see https://yukicoder.me/problems/no/1019/editorial\n * @see https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula\n\
     \ * @see https://yukicoder.me/wiki/sum_totient\n * @see https://oi-wiki.org/math/du/\n\
-    \ * @see https://blog.bill.moe/multiplicative-function-sieves-notes/\n *  \u30E1\
-    \u30E2\u5316\u518D\u5E30\u3067\u5B9F\u88C5(map\u4F7F\u3063\u3066\u308B\u306E\u3067\
-    log\u304C\u3064\u304F)\n *  k==1\u306A\u3089O(N^(3/4)) (g,b\u306E\u8A08\u7B97\u91CF\
-    \u3092O(1)\u3068\u3057\u3066)\n *  \u524D\u51E6\u7406\u3067N^(2/3)\u307E\u3067\
-    \u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3))\n */\n\n#ifndef call_from_test\n\
-    #line 19 \"src/Math/dujiao_sieve.hpp\"\nusing namespace std;\n#endif\n\n// BEGIN\
-    \ CUT HERE\n\n// input H,W,g,b,k\n// output f(H,W)\n//  s.t. g(x,y) = sum_{d=1,2,...}\
-    \ a(d)f([x/d^k],[y/d^k])\n//       b(d) = a(1)+a(2)+...+a(d)\n\ntemplate <typename\
-    \ T, typename G, typename A>\nT dujiao_sieve(std::int64_t H, std::int64_t W, const\
-    \ G &g, const A &b,\n               std::map<pair<std::int64_t, std::int64_t>,\
-    \ T> &memo, int k = 1) {\n  if (memo.count(std::make_pair(H, W))) return memo[std::make_pair(H,\
-    \ W)];\n  T ret = g(H, W);\n  std::int64_t d = 2;\n  while (true) {\n    std::int64_t\
-    \ Hd = H / std::pow(d, k), Wd = W / std::pow(d, k);\n    if (!Hd || !Wd) break;\n\
-    \    std::int64_t next_d\n        = std::min(pow(1. * H / Hd, 1. / k), pow(1.\
-    \ * W / Wd, 1. / k)) + 1;\n    T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);\n\
-    \    ret -= r * (b(next_d - 1) - b(d - 1));\n    d = next_d;\n  }\n  return memo[std::make_pair(H,\
-    \ W)] = ret / b(1);\n}\n"
+    \ * dirichlet_inv_sum : O(N^(3/4))\n *  (\u305F\u3060\u3057\u524D\u51E6\u7406\u3067\
+    N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
+    \ : O(\u221AN)\n */\n\n// verify\u7528: https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
+    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
+    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (memo.count(N))\
+    \ return memo[N];\n  T ret = hsum(N);\n  for (std::uint64_t d = 2, nN = N / d,\
+    \ nd; nN; nN = N / (d = nd)) {\n    nd = N / nN + 1;\n    ret -= dirichlet_inv_sum<T>(nN,\
+    \ gsum, hsum, memo)\n           * (gsum(nd - 1) - gsum(d - 1));\n  }\n  return\
+    \ memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class H>\nT dirichlet_inv_sum(std::uint64_t\
+    \ N, const G &gsum, const H &hsum) {\n  std::unordered_map<std::uint64_t, T> memo;\n\
+    \  return dirichlet_inv_sum<T>(N, gsum, hsum, memo);\n}\n\n// sum f s.t. f :=\
+    \  h * g\ntemplate <class T, class G, class H>\nT dirichlet_mul_sum(std::uint64_t\
+    \ N, const G &gsum, const H &hsum) {\n  const int sqrtN = sqrt(N);\n  T ret =\
+    \ 0;\n  for (int i = 1; i <= sqrtN; i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N\
+    \ / i);\n  for (int i = 1; i <= sqrtN; i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N\
+    \ / i);\n  return ret -= hsum(sqrtN) * gsum(sqrtN);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u675C\u6559\u7B5B\
     \n * @category \u6570\u5B66\n * @see https://maspypy.com/yukicoder-no-886-direct\n\
     \ * @see https://yukicoder.me/problems/no/1019/editorial\n * @see https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula\n\
     \ * @see https://yukicoder.me/wiki/sum_totient\n * @see https://oi-wiki.org/math/du/\n\
-    \ * @see https://blog.bill.moe/multiplicative-function-sieves-notes/\n *  \u30E1\
-    \u30E2\u5316\u518D\u5E30\u3067\u5B9F\u88C5(map\u4F7F\u3063\u3066\u308B\u306E\u3067\
-    log\u304C\u3064\u304F)\n *  k==1\u306A\u3089O(N^(3/4)) (g,b\u306E\u8A08\u7B97\u91CF\
-    \u3092O(1)\u3068\u3057\u3066)\n *  \u524D\u51E6\u7406\u3067N^(2/3)\u307E\u3067\
-    \u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3))\n */\n\n#ifndef call_from_test\n\
-    #include <bits/stdc++.h>\nusing namespace std;\n#endif\n\n// BEGIN CUT HERE\n\n\
-    // input H,W,g,b,k\n// output f(H,W)\n//  s.t. g(x,y) = sum_{d=1,2,...} a(d)f([x/d^k],[y/d^k])\n\
-    //       b(d) = a(1)+a(2)+...+a(d)\n\ntemplate <typename T, typename G, typename\
-    \ A>\nT dujiao_sieve(std::int64_t H, std::int64_t W, const G &g, const A &b,\n\
-    \               std::map<pair<std::int64_t, std::int64_t>, T> &memo, int k = 1)\
-    \ {\n  if (memo.count(std::make_pair(H, W))) return memo[std::make_pair(H, W)];\n\
-    \  T ret = g(H, W);\n  std::int64_t d = 2;\n  while (true) {\n    std::int64_t\
-    \ Hd = H / std::pow(d, k), Wd = W / std::pow(d, k);\n    if (!Hd || !Wd) break;\n\
-    \    std::int64_t next_d\n        = std::min(pow(1. * H / Hd, 1. / k), pow(1.\
-    \ * W / Wd, 1. / k)) + 1;\n    T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);\n\
-    \    ret -= r * (b(next_d - 1) - b(d - 1));\n    d = next_d;\n  }\n  return memo[std::make_pair(H,\
-    \ W)] = ret / b(1);\n}\n"
+    \ * dirichlet_inv_sum : O(N^(3/4))\n *  (\u305F\u3060\u3057\u524D\u51E6\u7406\u3067\
+    N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
+    \ : O(\u221AN)\n */\n\n// verify\u7528: https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
+    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
+    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (memo.count(N))\
+    \ return memo[N];\n  T ret = hsum(N);\n  for (std::uint64_t d = 2, nN = N / d,\
+    \ nd; nN; nN = N / (d = nd)) {\n    nd = N / nN + 1;\n    ret -= dirichlet_inv_sum<T>(nN,\
+    \ gsum, hsum, memo)\n           * (gsum(nd - 1) - gsum(d - 1));\n  }\n  return\
+    \ memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class H>\nT dirichlet_inv_sum(std::uint64_t\
+    \ N, const G &gsum, const H &hsum) {\n  std::unordered_map<std::uint64_t, T> memo;\n\
+    \  return dirichlet_inv_sum<T>(N, gsum, hsum, memo);\n}\n\n// sum f s.t. f :=\
+    \  h * g\ntemplate <class T, class G, class H>\nT dirichlet_mul_sum(std::uint64_t\
+    \ N, const G &gsum, const H &hsum) {\n  const int sqrtN = sqrt(N);\n  T ret =\
+    \ 0;\n  for (int i = 1; i <= sqrtN; i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N\
+    \ / i);\n  for (int i = 1; i <= sqrtN; i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N\
+    \ / i);\n  return ret -= hsum(sqrtN) * gsum(sqrtN);\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/dujiao_sieve.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
-  - test/yukicoder/886.dujiao.test.cpp
   - test/yukicoder/1019.dujiao.test.cpp
 documentation_of: src/Math/dujiao_sieve.hpp
 layout: document

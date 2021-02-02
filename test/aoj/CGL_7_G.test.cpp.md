@@ -9,6 +9,7 @@ data:
     title: "\u5186\u306E\u3042\u308C\u3053\u308C"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
   attributes:
@@ -165,7 +166,7 @@ data:
     \ >= 0) qs.emplace_back(s.p1 + t1 * u);\n  if (sgn(t2) >= 0 && sgn(1 - t2) >=\
     \ 0) qs.emplace_back(s.p1 + t2 * u);\n  return qs;\n}\nstd::vector<Point> cross_points(Segment\
     \ s, Circle c) {\n  return cross_points(c, s);\n}\n\n//-----------------------------------------------------------------------------\n\
-    // Polygon\n// assustd::ming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
+    // Polygon\n// assuming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
     struct Polygon : std::vector<Point> {\n  using std::vector<Point>::vector;\n \
     \ int prev(int i) { return i ? i - 1 : (int)this->size() - 1; }\n  int next(int\
     \ i) { return (i + 1 == (int)this->size() ? 0 : i + 1); }\n  bool is_convex()\
@@ -293,19 +294,19 @@ data:
     \           int lo = 0;\n            for (Point q : ps) {\n              Real\
     \ d = dist(qs[i], q);\n              if (sgn(d - r) <= 0) ++lo;\n            \
     \  if (sgn(d - w * std::sqrt(2) - r) <= 0) pss[i].push_back(q);\n            }\n\
-    \            if (lo > best) {\n              best = lo;\n              best_p\
-    \ = qs[i];\n            }\n          }\n          for (int i = 0; i < 4; ++i)\
-    \ {\n            for (int j = i + 1; j < 4; ++j)\n              if (pss[i].size()\
-    \ < pss[j].size())\n                std::swap(pss[i], pss[j]), std::swap(qs[i],\
-    \ qs[j]);\n            if ((int)pss[i].size() <= best) break;\n            rec(qs[i],\
-    \ w, pss[i]);\n          }\n        };\n  Real w = 0;\n  for (Point p : ps) w\
-    \ = std::max<Real>({w, std::abs(p.x), std::abs(p.y)});\n  rec({0, 0}, w, ps);\n\
-    \  return {best, best_p};\n}\n\n}  // namespace geometry\n#line 7 \"test/aoj/CGL_7_G.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using namespace geometry;\n  cout << fixed << setprecision(12);\n  Circle c,\
-    \ d;\n  cin >> c.o >> c.r;\n  cin >> d.o >> d.r;\n  auto ls = common_tangent(c,\
-    \ d);\n  vector<Point> ps;\n  for (Line l : ls) ps.push_back(l.p1);\n  sort(ps.begin(),\
-    \ ps.end());\n  for (Point p : ps) cout << p << endl;\n  return 0;\n}\n"
+    \            if (lo > best) best = lo, best_p = qs[i];\n          }\n        \
+    \  for (int i = 0; i < 4; ++i) {\n            for (int j = i + 1; j < 4; ++j)\n\
+    \              if (pss[i].size() < pss[j].size())\n                std::swap(pss[i],\
+    \ pss[j]), std::swap(qs[i], qs[j]);\n            if ((int)pss[i].size() <= best)\
+    \ break;\n            rec(qs[i], w, pss[i]);\n          }\n        };\n  Real\
+    \ w = 0;\n  for (Point p : ps) w = std::max<Real>({w, std::abs(p.x), std::abs(p.y)});\n\
+    \  rec({0, 0}, w, ps);\n  return {best, best_p};\n}\n\n}  // namespace geometry\n\
+    #line 7 \"test/aoj/CGL_7_G.test.cpp\"\nusing namespace std;\n\nsigned main() {\n\
+    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using namespace geometry;\n\
+    \  cout << fixed << setprecision(12);\n  Circle c, d;\n  cin >> c.o >> c.r;\n\
+    \  cin >> d.o >> d.r;\n  auto ls = common_tangent(c, d);\n  vector<Point> ps;\n\
+    \  for (Line l : ls) ps.push_back(l.p1);\n  sort(ps.begin(), ps.end());\n  for\
+    \ (Point p : ps) cout << p << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_G\"\
     \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\
     \n#include \"src/Geometry/circle_functions.hpp\"\nusing namespace std;\n\nsigned\
@@ -320,7 +321,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_7_G.test.cpp
   requiredBy: []
-  timestamp: '2020-12-29 14:38:47+09:00'
+  timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_G.test.cpp

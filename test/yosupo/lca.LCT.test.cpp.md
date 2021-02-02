@@ -6,6 +6,7 @@ data:
     title: "Link-Cut-Tree(\u30B7\u30F3\u30D7\u30EB)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

@@ -15,6 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/738.BIT.test.cpp
     title: test/yukicoder/738.BIT.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -63,8 +64,8 @@ data:
   verifiedWith:
   - test/yosupo/point_add_range_sum.BIT.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
-  - test/yukicoder/649.BIT.test.cpp
   - test/yukicoder/738.BIT.test.cpp
+  - test/yukicoder/649.BIT.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree.hpp
 layout: document
 redirect_from:

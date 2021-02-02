@@ -15,6 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/suffixarray.test.cpp
     title: test/yosupo/suffixarray.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -93,8 +94,8 @@ data:
   verifiedWith:
   - test/yosupo/suffixarray.test.cpp
   - test/yosupo/number_of_substrings.test.cpp
-  - test/aoj/ALDS1_14_D.test.cpp
   - test/aoj/2644.test.cpp
+  - test/aoj/ALDS1_14_D.test.cpp
 documentation_of: src/String/SuffixArray.hpp
 layout: document
 redirect_from:

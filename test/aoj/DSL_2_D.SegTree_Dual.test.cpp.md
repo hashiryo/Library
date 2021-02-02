@@ -6,6 +6,7 @@ data:
     title: "Segment-Tree(\u53CC\u5BFE)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

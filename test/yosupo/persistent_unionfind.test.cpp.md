@@ -9,6 +9,7 @@ data:
     title: "Union-Find(\u5B8C\u5168\u6C38\u7D9A)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

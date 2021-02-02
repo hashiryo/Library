@@ -6,6 +6,7 @@ data:
     title: "Sparse-Table(\u533A\u9593min)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

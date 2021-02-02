@@ -6,14 +6,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
     links: []
@@ -100,7 +101,7 @@ data:
   path: src/DataStructure/LinkCutTree_Monoid.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp

@@ -153,6 +153,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/argsort.test.cpp
     title: test/yosupo/argsort.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
@@ -306,7 +307,7 @@ data:
     \ >= 0) qs.emplace_back(s.p1 + t1 * u);\n  if (sgn(t2) >= 0 && sgn(1 - t2) >=\
     \ 0) qs.emplace_back(s.p1 + t2 * u);\n  return qs;\n}\nstd::vector<Point> cross_points(Segment\
     \ s, Circle c) {\n  return cross_points(c, s);\n}\n\n//-----------------------------------------------------------------------------\n\
-    // Polygon\n// assustd::ming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
+    // Polygon\n// assuming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
     struct Polygon : std::vector<Point> {\n  using std::vector<Point>::vector;\n \
     \ int prev(int i) { return i ? i - 1 : (int)this->size() - 1; }\n  int next(int\
     \ i) { return (i + 1 == (int)this->size() ? 0 : i + 1); }\n  bool is_convex()\
@@ -529,7 +530,7 @@ data:
     \ >= 0) qs.emplace_back(s.p1 + t1 * u);\n  if (sgn(t2) >= 0 && sgn(1 - t2) >=\
     \ 0) qs.emplace_back(s.p1 + t2 * u);\n  return qs;\n}\nstd::vector<Point> cross_points(Segment\
     \ s, Circle c) {\n  return cross_points(c, s);\n}\n\n//-----------------------------------------------------------------------------\n\
-    // Polygon\n// assustd::ming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
+    // Polygon\n// assuming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
     struct Polygon : std::vector<Point> {\n  using std::vector<Point>::vector;\n \
     \ int prev(int i) { return i ? i - 1 : (int)this->size() - 1; }\n  int next(int\
     \ i) { return (i + 1 == (int)this->size() ? 0 : i + 1); }\n  bool is_convex()\
@@ -610,59 +611,59 @@ data:
   isVerificationFile: false
   path: src/Geometry/!geometry_temp.hpp
   requiredBy:
-  - src/Geometry/closest_pair.hpp
-  - src/Geometry/arg_sort.hpp
   - src/Geometry/circle_functions.hpp
-  timestamp: '2020-12-29 14:38:47+09:00'
+  - src/Geometry/arg_sort.hpp
+  - src/Geometry/closest_pair.hpp
+  timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/argsort.test.cpp
-  - test/aoj/1183.test.cpp
-  - test/aoj/CGL_2_B.test.cpp
-  - test/aoj/CGL_7_G.test.cpp
-  - test/aoj/CGL_1_A.test.cpp
-  - test/aoj/2256.test.cpp
-  - test/aoj/3034.test.cpp
-  - test/aoj/CGL_4_A.test.cpp
-  - test/aoj/3049.test.cpp
-  - test/aoj/CGL_3_A.test.cpp
-  - test/aoj/2626.test.cpp
-  - test/aoj/CGL_2_A.test.cpp
-  - test/aoj/CGL_1_C.test.cpp
-  - test/aoj/1190.test.cpp
-  - test/aoj/CGL_2_D.test.cpp
-  - test/aoj/1242.test.cpp
-  - test/aoj/2402.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/CGL_4_B.test.cpp
-  - test/aoj/CGL_7_A.test.cpp
-  - test/aoj/CGL_3_B.test.cpp
-  - test/aoj/2201.test.cpp
-  - test/aoj/CGL_7_C.test.cpp
-  - test/aoj/CGL_1_B.test.cpp
-  - test/aoj/CGL_5_A.test.cpp
-  - test/aoj/3056.test.cpp
-  - test/aoj/1132.test.cpp
-  - test/aoj/2972.test.cpp
-  - test/aoj/CGL_2_C.test.cpp
   - test/aoj/CGL_3_C.test.cpp
-  - test/aoj/2003.test.cpp
+  - test/aoj/2442.test.cpp
   - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/CGL_3_A.test.cpp
+  - test/aoj/2159.test.cpp
+  - test/aoj/CGL_7_E.test.cpp
+  - test/aoj/2003.test.cpp
+  - test/aoj/CGL_4_C.test.cpp
+  - test/aoj/2972.test.cpp
+  - test/aoj/1242.test.cpp
+  - test/aoj/CGL_1_B.test.cpp
+  - test/aoj/CGL_7_C.test.cpp
+  - test/aoj/CGL_7_B.test.cpp
+  - test/aoj/2626.test.cpp
+  - test/aoj/CGL_3_B.test.cpp
+  - test/aoj/CGL_5_A.test.cpp
+  - test/aoj/CGL_7_A.test.cpp
   - test/aoj/2514.test.cpp
   - test/aoj/2423.test.cpp
-  - test/aoj/2159.test.cpp
-  - test/aoj/1171.test.cpp
+  - test/aoj/CGL_4_A.test.cpp
+  - test/aoj/CGL_4_B.test.cpp
+  - test/aoj/CGL_2_D.test.cpp
+  - test/aoj/1183.test.cpp
+  - test/aoj/3056.test.cpp
+  - test/aoj/1132.test.cpp
   - test/aoj/2009.test.cpp
-  - test/aoj/1342.test.cpp
-  - test/aoj/2635.test.cpp
+  - test/aoj/1190.test.cpp
+  - test/aoj/CGL_7_G.test.cpp
+  - test/aoj/1171.test.cpp
   - test/aoj/CGL_7_F.test.cpp
-  - test/aoj/CGL_4_C.test.cpp
-  - test/aoj/CGL_7_E.test.cpp
-  - test/aoj/CGL_7_B.test.cpp
-  - test/aoj/1157.test.cpp
+  - test/aoj/2201.test.cpp
+  - test/aoj/1342.test.cpp
+  - test/aoj/CGL_2_C.test.cpp
+  - test/aoj/0342.test.cpp
+  - test/aoj/CGL_1_A.test.cpp
+  - test/aoj/CGL_2_A.test.cpp
+  - test/aoj/2402.test.cpp
   - test/aoj/CGL_7_I.test.cpp
+  - test/aoj/CGL_2_B.test.cpp
+  - test/aoj/3049.test.cpp
+  - test/aoj/3034.test.cpp
   - test/aoj/CGL_7_D.test.cpp
-  - test/aoj/2442.test.cpp
+  - test/aoj/CGL_1_C.test.cpp
+  - test/aoj/2256.test.cpp
+  - test/aoj/2635.test.cpp
+  - test/aoj/1157.test.cpp
 documentation_of: src/Geometry/!geometry_temp.hpp
 layout: document
 redirect_from:

@@ -3,11 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Berlekamp-Massey
     links:
@@ -50,7 +51,7 @@ data:
   path: src/Math/berlekamp_massey.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/find_linear_recurrence.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp

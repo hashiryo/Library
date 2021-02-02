@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

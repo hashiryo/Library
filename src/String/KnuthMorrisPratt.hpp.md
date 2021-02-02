@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.KMP.test.cpp
     title: test/aoj/ALDS1_14_B.KMP.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

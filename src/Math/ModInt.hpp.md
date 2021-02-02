@@ -2,23 +2,26 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: src/Math/differential_equation.hpp
+    title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
+  - icon: ':x:'
     path: src/Math/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,79 +30,79 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_D.test.cpp
     title: test/aoj/DPL_5_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_E.test.cpp
     title: test/aoj/DPL_5_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_set_range_composite.SegTree.test.cpp
     title: test/yosupo/point_set_range_composite.SegTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.RBTL.test.cpp
     title: test/yosupo/range_affine_range_sum.RBTL.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
   - icon: ':x:'
@@ -120,6 +123,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+    title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
@@ -160,14 +166,15 @@ data:
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/886.dujiao.test.cpp
-    title: test/yukicoder/886.dujiao.test.cpp
-  - icon: ':x:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/963.test.cpp
+    title: test/yukicoder/963.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
@@ -175,25 +182,24 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n/**\n *\
     \ @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\ntemplate\
-    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt {\n private:\n\
-    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1);\n  static constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2\
-    \ = mod << 1;\n\n public:\n  static constexpr int level = __builtin_ctzll(mod\
-    \ - 1);\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) :\
-    \ x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr\
-    \ u64 modulo() { return mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
-    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
-    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64\
-    \ norm(u64 x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt()\
-    \ { return prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n\
-    \    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
-    \ ModInt &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n \
-    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
-    \ x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt\
-    \ &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n \
-    \ constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt {\n  using u64\
+    \ = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
+    \ n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2\
+    \ - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -u128(mod)\
+    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n\
+    \  static constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod\
+    \ - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n\n public:\n  constexpr ModInt()\
+    \ : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) %\
+    \ mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo() { return\
+    \ mod; }\n  static constexpr u64 norm(u64 w) { return w - (mod & -(w >= mod));\
+    \ }\n  static constexpr u64 pr_rt() { return prim_root; }\n  constexpr ModInt\
+    \ operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x !=\
+    \ 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n  \
+    \  return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n\
+    \  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x\
+    \ += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
+    \ ModInt &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n\
+    \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
     \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
     \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
@@ -220,25 +226,23 @@ data:
     \  }\n  u64 x;\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title ModInt\n * @category\
     \ \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t mod, std::uint64_t\
-    \ prim_root = 0>\nclass ModInt {\n private:\n  using u64 = std::uint64_t;\n  using\
-    \ u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x\
-    \ = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n \
-    \ static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static constexpr u64 r2 =\
-    \ -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\n public:\n  static\
-    \ constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr ModInt() : x(0)\
-    \ {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n))\
-    \ {}\n  ~ModInt() = default;\n  static constexpr u64 modulo() { return mod; }\n\
-    \  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n  static\
-    \ constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod - ((u128(u64(w)\
-    \ * inv) * mod) >> 64);\n  }\n  static constexpr u64 norm(u64 x) { return x -\
-    \ (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt() { return prim_root; }\n\
-    \  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x = (m2\
-    \ & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs)\
-    \ {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n  }\n  constexpr\
-    \ ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += m2 & -(x\
-    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
-    \   return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt\
-    \ &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \ prim_root = 0>\nclass ModInt {\n  using u64 = std::uint64_t;\n  using u128 =\
+    \ __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n\
+    \    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr\
+    \ u64 inv = mul_inv(mod, 6, 1), r2 = -u128(mod) % mod;\n  static constexpr u64\
+    \ init(u64 w) { return reduce(u128(w) * r2); }\n  static constexpr u64 reduce(const\
+    \ u128 w) {\n    return u64(w >> 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n\
+    \  }\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t\
+    \ n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static\
+    \ constexpr u64 modulo() { return mod; }\n  static constexpr u64 norm(u64 w) {\
+    \ return w - (mod & -(w >= mod)); }\n  static constexpr u64 pr_rt() { return prim_root;\
+    \ }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x\
+    \ = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
+    \ ModInt &rhs) {\n    return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >>\
+    \ 63), *this;\n  }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return\
+    \ x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
+    \ ModInt &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n\
+    \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
     \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
     \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
@@ -267,64 +271,66 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt.hpp
   requiredBy:
-  - src/Math/extgcd.hpp
-  - src/Math/SubproductTree.hpp
-  - src/Math/FormalPowerSeries.hpp
   - src/Math/fps_sequence.hpp
+  - src/Math/extgcd.hpp
+  - src/Math/differential_equation.hpp
+  - src/Math/FormalPowerSeries.hpp
   - src/Math/kitamasa.hpp
-  timestamp: '2020-12-11 13:30:53+09:00'
+  - src/Math/SubproductTree.hpp
+  timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/range_affine_range_sum.RBTL.test.cpp
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yosupo/sum_of_totient_function.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/find_linear_recurrence.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
-  - test/yosupo/matrix_det.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/point_set_range_composite.SegTree.test.cpp
-  - test/yosupo/linear_equations.test.cpp
-  - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/range_affine_range_sum.RBTL.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
-  - test/aoj/DPL_5_D.test.cpp
-  - test/aoj/0168.test.cpp
-  - test/aoj/2397.test.cpp
-  - test/aoj/3072.test.cpp
-  - test/aoj/2530.test.cpp
-  - test/aoj/DPL_5_E.test.cpp
-  - test/aoj/DPL_5_B.test.cpp
-  - test/aoj/DPL_5_F.test.cpp
+  - test/yosupo/find_linear_recurrence.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/matrix_det.test.cpp
+  - test/yosupo/point_set_range_composite.SegTree.test.cpp
+  - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/linear_equations.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/sum_of_totient_function.test.cpp
+  - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+  - test/yukicoder/665.test.cpp
+  - test/yukicoder/1145.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/658.test.cpp
-  - test/yukicoder/803.test.cpp
-  - test/yukicoder/644.test.cpp
-  - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/963.test.cpp
   - test/yukicoder/980.test.cpp
-  - test/yukicoder/886.dujiao.test.cpp
-  - test/yukicoder/665.test.cpp
+  - test/yukicoder/803.test.cpp
+  - test/yukicoder/1080.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/3046.test.cpp
   - test/yukicoder/1019.dujiao.test.cpp
-  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/644.test.cpp
   - test/yukicoder/886.numth.test.cpp
-  - test/yukicoder/235.LCT.test.cpp
-  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/235.HLD.test.cpp
+  - test/aoj/0168.test.cpp
+  - test/aoj/DPL_5_D.test.cpp
+  - test/aoj/2530.test.cpp
+  - test/aoj/DPL_5_B.test.cpp
+  - test/aoj/DPL_5_F.test.cpp
+  - test/aoj/DPL_5_E.test.cpp
+  - test/aoj/2397.test.cpp
+  - test/aoj/3072.test.cpp
 documentation_of: src/Math/ModInt.hpp
 layout: document
 redirect_from:

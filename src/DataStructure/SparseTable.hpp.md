@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_3_D.sparsetable.test.cpp
     title: test/aoj/DSL_3_D.sparsetable.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

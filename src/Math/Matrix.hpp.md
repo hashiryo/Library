@@ -9,14 +9,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u884C\u5217"
     links: []
@@ -186,12 +187,12 @@ data:
   path: src/Math/Matrix.hpp
   requiredBy: []
   timestamp: '2020-10-24 00:25:59+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/linear_equations.test.cpp
-  - test/aoj/1328.test.cpp
   - test/aoj/2397.test.cpp
+  - test/aoj/1328.test.cpp
 documentation_of: src/Math/Matrix.hpp
 layout: document
 redirect_from:

@@ -9,6 +9,7 @@ data:
   - icon: ':x:'
     path: test/aoj/CGL_5_A.test.cpp
     title: test/aoj/CGL_5_A.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
@@ -161,7 +162,7 @@ data:
     \ >= 0) qs.emplace_back(s.p1 + t1 * u);\n  if (sgn(t2) >= 0 && sgn(1 - t2) >=\
     \ 0) qs.emplace_back(s.p1 + t2 * u);\n  return qs;\n}\nstd::vector<Point> cross_points(Segment\
     \ s, Circle c) {\n  return cross_points(c, s);\n}\n\n//-----------------------------------------------------------------------------\n\
-    // Polygon\n// assustd::ming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
+    // Polygon\n// assuming counterclockwise rotation\n//-----------------------------------------------------------------------------\n\
     struct Polygon : std::vector<Point> {\n  using std::vector<Point>::vector;\n \
     \ int prev(int i) { return i ? i - 1 : (int)this->size() - 1; }\n  int next(int\
     \ i) { return (i + 1 == (int)this->size() ? 0 : i + 1); }\n  bool is_convex()\
@@ -279,7 +280,7 @@ data:
   isVerificationFile: false
   path: src/Geometry/closest_pair.hpp
   requiredBy: []
-  timestamp: '2020-12-29 14:38:47+09:00'
+  timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/CGL_5_A.test.cpp

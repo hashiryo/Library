@@ -6,12 +6,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
     title: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
@@ -81,8 +82,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Lazy.hpp
 layout: document
 redirect_from:

@@ -6,6 +6,7 @@ data:
     title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

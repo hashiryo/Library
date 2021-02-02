@@ -5,13 +5,17 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':x:'
+    path: src/Math/NumberTheory.hpp
+    title: "\u6570\u8AD6\u3044\u308D\u3044\u308D"
+  - icon: ':x:'
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
   - icon: ':x:'
-    path: src/Math/number_theory.hpp
-    title: "\u6570\u8AD6"
+    path: src/Math/multiplicative_functions.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
   attributes:
@@ -23,144 +27,181 @@ data:
     \ PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n *\
     \ @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t\
-    \ mod, std::uint64_t prim_root = 0>\nclass ModInt {\n private:\n  using u64 =\
-    \ std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
-    \ n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2\
-    \ - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1);\n  static\
-    \ constexpr u64 r2 = -u128(mod) % mod;\n  static constexpr u64 m2 = mod << 1;\n\
-    \n public:\n  static constexpr int level = __builtin_ctzll(mod - 1);\n  constexpr\
-    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
-    \ - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo()\
-    \ { return mod; }\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
-    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
-    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  static constexpr u64\
-    \ norm(u64 x) { return x - (mod & -(x >= mod)); }\n  static constexpr u64 pr_rt()\
-    \ { return prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n\
-    \    return ret.x = (m2 & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
-    \ ModInt &rhs) {\n    return x += rhs.x - m2, x += m2 & -(x >> 63), *this;\n \
-    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
-    \ x += m2 & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt\
-    \ &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n  }\n \
-    \ constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
-    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
-    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
-    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
-    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
-    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
-    \ }\n  bool operator!=(const ModInt &rhs) const { return norm(x) != norm(rhs.x);\
-    \ }\n  u64 val() const {\n    u64 ret = reduce(x) - mod;\n    return ret + (mod\
-    \ & -(ret >> 63));\n  }\n  constexpr ModInt pow(u64 k) const {\n    ModInt ret\
-    \ = ModInt(1);\n    for (ModInt base = *this; k; k >>= 1, base *= base)\n    \
-    \  if (k & 1) ret *= base;\n    return ret;\n  }\n  constexpr ModInt inverse()\
-    \ const { return pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this\
-    \ == ModInt(0) || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return\
-    \ ModInt(0);  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n \
-    \   while (w.pow((mod - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto\
-    \ mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt, ModInt> v) {\n    \
-    \  ModInt a = (u.first * v.first + u.second * v.second * w);\n      ModInt b =\
-    \ (u.first * v.second + u.second * v.first);\n      return std::make_pair(a, b);\n\
-    \    };\n    u64 e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n\
-    \    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n  \
-    \    if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 < mod ? ret.first\
-    \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
-    \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
-    \  }\n  u64 x;\n};\n#line 3 \"src/Math/dujiao_sieve.hpp\"\n/**\n * @title \u675C\
-    \u6559\u7B5B\n * @category \u6570\u5B66\n * @see https://maspypy.com/yukicoder-no-886-direct\n\
-    \ * @see https://yukicoder.me/problems/no/1019/editorial\n * @see https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula\n\
-    \ * @see https://yukicoder.me/wiki/sum_totient\n * @see https://oi-wiki.org/math/du/\n\
-    \ * @see https://blog.bill.moe/multiplicative-function-sieves-notes/\n *  \u30E1\
-    \u30E2\u5316\u518D\u5E30\u3067\u5B9F\u88C5(map\u4F7F\u3063\u3066\u308B\u306E\u3067\
-    log\u304C\u3064\u304F)\n *  k==1\u306A\u3089O(N^(3/4)) (g,b\u306E\u8A08\u7B97\u91CF\
-    \u3092O(1)\u3068\u3057\u3066)\n *  \u524D\u51E6\u7406\u3067N^(2/3)\u307E\u3067\
-    \u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3))\n */\n\n#ifndef call_from_test\n\
-    #line 19 \"src/Math/dujiao_sieve.hpp\"\nusing namespace std;\n#endif\n\n// BEGIN\
-    \ CUT HERE\n\n// input H,W,g,b,k\n// output f(H,W)\n//  s.t. g(x,y) = sum_{d=1,2,...}\
-    \ a(d)f([x/d^k],[y/d^k])\n//       b(d) = a(1)+a(2)+...+a(d)\n\ntemplate <typename\
-    \ T, typename G, typename A>\nT dujiao_sieve(std::int64_t H, std::int64_t W, const\
-    \ G &g, const A &b,\n               std::map<pair<std::int64_t, std::int64_t>,\
-    \ T> &memo, int k = 1) {\n  if (memo.count(std::make_pair(H, W))) return memo[std::make_pair(H,\
-    \ W)];\n  T ret = g(H, W);\n  std::int64_t d = 2;\n  while (true) {\n    std::int64_t\
-    \ Hd = H / std::pow(d, k), Wd = W / std::pow(d, k);\n    if (!Hd || !Wd) break;\n\
-    \    std::int64_t next_d\n        = std::min(pow(1. * H / Hd, 1. / k), pow(1.\
-    \ * W / Wd, 1. / k)) + 1;\n    T r = dujiao_sieve<T>(Hd, Wd, g, b, memo, k);\n\
-    \    ret -= r * (b(next_d - 1) - b(d - 1));\n    d = next_d;\n  }\n  return memo[std::make_pair(H,\
-    \ W)] = ret / b(1);\n}\n#line 3 \"src/Math/number_theory.hpp\"\n/**\n * @title\
-    \ \u6570\u8AD6\n * @category \u6570\u5B66\n *  \u7D04\u6570\u3084\u500D\u6570\u306B\
-    \u3064\u3044\u3066\u306E\u30BC\u30FC\u30BF\u5909\u63DB\u3084\u30E1\u30D3\u30A6\
-    \u30B9\u5909\u63DB\n *  \u3092\u3082\u3068\u306B\u6570\u8AD6\u7684\u95A2\u6570\
-    \u3084gcd\u7573\u307F\u8FBC\u307F\u306A\u3069\u3092\u5B9F\u73FE\n *  O(N log log\
-    \ N)\n * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5\n * @see\
-    \ https://en.wikipedia.org/wiki/Dirichlet_convolution\n */\n\n// verify\u7528\
-    :\n// https://atcoder.jp/contests/agc038/tasks/agc038_c\n\n// BEGIN CUT HERE\n\
-    \nnamespace number_theory {\nstd::vector<int> primes;\nconst int MAX_N = 1 <<\
-    \ 24;\nint mpf[MAX_N];  // minimum prime factor\nvoid init(int n) {\n  primes.push_back(2);\n\
-    \  for (int i = 2; i <= n; i += 2) mpf[i] = 2;\n  for (long long p = 3; p <= n;\
-    \ p += 2)\n    if (!mpf[p]) {\n      mpf[p] = p;\n      primes.push_back(p);\n\
-    \      for (long long i = p * p; i <= n; i += 2 * p)\n        if (!mpf[i]) mpf[i]\
-    \ = p;\n    }\n}\n\nstd::vector<std::pair<int, int>> prime_factorize(int n) {\
-    \  // O(log n)\n  std::vector<std::pair<int, int>> res;\n  while (n > 1) {\n \
-    \   int p = mpf[n];\n    int e = 0;\n    while (mpf[n] == p) e++, n /= p;\n  \
-    \  res.push_back(std::make_pair(p, e));\n  }\n  return res;\n}\n\n// f -> g s.t.\
-    \ g(n) = sum_{m|n} f(m)\ntemplate <typename T>\nvoid divisor_zeta(std::vector<T>\
-    \ &f) {\n  int n = f.size();\n  if (!primes.size()) init(n);\n  for (int p : primes)\
-    \ {\n    if (p > n) break;\n    for (int i = 1; p * i < n; i++) f[p * i] += f[i];\n\
-    \  }\n}\n// f -> h s.t. f(n) = sum_{m|n} h(m)\ntemplate <typename T>\nvoid divisor_mobius(std::vector<T>\
-    \ &f) {\n  int n = f.size();\n  if (!primes.size()) init(n);\n  for (int p : primes)\
-    \ {\n    if (p > n) break;\n    for (int i = (n - 1) / p; i > 0; i--) f[p * i]\
-    \ -= f[i];\n  }\n}\n// get table of Mobius function\ntemplate <typename T = int>\n\
-    std::vector<T> get_mu(int n) {\n  std::vector<T> f(n + 1, T(0));\n  f[1] = T(1);\n\
-    \  divisor_mobius(f);\n  return f;\n}\n// get table of Euler's totient function\n\
-    template <typename T = int>\nstd::vector<T> get_phi(int n) {\n  std::vector<T>\
-    \ f(n + 1);\n  std::iota(f.begin(), f.end(), 0);\n  divisor_mobius(f);\n  return\
-    \ f;\n}\n// get table of number-of-divisors function\ntemplate <typename T = int>\n\
-    std::vector<T> get_d(int n) {\n  std::vector<T> f(n + 1, 1);\n  divisor_zeta(f);\n\
-    \  return f;\n}\n// get table of sum-of-divisors function\ntemplate <typename\
-    \ T = int>\nstd::vector<T> get_sigma(int n) {\n  std::vector<T> f(n + 1);\n  std::iota(f.begin(),\
-    \ f.end(), 0);\n  divisor_zeta(f);\n  return f;\n}\ntemplate <typename T>\nstatic\
-    \ std::vector<T> lcm_convolution(std::vector<T> a, std::vector<T> b) {\n  int\
-    \ n = max(a.size(), b.size());\n  a.resize(n);\n  b.resize(n);\n  divisor_zeta(a);\n\
-    \  divisor_zeta(b);\n  for (int i = 0; i < n; i++) a[i] *= b[i];\n  divisor_mobius(a);\n\
-    \  return a;\n}\n// f -> g s.t. g(n) = sum_{n|m} f(m)\ntemplate <typename T>\n\
-    static void multiple_zeta(std::vector<T> &f) {\n  int n = f.size();\n  if (!primes.size())\
-    \ init(n);\n  for (int p : primes) {\n    if (p > n) break;\n    for (int i =\
-    \ (n - 1) / p; i > 0; i--) f[i] += f[p * i];\n  }\n}\n// f -> h s.t. f(n) = sum_{n|m}\
-    \ h(m)\ntemplate <typename T>\nstatic void multiple_mobius(std::vector<T> &f)\
-    \ {\n  int n = f.size();\n  if (!primes.size()) init(n);\n  for (int p : primes)\
-    \ {\n    if (p > n) break;\n    for (int i = 1; p * i < n; i++) f[i] -= f[p *\
-    \ i];\n  }\n}\ntemplate <typename T>\nstatic std::vector<T> gcd_convolution(std::vector<T>\
-    \ a, std::vector<T> b) {\n  int n = std::max(a.size(), b.size());\n  a.resize(n);\n\
-    \  b.resize(n);\n  multiple_zeta(a);\n  multiple_zeta(b);\n  for (int i = 0; i\
-    \ < n; i++) a[i] *= b[i];\n  multiple_mobius(a);\n  return a;\n}\n}  // namespace\
-    \ number_theory\n#line 6 \"test/yosupo/sum_of_totient_function.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = ModInt<998244353>;\n  using namespace number_theory;\n  const\
-    \ int M = 1 << (200 / 9);\n  init(M);\n  auto phi = get_phi<Mint>(M);\n  for (int\
-    \ i = 2; i < M; i++) phi[i] += phi[i - 1];\n  auto g = [](int64_t N, int64_t dummy)\
-    \ {\n    return Mint(N) * Mint(N + 1) / Mint(2);\n  };\n  auto b = [](int64_t\
-    \ d) { return Mint(d); };\n  map<pair<int64_t, int64_t>, Mint> memo;\n  for (int\
-    \ i = 1; i < M; i++) memo[make_pair(i, i)] = phi[i];\n  int64_t N;\n  cin >> N;\n\
-    \  Mint ans = dujiao_sieve<Mint>(N, N, g, b, memo);\n  cout << ans << endl;\n\
+    \ mod, std::uint64_t prim_root = 0>\nclass ModInt {\n  using u64 = std::uint64_t;\n\
+    \  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
+    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
+    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -u128(mod) % mod;\n\
+    \  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n  static\
+    \ constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod - ((u128(u64(w)\
+    \ * inv) * mod) >> 64);\n  }\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr\
+    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt()\
+    \ = default;\n  static constexpr u64 modulo() { return mod; }\n  static constexpr\
+    \ u64 norm(u64 w) { return w - (mod & -(w >= mod)); }\n  static constexpr u64\
+    \ pr_rt() { return prim_root; }\n  constexpr ModInt operator-() const {\n    ModInt\
+    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
+    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
+    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
+    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
+    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
+    \ = reduce(u128(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
+    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const\
+    \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
+    \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
+    \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
+    \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
+    \ ModInt &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const\
+    \ ModInt &rhs) const { return norm(x) != norm(rhs.x); }\n  u64 val() const {\n\
+    \    u64 ret = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n\
+    \  constexpr ModInt pow(u64 k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt\
+    \ base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret *= base;\n   \
+    \ return ret;\n  }\n  constexpr ModInt inverse() const { return pow(mod - 2);\
+    \ }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0) || mod == 2)\
+    \ return *this;\n    if (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n\
+    \    ModInt ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1)\
+    \ == ONE) b += ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt, ModInt>\
+    \ u, std::pair<ModInt, ModInt> v) {\n      ModInt a = (u.first * v.first + u.second\
+    \ * v.second * w);\n      ModInt b = (u.first * v.second + u.second * v.first);\n\
+    \      return std::make_pair(a, b);\n    };\n    u64 e = (mod + 1) >> 1;\n   \
+    \ auto ret = std::make_pair(ONE, ModInt(0));\n    for (auto bs = std::make_pair(b,\
+    \ ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1) ret = mul(ret, bs);\n\
+    \    return ret.first.val() * 2 < mod ? ret.first : -ret.first;\n  }\n  friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
+    \ rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n  u64 x;\n};\n\
+    #line 3 \"src/Math/dujiao_sieve.hpp\"\n/**\n * @title \u675C\u6559\u7B5B\n * @category\
+    \ \u6570\u5B66\n * @see https://maspypy.com/yukicoder-no-886-direct\n * @see https://yukicoder.me/problems/no/1019/editorial\n\
+    \ * @see https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula\n * @see\
+    \ https://yukicoder.me/wiki/sum_totient\n * @see https://oi-wiki.org/math/du/\n\
+    \ * dirichlet_inv_sum : O(N^(3/4))\n *  (\u305F\u3060\u3057\u524D\u51E6\u7406\u3067\
+    N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
+    \ : O(\u221AN)\n */\n\n// verify\u7528: https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
+    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
+    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (memo.count(N))\
+    \ return memo[N];\n  T ret = hsum(N);\n  for (std::uint64_t d = 2, nN = N / d,\
+    \ nd; nN; nN = N / (d = nd)) {\n    nd = N / nN + 1;\n    ret -= dirichlet_inv_sum<T>(nN,\
+    \ gsum, hsum, memo)\n           * (gsum(nd - 1) - gsum(d - 1));\n  }\n  return\
+    \ memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class H>\nT dirichlet_inv_sum(std::uint64_t\
+    \ N, const G &gsum, const H &hsum) {\n  std::unordered_map<std::uint64_t, T> memo;\n\
+    \  return dirichlet_inv_sum<T>(N, gsum, hsum, memo);\n}\n\n// sum f s.t. f :=\
+    \  h * g\ntemplate <class T, class G, class H>\nT dirichlet_mul_sum(std::uint64_t\
+    \ N, const G &gsum, const H &hsum) {\n  const int sqrtN = sqrt(N);\n  T ret =\
+    \ 0;\n  for (int i = 1; i <= sqrtN; i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N\
+    \ / i);\n  for (int i = 1; i <= sqrtN; i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N\
+    \ / i);\n  return ret -= hsum(sqrtN) * gsum(sqrtN);\n}\n#line 3 \"src/Math/NumberTheory.hpp\"\
+    \n/**\n * @title \u6570\u8AD6\u3044\u308D\u3044\u308D\n * @category \u6570\u5B66\
+    \n * \u7DDA\u5F62\u7BE9\u306B\u3088\u308B\u7D20\u6570\u5217\u6319\u306E\u524D\u51E6\
+    \u7406\n * \u4E57\u6CD5\u7684\u95A2\u6570\b\u30C6\u30FC\u30D6\u30EB\u5217\u6319\
+    \ \u3084 gcd\u7573\u307F\u8FBC\u307F\u306A\u3069\n * @see https://37zigen.com/linear-sieve/\n\
+    \ * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5\n * @see https://en.wikipedia.org/wiki/Dirichlet_convolution\n\
+    \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/agc038/tasks/agc038_c\n\
+    \n// BEGIN CUT HERE\n\nclass NumberTheory {\n  static constexpr int MAX_N = 1\
+    \ << 24;\n  static inline int ps[MAX_N >> 4], mpf[MAX_N], psz = 0, lim = 2;\n\
+    \  static void sieve(int N) {\n    if (lim > N) return;\n    for (int d = lim;\
+    \ d <= N; d++) {\n      if (!mpf[d]) mpf[d] = ps[psz++] = d;\n      for (int j\
+    \ = 0; j < psz && ps[j] <= mpf[d] && ps[j] * d <= N; j++)\n        mpf[ps[j] *\
+    \ d] = ps[j];\n    }\n    lim = N + 1;\n  }\n\n public:\n  static int min_prime_factor(int\
+    \ n) { return sieve(n), mpf[n]; }\n  // O(log n)\n  static std::map<int, short>\
+    \ factorize(int n) {\n    std::map<int, short> ret;\n    sieve(n);\n    while\
+    \ (n > 1) ret[mpf[n]]++, n /= mpf[n];\n    return ret;\n  }\n  // O(log n)\n \
+    \ static std::vector<int> divisors(int n) {\n    std::vector<int> ret = {1};\n\
+    \    for (auto [p, e] : factorize(n))\n      for (std::size_t sz = ret.size(),\
+    \ pw = p; e--; pw *= p)\n        for (int i = sz - 1; i >= 0; i--) ret.push_back(ret[i]\
+    \ * pw);\n    return std::sort(ret.begin(), ret.end()), ret;\n  }\n  // O(N)\n\
+    \  static std::vector<int> get_primes(int N) {\n    return sieve(N), std::vector<int>(ps,\
+    \ std::upper_bound(ps, ps + psz, N));\n  }\n  template <class T, class F>\n  static\
+    \ std::vector<T> completely_multiplicative_table(int N, const F &f) {\n    std::vector<T>\
+    \ ret(N + 1);\n    sieve(N);\n    for (int i = 2; i <= N; i++)\n      ret[i] =\
+    \ mpf[i] == i ? f(i, 1) : ret[mpf[i]] * ret[i / mpf[i]];\n    return ret[1] =\
+    \ 1, ret;\n  }\n  template <class T, class F>\n  static std::vector<T> multiplicative_table(int\
+    \ N, const F &f) {\n    std::vector<T> ret(N + 1, 0);\n    sieve(N);\n    auto\
+    \ dfs = [&](auto rc, int i, long long x, T y) -> void {\n      if ((ret[x] = y)\
+    \ == T(0)) return;\n      for (int j = i + 1; j < psz && ps[j] * x <= (long long)N;\
+    \ j++)\n        for (long long e = 1, nx = ps[j] * x; nx <= N; nx *= ps[j], e++)\n\
+    \          rc(rc, j, nx, y * f(ps[j], e));\n    };\n    return dfs(dfs, -1, 1,\
+    \ 1), ret;\n  }\n  // O(N log k / log N)\n  template <class T>\n  static std::vector<T>\
+    \ pow_table(int N, std::uint64_t k) {\n    auto f = [k](int p, short) {\n    \
+    \  T ret = 1, b = p;\n      for (auto e = k; e; e >>= 1, b *= b)\n        if (e\
+    \ & 1) ret *= b;\n      return ret;\n    };\n    return completely_multiplicative_table<T>(N,\
+    \ f);\n  }\n  // O(N)\n  template <class T>\n  static std::vector<T> inv_table(int\
+    \ N) {\n    return completely_multiplicative_table<T>(\n        N, [](int p, short)\
+    \ { return T(1) / p; });\n  }\n  // naive , O(N log N)\n  template <class T>\n\
+    \  static std::vector<T> dirichlet_conv(const std::vector<T> &a,\n           \
+    \                            const std::vector<T> &b) {\n    std::size_t N = std::max(a.size(),\
+    \ b.size());\n    std::vector<T> ret(N, 0);\n    for (std::size_t i = 1; i < a.size();\
+    \ i++)\n      for (std::size_t j = 1; j < b.size() && i * j < N; j++)\n      \
+    \  ret[i * j] += a[i] * b[j];\n    return ret;\n  }\n  // f -> g s.t. g(n) = sum_{m|n}\
+    \ f(m) , O(N log log N)\n  template <typename T>\n  static void divisor_zeta(std::vector<T>\
+    \ &f) {\n    int N = f.size();\n    sieve(N);\n    for (int i = 0; i < psz &&\
+    \ ps[i] < N; i++)\n      for (int j = 1; ps[i] * j < N; j++) f[ps[i] * j] += f[j];\n\
+    \  }\n  // f -> h s.t. f(n) = sum_{m|n} h(m) , O(N log log N)\n  template <typename\
+    \ T>\n  static void divisor_mobius(std::vector<T> &f) {\n    int N = f.size();\n\
+    \    sieve(N);\n    for (int i = 0; i < psz && ps[i] < N; i++)\n      for (int\
+    \ j = (N - 1) / ps[i]; j; j--) f[ps[i] * j] -= f[j];\n  }\n  // O(N log log N)\n\
+    \  template <typename T>\n  static std::vector<T> lcm_conv(std::vector<T> a, std::vector<T>\
+    \ b) {\n    int N = std::max(a.size(), b.size());\n    a.resize(N), b.resize(N),\
+    \ divisor_zeta(a), divisor_zeta(b);\n    for (int i = 0; i < N; i++) a[i] *= b[i];\n\
+    \    divisor_mobius(a);\n    return a;\n  }\n  // f -> g s.t. g(n) = sum_{n|m}\
+    \ f(m) , O(N log log N)\n  template <typename T>\n  static void multiple_zeta(std::vector<T>\
+    \ &f) {\n    int N = f.size();\n    sieve(N);\n    for (int i = 0; i < psz &&\
+    \ ps[i] < N; i++)\n      for (int j = (N - 1) / ps[i]; j > 0; j--) f[j] += f[ps[i]\
+    \ * j];\n  }\n  // f -> h s.t. f(n) = sum_{n|m} h(m) , O(N log log N)\n  template\
+    \ <typename T>\n  static void multiple_mobius(std::vector<T> &f) {\n    int N\
+    \ = f.size();\n    sieve(N);\n    for (int i = 0; i < psz && ps[i] < N; i++)\n\
+    \      for (int j = 1; ps[i] * j < N; j++) f[j] -= f[ps[i] * j];\n  }\n  // O(N\
+    \ log log N)\n  template <typename T>\n  static std::vector<T> gcd_conv(std::vector<T>\
+    \ a, std::vector<T> b) {\n    int N = std::max(a.size(), b.size());\n    a.resize(N),\
+    \ b.resize(N), multiple_zeta(a), multiple_zeta(b);\n    for (int i = 0; i < N;\
+    \ i++) a[i] *= b[i];\n    multiple_mobius(a);\n    return a;\n  }\n};\n#line 3\
+    \ \"src/Math/multiplicative_functions.hpp\"\n/**\n * @title \u4E57\u6CD5\u7684\
+    \u95A2\u6570\n * @category \u6570\u5B66\n * @see https://en.wikipedia.org/wiki/Arithmetic_function\n\
+    \ */\n\n// BEGIN CUT HERE\n\nnamespace multiplicative_functions {\ntemplate <class\
+    \ T>\nstruct Totient {\n  static constexpr T f(std::uint64_t p, short e) {\n \
+    \   T ret = p - 1;\n    while (e-- > 1) ret *= p;\n    return ret;\n  }\n  static\
+    \ std::vector<T> poly() { return {-1, 1}; }\n};\ntemplate <class T>\nstruct Moebius\
+    \ {\n  static constexpr T f(std::uint64_t, short e) { return (e == 0) - (e ==\
+    \ 1); }\n  static std::vector<T> poly() { return {-1}; }\n};\ntemplate <class\
+    \ T>\nstruct Liouville {\n  static constexpr T f(std::uint64_t, short e) { return\
+    \ e & 1 ? -1 : 1; }\n  static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
+    \ <class T, std::uint64_t k>\nstruct Divisor {\n  static constexpr T f(std::uint64_t\
+    \ p, short e) {\n    T ret = 0, pk = 1, pkpw = 1, b = p;\n    for (std::uint64_t\
+    \ kk = k; kk; kk >>= 1, b *= b)\n      if (kk & 1) pk *= b;\n    for (short i\
+    \ = 0; i <= e; i++, pkpw *= pk) ret += pkpw;\n    return ret;\n  }\n  static std::vector<T>\
+    \ poly() {\n    std::vector<T> ret(k + 1, 0);\n    ret[0] += 1, ret[k] += 1;\n\
+    \    return ret;\n  }\n};\ntemplate <class T>\nstruct Dedekind {\n  static constexpr\
+    \ T f(std::uint64_t p, short e) {\n    T ret = p + 1;\n    while (e-- > 1) ret\
+    \ *= p;\n    return ret;\n  }\n  static std::vector<T> poly() { return {1, 1};\
+    \ }\n};\n}  // namespace multiplicative_functions\n#line 7 \"test/yosupo/sum_of_totient_function.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using Mint = ModInt<998244353>;\n  using NT = NumberTheory;\n  using namespace\
+    \ multiplicative_functions;\n  const int M = 1 << (200 / 9);\n  auto phi = NT::multiplicative_table<Mint>(M,\
+    \ Totient<Mint>::f);\n  for (int i = 2; i < M; i++) phi[i] += phi[i - 1];\n  auto\
+    \ hsum = [](long long N) { return Mint(N) * Mint(N + 1) / Mint(2); };\n  auto\
+    \ gsum = [](long long N) { return Mint(N); };\n  unordered_map<unsigned long long,\
+    \ Mint> memo;\n  for (int i = 1; i < M; i++) memo[i] = phi[i];\n  int64_t N;\n\
+    \  cin >> N;\n  cout << dirichlet_inv_sum<Mint>(N, gsum, hsum, memo) << '\\n';\n\
     \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/dujiao_sieve.hpp\"\
-    \n#include \"src/Math/number_theory.hpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = ModInt<998244353>;\n\
-    \  using namespace number_theory;\n  const int M = 1 << (200 / 9);\n  init(M);\n\
-    \  auto phi = get_phi<Mint>(M);\n  for (int i = 2; i < M; i++) phi[i] += phi[i\
-    \ - 1];\n  auto g = [](int64_t N, int64_t dummy) {\n    return Mint(N) * Mint(N\
-    \ + 1) / Mint(2);\n  };\n  auto b = [](int64_t d) { return Mint(d); };\n  map<pair<int64_t,\
-    \ int64_t>, Mint> memo;\n  for (int i = 1; i < M; i++) memo[make_pair(i, i)] =\
-    \ phi[i];\n  int64_t N;\n  cin >> N;\n  Mint ans = dujiao_sieve<Mint>(N, N, g,\
-    \ b, memo);\n  cout << ans << endl;\n  return 0;\n}"
+    \n#include \"src/Math/NumberTheory.hpp\"\n#include \"src/Math/multiplicative_functions.hpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using Mint = ModInt<998244353>;\n  using NT = NumberTheory;\n  using namespace\
+    \ multiplicative_functions;\n  const int M = 1 << (200 / 9);\n  auto phi = NT::multiplicative_table<Mint>(M,\
+    \ Totient<Mint>::f);\n  for (int i = 2; i < M; i++) phi[i] += phi[i - 1];\n  auto\
+    \ hsum = [](long long N) { return Mint(N) * Mint(N + 1) / Mint(2); };\n  auto\
+    \ gsum = [](long long N) { return Mint(N); };\n  unordered_map<unsigned long long,\
+    \ Mint> memo;\n  for (int i = 1; i < M; i++) memo[i] = phi[i];\n  int64_t N;\n\
+    \  cin >> N;\n  cout << dirichlet_inv_sum<Mint>(N, gsum, hsum, memo) << '\\n';\n\
+    \  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/dujiao_sieve.hpp
-  - src/Math/number_theory.hpp
+  - src/Math/NumberTheory.hpp
+  - src/Math/multiplicative_functions.hpp
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2020-12-11 13:30:53+09:00'
+  timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp

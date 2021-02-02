@@ -6,6 +6,7 @@ data:
     title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

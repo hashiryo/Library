@@ -9,6 +9,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
@@ -115,8 +116,8 @@ data:
   timestamp: '2020-10-23 23:21:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2450.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/aoj/2450.LCT.test.cpp
 documentation_of: src/DataStructure/LinkCutTree_MonoidLazy.hpp
 layout: document
 redirect_from:
