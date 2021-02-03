@@ -34,7 +34,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree.hpp
       title: "Link-Cut-Tree(\u30B7\u30F3\u30D7\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree_Monoid.hpp
       title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
     - icon: ':heavy_check_mark:'
@@ -117,7 +117,7 @@ data:
       path: src/Graph/MatchingBipartite.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E8C\u90E8\u30B0\u30E9\u30D5\
         )"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/MatchingGeneral.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
         )"
@@ -153,7 +153,7 @@ data:
     - icon: ':question:'
       path: src/Math/Combination.hpp
       title: "\u7D44\u307F\u5408\u308F\u305B"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     - icon: ':question:'
@@ -174,7 +174,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
     - icon: ':x:'
@@ -189,13 +189,13 @@ data:
     - icon: ':x:'
       path: src/Math/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/factorize.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/fps_sequence.hpp
       title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     - icon: ':x:'
@@ -227,7 +227,7 @@ data:
   verificationCategories:
   - name: test/aoj
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0168.test.cpp
       title: test/aoj/0168.test.cpp
     - icon: ':heavy_check_mark:'
@@ -359,7 +359,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3056.test.cpp
       title: test/aoj/3056.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3072.test.cpp
       title: test/aoj/3072.test.cpp
     - icon: ':heavy_check_mark:'
@@ -523,16 +523,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution1000000007.test.cpp
       title: test/yosupo/convolution1000000007.test.cpp
     - icon: ':x:'
@@ -547,25 +547,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/exp_of_FPS.test.cpp
       title: test/yosupo/exp_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/factorize.test.cpp
       title: test/yosupo/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/find_linear_recurrence.test.cpp
       title: test/yosupo/find_linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/frequency_table_of_tree_distance.test.cpp
       title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.test.cpp
       title: test/yosupo/inv_of_FPS.test.cpp
     - icon: ':x:'

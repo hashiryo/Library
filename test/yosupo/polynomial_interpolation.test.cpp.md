@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -67,13 +67,13 @@ data:
     \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n  u64 x;\n};\n\
     #line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
     \u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
-    \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nclass FormalPowerSeries\
-    \ : std::vector<mint> {\n  using FPS = FormalPowerSeries<mint, LIM>;\n  using\
-    \ std::vector<mint>::vector;\n  using m64_1 = ModInt<34703335751681, 3>;\n  using\
-    \ m64_2 = ModInt<35012573396993, 3>;\n  static inline m64_1 a1[LIM], b1[LIM],\
-    \ c1[LIM];\n  static inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static inline\
-    \ mint bf1[LIM], bf2[LIM];\n  template <class mod_t>\n  static inline void idft(int\
-    \ n, mod_t x[]) {\n    static mod_t iW[LIM];\n    static constexpr std::uint64_t\
+    \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries\
+    \ : std::vector<mint> {\n  using std::vector<mint>::vector;\n\n private:\n  using\
+    \ FPS = FormalPowerSeries<mint, LIM>;\n  using m64_1 = ModInt<34703335751681,\
+    \ 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n  static inline m64_1 a1[LIM],\
+    \ b1[LIM], c1[LIM];\n  static inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static\
+    \ inline mint bf1[LIM], bf2[LIM];\n  template <class mod_t>\n  static inline void\
+    \ idft(int n, mod_t x[]) {\n    static mod_t iW[LIM];\n    static constexpr std::uint64_t\
     \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
     \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
     \ lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n\
@@ -356,7 +356,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
+  timestamp: '2021-02-03 15:48:26+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/polynomial_interpolation.test.cpp

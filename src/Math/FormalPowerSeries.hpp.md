@@ -14,35 +14,35 @@ data:
   - icon: ':x:'
     path: src/Math/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
   - icon: ':x:'
@@ -101,7 +101,7 @@ data:
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -152,40 +152,40 @@ data:
     \  }\n  u64 x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title\
     \ \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528\
     : https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate <class mint, int\
-    \ LIM = (1 << 22)>\nclass FormalPowerSeries : std::vector<mint> {\n  using FPS\
-    \ = FormalPowerSeries<mint, LIM>;\n  using std::vector<mint>::vector;\n  using\
-    \ m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n\
-    \  static inline m64_1 a1[LIM], b1[LIM], c1[LIM];\n  static inline m64_2 a2[LIM],\
-    \ b2[LIM], c2[LIM];\n  static inline mint bf1[LIM], bf2[LIM];\n  template <class\
-    \ mod_t>\n  static inline void idft(int n, mod_t x[]) {\n    static mod_t iW[LIM];\n\
-    \    static constexpr std::uint64_t mod = mod_t::modulo();\n    static constexpr\
-    \ unsigned pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n    static constexpr\
-    \ mod_t G(pr);\n    static int lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n\
-    \    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t idw = G.pow(mod - 1 -\
-    \ (mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++) iW[m + i] = iW[i] *\
-    \ idw;\n      lim = n / 2;\n    }\n    for (int m = 1; m < n; m *= 2)\n      for\
-    \ (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for (int i = s, j = s +\
-    \ m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v = x[j];\n          x[i]\
-    \ = u + v, x[j] = (u - v) * iW[k];\n        }\n    mod_t iv(mod - (mod - 1) /\
-    \ n);\n    for (int i = 0; i < n; i++) x[i] *= iv;\n  }\n  template <class mod_t>\n\
-    \  static inline void dft(int n, mod_t x[]) {\n    static mod_t W[LIM];\n    static\
-    \ constexpr std::uint64_t mod = mod_t::modulo();\n    static constexpr unsigned\
-    \ pr = mod_t::pr_rt();\n    static_assert(pr != 0);\n    static constexpr mod_t\
-    \ G(pr);\n    static int lim = 0;\n    if (lim == 0) W[0] = 1, lim = 1;\n    for\
-    \ (int m = lim; m < n / 2; m *= 2) {\n      mod_t dw = G.pow((mod - 1) / (4 *\
-    \ m));\n      for (int i = 0; i < m; i++) W[m + i] = W[i] * dw;\n      lim = n\
-    \ / 2;\n    }\n    for (int m = n; m >>= 1;)\n      for (int s = 0, k = 0; s <\
-    \ n; s += 2 * m, ++k)\n        for (int i = s, j = s + m; i < s + m; ++i, ++j)\
-    \ {\n          mod_t u = x[i], v = x[j] * W[k];\n          x[i] = u + v, x[j]\
-    \ = u - v;\n        }\n  }\n  static inline void crt(m64_1 f1[], m64_2 f2[], int\
-    \ b, int e, mint ret[]) {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n\
-    \    static constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e;\
-    \ i++) {\n      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i]\
-    \ = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
-    \ * mod1;\n    }\n  }\n  template <typename T, typename std::enable_if<\n    \
-    \                        std::is_integral<T>::value>::type * = nullptr>\n  static\
-    \ inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for\
-    \ (int i = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
+    \ LIM = (1 << 22)>\nstruct FormalPowerSeries : std::vector<mint> {\n  using std::vector<mint>::vector;\n\
+    \n private:\n  using FPS = FormalPowerSeries<mint, LIM>;\n  using m64_1 = ModInt<34703335751681,\
+    \ 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n  static inline m64_1 a1[LIM],\
+    \ b1[LIM], c1[LIM];\n  static inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static\
+    \ inline mint bf1[LIM], bf2[LIM];\n  template <class mod_t>\n  static inline void\
+    \ idft(int n, mod_t x[]) {\n    static mod_t iW[LIM];\n    static constexpr std::uint64_t\
+    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
+    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
+    \ lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n\
+    \ / 2; m *= 2) {\n      mod_t idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n  \
+    \    for (int i = 0; i < m; i++) iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n\
+    \    }\n    for (int m = 1; m < n; m *= 2)\n      for (int s = 0, k = 0; s < n;\
+    \ s += 2 * m, ++k)\n        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n\
+    \          mod_t u = x[i], v = x[j];\n          x[i] = u + v, x[j] = (u - v) *\
+    \ iW[k];\n        }\n    mod_t iv(mod - (mod - 1) / n);\n    for (int i = 0; i\
+    \ < n; i++) x[i] *= iv;\n  }\n  template <class mod_t>\n  static inline void dft(int\
+    \ n, mod_t x[]) {\n    static mod_t W[LIM];\n    static constexpr std::uint64_t\
+    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
+    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
+    \ lim = 0;\n    if (lim == 0) W[0] = 1, lim = 1;\n    for (int m = lim; m < n\
+    \ / 2; m *= 2) {\n      mod_t dw = G.pow((mod - 1) / (4 * m));\n      for (int\
+    \ i = 0; i < m; i++) W[m + i] = W[i] * dw;\n      lim = n / 2;\n    }\n    for\
+    \ (int m = n; m >>= 1;)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n\
+    \        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u\
+    \ = x[i], v = x[j] * W[k];\n          x[i] = u + v, x[j] = u - v;\n        }\n\
+    \  }\n  static inline void crt(m64_1 f1[], m64_2 f2[], int b, int e, mint ret[])\
+    \ {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n    static\
+    \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
+    \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] = mint(r1)\n\
+    \               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
+    \    }\n  }\n  template <typename T, typename std::enable_if<\n              \
+    \              std::is_integral<T>::value>::type * = nullptr>\n  static inline\
+    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
+    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
     \ T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
     \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
     \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
@@ -401,9 +401,9 @@ data:
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
     /**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
     \n */\n// verify\u7528: https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate\
-    \ <class mint, int LIM = (1 << 22)>\nclass FormalPowerSeries : std::vector<mint>\
-    \ {\n  using FPS = FormalPowerSeries<mint, LIM>;\n  using std::vector<mint>::vector;\n\
-    \  using m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993,\
+    \ <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries : std::vector<mint>\
+    \ {\n  using std::vector<mint>::vector;\n\n private:\n  using FPS = FormalPowerSeries<mint,\
+    \ LIM>;\n  using m64_1 = ModInt<34703335751681, 3>;\n  using m64_2 = ModInt<35012573396993,\
     \ 3>;\n  static inline m64_1 a1[LIM], b1[LIM], c1[LIM];\n  static inline m64_2\
     \ a2[LIM], b2[LIM], c2[LIM];\n  static inline mint bf1[LIM], bf2[LIM];\n  template\
     \ <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n    static mod_t\
@@ -657,8 +657,8 @@ data:
   - src/Math/differential_equation.hpp
   - src/Math/kitamasa.hpp
   - src/Math/SubproductTree.hpp
-  timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-02-03 15:48:26+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/inv_of_FPS.test.cpp
   - test/yosupo/stirling_second.test.cpp

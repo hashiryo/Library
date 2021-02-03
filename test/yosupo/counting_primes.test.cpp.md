@@ -20,11 +20,11 @@ data:
     \u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\u95A2\u6570\u3084\u52A0\u6CD5\u7684\u95A2\
     \u6570\u306E\u548C\u3082\u3042\u308A\n * @category \u6570\u5B66\n */\n\n// verify\u7528\
     :\n// https://atcoder.jp/contests/abc172/tasks/abc172_d\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
-    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e\n\n// BEGIN CUT HERE\n\
-    \n// O(d^2\u221AN+dN^(3/4)/log N) d := degre of polynomial\ntemplate <class T\
-    \ = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t N, const std::vector<T>\
-    \ &poly) {\n  const int sqrtN = std::sqrt(N), d = poly.size();\n  std::vector<T>\
-    \ primes, small(sqrtN + 1, 0), large(sqrtN + 1, 0);\n  std::vector<std::vector<T>>\
+    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e (\u52A0\u6CD5\u7684\
+    \u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log N) d := degre\
+    \ of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
+    \ N, const std::vector<T> &poly) {\n  const int sqrtN = std::sqrt(N), d = poly.size();\n\
+    \  std::vector<T> primes, small(sqrtN + 1, 0), large(sqrtN + 1, 0);\n  std::vector<std::vector<T>>\
     \ s(d, std::vector<T>(sqrtN + 1)),\n      l(d, std::vector<T>(sqrtN + 1));\n \
     \ for (int n = 1, k = 0; n <= sqrtN; n++, k = 0)\n    for (T prd = n; k < d; prd\
     \ *= (n + ++k)) s[k][n] = prd / (k + 1);\n  for (int n = 1, k = 0; n <= sqrtN;\
@@ -83,7 +83,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-02-03 13:01:44+09:00'
+  timestamp: '2021-02-03 15:48:26+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/counting_primes.test.cpp
