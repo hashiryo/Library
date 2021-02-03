@@ -11,8 +11,8 @@ data:
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
   - icon: ':x:'
-    path: src/Math/multiplicative_functions.hpp
-    title: "\u4E57\u6CD5\u7684\u95A2\u6570"
+    path: src/Math/multiplicative_and_additive.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -74,55 +74,57 @@ data:
     \ https://yukicoder.me/wiki/sum_totient\n * @see https://oi-wiki.org/math/du/\n\
     \ * dirichlet_inv_sum : O(N^(3/4))\n *  (\u305F\u3060\u3057\u524D\u51E6\u7406\u3067\
     N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
-    \ : O(\u221AN)\n */\n\n// verify\u7528: https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
-    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
-    \ G, class H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
-    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (memo.count(N))\
-    \ return memo[N];\n  T ret = hsum(N);\n  for (std::uint64_t d = 2, nN = N / d,\
-    \ nd; nN; nN = N / (d = nd)) {\n    nd = N / nN + 1;\n    ret -= dirichlet_inv_sum<T>(nN,\
-    \ gsum, hsum, memo)\n           * (gsum(nd - 1) - gsum(d - 1));\n  }\n  return\
-    \ memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class H>\nT dirichlet_inv_sum(std::uint64_t\
-    \ N, const G &gsum, const H &hsum) {\n  std::unordered_map<std::uint64_t, T> memo;\n\
-    \  return dirichlet_inv_sum<T>(N, gsum, hsum, memo);\n}\n\n// sum f s.t. f :=\
-    \  h * g\ntemplate <class T, class G, class H>\nT dirichlet_mul_sum(std::uint64_t\
-    \ N, const G &gsum, const H &hsum) {\n  const int sqrtN = sqrt(N);\n  T ret =\
-    \ 0;\n  for (int i = 1; i <= sqrtN; i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N\
-    \ / i);\n  for (int i = 1; i <= sqrtN; i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N\
-    \ / i);\n  return ret -= hsum(sqrtN) * gsum(sqrtN);\n}\n#line 3 \"src/Math/NumberTheory.hpp\"\
-    \n/**\n * @title \u6570\u8AD6\u3044\u308D\u3044\u308D\n * @category \u6570\u5B66\
-    \n * \u7DDA\u5F62\u7BE9\u306B\u3088\u308B\u7D20\u6570\u5217\u6319\u306E\u524D\u51E6\
-    \u7406\n * \u4E57\u6CD5\u7684\u95A2\u6570\b\u30C6\u30FC\u30D6\u30EB\u5217\u6319\
-    \ \u3084 gcd\u7573\u307F\u8FBC\u307F\u306A\u3069\n * @see https://37zigen.com/linear-sieve/\n\
-    \ * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5\n * @see https://en.wikipedia.org/wiki/Dirichlet_convolution\n\
-    \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/agc038/tasks/agc038_c\n\
-    \n// BEGIN CUT HERE\n\nclass NumberTheory {\n  static constexpr int MAX_N = 1\
-    \ << 24;\n  static inline int ps[MAX_N >> 4], mpf[MAX_N], psz = 0, lim = 2;\n\
-    \  static void sieve(int N) {\n    if (lim > N) return;\n    for (int d = lim;\
-    \ d <= N; d++) {\n      if (!mpf[d]) mpf[d] = ps[psz++] = d;\n      for (int j\
-    \ = 0; j < psz && ps[j] <= mpf[d] && ps[j] * d <= N; j++)\n        mpf[ps[j] *\
-    \ d] = ps[j];\n    }\n    lim = N + 1;\n  }\n\n public:\n  static int min_prime_factor(int\
-    \ n) { return sieve(n), mpf[n]; }\n  // O(log n)\n  static std::map<int, short>\
-    \ factorize(int n) {\n    std::map<int, short> ret;\n    sieve(n);\n    while\
-    \ (n > 1) ret[mpf[n]]++, n /= mpf[n];\n    return ret;\n  }\n  // O(log n)\n \
-    \ static std::vector<int> divisors(int n) {\n    std::vector<int> ret = {1};\n\
-    \    for (auto [p, e] : factorize(n))\n      for (std::size_t sz = ret.size(),\
-    \ pw = p; e--; pw *= p)\n        for (int i = sz - 1; i >= 0; i--) ret.push_back(ret[i]\
-    \ * pw);\n    return std::sort(ret.begin(), ret.end()), ret;\n  }\n  // O(N)\n\
-    \  static std::vector<int> get_primes(int N) {\n    return sieve(N), std::vector<int>(ps,\
-    \ std::upper_bound(ps, ps + psz, N));\n  }\n  template <class T, class F>\n  static\
-    \ std::vector<T> completely_multiplicative_table(int N, const F &f) {\n    std::vector<T>\
-    \ ret(N + 1);\n    sieve(N);\n    for (int i = 2; i <= N; i++)\n      ret[i] =\
-    \ mpf[i] == i ? f(i, 1) : ret[mpf[i]] * ret[i / mpf[i]];\n    return ret[1] =\
-    \ 1, ret;\n  }\n  template <class T, class F>\n  static std::vector<T> multiplicative_table(int\
-    \ N, const F &f) {\n    std::vector<T> ret(N + 1, 0);\n    sieve(N);\n    auto\
-    \ dfs = [&](auto rc, int i, long long x, T y) -> void {\n      if ((ret[x] = y)\
-    \ == T(0)) return;\n      for (int j = i + 1; j < psz && ps[j] * x <= (long long)N;\
-    \ j++)\n        for (long long e = 1, nx = ps[j] * x; nx <= N; nx *= ps[j], e++)\n\
-    \          rc(rc, j, nx, y * f(ps[j], e));\n    };\n    return dfs(dfs, -1, 1,\
-    \ 1), ret;\n  }\n  // O(N log k / log N)\n  template <class T>\n  static std::vector<T>\
-    \ pow_table(int N, std::uint64_t k) {\n    auto f = [k](int p, short) {\n    \
-    \  T ret = 1, b = p;\n      for (auto e = k; e; e >>= 1, b *= b)\n        if (e\
-    \ & 1) ret *= b;\n      return ret;\n    };\n    return completely_multiplicative_table<T>(N,\
+    \ : O(\u221AN)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
+    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\n// BEGIN CUT HERE\n\
+    \n// sum f s.t. f :=  h * g^(-1)\n\ntemplate <class T, class G, class H>\nT dirichlet_inv_sum(unsigned\
+    \ long long N, const G &gsum, const H &hsum,\n                    std::unordered_map<unsigned\
+    \ long long, T> &memo) {\n  auto it = memo.find(N);\n  if (it != memo.end()) return\
+    \ it->second;\n  T ret = hsum(N);\n  for (unsigned long long d = 2, nN = double(N)\
+    \ / d, nd; nN;\n       nN = double(N) / (d = nd))\n    ret -= dirichlet_inv_sum(nN,\
+    \ gsum, hsum, memo)\n           * (gsum((nd = double(N) / nN + 1) - 1) - gsum(d\
+    \ - 1));\n  return memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class\
+    \ H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum) {\n \
+    \ std::unordered_map<std::uint64_t, T> memo;\n  return dirichlet_inv_sum<T>(N,\
+    \ gsum, hsum, memo);\n}\n\n// sum f s.t. f :=  h * g\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_mul_sum(std::uint64_t N, const G &gsum, const H &hsum)\
+    \ {\n  const int sqrtN = sqrt(N);\n  T ret = 0;\n  for (int i = 1; i <= sqrtN;\
+    \ i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N / i);\n  for (int i = 1; i <= sqrtN;\
+    \ i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N / i);\n  return ret -= hsum(sqrtN)\
+    \ * gsum(sqrtN);\n}\n#line 3 \"src/Math/NumberTheory.hpp\"\n/**\n * @title \u6570\
+    \u8AD6\u3044\u308D\u3044\u308D\n * @category \u6570\u5B66\n * \u7DDA\u5F62\u7BE9\
+    \u306B\u3088\u308B\u7D20\u6570\u5217\u6319\u306E\u524D\u51E6\u7406\n * \u4E57\u6CD5\
+    \u7684\u95A2\u6570\b\u30C6\u30FC\u30D6\u30EB\u5217\u6319 \u3084 gcd\u7573\u307F\
+    \u8FBC\u307F\u306A\u3069\n * @see https://37zigen.com/linear-sieve/\n * @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5\n\
+    \ * @see https://en.wikipedia.org/wiki/Dirichlet_convolution\n */\n\n// verify\u7528\
+    :\n// https://atcoder.jp/contests/agc038/tasks/agc038_c\n\n// BEGIN CUT HERE\n\
+    \nclass NumberTheory {\n  static constexpr int MAX_N = 1 << 24;\n  static inline\
+    \ int ps[MAX_N >> 4], mpf[MAX_N], psz = 0, lim = 2;\n  static void sieve(int N)\
+    \ {\n    if (lim > N) return;\n    for (int d = lim; d <= N; d++) {\n      if\
+    \ (!mpf[d]) mpf[d] = ps[psz++] = d;\n      for (int j = 0; j < psz && ps[j] <=\
+    \ mpf[d] && ps[j] * d <= N; j++)\n        mpf[ps[j] * d] = ps[j];\n    }\n   \
+    \ lim = N + 1;\n  }\n\n public:\n  static int min_prime_factor(int n) { return\
+    \ sieve(n), mpf[n]; }\n  // O(log n)\n  static std::map<int, short> factorize(int\
+    \ n) {\n    std::map<int, short> ret;\n    sieve(n);\n    while (n > 1) ret[mpf[n]]++,\
+    \ n /= mpf[n];\n    return ret;\n  }\n  // O(log n)\n  static std::vector<int>\
+    \ divisors(int n) {\n    std::vector<int> ret = {1};\n    for (auto [p, e] : factorize(n))\n\
+    \      for (std::size_t sz = ret.size(), pw = p; e--; pw *= p)\n        for (int\
+    \ i = sz - 1; i >= 0; i--) ret.push_back(ret[i] * pw);\n    return std::sort(ret.begin(),\
+    \ ret.end()), ret;\n  }\n  // O(N)\n  static std::vector<int> get_primes(int N)\
+    \ {\n    return sieve(N), std::vector<int>(ps, std::upper_bound(ps, ps + psz,\
+    \ N));\n  }\n  template <class T, class F>\n  static std::vector<T> completely_multiplicative_table(int\
+    \ N, const F &f) {\n    std::vector<T> ret(N + 1);\n    sieve(N);\n    for (int\
+    \ i = 2; i <= N; i++)\n      ret[i] = mpf[i] == i ? f(i, 1) : ret[mpf[i]] * ret[i\
+    \ / mpf[i]];\n    return ret[1] = 1, ret;\n  }\n  template <class T, class F>\n\
+    \  static std::vector<T> multiplicative_table(int N, const F &f) {\n    std::vector<T>\
+    \ ret(N + 1, 0);\n    sieve(N);\n    auto dfs = [&](auto rc, int i, long long\
+    \ x, T y) -> void {\n      if ((ret[x] = y) == T(0)) return;\n      for (int j\
+    \ = i + 1; j < psz && ps[j] * x <= (long long)N; j++)\n        for (long long\
+    \ e = 1, nx = ps[j] * x; nx <= N; nx *= ps[j], e++)\n          rc(rc, j, nx, y\
+    \ * f(ps[j], e));\n    };\n    return dfs(dfs, -1, 1, 1), ret;\n  }\n  // O(N\
+    \ log k / log N)\n  template <class T>\n  static std::vector<T> pow_table(int\
+    \ N, std::uint64_t k) {\n    auto f = [k](int p, short) {\n      T ret = 1, b\
+    \ = p;\n      for (auto e = k; e; e >>= 1, b *= b)\n        if (e & 1) ret *=\
+    \ b;\n      return ret;\n    };\n    return completely_multiplicative_table<T>(N,\
     \ f);\n  }\n  // O(N)\n  template <class T>\n  static std::vector<T> inv_table(int\
     \ N) {\n    return completely_multiplicative_table<T>(\n        N, [](int p, short)\
     \ { return T(1) / p; });\n  }\n  // naive , O(N log N)\n  template <class T>\n\
@@ -153,25 +155,37 @@ data:
     \ a, std::vector<T> b) {\n    int N = std::max(a.size(), b.size());\n    a.resize(N),\
     \ b.resize(N), multiple_zeta(a), multiple_zeta(b);\n    for (int i = 0; i < N;\
     \ i++) a[i] *= b[i];\n    multiple_mobius(a);\n    return a;\n  }\n};\n#line 3\
-    \ \"src/Math/multiplicative_functions.hpp\"\n/**\n * @title \u4E57\u6CD5\u7684\
-    \u95A2\u6570\n * @category \u6570\u5B66\n * @see https://en.wikipedia.org/wiki/Arithmetic_function\n\
-    \ */\n\n// BEGIN CUT HERE\n\nnamespace multiplicative_functions {\ntemplate <class\
-    \ T>\nstruct Totient {\n  static constexpr T f(std::uint64_t p, short e) {\n \
-    \   T ret = p - 1;\n    while (e-- > 1) ret *= p;\n    return ret;\n  }\n  static\
-    \ std::vector<T> poly() { return {-1, 1}; }\n};\ntemplate <class T>\nstruct Moebius\
-    \ {\n  static constexpr T f(std::uint64_t, short e) { return (e == 0) - (e ==\
-    \ 1); }\n  static std::vector<T> poly() { return {-1}; }\n};\ntemplate <class\
-    \ T>\nstruct Liouville {\n  static constexpr T f(std::uint64_t, short e) { return\
-    \ e & 1 ? -1 : 1; }\n  static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
-    \ <class T, std::uint64_t k>\nstruct Divisor {\n  static constexpr T f(std::uint64_t\
-    \ p, short e) {\n    T ret = 0, pk = 1, pkpw = 1, b = p;\n    for (std::uint64_t\
-    \ kk = k; kk; kk >>= 1, b *= b)\n      if (kk & 1) pk *= b;\n    for (short i\
-    \ = 0; i <= e; i++, pkpw *= pk) ret += pkpw;\n    return ret;\n  }\n  static std::vector<T>\
-    \ poly() {\n    std::vector<T> ret(k + 1, 0);\n    ret[0] += 1, ret[k] += 1;\n\
-    \    return ret;\n  }\n};\ntemplate <class T>\nstruct Dedekind {\n  static constexpr\
-    \ T f(std::uint64_t p, short e) {\n    T ret = p + 1;\n    while (e-- > 1) ret\
-    \ *= p;\n    return ret;\n  }\n  static std::vector<T> poly() { return {1, 1};\
-    \ }\n};\n}  // namespace multiplicative_functions\n#line 7 \"test/yosupo/sum_of_totient_function.test.cpp\"\
+    \ \"src/Math/multiplicative_and_additive.hpp\"\n/**\n * @title \u4E57\u6CD5\u7684\
+    \u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570\n * @category \u6570\u5B66\n\
+    \ * @see https://en.wikipedia.org/wiki/Arithmetic_function\n */\n\n// BEGIN CUT\
+    \ HERE\n\nnamespace multiplicative_functions {\ntemplate <class T>\nstruct Totient\
+    \ {\n  static constexpr T f(std::uint64_t p, short e) {\n    T ret = p - 1;\n\
+    \    while (e-- > 1) ret *= p;\n    return ret;\n  }\n  static std::vector<T>\
+    \ poly() { return {-1, 1}; }\n};\ntemplate <class T>\nstruct Moebius {\n  static\
+    \ constexpr T f(std::uint64_t, short e) { return (e == 0) - (e == 1); }\n  static\
+    \ std::vector<T> poly() { return {-1}; }\n};\ntemplate <class T>\nstruct Liouville\
+    \ {\n  static constexpr T f(std::uint64_t, short e) { return e & 1 ? -1 : 1; }\n\
+    \  static std::vector<T> poly() { return {-1}; }\n};\ntemplate <class T, std::uint64_t\
+    \ k>\nstruct Divisor {\n  static constexpr T f(std::uint64_t p, short e) {\n \
+    \   T ret = 0, pk = 1, pkpw = 1, b = p;\n    for (std::uint64_t kk = k; kk; kk\
+    \ >>= 1, b *= b)\n      if (kk & 1) pk *= b;\n    for (short i = 0; i <= e; i++,\
+    \ pkpw *= pk) ret += pkpw;\n    return ret;\n  }\n  static std::vector<T> poly()\
+    \ {\n    std::vector<T> ret(k + 1, 0);\n    ret[0] += 1, ret[k] += 1;\n    return\
+    \ ret;\n  }\n};\ntemplate <class T>\nstruct Dedekind {\n  static constexpr T f(std::uint64_t\
+    \ p, short e) {\n    T ret = p + 1;\n    while (e-- > 1) ret *= p;\n    return\
+    \ ret;\n  }\n  static std::vector<T> poly() { return {1, 1}; }\n};\n}  // namespace\
+    \ multiplicative_functions\n\nnamespace additive_functions {\n// the total number\
+    \ of prime factors of n\ntemplate <class T>\nstruct BigOmega {\n  static constexpr\
+    \ T f(std::uint64_t, short e) { return e; }\n  static std::vector<T> poly() {\
+    \ return {1}; }\n};\n// the total number of different prime factors of n\ntemplate\
+    \ <class T>\nstruct LittleOmega {\n  static constexpr T f(std::uint64_t, short)\
+    \ { return 1; }\n  static std::vector<T> poly() { return {1}; }\n};\n// the sum\
+    \ of primes dividing n counting multiplicity\ntemplate <class T>\nstruct Sopfr\
+    \ {\n  static constexpr T f(std::uint64_t p, short e) { return p * e; }\n  static\
+    \ std::vector<T> poly() { return {0, 1}; }\n};\n// the sum of the distinct primes\
+    \ dividing n\ntemplate <class T>\nstruct Sopf {\n  static constexpr T f(std::uint64_t\
+    \ p, short) { return p; }\n  static std::vector<T> poly() { return {0, 1}; }\n\
+    };\n}  // namespace additive_functions\n#line 7 \"test/yosupo/sum_of_totient_function.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Mint = ModInt<998244353>;\n  using NT = NumberTheory;\n  using namespace\
     \ multiplicative_functions;\n  const int M = 1 << (200 / 9);\n  auto phi = NT::multiplicative_table<Mint>(M,\
@@ -183,7 +197,7 @@ data:
     \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/dujiao_sieve.hpp\"\
-    \n#include \"src/Math/NumberTheory.hpp\"\n#include \"src/Math/multiplicative_functions.hpp\"\
+    \n#include \"src/Math/NumberTheory.hpp\"\n#include \"src/Math/multiplicative_and_additive.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Mint = ModInt<998244353>;\n  using NT = NumberTheory;\n  using namespace\
     \ multiplicative_functions;\n  const int M = 1 << (200 / 9);\n  auto phi = NT::multiplicative_table<Mint>(M,\
@@ -197,11 +211,11 @@ data:
   - src/Math/ModInt.hpp
   - src/Math/dujiao_sieve.hpp
   - src/Math/NumberTheory.hpp
-  - src/Math/multiplicative_functions.hpp
+  - src/Math/multiplicative_and_additive.hpp
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
+  timestamp: '2021-02-03 13:01:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp

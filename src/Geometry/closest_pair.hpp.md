@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_5_A.test.cpp
     title: test/aoj/CGL_5_A.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6700\u8FD1\u70B9\u5BFE"
     links: []
@@ -281,7 +281,7 @@ data:
   path: src/Geometry/closest_pair.hpp
   requiredBy: []
   timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/CGL_5_A.test.cpp
 documentation_of: src/Geometry/closest_pair.hpp
