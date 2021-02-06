@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -9,7 +9,7 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: test/yukicoder/658.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
@@ -70,8 +70,8 @@ data:
     \  }\n  u64 x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title\
     \ \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528\
     : https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate <class mint, int\
-    \ LIM = (1 << 22)>\nstruct FormalPowerSeries : std::vector<mint> {\n  using std::vector<mint>::vector;\n\
-    \n private:\n  using FPS = FormalPowerSeries<mint, LIM>;\n  using m64_1 = ModInt<34703335751681,\
+    \ LIM = (1 << 22)>\nclass FormalPowerSeries : public std::vector<mint> {\n  using\
+    \ FPS = FormalPowerSeries<mint, LIM>;\n  using m64_1 = ModInt<34703335751681,\
     \ 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n  static inline m64_1 a1[LIM],\
     \ b1[LIM], c1[LIM];\n  static inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static\
     \ inline mint bf1[LIM], bf2[LIM];\n  template <class mod_t>\n  static inline void\
@@ -354,8 +354,8 @@ data:
   isVerificationFile: false
   path: src/Math/kitamasa.hpp
   requiredBy: []
-  timestamp: '2021-02-03 15:48:26+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-02-06 20:31:13+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/215.test.cpp

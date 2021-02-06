@@ -45,13 +45,11 @@ data:
     \ = true;; g++, isok = true) {\n    for (int i = divs.size() - 2; i && isok; i--,\
     \ isok &= pw != 1)\n      for (pw = 1, e = divs[i], b = g; e; e >>= 1, b = b *\
     \ b % p)\n        if (e & 1) pw = pw * b % p;\n    if (isok) return g;\n  }\n\
-    }\n\ntemplate <class T, class F>\nauto get_multiplicative(const F &f) {\n  return\
-    \ [f](std::uint64_t n) {\n    T ret = 1;\n    for (auto [p, e] : factorize_map(n))\
-    \ ret *= f(p, e);\n    return ret;\n  };\n}\n#line 4 \"test/yosupo/factorize.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int Q;\n  cin >> Q;\n  while (Q--) {\n    unsigned long long a;\n    cin >>\
-    \ a;\n    auto ans = factorize(a);\n    cout << ans.size();\n    for (auto x :\
-    \ ans) cout << \" \" << x;\n    cout << '\\n';\n  }\n  return 0;\n}\n"
+    }\n#line 4 \"test/yosupo/factorize.test.cpp\"\nusing namespace std;\n\nsigned\
+    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n\
+    \  while (Q--) {\n    unsigned long long a;\n    cin >> a;\n    auto ans = factorize(a);\n\
+    \    cout << ans.size();\n    for (auto x : ans) cout << \" \" << x;\n    cout\
+    \ << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include <bits/stdc++.h>\n\
     #include \"src/Math/factorize.hpp\"\nusing namespace std;\n\nsigned main() {\n\
     \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n  while (Q--)\
@@ -63,7 +61,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
+  timestamp: '2021-02-06 20:31:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/factorize.test.cpp

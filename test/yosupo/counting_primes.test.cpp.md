@@ -45,35 +45,36 @@ data:
     \ = sqrtN; (std::uint64_t)i >= q; i--)\n            s[k][i] -= (s[k][double(i)\
     \ / p] - tk) * pw;\n        }\n    }\n  for (int n = 1; n <= sqrtN; n++)\n   \
     \ for (int k = 0; k < d; k++)\n      small[n] += s[k][n] * poly[k], large[n] +=\
-    \ l[k][n] * poly[k];\n  return std::make_tuple(primes, small, large);\n}\n\ntemplate\
-    \ <class T>\nT polynomial_prime_sum(std::uint64_t N, const std::vector<T> &poly)\
-    \ {\n  return std::get<2>(polynomial_prime_sum_table<T>(N, poly))[1];\n}\n\nstd::uint64_t\
-    \ prime_count(std::uint64_t N) {\n  return polynomial_prime_sum<std::uint64_t>(N,\
-    \ {1});\n}\n\ntemplate <class T, class F>\nT additive_sum(std::uint64_t N, F f,\
-    \ std::vector<T> poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  auto\
-    \ [primes, s, l] = polynomial_prime_sum_table<T>(N, poly);\n  T ret = l[1];\n\
-    \  for (std::uint64_t d = 2, nN = N / d, nd; nN; nN = N / (d = nd))\n    ret +=\
-    \ (nN > sqrtN ? l[d] : s[nN]) * ((nd = N / nN + 1) - d);\n  for (std::uint64_t\
-    \ p : primes)\n    for (std::uint64_t pw = p * p, e = 2; pw <= N; e++, pw *= p)\n\
-    \      ret += (f(p, e) - f(p, e - 1)) * (N / pw);\n  return ret;\n}\n\ntemplate\
-    \ <class T = __int128_t, class F>\nT multiplicative_sum(std::uint64_t N, const\
-    \ F &f, const std::vector<T> &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n\
-    \  auto [primes, s, l] = polynomial_prime_sum_table<T>(N, poly);\n  for (auto\
-    \ it = primes.rbegin(); it != primes.rend(); it++) {\n    std::uint64_t p = *it,\
-    \ M = N / p, q = p * p;\n    int t = sqrtN / p, u = min(sqrtN, N / q);\n    T\
-    \ tk = s[p - 1];\n    for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) /\
-    \ p] - tk) * f(p, 1);\n    for (int i = u; i > t; i--) l[i] += (s[double(M) /\
-    \ i] - tk) * f(p, 1);\n    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk)\
-    \ * f(p, 1);\n  }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto\
-    \ dfs = [&](auto rc, std::uint64_t n, std::size_t bg, T cf) -> T {\n    if (cf\
-    \ == T(0)) return T(0);\n    T ret = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n\
-    \    for (auto i = bg; i < primes.size(); i++) {\n      std::uint64_t p = primes[i],\
-    \ q = p * p, nn = double(n) / q;\n      if (!nn) break;\n      for (int e = 2;\
-    \ nn; nn = double(nn) / p, e++)\n        ret += rc(rc, nn, i + 1, cf * (f(p, e)\
-    \ - f(p, 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n  return dfs(dfs,\
-    \ N, 0, 1);\n}\n#line 4 \"test/yosupo/counting_primes.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long\
-    \ long N;\n  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n}\n"
+    \ l[k][n] * poly[k];\n  return std::make_tuple(primes, small, large);\n}\n\nauto\
+    \ prime_count_table(std::uint64_t N) {\n  return polynomial_prime_sum_table<std::uint64_t>(N,\
+    \ {1});\n}\n\nstd::uint64_t prime_count(std::uint64_t N) {\n  return std::get<2>(prime_count_table(N))[1];\n\
+    }\n\ntemplate <class T>\nT polynomial_prime_sum(std::uint64_t N, const std::vector<T>\
+    \ &poly) {\n  return std::get<2>(polynomial_prime_sum_table<T>(N, poly))[1];\n\
+    }\n\ntemplate <class T, class F>\nT additive_sum(std::uint64_t N, F f, std::vector<T>\
+    \ poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  auto [primes, s, l]\
+    \ = polynomial_prime_sum_table<T>(N, poly);\n  T ret = l[1];\n  for (std::uint64_t\
+    \ d = 2, nN = N / d, nd; nN; nN = N / (d = nd))\n    ret += (nN > sqrtN ? l[d]\
+    \ : s[nN]) * ((nd = N / nN + 1) - d);\n  for (std::uint64_t p : primes)\n    for\
+    \ (std::uint64_t pw = p * p, e = 2; pw <= N; e++, pw *= p)\n      ret += (f(p,\
+    \ e) - f(p, e - 1)) * (N / pw);\n  return ret;\n}\n\ntemplate <class T = __int128_t,\
+    \ class F>\nT multiplicative_sum(std::uint64_t N, const F &f, const std::vector<T>\
+    \ &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  auto [primes, s, l]\
+    \ = polynomial_prime_sum_table<T>(N, poly);\n  for (auto it = primes.rbegin();\
+    \ it != primes.rend(); it++) {\n    std::uint64_t p = *it, M = N / p, q = p *\
+    \ p;\n    int t = sqrtN / p, u = min(sqrtN, N / q);\n    T tk = s[p - 1];\n  \
+    \  for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) / p] - tk) * f(p, 1);\n\
+    \    for (int i = u; i > t; i--) l[i] += (s[double(M) / i] - tk) * f(p, 1);\n\
+    \    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk) * f(p, 1);\n  }\n  for\
+    \ (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto dfs = [&](auto rc, std::uint64_t\
+    \ n, std::size_t bg, T cf) -> T {\n    if (cf == T(0)) return T(0);\n    T ret\
+    \ = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n    for (auto i = bg; i < primes.size();\
+    \ i++) {\n      std::uint64_t p = primes[i], q = p * p, nn = double(n) / q;\n\
+    \      if (!nn) break;\n      for (int e = 2; nn; nn = double(nn) / p, e++)\n\
+    \        ret += rc(rc, nn, i + 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n \
+    \   }\n    return ret;\n  };\n  return dfs(dfs, N, 0, 1);\n}\n#line 4 \"test/yosupo/counting_primes.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  long long N;\n  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/prime_count.hpp\"\nusing namespace std;\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long\
@@ -83,7 +84,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-02-03 15:48:26+09:00'
+  timestamp: '2021-02-06 20:31:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/counting_primes.test.cpp

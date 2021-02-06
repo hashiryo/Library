@@ -42,9 +42,7 @@ data:
     \ = true;; g++, isok = true) {\n    for (int i = divs.size() - 2; i && isok; i--,\
     \ isok &= pw != 1)\n      for (pw = 1, e = divs[i], b = g; e; e >>= 1, b = b *\
     \ b % p)\n        if (e & 1) pw = pw * b % p;\n    if (isok) return g;\n  }\n\
-    }\n\ntemplate <class T, class F>\nauto get_multiplicative(const F &f) {\n  return\
-    \ [f](std::uint64_t n) {\n    T ret = 1;\n    for (auto [p, e] : factorize_map(n))\
-    \ ret *= f(p, e);\n    return ret;\n  };\n}\n"
+    }\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u9AD8\u901F\u7D20\
     \u56E0\u6570\u5206\u89E3\n * @category \u6570\u5B66\n *  O(N^(1/4))\n * \u3064\
     \u3044\u3067\u306B\u539F\u59CB\u6839\u63A2\u7D22\n */\n\n// BEGIN CUT HERE\n\n\
@@ -75,14 +73,12 @@ data:
     \ = true;; g++, isok = true) {\n    for (int i = divs.size() - 2; i && isok; i--,\
     \ isok &= pw != 1)\n      for (pw = 1, e = divs[i], b = g; e; e >>= 1, b = b *\
     \ b % p)\n        if (e & 1) pw = pw * b % p;\n    if (isok) return g;\n  }\n\
-    }\n\ntemplate <class T, class F>\nauto get_multiplicative(const F &f) {\n  return\
-    \ [f](std::uint64_t n) {\n    T ret = 1;\n    for (auto [p, e] : factorize_map(n))\
-    \ ret *= f(p, e);\n    return ret;\n  };\n}\n"
+    }\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/factorize.hpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
+  timestamp: '2021-02-06 20:31:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/factorize.test.cpp

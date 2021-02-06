@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/maximum_independent_set.test.cpp
     title: test/yosupo/maximum_independent_set.test.cpp
   - icon: ':x:'
@@ -11,7 +11,7 @@ data:
     title: test/yukicoder/382.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
     links:
@@ -86,7 +86,7 @@ data:
   path: src/Graph/MaxClique.hpp
   requiredBy: []
   timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/maximum_independent_set.test.cpp
   - test/yukicoder/382.test.cpp
