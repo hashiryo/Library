@@ -39,12 +39,12 @@ data:
     \ d; k++)\n    for (int n = 1; n <= sqrtN; n++) s[k][n] -= 1, l[k][n] -= 1;\n\
     \  for (int p = 2, k = 0; p <= sqrtN; p++, k = 0)\n    if (s[0][p] > s[0][p -\
     \ 1]) {\n      primes.emplace_back(p);\n      std::uint64_t q = std::uint64_t(p)\
-    \ * p, M = N / p;\n      int t = sqrtN / p, u = min<std::uint64_t>(sqrtN, N /\
-    \ q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k] !=\
-    \ T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t; i++)\
-    \ l[k][i] -= (l[k][i * p] - tk) * pw;\n          for (int i = t + 1; i <= u; i++)\n\
-    \            l[k][i] -= (s[k][double(M) / i] - tk) * pw;\n          for (int i\
-    \ = sqrtN; (std::uint64_t)i >= q; i--)\n            s[k][i] -= (s[k][double(i)\
+    \ * p, M = N / p;\n      int t = sqrtN / p, u = std::min<std::uint64_t>(sqrtN,\
+    \ N / q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k]\
+    \ != T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t;\
+    \ i++) l[k][i] -= (l[k][i * p] - tk) * pw;\n          for (int i = t + 1; i <=\
+    \ u; i++)\n            l[k][i] -= (s[k][double(M) / i] - tk) * pw;\n         \
+    \ for (int i = sqrtN; (std::uint64_t)i >= q; i--)\n            s[k][i] -= (s[k][double(i)\
     \ / p] - tk) * pw;\n        }\n    }\n  for (int n = 1; n <= sqrtN; n++)\n   \
     \ for (int k = 0; k < d; k++)\n      small[n] += s[k][n] * poly[k], large[n] +=\
     \ l[k][n] * poly[k];\n  return std::make_tuple(primes, small, large);\n}\n\nauto\
@@ -63,17 +63,18 @@ data:
     \ &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  auto [primes, s, l]\
     \ = polynomial_prime_sum_table<T>(N, poly);\n  for (auto it = primes.rbegin();\
     \ it != primes.rend(); it++) {\n    std::uint64_t p = *it, M = N / p, q = p *\
-    \ p;\n    int t = sqrtN / p, u = min(sqrtN, N / q);\n    T tk = s[p - 1];\n  \
-    \  for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) / p] - tk) * f(p, 1);\n\
-    \    for (int i = u; i > t; i--) l[i] += (s[double(M) / i] - tk) * f(p, 1);\n\
-    \    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk) * f(p, 1);\n  }\n  for\
-    \ (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto dfs = [&](auto rc, std::uint64_t\
-    \ n, std::size_t bg, T cf) -> T {\n    if (cf == T(0)) return T(0);\n    T ret\
-    \ = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n    for (auto i = bg; i < primes.size();\
-    \ i++) {\n      std::uint64_t p = primes[i], q = p * p, nn = double(n) / q;\n\
-    \      if (!nn) break;\n      for (int e = 2; nn; nn = double(nn) / p, e++)\n\
-    \        ret += rc(rc, nn, i + 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n \
-    \   }\n    return ret;\n  };\n  return dfs(dfs, N, 0, 1);\n}\n"
+    \ p;\n    int t = sqrtN / p, u = std::min(sqrtN, N / q);\n    T tk = s[p - 1];\n\
+    \    for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) / p] - tk) * f(p,\
+    \ 1);\n    for (int i = u; i > t; i--) l[i] += (s[double(M) / i] - tk) * f(p,\
+    \ 1);\n    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk) * f(p, 1);\n \
+    \ }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto dfs = [&](auto\
+    \ rc, std::uint64_t n, std::size_t bg, T cf) -> T {\n    if (cf == T(0)) return\
+    \ T(0);\n    T ret = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n    for (auto\
+    \ i = bg; i < primes.size(); i++) {\n      std::uint64_t p = primes[i], q = p\
+    \ * p, nn = double(n) / q;\n      if (!nn) break;\n      for (int e = 2; nn; nn\
+    \ = double(nn) / p, e++)\n        ret += rc(rc, nn, i + 1, cf * (f(p, e) - f(p,\
+    \ 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n  return dfs(dfs, N, 0, 1);\n\
+    }\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u7D20\u6570\u30AB\
     \u30A6\u30F3\u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\u95A2\u6570\u3084\u52A0\u6CD5\
     \u7684\u95A2\u6570\u306E\u548C\u3082\u3042\u308A\n * @category \u6570\u5B66\n\
@@ -95,12 +96,12 @@ data:
     \ d; k++)\n    for (int n = 1; n <= sqrtN; n++) s[k][n] -= 1, l[k][n] -= 1;\n\
     \  for (int p = 2, k = 0; p <= sqrtN; p++, k = 0)\n    if (s[0][p] > s[0][p -\
     \ 1]) {\n      primes.emplace_back(p);\n      std::uint64_t q = std::uint64_t(p)\
-    \ * p, M = N / p;\n      int t = sqrtN / p, u = min<std::uint64_t>(sqrtN, N /\
-    \ q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k] !=\
-    \ T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t; i++)\
-    \ l[k][i] -= (l[k][i * p] - tk) * pw;\n          for (int i = t + 1; i <= u; i++)\n\
-    \            l[k][i] -= (s[k][double(M) / i] - tk) * pw;\n          for (int i\
-    \ = sqrtN; (std::uint64_t)i >= q; i--)\n            s[k][i] -= (s[k][double(i)\
+    \ * p, M = N / p;\n      int t = sqrtN / p, u = std::min<std::uint64_t>(sqrtN,\
+    \ N / q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k]\
+    \ != T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t;\
+    \ i++) l[k][i] -= (l[k][i * p] - tk) * pw;\n          for (int i = t + 1; i <=\
+    \ u; i++)\n            l[k][i] -= (s[k][double(M) / i] - tk) * pw;\n         \
+    \ for (int i = sqrtN; (std::uint64_t)i >= q; i--)\n            s[k][i] -= (s[k][double(i)\
     \ / p] - tk) * pw;\n        }\n    }\n  for (int n = 1; n <= sqrtN; n++)\n   \
     \ for (int k = 0; k < d; k++)\n      small[n] += s[k][n] * poly[k], large[n] +=\
     \ l[k][n] * poly[k];\n  return std::make_tuple(primes, small, large);\n}\n\nauto\
@@ -119,22 +120,23 @@ data:
     \ &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  auto [primes, s, l]\
     \ = polynomial_prime_sum_table<T>(N, poly);\n  for (auto it = primes.rbegin();\
     \ it != primes.rend(); it++) {\n    std::uint64_t p = *it, M = N / p, q = p *\
-    \ p;\n    int t = sqrtN / p, u = min(sqrtN, N / q);\n    T tk = s[p - 1];\n  \
-    \  for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) / p] - tk) * f(p, 1);\n\
-    \    for (int i = u; i > t; i--) l[i] += (s[double(M) / i] - tk) * f(p, 1);\n\
-    \    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk) * f(p, 1);\n  }\n  for\
-    \ (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto dfs = [&](auto rc, std::uint64_t\
-    \ n, std::size_t bg, T cf) -> T {\n    if (cf == T(0)) return T(0);\n    T ret\
-    \ = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n    for (auto i = bg; i < primes.size();\
-    \ i++) {\n      std::uint64_t p = primes[i], q = p * p, nn = double(n) / q;\n\
-    \      if (!nn) break;\n      for (int e = 2; nn; nn = double(nn) / p, e++)\n\
-    \        ret += rc(rc, nn, i + 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n \
-    \   }\n    return ret;\n  };\n  return dfs(dfs, N, 0, 1);\n}\n"
+    \ p;\n    int t = sqrtN / p, u = std::min(sqrtN, N / q);\n    T tk = s[p - 1];\n\
+    \    for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) / p] - tk) * f(p,\
+    \ 1);\n    for (int i = u; i > t; i--) l[i] += (s[double(M) / i] - tk) * f(p,\
+    \ 1);\n    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk) * f(p, 1);\n \
+    \ }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto dfs = [&](auto\
+    \ rc, std::uint64_t n, std::size_t bg, T cf) -> T {\n    if (cf == T(0)) return\
+    \ T(0);\n    T ret = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n    for (auto\
+    \ i = bg; i < primes.size(); i++) {\n      std::uint64_t p = primes[i], q = p\
+    \ * p, nn = double(n) / q;\n      if (!nn) break;\n      for (int e = 2; nn; nn\
+    \ = double(nn) / p, e++)\n        ret += rc(rc, nn, i + 1, cf * (f(p, e) - f(p,\
+    \ 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n  return dfs(dfs, N, 0, 1);\n\
+    }\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/prime_count.hpp
   requiredBy: []
-  timestamp: '2021-02-06 20:31:13+09:00'
+  timestamp: '2021-02-06 23:51:26+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/counting_primes.test.cpp
