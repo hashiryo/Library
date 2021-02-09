@@ -174,7 +174,7 @@ data:
     - icon: ':x:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/SubproductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
     - icon: ':heavy_check_mark:'
@@ -320,7 +320,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2514.test.cpp
       title: test/aoj/2514.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
     - icon: ':heavy_check_mark:'
@@ -622,7 +622,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/polynomial_interpolation.test.cpp
       title: test/yosupo/polynomial_interpolation.test.cpp
     - icon: ':heavy_check_mark:'

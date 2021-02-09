@@ -94,12 +94,10 @@ data:
     \  if (++rank == n) break;\n    }\n    return std::make_pair(rank, rank == n ?\
     \ det : K(0));\n  }\n  static auto row_reduction(std::vector<std::vector<bool>>\
     \ &a,\n                            int lim = 1 << 30) {\n    int n = a.size(),\
-    \ m = a[0].size(), rank;\n    if (m < 512) {\n      std::vector<std::bitset<512>>\
-    \ b(n);\n      subst(b, a, n, m), rank = row_reduction<512>(b, lim), subst(a,\
-    \ b, n, m);\n    } else if (m < 1024) {\n      std::vector<std::bitset<1024>>\
+    \ m = a[0].size(), rank;\n    if (m < 1024) {\n      std::vector<std::bitset<1024>>\
     \ b(n);\n      subst(b, a, n, m), rank = row_reduction<1024>(b, lim), subst(a,\
-    \ b, n, m);\n    } else {\n      std::vector<std::bitset<2048>> b(n);\n      subst(b,\
-    \ a, n, m), rank = row_reduction<2048>(b, lim), subst(a, b, n, m);\n    }\n  \
+    \ b, n, m);\n    } else {\n      std::vector<std::bitset<4096>> b(n);\n      subst(b,\
+    \ a, n, m), rank = row_reduction<4096>(b, lim), subst(a, b, n, m);\n    }\n  \
     \  return std::make_pair(rank, rank == n);\n  }\n  template <class K>\n  static\
     \ std::pair<std::vector<K>, std::vector<std::vector<K>>> linear_equation(\n  \
     \    std::vector<std::vector<K>> a, const std::vector<K> &b) {\n    int n = a.size(),\
@@ -141,7 +139,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2021-02-09 12:55:54+09:00'
+  timestamp: '2021-02-09 19:48:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp

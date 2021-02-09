@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   _extendedRequiredBy: []
@@ -331,7 +331,7 @@ data:
     \    auto rec = [&](auto dfs, int l, int r, int k) -> poly {\n      if (r - l\
     \ == 1) return poly({ys[l] / vs[l]});\n      return buf[k * 2 + 1] * dfs(dfs,\
     \ l, (l + r) / 2, k * 2)\n             + buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
-    \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.retize(n),\
+    \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.resize(n),\
     \ ret;\n  }\n};\n#line 6 \"test/yosupo/multipoint_evaluation.test.cpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n \
@@ -356,7 +356,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/multipoint_evaluation.test.cpp
   requiredBy: []
-  timestamp: '2021-02-09 12:55:54+09:00'
+  timestamp: '2021-02-09 19:48:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/multipoint_evaluation.test.cpp

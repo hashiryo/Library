@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\
       \u9593"
@@ -332,7 +332,7 @@ data:
     \    auto rec = [&](auto dfs, int l, int r, int k) -> poly {\n      if (r - l\
     \ == 1) return poly({ys[l] / vs[l]});\n      return buf[k * 2 + 1] * dfs(dfs,\
     \ l, (l + r) / 2, k * 2)\n             + buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
-    \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.retize(n),\
+    \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.resize(n),\
     \ ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
     #include \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u8907\u6570\u306E\
@@ -354,7 +354,7 @@ data:
     \    auto rec = [&](auto dfs, int l, int r, int k) -> poly {\n      if (r - l\
     \ == 1) return poly({ys[l] / vs[l]});\n      return buf[k * 2 + 1] * dfs(dfs,\
     \ l, (l + r) / 2, k * 2)\n             + buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
-    \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.retize(n),\
+    \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.resize(n),\
     \ ret;\n  }\n};\n"
   dependsOn:
   - src/Math/ModInt.hpp
@@ -362,8 +362,8 @@ data:
   isVerificationFile: false
   path: src/Math/SubproductTree.hpp
   requiredBy: []
-  timestamp: '2021-02-09 12:55:54+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-02-09 19:48:43+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp

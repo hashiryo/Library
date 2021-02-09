@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':x:'
@@ -63,12 +63,10 @@ data:
     \      if (++rank == n) break;\n    }\n    return std::make_pair(rank, rank ==\
     \ n ? det : K(0));\n  }\n  static auto row_reduction(std::vector<std::vector<bool>>\
     \ &a,\n                            int lim = 1 << 30) {\n    int n = a.size(),\
-    \ m = a[0].size(), rank;\n    if (m < 512) {\n      std::vector<std::bitset<512>>\
-    \ b(n);\n      subst(b, a, n, m), rank = row_reduction<512>(b, lim), subst(a,\
-    \ b, n, m);\n    } else if (m < 1024) {\n      std::vector<std::bitset<1024>>\
+    \ m = a[0].size(), rank;\n    if (m < 1024) {\n      std::vector<std::bitset<1024>>\
     \ b(n);\n      subst(b, a, n, m), rank = row_reduction<1024>(b, lim), subst(a,\
-    \ b, n, m);\n    } else {\n      std::vector<std::bitset<2048>> b(n);\n      subst(b,\
-    \ a, n, m), rank = row_reduction<2048>(b, lim), subst(a, b, n, m);\n    }\n  \
+    \ b, n, m);\n    } else {\n      std::vector<std::bitset<4096>> b(n);\n      subst(b,\
+    \ a, n, m), rank = row_reduction<4096>(b, lim), subst(a, b, n, m);\n    }\n  \
     \  return std::make_pair(rank, rank == n);\n  }\n  template <class K>\n  static\
     \ std::pair<std::vector<K>, std::vector<std::vector<K>>> linear_equation(\n  \
     \    std::vector<std::vector<K>> a, const std::vector<K> &b) {\n    int n = a.size(),\
@@ -114,12 +112,10 @@ data:
     \      if (++rank == n) break;\n    }\n    return std::make_pair(rank, rank ==\
     \ n ? det : K(0));\n  }\n  static auto row_reduction(std::vector<std::vector<bool>>\
     \ &a,\n                            int lim = 1 << 30) {\n    int n = a.size(),\
-    \ m = a[0].size(), rank;\n    if (m < 512) {\n      std::vector<std::bitset<512>>\
-    \ b(n);\n      subst(b, a, n, m), rank = row_reduction<512>(b, lim), subst(a,\
-    \ b, n, m);\n    } else if (m < 1024) {\n      std::vector<std::bitset<1024>>\
+    \ m = a[0].size(), rank;\n    if (m < 1024) {\n      std::vector<std::bitset<1024>>\
     \ b(n);\n      subst(b, a, n, m), rank = row_reduction<1024>(b, lim), subst(a,\
-    \ b, n, m);\n    } else {\n      std::vector<std::bitset<2048>> b(n);\n      subst(b,\
-    \ a, n, m), rank = row_reduction<2048>(b, lim), subst(a, b, n, m);\n    }\n  \
+    \ b, n, m);\n    } else {\n      std::vector<std::bitset<4096>> b(n);\n      subst(b,\
+    \ a, n, m), rank = row_reduction<4096>(b, lim), subst(a, b, n, m);\n    }\n  \
     \  return std::make_pair(rank, rank == n);\n  }\n  template <class K>\n  static\
     \ std::pair<std::vector<K>, std::vector<std::vector<K>>> linear_equation(\n  \
     \    std::vector<std::vector<K>> a, const std::vector<K> &b) {\n    int n = a.size(),\
@@ -132,12 +128,12 @@ data:
     \      if (piv[j] != -1) continue;\n      std::vector<K> x(m, K(0));\n      x[j]\
     \ = K(-1);\n      for (int k = 0; k < j; ++k)\n        if (piv[k] != -1) x[k]\
     \ = a[piv[k]][j];\n      d.emplace_back(x);\n    }\n    return {c, d};\n  }\n\
-    };\n"
+    };"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/GaussianElimination.hpp
   requiredBy: []
-  timestamp: '2021-02-09 12:55:54+09:00'
+  timestamp: '2021-02-09 19:48:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp

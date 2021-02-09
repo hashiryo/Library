@@ -38,7 +38,7 @@ data:
     \          s[k][n] -= stir[j] * s[j][n], l[k][n] -= stir[j] * l[j][n];\n    }\n\
     \  }\n  for (int k = 0; k < d; k++)\n    for (int n = 1; n <= sqrtN; n++) s[k][n]\
     \ -= 1, l[k][n] -= 1;\n  for (int p = 2, k = 0; p <= sqrtN; p++, k = 0)\n    if\
-    \ (s[0][p] > s[0][p - 1]) {\n      primes.emplace_back(p);\n      std::uint64_t\
+    \ (s[0][p] != s[0][p - 1]) {\n      primes.emplace_back(p);\n      std::uint64_t\
     \ q = std::uint64_t(p) * p, M = N / p;\n      int t = sqrtN / p, u = std::min<std::uint64_t>(sqrtN,\
     \ N / q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k]\
     \ != T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t;\
@@ -96,7 +96,7 @@ data:
     \          s[k][n] -= stir[j] * s[j][n], l[k][n] -= stir[j] * l[j][n];\n    }\n\
     \  }\n  for (int k = 0; k < d; k++)\n    for (int n = 1; n <= sqrtN; n++) s[k][n]\
     \ -= 1, l[k][n] -= 1;\n  for (int p = 2, k = 0; p <= sqrtN; p++, k = 0)\n    if\
-    \ (s[0][p] > s[0][p - 1]) {\n      primes.emplace_back(p);\n      std::uint64_t\
+    \ (s[0][p] != s[0][p - 1]) {\n      primes.emplace_back(p);\n      std::uint64_t\
     \ q = std::uint64_t(p) * p, M = N / p;\n      int t = sqrtN / p, u = std::min<std::uint64_t>(sqrtN,\
     \ N / q);\n      for (T pw = 1; k < d; k++, pw *= p)\n        if (!k || poly[k]\
     \ != T(0)) {\n          T tk = s[k][p - 1];\n          for (int i = 1; i <= t;\
@@ -138,7 +138,7 @@ data:
   isVerificationFile: false
   path: src/Math/prime_count.hpp
   requiredBy: []
-  timestamp: '2021-02-08 00:42:37+09:00'
+  timestamp: '2021-02-09 19:48:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/counting_primes.test.cpp
