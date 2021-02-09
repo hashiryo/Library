@@ -3,18 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
     links:
@@ -86,7 +86,7 @@ data:
   path: src/Math/multiplicative_and_additive.hpp
   requiredBy: []
   timestamp: '2021-02-03 13:01:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp

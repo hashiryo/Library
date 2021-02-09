@@ -6,15 +6,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u884C\u5217"
     links: []
@@ -35,23 +35,23 @@ data:
     \ k++) ret[i][j] += (*this)[i][k] * r[k][j];\n    return ret;\n  }\n  std::array<R,\
     \ N> operator*(const std::array<R, M> &r) const {\n    std::array<R, N> ret;\n\
     \    for (int i = 0; i < N; i++)\n      for (int j = 0; j < M; j++) ret[i] +=\
-    \ (*this)[i][j] * r[j];\n    return ret;\n  }\n  std::vector<std::vector<R>> to_vec()\
-    \ const {\n    std::vector<std::vector<R>> ret(N, std::vector<R>(M));\n    for\
-    \ (int i = 0; i < N; i++)\n      for (int j = 0; j < M; j++) ret[i][j] = (*this)[i][j];\n\
-    \    return ret;\n  }\n};\n\ntemplate <int N, int M>\nstruct Matrix<bool, N, M>\
-    \ : public std::array<std::bitset<M>, N> {\n  static Matrix O() { return Matrix{};\
-    \ }\n  Matrix &operator+=(const Matrix &r) {\n    for (int i = 0; i < N; i++)\
-    \ (*this)[i] ^= r[i];\n    return *this;\n  }\n  Matrix operator+(const Matrix\
-    \ &r) const { return Matrix(*this) += r; }\n  template <int L>\n  Matrix<bool,\
+    \ (*this)[i][j] * r[j];\n    return ret;\n  }\n  std::vector<std::vector<R>> to_vec(int\
+    \ n, int m) const {\n    std::vector<std::vector<R>> ret(n, std::vector<R>(m));\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) ret[i][j]\
+    \ = (*this)[i][j];\n    return ret;\n  }\n};\n\ntemplate <int N, int M>\nstruct\
+    \ Matrix<bool, N, M> : public std::array<std::bitset<M>, N> {\n  static Matrix\
+    \ O() { return Matrix{}; }\n  Matrix &operator+=(const Matrix &r) {\n    for (int\
+    \ i = 0; i < N; i++) (*this)[i] ^= r[i];\n    return *this;\n  }\n  Matrix operator+(const\
+    \ Matrix &r) const { return Matrix(*this) += r; }\n  template <int L>\n  Matrix<bool,\
     \ N, L> operator*(const Matrix<bool, M, L> &r) const {\n    Matrix<bool, L, M>\
     \ t;\n    Matrix<bool, N, L> ret;\n    for (int i = 0; i < M; i++)\n      for\
     \ (int j = 0; j < L; j++) t[j][i] = r[i][j];\n    for (int i = 0; i < N; i++)\n\
     \      for (int j = 0; j < L; j++) ret[i][j] = ((*this)[i] & t[j]).count() & 1;\n\
     \    return ret;\n  }\n  std::bitset<N> operator*(const std::bitset<N> &r) const\
     \ {\n    std::bitset<N> ret;\n    for (int i = 0; i < N; i++) ret[i] = ((*this)[i]\
-    \ & r).count() & 1;\n    return ret;\n  }\n  std::vector<std::vector<bool>> to_vec()\
-    \ const {\n    std::vector<std::vector<bool>> ret(N, std::vector<bool>(M));\n\
-    \    for (int i = 0; i < N; i++)\n      for (int j = 0; j < M; j++) ret[i][j]\
+    \ & r).count() & 1;\n    return ret;\n  }\n  std::vector<std::vector<bool>> to_vec(int\
+    \ n, int m) const {\n    std::vector<std::vector<bool>> ret(n, std::vector<bool>(m));\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) ret[i][j]\
     \ = (*this)[i][j];\n    return ret;\n  }\n};\n\ntemplate <class R, int N>\nstruct\
     \ SquareMatrix : public Matrix<R, N, N> {\n  using Matrix<R, N, N>::Matrix;\n\
     \  SquareMatrix(Matrix<R, N, N> m) { *this = m; }\n  template <typename T = R,\
@@ -83,8 +83,8 @@ data:
     \  }\n  std::array<R, N> operator*(const std::array<R, M> &r) const {\n    std::array<R,\
     \ N> ret;\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < M; j++)\
     \ ret[i] += (*this)[i][j] * r[j];\n    return ret;\n  }\n  std::vector<std::vector<R>>\
-    \ to_vec() const {\n    std::vector<std::vector<R>> ret(N, std::vector<R>(M));\n\
-    \    for (int i = 0; i < N; i++)\n      for (int j = 0; j < M; j++) ret[i][j]\
+    \ to_vec(int n, int m) const {\n    std::vector<std::vector<R>> ret(n, std::vector<R>(m));\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) ret[i][j]\
     \ = (*this)[i][j];\n    return ret;\n  }\n};\n\ntemplate <int N, int M>\nstruct\
     \ Matrix<bool, N, M> : public std::array<std::bitset<M>, N> {\n  static Matrix\
     \ O() { return Matrix{}; }\n  Matrix &operator+=(const Matrix &r) {\n    for (int\
@@ -96,9 +96,9 @@ data:
     \      for (int j = 0; j < L; j++) ret[i][j] = ((*this)[i] & t[j]).count() & 1;\n\
     \    return ret;\n  }\n  std::bitset<N> operator*(const std::bitset<N> &r) const\
     \ {\n    std::bitset<N> ret;\n    for (int i = 0; i < N; i++) ret[i] = ((*this)[i]\
-    \ & r).count() & 1;\n    return ret;\n  }\n  std::vector<std::vector<bool>> to_vec()\
-    \ const {\n    std::vector<std::vector<bool>> ret(N, std::vector<bool>(M));\n\
-    \    for (int i = 0; i < N; i++)\n      for (int j = 0; j < M; j++) ret[i][j]\
+    \ & r).count() & 1;\n    return ret;\n  }\n  std::vector<std::vector<bool>> to_vec(int\
+    \ n, int m) const {\n    std::vector<std::vector<bool>> ret(n, std::vector<bool>(m));\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) ret[i][j]\
     \ = (*this)[i][j];\n    return ret;\n  }\n};\n\ntemplate <class R, int N>\nstruct\
     \ SquareMatrix : public Matrix<R, N, N> {\n  using Matrix<R, N, N>::Matrix;\n\
     \  SquareMatrix(Matrix<R, N, N> m) { *this = m; }\n  template <typename T = R,\
@@ -117,8 +117,8 @@ data:
   isVerificationFile: false
   path: src/Math/Matrix.hpp
   requiredBy: []
-  timestamp: '2021-02-09 12:55:54+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-02-10 00:07:41+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1340.test.cpp
   - test/aoj/2397.test.cpp

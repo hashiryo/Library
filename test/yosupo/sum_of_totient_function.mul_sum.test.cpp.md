@@ -4,17 +4,17 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/multiplicative_and_additive.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/prime_count.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -107,50 +107,49 @@ data:
     \ (std::uint64_t pw = p * p, e = 2; pw <= N; e++, pw *= p)\n      ret += (f(p,\
     \ e) - f(p, e - 1)) * (N / pw);\n  return ret;\n}\n\ntemplate <class T = __int128_t,\
     \ class F>\nT multiplicative_sum(std::uint64_t N, const F &f, const std::vector<T>\
-    \ &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  auto [primes, s, l]\
-    \ = polynomial_prime_sum_table<T>(N, poly);\n  for (auto it = primes.rbegin();\
-    \ it != primes.rend(); it++) {\n    std::uint64_t p = *it, M = N / p, q = p *\
-    \ p;\n    int t = sqrtN / p, u = std::min(sqrtN, N / q);\n    T tk = s[p - 1];\n\
-    \    for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) / p] - tk) * f(p,\
-    \ 1);\n    for (int i = u; i > t; i--) l[i] += (s[double(M) / i] - tk) * f(p,\
-    \ 1);\n    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk) * f(p, 1);\n \
-    \ }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto dfs = [&, primes\
-    \ = primes, s = s, l = l](auto rc, std::uint64_t n,\n                        \
-    \                        std::size_t bg, T cf) -> T {\n    if (cf == T(0)) return\
-    \ T(0);\n    T ret = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n    for (auto\
-    \ i = bg; i < primes.size(); i++) {\n      std::uint64_t p = primes[i], q = p\
-    \ * p, nn = double(n) / q;\n      if (!nn) break;\n      for (int e = 2; nn; nn\
-    \ = double(nn) / p, e++)\n        ret += rc(rc, nn, i + 1, cf * (f(p, e) - f(p,\
-    \ 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n  return dfs(dfs, N, 0, 1);\n\
-    }\n#line 3 \"src/Math/multiplicative_and_additive.hpp\"\n/**\n * @title \u4E57\
-    \u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570\n * @category \u6570\
-    \u5B66\n * @see https://en.wikipedia.org/wiki/Arithmetic_function\n */\n\n// BEGIN\
-    \ CUT HERE\n\nnamespace multiplicative_functions {\ntemplate <class T>\nstruct\
-    \ Totient {\n  static constexpr T f(std::uint64_t p, short e) {\n    T ret = p\
-    \ - 1;\n    while (e-- > 1) ret *= p;\n    return ret;\n  }\n  static std::vector<T>\
-    \ poly() { return {-1, 1}; }\n};\ntemplate <class T>\nstruct Moebius {\n  static\
-    \ constexpr T f(std::uint64_t, short e) { return (e == 0) - (e == 1); }\n  static\
-    \ std::vector<T> poly() { return {-1}; }\n};\ntemplate <class T>\nstruct Liouville\
-    \ {\n  static constexpr T f(std::uint64_t, short e) { return e & 1 ? -1 : 1; }\n\
-    \  static std::vector<T> poly() { return {-1}; }\n};\ntemplate <class T, std::uint64_t\
-    \ k>\nstruct Divisor {\n  static constexpr T f(std::uint64_t p, short e) {\n \
-    \   T ret = 0, pk = 1, pkpw = 1, b = p;\n    for (std::uint64_t kk = k; kk; kk\
-    \ >>= 1, b *= b)\n      if (kk & 1) pk *= b;\n    for (short i = 0; i <= e; i++,\
-    \ pkpw *= pk) ret += pkpw;\n    return ret;\n  }\n  static std::vector<T> poly()\
-    \ {\n    std::vector<T> ret(k + 1, 0);\n    ret[0] += 1, ret[k] += 1;\n    return\
-    \ ret;\n  }\n};\ntemplate <class T>\nstruct Dedekind {\n  static constexpr T f(std::uint64_t\
-    \ p, short e) {\n    T ret = p + 1;\n    while (e-- > 1) ret *= p;\n    return\
-    \ ret;\n  }\n  static std::vector<T> poly() { return {1, 1}; }\n};\n}  // namespace\
-    \ multiplicative_functions\n\nnamespace additive_functions {\n// the total number\
-    \ of prime factors of n\ntemplate <class T>\nstruct BigOmega {\n  static constexpr\
-    \ T f(std::uint64_t, short e) { return e; }\n  static std::vector<T> poly() {\
-    \ return {1}; }\n};\n// the total number of different prime factors of n\ntemplate\
-    \ <class T>\nstruct LittleOmega {\n  static constexpr T f(std::uint64_t, short)\
-    \ { return 1; }\n  static std::vector<T> poly() { return {1}; }\n};\n// the sum\
-    \ of primes dividing n counting multiplicity\ntemplate <class T>\nstruct Sopfr\
-    \ {\n  static constexpr T f(std::uint64_t p, short e) { return p * e; }\n  static\
-    \ std::vector<T> poly() { return {0, 1}; }\n};\n// the sum of the distinct primes\
-    \ dividing n\ntemplate <class T>\nstruct Sopf {\n  static constexpr T f(std::uint64_t\
+    \ &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  std::vector<int> primes;\n\
+    \  std::vector<T> s, l;\n  tie(primes, s, l) = polynomial_prime_sum_table<T>(N,\
+    \ poly);\n  for (auto it = primes.rbegin(); it != primes.rend(); it++) {\n   \
+    \ std::uint64_t p = *it, M = N / p, q = p * p;\n    int t = sqrtN / p, u = std::min(sqrtN,\
+    \ N / q);\n    T tk = s[p - 1];\n    for (auto i = q; i <= sqrtN; i++) s[i] +=\
+    \ (s[double(i) / p] - tk) * f(p, 1);\n    for (int i = u; i > t; i--) l[i] +=\
+    \ (s[double(M) / i] - tk) * f(p, 1);\n    for (int i = t; i >= 1; i--) l[i] +=\
+    \ (l[i * p] - tk) * f(p, 1);\n  }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n]\
+    \ += 1;\n  auto dfs = [&](auto rc, std::uint64_t n, std::size_t bg, T cf) -> T\
+    \ {\n    if (cf == T(0)) return T(0);\n    T ret = cf * (n > sqrtN ? l[double(N)\
+    \ / n] : s[n]);\n    for (auto i = bg; i < primes.size(); i++) {\n      std::uint64_t\
+    \ p = primes[i], q = p * p, nn = double(n) / q;\n      if (!nn) break;\n     \
+    \ for (int e = 2; nn; nn = double(nn) / p, e++)\n        ret += rc(rc, nn, i +\
+    \ 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n\
+    \  return dfs(dfs, N, 0, 1);\n}\n#line 3 \"src/Math/multiplicative_and_additive.hpp\"\
+    \n/**\n * @title \u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570\
+    \n * @category \u6570\u5B66\n * @see https://en.wikipedia.org/wiki/Arithmetic_function\n\
+    \ */\n\n// BEGIN CUT HERE\n\nnamespace multiplicative_functions {\ntemplate <class\
+    \ T>\nstruct Totient {\n  static constexpr T f(std::uint64_t p, short e) {\n \
+    \   T ret = p - 1;\n    while (e-- > 1) ret *= p;\n    return ret;\n  }\n  static\
+    \ std::vector<T> poly() { return {-1, 1}; }\n};\ntemplate <class T>\nstruct Moebius\
+    \ {\n  static constexpr T f(std::uint64_t, short e) { return (e == 0) - (e ==\
+    \ 1); }\n  static std::vector<T> poly() { return {-1}; }\n};\ntemplate <class\
+    \ T>\nstruct Liouville {\n  static constexpr T f(std::uint64_t, short e) { return\
+    \ e & 1 ? -1 : 1; }\n  static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
+    \ <class T, std::uint64_t k>\nstruct Divisor {\n  static constexpr T f(std::uint64_t\
+    \ p, short e) {\n    T ret = 0, pk = 1, pkpw = 1, b = p;\n    for (std::uint64_t\
+    \ kk = k; kk; kk >>= 1, b *= b)\n      if (kk & 1) pk *= b;\n    for (short i\
+    \ = 0; i <= e; i++, pkpw *= pk) ret += pkpw;\n    return ret;\n  }\n  static std::vector<T>\
+    \ poly() {\n    std::vector<T> ret(k + 1, 0);\n    ret[0] += 1, ret[k] += 1;\n\
+    \    return ret;\n  }\n};\ntemplate <class T>\nstruct Dedekind {\n  static constexpr\
+    \ T f(std::uint64_t p, short e) {\n    T ret = p + 1;\n    while (e-- > 1) ret\
+    \ *= p;\n    return ret;\n  }\n  static std::vector<T> poly() { return {1, 1};\
+    \ }\n};\n}  // namespace multiplicative_functions\n\nnamespace additive_functions\
+    \ {\n// the total number of prime factors of n\ntemplate <class T>\nstruct BigOmega\
+    \ {\n  static constexpr T f(std::uint64_t, short e) { return e; }\n  static std::vector<T>\
+    \ poly() { return {1}; }\n};\n// the total number of different prime factors of\
+    \ n\ntemplate <class T>\nstruct LittleOmega {\n  static constexpr T f(std::uint64_t,\
+    \ short) { return 1; }\n  static std::vector<T> poly() { return {1}; }\n};\n//\
+    \ the sum of primes dividing n counting multiplicity\ntemplate <class T>\nstruct\
+    \ Sopfr {\n  static constexpr T f(std::uint64_t p, short e) { return p * e; }\n\
+    \  static std::vector<T> poly() { return {0, 1}; }\n};\n// the sum of the distinct\
+    \ primes dividing n\ntemplate <class T>\nstruct Sopf {\n  static constexpr T f(std::uint64_t\
     \ p, short) { return p; }\n  static std::vector<T> poly() { return {0, 1}; }\n\
     };\n}  // namespace additive_functions\n#line 6 \"test/yosupo/sum_of_totient_function.mul_sum.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
@@ -171,8 +170,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-02-09 19:48:43+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-10 00:07:41+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/prime_count.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
   _extendedRequiredBy: []
@@ -58,24 +58,24 @@ data:
     \ (std::uint64_t pw = p * p, e = 2; pw <= N; e++, pw *= p)\n      ret += (f(p,\
     \ e) - f(p, e - 1)) * (N / pw);\n  return ret;\n}\n\ntemplate <class T = __int128_t,\
     \ class F>\nT multiplicative_sum(std::uint64_t N, const F &f, const std::vector<T>\
-    \ &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  auto [primes, s, l]\
-    \ = polynomial_prime_sum_table<T>(N, poly);\n  for (auto it = primes.rbegin();\
-    \ it != primes.rend(); it++) {\n    std::uint64_t p = *it, M = N / p, q = p *\
-    \ p;\n    int t = sqrtN / p, u = std::min(sqrtN, N / q);\n    T tk = s[p - 1];\n\
-    \    for (auto i = q; i <= sqrtN; i++) s[i] += (s[double(i) / p] - tk) * f(p,\
-    \ 1);\n    for (int i = u; i > t; i--) l[i] += (s[double(M) / i] - tk) * f(p,\
-    \ 1);\n    for (int i = t; i >= 1; i--) l[i] += (l[i * p] - tk) * f(p, 1);\n \
-    \ }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n] += 1;\n  auto dfs = [&, primes\
-    \ = primes, s = s, l = l](auto rc, std::uint64_t n,\n                        \
-    \                        std::size_t bg, T cf) -> T {\n    if (cf == T(0)) return\
-    \ T(0);\n    T ret = cf * (n > sqrtN ? l[double(N) / n] : s[n]);\n    for (auto\
-    \ i = bg; i < primes.size(); i++) {\n      std::uint64_t p = primes[i], q = p\
-    \ * p, nn = double(n) / q;\n      if (!nn) break;\n      for (int e = 2; nn; nn\
-    \ = double(nn) / p, e++)\n        ret += rc(rc, nn, i + 1, cf * (f(p, e) - f(p,\
-    \ 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n  return dfs(dfs, N, 0, 1);\n\
-    }\n#line 4 \"test/yosupo/counting_primes.test.cpp\"\nusing namespace std;\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long N;\n\
-    \  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n}\n"
+    \ &poly) {\n  const std::uint64_t sqrtN = std::sqrt(N);\n  std::vector<int> primes;\n\
+    \  std::vector<T> s, l;\n  tie(primes, s, l) = polynomial_prime_sum_table<T>(N,\
+    \ poly);\n  for (auto it = primes.rbegin(); it != primes.rend(); it++) {\n   \
+    \ std::uint64_t p = *it, M = N / p, q = p * p;\n    int t = sqrtN / p, u = std::min(sqrtN,\
+    \ N / q);\n    T tk = s[p - 1];\n    for (auto i = q; i <= sqrtN; i++) s[i] +=\
+    \ (s[double(i) / p] - tk) * f(p, 1);\n    for (int i = u; i > t; i--) l[i] +=\
+    \ (s[double(M) / i] - tk) * f(p, 1);\n    for (int i = t; i >= 1; i--) l[i] +=\
+    \ (l[i * p] - tk) * f(p, 1);\n  }\n  for (auto n = sqrtN; n; n--) s[n] += 1, l[n]\
+    \ += 1;\n  auto dfs = [&](auto rc, std::uint64_t n, std::size_t bg, T cf) -> T\
+    \ {\n    if (cf == T(0)) return T(0);\n    T ret = cf * (n > sqrtN ? l[double(N)\
+    \ / n] : s[n]);\n    for (auto i = bg; i < primes.size(); i++) {\n      std::uint64_t\
+    \ p = primes[i], q = p * p, nn = double(n) / q;\n      if (!nn) break;\n     \
+    \ for (int e = 2; nn; nn = double(nn) / p, e++)\n        ret += rc(rc, nn, i +\
+    \ 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n\
+    \  return dfs(dfs, N, 0, 1);\n}\n#line 4 \"test/yosupo/counting_primes.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  long long N;\n  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/prime_count.hpp\"\nusing namespace std;\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long\
@@ -85,7 +85,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-02-09 19:48:43+09:00'
+  timestamp: '2021-02-10 00:07:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/counting_primes.test.cpp

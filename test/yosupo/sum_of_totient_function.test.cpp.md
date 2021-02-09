@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/NumberTheory.hpp
     title: "\u6570\u8AD6\u3044\u308D\u3044\u308D"
   - icon: ':question:'
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/multiplicative_and_additive.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
   _extendedRequiredBy: []
