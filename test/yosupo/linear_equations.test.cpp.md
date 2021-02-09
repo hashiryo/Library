@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/Matrix.hpp
-    title: "\u884C\u5217"
+  - icon: ':question:'
+    path: src/Math/GaussianElimination.hpp
+    title: "\u30AC\u30A6\u30B9\u306E\u6D88\u53BB\u6CD5"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -19,103 +19,23 @@ data:
     - https://judge.yosupo.jp/problem/system_of_linear_equations
   bundledCode: "#line 1 \"test/yosupo/linear_equations.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/Matrix.hpp\"\n/**\n * @title \u884C\u5217\n * @category \u6570\
-    \u5B66\n *  Gauss_Jordan(A,B) \u62E1\u5927\u4FC2\u6570\u884C\u5217\u306B\u5BFE\
-    \u3059\u308B\u30AC\u30A6\u30B9\u30B8\u30E7\u30EB\u30C0\u30F3\u6CD5\n *  linear_equations(A,b)\
-    \ \u8FD4\u308A\u5024 {\u89E3\u306E\u3046\u3061\u306E\u4E00\u3064,\u89E3\u7A7A\u9593\
-    \u306E\u57FA\u5E95\u30D9\u30AF\u30C8\u30EB}\n */\n\n// BEGIN CUT HERE\n\ntemplate\
-    \ <typename K>\nstruct Matrix {\n private:\n  std::vector<std::vector<K>> a;\n\
-    \n public:\n  Matrix() {}\n  Matrix(std::size_t n, std::size_t m) : a(n, std::vector<K>(m,\
-    \ 0)) {}\n  Matrix(std::size_t n) : Matrix(n, n) {}\n  Matrix(std::vector<std::vector<K>>\
-    \ a) : a(a) {}\n  std::size_t height() const { return a.size(); }\n  std::size_t\
-    \ width() const { return a[0].size(); }\n  inline const std::vector<K> &operator[](std::size_t\
-    \ k) const { return a[k]; }\n  inline std::vector<K> &operator[](std::size_t k)\
-    \ { return a[k]; }\n  static Matrix diag(std::vector<K> v) {\n    Matrix mat(v.size());\n\
-    \    for (std::size_t i = 0; i < v.size(); i++) mat[i][i] = v[i];\n    return\
-    \ mat;\n  }\n  static Matrix I(std::size_t n, K e = {1}) {\n    return diag(std::vector<K>(n,\
-    \ e));\n  }\n  Matrix &operator+=(const Matrix &b) {\n    std::size_t n = height(),\
-    \ m = width();\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t\
-    \ j = 0; j < m; j++) (*this)[i][j] += b[i][j];\n    return (*this);\n  }\n  Matrix\
-    \ &operator-=(const Matrix &b) {\n    std::size_t n = height(), m = width();\n\
-    \    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j = 0; j < m;\
-    \ j++) (*this)[i][j] -= b[i][j];\n    return (*this);\n  }\n  Matrix &operator*=(const\
-    \ Matrix &b) {\n    std::size_t n = height(), m = width(), l = b.width();\n  \
-    \  assert(m == b.height());\n    std::vector<std::vector<K>> c(n, std::vector<K>(l,\
-    \ 0));\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j = 0;\
-    \ j < l; j++)\n        for (std::size_t k = 0; k < m; k++) c[i][j] += (*this)[i][k]\
-    \ * b[k][j];\n    a.swap(c);\n    return (*this);\n  }\n  Matrix operator+(const\
-    \ Matrix &b) const { return (Matrix(*this) += b); }\n  Matrix operator-(const\
-    \ Matrix &b) const { return (Matrix(*this) -= b); }\n  Matrix operator*(const\
-    \ Matrix &b) const { return (Matrix(*this) *= b); }\n  Matrix pow(uint64_t n,\
-    \ K e = {1}) {\n    Matrix ret = I(height(), e);\n    for (Matrix base = *this;\
-    \ n; n >>= 1, base *= base)\n      if (n & 1) ret *= base;\n    return ret;\n\
-    \  }\n  std::vector<K> operator*(const std::vector<K> &v) {\n    std::size_t n\
-    \ = height(), m = width();\n    assert(m == v.size());\n    std::vector<K> ret(n);\n\
-    \    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j = 0; j < m;\
-    \ j++) ret[i] += (*this)[i][j] * v[j];\n    return ret;\n  }\n  bool operator==(const\
-    \ Matrix &b) const { return a == b.a; }\n  template <typename T>\n  using ET =\
-    \ std::enable_if<std::is_floating_point<T>::value>;\n  template <typename T>\n\
-    \  using EF = std::enable_if<!std::is_floating_point<T>::value>;\n  template <typename\
-    \ T, typename ET<T>::type * = nullptr>\n  static bool is_zero(T x) {\n    return\
-    \ std::abs(x) < 1e-8;\n  }\n  template <typename T, typename EF<T>::type * = nullptr>\n\
-    \  static bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <typename\
-    \ T, typename ET<T>::type * = nullptr>\n  static bool compare(T x, T y) {\n  \
-    \  return std::abs(x) < std::abs(y);\n  }\n  template <typename T, typename EF<T>::type\
-    \ * = nullptr>\n  static bool compare(T x, T y) {\n    (void)x;\n    return y\
-    \ != T(0);\n  }\n  // O(nm(m+l))\n  static std::pair<Matrix, Matrix> Gauss_Jordan(const\
-    \ Matrix &a,\n                                                const Matrix &b)\
-    \ {\n    std::size_t n = a.height(), m = a.width(), l = b.width();\n    Matrix\
-    \ c(n, m + l);\n    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t\
-    \ j = 0; j < m; j++) c[i][j] = a[i][j];\n    for (std::size_t i = 0; i < n; i++)\n\
-    \      for (std::size_t j = 0; j < l; j++) c[i][j + m] = b[i][j];\n    for (std::size_t\
-    \ j = 0, d = 0; j < m && d < n; j++) {\n      int p = d;\n      for (std::size_t\
-    \ i = d + 1; i < n; i++)\n        if (compare(c[p][j], c[i][j])) p = i;\n    \
-    \  if (is_zero(c[p][j])) continue;\n      std::swap(c[p], c[d]);\n      K invc\
-    \ = K(1) / c[d][j];\n      for (std::size_t k = j; k < m + l; k++) c[d][k] *=\
-    \ invc;\n      for (std::size_t i = 0; i < n; i++) {\n        if (i == d) continue;\n\
-    \        for (int k = m + l - 1; k >= (int)j; k--) c[i][k] -= c[i][j] * c[d][k];\n\
-    \      }\n      d++;\n    }\n    Matrix reta(n, m), retb(n, l);\n    for (std::size_t\
-    \ i = 0; i < n; i++)\n      for (std::size_t j = 0; j < m; j++) reta[i][j] = c[i][j];\n\
-    \    for (std::size_t i = 0; i < n; i++)\n      for (std::size_t j = 0; j < l;\
-    \ j++) retb[i][j] = c[i][j + m];\n    return std::make_pair(reta, retb);\n  }\n\
-    \  // O(nm^2)\n  static std::pair<std::vector<K>, std::vector<std::vector<K>>>\n\
-    \  linear_equations(const Matrix &a, const std::vector<K> &b) {\n    std::size_t\
-    \ n = a.height(), m = a.width();\n    Matrix B(n, 1);\n    for (std::size_t i\
-    \ = 0; i < n; i++) B[i][0] = b[i];\n    auto p = Gauss_Jordan(a, B);\n    std::vector<int>\
-    \ jdx(n, -1), idx(m, -1);\n    for (std::size_t i = 0, j; i < n; i++) {\n    \
-    \  for (j = 0; j < m; j++)\n        if (!is_zero(p.first[i][j])) {\n         \
-    \ jdx[i] = j, idx[j] = i;\n          break;\n        }\n      if (j == m && !is_zero(p.second[i][0]))\n\
-    \        return std::make_pair(std::vector<K>(),\n                           \
-    \   std::vector<std::vector<K>>());  // no solutions\n    }\n    std::vector<K>\
-    \ c(m);\n    std::vector<std::vector<K>> d;\n    for (std::size_t j = 0; j < m;\
-    \ j++) {\n      if (idx[j] != -1)\n        c[j] = p.second[idx[j]][0];\n     \
-    \ else {\n        std::vector<K> v(m);\n        v[j] = 1;\n        for (std::size_t\
-    \ i = 0; i < n; i++)\n          if (jdx[i] != -1) v[jdx[i]] = -p.first[i][j];\n\
-    \        d.emplace_back(v);\n      }\n    }\n    return std::make_pair(c, d);\n\
-    \  }\n  // O(n^3)\n  K det() const {\n    int n = height();\n    Matrix A(a);\n\
-    \    K ret(1);\n    for (int i = 0; i < n; i++) {\n      int p = i;\n      for\
-    \ (int j = i + 1; j < n; j++)\n        if (compare(A[p][i], A[j][i])) p = j;\n\
-    \      if (is_zero(A[p][i])) return 0;\n      if (p != i) ret = -ret;\n      std::swap(A[p],\
-    \ A[i]);\n      ret *= A[i][i];\n      K inva = K(1) / A[i][i];\n      for (int\
-    \ j = i + 1; j < n; j++)\n        for (int k = n - 1; k >= i; k--) A[j][k] -=\
-    \ inva * A[j][i] * A[i][k];\n    }\n    return ret;\n  }\n};\n#line 3 \"src/Math/ModInt.hpp\"\
-    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt {\n\
-    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1), r2 = -u128(mod) % mod;\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
-    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
-    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n\n public:\n  constexpr\
-    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
-    \ - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo()\
-    \ { return mod; }\n  static constexpr u64 norm(u64 w) { return w - (mod & -(w\
-    \ >= mod)); }\n  static constexpr u64 pr_rt() { return prim_root; }\n  constexpr\
-    \ ModInt operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1)\
-    \ & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs)\
-    \ {\n    return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n\
-    \  }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
-    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
+    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+    \n */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root\
+    \ = 0>\nclass ModInt {\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n\
+    \  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e ==\
+    \ 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv\
+    \ = mul_inv(mod, 6, 1), r2 = -u128(mod) % mod;\n  static constexpr u64 init(u64\
+    \ w) { return reduce(u128(w) * r2); }\n  static constexpr u64 reduce(const u128\
+    \ w) {\n    return u64(w >> 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n\
+    \  }\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t\
+    \ n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static\
+    \ constexpr u64 modulo() { return mod; }\n  static constexpr u64 norm(u64 w) {\
+    \ return w - (mod & -(w >= mod)); }\n  static constexpr u64 pr_rt() { return prim_root;\
+    \ }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x\
+    \ = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
+    \ ModInt &rhs) {\n    return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >>\
+    \ 63), *this;\n  }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return\
+    \ x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
     \ ModInt &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n\
     \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
@@ -141,36 +61,87 @@ data:
     \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
     \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
     \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
-    \  }\n  u64 x;\n};\n#line 5 \"test/yosupo/linear_equations.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using\
-    \ Mint = ModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  Matrix<Mint> A(N,\
-    \ M);\n  vector<Mint> b(N);\n  for (int i = 0; i < N; i++)\n    for (int j = 0;\
-    \ j < M; j++) cin >> A[i][j];\n  for (int i = 0; i < N; i++) cin >> b[i];\n  vector<Mint>\
-    \ c;\n  vector<vector<Mint>> d;\n  tie(c, d) = Matrix<Mint>::linear_equations(A,\
-    \ b);\n  if (!c.size())\n    cout << -1 << endl;\n  else {\n    cout << d.size()\
-    \ << endl;\n    for (int j = 0; j < M; j++) {\n      cout << (j ? \" \" : \"\"\
-    ) << c[j];\n    }\n    cout << endl;\n    for (int i = 0; i < d.size(); i++) {\n\
-    \      for (int j = 0; j < M; j++) {\n        cout << (j ? \" \" : \"\") << d[i][j];\n\
-    \      }\n      cout << endl;\n    }\n  }\n  return 0;\n}\n"
+    \  }\n  u64 x;\n};\n#line 3 \"src/Math/GaussianElimination.hpp\"\n/**\n * @title\
+    \ \u30AC\u30A6\u30B9\u306E\u6D88\u53BB\u6CD5\n * @category \u6570\u5B66\n * linear_equation(A,b)\
+    \ \u8FD4\u308A\u5024 {\u89E3\u306E\u3046\u3061\u306E\u4E00\u3064,\u89E3\u7A7A\u9593\
+    \u306E\u57FA\u5E95\u30D9\u30AF\u30C8\u30EB}\n */\n\n// BEGIN CUT HERE\n\nclass\
+    \ GaussianElimination {\n  template <class T>\n  inline static constexpr bool\
+    \ IFPV = std::is_floating_point_v<T>;\n  template <class T, typename std::enable_if_t<IFPV<T>>\
+    \ * = nullptr>\n  static bool is_zero(T x) {\n    return std::abs(x) < 1e-8;\n\
+    \  }\n  template <class T, typename std::enable_if_t<!IFPV<T>> * = nullptr>\n\
+    \  static bool is_zero(T x) {\n    return x == T(0);\n  }\n  template <class T,\
+    \ typename std::enable_if_t<IFPV<T>> * = nullptr>\n  static bool compare(T x,\
+    \ T y) {\n    return std::abs(x) < std::abs(y);\n  }\n  template <class T, typename\
+    \ std::enable_if_t<!IFPV<T>> * = nullptr>\n  static bool compare(T, T y) {\n \
+    \   return y != T(0);\n  }\n  template <class LHS, class RHS>\n  static void subst(LHS\
+    \ &lhs, const RHS &rhs, int n, int m) {\n    for (int i = 0; i < n; i++)\n   \
+    \   for (int j = 0; j < m; j++) lhs[i][j] = rhs[i][j];\n  }\n  template <int M>\n\
+    \  static int row_reduction(std::vector<std::bitset<M>> &a, int lim = 1 << 30)\
+    \ {\n    int n = a.size(), rank = 0, j, p;\n    for (lim = std::min(lim, M), j\
+    \ = 0, p = rank; j < lim; j++, p = rank) {\n      while (p < n - 1 && !a[p][j])\
+    \ p++;\n      if (!a[p][j]) continue;\n      std::swap(a[p], a[rank]);\n     \
+    \ for (int i = 0; i < n; i++)\n        if (i != rank && a[i][j]) a[i] ^= a[rank];\n\
+    \      if (++rank == n) break;\n    }\n    return rank;\n  }\n\n public:\n  template\
+    \ <class K>\n  static auto row_reduction(std::vector<std::vector<K>> &a, int lim\
+    \ = 1 << 30) {\n    int n = a.size(), m = a[0].size(), rank = 0, j, p;\n    K\
+    \ det = K(1), invc;\n    for (lim = std::min(lim, m), j = 0, p = rank; j < lim;\
+    \ j++, p = rank) {\n      for (int i = rank + 1; i < n; i++)\n        if (compare(a[p][j],\
+    \ a[i][j])) p = i;\n      if (is_zero(a[p][j])) continue;\n      if (p != rank)\
+    \ std::swap(a[p], a[rank]), det = -det;\n      invc = K(1) / a[rank][j], det *=\
+    \ a[rank][j];\n      for (int k = j; k < m; k++) a[rank][k] *= invc;\n      for\
+    \ (int i = 0; i < n; i++)\n        if (i != rank && !is_zero(a[i][j]))\n     \
+    \     for (int k = m - 1; k >= j; k--) a[i][k] -= a[i][j] * a[rank][k];\n    \
+    \  if (++rank == n) break;\n    }\n    return std::make_pair(rank, rank == n ?\
+    \ det : K(0));\n  }\n  static auto row_reduction(std::vector<std::vector<bool>>\
+    \ &a,\n                            int lim = 1 << 30) {\n    int n = a.size(),\
+    \ m = a[0].size(), rank;\n    if (m < 512) {\n      std::vector<std::bitset<512>>\
+    \ b(n);\n      subst(b, a, n, m), rank = row_reduction<512>(b, lim), subst(a,\
+    \ b, n, m);\n    } else if (m < 1024) {\n      std::vector<std::bitset<1024>>\
+    \ b(n);\n      subst(b, a, n, m), rank = row_reduction<1024>(b, lim), subst(a,\
+    \ b, n, m);\n    } else {\n      std::vector<std::bitset<2048>> b(n);\n      subst(b,\
+    \ a, n, m), rank = row_reduction<2048>(b, lim), subst(a, b, n, m);\n    }\n  \
+    \  return std::make_pair(rank, rank == n);\n  }\n  template <class K>\n  static\
+    \ std::pair<std::vector<K>, std::vector<std::vector<K>>> linear_equation(\n  \
+    \    std::vector<std::vector<K>> a, const std::vector<K> &b) {\n    int n = a.size(),\
+    \ m = a[0].size();\n    for (int i = 0; i < n; i++) a[i].emplace_back(b[i]);\n\
+    \    int rank = row_reduction(a, m).first;\n    for (int i = rank; i < n; ++i)\n\
+    \      if (!is_zero(K(a[i][m]))) return {{}, {}};\n    std::vector<K> c(m, K(0));\n\
+    \    std::vector<int> piv(m, -1);\n    for (int i = 0, j = 0; i < rank; i++) {\n\
+    \      while (is_zero(K(a[i][j]))) j++;\n      c[j] = a[i][m], piv[j] = i;\n \
+    \   }\n    std::vector<std::vector<K>> d;\n    for (int j = 0; j < m; ++j) {\n\
+    \      if (piv[j] != -1) continue;\n      std::vector<K> x(m, K(0));\n      x[j]\
+    \ = K(-1);\n      for (int k = 0; k < j; ++k)\n        if (piv[k] != -1) x[k]\
+    \ = a[piv[k]][j];\n      d.emplace_back(x);\n    }\n    return {c, d};\n  }\n\
+    };\n#line 5 \"test/yosupo/linear_equations.test.cpp\"\nusing namespace std;\n\n\
+    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
+    \  using GE = GaussianElimination;\n  int N, M;\n  cin >> N >> M;\n  vector<vector<Mint>>\
+    \ A(N, vector<Mint>(M));\n  vector<Mint> b(N);\n  for (int i = 0; i < N; i++)\n\
+    \    for (int j = 0; j < M; j++) cin >> A[i][j];\n  for (int i = 0; i < N; i++)\
+    \ cin >> b[i];\n  auto [c, d] = GE::linear_equation(A, b);\n  if (!c.size())\n\
+    \    cout << -1 << endl;\n  else {\n    cout << d.size() << endl;\n    for (int\
+    \ j = 0; j < M; j++) { cout << (j ? \" \" : \"\") << c[j]; }\n    cout << endl;\n\
+    \    for (int i = 0; i < d.size(); i++) {\n      for (int j = 0; j < M; j++) {\
+    \ cout << (j ? \" \" : \"\") << d[i][j]; }\n      cout << endl;\n    }\n  }\n\
+    \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/Matrix.hpp\"\n#include \"src/Math/ModInt.hpp\"\
+    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/GaussianElimination.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = ModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  Matrix<Mint>\
-    \ A(N, M);\n  vector<Mint> b(N);\n  for (int i = 0; i < N; i++)\n    for (int\
-    \ j = 0; j < M; j++) cin >> A[i][j];\n  for (int i = 0; i < N; i++) cin >> b[i];\n\
-    \  vector<Mint> c;\n  vector<vector<Mint>> d;\n  tie(c, d) = Matrix<Mint>::linear_equations(A,\
+    \  using Mint = ModInt<998244353>;\n  using GE = GaussianElimination;\n  int N,\
+    \ M;\n  cin >> N >> M;\n  vector<vector<Mint>> A(N, vector<Mint>(M));\n  vector<Mint>\
+    \ b(N);\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j < M; j++) cin >>\
+    \ A[i][j];\n  for (int i = 0; i < N; i++) cin >> b[i];\n  auto [c, d] = GE::linear_equation(A,\
     \ b);\n  if (!c.size())\n    cout << -1 << endl;\n  else {\n    cout << d.size()\
-    \ << endl;\n    for (int j = 0; j < M; j++) {\n      cout << (j ? \" \" : \"\"\
-    ) << c[j];\n    }\n    cout << endl;\n    for (int i = 0; i < d.size(); i++) {\n\
-    \      for (int j = 0; j < M; j++) {\n        cout << (j ? \" \" : \"\") << d[i][j];\n\
-    \      }\n      cout << endl;\n    }\n  }\n  return 0;\n}"
+    \ << endl;\n    for (int j = 0; j < M; j++) { cout << (j ? \" \" : \"\") << c[j];\
+    \ }\n    cout << endl;\n    for (int i = 0; i < d.size(); i++) {\n      for (int\
+    \ j = 0; j < M; j++) { cout << (j ? \" \" : \"\") << d[i][j]; }\n      cout <<\
+    \ endl;\n    }\n  }\n  return 0;\n}"
   dependsOn:
-  - src/Math/Matrix.hpp
   - src/Math/ModInt.hpp
+  - src/Math/GaussianElimination.hpp
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
+  timestamp: '2021-02-09 12:55:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp
