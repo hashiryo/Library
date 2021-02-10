@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/polynomial_interpolation
@@ -241,84 +241,84 @@ data:
     \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp()\n\
     \             * (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k *\
     \ cnt, j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
-    \ FPS> cos_and_sin() const {\n    static constexpr mint imag = mint(-1).sqrt();\n\
-    \    static constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) /\
-    \ 2);\n    FPS a = (*this * imag).exp(), b = (*this * (-imag)).exp();\n    return\
-    \ std::make_pair((a + b) * iv2, (a - b) * iv2 / imag);\n  }\n  FPS sqrt() const\
-    \ {\n    static constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1)\
-    \ / 2);\n    int n = this->size(), cnt = 0;\n    while (cnt < n && (*this)[cnt]\
-    \ == mint(0)) cnt++;\n    if (cnt == n) return FPS(n, 0);\n    if (cnt & 1) return\
-    \ FPS();  // no solution\n    mint sqr = (*this)[cnt].sqrt();\n    if (sqr * sqr\
-    \ != (*this)[cnt]) return FPS();  // no solution\n    int len = get_len(n - cnt\
-    \ / 2);\n    FPS ret({sqr});\n    ret.resize(len);\n    std::copy_n(this->begin()\
-    \ + cnt, n - cnt, bf1),\n        std::fill(bf1 + n - cnt, bf1 + len, 0);\n   \
-    \ std::fill_n(bf2, len, 0), bf2[0] = ret[0].inverse();\n    std::uint64_t tmp;\n\
-    \    tmp = ret[0].val(), b1[0] = tmp, b2[0] = tmp, b1[1] = 0, b2[1] = 0;\n   \
-    \ dft(2, b1), dft(2, b2);\n    for (int i = 2, i2 = 1; i <= len; i <<= 1, i2 <<=\
-    \ 1) {\n      for (int j = i2 - 1; j >= 0; j--)\n        c1[j] = b1[j] * b1[j],\
-    \ c2[j] = b2[j] * b2[j];\n      idft(i2, c1), idft(i2, c2), crt(c1, c2, 0, i2,\
-    \ ret.data() + i2);\n      for (int j = i - 2; j >= i2; j--)\n        tmp = (ret[j]\
-    \ - bf1[j - i2] - bf1[j]).val(), c1[j] = tmp, c2[j] = tmp;\n      tmp = (ret[i\
-    \ - 1] - bf1[i2 - 1]).val(), c1[i2 - 1] = tmp,\n      c2[i2 - 1] = tmp;\n    \
-    \  tmp = (-bf1[i - 1]).val(), c1[i - 1] = tmp, c2[i - 1] = tmp;\n      std::fill_n(c1,\
-    \ i2 - 1, 0), std::fill_n(c2, i2 - 1, 0),\n          subst(a1, a2, 0, i, bf2);\n\
-    \      dft(i, a1), dft(i, a2), dft(i, c1), dft(i, c2);\n      for (int j = i -\
-    \ 1; j >= 0; j--) c1[j] *= a1[j], c2[j] *= a2[j];\n      idft(i, c1), idft(i,\
-    \ c2), crt(c1, c2, i2, i, bf2);\n      for (int j = i2; j < i; j++) ret[j] = -bf2[j]\
-    \ * iv2;\n      if (i != len) {\n        subst(b1, b2, 0, i, ret.data()), dft(i,\
-    \ b1), dft(i, b2);\n        for (int j = i - 1; j >= 0; j--)\n          c1[j]\
-    \ = b1[j] * a1[j], c2[j] = b2[j] * a2[j];\n        idft(i, c1), idft(i, c2), crt(c1,\
-    \ c2, i2, i, bf2);\n        subst(c1, c2, i2, i, bf2);\n        std::fill_n(c1,\
-    \ i2, 0), std::fill_n(c2, i2, 0), dft(i, c1), dft(i, c2);\n        for (int j\
-    \ = i - 1; j >= 0; j--) c1[j] *= a1[j], c2[j] *= a2[j];\n        idft(i, c1),\
-    \ idft(i, c2), crt(c1, c2, i2, i, bf2);\n        for (int j = i2; j < i; j++)\
-    \ bf2[j] = -bf2[j];\n      }\n    }\n    for (int i = n - cnt / 2 - 1; i >= 0;\
-    \ i--) ret[i + cnt / 2] = ret[i];\n    std::fill_n(ret.begin(), cnt / 2, 0);\n\
-    \    return ret;\n  }\n  FPS shift(mint c) const {\n    int n = this->size();\n\
-    \    FPS ret(n), p(n);\n    mint f = 1, cpw = 1;\n    for (int i = 0; i < n; f\
-    \ *= ++i) ret[n - i - 1] = (*this)[i] * f;\n    f = mint(n) / f;\n    for (int\
-    \ i = n; i > 0; i--) p[i - 1] = i == n ? f : p[i] * i;\n    for (int i = 0; i\
-    \ < n; i++, cpw *= c) p[i] *= cpw;\n    p *= ret, p.resize(n);\n    std::reverse_copy(p.begin(),\
-    \ p.begin() + n, ret.begin());\n    for (int i = n - 1; i >= 2; f *= i--) ret[i]\
-    \ *= f;\n    return ret;\n  }\n  FPS comp(const FPS &g) const {\n    int n = this->size(),\
-    \ k = std::sqrt(1. * n);\n    if (k * k < n) k++;\n    int d = (n - 1 + k) / k;\n\
-    \    std::vector<FPS> gpw(d + 1);\n    gpw[0] = {1};\n    for (int i = 1; i <=\
-    \ d; i++) {\n      gpw[i] = gpw[i - 1] * g;\n      if ((int)gpw[i].size() > n)\
-    \ gpw[i].resize(n);\n    }\n    FPS ret(n, 0), gd{1}, tmp;\n    for (int i = 0;\
-    \ i < k; i++) {\n      tmp = {(*this)[i * d]};\n      for (int j = 1; j < d &&\
-    \ i * d + j < n; j++)\n        tmp += gpw[j] * (*this)[i * d + j];\n      tmp\
-    \ *= gd;\n      for (int j = std::min<int>(n, tmp.size()) - 1; j >= 0; j--)\n\
-    \        ret[j] += tmp[j];\n      gd *= gpw[d];\n      if ((int)gd.size() > n)\
-    \ gd.resize(n);\n    }\n    return ret;\n  }\n  mint eval(mint x) const {\n  \
-    \  mint res, w = 1;\n    for (auto &v : *this) res += w * v, w *= x;\n    return\
-    \ res;\n  }\n  FPS operator-() {\n    FPS ret(this->size());\n    for (int i =\
-    \ ret.size() - 1; i >= 0; i--) ret[i] = -(*this)[i];\n    return ret;\n  }\n \
-    \ FPS &operator+=(const mint &v) {\n    if (this->empty()) this->resize(1, 0);\n\
-    \    return (*this)[0] += v, *this;\n  }\n  FPS &operator-=(const mint &v) { return\
-    \ *this += -v; }\n  FPS &operator*=(const mint &v) {\n    for (int i = this->size()\
-    \ - 1; i >= 0; i--) (*this)[i] *= v;\n    return *this;\n  }\n  FPS &operator/=(const\
-    \ mint &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n\
-    \    return *this;\n  }\n  FPS &operator+=(const FPS &r) {\n    if (this->size()\
+    \ FPS> cos_and_sin() const {\n    static mint imag = mint(-1).sqrt();\n    static\
+    \ constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    FPS\
+    \ a = (*this * imag).exp(), b = (*this * (-imag)).exp();\n    return std::make_pair((a\
+    \ + b) * iv2, (a - b) * iv2 / imag);\n  }\n  FPS sqrt() const {\n    static constexpr\
+    \ mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    int n = this->size(),\
+    \ cnt = 0;\n    while (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (cnt\
+    \ == n) return FPS(n, 0);\n    if (cnt & 1) return FPS();  // no solution\n  \
+    \  mint sqr = (*this)[cnt].sqrt();\n    if (sqr * sqr != (*this)[cnt]) return\
+    \ FPS();  // no solution\n    int len = get_len(n - cnt / 2);\n    FPS ret({sqr});\n\
+    \    ret.resize(len);\n    std::copy_n(this->begin() + cnt, n - cnt, bf1),\n \
+    \       std::fill(bf1 + n - cnt, bf1 + len, 0);\n    std::fill_n(bf2, len, 0),\
+    \ bf2[0] = ret[0].inverse();\n    std::uint64_t tmp;\n    tmp = ret[0].val(),\
+    \ b1[0] = tmp, b2[0] = tmp, b1[1] = 0, b2[1] = 0;\n    dft(2, b1), dft(2, b2);\n\
+    \    for (int i = 2, i2 = 1; i <= len; i <<= 1, i2 <<= 1) {\n      for (int j\
+    \ = i2 - 1; j >= 0; j--)\n        c1[j] = b1[j] * b1[j], c2[j] = b2[j] * b2[j];\n\
+    \      idft(i2, c1), idft(i2, c2), crt(c1, c2, 0, i2, ret.data() + i2);\n    \
+    \  for (int j = i - 2; j >= i2; j--)\n        tmp = (ret[j] - bf1[j - i2] - bf1[j]).val(),\
+    \ c1[j] = tmp, c2[j] = tmp;\n      tmp = (ret[i - 1] - bf1[i2 - 1]).val(), c1[i2\
+    \ - 1] = tmp,\n      c2[i2 - 1] = tmp;\n      tmp = (-bf1[i - 1]).val(), c1[i\
+    \ - 1] = tmp, c2[i - 1] = tmp;\n      std::fill_n(c1, i2 - 1, 0), std::fill_n(c2,\
+    \ i2 - 1, 0),\n          subst(a1, a2, 0, i, bf2);\n      dft(i, a1), dft(i, a2),\
+    \ dft(i, c1), dft(i, c2);\n      for (int j = i - 1; j >= 0; j--) c1[j] *= a1[j],\
+    \ c2[j] *= a2[j];\n      idft(i, c1), idft(i, c2), crt(c1, c2, i2, i, bf2);\n\
+    \      for (int j = i2; j < i; j++) ret[j] = -bf2[j] * iv2;\n      if (i != len)\
+    \ {\n        subst(b1, b2, 0, i, ret.data()), dft(i, b1), dft(i, b2);\n      \
+    \  for (int j = i - 1; j >= 0; j--)\n          c1[j] = b1[j] * a1[j], c2[j] =\
+    \ b2[j] * a2[j];\n        idft(i, c1), idft(i, c2), crt(c1, c2, i2, i, bf2);\n\
+    \        subst(c1, c2, i2, i, bf2);\n        std::fill_n(c1, i2, 0), std::fill_n(c2,\
+    \ i2, 0), dft(i, c1), dft(i, c2);\n        for (int j = i - 1; j >= 0; j--) c1[j]\
+    \ *= a1[j], c2[j] *= a2[j];\n        idft(i, c1), idft(i, c2), crt(c1, c2, i2,\
+    \ i, bf2);\n        for (int j = i2; j < i; j++) bf2[j] = -bf2[j];\n      }\n\
+    \    }\n    for (int i = n - cnt / 2 - 1; i >= 0; i--) ret[i + cnt / 2] = ret[i];\n\
+    \    std::fill_n(ret.begin(), cnt / 2, 0);\n    return ret;\n  }\n  FPS shift(mint\
+    \ c) const {\n    int n = this->size();\n    FPS ret(n), p(n);\n    mint f = 1,\
+    \ cpw = 1;\n    for (int i = 0; i < n; f *= ++i) ret[n - i - 1] = (*this)[i] *\
+    \ f;\n    f = mint(n) / f;\n    for (int i = n; i > 0; i--) p[i - 1] = i == n\
+    \ ? f : p[i] * i;\n    for (int i = 0; i < n; i++, cpw *= c) p[i] *= cpw;\n  \
+    \  p *= ret, p.resize(n);\n    std::reverse_copy(p.begin(), p.begin() + n, ret.begin());\n\
+    \    for (int i = n - 1; i >= 2; f *= i--) ret[i] *= f;\n    return ret;\n  }\n\
+    \  FPS comp(const FPS &g) const {\n    int n = this->size(), k = std::sqrt(1.\
+    \ * n);\n    if (k * k < n) k++;\n    int d = (n - 1 + k) / k;\n    std::vector<FPS>\
+    \ gpw(d + 1);\n    gpw[0] = {1};\n    for (int i = 1; i <= d; i++) {\n      gpw[i]\
+    \ = gpw[i - 1] * g;\n      if ((int)gpw[i].size() > n) gpw[i].resize(n);\n   \
+    \ }\n    FPS ret(n, 0), gd{1}, tmp;\n    for (int i = 0; i < k; i++) {\n     \
+    \ tmp = {(*this)[i * d]};\n      for (int j = 1; j < d && i * d + j < n; j++)\n\
+    \        tmp += gpw[j] * (*this)[i * d + j];\n      tmp *= gd;\n      for (int\
+    \ j = std::min<int>(n, tmp.size()) - 1; j >= 0; j--)\n        ret[j] += tmp[j];\n\
+    \      gd *= gpw[d];\n      if ((int)gd.size() > n) gd.resize(n);\n    }\n   \
+    \ return ret;\n  }\n  mint eval(mint x) const {\n    mint res, w = 1;\n    for\
+    \ (auto &v : *this) res += w * v, w *= x;\n    return res;\n  }\n  FPS operator-()\
+    \ {\n    FPS ret(this->size());\n    for (int i = ret.size() - 1; i >= 0; i--)\
+    \ ret[i] = -(*this)[i];\n    return ret;\n  }\n  FPS &operator+=(const mint &v)\
+    \ {\n    if (this->empty()) this->resize(1, 0);\n    return (*this)[0] += v, *this;\n\
+    \  }\n  FPS &operator-=(const mint &v) { return *this += -v; }\n  FPS &operator*=(const\
+    \ mint &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] *= v;\n\
+    \    return *this;\n  }\n  FPS &operator/=(const mint &v) {\n    for (int i =\
+    \ this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n    return *this;\n  }\n  FPS\
+    \ &operator+=(const FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(),\
+    \ 0);\n    for (int i = r.size() - 1; i >= 0; i--) (*this)[i] += r[i];\n    return\
+    \ this->norm();\n  }\n  FPS &operator-=(const FPS &r) {\n    if (this->size()\
     \ < r.size()) this->resize(r.size(), 0);\n    for (int i = r.size() - 1; i >=\
-    \ 0; i--) (*this)[i] += r[i];\n    return this->norm();\n  }\n  FPS &operator-=(const\
-    \ FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(), 0);\n   \
-    \ for (int i = r.size() - 1; i >= 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n\
-    \  }\n  FPS &operator*=(const FPS &r) { return *this = norm().mul(FPS(r).norm());\
-    \ }\n  FPS &operator/=(const FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const\
-    \ FPS &r) { return *this = this->quorem(r).second; }\n  FPS operator+(const mint\
-    \ &v) const { return FPS(*this) += v; }\n  FPS operator-(const mint &v) const\
-    \ { return FPS(*this) -= v; }\n  FPS operator*(const mint &v) const { return FPS(*this)\
-    \ *= v; }\n  FPS operator/(const mint &v) const { return FPS(*this) /= v; }\n\
-    \  FPS operator+(const FPS &r) const { return FPS(*this) += r; }\n  FPS operator-(const\
-    \ FPS &r) const { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const\
-    \ { return FPS(*this) *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r);\
-    \ }\n  FPS operator%(const FPS &r) const { return this->quorem(r).second; }\n\
-    };\n#line 5 \"src/Math/SubproductTree.hpp\"\n/**\n * @title \u8907\u6570\u306E\
-    \u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category \u6570\u5B66\
-    \n *  \u3069\u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\ntemplate\
-    \ <typename mint>\nclass SubproductTree {\n  using poly = FormalPowerSeries<mint>;\n\
-    \  int n;\n  std::vector<mint> xs;\n  std::vector<poly> buf;\n  void pre(int l,\
-    \ int r, int k) {\n    if (r - l == 1) {\n      buf[k] = {-xs[l], 1};\n      return;\n\
+    \ 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n  }\n  FPS &operator*=(const\
+    \ FPS &r) { return *this = norm().mul(FPS(r).norm()); }\n  FPS &operator/=(const\
+    \ FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const FPS &r) {\
+    \ return *this = this->quorem(r).second; }\n  FPS operator+(const mint &v) const\
+    \ { return FPS(*this) += v; }\n  FPS operator-(const mint &v) const { return FPS(*this)\
+    \ -= v; }\n  FPS operator*(const mint &v) const { return FPS(*this) *= v; }\n\
+    \  FPS operator/(const mint &v) const { return FPS(*this) /= v; }\n  FPS operator+(const\
+    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator-(const FPS &r) const\
+    \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
+    \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
+    \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
+    \ 5 \"src/Math/SubproductTree.hpp\"\n/**\n * @title \u8907\u6570\u306E\u5024\u4EE3\
+    \u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category \u6570\u5B66\n *  \u3069\
+    \u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename\
+    \ mint>\nclass SubproductTree {\n  using poly = FormalPowerSeries<mint>;\n  int\
+    \ n;\n  std::vector<mint> xs;\n  std::vector<poly> buf;\n  void pre(int l, int\
+    \ r, int k) {\n    if (r - l == 1) {\n      buf[k] = {-xs[l], 1};\n      return;\n\
     \    }\n    pre(l, (l + r) / 2, k * 2), pre((l + r) / 2, r, k * 2 + 1);\n    buf[k]\
     \ = buf[k * 2] * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree() {}\n  SubproductTree(const\
     \ std::vector<mint> &_xs)\n      : n(_xs.size()), xs(_xs), buf(4 * n) {\n    pre(0,\
@@ -356,8 +356,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2021-02-09 19:48:43+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-10 10:21:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/polynomial_interpolation.test.cpp
 layout: document

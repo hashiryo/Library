@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':x:'
@@ -11,7 +11,7 @@ data:
     title: test/yukicoder/1019.dujiao.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u675C\u6559\u7B5B"
     links:
@@ -38,7 +38,7 @@ data:
     \ gsum, hsum, memo)\n           * (gsum((nd = double(N) / nN + 1) - 1) - gsum(d\
     \ - 1));\n  return memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class\
     \ H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum) {\n \
-    \ std::unordered_map<std::uint64_t, T> memo;\n  return dirichlet_inv_sum<T>(N,\
+    \ std::unordered_map<unsigned long long, T> memo;\n  return dirichlet_inv_sum<T>(N,\
     \ gsum, hsum, memo);\n}\n\n// sum f s.t. f :=  h * g\ntemplate <class T, class\
     \ G, class H>\nT dirichlet_mul_sum(std::uint64_t N, const G &gsum, const H &hsum)\
     \ {\n  const int sqrtN = sqrt(N);\n  T ret = 0;\n  for (int i = 1; i <= sqrtN;\
@@ -61,7 +61,7 @@ data:
     \ gsum, hsum, memo)\n           * (gsum((nd = double(N) / nN + 1) - 1) - gsum(d\
     \ - 1));\n  return memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class\
     \ H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum) {\n \
-    \ std::unordered_map<std::uint64_t, T> memo;\n  return dirichlet_inv_sum<T>(N,\
+    \ std::unordered_map<unsigned long long, T> memo;\n  return dirichlet_inv_sum<T>(N,\
     \ gsum, hsum, memo);\n}\n\n// sum f s.t. f :=  h * g\ntemplate <class T, class\
     \ G, class H>\nT dirichlet_mul_sum(std::uint64_t N, const G &gsum, const H &hsum)\
     \ {\n  const int sqrtN = sqrt(N);\n  T ret = 0;\n  for (int i = 1; i <= sqrtN;\
@@ -72,8 +72,8 @@ data:
   isVerificationFile: false
   path: src/Math/dujiao_sieve.hpp
   requiredBy: []
-  timestamp: '2021-02-03 13:01:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-02-10 10:21:48+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/yukicoder/1019.dujiao.test.cpp

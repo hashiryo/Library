@@ -4,20 +4,20 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/NumberTheory.hpp
     title: "\u6570\u8AD6\u3044\u308D\u3044\u308D"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/multiplicative_and_additive.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -84,7 +84,7 @@ data:
     \ gsum, hsum, memo)\n           * (gsum((nd = double(N) / nN + 1) - 1) - gsum(d\
     \ - 1));\n  return memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class\
     \ H>\nT dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum) {\n \
-    \ std::unordered_map<std::uint64_t, T> memo;\n  return dirichlet_inv_sum<T>(N,\
+    \ std::unordered_map<unsigned long long, T> memo;\n  return dirichlet_inv_sum<T>(N,\
     \ gsum, hsum, memo);\n}\n\n// sum f s.t. f :=  h * g\ntemplate <class T, class\
     \ G, class H>\nT dirichlet_mul_sum(std::uint64_t N, const G &gsum, const H &hsum)\
     \ {\n  const int sqrtN = sqrt(N);\n  T ret = 0;\n  for (int i = 1; i <= sqrtN;\
@@ -215,8 +215,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2021-02-03 13:01:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-10 10:21:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
 layout: document
