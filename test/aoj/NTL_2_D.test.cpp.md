@@ -146,22 +146,24 @@ data:
     \      ret = (dat[--i] + (__uint128_t(ret) << bdig)) % r;\n    return ret;\n \
     \ }\n  BigInt operator*(long long r) const { return BigInt(*this) *= r; }\n  BigInt\
     \ operator/(long long r) const { return BigInt(*this) /= r; }\n  BigInt operator*(const\
-    \ BigInt &r) const {\n    static ModB f[1 << 20], g[1 << 20];\n    static long\
-    \ long h[1 << 20];\n    int n = dat.size(), m = r.dat.size(), sz = n + m - 1;\n\
-    \    if (n <= 8 || m <= 8) {\n      std::fill_n(h, sz, 0);\n      for (int i =\
-    \ 0; i < n; i++)\n        for (int j = 0; j < m; j++) h[i + j] += (long long)dat[i]\
-    \ * r.dat[j];\n    } else {\n      for (int i = 0; i < n; i++) f[i] = dat[i];\n\
-    \      for (int i = 0; i < m; i++) g[i] = r.dat[i];\n      int len = get_len(sz);\n\
-    \      std::fill(f + n, f + len, 0), std::fill(g + m, g + len, 0);\n      dft(len,\
-    \ f), dft(len, g);\n      for (int i = 0; i < len; i++) f[i] *= g[i];\n      idft(len,\
-    \ f);\n      for (int i = 0; i < sz; i++) h[i] = f[i].val();\n    }\n    BigInt\
-    \ ret;\n    for (long long i = 0, carry = 0, cur; i < sz || carry; i++)\n    \
-    \  cur = carry + (i < sz ? h[i] : 0), carry = cur >> bdig,\n      ret.dat.emplace_back(cur\
-    \ & (base - 1));\n    return ret.neg = neg ^ r.neg, ret;\n  }\n  BigInt &operator*=(const\
-    \ BigInt &r) { return *this = *this * r; }\n  BigInt operator/(const BigInt &r)\
-    \ const {\n    if (r.dat.size() == 1 && r.dat.back() == 1) return *this;\n   \
-    \ if (r.able_ll()) return *this / r.convert_ll();\n    static ModB f[1 << 20],\
-    \ g[1 << 20];\n    int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb\
+    \ BigInt &r) const {\n    if (is_zero() || r.is_zero()) return 0;\n    static\
+    \ ModB f[1 << 20], g[1 << 20];\n    static long long h[1 << 20];\n    int n =\
+    \ dat.size(), m = r.dat.size(), sz = n + m - 1;\n    if (n <= 8 || m <= 8) {\n\
+    \      std::fill_n(h, sz, 0);\n      for (int i = 0; i < n; i++)\n        for\
+    \ (int j = 0; j < m; j++) h[i + j] += (long long)dat[i] * r.dat[j];\n    } else\
+    \ {\n      for (int i = 0; i < n; i++) f[i] = dat[i];\n      for (int i = 0; i\
+    \ < m; i++) g[i] = r.dat[i];\n      int len = get_len(sz);\n      std::fill(f\
+    \ + n, f + len, 0), std::fill(g + m, g + len, 0);\n      dft(len, f), dft(len,\
+    \ g);\n      for (int i = 0; i < len; i++) f[i] *= g[i];\n      idft(len, f);\n\
+    \      for (int i = 0; i < sz; i++) h[i] = f[i].val();\n    }\n    BigInt ret;\n\
+    \    for (long long i = 0, carry = 0, cur; i < sz || carry; i++)\n      cur =\
+    \ carry + (i < sz ? h[i] : 0), carry = cur >> bdig,\n      ret.dat.emplace_back(cur\
+    \ & (base - 1));\n    return ret.shrink(), ret.neg = neg ^ r.neg, ret;\n  }\n\
+    \  BigInt &operator*=(const BigInt &r) { return *this = *this * r; }\n  BigInt\
+    \ operator/(const BigInt &r) const {\n    if (r.dat.size() == 1 && r.dat.back()\
+    \ == 1) return r.neg ? -*this : *this;\n    if (this->abs() < r.abs()) return\
+    \ 0;\n    if (r.able_ll()) return *this / r.convert_ll();\n    static ModB f[1\
+    \ << 20], g[1 << 20];\n    int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb\
     \ - qb, 1),\n        lim = std::min(prec, 3), rlim = std::min(qb, 6);\n    BigInt\
     \ x, prev, rr = r.base_shift_r(qb - rlim), c;\n    x.dat.resize(lim + 1, 0), x.dat.back()\
     \ = 1;\n    c.dat.resize(rlim + lim + 1, 0), c.dat.back() = 2;\n    while (x !=\
@@ -225,7 +227,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_D.test.cpp
   requiredBy: []
-  timestamp: '2021-02-12 13:37:51+09:00'
+  timestamp: '2021-02-12 15:36:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_D.test.cpp
