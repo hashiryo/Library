@@ -188,9 +188,9 @@ data:
     \ - nrlim);\n        if (nrlim != rlim || nlim != lim)\n          c.dat.back()\
     \ = 0, c.dat.resize(nrlim + nlim + 1, 0), c.dat.back() = 2;\n        lim = nlim,\
     \ rlim = nrlim;\n      }\n    }\n    x *= this->abs(), x = x.base_shift_r(pb +\
-    \ (pb == qb));\n    if (this->abs() >= (x + 1) * r) x += 1;\n    return x.neg\
-    \ = neg ^ r.neg, x.shrink(), x;\n  }\n  BigInt &operator/=(const BigInt &r) {\
-    \ return *this = *this / r; }\n  BigInt &operator%=(const BigInt &r) { return\
+    \ (pb == qb));\n    if (this->abs() >= (x + 1) * r.abs()) x += 1;\n    return\
+    \ x.neg = neg ^ r.neg, x.shrink(), x;\n  }\n  BigInt &operator/=(const BigInt\
+    \ &r) { return *this = *this / r; }\n  BigInt &operator%=(const BigInt &r) { return\
     \ *this -= (*this / r) * r; }\n  BigInt operator%(const BigInt &r) const { return\
     \ BigInt(*this) %= r; }\n  BigInt &operator>>=(unsigned size) {\n    if (dat.size()\
     \ * bdig <= size) return *this = 0;\n    unsigned i = 0, j = size / bdig, k =\
@@ -227,7 +227,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_B.test.cpp
   requiredBy: []
-  timestamp: '2021-02-12 15:36:59+09:00'
+  timestamp: '2021-02-12 19:25:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_B.test.cpp
