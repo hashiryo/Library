@@ -87,136 +87,135 @@ data:
     \ n) {\n    return --n, n |= n >> 1, n |= n >> 2, n |= n >> 4, n |= n >> 8,\n\
     \           n |= n >> 16, ++n;\n  }\n  BigInt base_shift_r(int size) const {\n\
     \    BigInt ret;\n    return ret.dat = std::vector<unsigned>(dat.begin() + size,\
-    \ dat.end()), ret;\n  }\n  BigInt base_shift_l(int size) const {\n    BigInt ret\
-    \ = *this;\n    return ret.dat.insert(ret.dat.begin(), size, 0), ret;\n  }\n\n\
-    \ public:\n  BigInt() : neg(false), dat() {}\n  BigInt(long long v) { *this =\
-    \ v; }\n  BigInt(const std::string &s) { read(s); }\n  void shrink() {\n    while\
-    \ (dat.size() && !dat.back()) dat.pop_back();\n    if (dat.empty()) neg = false;\n\
-    \  }\n  bool is_zero() const { return dat.empty() || (dat.size() == 1 && !dat[0]);\
-    \ }\n  bool able_ll() const {\n    return dat.size() <= 2\n           || (dat.size()\
-    \ == 3 && !(dat.back() >> (63 - 2 * bdig)));\n  }\n  int ctz() const {\n    if\
-    \ (is_zero()) return -1;\n    int ret = 0, i;\n    for (i = 0; i < (int)dat.size()\
-    \ && !dat[i]; i++) ret += bdig;\n    return ret + __builtin_ctz(dat[i]);\n  }\n\
-    \  void read(const std::string &s) {\n    dat.clear(), neg = s[0] == '-';\n  \
-    \  std::vector<short> v;\n    for (int i = s.length() - 1; i >= 0 && '0' <= s[i]\
-    \ && s[i] <= '9'; i--)\n      v.emplace_back(s[i] - '0');\n    for (int rem =\
-    \ 0; !v.empty(); dat.emplace_back(rem), rem = 0) {\n      for (int i = v.size()\
-    \ - 1, cur; i >= 0; i--)\n        cur = rem * 10 + v[i], v[i] = cur >> bdig, rem\
-    \ = cur & (base - 1);\n      while (v.size() && !v.back()) v.pop_back();\n   \
-    \ }\n  }\n  std::string to_str() const {\n    if (is_zero()) return \"0\";\n \
-    \   auto v = dat;\n    std::string ret;\n    for (short rem = 0; !v.empty(); ret\
-    \ += rem + '0', rem = 0) {\n      for (int i = v.size() - 1, cur; i >= 0; i--)\n\
-    \        cur = (rem << bdig) + v[i], v[i] = cur / 10, rem = cur % 10;\n      while\
-    \ (v.size() && !v.back()) v.pop_back();\n    }\n    if (neg) ret += '-';\n   \
-    \ std::reverse(ret.begin(), ret.end());\n    return ret;\n  }\n  BigInt &operator=(long\
-    \ long r) {\n    neg = false, dat.clear();\n    if (r < 0) neg = true, r = -r;\n\
-    \    for (; r; r >>= bdig) dat.emplace_back(r & (base - 1));\n    return *this;\n\
-    \  }\n  bool operator<(const BigInt &r) const {\n    if (neg != r.neg) return\
-    \ neg;\n    if (dat.size() != r.dat.size()) return (dat.size() < r.dat.size())\
-    \ ^ neg;\n    for (int i = dat.size() - 1; i >= 0; i--)\n      if (dat[i] != r.dat[i])\
-    \ return (dat[i] < r.dat[i]) ^ neg;\n    return false;\n  }\n  bool operator>(const\
-    \ BigInt &r) const { return r < *this; }\n  bool operator<=(const BigInt &r) const\
-    \ { return !(r < *this); }\n  bool operator>=(const BigInt &r) const { return\
-    \ !(*this < r); }\n  bool operator==(const BigInt &r) const {\n    return neg\
-    \ == r.neg && dat == r.dat;\n  }\n  bool operator!=(const BigInt &r) const { return\
-    \ !(*this == r); }\n  BigInt abs() const {\n    BigInt ret = *this;\n    return\
-    \ ret.neg = false, ret;\n  }\n  BigInt operator-() const {\n    BigInt ret = *this;\n\
-    \    return ret.neg = !ret.neg, ret;\n  }\n  BigInt operator+(const BigInt &r)\
-    \ const {\n    if (neg != r.neg) return *this - (-r);\n    BigInt ret = r;\n \
-    \   for (int i = 0, ed = std::max(dat.size(), r.dat.size()), carry = 0;\n    \
-    \     i < ed || carry; i++) {\n      if (i == (int)ret.dat.size()) ret.dat.emplace_back(0);\n\
-    \      ret.dat[i] += carry + (i < (int)dat.size() ? dat[i] : 0);\n      if ((carry\
-    \ = (ret.dat[i] >= base))) ret.dat[i] -= base;\n    }\n    return ret;\n  }\n\
-    \  BigInt operator-(const BigInt &r) const {\n    if (neg != r.neg) return *this\
-    \ + (-r);\n    if (abs() < r.abs()) return -(r - *this);\n    BigInt ret = *this;\n\
-    \    for (unsigned i = 0, carry = 0; i < r.dat.size() || carry; i++) {\n     \
-    \ ret.dat[i] += base - (carry + (i < r.dat.size() ? r.dat[i] : 0));\n      if\
-    \ (!(carry = (ret.dat[i] < base))) ret.dat[i] -= base;\n    }\n    return ret.shrink(),\
-    \ ret;\n  }\n  BigInt &operator+=(const BigInt &r) { return *this = *this + r;\
-    \ }\n  BigInt &operator-=(const BigInt &r) { return *this = *this - r; }\n  BigInt\
-    \ &operator*=(long long r) {\n    if (r < 0) neg = !neg, r = -r;\n    for (long\
-    \ long i = 0, carry = 0; i < (long long)dat.size() || carry; i++) {\n      if\
-    \ (i == (long long)dat.size()) dat.emplace_back(0);\n      __uint128_t cur = (__uint128_t)r\
-    \ * dat[i] + carry;\n      carry = cur >> bdig, dat[i] = cur & (base - 1);\n \
-    \   }\n    return shrink(), *this;\n  }\n  BigInt &operator/=(long long r) {\n\
-    \    if (r < 0) neg = !neg, r = -r;\n    for (__int128_t i = dat.size() - 1, cur,\
-    \ rem = 0; i >= 0; i--)\n      cur = dat[i] + (rem << bdig), dat[i] = cur / r,\
-    \ rem = cur % r;\n    return shrink(), *this;\n  }\n  long long operator%(long\
-    \ long r) const {\n    long long ret = 0;\n    for (int i = dat.size(); i;)\n\
-    \      ret = (dat[--i] + (__uint128_t(ret) << bdig)) % r;\n    return ret;\n \
-    \ }\n  BigInt operator*(long long r) const { return BigInt(*this) *= r; }\n  BigInt\
-    \ operator/(long long r) const { return BigInt(*this) /= r; }\n  BigInt operator*(const\
-    \ BigInt &r) const {\n    if (is_zero() || r.is_zero()) return 0;\n    static\
-    \ ModB f[1 << 20], g[1 << 20];\n    static long long h[1 << 20];\n    int n =\
-    \ dat.size(), m = r.dat.size(), sz = n + m - 1;\n    if (n <= 8 || m <= 8) {\n\
-    \      std::fill_n(h, sz, 0);\n      for (int i = 0; i < n; i++)\n        for\
-    \ (int j = 0; j < m; j++) h[i + j] += (long long)dat[i] * r.dat[j];\n    } else\
-    \ {\n      for (int i = 0; i < n; i++) f[i] = dat[i];\n      for (int i = 0; i\
-    \ < m; i++) g[i] = r.dat[i];\n      int len = get_len(sz);\n      std::fill(f\
-    \ + n, f + len, 0), std::fill(g + m, g + len, 0);\n      dft(len, f), dft(len,\
-    \ g);\n      for (int i = 0; i < len; i++) f[i] *= g[i];\n      idft(len, f);\n\
-    \      for (int i = 0; i < sz; i++) h[i] = f[i].val();\n    }\n    BigInt ret;\n\
-    \    for (long long i = 0, carry = 0, cur; i < sz || carry; i++)\n      cur =\
-    \ carry + (i < sz ? h[i] : 0), carry = cur >> bdig,\n      ret.dat.emplace_back(cur\
-    \ & (base - 1));\n    return ret.shrink(), ret.neg = neg ^ r.neg, ret;\n  }\n\
-    \  BigInt &operator*=(const BigInt &r) { return *this = *this * r; }\n  BigInt\
-    \ operator/(const BigInt &r) const {\n    if (r.dat.size() == 1 && r.dat.back()\
-    \ == 1) return r.neg ? -*this : *this;\n    if (this->abs() < r.abs()) return\
-    \ 0;\n    if (r.able_ll()) return *this / r.convert_ll();\n    static ModB f[1\
-    \ << 20], g[1 << 20];\n    int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb\
-    \ - qb, 1),\n        lim = std::min(prec, 3), rlim = std::min(qb, 6);\n    BigInt\
-    \ x, prev, rr = r.base_shift_r(qb - rlim), c;\n    x.dat.resize(lim + 1, 0), x.dat.back()\
-    \ = 1;\n    c.dat.resize(rlim + lim + 1, 0), c.dat.back() = 2;\n    while (x !=\
-    \ prev) prev = x, x *= c - rr * x, x = x.base_shift_r(lim + rlim);\n    if (lim\
-    \ != prec) {\n      for (prev.dat.clear(); x != prev;) {\n        prev = x;\n\
-    \        int n = x.dat.size(), m = rr.dat.size(), sz = n + m - 1,\n          \
-    \  len1 = get_len(sz), len2 = get_len(rlim + lim + n),\n            nlim = std::min(lim\
-    \ * 2 + 1, prec),\n            nrlim = std::min(rlim * 2 + 1, qb);\n        for\
-    \ (int i = 0; i < n; i++) g[i] = x.dat[i];\n        for (int i = 0; i < m; i++)\
-    \ f[i] = rr.dat[i];\n        std::fill(g + n, g + len2, 0), std::fill(f + m, f\
-    \ + len1, 0);\n        dft(len1, f), dft(len2, g);\n        for (int i = 0; i\
-    \ < len1; i++) f[i] *= g[i];\n        idft(len1, f), x.dat.clear();\n        for\
-    \ (long long i = 0, carry = 0, cur; i < sz || carry; i++)\n          cur = carry\
-    \ + (i < sz ? f[i].val() : 0), carry = cur >> bdig,\n          x.dat.emplace_back(cur\
-    \ & (base - 1));\n        x = c - x, m = x.dat.size(), sz = n + m - 1;\n     \
-    \   for (int i = 0; i < m; i++) f[i] = x.dat[i];\n        std::fill(f + m, f +\
-    \ len2, 0), dft(len2, f);\n        for (int i = 0; i < len2; i++) f[i] *= g[i];\n\
-    \        idft(len2, f), x.dat.clear();\n        for (long long i = 0, carry =\
-    \ 0, cur; i < sz || carry; i++) {\n          cur = carry + (i < sz ? f[i].val()\
-    \ : 0), carry = cur >> bdig;\n          if (i >= 2 * lim - nlim + rlim) x.dat.emplace_back(cur\
-    \ & (base - 1));\n        }\n        if (nrlim != rlim) rr = r.base_shift_r(qb\
-    \ - nrlim);\n        if (nrlim != rlim || nlim != lim)\n          c.dat.back()\
-    \ = 0, c.dat.resize(nrlim + nlim + 1, 0), c.dat.back() = 2;\n        lim = nlim,\
-    \ rlim = nrlim;\n      }\n    }\n    x *= this->abs(), x = x.base_shift_r(pb +\
-    \ (pb == qb));\n    if (this->abs() >= (x + 1) * r.abs()) x += 1;\n    return\
-    \ x.neg = neg ^ r.neg, x.shrink(), x;\n  }\n  BigInt &operator/=(const BigInt\
-    \ &r) { return *this = *this / r; }\n  BigInt &operator%=(const BigInt &r) { return\
-    \ *this -= (*this / r) * r; }\n  BigInt operator%(const BigInt &r) const { return\
-    \ BigInt(*this) %= r; }\n  BigInt &operator>>=(unsigned size) {\n    if (dat.size()\
-    \ * bdig <= size) return *this = 0;\n    unsigned i = 0, j = size / bdig, k =\
-    \ size % bdig, mask = (1 << k) - 1;\n    for (; j + 1 < dat.size(); i++, j++)\n\
-    \      dat[i] = (dat[j] >> k) | ((dat[j + 1] & mask) << (bdig - k));\n    return\
-    \ dat[i] = (dat[j] >> k), dat.resize(i + 1), shrink(), *this;\n  }\n  BigInt &operator<<=(unsigned\
-    \ size) {\n    if (is_zero()) return *this;\n    int i = dat.size(), k = size\
-    \ % bdig;\n    for (dat.emplace_back(0); i > 0; i--)\n      dat[i] = ((dat[i]\
-    \ << k) & (base - 1)) | (dat[i - 1] >> (bdig - k));\n    dat[0] = (dat[0] << k)\
-    \ & (base - 1);\n    return shrink(), dat.insert(dat.begin(), size / bdig, 0),\
-    \ *this;\n  }\n  BigInt operator>>(unsigned size) const { return BigInt(*this)\
-    \ >>= size; }\n  BigInt operator<<(unsigned size) const { return BigInt(*this)\
-    \ <<= size; }\n  long long convert_ll() const {\n    assert(able_ll());\n    long\
-    \ long ret = 0;\n    for (int i = dat.size() - 1; i >= 0; i--) ret = (ret << bdig)\
-    \ + dat[i];\n    return neg ? -ret : ret;\n  }\n  friend std::istream &operator>>(std::istream\
-    \ &is, BigInt &v) {\n    std::string s;\n    return is >> s, v.read(s), is;\n\
-    \  }\n  friend std::ostream &operator<<(std::ostream &os, const BigInt &v) {\n\
-    \    return os << v.to_str(), os;\n  }\n};\n\nBigInt gcd(const BigInt &a, const\
-    \ BigInt &b) {\n  assert(!a.neg && !b.neg);\n  if (a.is_zero()) return b;\n  if\
-    \ (b.is_zero()) return a;\n  int y = a.ctz(), z = b.ctz();\n  BigInt x[2] = {a,\
-    \ b};\n  x[0] >>= y, x[1] >>= z;\n  bool id = 0;\n  while (true) {\n    if (x[id]\
-    \ < x[!id]) id = !id;\n    if ((x[id] -= x[!id]).is_zero()) break;\n    x[id]\
-    \ >>= x[id].ctz();\n  }\n  return x[!id] << std::min(y, z);\n}\n\nBigInt lcm(const\
-    \ BigInt &a, const BigInt &b) { return (a / gcd(a, b)) * b; }\n#line 5 \"test/aoj/NTL_2_C.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  BigInt A, B;\n  cin >> A >> B;\n  cout << A * B << endl;\n  return 0;\n}\n"
+    \ dat.end()), ret;\n  }\n\n public:\n  BigInt() : neg(false), dat() {}\n  BigInt(long\
+    \ long v) { *this = v; }\n  BigInt(const std::string &s) { read(s); }\n  void\
+    \ shrink() {\n    while (!dat.empty() && !dat.back()) dat.pop_back();\n    if\
+    \ (dat.empty()) neg = false;\n  }\n  bool is_zero() const { return dat.empty()\
+    \ || (dat.size() == 1 && !dat[0]); }\n  bool able_ll() const {\n    return dat.size()\
+    \ <= 2\n           || (dat.size() == 3 && !(dat.back() >> (63 - 2 * bdig)));\n\
+    \  }\n  int ctz() const {\n    if (is_zero()) return -1;\n    int ret = 0, i;\n\
+    \    for (i = 0; i < (int)dat.size() && !dat[i]; i++) ret += bdig;\n    return\
+    \ ret + __builtin_ctz(dat[i]);\n  }\n  void read(const std::string &s) {\n   \
+    \ dat.clear(), neg = s[0] == '-';\n    std::vector<short> v;\n    for (int i =\
+    \ s.length() - 1; i >= 0 && '0' <= s[i] && s[i] <= '9'; i--)\n      v.emplace_back(s[i]\
+    \ - '0');\n    for (int rem = 0; !v.empty(); dat.emplace_back(rem), rem = 0) {\n\
+    \      for (int i = v.size() - 1, cur; i >= 0; i--)\n        cur = rem * 10 +\
+    \ v[i], v[i] = cur >> bdig, rem = cur & (base - 1);\n      while (v.size() &&\
+    \ !v.back()) v.pop_back();\n    }\n  }\n  std::string to_str() const {\n    if\
+    \ (is_zero()) return \"0\";\n    auto v = dat;\n    std::string ret;\n    for\
+    \ (short rem = 0; !v.empty(); ret += rem + '0', rem = 0) {\n      for (int i =\
+    \ v.size() - 1, cur; i >= 0; i--)\n        cur = (rem << bdig) + v[i], v[i] =\
+    \ cur / 10, rem = cur % 10;\n      while (v.size() && !v.back()) v.pop_back();\n\
+    \    }\n    if (neg) ret += '-';\n    std::reverse(ret.begin(), ret.end());\n\
+    \    return ret;\n  }\n  BigInt &operator=(long long r) {\n    neg = false, dat.clear();\n\
+    \    if (r < 0) neg = true, r = -r;\n    for (; r; r >>= bdig) dat.emplace_back(r\
+    \ & (base - 1));\n    return *this;\n  }\n  bool operator<(const BigInt &r) const\
+    \ {\n    if (neg != r.neg) return neg;\n    if (dat.size() != r.dat.size()) return\
+    \ (dat.size() < r.dat.size()) ^ neg;\n    for (int i = dat.size() - 1; i >= 0;\
+    \ i--)\n      if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n    return\
+    \ false;\n  }\n  bool operator>(const BigInt &r) const { return r < *this; }\n\
+    \  bool operator<=(const BigInt &r) const { return !(r < *this); }\n  bool operator>=(const\
+    \ BigInt &r) const { return !(*this < r); }\n  bool operator==(const BigInt &r)\
+    \ const {\n    return neg == r.neg && dat == r.dat;\n  }\n  bool operator!=(const\
+    \ BigInt &r) const { return !(*this == r); }\n  BigInt abs() const {\n    BigInt\
+    \ ret = *this;\n    return ret.neg = false, ret;\n  }\n  BigInt operator-() const\
+    \ {\n    BigInt ret = *this;\n    return ret.neg = !ret.neg, ret;\n  }\n  BigInt\
+    \ operator+(const BigInt &r) const {\n    if (neg != r.neg) return *this - (-r);\n\
+    \    BigInt ret = r;\n    for (int i = 0, ed = std::max(dat.size(), r.dat.size()),\
+    \ carry = 0;\n         i < ed || carry; i++) {\n      if (i == (int)ret.dat.size())\
+    \ ret.dat.emplace_back(0);\n      ret.dat[i] += carry + (i < (int)dat.size() ?\
+    \ dat[i] : 0);\n      if ((carry = (ret.dat[i] >= base))) ret.dat[i] -= base;\n\
+    \    }\n    return ret;\n  }\n  BigInt operator-(const BigInt &r) const {\n  \
+    \  if (neg != r.neg) return *this + (-r);\n    if (abs() < r.abs()) return -(r\
+    \ - *this);\n    BigInt ret = *this;\n    for (int i = 0, carry = 0, ed = r.dat.size();\
+    \ i < ed || carry; i++) {\n      ret.dat[i] += base - (carry + (i < ed ? r.dat[i]\
+    \ : 0));\n      if (!(carry = (ret.dat[i] < base))) ret.dat[i] -= base;\n    }\n\
+    \    return ret.shrink(), ret;\n  }\n  BigInt &operator+=(const BigInt &r) { return\
+    \ *this = *this + r; }\n  BigInt &operator-=(const BigInt &r) { return *this =\
+    \ *this - r; }\n  BigInt &operator*=(long long r) {\n    if (r < 0) neg = !neg,\
+    \ r = -r;\n    for (long long i = 0, carry = 0, ed = dat.size(); i < ed || carry;\
+    \ i++) {\n      if (i == ed) dat.emplace_back(0);\n      long long cur = r * dat[i]\
+    \ + carry;\n      carry = cur >> bdig, dat[i] = cur & (base - 1);\n    }\n   \
+    \ return shrink(), *this;\n  }\n  BigInt &operator/=(long long r) {\n    if (r\
+    \ < 0) neg = !neg, r = -r;\n    for (__int128_t i = dat.size() - 1, cur, rem =\
+    \ 0; i >= 0; i--)\n      cur = dat[i] + (rem << bdig), dat[i] = cur / r, rem =\
+    \ cur % r;\n    return shrink(), *this;\n  }\n  long long operator%(long long\
+    \ r) const {\n    long long ret = 0;\n    for (int i = dat.size(); i;) ret = (dat[--i]\
+    \ + (ret << bdig)) % r;\n    return ret;\n  }\n  BigInt operator*(long long r)\
+    \ const { return BigInt(*this) *= r; }\n  BigInt operator/(long long r) const\
+    \ { return BigInt(*this) /= r; }\n  BigInt operator*(const BigInt &r) const {\n\
+    \    if (is_zero() || r.is_zero()) return 0;\n    static ModB f[1 << 20], g[1\
+    \ << 20];\n    static long long h[1 << 20];\n    int n = dat.size(), m = r.dat.size(),\
+    \ sz = n + m - 1;\n    if (n <= 8 || m <= 8) {\n      std::fill_n(h, sz, 0);\n\
+    \      for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++) h[i +\
+    \ j] += (long long)dat[i] * r.dat[j];\n    } else {\n      for (int i = 0; i <\
+    \ n; i++) f[i] = dat[i];\n      for (int i = 0; i < m; i++) g[i] = r.dat[i];\n\
+    \      int len = get_len(sz);\n      std::fill(f + n, f + len, 0), std::fill(g\
+    \ + m, g + len, 0);\n      dft(len, f), dft(len, g);\n      for (int i = 0; i\
+    \ < len; i++) f[i] *= g[i];\n      idft(len, f);\n      for (int i = 0; i < sz;\
+    \ i++) h[i] = f[i].val();\n    }\n    BigInt ret;\n    for (long long i = 0, carry\
+    \ = 0, cur; i < sz || carry; i++)\n      cur = carry + (i < sz ? h[i] : 0), carry\
+    \ = cur >> bdig,\n      ret.dat.emplace_back(cur & (base - 1));\n    return ret.shrink(),\
+    \ ret.neg = neg ^ r.neg, ret;\n  }\n  BigInt &operator*=(const BigInt &r) { return\
+    \ *this = *this * r; }\n  BigInt operator/(const BigInt &r) const {\n    if (r.dat.size()\
+    \ == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n    if (this->abs()\
+    \ < r.abs()) return 0;\n    if (r.able_ll()) return *this / r.convert_ll();\n\
+    \    static ModB f[1 << 20], g[1 << 20];\n    int pb = dat.size(), qb = r.dat.size(),\
+    \ prec = std::max(pb - qb, 1),\n        lim = std::min(prec, 3), rlim = std::min(qb,\
+    \ 6);\n    BigInt x, prev, rr = r.base_shift_r(qb - rlim), c;\n    x.dat.resize(lim\
+    \ + 1, 0), x.dat.back() = 1;\n    c.dat.resize(rlim + lim + 1, 0), c.dat.back()\
+    \ = 2;\n    while (x != prev) prev = x, x *= c - rr * x, x = x.base_shift_r(lim\
+    \ + rlim);\n    if (lim != prec) {\n      for (prev.dat.clear(); x != prev;) {\n\
+    \        prev = x;\n        int n = x.dat.size(), m = rr.dat.size(), sz = n +\
+    \ m - 1,\n            len1 = get_len(sz), len2 = get_len(rlim + lim + n),\n  \
+    \          nlim = std::min(lim * 2 + 1, prec),\n            nrlim = std::min(rlim\
+    \ * 2 + 1, qb);\n        for (int i = 0; i < n; i++) g[i] = x.dat[i];\n      \
+    \  for (int i = 0; i < m; i++) f[i] = rr.dat[i];\n        std::fill(g + n, g +\
+    \ len2, 0), std::fill(f + m, f + len1, 0);\n        dft(len1, f), dft(len2, g);\n\
+    \        for (int i = 0; i < len1; i++) f[i] *= g[i];\n        idft(len1, f),\
+    \ x.dat.clear();\n        for (long long i = 0, carry = 0, cur; i < sz || carry;\
+    \ i++)\n          cur = carry + (i < sz ? f[i].val() : 0), carry = cur >> bdig,\n\
+    \          x.dat.emplace_back(cur & (base - 1));\n        x = c - x, m = x.dat.size(),\
+    \ sz = n + m - 1;\n        for (int i = 0; i < m; i++) f[i] = x.dat[i];\n    \
+    \    std::fill(f + m, f + len2, 0), dft(len2, f);\n        for (int i = 0; i <\
+    \ len2; i++) f[i] *= g[i];\n        idft(len2, f), x.dat.clear();\n        for\
+    \ (long long i = 0, carry = 0, cur; i < sz || carry; i++) {\n          cur = carry\
+    \ + (i < sz ? f[i].val() : 0), carry = cur >> bdig;\n          if (i >= 2 * lim\
+    \ - nlim + rlim) x.dat.emplace_back(cur & (base - 1));\n        }\n        if\
+    \ (nrlim != rlim) rr = r.base_shift_r(qb - nrlim);\n        if (nrlim != rlim\
+    \ || nlim != lim)\n          c.dat.back() = 0, c.dat.resize(nrlim + nlim + 1,\
+    \ 0), c.dat.back() = 2;\n        lim = nlim, rlim = nrlim;\n      }\n    }\n \
+    \   x *= this->abs(), x = x.base_shift_r(pb + (pb == qb));\n    if (this->abs()\
+    \ >= (x + 1) * r.abs()) x += 1;\n    return x.neg = neg ^ r.neg, x.shrink(), x;\n\
+    \  }\n  BigInt &operator/=(const BigInt &r) { return *this = *this / r; }\n  BigInt\
+    \ &operator%=(const BigInt &r) { return *this -= (*this / r) * r; }\n  BigInt\
+    \ operator%(const BigInt &r) const { return BigInt(*this) %= r; }\n  BigInt &operator>>=(unsigned\
+    \ size) {\n    if (dat.size() * bdig <= size) return *this = 0;\n    unsigned\
+    \ i = 0, j = size / bdig, k = size % bdig, mask = (1 << k) - 1;\n    for (unsigned\
+    \ ed = dat.size(); j + 1 < ed; i++, j++)\n      dat[i] = (dat[j] >> k) | ((dat[j\
+    \ + 1] & mask) << (bdig - k));\n    return dat[i] = (dat[j] >> k), dat.resize(i\
+    \ + 1), shrink(), *this;\n  }\n  BigInt &operator<<=(unsigned size) {\n    if\
+    \ (is_zero()) return *this;\n    int i = dat.size(), k = size % bdig, j;\n   \
+    \ dat.resize(dat.size() + size / bdig + 1);\n    for (j = dat.size() - 1; i >\
+    \ 0; j--, i--)\n      dat[j] = ((dat[i] << k) & (base - 1)) | (dat[i - 1] >> (bdig\
+    \ - k));\n    dat[j] = (dat[0] << k) & (base - 1);\n    std::fill_n(dat.begin(),\
+    \ size / bdig, 0);\n    return shrink(), *this;\n  }\n  BigInt operator>>(unsigned\
+    \ size) const { return BigInt(*this) >>= size; }\n  BigInt operator<<(unsigned\
+    \ size) const { return BigInt(*this) <<= size; }\n  long long convert_ll() const\
+    \ {\n    assert(able_ll());\n    long long ret = 0;\n    for (int i = dat.size()\
+    \ - 1; i >= 0; i--) ret = (ret << bdig) + dat[i];\n    return neg ? -ret : ret;\n\
+    \  }\n  friend std::istream &operator>>(std::istream &is, BigInt &v) {\n    std::string\
+    \ s;\n    return is >> s, v.read(s), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const BigInt &v) {\n    return os << v.to_str(), os;\n  }\n};\n\nBigInt\
+    \ gcd(const BigInt &a, const BigInt &b) {\n  assert(!a.neg && !b.neg);\n  if (a.is_zero())\
+    \ return b;\n  if (b.is_zero()) return a;\n  int y = a.ctz(), z = b.ctz();\n \
+    \ BigInt x[2] = {a, b};\n  x[0] >>= y, x[1] >>= z;\n  bool id = 0;\n  while (true)\
+    \ {\n    if (x[id] < x[!id]) id = !id;\n    if ((x[id] -= x[!id]).is_zero()) break;\n\
+    \    x[id] >>= x[id].ctz();\n  }\n  return x[!id] << std::min(y, z);\n}\n\nBigInt\
+    \ lcm(const BigInt &a, const BigInt &b) { return (a / gcd(a, b)) * b; }\n#line\
+    \ 5 \"test/aoj/NTL_2_C.test.cpp\"\nusing namespace std;\n\nsigned main() {\n \
+    \ cin.tie(0);\n  ios::sync_with_stdio(false);\n  BigInt A, B;\n  cin >> A >> B;\n\
+    \  cout << A * B << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_C\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/BigInt.hpp\"\nusing namespace\
     \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  BigInt\
@@ -227,7 +226,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_C.test.cpp
   requiredBy: []
-  timestamp: '2021-02-12 19:25:32+09:00'
+  timestamp: '2021-02-12 20:52:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_C.test.cpp
