@@ -116,8 +116,8 @@ data:
   timestamp: '2020-10-23 23:21:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/235.LCT.test.cpp
   - test/aoj/2450.LCT.test.cpp
+  - test/yukicoder/235.LCT.test.cpp
 documentation_of: src/DataStructure/LinkCutTree_MonoidLazy.hpp
 layout: document
 redirect_from:

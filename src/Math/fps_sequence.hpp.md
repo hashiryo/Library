@@ -376,10 +376,10 @@ data:
   timestamp: '2021-02-10 10:21:48+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_first.test.cpp
   - test/yosupo/stirling_second.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/partition.test.cpp
 documentation_of: src/Math/fps_sequence.hpp
 layout: document
 redirect_from:

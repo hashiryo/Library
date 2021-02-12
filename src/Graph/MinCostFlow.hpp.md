@@ -248,10 +248,10 @@ data:
   timestamp: '2020-10-24 17:49:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/min_cost_b_flow.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
-  - test/aoj/GRL_6_B.test.cpp
+  - test/yosupo/min_cost_b_flow.test.cpp
   - test/aoj/GRL_6_B.RadixHeap.test.cpp
+  - test/aoj/GRL_6_B.test.cpp
 documentation_of: src/Graph/MinCostFlow.hpp
 layout: document
 redirect_from:

@@ -82,8 +82,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - test/yukicoder/235.HLD.test.cpp
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
+  - test/yukicoder/235.HLD.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Lazy.hpp
 layout: document
 redirect_from:

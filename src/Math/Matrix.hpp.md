@@ -120,9 +120,9 @@ data:
   timestamp: '2021-02-10 00:07:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1340.test.cpp
   - test/aoj/2397.test.cpp
   - test/aoj/2624.test.cpp
+  - test/yukicoder/1340.test.cpp
 documentation_of: src/Math/Matrix.hpp
 layout: document
 redirect_from:

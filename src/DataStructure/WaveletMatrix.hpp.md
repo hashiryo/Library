@@ -142,10 +142,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/range_kth_smallest.WM.test.cpp
-  - test/yukicoder/728.WM.test.cpp
-  - test/yukicoder/919.WM.test.cpp
   - test/aoj/1549.WM.test.cpp
   - test/aoj/2674.WM.test.cpp
+  - test/yukicoder/919.WM.test.cpp
+  - test/yukicoder/728.WM.test.cpp
 documentation_of: src/DataStructure/WaveletMatrix.hpp
 layout: document
 redirect_from:

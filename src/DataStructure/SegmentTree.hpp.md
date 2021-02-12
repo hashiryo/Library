@@ -108,8 +108,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
-  - test/yukicoder/649.SegTree.test.cpp
   - test/aoj/DSL_2_A.SegTree.test.cpp
+  - test/yukicoder/649.SegTree.test.cpp
 documentation_of: src/DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:
