@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/GaussianElimination.hpp
     title: "\u30AC\u30A6\u30B9\u306E\u6D88\u53BB\u6CD5"
   - icon: ':question:'
@@ -98,23 +98,22 @@ data:
     \ b, n, m);\n    } else {\n      std::vector<std::bitset<4096>> b(n);\n      subst(b,\
     \ a, n, m), rank = row_reduction<4096>(b, lim), subst(a, b, n, m);\n    }\n  \
     \  return std::make_pair(rank, rank == n);\n  }\n  template <class K>\n  static\
-    \ std::pair<std::vector<K>, std::vector<std::vector<K>>> linear_equation(\n  \
-    \    std::vector<std::vector<K>> a, const std::vector<K> &b) {\n    int n = a.size(),\
-    \ m = a[0].size();\n    for (int i = 0; i < n; i++) a[i].emplace_back(b[i]);\n\
-    \    int rank = row_reduction(a, m).first;\n    for (int i = rank; i < n; ++i)\n\
-    \      if (!is_zero(K(a[i][m]))) return {{}, {}};\n    std::vector<K> c(m, K(0));\n\
-    \    std::vector<int> piv(m, -1);\n    for (int i = 0, j = 0; i < rank; i++) {\n\
-    \      while (is_zero(K(a[i][j]))) j++;\n      c[j] = a[i][m], piv[j] = i;\n \
-    \   }\n    std::vector<std::vector<K>> d;\n    for (int j = 0; j < m; ++j) {\n\
-    \      if (piv[j] != -1) continue;\n      std::vector<K> x(m, K(0));\n      x[j]\
-    \ = K(-1);\n      for (int k = 0; k < j; ++k)\n        if (piv[k] != -1) x[k]\
-    \ = a[piv[k]][j];\n      d.emplace_back(x);\n    }\n    return {c, d};\n  }\n\
-    };\n#line 5 \"test/yosupo/matrix_det.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
-    \  using GE = GaussianElimination;\n  int N;\n  cin >> N;\n  vector<vector<Mint>>\
-    \ A(N, vector<Mint>(N));\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j\
-    \ < N; j++) cin >> A[i][j];\n  cout << GE::row_reduction(A).second << endl;\n\
-    \  return 0;\n}\n"
+    \ std::pair<std::vector<K>, std::vector<std::vector<K>>>\n  linear_equations(std::vector<std::vector<K>>\
+    \ a, const std::vector<K> &b) {\n    int n = a.size(), m = a[0].size();\n    for\
+    \ (int i = 0; i < n; i++) a[i].emplace_back(b[i]);\n    int rank = row_reduction(a,\
+    \ m).first;\n    for (int i = rank; i < n; ++i)\n      if (!is_zero(K(a[i][m])))\
+    \ return {{}, {}};\n    std::vector<K> c(m, K(0));\n    std::vector<int> piv(m,\
+    \ -1);\n    for (int i = 0, j = 0; i < rank; i++) {\n      while (is_zero(K(a[i][j])))\
+    \ j++;\n      c[j] = a[i][m], piv[j] = i;\n    }\n    std::vector<std::vector<K>>\
+    \ d;\n    for (int j = 0; j < m; ++j) {\n      if (piv[j] != -1) continue;\n \
+    \     std::vector<K> x(m, K(0));\n      x[j] = K(-1);\n      for (int k = 0; k\
+    \ < j; ++k)\n        if (piv[k] != -1) x[k] = a[piv[k]][j];\n      d.emplace_back(x);\n\
+    \    }\n    return {c, d};\n  }\n};\n#line 5 \"test/yosupo/matrix_det.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = ModInt<998244353>;\n  using GE = GaussianElimination;\n  int N;\n\
+    \  cin >> N;\n  vector<vector<Mint>> A(N, vector<Mint>(N));\n  for (int i = 0;\
+    \ i < N; i++)\n    for (int j = 0; j < N; j++) cin >> A[i][j];\n  cout << GE::row_reduction(A).second\
+    \ << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/GaussianElimination.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -128,7 +127,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2021-02-09 19:48:43+09:00'
+  timestamp: '2021-02-14 00:55:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/matrix_det.test.cpp

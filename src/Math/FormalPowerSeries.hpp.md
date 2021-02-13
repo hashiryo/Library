@@ -48,6 +48,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
@@ -665,6 +668,7 @@ data:
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp

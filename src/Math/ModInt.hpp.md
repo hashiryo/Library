@@ -93,6 +93,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
@@ -186,7 +189,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/665.test.cpp
     title: test/yukicoder/665.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
   - icon: ':heavy_check_mark:'
@@ -315,6 +318,7 @@ data:
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/linear_equations.test.cpp
