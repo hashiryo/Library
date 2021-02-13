@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
@@ -334,23 +334,23 @@ data:
     \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
     \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
     \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
-    \ * q}};\n  };\n  std::function<pm(poly, poly)> hgcd = [&](const poly &p0, const\
-    \ poly &p1) {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >>\
-    \ 1) + 1, n = p1.deg();\n    if (n < m) return pm{pv{poly{1}, poly{}}, pv{poly{},\
-    \ poly{1}}};\n    pm R(hgcd(poly(p0.begin() + m, p0.end()), poly(p1.begin() +\
-    \ m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n    if (ab[1].deg() < m) return\
-    \ R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n    int k = 2 * m -\
-    \ ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first, R);\n\
-    \    return mul(hgcd(poly(ab[1].begin() + k, ab[1].end()),\n                 \
-    \   poly(qr.second.begin() + k, qr.second.end())),\n               mulQ_l(qr.first,\
-    \ R));\n  };\n  std::function<pm(poly, poly)> cogcd = [&](const poly &p0, const\
-    \ poly &p1) {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(p0, p1));\n   \
-    \ pv p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return M;\n    std::pair<poly,\
+    \ * q}};\n  };\n  auto hgcd = [&](auto rec, const poly &p0, const poly &p1) ->\
+    \ pm {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) +\
+    \ 1, n = p1.deg();\n    if (n < m) return pm{pv{poly{1}, poly{}}, pv{poly{}, poly{1}}};\n\
+    \    pm R(rec(rec, poly(p0.begin() + m, p0.end()),\n             poly(p1.begin()\
+    \ + m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n    if (ab[1].deg() < m)\
+    \ return R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n    int k = 2\
+    \ * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first,\
+    \ R);\n    return mul(rec(rec, poly(ab[1].begin() + k, ab[1].end()),\n       \
+    \            poly(qr.second.begin() + k, qr.second.end())),\n               mulQ_l(qr.first,\
+    \ R));\n  };\n  auto cogcd = [&](auto rec, const poly &p0, const poly &p1) ->\
+    \ pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd, p0, p1));\n    pv\
+    \ p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return M;\n    std::pair<poly,\
     \ poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg() == -1) return mulQ_l(qr.first,\
-    \ M);\n    return mul(cogcd(p2p3[1], qr.second), mulQ_l(qr.first, M));\n  };\n\
-    \  pm c;\n  if (a.norm().deg() > b.norm().deg()) {\n    c = cogcd(a, b);\n  }\
-    \ else {\n    std::pair<poly, poly> qr(a.quorem(b));\n    c = mulQ_r(cogcd(b,\
-    \ qr.second), qr.first);\n  }\n  return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
+    \ M);\n    return mul(rec(rec, p2p3[1], qr.second), mulQ_l(qr.first, M));\n  };\n\
+    \  pm c;\n  if (a.norm().deg() > b.norm().deg()) {\n    c = cogcd(cogcd, a, b);\n\
+    \  } else {\n    std::pair<poly, poly> qr(a.quorem(b));\n    c = mulQ_r(cogcd(cogcd,\
+    \ b, qr.second), qr.first);\n  }\n  return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
     }\n#line 6 \"test/yosupo/inv_of_Poly.test.cpp\"\nusing namespace std;\n\nsigned\
     \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  using Poly = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  Poly\
@@ -378,8 +378,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2021-02-10 10:21:48+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-13 14:05:50+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
 layout: document
