@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MaxClique.hpp
     title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://old.yosupo.jp/problem/maximum_independent_set
@@ -66,7 +66,7 @@ data:
   path: test/yosupo/maximum_independent_set.test.cpp
   requiredBy: []
   timestamp: '2021-02-10 10:21:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/maximum_independent_set.test.cpp
 layout: document
