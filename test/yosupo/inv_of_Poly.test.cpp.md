@@ -334,32 +334,33 @@ data:
     \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
     \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
     \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
-    \ * q}};\n  };\n  auto hgcd = [&](auto rec, const poly &p0, const poly &p1) ->\
+    \ * q}};\n  };\n  auto hgcd = [&](auto rech, const poly &p0, const poly &p1) ->\
     \ pm {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) +\
     \ 1, n = p1.deg();\n    if (n < m) return pm{pv{poly{1}, poly{}}, pv{poly{}, poly{1}}};\n\
-    \    pm R(rec(rec, poly(p0.begin() + m, p0.end()),\n             poly(p1.begin()\
+    \    pm R(rech(rech, poly(p0.begin() + m, p0.end()),\n              poly(p1.begin()\
     \ + m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n    if (ab[1].deg() < m)\
     \ return R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n    int k = 2\
     \ * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first,\
-    \ R);\n    return mul(rec(rec, poly(ab[1].begin() + k, ab[1].end()),\n       \
-    \            poly(qr.second.begin() + k, qr.second.end())),\n               mulQ_l(qr.first,\
-    \ R));\n  };\n  auto cogcd = [&](auto rec, const poly &p0, const poly &p1) ->\
-    \ pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd, p0, p1));\n    pv\
-    \ p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return M;\n    std::pair<poly,\
-    \ poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg() == -1) return mulQ_l(qr.first,\
-    \ M);\n    return mul(rec(rec, p2p3[1], qr.second), mulQ_l(qr.first, M));\n  };\n\
-    \  pm c;\n  if (a.norm().deg() > b.norm().deg()) {\n    c = cogcd(cogcd, a, b);\n\
-    \  } else {\n    std::pair<poly, poly> qr(a.quorem(b));\n    c = mulQ_r(cogcd(cogcd,\
-    \ b, qr.second), qr.first);\n  }\n  return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
-    }\n#line 6 \"test/yosupo/inv_of_Poly.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
-    \  using Poly = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  Poly\
-    \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
-    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = extgcd(f, g, x, y);\n  if (d.deg()\
-    \ != 0) {\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout <<\
-    \ 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n  \
-    \  for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \" : \"\") << x[i];\n\
-    \    cout << '\\n';\n  }\n  return 0;\n}\n"
+    \ R);\n    return mul(rech(rech, poly(ab[1].begin() + k, ab[1].end()),\n     \
+    \               poly(qr.second.begin() + k, qr.second.end())),\n             \
+    \  mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto recc, const poly &p0,\
+    \ const poly &p1) -> pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd,\
+    \ p0, p1));\n    pv p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return\
+    \ M;\n    std::pair<poly, poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
+    \ == -1) return mulQ_l(qr.first, M);\n    return mul(recc(recc, p2p3[1], qr.second),\
+    \ mulQ_l(qr.first, M));\n  };\n  pm c;\n  if (a.norm().deg() > b.norm().deg())\
+    \ {\n    c = cogcd(cogcd, a, b);\n  } else {\n    std::pair<poly, poly> qr(a.quorem(b));\n\
+    \    c = mulQ_r(cogcd(cogcd, b, qr.second), qr.first);\n  }\n  return a * (x =\
+    \ c[0][0]) + b * (y = c[0][1]);\n}\n#line 6 \"test/yosupo/inv_of_Poly.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = ModInt<998244353>;\n  using Poly = FormalPowerSeries<Mint>;\n\
+    \  int N, M;\n  cin >> N >> M;\n  Poly f(N), g(M), x, y;\n  for (int i = 0; i\
+    \ < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n  Poly d\
+    \ = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cout << -1 << '\\n';\n  }\
+    \ else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout <<\
+    \ x.size() << '\\n';\n    x /= d[0];\n    for (size_t i = 0; i < x.size(); i++)\
+    \ cout << (i ? \" \" : \"\") << x[i];\n    cout << '\\n';\n  }\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
     \n#include \"src/Math/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n\
@@ -378,7 +379,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2021-02-13 14:05:50+09:00'
+  timestamp: '2021-02-13 19:31:33+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp

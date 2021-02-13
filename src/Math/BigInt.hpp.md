@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,9 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
@@ -76,9 +76,9 @@ data:
     \  }\n  u64 x;\n};\n#line 4 \"src/Math/BigInt.hpp\"\n/**\n * @title \u591A\u500D\
     \u9577\u6574\u6570\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\nstruct\
     \ BigInt {\n  static constexpr unsigned base = 10000000, bdig = 7;\n  bool neg;\n\
-    \n private:\n  std::vector<unsigned> dat;\n  using ModB = ModInt<4611615649683210241,\
-    \ 11>;\n  template <class mod_t>\n  static inline void idft(int n, mod_t x[])\
-    \ {\n    static mod_t iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
+    \n private:\n  std::vector<unsigned> dat;\n  using ModB = ModInt<4611685989973229569,\
+    \ 7>;\n  template <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n\
+    \    static mod_t iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
     \    static constexpr mod_t G(mod_t::pr_rt());\n    static int lim = 0;\n    if\
     \ (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n\
     \      mod_t idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n      for (int i = 0;\
@@ -163,18 +163,19 @@ data:
     \ = cur / base,\n      ret.dat.emplace_back(cur % base);\n    return ret.neg =\
     \ neg ^ r.neg, ret.shrink(), ret;\n  }\n  BigInt &operator*=(const BigInt &r)\
     \ { return *this = *this * r; }\n  BigInt operator/(const BigInt &r) const {\n\
-    \    if (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n\
-    \    if (this->abs() < r.abs()) return 0;\n    int pb = dat.size(), qb = r.dat.size(),\
-    \ prec = std::max(pb - qb, 1),\n        lim = std::min(prec, 3), rlim = std::min(qb,\
-    \ 6),\n        nlim = std::min(lim * 2 + 1, prec), nrlim = std::min(rlim * 2 +\
-    \ 1, qb);\n    BigInt x, prev, rr = r.base_shift_r(qb - rlim), c;\n    x.dat.resize(lim\
-    \ + 1, 0), x.dat.back() = 1;\n    c.dat.resize(rlim + lim + 1, 0), c.dat.back()\
-    \ = 2;\n    while (x != prev) prev = x, x *= c - rr * x, x = x.base_shift_r(lim\
-    \ + rlim);\n    if (lim != prec) {\n      for (prev.neg = true; x != prev; lim\
-    \ = nlim, rlim = nrlim) {\n        nlim = std::min(lim * 2 + 1, prec), nrlim =\
-    \ std::min(rlim * 2 + 1, qb);\n        prev = x, x *= c - rr * x, x = x.base_shift_r(2\
-    \ * lim - nlim + rlim);\n        if (nrlim != rlim) rr = r.base_shift_r(qb - nrlim);\n\
-    \        if (nrlim != rlim || nlim != lim)\n          c.dat.back() = 0, c.dat.resize(nrlim\
+    \    if (is_zero()) return *this;\n    if (r.dat.size() == 1 && r.dat.back() ==\
+    \ 1) return r.neg ? -*this : *this;\n    if (this->abs() < r.abs()) return 0;\n\
+    \    int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1),\n  \
+    \      lim = std::min(prec, 3), rlim = std::min(qb, 6),\n        nlim = std::min(lim\
+    \ * 2 + 1, prec), nrlim = std::min(rlim * 2 + 1, qb);\n    BigInt x, prev, rr\
+    \ = r.base_shift_r(qb - rlim), c;\n    x.dat.resize(lim + 1, 0), x.dat.back()\
+    \ = 1;\n    c.dat.resize(rlim + lim + 1, 0), c.dat.back() = 2;\n    while (x !=\
+    \ prev) prev = x, x *= c - rr * x, x = x.base_shift_r(lim + rlim);\n    if (lim\
+    \ != prec) {\n      for (prev.neg = true; x != prev; lim = nlim, rlim = nrlim)\
+    \ {\n        nlim = std::min(lim * 2 + 1, prec), nrlim = std::min(rlim * 2 + 1,\
+    \ qb);\n        prev = x, x *= c - rr * x, x = x.base_shift_r(2 * lim - nlim +\
+    \ rlim);\n        if (nrlim != rlim) rr = r.base_shift_r(qb - nrlim);\n      \
+    \  if (nrlim != rlim || nlim != lim)\n          c.dat.back() = 0, c.dat.resize(nrlim\
     \ + nlim + 1, 0), c.dat.back() = 2;\n      }\n    }\n    x *= this->abs(), x =\
     \ x.base_shift_r(pb + (pb == qb));\n    if (this->abs() >= (x + 1) * r.abs())\
     \ x += 1;\n    return x.neg = neg ^ r.neg, x.shrink(), x;\n  }\n  BigInt &operator/=(const\
@@ -188,7 +189,7 @@ data:
     /**\n * @title \u591A\u500D\u9577\u6574\u6570\n * @category \u6570\u5B66\n */\n\
     \n// BEGIN CUT HERE\n\nstruct BigInt {\n  static constexpr unsigned base = 10000000,\
     \ bdig = 7;\n  bool neg;\n\n private:\n  std::vector<unsigned> dat;\n  using ModB\
-    \ = ModInt<4611615649683210241, 11>;\n  template <class mod_t>\n  static inline\
+    \ = ModInt<4611685989973229569, 7>;\n  template <class mod_t>\n  static inline\
     \ void idft(int n, mod_t x[]) {\n    static mod_t iW[1 << 20];\n    static constexpr\
     \ std::uint64_t mod = mod_t::modulo();\n    static constexpr mod_t G(mod_t::pr_rt());\n\
     \    static int lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n    for (int\
@@ -275,18 +276,19 @@ data:
     \ = cur / base,\n      ret.dat.emplace_back(cur % base);\n    return ret.neg =\
     \ neg ^ r.neg, ret.shrink(), ret;\n  }\n  BigInt &operator*=(const BigInt &r)\
     \ { return *this = *this * r; }\n  BigInt operator/(const BigInt &r) const {\n\
-    \    if (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n\
-    \    if (this->abs() < r.abs()) return 0;\n    int pb = dat.size(), qb = r.dat.size(),\
-    \ prec = std::max(pb - qb, 1),\n        lim = std::min(prec, 3), rlim = std::min(qb,\
-    \ 6),\n        nlim = std::min(lim * 2 + 1, prec), nrlim = std::min(rlim * 2 +\
-    \ 1, qb);\n    BigInt x, prev, rr = r.base_shift_r(qb - rlim), c;\n    x.dat.resize(lim\
-    \ + 1, 0), x.dat.back() = 1;\n    c.dat.resize(rlim + lim + 1, 0), c.dat.back()\
-    \ = 2;\n    while (x != prev) prev = x, x *= c - rr * x, x = x.base_shift_r(lim\
-    \ + rlim);\n    if (lim != prec) {\n      for (prev.neg = true; x != prev; lim\
-    \ = nlim, rlim = nrlim) {\n        nlim = std::min(lim * 2 + 1, prec), nrlim =\
-    \ std::min(rlim * 2 + 1, qb);\n        prev = x, x *= c - rr * x, x = x.base_shift_r(2\
-    \ * lim - nlim + rlim);\n        if (nrlim != rlim) rr = r.base_shift_r(qb - nrlim);\n\
-    \        if (nrlim != rlim || nlim != lim)\n          c.dat.back() = 0, c.dat.resize(nrlim\
+    \    if (is_zero()) return *this;\n    if (r.dat.size() == 1 && r.dat.back() ==\
+    \ 1) return r.neg ? -*this : *this;\n    if (this->abs() < r.abs()) return 0;\n\
+    \    int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1),\n  \
+    \      lim = std::min(prec, 3), rlim = std::min(qb, 6),\n        nlim = std::min(lim\
+    \ * 2 + 1, prec), nrlim = std::min(rlim * 2 + 1, qb);\n    BigInt x, prev, rr\
+    \ = r.base_shift_r(qb - rlim), c;\n    x.dat.resize(lim + 1, 0), x.dat.back()\
+    \ = 1;\n    c.dat.resize(rlim + lim + 1, 0), c.dat.back() = 2;\n    while (x !=\
+    \ prev) prev = x, x *= c - rr * x, x = x.base_shift_r(lim + rlim);\n    if (lim\
+    \ != prec) {\n      for (prev.neg = true; x != prev; lim = nlim, rlim = nrlim)\
+    \ {\n        nlim = std::min(lim * 2 + 1, prec), nrlim = std::min(rlim * 2 + 1,\
+    \ qb);\n        prev = x, x *= c - rr * x, x = x.base_shift_r(2 * lim - nlim +\
+    \ rlim);\n        if (nrlim != rlim) rr = r.base_shift_r(qb - nrlim);\n      \
+    \  if (nrlim != rlim || nlim != lim)\n          c.dat.back() = 0, c.dat.resize(nrlim\
     \ + nlim + 1, 0), c.dat.back() = 2;\n      }\n    }\n    x *= this->abs(), x =\
     \ x.base_shift_r(pb + (pb == qb));\n    if (this->abs() >= (x + 1) * r.abs())\
     \ x += 1;\n    return x.neg = neg ^ r.neg, x.shrink(), x;\n  }\n  BigInt &operator/=(const\
@@ -301,8 +303,8 @@ data:
   isVerificationFile: false
   path: src/Math/BigInt.hpp
   requiredBy: []
-  timestamp: '2021-02-13 17:43:56+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-02-13 19:31:33+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_2_C.test.cpp
   - test/aoj/NTL_2_D.test.cpp
