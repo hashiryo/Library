@@ -343,8 +343,8 @@ data:
     \ * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first,\
     \ R);\n    return mul(rech(rech, poly(ab[1].begin() + k, ab[1].end()),\n     \
     \               poly(qr.second.begin() + k, qr.second.end())),\n             \
-    \  mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto recc, const poly &p0,\
-    \ const poly &p1) -> pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd,\
+    \  mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&, &hgcd](auto recc, const poly\
+    \ &p0, const poly &p1) -> pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd,\
     \ p0, p1));\n    pv p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return\
     \ M;\n    std::pair<poly, poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
     \ == -1) return mulQ_l(qr.first, M);\n    return mul(recc(recc, p2p3[1], qr.second),\
@@ -385,7 +385,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2021-02-14 12:18:09+09:00'
+  timestamp: '2021-02-14 14:59:41+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp

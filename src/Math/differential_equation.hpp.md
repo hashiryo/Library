@@ -9,12 +9,12 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
     links:
@@ -338,7 +338,7 @@ data:
   path: src/Math/differential_equation.hpp
   requiredBy: []
   timestamp: '2021-02-10 10:21:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/963.test.cpp
 documentation_of: src/Math/differential_equation.hpp

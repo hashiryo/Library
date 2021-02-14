@@ -10,6 +10,9 @@ data:
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1019.test.cpp
+    title: test/yukicoder/1019.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
   _isVerificationFailed: false
@@ -90,6 +93,7 @@ data:
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yukicoder/1019.test.cpp
   - test/yukicoder/644.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document

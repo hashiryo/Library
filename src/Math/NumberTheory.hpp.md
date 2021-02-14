@@ -7,6 +7,9 @@ data:
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1019.test.cpp
+    title: test/yukicoder/1019.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
   - icon: ':heavy_check_mark:'
@@ -160,6 +163,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
+  - test/yukicoder/1019.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/886.numth.test.cpp
 documentation_of: src/Math/NumberTheory.hpp
