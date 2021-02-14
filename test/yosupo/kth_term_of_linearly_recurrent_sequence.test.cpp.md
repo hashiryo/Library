@@ -12,9 +12,9 @@ data:
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
@@ -332,15 +332,15 @@ data:
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<998244353>;\n  long long d, k;\n  cin >> d >> k;\n  vector<Mint>\
     \ a(d), c(d);\n  for (int i = 0; i < d; i++) cin >> a[i];\n  for (int i = 0; i\
-    \ < d; i++) cin >> c[i];\n  cout << kitamasa(c, a, k) << '\\n';\n  return 0;\n\
-    }\n"
+    \ < d; i++) cin >> c[d - i - 1];\n  cout << kitamasa(c, a, k) << '\\n';\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
     \n#include \"src/Math/kitamasa.hpp\"\nusing namespace std;\n\nsigned main() {\n\
     \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  long long d, k;\n  cin >> d >> k;\n  vector<Mint> a(d), c(d);\n  for (int i\
-    \ = 0; i < d; i++) cin >> a[i];\n  for (int i = 0; i < d; i++) cin >> c[i];\n\
-    \  cout << kitamasa(c, a, k) << '\\n';\n  return 0;\n}"
+    \ = 0; i < d; i++) cin >> a[i];\n  for (int i = 0; i < d; i++) cin >> c[d - i\
+    \ - 1];\n  cout << kitamasa(c, a, k) << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
@@ -348,8 +348,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2021-02-14 00:55:41+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-14 12:18:09+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
 layout: document

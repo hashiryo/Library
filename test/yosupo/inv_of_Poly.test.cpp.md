@@ -356,26 +356,28 @@ data:
     \  using Mint = ModInt<998244353>;\n  using Poly = FormalPowerSeries<Mint>;\n\
     \  int N, M;\n  cin >> N >> M;\n  Poly f(N), g(M), x, y;\n  for (int i = 0; i\
     \ < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n  Poly d\
-    \ = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cerr << \"d size = \" << d.size();\n\
-    \    if (d.size() <= 10) {\n      cerr << \"d = { \";\n      for (auto x : d)\
-    \ cerr << x << \" \";\n      cerr << \" }\" << '\\n';\n    }\n    cout << -1 <<\
-    \ '\\n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n\
-    \    cout << x.size() << '\\n';\n    x /= d[0];\n    for (size_t i = 0; i < x.size();\
-    \ i++) cout << (i ? \" \" : \"\") << x[i];\n    cout << '\\n';\n  }\n  return\
-    \ 0;\n}\n"
+    \ = extgcd(f, g, x, y);\n  cerr << \"x deg = \" << x.deg() << '\\n';\n  cerr <<\
+    \ \"y deg = \" << y.deg() << '\\n';\n  if (d.deg() != 0) {\n    cerr << \"d deg=\
+    \ \" << d.deg() << '\\n';\n    if (d.size() <= 10) {\n      cerr << \"d = { \"\
+    ;\n      for (auto x : d) cerr << x << \" \";\n      cerr << \" }\" << '\\n';\n\
+    \    }\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout << 0\
+    \ << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n    for\
+    \ (size_t i = 0; i < x.size(); i++) cout << (i ? \" \" : \"\") << x[i];\n    cout\
+    \ << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
     \n#include \"src/Math/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n\
     \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  using Poly = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  Poly\
     \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
-    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = extgcd(f, g, x, y);\n  if (d.deg()\
-    \ != 0) {\n    cerr << \"d size = \" << d.size();\n    if (d.size() <= 10) {\n\
-    \      cerr << \"d = { \";\n      for (auto x : d) cerr << x << \" \";\n     \
-    \ cerr << \" }\" << '\\n';\n    }\n    cout << -1 << '\\n';\n  } else if (x.deg()\
-    \ == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n\
-    \    x /= d[0];\n    for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \"\
-    \ : \"\") << x[i];\n    cout << '\\n';\n  }\n  return 0;\n}"
+    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = extgcd(f, g, x, y);\n  cerr << \"\
+    x deg = \" << x.deg() << '\\n';\n  cerr << \"y deg = \" << y.deg() << '\\n';\n\
+    \  if (d.deg() != 0) {\n    cerr << \"d deg= \" << d.deg() << '\\n';\n    if (d.size()\
+    \ <= 10) {\n      cerr << \"d = { \";\n      for (auto x : d) cerr << x << \"\
+    \ \";\n      cerr << \" }\" << '\\n';\n    }\n    cout << -1 << '\\n';\n  } else\
+    \ if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout << x.size()\
+    \ << '\\n';\n    x /= d[0];\n    for (size_t i = 0; i < x.size(); i++) cout <<\
+    \ (i ? \" \" : \"\") << x[i];\n    cout << '\\n';\n  }\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/FormalPowerSeries.hpp
@@ -383,7 +385,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2021-02-14 00:55:41+09:00'
+  timestamp: '2021-02-14 12:18:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
