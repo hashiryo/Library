@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/LinkCutTree_Monoid.hpp
     title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite
@@ -103,25 +103,25 @@ data:
     \  }\n  u64 x;\n};\n#line 6 \"test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp\"\
     \nusing namespace std;\n#undef call_from_test\n\nusing Mint = ModInt<998244353>;\n\
     struct RcompositeQ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return\
-    \ make_pair(Mint(1), Mint(0)); }\n  static T f(const T &l, const T &r) {\n   \
-    \ return make_pair(r.first * l.first, r.first * l.second + r.second);\n  }\n};\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin\
-    \ >> N >> Q;\n  LinkCutTree_Monoid<RcompositeQ> lct(N);\n  for (int i = 0; i <\
-    \ N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n    lct.set_val(i, {a, b});\n\
+    \ make_pair(Mint(1), Mint(0)); }\n  static T op(const T &l, const T &r) {\n  \
+    \  return make_pair(r.first * l.first, r.first * l.second + r.second);\n  }\n\
+    };\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n\
+    \  cin >> N >> Q;\n  LinkCutTree_Monoid<RcompositeQ> lct(N);\n  for (int i = 0;\
+    \ i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n    lct.set_val(i, {a, b});\n\
     \  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n\
     \    lct.link(u, v);\n  }\n  while (Q--) {\n    int op;\n    cin >> op;\n    if\
     \ (op == 0) {\n      int u, v, w, x;\n      cin >> u >> v >> w >> x;\n      lct.cut(u,\
     \ v);\n      lct.link(w, x);\n    } else if (op == 1) {\n      int p;\n      Mint\
     \ c, d;\n      cin >> p >> c >> d;\n      lct.set_val(p, {c, d});\n    } else\
     \ {\n      int u, v;\n      Mint x;\n      cin >> u >> v >> x;\n      auto ans\
-    \ = lct.query(u, v);\n      cout << ans.first * x + ans.second << endl;\n    }\n\
+    \ = lct.fold(u, v);\n      cout << ans.first * x + ans.second << endl;\n    }\n\
     \  }\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/LinkCutTree_Monoid.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n#undef call_from_test\n\
     \nusing Mint = ModInt<998244353>;\nstruct RcompositeQ {\n  using T = pair<Mint,\
     \ Mint>;\n  static T ti() { return make_pair(Mint(1), Mint(0)); }\n  static T\
-    \ f(const T &l, const T &r) {\n    return make_pair(r.first * l.first, r.first\
+    \ op(const T &l, const T &r) {\n    return make_pair(r.first * l.first, r.first\
     \ * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree_Monoid<RcompositeQ> lct(N);\n  for\
     \ (int i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n    lct.set_val(i,\
@@ -131,7 +131,7 @@ data:
     \ x;\n      lct.cut(u, v);\n      lct.link(w, x);\n    } else if (op == 1) {\n\
     \      int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      lct.set_val(p,\
     \ {c, d});\n    } else {\n      int u, v;\n      Mint x;\n      cin >> u >> v\
-    \ >> x;\n      auto ans = lct.query(u, v);\n      cout << ans.first * x + ans.second\
+    \ >> x;\n      auto ans = lct.fold(u, v);\n      cout << ans.first * x + ans.second\
     \ << endl;\n    }\n  }\n  return 0;\n}\n"
   dependsOn:
   - src/DataStructure/LinkCutTree_Monoid.hpp
@@ -139,8 +139,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   requiredBy: []
-  timestamp: '2021-09-20 02:18:32+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-09-20 02:40:07+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
 layout: document

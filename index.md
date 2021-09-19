@@ -32,7 +32,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree.hpp
       title: "Link-Cut-Tree(\u30B7\u30F3\u30D7\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree_Monoid.hpp
       title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
     - icon: ':heavy_check_mark:'
@@ -108,7 +108,7 @@ data:
       title: "\u6700\u8FD1\u70B9\u5BFE"
   - name: src/Graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "HL\u5206\u89E3"
     - icon: ':warning:'
@@ -557,7 +557,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -721,7 +721,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/215.test.cpp
       title: test/yukicoder/215.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp
     - icon: ':heavy_check_mark:'
