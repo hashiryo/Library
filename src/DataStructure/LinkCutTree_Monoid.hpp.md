@@ -6,15 +6,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
     links: []
@@ -35,9 +35,9 @@ data:
     \      eval(x);\n      if (!is_root(x->par)) {\n        if (dir(x) == dir(x->par))\n\
     \          rot(x->par);\n        else\n          rot(x);\n      }\n      rot(x);\n\
     \    }\n  }\n  void pushup(Node *t) {\n    t->rdat = t->dat = t->val;\n    if\
-    \ (t->ch[0])\n      t->dat = M::f(t->ch[0]->dat, t->dat),\n      t->rdat = M::f(t->rdat,\
-    \ t->ch[0]->rdat);\n    if (t->ch[1])\n      t->dat = M::f(t->dat, t->ch[1]->dat),\n\
-    \      t->rdat = M::f(t->ch[1]->rdat, t->rdat);\n  }\n  Node *expose(Node *x)\
+    \ (t->ch[0])\n      t->dat = M::op(t->ch[0]->dat, t->dat),\n      t->rdat = M::op(t->rdat,\
+    \ t->ch[0]->rdat);\n    if (t->ch[1])\n      t->dat = M::op(t->dat, t->ch[1]->dat),\n\
+    \      t->rdat = M::op(t->ch[1]->rdat, t->rdat);\n  }\n  Node *expose(Node *x)\
     \ {\n    Node *r = nullptr;\n    for (Node *p = x; p; p = p->par) {\n      splay(p);\n\
     \      p->ch[1] = r;\n      pushup(p);\n      r = p;\n    }\n    splay(x);\n \
     \   return r;\n  }\n  void toggle(Node *t) {\n    std::swap(t->ch[0], t->ch[1]);\n\
@@ -54,7 +54,7 @@ data:
     \    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n    pushup(&ns[c]);\n\
     \  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) { return\
-    \ ns[k].val; }\n  // [a,b] closed section\n  T query(int a, int b) {\n    evert(a);\n\
+    \ ns[k].val; }\n  // [a,b] closed section\n  T fold(int a, int b) {\n    evert(a);\n\
     \    expose(&ns[b]);\n    return ns[b].dat;\n  }\n  void set_val(int k, T v) {\n\
     \    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Link-Cut-Tree(\u30E2\
@@ -73,9 +73,9 @@ data:
     \ eval(x->par->par);\n      eval(x->par);\n      eval(x);\n      if (!is_root(x->par))\
     \ {\n        if (dir(x) == dir(x->par))\n          rot(x->par);\n        else\n\
     \          rot(x);\n      }\n      rot(x);\n    }\n  }\n  void pushup(Node *t)\
-    \ {\n    t->rdat = t->dat = t->val;\n    if (t->ch[0])\n      t->dat = M::f(t->ch[0]->dat,\
-    \ t->dat),\n      t->rdat = M::f(t->rdat, t->ch[0]->rdat);\n    if (t->ch[1])\n\
-    \      t->dat = M::f(t->dat, t->ch[1]->dat),\n      t->rdat = M::f(t->ch[1]->rdat,\
+    \ {\n    t->rdat = t->dat = t->val;\n    if (t->ch[0])\n      t->dat = M::op(t->ch[0]->dat,\
+    \ t->dat),\n      t->rdat = M::op(t->rdat, t->ch[0]->rdat);\n    if (t->ch[1])\n\
+    \      t->dat = M::op(t->dat, t->ch[1]->dat),\n      t->rdat = M::op(t->ch[1]->rdat,\
     \ t->rdat);\n  }\n  Node *expose(Node *x) {\n    Node *r = nullptr;\n    for (Node\
     \ *p = x; p; p = p->par) {\n      splay(p);\n      p->ch[1] = r;\n      pushup(p);\n\
     \      r = p;\n    }\n    splay(x);\n    return r;\n  }\n  void toggle(Node *t)\
@@ -92,7 +92,7 @@ data:
     \    expose(&ns[c]);\n    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n\
     \    pushup(&ns[c]);\n  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n  \
     \  Node *u = expose(&ns[y]);\n    return ns[x].par ? u - &ns[0] : -1;\n  }\n \
-    \ T operator[](int k) { return ns[k].val; }\n  // [a,b] closed section\n  T query(int\
+    \ T operator[](int k) { return ns[k].val; }\n  // [a,b] closed section\n  T fold(int\
     \ a, int b) {\n    evert(a);\n    expose(&ns[b]);\n    return ns[b].dat;\n  }\n\
     \  void set_val(int k, T v) {\n    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n\
     \  }\n};"
@@ -100,8 +100,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree_Monoid.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-09-20 02:18:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp

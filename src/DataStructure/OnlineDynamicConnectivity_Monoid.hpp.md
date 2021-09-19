@@ -31,9 +31,9 @@ data:
     \ i) {\n    n[i].sz = (n[i].s == n[i].d), n[i].flag &= 0b0101,\n    n[i].flag\
     \ |= n[i].flag << 1, n[i].sum = n[i].val;\n    if (n[i].ch[0])\n      n[i].sz\
     \ += n[n[i].ch[0]].sz, n[i].flag |= n[n[i].ch[0]].flag & 0b1010,\n          n[i].sum\
-    \ = M::f(n[n[i].ch[0]].sum, n[i].sum);\n    if (n[i].ch[1])\n      n[i].sz +=\
+    \ = M::op(n[n[i].ch[0]].sum, n[i].sum);\n    if (n[i].ch[1])\n      n[i].sz +=\
     \ n[n[i].ch[1]].sz, n[i].flag |= n[n[i].ch[1]].flag & 0b1010,\n          n[i].sum\
-    \ = M::f(n[i].sum, n[n[i].ch[1]].sum);\n  }\n\n  static int dir(node_id i) {\n\
+    \ = M::op(n[i].sum, n[n[i].ch[1]].sum);\n  }\n\n  static int dir(node_id i) {\n\
     \    if (n[i].par) {\n      if (n[n[i].par].ch[0] == i)\n        return 0;\n \
     \     else if (n[n[i].par].ch[1] == i)\n        return 1;\n    }\n    return 2;\n\
     \  }\n\n  static void rot(node_id x) {\n    node_id p = n[x].par;\n    int d =\
@@ -72,7 +72,7 @@ data:
     \ subedge_set(vertex_id x, bool val) {\n    splay(x += n_st);\n    if (val)\n\
     \      n[x].flag |= (0b0100);\n    else\n      n[x].flag &= ~(0b0100);\n    pushup(x);\n\
     \  }\n\n  void set_val(vertex_id x, T val) {\n    splay(x += n_st), n[x].val =\
-    \ M::f(n[x].val, val), pushup(x);\n  }\n\n  int tree_size(vertex_id x) { return\
+    \ M::op(n[x].val, val), pushup(x);\n  }\n\n  int tree_size(vertex_id x) { return\
     \ splay(x += n_st), n[x].sz; }\n  T tree_fold(vertex_id x) { return splay(x +=\
     \ n_st), n[x].sum; }\n\n  template <class Func>\n  void hilevel_edges(vertex_id\
     \ v, Func f) {\n    splay(v += n_st);\n    while (v && (n[v].flag & 0b0010)) {\n\
@@ -161,7 +161,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/OnlineDynamicConnectivity_Monoid.hpp
   requiredBy: []
-  timestamp: '2021-09-20 02:06:56+09:00'
+  timestamp: '2021-09-20 02:18:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp

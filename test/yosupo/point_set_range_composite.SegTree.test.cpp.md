@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -31,51 +31,50 @@ data:
     \  SegmentTree(int n_, T v) : SegmentTree(std::vector<T>(n_, v)) {}\n  SegmentTree(const\
     \ std::vector<T> &v) : n(v.size()), dat(n << 1, M::ti()) {\n    for (int i = 0;\
     \ i < (int)v.size(); i++) dat[i + n] = v[i];\n    rebuild();\n  }\n  void set_val(int\
-    \ k, T x) {\n    for (dat[k += n] = x; k >>= 1;)\n      dat[k] = M::f(dat[(k <<\
-    \ 1) | 0], dat[(k << 1) | 1]);\n  }\n  void unsafe_set(int k, T x) { dat[k + n]\
-    \ = x; }\n  void rebuild() {\n    for (int i = n - 1; i >= 1; i--)\n      dat[i]\
-    \ = M::f(dat[i << 1 | 0], dat[i << 1 | 1]);\n  }\n  void clear() { fill(dat.begin(),\
-    \ dat.end(), M::ti()); }\n  //[l,r)\n  inline T query(int l, int r) {\n    T vl\
+    \ k, T x) {\n    for (dat[k += n] = x; k >>= 1;)\n      dat[k] = M::op(dat[(k\
+    \ << 1) | 0], dat[(k << 1) | 1]);\n  }\n  void unsafe_set(int k, T x) { dat[k\
+    \ + n] = x; }\n  void rebuild() {\n    for (int i = n - 1; i >= 1; i--)\n    \
+    \  dat[i] = M::op(dat[i << 1 | 0], dat[i << 1 | 1]);\n  }\n  void clear() { fill(dat.begin(),\
+    \ dat.end(), M::ti()); }\n  //[l,r)\n  inline T fold(int l, int r) {\n    T vl\
     \ = M::ti(), vr = M::ti();\n    for (int a = l + n, b = r + n; a < b; a >>= 1,\
-    \ b >>= 1) {\n      if (a & 1) vl = M::f(vl, dat[a++]);\n      if (b & 1) vr =\
-    \ M::f(dat[--b], vr);\n    }\n    return M::f(vl, vr);\n  }\n  T operator[](const\
-    \ int &k) const { return dat[k + n]; }\n\n  // max{ i : check(query(l,i+1)) =\
-    \ true}\n  template <class C>\n  int find_right(const C &check, int l = 0) {\n\
-    \    assert(check(M::ti()));\n    if (l == n) return n;\n    std::vector<int>\
-    \ idl, idr;\n    for (int a = l + n, b = 2 * n; a < b; a >>= 1, b >>= 1) {\n \
-    \     if (a & 1) idl.push_back(a++);\n      if (b & 1) idr.push_back(--b);\n \
-    \   }\n    for (auto itr = idr.rbegin(); itr != idr.rend(); itr++) idl.push_back(*itr);\n\
-    \    T val = M::ti();\n    for (int i : idl) {\n      if (!check(M::f(val, dat[i])))\
-    \ {\n        while (i < n) {\n          i = i << 1 | 0;\n          if (check(M::f(val,\
-    \ dat[i]))) val = M::f(val, dat[i++]);\n        }\n        return i - n;\n   \
-    \   }\n      val = M::f(val, dat[i]);\n    }\n    return n;\n  }\n  //   min {\
-    \ i : check(query(i,r)) = true }\n  template <class C>\n  int find_left(const\
-    \ C &check, int r = -1) {\n    if (r < 0) r = n;\n    assert(check(M::ti()));\n\
-    \    if (r == 0) return 0;\n    std::vector<int> idl, idr;\n    for (int a = n,\
-    \ b = r + n; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) idl.push_back(a++);\n\
-    \      if (b & 1) idr.push_back(--b);\n    }\n    for (auto itr = idl.rbegin();\
-    \ itr != idl.rend(); itr++) idr.push_back(*itr);\n    T val = M::ti();\n    for\
-    \ (int i : idr) {\n      if (!check(M::f(dat[i], val))) {\n        while (i <\
-    \ n) {\n          i = i << 1 | 1;\n          if (check(M::f(dat[i], val))) val\
-    \ = M::f(dat[i--], val);\n        }\n        return i + 1 - n;\n      }\n    \
-    \  val = M::f(dat[i], val);\n    }\n    return 0;\n  }\n};\n#line 3 \"src/Math/ModInt.hpp\"\
-    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt {\n\
-    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1), r2 = -u128(mod) % mod;\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
-    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
-    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n\n public:\n  constexpr\
-    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
-    \ - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 modulo()\
-    \ { return mod; }\n  static constexpr u64 norm(u64 w) { return w - (mod & -(w\
-    \ >= mod)); }\n  static constexpr u64 pr_rt() { return prim_root; }\n  constexpr\
-    \ ModInt operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1)\
-    \ & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs)\
-    \ {\n    return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n\
-    \  }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x,\
-    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
+    \ b >>= 1) {\n      if (a & 1) vl = M::op(vl, dat[a++]);\n      if (b & 1) vr\
+    \ = M::op(dat[--b], vr);\n    }\n    return M::op(vl, vr);\n  }\n  T operator[](const\
+    \ int &k) const { return dat[k + n]; }\n\n  // max{ i : check(fold(l,i+1)) = true}\n\
+    \  template <class C>\n  int find_right(const C &check, int l = 0) {\n    assert(check(M::ti()));\n\
+    \    if (l == n) return n;\n    std::vector<int> idl, idr;\n    for (int a = l\
+    \ + n, b = 2 * n; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) idl.push_back(a++);\n\
+    \      if (b & 1) idr.push_back(--b);\n    }\n    for (auto itr = idr.rbegin();\
+    \ itr != idr.rend(); itr++) idl.push_back(*itr);\n    T val = M::ti();\n    for\
+    \ (int i : idl) {\n      if (!check(M::op(val, dat[i]))) {\n        while (i <\
+    \ n) {\n          i = i << 1 | 0;\n          if (check(M::op(val, dat[i]))) val\
+    \ = M::op(val, dat[i++]);\n        }\n        return i - n;\n      }\n      val\
+    \ = M::op(val, dat[i]);\n    }\n    return n;\n  }\n  //   min { i : check(fold(i,r))\
+    \ = true }\n  template <class C>\n  int find_left(const C &check, int r = -1)\
+    \ {\n    if (r < 0) r = n;\n    assert(check(M::ti()));\n    if (r == 0) return\
+    \ 0;\n    std::vector<int> idl, idr;\n    for (int a = n, b = r + n; a < b; a\
+    \ >>= 1, b >>= 1) {\n      if (a & 1) idl.push_back(a++);\n      if (b & 1) idr.push_back(--b);\n\
+    \    }\n    for (auto itr = idl.rbegin(); itr != idl.rend(); itr++) idr.push_back(*itr);\n\
+    \    T val = M::ti();\n    for (int i : idr) {\n      if (!check(M::op(dat[i],\
+    \ val))) {\n        while (i < n) {\n          i = i << 1 | 1;\n          if (check(M::op(dat[i],\
+    \ val))) val = M::op(dat[i--], val);\n        }\n        return i + 1 - n;\n \
+    \     }\n      val = M::op(dat[i], val);\n    }\n    return 0;\n  }\n};\n#line\
+    \ 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
+    \ */\n\n// BEGIN CUT HERE\n\ntemplate <std::uint64_t mod, std::uint64_t prim_root\
+    \ = 0>\nclass ModInt {\n  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n\
+    \  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e ==\
+    \ 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv\
+    \ = mul_inv(mod, 6, 1), r2 = -u128(mod) % mod;\n  static constexpr u64 init(u64\
+    \ w) { return reduce(u128(w) * r2); }\n  static constexpr u64 reduce(const u128\
+    \ w) {\n    return u64(w >> 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n\
+    \  }\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t\
+    \ n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static\
+    \ constexpr u64 modulo() { return mod; }\n  static constexpr u64 norm(u64 w) {\
+    \ return w - (mod & -(w >= mod)); }\n  static constexpr u64 pr_rt() { return prim_root;\
+    \ }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n    return ret.x\
+    \ = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const\
+    \ ModInt &rhs) {\n    return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >>\
+    \ 63), *this;\n  }\n  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return\
+    \ x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
     \ ModInt &rhs) {\n    return this->x = reduce(u128(this->x) * rhs.x), *this;\n\
     \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
@@ -104,13 +103,13 @@ data:
     \  }\n  u64 x;\n};\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct RcompositeQ\
     \ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1),\
-    \ Mint(0)); }\n  static T f(const T &l, const T &r) {\n    return make_pair(r.first\
+    \ Mint(0)); }\n  static T op(const T &l, const T &r) {\n    return make_pair(r.first\
     \ * l.first, r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
     \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  vector<RcompositeQ::T>\
     \ v(N);\n  for (int i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n\
     \    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ> seg(v);\n  while (Q--) {\n\
     \    bool op;\n    cin >> op;\n    if (op) {\n      int l, r;\n      Mint x;\n\
-    \      cin >> l >> r >> x;\n      auto ans = seg.query(l, r);\n      cout << ans.first\
+    \      cin >> l >> r >> x;\n      auto ans = seg.fold(l, r);\n      cout << ans.first\
     \ * x + ans.second << endl;\n    } else {\n      int p;\n      Mint c, d;\n  \
     \    cin >> p >> c >> d;\n      seg.set_val(p, {c, d});\n    }\n  }\n  return\
     \ 0;\n}\n"
@@ -118,13 +117,13 @@ data:
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree.hpp\"\n#include\
     \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint = ModInt<998244353>;\n\
     struct RcompositeQ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return\
-    \ make_pair(Mint(1), Mint(0)); }\n  static T f(const T &l, const T &r) {\n   \
-    \ return make_pair(r.first * l.first, r.first * l.second + r.second);\n  }\n};\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin\
-    \ >> N >> Q;\n  vector<RcompositeQ::T> v(N);\n  for (int i = 0; i < N; i++) {\n\
-    \    Mint a, b;\n    cin >> a >> b;\n    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ>\
+    \ make_pair(Mint(1), Mint(0)); }\n  static T op(const T &l, const T &r) {\n  \
+    \  return make_pair(r.first * l.first, r.first * l.second + r.second);\n  }\n\
+    };\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n\
+    \  cin >> N >> Q;\n  vector<RcompositeQ::T> v(N);\n  for (int i = 0; i < N; i++)\
+    \ {\n    Mint a, b;\n    cin >> a >> b;\n    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ>\
     \ seg(v);\n  while (Q--) {\n    bool op;\n    cin >> op;\n    if (op) {\n    \
-    \  int l, r;\n      Mint x;\n      cin >> l >> r >> x;\n      auto ans = seg.query(l,\
+    \  int l, r;\n      Mint x;\n      cin >> l >> r >> x;\n      auto ans = seg.fold(l,\
     \ r);\n      cout << ans.first * x + ans.second << endl;\n    } else {\n     \
     \ int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      seg.set_val(p, {c,\
     \ d});\n    }\n  }\n  return 0;\n}\n"
@@ -134,7 +133,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
+  timestamp: '2021-09-20 02:18:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp

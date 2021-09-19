@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/set_xor_min.test.cpp
     title: test/yosupo/set_xor_min.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/649.BinaryTrie.test.cpp
     title: test/yukicoder/649.BinaryTrie.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u4E8C\u5206Trie"
     links:
@@ -37,24 +37,24 @@ data:
     \ const U &pos, const T &val, ll b) {\n    if (t == nullptr) t = new Node();\n\
     \    if (b < 0) {\n      t->dat = val;\n      return t;\n    }\n    push(t, b);\n\
     \    bool f = (pos >> (U)b) & (U)1;\n    t->ch[f] = set_Node(t->ch[f], pos, val,\
-    \ b - 1);\n    t->dat = M::f(value(t->ch[0]), value(t->ch[1]));\n    return t;\n\
-    \  }\n  T query_Node(const ll &l, const ll &r, Node *t, const ll &lb, const ll\
+    \ b - 1);\n    t->dat = M::op(value(t->ch[0]), value(t->ch[1]));\n    return t;\n\
+    \  }\n  T fold_Node(const ll &l, const ll &r, Node *t, const ll &lb, const ll\
     \ &ub,\n               ll b) {\n    if (t == nullptr || ub <= l || r <= lb) return\
     \ M::ti();\n    push(t, b);\n    if (l <= lb && ub <= r) return t->dat;\n    ll\
-    \ c = (lb + ub) / 2;\n    T vl = query_Node(l, r, t->ch[0], lb, c, b - 1);\n \
-    \   T vr = query_Node(l, r, t->ch[1], c, ub, b - 1);\n    return M::f(vl, vr);\n\
+    \ c = (lb + ub) / 2;\n    T vl = fold_Node(l, r, t->ch[0], lb, c, b - 1);\n  \
+    \  T vr = fold_Node(l, r, t->ch[1], c, ub, b - 1);\n    return M::op(vl, vr);\n\
     \  }\n  template <typename C>\n  ll find(Node *t, C &check, U bias) {\n    if\
     \ (!t) return -1;\n    ll ret = 0;\n    T acc = M::ti();\n    for (ll b = height\
     \ - 1; b >= 0; b--) {\n      push(t, b);\n      bool f = (bias >> (U)b) & (U)1;\n\
-    \      if (!check(M::f(acc, value(t->ch[f]))))\n        acc = M::f(acc, value(t->ch[f])),\
+    \      if (!check(M::op(acc, value(t->ch[f]))))\n        acc = M::op(acc, value(t->ch[f])),\
     \ f = !f;\n      t = t->ch[f];\n      if (!t) return -1;\n      ret |= (U)f <<\
     \ (U)b;\n    }\n    return ret;\n  }\n\n public:\n  SegmentTree_Dynamic() {}\n\
     \  SegmentTree_Dynamic(ll n_)\n      : height(ceil(log2(n_))), n(1LL << height),\
     \ root(nullptr) {}\n  void clear() {\n    node_count = 0;\n    root = nullptr;\n\
     \  }\n  void xor_all(U key) {\n    if (root != nullptr) root->xor_lazy ^= key;\n\
     \  }\n  void set_val(ll k, T x) { root = set_Node(root, k, x, height - 1); }\n\
-    \  //[l,r)\n  T query(ll l, ll r) { return query_Node(l, r, root, 0, n, height\
-    \ - 1); }\n  T operator[](ll k) { return query(k, k + 1); }\n  // min { i : check(query(0,i+1))\
+    \  //[l,r)\n  T fold(ll l, ll r) { return fold_Node(l, r, root, 0, n, height -\
+    \ 1); }\n  T operator[](ll k) { return fold(k, k + 1); }\n  // min { i : check(fold(0,i+1))\
     \ = true }\n  template <typename C>\n  ll find_first(C &check, U bias = 0) {\n\
     \    return find(root, check, bias);\n  }\n};\ntemplate <typename M, std::size_t\
     \ LIM>\nint SegmentTree_Dynamic<M, LIM>::node_count = 0;\n#line 4 \"src/DataStructure/BinaryTrie.hpp\"\
@@ -96,8 +96,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/BinaryTrie.hpp
   requiredBy: []
-  timestamp: '2020-11-07 14:59:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-09-20 02:18:32+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/set_xor_min.test.cpp
   - test/yukicoder/649.BinaryTrie.test.cpp

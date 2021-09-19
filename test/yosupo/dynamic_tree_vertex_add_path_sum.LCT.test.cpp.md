@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/LinkCutTree_Monoid.hpp
     title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9)"
   _extendedRequiredBy: []
@@ -33,9 +33,9 @@ data:
     \      eval(x);\n      if (!is_root(x->par)) {\n        if (dir(x) == dir(x->par))\n\
     \          rot(x->par);\n        else\n          rot(x);\n      }\n      rot(x);\n\
     \    }\n  }\n  void pushup(Node *t) {\n    t->rdat = t->dat = t->val;\n    if\
-    \ (t->ch[0])\n      t->dat = M::f(t->ch[0]->dat, t->dat),\n      t->rdat = M::f(t->rdat,\
-    \ t->ch[0]->rdat);\n    if (t->ch[1])\n      t->dat = M::f(t->dat, t->ch[1]->dat),\n\
-    \      t->rdat = M::f(t->ch[1]->rdat, t->rdat);\n  }\n  Node *expose(Node *x)\
+    \ (t->ch[0])\n      t->dat = M::op(t->ch[0]->dat, t->dat),\n      t->rdat = M::op(t->rdat,\
+    \ t->ch[0]->rdat);\n    if (t->ch[1])\n      t->dat = M::op(t->dat, t->ch[1]->dat),\n\
+    \      t->rdat = M::op(t->ch[1]->rdat, t->rdat);\n  }\n  Node *expose(Node *x)\
     \ {\n    Node *r = nullptr;\n    for (Node *p = x; p; p = p->par) {\n      splay(p);\n\
     \      p->ch[1] = r;\n      pushup(p);\n      r = p;\n    }\n    splay(x);\n \
     \   return r;\n  }\n  void toggle(Node *t) {\n    std::swap(t->ch[0], t->ch[1]);\n\
@@ -52,12 +52,12 @@ data:
     \    Node *y = ns[c].ch[0];\n    ns[c].ch[0] = y->par = nullptr;\n    pushup(&ns[c]);\n\
     \  }\n  int lca(int x, int y) {\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  T operator[](int k) { return\
-    \ ns[k].val; }\n  // [a,b] closed section\n  T query(int a, int b) {\n    evert(a);\n\
+    \ ns[k].val; }\n  // [a,b] closed section\n  T fold(int a, int b) {\n    evert(a);\n\
     \    expose(&ns[b]);\n    return ns[b].dat;\n  }\n  void set_val(int k, T v) {\n\
     \    expose(&ns[k]);\n    ns[k].val = v;\n    eval(&ns[k]);\n  }\n};\n#line 5\
     \ \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\nusing namespace\
     \ std;\n\nstruct RsumQ {\n  using T = long long;\n  static T ti() { return 0;\
-    \ }\n  static T f(const T &l, const T &r) { return l + r; }\n};\n\nsigned main()\
+    \ }\n  static T op(const T &l, const T &r) { return l + r; }\n};\n\nsigned main()\
     \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n\
     \  LinkCutTree_Monoid<RsumQ> lct(N);\n  for (int i = 0; i < N; i++) {\n    long\
     \ long a;\n    cin >> a;\n    lct.set_val(i, a);\n  }\n  for (int i = 0; i < N\
@@ -66,13 +66,13 @@ data:
     \ v, w, x;\n      cin >> u >> v >> w >> x;\n      lct.cut(u, v);\n      lct.link(w,\
     \ x);\n    } else if (op == 1) {\n      int p;\n      long long x;\n      cin\
     \ >> p >> x;\n      lct.set_val(p, lct[p] + x);\n    } else {\n      int u, v;\n\
-    \      cin >> u >> v;\n      cout << lct.query(u, v) << endl;\n    }\n  }\n  return\
+    \      cin >> u >> v;\n      cout << lct.fold(u, v) << endl;\n    }\n  }\n  return\
     \ 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/LinkCutTree_Monoid.hpp\"\
     \nusing namespace std;\n\nstruct RsumQ {\n  using T = long long;\n  static T ti()\
-    \ { return 0; }\n  static T f(const T &l, const T &r) { return l + r; }\n};\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin\
+    \ { return 0; }\n  static T op(const T &l, const T &r) { return l + r; }\n};\n\
+    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin\
     \ >> N >> Q;\n  LinkCutTree_Monoid<RsumQ> lct(N);\n  for (int i = 0; i < N; i++)\
     \ {\n    long long a;\n    cin >> a;\n    lct.set_val(i, a);\n  }\n  for (int\
     \ i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n    lct.link(v,\
@@ -80,14 +80,14 @@ data:
     \      int u, v, w, x;\n      cin >> u >> v >> w >> x;\n      lct.cut(u, v);\n\
     \      lct.link(w, x);\n    } else if (op == 1) {\n      int p;\n      long long\
     \ x;\n      cin >> p >> x;\n      lct.set_val(p, lct[p] + x);\n    } else {\n\
-    \      int u, v;\n      cin >> u >> v;\n      cout << lct.query(u, v) << endl;\n\
+    \      int u, v;\n      cin >> u >> v;\n      cout << lct.fold(u, v) << endl;\n\
     \    }\n  }\n  return 0;\n}\n"
   dependsOn:
   - src/DataStructure/LinkCutTree_Monoid.hpp
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
+  timestamp: '2021-09-20 02:18:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp

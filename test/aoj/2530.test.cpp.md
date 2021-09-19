@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/GaussianElimination.hpp
     title: "\u30AC\u30A6\u30B9\u306E\u6D88\u53BB\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
