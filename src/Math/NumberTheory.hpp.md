@@ -164,8 +164,8 @@ data:
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/yukicoder/1019.test.cpp
-  - test/yukicoder/644.test.cpp
   - test/yukicoder/886.numth.test.cpp
+  - test/yukicoder/644.test.cpp
 documentation_of: src/Math/NumberTheory.hpp
 layout: document
 redirect_from:

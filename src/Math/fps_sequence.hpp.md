@@ -377,9 +377,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/partition.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/stirling_second.test.cpp
   - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/stirling_first.test.cpp
 documentation_of: src/Math/fps_sequence.hpp
 layout: document
 redirect_from:

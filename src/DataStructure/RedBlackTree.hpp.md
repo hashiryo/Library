@@ -184,8 +184,8 @@ data:
   timestamp: '2020-10-24 15:28:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/persistent_queue.RBTP.test.cpp
   - test/aoj/1508.RBT.test.cpp
+  - test/yosupo/persistent_queue.RBTP.test.cpp
 documentation_of: src/DataStructure/RedBlackTree.hpp
 layout: document
 redirect_from:

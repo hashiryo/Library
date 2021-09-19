@@ -107,8 +107,8 @@ data:
   timestamp: '2020-10-23 23:21:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/aoj/DSL_2_A.SegTree.test.cpp
+  - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yukicoder/649.SegTree.test.cpp
 documentation_of: src/DataStructure/SegmentTree.hpp
 layout: document

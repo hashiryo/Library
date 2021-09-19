@@ -206,8 +206,8 @@ data:
   timestamp: '2020-10-24 15:28:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/persistent_queue.RBTPL.test.cpp
   - test/yosupo/range_affine_range_sum.RBTL.test.cpp
+  - test/yosupo/persistent_queue.RBTPL.test.cpp
 documentation_of: src/DataStructure/RedBlackTree_Lazy.hpp
 layout: document
 redirect_from:

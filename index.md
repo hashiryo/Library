@@ -1,11 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: .
-    pages:
-    - icon: ':warning:'
-      path: '!hoge.hpp'
-      title: '!hoge.hpp'
   - name: src/Algorithm
     pages:
     - icon: ':heavy_check_mark:'
@@ -29,6 +24,9 @@ data:
       path: src/DataStructure/DisjointSparseTable.hpp
       title: Disjoint-Sparse-Table
     - icon: ':heavy_check_mark:'
+      path: src/DataStructure/EulerTourTree_Monoid.hpp
+      title: "Euler-Tour-Tree(\u30E2\u30CE\u30A4\u30C9)"
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
     - icon: ':heavy_check_mark:'
@@ -43,6 +41,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree_MonoidLazy.hpp
       title: "Link-Cut-Tree(\u30E2\u30CE\u30A4\u30C9\u9045\u5EF6\u4F1D\u642C)"
+    - icon: ':heavy_check_mark:'
+      path: src/DataStructure/OnlineDynamicConnectivity_Monoid.hpp
+      title: "Euler-Tour-Tree(\u30E2\u30CE\u30A4\u30C9)"
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/PersistentArray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
@@ -550,6 +551,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/discrete_logarithm_mod.test.cpp
       title: test/yosupo/discrete_logarithm_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+      title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp

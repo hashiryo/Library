@@ -360,8 +360,8 @@ data:
   timestamp: '2021-02-10 10:21:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/aoj/0168.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/658.test.cpp
 documentation_of: src/Math/kitamasa.hpp
