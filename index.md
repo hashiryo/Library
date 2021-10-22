@@ -53,7 +53,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/RedBlackTree_PersistentLazy.hpp
       title: "\u8D64\u9ED2\u6728(\u6C38\u7D9A\u9045\u5EF6\u4F1D\u642C)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':heavy_check_mark:'
@@ -157,7 +157,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -803,7 +803,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.DynSeg.test.cpp
       title: test/yukicoder/649.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -821,7 +821,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/768.test.cpp
       title: test/yukicoder/768.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/803.test.cpp
       title: test/yukicoder/803.test.cpp
     - icon: ':x:'
@@ -841,8 +841,7 @@ data:
       title: test/yukicoder/980.test.cpp
 layout: toppage
 ---
-[![Actions Status](https://github.com/hashiryo/Library/workflows/verify/badge.svg)](https://github.com/hashiryo/Library/actions)
-[![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://hashiryo.github.io/Library/) 
+
 [![hashiryo](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Fhashiryo)](https://atcoder.jp/users/hashiryo)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/hashiryo/library?style=flat-square)
 ![C++](https://img.shields.io/badge/C++-17-green)

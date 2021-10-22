@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
