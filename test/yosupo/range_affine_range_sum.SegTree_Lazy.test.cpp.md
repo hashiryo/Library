@@ -19,8 +19,8 @@ data:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
-    #include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SegmentTree_Lazy.hpp\"\n\
-    /**\n * @title Segment-Tree(\u9045\u5EF6\u4F1D\u642C)\n * @category \u30C7\u30FC\
+    #include <bits/stdc++.h>\n\n#line 3 \"src/DataStructure/SegmentTree_Lazy.hpp\"\
+    \n/**\n * @title Segment-Tree(\u9045\u5EF6\u4F1D\u642C)\n * @category \u30C7\u30FC\
     \u30BF\u69CB\u9020\n * @brief O(logN)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ M>\nstruct SegmentTree_Lazy {\n  using T = typename M::T;\n  using E = typename\
     \ M::E;\n\n private:\n  const int height, n;\n  std::vector<T> dat;\n  std::vector<E>\
@@ -89,41 +89,41 @@ data:
     \ : -ret.first;\n  }\n  friend std::istream &operator>>(std::istream &is, ModInt\
     \ &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n  friend std::ostream\
     \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
-    \  }\n  u64 x;\n};\n#line 5 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\
+    \  }\n  u64 x;\n};\n#line 6 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\n// RsumQ\u306F\u30E2\
     \u30CE\u30A4\u30C9\u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\u3066\u304A\u304F\
     \nstruct RaffineQ_RsumQ {\n  struct T {\n    Mint val;\n    int size;\n    T(Mint\
     \ v = 0, int s = 1) : val(v), size(s) {}\n  };\n  using E = pair<Mint, Mint>;\n\
     \  static T ti() { return T(0, 0); }\n  static E ei() { return make_pair(Mint(1),\
-    \ Mint(0)); }\n  static T f(const T &l, const T &r) {\n    return T(l.val + r.val,\
-    \ l.size + r.size);\n  }\n  static T g(const T &l, const E &r) {\n    return T(r.first\
-    \ * l.val + r.second * l.size, l.size);\n  }\n  static E h(const E &l, const E\
-    \ &r) {\n    return make_pair(r.first * l.first, r.first * l.second + r.second);\n\
-    \  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int\
-    \ N, Q;\n  cin >> N >> Q;\n  vector<RaffineQ_RsumQ::T> v(N);\n  for (int i = 0;\
-    \ i < N; i++) {\n    Mint a;\n    cin >> a;\n    v[i] = {a, 1};\n  }\n  SegmentTree_Lazy<RaffineQ_RsumQ>\
-    \ seg(v);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op >> l >>\
-    \ r;\n    if (op) {\n      cout << seg.query(l, r).val << endl;\n    } else {\n\
-    \      Mint b, c;\n      cin >> b >> c;\n      seg.update(l, r, {Mint(b), Mint(c)});\n\
-    \    }\n  }\n  return 0;\n}\n"
+    \ Mint(0)); }\n  static T op(const T &l, const T &r) {\n    return T(l.val + r.val,\
+    \ l.size + r.size);\n  }\n  static T mapping(const T &l, const E &r) {\n    return\
+    \ T(r.first * l.val + r.second * l.size, l.size);\n  }\n  static E composition(const\
+    \ E &l, const E &r) {\n    return make_pair(r.first * l.first, r.first * l.second\
+    \ + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int N, Q;\n  cin >> N >> Q;\n  vector<RaffineQ_RsumQ::T> v(N);\n  for (int\
+    \ i = 0; i < N; i++) {\n    Mint a;\n    cin >> a;\n    v[i] = {a, 1};\n  }\n\
+    \  SegmentTree_Lazy<RaffineQ_RsumQ> seg(v);\n  while (Q--) {\n    bool op;\n \
+    \   int l, r;\n    cin >> op >> l >> r;\n    if (op) {\n      cout << seg.fold(l,\
+    \ r).val << endl;\n    } else {\n      Mint b, c;\n      cin >> b >> c;\n    \
+    \  seg.apply(l, r, {Mint(b), Mint(c)});\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree_Lazy.hpp\"\
+    \n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/SegmentTree_Lazy.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint = ModInt<998244353>;\n\
     // RsumQ\u306F\u30E2\u30CE\u30A4\u30C9\u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\
     \u3066\u304A\u304F\nstruct RaffineQ_RsumQ {\n  struct T {\n    Mint val;\n   \
     \ int size;\n    T(Mint v = 0, int s = 1) : val(v), size(s) {}\n  };\n  using\
     \ E = pair<Mint, Mint>;\n  static T ti() { return T(0, 0); }\n  static E ei()\
-    \ { return make_pair(Mint(1), Mint(0)); }\n  static T f(const T &l, const T &r)\
-    \ {\n    return T(l.val + r.val, l.size + r.size);\n  }\n  static T g(const T\
-    \ &l, const E &r) {\n    return T(r.first * l.val + r.second * l.size, l.size);\n\
-    \  }\n  static E h(const E &l, const E &r) {\n    return make_pair(r.first * l.first,\
-    \ r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
+    \ { return make_pair(Mint(1), Mint(0)); }\n  static T op(const T &l, const T &r)\
+    \ {\n    return T(l.val + r.val, l.size + r.size);\n  }\n  static T mapping(const\
+    \ T &l, const E &r) {\n    return T(r.first * l.val + r.second * l.size, l.size);\n\
+    \  }\n  static E composition(const E &l, const E &r) {\n    return make_pair(r.first\
+    \ * l.first, r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
     \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  vector<RaffineQ_RsumQ::T>\
     \ v(N);\n  for (int i = 0; i < N; i++) {\n    Mint a;\n    cin >> a;\n    v[i]\
     \ = {a, 1};\n  }\n  SegmentTree_Lazy<RaffineQ_RsumQ> seg(v);\n  while (Q--) {\n\
     \    bool op;\n    int l, r;\n    cin >> op >> l >> r;\n    if (op) {\n      cout\
-    \ << seg.query(l, r).val << endl;\n    } else {\n      Mint b, c;\n      cin >>\
-    \ b >> c;\n      seg.update(l, r, {Mint(b), Mint(c)});\n    }\n  }\n  return 0;\n\
+    \ << seg.fold(l, r).val << endl;\n    } else {\n      Mint b, c;\n      cin >>\
+    \ b >> c;\n      seg.apply(l, r, {Mint(b), Mint(c)});\n    }\n  }\n  return 0;\n\
     }\n"
   dependsOn:
   - src/DataStructure/SegmentTree_Lazy.hpp
@@ -131,7 +131,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2021-09-20 02:40:07+09:00'
+  timestamp: '2021-09-20 20:29:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

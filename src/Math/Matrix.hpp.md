@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u884C\u5217"
     links: []
@@ -54,18 +54,15 @@ data:
     \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) ret[i][j]\
     \ = (*this)[i][j];\n    return ret;\n  }\n};\n\ntemplate <class R, int N>\nstruct\
     \ SquareMatrix : public Matrix<R, N, N> {\n  using Matrix<R, N, N>::Matrix;\n\
-    \  SquareMatrix(Matrix<R, N, N> m) { *this = m; }\n  template <typename T = R,\
-    \ typename std::enable_if_t<has_I_v<T>> * = nullptr>\n  static SquareMatrix I()\
-    \ {\n    SquareMatrix ret;\n    for (int i = 0; i < N; i++) ret[i][i] = T::I();\n\
-    \    return ret;\n  }\n  template <typename T = R, typename std::enable_if_t<!has_I_v<T>>\
-    \ * = nullptr>\n  static SquareMatrix I() {\n    SquareMatrix ret;\n    for (int\
-    \ i = 0; i < N; i++) ret[i][i] = T(1);\n    return ret;\n  }\n  SquareMatrix &operator=(const\
-    \ Matrix<R, N, N> &r) {\n    for (int i = 0; i < N; i++)\n      for (int j = 0;\
-    \ j < N; j++) (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix\
-    \ &operator*=(const SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n\
-    \  SquareMatrix pow(std::uint64_t e) const {\n    SquareMatrix ret = I(), base\
-    \ = *this;\n    for (; e; e >>= 1, base *= base)\n      if (e & 1) ret *= base;\n\
-    \    return ret;\n  }\n};\n"
+    \  SquareMatrix(Matrix<R, N, N> m) { *this = m; }\n  static SquareMatrix I() {\n\
+    \    SquareMatrix ret;\n    if constexpr (has_I_v<R>)\n      for (int i = 0; i\
+    \ < N; i++) ret[i][i] = R::I();\n    else\n      for (int i = 0; i < N; i++) ret[i][i]\
+    \ = R(1);\n    return ret;\n  }\n  SquareMatrix &operator=(const Matrix<R, N,\
+    \ N> &r) {\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < N; j++)\
+    \ (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix &operator*=(const\
+    \ SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n  SquareMatrix pow(std::uint64_t\
+    \ e) const {\n    SquareMatrix ret = I(), base = *this;\n    for (; e; e >>= 1,\
+    \ base *= base)\n      if (e & 1) ret *= base;\n    return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u884C\u5217\n * @category\
     \ \u6570\u5B66\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// BEGIN CUT HERE\n\n\
     struct has_I_impl {\n  template <class T>\n  static auto check(T &&x) -> decltype(x.I(),\
@@ -101,28 +98,25 @@ data:
     \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) ret[i][j]\
     \ = (*this)[i][j];\n    return ret;\n  }\n};\n\ntemplate <class R, int N>\nstruct\
     \ SquareMatrix : public Matrix<R, N, N> {\n  using Matrix<R, N, N>::Matrix;\n\
-    \  SquareMatrix(Matrix<R, N, N> m) { *this = m; }\n  template <typename T = R,\
-    \ typename std::enable_if_t<has_I_v<T>> * = nullptr>\n  static SquareMatrix I()\
-    \ {\n    SquareMatrix ret;\n    for (int i = 0; i < N; i++) ret[i][i] = T::I();\n\
-    \    return ret;\n  }\n  template <typename T = R, typename std::enable_if_t<!has_I_v<T>>\
-    \ * = nullptr>\n  static SquareMatrix I() {\n    SquareMatrix ret;\n    for (int\
-    \ i = 0; i < N; i++) ret[i][i] = T(1);\n    return ret;\n  }\n  SquareMatrix &operator=(const\
-    \ Matrix<R, N, N> &r) {\n    for (int i = 0; i < N; i++)\n      for (int j = 0;\
-    \ j < N; j++) (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix\
-    \ &operator*=(const SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n\
-    \  SquareMatrix pow(std::uint64_t e) const {\n    SquareMatrix ret = I(), base\
-    \ = *this;\n    for (; e; e >>= 1, base *= base)\n      if (e & 1) ret *= base;\n\
-    \    return ret;\n  }\n};"
+    \  SquareMatrix(Matrix<R, N, N> m) { *this = m; }\n  static SquareMatrix I() {\n\
+    \    SquareMatrix ret;\n    if constexpr (has_I_v<R>)\n      for (int i = 0; i\
+    \ < N; i++) ret[i][i] = R::I();\n    else\n      for (int i = 0; i < N; i++) ret[i][i]\
+    \ = R(1);\n    return ret;\n  }\n  SquareMatrix &operator=(const Matrix<R, N,\
+    \ N> &r) {\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < N; j++)\
+    \ (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix &operator*=(const\
+    \ SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n  SquareMatrix pow(std::uint64_t\
+    \ e) const {\n    SquareMatrix ret = I(), base = *this;\n    for (; e; e >>= 1,\
+    \ base *= base)\n      if (e & 1) ret *= base;\n    return ret;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/Matrix.hpp
   requiredBy: []
-  timestamp: '2021-02-10 00:07:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-10-10 22:09:02+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2397.test.cpp
-  - test/aoj/2624.test.cpp
   - test/yukicoder/1340.test.cpp
+  - test/aoj/2624.test.cpp
+  - test/aoj/2397.test.cpp
 documentation_of: src/Math/Matrix.hpp
 layout: document
 redirect_from:

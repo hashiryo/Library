@@ -162,10 +162,10 @@ data:
   timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/sum_of_totient_function.test.cpp
+  - test/yukicoder/644.test.cpp
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/886.numth.test.cpp
-  - test/yukicoder/644.test.cpp
+  - test/yosupo/sum_of_totient_function.test.cpp
 documentation_of: src/Math/NumberTheory.hpp
 layout: document
 redirect_from:

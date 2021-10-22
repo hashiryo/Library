@@ -37,6 +37,9 @@ data:
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/division_of_Poly.test.cpp
+    title: test/yosupo/division_of_Poly.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -655,39 +658,40 @@ data:
   requiredBy:
   - src/Math/differential_equation.hpp
   - src/Math/kitamasa.hpp
-  - src/Math/extgcd.hpp
   - src/Math/fps_sequence.hpp
+  - src/Math/extgcd.hpp
   - src/Math/SubproductTree.hpp
   timestamp: '2021-02-10 10:21:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/980.test.cpp
+  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/963.test.cpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/3046.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/215.test.cpp
   - test/aoj/3072.test.cpp
   - test/aoj/0168.test.cpp
-  - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/convolution1000000007.test.cpp
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
-  - test/yukicoder/980.test.cpp
-  - test/yukicoder/3046.test.cpp
-  - test/yukicoder/963.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/1080.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yukicoder/658.test.cpp
 documentation_of: src/Math/FormalPowerSeries.hpp
 layout: document
 redirect_from:
