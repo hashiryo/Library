@@ -3,4 +3,4 @@ plugins:
 - jemoji
 - jekyll-redirect-from
 title: Hashiryo's Library
-theme: jekyll-theme-merlot
+theme: jekyll-theme-midnight
