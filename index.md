@@ -157,7 +157,7 @@ data:
     - icon: ':question:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':x:'
@@ -324,7 +324,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2514.test.cpp
       title: test/aoj/2514.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
     - icon: ':heavy_check_mark:'
