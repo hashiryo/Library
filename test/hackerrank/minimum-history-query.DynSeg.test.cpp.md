@@ -15,8 +15,7 @@ data:
     links:
     - https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query
   bundledCode: "#line 1 \"test/hackerrank/minimum-history-query.DynSeg.test.cpp\"\n\
-    #define PROBLEM                                                         \\\n \
-    \ \"https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query\"\
+    #define PROBLEM \\\n  \"https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query\"\
     \n\n// \u6C38\u7D9A\u5316 \u306E verify\n\n#include <bits/stdc++.h>\n#line 3 \"\
     src/DataStructure/DynamicSegmentTree.hpp\"\n/**\n * @title \u52D5\u7684\u69CB\u7BC9\
     Segment-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u6C38\u7D9A\u5316\
@@ -246,8 +245,7 @@ data:
     \ X = 0;\n  for (int i = 0; i < Q2; i++) {\n    int a, b, c;\n    cin >> a >>\
     \ b >> c;\n    int k = X ^ a, l = b ^ X, r = c ^ X;\n    cout << (X = seg[k].fold(--l,\
     \ r)) << '\\n';\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM                                                         \\\
-    \n  \"https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query\"\
+  code: "#define PROBLEM \\\n  \"https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query\"\
     \n\n// \u6C38\u7D9A\u5316 \u306E verify\n\n#include <bits/stdc++.h>\n#include\
     \ \"src/DataStructure/DynamicSegmentTree.hpp\"\nusing namespace std;\n\nstruct\
     \ RMQ {\n  using T = int;\n  static T op(T l, T r) { return min(l, r); }\n  static\
@@ -264,7 +262,7 @@ data:
   isVerificationFile: true
   path: test/hackerrank/minimum-history-query.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2021-10-22 16:46:35+09:00'
+  timestamp: '2021-10-23 16:46:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/hackerrank/minimum-history-query.DynSeg.test.cpp
