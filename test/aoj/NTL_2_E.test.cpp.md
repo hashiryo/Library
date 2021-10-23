@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_E
@@ -22,33 +22,33 @@ data:
     \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
     \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
     \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
-    \ std::uint64_t pr_rt() { return prim_root; }\n  ModInt operator+(const ModInt\
-    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
-    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
-    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
-    \ &rhs) const { return ModInt(*this) /= rhs; }\n  constexpr bool operator!=(const\
-    \ ModInt &rhs) const { return !(*this == rhs); }\n  friend std::ostream &operator<<(std::ostream\
+    \ std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream &operator<<(std::ostream\
     \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace\
     \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n\
     \    : public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n\
-    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1), r2 = -u128(mod) % mod;\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
-    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
-    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
-    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
-    \ < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return\
-    \ w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt\
-    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
-    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
-    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
-    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
-    \ = reduce(u128(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
-    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  constexpr\
-    \ bool operator==(const ModInt &rhs) const {\n    return norm(x) == norm(rhs.x);\n\
-    \  }\n  constexpr ModInt pow(std::uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
+    \  using u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
+    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
+    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod)\
+    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) *\
+    \ r2); }\n  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w\
+    \ >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n\
+    \ public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n)\
+    \ : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64\
+    \ w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const\
+    \ {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
+    \  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x\
+    \ - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt\
+    \ &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x\
+    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
+    \   return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr\
+    \ ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
+    \ }\n  bool operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n\
+    \  constexpr ModInt pow(std::uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
     \    for (ModInt base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret\
     \ *= base;\n    return ret;\n  }\n  constexpr ModInt inverse() const { return\
     \ pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0)\
@@ -70,45 +70,50 @@ data:
     \ &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
     \ &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
     \ &operator*=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator/=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  constexpr bool\
-    \ operator==(const ModInt &rhs) const { return x == rhs.x; }\n  constexpr ModInt\
-    \ pow(std::uint64_t k) const { return !k ? ModInt(1) : *this; }\n  constexpr ModInt\
-    \ sqrt() const { return *this; }\n  constexpr ModInt inverse() const { return\
-    \ *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend std::istream\
-    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n\
-    \  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Math/BigInt.hpp\"\n/**\n * @title\
-    \ \u591A\u500D\u9577\u6574\u6570\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT\
-    \ HERE\n\nstruct BigInt {\n  static constexpr unsigned base = 10000000, bdig =\
-    \ 7;\n  bool neg;\n\n private:\n  std::vector<unsigned> dat;\n  using ModB = ModInt<4611685989973229569,\
-    \ 7>;\n  template <class mod_t>\n  static inline void idft(int n, mod_t x[]) {\n\
-    \    static mod_t iW[1 << 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n\
-    \    static constexpr mod_t G(mod_t::pr_rt());\n    static int lim = 0;\n    if\
-    \ (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n\
-    \      mod_t idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n      for (int i = 0;\
-    \ i < m; i++) iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n    }\n    for (int\
-    \ m = 1; m < n; m *= 2)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n\
-    \        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u\
-    \ = x[i], v = x[j];\n          x[i] = u + v, x[j] = (u - v) * iW[k];\n       \
-    \ }\n    mod_t iv(mod - (mod - 1) / n);\n    for (int i = 0; i < n; i++) x[i]\
-    \ *= iv;\n  }\n  template <class mod_t>\n  static inline void dft(int n, mod_t\
-    \ x[]) {\n    static mod_t W[1 << 20];\n    static constexpr std::uint64_t mod\
-    \ = mod_t::modulo();\n    static constexpr mod_t G(mod_t::pr_rt());\n    static\
-    \ int lim = 0;\n    if (lim == 0) W[0] = 1, lim = 1;\n    for (int m = lim; m\
-    \ < n / 2; m *= 2) {\n      mod_t dw = G.pow((mod - 1) / (4 * m));\n      for\
-    \ (int i = 0; i < m; i++) W[m + i] = W[i] * dw;\n      lim = n / 2;\n    }\n \
-    \   for (int m = n; m >>= 1;)\n      for (int s = 0, k = 0; s < n; s += 2 * m,\
-    \ ++k)\n        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t\
-    \ u = x[i], v = x[j] * W[k];\n          x[i] = u + v, x[j] = u - v;\n        }\n\
-    \  }\n  static inline int get_len(int n) {\n    return --n, n |= n >> 1, n |=\
-    \ n >> 2, n |= n >> 4, n |= n >> 8,\n           n |= n >> 16, ++n;\n  }\n  BigInt\
-    \ base_shift_r(int size) const {\n    BigInt ret;\n    return ret.dat = std::vector<unsigned>(dat.begin()\
-    \ + size, dat.end()), ret;\n  }\n\n public:\n  BigInt() : neg(false), dat() {}\n\
-    \  BigInt(long long v) { *this = v; }\n  BigInt(const std::string &s) { read(s);\
-    \ }\n  void read(const std::string &s) {\n    neg = false, dat.clear();\n    int\
-    \ pos = 0;\n    for (; pos < (int)s.size() && (s[pos] == '-' || s[pos] == '+');\
-    \ ++pos)\n      if (s[pos] == '-') neg = !neg;\n    for (long long i = s.size()\
-    \ - 1, x = 0; i >= pos; i -= bdig, x = 0) {\n      for (int j = std::max<int>(pos,\
-    \ i - bdig + 1); j <= i; j++)\n        x = x * 10 + s[j] - '0';\n      dat.push_back(x);\n\
+    \ &operator/=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  ModInt operator+(const\
+    \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
+    \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
+    \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
+    \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
+    \ ModInt &rhs) const { return x == rhs.x; }\n  bool operator!=(const ModInt &rhs)\
+    \ const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t k) const\
+    \ { return !k ? ModInt(1) : *this; }\n  constexpr ModInt sqrt() const { return\
+    \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
+    \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
+    };\n#line 4 \"src/Math/BigInt.hpp\"\n/**\n * @title \u591A\u500D\u9577\u6574\u6570\
+    \n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\nstruct BigInt {\n  static\
+    \ constexpr unsigned base = 10000000, bdig = 7;\n  bool neg;\n\n private:\n  std::vector<unsigned>\
+    \ dat;\n  using ModB = ModInt<4611685989973229569, 7>;\n  template <class mod_t>\n\
+    \  static inline void idft(int n, mod_t x[]) {\n    static mod_t iW[1 << 20];\n\
+    \    static constexpr std::uint64_t mod = mod_t::modulo();\n    static constexpr\
+    \ mod_t G(mod_t::pr_rt());\n    static int lim = 0;\n    if (lim == 0) iW[0] =\
+    \ 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t idw = G.pow(mod\
+    \ - 1 - (mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++) iW[m + i] = iW[i]\
+    \ * idw;\n      lim = n / 2;\n    }\n    for (int m = 1; m < n; m *= 2)\n    \
+    \  for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for (int i = s, j =\
+    \ s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v = x[j];\n       \
+    \   x[i] = u + v, x[j] = (u - v) * iW[k];\n        }\n    mod_t iv(mod - (mod\
+    \ - 1) / n);\n    for (int i = 0; i < n; i++) x[i] *= iv;\n  }\n  template <class\
+    \ mod_t>\n  static inline void dft(int n, mod_t x[]) {\n    static mod_t W[1 <<\
+    \ 20];\n    static constexpr std::uint64_t mod = mod_t::modulo();\n    static\
+    \ constexpr mod_t G(mod_t::pr_rt());\n    static int lim = 0;\n    if (lim ==\
+    \ 0) W[0] = 1, lim = 1;\n    for (int m = lim; m < n / 2; m *= 2) {\n      mod_t\
+    \ dw = G.pow((mod - 1) / (4 * m));\n      for (int i = 0; i < m; i++) W[m + i]\
+    \ = W[i] * dw;\n      lim = n / 2;\n    }\n    for (int m = n; m >>= 1;)\n   \
+    \   for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n        for (int i = s, j\
+    \ = s + m; i < s + m; ++i, ++j) {\n          mod_t u = x[i], v = x[j] * W[k];\n\
+    \          x[i] = u + v, x[j] = u - v;\n        }\n  }\n  static inline int get_len(int\
+    \ n) {\n    return --n, n |= n >> 1, n |= n >> 2, n |= n >> 4, n |= n >> 8,\n\
+    \           n |= n >> 16, ++n;\n  }\n  BigInt base_shift_r(int size) const {\n\
+    \    BigInt ret;\n    return ret.dat = std::vector<unsigned>(dat.begin() + size,\
+    \ dat.end()), ret;\n  }\n\n public:\n  BigInt() : neg(false), dat() {}\n  BigInt(long\
+    \ long v) { *this = v; }\n  BigInt(const std::string &s) { read(s); }\n  void\
+    \ read(const std::string &s) {\n    neg = false, dat.clear();\n    int pos = 0;\n\
+    \    for (; pos < (int)s.size() && (s[pos] == '-' || s[pos] == '+'); ++pos)\n\
+    \      if (s[pos] == '-') neg = !neg;\n    for (long long i = s.size() - 1, x\
+    \ = 0; i >= pos; i -= bdig, x = 0) {\n      for (int j = std::max<int>(pos, i\
+    \ - bdig + 1); j <= i; j++)\n        x = x * 10 + s[j] - '0';\n      dat.push_back(x);\n\
     \    }\n    shrink();\n  }\n  std::string to_str() const {\n    std::stringstream\
     \ ss;\n    if (neg) ss << '-';\n    ss << (dat.empty() ? 0 : dat.back());\n  \
     \  for (long long i = dat.size() - 2; i >= 0; --i)\n      ss << std::setw(bdig)\
@@ -200,8 +205,8 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_E.test.cpp
   requiredBy: []
-  timestamp: '2021-10-23 22:12:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-10-24 00:31:24+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_E.test.cpp
 layout: document

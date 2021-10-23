@@ -29,33 +29,33 @@ data:
     \ @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
     \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
     \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
-    \ std::uint64_t pr_rt() { return prim_root; }\n  ModInt operator+(const ModInt\
-    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
-    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
-    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
-    \ &rhs) const { return ModInt(*this) /= rhs; }\n  constexpr bool operator!=(const\
-    \ ModInt &rhs) const { return !(*this == rhs); }\n  friend std::ostream &operator<<(std::ostream\
+    \ std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream &operator<<(std::ostream\
     \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace\
     \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n\
     \    : public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n\
-    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1), r2 = -u128(mod) % mod;\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
-    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
-    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
-    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
-    \ < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return\
-    \ w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt\
-    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
-    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
-    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
-    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
-    \ = reduce(u128(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
-    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  constexpr\
-    \ bool operator==(const ModInt &rhs) const {\n    return norm(x) == norm(rhs.x);\n\
-    \  }\n  constexpr ModInt pow(std::uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
+    \  using u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
+    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
+    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod)\
+    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) *\
+    \ r2); }\n  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w\
+    \ >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n\
+    \ public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n)\
+    \ : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64\
+    \ w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const\
+    \ {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
+    \  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x\
+    \ - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt\
+    \ &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x\
+    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
+    \   return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr\
+    \ ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
+    \ }\n  bool operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n\
+    \  constexpr ModInt pow(std::uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
     \    for (ModInt base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret\
     \ *= base;\n    return ret;\n  }\n  constexpr ModInt inverse() const { return\
     \ pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0)\
@@ -77,14 +77,19 @@ data:
     \ &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
     \ &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
     \ &operator*=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator/=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  constexpr bool\
-    \ operator==(const ModInt &rhs) const { return x == rhs.x; }\n  constexpr ModInt\
-    \ pow(std::uint64_t k) const { return !k ? ModInt(1) : *this; }\n  constexpr ModInt\
-    \ sqrt() const { return *this; }\n  constexpr ModInt inverse() const { return\
-    \ *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend std::istream\
-    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n\
-    \  }\n\n private:\n  bool x;\n};\n#line 3 \"src/Math/dujiao_sieve.hpp\"\n/**\n\
-    \ * @title \u675C\u6559\u7B5B\n * @category \u6570\u5B66\n * @see https://maspypy.com/yukicoder-no-886-direct\n\
+    \ &operator/=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  ModInt operator+(const\
+    \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
+    \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
+    \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
+    \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
+    \ ModInt &rhs) const { return x == rhs.x; }\n  bool operator!=(const ModInt &rhs)\
+    \ const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t k) const\
+    \ { return !k ? ModInt(1) : *this; }\n  constexpr ModInt sqrt() const { return\
+    \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
+    \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
+    };\n#line 3 \"src/Math/dujiao_sieve.hpp\"\n/**\n * @title \u675C\u6559\u7B5B\n\
+    \ * @category \u6570\u5B66\n * @see https://maspypy.com/yukicoder-no-886-direct\n\
     \ * @see https://yukicoder.me/problems/no/1019/editorial\n * @see https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula\n\
     \ * @see https://yukicoder.me/wiki/sum_totient\n * @see https://oi-wiki.org/math/du/\n\
     \ * dirichlet_inv_sum : O(N^(3/4))\n *  (\u305F\u3060\u3057\u524D\u51E6\u7406\u3067\
@@ -230,7 +235,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2021-10-23 22:12:11+09:00'
+  timestamp: '2021-10-24 00:31:24+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
