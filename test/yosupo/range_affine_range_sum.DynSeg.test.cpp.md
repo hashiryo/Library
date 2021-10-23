@@ -261,7 +261,7 @@ data:
     \ ret = mul(ret, bs);\n    return ret.first.val() * 2 < mod ? ret.first : -ret.first;\n\
     \  }\n  friend std::ostream &operator<<(std::ostream &os, const ModInt &rhs) {\n\
     \    return os << rhs.val();\n  }\n};\n}  // namespace internal\ntemplate <std::uint64_t\
-    \ mod, std::uint64_t prim_root = 0>\nclass ModInt : internal::ModIntImpl<mod,\
+    \ mod, std::uint64_t prim_root = 0>\nclass ModInt\n    : public internal::ModIntImpl<mod,\
     \ prim_root, ModInt<mod, prim_root>> {\n  using u64 = std::uint64_t;\n  using\
     \ u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x\
     \ = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n \
@@ -282,20 +282,20 @@ data:
     \ != norm(rhs.x); }\n  u64 val() const {\n    u64 ret = reduce(x) - mod;\n   \
     \ return ret + (mod & -(ret >> 63));\n  }\n  friend std::istream &operator>>(std::istream\
     \ &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n\
-    };\ntemplate <std::uint64_t prim_root>\nclass ModInt<2, prim_root>\n    : internal::ModIntImpl<2,\
-    \ prim_root, ModInt<2, prim_root>> {\n  bool x;\n\n public:\n  constexpr ModInt()\
-    \ : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(n & 1) {}\n  ~ModInt() = default;\n\
-    \  constexpr ModInt operator-() const { return *this; }\n  constexpr ModInt &operator+=(const\
-    \ ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt &operator*=(const\
-    \ ModInt &rhs) { return x &= rhs.x, *this; }\n  bool operator==(const ModInt &rhs)\
-    \ const { return x == rhs.x; }\n  bool operator!=(const ModInt &rhs) const { return\
-    \ x != rhs.x; }\n  std::uint64_t val() const { return x; }\n  friend std::istream\
-    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n\
-    \  }\n};\n#line 8 \"test/yosupo/range_affine_range_sum.DynSeg.test.cpp\"\n\nusing\
-    \ namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct RaffineQ_RsumQ {\n\
-    \  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T ti() { return 0;\
-    \ }\n  static T op(const T &l, const T &r) { return l + r; }\n  static T mapping(const\
+    };\ntemplate <std::uint64_t prim_root>\nclass ModInt<2, prim_root>\n    : public\
+    \ internal::ModIntImpl<2, prim_root, ModInt<2, prim_root>> {\n  bool x;\n\n public:\n\
+    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(n & 1)\
+    \ {}\n  ~ModInt() = default;\n  constexpr ModInt operator-() const { return *this;\
+    \ }\n  constexpr ModInt &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator*=(const ModInt &rhs) { return x &= rhs.x, *this;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return x == rhs.x; }\n  bool\
+    \ operator!=(const ModInt &rhs) const { return x != rhs.x; }\n  std::uint64_t\
+    \ val() const { return x; }\n  friend std::istream &operator>>(std::istream &is,\
+    \ ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n};\n#line 8 \"test/yosupo/range_affine_range_sum.DynSeg.test.cpp\"\
+    \n\nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct RaffineQ_RsumQ\
+    \ {\n  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T ti() { return\
+    \ 0; }\n  static T op(const T &l, const T &r) { return l + r; }\n  static T mapping(const\
     \ T &l, const E &r, int sz) {\n    return r.first * l + r.second * sz;\n  }\n\
     \  static E composition(const E &l, const E &r) {\n    return make_pair(r.first\
     \ * l.first, r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
@@ -326,7 +326,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2021-10-23 20:58:58+09:00'
+  timestamp: '2021-10-23 21:28:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.DynSeg.test.cpp

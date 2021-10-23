@@ -55,18 +55,18 @@ data:
     \ bs))\n      if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 <\
     \ mod ? ret.first : -ret.first;\n  }\n  friend std::ostream &operator<<(std::ostream\
     \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace\
-    \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\
-    \ : internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using u64\
-    \ = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr u64 mul_inv(u64\
-    \ n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2\
-    \ - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -u128(mod)\
-    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(u128(w) * r2); }\n\
-    \  static constexpr u64 reduce(const u128 w) {\n    return u64(w >> 64) + mod\
-    \ - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n  constexpr\
-    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
-    \ - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr u64 norm(u64\
-    \ w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const\
-    \ {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
+    \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n\
+    \    : public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n\
+    \  using u64 = std::uint64_t;\n  using u128 = __uint128_t;\n  static constexpr\
+    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
+    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
+    \ 1), r2 = -u128(mod) % mod;\n  static constexpr u64 init(u64 w) { return reduce(u128(w)\
+    \ * r2); }\n  static constexpr u64 reduce(const u128 w) {\n    return u64(w >>\
+    \ 64) + mod - ((u128(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
+    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
+    \ < 0 ? mod - (-n) % mod : n)) {}\n  ~ModInt() = default;\n  static constexpr\
+    \ u64 norm(u64 w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-()\
+    \ const {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
     \  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x\
     \ - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt\
     \ &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x\
@@ -77,7 +77,7 @@ data:
     \    u64 ret = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n\
     \  friend std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return\
     \ is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n};\ntemplate <std::uint64_t prim_root>\n\
-    class ModInt<2, prim_root>\n    : internal::ModIntImpl<2, prim_root, ModInt<2,\
+    class ModInt<2, prim_root>\n    : public internal::ModIntImpl<2, prim_root, ModInt<2,\
     \ prim_root>> {\n  bool x;\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr\
     \ ModInt(std::int64_t n) : x(n & 1) {}\n  ~ModInt() = default;\n  constexpr ModInt\
     \ operator-() const { return *this; }\n  constexpr ModInt &operator+=(const ModInt\
@@ -103,7 +103,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_B.test.cpp
   requiredBy: []
-  timestamp: '2021-10-23 20:58:58+09:00'
+  timestamp: '2021-10-23 21:28:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_B.test.cpp
