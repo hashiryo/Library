@@ -225,7 +225,7 @@ data:
   bundledCode: "#line 2 \"src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n/**\n *\
     \ @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\nnamespace\
     \ internal {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\n\
-    class ModIntImpl {\n  static constexpr std::uint64_t modulo() { return mod; }\n\
+    struct ModIntImpl {\n  static constexpr std::uint64_t modulo() { return mod; }\n\
     \  static constexpr std::uint64_t pr_rt() { return prim_root; }\n  constexpr ModInt\
     \ &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
@@ -281,7 +281,7 @@ data:
     \  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title ModInt\n * @category\
     \ \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\nnamespace internal {\ntemplate <std::uint64_t\
-    \ mod, std::uint64_t prim_root, class ModInt>\nclass ModIntImpl {\n  static constexpr\
+    \ mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
     \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
     \ { return prim_root; }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
     \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
@@ -347,7 +347,7 @@ data:
   - src/Math/BigInt.hpp
   - src/Math/extgcd.hpp
   - src/Math/SubproductTree.hpp
-  timestamp: '2021-10-23 18:23:39+09:00'
+  timestamp: '2021-10-23 20:58:58+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/644.test.cpp

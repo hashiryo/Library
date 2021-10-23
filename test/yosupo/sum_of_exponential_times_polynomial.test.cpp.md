@@ -39,7 +39,7 @@ data:
     \ mint nHr(int n, int r) { return !r ? mint(1) : nCr(n + r - 1, r); }\n};\n#line\
     \ 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
     \ */\n\n// BEGIN CUT HERE\n\nnamespace internal {\ntemplate <std::uint64_t mod,\
-    \ std::uint64_t prim_root, class ModInt>\nclass ModIntImpl {\n  static constexpr\
+    \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
     \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
     \ { return prim_root; }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
     \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
@@ -158,7 +158,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2021-10-23 18:23:39+09:00'
+  timestamp: '2021-10-23 20:58:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
