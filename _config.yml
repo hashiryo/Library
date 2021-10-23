@@ -3,4 +3,4 @@ plugins:
 - jemoji
 - jekyll-redirect-from
 title: Hashiryo's Library
-theme: jekyll-theme-architect
+theme: jekyll-theme-cayman
