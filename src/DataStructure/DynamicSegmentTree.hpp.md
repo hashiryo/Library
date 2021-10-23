@@ -21,7 +21,7 @@ data:
   - icon: ':x:'
     path: test/hackerrank/minimum-history-query.DynSeg.test.cpp
     title: test/hackerrank/minimum-history-query.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'

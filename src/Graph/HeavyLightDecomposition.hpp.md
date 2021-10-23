@@ -9,7 +9,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/kupc2018_m.test.cpp
     title: test/atcoder/kupc2018_m.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   _isVerificationFailed: true
