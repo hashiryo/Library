@@ -16,7 +16,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Online-Dynamic-Connectivity(\u30B7\u30F3\u30D7\u30EB)"
+    document_title: Online-Dynamic-Connectivity
     links: []
   bundledCode: "#line 2 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\n#include\
     \ <bits/stdc++.h>\n\n#line 3 \"src/DataStructure/EulerTourTree.hpp\"\n/**\n *\
@@ -136,9 +136,9 @@ data:
     \ & 0b0100) {\n          if (f(n[v].s)) return 1;\n          splay(v), loop =\
     \ false;\n        } else\n          v = n[v].ch[!(n[v].ch[0] && (n[n[v].ch[0]].flag\
     \ & 0b1000))];\n      }\n    return 0;\n  }\n};\n#line 5 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
-    \n/**\n * @title Online-Dynamic-Connectivity(\u30B7\u30F3\u30D7\u30EB)\n * @category\
-    \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief link,cut: O(log^2 N)\n * @brief connected:\
-    \ O(log N)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename M = void>\nclass OnlineDynamicConnectivity\
+    \n/**\n * @title Online-Dynamic-Connectivity\n * @category \u30C7\u30FC\u30BF\u69CB\
+    \u9020\n * @brief link,cut: O(log^2 N)\n * @brief connected: O(log N)\n */\n\n\
+    // BEGIN CUT HERE\n\ntemplate <typename M = void>\nclass OnlineDynamicConnectivity\
     \ {\n  using T = typename EulerTourTree<M>::T;\n  using E = typename EulerTourTree<M>::E;\n\
     \  int N;\n  std::vector<EulerTourTree<M>> ett;\n  std::vector<std::vector<std::unordered_set<int>>>\
     \ adj;\n  void replace(int x, int y, int level) {\n    for (int k = 0; k < level;\
@@ -172,9 +172,9 @@ data:
     \ }\n  void apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
     \ x, int y) { return ett[0].connected(x, y); }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
-    \n/**\n * @title Online-Dynamic-Connectivity(\u30B7\u30F3\u30D7\u30EB)\n * @category\
-    \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief link,cut: O(log^2 N)\n * @brief connected:\
-    \ O(log N)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename M = void>\nclass OnlineDynamicConnectivity\
+    \n/**\n * @title Online-Dynamic-Connectivity\n * @category \u30C7\u30FC\u30BF\u69CB\
+    \u9020\n * @brief link,cut: O(log^2 N)\n * @brief connected: O(log N)\n */\n\n\
+    // BEGIN CUT HERE\n\ntemplate <typename M = void>\nclass OnlineDynamicConnectivity\
     \ {\n  using T = typename EulerTourTree<M>::T;\n  using E = typename EulerTourTree<M>::E;\n\
     \  int N;\n  std::vector<EulerTourTree<M>> ett;\n  std::vector<std::vector<std::unordered_set<int>>>\
     \ adj;\n  void replace(int x, int y, int level) {\n    for (int k = 0; k < level;\
@@ -212,7 +212,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/OnlineDynamicConnectivity.hpp
   requiredBy: []
-  timestamp: '2021-10-21 17:43:25+09:00'
+  timestamp: '2021-10-24 21:10:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp
@@ -222,5 +222,5 @@ layout: document
 redirect_from:
 - /library/src/DataStructure/OnlineDynamicConnectivity.hpp
 - /library/src/DataStructure/OnlineDynamicConnectivity.hpp.html
-title: "Online-Dynamic-Connectivity(\u30B7\u30F3\u30D7\u30EB)"
+title: Online-Dynamic-Connectivity
 ---

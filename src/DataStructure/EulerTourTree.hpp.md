@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
-    title: "Online-Dynamic-Connectivity(\u30B7\u30F3\u30D7\u30EB)"
+    title: Online-Dynamic-Connectivity
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
