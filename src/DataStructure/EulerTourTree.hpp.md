@@ -16,6 +16,9 @@ data:
     path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+    title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
   _isVerificationFailed: false
@@ -270,6 +273,7 @@ data:
   - test/aoj/2235.onlinedicon.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
 documentation_of: src/DataStructure/EulerTourTree.hpp
 layout: document
 redirect_from:
