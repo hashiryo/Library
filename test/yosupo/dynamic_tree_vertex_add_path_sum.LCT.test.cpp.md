@@ -89,7 +89,9 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \ k) { return get(k); }\n  const T &get(std::size_t k) {\n    static_assert(semigroup<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"get\\\" is not available\\n\");\n\
+    \    return expose(&ns[k]), ns[k].val;\n  }\n  void set(std::size_t k, T v) {\n\
     \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
     \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
     \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
@@ -99,20 +101,21 @@ data:
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
     n\");\n    evert(a), expose(&ns[b]), propagate(&ns[b], v), eval(&ns[b]);\n  }\n\
     \  static std::string which_available() {\n    std::string ret = \"\";\n    if\
-    \ constexpr (semigroup<M>::value) ret += \"\\\"fold\\\" \";\n    if constexpr\
-    \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line\
-    \ 5 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\nusing namespace\
-    \ std;\n\nstruct RsumQ {\n  using T = long long;\n  static T op(const T &l, const\
-    \ T &r) { return l + r; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree<RsumQ> lct(N);\n  for (int i = 0;\
-    \ i < N; i++) {\n    long long a;\n    cin >> a;\n    lct.set(i, a);\n  }\n  for\
-    \ (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n    lct.link(v,\
-    \ u);\n  }\n  while (Q--) {\n    int op;\n    cin >> op;\n    if (op == 0) {\n\
-    \      int u, v, w, x;\n      cin >> u >> v >> w >> x;\n      lct.cut(u, v);\n\
-    \      lct.link(w, x);\n    } else if (op == 1) {\n      int p;\n      long long\
-    \ x;\n      cin >> p >> x;\n      lct.set(p, lct[p] + x);\n    } else {\n    \
-    \  int u, v;\n      cin >> u >> v;\n      cout << lct.fold(u, v) << endl;\n  \
-    \  }\n  }\n  return 0;\n}\n"
+    \ constexpr (semigroup<M>::value || dual<M>::value)\n      ret += \"\\\"set\\\"\
+    \ \\\"get\\\" \";\n    if constexpr (semigroup<M>::value) ret += \"\\\"fold\\\"\
+    \ \";\n    if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return\
+    \ ret;\n  }\n};\n#line 5 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\
+    \nusing namespace std;\n\nstruct RsumQ {\n  using T = long long;\n  static T op(const\
+    \ T &l, const T &r) { return l + r; }\n};\n\nsigned main() {\n  cin.tie(0);\n\
+    \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree<RsumQ>\
+    \ lct(N);\n  for (int i = 0; i < N; i++) {\n    long long a;\n    cin >> a;\n\
+    \    lct.set(i, a);\n  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n\
+    \    cin >> u >> v;\n    lct.link(v, u);\n  }\n  while (Q--) {\n    int op;\n\
+    \    cin >> op;\n    if (op == 0) {\n      int u, v, w, x;\n      cin >> u >>\
+    \ v >> w >> x;\n      lct.cut(u, v);\n      lct.link(w, x);\n    } else if (op\
+    \ == 1) {\n      int p;\n      long long x;\n      cin >> p >> x;\n      lct.set(p,\
+    \ lct[p] + x);\n    } else {\n      int u, v;\n      cin >> u >> v;\n      cout\
+    \ << lct.fold(u, v) << endl;\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/LinkCutTree.hpp\"\nusing\
     \ namespace std;\n\nstruct RsumQ {\n  using T = long long;\n  static T op(const\
@@ -131,7 +134,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 16:08:47+09:00'
+  timestamp: '2021-11-15 19:42:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp

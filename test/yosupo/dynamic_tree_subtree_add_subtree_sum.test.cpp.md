@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   _extendedRequiredBy: []
@@ -91,48 +91,50 @@ data:
     \ i == j;\n  }\n  node_id n_st;\n  std::unordered_map<std::uint64_t, node_id>\
     \ emp;\n\n public:\n  EulerTourTree() {}\n  EulerTourTree(int N) : n_st(ni) {\n\
     \    ni += N;\n    for (int i = 0; i < N; i++) n[i + n_st].s = n[i + n_st].d =\
-    \ i;\n  }\n  const T& operator[](vertex_id x) { return n[x + n_st].val; }\n  bool\
-    \ edge_exist(vertex_id x, vertex_id y) {\n    if (x > y) std::swap(x, y);\n  \
-    \  return emp.count(((long long)x << 32) | (long long)y);\n  }\n  void link(vertex_id\
-    \ x, vertex_id y, bool hi = true) {\n    if (x > y) std::swap(x, y);\n    int\
-    \ ei = new_edge(x, y, hi);\n    emp.insert(std::make_pair(((long long)x << 32)\
-    \ | (long long)y, ei));\n    x += n_st, y += n_st, reroot(x), reroot(y);\n   \
-    \ n[n[x].par = ei].ch[0] = x, n[n[y].par = ei].ch[1] = y;\n    pushup(ei), merge_back(ei,\
-    \ ei + 1);\n  }\n  void cut(vertex_id x, vertex_id y) {\n    if (x > y) std::swap(x,\
-    \ y);\n    int ei = emp[((long long)x << 32) | (long long)y], rei = ei + 1;\n\
-    \    emp.erase(((long long)x << 32) | (long long)y);\n    auto [pl, pr] = split(ei);\n\
-    \    node_id left, center, right;\n    if (pl && same_root(pl, rei)) {\n     \
-    \ auto [ql, qr] = split(rei);\n      left = ql, center = n[qr].ch[1], right =\
-    \ n[pr].ch[1], n[center].par = 0;\n    } else {\n      splay(ei), n[ei = n[ei].ch[1]].par\
-    \ = 0;\n      auto [ql, qr] = split(rei);\n      splay(pl), left = pl, right =\
-    \ n[qr].ch[1];\n    }\n    n[right].par = 0, merge_back(left, right);\n  }\n \
-    \ bool connected(vertex_id x, vertex_id y) {\n    return same_root(x + n_st, y\
-    \ + n_st);\n  }\n  void subedge_set(vertex_id x, bool val) {\n    splay(x += n_st);\n\
-    \    if (val)\n      n[x].flag |= (0b0100);\n    else\n      n[x].flag &= ~(0b0100);\n\
-    \    pushup(x);\n  }\n  void set(vertex_id x, T val) {\n    static_assert(monoid<M>::value\
-    \ || dual<M>::value,\n                  \"\\\"set\\\" is not available\\n\");\n\
-    \    splay(x += n_st), n[x].val = val, pushup(x);\n  }\n  std::size_t tree_size(vertex_id\
-    \ x) { return splay(x += n_st), n[x].sz; }\n  T fold_tree(vertex_id x) {\n   \
-    \ static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\n\");\n   \
-    \ return splay(x += n_st), n[x].sum;\n  }\n  T fold_subtree(vertex_id x, vertex_id\
-    \ par = -1) {\n    if (par == -1) return fold_tree(x);\n    cut(x, par);\n   \
-    \ T ret = fold_tree(x);\n    link(x, par);\n    return ret;\n  }\n  void apply_tree(vertex_id\
-    \ x, E v) {\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
-    n\");\n    splay(x += n_st), propagate(x, v), eval(x);\n  }\n  void apply_subtree(vertex_id\
-    \ x, vertex_id par, E v) {\n    cut(x, par), apply_tree(x, v), link(x, par);\n\
-    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
-    \    if constexpr (monoid<M>::value) ret += \"\\\"fold\\\" \";\n    if constexpr\
-    \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n  template\
-    \ <class Func>\n  void hilevel_edges(vertex_id v, Func f) {\n    splay(v += n_st);\n\
-    \    while (v && (n[v].flag & 0b0010))\n      while (1) {\n        if (n[v].flag\
-    \ & 0b0001) {\n          f(n[v].s, n[v].d), splay(v), n[v].flag &= ~(0b0001),\
-    \ pushup(v);\n          break;\n        } else\n          v = n[v].ch[!(n[v].ch[0]\
-    \ && (n[n[v].ch[0]].flag & 0b0010))];\n      }\n  }\n  template <class Func>\n\
-    \  int subedges(vertex_id v, Func f) {\n    splay(v += n_st);\n    while (v &&\
-    \ (n[v].flag & 0b1000))\n      for (bool loop = true; loop;) {\n        if (n[v].flag\
-    \ & 0b0100) {\n          if (f(n[v].s)) return 1;\n          splay(v), loop =\
-    \ false;\n        } else\n          v = n[v].ch[!(n[v].ch[0] && (n[n[v].ch[0]].flag\
-    \ & 0b1000))];\n      }\n    return 0;\n  }\n};\n#line 6 \"test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp\"\
+    \ i;\n  }\n  const T& operator[](vertex_id x) { return get(x); }\n  const T& get(vertex_id\
+    \ x) {\n    static_assert(monoid<M>::value || dual<M>::value,\n              \
+    \    \"\\\"get\\\" is not available\\n\");\n    return n[x + n_st].val;\n  }\n\
+    \  void set(vertex_id x, T val) {\n    static_assert(monoid<M>::value || dual<M>::value,\n\
+    \                  \"\\\"set\\\" is not available\\n\");\n    splay(x += n_st),\
+    \ n[x].val = val, pushup(x);\n  }\n  bool edge_exist(vertex_id x, vertex_id y)\
+    \ {\n    if (x > y) std::swap(x, y);\n    return emp.count(((long long)x << 32)\
+    \ | (long long)y);\n  }\n  void link(vertex_id x, vertex_id y, bool hi = true)\
+    \ {\n    if (x > y) std::swap(x, y);\n    int ei = new_edge(x, y, hi);\n    emp.insert(std::make_pair(((long\
+    \ long)x << 32) | (long long)y, ei));\n    x += n_st, y += n_st, reroot(x), reroot(y);\n\
+    \    n[n[x].par = ei].ch[0] = x, n[n[y].par = ei].ch[1] = y;\n    pushup(ei),\
+    \ merge_back(ei, ei + 1);\n  }\n  void cut(vertex_id x, vertex_id y) {\n    if\
+    \ (x > y) std::swap(x, y);\n    int ei = emp[((long long)x << 32) | (long long)y],\
+    \ rei = ei + 1;\n    emp.erase(((long long)x << 32) | (long long)y);\n    auto\
+    \ [pl, pr] = split(ei);\n    node_id left, center, right;\n    if (pl && same_root(pl,\
+    \ rei)) {\n      auto [ql, qr] = split(rei);\n      left = ql, center = n[qr].ch[1],\
+    \ right = n[pr].ch[1], n[center].par = 0;\n    } else {\n      splay(ei), n[ei\
+    \ = n[ei].ch[1]].par = 0;\n      auto [ql, qr] = split(rei);\n      splay(pl),\
+    \ left = pl, right = n[qr].ch[1];\n    }\n    n[right].par = 0, merge_back(left,\
+    \ right);\n  }\n  bool connected(vertex_id x, vertex_id y) {\n    return same_root(x\
+    \ + n_st, y + n_st);\n  }\n  void subedge_set(vertex_id x, bool val) {\n    splay(x\
+    \ += n_st);\n    if (val)\n      n[x].flag |= (0b0100);\n    else\n      n[x].flag\
+    \ &= ~(0b0100);\n    pushup(x);\n  }\n  std::size_t tree_size(vertex_id x) { return\
+    \ splay(x += n_st), n[x].sz; }\n  T fold_tree(vertex_id x) {\n    static_assert(monoid<M>::value,\
+    \ \"\\\"fold\\\" is not available\\n\");\n    return splay(x += n_st), n[x].sum;\n\
+    \  }\n  T fold_subtree(vertex_id x, vertex_id par = -1) {\n    if (par == -1)\
+    \ return fold_tree(x);\n    cut(x, par);\n    T ret = fold_tree(x);\n    link(x,\
+    \ par);\n    return ret;\n  }\n  void apply_tree(vertex_id x, E v) {\n    static_assert(dual<M>::value,\
+    \ \"\\\"apply\\\" is not available\\n\");\n    splay(x += n_st), propagate(x,\
+    \ v), eval(x);\n  }\n  void apply_subtree(vertex_id x, vertex_id par, E v) {\n\
+    \    cut(x, par), apply_tree(x, v), link(x, par);\n  }\n  static std::string which_available()\
+    \ {\n    std::string ret = \"\";\n    if constexpr (monoid<M>::value) ret += \"\
+    \\\"fold\\\" \";\n    if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \"\
+    ;\n    return ret;\n  }\n  template <class Func>\n  void hilevel_edges(vertex_id\
+    \ v, Func f) {\n    splay(v += n_st);\n    while (v && (n[v].flag & 0b0010))\n\
+    \      while (1) {\n        if (n[v].flag & 0b0001) {\n          f(n[v].s, n[v].d),\
+    \ splay(v), n[v].flag &= ~(0b0001), pushup(v);\n          break;\n        } else\n\
+    \          v = n[v].ch[!(n[v].ch[0] && (n[n[v].ch[0]].flag & 0b0010))];\n    \
+    \  }\n  }\n  template <class Func>\n  int subedges(vertex_id v, Func f) {\n  \
+    \  splay(v += n_st);\n    while (v && (n[v].flag & 0b1000))\n      for (bool loop\
+    \ = true; loop;) {\n        if (n[v].flag & 0b0100) {\n          if (f(n[v].s))\
+    \ return 1;\n          splay(v), loop = false;\n        } else\n          v =\
+    \ n[v].ch[!(n[v].ch[0] && (n[n[v].ch[0]].flag & 0b1000))];\n      }\n    return\
+    \ 0;\n  }\n};\n#line 6 \"test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp\"\
     \nusing namespace std;\n\nstruct RsumQRaddQ {\n  using T = long long;\n  using\
     \ E = long long;\n  static T ti() { return 0; }\n  static T op(const T &l, const\
     \ T &r) { return l + r; }\n  static T mapping(const T &t, const E &e, const std::size_t\
@@ -168,7 +170,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 16:18:00+09:00'
+  timestamp: '2021-11-15 19:42:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp

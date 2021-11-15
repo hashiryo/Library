@@ -235,7 +235,9 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \ k) { return get(k); }\n  const T &get(std::size_t k) {\n    static_assert(semigroup<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"get\\\" is not available\\n\");\n\
+    \    return expose(&ns[k]), ns[k].val;\n  }\n  void set(std::size_t k, T v) {\n\
     \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
     \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
     \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
@@ -245,13 +247,14 @@ data:
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
     n\");\n    evert(a), expose(&ns[b]), propagate(&ns[b], v), eval(&ns[b]);\n  }\n\
     \  static std::string which_available() {\n    std::string ret = \"\";\n    if\
-    \ constexpr (semigroup<M>::value) ret += \"\\\"fold\\\" \";\n    if constexpr\
-    \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line\
-    \ 8 \"test/atcoder/abc133_f.DynSeg.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n\
-    \  LinkCutTree lct(N);\n  vector<tuple<int, int, int>> adj[N];\n  for (int i =\
-    \ 0; i < N - 1; i++) {\n    int a, b, c, d;\n    cin >> a >> b >> c >> d;\n  \
-    \  lct.link(--a, --b);\n    adj[a].emplace_back(b, c, d);\n    adj[b].emplace_back(a,\
+    \ constexpr (semigroup<M>::value || dual<M>::value)\n      ret += \"\\\"set\\\"\
+    \ \\\"get\\\" \";\n    if constexpr (semigroup<M>::value) ret += \"\\\"fold\\\"\
+    \ \";\n    if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return\
+    \ ret;\n  }\n};\n#line 8 \"test/atcoder/abc133_f.DynSeg.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n\
+    \  cin >> N >> Q;\n  LinkCutTree lct(N);\n  vector<tuple<int, int, int>> adj[N];\n\
+    \  for (int i = 0; i < N - 1; i++) {\n    int a, b, c, d;\n    cin >> a >> b >>\
+    \ c >> d;\n    lct.link(--a, --b);\n    adj[a].emplace_back(b, c, d);\n    adj[b].emplace_back(a,\
     \ c, d);\n  }\n  using PerArr = SegmentTree_Dynamic<int, true, 17>;\n  PerArr\
     \ Arr1[N], Arr2[N];\n  int sum[N];\n  sum[0] = 0;\n  auto dfs = [&adj, &Arr1,\
     \ &Arr2, &sum](auto f, int v, int p) -> void {\n    for (auto [u, c, d] : adj[v])\n\
@@ -291,7 +294,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 19:21:03+09:00'
+  timestamp: '2021-11-15 19:42:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.DynSeg.test.cpp

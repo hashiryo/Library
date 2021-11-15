@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -92,7 +92,9 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \ k) { return get(k); }\n  const T &get(std::size_t k) {\n    static_assert(semigroup<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"get\\\" is not available\\n\");\n\
+    \    return expose(&ns[k]), ns[k].val;\n  }\n  void set(std::size_t k, T v) {\n\
     \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
     \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
     \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
@@ -102,11 +104,12 @@ data:
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
     n\");\n    evert(a), expose(&ns[b]), propagate(&ns[b], v), eval(&ns[b]);\n  }\n\
     \  static std::string which_available() {\n    std::string ret = \"\";\n    if\
-    \ constexpr (semigroup<M>::value) ret += \"\\\"fold\\\" \";\n    if constexpr\
-    \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line\
-    \ 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
-    \ */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
-    \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
+    \ constexpr (semigroup<M>::value || dual<M>::value)\n      ret += \"\\\"set\\\"\
+    \ \\\"get\\\" \";\n    if constexpr (semigroup<M>::value) ret += \"\\\"fold\\\"\
+    \ \";\n    if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return\
+    \ ret;\n  }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category\
+    \ \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t\
+    \ mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
     \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
     \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
     \ ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\n\
@@ -203,7 +206,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 16:08:47+09:00'
+  timestamp: '2021-11-15 19:42:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp

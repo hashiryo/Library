@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
     title: "Splay\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -129,65 +129,72 @@ data:
     \ make_tree(ar.data(), ar.data() + ar.size());\n  }\n  std::vector<T> dump() {\n\
     \    std::vector<T> ret(size());\n    return dump(ret.begin(), root), ret;\n \
     \ }\n  static std::string which_available() {\n    std::string ret = \"\";\n \
-    \   if constexpr (semigroup<M>::value) ret += \"\\\"fold\\\" \";\n    if constexpr\
-    \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    if constexpr (reversible) ret\
-    \ += \"\\\"reverse\\\" \";\n    return ret;\n  }\n  std::size_t size() { return\
-    \ root ? root->size : 0; }\n  void clear() { root = nullptr; }\n  const T &operator[](std::size_t\
-    \ k) { return splay(root, k), root->val; }\n  void set(std::size_t k, T val) {\n\
-    \    splay(root, k), root->val = val, pushup(root);\n  }\n  void set_balance()\
-    \ {\n    if (root) splay(root, xor128() % size()), splay(root, xor128() % size());\n\
-    \  }\n  T fold(std::size_t a, std::size_t b) {\n    static_assert(semigroup<M>::value,\
-    \ \"\\\"fold\\\" is not available\");\n    if (size() == b) {\n      return a--\
-    \ ? splay(root, a), root->ch[1]->sum : root->sum;\n    } else {\n      splay(root,\
-    \ b);\n      return a-- ? (splay(root->ch[0], a), root->ch[0]->ch[1]->sum)\n \
-    \                : root->ch[0]->sum;\n    }\n  }\n  void apply(std::size_t a,\
-    \ std::size_t b, E x) {\n    static_assert(dual<M>::value, \"\\\"apply\\\" is\
-    \ not available\");\n    query(a, b, [&](Node *t) { return propagate(t, x); });\n\
-    \  }\n  void reverse(std::size_t a, std::size_t b) {\n    static_assert(reversible,\
-    \ \"\\\"reverse\\\" is not available\");\n    query(a, b, [&](Node *t) { return\
-    \ toggle(t); });\n  }\n  std::pair<SplayTree, SplayTree> split(std::size_t k)\
-    \ {\n    assert(k <= size());\n    if (size() == k) return {*this, SplayTree()};\n\
-    \    splay(root, k);\n    Node *l = root->ch[0];\n    root->ch[0] = nullptr;\n\
-    \    return {SplayTree(l), SplayTree(pushup(root))};\n  }\n  std::tuple<SplayTree,\
-    \ SplayTree, SplayTree> split3(std::size_t a,\n                              \
-    \                       std::size_t b) {\n    auto [tmp, right] = split(b);\n\
-    \    auto [left, center] = tmp.split(a);\n    return {left, center, right};\n\
-    \  }\n  SplayTree &operator+=(SplayTree rhs) {  // merge\n    root ? (splay(root,\
-    \ root->size - 1), root->ch[1] = rhs.root, pushup(root))\n         : root = rhs.root;\n\
-    \    return *this;\n  }\n  SplayTree &operator+(SplayTree rhs) { return *this\
-    \ += rhs; }\n  void push_back(T val) { insert(size(), val); }\n  void push_front(T\
-    \ val) { insert(0, val); }\n  void insert(std::size_t k, T val) {\n    assert(!k\
-    \ || (root && k <= root->size));\n    if (size() == k) {\n      root = pushup(new\
-    \ Node{val, {root, nullptr}});\n    } else {\n      splay(root, k), root = new\
-    \ Node{val, {root->ch[0], root}};\n      root->ch[1]->ch[0] = nullptr, pushup(root->ch[1]),\
-    \ pushup(root);\n    }\n  }\n  T pop_back() { return erase(root->size - 1); }\n\
-    \  T pop_front() { return erase(0); }\n  T erase(std::size_t k) {\n    assert(root\
-    \ && k < root->size);\n    splay(root, k);\n    T ret = root->val;\n    splay(root->ch[1],\
-    \ 0);\n    if (root->ch[1])\n      root->ch[1]->ch[0] = root->ch[0], root = pushup(root->ch[1]);\n\
-    \    else\n      root = root->ch[0];\n    return ret;\n  }\n};\n#line 3 \"src/Math/ModInt.hpp\"\
-    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    namespace internal {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class\
-    \ ModInt>\nstruct ModIntImpl {\n  static constexpr std::uint64_t modulo() { return\
-    \ mod; }\n  static constexpr std::uint64_t pr_rt() { return prim_root; }\n  friend\
-    \ std::ostream &operator<<(std::ostream &os, const ModInt &rhs) {\n    return\
-    \ os << rhs.val();\n  }\n};\n}  // namespace internal\ntemplate <std::uint64_t\
-    \ mod, std::uint64_t prim_root = 0>\nclass ModInt\n    : public internal::ModIntImpl<mod,\
-    \ prim_root, ModInt<mod, prim_root>> {\n  using u64 = std::uint64_t;\n  static\
-    \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
-    \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
-    \ 6, 1), r2 = -__uint128_t(mod) % mod;\n  static constexpr u64 init(u64 w) { return\
-    \ reduce(__uint128_t(w) * r2); }\n  static constexpr u64 reduce(const __uint128_t\
-    \ w) {\n    return u64(w >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >>\
-    \ 64);\n  }\n  u64 x;\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr\
-    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static\
-    \ constexpr u64 norm(u64 w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt\
-    \ operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x !=\
-    \ 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n  \
-    \  return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n\
-    \  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x\
-    \ += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
-    \ ModInt &rhs) {\n    return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n\
-    \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \   if constexpr (semigroup<M>::value)\n      ret += \"\\\"fold\\\" \";\n    else\n\
+    \      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value) ret += \"\\\"\
+    apply\\\" \";\n    if constexpr (reversible) ret += \"\\\"reverse\\\" \";\n  \
+    \  return ret;\n  }\n  std::size_t size() { return root ? root->size : 0; }\n\
+    \  void clear() { root = nullptr; }\n  template <class L = M,\n            typename\
+    \ std::enable_if_t<semigroup<L>::value> * = nullptr>\n  const T &operator[](id_t\
+    \ k) {\n    return get(k);\n  }\n  template <class L = M,\n            typename\
+    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](id_t k)\
+    \ {\n    return at(k);\n  }\n  const T &get(std::size_t k) { return splay(root,\
+    \ k), root->val; }\n  T &at(std::size_t k) {\n    static_assert(!semigroup<M>::value,\
+    \ \"\\\"at\\\" is not available\");\n    return splay(root, k), root->val;\n \
+    \ }\n  void set(std::size_t k, T val) {\n    splay(root, k), root->val = val,\
+    \ pushup(root);\n  }\n  void set_balance() {\n    if (root) splay(root, xor128()\
+    \ % size()), splay(root, xor128() % size());\n  }\n  T fold(std::size_t a, std::size_t\
+    \ b) {\n    static_assert(semigroup<M>::value, \"\\\"fold\\\" is not available\"\
+    );\n    if (size() == b) {\n      return a-- ? splay(root, a), root->ch[1]->sum\
+    \ : root->sum;\n    } else {\n      splay(root, b);\n      return a-- ? (splay(root->ch[0],\
+    \ a), root->ch[0]->ch[1]->sum)\n                 : root->ch[0]->sum;\n    }\n\
+    \  }\n  void apply(std::size_t a, std::size_t b, E x) {\n    static_assert(dual<M>::value,\
+    \ \"\\\"apply\\\" is not available\");\n    query(a, b, [&](Node *t) { return\
+    \ propagate(t, x); });\n  }\n  void reverse(std::size_t a, std::size_t b) {\n\
+    \    static_assert(reversible, \"\\\"reverse\\\" is not available\");\n    query(a,\
+    \ b, [&](Node *t) { return toggle(t); });\n  }\n  std::pair<SplayTree, SplayTree>\
+    \ split(std::size_t k) {\n    assert(k <= size());\n    if (size() == k) return\
+    \ {*this, SplayTree()};\n    splay(root, k);\n    Node *l = root->ch[0];\n   \
+    \ root->ch[0] = nullptr;\n    return {SplayTree(l), SplayTree(pushup(root))};\n\
+    \  }\n  std::tuple<SplayTree, SplayTree, SplayTree> split3(std::size_t a,\n  \
+    \                                                   std::size_t b) {\n    auto\
+    \ [tmp, right] = split(b);\n    auto [left, center] = tmp.split(a);\n    return\
+    \ {left, center, right};\n  }\n  SplayTree &operator+=(SplayTree rhs) {  // merge\n\
+    \    root ? (splay(root, root->size - 1), root->ch[1] = rhs.root, pushup(root))\n\
+    \         : root = rhs.root;\n    return *this;\n  }\n  SplayTree &operator+(SplayTree\
+    \ rhs) { return *this += rhs; }\n  void push_back(T val) { insert(size(), val);\
+    \ }\n  void push_front(T val) { insert(0, val); }\n  void insert(std::size_t k,\
+    \ T val) {\n    assert(!k || (root && k <= root->size));\n    if (size() == k)\
+    \ {\n      root = pushup(new Node{val, {root, nullptr}});\n    } else {\n    \
+    \  splay(root, k), root = new Node{val, {root->ch[0], root}};\n      root->ch[1]->ch[0]\
+    \ = nullptr, pushup(root->ch[1]), pushup(root);\n    }\n  }\n  T pop_back() {\
+    \ return erase(root->size - 1); }\n  T pop_front() { return erase(0); }\n  T erase(std::size_t\
+    \ k) {\n    assert(root && k < root->size);\n    splay(root, k);\n    T ret =\
+    \ root->val;\n    splay(root->ch[1], 0);\n    if (root->ch[1])\n      root->ch[1]->ch[0]\
+    \ = root->ch[0], root = pushup(root->ch[1]);\n    else\n      root = root->ch[0];\n\
+    \    return ret;\n  }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
+    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
+    \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
+    \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
+    \ std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace\
+    \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n\
+    \    : public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n\
+    \  using u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
+    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
+    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod)\
+    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) *\
+    \ r2); }\n  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w\
+    \ >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n\
+    \ public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n)\
+    \ : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64\
+    \ w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const\
+    \ {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
+    \  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x\
+    \ - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt\
+    \ &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x\
+    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
+    \   return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr\
+    \ ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
     \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
     \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
@@ -271,7 +278,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 16:18:00+09:00'
+  timestamp: '2021-11-15 19:42:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

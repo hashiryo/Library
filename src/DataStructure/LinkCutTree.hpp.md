@@ -30,10 +30,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
   _isVerificationFailed: true
@@ -115,7 +115,9 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \ k) { return get(k); }\n  const T &get(std::size_t k) {\n    static_assert(semigroup<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"get\\\" is not available\\n\");\n\
+    \    return expose(&ns[k]), ns[k].val;\n  }\n  void set(std::size_t k, T v) {\n\
     \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
     \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
     \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
@@ -125,8 +127,10 @@ data:
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
     n\");\n    evert(a), expose(&ns[b]), propagate(&ns[b], v), eval(&ns[b]);\n  }\n\
     \  static std::string which_available() {\n    std::string ret = \"\";\n    if\
-    \ constexpr (semigroup<M>::value) ret += \"\\\"fold\\\" \";\n    if constexpr\
-    \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n"
+    \ constexpr (semigroup<M>::value || dual<M>::value)\n      ret += \"\\\"set\\\"\
+    \ \\\"get\\\" \";\n    if constexpr (semigroup<M>::value) ret += \"\\\"fold\\\"\
+    \ \";\n    if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return\
+    \ ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Link-Cut-Tree\n *\
     \ @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n * \u5358\u4F4D\
     \u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\
@@ -200,7 +204,9 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \ k) { return get(k); }\n  const T &get(std::size_t k) {\n    static_assert(semigroup<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"get\\\" is not available\\n\");\n\
+    \    return expose(&ns[k]), ns[k].val;\n  }\n  void set(std::size_t k, T v) {\n\
     \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
     \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
     \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
@@ -210,13 +216,15 @@ data:
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
     n\");\n    evert(a), expose(&ns[b]), propagate(&ns[b], v), eval(&ns[b]);\n  }\n\
     \  static std::string which_available() {\n    std::string ret = \"\";\n    if\
-    \ constexpr (semigroup<M>::value) ret += \"\\\"fold\\\" \";\n    if constexpr\
-    \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n"
+    \ constexpr (semigroup<M>::value || dual<M>::value)\n      ret += \"\\\"set\\\"\
+    \ \\\"get\\\" \";\n    if constexpr (semigroup<M>::value) ret += \"\\\"fold\\\"\
+    \ \";\n    if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return\
+    \ ret;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree.hpp
   requiredBy: []
-  timestamp: '2021-11-15 16:08:47+09:00'
+  timestamp: '2021-11-15 19:42:37+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/529.LCT.test.cpp
