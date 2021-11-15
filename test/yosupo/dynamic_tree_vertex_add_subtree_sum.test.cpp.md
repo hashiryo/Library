@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
@@ -109,9 +109,9 @@ data:
     \ bool connected(vertex_id x, vertex_id y) {\n    return same_root(x + n_st, y\
     \ + n_st);\n  }\n  void subedge_set(vertex_id x, bool val) {\n    splay(x += n_st);\n\
     \    if (val)\n      n[x].flag |= (0b0100);\n    else\n      n[x].flag &= ~(0b0100);\n\
-    \    pushup(x);\n  }\n  void set_val(vertex_id x, T val) {\n    static_assert(monoid<M>::value\
-    \ || dual<M>::value,\n                  \"\\\"set_val\\\" is not available\\n\"\
-    );\n    splay(x += n_st), n[x].val = val, pushup(x);\n  }\n  std::size_t tree_size(vertex_id\
+    \    pushup(x);\n  }\n  void set(vertex_id x, T val) {\n    static_assert(monoid<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"set\\\" is not available\\n\");\n\
+    \    splay(x += n_st), n[x].val = val, pushup(x);\n  }\n  std::size_t tree_size(vertex_id\
     \ x) { return splay(x += n_st), n[x].sz; }\n  T fold_tree(vertex_id x) {\n   \
     \ static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\n\");\n   \
     \ return splay(x += n_st), n[x].sum;\n  }\n  T fold_subtree(vertex_id x, vertex_id\
@@ -137,35 +137,35 @@ data:
     \ { return 0; }\n  static T op(const T &l, const T &r) { return l + r; }\n};\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin\
     \ >> N >> Q;\n  EulerTourTree<RsumQ> ett(N);\n  for (int i = 0; i < N; i++) {\n\
-    \    long long a;\n    cin >> a;\n    ett.set_val(i, a);\n  }\n  for (int i =\
-    \ 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n    ett.link(v, u);\n\
-    \  }\n  while (Q--) {\n    int op;\n    cin >> op;\n    if (op == 0) {\n     \
-    \ int u, v, w, x;\n      cin >> u >> v >> w >> x;\n      ett.cut(u, v);\n    \
-    \  ett.link(w, x);\n    } else if (op == 1) {\n      int p;\n      long long x;\n\
-    \      cin >> p >> x;\n      ett.set_val(p, ett[p] + x);\n    } else {\n     \
-    \ int v, p;\n      cin >> v >> p;\n      cout << ett.fold_subtree(v, p) << endl;\n\
-    \    }\n  }\n  return 0;\n}\n"
+    \    long long a;\n    cin >> a;\n    ett.set(i, a);\n  }\n  for (int i = 0; i\
+    \ < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n    ett.link(v, u);\n  }\n\
+    \  while (Q--) {\n    int op;\n    cin >> op;\n    if (op == 0) {\n      int u,\
+    \ v, w, x;\n      cin >> u >> v >> w >> x;\n      ett.cut(u, v);\n      ett.link(w,\
+    \ x);\n    } else if (op == 1) {\n      int p;\n      long long x;\n      cin\
+    \ >> p >> x;\n      ett.set(p, ett[p] + x);\n    } else {\n      int v, p;\n \
+    \     cin >> v >> p;\n      cout << ett.fold_subtree(v, p) << endl;\n    }\n \
+    \ }\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
     \n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
     \nusing namespace std;\n\nstruct RsumQ {\n  using T = long long;\n  static T ti()\
     \ { return 0; }\n  static T op(const T &l, const T &r) { return l + r; }\n};\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin\
     \ >> N >> Q;\n  EulerTourTree<RsumQ> ett(N);\n  for (int i = 0; i < N; i++) {\n\
-    \    long long a;\n    cin >> a;\n    ett.set_val(i, a);\n  }\n  for (int i =\
-    \ 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n    ett.link(v, u);\n\
-    \  }\n  while (Q--) {\n    int op;\n    cin >> op;\n    if (op == 0) {\n     \
-    \ int u, v, w, x;\n      cin >> u >> v >> w >> x;\n      ett.cut(u, v);\n    \
-    \  ett.link(w, x);\n    } else if (op == 1) {\n      int p;\n      long long x;\n\
-    \      cin >> p >> x;\n      ett.set_val(p, ett[p] + x);\n    } else {\n     \
-    \ int v, p;\n      cin >> v >> p;\n      cout << ett.fold_subtree(v, p) << endl;\n\
-    \    }\n  }\n  return 0;\n}\n"
+    \    long long a;\n    cin >> a;\n    ett.set(i, a);\n  }\n  for (int i = 0; i\
+    \ < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n    ett.link(v, u);\n  }\n\
+    \  while (Q--) {\n    int op;\n    cin >> op;\n    if (op == 0) {\n      int u,\
+    \ v, w, x;\n      cin >> u >> v >> w >> x;\n      ett.cut(u, v);\n      ett.link(w,\
+    \ x);\n    } else if (op == 1) {\n      int p;\n      long long x;\n      cin\
+    \ >> p >> x;\n      ett.set(p, ett[p] + x);\n    } else {\n      int v, p;\n \
+    \     cin >> v >> p;\n      cout << ett.fold_subtree(v, p) << endl;\n    }\n \
+    \ }\n  return 0;\n}\n"
   dependsOn:
   - src/DataStructure/EulerTourTree.hpp
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-10-25 13:47:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-15 16:18:00+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   - icon: ':heavy_check_mark:'
@@ -112,9 +112,9 @@ data:
     \ bool connected(vertex_id x, vertex_id y) {\n    return same_root(x + n_st, y\
     \ + n_st);\n  }\n  void subedge_set(vertex_id x, bool val) {\n    splay(x += n_st);\n\
     \    if (val)\n      n[x].flag |= (0b0100);\n    else\n      n[x].flag &= ~(0b0100);\n\
-    \    pushup(x);\n  }\n  void set_val(vertex_id x, T val) {\n    static_assert(monoid<M>::value\
-    \ || dual<M>::value,\n                  \"\\\"set_val\\\" is not available\\n\"\
-    );\n    splay(x += n_st), n[x].val = val, pushup(x);\n  }\n  std::size_t tree_size(vertex_id\
+    \    pushup(x);\n  }\n  void set(vertex_id x, T val) {\n    static_assert(monoid<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"set\\\" is not available\\n\");\n\
+    \    splay(x += n_st), n[x].val = val, pushup(x);\n  }\n  std::size_t tree_size(vertex_id\
     \ x) { return splay(x += n_st), n[x].sz; }\n  T fold_tree(vertex_id x) {\n   \
     \ static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\n\");\n   \
     \ return splay(x += n_st), n[x].sum;\n  }\n  T fold_subtree(vertex_id x, vertex_id\
@@ -168,21 +168,21 @@ data:
     \ ett.size(); k-- > 0;)\n      if (ett[k].edge_exist(x, y)) {\n        if (k +\
     \ 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n        replace(x,\
     \ y, k + 1);\n      }\n  }\n  const T& operator[](int x) { return ett[0][x]; }\n\
-    \  void set_val(int x, T val) { ett[0].set_val(x, val); }\n  int size(int x) {\
-    \ return ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x);\
-    \ }\n  void apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
+    \  void set(int x, T val) { ett[0].set(x, val); }\n  int size(int x) { return\
+    \ ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x); }\n  void\
+    \ apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
     \ x, int y) { return ett[0].connected(x, y); }\n};\n#line 7 \"test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp\"\
     \nusing namespace std;\n\nstruct Monoid {\n  using T = long long;\n  static inline\
     \ T ti() { return 0; }\n  static inline T op(const T& lval, const T& rval) { return\
     \ lval + rval; }\n};\n\nint main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  OnlineDynamicConnectivity<Monoid> dicon(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    int a;\n    cin >> a;\n    dicon.set_val(i,\
+    \  for (int i = 0; i < N; i++) {\n    int a;\n    cin >> a;\n    dicon.set(i,\
     \ a);\n  }\n  int t;\n  int u, v;\n  for (int i = 0; i < Q; i++) {\n    cin >>\
     \ t;\n    if (t == 0) {\n      cin >> u >> v;\n      dicon.link(u, v);\n    }\
     \ else if (t == 1) {\n      cin >> u >> v;\n      dicon.cut(u, v);\n    } else\
-    \ if (t == 2) {\n      cin >> u >> v;\n      dicon.set_val(u, dicon[u] + v);\n\
-    \    } else {\n      cin >> v;\n      cout << dicon.fold(v) << '\\n';\n    }\n\
-    \  }\n}\n"
+    \ if (t == 2) {\n      cin >> u >> v;\n      dicon.set(u, dicon[u] + v);\n   \
+    \ } else {\n      cin >> v;\n      cout << dicon.fold(v) << '\\n';\n    }\n  }\n\
+    }\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
     \n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
     \n#include \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\nusing namespace\
@@ -190,20 +190,20 @@ data:
     \ 0; }\n  static inline T op(const T& lval, const T& rval) { return lval + rval;\
     \ }\n};\n\nint main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  OnlineDynamicConnectivity<Monoid> dicon(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    int a;\n    cin >> a;\n    dicon.set_val(i,\
+    \  for (int i = 0; i < N; i++) {\n    int a;\n    cin >> a;\n    dicon.set(i,\
     \ a);\n  }\n  int t;\n  int u, v;\n  for (int i = 0; i < Q; i++) {\n    cin >>\
     \ t;\n    if (t == 0) {\n      cin >> u >> v;\n      dicon.link(u, v);\n    }\
     \ else if (t == 1) {\n      cin >> u >> v;\n      dicon.cut(u, v);\n    } else\
-    \ if (t == 2) {\n      cin >> u >> v;\n      dicon.set_val(u, dicon[u] + v);\n\
-    \    } else {\n      cin >> v;\n      cout << dicon.fold(v) << '\\n';\n    }\n\
-    \  }\n}"
+    \ if (t == 2) {\n      cin >> u >> v;\n      dicon.set(u, dicon[u] + v);\n   \
+    \ } else {\n      cin >> v;\n      cout << dicon.fold(v) << '\\n';\n    }\n  }\n\
+    }"
   dependsOn:
   - src/DataStructure/EulerTourTree.hpp
   - src/DataStructure/OnlineDynamicConnectivity.hpp
   isVerificationFile: true
   path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 21:10:40+09:00'
+  timestamp: '2021-11-15 16:18:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp

@@ -139,8 +139,8 @@ data:
   timestamp: '2021-02-10 00:07:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/counting_primes.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/Math/prime_count.hpp
 layout: document
 redirect_from:

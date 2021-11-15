@@ -128,8 +128,8 @@ data:
     \ (dual<M>::value) ret += \"\\\"apply\\\" \";\n    if constexpr (reversible) ret\
     \ += \"\\\"reverse\\\" \";\n    return ret;\n  }\n  std::size_t size() { return\
     \ root ? root->size : 0; }\n  void clear() { root = nullptr; }\n  const T &operator[](std::size_t\
-    \ k) { return splay(root, k), root->val; }\n  void set_val(std::size_t k, T val)\
-    \ {\n    splay(root, k), root->val = val, pushup(root);\n  }\n  void set_balance()\
+    \ k) { return splay(root, k), root->val; }\n  void set(std::size_t k, T val) {\n\
+    \    splay(root, k), root->val = val, pushup(root);\n  }\n  void set_balance()\
     \ {\n    if (root) splay(root, xor128() % size()), splay(root, xor128() % size());\n\
     \  }\n  T fold(std::size_t a, std::size_t b) {\n    static_assert(semigroup<M>::value,\
     \ \"\\\"fold\\\" is not available\");\n    if (size() == b) {\n      return a--\
@@ -181,7 +181,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_B.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2021-10-21 17:43:25+09:00'
+  timestamp: '2021-11-15 16:18:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_B.SplayTree.test.cpp

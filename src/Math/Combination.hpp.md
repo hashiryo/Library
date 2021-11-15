@@ -62,11 +62,11 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DPL_5_E.test.cpp
+  - test/aoj/DPL_5_B.test.cpp
   - test/aoj/DPL_5_F.test.cpp
   - test/aoj/DPL_5_D.test.cpp
-  - test/aoj/DPL_5_B.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 documentation_of: src/Math/Combination.hpp
 layout: document
 redirect_from:

@@ -86,8 +86,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/235.HLD.test.cpp
-  - test/atcoder/kupc2018_m.test.cpp
   - test/aoj/2667.HLD.test.cpp
+  - test/atcoder/kupc2018_m.test.cpp
 documentation_of: src/Graph/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

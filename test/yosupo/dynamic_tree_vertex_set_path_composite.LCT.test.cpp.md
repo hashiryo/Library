@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite
@@ -92,11 +92,11 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set_val(std::size_t k, T v)\
-    \ {\n    static_assert(semigroup<M>::value || dual<M>::value,\n              \
-    \    \"\\\"set_val\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val\
-    \ = v;\n    if constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t\
-    \ a, std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
+    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
+    \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
+    \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
+    \ std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
     \ \"\\\"fold\\\" is not available\\n\");\n    return evert(a), expose(&ns[b]),\
     \ ns[b].sum;\n  }\n  void apply(std::size_t a, std::size_t b, E v) {  // [a,b]\
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
@@ -172,15 +172,15 @@ data:
     \ const T &r) {\n    return make_pair(r.first * l.first, r.first * l.second +\
     \ r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree<RcompositeQ> lct(N);\n  for (int\
-    \ i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n    lct.set_val(i,\
-    \ {a, b});\n  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >>\
-    \ u >> v;\n    lct.link(u, v);\n  }\n  while (Q--) {\n    int op;\n    cin >>\
-    \ op;\n    if (op == 0) {\n      int u, v, w, x;\n      cin >> u >> v >> w >>\
-    \ x;\n      lct.cut(u, v);\n      lct.link(w, x);\n    } else if (op == 1) {\n\
-    \      int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      lct.set_val(p,\
-    \ {c, d});\n    } else {\n      int u, v;\n      Mint x;\n      cin >> u >> v\
-    \ >> x;\n      auto ans = lct.fold(u, v);\n      cout << ans.first * x + ans.second\
-    \ << endl;\n    }\n  }\n  return 0;\n}\n"
+    \ i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n    lct.set(i, {a,\
+    \ b});\n  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u\
+    \ >> v;\n    lct.link(u, v);\n  }\n  while (Q--) {\n    int op;\n    cin >> op;\n\
+    \    if (op == 0) {\n      int u, v, w, x;\n      cin >> u >> v >> w >> x;\n \
+    \     lct.cut(u, v);\n      lct.link(w, x);\n    } else if (op == 1) {\n     \
+    \ int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      lct.set(p, {c, d});\n\
+    \    } else {\n      int u, v;\n      Mint x;\n      cin >> u >> v >> x;\n   \
+    \   auto ans = lct.fold(u, v);\n      cout << ans.first * x + ans.second << endl;\n\
+    \    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/LinkCutTree.hpp\"\n#include\
     \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n#undef call_from_test\n\nusing\
@@ -189,22 +189,22 @@ data:
     \ r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
     \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree<RcompositeQ>\
     \ lct(N);\n  for (int i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n\
-    \    lct.set_val(i, {a, b});\n  }\n  for (int i = 0; i < N - 1; i++) {\n    int\
-    \ u, v;\n    cin >> u >> v;\n    lct.link(u, v);\n  }\n  while (Q--) {\n    int\
-    \ op;\n    cin >> op;\n    if (op == 0) {\n      int u, v, w, x;\n      cin >>\
-    \ u >> v >> w >> x;\n      lct.cut(u, v);\n      lct.link(w, x);\n    } else if\
-    \ (op == 1) {\n      int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n   \
-    \   lct.set_val(p, {c, d});\n    } else {\n      int u, v;\n      Mint x;\n  \
-    \    cin >> u >> v >> x;\n      auto ans = lct.fold(u, v);\n      cout << ans.first\
-    \ * x + ans.second << endl;\n    }\n  }\n  return 0;\n}\n"
+    \    lct.set(i, {a, b});\n  }\n  for (int i = 0; i < N - 1; i++) {\n    int u,\
+    \ v;\n    cin >> u >> v;\n    lct.link(u, v);\n  }\n  while (Q--) {\n    int op;\n\
+    \    cin >> op;\n    if (op == 0) {\n      int u, v, w, x;\n      cin >> u >>\
+    \ v >> w >> x;\n      lct.cut(u, v);\n      lct.link(w, x);\n    } else if (op\
+    \ == 1) {\n      int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      lct.set(p,\
+    \ {c, d});\n    } else {\n      int u, v;\n      Mint x;\n      cin >> u >> v\
+    \ >> x;\n      auto ans = lct.fold(u, v);\n      cout << ans.first * x + ans.second\
+    \ << endl;\n    }\n  }\n  return 0;\n}\n"
   dependsOn:
   - src/DataStructure/LinkCutTree.hpp
   - src/Math/ModInt.hpp
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-15 16:08:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
 layout: document

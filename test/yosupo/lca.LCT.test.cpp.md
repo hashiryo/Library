@@ -6,9 +6,9 @@ data:
     title: Link-Cut-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lca
@@ -88,11 +88,11 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set_val(std::size_t k, T v)\
-    \ {\n    static_assert(semigroup<M>::value || dual<M>::value,\n              \
-    \    \"\\\"set_val\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val\
-    \ = v;\n    if constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t\
-    \ a, std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
+    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
+    \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
+    \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
+    \ std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
     \ \"\\\"fold\\\" is not available\\n\");\n    return evert(a), expose(&ns[b]),\
     \ ns[b].sum;\n  }\n  void apply(std::size_t a, std::size_t b, E v) {  // [a,b]\
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
@@ -117,8 +117,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/lca.LCT.test.cpp
   requiredBy: []
-  timestamp: '2021-10-22 14:35:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-15 16:08:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/lca.LCT.test.cpp
 layout: document

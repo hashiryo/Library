@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   _extendedRequiredBy: []
@@ -112,9 +112,9 @@ data:
     \ bool connected(vertex_id x, vertex_id y) {\n    return same_root(x + n_st, y\
     \ + n_st);\n  }\n  void subedge_set(vertex_id x, bool val) {\n    splay(x += n_st);\n\
     \    if (val)\n      n[x].flag |= (0b0100);\n    else\n      n[x].flag &= ~(0b0100);\n\
-    \    pushup(x);\n  }\n  void set_val(vertex_id x, T val) {\n    static_assert(monoid<M>::value\
-    \ || dual<M>::value,\n                  \"\\\"set_val\\\" is not available\\n\"\
-    );\n    splay(x += n_st), n[x].val = val, pushup(x);\n  }\n  std::size_t tree_size(vertex_id\
+    \    pushup(x);\n  }\n  void set(vertex_id x, T val) {\n    static_assert(monoid<M>::value\
+    \ || dual<M>::value,\n                  \"\\\"set\\\" is not available\\n\");\n\
+    \    splay(x += n_st), n[x].val = val, pushup(x);\n  }\n  std::size_t tree_size(vertex_id\
     \ x) { return splay(x += n_st), n[x].sz; }\n  T fold_tree(vertex_id x) {\n   \
     \ static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\n\");\n   \
     \ return splay(x += n_st), n[x].sum;\n  }\n  T fold_subtree(vertex_id x, vertex_id\
@@ -167,9 +167,9 @@ data:
     \ ett.size(); k-- > 0;)\n      if (ett[k].edge_exist(x, y)) {\n        if (k +\
     \ 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n        replace(x,\
     \ y, k + 1);\n      }\n  }\n  const T& operator[](int x) { return ett[0][x]; }\n\
-    \  void set_val(int x, T val) { ett[0].set_val(x, val); }\n  int size(int x) {\
-    \ return ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x);\
-    \ }\n  void apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
+    \  void set(int x, T val) { ett[0].set(x, val); }\n  int size(int x) { return\
+    \ ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x); }\n  void\
+    \ apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
     \ x, int y) { return ett[0].connected(x, y); }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
     \n/**\n * @title Online-Dynamic-Connectivity\n * @category \u30C7\u30FC\u30BF\u69CB\
@@ -203,16 +203,16 @@ data:
     \ ett.size(); k-- > 0;)\n      if (ett[k].edge_exist(x, y)) {\n        if (k +\
     \ 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n        replace(x,\
     \ y, k + 1);\n      }\n  }\n  const T& operator[](int x) { return ett[0][x]; }\n\
-    \  void set_val(int x, T val) { ett[0].set_val(x, val); }\n  int size(int x) {\
-    \ return ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x);\
-    \ }\n  void apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
+    \  void set(int x, T val) { ett[0].set(x, val); }\n  int size(int x) { return\
+    \ ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x); }\n  void\
+    \ apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
     \ x, int y) { return ett[0].connected(x, y); }\n};\n"
   dependsOn:
   - src/DataStructure/EulerTourTree.hpp
   isVerificationFile: false
   path: src/DataStructure/OnlineDynamicConnectivity.hpp
   requiredBy: []
-  timestamp: '2021-10-24 21:10:40+09:00'
+  timestamp: '2021-11-15 16:18:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp

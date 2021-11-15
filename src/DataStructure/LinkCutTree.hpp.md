@@ -15,19 +15,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
   _isVerificationFailed: true
@@ -109,11 +109,11 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set_val(std::size_t k, T v)\
-    \ {\n    static_assert(semigroup<M>::value || dual<M>::value,\n              \
-    \    \"\\\"set_val\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val\
-    \ = v;\n    if constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t\
-    \ a, std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
+    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
+    \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
+    \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
+    \ std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
     \ \"\\\"fold\\\" is not available\\n\");\n    return evert(a), expose(&ns[b]),\
     \ ns[b].sum;\n  }\n  void apply(std::size_t a, std::size_t b, E v) {  // [a,b]\
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
@@ -194,11 +194,11 @@ data:
     \ t->ch[1];\n    return splay(t), t - &ns[0];\n  }\n  int lca(std::size_t x, std::size_t\
     \ y) {\n    if (x == y) return x;\n    expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n\
     \    return ns[x].par ? u - &ns[0] : -1;\n  }\n  const T &operator[](std::size_t\
-    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set_val(std::size_t k, T v)\
-    \ {\n    static_assert(semigroup<M>::value || dual<M>::value,\n              \
-    \    \"\\\"set_val\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val\
-    \ = v;\n    if constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t\
-    \ a, std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
+    \ k) { return expose(&ns[k]), ns[k].val; }\n  void set(std::size_t k, T v) {\n\
+    \    static_assert(semigroup<M>::value || dual<M>::value,\n                  \"\
+    \\\"set\\\" is not available\\n\");\n    expose(&ns[k]), ns[k].val = v;\n    if\
+    \ constexpr (semigroup<M>::value) pushup(&ns[k]);\n  }\n  T fold(std::size_t a,\
+    \ std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
     \ \"\\\"fold\\\" is not available\\n\");\n    return evert(a), expose(&ns[b]),\
     \ ns[b].sum;\n  }\n  void apply(std::size_t a, std::size_t b, E v) {  // [a,b]\
     \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
@@ -210,18 +210,18 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree.hpp
   requiredBy: []
-  timestamp: '2021-10-22 14:35:08+09:00'
+  timestamp: '2021-11-15 16:08:47+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
-  - test/atcoder/abc133_f.DynSeg.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/2450.LCT.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
-  - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
 documentation_of: src/DataStructure/LinkCutTree.hpp
 layout: document
 redirect_from:

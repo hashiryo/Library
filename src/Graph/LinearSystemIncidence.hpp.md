@@ -56,9 +56,9 @@ data:
   timestamp: '2021-10-24 21:10:40+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/atcoder/cf17_final_e.test.cpp
   - test/atcoder/abc155_f.test.cpp
   - test/atcoder/agc035_b.test.cpp
-  - test/atcoder/cf17_final_e.test.cpp
 documentation_of: src/Graph/LinearSystemIncidence.hpp
 layout: document
 redirect_from:

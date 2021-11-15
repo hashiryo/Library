@@ -483,15 +483,15 @@ data:
   timestamp: '2021-10-22 14:08:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/649.DynSeg.test.cpp
   - test/hackerrank/minimum-history-query.DynSeg.test.cpp
+  - test/yukicoder/649.DynSeg.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
+  - test/aoj/3024.DynSeg.test.cpp
+  - test/aoj/DSL_2_I.DynSeg.test.cpp
+  - test/yosupo/set_xor_min.test.cpp
+  - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/atcoder/kupc2018_m.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
-  - test/aoj/DSL_2_I.DynSeg.test.cpp
-  - test/aoj/3024.DynSeg.test.cpp
-  - test/aoj/2270.DynSeg.test.cpp
-  - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - test/yosupo/set_xor_min.test.cpp
 documentation_of: src/DataStructure/DynamicSegmentTree.hpp
 layout: document
 redirect_from:
