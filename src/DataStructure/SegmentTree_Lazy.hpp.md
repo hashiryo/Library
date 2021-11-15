@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Segment-Tree(\u9045\u5EF6\u4F1D\u642C)"
     links: []
@@ -80,7 +80,7 @@ data:
   path: src/DataStructure/SegmentTree_Lazy.hpp
   requiredBy: []
   timestamp: '2021-09-20 02:40:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/235.HLD.test.cpp
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp

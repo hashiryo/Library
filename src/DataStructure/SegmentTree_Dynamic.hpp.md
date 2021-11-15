@@ -13,17 +13,20 @@ data:
     path: test/aoj/DSL_2_I.DynSeg.test.cpp
     title: test/aoj/DSL_2_I.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc133_f.DynSeg.test.cpp
+    title: test/atcoder/abc133_f.DynSeg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/set_xor_min.test.cpp
-    title: test/yosupo/set_xor_min.test.cpp
-  - icon: ':x:'
+    path: test/yosupo/set_xor_min.DynSeg.test.cpp
+    title: test/yosupo/set_xor_min.DynSeg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     links:
@@ -33,10 +36,10 @@ data:
     - https://codeforces.com/contest/966/problem/C
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title Segment-Tree(\u52D5\u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\
-    \u30BF\u69CB\u9020\n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528\
-    :\n// https://codeforces.com/contest/464/problem/E (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\
-    \u642C+find*2)\n// https://codeforces.com/contest/947/problem/C (find+xor)\n//\
-    \ https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
+    \u30BF\u69CB\u9020\n * \u9045\u5EF6\u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\
+    \n * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/464/problem/E\
+    \ (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\u642C+find*2)\n// https://codeforces.com/contest/947/problem/C\
+    \ (find+xor)\n// https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
     \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n\n//\
     \ BEGIN CUT HERE\n\n#define HAS_CHECK(member, Dummy)                         \
     \     \\\n  template <class T>                                          \\\n \
@@ -176,10 +179,11 @@ data:
     \ \\\"find\\\"\";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Segment-Tree(\u52D5\
-    \u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u6C38\u7D9A\
-    \u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/464/problem/E\
-    \ (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\u642C+find*2)\n// https://codeforces.com/contest/947/problem/C\
-    \ (find+xor)\n// https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
+    \u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u9045\u5EF6\
+    \u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528\
+    :\n// https://codeforces.com/contest/464/problem/E (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\
+    \u642C+find*2)\n// https://codeforces.com/contest/947/problem/C (find+xor)\n//\
+    \ https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
     \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n\n//\
     \ BEGIN CUT HERE\n\n#define HAS_CHECK(member, Dummy)                         \
     \     \\\n  template <class T>                                          \\\n \
@@ -322,15 +326,16 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy: []
-  timestamp: '2021-11-15 19:05:59+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-11-15 19:21:03+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/649.DynSeg.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/3024.DynSeg.test.cpp
   - test/aoj/DSL_2_I.DynSeg.test.cpp
-  - test/yosupo/set_xor_min.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
+  - test/yosupo/set_xor_min.DynSeg.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document
 redirect_from:

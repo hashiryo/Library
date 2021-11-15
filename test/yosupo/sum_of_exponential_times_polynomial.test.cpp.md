@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/lagrange_interpolation.hpp
     title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
   _extendedRequiredBy: []

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   _extendedRequiredBy: []
@@ -14,10 +14,11 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/set_xor_min
     links:
     - https://judge.yosupo.jp/problem/set_xor_min
-  bundledCode: "#line 1 \"test/yosupo/set_xor_min.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
-    \n/**\n * @title Segment-Tree(\u52D5\u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\
-    \u30BF\u69CB\u9020\n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528\
+  bundledCode: "#line 1 \"test/yosupo/set_xor_min.DynSeg.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/set_xor_min\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n/**\n * @title Segment-Tree(\u52D5\
+    \u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u9045\u5EF6\
+    \u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528\
     :\n// https://codeforces.com/contest/464/problem/E (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\
     \u642C+find*2)\n// https://codeforces.com/contest/947/problem/C (find+xor)\n//\
     \ https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
@@ -158,7 +159,7 @@ data:
     \   return ret;\n  }\n  static std::string which_available() {\n    std::string\
     \ ret = \"\";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\"\
     \ \\\"find\\\"\";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
-    \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 4 \"test/yosupo/set_xor_min.test.cpp\"\
+    \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 4 \"test/yosupo/set_xor_min.DynSeg.test.cpp\"\
     \n\n// find + xor \u306E verify\n\nusing namespace std;\n\nstruct RsumQ {\n  using\
     \ T = int;\n  static T ti() { return 0; }\n  static T op(const T &l, const T &r)\
     \ { return l + r; }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -180,15 +181,15 @@ data:
   dependsOn:
   - src/DataStructure/SegmentTree_Dynamic.hpp
   isVerificationFile: true
-  path: test/yosupo/set_xor_min.test.cpp
+  path: test/yosupo/set_xor_min.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 19:05:59+09:00'
+  timestamp: '2021-11-15 19:21:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/set_xor_min.test.cpp
+documentation_of: test/yosupo/set_xor_min.DynSeg.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/set_xor_min.test.cpp
-- /verify/test/yosupo/set_xor_min.test.cpp.html
-title: test/yosupo/set_xor_min.test.cpp
+- /verify/test/yosupo/set_xor_min.DynSeg.test.cpp
+- /verify/test/yosupo/set_xor_min.DynSeg.test.cpp.html
+title: test/yosupo/set_xor_min.DynSeg.test.cpp
 ---
