@@ -2,66 +2,67 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/UnionFind_Persistent.hpp
     title: "Union-Find(\u5B8C\u5168\u6C38\u7D9A)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc133_f.PerArr.test.cpp
+    title: test/atcoder/abc133_f.PerArr.test.cpp
+  - icon: ':x:'
     path: test/yosupo/persistent_unionfind.test.cpp
     title: test/yosupo/persistent_unionfind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6C38\u7D9A\u914D\u5217"
     links: []
   bundledCode: "#line 2 \"src/DataStructure/PersistentArray.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u6C38\u7D9A\u914D\u5217\n * @category \u30C7\u30FC\u30BF\u69CB\
-    \u9020\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename T, int LOG = 3>\nstruct\
-    \ PersistentArray {\n  struct Node {\n    T data;\n    Node *child[1 << LOG] =\
-    \ {};\n    Node() {}\n  };\n\n private:\n  Node *root;\n\n public:\n  PersistentArray()\
-    \ : root(nullptr) {}\n  PersistentArray(size_t n, const T &v = T()) { build(std::vector<T>(n,\
-    \ v)); }\n  PersistentArray(const std::vector<T> &v) { build(v); }\n  const T\
-    \ get(const int &k) const { return get(root, k); }\n  T &operator[](const int\
-    \ &k) { return reference_get(k, false); }\n  void build(const std::vector<T> &v)\
-    \ {\n    root = nullptr;\n    for (int i = 0; i < v.size(); i++) reference_get(i,\
-    \ true) = v[i];\n  }\n\n private:\n  T get(Node *t, int k) const {\n    if (!t)\
-    \ return T();\n    if (k == 0) return t->data;\n    return get(t->child[k & ((1\
-    \ << LOG) - 1)], k >> LOG);\n  }\n  std::pair<Node *, T &> reference_get(Node\
-    \ *t, int k, bool destruct = false) {\n    t = t ? (destruct ? t : new Node(*t))\
-    \ : new Node();\n    if (k == 0) return {t, t->data};\n    auto p = reference_get(t->child[k\
-    \ & ((1 << LOG) - 1)], k >> LOG, destruct);\n    t->child[k & ((1 << LOG) - 1)]\
-    \ = p.first;\n    return {t, p.second};\n  }\n  T &reference_get(const int &k,\
-    \ bool destruct = false) {\n    auto ret = reference_get(root, k, destruct);\n\
-    \    root = ret.first;\n    return ret.second;\n  }\n};\n"
+    \u9020\n */\n\n// BEGIN CUT HERE\n\ntemplate <class T, std::size_t M = 32>\nclass\
+    \ PersistentArray {\n  struct Node {\n    T val;\n    Node *ch[M];\n  } * root;\n\
+    \  T get(Node *&t, std::size_t k) {\n    return t ? (k ? get(t->ch[k % M], (k\
+    \ - 1) / M) : t->val) : T();\n  }\n  bool is_null(Node *&t, std::size_t k) {\n\
+    \    return t ? (k ? get(t->ch[k % M], (k - 1) / M) : false) : true;\n  }\n  template\
+    \ <bool persistent = true>\n  T &at(Node *&t, std::size_t k) {\n    if (!t)\n\
+    \      t = new Node();\n    else if constexpr (persistent)\n      t = new Node(*t);\n\
+    \    return k ? at<persistent>(t->ch[k % M], (k - 1) / M) : t->val;\n  }\n\n public:\n\
+    \  PersistentArray() : root(nullptr) {}\n  PersistentArray(std::size_t n, T v)\
+    \ {\n    for (std::size_t i = n; i--;) at<false>(root, i) = v;\n  }\n  PersistentArray(T\
+    \ *bg, T *ed) {\n    for (std::size_t i = ed - bg; i--;) at<false>(root, i) =\
+    \ *(bg + i);\n  }\n  PersistentArray(const std::vector<T> &ar)\n      : PersistentArray(ar.data(),\
+    \ ar.data() + ar.size()) {}\n  bool is_null(std::size_t k) { return is_null(root,\
+    \ k); }\n  T get(std::size_t k) { return get(root, k); }\n  T &at(std::size_t\
+    \ k) { return at(root, k); }\n  T &operator[](std::size_t k) { return at(k); }\n\
+    };\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6C38\u7D9A\u914D\
     \u5217\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <typename T, int LOG = 3>\nstruct PersistentArray {\n  struct Node\
-    \ {\n    T data;\n    Node *child[1 << LOG] = {};\n    Node() {}\n  };\n\n private:\n\
-    \  Node *root;\n\n public:\n  PersistentArray() : root(nullptr) {}\n  PersistentArray(size_t\
-    \ n, const T &v = T()) { build(std::vector<T>(n, v)); }\n  PersistentArray(const\
-    \ std::vector<T> &v) { build(v); }\n  const T get(const int &k) const { return\
-    \ get(root, k); }\n  T &operator[](const int &k) { return reference_get(k, false);\
-    \ }\n  void build(const std::vector<T> &v) {\n    root = nullptr;\n    for (int\
-    \ i = 0; i < v.size(); i++) reference_get(i, true) = v[i];\n  }\n\n private:\n\
-    \  T get(Node *t, int k) const {\n    if (!t) return T();\n    if (k == 0) return\
-    \ t->data;\n    return get(t->child[k & ((1 << LOG) - 1)], k >> LOG);\n  }\n \
-    \ std::pair<Node *, T &> reference_get(Node *t, int k, bool destruct = false)\
-    \ {\n    t = t ? (destruct ? t : new Node(*t)) : new Node();\n    if (k == 0)\
-    \ return {t, t->data};\n    auto p = reference_get(t->child[k & ((1 << LOG) -\
-    \ 1)], k >> LOG, destruct);\n    t->child[k & ((1 << LOG) - 1)] = p.first;\n \
-    \   return {t, p.second};\n  }\n  T &reference_get(const int &k, bool destruct\
-    \ = false) {\n    auto ret = reference_get(root, k, destruct);\n    root = ret.first;\n\
-    \    return ret.second;\n  }\n};\n"
+    \ntemplate <class T, std::size_t M = 32>\nclass PersistentArray {\n  struct Node\
+    \ {\n    T val;\n    Node *ch[M];\n  } * root;\n  T get(Node *&t, std::size_t\
+    \ k) {\n    return t ? (k ? get(t->ch[k % M], (k - 1) / M) : t->val) : T();\n\
+    \  }\n  bool is_null(Node *&t, std::size_t k) {\n    return t ? (k ? get(t->ch[k\
+    \ % M], (k - 1) / M) : false) : true;\n  }\n  template <bool persistent = true>\n\
+    \  T &at(Node *&t, std::size_t k) {\n    if (!t)\n      t = new Node();\n    else\
+    \ if constexpr (persistent)\n      t = new Node(*t);\n    return k ? at<persistent>(t->ch[k\
+    \ % M], (k - 1) / M) : t->val;\n  }\n\n public:\n  PersistentArray() : root(nullptr)\
+    \ {}\n  PersistentArray(std::size_t n, T v) {\n    for (std::size_t i = n; i--;)\
+    \ at<false>(root, i) = v;\n  }\n  PersistentArray(T *bg, T *ed) {\n    for (std::size_t\
+    \ i = ed - bg; i--;) at<false>(root, i) = *(bg + i);\n  }\n  PersistentArray(const\
+    \ std::vector<T> &ar)\n      : PersistentArray(ar.data(), ar.data() + ar.size())\
+    \ {}\n  bool is_null(std::size_t k) { return is_null(root, k); }\n  T get(std::size_t\
+    \ k) { return get(root, k); }\n  T &at(std::size_t k) { return at(root, k); }\n\
+    \  T &operator[](std::size_t k) { return at(k); }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/PersistentArray.hpp
   requiredBy:
   - src/DataStructure/UnionFind_Persistent.hpp
-  timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-15 21:42:56+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/persistent_unionfind.test.cpp
+  - test/atcoder/abc133_f.PerArr.test.cpp
 documentation_of: src/DataStructure/PersistentArray.hpp
 layout: document
 redirect_from:
