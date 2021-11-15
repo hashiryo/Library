@@ -13,15 +13,12 @@ data:
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc133_f.DynSeg.test.cpp
-    title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':x:'
     path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
   - icon: ':x:'
@@ -221,7 +218,6 @@ data:
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/atcoder/abc133_f.DynSeg.test.cpp
 documentation_of: src/DataStructure/LinkCutTree.hpp
 layout: document
 redirect_from:

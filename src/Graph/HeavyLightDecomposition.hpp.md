@@ -7,9 +7,6 @@ data:
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':x:'
-    path: test/atcoder/kupc2018_m.test.cpp
-    title: test/atcoder/kupc2018_m.test.cpp
-  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   _isVerificationFailed: true
@@ -87,7 +84,6 @@ data:
   verifiedWith:
   - test/yukicoder/235.HLD.test.cpp
   - test/aoj/2667.HLD.test.cpp
-  - test/atcoder/kupc2018_m.test.cpp
 documentation_of: src/Graph/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:
