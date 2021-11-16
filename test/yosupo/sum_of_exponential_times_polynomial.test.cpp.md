@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/lagrange_interpolation.hpp
     title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
   _extendedRequiredBy: []
@@ -103,16 +103,16 @@ data:
     \n/**\n * @title \u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593\n * @category\
     \ \u6570\u5B66\n *  x=0,1,..,N-1\u3068y=f(0),f(1),...,f(N-1)\u304C\u4E0E\u3048\
     \u3089\u308C\u305F\u3068\u304D\u306Ef(t)\u3092\u8A08\u7B97\n *  O(N)\n */\n\n\
-    // verify\u7528:http://codeforces.com/contest/622/problem/F\n\n// BEGIN CUT HERE\n\
-    \ntemplate <typename K>\nK lagrange_interpolation(std::vector<K> &y, K t) {\n\
-    \  int n = y.size() - 1;\n  std::vector<K> pro(n + 1, 1), orp(n + 1, 1);\n  for\
-    \ (int i = 0; i < n; i++) pro[i + 1] = pro[i] * (t - K(i));\n  for (int i = n;\
-    \ i > 0; i--) orp[i - 1] = orp[i] * (t - K(i));\n  K fact = K(1);\n  for (int\
-    \ i = 1; i <= n; i++) fact *= K(i);\n  std::vector<K> finv(n + 1, 1);\n  finv[n]\
-    \ = K(1) / fact;\n  for (int i = n; i >= 1; i--) finv[i - 1] = finv[i] * K(i);\n\
-    \  K res(0);\n  for (int i = 0; i <= n; i++) {\n    K tmp = y[i] * pro[i] * orp[i]\
-    \ * finv[i] * finv[n - i];\n    res += (n - i) & 1 ? -tmp : tmp;\n  }\n  return\
-    \ res;\n}\n#line 9 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
+    // verify\u7528:\n// http://codeforces.com/contest/622/problem/F\n// https://atcoder.jp/contests/arc033/tasks/arc033_4\n\
+    \n// BEGIN CUT HERE\n\ntemplate <typename K>\nK lagrange_interpolation(std::vector<K>\
+    \ &y, K t) {\n  int n = y.size() - 1;\n  std::vector<K> pro(n + 1, 1), orp(n +\
+    \ 1, 1);\n  for (int i = 0; i < n; i++) pro[i + 1] = pro[i] * (t - K(i));\n  for\
+    \ (int i = n; i > 0; i--) orp[i - 1] = orp[i] * (t - K(i));\n  K fact = K(1);\n\
+    \  for (int i = 1; i <= n; i++) fact *= K(i);\n  std::vector<K> finv(n + 1, 1);\n\
+    \  finv[n] = K(1) / fact;\n  for (int i = n; i >= 1; i--) finv[i - 1] = finv[i]\
+    \ * K(i);\n  K res(0);\n  for (int i = 0; i <= n; i++) {\n    K tmp = y[i] * pro[i]\
+    \ * orp[i] * finv[i] * finv[n - i];\n    res += (n - i) & 1 ? -tmp : tmp;\n  }\n\
+    \  return res;\n}\n#line 9 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
     \nusing namespace std;\n\ntemplate <class Modint>\nvector<Modint> pow_d_list(int\
     \ n, long long d) {\n  vector<int> pdiv(n);\n  for (int i = 2; i < n; i++) pdiv[i]\
     \ = i & 1 ? i : 2;\n  for (int p = 3; p * p < n; p += 2)\n    if (pdiv[p] == p)\n\
@@ -165,7 +165,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
+  timestamp: '2021-11-16 21:18:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp

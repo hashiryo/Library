@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/LiChaoTree.hpp
     title: Li-Chao-Tree
   _extendedRequiredBy: []
@@ -21,14 +21,15 @@ data:
     \ n)\n * \u7DDA\u5206\u633F\u5165:O(log^2 n)\n * \u6700\u5C0F\u5024\u53D6\u5F97\
     :O(log n)\n * \u6700\u5927\u5024\u53D6\u5F97\u3057\u305F\u3044\u306A\u3089(-a,-b)\u3092\
     \u633F\u5165\u3057\u3066-\u6700\u5C0F\u5024\u3092\u53D6\u5F97\n * \u6D6E\u52D5\
-    \u5C0F\u6570\u70B9\u3082\u884C\u3051\u308B\u306F\u305A\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <typename T, std::size_t LIM = (1 << 23)>\nstruct LiChaoTree {\n  struct\
-    \ Line {\n    T a, b;\n    Line(T a, T b) : a(a), b(b) {}\n    inline T get(T\
-    \ x) const { return a * x + b; }\n  };\n  struct Node {\n    Line f;\n    Node\
-    \ *ch[2];\n    Node() : f(0, INF) {}\n    Node(const Line &f_) : f(f_), ch{nullptr,\
-    \ nullptr} {}\n    void *operator new(size_t) {\n      static std::vector<Node>\
-    \ pool(LIM);\n      return &pool[node_count++];\n    }\n  };\n\n private:\n  static\
-    \ constexpr T lower = -2e9, upper = 2e9;\n  static constexpr T INF = std::numeric_limits<T>::max()\
+    \u5C0F\u6570\u70B9\u3082\u884C\u3051\u308B\u306F\u305A\n */\n\n// verify\u7528\
+    : https://atcoder.jp/contests/arc051/tasks/arc051_d\n\n// BEGIN CUT HERE\n\ntemplate\
+    \ <typename T, std::size_t LIM = (1 << 23)>\nstruct LiChaoTree {\n  struct Line\
+    \ {\n    T a, b;\n    Line(T a, T b) : a(a), b(b) {}\n    inline T get(T x) const\
+    \ { return a * x + b; }\n  };\n  struct Node {\n    Line f;\n    Node *ch[2];\n\
+    \    Node() : f(0, INF) {}\n    Node(const Line &f_) : f(f_), ch{nullptr, nullptr}\
+    \ {}\n    void *operator new(size_t) {\n      static std::vector<Node> pool(LIM);\n\
+    \      return &pool[node_count++];\n    }\n  };\n\n private:\n  static constexpr\
+    \ T lower = -2e9, upper = 2e9;\n  static constexpr T INF = std::numeric_limits<T>::max()\
     \ / 2;\n  static inline int node_count;\n  Node *root;\n\n private:\n  int sgn(const\
     \ T &x) const {\n    static constexpr T EPS = 1e-10;\n    return x < -EPS ? -1\
     \ : x > +EPS ? 1 : 0;\n  }\n  Node *addl(Node *t, Line f, const T &x_l, const\
@@ -77,7 +78,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/line_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 19:50:40+09:00'
+  timestamp: '2021-11-16 21:18:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/line_add_get_min.test.cpp

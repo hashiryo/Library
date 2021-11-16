@@ -3,33 +3,32 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/atcoder/arc051_d.test.cpp
-    title: test/atcoder/arc051_d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.test.cpp
     title: test/yosupo/line_add_get_min.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Li-Chao-Tree
-    links: []
+    links:
+    - https://atcoder.jp/contests/arc051/tasks/arc051_d
   bundledCode: "#line 2 \"src/DataStructure/LiChaoTree.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title Li-Chao-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u76F4\
     \u7DDA\u633F\u5165:O(log n)\n * \u7DDA\u5206\u633F\u5165:O(log^2 n)\n * \u6700\
     \u5C0F\u5024\u53D6\u5F97:O(log n)\n * \u6700\u5927\u5024\u53D6\u5F97\u3057\u305F\
     \u3044\u306A\u3089(-a,-b)\u3092\u633F\u5165\u3057\u3066-\u6700\u5C0F\u5024\u3092\
     \u53D6\u5F97\n * \u6D6E\u52D5\u5C0F\u6570\u70B9\u3082\u884C\u3051\u308B\u306F\u305A\
-    \n */\n\n// BEGIN CUT HERE\n\ntemplate <typename T, std::size_t LIM = (1 << 23)>\n\
-    struct LiChaoTree {\n  struct Line {\n    T a, b;\n    Line(T a, T b) : a(a),\
-    \ b(b) {}\n    inline T get(T x) const { return a * x + b; }\n  };\n  struct Node\
-    \ {\n    Line f;\n    Node *ch[2];\n    Node() : f(0, INF) {}\n    Node(const\
-    \ Line &f_) : f(f_), ch{nullptr, nullptr} {}\n    void *operator new(size_t) {\n\
-    \      static std::vector<Node> pool(LIM);\n      return &pool[node_count++];\n\
+    \n */\n\n// verify\u7528: https://atcoder.jp/contests/arc051/tasks/arc051_d\n\n\
+    // BEGIN CUT HERE\n\ntemplate <typename T, std::size_t LIM = (1 << 23)>\nstruct\
+    \ LiChaoTree {\n  struct Line {\n    T a, b;\n    Line(T a, T b) : a(a), b(b)\
+    \ {}\n    inline T get(T x) const { return a * x + b; }\n  };\n  struct Node {\n\
+    \    Line f;\n    Node *ch[2];\n    Node() : f(0, INF) {}\n    Node(const Line\
+    \ &f_) : f(f_), ch{nullptr, nullptr} {}\n    void *operator new(size_t) {\n  \
+    \    static std::vector<Node> pool(LIM);\n      return &pool[node_count++];\n\
     \    }\n  };\n\n private:\n  static constexpr T lower = -2e9, upper = 2e9;\n \
     \ static constexpr T INF = std::numeric_limits<T>::max() / 2;\n  static inline\
     \ int node_count;\n  Node *root;\n\n private:\n  int sgn(const T &x) const {\n\
@@ -64,21 +63,22 @@ data:
     \u5206\u633F\u5165:O(log^2 n)\n * \u6700\u5C0F\u5024\u53D6\u5F97:O(log n)\n *\
     \ \u6700\u5927\u5024\u53D6\u5F97\u3057\u305F\u3044\u306A\u3089(-a,-b)\u3092\u633F\
     \u5165\u3057\u3066-\u6700\u5C0F\u5024\u3092\u53D6\u5F97\n * \u6D6E\u52D5\u5C0F\
-    \u6570\u70B9\u3082\u884C\u3051\u308B\u306F\u305A\n */\n\n// BEGIN CUT HERE\n\n\
-    template <typename T, std::size_t LIM = (1 << 23)>\nstruct LiChaoTree {\n  struct\
-    \ Line {\n    T a, b;\n    Line(T a, T b) : a(a), b(b) {}\n    inline T get(T\
-    \ x) const { return a * x + b; }\n  };\n  struct Node {\n    Line f;\n    Node\
-    \ *ch[2];\n    Node() : f(0, INF) {}\n    Node(const Line &f_) : f(f_), ch{nullptr,\
-    \ nullptr} {}\n    void *operator new(size_t) {\n      static std::vector<Node>\
-    \ pool(LIM);\n      return &pool[node_count++];\n    }\n  };\n\n private:\n  static\
-    \ constexpr T lower = -2e9, upper = 2e9;\n  static constexpr T INF = std::numeric_limits<T>::max()\
-    \ / 2;\n  static inline int node_count;\n  Node *root;\n\n private:\n  int sgn(const\
-    \ T &x) const {\n    static constexpr T EPS = 1e-10;\n    return x < -EPS ? -1\
-    \ : x > +EPS ? 1 : 0;\n  }\n  Node *addl(Node *t, Line f, const T &x_l, const\
-    \ T &x_r) {\n    if (!t) return new Node(f);\n    int dif_l = sgn(t->f.get(x_l)\
-    \ - f.get(x_l)),\n        dif_r = sgn(t->f.get(x_r) - f.get(x_r));\n    if (dif_l\
-    \ <= 0 && dif_r <= 0) return t;\n    if (dif_l >= 0 && dif_r >= 0) return t->f\
-    \ = f, t;\n    T x_m = (x_l + x_r) / 2;\n    int dif_m = sgn(t->f.get(x_m) - f.get(x_m));\n\
+    \u6570\u70B9\u3082\u884C\u3051\u308B\u306F\u305A\n */\n\n// verify\u7528: https://atcoder.jp/contests/arc051/tasks/arc051_d\n\
+    \n// BEGIN CUT HERE\n\ntemplate <typename T, std::size_t LIM = (1 << 23)>\nstruct\
+    \ LiChaoTree {\n  struct Line {\n    T a, b;\n    Line(T a, T b) : a(a), b(b)\
+    \ {}\n    inline T get(T x) const { return a * x + b; }\n  };\n  struct Node {\n\
+    \    Line f;\n    Node *ch[2];\n    Node() : f(0, INF) {}\n    Node(const Line\
+    \ &f_) : f(f_), ch{nullptr, nullptr} {}\n    void *operator new(size_t) {\n  \
+    \    static std::vector<Node> pool(LIM);\n      return &pool[node_count++];\n\
+    \    }\n  };\n\n private:\n  static constexpr T lower = -2e9, upper = 2e9;\n \
+    \ static constexpr T INF = std::numeric_limits<T>::max() / 2;\n  static inline\
+    \ int node_count;\n  Node *root;\n\n private:\n  int sgn(const T &x) const {\n\
+    \    static constexpr T EPS = 1e-10;\n    return x < -EPS ? -1 : x > +EPS ? 1\
+    \ : 0;\n  }\n  Node *addl(Node *t, Line f, const T &x_l, const T &x_r) {\n   \
+    \ if (!t) return new Node(f);\n    int dif_l = sgn(t->f.get(x_l) - f.get(x_l)),\n\
+    \        dif_r = sgn(t->f.get(x_r) - f.get(x_r));\n    if (dif_l <= 0 && dif_r\
+    \ <= 0) return t;\n    if (dif_l >= 0 && dif_r >= 0) return t->f = f, t;\n   \
+    \ T x_m = (x_l + x_r) / 2;\n    int dif_m = sgn(t->f.get(x_m) - f.get(x_m));\n\
     \    if (dif_m > 0) std::swap(t->f, f), dif_l = -dif_l;\n    if (sgn(x_l - x_m)\
     \ == 0) return t;\n    if (dif_l > 0) t->ch[0] = addl(t->ch[0], f, x_l, x_m);\n\
     \    if (dif_l < 0) t->ch[1] = addl(t->ch[1], f, x_m, x_r);\n    return t;\n \
@@ -103,12 +103,11 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2021-11-15 19:50:40+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-11-16 21:18:19+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/segment_add_get_min.test.cpp
   - test/yosupo/line_add_get_min.test.cpp
-  - test/atcoder/arc051_d.test.cpp
 documentation_of: src/DataStructure/LiChaoTree.hpp
 layout: document
 redirect_from:
