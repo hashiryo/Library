@@ -21,15 +21,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "LU\u5206\u89E3"
     links: []
@@ -91,15 +91,15 @@ data:
     \ i = 0; i < rows; i++)\n      for (std::size_t j = 0; j < cols; j++) dat[i][j]\
     \ = A[i][j];\n    std::iota(perm.begin(), perm.end(), 0);\n    std::bitset<MAX_COLS>\
     \ mask;\n    for (std::size_t c = 1; c < cols; c++) mask.set(c);\n    for (std::size_t\
-    \ c = 0; c != cols && piv.size() != rows; mask.reset(++c)) {\n      auto pos =\
-    \ piv.size();\n      for (std::size_t r = piv.size(); r < rows; r++)\n       \
-    \ if (bool(dat[r][c])) pos = r, r = rows;\n      if (!bool(dat[pos][c])) continue;\n\
-    \      if (pos != piv.size())\n        std::swap(perm[pos], perm[piv.size()]),\n\
+    \ c = 0; c < cols && piv.size() < rows; c++) {\n      mask.reset(c);\n      auto\
+    \ pos = piv.size();\n      for (std::size_t r = piv.size(); r < rows; r++)\n \
+    \       if (bool(dat[r][c])) pos = r, r = rows;\n      if (!bool(dat[pos][c]))\
+    \ continue;\n      if (pos != piv.size())\n        std::swap(perm[pos], perm[piv.size()]),\n\
     \            std::swap(dat[pos], dat[piv.size()]);\n      for (std::size_t r =\
     \ piv.size() + 1; r != rows; r++) {\n        auto m = bool(dat[r][c]);\n     \
     \   dat[r][c] = 0, dat[r][piv.size()] = m;\n        if (m) dat[r] ^= dat[piv.size()]\
-    \ & mask;\n      }\n      piv.emplace_back(c);\n    }\n    for (std::size_t j\
-    \ = 0; j < cols; j++)\n      for (std::size_t i = j + 1; i < rows; i++) tdat[j][i]\
+    \ & mask;\n      }\n      piv.push_back(c);\n    }\n    for (std::size_t j = 0;\
+    \ j < cols; j++)\n      for (std::size_t i = j + 1; i < rows; i++) tdat[j][i]\
     \ = dat[i][j];\n    for (std::size_t c = 0, i = 0; c < cols; c++) {\n      for\
     \ (std::size_t r = 0; r < i; r++) tdat2[c][r] = dat[r][c];\n      if (i != piv.size()\
     \ && piv[i] == c) i++;\n    }\n  }\n  std::size_t rank() const { return piv.size();\
@@ -183,15 +183,15 @@ data:
     \ i = 0; i < rows; i++)\n      for (std::size_t j = 0; j < cols; j++) dat[i][j]\
     \ = A[i][j];\n    std::iota(perm.begin(), perm.end(), 0);\n    std::bitset<MAX_COLS>\
     \ mask;\n    for (std::size_t c = 1; c < cols; c++) mask.set(c);\n    for (std::size_t\
-    \ c = 0; c != cols && piv.size() != rows; mask.reset(++c)) {\n      auto pos =\
-    \ piv.size();\n      for (std::size_t r = piv.size(); r < rows; r++)\n       \
-    \ if (bool(dat[r][c])) pos = r, r = rows;\n      if (!bool(dat[pos][c])) continue;\n\
-    \      if (pos != piv.size())\n        std::swap(perm[pos], perm[piv.size()]),\n\
+    \ c = 0; c < cols && piv.size() < rows; c++) {\n      mask.reset(c);\n      auto\
+    \ pos = piv.size();\n      for (std::size_t r = piv.size(); r < rows; r++)\n \
+    \       if (bool(dat[r][c])) pos = r, r = rows;\n      if (!bool(dat[pos][c]))\
+    \ continue;\n      if (pos != piv.size())\n        std::swap(perm[pos], perm[piv.size()]),\n\
     \            std::swap(dat[pos], dat[piv.size()]);\n      for (std::size_t r =\
     \ piv.size() + 1; r != rows; r++) {\n        auto m = bool(dat[r][c]);\n     \
     \   dat[r][c] = 0, dat[r][piv.size()] = m;\n        if (m) dat[r] ^= dat[piv.size()]\
-    \ & mask;\n      }\n      piv.emplace_back(c);\n    }\n    for (std::size_t j\
-    \ = 0; j < cols; j++)\n      for (std::size_t i = j + 1; i < rows; i++) tdat[j][i]\
+    \ & mask;\n      }\n      piv.push_back(c);\n    }\n    for (std::size_t j = 0;\
+    \ j < cols; j++)\n      for (std::size_t i = j + 1; i < rows; i++) tdat[j][i]\
     \ = dat[i][j];\n    for (std::size_t c = 0, i = 0; c < cols; c++) {\n      for\
     \ (std::size_t r = 0; r < i; r++) tdat2[c][r] = dat[r][c];\n      if (i != piv.size()\
     \ && piv[i] == c) i++;\n    }\n  }\n  std::size_t rank() const { return piv.size();\
@@ -216,13 +216,13 @@ data:
     \ no solution\n    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t\
     \ i = 0; i < rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
     \    for (std::size_t i = 0; i < rows; i++)\n      for (std::size_t j = 0; j <\
-    \ i; j++) std::swap(ret[i][j], ret[j][i]);\n    return ret;\n  }\n};"
+    \ i; j++) std::swap(ret[i][j], ret[j][i]);\n    return ret;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/LUDecomposition.hpp
   requiredBy: []
-  timestamp: '2021-10-02 23:54:56+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-11-16 14:41:46+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/184.test.cpp
   - test/yukicoder/803.test.cpp

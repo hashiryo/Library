@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/LUDecomposition.hpp
     title: "LU\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -77,15 +77,15 @@ data:
     \ i = 0; i < rows; i++)\n      for (std::size_t j = 0; j < cols; j++) dat[i][j]\
     \ = A[i][j];\n    std::iota(perm.begin(), perm.end(), 0);\n    std::bitset<MAX_COLS>\
     \ mask;\n    for (std::size_t c = 1; c < cols; c++) mask.set(c);\n    for (std::size_t\
-    \ c = 0; c != cols && piv.size() != rows; mask.reset(++c)) {\n      auto pos =\
-    \ piv.size();\n      for (std::size_t r = piv.size(); r < rows; r++)\n       \
-    \ if (bool(dat[r][c])) pos = r, r = rows;\n      if (!bool(dat[pos][c])) continue;\n\
-    \      if (pos != piv.size())\n        std::swap(perm[pos], perm[piv.size()]),\n\
+    \ c = 0; c < cols && piv.size() < rows; c++) {\n      mask.reset(c);\n      auto\
+    \ pos = piv.size();\n      for (std::size_t r = piv.size(); r < rows; r++)\n \
+    \       if (bool(dat[r][c])) pos = r, r = rows;\n      if (!bool(dat[pos][c]))\
+    \ continue;\n      if (pos != piv.size())\n        std::swap(perm[pos], perm[piv.size()]),\n\
     \            std::swap(dat[pos], dat[piv.size()]);\n      for (std::size_t r =\
     \ piv.size() + 1; r != rows; r++) {\n        auto m = bool(dat[r][c]);\n     \
     \   dat[r][c] = 0, dat[r][piv.size()] = m;\n        if (m) dat[r] ^= dat[piv.size()]\
-    \ & mask;\n      }\n      piv.emplace_back(c);\n    }\n    for (std::size_t j\
-    \ = 0; j < cols; j++)\n      for (std::size_t i = j + 1; i < rows; i++) tdat[j][i]\
+    \ & mask;\n      }\n      piv.push_back(c);\n    }\n    for (std::size_t j = 0;\
+    \ j < cols; j++)\n      for (std::size_t i = j + 1; i < rows; i++) tdat[j][i]\
     \ = dat[i][j];\n    for (std::size_t c = 0, i = 0; c < cols; c++) {\n      for\
     \ (std::size_t r = 0; r < i; r++) tdat2[c][r] = dat[r][c];\n      if (i != piv.size()\
     \ && piv[i] == c) i++;\n    }\n  }\n  std::size_t rank() const { return piv.size();\
@@ -204,7 +204,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
+  timestamp: '2021-11-16 14:41:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp
