@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   _extendedRequiredBy: []
@@ -338,9 +338,9 @@ data:
     \u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ mint>\nclass SubproductTree {\n  using poly = FormalPowerSeries<mint>;\n  int\
     \ n;\n  std::vector<mint> xs;\n  std::vector<poly> buf;\n  void pre(int l, int\
-    \ r, int k) {\n    if (r - l == 1) {\n      buf[k] = {-xs[l], 1};\n      return;\n\
-    \    }\n    pre(l, (l + r) / 2, k * 2), pre((l + r) / 2, r, k * 2 + 1);\n    buf[k]\
-    \ = buf[k * 2] * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree() {}\n  SubproductTree(const\
+    \ r, int k) {\n    if (r - l == 1) return buf[k] = {-xs[l], 1}, void();\n    pre(l,\
+    \ (l + r) / 2, k * 2), pre((l + r) / 2, r, k * 2 + 1);\n    buf[k] = buf[k * 2]\
+    \ * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree() {}\n  SubproductTree(const\
     \ std::vector<mint> &_xs)\n      : n(_xs.size()), xs(_xs), buf(4 * n) {\n    pre(0,\
     \ n, 1);\n  }\n  std::vector<mint> multi_eval(const poly &f) {\n    std::vector<mint>\
     \ ret(n);\n    auto rec = [&](auto dfs, poly g, int l, int r, int k) -> void {\n\
@@ -351,7 +351,7 @@ data:
     \ &ys) {\n    poly w = buf[1].diff();\n    std::vector<mint> vs = multi_eval(w);\n\
     \    auto rec = [&](auto dfs, int l, int r, int k) -> poly {\n      if (r - l\
     \ == 1) return poly({ys[l] / vs[l]});\n      return buf[k * 2 + 1] * dfs(dfs,\
-    \ l, (l + r) / 2, k * 2)\n             + buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
+    \ l, (l + r) / 2, k * 2) +\n             buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
     \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.resize(n),\
     \ ret;\n  }\n};\n#line 6 \"test/yosupo/polynomial_interpolation.test.cpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -376,7 +376,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
+  timestamp: '2021-11-16 15:41:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/polynomial_interpolation.test.cpp

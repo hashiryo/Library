@@ -151,7 +151,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Combination.hpp
       title: "\u7D44\u307F\u5408\u308F\u305B"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
@@ -160,7 +160,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -169,7 +169,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/SubproductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
     - icon: ':heavy_check_mark:'
@@ -202,7 +202,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/lagrange_interpolation.hpp
       title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
     - icon: ':heavy_check_mark:'
@@ -564,6 +564,12 @@ data:
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
     - icon: ':x:'
+      path: test/atcoder/arc033_4.FPS.test.cpp
+      title: test/atcoder/arc033_4.FPS.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/arc033_4.lagrange.test.cpp
+      title: test/atcoder/arc033_4.lagrange.test.cpp
+    - icon: ':x:'
       path: test/atcoder/arc051_d.test.cpp
       title: test/atcoder/arc051_d.test.cpp
   - name: test/hackerrank
@@ -594,6 +600,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution1000000007.test.cpp
       title: test/yosupo/convolution1000000007.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/convolution_mod_2_64.test.cpp
+      title: test/yosupo/convolution_mod_2_64.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp

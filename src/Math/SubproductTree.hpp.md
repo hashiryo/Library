@@ -1,23 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/arc033_4.FPS.test.cpp
+    title: test/atcoder/arc033_4.FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\
       \u9593"
@@ -338,9 +341,9 @@ data:
     \u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ mint>\nclass SubproductTree {\n  using poly = FormalPowerSeries<mint>;\n  int\
     \ n;\n  std::vector<mint> xs;\n  std::vector<poly> buf;\n  void pre(int l, int\
-    \ r, int k) {\n    if (r - l == 1) {\n      buf[k] = {-xs[l], 1};\n      return;\n\
-    \    }\n    pre(l, (l + r) / 2, k * 2), pre((l + r) / 2, r, k * 2 + 1);\n    buf[k]\
-    \ = buf[k * 2] * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree() {}\n  SubproductTree(const\
+    \ r, int k) {\n    if (r - l == 1) return buf[k] = {-xs[l], 1}, void();\n    pre(l,\
+    \ (l + r) / 2, k * 2), pre((l + r) / 2, r, k * 2 + 1);\n    buf[k] = buf[k * 2]\
+    \ * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree() {}\n  SubproductTree(const\
     \ std::vector<mint> &_xs)\n      : n(_xs.size()), xs(_xs), buf(4 * n) {\n    pre(0,\
     \ n, 1);\n  }\n  std::vector<mint> multi_eval(const poly &f) {\n    std::vector<mint>\
     \ ret(n);\n    auto rec = [&](auto dfs, poly g, int l, int r, int k) -> void {\n\
@@ -351,7 +354,7 @@ data:
     \ &ys) {\n    poly w = buf[1].diff();\n    std::vector<mint> vs = multi_eval(w);\n\
     \    auto rec = [&](auto dfs, int l, int r, int k) -> poly {\n      if (r - l\
     \ == 1) return poly({ys[l] / vs[l]});\n      return buf[k * 2 + 1] * dfs(dfs,\
-    \ l, (l + r) / 2, k * 2)\n             + buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
+    \ l, (l + r) / 2, k * 2) +\n             buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
     \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.resize(n),\
     \ ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
@@ -360,9 +363,9 @@ data:
     \n *  \u3069\u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\ntemplate\
     \ <typename mint>\nclass SubproductTree {\n  using poly = FormalPowerSeries<mint>;\n\
     \  int n;\n  std::vector<mint> xs;\n  std::vector<poly> buf;\n  void pre(int l,\
-    \ int r, int k) {\n    if (r - l == 1) {\n      buf[k] = {-xs[l], 1};\n      return;\n\
-    \    }\n    pre(l, (l + r) / 2, k * 2), pre((l + r) / 2, r, k * 2 + 1);\n    buf[k]\
-    \ = buf[k * 2] * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree() {}\n  SubproductTree(const\
+    \ int r, int k) {\n    if (r - l == 1) return buf[k] = {-xs[l], 1}, void();\n\
+    \    pre(l, (l + r) / 2, k * 2), pre((l + r) / 2, r, k * 2 + 1);\n    buf[k] =\
+    \ buf[k * 2] * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree() {}\n  SubproductTree(const\
     \ std::vector<mint> &_xs)\n      : n(_xs.size()), xs(_xs), buf(4 * n) {\n    pre(0,\
     \ n, 1);\n  }\n  std::vector<mint> multi_eval(const poly &f) {\n    std::vector<mint>\
     \ ret(n);\n    auto rec = [&](auto dfs, poly g, int l, int r, int k) -> void {\n\
@@ -373,7 +376,7 @@ data:
     \ &ys) {\n    poly w = buf[1].diff();\n    std::vector<mint> vs = multi_eval(w);\n\
     \    auto rec = [&](auto dfs, int l, int r, int k) -> poly {\n      if (r - l\
     \ == 1) return poly({ys[l] / vs[l]});\n      return buf[k * 2 + 1] * dfs(dfs,\
-    \ l, (l + r) / 2, k * 2)\n             + buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
+    \ l, (l + r) / 2, k * 2) +\n             buf[k * 2] * dfs(dfs, (l + r) / 2, r,\
     \ k * 2 + 1);\n    };\n    poly ret = rec(rec, 0, n, 1);\n    return ret.resize(n),\
     \ ret;\n  }\n};\n"
   dependsOn:
@@ -382,11 +385,12 @@ data:
   isVerificationFile: false
   path: src/Math/SubproductTree.hpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-16 15:41:48+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
+  - test/atcoder/arc033_4.FPS.test.cpp
 documentation_of: src/Math/SubproductTree.hpp
 layout: document
 redirect_from:
