@@ -18,14 +18,15 @@ data:
     - https://atcoder.jp/contests/code-thanks-festival-2017/tasks/code_thanks_festival_2017_h
   bundledCode: "#line 2 \"src/DataStructure/UnionFind_Persistent.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/DataStructure/PersistentArray.hpp\"\n/**\n * @title \u6C38\u7D9A\
-    \u914D\u5217\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n */\n\n// BEGIN CUT\
-    \ HERE\n\ntemplate <class T, std::size_t M = 32>\nclass PersistentArray {\n  struct\
-    \ Node {\n    T val;\n    Node *ch[M];\n  } * root;\n  T get(Node *&t, std::size_t\
-    \ k) {\n    return t ? (k ? get(t->ch[k % M], (k - 1) / M) : t->val) : T();\n\
-    \  }\n  bool is_null(Node *&t, std::size_t k) {\n    return t ? (k ? get(t->ch[k\
-    \ % M], (k - 1) / M) : false) : true;\n  }\n  template <bool persistent = true>\n\
-    \  T &at(Node *&t, std::size_t k) {\n    if (!t)\n      t = new Node();\n    else\
-    \ if constexpr (persistent)\n      t = new Node(*t);\n    return k ? at<persistent>(t->ch[k\
+    \u914D\u5217\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * M\u5206\u6728\n\
+    \ * get: O(log_M N)\n * at: O(M log_M N)\n */\n\n// BEGIN CUT HERE\n\ntemplate\
+    \ <class T, std::size_t M = 8>\nclass PersistentArray {\n  struct Node {\n   \
+    \ T val;\n    Node *ch[M];\n  } * root;\n  T get(Node *&t, std::size_t k) {\n\
+    \    return t ? (k ? get(t->ch[k % M], (k - 1) / M) : t->val) : T();\n  }\n  bool\
+    \ is_null(Node *&t, std::size_t k) {\n    return t ? (k ? get(t->ch[k % M], (k\
+    \ - 1) / M) : false) : true;\n  }\n  template <bool persistent = true>\n  T &at(Node\
+    \ *&t, std::size_t k) {\n    if (!t)\n      t = new Node();\n    else if constexpr\
+    \ (persistent)\n      t = new Node(*t);\n    return k ? at<persistent>(t->ch[k\
     \ % M], (k - 1) / M) : t->val;\n  }\n\n public:\n  PersistentArray() : root(nullptr)\
     \ {}\n  PersistentArray(std::size_t n, T v) {\n    for (std::size_t i = n; i--;)\
     \ at<false>(root, i) = v;\n  }\n  PersistentArray(T *bg, T *ed) {\n    for (std::size_t\
@@ -60,7 +61,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind_Persistent.hpp
   requiredBy: []
-  timestamp: '2021-11-15 21:42:56+09:00'
+  timestamp: '2021-11-16 14:25:06+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/persistent_unionfind.test.cpp
