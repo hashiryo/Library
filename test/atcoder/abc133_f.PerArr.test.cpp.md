@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/PersistentArray.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
   _extendedRequiredBy: []
@@ -24,19 +24,20 @@ data:
     \u9020\n * M\u5206\u6728\n * get: O(log_M N)\n * at: O(M log_M N)\n */\n\n// BEGIN\
     \ CUT HERE\n\ntemplate <class T, std::size_t M = 8>\nclass PersistentArray {\n\
     \  struct Node {\n    T val;\n    Node *ch[M];\n  } * root;\n  T get(Node *&t,\
-    \ std::size_t k) {\n    return t ? (k ? get(t->ch[k % M], (k - 1) / M) : t->val)\
-    \ : T();\n  }\n  bool is_null(Node *&t, std::size_t k) {\n    return t ? (k ?\
-    \ get(t->ch[k % M], (k - 1) / M) : false) : true;\n  }\n  template <bool persistent\
-    \ = true>\n  T &at(Node *&t, std::size_t k) {\n    if (!t)\n      t = new Node();\n\
-    \    else if constexpr (persistent)\n      t = new Node(*t);\n    return k ? at<persistent>(t->ch[k\
-    \ % M], (k - 1) / M) : t->val;\n  }\n\n public:\n  PersistentArray() : root(nullptr)\
-    \ {}\n  PersistentArray(std::size_t n, T v) {\n    for (std::size_t i = n; i--;)\
-    \ at<false>(root, i) = v;\n  }\n  PersistentArray(T *bg, T *ed) {\n    for (std::size_t\
+    \ std::size_t k) {\n    return t ? (k ? get(t->ch[(k - 1) % M], (k - 1) / M) :\
+    \ t->val) : T();\n  }\n  bool is_null(Node *&t, std::size_t k) {\n    return t\
+    \ ? (k ? is_null(t->ch[(k - 1) % M], (k - 1) / M) : false) : true;\n  }\n  template\
+    \ <bool persistent = true>\n  T &at(Node *&t, std::size_t k) {\n    if (!t)\n\
+    \      t = new Node();\n    else if constexpr (persistent)\n      t = new Node(*t);\n\
+    \    return k ? at<persistent>(t->ch[(k - 1) % M], (k - 1) / M) : t->val;\n  }\n\
+    \n public:\n  PersistentArray() : root(nullptr) {}\n  PersistentArray(std::size_t\
+    \ n, T v) : root(nullptr) {\n    for (std::size_t i = n; i--;) at<false>(root,\
+    \ i) = v;\n  }\n  PersistentArray(T *bg, T *ed) : root(nullptr) {\n    for (std::size_t\
     \ i = ed - bg; i--;) at<false>(root, i) = *(bg + i);\n  }\n  PersistentArray(const\
     \ std::vector<T> &ar)\n      : PersistentArray(ar.data(), ar.data() + ar.size())\
     \ {}\n  bool is_null(std::size_t k) { return is_null(root, k); }\n  T get(std::size_t\
-    \ k) { return get(root, k); }\n  T &at(std::size_t k) { return at(root, k); }\n\
-    \  T &operator[](std::size_t k) { return at(k); }\n};\n#line 3 \"src/DataStructure/LinkCutTree.hpp\"\
+    \ k) { return get(root, k); }\n  T &at(std::size_t k) { return at<true>(root,\
+    \ k); }\n  T &operator[](std::size_t k) { return at(k); }\n};\n#line 3 \"src/DataStructure/LinkCutTree.hpp\"\
     \n/**\n * @title Link-Cut-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n\
     \ * @brief O(logN)\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\
     \u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\
@@ -163,7 +164,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.PerArr.test.cpp
   requiredBy: []
-  timestamp: '2021-11-16 14:25:06+09:00'
+  timestamp: '2021-11-16 15:28:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.PerArr.test.cpp

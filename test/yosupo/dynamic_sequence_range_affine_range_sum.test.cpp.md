@@ -125,20 +125,19 @@ data:
     \    return x = y, y = z, z = w, (w = (w ^ (w >> 19)) ^ (t ^ (t >> 8)));\n  }\n\
     \n public:\n  SplayTree(Node *t = nullptr) : root(t) {}\n  SplayTree(std::size_t\
     \ n, T val) { root = make_tree(0, n, val); }\n  SplayTree(T *beg, T *ed) { root\
-    \ = make_tree(beg, ed); }\n  SplayTree(const std::vector<T> &ar) {\n    root =\
-    \ make_tree(ar.data(), ar.data() + ar.size());\n  }\n  std::vector<T> dump() {\n\
-    \    std::vector<T> ret(size());\n    return dump(ret.begin(), root), ret;\n \
-    \ }\n  static std::string which_available() {\n    std::string ret = \"\";\n \
-    \   if constexpr (semigroup<M>::value)\n      ret += \"\\\"fold\\\" \";\n    else\n\
-    \      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value) ret += \"\\\"\
-    apply\\\" \";\n    if constexpr (reversible) ret += \"\\\"reverse\\\" \";\n  \
-    \  return ret;\n  }\n  std::size_t size() { return root ? root->size : 0; }\n\
-    \  void clear() { root = nullptr; }\n  template <class L = M,\n            typename\
-    \ std::enable_if_t<semigroup<L>::value> * = nullptr>\n  const T &operator[](id_t\
-    \ k) {\n    return get(k);\n  }\n  template <class L = M,\n            typename\
-    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](id_t k)\
-    \ {\n    return at(k);\n  }\n  const T &get(std::size_t k) { return splay(root,\
-    \ k), root->val; }\n  T &at(std::size_t k) {\n    static_assert(!semigroup<M>::value,\
+    \ = make_tree(beg, ed); }\n  SplayTree(const std::vector<T> &ar)\n      : SplayTree(ar.data(),\
+    \ ar.data() + ar.size()) {}\n  std::vector<T> dump() {\n    std::vector<T> ret(size());\n\
+    \    return dump(ret.begin(), root), ret;\n  }\n  static std::string which_available()\
+    \ {\n    std::string ret = \"\";\n    if constexpr (semigroup<M>::value)\n   \
+    \   ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if\
+    \ constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    if constexpr (reversible)\
+    \ ret += \"\\\"reverse\\\" \";\n    return ret;\n  }\n  std::size_t size() { return\
+    \ root ? root->size : 0; }\n  void clear() { root = nullptr; }\n  template <class\
+    \ L = M,\n            typename std::enable_if_t<semigroup<L>::value> * = nullptr>\n\
+    \  const T &operator[](id_t k) {\n    return get(k);\n  }\n  template <class L\
+    \ = M,\n            typename std::enable_if_t<!semigroup<L>::value> * = nullptr>\n\
+    \  T &operator[](id_t k) {\n    return at(k);\n  }\n  const T &get(std::size_t\
+    \ k) { return splay(root, k), root->val; }\n  T &at(std::size_t k) {\n    static_assert(!semigroup<M>::value,\
     \ \"\\\"at\\\" is not available\");\n    return splay(root, k), root->val;\n \
     \ }\n  void set(std::size_t k, T val) {\n    splay(root, k), root->val = val,\
     \ pushup(root);\n  }\n  void set_balance() {\n    if (root) splay(root, xor128()\
@@ -278,7 +277,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 19:42:37+09:00'
+  timestamp: '2021-11-16 15:28:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

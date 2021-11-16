@@ -124,13 +124,14 @@ data:
     \ for (std::size_t i = N; i--;) ss[i] = ts[i] ? ts[i]->ch[!flg] : nullptr;\n \
     \   return find<last>(k, {m, b[1]}, bias, h - 1, check, ss, sums);\n  }\n\n public:\n\
     \  SegmentTree_Dynamic(Node *t = nullptr) : root(t) {}\n  SegmentTree_Dynamic(std::size_t\
-    \ n, T val) {\n    build(root, n, {0, 1LL << HEIGHT}, val);\n  }\n  SegmentTree_Dynamic(T\
-    \ *bg, T *ed) {\n    build(root, ed - bg, {0, 1LL << HEIGHT}, bg);\n  }\n  SegmentTree_Dynamic(const\
-    \ std::vector<T> &ar)\n      : SegmentTree_Dynamic(ar.data(), ar.data() + ar.size())\
-    \ {}\n  void set(id_t k, T val) { set_val(root, k, val, HEIGHT); }\n  T get(id_t\
-    \ k) { return get_val(root, k, HEIGHT); }\n  bool is_null(id_t k) { return is_null(root,\
-    \ k, HEIGHT); }\n  T &at(id_t k) {\n    static_assert(!monoid<M>::value, \"\\\"\
-    at\\\" is not available\\n\");\n    return at_val(root, k, HEIGHT);\n  }\n  template\
+    \ n, T val) : root(nullptr) {\n    build(root, n, {0, 1LL << HEIGHT}, val);\n\
+    \  }\n  SegmentTree_Dynamic(T *bg, T *ed) : root(nullptr) {\n    build(root, ed\
+    \ - bg, {0, 1LL << HEIGHT}, bg);\n  }\n  SegmentTree_Dynamic(const std::vector<T>\
+    \ &ar)\n      : SegmentTree_Dynamic(ar.data(), ar.data() + ar.size()) {}\n  void\
+    \ set(id_t k, T val) { set_val(root, k, val, HEIGHT); }\n  T get(id_t k) { return\
+    \ get_val(root, k, HEIGHT); }\n  bool is_null(id_t k) { return is_null(root, k,\
+    \ HEIGHT); }\n  T &at(id_t k) {\n    static_assert(!monoid<M>::value, \"\\\"at\\\
+    \" is not available\\n\");\n    return at_val(root, k, HEIGHT);\n  }\n  template\
     \ <class L = M,\n            typename std::enable_if_t<monoid<L>::value> * = nullptr>\n\
     \  T operator[](id_t k) {\n    return get(k);\n  }\n  template <class L = M,\n\
     \            typename std::enable_if_t<!monoid<L>::value> * = nullptr>\n  T &operator[](id_t\
@@ -259,7 +260,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2021-11-16 14:25:06+09:00'
+  timestamp: '2021-11-16 15:28:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.DynSeg.test.cpp

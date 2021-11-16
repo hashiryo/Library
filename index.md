@@ -32,7 +32,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/PersistentArray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':heavy_check_mark:'
@@ -77,7 +77,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind.hpp
       title: Union-Find
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Persistent.hpp
       title: "Union-Find(\u5B8C\u5168\u6C38\u7D9A)"
     - icon: ':heavy_check_mark:'
@@ -687,7 +687,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_queue.RBTPL.test.cpp
       title: test/yosupo/persistent_queue.RBTPL.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_unionfind.test.cpp
       title: test/yosupo/persistent_unionfind.test.cpp
     - icon: ':heavy_check_mark:'
