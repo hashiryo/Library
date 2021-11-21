@@ -93,8 +93,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/421.test.cpp
-  - test/aoj/2423.test.cpp
   - test/aoj/0334.test.cpp
+  - test/aoj/2423.test.cpp
   - test/yosupo/bipartitematching.test.cpp
 documentation_of: src/Graph/MatchingBipartite.hpp
 layout: document

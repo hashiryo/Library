@@ -309,8 +309,8 @@ data:
   - test/yukicoder/649.Patricia.test.cpp
   - test/aoj/3024.Patricia.test.cpp
   - test/aoj/2270.Patricia.test.cpp
-  - test/yosupo/set_xor_min.Patricia.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
+  - test/yosupo/set_xor_min.Patricia.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Patricia.hpp
 layout: document
 redirect_from:

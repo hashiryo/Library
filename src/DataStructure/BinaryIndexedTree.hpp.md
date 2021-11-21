@@ -64,8 +64,8 @@ data:
   verifiedWith:
   - test/yukicoder/738.BIT.test.cpp
   - test/yukicoder/649.BIT.test.cpp
-  - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/point_add_range_sum.BIT.test.cpp
+  - test/yosupo/static_range_inversions_query.mo.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree.hpp
 layout: document
 redirect_from:

@@ -106,8 +106,8 @@ data:
   timestamp: '2021-11-16 21:18:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/segment_add_get_min.test.cpp
   - test/yosupo/line_add_get_min.test.cpp
+  - test/yosupo/segment_add_get_min.test.cpp
 documentation_of: src/DataStructure/LiChaoTree.hpp
 layout: document
 redirect_from:
