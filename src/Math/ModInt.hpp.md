@@ -136,11 +136,11 @@ data:
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/range_affine_range_sum.RBTL.test.cpp
-    title: test/yosupo/range_affine_range_sum.RBTL.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/range_affine_range_sum.WBT.test.cpp
+    title: test/yosupo/range_affine_range_sum.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
@@ -216,9 +216,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: ModInt
     links: []
@@ -361,7 +361,7 @@ data:
   - src/Math/extgcd.hpp
   - src/Math/BigInt.hpp
   timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/1080.test.cpp
@@ -415,10 +415,10 @@ data:
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/range_affine_range_sum.RBTL.test.cpp
   - test/yosupo/stirling_first.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/range_affine_range_sum.WBT.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp

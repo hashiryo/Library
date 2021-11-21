@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/DisjointSparseTable.hpp
     title: Disjoint-Sparse-Table
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/3/DSL_3_D
@@ -28,29 +28,29 @@ data:
     \  ys.emplace_back(xs);\n      for (int i = half; i < n; i += range) {\n     \
     \   for (int j = i - 2; j >= i - half; --j)\n          ys[h][j] = f(ys[h][j],\
     \ ys[h][j + 1]);\n        for (int j = i + 1; j < std::min(n, i + half); ++j)\n\
-    \          ys[h][j] = f(ys[h][j - 1], ys[h][j]);\n      }\n    }\n  }\n  T query(int\
+    \          ys[h][j] = f(ys[h][j - 1], ys[h][j]);\n      }\n    }\n  }\n  T fold(int\
     \ i, int j) {  // [i, j)\n    if (i == --j) return ys[0][i];\n    int h = sizeof(int)\
     \ * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);\n    return f(ys[h][i], ys[h][j]);\n\
-    \  }\n};\n#line 5 \"test/aoj/DSL_3_D.disjointsparsetable.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N,\
-    \ L;\n  cin >> N >> L;\n  vector<int> a(N);\n  for (int i = 0; i < N; i++) cin\
-    \ >> a[i];\n  auto f = [](int a, int b) { return min(a, b); };\n  DisjointSparseTable<int>\
-    \ dst(a, f);\n  for (int i = 0; i + L <= N; i++) {\n    if (i) cout << \" \";\n\
-    \    cout << dst.query(i, i + L);\n  }\n  cout << endl;\n  return 0;\n}\n"
+    \  }\n};\n#line 5 \"test/aoj/DSL_3_D.disjointsparsetable.test.cpp\"\n\nusing namespace\
+    \ std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, L;\n\
+    \  cin >> N >> L;\n  vector<int> a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n\
+    \  DisjointSparseTable<int> dst(a, [](int a, int b) { return min(a, b); });\n\
+    \  for (int i = 0; i + L <= N; i++) cout << (i ? \" \" : \"\") << dst.fold(i,\
+    \ i + L);\n  cout << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/3/DSL_3_D\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/DisjointSparseTable.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \n\nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, L;\n  cin >> N >> L;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  auto f = [](int a, int b) { return min(a, b); };\n  DisjointSparseTable<int>\
-    \ dst(a, f);\n  for (int i = 0; i + L <= N; i++) {\n    if (i) cout << \" \";\n\
-    \    cout << dst.query(i, i + L);\n  }\n  cout << endl;\n  return 0;\n}"
+    \ i++) cin >> a[i];\n  DisjointSparseTable<int> dst(a, [](int a, int b) { return\
+    \ min(a, b); });\n  for (int i = 0; i + L <= N; i++) cout << (i ? \" \" : \"\"\
+    ) << dst.fold(i, i + L);\n  cout << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/DataStructure/DisjointSparseTable.hpp
   isVerificationFile: true
   path: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-21 22:51:09+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
 layout: document

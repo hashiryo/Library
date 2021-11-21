@@ -17,13 +17,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/DataStructure/DisjointSparseTable.hpp
       title: Disjoint-Sparse-Table
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
     - icon: ':question:'
@@ -38,25 +38,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
-    - icon: ':heavy_check_mark:'
-      path: src/DataStructure/RedBlackTree.hpp
-      title: "\u8D64\u9ED2\u6728"
-    - icon: ':heavy_check_mark:'
-      path: src/DataStructure/RedBlackTree_Lazy.hpp
-      title: "\u8D64\u9ED2\u6728(\u9045\u5EF6\u4F1D\u642C)"
-    - icon: ':heavy_check_mark:'
-      path: src/DataStructure/RedBlackTree_Persistent.hpp
-      title: "\u8D64\u9ED2\u6728(\u6C38\u7D9A)"
-    - icon: ':heavy_check_mark:'
-      path: src/DataStructure/RedBlackTree_PersistentLazy.hpp
-      title: "\u8D64\u9ED2\u6728(\u6C38\u7D9A\u9045\u5EF6\u4F1D\u642C)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -86,6 +74,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
+    - icon: ':x:'
+      path: src/DataStructure/WeightBalancedTree.hpp
+      title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   - name: src/Geometry
     pages:
     - icon: ':heavy_check_mark:'
@@ -160,7 +151,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -222,7 +213,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/String/SuffixArray.hpp
       title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
     - icon: ':heavy_check_mark:'
@@ -271,11 +262,11 @@ data:
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/1508.RBT.test.cpp
-      title: test/aoj/1508.RBT.test.cpp
-    - icon: ':heavy_check_mark:'
       path: test/aoj/1508.SplayTree.test.cpp
       title: test/aoj/1508.SplayTree.test.cpp
+    - icon: ':x:'
+      path: test/aoj/1508.WBT.test.cpp
+      title: test/aoj/1508.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1549.WM.test.cpp
       title: test/aoj/1549.WM.test.cpp
@@ -303,10 +294,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2256.test.cpp
       title: test/aoj/2256.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2270.DynSeg.test.cpp
       title: test/aoj/2270.DynSeg.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2270.Patricia.test.cpp
       title: test/aoj/2270.Patricia.test.cpp
     - icon: ':heavy_check_mark:'
@@ -345,7 +336,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2635.test.cpp
       title: test/aoj/2635.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2644.test.cpp
       title: test/aoj/2644.test.cpp
     - icon: ':heavy_check_mark:'
@@ -369,6 +360,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3024.Patricia.test.cpp
       title: test/aoj/3024.Patricia.test.cpp
+    - icon: ':x:'
+      path: test/aoj/3024.WBT.test.cpp
+      title: test/aoj/3024.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/3032.test.cpp
       title: test/aoj/3032.test.cpp
@@ -495,7 +489,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_I.DynSeg.test.cpp
       title: test/aoj/DSL_2_I.DynSeg.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
       title: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
     - icon: ':heavy_check_mark:'
@@ -646,7 +640,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/line_add_get_min.test.cpp
       title: test/yosupo/line_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
@@ -673,12 +667,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/partition.test.cpp
       title: test/yosupo/partition.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/yosupo/persistent_queue.RBTP.test.cpp
-      title: test/yosupo/persistent_queue.RBTP.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/yosupo/persistent_queue.RBTPL.test.cpp
-      title: test/yosupo/persistent_queue.RBTPL.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/persistent_queue.WBT.test.cpp
+      title: test/yosupo/persistent_queue.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_unionfind.test.cpp
       title: test/yosupo/persistent_unionfind.test.cpp
@@ -698,18 +689,18 @@ data:
       path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
       title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/yosupo/range_affine_range_sum.RBTL.test.cpp
-      title: test/yosupo/range_affine_range_sum.RBTL.test.cpp
-    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
       title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/range_affine_range_sum.WBT.test.cpp
+      title: test/yosupo/range_affine_range_sum.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/scc.test.cpp
       title: test/yosupo/scc.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
@@ -816,7 +807,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.Patricia.test.cpp
       title: test/yukicoder/649.Patricia.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
     - icon: ':heavy_check_mark:'

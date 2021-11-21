@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2644.test.cpp
     title: test/aoj/2644.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
     title: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Disjoint-Sparse-Table
     links: []
@@ -27,7 +27,7 @@ data:
     \  ys.emplace_back(xs);\n      for (int i = half; i < n; i += range) {\n     \
     \   for (int j = i - 2; j >= i - half; --j)\n          ys[h][j] = f(ys[h][j],\
     \ ys[h][j + 1]);\n        for (int j = i + 1; j < std::min(n, i + half); ++j)\n\
-    \          ys[h][j] = f(ys[h][j - 1], ys[h][j]);\n      }\n    }\n  }\n  T query(int\
+    \          ys[h][j] = f(ys[h][j - 1], ys[h][j]);\n      }\n    }\n  }\n  T fold(int\
     \ i, int j) {  // [i, j)\n    if (i == --j) return ys[0][i];\n    int h = sizeof(int)\
     \ * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);\n    return f(ys[h][i], ys[h][j]);\n\
     \  }\n};\n"
@@ -43,15 +43,15 @@ data:
     \ i < n; i += range) {\n        for (int j = i - 2; j >= i - half; --j)\n    \
     \      ys[h][j] = f(ys[h][j], ys[h][j + 1]);\n        for (int j = i + 1; j <\
     \ std::min(n, i + half); ++j)\n          ys[h][j] = f(ys[h][j - 1], ys[h][j]);\n\
-    \      }\n    }\n  }\n  T query(int i, int j) {  // [i, j)\n    if (i == --j)\
-    \ return ys[0][i];\n    int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(i\
-    \ ^ j);\n    return f(ys[h][i], ys[h][j]);\n  }\n};"
+    \      }\n    }\n  }\n  T fold(int i, int j) {  // [i, j)\n    if (i == --j) return\
+    \ ys[0][i];\n    int h = sizeof(int) * __CHAR_BIT__ - 1 - __builtin_clz(i ^ j);\n\
+    \    return f(ys[h][i], ys[h][j]);\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/DisjointSparseTable.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-21 22:51:09+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2644.test.cpp
   - test/aoj/DSL_3_D.disjointsparsetable.test.cpp

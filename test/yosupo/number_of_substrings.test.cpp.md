@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/String/SuffixArray.hpp
     title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
   _extendedRequiredBy: []
