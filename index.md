@@ -20,7 +20,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/DisjointSparseTable.hpp
       title: Disjoint-Sparse-Table
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
     - icon: ':heavy_check_mark:'
@@ -44,7 +44,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -128,7 +128,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/StronglyConnectedComponents.hpp
       title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - name: src/Math
@@ -604,10 +604,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -637,7 +637,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -685,7 +685,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.test.cpp
       title: test/yosupo/pow_of_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
       title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -703,7 +703,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/set_xor_min.DynSeg.test.cpp
       title: test/yosupo/set_xor_min.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -780,7 +780,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/235.LCT.test.cpp
       title: test/yukicoder/235.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -792,7 +792,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/421.test.cpp
       title: test/yukicoder/421.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/529.LCT.test.cpp
       title: test/yukicoder/529.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -801,7 +801,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.BIT.test.cpp
       title: test/yukicoder/649.BIT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/649.DynSeg.test.cpp
       title: test/yukicoder/649.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -828,7 +828,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/803.test.cpp
       title: test/yukicoder/803.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
     - icon: ':heavy_check_mark:'

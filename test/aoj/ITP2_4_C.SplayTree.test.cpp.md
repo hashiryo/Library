@@ -40,7 +40,7 @@ data:
     \ HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member)\
     \ HAS_CHECK(member, class dummy = typename U::member)\n\ntemplate <class M, bool\
     \ reversible = false>\nclass SplayTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition)\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
+    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
     \ L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n  template <class\
     \ L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
     \ has_composition<L>>;\n  template <class T, class tDerived, class F = std::nullptr_t>\n\
@@ -187,7 +187,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_C.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2021-11-21 18:18:36+09:00'
+  timestamp: '2021-11-22 16:08:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_C.SplayTree.test.cpp

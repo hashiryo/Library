@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Euler-Tour-Tree
     links: []
@@ -44,7 +44,7 @@ data:
     \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
     \ class dummy = typename U::member)\n\ntemplate <typename M = void, std::size_t\
     \ NODE_SIZE = 303030 * 4>\nclass EulerTourTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n\
-    \  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition)\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n\
+    \  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n\
     \  template <class L>\n  using monoid = std::conjunction<has_T<L>, has_op<L>,\
     \ has_ti<L>>;\n  template <class L>\n  using dual =\n      std::conjunction<has_T<L>,\
     \ has_E<L>, has_mapping<L>, has_composition<L>>;\n  using node_id = std::int_least32_t;\n\
@@ -161,7 +161,7 @@ data:
     \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
     \ntemplate <typename M = void, std::size_t NODE_SIZE = 303030 * 4>\nclass EulerTourTree\
-    \ {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition)\n\
+    \ {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n\
     \  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class L>\n  using monoid = std::conjunction<has_T<L>,\
     \ has_op<L>, has_ti<L>>;\n  template <class L>\n  using dual =\n      std::conjunction<has_T<L>,\
     \ has_E<L>, has_mapping<L>, has_composition<L>>;\n  using node_id = std::int_least32_t;\n\
@@ -267,8 +267,8 @@ data:
   path: src/DataStructure/EulerTourTree.hpp
   requiredBy:
   - src/DataStructure/OnlineDynamicConnectivity.hpp
-  timestamp: '2021-11-21 18:18:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-22 16:08:59+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/828.ETT.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp

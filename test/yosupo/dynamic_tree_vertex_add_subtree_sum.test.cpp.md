@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
@@ -33,7 +33,7 @@ data:
     \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
     \ class dummy = typename U::member)\n\ntemplate <typename M = void, std::size_t\
     \ NODE_SIZE = 303030 * 4>\nclass EulerTourTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n\
-    \  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition)\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n\
+    \  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n\
     \  template <class L>\n  using monoid = std::conjunction<has_T<L>, has_op<L>,\
     \ has_ti<L>>;\n  template <class L>\n  using dual =\n      std::conjunction<has_T<L>,\
     \ has_E<L>, has_mapping<L>, has_composition<L>>;\n  using node_id = std::int_least32_t;\n\
@@ -165,8 +165,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-11-21 18:18:36+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-22 16:08:59+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
 layout: document

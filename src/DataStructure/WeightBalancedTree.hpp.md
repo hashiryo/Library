@@ -45,7 +45,7 @@ data:
     \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
     \ class dummy = typename U::member)\n\ntemplate <typename M, std::size_t NODE_SIZE\
     \ = 1 << 23>\nclass WeightBalancedTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition)\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
+    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
     \ L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n  template <class\
     \ L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
     \ has_composition<L>>;\n  using node_id = std::int_least32_t;\n  template <class\
@@ -172,7 +172,7 @@ data:
     \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
     \ class dummy = typename U::member)\n\ntemplate <typename M, std::size_t NODE_SIZE\
     \ = 1 << 23>\nclass WeightBalancedTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition)\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
+    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
     \ L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n  template <class\
     \ L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
     \ has_composition<L>>;\n  using node_id = std::int_least32_t;\n  template <class\
@@ -282,7 +282,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/WeightBalancedTree.hpp
   requiredBy: []
-  timestamp: '2021-11-22 15:22:35+09:00'
+  timestamp: '2021-11-22 16:08:59+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/3024.WBT.test.cpp

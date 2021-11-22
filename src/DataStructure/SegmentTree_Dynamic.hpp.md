@@ -15,18 +15,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/set_xor_min.DynSeg.test.cpp
     title: test/yosupo/set_xor_min.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     links:
@@ -52,7 +52,7 @@ data:
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
     \ntemplate <typename M, bool persistent = false, std::uint8_t HEIGHT = 30>\nclass\
     \ SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition)\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
+    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
     \ L>\n  using monoid = std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n  template\
     \ <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
     \ has_composition<L>>;\n  using id_t = long long;\n  template <class T, class\
@@ -195,7 +195,7 @@ data:
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
     \ntemplate <typename M, bool persistent = false, std::uint8_t HEIGHT = 30>\nclass\
     \ SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition)\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
+    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
     \ L>\n  using monoid = std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n  template\
     \ <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
     \ has_composition<L>>;\n  using id_t = long long;\n  template <class T, class\
@@ -324,8 +324,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy: []
-  timestamp: '2021-11-21 18:18:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-22 16:08:59+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/649.DynSeg.test.cpp
   - test/aoj/3024.DynSeg.test.cpp
