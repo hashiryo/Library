@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.test.cpp
     title: test/yosupo/line_add_get_min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Li-Chao-Tree
     links:
@@ -93,7 +93,7 @@ data:
   path: src/DataStructure/LiChaoTree.hpp
   requiredBy: []
   timestamp: '2021-11-21 22:42:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/line_add_get_min.test.cpp
   - test/yosupo/segment_add_get_min.test.cpp

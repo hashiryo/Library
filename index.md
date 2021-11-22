@@ -17,13 +17,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/DisjointSparseTable.hpp
       title: Disjoint-Sparse-Table
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
     - icon: ':question:'
@@ -38,13 +38,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -213,7 +213,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/String/SuffixArray.hpp
       title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
     - icon: ':heavy_check_mark:'
@@ -294,10 +294,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2256.test.cpp
       title: test/aoj/2256.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2270.DynSeg.test.cpp
       title: test/aoj/2270.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2270.Patricia.test.cpp
       title: test/aoj/2270.Patricia.test.cpp
     - icon: ':heavy_check_mark:'
@@ -336,7 +336,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2635.test.cpp
       title: test/aoj/2635.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2644.test.cpp
       title: test/aoj/2644.test.cpp
     - icon: ':heavy_check_mark:'
@@ -489,7 +489,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_I.DynSeg.test.cpp
       title: test/aoj/DSL_2_I.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
       title: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
     - icon: ':heavy_check_mark:'
@@ -640,7 +640,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/line_add_get_min.test.cpp
       title: test/yosupo/line_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
@@ -700,7 +700,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/scc.test.cpp
       title: test/yosupo/scc.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
@@ -807,7 +807,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.Patricia.test.cpp
       title: test/yukicoder/649.Patricia.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
     - icon: ':heavy_check_mark:'

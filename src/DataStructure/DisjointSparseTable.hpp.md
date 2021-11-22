@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2644.test.cpp
     title: test/aoj/2644.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
     title: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Disjoint-Sparse-Table
     links: []
@@ -51,7 +51,7 @@ data:
   path: src/DataStructure/DisjointSparseTable.hpp
   requiredBy: []
   timestamp: '2021-11-21 22:51:09+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2644.test.cpp
   - test/aoj/DSL_3_D.disjointsparsetable.test.cpp
