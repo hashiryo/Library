@@ -102,55 +102,55 @@ data:
     \ void set_val(node_id &t, std::size_t k, const T &x) {\n    if (!n[t].ch[0])\
     \ return cp_node(t), n[t].val = x, void();\n    if constexpr (dual<M>::value)\
     \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    set_val(n[t].ch[flg],\
-    \ flg ? k - n[n[t].ch[0]].size : k, x);\n  }\n  T get_val(node_id t, std::size_t\
-    \ k) {\n    if (!n[t].ch[0]) return n[t].val;\n    if constexpr (dual<M>::value)\
-    \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    return get_val(n[t].ch[flg],\
-    \ flg ? k - n[n[t].ch[0]].size : k);\n  }\n  T &at_val(node_id t, std::size_t\
-    \ k) {\n    if (!n[t].ch[0]) return n[t].val;\n    if constexpr (dual<M>::value)\
-    \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    return at_val(n[t].ch[flg],\
-    \ flg ? k - n[n[t].ch[0]].size : k);\n  }\n\n public:\n  WeightBalancedTree(node_id\
-    \ t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t n, T val) { root = build(0,\
-    \ n, val); }\n  WeightBalancedTree(T *bg, T *ed) { root = build(0, ed - bg, bg);\
-    \ }\n  WeightBalancedTree(std::vector<T> &ar)\n      : WeightBalancedTree(ar.data(),\
-    \ ar.data() + ar.size()){};\n  WBT &operator+=(WBT rhs) { return root = merge(root,\
-    \ rhs.root), *this; }\n  WBT operator+(WBT rhs) { return WBT(*this) += rhs; }\n\
-    \  std::pair<WBT, WBT> split(std::size_t k) {\n    auto [l, r] = split(root, k);\n\
-    \    return {WBT(l), WBT(r)};\n  }\n  std::tuple<WBT, WBT, WBT> split3(std::size_t\
-    \ a, std::size_t b) {\n    auto [tmp, r] = split(root, b);\n    auto [l, c] =\
-    \ split(tmp, a);\n    return {WBT(l), WBT(c), WBT(r)};\n  }\n  void push_back(T\
-    \ val) { n[ni] = Node{val, 1}, root = merge(root, ni++); }\n  void push_front(T\
-    \ val) { n[ni] = Node{val, 1}, root = merge(ni++, root); }\n  void insert(std::size_t\
-    \ k, T val) {\n    auto [l, r] = split(root, k);\n    n[ni] = Node{val, 1}, root\
-    \ = merge(merge(l, ni++), r);\n  }\n  T pop_back() {\n    assert(root);\n    auto\
-    \ [l, t] = split(root, size() - 1);\n    return root = l, n[t].val;\n  }\n  T\
-    \ pop_front() {\n    assert(root);\n    auto [t, r] = split(root, 1);\n    return\
-    \ root = r, n[t].val;\n  }\n  T erase(std::size_t k) {\n    assert(k < size());\n\
-    \    auto [l, tmp] = split(root, k);\n    auto [t, r] = split(tmp, 1);\n    return\
-    \ root = merge(l, r), n[t].val;\n  }\n  void set(std::size_t k, T val) { set_val(root,\
-    \ k, val); }\n  T get(std::size_t k) { return get_val(root, k); }\n  T &at(std::size_t\
-    \ k) {\n    static_assert(!semigroup<M>::value, \"\\\"at\\\" is not available\\\
-    n\");\n    return at_val(root, k);\n  }\n  template <class L = M,\n          \
-    \  typename std::enable_if_t<semigroup<L>::value> * = nullptr>\n  T operator[](std::size_t\
-    \ k) {\n    return get(k);\n  }\n  template <class L = M,\n            typename\
-    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](std::size_t\
-    \ k) {\n    return at(k);\n  }\n  T fold(std::size_t a, std::size_t b) {\n   \
-    \ static_assert(semigroup<M>::value, \"\\\"fold\\\" is not available\\n\");\n\
-    \    return fold(root, a, b, 0, size());\n  }\n  void apply(std::size_t a, std::size_t\
-    \ b, E x) {\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
-    n\");\n    apply(root, a, b, 0, size(), x);\n  }\n  std::size_t size() { return\
-    \ n[root].size; }\n  std::vector<T> dump() {\n    if (!root) return std::vector<T>();\n\
-    \    std::vector<T> ret(size());\n    return dump(root, ret.begin()), ret;\n \
-    \ }\n  void clear() { root = nullptr; }\n  static void reset() { ni = 1; }\n \
-    \ void rebuild() {\n    auto dmp = dump();\n    reset(), *this = WBT(dmp);\n \
-    \ }\n  static std::string which_available() {\n    std::string ret = \"\";\n \
-    \   if constexpr (semigroup<M>::value)\n      ret += \"\\\"fold\\\" \";\n    else\n\
-    \      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value) ret += \"\\\"\
-    apply\\\" \";\n    return ret;\n  }\n  static double percentage_used() { return\
-    \ 100. * ni / NODE_SIZE; }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title\
-    \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal\
-    \ {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct\
-    \ ModIntImpl {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static\
-    \ constexpr std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream\
+    \ flg ? k - n[n[t].ch[0]].size : k, x);\n    if constexpr (semigroup<M>::value)\
+    \ pushup(t);\n  }\n  T get_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0])\
+    \ return n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg =\
+    \ n[n[t].ch[0]].size <= k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
+    \ : k);\n  }\n  T &at_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0]) return\
+    \ n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size\
+    \ <= k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n\
+    \  }\n\n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
+    \ n, T val) { root = build(0, n, val); }\n  WeightBalancedTree(T *bg, T *ed) {\
+    \ root = build(0, ed - bg, bg); }\n  WeightBalancedTree(std::vector<T> &ar)\n\
+    \      : WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n  WBT &operator+=(WBT\
+    \ rhs) { return root = merge(root, rhs.root), *this; }\n  WBT operator+(WBT rhs)\
+    \ { return WBT(*this) += rhs; }\n  std::pair<WBT, WBT> split(std::size_t k) {\n\
+    \    auto [l, r] = split(root, k);\n    return {WBT(l), WBT(r)};\n  }\n  std::tuple<WBT,\
+    \ WBT, WBT> split3(std::size_t a, std::size_t b) {\n    auto [tmp, r] = split(root,\
+    \ b);\n    auto [l, c] = split(tmp, a);\n    return {WBT(l), WBT(c), WBT(r)};\n\
+    \  }\n  void push_back(T val) { n[ni] = Node{val, 1}, root = merge(root, ni++);\
+    \ }\n  void push_front(T val) { n[ni] = Node{val, 1}, root = merge(ni++, root);\
+    \ }\n  void insert(std::size_t k, T val) {\n    auto [l, r] = split(root, k);\n\
+    \    n[ni] = Node{val, 1}, root = merge(merge(l, ni++), r);\n  }\n  T pop_back()\
+    \ {\n    assert(root);\n    auto [l, t] = split(root, size() - 1);\n    return\
+    \ root = l, n[t].val;\n  }\n  T pop_front() {\n    assert(root);\n    auto [t,\
+    \ r] = split(root, 1);\n    return root = r, n[t].val;\n  }\n  T erase(std::size_t\
+    \ k) {\n    assert(k < size());\n    auto [l, tmp] = split(root, k);\n    auto\
+    \ [t, r] = split(tmp, 1);\n    return root = merge(l, r), n[t].val;\n  }\n  void\
+    \ set(std::size_t k, T val) { set_val(root, k, val); }\n  T get(std::size_t k)\
+    \ { return get_val(root, k); }\n  T &at(std::size_t k) {\n    static_assert(!semigroup<M>::value,\
+    \ \"\\\"at\\\" is not available\\n\");\n    return at_val(root, k);\n  }\n  template\
+    \ <class L = M,\n            typename std::enable_if_t<semigroup<L>::value> *\
+    \ = nullptr>\n  T operator[](std::size_t k) {\n    return get(k);\n  }\n  template\
+    \ <class L = M,\n            typename std::enable_if_t<!semigroup<L>::value> *\
+    \ = nullptr>\n  T &operator[](std::size_t k) {\n    return at(k);\n  }\n  T fold(std::size_t\
+    \ a, std::size_t b) {\n    static_assert(semigroup<M>::value, \"\\\"fold\\\" is\
+    \ not available\\n\");\n    return fold(root, a, b, 0, size());\n  }\n  void apply(std::size_t\
+    \ a, std::size_t b, E x) {\n    static_assert(dual<M>::value, \"\\\"apply\\\"\
+    \ is not available\\n\");\n    apply(root, a, b, 0, size(), x);\n  }\n  std::size_t\
+    \ size() { return n[root].size; }\n  std::vector<T> dump() {\n    if (!root) return\
+    \ std::vector<T>();\n    std::vector<T> ret(size());\n    return dump(root, ret.begin()),\
+    \ ret;\n  }\n  void clear() { root = nullptr; }\n  static void reset() { ni =\
+    \ 1; }\n  void rebuild() {\n    auto dmp = dump();\n    reset(), *this = WBT(dmp);\n\
+    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
+    \    if constexpr (semigroup<M>::value)\n      ret += \"\\\"fold\\\" \";\n   \
+    \ else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value) ret +=\
+    \ \"\\\"apply\\\" \";\n    return ret;\n  }\n  static double percentage_used()\
+    \ { return 100. * ni / NODE_SIZE; }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n\
+    \ * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace\
+    \ internal {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\n\
+    struct ModIntImpl {\n  static constexpr std::uint64_t modulo() { return mod; }\n\
+    \  static constexpr std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream\
     \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
     \  }\n};\n}  // namespace internal\ntemplate <std::uint64_t mod, std::uint64_t\
     \ prim_root = 0>\nclass ModInt\n    : public internal::ModIntImpl<mod, prim_root,\
@@ -241,7 +241,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-22 16:08:59+09:00'
+  timestamp: '2021-11-23 15:57:05+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.DynSeg.test.cpp
     title: test/yosupo/set_xor_min.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     links:
@@ -325,7 +325,7 @@ data:
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy: []
   timestamp: '2021-11-22 16:08:59+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/649.DynSeg.test.cpp
   - test/aoj/3024.DynSeg.test.cpp
