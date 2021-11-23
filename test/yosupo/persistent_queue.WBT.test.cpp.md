@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   _extendedRequiredBy: []
@@ -137,8 +137,8 @@ data:
     \ is not available\\n\");\n    apply(root, a, b, 0, size(), x);\n  }\n  std::size_t\
     \ size() { return n[root].size; }\n  std::vector<T> dump() {\n    if (!root) return\
     \ std::vector<T>();\n    std::vector<T> ret(size());\n    return dump(root, ret.begin()),\
-    \ ret;\n  }\n  void clear() { root = nullptr; }\n  static void reset() { ni =\
-    \ 1; }\n  void rebuild() {\n    auto dmp = dump();\n    reset(), *this = WBT(dmp);\n\
+    \ ret;\n  }\n  void clear() { root = 0; }\n  static void reset() { ni = 1; }\n\
+    \  void rebuild() {\n    auto dmp = dump();\n    reset(), *this = WBT(dmp);\n\
     \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
     \    if constexpr (semigroup<M>::value)\n      ret += \"\\\"fold\\\" \";\n   \
     \ else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value) ret +=\
@@ -161,7 +161,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 15:57:05+09:00'
+  timestamp: '2021-11-23 16:32:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp

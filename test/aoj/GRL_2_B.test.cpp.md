@@ -36,7 +36,7 @@ data:
     \ -par[root(u)]; }\n};\n#line 3 \"src/DataStructure/SkewHeap.hpp\"\n/**\n * @title\
     \ Skew-Heap\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief \u30DE\u30FC\
     \u30B8\u3067\u304D\u308B\u30D2\u30FC\u30D7\n * @brief top: O(1), pop, push, merge:\
-    \ O(logN)\n * @brief add(v): \u5168\u4F53\u306B\u4F5C\u7528\u7D20v\u3092\u9069\
+    \ O(logN)\n * @brief apply(v): \u5168\u4F53\u306B\u4F5C\u7528\u7D20v\u3092\u9069\
     \u7528\n */\n\n// BEGIN CUT HERE\n\n#define HAS_CHECK(member, Dummy)         \
     \                     \\\n  template <class tClass>                          \
     \           \\\n  struct has_##member {                                      \
@@ -122,7 +122,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_2_B.test.cpp
   requiredBy: []
-  timestamp: '2021-11-22 17:20:56+09:00'
+  timestamp: '2021-11-23 16:32:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_2_B.test.cpp
