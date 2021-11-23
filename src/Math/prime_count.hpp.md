@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc172_d.primecnt.test.cpp
+    title: test/atcoder/abc172_d.primecnt.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
   - icon: ':heavy_check_mark:'
@@ -15,16 +18,15 @@ data:
   attributes:
     document_title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
     links:
-    - https://atcoder.jp/contests/abc172/tasks/abc172_d
     - https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d
     - https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e
   bundledCode: "#line 2 \"src/Math/prime_count.hpp\"\n#include <bits/stdc++.h>\n/**\n\
     \ * @title \u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\
     \u95A2\u6570\u3084\u52A0\u6CD5\u7684\u95A2\u6570\u306E\u548C\u3082\u3042\u308A\
-    \n * @category \u6570\u5B66\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
-    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e\
-    \ (\u52A0\u6CD5\u7684\u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log\
-    \ N) d := degre of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
+    \n * @category \u6570\u5B66\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
+    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e (\u52A0\u6CD5\u7684\
+    \u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log N) d := degre\
+    \ of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
     \ N, const std::vector<T> &poly) {\n  const int sqrtN = std::sqrt(N), d = poly.size();\n\
     \  std::vector<int> primes;\n  std::vector<T> small(sqrtN + 1, 0), large(sqrtN\
     \ + 1, 0);\n  std::vector<std::vector<T>> s(d, std::vector<T>(sqrtN + 1)),\n \
@@ -78,10 +80,10 @@ data:
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u7D20\u6570\u30AB\
     \u30A6\u30F3\u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\u95A2\u6570\u3084\u52A0\u6CD5\
     \u7684\u95A2\u6570\u306E\u548C\u3082\u3042\u308A\n * @category \u6570\u5B66\n\
-    \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/abc172/tasks/abc172_d\n\
-    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e\
-    \ (\u52A0\u6CD5\u7684\u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log\
-    \ N) d := degre of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
+    \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
+    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e (\u52A0\u6CD5\u7684\
+    \u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log N) d := degre\
+    \ of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
     \ N, const std::vector<T> &poly) {\n  const int sqrtN = std::sqrt(N), d = poly.size();\n\
     \  std::vector<int> primes;\n  std::vector<T> small(sqrtN + 1, 0), large(sqrtN\
     \ + 1, 0);\n  std::vector<std::vector<T>> s(d, std::vector<T>(sqrtN + 1)),\n \
@@ -136,9 +138,10 @@ data:
   isVerificationFile: false
   path: src/Math/prime_count.hpp
   requiredBy: []
-  timestamp: '2021-02-10 00:07:41+09:00'
+  timestamp: '2021-11-23 22:15:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/atcoder/abc172_d.primecnt.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/counting_primes.test.cpp
 documentation_of: src/Math/prime_count.hpp

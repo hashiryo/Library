@@ -11,17 +11,18 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/counting_primes
+    PROBLEM: https://atcoder.jp/contests/abc172/tasks/abc172_d
     links:
-    - https://judge.yosupo.jp/problem/counting_primes
-  bundledCode: "#line 1 \"test/yosupo/counting_primes.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/counting_primes\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/prime_count.hpp\"\n/**\n * @title \u7D20\u6570\u30AB\u30A6\u30F3\
-    \u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\u95A2\u6570\u3084\u52A0\u6CD5\u7684\u95A2\
-    \u6570\u306E\u548C\u3082\u3042\u308A\n * @category \u6570\u5B66\n */\n\n// verify\u7528\
-    :\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e\
-    \ (\u52A0\u6CD5\u7684\u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log\
-    \ N) d := degre of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
+    - https://atcoder.jp/contests/abc172/tasks/abc172_d
+  bundledCode: "#line 1 \"test/atcoder/abc172_d.primecnt.test.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/abc172/tasks/abc172_d\"\n\n// O(N^(3/4)/log N)\n\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/prime_count.hpp\"\n/**\n * @title\
+    \ \u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\u95A2\
+    \u6570\u3084\u52A0\u6CD5\u7684\u95A2\u6570\u306E\u548C\u3082\u3042\u308A\n * @category\
+    \ \u6570\u5B66\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
+    // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e (\u52A0\u6CD5\u7684\
+    \u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log N) d := degre\
+    \ of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
     \ N, const std::vector<T> &poly) {\n  const int sqrtN = std::sqrt(N), d = poly.size();\n\
     \  std::vector<int> primes;\n  std::vector<T> small(sqrtN + 1, 0), large(sqrtN\
     \ + 1, 0);\n  std::vector<std::vector<T>> s(d, std::vector<T>(sqrtN + 1)),\n \
@@ -71,26 +72,29 @@ data:
     \ p = primes[i], q = p * p, nn = double(n) / q;\n      if (!nn) break;\n     \
     \ for (int e = 2; nn; nn = double(nn) / p, e++)\n        ret += rc(rc, nn, i +\
     \ 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n\
-    \  return dfs(dfs, N, 0, 1);\n}\n#line 4 \"test/yosupo/counting_primes.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  long long N;\n  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/prime_count.hpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long\
-    \ N;\n  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n}"
+    \  return dfs(dfs, N, 0, 1);\n}\n#line 7 \"test/atcoder/abc172_d.primecnt.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  auto f = [](long long p, short e) {\n    long long ret = e + 1;\n    while\
+    \ (e--) ret *= p;\n    return ret;\n  };\n  long long N;\n  cin >> N;\n  cout\
+    \ << (long long)multiplicative_sum<>(N, f, {0, 2}) << '\\n';\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc172/tasks/abc172_d\"\n\n\
+    // O(N^(3/4)/log N)\n\n#include <bits/stdc++.h>\n#include \"src/Math/prime_count.hpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  auto f = [](long long p, short e) {\n    long long ret = e + 1;\n    while\
+    \ (e--) ret *= p;\n    return ret;\n  };\n  long long N;\n  cin >> N;\n  cout\
+    \ << (long long)multiplicative_sum<>(N, f, {0, 2}) << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/prime_count.hpp
   isVerificationFile: true
-  path: test/yosupo/counting_primes.test.cpp
+  path: test/atcoder/abc172_d.primecnt.test.cpp
   requiredBy: []
   timestamp: '2021-11-23 22:15:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/counting_primes.test.cpp
+documentation_of: test/atcoder/abc172_d.primecnt.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/counting_primes.test.cpp
-- /verify/test/yosupo/counting_primes.test.cpp.html
-title: test/yosupo/counting_primes.test.cpp
+- /verify/test/atcoder/abc172_d.primecnt.test.cpp
+- /verify/test/atcoder/abc172_d.primecnt.test.cpp.html
+title: test/atcoder/abc172_d.primecnt.test.cpp
 ---

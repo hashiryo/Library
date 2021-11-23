@@ -557,6 +557,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc172_d.dujiao.test.cpp
+      title: test/atcoder/abc172_d.dujiao.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc172_d.numth.test.cpp
+      title: test/atcoder/abc172_d.numth.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc172_d.primecnt.test.cpp
+      title: test/atcoder/abc172_d.primecnt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/agc038_c.numth.test.cpp
+      title: test/atcoder/agc038_c.numth.test.cpp
   - name: test/yosupo
     pages:
     - icon: ':heavy_check_mark:'

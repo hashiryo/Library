@@ -67,6 +67,9 @@ data:
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/agc038_c.numth.test.cpp
+    title: test/atcoder/agc038_c.numth.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':heavy_check_mark:'
@@ -392,6 +395,7 @@ data:
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/DPL_5_E.test.cpp
   - test/aoj/0168.test.cpp
+  - test/atcoder/agc038_c.numth.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
