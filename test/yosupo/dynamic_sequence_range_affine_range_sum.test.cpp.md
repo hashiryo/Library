@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
     title: "Splay\u6728"
   - icon: ':question:'
@@ -35,8 +35,8 @@ data:
     \u3069\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\u30B5\u30A4\
     \u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\u6570\
     \u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n\
-    // bgIN CUT HERE\n#define HAS_CHECK(member, Dummy)                           \
-    \   \\\n  template <class T>                                          \\\n  struct\
+    // BEGIN CUT HERE\n#define HAS_CHECK(member, Dummy)                          \
+    \    \\\n  template <class T>                                          \\\n  struct\
     \ has_##member {                                       \\\n    template <class\
     \ U, Dummy>                                 \\\n    static std::true_type check(U\
     \ *);                         \\\n    static std::false_type check(...);     \
@@ -126,7 +126,7 @@ data:
     \ { root = build(0, n, val); }\n  SplayTree(T *bg, T *ed) { root = build(bg, ed);\
     \ }\n  SplayTree(const std::vector<T> &ar)\n      : SplayTree(ar.data(), ar.data()\
     \ + ar.size()) {}\n  std::vector<T> dump() {\n    std::vector<T> ret(size());\n\
-    \    return dump(ret.bgin(), root), ret;\n  }\n  static std::string which_available()\
+    \    return dump(ret.begin(), root), ret;\n  }\n  static std::string which_available()\
     \ {\n    std::string ret = \"\";\n    if constexpr (semigroup<M>::value)\n   \
     \   ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if\
     \ constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    if constexpr (reversible)\
@@ -275,7 +275,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-11-22 16:08:59+09:00'
+  timestamp: '2021-11-23 15:43:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

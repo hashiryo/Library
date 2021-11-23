@@ -6,24 +6,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1508.SplayTree.test.cpp
     title: test/aoj/1508.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_2_D.SplayTree.test.cpp
     title: test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.SplayTree.test.cpp
     title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_B.SplayTree.test.cpp
     title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Splay\u6728"
     links: []
@@ -40,7 +40,7 @@ data:
     \u30E1\u30E2\u30EA\u3068\u6642\u9593\u3092\u4F7F\u3046\u3051\u3069\uFF09\n * \u5404\
     \u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\
     \u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\
-    \u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n// bgIN CUT HERE\n\
+    \u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n// BEGIN CUT HERE\n\
     #define HAS_CHECK(member, Dummy)                              \\\n  template <class\
     \ T>                                          \\\n  struct has_##member {    \
     \                                   \\\n    template <class U, Dummy>        \
@@ -132,7 +132,7 @@ data:
     \ { root = build(0, n, val); }\n  SplayTree(T *bg, T *ed) { root = build(bg, ed);\
     \ }\n  SplayTree(const std::vector<T> &ar)\n      : SplayTree(ar.data(), ar.data()\
     \ + ar.size()) {}\n  std::vector<T> dump() {\n    std::vector<T> ret(size());\n\
-    \    return dump(ret.bgin(), root), ret;\n  }\n  static std::string which_available()\
+    \    return dump(ret.begin(), root), ret;\n  }\n  static std::string which_available()\
     \ {\n    std::string ret = \"\";\n    if constexpr (semigroup<M>::value)\n   \
     \   ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if\
     \ constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    if constexpr (reversible)\
@@ -188,11 +188,11 @@ data:
     \u3092\u4F7F\u3046\u3051\u3069\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\
     \u6728\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\
     \u3067mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\
-    \u305B\u308B\n */\n\n// bgIN CUT HERE\n#define HAS_CHECK(member, Dummy)      \
-    \                        \\\n  template <class T>                            \
-    \              \\\n  struct has_##member {                                   \
-    \    \\\n    template <class U, Dummy>                                 \\\n  \
-    \  static std::true_type check(U *);                         \\\n    static std::false_type\
+    \u305B\u308B\n */\n\n// BEGIN CUT HERE\n#define HAS_CHECK(member, Dummy)     \
+    \                         \\\n  template <class T>                           \
+    \               \\\n  struct has_##member {                                  \
+    \     \\\n    template <class U, Dummy>                                 \\\n \
+    \   static std::true_type check(U *);                         \\\n    static std::false_type\
     \ check(...);                        \\\n    static T *mClass;               \
     \                          \\\n    static const bool value = decltype(check(mClass))::value;\
     \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
@@ -279,7 +279,7 @@ data:
     \ { root = build(0, n, val); }\n  SplayTree(T *bg, T *ed) { root = build(bg, ed);\
     \ }\n  SplayTree(const std::vector<T> &ar)\n      : SplayTree(ar.data(), ar.data()\
     \ + ar.size()) {}\n  std::vector<T> dump() {\n    std::vector<T> ret(size());\n\
-    \    return dump(ret.bgin(), root), ret;\n  }\n  static std::string which_available()\
+    \    return dump(ret.begin(), root), ret;\n  }\n  static std::string which_available()\
     \ {\n    std::string ret = \"\";\n    if constexpr (semigroup<M>::value)\n   \
     \   ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if\
     \ constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    if constexpr (reversible)\
@@ -326,8 +326,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
-  timestamp: '2021-11-22 16:08:59+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2021-11-23 15:43:58+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/ITP2_4_B.SplayTree.test.cpp
   - test/aoj/1508.SplayTree.test.cpp

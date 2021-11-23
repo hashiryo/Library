@@ -6,21 +6,21 @@ data:
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
+    PROBLEM: https://judge.yosupo.jp/problem/static_range_frequency
     links:
-    - https://judge.yosupo.jp/problem/range_kth_smallest
-  bundledCode: "#line 1 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/DataStructure/WaveletMatrix.hpp\"\n/**\n * @title Wavelet\u884C\u5217\
-    \n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u4E8B\u524D\u306B\u5EA7\u5727\
-    \u3057\u3066\u4F7F\u3046\n */\n\n// BEGIN CUT HERE\n\nstruct WaveletMatrix {\n\
-    \  struct SuccinctIndexableDictionary {\n    std::size_t length;\n    std::size_t\
-    \ blocks;\n    std::vector<unsigned> bit, sum;\n    SuccinctIndexableDictionary()\
+    - https://judge.yosupo.jp/problem/static_range_frequency
+  bundledCode: "#line 1 \"test/yosupo/static_range_frequency.WM.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/static_range_frequency\"\n#include\
+    \ <bits/stdc++.h>\n#line 3 \"src/DataStructure/WaveletMatrix.hpp\"\n/**\n * @title\
+    \ Wavelet\u884C\u5217\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u4E8B\u524D\
+    \u306B\u5EA7\u5727\u3057\u3066\u4F7F\u3046\n */\n\n// BEGIN CUT HERE\n\nstruct\
+    \ WaveletMatrix {\n  struct SuccinctIndexableDictionary {\n    std::size_t length;\n\
+    \    std::size_t blocks;\n    std::vector<unsigned> bit, sum;\n    SuccinctIndexableDictionary()\
     \ = default;\n    SuccinctIndexableDictionary(std::size_t length)\n        : length(length),\
     \ blocks((length + 31) >> 5) {\n      bit.assign(blocks, 0U);\n      sum.assign(blocks,\
     \ 0U);\n    }\n    void set(int k) { bit[k >> 5] |= 1U << (k & 31); }\n    void\
@@ -70,35 +70,37 @@ data:
     \ == 0 ? -1 : kth_smallest(l, r, cnt - 1);\n  }\n  // std::min v[i] s.t. (l <=\
     \ i < r) && (lower <= v[i])\n  int next_value(int l, int r, int lower) {\n   \
     \ int cnt = range_freq(l, r, lower);\n    return cnt == r - l ? -1 : kth_smallest(l,\
-    \ r, cnt);\n  }\n};\n#line 4 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\n\
+    \ r, cnt);\n  }\n};\n#line 4 \"test/yosupo/static_range_frequency.WM.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
+    \ i++) cin >> a[i];\n  vector<int> v(a);\n  sort(v.begin(), v.end());\n  v.erase(unique(v.begin(),\
+    \ v.end()), v.end());\n  for (int i = 0; i < N; i++)\n    a[i] = lower_bound(v.begin(),\
+    \ v.end(), a[i]) - v.begin();\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int\
+    \ l, r, x;\n    cin >> l >> r >> x;\n    x = lower_bound(v.begin(), v.end(), x)\
+    \ - v.begin();\n    cout << wm.rank(x, r) - wm.rank(x, l) << \"\\n\";\n  }\n \
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_frequency\"\
+    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\n\
     using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
     \ i++) cin >> a[i];\n  vector<int> v(a);\n  sort(v.begin(), v.end());\n  v.erase(unique(v.begin(),\
     \ v.end()), v.end());\n  for (int i = 0; i < N; i++)\n    a[i] = lower_bound(v.begin(),\
     \ v.end(), a[i]) - v.begin();\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int\
-    \ l, r, k;\n    cin >> l >> r >> k;\n    cout << v[wm.kth_smallest(l, r, k)] <<\
-    \ \"\\n\";\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
-    #include <bits/stdc++.h>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  vector<int> v(a);\n  sort(v.begin(), v.end());\n  v.erase(unique(v.begin(),\
-    \ v.end()), v.end());\n  for (int i = 0; i < N; i++)\n    a[i] = lower_bound(v.begin(),\
-    \ v.end(), a[i]) - v.begin();\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int\
-    \ l, r, k;\n    cin >> l >> r >> k;\n    cout << v[wm.kth_smallest(l, r, k)] <<\
-    \ \"\\n\";\n  }\n  return 0;\n}"
+    \ l, r, x;\n    cin >> l >> r >> x;\n    x = lower_bound(v.begin(), v.end(), x)\
+    \ - v.begin();\n    cout << wm.rank(x, r) - wm.rank(x, l) << \"\\n\";\n  }\n \
+    \ return 0;\n}"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
   isVerificationFile: true
-  path: test/yosupo/range_kth_smallest.WM.test.cpp
+  path: test/yosupo/static_range_frequency.WM.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-23 15:43:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/range_kth_smallest.WM.test.cpp
+documentation_of: test/yosupo/static_range_frequency.WM.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/range_kth_smallest.WM.test.cpp
-- /verify/test/yosupo/range_kth_smallest.WM.test.cpp.html
-title: test/yosupo/range_kth_smallest.WM.test.cpp
+- /verify/test/yosupo/static_range_frequency.WM.test.cpp
+- /verify/test/yosupo/static_range_frequency.WM.test.cpp.html
+title: test/yosupo/static_range_frequency.WM.test.cpp
 ---

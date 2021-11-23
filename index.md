@@ -59,7 +59,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SparseTable.hpp
       title: "Sparse-Table(\u533A\u9593min)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SplayTree.hpp
       title: "Splay\u6728"
     - icon: ':heavy_check_mark:'
@@ -71,7 +71,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':x:'
@@ -513,16 +513,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_B.test.cpp
       title: test/aoj/GRL_6_B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.SplayTree.test.cpp
       title: test/aoj/ITP2_2_D.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.SplayTree.test.cpp
       title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -703,7 +703,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/set_xor_min.DynSeg.test.cpp
       title: test/yosupo/set_xor_min.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -718,6 +718,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_of_FPS.test.cpp
       title: test/yosupo/sqrt_of_FPS.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/static_range_frequency.WM.test.cpp
+      title: test/yosupo/static_range_frequency.WM.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_inversions_query.mo.test.cpp
       title: test/yosupo/static_range_inversions_query.mo.test.cpp
