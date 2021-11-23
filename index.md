@@ -71,7 +71,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -667,7 +667,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/partition.test.cpp
       title: test/yosupo/partition.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_queue.WBT.test.cpp
       title: test/yosupo/persistent_queue.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -718,7 +718,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_of_FPS.test.cpp
       title: test/yosupo/sqrt_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_frequency.WM.test.cpp
       title: test/yosupo/static_range_frequency.WM.test.cpp
     - icon: ':heavy_check_mark:'

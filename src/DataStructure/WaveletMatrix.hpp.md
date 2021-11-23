@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_kth_smallest.WM.test.cpp
     title: test/yosupo/range_kth_smallest.WM.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_frequency.WM.test.cpp
     title: test/yosupo/static_range_frequency.WM.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,9 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/919.WM.test.cpp
     title: test/yukicoder/919.WM.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Wavelet\u884C\u5217"
     links: []
@@ -142,7 +142,7 @@ data:
   path: src/DataStructure/WaveletMatrix.hpp
   requiredBy: []
   timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/728.WM.test.cpp
   - test/yukicoder/919.WM.test.cpp

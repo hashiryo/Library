@@ -6,9 +6,9 @@ data:
     title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_queue
@@ -145,24 +145,26 @@ data:
     \ \"\\\"apply\\\" \";\n    return ret;\n  }\n  static double percentage_used()\
     \ { return 100. * ni / NODE_SIZE; }\n};\n#line 5 \"test/yosupo/persistent_queue.WBT.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int Q;\n  cin >> Q;\n  vector<WeightBalancedTree<int>> S(Q + 1);\n  for (int\
-    \ i = 1; i <= Q; i++) {\n    int op, t;\n    cin >> op >> t;\n    S[i] = S[++t];\n\
-    \    if (op) {\n      cout << S[i].pop_front() << endl;\n    } else {\n      int\
-    \ x;\n      cin >> x;\n      S[i].push_back(x);\n    }\n  }\n  return 0;\n}\n"
+    \  int Q;\n  cin >> Q;\n  vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n\
+    \  for (int i = 1; i <= Q; i++) {\n    int op, t;\n    cin >> op >> t;\n    S[i]\
+    \ = S[++t];\n    if (op) {\n      cout << S[i].pop_front() << endl;\n    } else\
+    \ {\n      int x;\n      cin >> x;\n      S[i].push_back(x);\n    }\n  }\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_queue\"\n//\
     \ \u6C38\u7D9A\u6027\u306Everify\n#include <bits/stdc++.h>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int Q;\n  cin >> Q;\n  vector<WeightBalancedTree<int>> S(Q + 1);\n  for (int\
-    \ i = 1; i <= Q; i++) {\n    int op, t;\n    cin >> op >> t;\n    S[i] = S[++t];\n\
-    \    if (op) {\n      cout << S[i].pop_front() << endl;\n    } else {\n      int\
-    \ x;\n      cin >> x;\n      S[i].push_back(x);\n    }\n  }\n  return 0;\n}"
+    \  int Q;\n  cin >> Q;\n  vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n\
+    \  for (int i = 1; i <= Q; i++) {\n    int op, t;\n    cin >> op >> t;\n    S[i]\
+    \ = S[++t];\n    if (op) {\n      cout << S[i].pop_front() << endl;\n    } else\
+    \ {\n      int x;\n      cin >> x;\n      S[i].push_back(x);\n    }\n  }\n  return\
+    \ 0;\n}"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 16:32:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-11-23 21:13:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp
 layout: document

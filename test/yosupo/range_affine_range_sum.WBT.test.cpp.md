@@ -217,10 +217,11 @@ data:
     \ E &l, const E &r) {\n    return make_pair(r.first * l.first, r.first * l.second\
     \ + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  Mint v[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> v[i];\n  WeightBalancedTree<RaffineQ_RsumQ> wbt(v, v + N);\n  while (Q--)\
-    \ {\n    bool op;\n    int l, r;\n    cin >> op >> l >> r;\n    if (op) {\n  \
-    \    cout << wbt.fold(l, r) << endl;\n    } else {\n      Mint b, c;\n      cin\
-    \ >> b >> c;\n      wbt.apply(l, r, {b, c});\n    }\n  }\n  return 0;\n}\n"
+    \ >> v[i];\n  using WBT = WeightBalancedTree<RaffineQ_RsumQ>;\n  WBT wbt(v, v\
+    \ + N);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op >> l >> r;\n\
+    \    if (op) {\n      cout << wbt.fold(l, r) << endl;\n    } else {\n      Mint\
+    \ b, c;\n      cin >> b >> c;\n      wbt.apply(l, r, {b, c});\n    }\n    if (WBT::percentage_used()\
+    \ > 97) wbt.rebuild();\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n//\u9045\u5EF6\u4F1D\u642C\u306Everify\n#include <bits/stdc++.h>\n\n#include\
     \ \"src/DataStructure/WeightBalancedTree.hpp\"\n#include \"src/Math/ModInt.hpp\"\
@@ -231,17 +232,18 @@ data:
     \ E &l, const E &r) {\n    return make_pair(r.first * l.first, r.first * l.second\
     \ + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  Mint v[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> v[i];\n  WeightBalancedTree<RaffineQ_RsumQ> wbt(v, v + N);\n  while (Q--)\
-    \ {\n    bool op;\n    int l, r;\n    cin >> op >> l >> r;\n    if (op) {\n  \
-    \    cout << wbt.fold(l, r) << endl;\n    } else {\n      Mint b, c;\n      cin\
-    \ >> b >> c;\n      wbt.apply(l, r, {b, c});\n    }\n  }\n  return 0;\n}"
+    \ >> v[i];\n  using WBT = WeightBalancedTree<RaffineQ_RsumQ>;\n  WBT wbt(v, v\
+    \ + N);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op >> l >> r;\n\
+    \    if (op) {\n      cout << wbt.fold(l, r) << endl;\n    } else {\n      Mint\
+    \ b, c;\n      cin >> b >> c;\n      wbt.apply(l, r, {b, c});\n    }\n    if (WBT::percentage_used()\
+    \ > 97) wbt.rebuild();\n  }\n  return 0;\n}"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   - src/Math/ModInt.hpp
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 16:32:39+09:00'
+  timestamp: '2021-11-23 21:13:19+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

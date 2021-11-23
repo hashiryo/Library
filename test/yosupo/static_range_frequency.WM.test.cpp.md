@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_frequency
@@ -72,24 +72,28 @@ data:
     \ int cnt = range_freq(l, r, lower);\n    return cnt == r - l ? -1 : kth_smallest(l,\
     \ r, cnt);\n  }\n};\n#line 4 \"test/yosupo/static_range_frequency.WM.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, x;\n\
-    \    cin >> l >> r >> x;\n    cout << wm.rank(x, r) - wm.rank(x, l) << \"\\n\"\
-    ;\n  }\n  return 0;\n}\n"
+    \  int N, Q;\n  cin >> N >> Q;\n  if (!N)\n    while (Q--) {\n      int l, r,\
+    \ x;\n      cin >> l >> r >> x;\n      cout << 0 << '\\n';\n    }\n  else {\n\
+    \    vector<int> a(N);\n    for (int i = 0; i < N; i++) cin >> a[i];\n    WaveletMatrix\
+    \ wm(a);\n    while (Q--) {\n      int l, r, x;\n      cin >> l >> r >> x;\n \
+    \     cout << wm.rank(x, r) - wm.rank(x, l) << \"\\n\";\n    }\n  }\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_frequency\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\n\
     using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, x;\n\
-    \    cin >> l >> r >> x;\n    cout << wm.rank(x, r) - wm.rank(x, l) << \"\\n\"\
-    ;\n  }\n  return 0;\n}"
+    \  int N, Q;\n  cin >> N >> Q;\n  if (!N)\n    while (Q--) {\n      int l, r,\
+    \ x;\n      cin >> l >> r >> x;\n      cout << 0 << '\\n';\n    }\n  else {\n\
+    \    vector<int> a(N);\n    for (int i = 0; i < N; i++) cin >> a[i];\n    WaveletMatrix\
+    \ wm(a);\n    while (Q--) {\n      int l, r, x;\n      cin >> l >> r >> x;\n \
+    \     cout << wm.rank(x, r) - wm.rank(x, l) << \"\\n\";\n    }\n  }\n  return\
+    \ 0;\n}"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
   isVerificationFile: true
   path: test/yosupo/static_range_frequency.WM.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 16:32:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-11-23 21:13:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/static_range_frequency.WM.test.cpp
 layout: document

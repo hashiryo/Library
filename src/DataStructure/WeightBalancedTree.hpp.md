@@ -9,7 +9,7 @@ data:
   - icon: ':x:'
     path: test/aoj/3024.WBT.test.cpp
     title: test/aoj/3024.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_queue.WBT.test.cpp
     title: test/yosupo/persistent_queue.WBT.test.cpp
   - icon: ':x:'
