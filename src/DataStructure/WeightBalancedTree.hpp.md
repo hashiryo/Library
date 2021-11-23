@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1508.WBT.test.cpp
     title: test/aoj/1508.WBT.test.cpp
   - icon: ':x:'
@@ -105,15 +105,15 @@ data:
     \ l, r, m, br, x);\n    if constexpr (semigroup<M>::value) pushup(t);\n  }\n \
     \ void set_val(node_id &t, std::size_t k, const T &x) {\n    if (!n[t].ch[0])\
     \ return cp_node(t), n[t].val = x, void();\n    if constexpr (dual<M>::value)\
-    \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    set_val(n[t].ch[flg],\
+    \ eval(t);\n    bool flg = n[n[t].ch[0]].size < k;\n    set_val(n[t].ch[flg],\
     \ flg ? k - n[n[t].ch[0]].size : k, x);\n    if constexpr (semigroup<M>::value)\
     \ pushup(t);\n  }\n  T get_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0])\
     \ return n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg =\
-    \ n[n[t].ch[0]].size <= k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
+    \ n[n[t].ch[0]].size < k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
     \ : k);\n  }\n  T &at_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0]) return\
     \ n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size\
-    \ <= k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n\
-    \  }\n\n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
+    \ < k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n \
+    \ }\n\n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
     \ n, T val) { root = build(0, n, val); }\n  WeightBalancedTree(T *bg, T *ed) {\
     \ root = build(0, ed - bg, bg); }\n  WeightBalancedTree(std::vector<T> &ar)\n\
     \      : WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n  WBT &operator+=(WBT\
@@ -232,15 +232,15 @@ data:
     \ l, r, m, br, x);\n    if constexpr (semigroup<M>::value) pushup(t);\n  }\n \
     \ void set_val(node_id &t, std::size_t k, const T &x) {\n    if (!n[t].ch[0])\
     \ return cp_node(t), n[t].val = x, void();\n    if constexpr (dual<M>::value)\
-    \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    set_val(n[t].ch[flg],\
+    \ eval(t);\n    bool flg = n[n[t].ch[0]].size < k;\n    set_val(n[t].ch[flg],\
     \ flg ? k - n[n[t].ch[0]].size : k, x);\n    if constexpr (semigroup<M>::value)\
     \ pushup(t);\n  }\n  T get_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0])\
     \ return n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg =\
-    \ n[n[t].ch[0]].size <= k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
+    \ n[n[t].ch[0]].size < k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
     \ : k);\n  }\n  T &at_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0]) return\
     \ n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size\
-    \ <= k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n\
-    \  }\n\n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
+    \ < k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n \
+    \ }\n\n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
     \ n, T val) { root = build(0, n, val); }\n  WeightBalancedTree(T *bg, T *ed) {\
     \ root = build(0, ed - bg, bg); }\n  WeightBalancedTree(std::vector<T> &ar)\n\
     \      : WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n  WBT &operator+=(WBT\
@@ -282,7 +282,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/WeightBalancedTree.hpp
   requiredBy: []
-  timestamp: '2021-11-23 16:32:39+09:00'
+  timestamp: '2021-11-24 01:12:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3024.WBT.test.cpp

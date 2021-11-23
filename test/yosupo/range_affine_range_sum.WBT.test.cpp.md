@@ -101,15 +101,15 @@ data:
     \ l, r, m, br, x);\n    if constexpr (semigroup<M>::value) pushup(t);\n  }\n \
     \ void set_val(node_id &t, std::size_t k, const T &x) {\n    if (!n[t].ch[0])\
     \ return cp_node(t), n[t].val = x, void();\n    if constexpr (dual<M>::value)\
-    \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    set_val(n[t].ch[flg],\
+    \ eval(t);\n    bool flg = n[n[t].ch[0]].size < k;\n    set_val(n[t].ch[flg],\
     \ flg ? k - n[n[t].ch[0]].size : k, x);\n    if constexpr (semigroup<M>::value)\
     \ pushup(t);\n  }\n  T get_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0])\
     \ return n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg =\
-    \ n[n[t].ch[0]].size <= k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
+    \ n[n[t].ch[0]].size < k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
     \ : k);\n  }\n  T &at_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0]) return\
     \ n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size\
-    \ <= k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n\
-    \  }\n\n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
+    \ < k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n \
+    \ }\n\n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
     \ n, T val) { root = build(0, n, val); }\n  WeightBalancedTree(T *bg, T *ed) {\
     \ root = build(0, ed - bg, bg); }\n  WeightBalancedTree(std::vector<T> &ar)\n\
     \      : WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n  WBT &operator+=(WBT\
@@ -243,7 +243,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 21:13:19+09:00'
+  timestamp: '2021-11-24 01:12:41+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp
