@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   _extendedRequiredBy: []
@@ -96,16 +96,17 @@ data:
     \ bl && br <= r) return propagate(t, x), void();\n    eval(t);\n    std::size_t\
     \ m = bl + n[n[t].ch[0]].size;\n    apply(n[t].ch[0], l, r, bl, m, x), apply(n[t].ch[1],\
     \ l, r, m, br, x);\n    if constexpr (semigroup<M>::value) pushup(t);\n  }\n \
-    \ void set_val(node_id &t, std::size_t k, const T &x) {\n    if (!n[t].ch[0])\
-    \ return cp_node(t), n[t].val = x, void();\n    if constexpr (dual<M>::value)\
+    \ void set_val(node_id &t, std::size_t k, const T &x) {\n    cp_node(t);\n   \
+    \ if (!n[t].ch[0]) return n[t].val = x, void();\n    if constexpr (dual<M>::value)\
     \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    set_val(n[t].ch[flg],\
-    \ flg ? k - n[n[t].ch[0]].size : k, x), pushup(t);\n  }\n  T get_val(node_id t,\
-    \ std::size_t k) {\n    if (!n[t].ch[0]) return n[t].val;\n    if constexpr (dual<M>::value)\
-    \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    return get_val(n[t].ch[flg],\
-    \ flg ? k - n[n[t].ch[0]].size : k);\n  }\n  T &at_val(node_id t, std::size_t\
-    \ k) {\n    if (!n[t].ch[0]) return n[t].val;\n    if constexpr (dual<M>::value)\
-    \ eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    return at_val(n[t].ch[flg],\
-    \ flg ? k - n[n[t].ch[0]].size : k);\n  }\n\n public:\n  WeightBalancedTree(node_id\
+    \ flg ? k - n[n[t].ch[0]].size : k, x);\n    if constexpr (semigroup<M>::value)\
+    \ pushup(t);\n  }\n  T get_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0])\
+    \ return n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n    bool flg =\
+    \ n[n[t].ch[0]].size <= k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
+    \ : k);\n  }\n  T &at_val(node_id t, std::size_t k) {\n    cp_node(t);\n    if\
+    \ (!n[t].ch[0]) return n[t].val;\n    if constexpr (dual<M>::value) eval(t);\n\
+    \    bool flg = n[n[t].ch[0]].size <= k;\n    return at_val(n[t].ch[flg], flg\
+    \ ? k - n[n[t].ch[0]].size : k);\n  }\n\n public:\n  WeightBalancedTree(node_id\
     \ t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t n, T val) { root = build(0,\
     \ n, val); }\n  WeightBalancedTree(T *bg, T *ed) { root = build(0, ed - bg, bg);\
     \ }\n  WeightBalancedTree(std::vector<T> &ar)\n      : WeightBalancedTree(ar.data(),\
@@ -162,7 +163,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-24 14:54:06+09:00'
+  timestamp: '2021-11-24 17:14:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp

@@ -74,7 +74,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WeightBalancedTree.hpp
       title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   - name: src/Geometry
@@ -360,7 +360,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3024.Patricia.test.cpp
       title: test/aoj/3024.Patricia.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3024.WBT.test.cpp
       title: test/aoj/3024.WBT.test.cpp
     - icon: ':heavy_check_mark:'
