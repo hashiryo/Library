@@ -96,7 +96,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "HL\u5206\u89E3"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/LinearSystemIncidence.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
     - icon: ':heavy_check_mark:'
@@ -569,6 +569,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/arc106_b.test.cpp
+      title: test/atcoder/arc106_b.test.cpp
   - name: test/yosupo
     pages:
     - icon: ':heavy_check_mark:'

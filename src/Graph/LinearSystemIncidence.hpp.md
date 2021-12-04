@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/arc106_b.test.cpp
+    title: test/atcoder/arc106_b.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
     links:
@@ -54,8 +57,9 @@ data:
   path: src/Graph/LinearSystemIncidence.hpp
   requiredBy: []
   timestamp: '2021-11-15 18:56:51+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/atcoder/arc106_b.test.cpp
 documentation_of: src/Graph/LinearSystemIncidence.hpp
 layout: document
 redirect_from:

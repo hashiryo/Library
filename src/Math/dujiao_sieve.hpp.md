@@ -72,8 +72,8 @@ data:
   timestamp: '2021-11-23 22:15:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc172_d.dujiao.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
+  - test/atcoder/abc172_d.dujiao.test.cpp
 documentation_of: src/Math/dujiao_sieve.hpp
 layout: document
 redirect_from:
