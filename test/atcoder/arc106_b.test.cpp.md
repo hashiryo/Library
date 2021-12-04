@@ -35,28 +35,29 @@ data:
     \  }\n};\n#line 5 \"test/atcoder/arc106_b.test.cpp\"\nusing namespace std;\n\n\
     // \u89E3\u7121\u3057\u306E\u5224\u5B9A\u306Everify\n\nsigned main() {\n  cin.tie(0);\n\
     \  ios::sync_with_stdio(false);\n  int N, M;\n  cin >> N >> M;\n  LinearSystemIncidence<long\
-    \ long> graph(N);\n  vector<long long> a(N), b(N);\n  for (int i = 0; i < N; i++)\
-    \ cin >> a[i];\n  for (int i = 0; i < N; i++) cin >> b[i], b[i] -= a[i];\n  for\
-    \ (int i = 0; i < M; i++) {\n    int c, d;\n    cin >> c >> d;\n    graph.add_edge(--c,\
-    \ --d);\n  }\n  if (M)\n    cout << (graph.solve(b).empty() ? \"No\" : \"Yes\"\
-    ) << '\\n';\n  else\n    cout << (b[0] ? \"No\" : \"Yes\") << '\\n';\n  return\
-    \ 0;\n}\n"
+    \ long> graph(N);\n  vector<long long> a(N);\n  for (int i = 0; i < N; i++) cin\
+    \ >> a[i];\n  for (int i = 0, b; i < N; i++) cin >> b, a[i] -= b;\n  for (int\
+    \ i = 0, c, d; i < M; i++) cin >> c >> d, graph.add_edge(--c, --d);\n  if (M)\n\
+    \    cout << (graph.solve(a).empty() ? \"No\" : \"Yes\") << '\\n';\n  else\n \
+    \   cout << (all_of(begin(a), end(a), [](auto t) { return !t; }) ? \"Yes\" : \"\
+    No\")\n         << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc106/tasks/arc106_b\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Graph/LinearSystemIncidence.hpp\"\nusing\
     \ namespace std;\n\n// \u89E3\u7121\u3057\u306E\u5224\u5B9A\u306Everify\n\nsigned\
     \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, M;\n  cin\
     \ >> N >> M;\n  LinearSystemIncidence<long long> graph(N);\n  vector<long long>\
-    \ a(N), b(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  for (int i = 0; i\
-    \ < N; i++) cin >> b[i], b[i] -= a[i];\n  for (int i = 0; i < M; i++) {\n    int\
-    \ c, d;\n    cin >> c >> d;\n    graph.add_edge(--c, --d);\n  }\n  if (M)\n  \
-    \  cout << (graph.solve(b).empty() ? \"No\" : \"Yes\") << '\\n';\n  else\n   \
-    \ cout << (b[0] ? \"No\" : \"Yes\") << '\\n';\n  return 0;\n}"
+    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  for (int i = 0, b; i <\
+    \ N; i++) cin >> b, a[i] -= b;\n  for (int i = 0, c, d; i < M; i++) cin >> c >>\
+    \ d, graph.add_edge(--c, --d);\n  if (M)\n    cout << (graph.solve(a).empty()\
+    \ ? \"No\" : \"Yes\") << '\\n';\n  else\n    cout << (all_of(begin(a), end(a),\
+    \ [](auto t) { return !t; }) ? \"Yes\" : \"No\")\n         << '\\n';\n  return\
+    \ 0;\n}"
   dependsOn:
   - src/Graph/LinearSystemIncidence.hpp
   isVerificationFile: true
   path: test/atcoder/arc106_b.test.cpp
   requiredBy: []
-  timestamp: '2021-12-04 18:40:33+09:00'
+  timestamp: '2021-12-05 00:18:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc106_b.test.cpp
