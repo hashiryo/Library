@@ -6,6 +6,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Algorithm/Mo.hpp
       title: Mo
+    - icon: ':heavy_check_mark:'
+      path: src/Algorithm/min_Lconvex.hpp
+      title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
+        \u30B0\u6CD5)"
   - name: src/DataStructure
     pages:
     - icon: ':heavy_check_mark:'
@@ -566,6 +570,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.primecnt.test.cpp
       title: test/atcoder/abc172_d.primecnt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/agc018_c.test.cpp
+      title: test/atcoder/agc018_c.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
