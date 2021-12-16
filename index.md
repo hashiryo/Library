@@ -9,14 +9,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Algorithm/Mo.hpp
       title: Mo
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Algorithm/PushRelabel.hpp
       title: PushRelabel(Gap)
     - icon: ':heavy_check_mark:'
       path: src/Algorithm/min_Lconvex.hpp
       title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
         \u30B0\u6CD5)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Algorithm/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
@@ -124,10 +124,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/MaxClique.hpp
       title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/MaxFlow.hpp
       title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/MaxFlowLowerBound.hpp
       title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\
         \u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
@@ -294,7 +294,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1615.Dinic.test.cpp
       title: test/aoj/1615.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1615.PushRelabel.test.cpp
       title: test/aoj/1615.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -327,7 +327,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.Dinic.test.cpp
       title: test/aoj/2313.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -378,7 +378,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2803.Dinic.test.cpp
       title: test/aoj/2803.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2803.PushRelabel.test.cpp
       title: test/aoj/2803.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -540,7 +540,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A.Dinic.test.cpp
       title: test/aoj/GRL_6_A.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A.PushRelabel.test.cpp
       title: test/aoj/GRL_6_A.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -614,7 +614,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.Dinic.test.cpp
       title: test/atcoder/arc129_e.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.PushRelabel.test.cpp
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/yosupo

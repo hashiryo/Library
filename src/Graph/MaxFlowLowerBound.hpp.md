@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1615.Dinic.test.cpp
     title: test/aoj/1615.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1615.PushRelabel.test.cpp
     title: test/aoj/1615.PushRelabel.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\
       \u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
@@ -86,7 +86,7 @@ data:
   path: src/Graph/MaxFlowLowerBound.hpp
   requiredBy: []
   timestamp: '2021-12-16 12:41:45+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1615.Dinic.test.cpp
   - test/aoj/1615.PushRelabel.test.cpp

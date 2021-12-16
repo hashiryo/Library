@@ -3,24 +3,24 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1615.PushRelabel.test.cpp
     title: test/aoj/1615.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2313.PushRelabel.test.cpp
     title: test/aoj/2313.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2803.PushRelabel.test.cpp
     title: test/aoj/2803.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.PushRelabel.test.cpp
     title: test/aoj/GRL_6_A.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: PushRelabel(Gap)
     links:
@@ -73,9 +73,9 @@ data:
     \ (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0] = n - 1;\n    for (auto &e\
     \ : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret = excess[t] + flow_lim;\n\
     \    if constexpr (!freeze) {\n      excess[s] += excess[t], excess[t] = 0;\n\
-    \      if constexpr (global_freq) global_relabeling(s);\n      calc(s);\n    \
-    \  assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n  }\n\
-    };\n"
+    \      if constexpr (global_freq != 0) global_relabeling(s);\n      calc(s);\n\
+    \      assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n\
+    \  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title PushRelabel(Gap)\n\
     \ * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 \u221Am)\n */\n\n\
     // verify\u7528: https://loj.ac/p/127 (Dinic\u3060\u3068\u843D\u3061\u308B)\n\
@@ -124,15 +124,15 @@ data:
     \ (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0] = n - 1;\n    for (auto &e\
     \ : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret = excess[t] + flow_lim;\n\
     \    if constexpr (!freeze) {\n      excess[s] += excess[t], excess[t] = 0;\n\
-    \      if constexpr (global_freq) global_relabeling(s);\n      calc(s);\n    \
-    \  assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n  }\n\
-    };"
+    \      if constexpr (global_freq != 0) global_relabeling(s);\n      calc(s);\n\
+    \      assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n\
+    \  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Algorithm/PushRelabel.hpp
   requiredBy: []
-  timestamp: '2021-12-16 14:04:23+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-12-16 14:12:15+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2803.PushRelabel.test.cpp
   - test/aoj/1615.PushRelabel.test.cpp
