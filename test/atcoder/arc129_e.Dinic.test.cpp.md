@@ -5,6 +5,10 @@ data:
     path: src/Algorithm/Dinic.hpp
     title: Dinic
   - icon: ':question:'
+    path: src/Algorithm/monge_mincut.hpp
+    title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
+      \u822C\u5316"
+  - icon: ':question:'
     path: src/Graph/MaxFlow.hpp
     title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
   _extendedRequiredBy: []
@@ -14,13 +18,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
+    PROBLEM: https://atcoder.jp/contests/arc129/tasks/arc129_e
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
-  bundledCode: "#line 1 \"test/aoj/GRL_6_A.Dinic.test.cpp\"\n#define PROBLEM \\\n\
-    \  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/Algorithm/Dinic.hpp\"\n/**\n * @title Dinic\n\
-    \ * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
+    - https://atcoder.jp/contests/arc129/tasks/arc129_e
+  bundledCode: "#line 1 \"test/atcoder/arc129_e.Dinic.test.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/arc129/tasks/arc129_e\"\n\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Algorithm/Dinic.hpp\"\n/**\n * @title Dinic\n * @category \u30A2\
+    \u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <class flow_t>\nstruct Dinic {\n  Dinic(std::size_t\
     \ _n = 0) : n(_n), m(0), adj(n) {}\n\n protected:\n  struct Edge {\n    int dst,\
     \ rev;\n    flow_t cap;\n  };\n  int n, m;\n  std::vector<std::vector<Edge>> adj;\n\
@@ -81,32 +85,70 @@ data:
     \    static std::queue<int> que;\n    for (que.push(s); !que.empty();) {\n   \
     \   int p = que.front();\n      que.pop(), visited[p] = true;\n      for (const\
     \ auto &e : this->adj[p])\n        if (e.cap && !visited[e.dst]) visited[e.dst]\
-    \ = true, que.push(e.dst);\n    }\n    return visited;\n  }\n};\n#line 6 \"test/aoj/GRL_6_A.Dinic.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, M;\n  cin >> N >> M;\n  MaxFlow<Dinic<long long>> graph(N);\n  for (int\
-    \ i = 0; i < M; i++) {\n    int u, v;\n    long long c;\n    cin >> u >> v >>\
-    \ c;\n    graph.add_edge(u, v, c);\n  }\n  cout << graph.maxflow(0, N - 1) <<\
-    \ endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Algorithm/Dinic.hpp\"\n#include \"\
-    src/Graph/MaxFlow.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  int N, M;\n  cin >> N >> M;\n  MaxFlow<Dinic<long\
-    \ long>> graph(N);\n  for (int i = 0; i < M; i++) {\n    int u, v;\n    long long\
-    \ c;\n    cin >> u >> v >> c;\n    graph.add_edge(u, v, c);\n  }\n  cout << graph.maxflow(0,\
-    \ N - 1) << endl;\n  return 0;\n}"
+    \ = true, que.push(e.dst);\n    }\n    return visited;\n  }\n};\n#line 3 \"src/Algorithm/monge_mincut.hpp\"\
+    \n/**\n * @title \u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\
+    \u306E\u4E00\u822C\u5316\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n\
+    \ * @see https://noshi91.hatenablog.com/entry/2021/06/29/044225\n */\n\n// BEGIN\
+    \ CUT HERE\n\ntemplate <typename T, typename MF, typename Th, typename Ph>\nauto\
+    \ monge_mincut(int n, int k, Th theta, Ph phi) {\n  static_assert(std::is_same_v<T,\
+    \ typename MF::flow_t>);\n  static constexpr T INF = std::numeric_limits<T>::max();\n\
+    \  T ret = 0;\n  MF graph;\n  int s = graph.add_vertex(), t = graph.add_vertex();\n\
+    \  std::vector<std::vector<int>> x;\n  std::vector<std::vector<T>> th(n, std::vector<T>(k));\n\
+    \  for (int i = 0; i < n; i++) {\n    x.emplace_back(graph.add_vertices(k - 1));\n\
+    \    for (int l = 1; l < k - 1; l++) graph.add_edge(x[i][l], x[i][l - 1], INF);\n\
+    \    for (int l = 0; l < k; l++) th[i][l] = theta(i, l);\n  }\n  for (int i =\
+    \ 0; i < n; i++)\n    for (int j = i + 1; j < n; j++) {\n      for (int l = 0;\
+    \ l < k - 1; l++)\n        for (int m = 0; m < k - 1; m++) {\n          T cost\
+    \ = -phi(i, j, l + 1, m + 1) + phi(i, j, l, m + 1) +\n                   phi(i,\
+    \ j, l + 1, m) - phi(i, j, l, m);\n          assert(cost >= 0);  // monge\n  \
+    \        if (cost > 0) graph.add_edge(x[i][l], x[j][m], cost);\n        }\n  \
+    \    for (int l = 0; l < k; l++) th[i][l] += phi(i, j, l, k - 1);\n      for (int\
+    \ l = 0; l < k; l++) th[j][l] += phi(i, j, 0, l);\n      ret -= phi(i, j, 0, k\
+    \ - 1);\n    }\n  for (int i = 0; i < n; i++) {\n    ret += th[i][0];\n    for\
+    \ (int l = 0; l < k - 1; l++) {\n      T cost = th[i][l] - th[i][l + 1];\n   \
+    \   if (cost > 0) graph.add_edge(s, x[i][l], cost), ret -= cost;\n      if (cost\
+    \ < 0) graph.add_edge(x[i][l], t, -cost);\n    }\n  }\n  ret += graph.maxflow(s,\
+    \ t);\n  auto y = graph.mincut(s);\n  std::vector<int> sol(n, k - 1);\n  for (int\
+    \ i = 0; i < n; i++)\n    for (int l = 0; l < k - 1; l++)\n      if (!y[x[i][l]])\
+    \ sol[i] = l, l = k;\n  return std::make_pair(ret, sol);\n}\n#line 7 \"test/atcoder/arc129_e.Dinic.test.cpp\"\
+    \nusing namespace std;\n\n// \u89E3\u7121\u3057\u306E\u5224\u5B9A\u306Everify\n\
+    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using MF =\
+    \ MaxFlow<Dinic<long long>>;\n  int N, M;\n  cin >> N >> M;\n  vector<vector<long\
+    \ long>> A(N, vector<long long>(M)),\n      C(N, vector<long long>(M));\n  for\
+    \ (int i = 0; i < N; i++)\n    for (int k = 0; k < M; k++) cin >> A[i][k] >> C[i][k];\n\
+    \  vector<vector<long long>> W(N, vector<long long>(N));\n  for (int i = 0; i\
+    \ < N; i++)\n    for (int j = i + 1; j < N; j++) cin >> W[i][j];\n  auto theta\
+    \ = [&](int i, int k) { return C[i][k]; };\n  auto phi = [&](int i, int j, int\
+    \ k, int l) {\n    return abs(A[i][k] - A[j][l]) * W[i][j];\n  };\n  auto [ans,\
+    \ x] = monge_mincut<long long, MF>(N, M, theta, phi);\n  cout << ans << '\\n';\n\
+    \  return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/arc129/tasks/arc129_e\"\n\n\
+    #include <bits/stdc++.h>\n#include \"src/Algorithm/Dinic.hpp\"\n#include \"src/Graph/MaxFlow.hpp\"\
+    \n#include \"src/Algorithm/monge_mincut.hpp\"\nusing namespace std;\n\n// \u89E3\
+    \u7121\u3057\u306E\u5224\u5B9A\u306Everify\n\nsigned main() {\n  cin.tie(0);\n\
+    \  ios::sync_with_stdio(false);\n  using MF = MaxFlow<Dinic<long long>>;\n  int\
+    \ N, M;\n  cin >> N >> M;\n  vector<vector<long long>> A(N, vector<long long>(M)),\n\
+    \      C(N, vector<long long>(M));\n  for (int i = 0; i < N; i++)\n    for (int\
+    \ k = 0; k < M; k++) cin >> A[i][k] >> C[i][k];\n  vector<vector<long long>> W(N,\
+    \ vector<long long>(N));\n  for (int i = 0; i < N; i++)\n    for (int j = i +\
+    \ 1; j < N; j++) cin >> W[i][j];\n  auto theta = [&](int i, int k) { return C[i][k];\
+    \ };\n  auto phi = [&](int i, int j, int k, int l) {\n    return abs(A[i][k] -\
+    \ A[j][l]) * W[i][j];\n  };\n  auto [ans, x] = monge_mincut<long long, MF>(N,\
+    \ M, theta, phi);\n  cout << ans << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Algorithm/Dinic.hpp
   - src/Graph/MaxFlow.hpp
+  - src/Algorithm/monge_mincut.hpp
   isVerificationFile: true
-  path: test/aoj/GRL_6_A.Dinic.test.cpp
+  path: test/atcoder/arc129_e.Dinic.test.cpp
   requiredBy: []
   timestamp: '2021-12-16 12:41:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/GRL_6_A.Dinic.test.cpp
+documentation_of: test/atcoder/arc129_e.Dinic.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/GRL_6_A.Dinic.test.cpp
-- /verify/test/aoj/GRL_6_A.Dinic.test.cpp.html
-title: test/aoj/GRL_6_A.Dinic.test.cpp
+- /verify/test/atcoder/arc129_e.Dinic.test.cpp
+- /verify/test/atcoder/arc129_e.Dinic.test.cpp.html
+title: test/atcoder/arc129_e.Dinic.test.cpp
 ---

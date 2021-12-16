@@ -380,10 +380,10 @@ data:
   timestamp: '2021-10-24 00:31:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/658.test.cpp
   - test/aoj/0168.test.cpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: src/Math/kitamasa.hpp
 layout: document
 redirect_from:
