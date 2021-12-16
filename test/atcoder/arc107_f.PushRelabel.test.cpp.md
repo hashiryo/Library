@@ -18,11 +18,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/arc129/tasks/arc129_e
+    PROBLEM: https://atcoder.jp/contests/arc107/tasks/arc107_f
     links:
-    - https://atcoder.jp/contests/arc129/tasks/arc129_e
-  bundledCode: "#line 1 \"test/atcoder/arc129_e.PushRelabel.test.cpp\"\n#define PROBLEM\
-    \ \"https://atcoder.jp/contests/arc129/tasks/arc129_e\"\n\n#include <bits/stdc++.h>\n\
+    - https://atcoder.jp/contests/arc107/tasks/arc107_f
+  bundledCode: "#line 1 \"test/atcoder/arc107_f.PushRelabel.test.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/arc107/tasks/arc107_f\"\n\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Algorithm/PushRelabel.hpp\"\n/**\n * @title PushRelabel(Gap)\n *\
     \ @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 \u221Am)\n */\n\n\
     // verify\u7528: https://loj.ac/p/127 (Dinic\u3060\u3068\u843D\u3061\u308B)\n\
@@ -142,44 +142,46 @@ data:
     \ t, -cost);\n    }\n  }\n  ret += graph.maxflow(s, t);\n  auto y = graph.mincut(s);\n\
     \  std::vector<int> sol(n, k - 1);\n  for (int i = 0; i < n; i++)\n    for (int\
     \ l = 0; l < k - 1; l++)\n      if (!y[x[i][l]]) sol[i] = l, l = k;\n  return\
-    \ std::make_pair(ret, sol);\n}\n#line 7 \"test/atcoder/arc129_e.PushRelabel.test.cpp\"\
+    \ std::make_pair(ret, sol);\n}\n#line 7 \"test/atcoder/arc107_f.PushRelabel.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using MF = MaxFlow<PushRelabel<long long>>;\n  int N, M;\n  cin >> N >> M;\n\
-    \  vector<vector<long long>> A(N, vector<long long>(M)),\n      C(N, vector<long\
-    \ long>(M));\n  for (int i = 0; i < N; i++)\n    for (int k = 0; k < M; k++) cin\
-    \ >> A[i][k] >> C[i][k];\n  vector<vector<long long>> W(N, vector<long long>(N));\n\
-    \  for (int i = 0; i < N; i++)\n    for (int j = i + 1; j < N; j++) cin >> W[i][j];\n\
-    \  auto theta = [&](int i, int xi) { return C[i][xi]; };\n  auto phi = [&](int\
-    \ i, int j, int xi, int xj) {\n    return abs(A[i][xi] - A[j][xj]) * W[i][j];\n\
-    \  };\n  auto [ans, x] = monge_mincut<MF>(N, M, theta, phi);\n  cout << ans <<\
-    \ '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/arc129/tasks/arc129_e\"\n\n\
+    \  int N, M;\n  cin >> N >> M;\n  vector<long long> A(N), B(N);\n  for (int i\
+    \ = 0; i < N; i++) cin >> A[i];\n  for (int i = 0; i < N; i++) cin >> B[i];\n\
+    \  vector<vector<bool>> adj(N, vector<bool>(N, false));\n  for (int i = 0; i <\
+    \ M; i++) {\n    int U, V;\n    cin >> U >> V, U--, V--;\n    adj[U][V] = adj[V][U]\
+    \ = true;\n  }\n  auto theta = [&](int i, int xi) {\n    if (xi == 0) return B[i];\n\
+    \    if (xi == 2) return -B[i];\n    return A[i];\n  };\n  const long long INF\
+    \ = 300 * 1e6 + 10;\n  auto phi = [&](int i, int j, int xi, int xj) {\n    if\
+    \ (adj[i][j] && xi + xj == 2 && xi != xj) return INF;\n    return 0ll;\n  };\n\
+    \  using MF = MaxFlow<PushRelabel<long long>>;\n  auto [ans, x] = monge_mincut<MF>(N,\
+    \ 3, theta, phi);\n  cout << -ans << '\\n';\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/arc107/tasks/arc107_f\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Algorithm/PushRelabel.hpp\"\n#include\
     \ \"src/Graph/MaxFlow.hpp\"\n#include \"src/Algorithm/monge_mincut.hpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using MF = MaxFlow<PushRelabel<long long>>;\n  int N, M;\n  cin >> N >> M;\n\
-    \  vector<vector<long long>> A(N, vector<long long>(M)),\n      C(N, vector<long\
-    \ long>(M));\n  for (int i = 0; i < N; i++)\n    for (int k = 0; k < M; k++) cin\
-    \ >> A[i][k] >> C[i][k];\n  vector<vector<long long>> W(N, vector<long long>(N));\n\
-    \  for (int i = 0; i < N; i++)\n    for (int j = i + 1; j < N; j++) cin >> W[i][j];\n\
-    \  auto theta = [&](int i, int xi) { return C[i][xi]; };\n  auto phi = [&](int\
-    \ i, int j, int xi, int xj) {\n    return abs(A[i][xi] - A[j][xj]) * W[i][j];\n\
-    \  };\n  auto [ans, x] = monge_mincut<MF>(N, M, theta, phi);\n  cout << ans <<\
-    \ '\\n';\n  return 0;\n}"
+    \  int N, M;\n  cin >> N >> M;\n  vector<long long> A(N), B(N);\n  for (int i\
+    \ = 0; i < N; i++) cin >> A[i];\n  for (int i = 0; i < N; i++) cin >> B[i];\n\
+    \  vector<vector<bool>> adj(N, vector<bool>(N, false));\n  for (int i = 0; i <\
+    \ M; i++) {\n    int U, V;\n    cin >> U >> V, U--, V--;\n    adj[U][V] = adj[V][U]\
+    \ = true;\n  }\n  auto theta = [&](int i, int xi) {\n    if (xi == 0) return B[i];\n\
+    \    if (xi == 2) return -B[i];\n    return A[i];\n  };\n  const long long INF\
+    \ = 300 * 1e6 + 10;\n  auto phi = [&](int i, int j, int xi, int xj) {\n    if\
+    \ (adj[i][j] && xi + xj == 2 && xi != xj) return INF;\n    return 0ll;\n  };\n\
+    \  using MF = MaxFlow<PushRelabel<long long>>;\n  auto [ans, x] = monge_mincut<MF>(N,\
+    \ 3, theta, phi);\n  cout << -ans << '\\n';\n  return 0;\n}\n"
   dependsOn:
   - src/Algorithm/PushRelabel.hpp
   - src/Graph/MaxFlow.hpp
   - src/Algorithm/monge_mincut.hpp
   isVerificationFile: true
-  path: test/atcoder/arc129_e.PushRelabel.test.cpp
+  path: test/atcoder/arc107_f.PushRelabel.test.cpp
   requiredBy: []
   timestamp: '2021-12-16 17:49:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/atcoder/arc129_e.PushRelabel.test.cpp
+documentation_of: test/atcoder/arc107_f.PushRelabel.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/arc129_e.PushRelabel.test.cpp
-- /verify/test/atcoder/arc129_e.PushRelabel.test.cpp.html
-title: test/atcoder/arc129_e.PushRelabel.test.cpp
+- /verify/test/atcoder/arc107_f.PushRelabel.test.cpp
+- /verify/test/atcoder/arc107_f.PushRelabel.test.cpp.html
+title: test/atcoder/arc107_f.PushRelabel.test.cpp
 ---

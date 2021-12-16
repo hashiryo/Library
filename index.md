@@ -382,6 +382,12 @@ data:
       path: test/aoj/2803.PushRelabel.test.cpp
       title: test/aoj/2803.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/2835.Dinic.test.cpp
+      title: test/aoj/2835.Dinic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2835.PushRelabel.test.cpp
+      title: test/aoj/2835.PushRelabel.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2842.BIT_2D.test.cpp
       title: test/aoj/2842.BIT_2D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -612,6 +618,12 @@ data:
       path: test/atcoder/arc106_b.test.cpp
       title: test/atcoder/arc106_b.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/arc107_f.Dinic.test.cpp
+      title: test/atcoder/arc107_f.Dinic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/arc107_f.PushRelabel.test.cpp
+      title: test/atcoder/arc107_f.PushRelabel.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.Dinic.test.cpp
       title: test/atcoder/arc129_e.Dinic.test.cpp
     - icon: ':heavy_check_mark:'
@@ -831,6 +843,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1145.test.cpp
       title: test/yukicoder/1145.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/119.Dinic.test.cpp
+      title: test/yukicoder/119.Dinic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/119.PushRelabel.test.cpp
+      title: test/yukicoder/119.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp

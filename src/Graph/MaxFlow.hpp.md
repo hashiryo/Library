@@ -16,17 +16,35 @@ data:
     path: test/aoj/2803.PushRelabel.test.cpp
     title: test/aoj/2803.PushRelabel.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2835.Dinic.test.cpp
+    title: test/aoj/2835.Dinic.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2835.PushRelabel.test.cpp
+    title: test/aoj/2835.PushRelabel.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.Dinic.test.cpp
     title: test/aoj/GRL_6_A.Dinic.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.PushRelabel.test.cpp
     title: test/aoj/GRL_6_A.PushRelabel.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/arc107_f.Dinic.test.cpp
+    title: test/atcoder/arc107_f.Dinic.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/arc107_f.PushRelabel.test.cpp
+    title: test/atcoder/arc107_f.PushRelabel.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/119.Dinic.test.cpp
+    title: test/yukicoder/119.Dinic.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/119.PushRelabel.test.cpp
+    title: test/yukicoder/119.PushRelabel.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -127,11 +145,17 @@ data:
   - test/aoj/2803.Dinic.test.cpp
   - test/aoj/2803.PushRelabel.test.cpp
   - test/aoj/GRL_6_A.PushRelabel.test.cpp
+  - test/aoj/2835.PushRelabel.test.cpp
   - test/aoj/2313.Dinic.test.cpp
   - test/aoj/GRL_6_A.Dinic.test.cpp
+  - test/aoj/2835.Dinic.test.cpp
   - test/aoj/2313.PushRelabel.test.cpp
+  - test/yukicoder/119.Dinic.test.cpp
+  - test/yukicoder/119.PushRelabel.test.cpp
+  - test/atcoder/arc107_f.Dinic.test.cpp
   - test/atcoder/arc129_e.Dinic.test.cpp
   - test/atcoder/arc129_e.PushRelabel.test.cpp
+  - test/atcoder/arc107_f.PushRelabel.test.cpp
 documentation_of: src/Graph/MaxFlow.hpp
 layout: document
 redirect_from:
