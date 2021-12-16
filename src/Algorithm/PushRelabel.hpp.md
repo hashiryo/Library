@@ -41,7 +41,7 @@ data:
     \    int pop() {\n      if (!se || (so && odd[so - 1].second > even[se - 1].second))\n\
     \        return odd[--so].first;\n      return even[--se].first;\n    }\n  } hque;\n\
     \  std::vector<std::vector<Edge>> adj;\n  std::vector<int> dist, dcnt;\n  std::vector<flow_t>\
-    \ excess;\n  inline void calc(int t) {\n    if constexpr (global_freq) global_relabeling(t);\n\
+    \ excess;\n  inline void calc(int t) {\n    if constexpr (global_freq != 0) global_relabeling(t);\n\
     \    for (int tick = m * global_freq; !hque.empty();) {\n      int i = hque.pop(),\
     \ dnxt = n * 2 - 1;\n      if constexpr (use_gap)\n        if (dist[i] > gap)\
     \ continue;\n      for (auto &e : adj[i])\n        if (e.cap) {\n          if\
@@ -52,29 +52,30 @@ data:
     \           gap = dist[i];\n          if (dnxt == gap) gap++;\n          while\
     \ (hque.highest() > gap) hque.pop();\n          if (dnxt > gap) dnxt = n;\n  \
     \        if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n        }\n    \
-    \    dist[i] = dnxt, hq_push(i);\n      }\n      if constexpr (global_freq)\n\
-    \        if (--tick == 0) tick = m * global_freq, global_relabeling(t);\n    }\n\
-    \  }\n  inline void hq_push(int i) {\n    if constexpr (!use_gap)\n      hque.push(i,\
-    \ dist[i]);\n    else if (dist[i] < gap)\n      hque.push(i, dist[i]);\n  }\n\
-    \  inline void push(int i, Edge &e) {\n    flow_t delta = std::min(e.cap, excess[i]);\n\
-    \    excess[i] -= delta, e.cap -= delta;\n    excess[e.dst] += delta, adj[e.dst][e.rev].cap\
-    \ += delta;\n    if (0 < excess[e.dst] && excess[e.dst] <= delta) hq_push(e.dst);\n\
-    \  }\n  inline void global_relabeling(int t) {\n    dist.assign(n, n), dist[t]\
-    \ = 0;\n    static std::queue<int> q;\n    q.push(t), hque.clear();\n    if constexpr\
-    \ (use_gap) gap = 1, dcnt.assign(n + 1, 0);\n    for (int now; !q.empty();) {\n\
-    \      now = q.front(), q.pop();\n      if constexpr (use_gap) gap = dist[now]\
-    \ + 1, dcnt[dist[now]]++;\n      if (excess[now] > 0) hque.push(now, dist[now]);\n\
-    \      for (const auto &e : adj[now])\n        if (adj[e.dst][e.rev].cap && dist[e.dst]\
-    \ == n)\n          dist[e.dst] = dist[now] + 1, q.push(e.dst);\n    }\n  }\n \
-    \ flow_t flow(int s, int t, flow_t flow_lim) {\n    assert(0 <= s && s < n);\n\
-    \    assert(0 <= t && t < n);\n    assert(s != t);\n    hque.init(n);\n    excess.assign(n,\
-    \ 0);\n    excess[s] += flow_lim, excess[t] -= flow_lim;\n    dist.assign(n, 0),\
-    \ dist[s] = n;\n    if constexpr (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0]\
-    \ = n - 1;\n    for (auto &e : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret\
-    \ = excess[t] + flow_lim;\n    if constexpr (!freeze) {\n      excess[s] += excess[t],\
-    \ excess[t] = 0;\n      if constexpr (global_freq) global_relabeling(s);\n   \
-    \   calc(s);\n      assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return\
-    \ ret;\n  }\n};\n"
+    \    dist[i] = dnxt, hq_push(i);\n      }\n      if constexpr (global_freq !=\
+    \ 0)\n        if (--tick == 0) tick = m * global_freq, global_relabeling(t);\n\
+    \    }\n  }\n  inline void hq_push(int i) {\n    if constexpr (!use_gap)\n   \
+    \   hque.push(i, dist[i]);\n    else if (dist[i] < gap)\n      hque.push(i, dist[i]);\n\
+    \  }\n  inline void push(int i, Edge &e) {\n    flow_t delta = std::min(e.cap,\
+    \ excess[i]);\n    excess[i] -= delta, e.cap -= delta;\n    excess[e.dst] += delta,\
+    \ adj[e.dst][e.rev].cap += delta;\n    if (0 < excess[e.dst] && excess[e.dst]\
+    \ <= delta) hq_push(e.dst);\n  }\n  inline void global_relabeling(int t) {\n \
+    \   dist.assign(n, n), dist[t] = 0;\n    static std::queue<int> q;\n    q.push(t),\
+    \ hque.clear();\n    if constexpr (use_gap) gap = 1, dcnt.assign(n + 1, 0);\n\
+    \    for (int now; !q.empty();) {\n      now = q.front(), q.pop();\n      if constexpr\
+    \ (use_gap) gap = dist[now] + 1, dcnt[dist[now]]++;\n      if (excess[now] > 0)\
+    \ hque.push(now, dist[now]);\n      for (const auto &e : adj[now])\n        if\
+    \ (adj[e.dst][e.rev].cap && dist[e.dst] == n)\n          dist[e.dst] = dist[now]\
+    \ + 1, q.push(e.dst);\n    }\n  }\n  flow_t flow(int s, int t, flow_t flow_lim)\
+    \ {\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n    assert(s\
+    \ != t);\n    hque.init(n);\n    excess.assign(n, 0);\n    excess[s] += flow_lim,\
+    \ excess[t] -= flow_lim;\n    dist.assign(n, 0), dist[s] = n;\n    if constexpr\
+    \ (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0] = n - 1;\n    for (auto &e\
+    \ : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret = excess[t] + flow_lim;\n\
+    \    if constexpr (!freeze) {\n      excess[s] += excess[t], excess[t] = 0;\n\
+    \      if constexpr (global_freq) global_relabeling(s);\n      calc(s);\n    \
+    \  assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n  }\n\
+    };\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title PushRelabel(Gap)\n\
     \ * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 \u221Am)\n */\n\n\
     // verify\u7528: https://loj.ac/p/127 (Dinic\u3060\u3068\u843D\u3061\u308B)\n\
@@ -91,8 +92,8 @@ data:
     \ - 1].second > even[se - 1].second))\n        return odd[--so].first;\n     \
     \ return even[--se].first;\n    }\n  } hque;\n  std::vector<std::vector<Edge>>\
     \ adj;\n  std::vector<int> dist, dcnt;\n  std::vector<flow_t> excess;\n  inline\
-    \ void calc(int t) {\n    if constexpr (global_freq) global_relabeling(t);\n \
-    \   for (int tick = m * global_freq; !hque.empty();) {\n      int i = hque.pop(),\
+    \ void calc(int t) {\n    if constexpr (global_freq != 0) global_relabeling(t);\n\
+    \    for (int tick = m * global_freq; !hque.empty();) {\n      int i = hque.pop(),\
     \ dnxt = n * 2 - 1;\n      if constexpr (use_gap)\n        if (dist[i] > gap)\
     \ continue;\n      for (auto &e : adj[i])\n        if (e.cap) {\n          if\
     \ (dist[e.dst] == dist[i] - 1) {\n            if (push(i, e), excess[i] == 0)\
@@ -102,34 +103,35 @@ data:
     \           gap = dist[i];\n          if (dnxt == gap) gap++;\n          while\
     \ (hque.highest() > gap) hque.pop();\n          if (dnxt > gap) dnxt = n;\n  \
     \        if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n        }\n    \
-    \    dist[i] = dnxt, hq_push(i);\n      }\n      if constexpr (global_freq)\n\
-    \        if (--tick == 0) tick = m * global_freq, global_relabeling(t);\n    }\n\
-    \  }\n  inline void hq_push(int i) {\n    if constexpr (!use_gap)\n      hque.push(i,\
-    \ dist[i]);\n    else if (dist[i] < gap)\n      hque.push(i, dist[i]);\n  }\n\
-    \  inline void push(int i, Edge &e) {\n    flow_t delta = std::min(e.cap, excess[i]);\n\
-    \    excess[i] -= delta, e.cap -= delta;\n    excess[e.dst] += delta, adj[e.dst][e.rev].cap\
-    \ += delta;\n    if (0 < excess[e.dst] && excess[e.dst] <= delta) hq_push(e.dst);\n\
-    \  }\n  inline void global_relabeling(int t) {\n    dist.assign(n, n), dist[t]\
-    \ = 0;\n    static std::queue<int> q;\n    q.push(t), hque.clear();\n    if constexpr\
-    \ (use_gap) gap = 1, dcnt.assign(n + 1, 0);\n    for (int now; !q.empty();) {\n\
-    \      now = q.front(), q.pop();\n      if constexpr (use_gap) gap = dist[now]\
-    \ + 1, dcnt[dist[now]]++;\n      if (excess[now] > 0) hque.push(now, dist[now]);\n\
-    \      for (const auto &e : adj[now])\n        if (adj[e.dst][e.rev].cap && dist[e.dst]\
-    \ == n)\n          dist[e.dst] = dist[now] + 1, q.push(e.dst);\n    }\n  }\n \
-    \ flow_t flow(int s, int t, flow_t flow_lim) {\n    assert(0 <= s && s < n);\n\
-    \    assert(0 <= t && t < n);\n    assert(s != t);\n    hque.init(n);\n    excess.assign(n,\
-    \ 0);\n    excess[s] += flow_lim, excess[t] -= flow_lim;\n    dist.assign(n, 0),\
-    \ dist[s] = n;\n    if constexpr (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0]\
-    \ = n - 1;\n    for (auto &e : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret\
-    \ = excess[t] + flow_lim;\n    if constexpr (!freeze) {\n      excess[s] += excess[t],\
-    \ excess[t] = 0;\n      if constexpr (global_freq) global_relabeling(s);\n   \
-    \   calc(s);\n      assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return\
-    \ ret;\n  }\n};"
+    \    dist[i] = dnxt, hq_push(i);\n      }\n      if constexpr (global_freq !=\
+    \ 0)\n        if (--tick == 0) tick = m * global_freq, global_relabeling(t);\n\
+    \    }\n  }\n  inline void hq_push(int i) {\n    if constexpr (!use_gap)\n   \
+    \   hque.push(i, dist[i]);\n    else if (dist[i] < gap)\n      hque.push(i, dist[i]);\n\
+    \  }\n  inline void push(int i, Edge &e) {\n    flow_t delta = std::min(e.cap,\
+    \ excess[i]);\n    excess[i] -= delta, e.cap -= delta;\n    excess[e.dst] += delta,\
+    \ adj[e.dst][e.rev].cap += delta;\n    if (0 < excess[e.dst] && excess[e.dst]\
+    \ <= delta) hq_push(e.dst);\n  }\n  inline void global_relabeling(int t) {\n \
+    \   dist.assign(n, n), dist[t] = 0;\n    static std::queue<int> q;\n    q.push(t),\
+    \ hque.clear();\n    if constexpr (use_gap) gap = 1, dcnt.assign(n + 1, 0);\n\
+    \    for (int now; !q.empty();) {\n      now = q.front(), q.pop();\n      if constexpr\
+    \ (use_gap) gap = dist[now] + 1, dcnt[dist[now]]++;\n      if (excess[now] > 0)\
+    \ hque.push(now, dist[now]);\n      for (const auto &e : adj[now])\n        if\
+    \ (adj[e.dst][e.rev].cap && dist[e.dst] == n)\n          dist[e.dst] = dist[now]\
+    \ + 1, q.push(e.dst);\n    }\n  }\n  flow_t flow(int s, int t, flow_t flow_lim)\
+    \ {\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n    assert(s\
+    \ != t);\n    hque.init(n);\n    excess.assign(n, 0);\n    excess[s] += flow_lim,\
+    \ excess[t] -= flow_lim;\n    dist.assign(n, 0), dist[s] = n;\n    if constexpr\
+    \ (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0] = n - 1;\n    for (auto &e\
+    \ : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret = excess[t] + flow_lim;\n\
+    \    if constexpr (!freeze) {\n      excess[s] += excess[t], excess[t] = 0;\n\
+    \      if constexpr (global_freq) global_relabeling(s);\n      calc(s);\n    \
+    \  assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n  }\n\
+    };"
   dependsOn: []
   isVerificationFile: false
   path: src/Algorithm/PushRelabel.hpp
   requiredBy: []
-  timestamp: '2021-12-16 12:41:45+09:00'
+  timestamp: '2021-12-16 14:04:23+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2803.PushRelabel.test.cpp

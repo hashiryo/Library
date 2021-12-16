@@ -39,8 +39,8 @@ data:
     \ - 1].second > even[se - 1].second))\n        return odd[--so].first;\n     \
     \ return even[--se].first;\n    }\n  } hque;\n  std::vector<std::vector<Edge>>\
     \ adj;\n  std::vector<int> dist, dcnt;\n  std::vector<flow_t> excess;\n  inline\
-    \ void calc(int t) {\n    if constexpr (global_freq) global_relabeling(t);\n \
-    \   for (int tick = m * global_freq; !hque.empty();) {\n      int i = hque.pop(),\
+    \ void calc(int t) {\n    if constexpr (global_freq != 0) global_relabeling(t);\n\
+    \    for (int tick = m * global_freq; !hque.empty();) {\n      int i = hque.pop(),\
     \ dnxt = n * 2 - 1;\n      if constexpr (use_gap)\n        if (dist[i] > gap)\
     \ continue;\n      for (auto &e : adj[i])\n        if (e.cap) {\n          if\
     \ (dist[e.dst] == dist[i] - 1) {\n            if (push(i, e), excess[i] == 0)\
@@ -50,32 +50,33 @@ data:
     \           gap = dist[i];\n          if (dnxt == gap) gap++;\n          while\
     \ (hque.highest() > gap) hque.pop();\n          if (dnxt > gap) dnxt = n;\n  \
     \        if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n        }\n    \
-    \    dist[i] = dnxt, hq_push(i);\n      }\n      if constexpr (global_freq)\n\
-    \        if (--tick == 0) tick = m * global_freq, global_relabeling(t);\n    }\n\
-    \  }\n  inline void hq_push(int i) {\n    if constexpr (!use_gap)\n      hque.push(i,\
-    \ dist[i]);\n    else if (dist[i] < gap)\n      hque.push(i, dist[i]);\n  }\n\
-    \  inline void push(int i, Edge &e) {\n    flow_t delta = std::min(e.cap, excess[i]);\n\
-    \    excess[i] -= delta, e.cap -= delta;\n    excess[e.dst] += delta, adj[e.dst][e.rev].cap\
-    \ += delta;\n    if (0 < excess[e.dst] && excess[e.dst] <= delta) hq_push(e.dst);\n\
-    \  }\n  inline void global_relabeling(int t) {\n    dist.assign(n, n), dist[t]\
-    \ = 0;\n    static std::queue<int> q;\n    q.push(t), hque.clear();\n    if constexpr\
-    \ (use_gap) gap = 1, dcnt.assign(n + 1, 0);\n    for (int now; !q.empty();) {\n\
-    \      now = q.front(), q.pop();\n      if constexpr (use_gap) gap = dist[now]\
-    \ + 1, dcnt[dist[now]]++;\n      if (excess[now] > 0) hque.push(now, dist[now]);\n\
-    \      for (const auto &e : adj[now])\n        if (adj[e.dst][e.rev].cap && dist[e.dst]\
-    \ == n)\n          dist[e.dst] = dist[now] + 1, q.push(e.dst);\n    }\n  }\n \
-    \ flow_t flow(int s, int t, flow_t flow_lim) {\n    assert(0 <= s && s < n);\n\
-    \    assert(0 <= t && t < n);\n    assert(s != t);\n    hque.init(n);\n    excess.assign(n,\
-    \ 0);\n    excess[s] += flow_lim, excess[t] -= flow_lim;\n    dist.assign(n, 0),\
-    \ dist[s] = n;\n    if constexpr (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0]\
-    \ = n - 1;\n    for (auto &e : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret\
-    \ = excess[t] + flow_lim;\n    if constexpr (!freeze) {\n      excess[s] += excess[t],\
-    \ excess[t] = 0;\n      if constexpr (global_freq) global_relabeling(s);\n   \
-    \   calc(s);\n      assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return\
-    \ ret;\n  }\n};\n#line 3 \"src/Graph/MaxFlow.hpp\"\n/**\n * @title \u6700\u5927\
-    \u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category \u30B0\u30E9\
-    \u30D5\n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\
-    \u30D7\u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * EdgePtr:\n *  change_cap:\
+    \    dist[i] = dnxt, hq_push(i);\n      }\n      if constexpr (global_freq !=\
+    \ 0)\n        if (--tick == 0) tick = m * global_freq, global_relabeling(t);\n\
+    \    }\n  }\n  inline void hq_push(int i) {\n    if constexpr (!use_gap)\n   \
+    \   hque.push(i, dist[i]);\n    else if (dist[i] < gap)\n      hque.push(i, dist[i]);\n\
+    \  }\n  inline void push(int i, Edge &e) {\n    flow_t delta = std::min(e.cap,\
+    \ excess[i]);\n    excess[i] -= delta, e.cap -= delta;\n    excess[e.dst] += delta,\
+    \ adj[e.dst][e.rev].cap += delta;\n    if (0 < excess[e.dst] && excess[e.dst]\
+    \ <= delta) hq_push(e.dst);\n  }\n  inline void global_relabeling(int t) {\n \
+    \   dist.assign(n, n), dist[t] = 0;\n    static std::queue<int> q;\n    q.push(t),\
+    \ hque.clear();\n    if constexpr (use_gap) gap = 1, dcnt.assign(n + 1, 0);\n\
+    \    for (int now; !q.empty();) {\n      now = q.front(), q.pop();\n      if constexpr\
+    \ (use_gap) gap = dist[now] + 1, dcnt[dist[now]]++;\n      if (excess[now] > 0)\
+    \ hque.push(now, dist[now]);\n      for (const auto &e : adj[now])\n        if\
+    \ (adj[e.dst][e.rev].cap && dist[e.dst] == n)\n          dist[e.dst] = dist[now]\
+    \ + 1, q.push(e.dst);\n    }\n  }\n  flow_t flow(int s, int t, flow_t flow_lim)\
+    \ {\n    assert(0 <= s && s < n);\n    assert(0 <= t && t < n);\n    assert(s\
+    \ != t);\n    hque.init(n);\n    excess.assign(n, 0);\n    excess[s] += flow_lim,\
+    \ excess[t] -= flow_lim;\n    dist.assign(n, 0), dist[s] = n;\n    if constexpr\
+    \ (use_gap) gap = 1, dcnt.assign(n + 1, 0), dcnt[0] = n - 1;\n    for (auto &e\
+    \ : adj[s]) push(s, e);\n    calc(t);\n    flow_t ret = excess[t] + flow_lim;\n\
+    \    if constexpr (!freeze) {\n      excess[s] += excess[t], excess[t] = 0;\n\
+    \      if constexpr (global_freq) global_relabeling(s);\n      calc(s);\n    \
+    \  assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n  }\n\
+    };\n#line 3 \"src/Graph/MaxFlow.hpp\"\n/**\n * @title \u6700\u5927\u6D41\u30A4\
+    \u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category \u30B0\u30E9\u30D5\n\
+    \ * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\u30D7\
+    \u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * EdgePtr:\n *  change_cap:\
     \ \u5BB9\u91CF\u3092\u5909\u66F4, \u305D\u308C\u306B\u4F34\u3046\u30D5\u30ED\u30FC\
     \u306E\u306F\u307F\u51FA\u3057\u3092\u51FA\u529B\n * \u53CC\u65B9\u5411\u8FBA\u3082\
     \u53EF\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename FlowAlgo>\nstruct MaxFlow\
@@ -170,7 +171,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc129_e.PushRelabel.test.cpp
   requiredBy: []
-  timestamp: '2021-12-16 12:41:45+09:00'
+  timestamp: '2021-12-16 14:04:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc129_e.PushRelabel.test.cpp
