@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
@@ -84,7 +84,8 @@ data:
     \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 3 \"src/Math/SetPowerSeries.hpp\"\
     \n/**\n * @title \u96C6\u5408\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n\
     \n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
-    \n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    // https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F)\n\n\
+    // BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
     \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
     \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
     \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
@@ -183,22 +184,24 @@ data:
     \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(1\
     \ << N), b(1 << N);\n  for (auto &ai : a) cin >> ai;\n  for (auto &bi : b) cin\
     \ >> bi;\n  auto c = SetPowerSeries<20>::convolution(a, b);\n  for (int i = 0;\
-    \ i < N; i++) cout << c[i] << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
+    \ i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/SetPowerSeries.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(1\
     \ << N), b(1 << N);\n  for (auto &ai : a) cin >> ai;\n  for (auto &bi : b) cin\
     \ >> bi;\n  auto c = SetPowerSeries<20>::convolution(a, b);\n  for (int i = 0;\
-    \ i < N; i++) cout << c[i] << \" \\n\"[i == N - 1];\n  return 0;\n}"
+    \ i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n  return 0;\n\
+    }"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/SetPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-02-07 22:52:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-02-08 01:59:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp
 layout: document

@@ -13,20 +13,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     links:
     - https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h
+    - https://loj.ac/p/2340
   bundledCode: "#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u96C6\u5408\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n\
     \n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
-    \n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    // https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F)\n\n\
+    // BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
     \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
     \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
     \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
@@ -123,7 +125,8 @@ data:
     \ << (n - i)) - 1];\n    return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u96C6\u5408\u51AA\
     \u7D1A\u6570\n * @category \u6570\u5B66\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
-    \n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    // https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F)\n\n\
+    // BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
     \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
     \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
     \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
@@ -223,8 +226,8 @@ data:
   path: src/Math/SetPowerSeries.hpp
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
-  timestamp: '2022-02-07 22:52:39+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-02-08 01:59:44+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/subset_convolution.test.cpp
   - test/atcoder/arc105_f.test.cpp

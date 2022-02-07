@@ -5,10 +5,10 @@ data:
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
@@ -88,7 +88,8 @@ data:
     \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 3 \"src/Math/SetPowerSeries.hpp\"\
     \n/**\n * @title \u96C6\u5408\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n\
     \n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
-    \n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    // https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F)\n\n\
+    // BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
     \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
     \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
     \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
@@ -338,7 +339,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2022-02-07 22:52:39+09:00'
+  timestamp: '2022-02-08 01:59:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp
