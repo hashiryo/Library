@@ -157,6 +157,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    - icon: ':heavy_check_mark:'
+      path: src/Graph/UndirectedGraphSetPowerSeries.hpp
+      title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
+        \u7D1A\u6570)"
   - name: src/Math
     pages:
     - icon: ':heavy_check_mark:'
@@ -177,7 +181,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -186,6 +190,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
+    - icon: ':question:'
+      path: src/Math/SetPowerSeries.hpp
+      title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
       path: src/Math/SubproductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
@@ -620,6 +627,9 @@ data:
       path: test/atcoder/abc172_d.primecnt.test.cpp
       title: test/atcoder/abc172_d.primecnt.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc213_g.test.cpp
+      title: test/atcoder/abc213_g.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -634,6 +644,9 @@ data:
     - icon: ':x:'
       path: test/atcoder/arc085_c.PushRelabel.test.cpp
       title: test/atcoder/arc085_c.PushRelabel.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/arc105_f.test.cpp
+      title: test/atcoder/arc105_f.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc106_b.test.cpp
       title: test/atcoder/arc106_b.test.cpp
@@ -822,6 +835,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/stirling_second.test.cpp
       title: test/yosupo/stirling_second.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/subset_convolution.test.cpp
+      title: test/yosupo/subset_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/suffixarray.test.cpp
       title: test/yosupo/suffixarray.test.cpp
