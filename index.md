@@ -91,6 +91,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/WeightBalancedTree.hpp
       title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
+  - name: src/Game
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: src/Game/ImpartialGame.hpp
+      title: "\u4E0D\u504F\u30B2\u30FC\u30E0 (grundy\u6570)"
+    - icon: ':heavy_check_mark:'
+      path: src/Game/PartisanGame.hpp
+      title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0 (Conway\u306E\u69CB\u6210)"
   - name: src/Geometry
     pages:
     - icon: ':heavy_check_mark:'
@@ -252,6 +260,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0366.test.cpp
       title: test/aoj/0366.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/0401.test.cpp
+      title: test/aoj/0401.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/0425.test.cpp
       title: test/aoj/0425.test.cpp
@@ -608,6 +619,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.primecnt.test.cpp
       title: test/atcoder/abc172_d.primecnt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc229_h.test.cpp
+      title: test/atcoder/abc229_h.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc018_c.test.cpp
       title: test/atcoder/agc018_c.test.cpp
