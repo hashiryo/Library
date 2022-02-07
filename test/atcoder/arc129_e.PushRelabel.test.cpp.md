@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Algorithm/PushRelabel.hpp
     title: PushRelabel(Gap)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Algorithm/monge_mincut.hpp
     title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
       \u822C\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/MaxFlow.hpp
     title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
   _extendedRequiredBy: []

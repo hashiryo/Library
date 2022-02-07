@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Algorithm/Dinic.hpp
     title: Dinic
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/MaxFlow.hpp
     title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
   _extendedRequiredBy: []

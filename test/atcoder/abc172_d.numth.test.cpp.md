@@ -19,15 +19,15 @@ data:
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/NumberTheory.hpp\"\n/**\n * @title\
     \ \u6570\u8AD6\u3044\u308D\u3044\u308D\n * @category \u6570\u5B66\n * \u7DDA\u5F62\
     \u7BE9\u306B\u3088\u308B\u7D20\u6570\u5217\u6319\u306E\u524D\u51E6\u7406\n * \u4E57\
-    \u6CD5\u7684\u95A2\u6570\b\u30C6\u30FC\u30D6\u30EB\u5217\u6319 \u3084 gcd\u7573\
+    \u6CD5\u7684\u95A2\u6570 \u30C6\u30FC\u30D6\u30EB\u5217\u6319 \u3084 gcd\u7573\
     \u307F\u8FBC\u307F\u306A\u3069\n * @see https://37zigen.com/linear-sieve/\n *\
     \ @see https://qiita.com/convexineq/items/afc84dfb9ee4ec4a67d5\n * @see https://en.wikipedia.org/wiki/Dirichlet_convolution\n\
     \ */\n\n// BEGIN CUT HERE\n\nclass NumberTheory {\n  static constexpr int MAX_N\
     \ = 1 << 24;\n  static inline int ps[MAX_N >> 4], mpf[MAX_N], psz = 0, lim = 2;\n\
-    \  static void sieve(int N) {\n    if (lim > N) return;\n    for (int d = lim;\
-    \ d <= N; d++) {\n      if (!mpf[d]) mpf[d] = ps[psz++] = d;\n      for (int j\
-    \ = 0; j < psz && ps[j] <= mpf[d] && ps[j] * d <= N; j++)\n        mpf[ps[j] *\
-    \ d] = ps[j];\n    }\n    lim = N + 1;\n  }\n\n public:\n  static int min_prime_factor(int\
+    \  static inline void sieve(int N) {\n    if (lim > N) return;\n    for (int d\
+    \ = lim; d <= N; d++) {\n      if (!mpf[d]) mpf[d] = ps[psz++] = d;\n      for\
+    \ (int j = 0; j < psz && ps[j] <= mpf[d] && ps[j] * d <= N; j++)\n        mpf[ps[j]\
+    \ * d] = ps[j];\n    }\n    lim = N + 1;\n  }\n\n public:\n  static int min_prime_factor(int\
     \ n) { return sieve(n), mpf[n]; }\n  // O(log n)\n  static std::map<int, short>\
     \ factorize(int n) {\n    std::map<int, short> ret;\n    sieve(n);\n    while\
     \ (n > 1) ret[mpf[n]]++, n /= mpf[n];\n    return ret;\n  }\n  // O(log n)\n \
@@ -96,7 +96,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc172_d.numth.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 22:15:15+09:00'
+  timestamp: '2022-02-07 21:00:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc172_d.numth.test.cpp

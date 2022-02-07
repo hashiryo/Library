@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.PushRelabel.test.cpp
     title: test/aoj/GRL_6_A.PushRelabel.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc085_c.PushRelabel.test.cpp
+    title: test/atcoder/arc085_c.PushRelabel.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.PushRelabel.test.cpp
     title: test/atcoder/arc107_f.PushRelabel.test.cpp
@@ -27,9 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/119.PushRelabel.test.cpp
     title: test/yukicoder/119.PushRelabel.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: PushRelabel(Gap)
     links:
@@ -141,16 +144,17 @@ data:
   path: src/Algorithm/PushRelabel.hpp
   requiredBy: []
   timestamp: '2021-12-16 14:12:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2803.PushRelabel.test.cpp
-  - test/aoj/1615.PushRelabel.test.cpp
-  - test/aoj/GRL_6_A.PushRelabel.test.cpp
-  - test/aoj/2835.PushRelabel.test.cpp
-  - test/aoj/2313.PushRelabel.test.cpp
-  - test/yukicoder/119.PushRelabel.test.cpp
+  - test/atcoder/arc085_c.PushRelabel.test.cpp
   - test/atcoder/arc129_e.PushRelabel.test.cpp
   - test/atcoder/arc107_f.PushRelabel.test.cpp
+  - test/aoj/GRL_6_A.PushRelabel.test.cpp
+  - test/aoj/1615.PushRelabel.test.cpp
+  - test/aoj/2835.PushRelabel.test.cpp
+  - test/aoj/2313.PushRelabel.test.cpp
+  - test/aoj/2803.PushRelabel.test.cpp
+  - test/yukicoder/119.PushRelabel.test.cpp
 documentation_of: src/Algorithm/PushRelabel.hpp
 layout: document
 redirect_from:

@@ -37,22 +37,23 @@ data:
     \ std::size_t size) {\n    std::vector<int> ret(size);\n    std::iota(ret.begin(),\
     \ ret.end(), this->n - 2);\n    return this->adj.resize(this->n += size), in.resize(this->n\
     \ - 2, 0), ret;\n  }\n  struct EdgePtr {\n    friend class MaxFlowLowerBound;\n\
-    \    MaxFlowLowerBound *instance;\n    int v, e;\n    flow_t u;\n    Edge &edge()\
-    \ { return instance->adj[v][e]; }\n    Edge &rev() {\n      Edge &e = edge();\n\
-    \      return instance->adj[e.dst][e.rev];\n    }\n    EdgePtr(MaxFlowLowerBound\
+    \    MaxFlowLowerBound *instance;\n    int v, e;\n    flow_t u;\n    const Edge\
+    \ &edge() { return instance->adj[v][e]; }\n    const Edge &rev() {\n      Edge\
+    \ &e = edge();\n      return instance->adj[e.dst][e.rev];\n    }\n    EdgePtr(MaxFlowLowerBound\
     \ *instance, int v, int e, flow_t u)\n        : instance(instance), v(v), e(e),\
-    \ u(u) {}\n\n   public:\n    EdgePtr() = default;\n    int src() { return v; }\n\
-    \    int dst() { return edge().dst; }\n    flow_t flow() { return u - edge().cap;\
-    \ }\n    flow_t lower() { return flow() - rev().cap; }\n    flow_t upper() { return\
-    \ u; }\n  };\n  EdgePtr add_edge(int src, int dst, flow_t lower, flow_t upper)\
-    \ {\n    assert(lower <= upper);\n    src += 2, dst += 2;\n    assert(0 <= src\
-    \ && src < this->n);\n    assert(0 <= dst && dst < this->n);\n    this->m++;\n\
-    \    int e = this->adj[src].size();\n    int re = src == dst ? e + 1 : this->adj[dst].size();\n\
-    \    if (lower * upper <= 0) {\n      this->adj[src].push_back(Edge{dst, re, upper});\n\
-    \      this->adj[dst].push_back(Edge{src, e, -lower});\n    } else if (lower >\
-    \ 0) {\n      in[src - 2] -= lower, in[dst - 2] += lower;\n      this->adj[src].push_back(Edge{dst,\
-    \ re, upper - lower});\n      this->adj[dst].push_back(Edge{src, e, 0});\n   \
-    \ } else {\n      in[src - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
+    \ u(u) {}\n\n   public:\n    EdgePtr() = default;\n    int src() const { return\
+    \ v; }\n    int dst() const { return edge().dst; }\n    flow_t flow() const {\
+    \ return u - edge().cap; }\n    flow_t lower() const { return flow() - rev().cap;\
+    \ }\n    flow_t upper() const { return u; }\n  };\n  EdgePtr add_edge(int src,\
+    \ int dst, flow_t lower, flow_t upper) {\n    assert(lower <= upper);\n    src\
+    \ += 2, dst += 2;\n    assert(0 <= src && src < this->n);\n    assert(0 <= dst\
+    \ && dst < this->n);\n    this->m++;\n    int e = this->adj[src].size();\n   \
+    \ int re = src == dst ? e + 1 : this->adj[dst].size();\n    if (lower * upper\
+    \ <= 0) {\n      this->adj[src].push_back(Edge{dst, re, upper});\n      this->adj[dst].push_back(Edge{src,\
+    \ e, -lower});\n    } else if (lower > 0) {\n      in[src - 2] -= lower, in[dst\
+    \ - 2] += lower;\n      this->adj[src].push_back(Edge{dst, re, upper - lower});\n\
+    \      this->adj[dst].push_back(Edge{src, e, 0});\n    } else {\n      in[src\
+    \ - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
     \ re, 0});\n      this->adj[dst].push_back(Edge{src, e, upper - lower});\n   \
     \ }\n    return EdgePtr(this, src, e, upper);\n  }\n  flow_t maxflow(int s, int\
     \ t) {\n    static constexpr flow_t INF = std::numeric_limits<flow_t>::max();\n\
@@ -80,22 +81,23 @@ data:
     \ std::size_t size) {\n    std::vector<int> ret(size);\n    std::iota(ret.begin(),\
     \ ret.end(), this->n - 2);\n    return this->adj.resize(this->n += size), in.resize(this->n\
     \ - 2, 0), ret;\n  }\n  struct EdgePtr {\n    friend class MaxFlowLowerBound;\n\
-    \    MaxFlowLowerBound *instance;\n    int v, e;\n    flow_t u;\n    Edge &edge()\
-    \ { return instance->adj[v][e]; }\n    Edge &rev() {\n      Edge &e = edge();\n\
-    \      return instance->adj[e.dst][e.rev];\n    }\n    EdgePtr(MaxFlowLowerBound\
+    \    MaxFlowLowerBound *instance;\n    int v, e;\n    flow_t u;\n    const Edge\
+    \ &edge() { return instance->adj[v][e]; }\n    const Edge &rev() {\n      Edge\
+    \ &e = edge();\n      return instance->adj[e.dst][e.rev];\n    }\n    EdgePtr(MaxFlowLowerBound\
     \ *instance, int v, int e, flow_t u)\n        : instance(instance), v(v), e(e),\
-    \ u(u) {}\n\n   public:\n    EdgePtr() = default;\n    int src() { return v; }\n\
-    \    int dst() { return edge().dst; }\n    flow_t flow() { return u - edge().cap;\
-    \ }\n    flow_t lower() { return flow() - rev().cap; }\n    flow_t upper() { return\
-    \ u; }\n  };\n  EdgePtr add_edge(int src, int dst, flow_t lower, flow_t upper)\
-    \ {\n    assert(lower <= upper);\n    src += 2, dst += 2;\n    assert(0 <= src\
-    \ && src < this->n);\n    assert(0 <= dst && dst < this->n);\n    this->m++;\n\
-    \    int e = this->adj[src].size();\n    int re = src == dst ? e + 1 : this->adj[dst].size();\n\
-    \    if (lower * upper <= 0) {\n      this->adj[src].push_back(Edge{dst, re, upper});\n\
-    \      this->adj[dst].push_back(Edge{src, e, -lower});\n    } else if (lower >\
-    \ 0) {\n      in[src - 2] -= lower, in[dst - 2] += lower;\n      this->adj[src].push_back(Edge{dst,\
-    \ re, upper - lower});\n      this->adj[dst].push_back(Edge{src, e, 0});\n   \
-    \ } else {\n      in[src - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
+    \ u(u) {}\n\n   public:\n    EdgePtr() = default;\n    int src() const { return\
+    \ v; }\n    int dst() const { return edge().dst; }\n    flow_t flow() const {\
+    \ return u - edge().cap; }\n    flow_t lower() const { return flow() - rev().cap;\
+    \ }\n    flow_t upper() const { return u; }\n  };\n  EdgePtr add_edge(int src,\
+    \ int dst, flow_t lower, flow_t upper) {\n    assert(lower <= upper);\n    src\
+    \ += 2, dst += 2;\n    assert(0 <= src && src < this->n);\n    assert(0 <= dst\
+    \ && dst < this->n);\n    this->m++;\n    int e = this->adj[src].size();\n   \
+    \ int re = src == dst ? e + 1 : this->adj[dst].size();\n    if (lower * upper\
+    \ <= 0) {\n      this->adj[src].push_back(Edge{dst, re, upper});\n      this->adj[dst].push_back(Edge{src,\
+    \ e, -lower});\n    } else if (lower > 0) {\n      in[src - 2] -= lower, in[dst\
+    \ - 2] += lower;\n      this->adj[src].push_back(Edge{dst, re, upper - lower});\n\
+    \      this->adj[dst].push_back(Edge{src, e, 0});\n    } else {\n      in[src\
+    \ - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
     \ re, 0});\n      this->adj[dst].push_back(Edge{src, e, upper - lower});\n   \
     \ }\n    return EdgePtr(this, src, e, upper);\n  }\n  flow_t maxflow(int s, int\
     \ t) {\n    static constexpr flow_t INF = std::numeric_limits<flow_t>::max();\n\
@@ -108,11 +110,11 @@ data:
   isVerificationFile: false
   path: src/Graph/MaxFlowLowerBound.hpp
   requiredBy: []
-  timestamp: '2021-12-16 17:49:33+09:00'
+  timestamp: '2022-02-07 21:00:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/1615.Dinic.test.cpp
   - test/aoj/1615.PushRelabel.test.cpp
+  - test/aoj/1615.Dinic.test.cpp
 documentation_of: src/Graph/MaxFlowLowerBound.hpp
 layout: document
 redirect_from:
