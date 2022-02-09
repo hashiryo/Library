@@ -6,9 +6,6 @@ data:
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
   - icon: ':heavy_check_mark:'
-    path: src/Math/ModInt.hpp
-    title: ModInt
-  - icon: ':heavy_check_mark:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
@@ -18,76 +15,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_g
+    PROBLEM: https://atcoder.jp/contests/abc199/tasks/abc199_d
     links:
-    - https://atcoder.jp/contests/abc213/tasks/abc213_g
-  bundledCode: "#line 1 \"test/atcoder/abc213_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_g\"\
-    \n\n// \u9023\u7D50\u30B0\u30E9\u30D5\n\n#include <bits/stdc++.h>\n#line 3 \"\
-    src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\
-    \n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod, std::uint64_t\
-    \ prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr std::uint64_t\
-    \ modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt() { return\
-    \ prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const ModInt\
-    \ &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\ntemplate\
-    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n    : public\
-    \ internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using u64\
-    \ = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1)\
-    \ {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static\
-    \ constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod) % mod;\n  static\
-    \ constexpr u64 init(u64 w) { return reduce(__uint128_t(w) * r2); }\n  static\
-    \ constexpr u64 reduce(const __uint128_t w) {\n    return u64(w >> 64) + mod -\
-    \ ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n  constexpr\
-    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
-    \ - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return w - (mod\
-    \ & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n\
-    \    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt\
-    \ &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1), x += (mod\
-    \ << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const ModInt\
-    \ &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n  }\n\
-    \  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x = reduce(__uint128_t(this->x)\
-    \ * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
-    \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
-    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
-    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
-    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
-    \ &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const ModInt\
-    \ &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const ModInt\
-    \ &rhs) const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t\
-    \ k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k\
-    \ >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n\
-    \  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr ModInt\
-    \ sqrt() const {\n    if (*this == ModInt(0) || mod == 2) return *this;\n    if\
-    \ (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt ONE\
-    \ = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b +=\
-    \ ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt,\
-    \ ModInt> v) {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n\
-    \      ModInt b = (u.first * v.second + u.second * v.first);\n      return std::make_pair(a,\
-    \ b);\n    };\n    std::uint64_t e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE,\
-    \ ModInt(0));\n    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs,\
-    \ bs))\n      if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 <\
-    \ mod ? ret.first : -ret.first;\n  }\n  constexpr u64 val() const {\n    u64 ret\
-    \ = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  friend std::istream\
-    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x\
-    \ = init(rhs.x), is;\n  }\n};\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2,\
-    \ pr_rt> : internal::ModIntImpl<2, pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t\
-    \ n = 0) : x(n & 1) {}\n  constexpr ModInt operator-() const { return *this; }\n\
-    \  constexpr ModInt &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this;\
-    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this;\
-    \ }\n  constexpr ModInt &operator*=(const ModInt &rhs) { return x &= rhs.x, *this;\
-    \ }\n  constexpr ModInt &operator/=(const ModInt &rhs) { return x &= rhs.x, *this;\
-    \ }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
-    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
-    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
-    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
-    \ }\n  bool operator==(const ModInt &rhs) const { return x == rhs.x; }\n  bool\
-    \ operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n  constexpr\
-    \ ModInt pow(std::uint64_t k) const { return !k ? ModInt(1) : *this; }\n  constexpr\
-    \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
-    \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
-    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 3 \"src/Math/SetPowerSeries.hpp\"\
-    \n/**\n * @title \u96C6\u5408\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n *\
-    \ @see\n * https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex\n\
+    - https://atcoder.jp/contests/abc199/tasks/abc199_d
+  bundledCode: "#line 1 \"test/atcoder/abc199_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc199/tasks/abc199_d\"\
+    \n\n#include <bits/stdc++.h>\n#line 3 \"src/Math/SetPowerSeries.hpp\"\n/**\n *\
+    \ @title \u96C6\u5408\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n * @see\n\
+    \ * https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex\n\
     \ * @see\n * https://notes.sshwy.name/Math/Subset-Power-Series/#%E5%88%86%E6%B2%BB%E5%8D%B7%E7%A7%AF-1\n\
     \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
     //                        (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F2 or\
@@ -322,40 +256,35 @@ data:
     \ * y + 1;\n      h = SPS::exp(h), std::copy(h.begin(), h.end(), std::back_inserter(g));\n\
     \    }\n    for (t = ~0, bfs(sz, [&](int u) { t ^= u; }), s = sz; --s &= t;) g[s]\
     \ *= x;\n    for (t = 0, i = V; i--;) t += adj[i][i];\n    return SPS::exp(g)[sz\
-    \ - 1] * pow(y, t);\n  }\n};\n#line 9 \"test/atcoder/abc213_g.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = ModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  UndirectedGraphSetPowerSeries<17>\
-    \ g(N);\n  for (int i = 0; i < M; i++) {\n    int a, b;\n    cin >> a >> b;\n\
-    \    g.add_edge(--a, --b);\n  }\n  auto tmp = g.edge_space_size<Mint>();\n  auto\
-    \ tmp2 = SetPowerSeries<17>::log(tmp);\n  for (int k = 1; k < N; k++) {\n    Mint\
-    \ ans = 0;\n    for (int s = 1; s < (1 << N); s += 2)\n      if ((s >> k) & 1)\
-    \ ans += tmp2[s] * tmp[((1 << N) - 1) ^ s];\n    cout << ans << '\\n';\n  }\n\
-    \  return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_g\"\n\n\
-    // \u9023\u7D50\u30B0\u30E9\u30D5\n\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\
-    \n#include \"src/Math/SetPowerSeries.hpp\"\n#include \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = ModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  UndirectedGraphSetPowerSeries<17>\
-    \ g(N);\n  for (int i = 0; i < M; i++) {\n    int a, b;\n    cin >> a >> b;\n\
-    \    g.add_edge(--a, --b);\n  }\n  auto tmp = g.edge_space_size<Mint>();\n  auto\
-    \ tmp2 = SetPowerSeries<17>::log(tmp);\n  for (int k = 1; k < N; k++) {\n    Mint\
-    \ ans = 0;\n    for (int s = 1; s < (1 << N); s += 2)\n      if ((s >> k) & 1)\
-    \ ans += tmp2[s] * tmp[((1 << N) - 1) ^ s];\n    cout << ans << '\\n';\n  }\n\
-    \  return 0;\n}\n"
+    \ - 1] * pow(y, t);\n  }\n};\n#line 6 \"test/atcoder/abc199_d.test.cpp\"\nusing\
+    \ namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  int N, M;\n  cin >> N >> M;\n  UndirectedGraphSetPowerSeries<20> g(N);\n  for\
+    \ (int i = 0; i < M; i++) {\n    int A, B;\n    cin >> A >> B;\n    g.add_edge(--A,\
+    \ --B);\n  }\n  auto tmp = g.colorings_using_exactly_k_colors_num<long long>();\n\
+    \  long long ans = 0, fact = 1;\n  for (int i = 0; i < min(3, N); i++) fact *=\
+    \ 3 - i, ans += fact * tmp[i + 1];\n  cout << ans << '\\n';\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc199/tasks/abc199_d\"\n\n\
+    #include <bits/stdc++.h>\n#include \"src/Math/SetPowerSeries.hpp\"\n#include \"\
+    src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, M;\n  cin >> N >>\
+    \ M;\n  UndirectedGraphSetPowerSeries<20> g(N);\n  for (int i = 0; i < M; i++)\
+    \ {\n    int A, B;\n    cin >> A >> B;\n    g.add_edge(--A, --B);\n  }\n  auto\
+    \ tmp = g.colorings_using_exactly_k_colors_num<long long>();\n  long long ans\
+    \ = 0, fact = 1;\n  for (int i = 0; i < min(3, N); i++) fact *= 3 - i, ans +=\
+    \ fact * tmp[i + 1];\n  cout << ans << '\\n';\n  return 0;\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
   - src/Math/SetPowerSeries.hpp
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
   isVerificationFile: true
-  path: test/atcoder/abc213_g.test.cpp
+  path: test/atcoder/abc199_d.test.cpp
   requiredBy: []
   timestamp: '2022-02-09 22:55:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/atcoder/abc213_g.test.cpp
+documentation_of: test/atcoder/abc199_d.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/abc213_g.test.cpp
-- /verify/test/atcoder/abc213_g.test.cpp.html
-title: test/atcoder/abc213_g.test.cpp
+- /verify/test/atcoder/abc199_d.test.cpp
+- /verify/test/atcoder/abc199_d.test.cpp.html
+title: test/atcoder/abc199_d.test.cpp
 ---

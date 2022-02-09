@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc199_d.test.cpp
+    title: test/atcoder/abc199_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -79,23 +82,23 @@ data:
     \ g) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    std::vector<T>\
     \ ret(sz);\n    if (n <= 10) return conv_na(f.data(), g.data(), ret.data(), sz),\
     \ ret;\n    assert(sz == 1 << n && sz == g.size());\n    return conv_tr(f.data(),\
-    \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u2282\
-    S & T\u2260\u2205} g(T)f(S/T) )\n  template <class T, class F = void (*)(int,\
-    \ T &)>  // O(n^2 2^n)\n  static inline std::vector<T> online_convolution(\n \
-    \     std::vector<T> g, T init, const F &phi = [](int, T &) {}) {\n    const int\
-    \ sz = g.size(), n = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0]\
-    \ = init;\n    if (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n\
-    \    assert(sz == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz),\
-    \ ret;\n  }\n  // f(S) = \u03C6_S ( (1/2) * \u03A3_{T\u2282S & T\u2260\u2205 &\
-    \ T\u2260S} f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static\
-    \ inline std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
+    \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u228A\
+    S} f(T)g(S/T) )\n  template <class T, class F = void (*)(int, T &)>  // O(n^2\
+    \ 2^n)\n  static inline std::vector<T> online_convolution(\n      std::vector<T>\
+    \ g, T init, const F &phi = [](int, T &) {}) {\n    const int sz = g.size(), n\
+    \ = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0] = init;\n    if\
+    \ (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n    assert(sz\
+    \ == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n  }\n\
+    \  // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
+    \ } f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static inline\
+    \ std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    int mid = std::min(1 << 13, sz);\n    std::vector<T> ret(sz, 0);\n\
     \    for (int I = 1, s, t, u = 1; I < mid; I <<= 1)\n      for (t = s = 0; s <\
     \ I; phi(u, ret[u]), t = ++s, u++)\n        for (ret[u] = 0; t; (--t) &= s) ret[u]\
     \ += ret[I | (s ^ t)] * ret[t];\n    T *h = ret.data();\n    for (int I = mid;\
     \ I < sz; I <<= 1)\n      phi(I, ret[I]), onconv_tr(\n                       \
     \   h, h + I, [&](int s, T &x) { phi(s | I, x); }, I);\n    return ret;\n  }\n\
-    \  // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n  // \"f[\u03C6] = 0\"\
+    \  // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n  // \"f[\u2205] = 0\"\
     \ is required.\n  template <class T, class EGF>  // O(n^2 2^n)\n  static inline\
     \ std::vector<T> composite(const std::vector<T> &f,\n                        \
     \                 const EGF &F) {\n    const int sz = f.size(), m = __builtin_ctz(sz),\
@@ -105,14 +108,14 @@ data:
     \ 1 << 11), j;\n    for (; l < ed; l <<= 1)\n      for (j = sz2; j >= l; j >>=\
     \ 1) conv_na(h - j, g + l, h - j - j + l, l);\n    for (; l < sz; l <<= 1)\n \
     \     for (j = sz2; j >= l; j >>= 1) conv_tr(h - j, g + l, h - j - j + l, l);\n\
-    \    return ret;\n  }\n  // exp(f) : \"f[\u03C6] = 0\" is required.\n  template\
+    \    return ret;\n  }\n  // exp(f) : \"f[\u2205] = 0\" is required.\n  template\
     \ <class T>  // O(n^2 2^n)\n  static inline std::vector<T> exp(const std::vector<T>\
     \ &f) {\n    const int sz = f.size();\n    assert(sz == 1 << __builtin_ctz(sz));\n\
     \    assert(f.at(0) == 0);\n    std::vector<T> ret(sz);\n    T *h = ret.data();\n\
     \    const T *g = f.data();\n    int l = 1, ed = std::min(sz, 1 << 11);\n    for\
     \ (h[0] = 1; l < ed; l <<= 1) conv_na(h, g + l, h + l, l);\n    for (; l < sz;\
     \ l <<= 1) conv_tr(h, g + l, h + l, l);\n    return ret;\n  }\n  // log(f) : \"\
-    f[\u03C6] = 1\" is required.\n  template <class T>  // O(n^2 2^n)\n  static inline\
+    f[\u2205] = 1\" is required.\n  template <class T>  // O(n^2 2^n)\n  static inline\
     \ std::vector<T> log(std::vector<T> f) {\n    const int sz = f.size(), m = __builtin_ctz(sz);\n\
     \    assert(sz == 1 << m);\n    assert(f.at(0) == T(1));\n    static T F[MAX_N\
     \ + 1] = {0, 1};\n    for (int i = 2; i <= m; i++) F[i] = -F[i - 1] * (i - 1);\n\
@@ -126,38 +129,39 @@ data:
     \ = 0, composite(f, F);\n  }\n\n  // {[X^{[n]}](f^k)/(k!)} for k=0,1,...,n\n \
     \ template <class T>  // O(n^2 2^n)\n  static inline std::vector<T> egf(std::vector<T>\
     \ f) {\n    const int sz = f.size(), n = __builtin_ctz(sz), md = 1 << 11, sz4\
-    \ = sz >> 2;\n    assert(sz == 1 << n);\n    int l = sz4, m;\n    T *in = f.data()\
-    \ + l, *dp = in + l, tmp[sz4], *dp2;\n    for (int s; l > md; conv_tr(dp, in,\
-    \ dp, l), in -= (l >>= 1))\n      for (s = l, m = sz4; dp2 = dp + (m - l), m >\
-    \ l; m >>= 1, s = l)\n        for (conv_tr(dp2 + m - l, in, tmp, l); s--;) dp2[s]\
-    \ += tmp[s];\n    for (int s; l; conv_na(dp, in, dp, l), in -= (l >>= 1))\n  \
-    \    for (s = l, m = sz4; dp2 = dp + (m - l), m > l; m >>= 1, s = l)\n       \
-    \ for (conv_na(dp2 + m - l, in, tmp, l); s--;) dp2[s] += tmp[s];\n    std::vector<T>\
-    \ ret(n + 1, 0);\n    for (int i = n + 1; --i;) ret[i] = dp[(1 << (n - i)) - 1];\n\
-    \    return ret;\n  }\n};\n#line 4 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
-    \n/**\n * @title \u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\
-    \u5408\u51AA\u7D1A\u6570)\n * @category \u30B0\u30E9\u30D5\n * @see\n * https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex\n\
-    \ */\n\n// verify\u7528:\n// https://loj.ac/p/155 (Tutte \u591A\u9805\u5F0F)\n\
-    // https://loj.ac/p/3165 (acyclic_orientations (Tutte \u591A\u9805\u5F0F))\n//\
-    \ https://loj.ac/p/6673 (\u30AA\u30A4\u30E9\u30FC\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6719\
-    \ (\u30AB\u30AF\u30BF\u30B9\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6729 (\u4E8C\
-    \u91CD\u70B9\u9023\u7D50\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6730 (\u4E8C\u91CD\
-    \u8FBA\u9023\u7D50\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6787 (\u5F69\u8272\u591A\
-    \u9805\u5F0F)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_V = 21>\nclass\
-    \ UndirectedGraphSetPowerSeries {\n  using SPS = SetPowerSeries<MAX_V>;\n  template\
-    \ <class T>\n  using sps = std::vector<T>;\n  template <class T>\n  using poly\
-    \ = std::vector<T>;\n  const unsigned V, sz;\n  unsigned adj[MAX_V][MAX_V] = {0},\
-    \ edge[MAX_V] = {0};\n  template <class T>\n  static inline T pow(T x, int k)\
-    \ {\n    T ret = 1;\n    for (; k; k >>= 1, x *= x)\n      if (k & 1) ret *= x;\n\
-    \    return ret;\n  }\n  template <class F>\n  inline void bfs(int s, const F\
-    \ &f) const {\n    for (int t = s, u, j; t;)\n      for (f(u = 1 << __builtin_ctz(t));\
-    \ u;)\n        j = __builtin_ctz(u), t ^= 1 << j, u ^= 1 << j, u |= edge[j] &\
-    \ t;\n  }\n\n public:\n  UndirectedGraphSetPowerSeries(int n) : V(n), sz(1 <<\
-    \ V) {}\n  UndirectedGraphSetPowerSeries(const std::vector<std::vector<int>> &g)\n\
-    \      : V(g.size()), sz(1 << V) {\n    for (int i = V; i--;)\n      for (int\
-    \ j = i; j--;) assert(g[i][j] == g[j][i]);\n    for (int i = V; i--;)\n      for\
-    \ (int j = V; j--;) adj[i][j] = g[i][j];\n    for (int i = V; i--;)\n      for\
-    \ (int j = V; j--;) edge[i] |= !(!(adj[i][j])) << j;\n  }\n  int *operator[](int\
+    \ = sz >> 2;\n    assert(sz == 1 << n);\n    if (n == 1) return {0, f[1]};\n \
+    \   int l = sz4, m;\n    T *in = f.data() + l, *dp = in + l, tmp[sz4], *dp2;\n\
+    \    for (int s; l > md; conv_tr(dp, in, dp, l), in -= (l >>= 1))\n      for (s\
+    \ = l, m = sz4; dp2 = dp + (m - l), m > l; m >>= 1, s = l)\n        for (conv_tr(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s] += tmp[s];\n    for (int s; l; conv_na(dp,\
+    \ in, dp, l), in -= (l >>= 1))\n      for (s = l, m = sz4; dp2 = dp + (m - l),\
+    \ m > l; m >>= 1, s = l)\n        for (conv_na(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s] += tmp[s];\n    std::vector<T> ret(n + 1, 0);\n    for (int i = n + 1;\
+    \ --i;) ret[i] = dp[(1 << (n - i)) - 1];\n    return ret;\n  }\n};\n#line 4 \"\
+    src/Graph/UndirectedGraphSetPowerSeries.hpp\"\n/**\n * @title \u7121\u5411\u30B0\
+    \u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\u7D1A\u6570)\n * @category\
+    \ \u30B0\u30E9\u30D5\n * @see\n * https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex\n\
+    \ * O(V 2^V) space\n */\n\n// verify\u7528:\n// https://loj.ac/p/155 (Tutte \u591A\
+    \u9805\u5F0F)\n// https://loj.ac/p/3165 (acyclic_orientations (Tutte \u591A\u9805\
+    \u5F0F, \u5F69\u8272\u591A\u9805\u5F0F))\n// https://loj.ac/p/6673 (\u30AA\u30A4\
+    \u30E9\u30FC\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6719 (\u30AB\u30AF\u30BF\u30B9\
+    \u30B0\u30E9\u30D5)\n// https://loj.ac/p/6729 (\u4E8C\u91CD\u70B9\u9023\u7D50\u30B0\
+    \u30E9\u30D5)\n// https://loj.ac/p/6730 (\u4E8C\u91CD\u8FBA\u9023\u7D50\u30B0\u30E9\
+    \u30D5)\n// https://loj.ac/p/6787 (\u5F69\u8272\u591A\u9805\u5F0F)\n\n// BEGIN\
+    \ CUT HERE\n\ntemplate <unsigned short MAX_V = 21>\nclass UndirectedGraphSetPowerSeries\
+    \ {\n  using SPS = SetPowerSeries<MAX_V>;\n  template <class T>\n  using sps =\
+    \ std::vector<T>;\n  template <class T>\n  using poly = std::vector<T>;\n  const\
+    \ unsigned V, sz;\n  unsigned adj[MAX_V][MAX_V] = {0}, edge[MAX_V] = {0};\n  template\
+    \ <class T>\n  static inline T pow(T x, int k) {\n    T ret = 1;\n    for (; k;\
+    \ k >>= 1, x *= x)\n      if (k & 1) ret *= x;\n    return ret;\n  }\n  template\
+    \ <class F>\n  inline void bfs(int s, const F &f) const {\n    for (int t = s,\
+    \ u, j; t;)\n      for (f(u = 1 << __builtin_ctz(t)); u;)\n        j = __builtin_ctz(u),\
+    \ t ^= 1 << j, u ^= 1 << j, u |= edge[j] & t;\n  }\n\n public:\n  UndirectedGraphSetPowerSeries(int\
+    \ n) : V(n), sz(1 << V) {}\n  UndirectedGraphSetPowerSeries(const std::vector<std::vector<int>>\
+    \ &g)\n      : V(g.size()), sz(1 << V) {\n    for (int i = V; i--;)\n      for\
+    \ (int j = i; j--;) assert(g[i][j] == g[j][i]);\n    for (int i = V; i--;)\n \
+    \     for (int j = V; j--;) adj[i][j] = g[i][j];\n    for (int i = V; i--;)\n\
+    \      for (int j = V; j--;) edge[i] |= !(!(adj[i][j])) << j;\n  }\n  int *operator[](int\
     \ u) const { return adj[u]; }\n  void add_edge(int u, int v, int cnt = 1) {\n\
     \    adj[u][v] = (adj[v][u] += cnt), edge[u] |= (1 << v), edge[v] |= (1 << u);\n\
     \    if (!(adj[u][v])) edge[u] ^= (1 << v), edge[v] ^= (1 << u);\n  }\n  template\
@@ -243,13 +247,13 @@ data:
     \ sps<T> acyclic_orientations() const {\n    auto k = connected_component_num();\n\
     \    sps<T> g(sz, 0);\n    for (int s = sz; --s;)\n      if (k[s] == __builtin_popcount(s))\
     \ g[s] = (k[s] + 1) & 1 ? -1 : 1;\n    return SPS::template online_convolution<T>(g,\
-    \ 1);\n  }\n  template <class T>  // O(V^2 2^V)\n  inline std::vector<T> number_of_colorings_using_exactly_k_colors()\
+    \ 1);\n  }\n  template <class T>  // O(V^2 2^V)\n  inline std::vector<T> colorings_using_exactly_k_colors_num()\
     \ const {\n    if (V == 0) return {0};  // impossible in any number of ways\n\
     \    for (int i = V; i--;)\n      if (adj[i][i]) return {0};  // impossible in\
     \ any number of ways\n    auto k = connected_component_num();\n    std::vector<T>\
     \ indep(sz, 0);\n    for (int s = sz; --s;) indep[s] = k[s] == __builtin_popcount(s);\n\
     \    return SPS::egf(indep);\n  }\n  template <class T>  // O(V^2 2^V)\n  inline\
-    \ poly<T> chromatic_polynomial() const {\n    auto e = number_of_colorings_using_exactly_k_colors<T>();\n\
+    \ poly<T> chromatic_polynomial() const {\n    auto e = colorings_using_exactly_k_colors_num<T>();\n\
     \    if (e.back() == 0) return {0};\n    poly<T> ret(V + 1, 0);\n    T tmp[V]\
     \ = {1};\n    for (int i = 1, j; i < V; i++)\n      for (j = i; j--; tmp[j] *=\
     \ -i)\n        ret[j + 1] += tmp[j] * e[i], tmp[j + 1] += tmp[j];\n    for (int\
@@ -267,27 +271,27 @@ data:
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/SetPowerSeries.hpp\"\
     \n/**\n * @title \u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\
     \u5408\u51AA\u7D1A\u6570)\n * @category \u30B0\u30E9\u30D5\n * @see\n * https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex\n\
-    \ */\n\n// verify\u7528:\n// https://loj.ac/p/155 (Tutte \u591A\u9805\u5F0F)\n\
-    // https://loj.ac/p/3165 (acyclic_orientations (Tutte \u591A\u9805\u5F0F))\n//\
-    \ https://loj.ac/p/6673 (\u30AA\u30A4\u30E9\u30FC\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6719\
-    \ (\u30AB\u30AF\u30BF\u30B9\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6729 (\u4E8C\
-    \u91CD\u70B9\u9023\u7D50\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6730 (\u4E8C\u91CD\
-    \u8FBA\u9023\u7D50\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6787 (\u5F69\u8272\u591A\
-    \u9805\u5F0F)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_V = 21>\nclass\
-    \ UndirectedGraphSetPowerSeries {\n  using SPS = SetPowerSeries<MAX_V>;\n  template\
-    \ <class T>\n  using sps = std::vector<T>;\n  template <class T>\n  using poly\
-    \ = std::vector<T>;\n  const unsigned V, sz;\n  unsigned adj[MAX_V][MAX_V] = {0},\
-    \ edge[MAX_V] = {0};\n  template <class T>\n  static inline T pow(T x, int k)\
-    \ {\n    T ret = 1;\n    for (; k; k >>= 1, x *= x)\n      if (k & 1) ret *= x;\n\
-    \    return ret;\n  }\n  template <class F>\n  inline void bfs(int s, const F\
-    \ &f) const {\n    for (int t = s, u, j; t;)\n      for (f(u = 1 << __builtin_ctz(t));\
-    \ u;)\n        j = __builtin_ctz(u), t ^= 1 << j, u ^= 1 << j, u |= edge[j] &\
-    \ t;\n  }\n\n public:\n  UndirectedGraphSetPowerSeries(int n) : V(n), sz(1 <<\
-    \ V) {}\n  UndirectedGraphSetPowerSeries(const std::vector<std::vector<int>> &g)\n\
-    \      : V(g.size()), sz(1 << V) {\n    for (int i = V; i--;)\n      for (int\
-    \ j = i; j--;) assert(g[i][j] == g[j][i]);\n    for (int i = V; i--;)\n      for\
-    \ (int j = V; j--;) adj[i][j] = g[i][j];\n    for (int i = V; i--;)\n      for\
-    \ (int j = V; j--;) edge[i] |= !(!(adj[i][j])) << j;\n  }\n  int *operator[](int\
+    \ * O(V 2^V) space\n */\n\n// verify\u7528:\n// https://loj.ac/p/155 (Tutte \u591A\
+    \u9805\u5F0F)\n// https://loj.ac/p/3165 (acyclic_orientations (Tutte \u591A\u9805\
+    \u5F0F, \u5F69\u8272\u591A\u9805\u5F0F))\n// https://loj.ac/p/6673 (\u30AA\u30A4\
+    \u30E9\u30FC\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6719 (\u30AB\u30AF\u30BF\u30B9\
+    \u30B0\u30E9\u30D5)\n// https://loj.ac/p/6729 (\u4E8C\u91CD\u70B9\u9023\u7D50\u30B0\
+    \u30E9\u30D5)\n// https://loj.ac/p/6730 (\u4E8C\u91CD\u8FBA\u9023\u7D50\u30B0\u30E9\
+    \u30D5)\n// https://loj.ac/p/6787 (\u5F69\u8272\u591A\u9805\u5F0F)\n\n// BEGIN\
+    \ CUT HERE\n\ntemplate <unsigned short MAX_V = 21>\nclass UndirectedGraphSetPowerSeries\
+    \ {\n  using SPS = SetPowerSeries<MAX_V>;\n  template <class T>\n  using sps =\
+    \ std::vector<T>;\n  template <class T>\n  using poly = std::vector<T>;\n  const\
+    \ unsigned V, sz;\n  unsigned adj[MAX_V][MAX_V] = {0}, edge[MAX_V] = {0};\n  template\
+    \ <class T>\n  static inline T pow(T x, int k) {\n    T ret = 1;\n    for (; k;\
+    \ k >>= 1, x *= x)\n      if (k & 1) ret *= x;\n    return ret;\n  }\n  template\
+    \ <class F>\n  inline void bfs(int s, const F &f) const {\n    for (int t = s,\
+    \ u, j; t;)\n      for (f(u = 1 << __builtin_ctz(t)); u;)\n        j = __builtin_ctz(u),\
+    \ t ^= 1 << j, u ^= 1 << j, u |= edge[j] & t;\n  }\n\n public:\n  UndirectedGraphSetPowerSeries(int\
+    \ n) : V(n), sz(1 << V) {}\n  UndirectedGraphSetPowerSeries(const std::vector<std::vector<int>>\
+    \ &g)\n      : V(g.size()), sz(1 << V) {\n    for (int i = V; i--;)\n      for\
+    \ (int j = i; j--;) assert(g[i][j] == g[j][i]);\n    for (int i = V; i--;)\n \
+    \     for (int j = V; j--;) adj[i][j] = g[i][j];\n    for (int i = V; i--;)\n\
+    \      for (int j = V; j--;) edge[i] |= !(!(adj[i][j])) << j;\n  }\n  int *operator[](int\
     \ u) const { return adj[u]; }\n  void add_edge(int u, int v, int cnt = 1) {\n\
     \    adj[u][v] = (adj[v][u] += cnt), edge[u] |= (1 << v), edge[v] |= (1 << u);\n\
     \    if (!(adj[u][v])) edge[u] ^= (1 << v), edge[v] ^= (1 << u);\n  }\n  template\
@@ -373,13 +377,13 @@ data:
     \ sps<T> acyclic_orientations() const {\n    auto k = connected_component_num();\n\
     \    sps<T> g(sz, 0);\n    for (int s = sz; --s;)\n      if (k[s] == __builtin_popcount(s))\
     \ g[s] = (k[s] + 1) & 1 ? -1 : 1;\n    return SPS::template online_convolution<T>(g,\
-    \ 1);\n  }\n  template <class T>  // O(V^2 2^V)\n  inline std::vector<T> number_of_colorings_using_exactly_k_colors()\
+    \ 1);\n  }\n  template <class T>  // O(V^2 2^V)\n  inline std::vector<T> colorings_using_exactly_k_colors_num()\
     \ const {\n    if (V == 0) return {0};  // impossible in any number of ways\n\
     \    for (int i = V; i--;)\n      if (adj[i][i]) return {0};  // impossible in\
     \ any number of ways\n    auto k = connected_component_num();\n    std::vector<T>\
     \ indep(sz, 0);\n    for (int s = sz; --s;) indep[s] = k[s] == __builtin_popcount(s);\n\
     \    return SPS::egf(indep);\n  }\n  template <class T>  // O(V^2 2^V)\n  inline\
-    \ poly<T> chromatic_polynomial() const {\n    auto e = number_of_colorings_using_exactly_k_colors<T>();\n\
+    \ poly<T> chromatic_polynomial() const {\n    auto e = colorings_using_exactly_k_colors_num<T>();\n\
     \    if (e.back() == 0) return {0};\n    poly<T> ret(V + 1, 0);\n    T tmp[V]\
     \ = {1};\n    for (int i = 1, j; i < V; i++)\n      for (j = i; j--; tmp[j] *=\
     \ -i)\n        ret[j + 1] += tmp[j] * e[i], tmp[j + 1] += tmp[j];\n    for (int\
@@ -399,9 +403,10 @@ data:
   isVerificationFile: false
   path: src/Graph/UndirectedGraphSetPowerSeries.hpp
   requiredBy: []
-  timestamp: '2022-02-09 09:22:14+09:00'
+  timestamp: '2022-02-09 22:55:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/atcoder/abc199_d.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc213_g.test.cpp
 documentation_of: src/Graph/UndirectedGraphSetPowerSeries.hpp

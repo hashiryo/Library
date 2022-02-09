@@ -133,23 +133,23 @@ data:
     \ g) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    std::vector<T>\
     \ ret(sz);\n    if (n <= 10) return conv_na(f.data(), g.data(), ret.data(), sz),\
     \ ret;\n    assert(sz == 1 << n && sz == g.size());\n    return conv_tr(f.data(),\
-    \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u2282\
-    S & T\u2260\u2205} g(T)f(S/T) )\n  template <class T, class F = void (*)(int,\
-    \ T &)>  // O(n^2 2^n)\n  static inline std::vector<T> online_convolution(\n \
-    \     std::vector<T> g, T init, const F &phi = [](int, T &) {}) {\n    const int\
-    \ sz = g.size(), n = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0]\
-    \ = init;\n    if (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n\
-    \    assert(sz == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz),\
-    \ ret;\n  }\n  // f(S) = \u03C6_S ( (1/2) * \u03A3_{T\u2282S & T\u2260\u2205 &\
-    \ T\u2260S} f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static\
-    \ inline std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
+    \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u228A\
+    S} f(T)g(S/T) )\n  template <class T, class F = void (*)(int, T &)>  // O(n^2\
+    \ 2^n)\n  static inline std::vector<T> online_convolution(\n      std::vector<T>\
+    \ g, T init, const F &phi = [](int, T &) {}) {\n    const int sz = g.size(), n\
+    \ = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0] = init;\n    if\
+    \ (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n    assert(sz\
+    \ == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n  }\n\
+    \  // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
+    \ } f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static inline\
+    \ std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    int mid = std::min(1 << 13, sz);\n    std::vector<T> ret(sz, 0);\n\
     \    for (int I = 1, s, t, u = 1; I < mid; I <<= 1)\n      for (t = s = 0; s <\
     \ I; phi(u, ret[u]), t = ++s, u++)\n        for (ret[u] = 0; t; (--t) &= s) ret[u]\
     \ += ret[I | (s ^ t)] * ret[t];\n    T *h = ret.data();\n    for (int I = mid;\
     \ I < sz; I <<= 1)\n      phi(I, ret[I]), onconv_tr(\n                       \
     \   h, h + I, [&](int s, T &x) { phi(s | I, x); }, I);\n    return ret;\n  }\n\
-    \  // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n  // \"f[\u03C6] = 0\"\
+    \  // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n  // \"f[\u2205] = 0\"\
     \ is required.\n  template <class T, class EGF>  // O(n^2 2^n)\n  static inline\
     \ std::vector<T> composite(const std::vector<T> &f,\n                        \
     \                 const EGF &F) {\n    const int sz = f.size(), m = __builtin_ctz(sz),\
@@ -159,14 +159,14 @@ data:
     \ 1 << 11), j;\n    for (; l < ed; l <<= 1)\n      for (j = sz2; j >= l; j >>=\
     \ 1) conv_na(h - j, g + l, h - j - j + l, l);\n    for (; l < sz; l <<= 1)\n \
     \     for (j = sz2; j >= l; j >>= 1) conv_tr(h - j, g + l, h - j - j + l, l);\n\
-    \    return ret;\n  }\n  // exp(f) : \"f[\u03C6] = 0\" is required.\n  template\
+    \    return ret;\n  }\n  // exp(f) : \"f[\u2205] = 0\" is required.\n  template\
     \ <class T>  // O(n^2 2^n)\n  static inline std::vector<T> exp(const std::vector<T>\
     \ &f) {\n    const int sz = f.size();\n    assert(sz == 1 << __builtin_ctz(sz));\n\
     \    assert(f.at(0) == 0);\n    std::vector<T> ret(sz);\n    T *h = ret.data();\n\
     \    const T *g = f.data();\n    int l = 1, ed = std::min(sz, 1 << 11);\n    for\
     \ (h[0] = 1; l < ed; l <<= 1) conv_na(h, g + l, h + l, l);\n    for (; l < sz;\
     \ l <<= 1) conv_tr(h, g + l, h + l, l);\n    return ret;\n  }\n  // log(f) : \"\
-    f[\u03C6] = 1\" is required.\n  template <class T>  // O(n^2 2^n)\n  static inline\
+    f[\u2205] = 1\" is required.\n  template <class T>  // O(n^2 2^n)\n  static inline\
     \ std::vector<T> log(std::vector<T> f) {\n    const int sz = f.size(), m = __builtin_ctz(sz);\n\
     \    assert(sz == 1 << m);\n    assert(f.at(0) == T(1));\n    static T F[MAX_N\
     \ + 1] = {0, 1};\n    for (int i = 2; i <= m; i++) F[i] = -F[i - 1] * (i - 1);\n\
@@ -180,21 +180,21 @@ data:
     \ = 0, composite(f, F);\n  }\n\n  // {[X^{[n]}](f^k)/(k!)} for k=0,1,...,n\n \
     \ template <class T>  // O(n^2 2^n)\n  static inline std::vector<T> egf(std::vector<T>\
     \ f) {\n    const int sz = f.size(), n = __builtin_ctz(sz), md = 1 << 11, sz4\
-    \ = sz >> 2;\n    assert(sz == 1 << n);\n    int l = sz4, m;\n    T *in = f.data()\
-    \ + l, *dp = in + l, tmp[sz4], *dp2;\n    for (int s; l > md; conv_tr(dp, in,\
-    \ dp, l), in -= (l >>= 1))\n      for (s = l, m = sz4; dp2 = dp + (m - l), m >\
-    \ l; m >>= 1, s = l)\n        for (conv_tr(dp2 + m - l, in, tmp, l); s--;) dp2[s]\
-    \ += tmp[s];\n    for (int s; l; conv_na(dp, in, dp, l), in -= (l >>= 1))\n  \
-    \    for (s = l, m = sz4; dp2 = dp + (m - l), m > l; m >>= 1, s = l)\n       \
-    \ for (conv_na(dp2 + m - l, in, tmp, l); s--;) dp2[s] += tmp[s];\n    std::vector<T>\
-    \ ret(n + 1, 0);\n    for (int i = n + 1; --i;) ret[i] = dp[(1 << (n - i)) - 1];\n\
-    \    return ret;\n  }\n};\n#line 5 \"test/yosupo/subset_convolution.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(1\
-    \ << N), b(1 << N);\n  for (auto &ai : a) cin >> ai;\n  for (auto &bi : b) cin\
-    \ >> bi;\n  auto c = SetPowerSeries<20>::convolution(a, b);\n  for (int i = 0;\
-    \ i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n  return 0;\n\
-    }\n"
+    \ = sz >> 2;\n    assert(sz == 1 << n);\n    if (n == 1) return {0, f[1]};\n \
+    \   int l = sz4, m;\n    T *in = f.data() + l, *dp = in + l, tmp[sz4], *dp2;\n\
+    \    for (int s; l > md; conv_tr(dp, in, dp, l), in -= (l >>= 1))\n      for (s\
+    \ = l, m = sz4; dp2 = dp + (m - l), m > l; m >>= 1, s = l)\n        for (conv_tr(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s] += tmp[s];\n    for (int s; l; conv_na(dp,\
+    \ in, dp, l), in -= (l >>= 1))\n      for (s = l, m = sz4; dp2 = dp + (m - l),\
+    \ m > l; m >>= 1, s = l)\n        for (conv_na(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s] += tmp[s];\n    std::vector<T> ret(n + 1, 0);\n    for (int i = n + 1;\
+    \ --i;) ret[i] = dp[(1 << (n - i)) - 1];\n    return ret;\n  }\n};\n#line 5 \"\
+    test/yosupo/subset_convolution.test.cpp\"\nusing namespace std;\n\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
+    \  int N;\n  cin >> N;\n  vector<Mint> a(1 << N), b(1 << N);\n  for (auto &ai\
+    \ : a) cin >> ai;\n  for (auto &bi : b) cin >> bi;\n  auto c = SetPowerSeries<20>::convolution(a,\
+    \ b);\n  for (int i = 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 ==\
+    \ 1 << N];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/SetPowerSeries.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -209,7 +209,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-02-09 09:22:14+09:00'
+  timestamp: '2022-02-09 22:55:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp
