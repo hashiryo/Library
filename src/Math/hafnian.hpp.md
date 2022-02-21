@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/hafnian_of_matrix.test.cpp
+    title: test/yosupo/hafnian_of_matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\
       \u306E\u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
@@ -55,8 +58,9 @@ data:
   path: src/Math/hafnian.hpp
   requiredBy: []
   timestamp: '2022-02-09 22:55:47+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/yosupo/hafnian_of_matrix.test.cpp
 documentation_of: src/Math/hafnian.hpp
 layout: document
 redirect_from:

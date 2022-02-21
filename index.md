@@ -175,19 +175,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/LUDecomposition.hpp
       title: "LU\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
       path: src/Math/NumberTheory.hpp
       title: "\u6570\u8AD6\u3044\u308D\u3044\u308D"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':heavy_check_mark:'
@@ -223,7 +223,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/fps_sequence.hpp
       title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
@@ -352,7 +352,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
     - icon: ':heavy_check_mark:'
@@ -376,7 +376,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2559.LCT_Dual.test.cpp
       title: test/aoj/2559.LCT_Dual.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
     - icon: ':heavy_check_mark:'
@@ -731,7 +731,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/hafnian_of_matrix.test.cpp
       title: test/yosupo/hafnian_of_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -889,7 +889,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
     - icon: ':heavy_check_mark:'

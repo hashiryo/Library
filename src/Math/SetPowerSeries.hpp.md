@@ -77,20 +77,20 @@ data:
     \ &f) {\n    SUBSET_REP(S, U, f.size()) f[S] += f[U];\n  }\n  template <typename\
     \ T>  // O(n 2^n)\n  static inline void subset_sum_inv(std::vector<T> &f) {\n\
     \    SUBSET_REP(S, U, f.size()) f[S] -= f[U];\n  }\n  template <class T>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> convolution(std::vector<T> f, std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> convolve(std::vector<T> f, std::vector<T>\
     \ g) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    std::vector<T>\
     \ ret(sz);\n    if (n <= 10) return conv_na(f.data(), g.data(), ret.data(), sz),\
     \ ret;\n    assert(sz == 1 << n && sz == g.size());\n    return conv_tr(f.data(),\
     \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u228A\
     S} f(T)g(S/T) )\n  template <class T, class F = void (*)(int, T &)>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> online_convolution(\n      std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> online_convolve(\n      std::vector<T>\
     \ g, T init, const F &phi = [](int, T &) {}) {\n    const int sz = g.size(), n\
     \ = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0] = init;\n    if\
     \ (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n    assert(sz\
     \ == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n  }\n\
     \  // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
     \ } f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static inline\
-    \ std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
+    \ std::vector<T> online_convolve2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    int mid = std::min(1 << 13, sz);\n    std::vector<T> ret(sz, 0);\n\
     \    for (int I = 1, s, t, u = 1; I < mid; I <<= 1)\n      for (t = s = 0; s <\
     \ I; phi(u, ret[u]), t = ++s, u++)\n        for (ret[u] = 0; t; (--t) &= s) ret[u]\
@@ -184,20 +184,20 @@ data:
     \ &f) {\n    SUBSET_REP(S, U, f.size()) f[S] += f[U];\n  }\n  template <typename\
     \ T>  // O(n 2^n)\n  static inline void subset_sum_inv(std::vector<T> &f) {\n\
     \    SUBSET_REP(S, U, f.size()) f[S] -= f[U];\n  }\n  template <class T>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> convolution(std::vector<T> f, std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> convolve(std::vector<T> f, std::vector<T>\
     \ g) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    std::vector<T>\
     \ ret(sz);\n    if (n <= 10) return conv_na(f.data(), g.data(), ret.data(), sz),\
     \ ret;\n    assert(sz == 1 << n && sz == g.size());\n    return conv_tr(f.data(),\
     \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u228A\
     S} f(T)g(S/T) )\n  template <class T, class F = void (*)(int, T &)>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> online_convolution(\n      std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> online_convolve(\n      std::vector<T>\
     \ g, T init, const F &phi = [](int, T &) {}) {\n    const int sz = g.size(), n\
     \ = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0] = init;\n    if\
     \ (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n    assert(sz\
     \ == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n  }\n\
     \  // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
     \ } f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static inline\
-    \ std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
+    \ std::vector<T> online_convolve2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    int mid = std::min(1 << 13, sz);\n    std::vector<T> ret(sz, 0);\n\
     \    for (int I = 1, s, t, u = 1; I < mid; I <<= 1)\n      for (t = s = 0; s <\
     \ I; phi(u, ret[u]), t = ++s, u++)\n        for (ret[u] = 0; t; (--t) &= s) ret[u]\
@@ -249,7 +249,7 @@ data:
   path: src/Math/SetPowerSeries.hpp
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
-  timestamp: '2022-02-09 22:55:47+09:00'
+  timestamp: '2022-02-21 12:14:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/subset_convolution.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'
@@ -129,20 +129,20 @@ data:
     \ &f) {\n    SUBSET_REP(S, U, f.size()) f[S] += f[U];\n  }\n  template <typename\
     \ T>  // O(n 2^n)\n  static inline void subset_sum_inv(std::vector<T> &f) {\n\
     \    SUBSET_REP(S, U, f.size()) f[S] -= f[U];\n  }\n  template <class T>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> convolution(std::vector<T> f, std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> convolve(std::vector<T> f, std::vector<T>\
     \ g) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    std::vector<T>\
     \ ret(sz);\n    if (n <= 10) return conv_na(f.data(), g.data(), ret.data(), sz),\
     \ ret;\n    assert(sz == 1 << n && sz == g.size());\n    return conv_tr(f.data(),\
     \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u228A\
     S} f(T)g(S/T) )\n  template <class T, class F = void (*)(int, T &)>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> online_convolution(\n      std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> online_convolve(\n      std::vector<T>\
     \ g, T init, const F &phi = [](int, T &) {}) {\n    const int sz = g.size(), n\
     \ = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0] = init;\n    if\
     \ (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n    assert(sz\
     \ == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n  }\n\
     \  // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
     \ } f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static inline\
-    \ std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
+    \ std::vector<T> online_convolve2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    int mid = std::min(1 << 13, sz);\n    std::vector<T> ret(sz, 0);\n\
     \    for (int I = 1, s, t, u = 1; I < mid; I <<= 1)\n      for (t = s = 0; s <\
     \ I; phi(u, ret[u]), t = ++s, u++)\n        for (ret[u] = 0; t; (--t) &= s) ret[u]\
@@ -192,7 +192,7 @@ data:
     test/yosupo/subset_convolution.test.cpp\"\nusing namespace std;\n\nsigned main()\
     \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  int N;\n  cin >> N;\n  vector<Mint> a(1 << N), b(1 << N);\n  for (auto &ai\
-    \ : a) cin >> ai;\n  for (auto &bi : b) cin >> bi;\n  auto c = SetPowerSeries<20>::convolution(a,\
+    \ : a) cin >> ai;\n  for (auto &bi : b) cin >> bi;\n  auto c = SetPowerSeries<20>::convolve(a,\
     \ b);\n  for (int i = 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 ==\
     \ 1 << N];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
@@ -200,16 +200,15 @@ data:
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(1\
     \ << N), b(1 << N);\n  for (auto &ai : a) cin >> ai;\n  for (auto &bi : b) cin\
-    \ >> bi;\n  auto c = SetPowerSeries<20>::convolution(a, b);\n  for (int i = 0;\
-    \ i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n  return 0;\n\
-    }"
+    \ >> bi;\n  auto c = SetPowerSeries<20>::convolve(a, b);\n  for (int i = 0; i\
+    \ < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/SetPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-02-09 22:55:47+09:00'
+  timestamp: '2022-02-21 12:14:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp

@@ -5,7 +5,7 @@ data:
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'
@@ -133,20 +133,20 @@ data:
     \ &f) {\n    SUBSET_REP(S, U, f.size()) f[S] += f[U];\n  }\n  template <typename\
     \ T>  // O(n 2^n)\n  static inline void subset_sum_inv(std::vector<T> &f) {\n\
     \    SUBSET_REP(S, U, f.size()) f[S] -= f[U];\n  }\n  template <class T>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> convolution(std::vector<T> f, std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> convolve(std::vector<T> f, std::vector<T>\
     \ g) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n    std::vector<T>\
     \ ret(sz);\n    if (n <= 10) return conv_na(f.data(), g.data(), ret.data(), sz),\
     \ ret;\n    assert(sz == 1 << n && sz == g.size());\n    return conv_tr(f.data(),\
     \ g.data(), ret.data(), sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{T\u228A\
     S} f(T)g(S/T) )\n  template <class T, class F = void (*)(int, T &)>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> online_convolution(\n      std::vector<T>\
+    \ 2^n)\n  static inline std::vector<T> online_convolve(\n      std::vector<T>\
     \ g, T init, const F &phi = [](int, T &) {}) {\n    const int sz = g.size(), n\
     \ = __builtin_ctz(sz);\n    std::vector<T> ret(sz);\n    ret[0] = init;\n    if\
     \ (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n    assert(sz\
     \ == 1 << n);\n    return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n  }\n\
     \  // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
     \ } f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n  static inline\
-    \ std::vector<T> online_convolution2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
+    \ std::vector<T> online_convolve2(int sz, const F &phi) {\n    assert(__builtin_popcount(sz)\
     \ == 1);\n    int mid = std::min(1 << 13, sz);\n    std::vector<T> ret(sz, 0);\n\
     \    for (int I = 1, s, t, u = 1; I < mid; I <<= 1)\n      for (t = s = 0; s <\
     \ I; phi(u, ret[u]), t = ++s, u++)\n        for (ret[u] = 0; t; (--t) &= s) ret[u]\
@@ -207,10 +207,10 @@ data:
     \ {\n  using SPS = SetPowerSeries<MAX_V>;\n  template <class T>\n  using sps =\
     \ std::vector<T>;\n  template <class T>\n  using poly = std::vector<T>;\n  const\
     \ unsigned V, sz;\n  unsigned adj[MAX_V][MAX_V] = {0}, edge[MAX_V] = {0};\n  template\
-    \ <class T>\n  static inline T pow(T x, int k) {\n    T ret = 1;\n    for (; k;\
-    \ k >>= 1, x *= x)\n      if (k & 1) ret *= x;\n    return ret;\n  }\n  template\
-    \ <class F>\n  inline void bfs(int s, const F &f) const {\n    for (int t = s,\
-    \ u, j; t;)\n      for (f(u = 1 << __builtin_ctz(t)); u;)\n        j = __builtin_ctz(u),\
+    \ <class T>\n  static inline T pow(T x, int k) {\n    for (T ret(1);; x *= x)\n\
+    \      if (k & 1 ? ret *= x : 0; !(k >>= 1)) return ret;\n  }\n  template <class\
+    \ F>\n  inline void bfs(int s, const F &f) const {\n    for (int t = s, u, j;\
+    \ t;)\n      for (f(u = 1 << __builtin_ctz(t)); u;)\n        j = __builtin_ctz(u),\
     \ t ^= 1 << j, u ^= 1 << j, u |= edge[j] & t;\n  }\n\n public:\n  UndirectedGraphSetPowerSeries(int\
     \ n) : V(n), sz(1 << V) {}\n  UndirectedGraphSetPowerSeries(const std::vector<std::vector<int>>\
     \ &g)\n      : V(g.size()), sz(1 << V) {\n    for (int i = V; i--;)\n      for\
@@ -258,7 +258,7 @@ data:
     \ <class T>  // O(V^2 2^V)\n  inline sps<T> euler_graph_num() const {\n    return\
     \ SPS::log(cycle_space_size<T>());\n  }\n  template <class T>  // O(V^2 2^V)\n\
     \  inline sps<T> connected_biparate_graph_num() const {\n    sps<T> tmp = edge_space_size<T>(),\
-    \ ret(sz, 1);\n    for (int s = sz; s--;) ret[s] /= tmp[s];\n    ret = SPS::convolution(ret,\
+    \ ret(sz, 1);\n    for (int s = sz; s--;) ret[s] /= tmp[s];\n    ret = SPS::convolve(ret,\
     \ ret);\n    for (int s = sz; s--;) ret[s] *= tmp[s];\n    ret = SPS::log(ret);\n\
     \    for (int s = sz; s--;) ret[s] /= 2;\n    return ret;\n  }\n  template <class\
     \ T>  // O(V^3 2^V)\n  inline sps<T> loop_ignored_biconnected_graph_num() const\
@@ -296,12 +296,12 @@ data:
     \ sz2; t += I)\n        for (int j = i, J = I, t2 = t << 1; J >>= 1, j--;)\n \
     \         for (int s = J, J2 = J * 2; s < I; s += J2)\n            for (int u\
     \ = s + J; u-- > s;)\n              tmp2[t | u] -= ret[t2 | u] * adj[i][j];\n\
-    \      tmp = SPS::convolution(tmp, SPS::exp(tmp2));\n      for (int t = 0; t <\
-    \ sz2; t += I)\n        for (int u = I, t2 = t << 1; u--;) ret[t2 | I | u] = tmp[t\
+    \      tmp = SPS::convolve(tmp, SPS::exp(tmp2));\n      for (int t = 0; t < sz2;\
+    \ t += I)\n        for (int u = I, t2 = t << 1; u--;) ret[t2 | I | u] = tmp[t\
     \ | u];\n    }\n    return ret;\n  }\n  template <class T>  // O(V^2 2^V)\n  inline\
     \ sps<T> acyclic_orientations() const {\n    auto k = connected_component_num();\n\
     \    sps<T> g(sz, 0);\n    for (int s = sz; --s;)\n      if (k[s] == __builtin_popcount(s))\
-    \ g[s] = (k[s] + 1) & 1 ? -1 : 1;\n    return SPS::template online_convolution<T>(g,\
+    \ g[s] = (k[s] + 1) & 1 ? -1 : 1;\n    return SPS::template online_convolve<T>(g,\
     \ 1);\n  }\n  template <class T>  // O(V^2 2^V)\n  inline std::vector<T> colorings_using_exactly_k_colors_num()\
     \ const {\n    if (V == 0) return {0};  // impossible in any number of ways\n\
     \    for (int i = V; i--;)\n      if (adj[i][i]) return {0};  // impossible in\
@@ -315,14 +315,14 @@ data:
     \ j = V; j--;) ret[j + 1] += tmp[j];\n    return ret;\n  }\n  template <class\
     \ T>  //  O(V^2 2^V)\n  inline T tutte_polynomial(T x, T y) const {\n    int sum[sz],\
     \ s, t, lim = 2, i, j;\n    T fum[10'000] = {0, 1};\n    std::vector<T> g = {0},\
-    \ h;\n    for (x -= 1, g.reserve(sz), h.reserve(sz), i = 0; i < V; i++) {\n  \
-    \    for (sum[0] = j = 0; j < i; j++)\n        for (s = t = 1 << j; s--;) sum[s\
-    \ | t] = sum[s] + adj[i][j];\n      for (h.resize(s = 1 << i); s--; h[s] = g[s]\
-    \ * fum[sum[s]])\n        for (; lim <= sum[s]; lim++) fum[lim] = fum[lim - 1]\
-    \ * y + 1;\n      h = SPS::exp(h), std::copy(h.begin(), h.end(), std::back_inserter(g));\n\
-    \    }\n    for (t = ~0, bfs(sz, [&](int u) { t ^= u; }), s = sz; --s &= t;) g[s]\
-    \ *= x;\n    for (t = 0, i = V; i--;) t += adj[i][i];\n    return SPS::exp(g)[sz\
-    \ - 1] * pow(y, t);\n  }\n};\n#line 9 \"test/atcoder/abc213_g.test.cpp\"\nusing\
+    \ h;\n    for (g.reserve(sz), h.reserve(sz), i = 0; i < V; i++) {\n      for (sum[0]\
+    \ = j = 0; j < i; j++)\n        for (s = t = 1 << j; s--;) sum[s | t] = sum[s]\
+    \ + adj[i][j];\n      for (h.resize(s = 1 << i); s--; h[s] = g[s] * fum[sum[s]])\n\
+    \        for (; lim <= sum[s]; lim++) fum[lim] = fum[lim - 1] * y + 1;\n     \
+    \ h = SPS::exp(h), std::copy(h.begin(), h.end(), std::back_inserter(g));\n   \
+    \ }\n    for (x -= 1, t = ~0, j = 0, i = V; i--;) j += adj[i][i];\n    for (bfs((s\
+    \ = sz) - 1, [&](int u) { t ^= u; }); --s &= t;) g[s] *= x;\n    return SPS::exp(g)[sz\
+    \ - 1] * pow(y, j);\n  }\n};\n#line 9 \"test/atcoder/abc213_g.test.cpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Mint = ModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  UndirectedGraphSetPowerSeries<17>\
     \ g(N);\n  for (int i = 0; i < M; i++) {\n    int a, b;\n    cin >> a >> b;\n\
@@ -349,7 +349,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2022-02-09 22:55:47+09:00'
+  timestamp: '2022-02-21 12:14:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp

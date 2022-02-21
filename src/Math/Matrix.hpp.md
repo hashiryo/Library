@@ -3,18 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u884C\u5217"
     links: []
@@ -61,8 +61,8 @@ data:
     \ N> &r) {\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < N; j++)\
     \ (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix &operator*=(const\
     \ SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n  SquareMatrix pow(std::uint64_t\
-    \ e) const {\n    SquareMatrix ret = I(), base = *this;\n    for (; e; e >>= 1,\
-    \ base *= base)\n      if (e & 1) ret *= base;\n    return ret;\n  }\n};\n"
+    \ e) const {\n    for (SquareMatrix ret = I(), b = *this;; b *= b)\n      if (e\
+    \ & 1 ? ret *= b : 0; !(e >>= 1)) return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u884C\u5217\n * @category\
     \ \u6570\u5B66\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// BEGIN CUT HERE\n\n\
     struct has_I_impl {\n  template <class T>\n  static auto check(T &&x) -> decltype(x.I(),\
@@ -105,14 +105,14 @@ data:
     \ N> &r) {\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < N; j++)\
     \ (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix &operator*=(const\
     \ SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n  SquareMatrix pow(std::uint64_t\
-    \ e) const {\n    SquareMatrix ret = I(), base = *this;\n    for (; e; e >>= 1,\
-    \ base *= base)\n      if (e & 1) ret *= base;\n    return ret;\n  }\n};"
+    \ e) const {\n    for (SquareMatrix ret = I(), b = *this;; b *= b)\n      if (e\
+    \ & 1 ? ret *= b : 0; !(e >>= 1)) return ret;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/Matrix.hpp
   requiredBy: []
-  timestamp: '2021-10-10 22:09:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-02-21 12:14:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2397.test.cpp
   - test/aoj/2624.test.cpp
