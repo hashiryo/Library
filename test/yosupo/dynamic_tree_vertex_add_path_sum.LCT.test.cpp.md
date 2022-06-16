@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
@@ -22,23 +22,23 @@ data:
     \u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\u30B5\
     \u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u306A\u3044\u306E\u3067mapping\u95A2\
     \u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u306A\u3044\
-    \n */\n\n// BEGIN CUT HERE\n\n#define HAS_CHECK(member, Dummy)               \
-    \               \\\n  template <class T>                                     \
-    \     \\\n  struct has_##member {                                       \\\n \
-    \   template <class U, Dummy>                                 \\\n    static std::true_type\
-    \ check(U *);                         \\\n    static std::false_type check(...);\
-    \                        \\\n    static T *mClass;                           \
-    \              \\\n    static const bool value = decltype(check(mClass))::value;\
+    \n */\n\n// BEGIN CUT HERE\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)\
+    \                              \\\n  template <class T>                      \
+    \                    \\\n  struct has_##member {                             \
+    \          \\\n    template <class U, Dummy>                                 \\\
+    \n    static std::true_type check(U *);                         \\\n    static\
+    \ std::false_type check(...);                        \\\n    static T *mClass;\
+    \                                         \\\n    static const bool value = decltype(check(mClass))::value;\
     \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
-    \ntemplate <typename M = void>\nclass LinkCutTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
-    \ L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n  template <class\
-    \ L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
-    \ has_composition<L>>;\n  template <class tDerived, class U = std::nullptr_t,\
-    \ class F = std::nullptr_t>\n  struct Node_B {\n    using T = U;\n    using E\
-    \ = F;\n    tDerived *ch[2], *par;\n    bool rev_flg;\n  };\n  template <bool\
-    \ sg_, bool du_, typename tEnable = void>\n  struct Node_D : Node_B<Node_D<sg_,\
+    #endif\n\ntemplate <typename M = void>\nclass LinkCutTree {\n  HAS_MEMBER(op);\n\
+    \  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n\
+    \  template <class L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n\
+    \  template <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>,\
+    \ has_mapping<L>, has_composition<L>>;\n  template <class tDerived, class U =\
+    \ std::nullptr_t, class F = std::nullptr_t>\n  struct Node_B {\n    using T =\
+    \ U;\n    using E = F;\n    tDerived *ch[2], *par;\n    bool rev_flg;\n  };\n\
+    \  template <bool sg_, bool du_, typename tEnable = void>\n  struct Node_D : Node_B<Node_D<sg_,\
     \ du_, tEnable>> {};\n  template <bool sg_, bool du_>\n  struct Node_D<sg_, du_,\
     \ typename std::enable_if_t<sg_ && !du_>>\n      : Node_B<Node_D<sg_, du_>, typename\
     \ M::T> {\n    typename M::T val, sum, rsum;\n  };\n  template <bool sg_, bool\
@@ -133,8 +133,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   requiredBy: []
-  timestamp: '2021-11-22 16:08:59+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-16 15:13:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
 layout: document

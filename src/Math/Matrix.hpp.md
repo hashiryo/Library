@@ -3,10 +3,10 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
   - icon: ':x:'
@@ -14,7 +14,7 @@ data:
     title: test/yukicoder/1340.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u884C\u5217"
     links: []
@@ -62,7 +62,7 @@ data:
     \ (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix &operator*=(const\
     \ SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n  SquareMatrix pow(std::uint64_t\
     \ e) const {\n    for (SquareMatrix ret = I(), b = *this;; b *= b)\n      if (e\
-    \ & 1 ? ret *= b : 0; !(e >>= 1)) return ret;\n  }\n};\n"
+    \ & 1 ? ret *= b, !(e >>= 1) : !(e >>= 1)) return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u884C\u5217\n * @category\
     \ \u6570\u5B66\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// BEGIN CUT HERE\n\n\
     struct has_I_impl {\n  template <class T>\n  static auto check(T &&x) -> decltype(x.I(),\
@@ -106,16 +106,16 @@ data:
     \ (*this)[i][j] = r[i][j];\n    return *this;\n  }\n  SquareMatrix &operator*=(const\
     \ SquareMatrix &r) {\n    return *this = (*this) * r;\n  }\n  SquareMatrix pow(std::uint64_t\
     \ e) const {\n    for (SquareMatrix ret = I(), b = *this;; b *= b)\n      if (e\
-    \ & 1 ? ret *= b : 0; !(e >>= 1)) return ret;\n  }\n};"
+    \ & 1 ? ret *= b, !(e >>= 1) : !(e >>= 1)) return ret;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/Matrix.hpp
   requiredBy: []
-  timestamp: '2022-02-21 12:14:55+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-06-16 15:13:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2397.test.cpp
   - test/aoj/2624.test.cpp
+  - test/aoj/2397.test.cpp
   - test/yukicoder/1340.test.cpp
 documentation_of: src/Math/Matrix.hpp
 layout: document

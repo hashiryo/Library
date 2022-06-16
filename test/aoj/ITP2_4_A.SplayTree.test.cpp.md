@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SplayTree.hpp
     title: "Splay\u6728"
   _extendedRequiredBy: []
@@ -30,31 +30,31 @@ data:
     \u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\
     \u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\
     \u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n// BEGIN CUT HERE\n\
-    #define HAS_CHECK(member, Dummy)                              \\\n  template <class\
-    \ T>                                          \\\n  struct has_##member {    \
-    \                                   \\\n    template <class U, Dummy>        \
-    \                         \\\n    static std::true_type check(U *);          \
-    \               \\\n    static std::false_type check(...);                   \
-    \     \\\n    static T *mClass;                                         \\\n \
-    \   static const bool value = decltype(check(mClass))::value; \\\n  };\n#define\
-    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy = typename U::member)\n\ntemplate <class M, bool\
-    \ reversible = false>\nclass SplayTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
-    \ L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n  template <class\
-    \ L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
-    \ has_composition<L>>;\n  template <class T, class tDerived, class F = std::nullptr_t>\n\
-    \  struct Node_B {\n    using E = F;\n    T val;\n    tDerived *ch[2];\n    std::size_t\
-    \ size;\n  };\n  template <bool sg_, bool du_, bool rev_, typename tEnable = void>\n\
-    \  struct Node_D : Node_B<M, Node_D<sg_, du_, rev_, tEnable>> {};\n  template\
+    \n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)                        \
+    \      \\\n  template <class T>                                          \\\n\
+    \  struct has_##member {                                       \\\n    template\
+    \ <class U, Dummy>                                 \\\n    static std::true_type\
+    \ check(U *);                         \\\n    static std::false_type check(...);\
+    \                        \\\n    static T *mClass;                           \
+    \              \\\n    static const bool value = decltype(check(mClass))::value;\
+    \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
+    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
+    #endif\n\ntemplate <class M, bool reversible = false>\nclass SplayTree {\n  HAS_MEMBER(op);\n\
+    \  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n\
+    \  template <class L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n\
+    \  template <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>,\
+    \ has_mapping<L>, has_composition<L>>;\n  template <class T, class tDerived, class\
+    \ F = std::nullptr_t>\n  struct Node_B {\n    using E = F;\n    T val;\n    tDerived\
+    \ *ch[2];\n    std::size_t size;\n  };\n  template <bool sg_, bool du_, bool rev_,\
+    \ typename tEnable = void>\n  struct Node_D : Node_B<M, Node_D<sg_, du_, rev_,\
+    \ tEnable>> {};\n  template <bool sg_, bool du_, bool rev_>\n  struct Node_D<sg_,\
+    \ du_, rev_, typename std::enable_if_t<sg_ && !du_ && !rev_>>\n      : Node_B<typename\
+    \ M::T, Node_D<sg_, du_, rev_>> {\n    typename M::T sum;\n  };\n  template <bool\
+    \ sg_, bool du_, bool rev_>\n  struct Node_D<sg_, du_, rev_, typename std::enable_if_t<!sg_\
+    \ && du_ && !rev_>>\n      : Node_B<typename M::T, Node_D<sg_, du_, rev_>, typename\
+    \ M::E> {\n    typename M::E lazy;\n    bool lazy_flg = false;\n  };\n  template\
     \ <bool sg_, bool du_, bool rev_>\n  struct Node_D<sg_, du_, rev_, typename std::enable_if_t<sg_\
-    \ && !du_ && !rev_>>\n      : Node_B<typename M::T, Node_D<sg_, du_, rev_>> {\n\
-    \    typename M::T sum;\n  };\n  template <bool sg_, bool du_, bool rev_>\n  struct\
-    \ Node_D<sg_, du_, rev_, typename std::enable_if_t<!sg_ && du_ && !rev_>>\n  \
-    \    : Node_B<typename M::T, Node_D<sg_, du_, rev_>, typename M::E> {\n    typename\
-    \ M::E lazy;\n    bool lazy_flg = false;\n  };\n  template <bool sg_, bool du_,\
-    \ bool rev_>\n  struct Node_D<sg_, du_, rev_, typename std::enable_if_t<sg_ &&\
-    \ du_ && !rev_>>\n      : Node_B<typename M::T, Node_D<sg_, du_, rev_>, typename\
+    \ && du_ && !rev_>>\n      : Node_B<typename M::T, Node_D<sg_, du_, rev_>, typename\
     \ M::E> {\n    typename M::T sum;\n    typename M::E lazy;\n    bool lazy_flg\
     \ = false;\n  };\n  template <bool sg_, bool du_, bool rev_>\n  struct Node_D<sg_,\
     \ du_, rev_, typename std::enable_if_t<!sg_ && !du_ && rev_>>\n      : Node_B<M,\
@@ -183,7 +183,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_A.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 15:43:58+09:00'
+  timestamp: '2022-06-16 15:13:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_A.SplayTree.test.cpp

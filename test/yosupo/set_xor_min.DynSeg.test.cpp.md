@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/set_xor_min
@@ -23,17 +23,17 @@ data:
     \u642C+find*2)\n// https://codeforces.com/contest/947/problem/C (find+xor)\n//\
     \ https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
     \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n\n//\
-    \ BEGIN CUT HERE\n\n#define HAS_CHECK(member, Dummy)                         \
-    \     \\\n  template <class T>                                          \\\n \
-    \ struct has_##member {                                       \\\n    template\
-    \ <class U, Dummy>                                 \\\n    static std::true_type\
-    \ check(U *);                         \\\n    static std::false_type check(...);\
-    \                        \\\n    static T *mClass;                           \
-    \              \\\n    static const bool value = decltype(check(mClass))::value;\
+    \ BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)      \
+    \                        \\\n  template <class T>                            \
+    \              \\\n  struct has_##member {                                   \
+    \    \\\n    template <class U, Dummy>                                 \\\n  \
+    \  static std::true_type check(U *);                         \\\n    static std::false_type\
+    \ check(...);                        \\\n    static T *mClass;               \
+    \                          \\\n    static const bool value = decltype(check(mClass))::value;\
     \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
-    \ntemplate <typename M, bool persistent = false, std::uint8_t HEIGHT = 30>\nclass\
-    \ SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n\
+    #endif\n\ntemplate <typename M, bool persistent = false, std::uint8_t HEIGHT =\
+    \ 30>\nclass SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n\
     \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
     \ L>\n  using monoid = std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n  template\
     \ <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
@@ -84,13 +84,13 @@ data:
     \ <= r) return propagate(t, x, b[1] - b[0]), void();\n    eval(t, b[1] - b[0]);\n\
     \    apply(t->ch[0], l, r, {b[0], m}, x), apply(t->ch[1], l, r, {m, b[1]}, x);\n\
     \    if constexpr (monoid<M>::value) pushup(t);\n  }\n  void set_val(Node *&t,\
-    \ const id_t &k, const T &val, std::uint8_t h) {\n    cp_node(t);\n    if (!h)\
-    \ return t->val = val, void();\n    if constexpr (dual<M>::value) eval(t, 1LL\
-    \ << h);\n    set_val(t->ch[(k >> (h - 1)) & 1], k, val, h - 1);\n    if constexpr\
-    \ (monoid<M>::value) pushup(t);\n  }\n  T &at_val(Node *&t, const id_t &k, std::uint8_t\
-    \ h) {\n    cp_node(t);\n    if (!h) return t->val;\n    if constexpr (dual<M>::value)\
-    \ eval(t, 1LL << h);\n    return at_val(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n\
-    \  }\n  bool is_null(Node *&t, const id_t &k, std::uint8_t h) {\n    if (!t) return\
+    \ const id_t &k, const T &val, std::uint8_t h) {\n    if (cp_node(t); !h) return\
+    \ t->val = val, void();\n    if constexpr (dual<M>::value) eval(t, 1LL << h);\n\
+    \    set_val(t->ch[(k >> (h - 1)) & 1], k, val, h - 1);\n    if constexpr (monoid<M>::value)\
+    \ pushup(t);\n  }\n  T &at_val(Node *&t, const id_t &k, std::uint8_t h) {\n  \
+    \  if (cp_node(t); !h) return t->val;\n    if constexpr (dual<M>::value) eval(t,\
+    \ 1LL << h);\n    return at_val(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n \
+    \ bool is_null(Node *&t, const id_t &k, std::uint8_t h) {\n    if (!t) return\
     \ true;\n    if (!h) return false;\n    if constexpr (dual<M>::value) eval(t,\
     \ 1LL << h);\n    return is_null(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n\
     \  T get_val(Node *&t, const id_t &k, std::uint8_t h) {\n    if (!t) return def_val();\n\
@@ -133,7 +133,7 @@ data:
     \ k) {\n    return at(k);\n  }\n  T fold(id_t a, id_t b, id_t bias = 0) {\n  \
     \  static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\n\");\n  \
     \  return fold(root, a, b, {0, 1LL << HEIGHT}, bias);\n  }\n  // find i s.t.\n\
-    \  //  check(fold(k,i)) == False, check(fold(k,i+1)) == True\n  // return -1 if\
+    \  //  check(fold(a,i)) == False, check(fold(a,i+1)) == True\n  // return -1 if\
     \ not found\n  template <class C>\n  id_t find_first(id_t a, C check, id_t bias\
     \ = 0) {\n    std::array<T, 1> sum{def_val()};\n    std::array<Node *, 1> t{root};\n\
     \    return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n  }\n\
@@ -142,7 +142,7 @@ data:
     \                id_t bias = 0) {\n    std::array<T, N> sums;\n    sums.fill(def_val());\n\
     \    std::array<Node *, N> ts;\n    for (std::size_t i = 0; i < N; i++) ts[i]\
     \ = segs[i].root;\n    return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check,\
-    \ ts, sums);\n  }\n  // find i s.t.\n  //  check(fold(i+1,k)) == False, check(fold(i,k))\
+    \ ts, sums);\n  }\n  // find i s.t.\n  //  check(fold(i+1,b)) == False, check(fold(i,b))\
     \ == True\n  // return -1 if not found\n  template <class C>\n  id_t find_last(id_t\
     \ b, C check, id_t bias = 0) {\n    std::array<T, 1> sum{def_val()};\n    std::array<Node\
     \ *, 1> t{root};\n    return find<1>(b, {1LL << HEIGHT, 0}, ~bias, HEIGHT, check,\
@@ -182,8 +182,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/set_xor_min.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2021-11-22 16:08:59+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-16 15:13:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/set_xor_min.DynSeg.test.cpp
 layout: document

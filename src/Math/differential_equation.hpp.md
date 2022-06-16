@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -9,12 +9,12 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
     links:
@@ -114,7 +114,7 @@ data:
     \ f2[], int b, int e, mint ret[]) {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n\
     \    static constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e;\
     \ i++) {\n      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i]\
-    \ = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
+    \ =\n          mint(r1) + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
     \ * mod1;\n    }\n  }\n  template <typename T, typename std::enable_if<\n    \
     \                        std::is_integral<T>::value>::type * = nullptr>\n  static\
     \ inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for\
@@ -255,9 +255,9 @@ data:
     \ ret.resize(n), ret;\n  }\n  FPS pow(std::uint64_t k) const {\n    int n = this->size(),\
     \ cnt = 0;\n    while (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (k *\
     \ cnt >= (std::uint64_t)n) return FPS(n, 0);\n    mint iv = (*this)[cnt].inverse();\n\
-    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp()\n\
-    \             * (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k *\
-    \ cnt, j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
+    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp() *\n\
+    \             (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k * cnt,\
+    \ j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
     \ FPS> cos_and_sin() const {\n    static mint imag = mint(-1).sqrt();\n    static\
     \ constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    FPS\
     \ a = (*this * imag).exp(), b = (*this * (-imag)).exp();\n    return std::make_pair((a\
@@ -357,8 +357,8 @@ data:
   isVerificationFile: false
   path: src/Math/differential_equation.hpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-16 15:13:41+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/963.test.cpp
 documentation_of: src/Math/differential_equation.hpp

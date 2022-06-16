@@ -5,19 +5,19 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/differential_equation.hpp
     title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
@@ -27,87 +27,87 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_first.test.cpp
     title: test/yosupo/stirling_first.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_second.test.cpp
     title: test/yosupo/stirling_second.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -207,7 +207,7 @@ data:
     \ f2[], int b, int e, mint ret[]) {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n\
     \    static constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e;\
     \ i++) {\n      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i]\
-    \ = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
+    \ =\n          mint(r1) + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
     \ * mod1;\n    }\n  }\n  template <typename T, typename std::enable_if<\n    \
     \                        std::is_integral<T>::value>::type * = nullptr>\n  static\
     \ inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for\
@@ -348,9 +348,9 @@ data:
     \ ret.resize(n), ret;\n  }\n  FPS pow(std::uint64_t k) const {\n    int n = this->size(),\
     \ cnt = 0;\n    while (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (k *\
     \ cnt >= (std::uint64_t)n) return FPS(n, 0);\n    mint iv = (*this)[cnt].inverse();\n\
-    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp()\n\
-    \             * (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k *\
-    \ cnt, j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
+    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp() *\n\
+    \             (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k * cnt,\
+    \ j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
     \ FPS> cos_and_sin() const {\n    static mint imag = mint(-1).sqrt();\n    static\
     \ constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    FPS\
     \ a = (*this * imag).exp(), b = (*this * (-imag)).exp();\n    return std::make_pair((a\
@@ -455,7 +455,7 @@ data:
     \ f2[], int b, int e, mint ret[]) {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n\
     \    static constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e;\
     \ i++) {\n      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i]\
-    \ = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
+    \ =\n          mint(r1) + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
     \ * mod1;\n    }\n  }\n  template <typename T, typename std::enable_if<\n    \
     \                        std::is_integral<T>::value>::type * = nullptr>\n  static\
     \ inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for\
@@ -596,9 +596,9 @@ data:
     \ ret.resize(n), ret;\n  }\n  FPS pow(std::uint64_t k) const {\n    int n = this->size(),\
     \ cnt = 0;\n    while (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (k *\
     \ cnt >= (std::uint64_t)n) return FPS(n, 0);\n    mint iv = (*this)[cnt].inverse();\n\
-    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp()\n\
-    \             * (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k *\
-    \ cnt, j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
+    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp() *\n\
+    \             (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k * cnt,\
+    \ j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
     \ FPS> cos_and_sin() const {\n    static mint imag = mint(-1).sqrt();\n    static\
     \ constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    FPS\
     \ a = (*this * imag).exp(), b = (*this * (-imag)).exp();\n    return std::make_pair((a\
@@ -676,42 +676,42 @@ data:
   isVerificationFile: false
   path: src/Math/FormalPowerSeries.hpp
   requiredBy:
-  - src/Math/kitamasa.hpp
-  - src/Math/extgcd.hpp
-  - src/Math/fps_sequence.hpp
-  - src/Math/SubproductTree.hpp
   - src/Math/differential_equation.hpp
-  timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - src/Math/fps_sequence.hpp
+  - src/Math/extgcd.hpp
+  - src/Math/kitamasa.hpp
+  - src/Math/SubproductTree.hpp
+  timestamp: '2022-06-16 15:13:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/division_of_Poly.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/convolution1000000007.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yosupo/inv_of_FPS.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/aoj/3072.test.cpp
   - test/aoj/0168.test.cpp
+  - test/aoj/3072.test.cpp
+  - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yukicoder/1080.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/980.test.cpp
   - test/yukicoder/3046.test.cpp
   - test/yukicoder/658.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/963.test.cpp
-  - test/yukicoder/1080.test.cpp
 documentation_of: src/Math/FormalPowerSeries.hpp
 layout: document
 redirect_from:

@@ -91,8 +91,8 @@ data:
   timestamp: '2021-02-03 13:01:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/644.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp

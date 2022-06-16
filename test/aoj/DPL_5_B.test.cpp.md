@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
   - icon: ':question:'
@@ -21,40 +21,39 @@ data:
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\n/**\n * @title\
     \ \u7D44\u307F\u5408\u308F\u305B\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT\
     \ HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 24)>\nstruct Combination\
-    \ {\n private:\n  static inline mint _fact[LIM], _finv[LIM];\n  static inline\
-    \ void set(int sz) {\n    static int lim = 0;\n    if (lim <= sz) {\n      if\
-    \ (lim == 0) _fact[0] = _finv[0] = 1, lim = 1;\n      for (int i = lim; i <= sz;\
-    \ i++) _fact[i] = _fact[i - 1] * i;\n      _finv[sz] = mint(1) / _fact[sz];\n\
-    \      for (int i = sz; i >= lim; i--) _finv[i - 1] = _finv[i] * i;\n      lim\
-    \ = sz + 1;\n    }\n  }\n\n public:\n  static inline mint fact(int n) { return\
-    \ set(n), n < 0 ? mint(0) : _fact[n]; }\n  static inline mint finv(int n) { return\
-    \ set(n), n < 0 ? mint(0) : _finv[n]; }\n  static mint nPr(int n, int r) { return\
-    \ fact(n) * finv(n - r); }\n  static mint nCr(int n, int r) { return nPr(n, r)\
-    \ * finv(r); }\n  static mint nHr(int n, int r) { return !r ? mint(1) : nCr(n\
-    \ + r - 1, r); }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
-    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
-    \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
-    \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
-    \ std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace\
-    \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n\
-    \    : public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n\
-    \  using u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
-    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
-    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod)\
-    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) *\
-    \ r2); }\n  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w\
-    \ >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n\
-    \ public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n)\
-    \ : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64\
-    \ w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const\
-    \ {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
-    \  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x\
-    \ - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt\
-    \ &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x\
-    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
-    \   return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr\
-    \ ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \ {\n private:\n  static inline mint _fact[LIM] = {1}, _finv[LIM] = {1};\n  static\
+    \ inline int lim = 1;\n  static inline void set(int sz) {\n    if (lim > sz) return;\n\
+    \    for (int i = lim; i <= sz; i++) _fact[i] = _fact[i - 1] * i;\n    _finv[sz]\
+    \ = mint(1) / _fact[sz];\n    for (int i = sz; i >= lim; i--) _finv[i - 1] = _finv[i]\
+    \ * i;\n    lim = sz + 1;\n  }\n\n public:\n  static inline mint fact(int n) {\
+    \ return set(n), n < 0 ? mint(0) : _fact[n]; }\n  static inline mint finv(int\
+    \ n) { return set(n), n < 0 ? mint(0) : _finv[n]; }\n  static mint nPr(int n,\
+    \ int r) { return fact(n) * finv(n - r); }\n  static mint nCr(int n, int r) {\
+    \ return nPr(n, r) * finv(r); }\n  static mint nHr(int n, int r) { return !r ?\
+    \ mint(1) : nCr(n + r - 1, r); }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n *\
+    \ @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace\
+    \ internal {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\n\
+    struct ModIntImpl {\n  static constexpr std::uint64_t modulo() { return mod; }\n\
+    \  static constexpr std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream\
+    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
+    \  }\n};\n}  // namespace internal\ntemplate <std::uint64_t mod, std::uint64_t\
+    \ prim_root = 0>\nclass ModInt\n    : public internal::ModIntImpl<mod, prim_root,\
+    \ ModInt<mod, prim_root>> {\n  using u64 = std::uint64_t;\n  static constexpr\
+    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
+    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
+    \ 1), r2 = -__uint128_t(mod) % mod;\n  static constexpr u64 init(u64 w) { return\
+    \ reduce(__uint128_t(w) * r2); }\n  static constexpr u64 reduce(const __uint128_t\
+    \ w) {\n    return u64(w >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >>\
+    \ 64);\n  }\n  u64 x;\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr\
+    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static\
+    \ constexpr u64 norm(u64 w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt\
+    \ operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x !=\
+    \ 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n  \
+    \  return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n\
+    \  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x\
+    \ += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
+    \ ModInt &rhs) {\n    return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n\
+    \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
     \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
     \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
@@ -110,7 +109,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_B.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
+  timestamp: '2022-06-16 15:13:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_B.test.cpp

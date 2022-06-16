@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -12,18 +12,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
@@ -122,7 +122,7 @@ data:
     \ f2[], int b, int e, mint ret[]) {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n\
     \    static constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e;\
     \ i++) {\n      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i]\
-    \ = mint(r1)\n               + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
+    \ =\n          mint(r1) + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val())\
     \ * mod1;\n    }\n  }\n  template <typename T, typename std::enable_if<\n    \
     \                        std::is_integral<T>::value>::type * = nullptr>\n  static\
     \ inline void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for\
@@ -263,9 +263,9 @@ data:
     \ ret.resize(n), ret;\n  }\n  FPS pow(std::uint64_t k) const {\n    int n = this->size(),\
     \ cnt = 0;\n    while (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (k *\
     \ cnt >= (std::uint64_t)n) return FPS(n, 0);\n    mint iv = (*this)[cnt].inverse();\n\
-    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp()\n\
-    \             * (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k *\
-    \ cnt, j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
+    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp() *\n\
+    \             (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k * cnt,\
+    \ j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
     \ FPS> cos_and_sin() const {\n    static mint imag = mint(-1).sqrt();\n    static\
     \ constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    FPS\
     \ a = (*this * imag).exp(), b = (*this * (-imag)).exp();\n    return std::make_pair((a\
@@ -377,11 +377,11 @@ data:
   isVerificationFile: false
   path: src/Math/kitamasa.hpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-16 15:13:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/aoj/0168.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/658.test.cpp
 documentation_of: src/Math/kitamasa.hpp
