@@ -380,8 +380,8 @@ data:
   timestamp: '2022-06-16 15:13:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/0168.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/aoj/0168.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/658.test.cpp
 documentation_of: src/Math/kitamasa.hpp

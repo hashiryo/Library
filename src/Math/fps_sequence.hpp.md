@@ -9,7 +9,7 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: test/yosupo/stirling_second.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
       )"
@@ -394,11 +394,11 @@ data:
   path: src/Math/fps_sequence.hpp
   requiredBy: []
   timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/stirling_first.test.cpp
   - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_first.test.cpp
   - test/yosupo/bernoulli.test.cpp
 documentation_of: src/Math/fps_sequence.hpp
 layout: document

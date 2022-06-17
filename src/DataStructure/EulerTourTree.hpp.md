@@ -2,14 +2,14 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - icon: ':x:'
@@ -271,10 +271,10 @@ data:
   timestamp: '2022-06-16 15:13:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2235.onlinedicon.test.cpp
+  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
+  - test/aoj/2235.onlinedicon.test.cpp
   - test/yukicoder/828.ETT.test.cpp
 documentation_of: src/DataStructure/EulerTourTree.hpp
 layout: document

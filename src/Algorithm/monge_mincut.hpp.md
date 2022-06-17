@@ -94,10 +94,10 @@ data:
   timestamp: '2021-12-16 17:49:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/arc107_f.PushRelabel.test.cpp
-  - test/atcoder/arc129_e.PushRelabel.test.cpp
   - test/atcoder/arc107_f.Dinic.test.cpp
+  - test/atcoder/arc107_f.PushRelabel.test.cpp
   - test/atcoder/arc129_e.Dinic.test.cpp
+  - test/atcoder/arc129_e.PushRelabel.test.cpp
   - test/yukicoder/119.PushRelabel.test.cpp
   - test/yukicoder/119.Dinic.test.cpp
 documentation_of: src/Algorithm/monge_mincut.hpp

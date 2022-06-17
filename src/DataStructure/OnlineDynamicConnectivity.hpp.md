@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Online-Dynamic-Connectivity
     links: []
@@ -214,10 +214,10 @@ data:
   path: src/DataStructure/OnlineDynamicConnectivity.hpp
   requiredBy: []
   timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2235.onlinedicon.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/aoj/2235.onlinedicon.test.cpp
 documentation_of: src/DataStructure/OnlineDynamicConnectivity.hpp
 layout: document
 redirect_from:
