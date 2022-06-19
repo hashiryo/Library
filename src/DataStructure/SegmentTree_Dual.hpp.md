@@ -28,8 +28,8 @@ data:
     \ x) {\n    thrust(a += n);\n    thrust(b += n - 1);\n    for (int l = a, r =\
     \ b + 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) laz[l] = M::composition(laz[l],\
     \ x), l++;\n      if (r & 1) --r, laz[r] = M::composition(laz[r], x);\n    }\n\
-    \  }\n  void set_val(int a, T x) {\n    thrust(a += n);\n    val[a] = x;\n   \
-    \ laz[a] = M::ei();\n  }\n  T operator[](const int k) {\n    thrust(k + n);\n\
+    \  }\n  void set_val(int a, T x) {\n    thrust(a += n);\n    val[a - n] = x;\n\
+    \    laz[a] = M::ei();\n  }\n  T operator[](const int k) {\n    thrust(k + n);\n\
     \    if (laz[k + n] != M::ei()) {\n      val[k] = M::mapping(val[k], laz[k + n]);\n\
     \      laz[k + n] = M::ei();\n    }\n    return val[k];\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Segment-Tree(\u53CC\
@@ -47,15 +47,15 @@ data:
     \ apply(int a, int b, E x) {\n    thrust(a += n);\n    thrust(b += n - 1);\n \
     \   for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) laz[l]\
     \ = M::composition(laz[l], x), l++;\n      if (r & 1) --r, laz[r] = M::composition(laz[r],\
-    \ x);\n    }\n  }\n  void set_val(int a, T x) {\n    thrust(a += n);\n    val[a]\
-    \ = x;\n    laz[a] = M::ei();\n  }\n  T operator[](const int k) {\n    thrust(k\
+    \ x);\n    }\n  }\n  void set_val(int a, T x) {\n    thrust(a += n);\n    val[a\
+    \ - n] = x;\n    laz[a] = M::ei();\n  }\n  T operator[](const int k) {\n    thrust(k\
     \ + n);\n    if (laz[k + n] != M::ei()) {\n      val[k] = M::mapping(val[k], laz[k\
     \ + n]);\n      laz[k + n] = M::ei();\n    }\n    return val[k];\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dual.hpp
   requiredBy: []
-  timestamp: '2021-09-20 02:40:07+09:00'
+  timestamp: '2022-06-19 19:40:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_D.SegTree_Dual.test.cpp

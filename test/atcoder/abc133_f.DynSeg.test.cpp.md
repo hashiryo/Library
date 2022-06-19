@@ -68,82 +68,84 @@ data:
     \      *(itr + b[0]) = t->val;\n  }\n  static inline void pushup(Node *&t) {\n\
     \    t->val = def_val();\n    if (t->ch[0]) t->val = M::op(t->ch[0]->val, t->val);\n\
     \    if (t->ch[1]) t->val = M::op(t->val, t->ch[1]->val);\n  }\n  static inline\
-    \ void propagate(Node *&t, const E &x, const id_t &sz) {\n    t->lazy = t->lazy_flg\
-    \ ? M::composition(t->lazy, x) : x, t->lazy_flg = true;\n    if constexpr (monoid<M>::value)\n\
-    \      t->val = M::mapping(t->val, x, sz);\n    else if (sz == 1)\n      t->val\
-    \ = M::mapping(t->val, x, sz);\n  }\n  static inline void cp_node(Node *&t) {\n\
-    \    if (!t)\n      t = new Node{def_val()};\n    else if constexpr (persistent)\n\
-    \      t = new Node(*t);\n  }\n  static inline void eval(Node *&t, const id_t\
-    \ &sz) {\n    if (!t->lazy_flg) return;\n    cp_node(t->ch[0]), cp_node(t->ch[1]),\
-    \ t->lazy_flg = false;\n    propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1],\
-    \ t->lazy, sz / 2);\n  }\n  T fold(Node *&t, const id_t &l, const id_t &r, std::array<id_t,\
-    \ 2> b,\n         const id_t &bias) {\n    if (!t || r <= b[0] || b[1] <= l) return\
-    \ def_val();\n    if (l <= b[0] && b[1] <= r) return t->val;\n    if constexpr\
-    \ (dual<M>::value) eval(t, b[1] - b[0]);\n    id_t m = (b[0] + b[1]) >> 1;\n \
-    \   bool flg = (bias >> (__builtin_ctzll(b[1] - b[0]) - 1)) & 1;\n    return M::op(fold(t->ch[flg],\
+    \ T &reflect(Node *&t) {\n    if constexpr (dual<M>::value && !monoid<M>::value)\n\
+    \      if (t->lazy_flg)\n        t->val = M::mapping(t->val, t->lazy, 1), t->lazy_flg\
+    \ = false;\n    return t->val;\n  }\n  static inline void propagate(Node *&t,\
+    \ const E &x, const id_t &sz) {\n    t->lazy = t->lazy_flg ? M::composition(t->lazy,\
+    \ x) : x, t->lazy_flg = true;\n    if constexpr (monoid<M>::value) t->val = M::mapping(t->val,\
+    \ x, sz);\n  }\n  static inline void cp_node(Node *&t) {\n    if (!t)\n      t\
+    \ = new Node{def_val()};\n    else if constexpr (persistent)\n      t = new Node(*t);\n\
+    \  }\n  static inline void eval(Node *&t, const id_t &sz) {\n    if (!t->lazy_flg)\
+    \ return;\n    cp_node(t->ch[0]), cp_node(t->ch[1]), t->lazy_flg = false;\n  \
+    \  propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1], t->lazy, sz / 2);\n\
+    \  }\n  T fold(Node *&t, const id_t &l, const id_t &r, std::array<id_t, 2> b,\n\
+    \         const id_t &bias) {\n    if (!t || r <= b[0] || b[1] <= l) return def_val();\n\
+    \    if (l <= b[0] && b[1] <= r) return t->val;\n    if constexpr (dual<M>::value)\
+    \ eval(t, b[1] - b[0]);\n    id_t m = (b[0] + b[1]) >> 1;\n    bool flg = (bias\
+    \ >> (__builtin_ctzll(b[1] - b[0]) - 1)) & 1;\n    return M::op(fold(t->ch[flg],\
     \ l, r, {b[0], m}, bias),\n                 fold(t->ch[!flg], l, r, {m, b[1]},\
     \ bias));\n  }\n  void apply(Node *&t, const id_t &l, const id_t &r, std::array<id_t,\
     \ 2> b,\n             const E &x) {\n    if (r <= b[0] || b[1] <= l) return;\n\
-    \    id_t m = (b[0] + b[1]) >> 1;\n    cp_node(t);\n    if (l <= b[0] && b[1]\
-    \ <= r) return propagate(t, x, b[1] - b[0]), void();\n    eval(t, b[1] - b[0]);\n\
-    \    apply(t->ch[0], l, r, {b[0], m}, x), apply(t->ch[1], l, r, {m, b[1]}, x);\n\
-    \    if constexpr (monoid<M>::value) pushup(t);\n  }\n  void set_val(Node *&t,\
-    \ const id_t &k, const T &val, std::uint8_t h) {\n    if (cp_node(t); !h) return\
-    \ t->val = val, void();\n    if constexpr (dual<M>::value) eval(t, 1LL << h);\n\
-    \    set_val(t->ch[(k >> (h - 1)) & 1], k, val, h - 1);\n    if constexpr (monoid<M>::value)\
-    \ pushup(t);\n  }\n  T &at_val(Node *&t, const id_t &k, std::uint8_t h) {\n  \
-    \  if (cp_node(t); !h) return t->val;\n    if constexpr (dual<M>::value) eval(t,\
-    \ 1LL << h);\n    return at_val(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n \
-    \ bool is_null(Node *&t, const id_t &k, std::uint8_t h) {\n    if (!t) return\
-    \ true;\n    if (!h) return false;\n    if constexpr (dual<M>::value) eval(t,\
-    \ 1LL << h);\n    return is_null(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n\
-    \  T get_val(Node *&t, const id_t &k, std::uint8_t h) {\n    if (!t) return def_val();\n\
-    \    if (!h) return t->val;\n    if constexpr (dual<M>::value) eval(t, 1LL <<\
-    \ h);\n    return get_val(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n  template\
-    \ <bool last>\n  static inline T calc_op(Node *&t, const T &v) {\n    if constexpr\
-    \ (last)\n      return M::op((t ? t->val : def_val()), v);\n    else\n      return\
-    \ M::op(v, (t ? t->val : def_val()));\n  }\n  template <bool last>\n  static inline\
-    \ bool is_in(const id_t &m, const id_t &k) {\n    if constexpr (last)\n      return\
+    \    id_t m = (b[0] + b[1]) >> 1;\n    if (cp_node(t); l <= b[0] && b[1] <= r)\
+    \ return propagate(t, x, b[1] - b[0]);\n    eval(t, b[1] - b[0]);\n    apply(t->ch[0],\
+    \ l, r, {b[0], m}, x), apply(t->ch[1], l, r, {m, b[1]}, x);\n    if constexpr\
+    \ (monoid<M>::value) pushup(t);\n  }\n  void set_val(Node *&t, const id_t &k,\
+    \ const T &val, std::uint8_t h) {\n    if (cp_node(t); !h) return reflect(t) =\
+    \ val, void();\n    if constexpr (dual<M>::value) eval(t, 1LL << h);\n    set_val(t->ch[(k\
+    \ >> (h - 1)) & 1], k, val, h - 1);\n    if constexpr (monoid<M>::value) pushup(t);\n\
+    \  }\n  T &at_val(Node *&t, const id_t &k, std::uint8_t h) {\n    if (cp_node(t);\
+    \ !h) return reflect(t);\n    if constexpr (dual<M>::value) eval(t, 1LL << h);\n\
+    \    return at_val(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n  bool is_null(Node\
+    \ *&t, const id_t &k, std::uint8_t h) {\n    if (!t) return true;\n    if (!h)\
+    \ return false;\n    if constexpr (dual<M>::value) eval(t, 1LL << h);\n    return\
+    \ is_null(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n  T get_val(Node *&t, const\
+    \ id_t &k, std::uint8_t h) {\n    if (!t) return def_val();\n    if (!h) return\
+    \ reflect(t);\n    if constexpr (dual<M>::value) eval(t, 1LL << h);\n    return\
+    \ get_val(t->ch[(k >> (h - 1)) & 1], k, h - 1);\n  }\n  template <bool last>\n\
+    \  static inline T calc_op(Node *&t, const T &v) {\n    if constexpr (last)\n\
+    \      return M::op((t ? t->val : def_val()), v);\n    else\n      return M::op(v,\
+    \ (t ? t->val : def_val()));\n  }\n  template <bool last>\n  static inline bool\
+    \ is_in(const id_t &m, const id_t &k) {\n    if constexpr (last)\n      return\
     \ k <= m;\n    else\n      return m <= k;\n  }\n  template <bool last, class C,\
     \ std::size_t N>\n  static id_t find(const id_t &k, std::array<id_t, 2> b, const\
     \ id_t &bias,\n                   std::uint8_t h, const C &check, std::array<Node\
     \ *, N> &ts,\n                   std::array<T, N> &sums) {\n    static_assert(monoid<M>::value,\
     \ \"\\\"find\\\" is not available\\n\");\n    static std::array<T, N> sums2;\n\
-    \    if (std::all_of(ts.begin(), ts.end(), [](Node *t) { return !t; }))\n    \
-    \  return -1;\n    if (!h) {\n      for (std::size_t i = N; i--;) sums[i] = calc_op<last>(ts[i],\
-    \ sums[i]);\n      return std::apply(check, sums) ? std::get<last>(b) : -1;\n\
-    \    } else if (is_in<last>(k, b[0])) {\n      for (std::size_t i = N; i--;) sums2[i]\
-    \ = calc_op<last>(ts[i], sums[i]);\n      if (!std::apply(check, sums2)) return\
-    \ sums = std::move(sums2), -1;\n    }\n    if constexpr (dual<M>::value)\n   \
-    \   for (std::size_t i = N; i--;) eval(ts[i], b[1] - b[0]);\n    std::array<Node\
-    \ *, N> ss;\n    id_t m = (b[0] + b[1]) >> 1;\n    bool flg = (bias >> (h - 1))\
-    \ & 1;\n    if (!is_in<last>(m, k)) {\n      for (std::size_t i = N; i--;) ss[i]\
-    \ = ts[i] ? ts[i]->ch[flg] : nullptr;\n      id_t ret = find<last>(k, {b[0], m},\
-    \ bias, h - 1, check, ss, sums);\n      if (ret >= 0) return ret;\n    }\n   \
-    \ for (std::size_t i = N; i--;) ss[i] = ts[i] ? ts[i]->ch[!flg] : nullptr;\n \
-    \   return find<last>(k, {m, b[1]}, bias, h - 1, check, ss, sums);\n  }\n\n public:\n\
-    \  SegmentTree_Dynamic(Node *t = nullptr) : root(t) {}\n  SegmentTree_Dynamic(std::size_t\
-    \ n, T val) : root(nullptr) {\n    build(root, n, {0, 1LL << HEIGHT}, val);\n\
-    \  }\n  SegmentTree_Dynamic(T *bg, T *ed) : root(nullptr) {\n    build(root, ed\
-    \ - bg, {0, 1LL << HEIGHT}, bg);\n  }\n  SegmentTree_Dynamic(const std::vector<T>\
-    \ &ar)\n      : SegmentTree_Dynamic(ar.data(), ar.data() + ar.size()) {}\n  void\
-    \ set(id_t k, T val) { set_val(root, k, val, HEIGHT); }\n  T get(id_t k) { return\
-    \ get_val(root, k, HEIGHT); }\n  bool is_null(id_t k) { return is_null(root, k,\
-    \ HEIGHT); }\n  T &at(id_t k) {\n    static_assert(!monoid<M>::value, \"\\\"at\\\
-    \" is not available\\n\");\n    return at_val(root, k, HEIGHT);\n  }\n  template\
-    \ <class L = M,\n            typename std::enable_if_t<monoid<L>::value> * = nullptr>\n\
-    \  T operator[](id_t k) {\n    return get(k);\n  }\n  template <class L = M,\n\
-    \            typename std::enable_if_t<!monoid<L>::value> * = nullptr>\n  T &operator[](id_t\
-    \ k) {\n    return at(k);\n  }\n  T fold(id_t a, id_t b, id_t bias = 0) {\n  \
-    \  static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\n\");\n  \
-    \  return fold(root, a, b, {0, 1LL << HEIGHT}, bias);\n  }\n  // find i s.t.\n\
-    \  //  check(fold(a,i)) == False, check(fold(a,i+1)) == True\n  // return -1 if\
-    \ not found\n  template <class C>\n  id_t find_first(id_t a, C check, id_t bias\
-    \ = 0) {\n    std::array<T, 1> sum{def_val()};\n    std::array<Node *, 1> t{root};\n\
-    \    return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n  }\n\
-    \  template <std::size_t N, class C>\n  static id_t find_first(id_t a, C check,\n\
-    \                         std::array<SegmentTree_Dynamic, N> segs,\n         \
-    \                id_t bias = 0) {\n    std::array<T, N> sums;\n    sums.fill(def_val());\n\
+    \    assert(!check(M::ti()));\n    if (std::all_of(ts.begin(), ts.end(), [](Node\
+    \ *t) { return !t; }))\n      return -1;\n    if (!h) {\n      for (std::size_t\
+    \ i = N; i--;) sums[i] = calc_op<last>(ts[i], sums[i]);\n      return std::apply(check,\
+    \ sums) ? std::get<last>(b) : -1;\n    } else if (is_in<last>(k, b[0])) {\n  \
+    \    for (std::size_t i = N; i--;) sums2[i] = calc_op<last>(ts[i], sums[i]);\n\
+    \      if (!std::apply(check, sums2)) return sums = std::move(sums2), -1;\n  \
+    \  }\n    if constexpr (dual<M>::value)\n      for (std::size_t i = N; i--;) eval(ts[i],\
+    \ b[1] - b[0]);\n    std::array<Node *, N> ss;\n    id_t m = (b[0] + b[1]) >>\
+    \ 1;\n    bool flg = (bias >> (h - 1)) & 1;\n    if (!is_in<last>(m, k)) {\n \
+    \     for (std::size_t i = N; i--;) ss[i] = ts[i] ? ts[i]->ch[flg] : nullptr;\n\
+    \      id_t ret = find<last>(k, {b[0], m}, bias, h - 1, check, ss, sums);\n  \
+    \    if (ret >= 0) return ret;\n    }\n    for (std::size_t i = N; i--;) ss[i]\
+    \ = ts[i] ? ts[i]->ch[!flg] : nullptr;\n    return find<last>(k, {m, b[1]}, bias,\
+    \ h - 1, check, ss, sums);\n  }\n\n public:\n  SegmentTree_Dynamic(Node *t = nullptr)\
+    \ : root(t) {}\n  SegmentTree_Dynamic(std::size_t n, T val) : root(nullptr) {\n\
+    \    build(root, n, {0, 1LL << HEIGHT}, val);\n  }\n  SegmentTree_Dynamic(T *bg,\
+    \ T *ed) : root(nullptr) {\n    build(root, ed - bg, {0, 1LL << HEIGHT}, bg);\n\
+    \  }\n  SegmentTree_Dynamic(const std::vector<T> &ar)\n      : SegmentTree_Dynamic(ar.data(),\
+    \ ar.data() + ar.size()) {}\n  void set(id_t k, T val) { set_val(root, k, val,\
+    \ HEIGHT); }\n  T get(id_t k) { return get_val(root, k, HEIGHT); }\n  bool is_null(id_t\
+    \ k) { return is_null(root, k, HEIGHT); }\n  T &at(id_t k) {\n    static_assert(!monoid<M>::value,\
+    \ \"\\\"at\\\" is not available\\n\");\n    return at_val(root, k, HEIGHT);\n\
+    \  }\n  template <class L = M,\n            typename std::enable_if_t<monoid<L>::value>\
+    \ * = nullptr>\n  T operator[](id_t k) {\n    return get(k);\n  }\n  template\
+    \ <class L = M,\n            typename std::enable_if_t<!monoid<L>::value> * =\
+    \ nullptr>\n  T &operator[](id_t k) {\n    return at(k);\n  }\n  T fold(id_t a,\
+    \ id_t b, id_t bias = 0) {\n    static_assert(monoid<M>::value, \"\\\"fold\\\"\
+    \ is not available\\n\");\n    return fold(root, a, b, {0, 1LL << HEIGHT}, bias);\n\
+    \  }\n  // find i s.t.\n  //  check(fold(a,i)) == False, check(fold(a,i+1)) ==\
+    \ True\n  // return -1 if not found\n  template <class C>\n  id_t find_first(id_t\
+    \ a, C check, id_t bias = 0) {\n    std::array<T, 1> sum{def_val()};\n    std::array<Node\
+    \ *, 1> t{root};\n    return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check,\
+    \ t, sum);\n  }\n  template <std::size_t N, class C>\n  static id_t find_first(id_t\
+    \ a, C check,\n                         std::array<SegmentTree_Dynamic, N> segs,\n\
+    \                         id_t bias = 0) {\n    std::array<T, N> sums;\n    sums.fill(def_val());\n\
     \    std::array<Node *, N> ts;\n    for (std::size_t i = 0; i < N; i++) ts[i]\
     \ = segs[i].root;\n    return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check,\
     \ ts, sums);\n  }\n  // find i s.t.\n  //  check(fold(i+1,b)) == False, check(fold(i,b))\
@@ -289,7 +291,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 14:50:02+09:00'
+  timestamp: '2022-06-19 19:40:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.DynSeg.test.cpp
