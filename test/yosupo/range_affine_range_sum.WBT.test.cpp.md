@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   - icon: ':question:'
@@ -58,9 +58,12 @@ data:
     \ ni = 1;\n  node_id root;\n  static inline void pushup(node_id t) {\n    n[t].size\
     \ = n[n[t].ch[0]].size + n[n[t].ch[1]].size;\n    if constexpr (semigroup<M>::value)\n\
     \      n[t].val = M::op(n[n[t].ch[0]].val, n[n[t].ch[1]].val);\n  }\n  static\
-    \ inline void propagate(node_id t, const E &x) {\n    n[t].lazy = n[t].lazy_flg\
-    \ ? M::composition(n[t].lazy, x) : x;\n    n[t].val = M::mapping(n[t].val, x,\
-    \ n[t].size), n[t].lazy_flg = true;\n  }\n  static inline void cp_node(node_id\
+    \ inline T &reflect(node_id t) {\n    if constexpr (dual<M>::value && !semigroup<M>::value)\n\
+    \      if (n[t].lazy_flg)\n        n[t].val = M::mapping(n[t].val, n[t].lazy,\
+    \ 1), n[t].lazy_flg = false;\n    return n[t].val;\n  }\n  static inline void\
+    \ propagate(node_id t, const E &x) {\n    n[t].lazy = n[t].lazy_flg ? M::composition(n[t].lazy,\
+    \ x) : x;\n    if constexpr (semigroup<M>::value)\n      n[t].val = M::mapping(n[t].val,\
+    \ x, n[t].size);\n    n[t].lazy_flg = true;\n  }\n  static inline void cp_node(node_id\
     \ &t) { n[t = ni++] = Node(n[t]); }\n  static inline void eval(node_id t) {\n\
     \    if (!n[t].lazy_flg) return;\n    cp_node(n[t].ch[0]), cp_node(n[t].ch[1]),\
     \ n[t].lazy_flg = false;\n    propagate(n[t].ch[0], n[t].lazy), propagate(n[t].ch[1],\
@@ -86,7 +89,7 @@ data:
     \ T>)\n        return n[ni] = Node{bg, 1}, ni++;\n      else\n        return n[ni]\
     \ = Node{*(bg + l), 1}, ni++;\n    }\n    return merge(build(l, (l + r) >> 1,\
     \ bg), build((l + r) >> 1, r, bg));\n  }\n  void dump(node_id t, typename std::vector<T>::iterator\
-    \ it) {\n    if (!n[t].ch[0]) return *it = n[t].val, void();\n    if constexpr\
+    \ it) {\n    if (!n[t].ch[0]) return *it = reflect(t), void();\n    if constexpr\
     \ (dual<M>::value) eval(t);\n    dump(n[t].ch[0], it), dump(n[t].ch[1], it + n[n[t].ch[0]].size);\n\
     \  }\n  T fold(node_id t, const std::size_t &l, const std::size_t &r, std::size_t\
     \ bl,\n         std::size_t br) {\n    if (l <= bl && br <= r) return n[t].val;\n\
@@ -100,120 +103,121 @@ data:
     \ bl + n[n[t].ch[0]].size;\n    apply(n[t].ch[0], l, r, bl, m, x), apply(n[t].ch[1],\
     \ l, r, m, br, x);\n    if constexpr (semigroup<M>::value) pushup(t);\n  }\n \
     \ void set_val(node_id &t, std::size_t k, const T &x) {\n    if (cp_node(t); !n[t].ch[0])\
-    \ return n[t].val = x, void();\n    if constexpr (dual<M>::value) eval(t);\n \
-    \   bool flg = n[n[t].ch[0]].size <= k;\n    set_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
-    \ : k, x);\n    if constexpr (semigroup<M>::value) pushup(t);\n  }\n  T get_val(node_id\
-    \ t, std::size_t k) {\n    if (!n[t].ch[0]) return n[t].val;\n    if constexpr\
-    \ (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size <= k;\n    return\
-    \ get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n  }\n  T &at_val(node_id\
-    \ t, std::size_t k) {\n    if (cp_node(t); !n[t].ch[0]) return n[t].val;\n   \
-    \ if constexpr (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size <=\
-    \ k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n  }\n\
-    \n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
-    \ n, T val) { root = build(0, n, val); }\n  WeightBalancedTree(const T *bg, const\
-    \ T *ed) { root = build(0, ed - bg, bg); }\n  WeightBalancedTree(const std::vector<T>\
+    \ return reflect(t) = x, void();\n    if constexpr (dual<M>::value) eval(t);\n\
+    \    bool flg = n[n[t].ch[0]].size <= k;\n    set_val(n[t].ch[flg], flg ? k -\
+    \ n[n[t].ch[0]].size : k, x);\n    if constexpr (semigroup<M>::value) pushup(t);\n\
+    \  }\n  T get_val(node_id t, std::size_t k) {\n    if (!n[t].ch[0]) return reflect(t);\n\
+    \    if constexpr (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size\
+    \ <= k;\n    return get_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n\
+    \  }\n  T &at_val(node_id t, std::size_t k) {\n    if (cp_node(t); !n[t].ch[0])\
+    \ return reflect(t);\n    if constexpr (dual<M>::value) eval(t);\n    bool flg\
+    \ = n[n[t].ch[0]].size <= k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size\
+    \ : k);\n  }\n  static WBT id_to_wbt(node_id t) {\n    WBT ret;\n    return ret.root\
+    \ = t, ret;\n  }\n\n public:\n  WeightBalancedTree() : root(0) {}\n  WeightBalancedTree(std::size_t\
+    \ n, T val = T()) { root = build(0, n, val); }\n  WeightBalancedTree(const T *bg,\
+    \ const T *ed) { root = build(0, ed - bg, bg); }\n  WeightBalancedTree(const std::vector<T>\
     \ &ar)\n      : WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n  WBT\
     \ &operator+=(WBT rhs) { return root = merge(root, rhs.root), *this; }\n  WBT\
     \ operator+(WBT rhs) { return WBT(*this) += rhs; }\n  std::pair<WBT, WBT> split(std::size_t\
-    \ k) {\n    auto [l, r] = split(root, k);\n    return {WBT(l), WBT(r)};\n  }\n\
-    \  std::tuple<WBT, WBT, WBT> split3(std::size_t a, std::size_t b) {\n    auto\
-    \ [tmp, r] = split(root, b);\n    auto [l, c] = split(tmp, a);\n    return {WBT(l),\
-    \ WBT(c), WBT(r)};\n  }\n  void push_back(T val) { n[ni] = Node{val, 1}, root\
-    \ = merge(root, ni++); }\n  void push_front(T val) { n[ni] = Node{val, 1}, root\
-    \ = merge(ni++, root); }\n  void insert(std::size_t k, T val) {\n    auto [l,\
-    \ r] = split(root, k);\n    n[ni] = Node{val, 1}, root = merge(merge(l, ni++),\
-    \ r);\n  }\n  T pop_back() {\n    assert(root);\n    auto [l, t] = split(root,\
-    \ size() - 1);\n    return root = l, n[t].val;\n  }\n  T pop_front() {\n    assert(root);\n\
-    \    auto [t, r] = split(root, 1);\n    return root = r, n[t].val;\n  }\n  T erase(std::size_t\
-    \ k) {\n    assert(k < size());\n    auto [l, tmp] = split(root, k);\n    auto\
-    \ [t, r] = split(tmp, 1);\n    return root = merge(l, r), n[t].val;\n  }\n  void\
-    \ set(std::size_t k, T val) { set_val(root, k, val); }\n  T get(std::size_t k)\
-    \ { return get_val(root, k); }\n  T &at(std::size_t k) {\n    static_assert(!semigroup<M>::value,\
-    \ \"\\\"at\\\" is not available\\n\");\n    return at_val(root, k);\n  }\n  template\
-    \ <class L = M,\n            typename std::enable_if_t<semigroup<L>::value> *\
-    \ = nullptr>\n  T operator[](std::size_t k) {\n    return get(k);\n  }\n  template\
-    \ <class L = M,\n            typename std::enable_if_t<!semigroup<L>::value> *\
-    \ = nullptr>\n  T &operator[](std::size_t k) {\n    return at(k);\n  }\n  T fold(std::size_t\
-    \ a, std::size_t b) {\n    static_assert(semigroup<M>::value, \"\\\"fold\\\" is\
-    \ not available\\n\");\n    return fold(root, a, b, 0, size());\n  }\n  void apply(std::size_t\
-    \ a, std::size_t b, E x) {\n    static_assert(dual<M>::value, \"\\\"apply\\\"\
-    \ is not available\\n\");\n    apply(root, a, b, 0, size(), x);\n  }\n  std::size_t\
-    \ size() { return n[root].size; }\n  std::vector<T> dump() {\n    if (!root) return\
-    \ std::vector<T>();\n    std::vector<T> ret(size());\n    return dump(root, ret.begin()),\
-    \ ret;\n  }\n  void clear() { root = 0; }\n  static void reset() { ni = 1; }\n\
-    \  void rebuild() {\n    auto dmp = dump();\n    reset(), *this = WBT(dmp);\n\
-    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
-    \    if constexpr (semigroup<M>::value)\n      ret += \"\\\"fold\\\" \";\n   \
-    \ else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value) ret +=\
-    \ \"\\\"apply\\\" \";\n    return ret;\n  }\n  static double percentage_used()\
-    \ { return 100. * ni / NODE_SIZE; }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n\
-    \ * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace\
-    \ internal {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\n\
-    struct ModIntImpl {\n  static constexpr std::uint64_t modulo() { return mod; }\n\
-    \  static constexpr std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
-    \  }\n};\n}  // namespace internal\ntemplate <std::uint64_t mod, std::uint64_t\
-    \ prim_root = 0>\nclass ModInt\n    : public internal::ModIntImpl<mod, prim_root,\
-    \ ModInt<mod, prim_root>> {\n  using u64 = std::uint64_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1), r2 = -__uint128_t(mod) % mod;\n  static constexpr u64 init(u64 w) { return\
-    \ reduce(__uint128_t(w) * r2); }\n  static constexpr u64 reduce(const __uint128_t\
-    \ w) {\n    return u64(w >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >>\
-    \ 64);\n  }\n  u64 x;\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr\
-    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static\
-    \ constexpr u64 norm(u64 w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt\
-    \ operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x !=\
-    \ 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n  \
-    \  return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n\
-    \  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x\
-    \ += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
-    \ ModInt &rhs) {\n    return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n\
-    \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
-    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
-    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
-    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
-    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
-    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
-    \ }\n  bool operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n\
-    \  constexpr ModInt pow(std::uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
-    \    for (ModInt base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret\
-    \ *= base;\n    return ret;\n  }\n  constexpr ModInt inverse() const { return\
-    \ pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0)\
-    \ || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return ModInt(0);\
-    \  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod\
-    \ - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt,\
-    \ ModInt> u, std::pair<ModInt, ModInt> v) {\n      ModInt a = (u.first * v.first\
-    \ + u.second * v.second * w);\n      ModInt b = (u.first * v.second + u.second\
-    \ * v.first);\n      return std::make_pair(a, b);\n    };\n    std::uint64_t e\
-    \ = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n    for (auto\
-    \ bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.val() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  constexpr u64 val() const {\n    u64 ret = reduce(x) - mod;\n    return\
-    \ ret + (mod & -(ret >> 63));\n  }\n  friend std::istream &operator>>(std::istream\
-    \ &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n\
-    };\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2, pr_rt> : internal::ModIntImpl<2,\
-    \ pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t n = 0) : x(n & 1)\
-    \ {}\n  constexpr ModInt operator-() const { return *this; }\n  constexpr ModInt\
-    \ &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator*=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator/=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  ModInt operator+(const\
+    \ k) {\n    auto [l, r] = split(root, k);\n    return {id_to_wbt(l), id_to_wbt(r)};\n\
+    \  }\n  std::tuple<WBT, WBT, WBT> split3(std::size_t a, std::size_t b) {\n   \
+    \ auto [tmp, r] = split(root, b);\n    auto [l, c] = split(tmp, a);\n    return\
+    \ {id_to_wbt(l), id_to_wbt(c), id_to_wbt(r)};\n  }\n  void push_back(T val) {\
+    \ n[ni] = Node{val, 1}, root = merge(root, ni++); }\n  void push_front(T val)\
+    \ { n[ni] = Node{val, 1}, root = merge(ni++, root); }\n  void insert(std::size_t\
+    \ k, T val) {\n    auto [l, r] = split(root, k);\n    n[ni] = Node{val, 1}, root\
+    \ = merge(merge(l, ni++), r);\n  }\n  T pop_back() {\n    assert(root);\n    auto\
+    \ [l, t] = split(root, size() - 1);\n    return root = l, reflect(t);\n  }\n \
+    \ T pop_front() {\n    assert(root);\n    auto [t, r] = split(root, 1);\n    return\
+    \ root = r, reflect(t);\n  }\n  T erase(std::size_t k) {\n    assert(k < size());\n\
+    \    auto [l, tmp] = split(root, k);\n    auto [t, r] = split(tmp, 1);\n    return\
+    \ root = merge(l, r), reflect(t);\n  }\n  void set(std::size_t k, T val) { set_val(root,\
+    \ k, val); }\n  T get(std::size_t k) { return get_val(root, k); }\n  T &at(std::size_t\
+    \ k) {\n    static_assert(!semigroup<M>::value, \"\\\"at\\\" is not available\\\
+    n\");\n    return at_val(root, k);\n  }\n  template <class L = M,\n          \
+    \  typename std::enable_if_t<semigroup<L>::value> * = nullptr>\n  T operator[](std::size_t\
+    \ k) {\n    return get(k);\n  }\n  template <class L = M,\n            typename\
+    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](std::size_t\
+    \ k) {\n    return at(k);\n  }\n  T fold(std::size_t a, std::size_t b) {\n   \
+    \ static_assert(semigroup<M>::value, \"\\\"fold\\\" is not available\\n\");\n\
+    \    return fold(root, a, b, 0, size());\n  }\n  void apply(std::size_t a, std::size_t\
+    \ b, E x) {\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
+    n\");\n    apply(root, a, b, 0, size(), x);\n  }\n  std::size_t size() { return\
+    \ n[root].size; }\n  std::vector<T> dump() {\n    if (!root) return std::vector<T>();\n\
+    \    std::vector<T> ret(size());\n    return dump(root, ret.begin()), ret;\n \
+    \ }\n  void clear() { root = 0; }\n  static void reset() { ni = 1; }\n  void rebuild()\
+    \ {\n    auto dmp = dump();\n    reset(), *this = WBT(dmp);\n  }\n  static std::string\
+    \ which_available() {\n    std::string ret = \"\";\n    if constexpr (semigroup<M>::value)\n\
+    \      ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n  \
+    \  if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n\
+    \  }\n  static double percentage_used() { return 100. * ni / NODE_SIZE; }\n};\n\
+    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+    \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
+    \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
+    \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
+    \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
+    \ ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\n\
+    template <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n    :\
+    \ public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using\
+    \ u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x\
+    \ = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n \
+    \ static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod) % mod;\n\
+    \  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) * r2); }\n\
+    \  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w >> 64)\
+    \ + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
+    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
+    \ < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return\
+    \ w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt\
+    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
+    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
+    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
+    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
+    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
+    \ = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
+    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const\
     \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
     \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
     \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
     \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
-    \ ModInt &rhs) const { return x == rhs.x; }\n  bool operator!=(const ModInt &rhs)\
-    \ const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t k) const\
-    \ { return !k ? ModInt(1) : *this; }\n  constexpr ModInt sqrt() const { return\
-    \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
-    \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
-    \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
-    };\n#line 7 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\nusing namespace\
-    \ std;\n\nusing Mint = ModInt<998244353>;\nstruct RaffineQ_RsumQ {\n  using T\
-    \ = Mint;\n  using E = pair<Mint, Mint>;\n  static T op(const T &l, const T &r)\
-    \ { return l + r; }\n  static T mapping(const T &l, const E &r, std::size_t sz)\
-    \ {\n    return r.first * l + r.second * sz;\n  }\n  static E composition(const\
+    \ ModInt &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const\
+    \ ModInt &rhs) const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t\
+    \ k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k\
+    \ >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n\
+    \  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr ModInt\
+    \ sqrt() const {\n    if (*this == ModInt(0) || mod == 2) return *this;\n    if\
+    \ (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt ONE\
+    \ = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b +=\
+    \ ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt,\
+    \ ModInt> v) {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n\
+    \      ModInt b = (u.first * v.second + u.second * v.first);\n      return std::make_pair(a,\
+    \ b);\n    };\n    std::uint64_t e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE,\
+    \ ModInt(0));\n    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs,\
+    \ bs))\n      if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 <\
+    \ mod ? ret.first : -ret.first;\n  }\n  constexpr u64 val() const {\n    u64 ret\
+    \ = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  friend std::istream\
+    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x\
+    \ = init(rhs.x), is;\n  }\n};\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2,\
+    \ pr_rt> : internal::ModIntImpl<2, pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t\
+    \ n = 0) : x(n & 1) {}\n  constexpr ModInt operator-() const { return *this; }\n\
+    \  constexpr ModInt &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator*=(const ModInt &rhs) { return x &= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator/=(const ModInt &rhs) { return x &= rhs.x, *this;\
+    \ }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return x == rhs.x; }\n  bool\
+    \ operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n  constexpr\
+    \ ModInt pow(std::uint64_t k) const { return !k ? ModInt(1) : *this; }\n  constexpr\
+    \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
+    \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 7 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct RaffineQ_RsumQ\
+    \ {\n  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T op(const T &l,\
+    \ const T &r) { return l + r; }\n  static T mapping(const T &l, const E &r, std::size_t\
+    \ sz) {\n    return r.first * l + r.second * sz;\n  }\n  static E composition(const\
     \ E &l, const E &r) {\n    return make_pair(r.first * l.first, r.first * l.second\
     \ + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  Mint v[N];\n  for (int i = 0; i < N; i++) cin\
@@ -245,7 +249,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 23:04:44+09:00'
+  timestamp: '2022-06-20 00:02:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

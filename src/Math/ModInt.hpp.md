@@ -75,6 +75,9 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc256_f.WBT.test.cpp
+    title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
@@ -386,6 +389,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/agc038_c.numth.test.cpp
+  - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc213_g.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp

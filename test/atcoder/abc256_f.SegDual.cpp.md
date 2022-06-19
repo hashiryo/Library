@@ -16,8 +16,7 @@ data:
     links:
     - https://atcoder.jp/contests/abc256/tasks/abc256_f
   bundledCode: "#line 1 \"test/atcoder/abc256_f.SegDual.cpp\"\n#define PROBLEM \"\
-    https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n// \u53CC\u5BFE \u306E\
-    \ verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include <bits/stdc++.h>\n\
+    https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
     \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
     \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
@@ -102,7 +101,7 @@ data:
     \  inline void eval(int k) {\n    if (!laz_flg[k]) return;\n    propagate(k <<\
     \ 1 | 0, laz[k]), propagate(k << 1 | 1, laz[k]);\n    laz_flg[k] = false;\n  }\n\
     \  inline void propagate(int k, const E &x) {\n    laz[k] = laz_flg[k] ? M::composition(laz[k],\
-    \ x) : x, laz_flg[k] = true;\n  }\n};\n#line 8 \"test/atcoder/abc256_f.SegDual.cpp\"\
+    \ x) : x, laz_flg[k] = true;\n  }\n};\n#line 6 \"test/atcoder/abc256_f.SegDual.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
     \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
     \ T mapping(T x, E mapp) {\n    return {x.id, x.val + mapp[0] * (x.id + 1) * (x.id\
@@ -118,8 +117,7 @@ data:
     \ v * x * x / 2});\n    } else {\n      cout << seg[x].val << '\\n';\n    }\n\
     \  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
-    // \u53CC\u5BFE \u306E verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dual.hpp\"\
+    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dual.hpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
     \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
     \ T mapping(T x, E mapp) {\n    return {x.id, x.val + mapp[0] * (x.id + 1) * (x.id\
@@ -140,7 +138,7 @@ data:
   isVerificationFile: false
   path: test/atcoder/abc256_f.SegDual.cpp
   requiredBy: []
-  timestamp: '2022-06-19 23:17:16+09:00'
+  timestamp: '2022-06-20 00:02:58+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.SegDual.cpp

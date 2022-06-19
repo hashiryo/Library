@@ -4,18 +4,85 @@ data:
   - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
+  - icon: ':question:'
+    path: src/Math/ModInt.hpp
+    title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/1508
+    PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
     links:
-    - https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/1508
-  bundledCode: "#line 1 \"test/aoj/1508.WBT.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/1508\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    - https://atcoder.jp/contests/abc256/tasks/abc256_f
+  bundledCode: "#line 1 \"test/atcoder/abc256_f.WBT.test.cpp\"\n#define PROBLEM \"\
+    https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n// \u53CC\u5BFE \u306E\
+    \ verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+    \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
+    \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
+    \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
+    \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
+    \ ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\n\
+    template <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n    :\
+    \ public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using\
+    \ u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x\
+    \ = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n \
+    \ static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod) % mod;\n\
+    \  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) * r2); }\n\
+    \  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w >> 64)\
+    \ + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
+    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
+    \ < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return\
+    \ w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt\
+    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
+    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
+    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
+    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
+    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
+    \ = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
+    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const\
+    \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
+    \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
+    \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
+    \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
+    \ ModInt &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const\
+    \ ModInt &rhs) const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t\
+    \ k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k\
+    \ >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n\
+    \  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr ModInt\
+    \ sqrt() const {\n    if (*this == ModInt(0) || mod == 2) return *this;\n    if\
+    \ (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt ONE\
+    \ = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b +=\
+    \ ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt,\
+    \ ModInt> v) {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n\
+    \      ModInt b = (u.first * v.second + u.second * v.first);\n      return std::make_pair(a,\
+    \ b);\n    };\n    std::uint64_t e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE,\
+    \ ModInt(0));\n    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs,\
+    \ bs))\n      if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 <\
+    \ mod ? ret.first : -ret.first;\n  }\n  constexpr u64 val() const {\n    u64 ret\
+    \ = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  friend std::istream\
+    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x\
+    \ = init(rhs.x), is;\n  }\n};\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2,\
+    \ pr_rt> : internal::ModIntImpl<2, pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t\
+    \ n = 0) : x(n & 1) {}\n  constexpr ModInt operator-() const { return *this; }\n\
+    \  constexpr ModInt &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator*=(const ModInt &rhs) { return x &= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator/=(const ModInt &rhs) { return x &= rhs.x, *this;\
+    \ }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return x == rhs.x; }\n  bool\
+    \ operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n  constexpr\
+    \ ModInt pow(std::uint64_t k) const { return !k ? ModInt(1) : *this; }\n  constexpr\
+    \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
+    \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \n/**\n * @title \u6C38\u7D9A\u5316Weight-Balanced-Tree\n * @category \u30C7\u30FC\
     \u30BF\u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\
     \u6728\n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\
@@ -147,40 +214,51 @@ data:
     \      ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n  \
     \  if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n\
     \  }\n  static double percentage_used() { return 100. * ni / NODE_SIZE; }\n};\n\
-    #line 5 \"test/aoj/1508.WBT.test.cpp\"\nusing namespace std;\n\n// \u5E73\u8861\
-    \u4E8C\u5206\u6728\u306Everify\n\nstruct RminQ {\n  using T = int;\n  static T\
-    \ op(const T &l, const T &r) { return min(l, r); }\n};\n\nint main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  using WBT = WeightBalancedTree<RminQ>;\n  int N,\
-    \ Q;\n  cin >> N >> Q;\n  vector<int> A(N);\n  for (int i = 0; i < N; i++) cin\
-    \ >> A[i];\n  WBT wbt(A);\n  while (Q--) {\n    int x, y, z;\n    cin >> x >>\
-    \ y >> z;\n    if (x == 0) {\n      auto [a, b, c] = wbt.split3(y, z + 1);\n \
-    \     b.push_front(b.pop_back());\n      wbt = a + b + c;\n    } else if (x ==\
-    \ 1)\n      cout << wbt.fold(y, z + 1) << '\\n';\n    else\n      wbt.set(y, z);\n\
-    \    if (WBT::percentage_used() > 97) wbt.rebuild();\n  }\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/1508\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
-    \nusing namespace std;\n\n// \u5E73\u8861\u4E8C\u5206\u6728\u306Everify\n\nstruct\
-    \ RminQ {\n  using T = int;\n  static T op(const T &l, const T &r) { return min(l,\
-    \ r); }\n};\n\nint main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using\
-    \ WBT = WeightBalancedTree<RminQ>;\n  int N, Q;\n  cin >> N >> Q;\n  vector<int>\
-    \ A(N);\n  for (int i = 0; i < N; i++) cin >> A[i];\n  WBT wbt(A);\n  while (Q--)\
-    \ {\n    int x, y, z;\n    cin >> x >> y >> z;\n    if (x == 0) {\n      auto\
-    \ [a, b, c] = wbt.split3(y, z + 1);\n      b.push_front(b.pop_back());\n     \
-    \ wbt = a + b + c;\n    } else if (x == 1)\n      cout << wbt.fold(y, z + 1) <<\
-    \ '\\n';\n    else\n      wbt.set(y, z);\n    if (WBT::percentage_used() > 97)\
-    \ wbt.rebuild();\n  }\n}"
+    #line 8 \"test/atcoder/abc256_f.WBT.test.cpp\"\nusing namespace std;\n\nusing\
+    \ Mint = ModInt<998244353>;\nstruct Mono {\n  struct T {\n    int id;\n    Mint\
+    \ val;\n  };\n  using E = array<Mint, 3>;\n  static T mapping(T x, E mapp, int)\
+    \ {\n    return {x.id, x.val + mapp[0] * (x.id + 1) * (x.id + 2) / 2 -\n     \
+    \                 mapp[1] * (2 * x.id + 3) / 2 + mapp[2]};\n  }\n  static E composition(E\
+    \ pre, E suf) {\n    return {pre[0] + suf[0], pre[1] + suf[1], pre[2] + suf[2]};\n\
+    \  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ WBT = WeightBalancedTree<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint A[N],\
+    \ D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for (int j\
+    \ = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n  WBT wbt(N);\n\
+    \  for (int i = 0; i < N; i++) wbt.set(i, {i, D[i]});\n  while (Q--) {\n    int\
+    \ op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint v;\n      cin\
+    \ >> v, v -= A[x], A[x] += v;\n      wbt.apply(x, N, {v, v * x, v * x * x / 2});\n\
+    \      if (wbt.percentage_used() >= 90) wbt.rebuild();\n    } else {\n      cout\
+    \ << wbt[x].val << '\\n';\n    }\n  }\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
+    // \u53CC\u5BFE \u306E verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include\
+    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
+    \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
+    \ T mapping(T x, E mapp, int) {\n    return {x.id, x.val + mapp[0] * (x.id + 1)\
+    \ * (x.id + 2) / 2 -\n                      mapp[1] * (2 * x.id + 3) / 2 + mapp[2]};\n\
+    \  }\n  static E composition(E pre, E suf) {\n    return {pre[0] + suf[0], pre[1]\
+    \ + suf[1], pre[2] + suf[2]};\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using WBT = WeightBalancedTree<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint\
+    \ A[N], D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for\
+    \ (int j = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n\
+    \  WBT wbt(N);\n  for (int i = 0; i < N; i++) wbt.set(i, {i, D[i]});\n  while\
+    \ (Q--) {\n    int op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n    \
+    \  Mint v;\n      cin >> v, v -= A[x], A[x] += v;\n      wbt.apply(x, N, {v, v\
+    \ * x, v * x * x / 2});\n      if (wbt.percentage_used() >= 90) wbt.rebuild();\n\
+    \    } else {\n      cout << wbt[x].val << '\\n';\n    }\n  }\n  return 0;\n}"
   dependsOn:
+  - src/Math/ModInt.hpp
   - src/DataStructure/WeightBalancedTree.hpp
   isVerificationFile: true
-  path: test/aoj/1508.WBT.test.cpp
+  path: test/atcoder/abc256_f.WBT.test.cpp
   requiredBy: []
   timestamp: '2022-06-20 00:02:58+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/1508.WBT.test.cpp
+documentation_of: test/atcoder/abc256_f.WBT.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/1508.WBT.test.cpp
-- /verify/test/aoj/1508.WBT.test.cpp.html
-title: test/aoj/1508.WBT.test.cpp
+- /verify/test/atcoder/abc256_f.WBT.test.cpp
+- /verify/test/atcoder/abc256_f.WBT.test.cpp.html
+title: test/atcoder/abc256_f.WBT.test.cpp
 ---

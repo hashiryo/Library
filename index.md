@@ -88,7 +88,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/WeightBalancedTree.hpp
       title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   - name: src/Game
@@ -647,6 +647,9 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc256_f.WBT.test.cpp
+      title: test/atcoder/abc256_f.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc018_c.test.cpp
       title: test/atcoder/agc018_c.test.cpp
