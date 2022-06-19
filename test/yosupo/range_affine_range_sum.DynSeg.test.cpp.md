@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -158,10 +158,10 @@ data:
     \ ts, sums);\n  }\n  void apply(id_t a, id_t b, E x) {\n    static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\\n\");\n    apply(root, a, b, {0, 1LL << HEIGHT},\
     \ x);\n  }\n  std::vector<T> dump(id_t bg, id_t ed) {\n    std::vector<T> ret(ed\
-    \ - bg);\n    dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin());\n    return\
-    \ ret;\n  }\n  static std::string which_available() {\n    std::string ret = \"\
-    \";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\
-    \" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
+    \ - bg);\n    return dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin()), ret;\n\
+    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
+    \    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\"\
+    \ \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 3 \"src/Math/ModInt.hpp\"\
     \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
     namespace internal {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class\
@@ -259,8 +259,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 14:17:31+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-06-19 14:50:02+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
 layout: document

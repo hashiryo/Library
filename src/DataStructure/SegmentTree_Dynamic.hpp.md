@@ -18,10 +18,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.DynSeg.test.cpp
     title: test/yosupo/set_xor_min.DynSeg.test.cpp
   - icon: ':x:'
@@ -176,10 +176,10 @@ data:
     \ ts, sums);\n  }\n  void apply(id_t a, id_t b, E x) {\n    static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\\n\");\n    apply(root, a, b, {0, 1LL << HEIGHT},\
     \ x);\n  }\n  std::vector<T> dump(id_t bg, id_t ed) {\n    std::vector<T> ret(ed\
-    \ - bg);\n    dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin());\n    return\
-    \ ret;\n  }\n  static std::string which_available() {\n    std::string ret = \"\
-    \";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\
-    \" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
+    \ - bg);\n    return dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin()), ret;\n\
+    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
+    \    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\"\
+    \ \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Segment-Tree(\u52D5\
     \u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u9045\u5EF6\
@@ -320,17 +320,17 @@ data:
     \ ts, sums);\n  }\n  void apply(id_t a, id_t b, E x) {\n    static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\\n\");\n    apply(root, a, b, {0, 1LL << HEIGHT},\
     \ x);\n  }\n  std::vector<T> dump(id_t bg, id_t ed) {\n    std::vector<T> ret(ed\
-    \ - bg);\n    dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin());\n    return\
-    \ ret;\n  }\n  static std::string which_available() {\n    std::string ret = \"\
-    \";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\
-    \" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
+    \ - bg);\n    return dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin()), ret;\n\
+    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
+    \    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\"\
+    \ \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy:
   - test/atcoder/abc256_f.DynSeg.teset.cpp
-  timestamp: '2022-06-19 14:17:31+09:00'
+  timestamp: '2022-06-19 14:50:02+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc133_f.DynSeg.test.cpp

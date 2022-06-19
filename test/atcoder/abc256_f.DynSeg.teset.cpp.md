@@ -219,10 +219,10 @@ data:
     \ ts, sums);\n  }\n  void apply(id_t a, id_t b, E x) {\n    static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\\n\");\n    apply(root, a, b, {0, 1LL << HEIGHT},\
     \ x);\n  }\n  std::vector<T> dump(id_t bg, id_t ed) {\n    std::vector<T> ret(ed\
-    \ - bg);\n    dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin());\n    return\
-    \ ret;\n  }\n  static std::string which_available() {\n    std::string ret = \"\
-    \";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\
-    \" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
+    \ - bg);\n    return dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin()), ret;\n\
+    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
+    \    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\"\
+    \ \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 8 \"test/atcoder/abc256_f.DynSeg.teset.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
     \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
@@ -261,7 +261,7 @@ data:
   isVerificationFile: false
   path: test/atcoder/abc256_f.DynSeg.teset.cpp
   requiredBy: []
-  timestamp: '2022-06-19 14:25:02+09:00'
+  timestamp: '2022-06-19 14:50:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.DynSeg.teset.cpp

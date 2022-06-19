@@ -6,9 +6,9 @@ data:
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/set_xor_min
@@ -155,10 +155,10 @@ data:
     \ ts, sums);\n  }\n  void apply(id_t a, id_t b, E x) {\n    static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\\n\");\n    apply(root, a, b, {0, 1LL << HEIGHT},\
     \ x);\n  }\n  std::vector<T> dump(id_t bg, id_t ed) {\n    std::vector<T> ret(ed\
-    \ - bg);\n    dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin());\n    return\
-    \ ret;\n  }\n  static std::string which_available() {\n    std::string ret = \"\
-    \";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\
-    \" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
+    \ - bg);\n    return dump(root, bg, ed, {0, 1LL << HEIGHT}, ret.begin()), ret;\n\
+    \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
+    \    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\"\
+    \ \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 4 \"test/yosupo/set_xor_min.DynSeg.test.cpp\"\
     \n\n// find + xor \u306E verify\n\nusing namespace std;\n\nstruct RsumQ {\n  using\
     \ T = int;\n  static T ti() { return 0; }\n  static T op(const T &l, const T &r)\
@@ -183,8 +183,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/set_xor_min.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 14:17:31+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-06-19 14:50:02+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/set_xor_min.DynSeg.test.cpp
 layout: document
