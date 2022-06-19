@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
@@ -26,105 +26,101 @@ data:
     array(10x10)\u3092\u306E\u305B\u308B\u3053\u3068\u306B\u6210\u529F\n// https://atcoder.jp/contests/arc027/tasks/arc027_4\n\
     \n// find_left, find_right verify\n// https://atcoder.jp/contests/code-festival-2014-qualb/tasks/code_festival_qualB_d\n\
     \n// BEGIN CUT HERE\n\ntemplate <typename M>\nstruct SegmentTree {\n  using T\
-    \ = typename M::T;\n\n private:\n  const int n;\n  std::vector<T> dat;\n\n public:\n\
-    \  SegmentTree() {}\n  SegmentTree(int n_) : n(n_), dat(n << 1, M::ti()) {}\n\
-    \  SegmentTree(int n_, T v) : SegmentTree(std::vector<T>(n_, v)) {}\n  SegmentTree(const\
-    \ std::vector<T> &v) : n(v.size()), dat(n << 1, M::ti()) {\n    for (int i = 0;\
-    \ i < (int)v.size(); i++) dat[i + n] = v[i];\n    rebuild();\n  }\n  void set_val(int\
-    \ k, T x) {\n    for (dat[k += n] = x; k >>= 1;)\n      dat[k] = M::op(dat[(k\
-    \ << 1) | 0], dat[(k << 1) | 1]);\n  }\n  void unsafe_set(int k, T x) { dat[k\
-    \ + n] = x; }\n  void rebuild() {\n    for (int i = n - 1; i >= 1; i--)\n    \
-    \  dat[i] = M::op(dat[i << 1 | 0], dat[i << 1 | 1]);\n  }\n  void clear() { fill(dat.begin(),\
-    \ dat.end(), M::ti()); }\n  //[l,r)\n  inline T fold(int l, int r) {\n    T vl\
-    \ = M::ti(), vr = M::ti();\n    for (int a = l + n, b = r + n; a < b; a >>= 1,\
-    \ b >>= 1) {\n      if (a & 1) vl = M::op(vl, dat[a++]);\n      if (b & 1) vr\
-    \ = M::op(dat[--b], vr);\n    }\n    return M::op(vl, vr);\n  }\n  T operator[](const\
-    \ int &k) const { return dat[k + n]; }\n\n  // max{ i : check(fold(l,i+1)) = true}\n\
-    \  template <class C>\n  int find_right(const C &check, int l = 0) {\n    assert(check(M::ti()));\n\
-    \    if (l == n) return n;\n    std::vector<int> idl, idr;\n    for (int a = l\
-    \ + n, b = 2 * n; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) idl.push_back(a++);\n\
-    \      if (b & 1) idr.push_back(--b);\n    }\n    for (auto itr = idr.rbegin();\
-    \ itr != idr.rend(); itr++) idl.push_back(*itr);\n    T val = M::ti();\n    for\
-    \ (int i : idl) {\n      if (!check(M::op(val, dat[i]))) {\n        while (i <\
-    \ n) {\n          i = i << 1 | 0;\n          if (check(M::op(val, dat[i]))) val\
-    \ = M::op(val, dat[i++]);\n        }\n        return i - n;\n      }\n      val\
-    \ = M::op(val, dat[i]);\n    }\n    return n;\n  }\n  //   min { i : check(fold(i,r))\
-    \ = true }\n  template <class C>\n  int find_left(const C &check, int r = -1)\
-    \ {\n    if (r < 0) r = n;\n    assert(check(M::ti()));\n    if (r == 0) return\
-    \ 0;\n    std::vector<int> idl, idr;\n    for (int a = n, b = r + n; a < b; a\
-    \ >>= 1, b >>= 1) {\n      if (a & 1) idl.push_back(a++);\n      if (b & 1) idr.push_back(--b);\n\
-    \    }\n    for (auto itr = idl.rbegin(); itr != idl.rend(); itr++) idr.push_back(*itr);\n\
-    \    T val = M::ti();\n    for (int i : idr) {\n      if (!check(M::op(dat[i],\
-    \ val))) {\n        while (i < n) {\n          i = i << 1 | 1;\n          if (check(M::op(dat[i],\
-    \ val))) val = M::op(dat[i--], val);\n        }\n        return i + 1 - n;\n \
-    \     }\n      val = M::op(dat[i], val);\n    }\n    return 0;\n  }\n};\n#line\
-    \ 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
-    \ */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
-    \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
-    \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
-    \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
-    \ ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\n\
-    template <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n    :\
-    \ public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using\
-    \ u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x\
-    \ = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n \
-    \ static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod) % mod;\n\
-    \  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) * r2); }\n\
-    \  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w >> 64)\
-    \ + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
-    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
-    \ < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return\
-    \ w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt\
-    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
-    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
-    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
-    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
-    \ = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
-    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const\
+    \ = typename M::T;\n  SegmentTree() {}\n  SegmentTree(int n_) : n(n_), dat(n <<\
+    \ 1, M::ti()) {}\n  SegmentTree(int n_, T v) : n(n_), dat(n << 1, M::ti()) {\n\
+    \    for (int i = n; i--;) dat[i + n] = v;\n    rebuild();\n  }\n  SegmentTree(const\
+    \ std::vector<T> &v) : n(v.size()), dat(n << 1, M::ti()) {\n    for (int i = n;\
+    \ i--;) dat[i + n] = v[i];\n    rebuild();\n  }\n  void set(int k, T x) {\n  \
+    \  for (dat[k += n] = x; k >>= 1;)\n      dat[k] = M::op(dat[(k << 1) | 0], dat[(k\
+    \ << 1) | 1]);\n  }\n  void unsafe_set(int k, T x) { dat[k + n] = x; }\n  void\
+    \ rebuild() {\n    for (int i = n; --i;) dat[i] = M::op(dat[i << 1 | 0], dat[i\
+    \ << 1 | 1]);\n  }\n  void clear() { fill(dat.begin(), dat.end(), M::ti()); }\n\
+    \  inline T fold(int l, int r) const {  //[l,r)\n    T vl = M::ti(), vr = M::ti();\n\
+    \    for (int a = l + n, b = r + n; a < b; a >>= 1, b >>= 1) {\n      if (a &\
+    \ 1) vl = M::op(vl, dat[a++]);\n      if (b & 1) vr = M::op(dat[--b], vr);\n \
+    \   }\n    return M::op(vl, vr);\n  }\n  T operator[](const int &k) const { return\
+    \ dat[k + n]; }\n  template <bool last>\n  static inline T calc_op(const T &v,\
+    \ const T &d) {\n    if constexpr (last)\n      return M::op(d, v);\n    else\n\
+    \      return M::op(v, d);\n  }\n  // Case 0. find i s.t check(fold(k,i)) == False,\
+    \ check(fold(k,i+1)) == True\n  // Case 1. find i s.t check(fold(i+1,b)) == False,\
+    \ check(fold(i,b)) == True\n  // return -1 if not found\n  template <bool last,\
+    \ class C>\n  int find(const C &check, int k) const {\n    assert(!check(M::ti()));\n\
+    \    std::vector<int> id[2];\n    int a = n + (k & -(!last)), b = n + n + ((k\
+    \ - n) & -(last));\n    for (; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) id[0].push_back(a++);\n\
+    \      if (b & 1) id[1].push_back(--b);\n    }\n    id[last].insert(id[last].end(),\
+    \ id[!last].rbegin(), id[!last].rend());\n    T val = M::ti();\n    for (int i\
+    \ : id[last]) {\n      if (T tmp = calc_op<last>(val, dat[i]); check(tmp)) {\n\
+    \        while (i < n)\n          if (tmp = calc_op<last>(val, dat[i = i << 1\
+    \ | last]); !check(tmp))\n            val = tmp, i -= last * 2 - 1;\n        return\
+    \ i - n + last;\n      } else\n        val = tmp;\n    }\n    return -1;\n  }\n\
+    \n private:\n  const int n;\n  std::vector<T> dat;\n};\n#line 3 \"src/Math/ModInt.hpp\"\
+    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
+    namespace internal {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class\
+    \ ModInt>\nstruct ModIntImpl {\n  static constexpr std::uint64_t modulo() { return\
+    \ mod; }\n  static constexpr std::uint64_t pr_rt() { return prim_root; }\n  friend\
+    \ std::ostream &operator<<(std::ostream &os, const ModInt &rhs) {\n    return\
+    \ os << rhs.val();\n  }\n};\n}  // namespace internal\ntemplate <std::uint64_t\
+    \ mod, std::uint64_t prim_root = 0>\nclass ModInt\n    : public internal::ModIntImpl<mod,\
+    \ prim_root, ModInt<mod, prim_root>> {\n  using u64 = std::uint64_t;\n  static\
+    \ constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x\
+    \ : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod,\
+    \ 6, 1), r2 = -__uint128_t(mod) % mod;\n  static constexpr u64 init(u64 w) { return\
+    \ reduce(__uint128_t(w) * r2); }\n  static constexpr u64 reduce(const __uint128_t\
+    \ w) {\n    return u64(w >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >>\
+    \ 64);\n  }\n  u64 x;\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr\
+    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static\
+    \ constexpr u64 norm(u64 w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt\
+    \ operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x !=\
+    \ 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n  \
+    \  return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n\
+    \  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x\
+    \ += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
+    \ ModInt &rhs) {\n    return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n\
+    \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
+    \ }\n  bool operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n\
+    \  constexpr ModInt pow(std::uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
+    \    for (ModInt base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret\
+    \ *= base;\n    return ret;\n  }\n  constexpr ModInt inverse() const { return\
+    \ pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0)\
+    \ || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return ModInt(0);\
+    \  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod\
+    \ - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt,\
+    \ ModInt> u, std::pair<ModInt, ModInt> v) {\n      ModInt a = (u.first * v.first\
+    \ + u.second * v.second * w);\n      ModInt b = (u.first * v.second + u.second\
+    \ * v.first);\n      return std::make_pair(a, b);\n    };\n    std::uint64_t e\
+    \ = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n    for (auto\
+    \ bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
+    \ ret = mul(ret, bs);\n    return ret.first.val() * 2 < mod ? ret.first : -ret.first;\n\
+    \  }\n  constexpr u64 val() const {\n    u64 ret = reduce(x) - mod;\n    return\
+    \ ret + (mod & -(ret >> 63));\n  }\n  friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n\
+    };\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2, pr_rt> : internal::ModIntImpl<2,\
+    \ pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t n = 0) : x(n & 1)\
+    \ {}\n  constexpr ModInt operator-() const { return *this; }\n  constexpr ModInt\
+    \ &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
+    \ &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
+    \ &operator*=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  constexpr ModInt\
+    \ &operator/=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  ModInt operator+(const\
     \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
     \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
     \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
     \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
-    \ ModInt &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const\
-    \ ModInt &rhs) const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t\
-    \ k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k\
-    \ >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n\
-    \  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr ModInt\
-    \ sqrt() const {\n    if (*this == ModInt(0) || mod == 2) return *this;\n    if\
-    \ (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt ONE\
-    \ = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b +=\
-    \ ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt,\
-    \ ModInt> v) {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n\
-    \      ModInt b = (u.first * v.second + u.second * v.first);\n      return std::make_pair(a,\
-    \ b);\n    };\n    std::uint64_t e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE,\
-    \ ModInt(0));\n    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs,\
-    \ bs))\n      if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 <\
-    \ mod ? ret.first : -ret.first;\n  }\n  constexpr u64 val() const {\n    u64 ret\
-    \ = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  friend std::istream\
-    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x\
-    \ = init(rhs.x), is;\n  }\n};\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2,\
-    \ pr_rt> : internal::ModIntImpl<2, pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t\
-    \ n = 0) : x(n & 1) {}\n  constexpr ModInt operator-() const { return *this; }\n\
-    \  constexpr ModInt &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this;\
-    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this;\
-    \ }\n  constexpr ModInt &operator*=(const ModInt &rhs) { return x &= rhs.x, *this;\
-    \ }\n  constexpr ModInt &operator/=(const ModInt &rhs) { return x &= rhs.x, *this;\
-    \ }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
-    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
-    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
-    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
-    \ }\n  bool operator==(const ModInt &rhs) const { return x == rhs.x; }\n  bool\
-    \ operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n  constexpr\
-    \ ModInt pow(std::uint64_t k) const { return !k ? ModInt(1) : *this; }\n  constexpr\
-    \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
-    \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
-    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
-    \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct RcompositeQ\
-    \ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1),\
-    \ Mint(0)); }\n  static T op(const T &l, const T &r) {\n    return make_pair(r.first\
-    \ * l.first, r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
+    \ ModInt &rhs) const { return x == rhs.x; }\n  bool operator!=(const ModInt &rhs)\
+    \ const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t k) const\
+    \ { return !k ? ModInt(1) : *this; }\n  constexpr ModInt sqrt() const { return\
+    \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
+    \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
+    \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
+    };\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\nusing\
+    \ namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct RcompositeQ {\n  using\
+    \ T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1), Mint(0));\
+    \ }\n  static T op(const T &l, const T &r) {\n    return make_pair(r.first * l.first,\
+    \ r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
     \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  vector<RcompositeQ::T>\
     \ v(N);\n  for (int i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n\
     \    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ> seg(v);\n  while (Q--) {\n\
@@ -153,8 +149,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-19 23:17:16+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp
 layout: document

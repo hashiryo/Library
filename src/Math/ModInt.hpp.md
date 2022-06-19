@@ -23,6 +23,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
+  - icon: ':warning:'
+    path: test/atcoder/abc256_f.SegDual.cpp
+    title: test/atcoder/abc256_f.SegDual.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
@@ -138,7 +141,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_set_range_composite.SegTree.test.cpp
     title: test/yosupo/point_set_range_composite.SegTree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -201,7 +204,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -371,6 +374,7 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt.hpp
   requiredBy:
+  - test/atcoder/abc256_f.SegDual.cpp
   - src/Math/differential_equation.hpp
   - src/Math/extgcd.hpp
   - src/Math/BigInt.hpp

@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A
@@ -23,45 +23,41 @@ data:
     \u306E\u305B\u308B\u3053\u3068\u306B\u6210\u529F\n// https://atcoder.jp/contests/arc027/tasks/arc027_4\n\
     \n// find_left, find_right verify\n// https://atcoder.jp/contests/code-festival-2014-qualb/tasks/code_festival_qualB_d\n\
     \n// BEGIN CUT HERE\n\ntemplate <typename M>\nstruct SegmentTree {\n  using T\
-    \ = typename M::T;\n\n private:\n  const int n;\n  std::vector<T> dat;\n\n public:\n\
-    \  SegmentTree() {}\n  SegmentTree(int n_) : n(n_), dat(n << 1, M::ti()) {}\n\
-    \  SegmentTree(int n_, T v) : SegmentTree(std::vector<T>(n_, v)) {}\n  SegmentTree(const\
-    \ std::vector<T> &v) : n(v.size()), dat(n << 1, M::ti()) {\n    for (int i = 0;\
-    \ i < (int)v.size(); i++) dat[i + n] = v[i];\n    rebuild();\n  }\n  void set_val(int\
-    \ k, T x) {\n    for (dat[k += n] = x; k >>= 1;)\n      dat[k] = M::op(dat[(k\
-    \ << 1) | 0], dat[(k << 1) | 1]);\n  }\n  void unsafe_set(int k, T x) { dat[k\
-    \ + n] = x; }\n  void rebuild() {\n    for (int i = n - 1; i >= 1; i--)\n    \
-    \  dat[i] = M::op(dat[i << 1 | 0], dat[i << 1 | 1]);\n  }\n  void clear() { fill(dat.begin(),\
-    \ dat.end(), M::ti()); }\n  //[l,r)\n  inline T fold(int l, int r) {\n    T vl\
-    \ = M::ti(), vr = M::ti();\n    for (int a = l + n, b = r + n; a < b; a >>= 1,\
-    \ b >>= 1) {\n      if (a & 1) vl = M::op(vl, dat[a++]);\n      if (b & 1) vr\
-    \ = M::op(dat[--b], vr);\n    }\n    return M::op(vl, vr);\n  }\n  T operator[](const\
-    \ int &k) const { return dat[k + n]; }\n\n  // max{ i : check(fold(l,i+1)) = true}\n\
-    \  template <class C>\n  int find_right(const C &check, int l = 0) {\n    assert(check(M::ti()));\n\
-    \    if (l == n) return n;\n    std::vector<int> idl, idr;\n    for (int a = l\
-    \ + n, b = 2 * n; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) idl.push_back(a++);\n\
-    \      if (b & 1) idr.push_back(--b);\n    }\n    for (auto itr = idr.rbegin();\
-    \ itr != idr.rend(); itr++) idl.push_back(*itr);\n    T val = M::ti();\n    for\
-    \ (int i : idl) {\n      if (!check(M::op(val, dat[i]))) {\n        while (i <\
-    \ n) {\n          i = i << 1 | 0;\n          if (check(M::op(val, dat[i]))) val\
-    \ = M::op(val, dat[i++]);\n        }\n        return i - n;\n      }\n      val\
-    \ = M::op(val, dat[i]);\n    }\n    return n;\n  }\n  //   min { i : check(fold(i,r))\
-    \ = true }\n  template <class C>\n  int find_left(const C &check, int r = -1)\
-    \ {\n    if (r < 0) r = n;\n    assert(check(M::ti()));\n    if (r == 0) return\
-    \ 0;\n    std::vector<int> idl, idr;\n    for (int a = n, b = r + n; a < b; a\
-    \ >>= 1, b >>= 1) {\n      if (a & 1) idl.push_back(a++);\n      if (b & 1) idr.push_back(--b);\n\
-    \    }\n    for (auto itr = idl.rbegin(); itr != idl.rend(); itr++) idr.push_back(*itr);\n\
-    \    T val = M::ti();\n    for (int i : idr) {\n      if (!check(M::op(dat[i],\
-    \ val))) {\n        while (i < n) {\n          i = i << 1 | 1;\n          if (check(M::op(dat[i],\
-    \ val))) val = M::op(dat[i--], val);\n        }\n        return i + 1 - n;\n \
-    \     }\n      val = M::op(dat[i], val);\n    }\n    return 0;\n  }\n};\n#line\
-    \ 5 \"test/aoj/DSL_2_A.SegTree.test.cpp\"\nusing namespace std;\n\nstruct RminQ\
-    \ {\n  using T = int;\n  static T ti() { return INT_MAX; }\n  static T op(const\
-    \ T &l, const T &r) { return min(l, r); }\n};\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  int n, q;\n  cin >> n >> q;\n  SegmentTree<RminQ>\
-    \ seg(n);\n  while (q--) {\n    int com, x, y;\n    cin >> com >> x >> y;\n  \
-    \  if (com) {\n      cout << seg.fold(x, y + 1) << endl;\n    } else {\n     \
-    \ seg.set_val(x, y);\n    }\n  }\n  return 0;\n}\n"
+    \ = typename M::T;\n  SegmentTree() {}\n  SegmentTree(int n_) : n(n_), dat(n <<\
+    \ 1, M::ti()) {}\n  SegmentTree(int n_, T v) : n(n_), dat(n << 1, M::ti()) {\n\
+    \    for (int i = n; i--;) dat[i + n] = v;\n    rebuild();\n  }\n  SegmentTree(const\
+    \ std::vector<T> &v) : n(v.size()), dat(n << 1, M::ti()) {\n    for (int i = n;\
+    \ i--;) dat[i + n] = v[i];\n    rebuild();\n  }\n  void set(int k, T x) {\n  \
+    \  for (dat[k += n] = x; k >>= 1;)\n      dat[k] = M::op(dat[(k << 1) | 0], dat[(k\
+    \ << 1) | 1]);\n  }\n  void unsafe_set(int k, T x) { dat[k + n] = x; }\n  void\
+    \ rebuild() {\n    for (int i = n; --i;) dat[i] = M::op(dat[i << 1 | 0], dat[i\
+    \ << 1 | 1]);\n  }\n  void clear() { fill(dat.begin(), dat.end(), M::ti()); }\n\
+    \  inline T fold(int l, int r) const {  //[l,r)\n    T vl = M::ti(), vr = M::ti();\n\
+    \    for (int a = l + n, b = r + n; a < b; a >>= 1, b >>= 1) {\n      if (a &\
+    \ 1) vl = M::op(vl, dat[a++]);\n      if (b & 1) vr = M::op(dat[--b], vr);\n \
+    \   }\n    return M::op(vl, vr);\n  }\n  T operator[](const int &k) const { return\
+    \ dat[k + n]; }\n  template <bool last>\n  static inline T calc_op(const T &v,\
+    \ const T &d) {\n    if constexpr (last)\n      return M::op(d, v);\n    else\n\
+    \      return M::op(v, d);\n  }\n  // Case 0. find i s.t check(fold(k,i)) == False,\
+    \ check(fold(k,i+1)) == True\n  // Case 1. find i s.t check(fold(i+1,b)) == False,\
+    \ check(fold(i,b)) == True\n  // return -1 if not found\n  template <bool last,\
+    \ class C>\n  int find(const C &check, int k) const {\n    assert(!check(M::ti()));\n\
+    \    std::vector<int> id[2];\n    int a = n + (k & -(!last)), b = n + n + ((k\
+    \ - n) & -(last));\n    for (; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) id[0].push_back(a++);\n\
+    \      if (b & 1) id[1].push_back(--b);\n    }\n    id[last].insert(id[last].end(),\
+    \ id[!last].rbegin(), id[!last].rend());\n    T val = M::ti();\n    for (int i\
+    \ : id[last]) {\n      if (T tmp = calc_op<last>(val, dat[i]); check(tmp)) {\n\
+    \        while (i < n)\n          if (tmp = calc_op<last>(val, dat[i = i << 1\
+    \ | last]); !check(tmp))\n            val = tmp, i -= last * 2 - 1;\n        return\
+    \ i - n + last;\n      } else\n        val = tmp;\n    }\n    return -1;\n  }\n\
+    \n private:\n  const int n;\n  std::vector<T> dat;\n};\n#line 5 \"test/aoj/DSL_2_A.SegTree.test.cpp\"\
+    \nusing namespace std;\n\nstruct RminQ {\n  using T = int;\n  static T ti() {\
+    \ return INT_MAX; }\n  static T op(const T &l, const T &r) { return min(l, r);\
+    \ }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int n,\
+    \ q;\n  cin >> n >> q;\n  SegmentTree<RminQ> seg(n);\n  while (q--) {\n    int\
+    \ com, x, y;\n    cin >> com >> x >> y;\n    if (com) {\n      cout << seg.fold(x,\
+    \ y + 1) << endl;\n    } else {\n      seg.set_val(x, y);\n    }\n  }\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree.hpp\"\nusing\
     \ namespace std;\n\nstruct RminQ {\n  using T = int;\n  static T ti() { return\
@@ -75,8 +71,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_A.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2021-09-20 02:18:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-19 23:17:16+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_A.SegTree.test.cpp
 layout: document

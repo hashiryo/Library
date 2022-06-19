@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: test/atcoder/abc256_f.SegDual.cpp
+    title: test/atcoder/abc256_f.SegDual.cpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
@@ -60,7 +63,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dual.hpp
-  requiredBy: []
+  requiredBy:
+  - test/atcoder/abc256_f.SegDual.cpp
   timestamp: '2022-06-19 22:48:54+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
