@@ -6,9 +6,9 @@ data:
     title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_queue
@@ -164,7 +164,7 @@ data:
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
   timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp
 layout: document

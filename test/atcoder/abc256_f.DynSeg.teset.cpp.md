@@ -2,30 +2,90 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/LinkCutTree.hpp
-    title: Link-Cut-Tree
-  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
+  - icon: ':question:'
+    path: src/Math/ModInt.hpp
+    title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/challenges/sources/VPC/UTPC/2270
     links:
-    - https://onlinejudge.u-aizu.ac.jp/challenges/sources/VPC/UTPC/2270
-  bundledCode: "#line 1 \"test/aoj/2270.DynSeg.test.cpp\"\n#define PROBLEM \\\n  \"\
-    https://onlinejudge.u-aizu.ac.jp/challenges/sources/VPC/UTPC/2270\"\n\n// \u6C38\
-    \u7D9A\u5316 + find * 4 \u306E verify\n\n#include <bits/stdc++.h>\n#line 3 \"\
-    src/DataStructure/SegmentTree_Dynamic.hpp\"\n/**\n * @title Segment-Tree(\u52D5\
-    \u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u9045\u5EF6\
-    \u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528\
-    :\n// https://codeforces.com/contest/464/problem/E (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\
-    \u642C+find*2)\n// https://codeforces.com/contest/947/problem/C (find+xor)\n//\
-    \ https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
+    - https://atcoder.jp/contests/abc256/tasks/abc256_f
+  bundledCode: "#line 1 \"test/atcoder/abc256_f.DynSeg.teset.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n// \u53CC\u5BFE \u306E\
+    \ verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+    \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
+    \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
+    \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
+    \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
+    \ ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\n\
+    template <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n    :\
+    \ public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using\
+    \ u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x\
+    \ = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n \
+    \ static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod) % mod;\n\
+    \  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) * r2); }\n\
+    \  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w >> 64)\
+    \ + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
+    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
+    \ < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return\
+    \ w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt\
+    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
+    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
+    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
+    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
+    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
+    \ = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
+    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const\
+    \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
+    \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
+    \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
+    \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
+    \ ModInt &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const\
+    \ ModInt &rhs) const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t\
+    \ k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k\
+    \ >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n\
+    \  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr ModInt\
+    \ sqrt() const {\n    if (*this == ModInt(0) || mod == 2) return *this;\n    if\
+    \ (pow((mod - 1) >> 1) != 1) return ModInt(0);  // no solutions\n    ModInt ONE\
+    \ = 1, b(2), w(b * b - *this);\n    while (w.pow((mod - 1) >> 1) == ONE) b +=\
+    \ ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt, ModInt> u, std::pair<ModInt,\
+    \ ModInt> v) {\n      ModInt a = (u.first * v.first + u.second * v.second * w);\n\
+    \      ModInt b = (u.first * v.second + u.second * v.first);\n      return std::make_pair(a,\
+    \ b);\n    };\n    std::uint64_t e = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE,\
+    \ ModInt(0));\n    for (auto bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs,\
+    \ bs))\n      if (e & 1) ret = mul(ret, bs);\n    return ret.first.val() * 2 <\
+    \ mod ? ret.first : -ret.first;\n  }\n  constexpr u64 val() const {\n    u64 ret\
+    \ = reduce(x) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  friend std::istream\
+    \ &operator>>(std::istream &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x\
+    \ = init(rhs.x), is;\n  }\n};\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2,\
+    \ pr_rt> : internal::ModIntImpl<2, pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t\
+    \ n = 0) : x(n & 1) {}\n  constexpr ModInt operator-() const { return *this; }\n\
+    \  constexpr ModInt &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator*=(const ModInt &rhs) { return x &= rhs.x, *this;\
+    \ }\n  constexpr ModInt &operator/=(const ModInt &rhs) { return x &= rhs.x, *this;\
+    \ }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
+    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
+    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
+    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
+    \ }\n  bool operator==(const ModInt &rhs) const { return x == rhs.x; }\n  bool\
+    \ operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n  constexpr\
+    \ ModInt pow(std::uint64_t k) const { return !k ? ModInt(1) : *this; }\n  constexpr\
+    \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
+    \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
+    \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 3 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
+    \n/**\n * @title Segment-Tree(\u52D5\u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\
+    \u30BF\u69CB\u9020\n * \u9045\u5EF6\u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\
+    \n * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/464/problem/E\
+    \ (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\u642C+find*2)\n// https://codeforces.com/contest/947/problem/C\
+    \ (find+xor)\n// https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
     \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n\n//\
     \ BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)      \
     \                        \\\n  template <class T>                            \
@@ -163,140 +223,51 @@ data:
     \ ret;\n  }\n  static std::string which_available() {\n    std::string ret = \"\
     \";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\
     \" \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
-    \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 3 \"src/DataStructure/LinkCutTree.hpp\"\
-    \n/**\n * @title Link-Cut-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n\
-    \ * @brief O(logN)\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\
-    \u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\
-    \u30B5\u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u306A\u3044\u306E\u3067\
-    mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\
-    \u306A\u3044\n */\n\n// BEGIN CUT HERE\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
-    \ Dummy)                              \\\n  template <class T>               \
-    \                           \\\n  struct has_##member {                      \
-    \                 \\\n    template <class U, Dummy>                          \
-    \       \\\n    static std::true_type check(U *);                         \\\n\
-    \    static std::false_type check(...);                        \\\n    static\
-    \ T *mClass;                                         \\\n    static const bool\
-    \ value = decltype(check(mClass))::value; \\\n  };\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy = typename U::member)\n#endif\n\ntemplate <typename M = void>\n\
-    class LinkCutTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n\
-    \  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class L>\n  using semigroup = std::conjunction<has_T<L>,\
-    \ has_op<L>>;\n  template <class L>\n  using dual =\n      std::conjunction<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n  template <class tDerived,\
-    \ class U = std::nullptr_t, class F = std::nullptr_t>\n  struct Node_B {\n   \
-    \ using T = U;\n    using E = F;\n    tDerived *ch[2], *par;\n    bool rev_flg;\n\
-    \  };\n  template <bool sg_, bool du_, typename tEnable = void>\n  struct Node_D\
-    \ : Node_B<Node_D<sg_, du_, tEnable>> {};\n  template <bool sg_, bool du_>\n \
-    \ struct Node_D<sg_, du_, typename std::enable_if_t<sg_ && !du_>>\n      : Node_B<Node_D<sg_,\
-    \ du_>, typename M::T> {\n    typename M::T val, sum, rsum;\n  };\n  template\
-    \ <bool sg_, bool du_>\n  struct Node_D<sg_, du_, typename std::enable_if_t<!sg_\
-    \ && du_>>\n      : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n\
-    \    typename M::T val;\n    typename M::E lazy;\n    bool lazy_flg;\n  };\n \
-    \ template <bool sg_, bool du_>\n  struct Node_D<sg_, du_, typename std::enable_if_t<sg_\
-    \ && du_>>\n      : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n\
-    \    typename M::T val, sum, rsum;\n    typename M::E lazy;\n    bool lazy_flg;\n\
-    \  };\n  using Node = Node_D<semigroup<M>::value, dual<M>::value>;\n  using T\
-    \ = typename Node::T;\n  using E = typename Node::E;\n  inline int dir(Node *&t)\
-    \ {\n    if (t->par) {\n      if (t->par->ch[0] == t) return 0;\n      if (t->par->ch[1]\
-    \ == t) return 1;\n    }\n    return 2;\n  }\n  inline void rot(Node *t) {\n \
-    \   Node *p = t->par;\n    int d = dir(t);\n    if ((p->ch[d] = t->ch[!d])) p->ch[d]->par\
-    \ = p;\n    t->ch[!d] = p;\n    if constexpr (semigroup<M>::value) pushup(p),\
-    \ pushup(t);\n    t->par = p->par;\n    if ((d = dir(p)) < 2) {\n      p->par->ch[d]\
-    \ = t;\n      if constexpr (semigroup<M>::value) pushup(t->par);\n    }\n    p->par\
-    \ = t;\n  }\n  inline void splay(Node *t) {\n    eval(t);\n    for (int t_d =\
-    \ dir(t), p_d; t_d < 2; rot(t), t_d = dir(t)) {\n      if ((p_d = dir(t->par))\
-    \ < 2) eval(t->par->par);\n      eval(t->par), eval(t);\n      if (p_d < 2) rot(t_d\
-    \ == p_d ? t->par : t);\n    }\n  }\n  inline void pushup(Node *t) {\n    t->rsum\
-    \ = t->sum = t->val;\n    if (t->ch[0])\n      t->sum = M::op(t->ch[0]->sum, t->sum),\n\
-    \      t->rsum = M::op(t->rsum, t->ch[0]->rsum);\n    if (t->ch[1])\n      t->sum\
-    \ = M::op(t->sum, t->ch[1]->sum),\n      t->rsum = M::op(t->ch[1]->rsum, t->rsum);\n\
-    \  }\n  inline void propagate(Node *t, const E &x) {\n    if (!t) return;\n  \
-    \  t->lazy = t->lazy_flg ? M::composition(t->lazy, x) : x;\n    t->val = M::mapping(t->val,\
-    \ x);\n    if constexpr (semigroup<M>::value)\n      t->sum = M::mapping(t->sum,\
-    \ x), t->rsum = M::mapping(t->rsum, x);\n    t->lazy_flg = true;\n  }\n  inline\
-    \ void toggle(Node *t) {\n    if (!t) return;\n    std::swap(t->ch[0], t->ch[1]);\n\
-    \    if constexpr (semigroup<M>::value) std::swap(t->sum, t->rsum);\n    t->rev_flg\
-    \ = !t->rev_flg;\n  }\n  inline void eval(Node *t) {\n    if (t->rev_flg) toggle(t->ch[0]),\
-    \ toggle(t->ch[1]), t->rev_flg = false;\n    if constexpr (dual<M>::value)\n \
-    \     if (t->lazy_flg)\n        propagate(t->ch[0], t->lazy), propagate(t->ch[1],\
-    \ t->lazy),\n            t->lazy_flg = false;\n  }\n  inline Node *expose(Node\
-    \ *t) {\n    Node *r = nullptr;\n    for (Node *p = t; p; r = p, p = p->par) {\n\
-    \      splay(p), p->ch[1] = r;\n      if constexpr (semigroup<M>::value) pushup(p);\n\
-    \    }\n    return splay(t), r;\n  }\n  std::vector<Node> ns;\n\n public:\n  LinkCutTree(std::size_t\
-    \ n) : ns(n) {}\n  LinkCutTree(std::size_t n, T val) : ns(n) {\n    for (std::size_t\
-    \ i = n; i--;) ns[i].val = val;\n  }\n  void evert(std::size_t k) { expose(&ns[k]),\
-    \ toggle(&ns[k]), eval(&ns[k]); }\n  void link(std::size_t c, std::size_t p) {\n\
-    \    evert(c), expose(&ns[p]);\n    assert(!ns[c].par);\n    ns[p].ch[1] = &ns[c],\
-    \ ns[c].par = &ns[p];\n    if constexpr (semigroup<M>::value) pushup(&ns[p]);\n\
-    \  }\n  void cut(std::size_t c, std::size_t p) {\n    evert(p), expose(&ns[c]);\n\
-    \    assert(ns[c].ch[0] == &ns[p]);\n    ns[c].ch[0] = ns[c].ch[0]->par = nullptr;\n\
-    \    if constexpr (semigroup<M>::value) pushup(&ns[c]);\n  }\n  int par(std::size_t\
-    \ x) {\n    expose(&ns[x]);\n    Node *t = ns[x].ch[0];\n    if (!t) return -1;\n\
-    \    while (t->ch[1]) eval(t), t = t->ch[1];\n    return splay(t), t - &ns[0];\n\
-    \  }\n  int lca(std::size_t x, std::size_t y) {\n    if (x == y) return x;\n \
-    \   expose(&ns[x]);\n    Node *u = expose(&ns[y]);\n    return ns[x].par ? u -\
-    \ &ns[0] : -1;\n  }\n  const T &operator[](std::size_t k) { return get(k); }\n\
-    \  const T &get(std::size_t k) {\n    static_assert(semigroup<M>::value || dual<M>::value,\n\
-    \                  \"\\\"get\\\" is not available\\n\");\n    return expose(&ns[k]),\
-    \ ns[k].val;\n  }\n  void set(std::size_t k, T v) {\n    static_assert(semigroup<M>::value\
-    \ || dual<M>::value,\n                  \"\\\"set\\\" is not available\\n\");\n\
-    \    expose(&ns[k]), ns[k].val = v;\n    if constexpr (semigroup<M>::value) pushup(&ns[k]);\n\
-    \  }\n  T fold(std::size_t a, std::size_t b) {  // [a,b] closed section\n    static_assert(semigroup<M>::value,\
-    \ \"\\\"fold\\\" is not available\\n\");\n    return evert(a), expose(&ns[b]),\
-    \ ns[b].sum;\n  }\n  void apply(std::size_t a, std::size_t b, E v) {  // [a,b]\
-    \ closed section\n    static_assert(dual<M>::value, \"\\\"apply\\\" is not available\\\
-    n\");\n    evert(a), expose(&ns[b]), propagate(&ns[b], v), eval(&ns[b]);\n  }\n\
-    \  static std::string which_available() {\n    std::string ret = \"\";\n    if\
-    \ constexpr (semigroup<M>::value || dual<M>::value)\n      ret += \"\\\"set\\\"\
-    \ \\\"get\\\" \";\n    if constexpr (semigroup<M>::value) ret += \"\\\"fold\\\"\
-    \ \";\n    if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return\
-    \ ret;\n  }\n};\n#line 9 \"test/aoj/2270.DynSeg.test.cpp\"\nusing namespace std;\n\
-    \nstruct RsumQ {\n  using T = int;\n  static T ti() { return 0; }\n  static T\
-    \ op(T vl, T vr) { return vl + vr; }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  int x[N + 1];\n  for (int i = 1; i <= N; i++)\
-    \ cin >> x[i];\n  LinkCutTree lct(N + 1);\n  vector<int> adj[N + 1];\n  lct.link(1,\
-    \ 0);\n  for (int i = 0; i < N - 1; i++) {\n    int a, b;\n    cin >> a >> b;\n\
-    \    lct.link(a, b), adj[a].push_back(b), adj[b].push_back(a);\n  }\n  lct.evert(0);\n\
-    \  using Seg = SegmentTree_Dynamic<RsumQ, true>;\n  Seg segs[N + 1];\n  auto dfs\
-    \ = [&adj, &segs, &x](auto f, int v, int p) -> void {\n    segs[v] = segs[p];\n\
-    \    segs[v].set(x[v], segs[v][x[v]] + 1);\n    for (int u : adj[v])\n      if\
-    \ (u != p) f(f, u, v);\n  };\n  dfs(dfs, 1, 0);\n  for (int i = 0; i < Q; i++)\
-    \ {\n    int v, w, l;\n    cin >> v >> w >> l;\n    auto check = [&](int x, int\
-    \ y, int a, int ap) {\n      return x + y - a - ap >= l;\n    };\n    int lca\
-    \ = lct.lca(v, w), lcap = lct.par(lca);\n    cout << Seg::find_first<4>(0, check,\n\
-    \                               {segs[v], segs[w], segs[lca], segs[lcap]})\n \
-    \        << '\\n';\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/VPC/UTPC/2270\"\
-    \n\n// \u6C38\u7D9A\u5316 + find * 4 \u306E verify\n\n#include <bits/stdc++.h>\n\
-    #include \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include \"src/DataStructure/LinkCutTree.hpp\"\
-    \nusing namespace std;\n\nstruct RsumQ {\n  using T = int;\n  static T ti() {\
-    \ return 0; }\n  static T op(T vl, T vr) { return vl + vr; }\n};\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n\
-    \  int x[N + 1];\n  for (int i = 1; i <= N; i++) cin >> x[i];\n  LinkCutTree lct(N\
-    \ + 1);\n  vector<int> adj[N + 1];\n  lct.link(1, 0);\n  for (int i = 0; i < N\
-    \ - 1; i++) {\n    int a, b;\n    cin >> a >> b;\n    lct.link(a, b), adj[a].push_back(b),\
-    \ adj[b].push_back(a);\n  }\n  lct.evert(0);\n  using Seg = SegmentTree_Dynamic<RsumQ,\
-    \ true>;\n  Seg segs[N + 1];\n  auto dfs = [&adj, &segs, &x](auto f, int v, int\
-    \ p) -> void {\n    segs[v] = segs[p];\n    segs[v].set(x[v], segs[v][x[v]] +\
-    \ 1);\n    for (int u : adj[v])\n      if (u != p) f(f, u, v);\n  };\n  dfs(dfs,\
-    \ 1, 0);\n  for (int i = 0; i < Q; i++) {\n    int v, w, l;\n    cin >> v >> w\
-    \ >> l;\n    auto check = [&](int x, int y, int a, int ap) {\n      return x +\
-    \ y - a - ap >= l;\n    };\n    int lca = lct.lca(v, w), lcap = lct.par(lca);\n\
-    \    cout << Seg::find_first<4>(0, check,\n                               {segs[v],\
-    \ segs[w], segs[lca], segs[lcap]})\n         << '\\n';\n  }\n  return 0;\n}"
+    \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 8 \"test/atcoder/abc256_f.DynSeg.teset.cpp\"\
+    \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
+    \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
+    \ E ei() { return {0, 0, 0}; }\n  static T mapping(T x, E mapp, int) {\n    return\
+    \ {x.id, x.val + mapp[0] * (x.id + 1) * (x.id + 2) / 2 -\n                   \
+    \   mapp[1] * (2 * x.id + 3) / 2 + mapp[2]};\n  }\n  static E composition(E pre,\
+    \ E suf) {\n    return {pre[0] + suf[0], pre[1] + suf[1], pre[2] + suf[2]};\n\
+    \  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ Seg = SegmentTree_Dynamic<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint A[N],\
+    \ D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for (int j\
+    \ = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n  Seg seg;\n\
+    \  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--) {\n    int\
+    \ op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint v;\n      cin\
+    \ >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x, v * x * x / 2});\n\
+    \    } else {\n      cout << seg[x].val << '\\n';\n    }\n  }\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
+    // \u53CC\u5BFE \u306E verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include\
+    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
+    \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
+    \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
+    \ E ei() { return {0, 0, 0}; }\n  static T mapping(T x, E mapp, int) {\n    return\
+    \ {x.id, x.val + mapp[0] * (x.id + 1) * (x.id + 2) / 2 -\n                   \
+    \   mapp[1] * (2 * x.id + 3) / 2 + mapp[2]};\n  }\n  static E composition(E pre,\
+    \ E suf) {\n    return {pre[0] + suf[0], pre[1] + suf[1], pre[2] + suf[2]};\n\
+    \  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ Seg = SegmentTree_Dynamic<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint A[N],\
+    \ D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for (int j\
+    \ = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n  Seg seg;\n\
+    \  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--) {\n    int\
+    \ op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint v;\n      cin\
+    \ >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x, v * x * x / 2});\n\
+    \    } else {\n      cout << seg[x].val << '\\n';\n    }\n  }\n  return 0;\n}"
   dependsOn:
+  - src/Math/ModInt.hpp
   - src/DataStructure/SegmentTree_Dynamic.hpp
-  - src/DataStructure/LinkCutTree.hpp
-  isVerificationFile: true
-  path: test/aoj/2270.DynSeg.test.cpp
+  isVerificationFile: false
+  path: test/atcoder/abc256_f.DynSeg.teset.cpp
   requiredBy: []
-  timestamp: '2022-06-19 14:17:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-19 14:25:02+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: test/aoj/2270.DynSeg.test.cpp
+documentation_of: test/atcoder/abc256_f.DynSeg.teset.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/2270.DynSeg.test.cpp
-- /verify/test/aoj/2270.DynSeg.test.cpp.html
-title: test/aoj/2270.DynSeg.test.cpp
+- /library/test/atcoder/abc256_f.DynSeg.teset.cpp
+- /library/test/atcoder/abc256_f.DynSeg.teset.cpp.html
+title: test/atcoder/abc256_f.DynSeg.teset.cpp
 ---

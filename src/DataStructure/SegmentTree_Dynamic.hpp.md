@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: test/atcoder/abc256_f.DynSeg.teset.cpp
+    title: test/atcoder/abc256_f.DynSeg.teset.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
@@ -84,17 +87,18 @@ data:
     \    t->val = def_val();\n    if (t->ch[0]) t->val = M::op(t->ch[0]->val, t->val);\n\
     \    if (t->ch[1]) t->val = M::op(t->val, t->ch[1]->val);\n  }\n  static inline\
     \ void propagate(Node *&t, const E &x, const id_t &sz) {\n    t->lazy = t->lazy_flg\
-    \ ? M::composition(t->lazy, x) : x;\n    t->val = M::mapping(t->val, x, sz), t->lazy_flg\
-    \ = true;\n  }\n  static inline void cp_node(Node *&t) {\n    if (!t)\n      t\
-    \ = new Node{def_val()};\n    else if constexpr (persistent)\n      t = new Node(*t);\n\
-    \  }\n  static inline void eval(Node *&t, const id_t &sz) {\n    if (!t->lazy_flg)\
-    \ return;\n    cp_node(t->ch[0]), cp_node(t->ch[1]), t->lazy_flg = false;\n  \
-    \  propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1], t->lazy, sz / 2);\n\
-    \  }\n  T fold(Node *&t, const id_t &l, const id_t &r, std::array<id_t, 2> b,\n\
-    \         const id_t &bias) {\n    if (!t || r <= b[0] || b[1] <= l) return def_val();\n\
-    \    if (l <= b[0] && b[1] <= r) return t->val;\n    if constexpr (dual<M>::value)\
-    \ eval(t, b[1] - b[0]);\n    id_t m = (b[0] + b[1]) >> 1;\n    bool flg = (bias\
-    \ >> (__builtin_ctzll(b[1] - b[0]) - 1)) & 1;\n    return M::op(fold(t->ch[flg],\
+    \ ? M::composition(t->lazy, x) : x, t->lazy_flg = true;\n    if constexpr (monoid<M>::value)\n\
+    \      t->val = M::mapping(t->val, x, sz);\n    else if (sz == 1)\n      t->val\
+    \ = M::mapping(t->val, x, sz);\n  }\n  static inline void cp_node(Node *&t) {\n\
+    \    if (!t)\n      t = new Node{def_val()};\n    else if constexpr (persistent)\n\
+    \      t = new Node(*t);\n  }\n  static inline void eval(Node *&t, const id_t\
+    \ &sz) {\n    if (!t->lazy_flg) return;\n    cp_node(t->ch[0]), cp_node(t->ch[1]),\
+    \ t->lazy_flg = false;\n    propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1],\
+    \ t->lazy, sz / 2);\n  }\n  T fold(Node *&t, const id_t &l, const id_t &r, std::array<id_t,\
+    \ 2> b,\n         const id_t &bias) {\n    if (!t || r <= b[0] || b[1] <= l) return\
+    \ def_val();\n    if (l <= b[0] && b[1] <= r) return t->val;\n    if constexpr\
+    \ (dual<M>::value) eval(t, b[1] - b[0]);\n    id_t m = (b[0] + b[1]) >> 1;\n \
+    \   bool flg = (bias >> (__builtin_ctzll(b[1] - b[0]) - 1)) & 1;\n    return M::op(fold(t->ch[flg],\
     \ l, r, {b[0], m}, bias),\n                 fold(t->ch[!flg], l, r, {m, b[1]},\
     \ bias));\n  }\n  void apply(Node *&t, const id_t &l, const id_t &r, std::array<id_t,\
     \ 2> b,\n             const E &x) {\n    if (r <= b[0] || b[1] <= l) return;\n\
@@ -227,17 +231,18 @@ data:
     \    t->val = def_val();\n    if (t->ch[0]) t->val = M::op(t->ch[0]->val, t->val);\n\
     \    if (t->ch[1]) t->val = M::op(t->val, t->ch[1]->val);\n  }\n  static inline\
     \ void propagate(Node *&t, const E &x, const id_t &sz) {\n    t->lazy = t->lazy_flg\
-    \ ? M::composition(t->lazy, x) : x;\n    t->val = M::mapping(t->val, x, sz), t->lazy_flg\
-    \ = true;\n  }\n  static inline void cp_node(Node *&t) {\n    if (!t)\n      t\
-    \ = new Node{def_val()};\n    else if constexpr (persistent)\n      t = new Node(*t);\n\
-    \  }\n  static inline void eval(Node *&t, const id_t &sz) {\n    if (!t->lazy_flg)\
-    \ return;\n    cp_node(t->ch[0]), cp_node(t->ch[1]), t->lazy_flg = false;\n  \
-    \  propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1], t->lazy, sz / 2);\n\
-    \  }\n  T fold(Node *&t, const id_t &l, const id_t &r, std::array<id_t, 2> b,\n\
-    \         const id_t &bias) {\n    if (!t || r <= b[0] || b[1] <= l) return def_val();\n\
-    \    if (l <= b[0] && b[1] <= r) return t->val;\n    if constexpr (dual<M>::value)\
-    \ eval(t, b[1] - b[0]);\n    id_t m = (b[0] + b[1]) >> 1;\n    bool flg = (bias\
-    \ >> (__builtin_ctzll(b[1] - b[0]) - 1)) & 1;\n    return M::op(fold(t->ch[flg],\
+    \ ? M::composition(t->lazy, x) : x, t->lazy_flg = true;\n    if constexpr (monoid<M>::value)\n\
+    \      t->val = M::mapping(t->val, x, sz);\n    else if (sz == 1)\n      t->val\
+    \ = M::mapping(t->val, x, sz);\n  }\n  static inline void cp_node(Node *&t) {\n\
+    \    if (!t)\n      t = new Node{def_val()};\n    else if constexpr (persistent)\n\
+    \      t = new Node(*t);\n  }\n  static inline void eval(Node *&t, const id_t\
+    \ &sz) {\n    if (!t->lazy_flg) return;\n    cp_node(t->ch[0]), cp_node(t->ch[1]),\
+    \ t->lazy_flg = false;\n    propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1],\
+    \ t->lazy, sz / 2);\n  }\n  T fold(Node *&t, const id_t &l, const id_t &r, std::array<id_t,\
+    \ 2> b,\n         const id_t &bias) {\n    if (!t || r <= b[0] || b[1] <= l) return\
+    \ def_val();\n    if (l <= b[0] && b[1] <= r) return t->val;\n    if constexpr\
+    \ (dual<M>::value) eval(t, b[1] - b[0]);\n    id_t m = (b[0] + b[1]) >> 1;\n \
+    \   bool flg = (bias >> (__builtin_ctzll(b[1] - b[0]) - 1)) & 1;\n    return M::op(fold(t->ch[flg],\
     \ l, r, {b[0], m}, bias),\n                 fold(t->ch[!flg], l, r, {m, b[1]},\
     \ bias));\n  }\n  void apply(Node *&t, const id_t &l, const id_t &r, std::array<id_t,\
     \ 2> b,\n             const E &x) {\n    if (r <= b[0] || b[1] <= l) return;\n\
@@ -323,8 +328,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
-  requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
+  requiredBy:
+  - test/atcoder/abc256_f.DynSeg.teset.cpp
+  timestamp: '2022-06-19 14:17:31+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc133_f.DynSeg.test.cpp
