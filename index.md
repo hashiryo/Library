@@ -40,7 +40,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree.hpp
       title: Link-Cut-Tree
     - icon: ':heavy_check_mark:'
@@ -55,10 +55,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -345,7 +345,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2256.test.cpp
       title: test/aoj/2256.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2270.DynSeg.test.cpp
       title: test/aoj/2270.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -543,7 +543,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_A.SegTree.test.cpp
       title: test/aoj/DSL_2_A.SegTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
       title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     - icon: ':heavy_check_mark:'
