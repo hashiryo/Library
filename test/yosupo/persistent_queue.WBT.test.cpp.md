@@ -107,21 +107,21 @@ data:
     \ if constexpr (dual<M>::value) eval(t);\n    bool flg = n[n[t].ch[0]].size <=\
     \ k;\n    return at_val(n[t].ch[flg], flg ? k - n[n[t].ch[0]].size : k);\n  }\n\
     \n public:\n  WeightBalancedTree(node_id t = 0) : root(t) {}\n  WeightBalancedTree(std::size_t\
-    \ n, T val) { root = build(0, n, val); }\n  WeightBalancedTree(T *bg, T *ed) {\
-    \ root = build(0, ed - bg, bg); }\n  WeightBalancedTree(std::vector<T> &ar)\n\
-    \      : WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n  WBT &operator+=(WBT\
-    \ rhs) { return root = merge(root, rhs.root), *this; }\n  WBT operator+(WBT rhs)\
-    \ { return WBT(*this) += rhs; }\n  std::pair<WBT, WBT> split(std::size_t k) {\n\
-    \    auto [l, r] = split(root, k);\n    return {WBT(l), WBT(r)};\n  }\n  std::tuple<WBT,\
-    \ WBT, WBT> split3(std::size_t a, std::size_t b) {\n    auto [tmp, r] = split(root,\
-    \ b);\n    auto [l, c] = split(tmp, a);\n    return {WBT(l), WBT(c), WBT(r)};\n\
-    \  }\n  void push_back(T val) { n[ni] = Node{val, 1}, root = merge(root, ni++);\
-    \ }\n  void push_front(T val) { n[ni] = Node{val, 1}, root = merge(ni++, root);\
-    \ }\n  void insert(std::size_t k, T val) {\n    auto [l, r] = split(root, k);\n\
-    \    n[ni] = Node{val, 1}, root = merge(merge(l, ni++), r);\n  }\n  T pop_back()\
-    \ {\n    assert(root);\n    auto [l, t] = split(root, size() - 1);\n    return\
-    \ root = l, n[t].val;\n  }\n  T pop_front() {\n    assert(root);\n    auto [t,\
-    \ r] = split(root, 1);\n    return root = r, n[t].val;\n  }\n  T erase(std::size_t\
+    \ n, T val) { root = build(0, n, val); }\n  WeightBalancedTree(const T *bg, const\
+    \ T *ed) { root = build(0, ed - bg, bg); }\n  WeightBalancedTree(const std::vector<T>\
+    \ &ar)\n      : WeightBalancedTree(ar.data(), ar.data() + ar.size()){};\n  WBT\
+    \ &operator+=(WBT rhs) { return root = merge(root, rhs.root), *this; }\n  WBT\
+    \ operator+(WBT rhs) { return WBT(*this) += rhs; }\n  std::pair<WBT, WBT> split(std::size_t\
+    \ k) {\n    auto [l, r] = split(root, k);\n    return {WBT(l), WBT(r)};\n  }\n\
+    \  std::tuple<WBT, WBT, WBT> split3(std::size_t a, std::size_t b) {\n    auto\
+    \ [tmp, r] = split(root, b);\n    auto [l, c] = split(tmp, a);\n    return {WBT(l),\
+    \ WBT(c), WBT(r)};\n  }\n  void push_back(T val) { n[ni] = Node{val, 1}, root\
+    \ = merge(root, ni++); }\n  void push_front(T val) { n[ni] = Node{val, 1}, root\
+    \ = merge(ni++, root); }\n  void insert(std::size_t k, T val) {\n    auto [l,\
+    \ r] = split(root, k);\n    n[ni] = Node{val, 1}, root = merge(merge(l, ni++),\
+    \ r);\n  }\n  T pop_back() {\n    assert(root);\n    auto [l, t] = split(root,\
+    \ size() - 1);\n    return root = l, n[t].val;\n  }\n  T pop_front() {\n    assert(root);\n\
+    \    auto [t, r] = split(root, 1);\n    return root = r, n[t].val;\n  }\n  T erase(std::size_t\
     \ k) {\n    assert(k < size());\n    auto [l, tmp] = split(root, k);\n    auto\
     \ [t, r] = split(tmp, 1);\n    return root = merge(l, r), n[t].val;\n  }\n  void\
     \ set(std::size_t k, T val) { set_val(root, k, val); }\n  T get(std::size_t k)\
@@ -163,7 +163,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
+  timestamp: '2022-06-19 23:04:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp

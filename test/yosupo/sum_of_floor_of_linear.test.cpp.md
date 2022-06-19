@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/AllPurposeEuclid.hpp
     title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []

@@ -1,21 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
     links:
     - https://atcoder.jp/contests/abc256/tasks/abc256_f
-  bundledCode: "#line 1 \"test/atcoder/abc256_f.DynSeg.teset.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"test/atcoder/abc256_f.DynSeg.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n// \u53CC\u5BFE \u306E\
     \ verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
@@ -225,7 +227,7 @@ data:
     \  }\n  static std::string which_available() {\n    std::string ret = \"\";\n\
     \    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\" \\\"find\\\"\
     \ \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
-    \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 8 \"test/atcoder/abc256_f.DynSeg.teset.cpp\"\
+    \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 8 \"test/atcoder/abc256_f.DynSeg.test.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
     \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
     \ E ei() { return {0, 0, 0}; }\n  static T mapping(T x, E mapp, int) {\n    return\
@@ -260,16 +262,16 @@ data:
   dependsOn:
   - src/Math/ModInt.hpp
   - src/DataStructure/SegmentTree_Dynamic.hpp
-  isVerificationFile: false
-  path: test/atcoder/abc256_f.DynSeg.teset.cpp
+  isVerificationFile: true
+  path: test/atcoder/abc256_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 22:48:54+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2022-06-19 23:04:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/atcoder/abc256_f.DynSeg.teset.cpp
+documentation_of: test/atcoder/abc256_f.DynSeg.test.cpp
 layout: document
 redirect_from:
-- /library/test/atcoder/abc256_f.DynSeg.teset.cpp
-- /library/test/atcoder/abc256_f.DynSeg.teset.cpp.html
-title: test/atcoder/abc256_f.DynSeg.teset.cpp
+- /verify/test/atcoder/abc256_f.DynSeg.test.cpp
+- /verify/test/atcoder/abc256_f.DynSeg.test.cpp.html
+title: test/atcoder/abc256_f.DynSeg.test.cpp
 ---

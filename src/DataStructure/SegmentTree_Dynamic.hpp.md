@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/atcoder/abc256_f.DynSeg.teset.cpp
-    title: test/atcoder/abc256_f.DynSeg.teset.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
@@ -18,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc256_f.DynSeg.test.cpp
+    title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
@@ -27,9 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     links:
@@ -332,12 +332,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
-  requiredBy:
-  - test/atcoder/abc256_f.DynSeg.teset.cpp
+  requiredBy: []
   timestamp: '2022-06-19 22:48:54+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/aoj/2270.DynSeg.test.cpp

@@ -58,7 +58,7 @@ data:
     - icon: ':x:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -73,7 +73,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SparseTable.hpp
       title: "Sparse-Table(\u533A\u9593min)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SplayTree.hpp
       title: "Splay\u6728"
     - icon: ':heavy_check_mark:'
@@ -181,7 +181,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -256,11 +256,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
-  - name: test/atcoder
-    pages:
-    - icon: ':warning:'
-      path: test/atcoder/abc256_f.DynSeg.teset.cpp
-      title: test/atcoder/abc256_f.DynSeg.teset.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -306,7 +301,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1508.SplayTree.test.cpp
       title: test/aoj/1508.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -585,13 +580,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.SplayTree.test.cpp
       title: test/aoj/ITP2_2_D.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_A.SplayTree.test.cpp
       title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -644,6 +639,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc256_f.DynSeg.test.cpp
+      title: test/atcoder/abc256_f.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc018_c.test.cpp
       title: test/atcoder/agc018_c.test.cpp
@@ -706,7 +704,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
       title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
