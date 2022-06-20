@@ -73,6 +73,9 @@ data:
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc256_ex.Beats.test.cpp
+    title: test/atcoder/abc256_ex.Beats.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':x:'
@@ -207,7 +210,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -388,6 +391,7 @@ data:
   timestamp: '2021-10-24 00:31:24+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc256_ex.Beats.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/arc105_f.test.cpp

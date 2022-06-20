@@ -55,15 +55,15 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
+    - icon: ':question:'
+      path: src/DataStructure/SegmentTree_Beats.hpp
+      title: Segment-Tree Beats!
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-    - icon: ':question:'
-      path: src/DataStructure/SegmentTree_Lazy.hpp
-      title: "Segment-Tree(\u9045\u5EF6\u4F1D\u642C)"
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Patricia.hpp
       title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
@@ -115,7 +115,7 @@ data:
       title: "\u6700\u8FD1\u70B9\u5BFE"
   - name: src/Graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -645,6 +645,9 @@ data:
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
     - icon: ':x:'
+      path: test/atcoder/abc256_ex.Beats.test.cpp
+      title: test/atcoder/abc256_ex.Beats.test.cpp
+    - icon: ':x:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
     - icon: ':x:'
@@ -909,7 +912,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/215.test.cpp
       title: test/yukicoder/215.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp
     - icon: ':heavy_check_mark:'
@@ -963,6 +966,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/880.Beats.test.cpp
+      title: test/yukicoder/880.Beats.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/886.numth.test.cpp
       title: test/yukicoder/886.numth.test.cpp
