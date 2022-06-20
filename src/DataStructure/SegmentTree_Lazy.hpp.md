@@ -49,9 +49,10 @@ data:
     \  std::vector<E> laz;\n  std::vector<char> laz_flg;\n  inline void eval(int k)\
     \ {\n    if (!laz_flg[k]) return;\n    propagate(k << 1 | 0, laz[k]), propagate(k\
     \ << 1 | 1, laz[k]);\n    laz_flg[k] = false;\n  }\n  inline void propagate(int\
-    \ k, const E &x) {\n    laz[k] = laz_flg[k] ? M::composition(laz[k], x) : x, laz_flg[k]\
-    \ = true;\n    dat[k] = M::mapping(dat[k], x);\n  }\n  inline void update(int\
-    \ k) {\n    dat[k] = M::op(dat[k << 1 | 0], dat[k << 1 | 1]);\n  }\n};\n"
+    \ k, const E &x) {\n    dat[k] = M::mapping(dat[k], x);\n    if (k < n)\n    \
+    \  laz[k] = laz_flg[k] ? M::composition(laz[k], x) : x, laz_flg[k] = true;\n \
+    \ }\n  inline void update(int k) {\n    dat[k] = M::op(dat[k << 1 | 0], dat[k\
+    \ << 1 | 1]);\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Segment-Tree(\u9045\
     \u5EF6\u4F1D\u642C)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename M>\nstruct SegmentTree_Lazy {\n\
@@ -83,14 +84,15 @@ data:
     \  std::vector<E> laz;\n  std::vector<char> laz_flg;\n  inline void eval(int k)\
     \ {\n    if (!laz_flg[k]) return;\n    propagate(k << 1 | 0, laz[k]), propagate(k\
     \ << 1 | 1, laz[k]);\n    laz_flg[k] = false;\n  }\n  inline void propagate(int\
-    \ k, const E &x) {\n    laz[k] = laz_flg[k] ? M::composition(laz[k], x) : x, laz_flg[k]\
-    \ = true;\n    dat[k] = M::mapping(dat[k], x);\n  }\n  inline void update(int\
-    \ k) {\n    dat[k] = M::op(dat[k << 1 | 0], dat[k << 1 | 1]);\n  }\n};"
+    \ k, const E &x) {\n    dat[k] = M::mapping(dat[k], x);\n    if (k < n)\n    \
+    \  laz[k] = laz_flg[k] ? M::composition(laz[k], x) : x, laz_flg[k] = true;\n \
+    \ }\n  inline void update(int k) {\n    dat[k] = M::op(dat[k << 1 | 0], dat[k\
+    \ << 1 | 1]);\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Lazy.hpp
   requiredBy: []
-  timestamp: '2022-06-19 23:17:16+09:00'
+  timestamp: '2022-06-20 10:43:54+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

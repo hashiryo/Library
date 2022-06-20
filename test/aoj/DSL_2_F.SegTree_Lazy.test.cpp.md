@@ -47,19 +47,20 @@ data:
     \  std::vector<E> laz;\n  std::vector<char> laz_flg;\n  inline void eval(int k)\
     \ {\n    if (!laz_flg[k]) return;\n    propagate(k << 1 | 0, laz[k]), propagate(k\
     \ << 1 | 1, laz[k]);\n    laz_flg[k] = false;\n  }\n  inline void propagate(int\
-    \ k, const E &x) {\n    laz[k] = laz_flg[k] ? M::composition(laz[k], x) : x, laz_flg[k]\
-    \ = true;\n    dat[k] = M::mapping(dat[k], x);\n  }\n  inline void update(int\
-    \ k) {\n    dat[k] = M::op(dat[k << 1 | 0], dat[k << 1 | 1]);\n  }\n};\n#line\
-    \ 5 \"test/aoj/DSL_2_F.SegTree_Lazy.test.cpp\"\nusing namespace std;\n\nstruct\
-    \ RupdQ_RminQ {\n  using T = int;\n  using E = int;\n  static T ti() { return\
-    \ INT_MAX; }\n  static E ei() { return INT_MAX; }\n  static T op(const T& l, const\
-    \ T& r) { return min(l, r); }\n  static T mapping(const T& l, const E& r) { return\
-    \ r == ei() ? l : r; }\n  static E composition(const E& l, const E& r) { return\
-    \ r == ei() ? l : r; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int n, q;\n  cin >> n >> q;\n  SegmentTree_Lazy<RupdQ_RminQ> seg(n);\n  while\
-    \ (q--) {\n    int com, s, t;\n    cin >> com >> s >> t;\n    if (com) {\n   \
-    \   cout << seg.fold(s, t + 1) << endl;\n    } else {\n      int x;\n      cin\
-    \ >> x;\n      seg.apply(s, t + 1, x);\n    }\n  }\n  return 0;\n}\n"
+    \ k, const E &x) {\n    dat[k] = M::mapping(dat[k], x);\n    if (k < n)\n    \
+    \  laz[k] = laz_flg[k] ? M::composition(laz[k], x) : x, laz_flg[k] = true;\n \
+    \ }\n  inline void update(int k) {\n    dat[k] = M::op(dat[k << 1 | 0], dat[k\
+    \ << 1 | 1]);\n  }\n};\n#line 5 \"test/aoj/DSL_2_F.SegTree_Lazy.test.cpp\"\nusing\
+    \ namespace std;\n\nstruct RupdQ_RminQ {\n  using T = int;\n  using E = int;\n\
+    \  static T ti() { return INT_MAX; }\n  static E ei() { return INT_MAX; }\n  static\
+    \ T op(const T& l, const T& r) { return min(l, r); }\n  static T mapping(const\
+    \ T& l, const E& r) { return r == ei() ? l : r; }\n  static E composition(const\
+    \ E& l, const E& r) { return r == ei() ? l : r; }\n};\n\nsigned main() {\n  cin.tie(0);\n\
+    \  ios::sync_with_stdio(0);\n  int n, q;\n  cin >> n >> q;\n  SegmentTree_Lazy<RupdQ_RminQ>\
+    \ seg(n);\n  while (q--) {\n    int com, s, t;\n    cin >> com >> s >> t;\n  \
+    \  if (com) {\n      cout << seg.fold(s, t + 1) << endl;\n    } else {\n     \
+    \ int x;\n      cin >> x;\n      seg.apply(s, t + 1, x);\n    }\n  }\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree_Lazy.hpp\"\
     \nusing namespace std;\n\nstruct RupdQ_RminQ {\n  using T = int;\n  using E =\
@@ -77,7 +78,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 23:17:16+09:00'
+  timestamp: '2022-06-20 10:43:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
