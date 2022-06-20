@@ -58,7 +58,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
@@ -256,11 +256,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
-  - name: test/atcoder
-    pages:
-    - icon: ':warning:'
-      path: test/atcoder/abc256_f.SegDual.cpp
-      title: test/atcoder/abc256_f.SegDual.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -650,6 +645,9 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc256_f.SegDual.test.cpp
+      title: test/atcoder/abc256_f.SegDual.test.cpp
     - icon: ':x:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp

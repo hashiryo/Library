@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/atcoder/abc256_f.SegDual.cpp
-    title: test/atcoder/abc256_f.SegDual.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/atcoder/abc256_f.SegDual.test.cpp
+    title: test/atcoder/abc256_f.SegDual.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Segment-Tree(\u53CC\u5BFE)"
     links: []
@@ -30,13 +30,13 @@ data:
     \    }\n  }\n  void set(int k, T x) {\n    for (int i = height; i; i--) eval((k\
     \ + n) >> i);\n    val[k] = x, laz[k + n].flg = false;\n  }\n  T operator[](const\
     \ int k) {\n    for (int i = height; i; i--) eval((k + n) >> i);\n    if (laz[k\
-    \ + n].flg)\n      val[k] = M::mapping(val[k], laz[k + n].val), laz[k + n].flg\
-    \ = false;\n    return val[k];\n  }\n\n private:\n  const int n, height;\n  struct\
-    \ Lazy {\n    E val;\n    bool flg;\n  };\n  std::vector<T> val;\n  std::vector<Lazy>\
-    \ laz;\n  inline void eval(int k) {\n    if (!laz[k].flg) return;\n    propagate(k\
-    \ << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n    laz[k].flg =\
-    \ false;\n  }\n  inline void propagate(int k, const E &x) {\n    laz[k] = {laz[k].flg\
-    \ ? M::composition(laz[k].val, x) : x, true};\n  }\n};\n"
+    \ + n].flg)\n      M::mapping(val[k], laz[k + n].val), laz[k + n].flg = false;\n\
+    \    return val[k];\n  }\n\n private:\n  const int n, height;\n  struct Lazy {\n\
+    \    E val;\n    bool flg;\n  };\n  std::vector<T> val;\n  std::vector<Lazy> laz;\n\
+    \  inline void eval(int k) {\n    if (!laz[k].flg) return;\n    propagate(k <<\
+    \ 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n    laz[k].flg = false;\n\
+    \  }\n  inline void propagate(int k, const E &x) {\n    laz[k].flg ? (M::composition(laz[k].val,\
+    \ x), x) : laz[k].val = x;\n    laz[k].flg = true;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Segment-Tree(\u53CC\
     \u5BFE)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n */\n\
     \n// BEGIN CUT HERE\n\ntemplate <typename M>\nstruct SegmentTree_Dual {\n  using\
@@ -51,21 +51,22 @@ data:
     \      if (r & 1) propagate(--r, x);\n    }\n  }\n  void set(int k, T x) {\n \
     \   for (int i = height; i; i--) eval((k + n) >> i);\n    val[k] = x, laz[k +\
     \ n].flg = false;\n  }\n  T operator[](const int k) {\n    for (int i = height;\
-    \ i; i--) eval((k + n) >> i);\n    if (laz[k + n].flg)\n      val[k] = M::mapping(val[k],\
+    \ i; i--) eval((k + n) >> i);\n    if (laz[k + n].flg)\n      M::mapping(val[k],\
     \ laz[k + n].val), laz[k + n].flg = false;\n    return val[k];\n  }\n\n private:\n\
     \  const int n, height;\n  struct Lazy {\n    E val;\n    bool flg;\n  };\n  std::vector<T>\
     \ val;\n  std::vector<Lazy> laz;\n  inline void eval(int k) {\n    if (!laz[k].flg)\
     \ return;\n    propagate(k << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n\
     \    laz[k].flg = false;\n  }\n  inline void propagate(int k, const E &x) {\n\
-    \    laz[k] = {laz[k].flg ? M::composition(laz[k].val, x) : x, true};\n  }\n};"
+    \    laz[k].flg ? (M::composition(laz[k].val, x), x) : laz[k].val = x;\n    laz[k].flg\
+    \ = true;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dual.hpp
-  requiredBy:
-  - test/atcoder/abc256_f.SegDual.cpp
-  timestamp: '2022-06-20 11:07:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy: []
+  timestamp: '2022-06-20 21:11:07+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc256_f.SegDual.test.cpp
   - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dual.hpp
 layout: document

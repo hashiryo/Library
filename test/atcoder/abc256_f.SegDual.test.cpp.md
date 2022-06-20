@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dual.hpp
     title: "Segment-Tree(\u53CC\u5BFE)"
   - icon: ':question:'
@@ -9,14 +9,16 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
     links:
     - https://atcoder.jp/contests/abc256/tasks/abc256_f
-  bundledCode: "#line 1 \"test/atcoder/abc256_f.SegDual.cpp\"\n#define PROBLEM \"\
-    https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 1 \"test/atcoder/abc256_f.SegDual.test.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
     \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
     \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
@@ -94,19 +96,19 @@ data:
     \    }\n  }\n  void set(int k, T x) {\n    for (int i = height; i; i--) eval((k\
     \ + n) >> i);\n    val[k] = x, laz[k + n].flg = false;\n  }\n  T operator[](const\
     \ int k) {\n    for (int i = height; i; i--) eval((k + n) >> i);\n    if (laz[k\
-    \ + n].flg)\n      val[k] = M::mapping(val[k], laz[k + n].val), laz[k + n].flg\
-    \ = false;\n    return val[k];\n  }\n\n private:\n  const int n, height;\n  struct\
-    \ Lazy {\n    E val;\n    bool flg;\n  };\n  std::vector<T> val;\n  std::vector<Lazy>\
-    \ laz;\n  inline void eval(int k) {\n    if (!laz[k].flg) return;\n    propagate(k\
-    \ << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n    laz[k].flg =\
-    \ false;\n  }\n  inline void propagate(int k, const E &x) {\n    laz[k] = {laz[k].flg\
-    \ ? M::composition(laz[k].val, x) : x, true};\n  }\n};\n#line 6 \"test/atcoder/abc256_f.SegDual.cpp\"\
+    \ + n].flg)\n      M::mapping(val[k], laz[k + n].val), laz[k + n].flg = false;\n\
+    \    return val[k];\n  }\n\n private:\n  const int n, height;\n  struct Lazy {\n\
+    \    E val;\n    bool flg;\n  };\n  std::vector<T> val;\n  std::vector<Lazy> laz;\n\
+    \  inline void eval(int k) {\n    if (!laz[k].flg) return;\n    propagate(k <<\
+    \ 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n    laz[k].flg = false;\n\
+    \  }\n  inline void propagate(int k, const E &x) {\n    laz[k].flg ? (M::composition(laz[k].val,\
+    \ x), x) : laz[k].val = x;\n    laz[k].flg = true;\n  }\n};\n#line 6 \"test/atcoder/abc256_f.SegDual.test.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
     \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
-    \ T mapping(T x, E mapp) {\n    return {x.id, x.val + mapp[0] * (x.id + 1) * (x.id\
-    \ + 2) / 2 -\n                      mapp[1] * (2 * x.id + 3) / 2 + mapp[2]};\n\
-    \  }\n  static E composition(E pre, E suf) {\n    return {pre[0] + suf[0], pre[1]\
-    \ + suf[1], pre[2] + suf[2]};\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \ void mapping(T& x, const E& mapp) {\n    x.val += mapp[0] * (x.id + 1) * (x.id\
+    \ + 2) / 2 -\n             mapp[1] * (2 * x.id + 3) / 2 + mapp[2];\n  }\n  static\
+    \ void composition(E& pre, const E& suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
+    \ pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Seg = SegmentTree_Dual<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint\
     \ A[N], D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for\
     \ (int j = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n\
@@ -119,10 +121,10 @@ data:
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dual.hpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
     \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
-    \ T mapping(T x, E mapp) {\n    return {x.id, x.val + mapp[0] * (x.id + 1) * (x.id\
-    \ + 2) / 2 -\n                      mapp[1] * (2 * x.id + 3) / 2 + mapp[2]};\n\
-    \  }\n  static E composition(E pre, E suf) {\n    return {pre[0] + suf[0], pre[1]\
-    \ + suf[1], pre[2] + suf[2]};\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \ void mapping(T& x, const E& mapp) {\n    x.val += mapp[0] * (x.id + 1) * (x.id\
+    \ + 2) / 2 -\n             mapp[1] * (2 * x.id + 3) / 2 + mapp[2];\n  }\n  static\
+    \ void composition(E& pre, const E& suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
+    \ pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Seg = SegmentTree_Dual<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint\
     \ A[N], D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for\
     \ (int j = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n\
@@ -134,16 +136,16 @@ data:
   dependsOn:
   - src/Math/ModInt.hpp
   - src/DataStructure/SegmentTree_Dual.hpp
-  isVerificationFile: false
-  path: test/atcoder/abc256_f.SegDual.cpp
+  isVerificationFile: true
+  path: test/atcoder/abc256_f.SegDual.test.cpp
   requiredBy: []
-  timestamp: '2022-06-20 11:07:09+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2022-06-20 21:11:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/atcoder/abc256_f.SegDual.cpp
+documentation_of: test/atcoder/abc256_f.SegDual.test.cpp
 layout: document
 redirect_from:
-- /library/test/atcoder/abc256_f.SegDual.cpp
-- /library/test/atcoder/abc256_f.SegDual.cpp.html
-title: test/atcoder/abc256_f.SegDual.cpp
+- /verify/test/atcoder/abc256_f.SegDual.test.cpp
+- /verify/test/atcoder/abc256_f.SegDual.test.cpp.html
+title: test/atcoder/abc256_f.SegDual.test.cpp
 ---

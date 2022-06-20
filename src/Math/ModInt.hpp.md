@@ -23,9 +23,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-  - icon: ':warning:'
-    path: test/atcoder/abc256_f.SegDual.cpp
-    title: test/atcoder/abc256_f.SegDual.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
@@ -78,6 +75,9 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc256_f.SegDual.test.cpp
+    title: test/atcoder/abc256_f.SegDual.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
@@ -380,7 +380,6 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt.hpp
   requiredBy:
-  - test/atcoder/abc256_f.SegDual.cpp
   - src/Math/differential_equation.hpp
   - src/Math/extgcd.hpp
   - src/Math/BigInt.hpp
@@ -392,6 +391,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc256_ex.Beats.test.cpp
+  - test/atcoder/abc256_f.SegDual.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/arc105_f.test.cpp
