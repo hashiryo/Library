@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   _extendedRequiredBy: []
@@ -62,19 +62,19 @@ data:
     \     n[i].sum = M::op(n[n[i].ch[0]].sum, n[i].sum);\n    }\n    if (n[i].ch[1])\
     \ {\n      n[i].sz += n[n[i].ch[1]].sz, n[i].flag |= n[n[i].ch[1]].flag & 0b1010;\n\
     \      if constexpr (monoid<M>::value)\n        n[i].sum = M::op(n[i].sum, n[n[i].ch[1]].sum);\n\
-    \    }\n  }\n  inline void propagate(node_id i, const E& v) {\n    n[i].lazy =\
-    \ n[i].lazy_flg ? M::composition(n[i].lazy, v) : v;\n    if (n[i].s == n[i].d)\
-    \ n[i].val = M::mapping(n[i].val, v, 1);\n    if constexpr (monoid<M>::value)\
-    \ n[i].sum = M::mapping(n[i].sum, v, n[i].sz);\n    n[i].lazy_flg = true;\n  }\n\
-    \  inline void eval(node_id i) {\n    if (!n[i].lazy_flg) return;\n    if (n[i].ch[0])\
-    \ propagate(n[i].ch[0], n[i].lazy);\n    if (n[i].ch[1]) propagate(n[i].ch[1],\
-    \ n[i].lazy);\n    n[i].lazy_flg = false;\n  }\n  inline int dir(node_id i) {\n\
-    \    if (n[i].par) {\n      if (n[n[i].par].ch[0] == i) return 0;\n      if (n[n[i].par].ch[1]\
-    \ == i) return 1;\n    }\n    return 2;\n  }\n  inline void rot(node_id x) {\n\
-    \    node_id p = n[x].par;\n    int d = dir(x);\n    if ((n[p].ch[d] = n[x].ch[!d]))\
-    \ n[n[p].ch[d]].par = p;\n    n[x].ch[!d] = p, pushup(p), pushup(x), n[x].par\
-    \ = n[p].par;\n    if ((d = dir(p)) < 2) n[n[p].par].ch[d] = x, pushup(n[p].par);\n\
-    \    n[p].par = x;\n  }\n  inline void splay(node_id i) {\n    if constexpr (dual<M>::value)\
+    \    }\n  }\n  inline void propagate(node_id i, const E& v) {\n    n[i].lazy_flg\
+    \ ? (M::composition(n[i].lazy, v), v) : n[i].lazy = v;\n    if (n[i].s == n[i].d)\
+    \ M::mapping(n[i].val, v, 1);\n    if constexpr (monoid<M>::value) M::mapping(n[i].sum,\
+    \ v, n[i].sz);\n    n[i].lazy_flg = true;\n  }\n  inline void eval(node_id i)\
+    \ {\n    if (!n[i].lazy_flg) return;\n    if (n[i].ch[0]) propagate(n[i].ch[0],\
+    \ n[i].lazy);\n    if (n[i].ch[1]) propagate(n[i].ch[1], n[i].lazy);\n    n[i].lazy_flg\
+    \ = false;\n  }\n  inline int dir(node_id i) {\n    if (n[i].par) {\n      if\
+    \ (n[n[i].par].ch[0] == i) return 0;\n      if (n[n[i].par].ch[1] == i) return\
+    \ 1;\n    }\n    return 2;\n  }\n  inline void rot(node_id x) {\n    node_id p\
+    \ = n[x].par;\n    int d = dir(x);\n    if ((n[p].ch[d] = n[x].ch[!d])) n[n[p].ch[d]].par\
+    \ = p;\n    n[x].ch[!d] = p, pushup(p), pushup(x), n[x].par = n[p].par;\n    if\
+    \ ((d = dir(p)) < 2) n[n[p].par].ch[d] = x, pushup(n[p].par);\n    n[p].par =\
+    \ x;\n  }\n  inline void splay(node_id i) {\n    if constexpr (dual<M>::value)\
     \ eval(i);\n    for (int i_dir = dir(i), p_dir; i_dir < 2; rot(i), i_dir = dir(i))\
     \ {\n      p_dir = dir(n[i].par);\n      if constexpr (dual<M>::value) {\n   \
     \     if (p_dir < 2) eval(n[n[i].par].par);\n        eval(n[i].par), eval(i);\n\
@@ -136,9 +136,9 @@ data:
     \ & 0b1000))];\n      }\n    return 0;\n  }\n};\n#line 6 \"test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp\"\
     \nusing namespace std;\n\nstruct RsumQRaddQ {\n  using T = long long;\n  using\
     \ E = long long;\n  static T ti() { return 0; }\n  static T op(const T &l, const\
-    \ T &r) { return l + r; }\n  static T mapping(const T &t, const E &e, const std::size_t\
-    \ &sz) {\n    return t + e * sz;\n  }\n  static E composition(const E &l, const\
-    \ E &r) { return l + r; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ T &r) { return l + r; }\n  static void mapping(T &t, const E &e, const std::size_t\
+    \ &sz) { t += e * sz; }\n  static void composition(E &pre, const E &suf) { pre\
+    \ += suf; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  EulerTourTree<RsumQRaddQ> ett(N);\n  for (int\
     \ i = 0; i < N; i++) {\n    long long a;\n    cin >> a;\n    ett.set(i, a);\n\
     \  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n\
@@ -152,9 +152,9 @@ data:
     \n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
     \nusing namespace std;\n\nstruct RsumQRaddQ {\n  using T = long long;\n  using\
     \ E = long long;\n  static T ti() { return 0; }\n  static T op(const T &l, const\
-    \ T &r) { return l + r; }\n  static T mapping(const T &t, const E &e, const std::size_t\
-    \ &sz) {\n    return t + e * sz;\n  }\n  static E composition(const E &l, const\
-    \ E &r) { return l + r; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ T &r) { return l + r; }\n  static void mapping(T &t, const E &e, const std::size_t\
+    \ &sz) { t += e * sz; }\n  static void composition(E &pre, const E &suf) { pre\
+    \ += suf; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  EulerTourTree<RsumQRaddQ> ett(N);\n  for (int\
     \ i = 0; i < N; i++) {\n    long long a;\n    cin >> a;\n    ett.set(i, a);\n\
     \  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n\
@@ -169,7 +169,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
+  timestamp: '2022-06-20 22:25:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp

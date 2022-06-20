@@ -12,28 +12,28 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/persistent_queue.WBT.test.cpp
     title: test/yosupo/persistent_queue.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    document_title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
+    document_title: "\u6C38\u7D9AWeight-Balanced-Tree"
     links:
     - https://atcoder.jp/contests/arc030/tasks/arc030_4
     - https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste
   bundledCode: "#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title \u6C38\u7D9A\u5316Weight-Balanced-Tree\n * @category \u30C7\u30FC\
-    \u30BF\u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\
-    \u6728\n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\
-    \u9006\u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\u3088\u3046\u306B\u3057\
-    \u3066\u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\
-    \uFF08\u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u8449\u306E\
-    \u30B5\u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\
+    /**\n * @title \u6C38\u7D9AWeight-Balanced-Tree\n * @category \u30C7\u30FC\u30BF\
+    \u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\u6728\
+    \n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\u9006\
+    \u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\u3088\u3046\u306B\u3057\u3066\
+    \u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\
+    \u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u8449\u306E\u30B5\
+    \u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\
     \u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n\
     \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
     \ (\u6C38\u7D9A)\n// https://atcoder.jp/contests/arc030/tasks/arc030_4 (\u6C38\
@@ -66,31 +66,31 @@ data:
     \ = n[n[t].ch[0]].size + n[n[t].ch[1]].size;\n    if constexpr (semigroup<M>::value)\n\
     \      n[t].val = M::op(n[n[t].ch[0]].val, n[n[t].ch[1]].val);\n  }\n  static\
     \ inline T &reflect(node_id t) {\n    if constexpr (dual<M>::value && !semigroup<M>::value)\n\
-    \      if (n[t].lazy_flg)\n        n[t].val = M::mapping(n[t].val, n[t].lazy,\
-    \ 1), n[t].lazy_flg = false;\n    return n[t].val;\n  }\n  static inline void\
-    \ propagate(node_id t, const E &x) {\n    n[t].lazy = n[t].lazy_flg ? M::composition(n[t].lazy,\
-    \ x) : x;\n    if constexpr (semigroup<M>::value)\n      n[t].val = M::mapping(n[t].val,\
-    \ x, n[t].size);\n    n[t].lazy_flg = true;\n  }\n  static inline void cp_node(node_id\
-    \ &t) { n[t = ni++] = Node(n[t]); }\n  static inline void eval(node_id t) {\n\
-    \    if (!n[t].lazy_flg) return;\n    cp_node(n[t].ch[0]), cp_node(n[t].ch[1]),\
-    \ n[t].lazy_flg = false;\n    propagate(n[t].ch[0], n[t].lazy), propagate(n[t].ch[1],\
-    \ n[t].lazy);\n  }\n  template <bool b>\n  static inline node_id helper(std::array<node_id,\
-    \ 2> &m) {\n    if constexpr (dual<M>::value) eval(m[b]);\n    node_id c;\n  \
-    \  if constexpr (b)\n      c = submerge({m[0], n[m[1]].ch[0]});\n    else\n  \
-    \    c = submerge({n[m[0]].ch[1], m[1]});\n    if (cp_node(m[b]), n[n[m[b]].ch[b]].size\
-    \ * 4 >= n[c].size)\n      return n[m[b]].ch[!b] = c, pushup(m[b]), m[b];\n  \
-    \  return n[m[b]].ch[!b] = n[c].ch[b], pushup(n[c].ch[b] = m[b]), pushup(c), c;\n\
-    \  }\n  static inline node_id submerge(std::array<node_id, 2> m) {\n    if (n[m[0]].size\
-    \ > n[m[1]].size * 4) return helper<0>(m);\n    if (n[m[1]].size > n[m[0]].size\
-    \ * 4) return helper<1>(m);\n    return n[ni] = Node{T(), 0, {m[0], m[1]}}, pushup(ni),\
-    \ ni++;\n  }\n  static inline node_id merge(node_id l, node_id r) {\n    return\
-    \ !l ? r : (!r ? l : submerge({l, r}));\n  }\n  static inline std::pair<node_id,\
-    \ node_id> split(node_id t, std::size_t k) {\n    if (!t) return {0, 0};\n   \
-    \ if (k == 0) return {0, t};\n    if (k >= n[t].size) return {t, 0};\n    if constexpr\
-    \ (dual<M>::value) eval(t);\n    if (k == n[n[t].ch[0]].size) return {n[t].ch[0],\
-    \ n[t].ch[1]};\n    if (k < n[n[t].ch[0]].size) {\n      auto [ll, m] = split(n[t].ch[0],\
-    \ k);\n      return {ll, merge(m, n[t].ch[1])};\n    } else {\n      auto [rl,\
-    \ rr] = split(n[t].ch[1], k - n[n[t].ch[0]].size);\n      return {merge(n[t].ch[0],\
+    \      if (n[t].lazy_flg)\n        M::mapping(n[t].val, n[t].lazy, 1), n[t].lazy_flg\
+    \ = false;\n    return n[t].val;\n  }\n  static inline void propagate(node_id\
+    \ t, const E &x) {\n    n[t].lazy_flg ? (M::composition(n[t].lazy, x), x) : n[t].lazy\
+    \ = x;\n    if constexpr (semigroup<M>::value) M::mapping(n[t].val, x, n[t].size);\n\
+    \    n[t].lazy_flg = true;\n  }\n  static inline void cp_node(node_id &t) { n[t\
+    \ = ni++] = Node(n[t]); }\n  static inline void eval(node_id t) {\n    if (!n[t].lazy_flg)\
+    \ return;\n    cp_node(n[t].ch[0]), cp_node(n[t].ch[1]), n[t].lazy_flg = false;\n\
+    \    propagate(n[t].ch[0], n[t].lazy), propagate(n[t].ch[1], n[t].lazy);\n  }\n\
+    \  template <bool b>\n  static inline node_id helper(std::array<node_id, 2> &m)\
+    \ {\n    if constexpr (dual<M>::value) eval(m[b]);\n    node_id c;\n    if constexpr\
+    \ (b)\n      c = submerge({m[0], n[m[1]].ch[0]});\n    else\n      c = submerge({n[m[0]].ch[1],\
+    \ m[1]});\n    if (cp_node(m[b]), n[n[m[b]].ch[b]].size * 4 >= n[c].size)\n  \
+    \    return n[m[b]].ch[!b] = c, pushup(m[b]), m[b];\n    return n[m[b]].ch[!b]\
+    \ = n[c].ch[b], pushup(n[c].ch[b] = m[b]), pushup(c), c;\n  }\n  static inline\
+    \ node_id submerge(std::array<node_id, 2> m) {\n    if (n[m[0]].size > n[m[1]].size\
+    \ * 4) return helper<0>(m);\n    if (n[m[1]].size > n[m[0]].size * 4) return helper<1>(m);\n\
+    \    return n[ni] = Node{T(), 0, {m[0], m[1]}}, pushup(ni), ni++;\n  }\n  static\
+    \ inline node_id merge(node_id l, node_id r) {\n    return !l ? r : (!r ? l :\
+    \ submerge({l, r}));\n  }\n  static inline std::pair<node_id, node_id> split(node_id\
+    \ t, std::size_t k) {\n    if (!t) return {0, 0};\n    if (k == 0) return {0,\
+    \ t};\n    if (k >= n[t].size) return {t, 0};\n    if constexpr (dual<M>::value)\
+    \ eval(t);\n    if (k == n[n[t].ch[0]].size) return {n[t].ch[0], n[t].ch[1]};\n\
+    \    if (k < n[n[t].ch[0]].size) {\n      auto [ll, m] = split(n[t].ch[0], k);\n\
+    \      return {ll, merge(m, n[t].ch[1])};\n    } else {\n      auto [rl, rr] =\
+    \ split(n[t].ch[1], k - n[n[t].ch[0]].size);\n      return {merge(n[t].ch[0],\
     \ rl), rr};\n    }\n  }\n  template <class S>\n  node_id build(std::size_t l,\
     \ std::size_t r, const S &bg) {\n    if (r - l == 1) {\n      if constexpr (std::is_same_v<S,\
     \ T>)\n        return n[ni] = Node{bg, 1}, ni++;\n      else\n        return n[ni]\
@@ -158,15 +158,15 @@ data:
     \      ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n  \
     \  if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n\
     \  }\n  static double percentage_used() { return 100. * ni / NODE_SIZE; }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6C38\u7D9A\u5316\
-    Weight-Balanced-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n\
-    \ * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\u6728\n * \u203B\u3053\u308C\u306F\u6C38\
-    \u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\u9006\u306B\u975E\u6C38\u7D9A\u306B\
-    \u3067\u304D\u308B\u3088\u3046\u306B\u3057\u3066\u307E\u305B\u3093\uFF09\n * \u5358\
-    \u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\
-    \n * \u5404\u30CE\u30FC\u30C9\u304C\u8449\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\u6301\
-    \u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\
-    \u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
+  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6C38\u7D9AWeight-Balanced-Tree\n\
+    \ * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\
+    \u5E73\u8861\u4E8C\u5206\u6728\n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\
+    \u3066\u307E\u3059\uFF08\u9006\u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\
+    \u3088\u3046\u306B\u3057\u3066\u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\
+    \u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\
+    \u30C9\u304C\u8449\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\
+    \u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066\
+    size\u3092\u6E21\u305B\u308B\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
     \ (\u6C38\u7D9A)\n// https://atcoder.jp/contests/arc030/tasks/arc030_4 (\u6C38\
     \u7D9A\u9045\u5EF6\u4F1D\u642C)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define\
     \ HAS_CHECK(member, Dummy)                              \\\n  template <class\
@@ -197,31 +197,31 @@ data:
     \ = n[n[t].ch[0]].size + n[n[t].ch[1]].size;\n    if constexpr (semigroup<M>::value)\n\
     \      n[t].val = M::op(n[n[t].ch[0]].val, n[n[t].ch[1]].val);\n  }\n  static\
     \ inline T &reflect(node_id t) {\n    if constexpr (dual<M>::value && !semigroup<M>::value)\n\
-    \      if (n[t].lazy_flg)\n        n[t].val = M::mapping(n[t].val, n[t].lazy,\
-    \ 1), n[t].lazy_flg = false;\n    return n[t].val;\n  }\n  static inline void\
-    \ propagate(node_id t, const E &x) {\n    n[t].lazy = n[t].lazy_flg ? M::composition(n[t].lazy,\
-    \ x) : x;\n    if constexpr (semigroup<M>::value)\n      n[t].val = M::mapping(n[t].val,\
-    \ x, n[t].size);\n    n[t].lazy_flg = true;\n  }\n  static inline void cp_node(node_id\
-    \ &t) { n[t = ni++] = Node(n[t]); }\n  static inline void eval(node_id t) {\n\
-    \    if (!n[t].lazy_flg) return;\n    cp_node(n[t].ch[0]), cp_node(n[t].ch[1]),\
-    \ n[t].lazy_flg = false;\n    propagate(n[t].ch[0], n[t].lazy), propagate(n[t].ch[1],\
-    \ n[t].lazy);\n  }\n  template <bool b>\n  static inline node_id helper(std::array<node_id,\
-    \ 2> &m) {\n    if constexpr (dual<M>::value) eval(m[b]);\n    node_id c;\n  \
-    \  if constexpr (b)\n      c = submerge({m[0], n[m[1]].ch[0]});\n    else\n  \
-    \    c = submerge({n[m[0]].ch[1], m[1]});\n    if (cp_node(m[b]), n[n[m[b]].ch[b]].size\
-    \ * 4 >= n[c].size)\n      return n[m[b]].ch[!b] = c, pushup(m[b]), m[b];\n  \
-    \  return n[m[b]].ch[!b] = n[c].ch[b], pushup(n[c].ch[b] = m[b]), pushup(c), c;\n\
-    \  }\n  static inline node_id submerge(std::array<node_id, 2> m) {\n    if (n[m[0]].size\
-    \ > n[m[1]].size * 4) return helper<0>(m);\n    if (n[m[1]].size > n[m[0]].size\
-    \ * 4) return helper<1>(m);\n    return n[ni] = Node{T(), 0, {m[0], m[1]}}, pushup(ni),\
-    \ ni++;\n  }\n  static inline node_id merge(node_id l, node_id r) {\n    return\
-    \ !l ? r : (!r ? l : submerge({l, r}));\n  }\n  static inline std::pair<node_id,\
-    \ node_id> split(node_id t, std::size_t k) {\n    if (!t) return {0, 0};\n   \
-    \ if (k == 0) return {0, t};\n    if (k >= n[t].size) return {t, 0};\n    if constexpr\
-    \ (dual<M>::value) eval(t);\n    if (k == n[n[t].ch[0]].size) return {n[t].ch[0],\
-    \ n[t].ch[1]};\n    if (k < n[n[t].ch[0]].size) {\n      auto [ll, m] = split(n[t].ch[0],\
-    \ k);\n      return {ll, merge(m, n[t].ch[1])};\n    } else {\n      auto [rl,\
-    \ rr] = split(n[t].ch[1], k - n[n[t].ch[0]].size);\n      return {merge(n[t].ch[0],\
+    \      if (n[t].lazy_flg)\n        M::mapping(n[t].val, n[t].lazy, 1), n[t].lazy_flg\
+    \ = false;\n    return n[t].val;\n  }\n  static inline void propagate(node_id\
+    \ t, const E &x) {\n    n[t].lazy_flg ? (M::composition(n[t].lazy, x), x) : n[t].lazy\
+    \ = x;\n    if constexpr (semigroup<M>::value) M::mapping(n[t].val, x, n[t].size);\n\
+    \    n[t].lazy_flg = true;\n  }\n  static inline void cp_node(node_id &t) { n[t\
+    \ = ni++] = Node(n[t]); }\n  static inline void eval(node_id t) {\n    if (!n[t].lazy_flg)\
+    \ return;\n    cp_node(n[t].ch[0]), cp_node(n[t].ch[1]), n[t].lazy_flg = false;\n\
+    \    propagate(n[t].ch[0], n[t].lazy), propagate(n[t].ch[1], n[t].lazy);\n  }\n\
+    \  template <bool b>\n  static inline node_id helper(std::array<node_id, 2> &m)\
+    \ {\n    if constexpr (dual<M>::value) eval(m[b]);\n    node_id c;\n    if constexpr\
+    \ (b)\n      c = submerge({m[0], n[m[1]].ch[0]});\n    else\n      c = submerge({n[m[0]].ch[1],\
+    \ m[1]});\n    if (cp_node(m[b]), n[n[m[b]].ch[b]].size * 4 >= n[c].size)\n  \
+    \    return n[m[b]].ch[!b] = c, pushup(m[b]), m[b];\n    return n[m[b]].ch[!b]\
+    \ = n[c].ch[b], pushup(n[c].ch[b] = m[b]), pushup(c), c;\n  }\n  static inline\
+    \ node_id submerge(std::array<node_id, 2> m) {\n    if (n[m[0]].size > n[m[1]].size\
+    \ * 4) return helper<0>(m);\n    if (n[m[1]].size > n[m[0]].size * 4) return helper<1>(m);\n\
+    \    return n[ni] = Node{T(), 0, {m[0], m[1]}}, pushup(ni), ni++;\n  }\n  static\
+    \ inline node_id merge(node_id l, node_id r) {\n    return !l ? r : (!r ? l :\
+    \ submerge({l, r}));\n  }\n  static inline std::pair<node_id, node_id> split(node_id\
+    \ t, std::size_t k) {\n    if (!t) return {0, 0};\n    if (k == 0) return {0,\
+    \ t};\n    if (k >= n[t].size) return {t, 0};\n    if constexpr (dual<M>::value)\
+    \ eval(t);\n    if (k == n[n[t].ch[0]].size) return {n[t].ch[0], n[t].ch[1]};\n\
+    \    if (k < n[n[t].ch[0]].size) {\n      auto [ll, m] = split(n[t].ch[0], k);\n\
+    \      return {ll, merge(m, n[t].ch[1])};\n    } else {\n      auto [rl, rr] =\
+    \ split(n[t].ch[1], k - n[n[t].ch[0]].size);\n      return {merge(n[t].ch[0],\
     \ rl), rr};\n    }\n  }\n  template <class S>\n  node_id build(std::size_t l,\
     \ std::size_t r, const S &bg) {\n    if (r - l == 1) {\n      if constexpr (std::is_same_v<S,\
     \ T>)\n        return n[ni] = Node{bg, 1}, ni++;\n      else\n        return n[ni]\
@@ -293,7 +293,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/WeightBalancedTree.hpp
   requiredBy: []
-  timestamp: '2022-06-20 00:02:58+09:00'
+  timestamp: '2022-06-20 22:21:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc256_f.WBT.test.cpp
@@ -306,5 +306,5 @@ layout: document
 redirect_from:
 - /library/src/DataStructure/WeightBalancedTree.hpp
 - /library/src/DataStructure/WeightBalancedTree.hpp.html
-title: "\u6C38\u7D9A\u5316Weight-Balanced-Tree"
+title: "\u6C38\u7D9AWeight-Balanced-Tree"
 ---
