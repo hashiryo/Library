@@ -67,10 +67,10 @@ data:
     \    t->val = def_val();\n    if (t->ch[0]) t->val = M::op(t->ch[0]->val, t->val);\n\
     \    if (t->ch[1]) t->val = M::op(t->val, t->ch[1]->val);\n  }\n  static inline\
     \ T &reflect(Node *&t) {\n    if constexpr (dual<M>::value && !monoid<M>::value)\n\
-    \      if (t->lazy_flg)\n        t->val = M::mapping(t->val, t->lazy, 1), t->lazy_flg\
-    \ = false;\n    return t->val;\n  }\n  static inline void propagate(Node *&t,\
-    \ const E &x, const id_t &sz) {\n    t->lazy = t->lazy_flg ? M::composition(t->lazy,\
-    \ x) : x, t->lazy_flg = true;\n    if constexpr (monoid<M>::value) t->val = M::mapping(t->val,\
+    \      if (t->lazy_flg) M::mapping(t->val, t->lazy, 1), t->lazy_flg = false;\n\
+    \    return t->val;\n  }\n  static inline void propagate(Node *&t, const E &x,\
+    \ const id_t &sz) {\n    t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy\
+    \ = x;\n    t->lazy_flg = true;\n    if constexpr (monoid<M>::value) M::mapping(t->val,\
     \ x, sz);\n  }\n  static inline void cp_node(Node *&t) {\n    if (!t)\n      t\
     \ = new Node{def_val()};\n    else if constexpr (persistent)\n      t = new Node(*t);\n\
     \  }\n  static inline void eval(Node *&t, const id_t &sz) {\n    if (!t->lazy_flg)\
@@ -165,8 +165,8 @@ data:
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 8 \"test/aoj/DSL_2_I.DynSeg.test.cpp\"\
     \n\nusing namespace std;\n\nstruct RSQandRUQ {\n  using T = int;\n  using E =\
     \ int;\n  static T op(T l, T r) { return l + r; }\n  static T ti() { return 0;\
-    \ }\n  static T mapping(T v, E f, int sz) { return f * sz; }\n  static T composition(E\
-    \ pre, E suf) { return suf; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ }\n  static void mapping(T& v, E f, int sz) { v = f * sz; }\n  static void composition(E&\
+    \ pre, E suf) { pre = suf; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int n, q;\n  cin >> n >> q;\n  SegmentTree_Dynamic<RSQandRUQ> seg(n, 0);\n\
     \  for (int i = 0; i < q; i++) {\n    int op, s, t;\n    cin >> op >> s >> t;\n\
     \    if (op == 0) {\n      int x;\n      cin >> x;\n      seg.apply(s, t + 1,\
@@ -176,19 +176,19 @@ data:
     \n\n// \u9045\u5EF6\u4F1D\u642C\u306Everify\n\n#include <bits/stdc++.h>\n#include\
     \ \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n\nusing namespace std;\n\nstruct\
     \ RSQandRUQ {\n  using T = int;\n  using E = int;\n  static T op(T l, T r) { return\
-    \ l + r; }\n  static T ti() { return 0; }\n  static T mapping(T v, E f, int sz)\
-    \ { return f * sz; }\n  static T composition(E pre, E suf) { return suf; }\n};\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int n, q;\n  cin\
-    \ >> n >> q;\n  SegmentTree_Dynamic<RSQandRUQ> seg(n, 0);\n  for (int i = 0; i\
-    \ < q; i++) {\n    int op, s, t;\n    cin >> op >> s >> t;\n    if (op == 0) {\n\
-    \      int x;\n      cin >> x;\n      seg.apply(s, t + 1, x);\n    } else {\n\
-    \      cout << seg.fold(s, t + 1) << '\\n';\n    }\n  }\n  return 0;\n}\n"
+    \ l + r; }\n  static T ti() { return 0; }\n  static void mapping(T& v, E f, int\
+    \ sz) { v = f * sz; }\n  static void composition(E& pre, E suf) { pre = suf; }\n\
+    };\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int n, q;\n\
+    \  cin >> n >> q;\n  SegmentTree_Dynamic<RSQandRUQ> seg(n, 0);\n  for (int i =\
+    \ 0; i < q; i++) {\n    int op, s, t;\n    cin >> op >> s >> t;\n    if (op ==\
+    \ 0) {\n      int x;\n      cin >> x;\n      seg.apply(s, t + 1, x);\n    } else\
+    \ {\n      cout << seg.fold(s, t + 1) << '\\n';\n    }\n  }\n  return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree_Dynamic.hpp
   isVerificationFile: true
   path: test/aoj/DSL_2_I.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 22:48:54+09:00'
+  timestamp: '2022-06-20 21:58:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_I.DynSeg.test.cpp

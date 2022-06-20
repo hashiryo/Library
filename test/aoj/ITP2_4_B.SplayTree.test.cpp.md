@@ -90,36 +90,36 @@ data:
     \ = 1;\n    if constexpr (semigroup<M>::value) {\n      t->sum = t->val;\n   \
     \   if constexpr (reversible) t->rsum = t->val;\n    }\n    return helper<0>(t),\
     \ helper<1>(t), t;\n  }\n  inline void propagate(Node *t, const E &x) {\n    if\
-    \ (!t) return;\n    t->lazy = t->lazy_flg ? M::composition(t->lazy, x) : x;\n\
-    \    if constexpr (semigroup<M>::value) {\n      t->sum = M::mapping(t->sum, x,\
-    \ t->size);\n      if constexpr (reversible) t->rsum = M::mapping(t->rsum, x,\
-    \ t->size);\n    }\n    t->val = M::mapping(t->val, x, 1), t->lazy_flg = true;\n\
-    \  }\n  inline void toggle(Node *t) {\n    if (!t) return;\n    if constexpr (semigroup<M>::value)\
-    \ std::swap(t->sum, t->rsum);\n    std::swap(t->ch[0], t->ch[1]), t->rev_flg =\
-    \ !t->rev_flg;\n  }\n  inline void eval_propagate(Node *t) {\n    if (t->lazy_flg)\n\
-    \      propagate(t->ch[0], t->lazy), propagate(t->ch[1], t->lazy),\n         \
-    \ t->lazy_flg = false;\n  }\n  inline void eval_toggle(Node *t) {\n    if (t->rev_flg)\
-    \ toggle(t->ch[0]), toggle(t->ch[1]), t->rev_flg = false;\n  }\n  inline void\
-    \ rot(Node *&t, bool d) {\n    Node *s = t->ch[d];\n    t->ch[d] = s->ch[!d],\
-    \ s->ch[!d] = pushup(t), t = pushup(s);\n  }\n  inline void splay(Node *&t, std::size_t\
-    \ k) {\n    if (!t) return;\n    if constexpr (dual<M>::value) eval_propagate(t);\n\
-    \    if constexpr (reversible) eval_toggle(t);\n    std::size_t sz = t->ch[0]\
-    \ ? t->ch[0]->size : 0;\n    if (sz == k) return;\n    bool d = sz < k;\n    if\
-    \ (d) k -= sz + 1;\n    if constexpr (dual<M>::value) eval_propagate(t->ch[d]);\n\
-    \    if constexpr (reversible) eval_toggle(t->ch[d]);\n    sz = t->ch[d]->ch[0]\
-    \ ? t->ch[d]->ch[0]->size : 0;\n    if (sz != k) {\n      bool c = sz < k;\n \
-    \     if (c) k -= sz + 1;\n      splay(t->ch[d]->ch[c], k);\n      c == d ? rot(t,\
-    \ d) : rot(t->ch[d], !d);\n    }\n    rot(t, d);\n  }\n  template <class F>\n\
-    \  void query(std::size_t a, std::size_t b, const F &f) {\n    if (size() == b)\
-    \ {\n      a-- ? (splay(root, a), f(root->ch[1]), pushup(root)) : (f(root), root);\n\
-    \    } else {\n      splay(root, b);\n      a-- ? (splay(root->ch[0], a), f(root->ch[0]->ch[1]),\
-    \ pushup(root->ch[0]))\n          : (f(root->ch[0]), root->ch[0]);\n      pushup(root);\n\
-    \    }\n  }\n  static inline unsigned xor128() {\n    static unsigned x = 123456789,\
-    \ y = 362436069, z = 521288629, w = 88675123;\n    unsigned t = (x ^ (x << 11));\n\
-    \    return x = y, y = z, z = w, (w = (w ^ (w >> 19)) ^ (t ^ (t >> 8)));\n  }\n\
-    \n public:\n  SplayTree(Node *t = nullptr) : root(t) {}\n  SplayTree(std::size_t\
-    \ n, T val) { root = build(0, n, val); }\n  SplayTree(const T *bg, const T *ed)\
-    \ { root = build(bg, ed); }\n  SplayTree(const std::vector<T> &ar)\n      : SplayTree(ar.data(),\
+    \ (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy =\
+    \ x;\n    if constexpr (semigroup<M>::value) {\n      M::mapping(t->sum, x, t->size);\n\
+    \      if constexpr (reversible) M::mapping(t->rsum, x, t->size);\n    }\n   \
+    \ M::mapping(t->val, x, 1), t->lazy_flg = true;\n  }\n  inline void toggle(Node\
+    \ *t) {\n    if (!t) return;\n    if constexpr (semigroup<M>::value) std::swap(t->sum,\
+    \ t->rsum);\n    std::swap(t->ch[0], t->ch[1]), t->rev_flg = !t->rev_flg;\n  }\n\
+    \  inline void eval_propagate(Node *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0],\
+    \ t->lazy), propagate(t->ch[1], t->lazy),\n          t->lazy_flg = false;\n  }\n\
+    \  inline void eval_toggle(Node *t) {\n    if (t->rev_flg) toggle(t->ch[0]), toggle(t->ch[1]),\
+    \ t->rev_flg = false;\n  }\n  inline void rot(Node *&t, bool d) {\n    Node *s\
+    \ = t->ch[d];\n    t->ch[d] = s->ch[!d], s->ch[!d] = pushup(t), t = pushup(s);\n\
+    \  }\n  inline void splay(Node *&t, std::size_t k) {\n    if (!t) return;\n  \
+    \  if constexpr (dual<M>::value) eval_propagate(t);\n    if constexpr (reversible)\
+    \ eval_toggle(t);\n    std::size_t sz = t->ch[0] ? t->ch[0]->size : 0;\n    if\
+    \ (sz == k) return;\n    bool d = sz < k;\n    if (d) k -= sz + 1;\n    if constexpr\
+    \ (dual<M>::value) eval_propagate(t->ch[d]);\n    if constexpr (reversible) eval_toggle(t->ch[d]);\n\
+    \    sz = t->ch[d]->ch[0] ? t->ch[d]->ch[0]->size : 0;\n    if (sz != k) {\n \
+    \     bool c = sz < k;\n      if (c) k -= sz + 1;\n      splay(t->ch[d]->ch[c],\
+    \ k);\n      c == d ? rot(t, d) : rot(t->ch[d], !d);\n    }\n    rot(t, d);\n\
+    \  }\n  template <class F>\n  void query(std::size_t a, std::size_t b, const F\
+    \ &f) {\n    if (size() == b) {\n      a-- ? (splay(root, a), f(root->ch[1]),\
+    \ pushup(root)) : (f(root), root);\n    } else {\n      splay(root, b);\n    \
+    \  a-- ? (splay(root->ch[0], a), f(root->ch[0]->ch[1]), pushup(root->ch[0]))\n\
+    \          : (f(root->ch[0]), root->ch[0]);\n      pushup(root);\n    }\n  }\n\
+    \  static inline unsigned xor128() {\n    static unsigned x = 123456789, y = 362436069,\
+    \ z = 521288629, w = 88675123;\n    unsigned t = (x ^ (x << 11));\n    return\
+    \ x = y, y = z, z = w, (w = (w ^ (w >> 19)) ^ (t ^ (t >> 8)));\n  }\n\n public:\n\
+    \  SplayTree(Node *t = nullptr) : root(t) {}\n  SplayTree(std::size_t n, T val)\
+    \ { root = build(0, n, val); }\n  SplayTree(const T *bg, const T *ed) { root =\
+    \ build(bg, ed); }\n  SplayTree(const std::vector<T> &ar)\n      : SplayTree(ar.data(),\
     \ ar.data() + ar.size()) {}\n  std::vector<T> dump() {\n    std::vector<T> ret(size());\n\
     \    return dump(ret.begin(), root), ret;\n  }\n  static std::string which_available()\
     \ {\n    std::string ret = \"\";\n    if constexpr (semigroup<M>::value)\n   \
@@ -185,7 +185,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_B.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 23:04:44+09:00'
+  timestamp: '2022-06-20 22:04:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_B.SplayTree.test.cpp
