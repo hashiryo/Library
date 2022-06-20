@@ -55,7 +55,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
@@ -543,7 +543,7 @@ data:
     - icon: ':x:'
       path: test/aoj/DSL_2_A.SegTree.test.cpp
       title: test/aoj/DSL_2_A.SegTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
       title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     - icon: ':heavy_check_mark:'
