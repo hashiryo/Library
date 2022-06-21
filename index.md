@@ -816,6 +816,9 @@ data:
       path: test/yosupo/range_affine_range_sum.WBT.test.cpp
       title: test/yosupo/range_affine_range_sum.WBT.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
+      title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
     - icon: ':heavy_check_mark:'
