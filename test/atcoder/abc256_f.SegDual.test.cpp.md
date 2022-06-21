@@ -112,11 +112,11 @@ data:
     \  using Seg = SegmentTree_Dual<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint\
     \ A[N], D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for\
     \ (int j = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n\
-    \  Seg seg;\n  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--)\
-    \ {\n    int op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint\
-    \ v;\n      cin >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x,\
-    \ v * x * x / 2});\n    } else {\n      cout << seg[x].val << '\\n';\n    }\n\
-    \  }\n  return 0;\n}\n"
+    \  Seg seg(N);\n  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while\
+    \ (Q--) {\n    int op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n    \
+    \  Mint v;\n      cin >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v\
+    \ * x, v * x * x / 2});\n    } else {\n      cout << seg[x].val << '\\n';\n  \
+    \  }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dual.hpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
@@ -128,18 +128,18 @@ data:
     \  using Seg = SegmentTree_Dual<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint\
     \ A[N], D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for\
     \ (int j = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n\
-    \  Seg seg;\n  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--)\
-    \ {\n    int op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint\
-    \ v;\n      cin >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x,\
-    \ v * x * x / 2});\n    } else {\n      cout << seg[x].val << '\\n';\n    }\n\
-    \  }\n  return 0;\n}"
+    \  Seg seg(N);\n  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while\
+    \ (Q--) {\n    int op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n    \
+    \  Mint v;\n      cin >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v\
+    \ * x, v * x * x / 2});\n    } else {\n      cout << seg[x].val << '\\n';\n  \
+    \  }\n  }\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/DataStructure/SegmentTree_Dual.hpp
   isVerificationFile: true
   path: test/atcoder/abc256_f.SegDual.test.cpp
   requiredBy: []
-  timestamp: '2022-06-20 21:11:07+09:00'
+  timestamp: '2022-06-21 13:40:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.SegDual.test.cpp
