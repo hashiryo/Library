@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -87,37 +87,35 @@ data:
     \u6210\u3059\u308BN/2\u6B21\u4EE5\u4E0B\u306E\u6700\u5C0F\u306E\u7DDA\u5F62\u6F38\
     \u5316\u5F0F\u3092\u6C42\u3081\u308B\n *  O(N^2)\n */\n\n// verify\u7528:\n//\
     \ https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c\n\n\
-    // BEGIN CUT HERE\n\n// a[n] = c[0] * a[n-N] + c[1] * a[n-N+1] + ... + c[N-1]\
-    \ * a[n-1]\n// return c\n\ntemplate <class T>\nstd::vector<T> berlekamp_massey(const\
-    \ std::vector<T> &a) {\n  const int N = (int)a.size();\n  std::vector<T> b = {T(-1)},\
-    \ c = {T(-1)};\n  T y = T(1);\n  for (int ed = 1; ed <= N; ed++) {\n    int l\
-    \ = int(c.size()), m = int(b.size()) + 1;\n    T x = 0;\n    for (int i = 0; i\
-    \ < l; i++) x += c[i] * a[ed - l + i];\n    b.emplace_back(0);\n    if (x == T(0))\
-    \ continue;\n    T freq = x / y;\n    if (l < m) {\n      auto tmp = c;\n    \
-    \  c.insert(c.begin(), m - l, T(0));\n      for (int i = 0; i < m; i++) c[m -\
-    \ 1 - i] -= freq * b[m - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n\
-    \      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n\
-    \  }\n  c.pop_back();\n  return c;\n}\n#line 5 \"test/yosupo/find_linear_recurrence.test.cpp\"\
+    // BEGIN CUT HERE\n\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] *\
+    \ a[n-d]\n// return c\ntemplate <class K>\nstd::vector<K> berlekamp_massey(const\
+    \ std::vector<K> &a) {\n  std::size_t n = a.size(), d = 0, m = 0, i, j;\n  std::vector<K>\
+    \ c(n), b(n), tmp;\n  K x = 1, y, coef;\n  const K Z = 0;\n  for (c[0] = b[0]\
+    \ = 1, i = 0, j; i < n; ++i) {\n    for (++m, y = a[i], j = 1; j <= d; ++j) y\
+    \ += c[j] * a[i - j];\n    if (y == Z) continue;\n    for (tmp = c, coef = y /\
+    \ x, j = m; j < n; ++j) c[j] -= coef * b[j - m];\n    if (2 * d > i) continue;\n\
+    \    d = i + 1 - d, b = tmp, x = y, m = 0;\n  }\n  c.resize(d + 1), c.erase(c.begin());\n\
+    \  for (auto &x : c) x = -x;\n  return c;\n}\n#line 5 \"test/yosupo/find_linear_recurrence.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(N);\n\
     \  for (int i = 0; i < N; i++) cin >> a[i];\n  vector<Mint> c = berlekamp_massey(a);\n\
-    \  int d = c.size();\n  cout << d << endl;\n  for (int i = 0; i < d; i++) cout\
-    \ << (i ? \" \" : \"\") << c[d - 1 - i];\n  cout << endl;\n  return 0;\n}\n"
+    \  int d = c.size();\n  cout << d << '\\n';\n  for (int i = 0; i < d; i++) cout\
+    \ << c[i] << \" \\n\"[i == d - 1];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/berlekamp_massey.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(N);\n\
     \  for (int i = 0; i < N; i++) cin >> a[i];\n  vector<Mint> c = berlekamp_massey(a);\n\
-    \  int d = c.size();\n  cout << d << endl;\n  for (int i = 0; i < d; i++) cout\
-    \ << (i ? \" \" : \"\") << c[d - 1 - i];\n  cout << endl;\n  return 0;\n}"
+    \  int d = c.size();\n  cout << d << '\\n';\n  for (int i = 0; i < d; i++) cout\
+    \ << c[i] << \" \\n\"[i == d - 1];\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/berlekamp_massey.hpp
   isVerificationFile: true
   path: test/yosupo/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-21 23:05:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/find_linear_recurrence.test.cpp
 layout: document

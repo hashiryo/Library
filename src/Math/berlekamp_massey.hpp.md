@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Berlekamp-Massey
     links:
@@ -19,39 +19,35 @@ data:
     \u6210\u3059\u308BN/2\u6B21\u4EE5\u4E0B\u306E\u6700\u5C0F\u306E\u7DDA\u5F62\u6F38\
     \u5316\u5F0F\u3092\u6C42\u3081\u308B\n *  O(N^2)\n */\n\n// verify\u7528:\n//\
     \ https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c\n\n\
-    // BEGIN CUT HERE\n\n// a[n] = c[0] * a[n-N] + c[1] * a[n-N+1] + ... + c[N-1]\
-    \ * a[n-1]\n// return c\n\ntemplate <class T>\nstd::vector<T> berlekamp_massey(const\
-    \ std::vector<T> &a) {\n  const int N = (int)a.size();\n  std::vector<T> b = {T(-1)},\
-    \ c = {T(-1)};\n  T y = T(1);\n  for (int ed = 1; ed <= N; ed++) {\n    int l\
-    \ = int(c.size()), m = int(b.size()) + 1;\n    T x = 0;\n    for (int i = 0; i\
-    \ < l; i++) x += c[i] * a[ed - l + i];\n    b.emplace_back(0);\n    if (x == T(0))\
-    \ continue;\n    T freq = x / y;\n    if (l < m) {\n      auto tmp = c;\n    \
-    \  c.insert(c.begin(), m - l, T(0));\n      for (int i = 0; i < m; i++) c[m -\
-    \ 1 - i] -= freq * b[m - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n\
-    \      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n\
-    \  }\n  c.pop_back();\n  return c;\n}\n"
+    // BEGIN CUT HERE\n\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] *\
+    \ a[n-d]\n// return c\ntemplate <class K>\nstd::vector<K> berlekamp_massey(const\
+    \ std::vector<K> &a) {\n  std::size_t n = a.size(), d = 0, m = 0, i, j;\n  std::vector<K>\
+    \ c(n), b(n), tmp;\n  K x = 1, y, coef;\n  const K Z = 0;\n  for (c[0] = b[0]\
+    \ = 1, i = 0, j; i < n; ++i) {\n    for (++m, y = a[i], j = 1; j <= d; ++j) y\
+    \ += c[j] * a[i - j];\n    if (y == Z) continue;\n    for (tmp = c, coef = y /\
+    \ x, j = m; j < n; ++j) c[j] -= coef * b[j - m];\n    if (2 * d > i) continue;\n\
+    \    d = i + 1 - d, b = tmp, x = y, m = 0;\n  }\n  c.resize(d + 1), c.erase(c.begin());\n\
+    \  for (auto &x : c) x = -x;\n  return c;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Berlekamp-Massey\n\
     \ * @category \u6570\u5B66\n * \u6570\u5217\u306E\u6700\u521D\u306EN\u9805\u304B\
     \u3089\u3001\u305D\u306E\u6570\u5217\u3092\u751F\u6210\u3059\u308BN/2\u6B21\u4EE5\
     \u4E0B\u306E\u6700\u5C0F\u306E\u7DDA\u5F62\u6F38\u5316\u5F0F\u3092\u6C42\u3081\
     \u308B\n *  O(N^2)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c\n\
-    \n// BEGIN CUT HERE\n\n// a[n] = c[0] * a[n-N] + c[1] * a[n-N+1] + ... + c[N-1]\
-    \ * a[n-1]\n// return c\n\ntemplate <class T>\nstd::vector<T> berlekamp_massey(const\
-    \ std::vector<T> &a) {\n  const int N = (int)a.size();\n  std::vector<T> b = {T(-1)},\
-    \ c = {T(-1)};\n  T y = T(1);\n  for (int ed = 1; ed <= N; ed++) {\n    int l\
-    \ = int(c.size()), m = int(b.size()) + 1;\n    T x = 0;\n    for (int i = 0; i\
-    \ < l; i++) x += c[i] * a[ed - l + i];\n    b.emplace_back(0);\n    if (x == T(0))\
-    \ continue;\n    T freq = x / y;\n    if (l < m) {\n      auto tmp = c;\n    \
-    \  c.insert(c.begin(), m - l, T(0));\n      for (int i = 0; i < m; i++) c[m -\
-    \ 1 - i] -= freq * b[m - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n\
-    \      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n\
-    \  }\n  c.pop_back();\n  return c;\n}"
+    \n// BEGIN CUT HERE\n\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1]\
+    \ * a[n-d]\n// return c\ntemplate <class K>\nstd::vector<K> berlekamp_massey(const\
+    \ std::vector<K> &a) {\n  std::size_t n = a.size(), d = 0, m = 0, i, j;\n  std::vector<K>\
+    \ c(n), b(n), tmp;\n  K x = 1, y, coef;\n  const K Z = 0;\n  for (c[0] = b[0]\
+    \ = 1, i = 0, j; i < n; ++i) {\n    for (++m, y = a[i], j = 1; j <= d; ++j) y\
+    \ += c[j] * a[i - j];\n    if (y == Z) continue;\n    for (tmp = c, coef = y /\
+    \ x, j = m; j < n; ++j) c[j] -= coef * b[j - m];\n    if (2 * d > i) continue;\n\
+    \    d = i + 1 - d, b = tmp, x = y, m = 0;\n  }\n  c.resize(d + 1), c.erase(c.begin());\n\
+    \  for (auto &x : c) x = -x;\n  return c;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/berlekamp_massey.hpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-21 23:05:48+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/find_linear_recurrence.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp
