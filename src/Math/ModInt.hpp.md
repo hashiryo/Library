@@ -172,6 +172,9 @@ data:
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/sparse_matrix_det.test.cpp
+    title: test/yosupo/sparse_matrix_det.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -403,6 +406,7 @@ data:
   - test/yosupo/inverse_matrix.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/subset_convolution.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/sum_of_floor_of_linear.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp

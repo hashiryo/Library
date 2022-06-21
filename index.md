@@ -199,7 +199,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
     - icon: ':heavy_check_mark:'
@@ -233,6 +233,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/lagrange_interpolation.hpp
       title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
+    - icon: ':heavy_check_mark:'
+      path: src/Math/minimal_polynomial.hpp
+      title: "\u6700\u5C0F\u591A\u9805\u5F0F\u3068\u758E\u884C\u5217"
     - icon: ':heavy_check_mark:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
@@ -839,6 +842,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/shift_of_FPS.test.cpp
       title: test/yosupo/shift_of_FPS.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/sparse_matrix_det.test.cpp
+      title: test/yosupo/sparse_matrix_det.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_of_FPS.test.cpp
       title: test/yosupo/sqrt_of_FPS.test.cpp

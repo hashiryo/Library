@@ -1,14 +1,20 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: src/Math/minimal_polynomial.hpp
+    title: "\u6700\u5C0F\u591A\u9805\u5F0F\u3068\u758E\u884C\u5217"
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/sparse_matrix_det.test.cpp
+    title: test/yosupo/sparse_matrix_det.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Berlekamp-Massey
     links:
@@ -45,10 +51,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/Math/berlekamp_massey.hpp
-  requiredBy: []
+  requiredBy:
+  - src/Math/minimal_polynomial.hpp
   timestamp: '2022-06-21 23:05:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/find_linear_recurrence.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp
 layout: document

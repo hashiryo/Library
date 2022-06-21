@@ -7,18 +7,21 @@ data:
   - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
+  - icon: ':heavy_check_mark:'
+    path: src/Math/minimal_polynomial.hpp
+    title: "\u6700\u5C0F\u591A\u9805\u5F0F\u3068\u758E\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
+    PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
     links:
-    - https://judge.yosupo.jp/problem/find_linear_recurrence
-  bundledCode: "#line 1 \"test/yosupo/find_linear_recurrence.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n#include <bits/stdc++.h>\n\
+    - https://judge.yosupo.jp/problem/sparse_matrix_det
+  bundledCode: "#line 1 \"test/yosupo/sparse_matrix_det.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
     \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
     \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
@@ -95,32 +98,60 @@ data:
     \ += c[j] * a[i - j];\n    if (y == Z) continue;\n    for (tmp = c, coef = y /\
     \ x, j = m; j < n; ++j) c[j] -= coef * b[j - m];\n    if (2 * d > i) continue;\n\
     \    d = i + 1 - d, b = tmp, x = y, m = 0;\n  }\n  c.resize(d + 1), c.erase(c.begin());\n\
-    \  for (auto &x : c) x = -x;\n  return c;\n}\n#line 5 \"test/yosupo/find_linear_recurrence.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(N);\n\
-    \  for (int i = 0; i < N; i++) cin >> a[i];\n  vector<Mint> c = berlekamp_massey(a);\n\
-    \  int d = c.size();\n  cout << d << '\\n';\n  for (int i = 0; i < d; i++) cout\
-    \ << c[i] << \" \\n\"[i == d - 1];\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/berlekamp_massey.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint> a(N);\n\
-    \  for (int i = 0; i < N; i++) cin >> a[i];\n  vector<Mint> c = berlekamp_massey(a);\n\
-    \  int d = c.size();\n  cout << d << '\\n';\n  for (int i = 0; i < d; i++) cout\
-    \ << c[i] << \" \\n\"[i == d - 1];\n  return 0;\n}"
+    \  for (auto &x : c) x = -x;\n  return c;\n}\n#line 4 \"src/Math/minimal_polynomial.hpp\"\
+    \n/**\n * @title \u6700\u5C0F\u591A\u9805\u5F0F\u3068\u758E\u884C\u5217\n * @category\
+    \ \u6570\u5B66\n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n */\n\
+    \n// BEGIN CUT HERE\n\nstd::uint64_t get_rand(std::uint64_t l, std::uint64_t r)\
+    \ {\n  static std::random_device rd;\n  static std::mt19937_64 gen(rd());\n  return\
+    \ std::uniform_int_distribution<std::uint64_t>(l, r)(gen);\n}\n\n// (c[d] * M^d\
+    \ + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\n// return c\ntemplate\
+    \ <class Mat, class Vec>\nauto minimal_polynomial(const Mat &M, Vec b) {\n  using\
+    \ mod_t = std::remove_reference_t<decltype(b[0])>;\n  const std::uint64_t MOD\
+    \ = mod_t::modulo();\n  std::size_t n = M.size(), i, j;\n  assert(n == b.size());\n\
+    \  std::vector<mod_t> a(n), v;\n  for (auto &x : a) x = get_rand(1, MOD - 1);\n\
+    \  mod_t tmp;\n  for (i = (n + 1) << 1; i--; v.push_back(tmp)) {\n    for (tmp\
+    \ = 0, j = n; j--;) tmp += a[j] * b[j];\n    if (i) b = M * b;\n  }\n  auto ret\
+    \ = berlekamp_massey(v);\n  for (auto &x : ret) x = -x;\n  return std::reverse(ret.begin(),\
+    \ ret.end()), ret.push_back(1), ret;\n}\n\ntemplate <class mod_t>\nstruct SparseSquareMatrix\
+    \ {\n  SparseSquareMatrix(std::size_t n_) : n(n_) {}\n  void add_component(std::size_t\
+    \ i, std::size_t j, mod_t val) {\n    dat.emplace_back(i, j, val);\n  }\n  std::vector<mod_t>\
+    \ operator*(const std::vector<mod_t> &vec) const {\n    std::vector<mod_t> ret(n);\n\
+    \    assert(vec.size() == n);\n    for (const auto &[i, j, val] : dat) ret[i]\
+    \ += val * vec[j];\n    return ret;\n  }\n  auto begin() { return dat.begin();\
+    \ }\n  auto end() { return dat.end(); }\n  std::size_t size() const { return n;\
+    \ }\n  mod_t det() const {\n    const std::uint64_t MOD = mod_t::modulo();\n \
+    \   SparseSquareMatrix M(*this);\n    std::vector<mod_t> d(n), b(n);\n    for\
+    \ (auto &x : b) x = get_rand(1, MOD - 1);\n    for (auto &x : d) x = get_rand(1,\
+    \ MOD - 1);\n    for (auto &[i, j, val] : M) val *= d[j];\n    mod_t ret = minimal_polynomial(M,\
+    \ b).front(), tmp = 1;\n    for (const auto &x : d) tmp *= x;\n    if (n & 1)\
+    \ ret = -ret;\n    return ret / tmp;\n  }\n\n private:\n  std::size_t n;\n  std::vector<std::tuple<std::size_t,\
+    \ std::size_t, mod_t>> dat;\n};\n#line 6 \"test/yosupo/sparse_matrix_det.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using Mint = ModInt<998244353>;\n  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint>\
+    \ M(N);\n  for (int i = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b\
+    \ >> c;\n    M.add_component(a, b, c);\n  }\n  cout << M.det() << '\\n';\n  return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include\
+    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/berlekamp_massey.hpp\"\
+    \n#include \"src/Math/minimal_polynomial.hpp\"\nusing namespace std;\n\nsigned\
+    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = ModInt<998244353>;\n\
+    \  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint> M(N);\n  for (int i\
+    \ = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b >> c;\n    M.add_component(a,\
+    \ b, c);\n  }\n  cout << M.det() << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/berlekamp_massey.hpp
+  - src/Math/minimal_polynomial.hpp
   isVerificationFile: true
-  path: test/yosupo/find_linear_recurrence.test.cpp
+  path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-06-21 23:05:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-06-21 23:28:10+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/find_linear_recurrence.test.cpp
+documentation_of: test/yosupo/sparse_matrix_det.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/find_linear_recurrence.test.cpp
-- /verify/test/yosupo/find_linear_recurrence.test.cpp.html
-title: test/yosupo/find_linear_recurrence.test.cpp
+- /verify/test/yosupo/sparse_matrix_det.test.cpp
+- /verify/test/yosupo/sparse_matrix_det.test.cpp.html
+title: test/yosupo/sparse_matrix_det.test.cpp
 ---
