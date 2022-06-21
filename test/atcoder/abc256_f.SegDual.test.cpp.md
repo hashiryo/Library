@@ -104,42 +104,42 @@ data:
     \  }\n  inline void propagate(int k, const E &x) {\n    laz[k].flg ? (M::composition(laz[k].val,\
     \ x), x) : laz[k].val = x;\n    laz[k].flg = true;\n  }\n};\n#line 6 \"test/atcoder/abc256_f.SegDual.test.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
-    \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
-    \ void mapping(T& x, const E& mapp) {\n    x.val += mapp[0] * (x.id + 1) * (x.id\
-    \ + 2) / 2 -\n             mapp[1] * (2 * x.id + 3) / 2 + mapp[2];\n  }\n  static\
-    \ void composition(E& pre, const E& suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
+    \ T {\n    Mint val, coef[2];\n    T() = default;\n    T(Mint id, Mint v)\n  \
+    \      : val(v), coef{(id + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n  };\n  using\
+    \ E = array<Mint, 3>;\n  static void mapping(T &x, const E &mapp) {\n    x.val\
+    \ += mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\n  }\n  static void\
+    \ composition(E &pre, const E &suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
     \ pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Seg = SegmentTree_Dual<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint\
-    \ A[N], D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for\
-    \ (int j = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n\
-    \  Seg seg(N);\n  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while\
-    \ (Q--) {\n    int op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n    \
-    \  Mint v;\n      cin >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v\
-    \ * x, v * x * x / 2});\n    } else {\n      cout << seg[x].val << '\\n';\n  \
-    \  }\n  }\n  return 0;\n}\n"
+    \  int N, Q;\n  cin >> N >> Q;\n  Mint A[N], D[N];\n  for (int i = 0; i < N; i++)\
+    \ cin >> A[i], D[i] = A[i];\n  for (int j = 0; j < 3; j++)\n    for (int i = 1;\
+    \ i < N; i++) D[i] += D[i - 1];\n  SegmentTree_Dual<Mono> seg(N);\n  for (int\
+    \ i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--) {\n    int op, x;\n\
+    \    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint v;\n      cin >> v,\
+    \ v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x, v * x * x / 2});\n \
+    \   } else {\n      cout << seg[x].val << '\\n';\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dual.hpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
-    \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
-    \ void mapping(T& x, const E& mapp) {\n    x.val += mapp[0] * (x.id + 1) * (x.id\
-    \ + 2) / 2 -\n             mapp[1] * (2 * x.id + 3) / 2 + mapp[2];\n  }\n  static\
-    \ void composition(E& pre, const E& suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
+    \ T {\n    Mint val, coef[2];\n    T() = default;\n    T(Mint id, Mint v)\n  \
+    \      : val(v), coef{(id + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n  };\n  using\
+    \ E = array<Mint, 3>;\n  static void mapping(T &x, const E &mapp) {\n    x.val\
+    \ += mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\n  }\n  static void\
+    \ composition(E &pre, const E &suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
     \ pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Seg = SegmentTree_Dual<Mono>;\n  int N, Q;\n  cin >> N >> Q;\n  Mint\
-    \ A[N], D[N];\n  for (int i = 0; i < N; i++) cin >> A[i], D[i] = A[i];\n  for\
-    \ (int j = 0; j < 3; j++)\n    for (int i = 1; i < N; i++) D[i] += D[i - 1];\n\
-    \  Seg seg(N);\n  for (int i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while\
-    \ (Q--) {\n    int op, x;\n    cin >> op >> x, x--;\n    if (op == 1) {\n    \
-    \  Mint v;\n      cin >> v, v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v\
-    \ * x, v * x * x / 2});\n    } else {\n      cout << seg[x].val << '\\n';\n  \
-    \  }\n  }\n  return 0;\n}"
+    \  int N, Q;\n  cin >> N >> Q;\n  Mint A[N], D[N];\n  for (int i = 0; i < N; i++)\
+    \ cin >> A[i], D[i] = A[i];\n  for (int j = 0; j < 3; j++)\n    for (int i = 1;\
+    \ i < N; i++) D[i] += D[i - 1];\n  SegmentTree_Dual<Mono> seg(N);\n  for (int\
+    \ i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--) {\n    int op, x;\n\
+    \    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint v;\n      cin >> v,\
+    \ v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x, v * x * x / 2});\n \
+    \   } else {\n      cout << seg[x].val << '\\n';\n    }\n  }\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/DataStructure/SegmentTree_Dual.hpp
   isVerificationFile: true
   path: test/atcoder/abc256_f.SegDual.test.cpp
   requiredBy: []
-  timestamp: '2022-06-21 13:40:14+09:00'
+  timestamp: '2022-06-21 16:53:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.SegDual.test.cpp

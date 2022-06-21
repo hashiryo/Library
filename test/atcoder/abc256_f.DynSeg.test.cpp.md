@@ -229,43 +229,43 @@ data:
     \ \";\n    else\n      ret += \"\\\"at\\\" \";\n    if constexpr (dual<M>::value)\
     \ ret += \"\\\"apply\\\" \";\n    return ret;\n  }\n};\n#line 8 \"test/atcoder/abc256_f.DynSeg.test.cpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
-    \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
-    \ void mapping(T& x, const E& mapp, int) {\n    x.val += mapp[0] * (x.id + 1)\
-    \ * (x.id + 2) / 2 -\n             mapp[1] * (2 * x.id + 3) / 2 + mapp[2];\n \
-    \ }\n  static void composition(E& pre, const E& suf) {\n    pre[0] += suf[0],\
-    \ pre[1] += suf[1], pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  using Seg = SegmentTree_Dynamic<Mono>;\n  int\
-    \ N, Q;\n  cin >> N >> Q;\n  Mint A[N], D[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> A[i], D[i] = A[i];\n  for (int j = 0; j < 3; j++)\n    for (int i = 1; i\
-    \ < N; i++) D[i] += D[i - 1];\n  Seg seg;\n  for (int i = 0; i < N; i++) seg.set(i,\
-    \ {i, D[i]});\n  while (Q--) {\n    int op, x;\n    cin >> op >> x, x--;\n   \
-    \ if (op == 1) {\n      Mint v;\n      cin >> v, v -= A[x], A[x] += v;\n     \
-    \ seg.apply(x, N, {v, v * x, v * x * x / 2});\n    } else {\n      cout << seg[x].val\
-    \ << '\\n';\n    }\n  }\n  return 0;\n}\n"
+    \ T {\n    Mint val, coef[2];\n    T() = default;\n    T(Mint id, Mint v)\n  \
+    \      : val(v), coef{(id + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n  };\n  using\
+    \ E = array<Mint, 3>;\n  static void mapping(T &x, const E &mapp, int) {\n   \
+    \ x.val += mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\n  }\n  static\
+    \ void composition(E &pre, const E &suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
+    \ pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  int N, Q;\n  cin >> N >> Q;\n  Mint A[N], D[N];\n  for (int i = 0; i < N; i++)\
+    \ cin >> A[i], D[i] = A[i];\n  for (int j = 0; j < 3; j++)\n    for (int i = 1;\
+    \ i < N; i++) D[i] += D[i - 1];\n  SegmentTree_Dynamic<Mono> seg;\n  for (int\
+    \ i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--) {\n    int op, x;\n\
+    \    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint v;\n      cin >> v,\
+    \ v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x, v * x * x / 2});\n \
+    \   } else {\n      cout << seg[x].val << '\\n';\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
     // \u53CC\u5BFE \u306E verify (\u9045\u5EF6\u4F1D\u642C\u3060\u3068TLE)\n\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \nusing namespace std;\n\nusing Mint = ModInt<998244353>;\nstruct Mono {\n  struct\
-    \ T {\n    int id;\n    Mint val;\n  };\n  using E = array<Mint, 3>;\n  static\
-    \ void mapping(T& x, const E& mapp, int) {\n    x.val += mapp[0] * (x.id + 1)\
-    \ * (x.id + 2) / 2 -\n             mapp[1] * (2 * x.id + 3) / 2 + mapp[2];\n \
-    \ }\n  static void composition(E& pre, const E& suf) {\n    pre[0] += suf[0],\
-    \ pre[1] += suf[1], pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  using Seg = SegmentTree_Dynamic<Mono>;\n  int\
-    \ N, Q;\n  cin >> N >> Q;\n  Mint A[N], D[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> A[i], D[i] = A[i];\n  for (int j = 0; j < 3; j++)\n    for (int i = 1; i\
-    \ < N; i++) D[i] += D[i - 1];\n  Seg seg;\n  for (int i = 0; i < N; i++) seg.set(i,\
-    \ {i, D[i]});\n  while (Q--) {\n    int op, x;\n    cin >> op >> x, x--;\n   \
-    \ if (op == 1) {\n      Mint v;\n      cin >> v, v -= A[x], A[x] += v;\n     \
-    \ seg.apply(x, N, {v, v * x, v * x * x / 2});\n    } else {\n      cout << seg[x].val\
-    \ << '\\n';\n    }\n  }\n  return 0;\n}"
+    \ T {\n    Mint val, coef[2];\n    T() = default;\n    T(Mint id, Mint v)\n  \
+    \      : val(v), coef{(id + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n  };\n  using\
+    \ E = array<Mint, 3>;\n  static void mapping(T &x, const E &mapp, int) {\n   \
+    \ x.val += mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\n  }\n  static\
+    \ void composition(E &pre, const E &suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
+    \ pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  int N, Q;\n  cin >> N >> Q;\n  Mint A[N], D[N];\n  for (int i = 0; i < N; i++)\
+    \ cin >> A[i], D[i] = A[i];\n  for (int j = 0; j < 3; j++)\n    for (int i = 1;\
+    \ i < N; i++) D[i] += D[i - 1];\n  SegmentTree_Dynamic<Mono> seg;\n  for (int\
+    \ i = 0; i < N; i++) seg.set(i, {i, D[i]});\n  while (Q--) {\n    int op, x;\n\
+    \    cin >> op >> x, x--;\n    if (op == 1) {\n      Mint v;\n      cin >> v,\
+    \ v -= A[x], A[x] += v;\n      seg.apply(x, N, {v, v * x, v * x * x / 2});\n \
+    \   } else {\n      cout << seg[x].val << '\\n';\n    }\n  }\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/DataStructure/SegmentTree_Dynamic.hpp
   isVerificationFile: true
   path: test/atcoder/abc256_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2022-06-20 22:21:12+09:00'
+  timestamp: '2022-06-21 16:53:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.DynSeg.test.cpp

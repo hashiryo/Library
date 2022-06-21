@@ -78,35 +78,36 @@ data:
     \ && du_>>\n      : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n\
     \    typename M::T val, sum, rsum;\n    typename M::E lazy;\n    bool lazy_flg;\n\
     \  };\n  using Node = Node_D<semigroup<M>::value, dual<M>::value>;\n  using T\
-    \ = typename Node::T;\n  using E = typename Node::E;\n  inline int dir(Node *&t)\
-    \ {\n    if (t->par) {\n      if (t->par->ch[0] == t) return 0;\n      if (t->par->ch[1]\
-    \ == t) return 1;\n    }\n    return 2;\n  }\n  inline void rot(Node *t) {\n \
-    \   Node *p = t->par;\n    int d = dir(t);\n    if ((p->ch[d] = t->ch[!d])) p->ch[d]->par\
-    \ = p;\n    t->ch[!d] = p;\n    if constexpr (semigroup<M>::value) pushup(p),\
-    \ pushup(t);\n    t->par = p->par;\n    if ((d = dir(p)) < 2) {\n      p->par->ch[d]\
-    \ = t;\n      if constexpr (semigroup<M>::value) pushup(t->par);\n    }\n    p->par\
-    \ = t;\n  }\n  inline void splay(Node *t) {\n    eval(t);\n    for (int t_d =\
-    \ dir(t), p_d; t_d < 2; rot(t), t_d = dir(t)) {\n      if ((p_d = dir(t->par))\
-    \ < 2) eval(t->par->par);\n      eval(t->par), eval(t);\n      if (p_d < 2) rot(t_d\
-    \ == p_d ? t->par : t);\n    }\n  }\n  inline void pushup(Node *t) {\n    t->rsum\
-    \ = t->sum = t->val;\n    if (t->ch[0])\n      t->sum = M::op(t->ch[0]->sum, t->sum),\n\
-    \      t->rsum = M::op(t->rsum, t->ch[0]->rsum);\n    if (t->ch[1])\n      t->sum\
-    \ = M::op(t->sum, t->ch[1]->sum),\n      t->rsum = M::op(t->ch[1]->rsum, t->rsum);\n\
-    \  }\n  inline void propagate(Node *t, const E &x) {\n    if (!t) return;\n  \
-    \  t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy = x;\n    M::mapping(t->val,\
-    \ x);\n    if constexpr (semigroup<M>::value)\n      M::mapping(t->sum, x), M::mapping(t->rsum,\
-    \ x);\n    t->lazy_flg = true;\n  }\n  inline void toggle(Node *t) {\n    if (!t)\
-    \ return;\n    std::swap(t->ch[0], t->ch[1]);\n    if constexpr (semigroup<M>::value)\
-    \ std::swap(t->sum, t->rsum);\n    t->rev_flg = !t->rev_flg;\n  }\n  inline void\
-    \ eval(Node *t) {\n    if (t->rev_flg) toggle(t->ch[0]), toggle(t->ch[1]), t->rev_flg\
-    \ = false;\n    if constexpr (dual<M>::value)\n      if (t->lazy_flg)\n      \
-    \  propagate(t->ch[0], t->lazy), propagate(t->ch[1], t->lazy),\n            t->lazy_flg\
-    \ = false;\n  }\n  inline Node *expose(Node *t) {\n    Node *r = nullptr;\n  \
-    \  for (Node *p = t; p; r = p, p = p->par) {\n      splay(p), p->ch[1] = r;\n\
-    \      if constexpr (semigroup<M>::value) pushup(p);\n    }\n    return splay(t),\
-    \ r;\n  }\n  std::vector<Node> ns;\n\n public:\n  LinkCutTree(std::size_t n) :\
-    \ ns(n) {}\n  LinkCutTree(std::size_t n, T val) : ns(n) {\n    for (std::size_t\
-    \ i = n; i--;) ns[i].val = val;\n  }\n  void evert(std::size_t k) { expose(&ns[k]),\
+    \ = typename Node::T;\n  using E = typename Node::E;\n  static inline int dir(Node\
+    \ *&t) {\n    if (t->par) {\n      if (t->par->ch[0] == t) return 0;\n      if\
+    \ (t->par->ch[1] == t) return 1;\n    }\n    return 2;\n  }\n  static inline void\
+    \ rot(Node *t) {\n    Node *p = t->par;\n    int d = dir(t);\n    if ((p->ch[d]\
+    \ = t->ch[!d])) p->ch[d]->par = p;\n    t->ch[!d] = p;\n    if constexpr (semigroup<M>::value)\
+    \ pushup(p), pushup(t);\n    t->par = p->par;\n    if ((d = dir(p)) < 2) {\n \
+    \     p->par->ch[d] = t;\n      if constexpr (semigroup<M>::value) pushup(t->par);\n\
+    \    }\n    p->par = t;\n  }\n  static inline void splay(Node *t) {\n    eval(t);\n\
+    \    for (int t_d = dir(t), p_d; t_d < 2; rot(t), t_d = dir(t)) {\n      if ((p_d\
+    \ = dir(t->par)) < 2) eval(t->par->par);\n      eval(t->par), eval(t);\n     \
+    \ if (p_d < 2) rot(t_d == p_d ? t->par : t);\n    }\n  }\n  static inline void\
+    \ pushup(Node *t) {\n    t->rsum = t->sum = t->val;\n    if (t->ch[0])\n     \
+    \ t->sum = M::op(t->ch[0]->sum, t->sum),\n      t->rsum = M::op(t->rsum, t->ch[0]->rsum);\n\
+    \    if (t->ch[1])\n      t->sum = M::op(t->sum, t->ch[1]->sum),\n      t->rsum\
+    \ = M::op(t->ch[1]->rsum, t->rsum);\n  }\n  static inline void propagate(Node\
+    \ *t, const E &x) {\n    if (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy,\
+    \ x), x) : t->lazy = x;\n    M::mapping(t->val, x);\n    if constexpr (semigroup<M>::value)\n\
+    \      M::mapping(t->sum, x), M::mapping(t->rsum, x);\n    t->lazy_flg = true;\n\
+    \  }\n  static inline void toggle(Node *t) {\n    if (!t) return;\n    std::swap(t->ch[0],\
+    \ t->ch[1]);\n    if constexpr (semigroup<M>::value) std::swap(t->sum, t->rsum);\n\
+    \    t->rev_flg = !t->rev_flg;\n  }\n  static inline void eval(Node *t) {\n  \
+    \  if (t->rev_flg) toggle(t->ch[0]), toggle(t->ch[1]), t->rev_flg = false;\n \
+    \   if constexpr (dual<M>::value)\n      if (t->lazy_flg)\n        propagate(t->ch[0],\
+    \ t->lazy), propagate(t->ch[1], t->lazy),\n            t->lazy_flg = false;\n\
+    \  }\n  static inline Node *expose(Node *t) {\n    Node *r = nullptr;\n    for\
+    \ (Node *p = t; p; r = p, p = p->par) {\n      splay(p), p->ch[1] = r;\n     \
+    \ if constexpr (semigroup<M>::value) pushup(p);\n    }\n    return splay(t), r;\n\
+    \  }\n  std::vector<Node> ns;\n\n public:\n  LinkCutTree(std::size_t n) : ns(n)\
+    \ {}\n  LinkCutTree(std::size_t n, T val) : ns(n) {\n    for (std::size_t i =\
+    \ n; i--;) ns[i].val = val;\n  }\n  void evert(std::size_t k) { expose(&ns[k]),\
     \ toggle(&ns[k]), eval(&ns[k]); }\n  void link(std::size_t c, std::size_t p) {\n\
     \    evert(c), expose(&ns[p]);\n    assert(!ns[c].par);\n    ns[p].ch[1] = &ns[c],\
     \ ns[c].par = &ns[p];\n    if constexpr (semigroup<M>::value) pushup(&ns[p]);\n\
@@ -166,35 +167,36 @@ data:
     \      : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n    typename\
     \ M::T val, sum, rsum;\n    typename M::E lazy;\n    bool lazy_flg;\n  };\n  using\
     \ Node = Node_D<semigroup<M>::value, dual<M>::value>;\n  using T = typename Node::T;\n\
-    \  using E = typename Node::E;\n  inline int dir(Node *&t) {\n    if (t->par)\
+    \  using E = typename Node::E;\n  static inline int dir(Node *&t) {\n    if (t->par)\
     \ {\n      if (t->par->ch[0] == t) return 0;\n      if (t->par->ch[1] == t) return\
-    \ 1;\n    }\n    return 2;\n  }\n  inline void rot(Node *t) {\n    Node *p = t->par;\n\
-    \    int d = dir(t);\n    if ((p->ch[d] = t->ch[!d])) p->ch[d]->par = p;\n   \
-    \ t->ch[!d] = p;\n    if constexpr (semigroup<M>::value) pushup(p), pushup(t);\n\
-    \    t->par = p->par;\n    if ((d = dir(p)) < 2) {\n      p->par->ch[d] = t;\n\
-    \      if constexpr (semigroup<M>::value) pushup(t->par);\n    }\n    p->par =\
-    \ t;\n  }\n  inline void splay(Node *t) {\n    eval(t);\n    for (int t_d = dir(t),\
-    \ p_d; t_d < 2; rot(t), t_d = dir(t)) {\n      if ((p_d = dir(t->par)) < 2) eval(t->par->par);\n\
-    \      eval(t->par), eval(t);\n      if (p_d < 2) rot(t_d == p_d ? t->par : t);\n\
-    \    }\n  }\n  inline void pushup(Node *t) {\n    t->rsum = t->sum = t->val;\n\
-    \    if (t->ch[0])\n      t->sum = M::op(t->ch[0]->sum, t->sum),\n      t->rsum\
-    \ = M::op(t->rsum, t->ch[0]->rsum);\n    if (t->ch[1])\n      t->sum = M::op(t->sum,\
-    \ t->ch[1]->sum),\n      t->rsum = M::op(t->ch[1]->rsum, t->rsum);\n  }\n  inline\
-    \ void propagate(Node *t, const E &x) {\n    if (!t) return;\n    t->lazy_flg\
-    \ ? (M::composition(t->lazy, x), x) : t->lazy = x;\n    M::mapping(t->val, x);\n\
-    \    if constexpr (semigroup<M>::value)\n      M::mapping(t->sum, x), M::mapping(t->rsum,\
-    \ x);\n    t->lazy_flg = true;\n  }\n  inline void toggle(Node *t) {\n    if (!t)\
-    \ return;\n    std::swap(t->ch[0], t->ch[1]);\n    if constexpr (semigroup<M>::value)\
-    \ std::swap(t->sum, t->rsum);\n    t->rev_flg = !t->rev_flg;\n  }\n  inline void\
-    \ eval(Node *t) {\n    if (t->rev_flg) toggle(t->ch[0]), toggle(t->ch[1]), t->rev_flg\
-    \ = false;\n    if constexpr (dual<M>::value)\n      if (t->lazy_flg)\n      \
-    \  propagate(t->ch[0], t->lazy), propagate(t->ch[1], t->lazy),\n            t->lazy_flg\
-    \ = false;\n  }\n  inline Node *expose(Node *t) {\n    Node *r = nullptr;\n  \
-    \  for (Node *p = t; p; r = p, p = p->par) {\n      splay(p), p->ch[1] = r;\n\
-    \      if constexpr (semigroup<M>::value) pushup(p);\n    }\n    return splay(t),\
-    \ r;\n  }\n  std::vector<Node> ns;\n\n public:\n  LinkCutTree(std::size_t n) :\
-    \ ns(n) {}\n  LinkCutTree(std::size_t n, T val) : ns(n) {\n    for (std::size_t\
-    \ i = n; i--;) ns[i].val = val;\n  }\n  void evert(std::size_t k) { expose(&ns[k]),\
+    \ 1;\n    }\n    return 2;\n  }\n  static inline void rot(Node *t) {\n    Node\
+    \ *p = t->par;\n    int d = dir(t);\n    if ((p->ch[d] = t->ch[!d])) p->ch[d]->par\
+    \ = p;\n    t->ch[!d] = p;\n    if constexpr (semigroup<M>::value) pushup(p),\
+    \ pushup(t);\n    t->par = p->par;\n    if ((d = dir(p)) < 2) {\n      p->par->ch[d]\
+    \ = t;\n      if constexpr (semigroup<M>::value) pushup(t->par);\n    }\n    p->par\
+    \ = t;\n  }\n  static inline void splay(Node *t) {\n    eval(t);\n    for (int\
+    \ t_d = dir(t), p_d; t_d < 2; rot(t), t_d = dir(t)) {\n      if ((p_d = dir(t->par))\
+    \ < 2) eval(t->par->par);\n      eval(t->par), eval(t);\n      if (p_d < 2) rot(t_d\
+    \ == p_d ? t->par : t);\n    }\n  }\n  static inline void pushup(Node *t) {\n\
+    \    t->rsum = t->sum = t->val;\n    if (t->ch[0])\n      t->sum = M::op(t->ch[0]->sum,\
+    \ t->sum),\n      t->rsum = M::op(t->rsum, t->ch[0]->rsum);\n    if (t->ch[1])\n\
+    \      t->sum = M::op(t->sum, t->ch[1]->sum),\n      t->rsum = M::op(t->ch[1]->rsum,\
+    \ t->rsum);\n  }\n  static inline void propagate(Node *t, const E &x) {\n    if\
+    \ (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy =\
+    \ x;\n    M::mapping(t->val, x);\n    if constexpr (semigroup<M>::value)\n   \
+    \   M::mapping(t->sum, x), M::mapping(t->rsum, x);\n    t->lazy_flg = true;\n\
+    \  }\n  static inline void toggle(Node *t) {\n    if (!t) return;\n    std::swap(t->ch[0],\
+    \ t->ch[1]);\n    if constexpr (semigroup<M>::value) std::swap(t->sum, t->rsum);\n\
+    \    t->rev_flg = !t->rev_flg;\n  }\n  static inline void eval(Node *t) {\n  \
+    \  if (t->rev_flg) toggle(t->ch[0]), toggle(t->ch[1]), t->rev_flg = false;\n \
+    \   if constexpr (dual<M>::value)\n      if (t->lazy_flg)\n        propagate(t->ch[0],\
+    \ t->lazy), propagate(t->ch[1], t->lazy),\n            t->lazy_flg = false;\n\
+    \  }\n  static inline Node *expose(Node *t) {\n    Node *r = nullptr;\n    for\
+    \ (Node *p = t; p; r = p, p = p->par) {\n      splay(p), p->ch[1] = r;\n     \
+    \ if constexpr (semigroup<M>::value) pushup(p);\n    }\n    return splay(t), r;\n\
+    \  }\n  std::vector<Node> ns;\n\n public:\n  LinkCutTree(std::size_t n) : ns(n)\
+    \ {}\n  LinkCutTree(std::size_t n, T val) : ns(n) {\n    for (std::size_t i =\
+    \ n; i--;) ns[i].val = val;\n  }\n  void evert(std::size_t k) { expose(&ns[k]),\
     \ toggle(&ns[k]), eval(&ns[k]); }\n  void link(std::size_t c, std::size_t p) {\n\
     \    evert(c), expose(&ns[p]);\n    assert(!ns[c].par);\n    ns[p].ch[1] = &ns[c],\
     \ ns[c].par = &ns[p];\n    if constexpr (semigroup<M>::value) pushup(&ns[p]);\n\
@@ -225,7 +227,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree.hpp
   requiredBy: []
-  timestamp: '2022-06-20 22:15:16+09:00'
+  timestamp: '2022-06-21 16:53:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc133_f.Patricia.test.cpp
