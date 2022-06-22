@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/LUDecomposition.hpp
+  - icon: ':x:'
+    path: src/LinearAlgebra/LUDecomposition.hpp
     title: "LU\u5206\u89E3"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
@@ -19,16 +19,14 @@ data:
     - https://judge.yosupo.jp/problem/system_of_linear_equations
   bundledCode: "#line 1 \"test/yosupo/linear_equations.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\n#include <bits/stdc++.h>\n\
-    \n#line 3 \"src/Math/LUDecomposition.hpp\"\n/**\n * @title LU\u5206\u89E3\n *\
-    \ @category \u6570\u5B66\n * bool\u578B\u306E\u5834\u5408\u306Ekernel\u95A2\u6570\
-    \ \u672Averify\n */\n\n// BEGIN CUT HERE\n\ntemplate <class K, std::size_t MAX_ROWS\
-    \ = (1 << 12),\n          std::size_t MAX_COLS = MAX_ROWS>\nclass LUDecomposition\
-    \ {\n  using Mat = std::vector<std::vector<K>>;\n  Mat dat;\n  std::vector<std::size_t>\
-    \ perm, piv;\n  bool sgn;\n  template <class T>\n  inline static constexpr bool\
-    \ IFPV = std::is_floating_point_v<T>;\n  template <class T, typename std::enable_if_t<IFPV<T>>\
-    \ * = nullptr>\n  static bool is_zero(T x) {\n    return std::abs(x) < 1e-8;\n\
-    \  }\n  template <class T, typename std::enable_if_t<!IFPV<T>> * = nullptr>\n\
-    \  static bool is_zero(T x) {\n    return x == T(0);\n  }\n\n public:\n  LUDecomposition(const\
+    \n#line 3 \"src/LinearAlgebra/LUDecomposition.hpp\"\n/**\n * @title LU\u5206\u89E3\
+    \n * @category \u7DDA\u5F62\u4EE3\u6570\n * bool\u578B\u306E\u5834\u5408\u306E\
+    kernel\u95A2\u6570 \u672Averify\n */\n\n// BEGIN CUT HERE\n\ntemplate <class K,\
+    \ std::size_t MAX_ROWS = (1 << 12),\n          std::size_t MAX_COLS = MAX_ROWS>\n\
+    class LUDecomposition {\n  using Mat = std::vector<std::vector<K>>;\n  Mat dat;\n\
+    \  std::vector<std::size_t> perm, piv;\n  bool sgn;\n  static bool is_zero(K x)\
+    \ {\n    if constexpr (std::is_floating_point_v<K>)\n      return std::abs(x)\
+    \ < 1e-8;\n    else\n      return x == T(0);\n  }\n\n public:\n  LUDecomposition(const\
     \ Mat &A) : dat(A), perm(A.size()), sgn(false) {\n    std::size_t rows = A.size(),\
     \ cols = A[0].size();\n    std::iota(perm.begin(), perm.end(), 0);\n    for (std::size_t\
     \ c = 0; c != cols && piv.size() != rows; c++) {\n      auto pos = piv.size();\n\
@@ -186,26 +184,26 @@ data:
     \ {\n      cout << (j ? \" \" : \"\") << ker[i][j];\n    }\n    cout << '\\n';\n\
     \  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n#include <bits/stdc++.h>\n\n#include \"src/Math/LUDecomposition.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n  int N, M;\n\
-    \  cin >> N >> M;\n  vector<vector<Mint>> A(N, vector<Mint>(M));\n  vector<Mint>\
-    \ b(N);\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j < M; j++) cin >>\
-    \ A[i][j];\n  for (int i = 0; i < N; i++) cin >> b[i];\n  LUDecomposition lu(A);\n\
-    \  auto res = lu.linear_equations(b);\n  if (res.empty()) {\n    cout << \"-1\"\
-    \ << '\\n';\n    return 0;\n  }\n  auto ker = lu.kernel();\n  std::cout << ker.size()\
-    \ << \"\\n\";\n  for (int j = 0; j < M; j++) {\n    cout << (j ? \" \" : \"\"\
-    ) << res[j];\n  }\n  cout << '\\n';\n  for (int i = 0; i < ker.size(); i++) {\n\
-    \    for (int j = 0; j < M; j++) {\n      cout << (j ? \" \" : \"\") << ker[i][j];\n\
-    \    }\n    cout << '\\n';\n  }\n  return 0;\n}"
+    \n#include <bits/stdc++.h>\n\n#include \"src/LinearAlgebra/LUDecomposition.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nsigned main() {\n\
+    \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
+    \  int N, M;\n  cin >> N >> M;\n  vector<vector<Mint>> A(N, vector<Mint>(M));\n\
+    \  vector<Mint> b(N);\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j <\
+    \ M; j++) cin >> A[i][j];\n  for (int i = 0; i < N; i++) cin >> b[i];\n  LUDecomposition\
+    \ lu(A);\n  auto res = lu.linear_equations(b);\n  if (res.empty()) {\n    cout\
+    \ << \"-1\" << '\\n';\n    return 0;\n  }\n  auto ker = lu.kernel();\n  std::cout\
+    \ << ker.size() << \"\\n\";\n  for (int j = 0; j < M; j++) {\n    cout << (j ?\
+    \ \" \" : \"\") << res[j];\n  }\n  cout << '\\n';\n  for (int i = 0; i < ker.size();\
+    \ i++) {\n    for (int j = 0; j < M; j++) {\n      cout << (j ? \" \" : \"\")\
+    \ << ker[i][j];\n    }\n    cout << '\\n';\n  }\n  return 0;\n}"
   dependsOn:
-  - src/Math/LUDecomposition.hpp
+  - src/LinearAlgebra/LUDecomposition.hpp
   - src/Math/ModInt.hpp
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2021-11-16 14:41:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-22 15:08:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp
 layout: document

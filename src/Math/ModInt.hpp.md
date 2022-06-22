@@ -27,10 +27,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2397.SparseMat.test.cpp
+    title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':heavy_check_mark:'
@@ -91,9 +94,6 @@ data:
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/characteristic_polynomial.test.cpp
-    title: test/yosupo/characteristic_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -126,19 +126,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
@@ -210,6 +210,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1750.SparseMat.test.cpp
+    title: test/yukicoder/1750.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
@@ -234,7 +237,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/665.test.cpp
     title: test/yukicoder/665.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
   - icon: ':heavy_check_mark:'
@@ -404,7 +407,6 @@ data:
   - test/yosupo/stirling_second.test.cpp
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
-  - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/subset_convolution.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/sum_of_floor_of_linear.test.cpp
@@ -441,6 +443,7 @@ data:
   - test/aoj/2530.test.cpp
   - test/aoj/NTL_2_F.test.cpp
   - test/aoj/NTL_2_C.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
   - test/aoj/DPL_5_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
   - test/aoj/NTL_2_B.test.cpp
@@ -463,6 +466,7 @@ data:
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/980.test.cpp
+  - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/235.HLD.test.cpp

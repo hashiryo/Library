@@ -161,6 +161,23 @@ data:
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
+  - name: src/LinearAlgebra
+    pages:
+    - icon: ':x:'
+      path: src/LinearAlgebra/LUDecomposition.hpp
+      title: "LU\u5206\u89E3"
+    - icon: ':question:'
+      path: src/LinearAlgebra/Matrix.hpp
+      title: "\u884C\u5217"
+    - icon: ':question:'
+      path: src/LinearAlgebra/MinimalPolynomial.hpp
+      title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
+    - icon: ':question:'
+      path: src/LinearAlgebra/SparseSquareMatrix.hpp
+      title: "\u758E\u884C\u5217"
+    - icon: ':warning:'
+      path: src/LinearAlgebra/characteristic_polynomial.hpp
+      title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
   - name: src/Math
     pages:
     - icon: ':heavy_check_mark:'
@@ -175,12 +192,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/LUDecomposition.hpp
-      title: "LU\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/Matrix.hpp
-      title: "\u884C\u5217"
     - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
@@ -202,9 +213,6 @@ data:
     - icon: ':question:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
-    - icon: ':heavy_check_mark:'
-      path: src/Math/characteristic_polynomial.hpp
-      title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
     - icon: ':heavy_check_mark:'
       path: src/Math/differential_equation.hpp
       title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
@@ -233,9 +241,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/lagrange_interpolation.hpp
       title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/minimal_polynomial.hpp
-      title: "\u6700\u5C0F\u591A\u9805\u5F0F\u3068\u758E\u884C\u5217"
     - icon: ':heavy_check_mark:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
@@ -298,7 +303,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1242.test.cpp
       title: test/aoj/1242.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
     - icon: ':heavy_check_mark:'
@@ -355,6 +360,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
+    - icon: ':x:'
+      path: test/aoj/2397.SparseMat.test.cpp
+      title: test/aoj/2397.SparseMat.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
@@ -373,13 +381,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2514.test.cpp
       title: test/aoj/2514.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2559.LCT_Dual.test.cpp
       title: test/aoj/2559.LCT_Dual.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
     - icon: ':heavy_check_mark:'
@@ -692,7 +700,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/characteristic_polynomial.test.cpp
       title: test/yosupo/characteristic_polynomial.test.cpp
     - icon: ':heavy_check_mark:'
@@ -755,7 +763,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/inverse_matrix.test.cpp
       title: test/yosupo/inverse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -767,13 +775,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/line_add_get_min.test.cpp
       title: test/yosupo/line_add_get_min.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/linear_equations.test.cpp
       title: test/yosupo/linear_equations.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/log_of_FPS.test.cpp
       title: test/yosupo/log_of_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/matrix_det.test.cpp
       title: test/yosupo/matrix_det.test.cpp
     - icon: ':heavy_check_mark:'
@@ -913,7 +921,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: test/yukicoder/1750.SparseMat.test.cpp
+      title: test/yukicoder/1750.SparseMat.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
     - icon: ':heavy_check_mark:'
@@ -967,7 +978,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/768.test.cpp
       title: test/yukicoder/768.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/803.test.cpp
       title: test/yukicoder/803.test.cpp
     - icon: ':heavy_check_mark:'

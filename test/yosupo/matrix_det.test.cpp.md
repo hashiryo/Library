@@ -1,41 +1,39 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/LUDecomposition.hpp
+  - icon: ':x:'
+    path: src/LinearAlgebra/LUDecomposition.hpp
     title: "LU\u5206\u89E3"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_det
     links:
     - https://judge.yosupo.jp/problem/matrix_det
   bundledCode: "#line 1 \"test/yosupo/matrix_det.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\
-    \n#include <bits/stdc++.h>\n\n#line 3 \"src/Math/LUDecomposition.hpp\"\n/**\n\
-    \ * @title LU\u5206\u89E3\n * @category \u6570\u5B66\n * bool\u578B\u306E\u5834\
-    \u5408\u306Ekernel\u95A2\u6570 \u672Averify\n */\n\n// BEGIN CUT HERE\n\ntemplate\
-    \ <class K, std::size_t MAX_ROWS = (1 << 12),\n          std::size_t MAX_COLS\
-    \ = MAX_ROWS>\nclass LUDecomposition {\n  using Mat = std::vector<std::vector<K>>;\n\
-    \  Mat dat;\n  std::vector<std::size_t> perm, piv;\n  bool sgn;\n  template <class\
-    \ T>\n  inline static constexpr bool IFPV = std::is_floating_point_v<T>;\n  template\
-    \ <class T, typename std::enable_if_t<IFPV<T>> * = nullptr>\n  static bool is_zero(T\
-    \ x) {\n    return std::abs(x) < 1e-8;\n  }\n  template <class T, typename std::enable_if_t<!IFPV<T>>\
-    \ * = nullptr>\n  static bool is_zero(T x) {\n    return x == T(0);\n  }\n\n public:\n\
-    \  LUDecomposition(const Mat &A) : dat(A), perm(A.size()), sgn(false) {\n    std::size_t\
-    \ rows = A.size(), cols = A[0].size();\n    std::iota(perm.begin(), perm.end(),\
-    \ 0);\n    for (std::size_t c = 0; c != cols && piv.size() != rows; c++) {\n \
-    \     auto pos = piv.size();\n      if constexpr (IFPV<K>) {\n        for (std::size_t\
-    \ r = piv.size() + 1; r < rows; r++)\n          if (std::abs(dat[pos][c]) < std::abs(dat[r][c]))\
-    \ pos = r;\n      } else if (is_zero(dat[pos][c])) {\n        for (std::size_t\
-    \ r = piv.size() + 1; r < rows; r++)\n          if (!is_zero(dat[r][c])) pos =\
-    \ r, r = rows;\n      }\n      if (is_zero(dat[pos][c])) continue;\n      if (pos\
+    \n#include <bits/stdc++.h>\n\n#line 3 \"src/LinearAlgebra/LUDecomposition.hpp\"\
+    \n/**\n * @title LU\u5206\u89E3\n * @category \u7DDA\u5F62\u4EE3\u6570\n * bool\u578B\
+    \u306E\u5834\u5408\u306Ekernel\u95A2\u6570 \u672Averify\n */\n\n// BEGIN CUT HERE\n\
+    \ntemplate <class K, std::size_t MAX_ROWS = (1 << 12),\n          std::size_t\
+    \ MAX_COLS = MAX_ROWS>\nclass LUDecomposition {\n  using Mat = std::vector<std::vector<K>>;\n\
+    \  Mat dat;\n  std::vector<std::size_t> perm, piv;\n  bool sgn;\n  static bool\
+    \ is_zero(K x) {\n    if constexpr (std::is_floating_point_v<K>)\n      return\
+    \ std::abs(x) < 1e-8;\n    else\n      return x == T(0);\n  }\n\n public:\n  LUDecomposition(const\
+    \ Mat &A) : dat(A), perm(A.size()), sgn(false) {\n    std::size_t rows = A.size(),\
+    \ cols = A[0].size();\n    std::iota(perm.begin(), perm.end(), 0);\n    for (std::size_t\
+    \ c = 0; c != cols && piv.size() != rows; c++) {\n      auto pos = piv.size();\n\
+    \      if constexpr (IFPV<K>) {\n        for (std::size_t r = piv.size() + 1;\
+    \ r < rows; r++)\n          if (std::abs(dat[pos][c]) < std::abs(dat[r][c])) pos\
+    \ = r;\n      } else if (is_zero(dat[pos][c])) {\n        for (std::size_t r =\
+    \ piv.size() + 1; r < rows; r++)\n          if (!is_zero(dat[r][c])) pos = r,\
+    \ r = rows;\n      }\n      if (is_zero(dat[pos][c])) continue;\n      if (pos\
     \ != piv.size())\n        sgn = !sgn, std::swap(perm[pos], perm[piv.size()]),\n\
     \        std::swap(dat[pos], dat[piv.size()]);\n      for (std::size_t r = piv.size()\
     \ + 1; r != rows; r++) {\n        auto m = dat[r][c] / dat[piv.size()][c];\n \
@@ -179,20 +177,20 @@ data:
     \ < N; j++) cin >> A[i][j];\n  cout << LUDecomposition(A).det() << endl;\n  return\
     \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\n#include\
-    \ <bits/stdc++.h>\n\n#include \"src/Math/LUDecomposition.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = ModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<vector<Mint>>\
-    \ A(N, vector<Mint>(N));\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j\
-    \ < N; j++) cin >> A[i][j];\n  cout << LUDecomposition(A).det() << endl;\n  return\
-    \ 0;\n}"
+    \ <bits/stdc++.h>\n\n#include \"src/LinearAlgebra/LUDecomposition.hpp\"\n#include\
+    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
+    \  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n  int N;\n  cin\
+    \ >> N;\n  vector<vector<Mint>> A(N, vector<Mint>(N));\n  for (int i = 0; i <\
+    \ N; i++)\n    for (int j = 0; j < N; j++) cin >> A[i][j];\n  cout << LUDecomposition(A).det()\
+    \ << endl;\n  return 0;\n}"
   dependsOn:
-  - src/Math/LUDecomposition.hpp
+  - src/LinearAlgebra/LUDecomposition.hpp
   - src/Math/ModInt.hpp
   isVerificationFile: true
   path: test/yosupo/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2021-11-16 14:41:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-22 15:08:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/matrix_det.test.cpp
 layout: document
