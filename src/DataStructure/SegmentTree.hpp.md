@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_A.SegTree.test.cpp
     title: test/aoj/DSL_2_A.SegTree.test.cpp
   - icon: ':x:'

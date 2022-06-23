@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/MinCostFlow.hpp
+  - icon: ':question:'
+    path: src/Optimization/MinCostFlow.hpp
     title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/assignment
@@ -16,9 +16,9 @@ data:
     - https://judge.yosupo.jp/problem/assignment
   bundledCode: "#line 1 \"test/yosupo/assignment.mcf.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/assignment\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Graph/MinCostFlow.hpp\"\n/**\n * @title \u6700\u5C0F\u8CBB\u7528\u6D41\
-    \n * @category \u30B0\u30E9\u30D5\n *  PrimalDual(\u5BB9\u91CF\u30B9\u30B1\u30FC\
-    \u30EA\u30F3\u30B0)\n *  O(m^2 log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
+    \ 3 \"src/Optimization/MinCostFlow.hpp\"\n/**\n * @title \u6700\u5C0F\u8CBB\u7528\
+    \u6D41\n * @category \u30B0\u30E9\u30D5\n *  PrimalDual(\u5BB9\u91CF\u30B9\u30B1\
+    \u30FC\u30EA\u30F3\u30B0)\n *  O(m^2 log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
     \ */\n// verify\u7528:\n// https://codeforces.com/contest/316/problem/C2\n// (Radix-Heap\u3067\
     \u306A\u3044\u3068TLE\u3057\u305F -> \u5BB9\u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\
     \u30B0\u306A\u3089TLE\u3057\u306A\u3044)\n// https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b\
@@ -135,9 +135,9 @@ data:
     \  for (int i = 0; i < N; i++)\n    for (int j = 0; j < N; j++)\n      if (edges[i][j].flow())\
     \ cout << j << (i == N - 1 ? \"\\n\" : \" \");\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Graph/MinCostFlow.hpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using MCF\
-    \ = MinCostFlow<long long, long long>;\n  int N;\n  cin >> N;\n  MCF graph;\n\
+    \ <bits/stdc++.h>\n#include \"src/Optimization/MinCostFlow.hpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ MCF = MinCostFlow<long long, long long>;\n  int N;\n  cin >> N;\n  MCF graph;\n\
     \  vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n  auto v_left\
     \ = graph.add_vertices(N);\n  auto v_right = graph.add_vertices(N);\n  for (int\
     \ i = 0; i < N; i++) {\n    graph.add_supply(v_left[i], 1);\n    graph.add_demand(v_right[i],\
@@ -147,12 +147,12 @@ data:
     \  for (int i = 0; i < N; i++)\n    for (int j = 0; j < N; j++)\n      if (edges[i][j].flow())\
     \ cout << j << (i == N - 1 ? \"\\n\" : \" \");\n  return 0;\n}\n"
   dependsOn:
-  - src/Graph/MinCostFlow.hpp
+  - src/Optimization/MinCostFlow.hpp
   isVerificationFile: true
   path: test/yosupo/assignment.mcf.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/assignment.mcf.test.cpp
 layout: document

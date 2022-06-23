@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2587.test.cpp
+    title: test/aoj/2587.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc015_d.test.cpp
     title: test/atcoder/agc015_d.test.cpp
   - icon: ':x:'
@@ -105,6 +108,7 @@ data:
   verifiedWith:
   - test/atcoder/arc066_d.test.cpp
   - test/atcoder/agc015_d.test.cpp
+  - test/aoj/2587.test.cpp
 documentation_of: src/Automaton/NFA_to_DFA.hpp
 layout: document
 redirect_from:

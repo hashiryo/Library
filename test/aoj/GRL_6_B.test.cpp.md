@@ -1,8 +1,8 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/MinCostFlow.hpp
+  - icon: ':question:'
+    path: src/Optimization/MinCostFlow.hpp
     title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -15,9 +15,10 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
   bundledCode: "#line 1 \"test/aoj/GRL_6_B.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Graph/MinCostFlow.hpp\"\n/**\n * @title\
-    \ \u6700\u5C0F\u8CBB\u7528\u6D41\n * @category \u30B0\u30E9\u30D5\n *  PrimalDual(\u5BB9\
-    \u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0)\n *  O(m^2 log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Optimization/MinCostFlow.hpp\"\n/**\n\
+    \ * @title \u6700\u5C0F\u8CBB\u7528\u6D41\n * @category \u30B0\u30E9\u30D5\n *\
+    \  PrimalDual(\u5BB9\u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0)\n *  O(m^2 log\
+    \ U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
     \ */\n// verify\u7528:\n// https://codeforces.com/contest/316/problem/C2\n// (Radix-Heap\u3067\
     \u306A\u3044\u3068TLE\u3057\u305F -> \u5BB9\u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\
     \u30B0\u306A\u3089TLE\u3057\u306A\u3044)\n// https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b\
@@ -129,18 +130,18 @@ data:
     \ v, 0, c, d);\n  }\n  auto ans = graph.st_flow_run(0, V - 1, F);\n  cout << (ans.first\
     \ ? ans.second : -1) << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Graph/MinCostFlow.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int V,\
-    \ E, F;\n  cin >> V >> E >> F;\n  MinCostFlow<int, int> graph;\n  graph.add_vertices(V);\n\
+    \n#include <bits/stdc++.h>\n#include \"src/Optimization/MinCostFlow.hpp\"\nusing\
+    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int V, E, F;\n  cin >> V >> E >> F;\n  MinCostFlow<int, int> graph;\n  graph.add_vertices(V);\n\
     \  while (E--) {\n    int u, v, c, d;\n    cin >> u >> v >> c >> d;\n    graph.add_edge(u,\
     \ v, 0, c, d);\n  }\n  auto ans = graph.st_flow_run(0, V - 1, F);\n  cout << (ans.first\
     \ ? ans.second : -1) << endl;\n  return 0;\n}"
   dependsOn:
-  - src/Graph/MinCostFlow.hpp
+  - src/Optimization/MinCostFlow.hpp
   isVerificationFile: true
   path: test/aoj/GRL_6_B.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:49:23+09:00'
+  timestamp: '2022-06-23 16:10:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_B.test.cpp

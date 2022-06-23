@@ -21,21 +21,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.Dinic.test.cpp
     title: test/atcoder/arc107_f.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/119.Dinic.test.cpp
     title: test/yukicoder/119.Dinic.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Dinic
     links:
     - https://misawa.github.io/others/flow/dinic_time_complexity.html
-  bundledCode: "#line 2 \"src/Algorithm/Dinic.hpp\"\n#include <bits/stdc++.h>\n/**\n\
-    \ * @title Dinic\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2\
+  bundledCode: "#line 2 \"src/Optimization/Dinic.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title Dinic\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2\
     \ m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <class flow_t>\nstruct Dinic {\n  Dinic(std::size_t\
     \ _n = 0) : n(_n), m(0), adj(n) {}\n\n protected:\n  struct Edge {\n    int dst,\
@@ -81,10 +81,10 @@ data:
     \    }\n    return ret;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/Algorithm/Dinic.hpp
+  path: src/Optimization/Dinic.hpp
   requiredBy: []
-  timestamp: '2021-12-16 12:41:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.Dinic.test.cpp
   - test/atcoder/arc129_e.Dinic.test.cpp
@@ -94,10 +94,10 @@ data:
   - test/aoj/1615.Dinic.test.cpp
   - test/aoj/2313.Dinic.test.cpp
   - test/aoj/GRL_6_A.Dinic.test.cpp
-documentation_of: src/Algorithm/Dinic.hpp
+documentation_of: src/Optimization/Dinic.hpp
 layout: document
 redirect_from:
-- /library/src/Algorithm/Dinic.hpp
-- /library/src/Algorithm/Dinic.hpp.html
+- /library/src/Optimization/Dinic.hpp
+- /library/src/Optimization/Dinic.hpp.html
 title: Dinic
 ---

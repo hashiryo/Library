@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Algorithm/PushRelabel.hpp
+  - icon: ':question:'
+    path: src/Optimization/MaxFlow.hpp
+    title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
+  - icon: ':question:'
+    path: src/Optimization/PushRelabel.hpp
     title: PushRelabel(Gap)
-  - icon: ':heavy_check_mark:'
-    path: src/Algorithm/monge_mincut.hpp
+  - icon: ':question:'
+    path: src/Optimization/monge_mincut.hpp
     title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
       \u822C\u5316"
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/MaxFlow.hpp
-    title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc107/tasks/arc107_f
@@ -23,8 +23,8 @@ data:
     - https://atcoder.jp/contests/arc107/tasks/arc107_f
   bundledCode: "#line 1 \"test/atcoder/arc107_f.PushRelabel.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/arc107/tasks/arc107_f\"\n\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Algorithm/PushRelabel.hpp\"\n/**\n * @title PushRelabel(Gap)\n *\
-    \ @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 \u221Am)\n */\n\n\
+    #line 3 \"src/Optimization/PushRelabel.hpp\"\n/**\n * @title PushRelabel(Gap)\n\
+    \ * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 \u221Am)\n */\n\n\
     // verify\u7528: https://loj.ac/p/127 (Dinic\u3060\u3068\u843D\u3061\u308B)\n\
     // BEGIN CUT HERE\n\ntemplate <class flow_t, unsigned global_freq = 4, bool use_gap\
     \ = true,\n          bool freeze = false>\nstruct PushRelabel {\n  PushRelabel(std::size_t\
@@ -73,10 +73,10 @@ data:
     \    if constexpr (!freeze) {\n      excess[s] += excess[t], excess[t] = 0;\n\
     \      if constexpr (global_freq != 0) global_relabeling(s);\n      calc(s);\n\
     \      assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n\
-    \  }\n};\n#line 3 \"src/Graph/MaxFlow.hpp\"\n/**\n * @title \u6700\u5927\u6D41\
-    \u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category \u30B0\u30E9\u30D5\
-    \n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * EdgePtr:\n *  change_cap:\
+    \  }\n};\n#line 3 \"src/Optimization/MaxFlow.hpp\"\n/**\n * @title \u6700\u5927\
+    \u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category \u30B0\u30E9\
+    \u30D5\n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\
+    \u30D7\u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * EdgePtr:\n *  change_cap:\
     \ \u5BB9\u91CF\u3092\u5909\u66F4, \u305D\u308C\u306B\u4F34\u3046\u30D5\u30ED\u30FC\
     \u306E\u306F\u307F\u51FA\u3057\u3092\u51FA\u529B\n * \u53CC\u65B9\u5411\u8FBA\u3082\
     \u53EF\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename FlowAlgo>\nstruct MaxFlow\
@@ -114,7 +114,7 @@ data:
     \    static std::queue<int> que;\n    for (que.push(s); !que.empty();) {\n   \
     \   int p = que.front();\n      que.pop(), visited[p] = true;\n      for (const\
     \ auto &e : this->adj[p])\n        if (e.cap && !visited[e.dst]) visited[e.dst]\
-    \ = true, que.push(e.dst);\n    }\n    return visited;\n  }\n};\n#line 3 \"src/Algorithm/monge_mincut.hpp\"\
+    \ = true, que.push(e.dst);\n    }\n    return visited;\n  }\n};\n#line 3 \"src/Optimization/monge_mincut.hpp\"\
     \n/**\n * @title \u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\
     \u306E\u4E00\u822C\u5316\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n\
     \ * @see https://noshi91.hatenablog.com/entry/2021/06/29/044225\n * phi\u95A2\u6570\
@@ -155,9 +155,9 @@ data:
     \  using MF = MaxFlow<PushRelabel<long long>>;\n  auto [ans, x] = monge_mincut<MF>(N,\
     \ 3, theta, phi);\n  cout << -ans << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc107/tasks/arc107_f\"\n\n\
-    #include <bits/stdc++.h>\n#include \"src/Algorithm/PushRelabel.hpp\"\n#include\
-    \ \"src/Graph/MaxFlow.hpp\"\n#include \"src/Algorithm/monge_mincut.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    #include <bits/stdc++.h>\n#include \"src/Optimization/PushRelabel.hpp\"\n#include\
+    \ \"src/Optimization/MaxFlow.hpp\"\n#include \"src/Optimization/monge_mincut.hpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  int N, M;\n  cin >> N >> M;\n  vector<long long> A(N), B(N);\n  for (int i\
     \ = 0; i < N; i++) cin >> A[i];\n  for (int i = 0; i < N; i++) cin >> B[i];\n\
     \  vector<vector<bool>> adj(N, vector<bool>(N, false));\n  for (int i = 0; i <\
@@ -169,14 +169,14 @@ data:
     \  using MF = MaxFlow<PushRelabel<long long>>;\n  auto [ans, x] = monge_mincut<MF>(N,\
     \ 3, theta, phi);\n  cout << -ans << '\\n';\n  return 0;\n}\n"
   dependsOn:
-  - src/Algorithm/PushRelabel.hpp
-  - src/Graph/MaxFlow.hpp
-  - src/Algorithm/monge_mincut.hpp
+  - src/Optimization/PushRelabel.hpp
+  - src/Optimization/MaxFlow.hpp
+  - src/Optimization/monge_mincut.hpp
   isVerificationFile: true
   path: test/atcoder/arc107_f.PushRelabel.test.cpp
   requiredBy: []
-  timestamp: '2021-12-16 17:49:33+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc107_f.PushRelabel.test.cpp
 layout: document

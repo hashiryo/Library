@@ -11,6 +11,9 @@ data:
       \u96C6\u5408\u6F14\u7B97"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2587.test.cpp
+    title: test/aoj/2587.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc117_d.test.cpp
     title: test/atcoder/abc117_d.test.cpp
   - icon: ':x:'
@@ -134,6 +137,7 @@ data:
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/agc015_d.test.cpp
   - test/atcoder/abc129_e.test.cpp
+  - test/aoj/2587.test.cpp
 documentation_of: src/Automaton/dfa_dp.hpp
 layout: document
 redirect_from:

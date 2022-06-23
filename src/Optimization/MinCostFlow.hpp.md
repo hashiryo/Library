@@ -9,22 +9,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_B.test.cpp
     title: test/aoj/GRL_6_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
     links:
     - https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b
     - https://codeforces.com/contest/316/problem/C2
     - https://misawa.github.io/others/flow/library_design.html
-  bundledCode: "#line 2 \"src/Graph/MinCostFlow.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/Optimization/MinCostFlow.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u6700\u5C0F\u8CBB\u7528\u6D41\n * @category \u30B0\u30E9\u30D5\
     \n *  PrimalDual(\u5BB9\u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0)\n *  O(m^2\
     \ log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
@@ -243,19 +243,19 @@ data:
     \ MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;"
   dependsOn: []
   isVerificationFile: false
-  path: src/Graph/MinCostFlow.hpp
+  path: src/Optimization/MinCostFlow.hpp
   requiredBy: []
-  timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/min_cost_b_flow.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
   - test/aoj/GRL_6_B.RadixHeap.test.cpp
   - test/aoj/GRL_6_B.test.cpp
-documentation_of: src/Graph/MinCostFlow.hpp
+documentation_of: src/Optimization/MinCostFlow.hpp
 layout: document
 redirect_from:
-- /library/src/Graph/MinCostFlow.hpp
-- /library/src/Graph/MinCostFlow.hpp.html
+- /library/src/Optimization/MinCostFlow.hpp
+- /library/src/Optimization/MinCostFlow.hpp.html
 title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
 ---

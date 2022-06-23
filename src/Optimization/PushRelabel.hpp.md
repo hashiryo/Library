@@ -18,23 +18,23 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.PushRelabel.test.cpp
     title: test/aoj/GRL_6_A.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc107_f.PushRelabel.test.cpp
     title: test/atcoder/arc107_f.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/119.PushRelabel.test.cpp
     title: test/yukicoder/119.PushRelabel.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: PushRelabel(Gap)
     links:
     - https://loj.ac/p/127
-  bundledCode: "#line 2 \"src/Algorithm/PushRelabel.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/Optimization/PushRelabel.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title PushRelabel(Gap)\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\
     \n *  O(n^2 \u221Am)\n */\n\n// verify\u7528: https://loj.ac/p/127 (Dinic\u3060\
     \u3068\u843D\u3061\u308B)\n// BEGIN CUT HERE\n\ntemplate <class flow_t, unsigned\
@@ -138,10 +138,10 @@ data:
     \  }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: src/Algorithm/PushRelabel.hpp
+  path: src/Optimization/PushRelabel.hpp
   requiredBy: []
-  timestamp: '2021-12-16 14:12:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.PushRelabel.test.cpp
   - test/atcoder/arc129_e.PushRelabel.test.cpp
@@ -151,10 +151,10 @@ data:
   - test/aoj/GRL_6_A.PushRelabel.test.cpp
   - test/aoj/2835.PushRelabel.test.cpp
   - test/aoj/1615.PushRelabel.test.cpp
-documentation_of: src/Algorithm/PushRelabel.hpp
+documentation_of: src/Optimization/PushRelabel.hpp
 layout: document
 redirect_from:
-- /library/src/Algorithm/PushRelabel.hpp
-- /library/src/Algorithm/PushRelabel.hpp.html
+- /library/src/Optimization/PushRelabel.hpp
+- /library/src/Optimization/PushRelabel.hpp.html
 title: PushRelabel(Gap)
 ---

@@ -4,22 +4,8 @@ data:
   - name: src/Algorithm
     pages:
     - icon: ':heavy_check_mark:'
-      path: src/Algorithm/Dinic.hpp
-      title: Dinic
-    - icon: ':heavy_check_mark:'
       path: src/Algorithm/Mo.hpp
       title: Mo
-    - icon: ':heavy_check_mark:'
-      path: src/Algorithm/PushRelabel.hpp
-      title: PushRelabel(Gap)
-    - icon: ':heavy_check_mark:'
-      path: src/Algorithm/min_Lconvex.hpp
-      title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
-        \u30B0\u6CD5)"
-    - icon: ':heavy_check_mark:'
-      path: src/Algorithm/monge_mincut.hpp
-      title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
-        \u822C\u5316"
   - name: src/Automaton
     pages:
     - icon: ':question:'
@@ -149,16 +135,6 @@ data:
       path: src/Graph/MaxClique.hpp
       title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
     - icon: ':heavy_check_mark:'
-      path: src/Graph/MaxFlow.hpp
-      title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
-    - icon: ':heavy_check_mark:'
-      path: src/Graph/MaxFlowLowerBound.hpp
-      title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\
-        \u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
-    - icon: ':heavy_check_mark:'
-      path: src/Graph/MinCostFlow.hpp
-      title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
-    - icon: ':heavy_check_mark:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
     - icon: ':heavy_check_mark:'
@@ -191,7 +167,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
-    - icon: ':warning:'
+    - icon: ':x:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
       title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
   - name: src/Math
@@ -266,6 +242,32 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/totient.hpp
       title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570"
+  - name: src/Optimization
+    pages:
+    - icon: ':question:'
+      path: src/Optimization/Dinic.hpp
+      title: Dinic
+    - icon: ':question:'
+      path: src/Optimization/MaxFlow.hpp
+      title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
+    - icon: ':heavy_check_mark:'
+      path: src/Optimization/MaxFlowLowerBound.hpp
+      title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\
+        \u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
+    - icon: ':question:'
+      path: src/Optimization/MinCostFlow.hpp
+      title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
+    - icon: ':question:'
+      path: src/Optimization/PushRelabel.hpp
+      title: PushRelabel(Gap)
+    - icon: ':heavy_check_mark:'
+      path: src/Optimization/min_Lconvex.hpp
+      title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
+        \u30B0\u6CD5)"
+    - icon: ':question:'
+      path: src/Optimization/monge_mincut.hpp
+      title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
+        \u822C\u5316"
   - name: src/String
     pages:
     - icon: ':heavy_check_mark:'
@@ -403,7 +405,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2559.LCT_Dual.test.cpp
       title: test/aoj/2559.LCT_Dual.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2587.test.cpp
       title: test/aoj/2587.test.cpp
     - icon: ':x:'
@@ -565,7 +567,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_1_A.test.cpp
       title: test/aoj/DSL_1_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_A.SegTree.test.cpp
       title: test/aoj/DSL_2_A.SegTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -717,13 +719,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.Dinic.test.cpp
       title: test/atcoder/arc107_f.Dinic.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc129_e.Dinic.test.cpp
       title: test/atcoder/arc129_e.Dinic.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc129_e.PushRelabel.test.cpp
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/yosupo
@@ -731,7 +733,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/argsort.test.cpp
       title: test/yosupo/argsort.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
     - icon: ':heavy_check_mark:'
@@ -827,7 +829,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/maximum_independent_set.test.cpp
       title: test/yosupo/maximum_independent_set.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/min_cost_b_flow.test.cpp
       title: test/yosupo/min_cost_b_flow.test.cpp
     - icon: ':heavy_check_mark:'
@@ -952,10 +954,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1145.test.cpp
       title: test/yukicoder/1145.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/119.Dinic.test.cpp
       title: test/yukicoder/119.Dinic.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'

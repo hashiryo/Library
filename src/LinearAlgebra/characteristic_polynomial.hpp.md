@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/yosupo/characteristic_polynomial.test.cpp
+    title: test/yosupo/characteristic_polynomial.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
     links: []
@@ -57,8 +60,9 @@ data:
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
   timestamp: '2022-06-22 15:08:37+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/yosupo/characteristic_polynomial.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp
 layout: document
 redirect_from:

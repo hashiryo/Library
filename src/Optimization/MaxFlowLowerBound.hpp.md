@@ -18,7 +18,7 @@ data:
     links:
     - https://snuke.hatenablog.com/entry/2016/07/10/043918
     - https://yukicoder.me/problems/no/459
-  bundledCode: "#line 2 \"src/Graph/MaxFlowLowerBound.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/Optimization/MaxFlowLowerBound.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\
     \u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category \u30B0\u30E9\u30D5\
     \n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\u30D7\
@@ -108,18 +108,18 @@ data:
     \ t, INF) + this->adj[s][re].cap;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: src/Graph/MaxFlowLowerBound.hpp
+  path: src/Optimization/MaxFlowLowerBound.hpp
   requiredBy: []
-  timestamp: '2022-02-07 21:00:37+09:00'
+  timestamp: '2022-06-23 16:10:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1615.Dinic.test.cpp
   - test/aoj/1615.PushRelabel.test.cpp
-documentation_of: src/Graph/MaxFlowLowerBound.hpp
+documentation_of: src/Optimization/MaxFlowLowerBound.hpp
 layout: document
 redirect_from:
-- /library/src/Graph/MaxFlowLowerBound.hpp
-- /library/src/Graph/MaxFlowLowerBound.hpp.html
+- /library/src/Optimization/MaxFlowLowerBound.hpp
+- /library/src/Optimization/MaxFlowLowerBound.hpp.html
 title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\u30F3\
   \u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
 ---

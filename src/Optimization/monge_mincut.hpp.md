@@ -6,31 +6,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.Dinic.test.cpp
     title: test/atcoder/arc107_f.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc107_f.PushRelabel.test.cpp
     title: test/atcoder/arc107_f.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/119.Dinic.test.cpp
     title: test/yukicoder/119.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/119.PushRelabel.test.cpp
     title: test/yukicoder/119.PushRelabel.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\
       \u306E\u4E00\u822C\u5316"
     links:
     - https://atcoder.jp/contests/kupc2019/tasks/kupc2019_h
     - https://noshi91.hatenablog.com/entry/2021/06/29/044225
-  bundledCode: "#line 2 \"src/Algorithm/monge_mincut.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/Optimization/monge_mincut.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\
     \u4E00\u822C\u5316\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n * @see\
     \ https://noshi91.hatenablog.com/entry/2021/06/29/044225\n * phi\u95A2\u6570\u7B49\
@@ -89,10 +89,10 @@ data:
     \ std::make_pair(ret, sol);\n}"
   dependsOn: []
   isVerificationFile: false
-  path: src/Algorithm/monge_mincut.hpp
+  path: src/Optimization/monge_mincut.hpp
   requiredBy: []
-  timestamp: '2021-12-16 17:49:33+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.PushRelabel.test.cpp
   - test/yukicoder/119.Dinic.test.cpp
@@ -100,11 +100,11 @@ data:
   - test/atcoder/arc129_e.Dinic.test.cpp
   - test/atcoder/arc107_f.Dinic.test.cpp
   - test/atcoder/arc107_f.PushRelabel.test.cpp
-documentation_of: src/Algorithm/monge_mincut.hpp
+documentation_of: src/Optimization/monge_mincut.hpp
 layout: document
 redirect_from:
-- /library/src/Algorithm/monge_mincut.hpp
-- /library/src/Algorithm/monge_mincut.hpp.html
+- /library/src/Optimization/monge_mincut.hpp
+- /library/src/Optimization/monge_mincut.hpp.html
 title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\u822C\
   \u5316"
 ---

@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Algorithm/Dinic.hpp
+  - icon: ':question:'
+    path: src/Optimization/Dinic.hpp
     title: Dinic
-  - icon: ':heavy_check_mark:'
-    path: src/Algorithm/monge_mincut.hpp
+  - icon: ':question:'
+    path: src/Optimization/MaxFlow.hpp
+    title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
+  - icon: ':question:'
+    path: src/Optimization/monge_mincut.hpp
     title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
       \u822C\u5316"
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/MaxFlow.hpp
-    title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc129/tasks/arc129_e
@@ -23,7 +23,7 @@ data:
     - https://atcoder.jp/contests/arc129/tasks/arc129_e
   bundledCode: "#line 1 \"test/atcoder/arc129_e.Dinic.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/arc129/tasks/arc129_e\"\n\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Algorithm/Dinic.hpp\"\n/**\n * @title Dinic\n * @category \u30A2\
+    #line 3 \"src/Optimization/Dinic.hpp\"\n/**\n * @title Dinic\n * @category \u30A2\
     \u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <class flow_t>\nstruct Dinic {\n  Dinic(std::size_t\
     \ _n = 0) : n(_n), m(0), adj(n) {}\n\n protected:\n  struct Edge {\n    int dst,\
@@ -44,20 +44,20 @@ data:
     \ <= t && t < n);\n    assert(s != t);\n    flow_t ret = 0;\n    for (flow_t f;\
     \ ret < flow_lim; ret += f) {\n      if (levelize(s, t), level[t] == -1) break;\n\
     \      iter.assign(n, 0);\n      if (!(f = dfs(t, s, flow_lim - ret))) break;\n\
-    \    }\n    return ret;\n  }\n};\n#line 3 \"src/Graph/MaxFlow.hpp\"\n/**\n * @title\
-    \ \u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category\
-    \ \u30B0\u30E9\u30D5\n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306F\
-    class\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * EdgePtr:\n\
-    \ *  change_cap: \u5BB9\u91CF\u3092\u5909\u66F4, \u305D\u308C\u306B\u4F34\u3046\
-    \u30D5\u30ED\u30FC\u306E\u306F\u307F\u51FA\u3057\u3092\u51FA\u529B\n * \u53CC\u65B9\
-    \u5411\u8FBA\u3082\u53EF\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename FlowAlgo>\n\
-    struct MaxFlow : public FlowAlgo {\n  using FlowAlgo::FlowAlgo;\n  using Edge\
-    \ = typename FlowAlgo::Edge;\n  using flow_t = decltype(Edge::cap);\n  int add_vertex()\
-    \ { return this->adj.resize(++this->n), this->n - 1; }\n  std::vector<int> add_vertices(const\
-    \ std::size_t size) {\n    std::vector<int> ret(size);\n    std::iota(ret.begin(),\
-    \ ret.end(), this->n);\n    return this->adj.resize(this->n += size), ret;\n \
-    \ }\n  struct EdgePtr {\n    friend class MaxFlow;\n    MaxFlow *instance;\n \
-    \   int v, e;\n    bool bidir;\n    Edge &edge() { return instance->adj[v][e];\
+    \    }\n    return ret;\n  }\n};\n#line 3 \"src/Optimization/MaxFlow.hpp\"\n/**\n\
+    \ * @title \u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n\
+    \ * @category \u30B0\u30E9\u30D5\n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49\
+    )\u306Fclass\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\
+    \n * EdgePtr:\n *  change_cap: \u5BB9\u91CF\u3092\u5909\u66F4, \u305D\u308C\u306B\
+    \u4F34\u3046\u30D5\u30ED\u30FC\u306E\u306F\u307F\u51FA\u3057\u3092\u51FA\u529B\
+    \n * \u53CC\u65B9\u5411\u8FBA\u3082\u53EF\n */\n\n// BEGIN CUT HERE\n\ntemplate\
+    \ <typename FlowAlgo>\nstruct MaxFlow : public FlowAlgo {\n  using FlowAlgo::FlowAlgo;\n\
+    \  using Edge = typename FlowAlgo::Edge;\n  using flow_t = decltype(Edge::cap);\n\
+    \  int add_vertex() { return this->adj.resize(++this->n), this->n - 1; }\n  std::vector<int>\
+    \ add_vertices(const std::size_t size) {\n    std::vector<int> ret(size);\n  \
+    \  std::iota(ret.begin(), ret.end(), this->n);\n    return this->adj.resize(this->n\
+    \ += size), ret;\n  }\n  struct EdgePtr {\n    friend class MaxFlow;\n    MaxFlow\
+    \ *instance;\n    int v, e;\n    bool bidir;\n    Edge &edge() { return instance->adj[v][e];\
     \ }\n    Edge &rev() {\n      Edge &e = edge();\n      return instance->adj[e.dst][e.rev];\n\
     \    }\n    EdgePtr(MaxFlow *instance, int v, int e, bool d)\n        : instance(instance),\
     \ v(v), e(e), bidir(d) {}\n\n   public:\n    EdgePtr() = default;\n    int src()\
@@ -85,7 +85,7 @@ data:
     \    static std::queue<int> que;\n    for (que.push(s); !que.empty();) {\n   \
     \   int p = que.front();\n      que.pop(), visited[p] = true;\n      for (const\
     \ auto &e : this->adj[p])\n        if (e.cap && !visited[e.dst]) visited[e.dst]\
-    \ = true, que.push(e.dst);\n    }\n    return visited;\n  }\n};\n#line 3 \"src/Algorithm/monge_mincut.hpp\"\
+    \ = true, que.push(e.dst);\n    }\n    return visited;\n  }\n};\n#line 3 \"src/Optimization/monge_mincut.hpp\"\
     \n/**\n * @title \u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\
     \u306E\u4E00\u822C\u5316\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n\
     \ * @see https://noshi91.hatenablog.com/entry/2021/06/29/044225\n * phi\u95A2\u6570\
@@ -125,26 +125,27 @@ data:
     \ [ans, x] = monge_mincut<MF>(N, M, theta, phi);\n  cout << ans << '\\n';\n  return\
     \ 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc129/tasks/arc129_e\"\n\n\
-    #include <bits/stdc++.h>\n#include \"src/Algorithm/Dinic.hpp\"\n#include \"src/Graph/MaxFlow.hpp\"\
-    \n#include \"src/Algorithm/monge_mincut.hpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using MF = MaxFlow<Dinic<long\
-    \ long>>;\n  int N, M;\n  cin >> N >> M;\n  vector<vector<long long>> A(N, vector<long\
-    \ long>(M)),\n      C(N, vector<long long>(M));\n  for (int i = 0; i < N; i++)\n\
-    \    for (int k = 0; k < M; k++) cin >> A[i][k] >> C[i][k];\n  vector<vector<long\
-    \ long>> W(N, vector<long long>(N));\n  for (int i = 0; i < N; i++)\n    for (int\
-    \ j = i + 1; j < N; j++) cin >> W[i][j];\n  auto theta = [&](int i, int xi) {\
-    \ return C[i][xi]; };\n  auto phi = [&](int i, int j, int xi, int xj) {\n    return\
-    \ abs(A[i][xi] - A[j][xj]) * W[i][j];\n  };\n  auto [ans, x] = monge_mincut<MF>(N,\
-    \ M, theta, phi);\n  cout << ans << '\\n';\n  return 0;\n}"
+    #include <bits/stdc++.h>\n#include \"src/Optimization/Dinic.hpp\"\n#include \"\
+    src/Optimization/MaxFlow.hpp\"\n#include \"src/Optimization/monge_mincut.hpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using MF = MaxFlow<Dinic<long long>>;\n  int N, M;\n  cin >> N >> M;\n  vector<vector<long\
+    \ long>> A(N, vector<long long>(M)),\n      C(N, vector<long long>(M));\n  for\
+    \ (int i = 0; i < N; i++)\n    for (int k = 0; k < M; k++) cin >> A[i][k] >> C[i][k];\n\
+    \  vector<vector<long long>> W(N, vector<long long>(N));\n  for (int i = 0; i\
+    \ < N; i++)\n    for (int j = i + 1; j < N; j++) cin >> W[i][j];\n  auto theta\
+    \ = [&](int i, int xi) { return C[i][xi]; };\n  auto phi = [&](int i, int j, int\
+    \ xi, int xj) {\n    return abs(A[i][xi] - A[j][xj]) * W[i][j];\n  };\n  auto\
+    \ [ans, x] = monge_mincut<MF>(N, M, theta, phi);\n  cout << ans << '\\n';\n  return\
+    \ 0;\n}"
   dependsOn:
-  - src/Algorithm/Dinic.hpp
-  - src/Graph/MaxFlow.hpp
-  - src/Algorithm/monge_mincut.hpp
+  - src/Optimization/Dinic.hpp
+  - src/Optimization/MaxFlow.hpp
+  - src/Optimization/monge_mincut.hpp
   isVerificationFile: true
   path: test/atcoder/arc129_e.Dinic.test.cpp
   requiredBy: []
-  timestamp: '2021-12-16 17:49:33+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc129_e.Dinic.test.cpp
 layout: document

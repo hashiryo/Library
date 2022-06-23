@@ -40,7 +40,7 @@ data:
     \ MAX_COLS = MAX_ROWS>\nclass LUDecomposition {\n  using Mat = std::vector<std::vector<K>>;\n\
     \  Mat dat;\n  std::vector<std::size_t> perm, piv;\n  bool sgn;\n  static bool\
     \ is_zero(K x) {\n    if constexpr (std::is_floating_point_v<K>)\n      return\
-    \ std::abs(x) < 1e-8;\n    else\n      return x == T(0);\n  }\n\n public:\n  LUDecomposition(const\
+    \ std::abs(x) < 1e-8;\n    else\n      return x == K(0);\n  }\n\n public:\n  LUDecomposition(const\
     \ Mat &A) : dat(A), perm(A.size()), sgn(false) {\n    std::size_t rows = A.size(),\
     \ cols = A[0].size();\n    std::iota(perm.begin(), perm.end(), 0);\n    for (std::size_t\
     \ c = 0; c != cols && piv.size() != rows; c++) {\n      auto pos = piv.size();\n\
@@ -129,7 +129,7 @@ data:
     \ MAX_ROWS = (1 << 12),\n          std::size_t MAX_COLS = MAX_ROWS>\nclass LUDecomposition\
     \ {\n  using Mat = std::vector<std::vector<K>>;\n  Mat dat;\n  std::vector<std::size_t>\
     \ perm, piv;\n  bool sgn;\n  static bool is_zero(K x) {\n    if constexpr (std::is_floating_point_v<K>)\n\
-    \      return std::abs(x) < 1e-8;\n    else\n      return x == T(0);\n  }\n\n\
+    \      return std::abs(x) < 1e-8;\n    else\n      return x == K(0);\n  }\n\n\
     \ public:\n  LUDecomposition(const Mat &A) : dat(A), perm(A.size()), sgn(false)\
     \ {\n    std::size_t rows = A.size(), cols = A[0].size();\n    std::iota(perm.begin(),\
     \ perm.end(), 0);\n    for (std::size_t c = 0; c != cols && piv.size() != rows;\
@@ -216,7 +216,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/LUDecomposition.hpp
   requiredBy: []
-  timestamp: '2022-06-22 15:08:37+09:00'
+  timestamp: '2022-06-23 16:17:03+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/184.test.cpp

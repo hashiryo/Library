@@ -102,6 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/characteristic_polynomial.test.cpp
+    title: test/yosupo/characteristic_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
@@ -455,6 +458,7 @@ data:
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/partition.test.cpp
+  - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp

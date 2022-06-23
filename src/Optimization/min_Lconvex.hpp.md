@@ -14,7 +14,7 @@ data:
       \u30F3\u30B0\u6CD5)"
     links:
     - https://opt-cp.com/agc018c-lconvex/#toc11
-  bundledCode: "#line 2 \"src/Algorithm/min_Lconvex.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/Optimization/min_Lconvex.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
     \u30B0\u6CD5)\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(2^n n^2\
     \ log (K/n)) * EVAL\n * @see https://opt-cp.com/agc018c-lconvex/#toc11\n */\n\n\
@@ -39,17 +39,17 @@ data:
     \  }\n  return {f1, std::move(x)};\n}"
   dependsOn: []
   isVerificationFile: false
-  path: src/Algorithm/min_Lconvex.hpp
+  path: src/Optimization/min_Lconvex.hpp
   requiredBy: []
-  timestamp: '2021-12-05 20:13:48+09:00'
+  timestamp: '2022-06-23 16:10:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/agc018_c.test.cpp
-documentation_of: src/Algorithm/min_Lconvex.hpp
+documentation_of: src/Optimization/min_Lconvex.hpp
 layout: document
 redirect_from:
-- /library/src/Algorithm/min_Lconvex.hpp
-- /library/src/Algorithm/min_Lconvex.hpp.html
+- /library/src/Optimization/min_Lconvex.hpp
+- /library/src/Optimization/min_Lconvex.hpp.html
 title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\
   \u6CD5)"
 ---

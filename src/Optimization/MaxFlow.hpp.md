@@ -30,30 +30,30 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.Dinic.test.cpp
     title: test/atcoder/arc107_f.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc107_f.PushRelabel.test.cpp
     title: test/atcoder/arc107_f.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/119.Dinic.test.cpp
     title: test/yukicoder/119.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/119.PushRelabel.test.cpp
     title: test/yukicoder/119.PushRelabel.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
     links: []
-  bundledCode: "#line 2 \"src/Graph/MaxFlow.hpp\"\n#include <bits/stdc++.h>\n/**\n\
-    \ * @title \u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n\
-    \ * @category \u30B0\u30E9\u30D5\n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49\
+  bundledCode: "#line 2 \"src/Optimization/MaxFlow.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title \u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\
+    \n * @category \u30B0\u30E9\u30D5\n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49\
     )\u306Fclass\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\
     \n * EdgePtr:\n *  change_cap: \u5BB9\u91CF\u3092\u5909\u66F4, \u305D\u308C\u306B\
     \u4F34\u3046\u30D5\u30ED\u30FC\u306E\u306F\u307F\u51FA\u3057\u3092\u51FA\u529B\
@@ -137,10 +137,10 @@ data:
     \ = true, que.push(e.dst);\n    }\n    return visited;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/Graph/MaxFlow.hpp
+  path: src/Optimization/MaxFlow.hpp
   requiredBy: []
-  timestamp: '2021-12-16 12:41:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.PushRelabel.test.cpp
   - test/yukicoder/119.Dinic.test.cpp
@@ -156,10 +156,10 @@ data:
   - test/aoj/2835.PushRelabel.test.cpp
   - test/aoj/2313.Dinic.test.cpp
   - test/aoj/GRL_6_A.Dinic.test.cpp
-documentation_of: src/Graph/MaxFlow.hpp
+documentation_of: src/Optimization/MaxFlow.hpp
 layout: document
 redirect_from:
-- /library/src/Graph/MaxFlow.hpp
-- /library/src/Graph/MaxFlow.hpp.html
+- /library/src/Optimization/MaxFlow.hpp
+- /library/src/Optimization/MaxFlow.hpp.html
 title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
 ---

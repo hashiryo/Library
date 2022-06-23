@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/MinCostFlow.hpp
+  - icon: ':question:'
+    path: src/Optimization/MinCostFlow.hpp
     title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/min_cost_b_flow
@@ -16,9 +16,9 @@ data:
     - https://judge.yosupo.jp/problem/min_cost_b_flow
   bundledCode: "#line 1 \"test/yosupo/min_cost_b_flow.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Graph/MinCostFlow.hpp\"\n/**\n * @title \u6700\u5C0F\u8CBB\u7528\
-    \u6D41\n * @category \u30B0\u30E9\u30D5\n *  PrimalDual(\u5BB9\u91CF\u30B9\u30B1\
-    \u30FC\u30EA\u30F3\u30B0)\n *  O(m^2 log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
+    #line 3 \"src/Optimization/MinCostFlow.hpp\"\n/**\n * @title \u6700\u5C0F\u8CBB\
+    \u7528\u6D41\n * @category \u30B0\u30E9\u30D5\n *  PrimalDual(\u5BB9\u91CF\u30B9\
+    \u30B1\u30FC\u30EA\u30F3\u30B0)\n *  O(m^2 log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
     \ */\n// verify\u7528:\n// https://codeforces.com/contest/316/problem/C2\n// (Radix-Heap\u3067\
     \u306A\u3044\u3068TLE\u3057\u305F -> \u5BB9\u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\
     \u30B0\u306A\u3089TLE\u3057\u306A\u3044)\n// https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b\
@@ -125,27 +125,10 @@ data:
     \ std::vector<std::pair<cost_t, int>>,\n              std::greater<>>>\nusing\
     \ MaxGainFlow = MinCostFlow<flow_t, cost_t, Heap, -1>;\n#line 4 \"test/yosupo/min_cost_b_flow.test.cpp\"\
     \nusing namespace std;\n\nostream &operator<<(ostream &stream, const __int128_t\
-    \ &v) {\n  if (v == 0) stream << \"0\";\n  __int128_t tmp;\n  if (v < 0) {\n \
-    \   stream << \"-\";\n    tmp = -v;\n  } else {\n    tmp = v;\n  }\n  std::string\
-    \ s;\n  while (tmp) {\n    s += '0' + (tmp % 10);\n    tmp /= 10;\n  }\n  std::reverse(s.begin(),\
-    \ s.end());\n  stream << s;\n  return stream;\n}\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  using MCF = MinCostFlow<long long, long long>;\n\
-    \  MCF graph;\n  vector<MCF::EdgePtr> edges;\n  int N, M;\n  cin >> N >> M;\n\
-    \  graph.add_vertices(N);\n  for (int i = 0; i < N; i++) {\n    long long b;\n\
-    \    cin >> b;\n    graph.add_supply(i, b);\n  }\n  for (int i = 0; i < M; i++)\
-    \ {\n    long long s, t, l, u, c;\n    cin >> s >> t >> l >> u >> c;\n    edges.emplace_back(graph.add_edge(s,\
-    \ t, l, u, c));\n  }\n  bool isok = graph.flow_run().first;\n  if (isok) {\n \
-    \   cout << graph.get_result_value<__int128_t>() << endl;\n    auto potential\
-    \ = graph.get_potential();\n    for (auto p : potential) cout << p << endl;\n\
-    \    for (auto &e : edges) cout << e.flow() << endl;\n  } else {\n    cout <<\
-    \ \"infeasible\" << endl;\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Graph/MinCostFlow.hpp\"\nusing namespace std;\n\
-    \nostream &operator<<(ostream &stream, const __int128_t &v) {\n  if (v == 0) stream\
-    \ << \"0\";\n  __int128_t tmp;\n  if (v < 0) {\n    stream << \"-\";\n    tmp\
-    \ = -v;\n  } else {\n    tmp = v;\n  }\n  std::string s;\n  while (tmp) {\n  \
-    \  s += '0' + (tmp % 10);\n    tmp /= 10;\n  }\n  std::reverse(s.begin(), s.end());\n\
-    \  stream << s;\n  return stream;\n}\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \ &v) {\n  if (v == 0) stream << \"0\";\n  __int128_t tmp;\n  if (v < 0)\n   \
+    \ stream << \"-\", tmp = -v;\n  else\n    tmp = v;\n  std::string s;\n  while\
+    \ (tmp) s += '0' + (tmp % 10), tmp /= 10;\n  return std::reverse(s.begin(), s.end()),\
+    \ stream << s;\n}\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using MCF = MinCostFlow<long long, long long>;\n  MCF graph;\n  vector<MCF::EdgePtr>\
     \ edges;\n  int N, M;\n  cin >> N >> M;\n  graph.add_vertices(N);\n  for (int\
     \ i = 0; i < N; i++) {\n    long long b;\n    cin >> b;\n    graph.add_supply(i,\
@@ -156,13 +139,30 @@ data:
     \    for (auto p : potential) cout << p << endl;\n    for (auto &e : edges) cout\
     \ << e.flow() << endl;\n  } else {\n    cout << \"infeasible\" << endl;\n  }\n\
     \  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#include\
+    \ <bits/stdc++.h>\n#include \"src/Optimization/MinCostFlow.hpp\"\nusing namespace\
+    \ std;\n\nostream &operator<<(ostream &stream, const __int128_t &v) {\n  if (v\
+    \ == 0) stream << \"0\";\n  __int128_t tmp;\n  if (v < 0)\n    stream << \"-\"\
+    , tmp = -v;\n  else\n    tmp = v;\n  std::string s;\n  while (tmp) s += '0' +\
+    \ (tmp % 10), tmp /= 10;\n  return std::reverse(s.begin(), s.end()), stream <<\
+    \ s;\n}\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ MCF = MinCostFlow<long long, long long>;\n  MCF graph;\n  vector<MCF::EdgePtr>\
+    \ edges;\n  int N, M;\n  cin >> N >> M;\n  graph.add_vertices(N);\n  for (int\
+    \ i = 0; i < N; i++) {\n    long long b;\n    cin >> b;\n    graph.add_supply(i,\
+    \ b);\n  }\n  for (int i = 0; i < M; i++) {\n    long long s, t, l, u, c;\n  \
+    \  cin >> s >> t >> l >> u >> c;\n    edges.emplace_back(graph.add_edge(s, t,\
+    \ l, u, c));\n  }\n  bool isok = graph.flow_run().first;\n  if (isok) {\n    cout\
+    \ << graph.get_result_value<__int128_t>() << endl;\n    auto potential = graph.get_potential();\n\
+    \    for (auto p : potential) cout << p << endl;\n    for (auto &e : edges) cout\
+    \ << e.flow() << endl;\n  } else {\n    cout << \"infeasible\" << endl;\n  }\n\
+    \  return 0;\n}\n"
   dependsOn:
-  - src/Graph/MinCostFlow.hpp
+  - src/Optimization/MinCostFlow.hpp
   isVerificationFile: true
   path: test/yosupo/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2020-10-24 17:49:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-06-23 16:10:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/min_cost_b_flow.test.cpp
 layout: document
