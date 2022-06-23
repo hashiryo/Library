@@ -75,7 +75,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SparseTable.hpp
       title: "Sparse-Table(\u533A\u9593min)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SplayTree.hpp
       title: "Splay\u6728"
     - icon: ':heavy_check_mark:'
@@ -155,16 +155,16 @@ data:
         \u7D1A\u6570)"
   - name: src/LinearAlgebra
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/LUDecomposition.hpp
       title: "LU\u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
       title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -202,7 +202,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
     - icon: ':heavy_check_mark:'
@@ -244,27 +244,27 @@ data:
       title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570"
   - name: src/Optimization
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlowLowerBound.hpp
       title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\
         \u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow_Dinic.hpp
       title: "\u6700\u5927\u6D41 Dinic"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow_PushRelabel.hpp
       title: "\u6700\u5927\u6D41 PushRelabel(Gap)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MinCostFlow.hpp
       title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/min_Lconvex.hpp
       title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
         \u30B0\u6CD5)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
@@ -321,13 +321,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1242.test.cpp
       title: test/aoj/1242.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1508.SplayTree.test.cpp
       title: test/aoj/1508.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -399,7 +399,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2514.test.cpp
       title: test/aoj/2514.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
     - icon: ':heavy_check_mark:'
@@ -408,7 +408,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2587.test.cpp
       title: test/aoj/2587.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
     - icon: ':heavy_check_mark:'
@@ -609,13 +609,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.SplayTree.test.cpp
       title: test/aoj/ITP2_2_D.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.SplayTree.test.cpp
       title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -763,7 +763,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
       title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -802,7 +802,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inverse_matrix.test.cpp
       title: test/yosupo/inverse_matrix.test.cpp
     - icon: ':heavy_check_mark:'
@@ -814,19 +814,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/line_add_get_min.test.cpp
       title: test/yosupo/line_add_get_min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/linear_equations.test.cpp
       title: test/yosupo/linear_equations.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/log_of_FPS.test.cpp
       title: test/yosupo/log_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/matrix_det.test.cpp
       title: test/yosupo/matrix_det.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/maximum_independent_set.test.cpp
       title: test/yosupo/maximum_independent_set.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/min_cost_b_flow.test.cpp
       title: test/yosupo/min_cost_b_flow.test.cpp
     - icon: ':heavy_check_mark:'
@@ -889,7 +889,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/shift_of_FPS.test.cpp
       title: test/yosupo/shift_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sparse_matrix_det.test.cpp
       title: test/yosupo/sparse_matrix_det.test.cpp
     - icon: ':heavy_check_mark:'
@@ -951,22 +951,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1145.test.cpp
       title: test/yukicoder/1145.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.Dinic.test.cpp
       title: test/yukicoder/119.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.test.cpp
       title: test/yukicoder/1615.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1750.SparseMat.test.cpp
       title: test/yukicoder/1750.SparseMat.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1020,7 +1020,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/768.test.cpp
       title: test/yukicoder/768.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/803.test.cpp
       title: test/yukicoder/803.test.cpp
     - icon: ':heavy_check_mark:'

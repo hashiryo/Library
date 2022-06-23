@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
   - icon: ':heavy_check_mark:'

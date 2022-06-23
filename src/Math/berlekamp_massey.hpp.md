@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/SparseSquareMatrix.hpp
     title: "\u758E\u884C\u5217"
   _extendedVerifiedWith:
@@ -15,7 +15,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: test/yukicoder/1750.SparseMat.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Berlekamp-Massey
     links:
@@ -64,7 +64,7 @@ data:
   - src/LinearAlgebra/MinimalPolynomial.hpp
   - src/LinearAlgebra/SparseSquareMatrix.hpp
   timestamp: '2022-06-21 23:05:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yosupo/find_linear_recurrence.test.cpp

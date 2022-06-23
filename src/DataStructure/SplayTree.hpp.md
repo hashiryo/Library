@@ -3,27 +3,27 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1508.SplayTree.test.cpp
     title: test/aoj/1508.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_2_D.SplayTree.test.cpp
     title: test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.SplayTree.test.cpp
     title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_B.SplayTree.test.cpp
     title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Splay\u6728"
     links: []
@@ -83,7 +83,7 @@ data:
     \ Node = Node_D<semigroup<M>::value, dual<M>::value, reversible>;\n  using T =\
     \ decltype(Node::val);\n  using E = typename Node::E;\n  Node *root;\n  static\
     \ inline Node *build(const T *bg, const T *ed) {\n    if (bg == ed) return nullptr;\n\
-    \    T *mid = bg + (ed - bg) / 2;\n    return pushup(new Node{*mid, {build(bg,\
+    \    const T *mid = bg + (ed - bg) / 2;\n    return pushup(new Node{*mid, {build(bg,\
     \ mid), build(mid + 1, ed)}});\n  }\n  static inline Node *build(std::size_t bg,\
     \ std::size_t ed, const T &val) {\n    if (bg == ed) return nullptr;\n    std::size_t\
     \ mid = bg + (ed - bg) / 2;\n    return pushup(\n        new Node{val, {build(bg,\
@@ -232,12 +232,12 @@ data:
     \ = false, rev_flg = false;\n  };\n  using Node = Node_D<semigroup<M>::value,\
     \ dual<M>::value, reversible>;\n  using T = decltype(Node::val);\n  using E =\
     \ typename Node::E;\n  Node *root;\n  static inline Node *build(const T *bg, const\
-    \ T *ed) {\n    if (bg == ed) return nullptr;\n    T *mid = bg + (ed - bg) / 2;\n\
-    \    return pushup(new Node{*mid, {build(bg, mid), build(mid + 1, ed)}});\n  }\n\
-    \  static inline Node *build(std::size_t bg, std::size_t ed, const T &val) {\n\
-    \    if (bg == ed) return nullptr;\n    std::size_t mid = bg + (ed - bg) / 2;\n\
-    \    return pushup(\n        new Node{val, {build(bg, mid, val), build(mid + 1,\
-    \ ed, val)}});\n  }\n  static inline void dump(typename std::vector<T>::iterator\
+    \ T *ed) {\n    if (bg == ed) return nullptr;\n    const T *mid = bg + (ed - bg)\
+    \ / 2;\n    return pushup(new Node{*mid, {build(bg, mid), build(mid + 1, ed)}});\n\
+    \  }\n  static inline Node *build(std::size_t bg, std::size_t ed, const T &val)\
+    \ {\n    if (bg == ed) return nullptr;\n    std::size_t mid = bg + (ed - bg) /\
+    \ 2;\n    return pushup(\n        new Node{val, {build(bg, mid, val), build(mid\
+    \ + 1, ed, val)}});\n  }\n  static inline void dump(typename std::vector<T>::iterator\
     \ itr, Node *t) {\n    if (!t) return;\n    if constexpr (dual<M>::value) eval_propagate(t);\n\
     \    if constexpr (reversible) eval_toggle(t);\n    std::size_t sz = t->ch[0]\
     \ ? t->ch[0]->size : 0;\n    *(itr + sz) = t->val, dump(itr, t->ch[0]), dump(itr\
@@ -330,8 +330,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
-  timestamp: '2022-06-21 13:40:14+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-06-23 23:46:03+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/aoj/ITP2_2_D.SplayTree.test.cpp

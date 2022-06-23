@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/LUDecomposition.hpp
     title: "LU\u5206\u89E3"
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_det
@@ -29,11 +29,11 @@ data:
     \ Mat &A) : dat(A), perm(A.size()), sgn(false) {\n    std::size_t rows = A.size(),\
     \ cols = A[0].size();\n    std::iota(perm.begin(), perm.end(), 0);\n    for (std::size_t\
     \ c = 0; c != cols && piv.size() != rows; c++) {\n      auto pos = piv.size();\n\
-    \      if constexpr (IFPV<K>) {\n        for (std::size_t r = piv.size() + 1;\
-    \ r < rows; r++)\n          if (std::abs(dat[pos][c]) < std::abs(dat[r][c])) pos\
-    \ = r;\n      } else if (is_zero(dat[pos][c])) {\n        for (std::size_t r =\
-    \ piv.size() + 1; r < rows; r++)\n          if (!is_zero(dat[r][c])) pos = r,\
-    \ r = rows;\n      }\n      if (is_zero(dat[pos][c])) continue;\n      if (pos\
+    \      if constexpr (std::is_floating_point_v<K>) {\n        for (std::size_t\
+    \ r = piv.size() + 1; r < rows; r++)\n          if (std::abs(dat[pos][c]) < std::abs(dat[r][c]))\
+    \ pos = r;\n      } else if (is_zero(dat[pos][c])) {\n        for (std::size_t\
+    \ r = piv.size() + 1; r < rows; r++)\n          if (!is_zero(dat[r][c])) pos =\
+    \ r, r = rows;\n      }\n      if (is_zero(dat[pos][c])) continue;\n      if (pos\
     \ != piv.size())\n        sgn = !sgn, std::swap(perm[pos], perm[piv.size()]),\n\
     \        std::swap(dat[pos], dat[piv.size()]);\n      for (std::size_t r = piv.size()\
     \ + 1; r != rows; r++) {\n        auto m = dat[r][c] / dat[piv.size()][c];\n \
@@ -189,8 +189,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-06-23 16:17:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-06-23 23:46:03+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/matrix_det.test.cpp
 layout: document

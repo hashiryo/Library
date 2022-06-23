@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/SparseSquareMatrix.hpp
     title: "\u758E\u884C\u5217"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
@@ -178,7 +178,7 @@ data:
   path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
   timestamp: '2022-06-23 22:51:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sparse_matrix_det.test.cpp
 layout: document

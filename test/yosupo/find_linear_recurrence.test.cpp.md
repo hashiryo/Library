@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   _extendedRequiredBy: []
