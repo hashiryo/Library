@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_6_B.RadixHeap.test.cpp
-    title: test/aoj/GRL_6_B.RadixHeap.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: Radix-Heap
     links:
@@ -142,9 +139,8 @@ data:
   path: src/DataStructure/RadixHeap.hpp
   requiredBy: []
   timestamp: '2020-10-24 18:38:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/aoj/GRL_6_B.RadixHeap.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/DataStructure/RadixHeap.hpp
 layout: document
 redirect_from:
