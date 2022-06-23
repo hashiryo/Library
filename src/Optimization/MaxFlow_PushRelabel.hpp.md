@@ -31,20 +31,20 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    document_title: PushRelabel(Gap)
+    document_title: "\u6700\u5927\u6D41 PushRelabel(Gap)"
     links:
     - https://loj.ac/p/127
-  bundledCode: "#line 2 \"src/Optimization/PushRelabel.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title PushRelabel(Gap)\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\
-    \n *  O(n^2 \u221Am)\n */\n\n// verify\u7528: https://loj.ac/p/127 (Dinic\u3060\
-    \u3068\u843D\u3061\u308B)\n// BEGIN CUT HERE\n\ntemplate <class flow_t, unsigned\
-    \ global_freq = 4, bool use_gap = true,\n          bool freeze = false>\nstruct\
-    \ PushRelabel {\n  PushRelabel(std::size_t _n = 0) : n(_n), m(0), adj(n) {}\n\n\
-    \ protected:\n  struct Edge {\n    int dst, rev;\n    flow_t cap;\n  };\n  int\
-    \ n, gap, m;\n  struct Hque {\n    std::vector<std::pair<int, int>> even, odd;\n\
-    \    int se, so;\n    void init(int _n) { even.resize(_n), odd.resize(_n), se\
-    \ = so = 0; };\n    void clear() { se = so = 0; }\n    bool empty() const { return\
-    \ se + so == 0; }\n    void push(int i, int h) { (h & 1 ? odd[so++] : even[se++])\
+  bundledCode: "#line 2 \"src/Optimization/MaxFlow_PushRelabel.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title \u6700\u5927\u6D41 PushRelabel(Gap)\n * @category \u6700\u9069\u5316\
+    \u554F\u984C\n *  O(n^2 \u221Am)\n */\n\n// verify\u7528: https://loj.ac/p/127\
+    \ (Dinic\u3060\u3068\u843D\u3061\u308B)\n// BEGIN CUT HERE\n\ntemplate <class\
+    \ flow_t, unsigned global_freq = 4, bool use_gap = true,\n          bool freeze\
+    \ = false>\nstruct PushRelabel {\n  PushRelabel(std::size_t _n = 0) : n(_n), m(0),\
+    \ adj(n) {}\n\n protected:\n  struct Edge {\n    int dst, rev;\n    flow_t cap;\n\
+    \  };\n  int n, gap, m;\n  struct Hque {\n    std::vector<std::pair<int, int>>\
+    \ even, odd;\n    int se, so;\n    void init(int _n) { even.resize(_n), odd.resize(_n),\
+    \ se = so = 0; };\n    void clear() { se = so = 0; }\n    bool empty() const {\
+    \ return se + so == 0; }\n    void push(int i, int h) { (h & 1 ? odd[so++] : even[se++])\
     \ = {i, h}; }\n    int highest() const {\n      int a = se ? even[se - 1].second\
     \ : -1, b = so ? odd[so - 1].second : -1;\n      return a > b ? a : b;\n    }\n\
     \    int pop() {\n      if (!se || (so && odd[so - 1].second > even[se - 1].second))\n\
@@ -85,23 +85,23 @@ data:
     \      if constexpr (global_freq != 0) global_relabeling(s);\n      calc(s);\n\
     \      assert(excess == std::vector<flow_t>(n, 0));\n    }\n    return ret;\n\
     \  }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title PushRelabel(Gap)\n\
-    \ * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 \u221Am)\n */\n\n\
-    // verify\u7528: https://loj.ac/p/127 (Dinic\u3060\u3068\u843D\u3061\u308B)\n\
-    // BEGIN CUT HERE\n\ntemplate <class flow_t, unsigned global_freq = 4, bool use_gap\
-    \ = true,\n          bool freeze = false>\nstruct PushRelabel {\n  PushRelabel(std::size_t\
-    \ _n = 0) : n(_n), m(0), adj(n) {}\n\n protected:\n  struct Edge {\n    int dst,\
-    \ rev;\n    flow_t cap;\n  };\n  int n, gap, m;\n  struct Hque {\n    std::vector<std::pair<int,\
-    \ int>> even, odd;\n    int se, so;\n    void init(int _n) { even.resize(_n),\
-    \ odd.resize(_n), se = so = 0; };\n    void clear() { se = so = 0; }\n    bool\
-    \ empty() const { return se + so == 0; }\n    void push(int i, int h) { (h & 1\
-    \ ? odd[so++] : even[se++]) = {i, h}; }\n    int highest() const {\n      int\
-    \ a = se ? even[se - 1].second : -1, b = so ? odd[so - 1].second : -1;\n     \
-    \ return a > b ? a : b;\n    }\n    int pop() {\n      if (!se || (so && odd[so\
-    \ - 1].second > even[se - 1].second))\n        return odd[--so].first;\n     \
-    \ return even[--se].first;\n    }\n  } hque;\n  std::vector<std::vector<Edge>>\
-    \ adj;\n  std::vector<int> dist, dcnt;\n  std::vector<flow_t> excess;\n  inline\
-    \ void calc(int t) {\n    if constexpr (global_freq != 0) global_relabeling(t);\n\
+  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6700\u5927\u6D41\
+    \ PushRelabel(Gap)\n * @category \u6700\u9069\u5316\u554F\u984C\n *  O(n^2 \u221A\
+    m)\n */\n\n// verify\u7528: https://loj.ac/p/127 (Dinic\u3060\u3068\u843D\u3061\
+    \u308B)\n// BEGIN CUT HERE\n\ntemplate <class flow_t, unsigned global_freq = 4,\
+    \ bool use_gap = true,\n          bool freeze = false>\nstruct PushRelabel {\n\
+    \  PushRelabel(std::size_t _n = 0) : n(_n), m(0), adj(n) {}\n\n protected:\n \
+    \ struct Edge {\n    int dst, rev;\n    flow_t cap;\n  };\n  int n, gap, m;\n\
+    \  struct Hque {\n    std::vector<std::pair<int, int>> even, odd;\n    int se,\
+    \ so;\n    void init(int _n) { even.resize(_n), odd.resize(_n), se = so = 0; };\n\
+    \    void clear() { se = so = 0; }\n    bool empty() const { return se + so ==\
+    \ 0; }\n    void push(int i, int h) { (h & 1 ? odd[so++] : even[se++]) = {i, h};\
+    \ }\n    int highest() const {\n      int a = se ? even[se - 1].second : -1, b\
+    \ = so ? odd[so - 1].second : -1;\n      return a > b ? a : b;\n    }\n    int\
+    \ pop() {\n      if (!se || (so && odd[so - 1].second > even[se - 1].second))\n\
+    \        return odd[--so].first;\n      return even[--se].first;\n    }\n  } hque;\n\
+    \  std::vector<std::vector<Edge>> adj;\n  std::vector<int> dist, dcnt;\n  std::vector<flow_t>\
+    \ excess;\n  inline void calc(int t) {\n    if constexpr (global_freq != 0) global_relabeling(t);\n\
     \    for (int tick = m * global_freq; !hque.empty();) {\n      int i = hque.pop(),\
     \ dnxt = n * 2 - 1;\n      if constexpr (use_gap)\n        if (dist[i] > gap)\
     \ continue;\n      for (auto &e : adj[i])\n        if (e.cap) {\n          if\
@@ -138,9 +138,9 @@ data:
     \  }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: src/Optimization/PushRelabel.hpp
+  path: src/Optimization/MaxFlow_PushRelabel.hpp
   requiredBy: []
-  timestamp: '2022-06-23 16:10:41+09:00'
+  timestamp: '2022-06-23 22:51:34+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.PushRelabel.test.cpp
@@ -151,10 +151,10 @@ data:
   - test/aoj/GRL_6_A.PushRelabel.test.cpp
   - test/aoj/2835.PushRelabel.test.cpp
   - test/aoj/1615.PushRelabel.test.cpp
-documentation_of: src/Optimization/PushRelabel.hpp
+documentation_of: src/Optimization/MaxFlow_PushRelabel.hpp
 layout: document
 redirect_from:
-- /library/src/Optimization/PushRelabel.hpp
-- /library/src/Optimization/PushRelabel.hpp.html
-title: PushRelabel(Gap)
+- /library/src/Optimization/MaxFlow_PushRelabel.hpp
+- /library/src/Optimization/MaxFlow_PushRelabel.hpp.html
+title: "\u6700\u5927\u6D41 PushRelabel(Gap)"
 ---

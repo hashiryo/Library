@@ -17,8 +17,8 @@ data:
   bundledCode: "#line 1 \"test/yosupo/min_cost_b_flow.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Optimization/MinCostFlow.hpp\"\n/**\n * @title \u6700\u5C0F\u8CBB\
-    \u7528\u6D41\n * @category \u30B0\u30E9\u30D5\n *  PrimalDual(\u5BB9\u91CF\u30B9\
-    \u30B1\u30FC\u30EA\u30F3\u30B0)\n *  O(m^2 log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
+    \u7528\u6D41\n * @category \u6700\u9069\u5316\u554F\u984C\n *  PrimalDual(\u5BB9\
+    \u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0)\n *  O(m^2 log U log n)\n * @see https://misawa.github.io/others/flow/library_design.html\n\
     \ */\n// verify\u7528:\n// https://codeforces.com/contest/316/problem/C2\n// (Radix-Heap\u3067\
     \u306A\u3044\u3068TLE\u3057\u305F -> \u5BB9\u91CF\u30B9\u30B1\u30FC\u30EA\u30F3\
     \u30B0\u306A\u3089TLE\u3057\u306A\u3044)\n// https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b\
@@ -161,7 +161,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2022-06-23 16:10:41+09:00'
+  timestamp: '2022-06-23 22:51:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/min_cost_b_flow.test.cpp

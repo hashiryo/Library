@@ -31,12 +31,12 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
-    document_title: Dinic
+    document_title: "\u6700\u5927\u6D41 Dinic"
     links:
     - https://misawa.github.io/others/flow/dinic_time_complexity.html
-  bundledCode: "#line 2 \"src/Optimization/Dinic.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title Dinic\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2\
-    \ m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
+  bundledCode: "#line 2 \"src/Optimization/MaxFlow_Dinic.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title \u6700\u5927\u6D41 Dinic\n * @category \u6700\u9069\u5316\u554F\
+    \u984C\n *  O(n^2 m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <class flow_t>\nstruct Dinic {\n  Dinic(std::size_t\
     \ _n = 0) : n(_n), m(0), adj(n) {}\n\n protected:\n  struct Edge {\n    int dst,\
     \ rev;\n    flow_t cap;\n  };\n  int n, m;\n  std::vector<std::vector<Edge>> adj;\n\
@@ -57,8 +57,8 @@ data:
     \ ret < flow_lim; ret += f) {\n      if (levelize(s, t), level[t] == -1) break;\n\
     \      iter.assign(n, 0);\n      if (!(f = dfs(t, s, flow_lim - ret))) break;\n\
     \    }\n    return ret;\n  }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Dinic\n * @category\
-    \ \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(n^2 m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
+  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6700\u5927\u6D41\
+    \ Dinic\n * @category \u6700\u9069\u5316\u554F\u984C\n *  O(n^2 m)\n * @see https://misawa.github.io/others/flow/dinic_time_complexity.html\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <class flow_t>\nstruct Dinic {\n  Dinic(std::size_t\
     \ _n = 0) : n(_n), m(0), adj(n) {}\n\n protected:\n  struct Edge {\n    int dst,\
     \ rev;\n    flow_t cap;\n  };\n  int n, m;\n  std::vector<std::vector<Edge>> adj;\n\
@@ -81,9 +81,9 @@ data:
     \    }\n    return ret;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/Optimization/Dinic.hpp
+  path: src/Optimization/MaxFlow_Dinic.hpp
   requiredBy: []
-  timestamp: '2022-06-23 16:10:41+09:00'
+  timestamp: '2022-06-23 22:51:34+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.Dinic.test.cpp
@@ -94,10 +94,10 @@ data:
   - test/aoj/1615.Dinic.test.cpp
   - test/aoj/2313.Dinic.test.cpp
   - test/aoj/GRL_6_A.Dinic.test.cpp
-documentation_of: src/Optimization/Dinic.hpp
+documentation_of: src/Optimization/MaxFlow_Dinic.hpp
 layout: document
 redirect_from:
-- /library/src/Optimization/Dinic.hpp
-- /library/src/Optimization/Dinic.hpp.html
-title: Dinic
+- /library/src/Optimization/MaxFlow_Dinic.hpp
+- /library/src/Optimization/MaxFlow_Dinic.hpp.html
+title: "\u6700\u5927\u6D41 Dinic"
 ---

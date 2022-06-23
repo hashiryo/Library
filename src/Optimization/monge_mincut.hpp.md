@@ -32,11 +32,10 @@ data:
     - https://noshi91.hatenablog.com/entry/2021/06/29/044225
   bundledCode: "#line 2 \"src/Optimization/monge_mincut.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\
-    \u4E00\u822C\u5316\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n * @see\
-    \ https://noshi91.hatenablog.com/entry/2021/06/29/044225\n * phi\u95A2\u6570\u7B49\
-    \u3067 \u221E \u3092\u8FD4\u3059\u3068\u304D\u306F\u305D\u306E\u5927\u304D\u3055\
-    \u306B\u6CE8\u610F (\u5927\u304D\u3059\u304E\u308B\u3068\u30AA\u30FC\u30D0\u30FC\
-    \u30D5\u30ED\u30FC)\n */\n\n// verify\u7528: https://atcoder.jp/contests/kupc2019/tasks/kupc2019_h\n\
+    \u4E00\u822C\u5316\n * @category \u6700\u9069\u5316\u554F\u984C\n * @see https://noshi91.hatenablog.com/entry/2021/06/29/044225\n\
+    \ * phi\u95A2\u6570\u7B49\u3067 \u221E \u3092\u8FD4\u3059\u3068\u304D\u306F\u305D\
+    \u306E\u5927\u304D\u3055\u306B\u6CE8\u610F (\u5927\u304D\u3059\u304E\u308B\u3068\
+    \u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC)\n */\n\n// verify\u7528: https://atcoder.jp/contests/kupc2019/tasks/kupc2019_h\n\
     \n// BEGIN CUT HERE\n\ntemplate <typename MF, typename Th, typename Ph>\nauto\
     \ monge_mincut(int n, int k, Th theta, Ph phi) {\n  using T = typename MF::flow_t;\n\
     \  static constexpr T INF = std::numeric_limits<T>::max();\n  T ret = 0;\n  MF\
@@ -61,7 +60,7 @@ data:
     \ std::make_pair(ret, sol);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6700\u5C0F\u30AB\
     \u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\u822C\u5316\n * @category\
-    \ \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n * @see https://noshi91.hatenablog.com/entry/2021/06/29/044225\n\
+    \ \u6700\u9069\u5316\u554F\u984C\n * @see https://noshi91.hatenablog.com/entry/2021/06/29/044225\n\
     \ * phi\u95A2\u6570\u7B49\u3067 \u221E \u3092\u8FD4\u3059\u3068\u304D\u306F\u305D\
     \u306E\u5927\u304D\u3055\u306B\u6CE8\u610F (\u5927\u304D\u3059\u304E\u308B\u3068\
     \u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC)\n */\n\n// verify\u7528: https://atcoder.jp/contests/kupc2019/tasks/kupc2019_h\n\
@@ -91,7 +90,7 @@ data:
   isVerificationFile: false
   path: src/Optimization/monge_mincut.hpp
   requiredBy: []
-  timestamp: '2022-06-23 16:10:41+09:00'
+  timestamp: '2022-06-23 22:51:34+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.PushRelabel.test.cpp

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   _extendedRequiredBy: []
@@ -12,7 +12,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: test/yukicoder/1750.SparseMat.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u758E\u884C\u5217"
     links:
@@ -69,16 +69,16 @@ data:
     \    }\n    rev = berlekamp_massey(v), dg = rev.size();\n    for (auto &x : rev)\
     \ x = -x;\n    rev.insert(rev.begin(), 1), poly = rev;\n    std::reverse(poly.begin(),\
     \ poly.end());\n    bs.erase(bs.begin() + dg + 1, bs.end());\n  }\n  static std::uint64_t\
-    \ get_rand(std::uint64_t l, std::uint64_t r) {\n    static std::random_device\
-    \ rd;\n    static std::mt19937_64 gen(rd());\n    return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n  }\n  Vec pow(std::uint64_t k) {  // M^k * b\n    auto r = x_pow_mod(k);\n\
-    \    Vec ret = bs[0];\n    for (auto &x : ret) x *= r[0];\n    for (int i = 1,\
-    \ e = r.size(), j; i < e; i++)\n      for (j = n; j--;) ret[j] += r[i] * bs[i][j];\n\
-    \    return ret;\n  }\n  const mod_t operator[](std::size_t k) const { return\
-    \ poly[k]; }\n  const auto begin() const { return poly.begin(); }\n  const auto\
-    \ end() const { return poly.end(); }\n  const std::size_t size() const { return\
-    \ dg + 1; }\n};\n#line 4 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\n\n/**\n\
-    \ * @title \u758E\u884C\u5217\n * @category \u6570\u5B66\n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n\
+    \ get_rand(std::uint64_t l, std::uint64_t r) {\n    static std::mt19937_64 gen(std::random_device{}());\n\
+    \    return std::uniform_int_distribution<std::uint64_t>(l, r)(gen);\n  }\n  Vec\
+    \ pow(std::uint64_t k) {  // M^k * b\n    auto r = x_pow_mod(k);\n    Vec ret\
+    \ = bs[0];\n    for (auto &x : ret) x *= r[0];\n    for (int i = 1, e = r.size(),\
+    \ j; i < e; i++)\n      for (j = n; j--;) ret[j] += r[i] * bs[i][j];\n    return\
+    \ ret;\n  }\n  const mod_t operator[](std::size_t k) const { return poly[k]; }\n\
+    \  const auto begin() const { return poly.begin(); }\n  const auto end() const\
+    \ { return poly.end(); }\n  const std::size_t size() const { return dg + 1; }\n\
+    };\n#line 4 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\n\n/**\n * @title \u758E\
+    \u884C\u5217\n * @category \u6570\u5B66\n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n\
     \ * @brief O(N*S(N)) S(N): \u884C\u5217\u306E\u975E\u96F6\u6210\u5206\u306E\u6570\
     \n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t>\nstruct SparseSquareMatrix\
     \ {\n  SparseSquareMatrix(std::size_t n_) : n(n_) {}\n  void add_component(std::size_t\
@@ -119,8 +119,8 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/SparseSquareMatrix.hpp
   requiredBy: []
-  timestamp: '2022-06-22 15:08:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-06-23 22:51:34+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp

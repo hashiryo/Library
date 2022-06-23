@@ -20,9 +20,9 @@ data:
     - https://yukicoder.me/problems/no/459
   bundledCode: "#line 2 \"src/Optimization/MaxFlowLowerBound.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\
-    \u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category \u30B0\u30E9\u30D5\
-    \n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * @see https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
+    \u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9\n * @category \u6700\u9069\u5316\
+    \u554F\u984C\n * \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\
+    \u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * @see https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
     \ * \u5BB9\u91CF\u306F\u8CA0\u3082\u53EF (\u9006\u5411\u304D\u306B\u6D41\u308C\
     \u308B\u610F\u5473)\n */\n\n// verify\u7528: https://yukicoder.me/problems/no/459\n\
     \n// BEGIN CUT HERE\n\ntemplate <typename FlowAlgo>\nclass MaxFlowLowerBound :\
@@ -64,9 +64,9 @@ data:
     \ t, INF) + this->adj[s][re].cap;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6700\u5C0F\u6D41\
     \u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\
-    \u30A7\u30FC\u30B9\n * @category \u30B0\u30E9\u30D5\n * \u30A2\u30EB\u30B4\u30EA\
-    \u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\
-    \u53D7\u3051\u53D6\u308B\n * @see https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
+    \u30A7\u30FC\u30B9\n * @category \u6700\u9069\u5316\u554F\u984C\n * \u30A2\u30EB\
+    \u30B4\u30EA\u30BA\u30E0(Dinic\u7B49)\u306Fclass\u30C6\u30F3\u30D7\u30EC\u30FC\
+    \u30C8\u3067\u53D7\u3051\u53D6\u308B\n * @see https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
     \ * \u5BB9\u91CF\u306F\u8CA0\u3082\u53EF (\u9006\u5411\u304D\u306B\u6D41\u308C\
     \u308B\u610F\u5473)\n */\n\n// verify\u7528: https://yukicoder.me/problems/no/459\n\
     \n// BEGIN CUT HERE\n\ntemplate <typename FlowAlgo>\nclass MaxFlowLowerBound :\
@@ -110,7 +110,7 @@ data:
   isVerificationFile: false
   path: src/Optimization/MaxFlowLowerBound.hpp
   requiredBy: []
-  timestamp: '2022-06-23 16:10:41+09:00'
+  timestamp: '2022-06-23 22:51:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1615.Dinic.test.cpp

@@ -18,9 +18,9 @@ data:
   bundledCode: "#line 1 \"test/atcoder/agc018_c.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/agc018/tasks/agc018_c\"\
     \n\n#include <bits/stdc++.h>\n#line 3 \"src/Optimization/min_Lconvex.hpp\"\n/**\n\
     \ * @title L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
-    \u30B0\u6CD5)\n * @category \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\n *  O(2^n n^2\
-    \ log (K/n)) * EVAL\n * @see https://opt-cp.com/agc018c-lconvex/#toc11\n */\n\n\
-    // BEGIN CUT HERE\n\ntemplate <typename TD, typename TR, class F>\nstd::pair<TR,\
+    \u30B0\u6CD5)\n * @category \u6700\u9069\u5316\u554F\u984C\n *  O(2^n n^2 log\
+    \ (K/n)) * EVAL\n * @see https://opt-cp.com/agc018c-lconvex/#toc11\n */\n\n//\
+    \ BEGIN CUT HERE\n\ntemplate <typename TD, typename TR, class F>\nstd::pair<TR,\
     \ std::vector<TD>> min_Lconvex(const F &f, std::vector<TD> x,\n              \
     \                             TD alpha) {\n  TR f0 = f(x), f1 = f0, fS;\n  for\
     \ (int n = x.size(); alpha; f0 == f1 ? alpha >>= 1 : f0 = f1) {\n    std::vector<TD>\
@@ -51,7 +51,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/agc018_c.test.cpp
   requiredBy: []
-  timestamp: '2022-06-23 16:10:41+09:00'
+  timestamp: '2022-06-23 22:51:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/agc018_c.test.cpp
