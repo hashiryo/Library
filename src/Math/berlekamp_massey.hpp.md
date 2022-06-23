@@ -66,10 +66,10 @@ data:
   timestamp: '2022-06-21 23:05:48+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/sparse_matrix_det.test.cpp
-  - test/yosupo/find_linear_recurrence.test.cpp
-  - test/aoj/2397.SparseMat.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
+  - test/yosupo/find_linear_recurrence.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp
 layout: document
 redirect_from:

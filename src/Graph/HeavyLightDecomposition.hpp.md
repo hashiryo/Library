@@ -82,8 +82,8 @@ data:
   timestamp: '2021-09-20 02:40:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2667.HLD.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/aoj/2667.HLD.test.cpp
 documentation_of: src/Graph/HeavyLightDecomposition.hpp
 layout: document
 redirect_from:

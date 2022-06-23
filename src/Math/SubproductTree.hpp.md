@@ -386,8 +386,8 @@ data:
   timestamp: '2022-06-16 15:13:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/polynomial_interpolation.test.cpp
 documentation_of: src/Math/SubproductTree.hpp
 layout: document
 redirect_from:

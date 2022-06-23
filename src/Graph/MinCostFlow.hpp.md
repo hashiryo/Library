@@ -250,8 +250,8 @@ data:
   verifiedWith:
   - test/yosupo/min_cost_b_flow.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
-  - test/aoj/GRL_6_B.test.cpp
   - test/aoj/GRL_6_B.RadixHeap.test.cpp
+  - test/aoj/GRL_6_B.test.cpp
 documentation_of: src/Graph/MinCostFlow.hpp
 layout: document
 redirect_from:

@@ -270,11 +270,11 @@ data:
   timestamp: '2022-06-20 22:25:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/828.ETT.test.cpp
   - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp
-  - test/yukicoder/828.ETT.test.cpp
 documentation_of: src/DataStructure/EulerTourTree.hpp
 layout: document
 redirect_from:
