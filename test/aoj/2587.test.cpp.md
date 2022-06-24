@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/NFA_to_DFA.hpp
     title: "NFA\u3092DFA\u306B\u5909\u63DB"
   - icon: ':question:'

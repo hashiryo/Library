@@ -12,7 +12,7 @@ data:
       path: src/Automaton/DFA_Le.hpp
       title: "$N$\u4EE5\u4E0B\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\u7406\u3059\
         \u308BDFA"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/NFA_to_DFA.hpp
       title: "NFA\u3092DFA\u306B\u5909\u63DB"
     - icon: ':question:'
@@ -60,10 +60,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -90,7 +90,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WeightBalancedTree.hpp
       title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - name: src/Game
@@ -683,15 +683,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
-    - icon: ':x:'
-      path: test/atcoder/abc256_f.DynSeg.test.cpp
-      title: test/atcoder/abc256_f.DynSeg.test.cpp
-    - icon: ':x:'
-      path: test/atcoder/abc256_f.SegDual.test.cpp
-      title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':x:'
-      path: test/atcoder/abc256_f.WBT.test.cpp
-      title: test/atcoder/abc256_f.WBT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc015_d.test.cpp
       title: test/atcoder/agc015_d.test.cpp
@@ -701,9 +692,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
-    - icon: ':x:'
-      path: test/atcoder/arc066_d.test.cpp
-      title: test/atcoder/arc066_d.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp

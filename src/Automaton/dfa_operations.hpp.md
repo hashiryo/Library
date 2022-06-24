@@ -18,9 +18,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc208_e.test.cpp
     title: test/atcoder/abc208_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/arc066_d.test.cpp
-    title: test/atcoder/arc066_d.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -150,7 +147,6 @@ data:
   verifiedWith:
   - test/atcoder/abc154_e.test.cpp
   - test/atcoder/abc208_e.test.cpp
-  - test/atcoder/arc066_d.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/abc129_e.test.cpp
 documentation_of: src/Automaton/dfa_operations.hpp

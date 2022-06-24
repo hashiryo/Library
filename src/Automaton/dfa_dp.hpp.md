@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/NFA_to_DFA.hpp
     title: "NFA\u3092DFA\u306B\u5909\u63DB"
   - icon: ':question:'
@@ -31,9 +31,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc015_d.test.cpp
     title: test/atcoder/agc015_d.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/arc066_d.test.cpp
-    title: test/atcoder/arc066_d.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -132,7 +129,6 @@ data:
   verifiedWith:
   - test/atcoder/abc154_e.test.cpp
   - test/atcoder/abc208_e.test.cpp
-  - test/atcoder/arc066_d.test.cpp
   - test/atcoder/abc117_d.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/agc015_d.test.cpp

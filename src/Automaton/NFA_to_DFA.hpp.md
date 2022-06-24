@@ -12,12 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc015_d.test.cpp
     title: test/atcoder/agc015_d.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/arc066_d.test.cpp
-    title: test/atcoder/arc066_d.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "NFA\u3092DFA\u306B\u5909\u63DB"
     links:
@@ -104,9 +101,8 @@ data:
   path: src/Automaton/NFA_to_DFA.hpp
   requiredBy: []
   timestamp: '2022-06-23 14:03:00+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/arc066_d.test.cpp
   - test/atcoder/agc015_d.test.cpp
   - test/aoj/2587.test.cpp
 documentation_of: src/Automaton/NFA_to_DFA.hpp

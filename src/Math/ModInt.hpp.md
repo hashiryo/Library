@@ -78,21 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc256_f.DynSeg.test.cpp
-    title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc256_f.SegDual.test.cpp
-    title: test/atcoder/abc256_f.SegDual.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc256_f.WBT.test.cpp
-    title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/arc066_d.test.cpp
-    title: test/atcoder/arc066_d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
@@ -459,13 +447,9 @@ data:
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/atcoder/abc256_f.SegDual.test.cpp
-  - test/atcoder/arc066_d.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/arc105_f.test.cpp
-  - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc213_g.test.cpp
   - test/aoj/3072.test.cpp
