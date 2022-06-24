@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc236_g.test.cpp
+    title: test/atcoder/abc236_g.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
   _isVerificationFailed: false
@@ -39,15 +42,19 @@ data:
     \ {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::min();\
     \ }\n  static T i() { return T(0); }\n  static T add(T vl, T vr) { return std::max(vl,\
     \ vr); }\n  static T mul(T vl, T vr) { return vl + vr; }\n};\ntemplate <class\
-    \ T>\nusing MaxPlusRig = Rig<MaxPlus<T>>;\n\ntemplate <class Uint>\nstruct BitwiseOrAnd\
-    \ {\n  using T = Uint;\n  static T o() { return 0; }\n  static T i() { return\
-    \ T(-1); }\n  static T add(T vl, T vr) { return vl | vr; }\n  static T mul(T vl,\
-    \ T vr) { return vl & vr; }\n};\ntemplate <class T = unsigned long long>\nusing\
-    \ BitwiseOrAndRig = Rig<BitwiseOrAnd<T>>;\n\ntemplate <class Uint>\nstruct BitwiseXorAnd\
-    \ {\n  using T = Uint;\n  static T o() { return 0; }\n  static T i() { return\
-    \ T(-1); }\n  static T add(T vl, T vr) { return vl ^ vr; }\n  static T mul(T vl,\
-    \ T vr) { return vl & vr; }\n};\ntemplate <class T = unsigned long long>\nusing\
-    \ BitwiseXorAndRig = Rig<BitwiseXorAnd<T>>;\n"
+    \ T>\nusing MaxPlusRig = Rig<MaxPlus<T>>;\n\ntemplate <class Arith>\nstruct MinMax\
+    \ {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::max();\
+    \ }\n  static T i() { return std::numeric_limits<T>::min(); }\n  static T add(T\
+    \ vl, T vr) { return std::min(vl, vr); }\n  static T mul(T vl, T vr) { return\
+    \ std::max(vl, vr); }\n};\ntemplate <class T>\nusing MinMaxRig = Rig<MinMax<T>>;\n\
+    \ntemplate <class Uint>\nstruct BitwiseOrAnd {\n  using T = Uint;\n  static T\
+    \ o() { return 0; }\n  static T i() { return T(-1); }\n  static T add(T vl, T\
+    \ vr) { return vl | vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
+    template <class T = unsigned long long>\nusing BitwiseOrAndRig = Rig<BitwiseOrAnd<T>>;\n\
+    \ntemplate <class Uint>\nstruct BitwiseXorAnd {\n  using T = Uint;\n  static T\
+    \ o() { return 0; }\n  static T i() { return T(-1); }\n  static T add(T vl, T\
+    \ vr) { return vl ^ vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
+    template <class T = unsigned long long>\nusing BitwiseXorAndRig = Rig<BitwiseXorAnd<T>>;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u534A\u74B0\n * @category\
     \ \u6570\u5B66\n * \u884C\u5217\u306B\u8F09\u305B\u308B\n */\n\n// verify\u7528\
     \n// https://atcoder.jp/contests/abc009/tasks/abc009_4\n// https://atcoder.jp/contests/ddcc2020-final/tasks/ddcc2020_final_b\n\
@@ -72,23 +79,28 @@ data:
     \ {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::min();\
     \ }\n  static T i() { return T(0); }\n  static T add(T vl, T vr) { return std::max(vl,\
     \ vr); }\n  static T mul(T vl, T vr) { return vl + vr; }\n};\ntemplate <class\
-    \ T>\nusing MaxPlusRig = Rig<MaxPlus<T>>;\n\ntemplate <class Uint>\nstruct BitwiseOrAnd\
-    \ {\n  using T = Uint;\n  static T o() { return 0; }\n  static T i() { return\
-    \ T(-1); }\n  static T add(T vl, T vr) { return vl | vr; }\n  static T mul(T vl,\
-    \ T vr) { return vl & vr; }\n};\ntemplate <class T = unsigned long long>\nusing\
-    \ BitwiseOrAndRig = Rig<BitwiseOrAnd<T>>;\n\ntemplate <class Uint>\nstruct BitwiseXorAnd\
-    \ {\n  using T = Uint;\n  static T o() { return 0; }\n  static T i() { return\
-    \ T(-1); }\n  static T add(T vl, T vr) { return vl ^ vr; }\n  static T mul(T vl,\
-    \ T vr) { return vl & vr; }\n};\ntemplate <class T = unsigned long long>\nusing\
-    \ BitwiseXorAndRig = Rig<BitwiseXorAnd<T>>;\n"
+    \ T>\nusing MaxPlusRig = Rig<MaxPlus<T>>;\n\ntemplate <class Arith>\nstruct MinMax\
+    \ {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::max();\
+    \ }\n  static T i() { return std::numeric_limits<T>::min(); }\n  static T add(T\
+    \ vl, T vr) { return std::min(vl, vr); }\n  static T mul(T vl, T vr) { return\
+    \ std::max(vl, vr); }\n};\ntemplate <class T>\nusing MinMaxRig = Rig<MinMax<T>>;\n\
+    \ntemplate <class Uint>\nstruct BitwiseOrAnd {\n  using T = Uint;\n  static T\
+    \ o() { return 0; }\n  static T i() { return T(-1); }\n  static T add(T vl, T\
+    \ vr) { return vl | vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
+    template <class T = unsigned long long>\nusing BitwiseOrAndRig = Rig<BitwiseOrAnd<T>>;\n\
+    \ntemplate <class Uint>\nstruct BitwiseXorAnd {\n  using T = Uint;\n  static T\
+    \ o() { return 0; }\n  static T i() { return T(-1); }\n  static T add(T vl, T\
+    \ vr) { return vl ^ vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
+    template <class T = unsigned long long>\nusing BitwiseXorAndRig = Rig<BitwiseXorAnd<T>>;\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/SemiRing.hpp
   requiredBy: []
-  timestamp: '2022-06-17 10:35:58+09:00'
+  timestamp: '2022-06-24 14:06:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1340.test.cpp
+  - test/atcoder/abc236_g.test.cpp
 documentation_of: src/Math/SemiRing.hpp
 layout: document
 redirect_from:

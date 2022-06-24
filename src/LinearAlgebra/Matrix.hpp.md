@@ -10,6 +10,9 @@ data:
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc236_g.test.cpp
+    title: test/atcoder/abc236_g.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
   _isVerificationFailed: false
@@ -103,6 +106,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1340.test.cpp
+  - test/atcoder/abc236_g.test.cpp
   - test/aoj/2397.test.cpp
   - test/aoj/2624.test.cpp
 documentation_of: src/LinearAlgebra/Matrix.hpp
