@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
@@ -127,8 +127,8 @@ data:
     \    bool op;\n    cin >> op;\n    if (op) {\n      int l, r;\n      Mint x;\n\
     \      cin >> l >> r >> x;\n      auto ans = seg.fold(l, r);\n      cout << ans.first\
     \ * x + ans.second << endl;\n    } else {\n      int p;\n      Mint c, d;\n  \
-    \    cin >> p >> c >> d;\n      seg.set_val(p, {c, d});\n    }\n  }\n  return\
-    \ 0;\n}\n"
+    \    cin >> p >> c >> d;\n      seg.set(p, {c, d});\n    }\n  }\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree.hpp\"\n#include\
     \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint = ModInt<998244353>;\n\
@@ -141,16 +141,16 @@ data:
     \ seg(v);\n  while (Q--) {\n    bool op;\n    cin >> op;\n    if (op) {\n    \
     \  int l, r;\n      Mint x;\n      cin >> l >> r >> x;\n      auto ans = seg.fold(l,\
     \ r);\n      cout << ans.first * x + ans.second << endl;\n    } else {\n     \
-    \ int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      seg.set_val(p, {c,\
-    \ d});\n    }\n  }\n  return 0;\n}\n"
+    \ int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      seg.set(p, {c, d});\n\
+    \    }\n  }\n  return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree.hpp
   - src/Math/ModInt.hpp
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2022-06-19 23:17:16+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-06-24 13:34:24+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp
 layout: document

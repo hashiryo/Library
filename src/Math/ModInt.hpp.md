@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,7 +144,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_set_range_composite.SegTree.test.cpp
     title: test/yosupo/point_set_range_composite.SegTree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -207,7 +207,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'

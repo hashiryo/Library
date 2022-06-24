@@ -54,7 +54,7 @@ data:
     - icon: ':warning:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':heavy_check_mark:'
@@ -161,10 +161,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
       title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -378,7 +378,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2397.SparseMat.test.cpp
       title: test/aoj/2397.SparseMat.test.cpp
     - icon: ':heavy_check_mark:'
@@ -832,7 +832,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_range_sum.BIT.test.cpp
       title: test/yosupo/point_add_range_sum.BIT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -948,7 +948,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.test.cpp
       title: test/yukicoder/1615.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1750.SparseMat.test.cpp
       title: test/yukicoder/1750.SparseMat.test.cpp
     - icon: ':heavy_check_mark:'
