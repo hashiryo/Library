@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/DFA_Le.hpp
     title: "$N$\u4EE5\u4E0B\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\u7406\u3059\u308B\
       DFA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u30FB\u88DC\
       \u96C6\u5408\u6F14\u7B97"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc129/tasks/abc129_e
@@ -191,7 +191,8 @@ data:
     \  ios::sync_with_stdio(false);\n  using Mint = ModInt<int(1e9 + 7)>;\n  string\
     \ L;\n  cin >> L;\n  auto dfa_le = DFA_SymbolMap(\n      DFA_Le(L, 2), dfa_bin.alphabet(),\n\
     \      [](const std::tuple<int, int, int> &a) { return std::get<2>(a); });\n \
-    \ cout << dfa_dp<Mint>(dfa_bin & dfa_le, L.length());\n  return 0;\n}\n"
+    \ cout << dfa_dp<Mint>(dfa_bin & dfa_le, L.length()) << '\\n';\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc129/tasks/abc129_e\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\n#include \"src/Automaton/DFA_Le.hpp\"\
     \n#include \"src/Automaton/dfa_operations.hpp\"\n#include \"src/Math/ModInt.hpp\"\
@@ -205,7 +206,7 @@ data:
     \  ios::sync_with_stdio(false);\n  using Mint = ModInt<int(1e9 + 7)>;\n  string\
     \ L;\n  cin >> L;\n  auto dfa_le = DFA_SymbolMap(\n      DFA_Le(L, 2), dfa_bin.alphabet(),\n\
     \      [](const std::tuple<int, int, int> &a) { return std::get<2>(a); });\n \
-    \ cout << dfa_dp<Mint>(dfa_bin & dfa_le, L.length());\n  return 0;\n}"
+    \ cout << dfa_dp<Mint>(dfa_bin & dfa_le, L.length()) << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Automaton/dfa_dp.hpp
   - src/Automaton/DFA_Le.hpp
@@ -214,8 +215,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc129_e.test.cpp
   requiredBy: []
-  timestamp: '2022-06-23 14:03:00+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-06-24 13:41:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc129_e.test.cpp
 layout: document
