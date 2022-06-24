@@ -79,9 +79,6 @@ data:
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':x:'
-    path: test/atcoder/abc256_ex.Beats.test.cpp
-    title: test/atcoder/abc256_ex.Beats.test.cpp
-  - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':x:'
@@ -464,7 +461,6 @@ data:
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
   - test/atcoder/arc066_d.test.cpp
-  - test/atcoder/abc256_ex.Beats.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
