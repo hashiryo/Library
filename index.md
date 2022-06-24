@@ -219,7 +219,7 @@ data:
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     - icon: ':heavy_check_mark:'
       path: src/Math/factorize.hpp
-      title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3"
+      title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':heavy_check_mark:'
       path: src/Math/fps_sequence.hpp
       title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
