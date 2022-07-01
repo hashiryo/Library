@@ -84,7 +84,7 @@ data:
     \ + m; };\n  std::uint64_t ret = 1, e = rec(a, b - 1, carmichael(m));\n  for (a\
     \ = mod(a);; a = mod(__uint128_t(a) * a))\n    if (e& 1 ? ret = mod(__uint128_t(ret)\
     \ * a) : 0; !(e >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t\
-    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) > m ? a\
+    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a\
     \ - m : a;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/factorize.hpp\"\
     \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
@@ -96,7 +96,7 @@ data:
     \ + m; };\n  std::uint64_t ret = 1, e = rec(a, b - 1, carmichael(m));\n  for (a\
     \ = mod(a);; a = mod(__uint128_t(a) * a))\n    if (e& 1 ? ret = mod(__uint128_t(ret)\
     \ * a) : 0; !(e >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t\
-    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) > m ? a\
+    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a\
     \ - m : a;\n}\n"
   dependsOn:
   - src/Math/factorize.hpp
@@ -104,7 +104,7 @@ data:
   isVerificationFile: false
   path: src/Math/tetration.hpp
   requiredBy: []
-  timestamp: '2022-07-01 23:38:07+09:00'
+  timestamp: '2022-07-02 00:01:10+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp

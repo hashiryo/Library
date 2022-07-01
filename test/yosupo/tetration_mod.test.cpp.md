@@ -86,7 +86,7 @@ data:
     \ + m; };\n  std::uint64_t ret = 1, e = rec(a, b - 1, carmichael(m));\n  for (a\
     \ = mod(a);; a = mod(__uint128_t(a) * a))\n    if (e& 1 ? ret = mod(__uint128_t(ret)\
     \ * a) : 0; !(e >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t\
-    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) > m ? a\
+    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a\
     \ - m : a;\n}\n#line 4 \"test/yosupo/tetration_mod.test.cpp\"\nusing namespace\
     \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n\
     \  cin >> T;\n  while (T--) {\n    int A, B, M;\n    cin >> A >> B >> M;\n   \
@@ -103,7 +103,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-07-01 23:38:07+09:00'
+  timestamp: '2022-07-02 00:01:10+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp
