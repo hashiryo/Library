@@ -217,7 +217,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/factorize.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':heavy_check_mark:'
@@ -227,6 +227,9 @@ data:
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
+    - icon: ':question:'
+      path: src/Math/is_prime.hpp
+      title: "\u7D20\u6570\u5224\u5B9A"
     - icon: ':heavy_check_mark:'
       path: src/Math/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
@@ -239,9 +242,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/prime_count.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/totient.hpp
-      title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570"
+    - icon: ':x:'
+      path: src/Math/tetration.hpp
+      title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
+        \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$"
   - name: src/Optimization
     pages:
     - icon: ':heavy_check_mark:'
@@ -916,7 +920,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.test.cpp
       title: test/yosupo/sum_of_totient_function.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/tetration_mod.test.cpp
       title: test/yosupo/tetration_mod.test.cpp
     - icon: ':heavy_check_mark:'

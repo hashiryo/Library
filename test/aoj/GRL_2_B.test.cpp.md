@@ -101,28 +101,27 @@ data:
     \    std::vector<Edge> es;\n    for (auto it = ei.rbegin(); it != ei.rend(); it++)\
     \ {\n      if (usede[*it]) continue;\n      es.emplace_back(edges[*it]);\n   \
     \   for (int x = leaf[edges[*it].dst]; x != *it; x = paredge[x]) usede[x] = 1;\n\
-    \    }\n    return {score, es};\n  }\n};\n#line 7 \"test/aoj/GRL_2_B.test.cpp\"\
+    \    }\n    return {score, es};\n  }\n};\n#line 5 \"test/aoj/GRL_2_B.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, M, r;\n  cin >> N >> M >> r;\n  MinimumSpanningAborescense<int> graph(N);\n\
     \  for (int i = 0; i < M; i++) {\n    int s, t, w;\n    cin >> s >> t >> w;\n\
     \    graph.add_edge(s, t, w);\n  }\n  cout << graph.get_MSA(r).first << endl;\n\
     \  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/UnionFind.hpp\"\n#include\
-    \ \"src/DataStructure/SkewHeap.hpp\"\n#include \"src/Graph/MinimumSpanningAborescense.hpp\"\
+    \n#include <bits/stdc++.h>\n#include \"src/Graph/MinimumSpanningAborescense.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, M, r;\n  cin >> N >> M >> r;\n  MinimumSpanningAborescense<int> graph(N);\n\
     \  for (int i = 0; i < M; i++) {\n    int s, t, w;\n    cin >> s >> t >> w;\n\
     \    graph.add_edge(s, t, w);\n  }\n  cout << graph.get_MSA(r).first << endl;\n\
     \  return 0;\n}"
   dependsOn:
+  - src/Graph/MinimumSpanningAborescense.hpp
   - src/DataStructure/UnionFind.hpp
   - src/DataStructure/SkewHeap.hpp
-  - src/Graph/MinimumSpanningAborescense.hpp
   isVerificationFile: true
   path: test/aoj/GRL_2_B.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 16:32:39+09:00'
+  timestamp: '2022-07-01 23:38:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_2_B.test.cpp

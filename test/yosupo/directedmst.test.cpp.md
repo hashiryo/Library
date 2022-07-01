@@ -101,7 +101,7 @@ data:
     \    std::vector<Edge> es;\n    for (auto it = ei.rbegin(); it != ei.rend(); it++)\
     \ {\n      if (usede[*it]) continue;\n      es.emplace_back(edges[*it]);\n   \
     \   for (int x = leaf[edges[*it].dst]; x != *it; x = paredge[x]) usede[x] = 1;\n\
-    \    }\n    return {score, es};\n  }\n};\n#line 6 \"test/yosupo/directedmst.test.cpp\"\
+    \    }\n    return {score, es};\n  }\n};\n#line 4 \"test/yosupo/directedmst.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, M, r;\n  cin >> N >> M >> r;\n  MinimumSpanningAborescense<long long>\
     \ graph(N);\n  for (int i = 0; i < M; i++) {\n    int s, t, w;\n    cin >> s >>\
@@ -110,23 +110,22 @@ data:
     \ par[e.dst] = e.src;\n  cout << ans.first << endl;\n  for (int i = 0; i < N;\
     \ i++) cout << (i ? \" \" : \"\") << par[i];\n  cout << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/directedmst\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/DataStructure/UnionFind.hpp\"\n#include \"src/DataStructure/SkewHeap.hpp\"\
-    \n#include \"src/Graph/MinimumSpanningAborescense.hpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M, r;\n\
-    \  cin >> N >> M >> r;\n  MinimumSpanningAborescense<long long> graph(N);\n  for\
-    \ (int i = 0; i < M; i++) {\n    int s, t, w;\n    cin >> s >> t >> w;\n    graph.add_edge(s,\
-    \ t, w);\n  }\n  auto ans = graph.get_MSA(r);\n  vector<int> par(N);\n  iota(par.begin(),\
-    \ par.end(), 0);\n  for (auto e : ans.second) par[e.dst] = e.src;\n  cout << ans.first\
-    \ << endl;\n  for (int i = 0; i < N; i++) cout << (i ? \" \" : \"\") << par[i];\n\
-    \  cout << endl;\n  return 0;\n}"
+    \ <bits/stdc++.h>\n#include \"src/Graph/MinimumSpanningAborescense.hpp\"\nusing\
+    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int N, M, r;\n  cin >> N >> M >> r;\n  MinimumSpanningAborescense<long long>\
+    \ graph(N);\n  for (int i = 0; i < M; i++) {\n    int s, t, w;\n    cin >> s >>\
+    \ t >> w;\n    graph.add_edge(s, t, w);\n  }\n  auto ans = graph.get_MSA(r);\n\
+    \  vector<int> par(N);\n  iota(par.begin(), par.end(), 0);\n  for (auto e : ans.second)\
+    \ par[e.dst] = e.src;\n  cout << ans.first << endl;\n  for (int i = 0; i < N;\
+    \ i++) cout << (i ? \" \" : \"\") << par[i];\n  cout << endl;\n  return 0;\n}"
   dependsOn:
+  - src/Graph/MinimumSpanningAborescense.hpp
   - src/DataStructure/UnionFind.hpp
   - src/DataStructure/SkewHeap.hpp
-  - src/Graph/MinimumSpanningAborescense.hpp
   isVerificationFile: true
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 16:32:39+09:00'
+  timestamp: '2022-07-01 23:38:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp
