@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
-    path: src/Math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows b\
       \ = a^{a^{\\cdot^{\\cdot^{a}}}}$"
@@ -16,12 +16,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u7D20\u6570\u5224\u5B9A"
     links: []
@@ -67,10 +67,10 @@ data:
   isVerificationFile: false
   path: src/Math/is_prime.hpp
   requiredBy:
-  - src/Math/factorize.hpp
+  - src/Math/Factors.hpp
   - src/Math/tetration.hpp
   timestamp: '2022-07-01 23:38:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/factorize.test.cpp

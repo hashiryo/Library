@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: src/Math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -36,7 +36,7 @@ data:
     \ false;\n  }\n  return true;\n}\nconstexpr bool is_prime(std::uint64_t n) {\n\
     \  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX) return\
     \ miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2, 325, 9375, 28178, 450775,\
-    \ 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/factorize.hpp\"\n/**\n * @title\
+    \ 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/Factors.hpp\"\n/**\n * @title\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069\n * @category \u6570\u5B66\
     \n *  O(N^(1/4))\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n// BEGIN CUT HERE\n\
     template <class T>\nconstexpr void bubble_sort(T *bg, T *ed) {\n  for (int sz\
@@ -68,24 +68,20 @@ data:
     };\nconstexpr std::uint64_t totient(const Factors &f) {\n  std::uint64_t ret =\
     \ 1, i = 0;\n  for (const auto &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;)\
     \ ret *= p;\n  return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return\
-    \ totient(Factors(n)); }\nconstexpr std::uint64_t carmichael(const Factors &f)\
-    \ {\n  std::uint64_t ret = 1, i = 0, tmp = 1;\n  for (const auto &[p, e] : f)\
-    \ {\n    for (tmp = p - 1, i = e - (p == 2 && e > 2); --i;) tmp *= p;\n    ret\
-    \ = std::lcm(ret, tmp);\n  }\n  return ret;\n}\nconstexpr auto carmichael(std::uint64_t\
-    \ n) { return carmichael(Factors(n)); }\n#line 5 \"test/aoj/NTL_1_D.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  long long n;\n  cin >> n;\n  cout << totient(n) << '\\n';\n  return 0;\n}\n"
+    \ totient(Factors(n)); }\n#line 5 \"test/aoj/NTL_1_D.test.cpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long\
+    \ long n;\n  cin >> n;\n  cout << totient(n) << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/factorize.hpp\"\nusing namespace\
+    \n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\nusing namespace\
     \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long\
     \ long n;\n  cin >> n;\n  cout << totient(n) << '\\n';\n  return 0;\n}\n"
   dependsOn:
-  - src/Math/factorize.hpp
+  - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: true
   path: test/aoj/NTL_1_D.test.cpp
   requiredBy: []
-  timestamp: '2022-07-01 23:38:07+09:00'
+  timestamp: '2022-07-02 08:52:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_1_D.test.cpp

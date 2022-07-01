@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: src/Math/factorize.hpp
+  - icon: ':heavy_check_mark:'
+    path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
       \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$"
@@ -38,7 +38,7 @@ data:
     \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
     \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
     \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/factorize.hpp\"\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/Factors.hpp\"\
     \n/**\n * @title \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069\n * @category\
     \ \u6570\u5B66\n *  O(N^(1/4))\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n\
     // BEGIN CUT HERE\ntemplate <class T>\nconstexpr void bubble_sort(T *bg, T *ed)\
@@ -70,42 +70,42 @@ data:
     };\nconstexpr std::uint64_t totient(const Factors &f) {\n  std::uint64_t ret =\
     \ 1, i = 0;\n  for (const auto &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;)\
     \ ret *= p;\n  return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return\
-    \ totient(Factors(n)); }\nconstexpr std::uint64_t carmichael(const Factors &f)\
-    \ {\n  std::uint64_t ret = 1, i = 0, tmp = 1;\n  for (const auto &[p, e] : f)\
-    \ {\n    for (tmp = p - 1, i = e - (p == 2 && e > 2); --i;) tmp *= p;\n    ret\
-    \ = std::lcm(ret, tmp);\n  }\n  return ret;\n}\nconstexpr auto carmichael(std::uint64_t\
-    \ n) { return carmichael(Factors(n)); }\n#line 4 \"src/Math/tetration.hpp\"\n\
-    /**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
-    \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * @category \u6570\u5B66\n *  O(N^(1/4))\n\
-    \ */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\n\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
+    \ totient(Factors(n)); }\n#line 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\
+    \u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows b = a^{a^{\\cdot^{\\\
+    cdot^{a}}}}$\n * @category \u6570\u5B66\n *  O(N^(1/4))\n */\n// verify\u7528\
+    :\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\n\
+    // BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
-    \ == 1) return 1;\n  auto mod = [m](__uint128_t x) { return x < m ? x : x % m\
-    \ + m; };\n  std::uint64_t ret = 1, e = rec(a, b - 1, carmichael(m));\n  for (a\
-    \ = mod(a);; a = mod(__uint128_t(a) * a))\n    if (e& 1 ? ret = mod(__uint128_t(ret)\
-    \ * a) : 0; !(e >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t\
-    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a\
-    \ - m : a;\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/factorize.hpp\"\
+    \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
+    \ auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3);\
+    \ --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t\
+    \ x) { return x < m ? x : x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);;\
+    \ a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a)\
+    \ : 0; !(k >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t a,\
+    \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
+    \ m : a;\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\
     \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
     \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * @category \u6570\u5B66\n *  O(N^(1/4))\n\
     \ */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\n\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
+    \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
-    \ == 1) return 1;\n  auto mod = [m](__uint128_t x) { return x < m ? x : x % m\
-    \ + m; };\n  std::uint64_t ret = 1, e = rec(a, b - 1, carmichael(m));\n  for (a\
-    \ = mod(a);; a = mod(__uint128_t(a) * a))\n    if (e& 1 ? ret = mod(__uint128_t(ret)\
-    \ * a) : 0; !(e >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t\
-    \ a, std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a\
-    \ - m : a;\n}\n"
+    \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
+    \ auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3);\
+    \ --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t\
+    \ x) { return x < m ? x : x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);;\
+    \ a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a)\
+    \ : 0; !(k >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t a,\
+    \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
+    \ m : a;\n}\n"
   dependsOn:
-  - src/Math/factorize.hpp
+  - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: false
   path: src/Math/tetration.hpp
   requiredBy: []
-  timestamp: '2022-07-02 00:01:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-07-02 08:52:47+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
 documentation_of: src/Math/tetration.hpp

@@ -182,6 +182,9 @@ data:
       path: src/Math/Combination.hpp
       title: "\u7D44\u307F\u5408\u308F\u305B"
     - icon: ':heavy_check_mark:'
+      path: src/Math/Factors.hpp
+      title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
+    - icon: ':heavy_check_mark:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
@@ -217,9 +220,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':question:'
-      path: src/Math/factorize.hpp
-      title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':heavy_check_mark:'
       path: src/Math/fps_sequence.hpp
       title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
@@ -227,7 +227,7 @@ data:
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
     - icon: ':heavy_check_mark:'
@@ -242,7 +242,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/prime_count.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
         \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$"
@@ -920,7 +920,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.test.cpp
       title: test/yosupo/sum_of_totient_function.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/tetration_mod.test.cpp
       title: test/yosupo/tetration_mod.test.cpp
     - icon: ':heavy_check_mark:'
