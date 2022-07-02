@@ -6,6 +6,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: src/Math/ModIntExp.hpp
+    title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
+  - icon: ':heavy_check_mark:'
     path: src/Math/tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows b\
       \ = a^{a^{\\cdot^{\\cdot^{a}}}}$"
@@ -13,6 +16,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc228_e.test.cpp
+    title: test/atcoder/abc228_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
@@ -114,12 +120,14 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
+  - src/Math/ModIntExp.hpp
   - src/Math/tetration.hpp
   timestamp: '2022-07-02 08:52:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/factorize.test.cpp
+  - test/atcoder/abc228_e.test.cpp
   - test/aoj/NTL_1_D.test.cpp
 documentation_of: src/Math/Factors.hpp
 layout: document

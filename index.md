@@ -191,6 +191,9 @@ data:
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
+      path: src/Math/ModIntExp.hpp
+      title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
+    - icon: ':heavy_check_mark:'
       path: src/Math/NumberTheory.hpp
       title: "\u6570\u8AD6\u3044\u308D\u3044\u308D"
     - icon: ':heavy_check_mark:'
@@ -684,6 +687,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc228_e.test.cpp
+      title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
