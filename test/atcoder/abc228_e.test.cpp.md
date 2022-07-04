@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/ModIntExp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -22,7 +22,7 @@ data:
     - https://atcoder.jp/contests/abc228/tasks/abc228_e
   bundledCode: "#line 1 \"test/atcoder/abc228_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc228/tasks/abc228_e\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/is_prime.hpp\"\n/**\n * @title\
-    \ \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(N^(1/4))\n * constexpr\
+    \ \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n * constexpr\
     \ \u3067\u547C\u3079\u308B\n */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t\
     \ bsf(std::uint64_t n) {\n  constexpr std::uint8_t convert[64] = {\n      0, \
     \ 1,  2,  53, 3,  7,  54, 27, 4,  38, 41, 8,  34, 55, 48, 28,\n      62, 5,  39,\
@@ -123,7 +123,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc228_e.test.cpp
   requiredBy: []
-  timestamp: '2022-07-02 12:20:57+09:00'
+  timestamp: '2022-07-04 14:16:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc228_e.test.cpp

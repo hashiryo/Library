@@ -25,14 +25,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/3030.test.cpp
+    title: test/yukicoder/3030.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u7D20\u6570\u5224\u5B9A"
     links: []
   bundledCode: "#line 2 \"src/Math/is_prime.hpp\"\n#include <bits/stdc++.h>\n/**\n\
-    \ * @title \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(N^(1/4))\n\
+    \ * @title \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n\
     \ * constexpr \u3067\u547C\u3079\u308B\n */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t\
     \ bsf(std::uint64_t n) {\n  constexpr std::uint8_t convert[64] = {\n      0, \
     \ 1,  2,  53, 3,  7,  54, 27, 4,  38, 41, 8,  34, 55, 48, 28,\n      62, 5,  39,\
@@ -51,7 +54,7 @@ data:
     \ miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2, 325, 9375, 28178, 450775,\
     \ 9780504, 1795265022>(n);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u7D20\u6570\u5224\
-    \u5B9A\n * @category \u6570\u5B66\n *  O(N^(1/4))\n * constexpr \u3067\u547C\u3079\
+    \u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\
     \u308B\n */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n)\
     \ {\n  constexpr std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54,\
     \ 27, 4,  38, 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24,\
@@ -76,9 +79,10 @@ data:
   - src/Math/ModIntExp.hpp
   - src/Math/Factors.hpp
   - src/Math/tetration.hpp
-  timestamp: '2022-07-01 23:38:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-07-04 14:16:36+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/3030.test.cpp
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/factorize.test.cpp
   - test/atcoder/abc228_e.test.cpp
