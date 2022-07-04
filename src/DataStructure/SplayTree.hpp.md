@@ -140,10 +140,10 @@ data:
     \ \"\\\"apply\\\" \";\n    if constexpr (reversible) ret += \"\\\"reverse\\\"\
     \ \";\n    return ret;\n  }\n  std::size_t size() { return root ? root->size :\
     \ 0; }\n  void clear() { root = nullptr; }\n  template <class L = M,\n       \
-    \     typename std::enable_if_t<semigroup<L>::value> * = nullptr>\n  const T &operator[](id_t\
+    \     typename std::enable_if_t<semigroup<L>::value> * = nullptr>\n  const T &operator[](std::size_t\
     \ k) {\n    return get(k);\n  }\n  template <class L = M,\n            typename\
-    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](id_t k)\
-    \ {\n    return at(k);\n  }\n  const T &get(std::size_t k) { return splay(root,\
+    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](std::size_t\
+    \ k) {\n    return at(k);\n  }\n  const T &get(std::size_t k) { return splay(root,\
     \ k), root->val; }\n  T &at(std::size_t k) {\n    static_assert(!semigroup<M>::value,\
     \ \"\\\"at\\\" is not available\");\n    return splay(root, k), root->val;\n \
     \ }\n  void set(std::size_t k, T val) {\n    splay(root, k), root->val = val,\
@@ -289,10 +289,10 @@ data:
     \ \"\\\"apply\\\" \";\n    if constexpr (reversible) ret += \"\\\"reverse\\\"\
     \ \";\n    return ret;\n  }\n  std::size_t size() { return root ? root->size :\
     \ 0; }\n  void clear() { root = nullptr; }\n  template <class L = M,\n       \
-    \     typename std::enable_if_t<semigroup<L>::value> * = nullptr>\n  const T &operator[](id_t\
+    \     typename std::enable_if_t<semigroup<L>::value> * = nullptr>\n  const T &operator[](std::size_t\
     \ k) {\n    return get(k);\n  }\n  template <class L = M,\n            typename\
-    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](id_t k)\
-    \ {\n    return at(k);\n  }\n  const T &get(std::size_t k) { return splay(root,\
+    \ std::enable_if_t<!semigroup<L>::value> * = nullptr>\n  T &operator[](std::size_t\
+    \ k) {\n    return at(k);\n  }\n  const T &get(std::size_t k) { return splay(root,\
     \ k), root->val; }\n  T &at(std::size_t k) {\n    static_assert(!semigroup<M>::value,\
     \ \"\\\"at\\\" is not available\");\n    return splay(root, k), root->val;\n \
     \ }\n  void set(std::size_t k, T val) {\n    splay(root, k), root->val = val,\
@@ -330,7 +330,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
-  timestamp: '2022-06-23 23:46:03+09:00'
+  timestamp: '2022-07-04 17:10:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
