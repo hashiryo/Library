@@ -39,6 +39,7 @@ data:
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
     #endif\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\n\
     HAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\nHAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\n\
+    HAS_MEMBER(is_reject);\n#undef HAS_TYPE\n#undef HAS_MEMBER\n#undef HAS_CHECK\n\
     template <class A>\nusing is_automaton =\n    std::conjunction<has_symbol_t<A>,\
     \ has_alphabet<A>, has_initial_state<A>,\n                     has_transition<A>,\
     \ has_is_accept<A>>;\ntemplate <class A>\nusing trans_t = std::invoke_result_t<decltype(&A::transition),\
@@ -142,7 +143,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc127_a.test.cpp
   requiredBy: []
-  timestamp: '2022-07-07 13:36:48+09:00'
+  timestamp: '2022-07-07 14:09:04+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc127_a.test.cpp

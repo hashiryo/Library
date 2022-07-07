@@ -10,9 +10,9 @@ data:
     title: "DFA\u4E0A\u306EDP"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc117/tasks/abc117_d
@@ -35,6 +35,7 @@ data:
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
     #endif\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\n\
     HAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\nHAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\n\
+    HAS_MEMBER(is_reject);\n#undef HAS_TYPE\n#undef HAS_MEMBER\n#undef HAS_CHECK\n\
     template <class A>\nusing is_automaton =\n    std::conjunction<has_symbol_t<A>,\
     \ has_alphabet<A>, has_initial_state<A>,\n                     has_transition<A>,\
     \ has_is_accept<A>>;\ntemplate <class A>\nusing trans_t = std::invoke_result_t<decltype(&A::transition),\
@@ -79,27 +80,27 @@ data:
     \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long N, K;\n  cin >>\
     \ N >> K;\n  long long A[N];\n  for (int i = 0; i < N; i++) cin >> A[i];\n  auto\
     \ add = [](long long &l, const long long &r) {\n    if (l < r) l = r;\n  };\n\
-    \  auto f = [&](const long long &x, int b, int k) {\n    long long val = x;\n\
-    \    for (int i = N; i--;) val += (((A[i] >> k) & 1) ^ b) << k;\n    return val;\n\
-    \  };\n  cout << dfa_dp<long long>(DFA_Inequality(K, 2, 41), 41, add, f, 0, 0)\
-    \ << '\\n';\n  return 0;\n}\n"
+    \  auto f = [&](long long x, int b, int k) {\n    int h = 40 - k;\n    for (int\
+    \ i = N; i--;) x += (((A[i] >> h) & 1) ^ b) << h;\n    return x;\n  };\n  cout\
+    \ << dfa_dp<long long>(DFA_Inequality(K, 2, 41), 41, add, f, 0, 0) << '\\n';\n\
+    \  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc117/tasks/abc117_d\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\n#include \"src/Automaton/DFA_Inequality.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  long long N, K;\n  cin >> N >> K;\n  long long A[N];\n  for (int i = 0; i <\
     \ N; i++) cin >> A[i];\n  auto add = [](long long &l, const long long &r) {\n\
-    \    if (l < r) l = r;\n  };\n  auto f = [&](const long long &x, int b, int k)\
-    \ {\n    long long val = x;\n    for (int i = N; i--;) val += (((A[i] >> k) &\
-    \ 1) ^ b) << k;\n    return val;\n  };\n  cout << dfa_dp<long long>(DFA_Inequality(K,\
-    \ 2, 41), 41, add, f, 0, 0) << '\\n';\n  return 0;\n}"
+    \    if (l < r) l = r;\n  };\n  auto f = [&](long long x, int b, int k) {\n  \
+    \  int h = 40 - k;\n    for (int i = N; i--;) x += (((A[i] >> h) & 1) ^ b) <<\
+    \ h;\n    return x;\n  };\n  cout << dfa_dp<long long>(DFA_Inequality(K, 2, 41),\
+    \ 41, add, f, 0, 0) << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Automaton/dfa_dp.hpp
   - src/Automaton/DFA_Inequality.hpp
   isVerificationFile: true
   path: test/atcoder/abc117_d.test.cpp
   requiredBy: []
-  timestamp: '2022-07-07 13:36:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-07-07 14:09:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc117_d.test.cpp
 layout: document

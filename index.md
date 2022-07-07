@@ -8,7 +8,7 @@ data:
       title: Mo
   - name: src/Automaton
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/DFA_Compress.hpp
       title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
     - icon: ':question:'
@@ -651,7 +651,7 @@ data:
       title: test/aoj/NTL_2_F.test.cpp
   - name: test/atcoder
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc117_d.test.cpp
       title: test/atcoder/abc117_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -684,7 +684,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc208_e.test.cpp
       title: test/atcoder/abc208_e.test.cpp
     - icon: ':heavy_check_mark:'
