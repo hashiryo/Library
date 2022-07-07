@@ -79,6 +79,9 @@ data:
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc235_f.test.cpp
+    title: test/atcoder/abc235_f.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
   - icon: ':heavy_check_mark:'
@@ -450,6 +453,7 @@ data:
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/arc105_f.test.cpp
+  - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc213_g.test.cpp
   - test/aoj/3072.test.cpp
