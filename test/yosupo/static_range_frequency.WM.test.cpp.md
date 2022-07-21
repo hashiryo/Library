@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_frequency
@@ -33,37 +33,36 @@ data:
     \ << (k & 31)) - 1)));\n    }\n    std::size_t rank0(std::size_t k) const { return\
     \ k - rank(k); }\n  };\n  std::size_t len, lg;\n  std::vector<SuccinctIndexableDictionary>\
     \ mat;\n  std::vector<T> vec;\n\n public:\n  WaveletMatrix() = default;\n  WaveletMatrix(const\
-    \ std::vector<T> &v)\n      : len(v.size()),\n        lg(32 - __builtin_clz(std::max(1u,\
-    \ len))),\n        mat(lg, len),\n        vec(v) {\n    std::sort(vec.begin(),\
-    \ vec.end());\n    vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n\
-    \    std::vector<unsigned> cur(len), nex(len);\n    for (int i = len; i--;)\n\
-    \      cur[i] = std::lower_bound(vec.begin(), vec.end(), v[i]) - vec.begin();\n\
-    \    for (auto h = lg; h--; cur.swap(nex)) {\n      for (std::size_t i = 0; i\
-    \ < len; i++)\n        if ((cur[i] >> h) & 1) mat[h].set(i);\n      mat[h].build();\n\
-    \      std::array it{nex.begin(), nex.begin() + mat[h].zeros};\n      for (std::size_t\
-    \ i = 0; i < len; i++) *it[mat[h][i]]++ = cur[i];\n    }\n  }\n  // k-th(0-indexed)\
-    \ smallest number in v[l,r)\n  T kth_smallest(int l, int r, int k) const {\n \
-    \   assert(k < r - l);\n    std::size_t ret = 0;\n    for (auto h = lg; h--;)\n\
-    \      if (auto l0 = mat[h].rank0(l), r0 = mat[h].rank0(r); k >= r0 - l0) {\n\
-    \        k -= r0 - l0, ret |= 1 << h;\n        l += mat[h].zeros - l0, r += mat[h].zeros\
-    \ - r0;\n      } else\n        l = l0, r = r0;\n    return vec[ret];\n  }\n  //\
-    \ k-th(0-indexed) largest number in v[l,r)\n  T kth_largest(int l, int r, int\
-    \ k) const {\n    return kth_smallest(l, r, r - l - k - 1);\n  }\n  // count i\
-    \ s.t. (l <= i < r) && (v[i] < ub)\n  std::size_t count(int l, int r, T ub) const\
-    \ {\n    std::size_t x = std::lower_bound(vec.begin(), vec.end(), ub) - vec.begin();\n\
-    \    if (x >= 1u << lg) return r - l;\n    if (x == 0) return 0;\n    std::size_t\
-    \ ret = 0;\n    for (auto h = lg; h--;)\n      if (auto l0 = mat[h].rank0(l),\
-    \ r0 = mat[h].rank0(r); (x >> h) & 1)\n        ret += r0 - l0, l += mat[h].zeros\
-    \ - l0, r += mat[h].zeros - r0;\n      else\n        l = l0, r = r0;\n    return\
-    \ ret;\n  }\n  // count i s.t. (l <= i < r) && (lb <= v[i] < ub)\n  std::size_t\
-    \ count(int l, int r, T lb, T ub) const {\n    return count(l, r, ub) - count(l,\
-    \ r, lb);\n  }\n};\n\nclass DQuery {\n  std::vector<int> next;\n  WaveletMatrix<int>\
-    \ wm;\n\n public:\n  template <class T>\n  DQuery(const std::vector<T> &v) : next(v.size(),\
-    \ -1) {\n    std::map<T, int> mp;\n    for (int i = v.size(); i--; mp[v[i]] =\
-    \ i)\n      if (mp.count(v[i])) next[mp[v[i]]] = i;\n    wm = WaveletMatrix(next);\n\
-    \  }\n  std::size_t number_of_types(int l, int r) const { return wm.count(l, r,\
-    \ l); }\n};\n#line 4 \"test/yosupo/static_range_frequency.WM.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ std::vector<T> &v)\n      : len(v.size()),\n        lg(32 - __builtin_clz(std::max<int>(len,\
+    \ 1))),\n        mat(lg, len),\n        vec(v) {\n    std::sort(vec.begin(), vec.end());\n\
+    \    vec.erase(std::unique(vec.begin(), vec.end()), vec.end());\n    std::vector<unsigned>\
+    \ cur(len), nex(len);\n    for (int i = len; i--;)\n      cur[i] = std::lower_bound(vec.begin(),\
+    \ vec.end(), v[i]) - vec.begin();\n    for (auto h = lg; h--; cur.swap(nex)) {\n\
+    \      for (std::size_t i = 0; i < len; i++)\n        if ((cur[i] >> h) & 1) mat[h].set(i);\n\
+    \      mat[h].build();\n      std::array it{nex.begin(), nex.begin() + mat[h].zeros};\n\
+    \      for (std::size_t i = 0; i < len; i++) *it[mat[h][i]]++ = cur[i];\n    }\n\
+    \  }\n  // k-th(0-indexed) smallest number in v[l,r)\n  T kth_smallest(int l,\
+    \ int r, int k) const {\n    assert(k < r - l);\n    std::size_t ret = 0;\n  \
+    \  for (auto h = lg; h--;)\n      if (auto l0 = mat[h].rank0(l), r0 = mat[h].rank0(r);\
+    \ k >= r0 - l0) {\n        k -= r0 - l0, ret |= 1 << h;\n        l += mat[h].zeros\
+    \ - l0, r += mat[h].zeros - r0;\n      } else\n        l = l0, r = r0;\n    return\
+    \ vec[ret];\n  }\n  // k-th(0-indexed) largest number in v[l,r)\n  T kth_largest(int\
+    \ l, int r, int k) const {\n    return kth_smallest(l, r, r - l - k - 1);\n  }\n\
+    \  // count i s.t. (l <= i < r) && (v[i] < ub)\n  std::size_t count(int l, int\
+    \ r, T ub) const {\n    std::size_t x = std::lower_bound(vec.begin(), vec.end(),\
+    \ ub) - vec.begin();\n    if (x >= 1u << lg) return r - l;\n    if (x == 0) return\
+    \ 0;\n    std::size_t ret = 0;\n    for (auto h = lg; h--;)\n      if (auto l0\
+    \ = mat[h].rank0(l), r0 = mat[h].rank0(r); (x >> h) & 1)\n        ret += r0 -\
+    \ l0, l += mat[h].zeros - l0, r += mat[h].zeros - r0;\n      else\n        l =\
+    \ l0, r = r0;\n    return ret;\n  }\n  // count i s.t. (l <= i < r) && (lb <=\
+    \ v[i] < ub)\n  std::size_t count(int l, int r, T lb, T ub) const {\n    return\
+    \ count(l, r, ub) - count(l, r, lb);\n  }\n};\n\nclass DQuery {\n  std::vector<int>\
+    \ next;\n  WaveletMatrix<int> wm;\n\n public:\n  template <class T>\n  DQuery(const\
+    \ std::vector<T> &v) : next(v.size(), -1) {\n    std::map<T, int> mp;\n    for\
+    \ (int i = v.size(); i--; mp[v[i]] = i)\n      if (mp.count(v[i])) next[mp[v[i]]]\
+    \ = i;\n    wm = WaveletMatrix(next);\n  }\n  std::size_t number_of_types(int\
+    \ l, int r) const { return wm.count(l, r, l); }\n};\n#line 4 \"test/yosupo/static_range_frequency.WM.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
     \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, x;\n\
     \    cin >> l >> r >> x;\n    cout << (l < r ? wm.count(l, r, x, x + 1) : 0) <<\
@@ -80,8 +79,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/static_range_frequency.WM.test.cpp
   requiredBy: []
-  timestamp: '2022-07-21 15:44:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-07-21 16:46:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/static_range_frequency.WM.test.cpp
 layout: document
