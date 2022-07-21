@@ -165,12 +165,12 @@ data:
   timestamp: '2022-02-07 21:00:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/atcoder/abc172_d.numth.test.cpp
+  - test/atcoder/agc038_c.numth.test.cpp
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
-  - test/atcoder/abc172_d.numth.test.cpp
-  - test/atcoder/agc038_c.numth.test.cpp
 documentation_of: src/Math/NumberTheory.hpp
 layout: document
 redirect_from:

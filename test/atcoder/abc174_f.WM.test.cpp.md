@@ -11,11 +11,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
+    PROBLEM: https://atcoder.jp/contests/abc174/tasks/abc174_f
     links:
-    - https://judge.yosupo.jp/problem/range_kth_smallest
-  bundledCode: "#line 1 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n#include <bits/stdc++.h>\n\
+    - https://atcoder.jp/contests/abc174/tasks/abc174_f
+  bundledCode: "#line 1 \"test/atcoder/abc174_f.WM.test.cpp\"\n#define PROBLEM \"\
+    https://atcoder.jp/contests/abc174/tasks/abc174_f\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/DataStructure/WaveletMatrix.hpp\"\n/**\n * @title Wavelet\u884C\u5217\
     \n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * \u5185\u90E8\u3067\u5EA7\u5727\
     \u3055\u308C\u308B\n * \u3064\u3044\u3067\u306B\u533A\u9593\u5185\u306E\u7A2E\u985E\
@@ -61,31 +61,30 @@ data:
     \ std::vector<T> &v) : next(v.size(), -1) {\n    std::map<T, int> mp;\n    for\
     \ (int i = v.size(); i--; mp[v[i]] = i)\n      if (mp.count(v[i])) next[mp[v[i]]]\
     \ = i;\n    wm = WaveletMatrix(next);\n  }\n  std::size_t number_of_types(int\
-    \ l, int r) const { return wm.count(l, r, l); }\n};\n#line 4 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\
+    \ l, int r) const { return wm.count(l, r, l); }\n};\n#line 4 \"test/atcoder/abc174_f.WM.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, k;\n\
-    \    cin >> l >> r >> k;\n    cout << wm.kth_smallest(l, r, k) << \"\\n\";\n \
-    \ }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
-    #include <bits/stdc++.h>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, k;\n\
-    \    cin >> l >> r >> k;\n    cout << wm.kth_smallest(l, r, k) << \"\\n\";\n \
-    \ }\n  return 0;\n}"
+    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> c(N);\n  for (int i = 0; i < N;\
+    \ i++) cin >> c[i];\n  DQuery dq(c);\n  while (Q--) {\n    int l, r;\n    cin\
+    \ >> l >> r, l--;\n    cout << dq.number_of_types(l, r) << '\\n';\n  }\n  return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc174/tasks/abc174_f\"\n#include\
+    \ <bits/stdc++.h>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N,\
+    \ Q;\n  cin >> N >> Q;\n  vector<int> c(N);\n  for (int i = 0; i < N; i++) cin\
+    \ >> c[i];\n  DQuery dq(c);\n  while (Q--) {\n    int l, r;\n    cin >> l >> r,\
+    \ l--;\n    cout << dq.number_of_types(l, r) << '\\n';\n  }\n  return 0;\n}"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
   isVerificationFile: true
-  path: test/yosupo/range_kth_smallest.WM.test.cpp
+  path: test/atcoder/abc174_f.WM.test.cpp
   requiredBy: []
   timestamp: '2022-07-21 11:25:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/range_kth_smallest.WM.test.cpp
+documentation_of: test/atcoder/abc174_f.WM.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/range_kth_smallest.WM.test.cpp
-- /verify/test/yosupo/range_kth_smallest.WM.test.cpp.html
-title: test/yosupo/range_kth_smallest.WM.test.cpp
+- /verify/test/atcoder/abc174_f.WM.test.cpp
+- /verify/test/atcoder/abc174_f.WM.test.cpp.html
+title: test/atcoder/abc174_f.WM.test.cpp
 ---
