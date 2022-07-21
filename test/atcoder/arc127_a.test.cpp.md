@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc127/tasks/arc127_a
@@ -119,8 +119,8 @@ data:
     \  return a == 1 ? s + 1 : -1;\n  }\n  inline bool is_accept(int s) const { return\
     \ s == n; }\n  const int state_size;\n};\n\nsigned main() {\n  cin.tie(0);\n \
     \ ios::sync_with_stdio(false);\n  long long N;\n  cin >> N;\n  auto dfa_le = DFA_Inequality(N,\
-    \ 10, 15);\n  long long ans = 0;\n  for (int i = 1; i <= 15; i++)\n    ans +=\
-    \ dfa_dp<long long>(dfa_le & DFA_Leading1s(i), 15);\n  cout << ans << '\\n';\n\
+    \ 10, 16);\n  long long ans = 0;\n  for (int i = 1; i <= 16; i++)\n    ans +=\
+    \ dfa_dp<long long>(dfa_le & DFA_Leading1s(i), 16);\n  cout << ans << '\\n';\n\
     \  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc127/tasks/arc127_a\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\n#include \"src/Automaton/dfa_operations.hpp\"\
@@ -133,8 +133,8 @@ data:
     \  return a == 1 ? s + 1 : -1;\n  }\n  inline bool is_accept(int s) const { return\
     \ s == n; }\n  const int state_size;\n};\n\nsigned main() {\n  cin.tie(0);\n \
     \ ios::sync_with_stdio(false);\n  long long N;\n  cin >> N;\n  auto dfa_le = DFA_Inequality(N,\
-    \ 10, 15);\n  long long ans = 0;\n  for (int i = 1; i <= 15; i++)\n    ans +=\
-    \ dfa_dp<long long>(dfa_le & DFA_Leading1s(i), 15);\n  cout << ans << '\\n';\n\
+    \ 10, 16);\n  long long ans = 0;\n  for (int i = 1; i <= 16; i++)\n    ans +=\
+    \ dfa_dp<long long>(dfa_le & DFA_Leading1s(i), 16);\n  cout << ans << '\\n';\n\
     \  return 0;\n}"
   dependsOn:
   - src/Automaton/dfa_dp.hpp
@@ -143,8 +143,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc127_a.test.cpp
   requiredBy: []
-  timestamp: '2022-07-07 14:09:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-07-21 15:44:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc127_a.test.cpp
 layout: document
