@@ -76,17 +76,17 @@ data:
   isVerificationFile: false
   path: src/Math/is_prime.hpp
   requiredBy:
-  - src/Math/tetration.hpp
-  - src/Math/Factors.hpp
   - src/Math/ModIntExp.hpp
+  - src/Math/Factors.hpp
+  - src/Math/tetration.hpp
   timestamp: '2022-07-04 14:16:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc228_e.test.cpp
-  - test/aoj/NTL_1_D.test.cpp
   - test/yukicoder/3030.test.cpp
-  - test/yosupo/factorize.test.cpp
   - test/yosupo/tetration_mod.test.cpp
+  - test/yosupo/factorize.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
+  - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/is_prime.hpp
 layout: document
 redirect_from:

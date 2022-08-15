@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Algorithm/Mo.hpp
     title: Mo
   - icon: ':heavy_check_mark:'
@@ -57,7 +57,7 @@ data:
     \ solutions\n  }\n};\n#line 5 \"test/yosupo/static_range_inversions_query.mo.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  int A[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> A[i];\n  vector<int> v(A, A + N);\n  sort(v.begin(), v.end());\n  v.erase(unique(v.begin(),\
+    \ >> A[i];\n  vector<int> v(A, A + N);\n  sort(v.begin(), v.end()), v.erase(unique(v.begin(),\
     \ v.end()), v.end());\n  for (int i = 0; i < N; i++)\n    A[i] = lower_bound(v.begin(),\
     \ v.end(), A[i]) - v.begin();\n  Mo mo(N);\n  for (int q = 0; q < Q; q++) {\n\
     \    int l, r;\n    cin >> l >> r;\n    mo.query(l, r);\n  }\n  BinaryIndexedTree<long\
@@ -69,12 +69,12 @@ data:
     \  inv -= total - bit.sum(A[i] + 1);\n    bit.add(A[i], -1);\n    total--;\n \
     \ };\n  long long ans[Q];\n  auto out = [&](int q) { ans[q] = inv; };\n  mo.run(addl,\
     \ addr, erasel, eraser, out);\n  for (int q = 0; q < Q; q++) cout << ans[q] <<\
-    \ \"\\n\";\n  cout << flush;\n  return 0;\n}\n"
+    \ \"\\n\";\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
     \n#include <bits/stdc++.h>\n#include \"src/Algorithm/Mo.hpp\"\n#include \"src/DataStructure/BinaryIndexedTree.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  int A[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> A[i];\n  vector<int> v(A, A + N);\n  sort(v.begin(), v.end());\n  v.erase(unique(v.begin(),\
+    \ >> A[i];\n  vector<int> v(A, A + N);\n  sort(v.begin(), v.end()), v.erase(unique(v.begin(),\
     \ v.end()), v.end());\n  for (int i = 0; i < N; i++)\n    A[i] = lower_bound(v.begin(),\
     \ v.end(), A[i]) - v.begin();\n  Mo mo(N);\n  for (int q = 0; q < Q; q++) {\n\
     \    int l, r;\n    cin >> l >> r;\n    mo.query(l, r);\n  }\n  BinaryIndexedTree<long\
@@ -86,14 +86,14 @@ data:
     \  inv -= total - bit.sum(A[i] + 1);\n    bit.add(A[i], -1);\n    total--;\n \
     \ };\n  long long ans[Q];\n  auto out = [&](int q) { ans[q] = inv; };\n  mo.run(addl,\
     \ addr, erasel, eraser, out);\n  for (int q = 0; q < Q; q++) cout << ans[q] <<\
-    \ \"\\n\";\n  cout << flush;\n  return 0;\n}"
+    \ \"\\n\";\n  return 0;\n}"
   dependsOn:
   - src/Algorithm/Mo.hpp
   - src/DataStructure/BinaryIndexedTree.hpp
   isVerificationFile: true
   path: test/yosupo/static_range_inversions_query.mo.test.cpp
   requiredBy: []
-  timestamp: '2020-11-07 15:26:25+09:00'
+  timestamp: '2022-08-16 03:00:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/static_range_inversions_query.mo.test.cpp

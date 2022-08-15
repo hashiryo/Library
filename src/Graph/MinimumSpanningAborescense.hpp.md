@@ -147,9 +147,9 @@ data:
   timestamp: '2021-11-23 16:32:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2647.test.cpp
-  - test/aoj/GRL_2_B.test.cpp
   - test/yosupo/directedmst.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/2647.test.cpp
 documentation_of: src/Graph/MinimumSpanningAborescense.hpp
 layout: document
 redirect_from:
