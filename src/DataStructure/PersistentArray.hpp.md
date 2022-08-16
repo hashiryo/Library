@@ -64,8 +64,8 @@ data:
   timestamp: '2021-11-16 15:28:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/persistent_unionfind.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp
+  - test/yosupo/persistent_unionfind.test.cpp
 documentation_of: src/DataStructure/PersistentArray.hpp
 layout: document
 redirect_from:

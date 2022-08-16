@@ -63,15 +63,15 @@ data:
   isVerificationFile: false
   path: src/Math/berlekamp_massey.hpp
   requiredBy:
-  - src/LinearAlgebra/SparseSquareMatrix.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
+  - src/LinearAlgebra/SparseSquareMatrix.hpp
   timestamp: '2022-06-24 13:41:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1750.SparseMat.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
-  - test/yosupo/find_linear_recurrence.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
+  - test/yukicoder/1750.SparseMat.test.cpp
+  - test/yosupo/find_linear_recurrence.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp
 layout: document
 redirect_from:

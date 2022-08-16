@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: src/Algorithm
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Algorithm/Mo.hpp
       title: Mo
   - name: src/Automaton
@@ -735,11 +735,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.PushRelabel.test.cpp
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
-  - name: test/hackerrank
-    pages:
-    - icon: ':x:'
-      path: test/hackerrank/range-counting-query.Mo.test.cpp
-      title: test/hackerrank/range-counting-query.Mo.test.cpp
   - name: test/yosupo
     pages:
     - icon: ':heavy_check_mark:'
