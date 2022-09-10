@@ -1,17 +1,20 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: test/atcoder/abc179_c.cpp
+    title: test/atcoder/abc179_c.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.dujiao.test.cpp
     title: test/atcoder/abc172_d.dujiao.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u675C\u6559\u7B5B"
     links:
@@ -28,21 +31,21 @@ data:
     \ * dirichlet_inv_sum : O(N^(3/4))\n *  (\u305F\u3060\u3057\u524D\u51E6\u7406\u3067\
     N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
     \ : O(\u221AN)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
-    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\n\ntemplate <class T, class\
-    \ G, class H>\nT dirichlet_inv_sum(unsigned long long N, const G &gsum, const\
-    \ H &hsum,\n                    std::unordered_map<unsigned long long, T> &memo)\
-    \ {\n  auto it = memo.find(N);\n  if (it != memo.end()) return it->second;\n \
-    \ T ret = hsum(N);\n  for (unsigned long long d = 2, nN = double(N) / d, nd; nN;\n\
-    \       nN = double(N) / (d = nd))\n    ret -= dirichlet_inv_sum(nN, gsum, hsum,\
-    \ memo) *\n           (gsum((nd = double(N) / nN + 1) - 1) - gsum(d - 1));\n \
-    \ return memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class H>\nT\
-    \ dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum) {\n  std::unordered_map<unsigned\
-    \ long long, T> memo;\n  return dirichlet_inv_sum<T>(N, gsum, hsum, memo);\n}\n\
-    \n// sum f s.t. f :=  h * g\ntemplate <class T, class G, class H>\nT dirichlet_mul_sum(std::uint64_t\
-    \ N, const G &gsum, const H &hsum) {\n  const int sqrtN = sqrt(N);\n  T ret =\
-    \ 0;\n  for (int i = 1; i <= sqrtN; i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N\
-    \ / i);\n  for (int i = 1; i <= sqrtN; i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N\
-    \ / i);\n  return ret -= hsum(sqrtN) * gsum(sqrtN);\n}\n"
+    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
+    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (auto\
+    \ it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
+    \ gs1 = gsum(1), gs = gs1, ngs;\n  for (std::uint64_t d = 1, nN; nN = N / (d +\
+    \ 1); gs = ngs)\n    ret -= dirichlet_div_sum(nN, gsum, hsum, memo) *\n      \
+    \     ((ngs = gsum(d = N / nN)) - gs);\n  return memo[N] = ret / gs1;\n}\ntemplate\
+    \ <class T, class G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum,\
+    \ const H &hsum) {\n  std::unordered_map<std::uint64_t, T> memo;\n  return dirichlet_div_sum<T>(N,\
+    \ gsum, hsum, memo);\n}\n\n// sum f s.t. f :=  h * g\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_mul_sum(std::uint64_t N, const G &gsum, const H &hsum)\
+    \ {\n  const int sqrtN = std::sqrt(N);\n  T ret = 0;\n  for (int i = 1; i <= sqrtN;\
+    \ i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N / i);\n  for (int i = 1; i <= sqrtN;\
+    \ i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N / i);\n  return ret -= hsum(sqrtN)\
+    \ * gsum(sqrtN);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u675C\u6559\u7B5B\
     \n * @category \u6570\u5B66\n * @see https://maspypy.com/yukicoder-no-886-direct\n\
     \ * @see https://yukicoder.me/problems/no/1019/editorial\n * @see https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula\n\
@@ -50,30 +53,31 @@ data:
     \ * dirichlet_inv_sum : O(N^(3/4))\n *  (\u305F\u3060\u3057\u524D\u51E6\u7406\u3067\
     N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
     \ : O(\u221AN)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
-    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\n\ntemplate <class T, class\
-    \ G, class H>\nT dirichlet_inv_sum(unsigned long long N, const G &gsum, const\
-    \ H &hsum,\n                    std::unordered_map<unsigned long long, T> &memo)\
-    \ {\n  auto it = memo.find(N);\n  if (it != memo.end()) return it->second;\n \
-    \ T ret = hsum(N);\n  for (unsigned long long d = 2, nN = double(N) / d, nd; nN;\n\
-    \       nN = double(N) / (d = nd))\n    ret -= dirichlet_inv_sum(nN, gsum, hsum,\
-    \ memo) *\n           (gsum((nd = double(N) / nN + 1) - 1) - gsum(d - 1));\n \
-    \ return memo[N] = ret / gsum(1);\n}\ntemplate <class T, class G, class H>\nT\
-    \ dirichlet_inv_sum(std::uint64_t N, const G &gsum, const H &hsum) {\n  std::unordered_map<unsigned\
-    \ long long, T> memo;\n  return dirichlet_inv_sum<T>(N, gsum, hsum, memo);\n}\n\
-    \n// sum f s.t. f :=  h * g\ntemplate <class T, class G, class H>\nT dirichlet_mul_sum(std::uint64_t\
-    \ N, const G &gsum, const H &hsum) {\n  const int sqrtN = sqrt(N);\n  T ret =\
-    \ 0;\n  for (int i = 1; i <= sqrtN; i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N\
-    \ / i);\n  for (int i = 1; i <= sqrtN; i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N\
-    \ / i);\n  return ret -= hsum(sqrtN) * gsum(sqrtN);\n}"
+    \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
+    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (auto\
+    \ it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
+    \ gs1 = gsum(1), gs = gs1, ngs;\n  for (std::uint64_t d = 1, nN; nN = N / (d +\
+    \ 1); gs = ngs)\n    ret -= dirichlet_div_sum(nN, gsum, hsum, memo) *\n      \
+    \     ((ngs = gsum(d = N / nN)) - gs);\n  return memo[N] = ret / gs1;\n}\ntemplate\
+    \ <class T, class G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum,\
+    \ const H &hsum) {\n  std::unordered_map<std::uint64_t, T> memo;\n  return dirichlet_div_sum<T>(N,\
+    \ gsum, hsum, memo);\n}\n\n// sum f s.t. f :=  h * g\ntemplate <class T, class\
+    \ G, class H>\nT dirichlet_mul_sum(std::uint64_t N, const G &gsum, const H &hsum)\
+    \ {\n  const int sqrtN = std::sqrt(N);\n  T ret = 0;\n  for (int i = 1; i <= sqrtN;\
+    \ i++) ret += (hsum(i) - hsum(i - 1)) * gsum(N / i);\n  for (int i = 1; i <= sqrtN;\
+    \ i++) ret += (gsum(i) - gsum(i - 1)) * hsum(N / i);\n  return ret -= hsum(sqrtN)\
+    \ * gsum(sqrtN);\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/dujiao_sieve.hpp
-  requiredBy: []
-  timestamp: '2021-11-23 22:15:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy:
+  - test/atcoder/abc179_c.cpp
+  timestamp: '2022-09-10 14:49:37+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc172_d.dujiao.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
+  - test/atcoder/abc172_d.dujiao.test.cpp
 documentation_of: src/Math/dujiao_sieve.hpp
 layout: document
 redirect_from:

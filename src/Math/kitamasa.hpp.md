@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -380,10 +380,10 @@ data:
   timestamp: '2022-06-16 15:13:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/0168.test.cpp
-  - test/yukicoder/215.test.cpp
   - test/yukicoder/658.test.cpp
+  - test/yukicoder/215.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/aoj/0168.test.cpp
 documentation_of: src/Math/kitamasa.hpp
 layout: document
 redirect_from:

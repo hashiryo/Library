@@ -34,37 +34,38 @@ data:
     - https://codeforces.com/contest/464/problem/E
     - https://codeforces.com/contest/947/problem/C
     - https://codeforces.com/contest/966/problem/C
+    - https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title Segment-Tree(\u52D5\u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\
     \u30BF\u69CB\u9020\n * \u9045\u5EF6\u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\
     \n * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/464/problem/E\
     \ (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\u642C+find*2)\n// https://codeforces.com/contest/947/problem/C\
     \ (find+xor)\n// https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
-    \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n\n//\
-    \ BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)      \
-    \                        \\\n  template <class T>                            \
-    \              \\\n  struct has_##member {                                   \
-    \    \\\n    template <class U, Dummy>                                 \\\n  \
-    \  static std::true_type check(U *);                         \\\n    static std::false_type\
-    \ check(...);                        \\\n    static T *mClass;               \
-    \                          \\\n    static const bool value = decltype(check(mClass))::value;\
-    \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
-    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
-    #endif\n\ntemplate <typename M, bool persistent = false, std::uint8_t HEIGHT =\
-    \ 30>\nclass SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
-    \ L>\n  using monoid = std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n  template\
-    \ <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
-    \ has_composition<L>>;\n  using id_t = long long;\n  template <class T, class\
-    \ tDerived, class F = std::nullptr_t>\n  struct Node_B {\n    using E = F;\n \
-    \   T val;\n    tDerived *ch[2] = {nullptr, nullptr};\n  };\n  template <bool\
-    \ mo_, bool du_, typename tEnable = void>\n  struct Node_D : Node_B<M, Node_D<mo_,\
-    \ du_, tEnable>> {};\n  template <bool mo_, bool du_>\n  struct Node_D<mo_, du_,\
-    \ typename std::enable_if_t<mo_ && !du_>>\n      : Node_B<typename M::T, Node_D<mo_,\
-    \ du_>> {};\n  template <bool mo_, bool du_>\n  struct Node_D<mo_, du_, typename\
-    \ std::enable_if_t<du_>>\n      : Node_B<typename M::T, Node_D<mo_, du_>, typename\
-    \ M::E> {\n    typename M::E lazy;\n    bool lazy_flg = false;\n  };\n  using\
-    \ Node = Node_D<monoid<M>::value, dual<M>::value>;\n  using T = decltype(Node::val);\n\
+    \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n// https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query\n\
+    // (\u6C38\u7D9A)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
+    \ Dummy)                              \\\n  template <class T>               \
+    \                           \\\n  struct has_##member {                      \
+    \                 \\\n    template <class U, Dummy>                          \
+    \       \\\n    static std::true_type check(U *);                         \\\n\
+    \    static std::false_type check(...);                        \\\n    static\
+    \ T *mClass;                                         \\\n    static const bool\
+    \ value = decltype(check(mClass))::value; \\\n  };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy = typename U::member)\n#endif\n\ntemplate <typename M, bool persistent\
+    \ = false, std::uint8_t HEIGHT = 30>\nclass SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n\
+    \  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n\
+    \  HAS_TYPE(E);\n  template <class L>\n  using monoid = std::conjunction<has_T<L>,\
+    \ has_op<L>, has_ti<L>>;\n  template <class L>\n  using dual =\n      std::conjunction<has_T<L>,\
+    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n  using id_t = long long;\n\
+    \  template <class T, class tDerived, class F = std::nullptr_t>\n  struct Node_B\
+    \ {\n    using E = F;\n    T val;\n    tDerived *ch[2] = {nullptr, nullptr};\n\
+    \  };\n  template <bool mo_, bool du_, typename tEnable = void>\n  struct Node_D\
+    \ : Node_B<M, Node_D<mo_, du_, tEnable>> {};\n  template <bool mo_, bool du_>\n\
+    \  struct Node_D<mo_, du_, typename std::enable_if_t<mo_ && !du_>>\n      : Node_B<typename\
+    \ M::T, Node_D<mo_, du_>> {};\n  template <bool mo_, bool du_>\n  struct Node_D<mo_,\
+    \ du_, typename std::enable_if_t<du_>>\n      : Node_B<typename M::T, Node_D<mo_,\
+    \ du_>, typename M::E> {\n    typename M::E lazy;\n    bool lazy_flg = false;\n\
+    \  };\n  using Node = Node_D<monoid<M>::value, dual<M>::value>;\n  using T = decltype(Node::val);\n\
     \  using E = typename Node::E;\n  Node *root;\n  static inline constexpr T def_val()\
     \ {\n    if constexpr (monoid<M>::value)\n      return M::ti();\n    else\n  \
     \    return T();\n  }\n  template <class S>\n  void build(Node *&t, const id_t\
@@ -186,31 +187,31 @@ data:
     :\n// https://codeforces.com/contest/464/problem/E (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\
     \u642C+find*2)\n// https://codeforces.com/contest/947/problem/C (find+xor)\n//\
     \ https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
-    \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n\n//\
-    \ BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)      \
-    \                        \\\n  template <class T>                            \
-    \              \\\n  struct has_##member {                                   \
-    \    \\\n    template <class U, Dummy>                                 \\\n  \
-    \  static std::true_type check(U *);                         \\\n    static std::false_type\
-    \ check(...);                        \\\n    static T *mClass;               \
-    \                          \\\n    static const bool value = decltype(check(mClass))::value;\
-    \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
-    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
-    #endif\n\ntemplate <typename M, bool persistent = false, std::uint8_t HEIGHT =\
-    \ 30>\nclass SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n\
-    \  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class\
-    \ L>\n  using monoid = std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n  template\
-    \ <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
-    \ has_composition<L>>;\n  using id_t = long long;\n  template <class T, class\
-    \ tDerived, class F = std::nullptr_t>\n  struct Node_B {\n    using E = F;\n \
-    \   T val;\n    tDerived *ch[2] = {nullptr, nullptr};\n  };\n  template <bool\
-    \ mo_, bool du_, typename tEnable = void>\n  struct Node_D : Node_B<M, Node_D<mo_,\
-    \ du_, tEnable>> {};\n  template <bool mo_, bool du_>\n  struct Node_D<mo_, du_,\
-    \ typename std::enable_if_t<mo_ && !du_>>\n      : Node_B<typename M::T, Node_D<mo_,\
-    \ du_>> {};\n  template <bool mo_, bool du_>\n  struct Node_D<mo_, du_, typename\
-    \ std::enable_if_t<du_>>\n      : Node_B<typename M::T, Node_D<mo_, du_>, typename\
-    \ M::E> {\n    typename M::E lazy;\n    bool lazy_flg = false;\n  };\n  using\
-    \ Node = Node_D<monoid<M>::value, dual<M>::value>;\n  using T = decltype(Node::val);\n\
+    \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n// https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query\n\
+    // (\u6C38\u7D9A)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
+    \ Dummy)                              \\\n  template <class T>               \
+    \                           \\\n  struct has_##member {                      \
+    \                 \\\n    template <class U, Dummy>                          \
+    \       \\\n    static std::true_type check(U *);                         \\\n\
+    \    static std::false_type check(...);                        \\\n    static\
+    \ T *mClass;                                         \\\n    static const bool\
+    \ value = decltype(check(mClass))::value; \\\n  };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy = typename U::member)\n#endif\n\ntemplate <typename M, bool persistent\
+    \ = false, std::uint8_t HEIGHT = 30>\nclass SegmentTree_Dynamic {\n  HAS_MEMBER(op);\n\
+    \  HAS_MEMBER(ti);\n  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n\
+    \  HAS_TYPE(E);\n  template <class L>\n  using monoid = std::conjunction<has_T<L>,\
+    \ has_op<L>, has_ti<L>>;\n  template <class L>\n  using dual =\n      std::conjunction<has_T<L>,\
+    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n  using id_t = long long;\n\
+    \  template <class T, class tDerived, class F = std::nullptr_t>\n  struct Node_B\
+    \ {\n    using E = F;\n    T val;\n    tDerived *ch[2] = {nullptr, nullptr};\n\
+    \  };\n  template <bool mo_, bool du_, typename tEnable = void>\n  struct Node_D\
+    \ : Node_B<M, Node_D<mo_, du_, tEnable>> {};\n  template <bool mo_, bool du_>\n\
+    \  struct Node_D<mo_, du_, typename std::enable_if_t<mo_ && !du_>>\n      : Node_B<typename\
+    \ M::T, Node_D<mo_, du_>> {};\n  template <bool mo_, bool du_>\n  struct Node_D<mo_,\
+    \ du_, typename std::enable_if_t<du_>>\n      : Node_B<typename M::T, Node_D<mo_,\
+    \ du_>, typename M::E> {\n    typename M::E lazy;\n    bool lazy_flg = false;\n\
+    \  };\n  using Node = Node_D<monoid<M>::value, dual<M>::value>;\n  using T = decltype(Node::val);\n\
     \  using E = typename Node::E;\n  Node *root;\n  static inline constexpr T def_val()\
     \ {\n    if constexpr (monoid<M>::value)\n      return M::ti();\n    else\n  \
     \    return T();\n  }\n  template <class S>\n  void build(Node *&t, const id_t\
@@ -330,16 +331,16 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy: []
-  timestamp: '2022-06-20 21:58:57+09:00'
+  timestamp: '2022-09-10 14:49:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc133_f.DynSeg.test.cpp
-  - test/aoj/2270.DynSeg.test.cpp
-  - test/aoj/3024.DynSeg.test.cpp
-  - test/aoj/DSL_2_I.DynSeg.test.cpp
   - test/yukicoder/649.DynSeg.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
+  - test/aoj/DSL_2_I.DynSeg.test.cpp
+  - test/aoj/3024.DynSeg.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document
 redirect_from:

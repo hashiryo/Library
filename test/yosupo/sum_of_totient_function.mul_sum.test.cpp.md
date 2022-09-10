@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/multiplicative_and_additive.hpp
-    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
   - icon: ':heavy_check_mark:'
     path: src/Math/prime_count.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
@@ -142,7 +142,7 @@ data:
     \ for (int e = 2; nn; nn = double(nn) / p, e++)\n        ret += rc(rc, nn, i +\
     \ 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n    }\n    return ret;\n  };\n\
     \  return dfs(dfs, N, 0, 1);\n}\n#line 3 \"src/Math/multiplicative_and_additive.hpp\"\
-    \n/**\n * @title \u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570\
+    \n/**\n * @title \u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570\
     \n * @category \u6570\u5B66\n * @see https://en.wikipedia.org/wiki/Arithmetic_function\n\
     \ */\n\n// BEGIN CUT HERE\n\nnamespace multiplicative_functions {\ntemplate <class\
     \ T>\nstruct Totient {\n  static constexpr T f(std::uint64_t p, short e) {\n \
@@ -190,7 +190,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 22:15:15+09:00'
+  timestamp: '2022-09-10 14:49:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

@@ -99,8 +99,8 @@ data:
   timestamp: '2022-06-24 14:06:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc236_g.test.cpp
   - test/yukicoder/1340.test.cpp
+  - test/atcoder/abc236_g.test.cpp
 documentation_of: src/Math/SemiRing.hpp
 layout: document
 redirect_from:

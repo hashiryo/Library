@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -396,10 +396,10 @@ data:
   timestamp: '2022-06-16 15:13:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/stirling_second.test.cpp
   - test/yosupo/partition.test.cpp
-  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/stirling_first.test.cpp
 documentation_of: src/Math/fps_sequence.hpp
 layout: document
 redirect_from:

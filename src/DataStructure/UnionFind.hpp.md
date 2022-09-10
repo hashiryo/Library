@@ -65,18 +65,18 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
-  - src/Graph/MinimumSpanningTree_Kruskal.hpp
   - src/Graph/MinimumSpanningAborescense.hpp
+  - src/Graph/MinimumSpanningTree_Kruskal.hpp
   timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2559.LCT_Dual.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/2647.test.cpp
-  - test/aoj/DSL_1_A.test.cpp
-  - test/aoj/GRL_2_A.kruskal.test.cpp
-  - test/aoj/GRL_2_B.test.cpp
   - test/yosupo/directedmst.test.cpp
+  - test/aoj/DSL_1_A.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/2647.test.cpp
+  - test/aoj/GRL_2_A.kruskal.test.cpp
+  - test/aoj/0342.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document
 redirect_from:

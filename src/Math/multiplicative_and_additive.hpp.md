@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    document_title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
+    document_title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
     links:
     - https://en.wikipedia.org/wiki/Arithmetic_function
   bundledCode: "#line 2 \"src/Math/multiplicative_and_additive.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title \u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570\
+    /**\n * @title \u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570\
     \n * @category \u6570\u5B66\n * @see https://en.wikipedia.org/wiki/Arithmetic_function\n\
     \ */\n\n// BEGIN CUT HERE\n\nnamespace multiplicative_functions {\ntemplate <class\
     \ T>\nstruct Totient {\n  static constexpr T f(std::uint64_t p, short e) {\n \
@@ -54,7 +54,7 @@ data:
     \ p, short) { return p; }\n  static std::vector<T> poly() { return {0, 1}; }\n\
     };\n}  // namespace additive_functions\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u4E57\u6CD5\u7684\
-    \u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570\n * @category \u6570\u5B66\n\
+    \u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570\n * @category \u6570\u5B66\n\
     \ * @see https://en.wikipedia.org/wiki/Arithmetic_function\n */\n\n// BEGIN CUT\
     \ HERE\n\nnamespace multiplicative_functions {\ntemplate <class T>\nstruct Totient\
     \ {\n  static constexpr T f(std::uint64_t p, short e) {\n    T ret = p - 1;\n\
@@ -88,17 +88,17 @@ data:
   isVerificationFile: false
   path: src/Math/multiplicative_and_additive.hpp
   requiredBy: []
-  timestamp: '2021-02-03 13:01:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-09-10 14:49:37+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/644.test.cpp
-  - test/yosupo/sum_of_totient_function.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/sum_of_totient_function.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document
 redirect_from:
 - /library/src/Math/multiplicative_and_additive.hpp
 - /library/src/Math/multiplicative_and_additive.hpp.html
-title: "\u4E57\u6CD5\u7684\u95A2\u6570\u3068\u52A0\u6CD5\u7684\u95A2\u6570"
+title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
 ---
