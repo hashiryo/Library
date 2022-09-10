@@ -42,7 +42,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/KDTree.hpp
       title: kD-Tree
     - icon: ':heavy_check_mark:'
@@ -714,9 +714,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
-    - icon: ':x:'
-      path: test/atcoder/abc234_h.KDT.test.cpp
-      title: test/atcoder/abc234_h.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
@@ -1053,7 +1050,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/665.test.cpp
       title: test/yukicoder/665.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.KDT.test.cpp
       title: test/yukicoder/728.KDT.test.cpp
     - icon: ':heavy_check_mark:'

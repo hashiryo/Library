@@ -12,9 +12,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc234_h.KDT.test.cpp
-    title: test/atcoder/abc234_h.KDT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
@@ -24,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.KDT.test.cpp
     title: test/yukicoder/728.KDT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: kD-Tree
     links:
@@ -267,7 +264,7 @@ data:
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
   timestamp: '2022-09-10 22:25:58+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/728.KDT.test.cpp
@@ -276,7 +273,6 @@ data:
   - test/aoj/1068.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
   - test/aoj/2842.KDT.test.cpp
-  - test/atcoder/abc234_h.KDT.test.cpp
 documentation_of: src/DataStructure/KDTree.hpp
 layout: document
 redirect_from:
