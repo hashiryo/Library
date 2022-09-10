@@ -6,20 +6,20 @@ data:
     title: kD-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://www.hackerrank.com/challenges/cube-summation/problemv
+    PROBLEM: https://www.hackerrank.com/challenges/cube-summation
     links:
-    - https://www.hackerrank.com/challenges/cube-summation/problemv
+    - https://www.hackerrank.com/challenges/cube-summation
   bundledCode: "#line 1 \"test/hackerrank/cube-summation.KDT.test.cpp\"\n#define PROBLEM\
-    \ \"https://www.hackerrank.com/challenges/cube-summation/problemv\"\n\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/DataStructure/KDTree.hpp\"\n/**\n * @title kD-Tree\n\
-    \ * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @see https://trap.jp/post/1489/\n\
-    \ */\n\n// verify\u7528\n// https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g\
-    \ (\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC+\u9045\u5EF6\u4F1D\u642C)\n// https://atcoder.jp/contests/past202004-open/tasks/past202004_n\
+    \ \"https://www.hackerrank.com/challenges/cube-summation\"\n\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/DataStructure/KDTree.hpp\"\n/**\n * @title kD-Tree\n * @category\
+    \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @see https://trap.jp/post/1489/\n */\n\n\
+    // verify\u7528\n// https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g (\u30AA\u30A4\
+    \u30E9\u30FC\u30C4\u30A2\u30FC+\u9045\u5EF6\u4F1D\u642C)\n// https://atcoder.jp/contests/past202004-open/tasks/past202004_n\
     \ (\u53CC\u5BFE)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
     \ Dummy)                              \\\n  template <class T>               \
     \                           \\\n  struct has_##member {                      \
@@ -144,11 +144,11 @@ data:
     \ {x, y, z});\n      } else {\n        auto [_, x1, y1, z1, x2, y2, z2] = q;\n\
     \        cout << kdt.fold({x1, x2}, {y1, y2}, {z1, z2}) << '\\n';\n      }\n \
     \   }\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://www.hackerrank.com/challenges/cube-summation/problemv\"\
-    \n\n#include <bits/stdc++.h>\n#include \"src/DataStructure/KDTree.hpp\"\n\n//\
-    \ 3\u6B21\u5143\nusing namespace std;\n\nstruct RSQ {\n  using T = long long;\n\
-    \  static T ti() { return 0; }\n  static T op(T l, T r) { return l + r; }\n};\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using KDT = KDTree<3,\
+  code: "#define PROBLEM \"https://www.hackerrank.com/challenges/cube-summation\"\n\
+    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/KDTree.hpp\"\n\n// 3\u6B21\
+    \u5143\nusing namespace std;\n\nstruct RSQ {\n  using T = long long;\n  static\
+    \ T ti() { return 0; }\n  static T op(T l, T r) { return l + r; }\n};\nsigned\
+    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using KDT = KDTree<3,\
     \ int, RSQ>;\n  int T;\n  cin >> T;\n  while (T--) {\n    int n, m;\n    cin >>\
     \ n >> m;\n    map<array<int, 3>, long long> mp;\n    vector<array<int, 7>> query;\n\
     \    while (m--) {\n      string op;\n      cin >> op;\n      if (op[0] == 'U')\
@@ -166,8 +166,8 @@ data:
   isVerificationFile: true
   path: test/hackerrank/cube-summation.KDT.test.cpp
   requiredBy: []
-  timestamp: '2022-09-10 22:25:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-09-10 22:58:49+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/cube-summation.KDT.test.cpp
 layout: document
