@@ -42,6 +42,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
+    - icon: ':question:'
+      path: src/DataStructure/KDTree.hpp
+      title: kD-Tree
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
@@ -318,6 +321,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0425.test.cpp
       title: test/aoj/0425.test.cpp
+    - icon: ':x:'
+      path: test/aoj/1068.KDT.test.cpp
+      title: test/aoj/1068.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1132.test.cpp
       title: test/aoj/1132.test.cpp
@@ -459,6 +465,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2842.BIT_2D.test.cpp
       title: test/aoj/2842.BIT_2D.test.cpp
+    - icon: ':x:'
+      path: test/aoj/2842.KDT.test.cpp
+      title: test/aoj/2842.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
@@ -586,6 +595,9 @@ data:
       path: test/aoj/DSL_2_A.SegTree.test.cpp
       title: test/aoj/DSL_2_A.SegTree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/DSL_2_C.KDT.test.cpp
+      title: test/aoj/DSL_2_C.KDT.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
       title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     - icon: ':heavy_check_mark:'
@@ -704,6 +716,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc234_h.KDT.test.cpp
+      title: test/atcoder/abc234_h.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
@@ -740,6 +755,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.PushRelabel.test.cpp
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
+  - name: test/hackerrank
+    pages:
+    - icon: ':x:'
+      path: test/hackerrank/cube-summation.KDT.test.cpp
+      title: test/hackerrank/cube-summation.KDT.test.cpp
   - name: test/yosupo
     pages:
     - icon: ':heavy_check_mark:'
@@ -863,6 +883,9 @@ data:
       path: test/yosupo/point_add_range_sum.BIT.test.cpp
       title: test/yosupo/point_add_range_sum.BIT.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+      title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -979,6 +1002,9 @@ data:
       path: test/yukicoder/1615.test.cpp
       title: test/yukicoder/1615.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yukicoder/1625.KDT.test.cpp
+      title: test/yukicoder/1625.KDT.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1750.SparseMat.test.cpp
       title: test/yukicoder/1750.SparseMat.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1029,6 +1055,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/665.test.cpp
       title: test/yukicoder/665.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/728.KDT.test.cpp
+      title: test/yukicoder/728.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp
