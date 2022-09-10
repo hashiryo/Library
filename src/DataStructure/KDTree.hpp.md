@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
   - icon: ':x:'
@@ -77,25 +77,25 @@ data:
     \    if constexpr (monoid<M>::value) M::mapping(ns[i].sum, x);\n  }\n  inline\
     \ void eval(int i) {\n    if (!ns[i].lazy_flg) return;\n    ns[i].lazy_flg = false;\n\
     \    propagate(ns[i].ch[0], ns[i].lazy), propagate(ns[i].ch[1], ns[i].lazy);\n\
-    \  }\n  inline void build(int &i, Iter bg, Iter ed, std::uint8_t div = 0) {\n\
-    \    static int cnt = 0;\n    if (ed - bg < 1) return;\n    const int n = ed -\
-    \ bg;\n    auto md = bg + n / 2;\n    std::nth_element(bg, md, ed, [div](const\
-    \ PosVal &l, const PosVal &r) {\n      return l.first[div] < r.first[div];\n \
-    \   });\n    ns[i = cnt++].val = md->second;\n    for (std::uint8_t j = K; j--;\
-    \ ns[i].pos[j] = md->first[j]) {\n      auto [mn, mx] =\n          std::minmax_element(bg,\
-    \ ed, [j](const PosVal &l, const PosVal &r) {\n            return l.first[j] <\
-    \ r.first[j];\n          });\n      ns[i].range[j][0] = mn->first[j], ns[i].range[j][1]\
-    \ = mx->first[j];\n    }\n    if (std::uint8_t nex = (div + 1) % K; n > 1)\n \
-    \     build(ns[i].ch[0], bg, md, nex), build(ns[i].ch[1], md + 1, ed, nex);\n\
-    \    if constexpr (monoid<M>::value) pushup(i);\n  }\n  template <class F, class\
-    \ G, class H>\n  inline T fold(int i, const F &in, const G &inall, const H &outall)\
+    \  }\n  inline void build(int &i, Iter bg, Iter ed, int &ts, std::uint8_t div\
+    \ = 0) {\n    if (ed - bg < 1) return;\n    const int n = ed - bg;\n    auto md\
+    \ = bg + n / 2;\n    std::nth_element(bg, md, ed, [div](const PosVal &l, const\
+    \ PosVal &r) {\n      return l.first[div] < r.first[div];\n    });\n    ns[i =\
+    \ ts++].val = md->second;\n    for (std::uint8_t j = K; j--; ns[i].pos[j] = md->first[j])\
+    \ {\n      auto [mn, mx] =\n          std::minmax_element(bg, ed, [j](const PosVal\
+    \ &l, const PosVal &r) {\n            return l.first[j] < r.first[j];\n      \
+    \    });\n      ns[i].range[j][0] = mn->first[j], ns[i].range[j][1] = mx->first[j];\n\
+    \    }\n    if (std::uint8_t nex = (div + 1) % K; n > 1)\n      build(ns[i].ch[0],\
+    \ bg, md, ts, nex),\n          build(ns[i].ch[1], md + 1, ed, ts, nex);\n    if\
+    \ constexpr (monoid<M>::value) pushup(i);\n  }\n  template <class F, class G,\
+    \ class H>\n  inline T fold(int i, const F &in, const G &inall, const H &outall)\
     \ {\n    static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\");\n\
     \    if (i == -1 || outall(ns[i].range)) return M::ti();\n    if (inall(ns[i].range))\
     \ return ns[i].sum;\n    if constexpr (dual<M>::value) eval(i);\n    T ret = M::op(fold(ns[i].ch[0],\
     \ in, inall, outall),\n                  fold(ns[i].ch[1], in, inall, outall));\n\
-    \    return in(ns[i].pos) ? M::op(ret, ns[i].val) : ret;\n  }\n  template <class\
-    \ F, class G, class H>\n  inline void apply(int i, const F &in, const G &inall,\
-    \ const H &outall,\n                    const E &x) {\n    static_assert(dual<M>::value,\
+    \    ret = in(ns[i].pos) ? M::op(ret, ns[i].val) : ret;\n    return ret;\n  }\n\
+    \  template <class F, class G, class H>\n  inline void apply(int i, const F &in,\
+    \ const G &inall, const H &outall,\n                    const E &x) {\n    static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\");\n    if (i == -1 || outall(ns[i].range))\
     \ return;\n    if (inall(ns[i].range)) return propagate(i, x), void();\n    if\
     \ (eval(i); in(ns[i].pos)) M::mapping(ns[i].val, x);\n    apply(ns[i].ch[0], in,\
@@ -127,10 +127,10 @@ data:
     \ return false;\n          return true;\n        },\n        [r](pos_t range[K][2])\
     \ {\n          for (std::uint8_t i = K; i--;)\n            if (range[i][1] < r[i][0]\
     \ || r[i][1] < range[i][0]) return true;\n          return false;\n        });\n\
-    \  }\n\n public:\n  KDTree(std::vector<PosVal> v) : ns(v.size()) {\n    int root;\n\
-    \    build(root, v.begin(), v.end());\n  }\n  T get(std::array<pos_t, K> pos)\
-    \ {\n    auto [ret, flg] = get(0, pos);\n    return assert(flg), ret;\n  }\n \
-    \ template <typename... Args>\n  T get(Args... ids) {\n    static_assert(sizeof...(ids)\
+    \  }\n\n public:\n  KDTree(std::vector<PosVal> v) : ns(v.size()) {\n    int root,\
+    \ timestamp = 0;\n    build(root, v.begin(), v.end(), timestamp);\n  }\n  T get(std::array<pos_t,\
+    \ K> pos) {\n    auto [ret, flg] = get(0, pos);\n    return assert(flg), ret;\n\
+    \  }\n  template <typename... Args>\n  T get(Args... ids) {\n    static_assert(sizeof...(ids)\
     \ == K);\n    static_assert(std::conjunction_v<std::is_convertible<Args, pos_t>...>);\n\
     \    auto [ret, flg] = get(0, {ids...});\n    return assert(flg), ret;\n  }\n\
     \  void set(T x, std::array<pos_t, K> pos) { assert(set(0, pos, x)); }\n  template\
@@ -190,25 +190,25 @@ data:
     \    if constexpr (monoid<M>::value) M::mapping(ns[i].sum, x);\n  }\n  inline\
     \ void eval(int i) {\n    if (!ns[i].lazy_flg) return;\n    ns[i].lazy_flg = false;\n\
     \    propagate(ns[i].ch[0], ns[i].lazy), propagate(ns[i].ch[1], ns[i].lazy);\n\
-    \  }\n  inline void build(int &i, Iter bg, Iter ed, std::uint8_t div = 0) {\n\
-    \    static int cnt = 0;\n    if (ed - bg < 1) return;\n    const int n = ed -\
-    \ bg;\n    auto md = bg + n / 2;\n    std::nth_element(bg, md, ed, [div](const\
-    \ PosVal &l, const PosVal &r) {\n      return l.first[div] < r.first[div];\n \
-    \   });\n    ns[i = cnt++].val = md->second;\n    for (std::uint8_t j = K; j--;\
-    \ ns[i].pos[j] = md->first[j]) {\n      auto [mn, mx] =\n          std::minmax_element(bg,\
-    \ ed, [j](const PosVal &l, const PosVal &r) {\n            return l.first[j] <\
-    \ r.first[j];\n          });\n      ns[i].range[j][0] = mn->first[j], ns[i].range[j][1]\
-    \ = mx->first[j];\n    }\n    if (std::uint8_t nex = (div + 1) % K; n > 1)\n \
-    \     build(ns[i].ch[0], bg, md, nex), build(ns[i].ch[1], md + 1, ed, nex);\n\
-    \    if constexpr (monoid<M>::value) pushup(i);\n  }\n  template <class F, class\
-    \ G, class H>\n  inline T fold(int i, const F &in, const G &inall, const H &outall)\
+    \  }\n  inline void build(int &i, Iter bg, Iter ed, int &ts, std::uint8_t div\
+    \ = 0) {\n    if (ed - bg < 1) return;\n    const int n = ed - bg;\n    auto md\
+    \ = bg + n / 2;\n    std::nth_element(bg, md, ed, [div](const PosVal &l, const\
+    \ PosVal &r) {\n      return l.first[div] < r.first[div];\n    });\n    ns[i =\
+    \ ts++].val = md->second;\n    for (std::uint8_t j = K; j--; ns[i].pos[j] = md->first[j])\
+    \ {\n      auto [mn, mx] =\n          std::minmax_element(bg, ed, [j](const PosVal\
+    \ &l, const PosVal &r) {\n            return l.first[j] < r.first[j];\n      \
+    \    });\n      ns[i].range[j][0] = mn->first[j], ns[i].range[j][1] = mx->first[j];\n\
+    \    }\n    if (std::uint8_t nex = (div + 1) % K; n > 1)\n      build(ns[i].ch[0],\
+    \ bg, md, ts, nex),\n          build(ns[i].ch[1], md + 1, ed, ts, nex);\n    if\
+    \ constexpr (monoid<M>::value) pushup(i);\n  }\n  template <class F, class G,\
+    \ class H>\n  inline T fold(int i, const F &in, const G &inall, const H &outall)\
     \ {\n    static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\");\n\
     \    if (i == -1 || outall(ns[i].range)) return M::ti();\n    if (inall(ns[i].range))\
     \ return ns[i].sum;\n    if constexpr (dual<M>::value) eval(i);\n    T ret = M::op(fold(ns[i].ch[0],\
     \ in, inall, outall),\n                  fold(ns[i].ch[1], in, inall, outall));\n\
-    \    return in(ns[i].pos) ? M::op(ret, ns[i].val) : ret;\n  }\n  template <class\
-    \ F, class G, class H>\n  inline void apply(int i, const F &in, const G &inall,\
-    \ const H &outall,\n                    const E &x) {\n    static_assert(dual<M>::value,\
+    \    ret = in(ns[i].pos) ? M::op(ret, ns[i].val) : ret;\n    return ret;\n  }\n\
+    \  template <class F, class G, class H>\n  inline void apply(int i, const F &in,\
+    \ const G &inall, const H &outall,\n                    const E &x) {\n    static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\");\n    if (i == -1 || outall(ns[i].range))\
     \ return;\n    if (inall(ns[i].range)) return propagate(i, x), void();\n    if\
     \ (eval(i); in(ns[i].pos)) M::mapping(ns[i].val, x);\n    apply(ns[i].ch[0], in,\
@@ -240,10 +240,10 @@ data:
     \ return false;\n          return true;\n        },\n        [r](pos_t range[K][2])\
     \ {\n          for (std::uint8_t i = K; i--;)\n            if (range[i][1] < r[i][0]\
     \ || r[i][1] < range[i][0]) return true;\n          return false;\n        });\n\
-    \  }\n\n public:\n  KDTree(std::vector<PosVal> v) : ns(v.size()) {\n    int root;\n\
-    \    build(root, v.begin(), v.end());\n  }\n  T get(std::array<pos_t, K> pos)\
-    \ {\n    auto [ret, flg] = get(0, pos);\n    return assert(flg), ret;\n  }\n \
-    \ template <typename... Args>\n  T get(Args... ids) {\n    static_assert(sizeof...(ids)\
+    \  }\n\n public:\n  KDTree(std::vector<PosVal> v) : ns(v.size()) {\n    int root,\
+    \ timestamp = 0;\n    build(root, v.begin(), v.end(), timestamp);\n  }\n  T get(std::array<pos_t,\
+    \ K> pos) {\n    auto [ret, flg] = get(0, pos);\n    return assert(flg), ret;\n\
+    \  }\n  template <typename... Args>\n  T get(Args... ids) {\n    static_assert(sizeof...(ids)\
     \ == K);\n    static_assert(std::conjunction_v<std::is_convertible<Args, pos_t>...>);\n\
     \    auto [ret, flg] = get(0, {ids...});\n    return assert(flg), ret;\n  }\n\
     \  void set(T x, std::array<pos_t, K> pos) { assert(set(0, pos, x)); }\n  template\
@@ -261,12 +261,12 @@ data:
     \ {\n    auto r = to_range(intervals...);\n    auto [in, inall, outall] = funcs(r);\n\
     \    apply(0, in, inall, outall, x);\n  }\n  template <class F, class G, class\
     \ H>\n  void apply(E x, const F &in, const G &inall, const H &outall) {\n    apply(0,\
-    \ in, inall, outall, x);\n  }\n};\n"
+    \ in, inall, outall, x);\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2022-09-10 19:37:18+09:00'
+  timestamp: '2022-09-10 22:25:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1625.KDT.test.cpp

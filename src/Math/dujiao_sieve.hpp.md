@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/atcoder/abc179_c.cpp
-    title: test/atcoder/abc179_c.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.dujiao.test.cpp
     title: test/atcoder/abc172_d.dujiao.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc179_c.test.cpp
+    title: test/atcoder/abc179_c.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
@@ -71,13 +71,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/Math/dujiao_sieve.hpp
-  requiredBy:
-  - test/atcoder/abc179_c.cpp
+  requiredBy: []
   timestamp: '2022-09-10 15:16:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/atcoder/abc172_d.dujiao.test.cpp
+  - test/atcoder/abc179_c.test.cpp
 documentation_of: src/Math/dujiao_sieve.hpp
 layout: document
 redirect_from:

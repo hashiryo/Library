@@ -295,11 +295,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
-  - name: test/atcoder
-    pages:
-    - icon: ':warning:'
-      path: test/atcoder/abc179_c.cpp
-      title: test/atcoder/abc179_c.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -321,7 +316,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0425.test.cpp
       title: test/aoj/0425.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1068.KDT.test.cpp
       title: test/aoj/1068.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -701,6 +696,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc179_c.test.cpp
+      title: test/atcoder/abc179_c.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
