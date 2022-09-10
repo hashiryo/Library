@@ -30,6 +30,7 @@ data:
   attributes:
     document_title: kD-Tree
     links:
+    - https://atcoder.jp/contests/abc234/tasks/abc234_h
     - https://atcoder.jp/contests/past202004-open/tasks/past202004_n
     - https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g
     - https://trap.jp/post/1489/
@@ -37,7 +38,8 @@ data:
     /**\n * @title kD-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @see https://trap.jp/post/1489/\n\
     \ */\n\n// verify\u7528\n// https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g\
     \ (\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC+\u9045\u5EF6\u4F1D\u642C)\n// https://atcoder.jp/contests/past202004-open/tasks/past202004_n\
-    \ (\u53CC\u5BFE)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
+    \ (\u53CC\u5BFE)\n// https://atcoder.jp/contests/abc234/tasks/abc234_h (\u5186\
+    \u5F62\u30AF\u30A8\u30EA)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
     \ Dummy)                              \\\n  template <class T>               \
     \                           \\\n  struct has_##member {                      \
     \                 \\\n    template <class U, Dummy>                          \
@@ -150,7 +152,8 @@ data:
     \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @see https://trap.jp/post/1489/\n */\n\n\
     // verify\u7528\n// https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g (\u30AA\u30A4\
     \u30E9\u30FC\u30C4\u30A2\u30FC+\u9045\u5EF6\u4F1D\u642C)\n// https://atcoder.jp/contests/past202004-open/tasks/past202004_n\
-    \ (\u53CC\u5BFE)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
+    \ (\u53CC\u5BFE)\n// https://atcoder.jp/contests/abc234/tasks/abc234_h (\u5186\
+    \u5F62\u30AF\u30A8\u30EA)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
     \ Dummy)                              \\\n  template <class T>               \
     \                           \\\n  struct has_##member {                      \
     \                 \\\n    template <class U, Dummy>                          \
@@ -263,7 +266,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2022-09-10 22:25:58+09:00'
+  timestamp: '2022-09-10 23:27:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1625.KDT.test.cpp

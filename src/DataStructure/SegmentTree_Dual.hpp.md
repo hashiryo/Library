@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc256_f.SegDual.test.cpp
+    title: test/atcoder/abc256_f.SegDual.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -64,6 +67,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
+  - test/atcoder/abc256_f.SegDual.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dual.hpp
 layout: document
 redirect_from:

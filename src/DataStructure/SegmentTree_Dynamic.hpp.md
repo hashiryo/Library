@@ -16,6 +16,9 @@ data:
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc256_f.DynSeg.test.cpp
+    title: test/atcoder/abc256_f.DynSeg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -340,6 +343,7 @@ data:
   - test/aoj/DSL_2_I.DynSeg.test.cpp
   - test/aoj/3024.DynSeg.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
+  - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document
