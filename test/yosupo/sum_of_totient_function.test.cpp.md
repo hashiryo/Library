@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/NumberTheory.hpp
     title: "\u7BE9\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/multiplicative_and_additive.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -96,9 +96,9 @@ data:
     N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
     \ : O(\u221AN)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
     \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
-    \ G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
-    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (auto\
-    \ it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
+    \ G, class H, class Int>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum,\
+    \ const H &hsum,\n                    std::unordered_map<Int, T> &memo) {\n  if\
+    \ (auto it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
     \ gs1 = gsum(1), gs = gs1, ngs;\n  for (std::uint64_t d = 1, nN; nN = N / (d +\
     \ 1); gs = ngs)\n    ret -= dirichlet_div_sum(nN, gsum, hsum, memo) *\n      \
     \     ((ngs = gsum(d = N / nN)) - gs);\n  return memo[N] = ret / gs1;\n}\ntemplate\
@@ -209,10 +209,9 @@ data:
     \ int M = 1 << (200 / 9);\n  auto phi = NT::multiplicative_table<Mint>(M, Totient<Mint>::f);\n\
     \  for (int i = 2; i < M; i++) phi[i] += phi[i - 1];\n  auto hsum = [](long long\
     \ N) { return Mint(N) * Mint(N + 1) / Mint(2); };\n  auto gsum = [](long long\
-    \ N) { return Mint(N); };\n  unordered_map<unsigned long long, Mint> memo;\n \
-    \ for (int i = 1; i < M; i++) memo[i] = phi[i];\n  long long N;\n  cin >> N;\n\
-    \  cout << dirichlet_div_sum<Mint>(N, gsum, hsum, memo) << '\\n';\n  return 0;\n\
-    }\n"
+    \ N) { return Mint(N); };\n  unordered_map<uint64_t, Mint> memo;\n  for (int i\
+    \ = 1; i < M; i++) memo[i] = phi[i];\n  long long N;\n  cin >> N;\n  cout << dirichlet_div_sum<Mint>(N,\
+    \ gsum, hsum, memo) << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/dujiao_sieve.hpp\"\
     \n#include \"src/Math/NumberTheory.hpp\"\n#include \"src/Math/multiplicative_and_additive.hpp\"\
@@ -221,10 +220,10 @@ data:
     \ multiplicative_functions;\n  const int M = 1 << (200 / 9);\n  auto phi = NT::multiplicative_table<Mint>(M,\
     \ Totient<Mint>::f);\n  for (int i = 2; i < M; i++) phi[i] += phi[i - 1];\n  auto\
     \ hsum = [](long long N) { return Mint(N) * Mint(N + 1) / Mint(2); };\n  auto\
-    \ gsum = [](long long N) { return Mint(N); };\n  unordered_map<unsigned long long,\
-    \ Mint> memo;\n  for (int i = 1; i < M; i++) memo[i] = phi[i];\n  long long N;\n\
-    \  cin >> N;\n  cout << dirichlet_div_sum<Mint>(N, gsum, hsum, memo) << '\\n';\n\
-    \  return 0;\n}"
+    \ gsum = [](long long N) { return Mint(N); };\n  unordered_map<uint64_t, Mint>\
+    \ memo;\n  for (int i = 1; i < M; i++) memo[i] = phi[i];\n  long long N;\n  cin\
+    \ >> N;\n  cout << dirichlet_div_sum<Mint>(N, gsum, hsum, memo) << '\\n';\n  return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/dujiao_sieve.hpp
@@ -233,8 +232,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2022-09-10 14:49:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-09-10 15:16:33+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
 layout: document

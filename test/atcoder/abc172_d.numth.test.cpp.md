@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/NumberTheory.hpp
     title: "\u7BE9\u306A\u3069"
   _extendedRequiredBy: []

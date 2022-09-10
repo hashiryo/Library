@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/dujiao_sieve.hpp
     title: "\u675C\u6559\u7B5B"
   _extendedRequiredBy: []
@@ -24,9 +24,9 @@ data:
     N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
     \ : O(\u221AN)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
     \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
-    \ G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
-    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (auto\
-    \ it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
+    \ G, class H, class Int>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum,\
+    \ const H &hsum,\n                    std::unordered_map<Int, T> &memo) {\n  if\
+    \ (auto it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
     \ gs1 = gsum(1), gs = gs1, ngs;\n  for (std::uint64_t d = 1, nN; nN = N / (d +\
     \ 1); gs = ngs)\n    ret -= dirichlet_div_sum(nN, gsum, hsum, memo) *\n      \
     \     ((ngs = gsum(d = N / nN)) - gs);\n  return memo[N] = ret / gs1;\n}\ntemplate\
@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc172_d.dujiao.test.cpp
   requiredBy: []
-  timestamp: '2022-09-10 14:49:37+09:00'
+  timestamp: '2022-09-10 15:16:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc172_d.dujiao.test.cpp

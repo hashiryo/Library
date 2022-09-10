@@ -190,13 +190,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
       path: src/Math/ModIntExp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/NumberTheory.hpp
       title: "\u7BE9\u306A\u3069"
     - icon: ':heavy_check_mark:'
@@ -220,7 +220,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/discrete_log.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/dujiao_sieve.hpp
       title: "\u675C\u6559\u7B5B"
     - icon: ':heavy_check_mark:'
@@ -242,7 +242,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/lagrange_interpolation.hpp
       title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
     - icon: ':heavy_check_mark:'
@@ -940,7 +940,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.test.cpp
       title: test/yosupo/sum_of_totient_function.test.cpp
     - icon: ':heavy_check_mark:'

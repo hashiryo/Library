@@ -198,7 +198,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -249,9 +249,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: ModInt
     links: []
@@ -394,7 +394,7 @@ data:
   - src/Math/FormalPowerSeries.hpp
   - src/Math/fps_sequence.hpp
   timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/3046.test.cpp

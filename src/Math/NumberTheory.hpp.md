@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,9 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u7BE9\u306A\u3069"
     links:
@@ -163,7 +163,7 @@ data:
   path: src/Math/NumberTheory.hpp
   requiredBy: []
   timestamp: '2022-09-10 14:49:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/1019.test.cpp

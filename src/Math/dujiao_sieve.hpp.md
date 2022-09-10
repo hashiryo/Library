@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.dujiao.test.cpp
     title: test/atcoder/abc172_d.dujiao.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u675C\u6559\u7B5B"
     links:
@@ -32,9 +32,9 @@ data:
     N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
     \ : O(\u221AN)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
     \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
-    \ G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
-    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (auto\
-    \ it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
+    \ G, class H, class Int>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum,\
+    \ const H &hsum,\n                    std::unordered_map<Int, T> &memo) {\n  if\
+    \ (auto it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
     \ gs1 = gsum(1), gs = gs1, ngs;\n  for (std::uint64_t d = 1, nN; nN = N / (d +\
     \ 1); gs = ngs)\n    ret -= dirichlet_div_sum(nN, gsum, hsum, memo) *\n      \
     \     ((ngs = gsum(d = N / nN)) - gs);\n  return memo[N] = ret / gs1;\n}\ntemplate\
@@ -54,9 +54,9 @@ data:
     N^(2/3)\u307E\u3067\u8A08\u7B97\u3067\u304D\u308B\u306A\u3089O(N^(2/3)))\n * dirichlet_mul_sum\
     \ : O(\u221AN)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
     \n// BEGIN CUT HERE\n\n// sum f s.t. f :=  h * g^(-1)\ntemplate <class T, class\
-    \ G, class H>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum, const H &hsum,\n\
-    \                    std::unordered_map<std::uint64_t, T> &memo) {\n  if (auto\
-    \ it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
+    \ G, class H, class Int>\nT dirichlet_div_sum(std::uint64_t N, const G &gsum,\
+    \ const H &hsum,\n                    std::unordered_map<Int, T> &memo) {\n  if\
+    \ (auto it = memo.find(N); it != memo.end()) return it->second;\n  T ret = hsum(N),\
     \ gs1 = gsum(1), gs = gs1, ngs;\n  for (std::uint64_t d = 1, nN; nN = N / (d +\
     \ 1); gs = ngs)\n    ret -= dirichlet_div_sum(nN, gsum, hsum, memo) *\n      \
     \     ((ngs = gsum(d = N / nN)) - gs);\n  return memo[N] = ret / gs1;\n}\ntemplate\
@@ -73,8 +73,8 @@ data:
   path: src/Math/dujiao_sieve.hpp
   requiredBy:
   - test/atcoder/abc179_c.cpp
-  timestamp: '2022-09-10 14:49:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-09-10 15:16:33+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/atcoder/abc172_d.dujiao.test.cpp
