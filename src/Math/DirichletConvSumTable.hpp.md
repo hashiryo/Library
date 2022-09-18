@@ -131,8 +131,9 @@ data:
     \ &a,\n                    const DirichletConvSumTable<T> &b) {\n  const std::size_t\
     \ K = a.x.size() - 1, L = a.X.size() - 1, M = std::min(K, L);\n  assert(a.N ==\
     \ b.N), assert(M <= b.x.size() - 1), assert(M <= b.X.size() - 1);\n  assert(std::uint64_t(M\
-    \ + 1) * (M + 1) > a.N);\n  T ret = 0;\n  for (int i = M; i; i--) ret += a.x[i]\
-    \ * b.X[i] + b.x[i] * a.X[i];\n  return ret -= a.X[M] * b.X[M];\n}\n"
+    \ + 1) * (M + 1) > a.N);\n  debug(M);\n  T ret = 0, A = 0, B = 0;\n  for (int\
+    \ i = M; i; i--) ret += a.x[i] * b.X[i] + b.x[i] * a.X[i];\n  for (int i = M;\
+    \ i; i--) A += a.x[i], B += b.x[i];\n  return ret -= A * B;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u6570\u8AD6\u95A2\
     \u6570\u306E\u7D2F\u7A4D\u548C\n * @category \u6570\u5B66\n * @see\n * https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C\n\
     \ * O(KlogK + \u221A(NL))\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
@@ -240,13 +241,14 @@ data:
     \ &a,\n                    const DirichletConvSumTable<T> &b) {\n  const std::size_t\
     \ K = a.x.size() - 1, L = a.X.size() - 1, M = std::min(K, L);\n  assert(a.N ==\
     \ b.N), assert(M <= b.x.size() - 1), assert(M <= b.X.size() - 1);\n  assert(std::uint64_t(M\
-    \ + 1) * (M + 1) > a.N);\n  T ret = 0;\n  for (int i = M; i; i--) ret += a.x[i]\
-    \ * b.X[i] + b.x[i] * a.X[i];\n  return ret -= a.X[M] * b.X[M];\n}"
+    \ + 1) * (M + 1) > a.N);\n  debug(M);\n  T ret = 0, A = 0, B = 0;\n  for (int\
+    \ i = M; i; i--) ret += a.x[i] * b.X[i] + b.x[i] * a.X[i];\n  for (int i = M;\
+    \ i; i--) A += a.x[i], B += b.x[i];\n  return ret -= A * B;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/DirichletConvSumTable.hpp
   requiredBy: []
-  timestamp: '2022-09-18 23:09:05+09:00'
+  timestamp: '2022-09-19 00:09:56+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp

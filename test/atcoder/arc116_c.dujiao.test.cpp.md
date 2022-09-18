@@ -189,12 +189,13 @@ data:
     \ &a,\n                    const DirichletConvSumTable<T> &b) {\n  const std::size_t\
     \ K = a.x.size() - 1, L = a.X.size() - 1, M = std::min(K, L);\n  assert(a.N ==\
     \ b.N), assert(M <= b.x.size() - 1), assert(M <= b.X.size() - 1);\n  assert(std::uint64_t(M\
-    \ + 1) * (M + 1) > a.N);\n  T ret = 0;\n  for (int i = M; i; i--) ret += a.x[i]\
-    \ * b.X[i] + b.x[i] * a.X[i];\n  return ret -= a.X[M] * b.X[M];\n}\n#line 6 \"\
-    test/atcoder/arc116_c.dujiao.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
-    \  long long N, M;\n  cin >> N >> M;\n  auto zeta = get_1<Mint>(M, int(pow(N,\
-    \ 2. / 3)));\n  cout << zeta.pow2(N).sum() << '\\n';\n  return 0;\n}\n"
+    \ + 1) * (M + 1) > a.N);\n  debug(M);\n  T ret = 0, A = 0, B = 0;\n  for (int\
+    \ i = M; i; i--) ret += a.x[i] * b.X[i] + b.x[i] * a.X[i];\n  for (int i = M;\
+    \ i; i--) A += a.x[i], B += b.x[i];\n  return ret -= A * B;\n}\n#line 6 \"test/atcoder/arc116_c.dujiao.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = ModInt<998244353>;\n  long long N, M;\n  cin >> N >> M;\n  auto\
+    \ zeta = get_1<Mint>(M, int(pow(N, 2. / 3)));\n  cout << zeta.pow2(N).sum() <<\
+    \ '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc116/tasks/arc116_c\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/DirichletConvSumTable.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -207,7 +208,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc116_c.dujiao.test.cpp
   requiredBy: []
-  timestamp: '2022-09-18 23:09:05+09:00'
+  timestamp: '2022-09-19 00:09:56+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc116_c.dujiao.test.cpp
