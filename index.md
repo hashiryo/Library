@@ -187,27 +187,30 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Combination.hpp
       title: "\u7D44\u307F\u5408\u308F\u305B"
+    - icon: ':x:'
+      path: src/Math/DirichletConvSumTable.hpp
+      title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
     - icon: ':heavy_check_mark:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':heavy_check_mark:'
       path: src/Math/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
       path: src/Math/ModIntExp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     - icon: ':heavy_check_mark:'
-      path: src/Math/NumberTheory.hpp
-      title: "\u7BE9\u306A\u3069"
-    - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':heavy_check_mark:'
       path: src/Math/SetPowerSeries.hpp
       title: "\u96C6\u5408\u51AA\u7D1A\u6570"
+    - icon: ':heavy_check_mark:'
+      path: src/Math/Sieve.hpp
+      title: "\u7BE9\u306A\u3069"
     - icon: ':heavy_check_mark:'
       path: src/Math/SubproductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
@@ -223,9 +226,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/discrete_log.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/dujiao_sieve.hpp
-      title: "\u675C\u6559\u7B5B"
     - icon: ':heavy_check_mark:'
       path: src/Math/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
@@ -684,7 +684,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc154_e.test.cpp
       title: test/atcoder/abc154_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc172_d.dujiao.test.cpp
       title: test/atcoder/abc172_d.dujiao.test.cpp
     - icon: ':heavy_check_mark:'
@@ -696,7 +696,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc179_c.test.cpp
       title: test/atcoder/abc179_c.test.cpp
     - icon: ':heavy_check_mark:'
@@ -750,6 +750,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/arc116_c.dujiao.test.cpp
+      title: test/atcoder/arc116_c.dujiao.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc127_a.test.cpp
       title: test/atcoder/arc127_a.test.cpp
@@ -967,7 +970,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/sum_of_totient_function.test.cpp
       title: test/yosupo/sum_of_totient_function.test.cpp
     - icon: ':heavy_check_mark:'

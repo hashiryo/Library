@@ -4,11 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc172_d.numth.test.cpp
+    title: test/atcoder/abc172_d.numth.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/sum_of_totient_function.test.cpp
-    title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
@@ -94,7 +94,7 @@ data:
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/yosupo/sum_of_totient_function.test.cpp
+  - test/atcoder/abc172_d.numth.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document
 redirect_from:

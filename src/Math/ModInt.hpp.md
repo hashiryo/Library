@@ -96,6 +96,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc116_c.dujiao.test.cpp
+    title: test/atcoder/arc116_c.dujiao.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
@@ -207,7 +210,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -258,9 +261,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: ModInt
     links: []
@@ -403,7 +406,7 @@ data:
   - src/Math/FormalPowerSeries.hpp
   - src/Math/fps_sequence.hpp
   timestamp: '2021-10-24 00:31:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/3046.test.cpp
@@ -478,6 +481,7 @@ data:
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc213_g.test.cpp
+  - test/atcoder/arc116_c.dujiao.test.cpp
   - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
