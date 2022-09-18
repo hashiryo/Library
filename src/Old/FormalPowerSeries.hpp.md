@@ -24,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3072.test.cpp
+    title: test/aoj/3072.test.cpp
   - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
@@ -708,6 +711,7 @@ data:
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/stirling_first.test.cpp
   - test/aoj/0168.test.cpp
+  - test/aoj/3072.test.cpp
 documentation_of: src/Old/FormalPowerSeries.hpp
 layout: document
 redirect_from:

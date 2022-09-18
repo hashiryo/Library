@@ -28,6 +28,9 @@ data:
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/3072.test.cpp
+    title: test/aoj/3072.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
   - icon: ':heavy_check_mark:'
@@ -300,6 +303,7 @@ data:
   - test/aoj/NTL_2_F.test.cpp
   - test/aoj/0168.test.cpp
   - test/aoj/NTL_2_A.test.cpp
+  - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
   - test/aoj/NTL_2_B.test.cpp
