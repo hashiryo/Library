@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Old/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
   _extendedRequiredBy: []

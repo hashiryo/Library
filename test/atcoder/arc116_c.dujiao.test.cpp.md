@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc116/tasks/arc116_c
@@ -199,22 +199,22 @@ data:
     \ B += b.x[i];\n  return ret -= A * B;\n}\n#line 6 \"test/atcoder/arc116_c.dujiao.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  long long N, M;\n  cin >> N >> M;\n\
-    \  auto zeta = get_1<Mint>(M, int(pow(N, 2. / 3)));\n  cout << zeta.pow2(N).sum()\
-    \ << '\\n';\n  return 0;\n}\n"
+    \  auto zeta = get_1<Mint>(M, pow(M, 2. / 3));\n  cout << zeta.pow2(N).sum() <<\
+    \ '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc116/tasks/arc116_c\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/DirichletConvSumTable.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  long long N, M;\n  cin >> N >> M;\n\
-    \  auto zeta = get_1<Mint>(M, int(pow(N, 2. / 3)));\n  cout << zeta.pow2(N).sum()\
-    \ << '\\n';\n  return 0;\n}"
+    \  auto zeta = get_1<Mint>(M, pow(M, 2. / 3));\n  cout << zeta.pow2(N).sum() <<\
+    \ '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/DirichletConvSumTable.hpp
   isVerificationFile: true
   path: test/atcoder/arc116_c.dujiao.test.cpp
   requiredBy: []
-  timestamp: '2022-09-19 00:55:13+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-09-19 02:37:07+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc116_c.dujiao.test.cpp
 layout: document
