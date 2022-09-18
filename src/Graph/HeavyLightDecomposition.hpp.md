@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "HL\u5206\u89E3"
     links: []
@@ -76,7 +76,7 @@ data:
   path: src/Graph/HeavyLightDecomposition.hpp
   requiredBy: []
   timestamp: '2022-09-10 22:25:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/235.HLD.test.cpp
   - test/aoj/2667.HLD.test.cpp

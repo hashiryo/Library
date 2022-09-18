@@ -1,41 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/FormalPowerSeries.hpp
+  - icon: ':question:'
+    path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/bernoulli.test.cpp
-    title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/partition.test.cpp
-    title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_first.test.cpp
-    title: test/yosupo/stirling_first.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_second.test.cpp
-    title: test/yosupo/stirling_second.test.cpp
-  _isVerificationFailed: false
+    path: test/aoj/0168.test.cpp
+    title: test/aoj/0168.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/215.test.cpp
+    title: test/yukicoder/215.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/658.test.cpp
+    title: test/yukicoder/658.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    document_title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
-      )"
-    links:
-    - https://en.m.wikipedia.org/wiki/Eulerian_number
-    - https://en.wikipedia.org/wiki/Bernoulli_number
-    - https://en.wikipedia.org/wiki/Partition_function_(number_theory)
-    - https://en.wikipedia.org/wiki/Stirling_number
-    - https://min-25.hatenablog.com/entry/2015/04/07/160154
-  bundledCode: "#line 2 \"src/Math/fps_sequence.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
-    \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
+    document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
+    links: []
+  bundledCode: "#line 2 \"src/Old/kitamasa.hpp\"\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
+    \ */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
     \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
     \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
     \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
@@ -96,7 +90,7 @@ data:
     \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
     \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
     \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
     \n */\n// verify\u7528: https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate\
     \ <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries : public std::vector<mint>\
@@ -344,66 +338,56 @@ data:
     \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
-    \ 5 \"src/Math/fps_sequence.hpp\"\n/**\n * @title \u6570\u5217(\u5F62\u5F0F\u7684\
-    \u51AA\u7D1A\u6570\u4F7F\u7528)\n * @category \u6570\u5B66\n *  O(NlogN)\n * @see\
-    \ https://min-25.hatenablog.com/entry/2015/04/07/160154\n * @see https://en.wikipedia.org/wiki/Bernoulli_number\n\
-    \ * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n *\
-    \ @see https://en.wikipedia.org/wiki/Stirling_number\n * @see https://en.m.wikipedia.org/wiki/Eulerian_number\n\
-    \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ bernoulli(int N) {\n  FormalPowerSeries<mint> ret(N + 1);\n  ret[0] = 1;\n \
-    \ for (int i = 1; i <= N; i++) ret[i] = ret[i - 1] / mint(i + 1);\n  ret = ret.inv();\n\
-    \  mint fact = 1;\n  for (int i = 1; i <= N; fact *= (++i)) ret[i] *= fact;\n\
-    \  return ret;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> partition(int\
-    \ N) {\n  FormalPowerSeries<mint> ret(N + 1);\n  ret[0] = 1;\n  for (int k = 1;\
-    \ 1ll * k * (3 * k + 1) / 2 <= N; k++)\n    ret[k * (3 * k + 1) / 2] = (k & 1\
-    \ ? -1 : 1);\n  for (int k = 1; 1ll * k * (3 * k - 1) / 2 <= N; k++)\n    ret[k\
-    \ * (3 * k - 1) / 2] = (k & 1 ? -1 : 1);\n  return ret.inv();\n}\n\ntemplate <typename\
-    \ mint>\nFormalPowerSeries<mint> stirling_first(int N) {\n  if (!N) return {1};\n\
-    \  auto ret = stirling_first<mint>(N / 2);\n  ret *= ret.shift(N / 2);\n  if (N\
-    \ & 1) ret *= {N - 1, 1};\n  return ret;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ stirling_second(int N) {\n  FormalPowerSeries<mint> a(N + 1), b(N + 1);\n  mint\
-    \ finv = 1;\n  for (int i = 0; i <= N; finv /= (++i))\n    a[i] = mint(i).pow(N)\
-    \ * finv, b[i] = i & 1 ? -finv : finv;\n  auto ret = a * b;\n  return ret.resize(N\
-    \ + 1), ret;\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
-    #include \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u6570\u5217(\u5F62\
-    \u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)\n * @category \u6570\u5B66\n *  O(NlogN)\n\
-    \ * @see https://min-25.hatenablog.com/entry/2015/04/07/160154\n * @see https://en.wikipedia.org/wiki/Bernoulli_number\n\
-    \ * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n *\
-    \ @see https://en.wikipedia.org/wiki/Stirling_number\n * @see https://en.m.wikipedia.org/wiki/Eulerian_number\n\
-    \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ bernoulli(int N) {\n  FormalPowerSeries<mint> ret(N + 1);\n  ret[0] = 1;\n \
-    \ for (int i = 1; i <= N; i++) ret[i] = ret[i - 1] / mint(i + 1);\n  ret = ret.inv();\n\
-    \  mint fact = 1;\n  for (int i = 1; i <= N; fact *= (++i)) ret[i] *= fact;\n\
-    \  return ret;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> partition(int\
-    \ N) {\n  FormalPowerSeries<mint> ret(N + 1);\n  ret[0] = 1;\n  for (int k = 1;\
-    \ 1ll * k * (3 * k + 1) / 2 <= N; k++)\n    ret[k * (3 * k + 1) / 2] = (k & 1\
-    \ ? -1 : 1);\n  for (int k = 1; 1ll * k * (3 * k - 1) / 2 <= N; k++)\n    ret[k\
-    \ * (3 * k - 1) / 2] = (k & 1 ? -1 : 1);\n  return ret.inv();\n}\n\ntemplate <typename\
-    \ mint>\nFormalPowerSeries<mint> stirling_first(int N) {\n  if (!N) return {1};\n\
-    \  auto ret = stirling_first<mint>(N / 2);\n  ret *= ret.shift(N / 2);\n  if (N\
-    \ & 1) ret *= {N - 1, 1};\n  return ret;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ stirling_second(int N) {\n  FormalPowerSeries<mint> a(N + 1), b(N + 1);\n  mint\
-    \ finv = 1;\n  for (int i = 0; i <= N; finv /= (++i))\n    a[i] = mint(i).pow(N)\
-    \ * finv, b[i] = i & 1 ? -finv : finv;\n  auto ret = a * b;\n  return ret.resize(N\
-    \ + 1), ret;\n}\n"
+    \ 5 \"src/Old/kitamasa.hpp\"\n/**\n * @title \u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\
+    \u9AD8\u901F\u8A08\u7B97\n * @category \u6570\u5B66\n *  O(NlogNlogk)\n */\n\n\
+    // BEGIN CUT HERE\n\n// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]\n// b[n]\
+    \ = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)\n// return\
+    \ b[k]\n\ntemplate <class mint>\nmint kitamasa(const std::vector<mint> &c, const\
+    \ std::vector<mint> &a,\n              std::uint64_t k) {\n  assert(a.size() ==\
+    \ c.size());\n  int N = a.size();\n  if (k < (std::uint64_t)N) return a[k];\n\
+    \  std::uint64_t mask = (std::uint64_t(1) << (63 - __builtin_clzll(k))) >> 1;\n\
+    \  FormalPowerSeries<mint> f(N + 1), r({1, 0});\n  f[0] = 1;\n  for (int i = 0;\
+    \ i < N; i++) f[N - i] = -c[i];\n  if (N < 1024) {  // naive\n    r = r.quorem_rev_n(f).second;\n\
+    \    for (; mask; mask >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n\
+    \      r = r.quorem_rev_n(f).second;\n    }\n  } else {\n    FormalPowerSeries<mint>\
+    \ inv = f.inv();\n    r = r.quorem_rev_con(f, inv).second;\n    for (; mask; mask\
+    \ >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n      r\
+    \ = r.quorem_rev_con(f, inv).second;\n    }\n  }\n  mint ret(0);\n  for (int i\
+    \ = 0; i < N; i++) ret += r[N - i - 1] * a[i];\n  return ret;\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n\
+    #include \"src/Old/FormalPowerSeries.hpp\"\n/**\n * @title \u7DDA\u5F62\u6F38\u5316\
+    \u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @category \u6570\u5B66\n *  O(NlogNlogk)\n\
+    \ */\n\n// BEGIN CUT HERE\n\n// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]\n\
+    // b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)\n//\
+    \ return b[k]\n\ntemplate <class mint>\nmint kitamasa(const std::vector<mint>\
+    \ &c, const std::vector<mint> &a,\n              std::uint64_t k) {\n  assert(a.size()\
+    \ == c.size());\n  int N = a.size();\n  if (k < (std::uint64_t)N) return a[k];\n\
+    \  std::uint64_t mask = (std::uint64_t(1) << (63 - __builtin_clzll(k))) >> 1;\n\
+    \  FormalPowerSeries<mint> f(N + 1), r({1, 0});\n  f[0] = 1;\n  for (int i = 0;\
+    \ i < N; i++) f[N - i] = -c[i];\n  if (N < 1024) {  // naive\n    r = r.quorem_rev_n(f).second;\n\
+    \    for (; mask; mask >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n\
+    \      r = r.quorem_rev_n(f).second;\n    }\n  } else {\n    FormalPowerSeries<mint>\
+    \ inv = f.inv();\n    r = r.quorem_rev_con(f, inv).second;\n    for (; mask; mask\
+    \ >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n      r\
+    \ = r.quorem_rev_con(f, inv).second;\n    }\n  }\n  mint ret(0);\n  for (int i\
+    \ = 0; i < N; i++) ret += r[N - i - 1] * a[i];\n  return ret;\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/Math/FormalPowerSeries.hpp
+  - src/Old/ModInt.hpp
+  - src/Old/FormalPowerSeries.hpp
   isVerificationFile: false
-  path: src/Math/fps_sequence.hpp
+  path: src/Old/kitamasa.hpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-documentation_of: src/Math/fps_sequence.hpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/aoj/0168.test.cpp
+documentation_of: src/Old/kitamasa.hpp
 layout: document
 redirect_from:
-- /library/src/Math/fps_sequence.hpp
-- /library/src/Math/fps_sequence.hpp.html
-title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
+- /library/src/Old/kitamasa.hpp
+- /library/src/Old/kitamasa.hpp.html
+title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
 ---

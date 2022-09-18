@@ -1,35 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/FormalPowerSeries.hpp
+  - icon: ':question:'
+    path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/0168.test.cpp
-    title: test/aoj/0168.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/215.test.cpp
-    title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/658.test.cpp
-    title: test/yukicoder/658.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/963.test.cpp
+    title: test/yukicoder/963.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-    links: []
-  bundledCode: "#line 2 \"src/Math/kitamasa.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
-    \ */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
+    document_title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
+    links:
+    - https://nyaannyaan.github.io/library/fps/differential-equation.hpp
+  bundledCode: "#line 2 \"src/Old/differential_equation.hpp\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+    \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
     \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
     \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
     \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
@@ -90,7 +82,7 @@ data:
     \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
     \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
     \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
     \n */\n// verify\u7528: https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate\
     \ <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries : public std::vector<mint>\
@@ -338,56 +330,41 @@ data:
     \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
-    \ 5 \"src/Math/kitamasa.hpp\"\n/**\n * @title \u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\
-    \u9AD8\u901F\u8A08\u7B97\n * @category \u6570\u5B66\n *  O(NlogNlogk)\n */\n\n\
-    // BEGIN CUT HERE\n\n// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]\n// b[n]\
-    \ = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)\n// return\
-    \ b[k]\n\ntemplate <class mint>\nmint kitamasa(const std::vector<mint> &c, const\
-    \ std::vector<mint> &a,\n              std::uint64_t k) {\n  assert(a.size() ==\
-    \ c.size());\n  int N = a.size();\n  if (k < (std::uint64_t)N) return a[k];\n\
-    \  std::uint64_t mask = (std::uint64_t(1) << (63 - __builtin_clzll(k))) >> 1;\n\
-    \  FormalPowerSeries<mint> f(N + 1), r({1, 0});\n  f[0] = 1;\n  for (int i = 0;\
-    \ i < N; i++) f[N - i] = -c[i];\n  if (N < 1024) {  // naive\n    r = r.quorem_rev_n(f).second;\n\
-    \    for (; mask; mask >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n\
-    \      r = r.quorem_rev_n(f).second;\n    }\n  } else {\n    FormalPowerSeries<mint>\
-    \ inv = f.inv();\n    r = r.quorem_rev_con(f, inv).second;\n    for (; mask; mask\
-    \ >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n      r\
-    \ = r.quorem_rev_con(f, inv).second;\n    }\n  }\n  mint ret(0);\n  for (int i\
-    \ = 0; i < N; i++) ret += r[N - i - 1] * a[i];\n  return ret;\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
-    #include \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u7DDA\u5F62\u6F38\
-    \u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @category \u6570\u5B66\n *  O(NlogNlogk)\n\
-    \ */\n\n// BEGIN CUT HERE\n\n// b[0] = a[0], b[1] = a[1], ..., b[N-1] = a[N-1]\n\
-    // b[n] = c[0] * b[n-N] + c[1] * b[n-N+1] + ... + c[N-1] * b[n-1] (n >= N)\n//\
-    \ return b[k]\n\ntemplate <class mint>\nmint kitamasa(const std::vector<mint>\
-    \ &c, const std::vector<mint> &a,\n              std::uint64_t k) {\n  assert(a.size()\
-    \ == c.size());\n  int N = a.size();\n  if (k < (std::uint64_t)N) return a[k];\n\
-    \  std::uint64_t mask = (std::uint64_t(1) << (63 - __builtin_clzll(k))) >> 1;\n\
-    \  FormalPowerSeries<mint> f(N + 1), r({1, 0});\n  f[0] = 1;\n  for (int i = 0;\
-    \ i < N; i++) f[N - i] = -c[i];\n  if (N < 1024) {  // naive\n    r = r.quorem_rev_n(f).second;\n\
-    \    for (; mask; mask >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n\
-    \      r = r.quorem_rev_n(f).second;\n    }\n  } else {\n    FormalPowerSeries<mint>\
-    \ inv = f.inv();\n    r = r.quorem_rev_con(f, inv).second;\n    for (; mask; mask\
-    \ >>= 1) {\n      r = r.mul(r);\n      if (k & mask) r.push_back(0);\n      r\
-    \ = r.quorem_rev_con(f, inv).second;\n    }\n  }\n  mint ret(0);\n  for (int i\
-    \ = 0; i < N; i++) ret += r[N - i - 1] * a[i];\n  return ret;\n}"
+    \ 5 \"src/Old/differential_equation.hpp\"\n/**\n * @title \u5FAE\u5206\u65B9\u7A0B\
+    \u5F0F\n * @category \u6570\u5B66\n * @see https://nyaannyaan.github.io/library/fps/differential-equation.hpp\n\
+    \ * df/dx=F(f)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ differential_equation(\n    std::function<FormalPowerSeries<mint>(FormalPowerSeries<mint>,\
+    \ int)> F,\n    std::function<FormalPowerSeries<mint>(FormalPowerSeries<mint>,\
+    \ int)> dF,\n    mint f0, int deg) {\n  FormalPowerSeries<mint> f{f0};\n  for\
+    \ (int e = 1, ne = 2; e < deg; e = ne, ne = std::min(e << 1, deg)) {\n    auto\
+    \ a = dF(f, ne - 1), r = a.inte().exp(), h = a * f;\n    h.resize(ne - 1), h =\
+    \ (F(f, ne - 1) - h).div(r).inte();\n    f = (h + f0) * r, f.resize(ne);\n  }\n\
+    \  return f;\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n\
+    #include \"src/Old/FormalPowerSeries.hpp\"\n/**\n * @title \u5FAE\u5206\u65B9\u7A0B\
+    \u5F0F\n * @category \u6570\u5B66\n * @see https://nyaannyaan.github.io/library/fps/differential-equation.hpp\n\
+    \ * df/dx=F(f)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ differential_equation(\n    std::function<FormalPowerSeries<mint>(FormalPowerSeries<mint>,\
+    \ int)> F,\n    std::function<FormalPowerSeries<mint>(FormalPowerSeries<mint>,\
+    \ int)> dF,\n    mint f0, int deg) {\n  FormalPowerSeries<mint> f{f0};\n  for\
+    \ (int e = 1, ne = 2; e < deg; e = ne, ne = std::min(e << 1, deg)) {\n    auto\
+    \ a = dF(f, ne - 1), r = a.inte().exp(), h = a * f;\n    h.resize(ne - 1), h =\
+    \ (F(f, ne - 1) - h).div(r).inte();\n    f = (h + f0) * r, f.resize(ne);\n  }\n\
+    \  return f;\n}\n"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/Math/FormalPowerSeries.hpp
+  - src/Old/ModInt.hpp
+  - src/Old/FormalPowerSeries.hpp
   isVerificationFile: false
-  path: src/Math/kitamasa.hpp
+  path: src/Old/differential_equation.hpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/658.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/aoj/0168.test.cpp
-documentation_of: src/Math/kitamasa.hpp
+  - test/yukicoder/963.test.cpp
+documentation_of: src/Old/differential_equation.hpp
 layout: document
 redirect_from:
-- /library/src/Math/kitamasa.hpp
-- /library/src/Math/kitamasa.hpp.html
-title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
+- /library/src/Old/differential_equation.hpp
+- /library/src/Old/differential_equation.hpp.html
+title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
 ---

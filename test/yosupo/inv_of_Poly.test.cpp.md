@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/FormalPowerSeries.hpp
+  - icon: ':question:'
+    path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
-    path: src/Math/extgcd.hpp
+  - icon: ':x:'
+    path: src/Old/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
     links:
     - https://judge.yosupo.jp/problem/inv_of_polynomials
   bundledCode: "#line 1 \"test/yosupo/inv_of_Poly.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n\
     \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
     \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
     \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
@@ -84,7 +84,7 @@ data:
     \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
     \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
     \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
-    };\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\
+    };\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\
     \u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
     \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries\
     \ : public std::vector<mint> {\n  using std::vector<mint>::vector;\n\n private:\n\
@@ -332,7 +332,7 @@ data:
     \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
-    \ 5 \"src/Math/extgcd.hpp\"\n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\
+    \ 5 \"src/Old/extgcd.hpp\"\n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\
     \u4E92\u9664\u6CD5\n * @category \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n\
     \ */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mint>\nFormalPowerSeries<mint>\
     \ extgcd(FormalPowerSeries<mint> a,\n                               FormalPowerSeries<mint>\
@@ -341,7 +341,7 @@ data:
     \  using pv = std::array<poly, 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg()\
     \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const pm &m) {\n    static\
     \ constexpr mint ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1\
-    \ && m[0][0].deg() == 0\n           && m[0][0][0] == ONE && m[1][1].deg() == 0\
+    \ && m[0][0].deg() == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() == 0\
     \ && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const pm &lhs, const pv &rhs)\
     \ {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1]\
     \ * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n \
@@ -382,9 +382,9 @@ data:
     \ cout << (i ? \" \" : \"\") << x[i];\n    cout << '\\n';\n  }\n  return 0;\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
-    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
-    \n#include \"src/Math/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
+    #include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n#include \"src/Old/FormalPowerSeries.hpp\"\
+    \n#include \"src/Old/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n \
+    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  using Poly = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  Poly\
     \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
     \ = 0; i < M; i++) cin >> g[i];\n  Poly d = extgcd(f, g, x, y);\n  if (d.deg()\
@@ -393,14 +393,14 @@ data:
     \  for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \" : \"\") << x[i];\n\
     \    cout << '\\n';\n  }\n  return 0;\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/Math/FormalPowerSeries.hpp
-  - src/Math/extgcd.hpp
+  - src/Old/ModInt.hpp
+  - src/Old/FormalPowerSeries.hpp
+  - src/Old/extgcd.hpp
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
 layout: document

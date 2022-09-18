@@ -1,59 +1,55 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/FormalPowerSeries.hpp
+  - icon: ':question:'
+    path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/multipoint_evaluation.test.cpp
-    title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/polynomial_interpolation.test.cpp
-    title: test/yosupo/polynomial_interpolation.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yosupo/inv_of_Poly.test.cpp
+    title: test/yosupo/inv_of_Poly.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    document_title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\
-      \u9593"
+    document_title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     links:
-    - https://atcoder.jp/contests/arc033/tasks/arc033_4
-  bundledCode: "#line 2 \"src/Math/SubproductTree.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
-    \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
-    \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
-    \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
-    \ { return prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const\
-    \ ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\n\
-    template <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n    :\
-    \ public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using\
-    \ u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x\
-    \ = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n \
-    \ static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod) % mod;\n\
-    \  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) * r2); }\n\
-    \  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w >> 64)\
-    \ + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n\
-    \  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n\
-    \ < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return\
-    \ w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt\
-    \ ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr\
-    \ ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1),\
-    \ x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n\
-    \  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x\
-    \ = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const\
-    \ ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const\
-    \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
-    \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
-    \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
-    \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
-    \ ModInt &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const\
-    \ ModInt &rhs) const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t\
+    - https://loj.ac/article/2773
+  bundledCode: "#line 2 \"src/Old/extgcd.hpp\"\n#include <bits/stdc++.h>\n#line 3\
+    \ \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\
+    \n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod, std::uint64_t\
+    \ prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr std::uint64_t\
+    \ modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt() { return\
+    \ prim_root; }\n  friend std::ostream &operator<<(std::ostream &os, const ModInt\
+    \ &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace internal\ntemplate\
+    \ <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n    : public\
+    \ internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n  using u64\
+    \ = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6, u64 x = 1)\
+    \ {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n  }\n  static\
+    \ constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod) % mod;\n  static\
+    \ constexpr u64 init(u64 w) { return reduce(__uint128_t(w) * r2); }\n  static\
+    \ constexpr u64 reduce(const __uint128_t w) {\n    return u64(w >> 64) + mod -\
+    \ ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n public:\n  constexpr\
+    \ ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n) : x(init(n < 0 ? mod\
+    \ - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64 w) { return w - (mod\
+    \ & -(w >= mod)); }\n  constexpr ModInt operator-() const {\n    ModInt ret;\n\
+    \    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n  }\n  constexpr ModInt\
+    \ &operator+=(const ModInt &rhs) {\n    return x += rhs.x - (mod << 1), x += (mod\
+    \ << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator-=(const ModInt\
+    \ &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x >> 63), *this;\n  }\n\
+    \  constexpr ModInt &operator*=(const ModInt &rhs) {\n    return this->x = reduce(__uint128_t(this->x)\
+    \ * rhs.x), *this;\n  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n\
+    \    return this->operator*=(rhs.inverse());\n  }\n  ModInt operator+(const ModInt\
+    \ &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const ModInt\
+    \ &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const ModInt\
+    \ &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const ModInt\
+    \ &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const ModInt\
+    \ &rhs) const { return norm(x) == norm(rhs.x); }\n  bool operator!=(const ModInt\
+    \ &rhs) const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t\
     \ k) const {\n    ModInt ret = ModInt(1);\n    for (ModInt base = *this; k; k\
     \ >>= 1, base *= base)\n      if (k & 1) ret *= base;\n    return ret;\n  }\n\
     \  constexpr ModInt inverse() const { return pow(mod - 2); }\n  constexpr ModInt\
@@ -86,7 +82,7 @@ data:
     \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
     \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
     \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
     \n */\n// verify\u7528: https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate\
     \ <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries : public std::vector<mint>\
@@ -334,64 +330,102 @@ data:
     \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
-    \ 5 \"src/Math/SubproductTree.hpp\"\n/**\n * @title \u8907\u6570\u306E\u5024\u4EE3\
-    \u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category \u6570\u5B66\n *  \u3069\
-    \u3061\u3089\u3082O(N log^2 N)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/arc033/tasks/arc033_4\n\
-    \n// BEGIN CUT HERE\n\ntemplate <typename mint>\nclass SubproductTree {\n  using\
-    \ poly = FormalPowerSeries<mint>;\n  int n;\n  std::vector<mint> xs;\n  std::vector<poly>\
-    \ buf;\n  void pre(int l, int r, int k) {\n    if (r - l == 1) return buf[k] =\
-    \ {-xs[l], 1}, void();\n    pre(l, (l + r) / 2, k * 2), pre((l + r) / 2, r, k\
-    \ * 2 + 1);\n    buf[k] = buf[k * 2] * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree()\
-    \ {}\n  SubproductTree(const std::vector<mint> &_xs)\n      : n(_xs.size()), xs(_xs),\
-    \ buf(4 * n) {\n    pre(0, n, 1);\n  }\n  std::vector<mint> multi_eval(const poly\
-    \ &f) {\n    std::vector<mint> ret(n);\n    auto rec = [&](auto dfs, poly g, int\
-    \ l, int r, int k) -> void {\n      g %= buf[k];\n      if (r - l <= 128) {\n\
-    \        for (int i = l; i < r; i++) ret[i] = g.eval(xs[i]);\n        return;\n\
-    \      }\n      dfs(dfs, g, l, (l + r) / 2, k * 2);\n      dfs(dfs, g, (l + r)\
-    \ / 2, r, k * 2 + 1);\n    };\n    return rec(rec, f, 0, n, 1), ret;\n  }\n  poly\
-    \ interpolate(const std::vector<mint> &ys) {\n    poly w = buf[1].diff();\n  \
-    \  std::vector<mint> vs = multi_eval(w);\n    auto rec = [&](auto dfs, int l,\
-    \ int r, int k) -> poly {\n      if (r - l == 1) return poly({ys[l] / vs[l]});\n\
-    \      return buf[k * 2 + 1] * dfs(dfs, l, (l + r) / 2, k * 2) +\n           \
-    \  buf[k * 2] * dfs(dfs, (l + r) / 2, r, k * 2 + 1);\n    };\n    poly ret = rec(rec,\
-    \ 0, n, 1);\n    return ret.resize(n), ret;\n  }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
-    #include \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u8907\u6570\u306E\
-    \u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category \u6570\u5B66\
-    \n *  \u3069\u3061\u3089\u3082O(N log^2 N)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/arc033/tasks/arc033_4\n\
-    \n// BEGIN CUT HERE\n\ntemplate <typename mint>\nclass SubproductTree {\n  using\
-    \ poly = FormalPowerSeries<mint>;\n  int n;\n  std::vector<mint> xs;\n  std::vector<poly>\
-    \ buf;\n  void pre(int l, int r, int k) {\n    if (r - l == 1) return buf[k] =\
-    \ {-xs[l], 1}, void();\n    pre(l, (l + r) / 2, k * 2), pre((l + r) / 2, r, k\
-    \ * 2 + 1);\n    buf[k] = buf[k * 2] * buf[k * 2 + 1];\n  }\n\n public:\n  SubproductTree()\
-    \ {}\n  SubproductTree(const std::vector<mint> &_xs)\n      : n(_xs.size()), xs(_xs),\
-    \ buf(4 * n) {\n    pre(0, n, 1);\n  }\n  std::vector<mint> multi_eval(const poly\
-    \ &f) {\n    std::vector<mint> ret(n);\n    auto rec = [&](auto dfs, poly g, int\
-    \ l, int r, int k) -> void {\n      g %= buf[k];\n      if (r - l <= 128) {\n\
-    \        for (int i = l; i < r; i++) ret[i] = g.eval(xs[i]);\n        return;\n\
-    \      }\n      dfs(dfs, g, l, (l + r) / 2, k * 2);\n      dfs(dfs, g, (l + r)\
-    \ / 2, r, k * 2 + 1);\n    };\n    return rec(rec, f, 0, n, 1), ret;\n  }\n  poly\
-    \ interpolate(const std::vector<mint> &ys) {\n    poly w = buf[1].diff();\n  \
-    \  std::vector<mint> vs = multi_eval(w);\n    auto rec = [&](auto dfs, int l,\
-    \ int r, int k) -> poly {\n      if (r - l == 1) return poly({ys[l] / vs[l]});\n\
-    \      return buf[k * 2 + 1] * dfs(dfs, l, (l + r) / 2, k * 2) +\n           \
-    \  buf[k * 2] * dfs(dfs, (l + r) / 2, r, k * 2 + 1);\n    };\n    poly ret = rec(rec,\
-    \ 0, n, 1);\n    return ret.resize(n), ret;\n  }\n};\n"
+    \ 5 \"src/Old/extgcd.hpp\"\n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\
+    \u4E92\u9664\u6CD5\n * @category \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n\
+    \ */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ extgcd(FormalPowerSeries<mint> a,\n                               FormalPowerSeries<mint>\
+    \ b,\n                               FormalPowerSeries<mint> &x,\n           \
+    \                    FormalPowerSeries<mint> &y) {\n  using poly = FormalPowerSeries<mint>;\n\
+    \  using pv = std::array<poly, 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg()\
+    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const pm &m) {\n    static\
+    \ constexpr mint ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1\
+    \ && m[0][0].deg() == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() == 0\
+    \ && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const pm &lhs, const pv &rhs)\
+    \ {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1]\
+    \ * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n \
+    \ auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0] + lhs[0][1]\
+    \ * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n\
+    \              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n           \
+    \      lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l =\
+    \ [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
+    \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
+    \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
+    \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
+    \ * q}};\n  };\n  auto hgcd = [&](auto self, const poly &p0, const poly &p1) ->\
+    \ pm {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) +\
+    \ 1, n = p1.deg();\n    if (n < m) return pm{pv{poly(1, 1), poly()}, pv{poly(),\
+    \ poly(1, 1)}};\n    pm R(self(self, poly(p0.begin() + m, p0.end()),\n       \
+    \       poly(p1.begin() + m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n \
+    \   if (ab[1].deg() < m) return R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n\
+    \    int k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return\
+    \ mulQ_l(qr.first, R);\n    return mul(self(self, poly(ab[1].begin() + k, ab[1].end()),\n\
+    \                    poly(qr.second.begin() + k, qr.second.end())),\n        \
+    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto self, const poly\
+    \ &p0, const poly &p1) -> pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd,\
+    \ p0, p1));\n    pv p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return\
+    \ M;\n    std::pair<poly, poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
+    \ == -1) return mulQ_l(qr.first, M);\n    return mul(self(self, p2p3[1], qr.second),\
+    \ mulQ_l(qr.first, M));\n  };\n  pm c;\n  if (a.norm().deg() > b.norm().deg())\
+    \ {\n    c = cogcd(cogcd, a, b);\n  } else {\n    std::pair<poly, poly> qr(a.quorem(b));\n\
+    \    c = mulQ_r(cogcd(cogcd, b, qr.second), qr.first);\n  }\n  return a * (x =\
+    \ c[0][0]) + b * (y = c[0][1]);\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n\
+    #include \"src/Old/FormalPowerSeries.hpp\"\n/**\n * @title \u591A\u9805\u5F0F\u306E\
+    \u62E1\u5F35\u4E92\u9664\u6CD5\n * @category \u6570\u5B66\n *  O(Nlog^2N)\n *\
+    \ @see https://loj.ac/article/2773\n */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a,\
+    \ b)\ntemplate <class mint>\nFormalPowerSeries<mint> extgcd(FormalPowerSeries<mint>\
+    \ a,\n                               FormalPowerSeries<mint> b,\n            \
+    \                   FormalPowerSeries<mint> &x,\n                            \
+    \   FormalPowerSeries<mint> &y) {\n  using poly = FormalPowerSeries<mint>;\n \
+    \ using pv = std::array<poly, 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg()\
+    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const pm &m) {\n    static\
+    \ constexpr mint ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1\
+    \ && m[0][0].deg() == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() == 0\
+    \ && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const pm &lhs, const pv &rhs)\
+    \ {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1]\
+    \ * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n \
+    \ auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0] + lhs[0][1]\
+    \ * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n\
+    \              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n           \
+    \      lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l =\
+    \ [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
+    \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
+    \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
+    \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
+    \ * q}};\n  };\n  auto hgcd = [&](auto self, const poly &p0, const poly &p1) ->\
+    \ pm {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) +\
+    \ 1, n = p1.deg();\n    if (n < m) return pm{pv{poly(1, 1), poly()}, pv{poly(),\
+    \ poly(1, 1)}};\n    pm R(self(self, poly(p0.begin() + m, p0.end()),\n       \
+    \       poly(p1.begin() + m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n \
+    \   if (ab[1].deg() < m) return R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n\
+    \    int k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return\
+    \ mulQ_l(qr.first, R);\n    return mul(self(self, poly(ab[1].begin() + k, ab[1].end()),\n\
+    \                    poly(qr.second.begin() + k, qr.second.end())),\n        \
+    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto self, const poly\
+    \ &p0, const poly &p1) -> pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd,\
+    \ p0, p1));\n    pv p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return\
+    \ M;\n    std::pair<poly, poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
+    \ == -1) return mulQ_l(qr.first, M);\n    return mul(self(self, p2p3[1], qr.second),\
+    \ mulQ_l(qr.first, M));\n  };\n  pm c;\n  if (a.norm().deg() > b.norm().deg())\
+    \ {\n    c = cogcd(cogcd, a, b);\n  } else {\n    std::pair<poly, poly> qr(a.quorem(b));\n\
+    \    c = mulQ_r(cogcd(cogcd, b, qr.second), qr.first);\n  }\n  return a * (x =\
+    \ c[0][0]) + b * (y = c[0][1]);\n}\n"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/Math/FormalPowerSeries.hpp
+  - src/Old/ModInt.hpp
+  - src/Old/FormalPowerSeries.hpp
   isVerificationFile: false
-  path: src/Math/SubproductTree.hpp
+  path: src/Old/extgcd.hpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-documentation_of: src/Math/SubproductTree.hpp
+  - test/yosupo/inv_of_Poly.test.cpp
+documentation_of: src/Old/extgcd.hpp
 layout: document
 redirect_from:
-- /library/src/Math/SubproductTree.hpp
-- /library/src/Math/SubproductTree.hpp.html
-title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
+- /library/src/Old/extgcd.hpp
+- /library/src/Old/extgcd.hpp.html
+title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
 ---

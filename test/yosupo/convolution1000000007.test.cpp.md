@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/FormalPowerSeries.hpp
+  - icon: ':question:'
+    path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_1000000007
@@ -19,7 +19,7 @@ data:
     - https://judge.yosupo.jp/problem/convolution_mod_1000000007
   bundledCode: "#line 1 \"test/yosupo/convolution1000000007.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+    #line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
     \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
     \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
     \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
@@ -81,7 +81,7 @@ data:
     \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
     \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
     \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
     \n */\n// verify\u7528: https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate\
     \ <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries : public std::vector<mint>\
@@ -337,7 +337,7 @@ data:
     \ (int k = 0; k < N + M - 1; k++) {\n    cout << c[k] << (k < N + M - 2 ? \" \"\
     \ : \"\\n\");\n  }\n  cout << flush;\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
+    \n#include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n#include \"src/Old/FormalPowerSeries.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = ModInt<int(1e9 + 7)>;\n  using FPS = FormalPowerSeries<Mint>;\n\
     \  int N, M;\n  cin >> N >> M;\n  FPS a(N), b(M);\n  for (int i = 0; i < N; i++)\
@@ -346,13 +346,13 @@ data:
     \ c[k] << (k < N + M - 2 ? \" \" : \"\\n\");\n  }\n  cout << flush;\n  return\
     \ 0;\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/Math/FormalPowerSeries.hpp
+  - src/Old/ModInt.hpp
+  - src/Old/FormalPowerSeries.hpp
   isVerificationFile: true
   path: test/yosupo/convolution1000000007.test.cpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/convolution1000000007.test.cpp
 layout: document

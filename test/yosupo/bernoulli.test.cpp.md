@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/FormalPowerSeries.hpp
+  - icon: ':question:'
+    path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
-    path: src/Math/fps_sequence.hpp
+  - icon: ':x:'
+    path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bernoulli_number
     links:
     - https://judge.yosupo.jp/problem/bernoulli_number
   bundledCode: "#line 1 \"test/yosupo/bernoulli.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/bernoulli_number\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n\
     \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
     \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
     \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
@@ -84,7 +84,7 @@ data:
     \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
     \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
     \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
-    };\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\
+    };\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\
     \u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
     \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries\
     \ : public std::vector<mint> {\n  using std::vector<mint>::vector;\n\n private:\n\
@@ -332,7 +332,7 @@ data:
     \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
-    \ 5 \"src/Math/fps_sequence.hpp\"\n/**\n * @title \u6570\u5217(\u5F62\u5F0F\u7684\
+    \ 5 \"src/Old/fps_sequence.hpp\"\n/**\n * @title \u6570\u5217(\u5F62\u5F0F\u7684\
     \u51AA\u7D1A\u6570\u4F7F\u7528)\n * @category \u6570\u5B66\n *  O(NlogN)\n * @see\
     \ https://min-25.hatenablog.com/entry/2015/04/07/160154\n * @see https://en.wikipedia.org/wiki/Bernoulli_number\n\
     \ * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n *\
@@ -358,20 +358,20 @@ data:
     \ N; i++) cout << (i ? \" \" : \"\") << B[i];\n  cout << endl;\n  return 0;\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bernoulli_number\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
-    \n#include \"src/Math/fps_sequence.hpp\"\nusing namespace std;\n\nsigned main()\
+    \ <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n#include \"src/Old/FormalPowerSeries.hpp\"\
+    \n#include \"src/Old/fps_sequence.hpp\"\nusing namespace std;\n\nsigned main()\
     \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  int N;\n  cin >> N;\n  auto B = bernoulli<Mint>(N);\n  for (int i = 0; i <=\
     \ N; i++) cout << (i ? \" \" : \"\") << B[i];\n  cout << endl;\n  return 0;\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/Math/FormalPowerSeries.hpp
-  - src/Math/fps_sequence.hpp
+  - src/Old/ModInt.hpp
+  - src/Old/FormalPowerSeries.hpp
+  - src/Old/fps_sequence.hpp
   isVerificationFile: true
   path: test/yosupo/bernoulli.test.cpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bernoulli.test.cpp
 layout: document

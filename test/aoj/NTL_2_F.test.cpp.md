@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: src/Math/BigInt.hpp
+    path: src/Old/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -18,7 +18,7 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_F
   bundledCode: "#line 1 \"test/aoj/NTL_2_F.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_F\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n\
     \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
     \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
     \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
@@ -81,7 +81,7 @@ data:
     \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
     \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
     \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
-    };\n#line 4 \"src/Math/BigInt.hpp\"\n/**\n * @title \u591A\u500D\u9577\u6574\u6570\
+    };\n#line 4 \"src/Old/BigInt.hpp\"\n/**\n * @title \u591A\u500D\u9577\u6574\u6570\
     \n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\nstruct BigInt {\n  static\
     \ constexpr unsigned base = 10000000, bdig = 7;\n  bool neg;\n\n private:\n  std::vector<unsigned>\
     \ dat;\n  using ModB = ModInt<4611685989973229569, 7>;\n  template <class mod_t>\n\
@@ -196,16 +196,16 @@ data:
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  BigInt A, B;\n  cin >> A >> B;\n  cout << A * B << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_F\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/BigInt.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  BigInt\
-    \ A, B;\n  cin >> A >> B;\n  cout << A * B << endl;\n  return 0;\n}"
+    \n#include <bits/stdc++.h>\n#include \"src/Old/BigInt.hpp\"\nusing namespace std;\n\
+    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  BigInt A,\
+    \ B;\n  cin >> A >> B;\n  cout << A * B << endl;\n  return 0;\n}"
   dependsOn:
-  - src/Math/BigInt.hpp
-  - src/Math/ModInt.hpp
+  - src/Old/BigInt.hpp
+  - src/Old/ModInt.hpp
   isVerificationFile: true
   path: test/aoj/NTL_2_F.test.cpp
   requiredBy: []
-  timestamp: '2021-10-24 00:31:24+09:00'
+  timestamp: '2022-09-19 00:53:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_F.test.cpp

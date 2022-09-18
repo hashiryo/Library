@@ -1,50 +1,50 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/FormalPowerSeries.hpp
+  - icon: ':question:'
+    path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
-    path: src/Math/fps_sequence.hpp
+  - icon: ':x:'
+    path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/partition_function
     links:
     - https://judge.yosupo.jp/problem/partition_function
   bundledCode: "#line 1 \"test/yosupo/partition.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/partition_function\"\
-    \n\n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title\
-    \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal\
-    \ {\ntemplate <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct\
-    \ ModIntImpl {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static\
-    \ constexpr std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream\
-    \ &operator<<(std::ostream &os, const ModInt &rhs) {\n    return os << rhs.val();\n\
-    \  }\n};\n}  // namespace internal\ntemplate <std::uint64_t mod, std::uint64_t\
-    \ prim_root = 0>\nclass ModInt\n    : public internal::ModIntImpl<mod, prim_root,\
-    \ ModInt<mod, prim_root>> {\n  using u64 = std::uint64_t;\n  static constexpr\
-    \ u64 mul_inv(u64 n, int e = 6, u64 x = 1) {\n    return e == 0 ? x : mul_inv(n,\
-    \ e - 1, x * (2 - x * n));\n  }\n  static constexpr u64 inv = mul_inv(mod, 6,\
-    \ 1), r2 = -__uint128_t(mod) % mod;\n  static constexpr u64 init(u64 w) { return\
-    \ reduce(__uint128_t(w) * r2); }\n  static constexpr u64 reduce(const __uint128_t\
-    \ w) {\n    return u64(w >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >>\
-    \ 64);\n  }\n  u64 x;\n\n public:\n  constexpr ModInt() : x(0) {}\n  constexpr\
-    \ ModInt(std::int64_t n) : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static\
-    \ constexpr u64 norm(u64 w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt\
-    \ operator-() const {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x !=\
-    \ 0)) - x, ret;\n  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n  \
-    \  return x += rhs.x - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n\
-    \  constexpr ModInt &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x\
-    \ += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const\
-    \ ModInt &rhs) {\n    return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n\
-    \  }\n  constexpr ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
+    \n\n#include <bits/stdc++.h>\n#line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n\
+    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
+    \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
+    \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
+    \ std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace\
+    \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n\
+    \    : public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n\
+    \  using u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
+    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
+    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod)\
+    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) *\
+    \ r2); }\n  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w\
+    \ >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n\
+    \ public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n)\
+    \ : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64\
+    \ w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const\
+    \ {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
+    \  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x\
+    \ - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt\
+    \ &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x\
+    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
+    \   return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr\
+    \ ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
     \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
     \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
     \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
@@ -84,7 +84,7 @@ data:
     \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
     \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
     \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
-    };\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\
+    };\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\
     \u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
     \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries\
     \ : public std::vector<mint> {\n  using std::vector<mint>::vector;\n\n private:\n\
@@ -332,7 +332,7 @@ data:
     \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
-    \ 5 \"src/Math/fps_sequence.hpp\"\n/**\n * @title \u6570\u5217(\u5F62\u5F0F\u7684\
+    \ 5 \"src/Old/fps_sequence.hpp\"\n/**\n * @title \u6570\u5217(\u5F62\u5F0F\u7684\
     \u51AA\u7D1A\u6570\u4F7F\u7528)\n * @category \u6570\u5B66\n *  O(NlogN)\n * @see\
     \ https://min-25.hatenablog.com/entry/2015/04/07/160154\n * @see https://en.wikipedia.org/wiki/Bernoulli_number\n\
     \ * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n *\
@@ -358,20 +358,20 @@ data:
     \ N; i++) cout << (i ? \" \" : \"\") << p[i];\n  cout << endl;\n  return 0;\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/partition_function\"\n\n\
-    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FormalPowerSeries.hpp\"\
-    \n#include \"src/Math/fps_sequence.hpp\"\nusing namespace std;\n\nsigned main()\
+    #include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n#include \"src/Old/FormalPowerSeries.hpp\"\
+    \n#include \"src/Old/fps_sequence.hpp\"\nusing namespace std;\n\nsigned main()\
     \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
     \  int N;\n  cin >> N;\n  auto p = partition<Mint>(N);\n  for (int i = 0; i <=\
     \ N; i++) cout << (i ? \" \" : \"\") << p[i];\n  cout << endl;\n  return 0;\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/Math/FormalPowerSeries.hpp
-  - src/Math/fps_sequence.hpp
+  - src/Old/ModInt.hpp
+  - src/Old/FormalPowerSeries.hpp
+  - src/Old/fps_sequence.hpp
   isVerificationFile: true
   path: test/yosupo/partition.test.cpp
   requiredBy: []
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/partition.test.cpp
 layout: document

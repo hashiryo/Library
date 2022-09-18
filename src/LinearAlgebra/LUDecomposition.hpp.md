@@ -12,24 +12,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "LU\u5206\u89E3"
     links: []
@@ -218,7 +218,7 @@ data:
   path: src/LinearAlgebra/LUDecomposition.hpp
   requiredBy: []
   timestamp: '2022-06-23 23:46:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/184.test.cpp
   - test/yukicoder/803.test.cpp

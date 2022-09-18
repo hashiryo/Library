@@ -2,118 +2,115 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Math/ModInt.hpp
+    path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/SubproductTree.hpp
+  - icon: ':x:'
+    path: src/Old/SubproductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/differential_equation.hpp
+  - icon: ':x:'
+    path: src/Old/differential_equation.hpp
     title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/extgcd.hpp
+  - icon: ':x:'
+    path: src/Old/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/fps_sequence.hpp
+  - icon: ':x:'
+    path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/kitamasa.hpp
+  - icon: ':question:'
+    path: src/Old/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3072.test.cpp
-    title: test/aoj/3072.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_first.test.cpp
     title: test/yosupo/stirling_first.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_second.test.cpp
     title: test/yosupo/stirling_second.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
     - https://loj.ac/problem/150
-  bundledCode: "#line 2 \"src/Math/FormalPowerSeries.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+  bundledCode: "#line 2 \"src/Old/FormalPowerSeries.hpp\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
     \n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate <std::uint64_t mod,\
     \ std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl {\n  static constexpr\
     \ std::uint64_t modulo() { return mod; }\n  static constexpr std::uint64_t pr_rt()\
@@ -175,7 +172,7 @@ data:
     \ ModInt sqrt() const { return *this; }\n  constexpr ModInt inverse() const {\
     \ return *this; }\n  constexpr std::uint64_t val() const { return x; }\n  friend\
     \ std::istream &operator>>(std::istream &is, ModInt &rhs) {\n    return is >>\
-    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Math/FormalPowerSeries.hpp\"\
+    \ rhs.x, is;\n  }\n\n private:\n  bool x;\n};\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
     \n */\n// verify\u7528: https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate\
     \ <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries : public std::vector<mint>\
@@ -423,7 +420,7 @@ data:
     \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n\
     /**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\
     \n */\n// verify\u7528: https://loj.ac/problem/150\n\n// BEGIN CUT HERE\n\ntemplate\
     \ <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries : public std::vector<mint>\
@@ -672,17 +669,17 @@ data:
     \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
     \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};"
   dependsOn:
-  - src/Math/ModInt.hpp
+  - src/Old/ModInt.hpp
   isVerificationFile: false
-  path: src/Math/FormalPowerSeries.hpp
+  path: src/Old/FormalPowerSeries.hpp
   requiredBy:
-  - src/Math/extgcd.hpp
-  - src/Math/SubproductTree.hpp
-  - src/Math/kitamasa.hpp
-  - src/Math/differential_equation.hpp
-  - src/Math/fps_sequence.hpp
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - src/Old/extgcd.hpp
+  - src/Old/SubproductTree.hpp
+  - src/Old/kitamasa.hpp
+  - src/Old/differential_equation.hpp
+  - src/Old/fps_sequence.hpp
+  timestamp: '2022-09-19 00:53:55+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/3046.test.cpp
@@ -711,11 +708,10 @@ data:
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/stirling_first.test.cpp
   - test/aoj/0168.test.cpp
-  - test/aoj/3072.test.cpp
-documentation_of: src/Math/FormalPowerSeries.hpp
+documentation_of: src/Old/FormalPowerSeries.hpp
 layout: document
 redirect_from:
-- /library/src/Math/FormalPowerSeries.hpp
-- /library/src/Math/FormalPowerSeries.hpp.html
+- /library/src/Old/FormalPowerSeries.hpp
+- /library/src/Old/FormalPowerSeries.hpp.html
 title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
 ---
