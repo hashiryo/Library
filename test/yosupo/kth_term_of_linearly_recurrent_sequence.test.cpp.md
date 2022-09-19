@@ -12,9 +12,9 @@ data:
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
@@ -369,7 +369,7 @@ data:
   path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
 layout: document

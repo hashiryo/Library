@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number Theoretic Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':question:'
@@ -18,7 +18,7 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
   - icon: ':x:'
@@ -29,7 +29,7 @@ data:
     title: test/yosupo/pow_of_FPS.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
     links: []
@@ -369,8 +369,8 @@ data:
     \  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p), p));\n}\n\ntemplate <class\
     \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> exp(const std::vector<mod_t>\
     \ &p) {\n  static constexpr int _Nm2 = _Nm * 2 / 15;\n  static constexpr int TH\
-    \ = 64 << ((!is_ntt<mod_t, _Nm>()) << 1);\n  using GAdp = GlobalArray<mod_t, _Nm,\
-    \ 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
+    \ = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n  using GAdp = GlobalArray<mod_t,\
+    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
     \ _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
     \ _Nm2, 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
     \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  const int n = p.size(), m = get_len(n);\n\
@@ -417,9 +417,9 @@ data:
     \ &p) {\n  assert(p[0] == mod_t(1));\n  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p),\
     \ p));\n}\n\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
     \ exp(const std::vector<mod_t> &p) {\n  static constexpr int _Nm2 = _Nm * 2 /\
-    \ 15;\n  static constexpr int TH = 64 << ((!is_ntt<mod_t, _Nm>()) << 1);\n  using\
-    \ GAdp = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n\
-    \  using GA = GlobalArray<mod_t, _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ 15;\n  static constexpr int TH = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n\
+    \  using GAdp = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
     \ _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA2D1 =\
     \ GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t,\
     \ _Nm2, 16, 2>;\n  const int n = p.size(), m = get_len(n);\n  assert(n > 0), assert(p[0]\
@@ -462,8 +462,8 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_exp.hpp
   requiredBy: []
-  timestamp: '2022-09-20 01:41:14+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-09-20 03:04:19+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
