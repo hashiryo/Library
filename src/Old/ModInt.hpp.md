@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Old/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -14,7 +14,7 @@ data:
   - icon: ':x:'
     path: src/Old/differential_equation.hpp
     title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Old/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
@@ -31,53 +31,23 @@ data:
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_A.test.cpp
-    title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_B.test.cpp
-    title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_C.test.cpp
-    title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_D.test.cpp
-    title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_E.test.cpp
-    title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_F.test.cpp
-    title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/convolution1000000007.test.cpp
-    title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/exp_of_FPS.test.cpp
-    title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/inv_of_FPS.test.cpp
-    title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/log_of_FPS.test.cpp
-    title: test/yosupo/log_of_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
@@ -88,17 +58,11 @@ data:
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
   - icon: ':x:'
-    path: test/yosupo/pow_of_FPS.test.cpp
-    title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
   - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/sqrt_of_FPS.test.cpp
-    title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/stirling_first.test.cpp
     title: test/yosupo/stirling_first.test.cpp
@@ -280,7 +244,6 @@ data:
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/980.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
@@ -288,25 +251,14 @@ data:
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/partition.test.cpp
-  - test/yosupo/inv_of_FPS.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/convolution1000000007.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/stirling_first.test.cpp
-  - test/aoj/NTL_2_C.test.cpp
-  - test/aoj/NTL_2_F.test.cpp
   - test/aoj/0168.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
   - test/aoj/3072.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_B.test.cpp
 documentation_of: src/Old/ModInt.hpp
 layout: document
 redirect_from:

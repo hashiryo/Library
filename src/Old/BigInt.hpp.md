@@ -5,28 +5,10 @@ data:
     path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_A.test.cpp
-    title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_B.test.cpp
-    title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_C.test.cpp
-    title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_D.test.cpp
-    title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_E.test.cpp
-    title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_2_F.test.cpp
-    title: test/aoj/NTL_2_F.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
@@ -325,14 +307,8 @@ data:
   path: src/Old/BigInt.hpp
   requiredBy: []
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/aoj/NTL_2_C.test.cpp
-  - test/aoj/NTL_2_F.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_B.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Old/BigInt.hpp
 layout: document
 redirect_from:
