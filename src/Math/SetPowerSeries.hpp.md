@@ -16,12 +16,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     links:
@@ -252,7 +252,7 @@ data:
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
   timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/subset_convolution.test.cpp
   - test/atcoder/arc105_f.test.cpp

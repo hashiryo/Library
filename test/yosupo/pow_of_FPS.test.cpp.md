@@ -405,17 +405,17 @@ data:
     \ i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf + 1,\
     \ n - 1, Z);\n  return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n#line 5 \"\
     test/yosupo/pow_of_FPS.test.cpp\"\nusing namespace std;\n\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin >> N >> M;\n  using\
-    \ Mint = StaticModInt<998244353>;\n  vector<Mint> a(N);\n  for (int i = 0; i <\
-    \ N; i++) cin >> a[i];\n  auto b = pow(a, M);\n  for (int i = 0; i < N; i++) cout\
-    \ << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
+    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  long long N, M;\n  cin >> N >> M;\n\
+    \  using Mint = StaticModInt<998244353>;\n  vector<Mint> a(N);\n  for (int i =\
+    \ 0; i < N; i++) cin >> a[i];\n  auto b = pow(a, M);\n  for (int i = 0; i < N;\
+    \ i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_exp.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, M;\n  cin >> N >> M;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint>\
-    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = pow(a, M);\n \
-    \ for (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return\
-    \ 0;\n}"
+    \  long long N, M;\n  cin >> N >> M;\n  using Mint = StaticModInt<998244353>;\n\
+    \  vector<Mint> a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b =\
+    \ pow(a, M);\n  for (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N -\
+    \ 1];\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/FFT/fps_exp.hpp
@@ -426,7 +426,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/pow_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 15:43:31+09:00'
+  timestamp: '2022-09-20 16:02:31+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/pow_of_FPS.test.cpp
