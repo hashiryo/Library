@@ -394,7 +394,7 @@ data:
     \ std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> pow(const std::vector<mod_t>\
     \ &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t, _Nm, 4>;\n  const mod_t\
     \ Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0] = 1; k) {\n    while\
-    \ (cnt < n && p[cnt] == Z) cnt++;\n    std::cerr << \"cnt: \" << cnt << '\\n';\n\
+    \ (cnt < n && p[cnt] == Z) cnt++;\n    std::cout << \"cnt: \" << cnt << '\\n';\n\
     \    const __int128_t ofs = (__int128_t)k * cnt, sz = n - ofs;\n    if (sz <=\
     \ 0) return std::vector<mod_t>(n, Z);\n    const mod_t p0 = p[cnt], iv = mod_t(1)\
     \ / p0, pk = p0.pow(k);\n    for (int i = sz; --i;) GA::bf[i] = p[i + cnt] * iv;\n\
@@ -425,7 +425,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/exp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 14:27:40+09:00'
+  timestamp: '2022-09-20 14:46:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/exp_of_FPS.test.cpp

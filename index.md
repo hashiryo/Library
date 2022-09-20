@@ -69,7 +69,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -938,7 +938,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/pow_of_FPS.test.cpp
       title: test/yosupo/pow_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
       title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     - icon: ':x:'
