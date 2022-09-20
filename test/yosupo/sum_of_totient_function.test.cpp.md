@@ -200,19 +200,19 @@ data:
     \ B += b.x[i];\n  return ret -= A * B;\n}\n#line 5 \"test/yosupo/sum_of_totient_function.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Mint = StaticModInt<998244353>;\n  long long N;\n  cin >> N;\n  cout\
-    \ << get_phi<Mint>(N, int(pow(N, 2. / 3))).sum() << '\\n';\n  return 0;\n}\n"
+    \ << get_phi<Mint>(N, powl(N, 2. / 3)).sum() << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/DirichletConvSumTable.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Mint = StaticModInt<998244353>;\n  long long N;\n  cin >> N;\n  cout\
-    \ << get_phi<Mint>(N, int(pow(N, 2. / 3))).sum() << '\\n';\n  return 0;\n}"
+    \ << get_phi<Mint>(N, powl(N, 2. / 3)).sum() << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/DirichletConvSumTable.hpp
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2022-09-19 00:55:13+09:00'
+  timestamp: '2022-09-21 01:59:24+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
