@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -269,78 +269,78 @@ data:
     \ j; i > p; i -= D, dat.push_back(x), x = 0)\n      for (j = std::max(p, i - int(D));\
     \ j < i;) x = x * 10 + s[j++] - '0';\n    shrink();\n  }\n  inline void shrink()\
     \ {\n    while (!dat.empty() && !dat.back()) dat.pop_back();\n    if (dat.empty())\
-    \ neg = false;\n  }\n  std::string to_str() const {\n    std::stringstream ss;\n\
-    \    if (neg) ss << '-';\n    ss << (dat.empty() ? 0 : dat.back());\n    for (long\
-    \ long i = dat.size() - 1; i-- > 0;)\n      ss << std::setw(D) << std::setfill('0')\
-    \ << dat[i];\n    std::string ret;\n    return ss >> ret, ret;\n  }\n  bool is_zero()\
-    \ const { return dat.empty() || (dat.size() == 1 && !dat[0]); }\n  bool operator<(const\
-    \ BigInt &r) const {\n    if (neg != r.neg) return neg;\n    if (dat.size() !=\
-    \ r.dat.size()) return (dat.size() < r.dat.size()) ^ neg;\n    for (int i = dat.size();\
-    \ i--;)\n      if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n   \
-    \ return false;\n  }\n  bool operator>(const BigInt &r) const { return r < *this;\
-    \ }\n  bool operator<=(const BigInt &r) const { return !(r < *this); }\n  bool\
-    \ operator>=(const BigInt &r) const { return !(*this < r); }\n  bool operator==(const\
-    \ BigInt &r) const {\n    return (neg == r.neg && dat == r.dat) || (is_zero()\
-    \ && r.is_zero());\n  }\n  bool operator!=(const BigInt &r) const { return !(*this\
-    \ == r); }\n  BigInt abs() const { return BigInt(false, dat); }\n  BigInt operator-()\
-    \ const { return BigInt(!neg, dat); }\n  BigInt operator+(const BigInt &r) const\
-    \ {\n    if (neg != r.neg) return *this - (-r);\n    auto [ret, tmp] = dat.size()\
-    \ > r.dat.size() ? std::make_pair(*this, &r)\n                               \
-    \                 : std::make_pair(r, this);\n    int car = 0, i, n = ret.dat.size(),\
-    \ m = tmp->dat.size();\n    for (i = 0; i < m; i++)\n      ret.dat[i] -= BASE\
-    \ & -(car = ((ret.dat[i] += car + tmp->dat[i]) >= BASE));\n    if (car) {\n  \
-    \    while (i < n && ret.dat[i] == BASE - 1) ret.dat[i++] = 0;\n      i < n ?\
-    \ ret.dat[i]++ : (ret.dat.push_back(1), 0);\n    }\n    return ret;\n  }\n  BigInt\
-    \ operator-(const BigInt &r) const {\n    if (neg != r.neg) return *this + (-r);\n\
-    \    if (r.is_zero()) return *this;\n    if (is_zero()) return -r;\n    auto [ret,\
-    \ tmp] =\n        abs() > r.abs() ? std::make_pair(*this, &r) : std::make_pair(r,\
-    \ this);\n    int car = 0, i, n = ret.dat.size(), m = tmp->dat.size();\n    for\
-    \ (i = 0; i < m; i++)\n      ret.dat[i] += BASE & -(car = ((ret.dat[i] -= car\
-    \ + tmp->dat[i]) >> 31));\n    while (car && i < n && !ret.dat[i]) ret.dat[i++]\
-    \ = BASE - 1;\n    return ret.neg ^= (tmp == this), ret.dat[i] -= car, ret.shrink(),\
-    \ ret;\n  }\n  long long operator%(long long r) const {\n    long long ret = 0;\n\
-    \    for (int i = dat.size(); i--;) ret = (ret * BASE + dat[i]) % r;\n    return\
-    \ ret;\n  }\n  BigInt operator*(const BigInt &r) const {\n    if (is_zero() ||\
-    \ r.is_zero()) return 0;\n    const int n = dat.size(), m = r.dat.size(), sz =\
-    \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20];\n    static long long h[1\
-    \ << 20];\n    if (int i = n, j; std::min(n, m) >= 74) {\n      for (i = n; i--;)\
-    \ f[i] = dat[i];\n      for (i = m; i--;) g[i] = r.dat[i];\n      const int l\
-    \ = get_len(std::max(n, m)), bl = bsf(l) + 6;\n      const int len = sz - l <\
-    \ bl * bl * 7 - 74 ? l : get_len(sz);\n      std::fill_n(f + n, len - n, 0), NTT::dft(len,\
-    \ f);\n      std::fill_n(g + m, len - m, 0), NTT::dft(len, g);\n      for (i =\
-    \ len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f), i = len; i < sz; f[i\
-    \ - len] -= h[i], i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++)\n  \
-    \        h[i] += (long long)dat[j] * r.dat[i - j];\n      for (i = std::min(sz,\
-    \ len); i--;) h[i] = f[i].val();\n    } else\n      for (std::fill_n(h, sz, 0);\
-    \ i--;)\n        for (j = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n\
-    \    BigInt ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n    for (int i\
-    \ = 0; i < sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n    for (;\
-    \ car; car /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n  }\n\
-    \  BigInt operator/(const BigInt &r) const {\n    assert(!r.is_zero());\n    if\
-    \ (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n  \
-    \  BigInt a = this->abs(), b = r.abs();\n    if (a < b) return 0;\n    const int\
-    \ pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1);\n    int l\
-    \ = std::min(prec, 3), ql = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l +\
-    \ 1)), p, rr = b.shift(qb - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() = 1,\
-    \ c.dat.back() = 2;\n    while (x != p) p.dat.swap(x.dat), x = (p * (c - rr *\
-    \ p)).shift(l + ql);\n    if (l != prec)\n      for (p.neg = true; x != p; l =\
-    \ nl, ql = nql) {\n        nl = std::min(l * 2 + 1, prec), nql = std::min(ql *\
-    \ 2 + 1, qb);\n        p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l -\
-    \ nl + ql);\n        if (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n \
-    \       c.dat.back() = 0, c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n    \
-    \  }\n    if (x = (x * a).shift(pb + (pb == qb)); a >= (x + 1) * b) x += 1;\n\
-    \    return x.neg = neg ^ r.neg, x;\n  }\n  BigInt operator%(const BigInt &r)\
-    \ const { return *this - (*this / r) * r; }\n  BigInt &operator+=(const BigInt\
-    \ &r) { return *this = *this + r; }\n  BigInt &operator-=(const BigInt &r) { return\
-    \ *this = *this - r; }\n  BigInt &operator*=(const BigInt &r) { return *this =\
-    \ *this * r; }\n  BigInt &operator/=(const BigInt &r) { return *this = *this /\
-    \ r; }\n  BigInt &operator%=(const BigInt &r) { return *this = *this % r; }\n\
-    \  friend std::istream &operator>>(std::istream &is, BigInt &v) {\n    std::string\
-    \ s;\n    return is >> s, v = BigInt(s), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const BigInt &v) {\n    return os << v.to_str(), os;\n  }\n};\n#line 5\
-    \ \"test/aoj/NTL_2_C.test.cpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  BigInt A, B;\n  cin >> A >> B;\n  cout << A\
-    \ * B << endl;\n  return 0;\n}\n"
+    \ neg = false;\n  }\n  std::string to_str() const {\n    if (is_zero()) return\
+    \ \"0\";\n    std::stringstream ss;\n    if (neg) ss << '-';\n    ss << (dat.empty()\
+    \ ? 0 : dat.back());\n    for (long long i = dat.size() - 1; i-- > 0;)\n     \
+    \ ss << std::setw(D) << std::setfill('0') << dat[i];\n    std::string ret;\n \
+    \   return ss >> ret, ret;\n  }\n  bool is_zero() const { return dat.empty() ||\
+    \ (dat.size() == 1 && !dat[0]); }\n  bool operator<(const BigInt &r) const {\n\
+    \    if (neg != r.neg) return neg;\n    if (dat.size() != r.dat.size()) return\
+    \ (dat.size() < r.dat.size()) ^ neg;\n    for (int i = dat.size(); i--;)\n   \
+    \   if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n    return false;\n\
+    \  }\n  bool operator>(const BigInt &r) const { return r < *this; }\n  bool operator<=(const\
+    \ BigInt &r) const { return !(r < *this); }\n  bool operator>=(const BigInt &r)\
+    \ const { return !(*this < r); }\n  bool operator==(const BigInt &r) const {\n\
+    \    return (neg == r.neg && dat == r.dat) || (is_zero() && r.is_zero());\n  }\n\
+    \  bool operator!=(const BigInt &r) const { return !(*this == r); }\n  BigInt\
+    \ abs() const { return BigInt(false, dat); }\n  BigInt operator-() const { return\
+    \ BigInt(!neg, dat); }\n  BigInt operator+(const BigInt &r) const {\n    if (neg\
+    \ != r.neg) return *this - (-r);\n    auto [ret, tmp] = dat.size() > r.dat.size()\
+    \ ? std::make_pair(*this, &r)\n                                              \
+    \  : std::make_pair(r, this);\n    int car = 0, i, n = ret.dat.size(), m = tmp->dat.size();\n\
+    \    for (i = 0; i < m; i++)\n      ret.dat[i] -= BASE & -(car = ((ret.dat[i]\
+    \ += car + tmp->dat[i]) >= BASE));\n    if (car) {\n      while (i < n && ret.dat[i]\
+    \ == BASE - 1) ret.dat[i++] = 0;\n      i < n ? ret.dat[i]++ : (ret.dat.push_back(1),\
+    \ 0);\n    }\n    return ret;\n  }\n  BigInt operator-(const BigInt &r) const\
+    \ {\n    if (neg != r.neg) return *this + (-r);\n    if (r.is_zero()) return *this;\n\
+    \    if (is_zero()) return -r;\n    auto [ret, tmp] =\n        abs() > r.abs()\
+    \ ? std::make_pair(*this, &r) : std::make_pair(r, this);\n    int car = 0, i,\
+    \ n = ret.dat.size(), m = tmp->dat.size();\n    for (i = 0; i < m; i++)\n    \
+    \  ret.dat[i] += BASE & -(car = ((ret.dat[i] -= car + tmp->dat[i]) >> 31));\n\
+    \    while (car && i < n && !ret.dat[i]) ret.dat[i++] = BASE - 1;\n    return\
+    \ ret.neg ^= (tmp == this), ret.dat[i] -= car, ret.shrink(), ret;\n  }\n  long\
+    \ long operator%(long long r) const {\n    long long ret = 0;\n    for (int i\
+    \ = dat.size(); i--;) ret = (ret * BASE + dat[i]) % r;\n    return ret;\n  }\n\
+    \  BigInt operator*(const BigInt &r) const {\n    if (is_zero() || r.is_zero())\
+    \ return 0;\n    const int n = dat.size(), m = r.dat.size(), sz = n + m - 1;\n\
+    \    static mod_t f[1 << 20], g[1 << 20];\n    static long long h[1 << 20];\n\
+    \    if (int i = n, j; std::min(n, m) >= 74) {\n      for (i = n; i--;) f[i] =\
+    \ dat[i];\n      for (i = m; i--;) g[i] = r.dat[i];\n      const int l = get_len(std::max(n,\
+    \ m)), bl = bsf(l) + 6;\n      const int len = sz - l < bl * bl * 7 - 74 ? l :\
+    \ get_len(sz);\n      std::fill_n(f + n, len - n, 0), NTT::dft(len, f);\n    \
+    \  std::fill_n(g + m, len - m, 0), NTT::dft(len, g);\n      for (i = len; i--;)\
+    \ f[i] *= g[i];\n      for (NTT::idft(len, f), i = len; i < sz; f[i - len] -=\
+    \ h[i], i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++)\n          h[i]\
+    \ += (long long)dat[j] * r.dat[i - j];\n      for (i = std::min(sz, len); i--;)\
+    \ h[i] = f[i].val();\n    } else\n      for (std::fill_n(h, sz, 0); i--;)\n  \
+    \      for (j = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n    BigInt\
+    \ ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n    for (int i = 0; i <\
+    \ sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n    for (; car; car\
+    \ /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n  }\n  BigInt operator/(const\
+    \ BigInt &r) const {\n    assert(!r.is_zero());\n    if (r.dat.size() == 1 &&\
+    \ r.dat.back() == 1) return r.neg ? -*this : *this;\n    BigInt a = this->abs(),\
+    \ b = r.abs();\n    if (a < b) return 0;\n    const int pb = dat.size(), qb =\
+    \ r.dat.size(), prec = std::max(pb - qb, 1);\n    int l = std::min(prec, 3), ql\
+    \ = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l + 1)), p, rr = b.shift(qb\
+    \ - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() = 1, c.dat.back() = 2;\n   \
+    \ while (x != p) p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(l + ql);\n  \
+    \  if (l != prec)\n      for (p.neg = true; x != p; l = nl, ql = nql) {\n    \
+    \    nl = std::min(l * 2 + 1, prec), nql = std::min(ql * 2 + 1, qb);\n       \
+    \ p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l - nl + ql);\n        if\
+    \ (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n        c.dat.back() = 0,\
+    \ c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n      }\n    if (x = (x * a).shift(pb\
+    \ + (pb == qb)); a >= (x + 1) * b) x += 1;\n    return x.neg = neg ^ r.neg, x;\n\
+    \  }\n  BigInt operator%(const BigInt &r) const { return *this - (*this / r) *\
+    \ r; }\n  BigInt &operator+=(const BigInt &r) { return *this = *this + r; }\n\
+    \  BigInt &operator-=(const BigInt &r) { return *this = *this - r; }\n  BigInt\
+    \ &operator*=(const BigInt &r) { return *this = *this * r; }\n  BigInt &operator/=(const\
+    \ BigInt &r) { return *this = *this / r; }\n  BigInt &operator%=(const BigInt\
+    \ &r) { return *this = *this % r; }\n  friend std::istream &operator>>(std::istream\
+    \ &is, BigInt &v) {\n    std::string s;\n    return is >> s, v = BigInt(s), is;\n\
+    \  }\n  friend std::ostream &operator<<(std::ostream &os, const BigInt &v) {\n\
+    \    return os << v.to_str(), os;\n  }\n};\n#line 5 \"test/aoj/NTL_2_C.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  BigInt A, B;\n  cin >> A >> B;\n  cout << A * B << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_C\"\
     \n#include <bits/stdc++.h>\n#include \"src/FFT/BigInt.hpp\"\nusing namespace std;\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  BigInt A,\
@@ -353,7 +353,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_C.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 12:54:19+09:00'
+  timestamp: '2022-09-20 14:27:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_C.test.cpp
