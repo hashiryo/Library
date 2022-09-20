@@ -398,14 +398,15 @@ data:
     \ &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t, _Nm, 4>;\n  const mod_t\
     \ Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0] = 1; k) {\n    while\
     \ (cnt < n && p[cnt] == Z) cnt++;\n    std::cout << \"n: \" << n << \", cnt: \"\
-    \ << cnt << '\\n';\n    const __int128_t ofs = (__int128_t)k * cnt, sz = n - ofs;\n\
-    \    if (sz <= 0) return std::vector<mod_t>(n, Z);\n    const mod_t p0 = p[cnt],\
-    \ iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int i = sz; --i;) GA::bf[i] =\
-    \ p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf, GA::bf\
-    \ + sz));\n    for (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t,\
-    \ _Nm>(q).begin(), (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs,\
-    \ Z);\n    for (int i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf\
-    \ + 1, n - 1, Z);\n  return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n"
+    \ << cnt << '\\n';\n    std::cout << \"Z: \" << Z << \", p[0]: \" << p[0] << '\\\
+    n';\n    const __int128_t ofs = (__int128_t)k * cnt, sz = n - ofs;\n    if (sz\
+    \ <= 0) return std::vector<mod_t>(n, Z);\n    const mod_t p0 = p[cnt], iv = mod_t(1)\
+    \ / p0, pk = p0.pow(k);\n    for (int i = sz; --i;) GA::bf[i] = p[i + cnt] * iv;\n\
+    \    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf, GA::bf + sz));\n    for\
+    \ (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t, _Nm>(q).begin(),\
+    \ (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs, Z);\n    for (int\
+    \ i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf + 1,\
+    \ n - 1, Z);\n  return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_div.hpp\"\n\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow\n * @category\
     \ FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t>\nstd::vector<mod_t> deriv(const\
@@ -447,10 +448,11 @@ data:
     \ pow(const std::vector<mod_t> &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t,\
     \ _Nm, 4>;\n  const mod_t Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0]\
     \ = 1; k) {\n    while (cnt < n && p[cnt] == Z) cnt++;\n    std::cout << \"n:\
-    \ \" << n << \", cnt: \" << cnt << '\\n';\n    const __int128_t ofs = (__int128_t)k\
-    \ * cnt, sz = n - ofs;\n    if (sz <= 0) return std::vector<mod_t>(n, Z);\n  \
-    \  const mod_t p0 = p[cnt], iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int\
-    \ i = sz; --i;) GA::bf[i] = p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf,\
+    \ \" << n << \", cnt: \" << cnt << '\\n';\n    std::cout << \"Z: \" << Z << \"\
+    , p[0]: \" << p[0] << '\\n';\n    const __int128_t ofs = (__int128_t)k * cnt,\
+    \ sz = n - ofs;\n    if (sz <= 0) return std::vector<mod_t>(n, Z);\n    const\
+    \ mod_t p0 = p[cnt], iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int i = sz;\
+    \ --i;) GA::bf[i] = p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf,\
     \ GA::bf + sz));\n    for (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t,\
     \ _Nm>(q).begin(), (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs,\
     \ Z);\n    for (int i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf\
@@ -464,7 +466,7 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_exp.hpp
   requiredBy: []
-  timestamp: '2022-09-20 15:13:52+09:00'
+  timestamp: '2022-09-20 15:43:31+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/log_of_FPS.test.cpp

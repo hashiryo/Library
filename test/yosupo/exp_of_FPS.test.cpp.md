@@ -395,19 +395,20 @@ data:
     \ &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t, _Nm, 4>;\n  const mod_t\
     \ Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0] = 1; k) {\n    while\
     \ (cnt < n && p[cnt] == Z) cnt++;\n    std::cout << \"n: \" << n << \", cnt: \"\
-    \ << cnt << '\\n';\n    const __int128_t ofs = (__int128_t)k * cnt, sz = n - ofs;\n\
-    \    if (sz <= 0) return std::vector<mod_t>(n, Z);\n    const mod_t p0 = p[cnt],\
-    \ iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int i = sz; --i;) GA::bf[i] =\
-    \ p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf, GA::bf\
-    \ + sz));\n    for (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t,\
-    \ _Nm>(q).begin(), (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs,\
-    \ Z);\n    for (int i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf\
-    \ + 1, n - 1, Z);\n  return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n#line\
-    \ 5 \"test/yosupo/exp_of_FPS.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N;\n  cin >> N;\n  using\
-    \ Mint = StaticModInt<998244353>;\n  vector<Mint> a(N);\n  for (int i = 0; i <\
-    \ N; i++) cin >> a[i];\n  auto b = exp(a);\n  for (int i = 0; i < N; i++) cout\
-    \ << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
+    \ << cnt << '\\n';\n    std::cout << \"Z: \" << Z << \", p[0]: \" << p[0] << '\\\
+    n';\n    const __int128_t ofs = (__int128_t)k * cnt, sz = n - ofs;\n    if (sz\
+    \ <= 0) return std::vector<mod_t>(n, Z);\n    const mod_t p0 = p[cnt], iv = mod_t(1)\
+    \ / p0, pk = p0.pow(k);\n    for (int i = sz; --i;) GA::bf[i] = p[i + cnt] * iv;\n\
+    \    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf, GA::bf + sz));\n    for\
+    \ (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t, _Nm>(q).begin(),\
+    \ (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs, Z);\n    for (int\
+    \ i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf + 1,\
+    \ n - 1, Z);\n  return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n#line 5 \"\
+    test/yosupo/exp_of_FPS.test.cpp\"\nusing namespace std;\n\nsigned main() {\n \
+    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N;\n  cin >> N;\n  using Mint\
+    \ = StaticModInt<998244353>;\n  vector<Mint> a(N);\n  for (int i = 0; i < N; i++)\
+    \ cin >> a[i];\n  auto b = exp(a);\n  for (int i = 0; i < N; i++) cout << b[i]\
+    \ << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/exp_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_exp.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -425,7 +426,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/exp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 15:13:52+09:00'
+  timestamp: '2022-09-20 15:43:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/exp_of_FPS.test.cpp
