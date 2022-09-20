@@ -308,13 +308,13 @@ data:
     \ = get_len(std::max(n, m)), bl = bsf(l) + 6;\n      const int len = sz - l <\
     \ bl * bl * 7 - 74 ? l : get_len(sz);\n      std::fill_n(f + n, len - n, 0), NTT::dft(len,\
     \ f);\n      std::fill_n(g + m, len - m, 0), NTT::dft(len, g);\n      for (i =\
-    \ len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f), i = std::min(sz, len);\
-    \ i--;) h[i] = f[i].val();\n      for (i = len, j; i < sz; h[i - len] -= h[i],\
-    \ i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++) h[i] += dat[j] * r.dat[i\
-    \ - j];\n    } else\n      for (std::fill_n(h, sz, 0); i--;)\n        for (int\
-    \ j = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n    BigInt ret(neg ^\
-    \ r.neg, Vec(sz));\n    long long car = 0;\n    for (int i = 0; i < sz; i++, car\
-    \ /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n    for (; car; car /= BASE) ret.dat.emplace_back(car\
+    \ len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f), i = len; i < sz; f[i\
+    \ - len] -= h[i], i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++) h[i]\
+    \ += dat[j] * r.dat[i - j];\n      for (i = std::min(sz, len); i--;) h[i] = f[i].val();\n\
+    \    } else\n      for (std::fill_n(h, sz, 0); i--;)\n        for (j = m; j--;)\
+    \ h[i + j] += (long long)dat[i] * r.dat[j];\n    BigInt ret(neg ^ r.neg, Vec(sz));\n\
+    \    long long car = 0;\n    for (int i = 0; i < sz; i++, car /= BASE) ret.dat[i]\
+    \ = (car += h[i]) % BASE;\n    for (; car; car /= BASE) ret.dat.emplace_back(car\
     \ % BASE);\n    return ret;\n  }\n  BigInt operator/(const BigInt &r) const {\n\
     \    assert(!r.is_zero());\n    if (r.dat.size() == 1 && r.dat.back() == 1) return\
     \ r.neg ? -*this : *this;\n    BigInt a = this->abs(), b = r.abs();\n    if (a\
@@ -352,7 +352,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_A.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 03:04:19+09:00'
+  timestamp: '2022-09-20 10:22:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_A.test.cpp

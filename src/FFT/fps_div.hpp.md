@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
   - icon: ':x:'
@@ -317,7 +317,7 @@ data:
     \ GAr::bf[l] += GAr::bf[j] * GAp::bf[l - j];\n  return std::vector<mod_t>(GAr::bf,\
     \ GAr::bf + n);\n}\n#line 4 \"src/FFT/fps_div.hpp\"\n\n/**\n * @title \u5F62\u5F0F\
     \u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate\
-    \ <std::size_t _Nm, class mod_t>\nstd::vector<mod_t> div(const std::vector<mod_t>\
+    \ <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> div(const std::vector<mod_t>\
     \ &p,\n                       const std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t,\
     \ _Nm, 0>;\n  using GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
     \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t\
@@ -360,30 +360,30 @@ data:
     }\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_inv.hpp\"\n\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n\
-    \ */\n\n// BEGIN CUT HERE\ntemplate <std::size_t _Nm, class mod_t>\nstd::vector<mod_t>\
-    \ div(const std::vector<mod_t> &p,\n                       const std::vector<mod_t>\
-    \ &q) {\n  using GAp = GlobalArray<mod_t, _Nm, 0>;\n  using GAq = GlobalArray<mod_t,\
-    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
-    \ _Nm, 3>;\n  static constexpr std::size_t _Nm2 = _Nm * 2 / 15;\n  using GNA1\
-    \ = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2,\
-    \ 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t,\
-    \ _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static\
-    \ constexpr int TH = 128 << (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr\
-    \ int TH2 = 1024 << (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int A\
-    \ = is_nttfriend<mod_t, _Nm2>()      ? 7\n                           : is_nttarraydouble<mod_t,\
-    \ _Nm2> ? 17\n                                                            : 18;\n\
-    \  static constexpr int B = is_nttfriend<mod_t, _Nm2>()      ? 29\n          \
-    \                 : is_nttarraydouble<mod_t, _Nm2> ? 85\n                    \
-    \                                        : 129;\n  const int n = p.size(), len\
-    \ = get_len(n), R = len < TH2 ? 8 : 16;\n  const int l = q.size(), lnR = bsf(R);\n\
-    \  std::copy(p.begin(), p.end(), GAp::bf);\n  std::copy(q.begin(), q.end(), GAq::bf);\n\
-    \  const mod_t iv0 = mod_t(1) / GAq::bf[0];\n  if (l < A * bsf(len) + B || TH\
-    \ >= n) {\n    for (int i = 0; i < n; GAp::bf[i++] *= iv0)\n      for (int j =\
-    \ std::min(i + 1, l); --j;)\n        GAp::bf[i] -= GAp::bf[i - j] * GAq::bf[j];\n\
-    \    return std::vector<mod_t>(GAp::bf, GAp::bf + n);\n  }\n  int m = len, i =\
-    \ 0;\n  while (m > TH) m >>= lnR;\n  for (std::copy_n(GAp::bf, m, GAr::bf); i\
-    \ < m; GAr::bf[i++] *= iv0)\n    for (int j = std::min(i + 1, l); --j;)\n    \
-    \  GAr::bf[i] -= GAr::bf[i - j] * GAq::bf[j];\n  if (l < n) std::fill(GAq::bf\
+    \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
+    std::vector<mod_t> div(const std::vector<mod_t> &p,\n                       const\
+    \ std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t, _Nm, 0>;\n  using\
+    \ GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n\
+    \  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t _Nm2\
+    \ = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2\
+    \ = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2,\
+    \ 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH = 128 <<\
+    \ (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int TH2 = 1024 << (!is_nttfriend<mod_t,\
+    \ _Nm2>());\n  static constexpr int A = is_nttfriend<mod_t, _Nm2>()      ? 7\n\
+    \                           : is_nttarraydouble<mod_t, _Nm2> ? 17\n          \
+    \                                                  : 18;\n  static constexpr int\
+    \ B = is_nttfriend<mod_t, _Nm2>()      ? 29\n                           : is_nttarraydouble<mod_t,\
+    \ _Nm2> ? 85\n                                                            : 129;\n\
+    \  const int n = p.size(), len = get_len(n), R = len < TH2 ? 8 : 16;\n  const\
+    \ int l = q.size(), lnR = bsf(R);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
+    \  std::copy(q.begin(), q.end(), GAq::bf);\n  const mod_t iv0 = mod_t(1) / GAq::bf[0];\n\
+    \  if (l < A * bsf(len) + B || TH >= n) {\n    for (int i = 0; i < n; GAp::bf[i++]\
+    \ *= iv0)\n      for (int j = std::min(i + 1, l); --j;)\n        GAp::bf[i] -=\
+    \ GAp::bf[i - j] * GAq::bf[j];\n    return std::vector<mod_t>(GAp::bf, GAp::bf\
+    \ + n);\n  }\n  int m = len, i = 0;\n  while (m > TH) m >>= lnR;\n  for (std::copy_n(GAp::bf,\
+    \ m, GAr::bf); i < m; GAr::bf[i++] *= iv0)\n    for (int j = std::min(i + 1, l);\
+    \ --j;)\n      GAr::bf[i] -= GAr::bf[i - j] * GAq::bf[j];\n  if (l < n) std::fill(GAq::bf\
     \ + l, GAq::bf + n, mod_t(0));\n  for (GA::bf[0] = iv0, i = 1; m < n; i = m, m\
     \ <<= lnR) {\n    int m2 = m << 1, ed = std::min(R, (n + m - 1) / m), k = 1, j,\
     \ mm = m;\n    inv_base<_Nm2>(GAq::bf, m, GA::bf, i);\n    GNA1::bf.set(GA::bf,\
@@ -411,7 +411,7 @@ data:
   path: src/FFT/fps_div.hpp
   requiredBy:
   - src/FFT/fps_exp.hpp
-  timestamp: '2022-09-20 01:41:14+09:00'
+  timestamp: '2022-09-20 10:22:38+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/log_of_FPS.test.cpp
