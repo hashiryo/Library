@@ -394,10 +394,10 @@ data:
     \ std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> pow(const std::vector<mod_t>\
     \ &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t, _Nm, 4>;\n  const mod_t\
     \ Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0] = 1; k) {\n    while\
-    \ (cnt < n && p[cnt] == Z) cnt++;\n    const auto ofs = (__int128_t)k * cnt, sz\
-    \ = n - ofs;\n    if (sz <= 0) return std::vector<mod_t>(n, Z);\n    const mod_t\
-    \ p0 = p[cnt], iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int i = sz; --i;)\
-    \ GA::bf[i] = p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf,\
+    \ (cnt < n && p[cnt] == Z) cnt++;\n    const __int128_t ofs = (__int128_t)k *\
+    \ cnt, sz = n - ofs;\n    if (sz <= 0) return std::vector<mod_t>(n, Z);\n    const\
+    \ mod_t p0 = p[cnt], iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int i = sz;\
+    \ --i;) GA::bf[i] = p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf,\
     \ GA::bf + sz));\n    for (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t,\
     \ _Nm>(q).begin(), (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs,\
     \ Z);\n    for (int i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf\
@@ -424,7 +424,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/pow_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 10:22:38+09:00'
+  timestamp: '2022-09-20 12:54:19+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/pow_of_FPS.test.cpp

@@ -33,13 +33,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
   - icon: ':x:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
   - icon: ':heavy_check_mark:'
