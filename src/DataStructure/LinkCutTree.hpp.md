@@ -33,15 +33,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Link-Cut-Tree
     links: []
@@ -228,7 +228,7 @@ data:
   path: src/DataStructure/LinkCutTree.hpp
   requiredBy: []
   timestamp: '2022-06-21 16:53:28+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp

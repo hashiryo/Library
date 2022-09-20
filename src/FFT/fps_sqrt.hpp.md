@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number Theoretic Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 $\\mathbb{F}_p$"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
     links: []
@@ -331,8 +331,8 @@ data:
     \ _Nm2 = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using\
     \ GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t,\
     \ _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  static\
-    \ constexpr int TH = 128 << ((!is_ntt<mod_t, _Nm2>()) << 1);\n  const mod_t Z(0),\
-    \ miv2((mod_t::modulo() - 1) >> 1);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
+    \ constexpr int TH = 128 << ((!is_nttfriend<mod_t, _Nm2>()) << 1);\n  const mod_t\
+    \ Z(0), miv2((mod_t::modulo() - 1) >> 1);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
     \  int n = p.size(), cnt = 0;\n  while (cnt < n && GAp::bf[cnt] == Z) cnt++;\n\
     \  if (cnt == n) return p;\n  if (cnt & 1) return {};  // no solution\n  mod_t\
     \ *bf = GAr::bf + (cnt >> 1), *pbf = GAp::bf + cnt;\n  std::fill_n(GAr::bf, n,\
@@ -372,7 +372,7 @@ data:
     \ _Nm, 0>;\n  static constexpr std::size_t _Nm2 = _Nm * 2 / 15;\n  using GNA1\
     \ = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2,\
     \ 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t,\
-    \ _Nm2, 16, 1>;\n  static constexpr int TH = 128 << ((!is_ntt<mod_t, _Nm2>())\
+    \ _Nm2, 16, 1>;\n  static constexpr int TH = 128 << ((!is_nttfriend<mod_t, _Nm2>())\
     \ << 1);\n  const mod_t Z(0), miv2((mod_t::modulo() - 1) >> 1);\n  std::copy(p.begin(),\
     \ p.end(), GAp::bf);\n  int n = p.size(), cnt = 0;\n  while (cnt < n && GAp::bf[cnt]\
     \ == Z) cnt++;\n  if (cnt == n) return p;\n  if (cnt & 1) return {};  // no solution\n\
@@ -413,8 +413,8 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_sqrt.hpp
   requiredBy: []
-  timestamp: '2022-09-20 01:41:14+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-09-20 16:18:34+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sqrt_of_FPS.test.cpp
 documentation_of: src/FFT/fps_sqrt.hpp
