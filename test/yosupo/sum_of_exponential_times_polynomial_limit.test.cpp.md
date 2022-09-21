@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
-    title: "\u7D44\u307F\u5408\u308F\u305B"
+    title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
@@ -24,12 +24,12 @@ data:
   bundledCode: "#line 1 \"test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp\"\
     \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\"\
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\n/**\n * @title \u7D44\
-    \u307F\u5408\u308F\u305B\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    \ntemplate <class mint, std::size_t LIM = (1 << 24)>\nstruct Combination {\n private:\n\
-    \  static inline mint _fact[LIM] = {1}, _finv[LIM] = {1};\n  static inline int\
-    \ lim = 1;\n  static inline void set(int sz) {\n    if (lim > sz) return;\n  \
-    \  for (int i = lim; i <= sz; i++) _fact[i] = _fact[i - 1] * i;\n    _finv[sz]\
+    \ <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\n/**\n * @title \u4E8C\
+    \u9805\u4FC2\u6570\u306A\u3069\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT\
+    \ HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 24)>\nstruct Combination\
+    \ {\n private:\n  static inline mint _fact[LIM] = {1}, _finv[LIM] = {1};\n  static\
+    \ inline int lim = 1;\n  static inline void set(int sz) {\n    if (lim > sz) return;\n\
+    \    for (int i = lim; i <= sz; i++) _fact[i] = _fact[i - 1] * i;\n    _finv[sz]\
     \ = mint(1) / _fact[sz];\n    for (int i = sz; i >= lim; i--) _finv[i - 1] = _finv[i]\
     \ * i;\n    lim = sz + 1;\n  }\n\n public:\n  static inline mint fact(int n) {\
     \ return set(n), n < 0 ? mint(0) : _fact[n]; }\n  static inline mint finv(int\
@@ -219,8 +219,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 11:13:45+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-09-21 15:23:39+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
 layout: document

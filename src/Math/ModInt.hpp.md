@@ -8,10 +8,10 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -36,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3072.test.cpp
+    title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
@@ -138,7 +141,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
   - icon: ':heavy_check_mark:'
@@ -159,6 +162,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/sharp_p_subset_sum.test.cpp
+    title: test/yosupo/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
@@ -168,10 +174,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -183,6 +189,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1080.test.cpp
+    title: test/yukicoder/1080.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1145.test.cpp
+    title: test/yukicoder/1145.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
@@ -192,6 +204,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/3046.test.cpp
+    title: test/yukicoder/3046.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/42.test.cpp
     title: test/yukicoder/42.test.cpp
@@ -207,6 +222,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/980.test.cpp
+    title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -366,12 +384,16 @@ data:
   timestamp: '2022-09-19 00:53:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/3046.test.cpp
   - test/yukicoder/886.numth.test.cpp
+  - test/yukicoder/1145.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/1080.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/665.test.cpp
+  - test/yukicoder/980.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/803.test.cpp
@@ -386,6 +408,7 @@ data:
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
@@ -411,6 +434,7 @@ data:
   - test/aoj/DPL_5_E.test.cpp
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/DPL_5_F.test.cpp
+  - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
   - test/aoj/2397.SparseMat.test.cpp

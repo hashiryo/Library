@@ -11,10 +11,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -30,6 +30,9 @@ data:
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3072.test.cpp
+    title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
@@ -60,7 +63,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
   - icon: ':x:'
@@ -70,8 +73,23 @@ data:
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
   - icon: ':x:'
+    path: test/yosupo/sharp_p_subset_sum.test.cpp
+    title: test/yosupo/sharp_p_subset_sum.test.cpp
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1080.test.cpp
+    title: test/yukicoder/1080.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1145.test.cpp
+    title: test/yukicoder/1145.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/3046.test.cpp
+    title: test/yukicoder/3046.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/980.test.cpp
+    title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -206,19 +224,20 @@ data:
     \ (B::type >= 2) HOGEHOGE(op, 2); \\\n    if constexpr (B::type >= 3) HOGEHOGE(op,\
     \ 3); \\\n  }\n#define DFT(fft, _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define\
     \ ZEROS(op, _) std::fill_n(this->dat##_ + b, e - b, B::Z##_)\n#define SET(op,\
-    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SUBST(op, _) std::copy(r.dat##_\
-    \ + b, r.dat##_ + e, this->dat##_ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n\
-    \  FUNC(idft, idft, DFT, int b, int e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n\
-    \  FUNC(__, set, SET, const T x[], int b, int e)\n  template <class C>\n  FUNC(__,\
-    \ subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline void get(T\
-    \ x[], int b, int e) const {\n    if constexpr (B::type == 1)\n      std::copy(this->dat1\
-    \ + b, this->dat1 + e, x + b);\n    else\n      for (int i = b; i < e; i++) x[i]\
-    \ = get(i);\n  }\n  inline T get(int i) const {\n    if constexpr (B::type ==\
-    \ 3) {\n      const T mod1 = B::mint1::modulo(), mod2 = B::mint2::modulo();\n\
-    \      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i] - r1)).val();\n\
-    \      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n     \
-    \ return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type == 2)\
-    \ {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
+    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SET_SINGLE(op, _) this->dat##_[i]\
+    \ = x;\n#define SUBST(op, _) std::copy(r.dat##_ + b, r.dat##_ + e, this->dat##_\
+    \ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n  FUNC(idft, idft, DFT, int b, int\
+    \ e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n  FUNC(__, set, SET, const T x[],\
+    \ int b, int e)\n  FUNC(__, set, SET_SINGLE, int i, T x)\n  template <class C>\n\
+    \  FUNC(__, subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline\
+    \ void get(T x[], int b, int e) const {\n    if constexpr (B::type == 1)\n   \
+    \   std::copy(this->dat1 + b, this->dat1 + e, x + b);\n    else\n      for (int\
+    \ i = b; i < e; i++) x[i] = get(i);\n  }\n  inline T get(int i) const {\n    if\
+    \ constexpr (B::type == 3) {\n      const T mod1 = B::mint1::modulo(), mod2 =\
+    \ B::mint2::modulo();\n      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i]\
+    \ - r1)).val();\n      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n\
+    \      return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type\
+    \ == 2) {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
     \      return mod1 * ((this->dat2[i] - r1) * B::iv).val() + r1;\n    } else\n\
     \      return this->dat1[i];\n  }\n#define ASGN(op, _) \\\n  for (int i = b; i\
     \ < e; i++) this->dat##_[i] op## = r.dat##_[i]\n#define ASSIGN(fname, op) \\\n\
@@ -228,28 +247,29 @@ data:
     \       \\\n  template <class C, class D>                       \\\n  FUNC(op,\
     \ fname, BOP, const NTTArrayImpl<T, C> &l, \\\n       const NTTArrayImpl<T, D>\
     \ &r, int b, int e)\n  OP(add, +) OP(dif, -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif,\
-    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SUBST\n#undef\
-    \ ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n};\ntemplate <class\
-    \ T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1 = NumberTheoreticTransform<T>;\n\
-    \  static_assert(_Nm <= ntt1::lim());\n  static constexpr T Z1 = 0;\n  static\
-    \ constexpr std::uint8_t type = 1;\n};\ntemplate <class T, std::size_t _Nm, bool\
-    \ is_heap>\nstruct NTTArrayB_Single : protected NTTArrayB_SingleB<T, _Nm> {\n\
-    \  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_Single<T,\
-    \ _Nm, true> : protected NTTArrayB_SingleB<T, _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data())\
-    \ {}\n  void resize(int n) {\n    buf1.resize(n, NTTArrayB_Single::Z1), dat1 =\
-    \ buf1.data();\n  }\n  std::size_t size() const { return buf1.size(); }\n  std::vector<T>\
-    \ buf1;\n  T *dat1;\n};\n#define NTTARRAYB_MULTI(iv, t)                      \
-    \              \\\n  using mint1 = StaticModInt<MOD1>;                       \
-    \        \\\n  using mint2 = StaticModInt<MOD2>;                             \
-    \  \\\n  using ntt1 = NumberTheoreticTransform<mint1>;                   \\\n\
-    \  using ntt2 = NumberTheoreticTransform<mint2>;                   \\\n  static_assert(_Nm\
-    \ <= (1 << 25));                                \\\n  static constexpr mint1 Z1\
-    \ = 0;                                  \\\n  static constexpr mint2 iv = mint2(1)\
-    \ / mint1::modulo(), Z2 = 0; \\\n  static constexpr std::uint8_t type = t;\ntemplate\
-    \ <std::size_t _Nm, u64 MOD1, u64 MOD2>\nstruct NTTArrayB_DoubleB {\n  NTTARRAYB_MULTI(iv,\
-    \ 2);\n};\ntemplate <std::size_t _Nm, u64 MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_TripleB\
-    \ {\n  NTTARRAYB_MULTI(iv21, 3);\n  using mint3 = StaticModInt<MOD3>;\n  using\
-    \ ntt3 = NumberTheoreticTransform<mint3>;\n  static constexpr mint3 iv32 = mint3(1)\
+    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SET_SINGLE\n\
+    #undef SUBST\n#undef ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n\
+    };\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1\
+    \ = NumberTheoreticTransform<T>;\n  static_assert(_Nm <= ntt1::lim());\n  static\
+    \ constexpr T Z1 = 0;\n  static constexpr std::uint8_t type = 1;\n};\ntemplate\
+    \ <class T, std::size_t _Nm, bool is_heap>\nstruct NTTArrayB_Single : protected\
+    \ NTTArrayB_SingleB<T, _Nm> {\n  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t\
+    \ _Nm>\nstruct NTTArrayB_Single<T, _Nm, true> : protected NTTArrayB_SingleB<T,\
+    \ _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data()) {}\n  void resize(int n) {\n\
+    \    buf1.resize(n, NTTArrayB_Single::Z1), dat1 = buf1.data();\n  }\n  std::size_t\
+    \ size() const { return buf1.size(); }\n  std::vector<T> buf1;\n  T *dat1;\n};\n\
+    #define NTTARRAYB_MULTI(iv, t)                                    \\\n  using\
+    \ mint1 = StaticModInt<MOD1>;                               \\\n  using mint2\
+    \ = StaticModInt<MOD2>;                               \\\n  using ntt1 = NumberTheoreticTransform<mint1>;\
+    \                   \\\n  using ntt2 = NumberTheoreticTransform<mint2>;      \
+    \             \\\n  static_assert(_Nm <= (1 << 25));                         \
+    \       \\\n  static constexpr mint1 Z1 = 0;                                 \
+    \ \\\n  static constexpr mint2 iv = mint2(1) / mint1::modulo(), Z2 = 0; \\\n \
+    \ static constexpr std::uint8_t type = t;\ntemplate <std::size_t _Nm, u64 MOD1,\
+    \ u64 MOD2>\nstruct NTTArrayB_DoubleB {\n  NTTARRAYB_MULTI(iv, 2);\n};\ntemplate\
+    \ <std::size_t _Nm, u64 MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_TripleB {\n\
+    \  NTTARRAYB_MULTI(iv21, 3);\n  using mint3 = StaticModInt<MOD3>;\n  using ntt3\
+    \ = NumberTheoreticTransform<mint3>;\n  static constexpr mint3 iv32 = mint3(1)\
     \ / mint2::modulo(),\n                         iv31 = iv32 / mint1::modulo(),\
     \ Z3 = 0;\n};\n#undef NTTARRAYB_MULTI\ntemplate <std::size_t _Nm, u64 MOD1, u64\
     \ MOD2, bool is_heap>\nstruct NTTArrayB_Double : protected NTTArrayB_DoubleB<_Nm,\
@@ -353,19 +373,20 @@ data:
     \ (B::type >= 2) HOGEHOGE(op, 2); \\\n    if constexpr (B::type >= 3) HOGEHOGE(op,\
     \ 3); \\\n  }\n#define DFT(fft, _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define\
     \ ZEROS(op, _) std::fill_n(this->dat##_ + b, e - b, B::Z##_)\n#define SET(op,\
-    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SUBST(op, _) std::copy(r.dat##_\
-    \ + b, r.dat##_ + e, this->dat##_ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n\
-    \  FUNC(idft, idft, DFT, int b, int e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n\
-    \  FUNC(__, set, SET, const T x[], int b, int e)\n  template <class C>\n  FUNC(__,\
-    \ subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline void get(T\
-    \ x[], int b, int e) const {\n    if constexpr (B::type == 1)\n      std::copy(this->dat1\
-    \ + b, this->dat1 + e, x + b);\n    else\n      for (int i = b; i < e; i++) x[i]\
-    \ = get(i);\n  }\n  inline T get(int i) const {\n    if constexpr (B::type ==\
-    \ 3) {\n      const T mod1 = B::mint1::modulo(), mod2 = B::mint2::modulo();\n\
-    \      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i] - r1)).val();\n\
-    \      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n     \
-    \ return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type == 2)\
-    \ {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
+    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SET_SINGLE(op, _) this->dat##_[i]\
+    \ = x;\n#define SUBST(op, _) std::copy(r.dat##_ + b, r.dat##_ + e, this->dat##_\
+    \ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n  FUNC(idft, idft, DFT, int b, int\
+    \ e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n  FUNC(__, set, SET, const T x[],\
+    \ int b, int e)\n  FUNC(__, set, SET_SINGLE, int i, T x)\n  template <class C>\n\
+    \  FUNC(__, subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline\
+    \ void get(T x[], int b, int e) const {\n    if constexpr (B::type == 1)\n   \
+    \   std::copy(this->dat1 + b, this->dat1 + e, x + b);\n    else\n      for (int\
+    \ i = b; i < e; i++) x[i] = get(i);\n  }\n  inline T get(int i) const {\n    if\
+    \ constexpr (B::type == 3) {\n      const T mod1 = B::mint1::modulo(), mod2 =\
+    \ B::mint2::modulo();\n      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i]\
+    \ - r1)).val();\n      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n\
+    \      return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type\
+    \ == 2) {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
     \      return mod1 * ((this->dat2[i] - r1) * B::iv).val() + r1;\n    } else\n\
     \      return this->dat1[i];\n  }\n#define ASGN(op, _) \\\n  for (int i = b; i\
     \ < e; i++) this->dat##_[i] op## = r.dat##_[i]\n#define ASSIGN(fname, op) \\\n\
@@ -375,28 +396,29 @@ data:
     \       \\\n  template <class C, class D>                       \\\n  FUNC(op,\
     \ fname, BOP, const NTTArrayImpl<T, C> &l, \\\n       const NTTArrayImpl<T, D>\
     \ &r, int b, int e)\n  OP(add, +) OP(dif, -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif,\
-    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SUBST\n#undef\
-    \ ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n};\ntemplate <class\
-    \ T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1 = NumberTheoreticTransform<T>;\n\
-    \  static_assert(_Nm <= ntt1::lim());\n  static constexpr T Z1 = 0;\n  static\
-    \ constexpr std::uint8_t type = 1;\n};\ntemplate <class T, std::size_t _Nm, bool\
-    \ is_heap>\nstruct NTTArrayB_Single : protected NTTArrayB_SingleB<T, _Nm> {\n\
-    \  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_Single<T,\
-    \ _Nm, true> : protected NTTArrayB_SingleB<T, _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data())\
-    \ {}\n  void resize(int n) {\n    buf1.resize(n, NTTArrayB_Single::Z1), dat1 =\
-    \ buf1.data();\n  }\n  std::size_t size() const { return buf1.size(); }\n  std::vector<T>\
-    \ buf1;\n  T *dat1;\n};\n#define NTTARRAYB_MULTI(iv, t)                      \
-    \              \\\n  using mint1 = StaticModInt<MOD1>;                       \
-    \        \\\n  using mint2 = StaticModInt<MOD2>;                             \
-    \  \\\n  using ntt1 = NumberTheoreticTransform<mint1>;                   \\\n\
-    \  using ntt2 = NumberTheoreticTransform<mint2>;                   \\\n  static_assert(_Nm\
-    \ <= (1 << 25));                                \\\n  static constexpr mint1 Z1\
-    \ = 0;                                  \\\n  static constexpr mint2 iv = mint2(1)\
-    \ / mint1::modulo(), Z2 = 0; \\\n  static constexpr std::uint8_t type = t;\ntemplate\
-    \ <std::size_t _Nm, u64 MOD1, u64 MOD2>\nstruct NTTArrayB_DoubleB {\n  NTTARRAYB_MULTI(iv,\
-    \ 2);\n};\ntemplate <std::size_t _Nm, u64 MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_TripleB\
-    \ {\n  NTTARRAYB_MULTI(iv21, 3);\n  using mint3 = StaticModInt<MOD3>;\n  using\
-    \ ntt3 = NumberTheoreticTransform<mint3>;\n  static constexpr mint3 iv32 = mint3(1)\
+    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SET_SINGLE\n\
+    #undef SUBST\n#undef ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n\
+    };\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1\
+    \ = NumberTheoreticTransform<T>;\n  static_assert(_Nm <= ntt1::lim());\n  static\
+    \ constexpr T Z1 = 0;\n  static constexpr std::uint8_t type = 1;\n};\ntemplate\
+    \ <class T, std::size_t _Nm, bool is_heap>\nstruct NTTArrayB_Single : protected\
+    \ NTTArrayB_SingleB<T, _Nm> {\n  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t\
+    \ _Nm>\nstruct NTTArrayB_Single<T, _Nm, true> : protected NTTArrayB_SingleB<T,\
+    \ _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data()) {}\n  void resize(int n) {\n\
+    \    buf1.resize(n, NTTArrayB_Single::Z1), dat1 = buf1.data();\n  }\n  std::size_t\
+    \ size() const { return buf1.size(); }\n  std::vector<T> buf1;\n  T *dat1;\n};\n\
+    #define NTTARRAYB_MULTI(iv, t)                                    \\\n  using\
+    \ mint1 = StaticModInt<MOD1>;                               \\\n  using mint2\
+    \ = StaticModInt<MOD2>;                               \\\n  using ntt1 = NumberTheoreticTransform<mint1>;\
+    \                   \\\n  using ntt2 = NumberTheoreticTransform<mint2>;      \
+    \             \\\n  static_assert(_Nm <= (1 << 25));                         \
+    \       \\\n  static constexpr mint1 Z1 = 0;                                 \
+    \ \\\n  static constexpr mint2 iv = mint2(1) / mint1::modulo(), Z2 = 0; \\\n \
+    \ static constexpr std::uint8_t type = t;\ntemplate <std::size_t _Nm, u64 MOD1,\
+    \ u64 MOD2>\nstruct NTTArrayB_DoubleB {\n  NTTARRAYB_MULTI(iv, 2);\n};\ntemplate\
+    \ <std::size_t _Nm, u64 MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_TripleB {\n\
+    \  NTTARRAYB_MULTI(iv21, 3);\n  using mint3 = StaticModInt<MOD3>;\n  using ntt3\
+    \ = NumberTheoreticTransform<mint3>;\n  static constexpr mint3 iv32 = mint3(1)\
     \ / mint2::modulo(),\n                         iv31 = iv32 / mint1::modulo(),\
     \ Z3 = 0;\n};\n#undef NTTARRAYB_MULTI\ntemplate <std::size_t _Nm, u64 MOD1, u64\
     \ MOD2, bool is_heap>\nstruct NTTArrayB_Double : protected NTTArrayB_DoubleB<_Nm,\
@@ -470,13 +492,18 @@ data:
   - src/FFT/fps_inv.hpp
   - src/FFT/BigInt.hpp
   - src/FFT/fps_exp.hpp
-  timestamp: '2022-09-21 14:30:01+09:00'
+  timestamp: '2022-09-21 15:34:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/3046.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/980.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
@@ -484,6 +511,7 @@ data:
   - test/aoj/NTL_2_C.test.cpp
   - test/aoj/NTL_2_F.test.cpp
   - test/aoj/NTL_2_A.test.cpp
+  - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
   - test/aoj/NTL_2_B.test.cpp

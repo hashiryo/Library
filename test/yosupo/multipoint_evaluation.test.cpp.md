@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
@@ -158,19 +158,20 @@ data:
     \ (B::type >= 2) HOGEHOGE(op, 2); \\\n    if constexpr (B::type >= 3) HOGEHOGE(op,\
     \ 3); \\\n  }\n#define DFT(fft, _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define\
     \ ZEROS(op, _) std::fill_n(this->dat##_ + b, e - b, B::Z##_)\n#define SET(op,\
-    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SUBST(op, _) std::copy(r.dat##_\
-    \ + b, r.dat##_ + e, this->dat##_ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n\
-    \  FUNC(idft, idft, DFT, int b, int e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n\
-    \  FUNC(__, set, SET, const T x[], int b, int e)\n  template <class C>\n  FUNC(__,\
-    \ subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline void get(T\
-    \ x[], int b, int e) const {\n    if constexpr (B::type == 1)\n      std::copy(this->dat1\
-    \ + b, this->dat1 + e, x + b);\n    else\n      for (int i = b; i < e; i++) x[i]\
-    \ = get(i);\n  }\n  inline T get(int i) const {\n    if constexpr (B::type ==\
-    \ 3) {\n      const T mod1 = B::mint1::modulo(), mod2 = B::mint2::modulo();\n\
-    \      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i] - r1)).val();\n\
-    \      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n     \
-    \ return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type == 2)\
-    \ {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
+    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SET_SINGLE(op, _) this->dat##_[i]\
+    \ = x;\n#define SUBST(op, _) std::copy(r.dat##_ + b, r.dat##_ + e, this->dat##_\
+    \ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n  FUNC(idft, idft, DFT, int b, int\
+    \ e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n  FUNC(__, set, SET, const T x[],\
+    \ int b, int e)\n  FUNC(__, set, SET_SINGLE, int i, T x)\n  template <class C>\n\
+    \  FUNC(__, subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline\
+    \ void get(T x[], int b, int e) const {\n    if constexpr (B::type == 1)\n   \
+    \   std::copy(this->dat1 + b, this->dat1 + e, x + b);\n    else\n      for (int\
+    \ i = b; i < e; i++) x[i] = get(i);\n  }\n  inline T get(int i) const {\n    if\
+    \ constexpr (B::type == 3) {\n      const T mod1 = B::mint1::modulo(), mod2 =\
+    \ B::mint2::modulo();\n      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i]\
+    \ - r1)).val();\n      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n\
+    \      return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type\
+    \ == 2) {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
     \      return mod1 * ((this->dat2[i] - r1) * B::iv).val() + r1;\n    } else\n\
     \      return this->dat1[i];\n  }\n#define ASGN(op, _) \\\n  for (int i = b; i\
     \ < e; i++) this->dat##_[i] op## = r.dat##_[i]\n#define ASSIGN(fname, op) \\\n\
@@ -180,28 +181,29 @@ data:
     \       \\\n  template <class C, class D>                       \\\n  FUNC(op,\
     \ fname, BOP, const NTTArrayImpl<T, C> &l, \\\n       const NTTArrayImpl<T, D>\
     \ &r, int b, int e)\n  OP(add, +) OP(dif, -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif,\
-    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SUBST\n#undef\
-    \ ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n};\ntemplate <class\
-    \ T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1 = NumberTheoreticTransform<T>;\n\
-    \  static_assert(_Nm <= ntt1::lim());\n  static constexpr T Z1 = 0;\n  static\
-    \ constexpr std::uint8_t type = 1;\n};\ntemplate <class T, std::size_t _Nm, bool\
-    \ is_heap>\nstruct NTTArrayB_Single : protected NTTArrayB_SingleB<T, _Nm> {\n\
-    \  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_Single<T,\
-    \ _Nm, true> : protected NTTArrayB_SingleB<T, _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data())\
-    \ {}\n  void resize(int n) {\n    buf1.resize(n, NTTArrayB_Single::Z1), dat1 =\
-    \ buf1.data();\n  }\n  std::size_t size() const { return buf1.size(); }\n  std::vector<T>\
-    \ buf1;\n  T *dat1;\n};\n#define NTTARRAYB_MULTI(iv, t)                      \
-    \              \\\n  using mint1 = StaticModInt<MOD1>;                       \
-    \        \\\n  using mint2 = StaticModInt<MOD2>;                             \
-    \  \\\n  using ntt1 = NumberTheoreticTransform<mint1>;                   \\\n\
-    \  using ntt2 = NumberTheoreticTransform<mint2>;                   \\\n  static_assert(_Nm\
-    \ <= (1 << 25));                                \\\n  static constexpr mint1 Z1\
-    \ = 0;                                  \\\n  static constexpr mint2 iv = mint2(1)\
-    \ / mint1::modulo(), Z2 = 0; \\\n  static constexpr std::uint8_t type = t;\ntemplate\
-    \ <std::size_t _Nm, u64 MOD1, u64 MOD2>\nstruct NTTArrayB_DoubleB {\n  NTTARRAYB_MULTI(iv,\
-    \ 2);\n};\ntemplate <std::size_t _Nm, u64 MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_TripleB\
-    \ {\n  NTTARRAYB_MULTI(iv21, 3);\n  using mint3 = StaticModInt<MOD3>;\n  using\
-    \ ntt3 = NumberTheoreticTransform<mint3>;\n  static constexpr mint3 iv32 = mint3(1)\
+    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SET_SINGLE\n\
+    #undef SUBST\n#undef ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n\
+    };\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1\
+    \ = NumberTheoreticTransform<T>;\n  static_assert(_Nm <= ntt1::lim());\n  static\
+    \ constexpr T Z1 = 0;\n  static constexpr std::uint8_t type = 1;\n};\ntemplate\
+    \ <class T, std::size_t _Nm, bool is_heap>\nstruct NTTArrayB_Single : protected\
+    \ NTTArrayB_SingleB<T, _Nm> {\n  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t\
+    \ _Nm>\nstruct NTTArrayB_Single<T, _Nm, true> : protected NTTArrayB_SingleB<T,\
+    \ _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data()) {}\n  void resize(int n) {\n\
+    \    buf1.resize(n, NTTArrayB_Single::Z1), dat1 = buf1.data();\n  }\n  std::size_t\
+    \ size() const { return buf1.size(); }\n  std::vector<T> buf1;\n  T *dat1;\n};\n\
+    #define NTTARRAYB_MULTI(iv, t)                                    \\\n  using\
+    \ mint1 = StaticModInt<MOD1>;                               \\\n  using mint2\
+    \ = StaticModInt<MOD2>;                               \\\n  using ntt1 = NumberTheoreticTransform<mint1>;\
+    \                   \\\n  using ntt2 = NumberTheoreticTransform<mint2>;      \
+    \             \\\n  static_assert(_Nm <= (1 << 25));                         \
+    \       \\\n  static constexpr mint1 Z1 = 0;                                 \
+    \ \\\n  static constexpr mint2 iv = mint2(1) / mint1::modulo(), Z2 = 0; \\\n \
+    \ static constexpr std::uint8_t type = t;\ntemplate <std::size_t _Nm, u64 MOD1,\
+    \ u64 MOD2>\nstruct NTTArrayB_DoubleB {\n  NTTARRAYB_MULTI(iv, 2);\n};\ntemplate\
+    \ <std::size_t _Nm, u64 MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_TripleB {\n\
+    \  NTTARRAYB_MULTI(iv21, 3);\n  using mint3 = StaticModInt<MOD3>;\n  using ntt3\
+    \ = NumberTheoreticTransform<mint3>;\n  static constexpr mint3 iv32 = mint3(1)\
     \ / mint2::modulo(),\n                         iv31 = iv32 / mint1::modulo(),\
     \ Z3 = 0;\n};\n#undef NTTARRAYB_MULTI\ntemplate <std::size_t _Nm, u64 MOD1, u64\
     \ MOD2, bool is_heap>\nstruct NTTArrayB_Double : protected NTTArrayB_DoubleB<_Nm,\
@@ -355,34 +357,35 @@ data:
     \ 0, m2), GNA2::bf.idft(0, m2);\n      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]\
     \ = -bfk[mm];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n\
     }\n#line 4 \"src/FFT/SubProductTree.hpp\"\n\n/**\n * @title \u8907\u6570\u306E\
-    \u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category FFT\n */\n\
-    \n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 20>\nstruct\
-    \ SubProductTree {\n  using poly = std::vector<mod_t>;\n  static const inline\
-    \ mod_t Z = 0;\n  std::vector<mod_t> xs, all;\n  int n, nn;\n  std::vector<NTTArray<mod_t,\
-    \ _Nm, true>> p;\n  using GA1 = GlobalArray<mod_t, _Nm, 1>;\n  using GNA1 = GlobalNTTArray<mod_t,\
-    \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  SubProductTree(const\
-    \ std::vector<mod_t> &xs_)\n      : xs(xs_), n(xs_.size()), nn(get_len(n)), p(nn\
-    \ << 1) {\n    xs.resize(nn, Z);\n    for (int i = 0; i < nn; ++i)\n      p[nn\
-    \ + i].resize(2), p[nn + i].set(0, 1), p[nn + i].set(1, -xs[i]);\n    for (int\
-    \ i = nn; --i;) {\n      int ls = i << 1, rs = i << 1 | 1, len = get_len(p[ls].size());\n\
-    \      p[ls].resize(len), p[rs].resize(len), p[ls].dft(0, len);\n      p[rs].dft(0,\
-    \ len), p[i].resize(len), p[i].mul(p[ls], p[rs], 0, len);\n      p[i].idft(0,\
-    \ len), p[i].resize(len + 1);\n      if constexpr (!is_nttfriend<mod_t, _Nm>())\n\
-    \        p[i].get(GA1::bf, 1, len), p[i].set(GA1::bf, 1, len);\n      p[i].set(len,\
-    \ p[i].get(0) - 1), p[i].set(0, 1);\n    }\n    all.resize(n + 1), p[1].get(all.data(),\
-    \ 0, n + 1);\n  }\n  std::vector<mod_t> multi_eval(const poly &f) const {\n  \
-    \  int m = f.size();\n    if (m == 1) return std::vector<mod_t>(n, f[0]);\n  \
-    \  auto q = div<mod_t, _Nm>(poly(f.rbegin(), f.rend()), all);\n    if (m > nn)\n\
-    \      std::copy(q.end() - nn, q.end(), GA1::bf);\n    else\n      std::copy(q.begin(),\
-    \ q.end(), GA1::bf + nn - m),\n          std::fill(GA1::bf, GA1::bf + nn - m,\
-    \ Z);\n    for (int k = nn; k >>= 1;)\n      for (int i = 0, k2 = k << 1, o =\
-    \ nn / k; i < nn; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf + i, 0, k2),\
-    \ GNA1::bf.dft(0, k2);\n        GNA2::bf.mul(GNA1::bf, p[o | 1], 0, k2), GNA2::bf.idft(0,\
-    \ k2);\n        GNA1::bf.mul(p[o], 0, k2), GNA1::bf.idft(0, k2);\n        GNA2::bf.get(GA1::bf\
-    \ + i - k, k, k2), GNA1::bf.get(GA1::bf + i, k, k2);\n      }\n    return std::vector<mod_t>(GA1::bf,\
-    \ GA1::bf + n);\n  }\n  poly interpolate(const std::vector<mod_t> &ys) {\n   \
-    \ for (int i = n; i; i--) GA1::bf[i - 1] = all[n - i] * i;\n    auto q = multi_eval(poly(GA1::bf,\
-    \ GA1::bf + n));\n    for (int i = n; i--;) GA1::bf[i] = ys[i] / q[i];\n    std::fill(GA1::bf\
+    \u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category FFT\n * \u3069\
+    \u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
+    \ std::size_t _Nm = 1 << 20>\nstruct SubProductTree {\n  using poly = std::vector<mod_t>;\n\
+    \  static const inline mod_t Z = 0;\n  std::vector<mod_t> xs, all;\n  int n, nn;\n\
+    \  std::vector<NTTArray<mod_t, _Nm, true>> p;\n  using GA1 = GlobalArray<mod_t,\
+    \ _Nm, 1>;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \ _Nm, 2>;\n  SubProductTree(const std::vector<mod_t> &xs_)\n      : xs(xs_),\
+    \ n(xs_.size()), nn(get_len(n)), p(nn << 1) {\n    xs.resize(nn, Z);\n    for\
+    \ (int i = 0; i < nn; ++i)\n      p[nn + i].resize(2), p[nn + i].set(0, 1), p[nn\
+    \ + i].set(1, -xs[i]);\n    for (int i = nn; --i;) {\n      int ls = i << 1, rs\
+    \ = i << 1 | 1, len = get_len(p[ls].size());\n      p[ls].resize(len), p[rs].resize(len),\
+    \ p[ls].dft(0, len);\n      p[rs].dft(0, len), p[i].resize(len), p[i].mul(p[ls],\
+    \ p[rs], 0, len);\n      p[i].idft(0, len), p[i].resize(len + 1);\n      if constexpr\
+    \ (!is_nttfriend<mod_t, _Nm>())\n        p[i].get(GA1::bf, 1, len), p[i].set(GA1::bf,\
+    \ 1, len);\n      p[i].set(len, p[i].get(0) - 1), p[i].set(0, 1);\n    }\n   \
+    \ all.resize(n + 1), p[1].get(all.data(), 0, n + 1);\n  }\n  std::vector<mod_t>\
+    \ multi_eval(const poly &f) const {\n    int m = f.size();\n    if (m == 1) return\
+    \ std::vector<mod_t>(n, f[0]);\n    auto q = div<mod_t, _Nm>(poly(f.rbegin(),\
+    \ f.rend()), all);\n    if (m > nn)\n      std::copy(q.end() - nn, q.end(), GA1::bf);\n\
+    \    else\n      std::copy(q.begin(), q.end(), GA1::bf + nn - m),\n          std::fill(GA1::bf,\
+    \ GA1::bf + nn - m, Z);\n    for (int k = nn; k >>= 1;)\n      for (int i = 0,\
+    \ k2 = k << 1, o = nn / k; i < nn; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf\
+    \ + i, 0, k2), GNA1::bf.dft(0, k2);\n        GNA2::bf.mul(GNA1::bf, p[o | 1],\
+    \ 0, k2), GNA2::bf.idft(0, k2);\n        GNA1::bf.mul(p[o], 0, k2), GNA1::bf.idft(0,\
+    \ k2);\n        GNA2::bf.get(GA1::bf + i - k, k, k2), GNA1::bf.get(GA1::bf + i,\
+    \ k, k2);\n      }\n    return std::vector<mod_t>(GA1::bf, GA1::bf + n);\n  }\n\
+    \  poly interpolate(const std::vector<mod_t> &ys) {\n    for (int i = n; i; i--)\
+    \ GA1::bf[i - 1] = all[n - i] * i;\n    auto q = multi_eval(poly(GA1::bf, GA1::bf\
+    \ + n));\n    for (int i = n; i--;) GA1::bf[i] = ys[i] / q[i];\n    std::fill(GA1::bf\
     \ + n, GA1::bf + nn, Z);\n    for (int k = 1; k < nn; k <<= 1)\n      for (int\
     \ i = 0, o = nn / k, k2 = k << 1; i < n; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf\
     \ + i, 0, k), GNA1::bf.zeros(k, k2);\n        GNA2::bf.set(GA1::bf + i + k, 0,\
@@ -415,8 +418,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/multipoint_evaluation.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 14:39:26+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-09-21 15:34:42+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/multipoint_evaluation.test.cpp
 layout: document

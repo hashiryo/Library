@@ -8,10 +8,10 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -37,6 +37,9 @@ data:
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows b\
       \ = a^{a^{\\cdot^{\\cdot^{a}}}}$"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3072.test.cpp
+    title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
@@ -76,7 +79,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
   - icon: ':x:'
@@ -86,14 +89,29 @@ data:
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
   - icon: ':x:'
+    path: test/yosupo/sharp_p_subset_sum.test.cpp
+    title: test/yosupo/sharp_p_subset_sum.test.cpp
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1080.test.cpp
+    title: test/yukicoder/1080.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1145.test.cpp
+    title: test/yukicoder/1145.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/3030.test.cpp
     title: test/yukicoder/3030.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/3046.test.cpp
+    title: test/yukicoder/3046.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/980.test.cpp
+    title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -156,12 +174,17 @@ data:
   timestamp: '2022-07-04 14:16:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/3046.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/980.test.cpp
   - test/yukicoder/3030.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/factorize.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
@@ -171,6 +194,7 @@ data:
   - test/aoj/NTL_2_F.test.cpp
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_1_D.test.cpp
+  - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
   - test/aoj/NTL_2_B.test.cpp

@@ -12,6 +12,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1080.test.cpp
+    title: test/yukicoder/1080.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -54,6 +57,7 @@ data:
   timestamp: '2022-09-20 01:41:14+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1080.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/sqrt_mod.test.cpp
 documentation_of: src/Math/mod_sqrt.hpp
