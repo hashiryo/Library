@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sharp_p_subset_sum
@@ -407,23 +407,23 @@ data:
     \ 5 \"test/yosupo/sharp_p_subset_sum.test.cpp\"\nusing namespace std;\n\n// log(1+x^s_1)(1+x^s_2)...(1+x^s_N)=log(1+x^s_1)+log(1+x^s_2)+...log(1+x^s_N)\n\
     // log(1+x)=x-x^2/2+x^3/3-x^4/4...\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N, T;\n  cin >> N >> T;\n  int\
-    \ c[T + 1] = {0};\n  for (int i = 0; i < N; i++) {\n    int s;\n    cin >> s,\
-    \ c[s]++;\n  }\n  vector<Mint> a(T + 1);\n  for (int t = 1; t <= T; t++)\n   \
-    \ if (c[t])\n      for (int j = 1; j * t <= T; j++) {\n        Mint tmp = Mint(c[t])\
-    \ / j;\n        a[j * t] += j & 1 ? tmp : -tmp;\n      }\n  auto ans = exp(a);\n\
-    \  for (int t = 1; t <= T; t++) cout << ans[t] << \" \\n\"[t == T];\n  return\
-    \ 0;\n}\n"
+    \ c[T + 1];\n  fill_n(c, T + 1, 0);\n  for (int i = 0; i < N; i++) {\n    int\
+    \ s;\n    cin >> s, c[s]++;\n  }\n  vector<Mint> a(T + 1);\n  for (int t = 1;\
+    \ t <= T; t++)\n    if (c[t])\n      for (int j = 1; j * t <= T; j++) {\n    \
+    \    Mint tmp = Mint(c[t]) / j;\n        a[j * t] += j & 1 ? tmp : -tmp;\n   \
+    \   }\n  auto ans = exp(a);\n  for (int t = 1; t <= T; t++) cout << ans[t] <<\
+    \ \" \\n\"[t == T];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_exp.hpp\"\
     \nusing namespace std;\n\n// log(1+x^s_1)(1+x^s_2)...(1+x^s_N)=log(1+x^s_1)+log(1+x^s_2)+...log(1+x^s_N)\n\
     // log(1+x)=x-x^2/2+x^3/3-x^4/4...\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N, T;\n  cin >> N >> T;\n  int\
-    \ c[T + 1] = {0};\n  for (int i = 0; i < N; i++) {\n    int s;\n    cin >> s,\
-    \ c[s]++;\n  }\n  vector<Mint> a(T + 1);\n  for (int t = 1; t <= T; t++)\n   \
-    \ if (c[t])\n      for (int j = 1; j * t <= T; j++) {\n        Mint tmp = Mint(c[t])\
-    \ / j;\n        a[j * t] += j & 1 ? tmp : -tmp;\n      }\n  auto ans = exp(a);\n\
-    \  for (int t = 1; t <= T; t++) cout << ans[t] << \" \\n\"[t == T];\n  return\
-    \ 0;\n}"
+    \ c[T + 1];\n  fill_n(c, T + 1, 0);\n  for (int i = 0; i < N; i++) {\n    int\
+    \ s;\n    cin >> s, c[s]++;\n  }\n  vector<Mint> a(T + 1);\n  for (int t = 1;\
+    \ t <= T; t++)\n    if (c[t])\n      for (int j = 1; j * t <= T; j++) {\n    \
+    \    Mint tmp = Mint(c[t]) / j;\n        a[j * t] += j & 1 ? tmp : -tmp;\n   \
+    \   }\n  auto ans = exp(a);\n  for (int t = 1; t <= T; t++) cout << ans[t] <<\
+    \ \" \\n\"[t == T];\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/FFT/fps_exp.hpp
@@ -434,8 +434,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 15:34:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-09-21 22:51:51+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.test.cpp
 layout: document

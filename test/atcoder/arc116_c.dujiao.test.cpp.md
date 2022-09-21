@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/DirichletConvSumTable.hpp
     title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
