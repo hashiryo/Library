@@ -17,13 +17,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Old/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/0168.test.cpp
-    title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
@@ -40,9 +37,6 @@ data:
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
   - icon: ':heavy_check_mark:'
@@ -54,12 +48,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_second.test.cpp
     title: test/yosupo/stirling_second.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/215.test.cpp
-    title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/658.test.cpp
-    title: test/yukicoder/658.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
@@ -642,11 +630,8 @@ data:
   timestamp: '2022-09-19 00:53:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/658.test.cpp
   - test/yukicoder/963.test.cpp
-  - test/yukicoder/215.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/stirling_second.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
@@ -655,7 +640,6 @@ data:
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/stirling_first.test.cpp
-  - test/aoj/0168.test.cpp
 documentation_of: src/Old/FormalPowerSeries.hpp
 layout: document
 redirect_from:

@@ -10,15 +10,30 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: src/FFT/bostan_mori.hpp
+    title: Bostan-Mori
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0168.test.cpp
+    title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
   - icon: ':x:'
+    path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/215.test.cpp
+    title: test/yukicoder/215.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/658.test.cpp
+    title: test/yukicoder/658.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
@@ -314,13 +329,18 @@ data:
   - src/Math/ModInt.hpp
   isVerificationFile: false
   path: src/FFT/convolve.hpp
-  requiredBy: []
+  requiredBy:
+  - src/FFT/bostan_mori.hpp
   timestamp: '2022-09-21 15:34:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/658.test.cpp
   - test/yukicoder/1145.test.cpp
+  - test/yukicoder/215.test.cpp
   - test/yukicoder/980.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
+  - test/aoj/0168.test.cpp
 documentation_of: src/FFT/convolve.hpp
 layout: document
 redirect_from:

@@ -8,22 +8,10 @@ data:
     path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/0168.test.cpp
-    title: test/aoj/0168.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/215.test.cpp
-    title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/658.test.cpp
-    title: test/yukicoder/658.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
@@ -378,12 +366,8 @@ data:
   path: src/Old/kitamasa.hpp
   requiredBy: []
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/yukicoder/658.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/aoj/0168.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Old/kitamasa.hpp
 layout: document
 redirect_from:
