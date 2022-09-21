@@ -3,8 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
-    title: "Splay\u6728"
-  - icon: ':heavy_check_mark:'
+    title: Splay-Tree
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -22,26 +22,26 @@ data:
     \n\n// set_balance \u3057\u306A\u3044\u3068 \u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\
     \u30D0\u30FC\u30D5\u30ED\u30FC\n// \uFF08\u30C6\u30B9\u30C8\u30B1\u30FC\u30B9\
     \ wrong_avl_killer_01\uFF09\n\n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SplayTree.hpp\"\
-    \n/**\n * @title Splay\u6728\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n *\
-    \ @brief O(logN)\n * \u6728\u306E\u6DF1\u3055\u304C10^5\u3050\u3089\u3044\u306B\
-    \u306A\u308B\u3068\u518D\u5E30\u95A2\u6570\u304C\u30B9\u30BF\u30C3\u30AF\u30AA\
-    \u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u8D77\u3053\u3059\u306E\u3067\u6CE8\u610F\
-    \n * set_balance() \u3067\u30E9\u30F3\u30C0\u30E0\u306Bsplay\u3059\u308B\u306E\
-    \u3067\u306A\u3089\u3059\u3053\u3068\u304C\u3067\u304D\u308B\u306F\u305A\n * \u5358\
-    \u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\
-    \n * \u533A\u9593reverse\u304C\u3067\u304D\u308B\u3002\uFF08\u534A\u7FA4\u306E\
-    \u53EF\u63DB\u6027\u3092\u4EEE\u5B9A\u3057\u3066\u3044\u306A\u3044\u306E\u3067\
-    \u7121\u99C4\u306B\u30E1\u30E2\u30EA\u3068\u6642\u9593\u3092\u4F7F\u3046\u3051\
-    \u3069\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\u30B5\u30A4\
-    \u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\u6570\
-    \u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n\
-    // BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)     \
-    \                         \\\n  template <class T>                           \
-    \               \\\n  struct has_##member {                                  \
-    \     \\\n    template <class U, Dummy>                                 \\\n \
-    \   static std::true_type check(U *);                         \\\n    static std::false_type\
-    \ check(...);                        \\\n    static T *mClass;               \
-    \                          \\\n    static const bool value = decltype(check(mClass))::value;\
+    \n/**\n * @title Splay-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
+    \ O(logN)\n * \u6728\u306E\u6DF1\u3055\u304C10^5\u3050\u3089\u3044\u306B\u306A\
+    \u308B\u3068\u518D\u5E30\u95A2\u6570\u304C\u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\
+    \u30D0\u30FC\u30D5\u30ED\u30FC\u8D77\u3053\u3059\u306E\u3067\u6CE8\u610F\n * set_balance()\
+    \ \u3067\u30E9\u30F3\u30C0\u30E0\u306Bsplay\u3059\u308B\u306E\u3067\u306A\u3089\
+    \u3059\u3053\u3068\u304C\u3067\u304D\u308B\u306F\u305A\n * \u5358\u4F4D\u5143\u306F\
+    \u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\n * \u533A\u9593\
+    reverse\u304C\u3067\u304D\u308B\u3002\uFF08\u534A\u7FA4\u306E\u53EF\u63DB\u6027\
+    \u3092\u4EEE\u5B9A\u3057\u3066\u3044\u306A\u3044\u306E\u3067\u7121\u99C4\u306B\
+    \u30E1\u30E2\u30EA\u3068\u6642\u9593\u3092\u4F7F\u3046\u3051\u3069\uFF09\n * \u5404\
+    \u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\
+    \u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\
+    \u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n// BEGIN CUT HERE\n\
+    \n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)                        \
+    \      \\\n  template <class T>                                          \\\n\
+    \  struct has_##member {                                       \\\n    template\
+    \ <class U, Dummy>                                 \\\n    static std::true_type\
+    \ check(U *);                         \\\n    static std::false_type check(...);\
+    \                        \\\n    static T *mClass;                           \
+    \              \\\n    static const bool value = decltype(check(mClass))::value;\
     \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
     #endif\n\ntemplate <class M, bool reversible = false>\nclass SplayTree {\n  HAS_MEMBER(op);\n\
@@ -282,7 +282,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-09-19 00:53:55+09:00'
+  timestamp: '2022-09-21 14:30:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
-    title: Number Theoretic Transform
-  - icon: ':heavy_check_mark:'
+    title: Number-Theoretic-Transform
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -108,7 +108,7 @@ data:
     \ id>>>;\n}  // namespace modint_internal\nusing modint_internal::DynamicModInt,\
     \ modint_internal::StaticModInt,\n    modint_internal::Montgomery, modint_internal::is_dynamicmodint_v,\n\
     \    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n#line\
-    \ 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title Number Theoretic Transform\n * @category\
+    \ 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title Number-Theoretic-Transform\n * @category\
     \ FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\n\
     using u128 = __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform\
     \ {\n  static inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0,\
@@ -307,7 +307,7 @@ data:
   isVerificationFile: false
   path: src/FFT/convolve.hpp
   requiredBy: []
-  timestamp: '2022-09-20 01:41:14+09:00'
+  timestamp: '2022-09-21 14:30:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/convolution1000000007.test.cpp

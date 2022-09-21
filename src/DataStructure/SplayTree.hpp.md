@@ -25,10 +25,10 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "Splay\u6728"
+    document_title: Splay-Tree
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title Splay\u6728\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
+    /**\n * @title Splay-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
     \ O(logN)\n * \u6728\u306E\u6DF1\u3055\u304C10^5\u3050\u3089\u3044\u306B\u306A\
     \u308B\u3068\u518D\u5E30\u95A2\u6570\u304C\u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\
     \u30D0\u30FC\u30D5\u30ED\u30FC\u8D77\u3053\u3059\u306E\u3067\u6CE8\u610F\n * set_balance()\
@@ -177,7 +177,7 @@ data:
     \    splay(root, k);\n    T ret = root->val;\n    splay(root->ch[1], 0);\n   \
     \ if (root->ch[1])\n      root->ch[1]->ch[0] = root->ch[0], root = pushup(root->ch[1]);\n\
     \    else\n      root = root->ch[0];\n    return ret;\n  }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Splay\u6728\n * @category\
+  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Splay-Tree\n * @category\
     \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n * \u6728\u306E\u6DF1\u3055\
     \u304C10^5\u3050\u3089\u3044\u306B\u306A\u308B\u3068\u518D\u5E30\u95A2\u6570\u304C\
     \u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u8D77\u3053\
@@ -330,7 +330,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
-  timestamp: '2022-07-04 17:10:20+09:00'
+  timestamp: '2022-09-21 14:30:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
@@ -344,5 +344,5 @@ layout: document
 redirect_from:
 - /library/src/DataStructure/SplayTree.hpp
 - /library/src/DataStructure/SplayTree.hpp.html
-title: "Splay\u6728"
+title: Splay-Tree
 ---

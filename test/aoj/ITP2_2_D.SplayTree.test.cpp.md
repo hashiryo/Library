@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
-    title: "Splay\u6728"
+    title: Splay-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -17,7 +17,7 @@ data:
   bundledCode: "#line 1 \"test/aoj/ITP2_2_D.SplayTree.test.cpp\"\n#define PROBLEM\
     \ \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SplayTree.hpp\"\n/**\n\
-    \ * @title Splay\u6728\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
+    \ * @title Splay-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
     \ O(logN)\n * \u6728\u306E\u6DF1\u3055\u304C10^5\u3050\u3089\u3044\u306B\u306A\
     \u308B\u3068\u518D\u5E30\u95A2\u6570\u304C\u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\
     \u30D0\u30FC\u30D5\u30ED\u30FC\u8D77\u3053\u3059\u306E\u3067\u6CE8\u610F\n * set_balance()\
@@ -189,7 +189,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_2_D.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2022-07-04 17:10:20+09:00'
+  timestamp: '2022-09-21 14:30:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_2_D.SplayTree.test.cpp
