@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Combination.hpp
     title: "\u7D44\u307F\u5408\u308F\u305B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
   - icon: ':heavy_check_mark:'

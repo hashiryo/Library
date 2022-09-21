@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/Old/BigInt.hpp
-    title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
@@ -231,7 +228,6 @@ data:
   - src/Old/SubproductTree.hpp
   - src/Old/kitamasa.hpp
   - src/Old/differential_equation.hpp
-  - src/Old/BigInt.hpp
   - src/Old/FormalPowerSeries.hpp
   - src/Old/fps_sequence.hpp
   timestamp: '2022-09-19 00:53:55+09:00'

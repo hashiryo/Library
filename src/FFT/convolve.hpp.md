@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number Theoretic Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'

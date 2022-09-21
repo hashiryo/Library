@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/LUDecomposition.hpp
     title: "LU\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
