@@ -122,29 +122,28 @@ data:
     \ i ? f(lpf[i], lpfe[i])\n                             : ret[lpfpw[i]] * ret[i\
     \ / lpfpw[i]];\n    return ret[1] = 1, ret;\n  }\n  // O(N log k / log N + N)\n\
     \  template <class T>\n  static std::vector<T> pow_table(int N, std::uint64_t\
-    \ k) {\n    if (k == 0) {\n      std::vector<T> ret(N + 1, 0);\n      return ret[0]\
-    \ = 1, ret;\n    }\n    auto f = [k](int p, short) {\n      T ret = 1, b = p;\n\
-    \      for (auto e = k;; b *= b)\n        if (e & 1 ? ret *= b, !(e >>= 1) : !(e\
-    \ >>= 1)) return ret;\n    };\n    return completely_multiplicative_table<T>(N,\
-    \ f);\n  }\n  // O(N log MOD / log N + N)\n  template <class T>\n  static std::vector<T>\
-    \ inv_table(int N) {\n    return completely_multiplicative_table<T>(\n       \
-    \ N, [](int p, short) { return T(1) / p; });\n  }\n  // naive , O(N log N)\n \
-    \ template <class T>\n  static std::vector<T> dirichlet_conv(const std::vector<T>\
-    \ &a,\n                                       const std::vector<T> &b) {\n   \
-    \ std::size_t N = std::max(a.size(), b.size()) - 1, i, j;\n    std::vector<T>\
-    \ ret(N + 1, 0);\n    for (i = a.size(); --i;)\n      for (j = std::min(b.size()\
-    \ - 1, N / i); j; j--) ret[i * j] += a[i] * b[j];\n    return ret;\n  }\n  //\
-    \ a is multiplicative, O(N log log N)\n  template <class T, class F>\n  static\
-    \ std::vector<T> dirichlet_conv(const F &a, std::vector<T> b) {\n    std::size_t\
-    \ N = b.size() - 1, j = 0;\n    for (sieve(N), b.resize(N + 1, 0); j < psz &&\
-    \ ps[j] <= N; j++)\n      for (int i = N / ps[j], n, m, e; i; i--)\n        for\
-    \ (b[n = ps[j] * i] += a(ps[j], e = 1) * b[m = i]; m % ps[j] == 0;)\n        \
-    \  b[n] += a(ps[j], ++e) * b[m /= ps[j]];\n    return b;\n  }\n  // both a and\
-    \ b are multiplicative, O(N)\n  template <class T, class F1, class F2>\n  static\
-    \ std::vector<T> dirichlet_conv(const F1 &a, const F2 &b,\n                  \
-    \                     std::size_t N) {\n    auto f = [&a, &b](int p, short e)\
-    \ {\n      T ret = a(p, e) + b(p, e);\n      for (int k = e; --k;) ret += a(p,\
-    \ e - k) * b(p, k);\n      return ret;\n    };\n    return multiplicative_table<T>(N,\
+    \ k) {\n    if (k == 0) return std::vector<T>(N + 1, 1);\n    auto f = [k](int\
+    \ p, short) {\n      T ret = 1, b = p;\n      for (auto e = k;; b *= b)\n    \
+    \    if (e & 1 ? ret *= b, !(e >>= 1) : !(e >>= 1)) return ret;\n    };\n    return\
+    \ completely_multiplicative_table<T>(N, f);\n  }\n  // O(N log MOD / log N + N)\n\
+    \  template <class T>\n  static std::vector<T> inv_table(int N) {\n    return\
+    \ completely_multiplicative_table<T>(\n        N, [](int p, short) { return T(1)\
+    \ / p; });\n  }\n  // naive , O(N log N)\n  template <class T>\n  static std::vector<T>\
+    \ dirichlet_conv(const std::vector<T> &a,\n                                  \
+    \     const std::vector<T> &b) {\n    std::size_t N = std::max(a.size(), b.size())\
+    \ - 1, i, j;\n    std::vector<T> ret(N + 1, 0);\n    for (i = a.size(); --i;)\n\
+    \      for (j = std::min(b.size() - 1, N / i); j; j--) ret[i * j] += a[i] * b[j];\n\
+    \    return ret;\n  }\n  // a is multiplicative, O(N log log N)\n  template <class\
+    \ T, class F>\n  static std::vector<T> dirichlet_conv(const F &a, std::vector<T>\
+    \ b) {\n    std::size_t N = b.size() - 1, j = 0;\n    for (sieve(N), b.resize(N\
+    \ + 1, 0); j < psz && ps[j] <= N; j++)\n      for (int i = N / ps[j], n, m, e;\
+    \ i; i--)\n        for (b[n = ps[j] * i] += a(ps[j], e = 1) * b[m = i]; m % ps[j]\
+    \ == 0;)\n          b[n] += a(ps[j], ++e) * b[m /= ps[j]];\n    return b;\n  }\n\
+    \  // both a and b are multiplicative, O(N)\n  template <class T, class F1, class\
+    \ F2>\n  static std::vector<T> dirichlet_conv(const F1 &a, const F2 &b,\n    \
+    \                                   std::size_t N) {\n    auto f = [&a, &b](int\
+    \ p, short e) {\n      T ret = a(p, e) + b(p, e);\n      for (int k = e; --k;)\
+    \ ret += a(p, e - k) * b(p, k);\n      return ret;\n    };\n    return multiplicative_table<T>(N,\
     \ f);\n  }\n  // f -> g s.t. g(n) = sum_{m|n} f(m), O(N log log N)\n  template\
     \ <typename T>\n  static void divisor_zeta(std::vector<T> &f) {\n    std::size_t\
     \ N = f.size(), i, j;\n    for (sieve(N), i = 0; i < psz && ps[i] < N; i++)\n\
@@ -195,7 +194,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/agc038_c.numth.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 01:59:24+09:00'
+  timestamp: '2022-09-21 11:13:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/agc038_c.numth.test.cpp

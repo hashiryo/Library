@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/DirichletConvSumTable.hpp
     title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
   - icon: ':question:'
@@ -129,25 +129,25 @@ data:
     \ x[i];\n    auto A = [&](std::uint64_t n) { return n <= K ? A_l[n] : r.X[N /\
     \ n]; };\n    auto B = [&](std::uint64_t n) { return n <= K ? B_l[n] : X[N / n];\
     \ };\n    std::uint64_t n;\n    for (std::size_t l = L, m; l; X[l--] /= r.x[1])\n\
-    \      for (X[l] += A(m = std::sqrt(n = N / l)) * B(m) - x[1] * A(n); m > 1; m--)\n\
-    \        X[l] -= r.x[m] * B(n / m) + x[m] * A(n / m);\n    return *this;\n  }\n\
-    \  DirichletConvSumTable square() const {\n    const std::size_t K = x.size()\
-    \ - 1, L = X.size() - 1;\n    assert(N <= std::uint64_t(K) * L);\n    std::vector<T>\
-    \ c(K + 1, 0), C(L + 1, 0), A_l(K + 1, 0);\n    for (int i = 1; i <= K; i++) A_l[i]\
-    \ = A_l[i - 1] + x[i];\n    auto A = [&](std::uint64_t n) { return n <= K ? A_l[n]\
-    \ : X[N / n]; };\n    std::size_t i, j, l = std::sqrt(K);\n    std::uint64_t n;\n\
-    \    T tmp;\n    for (i = l; i; i--)\n      for (j = K / i; j > i; j--) c[i *\
-    \ j] += x[i] * x[j];\n    for (i = K; i; i--) c[i] += c[i];\n    for (i = l; i;\
-    \ i--) c[i * i] += x[i] * x[i];\n    for (l = L; l; C[l] += C[l], C[l--] -= tmp\
-    \ * tmp)\n      for (tmp = A(i = std::sqrt(n = N / l)); i; i--) C[l] += x[i] *\
-    \ A(n / i);\n    return DirichletConvSumTable<T>(N, c, C);\n  }\n  DirichletConvSumTable\
-    \ pow1(std::uint64_t M) const {\n    for (auto ret = get_epsilon(N, x.size() -\
-    \ 1), b = *this;; b = b.square()) {\n      if (M & 1) ret *= b;\n      if (!(M\
-    \ >>= 1)) return ret;\n    }\n  }\n  DirichletConvSumTable pow2(std::uint64_t\
-    \ M) const {\n    const std::size_t K = x.size() - 1, L = X.size() - 1;\n    assert(N\
-    \ <= std::uint64_t(K) * L);\n    if (M == 0) return get_epsilon(N, K);\n    if\
-    \ (M == 1) return *this;\n    std::size_t n = 0, m, i, l, p = 2;\n    std::uint64_t\
-    \ e, j;\n    while (n <= M && (1ULL << n) <= N) n++;\n    DirichletConvSumTable\
+    \      for (m = std::sqrt(n = N / l), X[l] += A(m) * B(m) - x[1] * A(n); m > 1;\n\
+    \           m--)\n        X[l] -= r.x[m] * B(n / m) + x[m] * A(n / m);\n    return\
+    \ *this;\n  }\n  DirichletConvSumTable square() const {\n    const std::size_t\
+    \ K = x.size() - 1, L = X.size() - 1;\n    assert(N <= std::uint64_t(K) * L);\n\
+    \    std::vector<T> c(K + 1, 0), C(L + 1, 0), A_l(K + 1, 0);\n    for (int i =\
+    \ 1; i <= K; i++) A_l[i] = A_l[i - 1] + x[i];\n    auto A = [&](std::uint64_t\
+    \ n) { return n <= K ? A_l[n] : X[N / n]; };\n    std::size_t i, j, l = std::sqrt(K);\n\
+    \    std::uint64_t n;\n    T tmp;\n    for (i = l; i; i--)\n      for (j = K /\
+    \ i; j > i; j--) c[i * j] += x[i] * x[j];\n    for (i = K; i; i--) c[i] += c[i];\n\
+    \    for (i = l; i; i--) c[i * i] += x[i] * x[i];\n    for (l = L; l; C[l] +=\
+    \ C[l], C[l--] -= tmp * tmp)\n      for (tmp = A(i = std::sqrt(n = N / l)); i;\
+    \ i--) C[l] += x[i] * A(n / i);\n    return DirichletConvSumTable<T>(N, c, C);\n\
+    \  }\n  DirichletConvSumTable pow1(std::uint64_t M) const {\n    for (auto ret\
+    \ = get_epsilon(N, x.size() - 1), b = *this;; b = b.square()) {\n      if (M &\
+    \ 1) ret *= b;\n      if (!(M >>= 1)) return ret;\n    }\n  }\n  DirichletConvSumTable\
+    \ pow2(std::uint64_t M) const {\n    const std::size_t K = x.size() - 1, L = X.size()\
+    \ - 1;\n    assert(N <= std::uint64_t(K) * L);\n    if (M == 0) return get_epsilon(N,\
+    \ K);\n    if (M == 1) return *this;\n    std::size_t n = 0, m, i, l, p = 2;\n\
+    \    std::uint64_t e, j;\n    while (n <= M && (1ULL << n) <= N) n++;\n    DirichletConvSumTable\
     \ ret(N, x.size() - 1);\n    T pw[65] = {1}, b = x[1], tmp;\n    for (e = M -\
     \ n + 1;; b *= b)\n      if (e & 1 ? pw[0] *= b : 0; !(e >>= 1)) break;\n    for\
     \ (m = 1; m < n; m++) pw[m] = pw[m - 1] * x[1];\n    std::vector<T> XX(X), z(K\
@@ -213,7 +213,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc116_c.dujiao.test.cpp
   requiredBy: []
-  timestamp: '2022-09-19 02:37:07+09:00'
+  timestamp: '2022-09-21 11:13:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc116_c.dujiao.test.cpp

@@ -204,10 +204,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/Combination.hpp
       title: "\u7D44\u307F\u5408\u308F\u305B"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/DirichletConvSumTable.hpp
       title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
     - icon: ':heavy_check_mark:'
@@ -244,7 +244,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/lagrange_interpolation.hpp
       title: "\u30E9\u30B0\u30E9\u30F3\u30B8\u30E5\u88DC\u9593"
     - icon: ':heavy_check_mark:'
@@ -998,7 +998,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/suffixarray.test.cpp
       title: test/yosupo/suffixarray.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
       title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1010,7 +1010,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.test.cpp
       title: test/yosupo/sum_of_totient_function.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1123,7 +1123,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/880.Beats.test.cpp
       title: test/yukicoder/880.Beats.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/886.numth.test.cpp
       title: test/yukicoder/886.numth.test.cpp
     - icon: ':heavy_check_mark:'
