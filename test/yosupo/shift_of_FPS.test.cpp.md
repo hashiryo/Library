@@ -441,28 +441,28 @@ data:
     \ Poly &r) const { return Poly(*this) += r; }\n  Poly operator-(const Poly &r)\
     \ const { return Poly(*this) -= r; }\n  Poly operator*(const Poly &r) const {\
     \ return convolve<mod_t, _Nm>(*this, r); }\n  Poly operator/(const Poly &r) const\
-    \ {\n    const int m = r.deg(), qsz = deg() - m + 1, ln = bsf(get_len(qsz));\n\
-    \    assert(m >= 0);\n    if (qsz <= 0) return Poly{Z};\n    return m + 3 < A\
-    \ * ln + B || ln <= 64 ? quorem_na(r).first : quo(r);\n  }\n  std::pair<Poly,\
-    \ Poly> quorem(const Poly &r) const {\n    const int n = deg(), m = r.deg(), qsz\
-    \ = n - m + 1, ln = bsf(get_len(qsz));\n    assert(m >= 0);\n    if (qsz <= 0)\
-    \ return {Poly{Z}, Poly(this->begin(), this->begin() + n + 1)};\n    return m\
-    \ < A * ln + B || ln <= 64 ? quorem_na(r) : quorem_ntt(r);\n  }\n  Poly operator%(const\
-    \ Poly &r) const { return quorem(r).second; }\n  Poly &operator+=(const mod_t\
-    \ r) { return *this[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
-    \ *this[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
-    \ &c : *this) c *= r;\n    return shrink();\n  }\n  Poly &operator/=(const mod_t\
-    \ r) {\n    for (mod_t &c : *this) c /= r;\n    return shrink();\n  }\n  Poly\
-    \ operator+(const mod_t r) { return Poly(*this) += r; }\n  Poly operator-(const\
-    \ mod_t r) { return Poly(*this) -= r; }\n  Poly operator*(const mod_t r) { return\
-    \ Poly(*this) *= r; }\n  Poly operator/(const mod_t r) { return Poly(*this) /=\
-    \ r; }\n  friend Poly operator+(const mod_t l, Poly r) { return r += l; }\n  friend\
-    \ Poly operator-(const mod_t l, Poly r) { return -(r -= l); }\n  friend Poly operator*(const\
-    \ mod_t l, Poly r) { return r *= l; }\n  mod_t operator()(mod_t c) const {  //\
-    \ eval f(c)\n    if (c == Z) return (*this)[0];\n    mod_t ret = 0;\n    for (int\
-    \ i = deg() + 1; i--;) ret *= c, ret += (*this)[i];\n    return ret;\n  }\n  Poly\
-    \ operator()(const XP_plus_C &xpc) const {  // f(x^p+c)\n    return taylor_shift(xpc.c).scale(xpc.x.pow());\n\
-    \  }\n  Poly operator()(const Poly &q) const {  // f(g) mod x^n\n    const int\
+    \ {\n    const int m = r.deg(), qsz = deg() - m + 1, ln = get_len(qsz);\n    assert(m\
+    \ >= 0);\n    if (qsz <= 0) return Poly{Z};\n    return m + 3 < A * ln + B ||\
+    \ ln <= 64 ? quorem_na(r).first : quo(r);\n  }\n  std::pair<Poly, Poly> quorem(const\
+    \ Poly &r) const {\n    const int n = deg(), m = r.deg(), qsz = n - m + 1, ln\
+    \ = get_len(qsz);\n    assert(m >= 0);\n    if (qsz <= 0) return {Poly{Z}, Poly(this->begin(),\
+    \ this->begin() + n + 1)};\n    return m < A * ln + B || ln <= 64 ? quorem_na(r)\
+    \ : quorem_ntt(r);\n  }\n  Poly operator%(const Poly &r) const { return quorem(r).second;\
+    \ }\n  Poly &operator+=(const mod_t r) { return *this[0] += r, *this; }\n  Poly\
+    \ &operator-=(const mod_t r) { return *this[0] -= r, *this; }\n  Poly &operator*=(const\
+    \ mod_t r) {\n    for (mod_t &c : *this) c *= r;\n    return shrink();\n  }\n\
+    \  Poly &operator/=(const mod_t r) {\n    for (mod_t &c : *this) c /= r;\n   \
+    \ return shrink();\n  }\n  Poly operator+(const mod_t r) { return Poly(*this)\
+    \ += r; }\n  Poly operator-(const mod_t r) { return Poly(*this) -= r; }\n  Poly\
+    \ operator*(const mod_t r) { return Poly(*this) *= r; }\n  Poly operator/(const\
+    \ mod_t r) { return Poly(*this) /= r; }\n  friend Poly operator+(const mod_t l,\
+    \ Poly r) { return r += l; }\n  friend Poly operator-(const mod_t l, Poly r) {\
+    \ return -(r -= l); }\n  friend Poly operator*(const mod_t l, Poly r) { return\
+    \ r *= l; }\n  mod_t operator()(mod_t c) const {  // eval f(c)\n    if (c == Z)\
+    \ return (*this)[0];\n    mod_t ret = 0;\n    for (int i = deg() + 1; i--;) ret\
+    \ *= c, ret += (*this)[i];\n    return ret;\n  }\n  Poly operator()(const XP_plus_C\
+    \ &xpc) const {  // f(x^p+c)\n    return taylor_shift(xpc.c).scale(xpc.x.pow());\n\
+    \  }\n  Poly operator()(const Poly &q) const {  // f(g) mod x^n\n    const std::size_t\
     \ n = this->deg() + 1, k = std::ceil(std::sqrt(n));\n    std::vector<Poly> pw1(k\
     \ + 1), pw2(k + 1);\n    if (pw1[0] = {1}, pw1[1] = q; q.size() > n) pw1[1].resize(n);\n\
     \    for (int i = 2; i <= k; ++i)\n      if (pw1[i] = pw1[i - 1] * pw1[1]; pw1[i].size()\
@@ -486,24 +486,26 @@ data:
     \ GAq::bf[i] = cpw * GA3::bf[i], cpw *= c;\n    auto ret = Poly(GAp::bf, GAp::bf\
     \ + n + 1) * Poly(GAq::bf, GAq::bf + n + 1);\n    for (ret.resize(n + 1), std::reverse(ret.begin(),\
     \ ret.end()); i--;)\n      ret[i] *= GA3::bf[i];\n    return ret;\n  }\n  friend\
-    \ std::ostream &operator<<(std::ostream &os, const Poly &p) {\n    for (int i\
-    \ = 0, e = p.deg(); i <= e; i++) {\n      if (p[i] == Z) continue;\n      if (i\
-    \ == 0 || p[i] != mod_t(1)) os << p[i];\n      if (i >= 1) os << 'x';\n      if\
-    \ (i > 9)\n        os << \"^(\" << i << ')';\n      else if (i > 1)\n        os\
-    \ << '^' << i;\n      if (i + 1 <= e) os << \" + \";\n    }\n    return os;\n\
-    \  }\n};\n#line 5 \"test/yosupo/shift_of_FPS.test.cpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  using Poly = Polynomial<Mint>;\n  int N, c;\n  cin >> N >> c;\n  Poly a(N);\n\
-    \  for (int i = 0; i < N; i++) cin >> a[i];\n  auto x = Poly::x();\n  auto b =\
-    \ a(x + c);\n  for (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n\
-    \  return 0;\n}\n"
+    \ std::ostream &operator<<(std::ostream &os, const Poly &p) {\n    if (p.deg()\
+    \ == -1) return os << 0;\n    for (int i = 0, e = p.deg(); i <= e; i++) {\n  \
+    \    if (p[i] == Z) continue;\n      if (i == 0 || p[i] != mod_t(1)) os << p[i];\n\
+    \      if (i >= 1) os << 'x';\n      if (i > 9)\n        os << \"^(\" << i <<\
+    \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
+    \ os << \" + \";\n    }\n    return os;\n  }\n};\n#line 5 \"test/yosupo/shift_of_FPS.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = StaticModInt<998244353>;\n  using Poly = Polynomial<Mint>;\n \
+    \ int N, c;\n  cin >> N >> c;\n  Poly a(N);\n  for (int i = 0; i < N; i++) cin\
+    \ >> a[i];\n  auto x = Poly::x();\n  auto b = a(x + c);\n  b.resize(N);\n  for\
+    \ (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  using Poly = Polynomial<Mint>;\n \
     \ int N, c;\n  cin >> N >> c;\n  Poly a(N);\n  for (int i = 0; i < N; i++) cin\
-    \ >> a[i];\n  auto x = Poly::x();\n  auto b = a(x + c);\n  for (int i = 0; i <\
-    \ N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n}"
+    \ >> a[i];\n  auto x = Poly::x();\n  auto b = a(x + c);\n  b.resize(N);\n  for\
+    \ (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n\
+    }"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/FFT/Polynomial.hpp
@@ -515,7 +517,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/shift_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-22 16:41:18+09:00'
+  timestamp: '2022-09-22 18:19:27+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/shift_of_FPS.test.cpp
