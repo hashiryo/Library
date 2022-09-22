@@ -501,41 +501,41 @@ data:
     \ _Nm> a,\n                              Polynomial<mod_t, _Nm> b,\n         \
     \                     Polynomial<mod_t, _Nm> &x,\n                           \
     \   Polynomial<mod_t, _Nm> &y) {\n  using Poly = Polynomial<mod_t, _Nm>;\n  using\
-    \ PMat = std::array<Poly, 4>;\n  assert(a.deg() >= 0), assert(b.deg() >= 0);\n\
-    \  auto isI = [](const PMat &m) {\n    const mod_t ONE(1);\n    return m[1].deg()\
+    \ PolyMat = std::array<Poly, 4>;\n  assert(a.deg() >= 0), assert(b.deg() >= 0);\n\
+    \  auto isI = [](const PolyMat &m) {\n    const mod_t ONE(1);\n    return m[1].deg()\
     \ == -1 && m[2].deg() == -1 && m[0].deg() == 0 &&\n           m[0][0] == ONE &&\
-    \ m[3].deg() == 0 && m[3][0] == ONE;\n  };\n  auto mul = [&](const PMat &l, const\
-    \ PMat &r) -> PMat {\n    if (isI(l)) return r;\n    if (isI(r)) return l;\n \
-    \   return {l[0] * r[0] + l[1] * r[2], l[0] * r[1] + l[1] * r[3],\n          \
-    \  l[2] * r[0] + l[3] * r[2], l[2] * r[1] + l[3] * r[3]};\n  };\n  auto mulQ_l\
-    \ = [&](const Poly &q, const PMat &r) -> PMat {\n    return {r[2], r[3], r[0]\
-    \ - q * r[2], r[1] - q * r[3]};\n  };\n  auto hgcd = [&](auto self, const Poly\
-    \ &p0, const Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    int m\
-    \ = ((p0.deg() - 1) >> 1) + 1, n = p1.deg();\n    if (n < m) return {Poly{1},\
-    \ Poly(), Poly(), Poly{1}};\n    PMat R = self(self, Poly(p0.begin() + m, p0.end()),\n\
-    \                  Poly(p1.begin() + m, p1.end()));\n    Poly b = R[2] * p0 +\
+    \ m[3].deg() == 0 && m[3][0] == ONE;\n  };\n  auto mul = [&](const PolyMat &l,\
+    \ const PolyMat &r) -> PolyMat {\n    if (isI(l)) return r;\n    if (isI(r)) return\
+    \ l;\n    return {l[0] * r[0] + l[1] * r[2], l[0] * r[1] + l[1] * r[3],\n    \
+    \        l[2] * r[0] + l[3] * r[2], l[2] * r[1] + l[3] * r[3]};\n  };\n  auto\
+    \ mulQ_l = [&](const Poly &q, const PolyMat &r) -> PolyMat {\n    return {r[2],\
+    \ r[3], r[0] - q * r[2], r[1] - q * r[3]};\n  };\n#define SUF(f, k) Poly(f.begin()\
+    \ + k, f.end())\n  auto hgcd = [&](auto self, const Poly &p0, const Poly &p1)\
+    \ -> PolyMat {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1)\
+    \ >> 1) + 1, n = p1.deg();\n    if (n < m) return {Poly{1}, Poly(), Poly(), Poly{1}};\n\
+    \    PolyMat R = self(self, SUF(p0, m), SUF(p1, m));\n    Poly b = R[2] * p0 +\
     \ R[3] * p1;\n    if (b.deg() < m) return R;\n    std::pair<Poly, Poly> qr = (R[0]\
-    \ * p0 + R[1] * p1).quorem(b);\n    int k = 2 * m - b.deg();\n    if ((int)qr.second.size()\
-    \ <= k) return mulQ_l(qr.first, R);\n    return mul(self(self, Poly(b.begin()\
-    \ + k, b.end()),\n                    Poly(qr.second.begin() + k, qr.second.end())),\n\
-    \               mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto self, const\
-    \ Poly &p0, const Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat\
-    \ M = hgcd(hgcd, p0, p1);\n    Poly p3 = M[2] * p0 + M[3] * p1;\n    if (p3.deg()\
-    \ == -1) return M;\n    std::pair<Poly, Poly> qr = (M[0] * p0 + M[1] * p1).quorem(p3);\n\
-    \    if (qr.second.deg() == -1) return mulQ_l(qr.first, M);\n    return mul(self(self,\
-    \ p3, qr.second), mulQ_l(qr.first, M));\n  };\n  if (a.shrink().size() <= b.shrink().size())\
-    \ {\n    std::pair<Poly, Poly> qr = a.quorem(b);\n    PMat c = cogcd(cogcd, b,\
-    \ qr.second);\n    return a * (x = c[1]) + b * (y = c[0] - c[1] * qr.first);\n\
-    \  } else {\n    PMat c = cogcd(cogcd, a, b);\n    return a * (x = c[0]) + b *\
-    \ (y = c[1]);\n  }\n}\n#line 6 \"test/yosupo/inv_of_Poly.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using\
-    \ Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint>\
-    \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
-    \ = 0; i < M; i++) cin >> g[i];\n  auto d = extgcd(f, g, x, y);\n  if (d.deg()\
-    \ != 0) {\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout <<\
-    \ 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n  \
-    \  for (int i = 0, ed = x.size(); i < ed; i++)\n      cout << x[i] << \" \\n\"\
-    [i == ed - 1];\n  }\n  return 0;\n}\n"
+    \ * p0 + R[1] * p1).quorem(b);\n    if (int k = 2 * m - b.deg(); (int)qr.second.size()\
+    \ > k)\n      return mul(self(self, SUF(b, k), SUF(qr.second, k)), mulQ_l(qr.first,\
+    \ R));\n    return mulQ_l(qr.first, R);\n  };\n  auto cogcd = [&](auto self, const\
+    \ Poly &p0, const Poly &p1) -> PolyMat {\n    assert(p0.deg() > p1.deg());\n \
+    \   PolyMat M = hgcd(hgcd, p0, p1);\n    Poly p3 = M[2] * p0 + M[3] * p1;\n  \
+    \  if (p3.deg() == -1) return M;\n    std::pair<Poly, Poly> qr = (M[0] * p0 +\
+    \ M[1] * p1).quorem(p3);\n    if (qr.second.deg() == -1) return mulQ_l(qr.first,\
+    \ M);\n    return mul(self(self, p3, qr.second), mulQ_l(qr.first, M));\n  };\n\
+    #undef SUF\n  if (a.shrink().size() <= b.shrink().size()) {\n    std::pair<Poly,\
+    \ Poly> qr = a.quorem(b);\n    PolyMat c = cogcd(cogcd, b, qr.second);\n    return\
+    \ a * (x = c[1]) + b * (y = c[0] - c[1] * qr.first);\n  } else {\n    PolyMat\
+    \ c = cogcd(cogcd, a, b);\n    return a * (x = c[0]) + b * (y = c[1]);\n  }\n\
+    }\n#line 6 \"test/yosupo/inv_of_Poly.test.cpp\"\nusing namespace std;\n\nsigned\
+    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
+    \  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint> f(N), g(M), x, y;\n  for (int\
+    \ i = 0; i < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n\
+    \  auto d = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cout << -1 << '\\\
+    n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout\
+    \ << x.size() << '\\n';\n    x /= d[0];\n    for (int i = 0, ed = x.size(); i\
+    \ < ed; i++)\n      cout << x[i] << \" \\n\"[i == ed - 1];\n  }\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
     \n#include \"src/FFT/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n \
@@ -559,7 +559,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-09-22 23:17:11+09:00'
+  timestamp: '2022-09-22 23:32:40+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
