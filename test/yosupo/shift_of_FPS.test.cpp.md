@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -424,14 +424,15 @@ data:
     \    GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0, len);\n    GNA1::bf.get(GAq::bf,\
     \ 0, m);\n    for (int i = m; i--;) GAp::bf[i] -= GAq::bf[i];\n    Poly rem(GAp::bf,\
     \ GAp::bf + m);\n    return std::make_pair(qu, rem.shrink());\n  }\n\n public:\n\
-    \  using std::vector<mod_t>::vector;\n  Polynomial(const std::vector<mod_t> &p)\
-    \ : Polynomial(p.begin(), p.end()) {}\n  Polynomial(const XP_plus_C &xpc) : Polynomial(xpc.x.pow()\
-    \ + 1) {\n    (*this)[xpc.x.pow()] = 1, (*this)[0] = xpc.c;\n  }\n  static Inde\
-    \ x() { return Inde(); }\n  inline int deg() const {\n    for (int n = this->size()\
-    \ - 1;; n--)\n      if (n < 0 || (*this)[n] != Z) return n;\n  }\n  inline Poly\
-    \ &shrink() { return this->resize(std::max(deg() + 1, 1)), *this; }\n#define ASSIGN(op)\
-    \                                \\\n  Poly &operator op##=(const Poly &r) { \
-    \          \\\n    const std::size_t n = r.deg() + 1;            \\\n    if (this->size()\
+    \  using std::vector<mod_t>::vector;\n  Polynomial(mod_t a) : Polynomial(1, a)\
+    \ {}\n  Polynomial(const std::vector<mod_t> &p) : Polynomial(p.begin(), p.end())\
+    \ {}\n  Polynomial(const XP_plus_C &xpc) : Polynomial(xpc.x.pow() + 1) {\n   \
+    \ (*this)[xpc.x.pow()] = 1, (*this)[0] = xpc.c;\n  }\n  static Inde x() { return\
+    \ Inde(); }\n  inline int deg() const {\n    for (int n = this->size() - 1;; n--)\n\
+    \      if (n < 0 || (*this)[n] != Z) return n;\n  }\n  inline Poly &shrink() {\
+    \ return this->resize(std::max(deg() + 1, 1)), *this; }\n#define ASSIGN(op)  \
+    \                              \\\n  Poly &operator op##=(const Poly &r) {   \
+    \        \\\n    const std::size_t n = r.deg() + 1;            \\\n    if (this->size()\
     \ < n) this->resize(n);        \\\n    for (int i = n; i--;) (*this)[i] op## =\
     \ r[i]; \\\n    return shrink();                              \\\n  }\n  ASSIGN(+)\n\
     \  ASSIGN(-)\n#undef ASSIGN\n  Poly &operator*=(const Poly &r) { return *this\
@@ -517,7 +518,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/shift_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-22 22:33:11+09:00'
+  timestamp: '2022-09-23 01:37:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/shift_of_FPS.test.cpp
