@@ -366,21 +366,21 @@ data:
     \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 0>;\n  using GAp = GlobalArray<mod_t,\
     \ _Nm, 1>;\n  using GAq = GlobalArray<mod_t, _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t,\
     \ _Nm, 2>;\n  static constexpr int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n\
-    \  const int n = p.size(), m = q.size(), r_len = n + m - 1;\n  if (std::min(n,\
-    \ m) < TH) {\n    std::fill_n(GAr::bf, r_len, mod_t(0));\n    std::copy(p.begin(),\
-    \ p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(), GAq::bf);\n    for (int\
-    \ i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i + j] += GAp::bf[i] * GAq::bf[j];\n\
-    \  } else {\n    const int l = get_len(std::max(n, m)),\n              bl = bsf(l)\
-    \ + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const int len = r_len - l < bl * bl\
-    \ * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
-    \ len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf,\
-    \ 0, len);\n    else\n      GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len),\n\
-    \          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n    GNA1::bf.idft(0,\
-    \ len), GNA1::bf.get(GAr::bf, 0, std::min(r_len, len));\n    if (len < r_len)\
-    \ {\n      std::copy(p.begin() + len - m + 1, p.end(), GAp::bf + len - m + 1);\n\
-    \      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf + len - n + 1);\n \
-    \     for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i], i++)\n \
-    \       for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
+    \  const int n = p.size(), m = q.size(), r_len = n + m - 1;\n  if (!n || !m) return\
+    \ std::vector<mod_t>();\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf,\
+    \ r_len, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
+    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
+    \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
+    \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
+    \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
+    \ 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n  \
+    \    GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(), 0,\
+    \ m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
+    \ 0, len);\n    GNA1::bf.idft(0, len), GNA1::bf.get(GAr::bf, 0, std::min(r_len,\
+    \ len));\n    if (len < r_len) {\n      std::copy(p.begin() + len - m + 1, p.end(),\
+    \ GAp::bf + len - m + 1);\n      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf\
+    \ + len - n + 1);\n      for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i],\
+    \ i++)\n        for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
     \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
     \ GAr::bf + r_len);\n}\n#line 5 \"src/FFT/Polynomial.hpp\"\n\n/**\n * @title \u591A\
     \u9805\u5F0F\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
@@ -431,7 +431,7 @@ data:
     \ - 1;; n--)\n      if (n < 0 || (*this)[n] != Z) return n;\n  }\n  inline Poly\
     \ &shrink() { return this->resize(std::max(deg() + 1, 1)), *this; }\n#define ASSIGN(op)\
     \                                \\\n  Poly &operator op##=(const Poly &r) { \
-    \          \\\n    const int n = r.deg() + 1;                    \\\n    if (this->size()\
+    \          \\\n    const std::size_t n = r.deg() + 1;            \\\n    if (this->size()\
     \ < n) this->resize(n);        \\\n    for (int i = n; i--;) (*this)[i] op## =\
     \ r[i]; \\\n    return shrink();                              \\\n  }\n  ASSIGN(+)\n\
     \  ASSIGN(-)\n#undef ASSIGN\n  Poly &operator*=(const Poly &r) { return *this\
@@ -582,7 +582,7 @@ data:
   isVerificationFile: false
   path: src/FFT/extgcd.hpp
   requiredBy: []
-  timestamp: '2022-09-22 21:30:25+09:00'
+  timestamp: '2022-09-22 22:33:11+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp

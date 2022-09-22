@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
   - icon: ':question:'
@@ -323,20 +323,21 @@ data:
     \  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t, _Nm,\
     \ 2>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr int TH\
     \ = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n  const int n = p.size(), m = q.size(),\
-    \ r_len = n + m - 1;\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf, r_len,\
-    \ mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
-    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
-    \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
-    \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
-    \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
-    \ 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n  \
-    \    GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(), 0,\
-    \ m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
-    \ 0, len);\n    GNA1::bf.idft(0, len), GNA1::bf.get(GAr::bf, 0, std::min(r_len,\
-    \ len));\n    if (len < r_len) {\n      std::copy(p.begin() + len - m + 1, p.end(),\
-    \ GAp::bf + len - m + 1);\n      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf\
-    \ + len - n + 1);\n      for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i],\
-    \ i++)\n        for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
+    \ r_len = n + m - 1;\n  if (!n || !m) return std::vector<mod_t>();\n  if (std::min(n,\
+    \ m) < TH) {\n    std::fill_n(GAr::bf, r_len, mod_t(0));\n    std::copy(p.begin(),\
+    \ p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(), GAq::bf);\n    for (int\
+    \ i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i + j] += GAp::bf[i] * GAq::bf[j];\n\
+    \  } else {\n    const int l = get_len(std::max(n, m)),\n              bl = bsf(l)\
+    \ + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const int len = r_len - l < bl * bl\
+    \ * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
+    \ len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf,\
+    \ 0, len);\n    else\n      GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len),\n\
+    \          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n    GNA1::bf.idft(0,\
+    \ len), GNA1::bf.get(GAr::bf, 0, std::min(r_len, len));\n    if (len < r_len)\
+    \ {\n      std::copy(p.begin() + len - m + 1, p.end(), GAp::bf + len - m + 1);\n\
+    \      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf + len - n + 1);\n \
+    \     for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i], i++)\n \
+    \       for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
     \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
     \ GAr::bf + r_len);\n}\n#line 5 \"src/FFT/bostan_mori.hpp\"\n\n/**\n * @title\
     \ \u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805\n * @category\
@@ -419,7 +420,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 22:02:14+09:00'
+  timestamp: '2022-09-22 22:33:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp

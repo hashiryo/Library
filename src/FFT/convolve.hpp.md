@@ -14,7 +14,7 @@ data:
   - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
   - icon: ':x:'
@@ -48,10 +48,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
@@ -301,9 +301,10 @@ data:
     \ _Nm, 0>;\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t,\
     \ _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr\
     \ int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n  const int n = p.size(),\
-    \ m = q.size(), r_len = n + m - 1;\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf,\
-    \ r_len, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
-    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
+    \ m = q.size(), r_len = n + m - 1;\n  if (!n || !m) return std::vector<mod_t>();\n\
+    \  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf, r_len, mod_t(0));\n  \
+    \  std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(),\
+    \ GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
     \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
     \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
     \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
@@ -325,9 +326,10 @@ data:
     \ _Nm, 0>;\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t,\
     \ _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr\
     \ int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n  const int n = p.size(),\
-    \ m = q.size(), r_len = n + m - 1;\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf,\
-    \ r_len, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
-    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
+    \ m = q.size(), r_len = n + m - 1;\n  if (!n || !m) return std::vector<mod_t>();\n\
+    \  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf, r_len, mod_t(0));\n  \
+    \  std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(),\
+    \ GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
     \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
     \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
     \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
@@ -351,7 +353,7 @@ data:
   - src/FFT/extgcd.hpp
   - src/FFT/bostan_mori.hpp
   - src/FFT/Polynomial.hpp
-  timestamp: '2022-09-21 15:34:42+09:00'
+  timestamp: '2022-09-22 22:33:11+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
