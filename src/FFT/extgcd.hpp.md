@@ -493,84 +493,84 @@ data:
     \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
     \ os << \" + \";\n    }\n    return os;\n  }\n};\n#line 4 \"src/FFT/extgcd.hpp\"\
     \n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
-    \ FFT\n *  O(Nlog^2N)\n */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate\
-    \ <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t,\
+    \ FFT\n *  O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\n\
+    template <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t,\
     \ _Nm> a,\n                              Polynomial<mod_t, _Nm> b,\n         \
     \                     Polynomial<mod_t, _Nm> &x,\n                           \
     \   Polynomial<mod_t, _Nm> &y) {\n  using Poly = Polynomial<mod_t, _Nm>;\n  using\
     \ PVec = std::array<Poly, 2>;\n  using PMat = std::array<PVec, 2>;\n  assert(a.deg()\
-    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const PMat &m) {\n    static\
-    \ constexpr mod_t ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() ==\
-    \ -1 && m[0][0].deg() == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() ==\
-    \ 0 && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const PMat &lhs, const PVec\
-    \ &rhs) {\n    if (isI(lhs)) return rhs;\n    return PVec{lhs[0][0] * rhs[0] +\
-    \ lhs[0][1] * rhs[1],\n                lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n\
-    \  };\n  auto mul = [&](const PMat &lhs, const PMat &rhs) {\n    if (isI(lhs))\
-    \ return rhs;\n    if (isI(rhs)) return lhs;\n    return PMat{PVec{lhs[0][0] *\
-    \ rhs[0][0] + lhs[0][1] * rhs[1][0],\n                     lhs[0][0] * rhs[0][1]\
-    \ + lhs[0][1] * rhs[1][1]},\n                PVec{lhs[1][0] * rhs[0][0] + lhs[1][1]\
-    \ * rhs[1][0],\n                     lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n\
-    \  };\n  auto mulQ_l = [&](const Poly &q, const PMat &rhs) {\n    return PMat{PVec{rhs[1][0],\
-    \ rhs[1][1]},\n                PVec{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q *\
-    \ rhs[1][1]}};\n  };\n  auto hgcd = [&](auto self, const Poly &p0, const Poly\
-    \ &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1)\
-    \ >> 1) + 1, n = p1.deg();\n    if (n < m) return PMat{PVec{Poly(1, 1), Poly()},\
-    \ PVec{Poly(), Poly(1, 1)}};\n    PMat R(self(self, Poly(p0.begin() + m, p0.end()),\n\
-    \                Poly(p1.begin() + m, p1.end())));\n    PVec ab(mulv(R, PVec{p0,\
-    \ p1}));\n    if (ab[1].deg() < m) return R;\n    std::pair<Poly, Poly> qr(ab[0].quorem(ab[1]));\n\
-    \    int k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return\
-    \ mulQ_l(qr.first, R);\n    return mul(self(self, Poly(ab[1].begin() + k, ab[1].end()),\n\
-    \                    Poly(qr.second.begin() + k, qr.second.end())),\n        \
-    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](const Poly &p0, const\
-    \ Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat M(hgcd(hgcd,\
+    \ >= 0), assert(b.deg() >= 0);\n  auto isI = [](const PMat &m) {\n    const mod_t\
+    \ ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1 && m[0][0].deg()\
+    \ == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() == 0 && m[1][1][0] ==\
+    \ ONE;\n  };\n  auto mulv = [&](const PMat &lhs, const PVec &rhs) {\n    if (isI(lhs))\
+    \ return rhs;\n    return PVec{lhs[0][0] * rhs[0] + lhs[0][1] * rhs[1],\n    \
+    \            lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n  auto mul = [&](const\
+    \ PMat &lhs, const PMat &rhs) {\n    if (isI(lhs)) return rhs;\n    if (isI(rhs))\
+    \ return lhs;\n    return PMat{PVec{lhs[0][0] * rhs[0][0] + lhs[0][1] * rhs[1][0],\n\
+    \                     lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n      \
+    \          PVec{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n             \
+    \        lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l\
+    \ = [&](const Poly &q, const PMat &rhs) {\n    return PMat{PVec{rhs[1][0], rhs[1][1]},\n\
+    \                PVec{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n\
+    \  };\n  auto hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PMat {\n\
+    \    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) + 1, n =\
+    \ p1.deg();\n    if (n < m) return PMat{PVec{Poly{1}, Poly()}, PVec{Poly(), Poly{1}}};\n\
+    \    PMat R(self(self, Poly(p0.begin() + m, p0.end()),\n                Poly(p1.begin()\
+    \ + m, p1.end())));\n    PVec ab(mulv(R, PVec{p0, p1}));\n    if (ab[1].deg()\
+    \ < m) return R;\n    std::pair<Poly, Poly> qr(ab[0].quorem(ab[1]));\n    int\
+    \ k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first,\
+    \ R);\n    return mul(self(self, Poly(ab[1].begin() + k, ab[1].end()),\n     \
+    \               Poly(qr.second.begin() + k, qr.second.end())),\n             \
+    \  mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto self, const Poly &p0,\
+    \ const Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat M(hgcd(hgcd,\
     \ p0, p1));\n    PVec p2p3(mulv(M, PVec{p0, p1}));\n    if (p2p3[1].deg() == -1)\
     \ return M;\n    std::pair<Poly, Poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
     \ == -1) return mulQ_l(qr.first, M);\n    return mul(self(self, p2p3[1], qr.second),\
-    \ mulQ_l(qr.first, M));\n  };\n  if (a.shrink().deg() <= b.shrink().deg()) {\n\
-    \    std::pair<Poly, Poly> qr(a.quorem(b));\n    PMat c(cogcd(b, qr.second));\n\
+    \ mulQ_l(qr.first, M));\n  };\n  if (a.shrink().size() <= b.shrink().size()) {\n\
+    \    std::pair<Poly, Poly> qr(a.quorem(b));\n    PMat c(cogcd(cogcd, b, qr.second));\n\
     \    return a * (x = c[0][1]) + b * (y = c[0][0] - c[0][1] * qr.first);\n  } else\
-    \ {\n    PMat c(cogcd(a, b));\n    return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
-    \  }\n}\n"
+    \ {\n    PMat c(cogcd(cogcd, a, b));\n    return a * (x = c[0][0]) + b * (y =\
+    \ c[0][1]);\n  }\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/Polynomial.hpp\"\
     \n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
-    \ FFT\n *  O(Nlog^2N)\n */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate\
-    \ <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t,\
+    \ FFT\n *  O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\n\
+    template <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t,\
     \ _Nm> a,\n                              Polynomial<mod_t, _Nm> b,\n         \
     \                     Polynomial<mod_t, _Nm> &x,\n                           \
     \   Polynomial<mod_t, _Nm> &y) {\n  using Poly = Polynomial<mod_t, _Nm>;\n  using\
     \ PVec = std::array<Poly, 2>;\n  using PMat = std::array<PVec, 2>;\n  assert(a.deg()\
-    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const PMat &m) {\n    static\
-    \ constexpr mod_t ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() ==\
-    \ -1 && m[0][0].deg() == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() ==\
-    \ 0 && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const PMat &lhs, const PVec\
-    \ &rhs) {\n    if (isI(lhs)) return rhs;\n    return PVec{lhs[0][0] * rhs[0] +\
-    \ lhs[0][1] * rhs[1],\n                lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n\
-    \  };\n  auto mul = [&](const PMat &lhs, const PMat &rhs) {\n    if (isI(lhs))\
-    \ return rhs;\n    if (isI(rhs)) return lhs;\n    return PMat{PVec{lhs[0][0] *\
-    \ rhs[0][0] + lhs[0][1] * rhs[1][0],\n                     lhs[0][0] * rhs[0][1]\
-    \ + lhs[0][1] * rhs[1][1]},\n                PVec{lhs[1][0] * rhs[0][0] + lhs[1][1]\
-    \ * rhs[1][0],\n                     lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n\
-    \  };\n  auto mulQ_l = [&](const Poly &q, const PMat &rhs) {\n    return PMat{PVec{rhs[1][0],\
-    \ rhs[1][1]},\n                PVec{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q *\
-    \ rhs[1][1]}};\n  };\n  auto hgcd = [&](auto self, const Poly &p0, const Poly\
-    \ &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1)\
-    \ >> 1) + 1, n = p1.deg();\n    if (n < m) return PMat{PVec{Poly(1, 1), Poly()},\
-    \ PVec{Poly(), Poly(1, 1)}};\n    PMat R(self(self, Poly(p0.begin() + m, p0.end()),\n\
-    \                Poly(p1.begin() + m, p1.end())));\n    PVec ab(mulv(R, PVec{p0,\
-    \ p1}));\n    if (ab[1].deg() < m) return R;\n    std::pair<Poly, Poly> qr(ab[0].quorem(ab[1]));\n\
-    \    int k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return\
-    \ mulQ_l(qr.first, R);\n    return mul(self(self, Poly(ab[1].begin() + k, ab[1].end()),\n\
-    \                    Poly(qr.second.begin() + k, qr.second.end())),\n        \
-    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](const Poly &p0, const\
-    \ Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat M(hgcd(hgcd,\
+    \ >= 0), assert(b.deg() >= 0);\n  auto isI = [](const PMat &m) {\n    const mod_t\
+    \ ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1 && m[0][0].deg()\
+    \ == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() == 0 && m[1][1][0] ==\
+    \ ONE;\n  };\n  auto mulv = [&](const PMat &lhs, const PVec &rhs) {\n    if (isI(lhs))\
+    \ return rhs;\n    return PVec{lhs[0][0] * rhs[0] + lhs[0][1] * rhs[1],\n    \
+    \            lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n  auto mul = [&](const\
+    \ PMat &lhs, const PMat &rhs) {\n    if (isI(lhs)) return rhs;\n    if (isI(rhs))\
+    \ return lhs;\n    return PMat{PVec{lhs[0][0] * rhs[0][0] + lhs[0][1] * rhs[1][0],\n\
+    \                     lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n      \
+    \          PVec{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n             \
+    \        lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l\
+    \ = [&](const Poly &q, const PMat &rhs) {\n    return PMat{PVec{rhs[1][0], rhs[1][1]},\n\
+    \                PVec{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n\
+    \  };\n  auto hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PMat {\n\
+    \    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) + 1, n =\
+    \ p1.deg();\n    if (n < m) return PMat{PVec{Poly{1}, Poly()}, PVec{Poly(), Poly{1}}};\n\
+    \    PMat R(self(self, Poly(p0.begin() + m, p0.end()),\n                Poly(p1.begin()\
+    \ + m, p1.end())));\n    PVec ab(mulv(R, PVec{p0, p1}));\n    if (ab[1].deg()\
+    \ < m) return R;\n    std::pair<Poly, Poly> qr(ab[0].quorem(ab[1]));\n    int\
+    \ k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return mulQ_l(qr.first,\
+    \ R);\n    return mul(self(self, Poly(ab[1].begin() + k, ab[1].end()),\n     \
+    \               Poly(qr.second.begin() + k, qr.second.end())),\n             \
+    \  mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto self, const Poly &p0,\
+    \ const Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat M(hgcd(hgcd,\
     \ p0, p1));\n    PVec p2p3(mulv(M, PVec{p0, p1}));\n    if (p2p3[1].deg() == -1)\
     \ return M;\n    std::pair<Poly, Poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
     \ == -1) return mulQ_l(qr.first, M);\n    return mul(self(self, p2p3[1], qr.second),\
-    \ mulQ_l(qr.first, M));\n  };\n  if (a.shrink().deg() <= b.shrink().deg()) {\n\
-    \    std::pair<Poly, Poly> qr(a.quorem(b));\n    PMat c(cogcd(b, qr.second));\n\
+    \ mulQ_l(qr.first, M));\n  };\n  if (a.shrink().size() <= b.shrink().size()) {\n\
+    \    std::pair<Poly, Poly> qr(a.quorem(b));\n    PMat c(cogcd(cogcd, b, qr.second));\n\
     \    return a * (x = c[0][1]) + b * (y = c[0][0] - c[0][1] * qr.first);\n  } else\
-    \ {\n    PMat c(cogcd(a, b));\n    return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
-    \  }\n}\n"
+    \ {\n    PMat c(cogcd(cogcd, a, b));\n    return a * (x = c[0][0]) + b * (y =\
+    \ c[0][1]);\n  }\n}\n"
   dependsOn:
   - src/FFT/Polynomial.hpp
   - src/FFT/fps_div.hpp
@@ -582,7 +582,7 @@ data:
   isVerificationFile: false
   path: src/FFT/extgcd.hpp
   requiredBy: []
-  timestamp: '2022-09-22 20:08:05+09:00'
+  timestamp: '2022-09-22 21:30:25+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp
