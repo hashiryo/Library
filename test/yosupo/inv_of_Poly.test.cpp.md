@@ -532,10 +532,11 @@ data:
     \  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint> f(N), g(M), x, y;\n  for (int\
     \ i = 0; i < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n\
     \  auto d = extgcd(f, g, x, y);\n  cerr << \"d.deg() = \" << d.deg() << '\\n';\n\
-    \  if (d.deg() != 0) {\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1)\
-    \ {\n    cout << 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n   \
-    \ x /= d[0];\n    for (int i = 0, ed = x.size(); i < ed; i++)\n      cout << x[i]\
-    \ << \" \\n\"[i == ed - 1];\n  }\n  return 0;\n}\n"
+    \  cerr << \"x.deg() = \" << x.deg() << '\\n';\n  if (d.deg() != 0) {\n    cout\
+    \ << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  }\
+    \ else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n    for (int i = 0,\
+    \ ed = x.size(); i < ed; i++)\n      cout << x[i] << \" \\n\"[i == ed - 1];\n\
+    \  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
     \n#include \"src/FFT/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n \
@@ -543,10 +544,11 @@ data:
     \  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint> f(N), g(M), x, y;\n  for (int\
     \ i = 0; i < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n\
     \  auto d = extgcd(f, g, x, y);\n  cerr << \"d.deg() = \" << d.deg() << '\\n';\n\
-    \  if (d.deg() != 0) {\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1)\
-    \ {\n    cout << 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n   \
-    \ x /= d[0];\n    for (int i = 0, ed = x.size(); i < ed; i++)\n      cout << x[i]\
-    \ << \" \\n\"[i == ed - 1];\n  }\n  return 0;\n}"
+    \  cerr << \"x.deg() = \" << x.deg() << '\\n';\n  if (d.deg() != 0) {\n    cout\
+    \ << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  }\
+    \ else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n    for (int i = 0,\
+    \ ed = x.size(); i < ed; i++)\n      cout << x[i] << \" \\n\"[i == ed - 1];\n\
+    \  }\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/FFT/Polynomial.hpp
@@ -559,7 +561,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-09-23 00:53:48+09:00'
+  timestamp: '2022-09-23 01:05:27+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
