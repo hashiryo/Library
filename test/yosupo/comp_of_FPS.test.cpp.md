@@ -470,7 +470,7 @@ data:
     \ > n) pw1[i].resize(n);\n    pw2[0] = {1}, pw2[1] = pw1[k];\n    for (int i =\
     \ 2; i <= k; ++i)\n      if (pw2[i] = pw2[i - 1] * pw2[1]; pw2[i].size() > n)\
     \ pw2[i].resize(n);\n    Poly ret(n, Z), f;\n    for (int i = 0, j; i <= k; ++i)\
-    \ {\n      for (f.assign(n, Z), j = std::min(k, std::max(0, n - k * i)); j--;)\
+    \ {\n      for (f.assign(n, Z), j = std::min(k, std::max(0u, n - k * i)); j--;)\
     \ {\n        mod_t coef = (*this)[k * i + j];\n        for (int d = pw1[j].size();\
     \ d--;) f[d] += pw1[j][d] * coef;\n      }\n      for (f *= pw2[i], j = std::min(n,\
     \ f.size()); j--;) ret[j] += f[j];\n    }\n    return ret;\n  }\n  Poly &operator*=(const\
@@ -516,7 +516,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/comp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-22 18:22:47+09:00'
+  timestamp: '2022-09-22 19:57:29+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/comp_of_FPS.test.cpp
