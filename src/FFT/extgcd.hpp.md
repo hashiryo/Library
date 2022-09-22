@@ -4,6 +4,9 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
+  - icon: ':x:'
+    path: src/FFT/Polynomial.hpp
+    title: "\u591A\u9805\u5F0F"
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
@@ -19,31 +22,20 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: src/FFT/extgcd.hpp
-    title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/yosupo/comp_of_FPS.test.cpp
-    title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/division_of_Poly.test.cpp
-    title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/shift_of_FPS.test.cpp
-    title: test/yosupo/shift_of_FPS.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    document_title: "\u591A\u9805\u5F0F"
-    links: []
-  bundledCode: "#line 2 \"src/FFT/Polynomial.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
+    document_title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
+    links:
+    - https://loj.ac/article/2773
+  bundledCode: "#line 2 \"src/FFT/extgcd.hpp\"\n#include <bits/stdc++.h>\n#line 3\
+    \ \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
     \ \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n//\
     \ BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
     \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
@@ -500,119 +492,90 @@ data:
     \    if (p[i] == Z) continue;\n      if (i == 0 || p[i] != mod_t(1)) os << p[i];\n\
     \      if (i >= 1) os << 'x';\n      if (i > 9)\n        os << \"^(\" << i <<\
     \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
-    \ os << \" + \";\n    }\n    return os;\n  }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_div.hpp\"\n\
-    #include \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u591A\u9805\u5F0F\n * @category\
-    \ FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 <<\
-    \ 22>\nclass Polynomial : public std::vector<mod_t> {\n  using Poly = Polynomial;\n\
-    \  struct Inde;\n  struct XP_plus_C {  // x^p+c\n    Inde x;\n    mod_t c;\n \
-    \   XP_plus_C(const Inde &x_) : x(x_), c(Z) {}\n    XP_plus_C(int p_, mod_t c_)\
-    \ : x(p_), c(c_) {}\n  };\n  struct Inde {  // indeterminate\n    int p_;\n  \
-    \  Inde(int p) : p_(p) {}\n    Inde() : Inde(1) {}\n    Inde operator^(int p)\
-    \ const { return Inde(p_ * p); }\n    Inde operator*(const Inde &rhs) const {\
-    \ return Inde(p_ + rhs.p_); }\n    int pow() const { return p_; }\n    XP_plus_C\
-    \ operator+(mod_t c) { return XP_plus_C(p_, c); }\n    XP_plus_C operator-(mod_t\
-    \ c) { return XP_plus_C(p_, -c); }\n  };\n  using GNA1 = GlobalNTTArray<mod_t,\
-    \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
-    \ _Nm, 0>;\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t,\
-    \ _Nm, 2>;\n  using GA3 = GlobalArray<mod_t, _Nm, 3>;\n  static inline const mod_t\
-    \ Z = 0;\n  static constexpr int A = is_nttfriend<mod_t, _Nm>()      ? 8\n   \
-    \                        : is_nttarraydouble<mod_t, _Nm> ? 17\n              \
-    \                                             : 20;\n  static constexpr int B\
-    \ = is_nttfriend<mod_t, _Nm>()      ? 42\n                           : is_nttarraydouble<mod_t,\
-    \ _Nm> ? 110\n                                                           : 138;\n\
-    \  std::pair<Poly, Poly> quorem_na(const Poly &q) const {\n    int n = deg(),\
-    \ m = q.deg(), qsz = n - m + 1, i = qsz, j;\n    std::copy_n(this->begin(), n\
-    \ + 1, GAp::bf);\n    std::copy_n(q.begin(), m + 1, GAq::bf);\n    for (mod_t\
-    \ *bf = GAp::bf + n - m, iv = mod_t(1) / GAq::bf[m]; i--; bf--)\n      for (GA::bf[i]\
-    \ = bf[j = m] * iv; j--;) bf[j] -= GAq::bf[j] * GA::bf[i];\n    Poly rem(GAp::bf,\
-    \ GAp::bf + m);\n    return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n  }\n\
-    \  Poly quo(const Poly &q) const {\n    const int n = deg() + 1, m = q.deg() +\
-    \ 1, qsz = n - m + 1,\n              nb = this->size() - n, mb = q.size() - m;\n\
-    \    auto ret = div<mod_t, _Nm>(\n        Poly(this->rbegin() + nb, this->rbegin()\
-    \ + nb + qsz),\n        Poly(q.rbegin() + mb, q.rbegin() + mb + std::min(qsz,\
-    \ m)));\n    return std::reverse(ret.begin(), ret.end()), ret;\n  }\n  std::pair<Poly,\
-    \ Poly> quorem_ntt(const Poly &q) const {\n    const int n = deg(), m = q.deg(),\
-    \ qsz = n - m + 1;\n    auto qu = quo(q);\n    std::copy(qu.begin(), qu.end(),\
-    \ GA::bf);\n    std::copy_n(this->begin(), n + 1, GAp::bf);\n    std::copy_n(q.begin(),\
-    \ m + 1, GAq::bf);\n    const int len = get_len(m), mask = len - 1;\n    if (len\
-    \ > qsz) std::fill_n(GA::bf + qsz, len - qsz, Z);\n    if (len > m + 1) std::fill_n(GAq::bf\
-    \ + m + 1, len - m - 1, Z);\n    for (int i = qsz; i-- > len;) GA::bf[i & mask]\
-    \ += GA::bf[i];\n    for (int i = n; i >= len; i--) GAp::bf[i & mask] += GAp::bf[i];\n\
-    \    if (GNA1::bf.set(GA::bf, 0, len); m == len) GAq::bf[0] += GAq::bf[m];\n \
-    \   GNA2::bf.set(GAq::bf, 0, len), GNA1::bf.dft(0, len), GNA2::bf.dft(0, len);\n\
-    \    GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0, len);\n    GNA1::bf.get(GAq::bf,\
-    \ 0, m);\n    for (int i = m; i--;) GAp::bf[i] -= GAq::bf[i];\n    Poly rem(GAp::bf,\
-    \ GAp::bf + m);\n    return std::make_pair(qu, rem.shrink());\n  }\n\n public:\n\
-    \  using std::vector<mod_t>::vector;\n  Polynomial(const std::vector<mod_t> &p)\
-    \ : Polynomial(p.begin(), p.end()) {}\n  Polynomial(const XP_plus_C &xpc) : Polynomial(xpc.x.pow()\
-    \ + 1) {\n    (*this)[xpc.x.pow()] = 1, (*this)[0] = xpc.c;\n  }\n  static Inde\
-    \ x() { return Inde(); }\n  inline int deg() const {\n    for (int n = this->size()\
-    \ - 1;; n--)\n      if (n < 0 || (*this)[n] != Z) return n;\n  }\n  inline Poly\
-    \ &shrink() { return this->resize(std::max(deg() + 1, 1)), *this; }\n#define ASSIGN(op)\
-    \                                \\\n  Poly &operator op##=(const Poly &r) { \
-    \          \\\n    const int n = r.deg() + 1;                    \\\n    if (this->size()\
-    \ < n) this->resize(n);        \\\n    for (int i = n; i--;) (*this)[i] op## =\
-    \ r[i]; \\\n    return shrink();                              \\\n  }\n  ASSIGN(+)\n\
-    \  ASSIGN(-)\n#undef ASSIGN\n  Poly &operator*=(const Poly &r) { return *this\
-    \ = *this * r, *this; }\n  Poly &operator/=(const Poly &r) { return *this = *this\
-    \ / r, *this; }\n  Poly &operator%=(const Poly &r) { return *this = *this % r,\
-    \ *this; }\n  Poly operator-() const { return Poly() -= *this; }\n  Poly operator+(const\
-    \ Poly &r) const { return Poly(*this) += r; }\n  Poly operator-(const Poly &r)\
-    \ const { return Poly(*this) -= r; }\n  Poly operator*(const Poly &r) const {\
-    \ return convolve<mod_t, _Nm>(*this, r); }\n  Poly operator/(const Poly &r) const\
-    \ {\n    const int m = r.deg(), qsz = deg() - m + 1, ln = bsf(get_len(qsz));\n\
-    \    assert(m >= 0);\n    if (qsz <= 0) return Poly{Z};\n    return m + 3 < A\
-    \ * ln + B || qsz <= 64 ? quorem_na(r).first : quo(r);\n  }\n  std::pair<Poly,\
-    \ Poly> quorem(const Poly &r) const {\n    const int n = deg(), m = r.deg(), qsz\
-    \ = n - m + 1, ln = bsf(get_len(qsz));\n    assert(m >= 0);\n    if (qsz <= 0)\
-    \ return {Poly{Z}, Poly(this->begin(), this->begin() + n + 1)};\n    return m\
-    \ < A * ln + B || qsz <= 64 ? quorem_na(r) : quorem_ntt(r);\n  }\n  Poly operator%(const\
-    \ Poly &r) const { return quorem(r).second; }\n  Poly &operator+=(const mod_t\
-    \ r) { return *this[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
-    \ *this[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
-    \ &c : *this) c *= r;\n    return shrink();\n  }\n  Poly &operator/=(const mod_t\
-    \ r) {\n    for (mod_t &c : *this) c /= r;\n    return shrink();\n  }\n  Poly\
-    \ operator+(const mod_t r) { return Poly(*this) += r; }\n  Poly operator-(const\
-    \ mod_t r) { return Poly(*this) -= r; }\n  Poly operator*(const mod_t r) { return\
-    \ Poly(*this) *= r; }\n  Poly operator/(const mod_t r) { return Poly(*this) /=\
-    \ r; }\n  friend Poly operator+(const mod_t l, Poly r) { return r += l; }\n  friend\
-    \ Poly operator-(const mod_t l, Poly r) { return -(r -= l); }\n  friend Poly operator*(const\
-    \ mod_t l, Poly r) { return r *= l; }\n  mod_t operator()(mod_t c) const {  //\
-    \ eval f(c)\n    if (c == Z) return (*this)[0];\n    mod_t ret = 0;\n    for (int\
-    \ i = deg() + 1; i--;) ret *= c, ret += (*this)[i];\n    return ret;\n  }\n  Poly\
-    \ operator()(const XP_plus_C &xpc) const {  // f(x^p+c)\n    return taylor_shift(xpc.c).scale(xpc.x.pow());\n\
-    \  }\n  Poly operator()(const Poly &q) const {  // f(g) mod x^n\n    const std::size_t\
-    \ n = this->deg() + 1, k = std::ceil(std::sqrt(n));\n    std::vector<Poly> pw1(k\
-    \ + 1), pw2(k + 1);\n    if (pw1[0] = {1}, pw1[1] = q; q.size() > n) pw1[1].resize(n);\n\
-    \    for (int i = 2; i <= k; ++i)\n      if (pw1[i] = pw1[i - 1] * pw1[1]; pw1[i].size()\
-    \ > n) pw1[i].resize(n);\n    pw2[0] = {1}, pw2[1] = pw1[k];\n    for (int i =\
-    \ 2; i <= k; ++i)\n      if (pw2[i] = pw2[i - 1] * pw2[1]; pw2[i].size() > n)\
-    \ pw2[i].resize(n);\n    Poly ret(n, Z), f;\n    for (int i = 0, j; i <= k; ++i)\
-    \ {\n      for (f.assign(n, Z), j = std::min(k, std::max(0, n - k * i)); j--;)\
-    \ {\n        mod_t coef = (*this)[k * i + j];\n        for (int d = pw1[j].size();\
-    \ d--;) f[d] += pw1[j][d] * coef;\n      }\n      for (f *= pw2[i], j = std::min(n,\
-    \ f.size()); j--;) ret[j] += f[j];\n    }\n    return ret;\n  }\n  Poly &operator*=(const\
-    \ XP_plus_C &xpc) {\n    Poly q;\n    if (xpc.c != Z) q = *this * xpc.c;\n   \
-    \ return this->insert(this->begin(), xpc.x.pow(), Z), *this += q;\n  }\n  Poly\
-    \ operator*(const XP_plus_C &xpc) const { return Poly(*this) *= xpc; }\n  friend\
-    \ Poly operator*(const XP_plus_C &xpc, const Poly &p) { return p * xpc; }\n  Poly\
-    \ scale(int k) const {\n    const int n = deg();\n    Poly ret(n * k + 1, Z);\n\
-    \    for (int i = 0; i <= n; i++) ret[i * k] += (*this)[i];\n    return ret;\n\
-    \  }\n  Poly taylor_shift(mod_t c) const {\n    int n = deg(), i = 0;\n    if\
-    \ (n < 1 || c == Z) return Poly(*this);\n    mod_t cpw = 1, fact = 1;\n    for\
-    \ (; i <= n; fact *= ++i) GAp::bf[n - i] = (*this)[i] * fact;\n    for (fact =\
-    \ mod_t(1) / fact; i--;) GA3::bf[i] = (fact *= i + 1);\n    for (; ++i <= n;)\
-    \ GAq::bf[i] = cpw * GA3::bf[i], cpw *= c;\n    auto ret = Poly(GAp::bf, GAp::bf\
-    \ + n + 1) * Poly(GAq::bf, GAq::bf + n + 1);\n    for (ret.resize(n + 1), std::reverse(ret.begin(),\
-    \ ret.end()); i--;)\n      ret[i] *= GA3::bf[i];\n    return ret;\n  }\n  friend\
-    \ std::ostream &operator<<(std::ostream &os, const Poly &p) {\n    if (p.deg()\
-    \ == -1) return os << 0;\n    for (int i = 0, e = p.deg(); i <= e; i++) {\n  \
-    \    if (p[i] == Z) continue;\n      if (i == 0 || p[i] != mod_t(1)) os << p[i];\n\
-    \      if (i >= 1) os << 'x';\n      if (i > 9)\n        os << \"^(\" << i <<\
-    \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
-    \ os << \" + \";\n    }\n    return os;\n  }\n};"
+    \ os << \" + \";\n    }\n    return os;\n  }\n};\n#line 4 \"src/FFT/extgcd.hpp\"\
+    \n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
+    \ \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n */\n\n//\
+    \ BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mod_t, std::size_t\
+    \ _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t, _Nm> a,\n            \
+    \                  Polynomial<mod_t, _Nm> b,\n                              Polynomial<mod_t,\
+    \ _Nm> &x,\n                              Polynomial<mod_t, _Nm> &y) {\n  using\
+    \ Poly = Polynomial<mod_t, _Nm>;\n  using PVec = std::array<Poly, 2>;\n  using\
+    \ PMat = std::array<PVec, 2>;\n  assert(a.deg() >= 0);\n  assert(b.deg() >= 0);\n\
+    \  auto isI = [](const PMat &m) {\n    static constexpr mod_t ONE(1);\n    return\
+    \ m[0][1].deg() == -1 && m[1][0].deg() == -1 && m[0][0].deg() == 0 &&\n      \
+    \     m[0][0][0] == ONE && m[1][1].deg() == 0 && m[1][1][0] == ONE;\n  };\n  auto\
+    \ mulv = [&](const PMat &lhs, const PVec &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    return PVec{lhs[0][0] * rhs[0] + lhs[0][1] * rhs[1],\n                lhs[1][0]\
+    \ * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n  auto mul = [&](const PMat &lhs, const\
+    \ PMat &rhs) {\n    if (isI(lhs)) return rhs;\n    if (isI(rhs)) return lhs;\n\
+    \    return PMat{PVec{lhs[0][0] * rhs[0][0] + lhs[0][1] * rhs[1][0],\n       \
+    \              lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n             \
+    \   PVec{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n                    \
+    \ lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l = [&](const\
+    \ Poly &q, const PMat &rhs) {\n    return PMat{PVec{rhs[1][0], rhs[1][1]},\n \
+    \               PVec{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n\
+    \  };\n  auto hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PMat {\n\
+    \    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) + 1, n =\
+    \ p1.deg();\n    if (n < m) return PMat{PVec{Poly(1, 1), Poly()}, PVec{Poly(),\
+    \ Poly(1, 1)}};\n    PMat R(self(self, Poly(p0.begin() + m, p0.end()),\n     \
+    \           Poly(p1.begin() + m, p1.end())));\n    PVec ab(mulv(R, PVec{p0, p1}));\n\
+    \    if (ab[1].deg() < m) return R;\n    std::pair<Poly, Poly> qr(ab[0].quorem(ab[1]));\n\
+    \    int k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return\
+    \ mulQ_l(qr.first, R);\n    return mul(self(self, Poly(ab[1].begin() + k, ab[1].end()),\n\
+    \                    Poly(qr.second.begin() + k, qr.second.end())),\n        \
+    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](const Poly &p0, const\
+    \ Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat M(hgcd(hgcd,\
+    \ p0, p1));\n    PVec p2p3(mulv(M, PVec{p0, p1}));\n    if (p2p3[1].deg() == -1)\
+    \ return M;\n    std::pair<Poly, Poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
+    \ == -1) return mulQ_l(qr.first, M);\n    return mul(self(self, p2p3[1], qr.second),\
+    \ mulQ_l(qr.first, M));\n  };\n  if (a.shrink().deg() <= b.shrink().deg()) {\n\
+    \    std::pair<Poly, Poly> qr(a.quorem(b));\n    PMat c(cogcd(b, qr.second));\n\
+    \    return a * (x = c[0][1]) + b * (y = c[0][0] - c[0][1] * qr.first);\n  } else\
+    \ {\n    PMat c(cogcd(a, b));\n    return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
+    \  }\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/Polynomial.hpp\"\
+    \n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
+    \ \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n */\n\n//\
+    \ BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mod_t, std::size_t\
+    \ _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t, _Nm> a,\n            \
+    \                  Polynomial<mod_t, _Nm> b,\n                              Polynomial<mod_t,\
+    \ _Nm> &x,\n                              Polynomial<mod_t, _Nm> &y) {\n  using\
+    \ Poly = Polynomial<mod_t, _Nm>;\n  using PVec = std::array<Poly, 2>;\n  using\
+    \ PMat = std::array<PVec, 2>;\n  assert(a.deg() >= 0);\n  assert(b.deg() >= 0);\n\
+    \  auto isI = [](const PMat &m) {\n    static constexpr mod_t ONE(1);\n    return\
+    \ m[0][1].deg() == -1 && m[1][0].deg() == -1 && m[0][0].deg() == 0 &&\n      \
+    \     m[0][0][0] == ONE && m[1][1].deg() == 0 && m[1][1][0] == ONE;\n  };\n  auto\
+    \ mulv = [&](const PMat &lhs, const PVec &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    return PVec{lhs[0][0] * rhs[0] + lhs[0][1] * rhs[1],\n                lhs[1][0]\
+    \ * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n  auto mul = [&](const PMat &lhs, const\
+    \ PMat &rhs) {\n    if (isI(lhs)) return rhs;\n    if (isI(rhs)) return lhs;\n\
+    \    return PMat{PVec{lhs[0][0] * rhs[0][0] + lhs[0][1] * rhs[1][0],\n       \
+    \              lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n             \
+    \   PVec{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n                    \
+    \ lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l = [&](const\
+    \ Poly &q, const PMat &rhs) {\n    return PMat{PVec{rhs[1][0], rhs[1][1]},\n \
+    \               PVec{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n\
+    \  };\n  auto hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PMat {\n\
+    \    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) + 1, n =\
+    \ p1.deg();\n    if (n < m) return PMat{PVec{Poly(1, 1), Poly()}, PVec{Poly(),\
+    \ Poly(1, 1)}};\n    PMat R(self(self, Poly(p0.begin() + m, p0.end()),\n     \
+    \           Poly(p1.begin() + m, p1.end())));\n    PVec ab(mulv(R, PVec{p0, p1}));\n\
+    \    if (ab[1].deg() < m) return R;\n    std::pair<Poly, Poly> qr(ab[0].quorem(ab[1]));\n\
+    \    int k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return\
+    \ mulQ_l(qr.first, R);\n    return mul(self(self, Poly(ab[1].begin() + k, ab[1].end()),\n\
+    \                    Poly(qr.second.begin() + k, qr.second.end())),\n        \
+    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](const Poly &p0, const\
+    \ Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat M(hgcd(hgcd,\
+    \ p0, p1));\n    PVec p2p3(mulv(M, PVec{p0, p1}));\n    if (p2p3[1].deg() == -1)\
+    \ return M;\n    std::pair<Poly, Poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
+    \ == -1) return mulQ_l(qr.first, M);\n    return mul(self(self, p2p3[1], qr.second),\
+    \ mulQ_l(qr.first, M));\n  };\n  if (a.shrink().deg() <= b.shrink().deg()) {\n\
+    \    std::pair<Poly, Poly> qr(a.quorem(b));\n    PMat c(cogcd(b, qr.second));\n\
+    \    return a * (x = c[0][1]) + b * (y = c[0][0] - c[0][1] * qr.first);\n  } else\
+    \ {\n    PMat c(cogcd(a, b));\n    return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
+    \  }\n}\n"
   dependsOn:
+  - src/FFT/Polynomial.hpp
   - src/FFT/fps_div.hpp
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
@@ -620,20 +583,16 @@ data:
   - src/Math/ModInt.hpp
   - src/FFT/convolve.hpp
   isVerificationFile: false
-  path: src/FFT/Polynomial.hpp
-  requiredBy:
-  - src/FFT/extgcd.hpp
-  timestamp: '2022-09-22 18:22:47+09:00'
+  path: src/FFT/extgcd.hpp
+  requiredBy: []
+  timestamp: '2022-09-22 19:01:56+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-documentation_of: src/FFT/Polynomial.hpp
+documentation_of: src/FFT/extgcd.hpp
 layout: document
 redirect_from:
-- /library/src/FFT/Polynomial.hpp
-- /library/src/FFT/Polynomial.hpp.html
-title: "\u591A\u9805\u5F0F"
+- /library/src/FFT/extgcd.hpp
+- /library/src/FFT/extgcd.hpp.html
+title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
 ---

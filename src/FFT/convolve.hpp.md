@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
+  - icon: ':x:'
+    path: src/FFT/extgcd.hpp
+    title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
@@ -30,6 +33,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/inv_of_Poly.test.cpp
+    title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -342,6 +348,7 @@ data:
   isVerificationFile: false
   path: src/FFT/convolve.hpp
   requiredBy:
+  - src/FFT/extgcd.hpp
   - src/FFT/bostan_mori.hpp
   - src/FFT/Polynomial.hpp
   timestamp: '2022-09-21 15:34:42+09:00'
@@ -353,6 +360,7 @@ data:
   - test/yukicoder/980.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp

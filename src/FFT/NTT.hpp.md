@@ -23,6 +23,9 @@ data:
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
+  - icon: ':x:'
+    path: src/FFT/extgcd.hpp
+    title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
@@ -75,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/inv_of_Poly.test.cpp
+    title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -512,6 +518,7 @@ data:
   isVerificationFile: false
   path: src/FFT/NTT.hpp
   requiredBy:
+  - src/FFT/extgcd.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/convolve.hpp
   - src/FFT/bostan_mori.hpp
@@ -535,6 +542,7 @@ data:
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp

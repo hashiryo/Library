@@ -442,27 +442,27 @@ data:
     \ Poly &r) const { return Poly(*this) += r; }\n  Poly operator-(const Poly &r)\
     \ const { return Poly(*this) -= r; }\n  Poly operator*(const Poly &r) const {\
     \ return convolve<mod_t, _Nm>(*this, r); }\n  Poly operator/(const Poly &r) const\
-    \ {\n    const int m = r.deg(), qsz = deg() - m + 1, ln = get_len(qsz);\n    assert(m\
-    \ >= 0);\n    if (qsz <= 0) return Poly{Z};\n    return m + 3 < A * ln + B ||\
-    \ ln <= 64 ? quorem_na(r).first : quo(r);\n  }\n  std::pair<Poly, Poly> quorem(const\
-    \ Poly &r) const {\n    const int n = deg(), m = r.deg(), qsz = n - m + 1, ln\
-    \ = get_len(qsz);\n    assert(m >= 0);\n    if (qsz <= 0) return {Poly{Z}, Poly(this->begin(),\
-    \ this->begin() + n + 1)};\n    return m < A * ln + B || ln <= 64 ? quorem_na(r)\
-    \ : quorem_ntt(r);\n  }\n  Poly operator%(const Poly &r) const { return quorem(r).second;\
-    \ }\n  Poly &operator+=(const mod_t r) { return *this[0] += r, *this; }\n  Poly\
-    \ &operator-=(const mod_t r) { return *this[0] -= r, *this; }\n  Poly &operator*=(const\
-    \ mod_t r) {\n    for (mod_t &c : *this) c *= r;\n    return shrink();\n  }\n\
-    \  Poly &operator/=(const mod_t r) {\n    for (mod_t &c : *this) c /= r;\n   \
-    \ return shrink();\n  }\n  Poly operator+(const mod_t r) { return Poly(*this)\
-    \ += r; }\n  Poly operator-(const mod_t r) { return Poly(*this) -= r; }\n  Poly\
-    \ operator*(const mod_t r) { return Poly(*this) *= r; }\n  Poly operator/(const\
-    \ mod_t r) { return Poly(*this) /= r; }\n  friend Poly operator+(const mod_t l,\
-    \ Poly r) { return r += l; }\n  friend Poly operator-(const mod_t l, Poly r) {\
-    \ return -(r -= l); }\n  friend Poly operator*(const mod_t l, Poly r) { return\
-    \ r *= l; }\n  mod_t operator()(mod_t c) const {  // eval f(c)\n    if (c == Z)\
-    \ return (*this)[0];\n    mod_t ret = 0;\n    for (int i = deg() + 1; i--;) ret\
-    \ *= c, ret += (*this)[i];\n    return ret;\n  }\n  Poly operator()(const XP_plus_C\
-    \ &xpc) const {  // f(x^p+c)\n    return taylor_shift(xpc.c).scale(xpc.x.pow());\n\
+    \ {\n    const int m = r.deg(), qsz = deg() - m + 1, ln = bsf(get_len(qsz));\n\
+    \    assert(m >= 0);\n    if (qsz <= 0) return Poly{Z};\n    return m + 3 < A\
+    \ * ln + B || qsz <= 64 ? quorem_na(r).first : quo(r);\n  }\n  std::pair<Poly,\
+    \ Poly> quorem(const Poly &r) const {\n    const int n = deg(), m = r.deg(), qsz\
+    \ = n - m + 1, ln = bsf(get_len(qsz));\n    assert(m >= 0);\n    if (qsz <= 0)\
+    \ return {Poly{Z}, Poly(this->begin(), this->begin() + n + 1)};\n    return m\
+    \ < A * ln + B || qsz <= 64 ? quorem_na(r) : quorem_ntt(r);\n  }\n  Poly operator%(const\
+    \ Poly &r) const { return quorem(r).second; }\n  Poly &operator+=(const mod_t\
+    \ r) { return *this[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
+    \ *this[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
+    \ &c : *this) c *= r;\n    return shrink();\n  }\n  Poly &operator/=(const mod_t\
+    \ r) {\n    for (mod_t &c : *this) c /= r;\n    return shrink();\n  }\n  Poly\
+    \ operator+(const mod_t r) { return Poly(*this) += r; }\n  Poly operator-(const\
+    \ mod_t r) { return Poly(*this) -= r; }\n  Poly operator*(const mod_t r) { return\
+    \ Poly(*this) *= r; }\n  Poly operator/(const mod_t r) { return Poly(*this) /=\
+    \ r; }\n  friend Poly operator+(const mod_t l, Poly r) { return r += l; }\n  friend\
+    \ Poly operator-(const mod_t l, Poly r) { return -(r -= l); }\n  friend Poly operator*(const\
+    \ mod_t l, Poly r) { return r *= l; }\n  mod_t operator()(mod_t c) const {  //\
+    \ eval f(c)\n    if (c == Z) return (*this)[0];\n    mod_t ret = 0;\n    for (int\
+    \ i = deg() + 1; i--;) ret *= c, ret += (*this)[i];\n    return ret;\n  }\n  Poly\
+    \ operator()(const XP_plus_C &xpc) const {  // f(x^p+c)\n    return taylor_shift(xpc.c).scale(xpc.x.pow());\n\
     \  }\n  Poly operator()(const Poly &q) const {  // f(g) mod x^n\n    const std::size_t\
     \ n = this->deg() + 1, k = std::ceil(std::sqrt(n));\n    std::vector<Poly> pw1(k\
     \ + 1), pw2(k + 1);\n    if (pw1[0] = {1}, pw1[1] = q; q.size() > n) pw1[1].resize(n);\n\
@@ -516,7 +516,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/comp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-09-22 18:19:27+09:00'
+  timestamp: '2022-09-22 18:22:47+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/comp_of_FPS.test.cpp

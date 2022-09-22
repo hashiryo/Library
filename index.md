@@ -119,6 +119,9 @@ data:
     - icon: ':question:'
       path: src/FFT/convolve.hpp
       title: "\u7573\u307F\u8FBC\u307F"
+    - icon: ':x:'
+      path: src/FFT/extgcd.hpp
+      title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     - icon: ':question:'
       path: src/FFT/fps_div.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
@@ -280,7 +283,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Old/differential_equation.hpp
       title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/Old/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     - icon: ':heavy_check_mark:'
@@ -875,7 +878,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.test.cpp
       title: test/yosupo/inv_of_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
     - icon: ':heavy_check_mark:'

@@ -1,406 +1,573 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Old/FormalPowerSeries.hpp
-    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
-    path: src/Old/ModInt.hpp
-    title: ModInt
-  - icon: ':heavy_check_mark:'
-    path: src/Old/extgcd.hpp
+  - icon: ':question:'
+    path: src/FFT/NTT.hpp
+    title: Number-Theoretic-Transform
+  - icon: ':x:'
+    path: src/FFT/Polynomial.hpp
+    title: "\u591A\u9805\u5F0F"
+  - icon: ':question:'
+    path: src/FFT/convolve.hpp
+    title: "\u7573\u307F\u8FBC\u307F"
+  - icon: ':x:'
+    path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
+  - icon: ':question:'
+    path: src/FFT/fps_div.hpp
+    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
+  - icon: ':question:'
+    path: src/FFT/fps_inv.hpp
+    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
+  - icon: ':question:'
+    path: src/Math/ModInt.hpp
+    title: ModInt
+  - icon: ':question:'
+    path: src/Math/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
     links:
     - https://judge.yosupo.jp/problem/inv_of_polynomials
   bundledCode: "#line 1 \"test/yosupo/inv_of_Poly.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Old/ModInt.hpp\"\n/**\n * @title ModInt\n\
-    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace internal {\ntemplate\
-    \ <std::uint64_t mod, std::uint64_t prim_root, class ModInt>\nstruct ModIntImpl\
-    \ {\n  static constexpr std::uint64_t modulo() { return mod; }\n  static constexpr\
-    \ std::uint64_t pr_rt() { return prim_root; }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt &rhs) {\n    return os << rhs.val();\n  }\n};\n}  // namespace\
-    \ internal\ntemplate <std::uint64_t mod, std::uint64_t prim_root = 0>\nclass ModInt\n\
-    \    : public internal::ModIntImpl<mod, prim_root, ModInt<mod, prim_root>> {\n\
-    \  using u64 = std::uint64_t;\n  static constexpr u64 mul_inv(u64 n, int e = 6,\
-    \ u64 x = 1) {\n    return e == 0 ? x : mul_inv(n, e - 1, x * (2 - x * n));\n\
-    \  }\n  static constexpr u64 inv = mul_inv(mod, 6, 1), r2 = -__uint128_t(mod)\
-    \ % mod;\n  static constexpr u64 init(u64 w) { return reduce(__uint128_t(w) *\
-    \ r2); }\n  static constexpr u64 reduce(const __uint128_t w) {\n    return u64(w\
-    \ >> 64) + mod - ((__uint128_t(u64(w) * inv) * mod) >> 64);\n  }\n  u64 x;\n\n\
-    \ public:\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(std::int64_t n)\
-    \ : x(init(n < 0 ? mod - (-n) % mod : n)) {}\n  static constexpr u64 norm(u64\
-    \ w) { return w - (mod & -(w >= mod)); }\n  constexpr ModInt operator-() const\
-    \ {\n    ModInt ret;\n    return ret.x = ((mod << 1) & -(x != 0)) - x, ret;\n\
-    \  }\n  constexpr ModInt &operator+=(const ModInt &rhs) {\n    return x += rhs.x\
-    \ - (mod << 1), x += (mod << 1) & -(x >> 63), *this;\n  }\n  constexpr ModInt\
-    \ &operator-=(const ModInt &rhs) {\n    return x -= rhs.x, x += (mod << 1) & -(x\
-    \ >> 63), *this;\n  }\n  constexpr ModInt &operator*=(const ModInt &rhs) {\n \
-    \   return this->x = reduce(__uint128_t(this->x) * rhs.x), *this;\n  }\n  constexpr\
-    \ ModInt &operator/=(const ModInt &rhs) {\n    return this->operator*=(rhs.inverse());\n\
-    \  }\n  ModInt operator+(const ModInt &rhs) const { return ModInt(*this) += rhs;\
-    \ }\n  ModInt operator-(const ModInt &rhs) const { return ModInt(*this) -= rhs;\
-    \ }\n  ModInt operator*(const ModInt &rhs) const { return ModInt(*this) *= rhs;\
-    \ }\n  ModInt operator/(const ModInt &rhs) const { return ModInt(*this) /= rhs;\
-    \ }\n  bool operator==(const ModInt &rhs) const { return norm(x) == norm(rhs.x);\
-    \ }\n  bool operator!=(const ModInt &rhs) const { return !(*this == rhs); }\n\
-    \  constexpr ModInt pow(std::uint64_t k) const {\n    ModInt ret = ModInt(1);\n\
-    \    for (ModInt base = *this; k; k >>= 1, base *= base)\n      if (k & 1) ret\
-    \ *= base;\n    return ret;\n  }\n  constexpr ModInt inverse() const { return\
-    \ pow(mod - 2); }\n  constexpr ModInt sqrt() const {\n    if (*this == ModInt(0)\
-    \ || mod == 2) return *this;\n    if (pow((mod - 1) >> 1) != 1) return ModInt(0);\
-    \  // no solutions\n    ModInt ONE = 1, b(2), w(b * b - *this);\n    while (w.pow((mod\
-    \ - 1) >> 1) == ONE) b += ONE, w = b * b - *this;\n    auto mul = [&](std::pair<ModInt,\
-    \ ModInt> u, std::pair<ModInt, ModInt> v) {\n      ModInt a = (u.first * v.first\
-    \ + u.second * v.second * w);\n      ModInt b = (u.first * v.second + u.second\
-    \ * v.first);\n      return std::make_pair(a, b);\n    };\n    std::uint64_t e\
-    \ = (mod + 1) >> 1;\n    auto ret = std::make_pair(ONE, ModInt(0));\n    for (auto\
-    \ bs = std::make_pair(b, ONE); e; e >>= 1, bs = mul(bs, bs))\n      if (e & 1)\
-    \ ret = mul(ret, bs);\n    return ret.first.val() * 2 < mod ? ret.first : -ret.first;\n\
-    \  }\n  constexpr u64 val() const {\n    u64 ret = reduce(x) - mod;\n    return\
-    \ ret + (mod & -(ret >> 63));\n  }\n  friend std::istream &operator>>(std::istream\
-    \ &is, ModInt &rhs) {\n    return is >> rhs.x, rhs.x = init(rhs.x), is;\n  }\n\
-    };\ntemplate <std::uint64_t pr_rt>\nstruct ModInt<2, pr_rt> : internal::ModIntImpl<2,\
-    \ pr_rt, ModInt<2, pr_rt>> {\n  constexpr ModInt(std::int64_t n = 0) : x(n & 1)\
-    \ {}\n  constexpr ModInt operator-() const { return *this; }\n  constexpr ModInt\
-    \ &operator+=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator-=(const ModInt &rhs) { return x ^= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator*=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  constexpr ModInt\
-    \ &operator/=(const ModInt &rhs) { return x &= rhs.x, *this; }\n  ModInt operator+(const\
-    \ ModInt &rhs) const { return ModInt(*this) += rhs; }\n  ModInt operator-(const\
-    \ ModInt &rhs) const { return ModInt(*this) -= rhs; }\n  ModInt operator*(const\
-    \ ModInt &rhs) const { return ModInt(*this) *= rhs; }\n  ModInt operator/(const\
-    \ ModInt &rhs) const { return ModInt(*this) /= rhs; }\n  bool operator==(const\
-    \ ModInt &rhs) const { return x == rhs.x; }\n  bool operator!=(const ModInt &rhs)\
-    \ const { return !(*this == rhs); }\n  constexpr ModInt pow(std::uint64_t k) const\
-    \ { return !k ? ModInt(1) : *this; }\n  constexpr ModInt sqrt() const { return\
-    \ *this; }\n  constexpr ModInt inverse() const { return *this; }\n  constexpr\
-    \ std::uint64_t val() const { return x; }\n  friend std::istream &operator>>(std::istream\
-    \ &is, ModInt &rhs) {\n    return is >> rhs.x, is;\n  }\n\n private:\n  bool x;\n\
-    };\n#line 4 \"src/Old/FormalPowerSeries.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\
-    \u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n */\n// verify\u7528: https://loj.ac/problem/150\n\
-    \n// BEGIN CUT HERE\n\ntemplate <class mint, int LIM = (1 << 22)>\nstruct FormalPowerSeries\
-    \ : public std::vector<mint> {\n  using std::vector<mint>::vector;\n\n private:\n\
-    \  using FPS = FormalPowerSeries<mint, LIM>;\n  using m64_1 = ModInt<34703335751681,\
-    \ 3>;\n  using m64_2 = ModInt<35012573396993, 3>;\n  static inline m64_1 a1[LIM],\
-    \ b1[LIM], c1[LIM];\n  static inline m64_2 a2[LIM], b2[LIM], c2[LIM];\n  static\
-    \ inline mint bf1[LIM], bf2[LIM];\n  template <class mod_t>\n  static inline void\
-    \ idft(int n, mod_t x[]) {\n    static mod_t iW[LIM];\n    static constexpr std::uint64_t\
-    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
-    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
-    \ lim = 0;\n    if (lim == 0) iW[0] = 1, lim = 1;\n    for (int m = lim; m < n\
-    \ / 2; m *= 2) {\n      mod_t idw = G.pow(mod - 1 - (mod - 1) / (4 * m));\n  \
-    \    for (int i = 0; i < m; i++) iW[m + i] = iW[i] * idw;\n      lim = n / 2;\n\
-    \    }\n    for (int m = 1; m < n; m *= 2)\n      for (int s = 0, k = 0; s < n;\
-    \ s += 2 * m, ++k)\n        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n\
-    \          mod_t u = x[i], v = x[j];\n          x[i] = u + v, x[j] = (u - v) *\
-    \ iW[k];\n        }\n    mod_t iv(mod - (mod - 1) / n);\n    for (int i = 0; i\
-    \ < n; i++) x[i] *= iv;\n  }\n  template <class mod_t>\n  static inline void dft(int\
-    \ n, mod_t x[]) {\n    static mod_t W[LIM];\n    static constexpr std::uint64_t\
-    \ mod = mod_t::modulo();\n    static constexpr unsigned pr = mod_t::pr_rt();\n\
-    \    static_assert(pr != 0);\n    static constexpr mod_t G(pr);\n    static int\
-    \ lim = 0;\n    if (lim == 0) W[0] = 1, lim = 1;\n    for (int m = lim; m < n\
-    \ / 2; m *= 2) {\n      mod_t dw = G.pow((mod - 1) / (4 * m));\n      for (int\
-    \ i = 0; i < m; i++) W[m + i] = W[i] * dw;\n      lim = n / 2;\n    }\n    for\
-    \ (int m = n; m >>= 1;)\n      for (int s = 0, k = 0; s < n; s += 2 * m, ++k)\n\
-    \        for (int i = s, j = s + m; i < s + m; ++i, ++j) {\n          mod_t u\
-    \ = x[i], v = x[j] * W[k];\n          x[i] = u + v, x[j] = u - v;\n        }\n\
-    \  }\n  static inline void crt(m64_1 f1[], m64_2 f2[], int b, int e, mint ret[])\
-    \ {\n    static constexpr m64_2 iv = m64_2(m64_1::modulo()).inverse();\n    static\
-    \ constexpr mint mod1 = m64_1::modulo();\n    for (int i = b; i < e; i++) {\n\
-    \      std::uint64_t r1 = f1[i].val(), r2 = f2[i].val();\n      ret[i] =\n   \
-    \       mint(r1) + mint((m64_2(r2 + m64_2::modulo() - r1) * iv).val()) * mod1;\n\
-    \    }\n  }\n  template <typename T, typename std::enable_if<\n              \
-    \              std::is_integral<T>::value>::type * = nullptr>\n  static inline\
-    \ void subst(m64_1 f1[], m64_2 f2[], int b, int e, T ret[]) {\n    for (int i\
-    \ = b; i < e; i++) f1[i] = ret[i], f2[i] = ret[i];\n  }\n  template <typename\
-    \ T, typename std::enable_if<\n                            !std::is_integral<T>::value>::type\
-    \ * = nullptr>\n  static inline void subst(m64_1 f1[], m64_2 f2[], int b, int\
-    \ e, T ret[]) {\n    std::uint64_t tmp;\n    for (int i = b; i < e; i++) tmp =\
-    \ ret[i].val(), f1[i] = tmp, f2[i] = tmp;\n  }\n  static inline mint get_inv(int\
-    \ i) {\n    static mint INV[LIM];\n    static int lim = 0;\n    static constexpr\
-    \ std::uint64_t mod = mint::modulo();\n    if (lim <= i) {\n      if (lim == 0)\
-    \ INV[1] = 1, lim = 2;\n      for (int j = lim; j <= i; j++) INV[j] = INV[mod\
-    \ % j] * (mod - mod / j);\n      lim = i + 1;\n    }\n    return INV[i];\n  }\n\
-    \n public:\n  int deg() const {\n    int n = int(this->size()) - 1;\n    while\
-    \ (n >= 0 && (*this)[n] == mint(0)) n--;\n    return n;\n  }\n  FPS &norm() {\
-    \ return this->resize(std::max(this->deg() + 1, 1)), *this; }\n  std::uint64_t\
-    \ inline get_len(std::uint64_t n) const {\n    return --n, n |= n >> 1, n |= n\
-    \ >> 2, n |= n >> 4, n |= n >> 8,\n           n |= n >> 16, n |= n >> 32, ++n;\n\
-    \  }\n  FPS mul(const FPS &y) const {\n    if (deg() == -1 || y.deg() == -1) return\
-    \ {0};\n    int n = this->size(), m = y.size(), sz = n + m - 1;\n    FPS ret(sz,\
-    \ 0);\n    if (std::min(n, m) <= 8) {\n      for (int i = 0; i < n; i++)\n   \
-    \     for (int j = 0; j < m; j++) ret[i + j] += (*this)[i] * y[j];\n    } else\
-    \ {\n      subst(a1, a2, 0, n, this->data()), subst(b1, b2, 0, m, y.data());\n\
-    \      int len = get_len(sz);\n      std::fill(a1 + n, a1 + len, 0), std::fill(b1\
-    \ + m, b1 + len, 0);\n      std::fill(a2 + n, a2 + len, 0), std::fill(b2 + m,\
-    \ b2 + len, 0);\n      dft(len, a1), dft(len, b1), dft(len, a2), dft(len, b2);\n\
-    \      for (int i = 0; i < len; i++) a1[i] *= b1[i], a2[i] *= b2[i];\n      idft(len,\
-    \ a1), idft(len, a2), crt(a1, a2, 0, sz, ret.data());\n    }\n    return ret;\n\
-    \  }\n  FPS inv() const {\n    assert(!this->empty() && (*this)[0] != mint(0));\n\
-    \    int n = this->size(), len = get_len(n);\n    std::copy_n(this->begin(), n,\
-    \ bf1), std::fill(bf1 + n, bf1 + len, 0);\n    FPS ret(len, 0);\n    ret[0] =\
-    \ bf1[0].inverse();\n    for (int i = 1; i < 32 && i < n; ret[i++] *= -ret[0])\n\
-    \      for (int j = 1; j <= i; j++) ret[i] += bf1[j] * ret[i - j];\n    for (int\
-    \ i = 64; i <= len; i <<= 1) {\n      subst(a1, a2, 0, i, bf1), subst(b1, b2,\
-    \ 0, i, ret.data());\n      dft(i, a1), dft(i, b1), dft(i, a2), dft(i, b2);\n\
-    \      for (int j = i - 1; j >= 0; j--) a1[j] *= b1[j], a2[j] *= b2[j];\n    \
-    \  idft(i, a1), idft(i, a2);\n      crt(a1, a2, i >> 1, i, ret.data()), subst(a1,\
-    \ a2, i >> 1, i, ret.data());\n      std::fill_n(a1, i >> 1, 0), std::fill_n(a2,\
-    \ i >> 1, 0), dft(i, a1),\n          dft(i, a2);\n      for (int j = i - 1; j\
-    \ >= 0; j--) a1[j] *= b1[j], a2[j] *= b2[j];\n      idft(i, a1), idft(i, a2),\
-    \ crt(a1, a2, i >> 1, i, ret.data());\n      for (int j = i >> 1; j < i; j++)\
-    \ ret[j] = -ret[j];\n    }\n    return ret.resize(n), ret;\n  }\n  inline FPS\
-    \ div_con(const FPS &g, const FPS &g0) const {\n    if (this->size() == 1) return\
-    \ {(*this)[0] * g[0].inverse()};\n    int n = this->size(), len = get_len(n),\
-    \ len2 = len >> 1,\n        m = std::min<int>(n, g.size());\n    FPS ret(n);\n\
-    \    std::copy_n(this->begin(), n, bf1), std::fill(bf1 + n, bf1 + len, 0);\n \
-    \   std::copy_n(g.begin(), m, bf2), std::fill(bf2 + m, bf2 + len, 0);\n    subst(a1,\
-    \ a2, 0, len2, g0.data()), subst(b1, b2, 0, len2, bf1);\n    std::fill(a1 + len2,\
-    \ a1 + len, 0), std::fill(a2 + len2, a2 + len, 0);\n    std::fill(b1 + len2, b1\
-    \ + len, 0), std::fill(b2 + len2, b2 + len, 0);\n    dft(len, a1), dft(len, b1),\
-    \ dft(len, a2), dft(len, b2);\n    for (int i = 0; i < len; i++) b1[i] *= a1[i],\
-    \ b2[i] *= a2[i];\n    idft(len, b1), idft(len, b2), crt(b1, b2, 0, len2, ret.data());\n\
-    \    subst(b1, b2, 0, len2, ret.data()), subst(c1, c2, 0, len, bf2);\n    std::fill(b1\
-    \ + len2, b1 + len, 0), std::fill(b2 + len2, b2 + len, 0);\n    dft(len, c1),\
-    \ dft(len, b1), dft(len, c2), dft(len, b2);\n    for (int i = 0; i < len; i++)\
-    \ c1[i] *= b1[i], c2[i] *= b2[i];\n    idft(len, c1), idft(len, c2), crt(c1 +\
-    \ len2, c2 + len2, 0, len2, bf1);\n    for (int i = len2; i < len; i++) bf1[i]\
-    \ -= bf1[i - len2];\n    subst(c1, c2, len2, len, bf1);\n    std::fill_n(c1, len2,\
-    \ 0), std::fill_n(c2, len2, 0), dft(len, c1),\n        dft(len, c2);\n    for\
-    \ (int i = len; i >= 0; i--) c1[i] *= a1[i], c2[i] *= a2[i];\n    idft(len, c1),\
-    \ idft(len, c2), crt(c1, c2, len2, n, ret.data());\n    return ret;\n  }\n  inline\
-    \ std::pair<FPS, FPS> quorem_rev_con(const FPS &yr,\n                        \
-    \                    const FPS &g0r) const {\n    if (this->size() < yr.size())\
-    \ return std::make_pair(FPS{0}, *this);\n    int sq = this->size() - yr.size()\
-    \ + 1, len = get_len(sq);\n    FPS qr = FPS(this->begin(), this->begin() + sq).div_con(yr,\
-    \ g0r);\n    if (yr.size() == 1) return std::make_pair(qr, FPS{0});\n    len =\
-    \ get_len(std::max(qr.size(), yr.size()));\n    int mask = len - 1;\n    subst(a1,\
-    \ a2, 0, sq, qr.data()), subst(b1, b2, 0, yr.size(), yr.data());\n    std::fill(a1\
-    \ + sq, a1 + len, 0), std::fill(a2 + sq, a2 + len, 0);\n    std::fill(b1 + yr.size(),\
-    \ b1 + len, 0),\n        std::fill(b2 + yr.size(), b2 + len, 0);\n    dft(len,\
-    \ a1), dft(len, a2), dft(len, b1), dft(len, b2);\n    for (int i = len - 1; i\
-    \ >= 0; i--) a1[i] *= b1[i], a2[i] *= b2[i];\n    idft(len, a1), idft(len, a2),\
-    \ crt(a1, a2, 0, len, bf1);\n    for (int i = sq - 1; i >= 0; i--) bf1[i & mask]\
-    \ -= (*this)[i & mask];\n    FPS rem(this->begin() + sq, this->end());\n    for\
-    \ (int i = rem.size() - 1; i >= 0; i--) rem[i] -= bf1[(sq + i) & mask];\n    return\
-    \ std::make_pair(qr, rem);\n  }\n  inline std::pair<FPS, FPS> quorem_rev_n(const\
-    \ FPS &yr) const {\n    if (this->size() < yr.size()) return std::make_pair(FPS{0},\
-    \ *this);\n    int sq = this->size() - yr.size() + 1;\n    std::copy_n(this->begin(),\
-    \ this->size(), bf1);\n    FPS qr(sq, 0);\n    mint iv = yr[0].inverse();\n  \
-    \  for (int i = 0; i < sq; i++) {\n      qr[i] = bf1[i] * iv;\n      for (int\
-    \ j = 0; j < (int)yr.size(); j++) bf1[j + i] -= yr[j] * qr[i];\n    }\n    return\
-    \ std::make_pair(qr, FPS(bf1 + sq, bf1 + this->size()));\n  }\n  FPS div(const\
-    \ FPS &y) const {\n    if (this->size() == 1) return {(*this)[0] * y[0].inverse()};\n\
-    \    int len2 = get_len(this->size()) / 2;\n    FPS g(len2);\n    for (int i =\
-    \ std::min<int>(y.size(), len2) - 1; i >= 0; i--) g[i] = y[i];\n    return div_con(y,\
-    \ g.inv());\n  }\n  FPS quo(FPS y) const {\n    FPS x(*this);\n    x.norm(), y.norm();\n\
-    \    if (x.size() < y.size()) return FPS{0};\n    if (x.size() == y.size()) return\
-    \ FPS{x.back() / y.back()};\n    reverse(x.begin(), x.end()), reverse(y.begin(),\
-    \ y.end());\n    FPS ret = y.size() < 1024 ? x.quorem_rev_n(y).first\n       \
-    \                       : (x.resize(x.size() - y.size() + 1), x.div(y));\n   \
-    \ reverse(ret.begin(), ret.end());\n    return ret;\n  }\n  std::pair<FPS, FPS>\
-    \ quorem(FPS y) const {\n    FPS x(*this);\n    x.norm(), y.norm();\n    if (x.size()\
-    \ < y.size()) return std::make_pair(FPS{0}, x);\n    if (x.size() == y.size())\
-    \ {\n      mint tmp = x.back() / y.back();\n      return std::make_pair(FPS{tmp},\
-    \ x - y * tmp);\n    }\n    reverse(x.begin(), x.end()), reverse(y.begin(), y.end());\n\
-    \    FPS q, r;\n    if (y.size() < 1024)\n      tie(q, r) = x.quorem_rev_n(y);\n\
-    \    else {\n      int len2 = get_len(x.size() - y.size() + 1) / 2;\n      FPS\
-    \ gr(len2);\n      for (int i = std::min<int>(y.size(), len2) - 1; i >= 0; i--)\
-    \ gr[i] = y[i];\n      tie(q, r) = x.quorem_rev_con(y, gr.inv());\n    }\n   \
-    \ reverse(q.begin(), q.end()), reverse(r.begin(), r.end());\n    return std::make_pair(q,\
-    \ r.norm());\n  }\n  FPS diff() const {\n    FPS ret(std::max(0, int(this->size()\
-    \ - 1)));\n    for (int i = this->size() - 1; i > 0; i--) ret[i - 1] = (*this)[i]\
-    \ * i;\n    return ret;\n  }\n  FPS inte() const {\n    int len = this->size()\
-    \ + 1;\n    FPS ret(len, 0);\n    for (int i = len - 1; i >= 1; i--) ret[i] =\
-    \ (*this)[i - 1] * get_inv(i);\n    return ret;\n  }\n  FPS log() const {\n  \
-    \  assert((*this)[0] == mint(1));\n    return this->size() == 1 ? FPS{0} : this->diff().div(*this).inte();\n\
-    \  }\n  FPS exp() const {\n    assert((*this)[0] == mint(0));\n    int n = this->size(),\
-    \ len = get_len(n);\n    if (n == 1) return {1};\n    static mint b[LIM], f[LIM\
-    \ / 2];\n    std::copy_n(this->data(), n, bf1), std::fill(bf1 + n, bf1 + len,\
-    \ 0);\n    FPS ret(len, 0);\n    std::fill_n(bf2, len, 0), std::fill_n(c1, len,\
-    \ 0), std::fill_n(c2, len, 0);\n    ret[0] = 1, ret[1] = bf1[1], bf2[0] = 1, bf2[1]\
-    \ = -bf1[1];\n    for (int i = 1; i != len; ++i) b[i - 1] = mint(i) * bf1[i];\n\
-    \    subst(c1, c2, 0, 2, ret.data()), dft(4, c1), dft(4, c2);\n    std::uint64_t\
-    \ tmp;\n    for (int i = 4, i2 = 2; i <= len; i <<= 1, i2 <<= 1) {\n      for\
-    \ (int j = i >> 2; j < i2; j++) f[j - 1] = ret[j] * mint(j);\n      subst(b1,\
-    \ b2, 0, i2 - 1, b), b1[i2 - 1] = 0, b2[i2 - 1] = 0;\n      dft(i2, b1), dft(i2,\
-    \ b2);\n      for (int j = i2 - 1; j >= 0; j--) b1[j] *= c1[j], b2[j] *= c2[j];\n\
-    \      idft(i2, b1), idft(i2, b2), crt(b1, b2, 0, i2, bf1);\n      for (int j\
-    \ = i2 - 3; j >= 0; j--)\n        tmp = (f[j] - bf1[j]).val(), b1[j + i2] = tmp,\
-    \ b2[j + i2] = tmp;\n      tmp = (bf1[i2 - 2] - f[i2 - 2]).val(), b1[i2 - 2] =\
-    \ tmp, b2[i2 - 2] = tmp;\n      tmp = (-bf1[i2 - 1]).val(), b1[i2 - 1] = tmp,\
-    \ b2[i2 - 1] = tmp;\n      std::fill_n(b1, i2 - 2, 0), std::fill_n(b2, i2 - 2,\
-    \ 0);\n      b1[i - 2] = b1[i - 1] = 0, b2[i - 2] = b2[i - 1] = 0;\n      subst(a1,\
-    \ a2, 0, i, bf2), dft(i, a1), dft(i, a2), dft(i, b1), dft(i, b2);\n      for (int\
-    \ j = 0; j < i; j++) b1[j] *= a1[j], b2[j] *= a2[j];\n      idft(i, b1), idft(i,\
-    \ b2), crt(b1, b2, i2 - 1, i - 1, bf2 + 1);\n      for (int j = i - 1; j >= i2;\
-    \ j--) (bf2[j] *= get_inv(j)) -= bf1[j];\n      subst(b1, b2, i2, i, bf2);\n \
-    \     std::fill_n(b1, i2, 0), std::fill_n(b2, i2, 0), dft(i, b1), dft(i, b2);\n\
-    \      for (int j = i - 1; j >= 0; j--) c1[j] *= b1[j], c2[j] *= b2[j];\n    \
-    \  idft(i, c1), idft(i, c2), crt(c1, c2, i2, i, ret.data());\n      for (int j\
-    \ = i2; j < i; j++) ret[j] = -ret[j];\n      if (i != len) {\n        subst(c1,\
-    \ c2, 0, i, ret.data()), dft(i << 1, c1), dft(i << 1, c2);\n        for (int j\
-    \ = i - 1; j >= 0; j--)\n          b1[j] = c1[j] * a1[j], b2[j] = c2[j] * a2[j];\n\
-    \        idft(i, b1), idft(i, b2), crt(b1, b2, i2, i, bf2);\n        subst(b1,\
-    \ b2, i2, i, bf2);\n        std::fill_n(b1, i2, 0), std::fill_n(b2, i2, 0), dft(i,\
-    \ b1), dft(i, b2);\n        for (int j = i - 1; j >= 0; j--) b1[j] *= a1[j], b2[j]\
-    \ *= a2[j];\n        idft(i, b1), idft(i, b2), crt(b1, b2, i2, i, bf2);\n    \
-    \    for (int j = i2; j < i; j++) bf2[j] = -bf2[j];\n      }\n    }\n    return\
-    \ ret.resize(n), ret;\n  }\n  FPS pow(std::uint64_t k) const {\n    int n = this->size(),\
-    \ cnt = 0;\n    while (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (k *\
-    \ cnt >= (std::uint64_t)n) return FPS(n, 0);\n    mint iv = (*this)[cnt].inverse();\n\
-    \    FPS pt = ((FPS(this->begin() + cnt, this->end()) * iv).log() * k).exp() *\n\
-    \             (*this)[cnt].pow(k),\n        ret(n, 0);\n    for (int i = k * cnt,\
-    \ j = 0; i < n; i++, j++) ret[i] = pt[j];\n    return ret;\n  }\n  std::pair<FPS,\
-    \ FPS> cos_and_sin() const {\n    static mint imag = mint(-1).sqrt();\n    static\
-    \ constexpr mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    FPS\
-    \ a = (*this * imag).exp(), b = (*this * (-imag)).exp();\n    return std::make_pair((a\
-    \ + b) * iv2, (a - b) * iv2 / imag);\n  }\n  FPS sqrt() const {\n    static constexpr\
-    \ mint iv2 = mint(mint::modulo() - (mint::modulo() - 1) / 2);\n    int n = this->size(),\
-    \ cnt = 0;\n    while (cnt < n && (*this)[cnt] == mint(0)) cnt++;\n    if (cnt\
-    \ == n) return FPS(n, 0);\n    if (cnt & 1) return FPS();  // no solution\n  \
-    \  mint sqr = (*this)[cnt].sqrt();\n    if (sqr * sqr != (*this)[cnt]) return\
-    \ FPS();  // no solution\n    int len = get_len(n - cnt / 2);\n    FPS ret({sqr});\n\
-    \    ret.resize(len);\n    std::copy_n(this->begin() + cnt, n - cnt, bf1),\n \
-    \       std::fill(bf1 + n - cnt, bf1 + len, 0);\n    std::fill_n(bf2, len, 0),\
-    \ bf2[0] = ret[0].inverse();\n    std::uint64_t tmp;\n    tmp = ret[0].val(),\
-    \ b1[0] = tmp, b2[0] = tmp, b1[1] = 0, b2[1] = 0;\n    dft(2, b1), dft(2, b2);\n\
-    \    for (int i = 2, i2 = 1; i <= len; i <<= 1, i2 <<= 1) {\n      for (int j\
-    \ = i2 - 1; j >= 0; j--)\n        c1[j] = b1[j] * b1[j], c2[j] = b2[j] * b2[j];\n\
-    \      idft(i2, c1), idft(i2, c2), crt(c1, c2, 0, i2, ret.data() + i2);\n    \
-    \  for (int j = i - 2; j >= i2; j--)\n        tmp = (ret[j] - bf1[j - i2] - bf1[j]).val(),\
-    \ c1[j] = tmp, c2[j] = tmp;\n      tmp = (ret[i - 1] - bf1[i2 - 1]).val(), c1[i2\
-    \ - 1] = tmp,\n      c2[i2 - 1] = tmp;\n      tmp = (-bf1[i - 1]).val(), c1[i\
-    \ - 1] = tmp, c2[i - 1] = tmp;\n      std::fill_n(c1, i2 - 1, 0), std::fill_n(c2,\
-    \ i2 - 1, 0),\n          subst(a1, a2, 0, i, bf2);\n      dft(i, a1), dft(i, a2),\
-    \ dft(i, c1), dft(i, c2);\n      for (int j = i - 1; j >= 0; j--) c1[j] *= a1[j],\
-    \ c2[j] *= a2[j];\n      idft(i, c1), idft(i, c2), crt(c1, c2, i2, i, bf2);\n\
-    \      for (int j = i2; j < i; j++) ret[j] = -bf2[j] * iv2;\n      if (i != len)\
-    \ {\n        subst(b1, b2, 0, i, ret.data()), dft(i, b1), dft(i, b2);\n      \
-    \  for (int j = i - 1; j >= 0; j--)\n          c1[j] = b1[j] * a1[j], c2[j] =\
-    \ b2[j] * a2[j];\n        idft(i, c1), idft(i, c2), crt(c1, c2, i2, i, bf2);\n\
-    \        subst(c1, c2, i2, i, bf2);\n        std::fill_n(c1, i2, 0), std::fill_n(c2,\
-    \ i2, 0), dft(i, c1), dft(i, c2);\n        for (int j = i - 1; j >= 0; j--) c1[j]\
-    \ *= a1[j], c2[j] *= a2[j];\n        idft(i, c1), idft(i, c2), crt(c1, c2, i2,\
-    \ i, bf2);\n        for (int j = i2; j < i; j++) bf2[j] = -bf2[j];\n      }\n\
-    \    }\n    for (int i = n - cnt / 2 - 1; i >= 0; i--) ret[i + cnt / 2] = ret[i];\n\
-    \    std::fill_n(ret.begin(), cnt / 2, 0);\n    return ret;\n  }\n  FPS shift(mint\
-    \ c) const {\n    int n = this->size();\n    FPS ret(n), p(n);\n    mint f = 1,\
-    \ cpw = 1;\n    for (int i = 0; i < n; f *= ++i) ret[n - i - 1] = (*this)[i] *\
-    \ f;\n    f = mint(n) / f;\n    for (int i = n; i > 0; i--) p[i - 1] = i == n\
-    \ ? f : p[i] * i;\n    for (int i = 0; i < n; i++, cpw *= c) p[i] *= cpw;\n  \
-    \  p *= ret, p.resize(n);\n    std::reverse_copy(p.begin(), p.begin() + n, ret.begin());\n\
-    \    for (int i = n - 1; i >= 2; f *= i--) ret[i] *= f;\n    return ret;\n  }\n\
-    \  FPS comp(const FPS &g) const {\n    int n = this->size(), k = std::sqrt(1.\
-    \ * n);\n    if (k * k < n) k++;\n    int d = (n - 1 + k) / k;\n    std::vector<FPS>\
-    \ gpw(d + 1);\n    gpw[0] = {1};\n    for (int i = 1; i <= d; i++) {\n      gpw[i]\
-    \ = gpw[i - 1] * g;\n      if ((int)gpw[i].size() > n) gpw[i].resize(n);\n   \
-    \ }\n    FPS ret(n, 0), gd{1}, tmp;\n    for (int i = 0; i < k; i++) {\n     \
-    \ tmp = {(*this)[i * d]};\n      for (int j = 1; j < d && i * d + j < n; j++)\n\
-    \        tmp += gpw[j] * (*this)[i * d + j];\n      tmp *= gd;\n      for (int\
-    \ j = std::min<int>(n, tmp.size()) - 1; j >= 0; j--)\n        ret[j] += tmp[j];\n\
-    \      gd *= gpw[d];\n      if ((int)gd.size() > n) gd.resize(n);\n    }\n   \
-    \ return ret;\n  }\n  mint eval(mint x) const {\n    mint res, w = 1;\n    for\
-    \ (auto &v : *this) res += w * v, w *= x;\n    return res;\n  }\n  FPS operator-()\
-    \ {\n    FPS ret(this->size());\n    for (int i = ret.size() - 1; i >= 0; i--)\
-    \ ret[i] = -(*this)[i];\n    return ret;\n  }\n  FPS &operator+=(const mint &v)\
-    \ {\n    if (this->empty()) this->resize(1, 0);\n    return (*this)[0] += v, *this;\n\
-    \  }\n  FPS &operator-=(const mint &v) { return *this += -v; }\n  FPS &operator*=(const\
-    \ mint &v) {\n    for (int i = this->size() - 1; i >= 0; i--) (*this)[i] *= v;\n\
-    \    return *this;\n  }\n  FPS &operator/=(const mint &v) {\n    for (int i =\
-    \ this->size() - 1; i >= 0; i--) (*this)[i] /= v;\n    return *this;\n  }\n  FPS\
-    \ &operator+=(const FPS &r) {\n    if (this->size() < r.size()) this->resize(r.size(),\
-    \ 0);\n    for (int i = r.size() - 1; i >= 0; i--) (*this)[i] += r[i];\n    return\
-    \ this->norm();\n  }\n  FPS &operator-=(const FPS &r) {\n    if (this->size()\
-    \ < r.size()) this->resize(r.size(), 0);\n    for (int i = r.size() - 1; i >=\
-    \ 0; i--) (*this)[i] -= r[i];\n    return this->norm();\n  }\n  FPS &operator*=(const\
-    \ FPS &r) { return *this = norm().mul(FPS(r).norm()); }\n  FPS &operator/=(const\
-    \ FPS &r) { return *this = this->quo(r); }\n  FPS &operator%=(const FPS &r) {\
-    \ return *this = this->quorem(r).second; }\n  FPS operator+(const mint &v) const\
-    \ { return FPS(*this) += v; }\n  FPS operator-(const mint &v) const { return FPS(*this)\
-    \ -= v; }\n  FPS operator*(const mint &v) const { return FPS(*this) *= v; }\n\
-    \  FPS operator/(const mint &v) const { return FPS(*this) /= v; }\n  FPS operator+(const\
-    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator-(const FPS &r) const\
-    \ { return FPS(*this) -= r; }\n  FPS operator*(const FPS &r) const { return FPS(*this)\
-    \ *= r; }\n  FPS operator/(const FPS &r) const { return this->quo(r); }\n  FPS\
-    \ operator%(const FPS &r) const { return this->quorem(r).second; }\n};\n#line\
-    \ 5 \"src/Old/extgcd.hpp\"\n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\
-    \u4E92\u9664\u6CD5\n * @category \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n\
-    \ */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mint>\nFormalPowerSeries<mint>\
-    \ extgcd(FormalPowerSeries<mint> a,\n                               FormalPowerSeries<mint>\
-    \ b,\n                               FormalPowerSeries<mint> &x,\n           \
-    \                    FormalPowerSeries<mint> &y) {\n  using poly = FormalPowerSeries<mint>;\n\
-    \  using pv = std::array<poly, 2>;\n  using pm = std::array<pv, 2>;\n  assert(a.deg()\
-    \ >= 0);\n  assert(b.deg() >= 0);\n  auto isI = [](const pm &m) {\n    static\
-    \ constexpr mint ONE(1);\n    return m[0][1].deg() == -1 && m[1][0].deg() == -1\
-    \ && m[0][0].deg() == 0 &&\n           m[0][0][0] == ONE && m[1][1].deg() == 0\
-    \ && m[1][1][0] == ONE;\n  };\n  auto mulv = [&](const pm &lhs, const pv &rhs)\
-    \ {\n    if (isI(lhs)) return rhs;\n    return pv{lhs[0][0] * rhs[0] + lhs[0][1]\
-    \ * rhs[1],\n              lhs[1][0] * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n \
-    \ auto mul = [&](const pm &lhs, const pm &rhs) {\n    if (isI(lhs)) return rhs;\n\
-    \    if (isI(rhs)) return lhs;\n    return pm{pv{lhs[0][0] * rhs[0][0] + lhs[0][1]\
-    \ * rhs[1][0],\n                 lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n\
-    \              pv{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n           \
-    \      lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l =\
-    \ [&](const poly &q, const pm &rhs) {\n    return pm{pv{rhs[1][0], rhs[1][1]},\n\
-    \              pv{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n  };\n\
-    \  auto mulQ_r = [&](const pm &lhs, const poly &q) {\n    return pm{pv{lhs[0][1],\
-    \ lhs[0][0] - lhs[0][1] * q},\n              pv{lhs[1][1], lhs[1][0] - lhs[1][1]\
-    \ * q}};\n  };\n  auto hgcd = [&](auto self, const poly &p0, const poly &p1) ->\
-    \ pm {\n    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) +\
-    \ 1, n = p1.deg();\n    if (n < m) return pm{pv{poly(1, 1), poly()}, pv{poly(),\
-    \ poly(1, 1)}};\n    pm R(self(self, poly(p0.begin() + m, p0.end()),\n       \
-    \       poly(p1.begin() + m, p1.end())));\n    pv ab(mulv(R, pv{p0, p1}));\n \
-    \   if (ab[1].deg() < m) return R;\n    std::pair<poly, poly> qr(ab[0].quorem(ab[1]));\n\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
+    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
+    \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
+    \ {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
+    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
+    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
+    \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
+    struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
+    \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
+    \ D &operator/=(const D &r) { return (D &)*this *= r.inv(); }\n  constexpr D operator+(const\
+    \ D &r) const { return D((D &)*this) += r; }\n  constexpr D operator-(const D\
+    \ &r) const { return D((D &)*this) -= r; }\n  constexpr D operator*(const D &r)\
+    \ const { return D((D &)*this) *= r; }\n  constexpr D operator/(const D &r) const\
+    \ { return D((D &)*this) /= r; }\n  constexpr bool operator!=(const D &r) const\
+    \ { return !((D &)*this == r); }\n  constexpr D pow(u64 k) const {\n    for (D\
+    \ ret(1), b((const D &)*this);; b *= b)\n      if (k & 1 ? ret *= b : 0; !(k >>=\
+    \ 1)) return ret;\n  }\n  constexpr D inv() const { return pow(D::mod - 2); }\n\
+    \  friend ostream &operator<<(ostream &os, const D &r) { return os << r.val();\
+    \ }\n  friend istream &operator>>(istream &is, D &r) {\n    long long v;\n   \
+    \ return is >> v, r = D(v), is;\n  }\n};\ntemplate <class B>\nstruct ModInt_Na\
+    \ : public B, public ModIntImpl<ModInt_Na<B>> {\n  using DUint = conditional_t<is_same_v<typename\
+    \ B::Uint, u64>, u128, u64>;\n  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr\
+    \ ModInt_Na() = default;\n  template <class T, enable_if_t<is_integral_v<T>, nullptr_t>\
+    \ = nullptr>\n  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod)\
+    \ : n % B::mod) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
+    \ = nullptr>\n  constexpr ModInt_Na(T n) : ModInt_Na(n.val()) {}\n#define ASSIGN(m,\
+    \ p) return x m## = B::mod & -((x p## = r.x) >= B::mod), *this\n  constexpr ModInt_Na\
+    \ &operator+=(const ModInt_Na &r) { ASSIGN(-, +); }\n  constexpr ModInt_Na &operator-=(const\
+    \ ModInt_Na &r) { ASSIGN(+, -); }\n#undef ASSIGN\n  constexpr ModInt_Na &operator*=(const\
+    \ ModInt_Na &r) {\n    return x = (DUint)(x)*r.x % B::mod, *this;\n  }\n  constexpr\
+    \ bool operator==(const ModInt_Na &r) const { return x == r.x; }\n  constexpr\
+    \ auto val() const { return x; }\n\n private:\n  typename B::Uint x = 0;\n};\n\
+    template <class B>\nstruct ModInt_Mon : public B, public ModIntImpl<ModInt_Mon<B>>\
+    \ {\n  using Uint = u64;\n  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n\
+    \  constexpr ModInt_Mon() = default;\n  template <class T, enable_if_t<is_integral_v<T>,\
+    \ nullptr_t> = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod\
+    \ - ((-n) % B::mod) : n % B::mod, B::r2)) {}\n  template <class T, enable_if_t<is_modint_v<T>,\
+    \ nullptr_t> = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n\
+    #define ASGN(op, a) return x op## = a, x += (B::mod << 1) & -(x >> 63), *this\n\
+    \  constexpr mod_t &operator+=(const mod_t &r) { ASGN(+, r.x - (B::mod << 1));\
+    \ }\n  constexpr mod_t &operator-=(const mod_t &r) { ASGN(-, r.x); }\n#undef ASGN\n\
+    \  constexpr mod_t &operator*=(const mod_t &r) { return x = mul(x, r.x), *this;\
+    \ }\n  constexpr bool operator==(const mod_t &r) const { return norm() == r.norm();\
+    \ }\n  constexpr u64 val() const {\n    u64 ret = reduce(x) - B::mod;\n    return\
+    \ ret + (B::mod & -(ret >> 63));\n  }\n\n private:\n  static constexpr inline\
+    \ u64 reduce(const u128 &w) {\n    return u64(w >> 64) + B::mod - ((u128(u64(w)\
+    \ * B::iv) * B::mod) >> 64);\n  }\n  static constexpr inline u64 mul(u64 l, u64\
+    \ r) { return reduce(u128(l) * r); }\n  u64 x = 0;\n  constexpr inline u64 norm()\
+    \ const { return x - (B::mod & -(x >= B::mod)); }\n};\nconstexpr u64 mul_inv(u64\
+    \ n, int e = 6, u64 x = 1) {\n  return e ? mul_inv(n, e - 1, x * (2 - x * n))\
+    \ : x;\n}\ntemplate <u64 MOD>\nstruct StaticB_Na : sta_mint_base {\n protected:\n\
+    \  using Uint = conditional_t < MOD<UINT_MAX, uint32_t, u64>;\n  static constexpr\
+    \ Uint mod = MOD;\n};\ntemplate <u64 MOD>\nstruct StaticB_Mon : sta_mint_base\
+    \ {\n protected:\n  static_assert(MOD & 1);\n  static constexpr u64 mod = MOD,\
+    \ iv = mul_inv(mod), r2 = -u128(mod) % mod;\n};\ntemplate <class Int, int id =\
+    \ -1>\nstruct DynamicB_Na : dyn_mint_base {\n  static_assert(is_integral_v<Int>);\n\
+    \  static inline void set_mod(Int m) { mod = m; }\n\n protected:\n  using Uint\
+    \ = make_unsigned_t<Int>;\n  static inline Uint mod;\n};\ntemplate <int id>\n\
+    struct DynamicB_Mon : dyn_mint_base {\n  static inline void set_mod(u64 m) {\n\
+    \    assert(m & 1), iv = mul_inv(mod = m), r2 = -u128(m) % m;\n  }\n\n protected:\n\
+    \  static inline u64 mod, iv, r2;\n};\ntemplate <u64 mod>\nusing StaticModInt\
+    \ =\n    conditional_t<mod &(mod >= UINT_MAX), ModInt_Mon<StaticB_Mon<mod>>,\n\
+    \                  ModInt_Na<StaticB_Na<mod>>>;\nstruct Montgomery {};\ntemplate\
+    \ <class Int, int id = -1>\nusing DynamicModInt =\n    conditional_t<is_same_v<Int,\
+    \ Montgomery>, ModInt_Mon<DynamicB_Mon<id>>,\n                  ModInt_Na<DynamicB_Na<Int,\
+    \ id>>>;\n}  // namespace modint_internal\nusing modint_internal::DynamicModInt,\
+    \ modint_internal::StaticModInt,\n    modint_internal::Montgomery, modint_internal::is_dynamicmodint_v,\n\
+    \    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n#line\
+    \ 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
+    \ \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n//\
+    \ BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
+    \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
+    \ 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24, 35, 59, 56,\
+    \ 49, 18, 29, 11,\n      63, 52, 6,  26, 37, 40, 33, 47, 61, 45, 43, 21, 23, 58,\
+    \ 17, 10,\n      51, 25, 36, 32, 60, 20, 57, 16, 50, 31, 19, 15, 30, 14, 13, 12};\n\
+    \  return convert[(n & ~(n - 1)) * 157587932685088877 >> 58];\n}\nconstexpr std::uint64_t\
+    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
+    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
+    \ n) {\n  const std::uint64_t s = bsf(n - 1), d = n >> s;\n  for (auto a : {args...})\
+    \ {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d,\
+    \ x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1))\
+    \ break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n   \
+    \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
+    \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
+    \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 5 \"src/FFT/NTT.hpp\"\
+    \n\n/**\n * @title Number-Theoretic-Transform\n * @category FFT\n */\n\n// BEGIN\
+    \ CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\nusing u128 =\
+    \ __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform {\n  static\
+    \ inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0, i0 = 0; m >>=\
+    \ 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n; prod *= r2[bsf(++h)],\
+    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          x[i +\
+    \ m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static inline void idft(int\
+    \ n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0\
+    \ = 0)\n      for (mod_t prod = 1, y; i0 < n; prod *= ir2[bsf(++h)], i0 += (m\
+    \ << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i] - x[i\
+    \ + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv = mod_t(1)\
+    \ / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t x[]) {\n  \
+    \  for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] + x[i + 1]);\n\
+    \  }\n  static void odd_dft(int n, mod_t x[]) {\n    mod_t prod = iv2;\n    for\
+    \ (int i = 0, j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i] - x[i + 1]),\
+    \ prod *= ir2[bsf(~((u64)j))];\n  }\n  static void dft_doubling(int n, mod_t x[])\
+    \ {\n    std::copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1), t(rt[bsf(n\
+    \ << 1)]);\n    for (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n    dft(n,\
+    \ x + n);\n  }\n  static constexpr std::uint64_t lim() { return 1ULL << E; }\n\
+    \n protected:\n  static constexpr mod_t pow2th_root(std::uint8_t e) {\n    for\
+    \ (mod_t r = 2;; r += 1)\n      if (auto s = r.pow((mod_t::modulo() - 1) / 2);\
+    \ s != 1 && s * s == 1)\n        return r.pow((mod_t::modulo() - 1) >> e);\n \
+    \   return 0;  // can not find\n  }            // return \u03C9 (primitive 2^e\
+    \ th root)\n  static_assert(mod_t::modulo() & 1);\n  static_assert(is_prime(mod_t::modulo()));\n\
+    \  static constexpr std::uint8_t E = bsf(mod_t::modulo() - 1);\n  static constexpr\
+    \ auto roots(mod_t w) {\n    std::array<mod_t, E + 1> ret = {};\n    for (std::uint8_t\
+    \ e = E; e; e--, w *= w) ret[e] = w;\n    return ret[0] = w, ret;\n  }\n  static\
+    \ constexpr auto ratios(const std::array<mod_t, E + 1> &rt,\n                \
+    \               const std::array<mod_t, E + 1> &irt, int i = 2) {\n    std::array<mod_t,\
+    \ E - 1> ret = {};\n    for (mod_t prod = 1; i <= E; prod *= irt[i++]) ret[i -\
+    \ 2] = rt[i] * prod;\n    return ret;\n  }\n  static constexpr mod_t w = pow2th_root(E),\
+    \ iw = w.pow(lim() - 1);\n  static constexpr mod_t iv2 = mod_t((mod_t::modulo()\
+    \ + 1) / 2);\n  static_assert(w != mod_t(0));\n  static constexpr auto rt = roots(w),\
+    \ irt = roots(iw);\n  static constexpr auto r2 = ratios(rt, irt), ir2 = ratios(irt,\
+    \ rt);\n};\ntemplate <class T, class B>\nstruct NTTArrayImpl : public B {\n  using\
+    \ B::B;\n  static constexpr std::uint8_t type() { return B::type; }\n#define FUNC(op,\
+    \ name, HOGEHOGE, ...)            \\\n  inline void name(__VA_ARGS__) {      \
+    \          \\\n    HOGEHOGE(op, 1);                             \\\n    if constexpr\
+    \ (B::type >= 2) HOGEHOGE(op, 2); \\\n    if constexpr (B::type >= 3) HOGEHOGE(op,\
+    \ 3); \\\n  }\n#define DFT(fft, _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define\
+    \ ZEROS(op, _) std::fill_n(this->dat##_ + b, e - b, B::Z##_)\n#define SET(op,\
+    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SET_SINGLE(op, _) this->dat##_[i]\
+    \ = x;\n#define SUBST(op, _) std::copy(r.dat##_ + b, r.dat##_ + e, this->dat##_\
+    \ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n  FUNC(idft, idft, DFT, int b, int\
+    \ e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n  FUNC(__, set, SET, const T x[],\
+    \ int b, int e)\n  FUNC(__, set, SET_SINGLE, int i, T x)\n  template <class C>\n\
+    \  FUNC(__, subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline\
+    \ void get(T x[], int b, int e) const {\n    if constexpr (B::type == 1)\n   \
+    \   std::copy(this->dat1 + b, this->dat1 + e, x + b);\n    else\n      for (int\
+    \ i = b; i < e; i++) x[i] = get(i);\n  }\n  inline T get(int i) const {\n    if\
+    \ constexpr (B::type == 3) {\n      const T mod1 = B::mint1::modulo(), mod2 =\
+    \ B::mint2::modulo();\n      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i]\
+    \ - r1)).val();\n      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n\
+    \      return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type\
+    \ == 2) {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
+    \      return mod1 * ((this->dat2[i] - r1) * B::iv).val() + r1;\n    } else\n\
+    \      return this->dat1[i];\n  }\n#define ASGN(op, _) \\\n  for (int i = b; i\
+    \ < e; i++) this->dat##_[i] op## = r.dat##_[i]\n#define ASSIGN(fname, op) \\\n\
+    \  template <class C>      \\\n  FUNC(op, fname, ASGN, const NTTArrayImpl<T, C>\
+    \ &r, int b, int e)\n#define BOP(op, _) \\\n  for (int i = b; i < e; i++) this->dat##_[i]\
+    \ = l.dat##_[i] op r.dat##_[i]\n#define OP(fname, op)                        \
+    \       \\\n  template <class C, class D>                       \\\n  FUNC(op,\
+    \ fname, BOP, const NTTArrayImpl<T, C> &l, \\\n       const NTTArrayImpl<T, D>\
+    \ &r, int b, int e)\n  OP(add, +) OP(dif, -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif,\
+    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SET_SINGLE\n\
+    #undef SUBST\n#undef ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n\
+    };\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1\
+    \ = NumberTheoreticTransform<T>;\n  static_assert(_Nm <= ntt1::lim());\n  static\
+    \ constexpr T Z1 = 0;\n  static constexpr std::uint8_t type = 1;\n};\ntemplate\
+    \ <class T, std::size_t _Nm, bool is_heap>\nstruct NTTArrayB_Single : protected\
+    \ NTTArrayB_SingleB<T, _Nm> {\n  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t\
+    \ _Nm>\nstruct NTTArrayB_Single<T, _Nm, true> : protected NTTArrayB_SingleB<T,\
+    \ _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data()) {}\n  void resize(int n) {\n\
+    \    buf1.resize(n, NTTArrayB_Single::Z1), dat1 = buf1.data();\n  }\n  std::size_t\
+    \ size() const { return buf1.size(); }\n  std::vector<T> buf1;\n  T *dat1;\n};\n\
+    #define NTTARRAYB_MULTI(iv, t)                                    \\\n  using\
+    \ mint1 = StaticModInt<MOD1>;                               \\\n  using mint2\
+    \ = StaticModInt<MOD2>;                               \\\n  using ntt1 = NumberTheoreticTransform<mint1>;\
+    \                   \\\n  using ntt2 = NumberTheoreticTransform<mint2>;      \
+    \             \\\n  static_assert(_Nm <= (1 << 25));                         \
+    \       \\\n  static constexpr mint1 Z1 = 0;                                 \
+    \ \\\n  static constexpr mint2 iv = mint2(1) / mint1::modulo(), Z2 = 0; \\\n \
+    \ static constexpr std::uint8_t type = t;\ntemplate <std::size_t _Nm, u64 MOD1,\
+    \ u64 MOD2>\nstruct NTTArrayB_DoubleB {\n  NTTARRAYB_MULTI(iv, 2);\n};\ntemplate\
+    \ <std::size_t _Nm, u64 MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_TripleB {\n\
+    \  NTTARRAYB_MULTI(iv21, 3);\n  using mint3 = StaticModInt<MOD3>;\n  using ntt3\
+    \ = NumberTheoreticTransform<mint3>;\n  static constexpr mint3 iv32 = mint3(1)\
+    \ / mint2::modulo(),\n                         iv31 = iv32 / mint1::modulo(),\
+    \ Z3 = 0;\n};\n#undef NTTARRAYB_MULTI\ntemplate <std::size_t _Nm, u64 MOD1, u64\
+    \ MOD2, bool is_heap>\nstruct NTTArrayB_Double : protected NTTArrayB_DoubleB<_Nm,\
+    \ MOD1, MOD2> {\n  typename NTTArrayB_DoubleB<_Nm, MOD1, MOD2>::mint1 dat1[_Nm]\
+    \ = {};\n  typename NTTArrayB_DoubleB<_Nm, MOD1, MOD2>::mint2 dat2[_Nm] = {};\n\
+    };\ntemplate <std::size_t _Nm, u64 MOD1, u64 MOD2>\nstruct NTTArrayB_Double<_Nm,\
+    \ MOD1, MOD2, true>\n    : protected NTTArrayB_DoubleB<_Nm, MOD1, MOD2> {\n  NTTArrayB_Double()\
+    \ : dat1(buf1.data()), dat2(buf2.data()) {}\n  void resize(int n) {\n    buf1.resize(n,\
+    \ NTTArrayB_DoubleB<_Nm, MOD1, MOD2>::Z1), dat1 = buf1.data();\n    buf2.resize(n,\
+    \ NTTArrayB_DoubleB<_Nm, MOD1, MOD2>::Z2), dat2 = buf2.data();\n  }\n  std::size_t\
+    \ size() const { return buf1.size(); }\n  std::vector<typename NTTArrayB_DoubleB<_Nm,\
+    \ MOD1, MOD2>::mint1> buf1;\n  std::vector<typename NTTArrayB_DoubleB<_Nm, MOD1,\
+    \ MOD2>::mint2> buf2;\n  typename NTTArrayB_DoubleB<_Nm, MOD1, MOD2>::mint1 *dat1;\n\
+    \  typename NTTArrayB_DoubleB<_Nm, MOD1, MOD2>::mint2 *dat2;\n};\ntemplate <std::size_t\
+    \ _Nm, u64 MOD1, u64 MOD2, u64 MOD3, bool is_heap>\nstruct NTTArrayB_Triple :\
+    \ protected NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3> {\n  typename NTTArrayB_TripleB<_Nm,\
+    \ MOD1, MOD2, MOD3>::mint1 dat1[_Nm] = {};\n  typename NTTArrayB_TripleB<_Nm,\
+    \ MOD1, MOD2, MOD3>::mint2 dat2[_Nm] = {};\n  typename NTTArrayB_TripleB<_Nm,\
+    \ MOD1, MOD2, MOD3>::mint3 dat3[_Nm] = {};\n};\ntemplate <std::size_t _Nm, u64\
+    \ MOD1, u64 MOD2, u64 MOD3>\nstruct NTTArrayB_Triple<_Nm, MOD1, MOD2, MOD3, true>\n\
+    \    : protected NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3> {\n  NTTArrayB_Triple()\n\
+    \      : dat1(buf1.data()), dat2(buf2.data()), dat3(buf3.data()) {}\n  void resize(int\
+    \ n) {\n    buf1.resize(n, NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::Z1);\n  \
+    \  buf2.resize(n, NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::Z2);\n    buf3.resize(n,\
+    \ NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::Z3);\n    dat1 = buf1.data(), dat2\
+    \ = buf2.data(), dat3 = buf3.data();\n  }\n  std::size_t size() const { return\
+    \ buf1.size(); }\n  std::vector<typename NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::mint1>\
+    \ buf1;\n  std::vector<typename NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::mint2>\
+    \ buf2;\n  std::vector<typename NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::mint3>\
+    \ buf3;\n  typename NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::mint1 *dat1;\n \
+    \ typename NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::mint2 *dat2;\n  typename\
+    \ NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::mint3 *dat3;\n};\ntemplate <class\
+    \ T, std::size_t _Nm>\nconstexpr bool is_nttfriend() {\n  if constexpr (!is_staticmodint_v<T>)\n\
+    \    return false;\n  else\n    return (T::modulo() & is_prime(T::modulo())) &&\n\
+    \           _Nm <= (1ULL << bsf(T::modulo() - 1));\n}\nconstexpr std::uint32_t\
+    \ MOD32 = 0x7e000001;\nconstexpr u64 MOD64_1 = 0x3ffffffffa000001, MOD64_2 = 0x3fffffffea000001,\n\
+    \              MOD64_3 = 0x3fffffffcc000001;\nconstexpr bool threshold(u64 val,\
+    \ u64 s, u64 m) {\n  return u128(val) * val <= u128(MOD64_1) * m / s;\n}\ntemplate\
+    \ <class T>\nconstexpr u64 max_value() {\n  if constexpr (is_dynamicmodint_v<T>)\n\
+    \    return std::numeric_limits<typename T::Uint>::max();\n  else if constexpr\
+    \ (is_staticmodint_v<T>)\n    return T::modulo();\n  else\n    return std::numeric_limits<T>::max();\n\
+    }\ntemplate <class T, std::size_t _Nm>\nconstexpr bool is_nttarraydouble = threshold(max_value<T>(),\
+    \ _Nm, MOD32);\ntemplate <class T, std::size_t _Nm, bool is_heap>\nusing NTTArrayB_Multi\
+    \ =\n    std::conditional_t<is_nttarraydouble<T, _Nm>,\n                     \
+    \  NTTArrayB_Double<_Nm, MOD64_1, MOD32, is_heap>,\n                       NTTArrayB_Triple<_Nm,\
+    \ MOD64_1, MOD64_2, MOD32, is_heap>>;\ntemplate <class T, std::size_t _Nm, bool\
+    \ is_heap>\nusing NTTArrayB = std::conditional_t<is_nttfriend<T, _Nm>(),\n   \
+    \                                  NTTArrayB_Single<T, _Nm, is_heap>,\n      \
+    \                               NTTArrayB_Multi<T, _Nm, is_heap>>;\ntemplate <class\
+    \ T, std::size_t _Nm, bool is_heap = false>\nusing NTTArray = NTTArrayImpl<T,\
+    \ NTTArrayB<T, _Nm, is_heap>>;\n}  // namespace ntt_internal\nusing ntt_internal::is_nttarraydouble,\
+    \ ntt_internal::is_nttfriend,\n    ntt_internal::NumberTheoreticTransform, ntt_internal::NTTArray;\n\
+    template <class T, std::size_t _Nm>\nconstexpr int nttarray_type = NTTArray<T,\
+    \ _Nm>::type();\ntemplate <class T, std::size_t _Nm, int id = 0>\nstruct GlobalNTTArray\
+    \ {\n  static inline NTTArray<T, _Nm, false> bf;\n};\ntemplate <class T, std::size_t\
+    \ _Nm, std::size_t _Nm2, int id = 0>\nstruct GlobalNTTArray2D {\n  static inline\
+    \ NTTArray<T, _Nm, false> bf[_Nm2];\n};\ntemplate <class T, std::size_t _Nm, int\
+    \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
+    \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
+    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/fps_inv.hpp\"\n\n/**\n\
+    \ * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv\n * @category FFT\n */\n\n\
+    // BEGIN CUT HERE\ntemplate <class mod_t, std::size_t LIM>\nmod_t get_inv(int\
+    \ n) {\n  static mod_t dat[LIM] = {0, 1};\n  static int l = 2;\n  for (auto m\
+    \ = mod_t::modulo(); l <= n;) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
+    }\ntemplate <std::size_t _Nm, class mod_t>\nvoid inv_base(const mod_t p[], int\
+    \ n, mod_t r[], int i = 1) {\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
+    \  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr int TH = 64\
+    \ << (!is_nttfriend<mod_t, _Nm>() << 1);\n  if (n <= i) return;\n  assert(((n\
+    \ & -n) == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n, TH);\n\
+    \  const mod_t Z = 0, miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n    for\
+    \ (r[j = i] = Z; j--;) r[i] += r[j] * p[i - j];\n  for (int e = i << 1; i < n;\
+    \ e = i << 1) {\n    GNA1::bf.set(r, 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0,\
+    \ e);\n    GNA2::bf.set(p, 0, e), GNA2::bf.dft(0, e);\n    GNA2::bf.mul(GNA1::bf,\
+    \ 0, e), GNA2::bf.idft(0, e);\n    if constexpr (!is_nttfriend<mod_t, _Nm>())\n\
+    \      GNA2::bf.get(r, i, e), GNA2::bf.set(r, i, e);\n    GNA2::bf.zeros(0, i),\
+    \ GNA2::bf.dft(0, e), GNA1::bf.mul(GNA2::bf, 0, e);\n    for (GNA1::bf.idft(0,\
+    \ e), GNA1::bf.get(r, i, e); i < e; i++) r[i] = -r[i];\n  }\n}\ntemplate <class\
+    \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> inv(const std::vector<mod_t>\
+    \ &p) {\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  static constexpr std::size_t _Nm2 = _Nm * 2 / 15;\n  using GNA1\
+    \ = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2,\
+    \ 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH2 = is_nttfriend<mod_t,\
+    \ _Nm2>()\n                                 ? 115\n                          \
+    \       : (is_nttarraydouble<mod_t, _Nm2> ? 384 : 452);\n  static constexpr int\
+    \ C = nttarray_type<mod_t, _Nm> << 1, lnR = 4;\n  static constexpr int TH3 = 5\
+    \ + ((nttarray_type<mod_t, _Nm> == 3) << 1);\n  static constexpr int D = 10 *\
+    \ nttarray_type<mod_t, _Nm>;\n  const int n = p.size();\n  assert(n > 0), assert(p[0]\
+    \ != mod_t(0));\n  std::copy(p.begin(), p.end(), GAp::bf);\n  mod_t *bfk = GAr::bf,\
+    \ *pbfk = GAp::bf;\n  const mod_t Z = 0, miv = -(bfk[0] = mod_t(1) / pbfk[0]);\n\
+    \  if (n < TH2) {\n    for (int j, i = 1; i < n; bfk[i++] *= miv)\n      for (bfk[j\
+    \ = i] = Z; j--;) bfk[i] += bfk[j] * pbfk[i - j];\n    return std::vector<mod_t>(bfk,\
+    \ bfk + n);\n  }\n  const int bl = std::max(bsf(get_len(n)) - lnR, TH3);\n  int\
+    \ l = ((n >> bl) + ((((1 << bl) - 1) & n) > (C * bl + D))) << bl;\n  const int\
+    \ m = l & -l, m2 = m << 1, ed = (l + m - 1) / m;\n  if (inv_base<_Nm2>(pbfk, m,\
+    \ bfk); 1 < ed)\n    GNA2D2::bf[0].set(pbfk, 0, m), GNA2D2::bf[0].zeros(m, m2),\n\
+    \        GNA2D2::bf[0].dft(0, m2);\n  for (int k = 1, mm = m; k < ed; mm = std::min(m,\
+    \ n - m * ++k)) {\n    GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m,\
+    \ m2);\n    GNA2D1::bf[k - 1].dft(0, m2), GNA1::bf.set(pbfk += m, 0, m);\n   \
+    \ GNA1::bf.zeros(m, m2);\n    GNA1::bf.dft(0, m2), GNA2D2::bf[k].add(GNA1::bf,\
+    \ GNA2D2::bf[0], 0, m);\n    GNA2D2::bf[k].dif(GNA1::bf, GNA2D2::bf[0], m, m2),\
+    \ GNA2::bf.zeros(0, m2);\n    if (k + 1 < ed) GNA2D2::bf[0].subst(GNA1::bf, 0,\
+    \ m2);\n    for (int j = k; j--;)\n      GNA1::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k\
+    \ - j], 0, m2),\n          GNA2::bf.add(GNA1::bf, 0, m2);\n    GNA2::bf.idft(0,\
+    \ m2), GNA2::bf.zeros(m, m2), bfk += m;\n    if constexpr (!is_nttfriend<mod_t,\
+    \ _Nm2>())\n      GNA2::bf.get(bfk, 0, m), GNA2::bf.set(bfk, 0, m);\n    GNA2::bf.dft(0,\
+    \ m2);\n    GNA2::bf.mul(GNA2D1::bf[0], 0, m2), GNA2::bf.idft(0, m2);\n    for\
+    \ (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm] = -bfk[mm];\n  }\n  if (l < n)\n \
+    \   for (int j; l < n; GAr::bf[l++] *= miv)\n      for (GAr::bf[j = l] = Z; j--;)\
+    \ GAr::bf[l] += GAr::bf[j] * GAp::bf[l - j];\n  return std::vector<mod_t>(GAr::bf,\
+    \ GAr::bf + n);\n}\n#line 4 \"src/FFT/fps_div.hpp\"\n\n/**\n * @title \u5F62\u5F0F\
+    \u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate\
+    \ <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> div(const std::vector<mod_t>\
+    \ &p,\n                       const std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t,\
+    \ _Nm, 0>;\n  using GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t\
+    \ _Nm2 = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using\
+    \ GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t,\
+    \ _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH = 128 <<\
+    \ (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int TH2 = 1024 << (!is_nttfriend<mod_t,\
+    \ _Nm2>());\n  static constexpr int A = is_nttfriend<mod_t, _Nm2>()      ? 7\n\
+    \                           : is_nttarraydouble<mod_t, _Nm2> ? 17\n          \
+    \                                                  : 18;\n  static constexpr int\
+    \ B = is_nttfriend<mod_t, _Nm2>()      ? 29\n                           : is_nttarraydouble<mod_t,\
+    \ _Nm2> ? 85\n                                                            : 129;\n\
+    \  const int n = p.size(), len = get_len(n), R = len < TH2 ? 8 : 16;\n  const\
+    \ int l = q.size(), lnR = bsf(R);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
+    \  std::copy(q.begin(), q.end(), GAq::bf);\n  const mod_t iv0 = mod_t(1) / GAq::bf[0];\n\
+    \  if (l < A * bsf(len) + B || TH >= n) {\n    for (int i = 0; i < n; GAp::bf[i++]\
+    \ *= iv0)\n      for (int j = std::min(i + 1, l); --j;)\n        GAp::bf[i] -=\
+    \ GAp::bf[i - j] * GAq::bf[j];\n    return std::vector<mod_t>(GAp::bf, GAp::bf\
+    \ + n);\n  }\n  int m = len, i = 0;\n  while (m > TH) m >>= lnR;\n  for (std::copy_n(GAp::bf,\
+    \ m, GAr::bf); i < m; GAr::bf[i++] *= iv0)\n    for (int j = std::min(i + 1, l);\
+    \ --j;)\n      GAr::bf[i] -= GAr::bf[i - j] * GAq::bf[j];\n  if (l < n) std::fill(GAq::bf\
+    \ + l, GAq::bf + n, mod_t(0));\n  for (GA::bf[0] = iv0, i = 1; m < n; i = m, m\
+    \ <<= lnR) {\n    int m2 = m << 1, ed = std::min(R, (n + m - 1) / m), k = 1, j,\
+    \ mm = m;\n    inv_base<_Nm2>(GAq::bf, m, GA::bf, i);\n    GNA1::bf.set(GA::bf,\
+    \ 0, m), GNA1::bf.zeros(m, m2), GNA1::bf.dft(0, m2);\n    mod_t *bfk = GAr::bf,\
+    \ *qbfk = GAq::bf, *pbfk = GAp::bf;\n    GNA2D2::bf[0].set(qbfk, 0, m), GNA2D2::bf[0].zeros(m,\
+    \ m2);\n    for (GNA2D2::bf[0].dft(0, m2); k < ed; mm = std::min(m, n - m * ++k))\
+    \ {\n      GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m, m2);\n\
+    \      GNA2D1::bf[k - 1].dft(0, m2);\n      GNA3::bf.set(qbfk += m, 0, m), GNA3::bf.zeros(m,\
+    \ m2), GNA3::bf.dft(0, m2);\n      GNA2D2::bf[k].add(GNA3::bf, GNA2D2::bf[0],\
+    \ 0, m);\n      GNA2D2::bf[k].dif(GNA3::bf, GNA2D2::bf[0], m, m2), GNA2::bf.zeros(0,\
+    \ m2);\n      if (k + 1 < ed) GNA2D2::bf[0].subst(GNA3::bf, 0, m2);\n      for\
+    \ (j = k; j--;)\n        GNA3::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k - j], 0, m2),\n\
+    \            GNA2::bf.add(GNA3::bf, 0, m2);\n      GNA2::bf.idft(0, m2), GNA2::bf.zeros(m,\
+    \ m2), pbfk += m;\n      for (GNA2::bf.get(bfk += m, 0, mm), j = mm; j--;) bfk[j]\
+    \ -= pbfk[j];\n      GNA2::bf.set(bfk, 0, mm);\n      GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf,\
+    \ 0, m2), GNA2::bf.idft(0, m2);\n      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]\
+    \ = -bfk[mm];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n\
+    }\n#line 4 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\
+    \n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t> &p,\n \
+    \                           const std::vector<mod_t> &q) {\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 0>;\n  using GAp = GlobalArray<mod_t,\
+    \ _Nm, 1>;\n  using GAq = GlobalArray<mod_t, _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \ _Nm, 2>;\n  static constexpr int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n\
+    \  const int n = p.size(), m = q.size(), r_len = n + m - 1;\n  if (std::min(n,\
+    \ m) < TH) {\n    std::fill_n(GAr::bf, r_len, mod_t(0));\n    std::copy(p.begin(),\
+    \ p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(), GAq::bf);\n    for (int\
+    \ i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i + j] += GAp::bf[i] * GAq::bf[j];\n\
+    \  } else {\n    const int l = get_len(std::max(n, m)),\n              bl = bsf(l)\
+    \ + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const int len = r_len - l < bl * bl\
+    \ * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
+    \ len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf,\
+    \ 0, len);\n    else\n      GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len),\n\
+    \          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n    GNA1::bf.idft(0,\
+    \ len), GNA1::bf.get(GAr::bf, 0, std::min(r_len, len));\n    if (len < r_len)\
+    \ {\n      std::copy(p.begin() + len - m + 1, p.end(), GAp::bf + len - m + 1);\n\
+    \      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf + len - n + 1);\n \
+    \     for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i], i++)\n \
+    \       for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
+    \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
+    \ GAr::bf + r_len);\n}\n#line 5 \"src/FFT/Polynomial.hpp\"\n\n/**\n * @title \u591A\
+    \u9805\u5F0F\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
+    \ std::size_t _Nm = 1 << 22>\nclass Polynomial : public std::vector<mod_t> {\n\
+    \  using Poly = Polynomial;\n  struct Inde;\n  struct XP_plus_C {  // x^p+c\n\
+    \    Inde x;\n    mod_t c;\n    XP_plus_C(const Inde &x_) : x(x_), c(Z) {}\n \
+    \   XP_plus_C(int p_, mod_t c_) : x(p_), c(c_) {}\n  };\n  struct Inde {  // indeterminate\n\
+    \    int p_;\n    Inde(int p) : p_(p) {}\n    Inde() : Inde(1) {}\n    Inde operator^(int\
+    \ p) const { return Inde(p_ * p); }\n    Inde operator*(const Inde &rhs) const\
+    \ { return Inde(p_ + rhs.p_); }\n    int pow() const { return p_; }\n    XP_plus_C\
+    \ operator+(mod_t c) { return XP_plus_C(p_, c); }\n    XP_plus_C operator-(mod_t\
+    \ c) { return XP_plus_C(p_, -c); }\n  };\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
+    \ _Nm, 0>;\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  using GA3 = GlobalArray<mod_t, _Nm, 3>;\n  static inline const mod_t\
+    \ Z = 0;\n  static constexpr int A = is_nttfriend<mod_t, _Nm>()      ? 8\n   \
+    \                        : is_nttarraydouble<mod_t, _Nm> ? 17\n              \
+    \                                             : 20;\n  static constexpr int B\
+    \ = is_nttfriend<mod_t, _Nm>()      ? 42\n                           : is_nttarraydouble<mod_t,\
+    \ _Nm> ? 110\n                                                           : 138;\n\
+    \  std::pair<Poly, Poly> quorem_na(const Poly &q) const {\n    int n = deg(),\
+    \ m = q.deg(), qsz = n - m + 1, i = qsz, j;\n    std::copy_n(this->begin(), n\
+    \ + 1, GAp::bf);\n    std::copy_n(q.begin(), m + 1, GAq::bf);\n    for (mod_t\
+    \ *bf = GAp::bf + n - m, iv = mod_t(1) / GAq::bf[m]; i--; bf--)\n      for (GA::bf[i]\
+    \ = bf[j = m] * iv; j--;) bf[j] -= GAq::bf[j] * GA::bf[i];\n    Poly rem(GAp::bf,\
+    \ GAp::bf + m);\n    return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n  }\n\
+    \  Poly quo(const Poly &q) const {\n    const int n = deg() + 1, m = q.deg() +\
+    \ 1, qsz = n - m + 1,\n              nb = this->size() - n, mb = q.size() - m;\n\
+    \    auto ret = div<mod_t, _Nm>(\n        Poly(this->rbegin() + nb, this->rbegin()\
+    \ + nb + qsz),\n        Poly(q.rbegin() + mb, q.rbegin() + mb + std::min(qsz,\
+    \ m)));\n    return std::reverse(ret.begin(), ret.end()), ret;\n  }\n  std::pair<Poly,\
+    \ Poly> quorem_ntt(const Poly &q) const {\n    const int n = deg(), m = q.deg(),\
+    \ qsz = n - m + 1;\n    auto qu = quo(q);\n    std::copy(qu.begin(), qu.end(),\
+    \ GA::bf);\n    std::copy_n(this->begin(), n + 1, GAp::bf);\n    std::copy_n(q.begin(),\
+    \ m + 1, GAq::bf);\n    const int len = get_len(m), mask = len - 1;\n    if (len\
+    \ > qsz) std::fill_n(GA::bf + qsz, len - qsz, Z);\n    if (len > m + 1) std::fill_n(GAq::bf\
+    \ + m + 1, len - m - 1, Z);\n    for (int i = qsz; i-- > len;) GA::bf[i & mask]\
+    \ += GA::bf[i];\n    for (int i = n; i >= len; i--) GAp::bf[i & mask] += GAp::bf[i];\n\
+    \    if (GNA1::bf.set(GA::bf, 0, len); m == len) GAq::bf[0] += GAq::bf[m];\n \
+    \   GNA2::bf.set(GAq::bf, 0, len), GNA1::bf.dft(0, len), GNA2::bf.dft(0, len);\n\
+    \    GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0, len);\n    GNA1::bf.get(GAq::bf,\
+    \ 0, m);\n    for (int i = m; i--;) GAp::bf[i] -= GAq::bf[i];\n    Poly rem(GAp::bf,\
+    \ GAp::bf + m);\n    return std::make_pair(qu, rem.shrink());\n  }\n\n public:\n\
+    \  using std::vector<mod_t>::vector;\n  Polynomial(const std::vector<mod_t> &p)\
+    \ : Polynomial(p.begin(), p.end()) {}\n  Polynomial(const XP_plus_C &xpc) : Polynomial(xpc.x.pow()\
+    \ + 1) {\n    (*this)[xpc.x.pow()] = 1, (*this)[0] = xpc.c;\n  }\n  static Inde\
+    \ x() { return Inde(); }\n  inline int deg() const {\n    for (int n = this->size()\
+    \ - 1;; n--)\n      if (n < 0 || (*this)[n] != Z) return n;\n  }\n  inline Poly\
+    \ &shrink() { return this->resize(std::max(deg() + 1, 1)), *this; }\n#define ASSIGN(op)\
+    \                                \\\n  Poly &operator op##=(const Poly &r) { \
+    \          \\\n    const int n = r.deg() + 1;                    \\\n    if (this->size()\
+    \ < n) this->resize(n);        \\\n    for (int i = n; i--;) (*this)[i] op## =\
+    \ r[i]; \\\n    return shrink();                              \\\n  }\n  ASSIGN(+)\n\
+    \  ASSIGN(-)\n#undef ASSIGN\n  Poly &operator*=(const Poly &r) { return *this\
+    \ = *this * r, *this; }\n  Poly &operator/=(const Poly &r) { return *this = *this\
+    \ / r, *this; }\n  Poly &operator%=(const Poly &r) { return *this = *this % r,\
+    \ *this; }\n  Poly operator-() const { return Poly() -= *this; }\n  Poly operator+(const\
+    \ Poly &r) const { return Poly(*this) += r; }\n  Poly operator-(const Poly &r)\
+    \ const { return Poly(*this) -= r; }\n  Poly operator*(const Poly &r) const {\
+    \ return convolve<mod_t, _Nm>(*this, r); }\n  Poly operator/(const Poly &r) const\
+    \ {\n    const int m = r.deg(), qsz = deg() - m + 1, ln = bsf(get_len(qsz));\n\
+    \    assert(m >= 0);\n    if (qsz <= 0) return Poly{Z};\n    return m + 3 < A\
+    \ * ln + B || qsz <= 64 ? quorem_na(r).first : quo(r);\n  }\n  std::pair<Poly,\
+    \ Poly> quorem(const Poly &r) const {\n    const int n = deg(), m = r.deg(), qsz\
+    \ = n - m + 1, ln = bsf(get_len(qsz));\n    assert(m >= 0);\n    if (qsz <= 0)\
+    \ return {Poly{Z}, Poly(this->begin(), this->begin() + n + 1)};\n    return m\
+    \ < A * ln + B || qsz <= 64 ? quorem_na(r) : quorem_ntt(r);\n  }\n  Poly operator%(const\
+    \ Poly &r) const { return quorem(r).second; }\n  Poly &operator+=(const mod_t\
+    \ r) { return *this[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
+    \ *this[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
+    \ &c : *this) c *= r;\n    return shrink();\n  }\n  Poly &operator/=(const mod_t\
+    \ r) {\n    for (mod_t &c : *this) c /= r;\n    return shrink();\n  }\n  Poly\
+    \ operator+(const mod_t r) { return Poly(*this) += r; }\n  Poly operator-(const\
+    \ mod_t r) { return Poly(*this) -= r; }\n  Poly operator*(const mod_t r) { return\
+    \ Poly(*this) *= r; }\n  Poly operator/(const mod_t r) { return Poly(*this) /=\
+    \ r; }\n  friend Poly operator+(const mod_t l, Poly r) { return r += l; }\n  friend\
+    \ Poly operator-(const mod_t l, Poly r) { return -(r -= l); }\n  friend Poly operator*(const\
+    \ mod_t l, Poly r) { return r *= l; }\n  mod_t operator()(mod_t c) const {  //\
+    \ eval f(c)\n    if (c == Z) return (*this)[0];\n    mod_t ret = 0;\n    for (int\
+    \ i = deg() + 1; i--;) ret *= c, ret += (*this)[i];\n    return ret;\n  }\n  Poly\
+    \ operator()(const XP_plus_C &xpc) const {  // f(x^p+c)\n    return taylor_shift(xpc.c).scale(xpc.x.pow());\n\
+    \  }\n  Poly operator()(const Poly &q) const {  // f(g) mod x^n\n    const std::size_t\
+    \ n = this->deg() + 1, k = std::ceil(std::sqrt(n));\n    std::vector<Poly> pw1(k\
+    \ + 1), pw2(k + 1);\n    if (pw1[0] = {1}, pw1[1] = q; q.size() > n) pw1[1].resize(n);\n\
+    \    for (int i = 2; i <= k; ++i)\n      if (pw1[i] = pw1[i - 1] * pw1[1]; pw1[i].size()\
+    \ > n) pw1[i].resize(n);\n    pw2[0] = {1}, pw2[1] = pw1[k];\n    for (int i =\
+    \ 2; i <= k; ++i)\n      if (pw2[i] = pw2[i - 1] * pw2[1]; pw2[i].size() > n)\
+    \ pw2[i].resize(n);\n    Poly ret(n, Z), f;\n    for (int i = 0, j; i <= k; ++i)\
+    \ {\n      for (f.assign(n, Z), j = std::min(k, std::max(0, n - k * i)); j--;)\
+    \ {\n        mod_t coef = (*this)[k * i + j];\n        for (int d = pw1[j].size();\
+    \ d--;) f[d] += pw1[j][d] * coef;\n      }\n      for (f *= pw2[i], j = std::min(n,\
+    \ f.size()); j--;) ret[j] += f[j];\n    }\n    return ret;\n  }\n  Poly &operator*=(const\
+    \ XP_plus_C &xpc) {\n    Poly q;\n    if (xpc.c != Z) q = *this * xpc.c;\n   \
+    \ return this->insert(this->begin(), xpc.x.pow(), Z), *this += q;\n  }\n  Poly\
+    \ operator*(const XP_plus_C &xpc) const { return Poly(*this) *= xpc; }\n  friend\
+    \ Poly operator*(const XP_plus_C &xpc, const Poly &p) { return p * xpc; }\n  Poly\
+    \ scale(int k) const {\n    const int n = deg();\n    Poly ret(n * k + 1, Z);\n\
+    \    for (int i = 0; i <= n; i++) ret[i * k] += (*this)[i];\n    return ret;\n\
+    \  }\n  Poly taylor_shift(mod_t c) const {\n    int n = deg(), i = 0;\n    if\
+    \ (n < 1 || c == Z) return Poly(*this);\n    mod_t cpw = 1, fact = 1;\n    for\
+    \ (; i <= n; fact *= ++i) GAp::bf[n - i] = (*this)[i] * fact;\n    for (fact =\
+    \ mod_t(1) / fact; i--;) GA3::bf[i] = (fact *= i + 1);\n    for (; ++i <= n;)\
+    \ GAq::bf[i] = cpw * GA3::bf[i], cpw *= c;\n    auto ret = Poly(GAp::bf, GAp::bf\
+    \ + n + 1) * Poly(GAq::bf, GAq::bf + n + 1);\n    for (ret.resize(n + 1), std::reverse(ret.begin(),\
+    \ ret.end()); i--;)\n      ret[i] *= GA3::bf[i];\n    return ret;\n  }\n  friend\
+    \ std::ostream &operator<<(std::ostream &os, const Poly &p) {\n    if (p.deg()\
+    \ == -1) return os << 0;\n    for (int i = 0, e = p.deg(); i <= e; i++) {\n  \
+    \    if (p[i] == Z) continue;\n      if (i == 0 || p[i] != mod_t(1)) os << p[i];\n\
+    \      if (i >= 1) os << 'x';\n      if (i > 9)\n        os << \"^(\" << i <<\
+    \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
+    \ os << \" + \";\n    }\n    return os;\n  }\n};\n#line 4 \"src/FFT/extgcd.hpp\"\
+    \n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
+    \ \u6570\u5B66\n *  O(Nlog^2N)\n * @see https://loj.ac/article/2773\n */\n\n//\
+    \ BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\ntemplate <class mod_t, std::size_t\
+    \ _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t, _Nm> a,\n            \
+    \                  Polynomial<mod_t, _Nm> b,\n                              Polynomial<mod_t,\
+    \ _Nm> &x,\n                              Polynomial<mod_t, _Nm> &y) {\n  using\
+    \ Poly = Polynomial<mod_t, _Nm>;\n  using PVec = std::array<Poly, 2>;\n  using\
+    \ PMat = std::array<PVec, 2>;\n  assert(a.deg() >= 0);\n  assert(b.deg() >= 0);\n\
+    \  auto isI = [](const PMat &m) {\n    static constexpr mod_t ONE(1);\n    return\
+    \ m[0][1].deg() == -1 && m[1][0].deg() == -1 && m[0][0].deg() == 0 &&\n      \
+    \     m[0][0][0] == ONE && m[1][1].deg() == 0 && m[1][1][0] == ONE;\n  };\n  auto\
+    \ mulv = [&](const PMat &lhs, const PVec &rhs) {\n    if (isI(lhs)) return rhs;\n\
+    \    return PVec{lhs[0][0] * rhs[0] + lhs[0][1] * rhs[1],\n                lhs[1][0]\
+    \ * rhs[0] + lhs[1][1] * rhs[1]};\n  };\n  auto mul = [&](const PMat &lhs, const\
+    \ PMat &rhs) {\n    if (isI(lhs)) return rhs;\n    if (isI(rhs)) return lhs;\n\
+    \    return PMat{PVec{lhs[0][0] * rhs[0][0] + lhs[0][1] * rhs[1][0],\n       \
+    \              lhs[0][0] * rhs[0][1] + lhs[0][1] * rhs[1][1]},\n             \
+    \   PVec{lhs[1][0] * rhs[0][0] + lhs[1][1] * rhs[1][0],\n                    \
+    \ lhs[1][0] * rhs[0][1] + lhs[1][1] * rhs[1][1]}};\n  };\n  auto mulQ_l = [&](const\
+    \ Poly &q, const PMat &rhs) {\n    return PMat{PVec{rhs[1][0], rhs[1][1]},\n \
+    \               PVec{rhs[0][0] - q * rhs[1][0], rhs[0][1] - q * rhs[1][1]}};\n\
+    \  };\n  auto hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PMat {\n\
+    \    assert(p0.deg() > p1.deg());\n    int m = ((p0.deg() - 1) >> 1) + 1, n =\
+    \ p1.deg();\n    if (n < m) return PMat{PVec{Poly(1, 1), Poly()}, PVec{Poly(),\
+    \ Poly(1, 1)}};\n    PMat R(self(self, Poly(p0.begin() + m, p0.end()),\n     \
+    \           Poly(p1.begin() + m, p1.end())));\n    PVec ab(mulv(R, PVec{p0, p1}));\n\
+    \    if (ab[1].deg() < m) return R;\n    std::pair<Poly, Poly> qr(ab[0].quorem(ab[1]));\n\
     \    int k = 2 * m - ab[1].deg();\n    if ((int)qr.second.size() <= k) return\
-    \ mulQ_l(qr.first, R);\n    return mul(self(self, poly(ab[1].begin() + k, ab[1].end()),\n\
-    \                    poly(qr.second.begin() + k, qr.second.end())),\n        \
-    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](auto self, const poly\
-    \ &p0, const poly &p1) -> pm {\n    assert(p0.deg() > p1.deg());\n    pm M(hgcd(hgcd,\
-    \ p0, p1));\n    pv p2p3(mulv(M, pv{p0, p1}));\n    if (p2p3[1].deg() == -1) return\
-    \ M;\n    std::pair<poly, poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
+    \ mulQ_l(qr.first, R);\n    return mul(self(self, Poly(ab[1].begin() + k, ab[1].end()),\n\
+    \                    Poly(qr.second.begin() + k, qr.second.end())),\n        \
+    \       mulQ_l(qr.first, R));\n  };\n  auto cogcd = [&](const Poly &p0, const\
+    \ Poly &p1) -> PMat {\n    assert(p0.deg() > p1.deg());\n    PMat M(hgcd(hgcd,\
+    \ p0, p1));\n    PVec p2p3(mulv(M, PVec{p0, p1}));\n    if (p2p3[1].deg() == -1)\
+    \ return M;\n    std::pair<Poly, Poly> qr(p2p3[0].quorem(p2p3[1]));\n    if (qr.second.deg()\
     \ == -1) return mulQ_l(qr.first, M);\n    return mul(self(self, p2p3[1], qr.second),\
-    \ mulQ_l(qr.first, M));\n  };\n  pm c;\n  if (a.norm().deg() > b.norm().deg())\
-    \ {\n    c = cogcd(cogcd, a, b);\n  } else {\n    std::pair<poly, poly> qr(a.quorem(b));\n\
-    \    c = mulQ_r(cogcd(cogcd, b, qr.second), qr.first);\n  }\n  return a * (x =\
-    \ c[0][0]) + b * (y = c[0][1]);\n}\n#line 6 \"test/yosupo/inv_of_Poly.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = ModInt<998244353>;\n  using Poly = FormalPowerSeries<Mint>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  Poly f(N), g(M), x, y;\n  for (int i = 0; i\
-    \ < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n  Poly d\
-    \ = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cout << -1 << '\\n';\n  }\
-    \ else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout <<\
-    \ x.size() << '\\n';\n    x /= d[0];\n    for (size_t i = 0; i < x.size(); i++)\
-    \ cout << (i ? \" \" : \"\") << x[i];\n    cout << '\\n';\n  }\n  return 0;\n\
+    \ mulQ_l(qr.first, M));\n  };\n  if (a.shrink().deg() <= b.shrink().deg()) {\n\
+    \    std::pair<Poly, Poly> qr(a.quorem(b));\n    PMat c(cogcd(b, qr.second));\n\
+    \    return a * (x = c[0][1]) + b * (y = c[0][0] - c[0][1] * qr.first);\n  } else\
+    \ {\n    PMat c(cogcd(a, b));\n    return a * (x = c[0][0]) + b * (y = c[0][1]);\n\
+    \  }\n}\n#line 6 \"test/yosupo/inv_of_Poly.test.cpp\"\nusing namespace std;\n\n\
+    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
+    \  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint> f(N), g(M), x, y;\n  for (int\
+    \ i = 0; i < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n\
+    \  auto d = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cout << -1 << '\\\
+    n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout\
+    \ << x.size() << '\\n';\n    x /= d[0];\n    for (int i = 0, ed = x.size(); i\
+    \ < ed; i++)\n      cout << x[i] << \" \\n\"[i == ed - 1];\n  }\n  return 0;\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
-    #include <bits/stdc++.h>\n#include \"src/Old/ModInt.hpp\"\n#include \"src/Old/FormalPowerSeries.hpp\"\
-    \n#include \"src/Old/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = ModInt<998244353>;\n\
-    \  using Poly = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  Poly\
-    \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
-    \ = 0; i < M; i++) cin >> g[i];\n  Poly d = extgcd(f, g, x, y);\n  if (d.deg()\
-    \ != 0) {\n    cout << -1 << '\\n';\n  } else if (x.deg() == -1) {\n    cout <<\
-    \ 0 << '\\n';\n  } else {\n    cout << x.size() << '\\n';\n    x /= d[0];\n  \
-    \  for (size_t i = 0; i < x.size(); i++) cout << (i ? \" \" : \"\") << x[i];\n\
-    \    cout << '\\n';\n  }\n  return 0;\n}"
+    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
+    \n#include \"src/FFT/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n \
+    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
+    \  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint> f(N), g(M), x, y;\n  for (int\
+    \ i = 0; i < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n\
+    \  auto d = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cout << -1 << '\\\
+    n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout\
+    \ << x.size() << '\\n';\n    x /= d[0];\n    for (int i = 0, ed = x.size(); i\
+    \ < ed; i++)\n      cout << x[i] << \" \\n\"[i == ed - 1];\n  }\n  return 0;\n\
+    }"
   dependsOn:
-  - src/Old/ModInt.hpp
-  - src/Old/FormalPowerSeries.hpp
-  - src/Old/extgcd.hpp
+  - src/Math/ModInt.hpp
+  - src/FFT/Polynomial.hpp
+  - src/FFT/fps_div.hpp
+  - src/FFT/fps_inv.hpp
+  - src/FFT/NTT.hpp
+  - src/Math/is_prime.hpp
+  - src/FFT/convolve.hpp
+  - src/FFT/extgcd.hpp
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-09-22 19:01:56+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
 layout: document

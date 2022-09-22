@@ -20,6 +20,9 @@ data:
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
+  - icon: ':x:'
+    path: src/FFT/extgcd.hpp
+    title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
@@ -141,6 +144,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/inv_of_Poly.test.cpp
+    title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
@@ -400,6 +406,7 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt.hpp
   requiredBy:
+  - src/FFT/extgcd.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/NTT.hpp
   - src/FFT/convolve.hpp
@@ -437,6 +444,7 @@ data:
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yosupo/linear_equations.test.cpp
