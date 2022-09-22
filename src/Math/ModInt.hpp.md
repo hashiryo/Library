@@ -5,25 +5,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
+  - icon: ':x:'
+    path: src/FFT/Polynomial.hpp
+    title: "\u591A\u9805\u5F0F"
   - icon: ':heavy_check_mark:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   - icon: ':heavy_check_mark:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':heavy_check_mark:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':heavy_check_mark:'
@@ -108,9 +111,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/comp_of_FPS.test.cpp
+    title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/division_of_Poly.test.cpp
+    title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
@@ -174,6 +183,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/shift_of_FPS.test.cpp
+    title: test/yosupo/shift_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
@@ -240,9 +252,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: ModInt
     links: []
@@ -392,13 +404,14 @@ data:
   - src/FFT/NTT.hpp
   - src/FFT/convolve.hpp
   - src/FFT/bostan_mori.hpp
+  - src/FFT/Polynomial.hpp
   - src/FFT/fps_div.hpp
   - src/FFT/SubProductTree.hpp
   - src/FFT/fps_inv.hpp
   - src/FFT/BigInt.hpp
   - src/FFT/fps_exp.hpp
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/658.test.cpp
   - test/yukicoder/3046.test.cpp
@@ -420,9 +433,11 @@ data:
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
@@ -443,6 +458,7 @@ data:
   - test/yosupo/exp_of_FPS.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - test/yosupo/gcd_convolution.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
   - test/yosupo/matrix_det.test.cpp
   - test/aoj/DPL_5_D.test.cpp

@@ -5,9 +5,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':warning:'
-    path: src/Old/SubproductTree.hpp
-    title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   - icon: ':heavy_check_mark:'
     path: src/Old/differential_equation.hpp
     title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
@@ -17,19 +14,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  - icon: ':warning:'
-    path: src/Old/kitamasa.hpp
-    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/comp_of_FPS.test.cpp
-    title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/division_of_Poly.test.cpp
-    title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
@@ -39,9 +27,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/shift_of_FPS.test.cpp
-    title: test/yosupo/shift_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_first.test.cpp
     title: test/yosupo/stirling_first.test.cpp
@@ -189,8 +174,6 @@ data:
   path: src/Old/ModInt.hpp
   requiredBy:
   - src/Old/extgcd.hpp
-  - src/Old/SubproductTree.hpp
-  - src/Old/kitamasa.hpp
   - src/Old/differential_equation.hpp
   - src/Old/FormalPowerSeries.hpp
   - src/Old/fps_sequence.hpp
@@ -200,12 +183,9 @@ data:
   - test/yukicoder/963.test.cpp
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/partition.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/stirling_first.test.cpp
 documentation_of: src/Old/ModInt.hpp
 layout: document
