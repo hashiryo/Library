@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':question:'
@@ -465,16 +465,16 @@ data:
     \ eval f(c)\n    if (c == Z) return (*this)[0];\n    mod_t ret = 0;\n    for (int\
     \ i = deg() + 1; i--;) ret *= c, ret += (*this)[i];\n    return ret;\n  }\n  Poly\
     \ operator()(const XP_plus_C &xpc) const {  // f(x^p+c)\n    return taylor_shift(xpc.c).scale(xpc.x.pow());\n\
-    \  }\n  Poly operator()(const Poly &q) const {  // f(g) mod x^n\n    const std::size_t\
+    \  }\n  Poly operator()(const Poly &q) const {  // f(g) mod x^n\n    const int\
     \ n = this->deg() + 1, k = std::ceil(std::sqrt(n));\n    std::vector<Poly> pw1(k\
     \ + 1), pw2(k + 1);\n    if (pw1[0] = {1}, pw1[1] = q; q.size() > n) pw1[1].resize(n);\n\
     \    for (int i = 2; i <= k; ++i)\n      if (pw1[i] = pw1[i - 1] * pw1[1]; pw1[i].size()\
     \ > n) pw1[i].resize(n);\n    pw2[0] = {1}, pw2[1] = pw1[k];\n    for (int i =\
     \ 2; i <= k; ++i)\n      if (pw2[i] = pw2[i - 1] * pw2[1]; pw2[i].size() > n)\
     \ pw2[i].resize(n);\n    Poly ret(n, Z), f;\n    for (int i = 0, j; i <= k; ++i)\
-    \ {\n      for (f.assign(n, Z), j = std::min(k, std::max(0u, n - k * i)); j--;)\
+    \ {\n      for (f.assign(n, Z), j = std::min(k, std::max(0, n - k * i)); j--;)\
     \ {\n        mod_t coef = (*this)[k * i + j];\n        for (int d = pw1[j].size();\
-    \ d--;) f[d] += pw1[j][d] * coef;\n      }\n      for (f *= pw2[i], j = std::min(n,\
+    \ d--;) f[d] += pw1[j][d] * coef;\n      }\n      for (f *= pw2[i], j = std::min<int>(n,\
     \ f.size()); j--;) ret[j] += f[j];\n    }\n    return ret;\n  }\n  Poly &operator*=(const\
     \ XP_plus_C &xpc) {\n    Poly q;\n    if (xpc.c != Z) q = *this * xpc.c;\n   \
     \ return this->insert(this->begin(), xpc.x.pow(), Z), *this += q;\n  }\n  Poly\
@@ -565,7 +565,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-09-22 19:57:29+09:00'
+  timestamp: '2022-09-22 20:08:05+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
