@@ -505,13 +505,13 @@ data:
     \  using PolyMat = std::array<Poly, 4>;\n  assert(a.deg() >= 0), assert(b.deg()\
     \ >= 0);\n#define SUF(f, bg, ed) Poly(f.begin() + bg, f.begin() + ed)\n  auto\
     \ hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PolyMat {\n    int\
-    \ o = p0.deg(), m = ((o - 1) >> 1) + 1, n = p1.deg(), bdg, k, l;\n    if (assert(o\
-    \ > n); n < m) return {mod_t(1), Poly(), Poly(), mod_t(1)};\n    PolyMat R = self(self,\
-    \ SUF(p0, m, o + 1), SUF(p1, m, n + 1));\n    Poly b = R[2] * p0 + R[3] * p1;\n\
-    \    if (bdg = b.deg(); bdg < m) return R;\n    std::pair<Poly, Poly> qr = (R[0]\
-    \ * p0 + R[1] * p1).quorem(b);\n    R = {R[2], R[3], R[0] - qr.first * R[2], R[1]\
-    \ - qr.first * R[3]};\n    if (k = 2 * m - bdg, l = m + 1, o = qr.second.size();\
-    \ o < l) return R;\n    PolyMat A = self(self, SUF(b, k, bdg + 1), SUF(qr.second,\
+    \ o = p0.deg(), m = ((o - 1) >> 1) + 1, n = p1.deg(),\n        k = (o + m - 1)\
+    \ >> 1;\n    if (assert(o > n); n <= k) return {Poly(), mod_t(1), mod_t(1), -p0\
+    \ / p1};\n    PolyMat R = self(self, SUF(p0, m, o + 1), SUF(p1, m, n + 1));\n\
+    \    Poly b = R[2] * p0 + R[3] * p1;\n    std::pair<Poly, Poly> qr = (R[0] * p0\
+    \ + R[1] * p1).quorem(b);\n    R = {R[2], R[3], R[0] - qr.first * R[2], R[1] -\
+    \ qr.first * R[3]};\n    if (n = b.deg(), k = 2 * m - n, o = qr.second.size();\
+    \ o <= m) return R;\n    PolyMat A = self(self, SUF(b, k, n + 1), SUF(qr.second,\
     \ k, o));\n    return {A[0] * R[0] + A[1] * R[2], A[0] * R[1] + A[1] * R[3],\n\
     \            A[2] * R[0] + A[3] * R[2], A[2] * R[1] + A[3] * R[3]};\n  };\n#undef\
     \ SUF\n  auto cogcd = [&](auto self, const Poly &p0,\n                   const\
@@ -556,7 +556,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-09-23 12:12:56+09:00'
+  timestamp: '2022-09-23 14:01:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
