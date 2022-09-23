@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -450,8 +450,8 @@ data:
     \ return {Poly{Z}, Poly(this->begin(), this->begin() + n + 1)};\n    return m\
     \ < A * ln + B || qsz <= 64 ? quorem_na(r) : quorem_ntt(r);\n  }\n  Poly operator%(const\
     \ Poly &r) const { return quorem(r).second; }\n  Poly &operator+=(const mod_t\
-    \ r) { return *this[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
-    \ *this[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
+    \ r) { return (*this)[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
+    \ (*this)[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
     \ &c : *this) c *= r;\n    return shrink();\n  }\n  Poly &operator/=(const mod_t\
     \ r) {\n    for (mod_t &c : *this) c /= r;\n    return shrink();\n  }\n  Poly\
     \ operator+(const mod_t r) { return Poly(*this) += r; }\n  Poly operator-(const\
@@ -522,7 +522,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/division_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-09-23 01:37:07+09:00'
+  timestamp: '2022-09-23 15:33:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/division_of_Poly.test.cpp

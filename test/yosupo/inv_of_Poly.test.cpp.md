@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
@@ -453,8 +453,8 @@ data:
     \ return {Poly{Z}, Poly(this->begin(), this->begin() + n + 1)};\n    return m\
     \ < A * ln + B || qsz <= 64 ? quorem_na(r) : quorem_ntt(r);\n  }\n  Poly operator%(const\
     \ Poly &r) const { return quorem(r).second; }\n  Poly &operator+=(const mod_t\
-    \ r) { return *this[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
-    \ *this[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
+    \ r) { return (*this)[0] += r, *this; }\n  Poly &operator-=(const mod_t r) { return\
+    \ (*this)[0] -= r, *this; }\n  Poly &operator*=(const mod_t r) {\n    for (mod_t\
     \ &c : *this) c *= r;\n    return shrink();\n  }\n  Poly &operator/=(const mod_t\
     \ r) {\n    for (mod_t &c : *this) c /= r;\n    return shrink();\n  }\n  Poly\
     \ operator+(const mod_t r) { return Poly(*this) += r; }\n  Poly operator-(const\
@@ -514,18 +514,17 @@ data:
     \n          A[2] * R[0] + A[3] * R[2], A[2] * R[1] + A[3] * R[3]};\n  auto hgcd\
     \ = [&](auto self, const Poly &p0, const Poly &p1) -> PolyMat {\n    int o = p0.deg(),\
     \ m = (o + 1) / 2, n = p1.deg(), k = (o + m + 1) / 2;\n    if (assert(o > n);\
-    \ n < k) return {Poly(), mod_t(1), mod_t(1), -p0 / p1};\n    if (n < (((o + 1)\
-    \ * 3 + m) >> 2)) {\n      Poly tmp = SUF(p0, m, o + 1) / SUF(p1, m, n + 1), p3\
-    \ = p0 - tmp * p1;\n      std::pair<Poly, Poly> qr = p1.quorem(p3);\n      PolyMat\
-    \ R = {mod_t(1), -tmp, -qr.first, qr.first * tmp + mod_t(1)};\n      __COPY_HOGE\n\
-    \    }\n    PolyMat R = self(self, SUF(p0, m, o + 1), SUF(p1, m, n + 1));\n  \
-    \  Poly p3 = R[2] * p0 + R[3] * p1;\n    std::pair<Poly, Poly> qr = (R[0] * p0\
-    \ + R[1] * p1).quorem(p3);\n    R[0].swap(R[2]), R[1].swap(R[3]), R[2] -= qr.first\
-    \ * R[0],\n        R[3] -= qr.first * R[1];\n    __COPY_HOGE\n  };\n#undef SUF\n\
-    #undef __COPY_HOGE\n  auto cogcd = [&](auto self, const Poly &p0,\n          \
-    \         const Poly &p1) -> std::pair<Poly, Poly> {\n    int o = p0.deg(), m\
-    \ = (o + 1) / 2, n = p1.deg(), k = (o + m + 1) / 2;\n    if (assert(o > n); n\
-    \ < k) {\n      std::pair<Poly, Poly> t = p0.quorem(p1);\n      if (t.second.deg()\
+    \ n < (((o + 1) * 3 + m) >> 2)) {\n      Poly tmp = SUF(p0, m, o + 1) / SUF(p1,\
+    \ m, n + 1), p3 = p0 - tmp * p1;\n      std::pair<Poly, Poly> qr = p1.quorem(p3);\n\
+    \      PolyMat R = {mod_t(1), -tmp, -qr.first, qr.first * tmp + mod_t(1)};\n \
+    \     __COPY_HOGE\n    }\n    PolyMat R = self(self, SUF(p0, m, o + 1), SUF(p1,\
+    \ m, n + 1));\n    Poly p3 = R[2] * p0 + R[3] * p1;\n    std::pair<Poly, Poly>\
+    \ qr = (R[0] * p0 + R[1] * p1).quorem(p3);\n    R[0].swap(R[2]), R[1].swap(R[3]),\
+    \ R[2] -= qr.first * R[0],\n        R[3] -= qr.first * R[1];\n    __COPY_HOGE\n\
+    \  };\n#undef SUF\n#undef __COPY_HOGE\n  auto cogcd = [&](auto self, const Poly\
+    \ &p0,\n                   const Poly &p1) -> std::pair<Poly, Poly> {\n    int\
+    \ o = p0.deg(), m = (o + 1) / 2, n = p1.deg(), k = (o + m + 1) / 2;\n    if (assert(o\
+    \ > n); n < k) {\n      std::pair<Poly, Poly> t = p0.quorem(p1);\n      if (t.second.deg()\
     \ == -1) return {Poly(), mod_t(1)};\n      std::pair<Poly, Poly> qr = p1.quorem(t.second);\n\
     \      if (qr.second.deg() == -1) return {mod_t(1), -t.first};\n      auto A =\
     \ self(self, t.second, qr.second);\n      return A.first -= A.second * qr.first,\n\
@@ -570,8 +569,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-09-23 15:30:17+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-09-23 15:33:41+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
 layout: document

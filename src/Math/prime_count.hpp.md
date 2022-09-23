@@ -141,9 +141,9 @@ data:
   timestamp: '2021-11-23 22:15:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc172_d.primecnt.test.cpp
-  - test/yosupo/counting_primes.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/counting_primes.test.cpp
+  - test/atcoder/abc172_d.primecnt.test.cpp
 documentation_of: src/Math/prime_count.hpp
 layout: document
 redirect_from:
