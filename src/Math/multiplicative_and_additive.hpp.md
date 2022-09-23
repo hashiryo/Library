@@ -93,8 +93,8 @@ data:
   verifiedWith:
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/644.test.cpp
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document
 redirect_from:

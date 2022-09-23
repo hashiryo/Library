@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     links: []
@@ -495,19 +495,19 @@ data:
     \ os << \" + \";\n    }\n    return os;\n  }\n};\n#line 4 \"src/FFT/extgcd.hpp\"\
     \n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
     \ FFT\n *  O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\n\
-    template <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t,\
-    \ _Nm> a,\n                              Polynomial<mod_t, _Nm> b,\n         \
-    \                     Polynomial<mod_t, _Nm> &x,\n                           \
-    \   Polynomial<mod_t, _Nm> &y) {\n  using Poly = Polynomial<mod_t, _Nm>;\n  using\
-    \ PolyMat = std::array<Poly, 4>;\n  assert(a.deg() >= 0), assert(b.deg() >= 0);\n\
-    #define SUF(f, bg, ed) Poly(f.begin() + bg, f.begin() + ed)\n  auto hgcd = [&](auto\
-    \ self, const Poly &p0, const Poly &p1) -> PolyMat {\n    int o = p0.deg(), m\
-    \ = ((o - 1) >> 1) + 1, n = p1.deg(), bdg, k, l;\n    if (assert(o > n); n < m)\
-    \ return {mod_t(1), Poly(), Poly(), mod_t(1)};\n    PolyMat R = self(self, SUF(p0,\
-    \ m, o + 1), SUF(p1, m, n + 1));\n    Poly b = R[2] * p0 + R[3] * p1;\n    if\
-    \ (bdg = b.deg(); bdg < m) return R;\n    std::pair<Poly, Poly> qr = (R[0] * p0\
-    \ + R[1] * p1).quorem(b);\n    R = {R[2], R[3], R[0] - qr.first * R[2], R[1] -\
-    \ qr.first * R[3]};\n    if (k = 2 * m - bdg, l = m + 1, o = qr.second.size();\
+    template <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(const Polynomial<mod_t,\
+    \ _Nm> &a,\n                              const Polynomial<mod_t, _Nm> &b,\n \
+    \                             Polynomial<mod_t, _Nm> &x,\n                   \
+    \           Polynomial<mod_t, _Nm> &y) {\n  using Poly = Polynomial<mod_t, _Nm>;\n\
+    \  using PolyMat = std::array<Poly, 4>;\n  assert(a.deg() >= 0), assert(b.deg()\
+    \ >= 0);\n#define SUF(f, bg, ed) Poly(f.begin() + bg, f.begin() + ed)\n  auto\
+    \ hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PolyMat {\n    int\
+    \ o = p0.deg(), m = ((o - 1) >> 1) + 1, n = p1.deg(), bdg, k, l;\n    if (assert(o\
+    \ > n); n < m) return {mod_t(1), Poly(), Poly(), mod_t(1)};\n    PolyMat R = self(self,\
+    \ SUF(p0, m, o + 1), SUF(p1, m, n + 1));\n    Poly b = R[2] * p0 + R[3] * p1;\n\
+    \    if (bdg = b.deg(); bdg < m) return R;\n    std::pair<Poly, Poly> qr = (R[0]\
+    \ * p0 + R[1] * p1).quorem(b);\n    R = {R[2], R[3], R[0] - qr.first * R[2], R[1]\
+    \ - qr.first * R[3]};\n    if (k = 2 * m - bdg, l = m + 1, o = qr.second.size();\
     \ o < l) return R;\n    PolyMat A = self(self, SUF(b, k, bdg + 1), SUF(qr.second,\
     \ k, o));\n    return {A[0] * R[0] + A[1] * R[2], A[0] * R[1] + A[1] * R[3],\n\
     \            A[2] * R[0] + A[3] * R[2], A[2] * R[1] + A[3] * R[3]};\n  };\n#undef\
@@ -518,26 +518,26 @@ data:
     \ * p0 + M[1] * p1).quorem(p3);\n    if (qr.second.deg() == -1) return {M[2],\
     \ M[3]};\n    auto A = self(self, p3, qr.second);\n    return {A.first * M[2]\
     \ + A.second * (M[0] - qr.first * M[2]),\n            A.first * M[3] + A.second\
-    \ * (M[1] - qr.first * M[3])};\n  };\n  if (a.norm().size() <= b.norm().size())\
-    \ {\n    std::pair<Poly, Poly> qr = a.quorem(b);\n    std::tie(y, x) = cogcd(cogcd,\
-    \ b, qr.second), y -= x * qr.first;\n  } else\n    std::tie(x, y) = cogcd(cogcd,\
-    \ a, b);\n  return a * x + b * y;\n}\n"
+    \ * (M[1] - qr.first * M[3])};\n  };\n  if (a.deg() <= b.deg()) {\n    std::pair<Poly,\
+    \ Poly> qr = a.quorem(b);\n    std::tie(y, x) = cogcd(cogcd, b, qr.second), y\
+    \ -= x * qr.first;\n  } else\n    std::tie(x, y) = cogcd(cogcd, a, b);\n  return\
+    \ a * x + b * y;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/Polynomial.hpp\"\
     \n/**\n * @title \u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5\n * @category\
     \ FFT\n *  O(N log^2 N)\n */\n\n// BEGIN CUT HERE\n\n// ax + by = gcd(a, b)\n\
-    template <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(Polynomial<mod_t,\
-    \ _Nm> a,\n                              Polynomial<mod_t, _Nm> b,\n         \
-    \                     Polynomial<mod_t, _Nm> &x,\n                           \
-    \   Polynomial<mod_t, _Nm> &y) {\n  using Poly = Polynomial<mod_t, _Nm>;\n  using\
-    \ PolyMat = std::array<Poly, 4>;\n  assert(a.deg() >= 0), assert(b.deg() >= 0);\n\
-    #define SUF(f, bg, ed) Poly(f.begin() + bg, f.begin() + ed)\n  auto hgcd = [&](auto\
-    \ self, const Poly &p0, const Poly &p1) -> PolyMat {\n    int o = p0.deg(), m\
-    \ = ((o - 1) >> 1) + 1, n = p1.deg(), bdg, k, l;\n    if (assert(o > n); n < m)\
-    \ return {mod_t(1), Poly(), Poly(), mod_t(1)};\n    PolyMat R = self(self, SUF(p0,\
-    \ m, o + 1), SUF(p1, m, n + 1));\n    Poly b = R[2] * p0 + R[3] * p1;\n    if\
-    \ (bdg = b.deg(); bdg < m) return R;\n    std::pair<Poly, Poly> qr = (R[0] * p0\
-    \ + R[1] * p1).quorem(b);\n    R = {R[2], R[3], R[0] - qr.first * R[2], R[1] -\
-    \ qr.first * R[3]};\n    if (k = 2 * m - bdg, l = m + 1, o = qr.second.size();\
+    template <class mod_t, std::size_t _Nm>\nPolynomial<mod_t, _Nm> extgcd(const Polynomial<mod_t,\
+    \ _Nm> &a,\n                              const Polynomial<mod_t, _Nm> &b,\n \
+    \                             Polynomial<mod_t, _Nm> &x,\n                   \
+    \           Polynomial<mod_t, _Nm> &y) {\n  using Poly = Polynomial<mod_t, _Nm>;\n\
+    \  using PolyMat = std::array<Poly, 4>;\n  assert(a.deg() >= 0), assert(b.deg()\
+    \ >= 0);\n#define SUF(f, bg, ed) Poly(f.begin() + bg, f.begin() + ed)\n  auto\
+    \ hgcd = [&](auto self, const Poly &p0, const Poly &p1) -> PolyMat {\n    int\
+    \ o = p0.deg(), m = ((o - 1) >> 1) + 1, n = p1.deg(), bdg, k, l;\n    if (assert(o\
+    \ > n); n < m) return {mod_t(1), Poly(), Poly(), mod_t(1)};\n    PolyMat R = self(self,\
+    \ SUF(p0, m, o + 1), SUF(p1, m, n + 1));\n    Poly b = R[2] * p0 + R[3] * p1;\n\
+    \    if (bdg = b.deg(); bdg < m) return R;\n    std::pair<Poly, Poly> qr = (R[0]\
+    \ * p0 + R[1] * p1).quorem(b);\n    R = {R[2], R[3], R[0] - qr.first * R[2], R[1]\
+    \ - qr.first * R[3]};\n    if (k = 2 * m - bdg, l = m + 1, o = qr.second.size();\
     \ o < l) return R;\n    PolyMat A = self(self, SUF(b, k, bdg + 1), SUF(qr.second,\
     \ k, o));\n    return {A[0] * R[0] + A[1] * R[2], A[0] * R[1] + A[1] * R[3],\n\
     \            A[2] * R[0] + A[3] * R[2], A[2] * R[1] + A[3] * R[3]};\n  };\n#undef\
@@ -548,10 +548,10 @@ data:
     \ * p0 + M[1] * p1).quorem(p3);\n    if (qr.second.deg() == -1) return {M[2],\
     \ M[3]};\n    auto A = self(self, p3, qr.second);\n    return {A.first * M[2]\
     \ + A.second * (M[0] - qr.first * M[2]),\n            A.first * M[3] + A.second\
-    \ * (M[1] - qr.first * M[3])};\n  };\n  if (a.norm().size() <= b.norm().size())\
-    \ {\n    std::pair<Poly, Poly> qr = a.quorem(b);\n    std::tie(y, x) = cogcd(cogcd,\
-    \ b, qr.second), y -= x * qr.first;\n  } else\n    std::tie(x, y) = cogcd(cogcd,\
-    \ a, b);\n  return a * x + b * y;\n}"
+    \ * (M[1] - qr.first * M[3])};\n  };\n  if (a.deg() <= b.deg()) {\n    std::pair<Poly,\
+    \ Poly> qr = a.quorem(b);\n    std::tie(y, x) = cogcd(cogcd, b, qr.second), y\
+    \ -= x * qr.first;\n  } else\n    std::tie(x, y) = cogcd(cogcd, a, b);\n  return\
+    \ a * x + b * y;\n}"
   dependsOn:
   - src/FFT/Polynomial.hpp
   - src/FFT/fps_div.hpp
@@ -563,8 +563,8 @@ data:
   isVerificationFile: false
   path: src/FFT/extgcd.hpp
   requiredBy: []
-  timestamp: '2022-09-23 03:05:54+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-09-23 12:12:56+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp
 documentation_of: src/FFT/extgcd.hpp

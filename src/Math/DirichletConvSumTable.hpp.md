@@ -251,10 +251,10 @@ data:
   timestamp: '2022-09-21 11:28:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/sum_of_totient_function.test.cpp
+  - test/atcoder/abc179_c.test.cpp
   - test/atcoder/arc116_c.dujiao.test.cpp
   - test/atcoder/abc172_d.dujiao.test.cpp
-  - test/atcoder/abc179_c.test.cpp
+  - test/yosupo/sum_of_totient_function.test.cpp
 documentation_of: src/Math/DirichletConvSumTable.hpp
 layout: document
 redirect_from:
