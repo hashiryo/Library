@@ -113,8 +113,8 @@ data:
   timestamp: '2022-06-23 22:51:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/1615.PushRelabel.test.cpp
   - test/aoj/1615.Dinic.test.cpp
+  - test/aoj/1615.PushRelabel.test.cpp
 documentation_of: src/Optimization/MaxFlowLowerBound.hpp
 layout: document
 redirect_from:

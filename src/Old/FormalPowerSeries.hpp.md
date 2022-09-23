@@ -611,11 +611,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/963.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/partition.test.cpp
   - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_first.test.cpp
 documentation_of: src/Old/FormalPowerSeries.hpp
 layout: document
 redirect_from:

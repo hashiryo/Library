@@ -449,24 +449,24 @@ data:
   path: src/FFT/fps_div.hpp
   requiredBy:
   - src/FFT/extgcd.hpp
+  - src/FFT/Polynomial.hpp
   - src/FFT/SubProductTree.hpp
   - src/FFT/fps_exp.hpp
-  - src/FFT/Polynomial.hpp
   timestamp: '2022-09-21 15:34:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/1080.test.cpp
-  - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
 documentation_of: src/FFT/fps_div.hpp
 layout: document
 redirect_from:

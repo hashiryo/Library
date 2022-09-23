@@ -478,10 +478,10 @@ data:
   verifiedWith:
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/1080.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
 documentation_of: src/FFT/fps_exp.hpp
 layout: document
 redirect_from:

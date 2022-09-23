@@ -474,10 +474,10 @@ data:
   timestamp: '2022-09-22 22:33:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/0168.test.cpp
   - test/yukicoder/658.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/aoj/0168.test.cpp
 documentation_of: src/FFT/bostan_mori.hpp
 layout: document
 redirect_from:
