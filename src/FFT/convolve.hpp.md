@@ -11,7 +11,7 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':question:'
@@ -39,13 +39,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
   - icon: ':x:'

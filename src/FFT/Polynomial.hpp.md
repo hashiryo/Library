@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':question:'
@@ -33,12 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u591A\u9805\u5F0F"
     links: []
@@ -623,7 +623,7 @@ data:
   requiredBy:
   - src/FFT/extgcd.hpp
   timestamp: '2022-09-29 12:59:48+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp

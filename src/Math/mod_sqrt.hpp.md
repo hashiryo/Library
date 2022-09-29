@@ -2,22 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_mod.test.cpp
     title: test/yosupo/sqrt_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5E73\u65B9\u6839 $\\mathbb{F}_p$"
     links: []
@@ -55,7 +55,7 @@ data:
   requiredBy:
   - src/FFT/fps_sqrt.hpp
   timestamp: '2022-09-20 01:41:14+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sqrt_mod.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp

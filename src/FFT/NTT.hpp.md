@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':heavy_check_mark:'
@@ -26,19 +26,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
   - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/sample_points_shift.hpp
     title: sample points shift
   _extendedVerifiedWith:
@@ -75,7 +75,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -87,7 +87,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -96,28 +96,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
   - icon: ':x:'

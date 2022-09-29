@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':question:'
@@ -18,27 +18,27 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
     links: []
@@ -369,20 +369,20 @@ data:
     \u6570 log, exp, pow\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class\
     \ mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n\
     \  static constexpr auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n\
-    \  static int l = 2;\n  for (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return\
-    \ dat[n];\n}\n\ntemplate <class mod_t>\nstd::vector<mod_t> deriv(const std::vector<mod_t>\
-    \ &p) {\n  std::vector<mod_t> ret(p.size() - 1);\n  for (int i = p.size(); --i;)\
-    \ ret[i - 1] = p[i] * i;\n  return ret;\n}\ntemplate <class mod_t, std::size_t\
-    \ _Nm = 1 << 22>\nstd::vector<mod_t> integ(const std::vector<mod_t> &p) {\n  std::vector<mod_t>\
-    \ ret(p.size() + 1, mod_t(0));\n  for (int i = p.size(); i; i--) ret[i] = p[i\
-    \ - 1] * get_inv<mod_t, _Nm>(i);\n  return ret;\n}\ntemplate <class mod_t, std::size_t\
-    \ _Nm = 1 << 22>\nstd::vector<mod_t> log(const std::vector<mod_t> &p) {\n  assert(p[0]\
-    \ == mod_t(1));\n  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p), p));\n}\n\
-    \ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> exp(const\
-    \ std::vector<mod_t> &p) {\n  static constexpr int _Nm2 = _Nm * 2 / 15;\n  static\
-    \ constexpr int TH = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n  using GAdp\
-    \ = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n \
-    \ using GA = GlobalArray<mod_t, _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \  static int l = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
+    \  return dat[n];\n}\n\ntemplate <class mod_t>\nstd::vector<mod_t> deriv(const\
+    \ std::vector<mod_t> &p) {\n  std::vector<mod_t> ret(p.size() - 1);\n  for (int\
+    \ i = p.size(); --i;) ret[i - 1] = p[i] * i;\n  return ret;\n}\ntemplate <class\
+    \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> integ(const std::vector<mod_t>\
+    \ &p) {\n  std::vector<mod_t> ret(p.size() + 1, mod_t(0));\n  for (int i = p.size();\
+    \ i; i--) ret[i] = p[i - 1] * get_inv<mod_t, _Nm>(i);\n  return ret;\n}\ntemplate\
+    \ <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> log(const std::vector<mod_t>\
+    \ &p) {\n  assert(p[0] == mod_t(1));\n  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p),\
+    \ p));\n}\n\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ exp(const std::vector<mod_t> &p) {\n  static constexpr int _Nm2 = _Nm * 2 /\
+    \ 15;\n  static constexpr int TH = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n\
+    \  using GAdp = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
     \ _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA2D1 =\
     \ GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t,\
     \ _Nm2, 16, 2>;\n  const int n = p.size(), m = get_len(n);\n  assert(n > 0), assert(p[0]\
@@ -421,20 +421,20 @@ data:
     \u6570 log, exp, pow\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class\
     \ mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n\
     \  static constexpr auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n\
-    \  static int l = 2;\n  for (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return\
-    \ dat[n];\n}\n\ntemplate <class mod_t>\nstd::vector<mod_t> deriv(const std::vector<mod_t>\
-    \ &p) {\n  std::vector<mod_t> ret(p.size() - 1);\n  for (int i = p.size(); --i;)\
-    \ ret[i - 1] = p[i] * i;\n  return ret;\n}\ntemplate <class mod_t, std::size_t\
-    \ _Nm = 1 << 22>\nstd::vector<mod_t> integ(const std::vector<mod_t> &p) {\n  std::vector<mod_t>\
-    \ ret(p.size() + 1, mod_t(0));\n  for (int i = p.size(); i; i--) ret[i] = p[i\
-    \ - 1] * get_inv<mod_t, _Nm>(i);\n  return ret;\n}\ntemplate <class mod_t, std::size_t\
-    \ _Nm = 1 << 22>\nstd::vector<mod_t> log(const std::vector<mod_t> &p) {\n  assert(p[0]\
-    \ == mod_t(1));\n  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p), p));\n}\n\
-    \ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> exp(const\
-    \ std::vector<mod_t> &p) {\n  static constexpr int _Nm2 = _Nm * 2 / 15;\n  static\
-    \ constexpr int TH = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n  using GAdp\
-    \ = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n \
-    \ using GA = GlobalArray<mod_t, _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \  static int l = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
+    \  return dat[n];\n}\n\ntemplate <class mod_t>\nstd::vector<mod_t> deriv(const\
+    \ std::vector<mod_t> &p) {\n  std::vector<mod_t> ret(p.size() - 1);\n  for (int\
+    \ i = p.size(); --i;) ret[i - 1] = p[i] * i;\n  return ret;\n}\ntemplate <class\
+    \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> integ(const std::vector<mod_t>\
+    \ &p) {\n  std::vector<mod_t> ret(p.size() + 1, mod_t(0));\n  for (int i = p.size();\
+    \ i; i--) ret[i] = p[i - 1] * get_inv<mod_t, _Nm>(i);\n  return ret;\n}\ntemplate\
+    \ <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> log(const std::vector<mod_t>\
+    \ &p) {\n  assert(p[0] == mod_t(1));\n  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p),\
+    \ p));\n}\n\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ exp(const std::vector<mod_t> &p) {\n  static constexpr int _Nm2 = _Nm * 2 /\
+    \ 15;\n  static constexpr int TH = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n\
+    \  using GAdp = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
     \ _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA2D1 =\
     \ GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t,\
     \ _Nm2, 16, 2>;\n  const int n = p.size(), m = get_len(n);\n  assert(n > 0), assert(p[0]\
@@ -477,8 +477,8 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_exp.hpp
   requiredBy: []
-  timestamp: '2022-09-29 12:59:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-09-29 14:08:07+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp

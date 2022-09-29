@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 $\\mathbb{F}_p$"
   _extendedRequiredBy: []
