@@ -8,9 +8,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Old/differential_equation.hpp
     title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':warning:'
-    path: src/Old/extgcd.hpp
-    title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':heavy_check_mark:'
     path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
@@ -604,18 +601,17 @@ data:
   isVerificationFile: false
   path: src/Old/FormalPowerSeries.hpp
   requiredBy:
-  - src/Old/extgcd.hpp
   - src/Old/differential_equation.hpp
   - src/Old/fps_sequence.hpp
   timestamp: '2022-09-19 00:53:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/963.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/partition.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/stirling_first.test.cpp
+  - test/yukicoder/963.test.cpp
 documentation_of: src/Old/FormalPowerSeries.hpp
 layout: document
 redirect_from:

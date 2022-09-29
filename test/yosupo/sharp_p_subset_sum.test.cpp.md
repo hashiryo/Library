@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sharp_p_subset_sum
@@ -265,17 +265,14 @@ data:
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
     \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/fps_inv.hpp\"\n\n/**\n\
     \ * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv\n * @category FFT\n */\n\n\
-    // BEGIN CUT HERE\ntemplate <class mod_t, std::size_t LIM>\nmod_t get_inv(int\
-    \ n) {\n  static mod_t dat[LIM] = {0, 1};\n  static int l = 2;\n  for (auto m\
-    \ = mod_t::modulo(); l <= n;) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
-    }\ntemplate <std::size_t _Nm, class mod_t>\nvoid inv_base(const mod_t p[], int\
-    \ n, mod_t r[], int i = 1) {\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
-    \  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr int TH = 64\
-    \ << (!is_nttfriend<mod_t, _Nm>() << 1);\n  if (n <= i) return;\n  assert(((n\
-    \ & -n) == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n, TH);\n\
-    \  const mod_t Z = 0, miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n    for\
-    \ (r[j = i] = Z; j--;) r[i] += r[j] * p[i - j];\n  for (int e = i << 1; i < n;\
-    \ e = i << 1) {\n    GNA1::bf.set(r, 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0,\
+    // BEGIN CUT HERE\ntemplate <std::size_t _Nm, class mod_t>\nvoid inv_base(const\
+    \ mod_t p[], int n, mod_t r[], int i = 1) {\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr\
+    \ int TH = 64 << (!is_nttfriend<mod_t, _Nm>() << 1);\n  if (n <= i) return;\n\
+    \  assert(((n & -n) == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n,\
+    \ TH);\n  const mod_t Z = 0, miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n\
+    \    for (r[j = i] = Z; j--;) r[i] += r[j] * p[i - j];\n  for (int e = i << 1;\
+    \ i < n; e = i << 1) {\n    GNA1::bf.set(r, 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0,\
     \ e);\n    GNA2::bf.set(p, 0, e), GNA2::bf.dft(0, e);\n    GNA2::bf.mul(GNA1::bf,\
     \ 0, e), GNA2::bf.idft(0, e);\n    if constexpr (!is_nttfriend<mod_t, _Nm>())\n\
     \      GNA2::bf.get(r, i, e), GNA2::bf.set(r, i, e);\n    GNA2::bf.zeros(0, i),\
@@ -356,50 +353,53 @@ data:
     \ -= pbfk[j];\n      GNA2::bf.set(bfk, 0, mm);\n      GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf,\
     \ 0, m2), GNA2::bf.idft(0, m2);\n      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]\
     \ = -bfk[mm];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n\
-    }\n#line 4 \"src/FFT/fps_exp.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\
+    }\n#line 5 \"src/FFT/fps_exp.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\
     \u6570 log, exp, pow\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class\
-    \ mod_t>\nstd::vector<mod_t> deriv(const std::vector<mod_t> &p) {\n  std::vector<mod_t>\
-    \ ret(p.size() - 1);\n  for (int i = p.size(); --i;) ret[i - 1] = p[i] * i;\n\
-    \  return ret;\n}\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
-    \ integ(const std::vector<mod_t> &p) {\n  std::vector<mod_t> ret(p.size() + 1,\
-    \ mod_t(0));\n  for (int i = p.size(); i; i--) ret[i] = p[i - 1] * get_inv<mod_t,\
-    \ _Nm>(i);\n  return ret;\n}\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
-    std::vector<mod_t> log(const std::vector<mod_t> &p) {\n  assert(p[0] == mod_t(1));\n\
-    \  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p), p));\n}\n\ntemplate <class\
-    \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> exp(const std::vector<mod_t>\
-    \ &p) {\n  static constexpr int _Nm2 = _Nm * 2 / 15;\n  static constexpr int TH\
-    \ = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n  using GAdp = GlobalArray<mod_t,\
-    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
-    \ _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
-    \ _Nm2, 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
-    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  const int n = p.size(), m = get_len(n);\n\
-    \  assert(n > 0), assert(p[0] == mod_t(0));\n  std::copy(p.begin(), p.end(), GAdp::bf);\n\
-    \  for (int i = n; --i;) GAdp::bf[i] *= i;\n  std::fill_n(GAr::bf, n, mod_t(0)),\
-    \ GAr::bf[0] = 1;\n  for (int r = m, d = 0, R, k, i; r > TH; d += k) {\n    k\
-    \ = (r /= (R = get_len(bsf(r) + 1) >> 1)) << 1;\n    for (i = std::min(R - 1,\
-    \ (n - 1) / r); i--;)\n      GNA2D1::bf[i].set(GAdp::bf + i * r - d, d, d + k),\n\
-    \          GNA2D1::bf[i].dft(d, d + k);\n  }\n  auto rec = [&](auto f, int l,\
-    \ int r, int d) -> void {\n    if (int i = l | (!l), ed = std::min(r, n), j; r\
-    \ - l > TH) {\n      int R = get_len(bsf(r - l) + 1) >> 1, len = (r - l) / R,\
-    \ k = len << 1;\n      for (i = 0, ed = std::min(R, (n - l + len - 1) / len);;\
-    \ i++) {\n        if (mod_t *ret = GAr::bf + l + i * len, *bf = GA::bf + d + len;\
-    \ i) {\n          for (GNA1::bf.zeros(d, d + k), j = i; j--;)\n            GNA2::bf.mul(GNA2D2::bf[j],\
-    \ GNA2D1::bf[i - j - 1], d, d + k),\n                GNA1::bf.add(GNA2::bf, d,\
-    \ d + k);\n          GNA1::bf.idft(d, d + k), GNA1::bf.get(GA::bf, d + len, d\
-    \ + k);\n          for (int t = len; t--;) ret[t] += bf[t];\n        }\n     \
-    \   if (f(f, l + i * len, l + (i + 1) * len, d + k); i == ed - 1) break;\n   \
-    \     GNA2D2::bf[i].set(GAr::bf + l + i * len - d, d, d + len);\n        GNA2D2::bf[i].zeros(d\
-    \ + len, d + k), GNA2D2::bf[i].dft(d, d + k);\n      }\n    } else\n      for\
-    \ (; i < ed; GAr::bf[i] *= get_inv<mod_t, _Nm>(i), i++)\n        for (j = l; j\
-    \ < i; j++) GAr::bf[i] += GAr::bf[j] * GAdp::bf[i - j];\n  };\n  return rec(rec,\
-    \ 0, m, 0), std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n\ntemplate <class mod_t,\
-    \ std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> pow(const std::vector<mod_t>\
-    \ &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t, _Nm, 4>;\n  const mod_t\
-    \ Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0] = 1; k) {\n    while\
-    \ (cnt < n && p[cnt] == Z) cnt++;\n    const __int128_t ofs = (__int128_t)k *\
-    \ cnt, sz = n - ofs;\n    if (sz <= 0) return std::vector<mod_t>(n, Z);\n    const\
-    \ mod_t p0 = p[cnt], iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int i = sz;\
-    \ --i;) GA::bf[i] = p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf,\
+    \ mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n\
+    \  static constexpr auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n\
+    \  static int l = 2;\n  for (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return\
+    \ dat[n];\n}\n\ntemplate <class mod_t>\nstd::vector<mod_t> deriv(const std::vector<mod_t>\
+    \ &p) {\n  std::vector<mod_t> ret(p.size() - 1);\n  for (int i = p.size(); --i;)\
+    \ ret[i - 1] = p[i] * i;\n  return ret;\n}\ntemplate <class mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nstd::vector<mod_t> integ(const std::vector<mod_t> &p) {\n  std::vector<mod_t>\
+    \ ret(p.size() + 1, mod_t(0));\n  for (int i = p.size(); i; i--) ret[i] = p[i\
+    \ - 1] * get_inv<mod_t, _Nm>(i);\n  return ret;\n}\ntemplate <class mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nstd::vector<mod_t> log(const std::vector<mod_t> &p) {\n  assert(p[0]\
+    \ == mod_t(1));\n  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p), p));\n}\n\
+    \ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> exp(const\
+    \ std::vector<mod_t> &p) {\n  static constexpr int _Nm2 = _Nm * 2 / 15;\n  static\
+    \ constexpr int TH = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n  using GAdp\
+    \ = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n \
+    \ using GA = GlobalArray<mod_t, _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA2D1 =\
+    \ GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t,\
+    \ _Nm2, 16, 2>;\n  const int n = p.size(), m = get_len(n);\n  assert(n > 0), assert(p[0]\
+    \ == mod_t(0));\n  std::copy(p.begin(), p.end(), GAdp::bf);\n  for (int i = n;\
+    \ --i;) GAdp::bf[i] *= i;\n  std::fill_n(GAr::bf, n, mod_t(0)), GAr::bf[0] = 1;\n\
+    \  for (int r = m, d = 0, R, k, i; r > TH; d += k) {\n    k = (r /= (R = get_len(bsf(r)\
+    \ + 1) >> 1)) << 1;\n    for (i = std::min(R - 1, (n - 1) / r); i--;)\n      GNA2D1::bf[i].set(GAdp::bf\
+    \ + i * r - d, d, d + k),\n          GNA2D1::bf[i].dft(d, d + k);\n  }\n  auto\
+    \ rec = [&](auto f, int l, int r, int d) -> void {\n    if (int i = l | (!l),\
+    \ ed = std::min(r, n), j; r - l > TH) {\n      int R = get_len(bsf(r - l) + 1)\
+    \ >> 1, len = (r - l) / R, k = len << 1;\n      for (i = 0, ed = std::min(R, (n\
+    \ - l + len - 1) / len);; i++) {\n        if (mod_t *ret = GAr::bf + l + i * len,\
+    \ *bf = GA::bf + d + len; i) {\n          for (GNA1::bf.zeros(d, d + k), j = i;\
+    \ j--;)\n            GNA2::bf.mul(GNA2D2::bf[j], GNA2D1::bf[i - j - 1], d, d +\
+    \ k),\n                GNA1::bf.add(GNA2::bf, d, d + k);\n          GNA1::bf.idft(d,\
+    \ d + k), GNA1::bf.get(GA::bf, d + len, d + k);\n          for (int t = len; t--;)\
+    \ ret[t] += bf[t];\n        }\n        if (f(f, l + i * len, l + (i + 1) * len,\
+    \ d + k); i == ed - 1) break;\n        GNA2D2::bf[i].set(GAr::bf + l + i * len\
+    \ - d, d, d + len);\n        GNA2D2::bf[i].zeros(d + len, d + k), GNA2D2::bf[i].dft(d,\
+    \ d + k);\n      }\n    } else\n      for (; i < ed; GAr::bf[i] *= get_inv<mod_t,\
+    \ _Nm>(i), i++)\n        for (j = l; j < i; j++) GAr::bf[i] += GAr::bf[j] * GAdp::bf[i\
+    \ - j];\n  };\n  return rec(rec, 0, m, 0), std::vector<mod_t>(GAr::bf, GAr::bf\
+    \ + n);\n}\n\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ pow(const std::vector<mod_t> &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t,\
+    \ _Nm, 4>;\n  const mod_t Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0]\
+    \ = 1; k) {\n    while (cnt < n && p[cnt] == Z) cnt++;\n    const __int128_t ofs\
+    \ = (__int128_t)k * cnt, sz = n - ofs;\n    if (sz <= 0) return std::vector<mod_t>(n,\
+    \ Z);\n    const mod_t p0 = p[cnt], iv = mod_t(1) / p0, pk = p0.pow(k);\n    for\
+    \ (int i = sz; --i;) GA::bf[i] = p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf,\
     \ GA::bf + sz));\n    for (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t,\
     \ _Nm>(q).begin(), (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs,\
     \ Z);\n    for (int i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf\
@@ -434,8 +434,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 22:51:51+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-09-29 12:59:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.test.cpp
 layout: document

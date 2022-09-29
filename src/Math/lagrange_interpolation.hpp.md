@@ -55,9 +55,9 @@ data:
   timestamp: '2021-11-16 21:18:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/665.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 documentation_of: src/Math/lagrange_interpolation.hpp
 layout: document
 redirect_from:

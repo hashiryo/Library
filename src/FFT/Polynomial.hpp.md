@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
@@ -33,12 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u591A\u9805\u5F0F"
     links: []
@@ -277,17 +277,14 @@ data:
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
     \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/fps_inv.hpp\"\n\n/**\n\
     \ * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv\n * @category FFT\n */\n\n\
-    // BEGIN CUT HERE\ntemplate <class mod_t, std::size_t LIM>\nmod_t get_inv(int\
-    \ n) {\n  static mod_t dat[LIM] = {0, 1};\n  static int l = 2;\n  for (auto m\
-    \ = mod_t::modulo(); l <= n;) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
-    }\ntemplate <std::size_t _Nm, class mod_t>\nvoid inv_base(const mod_t p[], int\
-    \ n, mod_t r[], int i = 1) {\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
-    \  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr int TH = 64\
-    \ << (!is_nttfriend<mod_t, _Nm>() << 1);\n  if (n <= i) return;\n  assert(((n\
-    \ & -n) == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n, TH);\n\
-    \  const mod_t Z = 0, miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n    for\
-    \ (r[j = i] = Z; j--;) r[i] += r[j] * p[i - j];\n  for (int e = i << 1; i < n;\
-    \ e = i << 1) {\n    GNA1::bf.set(r, 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0,\
+    // BEGIN CUT HERE\ntemplate <std::size_t _Nm, class mod_t>\nvoid inv_base(const\
+    \ mod_t p[], int n, mod_t r[], int i = 1) {\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr\
+    \ int TH = 64 << (!is_nttfriend<mod_t, _Nm>() << 1);\n  if (n <= i) return;\n\
+    \  assert(((n & -n) == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n,\
+    \ TH);\n  const mod_t Z = 0, miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n\
+    \    for (r[j = i] = Z; j--;) r[i] += r[j] * p[i - j];\n  for (int e = i << 1;\
+    \ i < n; e = i << 1) {\n    GNA1::bf.set(r, 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0,\
     \ e);\n    GNA2::bf.set(p, 0, e), GNA2::bf.dft(0, e);\n    GNA2::bf.mul(GNA1::bf,\
     \ 0, e), GNA2::bf.idft(0, e);\n    if constexpr (!is_nttfriend<mod_t, _Nm>())\n\
     \      GNA2::bf.get(r, i, e), GNA2::bf.set(r, i, e);\n    GNA2::bf.zeros(0, i),\
@@ -625,13 +622,13 @@ data:
   path: src/FFT/Polynomial.hpp
   requiredBy:
   - src/FFT/extgcd.hpp
-  timestamp: '2022-09-23 15:33:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-09-29 12:59:48+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
 documentation_of: src/FFT/Polynomial.hpp
 layout: document
 redirect_from:

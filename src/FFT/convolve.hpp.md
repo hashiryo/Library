@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
   - icon: ':heavy_check_mark:'
@@ -39,24 +39,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u7573\u307F\u8FBC\u307F"
     links: []
@@ -350,23 +350,23 @@ data:
   isVerificationFile: false
   path: src/FFT/convolve.hpp
   requiredBy:
+  - src/FFT/Polynomial.hpp
   - src/FFT/extgcd.hpp
   - src/FFT/bostan_mori.hpp
-  - src/FFT/Polynomial.hpp
   timestamp: '2022-09-22 22:33:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/658.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/980.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
   - test/aoj/0168.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yukicoder/980.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/658.test.cpp
 documentation_of: src/FFT/convolve.hpp
 layout: document
 redirect_from:

@@ -5,32 +5,47 @@ data:
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':question:'
-    path: src/FFT/fps_inv.hpp
-    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
+    title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/3046
-    links:
-    - https://yukicoder.me/problems/no/3046
-  bundledCode: "#line 1 \"test/yukicoder/3046.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/3046\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
-    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
-    \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
-    \ {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
-    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
-    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
-    \ <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
+    document_title: sample points shift
+    links: []
+  bundledCode: "#line 2 \"src/FFT/sample_points_shift.hpp\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n *\
+    \ @category \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n\
+    \ */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
+    \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
+    \ 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24, 35, 59, 56,\
+    \ 49, 18, 29, 11,\n      63, 52, 6,  26, 37, 40, 33, 47, 61, 45, 43, 21, 23, 58,\
+    \ 17, 10,\n      51, 25, 36, 32, 60, 20, 57, 16, 50, 31, 19, 15, 30, 14, 13, 12};\n\
+    \  return convert[(n & ~(n - 1)) * 157587932685088877 >> 58];\n}\nconstexpr std::uint64_t\
+    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
+    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
+    \ n) {\n  const std::uint64_t s = bsf(n - 1), d = n >> s;\n  for (auto a : {args...})\
+    \ {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d,\
+    \ x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1))\
+    \ break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n   \
+    \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
+    \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
+    \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 3 \"src/Math/ModInt.hpp\"\
+    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
+    namespace modint_internal {\nusing namespace std;\nstruct modint_base {};\nstruct\
+    \ sta_mint_base : modint_base {};\nstruct dyn_mint_base : modint_base {};\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base, mod_t>;\n\
+    template <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
+    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
     \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
@@ -93,48 +108,30 @@ data:
     \ id>>>;\n}  // namespace modint_internal\nusing modint_internal::DynamicModInt,\
     \ modint_internal::StaticModInt,\n    modint_internal::Montgomery, modint_internal::is_dynamicmodint_v,\n\
     \    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n#line\
-    \ 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
-    \ \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n//\
-    \ BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
-    \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
-    \ 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24, 35, 59, 56,\
-    \ 49, 18, 29, 11,\n      63, 52, 6,  26, 37, 40, 33, 47, 61, 45, 43, 21, 23, 58,\
-    \ 17, 10,\n      51, 25, 36, 32, 60, 20, 57, 16, 50, 31, 19, 15, 30, 14, 13, 12};\n\
-    \  return convert[(n & ~(n - 1)) * 157587932685088877 >> 58];\n}\nconstexpr std::uint64_t\
-    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
-    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
-    \ n) {\n  const std::uint64_t s = bsf(n - 1), d = n >> s;\n  for (auto a : {args...})\
-    \ {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d,\
-    \ x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1))\
-    \ break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n   \
-    \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
-    \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
-    \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 5 \"src/FFT/NTT.hpp\"\
-    \n\n/**\n * @title Number-Theoretic-Transform\n * @category FFT\n */\n\n// BEGIN\
-    \ CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\nusing u128 =\
-    \ __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform {\n  static\
-    \ inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0, i0 = 0; m >>=\
-    \ 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n; prod *= r2[bsf(++h)],\
-    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          x[i +\
-    \ m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static inline void idft(int\
-    \ n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0\
-    \ = 0)\n      for (mod_t prod = 1, y; i0 < n; prod *= ir2[bsf(++h)], i0 += (m\
-    \ << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i] - x[i\
-    \ + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv = mod_t(1)\
-    \ / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t x[]) {\n  \
-    \  for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] + x[i + 1]);\n\
-    \  }\n  static void odd_dft(int n, mod_t x[]) {\n    mod_t prod = iv2;\n    for\
-    \ (int i = 0, j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i] - x[i + 1]),\
-    \ prod *= ir2[bsf(~((u64)j))];\n  }\n  static void dft_doubling(int n, mod_t x[])\
-    \ {\n    std::copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1), t(rt[bsf(n\
-    \ << 1)]);\n    for (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n    dft(n,\
-    \ x + n);\n  }\n  static constexpr std::uint64_t lim() { return 1ULL << E; }\n\
-    \n protected:\n  static constexpr mod_t pow2th_root(std::uint8_t e) {\n    for\
-    \ (mod_t r = 2;; r += 1)\n      if (auto s = r.pow((mod_t::modulo() - 1) / 2);\
-    \ s != 1 && s * s == 1)\n        return r.pow((mod_t::modulo() - 1) >> e);\n \
-    \   return 0;  // can not find\n  }            // return \u03C9 (primitive 2^e\
-    \ th root)\n  static_assert(mod_t::modulo() & 1);\n  static_assert(is_prime(mod_t::modulo()));\n\
+    \ 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title Number-Theoretic-Transform\n * @category\
+    \ FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\n\
+    using u128 = __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform\
+    \ {\n  static inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0,\
+    \ i0 = 0; m >>= 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n; prod\
+    \ *= r2[bsf(++h)], i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n\
+    \          x[i + m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static\
+    \ inline void idft(int n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m <\
+    \ n; m <<= 1, h = 0, i0 = 0)\n      for (mod_t prod = 1, y; i0 < n; prod *= ir2[bsf(++h)],\
+    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i]\
+    \ - x[i + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv\
+    \ = mod_t(1) / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t\
+    \ x[]) {\n    for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] +\
+    \ x[i + 1]);\n  }\n  static void odd_dft(int n, mod_t x[]) {\n    mod_t prod =\
+    \ iv2;\n    for (int i = 0, j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i]\
+    \ - x[i + 1]), prod *= ir2[bsf(~((u64)j))];\n  }\n  static void dft_doubling(int\
+    \ n, mod_t x[]) {\n    std::copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1),\
+    \ t(rt[bsf(n << 1)]);\n    for (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n\
+    \    dft(n, x + n);\n  }\n  static constexpr std::uint64_t lim() { return 1ULL\
+    \ << E; }\n\n protected:\n  static constexpr mod_t pow2th_root(std::uint8_t e)\
+    \ {\n    for (mod_t r = 2;; r += 1)\n      if (auto s = r.pow((mod_t::modulo()\
+    \ - 1) / 2); s != 1 && s * s == 1)\n        return r.pow((mod_t::modulo() - 1)\
+    \ >> e);\n    return 0;  // can not find\n  }            // return \u03C9 (primitive\
+    \ 2^e th root)\n  static_assert(mod_t::modulo() & 1);\n  static_assert(is_prime(mod_t::modulo()));\n\
     \  static constexpr std::uint8_t E = bsf(mod_t::modulo() - 1);\n  static constexpr\
     \ auto roots(mod_t w) {\n    std::array<mod_t, E + 1> ret = {};\n    for (std::uint8_t\
     \ e = E; e; e--, w *= w) ret[e] = w;\n    return ret[0] = w, ret;\n  }\n  static\
@@ -257,82 +254,89 @@ data:
     \ NTTArray<T, _Nm, false> bf[_Nm2];\n};\ntemplate <class T, std::size_t _Nm, int\
     \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
-    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/fps_inv.hpp\"\n\n/**\n\
-    \ * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv\n * @category FFT\n */\n\n\
-    // BEGIN CUT HERE\ntemplate <std::size_t _Nm, class mod_t>\nvoid inv_base(const\
-    \ mod_t p[], int n, mod_t r[], int i = 1) {\n  using GNA1 = GlobalNTTArray<mod_t,\
-    \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr\
-    \ int TH = 64 << (!is_nttfriend<mod_t, _Nm>() << 1);\n  if (n <= i) return;\n\
-    \  assert(((n & -n) == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n,\
-    \ TH);\n  const mod_t Z = 0, miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n\
-    \    for (r[j = i] = Z; j--;) r[i] += r[j] * p[i - j];\n  for (int e = i << 1;\
-    \ i < n; e = i << 1) {\n    GNA1::bf.set(r, 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0,\
-    \ e);\n    GNA2::bf.set(p, 0, e), GNA2::bf.dft(0, e);\n    GNA2::bf.mul(GNA1::bf,\
-    \ 0, e), GNA2::bf.idft(0, e);\n    if constexpr (!is_nttfriend<mod_t, _Nm>())\n\
-    \      GNA2::bf.get(r, i, e), GNA2::bf.set(r, i, e);\n    GNA2::bf.zeros(0, i),\
-    \ GNA2::bf.dft(0, e), GNA1::bf.mul(GNA2::bf, 0, e);\n    for (GNA1::bf.idft(0,\
-    \ e), GNA1::bf.get(r, i, e); i < e; i++) r[i] = -r[i];\n  }\n}\ntemplate <class\
-    \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> inv(const std::vector<mod_t>\
-    \ &p) {\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
-    \ _Nm, 2>;\n  static constexpr std::size_t _Nm2 = _Nm * 2 / 15;\n  using GNA1\
-    \ = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2,\
-    \ 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
-    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH2 = is_nttfriend<mod_t,\
-    \ _Nm2>()\n                                 ? 115\n                          \
-    \       : (is_nttarraydouble<mod_t, _Nm2> ? 384 : 452);\n  static constexpr int\
-    \ C = nttarray_type<mod_t, _Nm> << 1, lnR = 4;\n  static constexpr int TH3 = 5\
-    \ + ((nttarray_type<mod_t, _Nm> == 3) << 1);\n  static constexpr int D = 10 *\
-    \ nttarray_type<mod_t, _Nm>;\n  const int n = p.size();\n  assert(n > 0), assert(p[0]\
-    \ != mod_t(0));\n  std::copy(p.begin(), p.end(), GAp::bf);\n  mod_t *bfk = GAr::bf,\
-    \ *pbfk = GAp::bf;\n  const mod_t Z = 0, miv = -(bfk[0] = mod_t(1) / pbfk[0]);\n\
-    \  if (n < TH2) {\n    for (int j, i = 1; i < n; bfk[i++] *= miv)\n      for (bfk[j\
-    \ = i] = Z; j--;) bfk[i] += bfk[j] * pbfk[i - j];\n    return std::vector<mod_t>(bfk,\
-    \ bfk + n);\n  }\n  const int bl = std::max(bsf(get_len(n)) - lnR, TH3);\n  int\
-    \ l = ((n >> bl) + ((((1 << bl) - 1) & n) > (C * bl + D))) << bl;\n  const int\
-    \ m = l & -l, m2 = m << 1, ed = (l + m - 1) / m;\n  if (inv_base<_Nm2>(pbfk, m,\
-    \ bfk); 1 < ed)\n    GNA2D2::bf[0].set(pbfk, 0, m), GNA2D2::bf[0].zeros(m, m2),\n\
-    \        GNA2D2::bf[0].dft(0, m2);\n  for (int k = 1, mm = m; k < ed; mm = std::min(m,\
-    \ n - m * ++k)) {\n    GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m,\
-    \ m2);\n    GNA2D1::bf[k - 1].dft(0, m2), GNA1::bf.set(pbfk += m, 0, m);\n   \
-    \ GNA1::bf.zeros(m, m2);\n    GNA1::bf.dft(0, m2), GNA2D2::bf[k].add(GNA1::bf,\
-    \ GNA2D2::bf[0], 0, m);\n    GNA2D2::bf[k].dif(GNA1::bf, GNA2D2::bf[0], m, m2),\
-    \ GNA2::bf.zeros(0, m2);\n    if (k + 1 < ed) GNA2D2::bf[0].subst(GNA1::bf, 0,\
-    \ m2);\n    for (int j = k; j--;)\n      GNA1::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k\
-    \ - j], 0, m2),\n          GNA2::bf.add(GNA1::bf, 0, m2);\n    GNA2::bf.idft(0,\
-    \ m2), GNA2::bf.zeros(m, m2), bfk += m;\n    if constexpr (!is_nttfriend<mod_t,\
-    \ _Nm2>())\n      GNA2::bf.get(bfk, 0, m), GNA2::bf.set(bfk, 0, m);\n    GNA2::bf.dft(0,\
-    \ m2);\n    GNA2::bf.mul(GNA2D1::bf[0], 0, m2), GNA2::bf.idft(0, m2);\n    for\
-    \ (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm] = -bfk[mm];\n  }\n  if (l < n)\n \
-    \   for (int j; l < n; GAr::bf[l++] *= miv)\n      for (GAr::bf[j = l] = Z; j--;)\
-    \ GAr::bf[l] += GAr::bf[j] * GAp::bf[l - j];\n  return std::vector<mod_t>(GAr::bf,\
-    \ GAr::bf + n);\n}\n#line 5 \"test/yukicoder/3046.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int K;\n\
-    \  cin >> K;\n  int N;\n  cin >> N;\n  using Mint = StaticModInt<int(1e9 + 7)>;\n\
-    \  vector<Mint> f(1e5 + 10, 0);\n  for (int i = 0; i < N; i++) {\n    int x;\n\
-    \    cin >> x, f[x] = -1;\n  }\n  f[0] = 1, f.resize(K + 1);\n  auto ans = inv(f);\n\
-    \  cout << ans[K] << endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/3046\"\n#include <bits/stdc++.h>\n\
-    #include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_inv.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int K;\n\
-    \  cin >> K;\n  int N;\n  cin >> N;\n  using Mint = StaticModInt<int(1e9 + 7)>;\n\
-    \  vector<Mint> f(1e5 + 10, 0);\n  for (int i = 0; i < N; i++) {\n    int x;\n\
-    \    cin >> x, f[x] = -1;\n  }\n  f[0] = 1, f.resize(K + 1);\n  auto ans = inv(f);\n\
-    \  cout << ans[K] << endl;\n  return 0;\n}"
+    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/sample_points_shift.hpp\"\
+    \n\n/**\n * @title sample points shift\n * @category FFT\n * O( (d+m)log(d+m)\
+    \ )\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
+    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &pts, mod_t c,\n\
+    \                                       int m) {\n  assert(m <= mod_t::modulo()),\
+    \ assert(pts.size() <= mod_t::modulo());\n  if (m == 0) return {};\n  std::uint64_t\
+    \ c_64 = c.val(), nc1 = (c + (m - 1)).val();\n  std::uint32_t k = pts.size(),\
+    \ d = k - 1, i = d, e;\n  if (c_64 + m <= k)\n    return std::vector<mod_t>(pts.begin()\
+    \ + c_64, pts.begin() + c_64 + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n\
+    \  for (GA::bf[d] = 1; i; i--) GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1)\
+    \ / (GA::bf[0] * GA::bf[0]);\n  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d\
+    \ - i] = GA::bf[i] * GA::bf[d - i] * t;\n  for (i = k; i--;) GA::bf[i] *= pts[i];\n\
+    \  for (i = 1; i < k; i += 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z\
+    \ = 0;\n  auto f = [&](mod_t a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n    for (e = d + n, i = 0, t = a - d; i < e; i++, t += 1) ret[i] =\
+    \ t;\n    std::partial_sum(ret, ret + e, GAq::bf, std::multiplies<>());\n    for\
+    \ (t = mod_t(1) / GAq::bf[e - 1]; --i;)\n      GAq::bf[i] = t * GAq::bf[i - 1],\
+    \ t *= ret[i];\n    if (GAq::bf[0] = t; k >= 74 && n >= 128) {\n      const int\
+    \ len = get_len(e + (d > 0));\n      GNA1::bf.set(GA::bf, 0, k), GNA1::bf.zeros(k,\
+    \ len), GNA1::bf.dft(0, len);\n      GNA2::bf.set(GAq::bf, 0, e), GNA2::bf.zeros(e,\
+    \ len), GNA2::bf.dft(0, len);\n      GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0,\
+    \ len);\n      GNA1::bf.get(ret - d, d, e);\n    } else\n      for (std::fill_n(ret,\
+    \ n, Z), i = k; i--;)\n        for (int b = d - i, j = n; j--;) ret[j] += GA::bf[i]\
+    \ * GAq::bf[j + b];\n    for (t = a, i = k; --i;) t *= a - i;\n    for (; i <\
+    \ n; i++) ret[i] *= t, t *= (a + (i + 1)) * GAq::bf[i];\n    return ret + n;\n\
+    \  };\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  if (mod_t * bf; c_64 < k)\
+    \ {\n    if (bf = std::copy_n(pts.begin() + c_64, k - c_64, GAp::bf); nc1 < k)\n\
+    \      std::copy_n(pts.begin(), nc1 + 1, f(k, mod_t::modulo() - k, bf));\n   \
+    \ else\n      f(k, c_64 + m - k, bf);\n  } else if (nc1 < c_64) {\n    if (mod_t\
+    \ *bf = f(c, (-c).val(), GAp::bf); nc1 < k)\n      std::copy_n(pts.begin(), nc1\
+    \ + 1, bf);\n    else\n      f(k, nc1 + 1 - k, std::copy_n(pts.begin(), k, bf));\n\
+    \  } else\n    f(c, m, GAp::bf);\n  return std::vector<mod_t>(GAp::bf, GAp::bf\
+    \ + m);\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\n\n\
+    /**\n * @title sample points shift\n * @category FFT\n * O( (d+m)log(d+m) )\n\
+    \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
+    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &pts, mod_t c,\n\
+    \                                       int m) {\n  assert(m <= mod_t::modulo()),\
+    \ assert(pts.size() <= mod_t::modulo());\n  if (m == 0) return {};\n  std::uint64_t\
+    \ c_64 = c.val(), nc1 = (c + (m - 1)).val();\n  std::uint32_t k = pts.size(),\
+    \ d = k - 1, i = d, e;\n  if (c_64 + m <= k)\n    return std::vector<mod_t>(pts.begin()\
+    \ + c_64, pts.begin() + c_64 + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n\
+    \  for (GA::bf[d] = 1; i; i--) GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1)\
+    \ / (GA::bf[0] * GA::bf[0]);\n  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d\
+    \ - i] = GA::bf[i] * GA::bf[d - i] * t;\n  for (i = k; i--;) GA::bf[i] *= pts[i];\n\
+    \  for (i = 1; i < k; i += 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z\
+    \ = 0;\n  auto f = [&](mod_t a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n    for (e = d + n, i = 0, t = a - d; i < e; i++, t += 1) ret[i] =\
+    \ t;\n    std::partial_sum(ret, ret + e, GAq::bf, std::multiplies<>());\n    for\
+    \ (t = mod_t(1) / GAq::bf[e - 1]; --i;)\n      GAq::bf[i] = t * GAq::bf[i - 1],\
+    \ t *= ret[i];\n    if (GAq::bf[0] = t; k >= 74 && n >= 128) {\n      const int\
+    \ len = get_len(e + (d > 0));\n      GNA1::bf.set(GA::bf, 0, k), GNA1::bf.zeros(k,\
+    \ len), GNA1::bf.dft(0, len);\n      GNA2::bf.set(GAq::bf, 0, e), GNA2::bf.zeros(e,\
+    \ len), GNA2::bf.dft(0, len);\n      GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0,\
+    \ len);\n      GNA1::bf.get(ret - d, d, e);\n    } else\n      for (std::fill_n(ret,\
+    \ n, Z), i = k; i--;)\n        for (int b = d - i, j = n; j--;) ret[j] += GA::bf[i]\
+    \ * GAq::bf[j + b];\n    for (t = a, i = k; --i;) t *= a - i;\n    for (; i <\
+    \ n; i++) ret[i] *= t, t *= (a + (i + 1)) * GAq::bf[i];\n    return ret + n;\n\
+    \  };\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  if (mod_t * bf; c_64 < k)\
+    \ {\n    if (bf = std::copy_n(pts.begin() + c_64, k - c_64, GAp::bf); nc1 < k)\n\
+    \      std::copy_n(pts.begin(), nc1 + 1, f(k, mod_t::modulo() - k, bf));\n   \
+    \ else\n      f(k, c_64 + m - k, bf);\n  } else if (nc1 < c_64) {\n    if (mod_t\
+    \ *bf = f(c, (-c).val(), GAp::bf); nc1 < k)\n      std::copy_n(pts.begin(), nc1\
+    \ + 1, bf);\n    else\n      f(k, nc1 + 1 - k, std::copy_n(pts.begin(), k, bf));\n\
+    \  } else\n    f(c, m, GAp::bf);\n  return std::vector<mod_t>(GAp::bf, GAp::bf\
+    \ + m);\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
-  isVerificationFile: true
-  path: test/yukicoder/3046.test.cpp
+  - src/Math/ModInt.hpp
+  isVerificationFile: false
+  path: src/FFT/sample_points_shift.hpp
   requiredBy: []
   timestamp: '2022-09-29 12:59:48+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/yukicoder/3046.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
+documentation_of: src/FFT/sample_points_shift.hpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/3046.test.cpp
-- /verify/test/yukicoder/3046.test.cpp.html
-title: test/yukicoder/3046.test.cpp
+- /library/src/FFT/sample_points_shift.hpp
+- /library/src/FFT/sample_points_shift.hpp.html
+title: sample points shift
 ---

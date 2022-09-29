@@ -396,9 +396,9 @@ data:
   timestamp: '2022-09-19 00:53:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_second.test.cpp
   - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/stirling_first.test.cpp
 documentation_of: src/Old/fps_sequence.hpp
 layout: document

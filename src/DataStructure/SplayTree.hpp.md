@@ -334,11 +334,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  - test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/1508.SplayTree.test.cpp
   - test/aoj/ITP2_4_B.SplayTree.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/aoj/1508.SplayTree.test.cpp
+  - test/aoj/ITP2_4_A.SplayTree.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
 documentation_of: src/DataStructure/SplayTree.hpp
 layout: document
 redirect_from:
