@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_h
@@ -390,23 +390,24 @@ data:
     \ _Nm> &fps,\n                                  std::uint64_t k) {\n  using FPS\
     \ = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_, kk = mod_t(k), k,\
     \ cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
-    \ i) mutable {\n    if (s) return (unsigned long long)i < cnt ? mod_t(0) : (*s)(i\
-    \ - (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
-    \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
-    \ + os) * iv; });\n    FPS t1([h0 = log(t0).handle(), kk](int i) { return h0(i)\
-    \ * kk; });\n    s.emplace(\n        [vk = v.pow(k), h1 = exp(t1).handle()](int\
-    \ i) { return h1(i) * vk; });\n    return cnt ? mod_t(0) : (*s)(i);\n  });\n}\n\
-    #line 5 \"test/atcoder/abc213_h.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n\
-    \  using FPS = FormalPowerSeries<Mint, 40'010>;\n  int N, M, T;\n  cin >> N >>\
-    \ M >> T;\n  std::vector<Mint> p[M];\n  int a[M], b[M];\n  for (int i = 0; i <\
-    \ M; i++) {\n    cin >> a[i] >> b[i], a[i]--, b[i]--;\n    p[i].resize(T, 0);\n\
-    \    for (int j = 0; j < T; j++) cin >> p[i][j];\n  }\n  auto X = FPS::x();\n\
-    \  FPS d[N];\n  FPS::Resetter r[N];\n  for (int s = 0; s < N; s++) r[s] = d[s].reset();\n\
-    \  for (int s = 0; s < N; s++) {\n    FPS tmp;\n    for (int i = 0; i < M; i++)\
-    \ {\n      if (b[i] == s) tmp = d[a[i]] * p[i] + tmp;\n      if (a[i] == s) tmp\
-    \ = d[b[i]] * p[i] + tmp;\n    }\n    tmp = tmp * X;\n    if (!s) tmp = tmp +\
-    \ 1;\n    r[s].set(tmp);\n  }\n  cout << d[0][T] << '\\n';\n  return 0;\n}\n"
+    \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
+    \ (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
+    \    cout << cnt << '\\n';\n    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) /\
+    \ v, h](int i) { return h(i + os) * iv; });\n    FPS t1([h0 = log(t0).handle(),\
+    \ kk](int i) { return h0(i) * kk; });\n    s.emplace(\n        [vk = v.pow(k),\
+    \ h1 = exp(t1).handle()](int i) { return h1(i) * vk; });\n    return cnt ? mod_t(0)\
+    \ : (*s)(i);\n  });\n}\n#line 5 \"test/atcoder/abc213_h.test.cpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ Mint = StaticModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint, 40'010>;\n\
+    \  int N, M, T;\n  cin >> N >> M >> T;\n  std::vector<Mint> p[M];\n  int a[M],\
+    \ b[M];\n  for (int i = 0; i < M; i++) {\n    cin >> a[i] >> b[i], a[i]--, b[i]--;\n\
+    \    p[i].resize(T, 0);\n    for (int j = 0; j < T; j++) cin >> p[i][j];\n  }\n\
+    \  auto X = FPS::x();\n  FPS d[N];\n  FPS::Resetter r[N];\n  for (int s = 0; s\
+    \ < N; s++) r[s] = d[s].reset();\n  for (int s = 0; s < N; s++) {\n    FPS tmp;\n\
+    \    for (int i = 0; i < M; i++) {\n      if (b[i] == s) tmp = d[a[i]] * p[i]\
+    \ + tmp;\n      if (a[i] == s) tmp = d[b[i]] * p[i] + tmp;\n    }\n    tmp = tmp\
+    \ * X;\n    if (!s) tmp = tmp + 1;\n    r[s].set(tmp);\n  }\n  cout << d[0][T]\
+    \ << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_h\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
@@ -428,8 +429,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_h.test.cpp
   requiredBy: []
-  timestamp: '2022-10-01 17:05:00+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-10-01 18:03:50+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc213_h.test.cpp
 layout: document

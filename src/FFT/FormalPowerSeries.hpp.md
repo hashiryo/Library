@@ -12,16 +12,16 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.FPS.test.cpp
     title: test/yosupo/exp_of_FPS.FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.FPS.test.cpp
     title: test/yosupo/inv_of_FPS.FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.FPS.test.cpp
     title: test/yosupo/log_of_FPS.FPS.test.cpp
   - icon: ':x:'
@@ -32,7 +32,7 @@ data:
     title: test/yukicoder/963.FPS.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -403,12 +403,13 @@ data:
     \ _Nm> &fps,\n                                  std::uint64_t k) {\n  using FPS\
     \ = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_, kk = mod_t(k), k,\
     \ cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
-    \ i) mutable {\n    if (s) return (unsigned long long)i < cnt ? mod_t(0) : (*s)(i\
-    \ - (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
-    \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
-    \ + os) * iv; });\n    FPS t1([h0 = log(t0).handle(), kk](int i) { return h0(i)\
-    \ * kk; });\n    s.emplace(\n        [vk = v.pow(k), h1 = exp(t1).handle()](int\
-    \ i) { return h1(i) * vk; });\n    return cnt ? mod_t(0) : (*s)(i);\n  });\n}\n"
+    \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
+    \ (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
+    \    cout << cnt << '\\n';\n    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) /\
+    \ v, h](int i) { return h(i + os) * iv; });\n    FPS t1([h0 = log(t0).handle(),\
+    \ kk](int i) { return h0(i) * kk; });\n    s.emplace(\n        [vk = v.pow(k),\
+    \ h1 = exp(t1).handle()](int i) { return h1(i) * vk; });\n    return cnt ? mod_t(0)\
+    \ : (*s)(i);\n  });\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\n\n\
     /**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category FFT\n * @see\
     \ https://hly1204.github.io/library/math/formal_power_series.hpp\n */\n\n// BEGIN\
@@ -539,12 +540,13 @@ data:
     \ _Nm> &fps,\n                                  std::uint64_t k) {\n  using FPS\
     \ = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_, kk = mod_t(k), k,\
     \ cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
-    \ i) mutable {\n    if (s) return (unsigned long long)i < cnt ? mod_t(0) : (*s)(i\
-    \ - (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
-    \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
-    \ + os) * iv; });\n    FPS t1([h0 = log(t0).handle(), kk](int i) { return h0(i)\
-    \ * kk; });\n    s.emplace(\n        [vk = v.pow(k), h1 = exp(t1).handle()](int\
-    \ i) { return h1(i) * vk; });\n    return cnt ? mod_t(0) : (*s)(i);\n  });\n}"
+    \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
+    \ (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
+    \    cout << cnt << '\\n';\n    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) /\
+    \ v, h](int i) { return h(i + os) * iv; });\n    FPS t1([h0 = log(t0).handle(),\
+    \ kk](int i) { return h0(i) * kk; });\n    s.emplace(\n        [vk = v.pow(k),\
+    \ h1 = exp(t1).handle()](int i) { return h1(i) * vk; });\n    return cnt ? mod_t(0)\
+    \ : (*s)(i);\n  });\n}"
   dependsOn:
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
@@ -552,8 +554,8 @@ data:
   isVerificationFile: false
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
-  timestamp: '2022-10-01 17:05:00+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-10-01 18:03:50+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/pow_of_FPS.FPS.test.cpp

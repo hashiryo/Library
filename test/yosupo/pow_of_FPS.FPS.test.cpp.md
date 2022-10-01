@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -390,17 +390,18 @@ data:
     \ _Nm> &fps,\n                                  std::uint64_t k) {\n  using FPS\
     \ = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_, kk = mod_t(k), k,\
     \ cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
-    \ i) mutable {\n    if (s) return (unsigned long long)i < cnt ? mod_t(0) : (*s)(i\
-    \ - (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
-    \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
-    \ + os) * iv; });\n    FPS t1([h0 = log(t0).handle(), kk](int i) { return h0(i)\
-    \ * kk; });\n    s.emplace(\n        [vk = v.pow(k), h1 = exp(t1).handle()](int\
-    \ i) { return h1(i) * vk; });\n    return cnt ? mod_t(0) : (*s)(i);\n  });\n}\n\
-    #line 5 \"test/yosupo/pow_of_FPS.FPS.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  using Mint = StaticModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  std::vector<Mint> A(N);\n  for (int i = 0; i\
-    \ < N; i++) cin >> A[i];\n  auto ans = pow(FPS(A), M);\n  for (int i = 0; i <\
-    \ N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n}\n"
+    \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
+    \ (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
+    \    cout << cnt << '\\n';\n    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) /\
+    \ v, h](int i) { return h(i + os) * iv; });\n    FPS t1([h0 = log(t0).handle(),\
+    \ kk](int i) { return h0(i) * kk; });\n    s.emplace(\n        [vk = v.pow(k),\
+    \ h1 = exp(t1).handle()](int i) { return h1(i) * vk; });\n    return cnt ? mod_t(0)\
+    \ : (*s)(i);\n  });\n}\n#line 5 \"test/yosupo/pow_of_FPS.FPS.test.cpp\"\nusing\
+    \ namespace std;\n\nsigned main() {\n  using Mint = StaticModInt<998244353>;\n\
+    \  using FPS = FormalPowerSeries<Mint>;\n  int N, M;\n  cin >> N >> M;\n  std::vector<Mint>\
+    \ A(N);\n  for (int i = 0; i < N; i++) cin >> A[i];\n  auto ans = pow(FPS(A),\
+    \ M);\n  for (int i = 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  using Mint = StaticModInt<998244353>;\n\
@@ -416,7 +417,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/pow_of_FPS.FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-10-01 17:05:00+09:00'
+  timestamp: '2022-10-01 18:03:50+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/pow_of_FPS.FPS.test.cpp
