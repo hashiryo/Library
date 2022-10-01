@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
     links:
@@ -139,7 +139,7 @@ data:
   path: src/Math/prime_count.hpp
   requiredBy: []
   timestamp: '2021-11-23 22:15:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/counting_primes.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp

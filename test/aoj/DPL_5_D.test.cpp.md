@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
@@ -47,11 +47,14 @@ data:
     \ { return D((D &)*this) /= r; }\n  constexpr bool operator!=(const D &r) const\
     \ { return !((D &)*this == r); }\n  constexpr D pow(u64 k) const {\n    for (D\
     \ ret(1), b((const D &)*this);; b *= b)\n      if (k & 1 ? ret *= b : 0; !(k >>=\
-    \ 1)) return ret;\n  }\n  constexpr D inv() const { return pow(D::mod - 2); }\n\
-    \  friend ostream &operator<<(ostream &os, const D &r) { return os << r.val();\
-    \ }\n  friend istream &operator>>(istream &is, D &r) {\n    long long v;\n   \
-    \ return is >> v, r = D(v), is;\n  }\n};\ntemplate <class B>\nstruct ModInt_Na\
-    \ : public B, public ModIntImpl<ModInt_Na<B>> {\n  using DUint = conditional_t<is_same_v<typename\
+    \ 1)) return ret;\n  }\n  constexpr D inv() const {\n    typename D::Int x = 1,\
+    \ y = 0, a = ((D *)this)->val(), b = D::mod;\n    for (typename D::Int q = 0,\
+    \ z = 0, c = 0; b;)\n      z = x, c = a, x = y, y = z - y * (q = a / b), a = b,\
+    \ b = c - b * q;\n    return assert(a == 1), D(x);\n  }\n  friend ostream &operator<<(ostream\
+    \ &os, const D &r) { return os << r.val(); }\n  friend istream &operator>>(istream\
+    \ &is, D &r) {\n    long long v;\n    return is >> v, r = D(v), is;\n  }\n};\n\
+    template <class B>\nstruct ModInt_Na : public B, public ModIntImpl<ModInt_Na<B>>\
+    \ {\n  using Int = make_signed_t<typename B::Uint>;\n  using DUint = conditional_t<is_same_v<typename\
     \ B::Uint, u64>, u128, u64>;\n  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr\
     \ ModInt_Na() = default;\n  template <class T, enable_if_t<is_integral_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod)\
@@ -64,7 +67,7 @@ data:
     \ bool operator==(const ModInt_Na &r) const { return x == r.x; }\n  constexpr\
     \ auto val() const { return x; }\n\n private:\n  typename B::Uint x = 0;\n};\n\
     template <class B>\nstruct ModInt_Mon : public B, public ModIntImpl<ModInt_Mon<B>>\
-    \ {\n  using Uint = u64;\n  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n\
+    \ {\n  using Int = int64_t;\n  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n\
     \  constexpr ModInt_Mon() = default;\n  template <class T, enable_if_t<is_integral_v<T>,\
     \ nullptr_t> = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod\
     \ - ((-n) % B::mod) : n % B::mod, B::r2)) {}\n  template <class T, enable_if_t<is_modint_v<T>,\
@@ -115,7 +118,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_D.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 15:23:39+09:00'
+  timestamp: '2022-10-02 02:21:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_D.test.cpp

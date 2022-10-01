@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n
@@ -42,32 +42,32 @@ data:
     \n * @see\n * https://maspypy.com/stirling-%e6%95%b0%e3%82%92-p-%e3%81%a7%e5%89%b2%e3%81%a3%e3%81%9f%e4%bd%99%e3%82%8a%e3%81%ae%e8%a8%88%e7%ae%97\n\
     \ * \u524D\u51E6\u7406 O(p^2), \u30AF\u30A8\u30EA O(log n)\n */\n\n// BEGIN CUT\
     \ HERE\nclass StirlingNumber {\n  const std::uint16_t p;\n  std::vector<std::vector<std::uint16_t>>\
-    \ c, s1, s2;\n  void buildC() {\n    c.resize(p), c[0] = {1};\n    for (int i\
-    \ = 1, j; i < p; i++)\n      for (c[i] = c[i - 1], c[i].emplace_back(0), j = 1;\
-    \ j <= i; j++)\n        c[i][j] -= p & -((c[i][j] += c[i - 1][j - 1]) >= p);\n\
-    \  }\n  void buildS1() {\n    s1.resize(p), s1[0] = {1};\n    for (int i = 1,\
-    \ j, t; i < p; s1[i][i] = 1, i++)\n      for (s1[i].resize(i + 1, 0), j = 1, t\
-    \ = p - i + 1; j < i; j++)\n        s1[i][j] = (t * s1[i - 1][j] + s1[i - 1][j\
-    \ - 1]) % p;\n  }\n  void buildS2() {\n    s2.resize(p), s2[0] = {1};\n    for\
-    \ (int i = 1, j; i < p; s2[i][i] = 1, i++)\n      for (s2[i].resize(i + 1, 0),\
-    \ j = 1; j < i; j++)\n        s2[i][j] = (j * s2[i - 1][j] + s2[i - 1][j - 1])\
-    \ % p;\n  }\n\n public:\n  StirlingNumber(std::uint32_t p_, bool first = true,\
-    \ bool second = true)\n      : p(p_) {\n    assert(is_prime(p_)), assert(p_ <\
-    \ (1 << 15)), buildC();\n    if (first) buildS1();\n    if (second) buildS2();\n\
-    \  }\n  int nCk(std::uint64_t n, std::uint64_t k) {\n    if (k > n) return 0;\n\
-    \    int ret = 1, i, j;\n    for (; k = std::min(k, n - k); ret = ret * c[i][j]\
-    \ % p, n /= p, k /= p)\n      if (i = n % p, j = k % p; j > i) return 0;\n   \
-    \ return ret;\n  }\n  int S1(std::uint64_t n, std::uint64_t k) {\n    if (k >\
-    \ n) return 0;\n    std::uint64_t i = n / p;\n    if (i > k) return 0;\n    std::int64_t\
-    \ a = (k - i) / (p - 1);\n    std::uint16_t j = n % p, b = (k - i) % (p - 1);\n\
-    \    if (!b && j) b += (p - 1), a -= 1;\n    if (a < 0 || i < a || b > j) return\
-    \ 0;\n    return (j = nCk(i, a) * s1[j][b] % p) && ((i + a) & 1) ? p - j : j;\n\
-    \  }\n  int S2(std::uint64_t n, std::uint64_t k) {\n    if (k > n) return 0;\n\
-    \    if (!n) return 1;\n    std::uint64_t i = k / p;\n    if (n <= i) return 0;\n\
-    \    std::uint64_t a = (n - i - 1) / (p - 1);\n    std::uint16_t j = k % p, b\
-    \ = (n - i) - a * (p - 1);\n    if (j > b) return 0;\n    return b == p - 1 &&\
-    \ !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j] % p;\n  }\n};\n#line 5 \"test/yosupo/stirling_2_small_p_large_n.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \ c, s1, s2;\n  void buildS1() {\n    s1.resize(p), s1[0] = {1};\n    for (int\
+    \ i = 1, j, t; i < p; s1[i][i] = 1, i++)\n      for (s1[i].resize(i + 1, 0), j\
+    \ = 1, t = p - i + 1; j < i; j++)\n        s1[i][j] = (t * s1[i - 1][j] + s1[i\
+    \ - 1][j - 1]) % p;\n  }\n  void buildS2() {\n    s2.resize(p), s2[0] = {1};\n\
+    \    for (int i = 1, j; i < p; s2[i][i] = 1, i++)\n      for (s2[i].resize(i +\
+    \ 1, 0), j = 1; j < i; j++)\n        s2[i][j] = (j * s2[i - 1][j] + s2[i - 1][j\
+    \ - 1]) % p;\n  }\n\n public:\n  StirlingNumber(std::uint32_t p_, bool first =\
+    \ true, bool second = true)\n      : p(p_), c(p) {\n    assert(is_prime(p_)),\
+    \ assert(p_ < (1 << 15)), c[0] = {1};\n    for (int i = 1, j; i < p; i++)\n  \
+    \    for (c[i] = c[i - 1], c[i].emplace_back(0), j = 1; j <= i; j++)\n       \
+    \ c[i][j] -= p & -((c[i][j] += c[i - 1][j - 1]) >= p);\n    if (first) buildS1();\n\
+    \    if (second) buildS2();\n  }\n  int nCk(std::uint64_t n, std::uint64_t k)\
+    \ {\n    if (k > n) return 0;\n    int ret = 1, i, j;\n    for (k = std::min(k,\
+    \ n - k); k; ret = ret * c[i][j] % p, n /= p, k /= p)\n      if (i = n % p, j\
+    \ = k % p; j > i) return 0;\n    return ret;\n  }\n  int S1(std::uint64_t n, std::uint64_t\
+    \ k) {\n    if (k > n) return 0;\n    std::uint64_t i = n / p;\n    if (i > k)\
+    \ return 0;\n    std::int64_t a = (k - i) / (p - 1);\n    std::uint16_t j = n\
+    \ % p, b = (k - i) % (p - 1);\n    if (!b && j) b += (p - 1), a -= 1;\n    if\
+    \ (a < 0 || i < a || b > j) return 0;\n    return (j = nCk(i, a) * s1[j][b] %\
+    \ p) && ((i + a) & 1) ? p - j : j;\n  }\n  int S2(std::uint64_t n, std::uint64_t\
+    \ k) {\n    if (k > n) return 0;\n    if (!n) return 1;\n    std::uint64_t i =\
+    \ k / p;\n    if (n <= i) return 0;\n    std::uint64_t a = (n - i - 1) / (p -\
+    \ 1);\n    std::uint16_t j = k % p, b = (n - i) - a * (p - 1);\n    if (j > b)\
+    \ return 0;\n    return b == p - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j]\
+    \ % p;\n  }\n};\n#line 5 \"test/yosupo/stirling_2_small_p_large_n.test.cpp\"\n\
+    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  int T, p;\n  cin >> T >> p;\n  StirlingNumber SN(p, 0, 1);\n  while (T--) {\n\
     \    long long n, k;\n    cin >> n >> k;\n    cout << SN.S2(n, k) << '\\n';\n\
     \  }\n  return 0;\n}\n"
@@ -83,8 +83,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_2_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2022-10-01 23:17:45+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-10-02 02:21:45+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_2_small_p_large_n.test.cpp
 layout: document
