@@ -4,12 +4,15 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
-    path: src/FFT/SubProductTree.hpp
-    title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
+  - icon: ':question:'
+    path: src/FFT/convolve.hpp
+    title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
+  - icon: ':question:'
+    path: src/FFT/fps_exp.hpp
+    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
   - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
@@ -20,22 +23,58 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/bernoulli.test.cpp
+    title: test/yosupo/bernoulli.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/partition.test.cpp
+    title: test/yosupo/partition.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/stirling_first.test.cpp
+    title: test/yosupo/stirling_first.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/stirling_second.test.cpp
+    title: test/yosupo/stirling_second.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/963.test.cpp
+    title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _pathExtension: hpp
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
+    document_title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\
+      \u6570\u4F7F\u7528)"
     links:
-    - https://judge.yosupo.jp/problem/multipoint_evaluation
-  bundledCode: "#line 1 \"test/yosupo/multipoint_evaluation.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
-    \n */\n\n// BEGIN CUT HERE\nnamespace modint_internal {\nusing namespace std;\n\
-    struct modint_base {};\nstruct sta_mint_base : modint_base {};\nstruct dyn_mint_base\
-    \ : modint_base {};\ntemplate <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
+    - https://en.wikipedia.org/wiki/Alternating_permutation
+    - https://en.wikipedia.org/wiki/Bernoulli_number
+    - https://en.wikipedia.org/wiki/Partition_function_(number_theory)
+    - https://en.wikipedia.org/wiki/Stirling_number
+    - https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE
+  bundledCode: "#line 2 \"src/FFT/fps_sequences.hpp\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n *\
+    \ @category \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n\
+    \ */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
+    \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
+    \ 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24, 35, 59, 56,\
+    \ 49, 18, 29, 11,\n      63, 52, 6,  26, 37, 40, 33, 47, 61, 45, 43, 21, 23, 58,\
+    \ 17, 10,\n      51, 25, 36, 32, 60, 20, 57, 16, 50, 31, 19, 15, 30, 14, 13, 12};\n\
+    \  return convert[(n & ~(n - 1)) * 157587932685088877 >> 58];\n}\nconstexpr std::uint64_t\
+    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
+    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
+    \ n) {\n  const std::uint64_t s = bsf(n - 1), d = n >> s;\n  for (auto a : {args...})\
+    \ {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d,\
+    \ x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1))\
+    \ break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n   \
+    \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
+    \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
+    \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 3 \"src/Math/ModInt.hpp\"\
+    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
+    namespace modint_internal {\nusing namespace std;\nstruct modint_base {};\nstruct\
+    \ sta_mint_base : modint_base {};\nstruct dyn_mint_base : modint_base {};\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base, mod_t>;\n\
+    template <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
     \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
@@ -99,48 +138,30 @@ data:
     \ id>>>;\n}  // namespace modint_internal\nusing modint_internal::DynamicModInt,\
     \ modint_internal::StaticModInt,\n    modint_internal::Montgomery, modint_internal::is_dynamicmodint_v,\n\
     \    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n#line\
-    \ 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
-    \ \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n//\
-    \ BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
-    \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
-    \ 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24, 35, 59, 56,\
-    \ 49, 18, 29, 11,\n      63, 52, 6,  26, 37, 40, 33, 47, 61, 45, 43, 21, 23, 58,\
-    \ 17, 10,\n      51, 25, 36, 32, 60, 20, 57, 16, 50, 31, 19, 15, 30, 14, 13, 12};\n\
-    \  return convert[(n & ~(n - 1)) * 157587932685088877 >> 58];\n}\nconstexpr std::uint64_t\
-    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
-    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
-    \ n) {\n  const std::uint64_t s = bsf(n - 1), d = n >> s;\n  for (auto a : {args...})\
-    \ {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d,\
-    \ x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1))\
-    \ break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n   \
-    \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
-    \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
-    \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 5 \"src/FFT/NTT.hpp\"\
-    \n\n/**\n * @title Number-Theoretic-Transform\n * @category FFT\n */\n\n// BEGIN\
-    \ CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\nusing u128 =\
-    \ __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform {\n  static\
-    \ inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0, i0 = 0; m >>=\
-    \ 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n; prod *= r2[bsf(++h)],\
-    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          x[i +\
-    \ m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static inline void idft(int\
-    \ n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0\
-    \ = 0)\n      for (mod_t prod = 1, y; i0 < n; prod *= ir2[bsf(++h)], i0 += (m\
-    \ << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i] - x[i\
-    \ + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv = mod_t(1)\
-    \ / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t x[]) {\n  \
-    \  for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] + x[i + 1]);\n\
-    \  }\n  static void odd_dft(int n, mod_t x[]) {\n    mod_t prod = iv2;\n    for\
-    \ (int i = 0, j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i] - x[i + 1]),\
-    \ prod *= ir2[bsf(~((u64)j))];\n  }\n  static void dft_doubling(int n, mod_t x[])\
-    \ {\n    std::copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1), t(rt[bsf(n\
-    \ << 1)]);\n    for (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n    dft(n,\
-    \ x + n);\n  }\n  static constexpr std::uint64_t lim() { return 1ULL << E; }\n\
-    \n protected:\n  static constexpr mod_t pow2th_root(std::uint8_t e) {\n    for\
-    \ (mod_t r = 2;; r += 1)\n      if (auto s = r.pow((mod_t::modulo() - 1) / 2);\
-    \ s != 1 && s * s == 1)\n        return r.pow((mod_t::modulo() - 1) >> e);\n \
-    \   return 0;  // can not find\n  }            // return \u03C9 (primitive 2^e\
-    \ th root)\n  static_assert(mod_t::modulo() & 1);\n  static_assert(is_prime(mod_t::modulo()));\n\
+    \ 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title Number-Theoretic-Transform\n * @category\
+    \ FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\n\
+    using u128 = __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform\
+    \ {\n  static inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0,\
+    \ i0 = 0; m >>= 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n; prod\
+    \ *= r2[bsf(++h)], i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n\
+    \          x[i + m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static\
+    \ inline void idft(int n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m <\
+    \ n; m <<= 1, h = 0, i0 = 0)\n      for (mod_t prod = 1, y; i0 < n; prod *= ir2[bsf(++h)],\
+    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i]\
+    \ - x[i + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv\
+    \ = mod_t(1) / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t\
+    \ x[]) {\n    for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] +\
+    \ x[i + 1]);\n  }\n  static void odd_dft(int n, mod_t x[]) {\n    mod_t prod =\
+    \ iv2;\n    for (int i = 0, j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i]\
+    \ - x[i + 1]), prod *= ir2[bsf(~((u64)j))];\n  }\n  static void dft_doubling(int\
+    \ n, mod_t x[]) {\n    std::copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1),\
+    \ t(rt[bsf(n << 1)]);\n    for (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n\
+    \    dft(n, x + n);\n  }\n  static constexpr std::uint64_t lim() { return 1ULL\
+    \ << E; }\n\n protected:\n  static constexpr mod_t pow2th_root(std::uint8_t e)\
+    \ {\n    for (mod_t r = 2;; r += 1)\n      if (auto s = r.pow((mod_t::modulo()\
+    \ - 1) / 2); s != 1 && s * s == 1)\n        return r.pow((mod_t::modulo() - 1)\
+    \ >> e);\n    return 0;  // can not find\n  }            // return \u03C9 (primitive\
+    \ 2^e th root)\n  static_assert(mod_t::modulo() & 1);\n  static_assert(is_prime(mod_t::modulo()));\n\
     \  static constexpr std::uint8_t E = bsf(mod_t::modulo() - 1);\n  static constexpr\
     \ auto roots(mod_t w) {\n    std::array<mod_t, E + 1> ret = {};\n    for (std::uint8_t\
     \ e = E; e; e--, w *= w) ret[e] = w;\n    return ret[0] = w, ret;\n  }\n  static\
@@ -357,75 +378,184 @@ data:
     \ -= pbfk[j];\n      GNA2::bf.set(bfk, 0, mm);\n      GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf,\
     \ 0, m2), GNA2::bf.idft(0, m2);\n      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]\
     \ = -bfk[mm];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n\
-    }\n#line 4 \"src/FFT/SubProductTree.hpp\"\n\n/**\n * @title \u8907\u6570\u306E\
-    \u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category FFT\n * \u3069\
-    \u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
-    \ std::size_t _Nm = 1 << 20>\nstruct SubProductTree {\n  using poly = std::vector<mod_t>;\n\
-    \  static const inline mod_t Z = 0;\n  std::vector<mod_t> xs, all;\n  int n, nn;\n\
-    \  std::vector<NTTArray<mod_t, _Nm, true>> p;\n  using GA1 = GlobalArray<mod_t,\
-    \ _Nm, 1>;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
-    \ _Nm, 2>;\n  SubProductTree(const std::vector<mod_t> &xs_)\n      : xs(xs_),\
-    \ n(xs_.size()), nn(get_len(n)), p(nn << 1) {\n    xs.resize(nn, Z);\n    for\
-    \ (int i = 0; i < nn; ++i)\n      p[nn + i].resize(2), p[nn + i].set(0, 1), p[nn\
-    \ + i].set(1, -xs[i]);\n    for (int i = nn; --i;) {\n      int ls = i << 1, rs\
-    \ = i << 1 | 1, len = get_len(p[ls].size());\n      p[ls].resize(len), p[rs].resize(len),\
-    \ p[ls].dft(0, len);\n      p[rs].dft(0, len), p[i].resize(len), p[i].mul(p[ls],\
-    \ p[rs], 0, len);\n      p[i].idft(0, len), p[i].resize(len + 1);\n      if constexpr\
-    \ (!is_nttfriend<mod_t, _Nm>())\n        p[i].get(GA1::bf, 1, len), p[i].set(GA1::bf,\
-    \ 1, len);\n      p[i].set(len, p[i].get(0) - 1), p[i].set(0, 1);\n    }\n   \
-    \ all.resize(n + 1), p[1].get(all.data(), 0, n + 1);\n  }\n  std::vector<mod_t>\
-    \ multi_eval(const poly &f) const {\n    int m = f.size();\n    if (m == 1) return\
-    \ std::vector<mod_t>(n, f[0]);\n    auto q = div<mod_t, _Nm>(poly(f.rbegin(),\
-    \ f.rend()), all);\n    if (m > nn)\n      std::copy(q.end() - nn, q.end(), GA1::bf);\n\
-    \    else\n      std::copy(q.begin(), q.end(), GA1::bf + nn - m),\n          std::fill(GA1::bf,\
-    \ GA1::bf + nn - m, Z);\n    for (int k = nn; k >>= 1;)\n      for (int i = 0,\
-    \ k2 = k << 1, o = nn / k; i < nn; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf\
-    \ + i, 0, k2), GNA1::bf.dft(0, k2);\n        GNA2::bf.mul(GNA1::bf, p[o | 1],\
-    \ 0, k2), GNA2::bf.idft(0, k2);\n        GNA1::bf.mul(p[o], 0, k2), GNA1::bf.idft(0,\
-    \ k2);\n        GNA2::bf.get(GA1::bf + i - k, k, k2), GNA1::bf.get(GA1::bf + i,\
-    \ k, k2);\n      }\n    return std::vector<mod_t>(GA1::bf, GA1::bf + n);\n  }\n\
-    \  poly interpolate(const std::vector<mod_t> &ys) {\n    for (int i = n; i; i--)\
-    \ GA1::bf[i - 1] = all[n - i] * i;\n    auto q = multi_eval(poly(GA1::bf, GA1::bf\
-    \ + n));\n    for (int i = n; i--;) GA1::bf[i] = ys[i] / q[i];\n    std::fill(GA1::bf\
-    \ + n, GA1::bf + nn, Z);\n    for (int k = 1; k < nn; k <<= 1)\n      for (int\
-    \ i = 0, o = nn / k, k2 = k << 1; i < n; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf\
-    \ + i, 0, k), GNA1::bf.zeros(k, k2);\n        GNA2::bf.set(GA1::bf + i + k, 0,\
-    \ k), GNA2::bf.zeros(k, k2);\n        GNA1::bf.dft(0, k2), GNA2::bf.dft(0, k2),\
-    \ GNA1::bf.mul(p[o | 1], 0, k2);\n        GNA2::bf.mul(p[o], 0, k2), GNA1::bf.add(GNA2::bf,\
-    \ 0, k2);\n        GNA1::bf.idft(0, k2), GNA1::bf.get(GA1::bf + i, 0, k2);\n \
-    \     }\n    return std::reverse(GA1::bf, GA1::bf + n), poly(GA1::bf, GA1::bf\
-    \ + n);\n  }\n};\n#line 5 \"test/yosupo/multipoint_evaluation.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  std::vector<Mint>\
-    \ c(N), p(M);\n  for (int i = 0; i < N; i++) cin >> c[i];\n  for (int i = 0; i\
-    \ < M; i++) cin >> p[i];\n  auto ans = SubProductTree(p).multi_eval(c);\n  for\
-    \ (int i = 0; i < M; i++) cout << ans[i] << \" \\n\"[i == M - 1];\n  return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/SubProductTree.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  std::vector<Mint>\
-    \ c(N), p(M);\n  for (int i = 0; i < N; i++) cin >> c[i];\n  for (int i = 0; i\
-    \ < M; i++) cin >> p[i];\n  auto ans = SubProductTree(p).multi_eval(c);\n  for\
-    \ (int i = 0; i < M; i++) cout << ans[i] << \" \\n\"[i == M - 1];\n  return 0;\n\
-    }"
+    }\n#line 5 \"src/FFT/fps_exp.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\
+    \u6570 log, exp, pow\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class\
+    \ mod_t>\nstd::vector<mod_t> deriv(const std::vector<mod_t> &p) {\n  std::vector<mod_t>\
+    \ ret(p.size() - 1);\n  for (int i = p.size(); --i;) ret[i - 1] = p[i] * i;\n\
+    \  return ret;\n}\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ integ(const std::vector<mod_t> &p) {\n  std::vector<mod_t> ret(p.size() + 1,\
+    \ mod_t(0));\n  for (int i = p.size(); i; i--) ret[i] = p[i - 1] * get_inv<mod_t,\
+    \ _Nm>(i);\n  return ret;\n}\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
+    std::vector<mod_t> log(const std::vector<mod_t> &p) {\n  assert(p[0] == mod_t(1));\n\
+    \  return integ<mod_t, _Nm>(div<mod_t, _Nm>(deriv(p), p));\n}\n\ntemplate <class\
+    \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> exp(const std::vector<mod_t>\
+    \ &p) {\n  static constexpr int _Nm2 = _Nm * 2 / 15;\n  static constexpr int TH\
+    \ = 64 << ((!is_nttfriend<mod_t, _Nm>()) << 1);\n  using GAdp = GlobalArray<mod_t,\
+    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
+    \ _Nm2, 0>;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \ _Nm2, 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  const int n = p.size(), m = get_len(n);\n\
+    \  assert(n > 0), assert(p[0] == mod_t(0));\n  std::copy(p.begin(), p.end(), GAdp::bf);\n\
+    \  for (int i = n; --i;) GAdp::bf[i] *= i;\n  std::fill_n(GAr::bf, n, mod_t(0)),\
+    \ GAr::bf[0] = 1;\n  for (int r = m, d = 0, R, k, i; r > TH; d += k) {\n    k\
+    \ = (r /= (R = get_len(bsf(r) + 1) >> 1)) << 1;\n    for (i = std::min(R - 1,\
+    \ (n - 1) / r); i--;)\n      GNA2D1::bf[i].set(GAdp::bf + i * r - d, d, d + k),\n\
+    \          GNA2D1::bf[i].dft(d, d + k);\n  }\n  auto rec = [&](auto f, int l,\
+    \ int r, int d) -> void {\n    if (int i = l | (!l), ed = std::min(r, n), j; r\
+    \ - l > TH) {\n      int R = get_len(bsf(r - l) + 1) >> 1, len = (r - l) / R,\
+    \ k = len << 1;\n      for (i = 0, ed = std::min(R, (n - l + len - 1) / len);;\
+    \ i++) {\n        if (mod_t *ret = GAr::bf + l + i * len, *bf = GA::bf + d + len;\
+    \ i) {\n          for (GNA1::bf.zeros(d, d + k), j = i; j--;)\n            GNA2::bf.mul(GNA2D2::bf[j],\
+    \ GNA2D1::bf[i - j - 1], d, d + k),\n                GNA1::bf.add(GNA2::bf, d,\
+    \ d + k);\n          GNA1::bf.idft(d, d + k), GNA1::bf.get(GA::bf, d + len, d\
+    \ + k);\n          for (int t = len; t--;) ret[t] += bf[t];\n        }\n     \
+    \   if (f(f, l + i * len, l + (i + 1) * len, d + k); i == ed - 1) break;\n   \
+    \     GNA2D2::bf[i].set(GAr::bf + l + i * len - d, d, d + len);\n        GNA2D2::bf[i].zeros(d\
+    \ + len, d + k), GNA2D2::bf[i].dft(d, d + k);\n      }\n    } else\n      for\
+    \ (; i < ed; GAr::bf[i] *= get_inv<mod_t, _Nm>(i), i++)\n        for (j = l; j\
+    \ < i; j++) GAr::bf[i] += GAr::bf[j] * GAdp::bf[i - j];\n  };\n  return rec(rec,\
+    \ 0, m, 0), std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n\ntemplate <class mod_t,\
+    \ std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> pow(const std::vector<mod_t>\
+    \ &p, std::uint64_t k) {\n  using GA = GlobalArray<mod_t, _Nm, 4>;\n  const mod_t\
+    \ Z(0), MK(k);\n  int n = p.size(), cnt = 0;\n  if (GA::bf[0] = 1; k) {\n    while\
+    \ (cnt < n && p[cnt] == Z) cnt++;\n    const __int128_t ofs = (__int128_t)k *\
+    \ cnt, sz = n - ofs;\n    if (sz <= 0) return std::vector<mod_t>(n, Z);\n    const\
+    \ mod_t p0 = p[cnt], iv = mod_t(1) / p0, pk = p0.pow(k);\n    for (int i = sz;\
+    \ --i;) GA::bf[i] = p[i + cnt] * iv;\n    auto q = log<mod_t, _Nm>(std::vector<mod_t>(GA::bf,\
+    \ GA::bf + sz));\n    for (int i = sz; --i;) q[i] *= MK;\n    std::copy_n(exp<mod_t,\
+    \ _Nm>(q).begin(), (int)sz, GA::bf + ofs);\n    std::fill_n(GA::bf, (int)ofs,\
+    \ Z);\n    for (int i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf\
+    \ + 1, n - 1, Z);\n  return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n#line\
+    \ 4 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\n * @category\
+    \ FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 <<\
+    \ 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t> &p,\n            \
+    \                const std::vector<mod_t> &q) {\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 0>;\n  using GAp = GlobalArray<mod_t,\
+    \ _Nm, 1>;\n  using GAq = GlobalArray<mod_t, _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \ _Nm, 2>;\n  static constexpr int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n\
+    \  const int n = p.size(), m = q.size(), r_len = n + m - 1;\n  if (!n || !m) return\
+    \ std::vector<mod_t>();\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf,\
+    \ r_len, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
+    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
+    \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
+    \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
+    \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
+    \ 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n  \
+    \    GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(), 0,\
+    \ m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
+    \ 0, len);\n    GNA1::bf.idft(0, len), GNA1::bf.get(GAr::bf, 0, std::min(r_len,\
+    \ len));\n    if (len < r_len) {\n      std::copy(p.begin() + len - m + 1, p.end(),\
+    \ GAp::bf + len - m + 1);\n      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf\
+    \ + len - n + 1);\n      for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i],\
+    \ i++)\n        for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
+    \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
+    \ GAr::bf + r_len);\n}\n#line 6 \"src/FFT/fps_sequences.hpp\"\n/**\n * @title\
+    \ \u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
+    )\n * @category \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
+    \ * @see https://en.wikipedia.org/wiki/Bernoulli_number\n * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n\
+    \ * @see https://en.wikipedia.org/wiki/Alternating_permutation\n * @see https://en.wikipedia.org/wiki/Stirling_number\n\
+    \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename mod_t, std::size_t _Nm = 1 <<\
+    \ 22>\nstd::vector<mod_t> bernoulli(int N) {  // O(N log N)\n  std::vector<mod_t>\
+    \ ret(N + 1);\n  mod_t fact = ret[0] = 1;\n  for (int i = 1; i <= N; i++) ret[i]\
+    \ = ret[i - 1] * get_inv<mod_t, _Nm>(i + 1);\n  ret = inv<mod_t, _Nm>(ret);\n\
+    \  for (int i = 1; i <= N; fact *= (++i)) ret[i] *= fact;\n  return ret;\n}\n\n\
+    template <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> partition(int\
+    \ N) {  // O(N log N)\n  std::vector<mod_t> ret(N + 1, 0);\n  for (int k = 1,\
+    \ l = 2; l <= N; l += 6 * k + 7, k += 2) ret[l] = -1;\n  for (int k = 2, l = 7;\
+    \ l <= N; l += 6 * k + 7, k += 2) ret[l] = 1;\n  for (int k = 1, l = 1; l <= N;\
+    \ l += 6 * k + 5, k += 2) ret[l] = -1;\n  for (int k = 2, l = 5; l <= N; l +=\
+    \ 6 * k + 5, k += 2) ret[l] = 1;\n  return ret[0] = 1, inv<mod_t, _Nm>(ret);\n\
+    }\n\ntemplate <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ alternating_permutation(int N) {  // O(N log N)\n  std::vector<mod_t> f(N +\
+    \ 1), c(N + 1), s(N + 1);\n  mod_t fact = f[0] = 1;\n  for (int i = 1; i <= N;\
+    \ i++) f[i] = f[i - 1] * get_inv<mod_t, _Nm>(i);\n  for (int i = 0; i <= N; i\
+    \ += 4) c[i] = f[i];\n  for (int i = 1; i <= N; i += 4) s[i] = f[i];\n  for (int\
+    \ i = 2; i <= N; i += 4) c[i] = -f[i];\n  for (int i = 3; i <= N; i += 4) s[i]\
+    \ = -f[i];\n  s[0] += 1, f = div(s, c);\n  for (int i = 1; i <= N; fact *= ++i)\
+    \ f[i] *= fact;\n  return f;\n}\n\n// enumeration for k = 0,...,K in \u2211_{n=0}^{N-1}\
+    \ n^k\ntemplate <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ sum_kth_pows(int K, std::uint64_t N) {  // O(K log K)\n  std::vector<mod_t>\
+    \ a(K + 1), b(K + 1);\n  int i = 1;\n  for (a[0] = 1; i <= K; i++) a[i] = a[i\
+    \ - 1] * get_inv<mod_t, _Nm>(i + 1);\n  for (b[0] = N, i = 1; i <= K; i++) b[i]\
+    \ = b[i - 1] * N;\n  for (i = 0; i <= K; i++) b[i] *= a[i];\n  mod_t fact = 1;\n\
+    \  for (a = div(b, a), i = 1; i <= K; fact *= ++i) a[i] *= fact;\n  return a;\n\
+    }\n\n// enumeration for k = 0,...,K in s(N, N-k)\ntemplate <typename mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nstd::vector<mod_t> stirling_first(int K, std::uint64_t N = 0)\
+    \ {  // O(K log K)\n  if (N < K) N = K;\n  auto a = sum_kth_pows<mod_t, _Nm>(K,\
+    \ N);\n  for (int i = 1; i <= K; i++) a[i] *= -get_inv<mod_t, _Nm>(i);\n  return\
+    \ a[0] = 0, exp<mod_t, _Nm>(a);\n}\n\n// enumeration for k = 0,...,N in S(N, k)\n\
+    template <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> stirling_second(int\
+    \ N) {  // O(N log N)\n  std::vector<mod_t> a(N + 1, 1), b(N + 1);\n  for (int\
+    \ i = 1; i <= N; i++) a[i] = a[i - 1] * get_inv<mod_t, _Nm>(i);\n  for (int i\
+    \ = 0; i <= N; i += 2) b[i] = a[i];\n  for (int i = 1; i <= N; i += 2) b[i] =\
+    \ -a[i];\n  for (int i = 0; i <= N; i++) a[i] *= mod_t(i).pow(N);\n  return a\
+    \ = convolve<mod_t, _Nm>(a, b), a.resize(N + 1), a;\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_inv.hpp\"\n\
+    #include \"src/FFT/fps_exp.hpp\"\n#include \"src/FFT/convolve.hpp\"\n/**\n * @title\
+    \ \u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
+    )\n * @category \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
+    \ * @see https://en.wikipedia.org/wiki/Bernoulli_number\n * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n\
+    \ * @see https://en.wikipedia.org/wiki/Alternating_permutation\n * @see https://en.wikipedia.org/wiki/Stirling_number\n\
+    \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename mod_t, std::size_t _Nm = 1 <<\
+    \ 22>\nstd::vector<mod_t> bernoulli(int N) {  // O(N log N)\n  std::vector<mod_t>\
+    \ ret(N + 1);\n  mod_t fact = ret[0] = 1;\n  for (int i = 1; i <= N; i++) ret[i]\
+    \ = ret[i - 1] * get_inv<mod_t, _Nm>(i + 1);\n  ret = inv<mod_t, _Nm>(ret);\n\
+    \  for (int i = 1; i <= N; fact *= (++i)) ret[i] *= fact;\n  return ret;\n}\n\n\
+    template <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> partition(int\
+    \ N) {  // O(N log N)\n  std::vector<mod_t> ret(N + 1, 0);\n  for (int k = 1,\
+    \ l = 2; l <= N; l += 6 * k + 7, k += 2) ret[l] = -1;\n  for (int k = 2, l = 7;\
+    \ l <= N; l += 6 * k + 7, k += 2) ret[l] = 1;\n  for (int k = 1, l = 1; l <= N;\
+    \ l += 6 * k + 5, k += 2) ret[l] = -1;\n  for (int k = 2, l = 5; l <= N; l +=\
+    \ 6 * k + 5, k += 2) ret[l] = 1;\n  return ret[0] = 1, inv<mod_t, _Nm>(ret);\n\
+    }\n\ntemplate <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ alternating_permutation(int N) {  // O(N log N)\n  std::vector<mod_t> f(N +\
+    \ 1), c(N + 1), s(N + 1);\n  mod_t fact = f[0] = 1;\n  for (int i = 1; i <= N;\
+    \ i++) f[i] = f[i - 1] * get_inv<mod_t, _Nm>(i);\n  for (int i = 0; i <= N; i\
+    \ += 4) c[i] = f[i];\n  for (int i = 1; i <= N; i += 4) s[i] = f[i];\n  for (int\
+    \ i = 2; i <= N; i += 4) c[i] = -f[i];\n  for (int i = 3; i <= N; i += 4) s[i]\
+    \ = -f[i];\n  s[0] += 1, f = div(s, c);\n  for (int i = 1; i <= N; fact *= ++i)\
+    \ f[i] *= fact;\n  return f;\n}\n\n// enumeration for k = 0,...,K in \u2211_{n=0}^{N-1}\
+    \ n^k\ntemplate <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
+    \ sum_kth_pows(int K, std::uint64_t N) {  // O(K log K)\n  std::vector<mod_t>\
+    \ a(K + 1), b(K + 1);\n  int i = 1;\n  for (a[0] = 1; i <= K; i++) a[i] = a[i\
+    \ - 1] * get_inv<mod_t, _Nm>(i + 1);\n  for (b[0] = N, i = 1; i <= K; i++) b[i]\
+    \ = b[i - 1] * N;\n  for (i = 0; i <= K; i++) b[i] *= a[i];\n  mod_t fact = 1;\n\
+    \  for (a = div(b, a), i = 1; i <= K; fact *= ++i) a[i] *= fact;\n  return a;\n\
+    }\n\n// enumeration for k = 0,...,K in s(N, N-k)\ntemplate <typename mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nstd::vector<mod_t> stirling_first(int K, std::uint64_t N = 0)\
+    \ {  // O(K log K)\n  if (N < K) N = K;\n  auto a = sum_kth_pows<mod_t, _Nm>(K,\
+    \ N);\n  for (int i = 1; i <= K; i++) a[i] *= -get_inv<mod_t, _Nm>(i);\n  return\
+    \ a[0] = 0, exp<mod_t, _Nm>(a);\n}\n\n// enumeration for k = 0,...,N in S(N, k)\n\
+    template <typename mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> stirling_second(int\
+    \ N) {  // O(N log N)\n  std::vector<mod_t> a(N + 1, 1), b(N + 1);\n  for (int\
+    \ i = 1; i <= N; i++) a[i] = a[i - 1] * get_inv<mod_t, _Nm>(i);\n  for (int i\
+    \ = 0; i <= N; i += 2) b[i] = a[i];\n  for (int i = 1; i <= N; i += 2) b[i] =\
+    \ -a[i];\n  for (int i = 0; i <= N; i++) a[i] *= mod_t(i).pow(N);\n  return a\
+    \ = convolve<mod_t, _Nm>(a, b), a.resize(N + 1), a;\n}"
   dependsOn:
-  - src/Math/ModInt.hpp
-  - src/FFT/SubProductTree.hpp
-  - src/FFT/fps_div.hpp
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
-  isVerificationFile: true
-  path: test/yosupo/multipoint_evaluation.test.cpp
+  - src/Math/ModInt.hpp
+  - src/FFT/fps_exp.hpp
+  - src/FFT/fps_div.hpp
+  - src/FFT/convolve.hpp
+  isVerificationFile: false
+  path: src/FFT/fps_sequences.hpp
   requiredBy: []
   timestamp: '2022-10-01 12:31:30+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/yosupo/multipoint_evaluation.test.cpp
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/stirling_first.test.cpp
+  - test/yukicoder/963.test.cpp
+documentation_of: src/FFT/fps_sequences.hpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/multipoint_evaluation.test.cpp
-- /verify/test/yosupo/multipoint_evaluation.test.cpp.html
-title: test/yosupo/multipoint_evaluation.test.cpp
+- /library/src/FFT/fps_sequences.hpp
+- /library/src/FFT/fps_sequences.hpp.html
+title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
+  )"
 ---

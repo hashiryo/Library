@@ -11,19 +11,26 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
+  - icon: ':question:'
+    path: src/FFT/fps_sequences.hpp
+    title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
+      \u7528)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/bernoulli.test.cpp
+    title: test/yosupo/bernoulli.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
@@ -33,25 +40,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/partition.test.cpp
+    title: test/yosupo/partition.test.cpp
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/stirling_first.test.cpp
+    title: test/yosupo/stirling_first.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/stirling_second.test.cpp
+    title: test/yosupo/stirling_second.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
   - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yukicoder/963.test.cpp
+    title: test/yukicoder/963.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
@@ -293,18 +312,21 @@ data:
     \ NTTArray<T, _Nm, false> bf[_Nm2];\n};\ntemplate <class T, std::size_t _Nm, int\
     \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
-    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/convolve.hpp\"\n\n/**\n\
-    \ * @title \u7573\u307F\u8FBC\u307F\n * @category FFT\n */\n\n// BEGIN CUT HERE\n\
-    template <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> convolve(const\
-    \ std::vector<mod_t> &p,\n                            const std::vector<mod_t>\
-    \ &q) {\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
-    \ _Nm, 0>;\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t,\
-    \ _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr\
-    \ int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n  const int n = p.size(),\
-    \ m = q.size(), r_len = n + m - 1;\n  if (!n || !m) return std::vector<mod_t>();\n\
-    \  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf, r_len, mod_t(0));\n  \
-    \  std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(),\
-    \ GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
+    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
+    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n  static int l\
+    \ = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
+    }\n#line 4 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\
+    \n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t> &p,\n \
+    \                           const std::vector<mod_t> &q) {\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 0>;\n  using GAp = GlobalArray<mod_t,\
+    \ _Nm, 1>;\n  using GAq = GlobalArray<mod_t, _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \ _Nm, 2>;\n  static constexpr int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n\
+    \  const int n = p.size(), m = q.size(), r_len = n + m - 1;\n  if (!n || !m) return\
+    \ std::vector<mod_t>();\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf,\
+    \ r_len, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
+    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
     \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
     \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
     \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
@@ -352,18 +374,24 @@ data:
   requiredBy:
   - src/FFT/Polynomial.hpp
   - src/FFT/extgcd.hpp
+  - src/FFT/fps_sequences.hpp
   - src/FFT/bostan_mori.hpp
-  timestamp: '2022-09-22 22:33:11+09:00'
+  timestamp: '2022-10-01 12:31:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/partition.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/stirling_second.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/stirling_first.test.cpp
   - test/aoj/0168.test.cpp
   - test/yukicoder/215.test.cpp
+  - test/yukicoder/963.test.cpp
   - test/yukicoder/980.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/658.test.cpp

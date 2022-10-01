@@ -8,13 +8,10 @@ data:
     path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/963.test.cpp
-    title: test/yukicoder/963.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
     links:
@@ -358,9 +355,8 @@ data:
   path: src/Old/differential_equation.hpp
   requiredBy: []
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/yukicoder/963.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Old/differential_equation.hpp
 layout: document
 redirect_from:

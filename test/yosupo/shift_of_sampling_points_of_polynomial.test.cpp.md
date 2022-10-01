@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/sample_points_shift.hpp
     title: sample points shift
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial
@@ -258,21 +258,25 @@ data:
     \ NTTArray<T, _Nm, false> bf[_Nm2];\n};\ntemplate <class T, std::size_t _Nm, int\
     \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
-    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/sample_points_shift.hpp\"\
-    \n\n/**\n * @title sample points shift\n * @category FFT\n * O( (d+m)log(d+m)\
-    \ )\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
-    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &pts, mod_t c,\n\
-    \                                       int m) {\n  assert(m <= mod_t::modulo()),\
-    \ assert(pts.size() <= mod_t::modulo());\n  if (m == 0) return {};\n  std::uint64_t\
-    \ c_64 = c.val(), nc1 = (c + (m - 1)).val();\n  std::uint32_t k = pts.size(),\
-    \ d = k - 1, i = d, e;\n  if (c_64 + m <= k)\n    return std::vector<mod_t>(pts.begin()\
-    \ + c_64, pts.begin() + c_64 + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n\
-    \  for (GA::bf[d] = 1; i; i--) GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1)\
-    \ / (GA::bf[0] * GA::bf[0]);\n  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d\
-    \ - i] = GA::bf[i] * GA::bf[d - i] * t;\n  for (i = k; i--;) GA::bf[i] *= pts[i];\n\
-    \  for (i = 1; i < k; i += 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z\
-    \ = 0;\n  auto f = [&](mod_t a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t,\
-    \ _Nm, 1>;\n    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
+    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
+    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n  static int l\
+    \ = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
+    }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\n\n/**\n * @title sample points\
+    \ shift\n * @category FFT\n * O( (d+m)log(d+m) )\n */\n\n// BEGIN CUT HERE\ntemplate\
+    \ <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> sample_points_shift(const\
+    \ std::vector<mod_t> &pts, mod_t c,\n                                       int\
+    \ m) {\n  assert(m <= mod_t::modulo()), assert(pts.size() <= mod_t::modulo());\n\
+    \  if (m == 0) return {};\n  std::uint64_t c_64 = c.val(), nc1 = (c + (m - 1)).val();\n\
+    \  std::uint32_t k = pts.size(), d = k - 1, i = d, e;\n  if (c_64 + m <= k)\n\
+    \    return std::vector<mod_t>(pts.begin() + c_64, pts.begin() + c_64 + m);\n\
+    \  using GA = GlobalArray<mod_t, _Nm, 0>;\n  for (GA::bf[d] = 1; i; i--) GA::bf[i\
+    \ - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1) / (GA::bf[0] * GA::bf[0]);\n  for\
+    \ (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d - i] = GA::bf[i] * GA::bf[d\
+    \ - i] * t;\n  for (i = k; i--;) GA::bf[i] *= pts[i];\n  for (i = 1; i < k; i\
+    \ += 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z = 0;\n  auto f = [&](mod_t\
+    \ a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
+    \    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
     \ _Nm, 2>;\n    for (e = d + n, i = 0, t = a - d; i < e; i++, t += 1) ret[i] =\
     \ t;\n    std::partial_sum(ret, ret + e, GAq::bf, std::multiplies<>());\n    for\
     \ (t = mod_t(1) / GAq::bf[e - 1]; --i;)\n      GAq::bf[i] = t * GAq::bf[i - 1],\
@@ -312,8 +316,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2022-09-29 12:59:48+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-10-01 12:31:30+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
 layout: document

@@ -5,31 +5,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Old/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Old/differential_equation.hpp
     title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Old/fps_sequence.hpp
     title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/bernoulli.test.cpp
-    title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/partition.test.cpp
-    title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_first.test.cpp
-    title: test/yosupo/stirling_first.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_second.test.cpp
-    title: test/yosupo/stirling_second.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/963.test.cpp
-    title: test/yukicoder/963.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -173,12 +158,7 @@ data:
   timestamp: '2022-09-19 00:53:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/partition.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_first.test.cpp
-  - test/yukicoder/963.test.cpp
 documentation_of: src/Old/ModInt.hpp
 layout: document
 redirect_from:

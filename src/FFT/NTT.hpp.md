@@ -11,10 +11,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   - icon: ':question:'
@@ -23,22 +23,26 @@ data:
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
   - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/FFT/fps_sequences.hpp
+    title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
+      \u7528)"
+  - icon: ':x:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/sample_points_shift.hpp
     title: sample points shift
   _extendedVerifiedWith:
@@ -67,6 +71,9 @@ data:
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/bernoulli.test.cpp
+    title: test/yosupo/bernoulli.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -81,43 +88,52 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/partition.test.cpp
+    title: test/yosupo/partition.test.cpp
+  - icon: ':x:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/stirling_first.test.cpp
+    title: test/yosupo/stirling_first.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/stirling_second.test.cpp
+    title: test/yosupo/stirling_second.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
   - icon: ':x:'
@@ -126,7 +142,10 @@ data:
   - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yukicoder/963.test.cpp
+    title: test/yukicoder/963.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
@@ -368,7 +387,11 @@ data:
     \ NTTArray<T, _Nm, false> bf[_Nm2];\n};\ntemplate <class T, std::size_t _Nm, int\
     \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
-    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n"
+    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
+    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n  static int l\
+    \ = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
+    }\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/is_prime.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\n\n/**\n * @title Number-Theoretic-Transform\n\
     \ * @category FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal {\nusing u64\
@@ -517,7 +540,11 @@ data:
     \ NTTArray<T, _Nm, false> bf[_Nm2];\n};\ntemplate <class T, std::size_t _Nm, int\
     \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
-    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}"
+    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
+    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n  static int l\
+    \ = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
+    }"
   dependsOn:
   - src/Math/is_prime.hpp
   - src/Math/ModInt.hpp
@@ -526,6 +553,7 @@ data:
   requiredBy:
   - src/FFT/Polynomial.hpp
   - src/FFT/extgcd.hpp
+  - src/FFT/fps_sequences.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/SubProductTree.hpp
   - src/FFT/fps_inv.hpp
@@ -535,12 +563,14 @@ data:
   - src/FFT/sample_points_shift.hpp
   - src/FFT/fps_exp.hpp
   - src/FFT/BigInt.hpp
-  timestamp: '2022-09-21 15:34:42+09:00'
+  timestamp: '2022-10-01 12:31:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/partition.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/stirling_second.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
@@ -551,8 +581,10 @@ data:
   - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/stirling_first.test.cpp
   - test/aoj/NTL_2_C.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
@@ -563,6 +595,7 @@ data:
   - test/aoj/0168.test.cpp
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/215.test.cpp
+  - test/yukicoder/963.test.cpp
   - test/yukicoder/980.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/658.test.cpp

@@ -8,22 +8,10 @@ data:
     path: src/Old/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/bernoulli.test.cpp
-    title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/partition.test.cpp
-    title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_first.test.cpp
-    title: test/yosupo/stirling_first.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_second.test.cpp
-    title: test/yosupo/stirling_second.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
       )"
@@ -394,12 +382,8 @@ data:
   path: src/Old/fps_sequence.hpp
   requiredBy: []
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/stirling_second.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_first.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Old/fps_sequence.hpp
 layout: document
 redirect_from:
