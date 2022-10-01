@@ -21,9 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/137.div_at.test.cpp
+    title: test/yukicoder/137.div_at.test.cpp
   - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
@@ -478,6 +481,7 @@ data:
   - test/aoj/0168.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/658.test.cpp
+  - test/yukicoder/137.div_at.test.cpp
 documentation_of: src/FFT/bostan_mori.hpp
 layout: document
 redirect_from:

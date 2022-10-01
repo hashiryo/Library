@@ -14,13 +14,13 @@ data:
   - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
   - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
@@ -58,22 +58,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
   - icon: ':x:'
@@ -100,6 +100,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/137.div_at.test.cpp
+    title: test/yukicoder/137.div_at.test.cpp
   - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
@@ -494,6 +497,7 @@ data:
   - test/yukicoder/963.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/658.test.cpp
+  - test/yukicoder/137.div_at.test.cpp
   - test/yukicoder/3046.test.cpp
 documentation_of: src/FFT/fps_inv.hpp
 layout: document
