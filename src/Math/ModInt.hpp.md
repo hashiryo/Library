@@ -163,7 +163,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/hafnian_of_matrix.test.cpp
     title: test/yosupo/hafnian_of_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.FPS.test.cpp
     title: test/yosupo/inv_of_FPS.FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -301,6 +301,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/963.FPS.test.cpp
+    title: test/yukicoder/963.FPS.test.cpp
   - icon: ':x:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
@@ -537,6 +540,7 @@ data:
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/963.test.cpp
+  - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/980.test.cpp

@@ -15,9 +15,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_formal_power_series
@@ -352,17 +352,17 @@ data:
     \ k) const {\n    return FPS([h = h_, k](int i) { return i < k ? mod_t(0) : h(i\
     \ - k); });\n  }\n  FPS inv() const {\n    auto rc = std::make_shared<RelaxedConvolution<mod_t,\
     \ _Nm>>(\n        [h = h_](int i) { return h(i); },\n        [h = h_, iv = mod_t()](int\
-    \ i, const auto &c) mutable {\n          return i == 0 ? T(iv = mod_t(1) / h(0))\
-    \ : -(c[i] + h(i) * iv) * iv;\n        });\n    return FPS(\n        [rc](int\
-    \ i) { return rc->next(), rc->multiplier()[i]; });  // safe\n  }\n  friend FPS\
-    \ deriv<mod_t, _Nm>(const FPS &fps);\n  friend FPS integ<mod_t, _Nm>(const FPS\
-    \ &fps);\n  friend FPS log<mod_t, _Nm>(const FPS &fps);\n  friend FPS exp<mod_t,\
-    \ _Nm>(const FPS &fps);\n  friend FPS pow<mod_t, _Nm>(const FPS &fps, std::uint64_t\
-    \ k);\n  FPS operator+(const FPS &rhs) const {\n    return FPS([h0 = h_, h1 =\
-    \ rhs.h_](int i) { return h0(i) + h1(i); });\n  }\n  FPS operator-(const FPS &rhs)\
-    \ const {\n    return FPS([h0 = h_, h1 = rhs.h_](int i) { return h0(i) - h1(i);\
-    \ });\n  }\n  FPS operator-() const {\n    return FPS([h = h_](int i) { return\
-    \ -h(i); });\n  }\n  FPS operator*(const FPS &rhs) const {\n    auto rc = std::make_shared<RelaxedConvolution<mod_t,\
+    \ i, const auto &c) mutable {\n          return i ? -(c[i] + h(i) * iv) * iv :\
+    \ (iv = mod_t(1) / h(0));\n        });\n    return FPS(\n        [rc](int i) {\
+    \ return rc->next(), rc->multiplier()[i]; });  // safe\n  }\n  friend FPS deriv<mod_t,\
+    \ _Nm>(const FPS &fps);\n  friend FPS integ<mod_t, _Nm>(const FPS &fps);\n  friend\
+    \ FPS log<mod_t, _Nm>(const FPS &fps);\n  friend FPS exp<mod_t, _Nm>(const FPS\
+    \ &fps);\n  friend FPS pow<mod_t, _Nm>(const FPS &fps, std::uint64_t k);\n  FPS\
+    \ operator+(const FPS &rhs) const {\n    return FPS([h0 = h_, h1 = rhs.h_](int\
+    \ i) { return h0(i) + h1(i); });\n  }\n  FPS operator-(const FPS &rhs) const {\n\
+    \    return FPS([h0 = h_, h1 = rhs.h_](int i) { return h0(i) - h1(i); });\n  }\n\
+    \  FPS operator-() const {\n    return FPS([h = h_](int i) { return -h(i); });\n\
+    \  }\n  FPS operator*(const FPS &rhs) const {\n    auto rc = std::make_shared<RelaxedConvolution<mod_t,\
     \ _Nm>>(\n        [h = h_](int i) { return h(i); }, [h = rhs.h_](int i) { return\
     \ h(i); });\n    return FPS([rc](int) { return rc->next(); });\n  }\n  FPS operator/(const\
     \ FPS &rhs) const {\n    auto rc = std::make_shared<RelaxedConvolution<mod_t,\
@@ -417,8 +417,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_FPS.FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-10-01 16:28:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-10-01 17:05:00+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_FPS.FPS.test.cpp
 layout: document

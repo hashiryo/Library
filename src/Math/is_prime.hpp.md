@@ -113,7 +113,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.FPS.test.cpp
     title: test/yosupo/inv_of_FPS.FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -188,6 +188,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/963.FPS.test.cpp
+    title: test/yukicoder/963.FPS.test.cpp
   - icon: ':x:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
@@ -300,6 +303,7 @@ data:
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/963.test.cpp
+  - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/980.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/658.test.cpp
