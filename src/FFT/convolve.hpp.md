@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
@@ -56,11 +56,11 @@ data:
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_first.test.cpp
-    title: test/yosupo/stirling_first.test.cpp
+    path: test/yosupo/stirling_1.test.cpp
+    title: test/yosupo/stirling_1.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_second.test.cpp
-    title: test/yosupo/stirling_second.test.cpp
+    path: test/yosupo/stirling_2.test.cpp
+    title: test/yosupo/stirling_2.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
@@ -388,13 +388,13 @@ data:
   - test/yosupo/partition.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/stirling_second.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/stirling_1.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/stirling_2.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp
   - test/aoj/0168.test.cpp
   - test/yukicoder/215.test.cpp

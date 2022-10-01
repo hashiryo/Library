@@ -104,10 +104,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/FFT/BigInt.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
     - icon: ':heavy_check_mark:'
@@ -235,7 +235,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -251,6 +251,9 @@ data:
       path: src/Math/Sieve.hpp
       title: "\u7BE9\u306A\u3069"
     - icon: ':heavy_check_mark:'
+      path: src/Math/StirlingNumber.hpp
+      title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570"
+    - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
     - icon: ':heavy_check_mark:'
@@ -263,7 +266,7 @@ data:
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
     - icon: ':heavy_check_mark:'
@@ -960,7 +963,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/polynomial_interpolation.test.cpp
       title: test/yosupo/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.FPS.test.cpp
       title: test/yosupo/pow_of_FPS.FPS.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1018,11 +1021,17 @@ data:
       path: test/yosupo/static_range_inversions_query.mo.test.cpp
       title: test/yosupo/static_range_inversions_query.mo.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/yosupo/stirling_first.test.cpp
-      title: test/yosupo/stirling_first.test.cpp
+      path: test/yosupo/stirling_1.test.cpp
+      title: test/yosupo/stirling_1.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/yosupo/stirling_second.test.cpp
-      title: test/yosupo/stirling_second.test.cpp
+      path: test/yosupo/stirling_1_small_p_large_n.test.cpp
+      title: test/yosupo/stirling_1_small_p_large_n.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/stirling_2.test.cpp
+      title: test/yosupo/stirling_2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/stirling_2_small_p_large_n.test.cpp
+      title: test/yosupo/stirling_2_small_p_large_n.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/subset_convolution.test.cpp
       title: test/yosupo/subset_convolution.test.cpp

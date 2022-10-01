@@ -5,10 +5,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':heavy_check_mark:'
@@ -205,7 +205,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_FPS.FPS.test.cpp
     title: test/yosupo/pow_of_FPS.FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -236,11 +236,11 @@ data:
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_first.test.cpp
-    title: test/yosupo/stirling_first.test.cpp
+    path: test/yosupo/stirling_1.test.cpp
+    title: test/yosupo/stirling_1.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_second.test.cpp
-    title: test/yosupo/stirling_second.test.cpp
+    path: test/yosupo/stirling_2.test.cpp
+    title: test/yosupo/stirling_2.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
@@ -310,9 +310,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: ModInt
     links: []
@@ -473,7 +473,7 @@ data:
   - src/FFT/fps_exp.hpp
   - src/FFT/BigInt.hpp
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/partition.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
@@ -486,7 +486,6 @@ data:
   - test/yosupo/range_affine_range_sum.WBT.test.cpp
   - test/yosupo/exp_of_FPS.FPS.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - test/yosupo/stirling_second.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
@@ -497,6 +496,7 @@ data:
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/stirling_1.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/inv_of_FPS.test.cpp
@@ -509,12 +509,12 @@ data:
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/stirling_2.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
   - test/yosupo/exp_of_FPS.test.cpp
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/find_linear_recurrence.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/yosupo/stirling_first.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yosupo/lcm_convolution.test.cpp

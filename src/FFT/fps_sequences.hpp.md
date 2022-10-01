@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':heavy_check_mark:'
@@ -16,10 +16,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -31,11 +31,11 @@ data:
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_first.test.cpp
-    title: test/yosupo/stirling_first.test.cpp
+    path: test/yosupo/stirling_1.test.cpp
+    title: test/yosupo/stirling_1.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/stirling_second.test.cpp
-    title: test/yosupo/stirling_second.test.cpp
+    path: test/yosupo/stirling_2.test.cpp
+    title: test/yosupo/stirling_2.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
@@ -547,9 +547,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/partition.test.cpp
-  - test/yosupo/stirling_second.test.cpp
+  - test/yosupo/stirling_1.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_first.test.cpp
+  - test/yosupo/stirling_2.test.cpp
   - test/yukicoder/963.test.cpp
 documentation_of: src/FFT/fps_sequences.hpp
 layout: document

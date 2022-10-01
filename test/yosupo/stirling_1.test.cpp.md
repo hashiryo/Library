@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':heavy_check_mark:'
@@ -20,10 +20,10 @@ data:
     path: src/FFT/fps_sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -33,13 +33,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind
+    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
     links:
-    - https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind
-  bundledCode: "#line 1 \"test/yosupo/stirling_second.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
-    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
+    - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+  bundledCode: "#line 1 \"test/yosupo/stirling_1.test.cpp\"\n#define PROBLEM \\\n\
+    \  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\n#include\
+    \ <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n *\
+    \ @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
     \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
     \ {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
     \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
@@ -476,17 +476,17 @@ data:
     \ i = 1; i <= N; i++) a[i] = a[i - 1] * get_inv<mod_t, _Nm>(i);\n  for (int i\
     \ = 0; i <= N; i += 2) b[i] = a[i];\n  for (int i = 1; i <= N; i += 2) b[i] =\
     \ -a[i];\n  for (int i = 0; i <= N; i++) a[i] *= mod_t(i).pow(N);\n  return a\
-    \ = convolve<mod_t, _Nm>(a, b), a.resize(N + 1), a;\n}\n#line 6 \"test/yosupo/stirling_second.test.cpp\"\
+    \ = convolve<mod_t, _Nm>(a, b), a.resize(N + 1), a;\n}\n#line 6 \"test/yosupo/stirling_1.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  auto ans =\
-    \ stirling_second<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[i] <<\
-    \ \" \\n\"[i == N];\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind\"\
+    \ stirling_first<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[N - i]\
+    \ << \" \\n\"[i == N];\n  return 0;\n}\n"
+  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_sequences.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  auto ans =\
-    \ stirling_second<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[i] <<\
-    \ \" \\n\"[i == N];\n  return 0;\n}"
+    \ stirling_first<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[N - i]\
+    \ << \" \\n\"[i == N];\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/FFT/fps_sequences.hpp
@@ -497,15 +497,15 @@ data:
   - src/FFT/fps_div.hpp
   - src/FFT/convolve.hpp
   isVerificationFile: true
-  path: test/yosupo/stirling_second.test.cpp
+  path: test/yosupo/stirling_1.test.cpp
   requiredBy: []
-  timestamp: '2022-10-01 12:31:30+09:00'
+  timestamp: '2022-10-01 23:17:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/stirling_second.test.cpp
+documentation_of: test/yosupo/stirling_1.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/stirling_second.test.cpp
-- /verify/test/yosupo/stirling_second.test.cpp.html
-title: test/yosupo/stirling_second.test.cpp
+- /verify/test/yosupo/stirling_1.test.cpp
+- /verify/test/yosupo/stirling_1.test.cpp.html
+title: test/yosupo/stirling_1.test.cpp
 ---

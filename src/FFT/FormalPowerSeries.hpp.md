@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -24,15 +24,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.FPS.test.cpp
     title: test/yosupo/log_of_FPS.FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_FPS.FPS.test.cpp
     title: test/yosupo/pow_of_FPS.FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/963.FPS.test.cpp
     title: test/yukicoder/963.FPS.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -401,8 +401,8 @@ data:
     \ - 1) * get_inv<mod_t, _Nm>(i) : mod_t(1);\n  });\n}\ntemplate <class mod_t,\
     \ std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> pow(const FormalPowerSeries<mod_t,\
     \ _Nm> &fps,\n                                  std::uint64_t k) {\n  using FPS\
-    \ = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_, kk = mod_t(k), k,\
-    \ cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
+    \ = FormalPowerSeries<mod_t, _Nm>;\n  if (!k) return FPS(1);\n  return FPS([h\
+    \ = fps.h_, kk = mod_t(k), k, cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
     \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
     \ (int)cnt);\n    mod_t v = h(i);\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
     \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
@@ -538,8 +538,8 @@ data:
     \ - 1) * get_inv<mod_t, _Nm>(i) : mod_t(1);\n  });\n}\ntemplate <class mod_t,\
     \ std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> pow(const FormalPowerSeries<mod_t,\
     \ _Nm> &fps,\n                                  std::uint64_t k) {\n  using FPS\
-    \ = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_, kk = mod_t(k), k,\
-    \ cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
+    \ = FormalPowerSeries<mod_t, _Nm>;\n  if (!k) return FPS(1);\n  return FPS([h\
+    \ = fps.h_, kk = mod_t(k), k, cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
     \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
     \ (int)cnt);\n    mod_t v = h(i);\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
     \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
@@ -554,8 +554,8 @@ data:
   isVerificationFile: false
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
-  timestamp: '2022-10-01 20:02:58+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-10-01 23:21:13+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/pow_of_FPS.FPS.test.cpp
