@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -68,12 +68,18 @@ data:
     };\nconstexpr std::uint64_t totient(const Factors &f) {\n  std::uint64_t ret =\
     \ 1, i = 0;\n  for (const auto &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;)\
     \ ret *= p;\n  return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return\
-    \ totient(Factors(n)); }\n#line 4 \"test/yosupo/factorize.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n\
-    \  cin >> Q;\n  while (Q--) {\n    long long a;\n    cin >> a;\n    vector<long\
-    \ long> ans;\n    for (auto& [p, e] : Factors(a))\n      for (int i = 0; i < e;\
-    \ i++) ans.push_back(p);\n    cout << ans.size();\n    for (auto x : ans) cout\
-    \ << \" \" << x;\n    cout << '\\n';\n  }\n  return 0;\n}\n"
+    \ totient(Factors(n)); }\n\nconstexpr std::uint64_t primitive_root(std::uint64_t\
+    \ p) {\n  if (assert(is_prime(p)); p == 2) return 1;\n  auto f = Factors(p - 1);\n\
+    \  for (std::uint64_t ret = 2, pw = 0, x = 0, k = 0, ng = 0;; ret++) {\n    for\
+    \ (auto [q, e] : f) {\n      for (pw = 1, x = ret, k = (p - 1) / q;; x = mul(x,\
+    \ x, p))\n        if (k & 1 ? pw = mul(pw, x, p) : 0; !(k >>= 1)) break;\n   \
+    \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
+    \ 4 \"test/yosupo/factorize.test.cpp\"\nusing namespace std;\n\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n  while\
+    \ (Q--) {\n    long long a;\n    cin >> a;\n    vector<long long> ans;\n    for\
+    \ (auto& [p, e] : Factors(a))\n      for (int i = 0; i < e; i++) ans.push_back(p);\n\
+    \    cout << ans.size();\n    for (auto x : ans) cout << \" \" << x;\n    cout\
+    \ << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include <bits/stdc++.h>\n\
     #include \"src/Math/Factors.hpp\"\nusing namespace std;\n\nsigned main() {\n \
     \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n  while (Q--)\
@@ -87,7 +93,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-07-04 14:16:36+09:00'
+  timestamp: '2022-10-02 18:17:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/factorize.test.cpp

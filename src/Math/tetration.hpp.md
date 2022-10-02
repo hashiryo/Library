@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -9,12 +9,12 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
       \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$"
@@ -70,11 +70,16 @@ data:
     };\nconstexpr std::uint64_t totient(const Factors &f) {\n  std::uint64_t ret =\
     \ 1, i = 0;\n  for (const auto &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;)\
     \ ret *= p;\n  return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return\
-    \ totient(Factors(n)); }\n#line 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\
-    \u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows b = a^{a^{\\cdot^{\\\
-    cdot^{a}}}}$\n * @category \u6570\u5B66\n *  O(N^(1/4))\n */\n// verify\u7528\
-    :\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\n\
-    // BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
+    \ totient(Factors(n)); }\n\nconstexpr std::uint64_t primitive_root(std::uint64_t\
+    \ p) {\n  if (assert(is_prime(p)); p == 2) return 1;\n  auto f = Factors(p - 1);\n\
+    \  for (std::uint64_t ret = 2, pw = 0, x = 0, k = 0, ng = 0;; ret++) {\n    for\
+    \ (auto [q, e] : f) {\n      for (pw = 1, x = ret, k = (p - 1) / q;; x = mul(x,\
+    \ x, p))\n        if (k & 1 ? pw = mul(pw, x, p) : 0; !(k >>= 1)) break;\n   \
+    \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
+    \ 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\
+    \u30F3 $H_4(a,b) = a\\upuparrows b = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * @category\
+    \ \u6570\u5B66\n *  O(N^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
+    \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
     \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
     \ auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3);\
@@ -104,8 +109,8 @@ data:
   isVerificationFile: false
   path: src/Math/tetration.hpp
   requiredBy: []
-  timestamp: '2022-07-04 14:16:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-10-02 18:17:27+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
 documentation_of: src/Math/tetration.hpp

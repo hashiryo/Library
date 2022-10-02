@@ -7,10 +7,6 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':x:'
-    path: src/Math/tetration.hpp
-    title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows b\
-      \ = a^{a^{\\cdot^{\\cdot^{a}}}}$"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -18,11 +14,11 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/tetration_mod
+    PROBLEM: https://judge.yosupo.jp/problem/primitive_root
     links:
-    - https://judge.yosupo.jp/problem/tetration_mod
-  bundledCode: "#line 1 \"test/yosupo/tetration_mod.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/tetration_mod\"\n#include <bits/stdc++.h>\n#line\
+    - https://judge.yosupo.jp/problem/primitive_root
+  bundledCode: "#line 1 \"test/yosupo/primitive_root.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/primitive_root\"\n#include <bits/stdc++.h>\n#line\
     \ 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
     \ \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n//\
     \ BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
@@ -78,41 +74,28 @@ data:
     \ (auto [q, e] : f) {\n      for (pw = 1, x = ret, k = (p - 1) / q;; x = mul(x,\
     \ x, p))\n        if (k & 1 ? pw = mul(pw, x, p) : 0; !(k >>= 1)) break;\n   \
     \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
-    \ 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\
-    \u30F3 $H_4(a,b) = a\\upuparrows b = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * @category\
-    \ \u6570\u5B66\n *  O(N^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
-    \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
-    \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
-    \ auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3);\
-    \ --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t\
-    \ x) { return x < m ? x : x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);;\
-    \ a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a)\
-    \ : 0; !(k >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t a,\
-    \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
-    \ m : a;\n}\n#line 4 \"test/yosupo/tetration_mod.test.cpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n  cin\
-    \ >> T;\n  while (T--) {\n    int A, B, M;\n    cin >> A >> B >> M;\n    cout\
-    \ << H4(A, B, M) << '\\n';\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tetration_mod\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/tetration.hpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n  cin\
-    \ >> T;\n  while (T--) {\n    int A, B, M;\n    cin >> A >> B >> M;\n    cout\
-    \ << H4(A, B, M) << '\\n';\n  }\n  return 0;\n}"
+    \ 4 \"test/yosupo/primitive_root.test.cpp\"\nusing namespace std;\n\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int Q;\n  cin >> Q;\n  while\
+    \ (Q--) {\n    long long p;\n    cin >> p;\n    cout << primitive_root(p) << '\\\
+    n';\n  }\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primitive_root\"\n#include\
+    \ <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\nusing namespace std;\n\n\
+    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int Q;\n  cin\
+    \ >> Q;\n  while (Q--) {\n    long long p;\n    cin >> p;\n    cout << primitive_root(p)\
+    \ << '\\n';\n  }\n  return 0;\n}"
   dependsOn:
-  - src/Math/tetration.hpp
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: true
-  path: test/yosupo/tetration_mod.test.cpp
+  path: test/yosupo/primitive_root.test.cpp
   requiredBy: []
   timestamp: '2022-10-02 18:17:27+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/tetration_mod.test.cpp
+documentation_of: test/yosupo/primitive_root.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/tetration_mod.test.cpp
-- /verify/test/yosupo/tetration_mod.test.cpp.html
-title: test/yosupo/tetration_mod.test.cpp
+- /verify/test/yosupo/primitive_root.test.cpp
+- /verify/test/yosupo/primitive_root.test.cpp.html
+title: test/yosupo/primitive_root.test.cpp
 ---
