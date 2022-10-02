@@ -107,7 +107,7 @@ data:
     - icon: ':question:'
       path: src/FFT/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/MultiVariateConvolution.hpp
       title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
     - icon: ':question:'
@@ -116,7 +116,7 @@ data:
     - icon: ':question:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/SubProductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
     - icon: ':question:'
@@ -125,7 +125,7 @@ data:
     - icon: ':question:'
       path: src/FFT/convolve.hpp
       title: "\u7573\u307F\u8FBC\u307F"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     - icon: ':question:'
@@ -137,16 +137,16 @@ data:
     - icon: ':question:'
       path: src/FFT/fps_inv.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-    - icon: ':question:'
-      path: src/FFT/fps_sequences.hpp
-      title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
-        \u7528)"
     - icon: ':x:'
       path: src/FFT/fps_sqrt.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
     - icon: ':x:'
       path: src/FFT/sample_points_shift.hpp
       title: sample points shift
+    - icon: ':question:'
+      path: src/FFT/sequences.hpp
+      title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
+        \u7528)"
   - name: src/Game
     pages:
     - icon: ':heavy_check_mark:'
@@ -265,7 +265,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/discrete_log.hpp
       title: "\u96E2\u6563\u5BFE\u6570 $\\mathbb{Z}/m\\mathbb{Z}$"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
@@ -882,55 +882,55 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/factorize.test.cpp
       title: test/yosupo/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/find_linear_recurrence.test.cpp
       title: test/yosupo/find_linear_recurrence.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/frequency_table_of_tree_distance.test.cpp
       title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/hafnian_of_matrix.test.cpp
       title: test/yosupo/hafnian_of_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.FPS.test.cpp
       title: test/yosupo/inv_of_FPS.FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.test.cpp
       title: test/yosupo/inv_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inverse_matrix.test.cpp
       title: test/yosupo/inverse_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/lcm_convolution.test.cpp
       title: test/yosupo/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/line_add_get_min.test.cpp
       title: test/yosupo/line_add_get_min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/linear_equations.test.cpp
       title: test/yosupo/linear_equations.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/log_of_FPS.FPS.test.cpp
       title: test/yosupo/log_of_FPS.FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/log_of_FPS.test.cpp
       title: test/yosupo/log_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/matrix_det.test.cpp
       title: test/yosupo/matrix_det.test.cpp
     - icon: ':heavy_check_mark:'
@@ -939,10 +939,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/min_cost_b_flow.test.cpp
       title: test/yosupo/min_cost_b_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/multipoint_evaluation.test.cpp
       title: test/yosupo/multipoint_evaluation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/multivariate_convolution.test.cpp
       title: test/yosupo/multivariate_convolution.test.cpp
     - icon: ':heavy_check_mark:'

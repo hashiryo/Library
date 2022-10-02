@@ -9,9 +9,9 @@ data:
     title: "\u7BE9\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/gcd_convolution
@@ -195,7 +195,7 @@ data:
   path: test/yosupo/gcd_convolution.test.cpp
   requiredBy: []
   timestamp: '2022-10-02 02:21:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/gcd_convolution.test.cpp
 layout: document

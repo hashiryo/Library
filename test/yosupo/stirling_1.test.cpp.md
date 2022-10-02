@@ -17,7 +17,7 @@ data:
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
-    path: src/FFT/fps_sequences.hpp
+    path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   - icon: ':question:'
@@ -439,9 +439,9 @@ data:
     \ + len - n + 1);\n      for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i],\
     \ i++)\n        for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
     \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
-    \ GAr::bf + r_len);\n}\n#line 6 \"src/FFT/fps_sequences.hpp\"\n/**\n * @title\
-    \ \u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
-    )\n * @category \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
+    \ GAr::bf + r_len);\n}\n#line 6 \"src/FFT/sequences.hpp\"\n/**\n * @title \u6709\
+    \u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)\n *\
+    \ @category \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
     \ * @see https://en.wikipedia.org/wiki/Bernoulli_number\n * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n\
     \ * @see https://en.wikipedia.org/wiki/Alternating_permutation\n * @see https://en.wikipedia.org/wiki/Stirling_number\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename mod_t, std::size_t _Nm = 1 <<\
@@ -485,14 +485,14 @@ data:
     \ stirling_first<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[N - i]\
     \ << \" \\n\"[i == N];\n  return 0;\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_sequences.hpp\"\
+    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/sequences.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  auto ans =\
     \ stirling_first<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[N - i]\
     \ << \" \\n\"[i == N];\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
-  - src/FFT/fps_sequences.hpp
+  - src/FFT/sequences.hpp
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
@@ -502,7 +502,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_1.test.cpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-02 19:49:50+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_1.test.cpp

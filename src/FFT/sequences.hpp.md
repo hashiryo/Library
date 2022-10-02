@@ -51,10 +51,10 @@ data:
     - https://en.wikipedia.org/wiki/Partition_function_(number_theory)
     - https://en.wikipedia.org/wiki/Stirling_number
     - https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE
-  bundledCode: "#line 2 \"src/FFT/fps_sequences.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n *\
-    \ @category \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n\
-    \ */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
+  bundledCode: "#line 2 \"src/FFT/sequences.hpp\"\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
+    \ \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n */\n\n//\
+    \ BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
     \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
     \ 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24, 35, 59, 56,\
     \ 49, 18, 29, 11,\n      63, 52, 6,  26, 37, 40, 33, 47, 61, 45, 43, 21, 23, 58,\
@@ -452,9 +452,9 @@ data:
     \ + len - n + 1);\n      for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i],\
     \ i++)\n        for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
     \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
-    \ GAr::bf + r_len);\n}\n#line 6 \"src/FFT/fps_sequences.hpp\"\n/**\n * @title\
-    \ \u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
-    )\n * @category \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
+    \ GAr::bf + r_len);\n}\n#line 6 \"src/FFT/sequences.hpp\"\n/**\n * @title \u6709\
+    \u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)\n *\
+    \ @category \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
     \ * @see https://en.wikipedia.org/wiki/Bernoulli_number\n * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n\
     \ * @see https://en.wikipedia.org/wiki/Alternating_permutation\n * @see https://en.wikipedia.org/wiki/Stirling_number\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename mod_t, std::size_t _Nm = 1 <<\
@@ -544,9 +544,9 @@ data:
   - src/FFT/fps_div.hpp
   - src/FFT/convolve.hpp
   isVerificationFile: false
-  path: src/FFT/fps_sequences.hpp
+  path: src/FFT/sequences.hpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-02 19:49:50+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/partition.test.cpp
@@ -554,11 +554,11 @@ data:
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/stirling_2.test.cpp
   - test/yukicoder/963.test.cpp
-documentation_of: src/FFT/fps_sequences.hpp
+documentation_of: src/FFT/sequences.hpp
 layout: document
 redirect_from:
-- /library/src/FFT/fps_sequences.hpp
-- /library/src/FFT/fps_sequences.hpp.html
+- /library/src/FFT/sequences.hpp
+- /library/src/FFT/sequences.hpp.html
 title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\
   )"
 ---

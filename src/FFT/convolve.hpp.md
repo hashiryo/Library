@@ -17,11 +17,11 @@ data:
   - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
-    path: src/FFT/fps_sequences.hpp
+    path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
@@ -43,10 +43,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':x:'
@@ -383,8 +383,8 @@ data:
   requiredBy:
   - src/FFT/Polynomial.hpp
   - src/FFT/extgcd.hpp
-  - src/FFT/fps_sequences.hpp
   - src/FFT/bostan_mori.hpp
+  - src/FFT/sequences.hpp
   timestamp: '2022-10-02 02:21:45+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

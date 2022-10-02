@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/multivariate_convolution
@@ -316,7 +316,7 @@ data:
   path: test/yosupo/multivariate_convolution.test.cpp
   requiredBy: []
   timestamp: '2022-10-02 16:14:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/multivariate_convolution.test.cpp
 layout: document

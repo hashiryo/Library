@@ -12,12 +12,12 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/multivariate_convolution.test.cpp
     title: test/yosupo/multivariate_convolution.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
     links:
@@ -323,7 +323,7 @@ data:
   path: src/FFT/MultiVariateConvolution.hpp
   requiredBy: []
   timestamp: '2022-10-02 16:14:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/multivariate_convolution.test.cpp
 documentation_of: src/FFT/MultiVariateConvolution.hpp

@@ -18,7 +18,7 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
   - icon: ':question:'
-    path: src/FFT/fps_sequences.hpp
+    path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
@@ -28,7 +28,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
   - icon: ':x:'
@@ -497,7 +497,7 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_exp.hpp
   requiredBy:
-  - src/FFT/fps_sequences.hpp
+  - src/FFT/sequences.hpp
   timestamp: '2022-10-02 02:21:45+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
