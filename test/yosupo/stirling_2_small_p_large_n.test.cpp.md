@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
-    title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570"
+    title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 $\\mathbb{F}_p$"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -38,8 +38,8 @@ data:
     \  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX) return\
     \ miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2, 325, 9375, 28178, 450775,\
     \ 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/StirlingNumber.hpp\"\n/**\n\
-    \ * @title \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570\n * @category \u6570\u5B66\
-    \n * @see\n * https://maspypy.com/stirling-%e6%95%b0%e3%82%92-p-%e3%81%a7%e5%89%b2%e3%81%a3%e3%81%9f%e4%bd%99%e3%82%8a%e3%81%ae%e8%a8%88%e7%ae%97\n\
+    \ * @title \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 $\\mathbb{F}_p$\n * @category\
+    \ \u6570\u5B66\n * @see\n * https://maspypy.com/stirling-%e6%95%b0%e3%82%92-p-%e3%81%a7%e5%89%b2%e3%81%a3%e3%81%9f%e4%bd%99%e3%82%8a%e3%81%ae%e8%a8%88%e7%ae%97\n\
     \ * \u524D\u51E6\u7406 O(p^2), \u30AF\u30A8\u30EA O(log n)\n */\n\n// BEGIN CUT\
     \ HERE\nclass StirlingNumber {\n  const std::uint16_t p;\n  std::vector<std::vector<std::uint16_t>>\
     \ c, s1, s2;\n  void buildS1() {\n    s1.resize(p), s1[0] = {1};\n    for (int\
@@ -83,7 +83,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_2_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-03 01:10:53+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_2_small_p_large_n.test.cpp

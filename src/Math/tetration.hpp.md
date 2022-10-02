@@ -16,8 +16,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    document_title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
-      \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$"
+    document_title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a^{a^{\\\
+      cdot^{\\cdot^{a}}}}$"
     links:
     - https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f
   bundledCode: "#line 2 \"src/Math/tetration.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -77,8 +77,8 @@ data:
     \ x, p))\n        if (k & 1 ? pw = mul(pw, x, p) : 0; !(k >>= 1)) break;\n   \
     \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
     \ 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\
-    \u30F3 $H_4(a,b) = a\\upuparrows b = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * @category\
-    \ \u6570\u5B66\n *  O(N^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
+    \u30F3 $H_4(a,b) = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * $\\mathbb{Z}/m\\mathbb{Z}$\n\
+    \ * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
     \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
     \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
@@ -90,9 +90,9 @@ data:
     \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
     \ m : a;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\
-    \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows\
-    \ b = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * @category \u6570\u5B66\n *  O(N^(1/4))\n\
-    \ */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
+    \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a^{a^{\\\
+    cdot^{\\cdot^{a}}}}$\n * $\\mathbb{Z}/m\\mathbb{Z}$\n * @category \u6570\u5B66\
+    \n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
     \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
     \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
@@ -109,7 +109,7 @@ data:
   isVerificationFile: false
   path: src/Math/tetration.hpp
   requiredBy: []
-  timestamp: '2022-10-02 18:17:27+09:00'
+  timestamp: '2022-10-03 01:10:53+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
@@ -118,6 +118,5 @@ layout: document
 redirect_from:
 - /library/src/Math/tetration.hpp
 - /library/src/Math/tetration.hpp.html
-title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a\\upuparrows b = a^{a^{\\\
-  cdot^{\\cdot^{a}}}}$"
+title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a^{a^{\\cdot^{\\cdot^{a}}}}$"
 ---
