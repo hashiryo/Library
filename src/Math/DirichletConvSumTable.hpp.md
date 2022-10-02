@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.test.cpp
     title: test/atcoder/abc179_c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.dujiao.test.cpp
     title: test/atcoder/arc116_c.dujiao.test.cpp
   - icon: ':x:'
