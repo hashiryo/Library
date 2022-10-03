@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/tetration.hpp
-    title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a^{a^{\\cdot^{\\\
-      cdot^{a}}}}$"
+    title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
+      mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tetration_mod
@@ -79,8 +79,8 @@ data:
     \ x, p))\n        if (k & 1 ? pw = mul(pw, x, p) : 0; !(k >>= 1)) break;\n   \
     \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
     \ 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\
-    \u30F3 $H_4(a,b) = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * $\\mathbb{Z}/m\\mathbb{Z}$\n\
-    \ * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
+    \u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\
+    \n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
     \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
     \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
@@ -106,8 +106,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-10-03 01:10:53+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-10-03 10:06:49+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp
 layout: document

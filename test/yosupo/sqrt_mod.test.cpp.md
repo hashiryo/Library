@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_sqrt.hpp
-    title: "\u5E73\u65B9\u6839 $\\mathbb{F}_p$"
+    title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,7 +16,7 @@ data:
     - https://judge.yosupo.jp/problem/sqrt_mod
   bundledCode: "#line 1 \"test/yosupo/sqrt_mod.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_sqrt.hpp\"\n/**\n * @title\
-    \ \u5E73\u65B9\u6839 $\\mathbb{F}_p$\n * @category \u6570\u5B66\n * O(log p)\n\
+    \ \u5E73\u65B9\u6839 ($\\mathbb{F}_p$)\n * @category \u6570\u5B66\n * O(log p)\n\
     \ */\n\n// BEGIN CUT HERE\n\nconstexpr std::int64_t sqrt(std::uint64_t a, std::uint64_t\
     \ p) {\n  if ((a %= p) <= 1 || p == 2) return a;\n  using u64 = std::uint64_t;\n\
     \  auto pow = [&p](u64 x, u64 k) {\n    for (u64 ret = 1;; x = (__uint128_t)x\
@@ -42,7 +42,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sqrt_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 01:41:14+09:00'
+  timestamp: '2022-10-03 10:06:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sqrt_mod.test.cpp

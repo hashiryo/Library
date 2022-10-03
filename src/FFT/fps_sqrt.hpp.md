@@ -13,9 +13,9 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_sqrt.hpp
-    title: "\u5E73\u65B9\u6839 $\\mathbb{F}_p$"
+    title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -315,7 +315,7 @@ data:
     \ = -bfk[mm];\n  }\n  if (l < n)\n    for (int j; l < n; GAr::bf[l++] *= miv)\n\
     \      for (GAr::bf[j = l] = Z; j--;) GAr::bf[l] += GAr::bf[j] * GAp::bf[l - j];\n\
     \  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n#line 3 \"src/Math/mod_sqrt.hpp\"\
-    \n/**\n * @title \u5E73\u65B9\u6839 $\\mathbb{F}_p$\n * @category \u6570\u5B66\
+    \n/**\n * @title \u5E73\u65B9\u6839 ($\\mathbb{F}_p$)\n * @category \u6570\u5B66\
     \n * O(log p)\n */\n\n// BEGIN CUT HERE\n\nconstexpr std::int64_t sqrt(std::uint64_t\
     \ a, std::uint64_t p) {\n  if ((a %= p) <= 1 || p == 2) return a;\n  using u64\
     \ = std::uint64_t;\n  auto pow = [&p](u64 x, u64 k) {\n    for (u64 ret = 1;;\
@@ -418,7 +418,7 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_sqrt.hpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-03 10:06:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sqrt_of_FPS.test.cpp

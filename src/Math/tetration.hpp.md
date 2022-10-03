@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -9,15 +9,15 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a^{a^{\\\
-      cdot^{\\cdot^{a}}}}$"
+    document_title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$\
+      \ ($\\mathbb{Z}/m\\mathbb{Z}$)"
     links:
     - https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f
   bundledCode: "#line 2 \"src/Math/tetration.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -77,8 +77,8 @@ data:
     \ x, p))\n        if (k & 1 ? pw = mul(pw, x, p) : 0; !(k >>= 1)) break;\n   \
     \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
     \ 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\
-    \u30F3 $H_4(a,b) = a^{a^{\\cdot^{\\cdot^{a}}}}$\n * $\\mathbb{Z}/m\\mathbb{Z}$\n\
-    \ * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
+    \u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\
+    \n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
     \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
     \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
@@ -90,9 +90,9 @@ data:
     \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
     \ m : a;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\
-    \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a^{a^{\\\
-    cdot^{\\cdot^{a}}}}$\n * $\\mathbb{Z}/m\\mathbb{Z}$\n * @category \u6570\u5B66\
-    \n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
+    \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$\
+    \ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n\
+    // verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
     \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
     \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
     \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
@@ -109,8 +109,8 @@ data:
   isVerificationFile: false
   path: src/Math/tetration.hpp
   requiredBy: []
-  timestamp: '2022-10-03 01:10:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-10-03 10:06:49+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
 documentation_of: src/Math/tetration.hpp
@@ -118,5 +118,6 @@ layout: document
 redirect_from:
 - /library/src/Math/tetration.hpp
 - /library/src/Math/tetration.hpp.html
-title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $H_4(a,b) = a^{a^{\\cdot^{\\cdot^{a}}}}$"
+title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
+  mathbb{Z}$)"
 ---

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/Math/discrete_log.hpp
-    title: "\u96E2\u6563\u5BFE\u6570 $\\mathbb{Z}/m\\mathbb{Z}$"
+    title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -17,22 +17,21 @@ data:
   bundledCode: "#line 1 \"test/yosupo/discrete_logarithm_mod.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/discrete_log.hpp\"\n/**\n * @title \u96E2\u6563\u5BFE\u6570\
-    \ $\\mathbb{Z}/m\\mathbb{Z}$\n * @category \u6570\u5B66\n * O(\u221Amod)\n */\n\
-    \n// BEGIN CUT HERE\n\nint discrete_log(unsigned a, unsigned b, unsigned mod)\
-    \ {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b == 1 ? 0 : -1);\n \
-    \ auto mod_inv = [](unsigned x, unsigned mod) {\n    int a = x, b = mod, u = 1,\
-    \ v = 0, t;\n    while (b) t = a / b, std::swap(a -= t * b, b), std::swap(u -=\
-    \ t * v, v);\n    return u >= 0 ? u % mod : (mod - (-u) % mod);\n  };\n  unsigned\
-    \ cnt = 0;\n  for (unsigned g;; cnt++) {\n    if ((b == 1) || (mod == 1)) return\
-    \ cnt;\n    if ((g = std::gcd(a, mod)) == 1) break;\n    if (b % g != 0) return\
-    \ -1;  // no solution\n    b /= g, mod /= g;\n    b = 1ull * mod_inv(a / g, mod)\
-    \ * b % mod;\n  }\n  unsigned middle = std::ceil(std::sqrt(mod));\n  std::unordered_map<unsigned\
-    \ int, unsigned int> mp;\n  unsigned int baby = 1;\n  for (unsigned i = 0; i <\
-    \ middle; i++, baby = 1ull * baby * a % mod)\n    mp.insert({baby, i});\n  unsigned\
-    \ int inv = mod_inv(baby, mod);\n  unsigned int giant = b;\n  for (unsigned i\
-    \ = 0; i < middle; i++) {\n    auto it = mp.find(giant);\n    if (it != mp.end())\
-    \ return cnt + i * middle + it->second;\n    giant = 1ull * giant * inv % mod;\n\
-    \  }\n  return -1;  // no solution\n}\n#line 4 \"test/yosupo/discrete_logarithm_mod.test.cpp\"\
+    \ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n * O(\u221Amod)\n */\n\
+    \n// BEGIN CUT HERE\nint discrete_log(unsigned a, unsigned b, unsigned mod) {\n\
+    \  if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b == 1 ? 0 : -1);\n  using\
+    \ u32 = unsigned;\n  auto mul = [&mod](u32 &x, u32 y) { x = (std::uint64_t)x *\
+    \ y % mod; };\n  auto inv = [&mod](u32 s) -> u32 {\n    int x = 1, y = 0, t =\
+    \ mod;\n    for (int q, z, u; t;)\n      z = x, u = s, x = y, y = z - y * (q =\
+    \ s / t), s = t, t = u - t * q;\n    return x < 0 ? mod - (-x) % mod : x % mod;\n\
+    \  };\n  u32 cnt = 0;\n  for (u32 g;; cnt++, b /= g, mod /= g, mul(b, inv(a /\
+    \ g))) {\n    if ((b == 1) || (mod == 1)) return cnt;\n    if ((g = std::gcd(a,\
+    \ mod)) == 1) break;\n    if (b % g != 0) return -1;  // no solution\n  }\n  u32\
+    \ mid = std::ceil(std::sqrt(mod)), baby = 1;\n  std::unordered_map<u32, u32> mp;\n\
+    \  for (u32 i = 0; i < mid; i++, mul(baby, a)) mp.insert({baby, i});\n  for (u32\
+    \ i = 0, iv = inv(baby), giant = b; i < mid; mul(giant, iv), i++)\n    if (auto\
+    \ it = mp.find(giant); it != mp.end())\n      return cnt + i * mid + it->second;\n\
+    \  return -1;  // no solution\n}\n#line 4 \"test/yosupo/discrete_logarithm_mod.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int T;\n  cin >> T;\n  while (T--) {\n    int X, Y, M;\n    cin >> X >> Y >>\
     \ M;\n    cout << discrete_log(X, Y, M) << '\\n';\n  }\n  return 0;\n}\n"
@@ -46,7 +45,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/discrete_logarithm_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-09-20 01:41:14+09:00'
+  timestamp: '2022-10-03 10:06:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/discrete_logarithm_mod.test.cpp

@@ -6,17 +6,17 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_1_small_p_large_n.test.cpp
     title: test/yosupo/stirling_1_small_p_large_n.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 $\\mathbb{F}_p$"
+    document_title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
     links:
     - https://maspypy.com/stirling-%e6%95%b0%e3%82%92-p-%e3%81%a7%e5%89%b2%e3%81%a3%e3%81%9f%e4%bd%99%e3%82%8a%e3%81%ae%e8%a8%88%e7%ae%97
   bundledCode: "#line 2 \"src/Math/StirlingNumber.hpp\"\n#include <bits/stdc++.h>\n\
@@ -38,7 +38,7 @@ data:
     \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
     \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
     \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/StirlingNumber.hpp\"\
-    \n/**\n * @title \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 $\\mathbb{F}_p$\n\
+    \n/**\n * @title \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)\n\
     \ * @category \u6570\u5B66\n * @see\n * https://maspypy.com/stirling-%e6%95%b0%e3%82%92-p-%e3%81%a7%e5%89%b2%e3%81%a3%e3%81%9f%e4%bd%99%e3%82%8a%e3%81%ae%e8%a8%88%e7%ae%97\n\
     \ * \u524D\u51E6\u7406 O(p^2), \u30AF\u30A8\u30EA O(log n)\n */\n\n// BEGIN CUT\
     \ HERE\nclass StirlingNumber {\n  const std::uint16_t p;\n  std::vector<std::vector<std::uint16_t>>\
@@ -68,7 +68,7 @@ data:
     \ return 0;\n    return b == p - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j]\
     \ % p;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/is_prime.hpp\"\
-    \n/**\n * @title \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 $\\mathbb{F}_p$\n\
+    \n/**\n * @title \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)\n\
     \ * @category \u6570\u5B66\n * @see\n * https://maspypy.com/stirling-%e6%95%b0%e3%82%92-p-%e3%81%a7%e5%89%b2%e3%81%a3%e3%81%9f%e4%bd%99%e3%82%8a%e3%81%ae%e8%a8%88%e7%ae%97\n\
     \ * \u524D\u51E6\u7406 O(p^2), \u30AF\u30A8\u30EA O(log n)\n */\n\n// BEGIN CUT\
     \ HERE\nclass StirlingNumber {\n  const std::uint16_t p;\n  std::vector<std::vector<std::uint16_t>>\
@@ -102,8 +102,8 @@ data:
   isVerificationFile: false
   path: src/Math/StirlingNumber.hpp
   requiredBy: []
-  timestamp: '2022-10-03 01:10:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-10-03 10:06:49+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/stirling_2_small_p_large_n.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp
@@ -112,5 +112,5 @@ layout: document
 redirect_from:
 - /library/src/Math/StirlingNumber.hpp
 - /library/src/Math/StirlingNumber.hpp.html
-title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 $\\mathbb{F}_p$"
+title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
 ---
