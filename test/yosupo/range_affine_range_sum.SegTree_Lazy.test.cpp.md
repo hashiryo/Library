@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Beats.hpp
     title: Segment-Tree Beats!
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []

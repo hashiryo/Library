@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/lcm_convolution.test.cpp
     title: test/yosupo/lcm_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,15 +24,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u7BE9\u306A\u3069"
     links:
@@ -215,7 +215,7 @@ data:
   path: src/Math/Sieve.hpp
   requiredBy: []
   timestamp: '2022-09-21 11:13:45+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/gcd_convolution.test.cpp
