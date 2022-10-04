@@ -16,15 +16,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     links:
+    - https://atcoder.jp/contests/abc253/tasks/abc253_h
     - https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h
     - https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex
     - https://loj.ac/p/2340
@@ -36,29 +37,30 @@ data:
     \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
     //                        (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F2 or\
     \ \u5408\u6210 1-\u221A(1-2f))\n// https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\
-    \u30F3\u7573\u8FBC\u307F)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N\
-    \ = 21>\nclass SetPowerSeries {\n#define SUBSET_REP(i, j, n)                 \
-    \          \\\n  for (int _ = (n); _ >>= 1;)                         \\\n    for\
-    \ (int __ = 0, _2 = _ << 1; __ < (n); __ += _2) \\\n      for (int j = __, i =\
-    \ j | _, ___ = i; j < ___; j++, i++)\n  template <typename T>\n  static inline\
-    \ void ranked_zeta_tr(const T f[], T ret[][MAX_N + 1],\n                     \
-    \               const int &sz) {\n    for (int S = sz, c; S--;)\n      ret[S][c\
-    \ = __builtin_popcount(S)] = f[S], std::fill_n(ret[S], c, 0);\n    SUBSET_REP(S,\
-    \ U, sz)\n    for (int d = __builtin_popcount(S); d--;) ret[S][d] += ret[U][d];\n\
-    \  }\n  template <typename T>\n  static inline void conv_na(const T f[], const\
-    \ T g[], T ret[], const int &sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t\
-    \ = s] = f[s] * g[0]; t; (--t) &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template\
-    \ <typename T>\n  static inline void conv_tr(const T f[], const T g[], T ret[],\
-    \ const int &sz) {\n    static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N\
-    \ + 1];\n    T tmp[MAX_N + 1];\n    ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g,\
-    \ G, sz);\n    const int n = __builtin_ctz(sz);\n    for (int S = sz, c, d, e,\
-    \ bg; S--;) {\n      c = __builtin_popcount(S), bg = std::min(2 * c, n);\n   \
-    \   for (d = bg; d >= c; d--)\n        for (tmp[d] = 0, e = d - c; e <= c; e++)\n\
-    \          tmp[d] += F[S][e] * G[S][d - e];\n      for (d = bg; d >= c; d--) F[S][d]\
-    \ = tmp[d];\n    }\n    SUBSET_REP(S, U, sz)\n    for (int c = __builtin_popcount(U),\
-    \ d = std::min(2 * c, n); d > c; d--)\n      F[S][d] -= F[U][d];\n    for (int\
-    \ S = sz; S--;) ret[S] = F[S][__builtin_popcount(S)];\n  }\n  template <typename\
-    \ T, class F>\n  static inline void onconv_na(const T g[], T ret[], const F &phi,\n\
+    \u30F3\u7573\u8FBC\u307F)\n// https://atcoder.jp/contests/abc253/tasks/abc253_h\
+    \ (egf)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
+    \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
+    \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
+    \ j++, i++)\n  template <typename T>\n  static inline void ranked_zeta_tr(const\
+    \ T f[], T ret[][MAX_N + 1],\n                                    const int &sz)\
+    \ {\n    for (int S = sz, c; S--;)\n      ret[S][c = __builtin_popcount(S)] =\
+    \ f[S], std::fill_n(ret[S], c, 0);\n    SUBSET_REP(S, U, sz)\n    for (int d =\
+    \ __builtin_popcount(S); d--;) ret[S][d] += ret[U][d];\n  }\n  template <typename\
+    \ T>\n  static inline void conv_na(const T f[], const T g[], T ret[], const int\
+    \ &sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t = s] = f[s] * g[0];\
+    \ t; (--t) &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template <typename T>\n  static\
+    \ inline void conv_tr(const T f[], const T g[], T ret[], const int &sz) {\n  \
+    \  static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n    T tmp[MAX_N\
+    \ + 1];\n    ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n    const int\
+    \ n = __builtin_ctz(sz);\n    for (int S = sz, c, d, e, bg; S--;) {\n      c =\
+    \ __builtin_popcount(S), bg = std::min(2 * c, n);\n      for (d = bg; d >= c;\
+    \ d--)\n        for (tmp[d] = 0, e = d - c; e <= c; e++)\n          tmp[d] +=\
+    \ F[S][e] * G[S][d - e];\n      for (d = bg; d >= c; d--) F[S][d] = tmp[d];\n\
+    \    }\n    SUBSET_REP(S, U, sz)\n    for (int c = __builtin_popcount(U), d =\
+    \ std::min(2 * c, n); d > c; d--)\n      F[S][d] -= F[U][d];\n    for (int S =\
+    \ sz; S--;) ret[S] = F[S][__builtin_popcount(S)];\n  }\n  template <typename T,\
+    \ class F>\n  static inline void onconv_na(const T g[], T ret[], const F &phi,\n\
     \                               const int &sz) {\n    for (int s = 1, t; s < sz;\
     \ phi(s, ret[s]), s++)\n      for (ret[t = s] = 0; t; (--t) &= s) ret[s] += ret[s\
     \ ^ t] * g[t];\n  }\n  template <typename T, class F>\n  static inline void onconv_tr(const\
@@ -144,29 +146,30 @@ data:
     \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
     //                        (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F2 or\
     \ \u5408\u6210 1-\u221A(1-2f))\n// https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\
-    \u30F3\u7573\u8FBC\u307F)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N\
-    \ = 21>\nclass SetPowerSeries {\n#define SUBSET_REP(i, j, n)                 \
-    \          \\\n  for (int _ = (n); _ >>= 1;)                         \\\n    for\
-    \ (int __ = 0, _2 = _ << 1; __ < (n); __ += _2) \\\n      for (int j = __, i =\
-    \ j | _, ___ = i; j < ___; j++, i++)\n  template <typename T>\n  static inline\
-    \ void ranked_zeta_tr(const T f[], T ret[][MAX_N + 1],\n                     \
-    \               const int &sz) {\n    for (int S = sz, c; S--;)\n      ret[S][c\
-    \ = __builtin_popcount(S)] = f[S], std::fill_n(ret[S], c, 0);\n    SUBSET_REP(S,\
-    \ U, sz)\n    for (int d = __builtin_popcount(S); d--;) ret[S][d] += ret[U][d];\n\
-    \  }\n  template <typename T>\n  static inline void conv_na(const T f[], const\
-    \ T g[], T ret[], const int &sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t\
-    \ = s] = f[s] * g[0]; t; (--t) &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template\
-    \ <typename T>\n  static inline void conv_tr(const T f[], const T g[], T ret[],\
-    \ const int &sz) {\n    static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N\
-    \ + 1];\n    T tmp[MAX_N + 1];\n    ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g,\
-    \ G, sz);\n    const int n = __builtin_ctz(sz);\n    for (int S = sz, c, d, e,\
-    \ bg; S--;) {\n      c = __builtin_popcount(S), bg = std::min(2 * c, n);\n   \
-    \   for (d = bg; d >= c; d--)\n        for (tmp[d] = 0, e = d - c; e <= c; e++)\n\
-    \          tmp[d] += F[S][e] * G[S][d - e];\n      for (d = bg; d >= c; d--) F[S][d]\
-    \ = tmp[d];\n    }\n    SUBSET_REP(S, U, sz)\n    for (int c = __builtin_popcount(U),\
-    \ d = std::min(2 * c, n); d > c; d--)\n      F[S][d] -= F[U][d];\n    for (int\
-    \ S = sz; S--;) ret[S] = F[S][__builtin_popcount(S)];\n  }\n  template <typename\
-    \ T, class F>\n  static inline void onconv_na(const T g[], T ret[], const F &phi,\n\
+    \u30F3\u7573\u8FBC\u307F)\n// https://atcoder.jp/contests/abc253/tasks/abc253_h\
+    \ (egf)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
+    \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
+    \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
+    \ j++, i++)\n  template <typename T>\n  static inline void ranked_zeta_tr(const\
+    \ T f[], T ret[][MAX_N + 1],\n                                    const int &sz)\
+    \ {\n    for (int S = sz, c; S--;)\n      ret[S][c = __builtin_popcount(S)] =\
+    \ f[S], std::fill_n(ret[S], c, 0);\n    SUBSET_REP(S, U, sz)\n    for (int d =\
+    \ __builtin_popcount(S); d--;) ret[S][d] += ret[U][d];\n  }\n  template <typename\
+    \ T>\n  static inline void conv_na(const T f[], const T g[], T ret[], const int\
+    \ &sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t = s] = f[s] * g[0];\
+    \ t; (--t) &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template <typename T>\n  static\
+    \ inline void conv_tr(const T f[], const T g[], T ret[], const int &sz) {\n  \
+    \  static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n    T tmp[MAX_N\
+    \ + 1];\n    ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n    const int\
+    \ n = __builtin_ctz(sz);\n    for (int S = sz, c, d, e, bg; S--;) {\n      c =\
+    \ __builtin_popcount(S), bg = std::min(2 * c, n);\n      for (d = bg; d >= c;\
+    \ d--)\n        for (tmp[d] = 0, e = d - c; e <= c; e++)\n          tmp[d] +=\
+    \ F[S][e] * G[S][d - e];\n      for (d = bg; d >= c; d--) F[S][d] = tmp[d];\n\
+    \    }\n    SUBSET_REP(S, U, sz)\n    for (int c = __builtin_popcount(U), d =\
+    \ std::min(2 * c, n); d > c; d--)\n      F[S][d] -= F[U][d];\n    for (int S =\
+    \ sz; S--;) ret[S] = F[S][__builtin_popcount(S)];\n  }\n  template <typename T,\
+    \ class F>\n  static inline void onconv_na(const T g[], T ret[], const F &phi,\n\
     \                               const int &sz) {\n    for (int s = 1, t; s < sz;\
     \ phi(s, ret[s]), s++)\n      for (ret[t = s] = 0; t; (--t) &= s) ret[s] += ret[s\
     \ ^ t] * g[t];\n  }\n  template <typename T, class F>\n  static inline void onconv_tr(const\
@@ -251,8 +254,8 @@ data:
   path: src/Math/SetPowerSeries.hpp
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
-  timestamp: '2022-06-16 15:13:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-10-04 23:27:11+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/subset_convolution.test.cpp
   - test/atcoder/arc105_f.test.cpp

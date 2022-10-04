@@ -5,10 +5,10 @@ data:
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
@@ -100,29 +100,30 @@ data:
     \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h\n\
     //                        (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F2 or\
     \ \u5408\u6210 1-\u221A(1-2f))\n// https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\
-    \u30F3\u7573\u8FBC\u307F)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N\
-    \ = 21>\nclass SetPowerSeries {\n#define SUBSET_REP(i, j, n)                 \
-    \          \\\n  for (int _ = (n); _ >>= 1;)                         \\\n    for\
-    \ (int __ = 0, _2 = _ << 1; __ < (n); __ += _2) \\\n      for (int j = __, i =\
-    \ j | _, ___ = i; j < ___; j++, i++)\n  template <typename T>\n  static inline\
-    \ void ranked_zeta_tr(const T f[], T ret[][MAX_N + 1],\n                     \
-    \               const int &sz) {\n    for (int S = sz, c; S--;)\n      ret[S][c\
-    \ = __builtin_popcount(S)] = f[S], std::fill_n(ret[S], c, 0);\n    SUBSET_REP(S,\
-    \ U, sz)\n    for (int d = __builtin_popcount(S); d--;) ret[S][d] += ret[U][d];\n\
-    \  }\n  template <typename T>\n  static inline void conv_na(const T f[], const\
-    \ T g[], T ret[], const int &sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t\
-    \ = s] = f[s] * g[0]; t; (--t) &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template\
-    \ <typename T>\n  static inline void conv_tr(const T f[], const T g[], T ret[],\
-    \ const int &sz) {\n    static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N\
-    \ + 1];\n    T tmp[MAX_N + 1];\n    ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g,\
-    \ G, sz);\n    const int n = __builtin_ctz(sz);\n    for (int S = sz, c, d, e,\
-    \ bg; S--;) {\n      c = __builtin_popcount(S), bg = std::min(2 * c, n);\n   \
-    \   for (d = bg; d >= c; d--)\n        for (tmp[d] = 0, e = d - c; e <= c; e++)\n\
-    \          tmp[d] += F[S][e] * G[S][d - e];\n      for (d = bg; d >= c; d--) F[S][d]\
-    \ = tmp[d];\n    }\n    SUBSET_REP(S, U, sz)\n    for (int c = __builtin_popcount(U),\
-    \ d = std::min(2 * c, n); d > c; d--)\n      F[S][d] -= F[U][d];\n    for (int\
-    \ S = sz; S--;) ret[S] = F[S][__builtin_popcount(S)];\n  }\n  template <typename\
-    \ T, class F>\n  static inline void onconv_na(const T g[], T ret[], const F &phi,\n\
+    \u30F3\u7573\u8FBC\u307F)\n// https://atcoder.jp/contests/abc253/tasks/abc253_h\
+    \ (egf)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
+    \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
+    \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
+    \ j++, i++)\n  template <typename T>\n  static inline void ranked_zeta_tr(const\
+    \ T f[], T ret[][MAX_N + 1],\n                                    const int &sz)\
+    \ {\n    for (int S = sz, c; S--;)\n      ret[S][c = __builtin_popcount(S)] =\
+    \ f[S], std::fill_n(ret[S], c, 0);\n    SUBSET_REP(S, U, sz)\n    for (int d =\
+    \ __builtin_popcount(S); d--;) ret[S][d] += ret[U][d];\n  }\n  template <typename\
+    \ T>\n  static inline void conv_na(const T f[], const T g[], T ret[], const int\
+    \ &sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t = s] = f[s] * g[0];\
+    \ t; (--t) &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template <typename T>\n  static\
+    \ inline void conv_tr(const T f[], const T g[], T ret[], const int &sz) {\n  \
+    \  static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n    T tmp[MAX_N\
+    \ + 1];\n    ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n    const int\
+    \ n = __builtin_ctz(sz);\n    for (int S = sz, c, d, e, bg; S--;) {\n      c =\
+    \ __builtin_popcount(S), bg = std::min(2 * c, n);\n      for (d = bg; d >= c;\
+    \ d--)\n        for (tmp[d] = 0, e = d - c; e <= c; e++)\n          tmp[d] +=\
+    \ F[S][e] * G[S][d - e];\n      for (d = bg; d >= c; d--) F[S][d] = tmp[d];\n\
+    \    }\n    SUBSET_REP(S, U, sz)\n    for (int c = __builtin_popcount(U), d =\
+    \ std::min(2 * c, n); d > c; d--)\n      F[S][d] -= F[U][d];\n    for (int S =\
+    \ sz; S--;) ret[S] = F[S][__builtin_popcount(S)];\n  }\n  template <typename T,\
+    \ class F>\n  static inline void onconv_na(const T g[], T ret[], const F &phi,\n\
     \                               const int &sz) {\n    for (int s = 1, t; s < sz;\
     \ phi(s, ret[s]), s++)\n      for (ret[t = s] = 0; t; (--t) &= s) ret[s] += ret[s\
     \ ^ t] * g[t];\n  }\n  template <typename T, class F>\n  static inline void onconv_tr(const\
@@ -204,22 +205,23 @@ data:
     };\n#line 4 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\n/**\n * @title \u7121\
     \u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\u7D1A\u6570\
     )\n * @category \u30B0\u30E9\u30D5\n * @see\n * https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex\n\
-    \ * O(V 2^V) space\n */\n\n// verify\u7528:\n// https://loj.ac/p/155 (Tutte \u591A\
-    \u9805\u5F0F)\n// https://loj.ac/p/3165 (acyclic_orientations (Tutte \u591A\u9805\
-    \u5F0F, \u5F69\u8272\u591A\u9805\u5F0F))\n// https://loj.ac/p/6673 (\u30AA\u30A4\
-    \u30E9\u30FC\u30B0\u30E9\u30D5)\n// https://loj.ac/p/6719 (\u30AB\u30AF\u30BF\u30B9\
-    \u30B0\u30E9\u30D5)\n// https://loj.ac/p/6729 (\u4E8C\u91CD\u70B9\u9023\u7D50\u30B0\
-    \u30E9\u30D5)\n// https://loj.ac/p/6730 (\u4E8C\u91CD\u8FBA\u9023\u7D50\u30B0\u30E9\
-    \u30D5)\n// https://loj.ac/p/6787 (\u5F69\u8272\u591A\u9805\u5F0F)\n\n// BEGIN\
-    \ CUT HERE\n\ntemplate <unsigned short MAX_V = 21>\nclass UndirectedGraphSetPowerSeries\
-    \ {\n  using SPS = SetPowerSeries<MAX_V>;\n  template <class T>\n  using sps =\
-    \ std::vector<T>;\n  template <class T>\n  using poly = std::vector<T>;\n  const\
-    \ unsigned V, sz;\n  unsigned adj[MAX_V][MAX_V] = {0}, edge[MAX_V] = {0};\n  template\
-    \ <class T>\n  static inline T pow(T x, int k) {\n    for (T ret(1);; x *= x)\n\
-    \      if (k & 1 ? ret *= x : 0; !(k >>= 1)) return ret;\n  }\n  template <class\
-    \ F>\n  inline void bfs(int s, const F &f) const {\n    for (int t = s, u, j;\
-    \ t;)\n      for (f(u = 1 << __builtin_ctz(t)); u;)\n        j = __builtin_ctz(u),\
-    \ t ^= 1 << j, u ^= 1 << j, u |= edge[j] & t;\n  }\n\n public:\n  UndirectedGraphSetPowerSeries(int\
+    \ * O(V 2^V) space\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/abc253/tasks/abc253_h\
+    \ (\u5168\u57DF\u6728)\n// https://loj.ac/p/155 (Tutte \u591A\u9805\u5F0F)\n//\
+    \ https://loj.ac/p/3165 (acyclic_orientations (Tutte \u591A\u9805\u5F0F, \u5F69\
+    \u8272\u591A\u9805\u5F0F))\n// https://loj.ac/p/6673 (\u30AA\u30A4\u30E9\u30FC\
+    \u30B0\u30E9\u30D5)\n// https://loj.ac/p/6719 (\u30AB\u30AF\u30BF\u30B9\u30B0\u30E9\
+    \u30D5)\n// https://loj.ac/p/6729 (\u4E8C\u91CD\u70B9\u9023\u7D50\u30B0\u30E9\u30D5\
+    )\n// https://loj.ac/p/6730 (\u4E8C\u91CD\u8FBA\u9023\u7D50\u30B0\u30E9\u30D5\
+    )\n// https://loj.ac/p/6787 (\u5F69\u8272\u591A\u9805\u5F0F)\n\n// BEGIN CUT HERE\n\
+    \ntemplate <unsigned short MAX_V = 21>\nclass UndirectedGraphSetPowerSeries {\n\
+    \  using SPS = SetPowerSeries<MAX_V>;\n  template <class T>\n  using sps = std::vector<T>;\n\
+    \  template <class T>\n  using poly = std::vector<T>;\n  const unsigned V, sz;\n\
+    \  unsigned adj[MAX_V][MAX_V] = {0}, edge[MAX_V] = {0};\n  template <class T>\n\
+    \  static inline T pow(T x, int k) {\n    for (T ret(1);; x *= x)\n      if (k\
+    \ & 1 ? ret *= x : 0; !(k >>= 1)) return ret;\n  }\n  template <class F>\n  inline\
+    \ void bfs(int s, const F &f) const {\n    for (int t = s, u, j; t;)\n      for\
+    \ (f(u = 1 << __builtin_ctz(t)); u;)\n        j = __builtin_ctz(u), t ^= 1 <<\
+    \ j, u ^= 1 << j, u |= edge[j] & t;\n  }\n\n public:\n  UndirectedGraphSetPowerSeries(int\
     \ n) : V(n), sz(1 << V) {}\n  UndirectedGraphSetPowerSeries(const std::vector<std::vector<int>>\
     \ &g)\n      : V(g.size()), sz(1 << V) {\n    for (int i = V; i--;)\n      for\
     \ (int j = i; j--;) assert(g[i][j] == g[j][i]);\n    for (int i = V; i--;)\n \
@@ -273,15 +275,17 @@ data:
     \ {\n    auto ret = loop_ignored_connected_graph_num<T>();\n    return connect_to_biconnect(ret),\
     \ ret;\n  }\n  template <class T>  // O(V^3 2^V)\n  inline sps<T> biconnected_graph_num()\
     \ const {\n    auto ret = loop_ignored_biconnected_graph_num<T>();\n    return\
-    \ loop_ignored_to_loop_permitted(ret), ret;\n  }\n  template <class T>  // O(V^3\
-    \ 2^V)\n  inline sps<T> spanning_tree_num() const {\n    sps<T> ret(sz, 0);\n\
-    \    for (int i = V; i--;)\n      for (int j = i; j--;) ret[(1 << i) | (1 << j)]\
-    \ = adj[i][j];\n    return biconnect_to_connect(ret), ret;\n  }\n  template <class\
-    \ T>  // O(V^3 2^V)\n  inline sps<T> forest_num() const {\n    return SPS::exp(spanning_tree_num<T>());\n\
-    \  }\n  template <class T>  // O(V^3 2^V)\n  inline sps<T> rooted_spanning_tree_num()\
+    \ loop_ignored_to_loop_permitted(ret), ret;\n  }\n  template <class T>  // O(V^2\
+    \ 2^V)\n  inline sps<T> spanning_tree_num() const {\n    sps<int> e = edge_space_rank();\n\
+    \    sps<T> ret = {0, 1};\n    ret.reserve(sz);\n    for (int I = 2; I < sz; I\
+    \ <<= 1) {\n      sps<T> g(ret);\n      for (int s = I; --s;) g[s] *= e[s | I]\
+    \ - e[s] - e[I];\n      g = SPS::exp(g);\n      std::copy(g.begin(), g.end(),\
+    \ std::back_inserter(ret));\n    }\n    return ret;\n  }\n  template <class T>\
+    \  // O(V^2 2^V)\n  inline sps<T> forest_num() const {\n    return SPS::exp(spanning_tree_num<T>());\n\
+    \  }\n  template <class T>  // O(V^2 2^V)\n  inline sps<T> rooted_spanning_tree_num()\
     \ const {\n    auto ret = spanning_tree_num<T>();\n    for (int s = sz; s--;)\
     \ ret[s] *= __builtin_popcount(s);\n    return ret;\n  }\n  template <class T>\
-    \  // O(V^3 2^V)\n  inline sps<T> rooted_forest_num() const {\n    return SPS::exp(rooted_spanning_tree_num<T>());\n\
+    \  // O(V^2 2^V)\n  inline sps<T> rooted_forest_num() const {\n    return SPS::exp(rooted_spanning_tree_num<T>());\n\
     \  }\n  template <class T>  // O(V^2 2^V)\n  inline sps<T> cycle_graph_num() const\
     \ {\n    T dp[sz][V - 1];\n    sps<T> ret(sz, 0);\n    for (int i = V, I = sz;\
     \ I >>= 1, --i;) {\n      for (int s = I; --s;) std::fill_n(dp[s], i, 0);\n  \
@@ -352,7 +356,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc105_f.test.cpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-04 23:27:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc105_f.test.cpp

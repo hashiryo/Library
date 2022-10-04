@@ -1,23 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Old/ModInt.hpp
     title: ModInt
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/Old/differential_equation.hpp
-    title: "\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':warning:'
-    path: src/Old/fps_sequence.hpp
-    title: "\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/frequency_table_of_tree_distance.test.cpp
-    title: test/yosupo/frequency_table_of_tree_distance.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -585,13 +576,10 @@ data:
   - src/Old/ModInt.hpp
   isVerificationFile: false
   path: src/Old/FormalPowerSeries.hpp
-  requiredBy:
-  - src/Old/differential_equation.hpp
-  - src/Old/fps_sequence.hpp
+  requiredBy: []
   timestamp: '2022-09-19 00:53:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Old/FormalPowerSeries.hpp
 layout: document
 redirect_from:
