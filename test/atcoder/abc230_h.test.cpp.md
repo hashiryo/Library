@@ -2,17 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/FFT/FormalPowerSeries.hpp
+    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
-    path: src/FFT/SubProductTree.hpp
-    title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
-    path: src/FFT/fps_div.hpp
-    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':heavy_check_mark:'
-    path: src/FFT/fps_inv.hpp
-    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -26,17 +20,17 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
+    PROBLEM: https://atcoder.jp/contests/abc230/tasks/abc230_h
     links:
-    - https://judge.yosupo.jp/problem/multipoint_evaluation
-  bundledCode: "#line 1 \"test/yosupo/multipoint_evaluation.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
-    \n */\n\n// BEGIN CUT HERE\nnamespace modint_internal {\nusing namespace std;\n\
-    struct modint_base {};\nstruct sta_mint_base : modint_base {};\nstruct dyn_mint_base\
-    \ : modint_base {};\ntemplate <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
+    - https://atcoder.jp/contests/abc230/tasks/abc230_h
+  bundledCode: "#line 1 \"test/atcoder/abc230_h.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc230/tasks/abc230_h\"\
+    \n\n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title\
+    \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
+    \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
+    \ {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
+    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
+    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
     \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
@@ -270,165 +264,200 @@ data:
     mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
     \ auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n  static int l\
     \ = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
-    }\n#line 4 \"src/FFT/fps_inv.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\
-    \u6570 inv\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <std::size_t\
-    \ _Nm, class mod_t>\nvoid inv_base(const mod_t p[], int n, mod_t r[], int i =\
-    \ 1) {\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
-    \ _Nm, 2>;\n  static constexpr int TH = 64 << (!is_nttfriend<mod_t, _Nm>() <<\
-    \ 1);\n  if (n <= i) return;\n  assert(((n & -n) == n)), assert(i && ((i & -i)\
-    \ == i));\n  const int m = std::min(n, TH);\n  const mod_t Z = 0, miv = -r[0];\n\
-    \  for (int j; i < m; r[i++] *= miv)\n    for (r[j = i] = Z; j--;) r[i] += r[j]\
-    \ * p[i - j];\n  for (int e = i << 1; i < n; e = i << 1) {\n    GNA1::bf.set(r,\
-    \ 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0, e);\n    GNA2::bf.set(p, 0, e),\
-    \ GNA2::bf.dft(0, e);\n    GNA2::bf.mul(GNA1::bf, 0, e), GNA2::bf.idft(0, e);\n\
-    \    if constexpr (!is_nttfriend<mod_t, _Nm>())\n      GNA2::bf.get(r, i, e),\
-    \ GNA2::bf.set(r, i, e);\n    GNA2::bf.zeros(0, i), GNA2::bf.dft(0, e), GNA1::bf.mul(GNA2::bf,\
-    \ 0, e);\n    for (GNA1::bf.idft(0, e), GNA1::bf.get(r, i, e); i < e; i++) r[i]\
-    \ = -r[i];\n  }\n}\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
-    \ inv(const std::vector<mod_t> &p) {\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n\
-    \  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  static constexpr std::size_t _Nm2\
-    \ = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2\
-    \ = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t,\
-    \ _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static\
-    \ constexpr int TH2 = is_nttfriend<mod_t, _Nm2>()\n                          \
-    \       ? 115\n                                 : (is_nttarraydouble<mod_t, _Nm2>\
-    \ ? 384 : 452);\n  static constexpr int C = nttarray_type<mod_t, _Nm> << 1, lnR\
-    \ = 4;\n  static constexpr int TH3 = 5 + ((nttarray_type<mod_t, _Nm> == 3) <<\
-    \ 1);\n  static constexpr int D = 10 * nttarray_type<mod_t, _Nm>;\n  const int\
-    \ n = p.size();\n  assert(n > 0), assert(p[0] != mod_t(0));\n  std::copy(p.begin(),\
-    \ p.end(), GAp::bf);\n  mod_t *bfk = GAr::bf, *pbfk = GAp::bf;\n  const mod_t\
-    \ Z = 0, miv = -(bfk[0] = mod_t(1) / pbfk[0]);\n  if (n < TH2) {\n    for (int\
-    \ j, i = 1; i < n; bfk[i++] *= miv)\n      for (bfk[j = i] = Z; j--;) bfk[i] +=\
-    \ bfk[j] * pbfk[i - j];\n    return std::vector<mod_t>(bfk, bfk + n);\n  }\n \
-    \ const int bl = std::max(bsf(get_len(n)) - lnR, TH3);\n  int l = ((n >> bl) +\
-    \ ((((1 << bl) - 1) & n) > (C * bl + D))) << bl;\n  const int m = l & -l, m2 =\
-    \ m << 1, ed = (l + m - 1) / m;\n  if (inv_base<_Nm2>(pbfk, m, bfk); 1 < ed)\n\
-    \    GNA2D2::bf[0].set(pbfk, 0, m), GNA2D2::bf[0].zeros(m, m2),\n        GNA2D2::bf[0].dft(0,\
-    \ m2);\n  for (int k = 1, mm = m; k < ed; mm = std::min(m, n - m * ++k)) {\n \
-    \   GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m, m2);\n    GNA2D1::bf[k\
-    \ - 1].dft(0, m2), GNA1::bf.set(pbfk += m, 0, m);\n    GNA1::bf.zeros(m, m2);\n\
-    \    GNA1::bf.dft(0, m2), GNA2D2::bf[k].add(GNA1::bf, GNA2D2::bf[0], 0, m);\n\
-    \    GNA2D2::bf[k].dif(GNA1::bf, GNA2D2::bf[0], m, m2), GNA2::bf.zeros(0, m2);\n\
-    \    if (k + 1 < ed) GNA2D2::bf[0].subst(GNA1::bf, 0, m2);\n    for (int j = k;\
-    \ j--;)\n      GNA1::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k - j], 0, m2),\n      \
-    \    GNA2::bf.add(GNA1::bf, 0, m2);\n    GNA2::bf.idft(0, m2), GNA2::bf.zeros(m,\
-    \ m2), bfk += m;\n    if constexpr (!is_nttfriend<mod_t, _Nm2>())\n      GNA2::bf.get(bfk,\
-    \ 0, m), GNA2::bf.set(bfk, 0, m);\n    GNA2::bf.dft(0, m2);\n    GNA2::bf.mul(GNA2D1::bf[0],\
-    \ 0, m2), GNA2::bf.idft(0, m2);\n    for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]\
-    \ = -bfk[mm];\n  }\n  if (l < n)\n    for (int j; l < n; GAr::bf[l++] *= miv)\n\
-    \      for (GAr::bf[j = l] = Z; j--;) GAr::bf[l] += GAr::bf[j] * GAp::bf[l - j];\n\
-    \  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n#line 4 \"src/FFT/fps_div.hpp\"\
-    \n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n\
-    \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
-    std::vector<mod_t> div(const std::vector<mod_t> &p,\n                       const\
-    \ std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t, _Nm, 0>;\n  using\
-    \ GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n\
-    \  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t _Nm2\
-    \ = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2\
-    \ = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2,\
-    \ 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
-    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH = 128 <<\
-    \ (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int TH2 = 1024 << (!is_nttfriend<mod_t,\
-    \ _Nm2>());\n  static constexpr int A = is_nttfriend<mod_t, _Nm2>()      ? 7\n\
-    \                           : is_nttarraydouble<mod_t, _Nm2> ? 17\n          \
-    \                                                  : 18;\n  static constexpr int\
-    \ B = is_nttfriend<mod_t, _Nm2>()      ? 29\n                           : is_nttarraydouble<mod_t,\
-    \ _Nm2> ? 85\n                                                            : 129;\n\
-    \  const int n = p.size(), len = get_len(n), R = len < TH2 ? 8 : 16;\n  const\
-    \ int l = q.size(), lnR = bsf(R);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
-    \  std::copy(q.begin(), q.end(), GAq::bf);\n  const mod_t iv0 = mod_t(1) / GAq::bf[0];\n\
-    \  if (l < A * bsf(len) + B || TH >= n) {\n    for (int i = 0; i < n; GAp::bf[i++]\
-    \ *= iv0)\n      for (int j = std::min(i + 1, l); --j;)\n        GAp::bf[i] -=\
-    \ GAp::bf[i - j] * GAq::bf[j];\n    return std::vector<mod_t>(GAp::bf, GAp::bf\
-    \ + n);\n  }\n  int m = len, i = 0;\n  while (m > TH) m >>= lnR;\n  for (std::copy_n(GAp::bf,\
-    \ m, GAr::bf); i < m; GAr::bf[i++] *= iv0)\n    for (int j = std::min(i + 1, l);\
-    \ --j;)\n      GAr::bf[i] -= GAr::bf[i - j] * GAq::bf[j];\n  if (l < n) std::fill(GAq::bf\
-    \ + l, GAq::bf + n, mod_t(0));\n  for (GA::bf[0] = iv0, i = 1; m < n; i = m, m\
-    \ <<= lnR) {\n    int m2 = m << 1, ed = std::min(R, (n + m - 1) / m), k = 1, j,\
-    \ mm = m;\n    inv_base<_Nm2>(GAq::bf, m, GA::bf, i);\n    GNA1::bf.set(GA::bf,\
-    \ 0, m), GNA1::bf.zeros(m, m2), GNA1::bf.dft(0, m2);\n    mod_t *bfk = GAr::bf,\
-    \ *qbfk = GAq::bf, *pbfk = GAp::bf;\n    GNA2D2::bf[0].set(qbfk, 0, m), GNA2D2::bf[0].zeros(m,\
-    \ m2);\n    for (GNA2D2::bf[0].dft(0, m2); k < ed; mm = std::min(m, n - m * ++k))\
-    \ {\n      GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m, m2);\n\
-    \      GNA2D1::bf[k - 1].dft(0, m2);\n      GNA3::bf.set(qbfk += m, 0, m), GNA3::bf.zeros(m,\
-    \ m2), GNA3::bf.dft(0, m2);\n      GNA2D2::bf[k].add(GNA3::bf, GNA2D2::bf[0],\
-    \ 0, m);\n      GNA2D2::bf[k].dif(GNA3::bf, GNA2D2::bf[0], m, m2), GNA2::bf.zeros(0,\
-    \ m2);\n      if (k + 1 < ed) GNA2D2::bf[0].subst(GNA3::bf, 0, m2);\n      for\
-    \ (j = k; j--;)\n        GNA3::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k - j], 0, m2),\n\
-    \            GNA2::bf.add(GNA3::bf, 0, m2);\n      GNA2::bf.idft(0, m2), GNA2::bf.zeros(m,\
-    \ m2), pbfk += m;\n      for (GNA2::bf.get(bfk += m, 0, mm), j = mm; j--;) bfk[j]\
-    \ -= pbfk[j];\n      GNA2::bf.set(bfk, 0, mm);\n      GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf,\
-    \ 0, m2), GNA2::bf.idft(0, m2);\n      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]\
-    \ = -bfk[mm];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n\
-    }\n#line 4 \"src/FFT/SubProductTree.hpp\"\n\n/**\n * @title \u8907\u6570\u306E\
-    \u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593\n * @category FFT\n * \u3069\
-    \u3061\u3089\u3082O(N log^2 N)\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
-    \ std::size_t _Nm = 1 << 20>\nstruct SubProductTree {\n  using poly = std::vector<mod_t>;\n\
-    \  static const inline mod_t Z = 0;\n  std::vector<mod_t> xs, all;\n  int n, nn;\n\
-    \  std::vector<NTTArray<mod_t, _Nm, true>> p;\n  using GA1 = GlobalArray<mod_t,\
-    \ _Nm, 1>;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
-    \ _Nm, 2>;\n  SubProductTree(const std::vector<mod_t> &xs_)\n      : xs(xs_),\
-    \ n(xs_.size()), nn(get_len(n)), p(nn << 1) {\n    xs.resize(nn, Z);\n    for\
-    \ (int i = 0; i < nn; ++i)\n      p[nn + i].resize(2), p[nn + i].set(0, 1), p[nn\
-    \ + i].set(1, -xs[i]);\n    for (int i = nn; --i;) {\n      int ls = i << 1, rs\
-    \ = i << 1 | 1, len = get_len(p[ls].size());\n      p[ls].resize(len), p[rs].resize(len),\
-    \ p[ls].dft(0, len);\n      p[rs].dft(0, len), p[i].resize(len), p[i].mul(p[ls],\
-    \ p[rs], 0, len);\n      p[i].idft(0, len), p[i].resize(len + 1);\n      if constexpr\
-    \ (!is_nttfriend<mod_t, _Nm>())\n        p[i].get(GA1::bf, 1, len), p[i].set(GA1::bf,\
-    \ 1, len);\n      p[i].set(len, p[i].get(0) - 1), p[i].set(0, 1);\n    }\n   \
-    \ all.resize(n + 1), p[1].get(all.data(), 0, n + 1);\n  }\n  std::vector<mod_t>\
-    \ multi_eval(const poly &f) const {\n    int m = f.size();\n    if (m == 1) return\
-    \ std::vector<mod_t>(n, f[0]);\n    auto q = div<mod_t, _Nm>(poly(f.rbegin(),\
-    \ f.rend()), all);\n    if (m > nn)\n      std::copy(q.end() - nn, q.end(), GA1::bf);\n\
-    \    else\n      std::copy(q.begin(), q.end(), GA1::bf + nn - m),\n          std::fill(GA1::bf,\
-    \ GA1::bf + nn - m, Z);\n    for (int k = nn; k >>= 1;)\n      for (int i = 0,\
-    \ k2 = k << 1, o = nn / k; i < nn; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf\
-    \ + i, 0, k2), GNA1::bf.dft(0, k2);\n        GNA2::bf.mul(GNA1::bf, p[o | 1],\
-    \ 0, k2), GNA2::bf.idft(0, k2);\n        GNA1::bf.mul(p[o], 0, k2), GNA1::bf.idft(0,\
-    \ k2);\n        GNA2::bf.get(GA1::bf + i - k, k, k2), GNA1::bf.get(GA1::bf + i,\
-    \ k, k2);\n      }\n    return std::vector<mod_t>(GA1::bf, GA1::bf + n);\n  }\n\
-    \  poly interpolate(const std::vector<mod_t> &ys) {\n    for (int i = n; i; i--)\
-    \ GA1::bf[i - 1] = all[n - i] * i;\n    auto q = multi_eval(poly(GA1::bf, GA1::bf\
-    \ + n));\n    for (int i = n; i--;) GA1::bf[i] = ys[i] / q[i];\n    std::fill(GA1::bf\
-    \ + n, GA1::bf + nn, Z);\n    for (int k = 1; k < nn; k <<= 1)\n      for (int\
-    \ i = 0, o = nn / k, k2 = k << 1; i < n; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf\
-    \ + i, 0, k), GNA1::bf.zeros(k, k2);\n        GNA2::bf.set(GA1::bf + i + k, 0,\
-    \ k), GNA2::bf.zeros(k, k2);\n        GNA1::bf.dft(0, k2), GNA2::bf.dft(0, k2),\
-    \ GNA1::bf.mul(p[o | 1], 0, k2);\n        GNA2::bf.mul(p[o], 0, k2), GNA1::bf.add(GNA2::bf,\
-    \ 0, k2);\n        GNA1::bf.idft(0, k2), GNA1::bf.get(GA1::bf + i, 0, k2);\n \
-    \     }\n    return std::reverse(GA1::bf, GA1::bf + n), poly(GA1::bf, GA1::bf\
-    \ + n);\n  }\n};\n#line 5 \"test/yosupo/multipoint_evaluation.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  std::vector<Mint>\
-    \ c(N), p(M);\n  for (int i = 0; i < N; i++) cin >> c[i];\n  for (int i = 0; i\
-    \ < M; i++) cin >> p[i];\n  auto ans = SubProductTree(p).multi_eval(c);\n  for\
-    \ (int i = 0; i < M; i++) cout << ans[i] << \" \\n\"[i == M - 1];\n  return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/SubProductTree.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  std::vector<Mint>\
-    \ c(N), p(M);\n  for (int i = 0; i < N; i++) cin >> c[i];\n  for (int i = 0; i\
-    \ < M; i++) cin >> p[i];\n  auto ans = SubProductTree(p).multi_eval(c);\n  for\
-    \ (int i = 0; i < M; i++) cout << ans[i] << \" \\n\"[i == M - 1];\n  return 0;\n\
-    }"
+    }\n#line 4 \"src/FFT/FormalPowerSeries.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\
+    \u51AA\u7D1A\u6570\n * @category FFT\n * @see https://hly1204.github.io/library/math/formal_power_series.hpp\n\
+    \ */\n\n// verify\u7528:\n// https://loj.ac/p/6538\n\n// BEGIN CUT HERE\ntemplate\
+    \ <class T, std::size_t _Nm = 1 << 22>\nclass RelaxedConvolution {\n  std::vector<T>\
+    \ a, b, c;\n  std::vector<NTTArray<T, _Nm, true>> ac, bc;\n  std::function<T()>\
+    \ ha, hb;\n  int n;\n  template <class T0>\n  static auto wrap(T0 &&f, int &n,\
+    \ const std::vector<T> &c, std::vector<T> &e) {\n    if constexpr (std::is_invocable_r_v<T,\
+    \ T0, int, const std::vector<T> &>) {\n      return std::bind(\n          [f](int\
+    \ n, const std::vector<T> &c, std::vector<T> &e) mutable {\n            return\
+    \ T(e.emplace_back(f(n, c)));\n          },\n          std::cref(n), std::cref(c),\
+    \ std::ref(e));\n    } else if constexpr (std::is_invocable_r_v<T, T0, int>) {\n\
+    \      return std::bind(\n          [f](int n, std::vector<T> &e) mutable {\n\
+    \            return T(e.emplace_back(f(n)));\n          },\n          std::cref(n),\
+    \ std::ref(e));\n    } else if constexpr (std::is_invocable_r_v<T, T0>) {\n  \
+    \    return std::bind(\n          [f](std::vector<T> &e) mutable { return T(e.emplace_back(f()));\
+    \ },\n          std::ref(e));\n    } else\n      throw;\n  }\n\n public:\n  template\
+    \ <class F1, class F2>\n  RelaxedConvolution(F1 &&h1, F2 &&h2)\n      : c(4),\
+    \ ha(wrap(h1, n, c, a)), hb(wrap(h2, n, c, b)), n(0) {\n    a.reserve(_Nm), b.reserve(_Nm),\
+    \ c.reserve(_Nm);\n  }\n  const std::vector<T> &multiplicand() const { return\
+    \ a; }\n  const std::vector<T> &multiplier() const { return b; }\n  T at(int k)\
+    \ { return (*this)[k]; }\n  T operator[](int k) {\n    while (n <= k) next();\n\
+    \    return c[k];\n  }\n  T next() {\n    using GNA1 = GlobalNTTArray<T, _Nm,\
+    \ 1>;\n    using GNA2 = GlobalNTTArray<T, _Nm, 2>;\n    static constexpr int BASE_CASE_SIZE\
+    \ = 32;\n    if (int l = get_len(n << 1 | 1); (int)c.size() < l) c.resize(l);\n\
+    \    if (n == 0) c[0] = ha() * hb();\n    if (n == 1) c[1] = ha() * b[0] + a[0]\
+    \ * hb(), c[2] = a[1] * b[1];\n    if (n == 2)\n      c[2] += ha() * b[0] + a[0]\
+    \ * hb(), c[3] = a[2] * b[1] + a[1] * b[2];\n    if (n > 2) {\n      if (!(n &\
+    \ (n - 1))) {\n        int t0 = n >> 1, t1 = n;\n        auto &c0 = ac.emplace_back(),\
+    \ &c1 = bc.emplace_back();\n        c0.resize(t1), c0.set(a.data() + t0, 0, t0),\
+    \ c0.dft(0, t1);\n        c1.resize(t1), c1.set(b.data() + t0, 0, t0), c1.dft(0,\
+    \ t1);\n        GNA1::bf.mul(c0, c1, 0, t1), GNA1::bf.idft(0, t1);\n        for\
+    \ (int i = t1 - 1; i--;) c[t1 + i] += GNA1::bf.get(i);\n      }\n      c[n] +=\
+    \ ha() * b[0] + a[0] * hb(), c[n + 1] += a[1] * b[n] + a[n] * b[1];\n      for\
+    \ (int t0 = 2, sft = 0, ofs = get_len(n + 1) >> 1, t = n + 1 - ofs;\n        \
+    \   !(t & 1) && t0 < ofs; t0 <<= 1, sft++, t >>= 1)\n        if (int m = n + 1\
+    \ - t0, t1 = t0 << 1; t0 > BASE_CASE_SIZE) {\n          GNA1::bf.set(a.data()\
+    \ + m, 0, t0), GNA1::bf.zeros(t0, t1);\n          GNA2::bf.set(b.data() + m, 0,\
+    \ t0), GNA2::bf.zeros(t0, t1);\n          GNA1::bf.dft(0, t1), GNA2::bf.dft(0,\
+    \ t1);\n          GNA1::bf.mul(bc[sft], 0, t1), GNA2::bf.mul(ac[sft], 0, t1);\n\
+    \          GNA1::bf.add(GNA2::bf, 0, t1), GNA1::bf.idft(0, t1);\n          for\
+    \ (int i = t1 - 1; i--;) c[n + 1 + i] += GNA1::bf.get(i);\n        } else\n  \
+    \        for (int i = t0; i--;)\n            for (int j = t0; j--;)\n        \
+    \      c[n + 1 + i + j] += a[m + i] * b[j + t0] + a[j + t0] * b[m + i];\n    }\n\
+    \    return c[n++];\n  }\n};\ntemplate <class mod_t, std::size_t _Nm>\nclass FormalPowerSeries;\n\
+    template <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> deriv(const\
+    \ FormalPowerSeries<mod_t, _Nm> &fps);\ntemplate <class mod_t, std::size_t _Nm>\n\
+    FormalPowerSeries<mod_t, _Nm> integ(const FormalPowerSeries<mod_t, _Nm> &fps);\n\
+    template <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> log(const\
+    \ FormalPowerSeries<mod_t, _Nm> &fps);\ntemplate <class mod_t, std::size_t _Nm>\n\
+    FormalPowerSeries<mod_t, _Nm> exp(const FormalPowerSeries<mod_t, _Nm> &fps);\n\
+    template <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> pow(const\
+    \ FormalPowerSeries<mod_t, _Nm> &fps,\n                                  std::uint64_t\
+    \ k);\n\ntemplate <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm>\
+    \ SEQ(const FormalPowerSeries<mod_t, _Nm> &fps);\ntemplate <class mod_t, std::size_t\
+    \ _Nm>\nFormalPowerSeries<mod_t, _Nm> MSET(const FormalPowerSeries<mod_t, _Nm>\
+    \ &fps);\ntemplate <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm>\
+    \ PSET(const FormalPowerSeries<mod_t, _Nm> &fps);\n\ntemplate <class mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nclass FormalPowerSeries {\n  using F = std::function<mod_t(int)>;\n\
+    \  using FPS = FormalPowerSeries;\n  F h_;\n\n public:\n  class Resetter {\n \
+    \   std::shared_ptr<F> p_;\n\n   public:\n    Resetter() {}\n    Resetter(std::shared_ptr<F>\
+    \ p) : p_(p) {}\n    void set(const FPS &rhs) { *p_ = rhs.handle(); }\n  };\n\
+    \  class Inde {  // indeterminate\n    int p_;\n\n   public:\n    Inde(int p)\
+    \ : p_(p) {}\n    Inde() : Inde(1) {}\n    Inde operator^(int p) const { return\
+    \ Inde(p_ * p); }\n    Inde operator*(const Inde &rhs) const { return Inde(p_\
+    \ + rhs.p_); }\n    int pow() const { return p_; }\n  };\n  FormalPowerSeries()\
+    \ : h_([](int) { return mod_t(0); }) {}\n  FormalPowerSeries(F f)\n      : h_([f,\
+    \ cache = std::make_shared<std::vector<mod_t>>()](int k) -> mod_t {\n        \
+    \  for (int i = (int)cache->size(); i <= k; ++i)\n            cache->emplace_back(f(i));\n\
+    \          return cache->at(k);\n        }) {}\n  FormalPowerSeries(const std::vector<mod_t>\
+    \ &coef)\n      : h_([cache =\n                std::make_shared<std::vector<mod_t>>(coef)](int\
+    \ k) -> mod_t {\n          return k < (int)cache->size() ? cache->at(k) : mod_t(0);\n\
+    \        }) {}\n  FormalPowerSeries(mod_t v)\n      : h_([v](int k) { return k\
+    \ == 0 ? v : mod_t(0); }) {}\n  F handle() const { return h_; }\n  static Inde\
+    \ x() { return Inde(); }\n  Resetter reset() {\n    auto p = std::make_shared<F>();\n\
+    \    return h_ = [p](int i) { return (*p)(i); }, Resetter(p);\n  }\n  mod_t operator[](int\
+    \ k) const { return h_(k); }\n  FPS operator()(const Inde &rhs) const { return\
+    \ scale(rhs.pow()); }\n  FPS operator*(const Inde &rhs) const { return shift(rhs.pow());\
+    \ }\n  FPS operator*(const mod_t &rhs) const {\n    return FPS([h = h_, v = rhs](int\
+    \ i) { return h(i) * v; });\n  }\n  FPS operator/(const mod_t &rhs) const {  //\
+    \ `rhs == 0` is not allowed\n    return FPS([h = h_, v = mod_t(1) / rhs](int i)\
+    \ { return h(i) * v; });\n  }\n  FPS operator+(const mod_t &rhs) const {\n   \
+    \ return FPS([h = h_, v = rhs](int i) { return i ? h(i) : h(i) + v; });\n  }\n\
+    \  FPS operator-(const mod_t &rhs) const {\n    return FPS([h = h_, v = rhs](int\
+    \ i) { return i ? h(i) : h(i) - v; });\n  }\n  friend FPS operator*(const Inde\
+    \ &lhs, const FPS &rhs) {\n    return rhs.shift(lhs.pow());\n  }\n  friend FPS\
+    \ operator-(const mod_t &lhs, const FPS &rhs) {\n    return FPS([h = rhs.h_, v\
+    \ = lhs](int i) { return i ? -h(i) : v - h(i); });\n  }\n  friend FPS operator+(const\
+    \ mod_t &lhs, const FPS &rhs) {\n    return FPS([h = rhs.h_, v = lhs](int i) {\
+    \ return i ? h(i) : h(i) + v; });\n  }\n  friend FPS operator*(const mod_t &lhs,\
+    \ const FPS &rhs) {\n    return FPS([h = rhs.h_, v = lhs](int i) { return h(i)\
+    \ * v; });\n  }\n  friend FPS operator/(const mod_t &lhs, const FPS &rhs) {\n\
+    \    return lhs * rhs.inv();\n  }\n  FPS scale(int k) const {\n    return FPS([h\
+    \ = h_, k](int i) { return i % k ? mod_t(0) : h(i / k); });\n  }\n  FPS shift(int\
+    \ k) const {\n    return FPS([h = h_, k](int i) { return i < k ? mod_t(0) : h(i\
+    \ - k); });\n  }\n  FPS inv() const {\n    auto rc = std::make_shared<RelaxedConvolution<mod_t,\
+    \ _Nm>>(\n        [h = h_](int i) { return h(i); },\n        [h = h_, iv = mod_t()](int\
+    \ i, const auto &c) mutable {\n          return i ? -(c[i] + h(i) * iv) * iv :\
+    \ (iv = mod_t(1) / h(0));\n        });\n    return FPS(\n        [rc](int i) {\
+    \ return rc->next(), rc->multiplier()[i]; });  // safe\n  }\n  friend FPS deriv<mod_t,\
+    \ _Nm>(const FPS &fps);\n  friend FPS integ<mod_t, _Nm>(const FPS &fps);\n  friend\
+    \ FPS log<mod_t, _Nm>(const FPS &fps);\n  friend FPS exp<mod_t, _Nm>(const FPS\
+    \ &fps);\n  friend FPS pow<mod_t, _Nm>(const FPS &fps, std::uint64_t k);\n  friend\
+    \ FPS SEQ<mod_t, _Nm>(const FPS &fps);   // SEQUENCE\n  friend FPS MSET<mod_t,\
+    \ _Nm>(const FPS &fps);  // MULTISET\n  friend FPS PSET<mod_t, _Nm>(const FPS\
+    \ &fps);  // POWERSET\n  FPS operator+(const FPS &rhs) const {\n    return FPS([h0\
+    \ = h_, h1 = rhs.h_](int i) { return h0(i) + h1(i); });\n  }\n  FPS operator-(const\
+    \ FPS &rhs) const {\n    return FPS([h0 = h_, h1 = rhs.h_](int i) { return h0(i)\
+    \ - h1(i); });\n  }\n  FPS operator-() const {\n    return FPS([h = h_](int i)\
+    \ { return -h(i); });\n  }\n  FPS operator*(const FPS &rhs) const {\n    auto\
+    \ rc = std::make_shared<RelaxedConvolution<mod_t, _Nm>>(\n        [h = h_](int\
+    \ i) { return h(i); }, [h = rhs.h_](int i) { return h(i); });\n    return FPS([rc](int)\
+    \ { return rc->next(); });\n  }\n  FPS operator/(const FPS &rhs) const {\n   \
+    \ auto rc = std::make_shared<RelaxedConvolution<mod_t, _Nm>>(\n        [h = rhs.h_](int\
+    \ i) { return h(i); },\n        [h0 = h_, h1 = rhs.h_, iv = mod_t(), t0 = mod_t()](\n\
+    \            int i, const auto &c) mutable {\n          if (i == 0) return t0\
+    \ = h0(0) * (iv = mod_t(1) / h1(0));\n          return (h0(i) - h1(i) * t0 - c[i])\
+    \ * iv;\n        });\n    return FPS([rc](int i) { return rc->next(), rc->multiplier()[i];\
+    \ });\n  }\n};\ntemplate <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t,\
+    \ _Nm> deriv(const FormalPowerSeries<mod_t, _Nm> &fps) {\n  return FormalPowerSeries<mod_t,\
+    \ _Nm>(\n      [h = fps.h_](int i) { return h(i + 1) * mod_t(i + 1); });\n}\n\
+    template <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> integ(const\
+    \ FormalPowerSeries<mod_t, _Nm> &fps) {\n  return FormalPowerSeries<mod_t, _Nm>([h\
+    \ = fps.h_](int i) {\n    return i ? h(i - 1) * get_inv<mod_t, _Nm>(i) : mod_t(0);\n\
+    \  });\n}\ntemplate <class mod_t, std::size_t _Nm>  // `fps[0]==1` is required\n\
+    FormalPowerSeries<mod_t, _Nm> log(const FormalPowerSeries<mod_t, _Nm> &fps) {\n\
+    \  return integ(deriv(fps) / fps);\n}\ntemplate <class mod_t, std::size_t _Nm>\
+    \  //`fps[0]==0` is required\nFormalPowerSeries<mod_t, _Nm> exp(const FormalPowerSeries<mod_t,\
+    \ _Nm> &fps) {\n  auto rc = std::make_shared<RelaxedConvolution<mod_t, _Nm>>(\n\
+    \      [h = fps.h_](int i) { return h(i + 1) * mod_t(i + 1); },\n      [](int\
+    \ i, const auto &c) {\n        return i ? c[i - 1] * get_inv<mod_t, _Nm>(i) :\
+    \ mod_t(1);\n      });\n  return FormalPowerSeries<mod_t, _Nm>([rc](int i) {\n\
+    \    return i ? rc->at(i - 1) * get_inv<mod_t, _Nm>(i) : mod_t(1);\n  });\n}\n\
+    template <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> pow(const\
+    \ FormalPowerSeries<mod_t, _Nm> &fps,\n                                  std::uint64_t\
+    \ k) {\n  using FPS = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_,\
+    \ kk = mod_t(k), k, cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
+    \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
+    \ (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
+    \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
+    \ + os) * iv; });\n    FPS t1([h0 = log(t0).handle(), kk](int i) { return h0(i)\
+    \ * kk; });\n    s.emplace(\n        [vk = v.pow(k), h1 = exp(t1).handle()](int\
+    \ i) { return h1(i) * vk; });\n    return cnt ? mod_t(0) : (*s)(i);\n  });\n}\n\
+    template <class mod_t, std::size_t _Nm>  // `fps[0]==0` is required\nFormalPowerSeries<mod_t,\
+    \ _Nm> SEQ(const FormalPowerSeries<mod_t, _Nm> &fps) {\n  return FormalPowerSeries<mod_t,\
+    \ _Nm>(\n             [h = fps.h_](int i) { return i == 0 ? mod_t(1) : -h(i);\
+    \ })\n      .inv();\n}\ntemplate <class mod_t, std::size_t _Nm>  // `fps[0]==0`\
+    \ is required\nFormalPowerSeries<mod_t, _Nm> MSET(const FormalPowerSeries<mod_t,\
+    \ _Nm> &fps) {\n  return exp(FormalPowerSeries<mod_t, _Nm>(\n      [h = fps.h_,\
+    \ cache = std::make_shared<std::vector<mod_t>>()](int i) {\n        if (i == 0)\
+    \ return mod_t(0);\n        if ((i & (i - 1)) == 0) {\n          cache->resize(i\
+    \ * 2, mod_t(0));\n          for (int j = 1; j < i; ++j) {\n            mod_t\
+    \ hj = h(j);\n            for (int k = (i + j - 1) / j, ed = (i * 2 + j - 1) /\
+    \ j; k < ed; k++)\n              cache->at(j * k) += hj * get_inv<mod_t, _Nm>(k);\n\
+    \          }\n        }\n        return mod_t(cache->at(i) += h(i));\n      }));\n\
+    }\ntemplate <class mod_t, std::size_t _Nm>  // `fps[0]==0` is required\nFormalPowerSeries<mod_t,\
+    \ _Nm> PSET(const FormalPowerSeries<mod_t, _Nm> &fps) {\n  return exp(FormalPowerSeries<mod_t,\
+    \ _Nm>(\n      [h = fps.h_, cache = std::make_shared<std::vector<mod_t>>()](int\
+    \ i) {\n        if (i == 0) return mod_t(0);\n        if ((i & (i - 1)) == 0)\
+    \ {\n          cache->resize(i * 2, mod_t(0));\n          for (int j = 1; j <\
+    \ i; ++j) {\n            mod_t hj = h(j);\n            for (int k = (i + j - 1)\
+    \ / j, ed = (i * 2 + j - 1) / j; k < ed; k++)\n              if (k & 1)\n    \
+    \            cache->at(j * k) += hj * get_inv<mod_t, _Nm>(k);\n              else\n\
+    \                cache->at(j * k) -= hj * get_inv<mod_t, _Nm>(k);\n          }\n\
+    \        }\n        return mod_t(cache->at(i) += h(i));\n      }));\n}\n#line\
+    \ 6 \"test/atcoder/abc230_h.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n\
+    \  using FPS = FormalPowerSeries<Mint>;\n  auto X = FPS::x();\n  int W, K;\n \
+    \ cin >> W >> K;\n  vector<Mint> g(W + 1, 0);\n  for (int i = 0; i < K; i++) {\n\
+    \    int w;\n    cin >> w;\n    g[w] += 1;\n  }\n  FPS ans;\n  ans.reset().set(X\
+    \ * (MSET(FPS(g) + ans) - 1));\n  for (int i = 2; i <= W; i++) cout << ans[i]\
+    \ << '\\n';\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc230/tasks/abc230_h\"\n\n\
+    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
+    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using Mint = StaticModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n\
+    \  auto X = FPS::x();\n  int W, K;\n  cin >> W >> K;\n  vector<Mint> g(W + 1,\
+    \ 0);\n  for (int i = 0; i < K; i++) {\n    int w;\n    cin >> w;\n    g[w] +=\
+    \ 1;\n  }\n  FPS ans;\n  ans.reset().set(X * (MSET(FPS(g) + ans) - 1));\n  for\
+    \ (int i = 2; i <= W; i++) cout << ans[i] << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
-  - src/FFT/SubProductTree.hpp
-  - src/FFT/fps_div.hpp
-  - src/FFT/fps_inv.hpp
+  - src/FFT/FormalPowerSeries.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: true
-  path: test/yosupo/multipoint_evaluation.test.cpp
+  path: test/atcoder/abc230_h.test.cpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-05 17:50:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/multipoint_evaluation.test.cpp
+documentation_of: test/atcoder/abc230_h.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/multipoint_evaluation.test.cpp
-- /verify/test/yosupo/multipoint_evaluation.test.cpp.html
-title: test/yosupo/multipoint_evaluation.test.cpp
+- /verify/test/atcoder/abc230_h.test.cpp
+- /verify/test/atcoder/abc230_h.test.cpp.html
+title: test/atcoder/abc230_h.test.cpp
 ---
