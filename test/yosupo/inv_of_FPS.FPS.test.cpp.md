@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -398,19 +398,19 @@ data:
     \    return i ? rc->at(i - 1) * get_inv<mod_t, _Nm>(i) : mod_t(1);\n  });\n}\n\
     template <class mod_t, std::size_t _Nm>\nFormalPowerSeries<mod_t, _Nm> pow(const\
     \ FormalPowerSeries<mod_t, _Nm> &fps,\n                                  std::uint64_t\
-    \ k) {\n  using FPS = FormalPowerSeries<mod_t, _Nm>;\n  return FPS([h = fps.h_,\
-    \ kk = mod_t(k), k, cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
+    \ k) {\n  using FPS = FormalPowerSeries<mod_t, _Nm>;\n  if (!k) return FPS(1);\n\
+    \  return FPS([h = fps.h_, kk = mod_t(k), k, cnt = 0ull,\n              s = std::optional<std::function<mod_t(int)>>()](int\
     \ i) mutable {\n    if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
-    \ (int)cnt);\n    mod_t v(h(i));\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
+    \ (int)cnt);\n    mod_t v = h(i);\n    if (v == mod_t(0)) return cnt++, mod_t(0);\n\
     \    cnt *= k;\n    FPS t0([os = i, iv = mod_t(1) / v, h](int i) { return h(i\
-    \ + os) * iv; });\n    FPS t1([h0 = log(t0).handle(), kk](int i) { return h0(i)\
-    \ * kk; });\n    s.emplace(\n        [vk = v.pow(k), h1 = exp(t1).handle()](int\
-    \ i) { return h1(i) * vk; });\n    return cnt ? mod_t(0) : (*s)(i);\n  });\n}\n\
-    template <class mod_t, std::size_t _Nm>  // `fps[0]==0` is required\nFormalPowerSeries<mod_t,\
-    \ _Nm> SEQ(const FormalPowerSeries<mod_t, _Nm> &fps) {\n  return FormalPowerSeries<mod_t,\
-    \ _Nm>(\n             [h = fps.h_](int i) { return i == 0 ? mod_t(1) : -h(i);\
-    \ })\n      .inv();\n}\ntemplate <class mod_t, std::size_t _Nm>  // `fps[0]==0`\
-    \ is required\nFormalPowerSeries<mod_t, _Nm> MSET(const FormalPowerSeries<mod_t,\
+    \ + os) * iv; });\n    FPS t1(\n        [h0 = log<mod_t, _Nm>(t0).handle(), kk](int\
+    \ i) { return h0(i) * kk; });\n    s.emplace([vk = v.pow(k), h1 = exp<mod_t, _Nm>(t1).handle()](int\
+    \ i) {\n      return h1(i) * vk;\n    });\n    return cnt ? mod_t(0) : (*s)(i);\n\
+    \  });\n}\ntemplate <class mod_t, std::size_t _Nm>  // `fps[0]==0` is required\n\
+    FormalPowerSeries<mod_t, _Nm> SEQ(const FormalPowerSeries<mod_t, _Nm> &fps) {\n\
+    \  return FormalPowerSeries<mod_t, _Nm>(\n             [h = fps.h_](int i) { return\
+    \ i == 0 ? mod_t(1) : -h(i); })\n      .inv();\n}\ntemplate <class mod_t, std::size_t\
+    \ _Nm>  // `fps[0]==0` is required\nFormalPowerSeries<mod_t, _Nm> MSET(const FormalPowerSeries<mod_t,\
     \ _Nm> &fps) {\n  return exp(FormalPowerSeries<mod_t, _Nm>(\n      [h = fps.h_,\
     \ cache = std::make_shared<std::vector<mod_t>>()](int i) {\n        if (i == 0)\
     \ return mod_t(0);\n        if ((i & (i - 1)) == 0) {\n          cache->resize(i\
@@ -449,7 +449,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_FPS.FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-10-05 17:50:42+09:00'
+  timestamp: '2022-10-05 18:13:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_FPS.FPS.test.cpp
