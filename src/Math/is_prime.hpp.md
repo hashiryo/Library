@@ -150,6 +150,9 @@ data:
     path: test/yosupo/multivariate_convolution.test.cpp
     title: test/yosupo/multivariate_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/partition.MSET.test.cpp
+    title: test/yosupo/partition.MSET.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
   - icon: ':heavy_check_mark:'
@@ -164,6 +167,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+    title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
@@ -307,6 +313,7 @@ data:
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/partition.MSET.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/stirling_1.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
@@ -321,6 +328,7 @@ data:
   - test/yosupo/stirling_1_small_p_large_n.test.cpp
   - test/yosupo/stirling_2.test.cpp
   - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp
   - test/aoj/NTL_2_C.test.cpp
   - test/aoj/NTL_2_D.test.cpp

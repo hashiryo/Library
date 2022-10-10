@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
   - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
@@ -101,20 +101,20 @@ data:
     //                        (\u30AA\u30F3\u30E9\u30A4\u30F3\u7573\u8FBC\u307F2 or\
     \ \u5408\u6210 1-\u221A(1-2f))\n// https://loj.ac/p/2340 (\u30AA\u30F3\u30E9\u30A4\
     \u30F3\u7573\u8FBC\u307F)\n// https://atcoder.jp/contests/abc253/tasks/abc253_h\
-    \ (egf)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nclass SetPowerSeries\
+    \ (egf)\n\n// BEGIN CUT HERE\n\ntemplate <unsigned short MAX_N = 21>\nstruct SetPowerSeries\
     \ {\n#define SUBSET_REP(i, j, n)                           \\\n  for (int _ =\
     \ (n); _ >>= 1;)                         \\\n    for (int __ = 0, _2 = _ << 1;\
     \ __ < (n); __ += _2) \\\n      for (int j = __, i = j | _, ___ = i; j < ___;\
     \ j++, i++)\n  template <typename T>\n  static inline void ranked_zeta_tr(const\
-    \ T f[], T ret[][MAX_N + 1],\n                                    const int &sz)\
+    \ T f[], T ret[][MAX_N + 1],\n                                    const int sz)\
     \ {\n    for (int S = sz, c; S--;)\n      ret[S][c = __builtin_popcount(S)] =\
     \ f[S], std::fill_n(ret[S], c, 0);\n    SUBSET_REP(S, U, sz)\n    for (int d =\
     \ __builtin_popcount(S); d--;) ret[S][d] += ret[U][d];\n  }\n  template <typename\
     \ T>\n  static inline void conv_na(const T f[], const T g[], T ret[], const int\
-    \ &sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t = s] = f[s] * g[0];\
-    \ t; (--t) &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template <typename T>\n  static\
-    \ inline void conv_tr(const T f[], const T g[], T ret[], const int &sz) {\n  \
-    \  static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n    T tmp[MAX_N\
+    \ sz) {\n    for (int s = sz, t; s--;)\n      for (ret[t = s] = f[s] * g[0]; t;\
+    \ --t &= s) ret[s] += f[s ^ t] * g[t];\n  }\n  template <typename T>\n  static\
+    \ inline void conv_tr(const T f[], const T g[], T ret[], const int sz) {\n   \
+    \ static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n    T tmp[MAX_N\
     \ + 1];\n    ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n    const int\
     \ n = __builtin_ctz(sz);\n    for (int S = sz, c, d, e, bg; S--;) {\n      c =\
     \ __builtin_popcount(S), bg = std::min(2 * c, n);\n      for (d = bg; d >= c;\
@@ -124,10 +124,10 @@ data:
     \ std::min(2 * c, n); d > c; d--)\n      F[S][d] -= F[U][d];\n    for (int S =\
     \ sz; S--;) ret[S] = F[S][__builtin_popcount(S)];\n  }\n  template <typename T,\
     \ class F>\n  static inline void onconv_na(const T g[], T ret[], const F &phi,\n\
-    \                               const int &sz) {\n    for (int s = 1, t; s < sz;\
-    \ phi(s, ret[s]), s++)\n      for (ret[t = s] = 0; t; (--t) &= s) ret[s] += ret[s\
+    \                               const int sz) {\n    for (int s = 1, t; s < sz;\
+    \ phi(s, ret[s]), s++)\n      for (ret[t = s] = 0; t; --t &= s) ret[s] += ret[s\
     \ ^ t] * g[t];\n  }\n  template <typename T, class F>\n  static inline void onconv_tr(const\
-    \ T g[], T ret[], const F &phi,\n                               const int &sz)\
+    \ T g[], T ret[], const F &phi,\n                               const int sz)\
     \ {\n    static T G[1 << MAX_N][MAX_N + 1], mat[MAX_N + 1][1 << MAX_N];\n    const\
     \ int n = __builtin_ctz(sz);\n    ranked_zeta_tr(g, G, sz), std::fill_n(mat[0],\
     \ sz, ret[0]);\n    for (int d = n; d; d--) std::fill_n(mat[d], sz, 0);\n    for\
@@ -156,36 +156,39 @@ data:
     \ phi, sz), ret;\n  }\n  // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T)\
     \ as binary numbers) } f(T)f(S/T) )\n  template <class T, class F>  // O(n^2 2^n)\n\
     \  static inline std::vector<T> online_convolve2(int sz, const F &phi) {\n   \
-    \ assert(__builtin_popcount(sz) == 1);\n    int mid = std::min(1 << 13, sz);\n\
-    \    std::vector<T> ret(sz, 0);\n    for (int I = 1, s, t, u = 1; I < mid; I <<=\
+    \ assert(__builtin_popcount(sz) == 1);\n    int I = 1, ed = std::min(1 << 13,\
+    \ sz);\n    std::vector<T> ret(sz, 0);\n    for (int s, t, u = 1; I < ed; I <<=\
     \ 1)\n      for (t = s = 0; s < I; phi(u, ret[u]), t = ++s, u++)\n        for\
-    \ (ret[u] = 0; t; (--t) &= s) ret[u] += ret[I | (s ^ t)] * ret[t];\n    T *h =\
-    \ ret.data();\n    for (int I = mid; I < sz; I <<= 1)\n      phi(I, ret[I]), onconv_tr(\n\
-    \                          h, h + I, [&](int s, T &x) { phi(s | I, x); }, I);\n\
-    \    return ret;\n  }\n  // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n\
-    \  // \"f[\u2205] = 0\" is required.\n  template <class T, class EGF>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> composite(const std::vector<T> &f,\n  \
-    \                                       const EGF &F) {\n    const int sz = f.size(),\
-    \ m = __builtin_ctz(sz), sz2 = sz >> 1;\n    assert(sz == 1 << m), assert(f.at(0)\
-    \ == 0);\n    std::vector<T> ret(sz);\n    T *h = ret.data() + sz;\n    const\
-    \ T *g = f.data();\n    for (int i = 0; i <= m; i++) ret[sz - (1 << i)] = F[m\
-    \ - i];\n    int l = 1, ed = std::min(sz, 1 << 11), j;\n    for (; l < ed; l <<=\
-    \ 1)\n      for (j = sz2; j >= l; j >>= 1) conv_na(h - j, g + l, h - j - j + l,\
-    \ l);\n    for (; l < sz; l <<= 1)\n      for (j = sz2; j >= l; j >>= 1) conv_tr(h\
-    \ - j, g + l, h - j - j + l, l);\n    return ret;\n  }\n  // exp(f) : \"f[\u2205\
-    ] = 0\" is required.\n  template <class T>  // O(n^2 2^n)\n  static inline std::vector<T>\
-    \ exp(const std::vector<T> &f) {\n    const int sz = f.size();\n    assert(sz\
-    \ == 1 << __builtin_ctz(sz)), assert(f.at(0) == 0);\n    std::vector<T> ret(sz);\n\
-    \    T *h = ret.data();\n    const T *g = f.data();\n    int l = 1, ed = std::min(sz,\
+    \ (ret[u] = 0; t; --t &= s) ret[u] += ret[u ^ t] * ret[t];\n    T *h = ret.data();\n\
+    \    for (; I < sz; I <<= 1)\n      phi(I, ret[I]), onconv_tr(\n             \
+    \             h, h + I, [&](int s, T &x) { phi(s | I, x); }, I);\n    return ret;\n\
+    \  }\n  // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n  // \"f[\u2205\
+    ] = 0\" is required.\n  template <class T, class EGF>  // O(n^2 2^n)\n  static\
+    \ inline std::vector<T> composite(const std::vector<T> &f,\n                 \
+    \                        const EGF &F) {\n    const int sz = f.size(), m = __builtin_ctz(sz),\
+    \ sz2 = sz >> 1;\n    assert(sz == 1 << m), assert(f.at(0) == 0);\n    std::vector<T>\
+    \ ret(sz);\n    T *h = ret.data() + sz;\n    const T *g = f.data();\n    for (int\
+    \ i = 0; i <= m; i++) ret[sz - (1 << i)] = F[m - i];\n    int l = 1, ed = std::min(sz,\
+    \ 1 << 11), j;\n    for (; l < ed; l <<= 1)\n      for (j = sz2; j >= l; j >>=\
+    \ 1) conv_na(h - j, g + l, h - j - j + l, l);\n    for (; l < sz; l <<= 1)\n \
+    \     for (j = sz2; j >= l; j >>= 1) conv_tr(h - j, g + l, h - j - j + l, l);\n\
+    \    return ret;\n  }\n  // exp(f) : \"f[\u2205] = 0\" is required.\n  template\
+    \ <class T>  // O(n^2 2^n)\n  static inline std::vector<T> exp(const std::vector<T>\
+    \ &f) {\n    const int sz = f.size();\n    assert(!(sz & (sz - 1))), assert(f.at(0)\
+    \ == 0);\n    T h[sz];\n    const T *g = f.data();\n    int l = 1, ed = std::min(sz,\
     \ 1 << 11);\n    for (h[0] = 1; l < ed; l <<= 1) conv_na(h, g + l, h + l, l);\n\
-    \    for (; l < sz; l <<= 1) conv_tr(h, g + l, h + l, l);\n    return ret;\n \
-    \ }\n  // log(f) : \"f[\u2205] = 1\" is required.\n  template <class T>  // O(n^2\
-    \ 2^n)\n  static inline std::vector<T> log(std::vector<T> f) {\n    const int\
-    \ sz = f.size(), m = __builtin_ctz(sz);\n    assert(sz == 1 << m), assert(f.at(0)\
-    \ == T(1));\n    T F[MAX_N + 1] = {0, 1};\n    for (int i = 2; i <= m; i++) F[i]\
-    \ = -F[i - 1] * (i - 1);\n    return f[0] = 0, composite(f, F);\n  }\n  // f^k\n\
-    \  template <class T>  // O(n^2 2^n)\n  static inline std::vector<T> pow(std::vector<T>\
-    \ f, std::uint64_t k) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n\
+    \    for (; l < sz; l <<= 1) conv_tr(h, g + l, h + l, l);\n    return std::vector<T>(h,\
+    \ h + sz);\n  }\n  // log(f) : \"f[\u2205] = 1\" is required.\n  template <class\
+    \ T>  // O(n^2 2^n)\n  static inline std::vector<T> log(const std::vector<T> &f)\
+    \ {\n    const int sz = f.size();\n    assert(!(sz & (sz - 1))), assert(f.at(0)\
+    \ == T(1));\n    int I = 2, ed = std::min(sz, 1 << 13);\n    T h[sz];\n    for\
+    \ (std::copy_n(f.begin(), ed, h); I < ed; I <<= 1)\n      for (int s = 1, u =\
+    \ s | I; s < I; s++, u++)\n        for (int t = s; t; --t &= s) h[u] -= h[u ^\
+    \ t] * f[t];\n    const T *g = f.data();\n    for (; I < sz; I <<= 1)\n      h[I]\
+    \ = g[I], onconv_tr(\n                       g, h + I, [&](int s, T &x) { x =\
+    \ g[I | s] - x; }, I);\n    return h[0] = 0, std::vector<T>(h, h + sz);\n  }\n\
+    \  // f^k\n  template <class T>  // O(n^2 2^n)\n  static inline std::vector<T>\
+    \ pow(std::vector<T> f, std::uint64_t k) {\n    const int sz = f.size(), n = __builtin_ctz(sz);\n\
     \    assert(sz == 1 << n);\n    T F[MAX_N + 1] = {1}, pw = 1, bs = f[0];\n   \
     \ int i = 1, ed = std::min<std::uint64_t>(n, k);\n    for (; i <= ed; i++) F[i]\
     \ = F[i - 1] * (k - i + 1);\n    for (auto e = k - --i; e; e >>= 1, bs *= bs)\n\
@@ -356,7 +359,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc105_f.test.cpp
   requiredBy: []
-  timestamp: '2022-10-04 23:27:11+09:00'
+  timestamp: '2022-10-10 20:30:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc105_f.test.cpp

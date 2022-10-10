@@ -203,7 +203,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -247,7 +247,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/SetPowerSeries.hpp
       title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
@@ -288,14 +288,6 @@ data:
       path: src/Math/tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
-  - name: src/Old
-    pages:
-    - icon: ':warning:'
-      path: src/Old/FormalPowerSeries.hpp
-      title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':warning:'
-      path: src/Old/ModInt.hpp
-      title: ModInt
   - name: src/Optimization
     pages:
     - icon: ':heavy_check_mark:'
@@ -435,6 +427,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
+    - icon: ':x:'
+      path: test/aoj/2345.test.cpp
+      title: test/aoj/2345.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2397.SparseMat.test.cpp
       title: test/aoj/2397.SparseMat.test.cpp
@@ -812,6 +807,12 @@ data:
   - name: test/hackerrank
     pages:
     - icon: ':heavy_check_mark:'
+      path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+      title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+      title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-summation.KDT.test.cpp
       title: test/hackerrank/cube-summation.KDT.test.cpp
   - name: test/yosupo
@@ -946,6 +947,9 @@ data:
       path: test/yosupo/number_of_substrings.test.cpp
       title: test/yosupo/number_of_substrings.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yosupo/partition.MSET.test.cpp
+      title: test/yosupo/partition.MSET.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/partition.test.cpp
       title: test/yosupo/partition.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1002,6 +1006,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/set_xor_min.Patricia.test.cpp
       title: test/yosupo/set_xor_min.Patricia.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+      title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sharp_p_subset_sum.test.cpp
       title: test/yosupo/sharp_p_subset_sum.test.cpp

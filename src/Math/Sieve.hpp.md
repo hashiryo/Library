@@ -10,6 +10,12 @@ data:
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+    title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+    title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/gcd_convolution.test.cpp
     title: test/yosupo/gcd_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -221,6 +227,8 @@ data:
   - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
+  - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/886.numth.test.cpp

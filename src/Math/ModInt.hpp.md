@@ -209,6 +209,9 @@ data:
     path: test/yosupo/multivariate_convolution.test.cpp
     title: test/yosupo/multivariate_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/partition.MSET.test.cpp
+    title: test/yosupo/partition.MSET.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
   - icon: ':heavy_check_mark:'
@@ -232,6 +235,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+    title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
@@ -516,6 +522,7 @@ data:
   - test/yosupo/hafnian_of_matrix.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - test/yosupo/partition.MSET.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/stirling_1.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
@@ -536,6 +543,7 @@ data:
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/find_linear_recurrence.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
