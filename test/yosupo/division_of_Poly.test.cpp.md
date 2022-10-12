@@ -496,7 +496,8 @@ data:
     \    if (p[i] == Z) continue;\n      if (i == 0 || p[i] != mod_t(1)) os << p[i];\n\
     \      if (i >= 1) os << 'x';\n      if (i > 9)\n        os << \"^(\" << i <<\
     \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
-    \ os << \" + \";\n    }\n    return os;\n  }\n};\n#line 6 \"test/yosupo/division_of_Poly.test.cpp\"\
+    \ os << \" + \";\n    }\n    return os;\n  }\n};\n\n#define __POLYNOMIAL Polynomial<mod_t,\
+    \ _Nm>\n#ifdef __FPS_DIVAT\n__FPS_DIVAT(__POLYNOMIAL)\n#endif\n#line 6 \"test/yosupo/division_of_Poly.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint>\
     \ f(N), g(M), x, y;\n  for (int i = 0; i < N; i++) cin >> f[i];\n  for (int i\
@@ -526,7 +527,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/division_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-12 22:31:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/division_of_Poly.test.cpp

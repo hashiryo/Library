@@ -203,7 +203,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -247,7 +247,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/SetPowerSeries.hpp
       title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
@@ -427,7 +427,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2345.test.cpp
       title: test/aoj/2345.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1113,6 +1113,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/215.Poly.test.cpp
+      title: test/yukicoder/215.Poly.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/215.test.cpp
       title: test/yukicoder/215.test.cpp

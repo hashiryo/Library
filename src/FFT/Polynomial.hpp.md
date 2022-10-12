@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/215.Poly.test.cpp
+    title: test/yukicoder/215.Poly.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -508,7 +511,8 @@ data:
     \    if (p[i] == Z) continue;\n      if (i == 0 || p[i] != mod_t(1)) os << p[i];\n\
     \      if (i >= 1) os << 'x';\n      if (i > 9)\n        os << \"^(\" << i <<\
     \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
-    \ os << \" + \";\n    }\n    return os;\n  }\n};\n"
+    \ os << \" + \";\n    }\n    return os;\n  }\n};\n\n#define __POLYNOMIAL Polynomial<mod_t,\
+    \ _Nm>\n#ifdef __FPS_DIVAT\n__FPS_DIVAT(__POLYNOMIAL)\n#endif\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_div.hpp\"\n\
     #include \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u591A\u9805\u5F0F\n * @category\
     \ FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 <<\
@@ -620,7 +624,8 @@ data:
     \    if (p[i] == Z) continue;\n      if (i == 0 || p[i] != mod_t(1)) os << p[i];\n\
     \      if (i >= 1) os << 'x';\n      if (i > 9)\n        os << \"^(\" << i <<\
     \ ')';\n      else if (i > 1)\n        os << '^' << i;\n      if (i + 1 <= e)\
-    \ os << \" + \";\n    }\n    return os;\n  }\n};"
+    \ os << \" + \";\n    }\n    return os;\n  }\n};\n\n#define __POLYNOMIAL Polynomial<mod_t,\
+    \ _Nm>\n#ifdef __FPS_DIVAT\n__FPS_DIVAT(__POLYNOMIAL)\n#endif"
   dependsOn:
   - src/FFT/fps_div.hpp
   - src/FFT/fps_inv.hpp
@@ -632,7 +637,7 @@ data:
   path: src/FFT/Polynomial.hpp
   requiredBy:
   - src/FFT/extgcd.hpp
-  timestamp: '2022-10-02 02:21:45+09:00'
+  timestamp: '2022-10-12 22:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/division_of_Poly.test.cpp
@@ -640,6 +645,7 @@ data:
   - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/FFT/Polynomial.hpp
 layout: document
 redirect_from:

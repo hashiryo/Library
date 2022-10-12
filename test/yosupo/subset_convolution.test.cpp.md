@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
