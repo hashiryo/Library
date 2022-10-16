@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Combination.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []

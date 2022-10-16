@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   _extendedRequiredBy: []

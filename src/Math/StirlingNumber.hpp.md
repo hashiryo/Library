@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_1_small_p_large_n.test.cpp
     title: test/yosupo/stirling_1_small_p_large_n.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
     links:
@@ -22,22 +22,17 @@ data:
   bundledCode: "#line 2 \"src/Math/StirlingNumber.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n *\
     \ @category \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\u308B\n\
-    \ */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t bsf(std::uint64_t n) {\n  constexpr\
-    \ std::uint8_t convert[64] = {\n      0,  1,  2,  53, 3,  7,  54, 27, 4,  38,\
-    \ 41, 8,  34, 55, 48, 28,\n      62, 5,  39, 46, 44, 42, 22, 9,  24, 35, 59, 56,\
-    \ 49, 18, 29, 11,\n      63, 52, 6,  26, 37, 40, 33, 47, 61, 45, 43, 21, 23, 58,\
-    \ 17, 10,\n      51, 25, 36, 32, 60, 20, 57, 16, 50, 31, 19, 15, 30, 14, 13, 12};\n\
-    \  return convert[(n & ~(n - 1)) * 157587932685088877 >> 58];\n}\nconstexpr std::uint64_t\
-    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
-    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
-    \ n) {\n  const std::uint64_t s = bsf(n - 1), d = n >> s;\n  for (auto a : {args...})\
-    \ {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d,\
-    \ x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1))\
-    \ break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n   \
-    \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
-    \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
-    \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/StirlingNumber.hpp\"\
+    \ */\n\n// BEGIN CUT HERE\nconstexpr std::uint64_t mul(std::uint64_t x, std::uint64_t\
+    \ y, std::uint64_t m) {\n  return (__uint128_t)x * y % m;\n}\ntemplate <std::uint64_t...\
+    \ args>\nconstexpr bool miller_rabin(std::uint64_t n) {\n  const std::uint64_t\
+    \ s = __builtin_ctzll(n - 1), d = n >> s;\n  for (auto a : {args...}) {\n    std::uint64_t\
+    \ b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d, x = b;; x = mul(x, x,\
+    \ n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1)) break;\n    while (p\
+    \ != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n    if (p != n - 1 && i !=\
+    \ s) return false;\n  }\n  return true;\n}\nconstexpr bool is_prime(std::uint64_t\
+    \ n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX)\
+    \ return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2, 325, 9375, 28178,\
+    \ 450775, 9780504, 1795265022>(n);\n}\n#line 4 \"src/Math/StirlingNumber.hpp\"\
     \n/**\n * @title \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)\n\
     \ * @category \u6570\u5B66\n * @see\n * https://maspypy.com/stirling-%e6%95%b0%e3%82%92-p-%e3%81%a7%e5%89%b2%e3%81%a3%e3%81%9f%e4%bd%99%e3%82%8a%e3%81%ae%e8%a8%88%e7%ae%97\n\
     \ * \u524D\u51E6\u7406 O(p^2), \u30AF\u30A8\u30EA O(log n)\n */\n\n// BEGIN CUT\
@@ -102,8 +97,8 @@ data:
   isVerificationFile: false
   path: src/Math/StirlingNumber.hpp
   requiredBy: []
-  timestamp: '2022-10-03 10:06:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-10-16 17:42:41+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/stirling_2_small_p_large_n.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp

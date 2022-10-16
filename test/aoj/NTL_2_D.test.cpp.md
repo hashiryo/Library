@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_D
@@ -26,29 +26,23 @@ data:
   bundledCode: "#line 1 \"test/aoj/NTL_2_D.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_D\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/is_prime.hpp\"\n/**\n * @title\
     \ \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n * constexpr\
-    \ \u3067\u547C\u3079\u308B\n */\n\n// BEGIN CUT HERE\nconstexpr std::uint16_t\
-    \ bsf(std::uint64_t n) {\n  constexpr std::uint8_t convert[64] = {\n      0, \
-    \ 1,  2,  53, 3,  7,  54, 27, 4,  38, 41, 8,  34, 55, 48, 28,\n      62, 5,  39,\
-    \ 46, 44, 42, 22, 9,  24, 35, 59, 56, 49, 18, 29, 11,\n      63, 52, 6,  26, 37,\
-    \ 40, 33, 47, 61, 45, 43, 21, 23, 58, 17, 10,\n      51, 25, 36, 32, 60, 20, 57,\
-    \ 16, 50, 31, 19, 15, 30, 14, 13, 12};\n  return convert[(n & ~(n - 1)) * 157587932685088877\
-    \ >> 58];\n}\nconstexpr std::uint64_t mul(std::uint64_t x, std::uint64_t y, std::uint64_t\
-    \ m) {\n  return (__uint128_t)x * y % m;\n}\ntemplate <std::uint64_t... args>\n\
-    constexpr bool miller_rabin(std::uint64_t n) {\n  const std::uint64_t s = bsf(n\
-    \ - 1), d = n >> s;\n  for (auto a : {args...}) {\n    std::uint64_t b = a % n,\
-    \ p = 1, i = s;\n    for (std::uint64_t k = d, x = b;; x = mul(x, x, n))\n   \
-    \   if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1)) break;\n    while (p != 1 &&\
-    \ p != n - 1 && b && i--) p = mul(p, p, n);\n    if (p != n - 1 && i != s) return\
-    \ false;\n  }\n  return true;\n}\nconstexpr bool is_prime(std::uint64_t n) {\n\
-    \  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX) return\
-    \ miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2, 325, 9375, 28178, 450775,\
-    \ 9780504, 1795265022>(n);\n}\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title\
-    \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
-    \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
-    \ {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
-    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
-    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
-    \ <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
+    \ \u3067\u547C\u3079\u308B\n */\n\n// BEGIN CUT HERE\nconstexpr std::uint64_t\
+    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
+    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
+    \ n) {\n  const std::uint64_t s = __builtin_ctzll(n - 1), d = n >> s;\n  for (auto\
+    \ a : {args...}) {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t\
+    \ k = d, x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k\
+    \ >>= 1)) break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n\
+    \    if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr\
+    \ bool is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n |\
+    \ 1) == 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n#line 3 \"src/Math/ModInt.hpp\"\
+    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
+    namespace modint_internal {\nusing namespace std;\nstruct modint_base {};\nstruct\
+    \ sta_mint_base : modint_base {};\nstruct dyn_mint_base : modint_base {};\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base, mod_t>;\n\
+    template <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
+    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
     \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
@@ -118,31 +112,32 @@ data:
     \ FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\n\
     using u128 = __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform\
     \ {\n  static inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0,\
-    \ i0 = 0; m >>= 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n; prod\
-    \ *= r2[bsf(++h)], i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n\
-    \          x[i + m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static\
-    \ inline void idft(int n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m <\
-    \ n; m <<= 1, h = 0, i0 = 0)\n      for (mod_t prod = 1, y; i0 < n; prod *= ir2[bsf(++h)],\
-    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i]\
-    \ - x[i + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv\
-    \ = mod_t(1) / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t\
-    \ x[]) {\n    for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] +\
-    \ x[i + 1]);\n  }\n  static void odd_dft(int n, mod_t x[]) {\n    mod_t prod =\
-    \ iv2;\n    for (int i = 0, j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i]\
-    \ - x[i + 1]), prod *= ir2[bsf(~((u64)j))];\n  }\n  static void dft_doubling(int\
-    \ n, mod_t x[]) {\n    std::copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1),\
-    \ t(rt[bsf(n << 1)]);\n    for (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n\
-    \    dft(n, x + n);\n  }\n  static constexpr std::uint64_t lim() { return 1ULL\
-    \ << E; }\n\n protected:\n  static constexpr mod_t pow2th_root(std::uint8_t e)\
-    \ {\n    for (mod_t r = 2;; r += 1)\n      if (auto s = r.pow((mod_t::modulo()\
-    \ - 1) / 2); s != 1 && s * s == 1)\n        return r.pow((mod_t::modulo() - 1)\
-    \ >> e);\n    return 0;  // can not find\n  }            // return \u03C9 (primitive\
-    \ 2^e th root)\n  static_assert(mod_t::modulo() & 1);\n  static_assert(is_prime(mod_t::modulo()));\n\
-    \  static constexpr std::uint8_t E = bsf(mod_t::modulo() - 1);\n  static constexpr\
-    \ auto roots(mod_t w) {\n    std::array<mod_t, E + 1> ret = {};\n    for (std::uint8_t\
-    \ e = E; e; e--, w *= w) ret[e] = w;\n    return ret[0] = w, ret;\n  }\n  static\
-    \ constexpr auto ratios(const std::array<mod_t, E + 1> &rt,\n                \
-    \               const std::array<mod_t, E + 1> &irt, int i = 2) {\n    std::array<mod_t,\
+    \ i0 = 0; m >>= 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n;\n   \
+    \        prod *= r2[__builtin_ctz(++h)], i0 += (m << 1))\n        for (int i =\
+    \ i0; i < i0 + m; ++i)\n          x[i + m] = x[i] - (u = prod * x[i + m]), x[i]\
+    \ += u;\n  }\n  static inline void idft(int n, mod_t x[]) {\n    for (int m =\
+    \ 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0 = 0)\n      for (mod_t prod = 1,\
+    \ y; i0 < n;\n           prod *= ir2[__builtin_ctz(++h)], i0 += (m << 1))\n  \
+    \      for (int i = i0; i < i0 + m; ++i)\n          y = x[i] - x[i + m], x[i]\
+    \ += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv = mod_t(1) / n; n--;)\
+    \ x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t x[]) {\n    for (int i\
+    \ = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] + x[i + 1]);\n  }\n  static\
+    \ void odd_dft(int n, mod_t x[]) {\n    mod_t prod = iv2;\n    for (int i = 0,\
+    \ j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i] - x[i + 1]), prod *= ir2[__builtin_ctzll(~((u64)j))];\n\
+    \  }\n  static void dft_doubling(int n, mod_t x[]) {\n    std::copy_n(x, n, x\
+    \ + n), idft(n, x + n);\n    mod_t k(1), t(rt[__builtin_ctz(n << 1)]);\n    for\
+    \ (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n    dft(n, x + n);\n  }\n  static\
+    \ constexpr std::uint64_t lim() { return 1ULL << E; }\n\n protected:\n  static\
+    \ constexpr mod_t pow2th_root(std::uint8_t e) {\n    for (mod_t r = 2;; r += 1)\n\
+    \      if (auto s = r.pow((mod_t::modulo() - 1) / 2); s != 1 && s * s == 1)\n\
+    \        return r.pow((mod_t::modulo() - 1) >> e);\n    return 0;  // can not\
+    \ find\n  }            // return \u03C9 (primitive 2^e th root)\n  static_assert(mod_t::modulo()\
+    \ & 1);\n  static_assert(is_prime(mod_t::modulo()));\n  static constexpr std::uint8_t\
+    \ E = __builtin_ctzll(mod_t::modulo() - 1);\n  static constexpr auto roots(mod_t\
+    \ w) {\n    std::array<mod_t, E + 1> ret = {};\n    for (std::uint8_t e = E; e;\
+    \ e--, w *= w) ret[e] = w;\n    return ret[0] = w, ret;\n  }\n  static constexpr\
+    \ auto ratios(const std::array<mod_t, E + 1> &rt,\n                          \
+    \     const std::array<mod_t, E + 1> &irt, int i = 2) {\n    std::array<mod_t,\
     \ E - 1> ret = {};\n    for (mod_t prod = 1; i <= E; prod *= irt[i++]) ret[i -\
     \ 2] = rt[i] * prod;\n    return ret;\n  }\n  static constexpr mod_t w = pow2th_root(E),\
     \ iw = w.pow(lim() - 1);\n  static constexpr mod_t iv2 = mod_t((mod_t::modulo()\
@@ -235,7 +230,7 @@ data:
     \ NTTArrayB_TripleB<_Nm, MOD1, MOD2, MOD3>::mint3 *dat3;\n};\ntemplate <class\
     \ T, std::size_t _Nm>\nconstexpr bool is_nttfriend() {\n  if constexpr (!is_staticmodint_v<T>)\n\
     \    return false;\n  else\n    return (T::modulo() & is_prime(T::modulo())) &&\n\
-    \           _Nm <= (1ULL << bsf(T::modulo() - 1));\n}\nconstexpr std::uint32_t\
+    \           _Nm <= (1ULL << __builtin_ctzll(T::modulo() - 1));\n}\nconstexpr std::uint32_t\
     \ MOD32 = 0x7e000001;\nconstexpr u64 MOD64_1 = 0x3ffffffffa000001, MOD64_2 = 0x3fffffffea000001,\n\
     \              MOD64_3 = 0x3fffffffcc000001;\nconstexpr bool threshold(u64 val,\
     \ u64 s, u64 m) {\n  return u128(val) * val <= u128(MOD64_1) * m / s;\n}\ntemplate\
@@ -362,8 +357,8 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_D.test.cpp
   requiredBy: []
-  timestamp: '2022-10-02 02:21:45+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-10-16 17:42:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_D.test.cpp
 layout: document
