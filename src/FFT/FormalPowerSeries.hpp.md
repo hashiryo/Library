@@ -622,13 +622,13 @@ data:
   timestamp: '2022-10-16 17:42:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/log_of_FPS.FPS.test.cpp
-  - test/yosupo/pow_of_FPS.FPS.test.cpp
-  - test/yosupo/exp_of_FPS.FPS.test.cpp
-  - test/yosupo/partition.MSET.test.cpp
-  - test/yosupo/inv_of_FPS.FPS.test.cpp
-  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - test/yukicoder/963.FPS.test.cpp
+  - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/pow_of_FPS.FPS.test.cpp
+  - test/yosupo/log_of_FPS.FPS.test.cpp
+  - test/yosupo/partition.MSET.test.cpp
+  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+  - test/yosupo/exp_of_FPS.FPS.test.cpp
   - test/atcoder/abc230_h.test.cpp
   - test/atcoder/abc213_h.test.cpp
 documentation_of: src/FFT/FormalPowerSeries.hpp

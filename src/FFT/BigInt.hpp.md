@@ -12,27 +12,27 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
@@ -322,30 +322,30 @@ data:
     \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20];\n    static long long h[1\
     \ << 20];\n    if (int i = n, j; std::min(n, m) >= 74) {\n      for (i = n; i--;)\
     \ f[i] = dat[i];\n      for (i = m; i--;) g[i] = r.dat[i];\n      const int l\
-    \ = get_len(std::max(n, m)), bl = bsf(l) + 6;\n      const int len = sz - l <\
-    \ bl * bl * 7 - 74 ? l : get_len(sz);\n      std::fill_n(f + n, len - n, 0), NTT::dft(len,\
-    \ f);\n      std::fill_n(g + m, len - m, 0), NTT::dft(len, g);\n      for (i =\
-    \ len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f), i = len; i < sz; f[i\
-    \ - len] -= h[i], i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++)\n  \
-    \        h[i] += (long long)dat[j] * r.dat[i - j];\n      for (i = std::min(sz,\
-    \ len); i--;) h[i] = f[i].val();\n    } else\n      for (std::fill_n(h, sz, 0);\
-    \ i--;)\n        for (j = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n\
-    \    BigInt ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n    for (int i\
-    \ = 0; i < sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n    for (;\
-    \ car; car /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n  }\n\
-    \  BigInt operator/(const BigInt &r) const {\n    assert(!r.is_zero());\n    if\
-    \ (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n  \
-    \  BigInt a = this->abs(), b = r.abs();\n    if (a < b) return 0;\n    const int\
-    \ pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1);\n    int l\
-    \ = std::min(prec, 3), ql = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l +\
-    \ 1)), p, rr = b.shift(qb - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() = 1,\
-    \ c.dat.back() = 2;\n    while (x != p) p.dat.swap(x.dat), x = (p * (c - rr *\
-    \ p)).shift(l + ql);\n    if (l != prec)\n      for (p.neg = true; x != p; l =\
-    \ nl, ql = nql) {\n        nl = std::min(l * 2 + 1, prec), nql = std::min(ql *\
-    \ 2 + 1, qb);\n        p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l -\
-    \ nl + ql);\n        if (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n \
-    \       c.dat.back() = 0, c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n    \
-    \  }\n    if (x = (x * a).shift(pb + (pb == qb)); a >= (x + 1) * b) x += 1;\n\
+    \ = get_len(std::max(n, m)), bl = __builtin_ctz(l) + 6;\n      const int len =\
+    \ sz - l < bl * bl * 7 - 74 ? l : get_len(sz);\n      std::fill_n(f + n, len -\
+    \ n, 0), NTT::dft(len, f);\n      std::fill_n(g + m, len - m, 0), NTT::dft(len,\
+    \ g);\n      for (i = len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f),\
+    \ i = len; i < sz; f[i - len] -= h[i], i++)\n        for (h[i] = 0, j = i - m\
+    \ + 1; j < n; j++)\n          h[i] += (long long)dat[j] * r.dat[i - j];\n    \
+    \  for (i = std::min(sz, len); i--;) h[i] = f[i].val();\n    } else\n      for\
+    \ (std::fill_n(h, sz, 0); i--;)\n        for (j = m; j--;) h[i + j] += (long long)dat[i]\
+    \ * r.dat[j];\n    BigInt ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n\
+    \    for (int i = 0; i < sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n\
+    \    for (; car; car /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n\
+    \  }\n  BigInt operator/(const BigInt &r) const {\n    assert(!r.is_zero());\n\
+    \    if (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n\
+    \    BigInt a = this->abs(), b = r.abs();\n    if (a < b) return 0;\n    const\
+    \ int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1);\n    int\
+    \ l = std::min(prec, 3), ql = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l\
+    \ + 1)), p, rr = b.shift(qb - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() =\
+    \ 1, c.dat.back() = 2;\n    while (x != p) p.dat.swap(x.dat), x = (p * (c - rr\
+    \ * p)).shift(l + ql);\n    if (l != prec)\n      for (p.neg = true; x != p; l\
+    \ = nl, ql = nql) {\n        nl = std::min(l * 2 + 1, prec), nql = std::min(ql\
+    \ * 2 + 1, qb);\n        p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l\
+    \ - nl + ql);\n        if (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n\
+    \        c.dat.back() = 0, c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n   \
+    \   }\n    if (x = (x * a).shift(pb + (pb == qb)); a >= (x + 1) * b) x += 1;\n\
     \    return x.neg = neg ^ r.neg, x;\n  }\n  BigInt operator%(const BigInt &r)\
     \ const { return *this - (*this / r) * r; }\n  BigInt &operator+=(const BigInt\
     \ &r) { return *this = *this + r; }\n  BigInt &operator-=(const BigInt &r) { return\
@@ -406,39 +406,39 @@ data:
     \    static mod_t f[1 << 20], g[1 << 20];\n    static long long h[1 << 20];\n\
     \    if (int i = n, j; std::min(n, m) >= 74) {\n      for (i = n; i--;) f[i] =\
     \ dat[i];\n      for (i = m; i--;) g[i] = r.dat[i];\n      const int l = get_len(std::max(n,\
-    \ m)), bl = bsf(l) + 6;\n      const int len = sz - l < bl * bl * 7 - 74 ? l :\
-    \ get_len(sz);\n      std::fill_n(f + n, len - n, 0), NTT::dft(len, f);\n    \
-    \  std::fill_n(g + m, len - m, 0), NTT::dft(len, g);\n      for (i = len; i--;)\
-    \ f[i] *= g[i];\n      for (NTT::idft(len, f), i = len; i < sz; f[i - len] -=\
-    \ h[i], i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++)\n          h[i]\
-    \ += (long long)dat[j] * r.dat[i - j];\n      for (i = std::min(sz, len); i--;)\
-    \ h[i] = f[i].val();\n    } else\n      for (std::fill_n(h, sz, 0); i--;)\n  \
-    \      for (j = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n    BigInt\
-    \ ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n    for (int i = 0; i <\
-    \ sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n    for (; car; car\
-    \ /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n  }\n  BigInt operator/(const\
-    \ BigInt &r) const {\n    assert(!r.is_zero());\n    if (r.dat.size() == 1 &&\
-    \ r.dat.back() == 1) return r.neg ? -*this : *this;\n    BigInt a = this->abs(),\
-    \ b = r.abs();\n    if (a < b) return 0;\n    const int pb = dat.size(), qb =\
-    \ r.dat.size(), prec = std::max(pb - qb, 1);\n    int l = std::min(prec, 3), ql\
-    \ = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l + 1)), p, rr = b.shift(qb\
-    \ - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() = 1, c.dat.back() = 2;\n   \
-    \ while (x != p) p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(l + ql);\n  \
-    \  if (l != prec)\n      for (p.neg = true; x != p; l = nl, ql = nql) {\n    \
-    \    nl = std::min(l * 2 + 1, prec), nql = std::min(ql * 2 + 1, qb);\n       \
-    \ p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l - nl + ql);\n        if\
-    \ (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n        c.dat.back() = 0,\
-    \ c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n      }\n    if (x = (x * a).shift(pb\
-    \ + (pb == qb)); a >= (x + 1) * b) x += 1;\n    return x.neg = neg ^ r.neg, x;\n\
-    \  }\n  BigInt operator%(const BigInt &r) const { return *this - (*this / r) *\
-    \ r; }\n  BigInt &operator+=(const BigInt &r) { return *this = *this + r; }\n\
-    \  BigInt &operator-=(const BigInt &r) { return *this = *this - r; }\n  BigInt\
-    \ &operator*=(const BigInt &r) { return *this = *this * r; }\n  BigInt &operator/=(const\
-    \ BigInt &r) { return *this = *this / r; }\n  BigInt &operator%=(const BigInt\
-    \ &r) { return *this = *this % r; }\n  friend std::istream &operator>>(std::istream\
-    \ &is, BigInt &v) {\n    std::string s;\n    return is >> s, v = BigInt(s), is;\n\
-    \  }\n  friend std::ostream &operator<<(std::ostream &os, const BigInt &v) {\n\
-    \    return os << v.to_str(), os;\n  }\n};"
+    \ m)), bl = __builtin_ctz(l) + 6;\n      const int len = sz - l < bl * bl * 7\
+    \ - 74 ? l : get_len(sz);\n      std::fill_n(f + n, len - n, 0), NTT::dft(len,\
+    \ f);\n      std::fill_n(g + m, len - m, 0), NTT::dft(len, g);\n      for (i =\
+    \ len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f), i = len; i < sz; f[i\
+    \ - len] -= h[i], i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++)\n  \
+    \        h[i] += (long long)dat[j] * r.dat[i - j];\n      for (i = std::min(sz,\
+    \ len); i--;) h[i] = f[i].val();\n    } else\n      for (std::fill_n(h, sz, 0);\
+    \ i--;)\n        for (j = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n\
+    \    BigInt ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n    for (int i\
+    \ = 0; i < sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n    for (;\
+    \ car; car /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n  }\n\
+    \  BigInt operator/(const BigInt &r) const {\n    assert(!r.is_zero());\n    if\
+    \ (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n  \
+    \  BigInt a = this->abs(), b = r.abs();\n    if (a < b) return 0;\n    const int\
+    \ pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1);\n    int l\
+    \ = std::min(prec, 3), ql = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l +\
+    \ 1)), p, rr = b.shift(qb - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() = 1,\
+    \ c.dat.back() = 2;\n    while (x != p) p.dat.swap(x.dat), x = (p * (c - rr *\
+    \ p)).shift(l + ql);\n    if (l != prec)\n      for (p.neg = true; x != p; l =\
+    \ nl, ql = nql) {\n        nl = std::min(l * 2 + 1, prec), nql = std::min(ql *\
+    \ 2 + 1, qb);\n        p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l -\
+    \ nl + ql);\n        if (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n \
+    \       c.dat.back() = 0, c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n    \
+    \  }\n    if (x = (x * a).shift(pb + (pb == qb)); a >= (x + 1) * b) x += 1;\n\
+    \    return x.neg = neg ^ r.neg, x;\n  }\n  BigInt operator%(const BigInt &r)\
+    \ const { return *this - (*this / r) * r; }\n  BigInt &operator+=(const BigInt\
+    \ &r) { return *this = *this + r; }\n  BigInt &operator-=(const BigInt &r) { return\
+    \ *this = *this - r; }\n  BigInt &operator*=(const BigInt &r) { return *this =\
+    \ *this * r; }\n  BigInt &operator/=(const BigInt &r) { return *this = *this /\
+    \ r; }\n  BigInt &operator%=(const BigInt &r) { return *this = *this % r; }\n\
+    \  friend std::istream &operator>>(std::istream &is, BigInt &v) {\n    std::string\
+    \ s;\n    return is >> s, v = BigInt(s), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const BigInt &v) {\n    return os << v.to_str(), os;\n  }\n};"
   dependsOn:
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
@@ -446,15 +446,15 @@ data:
   isVerificationFile: false
   path: src/FFT/BigInt.hpp
   requiredBy: []
-  timestamp: '2022-10-16 17:42:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-10-17 13:12:22+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_2_C.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_B.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_F.test.cpp
+  - test/aoj/NTL_2_D.test.cpp
+  - test/aoj/NTL_2_A.test.cpp
+  - test/aoj/NTL_2_B.test.cpp
 documentation_of: src/FFT/BigInt.hpp
 layout: document
 redirect_from:

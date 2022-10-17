@@ -11,36 +11,36 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
   - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':x:'
@@ -87,7 +87,7 @@ data:
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u7573\u307F\u8FBC\u307F"
     links: []
@@ -339,11 +339,11 @@ data:
     \ r_len, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
     \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
     \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
-    \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
-    \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
-    \ 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n  \
-    \    GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(), 0,\
-    \ m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
+    \ m)),\n              bl = __builtin_ctz(l) + 2 * nttarray_type<mod_t, _Nm> -\
+    \ 6;\n    const int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n\
+    \    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n\
+    \    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(),\
+    \ 0, m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
     \ 0, len);\n    GNA1::bf.idft(0, len), GNA1::bf.get(GAr::bf, 0, std::min(r_len,\
     \ len));\n    if (len < r_len) {\n      std::copy(p.begin() + len - m + 1, p.end(),\
     \ GAp::bf + len - m + 1);\n      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf\
@@ -364,11 +364,11 @@ data:
     \  std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(),\
     \ GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
     \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
-    \ m)),\n              bl = bsf(l) + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const\
-    \ int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(),\
-    \ 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n  \
-    \    GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(), 0,\
-    \ m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
+    \ m)),\n              bl = __builtin_ctz(l) + 2 * nttarray_type<mod_t, _Nm> -\
+    \ 6;\n    const int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n\
+    \    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n\
+    \    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(),\
+    \ 0, m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
     \ 0, len);\n    GNA1::bf.idft(0, len), GNA1::bf.get(GAr::bf, 0, std::min(r_len,\
     \ len));\n    if (len < r_len) {\n      std::copy(p.begin() + len - m + 1, p.end(),\
     \ GAp::bf + len - m + 1);\n      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf\
@@ -383,33 +383,33 @@ data:
   isVerificationFile: false
   path: src/FFT/convolve.hpp
   requiredBy:
-  - src/FFT/Polynomial.hpp
-  - src/FFT/extgcd.hpp
   - src/FFT/bostan_mori.hpp
+  - src/FFT/Polynomial.hpp
   - src/FFT/sequences.hpp
-  timestamp: '2022-10-16 17:42:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  - src/FFT/extgcd.hpp
+  timestamp: '2022-10-17 13:12:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/division_of_Poly.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/convolution1000000007.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_2.test.cpp
-  - test/yosupo/convolution_mod_2_64.test.cpp
   - test/aoj/0168.test.cpp
-  - test/yukicoder/215.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
+  - test/yukicoder/658.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/980.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yukicoder/658.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/137.div_at.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/convolution_mod_2_64.test.cpp
+  - test/yosupo/partition.test.cpp
 documentation_of: src/FFT/convolve.hpp
 layout: document
 redirect_from:
