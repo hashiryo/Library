@@ -83,7 +83,7 @@ data:
     \ Nimber &r) {\n    return os << r.x;\n  }\n  friend std::istream &operator>>(std::istream\
     \ &is, Nimber &r) {\n    return is >> r.x, is;\n  }\n};\n#line 4 \"test/unit_test/nimber_inv.test.cpp\"\
     \nusing namespace std;\n\nvoid test(int X) {\n  mt19937 mt(X);\n  uniform_int_distribution<uint64_t>\
-    \ rng(1, ULLONG_MAX);\n  static constexpr int N = 100000;\n  static Nimber a[N],\
+    \ rng(1, ULLONG_MAX);\n  static constexpr int N = 10000;\n  static Nimber a[N],\
     \ b[N], c[N];\n  for (int i = 0; i < N; i++)\n    a[i] = rng(mt), b[i] = rng(mt),\
     \ c[i] = a[i] * b[i];\n  for (int i = 0; i < N; i++) {\n    Nimber ans = c[i]\
     \ / b[i];\n    assert(ans == a[i]);\n    assert(ans.val() == a[i].val());\n  }\n\
@@ -93,8 +93,8 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <bits/stdc++.h>\n\
     #include \"src/Math/Nimber.hpp\"\nusing namespace std;\n\nvoid test(int X) {\n\
     \  mt19937 mt(X);\n  uniform_int_distribution<uint64_t> rng(1, ULLONG_MAX);\n\
-    \  static constexpr int N = 100000;\n  static Nimber a[N], b[N], c[N];\n  for\
-    \ (int i = 0; i < N; i++)\n    a[i] = rng(mt), b[i] = rng(mt), c[i] = a[i] * b[i];\n\
+    \  static constexpr int N = 10000;\n  static Nimber a[N], b[N], c[N];\n  for (int\
+    \ i = 0; i < N; i++)\n    a[i] = rng(mt), b[i] = rng(mt), c[i] = a[i] * b[i];\n\
     \  for (int i = 0; i < N; i++) {\n    Nimber ans = c[i] / b[i];\n    assert(ans\
     \ == a[i]);\n    assert(ans.val() == a[i].val());\n  }\n}\nsigned main() {\n \
     \ cin.tie(0);\n  ios::sync_with_stdio(false);\n  int A, B;\n  cin >> A >> B;\n\
@@ -104,7 +104,7 @@ data:
   isVerificationFile: true
   path: test/unit_test/nimber_inv.test.cpp
   requiredBy: []
-  timestamp: '2022-10-18 15:06:26+09:00'
+  timestamp: '2022-10-18 15:34:57+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/nimber_inv.test.cpp
