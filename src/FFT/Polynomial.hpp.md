@@ -20,7 +20,7 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedVerifiedWith:
@@ -30,10 +30,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
@@ -639,12 +639,12 @@ data:
   timestamp: '2022-10-17 13:12:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/215.Poly.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/FFT/Polynomial.hpp
 layout: document
 redirect_from:

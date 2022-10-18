@@ -28,7 +28,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
   - icon: ':x:'
@@ -496,17 +496,17 @@ data:
   timestamp: '2022-10-17 13:12:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/963.test.cpp
-  - test/yukicoder/1080.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yosupo/stirling_2.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/partition.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/963.test.cpp
+  - test/yukicoder/1145.test.cpp
 documentation_of: src/FFT/fps_exp.hpp
 layout: document
 redirect_from:

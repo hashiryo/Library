@@ -105,8 +105,8 @@ data:
   timestamp: '2022-06-22 15:08:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2624.test.cpp
   - test/aoj/2397.test.cpp
+  - test/aoj/2624.test.cpp
   - test/yukicoder/1340.test.cpp
   - test/atcoder/abc236_g.test.cpp
 documentation_of: src/LinearAlgebra/Matrix.hpp

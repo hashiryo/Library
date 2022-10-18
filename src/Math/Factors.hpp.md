@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
   - icon: ':x:'
@@ -128,15 +128,15 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
-  - src/Math/tetration.hpp
   - src/Math/ModIntExp.hpp
+  - src/Math/tetration.hpp
   timestamp: '2022-10-16 17:42:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/NTL_1_D.test.cpp
-  - test/yosupo/factorize.test.cpp
-  - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
+  - test/yosupo/factorize.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
   - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/Factors.hpp
 layout: document

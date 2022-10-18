@@ -18,7 +18,7 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/yosupo/polynomial_interpolation.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\
       \u9593"
@@ -443,10 +443,10 @@ data:
   path: src/FFT/SubProductTree.hpp
   requiredBy: []
   timestamp: '2022-10-17 13:12:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
 documentation_of: src/FFT/SubProductTree.hpp
 layout: document
 redirect_from:

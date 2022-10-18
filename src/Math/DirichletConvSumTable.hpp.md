@@ -283,8 +283,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
-  - test/atcoder/arc116_c.dujiao.test.cpp
   - test/atcoder/abc172_d.dujiao.test.cpp
+  - test/atcoder/arc116_c.dujiao.test.cpp
   - test/atcoder/abc179_c.test.cpp
 documentation_of: src/Math/DirichletConvSumTable.hpp
 layout: document
