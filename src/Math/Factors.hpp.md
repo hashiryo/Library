@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
@@ -128,16 +128,16 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
-  - src/Math/ModIntExp.hpp
   - src/Math/tetration.hpp
+  - src/Math/ModIntExp.hpp
   timestamp: '2022-10-16 17:42:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/NTL_1_D.test.cpp
+  - test/atcoder/abc228_e.test.cpp
   - test/yosupo/primitive_root.test.cpp
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/factorize.test.cpp
-  - test/aoj/NTL_1_D.test.cpp
-  - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/Factors.hpp
 layout: document
 redirect_from:

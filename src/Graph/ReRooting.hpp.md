@@ -69,9 +69,9 @@ data:
   timestamp: '2020-10-23 23:21:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_5_A.test.cpp
-  - test/aoj/1595.test.cpp
   - test/yukicoder/768.test.cpp
+  - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
 documentation_of: src/Graph/ReRooting.hpp
 layout: document
 redirect_from:

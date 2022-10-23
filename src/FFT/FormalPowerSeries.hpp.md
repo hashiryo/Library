@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -36,12 +36,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
     title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/963.FPS.test.cpp
     title: test/yukicoder/963.FPS.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -620,17 +620,17 @@ data:
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
   timestamp: '2022-10-16 17:42:41+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/log_of_FPS.FPS.test.cpp
-  - test/yosupo/pow_of_FPS.FPS.test.cpp
-  - test/yosupo/exp_of_FPS.FPS.test.cpp
-  - test/yosupo/partition.MSET.test.cpp
-  - test/yosupo/inv_of_FPS.FPS.test.cpp
-  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - test/yukicoder/963.FPS.test.cpp
-  - test/atcoder/abc230_h.test.cpp
   - test/atcoder/abc213_h.test.cpp
+  - test/atcoder/abc230_h.test.cpp
+  - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/log_of_FPS.FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+  - test/yosupo/partition.MSET.test.cpp
+  - test/yosupo/exp_of_FPS.FPS.test.cpp
+  - test/yosupo/pow_of_FPS.FPS.test.cpp
 documentation_of: src/FFT/FormalPowerSeries.hpp
 layout: document
 redirect_from:

@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
@@ -639,12 +639,12 @@ data:
   timestamp: '2022-10-17 13:12:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/215.Poly.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/shift_of_FPS.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/FFT/Polynomial.hpp
 layout: document
 redirect_from:

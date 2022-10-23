@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -449,12 +449,12 @@ data:
   timestamp: '2022-10-17 13:12:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/NTL_2_C.test.cpp
   - test/aoj/NTL_2_D.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_B.test.cpp
+  - test/aoj/NTL_2_C.test.cpp
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_F.test.cpp
+  - test/aoj/NTL_2_B.test.cpp
+  - test/aoj/NTL_2_E.test.cpp
 documentation_of: src/FFT/BigInt.hpp
 layout: document
 redirect_from:

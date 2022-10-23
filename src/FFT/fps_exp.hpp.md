@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
@@ -52,12 +52,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
     links: []
@@ -494,19 +494,19 @@ data:
   requiredBy:
   - src/FFT/sequences.hpp
   timestamp: '2022-10-17 13:12:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_2.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yukicoder/1080.test.cpp
   - test/yukicoder/963.test.cpp
+  - test/yukicoder/1080.test.cpp
   - test/yukicoder/1145.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
 documentation_of: src/FFT/fps_exp.hpp
 layout: document
 redirect_from:

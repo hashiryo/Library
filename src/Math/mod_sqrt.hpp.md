@@ -57,9 +57,9 @@ data:
   timestamp: '2022-10-03 10:06:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/sqrt_mod.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yukicoder/1080.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/sqrt_mod.test.cpp
 documentation_of: src/Math/mod_sqrt.hpp
 layout: document
 redirect_from:

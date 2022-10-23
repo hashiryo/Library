@@ -266,11 +266,11 @@ data:
   timestamp: '2022-10-10 20:30:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/subset_convolution.test.cpp
   - test/aoj/2345.test.cpp
   - test/atcoder/arc105_f.test.cpp
-  - test/atcoder/abc213_g.test.cpp
   - test/atcoder/abc199_d.test.cpp
+  - test/atcoder/abc213_g.test.cpp
+  - test/yosupo/subset_convolution.test.cpp
 documentation_of: src/Math/SetPowerSeries.hpp
 layout: document
 redirect_from:

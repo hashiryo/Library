@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -100,8 +100,8 @@ data:
   timestamp: '2022-10-16 17:42:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/stirling_2_small_p_large_n.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp
+  - test/yosupo/stirling_2_small_p_large_n.test.cpp
 documentation_of: src/Math/StirlingNumber.hpp
 layout: document
 redirect_from:

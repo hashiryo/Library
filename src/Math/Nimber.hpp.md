@@ -157,9 +157,9 @@ data:
   timestamp: '2022-10-18 16:15:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/nim_product_64.test.cpp
-  - test/unit_test/nimber_sqrt.test.cpp
   - test/unit_test/nimber_inv.test.cpp
+  - test/unit_test/nimber_sqrt.test.cpp
+  - test/yosupo/nim_product_64.test.cpp
 documentation_of: src/Math/Nimber.hpp
 layout: document
 redirect_from:
