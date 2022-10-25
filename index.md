@@ -246,7 +246,7 @@ data:
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     - icon: ':heavy_check_mark:'
       path: src/Math/Nimber.hpp
-      title: Nimber
+      title: Nimber $\mathbb{F}_{2^{64}}$
     - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
@@ -266,7 +266,7 @@ data:
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
     - icon: ':heavy_check_mark:'
-      path: src/Math/discrete_log.hpp
+      path: src/Math/discrete_logarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':heavy_check_mark:'
       path: src/Math/hafnian.hpp
@@ -823,6 +823,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/unit_test/nimber_log.test.cpp
+      title: test/unit_test/nimber_log.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_sqrt.test.cpp
       title: test/unit_test/nimber_sqrt.test.cpp

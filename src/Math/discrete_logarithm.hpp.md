@@ -12,9 +12,9 @@ data:
   attributes:
     document_title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     links: []
-  bundledCode: "#line 2 \"src/Math/discrete_log.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/Math/discrete_logarithm.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category\
-    \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nint discrete_log(unsigned\
+    \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nint discrete_logarithm(unsigned\
     \ a, unsigned b, unsigned mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0\
     \ : 1) : (b == 1 ? 0 : -1);\n  using u32 = unsigned;\n  auto mul = [&mod](u32\
     \ &x, u32 y) { x = (std::uint64_t)x * y % mod; };\n  auto inv = [&mod](u32 s)\
@@ -30,9 +30,9 @@ data:
     \      return cnt + i * mid + it->second;\n  return -1;  // no solution\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u96E2\u6563\u5BFE\
     \u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n * O(\u221Amod)\n\
-    \ */\n\n// BEGIN CUT HERE\nint discrete_log(unsigned a, unsigned b, unsigned mod)\
-    \ {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b == 1 ? 0 : -1);\n \
-    \ using u32 = unsigned;\n  auto mul = [&mod](u32 &x, u32 y) { x = (std::uint64_t)x\
+    \ */\n\n// BEGIN CUT HERE\nint discrete_logarithm(unsigned a, unsigned b, unsigned\
+    \ mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b == 1 ? 0 : -1);\n\
+    \  using u32 = unsigned;\n  auto mul = [&mod](u32 &x, u32 y) { x = (std::uint64_t)x\
     \ * y % mod; };\n  auto inv = [&mod](u32 s) -> u32 {\n    int x = 1, y = 0, t\
     \ = mod;\n    for (int q, z, u; t;)\n      z = x, u = s, x = y, y = z - y * (q\
     \ = s / t), s = t, t = u - t * q;\n    return x < 0 ? mod - (-x) % mod : x % mod;\n\
@@ -46,16 +46,16 @@ data:
     \  return -1;  // no solution\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: src/Math/discrete_log.hpp
+  path: src/Math/discrete_logarithm.hpp
   requiredBy: []
-  timestamp: '2022-10-03 10:06:49+09:00'
+  timestamp: '2022-10-25 15:42:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
-documentation_of: src/Math/discrete_log.hpp
+documentation_of: src/Math/discrete_logarithm.hpp
 layout: document
 redirect_from:
-- /library/src/Math/discrete_log.hpp
-- /library/src/Math/discrete_log.hpp.html
+- /library/src/Math/discrete_logarithm.hpp
+- /library/src/Math/discrete_logarithm.hpp.html
 title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
 ---

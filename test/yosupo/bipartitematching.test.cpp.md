@@ -26,9 +26,9 @@ data:
     \ */\n// \u88AB\u8986\u554F\u984C\u3068\u306E\u95A2\u4FC2 https://qiita.com/drken/items/7f98315b56c95a6181a4\n\
     \n// BEGIN CUT HERE\n\nclass MatchingBipartite {\n  std::vector<std::vector<int>>\
     \ adj;\n  std::vector<int> pre, rt, lmate, rmate;\n  bool dfs(int v, const int\
-    \ &tstamp) {\n    pre[v] = tstamp;\n    for (int u : adj[v]) {\n      int w =\
-    \ rmate[u];\n      if (w == -1 || (rt[w] != -2 && pre[w] != tstamp && dfs(w, tstamp)))\n\
-    \        return rmate[u] = v, lmate[v] = u, true;\n    }\n    return false;\n\
+    \ &tstamp) {\n    pre[v] = tstamp;\n    for (int u : adj[v])\n      if (int w\
+    \ = rmate[u];\n          w == -1 || (rt[w] != -2 && pre[w] != tstamp && dfs(w,\
+    \ tstamp)))\n        return rmate[u] = v, lmate[v] = u, true;\n    return false;\n\
     \  }\n\n public:\n  MatchingBipartite(int n, int m) : adj(n), lmate(n, -1), rmate(m,\
     \ -1) {}\n  void add_edge(int l, int r) { adj[l].push_back(r); }\n  std::pair<int,\
     \ std::pair<std::vector<int>, std::vector<int>>> get_matching() {\n    int res\
@@ -36,24 +36,24 @@ data:
     \    update = false, pre.assign(adj.size(), -1), rt.assign(adj.size(), -1);\n\
     \      for (int i = 0; i < (int)adj.size(); i++)\n        if (lmate[i] == -1)\
     \ que.push(rt[i] = i);\n      while (!que.empty()) {\n        int v = que.front();\n\
-    \        que.pop();\n        if (lmate[rt[v]] != -1) continue;\n        for (int\
-    \ u : adj[v]) {\n          if (rmate[u] == -1) {\n            for (; u != -1;\
-    \ v = pre[v]) rmate[u] = v, std::swap(lmate[v], u);\n            update = true,\
-    \ res++;\n            break;\n          }\n          if (pre[rmate[u]] != -1)\
-    \ continue;\n          rt[rmate[u]] = rt[pre[rmate[u]] = v], que.push(rmate[u]);\n\
-    \        }\n      }\n    }\n    return std::make_pair(res, std::make_pair(lmate,\
-    \ rmate));\n  }\n  std::pair<int, std::pair<std::vector<int>, std::vector<int>>>\n\
-    \  lexicographically_matching() {\n    int res = get_matching().first, tstamp\
-    \ = -2;\n    for (int i = 0; i < (int)adj.size(); i++)\n      if (lmate[i] !=\
-    \ -1)\n        lmate[i] = rmate[lmate[i]] = -1, dfs(i, --tstamp), rt[i] = -2;\n\
-    \    return std::make_pair(res, std::make_pair(lmate, rmate));\n  }\n};\n#line\
-    \ 4 \"test/yosupo/bipartitematching.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int L, R, M;\n  cin >>\
-    \ L >> R >> M;\n  MatchingBipartite graph(L, R);\n  while (M--) {\n    int a,\
-    \ b;\n    cin >> a >> b;\n    graph.add_edge(a, b);\n  }\n  auto ans = graph.get_matching();\n\
-    \  auto left = ans.second.first;\n  cout << ans.first << '\\n';\n  for (int i\
-    \ = 0; i < (int)left.size(); i++)\n    if (left[i] != -1) {\n      cout << i <<\
-    \ \" \" << left[i] << '\\n';\n    }\n  return 0;\n}\n"
+    \        if (que.pop(); lmate[rt[v]] != -1) continue;\n        for (int u : adj[v])\
+    \ {\n          if (rmate[u] == -1) {\n            for (; u != -1; v = pre[v])\
+    \ rmate[u] = v, std::swap(lmate[v], u);\n            update = true, res++;\n \
+    \           break;\n          }\n          if (pre[rmate[u]] != -1) continue;\n\
+    \          rt[rmate[u]] = rt[pre[rmate[u]] = v], que.push(rmate[u]);\n       \
+    \ }\n      }\n    }\n    return std::make_pair(res, std::make_pair(lmate, rmate));\n\
+    \  }\n  std::pair<int, std::pair<std::vector<int>, std::vector<int>>>\n  lexicographically_matching()\
+    \ {\n    int res = get_matching().first, tstamp = -2;\n    for (int i = 0; i <\
+    \ (int)adj.size(); i++)\n      if (lmate[i] != -1)\n        lmate[i] = rmate[lmate[i]]\
+    \ = -1, dfs(i, --tstamp), rt[i] = -2;\n    return std::make_pair(res, std::make_pair(lmate,\
+    \ rmate));\n  }\n};\n#line 4 \"test/yosupo/bipartitematching.test.cpp\"\nusing\
+    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int L, R, M;\n  cin >> L >> R >> M;\n  MatchingBipartite graph(L, R);\n  while\
+    \ (M--) {\n    int a, b;\n    cin >> a >> b;\n    graph.add_edge(a, b);\n  }\n\
+    \  auto ans = graph.get_matching();\n  auto left = ans.second.first;\n  cout <<\
+    \ ans.first << '\\n';\n  for (int i = 0; i < (int)left.size(); i++)\n    if (left[i]\
+    \ != -1) {\n      cout << i << \" \" << left[i] << '\\n';\n    }\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Graph/MatchingBipartite.hpp\"\nusing namespace\
     \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int L,\
@@ -67,7 +67,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
+  timestamp: '2022-10-25 15:42:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.test.cpp

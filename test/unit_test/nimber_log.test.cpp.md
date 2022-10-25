@@ -14,7 +14,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"test/unit_test/nimber_inv.test.cpp\"\n#define PROBLEM \"\
+  bundledCode: "#line 1 \"test/unit_test/nimber_log.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/aplusb\"\n#include <bits/stdc++.h>\n#line 3 \"\
     src/Math/Nimber.hpp\"\n/**\n * @title Nimber $\\mathbb{F}_{2^{64}}$\n * @category\
     \ \u6570\u5B66\n * @see https://en.wikipedia.org/wiki/Nimber\n * @see https://natsugiri.hatenablog.com/entry/2020/03/29/073605\n\
@@ -109,37 +109,36 @@ data:
     \ Nimber &r) const { return x <= r.x; }\n  bool operator>=(const Nimber &r) const\
     \ { return x >= r.x; }\n  friend std::ostream &operator<<(std::ostream &os, const\
     \ Nimber &r) {\n    return os << r.x;\n  }\n  friend std::istream &operator>>(std::istream\
-    \ &is, Nimber &r) {\n    return is >> r.x, is;\n  }\n};\n#line 4 \"test/unit_test/nimber_inv.test.cpp\"\
+    \ &is, Nimber &r) {\n    return is >> r.x, is;\n  }\n};\n#line 4 \"test/unit_test/nimber_log.test.cpp\"\
     \nusing namespace std;\n\nvoid test(int X) {\n  mt19937 mt(X);\n  uniform_int_distribution<uint64_t>\
-    \ rng(1, ULLONG_MAX);\n  static constexpr int N = 100000;\n  static Nimber a[N],\
-    \ b[N], c[N];\n  for (int i = 0; i < N; i++)\n    a[i] = rng(mt), b[i] = rng(mt),\
-    \ c[i] = a[i] * b[i];\n  for (int i = 0; i < N; i++) {\n    Nimber ans = c[i]\
-    \ / b[i];\n    assert(ans == a[i]);\n    assert(ans.val() == a[i].val());\n  }\n\
-    }\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  Nimber::init();\n\
+    \ rng(0, ULLONG_MAX);\n  static constexpr int N = 1000;\n  static Nimber a[N],\
+    \ b[N];\n  static uint64_t x[N];\n  for (int i = 0; i < N; i++)\n    a[i] = rng(mt),\
+    \ x[i] = rng(mt), b[i] = a[i].pow(x[i]);\n  for (int i = 0; i < N; i++) {\n  \
+    \  uint64_t ans = a[i].log(b[i]);\n    assert(a[i].pow(ans) == b[i]);\n  }\n}\n\
+    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  Nimber::init();\n\
     \  int A, B;\n  cin >> A >> B;\n  test(A), test(B);\n  cout << A + B << '\\n';\n\
     \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <bits/stdc++.h>\n\
     #include \"src/Math/Nimber.hpp\"\nusing namespace std;\n\nvoid test(int X) {\n\
-    \  mt19937 mt(X);\n  uniform_int_distribution<uint64_t> rng(1, ULLONG_MAX);\n\
-    \  static constexpr int N = 100000;\n  static Nimber a[N], b[N], c[N];\n  for\
-    \ (int i = 0; i < N; i++)\n    a[i] = rng(mt), b[i] = rng(mt), c[i] = a[i] * b[i];\n\
-    \  for (int i = 0; i < N; i++) {\n    Nimber ans = c[i] / b[i];\n    assert(ans\
-    \ == a[i]);\n    assert(ans.val() == a[i].val());\n  }\n}\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(false);\n  Nimber::init();\n  int A, B;\n\
-    \  cin >> A >> B;\n  test(A), test(B);\n  cout << A + B << '\\n';\n  return 0;\n\
-    }"
+    \  mt19937 mt(X);\n  uniform_int_distribution<uint64_t> rng(0, ULLONG_MAX);\n\
+    \  static constexpr int N = 1000;\n  static Nimber a[N], b[N];\n  static uint64_t\
+    \ x[N];\n  for (int i = 0; i < N; i++)\n    a[i] = rng(mt), x[i] = rng(mt), b[i]\
+    \ = a[i].pow(x[i]);\n  for (int i = 0; i < N; i++) {\n    uint64_t ans = a[i].log(b[i]);\n\
+    \    assert(a[i].pow(ans) == b[i]);\n  }\n}\nsigned main() {\n  cin.tie(0);\n\
+    \  ios::sync_with_stdio(false);\n  Nimber::init();\n  int A, B;\n  cin >> A >>\
+    \ B;\n  test(A), test(B);\n  cout << A + B << '\\n';\n  return 0;\n}"
   dependsOn:
   - src/Math/Nimber.hpp
   isVerificationFile: true
-  path: test/unit_test/nimber_inv.test.cpp
+  path: test/unit_test/nimber_log.test.cpp
   requiredBy: []
   timestamp: '2022-10-25 15:42:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/unit_test/nimber_inv.test.cpp
+documentation_of: test/unit_test/nimber_log.test.cpp
 layout: document
 redirect_from:
-- /verify/test/unit_test/nimber_inv.test.cpp
-- /verify/test/unit_test/nimber_inv.test.cpp.html
-title: test/unit_test/nimber_inv.test.cpp
+- /verify/test/unit_test/nimber_log.test.cpp
+- /verify/test/unit_test/nimber_log.test.cpp.html
+title: test/unit_test/nimber_log.test.cpp
 ---
