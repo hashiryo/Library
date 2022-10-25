@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Segment-Tree(\u53CC\u5BFE)"
     links: []
@@ -64,7 +64,7 @@ data:
   path: src/DataStructure/SegmentTree_Dual.hpp
   requiredBy: []
   timestamp: '2022-06-20 21:11:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
