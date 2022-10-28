@@ -80,48 +80,49 @@ data:
     \ mul(y, x), big = mul(big, x);\n    for (int step = 0; step < pa; step += mid)\
     \ {\n      now = mul(now, big);\n      if (auto it = memo.find(now); it != memo.end())\n\
     \        return (step + mid) - it->second;\n    }\n    return -1;\n  }\n  static\
-    \ inline u64 log(u64 A, u64 B) {\n    if (B == 1) return 0;\n    if (!A) return\
-    \ B == 0 ? 1 : u64(-1);\n    static constexpr int P0 = 641, P1 = 65535, P2 = 65537,\
-    \ P3 = 6700417;\n    static constexpr int iv10 = 40691, iv21 = 32768, iv20 = 45242,\n\
-    \                         iv32 = 3317441, iv31 = 3350208, iv30 = 3883315;\n  \
-    \  int a0 = bsgs<651, 26>(pow(A, 0x663d80ff99c27f), pow(B, 0x663d80ff99c27f));\n\
-    \    if (a0 == -1) return u64(-1);\n    int a1 = log16(pow(A, 0x1000100010001),\
-    \ pow(B, 0x1000100010001));\n    if (a1 == -1) return u64(-1);\n    int a2 = bsgs<65547,\
-    \ 257>(pow(A, 0xffff0000ffff), pow(B, 0xffff0000ffff));\n    if (a2 == -1) return\
-    \ u64(-1);\n    int a3 = bsgs<6700427, 2589>(pow(A, 0x280fffffd7f), pow(B, 0x280fffffd7f));\n\
-    \    if (a3 == -1) return u64(-1);\n    int x1 = mmul<P1>(mdif<P1>(a1, a0), iv10);\n\
-    \    int x2 = mdif<P2>(mmul<P2>(mdif<P2>(a2, a0), iv20), mmul<P2>(x1, iv21));\n\
-    \    int x3 =\n        mdif<P3>(mdif<P3>(mmul<P3>(mdif<P3>(a3, a0), iv30), mmul<P3>(x1,\
-    \ iv31)),\n                 mmul<P3>(x2, iv32));\n    return u64(P0) * (u64(P1)\
-    \ * (u64(P2) * x3 + x2) + x1) + a0;\n  }\n  u64 x;\n\n public:\n  static inline\
-    \ void init(u32 x = 0, u32 y = 0) {\n    constexpr u16 f2n[16] = {\n        0x0001u,\
-    \ 0x2827u, 0x392bu, 0x8000u, 0x20fdu, 0x4d1du, 0xde4au, 0x0a17u,\n        0x3464u,\
-    \ 0xe3a9u, 0x6d8du, 0x34bcu, 0xa921u, 0xa173u, 0x0ebcu, 0x0e69u};\n    for (int\
-    \ i = pw[0] = pw[65535] = 1; i < 65535; ++i)\n      pw[i] = (pw[i - 1] << 1) ^\
-    \ (0x1681fu & (-(pw[i - 1] >= 0x8000u)));\n    for (int i = 1; i < 65535; ln[pw[i]\
-    \ = y] = i, i++)\n      for (x = pw[i], y = 0; x; x &= x - 1) y ^= f2n[__builtin_ctz(x)];\n\
-    \  }\n  Nimber(u64 x_ = 0) : x(x_) {}\n  Nimber &operator+=(const Nimber &r) {\
-    \ return x ^= r.x, *this; }\n  Nimber &operator-=(const Nimber &r) { return x\
-    \ ^= r.x, *this; }\n  Nimber &operator*=(const Nimber &r) { return x = mul(x,\
-    \ r.x), *this; }\n  Nimber &operator/=(const Nimber &r) { return x = mul(x, inv(r.x)),\
-    \ *this; }\n  Nimber operator+(const Nimber &r) const { return Nimber(x ^ r.x);\
-    \ }\n  Nimber operator-(const Nimber &r) const { return Nimber(x ^ r.x); }\n \
-    \ Nimber operator*(const Nimber &r) const { return Nimber(mul(x, r.x)); }\n  Nimber\
-    \ operator/(const Nimber &r) const { return Nimber(mul(x, inv(r.x))); }\n  Nimber\
-    \ inv() const { return Nimber(inv(x)); }\n  Nimber square() const { return Nimber(square(x));\
-    \ }\n  Nimber sqrt() const {\n    u16 a0 = u16(x), a1 = u16(x >> 16), a2 = u16(x\
-    \ >> 32), a3 = x >> 48;\n    a1 ^= half(a3 ^ a2), a2 ^= half(a3), a0 ^= half(a1)\
-    \ ^ half<6>(a3);\n    return Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) <<\
-    \ 32) |\n                  (u32(sqrt(a1)) << 16) | sqrt(a0));\n  }\n  u64 val()\
-    \ const { return x; }\n  Nimber pow(u64 k) const { return Nimber(pow(x, k)); }\n\
-    \  u64 log(const Nimber &r) const { return log(x, r.x); }\n  bool operator==(const\
-    \ Nimber &r) const { return x == r.x; }\n  bool operator!=(const Nimber &r) const\
-    \ { return x != r.x; }\n  bool operator<(const Nimber &r) const { return x < r.x;\
-    \ }\n  bool operator>(const Nimber &r) const { return x > r.x; }\n  bool operator<=(const\
-    \ Nimber &r) const { return x <= r.x; }\n  bool operator>=(const Nimber &r) const\
-    \ { return x >= r.x; }\n  friend std::ostream &operator<<(std::ostream &os, const\
-    \ Nimber &r) {\n    return os << r.x;\n  }\n  friend std::istream &operator>>(std::istream\
-    \ &is, Nimber &r) {\n    return is >> r.x, is;\n  }\n};\n"
+    \ inline u64 log(u64 A, u64 B) {\n    if (B == 1) return 0;\n    if (!A && !B)\
+    \ return 1;\n    if (!A || !B) return u64(-1);\n    static constexpr int P0 =\
+    \ 641, P1 = 65535, P2 = 65537, P3 = 6700417;\n    static constexpr int iv10 =\
+    \ 40691, iv21 = 32768, iv20 = 45242,\n                         iv32 = 3317441,\
+    \ iv31 = 3350208, iv30 = 3883315;\n    int a0 = bsgs<651, 26>(pow(A, 0x663d80ff99c27f),\
+    \ pow(B, 0x663d80ff99c27f));\n    if (a0 == -1) return u64(-1);\n    int a1 =\
+    \ log16(pow(A, 0x1000100010001), pow(B, 0x1000100010001));\n    if (a1 == -1)\
+    \ return u64(-1);\n    int a2 = bsgs<65547, 257>(pow(A, 0xffff0000ffff), pow(B,\
+    \ 0xffff0000ffff));\n    if (a2 == -1) return u64(-1);\n    int a3 = bsgs<6700427,\
+    \ 2589>(pow(A, 0x280fffffd7f), pow(B, 0x280fffffd7f));\n    if (a3 == -1) return\
+    \ u64(-1);\n    int x1 = mmul<P1>(mdif<P1>(a1, a0), iv10);\n    int x2 = mdif<P2>(mmul<P2>(mdif<P2>(a2,\
+    \ a0), iv20), mmul<P2>(x1, iv21));\n    int x3 =\n        mdif<P3>(mdif<P3>(mmul<P3>(mdif<P3>(a3,\
+    \ a0), iv30), mmul<P3>(x1, iv31)),\n                 mmul<P3>(x2, iv32));\n  \
+    \  return u64(P0) * (u64(P1) * (u64(P2) * x3 + x2) + x1) + a0;\n  }\n  u64 x;\n\
+    \n public:\n  static inline void init(u32 x = 0, u32 y = 0) {\n    constexpr u16\
+    \ f2n[16] = {\n        0x0001u, 0x2827u, 0x392bu, 0x8000u, 0x20fdu, 0x4d1du, 0xde4au,\
+    \ 0x0a17u,\n        0x3464u, 0xe3a9u, 0x6d8du, 0x34bcu, 0xa921u, 0xa173u, 0x0ebcu,\
+    \ 0x0e69u};\n    for (int i = pw[0] = pw[65535] = 1; i < 65535; ++i)\n      pw[i]\
+    \ = (pw[i - 1] << 1) ^ (0x1681fu & (-(pw[i - 1] >= 0x8000u)));\n    for (int i\
+    \ = 1; i < 65535; ln[pw[i] = y] = i, i++)\n      for (x = pw[i], y = 0; x; x &=\
+    \ x - 1) y ^= f2n[__builtin_ctz(x)];\n  }\n  Nimber(u64 x_ = 0) : x(x_) {}\n \
+    \ Nimber &operator+=(const Nimber &r) { return x ^= r.x, *this; }\n  Nimber &operator-=(const\
+    \ Nimber &r) { return x ^= r.x, *this; }\n  Nimber &operator*=(const Nimber &r)\
+    \ { return x = mul(x, r.x), *this; }\n  Nimber &operator/=(const Nimber &r) {\
+    \ return x = mul(x, inv(r.x)), *this; }\n  Nimber operator+(const Nimber &r) const\
+    \ { return Nimber(x ^ r.x); }\n  Nimber operator-(const Nimber &r) const { return\
+    \ Nimber(x ^ r.x); }\n  Nimber operator*(const Nimber &r) const { return Nimber(mul(x,\
+    \ r.x)); }\n  Nimber operator/(const Nimber &r) const { return Nimber(mul(x, inv(r.x)));\
+    \ }\n  Nimber inv() const { return Nimber(inv(x)); }\n  Nimber square() const\
+    \ { return Nimber(square(x)); }\n  Nimber sqrt() const {\n    u16 a0 = u16(x),\
+    \ a1 = u16(x >> 16), a2 = u16(x >> 32), a3 = x >> 48;\n    a1 ^= half(a3 ^ a2),\
+    \ a2 ^= half(a3), a0 ^= half(a1) ^ half<6>(a3);\n    return Nimber((u64(sqrt(a3))\
+    \ << 48) | (u64(sqrt(a2)) << 32) |\n                  (u32(sqrt(a1)) << 16) |\
+    \ sqrt(a0));\n  }\n  u64 val() const { return x; }\n  Nimber pow(u64 k) const\
+    \ { return Nimber(pow(x, k)); }\n  u64 log(const Nimber &r) const { return log(x,\
+    \ r.x); }\n  bool operator==(const Nimber &r) const { return x == r.x; }\n  bool\
+    \ operator!=(const Nimber &r) const { return x != r.x; }\n  bool operator<(const\
+    \ Nimber &r) const { return x < r.x; }\n  bool operator>(const Nimber &r) const\
+    \ { return x > r.x; }\n  bool operator<=(const Nimber &r) const { return x <=\
+    \ r.x; }\n  bool operator>=(const Nimber &r) const { return x >= r.x; }\n  friend\
+    \ std::ostream &operator<<(std::ostream &os, const Nimber &r) {\n    return os\
+    \ << r.x;\n  }\n  friend std::istream &operator>>(std::istream &is, Nimber &r)\
+    \ {\n    return is >> r.x, is;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Nimber $\\mathbb{F}_{2^{64}}$\n\
     \ * @category \u6570\u5B66\n * @see https://en.wikipedia.org/wiki/Nimber\n * @see\
     \ https://natsugiri.hatenablog.com/entry/2020/03/29/073605\n */\n// verify\u7528\
@@ -177,53 +178,54 @@ data:
     \ mul(y, x), big = mul(big, x);\n    for (int step = 0; step < pa; step += mid)\
     \ {\n      now = mul(now, big);\n      if (auto it = memo.find(now); it != memo.end())\n\
     \        return (step + mid) - it->second;\n    }\n    return -1;\n  }\n  static\
-    \ inline u64 log(u64 A, u64 B) {\n    if (B == 1) return 0;\n    if (!A) return\
-    \ B == 0 ? 1 : u64(-1);\n    static constexpr int P0 = 641, P1 = 65535, P2 = 65537,\
-    \ P3 = 6700417;\n    static constexpr int iv10 = 40691, iv21 = 32768, iv20 = 45242,\n\
-    \                         iv32 = 3317441, iv31 = 3350208, iv30 = 3883315;\n  \
-    \  int a0 = bsgs<651, 26>(pow(A, 0x663d80ff99c27f), pow(B, 0x663d80ff99c27f));\n\
-    \    if (a0 == -1) return u64(-1);\n    int a1 = log16(pow(A, 0x1000100010001),\
-    \ pow(B, 0x1000100010001));\n    if (a1 == -1) return u64(-1);\n    int a2 = bsgs<65547,\
-    \ 257>(pow(A, 0xffff0000ffff), pow(B, 0xffff0000ffff));\n    if (a2 == -1) return\
-    \ u64(-1);\n    int a3 = bsgs<6700427, 2589>(pow(A, 0x280fffffd7f), pow(B, 0x280fffffd7f));\n\
-    \    if (a3 == -1) return u64(-1);\n    int x1 = mmul<P1>(mdif<P1>(a1, a0), iv10);\n\
-    \    int x2 = mdif<P2>(mmul<P2>(mdif<P2>(a2, a0), iv20), mmul<P2>(x1, iv21));\n\
-    \    int x3 =\n        mdif<P3>(mdif<P3>(mmul<P3>(mdif<P3>(a3, a0), iv30), mmul<P3>(x1,\
-    \ iv31)),\n                 mmul<P3>(x2, iv32));\n    return u64(P0) * (u64(P1)\
-    \ * (u64(P2) * x3 + x2) + x1) + a0;\n  }\n  u64 x;\n\n public:\n  static inline\
-    \ void init(u32 x = 0, u32 y = 0) {\n    constexpr u16 f2n[16] = {\n        0x0001u,\
-    \ 0x2827u, 0x392bu, 0x8000u, 0x20fdu, 0x4d1du, 0xde4au, 0x0a17u,\n        0x3464u,\
-    \ 0xe3a9u, 0x6d8du, 0x34bcu, 0xa921u, 0xa173u, 0x0ebcu, 0x0e69u};\n    for (int\
-    \ i = pw[0] = pw[65535] = 1; i < 65535; ++i)\n      pw[i] = (pw[i - 1] << 1) ^\
-    \ (0x1681fu & (-(pw[i - 1] >= 0x8000u)));\n    for (int i = 1; i < 65535; ln[pw[i]\
-    \ = y] = i, i++)\n      for (x = pw[i], y = 0; x; x &= x - 1) y ^= f2n[__builtin_ctz(x)];\n\
-    \  }\n  Nimber(u64 x_ = 0) : x(x_) {}\n  Nimber &operator+=(const Nimber &r) {\
-    \ return x ^= r.x, *this; }\n  Nimber &operator-=(const Nimber &r) { return x\
-    \ ^= r.x, *this; }\n  Nimber &operator*=(const Nimber &r) { return x = mul(x,\
-    \ r.x), *this; }\n  Nimber &operator/=(const Nimber &r) { return x = mul(x, inv(r.x)),\
-    \ *this; }\n  Nimber operator+(const Nimber &r) const { return Nimber(x ^ r.x);\
-    \ }\n  Nimber operator-(const Nimber &r) const { return Nimber(x ^ r.x); }\n \
-    \ Nimber operator*(const Nimber &r) const { return Nimber(mul(x, r.x)); }\n  Nimber\
-    \ operator/(const Nimber &r) const { return Nimber(mul(x, inv(r.x))); }\n  Nimber\
-    \ inv() const { return Nimber(inv(x)); }\n  Nimber square() const { return Nimber(square(x));\
-    \ }\n  Nimber sqrt() const {\n    u16 a0 = u16(x), a1 = u16(x >> 16), a2 = u16(x\
-    \ >> 32), a3 = x >> 48;\n    a1 ^= half(a3 ^ a2), a2 ^= half(a3), a0 ^= half(a1)\
-    \ ^ half<6>(a3);\n    return Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) <<\
-    \ 32) |\n                  (u32(sqrt(a1)) << 16) | sqrt(a0));\n  }\n  u64 val()\
-    \ const { return x; }\n  Nimber pow(u64 k) const { return Nimber(pow(x, k)); }\n\
-    \  u64 log(const Nimber &r) const { return log(x, r.x); }\n  bool operator==(const\
-    \ Nimber &r) const { return x == r.x; }\n  bool operator!=(const Nimber &r) const\
-    \ { return x != r.x; }\n  bool operator<(const Nimber &r) const { return x < r.x;\
-    \ }\n  bool operator>(const Nimber &r) const { return x > r.x; }\n  bool operator<=(const\
-    \ Nimber &r) const { return x <= r.x; }\n  bool operator>=(const Nimber &r) const\
-    \ { return x >= r.x; }\n  friend std::ostream &operator<<(std::ostream &os, const\
-    \ Nimber &r) {\n    return os << r.x;\n  }\n  friend std::istream &operator>>(std::istream\
-    \ &is, Nimber &r) {\n    return is >> r.x, is;\n  }\n};\n"
+    \ inline u64 log(u64 A, u64 B) {\n    if (B == 1) return 0;\n    if (!A && !B)\
+    \ return 1;\n    if (!A || !B) return u64(-1);\n    static constexpr int P0 =\
+    \ 641, P1 = 65535, P2 = 65537, P3 = 6700417;\n    static constexpr int iv10 =\
+    \ 40691, iv21 = 32768, iv20 = 45242,\n                         iv32 = 3317441,\
+    \ iv31 = 3350208, iv30 = 3883315;\n    int a0 = bsgs<651, 26>(pow(A, 0x663d80ff99c27f),\
+    \ pow(B, 0x663d80ff99c27f));\n    if (a0 == -1) return u64(-1);\n    int a1 =\
+    \ log16(pow(A, 0x1000100010001), pow(B, 0x1000100010001));\n    if (a1 == -1)\
+    \ return u64(-1);\n    int a2 = bsgs<65547, 257>(pow(A, 0xffff0000ffff), pow(B,\
+    \ 0xffff0000ffff));\n    if (a2 == -1) return u64(-1);\n    int a3 = bsgs<6700427,\
+    \ 2589>(pow(A, 0x280fffffd7f), pow(B, 0x280fffffd7f));\n    if (a3 == -1) return\
+    \ u64(-1);\n    int x1 = mmul<P1>(mdif<P1>(a1, a0), iv10);\n    int x2 = mdif<P2>(mmul<P2>(mdif<P2>(a2,\
+    \ a0), iv20), mmul<P2>(x1, iv21));\n    int x3 =\n        mdif<P3>(mdif<P3>(mmul<P3>(mdif<P3>(a3,\
+    \ a0), iv30), mmul<P3>(x1, iv31)),\n                 mmul<P3>(x2, iv32));\n  \
+    \  return u64(P0) * (u64(P1) * (u64(P2) * x3 + x2) + x1) + a0;\n  }\n  u64 x;\n\
+    \n public:\n  static inline void init(u32 x = 0, u32 y = 0) {\n    constexpr u16\
+    \ f2n[16] = {\n        0x0001u, 0x2827u, 0x392bu, 0x8000u, 0x20fdu, 0x4d1du, 0xde4au,\
+    \ 0x0a17u,\n        0x3464u, 0xe3a9u, 0x6d8du, 0x34bcu, 0xa921u, 0xa173u, 0x0ebcu,\
+    \ 0x0e69u};\n    for (int i = pw[0] = pw[65535] = 1; i < 65535; ++i)\n      pw[i]\
+    \ = (pw[i - 1] << 1) ^ (0x1681fu & (-(pw[i - 1] >= 0x8000u)));\n    for (int i\
+    \ = 1; i < 65535; ln[pw[i] = y] = i, i++)\n      for (x = pw[i], y = 0; x; x &=\
+    \ x - 1) y ^= f2n[__builtin_ctz(x)];\n  }\n  Nimber(u64 x_ = 0) : x(x_) {}\n \
+    \ Nimber &operator+=(const Nimber &r) { return x ^= r.x, *this; }\n  Nimber &operator-=(const\
+    \ Nimber &r) { return x ^= r.x, *this; }\n  Nimber &operator*=(const Nimber &r)\
+    \ { return x = mul(x, r.x), *this; }\n  Nimber &operator/=(const Nimber &r) {\
+    \ return x = mul(x, inv(r.x)), *this; }\n  Nimber operator+(const Nimber &r) const\
+    \ { return Nimber(x ^ r.x); }\n  Nimber operator-(const Nimber &r) const { return\
+    \ Nimber(x ^ r.x); }\n  Nimber operator*(const Nimber &r) const { return Nimber(mul(x,\
+    \ r.x)); }\n  Nimber operator/(const Nimber &r) const { return Nimber(mul(x, inv(r.x)));\
+    \ }\n  Nimber inv() const { return Nimber(inv(x)); }\n  Nimber square() const\
+    \ { return Nimber(square(x)); }\n  Nimber sqrt() const {\n    u16 a0 = u16(x),\
+    \ a1 = u16(x >> 16), a2 = u16(x >> 32), a3 = x >> 48;\n    a1 ^= half(a3 ^ a2),\
+    \ a2 ^= half(a3), a0 ^= half(a1) ^ half<6>(a3);\n    return Nimber((u64(sqrt(a3))\
+    \ << 48) | (u64(sqrt(a2)) << 32) |\n                  (u32(sqrt(a1)) << 16) |\
+    \ sqrt(a0));\n  }\n  u64 val() const { return x; }\n  Nimber pow(u64 k) const\
+    \ { return Nimber(pow(x, k)); }\n  u64 log(const Nimber &r) const { return log(x,\
+    \ r.x); }\n  bool operator==(const Nimber &r) const { return x == r.x; }\n  bool\
+    \ operator!=(const Nimber &r) const { return x != r.x; }\n  bool operator<(const\
+    \ Nimber &r) const { return x < r.x; }\n  bool operator>(const Nimber &r) const\
+    \ { return x > r.x; }\n  bool operator<=(const Nimber &r) const { return x <=\
+    \ r.x; }\n  bool operator>=(const Nimber &r) const { return x >= r.x; }\n  friend\
+    \ std::ostream &operator<<(std::ostream &os, const Nimber &r) {\n    return os\
+    \ << r.x;\n  }\n  friend std::istream &operator>>(std::istream &is, Nimber &r)\
+    \ {\n    return is >> r.x, is;\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/Nimber.hpp
   requiredBy: []
-  timestamp: '2022-10-25 18:49:08+09:00'
+  timestamp: '2022-10-28 11:51:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/unit_test/nimber_inv.test.cpp

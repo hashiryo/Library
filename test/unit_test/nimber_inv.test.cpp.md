@@ -71,10 +71,10 @@ data:
     \ += mid) {\n      now = mul(now, big);\n      if (auto it = memo.find(now); it\
     \ != memo.end())\n        return (step + mid) - it->second;\n    }\n    return\
     \ -1;\n  }\n  static inline u64 log(u64 A, u64 B) {\n    if (B == 1) return 0;\n\
-    \    if (!A) return B == 0 ? 1 : u64(-1);\n    static constexpr int P0 = 641,\
-    \ P1 = 65535, P2 = 65537, P3 = 6700417;\n    static constexpr int iv10 = 40691,\
-    \ iv21 = 32768, iv20 = 45242,\n                         iv32 = 3317441, iv31 =\
-    \ 3350208, iv30 = 3883315;\n    int a0 = bsgs<651, 26>(pow(A, 0x663d80ff99c27f),\
+    \    if (!A && !B) return 1;\n    if (!A || !B) return u64(-1);\n    static constexpr\
+    \ int P0 = 641, P1 = 65535, P2 = 65537, P3 = 6700417;\n    static constexpr int\
+    \ iv10 = 40691, iv21 = 32768, iv20 = 45242,\n                         iv32 = 3317441,\
+    \ iv31 = 3350208, iv30 = 3883315;\n    int a0 = bsgs<651, 26>(pow(A, 0x663d80ff99c27f),\
     \ pow(B, 0x663d80ff99c27f));\n    if (a0 == -1) return u64(-1);\n    int a1 =\
     \ log16(pow(A, 0x1000100010001), pow(B, 0x1000100010001));\n    if (a1 == -1)\
     \ return u64(-1);\n    int a2 = bsgs<65547, 257>(pow(A, 0xffff0000ffff), pow(B,\
@@ -136,7 +136,7 @@ data:
   isVerificationFile: true
   path: test/unit_test/nimber_inv.test.cpp
   requiredBy: []
-  timestamp: '2022-10-25 18:49:08+09:00'
+  timestamp: '2022-10-28 11:51:38+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/nimber_inv.test.cpp
