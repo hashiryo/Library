@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/matroid_intersection.hpp
     title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/problems/GRL_2_B
@@ -103,8 +103,8 @@ data:
     \nint main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, M, r;\n\
     \  cin >> N >> M >> r;\n  GraphicMatroid M1(N);\n  vector<int> w(M);\n  vector<vector<int>>\
     \ parts(N);\n  for (int i = 0; i < M; i++) {\n    int s, t;\n    cin >> s >> t\
-    \ >> w[i];\n    M1.add_edge(s, t);\n    parts[t].push_back(i);\n  }\n  PartitionMatroid\
-    \ M2(M, parts, vector<int>(N, 1));\n  auto S = weighted_matroid_intersection<-1>(M,\
+    \ >> w[i];\n    M1.add_edge(s, t);\n    parts[t].push_back(i);\n  }\n  vector<int>\
+    \ R(N, 1);\n  R[r] = 0;\n  PartitionMatroid M2(M, parts, R);\n  auto S = weighted_matroid_intersection<-1>(M,\
     \ M1, M2, w);\n  int ans = 0;\n  for (int e : S[N - 1]) ans += w[e];\n  cout <<\
     \ ans << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/GRL_2_B\"\n//\
@@ -114,16 +114,17 @@ data:
     \  int N, M, r;\n  cin >> N >> M >> r;\n  GraphicMatroid M1(N);\n  vector<int>\
     \ w(M);\n  vector<vector<int>> parts(N);\n  for (int i = 0; i < M; i++) {\n  \
     \  int s, t;\n    cin >> s >> t >> w[i];\n    M1.add_edge(s, t);\n    parts[t].push_back(i);\n\
-    \  }\n  PartitionMatroid M2(M, parts, vector<int>(N, 1));\n  auto S = weighted_matroid_intersection<-1>(M,\
-    \ M1, M2, w);\n  int ans = 0;\n  for (int e : S[N - 1]) ans += w[e];\n  cout <<\
-    \ ans << '\\n';\n  return 0;\n}"
+    \  }\n  vector<int> R(N, 1);\n  R[r] = 0;\n  PartitionMatroid M2(M, parts, R);\n\
+    \  auto S = weighted_matroid_intersection<-1>(M, M1, M2, w);\n  int ans = 0;\n\
+    \  for (int e : S[N - 1]) ans += w[e];\n  cout << ans << '\\n';\n  return 0;\n\
+    }"
   dependsOn:
   - src/Optimization/matroid_intersection.hpp
   isVerificationFile: true
   path: test/aoj/GRL_2_B.matroid_intersection.test.cpp
   requiredBy: []
-  timestamp: '2022-10-28 11:51:38+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-10-28 12:41:25+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_2_B.matroid_intersection.test.cpp
 layout: document

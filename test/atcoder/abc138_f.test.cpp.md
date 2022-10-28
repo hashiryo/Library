@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -140,7 +140,8 @@ data:
     \ B::Uint, uint32_t>, u64, u128>;\n  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr\
     \ ModInt_Na() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt_Na(T n) : ModInt_Na(n.val()) {}\n  template <class\
-    \ T>\n  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
+    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
+    \  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
     \ {}\n#define ASSIGN(m, p) return x m## = B::mod & -((x p## = r.x) >= B::mod),\
     \ *this\n  constexpr ModInt_Na &operator+=(const ModInt_Na &r) { ASSIGN(-, +);\
     \ }\n  constexpr ModInt_Na &operator-=(const ModInt_Na &r) { ASSIGN(+, -); }\n\
@@ -152,7 +153,8 @@ data:
     \  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n  constexpr\
     \ ModInt_Mon() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n  template\
-    \ <class T>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
+    \ <class T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t>\
+    \ = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
     \ % B::mod) : n % B::mod, B::r2)) {}\n#define ASGN(op, a) return x op## = a, x\
     \ += (B::mod << 1) & -(x >> 63), *this\n  constexpr mod_t &operator+=(const mod_t\
     \ &r) { ASGN(+, r.x - (B::mod << 1)); }\n  constexpr mod_t &operator-=(const mod_t\
@@ -225,7 +227,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc138_f.test.cpp
   requiredBy: []
-  timestamp: '2022-10-25 18:49:08+09:00'
+  timestamp: '2022-10-28 12:41:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc138_f.test.cpp

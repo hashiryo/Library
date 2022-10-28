@@ -109,22 +109,22 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
   - icon: ':x:'
@@ -365,7 +365,8 @@ data:
     \ B::Uint, uint32_t>, u64, u128>;\n  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr\
     \ ModInt_Na() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt_Na(T n) : ModInt_Na(n.val()) {}\n  template <class\
-    \ T>\n  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
+    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
+    \  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
     \ {}\n#define ASSIGN(m, p) return x m## = B::mod & -((x p## = r.x) >= B::mod),\
     \ *this\n  constexpr ModInt_Na &operator+=(const ModInt_Na &r) { ASSIGN(-, +);\
     \ }\n  constexpr ModInt_Na &operator-=(const ModInt_Na &r) { ASSIGN(+, -); }\n\
@@ -377,7 +378,8 @@ data:
     \  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n  constexpr\
     \ ModInt_Mon() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n  template\
-    \ <class T>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
+    \ <class T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t>\
+    \ = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
     \ % B::mod) : n % B::mod, B::r2)) {}\n#define ASGN(op, a) return x op## = a, x\
     \ += (B::mod << 1) & -(x >> 63), *this\n  constexpr mod_t &operator+=(const mod_t\
     \ &r) { ASGN(+, r.x - (B::mod << 1)); }\n  constexpr mod_t &operator-=(const mod_t\
@@ -438,7 +440,8 @@ data:
     \ B::Uint, uint32_t>, u64, u128>;\n  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr\
     \ ModInt_Na() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt_Na(T n) : ModInt_Na(n.val()) {}\n  template <class\
-    \ T>\n  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
+    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
+    \  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
     \ {}\n#define ASSIGN(m, p) return x m## = B::mod & -((x p## = r.x) >= B::mod),\
     \ *this\n  constexpr ModInt_Na &operator+=(const ModInt_Na &r) { ASSIGN(-, +);\
     \ }\n  constexpr ModInt_Na &operator-=(const ModInt_Na &r) { ASSIGN(+, -); }\n\
@@ -450,7 +453,8 @@ data:
     \  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n  constexpr\
     \ ModInt_Mon() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n  template\
-    \ <class T>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
+    \ <class T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t>\
+    \ = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
     \ % B::mod) : n % B::mod, B::r2)) {}\n#define ASGN(op, a) return x op## = a, x\
     \ += (B::mod << 1) & -(x >> 63), *this\n  constexpr mod_t &operator+=(const mod_t\
     \ &r) { ASGN(+, r.x - (B::mod << 1)); }\n  constexpr mod_t &operator-=(const mod_t\
@@ -502,7 +506,7 @@ data:
   - src/FFT/convolve.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/MultiVariateConvolution.hpp
-  timestamp: '2022-10-25 18:49:08+09:00'
+  timestamp: '2022-10-28 12:41:25+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/3046.test.cpp

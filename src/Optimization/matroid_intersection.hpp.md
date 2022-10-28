@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1605.matroid_intersection.test.cpp
     title: test/aoj/1605.matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.matroid_intersection.test.cpp
     title: test/aoj/GRL_2_B.matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
@@ -15,9 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.matroid_intersection.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
     links:
@@ -192,7 +192,7 @@ data:
   path: src/Optimization/matroid_intersection.hpp
   requiredBy: []
   timestamp: '2022-10-28 11:51:38+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/GRL_7_A.matroid_intersection.test.cpp
   - test/aoj/GRL_2_B.matroid_intersection.test.cpp
