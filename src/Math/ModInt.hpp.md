@@ -62,8 +62,17 @@ data:
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2614.rollinghash.test.cpp
+    title: test/aoj/2614.rollinghash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2711.rollinghash.test.cpp
+    title: test/aoj/2711.rollinghash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+    title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
@@ -100,7 +109,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':x:'
@@ -275,6 +284,9 @@ data:
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
   - icon: ':x:'
+    path: test/yosupo/z_algorithm.rollinghash.test.cpp
+    title: test/yosupo/z_algorithm.rollinghash.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
   - icon: ':x:'
@@ -310,6 +322,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/650.LCT.test.cpp
+    title: test/yukicoder/650.LCT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
@@ -357,36 +372,37 @@ data:
     \ 1)) return ret;\n  }\n  constexpr D inv() const {\n    typename D::Int x = 1,\
     \ y = 0, a = ((D *)this)->val(), b = D::mod;\n    for (typename D::Int q = 0,\
     \ z = 0, c = 0; b;)\n      z = x, c = a, x = y, y = z - y * (q = a / b), a = b,\
-    \ b = c - b * q;\n    return assert(a == 1), D(x);\n  }\n  friend ostream &operator<<(ostream\
-    \ &os, const D &r) { return os << r.val(); }\n  friend istream &operator>>(istream\
-    \ &is, D &r) {\n    long long v;\n    return is >> v, r = D(v), is;\n  }\n};\n\
-    template <class B>\nstruct ModInt_Na : public B, public ModIntImpl<ModInt_Na<B>>\
-    \ {\n  using Int = typename B::Int;\n  using DUint = conditional_t<is_same_v<typename\
-    \ B::Uint, uint32_t>, u64, u128>;\n  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr\
-    \ ModInt_Na() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
-    \ = nullptr>\n  constexpr ModInt_Na(T n) : ModInt_Na(n.val()) {}\n  template <class\
-    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
-    \  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
-    \ {}\n#define ASSIGN(m, p) return x m## = B::mod & -((x p## = r.x) >= B::mod),\
-    \ *this\n  constexpr ModInt_Na &operator+=(const ModInt_Na &r) { ASSIGN(-, +);\
-    \ }\n  constexpr ModInt_Na &operator-=(const ModInt_Na &r) { ASSIGN(+, -); }\n\
-    #undef ASSIGN\n  constexpr ModInt_Na &operator*=(const ModInt_Na &r) {\n    return\
-    \ x = (DUint)(x)*r.x % B::mod, *this;\n  }\n  constexpr bool operator==(const\
-    \ ModInt_Na &r) const { return x == r.x; }\n  constexpr auto val() const { return\
-    \ x; }\n\n private:\n  typename B::Uint x = 0;\n};\ntemplate <class B>\nstruct\
-    \ ModInt_Mon : public B, public ModIntImpl<ModInt_Mon<B>> {\n  using Int = int64_t;\n\
-    \  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n  constexpr\
-    \ ModInt_Mon() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
-    \ = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n  template\
-    \ <class T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t>\
-    \ = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
-    \ % B::mod) : n % B::mod, B::r2)) {}\n#define ASGN(op, a) return x op## = a, x\
-    \ += (B::mod << 1) & -(x >> 63), *this\n  constexpr mod_t &operator+=(const mod_t\
-    \ &r) { ASGN(+, r.x - (B::mod << 1)); }\n  constexpr mod_t &operator-=(const mod_t\
-    \ &r) { ASGN(-, r.x); }\n#undef ASGN\n  constexpr mod_t &operator*=(const mod_t\
-    \ &r) { return x = mul(x, r.x), *this; }\n  constexpr bool operator==(const mod_t\
-    \ &r) const { return norm() == r.norm(); }\n  constexpr u64 val() const {\n  \
-    \  u64 ret = reduce(x) - B::mod;\n    return ret + (B::mod & -(ret >> 63));\n\
+    \ b = c - b * q;\n    return assert(a == 1), D(x);\n  }\n  constexpr bool operator<(const\
+    \ D &r) const {\n    return ((D *)this)->val() < r.val();\n  }  // for set or\
+    \ map\n  friend ostream &operator<<(ostream &os, const D &r) { return os << r.val();\
+    \ }\n  friend istream &operator>>(istream &is, D &r) {\n    long long v;\n   \
+    \ return is >> v, r = D(v), is;\n  }\n};\ntemplate <class B>\nstruct ModInt_Na\
+    \ : public B, public ModIntImpl<ModInt_Na<B>> {\n  using Int = typename B::Int;\n\
+    \  using DUint = conditional_t<is_same_v<typename B::Uint, uint32_t>, u64, u128>;\n\
+    \  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr ModInt_Na() = default;\n  template\
+    \ <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n  constexpr ModInt_Na(T\
+    \ n) : ModInt_Na(n.val()) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
+    \ __int128_t>, nullptr_t> = nullptr>\n  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod\
+    \ - ((-n) % B::mod) : n % B::mod) {}\n#define ASSIGN(m, p) return x m## = B::mod\
+    \ & -((x p## = r.x) >= B::mod), *this\n  constexpr ModInt_Na &operator+=(const\
+    \ ModInt_Na &r) { ASSIGN(-, +); }\n  constexpr ModInt_Na &operator-=(const ModInt_Na\
+    \ &r) { ASSIGN(+, -); }\n#undef ASSIGN\n  constexpr ModInt_Na &operator*=(const\
+    \ ModInt_Na &r) {\n    return x = (DUint)(x)*r.x % B::mod, *this;\n  }\n  constexpr\
+    \ bool operator==(const ModInt_Na &r) const { return x == r.x; }\n  constexpr\
+    \ auto val() const { return x; }\n\n private:\n  typename B::Uint x = 0;\n};\n\
+    template <class B>\nstruct ModInt_Mon : public B, public ModIntImpl<ModInt_Mon<B>>\
+    \ {\n  using Int = int64_t;\n  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n\
+    \  constexpr ModInt_Mon() = default;\n  template <class T, enable_if_t<is_modint_v<T>,\
+    \ nullptr_t> = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n\
+    \  template <class T,\n            enable_if_t<is_convertible_v<T, __int128_t>,\
+    \ nullptr_t> = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod\
+    \ - ((-n) % B::mod) : n % B::mod, B::r2)) {}\n#define ASGN(op, a) return x op##\
+    \ = a, x += (B::mod << 1) & -(x >> 63), *this\n  constexpr mod_t &operator+=(const\
+    \ mod_t &r) { ASGN(+, r.x - (B::mod << 1)); }\n  constexpr mod_t &operator-=(const\
+    \ mod_t &r) { ASGN(-, r.x); }\n#undef ASGN\n  constexpr mod_t &operator*=(const\
+    \ mod_t &r) { return x = mul(x, r.x), *this; }\n  constexpr bool operator==(const\
+    \ mod_t &r) const { return norm() == r.norm(); }\n  constexpr u64 val() const\
+    \ {\n    u64 ret = reduce(x) - B::mod;\n    return ret + (B::mod & -(ret >> 63));\n\
     \  }\n\n private:\n  static constexpr inline u64 reduce(const u128 &w) {\n   \
     \ return u64(w >> 64) + B::mod - ((u128(u64(w) * B::iv) * B::mod) >> 64);\n  }\n\
     \  static constexpr inline u64 mul(u64 l, u64 r) { return reduce(u128(l) * r);\
@@ -432,36 +448,37 @@ data:
     \ ret;\n  }\n  constexpr D inv() const {\n    typename D::Int x = 1, y = 0, a\
     \ = ((D *)this)->val(), b = D::mod;\n    for (typename D::Int q = 0, z = 0, c\
     \ = 0; b;)\n      z = x, c = a, x = y, y = z - y * (q = a / b), a = b, b = c -\
-    \ b * q;\n    return assert(a == 1), D(x);\n  }\n  friend ostream &operator<<(ostream\
-    \ &os, const D &r) { return os << r.val(); }\n  friend istream &operator>>(istream\
-    \ &is, D &r) {\n    long long v;\n    return is >> v, r = D(v), is;\n  }\n};\n\
-    template <class B>\nstruct ModInt_Na : public B, public ModIntImpl<ModInt_Na<B>>\
-    \ {\n  using Int = typename B::Int;\n  using DUint = conditional_t<is_same_v<typename\
-    \ B::Uint, uint32_t>, u64, u128>;\n  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr\
-    \ ModInt_Na() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
-    \ = nullptr>\n  constexpr ModInt_Na(T n) : ModInt_Na(n.val()) {}\n  template <class\
-    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
-    \  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod - ((-n) % B::mod) : n % B::mod)\
-    \ {}\n#define ASSIGN(m, p) return x m## = B::mod & -((x p## = r.x) >= B::mod),\
-    \ *this\n  constexpr ModInt_Na &operator+=(const ModInt_Na &r) { ASSIGN(-, +);\
-    \ }\n  constexpr ModInt_Na &operator-=(const ModInt_Na &r) { ASSIGN(+, -); }\n\
-    #undef ASSIGN\n  constexpr ModInt_Na &operator*=(const ModInt_Na &r) {\n    return\
-    \ x = (DUint)(x)*r.x % B::mod, *this;\n  }\n  constexpr bool operator==(const\
-    \ ModInt_Na &r) const { return x == r.x; }\n  constexpr auto val() const { return\
-    \ x; }\n\n private:\n  typename B::Uint x = 0;\n};\ntemplate <class B>\nstruct\
-    \ ModInt_Mon : public B, public ModIntImpl<ModInt_Mon<B>> {\n  using Int = int64_t;\n\
-    \  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n  constexpr\
-    \ ModInt_Mon() = default;\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
-    \ = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n  template\
-    \ <class T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t>\
-    \ = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod - ((-n)\
-    \ % B::mod) : n % B::mod, B::r2)) {}\n#define ASGN(op, a) return x op## = a, x\
-    \ += (B::mod << 1) & -(x >> 63), *this\n  constexpr mod_t &operator+=(const mod_t\
-    \ &r) { ASGN(+, r.x - (B::mod << 1)); }\n  constexpr mod_t &operator-=(const mod_t\
-    \ &r) { ASGN(-, r.x); }\n#undef ASGN\n  constexpr mod_t &operator*=(const mod_t\
-    \ &r) { return x = mul(x, r.x), *this; }\n  constexpr bool operator==(const mod_t\
-    \ &r) const { return norm() == r.norm(); }\n  constexpr u64 val() const {\n  \
-    \  u64 ret = reduce(x) - B::mod;\n    return ret + (B::mod & -(ret >> 63));\n\
+    \ b * q;\n    return assert(a == 1), D(x);\n  }\n  constexpr bool operator<(const\
+    \ D &r) const {\n    return ((D *)this)->val() < r.val();\n  }  // for set or\
+    \ map\n  friend ostream &operator<<(ostream &os, const D &r) { return os << r.val();\
+    \ }\n  friend istream &operator>>(istream &is, D &r) {\n    long long v;\n   \
+    \ return is >> v, r = D(v), is;\n  }\n};\ntemplate <class B>\nstruct ModInt_Na\
+    \ : public B, public ModIntImpl<ModInt_Na<B>> {\n  using Int = typename B::Int;\n\
+    \  using DUint = conditional_t<is_same_v<typename B::Uint, uint32_t>, u64, u128>;\n\
+    \  friend ModIntImpl<ModInt_Na<B>>;\n  constexpr ModInt_Na() = default;\n  template\
+    \ <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n  constexpr ModInt_Na(T\
+    \ n) : ModInt_Na(n.val()) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
+    \ __int128_t>, nullptr_t> = nullptr>\n  constexpr ModInt_Na(T n) : x(n < 0 ? B::mod\
+    \ - ((-n) % B::mod) : n % B::mod) {}\n#define ASSIGN(m, p) return x m## = B::mod\
+    \ & -((x p## = r.x) >= B::mod), *this\n  constexpr ModInt_Na &operator+=(const\
+    \ ModInt_Na &r) { ASSIGN(-, +); }\n  constexpr ModInt_Na &operator-=(const ModInt_Na\
+    \ &r) { ASSIGN(+, -); }\n#undef ASSIGN\n  constexpr ModInt_Na &operator*=(const\
+    \ ModInt_Na &r) {\n    return x = (DUint)(x)*r.x % B::mod, *this;\n  }\n  constexpr\
+    \ bool operator==(const ModInt_Na &r) const { return x == r.x; }\n  constexpr\
+    \ auto val() const { return x; }\n\n private:\n  typename B::Uint x = 0;\n};\n\
+    template <class B>\nstruct ModInt_Mon : public B, public ModIntImpl<ModInt_Mon<B>>\
+    \ {\n  using Int = int64_t;\n  using mod_t = ModInt_Mon;\n  friend ModIntImpl<ModInt_Mon<B>>;\n\
+    \  constexpr ModInt_Mon() = default;\n  template <class T, enable_if_t<is_modint_v<T>,\
+    \ nullptr_t> = nullptr>\n  constexpr ModInt_Mon(T n) : ModInt_Mon(n.val()) {}\n\
+    \  template <class T,\n            enable_if_t<is_convertible_v<T, __int128_t>,\
+    \ nullptr_t> = nullptr>\n  constexpr ModInt_Mon(T n)\n      : x(mul(n < 0 ? B::mod\
+    \ - ((-n) % B::mod) : n % B::mod, B::r2)) {}\n#define ASGN(op, a) return x op##\
+    \ = a, x += (B::mod << 1) & -(x >> 63), *this\n  constexpr mod_t &operator+=(const\
+    \ mod_t &r) { ASGN(+, r.x - (B::mod << 1)); }\n  constexpr mod_t &operator-=(const\
+    \ mod_t &r) { ASGN(-, r.x); }\n#undef ASGN\n  constexpr mod_t &operator*=(const\
+    \ mod_t &r) { return x = mul(x, r.x), *this; }\n  constexpr bool operator==(const\
+    \ mod_t &r) const { return norm() == r.norm(); }\n  constexpr u64 val() const\
+    \ {\n    u64 ret = reduce(x) - B::mod;\n    return ret + (B::mod & -(ret >> 63));\n\
     \  }\n\n private:\n  static constexpr inline u64 reduce(const u128 &w) {\n   \
     \ return u64(w >> 64) + B::mod - ((u128(u64(w) * B::iv) * B::mod) >> 64);\n  }\n\
     \  static constexpr inline u64 mul(u64 l, u64 r) { return reduce(u128(l) * r);\
@@ -506,13 +523,14 @@ data:
   - src/FFT/convolve.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/MultiVariateConvolution.hpp
-  timestamp: '2022-10-28 12:41:25+09:00'
+  timestamp: '2022-10-29 19:15:23+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/3046.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/215.Poly.test.cpp
@@ -528,18 +546,21 @@ data:
   - test/yukicoder/42.test.cpp
   - test/yukicoder/658.test.cpp
   - test/yukicoder/665.test.cpp
+  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_C.test.cpp
   - test/aoj/DPL_5_F.test.cpp
   - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/DPL_5_E.test.cpp
+  - test/aoj/2711.rollinghash.test.cpp
   - test/aoj/NTL_2_F.test.cpp
   - test/aoj/NTL_2_B.test.cpp
   - test/aoj/0168.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
   - test/aoj/2397.test.cpp
   - test/aoj/DPL_5_B.test.cpp
+  - test/aoj/2614.rollinghash.test.cpp
   - test/aoj/DPL_5_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp
   - test/aoj/2530.test.cpp
@@ -556,6 +577,7 @@ data:
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
+  - test/yosupo/z_algorithm.rollinghash.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp

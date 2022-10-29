@@ -13,23 +13,22 @@ data:
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
-  bundledCode: "#line 1 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n\
-    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
-    \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
-    \ {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
-    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
-    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
-    \ <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
+    - https://judge.yosupo.jp/problem/zalgorithm
+  bundledCode: "#line 1 \"test/yosupo/z_algorithm.rollinghash.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n#include <bits/stdc++.h>\n\
+    \n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\
+    \n */\n\n// BEGIN CUT HERE\nnamespace modint_internal {\nusing namespace std;\n\
+    struct modint_base {};\nstruct sta_mint_base : modint_base {};\nstruct dyn_mint_base\
+    \ : modint_base {};\ntemplate <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base,\
+    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
+    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
     \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
@@ -146,36 +145,36 @@ data:
     \ r) const { return SubString{this, l, r}; }\n};\n\nstd::uint64_t get_rand(std::uint64_t\
     \ l, std::uint64_t r) {\n  static std::mt19937_64 gen(std::random_device{}());\n\
     \  return std::uniform_int_distribution<std::uint64_t>(l, r)(gen);\n}\n#line 7\
-    \ \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\nusing namespace std;\n\nsigned\
+    \ \"test/yosupo/z_algorithm.rollinghash.test.cpp\"\nusing namespace std;\n\nsigned\
     \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<(1ll\
     \ << 61) - 1>;\n  using K = CartesianProduct<Mint, Mint>;\n  using RH = RollingHash<K>;\n\
     \  K base = {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll << 61) - 2)};\n  RH::set_base(base);\n\
-    \  string T, P;\n  cin >> T >> P;\n  RH rt(T), rp(P);\n  int N = P.length(), M\
-    \ = T.length();\n  auto hash = rp.get_hash();\n  for (int i = 0; i + N <= M; i++)\n\
-    \    if (rt.get_hash(i, i + N) == hash) cout << i << \"\\n\";\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\
+    \  string S;\n  cin >> S;\n  RH rh(S);\n  int N = S.length();\n  for (int i =\
+    \ 0; i < N; i++) {\n    cout << lcp(rh, rh.sub(i, N)) << \" \\n\"[i == N - 1];\n\
+    \  }\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n#include\
+    \ <bits/stdc++.h>\n\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\
     \n#include \"src/String/RollingHash.hpp\"\nusing namespace std;\n\nsigned main()\
     \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<(1ll\
     \ << 61) - 1>;\n  using K = CartesianProduct<Mint, Mint>;\n  using RH = RollingHash<K>;\n\
     \  K base = {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll << 61) - 2)};\n  RH::set_base(base);\n\
-    \  string T, P;\n  cin >> T >> P;\n  RH rt(T), rp(P);\n  int N = P.length(), M\
-    \ = T.length();\n  auto hash = rp.get_hash();\n  for (int i = 0; i + N <= M; i++)\n\
-    \    if (rt.get_hash(i, i + N) == hash) cout << i << \"\\n\";\n  return 0;\n}"
+    \  string S;\n  cin >> S;\n  RH rh(S);\n  int N = S.length();\n  for (int i =\
+    \ 0; i < N; i++) {\n    cout << lcp(rh, rh.sub(i, N)) << \" \\n\"[i == N - 1];\n\
+    \  }\n  return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/CartesianProduct.hpp
   - src/String/RollingHash.hpp
   isVerificationFile: true
-  path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+  path: test/yosupo/z_algorithm.rollinghash.test.cpp
   requiredBy: []
   timestamp: '2022-10-29 19:15:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+documentation_of: test/yosupo/z_algorithm.rollinghash.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp
-- /verify/test/aoj/ALDS1_14_B.rollinghash.test.cpp.html
-title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+- /verify/test/yosupo/z_algorithm.rollinghash.test.cpp
+- /verify/test/yosupo/z_algorithm.rollinghash.test.cpp.html
+title: test/yosupo/z_algorithm.rollinghash.test.cpp
 ---

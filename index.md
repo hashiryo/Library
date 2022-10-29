@@ -212,7 +212,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/LUDecomposition.hpp
       title: "LU\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
     - icon: ':question:'
@@ -229,6 +229,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
+    - icon: ':question:'
+      path: src/Math/CartesianProduct.hpp
+      title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
+        times K_n$)"
     - icon: ':question:'
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069"
@@ -247,7 +251,7 @@ data:
     - icon: ':x:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':question:'
@@ -325,13 +329,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/KnuthMorrisPratt.hpp
       title: Knuth-Morris-Pratt
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
     - icon: ':heavy_check_mark:'
       path: src/String/SuffixArray.hpp
       title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
   verificationCategories:
@@ -470,6 +474,9 @@ data:
       path: test/aoj/2587.test.cpp
       title: test/aoj/2587.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/2614.rollinghash.test.cpp
+      title: test/aoj/2614.rollinghash.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
     - icon: ':heavy_check_mark:'
@@ -490,6 +497,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2674.WM.test.cpp
       title: test/aoj/2674.WM.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2711.rollinghash.test.cpp
+      title: test/aoj/2711.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2803.Dinic.test.cpp
       title: test/aoj/2803.Dinic.test.cpp
@@ -756,7 +766,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc208_e.test.cpp
       title: test/atcoder/abc208_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
     - icon: ':x:'
@@ -777,7 +787,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
     - icon: ':x:'
@@ -1107,7 +1117,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/two_sat.test.cpp
       title: test/yosupo/two_sat.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: test/yosupo/z_algorithm.rollinghash.test.cpp
+      title: test/yosupo/z_algorithm.rollinghash.test.cpp
+    - icon: ':x:'
       path: test/yosupo/z_algorithm.test.cpp
       title: test/yosupo/z_algorithm.test.cpp
   - name: test/yukicoder
@@ -1127,7 +1140,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
     - icon: ':x:'
@@ -1187,6 +1200,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/650.LCT.test.cpp
+      title: test/yukicoder/650.LCT.test.cpp
     - icon: ':x:'
       path: test/yukicoder/658.test.cpp
       title: test/yukicoder/658.test.cpp

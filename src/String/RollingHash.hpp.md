@@ -4,109 +4,90 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2614.rollinghash.test.cpp
+    title: test/aoj/2614.rollinghash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2711.rollinghash.test.cpp
+    title: test/aoj/2711.rollinghash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yosupo/z_algorithm.rollinghash.test.cpp
+    title: test/yosupo/z_algorithm.rollinghash.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Rolling-Hash
     links:
-    - https://atcoder.jp/contests/arc050/tasks/arc050_d
-    - https://qiita.com/keymoon/items/11fac5627672a6d6a9f6
+    - https://atcoder.jp/contests/abc274/tasks/abc274_h
   bundledCode: "#line 2 \"src/String/RollingHash.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title Rolling-Hash\n * @category \u6587\u5B57\u5217\n *  Mod \u306F\u3000\
-    2^61-1 \u3067\u56FA\u5B9A\n * @see https://qiita.com/keymoon/items/11fac5627672a6d6a9f6\n\
-    \ */\n\n// lcp verify https://atcoder.jp/contests/arc050/tasks/arc050_d\n\n//\
-    \ BEGIN CUT HERE\n\nstruct RollingHash {\n private:\n  static constexpr std::uint64_t\
-    \ mod = (1ull << 61ull) - 1;\n  std::vector<std::uint64_t> hash, pw;\n  std::uint64_t\
-    \ base;\n\n private:\n  static inline std::uint64_t add(std::uint64_t a, std::uint64_t\
-    \ b) {\n    if ((a += b) >= mod) a -= mod;\n    return a;\n  }\n  static inline\
-    \ std::uint64_t mul(std::uint64_t a, std::uint64_t b) {\n    __uint128_t c = (__uint128_t)a\
-    \ * b;\n    return add(c >> 61, c & mod);\n  }\n\n public:\n  static inline std::uint64_t\
-    \ generate_base() {\n    std::mt19937_64 mt(\n        std::chrono::steady_clock::now().time_since_epoch().count());\n\
-    \    std::uniform_int_distribution<std::uint64_t> rand(1, RollingHash::mod - 1);\n\
-    \    return rand(mt);\n  }\n\n  RollingHash() = default;\n  RollingHash(const\
-    \ std::string& s, std::uint64_t base)\n      : RollingHash(std::vector<char>(s.begin(),\
-    \ s.end()), base) {}\n  template <typename T>\n  RollingHash(const std::vector<T>&\
-    \ s, std::uint64_t base) : base(base) {\n    hash.assign(s.size() + 1, 0);\n \
-    \   pw.assign(s.size() + 1, 0);\n    pw[0] = 1;\n    for (std::size_t i = 0; i\
-    \ < s.size(); i++) {\n      pw[i + 1] = mul(pw[i], base);\n      hash[i + 1] =\
-    \ add(mul(hash[i], base), s[i]);\n    }\n  }\n  // S[l, r)\n  std::uint64_t get_hash(int\
-    \ l = 0, int r = -1) const {\n    if (r < 0) r = pw.size() - 1;\n    return add(hash[r],\
-    \ mod - mul(hash[l], pw[r - l]));\n  }\n  std::uint64_t combine_hash(std::uint64_t\
-    \ hash1, std::uint64_t hash2,\n                             int hash2len) {\n\
-    \    return add(mul(hash1, pw[hash2len]), hash2);\n  }\n};\n\ntemplate <std::size_t\
-    \ SIZE>\nstruct RollingHash_MultiBase {\n  using Array = std::array<std::uint64_t,\
-    \ SIZE>;\n  std::array<RollingHash, SIZE> rhs;\n  Array bases;\n  RollingHash_MultiBase()\
-    \ = default;\n  RollingHash_MultiBase(const std::string& s, Array bs)\n      :\
-    \ RollingHash_MultiBase(std::vector<char>(s.begin(), s.end()), bs) {}\n  template\
-    \ <typename T>\n  RollingHash_MultiBase(const std::vector<T>& s, Array bs) : bases(bs)\
-    \ {\n    for (std::size_t i = 0; i < SIZE; i++) rhs[i] = RollingHash(s, bases[i]);\n\
-    \  }\n  Array get_hash(int l, int r) const {\n    Array ret;\n    for (std::size_t\
-    \ i = 0; i < SIZE; i++) ret[i] = rhs[i].get_hash(l, r);\n    return ret;\n  }\n\
-    \  bool equal(int l1, int r1, int l2, int r2) const {\n    return equal(*this,\
-    \ *this, l1, r1, l2, r2);\n  }\n  int lcp(int l1, int r1, int l2, int r2) const\
-    \ {\n    return lcp(*this, *this, l1, r1, l2, r2);\n  }\n  static bool equal(const\
-    \ RollingHash_MultiBase& a,\n                    const RollingHash_MultiBase&\
-    \ b, int l1, int r1, int l2,\n                    int r2) {\n    for (std::size_t\
-    \ i = 0; i < SIZE; i++)\n      if (a.rhs[i].get_hash(l1, r1) != b.rhs[i].get_hash(l2,\
-    \ r2)) return false;\n    return true;\n  }\n  static int lcp(const RollingHash_MultiBase&\
-    \ a, const RollingHash_MultiBase& b,\n                 int l1, int r1, int l2,\
-    \ int r2) {\n    int len = std::min(r1 - l1, r2 - l2);\n    int low = 0, high\
-    \ = len + 1;\n    while (high - low > 1) {\n      int mid = (low + high) / 2;\n\
-    \      if (equal(a, b, l1, l1 + mid, l2, l2 + mid))\n        low = mid;\n    \
-    \  else\n        high = mid;\n    }\n    return low;\n  }\n};\n"
+    /**\n * @title Rolling-Hash\n * @category \u6587\u5B57\u5217\n *  + - * \u304C\
+    \u5B9A\u7FA9\u3055\u308C\u3066\u3044\u308B\u30AF\u30E9\u30B9\u3067hash\u3092\u8A08\
+    \u7B97\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/abc274/tasks/abc274_h\
+    \ (\u6A19\u65702\u306E\u4F53 e.g. Nimber)\n\n// BEGIN CUT HERE\n\ntemplate <class\
+    \ K>\nclass RollingHash {\n  static inline std::vector<K> pw;\n  static inline\
+    \ K base;\n  static inline void set_pw(int n) {\n    if (int m = pw.size(); m\
+    \ < n)\n      for (pw.resize(n); m < n; m++) pw[m] = pw[m - 1] * base;\n  }\n\
+    \  std::vector<K> hash;\n\n public:\n  class SubString {\n    const RollingHash\
+    \ *instance;\n    const int bg, ed;\n\n   public:\n    SubString(const RollingHash\
+    \ &rh)\n        : instance(&rh), bg(0), ed(rh.hash.size()) {}\n    SubString(const\
+    \ RollingHash *i, int b, int e) : instance(i), bg(b), ed(e) {}\n    inline K get_hash(int\
+    \ l = 0, int r = -1) const {\n      return instance->get_hash(bg + l, (r == -1\
+    \ ? ed : bg + r));\n    }\n    friend int lcp(const SubString &l, const SubString\
+    \ &r) {\n      int ok = 0, ng = std::min(l.ed - l.bg, r.ed - r.bg) + 1;\n    \
+    \  for (int x; ng - ok > 1;)\n        x = (ok + ng) / 2, (l.get_hash(0, x) ==\
+    \ r.get_hash(0, x) ? ok : ng) = x;\n      return ok;\n    }\n  };\n  static void\
+    \ set_base(K b) { base = b, pw.assign(1, 1); }\n  static K base_pow(int i) { return\
+    \ pw[i]; }\n  RollingHash() = default;\n  template <class T>\n  RollingHash(const\
+    \ std::vector<T> &v) : hash(v.size() + 1, 0) {\n    set_pw(hash.size());\n   \
+    \ for (int i = 0, ed = v.size(); i < ed; i++)\n      hash[i + 1] = hash[i] * base\
+    \ + v[i];\n  }\n  RollingHash(const std::string &s)\n      : RollingHash(std::vector<char>(s.begin(),\
+    \ s.end())) {}\n  inline K get_hash(int l = 0, int r = -1) const {\n    if (r\
+    \ < 0) r = hash.size() - 1;\n    return hash[r] - hash[l] * pw[r - l];\n  }\n\
+    \  SubString sub(int l, int r) const { return SubString{this, l, r}; }\n};\n\n\
+    std::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n  static std::mt19937_64\
+    \ gen(std::random_device{}());\n  return std::uniform_int_distribution<std::uint64_t>(l,\
+    \ r)(gen);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Rolling-Hash\n * @category\
-    \ \u6587\u5B57\u5217\n *  Mod \u306F\u30002^61-1 \u3067\u56FA\u5B9A\n * @see https://qiita.com/keymoon/items/11fac5627672a6d6a9f6\n\
-    \ */\n\n// lcp verify https://atcoder.jp/contests/arc050/tasks/arc050_d\n\n//\
-    \ BEGIN CUT HERE\n\nstruct RollingHash {\n private:\n  static constexpr std::uint64_t\
-    \ mod = (1ull << 61ull) - 1;\n  std::vector<std::uint64_t> hash, pw;\n  std::uint64_t\
-    \ base;\n\n private:\n  static inline std::uint64_t add(std::uint64_t a, std::uint64_t\
-    \ b) {\n    if ((a += b) >= mod) a -= mod;\n    return a;\n  }\n  static inline\
-    \ std::uint64_t mul(std::uint64_t a, std::uint64_t b) {\n    __uint128_t c = (__uint128_t)a\
-    \ * b;\n    return add(c >> 61, c & mod);\n  }\n\n public:\n  static inline std::uint64_t\
-    \ generate_base() {\n    std::mt19937_64 mt(\n        std::chrono::steady_clock::now().time_since_epoch().count());\n\
-    \    std::uniform_int_distribution<std::uint64_t> rand(1, RollingHash::mod - 1);\n\
-    \    return rand(mt);\n  }\n\n  RollingHash() = default;\n  RollingHash(const\
-    \ std::string& s, std::uint64_t base)\n      : RollingHash(std::vector<char>(s.begin(),\
-    \ s.end()), base) {}\n  template <typename T>\n  RollingHash(const std::vector<T>&\
-    \ s, std::uint64_t base) : base(base) {\n    hash.assign(s.size() + 1, 0);\n \
-    \   pw.assign(s.size() + 1, 0);\n    pw[0] = 1;\n    for (std::size_t i = 0; i\
-    \ < s.size(); i++) {\n      pw[i + 1] = mul(pw[i], base);\n      hash[i + 1] =\
-    \ add(mul(hash[i], base), s[i]);\n    }\n  }\n  // S[l, r)\n  std::uint64_t get_hash(int\
-    \ l = 0, int r = -1) const {\n    if (r < 0) r = pw.size() - 1;\n    return add(hash[r],\
-    \ mod - mul(hash[l], pw[r - l]));\n  }\n  std::uint64_t combine_hash(std::uint64_t\
-    \ hash1, std::uint64_t hash2,\n                             int hash2len) {\n\
-    \    return add(mul(hash1, pw[hash2len]), hash2);\n  }\n};\n\ntemplate <std::size_t\
-    \ SIZE>\nstruct RollingHash_MultiBase {\n  using Array = std::array<std::uint64_t,\
-    \ SIZE>;\n  std::array<RollingHash, SIZE> rhs;\n  Array bases;\n  RollingHash_MultiBase()\
-    \ = default;\n  RollingHash_MultiBase(const std::string& s, Array bs)\n      :\
-    \ RollingHash_MultiBase(std::vector<char>(s.begin(), s.end()), bs) {}\n  template\
-    \ <typename T>\n  RollingHash_MultiBase(const std::vector<T>& s, Array bs) : bases(bs)\
-    \ {\n    for (std::size_t i = 0; i < SIZE; i++) rhs[i] = RollingHash(s, bases[i]);\n\
-    \  }\n  Array get_hash(int l, int r) const {\n    Array ret;\n    for (std::size_t\
-    \ i = 0; i < SIZE; i++) ret[i] = rhs[i].get_hash(l, r);\n    return ret;\n  }\n\
-    \  bool equal(int l1, int r1, int l2, int r2) const {\n    return equal(*this,\
-    \ *this, l1, r1, l2, r2);\n  }\n  int lcp(int l1, int r1, int l2, int r2) const\
-    \ {\n    return lcp(*this, *this, l1, r1, l2, r2);\n  }\n  static bool equal(const\
-    \ RollingHash_MultiBase& a,\n                    const RollingHash_MultiBase&\
-    \ b, int l1, int r1, int l2,\n                    int r2) {\n    for (std::size_t\
-    \ i = 0; i < SIZE; i++)\n      if (a.rhs[i].get_hash(l1, r1) != b.rhs[i].get_hash(l2,\
-    \ r2)) return false;\n    return true;\n  }\n  static int lcp(const RollingHash_MultiBase&\
-    \ a, const RollingHash_MultiBase& b,\n                 int l1, int r1, int l2,\
-    \ int r2) {\n    int len = std::min(r1 - l1, r2 - l2);\n    int low = 0, high\
-    \ = len + 1;\n    while (high - low > 1) {\n      int mid = (low + high) / 2;\n\
-    \      if (equal(a, b, l1, l1 + mid, l2, l2 + mid))\n        low = mid;\n    \
-    \  else\n        high = mid;\n    }\n    return low;\n  }\n};"
+    \ \u6587\u5B57\u5217\n *  + - * \u304C\u5B9A\u7FA9\u3055\u308C\u3066\u3044\u308B\
+    \u30AF\u30E9\u30B9\u3067hash\u3092\u8A08\u7B97\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/abc274/tasks/abc274_h\
+    \ (\u6A19\u65702\u306E\u4F53 e.g. Nimber)\n\n// BEGIN CUT HERE\n\ntemplate <class\
+    \ K>\nclass RollingHash {\n  static inline std::vector<K> pw;\n  static inline\
+    \ K base;\n  static inline void set_pw(int n) {\n    if (int m = pw.size(); m\
+    \ < n)\n      for (pw.resize(n); m < n; m++) pw[m] = pw[m - 1] * base;\n  }\n\
+    \  std::vector<K> hash;\n\n public:\n  class SubString {\n    const RollingHash\
+    \ *instance;\n    const int bg, ed;\n\n   public:\n    SubString(const RollingHash\
+    \ &rh)\n        : instance(&rh), bg(0), ed(rh.hash.size()) {}\n    SubString(const\
+    \ RollingHash *i, int b, int e) : instance(i), bg(b), ed(e) {}\n    inline K get_hash(int\
+    \ l = 0, int r = -1) const {\n      return instance->get_hash(bg + l, (r == -1\
+    \ ? ed : bg + r));\n    }\n    friend int lcp(const SubString &l, const SubString\
+    \ &r) {\n      int ok = 0, ng = std::min(l.ed - l.bg, r.ed - r.bg) + 1;\n    \
+    \  for (int x; ng - ok > 1;)\n        x = (ok + ng) / 2, (l.get_hash(0, x) ==\
+    \ r.get_hash(0, x) ? ok : ng) = x;\n      return ok;\n    }\n  };\n  static void\
+    \ set_base(K b) { base = b, pw.assign(1, 1); }\n  static K base_pow(int i) { return\
+    \ pw[i]; }\n  RollingHash() = default;\n  template <class T>\n  RollingHash(const\
+    \ std::vector<T> &v) : hash(v.size() + 1, 0) {\n    set_pw(hash.size());\n   \
+    \ for (int i = 0, ed = v.size(); i < ed; i++)\n      hash[i + 1] = hash[i] * base\
+    \ + v[i];\n  }\n  RollingHash(const std::string &s)\n      : RollingHash(std::vector<char>(s.begin(),\
+    \ s.end())) {}\n  inline K get_hash(int l = 0, int r = -1) const {\n    if (r\
+    \ < 0) r = hash.size() - 1;\n    return hash[r] - hash[l] * pw[r - l];\n  }\n\
+    \  SubString sub(int l, int r) const { return SubString{this, l, r}; }\n};\n\n\
+    std::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n  static std::mt19937_64\
+    \ gen(std::random_device{}());\n  return std::uniform_int_distribution<std::uint64_t>(l,\
+    \ r)(gen);\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/String/RollingHash.hpp
   requiredBy: []
-  timestamp: '2020-10-24 14:33:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-10-29 19:15:23+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/ALDS1_14_B.rollinghash.test.cpp
+  - test/aoj/2711.rollinghash.test.cpp
+  - test/aoj/2614.rollinghash.test.cpp
+  - test/yosupo/z_algorithm.rollinghash.test.cpp
 documentation_of: src/String/RollingHash.hpp
 layout: document
 redirect_from:

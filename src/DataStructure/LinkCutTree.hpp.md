@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/650.LCT.test.cpp
+    title: test/yukicoder/650.LCT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -231,6 +234,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/2450.LCT.test.cpp
