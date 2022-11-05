@@ -20,7 +20,7 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc236_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc236/tasks/abc236_g\"\
     \n\n// (min,max)\u534A\u74B0\n\n#include <bits/stdc++.h>\n#line 3 \"src/Math/SemiRing.hpp\"\
     \n/**\n * @title \u534A\u74B0\n * @category \u6570\u5B66\n * \u884C\u5217\u306B\
-    \u8F09\u305B\u308B\n */\n\n// verify\u7528\n// https://atcoder.jp/contests/abc009/tasks/abc009_4\
+    \u4E57\u305B\u308B\n */\n\n// verify\u7528\n// https://atcoder.jp/contests/abc009/tasks/abc009_4\
     \ (BitwiseXorAnd)\n// https://atcoder.jp/contests/ddcc2020-final/tasks/ddcc2020_final_b\n\
     // (max+\u306E\u4E00\u6B21\u95A2\u6570)\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)>\nstruct SemiRing {\n\
@@ -116,7 +116,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-06 00:20:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp

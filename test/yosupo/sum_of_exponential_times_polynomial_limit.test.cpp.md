@@ -26,37 +26,37 @@ data:
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\n/**\n * @title \u4E8C\
     \u9805\u4FC2\u6570\u306A\u3069\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT\
-    \ HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 24)>\nstruct Combination\
-    \ {\n private:\n  static inline mint _fact[LIM] = {1}, _finv[LIM] = {1};\n  static\
-    \ inline int lim = 1;\n  static inline void set(int sz) {\n    if (lim > sz) return;\n\
-    \    for (int i = lim; i <= sz; i++) _fact[i] = _fact[i - 1] * i;\n    _finv[sz]\
-    \ = mint(1) / _fact[sz];\n    for (int i = sz; i >= lim; i--) _finv[i - 1] = _finv[i]\
-    \ * i;\n    lim = sz + 1;\n  }\n\n public:\n  static inline mint fact(int n) {\
-    \ return set(n), n < 0 ? mint(0) : _fact[n]; }\n  static inline mint finv(int\
-    \ n) { return set(n), n < 0 ? mint(0) : _finv[n]; }\n  static mint nPr(int n,\
-    \ int r) { return fact(n) * finv(n - r); }\n  static mint nCr(int n, int r) {\
-    \ return nPr(n, r) * finv(r); }\n  static mint nHr(int n, int r) { return !r ?\
-    \ mint(1) : nCr(n + r - 1, r); }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n *\
-    \ @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace\
-    \ modint_internal {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base\
-    \ : modint_base {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\n\
-    constexpr bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class\
-    \ mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\n\
-    template <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
-    \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
-    struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
-    \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
-    \ D &operator/=(const D &r) { return (D &)*this *= r.inv(); }\n  constexpr D operator+(const\
-    \ D &r) const { return D((D &)*this) += r; }\n  constexpr D operator-(const D\
-    \ &r) const { return D((D &)*this) -= r; }\n  constexpr D operator*(const D &r)\
-    \ const { return D((D &)*this) *= r; }\n  constexpr D operator/(const D &r) const\
-    \ { return D((D &)*this) /= r; }\n  constexpr bool operator!=(const D &r) const\
-    \ { return !((D &)*this == r); }\n  constexpr D pow(u64 k) const {\n    for (D\
-    \ ret(1), b((const D &)*this);; b *= b)\n      if (k & 1 ? ret *= b : 0; !(k >>=\
-    \ 1)) return ret;\n  }\n  constexpr D inv() const {\n    typename D::Int x = 1,\
-    \ y = 0, a = ((D *)this)->val(), b = D::mod;\n    for (typename D::Int q = 0,\
-    \ z = 0, c = 0; b;)\n      z = x, c = a, x = y, y = z - y * (q = a / b), a = b,\
-    \ b = c - b * q;\n    return assert(a == 1), D(x);\n  }\n  constexpr bool operator<(const\
+    \ HERE\n\ntemplate <class mint>\nstruct Combination {\n private:\n  static inline\
+    \ std::vector<mint> fc = {1}, iv = {1};\n  static inline void set(int sz) {\n\
+    \    int lim = fc.size(), i;\n    if (lim > sz) return;\n    for (fc.resize(sz\
+    \ + 1), iv.resize(sz + 1), i = lim; i <= sz; i++)\n      fc[i] = fc[i - 1] * i;\n\
+    \    for (iv[sz] = mint(1) / fc[sz], i = sz; i >= lim; i--)\n      iv[i - 1] =\
+    \ iv[i] * i;\n  }\n\n public:\n  static inline mint fact(int n) { return set(n),\
+    \ n < 0 ? mint(0) : fc[n]; }\n  static inline mint finv(int n) { return set(n),\
+    \ n < 0 ? mint(0) : iv[n]; }\n  static mint nPr(int n, int r) { return fact(n)\
+    \ * finv(n - r); }\n  static mint nCr(int n, int r) { return nPr(n, r) * finv(r);\
+    \ }\n  static mint nHr(int n, int r) { return !r ? mint(1) : nCr(n + r - 1, r);\
+    \ }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category\
+    \ \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal {\nusing namespace\
+    \ std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base {};\nstruct\
+    \ dyn_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr bool is_modint_v\
+    \ = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\nconstexpr bool\
+    \ is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate <class mod_t>\n\
+    constexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base, mod_t>;\nusing\
+    \ u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\nstruct ModIntImpl\
+    \ {\n  static constexpr inline auto modulo() { return D::mod; }\n  constexpr D\
+    \ operator-() const { return D() -= (D &)*this; }\n  constexpr D &operator/=(const\
+    \ D &r) { return (D &)*this *= r.inv(); }\n  constexpr D operator+(const D &r)\
+    \ const { return D((D &)*this) += r; }\n  constexpr D operator-(const D &r) const\
+    \ { return D((D &)*this) -= r; }\n  constexpr D operator*(const D &r) const {\
+    \ return D((D &)*this) *= r; }\n  constexpr D operator/(const D &r) const { return\
+    \ D((D &)*this) /= r; }\n  constexpr bool operator!=(const D &r) const { return\
+    \ !((D &)*this == r); }\n  constexpr D pow(u64 k) const {\n    for (D ret(1),\
+    \ b((const D &)*this);; b *= b)\n      if (k & 1 ? ret *= b : 0; !(k >>= 1)) return\
+    \ ret;\n  }\n  constexpr D inv() const {\n    typename D::Int x = 1, y = 0, a\
+    \ = ((D *)this)->val(), b = D::mod;\n    for (typename D::Int q = 0, z = 0, c\
+    \ = 0; b;)\n      z = x, c = a, x = y, y = z - y * (q = a / b), a = b, b = c -\
+    \ b * q;\n    return assert(a == 1), D(x);\n  }\n  constexpr bool operator<(const\
     \ D &r) const {\n    return ((D *)this)->val() < r.val();\n  }  // for set or\
     \ map\n  friend ostream &operator<<(ostream &os, const D &r) { return os << r.val();\
     \ }\n  friend istream &operator>>(istream &is, D &r) {\n    long long v;\n   \
@@ -226,7 +226,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-06 00:20:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp

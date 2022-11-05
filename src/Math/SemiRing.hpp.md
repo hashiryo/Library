@@ -18,7 +18,7 @@ data:
     - https://atcoder.jp/contests/abc009/tasks/abc009_4
     - https://atcoder.jp/contests/ddcc2020-final/tasks/ddcc2020_final_b
   bundledCode: "#line 2 \"src/Math/SemiRing.hpp\"\n#include <bits/stdc++.h>\n/**\n\
-    \ * @title \u534A\u74B0\n * @category \u6570\u5B66\n * \u884C\u5217\u306B\u8F09\
+    \ * @title \u534A\u74B0\n * @category \u6570\u5B66\n * \u884C\u5217\u306B\u4E57\
     \u305B\u308B\n */\n\n// verify\u7528\n// https://atcoder.jp/contests/abc009/tasks/abc009_4\
     \ (BitwiseXorAnd)\n// https://atcoder.jp/contests/ddcc2020-final/tasks/ddcc2020_final_b\n\
     // (max+\u306E\u4E00\u6B21\u95A2\u6570)\n\n// BEGIN CUT HERE\n\ntemplate <typename\
@@ -58,7 +58,7 @@ data:
     \ vr) { return vl ^ vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
     template <class T = unsigned long long>\nusing BitwiseXorAndRig = Rig<BitwiseXorAnd<T>>;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u534A\u74B0\n * @category\
-    \ \u6570\u5B66\n * \u884C\u5217\u306B\u8F09\u305B\u308B\n */\n\n// verify\u7528\
+    \ \u6570\u5B66\n * \u884C\u5217\u306B\u4E57\u305B\u308B\n */\n\n// verify\u7528\
     \n// https://atcoder.jp/contests/abc009/tasks/abc009_4 (BitwiseXorAnd)\n// https://atcoder.jp/contests/ddcc2020-final/tasks/ddcc2020_final_b\n\
     // (max+\u306E\u4E00\u6B21\u95A2\u6570)\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)>\nstruct SemiRing {\n\
@@ -100,7 +100,7 @@ data:
   isVerificationFile: false
   path: src/Math/SemiRing.hpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-06 00:20:09+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1340.test.cpp
