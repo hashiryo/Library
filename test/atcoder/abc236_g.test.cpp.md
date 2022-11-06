@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc236/tasks/abc236_g
@@ -25,17 +25,17 @@ data:
     // (max+\u306E\u4E00\u6B21\u95A2\u6570)\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)>\nstruct SemiRing {\n\
     \  T x;\n  SemiRing() : x(o()) {}\n  SemiRing(bool y) : x(y ? i() : o()) {}\n\
-    \  template <class U,\n            std::enable_if_t<std::is_convertible_v<U, T>,\
-    \ nullptr_t> = nullptr>\n  SemiRing(U y) : x((T)y) {}\n  SemiRing &operator+=(const\
-    \ SemiRing &r) {\n    return x == o() ? *this = r : r.x == o() ? *this : *this\
-    \ = add(x, r.x);\n  }\n  SemiRing &operator*=(const SemiRing &r) {\n    if (x\
-    \ == o() || r.x == o()) return *this = o();\n    return x == i() ? *this = r :\
-    \ r.x == i() ? *this : *this = mul(x, r.x);\n  }\n  SemiRing operator+(const SemiRing\
-    \ &r) const { return SemiRing(*this) += r; }\n  SemiRing operator*(const SemiRing\
-    \ &r) const { return SemiRing(*this) *= r; }\n  bool operator==(const SemiRing\
-    \ &r) const { return x == r.x; }\n  bool operator!=(const SemiRing &r) const {\
-    \ return x != r.x; }\n  friend std::istream &operator>>(std::istream &is, SemiRing\
-    \ &r) {\n    return is >> r.x, is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \  template <class U, std::enable_if_t<std::is_convertible_v<U, T>,\n        \
+    \                              std::nullptr_t> = nullptr>\n  SemiRing(U y) : x((T)y)\
+    \ {}\n  SemiRing &operator+=(const SemiRing &r) {\n    return x == o() ? *this\
+    \ = r : r.x == o() ? *this : *this = add(x, r.x);\n  }\n  SemiRing &operator*=(const\
+    \ SemiRing &r) {\n    if (x == o() || r.x == o()) return *this = o();\n    return\
+    \ x == i() ? *this = r : r.x == i() ? *this : *this = mul(x, r.x);\n  }\n  SemiRing\
+    \ operator+(const SemiRing &r) const { return SemiRing(*this) += r; }\n  SemiRing\
+    \ operator*(const SemiRing &r) const { return SemiRing(*this) *= r; }\n  bool\
+    \ operator==(const SemiRing &r) const { return x == r.x; }\n  bool operator!=(const\
+    \ SemiRing &r) const { return x != r.x; }\n  friend std::istream &operator>>(std::istream\
+    \ &is, SemiRing &r) {\n    return is >> r.x, is;\n  }\n  friend std::ostream &operator<<(std::ostream\
     \ &os, const SemiRing &r) {\n    return os << r.x;\n  }\n};\ntemplate <class M>\n\
     using Rig = SemiRing<typename M::T, M::o, M::i, M::add, M::mul>;\n\ntemplate <class\
     \ Arith>\nstruct MinPlus {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::max();\
@@ -116,8 +116,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2022-11-06 00:20:09+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-11-06 11:30:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp
 layout: document

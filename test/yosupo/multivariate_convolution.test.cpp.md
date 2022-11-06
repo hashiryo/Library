@@ -262,12 +262,13 @@ data:
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
     \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\ntemplate <class mod_t, std::size_t LIM>\n\
     mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
-    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n  static int l\
-    \ = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
-    }\n#line 4 \"src/FFT/MultiVariateConvolution.hpp\"\n\n/**\n * @title \u591A\u5909\
-    \u6570\u7573\u307F\u8FBC\u307F\n * @category FFT\n * @see https://37zigen.com/truncated-multivariate-convolution/\n\
-    \ */\n\n// BEGIN CUT HERE\nclass MultiVariateConvolution {\n  int n, k, m;\n \
-    \ std::vector<int> chi;\n\n public:\n  MultiVariateConvolution() : MultiVariateConvolution(std::vector<int>{})\
+    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n \
+    \ if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m /\
+    \ l);\n  return dat[n];\n}\n#line 4 \"src/FFT/MultiVariateConvolution.hpp\"\n\n\
+    /**\n * @title \u591A\u5909\u6570\u7573\u307F\u8FBC\u307F\n * @category FFT\n\
+    \ * @see https://37zigen.com/truncated-multivariate-convolution/\n */\n\n// BEGIN\
+    \ CUT HERE\nclass MultiVariateConvolution {\n  int n, k, m;\n  std::vector<int>\
+    \ chi;\n\n public:\n  MultiVariateConvolution() : MultiVariateConvolution(std::vector<int>{})\
     \ {}\n  MultiVariateConvolution(const std::vector<int> &dim)\n      : n(std::accumulate(dim.begin(),\
     \ dim.end(), 1, std::multiplies<int>())),\n        k(dim.size()),\n        m(get_len(n)\
     \ * 2),\n        chi(n, 0) {\n    for (int i = n; i--;)\n      for (int den =\
@@ -314,7 +315,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-06 11:30:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/multivariate_convolution.test.cpp

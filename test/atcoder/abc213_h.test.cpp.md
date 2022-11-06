@@ -261,10 +261,10 @@ data:
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
     \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\ntemplate <class mod_t, std::size_t LIM>\n\
     mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
-    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM] = {0, 1};\n  static int l\
-    \ = 2;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n  return dat[n];\n\
-    }\n#line 4 \"src/FFT/FormalPowerSeries.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\
-    \u51AA\u7D1A\u6570\n * @category FFT\n * @see https://hly1204.github.io/library/math/formal_power_series.hpp\n\
+    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n \
+    \ if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m /\
+    \ l);\n  return dat[n];\n}\n#line 4 \"src/FFT/FormalPowerSeries.hpp\"\n\n/**\n\
+    \ * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category FFT\n * @see https://hly1204.github.io/library/math/formal_power_series.hpp\n\
     \ */\n\n// verify\u7528:\n// https://loj.ac/p/6538\n\n// BEGIN CUT HERE\ntemplate\
     \ <class T, std::size_t _Nm = 1 << 22>\nclass RelaxedConvolution {\n  std::vector<T>\
     \ a, b, c;\n  std::vector<NTTArray<T, _Nm, true>> ac, bc;\n  std::function<T()>\
@@ -459,7 +459,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_h.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-06 11:30:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc213_h.test.cpp

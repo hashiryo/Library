@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
   - icon: ':x:'
@@ -11,7 +11,7 @@ data:
     title: test/yukicoder/1340.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u534A\u74B0"
     links:
@@ -24,17 +24,17 @@ data:
     // (max+\u306E\u4E00\u6B21\u95A2\u6570)\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)>\nstruct SemiRing {\n\
     \  T x;\n  SemiRing() : x(o()) {}\n  SemiRing(bool y) : x(y ? i() : o()) {}\n\
-    \  template <class U,\n            std::enable_if_t<std::is_convertible_v<U, T>,\
-    \ nullptr_t> = nullptr>\n  SemiRing(U y) : x((T)y) {}\n  SemiRing &operator+=(const\
-    \ SemiRing &r) {\n    return x == o() ? *this = r : r.x == o() ? *this : *this\
-    \ = add(x, r.x);\n  }\n  SemiRing &operator*=(const SemiRing &r) {\n    if (x\
-    \ == o() || r.x == o()) return *this = o();\n    return x == i() ? *this = r :\
-    \ r.x == i() ? *this : *this = mul(x, r.x);\n  }\n  SemiRing operator+(const SemiRing\
-    \ &r) const { return SemiRing(*this) += r; }\n  SemiRing operator*(const SemiRing\
-    \ &r) const { return SemiRing(*this) *= r; }\n  bool operator==(const SemiRing\
-    \ &r) const { return x == r.x; }\n  bool operator!=(const SemiRing &r) const {\
-    \ return x != r.x; }\n  friend std::istream &operator>>(std::istream &is, SemiRing\
-    \ &r) {\n    return is >> r.x, is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \  template <class U, std::enable_if_t<std::is_convertible_v<U, T>,\n        \
+    \                              std::nullptr_t> = nullptr>\n  SemiRing(U y) : x((T)y)\
+    \ {}\n  SemiRing &operator+=(const SemiRing &r) {\n    return x == o() ? *this\
+    \ = r : r.x == o() ? *this : *this = add(x, r.x);\n  }\n  SemiRing &operator*=(const\
+    \ SemiRing &r) {\n    if (x == o() || r.x == o()) return *this = o();\n    return\
+    \ x == i() ? *this = r : r.x == i() ? *this : *this = mul(x, r.x);\n  }\n  SemiRing\
+    \ operator+(const SemiRing &r) const { return SemiRing(*this) += r; }\n  SemiRing\
+    \ operator*(const SemiRing &r) const { return SemiRing(*this) *= r; }\n  bool\
+    \ operator==(const SemiRing &r) const { return x == r.x; }\n  bool operator!=(const\
+    \ SemiRing &r) const { return x != r.x; }\n  friend std::istream &operator>>(std::istream\
+    \ &is, SemiRing &r) {\n    return is >> r.x, is;\n  }\n  friend std::ostream &operator<<(std::ostream\
     \ &os, const SemiRing &r) {\n    return os << r.x;\n  }\n};\ntemplate <class M>\n\
     using Rig = SemiRing<typename M::T, M::o, M::i, M::add, M::mul>;\n\ntemplate <class\
     \ Arith>\nstruct MinPlus {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::max();\
@@ -63,17 +63,17 @@ data:
     // (max+\u306E\u4E00\u6B21\u95A2\u6570)\n\n// BEGIN CUT HERE\n\ntemplate <typename\
     \ T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)>\nstruct SemiRing {\n\
     \  T x;\n  SemiRing() : x(o()) {}\n  SemiRing(bool y) : x(y ? i() : o()) {}\n\
-    \  template <class U,\n            std::enable_if_t<std::is_convertible_v<U, T>,\
-    \ nullptr_t> = nullptr>\n  SemiRing(U y) : x((T)y) {}\n  SemiRing &operator+=(const\
-    \ SemiRing &r) {\n    return x == o() ? *this = r : r.x == o() ? *this : *this\
-    \ = add(x, r.x);\n  }\n  SemiRing &operator*=(const SemiRing &r) {\n    if (x\
-    \ == o() || r.x == o()) return *this = o();\n    return x == i() ? *this = r :\
-    \ r.x == i() ? *this : *this = mul(x, r.x);\n  }\n  SemiRing operator+(const SemiRing\
-    \ &r) const { return SemiRing(*this) += r; }\n  SemiRing operator*(const SemiRing\
-    \ &r) const { return SemiRing(*this) *= r; }\n  bool operator==(const SemiRing\
-    \ &r) const { return x == r.x; }\n  bool operator!=(const SemiRing &r) const {\
-    \ return x != r.x; }\n  friend std::istream &operator>>(std::istream &is, SemiRing\
-    \ &r) {\n    return is >> r.x, is;\n  }\n  friend std::ostream &operator<<(std::ostream\
+    \  template <class U, std::enable_if_t<std::is_convertible_v<U, T>,\n        \
+    \                              std::nullptr_t> = nullptr>\n  SemiRing(U y) : x((T)y)\
+    \ {}\n  SemiRing &operator+=(const SemiRing &r) {\n    return x == o() ? *this\
+    \ = r : r.x == o() ? *this : *this = add(x, r.x);\n  }\n  SemiRing &operator*=(const\
+    \ SemiRing &r) {\n    if (x == o() || r.x == o()) return *this = o();\n    return\
+    \ x == i() ? *this = r : r.x == i() ? *this : *this = mul(x, r.x);\n  }\n  SemiRing\
+    \ operator+(const SemiRing &r) const { return SemiRing(*this) += r; }\n  SemiRing\
+    \ operator*(const SemiRing &r) const { return SemiRing(*this) *= r; }\n  bool\
+    \ operator==(const SemiRing &r) const { return x == r.x; }\n  bool operator!=(const\
+    \ SemiRing &r) const { return x != r.x; }\n  friend std::istream &operator>>(std::istream\
+    \ &is, SemiRing &r) {\n    return is >> r.x, is;\n  }\n  friend std::ostream &operator<<(std::ostream\
     \ &os, const SemiRing &r) {\n    return os << r.x;\n  }\n};\ntemplate <class M>\n\
     using Rig = SemiRing<typename M::T, M::o, M::i, M::add, M::mul>;\n\ntemplate <class\
     \ Arith>\nstruct MinPlus {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::max();\
@@ -100,8 +100,8 @@ data:
   isVerificationFile: false
   path: src/Math/SemiRing.hpp
   requiredBy: []
-  timestamp: '2022-11-06 00:20:09+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-11-06 11:30:34+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1340.test.cpp
   - test/atcoder/abc236_g.test.cpp
