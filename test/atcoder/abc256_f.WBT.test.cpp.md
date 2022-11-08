@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
@@ -95,15 +95,19 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\n/**\n * @title \u6C38\u7D9A\
-    Weight-Balanced-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n\
-    \ * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\u6728\n * \u203B\u3053\u308C\u306F\u6C38\
-    \u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\u9006\u306B\u975E\u6C38\u7D9A\u306B\
-    \u3067\u304D\u308B\u3088\u3046\u306B\u3057\u3066\u307E\u305B\u3093\uFF09\n * \u5358\
-    \u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\
-    \n * \u5404\u30CE\u30FC\u30C9\u304C\u8449\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\u6301\
-    \u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\
-    \u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \n/**\n * @title \u6C38\u7D9AWeight-Balanced-Tree\n * @category \u30C7\u30FC\u30BF\
+    \u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\u6728\
+    \n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\u9006\
+    \u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\u3088\u3046\u306B\u3057\u3066\
+    \u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\
+    \u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u8449\u306E\u30B5\
+    \u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\
+    \u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n\
+    \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
     \ (\u6C38\u7D9A)\n// https://atcoder.jp/contests/arc030/tasks/arc030_4 (\u6C38\
     \u7D9A\u9045\u5EF6\u4F1D\u642C)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define\
     \ HAS_CHECK(member, Dummy)                              \\\n  template <class\
@@ -266,8 +270,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.WBT.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-08 16:52:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.WBT.test.cpp
 layout: document

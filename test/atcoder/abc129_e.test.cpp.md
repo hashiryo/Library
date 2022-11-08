@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -188,13 +188,16 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 7 \"test/atcoder/abc129_e.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<int(1e9\
-    \ + 7)>;\n  string L;\n  cin >> L;\n  vector<tuple<int, int, int>> alphabet{{0,\
-    \ 0, 0}, {0, 1, 1}, {1, 0, 1}};\n  auto dfa_le =\n      DFA_SymbolMap(DFA_Inequality(L,\
-    \ 2), alphabet,\n                    [](const tuple<int, int, int> &a) { return\
-    \ get<2>(a); });\n  cout << dfa_dp<Mint>(dfa_le, L.length()) << '\\n';\n  return\
-    \ 0;\n}\n"
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 7 \"test/atcoder/abc129_e.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using Mint = StaticModInt<int(1e9 + 7)>;\n  string L;\n  cin >> L;\n  vector<tuple<int,\
+    \ int, int>> alphabet{{0, 0, 0}, {0, 1, 1}, {1, 0, 1}};\n  auto dfa_le =\n   \
+    \   DFA_SymbolMap(DFA_Inequality(L, 2), alphabet,\n                    [](const\
+    \ tuple<int, int, int> &a) { return get<2>(a); });\n  cout << dfa_dp<Mint>(dfa_le,\
+    \ L.length()) << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc129/tasks/abc129_e\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\n#include \"src/Automaton/DFA_Inequality.hpp\"\
     \n#include \"src/Automaton/dfa_operations.hpp\"\n#include \"src/Math/ModInt.hpp\"\
@@ -212,7 +215,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc129_e.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-08 16:52:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc129_e.test.cpp

@@ -129,11 +129,14 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\nusing namespace\
-    \ std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RcompositeQ {\n  using\
-    \ T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1), Mint(0));\
-    \ }\n  static T op(const T &l, const T &r) {\n    return make_pair(r.first * l.first,\
-    \ r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RcompositeQ\
+    \ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1),\
+    \ Mint(0)); }\n  static T op(const T &l, const T &r) {\n    return make_pair(r.first\
+    \ * l.first, r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
     \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  vector<RcompositeQ::T>\
     \ v(N);\n  for (int i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n\
     \    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ> seg(v);\n  while (Q--) {\n\
@@ -162,7 +165,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-08 16:52:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp

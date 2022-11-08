@@ -112,79 +112,82 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title Number-Theoretic-Transform\n * @category\
-    \ FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal {\nusing u64 = std::uint64_t;\n\
-    using u128 = __uint128_t;\ntemplate <class mod_t>\nstruct NumberTheoreticTransform\
-    \ {\n  static inline void dft(int n, mod_t x[]) {\n    for (int m = n, h = 0,\
-    \ i0 = 0; m >>= 1; h = 0, i0 = 0)\n      for (mod_t prod = 1, u; i0 < n;\n   \
-    \        prod *= r2[__builtin_ctz(++h)], i0 += (m << 1))\n        for (int i =\
-    \ i0; i < i0 + m; ++i)\n          x[i + m] = x[i] - (u = prod * x[i + m]), x[i]\
-    \ += u;\n  }\n  static inline void idft(int n, mod_t x[]) {\n    for (int m =\
-    \ 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0 = 0)\n      for (mod_t prod = 1,\
-    \ y; i0 < n;\n           prod *= ir2[__builtin_ctz(++h)], i0 += (m << 1))\n  \
-    \      for (int i = i0; i < i0 + m; ++i)\n          y = x[i] - x[i + m], x[i]\
-    \ += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv = mod_t(1) / n; n--;)\
-    \ x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t x[]) {\n    for (int i\
-    \ = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] + x[i + 1]);\n  }\n  static\
-    \ void odd_dft(int n, mod_t x[]) {\n    mod_t prod = iv2;\n    for (int i = 0,\
-    \ j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i] - x[i + 1]), prod *= ir2[__builtin_ctzll(~((u64)j))];\n\
-    \  }\n  static void dft_doubling(int n, mod_t x[]) {\n    std::copy_n(x, n, x\
-    \ + n), idft(n, x + n);\n    mod_t k(1), t(rt[__builtin_ctz(n << 1)]);\n    for\
-    \ (int i = 0; i < n; i++) x[n + i] *= k, k *= t;\n    dft(n, x + n);\n  }\n  static\
-    \ constexpr std::uint64_t lim() { return 1ULL << E; }\n\n protected:\n  static\
-    \ constexpr mod_t pow2th_root(std::uint8_t e) {\n    for (mod_t r = 2;; r += 1)\n\
-    \      if (auto s = r.pow((mod_t::modulo() - 1) / 2); s != 1 && s * s == 1)\n\
-    \        return r.pow((mod_t::modulo() - 1) >> e);\n    return 0;  // can not\
-    \ find\n  }            // return \u03C9 (primitive 2^e th root)\n  static_assert(mod_t::modulo()\
-    \ & 1);\n  static_assert(is_prime(mod_t::modulo()));\n  static constexpr std::uint8_t\
-    \ E = __builtin_ctzll(mod_t::modulo() - 1);\n  static constexpr auto roots(mod_t\
-    \ w) {\n    std::array<mod_t, E + 1> ret = {};\n    for (std::uint8_t e = E; e;\
-    \ e--, w *= w) ret[e] = w;\n    return ret[0] = w, ret;\n  }\n  static constexpr\
-    \ auto ratios(const std::array<mod_t, E + 1> &rt,\n                          \
-    \     const std::array<mod_t, E + 1> &irt, int i = 2) {\n    std::array<mod_t,\
-    \ E - 1> ret = {};\n    for (mod_t prod = 1; i <= E; prod *= irt[i++]) ret[i -\
-    \ 2] = rt[i] * prod;\n    return ret;\n  }\n  static constexpr mod_t w = pow2th_root(E),\
-    \ iw = w.pow(lim() - 1);\n  static constexpr mod_t iv2 = mod_t((mod_t::modulo()\
-    \ + 1) / 2);\n  static_assert(w != mod_t(0));\n  static constexpr auto rt = roots(w),\
-    \ irt = roots(iw);\n  static constexpr auto r2 = ratios(rt, irt), ir2 = ratios(irt,\
-    \ rt);\n};\ntemplate <class T, class B>\nstruct NTTArrayImpl : public B {\n  using\
-    \ B::B;\n  static constexpr std::uint8_t type() { return B::type; }\n#define FUNC(op,\
-    \ name, HOGEHOGE, ...)            \\\n  inline void name(__VA_ARGS__) {      \
-    \          \\\n    HOGEHOGE(op, 1);                             \\\n    if constexpr\
-    \ (B::type >= 2) HOGEHOGE(op, 2); \\\n    if constexpr (B::type >= 3) HOGEHOGE(op,\
-    \ 3); \\\n  }\n#define DFT(fft, _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define\
-    \ ZEROS(op, _) std::fill_n(this->dat##_ + b, e - b, B::Z##_)\n#define SET(op,\
-    \ _) std::copy(x + b, x + e, this->dat##_ + b)\n#define SET_SINGLE(op, _) this->dat##_[i]\
-    \ = x;\n#define SUBST(op, _) std::copy(r.dat##_ + b, r.dat##_ + e, this->dat##_\
-    \ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n  FUNC(idft, idft, DFT, int b, int\
-    \ e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n  FUNC(__, set, SET, const T x[],\
-    \ int b, int e)\n  FUNC(__, set, SET_SINGLE, int i, T x)\n  template <class C>\n\
-    \  FUNC(__, subst, SUBST, const NTTArrayImpl<T, C> &r, int b, int e)\n  inline\
-    \ void get(T x[], int b, int e) const {\n    if constexpr (B::type == 1)\n   \
-    \   std::copy(this->dat1 + b, this->dat1 + e, x + b);\n    else\n      for (int\
-    \ i = b; i < e; i++) x[i] = get(i);\n  }\n  inline T get(int i) const {\n    if\
-    \ constexpr (B::type == 3) {\n      const T mod1 = B::mint1::modulo(), mod2 =\
-    \ B::mint2::modulo();\n      u64 r1 = this->dat1[i].val(), r2 = (B::iv21 * (this->dat2[i]\
-    \ - r1)).val();\n      u64 r3 = (B::iv31 * (this->dat3[i] - r1) - B::iv32 * r2).val();\n\
-    \      return mod1 * (mod2 * r3 + r2) + r1;\n    } else if constexpr (B::type\
-    \ == 2) {\n      const T mod1 = B::mint1::modulo();\n      u64 r1 = this->dat1[i].val();\n\
-    \      return mod1 * ((this->dat2[i] - r1) * B::iv).val() + r1;\n    } else\n\
-    \      return this->dat1[i];\n  }\n#define ASGN(op, _) \\\n  for (int i = b; i\
-    \ < e; i++) this->dat##_[i] op## = r.dat##_[i]\n#define ASSIGN(fname, op) \\\n\
-    \  template <class C>      \\\n  FUNC(op, fname, ASGN, const NTTArrayImpl<T, C>\
-    \ &r, int b, int e)\n#define BOP(op, _) \\\n  for (int i = b; i < e; i++) this->dat##_[i]\
-    \ = l.dat##_[i] op r.dat##_[i]\n#define OP(fname, op)                        \
-    \       \\\n  template <class C, class D>                       \\\n  FUNC(op,\
-    \ fname, BOP, const NTTArrayImpl<T, C> &l, \\\n       const NTTArrayImpl<T, D>\
-    \ &r, int b, int e)\n  OP(add, +) OP(dif, -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif,\
-    \ -) ASSIGN(mul, *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SET_SINGLE\n\
-    #undef SUBST\n#undef ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n\
-    };\ntemplate <class T, std::size_t _Nm>\nstruct NTTArrayB_SingleB {\n  using ntt1\
-    \ = NumberTheoreticTransform<T>;\n  static_assert(_Nm <= ntt1::lim());\n  static\
-    \ constexpr T Z1 = 0;\n  static constexpr std::uint8_t type = 1;\n};\ntemplate\
-    \ <class T, std::size_t _Nm, bool is_heap>\nstruct NTTArrayB_Single : protected\
-    \ NTTArrayB_SingleB<T, _Nm> {\n  T dat1[_Nm] = {};\n};\ntemplate <class T, std::size_t\
-    \ _Nm>\nstruct NTTArrayB_Single<T, _Nm, true> : protected NTTArrayB_SingleB<T,\
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 5 \"src/FFT/NTT.hpp\"\n\n/**\n\
+    \ * @title Number-Theoretic-Transform\n * @category FFT\n */\n\n// BEGIN CUT HERE\n\
+    namespace ntt_internal {\nusing u64 = std::uint64_t;\nusing u128 = __uint128_t;\n\
+    template <class mod_t>\nstruct NumberTheoreticTransform {\n  static inline void\
+    \ dft(int n, mod_t x[]) {\n    for (int m = n, h = 0, i0 = 0; m >>= 1; h = 0,\
+    \ i0 = 0)\n      for (mod_t prod = 1, u; i0 < n;\n           prod *= r2[__builtin_ctz(++h)],\
+    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          x[i +\
+    \ m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static inline void idft(int\
+    \ n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0\
+    \ = 0)\n      for (mod_t prod = 1, y; i0 < n;\n           prod *= ir2[__builtin_ctz(++h)],\
+    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i]\
+    \ - x[i + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv\
+    \ = mod_t(1) / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t\
+    \ x[]) {\n    for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] +\
+    \ x[i + 1]);\n  }\n  static void odd_dft(int n, mod_t x[]) {\n    mod_t prod =\
+    \ iv2;\n    for (int i = 0, j = 0; i < n; i += 2, j++)\n      x[j] = prod * (x[i]\
+    \ - x[i + 1]), prod *= ir2[__builtin_ctzll(~((u64)j))];\n  }\n  static void dft_doubling(int\
+    \ n, mod_t x[]) {\n    std::copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1),\
+    \ t(rt[__builtin_ctz(n << 1)]);\n    for (int i = 0; i < n; i++) x[n + i] *= k,\
+    \ k *= t;\n    dft(n, x + n);\n  }\n  static constexpr std::uint64_t lim() { return\
+    \ 1ULL << E; }\n\n protected:\n  static constexpr mod_t pow2th_root(std::uint8_t\
+    \ e) {\n    for (mod_t r = 2;; r += 1)\n      if (auto s = r.pow((mod_t::modulo()\
+    \ - 1) / 2); s != 1 && s * s == 1)\n        return r.pow((mod_t::modulo() - 1)\
+    \ >> e);\n    return 0;  // can not find\n  }            // return \u03C9 (primitive\
+    \ 2^e th root)\n  static_assert(mod_t::modulo() & 1);\n  static_assert(is_prime(mod_t::modulo()));\n\
+    \  static constexpr std::uint8_t E = __builtin_ctzll(mod_t::modulo() - 1);\n \
+    \ static constexpr auto roots(mod_t w) {\n    std::array<mod_t, E + 1> ret = {};\n\
+    \    for (std::uint8_t e = E; e; e--, w *= w) ret[e] = w;\n    return ret[0] =\
+    \ w, ret;\n  }\n  static constexpr auto ratios(const std::array<mod_t, E + 1>\
+    \ &rt,\n                               const std::array<mod_t, E + 1> &irt, int\
+    \ i = 2) {\n    std::array<mod_t, E - 1> ret = {};\n    for (mod_t prod = 1; i\
+    \ <= E; prod *= irt[i++]) ret[i - 2] = rt[i] * prod;\n    return ret;\n  }\n \
+    \ static constexpr mod_t w = pow2th_root(E), iw = w.pow(lim() - 1);\n  static\
+    \ constexpr mod_t iv2 = mod_t((mod_t::modulo() + 1) / 2);\n  static_assert(w !=\
+    \ mod_t(0));\n  static constexpr auto rt = roots(w), irt = roots(iw);\n  static\
+    \ constexpr auto r2 = ratios(rt, irt), ir2 = ratios(irt, rt);\n};\ntemplate <class\
+    \ T, class B>\nstruct NTTArrayImpl : public B {\n  using B::B;\n  static constexpr\
+    \ std::uint8_t type() { return B::type; }\n#define FUNC(op, name, HOGEHOGE, ...)\
+    \            \\\n  inline void name(__VA_ARGS__) {                \\\n    HOGEHOGE(op,\
+    \ 1);                             \\\n    if constexpr (B::type >= 2) HOGEHOGE(op,\
+    \ 2); \\\n    if constexpr (B::type >= 3) HOGEHOGE(op, 3); \\\n  }\n#define DFT(fft,\
+    \ _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define ZEROS(op, _) std::fill_n(this->dat##_\
+    \ + b, e - b, B::Z##_)\n#define SET(op, _) std::copy(x + b, x + e, this->dat##_\
+    \ + b)\n#define SET_SINGLE(op, _) this->dat##_[i] = x;\n#define SUBST(op, _) std::copy(r.dat##_\
+    \ + b, r.dat##_ + e, this->dat##_ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n\
+    \  FUNC(idft, idft, DFT, int b, int e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n\
+    \  FUNC(__, set, SET, const T x[], int b, int e)\n  FUNC(__, set, SET_SINGLE,\
+    \ int i, T x)\n  template <class C>\n  FUNC(__, subst, SUBST, const NTTArrayImpl<T,\
+    \ C> &r, int b, int e)\n  inline void get(T x[], int b, int e) const {\n    if\
+    \ constexpr (B::type == 1)\n      std::copy(this->dat1 + b, this->dat1 + e, x\
+    \ + b);\n    else\n      for (int i = b; i < e; i++) x[i] = get(i);\n  }\n  inline\
+    \ T get(int i) const {\n    if constexpr (B::type == 3) {\n      const T mod1\
+    \ = B::mint1::modulo(), mod2 = B::mint2::modulo();\n      u64 r1 = this->dat1[i].val(),\
+    \ r2 = (B::iv21 * (this->dat2[i] - r1)).val();\n      u64 r3 = (B::iv31 * (this->dat3[i]\
+    \ - r1) - B::iv32 * r2).val();\n      return mod1 * (mod2 * r3 + r2) + r1;\n \
+    \   } else if constexpr (B::type == 2) {\n      const T mod1 = B::mint1::modulo();\n\
+    \      u64 r1 = this->dat1[i].val();\n      return mod1 * ((this->dat2[i] - r1)\
+    \ * B::iv).val() + r1;\n    } else\n      return this->dat1[i];\n  }\n#define\
+    \ ASGN(op, _) \\\n  for (int i = b; i < e; i++) this->dat##_[i] op## = r.dat##_[i]\n\
+    #define ASSIGN(fname, op) \\\n  template <class C>      \\\n  FUNC(op, fname,\
+    \ ASGN, const NTTArrayImpl<T, C> &r, int b, int e)\n#define BOP(op, _) \\\n  for\
+    \ (int i = b; i < e; i++) this->dat##_[i] = l.dat##_[i] op r.dat##_[i]\n#define\
+    \ OP(fname, op)                               \\\n  template <class C, class D>\
+    \                       \\\n  FUNC(op, fname, BOP, const NTTArrayImpl<T, C> &l,\
+    \ \\\n       const NTTArrayImpl<T, D> &r, int b, int e)\n  OP(add, +) OP(dif,\
+    \ -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif, -) ASSIGN(mul, *)\n#undef DFT\n#undef\
+    \ ZEROS\n#undef SET\n#undef SET_SINGLE\n#undef SUBST\n#undef ASGN\n#undef ASSIGN\n\
+    #undef BOP\n#undef OP\n#undef FUNC\n};\ntemplate <class T, std::size_t _Nm>\n\
+    struct NTTArrayB_SingleB {\n  using ntt1 = NumberTheoreticTransform<T>;\n  static_assert(_Nm\
+    \ <= ntt1::lim());\n  static constexpr T Z1 = 0;\n  static constexpr std::uint8_t\
+    \ type = 1;\n};\ntemplate <class T, std::size_t _Nm, bool is_heap>\nstruct NTTArrayB_Single\
+    \ : protected NTTArrayB_SingleB<T, _Nm> {\n  T dat1[_Nm] = {};\n};\ntemplate <class\
+    \ T, std::size_t _Nm>\nstruct NTTArrayB_Single<T, _Nm, true> : protected NTTArrayB_SingleB<T,\
     \ _Nm> {\n  NTTArrayB_Single() : dat1(buf1.data()) {}\n  void resize(int n) {\n\
     \    buf1.resize(n, NTTArrayB_Single::Z1), dat1 = buf1.data();\n  }\n  std::size_t\
     \ size() const { return buf1.size(); }\n  std::vector<T> buf1;\n  T *dat1;\n};\n\
@@ -259,84 +262,81 @@ data:
     \ NTTArray<T, _Nm, false> bf[_Nm2];\n};\ntemplate <class T, std::size_t _Nm, int\
     \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
-    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\ntemplate <class mod_t, std::size_t LIM>\n\
-    mod_t get_inv(int n) {\n  static_assert(is_staticmodint_v<mod_t>);\n  static constexpr\
-    \ auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n \
-    \ if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m /\
-    \ l);\n  return dat[n];\n}\n#line 4 \"src/FFT/BigInt.hpp\"\n\n/**\n * @title \u591A\
-    \u500D\u9577\u6574\u6570\n * @category FFT\n */\n\n// BEGIN CUT HERE\nclass BigInt\
-    \ {\n  static constexpr unsigned BASE = 10000000, D = 7;\n  using mod_t = StaticModInt<0x3ffffffffa000001>;\n\
-    \  using Vec = std::vector<unsigned>;\n  using NTT = NumberTheoreticTransform<mod_t>;\n\
-    \  bool neg;\n  Vec dat;\n  BigInt shift(int sz) const { return {neg, Vec(dat.begin()\
-    \ + sz, dat.end())}; }\n  BigInt(bool n, const Vec &d) : neg(n), dat(d) {}\n\n\
-    \ public:\n  BigInt() : neg(false), dat() {}\n  BigInt(long long v) : neg(v <\
-    \ 0) {\n    for (v = std::abs(v); v; v /= BASE) dat.push_back(v % BASE);\n  }\n\
-    \  BigInt(const std::string &s) : neg(false) {\n    int p = 0, x = 0;\n    for\
-    \ (; p < (int)s.size() && (s[p] == '-' || s[p] == '+'); p++)\n      if (s[p] ==\
-    \ '-') neg = !neg;\n    for (int i = s.size(), j; i > p; i -= D, dat.push_back(x),\
-    \ x = 0)\n      for (j = std::max(p, i - int(D)); j < i;) x = x * 10 + s[j++]\
-    \ - '0';\n    shrink();\n  }\n  inline void shrink() {\n    while (!dat.empty()\
-    \ && !dat.back()) dat.pop_back();\n    if (dat.empty()) neg = false;\n  }\n  std::string\
-    \ to_str() const {\n    if (is_zero()) return \"0\";\n    std::stringstream ss;\n\
-    \    if (neg) ss << '-';\n    ss << (dat.empty() ? 0 : dat.back());\n    for (long\
-    \ long i = dat.size() - 1; i-- > 0;)\n      ss << std::setw(D) << std::setfill('0')\
-    \ << dat[i];\n    std::string ret;\n    return ss >> ret, ret;\n  }\n  bool is_zero()\
-    \ const { return dat.empty() || (dat.size() == 1 && !dat[0]); }\n  bool operator<(const\
-    \ BigInt &r) const {\n    if (neg != r.neg) return neg;\n    if (dat.size() !=\
-    \ r.dat.size()) return (dat.size() < r.dat.size()) ^ neg;\n    for (int i = dat.size();\
-    \ i--;)\n      if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n   \
-    \ return false;\n  }\n  bool operator>(const BigInt &r) const { return r < *this;\
-    \ }\n  bool operator<=(const BigInt &r) const { return !(r < *this); }\n  bool\
-    \ operator>=(const BigInt &r) const { return !(*this < r); }\n  bool operator==(const\
-    \ BigInt &r) const {\n    return (neg == r.neg && dat == r.dat) || (is_zero()\
-    \ && r.is_zero());\n  }\n  bool operator!=(const BigInt &r) const { return !(*this\
-    \ == r); }\n  BigInt abs() const { return BigInt(false, dat); }\n  BigInt operator-()\
-    \ const { return BigInt(!neg, dat); }\n  BigInt operator+(const BigInt &r) const\
-    \ {\n    if (neg != r.neg) return *this - (-r);\n    auto [ret, tmp] = dat.size()\
-    \ > r.dat.size() ? std::make_pair(*this, &r)\n                               \
-    \                 : std::make_pair(r, this);\n    int car = 0, i, n = ret.dat.size(),\
-    \ m = tmp->dat.size();\n    for (i = 0; i < m; i++)\n      ret.dat[i] -= BASE\
-    \ & -(car = ((ret.dat[i] += car + tmp->dat[i]) >= BASE));\n    if (car) {\n  \
-    \    while (i < n && ret.dat[i] == BASE - 1) ret.dat[i++] = 0;\n      i < n ?\
-    \ ret.dat[i]++ : (ret.dat.push_back(1), 0);\n    }\n    return ret;\n  }\n  BigInt\
-    \ operator-(const BigInt &r) const {\n    if (neg != r.neg) return *this + (-r);\n\
-    \    if (r.is_zero()) return *this;\n    if (is_zero()) return -r;\n    auto [ret,\
-    \ tmp] =\n        abs() > r.abs() ? std::make_pair(*this, &r) : std::make_pair(r,\
-    \ this);\n    int car = 0, i, n = ret.dat.size(), m = tmp->dat.size();\n    for\
-    \ (i = 0; i < m; i++)\n      ret.dat[i] += BASE & -(car = ((ret.dat[i] -= car\
-    \ + tmp->dat[i]) >> 31));\n    while (car && i < n && !ret.dat[i]) ret.dat[i++]\
-    \ = BASE - 1;\n    return ret.neg ^= (tmp == this), ret.dat[i] -= car, ret.shrink(),\
-    \ ret;\n  }\n  long long operator%(long long r) const {\n    long long ret = 0;\n\
-    \    for (int i = dat.size(); i--;) ret = (ret * BASE + dat[i]) % r;\n    return\
-    \ ret;\n  }\n  BigInt operator*(const BigInt &r) const {\n    if (is_zero() ||\
-    \ r.is_zero()) return 0;\n    const int n = dat.size(), m = r.dat.size(), sz =\
-    \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20];\n    static long long h[1\
-    \ << 20];\n    if (int i = n, j; std::min(n, m) >= 74) {\n      for (i = n; i--;)\
-    \ f[i] = dat[i];\n      for (i = m; i--;) g[i] = r.dat[i];\n      const int l\
-    \ = get_len(std::max(n, m)), bl = __builtin_ctz(l) + 6;\n      const int len =\
-    \ sz - l < bl * bl * 7 - 74 ? l : get_len(sz);\n      std::fill_n(f + n, len -\
-    \ n, 0), NTT::dft(len, f);\n      std::fill_n(g + m, len - m, 0), NTT::dft(len,\
-    \ g);\n      for (i = len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f),\
-    \ i = len; i < sz; f[i - len] -= h[i], i++)\n        for (h[i] = 0, j = i - m\
-    \ + 1; j < n; j++)\n          h[i] += (long long)dat[j] * r.dat[i - j];\n    \
-    \  for (i = std::min(sz, len); i--;) h[i] = f[i].val();\n    } else\n      for\
-    \ (std::fill_n(h, sz, 0); i--;)\n        for (j = m; j--;) h[i + j] += (long long)dat[i]\
-    \ * r.dat[j];\n    BigInt ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n\
-    \    for (int i = 0; i < sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n\
-    \    for (; car; car /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n\
-    \  }\n  BigInt operator/(const BigInt &r) const {\n    assert(!r.is_zero());\n\
-    \    if (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n\
-    \    BigInt a = this->abs(), b = r.abs();\n    if (a < b) return 0;\n    const\
-    \ int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1);\n    int\
-    \ l = std::min(prec, 3), ql = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l\
-    \ + 1)), p, rr = b.shift(qb - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() =\
-    \ 1, c.dat.back() = 2;\n    while (x != p) p.dat.swap(x.dat), x = (p * (c - rr\
-    \ * p)).shift(l + ql);\n    if (l != prec)\n      for (p.neg = true; x != p; l\
-    \ = nl, ql = nql) {\n        nl = std::min(l * 2 + 1, prec), nql = std::min(ql\
-    \ * 2 + 1, qb);\n        p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l\
-    \ - nl + ql);\n        if (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n\
-    \        c.dat.back() = 0, c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n   \
-    \   }\n    if (x = (x * a).shift(pb + (pb == qb)); a >= (x + 1) * b) x += 1;\n\
+    \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/BigInt.hpp\"\n\n/**\n\
+    \ * @title \u591A\u500D\u9577\u6574\u6570\n * @category FFT\n */\n\n// BEGIN CUT\
+    \ HERE\nclass BigInt {\n  static constexpr unsigned BASE = 10000000, D = 7;\n\
+    \  using mod_t = StaticModInt<0x3ffffffffa000001>;\n  using Vec = std::vector<unsigned>;\n\
+    \  using NTT = NumberTheoreticTransform<mod_t>;\n  bool neg;\n  Vec dat;\n  BigInt\
+    \ shift(int sz) const { return {neg, Vec(dat.begin() + sz, dat.end())}; }\n  BigInt(bool\
+    \ n, const Vec &d) : neg(n), dat(d) {}\n\n public:\n  BigInt() : neg(false), dat()\
+    \ {}\n  BigInt(long long v) : neg(v < 0) {\n    for (v = std::abs(v); v; v /=\
+    \ BASE) dat.push_back(v % BASE);\n  }\n  BigInt(const std::string &s) : neg(false)\
+    \ {\n    int p = 0, x = 0;\n    for (; p < (int)s.size() && (s[p] == '-' || s[p]\
+    \ == '+'); p++)\n      if (s[p] == '-') neg = !neg;\n    for (int i = s.size(),\
+    \ j; i > p; i -= D, dat.push_back(x), x = 0)\n      for (j = std::max(p, i - int(D));\
+    \ j < i;) x = x * 10 + s[j++] - '0';\n    shrink();\n  }\n  inline void shrink()\
+    \ {\n    while (!dat.empty() && !dat.back()) dat.pop_back();\n    if (dat.empty())\
+    \ neg = false;\n  }\n  std::string to_str() const {\n    if (is_zero()) return\
+    \ \"0\";\n    std::stringstream ss;\n    if (neg) ss << '-';\n    ss << (dat.empty()\
+    \ ? 0 : dat.back());\n    for (long long i = dat.size() - 1; i-- > 0;)\n     \
+    \ ss << std::setw(D) << std::setfill('0') << dat[i];\n    std::string ret;\n \
+    \   return ss >> ret, ret;\n  }\n  bool is_zero() const { return dat.empty() ||\
+    \ (dat.size() == 1 && !dat[0]); }\n  bool operator<(const BigInt &r) const {\n\
+    \    if (neg != r.neg) return neg;\n    if (dat.size() != r.dat.size()) return\
+    \ (dat.size() < r.dat.size()) ^ neg;\n    for (int i = dat.size(); i--;)\n   \
+    \   if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n    return false;\n\
+    \  }\n  bool operator>(const BigInt &r) const { return r < *this; }\n  bool operator<=(const\
+    \ BigInt &r) const { return !(r < *this); }\n  bool operator>=(const BigInt &r)\
+    \ const { return !(*this < r); }\n  bool operator==(const BigInt &r) const {\n\
+    \    return (neg == r.neg && dat == r.dat) || (is_zero() && r.is_zero());\n  }\n\
+    \  bool operator!=(const BigInt &r) const { return !(*this == r); }\n  BigInt\
+    \ abs() const { return BigInt(false, dat); }\n  BigInt operator-() const { return\
+    \ BigInt(!neg, dat); }\n  BigInt operator+(const BigInt &r) const {\n    if (neg\
+    \ != r.neg) return *this - (-r);\n    auto [ret, tmp] = dat.size() > r.dat.size()\
+    \ ? std::make_pair(*this, &r)\n                                              \
+    \  : std::make_pair(r, this);\n    int car = 0, i, n = ret.dat.size(), m = tmp->dat.size();\n\
+    \    for (i = 0; i < m; i++)\n      ret.dat[i] -= BASE & -(car = ((ret.dat[i]\
+    \ += car + tmp->dat[i]) >= BASE));\n    if (car) {\n      while (i < n && ret.dat[i]\
+    \ == BASE - 1) ret.dat[i++] = 0;\n      i < n ? ret.dat[i]++ : (ret.dat.push_back(1),\
+    \ 0);\n    }\n    return ret;\n  }\n  BigInt operator-(const BigInt &r) const\
+    \ {\n    if (neg != r.neg) return *this + (-r);\n    if (r.is_zero()) return *this;\n\
+    \    if (is_zero()) return -r;\n    auto [ret, tmp] =\n        abs() > r.abs()\
+    \ ? std::make_pair(*this, &r) : std::make_pair(r, this);\n    int car = 0, i,\
+    \ n = ret.dat.size(), m = tmp->dat.size();\n    for (i = 0; i < m; i++)\n    \
+    \  ret.dat[i] += BASE & -(car = ((ret.dat[i] -= car + tmp->dat[i]) >> 31));\n\
+    \    while (car && i < n && !ret.dat[i]) ret.dat[i++] = BASE - 1;\n    return\
+    \ ret.neg ^= (tmp == this), ret.dat[i] -= car, ret.shrink(), ret;\n  }\n  long\
+    \ long operator%(long long r) const {\n    long long ret = 0;\n    for (int i\
+    \ = dat.size(); i--;) ret = (ret * BASE + dat[i]) % r;\n    return ret;\n  }\n\
+    \  BigInt operator*(const BigInt &r) const {\n    if (is_zero() || r.is_zero())\
+    \ return 0;\n    const int n = dat.size(), m = r.dat.size(), sz = n + m - 1;\n\
+    \    static mod_t f[1 << 20], g[1 << 20];\n    static long long h[1 << 20];\n\
+    \    if (int i = n, j; std::min(n, m) >= 74) {\n      for (i = n; i--;) f[i] =\
+    \ dat[i];\n      for (i = m; i--;) g[i] = r.dat[i];\n      const int l = get_len(std::max(n,\
+    \ m)), bl = __builtin_ctz(l) + 6;\n      const int len = sz - l < bl * bl * 7\
+    \ - 74 ? l : get_len(sz);\n      std::fill_n(f + n, len - n, 0), NTT::dft(len,\
+    \ f);\n      std::fill_n(g + m, len - m, 0), NTT::dft(len, g);\n      for (i =\
+    \ len; i--;) f[i] *= g[i];\n      for (NTT::idft(len, f), i = len; i < sz; f[i\
+    \ - len] -= h[i], i++)\n        for (h[i] = 0, j = i - m + 1; j < n; j++)\n  \
+    \        h[i] += (long long)dat[j] * r.dat[i - j];\n      for (i = std::min(sz,\
+    \ len); i--;) h[i] = f[i].val();\n    } else\n      for (std::fill_n(h, sz, 0);\
+    \ i--;)\n        for (j = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n\
+    \    BigInt ret(neg ^ r.neg, Vec(sz));\n    long long car = 0;\n    for (int i\
+    \ = 0; i < sz; i++, car /= BASE) ret.dat[i] = (car += h[i]) % BASE;\n    for (;\
+    \ car; car /= BASE) ret.dat.emplace_back(car % BASE);\n    return ret;\n  }\n\
+    \  BigInt operator/(const BigInt &r) const {\n    assert(!r.is_zero());\n    if\
+    \ (r.dat.size() == 1 && r.dat.back() == 1) return r.neg ? -*this : *this;\n  \
+    \  BigInt a = this->abs(), b = r.abs();\n    if (a < b) return 0;\n    const int\
+    \ pb = dat.size(), qb = r.dat.size(), prec = std::max(pb - qb, 1);\n    int l\
+    \ = std::min(prec, 3), ql = std::min(qb, 6), nl, nql;\n    BigInt x(0, Vec(l +\
+    \ 1)), p, rr = b.shift(qb - ql), c(0, Vec(l + ql + 1));\n    x.dat.back() = 1,\
+    \ c.dat.back() = 2;\n    while (x != p) p.dat.swap(x.dat), x = (p * (c - rr *\
+    \ p)).shift(l + ql);\n    if (l != prec)\n      for (p.neg = true; x != p; l =\
+    \ nl, ql = nql) {\n        nl = std::min(l * 2 + 1, prec), nql = std::min(ql *\
+    \ 2 + 1, qb);\n        p.dat.swap(x.dat), x = (p * (c - rr * p)).shift(2 * l -\
+    \ nl + ql);\n        if (p.neg = false; nql != ql) rr = b.shift(qb - nql);\n \
+    \       c.dat.back() = 0, c.dat.resize(nql + nl + 1), c.dat.back() = 2;\n    \
+    \  }\n    if (x = (x * a).shift(pb + (pb == qb)); a >= (x + 1) * b) x += 1;\n\
     \    return x.neg = neg ^ r.neg, x;\n  }\n  BigInt operator%(const BigInt &r)\
     \ const { return *this - (*this / r) * r; }\n  BigInt &operator+=(const BigInt\
     \ &r) { return *this = *this + r; }\n  BigInt &operator-=(const BigInt &r) { return\
@@ -361,7 +361,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_D.test.cpp
   requiredBy: []
-  timestamp: '2022-11-06 11:30:34+09:00'
+  timestamp: '2022-11-08 16:52:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_D.test.cpp

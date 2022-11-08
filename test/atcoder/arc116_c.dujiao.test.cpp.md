@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc116/tasks/arc116_c
@@ -94,8 +94,12 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 3 \"src/Math/DirichletConvSumTable.hpp\"\n/**\n * @title \u6570\u8AD6\u95A2\
-    \u6570\u306E\u7D2F\u7A4D\u548C\n * @category \u6570\u5B66\n * @see\n * https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C\n\
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 3 \"src/Math/DirichletConvSumTable.hpp\"\
+    \n/**\n * @title \u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C\n * @category\
+    \ \u6570\u5B66\n * @see\n * https://maspypy.com/dirichlet-%E7%A9%8D%E3%81%A8%E3%80%81%E6%95%B0%E8%AB%96%E9%96%A2%E6%95%B0%E3%81%AE%E7%B4%AF%E7%A9%8D%E5%92%8C\n\
     \ * O(KlogK + \u221A(NL))\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
     // https://atcoder.jp/contests/abc239/tasks/abc239_h (semi relaxed)\n\n// BEGIN\
     \ CUT HERE\n\ntemplate <class T>\nstruct DirichletConvSumTable {\n  std::uint64_t\
@@ -234,8 +238,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc116_c.dujiao.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-08 16:52:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc116_c.dujiao.test.cpp
 layout: document

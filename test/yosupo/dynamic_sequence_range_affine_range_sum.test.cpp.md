@@ -246,8 +246,11 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 10 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\nusing\
-    \ namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineRsumQ\
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 10 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineRsumQ\
     \ {\n  using T = Mint;\n  using E = pair<T, T>;\n  static T op(const T &vl, const\
     \ T &vr) { return vl + vr; }\n  static void mapping(T &val, const E &f, int sz)\
     \ {\n    val = f.first * val + f.second * sz;\n  }\n  static void composition(E\
@@ -289,7 +292,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-08 16:52:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

@@ -179,12 +179,15 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 6 \"test/yosupo/gcd_convolution.test.cpp\"\n\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N;\n  cin >> N;\n  vector<Mint> a(N + 1), b(N + 1);\n  for (int i = 1;\
-    \ i <= N; i++) cin >> a[i];\n  for (int i = 1; i <= N; i++) cin >> b[i];\n  auto\
-    \ c = Sieve<>::gcd_conv(a, b);\n  for (int i = 1; i <= N; i++) cout << c[i] <<\
-    \ \" \\n\"[i == N];\n  return 0;\n}\n"
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 6 \"test/yosupo/gcd_convolution.test.cpp\"\
+    \n\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint>\
+    \ a(N + 1), b(N + 1);\n  for (int i = 1; i <= N; i++) cin >> a[i];\n  for (int\
+    \ i = 1; i <= N; i++) cin >> b[i];\n  auto c = Sieve<>::gcd_conv(a, b);\n  for\
+    \ (int i = 1; i <= N; i++) cout << c[i] << \" \\n\"[i == N];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/gcd_convolution\"\n\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/Sieve.hpp\"\n#include \"src/Math/ModInt.hpp\"\
     \n\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -198,7 +201,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/gcd_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-08 16:52:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/gcd_convolution.test.cpp

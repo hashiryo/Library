@@ -106,10 +106,14 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 6 \"test/aoj/DPL_5_E.test.cpp\"\nusing namespace std;\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int n, k;\n  cin >> n >> k;\n\
-    \  using Mint = StaticModInt<int(1e9 + 7)>;\n  using C = Combination<Mint>;\n\
-    \  cout << C::nCr(k, n) << endl;\n  return 0;\n}\n"
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 6 \"test/aoj/DPL_5_E.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  int n, k;\n  cin >> n >> k;\n  using Mint = StaticModInt<int(1e9 + 7)>;\n \
+    \ using C = Combination<Mint>;\n  cout << C::nCr(k, n) << endl;\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_E\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/Combination.hpp\"\n#include \"\
     src/Math/ModInt.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
@@ -122,7 +126,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_E.test.cpp
   requiredBy: []
-  timestamp: '2022-11-06 11:30:34+09:00'
+  timestamp: '2022-11-08 16:52:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_E.test.cpp

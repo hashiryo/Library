@@ -226,13 +226,16 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 7 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\nusing namespace std;\n\
-    \nusing Mint = StaticModInt<998244353>;\nstruct RaffineQ_RsumQ {\n  using T =\
-    \ Mint;\n  using E = pair<Mint, Mint>;\n  static T op(const T &l, const T &r)\
-    \ { return l + r; }\n  static void mapping(T &v, const E &f, std::size_t sz) {\n\
-    \    v = f.first * v + f.second * sz;\n  }\n  static void composition(E &pre,\
-    \ const E &suf) {\n    pre = {suf.first * pre.first, suf.first * pre.second +\
-    \ suf.second};\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 7 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineQ_RsumQ\
+    \ {\n  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T op(const T &l,\
+    \ const T &r) { return l + r; }\n  static void mapping(T &v, const E &f, std::size_t\
+    \ sz) {\n    v = f.first * v + f.second * sz;\n  }\n  static void composition(E\
+    \ &pre, const E &suf) {\n    pre = {suf.first * pre.first, suf.first * pre.second\
+    \ + suf.second};\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  Mint v[N];\n  for (int i = 0; i < N; i++) cin\
     \ >> v[i];\n  using WBT = WeightBalancedTree<RaffineQ_RsumQ, 1 << 24>;\n  WBT\
     \ wbt(v, v + N);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op\
@@ -262,7 +265,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
+  timestamp: '2022-11-08 16:52:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

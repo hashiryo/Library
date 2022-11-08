@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dual.hpp
     title: "Segment-Tree(\u53CC\u5BFE)"
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: ModInt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
@@ -94,35 +94,38 @@ data:
     \                  ModInt_Na<DynamicB_Na<Int, id>>>;\n}  // namespace modint_internal\n\
     using modint_internal::DynamicModInt, modint_internal::StaticModInt,\n    modint_internal::Montgomery,\
     \ modint_internal::is_dynamicmodint_v,\n    modint_internal::is_modint_v, modint_internal::is_staticmodint_v;\n\
-    #line 3 \"src/DataStructure/SegmentTree_Dual.hpp\"\n/**\n * @title Segment-Tree(\u53CC\
-    \u5BFE)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n */\n\
-    \n// BEGIN CUT HERE\n\ntemplate <typename M>\nstruct SegmentTree_Dual {\n  using\
-    \ T = typename M::T;\n  using E = typename M::E;\n  SegmentTree_Dual() {}\n  SegmentTree_Dual(int\
-    \ n_, T v1 = T())\n      : n(n_), height(ceil(log2(n))), val(n, v1), laz(n * 2,\
-    \ {E(), false}) {}\n  SegmentTree_Dual(const std::vector<T> &v)\n      : n(v.size()),\
-    \ height(ceil(log2(n))), val(v), laz(n * 2, {E(), false}) {}\n  void apply(int\
-    \ a, int b, E x) {\n    a += n, b += n;\n    for (int i = height; i >= 1; i--)\n\
-    \      if (((a >> i) << i) != a) eval(a >> i);\n    for (int i = height; i >=\
-    \ 1; i--)\n      if (((b >> i) << i) != b) eval((b - 1) >> i);\n    for (int l\
-    \ = a, r = b; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) propagate(l++, x);\n\
-    \      if (r & 1) propagate(--r, x);\n    }\n  }\n  void set(int k, T x) {\n \
-    \   for (int i = height; i; i--) eval((k + n) >> i);\n    val[k] = x, laz[k +\
-    \ n].flg = false;\n  }\n  T operator[](const int k) {\n    for (int i = height;\
-    \ i; i--) eval((k + n) >> i);\n    if (laz[k + n].flg)\n      M::mapping(val[k],\
-    \ laz[k + n].val), laz[k + n].flg = false;\n    return val[k];\n  }\n\n private:\n\
-    \  const int n, height;\n  struct Lazy {\n    E val;\n    bool flg;\n  };\n  std::vector<T>\
-    \ val;\n  std::vector<Lazy> laz;\n  inline void eval(int k) {\n    if (!laz[k].flg)\
-    \ return;\n    propagate(k << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n\
-    \    laz[k].flg = false;\n  }\n  inline void propagate(int k, const E &x) {\n\
-    \    laz[k].flg ? (M::composition(laz[k].val, x), x) : laz[k].val = x;\n    laz[k].flg\
-    \ = true;\n  }\n};\n#line 6 \"test/atcoder/abc256_f.SegDual.test.cpp\"\nusing\
-    \ namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct Mono {\n  struct\
-    \ T {\n    Mint val, coef[2];\n    T() = default;\n    T(Mint id, Mint v)\n  \
-    \      : val(v), coef{(id + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n  };\n  using\
-    \ E = array<Mint, 3>;\n  static void mapping(T &x, const E &mapp) {\n    x.val\
-    \ += mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\n  }\n  static void\
-    \ composition(E &pre, const E &suf) {\n    pre[0] += suf[0], pre[1] += suf[1],\
-    \ pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    template <class mod_t, std::size_t LIM>\nmod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  static const auto m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static\
+    \ int l = 1;\n  if (l == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m %\
+    \ l] * (m - m / l);\n  return dat[n];\n}\n#line 3 \"src/DataStructure/SegmentTree_Dual.hpp\"\
+    \n/**\n * @title Segment-Tree(\u53CC\u5BFE)\n * @category \u30C7\u30FC\u30BF\u69CB\
+    \u9020\n * @brief O(logN)\n */\n\n// BEGIN CUT HERE\n\ntemplate <typename M>\n\
+    struct SegmentTree_Dual {\n  using T = typename M::T;\n  using E = typename M::E;\n\
+    \  SegmentTree_Dual() {}\n  SegmentTree_Dual(int n_, T v1 = T())\n      : n(n_),\
+    \ height(ceil(log2(n))), val(n, v1), laz(n * 2, {E(), false}) {}\n  SegmentTree_Dual(const\
+    \ std::vector<T> &v)\n      : n(v.size()), height(ceil(log2(n))), val(v), laz(n\
+    \ * 2, {E(), false}) {}\n  void apply(int a, int b, E x) {\n    a += n, b += n;\n\
+    \    for (int i = height; i >= 1; i--)\n      if (((a >> i) << i) != a) eval(a\
+    \ >> i);\n    for (int i = height; i >= 1; i--)\n      if (((b >> i) << i) !=\
+    \ b) eval((b - 1) >> i);\n    for (int l = a, r = b; l < r; l >>= 1, r >>= 1)\
+    \ {\n      if (l & 1) propagate(l++, x);\n      if (r & 1) propagate(--r, x);\n\
+    \    }\n  }\n  void set(int k, T x) {\n    for (int i = height; i; i--) eval((k\
+    \ + n) >> i);\n    val[k] = x, laz[k + n].flg = false;\n  }\n  T operator[](const\
+    \ int k) {\n    for (int i = height; i; i--) eval((k + n) >> i);\n    if (laz[k\
+    \ + n].flg)\n      M::mapping(val[k], laz[k + n].val), laz[k + n].flg = false;\n\
+    \    return val[k];\n  }\n\n private:\n  const int n, height;\n  struct Lazy {\n\
+    \    E val;\n    bool flg;\n  };\n  std::vector<T> val;\n  std::vector<Lazy> laz;\n\
+    \  inline void eval(int k) {\n    if (!laz[k].flg) return;\n    propagate(k <<\
+    \ 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n    laz[k].flg = false;\n\
+    \  }\n  inline void propagate(int k, const E &x) {\n    laz[k].flg ? (M::composition(laz[k].val,\
+    \ x), x) : laz[k].val = x;\n    laz[k].flg = true;\n  }\n};\n#line 6 \"test/atcoder/abc256_f.SegDual.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct Mono {\n\
+    \  struct T {\n    Mint val, coef[2];\n    T() = default;\n    T(Mint id, Mint\
+    \ v)\n        : val(v), coef{(id + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n \
+    \ };\n  using E = array<Mint, 3>;\n  static void mapping(T &x, const E &mapp)\
+    \ {\n    x.val += mapp[0] * x.coef[0] - mapp[1] * x.coef[1] + mapp[2];\n  }\n\
+    \  static void composition(E &pre, const E &suf) {\n    pre[0] += suf[0], pre[1]\
+    \ += suf[1], pre[2] += suf[2];\n  }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  int N, Q;\n  cin >> N >> Q;\n  Mint A[N], D[N];\n  for (int i = 0; i < N; i++)\
     \ cin >> A[i], D[i] = A[i];\n  for (int j = 0; j < 3; j++)\n    for (int i = 1;\
     \ i < N; i++) D[i] += D[i - 1];\n  SegmentTree_Dual<Mono> seg(N);\n  for (int\
@@ -152,8 +155,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.SegDual.test.cpp
   requiredBy: []
-  timestamp: '2022-10-29 19:15:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-08 16:52:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.SegDual.test.cpp
 layout: document
