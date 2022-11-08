@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   _extendedRequiredBy: []

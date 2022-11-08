@@ -66,7 +66,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
@@ -104,7 +104,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/FFT/BigInt.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     - icon: ':x:'
@@ -203,7 +203,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -248,7 +248,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/ModIntExp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
     - icon: ':question:'
@@ -769,7 +769,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc213_h.test.cpp
       title: test/atcoder/abc213_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -778,7 +778,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc230_h.test.cpp
       title: test/atcoder/abc230_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -790,13 +790,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -805,10 +805,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc018_c.test.cpp
       title: test/atcoder/agc018_c.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -820,7 +820,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.dujiao.test.cpp
       title: test/atcoder/arc116_c.dujiao.test.cpp
     - icon: ':heavy_check_mark:'
@@ -845,10 +845,10 @@ data:
       title: test/hackerrank/cube-summation.KDT.test.cpp
   - name: test/unit_test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_log.test.cpp
       title: test/unit_test/nimber_log.test.cpp
     - icon: ':x:'

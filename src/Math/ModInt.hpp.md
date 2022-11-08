@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -112,31 +112,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.dujiao.test.cpp
     title: test/atcoder/arc116_c.dujiao.test.cpp
   - icon: ':x:'
