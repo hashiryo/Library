@@ -5,13 +5,37 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
+  - icon: ':question:'
+    path: src/Math/sparse_fps.hpp
+    title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc222_h.sparse_FPS.test.cpp
+    title: test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc276_g.sparse_FPS.test.cpp
+    title: test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/exp_of_sparse_FPS.test.cpp
+    title: test/yosupo/exp_of_sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/inv_of_sparse_FPS.test.cpp
+    title: test/yosupo/inv_of_sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/log_of_sparse_FPS.test.cpp
+    title: test/yosupo/log_of_sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/pow_of_sparse_FPS.test.cpp
+    title: test/yosupo/pow_of_sparse_FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_mod.test.cpp
     title: test/yosupo/sqrt_mod.test.cpp
   - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1080.sparse_FPS.test.cpp
+    title: test/yukicoder/1080.sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
@@ -53,12 +77,20 @@ data:
   isVerificationFile: false
   path: src/Math/mod_sqrt.hpp
   requiredBy:
+  - src/Math/sparse_fps.hpp
   - src/FFT/fps_sqrt.hpp
   timestamp: '2022-10-03 10:06:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1080.test.cpp
+  - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
   - test/yosupo/sqrt_mod.test.cpp
 documentation_of: src/Math/mod_sqrt.hpp
 layout: document

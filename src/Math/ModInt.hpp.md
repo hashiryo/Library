@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -48,6 +48,9 @@ data:
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
+  - icon: ':question:'
+    path: src/Math/sparse_fps.hpp
+    title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
@@ -109,28 +112,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc222_h.sparse_FPS.test.cpp
+    title: test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc276_g.sparse_FPS.test.cpp
+    title: test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
   - icon: ':x:'
@@ -170,6 +179,9 @@ data:
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
   - icon: ':x:'
+    path: test/yosupo/exp_of_sparse_FPS.test.cpp
+    title: test/yosupo/exp_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
   - icon: ':x:'
@@ -191,6 +203,9 @@ data:
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
+    path: test/yosupo/inv_of_sparse_FPS.test.cpp
+    title: test/yosupo/inv_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
   - icon: ':x:'
@@ -208,6 +223,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/log_of_sparse_FPS.test.cpp
+    title: test/yosupo/log_of_sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
@@ -235,6 +253,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/pow_of_sparse_FPS.test.cpp
+    title: test/yosupo/pow_of_sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
@@ -289,6 +310,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1080.sparse_FPS.test.cpp
+    title: test/yukicoder/1080.sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
@@ -516,6 +540,7 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt.hpp
   requiredBy:
+  - src/Math/sparse_fps.hpp
   - src/FFT/BigInt.hpp
   - src/FFT/sequences.hpp
   - src/FFT/extgcd.hpp
@@ -545,6 +570,7 @@ data:
   - test/yukicoder/1019.test.cpp
   - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/980.test.cpp
+  - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/644.test.cpp
@@ -577,11 +603,13 @@ data:
   - test/atcoder/abc230_h.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/abc213_g.test.cpp
+  - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/arc116_c.dujiao.test.cpp
+  - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
@@ -593,6 +621,7 @@ data:
   - test/yosupo/exp_of_FPS.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/yosupo/range_affine_range_sum.WBT.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/find_linear_recurrence.test.cpp
@@ -601,6 +630,7 @@ data:
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/multivariate_convolution.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
@@ -632,6 +662,8 @@ data:
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/pow_of_FPS.FPS.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
   - test/yosupo/gcd_convolution.test.cpp
 documentation_of: src/Math/ModInt.hpp
 layout: document
