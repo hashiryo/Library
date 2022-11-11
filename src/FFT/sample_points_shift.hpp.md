@@ -10,16 +10,31 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: src/FFT/polynomial_matrix_prod.hpp
+    title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u7DCF\u7A4D"
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+    title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/42.test.cpp
+    title: test/yukicoder/42.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/502.test.cpp
+    title: test/yukicoder/502.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/665.test.cpp
+    title: test/yukicoder/665.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    document_title: sample points shift
+    document_title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
     links: []
   bundledCode: "#line 2 \"src/FFT/sample_points_shift.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n *\
@@ -261,24 +276,29 @@ data:
     \ id = 0>\nstruct GlobalArray {\n  static inline T bf[_Nm];\n};\nconstexpr std::uint32_t\
     \ get_len(std::uint32_t n) {\n  return (n |= (n |= (n |= (n |= (n |= (--n) >>\
     \ 1) >> 2) >> 4) >> 8) >> 16) + 1;\n}\n#line 4 \"src/FFT/sample_points_shift.hpp\"\
-    \n\n/**\n * @title sample points shift\n * @category FFT\n * O( (d+m)log(d+m)\
+    \n\n/**\n * @title \u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8\
+    \n * @category FFT\n * y=f(0),f(1),...,f(n-1)\u304C\u4E0E\u3048\u3089\u308C\u305F\
+    \u3068\u304D\u306Ef(c),f(c+1),...,f(c+m-1)\u3092\u8A08\u7B97\n * O( (n+m)log(n+m)\
     \ )\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
-    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &pts, mod_t c,\n\
-    \                                       int m) {\n  assert(m <= mod_t::modulo()),\
-    \ assert(pts.size() <= mod_t::modulo());\n  if (m == 0) return {};\n  std::uint64_t\
-    \ c_64 = c.val(), nc1 = (c + (m - 1)).val();\n  std::uint32_t k = pts.size(),\
-    \ d = k - 1, i = d, e;\n  if (c_64 + m <= k)\n    return std::vector<mod_t>(pts.begin()\
-    \ + c_64, pts.begin() + c_64 + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n\
-    \  for (GA::bf[d] = 1; i; i--) GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1)\
-    \ / (GA::bf[0] * GA::bf[0]);\n  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d\
-    \ - i] = GA::bf[i] * GA::bf[d - i] * t;\n  for (i = k; i--;) GA::bf[i] *= pts[i];\n\
-    \  for (i = 1; i < k; i += 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z\
-    \ = 0;\n  auto f = [&](mod_t a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t,\
-    \ _Nm, 1>;\n    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
+    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &y, mod_t c,\n\
+    \                                       int m = 1) {\n  assert(m <= mod_t::modulo()),\
+    \ assert(y.size() <= mod_t::modulo());\n  static constexpr int TH = = is_nttfriend<mod_t,\
+    \ _Nm2>()      ? 50\n                              : is_nttarraydouble<mod_t,\
+    \ _Nm2> ? 130\n                                                              \
+    \ : 145;\n  if (m == 0) return {};\n  std::uint64_t c_64 = c.val(), nc1 = (c +\
+    \ (m - 1)).val();\n  std::uint32_t k = y.size(), d = k - 1, i = d, e;\n  if (c_64\
+    \ + m <= k)\n    return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64\
+    \ + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n  for (GA::bf[d] = 1; i; i--)\
+    \ GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1) / (GA::bf[0] * GA::bf[0]);\n\
+    \  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d - i] = GA::bf[i] * GA::bf[d\
+    \ - i] * t;\n  for (i = k; i--;) GA::bf[i] *= y[i];\n  for (i = 1; i < k; i +=\
+    \ 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z = 0;\n  auto f = [&](mod_t\
+    \ a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
+    \    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
     \ _Nm, 2>;\n    for (e = d + n, i = 0, t = a - d; i < e; i++, t += 1) ret[i] =\
     \ t;\n    std::partial_sum(ret, ret + e, GAq::bf, std::multiplies<>());\n    for\
     \ (t = mod_t(1) / GAq::bf[e - 1]; --i;)\n      GAq::bf[i] = t * GAq::bf[i - 1],\
-    \ t *= ret[i];\n    if (GAq::bf[0] = t; k >= 74 && n >= 128) {\n      const int\
+    \ t *= ret[i];\n    if (GAq::bf[0] = t; k >= TH && n >= TH) {\n      const int\
     \ len = get_len(e + (d > 0));\n      GNA1::bf.set(GA::bf, 0, k), GNA1::bf.zeros(k,\
     \ len), GNA1::bf.dft(0, len);\n      GNA2::bf.set(GAq::bf, 0, e), GNA2::bf.zeros(e,\
     \ len), GNA2::bf.dft(0, len);\n      GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0,\
@@ -287,32 +307,37 @@ data:
     \ * GAq::bf[j + b];\n    for (t = a, i = k; --i;) t *= a - i;\n    for (; i <\
     \ n; i++) ret[i] *= t, t *= (a + (i + 1)) * GAq::bf[i];\n    return ret + n;\n\
     \  };\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  if (mod_t * bf; c_64 < k)\
-    \ {\n    if (bf = std::copy_n(pts.begin() + c_64, k - c_64, GAp::bf); nc1 < k)\n\
-    \      std::copy_n(pts.begin(), nc1 + 1, f(k, mod_t::modulo() - k, bf));\n   \
-    \ else\n      f(k, c_64 + m - k, bf);\n  } else if (nc1 < c_64) {\n    if (mod_t\
-    \ *bf = f(c, (-c).val(), GAp::bf); nc1 < k)\n      std::copy_n(pts.begin(), nc1\
-    \ + 1, bf);\n    else\n      f(k, nc1 + 1 - k, std::copy_n(pts.begin(), k, bf));\n\
-    \  } else\n    f(c, m, GAp::bf);\n  return std::vector<mod_t>(GAp::bf, GAp::bf\
-    \ + m);\n}\n"
+    \ {\n    if (bf = std::copy_n(y.begin() + c_64, k - c_64, GAp::bf); nc1 < k)\n\
+    \      std::copy_n(y.begin(), nc1 + 1, f(k, mod_t::modulo() - k, bf));\n    else\n\
+    \      f(k, c_64 + m - k, bf);\n  } else if (nc1 < c_64) {\n    if (mod_t *bf\
+    \ = f(c, (-c).val(), GAp::bf); nc1 < k)\n      std::copy_n(y.begin(), nc1 + 1,\
+    \ bf);\n    else\n      f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n  }\
+    \ else\n    f(c, m, GAp::bf);\n  return std::vector<mod_t>(GAp::bf, GAp::bf +\
+    \ m);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\n\n\
-    /**\n * @title sample points shift\n * @category FFT\n * O( (d+m)log(d+m) )\n\
-    \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
-    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &pts, mod_t c,\n\
-    \                                       int m) {\n  assert(m <= mod_t::modulo()),\
-    \ assert(pts.size() <= mod_t::modulo());\n  if (m == 0) return {};\n  std::uint64_t\
-    \ c_64 = c.val(), nc1 = (c + (m - 1)).val();\n  std::uint32_t k = pts.size(),\
-    \ d = k - 1, i = d, e;\n  if (c_64 + m <= k)\n    return std::vector<mod_t>(pts.begin()\
-    \ + c_64, pts.begin() + c_64 + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n\
-    \  for (GA::bf[d] = 1; i; i--) GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1)\
-    \ / (GA::bf[0] * GA::bf[0]);\n  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d\
-    \ - i] = GA::bf[i] * GA::bf[d - i] * t;\n  for (i = k; i--;) GA::bf[i] *= pts[i];\n\
-    \  for (i = 1; i < k; i += 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z\
-    \ = 0;\n  auto f = [&](mod_t a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t,\
-    \ _Nm, 1>;\n    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
+    /**\n * @title \u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8\n\
+    \ * @category FFT\n * y=f(0),f(1),...,f(n-1)\u304C\u4E0E\u3048\u3089\u308C\u305F\
+    \u3068\u304D\u306Ef(c),f(c+1),...,f(c+m-1)\u3092\u8A08\u7B97\n * O( (n+m)log(n+m)\
+    \ )\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
+    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &y, mod_t c,\n\
+    \                                       int m = 1) {\n  assert(m <= mod_t::modulo()),\
+    \ assert(y.size() <= mod_t::modulo());\n  static constexpr int TH = = is_nttfriend<mod_t,\
+    \ _Nm2>()      ? 50\n                              : is_nttarraydouble<mod_t,\
+    \ _Nm2> ? 130\n                                                              \
+    \ : 145;\n  if (m == 0) return {};\n  std::uint64_t c_64 = c.val(), nc1 = (c +\
+    \ (m - 1)).val();\n  std::uint32_t k = y.size(), d = k - 1, i = d, e;\n  if (c_64\
+    \ + m <= k)\n    return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64\
+    \ + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n  for (GA::bf[d] = 1; i; i--)\
+    \ GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1) / (GA::bf[0] * GA::bf[0]);\n\
+    \  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d - i] = GA::bf[i] * GA::bf[d\
+    \ - i] * t;\n  for (i = k; i--;) GA::bf[i] *= y[i];\n  for (i = 1; i < k; i +=\
+    \ 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z = 0;\n  auto f = [&](mod_t\
+    \ a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
+    \    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
     \ _Nm, 2>;\n    for (e = d + n, i = 0, t = a - d; i < e; i++, t += 1) ret[i] =\
     \ t;\n    std::partial_sum(ret, ret + e, GAq::bf, std::multiplies<>());\n    for\
     \ (t = mod_t(1) / GAq::bf[e - 1]; --i;)\n      GAq::bf[i] = t * GAq::bf[i - 1],\
-    \ t *= ret[i];\n    if (GAq::bf[0] = t; k >= 74 && n >= 128) {\n      const int\
+    \ t *= ret[i];\n    if (GAq::bf[0] = t; k >= TH && n >= TH) {\n      const int\
     \ len = get_len(e + (d > 0));\n      GNA1::bf.set(GA::bf, 0, k), GNA1::bf.zeros(k,\
     \ len), GNA1::bf.dft(0, len);\n      GNA2::bf.set(GAq::bf, 0, e), GNA2::bf.zeros(e,\
     \ len), GNA2::bf.dft(0, len);\n      GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0,\
@@ -321,28 +346,33 @@ data:
     \ * GAq::bf[j + b];\n    for (t = a, i = k; --i;) t *= a - i;\n    for (; i <\
     \ n; i++) ret[i] *= t, t *= (a + (i + 1)) * GAq::bf[i];\n    return ret + n;\n\
     \  };\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  if (mod_t * bf; c_64 < k)\
-    \ {\n    if (bf = std::copy_n(pts.begin() + c_64, k - c_64, GAp::bf); nc1 < k)\n\
-    \      std::copy_n(pts.begin(), nc1 + 1, f(k, mod_t::modulo() - k, bf));\n   \
-    \ else\n      f(k, c_64 + m - k, bf);\n  } else if (nc1 < c_64) {\n    if (mod_t\
-    \ *bf = f(c, (-c).val(), GAp::bf); nc1 < k)\n      std::copy_n(pts.begin(), nc1\
-    \ + 1, bf);\n    else\n      f(k, nc1 + 1 - k, std::copy_n(pts.begin(), k, bf));\n\
-    \  } else\n    f(c, m, GAp::bf);\n  return std::vector<mod_t>(GAp::bf, GAp::bf\
-    \ + m);\n}"
+    \ {\n    if (bf = std::copy_n(y.begin() + c_64, k - c_64, GAp::bf); nc1 < k)\n\
+    \      std::copy_n(y.begin(), nc1 + 1, f(k, mod_t::modulo() - k, bf));\n    else\n\
+    \      f(k, c_64 + m - k, bf);\n  } else if (nc1 < c_64) {\n    if (mod_t *bf\
+    \ = f(c, (-c).val(), GAp::bf); nc1 < k)\n      std::copy_n(y.begin(), nc1 + 1,\
+    \ bf);\n    else\n      f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n  }\
+    \ else\n    f(c, m, GAp::bf);\n  return std::vector<mod_t>(GAp::bf, GAp::bf +\
+    \ m);\n}"
   dependsOn:
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
   - src/Math/ModInt.hpp
   isVerificationFile: false
   path: src/FFT/sample_points_shift.hpp
-  requiredBy: []
-  timestamp: '2022-11-08 16:52:02+09:00'
+  requiredBy:
+  - src/FFT/polynomial_matrix_prod.hpp
+  timestamp: '2022-11-11 17:34:01+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/yukicoder/502.test.cpp
+  - test/yukicoder/42.test.cpp
+  - test/yukicoder/665.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
 documentation_of: src/FFT/sample_points_shift.hpp
 layout: document
 redirect_from:
 - /library/src/FFT/sample_points_shift.hpp
 - /library/src/FFT/sample_points_shift.hpp.html
-title: sample points shift
+title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
 ---

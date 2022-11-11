@@ -14,7 +14,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':x:'
@@ -29,10 +29,10 @@ data:
   - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
   - icon: ':question:'
@@ -42,9 +42,12 @@ data:
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
   - icon: ':x:'
-    path: src/FFT/sample_points_shift.hpp
-    title: sample points shift
+    path: src/FFT/polynomial_matrix_prod.hpp
+    title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u7DCF\u7A4D"
   - icon: ':x:'
+    path: src/FFT/sample_points_shift.hpp
+    title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
+  - icon: ':question:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
@@ -98,10 +101,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':x:'
@@ -194,6 +197,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+    title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
@@ -219,8 +225,17 @@ data:
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/42.test.cpp
+    title: test/yukicoder/42.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/502.test.cpp
+    title: test/yukicoder/502.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/665.test.cpp
+    title: test/yukicoder/665.test.cpp
   - icon: ':x:'
     path: test/yukicoder/963.FPS.test.cpp
     title: test/yukicoder/963.FPS.test.cpp
@@ -270,6 +285,7 @@ data:
   - src/Math/Factors.hpp
   - src/Math/ModIntExp.hpp
   - src/Math/StirlingNumber.hpp
+  - src/FFT/polynomial_matrix_prod.hpp
   - src/FFT/BigInt.hpp
   - src/FFT/sequences.hpp
   - src/FFT/extgcd.hpp
@@ -292,13 +308,16 @@ data:
   - test/yukicoder/215.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/215.Poly.test.cpp
+  - test/yukicoder/502.test.cpp
   - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/980.test.cpp
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/3030.test.cpp
   - test/yukicoder/137.div_at.test.cpp
   - test/yukicoder/1145.test.cpp
+  - test/yukicoder/42.test.cpp
   - test/yukicoder/658.test.cpp
+  - test/yukicoder/665.test.cpp
   - test/aoj/NTL_1_D.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_C.test.cpp
@@ -313,6 +332,7 @@ data:
   - test/atcoder/abc228_e.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/exp_of_FPS.test.cpp
   - test/yosupo/inv_of_FPS.FPS.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
