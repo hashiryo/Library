@@ -3,13 +3,13 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_primes.test.cpp
     title: test/yosupo/enumerate_primes.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/gcd_convolution.test.cpp
     title: test/yosupo/gcd_convolution.test.cpp
   - icon: ':x:'
@@ -78,22 +78,22 @@ data:
     \ {\n    return sieve(N), std::vector<int>(ps, std::upper_bound(ps, ps + psz,\
     \ N));\n  }\n  template <class T, class F>\n  static inline std::vector<T> completely_multiplicative_table(int\
     \ N,\n                                                               const F &f)\
-    \ {\n    std::vector<T> ret(N + 1);\n    sieve(N);\n    if (int n = 4; 2 <= N)\n\
-    \      for (ret[2] = f(2, 1); n <= N; n += 2) ret[n] = ret[2] * ret[n >> 1];\n\
-    \    for (int n = 3, i = 1; n <= N; n += 2, i++)\n      ret[n] = lpf[i] == n ?\
-    \ f(n, 1) : ret[lpf[i]] * ret[n / lpf[i]];\n    return ret[1] = 1, ret;\n  }\n\
-    \  template <class T, class F>\n  static inline std::vector<T> multiplicative_table(int\
+    \ {\n    std::vector<T> ret(N + 1);\n    sieve(N);\n    for (int n = 3, i = 1;\
+    \ n <= N; n += 2, i++)\n      ret[n] = lpf[i] == n ? f(n, 1) : ret[lpf[i]] * ret[n\
+    \ / lpf[i]];\n    if (int n = 4; 2 <= N)\n      for (ret[2] = f(2, 1); n <= N;\
+    \ n += 2) ret[n] = ret[2] * ret[n >> 1];\n    return ret[1] = 1, ret;\n  }\n \
+    \ template <class T, class F>\n  static inline std::vector<T> multiplicative_table(int\
     \ N, const F &f) {\n    std::vector<T> ret(N + 1);\n    set_lpfe(N);\n    for\
-    \ (int n = 2, t; n <= N; n += 2)\n      t = __builtin_ctz(n),\n      ret[n] =\
-    \ n & (n - 1) ? ret[n & -n] * ret[n >> t] : f(2, t);\n    for (int n = 3, i =\
-    \ 1; n <= N; n += 2, i++)\n      ret[n] = lpfpw[i] == n ? f(lpf[i], lpfe[i])\n\
-    \                             : ret[lpfpw[i]] * ret[n / lpfpw[i]];\n    return\
-    \ ret[1] = 1, ret;\n  }\n  // O(N log k / log N + N)\n  template <class T>\n \
-    \ static std::vector<T> pow_table(int N, std::uint64_t k) {\n    if (k == 0) return\
-    \ std::vector<T>(N + 1, 1);\n    auto f = [k](int p, short) {\n      T ret = 1,\
-    \ b = p;\n      for (auto e = k;; b *= b)\n        if (e & 1 ? ret *= b, !(e >>=\
-    \ 1) : !(e >>= 1)) return ret;\n    };\n    return completely_multiplicative_table<T>(N,\
-    \ f);\n  }\n  // O(N log MOD / log N + N)\n  template <class T>\n  static std::vector<T>\
+    \ (int n = 3, i = 1; n <= N; n += 2, i++)\n      ret[n] = lpfpw[i] == n ? f(lpf[i],\
+    \ lpfe[i])\n                             : ret[lpfpw[i]] * ret[n / lpfpw[i]];\n\
+    \    for (int n = 2, t; n <= N; n += 2)\n      t = __builtin_ctz(n),\n      ret[n]\
+    \ = n & (n - 1) ? ret[n & -n] * ret[n >> t] : f(2, t);\n    return ret[1] = 1,\
+    \ ret;\n  }\n  // O(N log k / log N + N)\n  template <class T>\n  static std::vector<T>\
+    \ pow_table(int N, std::uint64_t k) {\n    if (k == 0) return std::vector<T>(N\
+    \ + 1, 1);\n    auto f = [k](int p, short) {\n      T ret = 1, b = p;\n      for\
+    \ (auto e = k;; b *= b)\n        if (e & 1 ? ret *= b, !(e >>= 1) : !(e >>= 1))\
+    \ return ret;\n    };\n    return completely_multiplicative_table<T>(N, f);\n\
+    \  }\n  // O(N log MOD / log N + N)\n  template <class T>\n  static std::vector<T>\
     \ inv_table(int N) {\n    return completely_multiplicative_table<T>(\n       \
     \ N, [](int p, short) { return T(1) / p; });\n  }\n  // naive , O(N log N)\n \
     \ template <class T>\n  static std::vector<T> dirichlet_conv(const std::vector<T>\
@@ -169,22 +169,22 @@ data:
     \ {\n    return sieve(N), std::vector<int>(ps, std::upper_bound(ps, ps + psz,\
     \ N));\n  }\n  template <class T, class F>\n  static inline std::vector<T> completely_multiplicative_table(int\
     \ N,\n                                                               const F &f)\
-    \ {\n    std::vector<T> ret(N + 1);\n    sieve(N);\n    if (int n = 4; 2 <= N)\n\
-    \      for (ret[2] = f(2, 1); n <= N; n += 2) ret[n] = ret[2] * ret[n >> 1];\n\
-    \    for (int n = 3, i = 1; n <= N; n += 2, i++)\n      ret[n] = lpf[i] == n ?\
-    \ f(n, 1) : ret[lpf[i]] * ret[n / lpf[i]];\n    return ret[1] = 1, ret;\n  }\n\
-    \  template <class T, class F>\n  static inline std::vector<T> multiplicative_table(int\
+    \ {\n    std::vector<T> ret(N + 1);\n    sieve(N);\n    for (int n = 3, i = 1;\
+    \ n <= N; n += 2, i++)\n      ret[n] = lpf[i] == n ? f(n, 1) : ret[lpf[i]] * ret[n\
+    \ / lpf[i]];\n    if (int n = 4; 2 <= N)\n      for (ret[2] = f(2, 1); n <= N;\
+    \ n += 2) ret[n] = ret[2] * ret[n >> 1];\n    return ret[1] = 1, ret;\n  }\n \
+    \ template <class T, class F>\n  static inline std::vector<T> multiplicative_table(int\
     \ N, const F &f) {\n    std::vector<T> ret(N + 1);\n    set_lpfe(N);\n    for\
-    \ (int n = 2, t; n <= N; n += 2)\n      t = __builtin_ctz(n),\n      ret[n] =\
-    \ n & (n - 1) ? ret[n & -n] * ret[n >> t] : f(2, t);\n    for (int n = 3, i =\
-    \ 1; n <= N; n += 2, i++)\n      ret[n] = lpfpw[i] == n ? f(lpf[i], lpfe[i])\n\
-    \                             : ret[lpfpw[i]] * ret[n / lpfpw[i]];\n    return\
-    \ ret[1] = 1, ret;\n  }\n  // O(N log k / log N + N)\n  template <class T>\n \
-    \ static std::vector<T> pow_table(int N, std::uint64_t k) {\n    if (k == 0) return\
-    \ std::vector<T>(N + 1, 1);\n    auto f = [k](int p, short) {\n      T ret = 1,\
-    \ b = p;\n      for (auto e = k;; b *= b)\n        if (e & 1 ? ret *= b, !(e >>=\
-    \ 1) : !(e >>= 1)) return ret;\n    };\n    return completely_multiplicative_table<T>(N,\
-    \ f);\n  }\n  // O(N log MOD / log N + N)\n  template <class T>\n  static std::vector<T>\
+    \ (int n = 3, i = 1; n <= N; n += 2, i++)\n      ret[n] = lpfpw[i] == n ? f(lpf[i],\
+    \ lpfe[i])\n                             : ret[lpfpw[i]] * ret[n / lpfpw[i]];\n\
+    \    for (int n = 2, t; n <= N; n += 2)\n      t = __builtin_ctz(n),\n      ret[n]\
+    \ = n & (n - 1) ? ret[n & -n] * ret[n >> t] : f(2, t);\n    return ret[1] = 1,\
+    \ ret;\n  }\n  // O(N log k / log N + N)\n  template <class T>\n  static std::vector<T>\
+    \ pow_table(int N, std::uint64_t k) {\n    if (k == 0) return std::vector<T>(N\
+    \ + 1, 1);\n    auto f = [k](int p, short) {\n      T ret = 1, b = p;\n      for\
+    \ (auto e = k;; b *= b)\n        if (e & 1 ? ret *= b, !(e >>= 1) : !(e >>= 1))\
+    \ return ret;\n    };\n    return completely_multiplicative_table<T>(N, f);\n\
+    \  }\n  // O(N log MOD / log N + N)\n  template <class T>\n  static std::vector<T>\
     \ inv_table(int N) {\n    return completely_multiplicative_table<T>(\n       \
     \ N, [](int p, short) { return T(1) / p; });\n  }\n  // naive , O(N log N)\n \
     \ template <class T>\n  static std::vector<T> dirichlet_conv(const std::vector<T>\
@@ -235,7 +235,7 @@ data:
   isVerificationFile: false
   path: src/Math/Sieve.hpp
   requiredBy: []
-  timestamp: '2022-11-12 11:04:09+09:00'
+  timestamp: '2022-11-12 16:12:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp

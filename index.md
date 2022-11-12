@@ -275,7 +275,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/discrete_logarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
@@ -285,7 +285,7 @@ data:
     - icon: ':question:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
     - icon: ':question:'
@@ -751,7 +751,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.dujiao.test.cpp
       title: test/atcoder/abc172_d.dujiao.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
     - icon: ':heavy_check_mark:'
@@ -843,7 +843,7 @@ data:
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/hackerrank
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
       title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     - icon: ':heavy_check_mark:'
@@ -940,16 +940,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/frequency_table_of_tree_distance.test.cpp
       title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/hafnian_of_matrix.test.cpp
       title: test/yosupo/hafnian_of_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.FPS.test.cpp
       title: test/yosupo/inv_of_FPS.FPS.test.cpp
     - icon: ':x:'

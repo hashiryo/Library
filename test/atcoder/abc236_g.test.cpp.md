@@ -61,7 +61,7 @@ data:
     #line 3 \"src/LinearAlgebra/Matrix.hpp\"\n/**\n * @title \u884C\u5217\n * @category\
     \ \u7DDA\u5F62\u4EE3\u6570\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// BEGIN\
     \ CUT HERE\n\ntemplate <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R,\
-    \ M>, N> {\n  static constexpr Matrix O() { return Matrix{}; }\n  Matrix &operator+=(const\
+    \ M>, N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
     \ Matrix &r) {\n    for (int i = N; i--;)\n      for (int j = M; j--;) (*this)[i][j]\
     \ += r[i][j];\n    return *this;\n  }\n  Matrix operator+(const Matrix &r) const\
     \ { return Matrix(*this) += r; }\n  template <int L>\n  Matrix<R, N, L> operator*(const\
@@ -74,7 +74,7 @@ data:
     \ ret(n, std::vector<R>(m));\n    for (int i = n; i--;)\n      for (int j = m;\
     \ j--;) ret[i][j] = (*this)[i][j];\n    return ret;\n  }\n};\n\ntemplate <int\
     \ N, int M>\nstruct Matrix<bool, N, M> : public std::array<std::bitset<M>, N>\
-    \ {\n  static constexpr Matrix O() { return Matrix{}; }\n  Matrix &operator+=(const\
+    \ {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
     \ Matrix &r) {\n    for (int i = N; i--;) (*this)[i] ^= r[i];\n    return *this;\n\
     \  }\n  Matrix operator+(const Matrix &r) const { return Matrix(*this) += r; }\n\
     \  template <int L>\n  Matrix<bool, N, L> operator*(const Matrix<bool, M, L> &r)\
@@ -89,11 +89,11 @@ data:
     \    return ret;\n  }\n};\n\ntemplate <class R, int N>\nstruct SquareMatrix :\
     \ public Matrix<R, N, N> {\n  using Matrix<R, N, N>::Matrix;\n  SquareMatrix(Matrix<R,\
     \ N, N> m) { *this = m; }\n  static constexpr SquareMatrix I() {\n    SquareMatrix\
-    \ ret = {};\n    for (int i = N; i--;) ret[i][i] = R(true);\n    return ret;\n\
-    \  }\n  SquareMatrix &operator=(const Matrix<R, N, N> &r) {\n    for (int i =\
-    \ N; i--;)\n      for (int j = N; j--;) (*this)[i][j] = r[i][j];\n    return *this;\n\
-    \  }\n  SquareMatrix &operator*=(const SquareMatrix &r) {\n    return *this =\
-    \ (*this) * r;\n  }\n  SquareMatrix pow(std::uint64_t e) const {\n    for (SquareMatrix\
+    \ ret;\n    for (int i = N; i--;) ret[i][i] = R(true);\n    return ret;\n  }\n\
+    \  SquareMatrix &operator=(const Matrix<R, N, N> &r) {\n    for (int i = N; i--;)\n\
+    \      for (int j = N; j--;) (*this)[i][j] = r[i][j];\n    return *this;\n  }\n\
+    \  SquareMatrix &operator*=(const SquareMatrix &r) {\n    return *this = (*this)\
+    \ * r;\n  }\n  SquareMatrix pow(std::uint64_t e) const {\n    for (SquareMatrix\
     \ ret = I(), b = *this;; b *= b)\n      if (e & 1 ? ret *= b, !(e >>= 1) : !(e\
     \ >>= 1)) return ret;\n  }\n};\n#line 8 \"test/atcoder/abc236_g.test.cpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -116,7 +116,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2022-11-06 11:30:34+09:00'
+  timestamp: '2022-11-12 16:12:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp
