@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_sparse_FPS.test.cpp
     title: test/yosupo/exp_of_sparse_FPS.test.cpp
   - icon: ':x:'
@@ -39,6 +39,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1533.test.cpp
+    title: test/yukicoder/1533.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1939.test.cpp
+    title: test/yukicoder/1939.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -82,8 +88,10 @@ data:
   timestamp: '2022-10-03 10:06:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1533.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1080.test.cpp
+  - test/yukicoder/1939.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp
