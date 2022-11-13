@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -66,54 +66,58 @@ data:
     \  int a = ln[A], b = ln[B], mod = 65535;\n    if (a == 0) return b == 0 ? 1 :\
     \ -1;\n    if (int g = std::gcd(a, mod); g != 1) {\n      if (b % g != 0) return\
     \ -1;\n      a /= g, b /= g, mod /= g;\n    }\n    return u32(b) * minv(a, mod)\
-    \ % mod;\n  }\n  template <int pa, int mid>\n  static inline int bsgs(u64 x, u64\
-    \ y) {\n    std::unordered_map<u64, int> memo;\n    u64 big = 1, now = 1;\n  \
-    \  for (int i = 0; i < mid; i++) memo[y] = i, y = mul(y, x), big = mul(big, x);\n\
-    \    for (int step = 0; step < pa; step += mid) {\n      now = mul(now, big);\n\
-    \      if (auto it = memo.find(now); it != memo.end())\n        return (step +\
-    \ mid) - it->second;\n    }\n    return -1;\n  }\n  static inline u64 log(u64\
-    \ A, u64 B) {\n    if (B == 1) return 0;\n    if (!A && !B) return 1;\n    if\
-    \ (!A || !B) return u64(-1);\n    static constexpr int P0 = 641, P1 = 65535, P2\
-    \ = 65537, P3 = 6700417;\n    static constexpr int iv10 = 40691, iv21 = 32768,\
-    \ iv20 = 45242,\n                         iv32 = 3317441, iv31 = 3350208, iv30\
-    \ = 3883315;\n    int a0 = bsgs<651, 26>(pow(A, 0x663d80ff99c27f), pow(B, 0x663d80ff99c27f));\n\
-    \    if (a0 == -1) return u64(-1);\n    int a1 = log16(pow(A, 0x1000100010001),\
-    \ pow(B, 0x1000100010001));\n    if (a1 == -1) return u64(-1);\n    int a2 = bsgs<65547,\
-    \ 257>(pow(A, 0xffff0000ffff), pow(B, 0xffff0000ffff));\n    if (a2 == -1) return\
-    \ u64(-1);\n    int a3 = bsgs<6700427, 2589>(pow(A, 0x280fffffd7f), pow(B, 0x280fffffd7f));\n\
-    \    if (a3 == -1) return u64(-1);\n    int x1 = mmul<P1>(mdif<P1>(a1, a0), iv10);\n\
-    \    int x2 = mdif<P2>(mmul<P2>(mdif<P2>(a2, a0), iv20), mmul<P2>(x1, iv21));\n\
-    \    int x3 =\n        mdif<P3>(mdif<P3>(mmul<P3>(mdif<P3>(a3, a0), iv30), mmul<P3>(x1,\
-    \ iv31)),\n                 mmul<P3>(x2, iv32));\n    return u64(P0) * (u64(P1)\
-    \ * (u64(P2) * x3 + x2) + x1) + a0;\n  }\n  u64 x;\n\n public:\n  static inline\
-    \ void init(u32 x = 0, u32 y = 0) {\n    constexpr u16 f2n[16] = {\n        0x0001u,\
-    \ 0x2827u, 0x392bu, 0x8000u, 0x20fdu, 0x4d1du, 0xde4au, 0x0a17u,\n        0x3464u,\
-    \ 0xe3a9u, 0x6d8du, 0x34bcu, 0xa921u, 0xa173u, 0x0ebcu, 0x0e69u};\n    for (int\
-    \ i = pw[0] = pw[65535] = 1; i < 65535; ++i)\n      pw[i] = (pw[i - 1] << 1) ^\
-    \ (0x1681fu & (-(pw[i - 1] >= 0x8000u)));\n    for (int i = 1; i < 65535; ln[pw[i]\
-    \ = y] = i, i++)\n      for (x = pw[i], y = 0; x; x &= x - 1) y ^= f2n[__builtin_ctz(x)];\n\
-    \  }\n  Nimber(u64 x_ = 0) : x(x_) {}\n  Nimber &operator+=(const Nimber &r) {\
-    \ return x ^= r.x, *this; }\n  Nimber &operator-=(const Nimber &r) { return x\
-    \ ^= r.x, *this; }\n  Nimber &operator*=(const Nimber &r) { return x = mul(x,\
-    \ r.x), *this; }\n  Nimber &operator/=(const Nimber &r) { return x = mul(x, inv(r.x)),\
-    \ *this; }\n  Nimber operator+(const Nimber &r) const { return Nimber(x ^ r.x);\
-    \ }\n  Nimber operator-(const Nimber &r) const { return Nimber(x ^ r.x); }\n \
-    \ Nimber operator*(const Nimber &r) const { return Nimber(mul(x, r.x)); }\n  Nimber\
-    \ operator/(const Nimber &r) const { return Nimber(mul(x, inv(r.x))); }\n  Nimber\
-    \ inv() const { return Nimber(inv(x)); }\n  Nimber square() const { return Nimber(square(x));\
-    \ }\n  Nimber sqrt() const {\n    u16 a0 = u16(x), a1 = u16(x >> 16), a2 = u16(x\
-    \ >> 32), a3 = x >> 48;\n    a1 ^= half(a3 ^ a2), a2 ^= half(a3), a0 ^= half(a1)\
-    \ ^ half<6>(a3);\n    return Nimber((u64(sqrt(a3)) << 48) | (u64(sqrt(a2)) <<\
-    \ 32) |\n                  (u32(sqrt(a1)) << 16) | sqrt(a0));\n  }\n  u64 val()\
-    \ const { return x; }\n  Nimber pow(u64 k) const { return Nimber(pow(x, k)); }\n\
-    \  u64 log(const Nimber &r) const { return log(x, r.x); }\n  bool operator==(const\
-    \ Nimber &r) const { return x == r.x; }\n  bool operator!=(const Nimber &r) const\
-    \ { return x != r.x; }\n  bool operator<(const Nimber &r) const { return x < r.x;\
-    \ }\n  bool operator>(const Nimber &r) const { return x > r.x; }\n  bool operator<=(const\
-    \ Nimber &r) const { return x <= r.x; }\n  bool operator>=(const Nimber &r) const\
-    \ { return x >= r.x; }\n  friend std::ostream &operator<<(std::ostream &os, const\
-    \ Nimber &r) {\n    return os << r.x;\n  }\n  friend std::istream &operator>>(std::istream\
-    \ &is, Nimber &r) {\n    return is >> r.x, is;\n  }\n};\n#line 4 \"test/unit_test/nimber_sqrt.test.cpp\"\
+    \ % mod;\n  }\n  template <int period, int size>\n  static inline int bsgs(u64\
+    \ x, u64 y) {\n    static constexpr int mask = size - 1;\n    std::pair<u64, int>\
+    \ vs[size];\n    int os[size + 1] = {};\n    u64 so[size], big = 1;\n    for (int\
+    \ i = 0; i < size; i++, big = mul(big, x))\n      os[(so[i] = big) & mask]++;\n\
+    \    for (int i = 1; i < size; i++) os[i] += os[i - 1];\n    for (int i = 0; i\
+    \ < size; i++) vs[--os[so[i] & mask]] = {so[i], i};\n    os[size] = size;\n  \
+    \  for (int t = 0; t < period; t += size, y = mul(y, big))\n      for (int m =\
+    \ (y & mask), i = os[m], ret; i < os[m + 1]; ++i)\n        if (y == vs[i].first)\n\
+    \          return (ret = vs[i].second - t) < 0 ? ret + period : ret;\n    return\
+    \ -1;\n  }\n  static inline u64 log(u64 A, u64 B) {\n    if (B == 1) return 0;\n\
+    \    if (!A && !B) return 1;\n    if (!A || !B) return u64(-1);\n    static constexpr\
+    \ int P0 = 641, P1 = 65535, P2 = 65537, P3 = 6700417;\n    static constexpr int\
+    \ iv10 = 40691, iv21 = 32768, iv20 = 45242,\n                         iv32 = 3317441,\
+    \ iv31 = 3350208, iv30 = 3883315;\n    int a0 = bsgs<P0, 16>(pow(A, 0x663d80ff99c27f),\
+    \ pow(B, 0x663d80ff99c27f));\n    if (a0 == -1) return u64(-1);\n    int a1 =\
+    \ log16(pow(A, 0x1000100010001), pow(B, 0x1000100010001));\n    if (a1 == -1)\
+    \ return u64(-1);\n    int a2 = bsgs<P2, 256>(pow(A, 0xffff0000ffff), pow(B, 0xffff0000ffff));\n\
+    \    if (a2 == -1) return u64(-1);\n    int a3 = bsgs<P3, 2048>(pow(A, 0x280fffffd7f),\
+    \ pow(B, 0x280fffffd7f));\n    if (a3 == -1) return u64(-1);\n    int x1 = mmul<P1>(mdif<P1>(a1,\
+    \ a0), iv10);\n    int x2 = mdif<P2>(mmul<P2>(mdif<P2>(a2, a0), iv20), mmul<P2>(x1,\
+    \ iv21));\n    int x3 =\n        mdif<P3>(mdif<P3>(mmul<P3>(mdif<P3>(a3, a0),\
+    \ iv30), mmul<P3>(x1, iv31)),\n                 mmul<P3>(x2, iv32));\n    return\
+    \ u64(P0) * (u64(P1) * (u64(P2) * x3 + x2) + x1) + a0;\n  }\n  u64 x;\n\n public:\n\
+    \  static inline void init(u32 x = 0, u32 y = 0) {\n    constexpr u16 f2n[16]\
+    \ = {\n        0x0001u, 0x2827u, 0x392bu, 0x8000u, 0x20fdu, 0x4d1du, 0xde4au,\
+    \ 0x0a17u,\n        0x3464u, 0xe3a9u, 0x6d8du, 0x34bcu, 0xa921u, 0xa173u, 0x0ebcu,\
+    \ 0x0e69u};\n    for (int i = pw[0] = pw[65535] = 1; i < 65535; ++i)\n      pw[i]\
+    \ = (pw[i - 1] << 1) ^ (0x1681fu & (-(pw[i - 1] >= 0x8000u)));\n    for (int i\
+    \ = 1; i < 65535; ln[pw[i] = y] = i, i++)\n      for (x = pw[i], y = 0; x; x &=\
+    \ x - 1) y ^= f2n[__builtin_ctz(x)];\n  }\n  Nimber(u64 x_ = 0) : x(x_) {}\n \
+    \ Nimber &operator+=(const Nimber &r) { return x ^= r.x, *this; }\n  Nimber &operator-=(const\
+    \ Nimber &r) { return x ^= r.x, *this; }\n  Nimber &operator*=(const Nimber &r)\
+    \ { return x = mul(x, r.x), *this; }\n  Nimber &operator/=(const Nimber &r) {\
+    \ return x = mul(x, inv(r.x)), *this; }\n  Nimber operator+(const Nimber &r) const\
+    \ { return Nimber(x ^ r.x); }\n  Nimber operator-(const Nimber &r) const { return\
+    \ Nimber(x ^ r.x); }\n  Nimber operator*(const Nimber &r) const { return Nimber(mul(x,\
+    \ r.x)); }\n  Nimber operator/(const Nimber &r) const { return Nimber(mul(x, inv(r.x)));\
+    \ }\n  Nimber inv() const { return Nimber(inv(x)); }\n  Nimber square() const\
+    \ { return Nimber(square(x)); }\n  Nimber sqrt() const {\n    u16 a0 = u16(x),\
+    \ a1 = u16(x >> 16), a2 = u16(x >> 32), a3 = x >> 48;\n    a1 ^= half(a3 ^ a2),\
+    \ a2 ^= half(a3), a0 ^= half(a1) ^ half<6>(a3);\n    return Nimber((u64(sqrt(a3))\
+    \ << 48) | (u64(sqrt(a2)) << 32) |\n                  (u32(sqrt(a1)) << 16) |\
+    \ sqrt(a0));\n  }\n  u64 val() const { return x; }\n  Nimber pow(u64 k) const\
+    \ { return Nimber(pow(x, k)); }\n  u64 log(const Nimber &r) const { return log(x,\
+    \ r.x); }\n  bool operator==(const Nimber &r) const { return x == r.x; }\n  bool\
+    \ operator!=(const Nimber &r) const { return x != r.x; }\n  bool operator<(const\
+    \ Nimber &r) const { return x < r.x; }\n  bool operator>(const Nimber &r) const\
+    \ { return x > r.x; }\n  bool operator<=(const Nimber &r) const { return x <=\
+    \ r.x; }\n  bool operator>=(const Nimber &r) const { return x >= r.x; }\n  friend\
+    \ std::ostream &operator<<(std::ostream &os, const Nimber &r) {\n    return os\
+    \ << r.x;\n  }\n  friend std::istream &operator>>(std::istream &is, Nimber &r)\
+    \ {\n    return is >> r.x, is;\n  }\n};\n#line 4 \"test/unit_test/nimber_sqrt.test.cpp\"\
     \nusing namespace std;\n\nvoid test(int X) {\n  mt19937 mt(X);\n  uniform_int_distribution<uint64_t>\
     \ rng(0, ULLONG_MAX);\n  static constexpr int N = 100000;\n  static Nimber a[N],\
     \ b[N];\n  for (int i = 0; i < N; i++) a[i] = rng(mt), b[i] = a[i] * a[i];\n \
@@ -136,8 +140,8 @@ data:
   isVerificationFile: true
   path: test/unit_test/nimber_sqrt.test.cpp
   requiredBy: []
-  timestamp: '2022-11-06 00:20:09+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-14 01:24:19+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/nimber_sqrt.test.cpp
 layout: document

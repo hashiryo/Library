@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tetration_mod
@@ -76,19 +76,20 @@ data:
     \ 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\
     \u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\
     \n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
-    \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
-    \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
-    \ auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3);\
-    \ --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t\
-    \ x) { return x < m ? x : x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);;\
-    \ a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a)\
-    \ : 0; !(k >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t a,\
-    \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
-    \ m : a;\n}\n#line 4 \"test/yosupo/tetration_mod.test.cpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n  cin\
-    \ >> T;\n  while (T--) {\n    int A, B, M;\n    cin >> A >> B >> M;\n    cout\
-    \ << H4(A, B, M) << '\\n';\n  }\n  return 0;\n}\n"
+    \n// BEGIN CUT HERE\nnamespace tetration_internal {\nconstexpr std::uint64_t rec(std::uint64_t\
+    \ a, std::uint64_t b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n\
+    \  if (b == 0 || m == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i\
+    \ = 0;\n  for (const auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e\
+    \ - (p == 2 && e > 3); --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto\
+    \ mod = [m](__uint128_t x) { return x < m ? x : x % m + m; };\n  for (k = rec(a,\
+    \ b - 1, k), a = mod(a);; a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret =\
+    \ mod(__uint128_t(ret) * a) : 0; !(k >>= 1)) return ret;\n}\n}  // namespace tetration_internal\n\
+    constexpr std::uint64_t H4(std::uint64_t a, std::uint64_t b, std::uint64_t m)\
+    \ {\n  return (a = tetration_internal::rec(a, b, m)) >= m ? a - m : a;\n}\n#line\
+    \ 4 \"test/yosupo/tetration_mod.test.cpp\"\nusing namespace std;\n\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n  cin >> T;\n  while\
+    \ (T--) {\n    int A, B, M;\n    cin >> A >> B >> M;\n    cout << H4(A, B, M)\
+    \ << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tetration_mod\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/tetration.hpp\"\nusing namespace std;\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n  cin\
@@ -101,8 +102,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-10-16 17:42:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-14 01:24:19+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -9,12 +9,12 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$\
       \ ($\\mathbb{Z}/m\\mathbb{Z}$)"
@@ -74,38 +74,38 @@ data:
     \ 4 \"src/Math/tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\
     \u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\
     \n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
-    \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
-    \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
-    \ auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3);\
-    \ --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t\
-    \ x) { return x < m ? x : x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);;\
-    \ a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a)\
-    \ : 0; !(k >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t a,\
-    \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
-    \ m : a;\n}\n"
+    \n// BEGIN CUT HERE\nnamespace tetration_internal {\nconstexpr std::uint64_t rec(std::uint64_t\
+    \ a, std::uint64_t b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n\
+    \  if (b == 0 || m == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i\
+    \ = 0;\n  for (const auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e\
+    \ - (p == 2 && e > 3); --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto\
+    \ mod = [m](__uint128_t x) { return x < m ? x : x % m + m; };\n  for (k = rec(a,\
+    \ b - 1, k), a = mod(a);; a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret =\
+    \ mod(__uint128_t(ret) * a) : 0; !(k >>= 1)) return ret;\n}\n}  // namespace tetration_internal\n\
+    constexpr std::uint64_t H4(std::uint64_t a, std::uint64_t b, std::uint64_t m)\
+    \ {\n  return (a = tetration_internal::rec(a, b, m)) >= m ? a - m : a;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\
     \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$\
     \ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n\
     // verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\nconstexpr std::uint64_t rec(std::uint64_t a, std::uint64_t\
-    \ b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m\
-    \ == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i = 0;\n  for (const\
-    \ auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3);\
-    \ --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t\
-    \ x) { return x < m ? x : x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);;\
-    \ a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a)\
-    \ : 0; !(k >>= 1)) return ret;\n}\nconstexpr std::uint64_t H4(std::uint64_t a,\
-    \ std::uint64_t b, std::uint64_t m) {\n  return (a = rec(a, b, m)) >= m ? a -\
-    \ m : a;\n}\n"
+    \n// BEGIN CUT HERE\nnamespace tetration_internal {\nconstexpr std::uint64_t rec(std::uint64_t\
+    \ a, std::uint64_t b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n\
+    \  if (b == 0 || m == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i\
+    \ = 0;\n  for (const auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e\
+    \ - (p == 2 && e > 3); --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto\
+    \ mod = [m](__uint128_t x) { return x < m ? x : x % m + m; };\n  for (k = rec(a,\
+    \ b - 1, k), a = mod(a);; a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret =\
+    \ mod(__uint128_t(ret) * a) : 0; !(k >>= 1)) return ret;\n}\n}  // namespace tetration_internal\n\
+    constexpr std::uint64_t H4(std::uint64_t a, std::uint64_t b, std::uint64_t m)\
+    \ {\n  return (a = tetration_internal::rec(a, b, m)) >= m ? a - m : a;\n}\n"
   dependsOn:
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: false
   path: src/Math/tetration.hpp
   requiredBy: []
-  timestamp: '2022-10-16 17:42:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-11-14 01:24:19+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
 documentation_of: src/Math/tetration.hpp

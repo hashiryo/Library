@@ -1,55 +1,67 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Math/mod_inv.hpp
+    title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     links: []
   bundledCode: "#line 2 \"src/Math/discrete_logarithm.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title \u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category\
-    \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nint discrete_logarithm(unsigned\
+    #line 3 \"src/Math/mod_inv.hpp\"\n/**\n * @title \u9006\u5143 ($\\mathbb{Z}/m\\\
+    mathbb{Z}$)\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <class\
+    \ Int>\nconstexpr inline Int mod_inv(Int a, Int mod) {\n  Int x = 1, y = 0, b\
+    \ = mod;\n  for (Int q = 0, z = 0, c = 0; b;)\n    z = x, c = a, x = y, y = z\
+    \ - y * (q = a / b), a = b, b = c - b * q;\n  return assert(a == 1), x < 0 ? mod\
+    \ - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/discrete_logarithm.hpp\"\n/**\n\
+    \ * @title \u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category\
+    \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nconstexpr int discrete_logarithm(unsigned\
     \ a, unsigned b, unsigned mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0\
     \ : 1) : (b == 1 ? 0 : -1);\n  using u32 = unsigned;\n  auto mul = [&mod](u32\
-    \ &x, u32 y) { x = (std::uint64_t)x * y % mod; };\n  auto inv = [&mod](u32 s)\
-    \ -> u32 {\n    int x = 1, y = 0, t = mod;\n    for (int q, z, u; t;)\n      z\
-    \ = x, u = s, x = y, y = z - y * (q = s / t), s = t, t = u - t * q;\n    return\
-    \ x < 0 ? mod - (-x) % mod : x % mod;\n  };\n  u32 cnt = 0;\n  for (u32 g;; cnt++,\
-    \ b /= g, mod /= g, mul(b, inv(a / g))) {\n    if ((b == 1) || (mod == 1)) return\
-    \ cnt;\n    if ((g = std::gcd(a, mod)) == 1) break;\n    if (b % g != 0) return\
-    \ -1;  // no solution\n  }\n  u32 mid = std::ceil(std::sqrt(mod)), baby = 1;\n\
-    \  std::unordered_map<u32, u32> mp;\n  for (u32 i = 0; i < mid; i++, mul(baby,\
-    \ a)) mp.insert({baby, i});\n  for (u32 i = 0, iv = inv(baby), giant = b; i <\
-    \ mid; mul(giant, iv), i++)\n    if (auto it = mp.find(giant); it != mp.end())\n\
-    \      return cnt + i * mid + it->second;\n  return -1;  // no solution\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u96E2\u6563\u5BFE\
-    \u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n * O(\u221Amod)\n\
-    \ */\n\n// BEGIN CUT HERE\nint discrete_logarithm(unsigned a, unsigned b, unsigned\
-    \ mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b == 1 ? 0 : -1);\n\
-    \  using u32 = unsigned;\n  auto mul = [&mod](u32 &x, u32 y) { x = (std::uint64_t)x\
-    \ * y % mod; };\n  auto inv = [&mod](u32 s) -> u32 {\n    int x = 1, y = 0, t\
-    \ = mod;\n    for (int q, z, u; t;)\n      z = x, u = s, x = y, y = z - y * (q\
-    \ = s / t), s = t, t = u - t * q;\n    return x < 0 ? mod - (-x) % mod : x % mod;\n\
-    \  };\n  u32 cnt = 0;\n  for (u32 g;; cnt++, b /= g, mod /= g, mul(b, inv(a /\
-    \ g))) {\n    if ((b == 1) || (mod == 1)) return cnt;\n    if ((g = std::gcd(a,\
-    \ mod)) == 1) break;\n    if (b % g != 0) return -1;  // no solution\n  }\n  u32\
-    \ mid = std::ceil(std::sqrt(mod)), baby = 1;\n  std::unordered_map<u32, u32> mp;\n\
-    \  for (u32 i = 0; i < mid; i++, mul(baby, a)) mp.insert({baby, i});\n  for (u32\
-    \ i = 0, iv = inv(baby), giant = b; i < mid; mul(giant, iv), i++)\n    if (auto\
-    \ it = mp.find(giant); it != mp.end())\n      return cnt + i * mid + it->second;\n\
-    \  return -1;  // no solution\n}\n"
-  dependsOn: []
+    \ &x, u32 y) { x = (std::uint64_t)x * y % mod; };\n  u32 cnt = 0;\n  for (u32\
+    \ g = 0;; cnt++, b /= g, mod /= g, mul(b, mod_inv<int>(a / g, mod))) {\n    if\
+    \ ((b == 1) || (mod == 1)) return cnt;\n    if ((g = std::gcd(a, mod)) == 1) break;\n\
+    \    if (b % g != 0) return -1;  // no solution\n  }\n  u32 baby = 1, size = 1\
+    \ << std::__lg(int(std::sqrt(mod))), mask = size - 1,\n      os[size + 1] = {},\
+    \ vs[size][2] = {};\n  for (u32 i = 0; i < size; i++, mul(baby, a)) os[baby &\
+    \ mask]++;\n  for (u32 i = 1; i < size; i++) os[i] += os[i - 1];\n  os[size] =\
+    \ size, baby = 1;\n  for (u32 i = 0, j = 0; i < size; i++, mul(baby, a))\n   \
+    \ j = --os[baby & mask], vs[j][0] = baby, vs[j][1] = i;\n  for (u32 t = 0, iv\
+    \ = mod_inv<int>(baby, mod); t < mod; t += size, mul(b, iv))\n    for (u32 m =\
+    \ (b & mask), i = os[m + 1]; i-- > os[m];)\n      if (b == vs[i][0]) return cnt\
+    \ + vs[i][1] + t;\n  return -1;  // no solution\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/mod_inv.hpp\"\
+    \n/**\n * @title \u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category\
+    \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nconstexpr int discrete_logarithm(unsigned\
+    \ a, unsigned b, unsigned mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0\
+    \ : 1) : (b == 1 ? 0 : -1);\n  using u32 = unsigned;\n  auto mul = [&mod](u32\
+    \ &x, u32 y) { x = (std::uint64_t)x * y % mod; };\n  u32 cnt = 0;\n  for (u32\
+    \ g = 0;; cnt++, b /= g, mod /= g, mul(b, mod_inv<int>(a / g, mod))) {\n    if\
+    \ ((b == 1) || (mod == 1)) return cnt;\n    if ((g = std::gcd(a, mod)) == 1) break;\n\
+    \    if (b % g != 0) return -1;  // no solution\n  }\n  u32 baby = 1, size = 1\
+    \ << std::__lg(int(std::sqrt(mod))), mask = size - 1,\n      os[size + 1] = {},\
+    \ vs[size][2] = {};\n  for (u32 i = 0; i < size; i++, mul(baby, a)) os[baby &\
+    \ mask]++;\n  for (u32 i = 1; i < size; i++) os[i] += os[i - 1];\n  os[size] =\
+    \ size, baby = 1;\n  for (u32 i = 0, j = 0; i < size; i++, mul(baby, a))\n   \
+    \ j = --os[baby & mask], vs[j][0] = baby, vs[j][1] = i;\n  for (u32 t = 0, iv\
+    \ = mod_inv<int>(baby, mod); t < mod; t += size, mul(b, iv))\n    for (u32 m =\
+    \ (b & mask), i = os[m + 1]; i-- > os[m];)\n      if (b == vs[i][0]) return cnt\
+    \ + vs[i][1] + t;\n  return -1;  // no solution\n}"
+  dependsOn:
+  - src/Math/mod_inv.hpp
   isVerificationFile: false
   path: src/Math/discrete_logarithm.hpp
   requiredBy: []
-  timestamp: '2022-10-25 15:42:12+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-11-14 01:24:19+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Math/discrete_logarithm.hpp

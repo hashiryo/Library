@@ -1,20 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
+  - icon: ':question:'
+    path: src/Math/mod_inv.hpp
+    title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     links:
@@ -70,42 +73,44 @@ data:
     \ (auto [q, e] : f) {\n      for (pw = 1, x = ret, k = (p - 1) / q;; x = mul(x,\
     \ x, p))\n        if (k & 1 ? pw = mul(pw, x, p) : 0; !(k >>= 1)) break;\n   \
     \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
-    \ 4 \"src/Math/BinomialCoefficient.hpp\"\n/**\n * @title \u4E8C\u9805\u4FC2\u6570\
-    \ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n * @see https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n\
-    \ */\n\n// BEGIN CUT HERE\nclass BinomialCoefficient {  // mod <= 1e6\n  static\
-    \ inline constexpr int inv_mod(int a, int mod) {\n    int x = 1, y = 0, b = mod;\n\
-    \    for (int q = 0, z = 0, c = 0; b;)\n      z = x, c = a, x = y, y = z - y *\
-    \ (q = a / b), a = b, b = c - b * q;\n    return assert(a == 1), x < 0 ? mod -\
-    \ (-x) % mod : x % mod;\n  }\n  using i64 = std::int64_t;\n  struct ModPe {\n\
-    \    ModPe() = default;\n    ModPe(int p, int e, std::size_t pre_size = 1 << 14)\n\
-    \        : p(p), e(e), ppows(e + 1, 1) {\n      for (int i = 1; i <= e; ++i) ppows[i]\
-    \ = ppows[i - 1] * p;\n      for (pp = pe = ppows[e]; std::size_t(pp) * p <= pre_size;)\
-    \ pp *= p;\n      q = pp / pe * p, facts.resize(pp, 1);\n      for (int qq = 1,\
-    \ l = pp / p; qq < q; qq *= p, l /= p)\n        for (int i = 0; i < l; ++i)\n\
-    \          for (int j = i * p + 1; j < i * p + p; ++j) facts[j * qq] = j;\n  \
-    \    for (int i = 1; i < pp; ++i) facts[i] = i64(facts[i - 1]) * facts[i] % pe;\n\
-    \      mask = (facts[pp - 1] == pe - 1), ds.resize(q, 0);\n      for (int i =\
-    \ 0; i < pp / pe; ++i)\n        for (int j = 0, s = ds[i]; j < p; ++j) ds[i *\
-    \ p + j] = s + j;\n    }\n    int operator()(i64 n, i64 m) const {\n      int\
-    \ num = 1, den = 1, x = 0, s = 0;\n      if (i64 r = n - m; e > 1)\n        for\
-    \ (i64 n1, m1, r1; n > 0; n = n1, m = m1, r = r1) {\n          n1 = n / pp, m1\
-    \ = m / pp, r1 = r / pp;\n          num = i64(num) * facts[n - n1 * pp] % pp;\n\
-    \          den = i64(den) * facts[m - m1 * pp] % pp * facts[r - r1 * pp] % pp;\n\
-    \          s += n1 - m1 - r1, n1 = n / q, m1 = m / q, r1 = r / q;\n          x\
-    \ += ds[m - m1 * q] + ds[r - r1 * q] - ds[n - n1 * q];\n        }\n      else\n\
-    \        for (i64 n1, m1, r1; n > 0; n = n1, m = m1, r = r1) {\n          n1 =\
-    \ n / pp, m1 = m / pp, r1 = r / pp;\n          int nr = n - n1 * pp, mr = m -\
-    \ m1 * pp, rr = r - r1 * pp;\n          num = i64(num) * facts[nr] % pp;\n   \
-    \       den = i64(den) * facts[mr] % pp * facts[rr] % pp;\n          s += n1 -\
-    \ m1 - r1, x += ds[mr] + ds[rr] - ds[nr];\n        }\n      if (x >= e * (p -\
-    \ 1)) return 0;\n      if (p > 2) x /= p - 1;\n      int ret = i64(num) * inv_mod(den,\
-    \ pe) % pe * ppows[x] % pe;\n      return (s & mask) && ret > 0 ? pe - ret : ret;\n\
-    \    }\n    int p, e, mask, pe, q, pp;\n    std::vector<int> ppows, facts, ds;\n\
-    \  };\n  int mod;\n  std::vector<ModPe> binom_pp;\n  std::vector<int> iprods;\n\
-    \n public:\n  BinomialCoefficient(int mod, std::size_t pre_size = 1 << 14) : mod(mod)\
-    \ {\n    Factors f(mod);\n    if (f.size() == 1) pre_size = 1 << 20;\n    int\
-    \ prod = 1;\n    for (auto [p, e] : f) {\n      binom_pp.emplace_back(ModPe(p,\
-    \ e, pre_size));\n      iprods.push_back(inv_mod(prod, binom_pp.back().pe));\n\
+    \ 3 \"src/Math/mod_inv.hpp\"\n/**\n * @title \u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)\n\
+    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <class Int>\nconstexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n  Int x = 1, y = 0, b = mod;\n  for (Int\
+    \ q = 0, z = 0, c = 0; b;)\n    z = x, c = a, x = y, y = z - y * (q = a / b),\
+    \ a = b, b = c - b * q;\n  return assert(a == 1), x < 0 ? mod - (-x) % mod : x\
+    \ % mod;\n}\n#line 5 \"src/Math/BinomialCoefficient.hpp\"\n/**\n * @title \u4E8C\
+    \u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n *\
+    \ @see https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n */\n\n// BEGIN\
+    \ CUT HERE\nclass BinomialCoefficient {  // mod <= 1e6\n  using i64 = std::int64_t;\n\
+    \  struct ModPe {\n    ModPe() = default;\n    ModPe(int p, int e, std::size_t\
+    \ pre_size = 1 << 14)\n        : p(p), e(e), ppows(e + 1, 1) {\n      for (int\
+    \ i = 1; i <= e; ++i) ppows[i] = ppows[i - 1] * p;\n      for (pp = pe = ppows[e];\
+    \ std::size_t(pp) * p <= pre_size;) pp *= p;\n      q = pp / pe * p, facts.resize(pp,\
+    \ 1);\n      for (int qq = 1, l = pp / p; qq < q; qq *= p, l /= p)\n        for\
+    \ (int i = 0; i < l; ++i)\n          for (int j = i * p + 1; j < i * p + p; ++j)\
+    \ facts[j * qq] = j;\n      for (int i = 1; i < pp; ++i) facts[i] = i64(facts[i\
+    \ - 1]) * facts[i] % pe;\n      mask = (facts[pp - 1] == pe - 1), ds.resize(q,\
+    \ 0);\n      for (int i = 0; i < pp / pe; ++i)\n        for (int j = 0, s = ds[i];\
+    \ j < p; ++j) ds[i * p + j] = s + j;\n    }\n    int operator()(i64 n, i64 m)\
+    \ const {\n      int num = 1, den = 1, x = 0, s = 0;\n      if (i64 r = n - m;\
+    \ e > 1)\n        for (i64 n1, m1, r1; n > 0; n = n1, m = m1, r = r1) {\n    \
+    \      n1 = n / pp, m1 = m / pp, r1 = r / pp;\n          num = i64(num) * facts[n\
+    \ - n1 * pp] % pp;\n          den = i64(den) * facts[m - m1 * pp] % pp * facts[r\
+    \ - r1 * pp] % pp;\n          s += n1 - m1 - r1, n1 = n / q, m1 = m / q, r1 =\
+    \ r / q;\n          x += ds[m - m1 * q] + ds[r - r1 * q] - ds[n - n1 * q];\n \
+    \       }\n      else\n        for (i64 n1, m1, r1; n > 0; n = n1, m = m1, r =\
+    \ r1) {\n          n1 = n / pp, m1 = m / pp, r1 = r / pp;\n          int nr =\
+    \ n - n1 * pp, mr = m - m1 * pp, rr = r - r1 * pp;\n          num = i64(num) *\
+    \ facts[nr] % pp;\n          den = i64(den) * facts[mr] % pp * facts[rr] % pp;\n\
+    \          s += n1 - m1 - r1, x += ds[mr] + ds[rr] - ds[nr];\n        }\n    \
+    \  if (x >= e * (p - 1)) return 0;\n      if (p > 2) x /= p - 1;\n      int ret\
+    \ = i64(num) * mod_inv(den, pe) % pe * ppows[x] % pe;\n      return (s & mask)\
+    \ && ret > 0 ? pe - ret : ret;\n    }\n    int p, e, mask, pe, q, pp;\n    std::vector<int>\
+    \ ppows, facts, ds;\n  };\n  int mod;\n  std::vector<ModPe> binom_pp;\n  std::vector<int>\
+    \ iprods;\n\n public:\n  BinomialCoefficient(int mod, std::size_t pre_size = 1\
+    \ << 14) : mod(mod) {\n    Factors f(mod);\n    if (f.size() == 1) pre_size =\
+    \ 1 << 20;\n    int prod = 1;\n    for (auto [p, e] : f) {\n      binom_pp.emplace_back(ModPe(p,\
+    \ e, pre_size));\n      iprods.push_back(mod_inv(prod, binom_pp.back().pe));\n\
     \      prod *= binom_pp.back().pe;\n    }\n  }\n  inline int nCr(i64 n, i64 r)\
     \ const {\n    assert(r >= 0);\n    if (n < r) return 0;\n    if (r == 0) return\
     \ (mod > 1);\n    int ret = 0, prod = 1;\n    for (size_t i = 0, d, ed = binom_pp.size();\
@@ -113,56 +118,54 @@ data:
     \ r) + d - ret % d) * iprods[i] % d * prod;\n    return ret;\n  }\n  inline int\
     \ nHr(i64 n, i64 r) const { return !r ? 1 : nCr(n + r - 1, r); }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\
-    \n/**\n * @title \u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category\
-    \ \u6570\u5B66\n * @see https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n\
-    \ */\n\n// BEGIN CUT HERE\nclass BinomialCoefficient {  // mod <= 1e6\n  static\
-    \ inline constexpr int inv_mod(int a, int mod) {\n    int x = 1, y = 0, b = mod;\n\
-    \    for (int q = 0, z = 0, c = 0; b;)\n      z = x, c = a, x = y, y = z - y *\
-    \ (q = a / b), a = b, b = c - b * q;\n    return assert(a == 1), x < 0 ? mod -\
-    \ (-x) % mod : x % mod;\n  }\n  using i64 = std::int64_t;\n  struct ModPe {\n\
-    \    ModPe() = default;\n    ModPe(int p, int e, std::size_t pre_size = 1 << 14)\n\
-    \        : p(p), e(e), ppows(e + 1, 1) {\n      for (int i = 1; i <= e; ++i) ppows[i]\
-    \ = ppows[i - 1] * p;\n      for (pp = pe = ppows[e]; std::size_t(pp) * p <= pre_size;)\
-    \ pp *= p;\n      q = pp / pe * p, facts.resize(pp, 1);\n      for (int qq = 1,\
-    \ l = pp / p; qq < q; qq *= p, l /= p)\n        for (int i = 0; i < l; ++i)\n\
-    \          for (int j = i * p + 1; j < i * p + p; ++j) facts[j * qq] = j;\n  \
-    \    for (int i = 1; i < pp; ++i) facts[i] = i64(facts[i - 1]) * facts[i] % pe;\n\
-    \      mask = (facts[pp - 1] == pe - 1), ds.resize(q, 0);\n      for (int i =\
-    \ 0; i < pp / pe; ++i)\n        for (int j = 0, s = ds[i]; j < p; ++j) ds[i *\
-    \ p + j] = s + j;\n    }\n    int operator()(i64 n, i64 m) const {\n      int\
-    \ num = 1, den = 1, x = 0, s = 0;\n      if (i64 r = n - m; e > 1)\n        for\
-    \ (i64 n1, m1, r1; n > 0; n = n1, m = m1, r = r1) {\n          n1 = n / pp, m1\
-    \ = m / pp, r1 = r / pp;\n          num = i64(num) * facts[n - n1 * pp] % pp;\n\
-    \          den = i64(den) * facts[m - m1 * pp] % pp * facts[r - r1 * pp] % pp;\n\
-    \          s += n1 - m1 - r1, n1 = n / q, m1 = m / q, r1 = r / q;\n          x\
-    \ += ds[m - m1 * q] + ds[r - r1 * q] - ds[n - n1 * q];\n        }\n      else\n\
-    \        for (i64 n1, m1, r1; n > 0; n = n1, m = m1, r = r1) {\n          n1 =\
-    \ n / pp, m1 = m / pp, r1 = r / pp;\n          int nr = n - n1 * pp, mr = m -\
-    \ m1 * pp, rr = r - r1 * pp;\n          num = i64(num) * facts[nr] % pp;\n   \
-    \       den = i64(den) * facts[mr] % pp * facts[rr] % pp;\n          s += n1 -\
-    \ m1 - r1, x += ds[mr] + ds[rr] - ds[nr];\n        }\n      if (x >= e * (p -\
-    \ 1)) return 0;\n      if (p > 2) x /= p - 1;\n      int ret = i64(num) * inv_mod(den,\
-    \ pe) % pe * ppows[x] % pe;\n      return (s & mask) && ret > 0 ? pe - ret : ret;\n\
-    \    }\n    int p, e, mask, pe, q, pp;\n    std::vector<int> ppows, facts, ds;\n\
-    \  };\n  int mod;\n  std::vector<ModPe> binom_pp;\n  std::vector<int> iprods;\n\
-    \n public:\n  BinomialCoefficient(int mod, std::size_t pre_size = 1 << 14) : mod(mod)\
-    \ {\n    Factors f(mod);\n    if (f.size() == 1) pre_size = 1 << 20;\n    int\
-    \ prod = 1;\n    for (auto [p, e] : f) {\n      binom_pp.emplace_back(ModPe(p,\
-    \ e, pre_size));\n      iprods.push_back(inv_mod(prod, binom_pp.back().pe));\n\
-    \      prod *= binom_pp.back().pe;\n    }\n  }\n  inline int nCr(i64 n, i64 r)\
-    \ const {\n    assert(r >= 0);\n    if (n < r) return 0;\n    if (r == 0) return\
-    \ (mod > 1);\n    int ret = 0, prod = 1;\n    for (size_t i = 0, d, ed = binom_pp.size();\
-    \ i < ed; ++i, prod *= d)\n      d = binom_pp[i].pe,\n      ret += i64(binom_pp[i](n,\
-    \ r) + d - ret % d) * iprods[i] % d * prod;\n    return ret;\n  }\n  inline int\
-    \ nHr(i64 n, i64 r) const { return !r ? 1 : nCr(n + r - 1, r); }\n};"
+    \n#include \"src/Math/mod_inv.hpp\"\n/**\n * @title \u4E8C\u9805\u4FC2\u6570 ($\\\
+    mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n * @see https://ferin-tech.hatenablog.com/entry/2018/01/17/010829\n\
+    \ */\n\n// BEGIN CUT HERE\nclass BinomialCoefficient {  // mod <= 1e6\n  using\
+    \ i64 = std::int64_t;\n  struct ModPe {\n    ModPe() = default;\n    ModPe(int\
+    \ p, int e, std::size_t pre_size = 1 << 14)\n        : p(p), e(e), ppows(e + 1,\
+    \ 1) {\n      for (int i = 1; i <= e; ++i) ppows[i] = ppows[i - 1] * p;\n    \
+    \  for (pp = pe = ppows[e]; std::size_t(pp) * p <= pre_size;) pp *= p;\n     \
+    \ q = pp / pe * p, facts.resize(pp, 1);\n      for (int qq = 1, l = pp / p; qq\
+    \ < q; qq *= p, l /= p)\n        for (int i = 0; i < l; ++i)\n          for (int\
+    \ j = i * p + 1; j < i * p + p; ++j) facts[j * qq] = j;\n      for (int i = 1;\
+    \ i < pp; ++i) facts[i] = i64(facts[i - 1]) * facts[i] % pe;\n      mask = (facts[pp\
+    \ - 1] == pe - 1), ds.resize(q, 0);\n      for (int i = 0; i < pp / pe; ++i)\n\
+    \        for (int j = 0, s = ds[i]; j < p; ++j) ds[i * p + j] = s + j;\n    }\n\
+    \    int operator()(i64 n, i64 m) const {\n      int num = 1, den = 1, x = 0,\
+    \ s = 0;\n      if (i64 r = n - m; e > 1)\n        for (i64 n1, m1, r1; n > 0;\
+    \ n = n1, m = m1, r = r1) {\n          n1 = n / pp, m1 = m / pp, r1 = r / pp;\n\
+    \          num = i64(num) * facts[n - n1 * pp] % pp;\n          den = i64(den)\
+    \ * facts[m - m1 * pp] % pp * facts[r - r1 * pp] % pp;\n          s += n1 - m1\
+    \ - r1, n1 = n / q, m1 = m / q, r1 = r / q;\n          x += ds[m - m1 * q] + ds[r\
+    \ - r1 * q] - ds[n - n1 * q];\n        }\n      else\n        for (i64 n1, m1,\
+    \ r1; n > 0; n = n1, m = m1, r = r1) {\n          n1 = n / pp, m1 = m / pp, r1\
+    \ = r / pp;\n          int nr = n - n1 * pp, mr = m - m1 * pp, rr = r - r1 * pp;\n\
+    \          num = i64(num) * facts[nr] % pp;\n          den = i64(den) * facts[mr]\
+    \ % pp * facts[rr] % pp;\n          s += n1 - m1 - r1, x += ds[mr] + ds[rr] -\
+    \ ds[nr];\n        }\n      if (x >= e * (p - 1)) return 0;\n      if (p > 2)\
+    \ x /= p - 1;\n      int ret = i64(num) * mod_inv(den, pe) % pe * ppows[x] % pe;\n\
+    \      return (s & mask) && ret > 0 ? pe - ret : ret;\n    }\n    int p, e, mask,\
+    \ pe, q, pp;\n    std::vector<int> ppows, facts, ds;\n  };\n  int mod;\n  std::vector<ModPe>\
+    \ binom_pp;\n  std::vector<int> iprods;\n\n public:\n  BinomialCoefficient(int\
+    \ mod, std::size_t pre_size = 1 << 14) : mod(mod) {\n    Factors f(mod);\n   \
+    \ if (f.size() == 1) pre_size = 1 << 20;\n    int prod = 1;\n    for (auto [p,\
+    \ e] : f) {\n      binom_pp.emplace_back(ModPe(p, e, pre_size));\n      iprods.push_back(mod_inv(prod,\
+    \ binom_pp.back().pe));\n      prod *= binom_pp.back().pe;\n    }\n  }\n  inline\
+    \ int nCr(i64 n, i64 r) const {\n    assert(r >= 0);\n    if (n < r) return 0;\n\
+    \    if (r == 0) return (mod > 1);\n    int ret = 0, prod = 1;\n    for (size_t\
+    \ i = 0, d, ed = binom_pp.size(); i < ed; ++i, prod *= d)\n      d = binom_pp[i].pe,\n\
+    \      ret += i64(binom_pp[i](n, r) + d - ret % d) * iprods[i] % d * prod;\n \
+    \   return ret;\n  }\n  inline int nHr(i64 n, i64 r) const { return !r ? 1 : nCr(n\
+    \ + r - 1, r); }\n};"
   dependsOn:
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
+  - src/Math/mod_inv.hpp
   isVerificationFile: false
   path: src/Math/BinomialCoefficient.hpp
   requiredBy: []
-  timestamp: '2022-11-13 14:36:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-11-14 01:24:19+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/binomial_coefficient.test.cpp
 documentation_of: src/Math/BinomialCoefficient.hpp
