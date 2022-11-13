@@ -102,11 +102,11 @@ data:
     \   std::vector<bool> x(cols);\n    for (std::size_t c = 0; c != rows; c++) {\n\
     \      if (b[perm[c]]) y[c].flip();\n      if (c < cols && bool(y[c])) y ^= tdat[c];\n\
     \    }\n    for (std::size_t i = rank(); i != rows; i++)\n      if (bool(y[i]))\
-    \ return {};  // no solution\n    for (std::size_t i = rank(); i--;) {\n     \
-    \ x[piv[i]] = y[i];\n      if (x[piv[i]]) y ^= tdat2[piv[i]];\n    }\n    return\
-    \ x;\n  }\n  Mat inverse_matrix() const {\n    if (!isregular()) return {};  //\
-    \ no solution\n    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t\
-    \ i = 0; i < rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
+    \ return {};  // no solution\n    for (std::size_t i = rank(); i--;)\n      if\
+    \ (x[piv[i]] = y[i]; x[piv[i]]) y ^= tdat2[piv[i]];\n    return x;\n  }\n  Mat\
+    \ inverse_matrix() const {\n    if (!isregular()) return {};  // no solution\n\
+    \    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t i = 0; i <\
+    \ rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
     \    for (std::size_t i = 0; i < rows; i++)\n      for (std::size_t j = 0; j <\
     \ i; j++) std::swap(ret[i][j], ret[j][i]);\n    return ret;\n  }\n};\n#line 3\
     \ \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
@@ -218,7 +218,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2022-11-08 16:52:02+09:00'
+  timestamp: '2022-11-13 14:36:00+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp

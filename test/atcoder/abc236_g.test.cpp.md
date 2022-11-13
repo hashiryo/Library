@@ -59,9 +59,11 @@ data:
     \ vr) { return vl ^ vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
     template <class T = unsigned long long>\nusing BitwiseXorAndRig = Rig<BitwiseXorAnd<T>>;\n\
     #line 3 \"src/LinearAlgebra/Matrix.hpp\"\n/**\n * @title \u884C\u5217\n * @category\
-    \ \u7DDA\u5F62\u4EE3\u6570\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// BEGIN\
-    \ CUT HERE\n\ntemplate <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R,\
-    \ M>, N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
+    \ \u7DDA\u5F62\u4EE3\u6570\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// verify\u7528\
+    \n// https://atcoder.jp/contests/arc027/tasks/arc027_4 \u30BB\u30B0\u6728\u306B\
+    \u4E57\u305B\u308B(ML\u30AE\u30EA\u30AE\u30EA)\n\n// BEGIN CUT HERE\n\ntemplate\
+    \ <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R, M>,\
+    \ N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
     \ Matrix &r) {\n    for (int i = N; i--;)\n      for (int j = M; j--;) (*this)[i][j]\
     \ += r[i][j];\n    return *this;\n  }\n  Matrix operator+(const Matrix &r) const\
     \ { return Matrix(*this) += r; }\n  template <int L>\n  Matrix<R, N, L> operator*(const\
@@ -116,7 +118,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2022-11-12 16:12:36+09:00'
+  timestamp: '2022-11-13 14:36:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp

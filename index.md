@@ -125,7 +125,7 @@ data:
     - icon: ':question:'
       path: src/FFT/convolve.hpp
       title: "\u7573\u307F\u8FBC\u307F"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
     - icon: ':question:'
@@ -232,13 +232,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
+    - icon: ':heavy_check_mark:'
+      path: src/Math/BinomialCoefficient.hpp
+      title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':question:'
       path: src/Math/CartesianProduct.hpp
       title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
         times K_n$)"
     - icon: ':question:'
       path: src/Math/Combination.hpp
-      title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069"
+      title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97\
+        ) ($\\mathbb{F}_p$)"
     - icon: ':question:'
       path: src/Math/DirichletConvSumTable.hpp
       title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
@@ -875,6 +879,9 @@ data:
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yosupo/binomial_coefficient.test.cpp
+      title: test/yosupo/binomial_coefficient.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -952,10 +959,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.FPS.test.cpp
       title: test/yosupo/inv_of_FPS.FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.test.cpp
       title: test/yosupo/inv_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
     - icon: ':x:'
@@ -1185,7 +1192,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1750.SparseMat.test.cpp
       title: test/yukicoder/1750.SparseMat.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
     - icon: ':x:'

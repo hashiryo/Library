@@ -23,17 +23,19 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u884C\u5217"
-    links: []
+    links:
+    - https://atcoder.jp/contests/arc027/tasks/arc027_4
   bundledCode: "#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <bits/stdc++.h>\n\
     /**\n * @title \u884C\u5217\n * @category \u7DDA\u5F62\u4EE3\u6570\n * \u534A\u74B0\
-    \u304C\u8F09\u308B\n */\n\n// BEGIN CUT HERE\n\ntemplate <class R, int N, int\
-    \ M>\nstruct Matrix : public std::array<std::array<R, M>, N> {\n  static constexpr\
-    \ Matrix O() { return Matrix(); }\n  Matrix &operator+=(const Matrix &r) {\n \
-    \   for (int i = N; i--;)\n      for (int j = M; j--;) (*this)[i][j] += r[i][j];\n\
-    \    return *this;\n  }\n  Matrix operator+(const Matrix &r) const { return Matrix(*this)\
-    \ += r; }\n  template <int L>\n  Matrix<R, N, L> operator*(const Matrix<R, M,\
-    \ L> &r) const {\n    Matrix<R, N, L> ret;\n    for (int i = N; i--;)\n      for\
-    \ (int k = M; k--;)\n        for (int j = L; j--;) ret[i][j] += (*this)[i][k]\
+    \u304C\u8F09\u308B\n */\n\n// verify\u7528\n// https://atcoder.jp/contests/arc027/tasks/arc027_4\
+    \ \u30BB\u30B0\u6728\u306B\u4E57\u305B\u308B(ML\u30AE\u30EA\u30AE\u30EA)\n\n//\
+    \ BEGIN CUT HERE\n\ntemplate <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R,\
+    \ M>, N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
+    \ Matrix &r) {\n    for (int i = N; i--;)\n      for (int j = M; j--;) (*this)[i][j]\
+    \ += r[i][j];\n    return *this;\n  }\n  Matrix operator+(const Matrix &r) const\
+    \ { return Matrix(*this) += r; }\n  template <int L>\n  Matrix<R, N, L> operator*(const\
+    \ Matrix<R, M, L> &r) const {\n    Matrix<R, N, L> ret;\n    for (int i = N; i--;)\n\
+    \      for (int k = M; k--;)\n        for (int j = L; j--;) ret[i][j] += (*this)[i][k]\
     \ * r[k][j];\n    return ret;\n  }\n  std::array<R, N> operator*(const std::array<R,\
     \ M> &r) const {\n    std::array<R, N> ret;\n    for (int i = N; i--;)\n     \
     \ for (int j = M; j--;) ret[i] += (*this)[i][j] * r[j];\n    return ret;\n  }\n\
@@ -64,9 +66,11 @@ data:
     \ ret = I(), b = *this;; b *= b)\n      if (e & 1 ? ret *= b, !(e >>= 1) : !(e\
     \ >>= 1)) return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u884C\u5217\n * @category\
-    \ \u7DDA\u5F62\u4EE3\u6570\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// BEGIN\
-    \ CUT HERE\n\ntemplate <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R,\
-    \ M>, N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
+    \ \u7DDA\u5F62\u4EE3\u6570\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// verify\u7528\
+    \n// https://atcoder.jp/contests/arc027/tasks/arc027_4 \u30BB\u30B0\u6728\u306B\
+    \u4E57\u305B\u308B(ML\u30AE\u30EA\u30AE\u30EA)\n\n// BEGIN CUT HERE\n\ntemplate\
+    \ <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R, M>,\
+    \ N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
     \ Matrix &r) {\n    for (int i = N; i--;)\n      for (int j = M; j--;) (*this)[i][j]\
     \ += r[i][j];\n    return *this;\n  }\n  Matrix operator+(const Matrix &r) const\
     \ { return Matrix(*this) += r; }\n  template <int L>\n  Matrix<R, N, L> operator*(const\
@@ -105,7 +109,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/Matrix.hpp
   requiredBy: []
-  timestamp: '2022-11-12 16:12:36+09:00'
+  timestamp: '2022-11-13 14:36:00+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/650.LCT.test.cpp

@@ -3,7 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Math/Combination.hpp
-    title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069"
+    title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97)\
+      \ ($\\mathbb{F}_p$)"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -19,24 +20,25 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_E
   bundledCode: "#line 1 \"test/aoj/DPL_5_E.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_E\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\n/**\n * @title\
-    \ \u4E8C\u9805\u4FC2\u6570\u306A\u3069\n * @category \u6570\u5B66\n */\n\n// BEGIN\
-    \ CUT HERE\n\ntemplate <class mint, std::size_t LIM = (1 << 24)>\nclass Combination\
-    \ {\n  static inline mint _fact[LIM], _finv[LIM];\n  static inline int lim = 0;\n\
-    \  static inline void set(int sz) {\n    if (lim > sz) return;\n    if (lim ==\
-    \ 0) _fact[0] = 1, _finv[0] = 1, lim = 1;\n    for (int i = lim; i <= sz; i++)\
-    \ _fact[i] = _fact[i - 1] * i;\n    _finv[sz] = mint(1) / _fact[sz];\n    for\
-    \ (int i = sz; i >= lim; i--) _finv[i - 1] = _finv[i] * i;\n    lim = sz + 1;\n\
-    \  }\n\n public:\n  static inline mint fact(int n) { return set(n), n < 0 ? mint(0)\
-    \ : _fact[n]; }\n  static inline mint finv(int n) { return set(n), n < 0 ? mint(0)\
-    \ : _finv[n]; }\n  static mint nPr(int n, int r) { return fact(n) * finv(n - r);\
-    \ }\n  static mint nCr(int n, int r) { return nPr(n, r) * finv(r); }\n  static\
-    \ mint nHr(int n, int r) { return !r ? mint(1) : nCr(n + r - 1, r); }\n};\n#line\
-    \ 3 \"src/Math/ModInt.hpp\"\n/**\n * @title ModInt\n * @category \u6570\u5B66\n\
-    \ */\n\n// BEGIN CUT HERE\nnamespace modint_internal {\nusing namespace std;\n\
-    struct modint_base {};\nstruct sta_mint_base : modint_base {};\nstruct dyn_mint_base\
-    \ : modint_base {};\ntemplate <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
+    \ \u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\mathbb{F}_p$)\n\
+    \ * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\ntemplate <class mint,\
+    \ std::size_t LIM = (1 << 24)>\nclass Combination {\n  static inline mint _fact[LIM],\
+    \ _finv[LIM];\n  static inline int lim = 0;\n  static inline void set(int sz)\
+    \ {\n    if (lim > sz) return;\n    if (lim == 0) _fact[0] = 1, _finv[0] = 1,\
+    \ lim = 1;\n    for (int i = lim; i <= sz; i++) _fact[i] = _fact[i - 1] * i;\n\
+    \    _finv[sz] = mint(1) / _fact[sz];\n    for (int i = sz; i >= lim; i--) _finv[i\
+    \ - 1] = _finv[i] * i;\n    lim = sz + 1;\n  }\n\n public:\n  static inline mint\
+    \ fact(int n) { return set(n), n < 0 ? mint(0) : _fact[n]; }\n  static inline\
+    \ mint finv(int n) { return set(n), n < 0 ? mint(0) : _finv[n]; }\n  static mint\
+    \ nPr(int n, int r) { return fact(n) * finv(n - r); }\n  static mint nCr(int n,\
+    \ int r) { return nPr(n, r) * finv(r); }\n  static mint nHr(int n, int r) { return\
+    \ !r ? mint(1) : nCr(n + r - 1, r); }\n};\n#line 3 \"src/Math/ModInt.hpp\"\n/**\n\
+    \ * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace\
+    \ modint_internal {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base\
+    \ : modint_base {};\nstruct dyn_mint_base : modint_base {};\ntemplate <class mod_t>\n\
+    constexpr bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class\
+    \ mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\n\
+    template <class mod_t>\nconstexpr bool is_dynamicmodint_v = is_base_of_v<dyn_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
     \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
@@ -126,7 +128,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_E.test.cpp
   requiredBy: []
-  timestamp: '2022-11-08 16:52:02+09:00'
+  timestamp: '2022-11-13 14:36:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_E.test.cpp

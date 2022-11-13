@@ -26,7 +26,7 @@ data:
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
@@ -51,6 +51,9 @@ data:
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
+  - icon: ':heavy_check_mark:'
+    path: src/Math/BinomialCoefficient.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':heavy_check_mark:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
@@ -105,6 +108,9 @@ data:
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/binomial_coefficient.test.cpp
+    title: test/yosupo/binomial_coefficient.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -131,10 +137,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.FPS.test.cpp
     title: test/yosupo/inv_of_FPS.FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
@@ -285,6 +291,7 @@ data:
   - src/Math/Factors.hpp
   - src/Math/ModIntExp.hpp
   - src/Math/StirlingNumber.hpp
+  - src/Math/BinomialCoefficient.hpp
   - src/FFT/polynomial_matrix_prod.hpp
   - src/FFT/BigInt.hpp
   - src/FFT/sequences.hpp
@@ -351,6 +358,7 @@ data:
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/partition.MSET.test.cpp
   - test/yosupo/exp_of_FPS.FPS.test.cpp

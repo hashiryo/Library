@@ -21,7 +21,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
   - icon: ':x:'
@@ -116,11 +116,11 @@ data:
     \   std::vector<bool> x(cols);\n    for (std::size_t c = 0; c != rows; c++) {\n\
     \      if (b[perm[c]]) y[c].flip();\n      if (c < cols && bool(y[c])) y ^= tdat[c];\n\
     \    }\n    for (std::size_t i = rank(); i != rows; i++)\n      if (bool(y[i]))\
-    \ return {};  // no solution\n    for (std::size_t i = rank(); i--;) {\n     \
-    \ x[piv[i]] = y[i];\n      if (x[piv[i]]) y ^= tdat2[piv[i]];\n    }\n    return\
-    \ x;\n  }\n  Mat inverse_matrix() const {\n    if (!isregular()) return {};  //\
-    \ no solution\n    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t\
-    \ i = 0; i < rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
+    \ return {};  // no solution\n    for (std::size_t i = rank(); i--;)\n      if\
+    \ (x[piv[i]] = y[i]; x[piv[i]]) y ^= tdat2[piv[i]];\n    return x;\n  }\n  Mat\
+    \ inverse_matrix() const {\n    if (!isregular()) return {};  // no solution\n\
+    \    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t i = 0; i <\
+    \ rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
     \    for (std::size_t i = 0; i < rows; i++)\n      for (std::size_t j = 0; j <\
     \ i; j++) std::swap(ret[i][j], ret[j][i]);\n    return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title LU\u5206\u89E3\n *\
@@ -206,18 +206,18 @@ data:
     \   std::vector<bool> x(cols);\n    for (std::size_t c = 0; c != rows; c++) {\n\
     \      if (b[perm[c]]) y[c].flip();\n      if (c < cols && bool(y[c])) y ^= tdat[c];\n\
     \    }\n    for (std::size_t i = rank(); i != rows; i++)\n      if (bool(y[i]))\
-    \ return {};  // no solution\n    for (std::size_t i = rank(); i--;) {\n     \
-    \ x[piv[i]] = y[i];\n      if (x[piv[i]]) y ^= tdat2[piv[i]];\n    }\n    return\
-    \ x;\n  }\n  Mat inverse_matrix() const {\n    if (!isregular()) return {};  //\
-    \ no solution\n    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t\
-    \ i = 0; i < rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
+    \ return {};  // no solution\n    for (std::size_t i = rank(); i--;)\n      if\
+    \ (x[piv[i]] = y[i]; x[piv[i]]) y ^= tdat2[piv[i]];\n    return x;\n  }\n  Mat\
+    \ inverse_matrix() const {\n    if (!isregular()) return {};  // no solution\n\
+    \    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t i = 0; i <\
+    \ rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
     \    for (std::size_t i = 0; i < rows; i++)\n      for (std::size_t j = 0; j <\
     \ i; j++) std::swap(ret[i][j], ret[j][i]);\n    return ret;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/LinearAlgebra/LUDecomposition.hpp
   requiredBy: []
-  timestamp: '2022-06-23 23:46:03+09:00'
+  timestamp: '2022-11-13 14:36:00+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/184.test.cpp

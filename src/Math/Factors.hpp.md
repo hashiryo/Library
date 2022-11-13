@@ -6,6 +6,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: src/Math/BinomialCoefficient.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModIntExp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':heavy_check_mark:'
@@ -19,6 +22,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/binomial_coefficient.test.cpp
+    title: test/yosupo/binomial_coefficient.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
@@ -130,12 +136,14 @@ data:
   requiredBy:
   - src/Math/tetration.hpp
   - src/Math/ModIntExp.hpp
+  - src/Math/BinomialCoefficient.hpp
   timestamp: '2022-10-16 17:42:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_1_D.test.cpp
   - test/atcoder/abc228_e.test.cpp
   - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/factorize.test.cpp
 documentation_of: src/Math/Factors.hpp
