@@ -176,15 +176,16 @@ data:
     \    else\n      root = root->ch[0];\n    return ret;\n  }\n};\n#line 3 \"src/Math/mod_inv.hpp\"\
     \n/**\n * @title \u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\
     \u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <class Int>\nconstexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n  Int x = 1, y = 0, b = mod;\n  for (Int q = 0, z = 0, c = 0;\
-    \ b;)\n    z = x, c = a, x = y, y = z - y * (q = a / b), a = b, b = c - b * q;\n\
-    \  return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/ModInt.hpp\"\
-    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
-    namespace modint_internal {\nusing namespace std;\nstruct modint_base {};\nstruct\
-    \ sta_mint_base : modint_base {};\nstruct run_mint_base : modint_base {};\ntemplate\
-    \ <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base, mod_t>;\n\
-    template <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_runtimemodint_v = is_base_of_v<run_mint_base,\
+    \ a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n  Int x = 1, y = 0,\
+    \ b = mod;\n  for (Int q = 0, z = 0, c = 0; b;)\n    z = x, c = a, x = y, y =\
+    \ z - y * (q = a / b), a = b, b = c - b * q;\n  return assert(a == 1), x < 0 ?\
+    \ mod - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/ModInt.hpp\"\n/**\n * @title\
+    \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
+    \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
+    \ {};\nstruct run_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
+    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
+    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_runtimemodint_v = is_base_of_v<run_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
     \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
@@ -307,7 +308,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-11-14 01:24:19+09:00'
+  timestamp: '2022-11-14 09:47:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

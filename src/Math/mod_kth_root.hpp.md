@@ -29,16 +29,16 @@ data:
   bundledCode: "#line 2 \"src/Math/mod_kth_root.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\n/**\n * @title \u9006\u5143 ($\\mathbb{Z}/m\\\
     mathbb{Z}$)\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <class\
-    \ Int>\nconstexpr inline Int mod_inv(Int a, Int mod) {\n  Int x = 1, y = 0, b\
-    \ = mod;\n  for (Int q = 0, z = 0, c = 0; b;)\n    z = x, c = a, x = y, y = z\
-    \ - y * (q = a / b), a = b, b = c - b * q;\n  return assert(a == 1), x < 0 ? mod\
-    \ - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/ModInt.hpp\"\n/**\n * @title\
-    \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace modint_internal\
-    \ {\nusing namespace std;\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
-    \ {};\nstruct run_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
-    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
-    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
-    \ <class mod_t>\nconstexpr bool is_runtimemodint_v = is_base_of_v<run_mint_base,\
+    \ Int>\nconstexpr inline Int mod_inv(Int a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n\
+    \  Int x = 1, y = 0, b = mod;\n  for (Int q = 0, z = 0, c = 0; b;)\n    z = x,\
+    \ c = a, x = y, y = z - y * (q = a / b), a = b, b = c - b * q;\n  return assert(a\
+    \ == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/ModInt.hpp\"\
+    \n/**\n * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\n\
+    namespace modint_internal {\nusing namespace std;\nstruct modint_base {};\nstruct\
+    \ sta_mint_base : modint_base {};\nstruct run_mint_base : modint_base {};\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base, mod_t>;\n\
+    template <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
+    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_runtimemodint_v = is_base_of_v<run_mint_base,\
     \ mod_t>;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\ntemplate <class D>\n\
     struct ModIntImpl {\n  static constexpr inline auto modulo() { return D::mod;\
     \ }\n  constexpr D operator-() const { return D() -= (D &)*this; }\n  constexpr\
@@ -170,59 +170,59 @@ data:
     \   if (ng = (pw == 1)) break;\n    }\n    if (!ng) return ret;\n  }\n}\n#line\
     \ 6 \"src/Math/mod_kth_root.hpp\"\n/**\n * @title k\u4E57\u6839 ($\\mathbb{F}_p$)\n\
     \ * @category \u6570\u5B66\n * O( min(k,p)^(1/4) )\n * @see https://nyaannyaan.github.io/library/modulo/mod-kth-root.hpp\n\
-    \ */\n\n// verify\u7528\n//  https://yukicoder.me/problems/no/981 (\u5236\u7D04\
-    \u304C\u53B3\u3057\u3044, sp judge)\n\n// BEGIN CUT HERE\nnamespace kth_root_internal\
-    \ {\ntemplate <class Int, class mod_t>\nmod_t peth_root(mod_t c, Int pi, int ei)\
-    \ {\n  const Int p = mod_t::modulo();\n  int t = 0;\n  Int s = p - 1, pe = 1;\n\
-    \  while (s % pi == 0) s /= pi, ++t;\n  for (int i = ei; i--;) pe *= pi;\n  Int\
-    \ u = inv_mod(pe - s % pe, pe);\n  mod_t ONE = 1, z = c.pow((s * u + 1) / pe),\
-    \ zpe = c.pow(s * u);\n  if (zpe == ONE) return z;\n  Int ptm1 = 1;\n  for (int\
-    \ i = t; --i;) ptm1 *= pi;\n  mod_t vs, base;\n  for (mod_t v = 2;; v += ONE)\n\
-    \    if (vs = v.pow(s), base = vs.pow(ptm1); base != ONE) break;\n  int size =\
-    \ 1 << std::__lg(int(std::sqrt(pi)) + 1), mask = size - 1,\n      os[size + 1]\
-    \ = {};\n  std::pair<mod_t, int> vec[size];\n  mod_t x = 1, vspe = vs.pow(pe);\n\
-    \  for (int i = 0; i < size; ++i, x *= base) os[x.norm() & mask]++;\n  for (int\
-    \ i = 1; i < size; ++i) os[i] += os[i - 1];\n  x = 1, os[size] = size;\n  for\
-    \ (int i = 0; i < size; ++i, x *= base) vec[--os[x.norm() & mask]] = {x, i};\n\
-    \  for (int vs_e = ei, td; zpe != ONE;) {\n    mod_t tmp = zpe, base_zpe = mod_t(1)\
-    \ / zpe;\n    for (td = 0; tmp != ONE; td++) tmp = tmp.pow(pi);\n    for (int\
-    \ e = t - td; vs_e != e; vs_e++)\n      vs = vs.pow(pi), vspe = vspe.pow(pi);\n\
-    \    for (int i = td; --i;) base_zpe = base_zpe.pow(pi);\n    for (int tt = 0,\
-    \ upd = 1, n; upd; tt += size, base_zpe *= x)\n      for (int m = (base_zpe.norm()\
-    \ & mask), i = os[m]; i < os[m + 1]; i++)\n        if (base_zpe == vec[i].first)\
-    \ {\n          if (n = vec[i].second - tt; n < 0) n += pi;\n          z *= vs.pow(n),\
-    \ zpe *= vspe.pow(n), upd = false;\n          break;\n        }\n  }\n  return\
-    \ z;\n}\ntemplate <class Int, class mod_t>\nInt inner_kth_root(Int a, std::uint64_t\
-    \ k, Int p) {\n  if (k == 0) return a == 1 ? a : -1;\n  if (a <= 1 || k <= 1)\
-    \ return a;\n  mod_t::set_mod(p);\n  Int g = std::gcd(k, p - 1);\n  mod_t ma =\
-    \ a;\n  Int pp = (p - 1) / g, kk = (k / g) % pp;\n  if (ma.pow(pp) != mod_t(1))\
-    \ return -1;\n  ma = ma.pow(inv_mod(kk, pp));\n  for (auto [pi, ei] : Factors(g))\
-    \ ma = peth_root<Int>(ma, pi, ei);\n  return ma.val();\n}\nstd::int64_t mod_kth_root(std::int64_t\
-    \ a, std::uint64_t k, std::int64_t p) {\n  if (a %= p; p < INT_MAX)\n    return\
-    \ inner_kth_root<int, RuntimeModInt<int, -2>>(a, k, p);\n  else\n    return inner_kth_root<std::int64_t,\
-    \ RuntimeModInt<Montgomery, -2>>(a, k, p);\n}\n}  // namespace kth_root_internal\n\
-    using kth_root_internal::mod_kth_root;\n"
+    \ */\n\n// verify\u7528\n// https://yukicoder.me/problems/no/981 (\u53B3\u3057\
+    \u3044\u5236\u7D04\u306E\u30B1\u30FC\u30B9\u3042\u308A, sp judge)\n\n// BEGIN\
+    \ CUT HERE\nnamespace kth_root_internal {\ntemplate <class Int, class mod_t>\n\
+    mod_t peth_root(mod_t c, Int pi, int ei) {\n  const Int p = mod_t::modulo();\n\
+    \  int t = 0;\n  Int s = p - 1, pe = 1;\n  while (s % pi == 0) s /= pi, ++t;\n\
+    \  for (int i = ei; i--;) pe *= pi;\n  Int u = inv_mod(pe - s % pe, pe);\n  mod_t\
+    \ ONE = 1, z = c.pow((s * u + 1) / pe), zpe = c.pow(s * u);\n  if (zpe == ONE)\
+    \ return z;\n  Int ptm1 = 1;\n  for (int i = t; --i;) ptm1 *= pi;\n  mod_t vs,\
+    \ base;\n  for (mod_t v = 2;; v += ONE)\n    if (vs = v.pow(s), base = vs.pow(ptm1);\
+    \ base != ONE) break;\n  int size = 1 << std::__lg(int(std::sqrt(pi)) + 1), mask\
+    \ = size - 1,\n      os[size + 1] = {};\n  std::pair<mod_t, int> vec[size];\n\
+    \  mod_t x = 1, vspe = vs.pow(pe);\n  for (int i = 0; i < size; ++i, x *= base)\
+    \ os[x.norm() & mask]++;\n  for (int i = 1; i < size; ++i) os[i] += os[i - 1];\n\
+    \  x = 1, os[size] = size;\n  for (int i = 0; i < size; ++i, x *= base) vec[--os[x.norm()\
+    \ & mask]] = {x, i};\n  for (int vs_e = ei, td; zpe != ONE;) {\n    mod_t tmp\
+    \ = zpe, base_zpe = mod_t(1) / zpe;\n    for (td = 0; tmp != ONE; td++) tmp =\
+    \ tmp.pow(pi);\n    for (int e = t - td; vs_e != e; vs_e++)\n      vs = vs.pow(pi),\
+    \ vspe = vspe.pow(pi);\n    for (int i = td; --i;) base_zpe = base_zpe.pow(pi);\n\
+    \    for (int tt = 0, upd = 1, n; upd; tt += size, base_zpe *= x)\n      for (int\
+    \ m = (base_zpe.norm() & mask), i = os[m]; i < os[m + 1]; i++)\n        if (base_zpe\
+    \ == vec[i].first) {\n          if (n = vec[i].second - tt; n < 0) n += pi;\n\
+    \          z *= vs.pow(n), zpe *= vspe.pow(n), upd = false;\n          break;\n\
+    \        }\n  }\n  return z;\n}\ntemplate <class Int, class mod_t>\nInt inner_kth_root(Int\
+    \ a, std::uint64_t k, Int p) {\n  if (k == 0) return a == 1 ? a : -1;\n  if (a\
+    \ <= 1 || k <= 1) return a;\n  mod_t::set_mod(p);\n  Int g = std::gcd(k, p - 1);\n\
+    \  mod_t ma = a;\n  Int pp = (p - 1) / g, kk = (k / g) % pp;\n  if (ma.pow(pp)\
+    \ != mod_t(1)) return -1;\n  ma = ma.pow(inv_mod(kk, pp));\n  for (auto [pi, ei]\
+    \ : Factors(g)) ma = peth_root<Int>(ma, pi, ei);\n  return ma.val();\n}\nstd::int64_t\
+    \ mod_kth_root(std::int64_t a, std::uint64_t k, std::int64_t p) {\n  if (a %=\
+    \ p; p < INT_MAX)\n    return inner_kth_root<int, RuntimeModInt<int, -2>>(a, k,\
+    \ p);\n  else\n    return inner_kth_root<std::int64_t, RuntimeModInt<Montgomery,\
+    \ -2>>(a, k, p);\n}\n}  // namespace kth_root_internal\nusing kth_root_internal::mod_kth_root;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
     #include \"src/Math/mod_inv.hpp\"\n#include \"src/Math/Factors.hpp\"\n/**\n *\
     \ @title k\u4E57\u6839 ($\\mathbb{F}_p$)\n * @category \u6570\u5B66\n * O( min(k,p)^(1/4)\
     \ )\n * @see https://nyaannyaan.github.io/library/modulo/mod-kth-root.hpp\n */\n\
-    \n// verify\u7528\n//  https://yukicoder.me/problems/no/981 (\u5236\u7D04\u304C\
-    \u53B3\u3057\u3044, sp judge)\n\n// BEGIN CUT HERE\nnamespace kth_root_internal\
-    \ {\ntemplate <class Int, class mod_t>\nmod_t peth_root(mod_t c, Int pi, int ei)\
-    \ {\n  const Int p = mod_t::modulo();\n  int t = 0;\n  Int s = p - 1, pe = 1;\n\
-    \  while (s % pi == 0) s /= pi, ++t;\n  for (int i = ei; i--;) pe *= pi;\n  Int\
-    \ u = inv_mod(pe - s % pe, pe);\n  mod_t ONE = 1, z = c.pow((s * u + 1) / pe),\
-    \ zpe = c.pow(s * u);\n  if (zpe == ONE) return z;\n  Int ptm1 = 1;\n  for (int\
-    \ i = t; --i;) ptm1 *= pi;\n  mod_t vs, base;\n  for (mod_t v = 2;; v += ONE)\n\
-    \    if (vs = v.pow(s), base = vs.pow(ptm1); base != ONE) break;\n  int size =\
-    \ 1 << std::__lg(int(std::sqrt(pi)) + 1), mask = size - 1,\n      os[size + 1]\
-    \ = {};\n  std::pair<mod_t, int> vec[size];\n  mod_t x = 1, vspe = vs.pow(pe);\n\
-    \  for (int i = 0; i < size; ++i, x *= base) os[x.norm() & mask]++;\n  for (int\
-    \ i = 1; i < size; ++i) os[i] += os[i - 1];\n  x = 1, os[size] = size;\n  for\
-    \ (int i = 0; i < size; ++i, x *= base) vec[--os[x.norm() & mask]] = {x, i};\n\
-    \  for (int vs_e = ei, td; zpe != ONE;) {\n    mod_t tmp = zpe, base_zpe = mod_t(1)\
-    \ / zpe;\n    for (td = 0; tmp != ONE; td++) tmp = tmp.pow(pi);\n    for (int\
-    \ e = t - td; vs_e != e; vs_e++)\n      vs = vs.pow(pi), vspe = vspe.pow(pi);\n\
+    \n// verify\u7528\n// https://yukicoder.me/problems/no/981 (\u53B3\u3057\u3044\
+    \u5236\u7D04\u306E\u30B1\u30FC\u30B9\u3042\u308A, sp judge)\n\n// BEGIN CUT HERE\n\
+    namespace kth_root_internal {\ntemplate <class Int, class mod_t>\nmod_t peth_root(mod_t\
+    \ c, Int pi, int ei) {\n  const Int p = mod_t::modulo();\n  int t = 0;\n  Int\
+    \ s = p - 1, pe = 1;\n  while (s % pi == 0) s /= pi, ++t;\n  for (int i = ei;\
+    \ i--;) pe *= pi;\n  Int u = inv_mod(pe - s % pe, pe);\n  mod_t ONE = 1, z = c.pow((s\
+    \ * u + 1) / pe), zpe = c.pow(s * u);\n  if (zpe == ONE) return z;\n  Int ptm1\
+    \ = 1;\n  for (int i = t; --i;) ptm1 *= pi;\n  mod_t vs, base;\n  for (mod_t v\
+    \ = 2;; v += ONE)\n    if (vs = v.pow(s), base = vs.pow(ptm1); base != ONE) break;\n\
+    \  int size = 1 << std::__lg(int(std::sqrt(pi)) + 1), mask = size - 1,\n     \
+    \ os[size + 1] = {};\n  std::pair<mod_t, int> vec[size];\n  mod_t x = 1, vspe\
+    \ = vs.pow(pe);\n  for (int i = 0; i < size; ++i, x *= base) os[x.norm() & mask]++;\n\
+    \  for (int i = 1; i < size; ++i) os[i] += os[i - 1];\n  x = 1, os[size] = size;\n\
+    \  for (int i = 0; i < size; ++i, x *= base) vec[--os[x.norm() & mask]] = {x,\
+    \ i};\n  for (int vs_e = ei, td; zpe != ONE;) {\n    mod_t tmp = zpe, base_zpe\
+    \ = mod_t(1) / zpe;\n    for (td = 0; tmp != ONE; td++) tmp = tmp.pow(pi);\n \
+    \   for (int e = t - td; vs_e != e; vs_e++)\n      vs = vs.pow(pi), vspe = vspe.pow(pi);\n\
     \    for (int i = td; --i;) base_zpe = base_zpe.pow(pi);\n    for (int tt = 0,\
     \ upd = 1, n; upd; tt += size, base_zpe *= x)\n      for (int m = (base_zpe.norm()\
     \ & mask), i = os[m]; i < os[m + 1]; i++)\n        if (base_zpe == vec[i].first)\
@@ -246,7 +246,7 @@ data:
   isVerificationFile: false
   path: src/Math/mod_kth_root.hpp
   requiredBy: []
-  timestamp: '2022-11-14 01:24:19+09:00'
+  timestamp: '2022-11-14 09:47:23+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/kth_root_mod.test.cpp
