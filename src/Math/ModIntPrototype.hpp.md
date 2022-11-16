@@ -101,7 +101,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2711.rollinghash.test.cpp
     title: test/aoj/2711.rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
@@ -146,7 +146,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':x:'

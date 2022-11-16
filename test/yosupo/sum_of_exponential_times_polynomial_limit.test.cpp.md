@@ -87,30 +87,31 @@ data:
     \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
     constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
     \ <class mod_t>\nconstexpr bool is_runtimemodint_v = is_base_of_v<run_mint_base,\
-    \ mod_t>;\ntemplate <class mod_pro_t, u64 MOD>\nstruct StaticB {\n protected:\n\
-    \  static constexpr mod_pro_t md = mod_pro_t(MOD);\n};\ntemplate <class mod_pro_t,\
-    \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
-    \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
-    \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(const\
-    \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
-    \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
-    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
-    \  constexpr ModInt(T n)\n      : x(B::md.set(n < 0 ? modulo() - ((-n) % modulo())\
-    \ : n)) {}\n  constexpr ModInt operator-() const { return ModInt() - *this; }\n\
-    #define FUNC(name, op)          \\\n  constexpr ModInt name const { \\\n    ModInt\
-    \ ret;                 \\\n    return ret.x = op, ret;     \\\n  }\n  FUNC(operator+(const\
-    \ ModInt &r), B::md.plus(x, r.x))\n  FUNC(operator-(const ModInt &r), B::md.diff(x,\
-    \ r.x))\n  FUNC(operator*(const ModInt &r), B::md.mul(x, r.x))\n  FUNC(pow(u64\
-    \ k), math_internal::pow(x, k, B::md))\n#undef FUNC\n  constexpr ModInt operator/(const\
-    \ ModInt &r) const { return *this * r.inv(); }\n  constexpr ModInt &operator+=(const\
-    \ ModInt &r) { return *this = *this + r; }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &r) { return *this = *this - r; }\n  constexpr ModInt &operator*=(const\
-    \ ModInt &r) { return *this = *this * r; }\n  constexpr ModInt &operator/=(const\
-    \ ModInt &r) { return *this = *this / r; }\n  constexpr bool operator==(const\
-    \ ModInt &r) const {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
-    \ bool operator!=(const ModInt &r) const { return !(*this == r); }\n  constexpr\
-    \ bool operator<(const ModInt &r) const {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
+    \ mod_t>;\ntemplate <class mod_pro_t, u64 MOD>\nstruct StaticB : sta_mint_base\
+    \ {\n protected:\n  static constexpr mod_pro_t md = mod_pro_t(MOD);\n};\ntemplate\
+    \ <class mod_pro_t, int id>\nstruct RuntimeB : run_mint_base {\n  static inline\
+    \ void set_mod(u64 m) { md = mod_pro_t(m); }\n\n protected:\n  static inline mod_pro_t\
+    \ md;\n};\ntemplate <class Int, class Uint, class B>\nstruct ModInt : public B\
+    \ {\n  static constexpr inline auto modulo() { return B::md.modulo(); }\n  constexpr\
+    \ ModInt() : x(0) {}\n  constexpr ModInt(const ModInt &r) : x(r.x) {}\n  template\
+    \ <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n  constexpr ModInt(T\
+    \ v) : ModInt(v.val()) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
+    \ __int128_t>, nullptr_t> = nullptr>\n  constexpr ModInt(T n)\n      : x(B::md.set(n\
+    \ < 0 ? modulo() - ((-n) % modulo()) : n)) {}\n  constexpr ModInt operator-()\
+    \ const { return ModInt() - *this; }\n#define FUNC(name, op)          \\\n  constexpr\
+    \ ModInt name const { \\\n    ModInt ret;                 \\\n    return ret.x\
+    \ = op, ret;     \\\n  }\n  FUNC(operator+(const ModInt &r), B::md.plus(x, r.x))\n\
+    \  FUNC(operator-(const ModInt &r), B::md.diff(x, r.x))\n  FUNC(operator*(const\
+    \ ModInt &r), B::md.mul(x, r.x))\n  FUNC(pow(u64 k), math_internal::pow(x, k,\
+    \ B::md))\n#undef FUNC\n  constexpr ModInt operator/(const ModInt &r) const {\
+    \ return *this * r.inv(); }\n  constexpr ModInt &operator+=(const ModInt &r) {\
+    \ return *this = *this + r; }\n  constexpr ModInt &operator-=(const ModInt &r)\
+    \ { return *this = *this - r; }\n  constexpr ModInt &operator*=(const ModInt &r)\
+    \ { return *this = *this * r; }\n  constexpr ModInt &operator/=(const ModInt &r)\
+    \ { return *this = *this / r; }\n  constexpr bool operator==(const ModInt &r)\
+    \ const {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr bool\
+    \ operator!=(const ModInt &r) const { return !(*this == r); }\n  constexpr bool\
+    \ operator<(const ModInt &r) const {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
     \  }\n  constexpr inline ModInt inv() const { return mod_inv<Int>(val(), modulo());\
     \ }\n  constexpr inline Uint val() const { return B::md.get(x); }\n  friend ostream\
     \ &operator<<(ostream &os, const ModInt &r) {\n    return os << r.val();\n  }\n\
@@ -249,7 +250,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 18:52:59+09:00'
+  timestamp: '2022-11-16 19:55:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
