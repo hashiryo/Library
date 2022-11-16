@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/CartesianProduct.hpp
     title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
       times K_n$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/String/RollingHash.hpp
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
@@ -76,7 +76,7 @@ data:
     \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
     \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
     \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0);\n  constexpr ModInt(const\
+    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(const\
     \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
@@ -92,9 +92,9 @@ data:
     \ ModInt &r) { return *this = *this - r; }\n  constexpr ModInt &operator*=(const\
     \ ModInt &r) { return *this = *this * r; }\n  constexpr ModInt &operator/=(const\
     \ ModInt &r) { return *this = *this / r; }\n  constexpr bool operator==(const\
-    \ ModInt &r) {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
-    \ bool operator!=(const ModInt &r) { return !(*this == r); }\n  constexpr bool\
-    \ operator<(const ModInt &r) {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
+    \ ModInt &r) const {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
+    \ bool operator!=(const ModInt &r) const { return !(*this == r); }\n  constexpr\
+    \ bool operator<(const ModInt &r) const {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
     \  }\n  constexpr inline ModInt inv() const { return mod_inv<Int>(val(), modulo());\
     \ }\n  constexpr inline Uint val() const { return B::md.get(x); }\n  friend ostream\
     \ &operator<<(ostream &os, const ModInt &r) {\n    return os << r.val();\n  }\n\
@@ -184,8 +184,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 17:58:29+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-11-16 18:52:59+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.rollinghash.test.cpp
 layout: document

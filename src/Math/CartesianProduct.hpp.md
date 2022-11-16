@@ -3,13 +3,13 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2614.rollinghash.test.cpp
     title: test/aoj/2614.rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2711.rollinghash.test.cpp
     title: test/aoj/2711.rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - icon: ':x:'
@@ -17,7 +17,7 @@ data:
     title: test/yosupo/z_algorithm.rollinghash.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\\
       cdots\\times K_n$)"
@@ -70,7 +70,7 @@ data:
   path: src/Math/CartesianProduct.hpp
   requiredBy: []
   timestamp: '2022-10-29 19:15:23+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - test/aoj/2711.rollinghash.test.cpp

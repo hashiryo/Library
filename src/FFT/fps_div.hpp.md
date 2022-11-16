@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
@@ -162,7 +162,7 @@ data:
     \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
     \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
     \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0);\n  constexpr ModInt(const\
+    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(const\
     \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
@@ -178,9 +178,9 @@ data:
     \ ModInt &r) { return *this = *this - r; }\n  constexpr ModInt &operator*=(const\
     \ ModInt &r) { return *this = *this * r; }\n  constexpr ModInt &operator/=(const\
     \ ModInt &r) { return *this = *this / r; }\n  constexpr bool operator==(const\
-    \ ModInt &r) {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
-    \ bool operator!=(const ModInt &r) { return !(*this == r); }\n  constexpr bool\
-    \ operator<(const ModInt &r) {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
+    \ ModInt &r) const {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
+    \ bool operator!=(const ModInt &r) const { return !(*this == r); }\n  constexpr\
+    \ bool operator<(const ModInt &r) const {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
     \  }\n  constexpr inline ModInt inv() const { return mod_inv<Int>(val(), modulo());\
     \ }\n  constexpr inline Uint val() const { return B::md.get(x); }\n  friend ostream\
     \ &operator<<(ostream &os, const ModInt &r) {\n    return os << r.val();\n  }\n\
@@ -494,7 +494,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/SubProductTree.hpp
   - src/FFT/fps_exp.hpp
-  timestamp: '2022-11-16 17:58:29+09:00'
+  timestamp: '2022-11-16 18:52:59+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/963.test.cpp

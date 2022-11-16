@@ -5,7 +5,7 @@ data:
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -14,14 +14,14 @@ data:
   - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_g
@@ -76,7 +76,7 @@ data:
     \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
     \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
     \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0);\n  constexpr ModInt(const\
+    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(const\
     \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
@@ -92,9 +92,9 @@ data:
     \ ModInt &r) { return *this = *this - r; }\n  constexpr ModInt &operator*=(const\
     \ ModInt &r) { return *this = *this * r; }\n  constexpr ModInt &operator/=(const\
     \ ModInt &r) { return *this = *this / r; }\n  constexpr bool operator==(const\
-    \ ModInt &r) {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
-    \ bool operator!=(const ModInt &r) { return !(*this == r); }\n  constexpr bool\
-    \ operator<(const ModInt &r) {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
+    \ ModInt &r) const {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
+    \ bool operator!=(const ModInt &r) const { return !(*this == r); }\n  constexpr\
+    \ bool operator<(const ModInt &r) const {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
     \  }\n  constexpr inline ModInt inv() const { return mod_inv<Int>(val(), modulo());\
     \ }\n  constexpr inline Uint val() const { return B::md.get(x); }\n  friend ostream\
     \ &operator<<(ostream &os, const ModInt &r) {\n    return os << r.val();\n  }\n\
@@ -384,8 +384,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 17:58:29+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-11-16 18:52:59+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp
 layout: document

@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: test/yukicoder/1750.SparseMat.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u758E\u884C\u5217"
     links:
@@ -122,7 +122,7 @@ data:
   path: src/LinearAlgebra/SparseSquareMatrix.hpp
   requiredBy: []
   timestamp: '2022-06-24 13:41:05+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
