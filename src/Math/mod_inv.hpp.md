@@ -54,7 +54,7 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':x:'
@@ -76,7 +76,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':x:'
@@ -91,16 +91,16 @@ data:
   - icon: ':x:'
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_D.test.cpp
     title: test/aoj/DPL_5_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_E.test.cpp
     title: test/aoj/DPL_5_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
   - icon: ':x:'
@@ -121,10 +121,10 @@ data:
   - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
   - icon: ':x:'
@@ -405,7 +405,7 @@ data:
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     links: []
@@ -448,7 +448,7 @@ data:
   - src/FFT/fps_sqrt.hpp
   - src/FFT/MultiVariateConvolution.hpp
   timestamp: '2022-11-14 09:47:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/3046.test.cpp
   - test/yukicoder/1533.test.cpp

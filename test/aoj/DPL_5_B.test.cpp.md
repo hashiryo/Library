@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/Combination.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97)\
       \ ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_B
@@ -86,7 +86,7 @@ data:
     \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
     \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
     \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() = default;\n  constexpr ModInt(const\
+    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0);\n  constexpr ModInt(const\
     \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
@@ -140,8 +140,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_B.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 17:35:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-16 17:58:29+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_B.test.cpp
 layout: document

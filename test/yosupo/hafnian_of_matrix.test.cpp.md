@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -11,7 +11,7 @@ data:
     path: src/Math/hafnian.hpp
     title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\
       \u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -73,7 +73,7 @@ data:
     \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
     \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
     \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() = default;\n  constexpr ModInt(const\
+    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0);\n  constexpr ModInt(const\
     \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
@@ -146,7 +146,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/hafnian_of_matrix.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 17:35:17+09:00'
+  timestamp: '2022-11-16 17:58:29+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/hafnian_of_matrix.test.cpp

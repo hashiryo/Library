@@ -23,11 +23,11 @@ data:
       \ ($\\mathbb{Z}/m\\mathbb{Z}$)"
     links:
     - https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f
-  bundledCode: "#line 2 \"src/Math/tetration.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Math/ModIntPrototype.hpp\"\n/**\n * @title ModInt\u306E\u30D7\u30ED\u30C8\
-    \u30BF\u30A4\u30D7\n * @category \u6570\u5B66\n * \u30E2\u30F3\u30B4\u30E1\u30EA\
-    \u3068\u304B\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\n\
+  bundledCode: "#line 2 \"src/Math/mod_tetration.hpp\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Math/ModIntPrototype.hpp\"\n/**\n * @title ModInt\u306E\u30D7\u30ED\
+    \u30C8\u30BF\u30A4\u30D7\n * @category \u6570\u5B66\n * \u30E2\u30F3\u30B4\u30E1\
+    \u30EA\u3068\u304B\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\nusing\
+    \ namespace std;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\n\
     class MIntPro_Montg {\n  u64 mod, iv, r2;\n  constexpr u64 inv(u64 n, int e =\
     \ 6, u64 x = 1) {\n    return e ? inv(n, e - 1, x * (2 - x * n)) : x;\n  }\n \
     \ constexpr inline u64 reduce(const u128 &w) const {\n    return u64(w >> 64)\
@@ -109,50 +109,48 @@ data:
     \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
     \ &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto &[p, e] : f)\n   \
     \ for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n}\nconstexpr auto\
-    \ totient(std::uint64_t n) { return totient(Factors(n)); }\n#line 4 \"src/Math/tetration.hpp\"\
+    \ totient(std::uint64_t n) { return totient(Factors(n)); }\n#line 4 \"src/Math/mod_tetration.hpp\"\
     \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$\
     \ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n\
     // verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\nnamespace tetration_internal {\nconstexpr std::uint64_t rec(std::uint64_t\
-    \ a, std::uint64_t b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n\
-    \  if (b == 0 || m == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i\
-    \ = 0;\n  for (const auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e\
-    \ - (p == 2 && e > 3); --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto\
-    \ mod = [m](__uint128_t x) { return x < m ? x : x % m + m; };\n  for (k = rec(a,\
-    \ b - 1, k), a = mod(a);; a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret =\
-    \ mod(__uint128_t(ret) * a) : 0; !(k >>= 1)) return ret;\n}\n}  // namespace tetration_internal\n\
-    constexpr std::uint64_t H4(std::uint64_t a, std::uint64_t b, std::uint64_t m)\
-    \ {\n  return (a = tetration_internal::rec(a, b, m)) >= m ? a - m : a;\n}\n"
+    \n// BEGIN CUT HERE\nnamespace math_internal {\nconstexpr u64 rec(u64 a, u64 b,\
+    \ u64 m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m == 1) return\
+    \ 1;\n  u64 ret = 1, k = 1, tmp = 1, i = 0;\n  for (const auto &[p, e] : Factors(m))\
+    \ {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3); --i;) tmp *= p;\n    k =\
+    \ std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t x) { return x < m ? x :\
+    \ x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);; a = mod(__uint128_t(a)\
+    \ * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a) : 0; !(k >>= 1)) return\
+    \ ret;\n}\nconstexpr u64 mod_tetration(u64 a, u64 b, u64 m) {\n  return (a = rec(a,\
+    \ b, m)) >= m ? a - m : a;\n}\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\
     \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$\
     \ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n\
     // verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
-    \n// BEGIN CUT HERE\nnamespace tetration_internal {\nconstexpr std::uint64_t rec(std::uint64_t\
-    \ a, std::uint64_t b, std::uint64_t m) {\n  if (a == 0) return (b ^ 1) & 1;\n\
-    \  if (b == 0 || m == 1) return 1;\n  std::uint64_t ret = 1, k = 1, tmp = 1, i\
-    \ = 0;\n  for (const auto &[p, e] : Factors(m)) {\n    for (tmp = p - 1, i = e\
-    \ - (p == 2 && e > 3); --i;) tmp *= p;\n    k = std::lcm(k, tmp);\n  }\n  auto\
-    \ mod = [m](__uint128_t x) { return x < m ? x : x % m + m; };\n  for (k = rec(a,\
-    \ b - 1, k), a = mod(a);; a = mod(__uint128_t(a) * a))\n    if (k & 1 ? ret =\
-    \ mod(__uint128_t(ret) * a) : 0; !(k >>= 1)) return ret;\n}\n}  // namespace tetration_internal\n\
-    constexpr std::uint64_t H4(std::uint64_t a, std::uint64_t b, std::uint64_t m)\
-    \ {\n  return (a = tetration_internal::rec(a, b, m)) >= m ? a - m : a;\n}\n"
+    \n// BEGIN CUT HERE\nnamespace math_internal {\nconstexpr u64 rec(u64 a, u64 b,\
+    \ u64 m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m == 1) return\
+    \ 1;\n  u64 ret = 1, k = 1, tmp = 1, i = 0;\n  for (const auto &[p, e] : Factors(m))\
+    \ {\n    for (tmp = p - 1, i = e - (p == 2 && e > 3); --i;) tmp *= p;\n    k =\
+    \ std::lcm(k, tmp);\n  }\n  auto mod = [m](__uint128_t x) { return x < m ? x :\
+    \ x % m + m; };\n  for (k = rec(a, b - 1, k), a = mod(a);; a = mod(__uint128_t(a)\
+    \ * a))\n    if (k & 1 ? ret = mod(__uint128_t(ret) * a) : 0; !(k >>= 1)) return\
+    \ ret;\n}\nconstexpr u64 mod_tetration(u64 a, u64 b, u64 m) {\n  return (a = rec(a,\
+    \ b, m)) >= m ? a - m : a;\n}\n}  // namespace math_internal\nusing math_internal::mod_tetration;"
   dependsOn:
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
   - src/Math/ModIntPrototype.hpp
   isVerificationFile: false
-  path: src/Math/tetration.hpp
+  path: src/Math/mod_tetration.hpp
   requiredBy: []
-  timestamp: '2022-11-16 17:35:17+09:00'
+  timestamp: '2022-11-16 17:55:00+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
-documentation_of: src/Math/tetration.hpp
+documentation_of: src/Math/mod_tetration.hpp
 layout: document
 redirect_from:
-- /library/src/Math/tetration.hpp
-- /library/src/Math/tetration.hpp.html
+- /library/src/Math/mod_tetration.hpp
+- /library/src/Math/mod_tetration.hpp.html
 title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
   mathbb{Z}$)"
 ---

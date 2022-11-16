@@ -18,7 +18,7 @@ data:
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
-    path: src/Math/tetration.hpp
+    path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
   _extendedVerifiedWith:
@@ -185,7 +185,7 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
-  - src/Math/tetration.hpp
+  - src/Math/mod_tetration.hpp
   - src/Math/mod_kth_root.hpp
   - src/Math/ModIntExp.hpp
   - src/Math/BinomialCoefficient.hpp

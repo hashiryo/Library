@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
@@ -70,7 +70,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':x:'
@@ -85,16 +85,16 @@ data:
   - icon: ':x:'
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_D.test.cpp
     title: test/aoj/DPL_5_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_E.test.cpp
     title: test/aoj/DPL_5_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
   - icon: ':x:'
@@ -115,10 +115,10 @@ data:
   - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
   - icon: ':x:'
@@ -390,7 +390,7 @@ data:
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: ModInt
     links: []
@@ -442,7 +442,7 @@ data:
     \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
     \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
     \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() = default;\n  constexpr ModInt(const\
+    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0);\n  constexpr ModInt(const\
     \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
@@ -490,7 +490,7 @@ data:
     \ int id>\nstruct RuntimeB {\n  static inline void set_mod(u64 m) { md = mod_pro_t(m);\
     \ }\n\n protected:\n  static inline mod_pro_t md;\n};\ntemplate <class Int, class\
     \ Uint, class B>\nstruct ModInt : public B {\n  static constexpr inline auto modulo()\
-    \ { return B::md.modulo(); }\n  constexpr ModInt() = default;\n  constexpr ModInt(const\
+    \ { return B::md.modulo(); }\n  constexpr ModInt() : x(0);\n  constexpr ModInt(const\
     \ ModInt &r) : x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr>\n  constexpr ModInt(T v) : ModInt(v.val()) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
@@ -549,8 +549,8 @@ data:
   - src/FFT/convolve.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/MultiVariateConvolution.hpp
-  timestamp: '2022-11-16 17:35:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-11-16 17:58:29+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/3046.test.cpp
   - test/yukicoder/1533.test.cpp

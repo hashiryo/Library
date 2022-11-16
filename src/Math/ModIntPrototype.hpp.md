@@ -57,7 +57,7 @@ data:
   - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':x:'
@@ -76,12 +76,12 @@ data:
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
-    path: src/Math/sparse_fps.hpp
-    title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':x:'
-    path: src/Math/tetration.hpp
+    path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
+  - icon: ':x:'
+    path: src/Math/sparse_fps.hpp
+    title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/aoj/0168.test.cpp
@@ -92,7 +92,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':x:'
@@ -107,16 +107,16 @@ data:
   - icon: ':x:'
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_D.test.cpp
     title: test/aoj/DPL_5_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_E.test.cpp
     title: test/aoj/DPL_5_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
   - icon: ':heavy_check_mark:'
@@ -140,10 +140,10 @@ data:
   - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
   - icon: ':x:'
@@ -514,8 +514,8 @@ data:
   isVerificationFile: false
   path: src/Math/ModIntPrototype.hpp
   requiredBy:
-  - src/Math/tetration.hpp
   - src/Math/Factors.hpp
+  - src/Math/mod_tetration.hpp
   - src/Math/mod_kth_root.hpp
   - src/Math/ModIntExp.hpp
   - src/Math/is_prime.hpp

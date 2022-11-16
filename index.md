@@ -239,7 +239,7 @@ data:
       path: src/Math/CartesianProduct.hpp
       title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
         times K_n$)"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97\
         ) ($\\mathbb{F}_p$)"
@@ -249,7 +249,7 @@ data:
     - icon: ':question:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':x:'
@@ -289,7 +289,7 @@ data:
     - icon: ':question:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/mod_inv.hpp
       title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':x:'
@@ -298,6 +298,10 @@ data:
     - icon: ':x:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
+    - icon: ':x:'
+      path: src/Math/mod_tetration.hpp
+      title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
+        mathbb{Z}$)"
     - icon: ':question:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
@@ -307,10 +311,6 @@ data:
     - icon: ':x:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-    - icon: ':x:'
-      path: src/Math/tetration.hpp
-      title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
-        mathbb{Z}$)"
   - name: src/Optimization
     pages:
     - icon: ':heavy_check_mark:'
@@ -480,7 +480,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2514.test.cpp
       title: test/aoj/2514.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
     - icon: ':heavy_check_mark:'
@@ -642,16 +642,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_I.test.cpp
       title: test/aoj/CGL_7_I.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_B.test.cpp
       title: test/aoj/DPL_5_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_D.test.cpp
       title: test/aoj/DPL_5_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_E.test.cpp
       title: test/aoj/DPL_5_E.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_F.test.cpp
       title: test/aoj/DPL_5_F.test.cpp
     - icon: ':heavy_check_mark:'
@@ -743,7 +743,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc117_d.test.cpp
       title: test/atcoder/abc117_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc129_e.test.cpp
       title: test/atcoder/abc129_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -755,7 +755,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
     - icon: ':heavy_check_mark:'
