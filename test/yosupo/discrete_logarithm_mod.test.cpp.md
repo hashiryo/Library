@@ -26,24 +26,24 @@ data:
     \ c = a, x = y, y = z - y * (q = a / b), a = b, b = c - b * q;\n  return assert(a\
     \ == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/discrete_logarithm.hpp\"\
     \n/**\n * @title \u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category\
-    \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nconstexpr int discrete_logarithm(unsigned\
-    \ a, unsigned b, unsigned mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0\
-    \ : 1) : (b == 1 ? 0 : -1);\n  using u32 = unsigned;\n  auto mul = [&mod](u32\
-    \ &x, u32 y) { x = (std::uint64_t)x * y % mod; };\n  u32 cnt = 0;\n  for (u32\
-    \ g = 0;; cnt++, b /= g, mod /= g, mul(b, mod_inv<int>(a / g, mod))) {\n    if\
-    \ ((b == 1) || (mod == 1)) return cnt;\n    if ((g = std::gcd(a, mod)) == 1) break;\n\
-    \    if (b % g != 0) return -1;  // no solution\n  }\n  u32 baby = 1, size = 1\
-    \ << std::__lg(int(std::sqrt(mod))), mask = size - 1,\n      os[size + 1] = {},\
-    \ vs[size][2] = {};\n  for (u32 i = 0; i < size; i++, mul(baby, a)) os[baby &\
-    \ mask]++;\n  for (u32 i = 1; i < size; i++) os[i] += os[i - 1];\n  os[size] =\
-    \ size, baby = 1;\n  for (u32 i = 0, j = 0; i < size; i++, mul(baby, a))\n   \
-    \ j = --os[baby & mask], vs[j][0] = baby, vs[j][1] = i;\n  for (u32 t = 0, iv\
-    \ = mod_inv<int>(baby, mod); t < mod; t += size, mul(b, iv))\n    for (u32 m =\
-    \ (b & mask), i = os[m + 1]; i-- > os[m];)\n      if (b == vs[i][0]) return cnt\
-    \ + vs[i][1] + t;\n  return -1;  // no solution\n}\n#line 4 \"test/yosupo/discrete_logarithm_mod.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int T;\n  cin >> T;\n  while (T--) {\n    int X, Y, M;\n    cin >> X >> Y >>\
-    \ M;\n    cout << discrete_logarithm(X, Y, M) << '\\n';\n  }\n  return 0;\n}\n"
+    \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nconstexpr int discrete_logarithm(int\
+    \ a, int b, int mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b\
+    \ == 1 ? 0 : -1);\n  auto mul = [&mod](int &x, int y) { x = (std::uint64_t)x *\
+    \ y % mod; };\n  int cnt = 0;\n  for (int g = 0;; cnt++, b /= g, mod /= g, mul(b,\
+    \ mod_inv<int>(a / g, mod))) {\n    if ((b == 1) || (mod == 1)) return cnt;\n\
+    \    if ((g = std::gcd(a, mod)) == 1) break;\n    if (b % g != 0) return -1; \
+    \ // no solution\n  }\n  int baby = 1, size = 1 << std::__lg(int(std::sqrt(mod))\
+    \ + 1), mask = size - 1,\n      os[size + 1] = {}, vs[size][2] = {};\n  for (int\
+    \ i = 0; i < size; i++, mul(baby, a)) os[baby & mask]++;\n  for (int i = 1; i\
+    \ < size; i++) os[i] += os[i - 1];\n  os[size] = size, baby = 1;\n  for (int i\
+    \ = 0, j = 0; i < size; i++, mul(baby, a))\n    j = --os[baby & mask], vs[j][0]\
+    \ = baby, vs[j][1] = i;\n  for (int t = 0, iv = mod_inv<int>(baby, mod); t < mod;\
+    \ t += size, mul(b, iv))\n    for (int m = (b & mask), i = os[m + 1]; i-- > os[m];)\n\
+    \      if (b == vs[i][0]) return cnt + vs[i][1] + t;\n  return -1;  // no solution\n\
+    }\n#line 4 \"test/yosupo/discrete_logarithm_mod.test.cpp\"\nusing namespace std;\n\
+    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n  cin\
+    \ >> T;\n  while (T--) {\n    int X, Y, M;\n    cin >> X >> Y >> M;\n    cout\
+    \ << discrete_logarithm(X, Y, M) << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/discrete_logarithm.hpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -55,7 +55,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/discrete_logarithm_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-11-14 09:47:23+09:00'
+  timestamp: '2022-11-16 17:35:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/discrete_logarithm_mod.test.cpp

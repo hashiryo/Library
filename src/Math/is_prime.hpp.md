@@ -1,8 +1,11 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Math/ModIntPrototype.hpp
+    title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -11,7 +14,7 @@ data:
   - icon: ':x:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':x:'
@@ -20,10 +23,10 @@ data:
   - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -35,7 +38,7 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':x:'
@@ -57,56 +60,68 @@ data:
   - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModIntExp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
+    path: src/Math/mod_sqrt.hpp
+    title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
+  - icon: ':x:'
+    path: src/Math/sparse_fps.hpp
+    title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
+  - icon: ':x:'
     path: src/Math/tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/atcoder/abc222_h.sparse_FPS.test.cpp
+    title: test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc276_g.sparse_FPS.test.cpp
+    title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
@@ -131,7 +146,10 @@ data:
   - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/exp_of_sparse_FPS.test.cpp
+    title: test/yosupo/exp_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
   - icon: ':x:'
@@ -147,6 +165,9 @@ data:
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':x:'
+    path: test/yosupo/inv_of_sparse_FPS.test.cpp
+    title: test/yosupo/inv_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
   - icon: ':x:'
@@ -158,6 +179,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/log_of_sparse_FPS.test.cpp
+    title: test/yosupo/log_of_sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
@@ -179,7 +203,10 @@ data:
   - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yosupo/pow_of_sparse_FPS.test.cpp
+    title: test/yosupo/pow_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
   - icon: ':x:'
@@ -195,18 +222,21 @@ data:
     path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   - icon: ':x:'
+    path: test/yosupo/sqrt_mod.test.cpp
+    title: test/yosupo/sqrt_mod.test.cpp
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_1_small_p_large_n.test.cpp
     title: test/yosupo/stirling_1_small_p_large_n.test.cpp
   - icon: ':x:'
     path: test/yosupo/stirling_2.test.cpp
     title: test/yosupo/stirling_2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
   - icon: ':x:'
@@ -215,6 +245,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1080.sparse_FPS.test.cpp
+    title: test/yukicoder/1080.sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
@@ -225,12 +258,18 @@ data:
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1533.test.cpp
+    title: test/yukicoder/1533.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1939.test.cpp
+    title: test/yukicoder/1939.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/215.Poly.test.cpp
     title: test/yukicoder/215.Poly.test.cpp
   - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/3030.test.cpp
     title: test/yukicoder/3030.test.cpp
   - icon: ':x:'
@@ -263,33 +302,68 @@ data:
   attributes:
     document_title: "\u7D20\u6570\u5224\u5B9A"
     links: []
-  bundledCode: "#line 2 \"src/Math/is_prime.hpp\"\n#include <bits/stdc++.h>\n/**\n\
-    \ * @title \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n\
-    \ * constexpr \u3067\u547C\u3079\u308B\n */\n\n// BEGIN CUT HERE\nconstexpr std::uint64_t\
-    \ mul(std::uint64_t x, std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x\
-    \ * y % m;\n}\ntemplate <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t\
-    \ n) {\n  const std::uint64_t s = __builtin_ctzll(n - 1), d = n >> s;\n  for (auto\
-    \ a : {args...}) {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t\
-    \ k = d, x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k\
-    \ >>= 1)) break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n\
-    \    if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr\
-    \ bool is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n |\
-    \ 1) == 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title \u7D20\u6570\u5224\
-    \u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n * constexpr \u3067\u547C\u3079\
-    \u308B\n */\n\n// BEGIN CUT HERE\nconstexpr std::uint64_t mul(std::uint64_t x,\
-    \ std::uint64_t y, std::uint64_t m) {\n  return (__uint128_t)x * y % m;\n}\ntemplate\
-    \ <std::uint64_t... args>\nconstexpr bool miller_rabin(std::uint64_t n) {\n  const\
-    \ std::uint64_t s = __builtin_ctzll(n - 1), d = n >> s;\n  for (auto a : {args...})\
-    \ {\n    std::uint64_t b = a % n, p = 1, i = s;\n    for (std::uint64_t k = d,\
-    \ x = b;; x = mul(x, x, n))\n      if (k& 1 ? p = mul(p, x, n) : 0; !(k >>= 1))\
-    \ break;\n    while (p != 1 && p != n - 1 && b && i--) p = mul(p, p, n);\n   \
-    \ if (p != n - 1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool\
-    \ is_prime(std::uint64_t n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) ==\
-    \ 3;\n  if (n < UINT_MAX) return miller_rabin<2, 7, 61>(n);\n  return miller_rabin<2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}"
-  dependsOn: []
+  bundledCode: "#line 2 \"src/Math/is_prime.hpp\"\n#include <bits/stdc++.h>\n#line\
+    \ 3 \"src/Math/ModIntPrototype.hpp\"\n/**\n * @title ModInt\u306E\u30D7\u30ED\u30C8\
+    \u30BF\u30A4\u30D7\n * @category \u6570\u5B66\n * \u30E2\u30F3\u30B4\u30E1\u30EA\
+    \u3068\u304B\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\nusing namespace\
+    \ std;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\nusing u128 = __uint128_t;\n\
+    class MIntPro_Montg {\n  u64 mod, iv, r2;\n  constexpr u64 inv(u64 n, int e =\
+    \ 6, u64 x = 1) {\n    return e ? inv(n, e - 1, x * (2 - x * n)) : x;\n  }\n \
+    \ constexpr inline u64 reduce(const u128 &w) const {\n    return u64(w >> 64)\
+    \ + mod - ((u128(u64(w) * iv) * mod) >> 64);\n  }\n\n public:\n  constexpr MIntPro_Montg()\
+    \ : mod(0), iv(0), r2(0) {}\n  constexpr MIntPro_Montg(u64 m) : mod(m), iv(inv(m)),\
+    \ r2(-u128(mod) % mod) {}\n  constexpr inline u64 mul(u64 l, u64 r) const { return\
+    \ reduce(u128(l) * r); }\n#define BOP(op, a) return l op## = a, l += (mod << 1)\
+    \ & -(l >> 63)\n  constexpr inline u64 plus(u64 l, u64 r) const { BOP(+, r - (mod\
+    \ << 1)); }\n  constexpr inline u64 diff(u64 l, u64 r) const { BOP(-, r); }\n\
+    #undef BOP\n  constexpr inline u64 set(u64 n) const { return mul(n, r2); }\n \
+    \ constexpr inline u64 get(u64 n) const {\n    u64 ret = reduce(n) - mod;\n  \
+    \  return ret + (mod & -(ret >> 63));\n  }\n  constexpr inline u64 norm(u64 n)\
+    \ const { return n - (mod & -(n >= mod)); }\n  constexpr u64 modulo() const {\
+    \ return mod; }\n};\ntemplate <class Uint>\nclass MIntPro_Na {\n  using DUint\
+    \ = conditional_t<is_same_v<Uint, u32>, u64, u128>;\n  Uint mod;\n\n public:\n\
+    \  constexpr MIntPro_Na() : mod(0){};\n  constexpr MIntPro_Na(Uint m) : mod(m)\
+    \ {}\n  constexpr inline Uint mul(Uint l, Uint r) const { return DUint(l) * r\
+    \ % mod; }\n#define BOP(m, p) return l m## = mod & -((l p## = r) >= mod)\n  constexpr\
+    \ inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n  constexpr inline Uint\
+    \ diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint\
+    \ set(Uint n) const { return n % mod; }\n  static constexpr inline Uint get(Uint\
+    \ n) { return n; }\n  static constexpr inline Uint norm(Uint n) { return n; }\n\
+    \  constexpr Uint modulo() const { return mod; }\n};\ntemplate <class Uint, class\
+    \ mod_pro_t>\nconstexpr Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for\
+    \ (Uint ret = md.set(1);; x = md.mul(x, x))\n    if (k & 1 ? ret = md.mul(ret,\
+    \ x) : 0; !(k >>= 1)) return ret;\n}\n}  // namespace math_internal\n#line 4 \"\
+    src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category\
+    \ \u6570\u5B66\n *  O(log N)\n */\n\n// BEGIN CUT HERE\nnamespace math_internal\
+    \ {\ntemplate <class Uint, class mod_pro_t, u64... args>\nconstexpr bool miller_rabin(Uint\
+    \ n) {\n  const mod_pro_t md(n);\n  const Uint s = __builtin_ctzll(n - 1), d =\
+    \ n >> s, one = md.set(1),\n             n1 = md.norm(md.set(n - 1));\n  for (auto\
+    \ a : {args...}) {\n    Uint b = a % n, p = pow(md.set(b), d, md), i = s;\n  \
+    \  while (p = md.norm(p), (p != one && p != n1 && b && i--)) p = md.mul(p, p);\n\
+    \    if (md.norm(p) != n1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr\
+    \ bool is_prime(u64 n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n\
+    \  if (n < UINT_MAX) return miller_rabin<u32, MIntPro_Na<u32>, 2, 7, 61>(n);\n\
+    \  if (n < LLONG_MAX)\n    return miller_rabin<u64, MIntPro_Montg, 2, 325, 9375,\
+    \ 28178, 450775,\n                        9780504, 1795265022>(n);\n  return miller_rabin<u64,\
+    \ MIntPro_Na<u64>, 2, 325, 9375, 28178, 450775,\n                      9780504,\
+    \ 1795265022>(n);\n}\n}  // namespace math_internal\nusing math_internal::is_prime;\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModIntPrototype.hpp\"\
+    \n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log\
+    \ N)\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate <class Uint,\
+    \ class mod_pro_t, u64... args>\nconstexpr bool miller_rabin(Uint n) {\n  const\
+    \ mod_pro_t md(n);\n  const Uint s = __builtin_ctzll(n - 1), d = n >> s, one =\
+    \ md.set(1),\n             n1 = md.norm(md.set(n - 1));\n  for (auto a : {args...})\
+    \ {\n    Uint b = a % n, p = pow(md.set(b), d, md), i = s;\n    while (p = md.norm(p),\
+    \ (p != one && p != n1 && b && i--)) p = md.mul(p, p);\n    if (md.norm(p) !=\
+    \ n1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool is_prime(u64\
+    \ n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX)\
+    \ return miller_rabin<u32, MIntPro_Na<u32>, 2, 7, 61>(n);\n  if (n < LLONG_MAX)\n\
+    \    return miller_rabin<u64, MIntPro_Montg, 2, 325, 9375, 28178, 450775,\n  \
+    \                      9780504, 1795265022>(n);\n  return miller_rabin<u64, MIntPro_Na<u64>,\
+    \ 2, 325, 9375, 28178, 450775,\n                      9780504, 1795265022>(n);\n\
+    }\n}  // namespace math_internal\nusing math_internal::is_prime;"
+  dependsOn:
+  - src/Math/ModIntPrototype.hpp
   isVerificationFile: false
   path: src/Math/is_prime.hpp
   requiredBy:
@@ -297,6 +371,8 @@ data:
   - src/Math/Factors.hpp
   - src/Math/mod_kth_root.hpp
   - src/Math/ModIntExp.hpp
+  - src/Math/mod_sqrt.hpp
+  - src/Math/sparse_fps.hpp
   - src/Math/StirlingNumber.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/FFT/polynomial_matrix_prod.hpp
@@ -315,21 +391,24 @@ data:
   - src/FFT/convolve.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/MultiVariateConvolution.hpp
-  timestamp: '2022-10-16 17:42:41+09:00'
+  timestamp: '2022-11-16 17:35:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/3046.test.cpp
+  - test/yukicoder/1533.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/502.test.cpp
   - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/980.test.cpp
+  - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/3030.test.cpp
   - test/yukicoder/137.div_at.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/42.test.cpp
+  - test/yukicoder/1939.test.cpp
   - test/yukicoder/658.test.cpp
   - test/yukicoder/665.test.cpp
   - test/aoj/NTL_1_D.test.cpp
@@ -343,6 +422,8 @@ data:
   - test/aoj/NTL_2_E.test.cpp
   - test/atcoder/abc213_h.test.cpp
   - test/atcoder/abc230_h.test.cpp
+  - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc228_e.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
@@ -350,12 +431,14 @@ data:
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/exp_of_FPS.test.cpp
   - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/stirling_1.test.cpp
   - test/yosupo/stirling_2_small_p_large_n.test.cpp
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/multivariate_convolution.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp
   - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
@@ -380,6 +463,9 @@ data:
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/pow_of_FPS.FPS.test.cpp
   - test/yosupo/factorize.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_mod.test.cpp
 documentation_of: src/Math/is_prime.hpp
 layout: document
 redirect_from:

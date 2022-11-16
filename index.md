@@ -101,7 +101,7 @@ data:
       title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - name: src/FFT
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/FFT/BigInt.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':x:'
@@ -110,7 +110,7 @@ data:
     - icon: ':x:'
       path: src/FFT/MultiVariateConvolution.hpp
       title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
     - icon: ':x:'
@@ -119,10 +119,10 @@ data:
     - icon: ':x:'
       path: src/FFT/SubProductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/bostan_mori.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/convolve.hpp
       title: "\u7573\u307F\u8FBC\u307F"
     - icon: ':x:'
@@ -134,7 +134,7 @@ data:
     - icon: ':x:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/fps_inv.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
     - icon: ':x:'
@@ -218,10 +218,10 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
       title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
     - icon: ':x:'
@@ -235,7 +235,7 @@ data:
     - icon: ':x:'
       path: src/Math/BinomialCoefficient.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/CartesianProduct.hpp
       title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
         times K_n$)"
@@ -252,9 +252,12 @@ data:
     - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/ModIntExp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
+    - icon: ':question:'
+      path: src/Math/ModIntPrototype.hpp
+      title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
     - icon: ':x:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
@@ -267,13 +270,13 @@ data:
     - icon: ':question:'
       path: src/Math/Sieve.hpp
       title: "\u7BE9\u306A\u3069"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/StirlingNumber.hpp
       title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
     - icon: ':x:'
@@ -292,6 +295,9 @@ data:
     - icon: ':x:'
       path: src/Math/mod_kth_root.hpp
       title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
+    - icon: ':x:'
+      path: src/Math/mod_sqrt.hpp
+      title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
     - icon: ':question:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
@@ -339,7 +345,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/KnuthMorrisPratt.hpp
       title: Knuth-Morris-Pratt
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
     - icon: ':heavy_check_mark:'
@@ -351,7 +357,7 @@ data:
   verificationCategories:
   - name: test/aoj
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/0168.test.cpp
       title: test/aoj/0168.test.cpp
     - icon: ':heavy_check_mark:'
@@ -453,10 +459,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2345.test.cpp
       title: test/aoj/2345.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2397.SparseMat.test.cpp
       title: test/aoj/2397.SparseMat.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
     - icon: ':heavy_check_mark:'
@@ -483,7 +489,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2587.test.cpp
       title: test/aoj/2587.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2614.rollinghash.test.cpp
       title: test/aoj/2614.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
@@ -507,7 +513,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2674.WM.test.cpp
       title: test/aoj/2674.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2711.rollinghash.test.cpp
       title: test/aoj/2711.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
@@ -552,13 +558,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3056.test.cpp
       title: test/aoj/3056.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3072.test.cpp
       title: test/aoj/3072.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.KMP.test.cpp
       title: test/aoj/ALDS1_14_B.KMP.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
       title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
@@ -714,22 +720,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_1_D.test.cpp
       title: test/aoj/NTL_1_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_A.test.cpp
       title: test/aoj/NTL_2_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_B.test.cpp
       title: test/aoj/NTL_2_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_C.test.cpp
       title: test/aoj/NTL_2_C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_D.test.cpp
       title: test/aoj/NTL_2_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_E.test.cpp
       title: test/aoj/NTL_2_E.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_F.test.cpp
       title: test/aoj/NTL_2_F.test.cpp
   - name: test/atcoder
@@ -749,7 +755,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -785,7 +791,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc222_h.sparse_FPS.test.cpp
       title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -941,7 +947,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/exp_of_sparse_FPS.test.cpp
       title: test/yosupo/exp_of_sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/factorize.test.cpp
       title: test/yosupo/factorize.test.cpp
     - icon: ':x:'
@@ -1055,7 +1061,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/pow_of_sparse_FPS.test.cpp
       title: test/yosupo/pow_of_sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/primitive_root.test.cpp
       title: test/yosupo/primitive_root.test.cpp
     - icon: ':x:'
@@ -1115,13 +1121,13 @@ data:
     - icon: ':x:'
       path: test/yosupo/stirling_1.test.cpp
       title: test/yosupo/stirling_1.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/stirling_1_small_p_large_n.test.cpp
       title: test/yosupo/stirling_1_small_p_large_n.test.cpp
     - icon: ':x:'
       path: test/yosupo/stirling_2.test.cpp
       title: test/yosupo/stirling_2.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/stirling_2_small_p_large_n.test.cpp
       title: test/yosupo/stirling_2_small_p_large_n.test.cpp
     - icon: ':x:'
@@ -1216,7 +1222,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/235.LCT.test.cpp
       title: test/yukicoder/235.LCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/3030.test.cpp
       title: test/yukicoder/3030.test.cpp
     - icon: ':x:'
