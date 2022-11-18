@@ -25,14 +25,13 @@ data:
     \u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u53D7\u3051\u53D6\u308B\n * @see https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
     \ * \u5BB9\u91CF\u306F\u8CA0\u3082\u53EF (\u9006\u5411\u304D\u306B\u6D41\u308C\
     \u308B\u610F\u5473)\n */\n\n// verify\u7528: https://yukicoder.me/problems/no/459\n\
-    \n// BEGIN CUT HERE\n\ntemplate <typename FlowAlgo>\nclass MaxFlowLowerBound :\
-    \ public FlowAlgo {\n  using Edge = typename FlowAlgo::Edge;\n  using flow_t =\
-    \ decltype(Edge::cap);\n  std::vector<flow_t> in;\n  int add_edge(int src, int\
-    \ dst, flow_t cap) {\n    int e = this->adj[src].size();\n    int re = src ==\
-    \ dst ? e + 1 : this->adj[dst].size();\n    this->adj[src].push_back(Edge{dst,\
-    \ re, cap});\n    this->adj[dst].push_back(Edge{src, e, 0});\n    return this->m++,\
-    \ re;\n  }\n\n public:\n  MaxFlowLowerBound(std::size_t n = 0) : FlowAlgo(n +\
-    \ 2), in(n) {}\n  int add_vertex() {\n    return this->adj.resize(++this->n),\
+    \n// BEGIN CUT HERE\ntemplate <typename FlowAlgo>\nclass MaxFlowLowerBound : public\
+    \ FlowAlgo {\n  using Edge = typename FlowAlgo::Edge;\n  using flow_t = decltype(Edge::cap);\n\
+    \  std::vector<flow_t> in;\n  int add_edge(int src, int dst, flow_t cap) {\n \
+    \   int e = this->adj[src].size();\n    int re = src == dst ? e + 1 : this->adj[dst].size();\n\
+    \    return this->adj[src].push_back(Edge{dst, re, cap}),\n           this->adj[dst].push_back(Edge{src,\
+    \ e, 0}), this->m++, re;\n  }\n\n public:\n  MaxFlowLowerBound(std::size_t n =\
+    \ 0) : FlowAlgo(n + 2), in(n) {}\n  int add_vertex() {\n    return this->adj.resize(++this->n),\
     \ in.resize(this->n - 2, 0), this->n - 3;\n  }\n  std::vector<int> add_vertices(const\
     \ std::size_t size) {\n    std::vector<int> ret(size);\n    std::iota(ret.begin(),\
     \ ret.end(), this->n - 2);\n    return this->adj.resize(this->n += size), in.resize(this->n\
@@ -45,15 +44,14 @@ data:
     \ v; }\n    int dst() const { return edge().dst; }\n    flow_t flow() const {\
     \ return u - edge().cap; }\n    flow_t lower() const { return flow() - rev().cap;\
     \ }\n    flow_t upper() const { return u; }\n  };\n  EdgePtr add_edge(int src,\
-    \ int dst, flow_t lower, flow_t upper) {\n    assert(lower <= upper);\n    src\
-    \ += 2, dst += 2;\n    assert(0 <= src && src < this->n);\n    assert(0 <= dst\
-    \ && dst < this->n);\n    this->m++;\n    int e = this->adj[src].size();\n   \
-    \ int re = src == dst ? e + 1 : this->adj[dst].size();\n    if (lower * upper\
-    \ <= 0) {\n      this->adj[src].push_back(Edge{dst, re, upper});\n      this->adj[dst].push_back(Edge{src,\
-    \ e, -lower});\n    } else if (lower > 0) {\n      in[src - 2] -= lower, in[dst\
-    \ - 2] += lower;\n      this->adj[src].push_back(Edge{dst, re, upper - lower});\n\
-    \      this->adj[dst].push_back(Edge{src, e, 0});\n    } else {\n      in[src\
-    \ - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
+    \ int dst, flow_t lower, flow_t upper) {\n    assert(lower <= upper), src += 2,\
+    \ dst += 2;\n    assert(0 <= src && src < this->n), assert(0 <= dst && dst < this->n);\n\
+    \    this->m++;\n    int e = this->adj[src].size(),\n        re = src == dst ?\
+    \ e + 1 : this->adj[dst].size();\n    if (lower * upper <= 0) {\n      this->adj[src].push_back(Edge{dst,\
+    \ re, upper});\n      this->adj[dst].push_back(Edge{src, e, -lower});\n    } else\
+    \ if (lower > 0) {\n      in[src - 2] -= lower, in[dst - 2] += lower;\n      this->adj[src].push_back(Edge{dst,\
+    \ re, upper - lower});\n      this->adj[dst].push_back(Edge{src, e, 0});\n   \
+    \ } else {\n      in[src - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
     \ re, 0});\n      this->adj[dst].push_back(Edge{src, e, upper - lower});\n   \
     \ }\n    return EdgePtr(this, src, e, upper);\n  }\n  flow_t maxflow(int s, int\
     \ t) {\n    static constexpr flow_t INF = std::numeric_limits<flow_t>::max();\n\
@@ -69,14 +67,13 @@ data:
     \u30C8\u3067\u53D7\u3051\u53D6\u308B\n * @see https://snuke.hatenablog.com/entry/2016/07/10/043918\n\
     \ * \u5BB9\u91CF\u306F\u8CA0\u3082\u53EF (\u9006\u5411\u304D\u306B\u6D41\u308C\
     \u308B\u610F\u5473)\n */\n\n// verify\u7528: https://yukicoder.me/problems/no/459\n\
-    \n// BEGIN CUT HERE\n\ntemplate <typename FlowAlgo>\nclass MaxFlowLowerBound :\
-    \ public FlowAlgo {\n  using Edge = typename FlowAlgo::Edge;\n  using flow_t =\
-    \ decltype(Edge::cap);\n  std::vector<flow_t> in;\n  int add_edge(int src, int\
-    \ dst, flow_t cap) {\n    int e = this->adj[src].size();\n    int re = src ==\
-    \ dst ? e + 1 : this->adj[dst].size();\n    this->adj[src].push_back(Edge{dst,\
-    \ re, cap});\n    this->adj[dst].push_back(Edge{src, e, 0});\n    return this->m++,\
-    \ re;\n  }\n\n public:\n  MaxFlowLowerBound(std::size_t n = 0) : FlowAlgo(n +\
-    \ 2), in(n) {}\n  int add_vertex() {\n    return this->adj.resize(++this->n),\
+    \n// BEGIN CUT HERE\ntemplate <typename FlowAlgo>\nclass MaxFlowLowerBound : public\
+    \ FlowAlgo {\n  using Edge = typename FlowAlgo::Edge;\n  using flow_t = decltype(Edge::cap);\n\
+    \  std::vector<flow_t> in;\n  int add_edge(int src, int dst, flow_t cap) {\n \
+    \   int e = this->adj[src].size();\n    int re = src == dst ? e + 1 : this->adj[dst].size();\n\
+    \    return this->adj[src].push_back(Edge{dst, re, cap}),\n           this->adj[dst].push_back(Edge{src,\
+    \ e, 0}), this->m++, re;\n  }\n\n public:\n  MaxFlowLowerBound(std::size_t n =\
+    \ 0) : FlowAlgo(n + 2), in(n) {}\n  int add_vertex() {\n    return this->adj.resize(++this->n),\
     \ in.resize(this->n - 2, 0), this->n - 3;\n  }\n  std::vector<int> add_vertices(const\
     \ std::size_t size) {\n    std::vector<int> ret(size);\n    std::iota(ret.begin(),\
     \ ret.end(), this->n - 2);\n    return this->adj.resize(this->n += size), in.resize(this->n\
@@ -89,15 +86,14 @@ data:
     \ v; }\n    int dst() const { return edge().dst; }\n    flow_t flow() const {\
     \ return u - edge().cap; }\n    flow_t lower() const { return flow() - rev().cap;\
     \ }\n    flow_t upper() const { return u; }\n  };\n  EdgePtr add_edge(int src,\
-    \ int dst, flow_t lower, flow_t upper) {\n    assert(lower <= upper);\n    src\
-    \ += 2, dst += 2;\n    assert(0 <= src && src < this->n);\n    assert(0 <= dst\
-    \ && dst < this->n);\n    this->m++;\n    int e = this->adj[src].size();\n   \
-    \ int re = src == dst ? e + 1 : this->adj[dst].size();\n    if (lower * upper\
-    \ <= 0) {\n      this->adj[src].push_back(Edge{dst, re, upper});\n      this->adj[dst].push_back(Edge{src,\
-    \ e, -lower});\n    } else if (lower > 0) {\n      in[src - 2] -= lower, in[dst\
-    \ - 2] += lower;\n      this->adj[src].push_back(Edge{dst, re, upper - lower});\n\
-    \      this->adj[dst].push_back(Edge{src, e, 0});\n    } else {\n      in[src\
-    \ - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
+    \ int dst, flow_t lower, flow_t upper) {\n    assert(lower <= upper), src += 2,\
+    \ dst += 2;\n    assert(0 <= src && src < this->n), assert(0 <= dst && dst < this->n);\n\
+    \    this->m++;\n    int e = this->adj[src].size(),\n        re = src == dst ?\
+    \ e + 1 : this->adj[dst].size();\n    if (lower * upper <= 0) {\n      this->adj[src].push_back(Edge{dst,\
+    \ re, upper});\n      this->adj[dst].push_back(Edge{src, e, -lower});\n    } else\
+    \ if (lower > 0) {\n      in[src - 2] -= lower, in[dst - 2] += lower;\n      this->adj[src].push_back(Edge{dst,\
+    \ re, upper - lower});\n      this->adj[dst].push_back(Edge{src, e, 0});\n   \
+    \ } else {\n      in[src - 2] -= upper, in[dst - 2] += upper;\n      this->adj[src].push_back(Edge{dst,\
     \ re, 0});\n      this->adj[dst].push_back(Edge{src, e, upper - lower});\n   \
     \ }\n    return EdgePtr(this, src, e, upper);\n  }\n  flow_t maxflow(int s, int\
     \ t) {\n    static constexpr flow_t INF = std::numeric_limits<flow_t>::max();\n\
@@ -110,7 +106,7 @@ data:
   isVerificationFile: false
   path: src/Optimization/MaxFlowLowerBound.hpp
   requiredBy: []
-  timestamp: '2022-06-23 22:51:34+09:00'
+  timestamp: '2022-11-18 14:42:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1615.PushRelabel.test.cpp
