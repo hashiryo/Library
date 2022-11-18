@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedVerifiedWith:
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Skew-Heap
     links: []
@@ -48,8 +48,8 @@ data:
     \ typename M::E> {\n    typename M::E lazy;\n    bool lazy_flg = false;\n  };\n\
     \  using Node = Node_D<dual<M>::value>;\n  using E = typename Node::E;\n  Node\
     \ *root;\n  static inline void propagate(Node *&t, const E &x) {\n    if (!t)\
-    \ return;\n    t->lazy = t->lazy_flg ? M::composition(t->lazy, x) : x;\n    t->key\
-    \ = M::mapping(t->key, x), t->lazy_flg = true;\n  }\n  static inline void eval(Node\
+    \ return;\n    t->lazy_flg ? (M::composition(t->lazy, x), x) : (t->lazy = x);\n\
+    \    M::mapping(t->key, x), t->lazy_flg = true;\n  }\n  static inline void eval(Node\
     \ *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0], t->lazy), propagate(t->ch[1],\
     \ t->lazy),\n          t->lazy_flg = false;\n  }\n  Node *merge(Node *a, Node\
     \ *b) {\n    if (!a || !b) return a ? a : b;\n    if (Compare()(a->key, b->key))\
@@ -85,9 +85,9 @@ data:
     \      : Node_B<Node_D<du_>, typename M::E> {\n    typename M::E lazy;\n    bool\
     \ lazy_flg = false;\n  };\n  using Node = Node_D<dual<M>::value>;\n  using E =\
     \ typename Node::E;\n  Node *root;\n  static inline void propagate(Node *&t, const\
-    \ E &x) {\n    if (!t) return;\n    t->lazy = t->lazy_flg ? M::composition(t->lazy,\
-    \ x) : x;\n    t->key = M::mapping(t->key, x), t->lazy_flg = true;\n  }\n  static\
-    \ inline void eval(Node *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0],\
+    \ E &x) {\n    if (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy, x),\
+    \ x) : (t->lazy = x);\n    M::mapping(t->key, x), t->lazy_flg = true;\n  }\n \
+    \ static inline void eval(Node *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0],\
     \ t->lazy), propagate(t->ch[1], t->lazy),\n          t->lazy_flg = false;\n  }\n\
     \  Node *merge(Node *a, Node *b) {\n    if (!a || !b) return a ? a : b;\n    if\
     \ (Compare()(a->key, b->key)) std::swap(a, b);\n    if constexpr (dual<M>::value)\
@@ -105,8 +105,8 @@ data:
   path: src/DataStructure/SkewHeap.hpp
   requiredBy:
   - src/Graph/MinimumSpanningAborescense.hpp
-  timestamp: '2021-11-23 16:32:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-11-18 21:48:58+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2647.test.cpp
   - test/aoj/GRL_2_B.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
   _extendedRequiredBy: []
@@ -39,9 +39,9 @@ data:
     \      : Node_B<Node_D<du_>, typename M::E> {\n    typename M::E lazy;\n    bool\
     \ lazy_flg = false;\n  };\n  using Node = Node_D<dual<M>::value>;\n  using E =\
     \ typename Node::E;\n  Node *root;\n  static inline void propagate(Node *&t, const\
-    \ E &x) {\n    if (!t) return;\n    t->lazy = t->lazy_flg ? M::composition(t->lazy,\
-    \ x) : x;\n    t->key = M::mapping(t->key, x), t->lazy_flg = true;\n  }\n  static\
-    \ inline void eval(Node *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0],\
+    \ E &x) {\n    if (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy, x),\
+    \ x) : (t->lazy = x);\n    M::mapping(t->key, x), t->lazy_flg = true;\n  }\n \
+    \ static inline void eval(Node *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0],\
     \ t->lazy), propagate(t->ch[1], t->lazy),\n          t->lazy_flg = false;\n  }\n\
     \  Node *merge(Node *a, Node *b) {\n    if (!a || !b) return a ? a : b;\n    if\
     \ (Compare()(a->key, b->key)) std::swap(a, b);\n    if constexpr (dual<M>::value)\
@@ -69,7 +69,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 16:32:39+09:00'
+  timestamp: '2022-11-18 21:48:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_9_C.SkewHeap.test.cpp

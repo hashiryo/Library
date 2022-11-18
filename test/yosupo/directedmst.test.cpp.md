@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/directedmst
@@ -56,9 +56,9 @@ data:
     \      : Node_B<Node_D<du_>, typename M::E> {\n    typename M::E lazy;\n    bool\
     \ lazy_flg = false;\n  };\n  using Node = Node_D<dual<M>::value>;\n  using E =\
     \ typename Node::E;\n  Node *root;\n  static inline void propagate(Node *&t, const\
-    \ E &x) {\n    if (!t) return;\n    t->lazy = t->lazy_flg ? M::composition(t->lazy,\
-    \ x) : x;\n    t->key = M::mapping(t->key, x), t->lazy_flg = true;\n  }\n  static\
-    \ inline void eval(Node *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0],\
+    \ E &x) {\n    if (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy, x),\
+    \ x) : (t->lazy = x);\n    M::mapping(t->key, x), t->lazy_flg = true;\n  }\n \
+    \ static inline void eval(Node *t) {\n    if (t->lazy_flg)\n      propagate(t->ch[0],\
     \ t->lazy), propagate(t->ch[1], t->lazy),\n          t->lazy_flg = false;\n  }\n\
     \  Node *merge(Node *a, Node *b) {\n    if (!a || !b) return a ? a : b;\n    if\
     \ (Compare()(a->key, b->key)) std::swap(a, b);\n    if constexpr (dual<M>::value)\
@@ -78,37 +78,36 @@ data:
     class MinimumSpanningAborescense {\n  struct Edge {\n    std::size_t src, dst,\
     \ id;\n    cost_t cost;\n    bool operator>(const Edge &r) const { return this->cost\
     \ > r.cost; }\n  };\n  struct Op_Edge_add {\n    using E = cost_t;\n    static\
-    \ Edge mapping(const Edge &l, const E &r) {\n      return Edge{l.src, l.dst, l.id,\
-    \ l.cost + r};\n    }\n    static E composition(const E &l, const E &r) { return\
-    \ l + r; }\n  };\n  using Heap = SkewHeap<Edge, std::greater<Edge>, Op_Edge_add>;\n\
-    \  std::size_t n;\n  std::vector<Edge> edges;\n\n public:\n  MinimumSpanningAborescense(std::size_t\
-    \ n) : n(n) {}\n  void add_edge(std::size_t src, std::size_t dst, cost_t cost)\
-    \ {\n    edges.emplace_back(Edge{src, dst, edges.size(), cost});\n  }\n  std::pair<cost_t,\
-    \ std::vector<Edge>> get_MSA(int root) {\n    UnionFind uf(n);\n    std::vector<Heap>\
-    \ heap(n);\n    for (auto &e : edges) heap[e.dst].push(e);\n    cost_t score =\
-    \ 0;\n    std::size_t m = edges.size(), s = 0, u = s, cyc = 0, v;\n    std::vector<int>\
-    \ seen(n, -1), paredge(m), ei, leaf(n, -1), par(n), usede(m);\n    for (seen[root]\
-    \ = root; s < n; u = ++s, cyc = 0)\n      for (std::vector<int> path, ch; seen[u]\
-    \ < 0; u = uf.root(v)) {\n        path.push_back(u), seen[u] = s;\n        if\
-    \ (heap[u].empty()) return {-1, std::vector<Edge>()};\n        Edge min_e = heap[u].pop();\n\
-    \        score += min_e.cost, heap[u].apply(-min_e.cost), ei.push_back(min_e.id);\n\
-    \        if (leaf[min_e.dst] == -1) leaf[min_e.dst] = min_e.id;\n        for (;\
-    \ cyc; cyc--) paredge[ch.back()] = min_e.id, ch.pop_back();\n        ch.push_back(min_e.id);\n\
-    \        if (seen[v = uf.root(min_e.src)] != s) continue;\n        Heap new_heap;\n\
-    \        for (int w; 1;) {\n          new_heap += heap[w = path.back()];\n   \
-    \       path.pop_back(), cyc++;\n          if (!uf.unite(v, w)) break;\n     \
-    \   }\n        heap[uf.root(v)] = new_heap, seen[uf.root(v)] = -1;\n      }\n\
-    \    std::vector<Edge> es;\n    for (auto it = ei.rbegin(); it != ei.rend(); it++)\
-    \ {\n      if (usede[*it]) continue;\n      es.emplace_back(edges[*it]);\n   \
-    \   for (int x = leaf[edges[*it].dst]; x != *it; x = paredge[x]) usede[x] = 1;\n\
-    \    }\n    return {score, es};\n  }\n};\n#line 4 \"test/yosupo/directedmst.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, M, r;\n  cin >> N >> M >> r;\n  MinimumSpanningAborescense<long long>\
-    \ graph(N);\n  for (int i = 0; i < M; i++) {\n    int s, t, w;\n    cin >> s >>\
-    \ t >> w;\n    graph.add_edge(s, t, w);\n  }\n  auto ans = graph.get_MSA(r);\n\
-    \  vector<int> par(N);\n  iota(par.begin(), par.end(), 0);\n  for (auto e : ans.second)\
-    \ par[e.dst] = e.src;\n  cout << ans.first << endl;\n  for (int i = 0; i < N;\
-    \ i++) cout << (i ? \" \" : \"\") << par[i];\n  cout << endl;\n  return 0;\n}\n"
+    \ void mapping(Edge &l, const E &r) { l.cost += r; }\n    static void composition(E\
+    \ &l, const E &r) { l += r; }\n  };\n  std::size_t n;\n  std::vector<Edge> edges;\n\
+    \n public:\n  MinimumSpanningAborescense(std::size_t n) : n(n) {}\n  void add_edge(std::size_t\
+    \ src, std::size_t dst, cost_t cost) {\n    edges.emplace_back(Edge{src, dst,\
+    \ edges.size(), cost});\n  }\n  std::pair<cost_t, std::vector<Edge>> get_MSA(int\
+    \ root) {\n    UnionFind uf(n);\n    std::vector<SkewHeap<Edge, std::greater<Edge>,\
+    \ Op_Edge_add>> h(n);\n    std::vector<Edge> es;\n    for (auto &e : edges) h[e.dst].push(e);\n\
+    \    cost_t score = 0;\n    std::size_t m = edges.size(), s = 0, u = s, cyc =\
+    \ 0, v;\n    std::vector<int> seen(n, -1), paredge(m), ei, leaf(n, -1), par(n),\
+    \ usede(m);\n    for (seen[root] = root; s < n; u = ++s, cyc = 0)\n      for (std::vector<int>\
+    \ p, ch; seen[u] < 0; u = uf.root(v)) {\n        if (p.push_back(u), seen[u] =\
+    \ s; h[u].empty()) return {-1, es};\n        Edge min_e = h[u].pop();\n      \
+    \  score += min_e.cost, h[u].apply(-min_e.cost), ei.push_back(min_e.id);\n   \
+    \     if (leaf[min_e.dst] == -1) leaf[min_e.dst] = min_e.id;\n        for (; cyc;\
+    \ cyc--) paredge[ch.back()] = min_e.id, ch.pop_back();\n        if (ch.push_back(min_e.id);\
+    \ seen[v = uf.root(min_e.src)] != s) continue;\n        SkewHeap<Edge, std::greater<Edge>,\
+    \ Op_Edge_add> new_h;\n        for (int w;;) {\n          new_h += h[w = p.back()];\n\
+    \          if (p.pop_back(), cyc++; !uf.unite(v, w)) break;\n        }\n     \
+    \   h[uf.root(v)] = new_h, seen[uf.root(v)] = -1;\n      }\n    for (auto it =\
+    \ ei.rbegin(); it != ei.rend(); it++) {\n      if (usede[*it]) continue;\n   \
+    \   es.emplace_back(edges[*it]);\n      for (int x = leaf[edges[*it].dst]; x !=\
+    \ *it; x = paredge[x]) usede[x] = 1;\n    }\n    return {score, es};\n  }\n};\n\
+    #line 4 \"test/yosupo/directedmst.test.cpp\"\nusing namespace std;\n\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M, r;\n  cin >> N >>\
+    \ M >> r;\n  MinimumSpanningAborescense<long long> graph(N);\n  for (int i = 0;\
+    \ i < M; i++) {\n    int s, t, w;\n    cin >> s >> t >> w;\n    graph.add_edge(s,\
+    \ t, w);\n  }\n  auto ans = graph.get_MSA(r);\n  vector<int> par(N);\n  iota(par.begin(),\
+    \ par.end(), 0);\n  for (auto e : ans.second) par[e.dst] = e.src;\n  cout << ans.first\
+    \ << endl;\n  for (int i = 0; i < N; i++) cout << (i ? \" \" : \"\") << par[i];\n\
+    \  cout << endl;\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/directedmst\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Graph/MinimumSpanningAborescense.hpp\"\nusing\
     \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -125,8 +124,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2022-07-01 23:38:07+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-18 21:48:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp
 layout: document
