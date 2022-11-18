@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -127,17 +127,21 @@ data:
     \ id>>,\n                  ModInt<int, u32, RuntimeB<MIntPro_Na<u32>, id>>>>;\n\
     }  // namespace math_internal\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\n\
     \    math_internal::Montgomery, math_internal::is_runtimemodint_v,\n    math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\n#line 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title\
-    \ Number-Theoretic-Transform\n * @category FFT\n */\n\n// BEGIN CUT HERE\nnamespace\
-    \ ntt_internal {\nusing u64 = std::uint64_t;\nusing u128 = __uint128_t;\ntemplate\
-    \ <class mod_t>\nstruct NumberTheoreticTransform {\n  static inline void dft(int\
-    \ n, mod_t x[]) {\n    for (int m = n, h = 0, i0 = 0; m >>= 1; h = 0, i0 = 0)\n\
-    \      for (mod_t prod = 1, u; i0 < n;\n           prod *= r2[__builtin_ctz(++h)],\
-    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          x[i +\
-    \ m] = x[i] - (u = prod * x[i + m]), x[i] += u;\n  }\n  static inline void idft(int\
-    \ n, mod_t x[]) {\n    for (int m = 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0\
-    \ = 0)\n      for (mod_t prod = 1, y; i0 < n;\n           prod *= ir2[__builtin_ctz(++h)],\
-    \ i0 += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i]\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
+    \ m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n  if (l\
+    \ == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
+    \  return dat[n];\n}\n#line 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title Number-Theoretic-Transform\n\
+    \ * @category FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal {\nusing u64\
+    \ = std::uint64_t;\nusing u128 = __uint128_t;\ntemplate <class mod_t>\nstruct\
+    \ NumberTheoreticTransform {\n  static inline void dft(int n, mod_t x[]) {\n \
+    \   for (int m = n, h = 0, i0 = 0; m >>= 1; h = 0, i0 = 0)\n      for (mod_t prod\
+    \ = 1, u; i0 < n;\n           prod *= r2[__builtin_ctz(++h)], i0 += (m << 1))\n\
+    \        for (int i = i0; i < i0 + m; ++i)\n          x[i + m] = x[i] - (u = prod\
+    \ * x[i + m]), x[i] += u;\n  }\n  static inline void idft(int n, mod_t x[]) {\n\
+    \    for (int m = 1, h = 0, i0 = 0; m < n; m <<= 1, h = 0, i0 = 0)\n      for\
+    \ (mod_t prod = 1, y; i0 < n;\n           prod *= ir2[__builtin_ctz(++h)], i0\
+    \ += (m << 1))\n        for (int i = i0; i < i0 + m; ++i)\n          y = x[i]\
     \ - x[i + m], x[i] += x[i + m], x[i + m] = prod * y;\n    for (const mod_t iv\
     \ = mod_t(1) / n; n--;) x[n] *= iv;\n  }\n  static void even_dft(int n, mod_t\
     \ x[]) {\n    for (int i = 0, j = 0; i < n; i += 2, j++) x[j] = iv2 * (x[i] +\
@@ -375,7 +379,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_D.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 19:55:07+09:00'
+  timestamp: '2022-11-18 19:29:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_D.test.cpp

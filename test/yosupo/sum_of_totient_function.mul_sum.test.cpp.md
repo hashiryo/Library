@@ -111,10 +111,14 @@ data:
     \ id>>,\n                  ModInt<int, u32, RuntimeB<MIntPro_Na<u32>, id>>>>;\n\
     }  // namespace math_internal\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\n\
     \    math_internal::Montgomery, math_internal::is_runtimemodint_v,\n    math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\n#line 3 \"src/Math/prime_count.hpp\"\n/**\n\
-    \ * @title \u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\
-    \u95A2\u6570\u3084\u52A0\u6CD5\u7684\u95A2\u6570\u306E\u548C\u3082\u3042\u308A\
-    \n * @category \u6570\u5B66\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
+    \ m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n  if (l\
+    \ == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
+    \  return dat[n];\n}\n#line 3 \"src/Math/prime_count.hpp\"\n/**\n * @title \u7D20\
+    \u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069\n * \u4E57\u6CD5\u7684\u95A2\u6570\u3084\
+    \u52A0\u6CD5\u7684\u95A2\u6570\u306E\u548C\u3082\u3042\u308A\n * @category \u6570\
+    \u5B66\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d\n\
     // https://atcoder.jp/contests/xmascon19/tasks/xmascon19_e (\u52A0\u6CD5\u7684\
     \u95A2\u6570)\n\n// BEGIN CUT HERE\n\n// O(d^2\u221AN+dN^(3/4)/log N) d := degre\
     \ of polynomial\ntemplate <class T = __int128_t>\nauto polynomial_prime_sum_table(std::uint64_t\
@@ -218,7 +222,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 19:55:07+09:00'
+  timestamp: '2022-11-18 19:29:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

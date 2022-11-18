@@ -23,9 +23,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc129/tasks/abc129_e
@@ -202,9 +202,13 @@ data:
     \ id>>,\n                  ModInt<int, u32, RuntimeB<MIntPro_Na<u32>, id>>>>;\n\
     }  // namespace math_internal\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\n\
     \    math_internal::Montgomery, math_internal::is_runtimemodint_v,\n    math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\n#line 7 \"test/atcoder/abc129_e.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<int(1e9 + 7)>;\n  string L;\n  cin >> L;\n  vector<tuple<int,\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
+    \ m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n  if (l\
+    \ == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
+    \  return dat[n];\n}\n#line 7 \"test/atcoder/abc129_e.test.cpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
+    \ Mint = StaticModInt<int(1e9 + 7)>;\n  string L;\n  cin >> L;\n  vector<tuple<int,\
     \ int, int>> alphabet{{0, 0, 0}, {0, 1, 1}, {1, 0, 1}};\n  auto dfa_le =\n   \
     \   DFA_SymbolMap(DFA_Inequality(L, 2), alphabet,\n                    [](const\
     \ tuple<int, int, int> &a) { return get<2>(a); });\n  cout << dfa_dp<Mint>(dfa_le,\
@@ -228,8 +232,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc129_e.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 19:55:07+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-18 19:29:11+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc129_e.test.cpp
 layout: document

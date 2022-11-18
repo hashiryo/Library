@@ -6,16 +6,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1615.Dinic.test.cpp
     title: test/aoj/1615.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2313.Dinic.test.cpp
     title: test/aoj/2313.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2803.Dinic.test.cpp
     title: test/aoj/2803.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2835.Dinic.test.cpp
     title: test/aoj/2835.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.Dinic.test.cpp
     title: test/aoj/GRL_6_A.Dinic.test.cpp
   - icon: ':x:'

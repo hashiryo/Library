@@ -114,21 +114,25 @@ data:
     \ id>>,\n                  ModInt<int, u32, RuntimeB<MIntPro_Na<u32>, id>>>>;\n\
     }  // namespace math_internal\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\n\
     \    math_internal::Montgomery, math_internal::is_runtimemodint_v,\n    math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\n#line 4 \"src/Math/is_prime.hpp\"\n/**\n\
-    \ * @title \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n\
-    \ */\n\n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate <class Uint, class\
-    \ mod_pro_t, u64... args>\nconstexpr bool miller_rabin(Uint n) {\n  const mod_pro_t\
-    \ md(n);\n  const Uint s = __builtin_ctzll(n - 1), d = n >> s, one = md.set(1),\n\
-    \             n1 = md.norm(md.set(n - 1));\n  for (auto a : {args...}) {\n   \
-    \ Uint b = a % n, p = pow(md.set(b), d, md), i = s;\n    while (p = md.norm(p),\
-    \ (p != one && p != n1 && b && i--)) p = md.mul(p, p);\n    if (md.norm(p) !=\
-    \ n1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool is_prime(u64\
-    \ n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX)\
-    \ return miller_rabin<u32, MIntPro_Na<u32>, 2, 7, 61>(n);\n  if (n < LLONG_MAX)\n\
-    \    return miller_rabin<u64, MIntPro_Montg, 2, 325, 9375, 28178, 450775,\n  \
-    \                      9780504, 1795265022>(n);\n  return miller_rabin<u64, MIntPro_Na<u64>,\
-    \ 2, 325, 9375, 28178, 450775,\n                      9780504, 1795265022>(n);\n\
-    }\n}  // namespace math_internal\nusing math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
+    \ m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n  if (l\
+    \ == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
+    \  return dat[n];\n}\n#line 4 \"src/Math/is_prime.hpp\"\n/**\n * @title \u7D20\
+    \u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log N)\n */\n\n// BEGIN CUT\
+    \ HERE\nnamespace math_internal {\ntemplate <class Uint, class mod_pro_t, u64...\
+    \ args>\nconstexpr bool miller_rabin(Uint n) {\n  const mod_pro_t md(n);\n  const\
+    \ Uint s = __builtin_ctzll(n - 1), d = n >> s, one = md.set(1),\n            \
+    \ n1 = md.norm(md.set(n - 1));\n  for (auto a : {args...}) {\n    Uint b = a %\
+    \ n, p = pow(md.set(b), d, md), i = s;\n    while (p = md.norm(p), (p != one &&\
+    \ p != n1 && b && i--)) p = md.mul(p, p);\n    if (md.norm(p) != n1 && i != s)\
+    \ return false;\n  }\n  return true;\n}\nconstexpr bool is_prime(u64 n) {\n  if\
+    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX) return miller_rabin<u32,\
+    \ MIntPro_Na<u32>, 2, 7, 61>(n);\n  if (n < LLONG_MAX)\n    return miller_rabin<u64,\
+    \ MIntPro_Montg, 2, 325, 9375, 28178, 450775,\n                        9780504,\
+    \ 1795265022>(n);\n  return miller_rabin<u64, MIntPro_Na<u64>, 2, 325, 9375, 28178,\
+    \ 450775,\n                      9780504, 1795265022>(n);\n}\n}  // namespace\
+    \ math_internal\nusing math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\
     \n/**\n * @title \u5E73\u65B9\u6839 ($\\mathbb{F}_p$)\n * @category \u6570\u5B66\
     \n * O( log p )\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate\
     \ <class Int, class mod_pro_t>\nconstexpr Int inner_sqrt(Int a, Int p) {\n  const\
@@ -251,7 +255,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 19:55:07+09:00'
+  timestamp: '2022-11-18 19:29:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_sparse_FPS.test.cpp

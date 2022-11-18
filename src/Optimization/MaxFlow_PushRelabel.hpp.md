@@ -6,16 +6,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1615.PushRelabel.test.cpp
     title: test/aoj/1615.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2313.PushRelabel.test.cpp
     title: test/aoj/2313.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2803.PushRelabel.test.cpp
     title: test/aoj/2803.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2835.PushRelabel.test.cpp
     title: test/aoj/2835.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.PushRelabel.test.cpp
     title: test/aoj/GRL_6_A.PushRelabel.test.cpp
   - icon: ':x:'

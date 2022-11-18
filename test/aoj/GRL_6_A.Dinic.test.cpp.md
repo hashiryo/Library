@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/MaxFlow.hpp
     title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: "\u6700\u5927\u6D41 Dinic"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
@@ -71,7 +71,7 @@ data:
     \ ds, extrusion);\n      if (ds != t) instance->maxflow(t, ds, extrusion);\n \
     \     if (sr != s) instance->maxflow(sr, s, extrusion);\n      return extrusion;\n\
     \    }\n  };\n  EdgePtr add_edge(int src, int dst, flow_t cap, bool bidir = false)\
-    \ {\n    assert(0 <= src && src < this->n) assert(0 <= dst && dst < this->n);\n\
+    \ {\n    assert(0 <= src && src < this->n), assert(0 <= dst && dst < this->n);\n\
     \    assert(0 <= cap);\n    int e = this->adj[src].size();\n    int re = src ==\
     \ dst ? e + 1 : this->adj[dst].size();\n    return this->adj[src].push_back(Edge{dst,\
     \ re, cap}),\n           this->adj[dst].push_back(Edge{src, e, cap * bidir}),\
@@ -101,8 +101,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_A.Dinic.test.cpp
   requiredBy: []
-  timestamp: '2022-11-18 14:42:38+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-11-18 19:29:11+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_A.Dinic.test.cpp
 layout: document

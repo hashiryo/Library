@@ -115,19 +115,23 @@ data:
     \ id>>,\n                  ModInt<int, u32, RuntimeB<MIntPro_Na<u32>, id>>>>;\n\
     }  // namespace math_internal\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\n\
     \    math_internal::Montgomery, math_internal::is_runtimemodint_v,\n    math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\n#line 3 \"src/Automaton/dfa_dp.hpp\"\n/**\n\
-    \ * @title DFA\u4E0A\u306EDP\n * @category \u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\
-    \n * @see https://kuretchi.github.io/blog/entries/automaton-dp/\n */\n// verify\u7528\
-    :\n// https://atcoder.jp/contests/tdpc/tasks/tdpc_number\n// https://atcoder.jp/contests/abc029/tasks/abc029_d\n\
-    // https://atcoder.jp/contests/donuts-live2014/tasks/donuts_live2014_2\n// https://atcoder.jp/contests/joi2012yo/tasks/joi2012yo_f\n\
-    \n// BEGIN CUT HERE\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)     \
-    \                         \\\n  template <class T>                           \
-    \               \\\n  struct has_##member {                                  \
-    \     \\\n    template <class U, Dummy>                                 \\\n \
-    \   static std::true_type check(U *);                         \\\n    static std::false_type\
-    \ check(...);                        \\\n    static T *mClass;               \
-    \                          \\\n    static const bool value = decltype(check(mClass))::value;\
-    \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, std::size_t LIM>\n\
+    mod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
+    \ m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n  if (l\
+    \ == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
+    \  return dat[n];\n}\n#line 3 \"src/Automaton/dfa_dp.hpp\"\n/**\n * @title DFA\u4E0A\
+    \u306EDP\n * @category \u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\n * @see https://kuretchi.github.io/blog/entries/automaton-dp/\n\
+    \ */\n// verify\u7528:\n// https://atcoder.jp/contests/tdpc/tasks/tdpc_number\n\
+    // https://atcoder.jp/contests/abc029/tasks/abc029_d\n// https://atcoder.jp/contests/donuts-live2014/tasks/donuts_live2014_2\n\
+    // https://atcoder.jp/contests/joi2012yo/tasks/joi2012yo_f\n\n// BEGIN CUT HERE\n\
+    #ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)                          \
+    \    \\\n  template <class T>                                          \\\n  struct\
+    \ has_##member {                                       \\\n    template <class\
+    \ U, Dummy>                                 \\\n    static std::true_type check(U\
+    \ *);                         \\\n    static std::false_type check(...);     \
+    \                   \\\n    static T *mClass;                                \
+    \         \\\n    static const bool value = decltype(check(mClass))::value; \\\
+    \n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
     #endif\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\n\
     HAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\nHAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\n\
@@ -245,7 +249,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc235_f.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 19:55:07+09:00'
+  timestamp: '2022-11-18 19:29:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc235_f.test.cpp
