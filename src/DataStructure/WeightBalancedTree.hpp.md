@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3024.WBT.test.cpp
     title: test/aoj/3024.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -298,9 +298,9 @@ data:
   verifiedWith:
   - test/aoj/1508.WBT.test.cpp
   - test/aoj/3024.WBT.test.cpp
-  - test/atcoder/abc256_f.WBT.test.cpp
   - test/yosupo/persistent_queue.WBT.test.cpp
   - test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - test/atcoder/abc256_f.WBT.test.cpp
 documentation_of: src/DataStructure/WeightBalancedTree.hpp
 layout: document
 redirect_from:

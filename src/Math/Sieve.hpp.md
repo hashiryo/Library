@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
   - icon: ':heavy_check_mark:'
@@ -238,18 +238,18 @@ data:
   timestamp: '2022-11-12 16:12:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-  - test/yukicoder/886.numth.test.cpp
-  - test/yukicoder/1019.test.cpp
-  - test/yukicoder/644.test.cpp
-  - test/atcoder/abc172_d.numth.test.cpp
-  - test/atcoder/agc038_c.numth.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - test/yosupo/lcm_convolution.test.cpp
-  - test/yosupo/enumerate_primes.test.cpp
+  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/yosupo/gcd_convolution.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/enumerate_primes.test.cpp
+  - test/yosupo/lcm_convolution.test.cpp
+  - test/atcoder/agc038_c.numth.test.cpp
+  - test/atcoder/abc172_d.numth.test.cpp
+  - test/yukicoder/886.numth.test.cpp
+  - test/yukicoder/644.test.cpp
+  - test/yukicoder/1019.test.cpp
 documentation_of: src/Math/Sieve.hpp
 layout: document
 redirect_from:

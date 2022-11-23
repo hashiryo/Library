@@ -566,11 +566,11 @@ data:
   timestamp: '2022-11-18 19:29:11+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/963.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/partition.test.cpp
   - test/yosupo/stirling_2.test.cpp
   - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yukicoder/963.test.cpp
 documentation_of: src/FFT/sequences.hpp
 layout: document
 redirect_from:
