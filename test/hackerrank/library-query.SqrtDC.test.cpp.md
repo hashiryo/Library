@@ -6,9 +6,9 @@ data:
     title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/challenges/library-query/problem
@@ -89,34 +89,36 @@ data:
     \ a, b), d.lb = std::clamp(d.lb, a, b);\n    };\n    update(l, r, f, [&](T &x)\
     \ { x = std::clamp(x, lb, ub); });\n  }\n};\n#line 5 \"test/hackerrank/library-query.SqrtDC.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int T;\n  for (cin >> T; T--;) {\n    int N;\n    cin >> N;\n    vector<int>\
-    \ a(N);\n    for (int i = 0; i < N; i++) cin >> a[i];\n    SortedPerBucket<int,\
-    \ 50> sqrtdc(a);\n    int Q;\n    cin >> Q;\n    while (Q--) {\n      int type;\n\
-    \      cin >> type;\n      if (type) {\n        int x, k;\n        cin >> x >>\
-    \ k, x--;\n        sqrtdc.set(x, k);\n      } else {\n        int x, y, k;\n \
-    \       cin >> x >> y >> k, x--;\n        int ok = 0, ng = 1000;\n        while\
-    \ (abs(ok - ng) > 1) {\n          int t = (ok + ng) / 2;\n          (sqrtdc.count(x,\
-    \ y, t) < k ? ok : ng) = t;\n        }\n        cout << ok << '\\n';\n      }\n\
-    \    }\n  }\n  return 0;\n}\n"
+    \  int T;\n  bool first = true;\n  for (cin >> T; T--;) {\n    int N;\n    cin\
+    \ >> N;\n    vector<int> a(N);\n    for (int i = 0; i < N; i++) cin >> a[i];\n\
+    \    SortedPerBucket<int, 50> sqrtdc(a);\n    int Q;\n    cin >> Q;\n    while\
+    \ (Q--) {\n      int type;\n      cin >> type;\n      if (type) {\n        int\
+    \ x, k;\n        cin >> x >> k, x--;\n        sqrtdc.set(x, k);\n      } else\
+    \ {\n        int x, y, k;\n        cin >> x >> y >> k, x--;\n        int ok =\
+    \ 0, ng = 1010;\n        while (abs(ok - ng) > 1) {\n          int t = (ok + ng)\
+    \ / 2;\n          (sqrtdc.count(x, y, t) < k ? ok : ng) = t;\n        }\n    \
+    \    if (!first) cout << '\\n';\n        first = false;\n        cout << ok;\n\
+    \      }\n    }\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://www.hackerrank.com/challenges/library-query/problem\"\
     \n\n#include <bits/stdc++.h>\n#include \"src/DataStructure/SortedPerBucket.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int T;\n  for (cin >> T; T--;) {\n    int N;\n    cin >> N;\n    vector<int>\
-    \ a(N);\n    for (int i = 0; i < N; i++) cin >> a[i];\n    SortedPerBucket<int,\
-    \ 50> sqrtdc(a);\n    int Q;\n    cin >> Q;\n    while (Q--) {\n      int type;\n\
-    \      cin >> type;\n      if (type) {\n        int x, k;\n        cin >> x >>\
-    \ k, x--;\n        sqrtdc.set(x, k);\n      } else {\n        int x, y, k;\n \
-    \       cin >> x >> y >> k, x--;\n        int ok = 0, ng = 1000;\n        while\
-    \ (abs(ok - ng) > 1) {\n          int t = (ok + ng) / 2;\n          (sqrtdc.count(x,\
-    \ y, t) < k ? ok : ng) = t;\n        }\n        cout << ok << '\\n';\n      }\n\
-    \    }\n  }\n  return 0;\n}"
+    \  int T;\n  bool first = true;\n  for (cin >> T; T--;) {\n    int N;\n    cin\
+    \ >> N;\n    vector<int> a(N);\n    for (int i = 0; i < N; i++) cin >> a[i];\n\
+    \    SortedPerBucket<int, 50> sqrtdc(a);\n    int Q;\n    cin >> Q;\n    while\
+    \ (Q--) {\n      int type;\n      cin >> type;\n      if (type) {\n        int\
+    \ x, k;\n        cin >> x >> k, x--;\n        sqrtdc.set(x, k);\n      } else\
+    \ {\n        int x, y, k;\n        cin >> x >> y >> k, x--;\n        int ok =\
+    \ 0, ng = 1010;\n        while (abs(ok - ng) > 1) {\n          int t = (ok + ng)\
+    \ / 2;\n          (sqrtdc.count(x, y, t) < k ? ok : ng) = t;\n        }\n    \
+    \    if (!first) cout << '\\n';\n        first = false;\n        cout << ok;\n\
+    \      }\n    }\n  }\n  return 0;\n}"
   dependsOn:
   - src/DataStructure/SortedPerBucket.hpp
   isVerificationFile: true
   path: test/hackerrank/library-query.SqrtDC.test.cpp
   requiredBy: []
-  timestamp: '2022-11-23 20:47:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-11-27 19:11:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/library-query.SqrtDC.test.cpp
 layout: document

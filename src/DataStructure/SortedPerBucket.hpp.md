@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3170.test.cpp
     title: test/aoj/3170.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/library-query.SqrtDC.test.cpp
     title: test/hackerrank/library-query.SqrtDC.test.cpp
   - icon: ':x:'
