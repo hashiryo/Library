@@ -11,17 +11,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Automaton/DFA_Compress.hpp
       title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/DFA_Inequality.hpp
       title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
         \u7406\u3059\u308BDFA"
     - icon: ':heavy_check_mark:'
       path: src/Automaton/NFA_to_DFA.hpp
       title: "NFA\u3092DFA\u306B\u5909\u63DB"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/dfa_dp.hpp
       title: "DFA\u4E0A\u306EDP"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/dfa_operations.hpp
       title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\
         \u5408\u6F14\u7B97"
@@ -343,12 +343,15 @@ data:
       path: src/Optimization/min_Lconvex.hpp
       title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
         \u30B0\u6CD5)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
   - name: src/String
     pages:
+    - icon: ':question:'
+      path: src/String/AhoCorasick.hpp
+      title: Aho-Corasick
     - icon: ':heavy_check_mark:'
       path: src/String/KnuthMorrisPratt.hpp
       title: Knuth-Morris-Pratt
@@ -446,11 +449,17 @@ data:
       path: test/aoj/2207.test.cpp
       title: test/aoj/2207.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/2212.test.cpp
+      title: test/aoj/2212.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2235.onlinedicon.test.cpp
       title: test/aoj/2235.onlinedicon.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2256.test.cpp
       title: test/aoj/2256.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2257.test.cpp
+      title: test/aoj/2257.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2270.DynSeg.test.cpp
       title: test/aoj/2270.DynSeg.test.cpp
@@ -846,22 +855,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc106_b.test.cpp
       title: test/atcoder/arc106_b.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.Dinic.test.cpp
       title: test/atcoder/arc107_f.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.dujiao.test.cpp
       title: test/atcoder/arc116_c.dujiao.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc127_a.test.cpp
       title: test/atcoder/arc127_a.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.Dinic.test.cpp
       title: test/atcoder/arc129_e.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.PushRelabel.test.cpp
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/hackerrank
@@ -1206,6 +1215,9 @@ data:
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/1269.test.cpp
+      title: test/yukicoder/1269.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
     - icon: ':x:'
@@ -1253,6 +1265,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/421.test.cpp
       title: test/yukicoder/421.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/430.AhoCora.test.cpp
+      title: test/yukicoder/430.AhoCora.test.cpp
     - icon: ':x:'
       path: test/yukicoder/502.test.cpp
       title: test/yukicoder/502.test.cpp

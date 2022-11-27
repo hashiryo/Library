@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   _extendedRequiredBy: []

@@ -71,6 +71,9 @@ data:
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2257.test.cpp
+    title: test/aoj/2257.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'
@@ -160,7 +163,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.dujiao.test.cpp
     title: test/atcoder/arc116_c.dujiao.test.cpp
   - icon: ':x:'
@@ -344,6 +347,9 @@ data:
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1269.test.cpp
+    title: test/yukicoder/1269.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
   - icon: ':x:'
@@ -462,6 +468,7 @@ data:
   - test/yukicoder/963.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/665.test.cpp
+  - test/yukicoder/1269.test.cpp
   - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/1019.test.cpp
@@ -560,6 +567,7 @@ data:
   - test/aoj/NTL_2_C.test.cpp
   - test/aoj/NTL_2_B.test.cpp
   - test/aoj/2530.test.cpp
+  - test/aoj/2257.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_A.test.cpp
 documentation_of: src/Math/mod_inv.hpp
