@@ -18,10 +18,10 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
   - icon: ':x:'
@@ -47,7 +47,7 @@ data:
     title: test/yukicoder/963.FPS.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -78,7 +78,7 @@ data:
     \ % mod; }\n#define BOP(m, p) return l m## = mod & -((l p## = r) >= mod)\n  constexpr\
     \ inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n  constexpr inline Uint\
     \ diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint\
-    \ set(Uint n) const { return n % mod; }\n  static constexpr inline Uint get(Uint\
+    \ set(u64 n) const { return n % mod; }\n  static constexpr inline Uint get(Uint\
     \ n) { return n; }\n  static constexpr inline Uint norm(Uint n) { return n; }\n\
     \  constexpr Uint modulo() const { return mod; }\n};\ntemplate <class Uint, class\
     \ mod_pro_t>\nconstexpr Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for\
@@ -118,7 +118,7 @@ data:
     \ {\n  static constexpr inline auto modulo() { return B::md.modulo(); }\n  constexpr\
     \ ModInt() : x(0) {}\n  constexpr ModInt(const ModInt &r) : x(r.x) {}\n  template\
     \ <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n  constexpr ModInt(T\
-    \ v) : ModInt(v.val()) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
+    \ v) : x(B::md.set(v.val())) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
     \ __int128_t>, nullptr_t> = nullptr>\n  constexpr ModInt(T n)\n      : x(B::md.set(n\
     \ < 0 ? modulo() - ((-n) % modulo()) : n)) {}\n  constexpr ModInt operator-()\
     \ const { return ModInt() - *this; }\n#define FUNC(name, op)          \\\n  constexpr\
@@ -582,8 +582,8 @@ data:
   isVerificationFile: false
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
-  timestamp: '2022-11-18 19:29:11+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-11-27 21:09:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/963.FPS.test.cpp
   - test/yosupo/exp_of_FPS.FPS.test.cpp

@@ -48,7 +48,7 @@ data:
     \ % mod; }\n#define BOP(m, p) return l m## = mod & -((l p## = r) >= mod)\n  constexpr\
     \ inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n  constexpr inline Uint\
     \ diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint\
-    \ set(Uint n) const { return n % mod; }\n  static constexpr inline Uint get(Uint\
+    \ set(u64 n) const { return n % mod; }\n  static constexpr inline Uint get(Uint\
     \ n) { return n; }\n  static constexpr inline Uint norm(Uint n) { return n; }\n\
     \  constexpr Uint modulo() const { return mod; }\n};\ntemplate <class Uint, class\
     \ mod_pro_t>\nconstexpr Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for\
@@ -142,7 +142,7 @@ data:
   isVerificationFile: false
   path: src/Math/mod_tetration.hpp
   requiredBy: []
-  timestamp: '2022-11-16 17:55:00+09:00'
+  timestamp: '2022-11-27 21:09:10+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp

@@ -11,14 +11,14 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -53,7 +53,7 @@ data:
     title: test/yukicoder/1939.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
     links: []
@@ -82,7 +82,7 @@ data:
     \ % mod; }\n#define BOP(m, p) return l m## = mod & -((l p## = r) >= mod)\n  constexpr\
     \ inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n  constexpr inline Uint\
     \ diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint\
-    \ set(Uint n) const { return n % mod; }\n  static constexpr inline Uint get(Uint\
+    \ set(u64 n) const { return n % mod; }\n  static constexpr inline Uint get(Uint\
     \ n) { return n; }\n  static constexpr inline Uint norm(Uint n) { return n; }\n\
     \  constexpr Uint modulo() const { return mod; }\n};\ntemplate <class Uint, class\
     \ mod_pro_t>\nconstexpr Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for\
@@ -142,8 +142,8 @@ data:
   requiredBy:
   - src/Math/sparse_fps.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-11-16 17:35:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-11-27 21:09:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp

@@ -13,17 +13,17 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc276/tasks/abc276_g
@@ -60,7 +60,7 @@ data:
     \ l, Uint r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l\
     \ m## = mod & -((l p## = r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint\
     \ r) const { BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const\
-    \ { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint set(Uint n) const { return\
+    \ { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint set(u64 n) const { return\
     \ n % mod; }\n  static constexpr inline Uint get(Uint n) { return n; }\n  static\
     \ constexpr inline Uint norm(Uint n) { return n; }\n  constexpr Uint modulo()\
     \ const { return mod; }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr\
@@ -81,7 +81,7 @@ data:
     \ {\n  static constexpr inline auto modulo() { return B::md.modulo(); }\n  constexpr\
     \ ModInt() : x(0) {}\n  constexpr ModInt(const ModInt &r) : x(r.x) {}\n  template\
     \ <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n  constexpr ModInt(T\
-    \ v) : ModInt(v.val()) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
+    \ v) : x(B::md.set(v.val())) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
     \ __int128_t>, nullptr_t> = nullptr>\n  constexpr ModInt(T n)\n      : x(B::md.set(n\
     \ < 0 ? modulo() - ((-n) % modulo()) : n)) {}\n  constexpr ModInt operator-()\
     \ const { return ModInt() - *this; }\n#define FUNC(name, op)          \\\n  constexpr\
@@ -257,8 +257,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc276_g.sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-11-18 19:29:11+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-27 21:09:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc276_g.sparse_FPS.test.cpp
 layout: document

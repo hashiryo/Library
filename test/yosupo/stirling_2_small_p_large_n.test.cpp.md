@@ -46,7 +46,7 @@ data:
     \ l, Uint r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l\
     \ m## = mod & -((l p## = r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint\
     \ r) const { BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const\
-    \ { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint set(Uint n) const { return\
+    \ { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint set(u64 n) const { return\
     \ n % mod; }\n  static constexpr inline Uint get(Uint n) { return n; }\n  static\
     \ constexpr inline Uint norm(Uint n) { return n; }\n  constexpr Uint modulo()\
     \ const { return mod; }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr\
@@ -113,7 +113,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_2_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 17:35:17+09:00'
+  timestamp: '2022-11-27 21:09:10+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_2_small_p_large_n.test.cpp

@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -149,7 +149,7 @@ data:
     \ * r % mod; }\n#define BOP(m, p) return l m## = mod & -((l p## = r) >= mod)\n\
     \  constexpr inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n  constexpr\
     \ inline Uint diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n  constexpr\
-    \ inline Uint set(Uint n) const { return n % mod; }\n  static constexpr inline\
+    \ inline Uint set(u64 n) const { return n % mod; }\n  static constexpr inline\
     \ Uint get(Uint n) { return n; }\n  static constexpr inline Uint norm(Uint n)\
     \ { return n; }\n  constexpr Uint modulo() const { return mod; }\n};\ntemplate\
     \ <class Uint, class mod_pro_t>\nconstexpr Uint pow(Uint x, u64 k, const mod_pro_t\
@@ -169,7 +169,7 @@ data:
     \ {\n  static constexpr inline auto modulo() { return B::md.modulo(); }\n  constexpr\
     \ ModInt() : x(0) {}\n  constexpr ModInt(const ModInt &r) : x(r.x) {}\n  template\
     \ <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n  constexpr ModInt(T\
-    \ v) : ModInt(v.val()) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
+    \ v) : x(B::md.set(v.val())) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
     \ __int128_t>, nullptr_t> = nullptr>\n  constexpr ModInt(T n)\n      : x(B::md.set(n\
     \ < 0 ? modulo() - ((-n) % modulo()) : n)) {}\n  constexpr ModInt operator-()\
     \ const { return ModInt() - *this; }\n#define FUNC(name, op)          \\\n  constexpr\
@@ -232,7 +232,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc129_e.test.cpp
   requiredBy: []
-  timestamp: '2022-11-27 14:04:12+09:00'
+  timestamp: '2022-11-27 21:09:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc129_e.test.cpp

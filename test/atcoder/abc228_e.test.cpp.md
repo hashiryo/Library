@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModIntExp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc228/tasks/abc228_e
@@ -48,7 +48,7 @@ data:
     \ l, Uint r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l\
     \ m## = mod & -((l p## = r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint\
     \ r) const { BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const\
-    \ { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint set(Uint n) const { return\
+    \ { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint set(u64 n) const { return\
     \ n % mod; }\n  static constexpr inline Uint get(Uint n) { return n; }\n  static\
     \ constexpr inline Uint norm(Uint n) { return n; }\n  constexpr Uint modulo()\
     \ const { return mod; }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr\
@@ -163,8 +163,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc228_e.test.cpp
   requiredBy: []
-  timestamp: '2022-11-16 17:35:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-11-27 21:09:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc228_e.test.cpp
 layout: document
