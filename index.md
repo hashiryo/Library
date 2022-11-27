@@ -116,7 +116,7 @@ data:
     - icon: ':question:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
     - icon: ':x:'
@@ -131,10 +131,10 @@ data:
     - icon: ':x:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_div.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
     - icon: ':question:'
@@ -149,7 +149,7 @@ data:
     - icon: ':x:'
       path: src/FFT/sample_points_shift.hpp
       title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/sequences.hpp
       title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
         \u7528)"
@@ -223,7 +223,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
       title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
   - name: src/Math
@@ -231,7 +231,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/BinomialCoefficient.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':question:'
@@ -257,7 +257,7 @@ data:
     - icon: ':question:'
       path: src/Math/ModIntPrototype.hpp
       title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
     - icon: ':question:'
@@ -550,6 +550,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2842.KDT.test.cpp
       title: test/aoj/2842.KDT.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2863.test.cpp
+      title: test/aoj/2863.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
@@ -889,13 +892,13 @@ data:
       title: test/hackerrank/library-query.SqrtDC.test.cpp
   - name: test/unit_test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_log.test.cpp
       title: test/unit_test/nimber_log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_sqrt.test.cpp
       title: test/unit_test/nimber_sqrt.test.cpp
   - name: test/yosupo
@@ -906,19 +909,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/binomial_coefficient.test.cpp
       title: test/yosupo/binomial_coefficient.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/characteristic_polynomial.test.cpp
       title: test/yosupo/characteristic_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
     - icon: ':x:'

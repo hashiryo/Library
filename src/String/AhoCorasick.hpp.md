@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2257.test.cpp
     title: test/aoj/2257.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2863.test.cpp
+    title: test/aoj/2863.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
@@ -121,6 +124,7 @@ data:
   - test/yukicoder/430.AhoCora.test.cpp
   - test/aoj/2212.test.cpp
   - test/aoj/2257.test.cpp
+  - test/aoj/2863.test.cpp
 documentation_of: src/String/AhoCorasick.hpp
 layout: document
 redirect_from:
