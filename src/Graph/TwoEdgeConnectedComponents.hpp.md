@@ -72,8 +72,8 @@ data:
   timestamp: '2020-10-23 23:21:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/two_edge_connected_components.test.cpp
   - test/yukicoder/529.LCT.test.cpp
+  - test/yosupo/two_edge_connected_components.test.cpp
 documentation_of: src/Graph/TwoEdgeConnectedComponents.hpp
 layout: document
 redirect_from:

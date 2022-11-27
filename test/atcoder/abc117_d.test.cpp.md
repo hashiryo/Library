@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   _extendedRequiredBy: []
@@ -45,7 +45,7 @@ data:
     template <class T, class DFA, class Add, class F>\nT dfa_dp(const DFA &dfa, int\
     \ len, const Add &add, const F &f, const T t0 = T(0),\n         const T init =\
     \ T(1)) {\n  static_assert(is_dfa_v<DFA>);\n  const auto alphabet = dfa.alphabet();\n\
-    \  const int S = dfa.state_size;\n  std::vector<T> dp(S, t0);\n  std::vector<char>\
+    \  const int S = dfa.state_size();\n  std::vector<T> dp(S, t0);\n  std::vector<char>\
     \ visit(S, false);\n  dp[dfa.initial_state()] = init, visit[dfa.initial_state()]\
     \ = true;\n  for (int i = 0; i < len; i++) {\n    std::vector<T> next(S, t0);\n\
     \    std::vector<char> next_visit(S, false);\n    for (int s = S; s--;)\n    \
@@ -56,7 +56,7 @@ data:
     \  return ret;\n}\ntemplate <class T, class DFA>\nT dfa_dp(const DFA &dfa, int\
     \ len, const T t0 = T(0), const T init = T(1)) {\n  return dfa_dp<T>(\n      dfa,\
     \ len, [](T &l, const T &r) { l += r; },\n      [](const T &v, const typename\
-    \ DFA::symbol_t &, int) { return v; }, t0,\n      init);\n}\n#line 4 \"src/Automaton/DFA_Inequality.hpp\"\
+    \ DFA::symbol_t &, int) { return v; }, t0,\n      init);\n}\n#line 3 \"src/Automaton/DFA_Inequality.hpp\"\
     \n/**\n * @title $N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\
     \u53D7\u7406\u3059\u308BDFA\n * @category \u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\
     \n * @brief 0-fill\n */\n\n// BEGIN CUT HERE\ntemplate <bool ge = false>  // le\
@@ -74,16 +74,16 @@ data:
     \ s, const symbol_t &a, int i) const {\n    if (s != 0) return s;\n    if (i >=\
     \ (int)str.size()) return -1;\n    if (a == str[i]) return 0;\n    if constexpr\
     \ (ge)\n      return a < str[i] ? -1 : 1;\n    else\n      return a > str[i] ?\
-    \ -1 : 1;\n  }\n  inline bool is_accept(int s) const { return s >= 0; }\n  const\
-    \ int state_size = 2;\n\n private:\n  std::vector<symbol_t> str, alp;\n};\n#line\
-    \ 5 \"test/atcoder/abc117_d.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long N, K;\n  cin >>\
-    \ N >> K;\n  long long A[N];\n  for (int i = 0; i < N; i++) cin >> A[i];\n  auto\
-    \ add = [](long long &l, const long long &r) {\n    if (l < r) l = r;\n  };\n\
-    \  auto f = [&](long long x, int b, int k) {\n    int h = 40 - k;\n    for (int\
-    \ i = N; i--;) x += (((A[i] >> h) & 1) ^ b) << h;\n    return x;\n  };\n  cout\
-    \ << dfa_dp<long long>(DFA_Inequality(K, 2, 41), 41, add, f, 0, 0) << '\\n';\n\
-    \  return 0;\n}\n"
+    \ -1 : 1;\n  }\n  inline bool is_accept(int s) const { return s >= 0; }\n  inline\
+    \ int state_size() const { return 2; }\n\n private:\n  std::vector<symbol_t> str,\
+    \ alp;\n};\n#line 5 \"test/atcoder/abc117_d.test.cpp\"\nusing namespace std;\n\
+    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long\
+    \ N, K;\n  cin >> N >> K;\n  long long A[N];\n  for (int i = 0; i < N; i++) cin\
+    \ >> A[i];\n  auto add = [](long long &l, const long long &r) {\n    if (l < r)\
+    \ l = r;\n  };\n  auto f = [&](long long x, int b, int k) {\n    int h = 40 -\
+    \ k;\n    for (int i = N; i--;) x += (((A[i] >> h) & 1) ^ b) << h;\n    return\
+    \ x;\n  };\n  cout << dfa_dp<long long>(DFA_Inequality(K, 2, 41), 41, add, f,\
+    \ 0, 0) << '\\n';\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc117/tasks/abc117_d\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\n#include \"src/Automaton/DFA_Inequality.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
@@ -99,7 +99,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc117_d.test.cpp
   requiredBy: []
-  timestamp: '2022-07-07 14:09:04+09:00'
+  timestamp: '2022-11-27 14:04:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc117_d.test.cpp

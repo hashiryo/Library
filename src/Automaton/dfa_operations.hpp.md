@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   _extendedRequiredBy: []
@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc127_a.test.cpp
     title: test/atcoder/arc127_a.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\
       \u96C6\u5408\u6F14\u7B97"
@@ -58,7 +58,7 @@ data:
     template <class T, class DFA, class Add, class F>\nT dfa_dp(const DFA &dfa, int\
     \ len, const Add &add, const F &f, const T t0 = T(0),\n         const T init =\
     \ T(1)) {\n  static_assert(is_dfa_v<DFA>);\n  const auto alphabet = dfa.alphabet();\n\
-    \  const int S = dfa.state_size;\n  std::vector<T> dp(S, t0);\n  std::vector<char>\
+    \  const int S = dfa.state_size();\n  std::vector<T> dp(S, t0);\n  std::vector<char>\
     \ visit(S, false);\n  dp[dfa.initial_state()] = init, visit[dfa.initial_state()]\
     \ = true;\n  for (int i = 0; i < len; i++) {\n    std::vector<T> next(S, t0);\n\
     \    std::vector<char> next_visit(S, false);\n    for (int s = S; s--;)\n    \
@@ -74,17 +74,16 @@ data:
     \u96C6\u5408\u6F14\u7B97\n * @category \u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\n\
     \ */\n\n// BEGIN CUT HERE\ntemplate <class DFA, class S, class F>\nstruct DFA_SymbolMap\
     \ {\n  using symbol_t = S;\n  DFA_SymbolMap(const DFA &dfa_, const std::vector<symbol_t>\
-    \ &alp_, const F &f_)\n      : state_size(dfa_.state_size), dfa(dfa_), alp(alp_),\
-    \ f(f_) {\n    static_assert(is_dfa_v<DFA>);\n  }\n  std::vector<symbol_t> alphabet()\
-    \ const { return alp; }\n  inline int initial_state() const { return dfa.initial_state();\
-    \ }\n  inline int transition(int s, const symbol_t &a, int i) const {\n    return\
-    \ dfa.transition(s, f(a), i);\n  }\n  inline bool is_accept(int s) const { return\
-    \ dfa.is_accept(s); }\n  const int state_size;\n\n private:\n  const DFA dfa;\n\
+    \ &alp_, const F &f_)\n      : dfa(dfa_), alp(alp_), f(f_) {\n    static_assert(is_dfa_v<DFA>);\n\
+    \  }\n  std::vector<symbol_t> alphabet() const { return alp; }\n  inline int initial_state()\
+    \ const { return dfa.initial_state(); }\n  inline int transition(int s, const\
+    \ symbol_t &a, int i) const {\n    return dfa.transition(s, f(a), i);\n  }\n \
+    \ inline bool is_accept(int s) const { return dfa.is_accept(s); }\n  inline int\
+    \ state_size() const { return dfa.state_size(); }\n\n private:\n  const DFA dfa;\n\
     \  const std::vector<symbol_t> alp;\n  const F f;\n};\n\ntemplate <class DFA0,\
     \ class DFA1>\nstruct DFA_Intersection {\n  using symbol_t = typename DFA0::symbol_t;\n\
     \  static_assert(std::is_same_v<symbol_t, typename DFA1::symbol_t>);\n  DFA_Intersection(const\
-    \ DFA0 &dfa0_, const DFA1 &dfa1_)\n      : state_size(dfa0_.state_size * dfa1_.state_size),\n\
-    \        dfa0(dfa0_),\n        dfa1(dfa1_) {\n    static_assert(is_dfa_v<DFA0>);\n\
+    \ DFA0 &dfa0_, const DFA1 &dfa1_)\n      : dfa0(dfa0_), dfa1(dfa1_) {\n    static_assert(is_dfa_v<DFA0>);\n\
     \    static_assert(is_dfa_v<DFA1>);\n  }\n  inline std::vector<symbol_t> alphabet()\
     \ const {\n    auto alphabet = dfa0.alphabet();\n    assert(alphabet == dfa1.alphabet());\n\
     \    return alphabet;\n  }\n  inline int initial_state() const {\n    return product(dfa0.initial_state(),\
@@ -92,30 +91,30 @@ data:
     \ int i) const {\n    auto [s0, s1] = projection(s);\n    return product(dfa0.transition(s0,\
     \ c, i), dfa1.transition(s1, c, i));\n  }\n  inline bool is_accept(int s) const\
     \ {\n    auto [s0, s1] = projection(s);\n    return dfa0.is_accept(s0) && dfa1.is_accept(s1);\n\
-    \  }\n  const int state_size;\n\n private:\n  inline int product(int s0, int s1)\
-    \ const {\n    return s0 == -1 || s1 == -1 ? -1 : s0 + s1 * dfa0.state_size;\n\
-    \  }\n  inline std::pair<int, int> projection(int s) const {\n    return {s %\
-    \ dfa0.state_size, s / dfa0.state_size};\n  }\n  const DFA0 dfa0;\n  const DFA1\
-    \ dfa1;\n};\ntemplate <class DFA0, class DFA1,\n          typename std::enable_if_t<is_dfa_v<DFA0>\
-    \ && is_dfa_v<DFA1>,\n                                    std::nullptr_t> = nullptr>\n\
-    DFA_Intersection<DFA0, DFA1> operator&(const DFA0 &dfa0, const DFA1 &dfa1) {\n\
-    \  return DFA_Intersection<DFA0, DFA1>(dfa0, dfa1);\n}\n"
+    \  }\n  inline int state_size() const {\n    return dfa0.state_size() * dfa1.state_size();\n\
+    \  }\n\n private:\n  inline int product(int s0, int s1) const {\n    return s0\
+    \ == -1 || s1 == -1 ? -1 : s0 + s1 * dfa0.state_size();\n  }\n  inline std::pair<int,\
+    \ int> projection(int s) const {\n    return {s % dfa0.state_size(), s / dfa0.state_size()};\n\
+    \  }\n  const DFA0 dfa0;\n  const DFA1 dfa1;\n};\ntemplate <class DFA0, class\
+    \ DFA1,\n          typename std::enable_if_t<is_dfa_v<DFA0> && is_dfa_v<DFA1>,\n\
+    \                                    std::nullptr_t> = nullptr>\nDFA_Intersection<DFA0,\
+    \ DFA1> operator&(const DFA0 &dfa0, const DFA1 &dfa1) {\n  return DFA_Intersection<DFA0,\
+    \ DFA1>(dfa0, dfa1);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\
     \n/**\n * @title DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\
     \u96C6\u5408\u6F14\u7B97\n * @category \u30AA\u30FC\u30C8\u30DE\u30C8\u30F3\n\
     \ */\n\n// BEGIN CUT HERE\ntemplate <class DFA, class S, class F>\nstruct DFA_SymbolMap\
     \ {\n  using symbol_t = S;\n  DFA_SymbolMap(const DFA &dfa_, const std::vector<symbol_t>\
-    \ &alp_, const F &f_)\n      : state_size(dfa_.state_size), dfa(dfa_), alp(alp_),\
-    \ f(f_) {\n    static_assert(is_dfa_v<DFA>);\n  }\n  std::vector<symbol_t> alphabet()\
-    \ const { return alp; }\n  inline int initial_state() const { return dfa.initial_state();\
-    \ }\n  inline int transition(int s, const symbol_t &a, int i) const {\n    return\
-    \ dfa.transition(s, f(a), i);\n  }\n  inline bool is_accept(int s) const { return\
-    \ dfa.is_accept(s); }\n  const int state_size;\n\n private:\n  const DFA dfa;\n\
+    \ &alp_, const F &f_)\n      : dfa(dfa_), alp(alp_), f(f_) {\n    static_assert(is_dfa_v<DFA>);\n\
+    \  }\n  std::vector<symbol_t> alphabet() const { return alp; }\n  inline int initial_state()\
+    \ const { return dfa.initial_state(); }\n  inline int transition(int s, const\
+    \ symbol_t &a, int i) const {\n    return dfa.transition(s, f(a), i);\n  }\n \
+    \ inline bool is_accept(int s) const { return dfa.is_accept(s); }\n  inline int\
+    \ state_size() const { return dfa.state_size(); }\n\n private:\n  const DFA dfa;\n\
     \  const std::vector<symbol_t> alp;\n  const F f;\n};\n\ntemplate <class DFA0,\
     \ class DFA1>\nstruct DFA_Intersection {\n  using symbol_t = typename DFA0::symbol_t;\n\
     \  static_assert(std::is_same_v<symbol_t, typename DFA1::symbol_t>);\n  DFA_Intersection(const\
-    \ DFA0 &dfa0_, const DFA1 &dfa1_)\n      : state_size(dfa0_.state_size * dfa1_.state_size),\n\
-    \        dfa0(dfa0_),\n        dfa1(dfa1_) {\n    static_assert(is_dfa_v<DFA0>);\n\
+    \ DFA0 &dfa0_, const DFA1 &dfa1_)\n      : dfa0(dfa0_), dfa1(dfa1_) {\n    static_assert(is_dfa_v<DFA0>);\n\
     \    static_assert(is_dfa_v<DFA1>);\n  }\n  inline std::vector<symbol_t> alphabet()\
     \ const {\n    auto alphabet = dfa0.alphabet();\n    assert(alphabet == dfa1.alphabet());\n\
     \    return alphabet;\n  }\n  inline int initial_state() const {\n    return product(dfa0.initial_state(),\
@@ -123,28 +122,29 @@ data:
     \ int i) const {\n    auto [s0, s1] = projection(s);\n    return product(dfa0.transition(s0,\
     \ c, i), dfa1.transition(s1, c, i));\n  }\n  inline bool is_accept(int s) const\
     \ {\n    auto [s0, s1] = projection(s);\n    return dfa0.is_accept(s0) && dfa1.is_accept(s1);\n\
-    \  }\n  const int state_size;\n\n private:\n  inline int product(int s0, int s1)\
-    \ const {\n    return s0 == -1 || s1 == -1 ? -1 : s0 + s1 * dfa0.state_size;\n\
-    \  }\n  inline std::pair<int, int> projection(int s) const {\n    return {s %\
-    \ dfa0.state_size, s / dfa0.state_size};\n  }\n  const DFA0 dfa0;\n  const DFA1\
-    \ dfa1;\n};\ntemplate <class DFA0, class DFA1,\n          typename std::enable_if_t<is_dfa_v<DFA0>\
-    \ && is_dfa_v<DFA1>,\n                                    std::nullptr_t> = nullptr>\n\
-    DFA_Intersection<DFA0, DFA1> operator&(const DFA0 &dfa0, const DFA1 &dfa1) {\n\
-    \  return DFA_Intersection<DFA0, DFA1>(dfa0, dfa1);\n}"
+    \  }\n  inline int state_size() const {\n    return dfa0.state_size() * dfa1.state_size();\n\
+    \  }\n\n private:\n  inline int product(int s0, int s1) const {\n    return s0\
+    \ == -1 || s1 == -1 ? -1 : s0 + s1 * dfa0.state_size();\n  }\n  inline std::pair<int,\
+    \ int> projection(int s) const {\n    return {s % dfa0.state_size(), s / dfa0.state_size()};\n\
+    \  }\n  const DFA0 dfa0;\n  const DFA1 dfa1;\n};\ntemplate <class DFA0, class\
+    \ DFA1,\n          typename std::enable_if_t<is_dfa_v<DFA0> && is_dfa_v<DFA1>,\n\
+    \                                    std::nullptr_t> = nullptr>\nDFA_Intersection<DFA0,\
+    \ DFA1> operator&(const DFA0 &dfa0, const DFA1 &dfa1) {\n  return DFA_Intersection<DFA0,\
+    \ DFA1>(dfa0, dfa1);\n}"
   dependsOn:
   - src/Automaton/dfa_dp.hpp
   isVerificationFile: false
   path: src/Automaton/dfa_operations.hpp
   requiredBy: []
-  timestamp: '2022-07-07 14:09:04+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-11-27 14:04:12+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc154_e.test.cpp
-  - test/atcoder/abc208_e.test.cpp
+  - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/arc127_a.test.cpp
+  - test/atcoder/abc138_f.test.cpp
+  - test/atcoder/abc208_e.test.cpp
 documentation_of: src/Automaton/dfa_operations.hpp
 layout: document
 redirect_from:

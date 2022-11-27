@@ -84,10 +84,10 @@ data:
   timestamp: '2022-10-29 19:15:23+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2614.rollinghash.test.cpp
-  - test/aoj/2711.rollinghash.test.cpp
-  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - test/yosupo/z_algorithm.rollinghash.test.cpp
+  - test/aoj/2711.rollinghash.test.cpp
+  - test/aoj/2614.rollinghash.test.cpp
+  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
 documentation_of: src/String/RollingHash.hpp
 layout: document
 redirect_from:

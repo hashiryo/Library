@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   _extendedRequiredBy: []
@@ -42,7 +42,7 @@ data:
     template <class T, class DFA, class Add, class F>\nT dfa_dp(const DFA &dfa, int\
     \ len, const Add &add, const F &f, const T t0 = T(0),\n         const T init =\
     \ T(1)) {\n  static_assert(is_dfa_v<DFA>);\n  const auto alphabet = dfa.alphabet();\n\
-    \  const int S = dfa.state_size;\n  std::vector<T> dp(S, t0);\n  std::vector<char>\
+    \  const int S = dfa.state_size();\n  std::vector<T> dp(S, t0);\n  std::vector<char>\
     \ visit(S, false);\n  dp[dfa.initial_state()] = init, visit[dfa.initial_state()]\
     \ = true;\n  for (int i = 0; i < len; i++) {\n    std::vector<T> next(S, t0);\n\
     \    std::vector<char> next_visit(S, false);\n    for (int s = S; s--;)\n    \
@@ -57,7 +57,7 @@ data:
     \n/**\n * @title \u72B6\u614B\u3092int\u3067\u5727\u7E2E\n * @category \u30AA\u30FC\
     \u30C8\u30DE\u30C8\u30F3\n */\n\n// BEGIN CUT HERE\ntemplate <class DFAx, class\
     \ S = typename DFAx::state_t>\nstruct DFA_Compress {\n  using symbol_t = typename\
-    \ DFAx::symbol_t;\n  DFA_Compress(const DFAx &dfa_, int N) : state_size(0), dfa(dfa_)\
+    \ DFAx::symbol_t;\n  DFA_Compress(const DFAx &dfa_, int N) : size(0), dfa(dfa_)\
     \ {\n    static_assert(is_automaton<DFAx>::value);\n    static_assert(has_is_reject<DFAx>::value);\n\
     \    std::set<int> ss{mapping(dfa.initial_state())};\n    for (int i = 0; i <\
     \ N && !ss.empty(); i++) {\n      std::set<int> ts;\n      for (int s : ss)\n\
@@ -67,16 +67,17 @@ data:
     \ alphabet() const { return dfa.alphabet(); }\n  inline int initial_state() const\
     \ { return 0; }\n  inline int transition(int s, const symbol_t &c, int i) const\
     \ {\n    return memo.at(std::make_tuple(s, c, i));\n  }\n  inline bool is_accept(int\
-    \ s) const { return dfa.is_accept(states[s]); }\n  int state_size;\n\n private:\n\
-    \  DFAx dfa;\n  std::vector<S> states;\n  std::map<S, int> mp;\n  std::map<std::tuple<int,\
-    \ symbol_t, int>, int> memo;\n  inline int mapping(const S &ss) {\n    if (dfa.is_reject(ss))\
-    \ return -1;\n    if (mp.count(ss)) return mp[ss];\n    return states.push_back(ss),\
-    \ mp[ss] = state_size++;\n  }\n};\n"
+    \ s) const { return dfa.is_accept(states[s]); }\n  inline int state_size() const\
+    \ { return size; }\n\n private:\n  int size;\n  DFAx dfa;\n  std::vector<S> states;\n\
+    \  std::map<S, int> mp;\n  std::map<std::tuple<int, symbol_t, int>, int> memo;\n\
+    \  inline int mapping(const S &ss) {\n    if (dfa.is_reject(ss)) return -1;\n\
+    \    if (mp.count(ss)) return mp[ss];\n    return states.push_back(ss), mp[ss]\
+    \ = size++;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\
     \n/**\n * @title \u72B6\u614B\u3092int\u3067\u5727\u7E2E\n * @category \u30AA\u30FC\
     \u30C8\u30DE\u30C8\u30F3\n */\n\n// BEGIN CUT HERE\ntemplate <class DFAx, class\
     \ S = typename DFAx::state_t>\nstruct DFA_Compress {\n  using symbol_t = typename\
-    \ DFAx::symbol_t;\n  DFA_Compress(const DFAx &dfa_, int N) : state_size(0), dfa(dfa_)\
+    \ DFAx::symbol_t;\n  DFA_Compress(const DFAx &dfa_, int N) : size(0), dfa(dfa_)\
     \ {\n    static_assert(is_automaton<DFAx>::value);\n    static_assert(has_is_reject<DFAx>::value);\n\
     \    std::set<int> ss{mapping(dfa.initial_state())};\n    for (int i = 0; i <\
     \ N && !ss.empty(); i++) {\n      std::set<int> ts;\n      for (int s : ss)\n\
@@ -86,17 +87,18 @@ data:
     \ alphabet() const { return dfa.alphabet(); }\n  inline int initial_state() const\
     \ { return 0; }\n  inline int transition(int s, const symbol_t &c, int i) const\
     \ {\n    return memo.at(std::make_tuple(s, c, i));\n  }\n  inline bool is_accept(int\
-    \ s) const { return dfa.is_accept(states[s]); }\n  int state_size;\n\n private:\n\
-    \  DFAx dfa;\n  std::vector<S> states;\n  std::map<S, int> mp;\n  std::map<std::tuple<int,\
-    \ symbol_t, int>, int> memo;\n  inline int mapping(const S &ss) {\n    if (dfa.is_reject(ss))\
-    \ return -1;\n    if (mp.count(ss)) return mp[ss];\n    return states.push_back(ss),\
-    \ mp[ss] = state_size++;\n  }\n};"
+    \ s) const { return dfa.is_accept(states[s]); }\n  inline int state_size() const\
+    \ { return size; }\n\n private:\n  int size;\n  DFAx dfa;\n  std::vector<S> states;\n\
+    \  std::map<S, int> mp;\n  std::map<std::tuple<int, symbol_t, int>, int> memo;\n\
+    \  inline int mapping(const S &ss) {\n    if (dfa.is_reject(ss)) return -1;\n\
+    \    if (mp.count(ss)) return mp[ss];\n    return states.push_back(ss), mp[ss]\
+    \ = size++;\n  }\n};"
   dependsOn:
   - src/Automaton/dfa_dp.hpp
   isVerificationFile: false
   path: src/Automaton/DFA_Compress.hpp
   requiredBy: []
-  timestamp: '2022-07-07 14:09:04+09:00'
+  timestamp: '2022-11-27 14:04:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc208_e.test.cpp

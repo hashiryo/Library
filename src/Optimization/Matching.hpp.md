@@ -83,8 +83,8 @@ data:
   timestamp: '2022-11-18 14:42:38+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/3032.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/aoj/3032.test.cpp
 documentation_of: src/Optimization/Matching.hpp
 layout: document
 redirect_from:

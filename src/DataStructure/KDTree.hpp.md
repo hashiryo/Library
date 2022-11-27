@@ -269,13 +269,13 @@ data:
   timestamp: '2022-09-10 23:27:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/1068.KDT.test.cpp
+  - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/728.KDT.test.cpp
+  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - test/hackerrank/cube-summation.KDT.test.cpp
   - test/aoj/2842.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/hackerrank/cube-summation.KDT.test.cpp
-  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/yukicoder/728.KDT.test.cpp
-  - test/yukicoder/1625.KDT.test.cpp
+  - test/aoj/1068.KDT.test.cpp
 documentation_of: src/DataStructure/KDTree.hpp
 layout: document
 redirect_from:

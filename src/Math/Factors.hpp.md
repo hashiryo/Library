@@ -185,20 +185,20 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
+  - src/Math/ModIntExp.hpp
+  - src/Math/mod_tetration.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
-  - src/Math/mod_tetration.hpp
-  - src/Math/ModIntExp.hpp
   timestamp: '2022-11-16 17:35:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/NTL_1_D.test.cpp
-  - test/yosupo/tetration_mod.test.cpp
-  - test/yosupo/primitive_root.test.cpp
   - test/yosupo/kth_root_mod.test.cpp
+  - test/yosupo/primitive_root.test.cpp
   - test/yosupo/factorize.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
   - test/atcoder/abc228_e.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
 documentation_of: src/Math/Factors.hpp
 layout: document
 redirect_from:

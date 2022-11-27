@@ -112,11 +112,11 @@ data:
   timestamp: '2022-11-13 14:36:00+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2624.test.cpp
-  - test/aoj/2397.test.cpp
-  - test/atcoder/abc236_g.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/1340.test.cpp
+  - test/atcoder/abc236_g.test.cpp
+  - test/aoj/2397.test.cpp
+  - test/aoj/2624.test.cpp
 documentation_of: src/LinearAlgebra/Matrix.hpp
 layout: document
 redirect_from:

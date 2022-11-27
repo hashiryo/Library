@@ -66,8 +66,8 @@ data:
   timestamp: '2022-06-20 21:11:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
+  - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dual.hpp
 layout: document
 redirect_from:

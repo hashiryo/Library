@@ -135,8 +135,8 @@ data:
   timestamp: '2022-11-16 17:35:17+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/stirling_1_small_p_large_n.test.cpp
   - test/yosupo/stirling_2_small_p_large_n.test.cpp
+  - test/yosupo/stirling_1_small_p_large_n.test.cpp
 documentation_of: src/Math/StirlingNumber.hpp
 layout: document
 redirect_from:
