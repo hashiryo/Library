@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':heavy_check_mark:'
@@ -122,7 +122,8 @@ data:
     \    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t i = 0; i <\
     \ rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
     \    for (std::size_t i = 0; i < rows; i++)\n      for (std::size_t j = 0; j <\
-    \ i; j++) std::swap(ret[i][j], ret[j][i]);\n    return ret;\n  }\n};\n"
+    \ i; j++) {\n        bool tmp = ret[i][j];\n        ret[i][j] = ret[j][i];\n \
+    \       ret[j][i] = tmp;\n      }\n    return ret;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title LU\u5206\u89E3\n *\
     \ @category \u7DDA\u5F62\u4EE3\u6570\n * bool\u578B\u306E\u5834\u5408\u306Ekernel\u95A2\
     \u6570 \u672Averify\n */\n\n// BEGIN CUT HERE\n\ntemplate <class K, std::size_t\
@@ -212,12 +213,13 @@ data:
     \    std::vector<bool> b(rows);\n    Mat ret;\n    for (std::size_t i = 0; i <\
     \ rows; b[i++] = 0)\n      b[i] = 1, ret.emplace_back(linear_equations(b));\n\
     \    for (std::size_t i = 0; i < rows; i++)\n      for (std::size_t j = 0; j <\
-    \ i; j++) std::swap(ret[i][j], ret[j][i]);\n    return ret;\n  }\n};"
+    \ i; j++) {\n        bool tmp = ret[i][j];\n        ret[i][j] = ret[j][i];\n \
+    \       ret[j][i] = tmp;\n      }\n    return ret;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/LinearAlgebra/LUDecomposition.hpp
   requiredBy: []
-  timestamp: '2022-11-13 14:36:00+09:00'
+  timestamp: '2022-11-27 21:49:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/803.test.cpp
