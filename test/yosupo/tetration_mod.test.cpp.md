@@ -101,20 +101,19 @@ data:
     \ = default;\n  constexpr Factors(u64 n) { init(n), bubble_sort(dat, dat + sz);\
     \ }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr Uint inner_primitive_root(Uint\
     \ p) {\n  const mod_pro_t md(p);\n  const auto f = Factors(p - 1);\n  for (Uint\
-    \ ret = 2, one = md.set(1), pw = 0, x = 0, k = 0, ng = 0;; ret++) {\n    for (auto\
-    \ [q, e] : f)\n      if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))\
-    \ break;\n    if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p)\
-    \ {\n  if (assert(is_prime(p)); p == 2) return 1;\n  if (p < UINT_MAX) return\
-    \ inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n  if (p < LLONG_MAX) return\
-    \ inner_primitive_root<u64, MIntPro_Montg>(p);\n  return inner_primitive_root<u64,\
-    \ MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\nusing math_internal::Factors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto &[p, e] : f)\n   \
-    \ for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n}\nconstexpr auto\
-    \ totient(std::uint64_t n) { return totient(Factors(n)); }\n#line 4 \"src/Math/mod_tetration.hpp\"\
-    \n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$\
-    \ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n *  O(m^(1/4))\n */\n\
-    // verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
+    \ ret = 2, one = md.set(1), ng = 0;; ret++) {\n    for (auto [q, e] : f)\n   \
+    \   if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n   \
+    \ if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p) {\n  if (assert(is_prime(p));\
+    \ p == 2) return 1;\n  if (p < UINT_MAX) return inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n\
+    \  if (p < LLONG_MAX) return inner_primitive_root<u64, MIntPro_Montg>(p);\n  return\
+    \ inner_primitive_root<u64, MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\n\
+    using math_internal::Factors, math_internal::primitive_root;\nconstexpr std::uint64_t\
+    \ totient(const Factors &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto\
+    \ &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n\
+    }\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n)); }\n#line\
+    \ 4 \"src/Math/mod_tetration.hpp\"\n/**\n * @title \u30C6\u30C8\u30EC\u30FC\u30B7\
+    \u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\
+    \u5B66\n *  O(m^(1/4))\n */\n// verify\u7528:\n// https://atcoder.jp/contests/summerfes2018-div1/tasks/summerfes2018_f\n\
     \n// BEGIN CUT HERE\nnamespace math_internal {\nconstexpr u64 rec(u64 a, u64 b,\
     \ u64 m) {\n  if (a == 0) return (b ^ 1) & 1;\n  if (b == 0 || m == 1) return\
     \ 1;\n  u64 ret = 1, k = 1, tmp = 1, i = 0;\n  for (const auto &[p, e] : Factors(m))\
@@ -141,7 +140,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-11-27 21:09:10+09:00'
+  timestamp: '2022-11-28 17:14:54+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp

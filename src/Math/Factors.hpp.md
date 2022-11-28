@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/ModIntExp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
@@ -34,10 +34,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
   - icon: ':x:'
@@ -125,17 +125,16 @@ data:
     \ = default;\n  constexpr Factors(u64 n) { init(n), bubble_sort(dat, dat + sz);\
     \ }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr Uint inner_primitive_root(Uint\
     \ p) {\n  const mod_pro_t md(p);\n  const auto f = Factors(p - 1);\n  for (Uint\
-    \ ret = 2, one = md.set(1), pw = 0, x = 0, k = 0, ng = 0;; ret++) {\n    for (auto\
-    \ [q, e] : f)\n      if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))\
-    \ break;\n    if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p)\
-    \ {\n  if (assert(is_prime(p)); p == 2) return 1;\n  if (p < UINT_MAX) return\
-    \ inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n  if (p < LLONG_MAX) return\
-    \ inner_primitive_root<u64, MIntPro_Montg>(p);\n  return inner_primitive_root<u64,\
-    \ MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\nusing math_internal::Factors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto &[p, e] : f)\n   \
-    \ for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n}\nconstexpr auto\
-    \ totient(std::uint64_t n) { return totient(Factors(n)); }\n"
+    \ ret = 2, one = md.set(1), ng = 0;; ret++) {\n    for (auto [q, e] : f)\n   \
+    \   if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n   \
+    \ if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p) {\n  if (assert(is_prime(p));\
+    \ p == 2) return 1;\n  if (p < UINT_MAX) return inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n\
+    \  if (p < LLONG_MAX) return inner_primitive_root<u64, MIntPro_Montg>(p);\n  return\
+    \ inner_primitive_root<u64, MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\n\
+    using math_internal::Factors, math_internal::primitive_root;\nconstexpr std::uint64_t\
+    \ totient(const Factors &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto\
+    \ &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n\
+    }\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n)); }\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/is_prime.hpp\"\
     \n/**\n * @title \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069\n * @category\
     \ \u6570\u5B66\n *  O(N^(1/4))\n */\n\n// BEGIN CUT HERE\nnamespace math_internal\
@@ -168,17 +167,16 @@ data:
     \ default;\n  constexpr Factors(u64 n) { init(n), bubble_sort(dat, dat + sz);\
     \ }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr Uint inner_primitive_root(Uint\
     \ p) {\n  const mod_pro_t md(p);\n  const auto f = Factors(p - 1);\n  for (Uint\
-    \ ret = 2, one = md.set(1), pw = 0, x = 0, k = 0, ng = 0;; ret++) {\n    for (auto\
-    \ [q, e] : f)\n      if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))\
-    \ break;\n    if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p)\
-    \ {\n  if (assert(is_prime(p)); p == 2) return 1;\n  if (p < UINT_MAX) return\
-    \ inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n  if (p < LLONG_MAX) return\
-    \ inner_primitive_root<u64, MIntPro_Montg>(p);\n  return inner_primitive_root<u64,\
-    \ MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\nusing math_internal::Factors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto &[p, e] : f)\n   \
-    \ for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n}\nconstexpr auto\
-    \ totient(std::uint64_t n) { return totient(Factors(n)); }\n"
+    \ ret = 2, one = md.set(1), ng = 0;; ret++) {\n    for (auto [q, e] : f)\n   \
+    \   if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n   \
+    \ if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p) {\n  if (assert(is_prime(p));\
+    \ p == 2) return 1;\n  if (p < UINT_MAX) return inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n\
+    \  if (p < LLONG_MAX) return inner_primitive_root<u64, MIntPro_Montg>(p);\n  return\
+    \ inner_primitive_root<u64, MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\n\
+    using math_internal::Factors, math_internal::primitive_root;\nconstexpr std::uint64_t\
+    \ totient(const Factors &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto\
+    \ &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n\
+    }\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n)); }\n"
   dependsOn:
   - src/Math/is_prime.hpp
   - src/Math/ModIntPrototype.hpp
@@ -189,7 +187,7 @@ data:
   - src/Math/mod_tetration.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
-  timestamp: '2022-11-27 21:09:10+09:00'
+  timestamp: '2022-11-28 17:14:54+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/kth_root_mod.test.cpp

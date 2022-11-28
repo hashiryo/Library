@@ -97,22 +97,22 @@ data:
     \ default;\n  constexpr Factors(u64 n) { init(n), bubble_sort(dat, dat + sz);\
     \ }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr Uint inner_primitive_root(Uint\
     \ p) {\n  const mod_pro_t md(p);\n  const auto f = Factors(p - 1);\n  for (Uint\
-    \ ret = 2, one = md.set(1), pw = 0, x = 0, k = 0, ng = 0;; ret++) {\n    for (auto\
-    \ [q, e] : f)\n      if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))\
-    \ break;\n    if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p)\
-    \ {\n  if (assert(is_prime(p)); p == 2) return 1;\n  if (p < UINT_MAX) return\
-    \ inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n  if (p < LLONG_MAX) return\
-    \ inner_primitive_root<u64, MIntPro_Montg>(p);\n  return inner_primitive_root<u64,\
-    \ MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\nusing math_internal::Factors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto &[p, e] : f)\n   \
-    \ for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n}\nconstexpr auto\
-    \ totient(std::uint64_t n) { return totient(Factors(n)); }\n#line 4 \"test/yosupo/factorize.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int Q;\n  cin >> Q;\n  while (Q--) {\n    long long a;\n    cin >> a;\n   \
-    \ vector<long long> ans;\n    for (auto& [p, e] : Factors(a))\n      for (int\
-    \ i = 0; i < e; i++) ans.push_back(p);\n    cout << ans.size();\n    for (auto\
-    \ x : ans) cout << \" \" << x;\n    cout << '\\n';\n  }\n  return 0;\n}\n"
+    \ ret = 2, one = md.set(1), ng = 0;; ret++) {\n    for (auto [q, e] : f)\n   \
+    \   if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n   \
+    \ if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p) {\n  if (assert(is_prime(p));\
+    \ p == 2) return 1;\n  if (p < UINT_MAX) return inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n\
+    \  if (p < LLONG_MAX) return inner_primitive_root<u64, MIntPro_Montg>(p);\n  return\
+    \ inner_primitive_root<u64, MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\n\
+    using math_internal::Factors, math_internal::primitive_root;\nconstexpr std::uint64_t\
+    \ totient(const Factors &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto\
+    \ &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n\
+    }\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n)); }\n#line\
+    \ 4 \"test/yosupo/factorize.test.cpp\"\nusing namespace std;\n\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n  while\
+    \ (Q--) {\n    long long a;\n    cin >> a;\n    vector<long long> ans;\n    for\
+    \ (auto& [p, e] : Factors(a))\n      for (int i = 0; i < e; i++) ans.push_back(p);\n\
+    \    cout << ans.size();\n    for (auto x : ans) cout << \" \" << x;\n    cout\
+    \ << '\\n';\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include <bits/stdc++.h>\n\
     #include \"src/Math/Factors.hpp\"\nusing namespace std;\n\nsigned main() {\n \
     \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n  while (Q--)\
@@ -127,7 +127,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-11-27 21:09:10+09:00'
+  timestamp: '2022-11-28 17:14:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/factorize.test.cpp

@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
@@ -109,19 +109,18 @@ data:
     \ default;\n  constexpr Factors(u64 n) { init(n), bubble_sort(dat, dat + sz);\
     \ }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr Uint inner_primitive_root(Uint\
     \ p) {\n  const mod_pro_t md(p);\n  const auto f = Factors(p - 1);\n  for (Uint\
-    \ ret = 2, one = md.set(1), pw = 0, x = 0, k = 0, ng = 0;; ret++) {\n    for (auto\
-    \ [q, e] : f)\n      if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))\
-    \ break;\n    if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p)\
-    \ {\n  if (assert(is_prime(p)); p == 2) return 1;\n  if (p < UINT_MAX) return\
-    \ inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n  if (p < LLONG_MAX) return\
-    \ inner_primitive_root<u64, MIntPro_Montg>(p);\n  return inner_primitive_root<u64,\
-    \ MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\nusing math_internal::Factors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto &[p, e] : f)\n   \
-    \ for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n}\nconstexpr auto\
-    \ totient(std::uint64_t n) { return totient(Factors(n)); }\n#line 5 \"src/Math/mod_kth_root.hpp\"\
-    \n/**\n * @title k\u4E57\u6839 ($\\mathbb{F}_p$)\n * @category \u6570\u5B66\n\
-    \ * O( min(k,p)^(1/4) )\n * @see https://nyaannyaan.github.io/library/modulo/mod-kth-root.hpp\n\
+    \ ret = 2, one = md.set(1), ng = 0;; ret++) {\n    for (auto [q, e] : f)\n   \
+    \   if (ng = (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n   \
+    \ if (!ng) return ret;\n  }\n}\nconstexpr u64 primitive_root(u64 p) {\n  if (assert(is_prime(p));\
+    \ p == 2) return 1;\n  if (p < UINT_MAX) return inner_primitive_root<u32, MIntPro_Na<u32>>(p);\n\
+    \  if (p < LLONG_MAX) return inner_primitive_root<u64, MIntPro_Montg>(p);\n  return\
+    \ inner_primitive_root<u64, MIntPro_Na<u64>>(p);\n}\n}  // namespace math_internal\n\
+    using math_internal::Factors, math_internal::primitive_root;\nconstexpr std::uint64_t\
+    \ totient(const Factors &f) {\n  std::uint64_t ret = 1, i = 0;\n  for (const auto\
+    \ &[p, e] : f)\n    for (ret *= p - 1, i = e; --i;) ret *= p;\n  return ret;\n\
+    }\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n)); }\n#line\
+    \ 5 \"src/Math/mod_kth_root.hpp\"\n/**\n * @title k\u4E57\u6839 ($\\mathbb{F}_p$)\n\
+    \ * @category \u6570\u5B66\n * O( min(k,p)^(1/4) )\n * @see https://nyaannyaan.github.io/library/modulo/mod-kth-root.hpp\n\
     \ */\n\n// verify\u7528\n// https://yukicoder.me/problems/no/981 (\u53B3\u3057\
     \u3044\u5236\u7D04\u306E\u30B1\u30FC\u30B9\u3042\u308A, sp judge)\n\n// BEGIN\
     \ CUT HERE\nnamespace math_internal {\ntemplate <class Int, class mod_pro_t>\n\
@@ -152,7 +151,7 @@ data:
     \ pp;\n  if (a = md.set(a); md.norm(pow(a, pp, md)) != md.set(1)) return -1;\n\
     \  a = pow(a, mod_inv(kk, pp), md);\n  for (auto [pi, ei] : Factors(g)) a = peth_root<Int>(a,\
     \ pi, ei, md);\n  return md.get(a);\n}\nint64_t mod_kth_root(int64_t a, u64 k,\
-    \ int64_t p) {\n  assert(p > 0), assert(a > 0), assert(is_prime(p)), a %= p;\n\
+    \ int64_t p) {\n  assert(p > 0), assert(a >= 0), assert(is_prime(p)), a %= p;\n\
     \  if (p < INT_MAX) return inner_kth_root<int, MIntPro_Na<u32>>(a, k, p);\n  return\
     \ inner_kth_root<int64_t, MIntPro_Montg>(a, k, p);\n}\n}  // namespace math_internal\n\
     using math_internal::mod_kth_root;\n#line 4 \"test/yosupo/kth_root_mod.test.cpp\"\
@@ -173,8 +172,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_root_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-11-28 16:39:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-11-28 17:14:54+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/kth_root_mod.test.cpp
 layout: document
