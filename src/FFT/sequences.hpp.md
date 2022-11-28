@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
   - icon: ':question:'
@@ -30,7 +30,7 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':x:'
@@ -47,7 +47,7 @@ data:
     title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\
       \u6570\u4F7F\u7528)"
@@ -564,7 +564,7 @@ data:
   path: src/FFT/sequences.hpp
   requiredBy: []
   timestamp: '2022-11-27 21:09:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/963.test.cpp
   - test/yosupo/bernoulli.test.cpp

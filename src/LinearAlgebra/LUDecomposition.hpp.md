@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
   - icon: ':x:'
@@ -121,7 +121,7 @@ data:
     \ >> 7] >> (rank() & 127)))\n      return {};  // no solution\n    for (std::size_t\
     \ r = (rank() >> 7) + 1; r < row128; r++)\n      if (y[r]) return {};  // no solution\n\
     \    for (std::size_t i = rank(); i--;)\n      if (std::size_t k = piv[i]; (x[k]\
-    \ = (y[i >> 7] >> (i & 128)) & 1)) {\n        for (std::size_t r = i >> 7; r--;)\
+    \ = (y[i >> 7] >> (i & 127)) & 1)) {\n        for (std::size_t r = i >> 7; r--;)\
     \ y[r] ^= tdat[k][r];\n        y[i >> 7] ^= tdat[k][i >> 7] & ((u128(1) << (i\
     \ & 127)) - 1);\n      }\n    return x;\n  }\n  Mat inverse_matrix() const {\n\
     \    if (!isregular()) return {};  // no solution\n    std::vector<bool> b(rows);\n\
@@ -218,7 +218,7 @@ data:
     \ >> 7] >> (rank() & 127)))\n      return {};  // no solution\n    for (std::size_t\
     \ r = (rank() >> 7) + 1; r < row128; r++)\n      if (y[r]) return {};  // no solution\n\
     \    for (std::size_t i = rank(); i--;)\n      if (std::size_t k = piv[i]; (x[k]\
-    \ = (y[i >> 7] >> (i & 128)) & 1)) {\n        for (std::size_t r = i >> 7; r--;)\
+    \ = (y[i >> 7] >> (i & 127)) & 1)) {\n        for (std::size_t r = i >> 7; r--;)\
     \ y[r] ^= tdat[k][r];\n        y[i >> 7] ^= tdat[k][i >> 7] & ((u128(1) << (i\
     \ & 127)) - 1);\n      }\n    return x;\n  }\n  Mat inverse_matrix() const {\n\
     \    if (!isregular()) return {};  // no solution\n    std::vector<bool> b(rows);\n\
@@ -231,7 +231,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/LUDecomposition.hpp
   requiredBy: []
-  timestamp: '2022-11-28 12:47:19+09:00'
+  timestamp: '2022-11-28 13:23:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/803.test.cpp
