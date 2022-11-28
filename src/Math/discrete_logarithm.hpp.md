@@ -6,12 +6,12 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     links: []
@@ -30,14 +30,14 @@ data:
     \ mod_inv<int>(a / g, mod))) {\n    if ((b == 1) || (mod == 1)) return cnt;\n\
     \    if ((g = std::gcd(a, mod)) == 1) break;\n    if (b % g != 0) return -1; \
     \ // no solution\n  }\n  int baby = 1, size = 1 << std::__lg(int(std::sqrt(mod))\
-    \ + 1), mask = size - 1,\n      os[size + 1], vs[size][2];\n  for (int i = 0;\
-    \ i < size; i++, mul(baby, a)) os[baby & mask]++;\n  for (int i = 1; i < size;\
-    \ i++) os[i] += os[i - 1];\n  os[size] = size, baby = 1;\n  for (int i = 0, j\
-    \ = 0; i < size; i++, mul(baby, a))\n    j = --os[baby & mask], vs[j][0] = baby,\
-    \ vs[j][1] = i;\n  for (int t = 0, iv = mod_inv<int>(baby, mod); t < mod; t +=\
-    \ size, mul(b, iv))\n    for (int m = (b & mask), i = os[m + 1]; i-- > os[m];)\n\
-    \      if (b == vs[i][0]) return cnt + vs[i][1] + t;\n  return -1;  // no solution\n\
-    }\n"
+    \ + 1), mask = size - 1,\n      vs[size][2];\n  std::vector<int> os(size + 1);\n\
+    \  for (int i = 0; i < size; i++, mul(baby, a)) os[baby & mask]++;\n  for (int\
+    \ i = 1; i < size; i++) os[i] += os[i - 1];\n  os[size] = size, baby = 1;\n  for\
+    \ (int i = 0, j = 0; i < size; i++, mul(baby, a))\n    j = --os[baby & mask],\
+    \ vs[j][0] = baby, vs[j][1] = i;\n  for (int t = 0, iv = mod_inv<int>(baby, mod);\
+    \ t < mod; t += size, mul(b, iv))\n    for (int m = (b & mask), i = os[m + 1];\
+    \ i-- > os[m];)\n      if (b == vs[i][0]) return cnt + vs[i][1] + t;\n  return\
+    \ -1;  // no solution\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/mod_inv.hpp\"\
     \n/**\n * @title \u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category\
     \ \u6570\u5B66\n * O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nint discrete_logarithm(int\
@@ -47,21 +47,21 @@ data:
     \ mod_inv<int>(a / g, mod))) {\n    if ((b == 1) || (mod == 1)) return cnt;\n\
     \    if ((g = std::gcd(a, mod)) == 1) break;\n    if (b % g != 0) return -1; \
     \ // no solution\n  }\n  int baby = 1, size = 1 << std::__lg(int(std::sqrt(mod))\
-    \ + 1), mask = size - 1,\n      os[size + 1], vs[size][2];\n  for (int i = 0;\
-    \ i < size; i++, mul(baby, a)) os[baby & mask]++;\n  for (int i = 1; i < size;\
-    \ i++) os[i] += os[i - 1];\n  os[size] = size, baby = 1;\n  for (int i = 0, j\
-    \ = 0; i < size; i++, mul(baby, a))\n    j = --os[baby & mask], vs[j][0] = baby,\
-    \ vs[j][1] = i;\n  for (int t = 0, iv = mod_inv<int>(baby, mod); t < mod; t +=\
-    \ size, mul(b, iv))\n    for (int m = (b & mask), i = os[m + 1]; i-- > os[m];)\n\
-    \      if (b == vs[i][0]) return cnt + vs[i][1] + t;\n  return -1;  // no solution\n\
-    }"
+    \ + 1), mask = size - 1,\n      vs[size][2];\n  std::vector<int> os(size + 1);\n\
+    \  for (int i = 0; i < size; i++, mul(baby, a)) os[baby & mask]++;\n  for (int\
+    \ i = 1; i < size; i++) os[i] += os[i - 1];\n  os[size] = size, baby = 1;\n  for\
+    \ (int i = 0, j = 0; i < size; i++, mul(baby, a))\n    j = --os[baby & mask],\
+    \ vs[j][0] = baby, vs[j][1] = i;\n  for (int t = 0, iv = mod_inv<int>(baby, mod);\
+    \ t < mod; t += size, mul(b, iv))\n    for (int m = (b & mask), i = os[m + 1];\
+    \ i-- > os[m];)\n      if (b == vs[i][0]) return cnt + vs[i][1] + t;\n  return\
+    \ -1;  // no solution\n}"
   dependsOn:
   - src/Math/mod_inv.hpp
   isVerificationFile: false
   path: src/Math/discrete_logarithm.hpp
   requiredBy: []
-  timestamp: '2022-11-28 16:04:05+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-11-28 16:39:14+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Math/discrete_logarithm.hpp
