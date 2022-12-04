@@ -29,10 +29,10 @@ data:
   - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -44,7 +44,7 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':x:'
@@ -61,10 +61,10 @@ data:
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
@@ -499,12 +499,12 @@ data:
     \ MOD32_2 = 0x78000001,\n                        MOD32_3 = 0x6c000001, MOD32_4\
     \ = 0x66000001,\n                        MOD32_5 = 0x42000001;\ntemplate <class\
     \ T, size_t LIM>\nconstexpr uint8_t nttarray_type =\n    nttarray_type_<T, LIM,\
-    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\n\ntemplate <class T, size_t LIM, bool\
+    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\ntemplate <class T, size_t LIM, bool\
     \ vec>\nusing NTTArrayB =\n    conditional_t<is_nttfriend<T, LIM>(),\n       \
-    \           NTTArrayB_<0, T::modulo(), 0, 0, 0, 0, LIM, vec>,\n              \
-    \    NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n          \
-    \                   MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t LIM,\
-    \ bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
+    \           NTTArrayB_<0, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n           \
+    \       NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n       \
+    \                      MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t\
+    \ LIM, bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
     \ LIM, vec>>;\n}  // namespace math_internal\nusing math_internal::is_nttfriend,\
     \ math_internal::nttarray_type,\n    math_internal::NumberTheoreticTransform,\
     \ math_internal::NTTArray;\ntemplate <class T, std::size_t LIM, int id = 0>\n\
@@ -691,12 +691,12 @@ data:
     \ MOD32_2 = 0x78000001,\n                        MOD32_3 = 0x6c000001, MOD32_4\
     \ = 0x66000001,\n                        MOD32_5 = 0x42000001;\ntemplate <class\
     \ T, size_t LIM>\nconstexpr uint8_t nttarray_type =\n    nttarray_type_<T, LIM,\
-    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\n\ntemplate <class T, size_t LIM, bool\
+    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\ntemplate <class T, size_t LIM, bool\
     \ vec>\nusing NTTArrayB =\n    conditional_t<is_nttfriend<T, LIM>(),\n       \
-    \           NTTArrayB_<0, T::modulo(), 0, 0, 0, 0, LIM, vec>,\n              \
-    \    NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n          \
-    \                   MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t LIM,\
-    \ bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
+    \           NTTArrayB_<0, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n           \
+    \       NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n       \
+    \                      MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t\
+    \ LIM, bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
     \ LIM, vec>>;\n}  // namespace math_internal\nusing math_internal::is_nttfriend,\
     \ math_internal::nttarray_type,\n    math_internal::NumberTheoreticTransform,\
     \ math_internal::NTTArray;\ntemplate <class T, std::size_t LIM, int id = 0>\n\
@@ -729,7 +729,7 @@ data:
   - src/FFT/bostan_mori.hpp
   - src/FFT/Polynomial.hpp
   - src/FFT/MultiVariateConvolution.hpp
-  timestamp: '2022-12-04 16:01:47+09:00'
+  timestamp: '2022-12-04 16:40:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/137.div_at.test.cpp

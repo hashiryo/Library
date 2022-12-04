@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
@@ -313,12 +313,12 @@ data:
     \ MOD32_2 = 0x78000001,\n                        MOD32_3 = 0x6c000001, MOD32_4\
     \ = 0x66000001,\n                        MOD32_5 = 0x42000001;\ntemplate <class\
     \ T, size_t LIM>\nconstexpr uint8_t nttarray_type =\n    nttarray_type_<T, LIM,\
-    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\n\ntemplate <class T, size_t LIM, bool\
+    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\ntemplate <class T, size_t LIM, bool\
     \ vec>\nusing NTTArrayB =\n    conditional_t<is_nttfriend<T, LIM>(),\n       \
-    \           NTTArrayB_<0, T::modulo(), 0, 0, 0, 0, LIM, vec>,\n              \
-    \    NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n          \
-    \                   MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t LIM,\
-    \ bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
+    \           NTTArrayB_<0, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n           \
+    \       NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n       \
+    \                      MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t\
+    \ LIM, bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
     \ LIM, vec>>;\n}  // namespace math_internal\nusing math_internal::is_nttfriend,\
     \ math_internal::nttarray_type,\n    math_internal::NumberTheoreticTransform,\
     \ math_internal::NTTArray;\ntemplate <class T, std::size_t LIM, int id = 0>\n\
@@ -328,31 +328,31 @@ data:
     \ std::size_t LIM, int id = 0>\nstruct GlobalArray {\n  static inline T bf[LIM];\n\
     };\nconstexpr unsigned get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1);\
     \ }\n#line 4 \"src/FFT/fps_inv.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
-    \u7D1A\u6570 inv\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <std::size_t\
-    \ _Nm, class mod_t>\nvoid inv_base(const mod_t p[], int n, mod_t r[], int i =\
-    \ 1) {\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
-    \ _Nm, 2>;\n  static constexpr int TH = 64 << (!is_nttfriend<mod_t, _Nm>() <<\
-    \ 1);\n  if (n <= i) return;\n  assert(((n & -n) == n)), assert(i && ((i & -i)\
-    \ == i));\n  const int m = std::min(n, TH);\n  const mod_t Z = 0, miv = -r[0];\n\
-    \  for (int j; i < m; r[i++] *= miv)\n    for (r[j = i] = Z; j--;) r[i] += r[j]\
-    \ * p[i - j];\n  for (int e = i << 1; i < n; e = i << 1) {\n    GNA1::bf.set(r,\
-    \ 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0, e);\n    GNA2::bf.set(p, 0, e),\
-    \ GNA2::bf.dft(0, e);\n    GNA2::bf.mul(GNA1::bf, 0, e), GNA2::bf.idft(0, e);\n\
-    \    if constexpr (!is_nttfriend<mod_t, _Nm>())\n      GNA2::bf.get(r, i, e),\
-    \ GNA2::bf.set(r, i, e);\n    GNA2::bf.zeros(0, i), GNA2::bf.dft(0, e), GNA1::bf.mul(GNA2::bf,\
-    \ 0, e);\n    for (GNA1::bf.idft(0, e), GNA1::bf.get(r, i, e); i < e; i++) r[i]\
-    \ = -r[i];\n  }\n}\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
-    \ inv(const std::vector<mod_t> &p) {\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n\
-    \  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  static constexpr std::size_t _Nm2\
-    \ = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2\
-    \ = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t,\
-    \ _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static\
-    \ constexpr int TH2 = is_nttfriend<mod_t, _Nm2>()\n                          \
-    \       ? 115\n                                 : (is_nttarraydouble<mod_t, _Nm2>\
-    \ ? 384 : 452);\n  static constexpr int C = nttarray_type<mod_t, _Nm> << 1, lnR\
-    \ = 4;\n  static constexpr int TH3 = 5 + ((nttarray_type<mod_t, _Nm> == 3) <<\
-    \ 1);\n  static constexpr int D = 10 * nttarray_type<mod_t, _Nm>;\n  const int\
-    \ n = p.size();\n  assert(n > 0), assert(p[0] != mod_t(0));\n  std::copy(p.begin(),\
+    \u7D1A\u6570 inv\n * @category FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal\
+    \ {\ntemplate <std::size_t _Nm, class mod_t>\nvoid inv_base(const mod_t p[], int\
+    \ n, mod_t r[], int i = 1) {\n  using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
+    \  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr int TH = 64\
+    \ << (!is_nttfriend<mod_t, _Nm>() << 1);\n  if (n <= i) return;\n  assert(((n\
+    \ & -n) == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n, TH);\n\
+    \  const mod_t Z = 0, miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n    for\
+    \ (r[j = i] = Z; j--;) r[i] += r[j] * p[i - j];\n  for (int e = i << 1; i < n;\
+    \ e = i << 1) {\n    GNA1::bf.set(r, 0, i), GNA1::bf.zeros(i, e), GNA1::bf.dft(0,\
+    \ e);\n    GNA2::bf.set(p, 0, e), GNA2::bf.dft(0, e);\n    GNA2::bf.mul(GNA1::bf,\
+    \ 0, e), GNA2::bf.idft(0, e);\n    if constexpr (!is_nttfriend<mod_t, _Nm>())\n\
+    \      GNA2::bf.get(r, i, e), GNA2::bf.set(r, i, e);\n    GNA2::bf.zeros(0, i),\
+    \ GNA2::bf.dft(0, e), GNA1::bf.mul(GNA2::bf, 0, e);\n    for (GNA1::bf.idft(0,\
+    \ e), GNA1::bf.get(r, i, e); i < e; i++) r[i] = -r[i];\n  }\n}\ntemplate <class\
+    \ mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> inv(const std::vector<mod_t>\
+    \ &p) {\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  static constexpr std::size_t _Nm2 = _Nm * 2 / 15;\n  using GNA1\
+    \ = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2,\
+    \ 2>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH2 =\n    \
+    \  is_nttfriend<mod_t, _Nm2>()\n          ? 115\n          : ((nttarray_type<mod_t,\
+    \ _Nm2>) == 2 ? 384 : 452);\n  static constexpr int C = nttarray_type<mod_t, _Nm>\
+    \ << 1, lnR = 4;\n  static constexpr int TH3 = 5 + ((nttarray_type<mod_t, _Nm>\
+    \ == 3) << 1);\n  static constexpr int D = 10 * nttarray_type<mod_t, _Nm>;\n \
+    \ const int n = p.size();\n  assert(n > 0), assert(p[0] != mod_t(0));\n  std::copy(p.begin(),\
     \ p.end(), GAp::bf);\n  mod_t *bfk = GAr::bf, *pbfk = GAp::bf;\n  const mod_t\
     \ Z = 0, miv = -(bfk[0] = mod_t(1) / pbfk[0]);\n  if (n < TH2) {\n    for (int\
     \ j, i = 1; i < n; bfk[i++] *= miv)\n      for (bfk[j = i] = Z; j--;) bfk[i] +=\
@@ -375,29 +375,29 @@ data:
     \ (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm] = -bfk[mm];\n  }\n  if (l < n)\n \
     \   for (int j; l < n; GAr::bf[l++] *= miv)\n      for (GAr::bf[j = l] = Z; j--;)\
     \ GAr::bf[l] += GAr::bf[j] * GAp::bf[l - j];\n  return std::vector<mod_t>(GAr::bf,\
-    \ GAr::bf + n);\n}\n#line 4 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\
-    \u8FBC\u307F\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
-    \ std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t>\
-    \ &p,\n                            const std::vector<mod_t> &q) {\n  using GNA1\
-    \ = GlobalNTTArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 0>;\n\
-    \  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t, _Nm,\
-    \ 2>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  static constexpr int TH\
-    \ = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n  const int n = p.size(), m = q.size(),\
-    \ r_len = n + m - 1;\n  if (!n || !m) return std::vector<mod_t>();\n  if (std::min(n,\
-    \ m) < TH) {\n    std::fill_n(GAr::bf, r_len, mod_t(0));\n    std::copy(p.begin(),\
-    \ p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(), GAq::bf);\n    for (int\
-    \ i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i + j] += GAp::bf[i] * GAq::bf[j];\n\
-    \  } else {\n    const int l = get_len(std::max(n, m)),\n              bl = __builtin_ctz(l)\
-    \ + 2 * nttarray_type<mod_t, _Nm> - 6;\n    const int len = r_len - l < bl * bl\
-    \ * TMP - TH ? l : get_len(r_len);\n    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
-    \ len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf,\
-    \ 0, len);\n    else\n      GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len),\n\
-    \          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n    GNA1::bf.idft(0,\
-    \ len), GNA1::bf.get(GAr::bf, 0, std::min(r_len, len));\n    if (len < r_len)\
-    \ {\n      std::copy(p.begin() + len - m + 1, p.end(), GAp::bf + len - m + 1);\n\
-    \      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf + len - n + 1);\n \
-    \     for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i], i++)\n \
-    \       for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
+    \ GAr::bf + n);\n}\n}  // namespace ntt_internal\nusing ntt_internal::inv;\n#line\
+    \ 4 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\n * @category\
+    \ FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 <<\
+    \ 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t> &p,\n            \
+    \                const std::vector<mod_t> &q) {\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 0>;\n  using GAp = GlobalArray<mod_t,\
+    \ _Nm, 1>;\n  using GAq = GlobalArray<mod_t, _Nm, 2>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \ _Nm, 2>;\n  static constexpr int TH = 74, TMP = 7 * nttarray_type<mod_t, _Nm>;\n\
+    \  const int n = p.size(), m = q.size(), r_len = n + m - 1;\n  if (!n || !m) return\
+    \ std::vector<mod_t>();\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf,\
+    \ r_len, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
+    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
+    \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    const int l = get_len(std::max(n,\
+    \ m)),\n              bl = __builtin_ctz(l) + 2 * nttarray_type<mod_t, _Nm> -\
+    \ 6;\n    const int len = r_len - l < bl * bl * TMP - TH ? l : get_len(r_len);\n\
+    \    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0, len);\n\
+    \    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf, 0, len);\n    else\n      GNA2::bf.set(q.data(),\
+    \ 0, m), GNA2::bf.zeros(m, len),\n          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
+    \ 0, len);\n    GNA1::bf.idft(0, len), GNA1::bf.get(GAr::bf, 0, std::min(r_len,\
+    \ len));\n    if (len < r_len) {\n      std::copy(p.begin() + len - m + 1, p.end(),\
+    \ GAp::bf + len - m + 1);\n      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf\
+    \ + len - n + 1);\n      for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i],\
+    \ i++)\n        for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
     \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
     \ GAr::bf + r_len);\n}\n#line 5 \"src/FFT/bostan_mori.hpp\"\n\n/**\n * @title\
     \ \u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805\n * @category\
@@ -492,7 +492,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2022-12-04 16:01:47+09:00'
+  timestamp: '2022-12-04 16:40:12+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp

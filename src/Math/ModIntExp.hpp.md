@@ -12,12 +12,12 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     links:
@@ -187,7 +187,7 @@ data:
   path: src/Math/ModIntExp.hpp
   requiredBy: []
   timestamp: '2022-12-04 16:01:47+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/ModIntExp.hpp

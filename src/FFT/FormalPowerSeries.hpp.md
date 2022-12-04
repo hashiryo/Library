@@ -329,12 +329,12 @@ data:
     \ MOD32_2 = 0x78000001,\n                        MOD32_3 = 0x6c000001, MOD32_4\
     \ = 0x66000001,\n                        MOD32_5 = 0x42000001;\ntemplate <class\
     \ T, size_t LIM>\nconstexpr uint8_t nttarray_type =\n    nttarray_type_<T, LIM,\
-    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\n\ntemplate <class T, size_t LIM, bool\
+    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\ntemplate <class T, size_t LIM, bool\
     \ vec>\nusing NTTArrayB =\n    conditional_t<is_nttfriend<T, LIM>(),\n       \
-    \           NTTArrayB_<0, T::modulo(), 0, 0, 0, 0, LIM, vec>,\n              \
-    \    NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n          \
-    \                   MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t LIM,\
-    \ bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
+    \           NTTArrayB_<0, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n           \
+    \       NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n       \
+    \                      MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t\
+    \ LIM, bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
     \ LIM, vec>>;\n}  // namespace math_internal\nusing math_internal::is_nttfriend,\
     \ math_internal::nttarray_type,\n    math_internal::NumberTheoreticTransform,\
     \ math_internal::NTTArray;\ntemplate <class T, std::size_t LIM, int id = 0>\n\
@@ -622,7 +622,7 @@ data:
   isVerificationFile: false
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
-  timestamp: '2022-12-04 16:01:47+09:00'
+  timestamp: '2022-12-04 16:40:12+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/963.FPS.test.cpp
