@@ -327,7 +327,7 @@ data:
     \ T, size_t LIM>\nconstexpr uint8_t nttarray_type =\n    nttarray_type_<T, LIM,\
     \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\ntemplate <class T, size_t LIM, bool\
     \ vec>\nusing NTTArrayB =\n    conditional_t<is_nttfriend<T, LIM>(),\n       \
-    \           NTTArrayB_<0, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n           \
+    \           NTTArrayB_<1, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n           \
     \       NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n       \
     \                      MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t\
     \ LIM, bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
@@ -559,7 +559,7 @@ data:
   isVerificationFile: false
   path: src/FFT/bostan_mori.hpp
   requiredBy: []
-  timestamp: '2022-12-04 16:40:12+09:00'
+  timestamp: '2022-12-04 16:55:27+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/137.div_at.test.cpp
