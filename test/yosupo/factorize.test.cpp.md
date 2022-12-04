@@ -12,9 +12,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -25,30 +25,29 @@ data:
     \ @title ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7\n * @category \u6570\
     \u5B66\n * \u30E2\u30F3\u30B4\u30E1\u30EA\u3068\u304B\n */\n\n// BEGIN CUT HERE\n\
     namespace math_internal {\nusing namespace std;\nusing u32 = uint32_t;\nusing\
-    \ u64 = uint64_t;\nusing u128 = __uint128_t;\nclass MIntPro_Montg {\n  u64 mod,\
-    \ iv, r2;\n  constexpr u64 inv(u64 n, int e = 6, u64 x = 1) {\n    return e ?\
-    \ inv(n, e - 1, x * (2 - x * n)) : x;\n  }\n  constexpr inline u64 reduce(const\
-    \ u128 &w) const {\n    return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod)\
-    \ >> 64);\n  }\n\n public:\n  constexpr MIntPro_Montg() : mod(0), iv(0), r2(0)\
-    \ {}\n  constexpr MIntPro_Montg(u64 m) : mod(m), iv(inv(m)), r2(-u128(mod) % mod)\
-    \ {}\n  constexpr inline u64 mul(u64 l, u64 r) const { return reduce(u128(l) *\
-    \ r); }\n#define BOP(op, a) return l op## = a, l += (mod << 1) & -(l >> 63)\n\
-    \  constexpr inline u64 plus(u64 l, u64 r) const { BOP(+, r - (mod << 1)); }\n\
-    \  constexpr inline u64 diff(u64 l, u64 r) const { BOP(-, r); }\n#undef BOP\n\
-    \  constexpr inline u64 set(u64 n) const { return mul(n, r2); }\n  constexpr inline\
-    \ u64 get(u64 n) const {\n    u64 ret = reduce(n) - mod;\n    return ret + (mod\
-    \ & -(ret >> 63));\n  }\n  constexpr inline u64 norm(u64 n) const { return n -\
-    \ (mod & -(n >= mod)); }\n  constexpr u64 modulo() const { return mod; }\n};\n\
-    template <class Uint>\nclass MIntPro_Na {\n  using DUint = conditional_t<is_same_v<Uint,\
-    \ u32>, u64, u128>;\n  Uint mod;\n\n public:\n  constexpr MIntPro_Na() : mod(0){};\n\
-    \  constexpr MIntPro_Na(Uint m) : mod(m) {}\n  constexpr inline Uint mul(Uint\
-    \ l, Uint r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l\
-    \ m## = mod & -((l p## = r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint\
-    \ r) const { BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const\
-    \ { BOP(+, -); }\n#undef BOP\n  constexpr inline Uint set(u64 n) const { return\
-    \ n % mod; }\n  static constexpr inline Uint get(Uint n) { return n; }\n  static\
-    \ constexpr inline Uint norm(Uint n) { return n; }\n  constexpr Uint modulo()\
-    \ const { return mod; }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr\
+    \ u64 = uint64_t;\nusing u128 = __uint128_t;\nstruct MIntPro_Montg {\n  const\
+    \ u64 mod;\n  constexpr MIntPro_Montg() : mod(0), iv(0), r2(0) {}\n  constexpr\
+    \ MIntPro_Montg(u64 m) : mod(m), iv(inv(m)), r2(-u128(mod) % mod) {}\n  constexpr\
+    \ inline u64 mul(u64 l, u64 r) const { return reduce(u128(l) * r); }\n#define\
+    \ BOP(op, a) return l op## = a, l += (mod << 1) & -(l >> 63)\n  constexpr inline\
+    \ u64 plus(u64 l, u64 r) const { BOP(+, r - (mod << 1)); }\n  constexpr inline\
+    \ u64 diff(u64 l, u64 r) const { BOP(-, r); }\n#undef BOP\n  constexpr inline\
+    \ u64 set(u64 n) const { return mul(n, r2); }\n  constexpr inline u64 get(u64\
+    \ n) const {\n    u64 ret = reduce(n) - mod;\n    return ret + (mod & -(ret >>\
+    \ 63));\n  }\n  constexpr inline u64 norm(u64 n) const { return n - (mod & -(n\
+    \ >= mod)); }\n\n private:\n  const u64 iv, r2;\n  constexpr u64 inv(u64 n, int\
+    \ e = 6, u64 x = 1) {\n    return e ? inv(n, e - 1, x * (2 - x * n)) : x;\n  }\n\
+    \  constexpr inline u64 reduce(const u128 &w) const {\n    return u64(w >> 64)\
+    \ + mod - ((u128(u64(w) * iv) * mod) >> 64);\n  }\n};\ntemplate <class Uint>\n\
+    class MIntPro_Na {\n  using DUint = conditional_t<is_same_v<Uint, u32>, u64, u128>;\n\
+    \n public:\n  const Uint mod;\n  constexpr MIntPro_Na() : mod(0){};\n  constexpr\
+    \ MIntPro_Na(Uint m) : mod(m) {}\n  constexpr inline Uint mul(Uint l, Uint r)\
+    \ const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m## = mod &\
+    \ -((l p## = r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const {\
+    \ BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -);\
+    \ }\n#undef BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n  static\
+    \ constexpr inline Uint get(Uint n) { return n; }\n  static constexpr inline Uint\
+    \ norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr\
     \ Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret = md.set(1);;\
     \ x = md.mul(x, x))\n    if (k & 1 ? ret = md.mul(ret, x) : 0; !(k >>= 1)) return\
     \ ret;\n}\n}  // namespace math_internal\n#line 4 \"src/Math/is_prime.hpp\"\n\
@@ -127,8 +126,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-11-28 17:14:54+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-12-04 16:01:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/factorize.test.cpp
 layout: document
