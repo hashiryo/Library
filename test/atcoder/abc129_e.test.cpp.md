@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -23,9 +23,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc129/tasks/abc129_e
@@ -168,8 +168,8 @@ data:
     \  using Uint = U;\n  static constexpr inline auto modulo() { return B::md.mod;\
     \ }\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(const ModInt &r) : x(r.x)\
     \ {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n\
-    \  constexpr ModInt(T v) : x(B::md.set(v.val())) {}\n  template <class T,\n  \
-    \          enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
+    \  constexpr ModInt(T v) : x(B::md.set(v.val() % B::md.mod)) {}\n  template <class\
+    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
     \  constexpr ModInt(T n)\n      : x(B::md.set((n %= B::md.mod) < 0 ? n + B::md.mod\
     \ : n)) {}\n  constexpr ModInt operator-() const { return ModInt() - *this; }\n\
     #define FUNC(name, op)          \\\n  constexpr ModInt name const { \\\n    ModInt\
@@ -231,8 +231,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc129_e.test.cpp
   requiredBy: []
-  timestamp: '2022-12-04 16:01:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-12-08 15:47:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc129_e.test.cpp
 layout: document

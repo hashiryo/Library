@@ -19,9 +19,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_g
@@ -78,8 +78,8 @@ data:
     \  using Uint = U;\n  static constexpr inline auto modulo() { return B::md.mod;\
     \ }\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(const ModInt &r) : x(r.x)\
     \ {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n\
-    \  constexpr ModInt(T v) : x(B::md.set(v.val())) {}\n  template <class T,\n  \
-    \          enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
+    \  constexpr ModInt(T v) : x(B::md.set(v.val() % B::md.mod)) {}\n  template <class\
+    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
     \  constexpr ModInt(T n)\n      : x(B::md.set((n %= B::md.mod) < 0 ? n + B::md.mod\
     \ : n)) {}\n  constexpr ModInt operator-() const { return ModInt() - *this; }\n\
     #define FUNC(name, op)          \\\n  constexpr ModInt name const { \\\n    ModInt\
@@ -387,8 +387,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2022-12-04 16:01:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-12-08 15:47:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp
 layout: document

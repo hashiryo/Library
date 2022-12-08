@@ -86,8 +86,8 @@ data:
     \  using Uint = U;\n  static constexpr inline auto modulo() { return B::md.mod;\
     \ }\n  constexpr ModInt() : x(0) {}\n  constexpr ModInt(const ModInt &r) : x(r.x)\
     \ {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n\
-    \  constexpr ModInt(T v) : x(B::md.set(v.val())) {}\n  template <class T,\n  \
-    \          enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
+    \  constexpr ModInt(T v) : x(B::md.set(v.val() % B::md.mod)) {}\n  template <class\
+    \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
     \  constexpr ModInt(T n)\n      : x(B::md.set((n %= B::md.mod) < 0 ? n + B::md.mod\
     \ : n)) {}\n  constexpr ModInt operator-() const { return ModInt() - *this; }\n\
     #define FUNC(name, op)          \\\n  constexpr ModInt name const { \\\n    ModInt\
@@ -256,39 +256,39 @@ data:
     \ iv54 = mint5(1) / mint4::modulo(), \\\n                         iv53 = iv54\
     \ / mint3::modulo(),     \\\n                         iv52 = iv53 / mint2::modulo(),\
     \     \\\n                         iv51 = iv52 / mint1::modulo();\ntemplate <u8\
-    \ type, u32 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM, bool vec>\nstruct\
-    \ NTTArrayB_ {\n  ARR(1)\n};\ntemplate <u32 M1, u32 M2, u32 M3, u32 M4, u32 M5,\
+    \ type, u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM, bool vec>\nstruct\
+    \ NTTArrayB_ {\n  ARR(1)\n};\ntemplate <u64 M1, u32 M2, u32 M3, u32 M4, u32 M5,\
     \ size_t LIM>\nstruct NTTArrayB_<2, M1, M2, M3, M4, M5, LIM, false> {\n  ARR(1)\
-    \ ARR(2) IV2\n};\ntemplate <u32 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\n\
+    \ ARR(2) IV2\n};\ntemplate <u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\n\
     struct NTTArrayB_<3, M1, M2, M3, M4, M5, LIM, false> {\n  ARR(1) ARR(2) ARR(3)\
-    \ IV2 IV3\n};\ntemplate <u32 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\n\
+    \ IV2 IV3\n};\ntemplate <u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\n\
     struct NTTArrayB_<4, M1, M2, M3, M4, M5, LIM, false> {\n  ARR(1) ARR(2) ARR(3)\
-    \ ARR(4) IV2 IV3 IV4\n};\ntemplate <u32 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t\
+    \ ARR(4) IV2 IV3 IV4\n};\ntemplate <u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t\
     \ LIM>\nstruct NTTArrayB_<5, M1, M2, M3, M4, M5, LIM, false> {\n  ARR(1) ARR(2)\
     \ ARR(3) ARR(4) ARR(5) IV2 IV3 IV4 IV5\n};\n#undef ARR\n#define VEC(num)     \
     \                                   \\\n  using mint##num = StaticModInt<M##num>;\
     \               \\\n  using ntt##num = NumberTheoreticTransform<mint##num>; \\\
     \n  vector<mint##num> buf##num;                           \\\n  mint##num *dat##num;\n\
-    template <u32 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\nstruct NTTArrayB_<1,\
+    template <u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\nstruct NTTArrayB_<1,\
     \ M1, M2, M3, M4, M5, LIM, true> {\n  NTTArrayB_() : dat1(buf1.data()) {}\n  void\
     \ resize(int n) { buf1.resize(n), dat1 = buf1.data(); }\n  size_t size() const\
-    \ { return buf1.size(); }\n  VEC(1)\n};\ntemplate <u32 M1, u32 M2, u32 M3, u32\
+    \ { return buf1.size(); }\n  VEC(1)\n};\ntemplate <u64 M1, u32 M2, u32 M3, u32\
     \ M4, u32 M5, size_t LIM>\nstruct NTTArrayB_<2, M1, M2, M3, M4, M5, LIM, true>\
     \ {\n  NTTArrayB_() : dat1(buf1.data()), dat2(buf2.data()) {}\n  void resize(int\
     \ n) {\n    buf1.resize(n), dat1 = buf1.data(), buf2.resize(n), dat2 = buf2.data();\n\
     \  }\n  size_t size() const { return buf1.size(); }\n  VEC(1) VEC(2) IV2\n};\n\
-    template <u32 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\nstruct NTTArrayB_<3,\
+    template <u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\nstruct NTTArrayB_<3,\
     \ M1, M2, M3, M4, M5, LIM, true> {\n  NTTArrayB_() : dat1(buf1.data()), dat2(buf2.data()),\
     \ dat3(buf3.data()) {}\n  void resize(int n) {\n    buf1.resize(n), dat1 = buf1.data(),\
     \ buf2.resize(n), dat2 = buf2.data();\n    buf3.resize(n), dat3 = buf3.data();\n\
     \  }\n  size_t size() const { return buf1.size(); }\n  VEC(1) VEC(2) VEC(3) IV2\
-    \ IV3\n};\ntemplate <u32 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\nstruct\
+    \ IV3\n};\ntemplate <u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, size_t LIM>\nstruct\
     \ NTTArrayB_<4, M1, M2, M3, M4, M5, LIM, true> {\n  NTTArrayB_()\n      : dat1(buf1.data()),\n\
     \        dat2(buf2.data()),\n        dat3(buf3.data()),\n        dat4(buf4.data())\
     \ {}\n  void resize(int n) {\n    buf1.resize(n), dat1 = buf1.data(), buf2.resize(n),\
     \ dat2 = buf2.data();\n    buf3.resize(n), dat3 = buf3.data(), buf4.resize(n),\
     \ dat4 = buf4.data();\n  }\n  size_t size() const { return buf1.size(); }\n  VEC(1)\
-    \ VEC(2) VEC(3) VEC(4) IV2 IV3 IV4\n};\ntemplate <u32 M1, u32 M2, u32 M3, u32\
+    \ VEC(2) VEC(3) VEC(4) IV2 IV3 IV4\n};\ntemplate <u64 M1, u32 M2, u32 M3, u32\
     \ M4, u32 M5, size_t LIM>\nstruct NTTArrayB_<5, M1, M2, M3, M4, M5, LIM, true>\
     \ {\n  NTTArrayB_()\n      : dat1(buf1.data()),\n        dat2(buf2.data()),\n\
     \        dat3(buf3.data()),\n        dat4(buf4.data()),\n        dat5(buf5.data())\
@@ -312,16 +312,18 @@ data:
     \    else\n      return 5;\n  }\n}\nconstexpr std::uint32_t MOD32_1 = 0x7e000001,\
     \ MOD32_2 = 0x78000001,\n                        MOD32_3 = 0x6c000001, MOD32_4\
     \ = 0x66000001,\n                        MOD32_5 = 0x42000001;\ntemplate <class\
-    \ T, size_t LIM>\nconstexpr uint8_t nttarray_type =\n    nttarray_type_<T, LIM,\
-    \ MOD32_1, MOD32_2, MOD32_3, MOD32_4>();\ntemplate <class T, size_t LIM, bool\
-    \ vec>\nusing NTTArrayB =\n    conditional_t<is_nttfriend<T, LIM>(),\n       \
-    \           NTTArrayB_<1, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n           \
-    \       NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n       \
-    \                      MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T, size_t\
-    \ LIM, bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>, NTTArrayB<T,\
-    \ LIM, vec>>;\n}  // namespace math_internal\nusing math_internal::is_nttfriend,\
-    \ math_internal::nttarray_type,\n    math_internal::NumberTheoreticTransform,\
-    \ math_internal::NTTArray;\ntemplate <class T, std::size_t LIM, int id = 0>\n\
+    \ T, size_t LIM>\nconstexpr u8 nttarray_type =\n    nttarray_type_<T, LIM, MOD32_1,\
+    \ MOD32_2, MOD32_3, MOD32_4>();\ntemplate <class T, size_t LIM>\nconstexpr u8\
+    \ nttarr_cat = is_nttfriend<T, LIM>() && (max_value<T>() > INT_MAX)\n        \
+    \                      ? 0\n                              : nttarray_type<T, LIM>;\n\
+    template <class T, size_t LIM, bool vec>\nusing NTTArrayB =\n    conditional_t<is_nttfriend<T,\
+    \ LIM>(),\n                  NTTArrayB_<1, max_value<T>(), 0, 0, 0, 0, LIM, vec>,\n\
+    \                  NTTArrayB_<nttarray_type<T, LIM>, MOD32_1, MOD32_2, MOD32_3,\n\
+    \                             MOD32_4, MOD32_5, LIM, vec>>;\ntemplate <class T,\
+    \ size_t LIM, bool vec>\nusing NTTArray = NTTArrayImpl<T, nttarray_type<T, LIM>,\
+    \ NTTArrayB<T, LIM, vec>>;\n}  // namespace math_internal\nusing math_internal::is_nttfriend,\
+    \ math_internal::nttarray_type,\n    math_internal::nttarr_cat, math_internal::NumberTheoreticTransform,\n\
+    \    math_internal::NTTArray;\ntemplate <class T, std::size_t LIM, int id = 0>\n\
     struct GlobalNTTArray {\n  static inline NTTArray<T, LIM, false> bf;\n};\ntemplate\
     \ <class T, std::size_t LIM, std::size_t LIM2, int id = 0>\nstruct GlobalNTTArray2D\
     \ {\n  static inline NTTArray<T, LIM, false> bf[LIM2];\n};\ntemplate <class T,\
@@ -482,7 +484,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/multipoint_evaluation.test.cpp
   requiredBy: []
-  timestamp: '2022-12-04 16:55:27+09:00'
+  timestamp: '2022-12-08 15:47:47+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/multipoint_evaluation.test.cpp

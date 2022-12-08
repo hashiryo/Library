@@ -11,11 +11,11 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -53,7 +53,7 @@ data:
     title: test/yukicoder/1939.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
     links: []
@@ -141,7 +141,7 @@ data:
   - src/Math/sparse_fps.hpp
   - src/FFT/fps_sqrt.hpp
   timestamp: '2022-12-04 16:01:47+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
