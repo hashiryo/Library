@@ -205,7 +205,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -231,7 +231,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/BinomialCoefficient.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':question:'
@@ -849,10 +849,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc018_c.test.cpp
       title: test/atcoder/agc018_c.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -864,7 +864,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.dujiao.test.cpp
       title: test/atcoder/arc116_c.dujiao.test.cpp
     - icon: ':heavy_check_mark:'
@@ -912,7 +912,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/binomial_coefficient.test.cpp
       title: test/yosupo/binomial_coefficient.test.cpp
     - icon: ':heavy_check_mark:'

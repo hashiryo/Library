@@ -491,10 +491,11 @@ data:
     \  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf, sz, mod_t(0));\n    std::copy(p.begin(),\
     \ p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(), GAq::bf);\n    for (int\
     \ i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i + j] += GAp::bf[i] * GAq::bf[j];\n\
-    \  } else {\n    using GNA1 = GlobalNTTArray<mod_t, LIM, 1>;\n    using GNA2 =\
-    \ GlobalNTTArray<mod_t, LIM, 2>;\n    const int rl = get_len(sz), l = get_len(std::max(n,\
-    \ m)), fl = f(l);\n    if (l + fl < sz && sz <= (rl >> 3) * 5) {\n      static\
-    \ constexpr std::size_t LIM2 = LIM / 15;\n      using GNA2D1 = GlobalNTTArray2D<mod_t,\
+    \  } else {\n    const int rl = get_len(sz), l = get_len(std::max(n, m)), fl =\
+    \ f(l);\n    static constexpr std::size_t LIM2 = LIM >> 4;\n    static constexpr\
+    \ bool b = nttarr_cat<mod_t, LIM2> < t;\n    if (b || (l + fl < sz && sz <= (rl\
+    \ >> 3) * 5)) {\n      using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n      using\
+    \ GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n      using GNA2D1 = GlobalNTTArray2D<mod_t,\
     \ LIM2, 16, 1>;\n      using GNA2D2 = GlobalNTTArray2D<mod_t, LIM2, 16, 2>;\n\
     \      const int l = rl >> 4, l2 = l << 1;\n      const int nn = (n + l - 1) /\
     \ l, mm = (m + l - 1) / l;\n      for (int i = 0, k = 0, s; k < n; i++, k += l)\
@@ -511,7 +512,8 @@ data:
     \ j++)\n          GNA1::bf.mul(GNA2D1::bf[i - j], GNA2D2::bf[j], 0, l2),\n   \
     \           GNA2::bf.add(GNA1::bf, 0, l2);\n        GNA2::bf.idft(0, l2);\n  \
     \      GNA2::bf.get(GAr::bf + k, 0, std::min(l, sz - k));\n      }\n    } else\
-    \ {\n      const int len = sz <= l + fl ? l : rl;\n      GNA1::bf.set(p.data(),\
+    \ {\n      using GNA1 = GlobalNTTArray<mod_t, LIM, 1>;\n      using GNA2 = GlobalNTTArray<mod_t,\
+    \ LIM, 2>;\n      const int len = sz <= l + fl ? l : rl;\n      GNA1::bf.set(p.data(),\
     \ 0, n), GNA1::bf.zeros(n, len);\n      if (GNA1::bf.dft(0, len); &p != &q) {\n\
     \        GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len);\n        GNA2::bf.dft(0,\
     \ len), GNA1::bf.mul(GNA2::bf, 0, len);\n      } else\n        GNA1::bf.mul(GNA1::bf,\
@@ -586,7 +588,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/partition.test.cpp
   requiredBy: []
-  timestamp: '2022-12-09 23:40:20+09:00'
+  timestamp: '2022-12-10 02:59:57+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/partition.test.cpp
