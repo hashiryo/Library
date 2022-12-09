@@ -325,37 +325,54 @@ data:
     \ }\n#line 4 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\
     \n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
     \ LIM = 1 << 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t> &p,\n \
-    \                           const std::vector<mod_t> &q) {\n  using GNA1 = GlobalNTTArray<mod_t,\
-    \ LIM, 1>;\n  using GAr = GlobalArray<mod_t, LIM, 0>;\n  using GAp = GlobalArray<mod_t,\
-    \ LIM, 1>;\n  using GAq = GlobalArray<mod_t, LIM, 2>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \                           const std::vector<mod_t> &q) {\n  using GAr = GlobalArray<mod_t,\
+    \ LIM, 0>;\n  using GAp = GlobalArray<mod_t, LIM, 1>;\n  using GAq = GlobalArray<mod_t,\
     \ LIM, 2>;\n  static constexpr int t = nttarr_cat<mod_t, LIM>;\n  static constexpr\
     \ int TH = (int[]){70, 30, 70, 100, 135, 150}[t];\n  auto f = [](int l) -> int\
     \ {\n    static constexpr double B[] = {\n        (double[]){8.288, 5.418, 7.070,\
     \ 9.676, 11.713, 13.374}[t],\n        (double[]){8.252, 6.578, 9.283, 12.810,\
     \ 13.853, 15.501}[t]};\n    return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
-    \ & 1]);\n  };\n  const int n = p.size(), m = q.size(), r_len = n + m - 1;\n \
-    \ if (!n || !m) return std::vector<mod_t>();\n  if (std::min(n, m) < TH) {\n \
-    \   std::fill_n(GAr::bf, r_len, mod_t(0));\n    std::copy(p.begin(), p.end(),\
-    \ GAp::bf);\n    std::copy(q.begin(), q.end(), GAq::bf);\n    for (int i = n;\
-    \ i--;)\n      for (int j = m; j--;) GAr::bf[i + j] += GAp::bf[i] * GAq::bf[j];\n\
-    \  } else {\n    const int l = get_len(std::max(n, m));\n    const int len = r_len\
-    \ - l <= f(l) ? l : get_len(r_len);\n    GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
-    \ len), GNA1::bf.dft(0, len);\n    if (&p == &q)\n      GNA1::bf.mul(GNA1::bf,\
-    \ 0, len);\n    else\n      GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len),\n\
-    \          GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n    GNA1::bf.idft(0,\
-    \ len), GNA1::bf.get(GAr::bf, 0, std::min(r_len, len));\n    if (len < r_len)\
-    \ {\n      std::copy(p.begin() + len - m + 1, p.end(), GAp::bf + len - m + 1);\n\
-    \      std::copy(q.begin() + len - n + 1, q.end(), GAq::bf + len - n + 1);\n \
-    \     for (int i = len, j; i < r_len; GAr::bf[i - len] -= GAr::bf[i], i++)\n \
-    \       for (GAr::bf[i] = 0, j = i - m + 1; j < n; j++)\n          GAr::bf[i]\
-    \ += GAp::bf[j] * GAq::bf[i - j];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf,\
-    \ GAr::bf + r_len);\n}\n#line 4 \"test/yosupo/convolution_mod_2_64.test.cpp\"\n\
-    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, M;\n  cin >> N >> M;\n  vector<std::uint64_t> a(N), b(M);\n  for (int\
-    \ i = 0; i < N; i++) cin >> a[i];\n  for (int j = 0; j < M; j++) cin >> b[j];\n\
-    \  auto c = convolve(a, b);\n  c.resize(N + M - 1);\n  for (int k = 0; k < N +\
-    \ M - 1; k++) {\n    cout << c[k] << \" \\n\"[k == N + M - 2];\n  }\n  return\
-    \ 0;\n}\n"
+    \ & 1]);\n  };\n  const int n = p.size(), m = q.size(), sz = n + m - 1;\n  if\
+    \ (!n || !m) return std::vector<mod_t>();\n  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf,\
+    \ sz, mod_t(0));\n    std::copy(p.begin(), p.end(), GAp::bf);\n    std::copy(q.begin(),\
+    \ q.end(), GAq::bf);\n    for (int i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i\
+    \ + j] += GAp::bf[i] * GAq::bf[j];\n  } else {\n    using GNA1 = GlobalNTTArray<mod_t,\
+    \ LIM, 1>;\n    using GNA2 = GlobalNTTArray<mod_t, LIM, 2>;\n    const int rl\
+    \ = get_len(sz), l = get_len(std::max(n, m)), fl = f(l);\n    if (l + fl < sz\
+    \ && sz <= (rl >> 3) * 5) {\n      static constexpr std::size_t LIM2 = LIM / 15;\n\
+    \      using GNA2D1 = GlobalNTTArray2D<mod_t, LIM2, 16, 1>;\n      using GNA2D2\
+    \ = GlobalNTTArray2D<mod_t, LIM2, 16, 2>;\n      const int l = rl >> 4, l2 = l\
+    \ << 1;\n      const int nn = (n + l - 1) / l, mm = (m + l - 1) / l;\n      for\
+    \ (int i = 0, k = 0, s; k < n; i++, k += l) {\n        GNA2D1::bf[i].set(p.data()\
+    \ + k, 0, s = std::min(l, n - k));\n        GNA2D1::bf[i].zeros(s, l2), GNA2D1::bf[i].dft(0,\
+    \ l2);\n      }\n      if (&p != &q)\n        for (int i = 0, k = 0, s; k < m;\
+    \ i++, k += l) {\n          GNA2D2::bf[i].set(q.data() + k, 0, s = std::min(l,\
+    \ m - k));\n          GNA2D2::bf[i].zeros(s, l2), GNA2D2::bf[i].dft(0, l2);\n\
+    \        }\n      else\n        for (int i = 0; i < nn; i++) GNA2D2::bf[i].subst(GNA2D1::bf[i],\
+    \ 0, l2);\n      GNA2D2::bf[mm].zeros(0, l2);\n      for (int i = mm; i--;)\n\
+    \        GNA2D2::bf[i + 1].add(GNA2D2::bf[i], 0, l),\n            GNA2D2::bf[i\
+    \ + 1].dif(GNA2D2::bf[i], l, l2);\n      for (int i = 0, k = 0, j, ed; k < sz;\
+    \ i++, k += l) {\n        GNA2::bf.zeros(0, l2);\n        for (j = std::max(0,\
+    \ i - nn + 1), ed = std::min(mm, i); j <= ed; j++)\n          GNA1::bf.mul(GNA2D1::bf[i\
+    \ - j], GNA2D2::bf[j], 0, l2),\n              GNA2::bf.add(GNA1::bf, 0, l2);\n\
+    \        GNA2::bf.idft(0, l2);\n        GNA2::bf.get(GAr::bf + k, 0, std::min(l,\
+    \ sz - k));\n      }\n    } else {\n      const int len = sz <= l + fl ? l : rl;\n\
+    \      GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n, len);\n      if (GNA1::bf.dft(0,\
+    \ len); &p != &q) {\n        GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len);\n\
+    \        GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n      } else\n\
+    \        GNA1::bf.mul(GNA1::bf, 0, len);\n      GNA1::bf.idft(0, len), GNA1::bf.get(GAr::bf,\
+    \ 0, std::min(sz, len));\n      if (len < sz) {\n        std::copy(p.begin() +\
+    \ len - m + 1, p.end(), GAp::bf + len - m + 1);\n        std::copy(q.begin() +\
+    \ len - n + 1, q.end(), GAq::bf + len - n + 1);\n        for (int i = len, j;\
+    \ i < sz; GAr::bf[i - len] -= GAr::bf[i], i++)\n          for (GAr::bf[i] = 0,\
+    \ j = i - m + 1; j < n; j++)\n            GAr::bf[i] += GAp::bf[j] * GAq::bf[i\
+    \ - j];\n      }\n    }\n  }\n  return std::vector<mod_t>(GAr::bf, GAr::bf + sz);\n\
+    }\n#line 4 \"test/yosupo/convolution_mod_2_64.test.cpp\"\nusing namespace std;\n\
+    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin\
+    \ >> N >> M;\n  vector<std::uint64_t> a(N), b(M);\n  for (int i = 0; i < N; i++)\
+    \ cin >> a[i];\n  for (int j = 0; j < M; j++) cin >> b[j];\n  auto c = convolve(a,\
+    \ b);\n  c.resize(N + M - 1);\n  for (int k = 0; k < N + M - 1; k++) {\n    cout\
+    \ << c[k] << \" \\n\"[k == N + M - 2];\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_2_64\"\n\
     #include <bits/stdc++.h>\n#include \"src/FFT/convolve.hpp\"\nusing namespace std;\n\
     \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin\
@@ -373,7 +390,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/convolution_mod_2_64.test.cpp
   requiredBy: []
-  timestamp: '2022-12-08 15:47:47+09:00'
+  timestamp: '2022-12-09 23:40:20+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/convolution_mod_2_64.test.cpp
