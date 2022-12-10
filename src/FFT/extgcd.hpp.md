@@ -104,32 +104,32 @@ data:
     \ {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n\
     \  constexpr ModInt(T v) : x(B::md.set(v.val() % B::md.mod)) {}\n  template <class\
     \ T,\n            enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\n\
-    \  constexpr ModInt(T n)\n      : x(B::md.set((n %= B::md.mod) < 0 ? n + B::md.mod\
-    \ : n)) {}\n  constexpr ModInt operator-() const { return ModInt() - *this; }\n\
-    #define FUNC(name, op)          \\\n  constexpr ModInt name const { \\\n    ModInt\
-    \ ret;                 \\\n    return ret.x = op, ret;     \\\n  }\n  FUNC(operator+(const\
-    \ ModInt &r), B::md.plus(x, r.x))\n  FUNC(operator-(const ModInt &r), B::md.diff(x,\
-    \ r.x))\n  FUNC(operator*(const ModInt &r), B::md.mul(x, r.x))\n  FUNC(pow(u64\
-    \ k), math_internal::pow(x, k, B::md))\n#undef FUNC\n  constexpr ModInt operator/(const\
-    \ ModInt &r) const { return *this * r.inv(); }\n  constexpr ModInt &operator+=(const\
-    \ ModInt &r) { return *this = *this + r; }\n  constexpr ModInt &operator-=(const\
-    \ ModInt &r) { return *this = *this - r; }\n  constexpr ModInt &operator*=(const\
-    \ ModInt &r) { return *this = *this * r; }\n  constexpr ModInt &operator/=(const\
-    \ ModInt &r) { return *this = *this / r; }\n  constexpr bool operator==(const\
-    \ ModInt &r) const {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr\
-    \ bool operator!=(const ModInt &r) const { return !(*this == r); }\n  constexpr\
-    \ bool operator<(const ModInt &r) const {\n    return B::md.norm(x) < B::md.norm(r.x);\n\
-    \  }\n  constexpr inline ModInt inv() const { return mod_inv<Int>(val(), B::md.mod);\
-    \ }\n  constexpr inline Uint val() const { return B::md.get(x); }\n  friend ostream\
-    \ &operator<<(ostream &os, const ModInt &r) {\n    return os << r.val();\n  }\n\
-    \  friend istream &operator>>(istream &is, ModInt &r) {\n    long long v;\n  \
-    \  return is >> v, r = ModInt(v), is;\n  }\n\n private:\n  Uint x;\n};\ntemplate\
-    \ <u64 MOD>\nusing StaticModInt =\n    conditional_t <\n    MOD<INT_MAX, ModInt<int,\
-    \ u32, StaticB<MIntPro_Na<u32>, MOD>>,\n        conditional_t<MOD &(MOD < LLONG_MAX),\n\
-    \                      ModInt<long long, u64, StaticB<MIntPro_Montg, MOD>>,\n\
-    \                      ModInt<long long, u64, StaticB<MIntPro_Na<u64>, MOD>>>>;\n\
-    class Montgomery {};\ntemplate <class Int, int id = -1>\nusing RuntimeModInt =\
-    \ conditional_t<\n    is_same_v<Int, Montgomery>,\n    ModInt<long long, u64,\
+    \  constexpr ModInt(T n)\n      : x(B::md.set((n < 0 ? B::md.mod - (-n) % B::md.mod\
+    \ : n % B::md.mod))) {}\n  constexpr ModInt operator-() const { return ModInt()\
+    \ - *this; }\n#define FUNC(name, op)          \\\n  constexpr ModInt name const\
+    \ { \\\n    ModInt ret;                 \\\n    return ret.x = op, ret;     \\\
+    \n  }\n  FUNC(operator+(const ModInt &r), B::md.plus(x, r.x))\n  FUNC(operator-(const\
+    \ ModInt &r), B::md.diff(x, r.x))\n  FUNC(operator*(const ModInt &r), B::md.mul(x,\
+    \ r.x))\n  FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n#undef FUNC\n  constexpr\
+    \ ModInt operator/(const ModInt &r) const { return *this * r.inv(); }\n  constexpr\
+    \ ModInt &operator+=(const ModInt &r) { return *this = *this + r; }\n  constexpr\
+    \ ModInt &operator-=(const ModInt &r) { return *this = *this - r; }\n  constexpr\
+    \ ModInt &operator*=(const ModInt &r) { return *this = *this * r; }\n  constexpr\
+    \ ModInt &operator/=(const ModInt &r) { return *this = *this / r; }\n  constexpr\
+    \ bool operator==(const ModInt &r) const {\n    return B::md.norm(x) == B::md.norm(r.x);\n\
+    \  }\n  constexpr bool operator!=(const ModInt &r) const { return !(*this == r);\
+    \ }\n  constexpr bool operator<(const ModInt &r) const {\n    return B::md.norm(x)\
+    \ < B::md.norm(r.x);\n  }\n  constexpr inline ModInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n  constexpr inline Uint val() const { return B::md.get(x); }\n\
+    \  friend ostream &operator<<(ostream &os, const ModInt &r) {\n    return os <<\
+    \ r.val();\n  }\n  friend istream &operator>>(istream &is, ModInt &r) {\n    long\
+    \ long v;\n    return is >> v, r = ModInt(v), is;\n  }\n\n private:\n  Uint x;\n\
+    };\ntemplate <u64 MOD>\nusing StaticModInt =\n    conditional_t <\n    MOD<INT_MAX,\
+    \ ModInt<int, u32, StaticB<MIntPro_Na<u32>, MOD>>,\n        conditional_t<MOD\
+    \ &(MOD < LLONG_MAX),\n                      ModInt<long long, u64, StaticB<MIntPro_Montg,\
+    \ MOD>>,\n                      ModInt<long long, u64, StaticB<MIntPro_Na<u64>,\
+    \ MOD>>>>;\nclass Montgomery {};\ntemplate <class Int, int id = -1>\nusing RuntimeModInt\
+    \ = conditional_t<\n    is_same_v<Int, Montgomery>,\n    ModInt<long long, u64,\
     \ RuntimeB<MIntPro_Montg, id>>,\n    conditional_t<disjunction_v<is_same<Int,\
     \ long long>, is_same<Int, u64>>,\n                  ModInt<long long, u64, RuntimeB<MIntPro_Na<u64>,\
     \ id>>,\n                  ModInt<int, u32, RuntimeB<MIntPro_Na<u32>, id>>>>;\n\
@@ -680,7 +680,7 @@ data:
   isVerificationFile: false
   path: src/FFT/extgcd.hpp
   requiredBy: []
-  timestamp: '2022-12-10 02:59:57+09:00'
+  timestamp: '2022-12-10 17:29:53+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp
