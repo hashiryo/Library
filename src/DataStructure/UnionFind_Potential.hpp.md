@@ -6,9 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2207.test.cpp
     title: test/aoj/2207.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/atcoder/abc280_f.test.cpp
+    title: test/atcoder/abc280_f.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
     links: []
@@ -48,8 +51,9 @@ data:
   path: src/DataStructure/UnionFind_Potential.hpp
   requiredBy: []
   timestamp: '2020-10-24 12:39:10+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc280_f.test.cpp
   - test/aoj/2207.test.cpp
 documentation_of: src/DataStructure/UnionFind_Potential.hpp
 layout: document
