@@ -476,19 +476,19 @@ data:
     \ Z);\n    for (int i = sz; i--;) GA::bf[i + ofs] *= pk;\n  } else\n    std::fill_n(GA::bf\
     \ + 1, n - 1, Z);\n  return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n}  //\
     \ namespace ntt_internal\nusing ntt_internal::deriv, ntt_internal::integ, ntt_internal::log,\n\
-    \    ntt_internal::exp, ntt_internal::pow;\n#line 4 \"src/FFT/convolve.hpp\"\n\
-    \n/**\n * @title \u7573\u307F\u8FBC\u307F\n * @category FFT\n */\n\n// BEGIN CUT\
-    \ HERE\ntemplate <class mod_t, std::size_t LIM = 1 << 22>\nstd::vector<mod_t>\
-    \ convolve(const std::vector<mod_t> &p,\n                            const std::vector<mod_t>\
-    \ &q) {\n  using GAr = GlobalArray<mod_t, LIM, 0>;\n  using GAp = GlobalArray<mod_t,\
-    \ LIM, 1>;\n  using GAq = GlobalArray<mod_t, LIM, 2>;\n  static constexpr int\
-    \ t = nttarr_cat<mod_t, LIM>;\n  static constexpr int TH = (int[]){70, 30, 70,\
-    \ 100, 135, 150}[t];\n  auto f = [](int l) -> int {\n    static constexpr double\
-    \ B[] = {\n        (double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t],\n\
-    \        (double[]){8.252, 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n    return\
-    \ std::round(std::pow(l, 0.535) * B[__builtin_ctz(l) & 1]);\n  };\n  const int\
-    \ n = p.size(), m = q.size(), sz = n + m - 1;\n  if (!n || !m) return std::vector<mod_t>();\n\
-    \  if (std::min(n, m) < TH) {\n    std::fill_n(GAr::bf, sz, mod_t(0));\n    std::copy(p.begin(),\
+    \    ntt_internal::exp, ntt_internal::pow;\n#line 3 \"src/FFT/convolve.hpp\"\n\
+    \n#line 5 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\n\
+    \ * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
+    \ LIM = 1 << 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t> &p,\n \
+    \                           const std::vector<mod_t> &q) {\n  using GAr = GlobalArray<mod_t,\
+    \ LIM, 0>;\n  using GAp = GlobalArray<mod_t, LIM, 1>;\n  using GAq = GlobalArray<mod_t,\
+    \ LIM, 2>;\n  static constexpr int t = nttarr_cat<mod_t, LIM>;\n  auto f = [](int\
+    \ l) -> int {\n    static constexpr double B[] = {\n        (double[]){8.288,\
+    \ 5.418, 7.070, 9.676, 11.713, 13.374}[t],\n        (double[]){8.252, 6.578, 9.283,\
+    \ 12.810, 13.853, 15.501}[t]};\n    return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
+    \ & 1]);\n  };\n  const int n = p.size(), m = q.size(), sz = n + m - 1;\n  if\
+    \ (!n || !m) return std::vector<mod_t>();\n  if (std::min(n, m) < (int[]){70,\
+    \ 30, 70, 100, 135, 150}[t]) {\n    std::fill_n(GAr::bf, sz, mod_t(0));\n    std::copy(p.begin(),\
     \ p.end(), GAp::bf);\n    std::copy(q.begin(), q.end(), GAq::bf);\n    for (int\
     \ i = n; i--;)\n      for (int j = m; j--;) GAr::bf[i + j] += GAp::bf[i] * GAq::bf[j];\n\
     \  } else {\n    const int rl = get_len(sz), l = get_len(std::max(n, m)), fl =\
@@ -588,7 +588,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bernoulli.test.cpp
   requiredBy: []
-  timestamp: '2022-12-10 17:29:53+09:00'
+  timestamp: '2022-12-15 00:15:37+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bernoulli.test.cpp
