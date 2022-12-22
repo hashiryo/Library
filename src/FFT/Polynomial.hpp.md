@@ -30,13 +30,13 @@ data:
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'
@@ -50,7 +50,7 @@ data:
     title: test/yukicoder/215.Poly.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u591A\u9805\u5F0F"
     links: []
@@ -510,22 +510,18 @@ data:
     \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
     \ _Nm, 0>;\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t,\
     \ _Nm, 2>;\n  using GA3 = GlobalArray<mod_t, _Nm, 3>;\n  static inline const mod_t\
-    \ Z = 0;\n  static constexpr int A = is_nttfriend<mod_t, _Nm>()      ? 8\n   \
-    \                        : is_nttarraydouble<mod_t, _Nm> ? 17\n              \
-    \                                             : 20;\n  static constexpr int B\
-    \ = is_nttfriend<mod_t, _Nm>()      ? 42\n                           : is_nttarraydouble<mod_t,\
-    \ _Nm> ? 110\n                                                           : 138;\n\
-    \  std::pair<Poly, Poly> quorem_na(const Poly &q) const {\n    int n = deg(),\
-    \ m = q.deg(), qsz = n - m + 1, i = qsz, j;\n    std::copy_n(this->begin(), n\
-    \ + 1, GAp::bf);\n    std::copy_n(q.begin(), m + 1, GAq::bf);\n    for (mod_t\
-    \ *bf = GAp::bf + n - m, iv = mod_t(1) / GAq::bf[m]; i--; bf--)\n      for (GA::bf[i]\
-    \ = bf[j = m] * iv; j--;) bf[j] -= GAq::bf[j] * GA::bf[i];\n    Poly rem(GAp::bf,\
-    \ GAp::bf + m);\n    return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n  }\n\
-    \  Poly quo(const Poly &q) const {\n    const int n = deg() + 1, m = q.deg() +\
-    \ 1, qsz = n - m + 1,\n              nb = this->size() - n, mb = q.size() - m;\n\
-    \    auto ret = div<mod_t, _Nm>(\n        Poly(this->rbegin() + nb, this->rbegin()\
-    \ + nb + qsz),\n        Poly(q.rbegin() + mb, q.rbegin() + mb + std::min(qsz,\
-    \ m)));\n    return std::reverse(ret.begin(), ret.end()), ret;\n  }\n  std::pair<Poly,\
+    \ Z = 0;\n  static constexpr int A = 8;\n  static constexpr int B = 42;\n  std::pair<Poly,\
+    \ Poly> quorem_na(const Poly &q) const {\n    int n = deg(), m = q.deg(), qsz\
+    \ = n - m + 1, i = qsz, j;\n    std::copy_n(this->begin(), n + 1, GAp::bf);\n\
+    \    std::copy_n(q.begin(), m + 1, GAq::bf);\n    for (mod_t *bf = GAp::bf + n\
+    \ - m, iv = mod_t(1) / GAq::bf[m]; i--; bf--)\n      for (GA::bf[i] = bf[j = m]\
+    \ * iv; j--;) bf[j] -= GAq::bf[j] * GA::bf[i];\n    Poly rem(GAp::bf, GAp::bf\
+    \ + m);\n    return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n  }\n  Poly quo(const\
+    \ Poly &q) const {\n    const int n = deg() + 1, m = q.deg() + 1, qsz = n - m\
+    \ + 1,\n              nb = this->size() - n, mb = q.size() - m;\n    auto ret\
+    \ = div<mod_t, _Nm>(\n        Poly(this->rbegin() + nb, this->rbegin() + nb +\
+    \ qsz),\n        Poly(q.rbegin() + mb, q.rbegin() + mb + std::min(qsz, m)));\n\
+    \    return std::reverse(ret.begin(), ret.end()), ret;\n  }\n  std::pair<Poly,\
     \ Poly> quorem_ntt(const Poly &q) const {\n    const int n = deg(), m = q.deg(),\
     \ qsz = n - m + 1;\n    auto qu = quo(q);\n    std::copy(qu.begin(), qu.end(),\
     \ GA::bf);\n    std::copy_n(this->begin(), n + 1, GAp::bf);\n    std::copy_n(q.begin(),\
@@ -624,22 +620,18 @@ data:
     \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
     \ _Nm, 0>;\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  using GAq = GlobalArray<mod_t,\
     \ _Nm, 2>;\n  using GA3 = GlobalArray<mod_t, _Nm, 3>;\n  static inline const mod_t\
-    \ Z = 0;\n  static constexpr int A = is_nttfriend<mod_t, _Nm>()      ? 8\n   \
-    \                        : is_nttarraydouble<mod_t, _Nm> ? 17\n              \
-    \                                             : 20;\n  static constexpr int B\
-    \ = is_nttfriend<mod_t, _Nm>()      ? 42\n                           : is_nttarraydouble<mod_t,\
-    \ _Nm> ? 110\n                                                           : 138;\n\
-    \  std::pair<Poly, Poly> quorem_na(const Poly &q) const {\n    int n = deg(),\
-    \ m = q.deg(), qsz = n - m + 1, i = qsz, j;\n    std::copy_n(this->begin(), n\
-    \ + 1, GAp::bf);\n    std::copy_n(q.begin(), m + 1, GAq::bf);\n    for (mod_t\
-    \ *bf = GAp::bf + n - m, iv = mod_t(1) / GAq::bf[m]; i--; bf--)\n      for (GA::bf[i]\
-    \ = bf[j = m] * iv; j--;) bf[j] -= GAq::bf[j] * GA::bf[i];\n    Poly rem(GAp::bf,\
-    \ GAp::bf + m);\n    return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n  }\n\
-    \  Poly quo(const Poly &q) const {\n    const int n = deg() + 1, m = q.deg() +\
-    \ 1, qsz = n - m + 1,\n              nb = this->size() - n, mb = q.size() - m;\n\
-    \    auto ret = div<mod_t, _Nm>(\n        Poly(this->rbegin() + nb, this->rbegin()\
-    \ + nb + qsz),\n        Poly(q.rbegin() + mb, q.rbegin() + mb + std::min(qsz,\
-    \ m)));\n    return std::reverse(ret.begin(), ret.end()), ret;\n  }\n  std::pair<Poly,\
+    \ Z = 0;\n  static constexpr int A = 8;\n  static constexpr int B = 42;\n  std::pair<Poly,\
+    \ Poly> quorem_na(const Poly &q) const {\n    int n = deg(), m = q.deg(), qsz\
+    \ = n - m + 1, i = qsz, j;\n    std::copy_n(this->begin(), n + 1, GAp::bf);\n\
+    \    std::copy_n(q.begin(), m + 1, GAq::bf);\n    for (mod_t *bf = GAp::bf + n\
+    \ - m, iv = mod_t(1) / GAq::bf[m]; i--; bf--)\n      for (GA::bf[i] = bf[j = m]\
+    \ * iv; j--;) bf[j] -= GAq::bf[j] * GA::bf[i];\n    Poly rem(GAp::bf, GAp::bf\
+    \ + m);\n    return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n  }\n  Poly quo(const\
+    \ Poly &q) const {\n    const int n = deg() + 1, m = q.deg() + 1, qsz = n - m\
+    \ + 1,\n              nb = this->size() - n, mb = q.size() - m;\n    auto ret\
+    \ = div<mod_t, _Nm>(\n        Poly(this->rbegin() + nb, this->rbegin() + nb +\
+    \ qsz),\n        Poly(q.rbegin() + mb, q.rbegin() + mb + std::min(qsz, m)));\n\
+    \    return std::reverse(ret.begin(), ret.end()), ret;\n  }\n  std::pair<Poly,\
     \ Poly> quorem_ntt(const Poly &q) const {\n    const int n = deg(), m = q.deg(),\
     \ qsz = n - m + 1;\n    auto qu = quo(q);\n    std::copy(qu.begin(), qu.end(),\
     \ GA::bf);\n    std::copy_n(this->begin(), n + 1, GAp::bf);\n    std::copy_n(q.begin(),\
@@ -736,8 +728,8 @@ data:
   path: src/FFT/Polynomial.hpp
   requiredBy:
   - src/FFT/extgcd.hpp
-  timestamp: '2022-12-23 00:19:14+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-12-23 01:00:23+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/215.Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
