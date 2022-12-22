@@ -53,8 +53,8 @@ data:
   timestamp: '2020-10-24 12:39:10+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc280_f.test.cpp
   - test/aoj/2207.test.cpp
+  - test/atcoder/abc280_f.test.cpp
 documentation_of: src/DataStructure/UnionFind_Potential.hpp
 layout: document
 redirect_from:

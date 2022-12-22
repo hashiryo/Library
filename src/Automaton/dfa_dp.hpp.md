@@ -131,21 +131,21 @@ data:
   isVerificationFile: false
   path: src/Automaton/dfa_dp.hpp
   requiredBy:
-  - src/Automaton/dfa_operations.hpp
-  - src/Automaton/DFA_Compress.hpp
   - src/Automaton/NFA_to_DFA.hpp
+  - src/Automaton/DFA_Compress.hpp
+  - src/Automaton/dfa_operations.hpp
   timestamp: '2022-11-27 14:04:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/agc015_d.test.cpp
-  - test/atcoder/abc154_e.test.cpp
-  - test/atcoder/abc235_f.test.cpp
-  - test/atcoder/abc129_e.test.cpp
-  - test/atcoder/arc127_a.test.cpp
-  - test/atcoder/abc117_d.test.cpp
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc208_e.test.cpp
   - test/aoj/2587.test.cpp
+  - test/atcoder/abc117_d.test.cpp
+  - test/atcoder/abc208_e.test.cpp
+  - test/atcoder/agc015_d.test.cpp
+  - test/atcoder/abc138_f.test.cpp
+  - test/atcoder/abc129_e.test.cpp
+  - test/atcoder/abc154_e.test.cpp
+  - test/atcoder/arc127_a.test.cpp
+  - test/atcoder/abc235_f.test.cpp
 documentation_of: src/Automaton/dfa_dp.hpp
 layout: document
 redirect_from:

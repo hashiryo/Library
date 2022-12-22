@@ -139,12 +139,12 @@ data:
   timestamp: '2022-11-27 14:04:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc154_e.test.cpp
-  - test/atcoder/abc235_f.test.cpp
-  - test/atcoder/abc129_e.test.cpp
-  - test/atcoder/arc127_a.test.cpp
-  - test/atcoder/abc138_f.test.cpp
   - test/atcoder/abc208_e.test.cpp
+  - test/atcoder/abc138_f.test.cpp
+  - test/atcoder/abc129_e.test.cpp
+  - test/atcoder/abc154_e.test.cpp
+  - test/atcoder/arc127_a.test.cpp
+  - test/atcoder/abc235_f.test.cpp
 documentation_of: src/Automaton/dfa_operations.hpp
 layout: document
 redirect_from:

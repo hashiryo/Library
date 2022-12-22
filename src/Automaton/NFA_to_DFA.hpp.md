@@ -129,8 +129,8 @@ data:
   timestamp: '2022-11-27 14:04:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/agc015_d.test.cpp
   - test/aoj/2587.test.cpp
+  - test/atcoder/agc015_d.test.cpp
 documentation_of: src/Automaton/NFA_to_DFA.hpp
 layout: document
 redirect_from:

@@ -360,8 +360,8 @@ data:
   - test/yosupo/log_of_sparse_FPS.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/atcoder/abc276_g.sparse_FPS.test.cpp
 documentation_of: src/Math/sparse_fps.hpp
 layout: document
 redirect_from:

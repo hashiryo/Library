@@ -296,11 +296,11 @@ data:
   timestamp: '2022-06-20 22:21:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/persistent_queue.WBT.test.cpp
-  - test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - test/atcoder/abc256_f.WBT.test.cpp
   - test/aoj/1508.WBT.test.cpp
   - test/aoj/3024.WBT.test.cpp
+  - test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - test/yosupo/persistent_queue.WBT.test.cpp
+  - test/atcoder/abc256_f.WBT.test.cpp
 documentation_of: src/DataStructure/WeightBalancedTree.hpp
 layout: document
 redirect_from:

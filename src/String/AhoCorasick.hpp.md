@@ -120,11 +120,11 @@ data:
   timestamp: '2022-11-27 18:23:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1269.test.cpp
-  - test/yukicoder/430.AhoCora.test.cpp
+  - test/aoj/2863.test.cpp
   - test/aoj/2212.test.cpp
   - test/aoj/2257.test.cpp
-  - test/aoj/2863.test.cpp
+  - test/yukicoder/430.AhoCora.test.cpp
+  - test/yukicoder/1269.test.cpp
 documentation_of: src/String/AhoCorasick.hpp
 layout: document
 redirect_from:
