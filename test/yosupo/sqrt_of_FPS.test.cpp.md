@@ -391,18 +391,18 @@ data:
     \                                      : inv_<4, mod_t, LIM>)(pp, n, rr);\n  \
     \    }\n    } else\n      (k & 1 ? inv_<3, mod_t, LIM> : inv_<4, mod_t, LIM>)(pp,\
     \ n, rr);\n  }\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n\
-    using ntt_internal::inv;\n#line 4 \"src/Math/mod_sqrt.hpp\"\n/**\n * @title \u5E73\
-    \u65B9\u6839 ($\\mathbb{F}_p$)\n * @category \u6570\u5B66\n * O( log p )\n */\n\
-    \n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate <class Int, class mod_pro_t>\n\
-    constexpr Int inner_sqrt(Int a, Int p) {\n  const mod_pro_t md(p);\n  Int e =\
-    \ (p - 1) >> 1, one = md.set(1);\n  if (a = md.set(a); md.norm(pow(a, e, md))\
-    \ != one) return -1;\n  Int b = 0, d = md.diff(0, a), ret = one, r2 = 0, b2 =\
-    \ one;\n  while (md.norm(pow(d, e, md)) == one)\n    b = md.plus(b, one), d =\
-    \ md.diff(md.mul(b, b), a);\n  auto mult = [&md, d](Int &u1, Int &u2, Int v1,\
-    \ Int v2) {\n    Int tmp = md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2), d));\n\
-    \    u2 = md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1 = tmp;\n  };\n  for (++e;;\
-    \ mult(b, b2, b, b2)) {\n    if (e & 1) mult(ret, r2, b, b2);\n    if (!(e >>=\
-    \ 1)) return ret = md.get(ret), ret * 2 < p ? ret : p - ret;\n  }\n}\nconstexpr\
+    using ntt_internal::inv_base, ntt_internal::inv;\n#line 4 \"src/Math/mod_sqrt.hpp\"\
+    \n/**\n * @title \u5E73\u65B9\u6839 ($\\mathbb{F}_p$)\n * @category \u6570\u5B66\
+    \n * O( log p )\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate\
+    \ <class Int, class mod_pro_t>\nconstexpr Int inner_sqrt(Int a, Int p) {\n  const\
+    \ mod_pro_t md(p);\n  Int e = (p - 1) >> 1, one = md.set(1);\n  if (a = md.set(a);\
+    \ md.norm(pow(a, e, md)) != one) return -1;\n  Int b = 0, d = md.diff(0, a), ret\
+    \ = one, r2 = 0, b2 = one;\n  while (md.norm(pow(d, e, md)) == one)\n    b = md.plus(b,\
+    \ one), d = md.diff(md.mul(b, b), a);\n  auto mult = [&md, d](Int &u1, Int &u2,\
+    \ Int v1, Int v2) {\n    Int tmp = md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2),\
+    \ d));\n    u2 = md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1 = tmp;\n  };\n  for\
+    \ (++e;; mult(b, b2, b, b2)) {\n    if (e & 1) mult(ret, r2, b, b2);\n    if (!(e\
+    \ >>= 1)) return ret = md.get(ret), ret * 2 < p ? ret : p - ret;\n  }\n}\nconstexpr\
     \ int64_t mod_sqrt(int64_t a, int64_t p) {\n  assert(p > 0), assert(a > 0), assert(is_prime(p)),\
     \ a %= p;\n  if (a <= 1 || p == 2) return a;\n  if (p < INT_MAX) return inner_sqrt<int,\
     \ MIntPro_Na<u32>>(a, p);\n  return inner_sqrt<int64_t, MIntPro_Montg>(a, p);\n\
@@ -471,7 +471,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sqrt_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-22 23:51:49+09:00'
+  timestamp: '2022-12-23 00:19:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sqrt_of_FPS.test.cpp

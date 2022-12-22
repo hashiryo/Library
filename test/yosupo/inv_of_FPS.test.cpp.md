@@ -385,11 +385,12 @@ data:
     \                                      : inv_<4, mod_t, LIM>)(pp, n, rr);\n  \
     \    }\n    } else\n      (k & 1 ? inv_<3, mod_t, LIM> : inv_<4, mod_t, LIM>)(pp,\
     \ n, rr);\n  }\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n\
-    using ntt_internal::inv;\n#line 5 \"test/yosupo/inv_of_FPS.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N;\n\
-    \  cin >> N;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint> a(N);\n\
-    \  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = inv(a);\n  for (int i\
-    \ = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
+    using ntt_internal::inv_base, ntt_internal::inv;\n#line 5 \"test/yosupo/inv_of_FPS.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int N;\n  cin >> N;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint>\
+    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = inv(a);\n  for\
+    \ (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_inv.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -407,7 +408,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-22 23:51:49+09:00'
+  timestamp: '2022-12-23 00:19:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_FPS.test.cpp
