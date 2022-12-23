@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_C
@@ -370,9 +370,9 @@ data:
     \ ret;\n  }\n  BigInt operator*(const BigInt &r) const {\n    if (is_zero() ||\
     \ r.is_zero()) return 0;\n    const int n = dat.size(), m = r.dat.size(), sz =\
     \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20], f2[1 << 16][16], g2[1 <<\
-    \ 16][16];\n    static long long h[1 << 20];\n    if (int i, j; std::min(n, m)\
-    \ >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n \
-    \     const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
+    \ 16][16];\n    static long long h[1 << 20];\n    if (int i = n, j; std::min(n,\
+    \ m) >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n\
+    \      const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
     \ <= (rl >> 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l\
     \ - 1) / l,\n                  mm = (m + l - 1) / l, ss = nn + mm - 1;\n     \
     \   for (int k = i = 0, s; k < n; i++, k += l) {\n          for (j = s = std::min(l,\
@@ -441,8 +441,8 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_C.test.cpp
   requiredBy: []
-  timestamp: '2022-12-23 15:50:57+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-12-23 16:10:50+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_C.test.cpp
 layout: document

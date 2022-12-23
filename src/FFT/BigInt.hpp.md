@@ -24,21 +24,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
@@ -382,9 +382,9 @@ data:
     \ ret;\n  }\n  BigInt operator*(const BigInt &r) const {\n    if (is_zero() ||\
     \ r.is_zero()) return 0;\n    const int n = dat.size(), m = r.dat.size(), sz =\
     \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20], f2[1 << 16][16], g2[1 <<\
-    \ 16][16];\n    static long long h[1 << 20];\n    if (int i, j; std::min(n, m)\
-    \ >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n \
-    \     const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
+    \ 16][16];\n    static long long h[1 << 20];\n    if (int i = n, j; std::min(n,\
+    \ m) >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n\
+    \      const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
     \ <= (rl >> 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l\
     \ - 1) / l,\n                  mm = (m + l - 1) / l, ss = nn + mm - 1;\n     \
     \   for (int k = i = 0, s; k < n; i++, k += l) {\n          for (j = s = std::min(l,\
@@ -485,12 +485,12 @@ data:
     \  BigInt operator*(const BigInt &r) const {\n    if (is_zero() || r.is_zero())\
     \ return 0;\n    const int n = dat.size(), m = r.dat.size(), sz = n + m - 1;\n\
     \    static mod_t f[1 << 20], g[1 << 20], f2[1 << 16][16], g2[1 << 16][16];\n\
-    \    static long long h[1 << 20];\n    if (int i, j; std::min(n, m) >= 74) {\n\
-    \      const int rl = get_len(sz), l = get_len(std::max(n, m));\n      const int\
-    \ fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz <= (rl >> 3) *\
-    \ 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l - 1) / l,\n  \
-    \                mm = (m + l - 1) / l, ss = nn + mm - 1;\n        for (int k =\
-    \ i = 0, s; k < n; i++, k += l) {\n          for (j = s = std::min(l, n - k);\
+    \    static long long h[1 << 20];\n    if (int i = n, j; std::min(n, m) >= 74)\
+    \ {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n      const\
+    \ int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz <= (rl >>\
+    \ 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l - 1) / l,\n\
+    \                  mm = (m + l - 1) / l, ss = nn + mm - 1;\n        for (int k\
+    \ = i = 0, s; k < n; i++, k += l) {\n          for (j = s = std::min(l, n - k);\
     \ j--;) f2[i][j] = dat[k + j];\n          std::fill_n(f2[i] + s, l2 - s, mod_t()),\
     \ NTT::dft(l2, f2[i]);\n        }\n        if (this != &r)\n          for (int\
     \ k = i = 0, s; k < m; i++, k += l) {\n            for (j = s = std::min(l, m\
@@ -548,8 +548,8 @@ data:
   isVerificationFile: false
   path: src/FFT/BigInt.hpp
   requiredBy: []
-  timestamp: '2022-12-23 15:50:57+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-12-23 16:10:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_B.test.cpp
