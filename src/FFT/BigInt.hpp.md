@@ -24,21 +24,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
@@ -382,28 +382,29 @@ data:
     \ ret;\n  }\n  BigInt operator*(const BigInt &r) const {\n    if (is_zero() ||\
     \ r.is_zero()) return 0;\n    const int n = dat.size(), m = r.dat.size(), sz =\
     \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20], f2[1 << 16][16], g2[1 <<\
-    \ 16][16];\n    static long long h[1 << 20];\n    if (int i = n, j; std::min(n,\
-    \ m) >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n\
-    \      const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
-    \ <= (rl >> 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1;\n        const\
-    \ int nn = (n + l - 1) / l, mm = (m + l - 1) / l;\n        for (int k = i = 0,\
-    \ s; k < n; i++, k += l) {\n          for (j = s = std::min(l, n - k); j--;) f2[i][j]\
-    \ = dat[k + j];\n          std::fill_n(f2[i] + s, l2 - s, mod_t()), NTT::dft(l2,\
-    \ f2[i]);\n        }\n        if (this != &r)\n          for (int k = i = 0, s;\
-    \ k < m; i++, k += l) {\n            for (j = s = std::min(l, m - k); j--;) g2[i][j]\
-    \ = dat[k + j];\n            std::fill_n(g2[i] + s, l2 - s, mod_t()), NTT::dft(l2,\
-    \ g2[i]);\n          }\n        else\n          for (i = nn; i--;) std::copy_n(f2[i],\
-    \ l2, g2[i]);\n        for (std::fill_n(g2[mm], l2, mod_t()), i = mm; i--;) {\n\
-    \          for (j = 0; j < l; j++) g2[i + 1][j] += g2[i][j];\n          for (;\
-    \ j < l2; j++) g2[i + 1][j] -= g2[i][j];\n        }\n        for (int k = i =\
-    \ 0, ed, ii; k < sz; i++, k += l) {\n          j = std::max(0, i - nn + 1), ed\
-    \ = std::min(mm, i);\n          for (std::fill_n(f, l2, mod_t()); j <= ed; j++)\n\
-    \            for (ii = l2; ii--;) f[ii] += f2[i - j][ii] * g2[j][ii];\n      \
-    \    for (NTT::idft(l2, f), ii = std::min(l, sz - k); ii--;)\n            h[ii\
-    \ + k] = f[ii].val();\n        }\n      } else {\n        const int len = sz <=\
-    \ l + fl ? l : get_len(sz);\n        for (i = n; i--;) f[i] = dat[i];\n      \
-    \  std::fill_n(f + n, len - n, mod_t()), NTT::dft(len, f);\n        if (this !=\
-    \ &r) {\n          for (i = m; i--;) g[i] = r.dat[i];\n          std::fill_n(g\
+    \ 16][16];\n    static long long h[1 << 20];\n    if (int i, j; std::min(n, m)\
+    \ >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n \
+    \     const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
+    \ <= (rl >> 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l\
+    \ - 1) / l,\n                  mm = (m + l - 1) / l, ss = nn + mm - 1;\n     \
+    \   for (int k = i = 0, s; k < n; i++, k += l) {\n          for (j = s = std::min(l,\
+    \ n - k); j--;) f2[i][j] = dat[k + j];\n          std::fill_n(f2[i] + s, l2 -\
+    \ s, mod_t()), NTT::dft(l2, f2[i]);\n        }\n        if (this != &r)\n    \
+    \      for (int k = i = 0, s; k < m; i++, k += l) {\n            for (j = s =\
+    \ std::min(l, m - k); j--;) g2[i][j] = dat[k + j];\n            std::fill_n(g2[i]\
+    \ + s, l2 - s, mod_t()), NTT::dft(l2, g2[i]);\n          }\n        else\n   \
+    \       for (i = nn; i--;) std::copy_n(f2[i], l2, g2[i]);\n        for (i = l2;\
+    \ i--;) f[i] = f2[0][i] * g2[0][i];\n        for (NTT::idft(l2, f), i = l2; i--;)\
+    \ h[i] = f[i].val();\n        for (int k = l, ed, ii = 1; ii < ss; ++ii, k +=\
+    \ l) {\n          j = std::max(0, ii - nn + 1), ed = std::min(mm - 1, ii);\n \
+    \         for (i = l2; i--;) f[i] = f2[ii - ed][i] * g2[ed][i];\n          for\
+    \ (; j < ed; ++j)\n            for (i = l2; i--;) f[i] += f2[ii - j][i] * g2[j][i];\n\
+    \          for (NTT::idft(l2, f), i = std::min(l, sz - k); i--;)\n           \
+    \ h[i + k] += f[i].val();\n          for (i = std::min(l2, sz - k); i-- > l;)\
+    \ h[i + k] = f[i].val();\n        }\n      } else {\n        const int len = sz\
+    \ <= l + fl ? l : get_len(sz);\n        for (i = n; i--;) f[i] = dat[i];\n   \
+    \     std::fill_n(f + n, len - n, mod_t()), NTT::dft(len, f);\n        if (this\
+    \ != &r) {\n          for (i = m; i--;) g[i] = r.dat[i];\n          std::fill_n(g\
     \ + m, len - m, mod_t()), NTT::dft(len, g);\n          for (i = len; i--;) f[i]\
     \ *= g[i];\n        } else\n          for (i = len; i--;) f[i] *= f[i];\n    \
     \    for (NTT::idft(len, f), i = len; i < sz; f[i - len] -= h[i], i++)\n     \
@@ -484,28 +485,29 @@ data:
     \  BigInt operator*(const BigInt &r) const {\n    if (is_zero() || r.is_zero())\
     \ return 0;\n    const int n = dat.size(), m = r.dat.size(), sz = n + m - 1;\n\
     \    static mod_t f[1 << 20], g[1 << 20], f2[1 << 16][16], g2[1 << 16][16];\n\
-    \    static long long h[1 << 20];\n    if (int i = n, j; std::min(n, m) >= 74)\
-    \ {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n      const\
-    \ int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz <= (rl >>\
-    \ 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1;\n        const int nn\
-    \ = (n + l - 1) / l, mm = (m + l - 1) / l;\n        for (int k = i = 0, s; k <\
-    \ n; i++, k += l) {\n          for (j = s = std::min(l, n - k); j--;) f2[i][j]\
-    \ = dat[k + j];\n          std::fill_n(f2[i] + s, l2 - s, mod_t()), NTT::dft(l2,\
-    \ f2[i]);\n        }\n        if (this != &r)\n          for (int k = i = 0, s;\
-    \ k < m; i++, k += l) {\n            for (j = s = std::min(l, m - k); j--;) g2[i][j]\
-    \ = dat[k + j];\n            std::fill_n(g2[i] + s, l2 - s, mod_t()), NTT::dft(l2,\
-    \ g2[i]);\n          }\n        else\n          for (i = nn; i--;) std::copy_n(f2[i],\
-    \ l2, g2[i]);\n        for (std::fill_n(g2[mm], l2, mod_t()), i = mm; i--;) {\n\
-    \          for (j = 0; j < l; j++) g2[i + 1][j] += g2[i][j];\n          for (;\
-    \ j < l2; j++) g2[i + 1][j] -= g2[i][j];\n        }\n        for (int k = i =\
-    \ 0, ed, ii; k < sz; i++, k += l) {\n          j = std::max(0, i - nn + 1), ed\
-    \ = std::min(mm, i);\n          for (std::fill_n(f, l2, mod_t()); j <= ed; j++)\n\
-    \            for (ii = l2; ii--;) f[ii] += f2[i - j][ii] * g2[j][ii];\n      \
-    \    for (NTT::idft(l2, f), ii = std::min(l, sz - k); ii--;)\n            h[ii\
-    \ + k] = f[ii].val();\n        }\n      } else {\n        const int len = sz <=\
-    \ l + fl ? l : get_len(sz);\n        for (i = n; i--;) f[i] = dat[i];\n      \
-    \  std::fill_n(f + n, len - n, mod_t()), NTT::dft(len, f);\n        if (this !=\
-    \ &r) {\n          for (i = m; i--;) g[i] = r.dat[i];\n          std::fill_n(g\
+    \    static long long h[1 << 20];\n    if (int i, j; std::min(n, m) >= 74) {\n\
+    \      const int rl = get_len(sz), l = get_len(std::max(n, m));\n      const int\
+    \ fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz <= (rl >> 3) *\
+    \ 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l - 1) / l,\n  \
+    \                mm = (m + l - 1) / l, ss = nn + mm - 1;\n        for (int k =\
+    \ i = 0, s; k < n; i++, k += l) {\n          for (j = s = std::min(l, n - k);\
+    \ j--;) f2[i][j] = dat[k + j];\n          std::fill_n(f2[i] + s, l2 - s, mod_t()),\
+    \ NTT::dft(l2, f2[i]);\n        }\n        if (this != &r)\n          for (int\
+    \ k = i = 0, s; k < m; i++, k += l) {\n            for (j = s = std::min(l, m\
+    \ - k); j--;) g2[i][j] = dat[k + j];\n            std::fill_n(g2[i] + s, l2 -\
+    \ s, mod_t()), NTT::dft(l2, g2[i]);\n          }\n        else\n          for\
+    \ (i = nn; i--;) std::copy_n(f2[i], l2, g2[i]);\n        for (i = l2; i--;) f[i]\
+    \ = f2[0][i] * g2[0][i];\n        for (NTT::idft(l2, f), i = l2; i--;) h[i] =\
+    \ f[i].val();\n        for (int k = l, ed, ii = 1; ii < ss; ++ii, k += l) {\n\
+    \          j = std::max(0, ii - nn + 1), ed = std::min(mm - 1, ii);\n        \
+    \  for (i = l2; i--;) f[i] = f2[ii - ed][i] * g2[ed][i];\n          for (; j <\
+    \ ed; ++j)\n            for (i = l2; i--;) f[i] += f2[ii - j][i] * g2[j][i];\n\
+    \          for (NTT::idft(l2, f), i = std::min(l, sz - k); i--;)\n           \
+    \ h[i + k] += f[i].val();\n          for (i = std::min(l2, sz - k); i-- > l;)\
+    \ h[i + k] = f[i].val();\n        }\n      } else {\n        const int len = sz\
+    \ <= l + fl ? l : get_len(sz);\n        for (i = n; i--;) f[i] = dat[i];\n   \
+    \     std::fill_n(f + n, len - n, mod_t()), NTT::dft(len, f);\n        if (this\
+    \ != &r) {\n          for (i = m; i--;) g[i] = r.dat[i];\n          std::fill_n(g\
     \ + m, len - m, mod_t()), NTT::dft(len, g);\n          for (i = len; i--;) f[i]\
     \ *= g[i];\n        } else\n          for (i = len; i--;) f[i] *= f[i];\n    \
     \    for (NTT::idft(len, f), i = len; i < sz; f[i - len] -= h[i], i++)\n     \
@@ -546,8 +548,8 @@ data:
   isVerificationFile: false
   path: src/FFT/BigInt.hpp
   requiredBy: []
-  timestamp: '2022-12-10 17:29:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-12-23 15:50:57+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_B.test.cpp
