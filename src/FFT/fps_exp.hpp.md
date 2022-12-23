@@ -34,10 +34,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
   - icon: ':x:'
@@ -363,37 +363,38 @@ data:
     \ }\n#line 4 \"src/FFT/fps_inv.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\
     \u7D1A\u6570 inv\n * @category FFT\n */\n\n// BEGIN CUT HERE\nnamespace ntt_internal\
     \ {\ntemplate <std::size_t LIM, class mod_t>\ninline void inv_base(const mod_t\
-    \ p[], int n, mod_t r[], int i = 1) {\n  static constexpr int t = nttarr_cat<mod_t,\
-    \ LIM>;\n  static constexpr int TH = (int[]){64, 32, 64, 128, 128, 256}[t];\n\
-    \  if (n <= i) return;\n  assert(((n & -n) == n)), assert(i && ((i & -i) == i));\n\
-    \  const int m = std::min(n, TH);\n  const mod_t miv = -r[0];\n  for (int j; i\
-    \ < m; r[i++] *= miv)\n    for (r[j = i] = mod_t(); j--;) r[i] += r[j] * p[i -\
-    \ j];\n  static constexpr int lnR = 2 + (t == 0), LIM2 = LIM >> (lnR - 1),\n \
-    \                      R = (1 << lnR) - 1;\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ p[], int n, mod_t r[], int i = 1, int l = -1) {\n  static constexpr int t =\
+    \ nttarr_cat<mod_t, LIM>;\n  static constexpr int TH = (int[]){64, 32, 64, 128,\
+    \ 128, 256}[t];\n  if (n <= i) return;\n  if (l < 0) l = n;\n  assert(((n & -n)\
+    \ == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n, TH);\n  const\
+    \ mod_t miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n    for (r[j = i] =\
+    \ mod_t(); j--;) r[i] += r[j] * p[i - j];\n  static constexpr int lnR = 2 + (t\
+    \ == 0), LIM2 = LIM >> (lnR - 1),\n                       R = (1 << lnR) - 1;\n\
+    \  using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
+    \ LIM2, 2>;\n  auto gt1 = GlobalNTTArray2D<mod_t, LIM2, R, 1>::bf;\n  auto gt2\
+    \ = GlobalNTTArray2D<mod_t, LIM2, R, 2>::bf;\n  int ed = [&]() {\n    if constexpr\
+    \ (t == 0)\n      return (1 << (1 + ((__builtin_ctz(n) + 2) % 3))) - 1;\n    else\n\
+    \      return (1 << (1 + (__builtin_ctz(TH) & 1))) - 1;\n  }();\n  for (; i <\
+    \ n; ed = R) {\n    mod_t *rr = r;\n    const mod_t *pp = p;\n    const int s\
+    \ = i, e = s << 1;\n    for (int k = 0, j; i < n && k < ed; ++k, i += s, pp +=\
+    \ s) {\n      if (k * s < l) gt2[k].set(pp, 0, e), gt2[k].dft(0, e);\n      gt1[k].set(rr,\
+    \ 0, s), gt1[k].zeros(s, e), gt1[k].dft(0, e);\n      for (GNA2::bf.mul(gt1[k],\
+    \ gt2[0], 0, e), j = std::min(k, l / s) + 1; --j;)\n        GNA1::bf.mul(gt1[k\
+    \ - j], gt2[j], 0, e), GNA2::bf.add(GNA1::bf, 0, e);\n      GNA2::bf.idft(0, e),\
+    \ GNA2::bf.zeros(0, s);\n      if constexpr (!is_nttfriend<mod_t, LIM2>())\n \
+    \       GNA2::bf.get(rr, s, e), GNA2::bf.set(rr, s, e);\n      GNA2::bf.dft(0,\
+    \ e), GNA2::bf.mul(gt1[0], 0, e), GNA2::bf.idft(0, e);\n      for (GNA2::bf.get(rr,\
+    \ s, e), rr += s, j = s; j--;) rr[j] = -rr[j];\n    }\n  }\n}\ntemplate <std::size_t\
+    \ lnR, class mod_t, std::size_t LIM = 1 << 22>\nvoid inv_(const mod_t p[], int\
+    \ n, mod_t r[]) {\n  static constexpr std::size_t R = (1 << lnR) - 1;\n  static\
+    \ constexpr std::size_t LIM2 = LIM >> (lnR - 1);\n  using GNA1 = GlobalNTTArray<mod_t,\
     \ LIM2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n  auto gt1 = GlobalNTTArray2D<mod_t,\
-    \ LIM2, R, 1>::bf;\n  auto gt2 = GlobalNTTArray2D<mod_t, LIM2, R, 2>::bf;\n  int\
-    \ ed = [&]() {\n    if constexpr (t == 0)\n      return (1 << (1 + ((__builtin_ctz(n)\
-    \ + 2) % 3))) - 1;\n    else\n      return (1 << (1 + (__builtin_ctz(TH) & 1)))\
-    \ - 1;\n  }();\n  for (; i < n; ed = R) {\n    mod_t *rr = r;\n    const mod_t\
-    \ *pp = p;\n    const int s = i, e = s << 1;\n    for (int k = 0, l; i < n &&\
-    \ k < ed; ++k, i += s, pp += s) {\n      gt2[k].set(pp, 0, e), gt2[k].dft(0, e),\
-    \ gt1[k].set(rr, 0, s);\n      gt1[k].zeros(s, e), gt1[k].dft(0, e), GNA2::bf.mul(gt1[k],\
-    \ gt2[0], 0, e);\n      for (l = k; l--;)\n        GNA1::bf.mul(gt1[l], gt2[k\
-    \ - l], 0, e), GNA2::bf.add(GNA1::bf, 0, e);\n      GNA2::bf.idft(0, e), GNA2::bf.zeros(0,\
-    \ s);\n      if constexpr (!is_nttfriend<mod_t, (LIM >> 1)>())\n        GNA2::bf.get(rr,\
-    \ s, e), GNA2::bf.set(rr, s, e);\n      GNA2::bf.dft(0, e), GNA2::bf.mul(gt1[0],\
-    \ 0, e);\n      GNA2::bf.idft(0, e), GNA2::bf.get(rr, s, e);\n      for (rr +=\
-    \ s, l = s; l--;) rr[l] = -rr[l];\n    }\n  }\n}\ntemplate <std::size_t lnR, class\
-    \ mod_t, std::size_t LIM = 1 << 22>\nvoid inv_(const mod_t p[], int n, mod_t r[])\
-    \ {\n  static constexpr std::size_t R = (1 << lnR) - 1;\n  static constexpr std::size_t\
-    \ LIM2 = LIM >> (lnR - 1);\n  using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n \
-    \ using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n  auto gt1 = GlobalNTTArray2D<mod_t,\
     \ LIM2, R, 1>::bf;\n  auto gt2 = GlobalNTTArray2D<mod_t, LIM2, R, 2>::bf;\n  assert(n\
-    \ > 0), assert(p[0] != mod_t(0));\n  const int m = get_len(n) >> lnR, m2 = m <<\
+    \ > 0), assert(p[0] != mod_t());\n  const int m = get_len(n) >> lnR, m2 = m <<\
     \ 1, ed = (n - 1) / m;\n  inv_base<LIM2>(p, m, r);\n  for (int k = 0, l; k < ed;\
     \ p += m) {\n    gt2[k].set(p, 0, l = std::min(m2, n - m * k)), gt2[k].zeros(l,\
     \ m2);\n    gt2[k].dft(0, m2), gt1[k].set(r, 0, m), gt1[k].zeros(m, m2);\n   \
-    \ gt1[k].dft(0, m2), GNA2::bf.mul(gt1[k], gt2[0], 0, m2);\n    for (l = k; l--;)\n\
+    \ for (gt1[k].dft(0, m2), GNA2::bf.mul(gt1[k], gt2[0], 0, m2), l = k; l--;)\n\
     \      GNA1::bf.mul(gt1[l], gt2[k - l], 0, m2), GNA2::bf.add(GNA1::bf, 0, m2);\n\
     \    GNA2::bf.idft(0, m2), GNA2::bf.zeros(0, m);\n    if constexpr (!is_nttfriend<mod_t,\
     \ LIM2>())\n      GNA2::bf.get(r, m, m2), GNA2::bf.set(r, m, m2);\n    GNA2::bf.dft(0,\
@@ -576,7 +577,7 @@ data:
   path: src/FFT/fps_exp.hpp
   requiredBy:
   - src/FFT/sequences.hpp
-  timestamp: '2022-12-23 00:19:14+09:00'
+  timestamp: '2022-12-23 18:44:57+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/963.test.cpp
