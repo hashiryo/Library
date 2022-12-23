@@ -523,19 +523,20 @@ data:
     \      using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n      auto gt1 = GlobalNTTArray2D<mod_t,\
     \ LIM2, 16, 1>::bf,\n           gt2 = GlobalNTTArray2D<mod_t, LIM2, 16, 2>::bf;\n\
     \      const int l = rl >> 4, l2 = l << 1, nn = (n + l - 1) / l,\n           \
-    \     mm = (m + l - 1) / l;\n      for (int i = 0, k = 0, s; k < n; i++, k +=\
-    \ l)\n        gt1[i].set(p.data() + k, 0, s = std::min(l, n - k)),\n         \
-    \   gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n      if (&p != &q)\n        for\
-    \ (int i = 0, k = 0, s; k < m; i++, k += l)\n          gt2[i].set(q.data() + k,\
-    \ 0, s = std::min(l, m - k)),\n              gt2[i].zeros(s, l2), gt2[i].dft(0,\
-    \ l2);\n      else\n        for (int i = 0; i < nn; i++) gt2[i].subst(gt1[i],\
-    \ 0, l2);\n      gt2[mm].zeros(0, l2);\n      for (int i = mm; i--;)\n       \
-    \ gt2[i + 1].add(gt2[i], 0, l), gt2[i + 1].dif(gt2[i], l, l2);\n      for (int\
-    \ i = 0, k = 0, j, ed; k < sz; i++, k += l) {\n        j = std::max(0, i - nn\
-    \ + 1), ed = std::min(mm, i);\n        for (GNA2::bf.mul(gt1[i - ed], gt2[ed],\
-    \ 0, l2); j < ed; j++)\n          GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2),\n \
-    \             GNA2::bf.add(GNA1::bf, 0, l2);\n        GNA2::bf.idft(0, l2), GNA2::bf.get(rr\
-    \ + k, 0, std::min(l, sz - k));\n      }\n    } else {\n      using GNA1 = GlobalNTTArray<mod_t,\
+    \     mm = (m + l - 1) / l, ss = nn + mm - 1;\n      for (int i = 0, k = 0, s;\
+    \ k < n; ++i, k += l)\n        gt1[i].set(p.data() + k, 0, s = std::min(l, n -\
+    \ k)),\n            gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n      if (&p != &q)\n\
+    \        for (int i = 0, k = 0, s; k < m; ++i, k += l)\n          gt2[i].set(q.data()\
+    \ + k, 0, s = std::min(l, m - k)),\n              gt2[i].zeros(s, l2), gt2[i].dft(0,\
+    \ l2);\n      else\n        for (int i = 0; i < nn; ++i) gt2[i].subst(gt1[i],\
+    \ 0, l2);\n      GNA2::bf.mul(gt1[0], gt2[0], 0, l2), GNA2::bf.idft(0, l2);\n\
+    \      GNA2::bf.get(rr, 0, l2);\n      for (int i = 1, k = l, j, ed; i < ss; ++i,\
+    \ k += l) {\n        j = std::max(0, i - nn + 1), ed = std::min(mm - 1, i);\n\
+    \        for (GNA2::bf.mul(gt1[i - ed], gt2[ed], 0, l2); j < ed; ++j)\n      \
+    \    GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2),\n              GNA2::bf.add(GNA1::bf,\
+    \ 0, l2);\n        GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j = std::min(l, sz\
+    \ - k));\n        for (; j--;) rr[k + j] += pp[j];\n        if (l < sz - k) GNA2::bf.get(rr\
+    \ + k, l, std::min(l2, sz - k));\n      }\n    } else {\n      using GNA1 = GlobalNTTArray<mod_t,\
     \ LIM, 1>;\n      using GNA2 = GlobalNTTArray<mod_t, LIM, 2>;\n      const int\
     \ len = sz <= l + fl ? l : rl;\n      GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
     \ len);\n      if (GNA1::bf.dft(0, len); &p != &q) {\n        GNA2::bf.set(q.data(),\
@@ -544,11 +545,11 @@ data:
     \ len), GNA1::bf.get(rr, 0, std::min(sz, len));\n      if (len < sz) {\n     \
     \   std::copy(p.begin() + len - m + 1, p.end(), pp + len - m + 1);\n        std::copy(q.begin()\
     \ + len - n + 1, q.end(), qq + len - n + 1);\n        for (int i = len, j; i <\
-    \ sz; rr[i - len] -= rr[i], i++)\n          for (rr[i] = 0, j = i - m + 1; j <\
-    \ n; j++) rr[i] += pp[j] * qq[i - j];\n      }\n    }\n  }\n  return std::vector<mod_t>(rr,\
-    \ rr + sz);\n}\n#line 6 \"src/FFT/sequences.hpp\"\n/**\n * @title \u6709\u540D\
-    \u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528)\n * @category\
-    \ \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
+    \ sz; rr[i - len] -= rr[i], ++i)\n          for (rr[i] = mod_t(), j = i - m +\
+    \ 1; j < n; ++j)\n            rr[i] += pp[j] * qq[i - j];\n      }\n    }\n  }\n\
+    \  return std::vector<mod_t>(rr, rr + sz);\n}\n#line 6 \"src/FFT/sequences.hpp\"\
+    \n/**\n * @title \u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\
+    \u6570\u4F7F\u7528)\n * @category \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
     \ * @see https://en.wikipedia.org/wiki/Bernoulli_number\n * @see https://en.wikipedia.org/wiki/Partition_function_(number_theory)\n\
     \ * @see https://en.wikipedia.org/wiki/Alternating_permutation\n * @see https://en.wikipedia.org/wiki/Stirling_number\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename mod_t, std::size_t _Nm = 1 <<\
@@ -642,7 +643,7 @@ data:
   isVerificationFile: false
   path: src/FFT/sequences.hpp
   requiredBy: []
-  timestamp: '2022-12-23 14:05:06+09:00'
+  timestamp: '2022-12-23 15:30:53+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/963.test.cpp

@@ -426,19 +426,20 @@ data:
     \      using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n      auto gt1 = GlobalNTTArray2D<mod_t,\
     \ LIM2, 16, 1>::bf,\n           gt2 = GlobalNTTArray2D<mod_t, LIM2, 16, 2>::bf;\n\
     \      const int l = rl >> 4, l2 = l << 1, nn = (n + l - 1) / l,\n           \
-    \     mm = (m + l - 1) / l;\n      for (int i = 0, k = 0, s; k < n; i++, k +=\
-    \ l)\n        gt1[i].set(p.data() + k, 0, s = std::min(l, n - k)),\n         \
-    \   gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n      if (&p != &q)\n        for\
-    \ (int i = 0, k = 0, s; k < m; i++, k += l)\n          gt2[i].set(q.data() + k,\
-    \ 0, s = std::min(l, m - k)),\n              gt2[i].zeros(s, l2), gt2[i].dft(0,\
-    \ l2);\n      else\n        for (int i = 0; i < nn; i++) gt2[i].subst(gt1[i],\
-    \ 0, l2);\n      gt2[mm].zeros(0, l2);\n      for (int i = mm; i--;)\n       \
-    \ gt2[i + 1].add(gt2[i], 0, l), gt2[i + 1].dif(gt2[i], l, l2);\n      for (int\
-    \ i = 0, k = 0, j, ed; k < sz; i++, k += l) {\n        j = std::max(0, i - nn\
-    \ + 1), ed = std::min(mm, i);\n        for (GNA2::bf.mul(gt1[i - ed], gt2[ed],\
-    \ 0, l2); j < ed; j++)\n          GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2),\n \
-    \             GNA2::bf.add(GNA1::bf, 0, l2);\n        GNA2::bf.idft(0, l2), GNA2::bf.get(rr\
-    \ + k, 0, std::min(l, sz - k));\n      }\n    } else {\n      using GNA1 = GlobalNTTArray<mod_t,\
+    \     mm = (m + l - 1) / l, ss = nn + mm - 1;\n      for (int i = 0, k = 0, s;\
+    \ k < n; ++i, k += l)\n        gt1[i].set(p.data() + k, 0, s = std::min(l, n -\
+    \ k)),\n            gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n      if (&p != &q)\n\
+    \        for (int i = 0, k = 0, s; k < m; ++i, k += l)\n          gt2[i].set(q.data()\
+    \ + k, 0, s = std::min(l, m - k)),\n              gt2[i].zeros(s, l2), gt2[i].dft(0,\
+    \ l2);\n      else\n        for (int i = 0; i < nn; ++i) gt2[i].subst(gt1[i],\
+    \ 0, l2);\n      GNA2::bf.mul(gt1[0], gt2[0], 0, l2), GNA2::bf.idft(0, l2);\n\
+    \      GNA2::bf.get(rr, 0, l2);\n      for (int i = 1, k = l, j, ed; i < ss; ++i,\
+    \ k += l) {\n        j = std::max(0, i - nn + 1), ed = std::min(mm - 1, i);\n\
+    \        for (GNA2::bf.mul(gt1[i - ed], gt2[ed], 0, l2); j < ed; ++j)\n      \
+    \    GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2),\n              GNA2::bf.add(GNA1::bf,\
+    \ 0, l2);\n        GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j = std::min(l, sz\
+    \ - k));\n        for (; j--;) rr[k + j] += pp[j];\n        if (l < sz - k) GNA2::bf.get(rr\
+    \ + k, l, std::min(l2, sz - k));\n      }\n    } else {\n      using GNA1 = GlobalNTTArray<mod_t,\
     \ LIM, 1>;\n      using GNA2 = GlobalNTTArray<mod_t, LIM, 2>;\n      const int\
     \ len = sz <= l + fl ? l : rl;\n      GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
     \ len);\n      if (GNA1::bf.dft(0, len); &p != &q) {\n        GNA2::bf.set(q.data(),\
@@ -447,30 +448,30 @@ data:
     \ len), GNA1::bf.get(rr, 0, std::min(sz, len));\n      if (len < sz) {\n     \
     \   std::copy(p.begin() + len - m + 1, p.end(), pp + len - m + 1);\n        std::copy(q.begin()\
     \ + len - n + 1, q.end(), qq + len - n + 1);\n        for (int i = len, j; i <\
-    \ sz; rr[i - len] -= rr[i], i++)\n          for (rr[i] = 0, j = i - m + 1; j <\
-    \ n; j++) rr[i] += pp[j] * qq[i - j];\n      }\n    }\n  }\n  return std::vector<mod_t>(rr,\
-    \ rr + sz);\n}\n#line 5 \"src/FFT/bostan_mori.hpp\"\n\n/**\n * @title \u7DDA\u5F62\
-    \u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805\n * @category FFT\n * https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a\n\
-    \ */\n\n// BEGIN CUT HERE\nnamespace div_at_internal {\ntemplate <class K>\nint\
-    \ deg(const std::vector<K> &p) {\n  const K ZERO = 0;\n  for (int n = p.size()\
-    \ - 1;; n--)\n    if (n < 0 || p[n] != ZERO) return n;\n}\ntemplate <class mod_t>\n\
-    void div_at_na(std::vector<mod_t> &p, std::vector<mod_t> &q, std::uint64_t &k)\
-    \ {\n  unsigned n = deg(p), nn, j;\n  const unsigned m = deg(q), l = std::max(n,\
-    \ m) + 1;\n  const mod_t Z = 0;\n  std::vector<mod_t> tmp(l);\n  for (p.resize(l,\
-    \ Z), q.resize(l, Z); k > m; q.swap(p), p.swap(tmp)) {\n    std::fill_n(tmp.begin(),\
-    \ (nn = (n + m - ((n ^ m ^ k) & 1)) >> 1) + 1, Z);\n    for (j = 0; j <= m; j\
-    \ += 2)\n      for (int i = k & 1; i <= n; i += 2) tmp[(i + j) >> 1] += p[i] *\
-    \ q[j];\n    for (j = 1; j <= m; j += 2)\n      for (int i = (~k) & 1; i <= n;\
-    \ i += 2) tmp[(i + j) >> 1] -= p[i] * q[j];\n    for (std::fill_n(p.begin(), m\
-    \ + 1, Z), j = 2; j <= m; j += 2)\n      for (int i = j; (i -= 2) >= 0;) p[(i\
-    \ + j) >> 1] += q[i] * q[j];\n    for (k >>= 1, n = nn, j = 3; j <= m; j += 2)\n\
-    \      for (int i = j; (i -= 2) >= 0;) p[(i + j) >> 1] -= q[i] * q[j];\n    for\
-    \ (int i = m; i >= 0; i--) p[i] += p[i];\n    for (int i = 0; i <= m; i += 2)\
-    \ p[i] += q[i] * q[i];\n    for (int i = 1; i <= m; i += 2) p[i] -= q[i] * q[i];\n\
-    \  }\n  p.resize(n + 1), q.resize(m + 1);\n}\ntemplate <std::size_t _Nm, class\
-    \ mod_t>\nvoid div_at_ntt(std::vector<mod_t> &p, std::vector<mod_t> &q,\n    \
-    \            std::uint64_t &k) {\n  static_assert(!is_nttfriend<mod_t, _Nm>());\n\
-    \  using GNA = GlobalNTTArray<mod_t, _Nm, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
+    \ sz; rr[i - len] -= rr[i], ++i)\n          for (rr[i] = mod_t(), j = i - m +\
+    \ 1; j < n; ++j)\n            rr[i] += pp[j] * qq[i - j];\n      }\n    }\n  }\n\
+    \  return std::vector<mod_t>(rr, rr + sz);\n}\n#line 5 \"src/FFT/bostan_mori.hpp\"\
+    \n\n/**\n * @title \u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805\
+    \n * @category FFT\n * https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a\n */\n\
+    \n// BEGIN CUT HERE\nnamespace div_at_internal {\ntemplate <class K>\nint deg(const\
+    \ std::vector<K> &p) {\n  const K ZERO = 0;\n  for (int n = p.size() - 1;; n--)\n\
+    \    if (n < 0 || p[n] != ZERO) return n;\n}\ntemplate <class mod_t>\nvoid div_at_na(std::vector<mod_t>\
+    \ &p, std::vector<mod_t> &q, std::uint64_t &k) {\n  unsigned n = deg(p), nn, j;\n\
+    \  const unsigned m = deg(q), l = std::max(n, m) + 1;\n  const mod_t Z = 0;\n\
+    \  std::vector<mod_t> tmp(l);\n  for (p.resize(l, Z), q.resize(l, Z); k > m; q.swap(p),\
+    \ p.swap(tmp)) {\n    std::fill_n(tmp.begin(), (nn = (n + m - ((n ^ m ^ k) & 1))\
+    \ >> 1) + 1, Z);\n    for (j = 0; j <= m; j += 2)\n      for (int i = k & 1; i\
+    \ <= n; i += 2) tmp[(i + j) >> 1] += p[i] * q[j];\n    for (j = 1; j <= m; j +=\
+    \ 2)\n      for (int i = (~k) & 1; i <= n; i += 2) tmp[(i + j) >> 1] -= p[i] *\
+    \ q[j];\n    for (std::fill_n(p.begin(), m + 1, Z), j = 2; j <= m; j += 2)\n \
+    \     for (int i = j; (i -= 2) >= 0;) p[(i + j) >> 1] += q[i] * q[j];\n    for\
+    \ (k >>= 1, n = nn, j = 3; j <= m; j += 2)\n      for (int i = j; (i -= 2) >=\
+    \ 0;) p[(i + j) >> 1] -= q[i] * q[j];\n    for (int i = m; i >= 0; i--) p[i] +=\
+    \ p[i];\n    for (int i = 0; i <= m; i += 2) p[i] += q[i] * q[i];\n    for (int\
+    \ i = 1; i <= m; i += 2) p[i] -= q[i] * q[i];\n  }\n  p.resize(n + 1), q.resize(m\
+    \ + 1);\n}\ntemplate <std::size_t _Nm, class mod_t>\nvoid div_at_ntt(std::vector<mod_t>\
+    \ &p, std::vector<mod_t> &q,\n                std::uint64_t &k) {\n  static_assert(!is_nttfriend<mod_t,\
+    \ _Nm>());\n  using GNA = GlobalNTTArray<mod_t, _Nm, 0>;\n  using GNA1 = GlobalNTTArray<mod_t,\
     \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  const unsigned m\
     \ = deg(q) + 1, offset = std::max<unsigned>(deg(p) + 1, m),\n                \
     \ len = get_len((offset + m) - 1);\n  for (p.resize(len >> 1, mod_t(0)); k >=\
@@ -597,7 +598,7 @@ data:
   isVerificationFile: false
   path: src/FFT/bostan_mori.hpp
   requiredBy: []
-  timestamp: '2022-12-23 14:05:06+09:00'
+  timestamp: '2022-12-23 15:30:53+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/0168.test.cpp

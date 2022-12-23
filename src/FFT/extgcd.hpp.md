@@ -455,19 +455,20 @@ data:
     \      using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n      auto gt1 = GlobalNTTArray2D<mod_t,\
     \ LIM2, 16, 1>::bf,\n           gt2 = GlobalNTTArray2D<mod_t, LIM2, 16, 2>::bf;\n\
     \      const int l = rl >> 4, l2 = l << 1, nn = (n + l - 1) / l,\n           \
-    \     mm = (m + l - 1) / l;\n      for (int i = 0, k = 0, s; k < n; i++, k +=\
-    \ l)\n        gt1[i].set(p.data() + k, 0, s = std::min(l, n - k)),\n         \
-    \   gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n      if (&p != &q)\n        for\
-    \ (int i = 0, k = 0, s; k < m; i++, k += l)\n          gt2[i].set(q.data() + k,\
-    \ 0, s = std::min(l, m - k)),\n              gt2[i].zeros(s, l2), gt2[i].dft(0,\
-    \ l2);\n      else\n        for (int i = 0; i < nn; i++) gt2[i].subst(gt1[i],\
-    \ 0, l2);\n      gt2[mm].zeros(0, l2);\n      for (int i = mm; i--;)\n       \
-    \ gt2[i + 1].add(gt2[i], 0, l), gt2[i + 1].dif(gt2[i], l, l2);\n      for (int\
-    \ i = 0, k = 0, j, ed; k < sz; i++, k += l) {\n        j = std::max(0, i - nn\
-    \ + 1), ed = std::min(mm, i);\n        for (GNA2::bf.mul(gt1[i - ed], gt2[ed],\
-    \ 0, l2); j < ed; j++)\n          GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2),\n \
-    \             GNA2::bf.add(GNA1::bf, 0, l2);\n        GNA2::bf.idft(0, l2), GNA2::bf.get(rr\
-    \ + k, 0, std::min(l, sz - k));\n      }\n    } else {\n      using GNA1 = GlobalNTTArray<mod_t,\
+    \     mm = (m + l - 1) / l, ss = nn + mm - 1;\n      for (int i = 0, k = 0, s;\
+    \ k < n; ++i, k += l)\n        gt1[i].set(p.data() + k, 0, s = std::min(l, n -\
+    \ k)),\n            gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n      if (&p != &q)\n\
+    \        for (int i = 0, k = 0, s; k < m; ++i, k += l)\n          gt2[i].set(q.data()\
+    \ + k, 0, s = std::min(l, m - k)),\n              gt2[i].zeros(s, l2), gt2[i].dft(0,\
+    \ l2);\n      else\n        for (int i = 0; i < nn; ++i) gt2[i].subst(gt1[i],\
+    \ 0, l2);\n      GNA2::bf.mul(gt1[0], gt2[0], 0, l2), GNA2::bf.idft(0, l2);\n\
+    \      GNA2::bf.get(rr, 0, l2);\n      for (int i = 1, k = l, j, ed; i < ss; ++i,\
+    \ k += l) {\n        j = std::max(0, i - nn + 1), ed = std::min(mm - 1, i);\n\
+    \        for (GNA2::bf.mul(gt1[i - ed], gt2[ed], 0, l2); j < ed; ++j)\n      \
+    \    GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2),\n              GNA2::bf.add(GNA1::bf,\
+    \ 0, l2);\n        GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j = std::min(l, sz\
+    \ - k));\n        for (; j--;) rr[k + j] += pp[j];\n        if (l < sz - k) GNA2::bf.get(rr\
+    \ + k, l, std::min(l2, sz - k));\n      }\n    } else {\n      using GNA1 = GlobalNTTArray<mod_t,\
     \ LIM, 1>;\n      using GNA2 = GlobalNTTArray<mod_t, LIM, 2>;\n      const int\
     \ len = sz <= l + fl ? l : rl;\n      GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
     \ len);\n      if (GNA1::bf.dft(0, len); &p != &q) {\n        GNA2::bf.set(q.data(),\
@@ -476,15 +477,15 @@ data:
     \ len), GNA1::bf.get(rr, 0, std::min(sz, len));\n      if (len < sz) {\n     \
     \   std::copy(p.begin() + len - m + 1, p.end(), pp + len - m + 1);\n        std::copy(q.begin()\
     \ + len - n + 1, q.end(), qq + len - n + 1);\n        for (int i = len, j; i <\
-    \ sz; rr[i - len] -= rr[i], i++)\n          for (rr[i] = 0, j = i - m + 1; j <\
-    \ n; j++) rr[i] += pp[j] * qq[i - j];\n      }\n    }\n  }\n  return std::vector<mod_t>(rr,\
-    \ rr + sz);\n}\n#line 5 \"src/FFT/Polynomial.hpp\"\n\n/**\n * @title \u591A\u9805\
-    \u5F0F\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
-    \ _Nm = 1 << 22>\nclass Polynomial : public std::vector<mod_t> {\n  using Poly\
-    \ = Polynomial;\n  struct Inde;\n  struct XP_plus_C {  // x^p+c\n    Inde x;\n\
-    \    mod_t c;\n    XP_plus_C(const Inde &x_) : x(x_), c(Z) {}\n    XP_plus_C(int\
-    \ p_, mod_t c_) : x(p_), c(c_) {}\n  };\n  struct Inde {  // indeterminate\n \
-    \   int p_;\n    Inde(int p) : p_(p) {}\n    Inde() : Inde(1) {}\n    Inde operator^(int\
+    \ sz; rr[i - len] -= rr[i], ++i)\n          for (rr[i] = mod_t(), j = i - m +\
+    \ 1; j < n; ++j)\n            rr[i] += pp[j] * qq[i - j];\n      }\n    }\n  }\n\
+    \  return std::vector<mod_t>(rr, rr + sz);\n}\n#line 5 \"src/FFT/Polynomial.hpp\"\
+    \n\n/**\n * @title \u591A\u9805\u5F0F\n * @category FFT\n */\n\n// BEGIN CUT HERE\n\
+    template <class mod_t, std::size_t _Nm = 1 << 22>\nclass Polynomial : public std::vector<mod_t>\
+    \ {\n  using Poly = Polynomial;\n  struct Inde;\n  struct XP_plus_C {  // x^p+c\n\
+    \    Inde x;\n    mod_t c;\n    XP_plus_C(const Inde &x_) : x(x_), c(Z) {}\n \
+    \   XP_plus_C(int p_, mod_t c_) : x(p_), c(c_) {}\n  };\n  struct Inde {  // indeterminate\n\
+    \    int p_;\n    Inde(int p) : p_(p) {}\n    Inde() : Inde(1) {}\n    Inde operator^(int\
     \ p) const { return Inde(p_ * p); }\n    Inde operator*(const Inde &rhs) const\
     \ { return Inde(p_ + rhs.p_); }\n    int pow() const { return p_; }\n    XP_plus_C\
     \ operator+(mod_t c) { return XP_plus_C(p_, c); }\n    XP_plus_C operator-(mod_t\
@@ -685,7 +686,7 @@ data:
   isVerificationFile: false
   path: src/FFT/extgcd.hpp
   requiredBy: []
-  timestamp: '2022-12-23 14:05:06+09:00'
+  timestamp: '2022-12-23 15:30:53+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp
