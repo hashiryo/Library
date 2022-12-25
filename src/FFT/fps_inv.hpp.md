@@ -17,45 +17,45 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
   - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
   - icon: ':x:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':x:'
@@ -129,7 +129,7 @@ data:
     title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
     links: []
@@ -488,7 +488,8 @@ data:
     \ LIM>\n           : k == 5 || (k == 1 && t != 1) ? inv_<3, mod_t, LIM>\n    \
     \                                      : inv_<4, mod_t, LIM>)(pp, n, rr);\n  \
     \    }\n    } else\n      (k & 1 ? inv_<3, mod_t, LIM> : inv_<4, mod_t, LIM>)(pp,\
-    \ n, rr);\n  }\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n"
+    \ n, rr);\n  }\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n\
+    using ntt_internal::inv_base, ntt_internal::inv;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\n\n\
     /**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv\n * @category FFT\n */\n\
     \n// BEGIN CUT HERE\nnamespace ntt_internal {\ntemplate <std::size_t LIM, class\
@@ -553,7 +554,8 @@ data:
     \ || (k == 1 && t != 1) ? inv_<3, mod_t, LIM>\n                              \
     \            : inv_<4, mod_t, LIM>)(pp, n, rr);\n      }\n    } else\n      (k\
     \ & 1 ? inv_<3, mod_t, LIM> : inv_<4, mod_t, LIM>)(pp, n, rr);\n  }\n  return\
-    \ std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal"
+    \ std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\nusing ntt_internal::inv_base,\
+    \ ntt_internal::inv;"
   dependsOn:
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
@@ -571,8 +573,8 @@ data:
   - src/FFT/fps_exp.hpp
   - src/FFT/Polynomial.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-12-25 17:31:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-12-25 18:01:06+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3072.test.cpp
   - test/aoj/0168.test.cpp

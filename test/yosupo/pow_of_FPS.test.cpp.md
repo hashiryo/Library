@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
@@ -392,15 +392,16 @@ data:
     \                                      : inv_<4, mod_t, LIM>)(pp, n, rr);\n  \
     \    }\n    } else\n      (k & 1 ? inv_<3, mod_t, LIM> : inv_<4, mod_t, LIM>)(pp,\
     \ n, rr);\n  }\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n\
-    #line 4 \"src/FFT/fps_div.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\
-    \u6570 div\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
-    \ std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> div(const std::vector<mod_t>\
-    \ &p,\n                       const std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t,\
-    \ _Nm, 0>;\n  using GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
-    \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t\
-    \ _Nm2 = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using\
-    \ GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t,\
-    \ _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    using ntt_internal::inv_base, ntt_internal::inv;\n#line 4 \"src/FFT/fps_div.hpp\"\
+    \n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n\
+    \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
+    std::vector<mod_t> div(const std::vector<mod_t> &p,\n                       const\
+    \ std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t, _Nm, 0>;\n  using\
+    \ GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n\
+    \  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t _Nm2\
+    \ = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2\
+    \ = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2,\
+    \ 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
     \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH = 128 <<\
     \ (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int TH2 = 1024 << (!is_nttfriend<mod_t,\
     \ _Nm2>());\n  static constexpr int A = 7;\n  static constexpr int B = 29;\n \
@@ -505,7 +506,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/pow_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-25 17:31:44+09:00'
+  timestamp: '2022-12-25 18:01:06+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/pow_of_FPS.test.cpp
