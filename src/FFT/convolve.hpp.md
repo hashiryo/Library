@@ -17,36 +17,39 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
   - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/convolution_large.test.cpp
+    title: test/yosupo/convolution_large.test.cpp
+  - icon: ':x:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':x:'
@@ -404,7 +407,7 @@ data:
     \ sz, mod_t(0));\n    std::copy(p.begin(), p.end(), pp), std::copy(q.begin(),\
     \ q.end(), qq);\n    for (int i = n; i--;)\n      for (int j = m; j--;) rr[i +\
     \ j] += pp[i] * qq[j];\n  } else {\n    const int rl = get_len(sz), l = get_len(std::max(n,\
-    \ m)), fl = f(l);\n    static constexpr std::size_t LIM2 = LIM >> 4;\n    static\
+    \ m)), fl = f(l);\n    static constexpr std::size_t LIM2 = LIM >> 3;\n    static\
     \ constexpr bool b = nttarr_cat<mod_t, LIM2> < t;\n    if (b || (l + fl < sz &&\
     \ sz <= (rl >> 3) * 5)) {\n      using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n\
     \      using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n      auto gt1 = GlobalNTTArray2D<mod_t,\
@@ -451,7 +454,7 @@ data:
     \ p.end(), pp), std::copy(q.begin(), q.end(), qq);\n    for (int i = n; i--;)\n\
     \      for (int j = m; j--;) rr[i + j] += pp[i] * qq[j];\n  } else {\n    const\
     \ int rl = get_len(sz), l = get_len(std::max(n, m)), fl = f(l);\n    static constexpr\
-    \ std::size_t LIM2 = LIM >> 4;\n    static constexpr bool b = nttarr_cat<mod_t,\
+    \ std::size_t LIM2 = LIM >> 3;\n    static constexpr bool b = nttarr_cat<mod_t,\
     \ LIM2> < t;\n    if (b || (l + fl < sz && sz <= (rl >> 3) * 5)) {\n      using\
     \ GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n      using GNA2 = GlobalNTTArray<mod_t,\
     \ LIM2, 2>;\n      auto gt1 = GlobalNTTArray2D<mod_t, LIM2, 16, 1>::bf,\n    \
@@ -495,7 +498,7 @@ data:
   - src/FFT/bostan_mori.hpp
   - src/FFT/sequences.hpp
   - src/FFT/Polynomial.hpp
-  timestamp: '2022-12-23 15:30:53+09:00'
+  timestamp: '2022-12-25 17:31:44+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/0168.test.cpp
@@ -507,6 +510,7 @@ data:
   - test/yukicoder/980.test.cpp
   - test/yukicoder/658.test.cpp
   - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/convolution_large.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/stirling_1.test.cpp
   - test/yosupo/bernoulli.test.cpp

@@ -338,7 +338,7 @@ data:
     \ sz, mod_t(0));\n    std::copy(p.begin(), p.end(), pp), std::copy(q.begin(),\
     \ q.end(), qq);\n    for (int i = n; i--;)\n      for (int j = m; j--;) rr[i +\
     \ j] += pp[i] * qq[j];\n  } else {\n    const int rl = get_len(sz), l = get_len(std::max(n,\
-    \ m)), fl = f(l);\n    static constexpr std::size_t LIM2 = LIM >> 4;\n    static\
+    \ m)), fl = f(l);\n    static constexpr std::size_t LIM2 = LIM >> 3;\n    static\
     \ constexpr bool b = nttarr_cat<mod_t, LIM2> < t;\n    if (b || (l + fl < sz &&\
     \ sz <= (rl >> 3) * 5)) {\n      using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n\
     \      using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n      auto gt1 = GlobalNTTArray2D<mod_t,\
@@ -393,7 +393,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/convolution1000000007.test.cpp
   requiredBy: []
-  timestamp: '2022-12-23 15:30:53+09:00'
+  timestamp: '2022-12-25 17:31:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/convolution1000000007.test.cpp

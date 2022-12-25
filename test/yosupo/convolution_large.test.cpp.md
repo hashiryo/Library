@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/FFT/BigInt.hpp
-    title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
+  - icon: ':question:'
+    path: src/FFT/convolve.hpp
+    title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -26,15 +26,21 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A
+    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_large
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A
-  bundledCode: "#line 1 \"test/aoj/NTL_2_A.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModIntPrototype.hpp\"\n/**\n *\
-    \ @title ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7\n * @category \u6570\
-    \u5B66\n * \u30E2\u30F3\u30B4\u30E1\u30EA\u3068\u304B\n */\n\n// BEGIN CUT HERE\n\
-    namespace math_internal {\nusing namespace std;\nusing u32 = uint32_t;\nusing\
-    \ u64 = uint64_t;\nusing u128 = __uint128_t;\nstruct MIntPro_Montg {\n  const\
+    - https://judge.yosupo.jp/problem/convolution_mod_large
+  bundledCode: "#line 1 \"test/yosupo/convolution_large.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/convolution_mod_large\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Math/mod_inv.hpp\"\n/**\n * @title \u9006\u5143 ($\\mathbb{Z}/m\\\
+    mathbb{Z}$)\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <class\
+    \ Int>\nconstexpr inline Int mod_inv(Int a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n\
+    \  Int x = 1, y = 0, b = mod;\n  for (Int q = 0, z = 0, c = 0; b;)\n    z = x,\
+    \ c = a, x = y, y = z - y * (q = a / b), a = b, b = c - b * q;\n  return assert(a\
+    \ == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\
+    \n/**\n * @title ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7\n * @category\
+    \ \u6570\u5B66\n * \u30E2\u30F3\u30B4\u30E1\u30EA\u3068\u304B\n */\n\n// BEGIN\
+    \ CUT HERE\nnamespace math_internal {\nusing namespace std;\nusing u32 = uint32_t;\n\
+    using u64 = uint64_t;\nusing u128 = __uint128_t;\nstruct MIntPro_Montg {\n  const\
     \ u64 mod;\n  constexpr MIntPro_Montg() : mod(0), iv(0), r2(0) {}\n  constexpr\
     \ MIntPro_Montg(u64 m) : mod(m), iv(inv(m)), r2(-u128(mod) % mod) {}\n  constexpr\
     \ inline u64 mul(u64 l, u64 r) const { return reduce(u128(l) * r); }\n#define\
@@ -59,32 +65,13 @@ data:
     \ norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t>\nconstexpr\
     \ Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret = md.set(1);;\
     \ x = md.mul(x, x))\n    if (k & 1 ? ret = md.mul(ret, x) : 0; !(k >>= 1)) return\
-    \ ret;\n}\n}  // namespace math_internal\n#line 4 \"src/Math/is_prime.hpp\"\n\
-    /**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log\
-    \ N)\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate <class Uint,\
-    \ class mod_pro_t, u64... args>\nconstexpr bool miller_rabin(Uint n) {\n  const\
-    \ mod_pro_t md(n);\n  const Uint s = __builtin_ctzll(n - 1), d = n >> s, one =\
-    \ md.set(1),\n             n1 = md.norm(md.set(n - 1));\n  for (auto a : {args...})\
-    \ {\n    Uint b = a % n, p = pow(md.set(b), d, md), i = s;\n    while (p = md.norm(p),\
-    \ (p != one && p != n1 && b && i--)) p = md.mul(p, p);\n    if (md.norm(p) !=\
-    \ n1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool is_prime(u64\
-    \ n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX)\
-    \ return miller_rabin<u32, MIntPro_Na<u32>, 2, 7, 61>(n);\n  if (n < LLONG_MAX)\n\
-    \    return miller_rabin<u64, MIntPro_Montg, 2, 325, 9375, 28178, 450775,\n  \
-    \                      9780504, 1795265022>(n);\n  return miller_rabin<u64, MIntPro_Na<u64>,\
-    \ 2, 325, 9375, 28178, 450775,\n                      9780504, 1795265022>(n);\n\
-    }\n}  // namespace math_internal\nusing math_internal::is_prime;\n#line 3 \"src/Math/mod_inv.hpp\"\
-    \n/**\n * @title \u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\
-    \u5B66\n */\n\n// BEGIN CUT HERE\ntemplate <class Int>\nconstexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n  Int x = 1, y = 0,\
-    \ b = mod;\n  for (Int q = 0, z = 0, c = 0; b;)\n    z = x, c = a, x = y, y =\
-    \ z - y * (q = a / b), a = b, b = c - b * q;\n  return assert(a == 1), x < 0 ?\
-    \ mod - (-x) % mod : x % mod;\n}\n#line 5 \"src/Math/ModInt.hpp\"\n/**\n * @title\
-    \ ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace math_internal\
-    \ {\nstruct modint_base {};\nstruct sta_mint_base : modint_base {};\nstruct run_mint_base\
-    \ : modint_base {};\ntemplate <class mod_t>\nconstexpr bool is_modint_v = is_base_of_v<modint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_runtimemodint_v = is_base_of_v<run_mint_base,\
+    \ ret;\n}\n}  // namespace math_internal\n#line 5 \"src/Math/ModInt.hpp\"\n/**\n\
+    \ * @title ModInt\n * @category \u6570\u5B66\n */\n\n// BEGIN CUT HERE\nnamespace\
+    \ math_internal {\nstruct modint_base {};\nstruct sta_mint_base : modint_base\
+    \ {};\nstruct run_mint_base : modint_base {};\ntemplate <class mod_t>\nconstexpr\
+    \ bool is_modint_v = is_base_of_v<modint_base, mod_t>;\ntemplate <class mod_t>\n\
+    constexpr bool is_staticmodint_v = is_base_of_v<sta_mint_base, mod_t>;\ntemplate\
+    \ <class mod_t>\nconstexpr bool is_runtimemodint_v = is_base_of_v<run_mint_base,\
     \ mod_t>;\ntemplate <class mod_pro_t, u64 MOD>\nstruct StaticB : sta_mint_base\
     \ {\n protected:\n  static constexpr mod_pro_t md = mod_pro_t(MOD);\n};\ntemplate\
     \ <class mod_pro_t, int id>\nstruct RuntimeB : run_mint_base {\n  static inline\
@@ -130,37 +117,51 @@ data:
     mod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
     \ m = mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l = 1;\n  if (l\
     \ == 1) dat[l++] = 1;\n  while (l <= n) dat[l++] = dat[m % l] * (m - m / l);\n\
-    \  return dat[n];\n}\n#line 5 \"src/FFT/NTT.hpp\"\n\n/**\n * @title Number-Theoretic-Transform\n\
-    \ * @category FFT\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate\
-    \ <class mod_t>\nstruct NumberTheoreticTransform {\n  static inline void dft(int\
-    \ n, mod_t x[]) {\n    if constexpr (mod < INT_MAX) {\n      static constexpr\
-    \ auto r3 = ratios<3>(rt, irt);\n      static constexpr u128 imag = rt[2].val(),\
-    \ mod3 = u128(mod) << 93;\n      for (int p = n >> 2, ed = 1; p; p >>= 2, ed <<=\
-    \ 2) {\n        mod_t rot = one, rot2 = one, rot3 = one, *x0 = x, *x1, *x2, *x3;\n\
-    \        for (int s = 0, i;; rot *= r3[__builtin_ctz(s)], rot2 = rot * rot,\n\
-    \                 rot3 = rot2 * rot, x0 = x3 + p) {\n          u64 rot_u = rot.val(),\
-    \ rot2_u = rot2.val(), rot3_u = rot3.val();\n          for (x1 = x0 + p, x2 =\
-    \ x1 + p, x3 = x2 + p, i = p; i--;) {\n            u64 a0 = x0[i].val(), a1 =\
-    \ rot_u * x1[i].val(),\n                a2 = rot2_u * x2[i].val(), a3 = rot3_u\
-    \ * x3[i].val(),\n                na3 = mod2 - a3, a0n2 = mod2 + a0 - a2;\n  \
-    \          u128 a1na3imag = imag * (a1 + na3);\n            x0[i] = a0 + a1 +\
-    \ a2 + a3, x1[i] = a0 + (mod2 - a1) + a2 + na3;\n            x2[i] = a1na3imag\
-    \ + a0n2, x3[i] = mod3 - a1na3imag + a0n2;\n          }\n          if (++s ==\
-    \ ed) break;\n        }\n      }\n      if (__builtin_ctz(n) & 1) {\n        mod_t\
-    \ rot = one, u;\n        for (int s = 0, m = 0;; rot *= r2[__builtin_ctz(++s)])\
-    \ {\n          x[m + 1] = x[m] - (u = x[m + 1] * rot), x[m] += u;\n          if\
-    \ ((m += 2) == n) break;\n        }\n      }\n    } else\n      for (int m = n,\
-    \ s = 0, i, ed = 1; m >>= 1; s = 0, ed <<= 1)\n        for (mod_t rot = one, *x0\
-    \ = x, *x1, u;;\n             rot *= r2[__builtin_ctz(s)], x0 = x1 + m) {\n  \
-    \        for (x1 = x0 + (i = m); i--;)\n            x1[i] = x0[i] - (u = rot *\
-    \ x1[i]), x0[i] += u;\n          if (++s == ed) break;\n        }\n  }\n  static\
-    \ inline void idft(int n, mod_t x[]) {\n    if constexpr (mod < INT_MAX) {\n \
-    \     static constexpr auto ir3 = ratios<3>(irt, rt);\n      static constexpr\
-    \ u64 iimag = irt[2].val();\n      for (int ed = n >> 2, p = 1; ed; p <<= 2, ed\
-    \ >>= 2) {\n        mod_t irot = one, irot2 = one, irot3 = one, *x0 = x, *x1,\
-    \ *x2, *x3;\n        for (int s = 0, i;; irot *= ir3[__builtin_ctz(s)], irot2\
-    \ = irot * irot,\n                 irot3 = irot2 * irot, x0 = x3 + p) {\n    \
-    \      u64 irot2_u = irot2.val();\n          u128 irot_u = irot.val(), irot3_u\
+    \  return dat[n];\n}\n#line 3 \"src/FFT/convolve.hpp\"\n\n#line 4 \"src/Math/is_prime.hpp\"\
+    \n/**\n * @title \u7D20\u6570\u5224\u5B9A\n * @category \u6570\u5B66\n *  O(log\
+    \ N)\n */\n\n// BEGIN CUT HERE\nnamespace math_internal {\ntemplate <class Uint,\
+    \ class mod_pro_t, u64... args>\nconstexpr bool miller_rabin(Uint n) {\n  const\
+    \ mod_pro_t md(n);\n  const Uint s = __builtin_ctzll(n - 1), d = n >> s, one =\
+    \ md.set(1),\n             n1 = md.norm(md.set(n - 1));\n  for (auto a : {args...})\
+    \ {\n    Uint b = a % n, p = pow(md.set(b), d, md), i = s;\n    while (p = md.norm(p),\
+    \ (p != one && p != n1 && b && i--)) p = md.mul(p, p);\n    if (md.norm(p) !=\
+    \ n1 && i != s) return false;\n  }\n  return true;\n}\nconstexpr bool is_prime(u64\
+    \ n) {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX)\
+    \ return miller_rabin<u32, MIntPro_Na<u32>, 2, 7, 61>(n);\n  if (n < LLONG_MAX)\n\
+    \    return miller_rabin<u64, MIntPro_Montg, 2, 325, 9375, 28178, 450775,\n  \
+    \                      9780504, 1795265022>(n);\n  return miller_rabin<u64, MIntPro_Na<u64>,\
+    \ 2, 325, 9375, 28178, 450775,\n                      9780504, 1795265022>(n);\n\
+    }\n}  // namespace math_internal\nusing math_internal::is_prime;\n#line 5 \"src/FFT/NTT.hpp\"\
+    \n\n/**\n * @title Number-Theoretic-Transform\n * @category FFT\n */\n\n// BEGIN\
+    \ CUT HERE\nnamespace math_internal {\ntemplate <class mod_t>\nstruct NumberTheoreticTransform\
+    \ {\n  static inline void dft(int n, mod_t x[]) {\n    if constexpr (mod < INT_MAX)\
+    \ {\n      static constexpr auto r3 = ratios<3>(rt, irt);\n      static constexpr\
+    \ u128 imag = rt[2].val(), mod3 = u128(mod) << 93;\n      for (int p = n >> 2,\
+    \ ed = 1; p; p >>= 2, ed <<= 2) {\n        mod_t rot = one, rot2 = one, rot3 =\
+    \ one, *x0 = x, *x1, *x2, *x3;\n        for (int s = 0, i;; rot *= r3[__builtin_ctz(s)],\
+    \ rot2 = rot * rot,\n                 rot3 = rot2 * rot, x0 = x3 + p) {\n    \
+    \      u64 rot_u = rot.val(), rot2_u = rot2.val(), rot3_u = rot3.val();\n    \
+    \      for (x1 = x0 + p, x2 = x1 + p, x3 = x2 + p, i = p; i--;) {\n          \
+    \  u64 a0 = x0[i].val(), a1 = rot_u * x1[i].val(),\n                a2 = rot2_u\
+    \ * x2[i].val(), a3 = rot3_u * x3[i].val(),\n                na3 = mod2 - a3,\
+    \ a0n2 = mod2 + a0 - a2;\n            u128 a1na3imag = imag * (a1 + na3);\n  \
+    \          x0[i] = a0 + a1 + a2 + a3, x1[i] = a0 + (mod2 - a1) + a2 + na3;\n \
+    \           x2[i] = a1na3imag + a0n2, x3[i] = mod3 - a1na3imag + a0n2;\n     \
+    \     }\n          if (++s == ed) break;\n        }\n      }\n      if (__builtin_ctz(n)\
+    \ & 1) {\n        mod_t rot = one, u;\n        for (int s = 0, m = 0;; rot *=\
+    \ r2[__builtin_ctz(++s)]) {\n          x[m + 1] = x[m] - (u = x[m + 1] * rot),\
+    \ x[m] += u;\n          if ((m += 2) == n) break;\n        }\n      }\n    } else\n\
+    \      for (int m = n, s = 0, i, ed = 1; m >>= 1; s = 0, ed <<= 1)\n        for\
+    \ (mod_t rot = one, *x0 = x, *x1, u;;\n             rot *= r2[__builtin_ctz(s)],\
+    \ x0 = x1 + m) {\n          for (x1 = x0 + (i = m); i--;)\n            x1[i] =\
+    \ x0[i] - (u = rot * x1[i]), x0[i] += u;\n          if (++s == ed) break;\n  \
+    \      }\n  }\n  static inline void idft(int n, mod_t x[]) {\n    if constexpr\
+    \ (mod < INT_MAX) {\n      static constexpr auto ir3 = ratios<3>(irt, rt);\n \
+    \     static constexpr u64 iimag = irt[2].val();\n      for (int ed = n >> 2,\
+    \ p = 1; ed; p <<= 2, ed >>= 2) {\n        mod_t irot = one, irot2 = one, irot3\
+    \ = one, *x0 = x, *x1, *x2, *x3;\n        for (int s = 0, i;; irot *= ir3[__builtin_ctz(s)],\
+    \ irot2 = irot * irot,\n                 irot3 = irot2 * irot, x0 = x3 + p) {\n\
+    \          u64 irot2_u = irot2.val();\n          u128 irot_u = irot.val(), irot3_u\
     \ = irot3.val();\n          for (x1 = x0 + p, x2 = x1 + p, x3 = x2 + p, i = p;\
     \ i--;) {\n            u64 a0 = x0[i].val(), a1 = x1[i].val(), a2 = x2[i].val(),\n\
     \                a3 = x3[i].val(), na3 = mod - a3, a0n1 = a0 + mod - a1,\n   \
@@ -322,132 +323,83 @@ data:
     \ {\n  static inline NTTArray<T, LIM, false> bf[LIM2];\n};\ntemplate <class T,\
     \ std::size_t LIM, int id = 0>\nstruct GlobalArray {\n  static inline T bf[LIM];\n\
     };\nconstexpr unsigned get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1);\
-    \ }\n#line 4 \"src/FFT/BigInt.hpp\"\n\n/**\n * @title \u591A\u500D\u9577\u6574\
-    \u6570\n * @category FFT\n */\n\n// BEGIN CUT HERE\nclass BigInt {\n  static constexpr\
-    \ unsigned BASE = 10000000, D = 7;\n  using mod_t = StaticModInt<0x3ffffffffa000001>;\n\
-    \  using Vec = std::vector<unsigned>;\n  using NTT = NumberTheoreticTransform<mod_t>;\n\
-    \  bool neg;\n  Vec dat;\n  BigInt shift(int sz) const { return {neg, Vec(dat.begin()\
-    \ + sz, dat.end())}; }\n  BigInt(bool n, const Vec &d) : neg(n), dat(d) {}\n\n\
-    \ public:\n  BigInt() : neg(false), dat() {}\n  BigInt(long long v) : neg(v <\
-    \ 0) {\n    for (v = std::abs(v); v; v /= BASE) dat.push_back(v % BASE);\n  }\n\
-    \  BigInt(const std::string &s) : neg(false) {\n    int p = 0, x = 0;\n    for\
-    \ (; p < (int)s.size() && (s[p] == '-' || s[p] == '+'); p++)\n      if (s[p] ==\
-    \ '-') neg = !neg;\n    for (int i = s.size(), j; i > p; i -= D, dat.push_back(x),\
-    \ x = 0)\n      for (j = std::max(p, i - int(D)); j < i;) x = x * 10 + s[j++]\
-    \ - '0';\n    shrink();\n  }\n  inline void shrink() {\n    while (!dat.empty()\
-    \ && !dat.back()) dat.pop_back();\n    if (dat.empty()) neg = false;\n  }\n  std::string\
-    \ to_str() const {\n    if (is_zero()) return \"0\";\n    std::stringstream ss;\n\
-    \    if (neg) ss << '-';\n    ss << (dat.empty() ? 0 : dat.back());\n    for (long\
-    \ long i = dat.size() - 1; i-- > 0;)\n      ss << std::setw(D) << std::setfill('0')\
-    \ << dat[i];\n    std::string ret;\n    return ss >> ret, ret;\n  }\n  bool is_zero()\
-    \ const { return dat.empty() || (dat.size() == 1 && !dat[0]); }\n  bool operator<(const\
-    \ BigInt &r) const {\n    if (neg != r.neg) return neg;\n    if (dat.size() !=\
-    \ r.dat.size()) return (dat.size() < r.dat.size()) ^ neg;\n    for (int i = dat.size();\
-    \ i--;)\n      if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n   \
-    \ return false;\n  }\n  bool operator>(const BigInt &r) const { return r < *this;\
-    \ }\n  bool operator<=(const BigInt &r) const { return !(r < *this); }\n  bool\
-    \ operator>=(const BigInt &r) const { return !(*this < r); }\n  bool operator==(const\
-    \ BigInt &r) const {\n    return (neg == r.neg && dat == r.dat) || (is_zero()\
-    \ && r.is_zero());\n  }\n  bool operator!=(const BigInt &r) const { return !(*this\
-    \ == r); }\n  BigInt abs() const { return BigInt(false, dat); }\n  BigInt operator-()\
-    \ const { return BigInt(!neg, dat); }\n  BigInt operator+(const BigInt &r) const\
-    \ {\n    if (neg != r.neg) return *this - (-r);\n    auto [ret, tmp] = dat.size()\
-    \ > r.dat.size() ? std::make_pair(*this, &r)\n                               \
-    \                 : std::make_pair(r, this);\n    int car = 0, i, n = ret.dat.size(),\
-    \ m = tmp->dat.size();\n    for (i = 0; i < m; i++)\n      ret.dat[i] -= BASE\
-    \ & -(car = ((ret.dat[i] += car + tmp->dat[i]) >= BASE));\n    if (car) {\n  \
-    \    while (i < n && ret.dat[i] == BASE - 1) ret.dat[i++] = 0;\n      i < n ?\
-    \ ret.dat[i]++ : (ret.dat.push_back(1), 0);\n    }\n    return ret;\n  }\n  BigInt\
-    \ operator-(const BigInt &r) const {\n    if (neg != r.neg) return *this + (-r);\n\
-    \    if (r.is_zero()) return *this;\n    if (is_zero()) return -r;\n    auto [ret,\
-    \ tmp] =\n        abs() > r.abs() ? std::make_pair(*this, &r) : std::make_pair(r,\
-    \ this);\n    int car = 0, i, n = ret.dat.size(), m = tmp->dat.size();\n    for\
-    \ (i = 0; i < m; i++)\n      ret.dat[i] += BASE & -(car = ((ret.dat[i] -= car\
-    \ + tmp->dat[i]) >> 31));\n    while (car && i < n && !ret.dat[i]) ret.dat[i++]\
-    \ = BASE - 1;\n    return ret.neg ^= (tmp == this), ret.dat[i] -= car, ret.shrink(),\
-    \ ret;\n  }\n  long long operator%(long long r) const {\n    long long ret = 0;\n\
-    \    for (int i = dat.size(); i--;) ret = (ret * BASE + dat[i]) % r;\n    return\
-    \ ret;\n  }\n  BigInt operator*(const BigInt &r) const {\n    if (is_zero() ||\
-    \ r.is_zero()) return 0;\n    const int n = dat.size(), m = r.dat.size(), sz =\
-    \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20], f2[1 << 17][16], g2[1 <<\
-    \ 17][16];\n    static long long h[1 << 20];\n    if (int i = n, j; std::min(n,\
-    \ m) >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n\
-    \      const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
-    \ <= (rl >> 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l\
-    \ - 1) / l,\n                  mm = (m + l - 1) / l, ss = nn + mm - 1;\n     \
-    \   for (int k = i = 0, s; k < n; i++, k += l) {\n          for (j = s = std::min(l,\
-    \ n - k); j--;) f2[i][j] = dat[k + j];\n          std::fill_n(f2[i] + s, l2 -\
-    \ s, mod_t()), NTT::dft(l2, f2[i]);\n        }\n        if (this != &r)\n    \
-    \      for (int k = i = 0, s; k < m; i++, k += l) {\n            for (j = s =\
-    \ std::min(l, m - k); j--;) g2[i][j] = dat[k + j];\n            std::fill_n(g2[i]\
-    \ + s, l2 - s, mod_t()), NTT::dft(l2, g2[i]);\n          }\n        else\n   \
-    \       for (i = nn; i--;) std::copy_n(f2[i], l2, g2[i]);\n        for (i = l2;\
-    \ i--;) f[i] = f2[0][i] * g2[0][i];\n        for (NTT::idft(l2, f), i = l2; i--;)\
-    \ h[i] = f[i].val();\n        for (int k = l, ed, ii = 1; ii < ss; ++ii, k +=\
-    \ l) {\n          j = std::max(0, ii - nn + 1), ed = std::min(mm - 1, ii);\n \
-    \         for (i = l2; i--;) f[i] = f2[ii - ed][i] * g2[ed][i];\n          for\
-    \ (; j < ed; ++j)\n            for (i = l2; i--;) f[i] += f2[ii - j][i] * g2[j][i];\n\
-    \          for (NTT::idft(l2, f), i = std::min(l, sz - k); i--;)\n           \
-    \ h[i + k] += f[i].val();\n          for (i = std::min(l2, sz - k); i-- > l;)\
-    \ h[i + k] = f[i].val();\n        }\n      } else {\n        const int len = sz\
-    \ <= l + fl ? l : get_len(sz);\n        for (i = n; i--;) f[i] = dat[i];\n   \
-    \     std::fill_n(f + n, len - n, mod_t()), NTT::dft(len, f);\n        if (this\
-    \ != &r) {\n          for (i = m; i--;) g[i] = r.dat[i];\n          std::fill_n(g\
-    \ + m, len - m, mod_t()), NTT::dft(len, g);\n          for (i = len; i--;) f[i]\
-    \ *= g[i];\n        } else\n          for (i = len; i--;) f[i] *= f[i];\n    \
-    \    for (NTT::idft(len, f), i = len; i < sz; f[i - len] -= h[i], i++)\n     \
-    \     for (h[i] = 0, j = i - m + 1; j < n; j++)\n            h[i] += (long long)dat[j]\
-    \ * r.dat[i - j];\n        for (i = std::min(sz, len); i--;) h[i] = f[i].val();\n\
-    \      }\n    } else\n      for (std::fill_n(h, sz, 0); i--;)\n        for (j\
-    \ = m; j--;) h[i + j] += (long long)dat[i] * r.dat[j];\n    BigInt ret(neg ^ r.neg,\
-    \ Vec(sz));\n    long long car = 0;\n    for (int i = 0; i < sz; i++, car /= BASE)\
-    \ ret.dat[i] = (car += h[i]) % BASE;\n    for (; car; car /= BASE) ret.dat.emplace_back(car\
-    \ % BASE);\n    return ret;\n  }\n  BigInt operator/(const BigInt &r) const {\n\
-    \    assert(!r.is_zero());\n    if (r.dat.size() == 1 && r.dat.back() == 1) return\
-    \ r.neg ? -*this : *this;\n    BigInt a = this->abs(), b = r.abs();\n    if (a\
-    \ < b) return 0;\n    const int pb = dat.size(), qb = r.dat.size(), prec = std::max(pb\
-    \ - qb, 1);\n    int l = std::min(prec, 3), ql = std::min(qb, 6), nl, nql;\n \
-    \   BigInt x(0, Vec(l + 1)), p, rr = b.shift(qb - ql), c(0, Vec(l + ql + 1));\n\
-    \    x.dat.back() = 1, c.dat.back() = 2;\n    while (x != p) p.dat.swap(x.dat),\
-    \ x = (p * (c - rr * p)).shift(l + ql);\n    if (l != prec)\n      for (p.neg\
-    \ = true; x != p; l = nl, ql = nql) {\n        nl = std::min(l * 2 + 1, prec),\
-    \ nql = std::min(ql * 2 + 1, qb);\n        p.dat.swap(x.dat), x = (p * (c - rr\
-    \ * p)).shift(2 * l - nl + ql);\n        if (p.neg = false; nql != ql) rr = b.shift(qb\
-    \ - nql);\n        c.dat.back() = 0, c.dat.resize(nql + nl + 1), c.dat.back()\
-    \ = 2;\n      }\n    if (x = (x * a).shift(pb + (pb == qb)); a >= (x + 1) * b)\
-    \ x += 1;\n    return x.neg = neg ^ r.neg, x;\n  }\n  BigInt operator%(const BigInt\
-    \ &r) const { return *this - (*this / r) * r; }\n  BigInt &operator+=(const BigInt\
-    \ &r) { return *this = *this + r; }\n  BigInt &operator-=(const BigInt &r) { return\
-    \ *this = *this - r; }\n  BigInt &operator*=(const BigInt &r) { return *this =\
-    \ *this * r; }\n  BigInt &operator/=(const BigInt &r) { return *this = *this /\
-    \ r; }\n  BigInt &operator%=(const BigInt &r) { return *this = *this % r; }\n\
-    \  friend std::istream &operator>>(std::istream &is, BigInt &v) {\n    std::string\
-    \ s;\n    return is >> s, v = BigInt(s), is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const BigInt &v) {\n    return os << v.to_str(), os;\n  }\n};\n#line 5\
-    \ \"test/aoj/NTL_2_A.test.cpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  BigInt A, B;\n  cin >> A >> B;\n  cout << A\
-    \ + B << endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A\"\
-    \n#include <bits/stdc++.h>\n#include \"src/FFT/BigInt.hpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  BigInt A,\
-    \ B;\n  cin >> A >> B;\n  cout << A + B << endl;\n  return 0;\n}"
+    \ }\n#line 5 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\
+    \n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
+    \ LIM = 1 << 22>\nstd::vector<mod_t> convolve(const std::vector<mod_t> &p,\n \
+    \                           const std::vector<mod_t> &q) {\n  mod_t *pp = GlobalArray<mod_t,\
+    \ LIM, 0>::bf,\n        *qq = GlobalArray<mod_t, LIM, 1>::bf,\n        *rr = GlobalArray<mod_t,\
+    \ LIM, 2>::bf;\n  static constexpr int t = nttarr_cat<mod_t, LIM>;\n  static constexpr\
+    \ int TH = (int[]){70, 30, 70, 100, 135, 150}[t];\n  auto f = [](int l) -> int\
+    \ {\n    static constexpr double B[] = {\n        (double[]){8.288, 5.418, 7.070,\
+    \ 9.676, 11.713, 13.374}[t],\n        (double[]){8.252, 6.578, 9.283, 12.810,\
+    \ 13.853, 15.501}[t]};\n    return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
+    \ & 1]);\n  };\n  const int n = p.size(), m = q.size(), sz = n + m - 1;\n  if\
+    \ (!n || !m) return std::vector<mod_t>();\n  if (std::min(n, m) < TH) {\n    std::fill_n(rr,\
+    \ sz, mod_t(0));\n    std::copy(p.begin(), p.end(), pp), std::copy(q.begin(),\
+    \ q.end(), qq);\n    for (int i = n; i--;)\n      for (int j = m; j--;) rr[i +\
+    \ j] += pp[i] * qq[j];\n  } else {\n    const int rl = get_len(sz), l = get_len(std::max(n,\
+    \ m)), fl = f(l);\n    static constexpr std::size_t LIM2 = LIM >> 3;\n    static\
+    \ constexpr bool b = nttarr_cat<mod_t, LIM2> < t;\n    if (b || (l + fl < sz &&\
+    \ sz <= (rl >> 3) * 5)) {\n      using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n\
+    \      using GNA2 = GlobalNTTArray<mod_t, LIM2, 2>;\n      auto gt1 = GlobalNTTArray2D<mod_t,\
+    \ LIM2, 16, 1>::bf,\n           gt2 = GlobalNTTArray2D<mod_t, LIM2, 16, 2>::bf;\n\
+    \      const int l = rl >> 4, l2 = l << 1, nn = (n + l - 1) / l,\n           \
+    \     mm = (m + l - 1) / l, ss = nn + mm - 1;\n      for (int i = 0, k = 0, s;\
+    \ k < n; ++i, k += l)\n        gt1[i].set(p.data() + k, 0, s = std::min(l, n -\
+    \ k)),\n            gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n      if (&p != &q)\n\
+    \        for (int i = 0, k = 0, s; k < m; ++i, k += l)\n          gt2[i].set(q.data()\
+    \ + k, 0, s = std::min(l, m - k)),\n              gt2[i].zeros(s, l2), gt2[i].dft(0,\
+    \ l2);\n      else\n        for (int i = 0; i < nn; ++i) gt2[i].subst(gt1[i],\
+    \ 0, l2);\n      GNA2::bf.mul(gt1[0], gt2[0], 0, l2), GNA2::bf.idft(0, l2);\n\
+    \      GNA2::bf.get(rr, 0, l2);\n      for (int i = 1, k = l, j, ed; i < ss; ++i,\
+    \ k += l) {\n        j = std::max(0, i - nn + 1), ed = std::min(mm - 1, i);\n\
+    \        for (GNA2::bf.mul(gt1[i - ed], gt2[ed], 0, l2); j < ed; ++j)\n      \
+    \    GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2),\n              GNA2::bf.add(GNA1::bf,\
+    \ 0, l2);\n        GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j = std::min(l, sz\
+    \ - k));\n        for (; j--;) rr[k + j] += pp[j];\n        if (l < sz - k) GNA2::bf.get(rr\
+    \ + k, l, std::min(l2, sz - k));\n      }\n    } else {\n      using GNA1 = GlobalNTTArray<mod_t,\
+    \ LIM, 1>;\n      using GNA2 = GlobalNTTArray<mod_t, LIM, 2>;\n      const int\
+    \ len = sz <= l + fl ? l : rl;\n      GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
+    \ len);\n      if (GNA1::bf.dft(0, len); &p != &q) {\n        GNA2::bf.set(q.data(),\
+    \ 0, m), GNA2::bf.zeros(m, len);\n        GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
+    \ 0, len);\n      } else\n        GNA1::bf.mul(GNA1::bf, 0, len);\n      GNA1::bf.idft(0,\
+    \ len), GNA1::bf.get(rr, 0, std::min(sz, len));\n      if (len < sz) {\n     \
+    \   std::copy(p.begin() + len - m + 1, p.end(), pp + len - m + 1);\n        std::copy(q.begin()\
+    \ + len - n + 1, q.end(), qq + len - n + 1);\n        for (int i = len, j; i <\
+    \ sz; rr[i - len] -= rr[i], ++i)\n          for (rr[i] = mod_t(), j = i - m +\
+    \ 1; j < n; ++j)\n            rr[i] += pp[j] * qq[i - j];\n      }\n    }\n  }\n\
+    \  return std::vector<mod_t>(rr, rr + sz);\n}\n#line 5 \"test/yosupo/convolution_large.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  vector<Mint>\
+    \ a(N), b(M);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  for (int j = 0; j\
+    \ < M; j++) cin >> b[j];\n  auto c = convolve<Mint, (1<<25)>(a, b);\n  c.resize(N\
+    \ + M - 1);\n  for (int k = 0; k < N + M - 1; k++) {\n    cout << c[k] << \" \\\
+    n\"[k == N + M - 2];\n  }\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_large\"\
+    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/convolve.hpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  vector<Mint>\
+    \ a(N), b(M);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  for (int j = 0; j\
+    \ < M; j++) cin >> b[j];\n  auto c = convolve<Mint, (1<<25)>(a, b);\n  c.resize(N\
+    \ + M - 1);\n  for (int k = 0; k < N + M - 1; k++) {\n    cout << c[k] << \" \\\
+    n\"[k == N + M - 2];\n  }\n  return 0;\n}"
   dependsOn:
-  - src/FFT/BigInt.hpp
-  - src/FFT/NTT.hpp
-  - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
+  - src/Math/ModIntPrototype.hpp
+  - src/FFT/convolve.hpp
+  - src/FFT/NTT.hpp
+  - src/Math/is_prime.hpp
   isVerificationFile: true
-  path: test/aoj/NTL_2_A.test.cpp
+  path: test/yosupo/convolution_large.test.cpp
   requiredBy: []
   timestamp: '2022-12-25 17:31:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/NTL_2_A.test.cpp
+documentation_of: test/yosupo/convolution_large.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/NTL_2_A.test.cpp
-- /verify/test/aoj/NTL_2_A.test.cpp.html
-title: test/aoj/NTL_2_A.test.cpp
+- /verify/test/yosupo/convolution_large.test.cpp
+- /verify/test/yosupo/convolution_large.test.cpp.html
+title: test/yosupo/convolution_large.test.cpp
 ---

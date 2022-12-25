@@ -369,8 +369,8 @@ data:
     \    for (int i = dat.size(); i--;) ret = (ret * BASE + dat[i]) % r;\n    return\
     \ ret;\n  }\n  BigInt operator*(const BigInt &r) const {\n    if (is_zero() ||\
     \ r.is_zero()) return 0;\n    const int n = dat.size(), m = r.dat.size(), sz =\
-    \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20], f2[1 << 16][16], g2[1 <<\
-    \ 16][16];\n    static long long h[1 << 20];\n    if (int i = n, j; std::min(n,\
+    \ n + m - 1;\n    static mod_t f[1 << 20], g[1 << 20], f2[1 << 17][16], g2[1 <<\
+    \ 17][16];\n    static long long h[1 << 20];\n    if (int i = n, j; std::min(n,\
     \ m) >= 74) {\n      const int rl = get_len(sz), l = get_len(std::max(n, m));\n\
     \      const int fl = std::pow(l, 0.535) * 8.288;\n      if (l + fl < sz && sz\
     \ <= (rl >> 3) * 5) {\n        const int l = rl >> 4, l2 = l << 1, nn = (n + l\
@@ -441,7 +441,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_C.test.cpp
   requiredBy: []
-  timestamp: '2022-12-23 16:10:50+09:00'
+  timestamp: '2022-12-25 17:31:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_C.test.cpp

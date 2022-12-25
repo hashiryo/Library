@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
@@ -329,22 +329,22 @@ data:
     \ nttarr_cat<mod_t, LIM>;\n  static constexpr int TH = (int[]){64, 32, 64, 128,\
     \ 128, 256}[t];\n  if (n <= i) return;\n  if (l < 0) l = n;\n  assert(((n & -n)\
     \ == n)), assert(i && ((i & -i) == i));\n  const int m = std::min(n, TH);\n  const\
-    \ mod_t miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n    for (r[j = i] =\
-    \ mod_t(); j--;) r[i] += r[j] * p[i - j];\n  static constexpr int lnR = 2 + (t\
-    \ == 0), LIM2 = LIM >> (lnR - 1),\n                       R = (1 << lnR) - 1;\n\
-    \  using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t,\
-    \ LIM2, 2>;\n  auto gt1 = GlobalNTTArray2D<mod_t, LIM2, R, 1>::bf;\n  auto gt2\
-    \ = GlobalNTTArray2D<mod_t, LIM2, R, 2>::bf;\n  int ed = [&]() {\n    if constexpr\
-    \ (t == 0)\n      return (1 << (1 + ((__builtin_ctz(n) + 2) % 3))) - 1;\n    else\n\
-    \      return (1 << (1 + (__builtin_ctz(TH) & 1))) - 1;\n  }();\n  for (; i <\
-    \ n; ed = R) {\n    mod_t *rr = r;\n    const mod_t *pp = p;\n    const int s\
-    \ = i, e = s << 1;\n    for (int k = 0, j; i < n && k < ed; ++k, i += s, pp +=\
-    \ s) {\n      if (k * s < l) gt2[k].set(pp, 0, e), gt2[k].dft(0, e);\n      gt1[k].set(rr,\
-    \ 0, s), gt1[k].zeros(s, e), gt1[k].dft(0, e);\n      for (GNA2::bf.mul(gt1[k],\
-    \ gt2[0], 0, e), j = std::min(k, l / s) + 1; --j;)\n        GNA1::bf.mul(gt1[k\
-    \ - j], gt2[j], 0, e), GNA2::bf.add(GNA1::bf, 0, e);\n      GNA2::bf.idft(0, e),\
-    \ GNA2::bf.zeros(0, s);\n      if constexpr (!is_nttfriend<mod_t, LIM2>())\n \
-    \       GNA2::bf.get(rr, s, e), GNA2::bf.set(rr, s, e);\n      GNA2::bf.dft(0,\
+    \ mod_t miv = -r[0];\n  for (int j; i < m; r[i++] *= miv)\n    for (r[i] = mod_t(),\
+    \ j = std::min(i + 1, l); --j;) r[i] += r[i - j] * p[j];\n  static constexpr int\
+    \ lnR = 2 + (t == 0), LIM2 = LIM >> (lnR - 1),\n                       R = (1\
+    \ << lnR) - 1;\n  using GNA1 = GlobalNTTArray<mod_t, LIM2, 1>;\n  using GNA2 =\
+    \ GlobalNTTArray<mod_t, LIM2, 2>;\n  auto gt1 = GlobalNTTArray2D<mod_t, LIM2,\
+    \ R, 1>::bf;\n  auto gt2 = GlobalNTTArray2D<mod_t, LIM2, R, 2>::bf;\n  int ed\
+    \ =\n      (1 << (1 + (t ? __builtin_ctz(TH) & 1 : (__builtin_ctz(n) + 2) % 3)))\
+    \ - 1;\n  for (; i < n; ed = R) {\n    mod_t *rr = r;\n    const mod_t *pp = p;\n\
+    \    const int s = i, e = s << 1, ss = (l - 1) / s;\n    for (int k = 0, j; i\
+    \ < n && k < ed; ++k, i += s, pp += s) {\n      if (j = std::min(e, l - k * s);\
+    \ j > 0)\n        gt2[k].set(pp, 0, j), gt2[k].zeros(j, e), gt2[k].dft(0, e);\n\
+    \      gt1[k].set(rr, 0, s), gt1[k].zeros(s, e), gt1[k].dft(0, e);\n      for\
+    \ (GNA2::bf.mul(gt1[k], gt2[0], 0, e), j = std::min(k, ss) + 1; --j;)\n      \
+    \  GNA1::bf.mul(gt1[k - j], gt2[j], 0, e), GNA2::bf.add(GNA1::bf, 0, e);\n   \
+    \   GNA2::bf.idft(0, e), GNA2::bf.zeros(0, s);\n      if constexpr (!is_nttfriend<mod_t,\
+    \ LIM2>())\n        GNA2::bf.get(rr, s, e), GNA2::bf.set(rr, s, e);\n      GNA2::bf.dft(0,\
     \ e), GNA2::bf.mul(gt1[0], 0, e), GNA2::bf.idft(0, e);\n      for (GNA2::bf.get(rr,\
     \ s, e), rr += s, j = s; j--;) rr[j] = -rr[j];\n    }\n  }\n}\ntemplate <std::size_t\
     \ lnR, class mod_t, std::size_t LIM = 1 << 22>\nvoid inv_(const mod_t p[], int\
@@ -386,12 +386,11 @@ data:
     \                                      : inv_<4, mod_t, LIM>)(pp, n, rr);\n  \
     \    }\n    } else\n      (k & 1 ? inv_<3, mod_t, LIM> : inv_<4, mod_t, LIM>)(pp,\
     \ n, rr);\n  }\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n\
-    using ntt_internal::inv_base, ntt_internal::inv;\n#line 5 \"test/yosupo/inv_of_FPS.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N;\n  cin >> N;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint>\
-    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = inv(a);\n  for\
-    \ (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n\
-    }\n"
+    #line 5 \"test/yosupo/inv_of_FPS.test.cpp\"\nusing namespace std;\n\nsigned main()\
+    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N;\n  cin >> N;\n  using\
+    \ Mint = StaticModInt<998244353>;\n  vector<Mint> a(N);\n  for (int i = 0; i <\
+    \ N; i++) cin >> a[i];\n  auto b = inv(a);\n  for (int i = 0; i < N; i++) cout\
+    \ << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_inv.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -409,7 +408,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-23 18:44:57+09:00'
+  timestamp: '2022-12-25 17:31:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_FPS.test.cpp
