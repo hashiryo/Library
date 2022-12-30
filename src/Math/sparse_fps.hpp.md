@@ -13,12 +13,12 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -47,7 +47,7 @@ data:
     title: test/yukicoder/1939.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     links:
@@ -340,7 +340,7 @@ data:
   path: src/Math/sparse_fps.hpp
   requiredBy: []
   timestamp: '2022-12-30 21:33:55+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp

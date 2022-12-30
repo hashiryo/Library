@@ -33,12 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
@@ -535,7 +535,7 @@ data:
   path: src/FFT/BigInt.hpp
   requiredBy: []
   timestamp: '2022-12-30 21:33:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_B.test.cpp
