@@ -142,99 +142,99 @@ data:
     \  x0[i]= a0 + a1 + a2 + a3, x1[i]= a0 + (mod2 - a1) + a2 + na3;\n           \
     \ x2[i]= a1na3imag + a0n2, x3[i]= mod3 - a1na3imag + a0n2;\n          }\n    \
     \      if (++s == ed) break;\n        }\n      }\n      if (__builtin_ctz(n) &\
-    \ 1) {\n        mod_t rot= one, u;\n        for (int s= 0, m= 0;; rot*= r2[__builtin_ctz(++s)])\
-    \ {\n          x[m + 1]= x[m] - (u= x[m + 1] * rot), x[m]+= u;\n          if ((m+=\
-    \ 2) == n) break;\n        }\n      }\n    } else\n      for (int m= n, s= 0,\
-    \ i, ed= 1; m>>= 1; s= 0, ed<<= 1)\n        for (mod_t rot= one, *x0= x, *x1,\
-    \ u;;\n             rot*= r2[__builtin_ctz(s)], x0= x1 + m) {\n          for (x1=\
-    \ x0 + (i= m); i--;)\n            x1[i]= x0[i] - (u= rot * x1[i]), x0[i]+= u;\n\
-    \          if (++s == ed) break;\n        }\n  }\n  static inline void idft(int\
-    \ n, mod_t x[]) {\n    if constexpr (mod < INT_MAX) {\n      static constexpr\
+    \ 1) {\n        mod_t rot= one, u;\n        for (int s= 0, m= 0;; rot*= r2[__builtin_ctz(++s)])\n\
+    \          if (x[m + 1]= x[m] - (u= x[m + 1] * rot), x[m]+= u; (m+= 2) == n)\n\
+    \            break;\n      }\n    } else\n      for (int m= n, s= 0, i, ed= 1;\
+    \ m>>= 1; s= 0, ed<<= 1)\n        for (mod_t rot= one, *x0= x, *x1, u;;\n    \
+    \         rot*= r2[__builtin_ctz(s)], x0= x1 + m) {\n          for (x1= x0 + (i=\
+    \ m); i--;)\n            x1[i]= x0[i] - (u= rot * x1[i]), x0[i]+= u;\n       \
+    \   if (++s == ed) break;\n        }\n  }\n  static inline void idft(int n, mod_t\
+    \ x[], int i= 0) {\n    if constexpr (mod < INT_MAX) {\n      static constexpr\
     \ auto ir3= ratios<3>(irt, rt);\n      static constexpr u64 iimag= irt[2].val();\n\
     \      for (int ed= n >> 2, p= 1; ed; p<<= 2, ed>>= 2) {\n        mod_t irot=\
-    \ one, irot2= one, irot3= one, *x0= x, *x1, *x2, *x3;\n        for (int s= 0,\
-    \ i;; irot*= ir3[__builtin_ctz(s)], irot2= irot * irot,\n                 irot3=\
-    \ irot2 * irot, x0= x3 + p) {\n          u64 irot2_u= irot2.val();\n         \
-    \ u128 irot_u= irot.val(), irot3_u= irot3.val();\n          for (x1= x0 + p, x2=\
-    \ x1 + p, x3= x2 + p, i= p; i--;) {\n            u64 a0= x0[i].val(), a1= x1[i].val(),\
-    \ a2= x2[i].val(),\n                a3= x3[i].val(), na3= mod - a3, a0n1= a0 +\
-    \ mod - a1,\n                a2na3iimag= iimag * (a2 + na3);\n            x0[i]=\
-    \ a0 + a1 + a2 + a3, x1[i]= irot_u * (a0n1 + a2na3iimag);\n            x2[i]=\
-    \ irot2_u * (a0 + a1 + (mod - a2) + na3);\n            x3[i]= irot3_u * (a0n1\
-    \ + (mod2 << 1) - a2na3iimag);\n          }\n          if (++s == ed) break;\n\
-    \        }\n      }\n      if (__builtin_ctz(n) & 1) {\n        mod_t u, *x1=\
-    \ x + (n >> 1);\n        for (int i= n >> 1; i--;) u= x[i] - x1[i], x[i]+= x1[i],\
-    \ x1[i]= u;\n      }\n    } else\n      for (int m= 1, s= 0, i, ed= n; ed>>= 1;\
-    \ m<<= 1, s= 0)\n        for (mod_t irot= one, y, *x0= x, *x1;;\n            \
-    \ irot*= ir2[__builtin_ctz(s)], x0= x1 + m) {\n          for (x1= x0 + (i= m);\
-    \ i--;)\n            y= x0[i] - x1[i], x0[i]+= x1[i], x1[i]= irot * y;\n     \
-    \     if (++s == ed) break;\n        }\n    for (const mod_t iv= one / n; n--;)\
-    \ x[n]*= iv;\n  }\n  static inline void even_dft(int n, mod_t x[]) {\n    for\
-    \ (int i= 0, j= 0; i < n; i+= 2, j++) x[j]= iv2 * (x[i] + x[i + 1]);\n  }\n  static\
-    \ inline void odd_dft(int n, mod_t x[]) {\n    mod_t prod= iv2;\n    for (int\
-    \ i= 0, j= 0;; i+= 2, prod*= ir2[__builtin_ctz(++j)])\n      if (x[j]= prod *\
-    \ (x[i] - x[i + 1]); i + 2 == n) break;\n  }\n  static inline void dft_doubling(int\
-    \ n, mod_t x[]) {\n    copy_n(x, n, x + n), idft(n, x + n);\n    mod_t k(1), t(rt[__builtin_ctz(n\
-    \ << 1)]);\n    for (int i= 0; i < n; i++) x[n + i]*= k, k*= t;\n    dft(n, x\
-    \ + n);\n  }\n  static constexpr u64 lim() { return 1ULL << E; }\n protected:\n\
-    \  static constexpr u64 mod= mod_t::modulo(), mod2= mod << 31;\n  static_assert(mod\
-    \ & 1);\n  static_assert(is_prime(mod));\n  static constexpr uint8_t E= __builtin_ctzll(mod\
-    \ - 1);\n  static constexpr mod_t w= [](uint8_t e) -> mod_t {\n    for (mod_t\
-    \ r= 2;; r+= 1)\n      if (auto s= r.pow((mod - 1) / 2); s != 1 && s * s == 1)\n\
-    \        return r.pow((mod - 1) >> e);\n    return 0;\n  }(E);\n  static_assert(w\
-    \ != mod_t(0));\n  static constexpr mod_t one= 1, iv2= (mod + 1) / 2, iw= w.pow(lim()\
-    \ - 1);\n  static constexpr auto roots(mod_t w) {\n    array<mod_t, E + 1> ret=\
-    \ {};\n    for (uint8_t e= E; e; e--, w*= w) ret[e]= w;\n    return ret[0]= w,\
-    \ ret;\n  }\n  template <size_t N>\n  static constexpr auto ratios(const array<mod_t,\
-    \ E + 1> &rt,\n                               const array<mod_t, E + 1> &irt,\
-    \ int i= N) {\n    array<mod_t, E + 1 - N> ret= {};\n    for (mod_t prod= 1; i\
-    \ <= E; prod*= irt[i++]) ret[i - N]= rt[i] * prod;\n    return ret;\n  }\n  static\
-    \ constexpr auto rt= roots(w), irt= roots(iw);\n  static constexpr auto r2= ratios<2>(rt,\
-    \ irt), ir2= ratios<2>(irt, rt);\n};\ntemplate <class T, uint8_t type, class B>\
-    \ struct NTTArrayImpl: public B {\n  using B::B;\n#define FUNC(op, name, HOGEHOGE,\
-    \ ...)         \\\n  inline void name(__VA_ARGS__) {             \\\n    HOGEHOGE(op,\
-    \ 1);                          \\\n    if constexpr (type >= 2) HOGEHOGE(op, 2);\
-    \ \\\n    if constexpr (type >= 3) HOGEHOGE(op, 3); \\\n    if constexpr (type\
-    \ >= 4) HOGEHOGE(op, 4); \\\n    if constexpr (type >= 5) HOGEHOGE(op, 5); \\\n\
-    \  }\n#define DFT(fft, _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define ZEROS(op,\
-    \ _) fill_n(this->dat##_ + b, e - b, typename B::mint##_())\n#define SET(op, _)\
-    \ copy(x + b, x + e, this->dat##_ + b)\n#define SET_SINGLE(op, _) this->dat##_[i]=\
-    \ x;\n#define SUBST(op, _) copy(r.dat##_ + b, r.dat##_ + e, this->dat##_ + b)\n\
-    \  FUNC(dft, dft, DFT, int b, int e)\n  FUNC(idft, idft, DFT, int b, int e)\n\
-    \  FUNC(__, zeros, ZEROS, int b, int e)\n  FUNC(__, set, SET, const T x[], int\
-    \ b, int e)\n  FUNC(__, set, SET_SINGLE, int i, T x)\n  template <class C>\n \
-    \ FUNC(__, subst, SUBST, const NTTArrayImpl<T, type, C> &r, int b, int e)\n  inline\
-    \ void get(T x[], int b, int e) const {\n    if constexpr (type == 1) copy(this->dat1\
-    \ + b, this->dat1 + e, x + b);\n    else\n      for (int i= b; i < e; i++) x[i]=\
-    \ get(i);\n  }\n#define TMP(num) B::iv##num##1 * (this->dat##num[i] - r1)\n  inline\
-    \ T get(int i) const {\n    if constexpr (type >= 2) {\n      static const T mod1=\
-    \ B::mint1::modulo();\n      u64 r1= this->dat1[i].val(), r2= (TMP(2)).val();\n\
-    \      T ret= 0;\n      if constexpr (type >= 3) {\n        static const T mod2=\
-    \ B::mint2::modulo();\n        u64 r3= (TMP(3) - B::iv32 * r2).val();\n      \
-    \  if constexpr (type >= 4) {\n          static const T mod3= B::mint3::modulo();\n\
-    \          u64 r4= (TMP(4) - B::iv42 * r2 - B::iv43 * r3).val();\n          if\
-    \ constexpr (type >= 5) {\n            static const T mod4= B::mint4::modulo();\n\
-    \            u64 r5= (TMP(5) - B::iv52 * r2 - B::iv53 * r3 - B::iv54 * r4).val();\n\
-    \            ret= mod4 * r5;\n          }\n          ret= mod3 * (ret + r4);\n\
-    \        }\n        ret= mod2 * (ret + r3);\n      }\n      return mod1 * (ret\
-    \ + r2) + r1;\n    } else return this->dat1[i];\n  }\n#undef TMP\n#define ASGN(op,\
-    \ _) \\\n  for (int i= b; i < e; i++) this->dat##_[i] op##= r.dat##_[i]\n#define\
-    \ ASSIGN(fname, op) \\\n  template <class C>      \\\n  FUNC(op, fname, ASGN,\
-    \ const NTTArrayImpl<T, type, C> &r, int b, int e)\n#define BOP(op, _) \\\n  for\
-    \ (int i= b; i < e; i++) this->dat##_[i]= l.dat##_[i] op r.dat##_[i]\n#define\
-    \ OP(fname, op)                                     \\\n  template <class C, class\
-    \ D>                             \\\n  FUNC(op, fname, BOP, const NTTArrayImpl<T,\
-    \ type, C> &l, \\\n       const NTTArrayImpl<T, type, D> &r, int b, int e)\n \
-    \ OP(add, +)\n  OP(dif, -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif, -) ASSIGN(mul,\
-    \ *)\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef SET_SINGLE\n#undef SUBST\n\
-    #undef ASGN\n#undef ASSIGN\n#undef BOP\n#undef OP\n#undef FUNC\n};\nusing u8=\
-    \ uint8_t;\n#define ARR(num)                                       \\\n  using\
-    \ mint##num= StaticModInt<M##num>;               \\\n  using ntt##num= NumberTheoreticTransform<mint##num>;\
-    \ \\\n  mint##num dat##num[LIM]= {};\n#define IV2 static constexpr mint2 iv21=\
-    \ mint2(1) / mint1::modulo();\n#define IV3                                   \
-    \             \\\n  static constexpr mint3 iv32= mint3(1) / mint2::modulo(), \\\
-    \n                         iv31= iv32 / mint1::modulo();\n#define IV4        \
-    \                                        \\\n  static constexpr mint4 iv43= mint4(1)\
+    \ one, irot2= one, irot3= one, *x0= x, *x1, *x2, *x3;\n        for (int s= 0;;\
+    \ irot*= ir3[__builtin_ctz(s)], irot2= irot * irot,\n                 irot3= irot2\
+    \ * irot, x0= x3 + p) {\n          u64 irot2_u= irot2.val();\n          u128 irot_u=\
+    \ irot.val(), irot3_u= irot3.val();\n          for (x1= x0 + p, x2= x1 + p, x3=\
+    \ x2 + p, i= p; i--;) {\n            u64 a0= x0[i].val(), a1= x1[i].val(), a2=\
+    \ x2[i].val(),\n                a3= x3[i].val(), na3= mod - a3, a0n1= a0 + mod\
+    \ - a1,\n                a2na3iimag= iimag * (a2 + na3);\n            x0[i]= a0\
+    \ + a1 + a2 + a3, x1[i]= irot_u * (a0n1 + a2na3iimag);\n            x2[i]= irot2_u\
+    \ * (a0 + a1 + (mod - a2) + na3);\n            x3[i]= irot3_u * (a0n1 + (mod2\
+    \ << 1) - a2na3iimag);\n          }\n          if (++s == ed) break;\n       \
+    \ }\n      }\n      if (__builtin_ctz(n) & 1)\n        for (mod_t u, *x1= x +\
+    \ (i= n >> 1); i--;)\n          u= x[i] - x1[i], x[i]+= x1[i], x1[i]= u;\n   \
+    \ } else\n      for (int m= 1, s= 0, i, ed= n; ed>>= 1; m<<= 1, s= 0)\n      \
+    \  for (mod_t irot= one, y, *x0= x, *x1;;\n             irot*= ir2[__builtin_ctz(s)],\
+    \ x0= x1 + m) {\n          for (x1= x0 + (i= m); i--;)\n            y= x0[i] -\
+    \ x1[i], x0[i]+= x1[i], x1[i]= irot * y;\n          if (++s == ed) break;\n  \
+    \      }\n    for (const mod_t iv= one / n; n--;) x[n]*= iv;\n  }\n  static inline\
+    \ void even_dft(int n, mod_t x[]) {\n    for (int i= 0, j= 0; i < n; i+= 2, j++)\
+    \ x[j]= iv2 * (x[i] + x[i + 1]);\n  }\n  static inline void odd_dft(int n, mod_t\
+    \ x[], mod_t prod= iv2) {\n    for (int i= 0, j= 0;; i+= 2, prod*= ir2[__builtin_ctz(++j)])\n\
+    \      if (x[j]= prod * (x[i] - x[i + 1]); i + 2 == n) break;\n  }\n  static inline\
+    \ void dft_doubling(int n, mod_t x[], int i= 0) {\n    mod_t k(1), t(rt[__builtin_ctz(n\
+    \ << 1)]);\n    for (copy_n(x, n, x + n), idft(n, x + n); i < n; i++) x[n + i]*=\
+    \ k, k*= t;\n    dft(n, x + n);\n  }\n  static constexpr u64 lim() { return 1ULL\
+    \ << E; }\n protected:\n  static constexpr u64 mod= mod_t::modulo(), mod2= mod\
+    \ << 31;\n  static_assert(mod & 1);\n  static_assert(is_prime(mod));\n  static\
+    \ constexpr uint8_t E= __builtin_ctzll(mod - 1);\n  static constexpr mod_t w=\
+    \ [](uint8_t e) -> mod_t {\n    for (mod_t r= 2;; r+= 1)\n      if (auto s= r.pow((mod\
+    \ - 1) / 2); s != 1 && s * s == 1)\n        return r.pow((mod - 1) >> e);\n  \
+    \  return 0;\n  }(E);\n  static_assert(w != mod_t(0));\n  static constexpr mod_t\
+    \ one= 1, iv2= (mod + 1) / 2, iw= w.pow(lim() - 1);\n  static constexpr auto roots(mod_t\
+    \ w) {\n    array<mod_t, E + 1> ret= {};\n    for (uint8_t e= E; e; e--, w*= w)\
+    \ ret[e]= w;\n    return ret[0]= w, ret;\n  }\n  template <size_t N>\n  static\
+    \ constexpr auto ratios(const array<mod_t, E + 1> &rt,\n                     \
+    \          const array<mod_t, E + 1> &irt, int i= N) {\n    array<mod_t, E + 1\
+    \ - N> ret= {};\n    for (mod_t prod= 1; i <= E; prod*= irt[i++]) ret[i - N]=\
+    \ rt[i] * prod;\n    return ret;\n  }\n  static constexpr auto rt= roots(w), irt=\
+    \ roots(iw);\n  static constexpr auto r2= ratios<2>(rt, irt), ir2= ratios<2>(irt,\
+    \ rt);\n};\ntemplate <class T, uint8_t type, class B> struct NTTArrayImpl: public\
+    \ B {\n  using B::B;\n#define FUNC(op, name, HOGEHOGE, ...)         \\\n  inline\
+    \ void name(__VA_ARGS__) {             \\\n    HOGEHOGE(op, 1);              \
+    \            \\\n    if constexpr (type >= 2) HOGEHOGE(op, 2); \\\n    if constexpr\
+    \ (type >= 3) HOGEHOGE(op, 3); \\\n    if constexpr (type >= 4) HOGEHOGE(op, 4);\
+    \ \\\n    if constexpr (type >= 5) HOGEHOGE(op, 5); \\\n  }\n#define DFT(fft,\
+    \ _) B::ntt##_::fft(e - b, this->dat##_ + b)\n#define ZEROS(op, _) fill_n(this->dat##_\
+    \ + b, e - b, typename B::mint##_())\n#define SET(op, _) copy(x + b, x + e, this->dat##_\
+    \ + b)\n#define SET_SINGLE(op, _) this->dat##_[i]= x;\n#define SUBST(op, _) copy(r.dat##_\
+    \ + b, r.dat##_ + e, this->dat##_ + b)\n  FUNC(dft, dft, DFT, int b, int e)\n\
+    \  FUNC(idft, idft, DFT, int b, int e)\n  FUNC(__, zeros, ZEROS, int b, int e)\n\
+    \  FUNC(__, set, SET, const T x[], int b, int e)\n  FUNC(__, set, SET_SINGLE,\
+    \ int i, T x)\n  template <class C>\n  FUNC(__, subst, SUBST, const NTTArrayImpl<T,\
+    \ type, C> &r, int b, int e)\n  inline void get(T x[], int b, int e) const {\n\
+    \    if constexpr (type == 1) copy(this->dat1 + b, this->dat1 + e, x + b);\n \
+    \   else\n      for (int i= b; i < e; i++) x[i]= get(i);\n  }\n#define TMP(num)\
+    \ B::iv##num##1 * (this->dat##num[i] - r1)\n  inline T get(int i) const {\n  \
+    \  if constexpr (type >= 2) {\n      static constexpr T mod1= B::mint1::modulo();\n\
+    \      u64 r1= this->dat1[i].val(), r2= (TMP(2)).val();\n      T ret= 0;\n   \
+    \   if constexpr (type >= 3) {\n        static constexpr T mod2= B::mint2::modulo();\n\
+    \        u64 r3= (TMP(3) - B::iv32 * r2).val();\n        if constexpr (type >=\
+    \ 4) {\n          static constexpr T mod3= B::mint3::modulo();\n          u64\
+    \ r4= (TMP(4) - B::iv42 * r2 - B::iv43 * r3).val();\n          if constexpr (type\
+    \ >= 5) {\n            static constexpr T mod4= B::mint4::modulo();\n        \
+    \    ret= mod4 *\n                 (TMP(5) - B::iv52 * r2 - B::iv53 * r3 - B::iv54\
+    \ * r4).val();\n          }\n          ret= mod3 * (ret + r4);\n        }\n  \
+    \      ret= mod2 * (ret + r3);\n      }\n      return mod1 * (ret + r2) + r1;\n\
+    \    } else return this->dat1[i];\n  }\n#undef TMP\n#define ASGN(op, _) \\\n \
+    \ for (int i= b; i < e; ++i) this->dat##_[i] op##= r.dat##_[i]\n#define ASSIGN(fname,\
+    \ op) \\\n  template <class C>      \\\n  FUNC(op, fname, ASGN, const NTTArrayImpl<T,\
+    \ type, C> &r, int b, int e)\n#define BOP(op, _) \\\n  for (int i= b; i < e; ++i)\
+    \ this->dat##_[i]= l.dat##_[i] op r.dat##_[i]\n#define OP(fname, op)         \
+    \                            \\\n  template <class C, class D>               \
+    \              \\\n  FUNC(op, fname, BOP, const NTTArrayImpl<T, type, C> &l, \\\
+    \n       const NTTArrayImpl<T, type, D> &r, int b, int e)\n  OP(add, +)\n  OP(dif,\
+    \ -) OP(mul, *) ASSIGN(add, +) ASSIGN(dif, -) ASSIGN(mul, *)\n#undef DFT\n#undef\
+    \ ZEROS\n#undef SET\n#undef SET_SINGLE\n#undef SUBST\n#undef ASGN\n#undef ASSIGN\n\
+    #undef BOP\n#undef OP\n#undef FUNC\n};\nusing u8= uint8_t;\n#define ARR(num) \
+    \                                      \\\n  using mint##num= StaticModInt<M##num>;\
+    \               \\\n  using ntt##num= NumberTheoreticTransform<mint##num>; \\\n\
+    \  mint##num dat##num[LIM]= {};\n#define IV2 static constexpr mint2 iv21= mint2(1)\
+    \ / mint1::modulo();\n#define IV3                                            \
+    \    \\\n  static constexpr mint3 iv32= mint3(1) / mint2::modulo(), \\\n     \
+    \                    iv31= iv32 / mint1::modulo();\n#define IV4              \
+    \                                  \\\n  static constexpr mint4 iv43= mint4(1)\
     \ / mint3::modulo(), \\\n                         iv42= iv43 / mint2::modulo(),\
     \     \\\n                         iv41= iv42 / mint1::modulo();\n#define IV5\
     \                                                \\\n  static constexpr mint5\
@@ -493,7 +493,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/exp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-30 21:33:55+09:00'
+  timestamp: '2022-12-30 23:04:24+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/exp_of_FPS.test.cpp

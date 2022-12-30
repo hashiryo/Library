@@ -152,4 +152,4 @@ title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
 ---
 
 ## 計算量
- $\Omicron (\log p) $
+ $\mathcal{O} (\log p) $
