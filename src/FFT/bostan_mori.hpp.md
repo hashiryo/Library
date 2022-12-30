@@ -391,25 +391,25 @@ data:
     \ LIM>;\n  static constexpr int TH = (int[]){94, 54, 123, 222, 243, 354}[t];\n\
     \  mod_t *pp = GlobalArray<mod_t, LIM, 1>::bf,\n        *rr = GlobalArray<mod_t,\
     \ LIM, 2>::bf;\n  const int n = p.size();\n  assert(n > 0), assert(p[0] != mod_t(0));\n\
-    \  std::copy(p.begin(), p.end(), pp);\n  const mod_t miv = -(rr[0] = mod_t(1)\
-    \ / pp[0]);\n  if (n <= TH) {\n    for (int j, i = 1; i < n; rr[i++] *= miv)\n\
-    \      for (rr[j = i] = mod_t(); j--;) rr[i] += rr[j] * pp[i - j];\n  } else {\n\
-    \    const int l = get_len(n), l1 = l >> 1, k = (n - l1 - 1) / (l1 >> 3),\n  \
-    \            bl = __builtin_ctz(l1);\n    if constexpr (t != 0) {\n      if (bl\
-    \ & 1) {\n        static constexpr int BL = t == 5 ? 11 : 13;\n        (k >= 6\
-    \                        ? inv_<1, mod_t, LIM>\n         : k == 0 && bl >= BL\
-    \          ? inv_<4, mod_t, LIM>\n         : t == 2 && bl == 7 && k == 1 ? inv_<2,\
-    \ mod_t, LIM>\n                                       : inv_<3, mod_t, LIM>)(pp,\
-    \ n, rr);\n      } else {\n        if (bl >= 10)\n          (k >= 6 || k == 3\
-    \ ? inv_<2, mod_t, LIM>\n           : k == 5         ? inv_<3, mod_t, LIM>\n \
-    \                           : inv_<4, mod_t, LIM>)(pp, n, rr);\n        else if\
-    \ (bl == 6 || t == 4)\n          (k == 0   ? inv_<4, mod_t, LIM>\n           :\
-    \ k == 1 ? inv_<3, mod_t, LIM>\n                    : inv_<2, mod_t, LIM>)(pp,\
-    \ n, rr);\n        else\n          (k >= 6 || (2 <= k && k < 4)    ? inv_<2, mod_t,\
-    \ LIM>\n           : k == 5 || (k == 1 && t != 1) ? inv_<3, mod_t, LIM>\n    \
-    \                                      : inv_<4, mod_t, LIM>)(pp, n, rr);\n  \
-    \    }\n    } else\n      (k & 1 ? inv_<3, mod_t, LIM> : inv_<4, mod_t, LIM>)(pp,\
-    \ n, rr);\n  }\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n\
+    \  std::copy(p.begin(), p.end(), pp);\n  if (const mod_t miv = -(rr[0] = mod_t(1)\
+    \ / pp[0]); n > TH) {\n    const int l = get_len(n), l1 = l >> 1, k = (n - l1\
+    \ - 1) / (l1 >> 3),\n              bl = __builtin_ctz(l1);\n    if constexpr (t\
+    \ != 0) {\n      if (bl & 1) {\n        static constexpr int BL = t == 5 ? 11\
+    \ : 13;\n        (k >= 6                        ? inv_<1, mod_t, LIM>\n      \
+    \   : k == 0 && bl >= BL          ? inv_<4, mod_t, LIM>\n         : t == 2 &&\
+    \ bl == 7 && k == 1 ? inv_<2, mod_t, LIM>\n                                  \
+    \     : inv_<3, mod_t, LIM>)(pp, n, rr);\n      } else {\n        if (bl >= 10)\n\
+    \          (k >= 6 || k == 3 ? inv_<2, mod_t, LIM>\n           : k == 5      \
+    \   ? inv_<3, mod_t, LIM>\n                            : inv_<4, mod_t, LIM>)(pp,\
+    \ n, rr);\n        else if (bl == 6 || t == 4)\n          (k == 0   ? inv_<4,\
+    \ mod_t, LIM>\n           : k == 1 ? inv_<3, mod_t, LIM>\n                   \
+    \ : inv_<2, mod_t, LIM>)(pp, n, rr);\n        else\n          (k >= 6 || (2 <=\
+    \ k && k < 4)    ? inv_<2, mod_t, LIM>\n           : k == 5 || (k == 1 && t !=\
+    \ 1) ? inv_<3, mod_t, LIM>\n                                          : inv_<4,\
+    \ mod_t, LIM>)(pp, n, rr);\n      }\n    } else\n      (k & 1 ? inv_<3, mod_t,\
+    \ LIM> : inv_<4, mod_t, LIM>)(pp, n, rr);\n  } else\n    for (int j, i = 1; i\
+    \ < n; rr[i++] *= miv)\n      for (rr[j = i] = mod_t(); j--;) rr[i] += rr[j] *\
+    \ pp[i - j];\n  return std::vector<mod_t>(rr, rr + n);\n}\n}  // namespace ntt_internal\n\
     using ntt_internal::inv_base, ntt_internal::inv;\n#line 3 \"src/FFT/convolve.hpp\"\
     \n\n#line 5 \"src/FFT/convolve.hpp\"\n\n/**\n * @title \u7573\u307F\u8FBC\u307F\
     \n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
@@ -604,7 +604,7 @@ data:
   isVerificationFile: false
   path: src/FFT/bostan_mori.hpp
   requiredBy: []
-  timestamp: '2022-12-29 22:36:03+09:00'
+  timestamp: '2022-12-30 17:45:21+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/0168.test.cpp
