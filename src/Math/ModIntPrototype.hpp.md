@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -60,7 +60,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModIntExp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':x:'
@@ -72,14 +72,14 @@ data:
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
@@ -131,40 +131,40 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
   - icon: ':x:'
@@ -461,9 +461,9 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/ModIntPrototype.hpp\"\n#include <bits/stdc++.h>\n\
-    namespace math_internal {\nusing namespace std;\nusing u32= uint32_t;\nusing u64=\
-    \ uint64_t;\nusing u128= __uint128_t;\nstruct MIntPro_Montg {\n  const u64 mod;\n\
-    \  constexpr MIntPro_Montg(): mod(0), iv(0), r2(0) {}\n  constexpr MIntPro_Montg(u64\
+    namespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
+    \ uint32_t;\nusing u64= uint64_t;\nusing u128= __uint128_t;\nstruct MP_Mo {\n\
+    \  const u64 mod;\n  constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n  constexpr MP_Mo(u64\
     \ m): mod(m), iv(inv(m)), r2(-u128(mod) % mod) {}\n  constexpr inline u64 mul(u64\
     \ l, u64 r) const { return reduce(u128(l) * r); }\n#define BOP(op, a) return l\
     \ op##= a, l+= (mod << 1) & -(l >> 63)\n  constexpr inline u64 plus(u64 l, u64\
@@ -472,25 +472,25 @@ data:
     \ { return mul(n, r2); }\n  constexpr inline u64 get(u64 n) const {\n    u64 ret=\
     \ reduce(n) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  constexpr inline\
     \ u64 norm(u64 n) const { return n - (mod & -(n >= mod)); }\n private:\n  const\
-    \ u64 iv, r2;\n  constexpr u64 inv(u64 n, int e= 6, u64 x= 1) {\n    return e\
-    \ ? inv(n, e - 1, x * (2 - x * n)) : x;\n  }\n  constexpr inline u64 reduce(const\
-    \ u128 &w) const {\n    return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod)\
-    \ >> 64);\n  }\n};\ntemplate <class Uint> class MIntPro_Na {\n  using DUint= conditional_t<is_same_v<Uint,\
-    \ u32>, u64, u128>;\n public:\n  const Uint mod;\n  constexpr MIntPro_Na(): mod(0){};\n\
-    \  constexpr MIntPro_Na(Uint m): mod(m) {}\n  constexpr inline Uint mul(Uint l,\
-    \ Uint r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##=\
-    \ mod & -((l p##= r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const\
-    \ { BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+,\
-    \ -); }\n#undef BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n\
-    \  static constexpr inline Uint get(Uint n) { return n; }\n  static constexpr\
-    \ inline Uint norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t>\n\
-    constexpr Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);;\
+    \ u64 iv, r2;\n  constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e ? inv(n,\
+    \ e - 1, x * (2 - x * n)) : x; }\n  constexpr inline u64 reduce(const u128 &w)\
+    \ const { return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64); }\n};\n\
+    template <class Uint> class MP_Na {\n  using DUint= conditional_t<is_same_v<Uint,\
+    \ u32>, u64, u128>;\n public:\n  const Uint mod;\n  constexpr MP_Na(): mod(0){};\n\
+    \  constexpr MP_Na(Uint m): mod(m) {}\n  constexpr inline Uint mul(Uint l, Uint\
+    \ r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod\
+    \ & -((l p##= r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const {\
+    \ BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -);\
+    \ }\n#undef BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n  static\
+    \ constexpr inline Uint get(Uint n) { return n; }\n  static constexpr inline Uint\
+    \ norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr\
+    \ Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);;\
     \ x= md.mul(x, x))\n    if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return\
     \ ret;\n}\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nnamespace math_internal {\nusing\
-    \ namespace std;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing u128= __uint128_t;\n\
-    struct MIntPro_Montg {\n  const u64 mod;\n  constexpr MIntPro_Montg(): mod(0),\
-    \ iv(0), r2(0) {}\n  constexpr MIntPro_Montg(u64 m): mod(m), iv(inv(m)), r2(-u128(mod)\
+    \ namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\n\
+    using u128= __uint128_t;\nstruct MP_Mo {\n  const u64 mod;\n  constexpr MP_Mo():\
+    \ mod(0), iv(0), r2(0) {}\n  constexpr MP_Mo(u64 m): mod(m), iv(inv(m)), r2(-u128(mod)\
     \ % mod) {}\n  constexpr inline u64 mul(u64 l, u64 r) const { return reduce(u128(l)\
     \ * r); }\n#define BOP(op, a) return l op##= a, l+= (mod << 1) & -(l >> 63)\n\
     \  constexpr inline u64 plus(u64 l, u64 r) const { BOP(+, r - (mod << 1)); }\n\
@@ -499,21 +499,20 @@ data:
     \ u64 get(u64 n) const {\n    u64 ret= reduce(n) - mod;\n    return ret + (mod\
     \ & -(ret >> 63));\n  }\n  constexpr inline u64 norm(u64 n) const { return n -\
     \ (mod & -(n >= mod)); }\n private:\n  const u64 iv, r2;\n  constexpr u64 inv(u64\
-    \ n, int e= 6, u64 x= 1) {\n    return e ? inv(n, e - 1, x * (2 - x * n)) : x;\n\
-    \  }\n  constexpr inline u64 reduce(const u128 &w) const {\n    return u64(w >>\
-    \ 64) + mod - ((u128(u64(w) * iv) * mod) >> 64);\n  }\n};\ntemplate <class Uint>\
-    \ class MIntPro_Na {\n  using DUint= conditional_t<is_same_v<Uint, u32>, u64,\
-    \ u128>;\n public:\n  const Uint mod;\n  constexpr MIntPro_Na(): mod(0){};\n \
-    \ constexpr MIntPro_Na(Uint m): mod(m) {}\n  constexpr inline Uint mul(Uint l,\
-    \ Uint r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##=\
-    \ mod & -((l p##= r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const\
-    \ { BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+,\
-    \ -); }\n#undef BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n\
-    \  static constexpr inline Uint get(Uint n) { return n; }\n  static constexpr\
-    \ inline Uint norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t>\n\
-    constexpr Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);;\
-    \ x= md.mul(x, x))\n    if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return\
-    \ ret;\n}\n}"
+    \ n, int e= 6, u64 x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n\
+    \  constexpr inline u64 reduce(const u128 &w) const { return u64(w >> 64) + mod\
+    \ - ((u128(u64(w) * iv) * mod) >> 64); }\n};\ntemplate <class Uint> class MP_Na\
+    \ {\n  using DUint= conditional_t<is_same_v<Uint, u32>, u64, u128>;\n public:\n\
+    \  const Uint mod;\n  constexpr MP_Na(): mod(0){};\n  constexpr MP_Na(Uint m):\
+    \ mod(m) {}\n  constexpr inline Uint mul(Uint l, Uint r) const { return DUint(l)\
+    \ * r % mod; }\n#define BOP(m, p) return l m##= mod & -((l p##= r) >= mod)\n \
+    \ constexpr inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n  constexpr\
+    \ inline Uint diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n  static\
+    \ constexpr inline Uint set(Uint n) { return n; }\n  static constexpr inline Uint\
+    \ get(Uint n) { return n; }\n  static constexpr inline Uint norm(Uint n) { return\
+    \ n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr Uint pow(Uint x,\
+    \ u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);; x= md.mul(x, x))\n\
+    \    if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/ModIntPrototype.hpp
@@ -544,7 +543,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/FormalPowerSeries.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-12-30 21:33:55+09:00'
+  timestamp: '2022-12-31 01:36:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DPL_5_E.test.cpp

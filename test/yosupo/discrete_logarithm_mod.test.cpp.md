@@ -21,9 +21,9 @@ data:
     \ \"https://judge.yosupo.jp/problem/discrete_logarithm_mod\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
     \ a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n  Int x= 1, y= 0, b=\
-    \ mod;\n  for (Int q= 0, z= 0, c= 0; b;)\n    z= x, c= a, x= y, y= z - y * (q=\
-    \ a / b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ? mod - (-x) % mod\
-    \ : x % mod;\n}\n#line 4 \"src/Math/discrete_logarithm.hpp\"\n/**\n * @title \u96E2\
+    \ mod;\n  for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a /\
+    \ b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ? mod - (-x) % mod :\
+    \ x % mod;\n}\n#line 4 \"src/Math/discrete_logarithm.hpp\"\n/**\n * @title \u96E2\
     \u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)\n * @category \u6570\u5B66\n *\
     \ O(\u221Amod)\n */\n\n// BEGIN CUT HERE\nint discrete_logarithm(int a, int b,\
     \ int mod) {\n  if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b == 1 ? 0 :\
@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/discrete_logarithm_mod.test.cpp
   requiredBy: []
-  timestamp: '2022-12-30 21:33:55+09:00'
+  timestamp: '2022-12-31 01:36:36+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/discrete_logarithm_mod.test.cpp

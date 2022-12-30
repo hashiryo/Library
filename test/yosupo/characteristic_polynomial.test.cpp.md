@@ -48,84 +48,80 @@ data:
     \ s = prod * b[j][i];\n      for (std::size_t k = 0; k <= j; ++k) fss[i + 1][k]\
     \ += s * fss[j][k];\n    }\n  }\n  return fss.back();\n}\n#line 3 \"src/Math/mod_inv.hpp\"\
     \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n\
-    \  Int x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;)\n    z= x, c= a,\
-    \ x= y, y= z - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x\
-    \ < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\
-    \nnamespace math_internal {\nusing namespace std;\nusing u32= uint32_t;\nusing\
-    \ u64= uint64_t;\nusing u128= __uint128_t;\nstruct MIntPro_Montg {\n  const u64\
-    \ mod;\n  constexpr MIntPro_Montg(): mod(0), iv(0), r2(0) {}\n  constexpr MIntPro_Montg(u64\
-    \ m): mod(m), iv(inv(m)), r2(-u128(mod) % mod) {}\n  constexpr inline u64 mul(u64\
-    \ l, u64 r) const { return reduce(u128(l) * r); }\n#define BOP(op, a) return l\
-    \ op##= a, l+= (mod << 1) & -(l >> 63)\n  constexpr inline u64 plus(u64 l, u64\
-    \ r) const { BOP(+, r - (mod << 1)); }\n  constexpr inline u64 diff(u64 l, u64\
-    \ r) const { BOP(-, r); }\n#undef BOP\n  constexpr inline u64 set(u64 n) const\
-    \ { return mul(n, r2); }\n  constexpr inline u64 get(u64 n) const {\n    u64 ret=\
-    \ reduce(n) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  constexpr inline\
-    \ u64 norm(u64 n) const { return n - (mod & -(n >= mod)); }\n private:\n  const\
-    \ u64 iv, r2;\n  constexpr u64 inv(u64 n, int e= 6, u64 x= 1) {\n    return e\
-    \ ? inv(n, e - 1, x * (2 - x * n)) : x;\n  }\n  constexpr inline u64 reduce(const\
-    \ u128 &w) const {\n    return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod)\
-    \ >> 64);\n  }\n};\ntemplate <class Uint> class MIntPro_Na {\n  using DUint= conditional_t<is_same_v<Uint,\
-    \ u32>, u64, u128>;\n public:\n  const Uint mod;\n  constexpr MIntPro_Na(): mod(0){};\n\
-    \  constexpr MIntPro_Na(Uint m): mod(m) {}\n  constexpr inline Uint mul(Uint l,\
-    \ Uint r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##=\
-    \ mod & -((l p##= r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const\
-    \ { BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+,\
-    \ -); }\n#undef BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n\
-    \  static constexpr inline Uint get(Uint n) { return n; }\n  static constexpr\
-    \ inline Uint norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t>\n\
-    constexpr Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);;\
+    \  Int x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y,\
+    \ y= z - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ?\
+    \ mod - (-x) % mod : x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
+    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
+    using u64= uint64_t;\nusing u128= __uint128_t;\nstruct MP_Mo {\n  const u64 mod;\n\
+    \  constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n  constexpr MP_Mo(u64 m): mod(m),\
+    \ iv(inv(m)), r2(-u128(mod) % mod) {}\n  constexpr inline u64 mul(u64 l, u64 r)\
+    \ const { return reduce(u128(l) * r); }\n#define BOP(op, a) return l op##= a,\
+    \ l+= (mod << 1) & -(l >> 63)\n  constexpr inline u64 plus(u64 l, u64 r) const\
+    \ { BOP(+, r - (mod << 1)); }\n  constexpr inline u64 diff(u64 l, u64 r) const\
+    \ { BOP(-, r); }\n#undef BOP\n  constexpr inline u64 set(u64 n) const { return\
+    \ mul(n, r2); }\n  constexpr inline u64 get(u64 n) const {\n    u64 ret= reduce(n)\
+    \ - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  constexpr inline u64\
+    \ norm(u64 n) const { return n - (mod & -(n >= mod)); }\n private:\n  const u64\
+    \ iv, r2;\n  constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e ? inv(n,\
+    \ e - 1, x * (2 - x * n)) : x; }\n  constexpr inline u64 reduce(const u128 &w)\
+    \ const { return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64); }\n};\n\
+    template <class Uint> class MP_Na {\n  using DUint= conditional_t<is_same_v<Uint,\
+    \ u32>, u64, u128>;\n public:\n  const Uint mod;\n  constexpr MP_Na(): mod(0){};\n\
+    \  constexpr MP_Na(Uint m): mod(m) {}\n  constexpr inline Uint mul(Uint l, Uint\
+    \ r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod\
+    \ & -((l p##= r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const {\
+    \ BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -);\
+    \ }\n#undef BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n  static\
+    \ constexpr inline Uint get(Uint n) { return n; }\n  static constexpr inline Uint\
+    \ norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr\
+    \ Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);;\
     \ x= md.mul(x, x))\n    if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return\
     \ ret;\n}\n}\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\nstruct\
-    \ modint_base {};\nstruct sta_mint_base: modint_base {};\nstruct run_mint_base:\
-    \ modint_base {};\ntemplate <class mod_t>\nconstexpr bool is_modint_v= is_base_of_v<modint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_staticmodint_v= is_base_of_v<sta_mint_base,\
-    \ mod_t>;\ntemplate <class mod_t>\nconstexpr bool is_runtimemodint_v= is_base_of_v<run_mint_base,\
-    \ mod_t>;\ntemplate <class mod_pro_t, u64 MOD> struct StaticB: sta_mint_base {\n\
-    \ protected:\n  static constexpr mod_pro_t md= mod_pro_t(MOD);\n};\ntemplate <class\
-    \ mod_pro_t, int id> struct RuntimeB: run_mint_base {\n  static inline void set_mod(u64\
-    \ m) { md= mod_pro_t(m); }\n protected:\n  static inline mod_pro_t md;\n};\ntemplate\
-    \ <class Int, class U, class B> struct ModInt: public B {\n  using Uint= U;\n\
-    \  static constexpr inline auto modulo() { return B::md.mod; }\n  constexpr ModInt():\
-    \ x(0) {}\n  constexpr ModInt(const ModInt &r): x(r.x) {}\n  template <class T,\
-    \ enable_if_t<is_modint_v<T>, nullptr_t> = nullptr>\n  constexpr ModInt(T v):\
-    \ x(B::md.set(v.val() % B::md.mod)) {}\n  template <class T,\n            enable_if_t<is_convertible_v<T,\
-    \ __int128_t>, nullptr_t> = nullptr>\n  constexpr ModInt(T n)\n      : x(B::md.set((n\
-    \ < 0 ? B::md.mod - (-n) % B::md.mod : n % B::md.mod))) {}\n  constexpr ModInt\
-    \ operator-() const { return ModInt() - *this; }\n#define FUNC(name, op)     \
-    \     \\\n  constexpr ModInt name const { \\\n    ModInt ret;                \
-    \ \\\n    return ret.x= op, ret;      \\\n  }\n  FUNC(operator+(const ModInt &r),\
-    \ B::md.plus(x, r.x))\n  FUNC(operator-(const ModInt &r), B::md.diff(x, r.x))\n\
-    \  FUNC(operator*(const ModInt &r), B::md.mul(x, r.x))\n  FUNC(pow(u64 k), math_internal::pow(x,\
-    \ k, B::md))\n#undef FUNC\n  constexpr ModInt operator/(const ModInt &r) const\
-    \ { return *this * r.inv(); }\n  constexpr ModInt &operator+=(const ModInt &r)\
-    \ { return *this= *this + r; }\n  constexpr ModInt &operator-=(const ModInt &r)\
-    \ { return *this= *this - r; }\n  constexpr ModInt &operator*=(const ModInt &r)\
-    \ { return *this= *this * r; }\n  constexpr ModInt &operator/=(const ModInt &r)\
-    \ { return *this= *this / r; }\n  constexpr bool operator==(const ModInt &r) const\
-    \ {\n    return B::md.norm(x) == B::md.norm(r.x);\n  }\n  constexpr bool operator!=(const\
-    \ ModInt &r) const { return !(*this == r); }\n  constexpr bool operator<(const\
-    \ ModInt &r) const {\n    return B::md.norm(x) < B::md.norm(r.x);\n  }\n  constexpr\
-    \ inline ModInt inv() const { return mod_inv<Int>(val(), B::md.mod); }\n  constexpr\
-    \ inline Uint val() const { return B::md.get(x); }\n  friend ostream &operator<<(ostream\
-    \ &os, const ModInt &r) {\n    return os << r.val();\n  }\n  friend istream &operator>>(istream\
-    \ &is, ModInt &r) {\n    long long v;\n    return is >> v, r= ModInt(v), is;\n\
-    \  }\n private:\n  Uint x;\n};\ntemplate <u64 MOD>\nusing StaticModInt=\n    conditional_t\
-    \ <\n    MOD<INT_MAX, ModInt<int, u32, StaticB<MIntPro_Na<u32>, MOD>>,\n     \
-    \   conditional_t<MOD &(MOD < LLONG_MAX),\n                      ModInt<long long,\
-    \ u64, StaticB<MIntPro_Montg, MOD>>,\n                      ModInt<long long,\
-    \ u64, StaticB<MIntPro_Na<u64>, MOD>>>>;\nclass Montgomery {};\ntemplate <class\
-    \ Int, int id= -1>\nusing RuntimeModInt= conditional_t<\n    is_same_v<Int, Montgomery>,\n\
-    \    ModInt<long long, u64, RuntimeB<MIntPro_Montg, id>>,\n    conditional_t<disjunction_v<is_same<Int,\
-    \ long long>, is_same<Int, u64>>,\n                  ModInt<long long, u64, RuntimeB<MIntPro_Na<u64>,\
-    \ id>>,\n                  ModInt<int, u32, RuntimeB<MIntPro_Na<u32>, id>>>>;\n\
-    }\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\n    math_internal::Montgomery,\
-    \ math_internal::is_runtimemodint_v,\n    math_internal::is_modint_v, math_internal::is_staticmodint_v;\n\
-    template <class mod_t, std::size_t LIM> mod_t get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n\
-    \  static const auto m= mod_t::modulo();\n  static mod_t dat[LIM];\n  static int\
-    \ l= 1;\n  if (l == 1) dat[l++]= 1;\n  while (l <= n) dat[l++]= dat[m % l] * (m\
-    \ - m / l);\n  return dat[n];\n}\n#line 6 \"test/yosupo/characteristic_polynomial.test.cpp\"\
-    \n\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ m_b {};\nstruct s_b: m_b {};\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr\
+    \ bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t> constexpr\
+    \ bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\ntemplate <class mod_t> constexpr\
+    \ bool is_runtimemodint_v= is_base_of_v<r_b, mod_t>;\ntemplate <class mpt, u64\
+    \ MOD> struct SB: s_b {\n protected:\n  static constexpr mpt md= mpt(MOD);\n};\n\
+    template <class mpt, int id> struct RB: r_b {\n  static inline void set_mod(u64\
+    \ m) { md= mpt(m); }\n protected:\n  static inline mpt md;\n};\ntemplate <class\
+    \ Int, class U, class B> struct MInt: public B {\n  using Uint= U;\n  static constexpr\
+    \ inline auto modulo() { return B::md.mod; }\n  constexpr MInt(): x(0) {}\n  constexpr\
+    \ MInt(const MInt &r): x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>,\
+    \ nullptr_t> = nullptr> constexpr MInt(T v): x(B::md.set(v.val() % B::md.mod))\
+    \ {}\n  template <class T, enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t>\
+    \ = nullptr> constexpr MInt(T n): x(B::md.set((n < 0 ? B::md.mod - (-n) % B::md.mod\
+    \ : n % B::md.mod))) {}\n  constexpr MInt operator-() const { return MInt() -\
+    \ *this; }\n#define FUNC(name, op) \\\n  constexpr MInt name const { \\\n    MInt\
+    \ ret; \\\n    return ret.x= op, ret; \\\n  }\n  FUNC(operator+(const MInt &r),\
+    \ B::md.plus(x, r.x))\n  FUNC(operator-(const MInt &r), B::md.diff(x, r.x))\n\
+    \  FUNC(operator*(const MInt &r), B::md.mul(x, r.x))\n  FUNC(pow(u64 k), math_internal::pow(x,\
+    \ k, B::md))\n#undef FUNC\n  constexpr MInt operator/(const MInt &r) const { return\
+    \ *this * r.inv(); }\n  constexpr MInt &operator+=(const MInt &r) { return *this=\
+    \ *this + r; }\n  constexpr MInt &operator-=(const MInt &r) { return *this= *this\
+    \ - r; }\n  constexpr MInt &operator*=(const MInt &r) { return *this= *this *\
+    \ r; }\n  constexpr MInt &operator/=(const MInt &r) { return *this= *this / r;\
+    \ }\n  constexpr bool operator==(const MInt &r) const { return B::md.norm(x) ==\
+    \ B::md.norm(r.x); }\n  constexpr bool operator!=(const MInt &r) const { return\
+    \ !(*this == r); }\n  constexpr bool operator<(const MInt &r) const { return B::md.norm(x)\
+    \ < B::md.norm(r.x); }\n  constexpr inline MInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n  constexpr inline Uint val() const { return B::md.get(x); }\n\
+    \  friend ostream &operator<<(ostream &os, const MInt &r) { return os << r.val();\
+    \ }\n  friend istream &operator>>(istream &is, MInt &r) {\n    long long v;\n\
+    \    return is >> v, r= MInt(v), is;\n  }\n private:\n  Uint x;\n};\ntemplate\
+    \ <u64 MOD> using StaticModInt= conditional_t < MOD<INT_MAX, MInt<int, u32, SB<MP_Na<u32>,\
+    \ MOD>>, conditional_t<MOD &(MOD < LLONG_MAX), MInt<long long, u64, SB<MP_Mo,\
+    \ MOD>>, MInt<long long, u64, SB<MP_Na<u64>, MOD>>>>;\nclass Moomery {};\ntemplate\
+    \ <class Int, int id= -1> using RuntimeModInt= conditional_t<is_same_v<Int, Moomery>,\
+    \ MInt<long long, u64, RB<MP_Mo, id>>, conditional_t<disjunction_v<is_same<Int,\
+    \ long long>, is_same<Int, u64>>, MInt<long long, u64, RB<MP_Na<u64>, id>>, MInt<int,\
+    \ u32, RB<MP_Na<u32>, id>>>>;\n}\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\
+    \ math_internal::Moomery, math_internal::is_runtimemodint_v, math_internal::is_modint_v,\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, std::size_t LIM> mod_t\
+    \ get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
+    \ m= mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l= 1;\n  if (l ==\
+    \ 1) dat[l++]= 1;\n  while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n  return\
+    \ dat[n];\n}\n#line 6 \"test/yosupo/characteristic_polynomial.test.cpp\"\n\nusing\
+    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<vector<Mint>>\
     \ a(N, vector<Mint>(N));\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j\
     \ < N; j++) cin >> a[i][j];\n  auto p = characteristic_polynomial(a);\n  for (int\
@@ -147,7 +143,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2022-12-30 21:33:55+09:00'
+  timestamp: '2022-12-31 01:36:36+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp

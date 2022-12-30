@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -63,7 +63,7 @@ data:
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
@@ -112,37 +112,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
   - icon: ':x:'
@@ -422,14 +422,14 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <bits/stdc++.h>\ntemplate\
     \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n\
-    \  Int x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;)\n    z= x, c= a,\
-    \ x= y, y= z - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x\
-    \ < 0 ? mod - (-x) % mod : x % mod;\n}\n"
+    \  Int x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y,\
+    \ y= z - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ?\
+    \ mod - (-x) % mod : x % mod;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <class Int> constexpr inline\
     \ Int mod_inv(Int a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n  Int\
-    \ x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;)\n    z= x, c= a, x= y,\
-    \ y= z - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ?\
-    \ mod - (-x) % mod : x % mod;\n}"
+    \ x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
+    \ - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ? mod\
+    \ - (-x) % mod : x % mod;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/mod_inv.hpp
@@ -455,7 +455,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/FormalPowerSeries.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-12-30 21:33:55+09:00'
+  timestamp: '2022-12-31 01:36:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DPL_5_E.test.cpp
