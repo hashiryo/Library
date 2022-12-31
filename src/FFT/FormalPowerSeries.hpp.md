@@ -203,12 +203,12 @@ data:
     \ inline T get(int i) const {\n  if CE (t > 1) {\n   u64 r1= this->dt1[i].val(),\
     \ r2= (TMP(2)).val();\n   T a= 0;\n   if CE (t > 2) {\n    u64 r3= (TMP(3) - B::iv32\
     \ * r2).val();\n    if CE (t > 3) {\n     u64 r4= (TMP(4) - B::iv42 * r2 - B::iv43\
-    \ * r3).val();\n     if CE (t > 4) a= B::m4::mod() * (TMP(5) - B::iv52 * r2 -\
-    \ B::iv53 * r3 - B::iv54 * r4).val();\n     a= (a + r4) * B::m3::mod();\n    }\n\
-    \    a= (a + r3) * B::m2::mod();\n   }\n   return (a + r2) * B::m1::mod() + r1;\n\
-    \  } else return this->dt1[i];\n }\n#undef TMP\n#undef DFT\n#undef ZEROS\n#undef\
-    \ SET\n#undef SET_S\n#undef SUBST\n#undef ASGN\n#undef ASN\n#undef BOP\n#undef\
-    \ OP\n#undef FUNC\n#undef REP\n};\n#define ARR(_) \\\n using m##_= StaticModInt<M##_>;\
+    \ * r3).val();\n     if CE (t > 4) a= T(B::m4::mod()) * (TMP(5) - B::iv52 * r2\
+    \ - B::iv53 * r3 - B::iv54 * r4).val();\n     a= (a + r4) * B::m3::mod();\n  \
+    \  }\n    a= (a + r3) * B::m2::mod();\n   }\n   return (a + r2) * B::m1::mod()\
+    \ + r1;\n  } else return this->dt1[i];\n }\n#undef TMP\n#undef DFT\n#undef ZEROS\n\
+    #undef SET\n#undef SET_S\n#undef SUBST\n#undef ASGN\n#undef ASN\n#undef BOP\n\
+    #undef OP\n#undef FUNC\n#undef REP\n};\n#define ARR(_) \\\n using m##_= StaticModInt<M##_>;\
     \ \\\n using ntt##_= NTT<m##_>; \\\n m##_ dt##_[LM]= {};\n#define IV2 ST CE m2\
     \ iv21= m2(1) / m1::mod();\n#define IV3 ST CE m3 iv32= m3(1) / m2::mod(), iv31=\
     \ iv32 / m1::mod();\n#define IV4 ST CE m4 iv43= m4(1) / m3::mod(), iv42= iv43\
@@ -547,7 +547,7 @@ data:
   isVerificationFile: false
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
-  timestamp: '2023-01-01 00:16:52+09:00'
+  timestamp: '2023-01-01 04:58:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/963.FPS.test.cpp
