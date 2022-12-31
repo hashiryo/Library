@@ -173,4 +173,4 @@ layout: document
 title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
 ---
 ## 参考
-https://trap.jp/post/1444/
+[https://trap.jp/post/1444/](https://trap.jp/post/1444/)
