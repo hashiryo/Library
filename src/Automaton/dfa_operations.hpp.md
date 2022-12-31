@@ -6,7 +6,7 @@ data:
     title: "DFA\u4E0A\u306EDP"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
   - icon: ':x:'

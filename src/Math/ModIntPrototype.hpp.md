@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -20,10 +20,10 @@ data:
   - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -83,13 +83,13 @@ data:
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2257.test.cpp
     title: test/aoj/2257.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'
@@ -128,7 +128,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
   - icon: ':x:'
@@ -146,7 +146,7 @@ data:
   - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
   - icon: ':x:'
@@ -462,57 +462,57 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Math/ModIntPrototype.hpp\"\n#include <bits/stdc++.h>\n\
     namespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
-    \ uint32_t;\nusing u64= uint64_t;\nusing u128= __uint128_t;\nstruct MP_Mo {\n\
-    \  const u64 mod;\n  constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n  constexpr MP_Mo(u64\
-    \ m): mod(m), iv(inv(m)), r2(-u128(mod) % mod) {}\n  constexpr inline u64 mul(u64\
-    \ l, u64 r) const { return reduce(u128(l) * r); }\n#define BOP(op, a) return l\
-    \ op##= a, l+= (mod << 1) & -(l >> 63)\n  constexpr inline u64 plus(u64 l, u64\
-    \ r) const { BOP(+, r - (mod << 1)); }\n  constexpr inline u64 diff(u64 l, u64\
-    \ r) const { BOP(-, r); }\n#undef BOP\n  constexpr inline u64 set(u64 n) const\
-    \ { return mul(n, r2); }\n  constexpr inline u64 get(u64 n) const {\n    u64 ret=\
-    \ reduce(n) - mod;\n    return ret + (mod & -(ret >> 63));\n  }\n  constexpr inline\
-    \ u64 norm(u64 n) const { return n - (mod & -(n >= mod)); }\n private:\n  const\
-    \ u64 iv, r2;\n  constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e ? inv(n,\
-    \ e - 1, x * (2 - x * n)) : x; }\n  constexpr inline u64 reduce(const u128 &w)\
-    \ const { return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64); }\n};\n\
-    template <class Uint> class MP_Na {\n  using DUint= conditional_t<is_same_v<Uint,\
-    \ u32>, u64, u128>;\n public:\n  const Uint mod;\n  constexpr MP_Na(): mod(0){};\n\
-    \  constexpr MP_Na(Uint m): mod(m) {}\n  constexpr inline Uint mul(Uint l, Uint\
+    \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
+    struct MP_Mo {\n const u64 mod;\n constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n\
+    \ constexpr MP_Mo(u64 m): mod(m), iv(inv(m)), r2(-u128(mod) % mod) {}\n constexpr\
+    \ inline u64 mul(u64 l, u64 r) const { return reduce(u128(l) * r); }\n#define\
+    \ BOP(op, a) return l op##= a, l+= (mod << 1) & -(l >> 63)\n constexpr inline\
+    \ u64 plus(u64 l, u64 r) const { BOP(+, r - (mod << 1)); }\n constexpr inline\
+    \ u64 diff(u64 l, u64 r) const { BOP(-, r); }\n#undef BOP\n constexpr inline u64\
+    \ set(u64 n) const { return mul(n, r2); }\n constexpr inline u64 get(u64 n) const\
+    \ {\n  u64 ret= reduce(n) - mod;\n  return ret + (mod & -(ret >> 63));\n }\n constexpr\
+    \ inline u64 norm(u64 n) const { return n - (mod & -(n >= mod)); }\nprivate:\n\
+    \ const u64 iv, r2;\n constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e\
+    \ ? inv(n, e - 1, x * (2 - x * n)) : x; }\n constexpr inline u64 reduce(const\
+    \ u128& w) const { return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64);\
+    \ }\n};\ntemplate <class Uint> class MP_Na {\n using DUint= conditional_t<is_same_v<Uint,\
+    \ u32>, u64, u128>;\npublic:\n const Uint mod;\n constexpr MP_Na(): mod(0){};\n\
+    \ constexpr MP_Na(Uint m): mod(m) {}\n constexpr inline Uint mul(Uint l, Uint\
     \ r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod\
-    \ & -((l p##= r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const {\
-    \ BOP(-, +); }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -);\
-    \ }\n#undef BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n  static\
-    \ constexpr inline Uint get(Uint n) { return n; }\n  static constexpr inline Uint\
+    \ & -((l p##= r) >= mod)\n constexpr inline Uint plus(Uint l, Uint r) const {\
+    \ BOP(-, +); }\n constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -);\
+    \ }\n#undef BOP\n static constexpr inline Uint set(Uint n) { return n; }\n static\
+    \ constexpr inline Uint get(Uint n) { return n; }\n static constexpr inline Uint\
     \ norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr\
-    \ Uint pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);;\
-    \ x= md.mul(x, x))\n    if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return\
-    \ ret;\n}\n}\n"
+    \ Uint pow(Uint x, u64 k, const mod_pro_t& md) {\n for (Uint ret= md.set(1);;\
+    \ x= md.mul(x, x))\n  if (k& 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
+    }\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nnamespace math_internal {\nusing\
     \ namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\n\
-    using u128= __uint128_t;\nstruct MP_Mo {\n  const u64 mod;\n  constexpr MP_Mo():\
-    \ mod(0), iv(0), r2(0) {}\n  constexpr MP_Mo(u64 m): mod(m), iv(inv(m)), r2(-u128(mod)\
-    \ % mod) {}\n  constexpr inline u64 mul(u64 l, u64 r) const { return reduce(u128(l)\
-    \ * r); }\n#define BOP(op, a) return l op##= a, l+= (mod << 1) & -(l >> 63)\n\
-    \  constexpr inline u64 plus(u64 l, u64 r) const { BOP(+, r - (mod << 1)); }\n\
-    \  constexpr inline u64 diff(u64 l, u64 r) const { BOP(-, r); }\n#undef BOP\n\
-    \  constexpr inline u64 set(u64 n) const { return mul(n, r2); }\n  constexpr inline\
-    \ u64 get(u64 n) const {\n    u64 ret= reduce(n) - mod;\n    return ret + (mod\
-    \ & -(ret >> 63));\n  }\n  constexpr inline u64 norm(u64 n) const { return n -\
-    \ (mod & -(n >= mod)); }\n private:\n  const u64 iv, r2;\n  constexpr u64 inv(u64\
-    \ n, int e= 6, u64 x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n\
-    \  constexpr inline u64 reduce(const u128 &w) const { return u64(w >> 64) + mod\
-    \ - ((u128(u64(w) * iv) * mod) >> 64); }\n};\ntemplate <class Uint> class MP_Na\
-    \ {\n  using DUint= conditional_t<is_same_v<Uint, u32>, u64, u128>;\n public:\n\
-    \  const Uint mod;\n  constexpr MP_Na(): mod(0){};\n  constexpr MP_Na(Uint m):\
-    \ mod(m) {}\n  constexpr inline Uint mul(Uint l, Uint r) const { return DUint(l)\
-    \ * r % mod; }\n#define BOP(m, p) return l m##= mod & -((l p##= r) >= mod)\n \
-    \ constexpr inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n  constexpr\
-    \ inline Uint diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n  static\
-    \ constexpr inline Uint set(Uint n) { return n; }\n  static constexpr inline Uint\
-    \ get(Uint n) { return n; }\n  static constexpr inline Uint norm(Uint n) { return\
-    \ n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr Uint pow(Uint x,\
-    \ u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);; x= md.mul(x, x))\n\
-    \    if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n}"
+    using i64= int64_t;\nusing u128= __uint128_t;\nstruct MP_Mo {\n const u64 mod;\n\
+    \ constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n constexpr MP_Mo(u64 m): mod(m),\
+    \ iv(inv(m)), r2(-u128(mod) % mod) {}\n constexpr inline u64 mul(u64 l, u64 r)\
+    \ const { return reduce(u128(l) * r); }\n#define BOP(op, a) return l op##= a,\
+    \ l+= (mod << 1) & -(l >> 63)\n constexpr inline u64 plus(u64 l, u64 r) const\
+    \ { BOP(+, r - (mod << 1)); }\n constexpr inline u64 diff(u64 l, u64 r) const\
+    \ { BOP(-, r); }\n#undef BOP\n constexpr inline u64 set(u64 n) const { return\
+    \ mul(n, r2); }\n constexpr inline u64 get(u64 n) const {\n  u64 ret= reduce(n)\
+    \ - mod;\n  return ret + (mod & -(ret >> 63));\n }\n constexpr inline u64 norm(u64\
+    \ n) const { return n - (mod & -(n >= mod)); }\nprivate:\n const u64 iv, r2;\n\
+    \ constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e ? inv(n, e - 1, x *\
+    \ (2 - x * n)) : x; }\n constexpr inline u64 reduce(const u128& w) const { return\
+    \ u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64); }\n};\ntemplate <class\
+    \ Uint> class MP_Na {\n using DUint= conditional_t<is_same_v<Uint, u32>, u64,\
+    \ u128>;\npublic:\n const Uint mod;\n constexpr MP_Na(): mod(0){};\n constexpr\
+    \ MP_Na(Uint m): mod(m) {}\n constexpr inline Uint mul(Uint l, Uint r) const {\
+    \ return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod & -((l p##=\
+    \ r) >= mod)\n constexpr inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n\
+    \ constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n\
+    \ static constexpr inline Uint set(Uint n) { return n; }\n static constexpr inline\
+    \ Uint get(Uint n) { return n; }\n static constexpr inline Uint norm(Uint n) {\
+    \ return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr Uint pow(Uint\
+    \ x, u64 k, const mod_pro_t& md) {\n for (Uint ret= md.set(1);; x= md.mul(x, x))\n\
+    \  if (k& 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/ModIntPrototype.hpp
@@ -543,7 +543,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/FormalPowerSeries.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-12-31 01:36:36+09:00'
+  timestamp: '2022-12-31 18:14:29+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DPL_5_E.test.cpp

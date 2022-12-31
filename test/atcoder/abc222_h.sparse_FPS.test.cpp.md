@@ -32,106 +32,103 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc222_h.sparse_FPS.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc222/tasks/abc222_h\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n  Int x= 1, y= 0, b=\
-    \ mod;\n  for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a /\
-    \ b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ? mod - (-x) % mod :\
-    \ x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal\
-    \ {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64=\
-    \ uint64_t;\nusing u128= __uint128_t;\nstruct MP_Mo {\n  const u64 mod;\n  constexpr\
-    \ MP_Mo(): mod(0), iv(0), r2(0) {}\n  constexpr MP_Mo(u64 m): mod(m), iv(inv(m)),\
-    \ r2(-u128(mod) % mod) {}\n  constexpr inline u64 mul(u64 l, u64 r) const { return\
-    \ reduce(u128(l) * r); }\n#define BOP(op, a) return l op##= a, l+= (mod << 1)\
-    \ & -(l >> 63)\n  constexpr inline u64 plus(u64 l, u64 r) const { BOP(+, r - (mod\
-    \ << 1)); }\n  constexpr inline u64 diff(u64 l, u64 r) const { BOP(-, r); }\n\
-    #undef BOP\n  constexpr inline u64 set(u64 n) const { return mul(n, r2); }\n \
-    \ constexpr inline u64 get(u64 n) const {\n    u64 ret= reduce(n) - mod;\n   \
-    \ return ret + (mod & -(ret >> 63));\n  }\n  constexpr inline u64 norm(u64 n)\
-    \ const { return n - (mod & -(n >= mod)); }\n private:\n  const u64 iv, r2;\n\
-    \  constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e ? inv(n, e - 1, x *\
-    \ (2 - x * n)) : x; }\n  constexpr inline u64 reduce(const u128 &w) const { return\
+    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
+    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
+    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
+    }\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing\
+    \ namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\n\
+    using i64= int64_t;\nusing u128= __uint128_t;\nstruct MP_Mo {\n const u64 mod;\n\
+    \ constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n constexpr MP_Mo(u64 m): mod(m),\
+    \ iv(inv(m)), r2(-u128(mod) % mod) {}\n constexpr inline u64 mul(u64 l, u64 r)\
+    \ const { return reduce(u128(l) * r); }\n#define BOP(op, a) return l op##= a,\
+    \ l+= (mod << 1) & -(l >> 63)\n constexpr inline u64 plus(u64 l, u64 r) const\
+    \ { BOP(+, r - (mod << 1)); }\n constexpr inline u64 diff(u64 l, u64 r) const\
+    \ { BOP(-, r); }\n#undef BOP\n constexpr inline u64 set(u64 n) const { return\
+    \ mul(n, r2); }\n constexpr inline u64 get(u64 n) const {\n  u64 ret= reduce(n)\
+    \ - mod;\n  return ret + (mod & -(ret >> 63));\n }\n constexpr inline u64 norm(u64\
+    \ n) const { return n - (mod & -(n >= mod)); }\nprivate:\n const u64 iv, r2;\n\
+    \ constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e ? inv(n, e - 1, x *\
+    \ (2 - x * n)) : x; }\n constexpr inline u64 reduce(const u128& w) const { return\
     \ u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64); }\n};\ntemplate <class\
-    \ Uint> class MP_Na {\n  using DUint= conditional_t<is_same_v<Uint, u32>, u64,\
-    \ u128>;\n public:\n  const Uint mod;\n  constexpr MP_Na(): mod(0){};\n  constexpr\
-    \ MP_Na(Uint m): mod(m) {}\n  constexpr inline Uint mul(Uint l, Uint r) const\
-    \ { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod & -((l p##=\
-    \ r) >= mod)\n  constexpr inline Uint plus(Uint l, Uint r) const { BOP(-, +);\
-    \ }\n  constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -); }\n#undef\
-    \ BOP\n  static constexpr inline Uint set(Uint n) { return n; }\n  static constexpr\
-    \ inline Uint get(Uint n) { return n; }\n  static constexpr inline Uint norm(Uint\
-    \ n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr Uint\
-    \ pow(Uint x, u64 k, const mod_pro_t &md) {\n  for (Uint ret= md.set(1);; x= md.mul(x,\
-    \ x))\n    if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n}\n\
-    #line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\nstruct m_b {};\nstruct\
-    \ s_b: m_b {};\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr bool is_modint_v=\
-    \ is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t> constexpr bool is_staticmodint_v=\
-    \ is_base_of_v<s_b, mod_t>;\ntemplate <class mod_t> constexpr bool is_runtimemodint_v=\
-    \ is_base_of_v<r_b, mod_t>;\ntemplate <class mpt, u64 MOD> struct SB: s_b {\n\
-    \ protected:\n  static constexpr mpt md= mpt(MOD);\n};\ntemplate <class mpt, int\
-    \ id> struct RB: r_b {\n  static inline void set_mod(u64 m) { md= mpt(m); }\n\
-    \ protected:\n  static inline mpt md;\n};\ntemplate <class Int, class U, class\
-    \ B> struct MInt: public B {\n  using Uint= U;\n  static constexpr inline auto\
-    \ modulo() { return B::md.mod; }\n  constexpr MInt(): x(0) {}\n  constexpr MInt(const\
-    \ MInt &r): x(r.x) {}\n  template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
-    \ = nullptr> constexpr MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n  template\
-    \ <class T, enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\
-    \ constexpr MInt(T n): x(B::md.set((n < 0 ? B::md.mod - (-n) % B::md.mod : n %\
-    \ B::md.mod))) {}\n  constexpr MInt operator-() const { return MInt() - *this;\
-    \ }\n#define FUNC(name, op) \\\n  constexpr MInt name const { \\\n    MInt ret;\
-    \ \\\n    return ret.x= op, ret; \\\n  }\n  FUNC(operator+(const MInt &r), B::md.plus(x,\
-    \ r.x))\n  FUNC(operator-(const MInt &r), B::md.diff(x, r.x))\n  FUNC(operator*(const\
-    \ MInt &r), B::md.mul(x, r.x))\n  FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
-    #undef FUNC\n  constexpr MInt operator/(const MInt &r) const { return *this *\
-    \ r.inv(); }\n  constexpr MInt &operator+=(const MInt &r) { return *this= *this\
-    \ + r; }\n  constexpr MInt &operator-=(const MInt &r) { return *this= *this -\
-    \ r; }\n  constexpr MInt &operator*=(const MInt &r) { return *this= *this * r;\
-    \ }\n  constexpr MInt &operator/=(const MInt &r) { return *this= *this / r; }\n\
-    \  constexpr bool operator==(const MInt &r) const { return B::md.norm(x) == B::md.norm(r.x);\
-    \ }\n  constexpr bool operator!=(const MInt &r) const { return !(*this == r);\
-    \ }\n  constexpr bool operator<(const MInt &r) const { return B::md.norm(x) <\
-    \ B::md.norm(r.x); }\n  constexpr inline MInt inv() const { return mod_inv<Int>(val(),\
-    \ B::md.mod); }\n  constexpr inline Uint val() const { return B::md.get(x); }\n\
-    \  friend ostream &operator<<(ostream &os, const MInt &r) { return os << r.val();\
-    \ }\n  friend istream &operator>>(istream &is, MInt &r) {\n    long long v;\n\
-    \    return is >> v, r= MInt(v), is;\n  }\n private:\n  Uint x;\n};\ntemplate\
-    \ <u64 MOD> using StaticModInt= conditional_t < MOD<INT_MAX, MInt<int, u32, SB<MP_Na<u32>,\
-    \ MOD>>, conditional_t<MOD &(MOD < LLONG_MAX), MInt<long long, u64, SB<MP_Mo,\
-    \ MOD>>, MInt<long long, u64, SB<MP_Na<u64>, MOD>>>>;\nclass Moomery {};\ntemplate\
-    \ <class Int, int id= -1> using RuntimeModInt= conditional_t<is_same_v<Int, Moomery>,\
-    \ MInt<long long, u64, RB<MP_Mo, id>>, conditional_t<disjunction_v<is_same<Int,\
-    \ long long>, is_same<Int, u64>>, MInt<long long, u64, RB<MP_Na<u64>, id>>, MInt<int,\
-    \ u32, RB<MP_Na<u32>, id>>>>;\n}\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\
-    \ math_internal::Moomery, math_internal::is_runtimemodint_v, math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, std::size_t LIM> mod_t\
-    \ get_inv(int n) {\n  static_assert(is_modint_v<mod_t>);\n  static const auto\
-    \ m= mod_t::modulo();\n  static mod_t dat[LIM];\n  static int l= 1;\n  if (l ==\
-    \ 1) dat[l++]= 1;\n  while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n  return\
-    \ dat[n];\n}\n#line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate\
-    \ <class Uint, class mod_pro_t, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n  const mod_pro_t md(n);\n  const Uint s= __builtin_ctzll(n - 1), d= n\
-    \ >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n  for (auto a: {args...})\
-    \ {\n    Uint b= a % n, p= pow(md.set(b), d, md), i= s;\n    while (p= md.norm(p),\
-    \ (p != one && p != n1 && b && i--)) p= md.mul(p, p);\n    if (md.norm(p) != n1\
-    \ && i != s) return 0;\n  }\n  return true;\n}\nconstexpr bool is_prime(u64 n)\
-    \ {\n  if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n  if (n < UINT_MAX)\
-    \ return miller_rabin<u32, MP_Na<u32>, 2, 7, 61>(n);\n  if (n < LLONG_MAX) return\
-    \ miller_rabin<u64, MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \  return miller_rabin<u64, MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504,\
-    \ 1795265022>(n);\n}\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\
-    \nnamespace math_internal {\ntemplate <class Int, class mod_pro_t> constexpr Int\
-    \ inner_sqrt(Int a, Int p) {\n  const mod_pro_t md(p);\n  Int e= (p - 1) >> 1,\
-    \ one= md.set(1);\n  if (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n\
-    \  Int b= 0, d= md.diff(0, a), ret= one, r2= 0, b2= one;\n  while (md.norm(pow(d,\
-    \ e, md)) == one) b= md.plus(b, one), d= md.diff(md.mul(b, b), a);\n  auto mult=\
-    \ [&md, d](Int &u1, Int &u2, Int v1, Int v2) {\n    Int tmp= md.plus(md.mul(u1,\
-    \ v1), md.mul(md.mul(u2, v2), d));\n    u2= md.plus(md.mul(u1, v2), md.mul(u2,\
-    \ v1)), u1= tmp;\n  };\n  for (++e;; mult(b, b2, b, b2)) {\n    if (e & 1) mult(ret,\
-    \ r2, b, b2);\n    if (!(e>>= 1)) return ret= md.get(ret), ret * 2 < p ? ret :\
-    \ p - ret;\n  }\n}\nconstexpr int64_t mod_sqrt(int64_t a, int64_t p) {\n  assert(p\
-    \ > 0), assert(a > 0), assert(is_prime(p)), a%= p;\n  if (a <= 1 || p == 2) return\
-    \ a;\n  if (p < INT_MAX) return inner_sqrt<int, MP_Na<u32>>(a, p);\n  return inner_sqrt<int64_t,\
-    \ MP_Mo>(a, p);\n}\n}\nusing math_internal::mod_sqrt;\n#line 5 \"src/Math/sparse_fps.hpp\"\
-    \n/**\n * @title \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category\
-    \ \u6570\u5B66\n * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
+    \ Uint> class MP_Na {\n using DUint= conditional_t<is_same_v<Uint, u32>, u64,\
+    \ u128>;\npublic:\n const Uint mod;\n constexpr MP_Na(): mod(0){};\n constexpr\
+    \ MP_Na(Uint m): mod(m) {}\n constexpr inline Uint mul(Uint l, Uint r) const {\
+    \ return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod & -((l p##=\
+    \ r) >= mod)\n constexpr inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n\
+    \ constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n\
+    \ static constexpr inline Uint set(Uint n) { return n; }\n static constexpr inline\
+    \ Uint get(Uint n) { return n; }\n static constexpr inline Uint norm(Uint n) {\
+    \ return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr Uint pow(Uint\
+    \ x, u64 k, const mod_pro_t& md) {\n for (Uint ret= md.set(1);; x= md.mul(x, x))\n\
+    \  if (k& 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n}\n#line 5 \"\
+    src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\nstruct\
+    \ m_b {};\nstruct s_b: m_b {};\nstruct r_b: m_b {};\ntemplate <class mod_t> CE\
+    \ bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t> CE bool\
+    \ is_staticmodint_v= is_base_of_v<s_b, mod_t>;\ntemplate <class mod_t> CE bool\
+    \ is_runtimemodint_v= is_base_of_v<r_b, mod_t>;\ntemplate <class mpt, u64 MOD>\
+    \ struct SB: s_b {\nprotected:\n static CE mpt md= mpt(MOD);\n};\ntemplate <class\
+    \ mpt, int id> struct RB: r_b {\n static inline void set_mod(u64 m) { md= mpt(m);\
+    \ }\nprotected:\n static inline mpt md;\n};\ntemplate <class Int, class U, class\
+    \ B> struct MInt: public B {\n using Uint= U;\n static CE inline auto mod() {\
+    \ return B::md.mod; }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n\
+    \ template <class T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T\
+    \ v): x(B::md.set(v.val() % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T,\
+    \ __int128_t>, nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? B::md.mod\
+    \ - (-n) % B::md.mod : n % B::md.mod))) {}\n CE MInt operator-() const { return\
+    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
+    \ ret; \\\n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
+    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
+    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
+    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
+    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
+    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
+    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
+    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
+    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
+    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
+    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using StaticModInt=\
+    \ conditional_t < MOD<INT_MAX, MInt<int, u32, SB<MP_Na<u32>, MOD>>, conditional_t<MOD&(MOD\
+    \ < LLONG_MAX), MInt<i64, u64, SB<MP_Mo, MOD>>, MInt<i64, u64, SB<MP_Na<u64>,\
+    \ MOD>>>>;\nclass Montgomery {};\ntemplate <class Int, int id= -1> using RuntimeModInt=\
+    \ conditional_t<is_same_v<Int, Montgomery>, MInt<i64, u64, RB<MP_Mo, id>>, conditional_t<disjunction_v<is_same<Int,\
+    \ i64>, is_same<Int, u64>>, MInt<i64, u64, RB<MP_Na<u64>, id>>, MInt<int, u32,\
+    \ RB<MP_Na<u32>, id>>>>;\n#undef CE\n}\nusing math_internal::RuntimeModInt, math_internal::StaticModInt,\
+    \ math_internal::Montgomery, math_internal::is_runtimemodint_v, math_internal::is_modint_v,\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, size_t LIM> mod_t\
+    \ get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m=\
+    \ mod_t::mod();\n static mod_t dat[LIM];\n static int l= 1;\n if (l == 1) dat[l++]=\
+    \ 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n\
+    #line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
+    \ Uint, class mod_pro_t, u64... args> constexpr bool miller_rabin(Uint n) {\n\
+    \ const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
+    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...}) {\n  Uint b=\
+    \ a % n, p= pow(md.set(b), d, md), i= s;\n  while (p= md.norm(p), (p != one &&\
+    \ p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p) != n1 && i != s) return\
+    \ 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n\
+    \ % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
+    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return miller_rabin<u64, MP_Mo,\
+    \ 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\nnamespace math_internal\
+    \ {\ntemplate <class Int, class mod_pro_t> constexpr Int inner_sqrt(Int a, Int\
+    \ p) {\n  const mod_pro_t md(p);\n  Int e= (p - 1) >> 1, one= md.set(1);\n  if\
+    \ (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n  Int b= 0, d= md.diff(0,\
+    \ a), ret= one, r2= 0, b2= one;\n  while (md.norm(pow(d, e, md)) == one) b= md.plus(b,\
+    \ one), d= md.diff(md.mul(b, b), a);\n  auto mult= [&md, d](Int &u1, Int &u2,\
+    \ Int v1, Int v2) {\n    Int tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2),\
+    \ d));\n    u2= md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1= tmp;\n  };\n  for\
+    \ (++e;; mult(b, b2, b, b2)) {\n    if (e & 1) mult(ret, r2, b, b2);\n    if (!(e>>=\
+    \ 1)) return ret= md.get(ret), ret * 2 < p ? ret : p - ret;\n  }\n}\nconstexpr\
+    \ int64_t mod_sqrt(int64_t a, int64_t p) {\n  assert(p > 0), assert(a > 0), assert(is_prime(p)),\
+    \ a%= p;\n  if (a <= 1 || p == 2) return a;\n  if (p < INT_MAX) return inner_sqrt<int,\
+    \ MP_Na<u32>>(a, p);\n  return inner_sqrt<int64_t, MP_Mo>(a, p);\n}\n}\nusing\
+    \ math_internal::mod_sqrt;\n#line 5 \"src/Math/sparse_fps.hpp\"\n/**\n * @title\
+    \ \u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\n * @category \u6570\u5B66\n\
+    \ * @see\n * https://maspypy.com/%E5%A4%9A%E9%A0%85%E5%BC%8F%E3%83%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E3%81%B9%E3%81%8D%E7%B4%9A%E6%95%B0-%E9%AB%98%E9%80%9F%E3%81%AB%E8%A8%88%E7%AE%97%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%82%E3%81%AE\n\
     \ */\n\n// verify\u7528:\n// https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse\n\
     \n// BEGIN CUT HERE\ntemplate <class K>\nstd::vector<K> sparse_inv(const std::vector<K>\
     \ &f, int n) {\n  assert(f[0] != K(0));\n  std::vector<std::pair<int, K>> dat;\n\
@@ -233,7 +230,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc222_h.sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 01:36:36+09:00'
+  timestamp: '2022-12-31 18:14:29+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc222_h.sparse_FPS.test.cpp

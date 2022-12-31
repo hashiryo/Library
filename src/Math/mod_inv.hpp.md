@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -20,10 +20,10 @@ data:
   - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -67,13 +67,13 @@ data:
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2257.test.cpp
     title: test/aoj/2257.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'
@@ -109,7 +109,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
   - icon: ':x:'
@@ -127,7 +127,7 @@ data:
   - icon: ':x:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
   - icon: ':x:'
@@ -421,15 +421,15 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <bits/stdc++.h>\ntemplate\
-    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n\
-    \  Int x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y,\
-    \ y= z - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ?\
-    \ mod - (-x) % mod : x % mod;\n}\n"
+    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
+    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
+    \ - (-x) % mod : x % mod;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <class Int> constexpr inline\
-    \ Int mod_inv(Int a, Int mod) {\n  static_assert(std::is_signed_v<Int>);\n  Int\
-    \ x= 1, y= 0, b= mod;\n  for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
-    \ - y * (q= a / b), a= b, b= c - b * q;\n  return assert(a == 1), x < 0 ? mod\
-    \ - (-x) % mod : x % mod;\n}"
+    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
+    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
+    \ - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod -\
+    \ (-x) % mod : x % mod;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/mod_inv.hpp
@@ -455,7 +455,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/FormalPowerSeries.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-12-31 01:36:36+09:00'
+  timestamp: '2022-12-31 18:14:29+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DPL_5_E.test.cpp
