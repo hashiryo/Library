@@ -22,9 +22,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    document_title: "\u758E\u884C\u5217"
-    links:
-    - https://yukicoder.me/wiki/black_box_linear_algebra
+    links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2]\
     \ + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class K> std::vector<K> berlekamp_massey(const\
@@ -74,48 +72,42 @@ data:
     \ mod_t operator[](std::size_t k) const { return poly[k]; }\n  const auto begin()\
     \ const { return poly.begin(); }\n  const auto end() const { return poly.end();\
     \ }\n  const std::size_t size() const { return dg + 1; }\n};\n#line 4 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
-    \n\n/**\n * @title \u758E\u884C\u5217\n * @category \u6570\u5B66\n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n\
-    \ * @brief O(N*S(N)) S(N): \u884C\u5217\u306E\u975E\u96F6\u6210\u5206\u306E\u6570\
-    \n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t>\nstruct SparseSquareMatrix\
-    \ {\n  SparseSquareMatrix(std::size_t n_) : n(n_) {}\n  void add_component(std::size_t\
-    \ i, std::size_t j, mod_t val) {\n    dat.emplace_back(i, j, val);\n  }\n  std::vector<mod_t>\
-    \ operator*(const std::vector<mod_t> &vec) const {\n    std::vector<mod_t> ret(n);\n\
-    \    assert(vec.size() == n);\n    for (const auto &[i, j, val] : dat) ret[i]\
-    \ += val * vec[j];\n    return ret;\n  }\n  auto begin() { return dat.begin();\
-    \ }\n  auto end() { return dat.end(); }\n  std::size_t size() const { return n;\
-    \ }\n  mod_t det() const {\n    const std::uint64_t MOD = mod_t::modulo();\n \
-    \   using MinPoly = MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
-    \    SparseSquareMatrix M(*this);\n    std::vector<mod_t> d(n), b(n);\n    for\
-    \ (auto &x : b) x = MinPoly::get_rand(1, MOD - 1);\n    for (auto &x : d) x =\
-    \ MinPoly::get_rand(1, MOD - 1);\n    for (auto &[i, j, val] : M) val *= d[j];\n\
-    \    mod_t ret = MinPoly(M, b)[0], tmp = 1;\n    for (const auto &x : d) tmp *=\
-    \ x;\n    if (n & 1) ret = -ret;\n    return ret / tmp;\n  }\n\n private:\n  std::size_t\
-    \ n;\n  std::vector<std::tuple<std::size_t, std::size_t, mod_t>> dat;\n};\n"
+    \ntemplate <class mod_t> struct SparseSquareMatrix {\n SparseSquareMatrix(std::size_t\
+    \ n_): n(n_) {}\n void add_component(std::size_t i, std::size_t j, mod_t val)\
+    \ { dat.emplace_back(i, j, val); }\n std::vector<mod_t> operator*(const std::vector<mod_t>\
+    \ &vec) const {\n  std::vector<mod_t> ret(n);\n  assert(vec.size() == n);\n  for\
+    \ (const auto &[i, j, val]: dat) ret[i]+= val * vec[j];\n  return ret;\n }\n auto\
+    \ begin() { return dat.begin(); }\n auto end() { return dat.end(); }\n std::size_t\
+    \ size() const { return n; }\n mod_t det() const {\n  const std::uint64_t MOD=\
+    \ mod_t::mod();\n  using MinPoly= MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
+    \  SparseSquareMatrix M(*this);\n  std::vector<mod_t> d(n), b(n);\n  for (auto\
+    \ &x: b) x= MinPoly::get_rand(1, MOD - 1);\n  for (auto &x: d) x= MinPoly::get_rand(1,\
+    \ MOD - 1);\n  for (auto &[i, j, val]: M) val*= d[j];\n  mod_t ret= MinPoly(M,\
+    \ b)[0], tmp= 1;\n  for (const auto &x: d) tmp*= x;\n  if (n & 1) ret= -ret;\n\
+    \  return ret / tmp;\n }\nprivate:\n std::size_t n;\n std::vector<std::tuple<std::size_t,\
+    \ std::size_t, mod_t>> dat;\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
-    \n\n/**\n * @title \u758E\u884C\u5217\n * @category \u6570\u5B66\n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n\
-    \ * @brief O(N*S(N)) S(N): \u884C\u5217\u306E\u975E\u96F6\u6210\u5206\u306E\u6570\
-    \n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t>\nstruct SparseSquareMatrix\
-    \ {\n  SparseSquareMatrix(std::size_t n_) : n(n_) {}\n  void add_component(std::size_t\
-    \ i, std::size_t j, mod_t val) {\n    dat.emplace_back(i, j, val);\n  }\n  std::vector<mod_t>\
-    \ operator*(const std::vector<mod_t> &vec) const {\n    std::vector<mod_t> ret(n);\n\
-    \    assert(vec.size() == n);\n    for (const auto &[i, j, val] : dat) ret[i]\
-    \ += val * vec[j];\n    return ret;\n  }\n  auto begin() { return dat.begin();\
-    \ }\n  auto end() { return dat.end(); }\n  std::size_t size() const { return n;\
-    \ }\n  mod_t det() const {\n    const std::uint64_t MOD = mod_t::modulo();\n \
-    \   using MinPoly = MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
-    \    SparseSquareMatrix M(*this);\n    std::vector<mod_t> d(n), b(n);\n    for\
-    \ (auto &x : b) x = MinPoly::get_rand(1, MOD - 1);\n    for (auto &x : d) x =\
-    \ MinPoly::get_rand(1, MOD - 1);\n    for (auto &[i, j, val] : M) val *= d[j];\n\
-    \    mod_t ret = MinPoly(M, b)[0], tmp = 1;\n    for (const auto &x : d) tmp *=\
-    \ x;\n    if (n & 1) ret = -ret;\n    return ret / tmp;\n  }\n\n private:\n  std::size_t\
-    \ n;\n  std::vector<std::tuple<std::size_t, std::size_t, mod_t>> dat;\n};\n"
+    \ntemplate <class mod_t> struct SparseSquareMatrix {\n SparseSquareMatrix(std::size_t\
+    \ n_): n(n_) {}\n void add_component(std::size_t i, std::size_t j, mod_t val)\
+    \ { dat.emplace_back(i, j, val); }\n std::vector<mod_t> operator*(const std::vector<mod_t>\
+    \ &vec) const {\n  std::vector<mod_t> ret(n);\n  assert(vec.size() == n);\n  for\
+    \ (const auto &[i, j, val]: dat) ret[i]+= val * vec[j];\n  return ret;\n }\n auto\
+    \ begin() { return dat.begin(); }\n auto end() { return dat.end(); }\n std::size_t\
+    \ size() const { return n; }\n mod_t det() const {\n  const std::uint64_t MOD=\
+    \ mod_t::mod();\n  using MinPoly= MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
+    \  SparseSquareMatrix M(*this);\n  std::vector<mod_t> d(n), b(n);\n  for (auto\
+    \ &x: b) x= MinPoly::get_rand(1, MOD - 1);\n  for (auto &x: d) x= MinPoly::get_rand(1,\
+    \ MOD - 1);\n  for (auto &[i, j, val]: M) val*= d[j];\n  mod_t ret= MinPoly(M,\
+    \ b)[0], tmp= 1;\n  for (const auto &x: d) tmp*= x;\n  if (n & 1) ret= -ret;\n\
+    \  return ret / tmp;\n }\nprivate:\n std::size_t n;\n std::vector<std::tuple<std::size_t,\
+    \ std::size_t, mod_t>> dat;\n};\n"
   dependsOn:
   - src/LinearAlgebra/MinimalPolynomial.hpp
   - src/Math/berlekamp_massey.hpp
   isVerificationFile: false
   path: src/LinearAlgebra/SparseSquareMatrix.hpp
   requiredBy: []
-  timestamp: '2022-12-31 19:53:17+09:00'
+  timestamp: '2022-12-31 20:36:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2397.SparseMat.test.cpp
@@ -123,8 +115,10 @@ data:
   - test/yosupo/sparse_matrix_det.test.cpp
 documentation_of: src/LinearAlgebra/SparseSquareMatrix.hpp
 layout: document
-redirect_from:
-- /library/src/LinearAlgebra/SparseSquareMatrix.hpp
-- /library/src/LinearAlgebra/SparseSquareMatrix.hpp.html
 title: "\u758E\u884C\u5217"
 ---
+## 計算量
+$\mathcal{O} (N*S(N))$ \
+$S(N)$: 行列の非零成分の数
+## 参考
+https://yukicoder.me/wiki/black_box_linear_algebra

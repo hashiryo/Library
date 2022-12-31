@@ -150,28 +150,25 @@ data:
     \ mod_t operator[](std::size_t k) const { return poly[k]; }\n  const auto begin()\
     \ const { return poly.begin(); }\n  const auto end() const { return poly.end();\
     \ }\n  const std::size_t size() const { return dg + 1; }\n};\n#line 4 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
-    \n\n/**\n * @title \u758E\u884C\u5217\n * @category \u6570\u5B66\n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n\
-    \ * @brief O(N*S(N)) S(N): \u884C\u5217\u306E\u975E\u96F6\u6210\u5206\u306E\u6570\
-    \n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t>\nstruct SparseSquareMatrix\
-    \ {\n  SparseSquareMatrix(std::size_t n_) : n(n_) {}\n  void add_component(std::size_t\
-    \ i, std::size_t j, mod_t val) {\n    dat.emplace_back(i, j, val);\n  }\n  std::vector<mod_t>\
-    \ operator*(const std::vector<mod_t> &vec) const {\n    std::vector<mod_t> ret(n);\n\
-    \    assert(vec.size() == n);\n    for (const auto &[i, j, val] : dat) ret[i]\
-    \ += val * vec[j];\n    return ret;\n  }\n  auto begin() { return dat.begin();\
-    \ }\n  auto end() { return dat.end(); }\n  std::size_t size() const { return n;\
-    \ }\n  mod_t det() const {\n    const std::uint64_t MOD = mod_t::modulo();\n \
-    \   using MinPoly = MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
-    \    SparseSquareMatrix M(*this);\n    std::vector<mod_t> d(n), b(n);\n    for\
-    \ (auto &x : b) x = MinPoly::get_rand(1, MOD - 1);\n    for (auto &x : d) x =\
-    \ MinPoly::get_rand(1, MOD - 1);\n    for (auto &[i, j, val] : M) val *= d[j];\n\
-    \    mod_t ret = MinPoly(M, b)[0], tmp = 1;\n    for (const auto &x : d) tmp *=\
-    \ x;\n    if (n & 1) ret = -ret;\n    return ret / tmp;\n  }\n\n private:\n  std::size_t\
-    \ n;\n  std::vector<std::tuple<std::size_t, std::size_t, mod_t>> dat;\n};\n#line\
-    \ 5 \"test/yosupo/sparse_matrix_det.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint> M(N);\n  for (int i\
-    \ = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b >> c;\n    M.add_component(a,\
-    \ b, c);\n  }\n  cout << M.det() << '\\n';\n  return 0;\n}\n"
+    \ntemplate <class mod_t> struct SparseSquareMatrix {\n SparseSquareMatrix(std::size_t\
+    \ n_): n(n_) {}\n void add_component(std::size_t i, std::size_t j, mod_t val)\
+    \ { dat.emplace_back(i, j, val); }\n std::vector<mod_t> operator*(const std::vector<mod_t>\
+    \ &vec) const {\n  std::vector<mod_t> ret(n);\n  assert(vec.size() == n);\n  for\
+    \ (const auto &[i, j, val]: dat) ret[i]+= val * vec[j];\n  return ret;\n }\n auto\
+    \ begin() { return dat.begin(); }\n auto end() { return dat.end(); }\n std::size_t\
+    \ size() const { return n; }\n mod_t det() const {\n  const std::uint64_t MOD=\
+    \ mod_t::mod();\n  using MinPoly= MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
+    \  SparseSquareMatrix M(*this);\n  std::vector<mod_t> d(n), b(n);\n  for (auto\
+    \ &x: b) x= MinPoly::get_rand(1, MOD - 1);\n  for (auto &x: d) x= MinPoly::get_rand(1,\
+    \ MOD - 1);\n  for (auto &[i, j, val]: M) val*= d[j];\n  mod_t ret= MinPoly(M,\
+    \ b)[0], tmp= 1;\n  for (const auto &x: d) tmp*= x;\n  if (n & 1) ret= -ret;\n\
+    \  return ret / tmp;\n }\nprivate:\n std::size_t n;\n std::vector<std::tuple<std::size_t,\
+    \ std::size_t, mod_t>> dat;\n};\n#line 5 \"test/yosupo/sparse_matrix_det.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
+    \  using Mint = StaticModInt<998244353>;\n  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint>\
+    \ M(N);\n  for (int i = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b\
+    \ >> c;\n    M.add_component(a, b, c);\n  }\n  cout << M.det() << '\\n';\n  return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
@@ -189,7 +186,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 19:53:17+09:00'
+  timestamp: '2022-12-31 20:36:38+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sparse_matrix_det.test.cpp
