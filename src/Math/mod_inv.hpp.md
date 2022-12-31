@@ -57,7 +57,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/discrete_logarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':x:'
@@ -190,7 +190,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':x:'

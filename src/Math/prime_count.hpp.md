@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.primecnt.test.cpp
     title: test/atcoder/abc172_d.primecnt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
   - icon: ':x:'

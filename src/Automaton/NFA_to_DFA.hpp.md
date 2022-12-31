@@ -111,7 +111,7 @@ layout: document
 title: "NFA\u3092DFA\u306B\u5909\u63DB"
 ---
 ## 参考
-https://qiita.com/hotman78/items/74c2d5d246ba3b6b3836 \
-https://blog.knshnb.com/posts/aoj2587/
+[https://qiita.com/hotman78/items/74c2d5d246ba3b6b3836](https://qiita.com/hotman78/items/74c2d5d246ba3b6b3836) \
+[https://blog.knshnb.com/posts/aoj2587/](https://blog.knshnb.com/posts/aoj2587/)
 ## 問題例
 [AtCoder Beginner Contest 050 D - Xor Sum](https://atcoder.jp/contests/abc050/tasks/arc066_b)

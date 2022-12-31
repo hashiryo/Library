@@ -101,8 +101,7 @@ data:
   - test/atcoder/abc172_d.numth.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document
-redirect_from:
-- /library/src/Math/multiplicative_and_additive.hpp
-- /library/src/Math/multiplicative_and_additive.hpp.html
 title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
 ---
+## 参考
+[https://en.wikipedia.org/wiki/Arithmetic_function](https://en.wikipedia.org/wiki/Arithmetic_function)

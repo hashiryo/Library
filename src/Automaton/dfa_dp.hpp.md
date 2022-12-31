@@ -124,7 +124,7 @@ layout: document
 title: "DFA\u4E0A\u306EDP"
 ---
 ## 参考
-https://kuretchi.github.io/blog/entries/automaton-dp/
+[https://kuretchi.github.io/blog/entries/automaton-dp/](https://kuretchi.github.io/blog/entries/automaton-dp/)
 ## 問題例
 [Typical DP Contest E - 数](https://atcoder.jp/contests/tdpc/tasks/tdpc_number)
 [AtCoder Beginner Contest 029 D - 1](https://atcoder.jp/contests/abc029/tasks/abc029_d)

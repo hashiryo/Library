@@ -128,4 +128,4 @@ title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0 (Conway\u306E\u69CB\u6210)"
 ---
 メモ化再帰で2進分数を計算
 ## 参考
-http://www.ivis.co.jp/text/20111102.pdf
+[http://www.ivis.co.jp/text/20111102.pdf](http://www.ivis.co.jp/text/20111102.pdf)

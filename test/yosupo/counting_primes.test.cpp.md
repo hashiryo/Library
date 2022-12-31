@@ -6,9 +6,9 @@ data:
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/counting_primes
@@ -76,7 +76,7 @@ data:
   path: test/yosupo/counting_primes.test.cpp
   requiredBy: []
   timestamp: '2022-12-31 21:15:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/counting_primes.test.cpp
 layout: document

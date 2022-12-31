@@ -70,7 +70,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Patricia.hpp
       title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SkewHeap.hpp
       title: Skew-Heap
     - icon: ':question:'
@@ -82,7 +82,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SplayTree.hpp
       title: Splay-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind.hpp
       title: Union-Find
     - icon: ':heavy_check_mark:'
@@ -185,7 +185,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/MaxClique.hpp
       title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
     - icon: ':heavy_check_mark:'
@@ -273,7 +273,7 @@ data:
     - icon: ':question:'
       path: src/Math/berlekamp_massey.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/discrete_logarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':x:'
@@ -936,13 +936,13 @@ data:
     - icon: ':x:'
       path: test/yosupo/convolution_mod_2_64.test.cpp
       title: test/yosupo/convolution_mod_2_64.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/directedmst.test.cpp
       title: test/yosupo/directedmst.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/discrete_logarithm_mod.test.cpp
       title: test/yosupo/discrete_logarithm_mod.test.cpp
     - icon: ':x:'

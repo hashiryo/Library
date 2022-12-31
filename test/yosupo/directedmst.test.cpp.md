@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/directedmst
@@ -119,7 +119,7 @@ data:
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
   timestamp: '2022-12-31 22:54:50+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp
 layout: document
