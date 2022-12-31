@@ -1,38 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/directedmst
     links:
     - https://judge.yosupo.jp/problem/directedmst
   bundledCode: "#line 1 \"test/yosupo/directedmst.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/directedmst\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/UnionFind.hpp\"\n/**\n\
-    \ * @title Union-Find\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
-    \ unite(x,y) x \u304C\u5165\u3063\u3066\u3044\u308B\u96C6\u5408\u3068 y \u304C\
-    \u5165\u3063\u3066\u3044\u308B\u96C6\u5408\u3092\u4F75\u5408\u3059\u308B\uFF0E\
-    \n * @brief same(x,y) x \u3068 y \u304C\u540C\u3058\u96C6\u5408\u306B\u5165\u3063\
-    \u3066\u3044\u308B\u304B\u3069\u3046\u304B\u3092\u5224\u5B9A\u3059\u308B\uFF0E\
-    \n * @brief O(\u03B1(N))\n */\n\n// BEGIN CUT HERE\n\nstruct UnionFind {\n  std::vector<int>\
-    \ par;\n  UnionFind(int size) : par(size, -1) {}\n  bool unite(int u, int v) {\n\
-    \    if ((u = root(u)) == (v = root(v))) return false;\n    if (par[u] > par[v])\
-    \ std::swap(u, v);\n    par[u] += par[v], par[v] = u;\n    return true;\n  }\n\
-    \  bool same(int u, int v) { return root(u) == root(v); }\n  int root(int u) {\
-    \ return par[u] < 0 ? u : par[u] = root(par[u]); }\n  int size(int u) { return\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/UnionFind.hpp\"\nstruct\
+    \ UnionFind {\n std::vector<int> par;\n UnionFind(int size): par(size, -1) {}\n\
+    \ bool unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n\
+    \  if (par[u] > par[v]) std::swap(u, v);\n  return par[u]+= par[v], par[v]= u,\
+    \ true;\n }\n bool same(int u, int v) { return root(u) == root(v); }\n int root(int\
+    \ u) { return par[u] < 0 ? u : par[u]= root(par[u]); }\n int size(int u) { return\
     \ -par[root(u)]; }\n};\n#line 3 \"src/DataStructure/SkewHeap.hpp\"\n/**\n * @title\
     \ Skew-Heap\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief \u30DE\u30FC\
     \u30B8\u3067\u304D\u308B\u30D2\u30FC\u30D7\n * @brief top: O(1), pop, push, merge:\
@@ -124,8 +118,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/directedmst.test.cpp
   requiredBy: []
-  timestamp: '2022-11-18 21:48:58+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-12-31 22:54:50+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/directedmst.test.cpp
 layout: document

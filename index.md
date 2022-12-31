@@ -6,23 +6,23 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Automaton/DFA_Compress.hpp
       title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/DFA_Inequality.hpp
       title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
         \u7406\u3059\u308BDFA"
     - icon: ':heavy_check_mark:'
       path: src/Automaton/NFA_to_DFA.hpp
       title: "NFA\u3092DFA\u306B\u5909\u63DB"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/dfa_dp.hpp
       title: "DFA\u4E0A\u306EDP"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/dfa_operations.hpp
       title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\
         \u5408\u6F14\u7B97"
   - name: src/DataStructure
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/DataStructure/BinaryIndexedTree.hpp
       title: Binary-Indexed-Tree
     - icon: ':heavy_check_mark:'
@@ -70,7 +70,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Patricia.hpp
       title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SkewHeap.hpp
       title: Skew-Heap
     - icon: ':question:'
@@ -82,7 +82,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SplayTree.hpp
       title: Splay-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/UnionFind.hpp
       title: Union-Find
     - icon: ':heavy_check_mark:'
@@ -126,10 +126,10 @@ data:
     - icon: ':x:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_div.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
     - icon: ':question:'
@@ -144,7 +144,7 @@ data:
     - icon: ':x:'
       path: src/FFT/sample_points_shift.hpp
       title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/sequences.hpp
       title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
         \u7528)"
@@ -185,7 +185,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/MaxClique.hpp
       title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
     - icon: ':heavy_check_mark:'
@@ -200,7 +200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -252,7 +252,7 @@ data:
     - icon: ':question:'
       path: src/Math/ModIntPrototype.hpp
       title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
     - icon: ':question:'
@@ -765,7 +765,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc117_d.test.cpp
       title: test/atcoder/abc117_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc129_e.test.cpp
       title: test/atcoder/abc129_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -852,10 +852,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc018_c.test.cpp
       title: test/atcoder/agc018_c.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -870,7 +870,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.dujiao.test.cpp
       title: test/atcoder/arc116_c.dujiao.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc127_a.test.cpp
       title: test/atcoder/arc127_a.test.cpp
     - icon: ':heavy_check_mark:'
@@ -881,10 +881,10 @@ data:
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/hackerrank
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
       title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
       title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     - icon: ':heavy_check_mark:'
@@ -895,13 +895,13 @@ data:
       title: test/hackerrank/library-query.SqrtDC.test.cpp
   - name: test/unit_test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_log.test.cpp
       title: test/unit_test/nimber_log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_sqrt.test.cpp
       title: test/unit_test/nimber_sqrt.test.cpp
   - name: test/yosupo
@@ -912,7 +912,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
     - icon: ':x:'
@@ -939,7 +939,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/directedmst.test.cpp
       title: test/yosupo/directedmst.test.cpp
     - icon: ':x:'
@@ -1074,7 +1074,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_unionfind.test.cpp
       title: test/yosupo/persistent_unionfind.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/point_add_range_sum.BIT.test.cpp
       title: test/yosupo/point_add_range_sum.BIT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1289,7 +1289,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/644.test.cpp
       title: test/yukicoder/644.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/649.BIT.test.cpp
       title: test/yukicoder/649.BIT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1316,7 +1316,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/738.BIT.test.cpp
       title: test/yukicoder/738.BIT.test.cpp
     - icon: ':heavy_check_mark:'

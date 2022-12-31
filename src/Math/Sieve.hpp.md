@@ -6,13 +6,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
   - icon: ':x:'

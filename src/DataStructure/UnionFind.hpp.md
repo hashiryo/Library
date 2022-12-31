@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   - icon: ':heavy_check_mark:'
@@ -27,48 +27,35 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    document_title: Union-Find
     links: []
   bundledCode: "#line 2 \"src/DataStructure/UnionFind.hpp\"\n#include <bits/stdc++.h>\n\
-    /**\n * @title Union-Find\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
-    \ unite(x,y) x \u304C\u5165\u3063\u3066\u3044\u308B\u96C6\u5408\u3068 y \u304C\
-    \u5165\u3063\u3066\u3044\u308B\u96C6\u5408\u3092\u4F75\u5408\u3059\u308B\uFF0E\
-    \n * @brief same(x,y) x \u3068 y \u304C\u540C\u3058\u96C6\u5408\u306B\u5165\u3063\
-    \u3066\u3044\u308B\u304B\u3069\u3046\u304B\u3092\u5224\u5B9A\u3059\u308B\uFF0E\
-    \n * @brief O(\u03B1(N))\n */\n\n// BEGIN CUT HERE\n\nstruct UnionFind {\n  std::vector<int>\
-    \ par;\n  UnionFind(int size) : par(size, -1) {}\n  bool unite(int u, int v) {\n\
-    \    if ((u = root(u)) == (v = root(v))) return false;\n    if (par[u] > par[v])\
-    \ std::swap(u, v);\n    par[u] += par[v], par[v] = u;\n    return true;\n  }\n\
-    \  bool same(int u, int v) { return root(u) == root(v); }\n  int root(int u) {\
-    \ return par[u] < 0 ? u : par[u] = root(par[u]); }\n  int size(int u) { return\
-    \ -par[root(u)]; }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n/**\n * @title Union-Find\n * @category\
-    \ \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief unite(x,y) x \u304C\u5165\u3063\u3066\
-    \u3044\u308B\u96C6\u5408\u3068 y \u304C\u5165\u3063\u3066\u3044\u308B\u96C6\u5408\
-    \u3092\u4F75\u5408\u3059\u308B\uFF0E\n * @brief same(x,y) x \u3068 y \u304C\u540C\
-    \u3058\u96C6\u5408\u306B\u5165\u3063\u3066\u3044\u308B\u304B\u3069\u3046\u304B\
-    \u3092\u5224\u5B9A\u3059\u308B\uFF0E\n * @brief O(\u03B1(N))\n */\n\n// BEGIN\
-    \ CUT HERE\n\nstruct UnionFind {\n  std::vector<int> par;\n  UnionFind(int size)\
-    \ : par(size, -1) {}\n  bool unite(int u, int v) {\n    if ((u = root(u)) == (v\
-    \ = root(v))) return false;\n    if (par[u] > par[v]) std::swap(u, v);\n    par[u]\
-    \ += par[v], par[v] = u;\n    return true;\n  }\n  bool same(int u, int v) { return\
-    \ root(u) == root(v); }\n  int root(int u) { return par[u] < 0 ? u : par[u] =\
-    \ root(par[u]); }\n  int size(int u) { return -par[root(u)]; }\n};"
+    struct UnionFind {\n std::vector<int> par;\n UnionFind(int size): par(size, -1)\
+    \ {}\n bool unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v))) return\
+    \ false;\n  if (par[u] > par[v]) std::swap(u, v);\n  return par[u]+= par[v], par[v]=\
+    \ u, true;\n }\n bool same(int u, int v) { return root(u) == root(v); }\n int\
+    \ root(int u) { return par[u] < 0 ? u : par[u]= root(par[u]); }\n int size(int\
+    \ u) { return -par[root(u)]; }\n};\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\nstruct UnionFind {\n std::vector<int>\
+    \ par;\n UnionFind(int size): par(size, -1) {}\n bool unite(int u, int v) {\n\
+    \  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v]) std::swap(u,\
+    \ v);\n  return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u, int v)\
+    \ { return root(u) == root(v); }\n int root(int u) { return par[u] < 0 ? u : par[u]=\
+    \ root(par[u]); }\n int size(int u) { return -par[root(u)]; }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
   - src/Graph/MinimumSpanningAborescense.hpp
   - src/Graph/MinimumSpanningTree_Kruskal.hpp
-  timestamp: '2020-10-24 12:39:10+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-12-31 22:54:50+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/0342.test.cpp
   - test/aoj/GRL_2_A.kruskal.test.cpp
@@ -79,8 +66,9 @@ data:
   - test/yosupo/directedmst.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document
-redirect_from:
-- /library/src/DataStructure/UnionFind.hpp
-- /library/src/DataStructure/UnionFind.hpp.html
 title: Union-Find
 ---
+ * `unite(x,y)` x が入っている集合と y が入っている集合を併合する．
+ * `same(x,y)` x と y が同じ集合に入っているかどうかを判定する．
+## 計算量
+$\mathcal{O}(\alpha(N))$
