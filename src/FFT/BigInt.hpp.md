@@ -18,27 +18,27 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/BigInt.hpp\"\n#include <bits/stdc++.h>\n#line 3\
@@ -258,7 +258,7 @@ data:
     \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/BigInt.hpp\"\
     \nclass BigInt {\n static constexpr unsigned BASE= 10000000, D= 7;\n using mod_t=\
     \ StaticModInt<0x3ffffffffa000001>;\n using Vec= std::vector<unsigned>;\n using\
-    \ NTT= NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt shift(int sz) const { return\
+    \ ntt= NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt shift(int sz) const { return\
     \ {neg, Vec(dat.begin() + sz, dat.end())}; }\n BigInt(bool n, const Vec &d): neg(n),\
     \ dat(d) {}\npublic:\n BigInt(): neg(false), dat() {}\n BigInt(long long v): neg(v\
     \ < 0) {\n  for (v= std::abs(v); v; v/= BASE) dat.push_back(v % BASE);\n }\n BigInt(const\
@@ -305,23 +305,23 @@ data:
     \ (l + fl < sz && sz <= (rl >> 3) * 5) {\n    const int l= rl >> 4, l2= l << 1,\
     \ nn= (n + l - 1) / l, mm= (m + l - 1) / l, ss= nn + mm - 1;\n    for (int k=\
     \ i= 0, s; k < n; i++, k+= l) {\n     for (j= s= std::min(l, n - k); j--;) f2[i][j]=\
-    \ dat[k + j];\n     std::fill_n(f2[i] + s, l2 - s, mod_t()), NTT::dft(l2, f2[i]);\n\
+    \ dat[k + j];\n     std::fill_n(f2[i] + s, l2 - s, mod_t()), ntt::dft(l2, f2[i]);\n\
     \    }\n    if (this != &r)\n     for (int k= i= 0, s; k < m; i++, k+= l) {\n\
     \      for (j= s= std::min(l, m - k); j--;) g2[i][j]= dat[k + j];\n      std::fill_n(g2[i]\
-    \ + s, l2 - s, mod_t()), NTT::dft(l2, g2[i]);\n     }\n    else\n     for (i=\
+    \ + s, l2 - s, mod_t()), ntt::dft(l2, g2[i]);\n     }\n    else\n     for (i=\
     \ nn; i--;) std::copy_n(f2[i], l2, g2[i]);\n    for (i= l2; i--;) f[i]= f2[0][i]\
-    \ * g2[0][i];\n    for (NTT::idft(l2, f), i= l2; i--;) h[i]= f[i].val();\n   \
+    \ * g2[0][i];\n    for (ntt::idft(l2, f), i= l2; i--;) h[i]= f[i].val();\n   \
     \ for (int k= l, ed, ii= 1; ii < ss; ++ii, k+= l) {\n     j= std::max(0, ii -\
     \ nn + 1), ed= std::min(mm - 1, ii);\n     for (i= l2; i--;) f[i]= f2[ii - ed][i]\
     \ * g2[ed][i];\n     for (; j < ed; ++j)\n      for (i= l2; i--;) f[i]+= f2[ii\
-    \ - j][i] * g2[j][i];\n     for (NTT::idft(l2, f), i= std::min(l, sz - k); i--;)\
+    \ - j][i] * g2[j][i];\n     for (ntt::idft(l2, f), i= std::min(l, sz - k); i--;)\
     \ h[i + k]+= f[i].val();\n     for (i= std::min(l2, sz - k); i-- > l;) h[i + k]=\
     \ f[i].val();\n    }\n   } else {\n    const int len= sz <= l + fl ? l : get_len(sz);\n\
     \    for (i= n; i--;) f[i]= dat[i];\n    std::fill_n(f + n, len - n, mod_t()),\
-    \ NTT::dft(len, f);\n    if (this != &r) {\n     for (i= m; i--;) g[i]= r.dat[i];\n\
-    \     std::fill_n(g + m, len - m, mod_t()), NTT::dft(len, g);\n     for (i= len;\
+    \ ntt::dft(len, f);\n    if (this != &r) {\n     for (i= m; i--;) g[i]= r.dat[i];\n\
+    \     std::fill_n(g + m, len - m, mod_t()), ntt::dft(len, g);\n     for (i= len;\
     \ i--;) f[i]*= g[i];\n    } else\n     for (i= len; i--;) f[i]*= f[i];\n    for\
-    \ (NTT::idft(len, f), i= len; i < sz; f[i - len]-= h[i], i++)\n     for (h[i]=\
+    \ (ntt::idft(len, f), i= len; i < sz; f[i - len]-= h[i], i++)\n     for (h[i]=\
     \ 0, j= i - m + 1; j < n; j++) h[i]+= (long long)dat[j] * r.dat[i - j];\n    for\
     \ (i= std::min(sz, len); i--;) h[i]= f[i].val();\n   }\n  } else\n   for (std::fill_n(h,\
     \ sz, 0); i--;)\n    for (j= m; j--;) h[i + j]+= (long long)dat[i] * r.dat[j];\n\
@@ -350,7 +350,7 @@ data:
     \ const BigInt &v) { return os << v.to_str(), os; }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\nclass\
     \ BigInt {\n static constexpr unsigned BASE= 10000000, D= 7;\n using mod_t= StaticModInt<0x3ffffffffa000001>;\n\
-    \ using Vec= std::vector<unsigned>;\n using NTT= NTT<mod_t>;\n bool neg;\n Vec\
+    \ using Vec= std::vector<unsigned>;\n using ntt= NTT<mod_t>;\n bool neg;\n Vec\
     \ dat;\n BigInt shift(int sz) const { return {neg, Vec(dat.begin() + sz, dat.end())};\
     \ }\n BigInt(bool n, const Vec &d): neg(n), dat(d) {}\npublic:\n BigInt(): neg(false),\
     \ dat() {}\n BigInt(long long v): neg(v < 0) {\n  for (v= std::abs(v); v; v/=\
@@ -397,23 +397,23 @@ data:
     \ (l + fl < sz && sz <= (rl >> 3) * 5) {\n    const int l= rl >> 4, l2= l << 1,\
     \ nn= (n + l - 1) / l, mm= (m + l - 1) / l, ss= nn + mm - 1;\n    for (int k=\
     \ i= 0, s; k < n; i++, k+= l) {\n     for (j= s= std::min(l, n - k); j--;) f2[i][j]=\
-    \ dat[k + j];\n     std::fill_n(f2[i] + s, l2 - s, mod_t()), NTT::dft(l2, f2[i]);\n\
+    \ dat[k + j];\n     std::fill_n(f2[i] + s, l2 - s, mod_t()), ntt::dft(l2, f2[i]);\n\
     \    }\n    if (this != &r)\n     for (int k= i= 0, s; k < m; i++, k+= l) {\n\
     \      for (j= s= std::min(l, m - k); j--;) g2[i][j]= dat[k + j];\n      std::fill_n(g2[i]\
-    \ + s, l2 - s, mod_t()), NTT::dft(l2, g2[i]);\n     }\n    else\n     for (i=\
+    \ + s, l2 - s, mod_t()), ntt::dft(l2, g2[i]);\n     }\n    else\n     for (i=\
     \ nn; i--;) std::copy_n(f2[i], l2, g2[i]);\n    for (i= l2; i--;) f[i]= f2[0][i]\
-    \ * g2[0][i];\n    for (NTT::idft(l2, f), i= l2; i--;) h[i]= f[i].val();\n   \
+    \ * g2[0][i];\n    for (ntt::idft(l2, f), i= l2; i--;) h[i]= f[i].val();\n   \
     \ for (int k= l, ed, ii= 1; ii < ss; ++ii, k+= l) {\n     j= std::max(0, ii -\
     \ nn + 1), ed= std::min(mm - 1, ii);\n     for (i= l2; i--;) f[i]= f2[ii - ed][i]\
     \ * g2[ed][i];\n     for (; j < ed; ++j)\n      for (i= l2; i--;) f[i]+= f2[ii\
-    \ - j][i] * g2[j][i];\n     for (NTT::idft(l2, f), i= std::min(l, sz - k); i--;)\
+    \ - j][i] * g2[j][i];\n     for (ntt::idft(l2, f), i= std::min(l, sz - k); i--;)\
     \ h[i + k]+= f[i].val();\n     for (i= std::min(l2, sz - k); i-- > l;) h[i + k]=\
     \ f[i].val();\n    }\n   } else {\n    const int len= sz <= l + fl ? l : get_len(sz);\n\
     \    for (i= n; i--;) f[i]= dat[i];\n    std::fill_n(f + n, len - n, mod_t()),\
-    \ NTT::dft(len, f);\n    if (this != &r) {\n     for (i= m; i--;) g[i]= r.dat[i];\n\
-    \     std::fill_n(g + m, len - m, mod_t()), NTT::dft(len, g);\n     for (i= len;\
+    \ ntt::dft(len, f);\n    if (this != &r) {\n     for (i= m; i--;) g[i]= r.dat[i];\n\
+    \     std::fill_n(g + m, len - m, mod_t()), ntt::dft(len, g);\n     for (i= len;\
     \ i--;) f[i]*= g[i];\n    } else\n     for (i= len; i--;) f[i]*= f[i];\n    for\
-    \ (NTT::idft(len, f), i= len; i < sz; f[i - len]-= h[i], i++)\n     for (h[i]=\
+    \ (ntt::idft(len, f), i= len; i < sz; f[i - len]-= h[i], i++)\n     for (h[i]=\
     \ 0, j= i - m + 1; j < n; j++) h[i]+= (long long)dat[j] * r.dat[i - j];\n    for\
     \ (i= std::min(sz, len); i--;) h[i]= f[i].val();\n   }\n  } else\n   for (std::fill_n(h,\
     \ sz, 0); i--;)\n    for (j= m; j--;) h[i + j]+= (long long)dat[i] * r.dat[j];\n\
@@ -449,8 +449,8 @@ data:
   isVerificationFile: false
   path: src/FFT/BigInt.hpp
   requiredBy: []
-  timestamp: '2022-12-31 18:14:29+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-12-31 19:14:40+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_B.test.cpp
