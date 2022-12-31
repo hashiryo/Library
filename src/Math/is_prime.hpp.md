@@ -231,6 +231,9 @@ data:
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':x:'
+    path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
+    title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
   - icon: ':x:'
@@ -428,6 +431,7 @@ data:
   - test/yosupo/stirling_1.test.cpp
   - test/yosupo/stirling_2_small_p_large_n.test.cpp
   - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/primitive_root.test.cpp

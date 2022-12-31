@@ -40,6 +40,9 @@ data:
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':x:'
+    path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
+    title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -139,6 +142,7 @@ data:
   - test/yosupo/sqrt_mod.test.cpp
   - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp

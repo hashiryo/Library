@@ -21,49 +21,49 @@ data:
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/abc276/tasks/abc276_g
+    PROBLEM: https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse
     links:
-    - https://atcoder.jp/contests/abc276/tasks/abc276_g
-  bundledCode: "#line 1 \"test/atcoder/abc276_g.sparse_FPS.test.cpp\"\n#define PROBLEM\
-    \ \"https://atcoder.jp/contests/abc276/tasks/abc276_g\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
-    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
-    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing\
-    \ namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\n\
-    using i64= int64_t;\nusing u128= __uint128_t;\nstruct MP_Mo {\n const u64 mod;\n\
-    \ constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n constexpr MP_Mo(u64 m): mod(m),\
-    \ iv(inv(m)), r2(-u128(mod) % mod) {}\n constexpr inline u64 mul(u64 l, u64 r)\
-    \ const { return reduce(u128(l) * r); }\n#define BOP(op, a) return l op##= a,\
-    \ l+= (mod << 1) & -(l >> 63)\n constexpr inline u64 plus(u64 l, u64 r) const\
-    \ { BOP(+, r - (mod << 1)); }\n constexpr inline u64 diff(u64 l, u64 r) const\
-    \ { BOP(-, r); }\n#undef BOP\n constexpr inline u64 set(u64 n) const { return\
-    \ mul(n, r2); }\n constexpr inline u64 get(u64 n) const {\n  u64 ret= reduce(n)\
-    \ - mod;\n  return ret + (mod & -(ret >> 63));\n }\n constexpr inline u64 norm(u64\
-    \ n) const { return n - (mod & -(n >= mod)); }\nprivate:\n const u64 iv, r2;\n\
-    \ constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e ? inv(n, e - 1, x *\
-    \ (2 - x * n)) : x; }\n constexpr inline u64 reduce(const u128& w) const { return\
-    \ u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64); }\n};\ntemplate <class\
-    \ Uint> class MP_Na {\n using DUint= conditional_t<is_same_v<Uint, u32>, u64,\
-    \ u128>;\npublic:\n const Uint mod;\n constexpr MP_Na(): mod(0){};\n constexpr\
-    \ MP_Na(Uint m): mod(m) {}\n constexpr inline Uint mul(Uint l, Uint r) const {\
-    \ return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod & -((l p##=\
-    \ r) >= mod)\n constexpr inline Uint plus(Uint l, Uint r) const { BOP(-, +); }\n\
-    \ constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -); }\n#undef BOP\n\
-    \ static constexpr inline Uint set(Uint n) { return n; }\n static constexpr inline\
-    \ Uint get(Uint n) { return n; }\n static constexpr inline Uint norm(Uint n) {\
-    \ return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr Uint pow(Uint\
-    \ x, u64 k, const mod_pro_t& md) {\n for (Uint ret= md.set(1);; x= md.mul(x, x))\n\
-    \  if (k& 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n}\n#line 5 \"\
-    src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\nstruct\
-    \ m_b {};\nstruct s_b: m_b {};\nstruct r_b: m_b {};\ntemplate <class mod_t> CE\
-    \ bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t> CE bool\
+    - https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse
+  bundledCode: "#line 1 \"test/yosupo/sqrt_of_sparse_FPS.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse\"\n#include\
+    \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
+    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
+    \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
+    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
+    using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\nstruct MP_Mo\
+    \ {\n const u64 mod;\n constexpr MP_Mo(): mod(0), iv(0), r2(0) {}\n constexpr\
+    \ MP_Mo(u64 m): mod(m), iv(inv(m)), r2(-u128(mod) % mod) {}\n constexpr inline\
+    \ u64 mul(u64 l, u64 r) const { return reduce(u128(l) * r); }\n#define BOP(op,\
+    \ a) return l op##= a, l+= (mod << 1) & -(l >> 63)\n constexpr inline u64 plus(u64\
+    \ l, u64 r) const { BOP(+, r - (mod << 1)); }\n constexpr inline u64 diff(u64\
+    \ l, u64 r) const { BOP(-, r); }\n#undef BOP\n constexpr inline u64 set(u64 n)\
+    \ const { return mul(n, r2); }\n constexpr inline u64 get(u64 n) const {\n  u64\
+    \ ret= reduce(n) - mod;\n  return ret + (mod & -(ret >> 63));\n }\n constexpr\
+    \ inline u64 norm(u64 n) const { return n - (mod & -(n >= mod)); }\nprivate:\n\
+    \ const u64 iv, r2;\n constexpr u64 inv(u64 n, int e= 6, u64 x= 1) { return e\
+    \ ? inv(n, e - 1, x * (2 - x * n)) : x; }\n constexpr inline u64 reduce(const\
+    \ u128& w) const { return u64(w >> 64) + mod - ((u128(u64(w) * iv) * mod) >> 64);\
+    \ }\n};\ntemplate <class Uint> class MP_Na {\n using DUint= conditional_t<is_same_v<Uint,\
+    \ u32>, u64, u128>;\npublic:\n const Uint mod;\n constexpr MP_Na(): mod(0){};\n\
+    \ constexpr MP_Na(Uint m): mod(m) {}\n constexpr inline Uint mul(Uint l, Uint\
+    \ r) const { return DUint(l) * r % mod; }\n#define BOP(m, p) return l m##= mod\
+    \ & -((l p##= r) >= mod)\n constexpr inline Uint plus(Uint l, Uint r) const {\
+    \ BOP(-, +); }\n constexpr inline Uint diff(Uint l, Uint r) const { BOP(+, -);\
+    \ }\n#undef BOP\n static constexpr inline Uint set(Uint n) { return n; }\n static\
+    \ constexpr inline Uint get(Uint n) { return n; }\n static constexpr inline Uint\
+    \ norm(Uint n) { return n; }\n};\ntemplate <class Uint, class mod_pro_t> constexpr\
+    \ Uint pow(Uint x, u64 k, const mod_pro_t& md) {\n for (Uint ret= md.set(1);;\
+    \ x= md.mul(x, x))\n  if (k& 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
+    }\n}\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\n\
+    struct m_b {};\nstruct s_b: m_b {};\nstruct r_b: m_b {};\ntemplate <class mod_t>\
+    \ CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t> CE bool\
     \ is_staticmodint_v= is_base_of_v<s_b, mod_t>;\ntemplate <class mod_t> CE bool\
     \ is_runtimemodint_v= is_base_of_v<r_b, mod_t>;\ntemplate <class mpt, u64 MOD>\
     \ struct SB: s_b {\nprotected:\n static CE mpt md= mpt(MOD);\n};\ntemplate <class\
@@ -200,21 +200,19 @@ data:
     \ b(2 * g.size() - 1);\n for (auto &&[i, x]: dat_f)\n  for (auto &&[j, y]: dat_g)\
     \ a[i + j - 1]+= x * y * (i - j) * k;\n for (auto &&[i, x]: dat_f)\n  for (auto\
     \ &&[j, y]: dat_g) b[i + j]+= x * y;  // a = k(f'g-fg'), b = fg\n return sparse_log_differentiation<mod_t,\
-    \ _Nm>(a, b, n);\n}\n#line 5 \"test/atcoder/abc276_g.sparse_FPS.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  if\
-    \ (M -= --N; M < 0) {\n    cout << 0 << '\\n';\n    return 0;\n  }\n  auto F =\
-    \ sparse_pow_of_div<Mint>({1, 1}, {1, 0, 0, -1}, N, M + 1);\n  for (int i = 1;\
-    \ i <= M; i++) F[i] += F[i - 1];\n  for (int i = 1; i <= M; i++) F[i] += F[i -\
-    \ 1];\n  cout << F[M] << '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc276/tasks/abc276_g\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  if\
-    \ (M -= --N; M < 0) {\n    cout << 0 << '\\n';\n    return 0;\n  }\n  auto F =\
-    \ sparse_pow_of_div<Mint>({1, 1}, {1, 0, 0, -1}, N, M + 1);\n  for (int i = 1;\
-    \ i <= M; i++) F[i] += F[i - 1];\n  for (int i = 1; i <= M; i++) F[i] += F[i -\
-    \ 1];\n  cout << F[M] << '\\n';\n  return 0;\n}"
+    \ _Nm>(a, b, n);\n}\n#line 5 \"test/yosupo/sqrt_of_sparse_FPS.test.cpp\"\nusing\
+    \ namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= StaticModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
+    \ a(N);\n while (K--) {\n  int i;\n  cin >> i;\n  cin >> a[i];\n }\n auto ans=\
+    \ sparse_sqrt(a, N);\n if (ans.empty()) cout << -1 << '\\n';\n else\n  for (int\
+    \ i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse\"\
+    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
+    \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= StaticModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
+    \ a(N);\n while (K--) {\n  int i;\n  cin >> i;\n  cin >> a[i];\n }\n auto ans=\
+    \ sparse_sqrt(a, N);\n if (ans.empty()) cout << -1 << '\\n';\n else\n  for (int\
+    \ i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -223,15 +221,15 @@ data:
   - src/Math/mod_sqrt.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: true
-  path: test/atcoder/abc276_g.sparse_FPS.test.cpp
+  path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
   requiredBy: []
   timestamp: '2022-12-31 21:46:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/atcoder/abc276_g.sparse_FPS.test.cpp
+documentation_of: test/yosupo/sqrt_of_sparse_FPS.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/abc276_g.sparse_FPS.test.cpp
-- /verify/test/atcoder/abc276_g.sparse_FPS.test.cpp.html
-title: test/atcoder/abc276_g.sparse_FPS.test.cpp
+- /verify/test/yosupo/sqrt_of_sparse_FPS.test.cpp
+- /verify/test/yosupo/sqrt_of_sparse_FPS.test.cpp.html
+title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
 ---

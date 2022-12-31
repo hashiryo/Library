@@ -302,6 +302,9 @@ data:
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
   - icon: ':x:'
+    path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
+    title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - icon: ':x:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
   - icon: ':x:'
@@ -609,6 +612,7 @@ data:
   - test/yosupo/stirling_1.test.cpp
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp

@@ -213,10 +213,10 @@ data:
     pages:
     - icon: ':question:'
       path: src/LinearAlgebra/LUDecomposition.hpp
-      title: "LU\u5206\u89E3"
+      title: src/LinearAlgebra/LUDecomposition.hpp
     - icon: ':question:'
       path: src/LinearAlgebra/Matrix.hpp
-      title: "\u884C\u5217"
+      title: src/LinearAlgebra/Matrix.hpp
     - icon: ':question:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
       title: src/LinearAlgebra/MinimalPolynomial.hpp
@@ -225,7 +225,7 @@ data:
       title: "\u758E\u884C\u5217"
     - icon: ':x:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
-      title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
+      title: src/LinearAlgebra/characteristic_polynomial.hpp
   - name: src/Math
     pages:
     - icon: ':heavy_check_mark:'
@@ -1149,6 +1149,9 @@ data:
     - icon: ':x:'
       path: test/yosupo/sqrt_of_FPS.test.cpp
       title: test/yosupo/sqrt_of_FPS.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
+      title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_frequency.WM.test.cpp
       title: test/yosupo/static_range_frequency.WM.test.cpp
