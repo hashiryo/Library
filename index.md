@@ -1,11 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: src/Algorithm
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: src/Algorithm/Mo.hpp
-      title: Mo
   - name: src/Automaton
     pages:
     - icon: ':heavy_check_mark:'
@@ -27,7 +22,7 @@ data:
         \u5408\u6F14\u7B97"
   - name: src/DataStructure
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/BinaryIndexedTree.hpp
       title: Binary-Indexed-Tree
     - icon: ':heavy_check_mark:'
@@ -228,7 +223,7 @@ data:
       title: src/LinearAlgebra/characteristic_polynomial.hpp
   - name: src/Math
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
     - icon: ':x:'
@@ -310,6 +305,11 @@ data:
     - icon: ':question:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
+  - name: src/Misc
+    pages:
+    - icon: ':question:'
+      path: src/Misc/Mo.hpp
+      title: Mo's Algorithm
   - name: src/Optimization
     pages:
     - icon: ':heavy_check_mark:'
@@ -1155,7 +1155,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_frequency.WM.test.cpp
       title: test/yosupo/static_range_frequency.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/static_range_inversions_query.mo.test.cpp
       title: test/yosupo/static_range_inversions_query.mo.test.cpp
     - icon: ':x:'
@@ -1182,7 +1182,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
       title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/sum_of_floor_of_linear.test.cpp
       title: test/yosupo/sum_of_floor_of_linear.test.cpp
     - icon: ':x:'
