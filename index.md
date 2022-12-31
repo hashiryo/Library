@@ -111,7 +111,7 @@ data:
     - icon: ':question:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
     - icon: ':x:'
@@ -218,7 +218,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
       title: src/LinearAlgebra/characteristic_polynomial.hpp
   - name: src/Math
@@ -226,7 +226,7 @@ data:
     - icon: ':x:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/BinomialCoefficient.hpp
       title: Berlekamp-Massey
     - icon: ':question:'
@@ -312,7 +312,7 @@ data:
       title: Mo's Algorithm
   - name: src/Optimization
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/Matching.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
         )"
@@ -333,16 +333,16 @@ data:
     - icon: ':question:'
       path: src/Optimization/MaxFlow_PushRelabel.hpp
       title: "\u6700\u5927\u6D41 PushRelabel(Gap)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/MinCostFlow.hpp
-      title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
+      title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
+        \u30B0\u6CD5)"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/matroid_intersection.hpp
       title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/min_Lconvex.hpp
-      title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
-        \u30B0\u6CD5)"
+      title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
     - icon: ':question:'
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
@@ -354,7 +354,7 @@ data:
       title: Aho-Corasick
     - icon: ':heavy_check_mark:'
       path: src/String/KnuthMorrisPratt.hpp
-      title: Knuth-Morris-Pratt
+      title: Rolling-Hash
     - icon: ':question:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
@@ -915,16 +915,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/binomial_coefficient.test.cpp
       title: test/yosupo/binomial_coefficient.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/characteristic_polynomial.test.cpp
       title: test/yosupo/characteristic_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
     - icon: ':x:'
@@ -990,7 +990,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1047,7 +1047,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/maximum_independent_set.test.cpp
       title: test/yosupo/maximum_independent_set.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/min_cost_b_flow.test.cpp
       title: test/yosupo/min_cost_b_flow.test.cpp
     - icon: ':x:'
@@ -1238,7 +1238,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1615.test.cpp
       title: test/yukicoder/1615.test.cpp
     - icon: ':heavy_check_mark:'
