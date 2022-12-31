@@ -15,7 +15,7 @@ data:
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
   - icon: ':x:'
     path: src/Math/berlekamp_massey.hpp
-    title: Berlekamp-Massey
+    title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
@@ -102,25 +102,19 @@ data:
     \ get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m=\
     \ mod_t::mod();\n static mod_t dat[LIM];\n static int l= 1;\n if (l == 1) dat[l++]=\
     \ 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n\
-    #line 3 \"src/Math/berlekamp_massey.hpp\"\n/**\n * @title Berlekamp-Massey\n *\
-    \ @category \u6570\u5B66\n * \u6570\u5217\u306E\u6700\u521D\u306EN\u9805\u304B\
-    \u3089\u3001\u305D\u306E\u6570\u5217\u3092\u751F\u6210\u3059\u308BN/2\u6B21\u4EE5\
-    \u4E0B\u306E\u6700\u5C0F\u306E\u7DDA\u5F62\u6F38\u5316\u5F0F\u3092\u6C42\u3081\
-    \u308B\n *  O(N^2)\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/tenka1-2015-qualb/tasks/tenka1_2015_qualB_c\n\
-    \n// BEGIN CUT HERE\n\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1]\
-    \ * a[n-d]\n// return c\ntemplate <class K>\nstd::vector<K> berlekamp_massey(const\
-    \ std::vector<K> &a) {\n  std::size_t n = a.size(), d = 0, m = 0, i, j;\n  if\
-    \ (n == 0) return {};\n  std::vector<K> c(n), b(n), tmp;\n  K x = 1, y, coef;\n\
-    \  const K Z = 0;\n  for (c[0] = b[0] = 1, i = 0, j; i < n; ++i) {\n    for (++m,\
-    \ y = a[i], j = 1; j <= d; ++j) y += c[j] * a[i - j];\n    if (y == Z) continue;\n\
-    \    for (tmp = c, coef = y / x, j = m; j < n; ++j) c[j] -= coef * b[j - m];\n\
-    \    if (2 * d > i) continue;\n    d = i + 1 - d, b = tmp, x = y, m = 0;\n  }\n\
-    \  c.resize(d + 1), c.erase(c.begin());\n  for (auto &x : c) x = -x;\n  return\
-    \ c;\n}\n#line 4 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n/**\n * @title \u884C\
-    \u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F\n * @category \u7DDA\u5F62\u4EE3\u6570\
-    \n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n * O(N*S(N))\n */\n\
-    \n// BEGIN CUT HERE\n\n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1]\
-    \ * M + c[0]) * b = 0\ntemplate <class Mat, class Vec>\nclass MinimalPolynomial\
+    #line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2]\
+    \ + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class K> std::vector<K> berlekamp_massey(const\
+    \ std::vector<K> &a) {\n std::size_t n= a.size(), d= 0, m= 0, i, j;\n if (n ==\
+    \ 0) return {};\n std::vector<K> c(n), b(n), tmp;\n K x= 1, y, coef;\n const K\
+    \ Z= 0;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m, y= a[i], j=\
+    \ 1; j <= d; ++j) y+= c[j] * a[i - j];\n  if (y == Z) continue;\n  for (tmp= c,\
+    \ coef= y / x, j= m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n\
+    \  d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n\
+    \ for (auto &x: c) x= -x;\n return c;\n}\n#line 4 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
+    \n/**\n * @title \u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F\n * @category\
+    \ \u7DDA\u5F62\u4EE3\u6570\n * @see https://yukicoder.me/wiki/black_box_linear_algebra\n\
+    \ * O(N*S(N))\n */\n\n// BEGIN CUT HERE\n\n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)\
+    \  + ... + c[1] * M + c[0]) * b = 0\ntemplate <class Mat, class Vec>\nclass MinimalPolynomial\
     \ {\n  using mod_t = std::remove_reference_t<decltype((Vec{1})[0])>;\n  static\
     \ const inline mod_t ZERO = 0;\n  std::vector<mod_t> poly, rev;\n  std::vector<Vec>\
     \ bs;\n  std::size_t dg, n;\n  static inline int deg(const std::vector<mod_t>\
@@ -195,7 +189,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 18:14:29+09:00'
+  timestamp: '2022-12-31 19:53:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sparse_matrix_det.test.cpp
