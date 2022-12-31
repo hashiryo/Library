@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':question:'
@@ -30,9 +30,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/composition_of_formal_power_series
@@ -191,8 +191,8 @@ data:
     \  T a= 0;\n   if CE (t > 2) {\n    u64 r3= (TMP(3) - B::iv32 * r2).val();\n \
     \   if CE (t > 3) {\n     u64 r4= (TMP(4) - B::iv42 * r2 - B::iv43 * r3).val();\n\
     \     if CE (t > 4) a= B::m4::mod() * (TMP(5) - B::iv52 * r2 - B::iv53 * r3 -\
-    \ B::iv54 * r4).val();\n     a= B::m3::mod() * (a + r4);\n    }\n    a= B::m2::mod()\
-    \ * (a + r3);\n   }\n   return B::m1::mod() * (a + r2) + r1;\n  } else return\
+    \ B::iv54 * r4).val();\n     a= (a + r4) * B::m3::mod();\n    }\n    a= (a + r3)\
+    \ * B::m2::mod();\n   }\n   return (a + r2) * B::m1::mod() + r1;\n  } else return\
     \ this->dt1[i];\n }\n#undef TMP\n#undef DFT\n#undef ZEROS\n#undef SET\n#undef\
     \ SET_S\n#undef SUBST\n#undef ASGN\n#undef ASN\n#undef BOP\n#undef OP\n#undef\
     \ FUNC\n#undef REP\n};\n#define ARR(_) \\\n using m##_= StaticModInt<M##_>; \\\
@@ -522,8 +522,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/comp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 18:14:29+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-01 00:16:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/comp_of_FPS.test.cpp
 layout: document

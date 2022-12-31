@@ -20,7 +20,7 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':x:'
@@ -29,18 +29,18 @@ data:
   - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':x:'
@@ -96,7 +96,7 @@ data:
     title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
     links: []
@@ -251,8 +251,8 @@ data:
     \ r2= (TMP(2)).val();\n   T a= 0;\n   if CE (t > 2) {\n    u64 r3= (TMP(3) - B::iv32\
     \ * r2).val();\n    if CE (t > 3) {\n     u64 r4= (TMP(4) - B::iv42 * r2 - B::iv43\
     \ * r3).val();\n     if CE (t > 4) a= B::m4::mod() * (TMP(5) - B::iv52 * r2 -\
-    \ B::iv53 * r3 - B::iv54 * r4).val();\n     a= B::m3::mod() * (a + r4);\n    }\n\
-    \    a= B::m2::mod() * (a + r3);\n   }\n   return B::m1::mod() * (a + r2) + r1;\n\
+    \ B::iv53 * r3 - B::iv54 * r4).val();\n     a= (a + r4) * B::m3::mod();\n    }\n\
+    \    a= (a + r3) * B::m2::mod();\n   }\n   return (a + r2) * B::m1::mod() + r1;\n\
     \  } else return this->dt1[i];\n }\n#undef TMP\n#undef DFT\n#undef ZEROS\n#undef\
     \ SET\n#undef SET_S\n#undef SUBST\n#undef ASGN\n#undef ASN\n#undef BOP\n#undef\
     \ OP\n#undef FUNC\n#undef REP\n};\n#define ARR(_) \\\n using m##_= StaticModInt<M##_>;\
@@ -465,8 +465,8 @@ data:
   - src/FFT/sequences.hpp
   - src/FFT/fps_exp.hpp
   - src/FFT/Polynomial.hpp
-  timestamp: '2022-12-31 18:14:29+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-01-01 00:16:52+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/963.test.cpp
   - test/yukicoder/215.Poly.test.cpp

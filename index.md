@@ -61,7 +61,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
@@ -111,7 +111,7 @@ data:
     - icon: ':question:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
     - icon: ':x:'
@@ -126,10 +126,10 @@ data:
     - icon: ':x:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/fps_div.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
     - icon: ':question:'
@@ -144,7 +144,7 @@ data:
     - icon: ':x:'
       path: src/FFT/sample_points_shift.hpp
       title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/sequences.hpp
       title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
         \u7528)"
@@ -834,7 +834,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
     - icon: ':heavy_check_mark:'
@@ -912,7 +912,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
     - icon: ':heavy_check_mark:'
@@ -924,7 +924,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/characteristic_polynomial.test.cpp
       title: test/yosupo/characteristic_polynomial.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
     - icon: ':x:'
@@ -1110,7 +1110,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
     - icon: ':x:'
@@ -1298,7 +1298,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.Patricia.test.cpp
       title: test/yukicoder/649.Patricia.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
     - icon: ':x:'
@@ -1328,7 +1328,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/880.Beats.test.cpp
       title: test/yukicoder/880.Beats.test.cpp
     - icon: ':x:'

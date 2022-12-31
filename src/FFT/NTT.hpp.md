@@ -23,7 +23,7 @@ data:
   - icon: ':x:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':x:'
@@ -38,10 +38,10 @@ data:
   - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
   - icon: ':question:'
@@ -56,7 +56,7 @@ data:
   - icon: ':x:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
@@ -91,10 +91,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
   - icon: ':x:'
@@ -376,8 +376,8 @@ data:
     \ r2= (TMP(2)).val();\n   T a= 0;\n   if CE (t > 2) {\n    u64 r3= (TMP(3) - B::iv32\
     \ * r2).val();\n    if CE (t > 3) {\n     u64 r4= (TMP(4) - B::iv42 * r2 - B::iv43\
     \ * r3).val();\n     if CE (t > 4) a= B::m4::mod() * (TMP(5) - B::iv52 * r2 -\
-    \ B::iv53 * r3 - B::iv54 * r4).val();\n     a= B::m3::mod() * (a + r4);\n    }\n\
-    \    a= B::m2::mod() * (a + r3);\n   }\n   return B::m1::mod() * (a + r2) + r1;\n\
+    \ B::iv53 * r3 - B::iv54 * r4).val();\n     a= (a + r4) * B::m3::mod();\n    }\n\
+    \    a= (a + r3) * B::m2::mod();\n   }\n   return (a + r2) * B::m1::mod() + r1;\n\
     \  } else return this->dt1[i];\n }\n#undef TMP\n#undef DFT\n#undef ZEROS\n#undef\
     \ SET\n#undef SET_S\n#undef SUBST\n#undef ASGN\n#undef ASN\n#undef BOP\n#undef\
     \ OP\n#undef FUNC\n#undef REP\n};\n#define ARR(_) \\\n using m##_= StaticModInt<M##_>;\
@@ -509,8 +509,8 @@ data:
     \ r2= (TMP(2)).val();\n   T a= 0;\n   if CE (t > 2) {\n    u64 r3= (TMP(3) - B::iv32\
     \ * r2).val();\n    if CE (t > 3) {\n     u64 r4= (TMP(4) - B::iv42 * r2 - B::iv43\
     \ * r3).val();\n     if CE (t > 4) a= B::m4::mod() * (TMP(5) - B::iv52 * r2 -\
-    \ B::iv53 * r3 - B::iv54 * r4).val();\n     a= B::m3::mod() * (a + r4);\n    }\n\
-    \    a= B::m2::mod() * (a + r3);\n   }\n   return B::m1::mod() * (a + r2) + r1;\n\
+    \ B::iv53 * r3 - B::iv54 * r4).val();\n     a= (a + r4) * B::m3::mod();\n    }\n\
+    \    a= (a + r3) * B::m2::mod();\n   }\n   return (a + r2) * B::m1::mod() + r1;\n\
     \  } else return this->dt1[i];\n }\n#undef TMP\n#undef DFT\n#undef ZEROS\n#undef\
     \ SET\n#undef SET_S\n#undef SUBST\n#undef ASGN\n#undef ASN\n#undef BOP\n#undef\
     \ OP\n#undef FUNC\n#undef REP\n};\n#define ARR(_) \\\n using m##_= StaticModInt<M##_>;\
@@ -596,7 +596,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/FormalPowerSeries.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-12-31 18:14:29+09:00'
+  timestamp: '2023-01-01 00:16:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/NTL_2_A.test.cpp
