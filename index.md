@@ -205,7 +205,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -217,10 +217,10 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
-      title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-    - icon: ':x:'
+      title: src/LinearAlgebra/MinimalPolynomial.hpp
+    - icon: ':question:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
     - icon: ':x:'
@@ -275,7 +275,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/berlekamp_massey.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':x:'
@@ -475,7 +475,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2345.test.cpp
       title: test/aoj/2345.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2397.SparseMat.test.cpp
       title: test/aoj/2397.SparseMat.test.cpp
     - icon: ':heavy_check_mark:'
@@ -852,10 +852,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc018_c.test.cpp
       title: test/atcoder/agc018_c.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -881,10 +881,10 @@ data:
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/hackerrank
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
       title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
       title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     - icon: ':heavy_check_mark:'
@@ -936,7 +936,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/convolution_mod_2_64.test.cpp
       title: test/yosupo/convolution_mod_2_64.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -966,7 +966,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/enumerate_primes.test.cpp
       title: test/yosupo/enumerate_primes.test.cpp
     - icon: ':x:'

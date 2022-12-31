@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - icon: ':x:'

@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'

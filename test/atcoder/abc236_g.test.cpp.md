@@ -19,51 +19,45 @@ data:
     - https://atcoder.jp/contests/abc236/tasks/abc236_g
   bundledCode: "#line 1 \"test/atcoder/abc236_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc236/tasks/abc236_g\"\
     \n\n// (min,max)\u534A\u74B0\n\n#include <bits/stdc++.h>\n#line 3 \"src/Math/SemiRing.hpp\"\
-    \n/**\n * @title \u534A\u74B0\n * @category \u6570\u5B66\n * \u884C\u5217\u306B\
-    \u4E57\u305B\u308B\n */\n\n// verify\u7528\n// https://atcoder.jp/contests/abc009/tasks/abc009_4\
-    \ (BitwiseXorAnd)\n// https://atcoder.jp/contests/ddcc2020-final/tasks/ddcc2020_final_b\n\
-    // (max+\u306E\u4E00\u6B21\u95A2\u6570)\n\n// BEGIN CUT HERE\n\ntemplate <typename\
-    \ T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)>\nstruct SemiRing {\n\
-    \  T x;\n  SemiRing() : x(o()) {}\n  SemiRing(bool y) : x(y ? i() : o()) {}\n\
-    \  template <class U, std::enable_if_t<std::is_convertible_v<U, T>,\n        \
-    \                              std::nullptr_t> = nullptr>\n  SemiRing(U y) : x((T)y)\
-    \ {}\n  SemiRing &operator+=(const SemiRing &r) {\n    return x == o() ? *this\
-    \ = r : r.x == o() ? *this : *this = add(x, r.x);\n  }\n  SemiRing &operator*=(const\
-    \ SemiRing &r) {\n    if (x == o() || r.x == o()) return *this = o();\n    return\
-    \ x == i() ? *this = r : r.x == i() ? *this : *this = mul(x, r.x);\n  }\n  SemiRing\
-    \ operator+(const SemiRing &r) const { return SemiRing(*this) += r; }\n  SemiRing\
-    \ operator*(const SemiRing &r) const { return SemiRing(*this) *= r; }\n  bool\
-    \ operator==(const SemiRing &r) const { return x == r.x; }\n  bool operator!=(const\
-    \ SemiRing &r) const { return x != r.x; }\n  friend std::istream &operator>>(std::istream\
-    \ &is, SemiRing &r) {\n    return is >> r.x, is;\n  }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const SemiRing &r) {\n    return os << r.x;\n  }\n};\ntemplate <class M>\n\
-    using Rig = SemiRing<typename M::T, M::o, M::i, M::add, M::mul>;\n\ntemplate <class\
-    \ Arith>\nstruct MinPlus {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::max();\
-    \ }\n  static T i() { return T(0); }\n  static T add(T vl, T vr) { return std::min(vl,\
-    \ vr); }\n  static T mul(T vl, T vr) { return vl + vr; }\n};\ntemplate <class\
-    \ T>\nusing MinPlusRig = Rig<MinPlus<T>>;\n\ntemplate <class Arith>\nstruct MaxPlus\
-    \ {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::min();\
-    \ }\n  static T i() { return T(0); }\n  static T add(T vl, T vr) { return std::max(vl,\
-    \ vr); }\n  static T mul(T vl, T vr) { return vl + vr; }\n};\ntemplate <class\
-    \ T>\nusing MaxPlusRig = Rig<MaxPlus<T>>;\n\ntemplate <class Arith>\nstruct MinMax\
-    \ {\n  using T = Arith;\n  static T o() { return std::numeric_limits<T>::max();\
-    \ }\n  static T i() { return std::numeric_limits<T>::min(); }\n  static T add(T\
-    \ vl, T vr) { return std::min(vl, vr); }\n  static T mul(T vl, T vr) { return\
-    \ std::max(vl, vr); }\n};\ntemplate <class T>\nusing MinMaxRig = Rig<MinMax<T>>;\n\
-    \ntemplate <class Uint>\nstruct BitwiseOrAnd {\n  using T = Uint;\n  static T\
-    \ o() { return 0; }\n  static T i() { return T(-1); }\n  static T add(T vl, T\
-    \ vr) { return vl | vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
-    template <class T = unsigned long long>\nusing BitwiseOrAndRig = Rig<BitwiseOrAnd<T>>;\n\
-    \ntemplate <class Uint>\nstruct BitwiseXorAnd {\n  using T = Uint;\n  static T\
-    \ o() { return 0; }\n  static T i() { return T(-1); }\n  static T add(T vl, T\
-    \ vr) { return vl ^ vr; }\n  static T mul(T vl, T vr) { return vl & vr; }\n};\n\
-    template <class T = unsigned long long>\nusing BitwiseXorAndRig = Rig<BitwiseXorAnd<T>>;\n\
-    #line 3 \"src/LinearAlgebra/Matrix.hpp\"\n/**\n * @title \u884C\u5217\n * @category\
-    \ \u7DDA\u5F62\u4EE3\u6570\n * \u534A\u74B0\u304C\u8F09\u308B\n */\n\n// verify\u7528\
-    \n// https://atcoder.jp/contests/arc027/tasks/arc027_4 \u30BB\u30B0\u6728\u306B\
-    \u4E57\u305B\u308B(ML\u30AE\u30EA\u30AE\u30EA)\n\n// BEGIN CUT HERE\n\ntemplate\
-    \ <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R, M>,\
-    \ N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
+    \ntemplate <typename T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)> struct\
+    \ SemiRing {\n T x;\n SemiRing(): x(o()) {}\n SemiRing(bool y): x(y ? i() : o())\
+    \ {}\n template <class U, std::enable_if_t<std::is_convertible_v<U, T>, std::nullptr_t>\
+    \ = nullptr> SemiRing(U y): x((T)y) {}\n SemiRing &operator+=(const SemiRing &r)\
+    \ { return x == o() ? *this= r : r.x == o() ? *this : *this= add(x, r.x); }\n\
+    \ SemiRing &operator*=(const SemiRing &r) {\n  if (x == o() || r.x == o()) return\
+    \ *this= o();\n  return x == i() ? *this= r : r.x == i() ? *this : *this= mul(x,\
+    \ r.x);\n }\n SemiRing operator+(const SemiRing &r) const { return SemiRing(*this)+=\
+    \ r; }\n SemiRing operator*(const SemiRing &r) const { return SemiRing(*this)*=\
+    \ r; }\n bool operator==(const SemiRing &r) const { return x == r.x; }\n bool\
+    \ operator!=(const SemiRing &r) const { return x != r.x; }\n friend std::istream\
+    \ &operator>>(std::istream &is, SemiRing &r) { return is >> r.x, is; }\n friend\
+    \ std::ostream &operator<<(std::ostream &os, const SemiRing &r) { return os <<\
+    \ r.x; }\n};\ntemplate <class M> using Rig= SemiRing<typename M::T, M::o, M::i,\
+    \ M::add, M::mul>;\ntemplate <class Arith> struct MinPlus {\n using T= Arith;\n\
+    \ static T o() { return std::numeric_limits<T>::max(); }\n static T i() { return\
+    \ T(0); }\n static T add(T vl, T vr) { return std::min(vl, vr); }\n static T mul(T\
+    \ vl, T vr) { return vl + vr; }\n};\ntemplate <class T> using MinPlusRig= Rig<MinPlus<T>>;\n\
+    template <class Arith> struct MaxPlus {\n using T= Arith;\n static T o() { return\
+    \ std::numeric_limits<T>::min(); }\n static T i() { return T(0); }\n static T\
+    \ add(T vl, T vr) { return std::max(vl, vr); }\n static T mul(T vl, T vr) { return\
+    \ vl + vr; }\n};\ntemplate <class T> using MaxPlusRig= Rig<MaxPlus<T>>;\ntemplate\
+    \ <class Arith> struct MinMax {\n using T= Arith;\n static T o() { return std::numeric_limits<T>::max();\
+    \ }\n static T i() { return std::numeric_limits<T>::min(); }\n static T add(T\
+    \ vl, T vr) { return std::min(vl, vr); }\n static T mul(T vl, T vr) { return std::max(vl,\
+    \ vr); }\n};\ntemplate <class T> using MinMaxRig= Rig<MinMax<T>>;\ntemplate <class\
+    \ Uint> struct BitwiseOrAnd {\n using T= Uint;\n static T o() { return 0; }\n\
+    \ static T i() { return T(-1); }\n static T add(T vl, T vr) { return vl | vr;\
+    \ }\n static T mul(T vl, T vr) { return vl & vr; }\n};\ntemplate <class T= unsigned\
+    \ long long> using BitwiseOrAndRig= Rig<BitwiseOrAnd<T>>;\ntemplate <class Uint>\
+    \ struct BitwiseXorAnd {\n using T= Uint;\n static T o() { return 0; }\n static\
+    \ T i() { return T(-1); }\n static T add(T vl, T vr) { return vl ^ vr; }\n static\
+    \ T mul(T vl, T vr) { return vl & vr; }\n};\ntemplate <class T= unsigned long\
+    \ long> using BitwiseXorAndRig= Rig<BitwiseXorAnd<T>>;\n#line 3 \"src/LinearAlgebra/Matrix.hpp\"\
+    \n/**\n * @title \u884C\u5217\n * @category \u7DDA\u5F62\u4EE3\u6570\n * \u534A\
+    \u74B0\u304C\u8F09\u308B\n */\n\n// verify\u7528\n// https://atcoder.jp/contests/arc027/tasks/arc027_4\
+    \ \u30BB\u30B0\u6728\u306B\u4E57\u305B\u308B(ML\u30AE\u30EA\u30AE\u30EA)\n\n//\
+    \ BEGIN CUT HERE\n\ntemplate <class R, int N, int M>\nstruct Matrix : public std::array<std::array<R,\
+    \ M>, N> {\n  static constexpr Matrix O() { return Matrix(); }\n  Matrix &operator+=(const\
     \ Matrix &r) {\n    for (int i = N; i--;)\n      for (int j = M; j--;) (*this)[i][j]\
     \ += r[i][j];\n    return *this;\n  }\n  Matrix operator+(const Matrix &r) const\
     \ { return Matrix(*this) += r; }\n  template <int L>\n  Matrix<R, N, L> operator*(const\
@@ -118,7 +112,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2022-11-13 14:36:00+09:00'
+  timestamp: '2022-12-31 21:15:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp
