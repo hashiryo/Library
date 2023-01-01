@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_primes.test.cpp
     title: test/yosupo/enumerate_primes.test.cpp
   - icon: ':x:'
