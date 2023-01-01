@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/String/KnuthMorrisPratt.hpp
-    title: Rolling-Hash
+    title: Knuth-Morris-Pratt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

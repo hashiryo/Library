@@ -44,7 +44,7 @@ data:
   - test/aoj/ALDS1_14_B.KMP.test.cpp
 documentation_of: src/String/KnuthMorrisPratt.hpp
 layout: document
-title: Rolling-Hash
+title: Knuth-Morris-Pratt
 ---
 ## 計算量
  *  テーブル構築 $\mathcal{O}(|S|)$
