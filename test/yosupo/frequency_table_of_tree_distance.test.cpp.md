@@ -30,9 +30,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -555,7 +555,7 @@ data:
   path: test/yosupo/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
   timestamp: '2023-01-01 04:58:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/frequency_table_of_tree_distance.test.cpp
 layout: document

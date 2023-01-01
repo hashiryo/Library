@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MatchingWeighted.hpp
     title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
       \u822C\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_weighted_matching
@@ -103,7 +103,7 @@ data:
   path: test/yosupo/general_weighted_matching.test.cpp
   requiredBy: []
   timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/general_weighted_matching.test.cpp
 layout: document
