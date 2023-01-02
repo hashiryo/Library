@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_formal_power_series
@@ -284,27 +284,27 @@ data:
     \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
     \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
     \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){94, 54, 123,\
-    \ 222, 243, 354}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t,\
-    \ LM, 2>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
-    \ copy(p.begin(), p.end(), pp);\n if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]);\
-    \ n > TH) {\n  const int l= get_len(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3),\
-    \ bl= __builtin_ctz(l1);\n  if constexpr (t != 0) {\n   if (bl & 1) {\n    static\
-    \ constexpr int BL= t == 5 ? 11 : 13;\n    (k >= 6 ? inv_<1, mod_t, LM> : !k &&\
-    \ bl >= BL ? inv_<4, mod_t, LM> : t == 2 && bl == 7 && k == 1 ? inv_<2, mod_t,\
-    \ LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n   } else {\n    if (bl >= 10) (k >=\
-    \ 6 || k == 3 ? inv_<2, mod_t, LM> : k == 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t,\
-    \ LM>)(pp, n, rr);\n    else if (bl == 6 || t == 4) (!k ? inv_<4, mod_t, LM> :\
-    \ k == 1 ? inv_<3, mod_t, LM> : inv_<2, mod_t, LM>)(pp, n, rr);\n    else (k >=\
-    \ 6 || (2 <= k && k < 4) ? inv_<2, mod_t, LM> : k == 5 || (k == 1 && t != 1) ?\
-    \ inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n   }\n  } else (k & 1\
-    \ ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n } else\n  for (int\
-    \ j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]= mod_t(); j--;) rr[i]+= rr[j]\
-    \ * pp[i - j];\n return vector(rr, rr + n);\n}\n}\nusing math_internal::inv_base,\
-    \ math_internal::inv;\n#line 5 \"test/yosupo/inv_of_FPS.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N;\n\
-    \  cin >> N;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint> a(N);\n\
-    \  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = inv(a);\n  for (int i\
-    \ = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n}\n"
+    \ 222, 243, 354}[t];\n const mod_t* pp= p.data();\n mod_t* rr= GlobalArray<mod_t,\
+    \ LM, 1>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
+    \ if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]); n > TH) {\n  const int l= get_len(n),\
+    \ l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  if constexpr\
+    \ (t != 0) {\n   if (bl & 1) {\n    static constexpr int BL= t == 5 ? 11 : 13;\n\
+    \    (k >= 6 ? inv_<1, mod_t, LM> : !k && bl >= BL ? inv_<4, mod_t, LM> : t ==\
+    \ 2 && bl == 7 && k == 1 ? inv_<2, mod_t, LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n\
+    \   } else {\n    if (bl >= 10) (k >= 6 || k == 3 ? inv_<2, mod_t, LM> : k ==\
+    \ 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n    else if (bl ==\
+    \ 6 || t == 4) (!k ? inv_<4, mod_t, LM> : k == 1 ? inv_<3, mod_t, LM> : inv_<2,\
+    \ mod_t, LM>)(pp, n, rr);\n    else (k >= 6 || (2 <= k && k < 4) ? inv_<2, mod_t,\
+    \ LM> : k == 5 || (k == 1 && t != 1) ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
+    \ n, rr);\n   }\n  } else (k & 1 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
+    \ n, rr);\n } else\n  for (int j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]=\
+    \ mod_t(); j--;) rr[i]+= rr[j] * pp[i - j];\n return vector(rr, rr + n);\n}\n\
+    }\nusing math_internal::inv_base, math_internal::inv;\n#line 5 \"test/yosupo/inv_of_FPS.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  int N;\n  cin >> N;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint>\
+    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = inv(a);\n  for\
+    \ (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_inv.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -322,8 +322,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-01 04:58:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-03 03:52:51+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_FPS.test.cpp
 layout: document

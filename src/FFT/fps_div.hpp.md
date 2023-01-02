@@ -46,10 +46,10 @@ data:
   - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'
@@ -354,62 +354,61 @@ data:
     \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
     \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
     \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){94, 54, 123,\
-    \ 222, 243, 354}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t,\
-    \ LM, 2>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
-    \ copy(p.begin(), p.end(), pp);\n if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]);\
-    \ n > TH) {\n  const int l= get_len(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3),\
-    \ bl= __builtin_ctz(l1);\n  if constexpr (t != 0) {\n   if (bl & 1) {\n    static\
-    \ constexpr int BL= t == 5 ? 11 : 13;\n    (k >= 6 ? inv_<1, mod_t, LM> : !k &&\
-    \ bl >= BL ? inv_<4, mod_t, LM> : t == 2 && bl == 7 && k == 1 ? inv_<2, mod_t,\
-    \ LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n   } else {\n    if (bl >= 10) (k >=\
-    \ 6 || k == 3 ? inv_<2, mod_t, LM> : k == 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t,\
-    \ LM>)(pp, n, rr);\n    else if (bl == 6 || t == 4) (!k ? inv_<4, mod_t, LM> :\
-    \ k == 1 ? inv_<3, mod_t, LM> : inv_<2, mod_t, LM>)(pp, n, rr);\n    else (k >=\
-    \ 6 || (2 <= k && k < 4) ? inv_<2, mod_t, LM> : k == 5 || (k == 1 && t != 1) ?\
-    \ inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n   }\n  } else (k & 1\
-    \ ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n } else\n  for (int\
-    \ j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]= mod_t(); j--;) rr[i]+= rr[j]\
-    \ * pp[i - j];\n return vector(rr, rr + n);\n}\n}\nusing math_internal::inv_base,\
-    \ math_internal::inv;\n#line 4 \"src/FFT/fps_div.hpp\"\n\n/**\n * @title \u5F62\
-    \u5F0F\u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n */\n\n// BEGIN CUT HERE\n\
-    template <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t> div(const\
-    \ std::vector<mod_t> &p,\n                       const std::vector<mod_t> &q)\
-    \ {\n  using GAp = GlobalArray<mod_t, _Nm, 0>;\n  using GAq = GlobalArray<mod_t,\
-    \ _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  using GA = GlobalArray<mod_t,\
-    \ _Nm, 3>;\n  static constexpr std::size_t _Nm2 = _Nm * 2 / 15;\n  using GNA1\
-    \ = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm2,\
-    \ 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t,\
-    \ _Nm2, 16, 1>;\n  using GNA2D2 = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static\
-    \ constexpr int TH = 128 << (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr\
-    \ int TH2 = 1024 << (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int A\
-    \ = 7;\n  static constexpr int B = 29;\n  const int n = p.size(), len = get_len(n),\
-    \ R = len < TH2 ? 8 : 16;\n  const int l = q.size(), lnR = __builtin_ctz(R);\n\
-    \  std::copy(p.begin(), p.end(), GAp::bf);\n  std::copy(q.begin(), q.end(), GAq::bf);\n\
-    \  const mod_t iv0 = mod_t(1) / GAq::bf[0];\n  if (l < A * __builtin_ctz(len)\
-    \ + B || TH >= n) {\n    for (int i = 0; i < n; GAp::bf[i++] *= iv0)\n      for\
-    \ (int j = std::min(i + 1, l); --j;)\n        GAp::bf[i] -= GAp::bf[i - j] * GAq::bf[j];\n\
-    \    return std::vector<mod_t>(GAp::bf, GAp::bf + n);\n  }\n  int m = len, i =\
-    \ 0;\n  while (m > TH) m >>= lnR;\n  for (std::copy_n(GAp::bf, m, GAr::bf); i\
-    \ < m; GAr::bf[i++] *= iv0)\n    for (int j = std::min(i + 1, l); --j;)\n    \
-    \  GAr::bf[i] -= GAr::bf[i - j] * GAq::bf[j];\n  if (l < n) std::fill(GAq::bf\
-    \ + l, GAq::bf + n, mod_t(0));\n  for (GA::bf[0] = iv0, i = 1; m < n; i = m, m\
-    \ <<= lnR) {\n    int m2 = m << 1, ed = std::min(R, (n + m - 1) / m), k = 1, j,\
-    \ mm = m;\n    inv_base<_Nm2>(GAq::bf, m, GA::bf, i);\n    GNA1::bf.set(GA::bf,\
-    \ 0, m), GNA1::bf.zeros(m, m2), GNA1::bf.dft(0, m2);\n    mod_t *bfk = GAr::bf,\
-    \ *qbfk = GAq::bf, *pbfk = GAp::bf;\n    GNA2D2::bf[0].set(qbfk, 0, m), GNA2D2::bf[0].zeros(m,\
-    \ m2);\n    for (GNA2D2::bf[0].dft(0, m2); k < ed; mm = std::min(m, n - m * ++k))\
-    \ {\n      GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m, m2);\n\
-    \      GNA2D1::bf[k - 1].dft(0, m2);\n      GNA3::bf.set(qbfk += m, 0, m), GNA3::bf.zeros(m,\
-    \ m2), GNA3::bf.dft(0, m2);\n      GNA2D2::bf[k].add(GNA3::bf, GNA2D2::bf[0],\
-    \ 0, m);\n      GNA2D2::bf[k].dif(GNA3::bf, GNA2D2::bf[0], m, m2), GNA2::bf.zeros(0,\
-    \ m2);\n      if (k + 1 < ed) GNA2D2::bf[0].subst(GNA3::bf, 0, m2);\n      for\
-    \ (j = k; j--;)\n        GNA3::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k - j], 0, m2),\n\
-    \            GNA2::bf.add(GNA3::bf, 0, m2);\n      GNA2::bf.idft(0, m2), GNA2::bf.zeros(m,\
-    \ m2), pbfk += m;\n      for (GNA2::bf.get(bfk += m, 0, mm), j = mm; j--;) bfk[j]\
-    \ -= pbfk[j];\n      GNA2::bf.set(bfk, 0, mm);\n      GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf,\
-    \ 0, m2), GNA2::bf.idft(0, m2);\n      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]\
-    \ = -bfk[mm];\n    }\n  }\n  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n\
-    }\n"
+    \ 222, 243, 354}[t];\n const mod_t* pp= p.data();\n mod_t* rr= GlobalArray<mod_t,\
+    \ LM, 1>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
+    \ if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]); n > TH) {\n  const int l= get_len(n),\
+    \ l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  if constexpr\
+    \ (t != 0) {\n   if (bl & 1) {\n    static constexpr int BL= t == 5 ? 11 : 13;\n\
+    \    (k >= 6 ? inv_<1, mod_t, LM> : !k && bl >= BL ? inv_<4, mod_t, LM> : t ==\
+    \ 2 && bl == 7 && k == 1 ? inv_<2, mod_t, LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n\
+    \   } else {\n    if (bl >= 10) (k >= 6 || k == 3 ? inv_<2, mod_t, LM> : k ==\
+    \ 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n    else if (bl ==\
+    \ 6 || t == 4) (!k ? inv_<4, mod_t, LM> : k == 1 ? inv_<3, mod_t, LM> : inv_<2,\
+    \ mod_t, LM>)(pp, n, rr);\n    else (k >= 6 || (2 <= k && k < 4) ? inv_<2, mod_t,\
+    \ LM> : k == 5 || (k == 1 && t != 1) ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
+    \ n, rr);\n   }\n  } else (k & 1 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
+    \ n, rr);\n } else\n  for (int j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]=\
+    \ mod_t(); j--;) rr[i]+= rr[j] * pp[i - j];\n return vector(rr, rr + n);\n}\n\
+    }\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"src/FFT/fps_div.hpp\"\
+    \n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n\
+    \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
+    std::vector<mod_t> div(const std::vector<mod_t> &p,\n                       const\
+    \ std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t, _Nm, 0>;\n  using\
+    \ GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n\
+    \  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t _Nm2\
+    \ = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2\
+    \ = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2,\
+    \ 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH = 128 <<\
+    \ (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int TH2 = 1024 << (!is_nttfriend<mod_t,\
+    \ _Nm2>());\n  static constexpr int A = 7;\n  static constexpr int B = 29;\n \
+    \ const int n = p.size(), len = get_len(n), R = len < TH2 ? 8 : 16;\n  const int\
+    \ l = q.size(), lnR = __builtin_ctz(R);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
+    \  std::copy(q.begin(), q.end(), GAq::bf);\n  const mod_t iv0 = mod_t(1) / GAq::bf[0];\n\
+    \  if (l < A * __builtin_ctz(len) + B || TH >= n) {\n    for (int i = 0; i < n;\
+    \ GAp::bf[i++] *= iv0)\n      for (int j = std::min(i + 1, l); --j;)\n       \
+    \ GAp::bf[i] -= GAp::bf[i - j] * GAq::bf[j];\n    return std::vector<mod_t>(GAp::bf,\
+    \ GAp::bf + n);\n  }\n  int m = len, i = 0;\n  while (m > TH) m >>= lnR;\n  for\
+    \ (std::copy_n(GAp::bf, m, GAr::bf); i < m; GAr::bf[i++] *= iv0)\n    for (int\
+    \ j = std::min(i + 1, l); --j;)\n      GAr::bf[i] -= GAr::bf[i - j] * GAq::bf[j];\n\
+    \  if (l < n) std::fill(GAq::bf + l, GAq::bf + n, mod_t(0));\n  for (GA::bf[0]\
+    \ = iv0, i = 1; m < n; i = m, m <<= lnR) {\n    int m2 = m << 1, ed = std::min(R,\
+    \ (n + m - 1) / m), k = 1, j, mm = m;\n    inv_base<_Nm2>(GAq::bf, m, GA::bf,\
+    \ i);\n    GNA1::bf.set(GA::bf, 0, m), GNA1::bf.zeros(m, m2), GNA1::bf.dft(0,\
+    \ m2);\n    mod_t *bfk = GAr::bf, *qbfk = GAq::bf, *pbfk = GAp::bf;\n    GNA2D2::bf[0].set(qbfk,\
+    \ 0, m), GNA2D2::bf[0].zeros(m, m2);\n    for (GNA2D2::bf[0].dft(0, m2); k < ed;\
+    \ mm = std::min(m, n - m * ++k)) {\n      GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k\
+    \ - 1].zeros(m, m2);\n      GNA2D1::bf[k - 1].dft(0, m2);\n      GNA3::bf.set(qbfk\
+    \ += m, 0, m), GNA3::bf.zeros(m, m2), GNA3::bf.dft(0, m2);\n      GNA2D2::bf[k].add(GNA3::bf,\
+    \ GNA2D2::bf[0], 0, m);\n      GNA2D2::bf[k].dif(GNA3::bf, GNA2D2::bf[0], m, m2),\
+    \ GNA2::bf.zeros(0, m2);\n      if (k + 1 < ed) GNA2D2::bf[0].subst(GNA3::bf,\
+    \ 0, m2);\n      for (j = k; j--;)\n        GNA3::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k\
+    \ - j], 0, m2),\n            GNA2::bf.add(GNA3::bf, 0, m2);\n      GNA2::bf.idft(0,\
+    \ m2), GNA2::bf.zeros(m, m2), pbfk += m;\n      for (GNA2::bf.get(bfk += m, 0,\
+    \ mm), j = mm; j--;) bfk[j] -= pbfk[j];\n      GNA2::bf.set(bfk, 0, mm);\n   \
+    \   GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf, 0, m2), GNA2::bf.idft(0, m2);\n\
+    \      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm] = -bfk[mm];\n    }\n  }\n\
+    \  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_inv.hpp\"\n\
     \n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n\
     \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
@@ -465,7 +464,7 @@ data:
   - src/FFT/sequences.hpp
   - src/FFT/fps_exp.hpp
   - src/FFT/Polynomial.hpp
-  timestamp: '2023-01-01 04:58:03+09:00'
+  timestamp: '2023-01-03 03:52:51+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/963.test.cpp

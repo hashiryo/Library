@@ -58,19 +58,19 @@ data:
   - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':x:'
@@ -386,23 +386,22 @@ data:
     \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
     \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
     \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){94, 54, 123,\
-    \ 222, 243, 354}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t,\
-    \ LM, 2>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
-    \ copy(p.begin(), p.end(), pp);\n if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]);\
-    \ n > TH) {\n  const int l= get_len(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3),\
-    \ bl= __builtin_ctz(l1);\n  if constexpr (t != 0) {\n   if (bl & 1) {\n    static\
-    \ constexpr int BL= t == 5 ? 11 : 13;\n    (k >= 6 ? inv_<1, mod_t, LM> : !k &&\
-    \ bl >= BL ? inv_<4, mod_t, LM> : t == 2 && bl == 7 && k == 1 ? inv_<2, mod_t,\
-    \ LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n   } else {\n    if (bl >= 10) (k >=\
-    \ 6 || k == 3 ? inv_<2, mod_t, LM> : k == 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t,\
-    \ LM>)(pp, n, rr);\n    else if (bl == 6 || t == 4) (!k ? inv_<4, mod_t, LM> :\
-    \ k == 1 ? inv_<3, mod_t, LM> : inv_<2, mod_t, LM>)(pp, n, rr);\n    else (k >=\
-    \ 6 || (2 <= k && k < 4) ? inv_<2, mod_t, LM> : k == 5 || (k == 1 && t != 1) ?\
-    \ inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n   }\n  } else (k & 1\
-    \ ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n } else\n  for (int\
-    \ j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]= mod_t(); j--;) rr[i]+= rr[j]\
-    \ * pp[i - j];\n return vector(rr, rr + n);\n}\n}\nusing math_internal::inv_base,\
-    \ math_internal::inv;\n"
+    \ 222, 243, 354}[t];\n const mod_t* pp= p.data();\n mod_t* rr= GlobalArray<mod_t,\
+    \ LM, 1>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
+    \ if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]); n > TH) {\n  const int l= get_len(n),\
+    \ l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  if constexpr\
+    \ (t != 0) {\n   if (bl & 1) {\n    static constexpr int BL= t == 5 ? 11 : 13;\n\
+    \    (k >= 6 ? inv_<1, mod_t, LM> : !k && bl >= BL ? inv_<4, mod_t, LM> : t ==\
+    \ 2 && bl == 7 && k == 1 ? inv_<2, mod_t, LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n\
+    \   } else {\n    if (bl >= 10) (k >= 6 || k == 3 ? inv_<2, mod_t, LM> : k ==\
+    \ 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n    else if (bl ==\
+    \ 6 || t == 4) (!k ? inv_<4, mod_t, LM> : k == 1 ? inv_<3, mod_t, LM> : inv_<2,\
+    \ mod_t, LM>)(pp, n, rr);\n    else (k >= 6 || (2 <= k && k < 4) ? inv_<2, mod_t,\
+    \ LM> : k == 5 || (k == 1 && t != 1) ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
+    \ n, rr);\n   }\n  } else (k & 1 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
+    \ n, rr);\n } else\n  for (int j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]=\
+    \ mod_t(); j--;) rr[i]+= rr[j] * pp[i - j];\n return vector(rr, rr + n);\n}\n\
+    }\nusing math_internal::inv_base, math_internal::inv;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\nnamespace\
     \ math_internal {\ntemplate <u32 LM, class mod_t> inline void inv_base(const mod_t\
     \ p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t= nttarr_cat<mod_t,\
@@ -442,23 +441,23 @@ data:
     \ 0, m2), GNA2::bf.idft(0, m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))),\
     \ r+= m; l--;) r[l]= -r[l];\n }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t>\
     \ inv(const vector<mod_t>& p) {\n static constexpr int t= nttarr_cat<mod_t, LM>,\
-    \ TH= (int[]){94, 54, 123, 222, 243, 354}[t];\n mod_t *pp= GlobalArray<mod_t,\
-    \ LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n const int n= p.size();\n assert(n\
-    \ > 0), assert(p[0] != mod_t());\n copy(p.begin(), p.end(), pp);\n if (const mod_t\
-    \ miv= -(rr[0]= mod_t(1) / pp[0]); n > TH) {\n  const int l= get_len(n), l1= l\
-    \ >> 1, k= (n - l1 - 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  if constexpr (t\
-    \ != 0) {\n   if (bl & 1) {\n    static constexpr int BL= t == 5 ? 11 : 13;\n\
-    \    (k >= 6 ? inv_<1, mod_t, LM> : !k && bl >= BL ? inv_<4, mod_t, LM> : t ==\
-    \ 2 && bl == 7 && k == 1 ? inv_<2, mod_t, LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n\
-    \   } else {\n    if (bl >= 10) (k >= 6 || k == 3 ? inv_<2, mod_t, LM> : k ==\
-    \ 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n    else if (bl ==\
-    \ 6 || t == 4) (!k ? inv_<4, mod_t, LM> : k == 1 ? inv_<3, mod_t, LM> : inv_<2,\
-    \ mod_t, LM>)(pp, n, rr);\n    else (k >= 6 || (2 <= k && k < 4) ? inv_<2, mod_t,\
-    \ LM> : k == 5 || (k == 1 && t != 1) ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
-    \ n, rr);\n   }\n  } else (k & 1 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
-    \ n, rr);\n } else\n  for (int j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]=\
-    \ mod_t(); j--;) rr[i]+= rr[j] * pp[i - j];\n return vector(rr, rr + n);\n}\n\
-    }\nusing math_internal::inv_base, math_internal::inv;"
+    \ TH= (int[]){94, 54, 123, 222, 243, 354}[t];\n const mod_t* pp= p.data();\n mod_t*\
+    \ rr= GlobalArray<mod_t, LM, 1>::bf;\n const int n= p.size();\n assert(n > 0),\
+    \ assert(p[0] != mod_t());\n if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]);\
+    \ n > TH) {\n  const int l= get_len(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3),\
+    \ bl= __builtin_ctz(l1);\n  if constexpr (t != 0) {\n   if (bl & 1) {\n    static\
+    \ constexpr int BL= t == 5 ? 11 : 13;\n    (k >= 6 ? inv_<1, mod_t, LM> : !k &&\
+    \ bl >= BL ? inv_<4, mod_t, LM> : t == 2 && bl == 7 && k == 1 ? inv_<2, mod_t,\
+    \ LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n   } else {\n    if (bl >= 10) (k >=\
+    \ 6 || k == 3 ? inv_<2, mod_t, LM> : k == 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t,\
+    \ LM>)(pp, n, rr);\n    else if (bl == 6 || t == 4) (!k ? inv_<4, mod_t, LM> :\
+    \ k == 1 ? inv_<3, mod_t, LM> : inv_<2, mod_t, LM>)(pp, n, rr);\n    else (k >=\
+    \ 6 || (2 <= k && k < 4) ? inv_<2, mod_t, LM> : k == 5 || (k == 1 && t != 1) ?\
+    \ inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n   }\n  } else (k & 1\
+    \ ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n } else\n  for (int\
+    \ j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]= mod_t(); j--;) rr[i]+= rr[j]\
+    \ * pp[i - j];\n return vector(rr, rr + n);\n}\n}\nusing math_internal::inv_base,\
+    \ math_internal::inv;"
   dependsOn:
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
@@ -476,7 +475,7 @@ data:
   - src/FFT/fps_exp.hpp
   - src/FFT/Polynomial.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2023-01-01 04:58:03+09:00'
+  timestamp: '2023-01-03 03:52:51+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3072.test.cpp
