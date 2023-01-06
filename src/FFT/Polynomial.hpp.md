@@ -273,8 +273,8 @@ data:
     \ mod_t p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t=\
     \ nttarr_cat<mod_t, LM>, TH= (int[]){64, 32, 64, 128, 128, 256}[t];\n if (n <=\
     \ i) return;\n if (l < 0) l= n;\n assert(((n & -n) == n)), assert(i && ((i & -i)\
-    \ == i));\n const mod_t miv= -r[0];\n if (; n > TH) {\n  static constexpr int\
-    \ lnR= 2 + (!t), LM2= LM >> (lnR - 1), R= (1 << lnR) - 1;\n  const auto [m, skip]=\
+    \ == i));\n if (const mod_t miv= -r[0]; n > TH) {\n  static constexpr int lnR=\
+    \ 2 + (!t), LM2= LM >> (lnR - 1), R= (1 << lnR) - 1;\n  const auto [m, skip]=\
     \ [&]() {\n   if constexpr (!t) {\n    const int bn= __builtin_ctz(n) % 3;\n \
     \   return bn ? make_pair(64, bn) : make_pair(32, 1);\n   } else return make_pair(TH,\
     \ 1 + (__builtin_ctz(TH) & 1));\n  }();\n  for (fill_n(r + 1, m - 1, mod_t());\
@@ -307,32 +307,36 @@ data:
     \ m, m2);\n  for (GNA2::bf.dft(0, m2), GNA2::bf.mul(gt1[0], 0, m2), GNA2::bf.idft(0,\
     \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
     \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
-    \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){94, 54, 123,\
-    \ 222, 243, 354}[t];\n const mod_t* pp= p.data();\n mod_t* rr= GlobalArray<mod_t,\
-    \ LM, 1>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
-    \ if (const mod_t miv= -(rr[0]= mod_t(1) / pp[0]); n > TH) {\n  const int l= get_len(n),\
-    \ l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  if constexpr\
-    \ (t != 0) {\n   if (bl & 1) {\n    static constexpr int BL= t == 5 ? 11 : 13;\n\
-    \    (k >= 6 ? inv_<1, mod_t, LM> : !k && bl >= BL ? inv_<4, mod_t, LM> : t ==\
-    \ 2 && bl == 7 && k == 1 ? inv_<2, mod_t, LM> : inv_<3, mod_t, LM>)(pp, n, rr);\n\
-    \   } else {\n    if (bl >= 10) (k >= 6 || k == 3 ? inv_<2, mod_t, LM> : k ==\
-    \ 5 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp, n, rr);\n    else if (bl ==\
-    \ 6 || t == 4) (!k ? inv_<4, mod_t, LM> : k == 1 ? inv_<3, mod_t, LM> : inv_<2,\
-    \ mod_t, LM>)(pp, n, rr);\n    else (k >= 6 || (2 <= k && k < 4) ? inv_<2, mod_t,\
-    \ LM> : k == 5 || (k == 1 && t != 1) ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
-    \ n, rr);\n   }\n  } else (k & 1 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(pp,\
-    \ n, rr);\n } else\n  for (int j, i= 1; i < n; rr[i++]*= miv)\n   for (rr[j= i]=\
-    \ mod_t(); j--;) rr[i]+= rr[j] * pp[i - j];\n return vector(rr, rr + n);\n}\n\
-    }\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"src/FFT/fps_div.hpp\"\
-    \n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n * @category FFT\n\
-    \ */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
-    std::vector<mod_t> div(const std::vector<mod_t> &p,\n                       const\
-    \ std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t, _Nm, 0>;\n  using\
-    \ GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t, _Nm, 2>;\n\
-    \  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t _Nm2\
-    \ = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using GNA2\
-    \ = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t, _Nm2,\
-    \ 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
+    \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){102, 60, 178,\
+    \ 245, 370, 480}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
+    \ LM, 2>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
+    \ if (const mod_t miv= -(r[0]= mod_t(1) / p[0]); n > TH) {\n  const int l= get_len(n),\
+    \ l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  int a= 4;\n\
+    \  if constexpr (!t) a= bl < 7 ? k > 5 ? 1 : k > 4 ? 3 : k > 3 ? 4 : 2 : k & 1\
+    \ ? 3 : 4;\n  else if constexpr (t < 2) a= bl & 1 ? k > 5 ? 1 : bl < 8 ? 3 : bl\
+    \ < 12 ? k > 2 || k == 1 ? 3 : 4 : k & 1 ? 3 : 4 : k > 5 ? bl > 17 && k < 7 ?\
+    \ 4 : 2 : k > 4 ? 3 : k > 3 ? 4 : bl < 7 ? k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 :\
+    \ 4;\n  else if constexpr (t < 3) a= bl & 1 ? k > 5 ? 1 : bl < 8 ? k > 3 || k\
+    \ < 2 ? 3 : 2 : k & 1 ? 3 : 4 : k > 5 ? bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2\
+    \ : k & 1 ? 3 : 4;\n  else if constexpr (t < 5) a= bl & 1 ? k > 5 ? 1 : k == 1\
+    \ ? 3 : k < 3 ? 4 : bl > 12 && k == 4 ? 4 : 3 : k > 5 ? bl > 13 && k < 7 ? 4 :\
+    \ 2 : k > 4 ? 3 : k > 3 ? 4 : bl < 9 ? k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 : 4;\n\
+    \  else a= bl & 1 ? k > 5 ? 1 : bl < 10 ? k > 3 || k < 2 ? 3 : 2 : k & 1 ? 3 :\
+    \ 4 : bl < 9 ? k > 3 ? 1 : 2 : k > 5 ? bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2 :\
+    \ k & 1 ? 3 : 4;\n  (a == 1 ? inv_<1, mod_t, LM> : a == 2 ? inv_<2, mod_t, LM>\
+    \ : a == 3 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(p.data(), n, r);\n } else\
+    \ {\n  copy(p.begin(), p.end(), pp);\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
+    \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n }\n return vector(r,\
+    \ r + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
+    src/FFT/fps_div.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n\
+    \ * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
+    \ _Nm = 1 << 22>\nstd::vector<mod_t> div(const std::vector<mod_t> &p,\n      \
+    \                 const std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t,\
+    \ _Nm, 0>;\n  using GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
+    \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t\
+    \ _Nm2 = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using\
+    \ GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t,\
+    \ _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
     \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH = 128 <<\
     \ (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int TH2 = 1024 << (!is_nttfriend<mod_t,\
     \ _Nm2>());\n  static constexpr int A = 7;\n  static constexpr int B = 29;\n \
@@ -634,7 +638,7 @@ data:
   path: src/FFT/Polynomial.hpp
   requiredBy:
   - src/FFT/extgcd.hpp
-  timestamp: '2023-01-03 03:52:51+09:00'
+  timestamp: '2023-01-06 17:39:47+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/215.Poly.test.cpp
