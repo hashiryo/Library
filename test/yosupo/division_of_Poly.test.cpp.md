@@ -30,9 +30,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/division_of_polynomials
@@ -277,12 +277,12 @@ data:
     \ s);\n    if constexpr (!is_nttfriend<mod_t, LM2>()) GNA2::bf.get(rr, s, e),\
     \ GNA2::bf.set(rr, s, e);\n    for (GNA2::bf.dft(0, e), GNA2::bf.mul(gt1[0], 0,\
     \ e), GNA2::bf.idft(0, e), GNA2::bf.get(rr, s, e), rr+= s, j= s; j--;) rr[j]=\
-    \ -rr[j];\n   }\n  }\n } else\n  for (fill_n(r + 1, n - 1, mod_t()); i < n; r[i++]*=\
-    \ miv)\n   for (int j= min(i + 1, l); --j;) r[i]+= r[i - j] * p[j];\n}\ntemplate\
-    \ <u32 lnR, class mod_t, u32 LM= 1 << 22> void inv_(const mod_t p[], int n, mod_t\
-    \ r[]) {\n static constexpr u32 R= (1 << lnR) - 1, LM2= LM >> (lnR - 1);\n using\
-    \ GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2,\
-    \ 2>;\n auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    \ -rr[j];\n   }\n  }\n } else\n  for (int j; i < n; r[i++]*= miv)\n   for (r[i]=\
+    \ mod_t(), j= min(i + 1, l); --j;) r[i]+= r[i - j] * p[j];\n}\ntemplate <u32 lnR,\
+    \ class mod_t, u32 LM= 1 << 22> void inv_(const mod_t p[], int n, mod_t r[]) {\n\
+    \ static constexpr u32 R= (1 << lnR) - 1, LM2= LM >> (lnR - 1);\n using GNA1=\
+    \ GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
+    \ auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
     \ LM2, R, 2>::bf;\n assert(n > 0), assert(p[0] != mod_t());\n const int m= get_len(n)\
     \ >> lnR, m2= m << 1, ed= (n - 1) / m;\n inv_base<LM2>(p, m, r);\n for (int k=\
     \ 0, l; k < ed; p+= m) {\n  for (gt2[k].set(p, 0, l= min(m2, n - m * k)), gt2[k].zeros(l,\
@@ -295,25 +295,25 @@ data:
     \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
     \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){102, 60, 178,\
     \ 245, 370, 480}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
-    \ LM, 2>::bf;\n const int n= p.size();\n assert(n > 0), assert(p[0] != mod_t());\n\
-    \ if (const mod_t miv= -(r[0]= mod_t(1) / p[0]); n > TH) {\n  const int l= get_len(n),\
-    \ l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  int a= 4;\n\
-    \  if constexpr (!t) a= bl < 7 ? k > 5 ? 1 : k > 4 ? 3 : k > 3 ? 4 : 2 : k & 1\
-    \ ? 3 : 4;\n  else if constexpr (t < 2) a= bl & 1 ? k > 5 ? 1 : bl < 8 ? 3 : bl\
-    \ < 12 ? k > 2 || k == 1 ? 3 : 4 : k & 1 ? 3 : 4 : k > 5 ? bl > 17 && k < 7 ?\
-    \ 4 : 2 : k > 4 ? 3 : k > 3 ? 4 : bl < 7 ? k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 :\
-    \ 4;\n  else if constexpr (t < 3) a= bl & 1 ? k > 5 ? 1 : bl < 8 ? k > 3 || k\
-    \ < 2 ? 3 : 2 : k & 1 ? 3 : 4 : k > 5 ? bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2\
-    \ : k & 1 ? 3 : 4;\n  else if constexpr (t < 5) a= bl & 1 ? k > 5 ? 1 : k == 1\
-    \ ? 3 : k < 3 ? 4 : bl > 12 && k == 4 ? 4 : 3 : k > 5 ? bl > 13 && k < 7 ? 4 :\
-    \ 2 : k > 4 ? 3 : k > 3 ? 4 : bl < 9 ? k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 : 4;\n\
-    \  else a= bl & 1 ? k > 5 ? 1 : bl < 10 ? k > 3 || k < 2 ? 3 : 2 : k & 1 ? 3 :\
-    \ 4 : bl < 9 ? k > 3 ? 1 : 2 : k > 5 ? bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2 :\
-    \ k & 1 ? 3 : 4;\n  (a == 1 ? inv_<1, mod_t, LM> : a == 2 ? inv_<2, mod_t, LM>\
-    \ : a == 3 ? inv_<3, mod_t, LM> : inv_<4, mod_t, LM>)(p.data(), n, r);\n } else\
-    \ {\n  copy(p.begin(), p.end(), pp);\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
-    \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n }\n return vector(r,\
-    \ r + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
+    \ LM, 2>::bf;\n const int n= p.size();\n copy_n(p.begin(), n, pp), assert(n >\
+    \ 0), assert(p[0] != mod_t());\n if (const mod_t miv= -(r[0]= mod_t(1) / p[0]);\
+    \ n > TH) {\n  const int l= get_len(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3),\
+    \ bl= __builtin_ctz(l1);\n  int a= 4;\n  if constexpr (!t) a= bl < 7 ? k > 5 ?\
+    \ 1 : k > 4 ? 3 : k > 3 ? 4 : 2 : k & 1 ? 3 : 4;\n  else if constexpr (t < 2)\
+    \ a= bl & 1 ? k > 5 ? 1 : bl < 8 ? 3 : bl < 12 ? k > 2 || k == 1 ? 3 : 4 : k &\
+    \ 1 ? 3 : 4 : k > 5 ? bl > 17 && k < 7 ? 4 : 2 : k > 4 ? 3 : k > 3 ? 4 : bl <\
+    \ 7 ? k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 : 4;\n  else if constexpr (t < 3) a= bl\
+    \ & 1 ? k > 5 ? 1 : bl < 8 ? k > 3 || k < 2 ? 3 : 2 : k & 1 ? 3 : 4 : k > 5 ?\
+    \ bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2 : k & 1 ? 3 : 4;\n  else if constexpr\
+    \ (t < 5) a= bl & 1 ? k > 5 ? 1 : k == 1 ? 3 : k < 3 ? 4 : bl > 12 && k == 4 ?\
+    \ 4 : 3 : k > 5 ? bl > 13 && k < 7 ? 4 : 2 : k > 4 ? 3 : k > 3 ? 4 : bl < 9 ?\
+    \ k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 : 4;\n  else a= bl & 1 ? k > 5 ? 1 : bl <\
+    \ 10 ? k > 3 || k < 2 ? 3 : 2 : k & 1 ? 3 : 4 : bl < 9 ? k > 3 ? 1 : 2 : k > 5\
+    \ ? bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2 : k & 1 ? 3 : 4;\n  (a < 2 ? inv_<1,\
+    \ mod_t, LM> : a < 3 ? inv_<2, mod_t, LM> : a < 4 ? inv_<3, mod_t, LM> : inv_<4,\
+    \ mod_t, LM>)(pp, n, r);\n } else\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
+    \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
+    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
     src/FFT/fps_div.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n\
     \ * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
     \ _Nm = 1 << 22>\nstd::vector<mod_t> div(const std::vector<mod_t> &p,\n      \
@@ -532,8 +532,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/division_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2023-01-07 16:40:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-08 00:06:09+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/division_of_Poly.test.cpp
 layout: document
