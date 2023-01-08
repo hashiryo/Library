@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0425.test.cpp
     title: test/aoj/0425.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/Mo.hpp\"\n#include <bits/stdc++.h>\nstruct Mo {\n\
@@ -49,7 +49,7 @@ data:
   path: src/Misc/Mo.hpp
   requiredBy: []
   timestamp: '2022-12-31 22:09:43+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/0425.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
