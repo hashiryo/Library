@@ -22,7 +22,7 @@ data:
         \u5408\u6F14\u7B97"
   - name: src/DataStructure
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/DataStructure/BinaryIndexedTree.hpp
       title: Binary-Indexed-Tree
     - icon: ':heavy_check_mark:'
@@ -49,7 +49,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/PersistentArray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':warning:'
@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -85,7 +85,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind.hpp
       title: Union-Find
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Persistent.hpp
       title: "Union-Find(\u5B8C\u5168\u6C38\u7D9A)"
     - icon: ':question:'
@@ -94,7 +94,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WeightBalancedTree.hpp
       title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - name: src/FFT
@@ -1071,43 +1071,43 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_queue.WBT.test.cpp
       title: test/yosupo/persistent_queue.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_unionfind.test.cpp
       title: test/yosupo/persistent_unionfind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_range_sum.BIT.test.cpp
       title: test/yosupo/point_add_range_sum.BIT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
     - icon: ':x:'
       path: test/yosupo/polynomial_interpolation.test.cpp
       title: test/yosupo/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.FPS.test.cpp
       title: test/yosupo/pow_of_FPS.FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.test.cpp
       title: test/yosupo/pow_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_sparse_FPS.test.cpp
       title: test/yosupo/pow_of_sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/primitive_root.test.cpp
       title: test/yosupo/primitive_root.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
       title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
       title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.WBT.test.cpp
       title: test/yosupo/range_affine_range_sum.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
     - icon: ':x:'

@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/PersistentArray.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/UnionFind_Persistent.hpp
     title: "Union-Find(\u5B8C\u5168\u6C38\u7D9A)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
@@ -65,7 +65,7 @@ data:
   path: test/yosupo/persistent_unionfind.test.cpp
   requiredBy: []
   timestamp: '2023-01-08 18:54:29+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/persistent_unionfind.test.cpp
 layout: document

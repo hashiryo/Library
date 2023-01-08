@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/BinaryIndexedTree.hpp
     title: Binary-Indexed-Tree
   - icon: ':question:'

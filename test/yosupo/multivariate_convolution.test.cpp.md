@@ -253,11 +253,11 @@ data:
     \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; j++) chi[i]+=\
     \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
     \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
-    \ mod_t, std::size_t LM= 1 << 20, std::size_t LM2= 20> std::vector<mod_t> convolve(const\
+    \ mod_t, std::size_t LM= 1 << 18, std::size_t LM2= 20> std::vector<mod_t> convolve(const\
     \ std::vector<mod_t> &f, const std::vector<mod_t> &g) const {\n  assert((int)f.size()\
     \ == n), assert((int)g.size() == n);\n  if (!k) return {f[0] * g[0]};\n  mod_t\
-    \ *r= GA= GlobalArray<mod_t, LM, 0>::bf;\n  using GNA= GlobalNTTArray<mod_t, LM,\
-    \ 0>;\n  auto gt0= GlobalNTTArray2D<mod_t, LM, LM2, 0>::bf, gt1= GlobalNTTArray2D<mod_t,\
+    \ *r= GlobalArray<mod_t, LM, 0>::bf;\n  using GNA= GlobalNTTArray<mod_t, LM, 0>;\n\
+    \  auto gt0= GlobalNTTArray2D<mod_t, LM, LM2, 0>::bf, gt1= GlobalNTTArray2D<mod_t,\
     \ LM, LM2, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM, LM2, 2>::bf;\n  for (int i=\
     \ k; i--;) gt0[i].zeros(0, m);\n  for (int i= k; i--;) gt1[i].zeros(0, m);\n \
     \ for (int i= k; i--;) gt2[i].zeros(0, m);\n  for (int i= n; i--;) gt1[chi[i]].set(i,\
@@ -293,7 +293,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-01-08 17:55:50+09:00'
+  timestamp: '2023-01-08 20:35:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/multivariate_convolution.test.cpp

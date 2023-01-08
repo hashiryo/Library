@@ -6,9 +6,9 @@ data:
     title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
@@ -99,7 +99,7 @@ data:
   path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
   requiredBy: []
   timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
 layout: document

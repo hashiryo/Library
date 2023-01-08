@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/UnionFind_Persistent.hpp
     title: "Union-Find(\u5B8C\u5168\u6C38\u7D9A)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_unionfind.test.cpp
     title: test/yosupo/persistent_unionfind.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/PersistentArray.hpp\"\n#include <bits/stdc++.h>\n\
@@ -54,7 +54,7 @@ data:
   requiredBy:
   - src/DataStructure/UnionFind_Persistent.hpp
   timestamp: '2023-01-08 18:54:29+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/persistent_unionfind.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp
