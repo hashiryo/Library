@@ -350,44 +350,38 @@ data:
     \   GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf, 0, m2), GNA2::bf.idft(0, m2);\n\
     \      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm] = -bfk[mm];\n    }\n  }\n\
     \  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n#line 4 \"src/FFT/SubProductTree.hpp\"\
-    \n\n/**\n * @title \u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\
-    \u88DC\u9593\n * @category FFT\n * \u3069\u3061\u3089\u3082O(N log^2 N)\n */\n\
-    \n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 20>\nstruct\
-    \ SubProductTree {\n  using poly = std::vector<mod_t>;\n  static const inline\
-    \ mod_t Z = 0;\n  std::vector<mod_t> xs, all;\n  int n, nn;\n  std::vector<NTTArray<mod_t,\
-    \ _Nm, true>> p;\n  using GA1 = GlobalArray<mod_t, _Nm, 1>;\n  using GNA1 = GlobalNTTArray<mod_t,\
-    \ _Nm, 1>;\n  using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n  SubProductTree(const\
-    \ std::vector<mod_t> &xs_)\n      : xs(xs_), n(xs_.size()), nn(get_len(n)), p(nn\
-    \ << 1) {\n    xs.resize(nn, Z);\n    for (int i = 0; i < nn; ++i)\n      p[nn\
-    \ + i].resize(2), p[nn + i].set(0, 1), p[nn + i].set(1, -xs[i]);\n    for (int\
-    \ i = nn; --i;) {\n      int ls = i << 1, rs = i << 1 | 1, len = get_len(p[ls].size());\n\
-    \      p[ls].resize(len), p[rs].resize(len), p[ls].dft(0, len);\n      p[rs].dft(0,\
-    \ len), p[i].resize(len), p[i].mul(p[ls], p[rs], 0, len);\n      p[i].idft(0,\
-    \ len), p[i].resize(len + 1);\n      if constexpr (!is_nttfriend<mod_t, _Nm>())\n\
-    \        p[i].get(GA1::bf, 1, len), p[i].set(GA1::bf, 1, len);\n      p[i].set(len,\
-    \ p[i].get(0) - 1), p[i].set(0, 1);\n    }\n    all.resize(n + 1), p[1].get(all.data(),\
-    \ 0, n + 1);\n  }\n  std::vector<mod_t> multi_eval(const poly &f) const {\n  \
-    \  int m = f.size();\n    if (m == 1) return std::vector<mod_t>(n, f[0]);\n  \
-    \  auto q = div<mod_t, _Nm>(poly(f.rbegin(), f.rend()), all);\n    if (m > nn)\n\
-    \      std::copy(q.end() - nn, q.end(), GA1::bf);\n    else\n      std::copy(q.begin(),\
-    \ q.end(), GA1::bf + nn - m),\n          std::fill(GA1::bf, GA1::bf + nn - m,\
-    \ Z);\n    for (int k = nn; k >>= 1;)\n      for (int i = 0, k2 = k << 1, o =\
-    \ nn / k; i < nn; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf + i, 0, k2),\
-    \ GNA1::bf.dft(0, k2);\n        GNA2::bf.mul(GNA1::bf, p[o | 1], 0, k2), GNA2::bf.idft(0,\
-    \ k2);\n        GNA1::bf.mul(p[o], 0, k2), GNA1::bf.idft(0, k2);\n        GNA2::bf.get(GA1::bf\
-    \ + i - k, k, k2), GNA1::bf.get(GA1::bf + i, k, k2);\n      }\n    return std::vector<mod_t>(GA1::bf,\
-    \ GA1::bf + n);\n  }\n  poly interpolate(const std::vector<mod_t> &ys) {\n   \
-    \ for (int i = n; i; i--) GA1::bf[i - 1] = all[n - i] * i;\n    auto q = multi_eval(poly(GA1::bf,\
-    \ GA1::bf + n));\n    for (int i = n; i--;) GA1::bf[i] = ys[i] / q[i];\n    std::fill(GA1::bf\
-    \ + n, GA1::bf + nn, Z);\n    for (int k = 1; k < nn; k <<= 1)\n      for (int\
-    \ i = 0, o = nn / k, k2 = k << 1; i < n; i += k2, o += 2) {\n        GNA1::bf.set(GA1::bf\
-    \ + i, 0, k), GNA1::bf.zeros(k, k2);\n        GNA2::bf.set(GA1::bf + i + k, 0,\
-    \ k), GNA2::bf.zeros(k, k2);\n        GNA1::bf.dft(0, k2), GNA2::bf.dft(0, k2),\
-    \ GNA1::bf.mul(p[o | 1], 0, k2);\n        GNA2::bf.mul(p[o], 0, k2), GNA1::bf.add(GNA2::bf,\
-    \ 0, k2);\n        GNA1::bf.idft(0, k2), GNA1::bf.get(GA1::bf + i, 0, k2);\n \
-    \     }\n    return std::reverse(GA1::bf, GA1::bf + n), poly(GA1::bf, GA1::bf\
-    \ + n);\n  }\n};\n#line 5 \"test/yosupo/polynomial_interpolation.test.cpp\"\n\
-    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \ntemplate <class mod_t, std::size_t LM= 1 << 20> struct SubProductTree {\n using\
+    \ poly= std::vector<mod_t>;\n std::vector<mod_t> xs, all;\n int n, nn;\n std::vector<NTTArray<mod_t,\
+    \ LM, true>> p;\n using GA1= GlobalArray<mod_t, LM, 1>;\n using GNA1= GlobalNTTArray<mod_t,\
+    \ LM, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n SubProductTree(const std::vector<mod_t>\
+    \ &xs_): xs(xs_), n(xs_.size()), nn(get_len(n)), p(nn << 1) {\n  xs.resize(nn);\n\
+    \  for (int i= 0; i < nn; ++i) p[nn + i].resize(2), p[nn + i].set(0, 1), p[nn\
+    \ + i].set(1, -xs[i]);\n  for (int i= nn; --i;) {\n   int ls= i << 1, rs= i <<\
+    \ 1 | 1, len= get_len(p[ls].size());\n   p[ls].resize(len), p[rs].resize(len),\
+    \ p[ls].dft(0, len), p[rs].dft(0, len), p[i].resize(len), p[i].mul(p[ls], p[rs],\
+    \ 0, len), p[i].idft(0, len), p[i].resize(len + 1);\n   if constexpr (!is_nttfriend<mod_t,\
+    \ LM>()) p[i].get(GA1::bf, 1, len), p[i].set(GA1::bf, 1, len);\n   p[i].set(len,\
+    \ p[i].get(0) - 1), p[i].set(0, 1);\n  }\n  all.resize(n + 1), p[1].get(all.data(),\
+    \ 0, n + 1);\n }\n std::vector<mod_t> multi_eval(const poly &f) const {\n  int\
+    \ m= f.size();\n  if (m == 1) return std::vector<mod_t>(n, f[0]);\n  auto q= div<mod_t,\
+    \ LM>(poly(f.rbegin(), f.rend()), all);\n  if (m > nn) std::copy(q.end() - nn,\
+    \ q.end(), GA1::bf);\n  else std::copy(q.begin(), q.end(), GA1::bf + nn - m),\
+    \ std::fill(GA1::bf, GA1::bf + nn - m, mod_t());\n  for (int k= nn; k>>= 1;)\n\
+    \   for (int i= 0, k2= k << 1, o= nn / k; i < nn; i+= k2, o+= 2) GNA1::bf.set(GA1::bf\
+    \ + i, 0, k2), GNA1::bf.dft(0, k2), GNA2::bf.mul(GNA1::bf, p[o | 1], 0, k2), GNA2::bf.idft(0,\
+    \ k2), GNA1::bf.mul(p[o], 0, k2), GNA1::bf.idft(0, k2), GNA2::bf.get(GA1::bf +\
+    \ i - k, k, k2), GNA1::bf.get(GA1::bf + i, k, k2);\n  return std::vector<mod_t>(GA1::bf,\
+    \ GA1::bf + n);\n }\n poly interpolate(const std::vector<mod_t> &ys) {\n  for\
+    \ (int i= n; i; i--) GA1::bf[i - 1]= all[n - i] * i;\n  auto q= multi_eval(poly(GA1::bf,\
+    \ GA1::bf + n));\n  for (int i= n; i--;) GA1::bf[i]= ys[i] / q[i];\n  std::fill(GA1::bf\
+    \ + n, GA1::bf + nn, mod_t());\n  for (int k= 1; k < nn; k<<= 1)\n   for (int\
+    \ i= 0, o= nn / k, k2= k << 1; i < n; i+= k2, o+= 2) GNA1::bf.set(GA1::bf + i,\
+    \ 0, k), GNA1::bf.zeros(k, k2), GNA2::bf.set(GA1::bf + i + k, 0, k), GNA2::bf.zeros(k,\
+    \ k2), GNA1::bf.dft(0, k2), GNA2::bf.dft(0, k2), GNA1::bf.mul(p[o | 1], 0, k2),\
+    \ GNA2::bf.mul(p[o], 0, k2), GNA1::bf.add(GNA2::bf, 0, k2), GNA1::bf.idft(0, k2),\
+    \ GNA1::bf.get(GA1::bf + i, 0, k2);\n  return std::reverse(GA1::bf, GA1::bf +\
+    \ n), poly(GA1::bf, GA1::bf + n);\n }\n};\n#line 5 \"test/yosupo/polynomial_interpolation.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  std::vector<Mint>\
     \ x(N), y(N);\n  for (int i = 0; i < N; i++) cin >> x[i];\n  for (int i = 0; i\
     \ < N; i++) cin >> y[i];\n  auto ans = SubProductTree(x).interpolate(y);\n  for\
@@ -413,7 +407,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2023-01-08 00:06:09+09:00'
+  timestamp: '2023-01-08 17:29:45+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/polynomial_interpolation.test.cpp
