@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
     title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':x:'

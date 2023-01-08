@@ -37,13 +37,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/KDTree.hpp
       title: kD-Tree
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree.hpp
       title: Link-Cut-Tree
     - icon: ':heavy_check_mark:'
@@ -55,7 +55,7 @@ data:
     - icon: ':warning:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':question:'
@@ -172,7 +172,7 @@ data:
       title: "\u6700\u8FD1\u70B9\u5BFE"
   - name: src/Graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -209,7 +209,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/LUDecomposition.hpp
       title: src/LinearAlgebra/LUDecomposition.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/Matrix.hpp
       title: src/LinearAlgebra/Matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -233,7 +233,7 @@ data:
       path: src/Math/CartesianProduct.hpp
       title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
         times K_n$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97\
         ) ($\\mathbb{F}_p$)"
@@ -296,7 +296,7 @@ data:
       path: src/Math/mod_tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
     - icon: ':heavy_check_mark:'
@@ -349,7 +349,7 @@ data:
         \u822C\u5316"
   - name: src/String
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/String/AhoCorasick.hpp
       title: Aho-Corasick
     - icon: ':heavy_check_mark:'
@@ -1176,7 +1176,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/suffixarray.test.cpp
       title: test/yosupo/suffixarray.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
       title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1259,25 +1259,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/215.test.cpp
       title: test/yukicoder/215.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.LCT.test.cpp
       title: test/yukicoder/235.LCT.test.cpp
     - icon: ':x:'
       path: test/yukicoder/3030.test.cpp
       title: test/yukicoder/3030.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/3046.test.cpp
       title: test/yukicoder/3046.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/42.test.cpp
       title: test/yukicoder/42.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/421.test.cpp
       title: test/yukicoder/421.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/430.AhoCora.test.cpp
       title: test/yukicoder/430.AhoCora.test.cpp
     - icon: ':x:'
@@ -1286,10 +1286,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/529.LCT.test.cpp
       title: test/yukicoder/529.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/644.test.cpp
       title: test/yukicoder/644.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.BIT.test.cpp
       title: test/yukicoder/649.BIT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1298,19 +1298,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.Patricia.test.cpp
       title: test/yukicoder/649.Patricia.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/650.LCT.test.cpp
       title: test/yukicoder/650.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/658.test.cpp
       title: test/yukicoder/658.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/665.test.cpp
       title: test/yukicoder/665.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.KDT.test.cpp
       title: test/yukicoder/728.KDT.test.cpp
     - icon: ':x:'

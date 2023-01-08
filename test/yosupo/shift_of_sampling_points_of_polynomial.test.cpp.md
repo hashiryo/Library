@@ -246,33 +246,33 @@ data:
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
     \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\
-    \ntemplate <class mod_t, std::size_t LM= 1 << 22> std::vector<mod_t> sample_points_shift(const\
+    \ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const\
     \ std::vector<mod_t>& y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size()\
     \ <= mod_t::mod());\n static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
     \ LM>];\n if (m == 0) return {};\n std::uint64_t c_64= c.val(), nc1= (c + (m -\
     \ 1)).val();\n std::uint32_t k= y.size(), d= k - 1, i= d, e;\n if (c_64 + m <=\
-    \ k) return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64 + m);\n mod_t*\
-    \ x= GlobalArray<mod_t, LM, 0>::bf;\n for (x[d]= 1; i; i--) x[i - 1]= x[i] * i;\n\
-    \ mod_t t= mod_t(1) / (x[0] * x[0]);\n for (i= d / 2 + 1; i--;) x[i]= x[d - i]=\
-    \ x[i] * x[d - i] * t;\n for (i= k; i--;) x[i]*= y[i];\n for (i= 1; i < k; i+=\
-    \ 2) x[d - i]= -x[d - i];\n auto f= [&](mod_t a, int n, mod_t ret[]) {\n  using\
-    \ GNA1= GlobalNTTArray<mod_t, LM, 1>;\n  using GNA2= GlobalNTTArray<mod_t, LM,\
-    \ 2>;\n  mod_t* q= GlobalArray<mod_t, LM, 2>::bf;\n  for (e= d + n, i= 0, t= a\
-    \ - d; i < e; i++, t+= 1) ret[i]= t;\n  std::partial_sum(ret, ret + e, q, std::multiplies<>());\n\
-    \  for (t= mod_t(1) / q[e - 1]; --i;) q[i]= t * q[i - 1], t*= ret[i];\n  if (q[0]=\
-    \ t; k >= TH && n >= TH) {\n   const int len= get_len(e + (d > 0));\n   GNA1::bf.set(x,\
-    \ 0, k), GNA1::bf.zeros(k, len), GNA1::bf.dft(0, len), GNA2::bf.set(q, 0, e),\
-    \ GNA2::bf.zeros(e, len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len),\
-    \ GNA1::bf.idft(0, len), GNA1::bf.get(ret - d, d, e);\n  } else\n   for (std::fill_n(ret,\
-    \ n, mod_t()), i= k; i--;)\n    for (int b= d - i, j= n; j--;) ret[j]+= x[i] *\
-    \ q[j + b];\n  for (t= a, i= k; --i;) t*= a - i;\n  for (; i < n; i++) ret[i]*=\
-    \ t, t*= (a + (i + 1)) * q[i];\n  return ret + n;\n };\n mod_t* p= GlobalArray<mod_t,\
-    \ LM, 1>::bf;\n if (mod_t * bf; c_64 < k) {\n  if (bf= std::copy_n(y.begin() +\
-    \ c_64, k - c_64, p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, f(k, mod_t::mod()\
-    \ - k, bf));\n  else f(k, c_64 + m - k, bf);\n } else if (nc1 < c_64) {\n  if\
-    \ (mod_t* bf= f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, bf);\n\
-    \  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n } else f(c, m, p);\n\
-    \ return std::vector(p, p + m);\n}\n#line 6 \"test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp\"\
+    \ k) return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64 + m);\n mod_t\
+    \ *x= GlobalArray<mod_t, LM, 0>::bf, *p= GlobalArray<mod_t, LM, 1>::bf, *bf;\n\
+    \ for (x[d]= 1; i; i--) x[i - 1]= x[i] * i;\n mod_t t= mod_t(1) / (x[0] * x[0]);\n\
+    \ for (i= d / 2 + 1; i--;) x[i]= x[d - i]= x[i] * x[d - i] * t;\n for (i= k; i--;)\
+    \ x[i]*= y[i];\n for (i= 1; i < k; i+= 2) x[d - i]= -x[d - i];\n auto f= [&](mod_t\
+    \ a, int n, mod_t ret[]) {\n  using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n  using\
+    \ GNA2= GlobalNTTArray<mod_t, LM, 2>;\n  mod_t* q= GlobalArray<mod_t, LM, 2>::bf;\n\
+    \  for (e= d + n, i= 0, t= a - d; i < e; ++i, t+= 1) ret[i]= t;\n  std::partial_sum(ret,\
+    \ ret + e, q, std::multiplies<>());\n  for (t= mod_t(1) / q[e - 1]; --i;) q[i]=\
+    \ t * q[i - 1], t*= ret[i];\n  if (q[0]= t; k >= TH && n >= TH) {\n   const int\
+    \ len= get_len(e + (d > 0));\n   GNA1::bf.set(x, 0, k), GNA1::bf.zeros(k, len),\
+    \ GNA1::bf.dft(0, len), GNA2::bf.set(q, 0, e), GNA2::bf.zeros(e, len), GNA2::bf.dft(0,\
+    \ len), GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0, len), GNA1::bf.get(ret\
+    \ - d, d, e);\n  } else\n   for (std::fill_n(ret, n, mod_t()), i= k; i--;)\n \
+    \   for (int b= d - i, j= n; j--;) ret[j]+= x[i] * q[j + b];\n  for (t= a, i=\
+    \ k; --i;) t*= a - i;\n  for (; i < n; i++) ret[i]*= t, t*= (a + (i + 1)) * q[i];\n\
+    \  return ret + n;\n };\n if (c_64 < k) {\n  if (bf= std::copy_n(y.begin() + c_64,\
+    \ k - c_64, p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, f(k, mod_t::mod() - k,\
+    \ bf));\n  else f(k, c_64 + m - k, bf);\n } else if (nc1 < c_64) {\n  if (bf=\
+    \ f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, bf);\n  else f(k,\
+    \ nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n } else f(c, m, p);\n return std::vector(p,\
+    \ p + m);\n}\n#line 6 \"test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  Mint c;\n  cin >> N >>\
     \ M >> c;\n  std::vector<Mint> pts(N);\n  for (int i = 0; i < N; i++) cin >> pts[i];\n\
@@ -295,7 +295,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-08 21:44:53+09:00'
+  timestamp: '2023-01-09 00:52:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp

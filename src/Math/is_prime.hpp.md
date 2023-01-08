@@ -245,7 +245,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -278,19 +278,19 @@ data:
   - icon: ':x:'
     path: test/yukicoder/3030.test.cpp
     title: test/yukicoder/3030.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/42.test.cpp
     title: test/yukicoder/42.test.cpp
   - icon: ':x:'
     path: test/yukicoder/502.test.cpp
     title: test/yukicoder/502.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/665.test.cpp
     title: test/yukicoder/665.test.cpp
   - icon: ':x:'
