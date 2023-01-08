@@ -433,3 +433,5 @@ title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593
 ---
 ## 計算量
 どちらも $\mathcal{O}(N (\log N)^2)$
+## 問題例
+[AtCoder Regular Contest 033 D - 見たことのない多項式](https://atcoder.jp/contests/arc033/tasks/arc033_4) (オーバーキル)

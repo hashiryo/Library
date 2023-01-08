@@ -173,7 +173,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':x:'
