@@ -114,26 +114,26 @@ data:
     \ 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
     \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
     \ math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Int, class mod_pro_t> constexpr Int inner_sqrt(Int a, Int\
-    \ p) {\n  const mod_pro_t md(p);\n  Int e= (p - 1) >> 1, one= md.set(1);\n  if\
-    \ (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n  Int b= 0, d= md.diff(0,\
-    \ a), ret= one, r2= 0, b2= one;\n  while (md.norm(pow(d, e, md)) == one) b= md.plus(b,\
-    \ one), d= md.diff(md.mul(b, b), a);\n  auto mult= [&md, d](Int &u1, Int &u2,\
-    \ Int v1, Int v2) {\n    Int tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2),\
-    \ d));\n    u2= md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1= tmp;\n  };\n  for\
-    \ (++e;; mult(b, b2, b, b2)) {\n    if (e & 1) mult(ret, r2, b, b2);\n    if (!(e>>=\
-    \ 1)) return ret= md.get(ret), ret * 2 < p ? ret : p - ret;\n  }\n}\nconstexpr\
-    \ int64_t mod_sqrt(int64_t a, int64_t p) {\n  assert(p > 0), assert(a > 0), assert(is_prime(p)),\
-    \ a%= p;\n  if (a <= 1 || p == 2) return a;\n  if (p < INT_MAX) return inner_sqrt<int,\
-    \ MP_Na<u32>>(a, p);\n  return inner_sqrt<int64_t, MP_Mo>(a, p);\n}\n}\nusing\
-    \ math_internal::mod_sqrt;\n#line 5 \"src/Math/sparse_fps.hpp\"\ntemplate <class\
-    \ K> std::vector<K> sparse_inv(const std::vector<K> &f, int n) {\n assert(f[0]\
-    \ != K(0));\n std::vector<std::pair<int, K>> dat;\n for (int i= 1, ed= std::min<int>(n,\
-    \ f.size()); i < ed; i++)\n  if (f[i] != K(0)) dat.emplace_back(i, f[i]);\n std::vector<K>\
-    \ ret(n);\n const K iv= ret[0]= K(1) / f[0];\n for (int i= 1; i < n; ret[i++]*=\
-    \ iv)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   ret[i]-= ret[i -\
-    \ j] * v;\n  }\n return ret;\n}\ntemplate <class K> std::vector<K> sparse_div(std::vector<K>\
-    \ f, const std::vector<K> &g, int n) {\n assert(g[0] != K(0));\n std::vector<std::pair<int,\
+    \ {\ntemplate <class Int, class mod_pro_t> constexpr int64_t inner_sqrt(Int a,\
+    \ Int p) {\n const mod_pro_t md(p);\n Int e= (p - 1) >> 1, one= md.set(1);\n if\
+    \ (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n Int b= 0, d= md.diff(0,\
+    \ a), ret= one, r2= 0, b2= one;\n while (md.norm(pow(d, e, md)) == one) b= md.plus(b,\
+    \ one), d= md.diff(md.mul(b, b), a);\n auto mult= [&md, d](Int &u1, Int &u2, Int\
+    \ v1, Int v2) {\n  Int tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2), d));\n\
+    \  u2= md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1= tmp;\n };\n for (++e;; mult(b,\
+    \ b2, b, b2)) {\n  if (e & 1) mult(ret, r2, b, b2);\n  if (!(e>>= 1)) return ret=\
+    \ md.get(ret), ret * 2 < p ? ret : p - ret;\n }\n}\nconstexpr int64_t mod_sqrt(int64_t\
+    \ a, int64_t p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n\
+    \ if (a <= 1 || p == 2) return a;\n if (p < INT_MAX) return inner_sqrt<u32, MP_Na<u32>>(a,\
+    \ p);\n return inner_sqrt<u64, MP_Mo>(a, p);\n}\n}\nusing math_internal::mod_sqrt;\n\
+    #line 5 \"src/Math/sparse_fps.hpp\"\ntemplate <class K> std::vector<K> sparse_inv(const\
+    \ std::vector<K> &f, int n) {\n assert(f[0] != K(0));\n std::vector<std::pair<int,\
+    \ K>> dat;\n for (int i= 1, ed= std::min<int>(n, f.size()); i < ed; i++)\n  if\
+    \ (f[i] != K(0)) dat.emplace_back(i, f[i]);\n std::vector<K> ret(n);\n const K\
+    \ iv= ret[0]= K(1) / f[0];\n for (int i= 1; i < n; ret[i++]*= iv)\n  for (auto\
+    \ &&[j, v]: dat) {\n   if (i < j) break;\n   ret[i]-= ret[i - j] * v;\n  }\n return\
+    \ ret;\n}\ntemplate <class K> std::vector<K> sparse_div(std::vector<K> f, const\
+    \ std::vector<K> &g, int n) {\n assert(g[0] != K(0));\n std::vector<std::pair<int,\
     \ K>> dat;\n for (int i= 1, ed= std::min<int>(n, g.size()); i < ed; i++)\n  if\
     \ (g[i] != K(0)) dat.emplace_back(i, g[i]);\n f.resize(n);\n const K iv= K(1)\
     \ / g[0];\n for (int i= 0; i < n; f[i++]*= iv)\n  for (auto &&[j, v]: dat) {\n\
@@ -166,7 +166,7 @@ data:
     \ & 1) return {};  // no solution\n const int ofs= cnt >> 1, sz= n - ofs;\n std::vector<std::pair<int,\
     \ mod_t>> dat;\n for (int i= cnt + 1; i < ed; i++)\n  if (f[i] != mod_t(0)) dat.emplace_back(i\
     \ - cnt, f[i]);\n mod_t *bf= ret.data() + ofs, mk= mod_t(1) / 2, iv= mod_t(1)\
-    \ / f[cnt];\n bf[0]= mod_sqrt(f[cnt].val(), mod_t::modulo());\n if (bf[0] * bf[0]\
+    \ / f[cnt];\n bf[0]= mod_sqrt(f[cnt].val(), mod_t::mod());\n if (bf[0] * bf[0]\
     \ != f[cnt]) return {};  // no solution\n for (int i= 1; i < sz; bf[i]*= get_inv<mod_t,\
     \ _Nm>(i) * iv, i++)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   bf[i]+=\
     \ v * (mk * j - (i - j)) * bf[i - j];\n  }\n return ret;\n}\n// F'/F = f(x)/g(x),\
@@ -225,7 +225,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc276_g.sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 21:46:20+09:00'
+  timestamp: '2023-01-08 22:12:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc276_g.sparse_FPS.test.cpp

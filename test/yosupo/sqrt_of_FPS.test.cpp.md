@@ -311,64 +311,61 @@ data:
     \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
     \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
     src/Math/mod_sqrt.hpp\"\nnamespace math_internal {\ntemplate <class Int, class\
-    \ mod_pro_t> constexpr Int inner_sqrt(Int a, Int p) {\n  const mod_pro_t md(p);\n\
-    \  Int e= (p - 1) >> 1, one= md.set(1);\n  if (a= md.set(a); md.norm(pow(a, e,\
-    \ md)) != one) return -1;\n  Int b= 0, d= md.diff(0, a), ret= one, r2= 0, b2=\
-    \ one;\n  while (md.norm(pow(d, e, md)) == one) b= md.plus(b, one), d= md.diff(md.mul(b,\
-    \ b), a);\n  auto mult= [&md, d](Int &u1, Int &u2, Int v1, Int v2) {\n    Int\
-    \ tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2), d));\n    u2= md.plus(md.mul(u1,\
-    \ v2), md.mul(u2, v1)), u1= tmp;\n  };\n  for (++e;; mult(b, b2, b, b2)) {\n \
-    \   if (e & 1) mult(ret, r2, b, b2);\n    if (!(e>>= 1)) return ret= md.get(ret),\
-    \ ret * 2 < p ? ret : p - ret;\n  }\n}\nconstexpr int64_t mod_sqrt(int64_t a,\
-    \ int64_t p) {\n  assert(p > 0), assert(a > 0), assert(is_prime(p)), a%= p;\n\
-    \  if (a <= 1 || p == 2) return a;\n  if (p < INT_MAX) return inner_sqrt<int,\
-    \ MP_Na<u32>>(a, p);\n  return inner_sqrt<int64_t, MP_Mo>(a, p);\n}\n}\nusing\
-    \ math_internal::mod_sqrt;\n#line 5 \"src/FFT/fps_sqrt.hpp\"\n\n/**\n * @title\
-    \ \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt\n * @category FFT\n */\n\n// BEGIN\
-    \ CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\nstd::vector<mod_t>\
-    \ sqrt(const std::vector<mod_t> &p) {\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n\
-    \  using GAr = GlobalArray<mod_t, _Nm, 2>;\n  using GA3 = GlobalArray<mod_t, _Nm,\
-    \ 3>;\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n  static constexpr std::size_t\
-    \ _Nm2 = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using\
-    \ GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t,\
-    \ _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  static\
-    \ constexpr int TH = 128 << ((!is_nttfriend<mod_t, _Nm2>()) << 1);\n  const mod_t\
-    \ Z(0), miv2((mod_t::modulo() - 1) >> 1);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
-    \  int n = p.size(), cnt = 0;\n  while (cnt < n && GAp::bf[cnt] == Z) cnt++;\n\
-    \  if (cnt == n) return p;\n  if (cnt & 1) return {};  // no solution\n  mod_t\
-    \ *bf = GAr::bf + (cnt >> 1), *pbf = GAp::bf + cnt;\n  std::fill_n(GAr::bf, n,\
-    \ Z), bf[0] = mod_sqrt(pbf[0].val(), mod_t::modulo());\n  if (bf[0] * bf[0] !=\
-    \ pbf[0]) return {};  // no solution\n  const int nn = n - cnt, len = get_len(nn),\n\
-    \            R = get_len(__builtin_ctz(len) + 1) >> 1;\n  int m = TH >= nn ? nn\
-    \ : len, lnR = __builtin_ctz(R), i = 2;\n  while (m > TH) m >>= lnR;\n  const\
-    \ mod_t miv = mod_t(mod_t::modulo() - 1) / (bf[0] + bf[0]);\n  for ((bf[1] -=\
-    \ pbf[1]) *= miv; i < m; (bf[i] -= pbf[i]) *= miv, i++) {\n    for (int j = (i\
-    \ + 1) / 2; --j;) bf[i] += bf[j] * bf[i - j];\n    if (bf[i] += bf[i]; !(i & 1))\
-    \ bf[i] += bf[i >> 1] * bf[i >> 1];\n  }\n  if (m == nn) return std::vector<mod_t>(GAr::bf,\
-    \ GAr::bf + n);\n  for (GA3::bf[0] = mod_t(1) / bf[0], i = 1; m < nn; i = m, m\
-    \ <<= lnR) {\n    int m2 = m << 1, ed = std::min(R, (nn + m - 1) / m), k = 1,\
-    \ mm = m, j;\n    inv_base<_Nm2>(bf, m, GA3::bf, i);\n    GNA1::bf.set(GA3::bf,\
-    \ 0, m), GNA1::bf.zeros(m, m2), GNA1::bf.dft(0, m2);\n    for (mod_t *bfk = bf,\
-    \ *pbfk = pbf; k < ed; mm = std::min(m, nn - m * ++k)) {\n      GNA2D1::bf[k -\
-    \ 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m, m2);\n      GNA2D1::bf[k - 1].dft(0,\
-    \ m2);\n      for (GNA2::bf.zeros(0, m2), j = (k - 1) >> 1; j--;)\n        GNA3::bf.add(GNA2D1::bf[j\
-    \ + 1], GNA2D1::bf[j], 0, m),\n            GNA3::bf.dif(GNA2D1::bf[j + 1], GNA2D1::bf[j],\
-    \ m, m2),\n            GNA3::bf.mul(GNA2D1::bf[k - 1 - j], 0, m2),\n         \
-    \   GNA2::bf.add(GNA3::bf, 0, m2);\n      if (j = k >> 1; !(k & 1))\n        GNA3::bf.mul(GNA2D1::bf[j],\
-    \ GNA2D1::bf[k - 1 - j], 0, m2),\n            GNA2::bf.add(GNA3::bf, 0, m), GNA2::bf.dif(GNA3::bf,\
-    \ m, m2);\n      if (k != 1) GNA2::bf.add(GNA2::bf, 0, m2);\n      GNA3::bf.mul(GNA2D1::bf[j],\
-    \ GNA2D1::bf[j], 0, m2), pbfk += m;\n      k & 1 ? GNA2::bf.dif(GNA3::bf, m, m2)\
-    \ : GNA2::bf.add(GNA3::bf, m, m2);\n      GNA2::bf.add(GNA3::bf, 0, m), GNA2::bf.idft(0,\
-    \ m2), GNA2::bf.zeros(m, m2);\n      for (GNA2::bf.get(GA::bf, 0, mm), j = mm;\
-    \ j--;) GA::bf[j] -= pbfk[j];\n      GNA2::bf.set(GA::bf, 0, mm), GNA2::bf.dft(0,\
-    \ m2);\n      GNA2::bf.mul(GNA1::bf, 0, m2), GNA2::bf.idft(0, m2);\n      for\
-    \ (GNA2::bf.get(bfk += m, 0, mm); mm--;) bfk[mm] *= miv2;\n    }\n  }\n  return\
-    \ std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n#line 5 \"test/yosupo/sqrt_of_FPS.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N;\n  cin >> N;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint>\
-    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = sqrt(a);\n  if\
-    \ (b.size() == 0) {\n    cout << -1 << endl;\n  } else {\n    for (int i = 0;\
-    \ i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  }\n  return 0;\n}\n"
+    \ mod_pro_t> constexpr int64_t inner_sqrt(Int a, Int p) {\n const mod_pro_t md(p);\n\
+    \ Int e= (p - 1) >> 1, one= md.set(1);\n if (a= md.set(a); md.norm(pow(a, e, md))\
+    \ != one) return -1;\n Int b= 0, d= md.diff(0, a), ret= one, r2= 0, b2= one;\n\
+    \ while (md.norm(pow(d, e, md)) == one) b= md.plus(b, one), d= md.diff(md.mul(b,\
+    \ b), a);\n auto mult= [&md, d](Int &u1, Int &u2, Int v1, Int v2) {\n  Int tmp=\
+    \ md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2), d));\n  u2= md.plus(md.mul(u1,\
+    \ v2), md.mul(u2, v1)), u1= tmp;\n };\n for (++e;; mult(b, b2, b, b2)) {\n  if\
+    \ (e & 1) mult(ret, r2, b, b2);\n  if (!(e>>= 1)) return ret= md.get(ret), ret\
+    \ * 2 < p ? ret : p - ret;\n }\n}\nconstexpr int64_t mod_sqrt(int64_t a, int64_t\
+    \ p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if (a <=\
+    \ 1 || p == 2) return a;\n if (p < INT_MAX) return inner_sqrt<u32, MP_Na<u32>>(a,\
+    \ p);\n return inner_sqrt<u64, MP_Mo>(a, p);\n}\n}\nusing math_internal::mod_sqrt;\n\
+    #line 5 \"src/FFT/fps_sqrt.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\
+    \u6570 sqrt\n * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t,\
+    \ std::size_t _Nm= 1 << 22> std::vector<mod_t> sqrt(const std::vector<mod_t> &p)\
+    \ {\n using GAp= GlobalArray<mod_t, _Nm, 1>;\n using GAr= GlobalArray<mod_t, _Nm,\
+    \ 2>;\n using GA3= GlobalArray<mod_t, _Nm, 3>;\n using GA= GlobalArray<mod_t,\
+    \ _Nm, 0>;\n static constexpr std::size_t _Nm2= _Nm * 2 / 15;\n using GNA1= GlobalNTTArray<mod_t,\
+    \ _Nm2, 1>;\n using GNA2= GlobalNTTArray<mod_t, _Nm2, 2>;\n using GNA3= GlobalNTTArray<mod_t,\
+    \ _Nm2, 3>;\n using GNA2D1= GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n static constexpr\
+    \ int TH= 128 << ((!is_nttfriend<mod_t, _Nm2>()) << 1);\n const mod_t Z(0), miv2((mod_t::mod()\
+    \ - 1) >> 1);\n std::copy(p.begin(), p.end(), GAp::bf);\n int n= p.size(), cnt=\
+    \ 0;\n while (cnt < n && GAp::bf[cnt] == Z) cnt++;\n if (cnt == n) return p;\n\
+    \ if (cnt & 1) return {};  // no solution\n mod_t *bf= GAr::bf + (cnt >> 1), *pbf=\
+    \ GAp::bf + cnt;\n std::fill_n(GAr::bf, n, Z), bf[0]= mod_sqrt(pbf[0].val(), mod_t::mod());\n\
+    \ if (bf[0] * bf[0] != pbf[0]) return {};  // no solution\n const int nn= n -\
+    \ cnt, len= get_len(nn), R= get_len(__builtin_ctz(len) + 1) >> 1;\n int m= TH\
+    \ >= nn ? nn : len, lnR= __builtin_ctz(R), i= 2;\n while (m > TH) m>>= lnR;\n\
+    \ const mod_t miv= mod_t(mod_t::mod() - 1) / (bf[0] + bf[0]);\n for ((bf[1]-=\
+    \ pbf[1])*= miv; i < m; (bf[i]-= pbf[i])*= miv, i++) {\n  for (int j= (i + 1)\
+    \ / 2; --j;) bf[i]+= bf[j] * bf[i - j];\n  if (bf[i]+= bf[i]; !(i & 1)) bf[i]+=\
+    \ bf[i >> 1] * bf[i >> 1];\n }\n if (m == nn) return std::vector<mod_t>(GAr::bf,\
+    \ GAr::bf + n);\n for (GA3::bf[0]= mod_t(1) / bf[0], i= 1; m < nn; i= m, m<<=\
+    \ lnR) {\n  int m2= m << 1, ed= std::min(R, (nn + m - 1) / m), k= 1, mm= m, j;\n\
+    \  inv_base<_Nm2>(bf, m, GA3::bf, i);\n  GNA1::bf.set(GA3::bf, 0, m), GNA1::bf.zeros(m,\
+    \ m2), GNA1::bf.dft(0, m2);\n  for (mod_t *bfk= bf, *pbfk= pbf; k < ed; mm= std::min(m,\
+    \ nn - m * ++k)) {\n   GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k - 1].zeros(m,\
+    \ m2);\n   GNA2D1::bf[k - 1].dft(0, m2);\n   for (GNA2::bf.zeros(0, m2), j= (k\
+    \ - 1) >> 1; j--;) GNA3::bf.add(GNA2D1::bf[j + 1], GNA2D1::bf[j], 0, m), GNA3::bf.dif(GNA2D1::bf[j\
+    \ + 1], GNA2D1::bf[j], m, m2), GNA3::bf.mul(GNA2D1::bf[k - 1 - j], 0, m2), GNA2::bf.add(GNA3::bf,\
+    \ 0, m2);\n   if (j= k >> 1; !(k & 1)) GNA3::bf.mul(GNA2D1::bf[j], GNA2D1::bf[k\
+    \ - 1 - j], 0, m2), GNA2::bf.add(GNA3::bf, 0, m), GNA2::bf.dif(GNA3::bf, m, m2);\n\
+    \   if (k != 1) GNA2::bf.add(GNA2::bf, 0, m2);\n   GNA3::bf.mul(GNA2D1::bf[j],\
+    \ GNA2D1::bf[j], 0, m2), pbfk+= m;\n   k & 1 ? GNA2::bf.dif(GNA3::bf, m, m2) :\
+    \ GNA2::bf.add(GNA3::bf, m, m2);\n   GNA2::bf.add(GNA3::bf, 0, m), GNA2::bf.idft(0,\
+    \ m2), GNA2::bf.zeros(m, m2);\n   for (GNA2::bf.get(GA::bf, 0, mm), j= mm; j--;)\
+    \ GA::bf[j]-= pbfk[j];\n   GNA2::bf.set(GA::bf, 0, mm), GNA2::bf.dft(0, m2);\n\
+    \   GNA2::bf.mul(GNA1::bf, 0, m2), GNA2::bf.idft(0, m2);\n   for (GNA2::bf.get(bfk+=\
+    \ m, 0, mm); mm--;) bfk[mm]*= miv2;\n  }\n }\n return std::vector<mod_t>(GAr::bf,\
+    \ GAr::bf + n);\n}\n#line 5 \"test/yosupo/sqrt_of_FPS.test.cpp\"\nusing namespace\
+    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N;\n\
+    \  cin >> N;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint> a(N);\n\
+    \  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = sqrt(a);\n  if (b.size()\
+    \ == 0) {\n    cout << -1 << endl;\n  } else {\n    for (int i = 0; i < N; i++)\
+    \ cout << b[i] << \" \\n\"[i == N - 1];\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_sqrt.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -388,7 +385,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sqrt_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-08 00:06:09+09:00'
+  timestamp: '2023-01-08 22:12:54+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sqrt_of_FPS.test.cpp

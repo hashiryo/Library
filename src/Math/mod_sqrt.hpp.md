@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_sparse_FPS.test.cpp
     title: test/yosupo/pow_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_mod.test.cpp
     title: test/yosupo/sqrt_mod.test.cpp
   - icon: ':x:'
@@ -97,33 +97,31 @@ data:
     \ miller_rabin<u64, MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\nnamespace\
-    \ math_internal {\ntemplate <class Int, class mod_pro_t> constexpr Int inner_sqrt(Int\
-    \ a, Int p) {\n  const mod_pro_t md(p);\n  Int e= (p - 1) >> 1, one= md.set(1);\n\
-    \  if (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n  Int b= 0, d=\
-    \ md.diff(0, a), ret= one, r2= 0, b2= one;\n  while (md.norm(pow(d, e, md)) ==\
-    \ one) b= md.plus(b, one), d= md.diff(md.mul(b, b), a);\n  auto mult= [&md, d](Int\
-    \ &u1, Int &u2, Int v1, Int v2) {\n    Int tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2,\
-    \ v2), d));\n    u2= md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1= tmp;\n  };\n\
-    \  for (++e;; mult(b, b2, b, b2)) {\n    if (e & 1) mult(ret, r2, b, b2);\n  \
-    \  if (!(e>>= 1)) return ret= md.get(ret), ret * 2 < p ? ret : p - ret;\n  }\n\
-    }\nconstexpr int64_t mod_sqrt(int64_t a, int64_t p) {\n  assert(p > 0), assert(a\
-    \ > 0), assert(is_prime(p)), a%= p;\n  if (a <= 1 || p == 2) return a;\n  if (p\
-    \ < INT_MAX) return inner_sqrt<int, MP_Na<u32>>(a, p);\n  return inner_sqrt<int64_t,\
-    \ MP_Mo>(a, p);\n}\n}\nusing math_internal::mod_sqrt;\n"
+    \ math_internal {\ntemplate <class Int, class mod_pro_t> constexpr int64_t inner_sqrt(Int\
+    \ a, Int p) {\n const mod_pro_t md(p);\n Int e= (p - 1) >> 1, one= md.set(1);\n\
+    \ if (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n Int b= 0, d= md.diff(0,\
+    \ a), ret= one, r2= 0, b2= one;\n while (md.norm(pow(d, e, md)) == one) b= md.plus(b,\
+    \ one), d= md.diff(md.mul(b, b), a);\n auto mult= [&md, d](Int &u1, Int &u2, Int\
+    \ v1, Int v2) {\n  Int tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2), d));\n\
+    \  u2= md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1= tmp;\n };\n for (++e;; mult(b,\
+    \ b2, b, b2)) {\n  if (e & 1) mult(ret, r2, b, b2);\n  if (!(e>>= 1)) return ret=\
+    \ md.get(ret), ret * 2 < p ? ret : p - ret;\n }\n}\nconstexpr int64_t mod_sqrt(int64_t\
+    \ a, int64_t p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n\
+    \ if (a <= 1 || p == 2) return a;\n if (p < INT_MAX) return inner_sqrt<u32, MP_Na<u32>>(a,\
+    \ p);\n return inner_sqrt<u64, MP_Mo>(a, p);\n}\n}\nusing math_internal::mod_sqrt;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/is_prime.hpp\"\
-    \nnamespace math_internal {\ntemplate <class Int, class mod_pro_t> constexpr Int\
-    \ inner_sqrt(Int a, Int p) {\n  const mod_pro_t md(p);\n  Int e= (p - 1) >> 1,\
-    \ one= md.set(1);\n  if (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n\
-    \  Int b= 0, d= md.diff(0, a), ret= one, r2= 0, b2= one;\n  while (md.norm(pow(d,\
-    \ e, md)) == one) b= md.plus(b, one), d= md.diff(md.mul(b, b), a);\n  auto mult=\
-    \ [&md, d](Int &u1, Int &u2, Int v1, Int v2) {\n    Int tmp= md.plus(md.mul(u1,\
-    \ v1), md.mul(md.mul(u2, v2), d));\n    u2= md.plus(md.mul(u1, v2), md.mul(u2,\
-    \ v1)), u1= tmp;\n  };\n  for (++e;; mult(b, b2, b, b2)) {\n    if (e & 1) mult(ret,\
-    \ r2, b, b2);\n    if (!(e>>= 1)) return ret= md.get(ret), ret * 2 < p ? ret :\
-    \ p - ret;\n  }\n}\nconstexpr int64_t mod_sqrt(int64_t a, int64_t p) {\n  assert(p\
-    \ > 0), assert(a > 0), assert(is_prime(p)), a%= p;\n  if (a <= 1 || p == 2) return\
-    \ a;\n  if (p < INT_MAX) return inner_sqrt<int, MP_Na<u32>>(a, p);\n  return inner_sqrt<int64_t,\
-    \ MP_Mo>(a, p);\n}\n}\nusing math_internal::mod_sqrt;"
+    \nnamespace math_internal {\ntemplate <class Int, class mod_pro_t> constexpr int64_t\
+    \ inner_sqrt(Int a, Int p) {\n const mod_pro_t md(p);\n Int e= (p - 1) >> 1, one=\
+    \ md.set(1);\n if (a= md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n Int\
+    \ b= 0, d= md.diff(0, a), ret= one, r2= 0, b2= one;\n while (md.norm(pow(d, e,\
+    \ md)) == one) b= md.plus(b, one), d= md.diff(md.mul(b, b), a);\n auto mult= [&md,\
+    \ d](Int &u1, Int &u2, Int v1, Int v2) {\n  Int tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2,\
+    \ v2), d));\n  u2= md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1= tmp;\n };\n for\
+    \ (++e;; mult(b, b2, b, b2)) {\n  if (e & 1) mult(ret, r2, b, b2);\n  if (!(e>>=\
+    \ 1)) return ret= md.get(ret), ret * 2 < p ? ret : p - ret;\n }\n}\nconstexpr\
+    \ int64_t mod_sqrt(int64_t a, int64_t p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)),\
+    \ a%= p;\n if (a <= 1 || p == 2) return a;\n if (p < INT_MAX) return inner_sqrt<u32,\
+    \ MP_Na<u32>>(a, p);\n return inner_sqrt<u64, MP_Mo>(a, p);\n}\n}\nusing math_internal::mod_sqrt;"
   dependsOn:
   - src/Math/is_prime.hpp
   - src/Math/ModIntPrototype.hpp
@@ -132,7 +130,7 @@ data:
   requiredBy:
   - src/Math/sparse_fps.hpp
   - src/FFT/fps_sqrt.hpp
-  timestamp: '2022-12-31 18:14:29+09:00'
+  timestamp: '2023-01-08 22:12:54+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1939.test.cpp
