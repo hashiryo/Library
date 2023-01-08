@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: src/LinearAlgebra/MinimalPolynomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/SparseSquareMatrix.hpp
     title: "\u758E\u884C\u5217"
   - icon: ':question:'
@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/berlekamp_massey.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'

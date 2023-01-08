@@ -24,12 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/119.Dinic.test.cpp
     title: test/yukicoder/119.Dinic.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6700\u5927\u6D41 Dinic"
     links:
@@ -82,7 +82,7 @@ data:
   path: src/Optimization/MaxFlow_Dinic.hpp
   requiredBy: []
   timestamp: '2022-11-18 14:42:38+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/GRL_6_A.Dinic.test.cpp
   - test/aoj/2313.Dinic.test.cpp

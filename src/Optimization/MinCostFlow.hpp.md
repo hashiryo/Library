@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1615.test.cpp
     title: test/yukicoder/1615.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/MinCostFlow.hpp\"\n#include <bits/stdc++.h>\n\
@@ -173,7 +173,7 @@ data:
   path: src/Optimization/MinCostFlow.hpp
   requiredBy: []
   timestamp: '2022-12-31 23:16:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/GRL_6_B.test.cpp
   - test/yukicoder/1615.test.cpp

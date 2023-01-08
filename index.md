@@ -212,10 +212,10 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Matrix.hpp
       title: src/LinearAlgebra/Matrix.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
       title: src/LinearAlgebra/MinimalPolynomial.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/SparseSquareMatrix.hpp
       title: "\u758E\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -255,7 +255,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':heavy_check_mark:'
@@ -270,7 +270,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/berlekamp_massey.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':heavy_check_mark:'
@@ -289,7 +289,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/mod_kth_root.hpp
       title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
     - icon: ':heavy_check_mark:'
@@ -302,7 +302,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/prime_count.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - name: src/Misc
@@ -320,20 +320,20 @@ data:
       path: src/Optimization/MatchingWeighted.hpp
       title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
         \u822C\u30B0\u30E9\u30D5)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlowLowerBound.hpp
       title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\
         \u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow_Dinic.hpp
       title: "\u6700\u5927\u6D41 Dinic"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow_PushRelabel.hpp
       title: "\u6700\u5927\u6D41 PushRelabel(Gap)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MinCostFlow.hpp
       title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
         \u30B0\u6CD5)"
@@ -343,7 +343,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/min_Lconvex.hpp
       title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
@@ -1214,49 +1214,49 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1080.sparse_FPS.test.cpp
       title: test/yukicoder/1080.sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1080.test.cpp
       title: test/yukicoder/1080.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1145.test.cpp
       title: test/yukicoder/1145.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.Dinic.test.cpp
       title: test/yukicoder/119.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1269.test.cpp
       title: test/yukicoder/1269.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/137.div_at.test.cpp
       title: test/yukicoder/137.div_at.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.test.cpp
       title: test/yukicoder/1615.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1625.KDT.test.cpp
       title: test/yukicoder/1625.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1750.SparseMat.test.cpp
       title: test/yukicoder/1750.SparseMat.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1939.test.cpp
       title: test/yukicoder/1939.test.cpp
     - icon: ':x:'
       path: test/yukicoder/215.Poly.test.cpp
       title: test/yukicoder/215.Poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/215.test.cpp
       title: test/yukicoder/215.test.cpp
     - icon: ':x:'

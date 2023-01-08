@@ -371,14 +371,14 @@ data:
     \ p[o | 1], 0, k2), GNA2::bf.idft(0, k2), GNA1::bf.mul(p[o], 0, k2), GNA1::bf.idft(0,\
     \ k2), GNA2::bf.get(r + i - k, k, k2), GNA1::bf.get(r + i, k, k2);\n  return std::vector<mod_t>(r,\
     \ r + n);\n }\n poly interpolate(const std::vector<mod_t> &ys) {\n  for (int i=\
-    \ n; i; i--) r[i - 1]= all[n - i] * i;\n  auto q= multi_eval(poly(r, r + n));\n\
-    \  for (int i= n; i--;) r[i]= ys[i] / q[i];\n  std::fill(r + n, r + nn, mod_t());\n\
-    \  for (int k= 1; k < nn; k<<= 1)\n   for (int i= 0, o= nn / k, k2= k << 1; i\
-    \ < n; i+= k2, o+= 2) GNA1::bf.set(r + i, 0, k), GNA1::bf.zeros(k, k2), GNA2::bf.set(r\
-    \ + i + k, 0, k), GNA2::bf.zeros(k, k2), GNA1::bf.dft(0, k2), GNA2::bf.dft(0,\
-    \ k2), GNA1::bf.mul(p[o | 1], 0, k2), GNA2::bf.mul(p[o], 0, k2), GNA1::bf.add(GNA2::bf,\
-    \ 0, k2), GNA1::bf.idft(0, k2), GNA1::bf.get(r + i, 0, k2);\n  return std::reverse(r,\
-    \ r + n), poly(r, r + n);\n }\n};\n#line 5 \"test/yosupo/polynomial_interpolation.test.cpp\"\
+    \ n; i; --i) r[i - 1]= all[n - i] * i;\n  auto q= multi_eval(poly(r, r + n));\n\
+    \  for (int i= n; i--;) r[i]= ys[i] / q[i];\n  if (n < nn) std::fill(r + n, r\
+    \ + nn, mod_t());\n  for (int k= 1; k < nn; k<<= 1)\n   for (int i= 0, o= nn /\
+    \ k, k2= k << 1; i < n; i+= k2, o+= 2) GNA1::bf.set(r + i, 0, k), GNA1::bf.zeros(k,\
+    \ k2), GNA2::bf.set(r + i + k, 0, k), GNA2::bf.zeros(k, k2), GNA1::bf.dft(0, k2),\
+    \ GNA2::bf.dft(0, k2), GNA1::bf.mul(p[o | 1], 0, k2), GNA2::bf.mul(p[o], 0, k2),\
+    \ GNA1::bf.add(GNA2::bf, 0, k2), GNA1::bf.idft(0, k2), GNA1::bf.get(r + i, 0,\
+    \ k2);\n  return std::reverse(r, r + n), poly(r, r + n);\n }\n};\n#line 5 \"test/yosupo/polynomial_interpolation.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  std::vector<Mint>\
     \ x(N), y(N);\n  for (int i = 0; i < N; i++) cin >> x[i];\n  for (int i = 0; i\
@@ -405,7 +405,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2023-01-08 21:44:53+09:00'
+  timestamp: '2023-01-08 23:42:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/polynomial_interpolation.test.cpp
