@@ -36,12 +36,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Sieve.hpp\"\n#include <bits/stdc++.h>\ntemplate\
@@ -205,7 +205,7 @@ data:
   path: src/Math/Sieve.hpp
   requiredBy: []
   timestamp: '2022-12-31 21:15:19+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp

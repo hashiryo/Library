@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/LUDecomposition.hpp
     title: src/LinearAlgebra/LUDecomposition.hpp
   - icon: ':question:'

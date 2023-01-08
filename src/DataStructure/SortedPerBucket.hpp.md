@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
     title: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/925.SqrtDC.test.cpp
     title: test/yukicoder/925.SqrtDC.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SortedPerBucket.hpp\"\n#include <bits/stdc++.h>\n\
@@ -147,7 +147,7 @@ data:
   path: src/DataStructure/SortedPerBucket.hpp
   requiredBy: []
   timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/hackerrank/library-query.SqrtDC.test.cpp
   - test/aoj/3170.test.cpp

@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.BIT.test.cpp
     title: test/yukicoder/649.BIT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/738.BIT.test.cpp
     title: test/yukicoder/738.BIT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/BinaryIndexedTree.hpp\"\n#include <bits/stdc++.h>\n\
@@ -53,7 +53,7 @@ data:
   path: src/DataStructure/BinaryIndexedTree.hpp
   requiredBy: []
   timestamp: '2022-12-31 22:54:50+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/649.BIT.test.cpp
   - test/yukicoder/738.BIT.test.cpp
