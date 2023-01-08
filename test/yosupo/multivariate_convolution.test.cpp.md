@@ -263,9 +263,9 @@ data:
     \ for (int i= k; i--;) gt2[i].zeros(0, m);\n  for (int i= n; i--;) gt1[chi[i]].set(i,\
     \ f[i]);\n  for (int i= n; i--;) gt2[chi[i]].set(i, g[i]);\n  for (int i= k; i--;)\
     \ gt1[i].dft(0, m);\n  for (int i= k; i--;) gt2[i].dft(0, m);\n  for (int i= k,\
-    \ j, r; i--;)\n   for (j= k; j--;) GNA::bf.mul(gt1[i], gt2[j], 0, m), gt0[r-=\
-    \ k & -((r= i + j) >= k)].add(GNA::bf, 0, m);\n  for (int i= k; i--;) gt0[i].idft(0,\
-    \ m);\n  for (int i= n; i--;) r[i]= gt0[chi[i]].get(i);\n  return std::vector<mod_t>(r,\
+    \ j, l; i--;)\n   for (j= k; j--;) GNA::bf.mul(gt1[i], gt2[j], 0, m), gt0[l-=\
+    \ k & -((l= i + j) >= k)].add(GNA::bf, 0, m);\n  for (int i= k; i--;) gt0[i].idft(0,\
+    \ m);\n  for (int i= n; i--;) r[i]= gt0[chi[i]].get(i);\n  return std::vector(r,\
     \ r + n);\n }\n};\n#line 5 \"test/yosupo/multivariate_convolution.test.cpp\"\n\
     using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
     \  using Mint = StaticModInt<998244353>;\n  int k;\n  cin >> k;\n  vector<int>\
@@ -293,7 +293,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-01-08 20:35:17+09:00'
+  timestamp: '2023-01-08 21:44:53+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/multivariate_convolution.test.cpp

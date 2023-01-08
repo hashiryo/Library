@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
   - icon: ':question:'
@@ -343,44 +343,33 @@ data:
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
     \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\
-    \n\n/**\n * @title \u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8\
-    \n * @category FFT\n * y=f(0),f(1),...,f(n-1)\u304C\u4E0E\u3048\u3089\u308C\u305F\
-    \u3068\u304D\u306Ef(c),f(c+1),...,f(c+m-1)\u3092\u8A08\u7B97\n * O( (n+m)log(n+m)\
-    \ )\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t _Nm = 1 << 22>\n\
-    std::vector<mod_t> sample_points_shift(const std::vector<mod_t> &y, mod_t c,\n\
-    \                                       int m = 1) {\n  assert(m <= mod_t::modulo()),\
-    \ assert(y.size() <= mod_t::modulo());\n  static constexpr int TH = = is_nttfriend<mod_t,\
-    \ _Nm2>()      ? 50\n                              : is_nttarraydouble<mod_t,\
-    \ _Nm2> ? 130\n                                                              \
-    \ : 145;\n  if (m == 0) return {};\n  std::uint64_t c_64 = c.val(), nc1 = (c +\
-    \ (m - 1)).val();\n  std::uint32_t k = y.size(), d = k - 1, i = d, e;\n  if (c_64\
-    \ + m <= k)\n    return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64\
-    \ + m);\n  using GA = GlobalArray<mod_t, _Nm, 0>;\n  for (GA::bf[d] = 1; i; i--)\
-    \ GA::bf[i - 1] = GA::bf[i] * i;\n  mod_t t = mod_t(1) / (GA::bf[0] * GA::bf[0]);\n\
-    \  for (i = d / 2 + 1; i--;)\n    GA::bf[i] = GA::bf[d - i] = GA::bf[i] * GA::bf[d\
-    \ - i] * t;\n  for (i = k; i--;) GA::bf[i] *= y[i];\n  for (i = 1; i < k; i +=\
-    \ 2) GA::bf[d - i] = -GA::bf[d - i];\n  const mod_t Z = 0;\n  auto f = [&](mod_t\
-    \ a, int n, mod_t ret[]) {\n    using GNA1 = GlobalNTTArray<mod_t, _Nm, 1>;\n\
-    \    using GNA2 = GlobalNTTArray<mod_t, _Nm, 2>;\n    using GAq = GlobalArray<mod_t,\
-    \ _Nm, 2>;\n    for (e = d + n, i = 0, t = a - d; i < e; i++, t += 1) ret[i] =\
-    \ t;\n    std::partial_sum(ret, ret + e, GAq::bf, std::multiplies<>());\n    for\
-    \ (t = mod_t(1) / GAq::bf[e - 1]; --i;)\n      GAq::bf[i] = t * GAq::bf[i - 1],\
-    \ t *= ret[i];\n    if (GAq::bf[0] = t; k >= TH && n >= TH) {\n      const int\
-    \ len = get_len(e + (d > 0));\n      GNA1::bf.set(GA::bf, 0, k), GNA1::bf.zeros(k,\
-    \ len), GNA1::bf.dft(0, len);\n      GNA2::bf.set(GAq::bf, 0, e), GNA2::bf.zeros(e,\
-    \ len), GNA2::bf.dft(0, len);\n      GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0,\
-    \ len);\n      GNA1::bf.get(ret - d, d, e);\n    } else\n      for (std::fill_n(ret,\
-    \ n, Z), i = k; i--;)\n        for (int b = d - i, j = n; j--;) ret[j] += GA::bf[i]\
-    \ * GAq::bf[j + b];\n    for (t = a, i = k; --i;) t *= a - i;\n    for (; i <\
-    \ n; i++) ret[i] *= t, t *= (a + (i + 1)) * GAq::bf[i];\n    return ret + n;\n\
-    \  };\n  using GAp = GlobalArray<mod_t, _Nm, 1>;\n  if (mod_t * bf; c_64 < k)\
-    \ {\n    if (bf = std::copy_n(y.begin() + c_64, k - c_64, GAp::bf); nc1 < k)\n\
-    \      std::copy_n(y.begin(), nc1 + 1, f(k, mod_t::modulo() - k, bf));\n    else\n\
-    \      f(k, c_64 + m - k, bf);\n  } else if (nc1 < c_64) {\n    if (mod_t *bf\
-    \ = f(c, (-c).val(), GAp::bf); nc1 < k)\n      std::copy_n(y.begin(), nc1 + 1,\
-    \ bf);\n    else\n      f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n  }\
-    \ else\n    f(c, m, GAp::bf);\n  return std::vector<mod_t>(GAp::bf, GAp::bf +\
-    \ m);\n}\n#line 10 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
+    \ntemplate <class mod_t, std::size_t LM= 1 << 22> std::vector<mod_t> sample_points_shift(const\
+    \ std::vector<mod_t>& y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size()\
+    \ <= mod_t::mod());\n static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
+    \ LM>];\n if (m == 0) return {};\n std::uint64_t c_64= c.val(), nc1= (c + (m -\
+    \ 1)).val();\n std::uint32_t k= y.size(), d= k - 1, i= d, e;\n if (c_64 + m <=\
+    \ k) return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64 + m);\n mod_t*\
+    \ x= GlobalArray<mod_t, LM, 0>::bf;\n for (x[d]= 1; i; i--) x[i - 1]= x[i] * i;\n\
+    \ mod_t t= mod_t(1) / (x[0] * x[0]);\n for (i= d / 2 + 1; i--;) x[i]= x[d - i]=\
+    \ x[i] * x[d - i] * t;\n for (i= k; i--;) x[i]*= y[i];\n for (i= 1; i < k; i+=\
+    \ 2) x[d - i]= -x[d - i];\n auto f= [&](mod_t a, int n, mod_t ret[]) {\n  using\
+    \ GNA1= GlobalNTTArray<mod_t, LM, 1>;\n  using GNA2= GlobalNTTArray<mod_t, LM,\
+    \ 2>;\n  mod_t* q= GlobalArray<mod_t, LM, 2>::bf;\n  for (e= d + n, i= 0, t= a\
+    \ - d; i < e; i++, t+= 1) ret[i]= t;\n  std::partial_sum(ret, ret + e, q, std::multiplies<>());\n\
+    \  for (t= mod_t(1) / q[e - 1]; --i;) q[i]= t * q[i - 1], t*= ret[i];\n  if (q[0]=\
+    \ t; k >= TH && n >= TH) {\n   const int len= get_len(e + (d > 0));\n   GNA1::bf.set(x,\
+    \ 0, k), GNA1::bf.zeros(k, len), GNA1::bf.dft(0, len), GNA2::bf.set(q, 0, e),\
+    \ GNA2::bf.zeros(e, len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len),\
+    \ GNA1::bf.idft(0, len), GNA1::bf.get(ret - d, d, e);\n  } else\n   for (std::fill_n(ret,\
+    \ n, mod_t()), i= k; i--;)\n    for (int b= d - i, j= n; j--;) ret[j]+= x[i] *\
+    \ q[j + b];\n  for (t= a, i= k; --i;) t*= a - i;\n  for (; i < n; i++) ret[i]*=\
+    \ t, t*= (a + (i + 1)) * q[i];\n  return ret + n;\n };\n mod_t* p= GlobalArray<mod_t,\
+    \ LM, 1>::bf;\n if (mod_t * bf; c_64 < k) {\n  if (bf= std::copy_n(y.begin() +\
+    \ c_64, k - c_64, p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, f(k, mod_t::mod()\
+    \ - k, bf));\n  else f(k, c_64 + m - k, bf);\n } else if (nc1 < c_64) {\n  if\
+    \ (mod_t* bf= f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, bf);\n\
+    \  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n } else f(c, m, p);\n\
+    \ return std::vector(p, p + m);\n}\n#line 10 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  using C = Combination<Mint>;\n  long\
     \ long r, d, n;\n  cin >> r >> d >> n;\n  if (--n < 0) {\n    cout << 0 << endl;\n\
@@ -427,7 +416,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-01 04:58:03+09:00'
+  timestamp: '2023-01-08 21:44:53+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
