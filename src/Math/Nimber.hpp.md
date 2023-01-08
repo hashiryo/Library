@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/nimber_sqrt.test.cpp
     title: test/unit_test/nimber_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/nim_product_64.test.cpp
     title: test/yosupo/nim_product_64.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Nimber.hpp\"\n#include <bits/stdc++.h>\nclass Nimber\
@@ -204,7 +204,7 @@ data:
   path: src/Math/Nimber.hpp
   requiredBy: []
   timestamp: '2022-12-31 20:36:38+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/unit_test/nimber_sqrt.test.cpp
   - test/unit_test/nimber_log.test.cpp

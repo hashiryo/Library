@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/PersistentArray.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
   _extendedRequiredBy: []
@@ -20,74 +20,71 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc133_f.PerArr.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n\n// \u6C38\u7D9A\u914D\
     \u5217(at) \u306E verify\n\n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/PersistentArray.hpp\"\
-    \n/**\n * @title \u6C38\u7D9A\u914D\u5217\n * @category \u30C7\u30FC\u30BF\u69CB\
-    \u9020\n * M\u5206\u6728\n * get: O(log_M N)\n * at: O(M log_M N)\n */\n\n// BEGIN\
-    \ CUT HERE\n\ntemplate <class T, std::size_t M = 8>\nclass PersistentArray {\n\
-    \  struct Node {\n    T val;\n    Node *ch[M];\n  } * root;\n  T get(Node *&t,\
-    \ std::size_t k) {\n    return t ? (k ? get(t->ch[(k - 1) % M], (k - 1) / M) :\
-    \ t->val) : T();\n  }\n  bool is_null(Node *&t, std::size_t k) {\n    return t\
-    \ ? (k ? is_null(t->ch[(k - 1) % M], (k - 1) / M) : false) : true;\n  }\n  template\
-    \ <bool persistent = true>\n  T &at(Node *&t, std::size_t k) {\n    if (!t)\n\
-    \      t = new Node();\n    else if constexpr (persistent)\n      t = new Node(*t);\n\
-    \    return k ? at<persistent>(t->ch[(k - 1) % M], (k - 1) / M) : t->val;\n  }\n\
-    \n public:\n  PersistentArray() : root(nullptr) {}\n  PersistentArray(std::size_t\
-    \ n, T v) : root(nullptr) {\n    for (std::size_t i = n; i--;) at<false>(root,\
-    \ i) = v;\n  }\n  PersistentArray(T *bg, T *ed) : root(nullptr) {\n    for (std::size_t\
-    \ i = ed - bg; i--;) at<false>(root, i) = *(bg + i);\n  }\n  PersistentArray(const\
-    \ std::vector<T> &ar)\n      : PersistentArray(ar.data(), ar.data() + ar.size())\
-    \ {}\n  bool is_null(std::size_t k) { return is_null(root, k); }\n  T get(std::size_t\
-    \ k) { return get(root, k); }\n  T &at(std::size_t k) { return at<true>(root,\
-    \ k); }\n  T &operator[](std::size_t k) { return at(k); }\n};\n#line 3 \"src/DataStructure/LinkCutTree.hpp\"\
-    \n/**\n * @title Link-Cut-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n\
-    \ * @brief O(logN)\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\
-    \u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\
-    \u30B5\u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u306A\u3044\u306E\u3067\
-    mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\
-    \u306A\u3044\n */\n\n// BEGIN CUT HERE\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
-    \ Dummy)                              \\\n  template <class T>               \
-    \                           \\\n  struct has_##member {                      \
-    \                 \\\n    template <class U, Dummy>                          \
-    \       \\\n    static std::true_type check(U *);                         \\\n\
-    \    static std::false_type check(...);                        \\\n    static\
-    \ T *mClass;                                         \\\n    static const bool\
-    \ value = decltype(check(mClass))::value; \\\n  };\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy = (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy = typename U::member)\n#endif\n\ntemplate <typename M = void>\n\
-    class LinkCutTree {\n  HAS_MEMBER(op);\n  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n\
-    \  HAS_TYPE(T);\n  HAS_TYPE(E);\n  template <class L>\n  using semigroup = std::conjunction<has_T<L>,\
-    \ has_op<L>>;\n  template <class L>\n  using dual =\n      std::conjunction<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n  template <class tDerived,\
-    \ class U = std::nullptr_t, class F = std::nullptr_t>\n  struct Node_B {\n   \
-    \ using T = U;\n    using E = F;\n    tDerived *ch[2], *par;\n    bool rev_flg;\n\
-    \  };\n  template <bool sg_, bool du_, typename tEnable = void>\n  struct Node_D\
-    \ : Node_B<Node_D<sg_, du_, tEnable>> {};\n  template <bool sg_, bool du_>\n \
-    \ struct Node_D<sg_, du_, typename std::enable_if_t<sg_ && !du_>>\n      : Node_B<Node_D<sg_,\
-    \ du_>, typename M::T> {\n    typename M::T val, sum, rsum;\n  };\n  template\
-    \ <bool sg_, bool du_>\n  struct Node_D<sg_, du_, typename std::enable_if_t<!sg_\
-    \ && du_>>\n      : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n\
-    \    typename M::T val;\n    typename M::E lazy;\n    bool lazy_flg;\n  };\n \
-    \ template <bool sg_, bool du_>\n  struct Node_D<sg_, du_, typename std::enable_if_t<sg_\
-    \ && du_>>\n      : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n\
-    \    typename M::T val, sum, rsum;\n    typename M::E lazy;\n    bool lazy_flg;\n\
-    \  };\n  using Node = Node_D<semigroup<M>::value, dual<M>::value>;\n  using T\
-    \ = typename Node::T;\n  using E = typename Node::E;\n  static inline int dir(Node\
-    \ *&t) {\n    if (t->par) {\n      if (t->par->ch[0] == t) return 0;\n      if\
-    \ (t->par->ch[1] == t) return 1;\n    }\n    return 2;\n  }\n  static inline void\
-    \ rot(Node *t) {\n    Node *p = t->par;\n    int d = dir(t);\n    if ((p->ch[d]\
-    \ = t->ch[!d])) p->ch[d]->par = p;\n    t->ch[!d] = p;\n    if constexpr (semigroup<M>::value)\
-    \ pushup(p), pushup(t);\n    t->par = p->par;\n    if ((d = dir(p)) < 2) {\n \
-    \     p->par->ch[d] = t;\n      if constexpr (semigroup<M>::value) pushup(t->par);\n\
-    \    }\n    p->par = t;\n  }\n  static inline void splay(Node *t) {\n    eval(t);\n\
-    \    for (int t_d = dir(t), p_d; t_d < 2; rot(t), t_d = dir(t)) {\n      if ((p_d\
-    \ = dir(t->par)) < 2) eval(t->par->par);\n      eval(t->par), eval(t);\n     \
-    \ if (p_d < 2) rot(t_d == p_d ? t->par : t);\n    }\n  }\n  static inline void\
-    \ pushup(Node *t) {\n    t->rsum = t->sum = t->val;\n    if (t->ch[0])\n     \
-    \ t->sum = M::op(t->ch[0]->sum, t->sum),\n      t->rsum = M::op(t->rsum, t->ch[0]->rsum);\n\
-    \    if (t->ch[1])\n      t->sum = M::op(t->sum, t->ch[1]->sum),\n      t->rsum\
-    \ = M::op(t->ch[1]->rsum, t->rsum);\n  }\n  static inline void propagate(Node\
-    \ *t, const E &x) {\n    if (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy,\
-    \ x), x) : t->lazy = x;\n    M::mapping(t->val, x);\n    if constexpr (semigroup<M>::value)\n\
-    \      M::mapping(t->sum, x), M::mapping(t->rsum, x);\n    t->lazy_flg = true;\n\
+    \ntemplate <class T, std::size_t M= 8> class PersistentArray {\n struct Node {\n\
+    \  T val;\n  Node *ch[M];\n } * root;\n T get(Node *&t, std::size_t k) { return\
+    \ t ? (k ? get(t->ch[(k - 1) % M], (k - 1) / M) : t->val) : T(); }\n bool is_null(Node\
+    \ *&t, std::size_t k) { return t ? (k ? is_null(t->ch[(k - 1) % M], (k - 1) /\
+    \ M) : false) : true; }\n template <bool persistent= true> T &at(Node *&t, std::size_t\
+    \ k) {\n  if (!t) t= new Node();\n  else if constexpr (persistent) t= new Node(*t);\n\
+    \  return k ? at<persistent>(t->ch[(k - 1) % M], (k - 1) / M) : t->val;\n }\n\
+    public:\n PersistentArray(): root(nullptr) {}\n PersistentArray(std::size_t n,\
+    \ T v): root(nullptr) {\n  for (std::size_t i= n; i--;) at<false>(root, i)= v;\n\
+    \ }\n PersistentArray(T *bg, T *ed): root(nullptr) {\n  for (std::size_t i= ed\
+    \ - bg; i--;) at<false>(root, i)= *(bg + i);\n }\n PersistentArray(const std::vector<T>\
+    \ &ar): PersistentArray(ar.data(), ar.data() + ar.size()) {}\n bool is_null(std::size_t\
+    \ k) { return is_null(root, k); }\n T get(std::size_t k) { return get(root, k);\
+    \ }\n T &at(std::size_t k) { return at<true>(root, k); }\n T &operator[](std::size_t\
+    \ k) { return at(k); }\n};\n#line 3 \"src/DataStructure/LinkCutTree.hpp\"\n/**\n\
+    \ * @title Link-Cut-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
+    \ O(logN)\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\
+    \u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u90E8\u5206\u6728\u306E\u30B5\
+    \u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u306A\u3044\u306E\u3067mapping\u95A2\
+    \u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u306A\u3044\
+    \n */\n\n// BEGIN CUT HERE\n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy)\
+    \                              \\\n  template <class T>                      \
+    \                    \\\n  struct has_##member {                             \
+    \          \\\n    template <class U, Dummy>                                 \\\
+    \n    static std::true_type check(U *);                         \\\n    static\
+    \ std::false_type check(...);                        \\\n    static T *mClass;\
+    \                                         \\\n    static const bool value = decltype(check(mClass))::value;\
+    \ \\\n  };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy = (&U::member,\
+    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy = typename U::member)\n\
+    #endif\n\ntemplate <typename M = void>\nclass LinkCutTree {\n  HAS_MEMBER(op);\n\
+    \  HAS_MEMBER(mapping);\n  HAS_MEMBER(composition);\n  HAS_TYPE(T);\n  HAS_TYPE(E);\n\
+    \  template <class L>\n  using semigroup = std::conjunction<has_T<L>, has_op<L>>;\n\
+    \  template <class L>\n  using dual =\n      std::conjunction<has_T<L>, has_E<L>,\
+    \ has_mapping<L>, has_composition<L>>;\n  template <class tDerived, class U =\
+    \ std::nullptr_t, class F = std::nullptr_t>\n  struct Node_B {\n    using T =\
+    \ U;\n    using E = F;\n    tDerived *ch[2], *par;\n    bool rev_flg;\n  };\n\
+    \  template <bool sg_, bool du_, typename tEnable = void>\n  struct Node_D : Node_B<Node_D<sg_,\
+    \ du_, tEnable>> {};\n  template <bool sg_, bool du_>\n  struct Node_D<sg_, du_,\
+    \ typename std::enable_if_t<sg_ && !du_>>\n      : Node_B<Node_D<sg_, du_>, typename\
+    \ M::T> {\n    typename M::T val, sum, rsum;\n  };\n  template <bool sg_, bool\
+    \ du_>\n  struct Node_D<sg_, du_, typename std::enable_if_t<!sg_ && du_>>\n  \
+    \    : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n    typename\
+    \ M::T val;\n    typename M::E lazy;\n    bool lazy_flg;\n  };\n  template <bool\
+    \ sg_, bool du_>\n  struct Node_D<sg_, du_, typename std::enable_if_t<sg_ && du_>>\n\
+    \      : Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n    typename\
+    \ M::T val, sum, rsum;\n    typename M::E lazy;\n    bool lazy_flg;\n  };\n  using\
+    \ Node = Node_D<semigroup<M>::value, dual<M>::value>;\n  using T = typename Node::T;\n\
+    \  using E = typename Node::E;\n  static inline int dir(Node *&t) {\n    if (t->par)\
+    \ {\n      if (t->par->ch[0] == t) return 0;\n      if (t->par->ch[1] == t) return\
+    \ 1;\n    }\n    return 2;\n  }\n  static inline void rot(Node *t) {\n    Node\
+    \ *p = t->par;\n    int d = dir(t);\n    if ((p->ch[d] = t->ch[!d])) p->ch[d]->par\
+    \ = p;\n    t->ch[!d] = p;\n    if constexpr (semigroup<M>::value) pushup(p),\
+    \ pushup(t);\n    t->par = p->par;\n    if ((d = dir(p)) < 2) {\n      p->par->ch[d]\
+    \ = t;\n      if constexpr (semigroup<M>::value) pushup(t->par);\n    }\n    p->par\
+    \ = t;\n  }\n  static inline void splay(Node *t) {\n    eval(t);\n    for (int\
+    \ t_d = dir(t), p_d; t_d < 2; rot(t), t_d = dir(t)) {\n      if ((p_d = dir(t->par))\
+    \ < 2) eval(t->par->par);\n      eval(t->par), eval(t);\n      if (p_d < 2) rot(t_d\
+    \ == p_d ? t->par : t);\n    }\n  }\n  static inline void pushup(Node *t) {\n\
+    \    t->rsum = t->sum = t->val;\n    if (t->ch[0])\n      t->sum = M::op(t->ch[0]->sum,\
+    \ t->sum),\n      t->rsum = M::op(t->rsum, t->ch[0]->rsum);\n    if (t->ch[1])\n\
+    \      t->sum = M::op(t->sum, t->ch[1]->sum),\n      t->rsum = M::op(t->ch[1]->rsum,\
+    \ t->rsum);\n  }\n  static inline void propagate(Node *t, const E &x) {\n    if\
+    \ (!t) return;\n    t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy =\
+    \ x;\n    M::mapping(t->val, x);\n    if constexpr (semigroup<M>::value)\n   \
+    \   M::mapping(t->sum, x), M::mapping(t->rsum, x);\n    t->lazy_flg = true;\n\
     \  }\n  static inline void toggle(Node *t) {\n    if (!t) return;\n    std::swap(t->ch[0],\
     \ t->ch[1]);\n    if constexpr (semigroup<M>::value) std::swap(t->sum, t->rsum);\n\
     \    t->rev_flg = !t->rev_flg;\n  }\n  static inline void eval(Node *t) {\n  \
@@ -164,7 +161,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.PerArr.test.cpp
   requiredBy: []
-  timestamp: '2022-06-21 16:53:28+09:00'
+  timestamp: '2023-01-08 18:54:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.PerArr.test.cpp
