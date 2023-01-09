@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_C
@@ -244,9 +244,9 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
-    \ n >> 16); }\n#line 4 \"src/FFT/BigInt.hpp\"\nclass BigInt {\n static constexpr\
-    \ unsigned BASE= 10000000, D= 7;\n using mod_t= StaticModInt<0x3ffffffffa000001>;\n\
+    \ pw2(unsigned n) { return --n, n|= n >> 1, n|= n >> 2, n|= n >> 4, n|= n >> 8,\
+    \ n|= n >> 16, ++n; }\n#line 4 \"src/FFT/BigInt.hpp\"\nclass BigInt {\n static\
+    \ constexpr unsigned BASE= 10000000, D= 7;\n using mod_t= StaticModInt<0x3ffffffffa000001>;\n\
     \ using Vec= std::vector<unsigned>;\n using ntt= NTT<mod_t>;\n bool neg;\n Vec\
     \ dat;\n BigInt shift(int sz) const { return {neg, Vec(dat.begin() + sz, dat.end())};\
     \ }\n BigInt(bool n, const Vec &d): neg(n), dat(d) {}\npublic:\n BigInt(): neg(false),\
@@ -353,8 +353,8 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_C.test.cpp
   requiredBy: []
-  timestamp: '2023-01-09 16:30:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-09 16:57:46+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_C.test.cpp
 layout: document

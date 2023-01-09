@@ -245,11 +245,11 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
-    \ n >> 16); }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\ntemplate <class mod_t,\
-    \ std::size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const std::vector<mod_t>&\
-    \ y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size() <= mod_t::mod());\n\
-    \ static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
+    \ pw2(unsigned n) { return --n, n|= n >> 1, n|= n >> 2, n|= n >> 4, n|= n >> 8,\
+    \ n|= n >> 16, ++n; }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\ntemplate <class\
+    \ mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const\
+    \ std::vector<mod_t>& y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size()\
+    \ <= mod_t::mod());\n static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
     \ LM>];\n if (m == 0) return {};\n std::uint64_t c_64= c.val(), nc1= (c + (m -\
     \ 1)).val();\n std::uint32_t k= y.size(), d= k - 1, i= d, e;\n if (c_64 + m <=\
     \ k) return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64 + m);\n mod_t\
@@ -295,7 +295,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-09 16:30:05+09:00'
+  timestamp: '2023-01-09 16:57:46+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp

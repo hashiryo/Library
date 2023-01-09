@@ -245,53 +245,53 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
-    \ n >> 16); }\n#line 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t, size_t\
-    \ LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p, const\
-    \ std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq= GlobalArray<mod_t,\
-    \ LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static constexpr int t= nttarr_cat<mod_t,\
-    \ LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n\
-    \  static constexpr double B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713,\
-    \ 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n \
-    \ return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const\
-    \ int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n\
-    \ if (std::min(n, m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(),\
-    \ p.end(), pp), std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n \
-    \  for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl=\
-    \ pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static constexpr size_t LM2= LM\
-    \ >> 3;\n  static constexpr bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l\
-    \ + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2,\
-    \ 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t,\
-    \ LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM2, 16, 2>::bf;\n   const int\
-    \ l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l, mm= (m + l - 1) / l, ss= nn + mm\
-    \ - 1;\n   for (int i= 0, k= 0, s; k < n; ++i, k+= l) gt1[i].set(p.data() + k,\
-    \ 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n   if (&p\
-    \ != &q)\n    for (int i= 0, k= 0, s; k < m; ++i, k+= l) gt2[i].set(q.data() +\
-    \ k, 0, s= std::min(l, m - k)), gt2[i].zeros(s, l2), gt2[i].dft(0, l2);\n   else\n\
-    \    for (int i= nn; i--;) gt2[i].subst(gt1[i], 0, l2);\n   GNA2::bf.mul(gt1[0],\
-    \ gt2[0], 0, l2), GNA2::bf.idft(0, l2), GNA2::bf.get(rr, 0, l2);\n   for (int\
-    \ i= 1, k= l, j, ed; i < ss; ++i, k+= l) {\n    for (j= std::max(0, i - nn + 1),\
-    \ ed= std::min(mm - 1, i), GNA2::bf.mul(gt1[i - ed], gt2[ed], 0, l2); j < ed;\
-    \ ++j) GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2), GNA2::bf.add(GNA1::bf, 0, l2);\n\
-    \    for (GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j= std::min(l, sz - k)); j--;)\
-    \ rr[k + j]+= pp[j];\n    if (l < sz - k) GNA2::bf.get(rr + k, l, std::min(l2,\
-    \ sz - k));\n   }\n  } else {\n   using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n\
-    \   using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n   const int len= sz <= l + fl\
-    \ ? l : rl;\n   if (GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0,\
-    \ len); &p != &q) GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len), GNA2::bf.dft(0,\
-    \ len), GNA1::bf.mul(GNA2::bf, 0, len);\n   else GNA1::bf.mul(GNA1::bf, 0, len);\n\
-    \   if (GNA1::bf.idft(0, len), GNA1::bf.get(rr, 0, std::min(sz, len)); len < sz)\
-    \ {\n    std::copy(p.begin() + len - m + 1, p.end(), pp + len - m + 1), std::copy(q.begin()\
-    \ + len - n + 1, q.end(), qq + len - n + 1);\n    for (int i= len, j; i < sz;\
-    \ rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(), j= i - m + 1; j < n; ++j)\
-    \ rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return std::vector(rr, rr + sz);\n\
-    }\n#line 5 \"test/yosupo/convolution_large.test.cpp\"\nusing namespace std;\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  vector<Mint> a(N), b(M);\n  for (int i = 0;\
-    \ i < N; i++) cin >> a[i];\n  for (int j = 0; j < M; j++) cin >> b[j];\n  auto\
-    \ c = convolve<Mint, (1<<25)>(a, b);\n  c.resize(N + M - 1);\n  for (int k = 0;\
-    \ k < N + M - 1; k++) {\n    cout << c[k] << \" \\n\"[k == N + M - 2];\n  }\n\
-    \  return 0;\n}\n"
+    \ pw2(unsigned n) { return --n, n|= n >> 1, n|= n >> 2, n|= n >> 4, n|= n >> 8,\
+    \ n|= n >> 16, ++n; }\n#line 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t,\
+    \ size_t LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p,\
+    \ const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq=\
+    \ GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static\
+    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n\
+    \ auto f= [](int l) -> int {\n  static constexpr double B[]= {(double[]){8.288,\
+    \ 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810,\
+    \ 13.853, 15.501}[t]};\n  return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
+    \ & 1]);\n };\n const int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n ||\
+    \ !m) return std::vector<mod_t>();\n if (std::min(n, m) < TH) {\n  std::fill_n(rr,\
+    \ sz, mod_t()), std::copy(p.begin(), p.end(), pp), std::copy(q.begin(), q.end(),\
+    \ qq);\n  for (int i= n; i--;)\n   for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n\
+    \ } else {\n  const int rl= pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static\
+    \ constexpr size_t LM2= LM >> 3;\n  static constexpr bool b= nttarr_cat<mod_t,\
+    \ LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1=\
+    \ GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
+    \   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    \ LM2, 16, 2>::bf;\n   const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l,\
+    \ mm= (m + l - 1) / l, ss= nn + mm - 1;\n   for (int i= 0, k= 0, s; k < n; ++i,\
+    \ k+= l) gt1[i].set(p.data() + k, 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2),\
+    \ gt1[i].dft(0, l2);\n   if (&p != &q)\n    for (int i= 0, k= 0, s; k < m; ++i,\
+    \ k+= l) gt2[i].set(q.data() + k, 0, s= std::min(l, m - k)), gt2[i].zeros(s, l2),\
+    \ gt2[i].dft(0, l2);\n   else\n    for (int i= nn; i--;) gt2[i].subst(gt1[i],\
+    \ 0, l2);\n   GNA2::bf.mul(gt1[0], gt2[0], 0, l2), GNA2::bf.idft(0, l2), GNA2::bf.get(rr,\
+    \ 0, l2);\n   for (int i= 1, k= l, j, ed; i < ss; ++i, k+= l) {\n    for (j= std::max(0,\
+    \ i - nn + 1), ed= std::min(mm - 1, i), GNA2::bf.mul(gt1[i - ed], gt2[ed], 0,\
+    \ l2); j < ed; ++j) GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2), GNA2::bf.add(GNA1::bf,\
+    \ 0, l2);\n    for (GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j= std::min(l, sz\
+    \ - k)); j--;) rr[k + j]+= pp[j];\n    if (l < sz - k) GNA2::bf.get(rr + k, l,\
+    \ std::min(l2, sz - k));\n   }\n  } else {\n   using GNA1= GlobalNTTArray<mod_t,\
+    \ LM, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n   const int len= sz\
+    \ <= l + fl ? l : rl;\n   if (GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
+    \ len), GNA1::bf.dft(0, len); &p != &q) GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m,\
+    \ len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n   else GNA1::bf.mul(GNA1::bf,\
+    \ 0, len);\n   if (GNA1::bf.idft(0, len), GNA1::bf.get(rr, 0, std::min(sz, len));\
+    \ len < sz) {\n    std::copy(p.begin() + len - m + 1, p.end(), pp + len - m +\
+    \ 1), std::copy(q.begin() + len - n + 1, q.end(), qq + len - n + 1);\n    for\
+    \ (int i= len, j; i < sz; rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(),\
+    \ j= i - m + 1; j < n; ++j) rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return\
+    \ std::vector(rr, rr + sz);\n}\n#line 5 \"test/yosupo/convolution_large.test.cpp\"\
+    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
+    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  vector<Mint>\
+    \ a(N), b(M);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  for (int j = 0; j\
+    \ < M; j++) cin >> b[j];\n  auto c = convolve<Mint, (1<<25)>(a, b);\n  c.resize(N\
+    \ + M - 1);\n  for (int k = 0; k < N + M - 1; k++) {\n    cout << c[k] << \" \\\
+    n\"[k == N + M - 2];\n  }\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_large\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/convolve.hpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
@@ -310,7 +310,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/convolution_large.test.cpp
   requiredBy: []
-  timestamp: '2023-01-09 16:30:05+09:00'
+  timestamp: '2023-01-09 16:57:46+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/convolution_large.test.cpp
