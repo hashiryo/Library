@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_small_p_large_n
@@ -51,13 +51,13 @@ data:
     }\n}\n#line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
     \ Uint, class mod_pro_t, u64... args> constexpr bool miller_rabin(Uint n) {\n\
     \ const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...}) {\n  Uint b=\
-    \ a % n, p= pow(md.set(b), d, md), i= s;\n  while (p= md.norm(p), (p != one &&\
-    \ p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p) != n1 && i != s) return\
-    \ 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n\
-    \ % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
-    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return miller_rabin<u64, MP_Mo,\
-    \ 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
+    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
+    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
+    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
+    \ return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32, MP_Na<u32>,\
+    \ 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64, MP_Mo, 2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
     \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
     \ math_internal::is_prime;\n#line 4 \"src/Math/StirlingNumber.hpp\"\n/**\n * @title\
     \ \u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)\n * @category \u6570\
@@ -106,8 +106,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_1_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 18:14:29+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_1_small_p_large_n.test.cpp
 layout: document

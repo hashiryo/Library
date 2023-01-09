@@ -8,16 +8,16 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: Berlekamp-Massey
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModIntExp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
@@ -25,27 +25,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -78,34 +78,34 @@ data:
     \ math_internal {\ntemplate <class Uint, class mod_pro_t, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
-    \ {args...}) {\n  Uint b= a % n, p= pow(md.set(b), d, md), i= s;\n  while (p=\
-    \ md.norm(p), (p != one && p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p)\
-    \ != n1 && i != s) return 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64\
-    \ n) {\n if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX)\
-    \ return miller_rabin<u32, MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return\
-    \ miller_rabin<u64, MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/Factors.hpp\"\nnamespace\
-    \ math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg, T *ed)\
-    \ {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n\
-    \   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n\
-    }\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr size_t size()\
-    \ const { return sz; }\n constexpr auto &operator[](int i) const { return dat[i];\
-    \ }\n constexpr auto *begin() const { return dat; }\n constexpr auto *end() const\
-    \ { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n};\nclass\
-    \ Factors: public ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class\
-    \ Uint, class mod_pro_t> static constexpr Uint rho(Uint n, Uint c) {\n  const\
-    \ mod_pro_t md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x, x),\
-    \ c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z=\
-    \ 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x=\
-    \ y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= gcd(md.get(q),\
-    \ n), k+= m)\n    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y,\
-    \ x));\n  }\n  if (g == n) do {\n    z= f(z), g= gcd(md.get(md.diff(z, x)), n);\n\
-    \   } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
-    \ n) {\n  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n <\
-    \ UINT_MAX ? rho<u32, MP_Na<u32>>(n, i + 1) : n < LLONG_MAX ? rho<u64, MP_Mo>(n,\
-    \ i + 1) : rho<u64, MP_Na<u64>>(n, i + 1); is_prime(n)) return n;\n  return 0;\n\
-    \ }\n constexpr void init(u64 n) {\n  for (u64 p= 2; p < 100 && p * p <= n; p++)\n\
+    \ {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d,\
+    \ md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n   \
+    \  if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if\
+    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
+    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64,\
+    \ MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 4 \"src/Math/Factors.hpp\"\nnamespace math_internal\
+    \ {\ntemplate <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int\
+    \ sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp=\
+    \ bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class\
+    \ T, size_t _Nm> struct ConstexprArray {\n constexpr size_t size() const { return\
+    \ sz; }\n constexpr auto &operator[](int i) const { return dat[i]; }\n constexpr\
+    \ auto *begin() const { return dat; }\n constexpr auto *end() const { return dat\
+    \ + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n};\nclass Factors: public\
+    \ ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class mod_pro_t>\
+    \ static constexpr Uint rho(Uint n, Uint c) {\n  const mod_pro_t md(n);\n  auto\
+    \ f= [&md, n, c](Uint x) { return md.plus(md.mul(x, x), c); };\n  const Uint m=\
+    \ 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z= 1, q= md.set(1), g= 1;\n\
+    \  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x= y, i= r; i--;) y= f(y);\n\
+    \   for (Uint k= 0; k < r && g == 1; g= gcd(md.get(q), n), k+= m)\n    for (z=\
+    \ y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y, x));\n  }\n  if\
+    \ (g == n) do {\n    z= f(z), g= gcd(md.get(md.diff(z, x)), n);\n   } while (g\
+    \ == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64 n) {\n\
+    \  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n < UINT_MAX\
+    \ ? rho<u32, MP_Na<u32>>(n, i + 1) : n < LLONG_MAX ? rho<u64, MP_Mo>(n, i + 1)\
+    \ : rho<u64, MP_Na<u64>>(n, i + 1); is_prime(n)) return n;\n  return 0;\n }\n\
+    \ constexpr void init(u64 n) {\n  for (u64 p= 2; p < 100 && p * p <= n; p++)\n\
     \   if (n % p == 0)\n    for (dat[sz++].first= p; n % p == 0;) n/= p, dat[sz -\
     \ 1].second++;\n  for (u64 p= 0; n > 1; dat[sz++].first= p)\n   for (p= find_prime_factor(n);\
     \ n % p == 0;) n/= p, dat[sz].second++;\n }\npublic:\n constexpr Factors()= default;\n\
@@ -169,8 +169,8 @@ data:
   - src/Math/ModIntExp.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
-  timestamp: '2022-12-31 19:53:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/NTL_1_D.test.cpp
   - test/yosupo/kth_root_mod.test.cpp

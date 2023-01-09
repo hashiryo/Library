@@ -17,16 +17,16 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
@@ -34,69 +34,69 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/convolution1000000007.test.cpp
     title: test/yosupo/convolution1000000007.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/convolution_large.test.cpp
     title: test/yosupo/convolution_large.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_2.test.cpp
     title: test/yosupo/stirling_2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.Poly.test.cpp
     title: test/yukicoder/215.Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/convolve.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -129,15 +129,15 @@ data:
     \ math_internal {\ntemplate <class Uint, class mod_pro_t, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
-    \ {args...}) {\n  Uint b= a % n, p= pow(md.set(b), d, md), i= s;\n  while (p=\
-    \ md.norm(p), (p != one && p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p)\
-    \ != n1 && i != s) return 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64\
-    \ n) {\n if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX)\
-    \ return miller_rabin<u32, MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return\
-    \ miller_rabin<u64, MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate\
-    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d,\
+    \ md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n   \
+    \  if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if\
+    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
+    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64,\
+    \ MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
+    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal\
@@ -313,23 +313,23 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/convolve.hpp\"\
-    \ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t> convolve(const\
-    \ std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t,\
-    \ LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM,\
-    \ 2>::bf;\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30,\
-    \ 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n  static constexpr double\
-    \ B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252,\
-    \ 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n  return std::round(std::pow(l,\
-    \ 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const int n= p.size(), m= q.size(),\
-    \ sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n if (std::min(n,\
-    \ m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(), p.end(), pp),\
-    \ std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n   for (int j= m;\
-    \ j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl= get_len(sz), l=\
-    \ get_len(std::max(n, m)), fl= f(l);\n  static constexpr size_t LM2= LM >> 3;\n\
-    \  static constexpr bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l + fl <\
-    \ sz && sz <= (rl >> 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n\
-    \   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t,\
+    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
+    \ n >> 16); }\n#line 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t, size_t\
+    \ LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p, const\
+    \ std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq= GlobalArray<mod_t,\
+    \ LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static constexpr int t= nttarr_cat<mod_t,\
+    \ LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n\
+    \  static constexpr double B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713,\
+    \ 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n \
+    \ return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const\
+    \ int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n\
+    \ if (std::min(n, m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(),\
+    \ p.end(), pp), std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n \
+    \  for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl=\
+    \ pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static constexpr size_t LM2= LM\
+    \ >> 3;\n  static constexpr bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l\
+    \ + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2,\
+    \ 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t,\
     \ LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM2, 16, 2>::bf;\n   const int\
     \ l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l, mm= (m + l - 1) / l, ss= nn + mm\
     \ - 1;\n   for (int i= 0, k= 0, s; k < n; ++i, k+= l) gt1[i].set(p.data() + k,\
@@ -366,8 +366,8 @@ data:
     \ !m) return std::vector<mod_t>();\n if (std::min(n, m) < TH) {\n  std::fill_n(rr,\
     \ sz, mod_t()), std::copy(p.begin(), p.end(), pp), std::copy(q.begin(), q.end(),\
     \ qq);\n  for (int i= n; i--;)\n   for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n\
-    \ } else {\n  const int rl= get_len(sz), l= get_len(std::max(n, m)), fl= f(l);\n\
-    \  static constexpr size_t LM2= LM >> 3;\n  static constexpr bool b= nttarr_cat<mod_t,\
+    \ } else {\n  const int rl= pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static\
+    \ constexpr size_t LM2= LM >> 3;\n  static constexpr bool b= nttarr_cat<mod_t,\
     \ LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1=\
     \ GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
     \   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
@@ -407,8 +407,8 @@ data:
   - src/FFT/bostan_mori.hpp
   - src/FFT/sequences.hpp
   - src/FFT/Polynomial.hpp
-  timestamp: '2023-01-01 04:58:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/0168.test.cpp
   - test/yukicoder/215.test.cpp

@@ -4,16 +4,16 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':question:'
@@ -33,9 +33,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
@@ -116,13 +116,13 @@ data:
     #line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
     \ Uint, class mod_pro_t, u64... args> constexpr bool miller_rabin(Uint n) {\n\
     \ const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...}) {\n  Uint b=\
-    \ a % n, p= pow(md.set(b), d, md), i= s;\n  while (p= md.norm(p), (p != one &&\
-    \ p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p) != n1 && i != s) return\
-    \ 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n\
-    \ % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
-    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return miller_rabin<u64, MP_Mo,\
-    \ 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
+    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
+    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
+    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
+    \ return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32, MP_Na<u32>,\
+    \ 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64, MP_Mo, 2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
     \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
     \ math_internal::is_prime;\n#line 5 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
@@ -256,57 +256,57 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/fps_inv.hpp\"\
-    \nnamespace math_internal {\ntemplate <u32 LM, class mod_t> inline void inv_base(const\
-    \ mod_t p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t=\
-    \ nttarr_cat<mod_t, LM>, TH= (int[]){64, 32, 64, 128, 128, 256}[t];\n if (n <=\
-    \ i) return;\n if (l < 0) l= n;\n assert(((n & -n) == n)), assert(i && ((i & -i)\
-    \ == i));\n if (const mod_t miv= -r[0]; n > TH) {\n  static constexpr int lnR=\
-    \ 2 + (!t), LM2= LM >> (lnR - 1), R= (1 << lnR) - 1;\n  const auto [m, skip]=\
-    \ [&]() {\n   if constexpr (!t) {\n    const int bn= __builtin_ctz(n) % 3;\n \
-    \   return bn ? make_pair(64, bn) : make_pair(32, 1);\n   } else return make_pair(TH,\
-    \ 1 + (__builtin_ctz(TH) & 1));\n  }();\n  for (int j; i < m; r[i++]*= miv)\n\
-    \   for (r[i]= mod_t(), j= min(i + 1, l); --j;) r[i]+= r[i - j] * p[j];\n  using\
-    \ GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n  using GNA2= GlobalNTTArray<mod_t, LM2,\
-    \ 2>;\n  auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
-    \ LM2, R, 2>::bf;\n  for (int ed= (1 << skip) - 1; i < n; ed= R) {\n   mod_t*\
-    \ rr= r;\n   const mod_t* pp= p;\n   const int s= i, e= s << 1, ss= (l - 1) /\
-    \ s;\n   for (int k= 0, j; i < n && k < ed; ++k, i+= s, pp+= s) {\n    if (j=\
-    \ min(e, l - k * s); j > 0) gt2[k].set(pp, 0, j), gt2[k].zeros(j, e), gt2[k].dft(0,\
-    \ e);\n    for (gt1[k].set(rr, 0, s), gt1[k].zeros(s, e), gt1[k].dft(0, e), GNA2::bf.mul(gt1[k],\
-    \ gt2[0], 0, e), j= min(k, ss) + 1; --j;) GNA1::bf.mul(gt1[k - j], gt2[j], 0,\
-    \ e), GNA2::bf.add(GNA1::bf, 0, e);\n    GNA2::bf.idft(0, e), GNA2::bf.zeros(0,\
-    \ s);\n    if constexpr (!is_nttfriend<mod_t, LM2>()) GNA2::bf.get(rr, s, e),\
-    \ GNA2::bf.set(rr, s, e);\n    for (GNA2::bf.dft(0, e), GNA2::bf.mul(gt1[0], 0,\
-    \ e), GNA2::bf.idft(0, e), GNA2::bf.get(rr, s, e), rr+= s, j= s; j--;) rr[j]=\
-    \ -rr[j];\n   }\n  }\n } else\n  for (int j; i < n; r[i++]*= miv)\n   for (r[i]=\
-    \ mod_t(), j= min(i + 1, l); --j;) r[i]+= r[i - j] * p[j];\n}\ntemplate <u32 lnR,\
-    \ class mod_t, u32 LM= 1 << 22> void inv_(const mod_t p[], int n, mod_t r[]) {\n\
-    \ static constexpr u32 R= (1 << lnR) - 1, LM2= LM >> (lnR - 1);\n using GNA1=\
-    \ GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
-    \ auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
-    \ LM2, R, 2>::bf;\n assert(n > 0), assert(p[0] != mod_t());\n const int m= get_len(n)\
-    \ >> lnR, m2= m << 1, ed= (n - 1) / m;\n inv_base<LM2>(p, m, r);\n for (int k=\
-    \ 0, l; k < ed; p+= m) {\n  for (gt2[k].set(p, 0, l= min(m2, n - m * k)), gt2[k].zeros(l,\
-    \ m2), gt2[k].dft(0, m2), gt1[k].set(r, 0, m), gt1[k].zeros(m, m2), gt1[k].dft(0,\
-    \ m2), GNA2::bf.mul(gt1[k], gt2[0], 0, m2), l= k; l--;) GNA1::bf.mul(gt1[l], gt2[k\
-    \ - l], 0, m2), GNA2::bf.add(GNA1::bf, 0, m2);\n  GNA2::bf.idft(0, m2), GNA2::bf.zeros(0,\
-    \ m);\n  if constexpr (!is_nttfriend<mod_t, LM2>()) GNA2::bf.get(r, m, m2), GNA2::bf.set(r,\
-    \ m, m2);\n  for (GNA2::bf.dft(0, m2), GNA2::bf.mul(gt1[0], 0, m2), GNA2::bf.idft(0,\
-    \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
-    \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
-    \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){102, 60, 178,\
-    \ 245, 370, 480}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
-    \ LM, 2>::bf;\n const int n= p.size();\n copy_n(p.begin(), n, pp), assert(n >\
-    \ 0), assert(p[0] != mod_t());\n if (const mod_t miv= -(r[0]= mod_t(1) / p[0]);\
-    \ n > TH) {\n  const int l= get_len(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3),\
-    \ bl= __builtin_ctz(l1);\n  int a= 4;\n  if constexpr (!t) a= bl < 7 ? k > 5 ?\
-    \ 1 : k > 4 ? 3 : k > 3 ? 4 : 2 : k & 1 ? 3 : 4;\n  else if constexpr (t < 2)\
-    \ a= bl & 1 ? k > 5 ? 1 : bl < 8 ? 3 : bl < 12 ? k > 2 || k == 1 ? 3 : 4 : k &\
-    \ 1 ? 3 : 4 : k > 5 ? bl > 17 && k < 7 ? 4 : 2 : k > 4 ? 3 : k > 3 ? 4 : bl <\
-    \ 7 ? k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 : 4;\n  else if constexpr (t < 3) a= bl\
-    \ & 1 ? k > 5 ? 1 : bl < 8 ? k > 3 || k < 2 ? 3 : 2 : k & 1 ? 3 : 4 : k > 5 ?\
-    \ bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2 : k & 1 ? 3 : 4;\n  else if constexpr\
+    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
+    \ n >> 16); }\n#line 4 \"src/FFT/fps_inv.hpp\"\nnamespace math_internal {\ntemplate\
+    \ <u32 LM, class mod_t> inline void inv_base(const mod_t p[], int n, mod_t r[],\
+    \ int i= 1, int l= -1) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH=\
+    \ (int[]){64, 32, 64, 128, 128, 256}[t];\n if (n <= i) return;\n if (l < 0) l=\
+    \ n;\n assert(((n & -n) == n)), assert(i && ((i & -i) == i));\n if (const mod_t\
+    \ miv= -r[0]; n > TH) {\n  static constexpr int lnR= 2 + (!t), LM2= LM >> (lnR\
+    \ - 1), R= (1 << lnR) - 1;\n  const auto [m, skip]= [&]() {\n   if constexpr (!t)\
+    \ {\n    const int bn= __builtin_ctz(n) % 3;\n    return bn ? make_pair(64, bn)\
+    \ : make_pair(32, 1);\n   } else return make_pair(TH, 1 + (__builtin_ctz(TH) &\
+    \ 1));\n  }();\n  for (int j; i < m; r[i++]*= miv)\n   for (r[i]= mod_t(), j=\
+    \ min(i + 1, l); --j;) r[i]+= r[i - j] * p[j];\n  using GNA1= GlobalNTTArray<mod_t,\
+    \ LM2, 1>;\n  using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n  auto gt1= GlobalNTTArray2D<mod_t,\
+    \ LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM2, R, 2>::bf;\n  for (int ed=\
+    \ (1 << skip) - 1; i < n; ed= R) {\n   mod_t* rr= r;\n   const mod_t* pp= p;\n\
+    \   const int s= i, e= s << 1, ss= (l - 1) / s;\n   for (int k= 0, j; i < n &&\
+    \ k < ed; ++k, i+= s, pp+= s) {\n    if (j= min(e, l - k * s); j > 0) gt2[k].set(pp,\
+    \ 0, j), gt2[k].zeros(j, e), gt2[k].dft(0, e);\n    for (gt1[k].set(rr, 0, s),\
+    \ gt1[k].zeros(s, e), gt1[k].dft(0, e), GNA2::bf.mul(gt1[k], gt2[0], 0, e), j=\
+    \ min(k, ss) + 1; --j;) GNA1::bf.mul(gt1[k - j], gt2[j], 0, e), GNA2::bf.add(GNA1::bf,\
+    \ 0, e);\n    GNA2::bf.idft(0, e), GNA2::bf.zeros(0, s);\n    if constexpr (!is_nttfriend<mod_t,\
+    \ LM2>()) GNA2::bf.get(rr, s, e), GNA2::bf.set(rr, s, e);\n    for (GNA2::bf.dft(0,\
+    \ e), GNA2::bf.mul(gt1[0], 0, e), GNA2::bf.idft(0, e), GNA2::bf.get(rr, s, e),\
+    \ rr+= s, j= s; j--;) rr[j]= -rr[j];\n   }\n  }\n } else\n  for (int j; i < n;\
+    \ r[i++]*= miv)\n   for (r[i]= mod_t(), j= min(i + 1, l); --j;) r[i]+= r[i - j]\
+    \ * p[j];\n}\ntemplate <u32 lnR, class mod_t, u32 LM= 1 << 22> void inv_(const\
+    \ mod_t p[], int n, mod_t r[]) {\n static constexpr u32 R= (1 << lnR) - 1, LM2=\
+    \ LM >> (lnR - 1);\n using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2=\
+    \ GlobalNTTArray<mod_t, LM2, 2>;\n auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf,\
+    \ gt2= GlobalNTTArray2D<mod_t, LM2, R, 2>::bf;\n assert(n > 0), assert(p[0] !=\
+    \ mod_t());\n const int m= pw2(n) >> lnR, m2= m << 1, ed= (n - 1) / m;\n inv_base<LM2>(p,\
+    \ m, r);\n for (int k= 0, l; k < ed; p+= m) {\n  for (gt2[k].set(p, 0, l= min(m2,\
+    \ n - m * k)), gt2[k].zeros(l, m2), gt2[k].dft(0, m2), gt1[k].set(r, 0, m), gt1[k].zeros(m,\
+    \ m2), gt1[k].dft(0, m2), GNA2::bf.mul(gt1[k], gt2[0], 0, m2), l= k; l--;) GNA1::bf.mul(gt1[l],\
+    \ gt2[k - l], 0, m2), GNA2::bf.add(GNA1::bf, 0, m2);\n  GNA2::bf.idft(0, m2),\
+    \ GNA2::bf.zeros(0, m);\n  if constexpr (!is_nttfriend<mod_t, LM2>()) GNA2::bf.get(r,\
+    \ m, m2), GNA2::bf.set(r, m, m2);\n  for (GNA2::bf.dft(0, m2), GNA2::bf.mul(gt1[0],\
+    \ 0, m2), GNA2::bf.idft(0, m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))),\
+    \ r+= m; l--;) r[l]= -r[l];\n }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t>\
+    \ inv(const vector<mod_t>& p) {\n static constexpr int t= nttarr_cat<mod_t, LM>,\
+    \ TH= (int[]){102, 60, 178, 245, 370, 480}[t];\n mod_t *pp= GlobalArray<mod_t,\
+    \ LM, 1>::bf, *r= GlobalArray<mod_t, LM, 2>::bf;\n const int n= p.size();\n copy_n(p.begin(),\
+    \ n, pp), assert(n > 0), assert(p[0] != mod_t());\n if (const mod_t miv= -(r[0]=\
+    \ mod_t(1) / p[0]); n > TH) {\n  const int l= pw2(n), l1= l >> 1, k= (n - l1 -\
+    \ 1) / (l1 >> 3), bl= __builtin_ctz(l1);\n  int a= 4;\n  if constexpr (!t) a=\
+    \ bl < 7 ? k > 5 ? 1 : k > 4 ? 3 : k > 3 ? 4 : 2 : k & 1 ? 3 : 4;\n  else if constexpr\
+    \ (t < 2) a= bl & 1 ? k > 5 ? 1 : bl < 8 ? 3 : bl < 12 ? k > 2 || k == 1 ? 3 :\
+    \ 4 : k & 1 ? 3 : 4 : k > 5 ? bl > 17 && k < 7 ? 4 : 2 : k > 4 ? 3 : k > 3 ? 4\
+    \ : bl < 7 ? k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 : 4;\n  else if constexpr (t <\
+    \ 3) a= bl & 1 ? k > 5 ? 1 : bl < 8 ? k > 3 || k < 2 ? 3 : 2 : k & 1 ? 3 : 4 :\
+    \ k > 5 ? bl > 13 && k < 7 ? 4 : 2 : k == 3 ? 2 : k & 1 ? 3 : 4;\n  else if constexpr\
     \ (t < 5) a= bl & 1 ? k > 5 ? 1 : k == 1 ? 3 : k < 3 ? 4 : bl > 12 && k == 4 ?\
     \ 4 : 3 : k > 5 ? bl > 13 && k < 7 ? 4 : 2 : k > 4 ? 3 : k > 3 ? 4 : bl < 9 ?\
     \ k > 1 ? 2 : k ? 3 : 4 : k > 2 ? 2 : 4;\n  else a= bl & 1 ? k > 5 ? 1 : bl <\
@@ -316,96 +316,91 @@ data:
     \ mod_t, LM>)(pp, n, r);\n } else\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
     \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
     \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
-    src/FFT/fps_div.hpp\"\n\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n\
+    src/FFT/fps_div.hpp\"\n/**\n * @title \u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div\n\
     \ * @category FFT\n */\n\n// BEGIN CUT HERE\ntemplate <class mod_t, std::size_t\
-    \ _Nm = 1 << 22>\nstd::vector<mod_t> div(const std::vector<mod_t> &p,\n      \
-    \                 const std::vector<mod_t> &q) {\n  using GAp = GlobalArray<mod_t,\
-    \ _Nm, 0>;\n  using GAq = GlobalArray<mod_t, _Nm, 1>;\n  using GAr = GlobalArray<mod_t,\
-    \ _Nm, 2>;\n  using GA = GlobalArray<mod_t, _Nm, 3>;\n  static constexpr std::size_t\
-    \ _Nm2 = _Nm * 2 / 15;\n  using GNA1 = GlobalNTTArray<mod_t, _Nm2, 1>;\n  using\
-    \ GNA2 = GlobalNTTArray<mod_t, _Nm2, 2>;\n  using GNA3 = GlobalNTTArray<mod_t,\
-    \ _Nm2, 3>;\n  using GNA2D1 = GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n  using GNA2D2\
-    \ = GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n  static constexpr int TH = 128 <<\
-    \ (!is_nttfriend<mod_t, _Nm2>());\n  static constexpr int TH2 = 1024 << (!is_nttfriend<mod_t,\
-    \ _Nm2>());\n  static constexpr int A = 7;\n  static constexpr int B = 29;\n \
-    \ const int n = p.size(), len = get_len(n), R = len < TH2 ? 8 : 16;\n  const int\
-    \ l = q.size(), lnR = __builtin_ctz(R);\n  std::copy(p.begin(), p.end(), GAp::bf);\n\
-    \  std::copy(q.begin(), q.end(), GAq::bf);\n  const mod_t iv0 = mod_t(1) / GAq::bf[0];\n\
-    \  if (l < A * __builtin_ctz(len) + B || TH >= n) {\n    for (int i = 0; i < n;\
-    \ GAp::bf[i++] *= iv0)\n      for (int j = std::min(i + 1, l); --j;)\n       \
-    \ GAp::bf[i] -= GAp::bf[i - j] * GAq::bf[j];\n    return std::vector<mod_t>(GAp::bf,\
-    \ GAp::bf + n);\n  }\n  int m = len, i = 0;\n  while (m > TH) m >>= lnR;\n  for\
-    \ (std::copy_n(GAp::bf, m, GAr::bf); i < m; GAr::bf[i++] *= iv0)\n    for (int\
-    \ j = std::min(i + 1, l); --j;)\n      GAr::bf[i] -= GAr::bf[i - j] * GAq::bf[j];\n\
-    \  if (l < n) std::fill(GAq::bf + l, GAq::bf + n, mod_t(0));\n  for (GA::bf[0]\
-    \ = iv0, i = 1; m < n; i = m, m <<= lnR) {\n    int m2 = m << 1, ed = std::min(R,\
-    \ (n + m - 1) / m), k = 1, j, mm = m;\n    inv_base<_Nm2>(GAq::bf, m, GA::bf,\
-    \ i);\n    GNA1::bf.set(GA::bf, 0, m), GNA1::bf.zeros(m, m2), GNA1::bf.dft(0,\
-    \ m2);\n    mod_t *bfk = GAr::bf, *qbfk = GAq::bf, *pbfk = GAp::bf;\n    GNA2D2::bf[0].set(qbfk,\
-    \ 0, m), GNA2D2::bf[0].zeros(m, m2);\n    for (GNA2D2::bf[0].dft(0, m2); k < ed;\
-    \ mm = std::min(m, n - m * ++k)) {\n      GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k\
-    \ - 1].zeros(m, m2);\n      GNA2D1::bf[k - 1].dft(0, m2);\n      GNA3::bf.set(qbfk\
-    \ += m, 0, m), GNA3::bf.zeros(m, m2), GNA3::bf.dft(0, m2);\n      GNA2D2::bf[k].add(GNA3::bf,\
-    \ GNA2D2::bf[0], 0, m);\n      GNA2D2::bf[k].dif(GNA3::bf, GNA2D2::bf[0], m, m2),\
-    \ GNA2::bf.zeros(0, m2);\n      if (k + 1 < ed) GNA2D2::bf[0].subst(GNA3::bf,\
-    \ 0, m2);\n      for (j = k; j--;)\n        GNA3::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k\
-    \ - j], 0, m2),\n            GNA2::bf.add(GNA3::bf, 0, m2);\n      GNA2::bf.idft(0,\
-    \ m2), GNA2::bf.zeros(m, m2), pbfk += m;\n      for (GNA2::bf.get(bfk += m, 0,\
-    \ mm), j = mm; j--;) bfk[j] -= pbfk[j];\n      GNA2::bf.set(bfk, 0, mm);\n   \
-    \   GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf, 0, m2), GNA2::bf.idft(0, m2);\n\
-    \      for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm] = -bfk[mm];\n    }\n  }\n\
-    \  return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n#line 4 \"src/FFT/convolve.hpp\"\
-    \ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t> convolve(const\
-    \ std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t,\
-    \ LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM,\
-    \ 2>::bf;\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30,\
-    \ 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n  static constexpr double\
-    \ B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252,\
-    \ 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n  return std::round(std::pow(l,\
+    \ _Nm= 1 << 22> std::vector<mod_t> div(const std::vector<mod_t> &p, const std::vector<mod_t>\
+    \ &q) {\n using GAp= GlobalArray<mod_t, _Nm, 0>;\n using GAq= GlobalArray<mod_t,\
+    \ _Nm, 1>;\n using GAr= GlobalArray<mod_t, _Nm, 2>;\n using GA= GlobalArray<mod_t,\
+    \ _Nm, 3>;\n static constexpr std::size_t _Nm2= _Nm * 2 / 15;\n using GNA1= GlobalNTTArray<mod_t,\
+    \ _Nm2, 1>;\n using GNA2= GlobalNTTArray<mod_t, _Nm2, 2>;\n using GNA3= GlobalNTTArray<mod_t,\
+    \ _Nm2, 3>;\n using GNA2D1= GlobalNTTArray2D<mod_t, _Nm2, 16, 1>;\n using GNA2D2=\
+    \ GlobalNTTArray2D<mod_t, _Nm2, 16, 2>;\n static constexpr int TH= 128 << (!is_nttfriend<mod_t,\
+    \ _Nm2>());\n static constexpr int TH2= 1024 << (!is_nttfriend<mod_t, _Nm2>());\n\
+    \ static constexpr int A= 7;\n static constexpr int B= 29;\n const int n= p.size(),\
+    \ len= pw2(n), R= len < TH2 ? 8 : 16;\n const int l= q.size(), lnR= __builtin_ctz(R);\n\
+    \ std::copy(p.begin(), p.end(), GAp::bf);\n std::copy(q.begin(), q.end(), GAq::bf);\n\
+    \ const mod_t iv0= mod_t(1) / GAq::bf[0];\n if (l < A * __builtin_ctz(len) + B\
+    \ || TH >= n) {\n  for (int i= 0; i < n; GAp::bf[i++]*= iv0)\n   for (int j= std::min(i\
+    \ + 1, l); --j;) GAp::bf[i]-= GAp::bf[i - j] * GAq::bf[j];\n  return std::vector<mod_t>(GAp::bf,\
+    \ GAp::bf + n);\n }\n int m= len, i= 0;\n while (m > TH) m>>= lnR;\n for (std::copy_n(GAp::bf,\
+    \ m, GAr::bf); i < m; GAr::bf[i++]*= iv0)\n  for (int j= std::min(i + 1, l); --j;)\
+    \ GAr::bf[i]-= GAr::bf[i - j] * GAq::bf[j];\n if (l < n) std::fill(GAq::bf + l,\
+    \ GAq::bf + n, mod_t(0));\n for (GA::bf[0]= iv0, i= 1; m < n; i= m, m<<= lnR)\
+    \ {\n  int m2= m << 1, ed= std::min(R, (n + m - 1) / m), k= 1, j, mm= m;\n  inv_base<_Nm2>(GAq::bf,\
+    \ m, GA::bf, i);\n  GNA1::bf.set(GA::bf, 0, m), GNA1::bf.zeros(m, m2), GNA1::bf.dft(0,\
+    \ m2);\n  mod_t *bfk= GAr::bf, *qbfk= GAq::bf, *pbfk= GAp::bf;\n  GNA2D2::bf[0].set(qbfk,\
+    \ 0, m), GNA2D2::bf[0].zeros(m, m2);\n  for (GNA2D2::bf[0].dft(0, m2); k < ed;\
+    \ mm= std::min(m, n - m * ++k)) {\n   GNA2D1::bf[k - 1].set(bfk, 0, m), GNA2D1::bf[k\
+    \ - 1].zeros(m, m2);\n   GNA2D1::bf[k - 1].dft(0, m2);\n   GNA3::bf.set(qbfk+=\
+    \ m, 0, m), GNA3::bf.zeros(m, m2), GNA3::bf.dft(0, m2);\n   GNA2D2::bf[k].add(GNA3::bf,\
+    \ GNA2D2::bf[0], 0, m);\n   GNA2D2::bf[k].dif(GNA3::bf, GNA2D2::bf[0], m, m2),\
+    \ GNA2::bf.zeros(0, m2);\n   if (k + 1 < ed) GNA2D2::bf[0].subst(GNA3::bf, 0,\
+    \ m2);\n   for (j= k; j--;) GNA3::bf.mul(GNA2D1::bf[j], GNA2D2::bf[k - j], 0,\
+    \ m2), GNA2::bf.add(GNA3::bf, 0, m2);\n   GNA2::bf.idft(0, m2), GNA2::bf.zeros(m,\
+    \ m2), pbfk+= m;\n   for (GNA2::bf.get(bfk+= m, 0, mm), j= mm; j--;) bfk[j]-=\
+    \ pbfk[j];\n   GNA2::bf.set(bfk, 0, mm);\n   GNA2::bf.dft(0, m2), GNA2::bf.mul(GNA1::bf,\
+    \ 0, m2), GNA2::bf.idft(0, m2);\n   for (GNA2::bf.get(bfk, 0, mm); mm--;) bfk[mm]=\
+    \ -bfk[mm];\n  }\n }\n return std::vector<mod_t>(GAr::bf, GAr::bf + n);\n}\n#line\
+    \ 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t>\
+    \ convolve(const std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t\
+    \ *pp= GlobalArray<mod_t, LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr=\
+    \ GlobalArray<mod_t, LM, 2>::bf;\n static constexpr int t= nttarr_cat<mod_t, LM>,\
+    \ TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n  static\
+    \ constexpr double B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t],\
+    \ (double[]){8.252, 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n  return std::round(std::pow(l,\
     \ 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const int n= p.size(), m= q.size(),\
     \ sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n if (std::min(n,\
     \ m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(), p.end(), pp),\
     \ std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n   for (int j= m;\
-    \ j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl= get_len(sz), l=\
-    \ get_len(std::max(n, m)), fl= f(l);\n  static constexpr size_t LM2= LM >> 3;\n\
-    \  static constexpr bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l + fl <\
-    \ sz && sz <= (rl >> 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n\
-    \   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t,\
-    \ LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM2, 16, 2>::bf;\n   const int\
-    \ l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l, mm= (m + l - 1) / l, ss= nn + mm\
-    \ - 1;\n   for (int i= 0, k= 0, s; k < n; ++i, k+= l) gt1[i].set(p.data() + k,\
-    \ 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2), gt1[i].dft(0, l2);\n   if (&p\
-    \ != &q)\n    for (int i= 0, k= 0, s; k < m; ++i, k+= l) gt2[i].set(q.data() +\
-    \ k, 0, s= std::min(l, m - k)), gt2[i].zeros(s, l2), gt2[i].dft(0, l2);\n   else\n\
-    \    for (int i= nn; i--;) gt2[i].subst(gt1[i], 0, l2);\n   GNA2::bf.mul(gt1[0],\
-    \ gt2[0], 0, l2), GNA2::bf.idft(0, l2), GNA2::bf.get(rr, 0, l2);\n   for (int\
-    \ i= 1, k= l, j, ed; i < ss; ++i, k+= l) {\n    for (j= std::max(0, i - nn + 1),\
-    \ ed= std::min(mm - 1, i), GNA2::bf.mul(gt1[i - ed], gt2[ed], 0, l2); j < ed;\
-    \ ++j) GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2), GNA2::bf.add(GNA1::bf, 0, l2);\n\
-    \    for (GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j= std::min(l, sz - k)); j--;)\
-    \ rr[k + j]+= pp[j];\n    if (l < sz - k) GNA2::bf.get(rr + k, l, std::min(l2,\
-    \ sz - k));\n   }\n  } else {\n   using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n\
-    \   using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n   const int len= sz <= l + fl\
-    \ ? l : rl;\n   if (GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n, len), GNA1::bf.dft(0,\
-    \ len); &p != &q) GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m, len), GNA2::bf.dft(0,\
-    \ len), GNA1::bf.mul(GNA2::bf, 0, len);\n   else GNA1::bf.mul(GNA1::bf, 0, len);\n\
-    \   if (GNA1::bf.idft(0, len), GNA1::bf.get(rr, 0, std::min(sz, len)); len < sz)\
-    \ {\n    std::copy(p.begin() + len - m + 1, p.end(), pp + len - m + 1), std::copy(q.begin()\
-    \ + len - n + 1, q.end(), qq + len - n + 1);\n    for (int i= len, j; i < sz;\
-    \ rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(), j= i - m + 1; j < n; ++j)\
-    \ rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return std::vector(rr, rr + sz);\n\
-    }\n#line 5 \"src/FFT/Polynomial.hpp\"\ntemplate <class mod_t, std::size_t LM=\
-    \ 1 << 22> class Polynomial: public std::vector<mod_t> {\n using Poly= Polynomial;\n\
-    \ struct Inde;\n struct XP_plus_C {  // x^p+c\n  Inde x;\n  mod_t c;\n  XP_plus_C(const\
-    \ Inde &x_): x(x_), c(Z) {}\n  XP_plus_C(int p_, mod_t c_): x(p_), c(c_) {}\n\
-    \ };\n struct Inde {  // indeterminate\n  int p_;\n  Inde(int p): p_(p) {}\n \
-    \ Inde(): Inde(1) {}\n  Inde operator^(int p) const { return Inde(p_ * p); }\n\
-    \  Inde operator*(const Inde &rhs) const { return Inde(p_ + rhs.p_); }\n  int\
-    \ pow() const { return p_; }\n  XP_plus_C operator+(mod_t c) { return XP_plus_C(p_,\
-    \ c); }\n  XP_plus_C operator-(mod_t c) { return XP_plus_C(p_, -c); }\n };\n using\
-    \ GNA1= GlobalNTTArray<mod_t, LM, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM,\
-    \ 2>;\n using GA= GlobalArray<mod_t, LM, 0>;\n using GAp= GlobalArray<mod_t, LM,\
-    \ 1>;\n using GAq= GlobalArray<mod_t, LM, 2>;\n using GA3= GlobalArray<mod_t,\
+    \ j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl= pw2(sz), l= pw2(std::max(n,\
+    \ m)), fl= f(l);\n  static constexpr size_t LM2= LM >> 3;\n  static constexpr\
+    \ bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >>\
+    \ 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t,\
+    \ LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    \ LM2, 16, 2>::bf;\n   const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l,\
+    \ mm= (m + l - 1) / l, ss= nn + mm - 1;\n   for (int i= 0, k= 0, s; k < n; ++i,\
+    \ k+= l) gt1[i].set(p.data() + k, 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2),\
+    \ gt1[i].dft(0, l2);\n   if (&p != &q)\n    for (int i= 0, k= 0, s; k < m; ++i,\
+    \ k+= l) gt2[i].set(q.data() + k, 0, s= std::min(l, m - k)), gt2[i].zeros(s, l2),\
+    \ gt2[i].dft(0, l2);\n   else\n    for (int i= nn; i--;) gt2[i].subst(gt1[i],\
+    \ 0, l2);\n   GNA2::bf.mul(gt1[0], gt2[0], 0, l2), GNA2::bf.idft(0, l2), GNA2::bf.get(rr,\
+    \ 0, l2);\n   for (int i= 1, k= l, j, ed; i < ss; ++i, k+= l) {\n    for (j= std::max(0,\
+    \ i - nn + 1), ed= std::min(mm - 1, i), GNA2::bf.mul(gt1[i - ed], gt2[ed], 0,\
+    \ l2); j < ed; ++j) GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2), GNA2::bf.add(GNA1::bf,\
+    \ 0, l2);\n    for (GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j= std::min(l, sz\
+    \ - k)); j--;) rr[k + j]+= pp[j];\n    if (l < sz - k) GNA2::bf.get(rr + k, l,\
+    \ std::min(l2, sz - k));\n   }\n  } else {\n   using GNA1= GlobalNTTArray<mod_t,\
+    \ LM, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n   const int len= sz\
+    \ <= l + fl ? l : rl;\n   if (GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
+    \ len), GNA1::bf.dft(0, len); &p != &q) GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m,\
+    \ len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n   else GNA1::bf.mul(GNA1::bf,\
+    \ 0, len);\n   if (GNA1::bf.idft(0, len), GNA1::bf.get(rr, 0, std::min(sz, len));\
+    \ len < sz) {\n    std::copy(p.begin() + len - m + 1, p.end(), pp + len - m +\
+    \ 1), std::copy(q.begin() + len - n + 1, q.end(), qq + len - n + 1);\n    for\
+    \ (int i= len, j; i < sz; rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(),\
+    \ j= i - m + 1; j < n; ++j) rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return\
+    \ std::vector(rr, rr + sz);\n}\n#line 5 \"src/FFT/Polynomial.hpp\"\ntemplate <class\
+    \ mod_t, std::size_t LM= 1 << 22> class Polynomial: public std::vector<mod_t>\
+    \ {\n using Poly= Polynomial;\n struct Inde;\n struct XP_plus_C {  // x^p+c\n\
+    \  Inde x;\n  mod_t c;\n  XP_plus_C(const Inde &x_): x(x_), c(Z) {}\n  XP_plus_C(int\
+    \ p_, mod_t c_): x(p_), c(c_) {}\n };\n struct Inde {  // indeterminate\n  int\
+    \ p_;\n  Inde(int p): p_(p) {}\n  Inde(): Inde(1) {}\n  Inde operator^(int p)\
+    \ const { return Inde(p_ * p); }\n  Inde operator*(const Inde &rhs) const { return\
+    \ Inde(p_ + rhs.p_); }\n  int pow() const { return p_; }\n  XP_plus_C operator+(mod_t\
+    \ c) { return XP_plus_C(p_, c); }\n  XP_plus_C operator-(mod_t c) { return XP_plus_C(p_,\
+    \ -c); }\n };\n using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n using GNA2= GlobalNTTArray<mod_t,\
+    \ LM, 2>;\n using GA= GlobalArray<mod_t, LM, 0>;\n using GAp= GlobalArray<mod_t,\
+    \ LM, 1>;\n using GAq= GlobalArray<mod_t, LM, 2>;\n using GA3= GlobalArray<mod_t,\
     \ LM, 3>;\n static inline const mod_t Z= 0;\n static constexpr int A= 8;\n static\
     \ constexpr int B= 42;\n std::pair<Poly, Poly> quorem_na(const Poly &q) const\
     \ {\n  int n= deg(), m= q.deg(), qsz= n - m + 1, i= qsz, j;\n  std::copy_n(this->begin(),\
@@ -420,7 +415,7 @@ data:
     \ Poly> quorem_ntt(const Poly &q) const {\n  const int n= deg(), m= q.deg(), qsz=\
     \ n - m + 1;\n  auto qu= quo(q);\n  std::copy(qu.begin(), qu.end(), GA::bf);\n\
     \  std::copy_n(this->begin(), n + 1, GAp::bf);\n  std::copy_n(q.begin(), m + 1,\
-    \ GAq::bf);\n  const int len= get_len(m), mask= len - 1;\n  if (len > qsz) std::fill_n(GA::bf\
+    \ GAq::bf);\n  const int len= pw2(m), mask= len - 1;\n  if (len > qsz) std::fill_n(GA::bf\
     \ + qsz, len - qsz, Z);\n  if (len > m + 1) std::fill_n(GAq::bf + m + 1, len -\
     \ m - 1, Z);\n  for (int i= qsz; i-- > len;) GA::bf[i & mask]+= GA::bf[i];\n \
     \ for (int i= n; i >= len; i--) GAp::bf[i & mask]+= GAp::bf[i];\n  if (GNA1::bf.set(GA::bf,\
@@ -444,10 +439,10 @@ data:
     \ operator+(const Poly &r) const { return Poly(*this)+= r; }\n Poly operator-(const\
     \ Poly &r) const { return Poly(*this)-= r; }\n Poly operator*(const Poly &r) const\
     \ { return convolve<mod_t, LM>(*this, r); }\n Poly operator/(const Poly &r) const\
-    \ {\n  const int m= r.deg(), qsz= deg() - m + 1, ln= __builtin_ctz(get_len(qsz));\n\
+    \ {\n  const int m= r.deg(), qsz= deg() - m + 1, ln= __builtin_ctz(pw2(qsz));\n\
     \  assert(m >= 0);\n  if (qsz <= 0) return Poly{Z};\n  return m + 3 < A * ln +\
     \ B || qsz <= 64 ? quorem_na(r).first : quo(r);\n }\n std::pair<Poly, Poly> quorem(const\
-    \ Poly &r) const {\n  const int n= deg(), m= r.deg(), qsz= n - m + 1, ln= __builtin_ctz(get_len(qsz));\n\
+    \ Poly &r) const {\n  const int n= deg(), m= r.deg(), qsz= n - m + 1, ln= __builtin_ctz(pw2(qsz));\n\
     \  assert(m >= 0);\n  if (qsz <= 0) return {Poly{Z}, Poly(this->begin(), this->begin()\
     \ + n + 1)};\n  return m < A * ln + B || qsz <= 64 ? quorem_na(r) : quorem_ntt(r);\n\
     \ }\n Poly operator%(const Poly &r) const { return quorem(r).second; }\n Poly\
@@ -561,8 +556,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2023-01-09 03:25:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp
 layout: document

@@ -18,12 +18,12 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/multivariate_convolution.test.cpp
     title: test/yosupo/multivariate_convolution.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/MultiVariateConvolution.hpp\"\n#include <bits/stdc++.h>\n\
@@ -56,15 +56,15 @@ data:
     \ math_internal {\ntemplate <class Uint, class mod_pro_t, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
-    \ {args...}) {\n  Uint b= a % n, p= pow(md.set(b), d, md), i= s;\n  while (p=\
-    \ md.norm(p), (p != one && p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p)\
-    \ != n1 && i != s) return 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64\
-    \ n) {\n if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX)\
-    \ return miller_rabin<u32, MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return\
-    \ miller_rabin<u64, MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate\
-    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d,\
+    \ md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n   \
+    \  if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if\
+    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
+    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64,\
+    \ MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
+    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal\
@@ -240,33 +240,33 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/MultiVariateConvolution.hpp\"\
-    \nclass MultiVariateConvolution {\n const int n, k, m;\n std::vector<int> chi;\n\
-    public:\n MultiVariateConvolution(): MultiVariateConvolution(std::vector<int>{})\
-    \ {}\n MultiVariateConvolution(const std::vector<int> &dim): n(std::accumulate(dim.begin(),\
-    \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(get_len(n) * 2), chi(n,\
-    \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
-    \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
-    \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
-    \ mod_t, std::size_t LM= 1 << 19, std::size_t LM2= 18> std::vector<mod_t> convolve(const\
-    \ std::vector<mod_t> &f, const std::vector<mod_t> &g) const {\n  assert((int)f.size()\
-    \ == n), assert((int)g.size() == n);\n  if (!k) return {f[0] * g[0]};\n  mod_t\
-    \ *r= GlobalArray<mod_t, LM, 0>::bf;\n  using GNA= GlobalNTTArray<mod_t, LM, 0>;\n\
-    \  auto gt0= GlobalNTTArray2D<mod_t, LM, LM2, 0>::bf, gt1= GlobalNTTArray2D<mod_t,\
-    \ LM, LM2, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM, LM2, 2>::bf;\n  for (int i=\
-    \ k; i--;) gt0[i].zeros(0, m);\n  for (int i= k; i--;) gt1[i].zeros(0, m);\n \
-    \ for (int i= k; i--;) gt2[i].zeros(0, m);\n  for (int i= n; i--;) gt1[chi[i]].set(i,\
-    \ f[i]);\n  for (int i= n; i--;) gt2[chi[i]].set(i, g[i]);\n  for (int i= k; i--;)\
-    \ gt1[i].dft(0, m);\n  for (int i= k; i--;) gt2[i].dft(0, m);\n  for (int i= k,\
-    \ j, l; i--;)\n   for (j= k; j--;) GNA::bf.mul(gt1[i], gt2[j], 0, m), gt0[l-=\
-    \ k & -((l= i + j) >= k)].add(GNA::bf, 0, m);\n  for (int i= k; i--;) gt0[i].idft(0,\
-    \ m);\n  for (int i= n; i--;) r[i]= gt0[chi[i]].get(i);\n  return std::vector(r,\
-    \ r + n);\n }\n};\n"
+    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
+    \ n >> 16); }\n#line 4 \"src/FFT/MultiVariateConvolution.hpp\"\nclass MultiVariateConvolution\
+    \ {\n const int n, k, m;\n std::vector<int> chi;\npublic:\n MultiVariateConvolution():\
+    \ MultiVariateConvolution(std::vector<int>{}) {}\n MultiVariateConvolution(const\
+    \ std::vector<int> &dim): n(std::accumulate(dim.begin(), dim.end(), 1, std::multiplies<int>())),\
+    \ k(dim.size()), m(pw2(n) * 2), chi(n, 0) {\n  for (int i= n; i--;)\n   for (int\
+    \ den= 1, j= 0; j < k; ++j) chi[i]+= i / (den*= dim[j]);\n  if (k)\n   for (int\
+    \ i= n; i--;) chi[i]%= k;\n }\n int size() const { return n; }\n int dim() const\
+    \ { return k; }\n template <typename mod_t, std::size_t LM= 1 << 19, std::size_t\
+    \ LM2= 18> std::vector<mod_t> convolve(const std::vector<mod_t> &f, const std::vector<mod_t>\
+    \ &g) const {\n  assert((int)f.size() == n), assert((int)g.size() == n);\n  if\
+    \ (!k) return {f[0] * g[0]};\n  mod_t *r= GlobalArray<mod_t, LM, 0>::bf;\n  using\
+    \ GNA= GlobalNTTArray<mod_t, LM, 0>;\n  auto gt0= GlobalNTTArray2D<mod_t, LM,\
+    \ LM2, 0>::bf, gt1= GlobalNTTArray2D<mod_t, LM, LM2, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    \ LM, LM2, 2>::bf;\n  for (int i= k; i--;) gt0[i].zeros(0, m);\n  for (int i=\
+    \ k; i--;) gt1[i].zeros(0, m);\n  for (int i= k; i--;) gt2[i].zeros(0, m);\n \
+    \ for (int i= n; i--;) gt1[chi[i]].set(i, f[i]);\n  for (int i= n; i--;) gt2[chi[i]].set(i,\
+    \ g[i]);\n  for (int i= k; i--;) gt1[i].dft(0, m);\n  for (int i= k; i--;) gt2[i].dft(0,\
+    \ m);\n  for (int i= k, j, l; i--;)\n   for (j= k; j--;) GNA::bf.mul(gt1[i], gt2[j],\
+    \ 0, m), gt0[l-= k & -((l= i + j) >= k)].add(GNA::bf, 0, m);\n  for (int i= k;\
+    \ i--;) gt0[i].idft(0, m);\n  for (int i= n; i--;) r[i]= gt0[chi[i]].get(i);\n\
+    \  return std::vector(r, r + n);\n }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\nclass\
     \ MultiVariateConvolution {\n const int n, k, m;\n std::vector<int> chi;\npublic:\n\
     \ MultiVariateConvolution(): MultiVariateConvolution(std::vector<int>{}) {}\n\
     \ MultiVariateConvolution(const std::vector<int> &dim): n(std::accumulate(dim.begin(),\
-    \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(get_len(n) * 2), chi(n,\
+    \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(pw2(n) * 2), chi(n,\
     \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
     \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
     \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
@@ -293,8 +293,8 @@ data:
   isVerificationFile: false
   path: src/FFT/MultiVariateConvolution.hpp
   requiredBy: []
-  timestamp: '2023-01-08 23:13:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/multivariate_convolution.test.cpp
 documentation_of: src/FFT/MultiVariateConvolution.hpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_D
@@ -59,13 +59,13 @@ data:
     }\n}\n#line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
     \ Uint, class mod_pro_t, u64... args> constexpr bool miller_rabin(Uint n) {\n\
     \ const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...}) {\n  Uint b=\
-    \ a % n, p= pow(md.set(b), d, md), i= s;\n  while (p= md.norm(p), (p != one &&\
-    \ p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p) != n1 && i != s) return\
-    \ 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n\
-    \ % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
-    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return miller_rabin<u64, MP_Mo,\
-    \ 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
+    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
+    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
+    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
+    \ return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32, MP_Na<u32>,\
+    \ 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64, MP_Mo, 2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
     \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
     \ math_internal::is_prime;\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
     \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
@@ -244,33 +244,33 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/BigInt.hpp\"\
-    \nclass BigInt {\n static constexpr unsigned BASE= 10000000, D= 7;\n using mod_t=\
-    \ StaticModInt<0x3ffffffffa000001>;\n using Vec= std::vector<unsigned>;\n using\
-    \ ntt= NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt shift(int sz) const { return\
-    \ {neg, Vec(dat.begin() + sz, dat.end())}; }\n BigInt(bool n, const Vec &d): neg(n),\
-    \ dat(d) {}\npublic:\n BigInt(): neg(false), dat() {}\n BigInt(long long v): neg(v\
-    \ < 0) {\n  for (v= std::abs(v); v; v/= BASE) dat.push_back(v % BASE);\n }\n BigInt(const\
-    \ std::string &s): neg(false) {\n  int p= 0, x= 0;\n  for (; p < (int)s.size()\
-    \ && (s[p] == '-' || s[p] == '+'); p++)\n   if (s[p] == '-') neg= !neg;\n  for\
-    \ (int i= s.size(), j; i > p; i-= D, dat.push_back(x), x= 0)\n   for (j= std::max(p,\
-    \ i - int(D)); j < i;) x= x * 10 + s[j++] - '0';\n  shrink();\n }\n inline void\
-    \ shrink() {\n  while (!dat.empty() && !dat.back()) dat.pop_back();\n  if (dat.empty())\
-    \ neg= false;\n }\n std::string to_str() const {\n  if (is_zero()) return \"0\"\
-    ;\n  std::stringstream ss;\n  if (neg) ss << '-';\n  ss << (dat.empty() ? 0 :\
-    \ dat.back());\n  for (long long i= dat.size() - 1; i-- > 0;) ss << std::setw(D)\
-    \ << std::setfill('0') << dat[i];\n  std::string ret;\n  return ss >> ret, ret;\n\
-    \ }\n bool is_zero() const { return dat.empty() || (dat.size() == 1 && !dat[0]);\
-    \ }\n bool operator<(const BigInt &r) const {\n  if (neg != r.neg) return neg;\n\
-    \  if (dat.size() != r.dat.size()) return (dat.size() < r.dat.size()) ^ neg;\n\
-    \  for (int i= dat.size(); i--;)\n   if (dat[i] != r.dat[i]) return (dat[i] <\
-    \ r.dat[i]) ^ neg;\n  return false;\n }\n bool operator>(const BigInt &r) const\
-    \ { return r < *this; }\n bool operator<=(const BigInt &r) const { return !(r\
-    \ < *this); }\n bool operator>=(const BigInt &r) const { return !(*this < r);\
-    \ }\n bool operator==(const BigInt &r) const { return (neg == r.neg && dat ==\
-    \ r.dat) || (is_zero() && r.is_zero()); }\n bool operator!=(const BigInt &r) const\
-    \ { return !(*this == r); }\n BigInt abs() const { return BigInt(false, dat);\
-    \ }\n BigInt operator-() const { return BigInt(!neg, dat); }\n BigInt operator+(const\
+    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
+    \ n >> 16); }\n#line 4 \"src/FFT/BigInt.hpp\"\nclass BigInt {\n static constexpr\
+    \ unsigned BASE= 10000000, D= 7;\n using mod_t= StaticModInt<0x3ffffffffa000001>;\n\
+    \ using Vec= std::vector<unsigned>;\n using ntt= NTT<mod_t>;\n bool neg;\n Vec\
+    \ dat;\n BigInt shift(int sz) const { return {neg, Vec(dat.begin() + sz, dat.end())};\
+    \ }\n BigInt(bool n, const Vec &d): neg(n), dat(d) {}\npublic:\n BigInt(): neg(false),\
+    \ dat() {}\n BigInt(long long v): neg(v < 0) {\n  for (v= std::abs(v); v; v/=\
+    \ BASE) dat.push_back(v % BASE);\n }\n BigInt(const std::string &s): neg(false)\
+    \ {\n  int p= 0, x= 0;\n  for (; p < (int)s.size() && (s[p] == '-' || s[p] ==\
+    \ '+'); p++)\n   if (s[p] == '-') neg= !neg;\n  for (int i= s.size(), j; i > p;\
+    \ i-= D, dat.push_back(x), x= 0)\n   for (j= std::max(p, i - int(D)); j < i;)\
+    \ x= x * 10 + s[j++] - '0';\n  shrink();\n }\n inline void shrink() {\n  while\
+    \ (!dat.empty() && !dat.back()) dat.pop_back();\n  if (dat.empty()) neg= false;\n\
+    \ }\n std::string to_str() const {\n  if (is_zero()) return \"0\";\n  std::stringstream\
+    \ ss;\n  if (neg) ss << '-';\n  ss << (dat.empty() ? 0 : dat.back());\n  for (long\
+    \ long i= dat.size() - 1; i-- > 0;) ss << std::setw(D) << std::setfill('0') <<\
+    \ dat[i];\n  std::string ret;\n  return ss >> ret, ret;\n }\n bool is_zero() const\
+    \ { return dat.empty() || (dat.size() == 1 && !dat[0]); }\n bool operator<(const\
+    \ BigInt &r) const {\n  if (neg != r.neg) return neg;\n  if (dat.size() != r.dat.size())\
+    \ return (dat.size() < r.dat.size()) ^ neg;\n  for (int i= dat.size(); i--;)\n\
+    \   if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n  return false;\n\
+    \ }\n bool operator>(const BigInt &r) const { return r < *this; }\n bool operator<=(const\
+    \ BigInt &r) const { return !(r < *this); }\n bool operator>=(const BigInt &r)\
+    \ const { return !(*this < r); }\n bool operator==(const BigInt &r) const { return\
+    \ (neg == r.neg && dat == r.dat) || (is_zero() && r.is_zero()); }\n bool operator!=(const\
+    \ BigInt &r) const { return !(*this == r); }\n BigInt abs() const { return BigInt(false,\
+    \ dat); }\n BigInt operator-() const { return BigInt(!neg, dat); }\n BigInt operator+(const\
     \ BigInt &r) const {\n  if (neg != r.neg) return *this - (-r);\n  auto [ret, tmp]=\
     \ dat.size() > r.dat.size() ? std::make_pair(*this, &r) : std::make_pair(r, this);\n\
     \  int car= 0, i, n= ret.dat.size(), m= tmp->dat.size();\n  for (i= 0; i < m;\
@@ -289,14 +289,14 @@ data:
     \ BigInt &r) const {\n  if (is_zero() || r.is_zero()) return 0;\n  const int n=\
     \ dat.size(), m= r.dat.size(), sz= n + m - 1;\n  static mod_t f[1 << 20], g[1\
     \ << 20], f2[1 << 17][16], g2[1 << 17][16];\n  static long long h[1 << 20];\n\
-    \  if (int i= n, j; std::min(n, m) >= 74) {\n   const int rl= get_len(sz), l=\
-    \ get_len(std::max(n, m));\n   const int fl= std::pow(l, 0.535) * 8.288;\n   if\
-    \ (l + fl < sz && sz <= (rl >> 3) * 5) {\n    const int l= rl >> 4, l2= l << 1,\
-    \ nn= (n + l - 1) / l, mm= (m + l - 1) / l, ss= nn + mm - 1;\n    for (int k=\
-    \ i= 0, s; k < n; i++, k+= l) {\n     for (j= s= std::min(l, n - k); j--;) f2[i][j]=\
-    \ dat[k + j];\n     std::fill_n(f2[i] + s, l2 - s, mod_t()), ntt::dft(l2, f2[i]);\n\
-    \    }\n    if (this != &r)\n     for (int k= i= 0, s; k < m; i++, k+= l) {\n\
-    \      for (j= s= std::min(l, m - k); j--;) g2[i][j]= dat[k + j];\n      std::fill_n(g2[i]\
+    \  if (int i= n, j; std::min(n, m) >= 74) {\n   const int rl= pw2(sz), l= pw2(std::max(n,\
+    \ m));\n   const int fl= std::pow(l, 0.535) * 8.288;\n   if (l + fl < sz && sz\
+    \ <= (rl >> 3) * 5) {\n    const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) /\
+    \ l, mm= (m + l - 1) / l, ss= nn + mm - 1;\n    for (int k= i= 0, s; k < n; i++,\
+    \ k+= l) {\n     for (j= s= std::min(l, n - k); j--;) f2[i][j]= dat[k + j];\n\
+    \     std::fill_n(f2[i] + s, l2 - s, mod_t()), ntt::dft(l2, f2[i]);\n    }\n \
+    \   if (this != &r)\n     for (int k= i= 0, s; k < m; i++, k+= l) {\n      for\
+    \ (j= s= std::min(l, m - k); j--;) g2[i][j]= dat[k + j];\n      std::fill_n(g2[i]\
     \ + s, l2 - s, mod_t()), ntt::dft(l2, g2[i]);\n     }\n    else\n     for (i=\
     \ nn; i--;) std::copy_n(f2[i], l2, g2[i]);\n    for (i= l2; i--;) f[i]= f2[0][i]\
     \ * g2[0][i];\n    for (ntt::idft(l2, f), i= l2; i--;) h[i]= f[i].val();\n   \
@@ -305,7 +305,7 @@ data:
     \ * g2[ed][i];\n     for (; j < ed; ++j)\n      for (i= l2; i--;) f[i]+= f2[ii\
     \ - j][i] * g2[j][i];\n     for (ntt::idft(l2, f), i= std::min(l, sz - k); i--;)\
     \ h[i + k]+= f[i].val();\n     for (i= std::min(l2, sz - k); i-- > l;) h[i + k]=\
-    \ f[i].val();\n    }\n   } else {\n    const int len= sz <= l + fl ? l : get_len(sz);\n\
+    \ f[i].val();\n    }\n   } else {\n    const int len= sz <= l + fl ? l : pw2(sz);\n\
     \    for (i= n; i--;) f[i]= dat[i];\n    std::fill_n(f + n, len - n, mod_t()),\
     \ ntt::dft(len, f);\n    if (this != &r) {\n     for (i= m; i--;) g[i]= r.dat[i];\n\
     \     std::fill_n(g + m, len - m, mod_t()), ntt::dft(len, g);\n     for (i= len;\
@@ -353,8 +353,8 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_D.test.cpp
   requiredBy: []
-  timestamp: '2023-01-01 04:58:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_D.test.cpp
 layout: document

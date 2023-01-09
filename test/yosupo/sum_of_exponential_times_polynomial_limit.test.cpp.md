@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97)\
       \ ($\\mathbb{F}_p$)"
@@ -11,7 +11,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
   - icon: ':question:'

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_large
@@ -105,13 +105,13 @@ data:
     #line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
     \ Uint, class mod_pro_t, u64... args> constexpr bool miller_rabin(Uint n) {\n\
     \ const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...}) {\n  Uint b=\
-    \ a % n, p= pow(md.set(b), d, md), i= s;\n  while (p= md.norm(p), (p != one &&\
-    \ p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p) != n1 && i != s) return\
-    \ 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n\
-    \ % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32,\
-    \ MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return miller_rabin<u64, MP_Mo,\
-    \ 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
+    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
+    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
+    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
+    \ return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32, MP_Na<u32>,\
+    \ 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64, MP_Mo, 2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
     \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
     \ math_internal::is_prime;\n#line 5 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
@@ -245,23 +245,23 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/convolve.hpp\"\
-    \ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t> convolve(const\
-    \ std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t,\
-    \ LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM,\
-    \ 2>::bf;\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30,\
-    \ 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n  static constexpr double\
-    \ B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252,\
-    \ 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n  return std::round(std::pow(l,\
-    \ 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const int n= p.size(), m= q.size(),\
-    \ sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n if (std::min(n,\
-    \ m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(), p.end(), pp),\
-    \ std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n   for (int j= m;\
-    \ j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl= get_len(sz), l=\
-    \ get_len(std::max(n, m)), fl= f(l);\n  static constexpr size_t LM2= LM >> 3;\n\
-    \  static constexpr bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l + fl <\
-    \ sz && sz <= (rl >> 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n\
-    \   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t,\
+    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
+    \ n >> 16); }\n#line 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t, size_t\
+    \ LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p, const\
+    \ std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq= GlobalArray<mod_t,\
+    \ LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static constexpr int t= nttarr_cat<mod_t,\
+    \ LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n\
+    \  static constexpr double B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713,\
+    \ 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n \
+    \ return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const\
+    \ int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n\
+    \ if (std::min(n, m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(),\
+    \ p.end(), pp), std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n \
+    \  for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl=\
+    \ pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static constexpr size_t LM2= LM\
+    \ >> 3;\n  static constexpr bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l\
+    \ + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2,\
+    \ 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t,\
     \ LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM2, 16, 2>::bf;\n   const int\
     \ l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l, mm= (m + l - 1) / l, ss= nn + mm\
     \ - 1;\n   for (int i= 0, k= 0, s; k < n; ++i, k+= l) gt1[i].set(p.data() + k,\
@@ -310,8 +310,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/convolution_large.test.cpp
   requiredBy: []
-  timestamp: '2023-01-01 04:58:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/convolution_large.test.cpp
 layout: document

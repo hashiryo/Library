@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97)\
       \ ($\\mathbb{F}_p$)"
@@ -17,7 +17,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "ModInt\u306E\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
   - icon: ':question:'
@@ -28,9 +28,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
@@ -202,13 +202,13 @@ data:
     \ a;\n }\n};\n#line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate\
     \ <class Uint, class mod_pro_t, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const mod_pro_t md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >>\
-    \ s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...}) {\n\
-    \  Uint b= a % n, p= pow(md.set(b), d, md), i= s;\n  while (p= md.norm(p), (p\
-    \ != one && p != n1 && b && i--)) p= md.mul(p, p);\n  if (md.norm(p) != n1 &&\
-    \ i != s) return 0;\n }\n return true;\n}\nconstexpr bool is_prime(u64 n) {\n\
-    \ if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return\
-    \ miller_rabin<u32, MP_Na<u32>, 2, 7, 61>(n);\n if (n < LLONG_MAX) return miller_rabin<u64,\
-    \ MP_Mo, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n \
+    \ if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n\
+    \    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return\
+    \ 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4\
+    \ != 1) return (n | 1) == 3;\n if (n < UINT_MAX) return miller_rabin<u32, MP_Na<u32>,\
+    \ 2, 7, 61>(n);\n if (n < (LLONG_MAX >> 1)) return miller_rabin<u64, MP_Mo, 2,\
+    \ 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
     \ MP_Na<u64>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
     \ math_internal::is_prime;\n#line 5 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
@@ -342,10 +342,11 @@ data:
     \ LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id= 0> struct GlobalNTTArray2D\
     \ { static inline NTTArray<T, LM, 0> bf[LM2]; };\ntemplate <class T, size_t LM,\
     \ int id= 0> struct GlobalArray { static inline T bf[LM]; };\nconstexpr unsigned\
-    \ get_len(unsigned n) { return 1 << (std::__lg(n - 1) + 1); }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\
-    \ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const\
-    \ std::vector<mod_t>& y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size()\
-    \ <= mod_t::mod());\n static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
+    \ pw2(unsigned n) { return ++((((((--n)|= n >> 1)|= n >> 2)|= n >> 4)|= n >> 8)|=\
+    \ n >> 16); }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\ntemplate <class mod_t,\
+    \ std::size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const std::vector<mod_t>&\
+    \ y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size() <= mod_t::mod());\n\
+    \ static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
     \ LM>];\n if (m == 0) return {};\n std::uint64_t c_64= c.val(), nc1= (c + (m -\
     \ 1)).val();\n std::uint32_t k= y.size(), d= k - 1, i= d, e;\n if (c_64 + m <=\
     \ k) return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64 + m);\n mod_t\
@@ -358,18 +359,17 @@ data:
     \  for (e= d + n, i= 0, t= a - d; i < e; ++i, t+= 1) ret[i]= t;\n  std::partial_sum(ret,\
     \ ret + e, q, std::multiplies<>());\n  for (t= mod_t(1) / q[e - 1]; --i;) q[i]=\
     \ t * q[i - 1], t*= ret[i];\n  if (q[0]= t; k >= TH && n >= TH) {\n   const int\
-    \ len= get_len(e + (d > 0));\n   GNA1::bf.set(x, 0, k), GNA1::bf.zeros(k, len),\
-    \ GNA1::bf.dft(0, len), GNA2::bf.set(q, 0, e), GNA2::bf.zeros(e, len), GNA2::bf.dft(0,\
-    \ len), GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0, len), GNA1::bf.get(ret\
-    \ - d, d, e);\n  } else\n   for (std::fill_n(ret, n, mod_t()), i= k; i--;)\n \
-    \   for (int b= d - i, j= n; j--;) ret[j]+= x[i] * q[j + b];\n  for (t= a, i=\
-    \ k; --i;) t*= a - i;\n  for (; i < n; i++) ret[i]*= t, t*= (a + (i + 1)) * q[i];\n\
-    \  return ret + n;\n };\n if (c_64 < k) {\n  if (bf= std::copy_n(y.begin() + c_64,\
-    \ k - c_64, p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, f(k, mod_t::mod() - k,\
-    \ bf));\n  else f(k, c_64 + m - k, bf);\n } else if (nc1 < c_64) {\n  if (bf=\
-    \ f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(), nc1 + 1, bf);\n  else f(k,\
-    \ nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n } else f(c, m, p);\n return std::vector(p,\
-    \ p + m);\n}\n#line 10 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
+    \ len= pw2(e + (d > 0));\n   GNA1::bf.set(x, 0, k), GNA1::bf.zeros(k, len), GNA1::bf.dft(0,\
+    \ len), GNA2::bf.set(q, 0, e), GNA2::bf.zeros(e, len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
+    \ 0, len), GNA1::bf.idft(0, len), GNA1::bf.get(ret - d, d, e);\n  } else\n   for\
+    \ (std::fill_n(ret, n, mod_t()), i= k; i--;)\n    for (int b= d - i, j= n; j--;)\
+    \ ret[j]+= x[i] * q[j + b];\n  for (t= a, i= k; --i;) t*= a - i;\n  for (; i <\
+    \ n; i++) ret[i]*= t, t*= (a + (i + 1)) * q[i];\n  return ret + n;\n };\n if (c_64\
+    \ < k) {\n  if (bf= std::copy_n(y.begin() + c_64, k - c_64, p); nc1 < k) std::copy_n(y.begin(),\
+    \ nc1 + 1, f(k, mod_t::mod() - k, bf));\n  else f(k, c_64 + m - k, bf);\n } else\
+    \ if (nc1 < c_64) {\n  if (bf= f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(),\
+    \ nc1 + 1, bf);\n  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n }\
+    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 10 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
     \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
     \  using Mint = StaticModInt<998244353>;\n  using C = Combination<Mint>;\n  long\
     \ long r, d, n;\n  cin >> r >> d >> n;\n  if (--n < 0) {\n    cout << 0 << endl;\n\
@@ -416,8 +416,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-09 00:52:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-09 16:30:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 layout: document
