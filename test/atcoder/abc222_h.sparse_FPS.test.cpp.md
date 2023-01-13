@@ -13,17 +13,17 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc222/tasks/abc222_h
@@ -232,7 +232,7 @@ data:
   path: test/atcoder/abc222_h.sparse_FPS.test.cpp
   requiredBy: []
   timestamp: '2023-01-13 21:45:16+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc222_h.sparse_FPS.test.cpp
 layout: document

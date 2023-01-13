@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -54,7 +54,7 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -69,20 +69,23 @@ data:
   - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
+  - icon: ':x:'
+    path: src/Math/discrete_logarithm.hpp
+    title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
@@ -128,40 +131,40 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -215,6 +218,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/discrete_logarithm_mod.test.cpp
+    title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
@@ -571,6 +577,7 @@ data:
   - src/FFT/polynomial_matrix_prod.hpp
   - src/FFT/NTT.hpp
   - src/Math/ModInt_Runtime.hpp
+  - src/Math/discrete_logarithm.hpp
   - src/Math/StirlingNumber.hpp
   - src/Math/ModInt_Exp.hpp
   - src/Math/mod_sqrt.hpp
@@ -707,6 +714,7 @@ data:
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
 documentation_of: src/Internal/Remainder.hpp

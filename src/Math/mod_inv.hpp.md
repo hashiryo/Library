@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -61,9 +61,12 @@ data:
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':x:'
+    path: src/Math/discrete_logarithm.hpp
+    title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
@@ -109,37 +112,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -190,6 +193,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/discrete_logarithm_mod.test.cpp
+    title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
@@ -451,6 +457,7 @@ data:
   - src/FFT/polynomial_matrix_prod.hpp
   - src/FFT/NTT.hpp
   - src/Math/ModInt_Runtime.hpp
+  - src/Math/discrete_logarithm.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
   - src/Math/ModInt.hpp
@@ -572,6 +579,7 @@ data:
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
 documentation_of: src/Math/mod_inv.hpp
