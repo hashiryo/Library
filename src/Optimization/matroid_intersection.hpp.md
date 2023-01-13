@@ -163,8 +163,8 @@ data:
   timestamp: '2022-12-31 23:16:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_7_A.matroid_intersection.test.cpp
   - test/aoj/GRL_2_B.matroid_intersection.test.cpp
+  - test/aoj/GRL_7_A.matroid_intersection.test.cpp
   - test/aoj/1605.matroid_intersection.test.cpp
   - test/atcoder/abc231_h.matroid_intersection.test.cpp
 documentation_of: src/Optimization/matroid_intersection.hpp

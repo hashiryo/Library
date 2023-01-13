@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: src/LinearAlgebra/MinimalPolynomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/berlekamp_massey.hpp
-    title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+    title: Berlekamp-Massey
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\n#include <bits/stdc++.h>\n\
@@ -103,10 +103,10 @@ data:
   path: src/LinearAlgebra/SparseSquareMatrix.hpp
   requiredBy: []
   timestamp: '2022-12-31 21:15:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/aoj/2397.SparseMat.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
 documentation_of: src/LinearAlgebra/SparseSquareMatrix.hpp
 layout: document

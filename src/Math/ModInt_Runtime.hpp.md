@@ -2,35 +2,22 @@
 data:
   _extendedDependsOn:
   - icon: ':x:'
-    path: src/LinearAlgebra/MinimalPolynomial.hpp
-    title: src/LinearAlgebra/MinimalPolynomial.hpp
-  - icon: ':x:'
-    path: src/LinearAlgebra/SparseSquareMatrix.hpp
-    title: "\u758E\u884C\u5217"
-  - icon: ':x:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':x:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':x:'
-    path: src/Math/berlekamp_massey.hpp
-    title: Berlekamp-Massey
-  - icon: ':x:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
-  _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _isVerificationFailed: false
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
-    links:
-    - https://judge.yosupo.jp/problem/sparse_matrix_det
-  bundledCode: "#line 1 \"test/yosupo/sparse_matrix_det.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include <bits/stdc++.h>\n\
+    links: []
+  bundledCode: "#line 2 \"src/Math/ModInt_Runtime.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
     \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
     \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
@@ -109,93 +96,51 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 3 \"src/Math/berlekamp_massey.hpp\"\
-    \n// a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\n\
-    template <class K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n\
-    \ std::size_t n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K>\
-    \ c(n), b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for (c[0]= b[0]= 1, i=\
-    \ 0, j; i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i\
-    \ - j];\n  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j)\
-    \ c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i + 1 - d, b= tmp,\
-    \ x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x=\
-    \ -x;\n return c;\n}\n#line 4 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n//\
-    \ c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate\
-    \ <class Mat, class Vec> class MinimalPolynomial {\n using mod_t= std::remove_reference_t<decltype((Vec{1})[0])>;\n\
-    \ static const inline mod_t ZERO= 0;\n std::vector<mod_t> poly, rev;\n std::vector<Vec>\
-    \ bs;\n std::size_t dg, n;\n static inline int deg(const std::vector<mod_t> &p)\
-    \ {\n  for (int d= p.size() - 1;; d--)\n   if (d < 0 || p[d] != ZERO) return d;\n\
-    \ }\n static inline std::vector<mod_t> bostan_mori_msb(const std::vector<mod_t>\
-    \ &q, std::uint64_t k) {\n  int d= deg(q);\n  assert(d >= 0), assert(q[0] != ZERO);\n\
-    \  std::vector<mod_t> ret(std::max(d, 1));\n  if (k == 0) return ret.back()= mod_t(1),\
-    \ ret;\n  std::vector<mod_t> v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for\
-    \ (int j= 0; j <= d; j+= 2) v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i\
-    \ <= d; i+= 2)\n   for (int j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n\
-    \  auto w= bostan_mori_msb(v, k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >=\
-    \ d; i-= 2)\n   for (int j= 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >>\
-    \ 1];\n  for (int i= 2 * d - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j\
-    \ <= d; j+= 2) ret[i - d]-= q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t>\
-    \ x_pow_mod(std::uint64_t k) const {\n  assert(k >= n);\n  std::vector<mod_t>\
-    \ ret(n), u= bostan_mori_msb(rev, k - n + dg);\n  for (int i= dg; i--;)\n   for\
-    \ (int j= i + 1; j--;) ret[n - 1 - i]+= u[j] * rev[i - j];\n  return ret;\n }\n\
-    public:\n MinimalPolynomial(const Mat &M, Vec b): n(M.size()) {\n  std::size_t\
-    \ i, j;\n  assert(n == b.size());\n  std::vector<mod_t> a(n), v;\n  for (auto\
-    \ &x: a) x= get_rand(1, mod_t::mod() - 1);\n  mod_t tmp;\n  for (i= (n + 1) <<\
-    \ 1; i--; v.push_back(tmp)) {\n   if (i > n) bs.emplace_back(b);\n   for (tmp=\
-    \ 0, j= n; j--;) tmp+= a[j] * b[j];\n   if (i) b= M * b;\n  }\n  rev= berlekamp_massey(v);\n\
-    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly= rev;\n  rev.erase(rev.begin()\
-    \ + (dg= deg(rev)) + 1, rev.end());\n  std::reverse(poly.begin(), poly.end());\n\
-    \ }\n static std::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n  static\
-    \ std::mt19937_64 gen(std::random_device{}());\n  return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n }\n Vec pow(std::uint64_t k) const {  // M^k * b\n  if (k < n) return\
-    \ bs[k];\n  auto r= x_pow_mod(k);\n  Vec ret= bs[0];\n  for (auto &x: ret) x*=\
-    \ r[0];\n  for (int i= 1, e= r.size(), j; i < e; i++)\n   for (j= n; j--;) ret[j]+=\
-    \ r[i] * bs[i][j];\n  return ret;\n }\n const mod_t operator[](std::size_t k)\
-    \ const { return poly[k]; }\n const auto begin() const { return poly.begin();\
-    \ }\n const auto end() const { return poly.end(); }\n const std::size_t size()\
-    \ const { return dg + 1; }\n};\n#line 4 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
-    \ntemplate <class mod_t> struct SparseSquareMatrix {\n SparseSquareMatrix(std::size_t\
-    \ n_): n(n_) {}\n void add_component(std::size_t i, std::size_t j, mod_t val)\
-    \ { dat.emplace_back(i, j, val); }\n std::vector<mod_t> operator*(const std::vector<mod_t>\
-    \ &vec) const {\n  std::vector<mod_t> ret(n);\n  assert(vec.size() == n);\n  for\
-    \ (const auto &[i, j, val]: dat) ret[i]+= val * vec[j];\n  return ret;\n }\n auto\
-    \ begin() { return dat.begin(); }\n auto end() { return dat.end(); }\n std::size_t\
-    \ size() const { return n; }\n mod_t det() const {\n  const std::uint64_t MOD=\
-    \ mod_t::mod();\n  using MinPoly= MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
-    \  SparseSquareMatrix M(*this);\n  std::vector<mod_t> d(n), b(n);\n  for (auto\
-    \ &x: b) x= MinPoly::get_rand(1, MOD - 1);\n  for (auto &x: d) x= MinPoly::get_rand(1,\
-    \ MOD - 1);\n  for (auto &[i, j, val]: M) val*= d[j];\n  mod_t ret= MinPoly(M,\
-    \ b)[0], tmp= 1;\n  for (const auto &x: d) tmp*= x;\n  if (n & 1) ret= -ret;\n\
-    \  return ret / tmp;\n }\nprivate:\n std::size_t n;\n std::vector<std::tuple<std::size_t,\
-    \ std::size_t, mod_t>> dat;\n};\n#line 5 \"test/yosupo/sparse_matrix_det.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint>\
-    \ M(N);\n  for (int i = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b\
-    \ >> c;\n    M.add_component(a, b, c);\n  }\n  cout << M.det() << '\\n';\n  return\
-    \ 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint>\
-    \ M(N);\n  for (int i = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b\
-    \ >> c;\n    M.add_component(a, b, c);\n  }\n  cout << M.det() << '\\n';\n  return\
-    \ 0;\n}"
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 4 \"src/Math/ModInt_Runtime.hpp\"\
+    \nnamespace math_internal {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr\
+    \ bool is_runtimemodint_v= is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64\
+    \ M, int id> struct RB: r_b {\n static inline void set_mod(u64 m) { md= MP(m);\
+    \ }\n static inline u64 max() { return M; }\nprotected:\n static inline MP md;\n\
+    };\nclass Montgomery32 {};\nclass Montgomery64 {};\nclass Barrett {};\nclass Barrett2\
+    \ {};\ntemplate <class Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int,\
+    \ Montgomery32>, MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
+    \ Montgomery64>, MInt<i64, u64, RB<MP_Mo<u64, u128, 64, 63>, (1ull << 62), id>>,\
+    \ conditional_t<is_same_v<Int, Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31),\
+    \ id>>, conditional_t<is_same_v<Int, Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull\
+    \ << 41), id>>, conditional_t<disjunction_v<is_same<Int, i64>, is_same<Int, u64>>,\
+    \ MInt<i64, u64, RB<MP_D2B1, ULLONG_MAX, id>>, MInt<int, u32, RB<MP_Na, UINT_MAX,\
+    \ id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>, nullptr_t>\
+    \ = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
+    \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
+    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
+    namespace math_internal {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr\
+    \ bool is_runtimemodint_v= is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64\
+    \ M, int id> struct RB: r_b {\n static inline void set_mod(u64 m) { md= MP(m);\
+    \ }\n static inline u64 max() { return M; }\nprotected:\n static inline MP md;\n\
+    };\nclass Montgomery32 {};\nclass Montgomery64 {};\nclass Barrett {};\nclass Barrett2\
+    \ {};\ntemplate <class Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int,\
+    \ Montgomery32>, MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
+    \ Montgomery64>, MInt<i64, u64, RB<MP_Mo<u64, u128, 64, 63>, (1ull << 62), id>>,\
+    \ conditional_t<is_same_v<Int, Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31),\
+    \ id>>, conditional_t<is_same_v<Int, Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull\
+    \ << 41), id>>, conditional_t<disjunction_v<is_same<Int, i64>, is_same<Int, u64>>,\
+    \ MInt<i64, u64, RB<MP_D2B1, ULLONG_MAX, id>>, MInt<int, u32, RB<MP_Na, UINT_MAX,\
+    \ id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>, nullptr_t>\
+    \ = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
+    \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
+    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Math/ModIntPrototype.hpp
-  - src/LinearAlgebra/SparseSquareMatrix.hpp
-  - src/LinearAlgebra/MinimalPolynomial.hpp
-  - src/Math/berlekamp_massey.hpp
-  isVerificationFile: true
-  path: test/yosupo/sparse_matrix_det.test.cpp
+  isVerificationFile: false
+  path: src/Math/ModInt_Runtime.hpp
   requiredBy: []
   timestamp: '2023-01-13 17:51:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: test/yosupo/sparse_matrix_det.test.cpp
+documentation_of: src/Math/ModInt_Runtime.hpp
 layout: document
-redirect_from:
-- /verify/test/yosupo/sparse_matrix_det.test.cpp
-- /verify/test/yosupo/sparse_matrix_det.test.cpp.html
-title: test/yosupo/sparse_matrix_det.test.cpp
+title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
 ---

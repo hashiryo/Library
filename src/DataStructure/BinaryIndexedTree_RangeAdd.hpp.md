@@ -44,8 +44,8 @@ data:
   timestamp: '2022-12-31 22:54:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2667.HLD.test.cpp
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
+  - test/aoj/2667.HLD.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
 layout: document
 title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"

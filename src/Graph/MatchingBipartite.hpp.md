@@ -92,9 +92,9 @@ data:
   timestamp: '2022-10-25 15:42:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/0334.test.cpp
-  - test/aoj/2423.test.cpp
   - test/yukicoder/421.test.cpp
+  - test/aoj/2423.test.cpp
+  - test/aoj/0334.test.cpp
   - test/yosupo/bipartitematching.test.cpp
 documentation_of: src/Graph/MatchingBipartite.hpp
 layout: document

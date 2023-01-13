@@ -175,10 +175,10 @@ data:
   timestamp: '2022-12-31 23:16:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_6_B.test.cpp
   - test/yukicoder/1615.test.cpp
-  - test/yosupo/min_cost_b_flow.test.cpp
+  - test/aoj/GRL_6_B.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
+  - test/yosupo/min_cost_b_flow.test.cpp
 documentation_of: src/Optimization/MinCostFlow.hpp
 layout: document
 title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\
