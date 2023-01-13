@@ -107,13 +107,17 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 3 \"src/Math/SetPowerSeries.hpp\"\
-    \ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i,\
-    \ j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ <\
-    \ (n); __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j < ___; j++, i++)\n\
-    \ template <typename T> static inline void ranked_zeta_tr(const T f[], T ret[][MAX_N\
-    \ + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]=\
-    \ f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/Math/SetPowerSeries.hpp\"\ntemplate <unsigned\
+    \ short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i, j, n) \\\n for\
+    \ (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ < (n); __+= _2) \\\
+    \n   for (int j= __, i= j | _, ___= i; j < ___; j++, i++)\n template <typename\
+    \ T> static inline void ranked_zeta_tr(const T f[], T ret[][MAX_N + 1], const\
+    \ int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]= f[S],\
+    \ std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
     \ d--;) ret[S][d]+= ret[U][d];\n }\n template <typename T> static inline void\
     \ conv_na(const T f[], const T g[], T ret[], const int sz) {\n  for (int s= sz,\
     \ t; s--;)\n   for (ret[t= s]= f[s] * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n\
@@ -341,7 +345,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc105_f.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:39:18+09:00'
+  timestamp: '2023-01-13 21:16:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc105_f.test.cpp

@@ -103,10 +103,14 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 3 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
-    \n/**\n * @title Segment-Tree(\u52D5\u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\
-    \u30BF\u69CB\u9020\n * \u9045\u5EF6\u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\
-    \n * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/464/problem/E\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n/**\n\
+    \ * @title Segment-Tree(\u52D5\u7684\u69CB\u7BC9)\n * @category \u30C7\u30FC\u30BF\
+    \u69CB\u9020\n * \u9045\u5EF6\u4F1D\u642C\u53EF\n * \u6C38\u7D9A\u5316\u53EF\n\
+    \ * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/464/problem/E\
     \ (\u6C38\u7D9A+\u9045\u5EF6\u4F1D\u642C+find*2)\n// https://codeforces.com/contest/947/problem/C\
     \ (find+xor)\n// https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
     \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n// https://www.hackerrank.com/contests/happy-query-contest/challenges/minimum-history-query\n\
@@ -286,7 +290,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:39:18+09:00'
+  timestamp: '2023-01-13 21:16:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.DynSeg.test.cpp

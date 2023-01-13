@@ -106,22 +106,26 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 3 \"src/Math/prime_count.hpp\"\
-    \ntemplate <class T= __int128_t> auto polynomial_prime_sum_table(std::uint64_t\
-    \ N, const std::vector<T> &poly) {\n const int sqrtN= std::sqrt(N), d= poly.size();\n\
-    \ std::vector<int> primes;\n std::vector<T> small(sqrtN + 1, 0), large(sqrtN +\
-    \ 1, 0);\n std::vector<std::vector<T>> s(d, std::vector<T>(sqrtN + 1)), l(d, std::vector<T>(sqrtN\
-    \ + 1));\n for (int n= 1, k= 0; n <= sqrtN; n++, k= 0)\n  for (T prd= n; k < d;\
-    \ prd*= (n + ++k)) s[k][n]= prd / (k + 1);\n for (int n= 1, k= 0; n <= sqrtN;\
-    \ n++, k= 0)\n  for (T prd= N / n; k < d; prd*= ((N / n) + ++k)) l[k][n]= prd\
-    \ / (k + 1);\n if (d > 2) {\n  std::vector<T> stir(d, 0);\n  stir[1]= 1;\n  for\
-    \ (int k= 2; k < d; stir[k++]= 1) {\n   for (int j= k - 1; j; j--) stir[j]= stir[j\
-    \ - 1] + stir[j] * (k - 1);\n   for (int n= 1; n <= sqrtN; n++)\n    for (int\
-    \ j= 1; j < k; j++) s[k][n]-= stir[j] * s[j][n], l[k][n]-= stir[j] * l[j][n];\n\
-    \  }\n }\n for (int k= 0; k < d; k++)\n  for (int n= 1; n <= sqrtN; n++) s[k][n]-=\
-    \ 1, l[k][n]-= 1;\n for (int p= 2, k= 0; p <= sqrtN; p++, k= 0)\n  if (s[0][p]\
-    \ != s[0][p - 1]) {\n   primes.emplace_back(p);\n   std::uint64_t q= std::uint64_t(p)\
-    \ * p, M= N / p;\n   int t= sqrtN / p, u= std::min<std::uint64_t>(sqrtN, N / q);\n\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/Math/prime_count.hpp\"\ntemplate <class T=\
+    \ __int128_t> auto polynomial_prime_sum_table(std::uint64_t N, const std::vector<T>\
+    \ &poly) {\n const int sqrtN= std::sqrt(N), d= poly.size();\n std::vector<int>\
+    \ primes;\n std::vector<T> small(sqrtN + 1, 0), large(sqrtN + 1, 0);\n std::vector<std::vector<T>>\
+    \ s(d, std::vector<T>(sqrtN + 1)), l(d, std::vector<T>(sqrtN + 1));\n for (int\
+    \ n= 1, k= 0; n <= sqrtN; n++, k= 0)\n  for (T prd= n; k < d; prd*= (n + ++k))\
+    \ s[k][n]= prd / (k + 1);\n for (int n= 1, k= 0; n <= sqrtN; n++, k= 0)\n  for\
+    \ (T prd= N / n; k < d; prd*= ((N / n) + ++k)) l[k][n]= prd / (k + 1);\n if (d\
+    \ > 2) {\n  std::vector<T> stir(d, 0);\n  stir[1]= 1;\n  for (int k= 2; k < d;\
+    \ stir[k++]= 1) {\n   for (int j= k - 1; j; j--) stir[j]= stir[j - 1] + stir[j]\
+    \ * (k - 1);\n   for (int n= 1; n <= sqrtN; n++)\n    for (int j= 1; j < k; j++)\
+    \ s[k][n]-= stir[j] * s[j][n], l[k][n]-= stir[j] * l[j][n];\n  }\n }\n for (int\
+    \ k= 0; k < d; k++)\n  for (int n= 1; n <= sqrtN; n++) s[k][n]-= 1, l[k][n]-=\
+    \ 1;\n for (int p= 2, k= 0; p <= sqrtN; p++, k= 0)\n  if (s[0][p] != s[0][p -\
+    \ 1]) {\n   primes.emplace_back(p);\n   std::uint64_t q= std::uint64_t(p) * p,\
+    \ M= N / p;\n   int t= sqrtN / p, u= std::min<std::uint64_t>(sqrtN, N / q);\n\
     \   for (T pw= 1; k < d; k++, pw*= p)\n    if (!k || poly[k] != T(0)) {\n    \
     \ T tk= s[k][p - 1];\n     for (int i= 1; i <= t; i++) l[k][i]-= (l[k][i * p]\
     \ - tk) * pw;\n     for (int i= t + 1; i <= u; i++) l[k][i]-= (s[k][double(M)\
@@ -204,7 +208,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:56:15+09:00'
+  timestamp: '2023-01-13 21:16:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

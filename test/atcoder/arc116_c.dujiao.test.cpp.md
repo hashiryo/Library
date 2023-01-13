@@ -103,14 +103,18 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 3 \"src/Math/DirichletConvSumTable.hpp\"\
-    \ntemplate <class T> struct DirichletConvSumTable {\n std::uint64_t N;  // <=\
-    \ K * L\n std::vector<T> x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L)\
-    \ */;\n static DirichletConvSumTable get_epsilon(std::uint64_t N, std::size_t\
-    \ K) {\n  std::size_t L= (N - 1 + K) / K;\n  std::vector<T> a(K + 1, 0);\n  return\
-    \ a[1]= 1, DirichletConvSumTable(N, a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t\
-    \ n_, const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_)\
-    \ { assert(N < std::uint64_t(x.size()) * X.size()); }\n DirichletConvSumTable(std::uint64_t\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/Math/DirichletConvSumTable.hpp\"\ntemplate\
+    \ <class T> struct DirichletConvSumTable {\n std::uint64_t N;  // <= K * L\n std::vector<T>\
+    \ x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L) */;\n static DirichletConvSumTable\
+    \ get_epsilon(std::uint64_t N, std::size_t K) {\n  std::size_t L= (N - 1 + K)\
+    \ / K;\n  std::vector<T> a(K + 1, 0);\n  return a[1]= 1, DirichletConvSumTable(N,\
+    \ a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t n_,\
+    \ const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_) { assert(N\
+    \ < std::uint64_t(x.size()) * X.size()); }\n DirichletConvSumTable(std::uint64_t\
     \ n_, std::size_t k_): N(n_), x(k_ + 1, 0), X((n_ - 1 + k_) / k_ + 1, 0) {}\n\
     \ template <class F> DirichletConvSumTable(std::uint64_t n_, std::size_t k_, const\
     \ F &sum): N(n_), x(k_ + 1), X((n_ - 1 + k_) / k_ + 1) {\n  assert(N < std::uint64_t(x.size())\
@@ -233,7 +237,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc116_c.dujiao.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:39:18+09:00'
+  timestamp: '2023-01-13 21:16:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc116_c.dujiao.test.cpp

@@ -103,21 +103,25 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 3 \"src/Math/berlekamp_massey.hpp\"\
-    \n// a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\n\
-    template <class K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n\
-    \ std::size_t n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K>\
-    \ c(n), b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for (c[0]= b[0]= 1, i=\
-    \ 0, j; i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i\
-    \ - j];\n  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j)\
-    \ c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i + 1 - d, b= tmp,\
-    \ x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x=\
-    \ -x;\n return c;\n}\n#line 5 \"test/yosupo/find_linear_recurrence.test.cpp\"\n\
-    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N);\n for\
-    \ (int i= 0; i < N; i++) cin >> a[i];\n vector<Mint> c= berlekamp_massey(a);\n\
-    \ int d= c.size();\n cout << d << '\\n';\n for (int i= 0; i < d; i++) cout <<\
-    \ c[i] << \" \\n\"[i == d - 1];\n return 0;\n}\n"
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n] = c[0]\
+    \ * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class\
+    \ K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n std::size_t\
+    \ n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K> c(n),\
+    \ b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for (c[0]= b[0]= 1, i= 0, j;\
+    \ i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i - j];\n\
+    \  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-=\
+    \ coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i + 1 - d, b= tmp, x= y,\
+    \ m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n\
+    \ return c;\n}\n#line 5 \"test/yosupo/find_linear_recurrence.test.cpp\"\nusing\
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
+    \ Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N);\n for (int\
+    \ i= 0; i < N; i++) cin >> a[i];\n vector<Mint> c= berlekamp_massey(a);\n int\
+    \ d= c.size();\n cout << d << '\\n';\n for (int i= 0; i < d; i++) cout << c[i]\
+    \ << \" \\n\"[i == d - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/berlekamp_massey.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -133,7 +137,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:56:15+09:00'
+  timestamp: '2023-01-13 21:16:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/find_linear_recurrence.test.cpp

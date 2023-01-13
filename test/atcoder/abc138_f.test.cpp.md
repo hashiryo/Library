@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -23,9 +23,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc138/tasks/abc138_f
@@ -180,20 +180,23 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 7 \"test/atcoder/abc138_f.test.cpp\"\
-    \nusing namespace std;\n\nusing Pii= pair<int, int>;\nstruct DFA_SameLen {\n using\
-    \ symbol_t= Pii;\n std::vector<symbol_t> alphabet() const { return {{0, 0}, {0,\
-    \ 1}, {1, 1}}; }\n inline int initial_state() const { return 0; }\n inline int\
-    \ transition(int s, const symbol_t &a, int) const {\n  const auto &[u, v]= a;\n\
-    \  if (s == 1) return 1;\n  if (u != v) return -1;\n  return u == 1;\n }\n inline\
-    \ bool is_accept(int s) const { return s >= 0; }\n inline int state_size() const\
-    \ { return 2; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<int(1e9 + 7)>;\n long long L, R;\n cin >> L >> R;\n auto\
-    \ dfa_samelen= DFA_SameLen();\n auto alp= dfa_samelen.alphabet();\n auto dfa_y_le=\
-    \ DFA_SymbolMap(DFA_Inequality(R, 2, 61), alp, [](const Pii &a) { return a.second;\
-    \ });\n auto dfa_x_ge= DFA_SymbolMap(DFA_Inequality<true>(L, 2, 61), alp, [](const\
-    \ Pii &a) { return a.first; });\n cout << dfa_dp<Mint>(dfa_x_ge & dfa_y_le & dfa_samelen,\
-    \ 61) << '\\n';\n return 0;\n}\n"
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 7 \"test/atcoder/abc138_f.test.cpp\"\nusing namespace\
+    \ std;\n\nusing Pii= pair<int, int>;\nstruct DFA_SameLen {\n using symbol_t= Pii;\n\
+    \ std::vector<symbol_t> alphabet() const { return {{0, 0}, {0, 1}, {1, 1}}; }\n\
+    \ inline int initial_state() const { return 0; }\n inline int transition(int s,\
+    \ const symbol_t &a, int) const {\n  const auto &[u, v]= a;\n  if (s == 1) return\
+    \ 1;\n  if (u != v) return -1;\n  return u == 1;\n }\n inline bool is_accept(int\
+    \ s) const { return s >= 0; }\n inline int state_size() const { return 2; }\n\
+    };\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint=\
+    \ ModInt<int(1e9 + 7)>;\n long long L, R;\n cin >> L >> R;\n auto dfa_samelen=\
+    \ DFA_SameLen();\n auto alp= dfa_samelen.alphabet();\n auto dfa_y_le= DFA_SymbolMap(DFA_Inequality(R,\
+    \ 2, 61), alp, [](const Pii &a) { return a.second; });\n auto dfa_x_ge= DFA_SymbolMap(DFA_Inequality<true>(L,\
+    \ 2, 61), alp, [](const Pii &a) { return a.first; });\n cout << dfa_dp<Mint>(dfa_x_ge\
+    \ & dfa_y_le & dfa_samelen, 61) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc138/tasks/abc138_f\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\n#include \"src/Automaton/DFA_Inequality.hpp\"\
     \n#include \"src/Automaton/dfa_operations.hpp\"\n#include \"src/Math/ModInt.hpp\"\
@@ -220,8 +223,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc138_f.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:39:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-13 21:16:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc138_f.test.cpp
 layout: document

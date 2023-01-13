@@ -130,7 +130,11 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
     \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RcompositeQ\
     \ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1),\
     \ Mint(0)); }\n  static T op(const T &l, const T &r) {\n    return make_pair(r.first\
@@ -165,7 +169,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 21:16:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp

@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -23,9 +23,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc235/tasks/abc235_f
@@ -110,14 +110,18 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 3 \"src/Automaton/dfa_dp.hpp\"\
-    \n#ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy) \\\n template <class T>\
-    \ struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
-    \ check(U *); \\\n  static std::false_type check(...); \\\n  static T *mClass;\
-    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
-    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#endif\nHAS_TYPE(symbol_t);\n\
-    HAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\nHAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\n\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/Automaton/dfa_dp.hpp\"\n#ifndef HAS_CHECK\n\
+    #define HAS_CHECK(member, Dummy) \\\n template <class T> struct has_##member {\
+    \ \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
+    \ std::false_type check(...); \\\n  static T *mClass; \\\n  static const bool\
+    \ value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member,\
+    \ int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class\
+    \ dummy= typename U::member)\n#endif\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\n\
+    HAS_MEMBER(initial_state);\nHAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\n\
     HAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\nHAS_MEMBER(is_reject);\n\
     #undef HAS_TYPE\n#undef HAS_MEMBER\n#undef HAS_CHECK\ntemplate <class A> using\
     \ is_automaton= std::conjunction<has_symbol_t<A>, has_alphabet<A>, has_initial_state<A>,\
@@ -222,8 +226,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc235_f.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:39:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-13 21:16:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc235_f.test.cpp
 layout: document

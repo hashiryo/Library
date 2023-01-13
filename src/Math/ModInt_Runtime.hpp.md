@@ -96,14 +96,18 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 4 \"src/Math/ModInt_Runtime.hpp\"\
-    \nnamespace math_internal {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr\
-    \ bool is_runtimemodint_v= is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64\
-    \ M, int id> struct RB: r_b {\n static inline void set_mod(u64 m) { md= MP(m);\
-    \ }\n static inline u64 max() { return M; }\nprotected:\n static inline MP md;\n\
-    };\nclass Montgomery32 {};\nclass Montgomery64 {};\nclass Barrett {};\nclass Barrett2\
-    \ {};\ntemplate <class Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int,\
-    \ Montgomery32>, MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 4 \"src/Math/ModInt_Runtime.hpp\"\nnamespace math_internal\
+    \ {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr bool is_runtimemodint_v=\
+    \ is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64 M, int id> struct RB: r_b\
+    \ {\n static inline void set_mod(u64 m) { md= MP(m); }\n static inline u64 max()\
+    \ { return M; }\nprotected:\n static inline MP md;\n};\nclass Montgomery32 {};\n\
+    class Montgomery64 {};\nclass Barrett {};\nclass Barrett2 {};\ntemplate <class\
+    \ Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int, Montgomery32>,\
+    \ MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
     \ Montgomery64>, MInt<i64, u64, RB<MP_Mo<u64, u128, 64, 63>, (1ull << 62), id>>,\
     \ conditional_t<is_same_v<Int, Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31),\
     \ id>>, conditional_t<is_same_v<Int, Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull\
@@ -137,7 +141,7 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Runtime.hpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 21:16:21+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: src/Math/ModInt_Runtime.hpp
