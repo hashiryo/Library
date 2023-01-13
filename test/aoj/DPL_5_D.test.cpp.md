@@ -2,15 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97)\
       \ ($\\mathbb{F}_p$)"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
@@ -40,7 +40,7 @@ data:
     \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
     \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
     \ - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod -\
-    \ (-x) % mod : x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
+    \ (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -131,11 +131,11 @@ data:
   - src/Math/Combination.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   isVerificationFile: true
   path: test/aoj/DPL_5_D.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 21:16:21+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_D.test.cpp

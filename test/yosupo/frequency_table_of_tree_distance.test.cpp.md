@@ -17,11 +17,11 @@ data:
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -41,7 +41,7 @@ data:
   bundledCode: "#line 1 \"test/yosupo/frequency_table_of_tree_distance.test.cpp\"\n\
     #define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
     \n// \u6728\u306E\u91CD\u5FC3\u5206\u89E3\n#include <bits/stdc++.h>\n#line 3 \"\
-    src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing namespace std;\n\
+    src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace std;\n\
     using u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\n\
     using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
     \ \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
@@ -574,14 +574,14 @@ data:
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/FFT/convolve.hpp
   isVerificationFile: true
   path: test/yosupo/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 21:16:21+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/frequency_table_of_tree_distance.test.cpp

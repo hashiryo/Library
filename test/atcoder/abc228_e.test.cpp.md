@@ -2,12 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':x:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':question:'
@@ -15,16 +15,16 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc228/tasks/abc228_e
     links:
     - https://atcoder.jp/contests/abc228/tasks/abc228_e
   bundledCode: "#line 1 \"test/atcoder/abc228_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc228/tasks/abc228_e\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -157,12 +157,12 @@ data:
   - src/Math/ModInt_Exp.hpp
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   isVerificationFile: true
   path: test/atcoder/abc228_e.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:56:15+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-13 21:45:16+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc228_e.test.cpp
 layout: document

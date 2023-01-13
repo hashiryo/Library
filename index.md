@@ -99,7 +99,7 @@ data:
       title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - name: src/FFT
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/BigInt.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':x:'
@@ -204,6 +204,11 @@ data:
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
+  - name: src/Internal
+    pages:
+    - icon: ':question:'
+      path: src/Internal/Remainder.hpp
+      title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - name: src/LinearAlgebra
     pages:
     - icon: ':question:'
@@ -240,16 +245,13 @@ data:
     - icon: ':question:'
       path: src/Math/DirichletConvSumTable.hpp
       title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':question:'
-      path: src/Math/ModIntPrototype.hpp
-      title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     - icon: ':warning:'
@@ -276,7 +278,7 @@ data:
     - icon: ':question:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
-    - icon: ':x:'
+    - icon: ':warning:'
       path: src/Math/discrete_logarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':x:'
@@ -742,16 +744,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_1_D.test.cpp
       title: test/aoj/NTL_1_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_A.test.cpp
       title: test/aoj/NTL_2_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_B.test.cpp
       title: test/aoj/NTL_2_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_2_C.test.cpp
       title: test/aoj/NTL_2_C.test.cpp
     - icon: ':x:'
@@ -816,7 +818,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc222_h.sparse_FPS.test.cpp
       title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'

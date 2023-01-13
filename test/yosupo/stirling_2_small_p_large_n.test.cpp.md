@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
+    path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
@@ -22,7 +22,7 @@ data:
     - https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n
   bundledCode: "#line 1 \"test/yosupo/stirling_2_small_p_large_n.test.cpp\"\n#define\
     \ PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -111,11 +111,11 @@ data:
   dependsOn:
   - src/Math/StirlingNumber.hpp
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   isVerificationFile: true
   path: test/yosupo/stirling_2_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:56:15+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_2_small_p_large_n.test.cpp

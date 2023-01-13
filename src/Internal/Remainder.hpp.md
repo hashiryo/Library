@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -54,13 +54,13 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':warning:'
@@ -69,9 +69,6 @@ data:
   - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
-    path: src/Math/discrete_logarithm.hpp
-    title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -131,16 +128,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
   - icon: ':x:'
@@ -167,7 +164,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'
@@ -218,9 +215,6 @@ data:
   - icon: ':x:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/discrete_logarithm_mod.test.cpp
-    title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
@@ -472,7 +466,7 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Math/ModIntPrototype.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/Internal/Remainder.hpp\"\n#include <bits/stdc++.h>\n\
     namespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
     \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
     #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
@@ -558,7 +552,7 @@ data:
     \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}"
   dependsOn: []
   isVerificationFile: false
-  path: src/Math/ModIntPrototype.hpp
+  path: src/Internal/Remainder.hpp
   requiredBy:
   - src/FFT/sample_points_shift.hpp
   - src/FFT/fps_div.hpp
@@ -577,7 +571,6 @@ data:
   - src/FFT/polynomial_matrix_prod.hpp
   - src/FFT/NTT.hpp
   - src/Math/ModInt_Runtime.hpp
-  - src/Math/discrete_logarithm.hpp
   - src/Math/StirlingNumber.hpp
   - src/Math/ModInt_Exp.hpp
   - src/Math/mod_sqrt.hpp
@@ -588,7 +581,7 @@ data:
   - src/Math/mod_tetration.hpp
   - src/Math/Factors.hpp
   - src/Math/sparse_fps.hpp
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1533.test.cpp
@@ -714,10 +707,9 @@ data:
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
-  - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
-documentation_of: src/Math/ModIntPrototype.hpp
+documentation_of: src/Internal/Remainder.hpp
 layout: document
 title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
 ---

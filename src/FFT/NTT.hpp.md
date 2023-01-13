@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -14,7 +14,7 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -67,13 +67,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
   - icon: ':x:'
@@ -226,7 +226,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/NTT.hpp\"\n#include <bits/stdc++.h>\n#line 3 \"\
-    src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing namespace std;\n\
+    src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace std;\n\
     using u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\n\
     using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
     \ \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
@@ -548,7 +548,7 @@ data:
     \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n"
   dependsOn:
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   isVerificationFile: false
@@ -569,7 +569,7 @@ data:
   - src/FFT/MultiVariateConvolution.hpp
   - src/FFT/bostan_mori.hpp
   - src/FFT/polynomial_matrix_prod.hpp
-  timestamp: '2023-01-13 21:16:21+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/215.Poly.test.cpp

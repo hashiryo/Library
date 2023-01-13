@@ -5,11 +5,11 @@ data:
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -100,7 +100,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/convolve.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -389,7 +389,7 @@ data:
   dependsOn:
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   isVerificationFile: false
@@ -399,7 +399,7 @@ data:
   - src/FFT/sequences.hpp
   - src/FFT/Polynomial.hpp
   - src/FFT/bostan_mori.hpp
-  timestamp: '2023-01-13 21:16:21+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/215.Poly.test.cpp

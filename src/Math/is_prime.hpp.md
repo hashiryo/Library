@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
+    path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -57,10 +57,10 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':x:'
@@ -86,16 +86,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
   - icon: ':x:'
@@ -113,7 +113,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'
@@ -308,7 +308,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/is_prime.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -361,7 +361,7 @@ data:
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModIntPrototype.hpp\"\
+  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
@@ -374,7 +374,7 @@ data:
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;"
   dependsOn:
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   isVerificationFile: false
   path: src/Math/is_prime.hpp
   requiredBy:
@@ -402,7 +402,7 @@ data:
   - src/Math/mod_tetration.hpp
   - src/Math/Factors.hpp
   - src/Math/sparse_fps.hpp
-  timestamp: '2023-01-13 20:56:15+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1533.test.cpp

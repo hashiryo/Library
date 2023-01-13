@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -28,7 +28,7 @@ data:
     - https://judge.yosupo.jp/problem/binomial_coefficient
   bundledCode: "#line 1 \"test/yosupo/binomial_coefficient.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing namespace\
+    #line 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -169,12 +169,12 @@ data:
   - src/Math/BinomialCoefficient.hpp
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   - src/Math/mod_inv.hpp
   isVerificationFile: true
   path: test/yosupo/binomial_coefficient.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:56:15+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/binomial_coefficient.test.cpp

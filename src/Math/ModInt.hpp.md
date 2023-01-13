@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
+    path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -106,13 +106,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
   - icon: ':x:'
@@ -416,24 +416,24 @@ data:
     \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
     \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
     \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing\
-    \ namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\n\
-    using i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL\
-    \ inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U,\
-    \ M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n\
-    \  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const {\
-    \ \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n\
-    \ static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
-    \ n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class\
-    \ du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0),\
-    \ r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE\
-    \ IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod\
-    \ << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n,\
-    \ r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL\
-    \ u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n CE u_t inv(u_t\
-    \ n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n\
-    \ CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
-    \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
+    }\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
+    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
+    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
+    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
+    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
+    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
+    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
+    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
+    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
+    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
+    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
+    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
+    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
+    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n CE u_t inv(u_t n, int e=\
+    \ 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE IL u_t\
+    \ reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w) * iv)\
+    \ * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
     \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
     \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
     \ {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32\
@@ -496,7 +496,7 @@ data:
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/mod_inv.hpp\"\
-    \n#include \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\n#define\
+    \n#include \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\n#define\
     \ CE constexpr\nstruct m_b {};\nstruct s_b: m_b {};\ntemplate <class mod_t> CE\
     \ bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t> CE bool\
     \ is_staticmodint_v= is_base_of_v<s_b, mod_t>;\ntemplate <class MP, u64 MOD> struct\
@@ -536,7 +536,7 @@ data:
     \ return dat[n];\n}"
   dependsOn:
   - src/Math/mod_inv.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   isVerificationFile: false
   path: src/Math/ModInt.hpp
   requiredBy:
@@ -558,7 +558,7 @@ data:
   - src/FFT/NTT.hpp
   - src/Math/ModInt_Runtime.hpp
   - src/Math/sparse_fps.hpp
-  timestamp: '2023-01-13 21:16:21+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1533.test.cpp

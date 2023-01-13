@@ -17,11 +17,11 @@ data:
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -39,48 +39,47 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/extgcd.hpp\"\n#include <bits/stdc++.h>\n#line 3\
-    \ \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
-    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
-    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
-    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
-    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
-    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
-    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
-    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
-    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
-    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
-    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
-    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
-    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n CE u_t inv(u_t n, int e=\
-    \ 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE IL u_t\
-    \ reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w) * iv)\
-    \ * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
-    \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
-    \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
-    \ {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32\
-    \ m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL\
-    \ u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32,\
-    \ 31, mod) SGN(u32) private: const u8 s;\n const u64 x;\n CE IL u64 quo(u64 n)\
-    \ const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const { return n\
-    \ - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n const u64 mod;\n\
-    \ CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) /\
-    \ m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64,\
-    \ mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n) { return n;\
-    \ }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM;\
-    \ }\nprivate:\n const u64 x;\n CE IL u128 quo(const u128 &n) const { return (n\
-    \ * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) * mod;\
-    \ }\n};\nstruct MP_D2B1 {\n const u64 mod;\n CE MP_D2B1(): mod(0), s(0), d(0),\
-    \ v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)), d(m << s), v(u128(-1)\
-    \ / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l) * r) << s)\
-    \ >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const\
-    \ u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64)\
-    \ * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n\
-    \ const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t\
-    \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
-    \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
-    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/is_prime.hpp\"\
+    \ \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace std;\n\
+    using u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\n\
+    using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
+    \ \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
+    \ l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define\
+    \ DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+=\
+    \ M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return\
+    \ n; } \\\n static CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n)\
+    \ { return n; }\ntemplate <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n\
+    \ const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m),\
+    \ iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return\
+    \ reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL\
+    \ u_t set(u_t n) const { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n\
+    \  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n\
+    \ const u_t iv, r2;\n CE u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n,\
+    \ e - 1, x * (2 - x * n)) : x; }\n CE IL u_t reduce(const du_t &w) const { return\
+    \ u_t(w >> B) + mod - ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n\
+    \ const u32 mod;\n CE MP_Na(): mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL\
+    \ u32 mul(u32 l, u32 r) const { return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32,\
+    \ 31, mod) SGN(u32)\n};\nstruct MP_Br {  // mod < 2^31\n const u32 mod;\n CE MP_Br():\
+    \ mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m - 1) + 64), x(((u128(1)\
+    \ << s) + m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l)\
+    \ * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: const u8 s;\n\
+    \ const u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n) >> s; }\n CE\
+    \ IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  //\
+    \ 2^20 < mod <= 2^41\n const u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64\
+    \ m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const {\
+    \ return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n\
+    \ static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n) const { NORM;\
+    \ }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n const u64 x;\n CE IL u128\
+    \ quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const u128\
+    \ &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n const u64 mod;\n\
+    \ CE MP_D2B1(): mod(0), s(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)),\
+    \ d(m << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
+    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
+    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
+    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
+    \ r;\n }\n const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE\
+    \ u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x,\
+    \ x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef\
+    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
@@ -598,14 +597,14 @@ data:
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/FFT/convolve.hpp
   isVerificationFile: false
   path: src/FFT/extgcd.hpp
   requiredBy: []
-  timestamp: '2023-01-13 21:16:21+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
+    path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
@@ -11,7 +11,7 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':x:'
@@ -22,10 +22,10 @@ data:
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'
@@ -45,11 +45,11 @@ data:
     title: test/yosupo/tetration_mod.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -179,7 +179,7 @@ data:
     \ }"
   dependsOn:
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
@@ -187,8 +187,8 @@ data:
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
   - src/Math/mod_tetration.hpp
-  timestamp: '2023-01-13 20:56:15+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-01-13 21:45:16+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/NTL_1_D.test.cpp
   - test/atcoder/abc228_e.test.cpp

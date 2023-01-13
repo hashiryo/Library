@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
-    path: src/Math/ModIntPrototype.hpp
-    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -30,7 +30,7 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_D
   bundledCode: "#line 1 \"test/aoj/NTL_2_D.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_D\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -339,13 +339,13 @@ data:
   - src/FFT/BigInt.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
-  - src/Math/ModIntPrototype.hpp
+  - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   isVerificationFile: true
   path: test/aoj/NTL_2_D.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 21:16:21+09:00'
+  timestamp: '2023-01-13 21:45:16+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_D.test.cpp
