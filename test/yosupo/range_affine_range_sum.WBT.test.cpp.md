@@ -236,35 +236,33 @@ data:
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
     \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 7 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\
-    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineQ_RsumQ\
-    \ {\n  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T op(const T &l,\
-    \ const T &r) { return l + r; }\n  static void mapping(T &v, const E &f, std::size_t\
-    \ sz) {\n    v = f.first * v + f.second * sz;\n  }\n  static void composition(E\
-    \ &pre, const E &suf) {\n    pre = {suf.first * pre.first, suf.first * pre.second\
-    \ + suf.second};\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  Mint v[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> v[i];\n  using WBT = WeightBalancedTree<RaffineQ_RsumQ, 1 << 24>;\n  WBT\
-    \ wbt(v, v + N);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op\
-    \ >> l >> r;\n    if (op) {\n      cout << wbt.fold(l, r) << endl;\n    } else\
-    \ {\n      Mint b, c;\n      cin >> b >> c;\n      wbt.apply(l, r, {b, c});\n\
-    \    }\n    if (WBT::percentage_used() > 90) wbt.rebuild();\n  }\n  return 0;\n\
-    }\n"
+    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineQ_RsumQ\
+    \ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static T op(const T &l, const\
+    \ T &r) { return l + r; }\n static void mapping(T &v, const E &f, std::size_t\
+    \ sz) { v= f.first * v + f.second * sz; }\n static void composition(E &pre, const\
+    \ E &suf) { pre= {suf.first * pre.first, suf.first * pre.second + suf.second};\
+    \ }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
+    \ cin >> N >> Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >> v[i];\n using\
+    \ WBT= WeightBalancedTree<RaffineQ_RsumQ, 1 << 24>;\n WBT wbt(v, v + N);\n while\
+    \ (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout\
+    \ << wbt.fold(l, r) << endl;\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n \
+    \  wbt.apply(l, r, {b, c});\n  }\n  if (WBT::percentage_used() > 90) wbt.rebuild();\n\
+    \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n//\u9045\u5EF6\u4F1D\u642C\u306Everify\n#include <bits/stdc++.h>\n\n#include\
     \ \"src/DataStructure/WeightBalancedTree.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineQ_RsumQ\
-    \ {\n  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T op(const T &l,\
-    \ const T &r) { return l + r; }\n  static void mapping(T &v, const E &f, std::size_t\
-    \ sz) {\n    v = f.first * v + f.second * sz;\n  }\n  static void composition(E\
-    \ &pre, const E &suf) {\n    pre = {suf.first * pre.first, suf.first * pre.second\
-    \ + suf.second};\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  Mint v[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> v[i];\n  using WBT = WeightBalancedTree<RaffineQ_RsumQ, 1 << 24>;\n  WBT\
-    \ wbt(v, v + N);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op\
-    \ >> l >> r;\n    if (op) {\n      cout << wbt.fold(l, r) << endl;\n    } else\
-    \ {\n      Mint b, c;\n      cin >> b >> c;\n      wbt.apply(l, r, {b, c});\n\
-    \    }\n    if (WBT::percentage_used() > 90) wbt.rebuild();\n  }\n  return 0;\n\
-    }"
+    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineQ_RsumQ\
+    \ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static T op(const T &l, const\
+    \ T &r) { return l + r; }\n static void mapping(T &v, const E &f, std::size_t\
+    \ sz) { v= f.first * v + f.second * sz; }\n static void composition(E &pre, const\
+    \ E &suf) { pre= {suf.first * pre.first, suf.first * pre.second + suf.second};\
+    \ }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
+    \ cin >> N >> Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >> v[i];\n using\
+    \ WBT= WeightBalancedTree<RaffineQ_RsumQ, 1 << 24>;\n WBT wbt(v, v + N);\n while\
+    \ (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout\
+    \ << wbt.fold(l, r) << endl;\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n \
+    \  wbt.apply(l, r, {b, c});\n  }\n  if (WBT::percentage_used() > 90) wbt.rebuild();\n\
+    \ }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   - src/Math/ModInt.hpp
@@ -273,7 +271,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

@@ -184,17 +184,17 @@ data:
     \ primes dividing n\ntemplate <class T>\nstruct Sopf {\n  static constexpr T f(std::uint64_t\
     \ p, short) { return p; }\n  static std::vector<T> poly() { return {0, 1}; }\n\
     };\n}  // namespace additive_functions\n#line 6 \"test/yosupo/sum_of_totient_function.mul_sum.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  using namespace multiplicative_functions;\n\
-    \  long long N;\n  cin >> N;\n  cout << multiplicative_sum<Mint>(N, Totient<Mint>::f,\
-    \ Totient<Mint>::poly())\n       << '\\n';\n  return 0;\n}\n"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n using namespace multiplicative_functions;\n\
+    \ long long N;\n cin >> N;\n cout << multiplicative_sum<Mint>(N, Totient<Mint>::f,\
+    \ Totient<Mint>::poly()) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/prime_count.hpp\"\
     \n#include \"src/Math/multiplicative_and_additive.hpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint\
-    \ = StaticModInt<998244353>;\n  using namespace multiplicative_functions;\n  long\
-    \ long N;\n  cin >> N;\n  cout << multiplicative_sum<Mint>(N, Totient<Mint>::f,\
-    \ Totient<Mint>::poly())\n       << '\\n';\n  return 0;\n}"
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ using namespace multiplicative_functions;\n long long N;\n cin >> N;\n cout\
+    \ << multiplicative_sum<Mint>(N, Totient<Mint>::f, Totient<Mint>::poly()) << '\\\
+    n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -204,7 +204,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

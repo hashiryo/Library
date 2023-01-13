@@ -199,19 +199,18 @@ data:
     \ l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n  for (int i= n\
     \ + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n#undef SUBSET_REP\n\
     };\n#line 5 \"test/yosupo/subset_convolution.test.cpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N;\n  cin >> N;\n  vector<Mint> a(1 << N), b(1 << N);\n  for (auto &ai\
-    \ : a) cin >> ai;\n  for (auto &bi : b) cin >> bi;\n  auto c = SetPowerSeries<20>::convolve(a,\
-    \ b);\n  for (int i = 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 ==\
-    \ 1 << N];\n  return 0;\n}\n"
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ int N;\n cin >> N;\n vector<Mint> a(1 << N), b(1 << N);\n for (auto &ai: a)\
+    \ cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto c= SetPowerSeries<20>::convolve(a,\
+    \ b);\n for (int i= 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1\
+    \ << N];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/SetPowerSeries.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint>\
-    \ a(1 << N), b(1 << N);\n  for (auto &ai : a) cin >> ai;\n  for (auto &bi : b)\
-    \ cin >> bi;\n  auto c = SetPowerSeries<20>::convolve(a, b);\n  for (int i = 0;\
-    \ i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n  return 0;\n\
-    }"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(1 << N),\
+    \ b(1 << N);\n for (auto &ai: a) cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto\
+    \ c= SetPowerSeries<20>::convolve(a, b);\n for (int i= 0; i < (1 << N); i++) cout\
+    \ << c[i] << \" \\n\"[i + 1 == 1 << N];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -220,7 +219,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp

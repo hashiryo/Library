@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
   - icon: ':question:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -31,9 +31,14 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
+    links:
+    - https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
+    - https://min-25.hatenablog.com/entry/2015/04/24/031413
   bundledCode: "#line 1 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\ntemplate <class mint,\
     \ std::size_t LIM= (1 << 24)> class Combination {\n static inline mint _fact[LIM],\
@@ -352,41 +357,39 @@ data:
     \ nc1 + 1, f(k, mod_t::mod() - k, bf));\n  else f(k, c_64 + m - k, bf);\n } else\
     \ if (nc1 < c_64) {\n  if (bf= f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(),\
     \ nc1 + 1, bf);\n  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n }\
-    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 10 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  using C = Combination<Mint>;\n  long\
-    \ long r, d, n;\n  cin >> r >> d >> n;\n  if (--n < 0) {\n    cout << 0 << endl;\n\
-    \    return 0;\n  }\n  if (r == 0) {\n    cout << (d ? 0 : 1) << '\\n';\n    return\
-    \ 0;\n  }\n  vector<Mint> sum(d + 2), rpow(d + 2), pd = Sieve<>::pow_table<Mint>(d\
-    \ + 2, d);\n  rpow[0] = 1, sum[0] = rpow[0] * pd[0];\n  for (int i = 1; i <= d\
-    \ + 1; i++) rpow[i] = rpow[i - 1] * r;\n  for (int i = 1; i <= d + 1; i++) sum[i]\
-    \ = sum[i - 1] + rpow[i] * pd[i];\n  Mint ans = 0;\n  if (r == 1)\n    ans = sample_points_shift<Mint>(sum,\
-    \ n)[0];\n  else {\n    for (int i = 0; i <= d; i++) {\n      Mint tmp = C::nCr(d\
-    \ + 1, i + 1) * rpow[d - i] * sum[i];\n      ans += (d - i) & 1 ? -tmp : tmp;\n\
-    \    }\n    ans /= Mint(1 - r).pow(d + 1);\n    vector<Mint> y(d + 1);\n    Mint\
-    \ rinv = Mint(1) / r, rinvpow = 1;\n    for (int i = 0; i <= d; i++) {\n     \
-    \ y[i] = Mint(sum[i] - ans) * rinvpow;\n      rinvpow *= rinv;\n    }\n    ans\
-    \ += Mint(r).pow(n) * sample_points_shift<Mint>(y, n)[0];\n  }\n  cout << ans\
-    \ << '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
+    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 9 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n long long r,\
+    \ d, n;\n cin >> r >> d >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n  return\
+    \ 0;\n }\n if (r == 0) {\n  cout << (d ? 0 : 1) << '\\n';\n  return 0;\n }\n vector<Mint>\
+    \ sum(d + 2), rpow(d + 2), pd= Sieve<>::pow_table<Mint>(d + 2, d);\n rpow[0]=\
+    \ 1, sum[0]= rpow[0] * pd[0];\n for (int i= 1; i <= d + 1; i++) rpow[i]= rpow[i\
+    \ - 1] * r;\n for (int i= 1; i <= d + 1; i++) sum[i]= sum[i - 1] + rpow[i] * pd[i];\n\
+    \ Mint ans= 0;\n if (r == 1) ans= sample_points_shift<Mint>(sum, n)[0];\n else\
+    \ {\n  for (int i= 0; i <= d; i++) {\n   Mint tmp= C::nCr(d + 1, i + 1) * rpow[d\
+    \ - i] * sum[i];\n   ans+= (d - i) & 1 ? -tmp : tmp;\n  }\n  ans/= Mint(1 - r).pow(d\
+    \ + 1);\n  vector<Mint> y(d + 1);\n  Mint rinv= Mint(1) / r, rinvpow= 1;\n  for\
+    \ (int i= 0; i <= d; i++) {\n   y[i]= Mint(sum[i] - ans) * rinvpow;\n   rinvpow*=\
+    \ rinv;\n  }\n  ans+= Mint(r).pow(n) * sample_points_shift<Mint>(y, n)[0];\n }\n\
+    \ cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/Combination.hpp\"\n#include \"src/Math/ModInt.hpp\"\
     \n#include \"src/Math/Sieve.hpp\"\n#include \"src/FFT/sample_points_shift.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  using C = Combination<Mint>;\n  long\
-    \ long r, d, n;\n  cin >> r >> d >> n;\n  if (--n < 0) {\n    cout << 0 << endl;\n\
-    \    return 0;\n  }\n  if (r == 0) {\n    cout << (d ? 0 : 1) << '\\n';\n    return\
-    \ 0;\n  }\n  vector<Mint> sum(d + 2), rpow(d + 2), pd = Sieve<>::pow_table<Mint>(d\
-    \ + 2, d);\n  rpow[0] = 1, sum[0] = rpow[0] * pd[0];\n  for (int i = 1; i <= d\
-    \ + 1; i++) rpow[i] = rpow[i - 1] * r;\n  for (int i = 1; i <= d + 1; i++) sum[i]\
-    \ = sum[i - 1] + rpow[i] * pd[i];\n  Mint ans = 0;\n  if (r == 1)\n    ans = sample_points_shift<Mint>(sum,\
-    \ n)[0];\n  else {\n    for (int i = 0; i <= d; i++) {\n      Mint tmp = C::nCr(d\
-    \ + 1, i + 1) * rpow[d - i] * sum[i];\n      ans += (d - i) & 1 ? -tmp : tmp;\n\
-    \    }\n    ans /= Mint(1 - r).pow(d + 1);\n    vector<Mint> y(d + 1);\n    Mint\
-    \ rinv = Mint(1) / r, rinvpow = 1;\n    for (int i = 0; i <= d; i++) {\n     \
-    \ y[i] = Mint(sum[i] - ans) * rinvpow;\n      rinvpow *= rinv;\n    }\n    ans\
-    \ += Mint(r).pow(n) * sample_points_shift<Mint>(y, n)[0];\n  }\n  cout << ans\
-    \ << '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n long long r,\
+    \ d, n;\n cin >> r >> d >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n  return\
+    \ 0;\n }\n if (r == 0) {\n  cout << (d ? 0 : 1) << '\\n';\n  return 0;\n }\n vector<Mint>\
+    \ sum(d + 2), rpow(d + 2), pd= Sieve<>::pow_table<Mint>(d + 2, d);\n rpow[0]=\
+    \ 1, sum[0]= rpow[0] * pd[0];\n for (int i= 1; i <= d + 1; i++) rpow[i]= rpow[i\
+    \ - 1] * r;\n for (int i= 1; i <= d + 1; i++) sum[i]= sum[i - 1] + rpow[i] * pd[i];\n\
+    \ Mint ans= 0;\n if (r == 1) ans= sample_points_shift<Mint>(sum, n)[0];\n else\
+    \ {\n  for (int i= 0; i <= d; i++) {\n   Mint tmp= C::nCr(d + 1, i + 1) * rpow[d\
+    \ - i] * sum[i];\n   ans+= (d - i) & 1 ? -tmp : tmp;\n  }\n  ans/= Mint(1 - r).pow(d\
+    \ + 1);\n  vector<Mint> y(d + 1);\n  Mint rinv= Mint(1) / r, rinvpow= 1;\n  for\
+    \ (int i= 0; i <= d; i++) {\n   y[i]= Mint(sum[i] - ans) * rinvpow;\n   rinvpow*=\
+    \ rinv;\n  }\n  ans+= Mint(r).pow(n) * sample_points_shift<Mint>(y, n)[0];\n }\n\
+    \ cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/Combination.hpp
   - src/Math/ModInt.hpp
@@ -399,7 +402,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp

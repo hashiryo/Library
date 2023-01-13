@@ -24,7 +24,7 @@ data:
     links:
     - https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
     \n\n// set_balance \u3057\u306A\u3044\u3068 \u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\
     \u30D0\u30FC\u30D5\u30ED\u30FC\n// \uFF08\u30C6\u30B9\u30C8\u30B1\u30FC\u30B9\
     \ wrong_avl_killer_01\uFF09\n\n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SplayTree.hpp\"\
@@ -254,43 +254,41 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 10 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
-    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineRsumQ\
-    \ {\n  using T = Mint;\n  using E = pair<T, T>;\n  static T op(const T &vl, const\
-    \ T &vr) { return vl + vr; }\n  static void mapping(T &val, const E &f, int sz)\
-    \ {\n    val = f.first * val + f.second * sz;\n  }\n  static void composition(E\
-    \ &pre, const E &suf) {\n    pre = {pre.first * suf.first, suf.first * pre.second\
-    \ + suf.second};\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  Mint a[N];\n  for (int i = 0; i < N; i++) cin\
-    \ >> a[i];\n  SplayTree<RaffineRsumQ, true> splay(a, a + N);\n  for (int q = 0;\
-    \ q < Q; q++) {\n    int op;\n    cin >> op;\n    if (op == 0) {\n      int i,\
-    \ x;\n      cin >> i >> x;\n      splay.insert(i, x);\n    } else if (op == 1)\
-    \ {\n      int i;\n      cin >> i;\n      splay.erase(i);\n    } else if (op ==\
-    \ 2) {\n      int l, r;\n      cin >> l >> r;\n      splay.reverse(l, r);\n  \
-    \  } else if (op == 3) {\n      int l, r, b, c;\n      cin >> l >> r >> b >> c;\n\
-    \      splay.apply(l, r, {b, c});\n    } else {\n      int l, r;\n      cin >>\
-    \ l >> r;\n      cout << splay.fold(l, r) << '\\n';\n    }\n    if (q % 100000\
-    \ == 0) splay.set_balance();\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 9 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
+    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineRsumQ\
+    \ {\n using T= Mint;\n using E= pair<T, T>;\n static T op(const T &vl, const T\
+    \ &vr) { return vl + vr; }\n static void mapping(T &val, const E &f, int sz) {\
+    \ val= f.first * val + f.second * sz; }\n static void composition(E &pre, const\
+    \ E &suf) { pre= {pre.first * suf.first, suf.first * pre.second + suf.second};\
+    \ }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
+    \ cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >> a[i];\n SplayTree<RaffineRsumQ,\
+    \ true> splay(a, a + N);\n for (int q= 0; q < Q; q++) {\n  int op;\n  cin >> op;\n\
+    \  if (op == 0) {\n   int i, x;\n   cin >> i >> x;\n   splay.insert(i, x);\n \
+    \ } else if (op == 1) {\n   int i;\n   cin >> i;\n   splay.erase(i);\n  } else\
+    \ if (op == 2) {\n   int l, r;\n   cin >> l >> r;\n   splay.reverse(l, r);\n \
+    \ } else if (op == 3) {\n   int l, r, b, c;\n   cin >> l >> r >> b >> c;\n   splay.apply(l,\
+    \ r, {b, c});\n  } else {\n   int l, r;\n   cin >> l >> r;\n   cout << splay.fold(l,\
+    \ r) << '\\n';\n  }\n  if (q % 100000 == 0) splay.set_balance();\n }\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
     \n\n// set_balance \u3057\u306A\u3044\u3068 \u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\
     \u30D0\u30FC\u30D5\u30ED\u30FC\n// \uFF08\u30C6\u30B9\u30C8\u30B1\u30FC\u30B9\
     \ wrong_avl_killer_01\uFF09\n\n#include <bits/stdc++.h>\n#include \"src/DataStructure/SplayTree.hpp\"\
-    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\n\
-    struct RaffineRsumQ {\n  using T = Mint;\n  using E = pair<T, T>;\n  static T\
-    \ op(const T &vl, const T &vr) { return vl + vr; }\n  static void mapping(T &val,\
-    \ const E &f, int sz) {\n    val = f.first * val + f.second * sz;\n  }\n  static\
-    \ void composition(E &pre, const E &suf) {\n    pre = {pre.first * suf.first,\
-    \ suf.first * pre.second + suf.second};\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  Mint a[N];\n  for\
-    \ (int i = 0; i < N; i++) cin >> a[i];\n  SplayTree<RaffineRsumQ, true> splay(a,\
-    \ a + N);\n  for (int q = 0; q < Q; q++) {\n    int op;\n    cin >> op;\n    if\
-    \ (op == 0) {\n      int i, x;\n      cin >> i >> x;\n      splay.insert(i, x);\n\
-    \    } else if (op == 1) {\n      int i;\n      cin >> i;\n      splay.erase(i);\n\
-    \    } else if (op == 2) {\n      int l, r;\n      cin >> l >> r;\n      splay.reverse(l,\
-    \ r);\n    } else if (op == 3) {\n      int l, r, b, c;\n      cin >> l >> r >>\
-    \ b >> c;\n      splay.apply(l, r, {b, c});\n    } else {\n      int l, r;\n \
-    \     cin >> l >> r;\n      cout << splay.fold(l, r) << '\\n';\n    }\n    if\
-    \ (q % 100000 == 0) splay.set_balance();\n  }\n  return 0;\n}"
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
+    struct RaffineRsumQ {\n using T= Mint;\n using E= pair<T, T>;\n static T op(const\
+    \ T &vl, const T &vr) { return vl + vr; }\n static void mapping(T &val, const\
+    \ E &f, int sz) { val= f.first * val + f.second * sz; }\n static void composition(E\
+    \ &pre, const E &suf) { pre= {pre.first * suf.first, suf.first * pre.second +\
+    \ suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >>\
+    \ a[i];\n SplayTree<RaffineRsumQ, true> splay(a, a + N);\n for (int q= 0; q <\
+    \ Q; q++) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int i, x;\n   cin >>\
+    \ i >> x;\n   splay.insert(i, x);\n  } else if (op == 1) {\n   int i;\n   cin\
+    \ >> i;\n   splay.erase(i);\n  } else if (op == 2) {\n   int l, r;\n   cin >>\
+    \ l >> r;\n   splay.reverse(l, r);\n  } else if (op == 3) {\n   int l, r, b, c;\n\
+    \   cin >> l >> r >> b >> c;\n   splay.apply(l, r, {b, c});\n  } else {\n   int\
+    \ l, r;\n   cin >> l >> r;\n   cout << splay.fold(l, r) << '\\n';\n  }\n  if (q\
+    \ % 100000 == 0) splay.set_balance();\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SplayTree.hpp
   - src/Math/ModInt.hpp
@@ -299,7 +297,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

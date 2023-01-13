@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -16,7 +16,7 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -36,7 +36,11 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
+    links:
+    - https://judge.yosupo.jp/problem/inv_of_polynomials
   bundledCode: "#line 1 \"test/yosupo/inv_of_Poly.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
     \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
@@ -552,26 +556,24 @@ data:
     \ A.first * M[3]);\n };\n if (a.deg() <= b.deg()) {\n  std::pair<Poly, Poly> qr=\
     \ a.quorem(b);\n  std::tie(y, x)= cogcd(cogcd, b, qr.second), y-= x * qr.first;\n\
     \ } else std::tie(x, y)= cogcd(cogcd, a, b);\n return a * x + b * y;\n}\n#line\
-    \ 6 \"test/yosupo/inv_of_Poly.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint> f(N), g(M), x, y;\n  for (int\
-    \ i = 0; i < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n\
-    \  auto d = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cout << -1 << '\\\
-    n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout\
-    \ << x.size() << '\\n';\n    x /= d[0];\n    for (int i = 0, ed = x.size(); i\
-    \ < ed; i++)\n      cout << x[i] << \" \\n\"[i == ed - 1];\n  }\n  return 0;\n\
-    }\n"
+    \ 6 \"test/yosupo/inv_of_Poly.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ int N, M;\n cin >> N >> M;\n Polynomial<Mint> f(N), g(M), x, y;\n for (int i=\
+    \ 0; i < N; i++) cin >> f[i];\n for (int i= 0; i < M; i++) cin >> g[i];\n auto\
+    \ d= extgcd(f, g, x, y);\n if (d.deg() != 0) {\n  cout << -1 << '\\n';\n } else\
+    \ if (x.deg() == -1) {\n  cout << 0 << '\\n';\n } else {\n  cout << x.size() <<\
+    \ '\\n';\n  x/= d[0];\n  for (int i= 0, ed= x.size(); i < ed; i++) cout << x[i]\
+    \ << \" \\n\"[i == ed - 1];\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
-    \n#include \"src/FFT/extgcd.hpp\"\nusing namespace std;\n\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  Polynomial<Mint> f(N), g(M), x, y;\n  for (int\
-    \ i = 0; i < N; i++) cin >> f[i];\n  for (int i = 0; i < M; i++) cin >> g[i];\n\
-    \  auto d = extgcd(f, g, x, y);\n  if (d.deg() != 0) {\n    cout << -1 << '\\\
-    n';\n  } else if (x.deg() == -1) {\n    cout << 0 << '\\n';\n  } else {\n    cout\
-    \ << x.size() << '\\n';\n    x /= d[0];\n    for (int i = 0, ed = x.size(); i\
-    \ < ed; i++)\n      cout << x[i] << \" \\n\"[i == ed - 1];\n  }\n  return 0;\n\
-    }"
+    \n#include \"src/FFT/extgcd.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N, M;\n cin\
+    \ >> N >> M;\n Polynomial<Mint> f(N), g(M), x, y;\n for (int i= 0; i < N; i++)\
+    \ cin >> f[i];\n for (int i= 0; i < M; i++) cin >> g[i];\n auto d= extgcd(f, g,\
+    \ x, y);\n if (d.deg() != 0) {\n  cout << -1 << '\\n';\n } else if (x.deg() ==\
+    \ -1) {\n  cout << 0 << '\\n';\n } else {\n  cout << x.size() << '\\n';\n  x/=\
+    \ d[0];\n  for (int i= 0, ed= x.size(); i < ed; i++) cout << x[i] << \" \\n\"\
+    [i == ed - 1];\n }\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -586,7 +588,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp

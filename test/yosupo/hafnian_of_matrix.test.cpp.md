@@ -117,17 +117,17 @@ data:
     \ + 1][j][k - l] + b[m + 1][i][l] * b[m][j][k - l];\n  Poly t= self(self, c);\n\
     \  for (int i= n2, j; i >= 0; i--)\n   for (r[i]= t[j= i] - r[i]; j--;) r[i]+=\
     \ t[j] * b[m + 1][m][i - j - 1];\n  return r;\n };\n return rec(rec, a)[n2];\n\
-    }\n#line 5 \"test/yosupo/hafnian_of_matrix.test.cpp\"\nusing namespace std;\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint =\
-    \ StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<vector<Mint>> a(N,\
-    \ vector<Mint>(N));\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j < N;\
-    \ j++) cin >> a[i][j];\n  cout << hafnian(a) << '\\n';\n  return 0;\n}\n"
+    }\n#line 5 \"test/yosupo/hafnian_of_matrix.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ int N;\n cin >> N;\n vector a(N, vector<Mint>(N));\n for (int i= 0; i < N; i++)\n\
+    \  for (int j= 0; j < N; j++) cin >> a[i][j];\n cout << hafnian(a) << '\\n';\n\
+    \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/hafnian_of_matrix\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/hafnian.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<vector<Mint>>\
-    \ a(N, vector<Mint>(N));\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j\
-    \ < N; j++) cin >> a[i][j];\n  cout << hafnian(a) << '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector a(N, vector<Mint>(N));\n\
+    \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++) cin >> a[i][j];\n cout\
+    \ << hafnian(a) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -136,7 +136,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/hafnian_of_matrix.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/hafnian_of_matrix.test.cpp

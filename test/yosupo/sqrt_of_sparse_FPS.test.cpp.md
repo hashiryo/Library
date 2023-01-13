@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -24,7 +24,11 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse
+    links:
+    - https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse
   bundledCode: "#line 1 \"test/yosupo/sqrt_of_sparse_FPS.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse\"\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
@@ -206,14 +210,14 @@ data:
     \ &&[j, y]: dat_g) b[i + j]+= x * y;  // a = k(f'g-fg'), b = fg\n return sparse_log_differentiation<mod_t,\
     \ _Nm>(a, b, n);\n}\n#line 5 \"test/yosupo/sqrt_of_sparse_FPS.test.cpp\"\nusing\
     \ namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= StaticModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
+    \ using Mint= ModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
     \ a(N);\n while (K--) {\n  int i;\n  cin >> i;\n  cin >> a[i];\n }\n auto ans=\
     \ sparse_sqrt(a, N);\n if (ans.empty()) cout << -1 << '\\n';\n else\n  for (int\
     \ i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_of_formal_power_series_sparse\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
     \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= StaticModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
+    \ using Mint= ModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
     \ a(N);\n while (K--) {\n  int i;\n  cin >> i;\n  cin >> a[i];\n }\n auto ans=\
     \ sparse_sqrt(a, N);\n if (ans.empty()) cout << -1 << '\\n';\n else\n  for (int\
     \ i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}"
@@ -227,7 +231,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sqrt_of_sparse_FPS.test.cpp

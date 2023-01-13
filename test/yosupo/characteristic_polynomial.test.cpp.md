@@ -122,20 +122,19 @@ data:
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
     \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 6 \"test/yosupo/characteristic_polynomial.test.cpp\"\
-    \n\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<vector<Mint>>\
-    \ a(N, vector<Mint>(N));\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j\
-    \ < N; j++) cin >> a[i][j];\n  auto p = characteristic_polynomial(a);\n  for (int\
-    \ i = 0; i <= N; i++) cout << (i ? \" \" : \"\") << p[i];\n  cout << '\\n';\n\
-    \  return 0;\n}\n"
+    \n\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<vector<Mint>> a(N,\
+    \ vector<Mint>(N));\n for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++)\
+    \ cin >> a[i][j];\n auto p= characteristic_polynomial(a);\n for (int i= 0; i <=\
+    \ N; i++) cout << (i ? \" \" : \"\") << p[i];\n cout << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/characteristic_polynomial\"\
     \n\n#include <bits/stdc++.h>\n#include \"src/LinearAlgebra/characteristic_polynomial.hpp\"\
-    \n#include \"src/Math/ModInt.hpp\"\n\nusing namespace std;\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N;\n  cin >> N;\n  vector<vector<Mint>> a(N, vector<Mint>(N));\n  for (int\
-    \ i = 0; i < N; i++)\n    for (int j = 0; j < N; j++) cin >> a[i][j];\n  auto\
-    \ p = characteristic_polynomial(a);\n  for (int i = 0; i <= N; i++) cout << (i\
-    \ ? \" \" : \"\") << p[i];\n  cout << '\\n';\n  return 0;\n}"
+    \n#include \"src/Math/ModInt.hpp\"\n\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int\
+    \ N;\n cin >> N;\n vector<vector<Mint>> a(N, vector<Mint>(N));\n for (int i= 0;\
+    \ i < N; i++)\n  for (int j= 0; j < N; j++) cin >> a[i][j];\n auto p= characteristic_polynomial(a);\n\
+    \ for (int i= 0; i <= N; i++) cout << (i ? \" \" : \"\") << p[i];\n cout << '\\\
+    n';\n return 0;\n}"
   dependsOn:
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/Math/ModInt.hpp
@@ -144,7 +143,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp

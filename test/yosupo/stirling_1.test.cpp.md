@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -13,7 +13,7 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -37,11 +37,14 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
-  bundledCode: "#line 1 \"test/yosupo/stirling_1.test.cpp\"\n#define PROBLEM \\\n\
-    \  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
-    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+    links:
+    - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+  bundledCode: "#line 1 \"test/yosupo/stirling_1.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
+    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
@@ -502,17 +505,17 @@ data:
     \ a(N + 1, 1), b(N + 1);\n for (int i= 1; i <= N; i++) a[i]= a[i - 1] * get_inv<mod_t,\
     \ LM>(i);\n for (int i= 0; i <= N; i+= 2) b[i]= a[i];\n for (int i= 1; i <= N;\
     \ i+= 2) b[i]= -a[i];\n for (int i= 0; i <= N; i++) a[i]*= mod_t(i).pow(N);\n\
-    \ return a= convolve<mod_t, LM>(a, b), a.resize(N + 1), a;\n}\n#line 6 \"test/yosupo/stirling_1.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  auto ans =\
-    \ stirling_first<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[N - i]\
-    \ << \" \\n\"[i == N];\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \ return a= convolve<mod_t, LM>(a, b), a.resize(N + 1), a;\n}\n#line 5 \"test/yosupo/stirling_1.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto ans= stirling_first<Mint>(N);\n\
+    \ for (int i= 0; i <= N; i++) cout << ans[N - i] << \" \\n\"[i == N];\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/sequences.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  auto ans =\
-    \ stirling_first<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[N - i]\
-    \ << \" \\n\"[i == N];\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto ans= stirling_first<Mint>(N);\n\
+    \ for (int i= 0; i <= N; i++) cout << ans[N - i] << \" \\n\"[i == N];\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -527,7 +530,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_1.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_1.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':question:'
@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -24,7 +24,11 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/multivariate_convolution
+    links:
+    - https://judge.yosupo.jp/problem/multivariate_convolution
   bundledCode: "#line 1 \"test/yosupo/multivariate_convolution.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/multivariate_convolution\"\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
@@ -251,22 +255,22 @@ data:
     \ k & -((l= i + j) >= k)].add(GNA::bf, 0, m);\n  for (int i= k; i--;) gt0[i].idft(0,\
     \ m);\n  for (int i= n; i--;) r[i]= gt0[chi[i]].get(i);\n  return std::vector(r,\
     \ r + n);\n }\n};\n#line 5 \"test/yosupo/multivariate_convolution.test.cpp\"\n\
-    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int k;\n  cin >> k;\n  vector<int>\
-    \ dim(k);\n  for (int i = 0; i < k; i++) cin >> dim[i];\n  MultiVariateConvolution\
-    \ mvc(dim);\n  int n = mvc.size();\n  vector<Mint> f(n), g(n);\n  for (int i =\
-    \ 0; i < n; i++) cin >> f[i];\n  for (int i = 0; i < n; i++) cin >> g[i];\n  auto\
-    \ h = mvc.convolve(f, g);\n  for (int i = 0; i < n; i++) cout << h[i] << \" \\\
-    n\"[i == n - 1];\n  return 0;\n}\n"
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int k;\n cin >> k;\n vector<int> dim(k);\n\
+    \ for (int i= 0; i < k; i++) cin >> dim[i];\n MultiVariateConvolution mvc(dim);\n\
+    \ int n= mvc.size();\n vector<Mint> f(n), g(n);\n for (int i= 0; i < n; i++) cin\
+    \ >> f[i];\n for (int i= 0; i < n; i++) cin >> g[i];\n auto h= mvc.convolve(f,\
+    \ g);\n for (int i= 0; i < n; i++) cout << h[i] << \" \\n\"[i == n - 1];\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multivariate_convolution\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/MultiVariateConvolution.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int k;\n  cin >> k;\n  vector<int>\
-    \ dim(k);\n  for (int i = 0; i < k; i++) cin >> dim[i];\n  MultiVariateConvolution\
-    \ mvc(dim);\n  int n = mvc.size();\n  vector<Mint> f(n), g(n);\n  for (int i =\
-    \ 0; i < n; i++) cin >> f[i];\n  for (int i = 0; i < n; i++) cin >> g[i];\n  auto\
-    \ h = mvc.convolve(f, g);\n  for (int i = 0; i < n; i++) cout << h[i] << \" \\\
-    n\"[i == n - 1];\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int k;\n cin >> k;\n vector<int> dim(k);\n\
+    \ for (int i= 0; i < k; i++) cin >> dim[i];\n MultiVariateConvolution mvc(dim);\n\
+    \ int n= mvc.size();\n vector<Mint> f(n), g(n);\n for (int i= 0; i < n; i++) cin\
+    \ >> f[i];\n for (int i= 0; i < n; i++) cin >> g[i];\n auto h= mvc.convolve(f,\
+    \ g);\n for (int i= 0; i < n; i++) cout << h[i] << \" \\n\"[i == n - 1];\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -277,7 +281,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/multivariate_convolution.test.cpp

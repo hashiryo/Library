@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -24,7 +24,11 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://atcoder.jp/contests/abc222/tasks/abc222_h
+    links:
+    - https://atcoder.jp/contests/abc222/tasks/abc222_h
   bundledCode: "#line 1 \"test/atcoder/abc222_h.sparse_FPS.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc222/tasks/abc222_h\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
@@ -223,7 +227,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc222_h.sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 20:39:18+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc222_h.sparse_FPS.test.cpp

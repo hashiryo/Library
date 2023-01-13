@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
@@ -19,7 +19,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -30,9 +30,13 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
+    links:
+    - https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
   bundledCode: "#line 1 \"test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
     \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
@@ -386,19 +390,19 @@ data:
     \ a, std::uint64_t k) {\n const std::size_t d= c.size();\n assert(d <= a.size());\n\
     \ for (auto &x: c) x= -x;\n c.insert(c.begin(), mod_t(1)), a.resize(d);\n auto\
     \ p= convolve<mod_t, LM>(c, a);\n return p.resize(d), div_at<mod_t, LM>(p, c,\
-    \ k);\n}\n#line 6 \"test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int d;\n  cin >> d;\n  std::uint64_t\
-    \ k;\n  cin >> k;\n  std::vector<Mint> a(d), c(d);\n  for (int i = 0; i < d; i++)\
-    \ cin >> a[i];\n  for (int i = 0; i < d; i++) cin >> c[i];\n  cout << linear_recurrence(c,\
-    \ a, k) << '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
+    \ k);\n}\n#line 5 \"test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int d;\n cin >> d;\n std::uint64_t k;\n cin\
+    \ >> k;\n std::vector<Mint> a(d), c(d);\n for (int i= 0; i < d; i++) cin >> a[i];\n\
+    \ for (int i= 0; i < d; i++) cin >> c[i];\n cout << linear_recurrence(c, a, k)\
+    \ << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/bostan_mori.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int d;\n  cin >> d;\n  std::uint64_t\
-    \ k;\n  cin >> k;\n  std::vector<Mint> a(d), c(d);\n  for (int i = 0; i < d; i++)\
-    \ cin >> a[i];\n  for (int i = 0; i < d; i++) cin >> c[i];\n  cout << linear_recurrence(c,\
-    \ a, k) << '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int d;\n cin >> d;\n std::uint64_t k;\n cin\
+    \ >> k;\n std::vector<Mint> a(d), c(d);\n for (int i= 0; i < d; i++) cin >> a[i];\n\
+    \ for (int i= 0; i < d; i++) cin >> c[i];\n cout << linear_recurrence(c, a, k)\
+    \ << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -411,7 +415,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp

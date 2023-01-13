@@ -181,18 +181,18 @@ data:
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
     \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 6 \"test/yosupo/gcd_convolution.test.cpp\"\
-    \n\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint>\
-    \ a(N + 1), b(N + 1);\n  for (int i = 1; i <= N; i++) cin >> a[i];\n  for (int\
-    \ i = 1; i <= N; i++) cin >> b[i];\n  auto c = Sieve<>::gcd_conv(a, b);\n  for\
-    \ (int i = 1; i <= N; i++) cout << c[i] << \" \\n\"[i == N];\n  return 0;\n}\n"
+    \n\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N + 1),\
+    \ b(N + 1);\n for (int i= 1; i <= N; i++) cin >> a[i];\n for (int i= 1; i <= N;\
+    \ i++) cin >> b[i];\n auto c= Sieve<>::gcd_conv(a, b);\n for (int i= 1; i <= N;\
+    \ i++) cout << c[i] << \" \\n\"[i == N];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/gcd_convolution\"\n\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/Sieve.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \n\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint>\
-    \ a(N + 1), b(N + 1);\n  for (int i = 1; i <= N; i++) cin >> a[i];\n  for (int\
-    \ i = 1; i <= N; i++) cin >> b[i];\n  auto c = Sieve<>::gcd_conv(a, b);\n  for\
-    \ (int i = 1; i <= N; i++) cout << c[i] << \" \\n\"[i == N];\n  return 0;\n}"
+    \n\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N + 1),\
+    \ b(N + 1);\n for (int i= 1; i <= N; i++) cin >> a[i];\n for (int i= 1; i <= N;\
+    \ i++) cin >> b[i];\n auto c= Sieve<>::gcd_conv(a, b);\n for (int i= 1; i <= N;\
+    \ i++) cout << c[i] << \" \\n\"[i == N];\n return 0;\n}"
   dependsOn:
   - src/Math/Sieve.hpp
   - src/Math/ModInt.hpp
@@ -201,7 +201,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/gcd_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/gcd_convolution.test.cpp

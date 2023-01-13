@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':x:'
@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -24,9 +24,13 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial
+    links:
+    - https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial
   bundledCode: "#line 1 \"test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
     \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
@@ -255,19 +259,19 @@ data:
     \ nc1 + 1, f(k, mod_t::mod() - k, bf));\n  else f(k, c_64 + m - k, bf);\n } else\
     \ if (nc1 < c_64) {\n  if (bf= f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(),\
     \ nc1 + 1, bf);\n  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n }\
-    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 6 \"test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  Mint c;\n  cin >> N >>\
-    \ M >> c;\n  std::vector<Mint> pts(N);\n  for (int i = 0; i < N; i++) cin >> pts[i];\n\
-    \  auto ans = sample_points_shift(pts, c, M);\n  for (int i = 0; i < M; i++) cout\
-    \ << ans[i] << \" \\n\"[i == M - 1];\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial\"\
+    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 5 \"test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N, M;\n Mint c;\n cin >> N >> M >> c;\n\
+    \ std::vector<Mint> pts(N);\n for (int i= 0; i < N; i++) cin >> pts[i];\n auto\
+    \ ans= sample_points_shift(pts, c, M);\n for (int i= 0; i < M; i++) cout << ans[i]\
+    \ << \" \\n\"[i == M - 1];\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/sample_points_shift.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  Mint c;\n  cin >> N >>\
-    \ M >> c;\n  std::vector<Mint> pts(N);\n  for (int i = 0; i < N; i++) cin >> pts[i];\n\
-    \  auto ans = sample_points_shift(pts, c, M);\n  for (int i = 0; i < M; i++) cout\
-    \ << ans[i] << \" \\n\"[i == M - 1];\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N, M;\n Mint c;\n cin >> N >> M >> c;\n\
+    \ std::vector<Mint> pts(N);\n for (int i= 0; i < N; i++) cin >> pts[i];\n auto\
+    \ ans= sample_points_shift(pts, c, M);\n for (int i= 0; i < M; i++) cout << ans[i]\
+    \ << \" \\n\"[i == M - 1];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -278,7 +282,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp

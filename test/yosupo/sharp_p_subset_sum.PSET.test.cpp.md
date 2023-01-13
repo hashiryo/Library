@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':question:'
@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -24,7 +24,11 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/sharp_p_subset_sum
+    links:
+    - https://judge.yosupo.jp/problem/sharp_p_subset_sum
   bundledCode: "#line 1 \"test/yosupo/sharp_p_subset_sum.PSET.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
@@ -351,19 +355,18 @@ data:
     \ * iv;\n                                                           });\n  return\
     \ FPS([rc](int i) { return rc->next(), rc->multiplier()[i]; });\n }\n};\n#line\
     \ 5 \"test/yosupo/sharp_p_subset_sum.PSET.test.cpp\"\nusing namespace std;\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  using FPS = FormalPowerSeries<Mint>;\n  int N, T;\n  cin >> N >> T;\n  vector<Mint>\
-    \ c(T + 1, 0);\n  for (int i = 0; i < N; i++) {\n    int s;\n    cin >> s, c[s]\
-    \ += 1;\n  }\n  auto ans = PSET(FPS(c));\n  for (int t = 1; t <= T; t++) cout\
-    \ << ans[t] << \" \\n\"[t == T];\n  return 0;\n}\n"
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ using FPS= FormalPowerSeries<Mint>;\n int N, T;\n cin >> N >> T;\n vector<Mint>\
+    \ c(T + 1, 0);\n for (int i= 0; i < N; i++) {\n  int s;\n  cin >> s, c[s]+= 1;\n\
+    \ }\n auto ans= PSET(FPS(c));\n for (int t= 1; t <= T; t++) cout << ans[t] <<\
+    \ \" \\n\"[t == T];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
-    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n\
-    \  int N, T;\n  cin >> N >> T;\n  vector<Mint> c(T + 1, 0);\n  for (int i = 0;\
-    \ i < N; i++) {\n    int s;\n    cin >> s, c[s] += 1;\n  }\n  auto ans = PSET(FPS(c));\n\
-    \  for (int t = 1; t <= T; t++) cout << ans[t] << \" \\n\"[t == T];\n  return\
-    \ 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n using FPS= FormalPowerSeries<Mint>;\n int N,\
+    \ T;\n cin >> N >> T;\n vector<Mint> c(T + 1, 0);\n for (int i= 0; i < N; i++)\
+    \ {\n  int s;\n  cin >> s, c[s]+= 1;\n }\n auto ans= PSET(FPS(c));\n for (int\
+    \ t= 1; t <= T; t++) cout << ans[t] << \" \\n\"[t == T];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -374,7 +377,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.PSET.test.cpp

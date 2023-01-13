@@ -167,18 +167,16 @@ data:
     \ b)[0], tmp= 1;\n  for (const auto &x: d) tmp*= x;\n  if (n & 1) ret= -ret;\n\
     \  return ret / tmp;\n }\nprivate:\n std::size_t n;\n std::vector<std::tuple<std::size_t,\
     \ std::size_t, mod_t>> dat;\n};\n#line 5 \"test/yosupo/sparse_matrix_det.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint>\
-    \ M(N);\n  for (int i = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b\
-    \ >> c;\n    M.add_component(a, b, c);\n  }\n  cout << M.det() << '\\n';\n  return\
-    \ 0;\n}\n"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int N, K;\n cin >> N >> K;\n SparseSquareMatrix<Mint>\
+    \ M(N);\n for (int i= 0; i < K; i++) {\n  int a, b, c;\n  cin >> a >> b >> c;\n\
+    \  M.add_component(a, b, c);\n }\n cout << M.det() << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, K;\n  cin >> N >> K;\n  SparseSquareMatrix<Mint>\
-    \ M(N);\n  for (int i = 0; i < K; i++) {\n    int a, b, c;\n    cin >> a >> b\
-    \ >> c;\n    M.add_component(a, b, c);\n  }\n  cout << M.det() << '\\n';\n  return\
-    \ 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int N, K;\n cin >> N >> K;\n SparseSquareMatrix<Mint>\
+    \ M(N);\n for (int i= 0; i < K; i++) {\n  int a, b, c;\n  cin >> a >> b >> c;\n\
+    \  M.add_component(a, b, c);\n }\n cout << M.det() << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -189,7 +187,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sparse_matrix_det.test.cpp

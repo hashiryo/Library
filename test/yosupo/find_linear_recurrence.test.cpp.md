@@ -113,18 +113,18 @@ data:
     \ c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i + 1 - d, b= tmp,\
     \ x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x=\
     \ -x;\n return c;\n}\n#line 5 \"test/yosupo/find_linear_recurrence.test.cpp\"\n\
-    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint>\
-    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  vector<Mint> c = berlekamp_massey(a);\n\
-    \  int d = c.size();\n  cout << d << '\\n';\n  for (int i = 0; i < d; i++) cout\
-    \ << c[i] << \" \\n\"[i == d - 1];\n  return 0;\n}\n"
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N);\n for\
+    \ (int i= 0; i < N; i++) cin >> a[i];\n vector<Mint> c= berlekamp_massey(a);\n\
+    \ int d= c.size();\n cout << d << '\\n';\n for (int i= 0; i < d; i++) cout <<\
+    \ c[i] << \" \\n\"[i == d - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/berlekamp_massey.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  vector<Mint>\
-    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  vector<Mint> c = berlekamp_massey(a);\n\
-    \  int d = c.size();\n  cout << d << '\\n';\n  for (int i = 0; i < d; i++) cout\
-    \ << c[i] << \" \\n\"[i == d - 1];\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N);\n for\
+    \ (int i= 0; i < N; i++) cin >> a[i];\n vector<Mint> c= berlekamp_massey(a);\n\
+    \ int d= c.size();\n cout << d << '\\n';\n for (int i= 0; i < d; i++) cout <<\
+    \ c[i] << \" \\n\"[i == d - 1];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -133,7 +133,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/find_linear_recurrence.test.cpp

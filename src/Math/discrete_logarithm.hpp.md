@@ -64,7 +64,7 @@ data:
     \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
     \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
     \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 5 \"src/Math/discrete_logarithm.hpp\"\
-    \nint discrete_logarithm2(int a, int b, int mod) {\n if (a == 0) return b == 0\
+    \nint discrete_logarithm(int a, int b, int mod) {\n if (a == 0) return b == 0\
     \ ? (mod == 1 ? 0 : 1) : (b == 1 ? 0 : -1);\n using namespace math_internal;\n\
     \ int cnt= 0;\n for (int g= 0;; ++cnt, b/= g, mod/= g, b= u64(b) * mod_inv<int>(a\
     \ / g, mod) % mod) {\n  if ((b == 1) || (mod == 1)) return cnt;\n  if ((g= gcd(a,\
@@ -79,7 +79,7 @@ data:
     \  if (b == vs[i][0]) return cnt + vs[i][1] + t;\n return -1;  // no solution\n\
     }\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/mod_inv.hpp\"\
-    \n#include \"src/Math/ModIntPrototype.hpp\"\nint discrete_logarithm2(int a, int\
+    \n#include \"src/Math/ModIntPrototype.hpp\"\nint discrete_logarithm(int a, int\
     \ b, int mod) {\n if (a == 0) return b == 0 ? (mod == 1 ? 0 : 1) : (b == 1 ? 0\
     \ : -1);\n using namespace math_internal;\n int cnt= 0;\n for (int g= 0;; ++cnt,\
     \ b/= g, mod/= g, b= u64(b) * mod_inv<int>(a / g, mod) % mod) {\n  if ((b == 1)\
@@ -99,7 +99,7 @@ data:
   isVerificationFile: false
   path: src/Math/discrete_logarithm.hpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp

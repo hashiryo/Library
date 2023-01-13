@@ -143,22 +143,21 @@ data:
     \ l, r}; }\n};\nstd::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n static\
     \ std::mt19937_64 gen(std::random_device{}());\n return std::uniform_int_distribution<std::uint64_t>(l,\
     \ r)(gen);\n}\n#line 7 \"test/yosupo/z_algorithm.rollinghash.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<(1ll << 61) - 1>;\n  using K = CartesianProduct<Mint,\
-    \ Mint>;\n  using RH = RollingHash<K>;\n  K base = {get_rand(2, (1ll << 61) -\
-    \ 2), get_rand(2, (1ll << 61) - 2)};\n  RH::set_base(base);\n  string S;\n  cin\
-    \ >> S;\n  RH rh(S);\n  int N = S.length();\n  for (int i = 0; i < N; i++) {\n\
-    \    cout << lcp(rh, rh.sub(i, N)) << \" \\n\"[i == N - 1];\n  }\n  return 0;\n\
-    }\n"
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
+    \ Mint= ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using\
+    \ RH= RollingHash<K>;\n K base= {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll\
+    \ << 61) - 2)};\n RH::set_base(base);\n string S;\n cin >> S;\n RH rh(S);\n int\
+    \ N= S.length();\n for (int i= 0; i < N; i++) {\n  cout << lcp(rh, rh.sub(i, N))\
+    \ << \" \\n\"[i == N - 1];\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n#include\
     \ <bits/stdc++.h>\n\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\
-    \n#include \"src/String/RollingHash.hpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<(1ll\
-    \ << 61) - 1>;\n  using K = CartesianProduct<Mint, Mint>;\n  using RH = RollingHash<K>;\n\
-    \  K base = {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll << 61) - 2)};\n  RH::set_base(base);\n\
-    \  string S;\n  cin >> S;\n  RH rh(S);\n  int N = S.length();\n  for (int i =\
-    \ 0; i < N; i++) {\n    cout << lcp(rh, rh.sub(i, N)) << \" \\n\"[i == N - 1];\n\
-    \  }\n  return 0;\n}"
+    \n#include \"src/String/RollingHash.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<(1ll << 61)\
+    \ - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using RH= RollingHash<K>;\n\
+    \ K base= {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll << 61) - 2)};\n RH::set_base(base);\n\
+    \ string S;\n cin >> S;\n RH rh(S);\n int N= S.length();\n for (int i= 0; i <\
+    \ N; i++) {\n  cout << lcp(rh, rh.sub(i, N)) << \" \\n\"[i == N - 1];\n }\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -168,7 +167,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/z_algorithm.rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/z_algorithm.rollinghash.test.cpp

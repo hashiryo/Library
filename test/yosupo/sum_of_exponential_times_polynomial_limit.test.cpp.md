@@ -29,7 +29,7 @@ data:
     - https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
     - https://min-25.hatenablog.com/entry/2015/04/24/031413
   bundledCode: "#line 1 \"test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\"\
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
     \ <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\ntemplate <class mint,\
     \ std::size_t LIM= (1 << 24)> class Combination {\n static inline mint _fact[LIM],\
@@ -198,28 +198,27 @@ data:
     \ static std::vector<T> gcd_conv(std::vector<T> a, std::vector<T> b) {\n  std::size_t\
     \ N= std::max(a.size(), b.size());\n  a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
-    \ a;\n }\n};\n#line 9 \"test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  using C = Combination<Mint>;\n  long\
-    \ long r, d;\n  cin >> r >> d;\n  vector<Mint> sum(d + 1), rpow(d + 1), pd = Sieve<>::pow_table<Mint>(d\
-    \ + 1, d);\n  rpow[0] = 1, sum[0] = rpow[0] * pd[0];\n  for (int i = 1; i <= d;\
-    \ i++) rpow[i] = rpow[i - 1] * r;\n  for (int i = 1; i <= d; i++) sum[i] = sum[i\
-    \ - 1] + rpow[i] * pd[i];\n  Mint ans = 0;\n  for (int i = 0; i <= d; i++) {\n\
-    \    Mint tmp = C::nCr(d + 1, i + 1) * rpow[d - i] * sum[i];\n    ans += (d -\
-    \ i) & 1 ? -tmp : tmp;\n  }\n  ans /= Mint(1 - r).pow(d + 1);\n  cout << ans <<\
-    \ '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\"\
+    \ a;\n }\n};\n#line 8 \"test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n long long r,\
+    \ d;\n cin >> r >> d;\n vector<Mint> sum(d + 1), rpow(d + 1), pd= Sieve<>::pow_table<Mint>(d\
+    \ + 1, d);\n rpow[0]= 1, sum[0]= rpow[0] * pd[0];\n for (int i= 1; i <= d; i++)\
+    \ rpow[i]= rpow[i - 1] * r;\n for (int i= 1; i <= d; i++) sum[i]= sum[i - 1] +\
+    \ rpow[i] * pd[i];\n Mint ans= 0;\n for (int i= 0; i <= d; i++) {\n  Mint tmp=\
+    \ C::nCr(d + 1, i + 1) * rpow[d - i] * sum[i];\n  ans+= (d - i) & 1 ? -tmp : tmp;\n\
+    \ }\n ans/= Mint(1 - r).pow(d + 1);\n cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit\"\
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/Combination.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \n#include \"src/Math/Sieve.hpp\"\nusing namespace std;\n\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  using C = Combination<Mint>;\n  long long r, d;\n  cin >> r >> d;\n  vector<Mint>\
-    \ sum(d + 1), rpow(d + 1), pd = Sieve<>::pow_table<Mint>(d + 1, d);\n  rpow[0]\
-    \ = 1, sum[0] = rpow[0] * pd[0];\n  for (int i = 1; i <= d; i++) rpow[i] = rpow[i\
-    \ - 1] * r;\n  for (int i = 1; i <= d; i++) sum[i] = sum[i - 1] + rpow[i] * pd[i];\n\
-    \  Mint ans = 0;\n  for (int i = 0; i <= d; i++) {\n    Mint tmp = C::nCr(d +\
-    \ 1, i + 1) * rpow[d - i] * sum[i];\n    ans += (d - i) & 1 ? -tmp : tmp;\n  }\n\
-    \  ans /= Mint(1 - r).pow(d + 1);\n  cout << ans << '\\n';\n  return 0;\n}"
+    \n#include \"src/Math/Sieve.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n\
+    \ long long r, d;\n cin >> r >> d;\n vector<Mint> sum(d + 1), rpow(d + 1), pd=\
+    \ Sieve<>::pow_table<Mint>(d + 1, d);\n rpow[0]= 1, sum[0]= rpow[0] * pd[0];\n\
+    \ for (int i= 1; i <= d; i++) rpow[i]= rpow[i - 1] * r;\n for (int i= 1; i <=\
+    \ d; i++) sum[i]= sum[i - 1] + rpow[i] * pd[i];\n Mint ans= 0;\n for (int i= 0;\
+    \ i <= d; i++) {\n  Mint tmp= C::nCr(d + 1, i + 1) * rpow[d - i] * sum[i];\n \
+    \ ans+= (d - i) & 1 ? -tmp : tmp;\n }\n ans/= Mint(1 - r).pow(d + 1);\n cout <<\
+    \ ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/Combination.hpp
   - src/Math/ModInt.hpp
@@ -229,7 +228,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp

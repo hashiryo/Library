@@ -189,30 +189,28 @@ data:
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
     \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 6 \"test/yosupo/linear_equations.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  vector<vector<Mint>>\
-    \ A(N, vector<Mint>(M));\n  vector<Mint> b(N);\n  for (int i = 0; i < N; i++)\n\
-    \    for (int j = 0; j < M; j++) cin >> A[i][j];\n  for (int i = 0; i < N; i++)\
-    \ cin >> b[i];\n  LUDecomposition lu(A);\n  auto res = lu.linear_equations(b);\n\
-    \  if (res.empty()) {\n    cout << \"-1\" << '\\n';\n    return 0;\n  }\n  auto\
-    \ ker = lu.kernel();\n  std::cout << ker.size() << \"\\n\";\n  for (int j = 0;\
-    \ j < M; j++) {\n    cout << (j ? \" \" : \"\") << res[j];\n  }\n  cout << '\\\
-    n';\n  for (int i = 0; i < ker.size(); i++) {\n    for (int j = 0; j < M; j++)\
-    \ {\n      cout << (j ? \" \" : \"\") << ker[i][j];\n    }\n    cout << '\\n';\n\
-    \  }\n  return 0;\n}\n"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n vector<vector<Mint>>\
+    \ A(N, vector<Mint>(M));\n vector<Mint> b(N);\n for (int i= 0; i < N; i++)\n \
+    \ for (int j= 0; j < M; j++) cin >> A[i][j];\n for (int i= 0; i < N; i++) cin\
+    \ >> b[i];\n LUDecomposition lu(A);\n auto res= lu.linear_equations(b);\n if (res.empty())\
+    \ {\n  cout << \"-1\" << '\\n';\n  return 0;\n }\n auto ker= lu.kernel();\n std::cout\
+    \ << ker.size() << \"\\n\";\n for (int j= 0; j < M; j++) {\n  cout << (j ? \"\
+    \ \" : \"\") << res[j];\n }\n cout << '\\n';\n for (int i= 0; i < ker.size();\
+    \ i++) {\n  for (int j= 0; j < M; j++) {\n   cout << (j ? \" \" : \"\") << ker[i][j];\n\
+    \  }\n  cout << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
     \n#include <bits/stdc++.h>\n\n#include \"src/LinearAlgebra/LUDecomposition.hpp\"\
-    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  vector<vector<Mint>> A(N, vector<Mint>(M));\n\
-    \  vector<Mint> b(N);\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j <\
-    \ M; j++) cin >> A[i][j];\n  for (int i = 0; i < N; i++) cin >> b[i];\n  LUDecomposition\
-    \ lu(A);\n  auto res = lu.linear_equations(b);\n  if (res.empty()) {\n    cout\
-    \ << \"-1\" << '\\n';\n    return 0;\n  }\n  auto ker = lu.kernel();\n  std::cout\
-    \ << ker.size() << \"\\n\";\n  for (int j = 0; j < M; j++) {\n    cout << (j ?\
-    \ \" \" : \"\") << res[j];\n  }\n  cout << '\\n';\n  for (int i = 0; i < ker.size();\
-    \ i++) {\n    for (int j = 0; j < M; j++) {\n      cout << (j ? \" \" : \"\")\
-    \ << ker[i][j];\n    }\n    cout << '\\n';\n  }\n  return 0;\n}"
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N, M;\n cin\
+    \ >> N >> M;\n vector<vector<Mint>> A(N, vector<Mint>(M));\n vector<Mint> b(N);\n\
+    \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < M; j++) cin >> A[i][j];\n for\
+    \ (int i= 0; i < N; i++) cin >> b[i];\n LUDecomposition lu(A);\n auto res= lu.linear_equations(b);\n\
+    \ if (res.empty()) {\n  cout << \"-1\" << '\\n';\n  return 0;\n }\n auto ker=\
+    \ lu.kernel();\n std::cout << ker.size() << \"\\n\";\n for (int j= 0; j < M; j++)\
+    \ {\n  cout << (j ? \" \" : \"\") << res[j];\n }\n cout << '\\n';\n for (int i=\
+    \ 0; i < ker.size(); i++) {\n  for (int j= 0; j < M; j++) {\n   cout << (j ? \"\
+    \ \" : \"\") << ker[i][j];\n  }\n  cout << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/LinearAlgebra/LUDecomposition.hpp
   - src/Math/ModInt.hpp
@@ -221,7 +219,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp

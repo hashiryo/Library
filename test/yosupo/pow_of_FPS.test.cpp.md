@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':x:'
@@ -10,7 +10,7 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
@@ -19,7 +19,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -30,7 +30,11 @@ data:
   _isVerificationFailed: true
   _pathExtension: cpp
   _verificationStatusIcon: ':x:'
-  attributes: {}
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/pow_of_formal_power_series
+    links:
+    - https://judge.yosupo.jp/problem/pow_of_formal_power_series
   bundledCode: "#line 1 \"test/yosupo/pow_of_FPS.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
     \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
@@ -423,18 +427,16 @@ data:
     \ return std::vector<mod_t>(GA::bf, GA::bf + n);\n}\n}  // namespace ntt_internal\n\
     using ntt_internal::deriv, ntt_internal::integ, ntt_internal::log, ntt_internal::exp,\
     \ ntt_internal::pow;\n#line 5 \"test/yosupo/pow_of_FPS.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  long long\
-    \ N, M;\n  cin >> N >> M;\n  using Mint = StaticModInt<998244353>;\n  vector<Mint>\
-    \ a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b = pow(a, M);\n \
-    \ for (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n  return\
-    \ 0;\n}\n"
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N,\
+    \ M;\n cin >> N >> M;\n using Mint= ModInt<998244353>;\n vector<Mint> a(N);\n\
+    \ for (int i= 0; i < N; i++) cin >> a[i];\n auto b= pow(a, M);\n for (int i= 0;\
+    \ i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_exp.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  long long N, M;\n  cin >> N >> M;\n  using Mint = StaticModInt<998244353>;\n\
-    \  vector<Mint> a(N);\n  for (int i = 0; i < N; i++) cin >> a[i];\n  auto b =\
-    \ pow(a, M);\n  for (int i = 0; i < N; i++) cout << b[i] << \" \\n\"[i == N -\
-    \ 1];\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ long long N, M;\n cin >> N >> M;\n using Mint= ModInt<998244353>;\n vector<Mint>\
+    \ a(N);\n for (int i= 0; i < N; i++) cin >> a[i];\n auto b= pow(a, M);\n for (int\
+    \ i= 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -447,7 +449,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/pow_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:56:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/pow_of_FPS.test.cpp
