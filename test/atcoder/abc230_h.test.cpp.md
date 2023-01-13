@@ -7,16 +7,16 @@ data:
   - icon: ':x:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':x:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -350,20 +350,20 @@ data:
     \ * iv;\n                                                           });\n  return\
     \ FPS([rc](int i) { return rc->next(), rc->multiplier()[i]; });\n }\n};\n#line\
     \ 6 \"test/atcoder/abc230_h.test.cpp\"\nusing namespace std;\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n\
-    \  using FPS = FormalPowerSeries<Mint>;\n  auto X = FPS::x();\n  int W, K;\n \
-    \ cin >> W >> K;\n  vector<Mint> g(W + 1, 0);\n  for (int i = 0; i < K; i++) {\n\
-    \    int w;\n    cin >> w;\n    g[w] += 1;\n  }\n  FPS ans;\n  ans.reset().set(X\
-    \ * (MSET(FPS(g) + ans) - 1));\n  for (int i = 2; i <= W; i++) cout << ans[i]\
-    \ << '\\n';\n  return 0;\n}\n"
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ using FPS= FormalPowerSeries<Mint>;\n auto X= FPS::x();\n int W, K;\n cin >>\
+    \ W >> K;\n vector<Mint> g(W + 1, 0);\n for (int i= 0; i < K; i++) {\n  int w;\n\
+    \  cin >> w;\n  g[w]+= 1;\n }\n FPS ans;\n ans.reset().set(X * (MSET(FPS(g) +\
+    \ ans) - 1));\n for (int i= 2; i <= W; i++) cout << ans[i] << '\\n';\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc230/tasks/abc230_h\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
-    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint>;\n\
-    \  auto X = FPS::x();\n  int W, K;\n  cin >> W >> K;\n  vector<Mint> g(W + 1,\
-    \ 0);\n  for (int i = 0; i < K; i++) {\n    int w;\n    cin >> w;\n    g[w] +=\
-    \ 1;\n  }\n  FPS ans;\n  ans.reset().set(X * (MSET(FPS(g) + ans) - 1));\n  for\
-    \ (int i = 2; i <= W; i++) cout << ans[i] << '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n using FPS= FormalPowerSeries<Mint>;\n auto\
+    \ X= FPS::x();\n int W, K;\n cin >> W >> K;\n vector<Mint> g(W + 1, 0);\n for\
+    \ (int i= 0; i < K; i++) {\n  int w;\n  cin >> w;\n  g[w]+= 1;\n }\n FPS ans;\n\
+    \ ans.reset().set(X * (MSET(FPS(g) + ans) - 1));\n for (int i= 2; i <= W; i++)\
+    \ cout << ans[i] << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -374,7 +374,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc230_h.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:39:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc230_h.test.cpp

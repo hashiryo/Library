@@ -1,36 +1,36 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/CartesianProduct.hpp
     title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
       times K_n$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/String/RollingHash.hpp
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
   bundledCode: "#line 1 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
-    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\n#include\
+    \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Math/ModIntPrototype.hpp\"\nnamespace\
@@ -142,23 +142,23 @@ data:
     \ - hash[l] * pw[r - l];\n }\n SubString sub(int l, int r) const { return SubString{this,\
     \ l, r}; }\n};\nstd::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n static\
     \ std::mt19937_64 gen(std::random_device{}());\n return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n}\n#line 7 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using\
-    \ Mint = StaticModInt<(1ll << 61) - 1>;\n  using K = CartesianProduct<Mint, Mint>;\n\
-    \  using RH = RollingHash<K>;\n  K base = {get_rand(2, (1ll << 61) - 2), get_rand(2,\
-    \ (1ll << 61) - 2)};\n  RH::set_base(base);\n  string T, P;\n  cin >> T >> P;\n\
-    \  RH rt(T), rp(P);\n  int N = P.length(), M = T.length();\n  auto hash = rp.get_hash();\n\
-    \  for (int i = 0; i + N <= M; i++)\n    if (rt.get_hash(i, i + N) == hash) cout\
-    \ << i << \"\\n\";\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
+    \ r)(gen);\n}\n#line 6 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
+    \ ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using RH=\
+    \ RollingHash<K>;\n K base= {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll <<\
+    \ 61) - 2)};\n RH::set_base(base);\n string T, P;\n cin >> T >> P;\n RH rt(T),\
+    \ rp(P);\n int N= P.length(), M= T.length();\n auto hash= rp.get_hash();\n for\
+    \ (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i, i + N) == hash) cout << i\
+    \ << \"\\n\";\n return 0;\n}\n"
+  code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\
-    \n#include \"src/String/RollingHash.hpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<(1ll\
-    \ << 61) - 1>;\n  using K = CartesianProduct<Mint, Mint>;\n  using RH = RollingHash<K>;\n\
-    \  K base = {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll << 61) - 2)};\n  RH::set_base(base);\n\
-    \  string T, P;\n  cin >> T >> P;\n  RH rt(T), rp(P);\n  int N = P.length(), M\
-    \ = T.length();\n  auto hash = rp.get_hash();\n  for (int i = 0; i + N <= M; i++)\n\
-    \    if (rt.get_hash(i, i + N) == hash) cout << i << \"\\n\";\n  return 0;\n}"
+    \n#include \"src/String/RollingHash.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<(1ll << 61)\
+    \ - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using RH= RollingHash<K>;\n\
+    \ K base= {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll << 61) - 2)};\n RH::set_base(base);\n\
+    \ string T, P;\n cin >> T >> P;\n RH rt(T), rp(P);\n int N= P.length(), M= T.length();\n\
+    \ auto hash= rp.get_hash();\n for (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i,\
+    \ i + N) == hash) cout << i << \"\\n\";\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -168,8 +168,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-13 20:39:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.rollinghash.test.cpp
 layout: document

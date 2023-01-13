@@ -7,16 +7,16 @@ data:
   - icon: ':x:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':x:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -349,30 +349,29 @@ data:
     \                                             return (h0(i) - h1(i) * t0 - c[i])\
     \ * iv;\n                                                           });\n  return\
     \ FPS([rc](int i) { return rc->next(), rc->multiplier()[i]; });\n }\n};\n#line\
-    \ 5 \"test/atcoder/abc213_h.test.cpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n\
-    \  using FPS = FormalPowerSeries<Mint, 40'010>;\n  int N, M, T;\n  cin >> N >>\
-    \ M >> T;\n  std::vector<Mint> p[M];\n  int a[M], b[M];\n  for (int i = 0; i <\
-    \ M; i++) {\n    cin >> a[i] >> b[i], a[i]--, b[i]--;\n    p[i].resize(T, 0);\n\
-    \    for (int j = 0; j < T; j++) cin >> p[i][j];\n  }\n  auto X = FPS::x();\n\
-    \  FPS d[N];\n  FPS::Resetter r[N];\n  for (int s = 0; s < N; s++) r[s] = d[s].reset();\n\
-    \  for (int s = 0; s < N; s++) {\n    FPS tmp;\n    for (int i = 0; i < M; i++)\
-    \ {\n      if (b[i] == s) tmp = d[a[i]] * p[i] + tmp;\n      if (a[i] == s) tmp\
-    \ = d[b[i]] * p[i] + tmp;\n    }\n    tmp = tmp * X;\n    if (!s) tmp = tmp +\
-    \ 1;\n    r[s].set(tmp);\n  }\n  cout << d[0][T] << '\\n';\n  return 0;\n}\n"
+    \ 5 \"test/atcoder/abc213_h.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ using FPS= FormalPowerSeries<Mint, 40'010>;\n int N, M, T;\n cin >> N >> M >>\
+    \ T;\n std::vector<Mint> p[M];\n int a[M], b[M];\n for (int i= 0; i < M; i++)\
+    \ {\n  cin >> a[i] >> b[i], a[i]--, b[i]--;\n  p[i].resize(T, 0);\n  for (int\
+    \ j= 0; j < T; j++) cin >> p[i][j];\n }\n auto X= FPS::x();\n FPS d[N];\n FPS::Resetter\
+    \ r[N];\n for (int s= 0; s < N; s++) r[s]= d[s].reset();\n for (int s= 0; s <\
+    \ N; s++) {\n  FPS tmp;\n  for (int i= 0; i < M; i++) {\n   if (b[i] == s) tmp=\
+    \ d[a[i]] * p[i] + tmp;\n   if (a[i] == s) tmp= d[b[i]] * p[i] + tmp;\n  }\n \
+    \ tmp= tmp * X;\n  if (!s) tmp= tmp + 1;\n  r[s].set(tmp);\n }\n cout << d[0][T]\
+    \ << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_h\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  using FPS = FormalPowerSeries<Mint,\
-    \ 40'010>;\n  int N, M, T;\n  cin >> N >> M >> T;\n  std::vector<Mint> p[M];\n\
-    \  int a[M], b[M];\n  for (int i = 0; i < M; i++) {\n    cin >> a[i] >> b[i],\
-    \ a[i]--, b[i]--;\n    p[i].resize(T, 0);\n    for (int j = 0; j < T; j++) cin\
-    \ >> p[i][j];\n  }\n  auto X = FPS::x();\n  FPS d[N];\n  FPS::Resetter r[N];\n\
-    \  for (int s = 0; s < N; s++) r[s] = d[s].reset();\n  for (int s = 0; s < N;\
-    \ s++) {\n    FPS tmp;\n    for (int i = 0; i < M; i++) {\n      if (b[i] == s)\
-    \ tmp = d[a[i]] * p[i] + tmp;\n      if (a[i] == s) tmp = d[b[i]] * p[i] + tmp;\n\
-    \    }\n    tmp = tmp * X;\n    if (!s) tmp = tmp + 1;\n    r[s].set(tmp);\n \
-    \ }\n  cout << d[0][T] << '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n using FPS= FormalPowerSeries<Mint, 40'010>;\n\
+    \ int N, M, T;\n cin >> N >> M >> T;\n std::vector<Mint> p[M];\n int a[M], b[M];\n\
+    \ for (int i= 0; i < M; i++) {\n  cin >> a[i] >> b[i], a[i]--, b[i]--;\n  p[i].resize(T,\
+    \ 0);\n  for (int j= 0; j < T; j++) cin >> p[i][j];\n }\n auto X= FPS::x();\n\
+    \ FPS d[N];\n FPS::Resetter r[N];\n for (int s= 0; s < N; s++) r[s]= d[s].reset();\n\
+    \ for (int s= 0; s < N; s++) {\n  FPS tmp;\n  for (int i= 0; i < M; i++) {\n \
+    \  if (b[i] == s) tmp= d[a[i]] * p[i] + tmp;\n   if (a[i] == s) tmp= d[b[i]] *\
+    \ p[i] + tmp;\n  }\n  tmp= tmp * X;\n  if (!s) tmp= tmp + 1;\n  r[s].set(tmp);\n\
+    \ }\n cout << d[0][T] << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -383,7 +382,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_h.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:39:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc213_h.test.cpp

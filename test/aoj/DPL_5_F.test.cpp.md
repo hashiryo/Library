@@ -1,30 +1,30 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/Combination.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97)\
       \ ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F
-  bundledCode: "#line 1 \"test/aoj/DPL_5_F.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F\"\
+  bundledCode: "#line 1 \"test/aoj/DPL_5_F.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F\"\
     \n#include <bits/stdc++.h>\n#line 3 \"src/Math/Combination.hpp\"\ntemplate <class\
     \ mint, std::size_t LIM= (1 << 24)> class Combination {\n static inline mint _fact[LIM],\
     \ _finv[LIM];\n static inline int lim= 0;\n static inline void set(int sz) {\n\
@@ -114,17 +114,15 @@ data:
     \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
     \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 6 \"test/aoj/DPL_5_F.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  int n, k;\n  cin >> n >> k;\n  using Mint = StaticModInt<int(1e9 + 7)>;\n \
-    \ using C = Combination<Mint>;\n  cout << C::nHr(k, n - k) << endl;\n  return\
-    \ 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F\"\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\n#line 5 \"test/aoj/DPL_5_F.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int n, k;\n cin >> n >> k;\n using Mint= ModInt<int(1e9 + 7)>;\n using C= Combination<Mint>;\n\
+    \ cout << C::nHr(k, n - k) << endl;\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_F\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/Combination.hpp\"\n#include \"\
-    src/Math/ModInt.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  int n, k;\n  cin >> n >> k;\n  using Mint =\
-    \ StaticModInt<int(1e9 + 7)>;\n  using C = Combination<Mint>;\n  cout << C::nHr(k,\
-    \ n - k) << endl;\n  return 0;\n}\n"
+    src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int n, k;\n cin >> n >> k;\n using Mint= ModInt<int(1e9 + 7)>;\n using C= Combination<Mint>;\n\
+    \ cout << C::nHr(k, n - k) << endl;\n return 0;\n}\n"
   dependsOn:
   - src/Math/Combination.hpp
   - src/Math/ModInt.hpp
@@ -133,8 +131,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_5_F.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-13 20:39:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_F.test.cpp
 layout: document

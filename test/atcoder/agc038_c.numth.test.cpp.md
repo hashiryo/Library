@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -182,21 +182,20 @@ data:
     \ N= std::max(a.size(), b.size());\n  a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
     \ a;\n }\n};\n#line 6 \"test/atcoder/agc038_c.numth.test.cpp\"\nusing namespace\
-    \ std;\n\n// O(MAX_A log log MAX_A)\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using Mint = StaticModInt<998244353>;\n  const int MAX_A = 1e6;\n  int N;\n\
-    \  cin >> N;\n  vector<Mint> c(MAX_A + 1, 0);\n  Mint sum = 0;\n  for (int i =\
-    \ 0, A; i < N; i++) cin >> A, c[A] += A, sum += A;\n  auto tmp = Sieve<>::gcd_conv(c,\
-    \ c);\n  Mint sum2 = 0;\n  for (int d = 1; d <= MAX_A; d++) sum2 += tmp[d] / d;\n\
-    \  cout << (sum2 - sum) / 2 << endl;\n  return 0;\n}\n"
+    \ std;\n// O(MAX_A log log MAX_A)\n\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n const int MAX_A= 1e6;\n int N;\n cin >> N;\n\
+    \ vector<Mint> c(MAX_A + 1, 0);\n Mint sum= 0;\n for (int i= 0, A; i < N; i++)\
+    \ cin >> A, c[A]+= A, sum+= A;\n auto tmp= Sieve<>::gcd_conv(c, c);\n Mint sum2=\
+    \ 0;\n for (int d= 1; d <= MAX_A; d++) sum2+= tmp[d] / d;\n cout << (sum2 - sum)\
+    \ / 2 << endl;\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/agc038/tasks/agc038_c\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/Sieve.hpp\"\
-    \nusing namespace std;\n\n// O(MAX_A log log MAX_A)\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n  const\
-    \ int MAX_A = 1e6;\n  int N;\n  cin >> N;\n  vector<Mint> c(MAX_A + 1, 0);\n \
-    \ Mint sum = 0;\n  for (int i = 0, A; i < N; i++) cin >> A, c[A] += A, sum +=\
-    \ A;\n  auto tmp = Sieve<>::gcd_conv(c, c);\n  Mint sum2 = 0;\n  for (int d =\
-    \ 1; d <= MAX_A; d++) sum2 += tmp[d] / d;\n  cout << (sum2 - sum) / 2 << endl;\n\
-    \  return 0;\n}"
+    \nusing namespace std;\n// O(MAX_A log log MAX_A)\n\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n const int MAX_A=\
+    \ 1e6;\n int N;\n cin >> N;\n vector<Mint> c(MAX_A + 1, 0);\n Mint sum= 0;\n for\
+    \ (int i= 0, A; i < N; i++) cin >> A, c[A]+= A, sum+= A;\n auto tmp= Sieve<>::gcd_conv(c,\
+    \ c);\n Mint sum2= 0;\n for (int d= 1; d <= MAX_A; d++) sum2+= tmp[d] / d;\n cout\
+    \ << (sum2 - sum) / 2 << endl;\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -205,7 +204,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/agc038_c.numth.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:39:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/agc038_c.numth.test.cpp

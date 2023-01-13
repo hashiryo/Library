@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: src/Math/DirichletConvSumTable.hpp
     title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -216,16 +216,15 @@ data:
     \ t)\n  for (m= std::sqrt(n= F.N / l), G[l]= A(m) * B(m) - g[1] * A(n); m > 1;)\
     \ G[l]-= F.x[m] * B(n / m) + g[m] * A(n / m), m--;\n return DirichletConvSumTable<mod_t>(F.N,\
     \ g, G);\n}\n#line 6 \"test/atcoder/arc116_c.dujiao.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using\
-    \ Mint = StaticModInt<998244353>;\n  long long N, M;\n  cin >> N >> M;\n  auto\
-    \ zeta = get_1<Mint>(M, pow(M, 2. / 3));\n  cout << zeta.pow2(N).sum() << '\\\
-    n';\n  return 0;\n}\n"
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
+    \ ModInt<998244353>;\n long long N, M;\n cin >> N >> M;\n auto zeta= get_1<Mint>(M,\
+    \ pow(M, 2. / 3));\n cout << zeta.pow2(N).sum() << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc116/tasks/arc116_c\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/DirichletConvSumTable.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  long long N, M;\n  cin >> N >> M;\n\
-    \  auto zeta = get_1<Mint>(M, pow(M, 2. / 3));\n  cout << zeta.pow2(N).sum() <<\
-    \ '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n long long N, M;\n cin >> N >> M;\n auto zeta=\
+    \ get_1<Mint>(M, pow(M, 2. / 3));\n cout << zeta.pow2(N).sum() << '\\n';\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -234,7 +233,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc116_c.dujiao.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:39:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc116_c.dujiao.test.cpp

@@ -5,16 +5,16 @@ data:
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -317,21 +317,21 @@ data:
     \ std::copy(h.begin(), h.end(), std::back_inserter(g));\n  }\n  for (x-= 1, t=\
     \ ~0, j= 0, i= V; i--;) j+= adj[i][i];\n  for (bfs((s= sz) - 1, [&](int u) { t^=\
     \ u; }); --s&= t;) g[s]*= x;\n  return SPS::exp(g)[sz - 1] * pow(y, j);\n }\n\
-    };\n#line 9 \"test/atcoder/arc105_f.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  UndirectedGraphSetPowerSeries<17> g(N);\n  for\
-    \ (int i = 0; i < M; i++) {\n    int a, b;\n    cin >> a >> b;\n    g.add_edge(--a,\
-    \ --b);\n  }\n  cout << g.connected_biparate_graph_num<Mint>()[(1 << N) - 1] <<\
-    \ '\\n';\n  return 0;\n}\n"
+    };\n#line 9 \"test/atcoder/arc105_f.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries<17> g(N);\n for (int\
+    \ i= 0; i < M; i++) {\n  int a, b;\n  cin >> a >> b;\n  g.add_edge(--a, --b);\n\
+    \ }\n cout << g.connected_biparate_graph_num<Mint>()[(1 << N) - 1] << '\\n';\n\
+    \ return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc105/tasks/arc105_f\"\n\n\
     // \u9023\u7D50\u4E8C\u90E8\u30B0\u30E9\u30D5\n\n#include <bits/stdc++.h>\n#include\
     \ \"src/Math/ModInt.hpp\"\n#include \"src/Math/SetPowerSeries.hpp\"\n#include\
-    \ \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using Mint = StaticModInt<998244353>;\n\
-    \  int N, M;\n  cin >> N >> M;\n  UndirectedGraphSetPowerSeries<17> g(N);\n  for\
-    \ (int i = 0; i < M; i++) {\n    int a, b;\n    cin >> a >> b;\n    g.add_edge(--a,\
-    \ --b);\n  }\n  cout << g.connected_biparate_graph_num<Mint>()[(1 << N) - 1] <<\
-    \ '\\n';\n  return 0;\n}\n"
+    \ \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries<17> g(N);\n for (int\
+    \ i= 0; i < M; i++) {\n  int a, b;\n  cin >> a >> b;\n  g.add_edge(--a, --b);\n\
+    \ }\n cout << g.connected_biparate_graph_num<Mint>()[(1 << N) - 1] << '\\n';\n\
+    \ return 0;\n}\n"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -341,7 +341,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc105_f.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:39:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc105_f.test.cpp

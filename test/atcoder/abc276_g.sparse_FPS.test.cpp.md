@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':x:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':x:'
@@ -205,20 +205,20 @@ data:
     \ a[i + j - 1]+= x * y * (i - j) * k;\n for (auto &&[i, x]: dat_f)\n  for (auto\
     \ &&[j, y]: dat_g) b[i + j]+= x * y;  // a = k(f'g-fg'), b = fg\n return sparse_log_differentiation<mod_t,\
     \ _Nm>(a, b, n);\n}\n#line 5 \"test/atcoder/abc276_g.sparse_FPS.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  if\
-    \ (M -= --N; M < 0) {\n    cout << 0 << '\\n';\n    return 0;\n  }\n  auto F =\
-    \ sparse_pow_of_div<Mint>({1, 1}, {1, 0, 0, -1}, N, M + 1);\n  for (int i = 1;\
-    \ i <= M; i++) F[i] += F[i - 1];\n  for (int i = 1; i <= M; i++) F[i] += F[i -\
-    \ 1];\n  cout << F[M] << '\\n';\n  return 0;\n}\n"
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
+    \ Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n if (M-= --N; M < 0)\
+    \ {\n  cout << 0 << '\\n';\n  return 0;\n }\n auto F= sparse_pow_of_div<Mint>({1,\
+    \ 1}, {1, 0, 0, -1}, N, M + 1);\n for (int i= 1; i <= M; i++) F[i]+= F[i - 1];\n\
+    \ for (int i= 1; i <= M; i++) F[i]+= F[i - 1];\n cout << F[M] << '\\n';\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc276/tasks/abc276_g\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N, M;\n  cin >> N >> M;\n  if\
-    \ (M -= --N; M < 0) {\n    cout << 0 << '\\n';\n    return 0;\n  }\n  auto F =\
-    \ sparse_pow_of_div<Mint>({1, 1}, {1, 0, 0, -1}, N, M + 1);\n  for (int i = 1;\
-    \ i <= M; i++) F[i] += F[i - 1];\n  for (int i = 1; i <= M; i++) F[i] += F[i -\
-    \ 1];\n  cout << F[M] << '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n if (M-= --N; M\
+    \ < 0) {\n  cout << 0 << '\\n';\n  return 0;\n }\n auto F= sparse_pow_of_div<Mint>({1,\
+    \ 1}, {1, 0, 0, -1}, N, M + 1);\n for (int i= 1; i <= M; i++) F[i]+= F[i - 1];\n\
+    \ for (int i= 1; i <= M; i++) F[i]+= F[i - 1];\n cout << F[M] << '\\n';\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -229,7 +229,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc276_g.sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
+  timestamp: '2023-01-13 20:39:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc276_g.sparse_FPS.test.cpp

@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModIntPrototype.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc235/tasks/abc235_f
@@ -180,40 +180,38 @@ data:
     \ if constexpr (ge) return a < str[i] ? -1 : 1;\n  else return a > str[i] ? -1\
     \ : 1;\n }\n inline bool is_accept(int s) const { return s >= 0; }\n inline int\
     \ state_size() const { return 2; }\nprivate:\n std::vector<symbol_t> str, alp;\n\
-    };\n#line 7 \"test/atcoder/abc235_f.test.cpp\"\nusing namespace std;\n\nclass\
-    \ DFA_Variety {\n  int conclude;\n\n public:\n  using symbol_t = int;\n  DFA_Variety(int\
-    \ c) : conclude(c) {}\n  inline std::vector<symbol_t> alphabet() const {\n   \
-    \ return {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};\n  }\n  inline int initial_state() const\
-    \ { return 0; }\n  inline int transition(int s, const symbol_t &a, int) const\
-    \ {\n    return s | ((a || s) << a);\n  }\n  inline bool is_accept(int s) const\
-    \ { return (s & conclude) == conclude; }\n  inline int state_size() const { return\
-    \ 1 << 10; }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  string N;\n  cin >> N;\n  int M;\n\
-    \  cin >> M;\n  int c = 0;\n  for (int i = 0; i < M; i++) {\n    int C;\n    cin\
-    \ >> C, c |= 1 << C;\n  }\n  using T = pair<Mint, Mint>;\n  auto add = [](T &l,\
-    \ const T &r) { l.first += r.first, l.second += r.second; };\n  auto f = [](const\
-    \ T &v, int a, int) -> T {\n    return {v.first * 10 + v.second * a, v.second};\n\
-    \  };\n  DFA_Variety dfa_v(c);\n  DFA_Inequality dfa_le(N, 10);\n  cout << dfa_dp<T>(dfa_v\
-    \ & dfa_le, N.length(), add, f, {0, 0}, {0, 1}).first\n       << '\\n';\n  return\
-    \ 0;\n}\n"
+    };\n#line 7 \"test/atcoder/abc235_f.test.cpp\"\nusing namespace std;\nclass DFA_Variety\
+    \ {\n int conclude;\npublic:\n using symbol_t= int;\n DFA_Variety(int c): conclude(c)\
+    \ {}\n inline std::vector<symbol_t> alphabet() const { return {0, 1, 2, 3, 4,\
+    \ 5, 6, 7, 8, 9}; }\n inline int initial_state() const { return 0; }\n inline\
+    \ int transition(int s, const symbol_t &a, int) const { return s | ((a || s) <<\
+    \ a); }\n inline bool is_accept(int s) const { return (s & conclude) == conclude;\
+    \ }\n inline int state_size() const { return 1 << 10; }\n};\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n string\
+    \ N;\n cin >> N;\n int M;\n cin >> M;\n int c= 0;\n for (int i= 0; i < M; i++)\
+    \ {\n  int C;\n  cin >> C, c|= 1 << C;\n }\n using T= pair<Mint, Mint>;\n auto\
+    \ add= [](T &l, const T &r) { l.first+= r.first, l.second+= r.second; };\n auto\
+    \ f= [](const T &v, int a, int) -> T { return {v.first * 10 + v.second * a, v.second};\
+    \ };\n DFA_Variety dfa_v(c);\n DFA_Inequality dfa_le(N, 10);\n cout << dfa_dp<T>(dfa_v\
+    \ & dfa_le, N.length(), add, f, {0, 0}, {0, 1}).first << '\\n';\n return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc235/tasks/abc235_f\"\n#include\
     \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Automaton/dfa_dp.hpp\"\
     \n#include \"src/Automaton/dfa_operations.hpp\"\n#include \"src/Automaton/DFA_Inequality.hpp\"\
-    \nusing namespace std;\n\nclass DFA_Variety {\n  int conclude;\n\n public:\n \
-    \ using symbol_t = int;\n  DFA_Variety(int c) : conclude(c) {}\n  inline std::vector<symbol_t>\
-    \ alphabet() const {\n    return {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};\n  }\n  inline\
-    \ int initial_state() const { return 0; }\n  inline int transition(int s, const\
-    \ symbol_t &a, int) const {\n    return s | ((a || s) << a);\n  }\n  inline bool\
-    \ is_accept(int s) const { return (s & conclude) == conclude; }\n  inline int\
-    \ state_size() const { return 1 << 10; }\n};\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  using Mint = StaticModInt<998244353>;\n  string\
-    \ N;\n  cin >> N;\n  int M;\n  cin >> M;\n  int c = 0;\n  for (int i = 0; i <\
-    \ M; i++) {\n    int C;\n    cin >> C, c |= 1 << C;\n  }\n  using T = pair<Mint,\
-    \ Mint>;\n  auto add = [](T &l, const T &r) { l.first += r.first, l.second +=\
-    \ r.second; };\n  auto f = [](const T &v, int a, int) -> T {\n    return {v.first\
-    \ * 10 + v.second * a, v.second};\n  };\n  DFA_Variety dfa_v(c);\n  DFA_Inequality\
-    \ dfa_le(N, 10);\n  cout << dfa_dp<T>(dfa_v & dfa_le, N.length(), add, f, {0,\
-    \ 0}, {0, 1}).first\n       << '\\n';\n  return 0;\n}"
+    \nusing namespace std;\nclass DFA_Variety {\n int conclude;\npublic:\n using symbol_t=\
+    \ int;\n DFA_Variety(int c): conclude(c) {}\n inline std::vector<symbol_t> alphabet()\
+    \ const { return {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}; }\n inline int initial_state()\
+    \ const { return 0; }\n inline int transition(int s, const symbol_t &a, int) const\
+    \ { return s | ((a || s) << a); }\n inline bool is_accept(int s) const { return\
+    \ (s & conclude) == conclude; }\n inline int state_size() const { return 1 <<\
+    \ 10; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
+    \ Mint= ModInt<998244353>;\n string N;\n cin >> N;\n int M;\n cin >> M;\n int\
+    \ c= 0;\n for (int i= 0; i < M; i++) {\n  int C;\n  cin >> C, c|= 1 << C;\n }\n\
+    \ using T= pair<Mint, Mint>;\n auto add= [](T &l, const T &r) { l.first+= r.first,\
+    \ l.second+= r.second; };\n auto f= [](const T &v, int a, int) -> T { return {v.first\
+    \ * 10 + v.second * a, v.second}; };\n DFA_Variety dfa_v(c);\n DFA_Inequality\
+    \ dfa_le(N, 10);\n cout << dfa_dp<T>(dfa_v & dfa_le, N.length(), add, f, {0, 0},\
+    \ {0, 1}).first << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -224,8 +222,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc235_f.test.cpp
   requiredBy: []
-  timestamp: '2023-01-13 17:51:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-13 20:39:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc235_f.test.cpp
 layout: document
