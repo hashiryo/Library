@@ -23,7 +23,7 @@ data:
   - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
   - icon: ':x:'
@@ -43,7 +43,7 @@ data:
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
   - icon: ':heavy_check_mark:'
@@ -359,21 +359,21 @@ data:
     \ s, e);\n   for (GNA2::bf.dft(0, e), GNA2::bf.mul(gt1[0], 0, e), GNA2::bf.idft(0,\
     \ e), GNA2::bf.get(rr, s, e), rr+= j= s; j--;) rr[j]= -rr[j];\n  }\n }\n}\ntemplate\
     \ <u32 lnR, class mod_t, u32 LM= 1 << 22> void inv_(const mod_t p[], int n, mod_t\
-    \ r[]) {\n static constexpr u32 R= (1 << lnR) - 1;\n using GNA1= GlobalNTTArray<mod_t,\
-    \ LM, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n auto gt1= GlobalNTTArray2D<mod_t,\
-    \ LM, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM, R, 2>::bf;\n assert(n > 0),\
-    \ assert(p[0] != mod_t());\n const int m= pw2(n) >> lnR, m2= m << 1, ed= (n -\
-    \ 1) / m;\n inv_base<LM>(p, m, r);\n for (int k= 0, l; k < ed; p+= m) {\n  for\
-    \ (gt2[k].set(p, 0, l= min(m2, n - m * k)), gt2[k].zeros(l, m2), gt2[k].dft(0,\
-    \ m2), gt1[k].set(r, 0, m), gt1[k].zeros(m, m2), gt1[k].dft(0, m2), GNA2::bf.mul(gt1[k],\
-    \ gt2[0], 0, m2), l= k; l--;) GNA1::bf.mul(gt1[l], gt2[k - l], 0, m2), GNA2::bf.add(GNA1::bf,\
-    \ 0, m2);\n  GNA2::bf.idft(0, m2), GNA2::bf.zeros(0, m);\n  if constexpr (!is_nttfriend<mod_t,\
-    \ LM>()) GNA2::bf.get(r, m, m2), GNA2::bf.set(r, m, m2);\n  for (GNA2::bf.dft(0,\
-    \ m2), GNA2::bf.mul(gt1[0], 0, m2), GNA2::bf.idft(0, m2), GNA2::bf.get(r, m, m\
-    \ + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n }\n}\ntemplate <class\
-    \ mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>& p) {\n static\
-    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){234, 106, 280, 458, 603,\
-    \ 861}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
+    \ r[]) {\n static constexpr u32 R= (1 << lnR) - 1, LM2= LM >> (lnR - 1);\n using\
+    \ GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2,\
+    \ 2>;\n auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    \ LM2, R, 2>::bf;\n assert(n > 0), assert(p[0] != mod_t());\n const int m= pw2(n)\
+    \ >> lnR, m2= m << 1, ed= (n - 1) / m;\n inv_base<LM2>(p, m, r);\n for (int k=\
+    \ 0, l; k < ed; p+= m) {\n  for (gt2[k].set(p, 0, l= min(m2, n - m * k)), gt2[k].zeros(l,\
+    \ m2), gt2[k].dft(0, m2), gt1[k].set(r, 0, m), gt1[k].zeros(m, m2), gt1[k].dft(0,\
+    \ m2), GNA2::bf.mul(gt1[k], gt2[0], 0, m2), l= k; l--;) GNA1::bf.mul(gt1[l], gt2[k\
+    \ - l], 0, m2), GNA2::bf.add(GNA1::bf, 0, m2);\n  GNA2::bf.idft(0, m2), GNA2::bf.zeros(0,\
+    \ m);\n  if constexpr (!is_nttfriend<mod_t, LM>()) GNA2::bf.get(r, m, m2), GNA2::bf.set(r,\
+    \ m, m2);\n  for (GNA2::bf.dft(0, m2), GNA2::bf.mul(gt1[0], 0, m2), GNA2::bf.idft(0,\
+    \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
+    \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
+    \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){234, 106,\
+    \ 280, 458, 603, 861}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
     \ LM, 2>::bf;\n const int n= p.size();\n copy_n(p.begin(), n, pp), assert(n >\
     \ 0), assert(p[0] != mod_t());\n if (const mod_t miv= -(r[0]= mod_t(1) / p[0]);\
     \ n > TH) {\n  const int l= pw2(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl=\
@@ -409,21 +409,21 @@ data:
     \ s, e);\n   for (GNA2::bf.dft(0, e), GNA2::bf.mul(gt1[0], 0, e), GNA2::bf.idft(0,\
     \ e), GNA2::bf.get(rr, s, e), rr+= j= s; j--;) rr[j]= -rr[j];\n  }\n }\n}\ntemplate\
     \ <u32 lnR, class mod_t, u32 LM= 1 << 22> void inv_(const mod_t p[], int n, mod_t\
-    \ r[]) {\n static constexpr u32 R= (1 << lnR) - 1;\n using GNA1= GlobalNTTArray<mod_t,\
-    \ LM, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n auto gt1= GlobalNTTArray2D<mod_t,\
-    \ LM, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM, R, 2>::bf;\n assert(n > 0),\
-    \ assert(p[0] != mod_t());\n const int m= pw2(n) >> lnR, m2= m << 1, ed= (n -\
-    \ 1) / m;\n inv_base<LM>(p, m, r);\n for (int k= 0, l; k < ed; p+= m) {\n  for\
-    \ (gt2[k].set(p, 0, l= min(m2, n - m * k)), gt2[k].zeros(l, m2), gt2[k].dft(0,\
-    \ m2), gt1[k].set(r, 0, m), gt1[k].zeros(m, m2), gt1[k].dft(0, m2), GNA2::bf.mul(gt1[k],\
-    \ gt2[0], 0, m2), l= k; l--;) GNA1::bf.mul(gt1[l], gt2[k - l], 0, m2), GNA2::bf.add(GNA1::bf,\
-    \ 0, m2);\n  GNA2::bf.idft(0, m2), GNA2::bf.zeros(0, m);\n  if constexpr (!is_nttfriend<mod_t,\
-    \ LM>()) GNA2::bf.get(r, m, m2), GNA2::bf.set(r, m, m2);\n  for (GNA2::bf.dft(0,\
-    \ m2), GNA2::bf.mul(gt1[0], 0, m2), GNA2::bf.idft(0, m2), GNA2::bf.get(r, m, m\
-    \ + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n }\n}\ntemplate <class\
-    \ mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>& p) {\n static\
-    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){234, 106, 280, 458, 603,\
-    \ 861}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
+    \ r[]) {\n static constexpr u32 R= (1 << lnR) - 1, LM2= LM >> (lnR - 1);\n using\
+    \ GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2,\
+    \ 2>;\n auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    \ LM2, R, 2>::bf;\n assert(n > 0), assert(p[0] != mod_t());\n const int m= pw2(n)\
+    \ >> lnR, m2= m << 1, ed= (n - 1) / m;\n inv_base<LM2>(p, m, r);\n for (int k=\
+    \ 0, l; k < ed; p+= m) {\n  for (gt2[k].set(p, 0, l= min(m2, n - m * k)), gt2[k].zeros(l,\
+    \ m2), gt2[k].dft(0, m2), gt1[k].set(r, 0, m), gt1[k].zeros(m, m2), gt1[k].dft(0,\
+    \ m2), GNA2::bf.mul(gt1[k], gt2[0], 0, m2), l= k; l--;) GNA1::bf.mul(gt1[l], gt2[k\
+    \ - l], 0, m2), GNA2::bf.add(GNA1::bf, 0, m2);\n  GNA2::bf.idft(0, m2), GNA2::bf.zeros(0,\
+    \ m);\n  if constexpr (!is_nttfriend<mod_t, LM>()) GNA2::bf.get(r, m, m2), GNA2::bf.set(r,\
+    \ m, m2);\n  for (GNA2::bf.dft(0, m2), GNA2::bf.mul(gt1[0], 0, m2), GNA2::bf.idft(0,\
+    \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
+    \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
+    \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){234, 106,\
+    \ 280, 458, 603, 861}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
     \ LM, 2>::bf;\n const int n= p.size();\n copy_n(p.begin(), n, pp), assert(n >\
     \ 0), assert(p[0] != mod_t());\n if (const mod_t miv= -(r[0]= mod_t(1) / p[0]);\
     \ n > TH) {\n  const int l= pw2(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl=\
@@ -456,7 +456,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/SubProductTree.hpp
   - src/FFT/bostan_mori.hpp
-  timestamp: '2023-01-15 15:10:38+09:00'
+  timestamp: '2023-01-17 01:19:23+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/215.Poly.test.cpp
