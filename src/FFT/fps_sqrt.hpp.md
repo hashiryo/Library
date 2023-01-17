@@ -19,7 +19,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
@@ -300,8 +300,8 @@ data:
     \ b, b2);\n  if (!(e>>= 1)) return ret= md.get(ret), ret * 2 < p ? ret : p - ret;\n\
     \ }\n}\nconstexpr i64 mod_sqrt(i64 a, i64 p) {\n assert(p > 0), assert(a >= 0),\
     \ assert(is_prime(p)), a%= p;\n if (a <= 1 || p == 2) return a;\n if (p < (1 <<\
-    \ 30)) return inner_sqrt<int, MP_Mo<u32, u64, 32, 31>>(a, p);\n if (p < (1ull\
-    \ << 62)) return inner_sqrt<i64, MP_Mo<u64, u128, 64, 63>>(a, p);\n return inner_sqrt<i64,\
+    \ 30)) return inner_sqrt<u32, MP_Mo<u32, u64, 32, 31>>(a, p);\n if (p < (1ll <<\
+    \ 62)) return inner_sqrt<u64, MP_Mo<u64, u128, 64, 63>>(a, p);\n return inner_sqrt<u64,\
     \ MP_D2B1>(a, p);\n}\n}\nusing math_internal::mod_sqrt;\n#line 5 \"src/FFT/fps_sqrt.hpp\"\
     \nnamespace math_internal {\ntemplate <size_t LM, class mod_t> void sqrt_base(const\
     \ mod_t p[], int n, mod_t r[], int l, mod_t v[], mod_t iv[]) {\n static constexpr\
@@ -385,7 +385,7 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_sqrt.hpp
   requiredBy: []
-  timestamp: '2023-01-17 01:19:23+09:00'
+  timestamp: '2023-01-17 12:16:13+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sqrt_of_FPS.test.cpp

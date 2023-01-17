@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
@@ -84,9 +84,9 @@ data:
     \ b2, b, b2)) {\n  if (e & 1) mult(ret, r2, b, b2);\n  if (!(e>>= 1)) return ret=\
     \ md.get(ret), ret * 2 < p ? ret : p - ret;\n }\n}\nconstexpr i64 mod_sqrt(i64\
     \ a, i64 p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if\
-    \ (a <= 1 || p == 2) return a;\n if (p < (1 << 30)) return inner_sqrt<int, MP_Mo<u32,\
-    \ u64, 32, 31>>(a, p);\n if (p < (1ull << 62)) return inner_sqrt<i64, MP_Mo<u64,\
-    \ u128, 64, 63>>(a, p);\n return inner_sqrt<i64, MP_D2B1>(a, p);\n}\n}\nusing\
+    \ (a <= 1 || p == 2) return a;\n if (p < (1 << 30)) return inner_sqrt<u32, MP_Mo<u32,\
+    \ u64, 32, 31>>(a, p);\n if (p < (1ll << 62)) return inner_sqrt<u64, MP_Mo<u64,\
+    \ u128, 64, 63>>(a, p);\n return inner_sqrt<u64, MP_D2B1>(a, p);\n}\n}\nusing\
     \ math_internal::mod_sqrt;\n#line 4 \"test/yosupo/sqrt_mod.test.cpp\"\nusing namespace\
     \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int T;\n\
     \  cin >> T;\n  while (T--) {\n    int Y, P;\n    cin >> Y >> P;\n    cout <<\
@@ -103,7 +103,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sqrt_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
+  timestamp: '2023-01-17 12:16:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sqrt_mod.test.cpp
