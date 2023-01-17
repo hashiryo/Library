@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Splay-Tree
     links: []
@@ -331,7 +331,7 @@ data:
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
   timestamp: '2022-09-21 14:30:01+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/ITP2_4_A.SplayTree.test.cpp
   - test/aoj/ITP2_4_C.SplayTree.test.cpp

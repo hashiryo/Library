@@ -60,13 +60,13 @@ data:
   - icon: ':warning:'
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/discrete_logarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
@@ -142,7 +142,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -160,7 +160,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -190,28 +190,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution_large.test.cpp
     title: test/yosupo/convolution_large.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.FPS.test.cpp
     title: test/yosupo/exp_of_FPS.FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_sparse_FPS.test.cpp
     title: test/yosupo/exp_of_sparse_FPS.test.cpp
   - icon: ':x:'

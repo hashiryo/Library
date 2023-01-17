@@ -13,10 +13,10 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
@@ -150,18 +150,18 @@ data:
     \ (g[i] != K(0)) dat.emplace_back(i, g[i]);\n f.resize(n);\n const K iv= K(1)\
     \ / g[0];\n for (int i= 0; i < n; f[i++]*= iv)\n  for (auto &&[j, v]: dat) {\n\
     \   if (i < j) break;\n   f[i]-= f[i - j] * v;\n  }\n return f;\n}\ntemplate <class\
-    \ mod_t, std::size_t LM= 1 << 23> std::vector<mod_t> sparse_log(const std::vector<mod_t>\
+    \ mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sparse_log(const std::vector<mod_t>\
     \ &f, int n) {\n assert(f[0] == mod_t(1));\n std::vector<mod_t> df(n - 1);\n for\
     \ (int i= 1, ed= std::min<int>(n, f.size()); i < ed; ++i) df[i - 1]+= f[i] * i;\n\
     \ df= sparse_div(df, f, n - 1);\n std::vector<mod_t> ret(n);\n for (int i= 1;\
     \ i < n; ++i) ret[i]= df[i - 1] * get_inv<mod_t, LM>(i);\n return ret;\n}\ntemplate\
-    \ <class mod_t, std::size_t LM= 1 << 23> std::vector<mod_t> sparse_exp(const std::vector<mod_t>\
+    \ <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sparse_exp(const std::vector<mod_t>\
     \ &f, int n) {\n assert(f[0] == mod_t(0));\n std::vector<std::pair<int, mod_t>>\
     \ dat;\n for (int i= 1, ed= std::min<int>(n, f.size()); i < ed; ++i)\n  if (f[i]\
     \ != mod_t(0)) dat.emplace_back(i - 1, f[i] * i);\n std::vector<mod_t> ret(n);\n\
     \ ret[0]= 1;\n for (int i= 1; i < n; ret[i]*= get_inv<mod_t, LM>(i), ++i)\n  for\
     \ (auto &&[j, v]: dat) {\n   if (i <= j) break;\n   ret[i]+= ret[i - 1 - j] *\
-    \ v;\n  }\n return ret;\n}\ntemplate <class mod_t, std::size_t LM= 1 << 23> std::vector<mod_t>\
+    \ v;\n  }\n return ret;\n}\ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t>\
     \ sparse_pow(const std::vector<mod_t> &f, std::uint64_t k, int n) {\n std::vector<mod_t>\
     \ ret(n);\n if (k == 0) return ret[0]= 1, ret;\n int cnt= 0, ed= std::min<int>(n,\
     \ f.size());\n while (cnt < ed && f[cnt] == mod_t(0)) cnt++;\n const __int128_t\
@@ -171,7 +171,7 @@ data:
     \ bf[0]= f[cnt].pow(k);\n for (int i= 1; i < sz; bf[i]*= get_inv<mod_t, LM>(i)\
     \ * iv, ++i)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   bf[i]+= v\
     \ * (mk * j - (i - j)) * bf[i - j];\n  }\n return ret;\n}\ntemplate <class mod_t,\
-    \ std::size_t LM= 1 << 23> std::vector<mod_t> sparse_sqrt(const std::vector<mod_t>\
+    \ std::size_t LM= 1 << 24> std::vector<mod_t> sparse_sqrt(const std::vector<mod_t>\
     \ &f, int n) {\n std::vector<mod_t> ret(n);\n int cnt= 0, ed= std::min<int>(n,\
     \ f.size());\n while (cnt < ed && f[cnt] == mod_t(0)) cnt++;\n if (cnt == ed)\
     \ return ret;\n if (cnt & 1) return {};  // no solution\n const int ofs= cnt >>\
@@ -182,7 +182,7 @@ data:
     \ {};  // no solution\n for (int i= 1; i < sz; bf[i]*= get_inv<mod_t, LM>(i) *\
     \ iv, ++i)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   bf[i]+= v *\
     \ (mk * j - (i - j)) * bf[i - j];\n  }\n return ret;\n}\n// F'/F = f(x)/g(x),\
-    \ F[0]=1\ntemplate <class mod_t, std::size_t LM= 1 << 23> std::vector<mod_t> sparse_log_differentiation(const\
+    \ F[0]=1\ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sparse_log_differentiation(const\
     \ std::vector<mod_t> &f, const std::vector<mod_t> &g, int n) {\n assert(g[0] ==\
     \ mod_t(1));\n std::vector<std::pair<int, mod_t>> dat_f, dat_g;\n for (int i=\
     \ 0, ed= std::min<int>(f.size(), n); i < ed; ++i)\n  if (f[i] != mod_t(0)) dat_f.emplace_back(i,\
@@ -192,7 +192,7 @@ data:
     \ {\n   if (i < j) break;\n   d[i]-= v * d[i - j];\n  }\n  for (auto &&[j, v]:\
     \ dat_f) {\n   if (i < j) break;\n   d[i]+= v * ret[i - j];\n  }\n  ret[i + 1]=\
     \ d[i] * get_inv<mod_t, LM>(i + 1);\n }\n return ret;\n}\ntemplate <class mod_t,\
-    \ std::size_t LM= 1 << 23>  // exp(f/g)\nstd::vector<mod_t> sparse_exp_of_div(const\
+    \ std::size_t LM= 1 << 24>  // exp(f/g)\nstd::vector<mod_t> sparse_exp_of_div(const\
     \ std::vector<mod_t> &f, const std::vector<mod_t> &g, int n) {\n assert(f[0] ==\
     \ mod_t(0)), assert(g[0] == mod_t(1));\n std::vector<std::pair<int, mod_t>> dat_f,\
     \ dat_g;\n for (int i= 1, ed= std::min<int>(f.size(), n); i < ed; ++i)\n  if (f[i]\
@@ -202,7 +202,7 @@ data:
     \  for (auto &&[j, y]: dat_g)\n   if (i || j) a[i + j - 1]+= x * y * (i - j);\n\
     \ for (auto &&[i, x]: dat_g)\n  for (auto &&[j, y]: dat_g) b[i + j]+= x * y; \
     \ // a = f'g-fg', b = g^2\n return sparse_log_differentiation<mod_t, LM>(a, b,\
-    \ n);\n}\ntemplate <class mod_t, std::size_t LM= 1 << 23>  // (f/g)^k\nstd::vector<mod_t>\
+    \ n);\n}\ntemplate <class mod_t, std::size_t LM= 1 << 24>  // (f/g)^k\nstd::vector<mod_t>\
     \ sparse_pow_of_div(const std::vector<mod_t> &f, const std::vector<mod_t> &g,\
     \ std::uint64_t k, int n) {\n assert(f[0] == mod_t(1)), assert(g[0] == mod_t(1));\n\
     \ std::vector<std::pair<int, mod_t>> dat_f, dat_g;\n for (int i= 0, ed= std::min<int>(f.size(),\
@@ -235,7 +235,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/log_of_sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-17 12:28:48+09:00'
+  timestamp: '2023-01-17 13:31:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/log_of_sparse_FPS.test.cpp
