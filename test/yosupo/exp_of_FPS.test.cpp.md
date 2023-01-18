@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/exp_of_formal_power_series
@@ -365,10 +365,10 @@ data:
     \ gt1[i - j - 1], d, d + k), GNA1::bf.add(GNA2::bf, d, d + k);\n     GNA1::bf.idft(d,\
     \ d + k), GNA1::bf.get(g, d + len, d + k);\n     for (int t= len; t--;) ret[t]+=\
     \ bf[t];\n    }\n    if (f(f, l + i * len, l + (i + 1) * len, d + k); i == ed\
-    \ - 1) break;\n    gt2[i].set(r + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
+    \ - 1) break;\n    gt2[i].set(rr + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
     \ + len, d + k), gt2[i].dft(d, d + k);\n   }\n  } else\n   for (; i < ed; rr[i]*=\
     \ get_inv<mod_t, LM>(i), ++i)\n    for (j= l; j < i; j++) rr[i]+= rr[j] * dp[i\
-    \ - j];\n };\n return rec(rec, 0, m, 0), vector(r, r + n);\n}\ntemplate <class\
+    \ - j];\n };\n return rec(rec, 0, m, 0), vector(rr, rr + n);\n}\ntemplate <class\
     \ mod_t, size_t LM= 1 << 22> vector<mod_t> pow(const vector<mod_t> &p, uint64_t\
     \ k) {\n mod_t *g= GlobalArray<mod_t, LM, 4>::bf;\n const mod_t MK(k);\n int n=\
     \ p.size(), cnt= 0;\n if (g[0]= 1; k) {\n  while (cnt < n && p[cnt] == mod_t())\
@@ -403,8 +403,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/exp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-18 23:17:24+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-19 00:09:14+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/exp_of_FPS.test.cpp
 layout: document

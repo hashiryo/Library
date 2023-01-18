@@ -23,30 +23,30 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
   - icon: ':x:'
@@ -63,7 +63,7 @@ data:
     title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/fps_exp.hpp\"\n#include <bits/stdc++.h>\n#line 3\
@@ -396,10 +396,10 @@ data:
     \ gt1[i - j - 1], d, d + k), GNA1::bf.add(GNA2::bf, d, d + k);\n     GNA1::bf.idft(d,\
     \ d + k), GNA1::bf.get(g, d + len, d + k);\n     for (int t= len; t--;) ret[t]+=\
     \ bf[t];\n    }\n    if (f(f, l + i * len, l + (i + 1) * len, d + k); i == ed\
-    \ - 1) break;\n    gt2[i].set(r + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
+    \ - 1) break;\n    gt2[i].set(rr + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
     \ + len, d + k), gt2[i].dft(d, d + k);\n   }\n  } else\n   for (; i < ed; rr[i]*=\
     \ get_inv<mod_t, LM>(i), ++i)\n    for (j= l; j < i; j++) rr[i]+= rr[j] * dp[i\
-    \ - j];\n };\n return rec(rec, 0, m, 0), vector(r, r + n);\n}\ntemplate <class\
+    \ - j];\n };\n return rec(rec, 0, m, 0), vector(rr, rr + n);\n}\ntemplate <class\
     \ mod_t, size_t LM= 1 << 22> vector<mod_t> pow(const vector<mod_t> &p, uint64_t\
     \ k) {\n mod_t *g= GlobalArray<mod_t, LM, 4>::bf;\n const mod_t MK(k);\n int n=\
     \ p.size(), cnt= 0;\n if (g[0]= 1; k) {\n  while (cnt < n && p[cnt] == mod_t())\
@@ -440,10 +440,10 @@ data:
     \ gt1[i - j - 1], d, d + k), GNA1::bf.add(GNA2::bf, d, d + k);\n     GNA1::bf.idft(d,\
     \ d + k), GNA1::bf.get(g, d + len, d + k);\n     for (int t= len; t--;) ret[t]+=\
     \ bf[t];\n    }\n    if (f(f, l + i * len, l + (i + 1) * len, d + k); i == ed\
-    \ - 1) break;\n    gt2[i].set(r + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
+    \ - 1) break;\n    gt2[i].set(rr + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
     \ + len, d + k), gt2[i].dft(d, d + k);\n   }\n  } else\n   for (; i < ed; rr[i]*=\
     \ get_inv<mod_t, LM>(i), ++i)\n    for (j= l; j < i; j++) rr[i]+= rr[j] * dp[i\
-    \ - j];\n };\n return rec(rec, 0, m, 0), vector(r, r + n);\n}\ntemplate <class\
+    \ - j];\n };\n return rec(rec, 0, m, 0), vector(rr, rr + n);\n}\ntemplate <class\
     \ mod_t, size_t LM= 1 << 22> vector<mod_t> pow(const vector<mod_t> &p, uint64_t\
     \ k) {\n mod_t *g= GlobalArray<mod_t, LM, 4>::bf;\n const mod_t MK(k);\n int n=\
     \ p.size(), cnt= 0;\n if (g[0]= 1; k) {\n  while (cnt < n && p[cnt] == mod_t())\
@@ -468,8 +468,8 @@ data:
   path: src/FFT/fps_exp.hpp
   requiredBy:
   - src/FFT/sequences.hpp
-  timestamp: '2023-01-18 23:17:24+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-19 00:09:14+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/1080.test.cpp
