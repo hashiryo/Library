@@ -495,8 +495,5 @@ data:
   - test/yosupo/sharp_p_subset_sum.test.cpp
 documentation_of: src/FFT/fps_exp.hpp
 layout: document
-redirect_from:
-- /library/src/FFT/fps_exp.hpp
-- /library/src/FFT/fps_exp.hpp.html
-title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
+title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
 ---

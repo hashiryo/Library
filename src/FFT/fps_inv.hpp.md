@@ -26,7 +26,7 @@ data:
   - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':question:'
@@ -34,7 +34,7 @@ data:
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':question:'
     path: src/FFT/fps_exp.hpp
-    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 log, exp, pow"
+    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
   - icon: ':x:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
@@ -61,16 +61,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - icon: ':x:'
