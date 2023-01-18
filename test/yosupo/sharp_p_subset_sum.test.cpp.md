@@ -350,39 +350,39 @@ data:
     \ p));\n}\ntemplate <class mod_t, size_t LM= 1 << 22> vector<mod_t> exp(const\
     \ vector<mod_t> &p) {\n static constexpr int LM2= LM * 2 / 15;\n static constexpr\
     \ int TH= 64 << ((!is_nttfriend<mod_t, LM>()) << 1);\n mod_t *dp= GlobalArray<mod_t,\
-    \ LM, 1>::bf, *r= GlobalArray<mod_t, LM, 2>::bf, *g= GlobalArray<mod_t, LM2, 0>::bf;\n\
-    \ using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t,\
+    \ LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf, *g= GlobalArray<mod_t, LM2,\
+    \ 0>::bf;\n using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t,\
     \ LM2, 2>;\n auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
     \ LM2, 16, 2>::bf;\n const int n= p.size(), m= pw2(n);\n assert(n > 0), assert(p[0]\
     \ == mod_t());\n copy(p.begin(), p.end(), dp);\n for (int i= n; --i;) dp[i]*=\
-    \ i;\n fill_n(r, n, mod_t()), r[0]= 1;\n for (int r= m, d= 0, R, k, i; r > TH;\
+    \ i;\n fill_n(rr, n, mod_t()), rr[0]= 1;\n for (int r= m, d= 0, R, k, i; r > TH;\
     \ d+= k) {\n  k= (r/= (R= pw2(__builtin_ctz(r) + 1) >> 1)) << 1;\n  for (i= min(R\
     \ - 1, (n - 1) / r); i--;) gt1[i].set(dp + i * r - d, d, d + k), gt1[i].dft(d,\
     \ d + k);\n }\n auto rec= [&](auto f, int l, int r, int d) -> void {\n  if (int\
     \ i= l | (!l), ed= min(r, n), j; r - l > TH) {\n   int R= pw2(__builtin_ctz(r\
     \ - l) + 1) >> 1, len= (r - l) / R, k= len << 1;\n   for (i= 0, ed= min(R, (n\
-    \ - l + len - 1) / len);; i++) {\n    if (mod_t *ret= r + l + i * len, *bf= g\
+    \ - l + len - 1) / len);; i++) {\n    if (mod_t *ret= rr + l + i * len, *bf= g\
     \ + d + len; i) {\n     for (GNA1::bf.zeros(d, d + k), j= i; j--;) GNA2::bf.mul(gt2[j],\
     \ gt1[i - j - 1], d, d + k), GNA1::bf.add(GNA2::bf, d, d + k);\n     GNA1::bf.idft(d,\
     \ d + k), GNA1::bf.get(g, d + len, d + k);\n     for (int t= len; t--;) ret[t]+=\
     \ bf[t];\n    }\n    if (f(f, l + i * len, l + (i + 1) * len, d + k); i == ed\
     \ - 1) break;\n    gt2[i].set(r + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
-    \ + len, d + k), gt2[i].dft(d, d + k);\n   }\n  } else\n   for (; i < ed; r[i]*=\
-    \ get_inv<mod_t, LM>(i), i++)\n    for (j= l; j < i; j++) r[i]+= r[j] * dp[i -\
-    \ j];\n };\n return rec(rec, 0, m, 0), vector(r, r + n);\n}\ntemplate <class mod_t,\
-    \ size_t LM= 1 << 22> vector<mod_t> pow(const vector<mod_t> &p, uint64_t k) {\n\
-    \ mod_t *g= GlobalArray<mod_t, LM, 4>::bf;\n const mod_t MK(k);\n int n= p.size(),\
-    \ cnt= 0;\n if (g[0]= 1; k) {\n  while (cnt < n && p[cnt] == mod_t()) cnt++;\n\
-    \  const __int128_t ofs= (__int128_t)k * cnt, sz= n - ofs;\n  if (sz <= 0) return\
-    \ vector<mod_t>(n, mod_t());\n  const mod_t p0= p[cnt], iv= mod_t(1) / p0, pk=\
-    \ p0.pow(k);\n  for (int i= sz; --i;) g[i]= p[i + cnt] * iv;\n  auto q= log<mod_t,\
-    \ LM>(vector<mod_t>(g, g + sz));\n  for (int i= sz; --i;) q[i]*= MK;\n  copy_n(exp<mod_t,\
-    \ LM>(q).begin(), (int)sz, g + ofs);\n  fill_n(g, (int)ofs, mod_t());\n  for (int\
-    \ i= sz; i--;) g[i + ofs]*= pk;\n } else fill_n(g + 1, n - 1, mod_t());\n return\
-    \ vector(g, g + n);\n}\n}  // namespace math_internal\nusing math_internal::deriv,\
-    \ math_internal::integ, math_internal::log, math_internal::exp, math_internal::pow;\n\
-    #line 5 \"test/yosupo/sharp_p_subset_sum.test.cpp\"\nusing namespace std;\n//\
-    \ log(1+x^s_1)(1+x^s_2)...(1+x^s_N)=log(1+x^s_1)+log(1+x^s_2)+...log(1+x^s_N)\n\
+    \ + len, d + k), gt2[i].dft(d, d + k);\n   }\n  } else\n   for (; i < ed; rr[i]*=\
+    \ get_inv<mod_t, LM>(i), ++i)\n    for (j= l; j < i; j++) rr[i]+= rr[j] * dp[i\
+    \ - j];\n };\n return rec(rec, 0, m, 0), vector(r, r + n);\n}\ntemplate <class\
+    \ mod_t, size_t LM= 1 << 22> vector<mod_t> pow(const vector<mod_t> &p, uint64_t\
+    \ k) {\n mod_t *g= GlobalArray<mod_t, LM, 4>::bf;\n const mod_t MK(k);\n int n=\
+    \ p.size(), cnt= 0;\n if (g[0]= 1; k) {\n  while (cnt < n && p[cnt] == mod_t())\
+    \ cnt++;\n  const __int128_t ofs= (__int128_t)k * cnt, sz= n - ofs;\n  if (sz\
+    \ <= 0) return vector<mod_t>(n, mod_t());\n  const mod_t p0= p[cnt], iv= mod_t(1)\
+    \ / p0, pk= p0.pow(k);\n  for (int i= sz; --i;) g[i]= p[i + cnt] * iv;\n  auto\
+    \ q= log<mod_t, LM>(vector<mod_t>(g, g + sz));\n  for (int i= sz; --i;) q[i]*=\
+    \ MK;\n  copy_n(exp<mod_t, LM>(q).begin(), (int)sz, g + ofs);\n  fill_n(g, (int)ofs,\
+    \ mod_t());\n  for (int i= sz; i--;) g[i + ofs]*= pk;\n } else fill_n(g + 1, n\
+    \ - 1, mod_t());\n return vector(g, g + n);\n}\n}  // namespace math_internal\n\
+    using math_internal::deriv, math_internal::integ, math_internal::log, math_internal::exp,\
+    \ math_internal::pow;\n#line 5 \"test/yosupo/sharp_p_subset_sum.test.cpp\"\nusing\
+    \ namespace std;\n// log(1+x^s_1)(1+x^s_2)...(1+x^s_N)=log(1+x^s_1)+log(1+x^s_2)+...log(1+x^s_N)\n\
     // log(1+x)=x-x^2/2+x^3/3-x^4/4...\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n int N, T;\n cin >> N >> T;\n int c[T + 1];\n\
     \ fill_n(c, T + 1, 0);\n for (int i= 0; i < N; i++) {\n  int s;\n  cin >> s, c[s]++;\n\
@@ -412,7 +412,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-18 22:18:13+09:00'
+  timestamp: '2023-01-18 23:17:24+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.test.cpp
