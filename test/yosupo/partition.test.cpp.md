@@ -34,9 +34,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/partition_function
@@ -460,16 +460,16 @@ data:
     \ LM>(i);\n for (int i= 0; i <= N; i+= 2) b[i]= a[i];\n for (int i= 1; i <= N;\
     \ i+= 2) b[i]= -a[i];\n for (int i= 0; i <= N; i++) a[i]*= mod_t(i).pow(N);\n\
     \ return a= convolve<mod_t, LM>(a, b), a.resize(N + 1), a;\n}\n#line 6 \"test/yosupo/partition.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  auto ans =\
-    \ partition<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[i] << \" \\\
-    n\"[i == N];\n  return 0;\n}\n"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto ans= partition<Mint>(N);\n\
+    \ for (int i= 0; i <= N; i++) cout << ans[i] << \" \\n\"[i == N];\n return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/partition_function\"\n\n\
     #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/sequences.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  using Mint = StaticModInt<998244353>;\n  int N;\n  cin >> N;\n  auto ans =\
-    \ partition<Mint>(N);\n  for (int i = 0; i <= N; i++) cout << ans[i] << \" \\\
-    n\"[i == N];\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto ans= partition<Mint>(N);\n\
+    \ for (int i= 0; i <= N; i++) cout << ans[i] << \" \\n\"[i == N];\n return 0;\n\
+    }"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -484,8 +484,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/partition.test.cpp
   requiredBy: []
-  timestamp: '2023-01-19 00:09:14+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-19 15:55:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/partition.test.cpp
 layout: document

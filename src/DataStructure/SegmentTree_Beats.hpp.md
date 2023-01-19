@@ -12,15 +12,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
     title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/880.Beats.test.cpp
     title: test/yukicoder/880.Beats.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Beats.hpp\"\n#include <bits/stdc++.h>\n\
@@ -91,7 +91,7 @@ data:
   path: src/DataStructure/SegmentTree_Beats.hpp
   requiredBy: []
   timestamp: '2023-01-01 00:16:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/880.Beats.test.cpp
   - test/yukicoder/235.HLD.test.cpp

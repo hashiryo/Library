@@ -19,17 +19,17 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/fps_sqrt.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -329,14 +329,14 @@ data:
     \ s * k); j > 0)\n    for (pp+= s; j--;) rr[j]-= pp[j];\n   GNA2::bf.set(rr, 0,\
     \ s), GNA2::bf.dft(0, e), GNA2::bf.mul(GNA1::bf, 0, e), GNA2::bf.idft(0, e), GNA2::bf.get(rr,\
     \ 0, min(s, n - s * k));\n  }\n }\n}\ntemplate <class mod_t, size_t LM= 1 << 22>\
-    \ vector<mod_t> sqrt(const vector<mod_t>& p) {\n mod_t *pp= GlobalArray<mod_t,\
-    \ LM, 0>::bf, *r= GlobalArray<mod_t, LM, 1>::bf, *v= GlobalArray<mod_t, LM, 2>::bf,\
-    \ *iv= GlobalArray<mod_t, LM, 3>::bf;\n static constexpr size_t LM2= LM >> 2;\n\
-    \ int n= p.size(), cnt= 0;\n while (cnt < n && p[cnt] == mod_t()) cnt++;\n if\
-    \ (cnt == n) return p;\n if (cnt & 1) return {};  // no solution\n const int nn=\
-    \ n - (cnt >> 1), l= n - cnt;\n mod_t* rr= r + (cnt >> 1);\n fill_n(r, n, mod_t());\n\
+    \ vector<mod_t> sqrt(const vector<mod_t>& p) {\n mod_t *r= GlobalArray<mod_t,\
+    \ LM, 1>::bf, *v= GlobalArray<mod_t, LM, 2>::bf, *iv= GlobalArray<mod_t, LM, 3>::bf;\n\
+    \ static constexpr size_t LM2= LM >> 2;\n int n= p.size(), cnt= 0;\n while (cnt\
+    \ < n && p[cnt] == mod_t()) cnt++;\n if (cnt == n) return p;\n if (cnt & 1) return\
+    \ {};  // no solution\n const int nn= n - (cnt >> 1), l= n - cnt;\n const mod_t*\
+    \ pp= p.data() + cnt;\n mod_t* rr= r + (cnt >> 1);\n fill_n(r, n, mod_t());\n\
     \ if (rr[0]= mod_sqrt(pp[0].val(), mod_t::mod()); rr[0] * rr[0] != pp[0]) return\
-    \ {};  // no solution\n sqrt_base<LM2, mod_t>(p.data(), nn, rr, l, v, iv);\n return\
+    \ {};  // no solution\n sqrt_base<LM2, mod_t>(pp, nn, rr, l, v, iv);\n return\
     \ vector(r, r + n);\n}\n}\nusing math_internal::sqrt;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_inv.hpp\"\n\
     #include \"src/Math/mod_sqrt.hpp\"\nnamespace math_internal {\ntemplate <size_t\
@@ -366,14 +366,14 @@ data:
     \   GNA2::bf.set(rr, 0, s), GNA2::bf.dft(0, e), GNA2::bf.mul(GNA1::bf, 0, e),\
     \ GNA2::bf.idft(0, e), GNA2::bf.get(rr, 0, min(s, n - s * k));\n  }\n }\n}\ntemplate\
     \ <class mod_t, size_t LM= 1 << 22> vector<mod_t> sqrt(const vector<mod_t>& p)\
-    \ {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *r= GlobalArray<mod_t, LM, 1>::bf,\
-    \ *v= GlobalArray<mod_t, LM, 2>::bf, *iv= GlobalArray<mod_t, LM, 3>::bf;\n static\
-    \ constexpr size_t LM2= LM >> 2;\n int n= p.size(), cnt= 0;\n while (cnt < n &&\
-    \ p[cnt] == mod_t()) cnt++;\n if (cnt == n) return p;\n if (cnt & 1) return {};\
-    \  // no solution\n const int nn= n - (cnt >> 1), l= n - cnt;\n mod_t* rr= r +\
-    \ (cnt >> 1);\n fill_n(r, n, mod_t());\n if (rr[0]= mod_sqrt(pp[0].val(), mod_t::mod());\
-    \ rr[0] * rr[0] != pp[0]) return {};  // no solution\n sqrt_base<LM2, mod_t>(p.data(),\
-    \ nn, rr, l, v, iv);\n return vector(r, r + n);\n}\n}\nusing math_internal::sqrt;"
+    \ {\n mod_t *r= GlobalArray<mod_t, LM, 1>::bf, *v= GlobalArray<mod_t, LM, 2>::bf,\
+    \ *iv= GlobalArray<mod_t, LM, 3>::bf;\n static constexpr size_t LM2= LM >> 2;\n\
+    \ int n= p.size(), cnt= 0;\n while (cnt < n && p[cnt] == mod_t()) cnt++;\n if\
+    \ (cnt == n) return p;\n if (cnt & 1) return {};  // no solution\n const int nn=\
+    \ n - (cnt >> 1), l= n - cnt;\n const mod_t* pp= p.data() + cnt;\n mod_t* rr=\
+    \ r + (cnt >> 1);\n fill_n(r, n, mod_t());\n if (rr[0]= mod_sqrt(pp[0].val(),\
+    \ mod_t::mod()); rr[0] * rr[0] != pp[0]) return {};  // no solution\n sqrt_base<LM2,\
+    \ mod_t>(pp, nn, rr, l, v, iv);\n return vector(r, r + n);\n}\n}\nusing math_internal::sqrt;"
   dependsOn:
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
@@ -385,8 +385,8 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_sqrt.hpp
   requiredBy: []
-  timestamp: '2023-01-19 12:48:01+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-19 15:55:08+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sqrt_of_FPS.test.cpp
 documentation_of: src/FFT/fps_sqrt.hpp

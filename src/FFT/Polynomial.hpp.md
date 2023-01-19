@@ -45,12 +45,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.Poly.test.cpp
     title: test/yukicoder/215.Poly.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/Polynomial.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -608,7 +608,7 @@ data:
   requiredBy:
   - src/FFT/extgcd.hpp
   timestamp: '2023-01-17 01:19:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/215.Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
