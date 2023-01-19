@@ -333,19 +333,19 @@ data:
     \ s), GNA2::bf.dft(0, e), GNA2::bf.mul(GNA1::bf, 0, e), GNA2::bf.idft(0, e), GNA2::bf.get(rr,\
     \ 0, min(s, n - s * k));\n  }\n }\n}\ntemplate <class mod_t, size_t LM= 1 << 22>\
     \ vector<mod_t> sqrt(const vector<mod_t>& p) {\n mod_t *pp= GlobalArray<mod_t,\
-    \ LM, 0>, *r= GlobalArray<mod_t, LM, 1>, *v= GlobalArray<mod_t, LM, 2>, *iv= GlobalArray<mod_t,\
-    \ LM, 3>;\n static constexpr size_t LM2= LM >> 2;\n int n= p.size(), cnt= 0;\n\
-    \ while (cnt < n && p[cnt] == mod_t()) cnt++;\n if (cnt == n) return p;\n if (cnt\
-    \ & 1) return {};  // no solution\n const int nn= n - (cnt >> 1), l= n - cnt;\n\
-    \ mod_t* rr= r + (cnt >> 1);\n fill_n(r, n, mod_t());\n if (rr[0]= mod_sqrt(pp[0].val(),\
-    \ mod_t::mod()); rr[0] * rr[0] != pp[0]) return {};  // no solution\n sqrt_base<LM2,\
-    \ mod_t>(p.data(), nn, rr, l, v, iv);\n return vector(r, r + n);\n}\n}\nusing\
-    \ math_internal::sqrt;\n#line 5 \"test/yosupo/sqrt_of_FPS.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin\
-    \ >> N;\n using Mint= ModInt<998244353>;\n vector<Mint> a(N);\n for (int i= 0;\
-    \ i < N; i++) cin >> a[i];\n auto b= sqrt(a);\n if (b.size() == 0) {\n  cout <<\
-    \ -1 << endl;\n } else {\n  for (int i= 0; i < N; i++) cout << b[i] << \" \\n\"\
-    [i == N - 1];\n }\n return 0;\n}\n"
+    \ LM, 0>::bf, *r= GlobalArray<mod_t, LM, 1>::bf, *v= GlobalArray<mod_t, LM, 2>::bf,\
+    \ *iv= GlobalArray<mod_t, LM, 3>::bf;\n static constexpr size_t LM2= LM >> 2;\n\
+    \ int n= p.size(), cnt= 0;\n while (cnt < n && p[cnt] == mod_t()) cnt++;\n if\
+    \ (cnt == n) return p;\n if (cnt & 1) return {};  // no solution\n const int nn=\
+    \ n - (cnt >> 1), l= n - cnt;\n mod_t* rr= r + (cnt >> 1);\n fill_n(r, n, mod_t());\n\
+    \ if (rr[0]= mod_sqrt(pp[0].val(), mod_t::mod()); rr[0] * rr[0] != pp[0]) return\
+    \ {};  // no solution\n sqrt_base<LM2, mod_t>(p.data(), nn, rr, l, v, iv);\n return\
+    \ vector(r, r + n);\n}\n}\nusing math_internal::sqrt;\n#line 5 \"test/yosupo/sqrt_of_FPS.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n using Mint= ModInt<998244353>;\n vector<Mint> a(N);\n for\
+    \ (int i= 0; i < N; i++) cin >> a[i];\n auto b= sqrt(a);\n if (b.size() == 0)\
+    \ {\n  cout << -1 << endl;\n } else {\n  for (int i= 0; i < N; i++) cout << b[i]\
+    \ << \" \\n\"[i == N - 1];\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_of_formal_power_series\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_sqrt.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -365,7 +365,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sqrt_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-17 12:16:13+09:00'
+  timestamp: '2023-01-19 12:48:01+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sqrt_of_FPS.test.cpp

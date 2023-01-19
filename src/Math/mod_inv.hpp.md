@@ -277,7 +277,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_set_range_composite.SegTree.test.cpp
     title: test/yosupo/point_set_range_composite.SegTree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -292,7 +292,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_sparse_FPS.test.cpp
     title: test/yosupo/pow_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -325,7 +325,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2.test.cpp
     title: test/yosupo/stirling_2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -334,25 +334,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.rollinghash.test.cpp
     title: test/yosupo/z_algorithm.rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
   - icon: ':x:'

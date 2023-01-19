@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Combination.hpp\"\n#include <bits/stdc++.h>\ntemplate\
@@ -54,7 +54,7 @@ data:
   path: src/Math/Combination.hpp
   requiredBy: []
   timestamp: '2022-12-31 19:53:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DPL_5_F.test.cpp
   - test/aoj/DPL_5_B.test.cpp

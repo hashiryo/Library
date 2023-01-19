@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
@@ -135,32 +135,29 @@ data:
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
-    \nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RcompositeQ\
-    \ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return make_pair(Mint(1),\
-    \ Mint(0)); }\n  static T op(const T &l, const T &r) {\n    return make_pair(r.first\
-    \ * l.first, r.first * l.second + r.second);\n  }\n};\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n  vector<RcompositeQ::T>\
-    \ v(N);\n  for (int i = 0; i < N; i++) {\n    Mint a, b;\n    cin >> a >> b;\n\
-    \    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ> seg(v);\n  while (Q--) {\n\
-    \    bool op;\n    cin >> op;\n    if (op) {\n      int l, r;\n      Mint x;\n\
-    \      cin >> l >> r >> x;\n      auto ans = seg.fold(l, r);\n      cout << ans.first\
-    \ * x + ans.second << endl;\n    } else {\n      int p;\n      Mint c, d;\n  \
-    \    cin >> p >> c >> d;\n      seg.set(p, {c, d});\n    }\n  }\n  return 0;\n\
-    }\n"
+    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RcompositeQ {\n\
+    \ using T= pair<Mint, Mint>;\n static T ti() { return make_pair(Mint(1), Mint(0));\
+    \ }\n static T op(const T &l, const T &r) { return make_pair(r.first * l.first,\
+    \ r.first * l.second + r.second); }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n vector<RcompositeQ::T> v(N);\n for (int i= 0; i\
+    \ < N; i++) {\n  Mint a, b;\n  cin >> a >> b;\n  v[i]= {a, b};\n }\n SegmentTree<RcompositeQ>\
+    \ seg(v);\n while (Q--) {\n  bool op;\n  cin >> op;\n  if (op) {\n   int l, r;\n\
+    \   Mint x;\n   cin >> l >> r >> x;\n   auto ans= seg.fold(l, r);\n   cout <<\
+    \ ans.first * x + ans.second << endl;\n  } else {\n   int p;\n   Mint c, d;\n\
+    \   cin >> p >> c >> d;\n   seg.set(p, {c, d});\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\n\
-    struct RcompositeQ {\n  using T = pair<Mint, Mint>;\n  static T ti() { return\
-    \ make_pair(Mint(1), Mint(0)); }\n  static T op(const T &l, const T &r) {\n  \
-    \  return make_pair(r.first * l.first, r.first * l.second + r.second);\n  }\n\
-    };\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n\
-    \  cin >> N >> Q;\n  vector<RcompositeQ::T> v(N);\n  for (int i = 0; i < N; i++)\
-    \ {\n    Mint a, b;\n    cin >> a >> b;\n    v[i] = {a, b};\n  }\n  SegmentTree<RcompositeQ>\
-    \ seg(v);\n  while (Q--) {\n    bool op;\n    cin >> op;\n    if (op) {\n    \
-    \  int l, r;\n      Mint x;\n      cin >> l >> r >> x;\n      auto ans = seg.fold(l,\
-    \ r);\n      cout << ans.first * x + ans.second << endl;\n    } else {\n     \
-    \ int p;\n      Mint c, d;\n      cin >> p >> c >> d;\n      seg.set(p, {c, d});\n\
-    \    }\n  }\n  return 0;\n}\n"
+    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
+    struct RcompositeQ {\n using T= pair<Mint, Mint>;\n static T ti() { return make_pair(Mint(1),\
+    \ Mint(0)); }\n static T op(const T &l, const T &r) { return make_pair(r.first\
+    \ * l.first, r.first * l.second + r.second); }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n vector<RcompositeQ::T>\
+    \ v(N);\n for (int i= 0; i < N; i++) {\n  Mint a, b;\n  cin >> a >> b;\n  v[i]=\
+    \ {a, b};\n }\n SegmentTree<RcompositeQ> seg(v);\n while (Q--) {\n  bool op;\n\
+    \  cin >> op;\n  if (op) {\n   int l, r;\n   Mint x;\n   cin >> l >> r >> x;\n\
+    \   auto ans= seg.fold(l, r);\n   cout << ans.first * x + ans.second << endl;\n\
+    \  } else {\n   int p;\n   Mint c, d;\n   cin >> p >> c >> d;\n   seg.set(p, {c,\
+    \ d});\n  }\n }\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree.hpp
   - src/Math/ModInt.hpp
@@ -169,8 +166,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-19 12:48:01+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp
 layout: document

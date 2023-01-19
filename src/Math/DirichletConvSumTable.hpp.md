@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.dujiao.test.cpp
     title: test/atcoder/arc116_c.dujiao.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.test.cpp
     title: test/yosupo/sum_of_totient_function.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/DirichletConvSumTable.hpp\"\n#include <bits/stdc++.h>\n\
@@ -251,7 +251,7 @@ data:
   path: src/Math/DirichletConvSumTable.hpp
   requiredBy: []
   timestamp: '2022-12-31 19:53:17+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/arc116_c.dujiao.test.cpp
   - test/atcoder/abc179_c.test.cpp

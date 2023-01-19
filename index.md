@@ -55,7 +55,7 @@ data:
     - icon: ':warning:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':question:'
@@ -64,7 +64,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
     - icon: ':heavy_check_mark:'
@@ -234,18 +234,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/BinomialCoefficient.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/CartesianProduct.hpp
       title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
         times K_n$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97\
         ) ($\\mathbb{F}_p$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/DirichletConvSumTable.hpp
       title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':question:'
@@ -297,14 +297,14 @@ data:
     - icon: ':question:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/mod_tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
     - icon: ':question:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/prime_count.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
     - icon: ':question:'
@@ -360,7 +360,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/KnuthMorrisPratt.hpp
       title: Knuth-Morris-Pratt
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
     - icon: ':heavy_check_mark:'
@@ -1085,7 +1085,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1103,7 +1103,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/primitive_root.test.cpp
       title: test/yosupo/primitive_root.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
       title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1169,7 +1169,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/stirling_1_small_p_large_n.test.cpp
       title: test/yosupo/stirling_1_small_p_large_n.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/stirling_2.test.cpp
       title: test/yosupo/stirling_2.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1184,19 +1184,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
       title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
       title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_floor_of_linear.test.cpp
       title: test/yosupo/sum_of_floor_of_linear.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.test.cpp
       title: test/yosupo/sum_of_totient_function.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/tetration_mod.test.cpp
       title: test/yosupo/tetration_mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1205,7 +1205,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/two_sat.test.cpp
       title: test/yosupo/two_sat.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/z_algorithm.rollinghash.test.cpp
       title: test/yosupo/z_algorithm.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1213,13 +1213,13 @@ data:
       title: test/yosupo/z_algorithm.test.cpp
   - name: test/yukicoder
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1019.test.cpp
       title: test/yukicoder/1019.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1080.sparse_FPS.test.cpp
       title: test/yukicoder/1080.sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1080.test.cpp
       title: test/yukicoder/1080.test.cpp
     - icon: ':x:'

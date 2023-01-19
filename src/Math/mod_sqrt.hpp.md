@@ -42,10 +42,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
     title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
   - icon: ':x:'

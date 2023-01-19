@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -253,33 +253,31 @@ data:
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 8 \"test/yosupo/range_affine_range_sum.DynSeg.test.cpp\"\
-    \n\nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineQ_RsumQ\
-    \ {\n  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T ti() { return\
-    \ 0; }\n  static T op(const T &l, const T &r) { return l + r; }\n  static void\
-    \ mapping(T &v, const E &f, int sz) {\n    v = f.first * v + f.second * sz;\n\
-    \  }\n  static void composition(E &pre, const E &suf) {\n    pre = {suf.first\
-    \ * pre.first, suf.first * pre.second + suf.second};\n  }\n};\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n\
-    \  Mint a[N];\n  for (int i = 0; i < N; i++) cin >> a[i];\n  SegmentTree_Dynamic<RaffineQ_RsumQ>\
-    \ seg(a, a + N);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op\
-    \ >> l >> r;\n    if (op) {\n      cout << seg.fold(l, r) << endl;\n    } else\
-    \ {\n      Mint b, c;\n      cin >> b >> c;\n      seg.apply(l, r, {Mint(b), Mint(c)});\n\
-    \    }\n  }\n  return 0;\n}\n"
+    \n\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineQ_RsumQ\
+    \ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static T ti() { return 0;\
+    \ }\n static T op(const T &l, const T &r) { return l + r; }\n static void mapping(T\
+    \ &v, const E &f, int sz) { v= f.first * v + f.second * sz; }\n static void composition(E\
+    \ &pre, const E &suf) { pre= {suf.first * pre.first, suf.first * pre.second +\
+    \ suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >>\
+    \ a[i];\n SegmentTree_Dynamic<RaffineQ_RsumQ> seg(a, a + N);\n while (Q--) {\n\
+    \  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << seg.fold(l,\
+    \ r) << endl;\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n   seg.apply(l, r,\
+    \ {Mint(b), Mint(c)});\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n\n//\u9045\u5EF6\u4F1D\u642C\u306Everify\n\n#include <bits/stdc++.h>\n#include\
     \ \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \n\nusing namespace std;\n\nusing Mint = StaticModInt<998244353>;\nstruct RaffineQ_RsumQ\
-    \ {\n  using T = Mint;\n  using E = pair<Mint, Mint>;\n  static T ti() { return\
-    \ 0; }\n  static T op(const T &l, const T &r) { return l + r; }\n  static void\
-    \ mapping(T &v, const E &f, int sz) {\n    v = f.first * v + f.second * sz;\n\
-    \  }\n  static void composition(E &pre, const E &suf) {\n    pre = {suf.first\
-    \ * pre.first, suf.first * pre.second + suf.second};\n  }\n};\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, Q;\n  cin >> N >> Q;\n\
-    \  Mint a[N];\n  for (int i = 0; i < N; i++) cin >> a[i];\n  SegmentTree_Dynamic<RaffineQ_RsumQ>\
-    \ seg(a, a + N);\n  while (Q--) {\n    bool op;\n    int l, r;\n    cin >> op\
-    \ >> l >> r;\n    if (op) {\n      cout << seg.fold(l, r) << endl;\n    } else\
-    \ {\n      Mint b, c;\n      cin >> b >> c;\n      seg.apply(l, r, {Mint(b), Mint(c)});\n\
-    \    }\n  }\n  return 0;\n}\n"
+    \n\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineQ_RsumQ\
+    \ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static T ti() { return 0;\
+    \ }\n static T op(const T &l, const T &r) { return l + r; }\n static void mapping(T\
+    \ &v, const E &f, int sz) { v= f.first * v + f.second * sz; }\n static void composition(E\
+    \ &pre, const E &suf) { pre= {suf.first * pre.first, suf.first * pre.second +\
+    \ suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >>\
+    \ a[i];\n SegmentTree_Dynamic<RaffineQ_RsumQ> seg(a, a + N);\n while (Q--) {\n\
+    \  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << seg.fold(l,\
+    \ r) << endl;\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n   seg.apply(l, r,\
+    \ {Mint(b), Mint(c)});\n  }\n }\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree_Dynamic.hpp
   - src/Math/ModInt.hpp
@@ -288,8 +286,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-19 12:48:01+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
 layout: document
