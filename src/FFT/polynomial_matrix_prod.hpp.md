@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/502.test.cpp
     title: test/yukicoder/502.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/polynomial_matrix_prod.hpp\"\n#include <bits/stdc++.h>\n\
@@ -279,7 +279,7 @@ data:
     \ Poly &f, mod_t x) {\n  mod_t ret= mod_t(0);\n  for (int l= f.size(); l--;) ret*=\
     \ x, ret+= f[l];\n  return ret;\n };\n int deg= 1, w;\n for (int i= n; i--;)\n\
     \  for (int j= n; j--;) deg= std::max(deg, (int)m[i][j].size() - 1);\n std::vector<Mat>\
-    \ G(deg + 1, Mat(n, std::vector<mod_t>(n)));\n const int v= get_len((std::sqrt(std::max<std::uint64_t>(1,\
+    \ G(deg + 1, Mat(n, std::vector<mod_t>(n)));\n const int v= pw2((std::sqrt(std::max<std::uint64_t>(1,\
     \ (k + deg - 1) / deg))));\n mod_t tmp, iv= mod_t(1) / v;\n for (int d= deg +\
     \ 1, i; d--;)\n  for (tmp= mod_t(v) * d, i= n; i--;)\n   for (int j= n, l; j--;)\
     \ G[d][i][j]= eval(m[i][j], tmp);\n for (tmp= v, w= 1; w < v; w<<= 1) {\n  auto\
@@ -309,7 +309,7 @@ data:
     \ Poly &f, mod_t x) {\n  mod_t ret= mod_t(0);\n  for (int l= f.size(); l--;) ret*=\
     \ x, ret+= f[l];\n  return ret;\n };\n int deg= 1, w;\n for (int i= n; i--;)\n\
     \  for (int j= n; j--;) deg= std::max(deg, (int)m[i][j].size() - 1);\n std::vector<Mat>\
-    \ G(deg + 1, Mat(n, std::vector<mod_t>(n)));\n const int v= get_len((std::sqrt(std::max<std::uint64_t>(1,\
+    \ G(deg + 1, Mat(n, std::vector<mod_t>(n)));\n const int v= pw2((std::sqrt(std::max<std::uint64_t>(1,\
     \ (k + deg - 1) / deg))));\n mod_t tmp, iv= mod_t(1) / v;\n for (int d= deg +\
     \ 1, i; d--;)\n  for (tmp= mod_t(v) * d, i= n; i--;)\n   for (int j= n, l; j--;)\
     \ G[d][i][j]= eval(m[i][j], tmp);\n for (tmp= v, w= 1; w < v; w<<= 1) {\n  auto\
@@ -332,8 +332,8 @@ data:
   isVerificationFile: false
   path: src/FFT/polynomial_matrix_prod.hpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-19 17:58:38+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/502.test.cpp
 documentation_of: src/FFT/polynomial_matrix_prod.hpp
