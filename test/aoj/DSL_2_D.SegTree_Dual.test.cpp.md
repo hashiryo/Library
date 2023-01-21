@@ -38,7 +38,7 @@ data:
     \nusing namespace std;\nstruct RupdQ {\n using T= int;\n using E= int;\n static\
     \ void mapping(T& v, const E& f) { v= f; }\n static void composition(E& pre, const\
     \ E& suf) { pre= suf; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n, q;\n cin >> n >> q;\n SegmentTree_Dual<RupdQ> seg(n, 1 << 30);\n while\
+    \ int n, q;\n cin >> n >> q;\n SegmentTree_Dual<RupdQ> seg(n, 0x7fffffff);\n while\
     \ (q--) {\n  bool com;\n  cin >> com;\n  if (com) {\n   int i;\n   cin >> i;\n\
     \   cout << seg[i] << endl;\n  } else {\n   int s, t, x;\n   cin >> s >> t >>\
     \ x;\n   seg.apply(s, t + 1, x);\n  }\n }\n return 0;\n}\n"
@@ -47,7 +47,7 @@ data:
     \ namespace std;\nstruct RupdQ {\n using T= int;\n using E= int;\n static void\
     \ mapping(T& v, const E& f) { v= f; }\n static void composition(E& pre, const\
     \ E& suf) { pre= suf; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n, q;\n cin >> n >> q;\n SegmentTree_Dual<RupdQ> seg(n, 1 << 30);\n while\
+    \ int n, q;\n cin >> n >> q;\n SegmentTree_Dual<RupdQ> seg(n, 0x7fffffff);\n while\
     \ (q--) {\n  bool com;\n  cin >> com;\n  if (com) {\n   int i;\n   cin >> i;\n\
     \   cout << seg[i] << endl;\n  } else {\n   int s, t, x;\n   cin >> s >> t >>\
     \ x;\n   seg.apply(s, t + 1, x);\n  }\n }\n return 0;\n}"
@@ -56,7 +56,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:27:17+09:00'
+  timestamp: '2023-01-21 22:17:27+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_D.SegTree_Dual.test.cpp

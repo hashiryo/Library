@@ -22,15 +22,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_frequency.WM.test.cpp
     title: test/yosupo/static_range_frequency.WM.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.WM.test.cpp
     title: test/yukicoder/728.WM.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/919.WM.test.cpp
     title: test/yukicoder/919.WM.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <vector>\n\
@@ -109,7 +109,7 @@ data:
   requiredBy:
   - src/DataStructure/DQuery.hpp
   timestamp: '2023-01-21 19:30:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1549.WM.test.cpp
   - test/aoj/2674.WM.test.cpp

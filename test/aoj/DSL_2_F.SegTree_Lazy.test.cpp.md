@@ -49,7 +49,7 @@ data:
     \  }\n }\n inline void update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k <<\
     \ 1 | 1]); }\n};\n#line 4 \"test/aoj/DSL_2_F.SegTree_Lazy.test.cpp\"\nusing namespace\
     \ std;\nstruct RupdQ_RminQ {\n using T= int;\n using E= int;\n static T ti() {\
-    \ return 1 << 30; }\n static T op(const T& l, const T& r) { return min(l, r);\
+    \ return 0x7fffffff; }\n static T op(const T& l, const T& r) { return min(l, r);\
     \ }\n static bool mapping(T& v, const E& f) { return v= f, true; }\n static void\
     \ composition(E& pre, const E& suf) { pre= suf; }\n};\nsigned main() {\n cin.tie(0);\n\
     \ ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n SegmentTree_Beats<RupdQ_RminQ>\
@@ -59,10 +59,10 @@ data:
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_F\"\
     \n#include <iostream>\n#include \"src/DataStructure/SegmentTree_Beats.hpp\"\n\
     using namespace std;\nstruct RupdQ_RminQ {\n using T= int;\n using E= int;\n static\
-    \ T ti() { return 1 << 30; }\n static T op(const T& l, const T& r) { return min(l,\
-    \ r); }\n static bool mapping(T& v, const E& f) { return v= f, true; }\n static\
-    \ void composition(E& pre, const E& suf) { pre= suf; }\n};\nsigned main() {\n\
-    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n SegmentTree_Beats<RupdQ_RminQ>\
+    \ T ti() { return 0x7fffffff; }\n static T op(const T& l, const T& r) { return\
+    \ min(l, r); }\n static bool mapping(T& v, const E& f) { return v= f, true; }\n\
+    \ static void composition(E& pre, const E& suf) { pre= suf; }\n};\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n SegmentTree_Beats<RupdQ_RminQ>\
     \ seg(n);\n while (q--) {\n  int com, s, t;\n  cin >> com >> s >> t;\n  if (com)\
     \ {\n   cout << seg.fold(s, t + 1) << endl;\n  } else {\n   int x;\n   cin >>\
     \ x;\n   seg.apply(s, t + 1, x);\n  }\n }\n return 0;\n}\n"
@@ -71,7 +71,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:27:17+09:00'
+  timestamp: '2023-01-21 22:17:27+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp

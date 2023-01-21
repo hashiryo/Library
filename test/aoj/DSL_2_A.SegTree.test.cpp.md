@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A
@@ -44,26 +44,26 @@ data:
     \ 2 - 1;\n    return i - n + last;\n   } else val= tmp;\n  }\n  return -1;\n }\n\
     private:\n const int n;\n std::vector<T> dat;\n};\n#line 4 \"test/aoj/DSL_2_A.SegTree.test.cpp\"\
     \nusing namespace std;\nstruct RminQ {\n using T= int;\n static T ti() { return\
-    \ 1 << 30; }\n static T op(const T &l, const T &r) { return min(l, r); }\n};\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >>\
-    \ n >> q;\n SegmentTree<RminQ> seg(n);\n while (q--) {\n  int com, x, y;\n  cin\
-    \ >> com >> x >> y;\n  if (com) {\n   cout << seg.fold(x, y + 1) << endl;\n  }\
-    \ else {\n   seg.set(x, y);\n  }\n }\n return 0;\n}\n"
+    \ 0x7fffffff; }\n static T op(const T &l, const T &r) { return min(l, r); }\n\
+    };\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin\
+    \ >> n >> q;\n SegmentTree<RminQ> seg(n);\n while (q--) {\n  int com, x, y;\n\
+    \  cin >> com >> x >> y;\n  if (com) {\n   cout << seg.fold(x, y + 1) << endl;\n\
+    \  } else {\n   seg.set(x, y);\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_A\"\
     \n#include <iostream>\n#include \"src/DataStructure/SegmentTree.hpp\"\nusing namespace\
-    \ std;\nstruct RminQ {\n using T= int;\n static T ti() { return 1 << 30; }\n static\
-    \ T op(const T &l, const T &r) { return min(l, r); }\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n SegmentTree<RminQ> seg(n);\n\
-    \ while (q--) {\n  int com, x, y;\n  cin >> com >> x >> y;\n  if (com) {\n   cout\
-    \ << seg.fold(x, y + 1) << endl;\n  } else {\n   seg.set(x, y);\n  }\n }\n return\
-    \ 0;\n}"
+    \ std;\nstruct RminQ {\n using T= int;\n static T ti() { return 0x7fffffff; }\n\
+    \ static T op(const T &l, const T &r) { return min(l, r); }\n};\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n SegmentTree<RminQ>\
+    \ seg(n);\n while (q--) {\n  int com, x, y;\n  cin >> com >> x >> y;\n  if (com)\
+    \ {\n   cout << seg.fold(x, y + 1) << endl;\n  } else {\n   seg.set(x, y);\n \
+    \ }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SegmentTree.hpp
   isVerificationFile: true
   path: test/aoj/DSL_2_A.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:27:17+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 22:17:27+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_A.SegTree.test.cpp
 layout: document

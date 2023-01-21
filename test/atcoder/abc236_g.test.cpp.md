@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Matrix.hpp
     title: src/LinearAlgebra/Matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
   _extendedRequiredBy: []
