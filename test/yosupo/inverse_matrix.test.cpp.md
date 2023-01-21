@@ -15,30 +15,31 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inverse_matrix
     links:
     - https://judge.yosupo.jp/problem/inverse_matrix
   bundledCode: "#line 1 \"test/yosupo/inverse_matrix.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/inverse_matrix\"\n#include <bits/stdc++.h>\n\n\
-    #line 3 \"src/LinearAlgebra/LUDecomposition.hpp\"\n#include <type_traits>\n#line\
-    \ 7 \"src/LinearAlgebra/LUDecomposition.hpp\"\ntemplate <class K> class LUDecomposition\
-    \ {\n using Mat= std::vector<std::vector<K>>;\n Mat dat;\n std::vector<std::size_t>\
-    \ perm, piv;\n bool sgn;\n static bool is_zero(K x) {\n  if constexpr (std::is_floating_point_v<K>)\
-    \ return std::abs(x) < 1e-8;\n  else return x == K(0);\n }\npublic:\n LUDecomposition(const\
-    \ Mat &A): dat(A), perm(A.size()), sgn(false) {\n  std::size_t rows= A.size(),\
-    \ cols= A[0].size();\n  std::iota(perm.begin(), perm.end(), 0);\n  for (std::size_t\
-    \ c= 0, psz= 0; c != cols && psz != rows; c++) {\n   auto pos= psz;\n   if constexpr\
-    \ (std::is_floating_point_v<K>) {\n    for (std::size_t r= psz + 1; r < rows;\
-    \ r++)\n     if (std::abs(dat[pos][c]) < std::abs(dat[r][c])) pos= r;\n   } else\
-    \ if (is_zero(dat[pos][c])) {\n    for (std::size_t r= psz + 1; r < rows; r++)\n\
-    \     if (!is_zero(dat[r][c])) pos= r, r= rows;\n   }\n   if (is_zero(dat[pos][c]))\
-    \ continue;\n   if (pos != psz) sgn= !sgn, std::swap(perm[pos], perm[psz]), dat[pos].swap(dat[psz]);\n\
-    \   for (std::size_t r= psz + 1; r < rows; r++) {\n    auto m= dat[r][c] / dat[psz][c];\n\
+    https://judge.yosupo.jp/problem/inverse_matrix\"\n#include <iostream>\n#include\
+    \ <vector>\n#line 3 \"src/LinearAlgebra/LUDecomposition.hpp\"\n#include <type_traits>\n\
+    #include <algorithm>\n#include <numeric>\n#include <cassert>\ntemplate <class\
+    \ K> class LUDecomposition {\n using Mat= std::vector<std::vector<K>>;\n Mat dat;\n\
+    \ std::vector<std::size_t> perm, piv;\n bool sgn;\n static bool is_zero(K x) {\n\
+    \  if constexpr (std::is_floating_point_v<K>) return std::abs(x) < 1e-8;\n  else\
+    \ return x == K(0);\n }\npublic:\n LUDecomposition(const Mat &A): dat(A), perm(A.size()),\
+    \ sgn(false) {\n  std::size_t rows= A.size(), cols= A[0].size();\n  std::iota(perm.begin(),\
+    \ perm.end(), 0);\n  for (std::size_t c= 0, psz= 0; c != cols && psz != rows;\
+    \ c++) {\n   auto pos= psz;\n   if constexpr (std::is_floating_point_v<K>) {\n\
+    \    for (std::size_t r= psz + 1; r < rows; r++)\n     if (std::abs(dat[pos][c])\
+    \ < std::abs(dat[r][c])) pos= r;\n   } else if (is_zero(dat[pos][c])) {\n    for\
+    \ (std::size_t r= psz + 1; r < rows; r++)\n     if (!is_zero(dat[r][c])) pos=\
+    \ r, r= rows;\n   }\n   if (is_zero(dat[pos][c])) continue;\n   if (pos != psz)\
+    \ sgn= !sgn, std::swap(perm[pos], perm[psz]), dat[pos].swap(dat[psz]);\n   for\
+    \ (std::size_t r= psz + 1; r < rows; r++) {\n    auto m= dat[r][c] / dat[psz][c];\n\
     \    dat[r][c]= 0, dat[r][psz]= m;\n    for (std::size_t i= c + 1; i < cols; i++)\
     \ dat[r][i]-= dat[psz][i] * m;\n   }\n   piv.emplace_back(c), psz++;\n  }\n }\n\
     \ std::size_t rank() const { return piv.size(); }\n bool isregular() const { return\
@@ -111,8 +112,9 @@ data:
     \ b(rows);\n  Mat ret;\n  for (std::size_t i= 0; i < rows; b[i++]= 0) b[i]= 1,\
     \ ret.emplace_back(linear_equations(b));\n  for (std::size_t i= 0; i < rows; i++)\n\
     \   for (std::size_t j= 0; j < i; j++) {\n    bool tmp= ret[i][j];\n    ret[i][j]=\
-    \ ret[j][i];\n    ret[j][i]= tmp;\n   }\n  return ret;\n }\n};\n#line 3 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ ret[j][i];\n    ret[j][i]= tmp;\n   }\n  return ret;\n }\n};\n#line 2 \"src/Math/ModInt.hpp\"\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class\
+    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -202,8 +204,8 @@ data:
     \ j < N; j++) cout << (j ? \" \" : \"\") << ans[i][j];\n  cout << '\\n';\n }\n\
     \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix\"\n#include\
-    \ <bits/stdc++.h>\n\n#include \"src/LinearAlgebra/LUDecomposition.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ <iostream>\n#include <vector>\n#include \"src/LinearAlgebra/LUDecomposition.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
     \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N;\n cin >>\
     \ N;\n vector A(N, vector<Mint>(N));\n for (int i= 0; i < N; i++)\n  for (int\
     \ j= 0; j < N; j++) cin >> A[i][j];\n LUDecomposition lu(A);\n auto ans= lu.inverse_matrix();\n\
@@ -218,8 +220,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/inverse_matrix.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 20:28:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 20:48:27+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inverse_matrix.test.cpp
 layout: document

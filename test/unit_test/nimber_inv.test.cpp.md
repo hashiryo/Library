@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   _extendedRequiredBy: []
@@ -15,18 +15,19 @@ data:
     links:
     - https://judge.yosupo.jp/problem/aplusb
   bundledCode: "#line 1 \"test/unit_test/nimber_inv.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/aplusb\"\n#include <bits/stdc++.h>\n#line 3 \"\
-    src/Math/Nimber.hpp\"\nclass Nimber {\n using u64= std::uint64_t;\n using u32=\
-    \ std::uint32_t;\n using u16= std::uint16_t;\n static inline std::array<u16, 65536>\
-    \ pw, ln;\n template <u16 h= 3> static inline u16 half(u16 A) { return A ? pw[(ln[A]\
-    \ + h) % 65535] : 0; }\n template <u16 h= 0> static inline u16 mul(u16 A, u16\
-    \ B) { return A && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template <u16\
-    \ h= 0> static inline u16 mul(u16 A, u16 B, u16 C) { return A && B && C ? pw[(ln[A]\
-    \ + ln[B] + ln[C] + h) % 65535] : 0; }\n static inline u16 inv(u16 A) { return\
-    \ assert(A), pw[65535 - ln[A]]; }\n static inline u16 sqrt(u16 A) { return A ?\
-    \ pw[u16((65537 * u32(ln[A])) >> 1)] : 0; }\n static inline u64 mul(u64 A, u64\
-    \ B) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48;\n \
-    \ u16 b0= u16(B), b1= u16(B >> 16), b2= u16(B >> 32), b3= B >> 48;\n  u16 x0=\
+    https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n#include <random>\n\
+    #include <cassert>\n#line 2 \"src/Math/Nimber.hpp\"\n#include <array>\n#include\
+    \ <numeric>\n#include <utility>\nclass Nimber {\n using u64= std::uint64_t;\n\
+    \ using u32= std::uint32_t;\n using u16= std::uint16_t;\n static inline std::array<u16,\
+    \ 65536> pw, ln;\n template <u16 h= 3> static inline u16 half(u16 A) { return\
+    \ A ? pw[(ln[A] + h) % 65535] : 0; }\n template <u16 h= 0> static inline u16 mul(u16\
+    \ A, u16 B) { return A && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template\
+    \ <u16 h= 0> static inline u16 mul(u16 A, u16 B, u16 C) { return A && B && C ?\
+    \ pw[(ln[A] + ln[B] + ln[C] + h) % 65535] : 0; }\n static inline u16 inv(u16 A)\
+    \ { return assert(A), pw[65535 - ln[A]]; }\n static inline u16 sqrt(u16 A) { return\
+    \ A ? pw[u16((65537 * u32(ln[A])) >> 1)] : 0; }\n static inline u64 mul(u64 A,\
+    \ u64 B) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48;\n\
+    \  u16 b0= u16(B), b1= u16(B >> 16), b2= u16(B >> 32), b3= B >> 48;\n  u16 x0=\
     \ a1 ^ a0, x1= a3 ^ a2, y0= b1 ^ b0, y1= b3 ^ b2;\n  u16 c0= mul(a0, b0), c1=\
     \ mul(x0, y0) ^ c0, c2= mul<0>(a2 ^ a0, b2 ^ b0);\n  u16 c3= mul<0>(x0 ^ x1, y0\
     \ ^ y1) ^ c2 ^ c1;\n  c2^= (c0^= mul<3>(a1, b1)) ^ mul<3>(u16(a3 ^ a1), u16(b3\
@@ -104,31 +105,29 @@ data:
     \ { return x <= r.x; }\n bool operator>=(const Nimber &r) const { return x >=\
     \ r.x; }\n friend std::ostream &operator<<(std::ostream &os, const Nimber &r)\
     \ { return os << r.x; }\n friend std::istream &operator>>(std::istream &is, Nimber\
-    \ &r) { return is >> r.x, is; }\n};\n#line 4 \"test/unit_test/nimber_inv.test.cpp\"\
-    \nusing namespace std;\n\nvoid test(int X) {\n  mt19937 mt(X);\n  uniform_int_distribution<uint64_t>\
-    \ rng(1, ULLONG_MAX);\n  static constexpr int N = 100000;\n  static Nimber a[N],\
-    \ b[N], c[N];\n  for (int i = 0; i < N; i++)\n    a[i] = rng(mt), b[i] = rng(mt),\
-    \ c[i] = a[i] * b[i];\n  for (int i = 0; i < N; i++) {\n    Nimber ans = c[i]\
-    \ / b[i];\n    assert(ans == a[i]);\n    assert(ans.val() == a[i].val());\n  }\n\
-    }\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  Nimber::init();\n\
-    \  int A, B;\n  cin >> A >> B;\n  test(A), test(B);\n  cout << A + B << '\\n';\n\
-    \  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <bits/stdc++.h>\n\
-    #include \"src/Math/Nimber.hpp\"\nusing namespace std;\n\nvoid test(int X) {\n\
-    \  mt19937 mt(X);\n  uniform_int_distribution<uint64_t> rng(1, ULLONG_MAX);\n\
-    \  static constexpr int N = 100000;\n  static Nimber a[N], b[N], c[N];\n  for\
-    \ (int i = 0; i < N; i++)\n    a[i] = rng(mt), b[i] = rng(mt), c[i] = a[i] * b[i];\n\
-    \  for (int i = 0; i < N; i++) {\n    Nimber ans = c[i] / b[i];\n    assert(ans\
-    \ == a[i]);\n    assert(ans.val() == a[i].val());\n  }\n}\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(false);\n  Nimber::init();\n  int A, B;\n\
-    \  cin >> A >> B;\n  test(A), test(B);\n  cout << A + B << '\\n';\n  return 0;\n\
-    }"
+    \ &r) { return is >> r.x, is; }\n};\n#line 6 \"test/unit_test/nimber_inv.test.cpp\"\
+    \nusing namespace std;\nvoid test(int X) {\n mt19937 mt(X);\n uniform_int_distribution<uint64_t>\
+    \ rng(1, uint64_t(-1));\n static constexpr int N= 100000;\n static Nimber a[N],\
+    \ b[N], c[N];\n for (int i= 0; i < N; i++) a[i]= rng(mt), b[i]= rng(mt), c[i]=\
+    \ a[i] * b[i];\n for (int i= 0; i < N; i++) {\n  Nimber ans= c[i] / b[i];\n  assert(ans\
+    \ == a[i]);\n  assert(ans.val() == a[i].val());\n }\n}\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n Nimber::init();\n int A, B;\n cin >> A >> B;\n\
+    \ test(A), test(B);\n cout << A + B << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
+    #include <random>\n#include <cassert>\n#include \"src/Math/Nimber.hpp\"\nusing\
+    \ namespace std;\nvoid test(int X) {\n mt19937 mt(X);\n uniform_int_distribution<uint64_t>\
+    \ rng(1, uint64_t(-1));\n static constexpr int N= 100000;\n static Nimber a[N],\
+    \ b[N], c[N];\n for (int i= 0; i < N; i++) a[i]= rng(mt), b[i]= rng(mt), c[i]=\
+    \ a[i] * b[i];\n for (int i= 0; i < N; i++) {\n  Nimber ans= c[i] / b[i];\n  assert(ans\
+    \ == a[i]);\n  assert(ans.val() == a[i].val());\n }\n}\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n Nimber::init();\n int A, B;\n cin >> A >> B;\n\
+    \ test(A), test(B);\n cout << A + B << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/Nimber.hpp
   isVerificationFile: true
   path: test/unit_test/nimber_inv.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 20:36:38+09:00'
+  timestamp: '2023-01-21 20:48:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/unit_test/nimber_inv.test.cpp

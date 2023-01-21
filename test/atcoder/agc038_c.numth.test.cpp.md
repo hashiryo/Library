@@ -24,7 +24,8 @@ data:
     links:
     - https://atcoder.jp/contests/agc038/tasks/agc038_c
   bundledCode: "#line 1 \"test/atcoder/agc038_c.numth.test.cpp\"\n#define PROBLEM\
-    \ \"https://atcoder.jp/contests/agc038/tasks/agc038_c\"\n\n#include <bits/stdc++.h>\n\
+    \ \"https://atcoder.jp/contests/agc038/tasks/agc038_c\"\n\n#include <iostream>\n\
+    #include <vector>\n#line 2 \"src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
     \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
     \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
@@ -107,7 +108,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/Sieve.hpp\"\ntemplate <int LIM= 1 << 24>\
+    \ return dat[n];\n}\n#line 5 \"src/Math/Sieve.hpp\"\ntemplate <int LIM= 1 << 24>\
     \ class Sieve {\n static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >>\
     \ 1], psz= 0;\n static inline std::int8_t lpfe[LIM >> 1];\n static inline void\
     \ sieve(int N) {  // O(N)\n  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]=\
@@ -184,21 +185,21 @@ data:
     \ static std::vector<T> gcd_conv(std::vector<T> a, std::vector<T> b) {\n  std::size_t\
     \ N= std::max(a.size(), b.size());\n  a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
-    \ a;\n }\n};\n#line 6 \"test/atcoder/agc038_c.numth.test.cpp\"\nusing namespace\
+    \ a;\n }\n};\n#line 7 \"test/atcoder/agc038_c.numth.test.cpp\"\nusing namespace\
     \ std;\n// O(MAX_A log log MAX_A)\n\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ using Mint= ModInt<998244353>;\n const int MAX_A= 1e6;\n int N;\n cin >> N;\n\
     \ vector<Mint> c(MAX_A + 1, 0);\n Mint sum= 0;\n for (int i= 0, A; i < N; i++)\
     \ cin >> A, c[A]+= A, sum+= A;\n auto tmp= Sieve<>::gcd_conv(c, c);\n Mint sum2=\
     \ 0;\n for (int d= 1; d <= MAX_A; d++) sum2+= tmp[d] / d;\n cout << (sum2 - sum)\
-    \ / 2 << endl;\n return 0;\n}\n"
+    \ / 2 << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/agc038/tasks/agc038_c\"\n\n\
-    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/Sieve.hpp\"\
-    \nusing namespace std;\n// O(MAX_A log log MAX_A)\n\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n const int MAX_A=\
-    \ 1e6;\n int N;\n cin >> N;\n vector<Mint> c(MAX_A + 1, 0);\n Mint sum= 0;\n for\
-    \ (int i= 0, A; i < N; i++) cin >> A, c[A]+= A, sum+= A;\n auto tmp= Sieve<>::gcd_conv(c,\
-    \ c);\n Mint sum2= 0;\n for (int d= 1; d <= MAX_A; d++) sum2+= tmp[d] / d;\n cout\
-    \ << (sum2 - sum) / 2 << endl;\n return 0;\n}"
+    #include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/Math/Sieve.hpp\"\nusing namespace std;\n// O(MAX_A log log MAX_A)\n\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ const int MAX_A= 1e6;\n int N;\n cin >> N;\n vector<Mint> c(MAX_A + 1, 0);\n\
+    \ Mint sum= 0;\n for (int i= 0, A; i < N; i++) cin >> A, c[A]+= A, sum+= A;\n\
+    \ auto tmp= Sieve<>::gcd_conv(c, c);\n Mint sum2= 0;\n for (int d= 1; d <= MAX_A;\
+    \ d++) sum2+= tmp[d] / d;\n cout << (sum2 - sum) / 2 << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -207,7 +208,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/agc038_c.numth.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
+  timestamp: '2023-01-21 20:48:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/agc038_c.numth.test.cpp

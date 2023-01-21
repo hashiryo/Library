@@ -109,7 +109,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - icon: ':x:'

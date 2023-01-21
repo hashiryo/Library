@@ -15,27 +15,28 @@ data:
     links:
     - https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers
   bundledCode: "#line 1 \"test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/Sieve.hpp\"\ntemplate <int LIM=\
-    \ 1 << 24> class Sieve {\n static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM\
-    \ >> 1], psz= 0;\n static inline std::int8_t lpfe[LIM >> 1];\n static inline void\
-    \ sieve(int N) {  // O(N)\n  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]=\
-    \ 2, n++;\n  for (; n <= N; n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]=\
-    \ n;\n   for (int j= 1, e= std::min(lpf[i], N / n); j < psz && ps[j] <= e; j++)\
-    \ lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n static inline void set_lpfe(int N)\
-    \ {  // O(N)\n  static int n= 3, i= 1;\n  if (N < n) return;\n  sieve(N), std::copy(lpf\
-    \ + i, lpf + (N >> 1) + 1, lpfpw + i);\n  for (std::fill(lpfe + i, lpfe + (N >>\
-    \ 1) + 1, 1); n <= N; n+= 2, i++)\n   if (int j= (n / lpf[i]) >> 1; lpf[i] ==\
-    \ lpf[j]) lpfe[i]+= lpfe[j], lpfpw[i]*= lpfpw[j];\n }\npublic:\n static int least_prime_factor(int\
-    \ n) { return sieve(n), lpf[n]; }\n // O(log n)\n static std::map<int, short>\
-    \ factorize(int n) {\n  std::map<int, short> ret;\n  if (int t; !(n & 1)) ret[2]=\
-    \ t= __builtin_ctz(n), n>>= t;\n  if (int i= n >> 1; n > 1)\n   for (set_lpfe(n);\
-    \ n > 1; i= n >> 1) ret[lpf[i]]= lpfe[i], n/= lpfpw[i];\n  return ret;\n }\n //\
-    \ O(log n)\n static std::vector<int> divisors(int n) {\n  std::vector<int> ret=\
-    \ {1};\n  for (auto [p, e]: factorize(n))\n   for (std::size_t sz= ret.size(),\
-    \ pw= p; e--; pw*= p)\n    for (int i= sz - 1; i >= 0; i--) ret.push_back(ret[i]\
-    \ * pw);\n  return std::sort(ret.begin(), ret.end()), ret;\n }\n // O(N)\n static\
-    \ std::vector<int> get_primes(int N) { return sieve(N), std::vector<int>(ps, std::upper_bound(ps,\
+    \n#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
+    \n#include <iostream>\n#include <vector>\n#line 3 \"src/Math/Sieve.hpp\"\n#include\
+    \ <algorithm>\n#include <map>\ntemplate <int LIM= 1 << 24> class Sieve {\n static\
+    \ inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static inline\
+    \ std::int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n \
+    \ static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N; n+=\
+    \ 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
+    \ N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n\
+    \ static inline void set_lpfe(int N) {  // O(N)\n  static int n= 3, i= 1;\n  if\
+    \ (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >> 1) + 1, lpfpw +\
+    \ i);\n  for (std::fill(lpfe + i, lpfe + (N >> 1) + 1, 1); n <= N; n+= 2, i++)\n\
+    \   if (int j= (n / lpf[i]) >> 1; lpf[i] == lpf[j]) lpfe[i]+= lpfe[j], lpfpw[i]*=\
+    \ lpfpw[j];\n }\npublic:\n static int least_prime_factor(int n) { return sieve(n),\
+    \ lpf[n]; }\n // O(log n)\n static std::map<int, short> factorize(int n) {\n \
+    \ std::map<int, short> ret;\n  if (int t; !(n & 1)) ret[2]= t= __builtin_ctz(n),\
+    \ n>>= t;\n  if (int i= n >> 1; n > 1)\n   for (set_lpfe(n); n > 1; i= n >> 1)\
+    \ ret[lpf[i]]= lpfe[i], n/= lpfpw[i];\n  return ret;\n }\n // O(log n)\n static\
+    \ std::vector<int> divisors(int n) {\n  std::vector<int> ret= {1};\n  for (auto\
+    \ [p, e]: factorize(n))\n   for (std::size_t sz= ret.size(), pw= p; e--; pw*=\
+    \ p)\n    for (int i= sz - 1; i >= 0; i--) ret.push_back(ret[i] * pw);\n  return\
+    \ std::sort(ret.begin(), ret.end()), ret;\n }\n // O(N)\n static std::vector<int>\
+    \ get_primes(int N) { return sieve(N), std::vector<int>(ps, std::upper_bound(ps,\
     \ ps + psz, N)); }\n template <class T, class F> static inline std::vector<T>\
     \ completely_multiplicative_table(int N, const F &f) {\n  std::vector<T> ret(N\
     \ + 1);\n  sieve(N);\n  for (int n= 3, i= 1; n <= N; n+= 2, i++) ret[n]= lpf[i]\
@@ -94,26 +95,26 @@ data:
     \ N= std::max(a.size(), b.size());\n  a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
     \ a;\n }\n};\n#line 5 \"test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp\"\
-    \n// \u500D\u6570\u30E1\u30D3\u30A6\u30B9\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int T;\n  cin >> T;\n  long\
-    \ long f[1'000'010];\n  while (T--) {\n    long long N, a = 2, ans = 0;\n    cin\
-    \ >> N;\n    for (; a * a * a <= N; a++) f[a] = N / (a * a * a);\n    vector<long\
-    \ long> g(f, f + a);\n    Sieve<>::multiple_mobius(g);\n    for (; --a >= 2;)\
-    \ ans += g[a];\n    cout << ans << '\\n';\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/Sieve.hpp\"\n// \u500D\u6570\u30E1\
-    \u30D3\u30A6\u30B9\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n \
-    \ ios::sync_with_stdio(false);\n  int T;\n  cin >> T;\n  long long f[1'000'010];\n\
-    \  while (T--) {\n    long long N, a = 2, ans = 0;\n    cin >> N;\n    for (;\
-    \ a * a * a <= N; a++) f[a] = N / (a * a * a);\n    vector<long long> g(f, f +\
-    \ a);\n    Sieve<>::multiple_mobius(g);\n    for (; --a >= 2;) ans += g[a];\n\
-    \    cout << ans << '\\n';\n  }\n  return 0;\n}"
+    \n// \u500D\u6570\u30E1\u30D3\u30A6\u30B9\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int T;\n cin >> T;\n long long\
+    \ f[1'000'010];\n while (T--) {\n  long long N, a= 2, ans= 0;\n  cin >> N;\n \
+    \ for (; a * a * a <= N; a++) f[a]= N / (a * a * a);\n  vector<long long> g(f,\
+    \ f + a);\n  Sieve<>::multiple_mobius(g);\n  for (; --a >= 2;) ans+= g[a];\n \
+    \ cout << ans << '\\n';\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
+    \n#include <iostream>\n#include <vector>\n#include \"src/Math/Sieve.hpp\"\n//\
+    \ \u500D\u6570\u30E1\u30D3\u30A6\u30B9\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n int T;\n cin >> T;\n long long\
+    \ f[1'000'010];\n while (T--) {\n  long long N, a= 2, ans= 0;\n  cin >> N;\n \
+    \ for (; a * a * a <= N; a++) f[a]= N / (a * a * a);\n  vector<long long> g(f,\
+    \ f + a);\n  Sieve<>::multiple_mobius(g);\n  for (; --a >= 2;) ans+= g[a];\n \
+    \ cout << ans << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/Math/Sieve.hpp
   isVerificationFile: true
   path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 21:15:19+09:00'
+  timestamp: '2023-01-21 20:48:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp

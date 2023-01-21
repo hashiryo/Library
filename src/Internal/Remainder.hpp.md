@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':heavy_check_mark:'
@@ -44,7 +44,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/polynomial_matrix_prod.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u7DCF\u7A4D"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
   - icon: ':heavy_check_mark:'
@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/discrete_logarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':heavy_check_mark:'
@@ -266,7 +266,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_sparse_FPS.test.cpp
     title: test/yosupo/inv_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -278,7 +278,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/lcm_convolution.test.cpp
     title: test/yosupo/lcm_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -290,7 +290,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_sparse_FPS.test.cpp
     title: test/yosupo/log_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
@@ -371,10 +371,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -389,7 +389,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.rollinghash.test.cpp
     title: test/yosupo/z_algorithm.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
   - icon: ':heavy_check_mark:'
@@ -440,7 +440,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/502.test.cpp
     title: test/yukicoder/502.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
   - icon: ':x:'
@@ -455,7 +455,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
   - icon: ':heavy_check_mark:'
