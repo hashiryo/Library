@@ -3,19 +3,19 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc117_d.test.cpp
     title: test/atcoder/abc117_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc154_e.test.cpp
     title: test/atcoder/abc154_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc208_e.test.cpp
     title: test/atcoder/abc208_e.test.cpp
   - icon: ':x:'
@@ -26,17 +26,17 @@ data:
     title: test/atcoder/arc127_a.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Automaton/DFA_Inequality.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <string>\ntemplate <bool ge= false>  // le or ge\n\
-    struct DFA_Inequality {    // view from the top digit\n using symbol_t= int;\n\
-    \ DFA_Inequality(std::vector<symbol_t> &&str_, std::vector<symbol_t> &&alp_):\
-    \ str(std::move(str_)), alp(std::move(alp_)) {}\n DFA_Inequality(const std::string\
-    \ &n, int m) {  // n : m-ary notation\n  assert(2 <= m && m <= 10);\n  for (int\
-    \ l= n.length(), i= 0; i < l;) str.push_back(n[i++] - '0');\n  for (int i= 0;\
-    \ i < m; i++) alp.push_back(i);\n }\n template <class Int>  // m-ary number\n\
+    #include <algorithm>\n#include <string>\n#include <cassert>\ntemplate <bool ge=\
+    \ false>  // le or ge\nstruct DFA_Inequality {    // view from the top digit\n\
+    \ using symbol_t= int;\n DFA_Inequality(std::vector<symbol_t> &&str_, std::vector<symbol_t>\
+    \ &&alp_): str(std::move(str_)), alp(std::move(alp_)) {}\n DFA_Inequality(const\
+    \ std::string &n, int m) {  // n : m-ary notation\n  assert(2 <= m && m <= 10);\n\
+    \  for (int l= n.length(), i= 0; i < l;) str.push_back(n[i++] - '0');\n  for (int\
+    \ i= 0; i < m; i++) alp.push_back(i);\n }\n template <class Int>  // m-ary number\n\
     \ DFA_Inequality(Int n, int m, int len= 0) {\n  for (; n; n/= m, len--) str.push_back(n\
     \ % m);\n  while (len-- > 0) str.push_back(0);\n  for (int i= 0; i < m; i++) alp.push_back(i);\n\
     \  std::reverse(str.begin(), str.end());\n }\n inline std::vector<symbol_t> alphabet()\
@@ -48,8 +48,8 @@ data:
     \ state_size() const { return 2; }\nprivate:\n std::vector<symbol_t> str, alp;\n\
     };\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <string>\n\
-    template <bool ge= false>  // le or ge\nstruct DFA_Inequality {    // view from\
-    \ the top digit\n using symbol_t= int;\n DFA_Inequality(std::vector<symbol_t>\
+    #include <cassert>\ntemplate <bool ge= false>  // le or ge\nstruct DFA_Inequality\
+    \ {    // view from the top digit\n using symbol_t= int;\n DFA_Inequality(std::vector<symbol_t>\
     \ &&str_, std::vector<symbol_t> &&alp_): str(std::move(str_)), alp(std::move(alp_))\
     \ {}\n DFA_Inequality(const std::string &n, int m) {  // n : m-ary notation\n\
     \  assert(2 <= m && m <= 10);\n  for (int l= n.length(), i= 0; i < l;) str.push_back(n[i++]\
@@ -68,8 +68,8 @@ data:
   isVerificationFile: false
   path: src/Automaton/DFA_Inequality.hpp
   requiredBy: []
-  timestamp: '2023-01-21 17:49:49+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-21 18:41:09+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc208_e.test.cpp
   - test/atcoder/abc235_f.test.cpp

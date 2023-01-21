@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Game/PartisanGame.hpp
     title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0 (Conway\u306E\u69CB\u6210)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc229/tasks/abc229_h
@@ -16,8 +16,8 @@ data:
     - https://atcoder.jp/contests/abc229/tasks/abc229_h
   bundledCode: "#line 1 \"test/atcoder/abc229_h.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc229/tasks/abc229_h\"\
     \n#include <iostream>\n#include <vector>\n#include <string>\n#line 3 \"src/Game/PartisanGame.hpp\"\
-    \n#include <limits>\n#include <map>\n#include <cassert>\n#include <cmath>\nclass\
-    \ DyadicRational {\n static constexpr char FracLen= std::numeric_limits<std::uint64_t>::digits\
+    \n#include <algorithm>\n#include <limits>\n#include <map>\n#include <cassert>\n\
+    #include <cmath>\nclass DyadicRational {\n static constexpr char FracLen= std::numeric_limits<std::uint64_t>::digits\
     \ - 1;\n static constexpr std::uint64_t Denom= 1ULL << FracLen;\n int integ;\n\
     \ std::uint64_t frac;\n template <class l_t, class r_t>  // Conway's realization\n\
     \ static DyadicRational reduce(const std::vector<l_t> &L, const std::vector<r_t>\
@@ -95,8 +95,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc229_h.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 17:49:49+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 18:41:09+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc229_h.test.cpp
 layout: document

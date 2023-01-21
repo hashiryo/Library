@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -145,7 +145,7 @@ data:
     \ add(ret, dp[s]);\n return ret;\n}\ntemplate <class T, class DFA> T dfa_dp(const\
     \ DFA &dfa, int len, const T t0= T(0), const T init= T(1)) {\n return dfa_dp<T>(\n\
     \     dfa, len, [](T &l, const T &r) { l+= r; }, [](const T &v, const typename\
-    \ DFA::symbol_t &, int) { return v; }, t0, init);\n}\n#line 3 \"src/Automaton/dfa_operations.hpp\"\
+    \ DFA::symbol_t &, int) { return v; }, t0, init);\n}\n#line 4 \"src/Automaton/dfa_operations.hpp\"\
     \ntemplate <class DFA, class S, class F> struct DFA_SymbolMap {\n using symbol_t=\
     \ S;\n DFA_SymbolMap(const DFA &dfa_, const std::vector<symbol_t> &alp_, const\
     \ F &f_): dfa(dfa_), alp(alp_), f(f_) { static_assert(is_dfa_v<DFA>); }\n std::vector<symbol_t>\
@@ -172,7 +172,7 @@ data:
     \ <class DFA0, class DFA1, typename std::enable_if_t<is_dfa_v<DFA0> && is_dfa_v<DFA1>,\
     \ std::nullptr_t> = nullptr> DFA_Intersection<DFA0, DFA1> operator&(const DFA0\
     \ &dfa0, const DFA1 &dfa1) { return DFA_Intersection<DFA0, DFA1>(dfa0, dfa1);\
-    \ }\n#line 5 \"src/Automaton/DFA_Inequality.hpp\"\ntemplate <bool ge= false> \
+    \ }\n#line 6 \"src/Automaton/DFA_Inequality.hpp\"\ntemplate <bool ge= false> \
     \ // le or ge\nstruct DFA_Inequality {    // view from the top digit\n using symbol_t=\
     \ int;\n DFA_Inequality(std::vector<symbol_t> &&str_, std::vector<symbol_t> &&alp_):\
     \ str(std::move(str_)), alp(std::move(alp_)) {}\n DFA_Inequality(const std::string\
@@ -231,7 +231,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc235_f.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 17:49:49+09:00'
+  timestamp: '2023-01-21 18:41:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc235_f.test.cpp

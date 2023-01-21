@@ -12,35 +12,35 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2863.test.cpp
     title: test/aoj/2863.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/430.AhoCora.test.cpp
     title: test/yukicoder/430.AhoCora.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/String/AhoCorasick.hpp\"\n#include <bits/stdc++.h>\n\
-    template <typename S> struct AhoCorasick {\n using symbol_t= S;\n template <class\
-    \ Array> AhoCorasick(const std::vector<Array> &ps) {\n  static_assert(std::is_convertible_v<decltype(ps[0][0]),\
-    \ symbol_t>);\n  const size_t n= ps.size();\n  std::vector<int> ord(n), rows;\n\
-    \  std::iota(ord.begin(), ord.end(), 0);\n  std::sort(ord.begin(), ord.end(),\
-    \ [&](int l, int r) { return ps[l] < ps[r]; });\n  std::vector<size_t> lcp(n,\
-    \ 0), prev(n, 0), cur(n);\n  for (size_t i= 1, j, ed; i < n; lcp[i++]= j)\n  \
-    \ for (j= 0, ed= std::min(ps[ord[i - 1]].size(), ps[ord[i]].size()); j < ed; j++)\n\
-    \    if (ps[ord[i - 1]][j] != ps[ord[i]][j]) break;\n  size_t nodes= 1;\n  for\
-    \ (size_t i= 0; i < n; i++) nodes+= ps[ord[i]].size() - lcp[i];\n  beg.reserve(nodes\
-    \ + 1), es.reserve(nodes), match.reserve(nodes);\n  rows.reserve(n + 1);\n  for\
-    \ (size_t row= 0; row < n; row++)\n   if (!ps[ord[row]].empty()) rows.push_back(row);\n\
-    \  rows.push_back(-1), beg.push_back(0);\n  match.push_back({});\n  for (int i=\
-    \ 0; i < n && ps[ord[i]].empty(); i++) match[0].push_back(ord[i]);\n  for (size_t\
-    \ col= 0; rows[0] != -1; col++) {\n   int size= 0;\n   for (int &r: rows) {\n\
-    \    if (r == -1) break;\n    size_t row= r;\n    if (size++; lcp[row] <= col)\
-    \ {\n     if (size_t par= prev[row]; beg[par] == -1) beg[par]= es.size();\n  \
-    \   es.push_back(ps[ord[row]][col]), beg.push_back(-1);\n     if (match.push_back({});\
+  bundledCode: "#line 2 \"src/String/AhoCorasick.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#include <numeric>\ntemplate <typename S> struct AhoCorasick {\n\
+    \ using symbol_t= S;\n template <class Array> AhoCorasick(const std::vector<Array>\
+    \ &ps) {\n  static_assert(std::is_convertible_v<decltype(ps[0][0]), symbol_t>);\n\
+    \  const size_t n= ps.size();\n  std::vector<int> ord(n), rows;\n  std::iota(ord.begin(),\
+    \ ord.end(), 0), std::sort(ord.begin(), ord.end(), [&](int l, int r) { return\
+    \ ps[l] < ps[r]; });\n  std::vector<size_t> lcp(n, 0), prev(n, 0), cur(n);\n \
+    \ for (size_t i= 1, j, ed; i < n; lcp[i++]= j)\n   for (j= 0, ed= std::min(ps[ord[i\
+    \ - 1]].size(), ps[ord[i]].size()); j < ed; j++)\n    if (ps[ord[i - 1]][j] !=\
+    \ ps[ord[i]][j]) break;\n  size_t nodes= 1;\n  for (size_t i= 0; i < n; i++) nodes+=\
+    \ ps[ord[i]].size() - lcp[i];\n  beg.reserve(nodes + 1), es.reserve(nodes), match.reserve(nodes),\
+    \ rows.reserve(n + 1);\n  for (size_t row= 0; row < n; row++)\n   if (!ps[ord[row]].empty())\
+    \ rows.push_back(row);\n  rows.push_back(-1), beg.push_back(0), match.push_back({});\n\
+    \  for (int i= 0; i < n && ps[ord[i]].empty(); i++) match[0].push_back(ord[i]);\n\
+    \  for (size_t col= 0; rows[0] != -1; col++) {\n   int size= 0;\n   for (int &r:\
+    \ rows) {\n    if (r == -1) break;\n    size_t row= r;\n    if (size++; lcp[row]\
+    \ <= col) {\n     if (size_t par= prev[row]; beg[par] == -1) beg[par]= es.size();\n\
+    \     es.push_back(ps[ord[row]][col]), beg.push_back(-1);\n     if (match.push_back({});\
     \ col + 1 == ps[ord[row]].size())\n      for (int i= row; i < n && ps[ord[i]]\
     \ == ps[ord[row]]; i++) match.back().push_back(ord[i]);\n    }\n    if (cur[row]=\
     \ beg.size() - 1; col + 1 == ps[ord[row]].size()) r= -1;\n   }\n   *std::remove(rows.begin(),\
@@ -59,19 +59,19 @@ data:
     \ c) const {\n  int index= std::lower_bound(es.begin() + beg[s], es.begin() +\
     \ beg[s + 1], c) - es.begin();\n  if (index != beg[s + 1] && c == es[index]) return\
     \ index + 1;\n  return -1;\n }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <typename S> struct AhoCorasick\
-    \ {\n using symbol_t= S;\n template <class Array> AhoCorasick(const std::vector<Array>\
-    \ &ps) {\n  static_assert(std::is_convertible_v<decltype(ps[0][0]), symbol_t>);\n\
-    \  const size_t n= ps.size();\n  std::vector<int> ord(n), rows;\n  std::iota(ord.begin(),\
-    \ ord.end(), 0);\n  std::sort(ord.begin(), ord.end(), [&](int l, int r) { return\
-    \ ps[l] < ps[r]; });\n  std::vector<size_t> lcp(n, 0), prev(n, 0), cur(n);\n \
-    \ for (size_t i= 1, j, ed; i < n; lcp[i++]= j)\n   for (j= 0, ed= std::min(ps[ord[i\
-    \ - 1]].size(), ps[ord[i]].size()); j < ed; j++)\n    if (ps[ord[i - 1]][j] !=\
-    \ ps[ord[i]][j]) break;\n  size_t nodes= 1;\n  for (size_t i= 0; i < n; i++) nodes+=\
-    \ ps[ord[i]].size() - lcp[i];\n  beg.reserve(nodes + 1), es.reserve(nodes), match.reserve(nodes);\n\
-    \  rows.reserve(n + 1);\n  for (size_t row= 0; row < n; row++)\n   if (!ps[ord[row]].empty())\
-    \ rows.push_back(row);\n  rows.push_back(-1), beg.push_back(0);\n  match.push_back({});\n\
-    \  for (int i= 0; i < n && ps[ord[i]].empty(); i++) match[0].push_back(ord[i]);\n\
+  code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\
+    template <typename S> struct AhoCorasick {\n using symbol_t= S;\n template <class\
+    \ Array> AhoCorasick(const std::vector<Array> &ps) {\n  static_assert(std::is_convertible_v<decltype(ps[0][0]),\
+    \ symbol_t>);\n  const size_t n= ps.size();\n  std::vector<int> ord(n), rows;\n\
+    \  std::iota(ord.begin(), ord.end(), 0), std::sort(ord.begin(), ord.end(), [&](int\
+    \ l, int r) { return ps[l] < ps[r]; });\n  std::vector<size_t> lcp(n, 0), prev(n,\
+    \ 0), cur(n);\n  for (size_t i= 1, j, ed; i < n; lcp[i++]= j)\n   for (j= 0, ed=\
+    \ std::min(ps[ord[i - 1]].size(), ps[ord[i]].size()); j < ed; j++)\n    if (ps[ord[i\
+    \ - 1]][j] != ps[ord[i]][j]) break;\n  size_t nodes= 1;\n  for (size_t i= 0; i\
+    \ < n; i++) nodes+= ps[ord[i]].size() - lcp[i];\n  beg.reserve(nodes + 1), es.reserve(nodes),\
+    \ match.reserve(nodes), rows.reserve(n + 1);\n  for (size_t row= 0; row < n; row++)\n\
+    \   if (!ps[ord[row]].empty()) rows.push_back(row);\n  rows.push_back(-1), beg.push_back(0),\
+    \ match.push_back({});\n  for (int i= 0; i < n && ps[ord[i]].empty(); i++) match[0].push_back(ord[i]);\n\
     \  for (size_t col= 0; rows[0] != -1; col++) {\n   int size= 0;\n   for (int &r:\
     \ rows) {\n    if (r == -1) break;\n    size_t row= r;\n    if (size++; lcp[row]\
     \ <= col) {\n     if (size_t par= prev[row]; beg[par] == -1) beg[par]= es.size();\n\
@@ -98,8 +98,8 @@ data:
   isVerificationFile: false
   path: src/String/AhoCorasick.hpp
   requiredBy: []
-  timestamp: '2022-12-31 22:35:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 18:41:09+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2212.test.cpp
   - test/aoj/2863.test.cpp

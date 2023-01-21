@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/BinaryIndexedTree.hpp
     title: Binary-Indexed-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Misc/Mo.hpp
     title: Mo's Algorithm
   - icon: ':question:'
@@ -26,25 +26,25 @@ data:
     \ntemplate <class T> auto compress(std::vector<T> &v) {\n return std::sort(v.begin(),\
     \ v.end()), v.erase(std::unique(v.begin(), v.end()), v.end()), [&v](T x) { return\
     \ std::lower_bound(v.begin(), v.end(), x) - v.begin(); };\n}\n#line 4 \"src/Misc/Mo.hpp\"\
-    \n#include <numeric>\nstruct Mo {\n int n;\n std::vector<int> L, R;\n explicit\
-    \ Mo(int n): n(n) {}\n void query(int l, int r) { L.push_back(l), R.push_back(r);\
-    \ } /* [l, r) */\n template <typename AL, typename AR, typename EL, typename ER,\
-    \ typename O> void run(const AL &add_left, const AR &add_right, const EL &erase_left,\
-    \ const ER &erase_right, const O &out) {\n  int q= L.size(), bs= n / std::min<int>(n,\
-    \ std::sqrt(q));\n  std::vector<int> ord(q);\n  std::iota(ord.begin(), ord.end(),\
-    \ 0), std::sort(ord.begin(), ord.end(), [&](int a, int b) {\n   int ablk= L[a]\
-    \ / bs, bblk= L[b] / bs;\n   return ablk != bblk ? ablk < bblk : (ablk & 1) ?\
-    \ R[a] > R[b] : R[a] < R[b];\n  });\n  int l= 0, r= 0;\n  for (auto i: ord) {\n\
-    \   while (l > L[i]) add_left(--l);\n   while (r < R[i]) add_right(r++);\n   while\
-    \ (l < L[i]) erase_left(l++);\n   while (r > R[i]) erase_right(--r);\n   out(i);\n\
-    \  }\n }\n template <typename A, typename E, typename O> void run(const A &add,\
-    \ const E &erase, const O &out) { run(add, add, erase, erase, out); }\n};\n#line\
-    \ 4 \"src/DataStructure/BinaryIndexedTree.hpp\"\ntemplate <typename T> class BinaryIndexedTree\
-    \ {\n std::vector<T> dat;\npublic:\n BinaryIndexedTree(int n): dat(n + 1, T())\
-    \ {}\n BinaryIndexedTree(int n, T a): BinaryIndexedTree(std::vector<T>(n, a))\
-    \ {}\n BinaryIndexedTree(const std::vector<T>& y): dat(y.size() + 1, 0) {\n  for\
-    \ (int i= y.size(); i--;) dat[i + 1]= y[i];\n  for (int i= 1, e= dat.size(), j;\
-    \ i < e; ++i)\n   if ((j= i + (i & -i)) < e) dat[j]+= dat[i];\n }\n void add(int\
+    \n#include <numeric>\n#include <cmath>\nstruct Mo {\n int n;\n std::vector<int>\
+    \ L, R;\n explicit Mo(int n): n(n) {}\n void query(int l, int r) { L.push_back(l),\
+    \ R.push_back(r); } /* [l, r) */\n template <typename AL, typename AR, typename\
+    \ EL, typename ER, typename O> void run(const AL &add_left, const AR &add_right,\
+    \ const EL &erase_left, const ER &erase_right, const O &out) {\n  int q= L.size(),\
+    \ bs= n / std::min<int>(n, std::sqrt(q));\n  std::vector<int> ord(q);\n  std::iota(ord.begin(),\
+    \ ord.end(), 0), std::sort(ord.begin(), ord.end(), [&](int a, int b) {\n   int\
+    \ ablk= L[a] / bs, bblk= L[b] / bs;\n   return ablk != bblk ? ablk < bblk : (ablk\
+    \ & 1) ? R[a] > R[b] : R[a] < R[b];\n  });\n  int l= 0, r= 0;\n  for (auto i:\
+    \ ord) {\n   while (l > L[i]) add_left(--l);\n   while (r < R[i]) add_right(r++);\n\
+    \   while (l < L[i]) erase_left(l++);\n   while (r > R[i]) erase_right(--r);\n\
+    \   out(i);\n  }\n }\n template <typename A, typename E, typename O> void run(const\
+    \ A &add, const E &erase, const O &out) { run(add, add, erase, erase, out); }\n\
+    };\n#line 4 \"src/DataStructure/BinaryIndexedTree.hpp\"\ntemplate <typename T>\
+    \ class BinaryIndexedTree {\n std::vector<T> dat;\npublic:\n BinaryIndexedTree(int\
+    \ n): dat(n + 1, T()) {}\n BinaryIndexedTree(int n, T a): BinaryIndexedTree(std::vector<T>(n,\
+    \ a)) {}\n BinaryIndexedTree(const std::vector<T>& y): dat(y.size() + 1, 0) {\n\
+    \  for (int i= y.size(); i--;) dat[i + 1]= y[i];\n  for (int i= 1, e= dat.size(),\
+    \ j; i < e; ++i)\n   if ((j= i + (i & -i)) < e) dat[j]+= dat[i];\n }\n void add(int\
     \ i, T a= 1) {\n  for (++i; i < (int)dat.size(); i+= i & -i) dat[i]+= a;\n }\n\
     \ T sum(int i) const {  // sum [0,i)\n  T s= 0;\n  for (; i; i&= i - 1) s+= dat[i];\n\
     \  return s;\n }\n T sum(int l, int r) const { return sum(r) - sum(l); }  // sum\
@@ -87,7 +87,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/static_range_inversions_query.mo.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 17:49:49+09:00'
+  timestamp: '2023-01-21 18:41:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/static_range_inversions_query.mo.test.cpp

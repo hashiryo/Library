@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   - icon: ':question:'
@@ -14,9 +14,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc117/tasks/abc117_d
@@ -51,13 +51,13 @@ data:
     \ DFA &dfa, int len, const T t0= T(0), const T init= T(1)) {\n return dfa_dp<T>(\n\
     \     dfa, len, [](T &l, const T &r) { l+= r; }, [](const T &v, const typename\
     \ DFA::symbol_t &, int) { return v; }, t0, init);\n}\n#line 3 \"src/Automaton/DFA_Inequality.hpp\"\
-    \n#include <algorithm>\n#include <string>\ntemplate <bool ge= false>  // le or\
-    \ ge\nstruct DFA_Inequality {    // view from the top digit\n using symbol_t=\
-    \ int;\n DFA_Inequality(std::vector<symbol_t> &&str_, std::vector<symbol_t> &&alp_):\
-    \ str(std::move(str_)), alp(std::move(alp_)) {}\n DFA_Inequality(const std::string\
-    \ &n, int m) {  // n : m-ary notation\n  assert(2 <= m && m <= 10);\n  for (int\
-    \ l= n.length(), i= 0; i < l;) str.push_back(n[i++] - '0');\n  for (int i= 0;\
-    \ i < m; i++) alp.push_back(i);\n }\n template <class Int>  // m-ary number\n\
+    \n#include <algorithm>\n#include <string>\n#include <cassert>\ntemplate <bool\
+    \ ge= false>  // le or ge\nstruct DFA_Inequality {    // view from the top digit\n\
+    \ using symbol_t= int;\n DFA_Inequality(std::vector<symbol_t> &&str_, std::vector<symbol_t>\
+    \ &&alp_): str(std::move(str_)), alp(std::move(alp_)) {}\n DFA_Inequality(const\
+    \ std::string &n, int m) {  // n : m-ary notation\n  assert(2 <= m && m <= 10);\n\
+    \  for (int l= n.length(), i= 0; i < l;) str.push_back(n[i++] - '0');\n  for (int\
+    \ i= 0; i < m; i++) alp.push_back(i);\n }\n template <class Int>  // m-ary number\n\
     \ DFA_Inequality(Int n, int m, int len= 0) {\n  for (; n; n/= m, len--) str.push_back(n\
     \ % m);\n  while (len-- > 0) str.push_back(0);\n  for (int i= 0; i < m; i++) alp.push_back(i);\n\
     \  std::reverse(str.begin(), str.end());\n }\n inline std::vector<symbol_t> alphabet()\
@@ -90,8 +90,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc117_d.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 17:49:49+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 18:41:09+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc117_d.test.cpp
 layout: document
