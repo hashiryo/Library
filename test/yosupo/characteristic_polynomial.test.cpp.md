@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: src/LinearAlgebra/characteristic_polynomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -24,27 +24,28 @@ data:
     links:
     - https://judge.yosupo.jp/problem/characteristic_polynomial
   bundledCode: "#line 1 \"test/yosupo/characteristic_polynomial.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/characteristic_polynomial\"\n\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\
-    \ntemplate <class K> std::vector<std::vector<K>> hessenberg(const std::vector<std::vector<K>>\
-    \ &a) {\n std::size_t n= a.size();\n auto ret= a;\n for (std::size_t j= 0; j +\
-    \ 2 < n; ++j) {\n  for (std::size_t i= j + 1; i < n; ++i)\n   if (ret[i][j] !=\
-    \ 0) {\n    std::swap(ret[j + 1], ret[i]);\n    for (std::size_t r= 0; r < n;\
-    \ ++r) std::swap(ret[r][j + 1], ret[r][i]);\n    break;\n   }\n  if (ret[j + 1][j]\
-    \ != 0)\n   for (std::size_t i= j + 2; i < n; ++i) {\n    auto m= ret[i][j] /\
-    \ ret[j + 1][j];\n    for (std::size_t c= j; c < n; ++c) ret[i][c]-= m * ret[j\
-    \ + 1][c];\n    for (std::size_t r= 0; r < n; ++r) ret[r][j + 1]+= m * ret[r][i];\n\
-    \   }\n }\n return ret;\n}\ntemplate <class K> std::vector<K> characteristic_polynomial(const\
-    \ std::vector<std::vector<K>> &a) {\n std::size_t n= a.size();\n auto b= hessenberg(a);\n\
-    \ for (std::size_t i= 0; i < n; i++)\n  for (std::size_t j= 0; j < n; j++) b[i][j]=\
-    \ -b[i][j];\n std::vector<std::vector<K>> fss(n + 1);\n fss[0]= {1};\n for (std::size_t\
-    \ i= 0; i < n; ++i) {\n  fss[i + 1].assign(i + 2, 0);\n  for (std::size_t k= 0;\
-    \ k <= i; ++k) fss[i + 1][k + 1]= fss[i][k];\n  for (std::size_t k= 0; k <= i;\
-    \ ++k) fss[i + 1][k]+= b[i][i] * fss[i][k];\n  K prod= 1;\n  for (std::size_t\
-    \ j= i; j--;) {\n   prod*= -b[j + 1][j];\n   const K s= prod * b[j][i];\n   for\
-    \ (std::size_t k= 0; k <= j; ++k) fss[i + 1][k]+= s * fss[j][k];\n  }\n }\n return\
-    \ fss.back();\n}\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
-    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/characteristic_polynomial\"\n#include\
+    \ <iostream>\n#include <vector>\n#line 3 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\
+    \n#include <algorithm>\ntemplate <class K> std::vector<std::vector<K>> hessenberg(const\
+    \ std::vector<std::vector<K>> &a) {\n std::size_t n= a.size();\n auto ret= a;\n\
+    \ for (std::size_t j= 0; j + 2 < n; ++j) {\n  for (std::size_t i= j + 1; i < n;\
+    \ ++i)\n   if (ret[i][j] != 0) {\n    std::swap(ret[j + 1], ret[i]);\n    for\
+    \ (std::size_t r= 0; r < n; ++r) std::swap(ret[r][j + 1], ret[r][i]);\n    break;\n\
+    \   }\n  if (ret[j + 1][j] != 0)\n   for (std::size_t i= j + 2; i < n; ++i) {\n\
+    \    auto m= ret[i][j] / ret[j + 1][j];\n    for (std::size_t c= j; c < n; ++c)\
+    \ ret[i][c]-= m * ret[j + 1][c];\n    for (std::size_t r= 0; r < n; ++r) ret[r][j\
+    \ + 1]+= m * ret[r][i];\n   }\n }\n return ret;\n}\ntemplate <class K> std::vector<K>\
+    \ characteristic_polynomial(const std::vector<std::vector<K>> &a) {\n std::size_t\
+    \ n= a.size();\n auto b= hessenberg(a);\n for (std::size_t i= 0; i < n; i++)\n\
+    \  for (std::size_t j= 0; j < n; j++) b[i][j]= -b[i][j];\n std::vector<std::vector<K>>\
+    \ fss(n + 1);\n fss[0]= {1};\n for (std::size_t i= 0; i < n; ++i) {\n  fss[i +\
+    \ 1].assign(i + 2, 0);\n  for (std::size_t k= 0; k <= i; ++k) fss[i + 1][k + 1]=\
+    \ fss[i][k];\n  for (std::size_t k= 0; k <= i; ++k) fss[i + 1][k]+= b[i][i] *\
+    \ fss[i][k];\n  K prod= 1;\n  for (std::size_t j= i; j--;) {\n   prod*= -b[j +\
+    \ 1][j];\n   const K s= prod * b[j][i];\n   for (std::size_t k= 0; k <= j; ++k)\
+    \ fss[i + 1][k]+= s * fss[j][k];\n  }\n }\n return fss.back();\n}\n#line 2 \"\
+    src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\
+    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -127,18 +128,17 @@ data:
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 6 \"test/yosupo/characteristic_polynomial.test.cpp\"\
     \n\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<vector<Mint>> a(N,\
-    \ vector<Mint>(N));\n for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++)\
-    \ cin >> a[i][j];\n auto p= characteristic_polynomial(a);\n for (int i= 0; i <=\
-    \ N; i++) cout << (i ? \" \" : \"\") << p[i];\n cout << '\\n';\n return 0;\n}\n"
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector a(N, vector<Mint>(N));\n\
+    \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++) cin >> a[i][j];\n auto\
+    \ p= characteristic_polynomial(a);\n for (int i= 0; i <= N; i++) cout << p[i]\
+    \ << \" \\n\"[i == N];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/characteristic_polynomial\"\
-    \n\n#include <bits/stdc++.h>\n#include \"src/LinearAlgebra/characteristic_polynomial.hpp\"\
+    \n#include <iostream>\n#include <vector>\n#include \"src/LinearAlgebra/characteristic_polynomial.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\n\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int\
-    \ N;\n cin >> N;\n vector<vector<Mint>> a(N, vector<Mint>(N));\n for (int i= 0;\
-    \ i < N; i++)\n  for (int j= 0; j < N; j++) cin >> a[i][j];\n auto p= characteristic_polynomial(a);\n\
-    \ for (int i= 0; i <= N; i++) cout << (i ? \" \" : \"\") << p[i];\n cout << '\\\
-    n';\n return 0;\n}"
+    \ N;\n cin >> N;\n vector a(N, vector<Mint>(N));\n for (int i= 0; i < N; i++)\n\
+    \  for (int j= 0; j < N; j++) cin >> a[i][j];\n auto p= characteristic_polynomial(a);\n\
+    \ for (int i= 0; i <= N; i++) cout << p[i] << \" \\n\"[i == N];\n return 0;\n}"
   dependsOn:
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/Math/ModInt.hpp
@@ -147,7 +147,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
+  timestamp: '2023-01-21 20:28:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp

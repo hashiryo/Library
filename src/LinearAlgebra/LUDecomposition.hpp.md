@@ -12,27 +12,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/LinearAlgebra/LUDecomposition.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/LinearAlgebra/LUDecomposition.hpp\"\n#include <vector>\n\
+    #include <type_traits>\n#include <algorithm>\n#include <numeric>\n#include <cassert>\n\
     template <class K> class LUDecomposition {\n using Mat= std::vector<std::vector<K>>;\n\
     \ Mat dat;\n std::vector<std::size_t> perm, piv;\n bool sgn;\n static bool is_zero(K\
     \ x) {\n  if constexpr (std::is_floating_point_v<K>) return std::abs(x) < 1e-8;\n\
@@ -119,7 +120,8 @@ data:
     \ ret.emplace_back(linear_equations(b));\n  for (std::size_t i= 0; i < rows; i++)\n\
     \   for (std::size_t j= 0; j < i; j++) {\n    bool tmp= ret[i][j];\n    ret[i][j]=\
     \ ret[j][i];\n    ret[j][i]= tmp;\n   }\n  return ret;\n }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <class K> class LUDecomposition\
+  code: "#pragma once\n#include <vector>\n#include <type_traits>\n#include <algorithm>\n\
+    #include <numeric>\n#include <cassert>\ntemplate <class K> class LUDecomposition\
     \ {\n using Mat= std::vector<std::vector<K>>;\n Mat dat;\n std::vector<std::size_t>\
     \ perm, piv;\n bool sgn;\n static bool is_zero(K x) {\n  if constexpr (std::is_floating_point_v<K>)\
     \ return std::abs(x) < 1e-8;\n  else return x == K(0);\n }\npublic:\n LUDecomposition(const\
@@ -209,8 +211,8 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/LUDecomposition.hpp
   requiredBy: []
-  timestamp: '2022-12-31 21:46:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 20:28:05+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2624.test.cpp
   - test/aoj/2530.test.cpp

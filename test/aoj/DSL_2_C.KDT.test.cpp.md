@@ -10,9 +10,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C
@@ -20,15 +20,15 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C
   bundledCode: "#line 1 \"test/aoj/DSL_2_C.KDT.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\
     \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/DataStructure/KDTree.hpp\"\
-    \n#include <array>\n#line 5 \"src/DataStructure/KDTree.hpp\"\n#include <cstddef>\n\
-    #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
-    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
-    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
-    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
-    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy= typename U::member)\n#line 8 \"src/DataStructure/KDTree.hpp\"\n\
-    template <std::uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
+    \n#include <array>\n#line 5 \"src/DataStructure/KDTree.hpp\"\n#include <tuple>\n\
+    #include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
+    \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
+    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
+    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
+    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
+    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
+    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 9 \"src/DataStructure/KDTree.hpp\"\
+    \ntemplate <std::uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
     \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
     \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
     \ has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
@@ -147,8 +147,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_C.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 20:06:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 20:28:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_C.KDT.test.cpp
 layout: document

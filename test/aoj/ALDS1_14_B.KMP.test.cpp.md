@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/String/KnuthMorrisPratt.hpp
     title: Knuth-Morris-Pratt
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
@@ -30,20 +30,19 @@ data:
     };\n#line 5 \"test/aoj/ALDS1_14_B.KMP.test.cpp\"\nusing namespace std;\nsigned\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string T, P;\n cin >> T\
     \ >> P;\n KnuthMorrisPratt KMP(P);\n auto ans= KMP.pattern_match(T);\n for (auto\
-    \ a: ans) {\n  cout << a << \"\\n\";\n }\n cout << '\\n';\n return 0;\n}\n"
+    \ a: ans) cout << a << \"\\n\";\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
     \n#include <iostream>\n#include <string>\n#include \"src/String/KnuthMorrisPratt.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ string T, P;\n cin >> T >> P;\n KnuthMorrisPratt KMP(P);\n auto ans= KMP.pattern_match(T);\n\
-    \ for (auto a: ans) {\n  cout << a << \"\\n\";\n }\n cout << '\\n';\n return 0;\n\
-    }"
+    \ for (auto a: ans) cout << a << \"\\n\";\n return 0;\n}"
   dependsOn:
   - src/String/KnuthMorrisPratt.hpp
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.KMP.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 20:06:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 20:28:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.KMP.test.cpp
 layout: document

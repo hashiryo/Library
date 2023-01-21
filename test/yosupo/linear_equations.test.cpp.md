@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/LUDecomposition.hpp
     title: src/LinearAlgebra/LUDecomposition.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
@@ -25,8 +25,9 @@ data:
     - https://judge.yosupo.jp/problem/system_of_linear_equations
   bundledCode: "#line 1 \"test/yosupo/linear_equations.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\n#include <bits/stdc++.h>\n\
-    \n#line 3 \"src/LinearAlgebra/LUDecomposition.hpp\"\ntemplate <class K> class\
-    \ LUDecomposition {\n using Mat= std::vector<std::vector<K>>;\n Mat dat;\n std::vector<std::size_t>\
+    \n#line 3 \"src/LinearAlgebra/LUDecomposition.hpp\"\n#include <type_traits>\n\
+    #line 7 \"src/LinearAlgebra/LUDecomposition.hpp\"\ntemplate <class K> class LUDecomposition\
+    \ {\n using Mat= std::vector<std::vector<K>>;\n Mat dat;\n std::vector<std::size_t>\
     \ perm, piv;\n bool sgn;\n static bool is_zero(K x) {\n  if constexpr (std::is_floating_point_v<K>)\
     \ return std::abs(x) < 1e-8;\n  else return x == K(0);\n }\npublic:\n LUDecomposition(const\
     \ Mat &A): dat(A), perm(A.size()), sgn(false) {\n  std::size_t rows= A.size(),\
@@ -223,8 +224,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 20:28:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp
 layout: document
