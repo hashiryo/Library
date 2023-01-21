@@ -174,7 +174,7 @@ data:
     \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
     \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
     \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 7 \"src/DataStructure/LinkCutTree.hpp\"\
+    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\
     \ntemplate <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
     \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
     \ using semigroup= std::conjunction<has_T<L>, has_op<L>>;\n template <class L>\
@@ -282,7 +282,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 15:27:58+09:00'
+  timestamp: '2023-01-21 16:53:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.DynSeg.test.cpp

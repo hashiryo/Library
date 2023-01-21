@@ -5,13 +5,10 @@ data:
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/0342.test.cpp
-    title: test/aoj/0342.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     document_title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
     links: []
@@ -56,9 +53,8 @@ data:
   path: src/Graph/MinimumSpanningTree_Kruskal.hpp
   requiredBy: []
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/aoj/0342.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Graph/MinimumSpanningTree_Kruskal.hpp
 layout: document
 redirect_from:

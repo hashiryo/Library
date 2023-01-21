@@ -15,33 +15,33 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\n#include\
-    \ <bits/stdc++.h>\ntemplate <typename T> struct BinaryIndexedTree_RangeAdd {\n\
-    \ std::vector<T> dat1;\n std::vector<T> dat2;\n BinaryIndexedTree_RangeAdd(int\
-    \ n): dat1(n + 1, T(0)), dat2(n + 1, T(0)) {}\n void add_range(int l, int r, T\
-    \ w) {  // add w [l,r)\n  for (int k= l + 1; k < (int)dat1.size(); k+= k & -k)\
-    \ dat1[k]-= w * l;\n  for (int k= r + 1; k < (int)dat1.size(); k+= k & -k) dat1[k]+=\
-    \ w * r;\n  for (int k= l + 1; k < (int)dat2.size(); k+= k & -k) dat2[k]+= w;\n\
-    \  for (int k= r + 1; k < (int)dat2.size(); k+= k & -k) dat2[k]-= w;\n }\n T sum(int\
-    \ x) {  // sum [0,x)\n  T s= 0;\n  for (int k= x; k > 0; k&= k - 1) s+= dat1[k];\n\
-    \  for (int k= x; k > 0; k&= k - 1) s+= dat2[k] * x;\n  return s;\n }\n // sum\
-    \ [l,r)\n T sum(int l, int r) { return sum(r) - sum(l); }\n T operator[](size_t\
-    \ k) { return sum(k + 1) - sum(k); }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <typename T> struct BinaryIndexedTree_RangeAdd\
-    \ {\n std::vector<T> dat1;\n std::vector<T> dat2;\n BinaryIndexedTree_RangeAdd(int\
-    \ n): dat1(n + 1, T(0)), dat2(n + 1, T(0)) {}\n void add_range(int l, int r, T\
-    \ w) {  // add w [l,r)\n  for (int k= l + 1; k < (int)dat1.size(); k+= k & -k)\
-    \ dat1[k]-= w * l;\n  for (int k= r + 1; k < (int)dat1.size(); k+= k & -k) dat1[k]+=\
-    \ w * r;\n  for (int k= l + 1; k < (int)dat2.size(); k+= k & -k) dat2[k]+= w;\n\
-    \  for (int k= r + 1; k < (int)dat2.size(); k+= k & -k) dat2[k]-= w;\n }\n T sum(int\
-    \ x) {  // sum [0,x)\n  T s= 0;\n  for (int k= x; k > 0; k&= k - 1) s+= dat1[k];\n\
-    \  for (int k= x; k > 0; k&= k - 1) s+= dat2[k] * x;\n  return s;\n }\n // sum\
-    \ [l,r)\n T sum(int l, int r) { return sum(r) - sum(l); }\n T operator[](size_t\
-    \ k) { return sum(k + 1) - sum(k); }\n};\n"
+    \ <vector>\ntemplate <typename T> class BinaryIndexedTree_RangeAdd {\n std::vector<T>\
+    \ dat1, dat2;\npublic:\n BinaryIndexedTree_RangeAdd(int n): dat1(n + 1, T()),\
+    \ dat2(n + 1, T()) {}\n void add_range(int l, int r, T w) {  // add w [l,r)\n\
+    \  int n= dat1.size();\n  for (int k= l + 1; k < n; k+= k & -k) dat1[k]-= w *\
+    \ l;\n  for (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w * r;\n  for (int k=\
+    \ l + 1; k < n; k+= k & -k) dat2[k]+= w;\n  for (int k= r + 1; k < n; k+= k &\
+    \ -k) dat2[k]-= w;\n }\n T sum(int x) const {  // sum [0,x)\n  T s= 0;\n  for\
+    \ (int k= x; k; k&= k - 1) s+= dat1[k];\n  for (int k= x; k; k&= k - 1) s+= dat2[k]\
+    \ * x;\n  return s;\n }\n T sum(int l, int r) const { return sum(r) - sum(l);\
+    \ }  // sum [l,r)\n T operator[](size_t k) const { return sum(k + 1) - sum(k);\
+    \ }\n};\n"
+  code: "#pragma once\n#include <vector>\ntemplate <typename T> class BinaryIndexedTree_RangeAdd\
+    \ {\n std::vector<T> dat1, dat2;\npublic:\n BinaryIndexedTree_RangeAdd(int n):\
+    \ dat1(n + 1, T()), dat2(n + 1, T()) {}\n void add_range(int l, int r, T w) {\
+    \  // add w [l,r)\n  int n= dat1.size();\n  for (int k= l + 1; k < n; k+= k &\
+    \ -k) dat1[k]-= w * l;\n  for (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w *\
+    \ r;\n  for (int k= l + 1; k < n; k+= k & -k) dat2[k]+= w;\n  for (int k= r +\
+    \ 1; k < n; k+= k & -k) dat2[k]-= w;\n }\n T sum(int x) const {  // sum [0,x)\n\
+    \  T s= 0;\n  for (int k= x; k; k&= k - 1) s+= dat1[k];\n  for (int k= x; k; k&=\
+    \ k - 1) s+= dat2[k] * x;\n  return s;\n }\n T sum(int l, int r) const { return\
+    \ sum(r) - sum(l); }  // sum [l,r)\n T operator[](size_t k) const { return sum(k\
+    \ + 1) - sum(k); }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
   requiredBy: []
-  timestamp: '2022-12-31 22:54:50+09:00'
+  timestamp: '2023-01-21 16:53:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp

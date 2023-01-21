@@ -10,9 +10,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
@@ -21,42 +21,43 @@ data:
   bundledCode: "#line 1 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
     \n#include <iostream>\n#line 2 \"src/DataStructure/LinkCutTree.hpp\"\n#include\
-    \ <algorithm>\n#include <vector>\n#include <string>\n#include <cstddef>\n#line\
-    \ 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
-    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
-    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
-    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
-    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
-    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
-    #line 7 \"src/DataStructure/LinkCutTree.hpp\"\ntemplate <typename M= void> class\
-    \ LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
-    \ HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L> using semigroup= std::conjunction<has_T<L>,\
-    \ has_op<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n template <class tDerived, class U= std::nullptr_t,\
-    \ class F= std::nullptr_t> struct Node_B {\n  using T= U;\n  using E= F;\n  tDerived\
-    \ *ch[2], *par;\n  bool rev_flg;\n };\n template <bool sg_, bool du_, typename\
-    \ tEnable= void> struct Node_D: Node_B<Node_D<sg_, du_, tEnable>> {};\n template\
-    \ <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<sg_ &&\
-    \ !du_>>: Node_B<Node_D<sg_, du_>, typename M::T> { typename M::T val, sum, rsum;\
-    \ };\n template <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<!sg_\
-    \ && du_>>: Node_B<Node_D<sg_, du_>, typename M::T, typename M::E> {\n  typename\
-    \ M::T val;\n  typename M::E lazy;\n  bool lazy_flg;\n };\n template <bool sg_,\
-    \ bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<sg_ && du_>>: Node_B<Node_D<sg_,\
-    \ du_>, typename M::T, typename M::E> {\n  typename M::T val, sum, rsum;\n  typename\
-    \ M::E lazy;\n  bool lazy_flg;\n };\n using Node= Node_D<semigroup<M>::value,\
-    \ dual<M>::value>;\n using T= typename Node::T;\n using E= typename Node::E;\n\
-    \ static inline int dir(Node *&t) {\n  if (t->par) {\n   if (t->par->ch[0] ==\
-    \ t) return 0;\n   if (t->par->ch[1] == t) return 1;\n  }\n  return 2;\n }\n static\
-    \ inline void rot(Node *t) {\n  Node *p= t->par;\n  int d= dir(t);\n  if ((p->ch[d]=\
-    \ t->ch[!d])) p->ch[d]->par= p;\n  t->ch[!d]= p;\n  if constexpr (semigroup<M>::value)\
-    \ pushup(p), pushup(t);\n  t->par= p->par;\n  if ((d= dir(p)) < 2) {\n   p->par->ch[d]=\
-    \ t;\n   if constexpr (semigroup<M>::value) pushup(t->par);\n  }\n  p->par= t;\n\
-    \ }\n static inline void splay(Node *t) {\n  eval(t);\n  for (int t_d= dir(t),\
-    \ p_d; t_d < 2; rot(t), t_d= dir(t)) {\n   if ((p_d= dir(t->par)) < 2) eval(t->par->par);\n\
-    \   eval(t->par), eval(t);\n   if (p_d < 2) rot(t_d == p_d ? t->par : t);\n  }\n\
-    \ }\n static inline void pushup(Node *t) {\n  t->rsum= t->sum= t->val;\n  if (t->ch[0])\
-    \ t->sum= M::op(t->ch[0]->sum, t->sum), t->rsum= M::op(t->rsum, t->ch[0]->rsum);\n\
-    \  if (t->ch[1]) t->sum= M::op(t->sum, t->ch[1]->sum), t->rsum= M::op(t->ch[1]->rsum,\
+    \ <algorithm>\n#include <vector>\n#include <string>\n#include <cstddef>\n#include\
+    \ <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
+    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
+    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
+    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\
+    \ntemplate <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
+    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
+    \ using semigroup= std::conjunction<has_T<L>, has_op<L>>;\n template <class L>\
+    \ using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>, has_composition<L>>;\n\
+    \ template <class tDerived, class U= std::nullptr_t, class F= std::nullptr_t>\
+    \ struct Node_B {\n  using T= U;\n  using E= F;\n  tDerived *ch[2], *par;\n  bool\
+    \ rev_flg;\n };\n template <bool sg_, bool du_, typename tEnable= void> struct\
+    \ Node_D: Node_B<Node_D<sg_, du_, tEnable>> {};\n template <bool sg_, bool du_>\
+    \ struct Node_D<sg_, du_, typename std::enable_if_t<sg_ && !du_>>: Node_B<Node_D<sg_,\
+    \ du_>, typename M::T> { typename M::T val, sum, rsum; };\n template <bool sg_,\
+    \ bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<!sg_ && du_>>: Node_B<Node_D<sg_,\
+    \ du_>, typename M::T, typename M::E> {\n  typename M::T val;\n  typename M::E\
+    \ lazy;\n  bool lazy_flg;\n };\n template <bool sg_, bool du_> struct Node_D<sg_,\
+    \ du_, typename std::enable_if_t<sg_ && du_>>: Node_B<Node_D<sg_, du_>, typename\
+    \ M::T, typename M::E> {\n  typename M::T val, sum, rsum;\n  typename M::E lazy;\n\
+    \  bool lazy_flg;\n };\n using Node= Node_D<semigroup<M>::value, dual<M>::value>;\n\
+    \ using T= typename Node::T;\n using E= typename Node::E;\n static inline int\
+    \ dir(Node *&t) {\n  if (t->par) {\n   if (t->par->ch[0] == t) return 0;\n   if\
+    \ (t->par->ch[1] == t) return 1;\n  }\n  return 2;\n }\n static inline void rot(Node\
+    \ *t) {\n  Node *p= t->par;\n  int d= dir(t);\n  if ((p->ch[d]= t->ch[!d])) p->ch[d]->par=\
+    \ p;\n  t->ch[!d]= p;\n  if constexpr (semigroup<M>::value) pushup(p), pushup(t);\n\
+    \  t->par= p->par;\n  if ((d= dir(p)) < 2) {\n   p->par->ch[d]= t;\n   if constexpr\
+    \ (semigroup<M>::value) pushup(t->par);\n  }\n  p->par= t;\n }\n static inline\
+    \ void splay(Node *t) {\n  eval(t);\n  for (int t_d= dir(t), p_d; t_d < 2; rot(t),\
+    \ t_d= dir(t)) {\n   if ((p_d= dir(t->par)) < 2) eval(t->par->par);\n   eval(t->par),\
+    \ eval(t);\n   if (p_d < 2) rot(t_d == p_d ? t->par : t);\n  }\n }\n static inline\
+    \ void pushup(Node *t) {\n  t->rsum= t->sum= t->val;\n  if (t->ch[0]) t->sum=\
+    \ M::op(t->ch[0]->sum, t->sum), t->rsum= M::op(t->rsum, t->ch[0]->rsum);\n  if\
+    \ (t->ch[1]) t->sum= M::op(t->sum, t->ch[1]->sum), t->rsum= M::op(t->ch[1]->rsum,\
     \ t->rsum);\n }\n static inline void propagate(Node *t, const E &x) {\n  if (!t)\
     \ return;\n  t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy= x;\n  M::mapping(t->val,\
     \ x);\n  if constexpr (semigroup<M>::value) M::mapping(t->sum, x), M::mapping(t->rsum,\
@@ -123,8 +124,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 16:53:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
 layout: document

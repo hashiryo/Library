@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Beats.hpp
     title: Segment-Tree Beats!
   _extendedRequiredBy: []

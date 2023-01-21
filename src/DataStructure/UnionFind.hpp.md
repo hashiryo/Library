@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Graph/MinimumSpanningTree_Kruskal.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
   _extendedVerifiedWith:
@@ -36,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/two_edge_connected_components.test.cpp
     title: test/yosupo/two_edge_connected_components.test.cpp
   - icon: ':x:'

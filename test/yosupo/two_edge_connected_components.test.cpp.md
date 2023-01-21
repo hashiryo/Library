@@ -9,9 +9,9 @@ data:
     title: Incremental-Bridge-Connectivity
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
@@ -65,7 +65,7 @@ data:
   path: test/yosupo/two_edge_connected_components.test.cpp
   requiredBy: []
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/two_edge_connected_components.test.cpp
 layout: document

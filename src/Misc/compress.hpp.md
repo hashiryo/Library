@@ -7,8 +7,17 @@ data:
     path: test/aoj/2893.test.cpp
     title: test/aoj/2893.test.cpp
   - icon: ':x:'
+    path: test/yosupo/static_range_inversions_query.mo.test.cpp
+    title: test/yosupo/static_range_inversions_query.mo.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/649.BIT.test.cpp
+    title: test/yukicoder/649.BIT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/738.BIT.test.cpp
+    title: test/yukicoder/738.BIT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -30,7 +39,10 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2893.test.cpp
+  - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/649.BIT.test.cpp
+  - test/yukicoder/738.BIT.test.cpp
 documentation_of: src/Misc/compress.hpp
 layout: document
 title: "\u5EA7\u6A19\u5727\u7E2E"
