@@ -8,14 +8,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
-  - icon: ':warning:'
-    path: src/Graph/MinimumSpanningTree_Kruskal.hpp
-    title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_1_A.test.cpp
     title: test/aoj/DSL_1_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_A.kruskal.test.cpp
     title: test/aoj/GRL_2_A.kruskal.test.cpp
   - icon: ':heavy_check_mark:'
@@ -67,7 +64,6 @@ data:
   requiredBy:
   - src/Graph/MinimumSpanningAborescense.hpp
   - src/Graph/IncrementalBridgeConnectivity.hpp
-  - src/Graph/MinimumSpanningTree_Kruskal.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

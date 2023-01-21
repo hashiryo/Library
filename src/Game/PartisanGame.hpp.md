@@ -3,16 +3,17 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc229_h.test.cpp
     title: test/atcoder/abc229_h.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Game/PartisanGame.hpp\"\n#include <bits/stdc++.h>\n\
-    class DyadicRational {\n static constexpr char FracLen= std::numeric_limits<std::uint64_t>::digits\
+  bundledCode: "#line 2 \"src/Game/PartisanGame.hpp\"\n#include <vector>\n#include\
+    \ <limits>\n#include <map>\n#include <cassert>\n#include <cmath>\nclass DyadicRational\
+    \ {\n static constexpr char FracLen= std::numeric_limits<std::uint64_t>::digits\
     \ - 1;\n static constexpr std::uint64_t Denom= 1ULL << FracLen;\n int integ;\n\
     \ std::uint64_t frac;\n template <class l_t, class r_t>  // Conway's realization\n\
     \ static DyadicRational reduce(const std::vector<l_t> &L, const std::vector<r_t>\
@@ -63,8 +64,9 @@ data:
     \ mp[g];\n  auto [gls, grs]= f(g);\n  std::vector<DyadicRational> L, R;\n  for\
     \ (auto &gl: gls) L.emplace_back(eval(gl));\n  for (auto &gr: grs) R.emplace_back(eval(gr));\n\
     \  return mp[g]= DyadicRational(L, R);\n }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nclass DyadicRational {\n static constexpr\
-    \ char FracLen= std::numeric_limits<std::uint64_t>::digits - 1;\n static constexpr\
+  code: "#pragma once\n#include <vector>\n#include <limits>\n#include <map>\n#include\
+    \ <cassert>\n#include <cmath>\nclass DyadicRational {\n static constexpr char\
+    \ FracLen= std::numeric_limits<std::uint64_t>::digits - 1;\n static constexpr\
     \ std::uint64_t Denom= 1ULL << FracLen;\n int integ;\n std::uint64_t frac;\n template\
     \ <class l_t, class r_t>  // Conway's realization\n static DyadicRational reduce(const\
     \ std::vector<l_t> &L, const std::vector<r_t> &R) {\n  if (L.empty() && R.empty())\
@@ -118,8 +120,8 @@ data:
   isVerificationFile: false
   path: src/Game/PartisanGame.hpp
   requiredBy: []
-  timestamp: '2022-12-31 22:09:43+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 17:49:49+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc229_h.test.cpp
 documentation_of: src/Game/PartisanGame.hpp

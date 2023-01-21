@@ -1,87 +1,64 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Internal/HAS_CHECK.hpp
+    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
+      \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Automaton/DFA_Compress.hpp
     title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Automaton/NFA_to_DFA.hpp
     title: "NFA\u3092DFA\u306B\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2587.test.cpp
     title: test/aoj/2587.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc117_d.test.cpp
     title: test/atcoder/abc117_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc154_e.test.cpp
     title: test/atcoder/abc154_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc208_e.test.cpp
     title: test/atcoder/abc208_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/agc015_d.test.cpp
     title: test/atcoder/agc015_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc127_a.test.cpp
     title: test/atcoder/arc127_a.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Automaton/dfa_dp.hpp\"\n#include <bits/stdc++.h>\n#ifndef\
-    \ HAS_CHECK\n#define HAS_CHECK(member, Dummy) \\\n template <class T> struct has_##member\
-    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
-    \ std::false_type check(...); \\\n  static T *mClass; \\\n  static const bool\
-    \ value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member,\
-    \ int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class\
-    \ dummy= typename U::member)\n#endif\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\n\
-    HAS_MEMBER(initial_state);\nHAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\n\
-    HAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\nHAS_MEMBER(is_reject);\n\
-    #undef HAS_TYPE\n#undef HAS_MEMBER\n#undef HAS_CHECK\ntemplate <class A> using\
-    \ is_automaton= std::conjunction<has_symbol_t<A>, has_alphabet<A>, has_initial_state<A>,\
-    \ has_transition<A>, has_is_accept<A>>;\ntemplate <class A> using trans_t= std::invoke_result_t<decltype(&A::transition),\
-    \ A, int, typename A::symbol_t, int>;\ntemplate <class DFA> constexpr bool is_dfa_v=\
-    \ std::conjunction_v<has_state_size<DFA>, is_automaton<DFA>, std::is_same<trans_t<DFA>,\
-    \ int>>;\ntemplate <class T, class DFA, class Add, class F> T dfa_dp(const DFA\
-    \ &dfa, int len, const Add &add, const F &f, const T t0= T(0), const T init= T(1))\
-    \ {\n static_assert(is_dfa_v<DFA>);\n const auto alphabet= dfa.alphabet();\n const\
-    \ int S= dfa.state_size();\n std::vector<T> dp(S, t0);\n std::vector<char> visit(S,\
-    \ false);\n dp[dfa.initial_state()]= init, visit[dfa.initial_state()]= true;\n\
-    \ for (int i= 0; i < len; i++) {\n  std::vector<T> next(S, t0);\n  std::vector<char>\
-    \ next_visit(S, false);\n  for (int s= S; s--;)\n   if (visit[s])\n    for (const\
-    \ auto &a: alphabet)\n     if (int q= dfa.transition(s, a, i); q != -1) add(next[q],\
-    \ f(dp[s], a, i)), next_visit[q]= true;\n  dp.swap(next), visit.swap(next_visit);\n\
-    \ }\n T ret= t0;\n for (int s= S; s--;)\n  if (dfa.is_accept(s)) add(ret, dp[s]);\n\
-    \ return ret;\n}\ntemplate <class T, class DFA> T dfa_dp(const DFA &dfa, int len,\
-    \ const T t0= T(0), const T init= T(1)) {\n return dfa_dp<T>(\n     dfa, len,\
-    \ [](T &l, const T &r) { l+= r; }, [](const T &v, const typename DFA::symbol_t\
-    \ &, int) { return v; }, t0, init);\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
-    \ Dummy) \\\n template <class T> struct has_##member { \\\n  template <class U,\
-    \ Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
-    \ \\\n  static T *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
+  bundledCode: "#line 2 \"src/Automaton/dfa_dp.hpp\"\n#include <vector>\n#line 2 \"\
+    src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
+    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
+    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
+    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
     \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
-    #endif\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\n\
-    HAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\nHAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\n\
-    HAS_MEMBER(is_reject);\n#undef HAS_TYPE\n#undef HAS_MEMBER\n#undef HAS_CHECK\n\
+    #line 4 \"src/Automaton/dfa_dp.hpp\"\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\n\
+    HAS_MEMBER(initial_state);\nHAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\n\
+    HAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\nHAS_MEMBER(is_reject);\n\
     template <class A> using is_automaton= std::conjunction<has_symbol_t<A>, has_alphabet<A>,\
     \ has_initial_state<A>, has_transition<A>, has_is_accept<A>>;\ntemplate <class\
     \ A> using trans_t= std::invoke_result_t<decltype(&A::transition), A, int, typename\
@@ -99,16 +76,39 @@ data:
     \ add(ret, dp[s]);\n return ret;\n}\ntemplate <class T, class DFA> T dfa_dp(const\
     \ DFA &dfa, int len, const T t0= T(0), const T init= T(1)) {\n return dfa_dp<T>(\n\
     \     dfa, len, [](T &l, const T &r) { l+= r; }, [](const T &v, const typename\
-    \ DFA::symbol_t &, int) { return v; }, t0, init);\n}"
-  dependsOn: []
+    \ DFA::symbol_t &, int) { return v; }, t0, init);\n}\n"
+  code: "#pragma once\n#include <vector>\n#include \"src/Internal/HAS_CHECK.hpp\"\n\
+    HAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\nHAS_MEMBER(transition);\n\
+    HAS_MEMBER(is_accept);\nHAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\n\
+    HAS_MEMBER(is_reject);\ntemplate <class A> using is_automaton= std::conjunction<has_symbol_t<A>,\
+    \ has_alphabet<A>, has_initial_state<A>, has_transition<A>, has_is_accept<A>>;\n\
+    template <class A> using trans_t= std::invoke_result_t<decltype(&A::transition),\
+    \ A, int, typename A::symbol_t, int>;\ntemplate <class DFA> constexpr bool is_dfa_v=\
+    \ std::conjunction_v<has_state_size<DFA>, is_automaton<DFA>, std::is_same<trans_t<DFA>,\
+    \ int>>;\ntemplate <class T, class DFA, class Add, class F> T dfa_dp(const DFA\
+    \ &dfa, int len, const Add &add, const F &f, const T t0= T(0), const T init= T(1))\
+    \ {\n static_assert(is_dfa_v<DFA>);\n const auto alphabet= dfa.alphabet();\n const\
+    \ int S= dfa.state_size();\n std::vector<T> dp(S, t0);\n std::vector<char> visit(S,\
+    \ false);\n dp[dfa.initial_state()]= init, visit[dfa.initial_state()]= true;\n\
+    \ for (int i= 0; i < len; i++) {\n  std::vector<T> next(S, t0);\n  std::vector<char>\
+    \ next_visit(S, false);\n  for (int s= S; s--;)\n   if (visit[s])\n    for (const\
+    \ auto &a: alphabet)\n     if (int q= dfa.transition(s, a, i); q != -1) add(next[q],\
+    \ f(dp[s], a, i)), next_visit[q]= true;\n  dp.swap(next), visit.swap(next_visit);\n\
+    \ }\n T ret= t0;\n for (int s= S; s--;)\n  if (dfa.is_accept(s)) add(ret, dp[s]);\n\
+    \ return ret;\n}\ntemplate <class T, class DFA> T dfa_dp(const DFA &dfa, int len,\
+    \ const T t0= T(0), const T init= T(1)) {\n return dfa_dp<T>(\n     dfa, len,\
+    \ [](T &l, const T &r) { l+= r; }, [](const T &v, const typename DFA::symbol_t\
+    \ &, int) { return v; }, t0, init);\n}"
+  dependsOn:
+  - src/Internal/HAS_CHECK.hpp
   isVerificationFile: false
   path: src/Automaton/dfa_dp.hpp
   requiredBy:
   - src/Automaton/DFA_Compress.hpp
   - src/Automaton/dfa_operations.hpp
   - src/Automaton/NFA_to_DFA.hpp
-  timestamp: '2022-12-31 22:35:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 17:49:49+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2587.test.cpp
   - test/atcoder/abc208_e.test.cpp

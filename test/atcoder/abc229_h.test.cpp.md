@@ -1,22 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Game/PartisanGame.hpp
     title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0 (Conway\u306E\u69CB\u6210)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc229/tasks/abc229_h
     links:
     - https://atcoder.jp/contests/abc229/tasks/abc229_h
   bundledCode: "#line 1 \"test/atcoder/abc229_h.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc229/tasks/abc229_h\"\
-    \n\n#include <bits/stdc++.h>\n#line 3 \"src/Game/PartisanGame.hpp\"\nclass DyadicRational\
-    \ {\n static constexpr char FracLen= std::numeric_limits<std::uint64_t>::digits\
+    \n#include <iostream>\n#include <vector>\n#include <string>\n#line 3 \"src/Game/PartisanGame.hpp\"\
+    \n#include <limits>\n#include <map>\n#include <cassert>\n#include <cmath>\nclass\
+    \ DyadicRational {\n static constexpr char FracLen= std::numeric_limits<std::uint64_t>::digits\
     \ - 1;\n static constexpr std::uint64_t Denom= 1ULL << FracLen;\n int integ;\n\
     \ std::uint64_t frac;\n template <class l_t, class r_t>  // Conway's realization\n\
     \ static DyadicRational reduce(const std::vector<l_t> &L, const std::vector<r_t>\
@@ -66,39 +67,36 @@ data:
     \ F &_f): f(_f) {}\n DyadicRational eval(Game g) {\n  if (mp.count(g)) return\
     \ mp[g];\n  auto [gls, grs]= f(g);\n  std::vector<DyadicRational> L, R;\n  for\
     \ (auto &gl: gls) L.emplace_back(eval(gl));\n  for (auto &gr: grs) R.emplace_back(eval(gr));\n\
-    \  return mp[g]= DyadicRational(L, R);\n }\n};\n#line 5 \"test/atcoder/abc229_h.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N;\n  cin >> N;\n  using Game = vector<int>;\n  auto f = [&](const Game\
-    \ &g) {\n    vector<Game> gs[2];\n    for (int b = 0; b < 2; b++)\n      for (int\
-    \ i = 0; i < N; i++)\n        if (g[i] == !b) {\n          gs[b].emplace_back(g),\
-    \ gs[b].back()[i] = 2;\n        } else if (g[i] == b && i > 0 && g[i - 1] == 2)\
-    \ {\n          gs[b].emplace_back(g), gs[b].back()[i - 1] = b, gs[b].back()[i]\
-    \ = 2;\n        }\n    return make_pair(gs[0], gs[1]);\n  };\n  PartisanGame<Game,\
-    \ decltype(f)> pg(f);\n  string S[N];\n  for (int i = 0; i < N; i++) cin >> S[i];\n\
-    \  DyadicRational sum(0);\n  for (int j = 0; j < N; j++) {\n    Game g(N);\n \
-    \   for (int i = 0; i < N; i++) g[i] = S[i][j] == '.' ? 2 : (S[i][j] == 'B');\n\
-    \    sum += pg.eval(g);\n  }\n  cout << (sum > 0 ? \"Takahashi\" : \"Snuke\")\
-    \ << '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc229/tasks/abc229_h\"\n\n\
-    #include <bits/stdc++.h>\n#include \"src/Game/PartisanGame.hpp\"\nusing namespace\
-    \ std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N;\n\
-    \  cin >> N;\n  using Game = vector<int>;\n  auto f = [&](const Game &g) {\n \
-    \   vector<Game> gs[2];\n    for (int b = 0; b < 2; b++)\n      for (int i = 0;\
-    \ i < N; i++)\n        if (g[i] == !b) {\n          gs[b].emplace_back(g), gs[b].back()[i]\
-    \ = 2;\n        } else if (g[i] == b && i > 0 && g[i - 1] == 2) {\n          gs[b].emplace_back(g),\
-    \ gs[b].back()[i - 1] = b, gs[b].back()[i] = 2;\n        }\n    return make_pair(gs[0],\
-    \ gs[1]);\n  };\n  PartisanGame<Game, decltype(f)> pg(f);\n  string S[N];\n  for\
-    \ (int i = 0; i < N; i++) cin >> S[i];\n  DyadicRational sum(0);\n  for (int j\
-    \ = 0; j < N; j++) {\n    Game g(N);\n    for (int i = 0; i < N; i++) g[i] = S[i][j]\
-    \ == '.' ? 2 : (S[i][j] == 'B');\n    sum += pg.eval(g);\n  }\n  cout << (sum\
-    \ > 0 ? \"Takahashi\" : \"Snuke\") << '\\n';\n  return 0;\n}"
+    \  return mp[g]= DyadicRational(L, R);\n }\n};\n#line 6 \"test/atcoder/abc229_h.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n using Game= vector<int>;\n auto f= [&](const Game &g) {\n\
+    \  vector<Game> gs[2];\n  for (int b= 0; b < 2; b++)\n   for (int i= 0; i < N;\
+    \ i++)\n    if (g[i] == !b) gs[b].emplace_back(g), gs[b].back()[i]= 2;\n    else\
+    \ if (g[i] == b && i > 0 && g[i - 1] == 2) gs[b].emplace_back(g), gs[b].back()[i\
+    \ - 1]= b, gs[b].back()[i]= 2;\n  return make_pair(gs[0], gs[1]);\n };\n PartisanGame<Game,\
+    \ decltype(f)> pg(f);\n string S[N];\n for (int i= 0; i < N; i++) cin >> S[i];\n\
+    \ DyadicRational sum(0);\n for (int j= 0; j < N; j++) {\n  Game g(N);\n  for (int\
+    \ i= 0; i < N; i++) g[i]= S[i][j] == '.' ? 2 : (S[i][j] == 'B');\n  sum+= pg.eval(g);\n\
+    \ }\n cout << (sum > 0 ? \"Takahashi\" : \"Snuke\") << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc229/tasks/abc229_h\"\n#include\
+    \ <iostream>\n#include <vector>\n#include <string>\n#include \"src/Game/PartisanGame.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n using Game= vector<int>;\n auto f= [&](const Game &g) {\n\
+    \  vector<Game> gs[2];\n  for (int b= 0; b < 2; b++)\n   for (int i= 0; i < N;\
+    \ i++)\n    if (g[i] == !b) gs[b].emplace_back(g), gs[b].back()[i]= 2;\n    else\
+    \ if (g[i] == b && i > 0 && g[i - 1] == 2) gs[b].emplace_back(g), gs[b].back()[i\
+    \ - 1]= b, gs[b].back()[i]= 2;\n  return make_pair(gs[0], gs[1]);\n };\n PartisanGame<Game,\
+    \ decltype(f)> pg(f);\n string S[N];\n for (int i= 0; i < N; i++) cin >> S[i];\n\
+    \ DyadicRational sum(0);\n for (int j= 0; j < N; j++) {\n  Game g(N);\n  for (int\
+    \ i= 0; i < N; i++) g[i]= S[i][j] == '.' ? 2 : (S[i][j] == 'B');\n  sum+= pg.eval(g);\n\
+    \ }\n cout << (sum > 0 ? \"Takahashi\" : \"Snuke\") << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Game/PartisanGame.hpp
   isVerificationFile: true
   path: test/atcoder/abc229_h.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 22:09:43+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 17:49:49+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc229_h.test.cpp
 layout: document

@@ -19,7 +19,7 @@ data:
     \ n): n(n) {}\n void query(int l, int r) { L.push_back(l), R.push_back(r); } /*\
     \ [l, r) */\n template <typename AL, typename AR, typename EL, typename ER, typename\
     \ O> void run(const AL &add_left, const AR &add_right, const EL &erase_left, const\
-    \ ER &erase_right, const O &out) {\n  int q= lr.size(), bs= n / std::min<int>(n,\
+    \ ER &erase_right, const O &out) {\n  int q= L.size(), bs= n / std::min<int>(n,\
     \ std::sqrt(q));\n  std::vector<int> ord(q);\n  std::iota(ord.begin(), ord.end(),\
     \ 0), std::sort(ord.begin(), ord.end(), [&](int a, int b) {\n   int ablk= L[a]\
     \ / bs, bblk= L[b] / bs;\n   return ablk != bblk ? ablk < bblk : (ablk & 1) ?\
@@ -33,20 +33,20 @@ data:
     \ void query(int l, int r) { L.push_back(l), R.push_back(r); } /* [l, r) */\n\
     \ template <typename AL, typename AR, typename EL, typename ER, typename O> void\
     \ run(const AL &add_left, const AR &add_right, const EL &erase_left, const ER\
-    \ &erase_right, const O &out) {\n  int q= lr.size(), bs= n / std::min<int>(n,\
-    \ std::sqrt(q));\n  std::vector<int> ord(q);\n  std::iota(ord.begin(), ord.end(),\
-    \ 0), std::sort(ord.begin(), ord.end(), [&](int a, int b) {\n   int ablk= L[a]\
-    \ / bs, bblk= L[b] / bs;\n   return ablk != bblk ? ablk < bblk : (ablk & 1) ?\
-    \ R[a] > R[b] : R[a] < R[b];\n  });\n  int l= 0, r= 0;\n  for (auto i: ord) {\n\
-    \   while (l > L[i]) add_left(--l);\n   while (r < R[i]) add_right(r++);\n   while\
-    \ (l < L[i]) erase_left(l++);\n   while (r > R[i]) erase_right(--r);\n   out(i);\n\
-    \  }\n }\n template <typename A, typename E, typename O> void run(const A &add,\
-    \ const E &erase, const O &out) { run(add, add, erase, erase, out); }\n};"
+    \ &erase_right, const O &out) {\n  int q= L.size(), bs= n / std::min<int>(n, std::sqrt(q));\n\
+    \  std::vector<int> ord(q);\n  std::iota(ord.begin(), ord.end(), 0), std::sort(ord.begin(),\
+    \ ord.end(), [&](int a, int b) {\n   int ablk= L[a] / bs, bblk= L[b] / bs;\n \
+    \  return ablk != bblk ? ablk < bblk : (ablk & 1) ? R[a] > R[b] : R[a] < R[b];\n\
+    \  });\n  int l= 0, r= 0;\n  for (auto i: ord) {\n   while (l > L[i]) add_left(--l);\n\
+    \   while (r < R[i]) add_right(r++);\n   while (l < L[i]) erase_left(l++);\n \
+    \  while (r > R[i]) erase_right(--r);\n   out(i);\n  }\n }\n template <typename\
+    \ A, typename E, typename O> void run(const A &add, const E &erase, const O &out)\
+    \ { run(add, add, erase, erase, out); }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Misc/Mo.hpp
   requiredBy: []
-  timestamp: '2023-01-21 16:53:05+09:00'
+  timestamp: '2023-01-21 17:49:49+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/0425.test.cpp

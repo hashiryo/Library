@@ -1,44 +1,48 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
+  - icon: ':question:'
+    path: src/Internal/HAS_CHECK.hpp
+    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
+      \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc154_e.test.cpp
     title: test/atcoder/abc154_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc208_e.test.cpp
     title: test/atcoder/abc208_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc127_a.test.cpp
     title: test/atcoder/arc127_a.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Automaton/dfa_operations.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Automaton/dfa_dp.hpp\"\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
-    \ Dummy) \\\n template <class T> struct has_##member { \\\n  template <class U,\
-    \ Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
-    \ \\\n  static T *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
+  bundledCode: "#line 2 \"src/Automaton/dfa_dp.hpp\"\n#include <vector>\n#line 2 \"\
+    src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
+    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
+    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
+    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
     \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
-    #endif\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\n\
-    HAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\nHAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\n\
-    HAS_MEMBER(is_reject);\n#undef HAS_TYPE\n#undef HAS_MEMBER\n#undef HAS_CHECK\n\
+    #line 4 \"src/Automaton/dfa_dp.hpp\"\nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\n\
+    HAS_MEMBER(initial_state);\nHAS_MEMBER(transition);\nHAS_MEMBER(is_accept);\n\
+    HAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\nHAS_MEMBER(is_reject);\n\
     template <class A> using is_automaton= std::conjunction<has_symbol_t<A>, has_alphabet<A>,\
     \ has_initial_state<A>, has_transition<A>, has_is_accept<A>>;\ntemplate <class\
     \ A> using trans_t= std::invoke_result_t<decltype(&A::transition), A, int, typename\
@@ -56,7 +60,7 @@ data:
     \ add(ret, dp[s]);\n return ret;\n}\ntemplate <class T, class DFA> T dfa_dp(const\
     \ DFA &dfa, int len, const T t0= T(0), const T init= T(1)) {\n return dfa_dp<T>(\n\
     \     dfa, len, [](T &l, const T &r) { l+= r; }, [](const T &v, const typename\
-    \ DFA::symbol_t &, int) { return v; }, t0, init);\n}\n#line 4 \"src/Automaton/dfa_operations.hpp\"\
+    \ DFA::symbol_t &, int) { return v; }, t0, init);\n}\n#line 3 \"src/Automaton/dfa_operations.hpp\"\
     \ntemplate <class DFA, class S, class F> struct DFA_SymbolMap {\n using symbol_t=\
     \ S;\n DFA_SymbolMap(const DFA &dfa_, const std::vector<symbol_t> &alp_, const\
     \ F &f_): dfa(dfa_), alp(alp_), f(f_) { static_assert(is_dfa_v<DFA>); }\n std::vector<symbol_t>\
@@ -84,41 +88,41 @@ data:
     \ std::nullptr_t> = nullptr> DFA_Intersection<DFA0, DFA1> operator&(const DFA0\
     \ &dfa0, const DFA1 &dfa1) { return DFA_Intersection<DFA0, DFA1>(dfa0, dfa1);\
     \ }\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Automaton/dfa_dp.hpp\"\
-    \ntemplate <class DFA, class S, class F> struct DFA_SymbolMap {\n using symbol_t=\
-    \ S;\n DFA_SymbolMap(const DFA &dfa_, const std::vector<symbol_t> &alp_, const\
-    \ F &f_): dfa(dfa_), alp(alp_), f(f_) { static_assert(is_dfa_v<DFA>); }\n std::vector<symbol_t>\
-    \ alphabet() const { return alp; }\n inline int initial_state() const { return\
-    \ dfa.initial_state(); }\n inline int transition(int s, const symbol_t &a, int\
-    \ i) const { return dfa.transition(s, f(a), i); }\n inline bool is_accept(int\
-    \ s) const { return dfa.is_accept(s); }\n inline int state_size() const { return\
-    \ dfa.state_size(); }\nprivate:\n const DFA dfa;\n const std::vector<symbol_t>\
-    \ alp;\n const F f;\n};\ntemplate <class DFA0, class DFA1> struct DFA_Intersection\
-    \ {\n using symbol_t= typename DFA0::symbol_t;\n static_assert(std::is_same_v<symbol_t,\
-    \ typename DFA1::symbol_t>);\n DFA_Intersection(const DFA0 &dfa0_, const DFA1\
-    \ &dfa1_): dfa0(dfa0_), dfa1(dfa1_) {\n  static_assert(is_dfa_v<DFA0>);\n  static_assert(is_dfa_v<DFA1>);\n\
-    \ }\n inline std::vector<symbol_t> alphabet() const {\n  auto alphabet= dfa0.alphabet();\n\
-    \  assert(alphabet == dfa1.alphabet());\n  return alphabet;\n }\n inline int initial_state()\
-    \ const { return product(dfa0.initial_state(), dfa1.initial_state()); }\n inline\
-    \ int transition(int s, const symbol_t &c, int i) const {\n  auto [s0, s1]= projection(s);\n\
-    \  return product(dfa0.transition(s0, c, i), dfa1.transition(s1, c, i));\n }\n\
-    \ inline bool is_accept(int s) const {\n  auto [s0, s1]= projection(s);\n  return\
-    \ dfa0.is_accept(s0) && dfa1.is_accept(s1);\n }\n inline int state_size() const\
-    \ { return dfa0.state_size() * dfa1.state_size(); }\nprivate:\n inline int product(int\
-    \ s0, int s1) const { return s0 == -1 || s1 == -1 ? -1 : s0 + s1 * dfa0.state_size();\
-    \ }\n inline std::pair<int, int> projection(int s) const { return {s % dfa0.state_size(),\
-    \ s / dfa0.state_size()}; }\n const DFA0 dfa0;\n const DFA1 dfa1;\n};\ntemplate\
-    \ <class DFA0, class DFA1, typename std::enable_if_t<is_dfa_v<DFA0> && is_dfa_v<DFA1>,\
-    \ std::nullptr_t> = nullptr> DFA_Intersection<DFA0, DFA1> operator&(const DFA0\
-    \ &dfa0, const DFA1 &dfa1) { return DFA_Intersection<DFA0, DFA1>(dfa0, dfa1);\
-    \ }"
+  code: "#pragma once\n#include \"src/Automaton/dfa_dp.hpp\"\ntemplate <class DFA,\
+    \ class S, class F> struct DFA_SymbolMap {\n using symbol_t= S;\n DFA_SymbolMap(const\
+    \ DFA &dfa_, const std::vector<symbol_t> &alp_, const F &f_): dfa(dfa_), alp(alp_),\
+    \ f(f_) { static_assert(is_dfa_v<DFA>); }\n std::vector<symbol_t> alphabet() const\
+    \ { return alp; }\n inline int initial_state() const { return dfa.initial_state();\
+    \ }\n inline int transition(int s, const symbol_t &a, int i) const { return dfa.transition(s,\
+    \ f(a), i); }\n inline bool is_accept(int s) const { return dfa.is_accept(s);\
+    \ }\n inline int state_size() const { return dfa.state_size(); }\nprivate:\n const\
+    \ DFA dfa;\n const std::vector<symbol_t> alp;\n const F f;\n};\ntemplate <class\
+    \ DFA0, class DFA1> struct DFA_Intersection {\n using symbol_t= typename DFA0::symbol_t;\n\
+    \ static_assert(std::is_same_v<symbol_t, typename DFA1::symbol_t>);\n DFA_Intersection(const\
+    \ DFA0 &dfa0_, const DFA1 &dfa1_): dfa0(dfa0_), dfa1(dfa1_) {\n  static_assert(is_dfa_v<DFA0>);\n\
+    \  static_assert(is_dfa_v<DFA1>);\n }\n inline std::vector<symbol_t> alphabet()\
+    \ const {\n  auto alphabet= dfa0.alphabet();\n  assert(alphabet == dfa1.alphabet());\n\
+    \  return alphabet;\n }\n inline int initial_state() const { return product(dfa0.initial_state(),\
+    \ dfa1.initial_state()); }\n inline int transition(int s, const symbol_t &c, int\
+    \ i) const {\n  auto [s0, s1]= projection(s);\n  return product(dfa0.transition(s0,\
+    \ c, i), dfa1.transition(s1, c, i));\n }\n inline bool is_accept(int s) const\
+    \ {\n  auto [s0, s1]= projection(s);\n  return dfa0.is_accept(s0) && dfa1.is_accept(s1);\n\
+    \ }\n inline int state_size() const { return dfa0.state_size() * dfa1.state_size();\
+    \ }\nprivate:\n inline int product(int s0, int s1) const { return s0 == -1 ||\
+    \ s1 == -1 ? -1 : s0 + s1 * dfa0.state_size(); }\n inline std::pair<int, int>\
+    \ projection(int s) const { return {s % dfa0.state_size(), s / dfa0.state_size()};\
+    \ }\n const DFA0 dfa0;\n const DFA1 dfa1;\n};\ntemplate <class DFA0, class DFA1,\
+    \ typename std::enable_if_t<is_dfa_v<DFA0> && is_dfa_v<DFA1>, std::nullptr_t>\
+    \ = nullptr> DFA_Intersection<DFA0, DFA1> operator&(const DFA0 &dfa0, const DFA1\
+    \ &dfa1) { return DFA_Intersection<DFA0, DFA1>(dfa0, dfa1); }"
   dependsOn:
   - src/Automaton/dfa_dp.hpp
+  - src/Internal/HAS_CHECK.hpp
   isVerificationFile: false
   path: src/Automaton/dfa_operations.hpp
   requiredBy: []
-  timestamp: '2022-12-31 22:35:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 17:49:49+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc208_e.test.cpp
   - test/atcoder/abc235_f.test.cpp

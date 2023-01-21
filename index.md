@@ -3,20 +3,20 @@ data:
   libraryCategories:
   - name: src/Automaton
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Automaton/DFA_Compress.hpp
       title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Automaton/DFA_Inequality.hpp
       title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
         \u7406\u3059\u308BDFA"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Automaton/NFA_to_DFA.hpp
       title: "NFA\u3092DFA\u306B\u5909\u63DB"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Automaton/dfa_dp.hpp
       title: "DFA\u4E0A\u306EDP"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Automaton/dfa_operations.hpp
       title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\
         \u5408\u6F14\u7B97"
@@ -153,7 +153,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Game/ImpartialGame.hpp
       title: "\u4E0D\u504F\u30B2\u30FC\u30E0 (grundy\u6570)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Game/PartisanGame.hpp
       title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0 (Conway\u306E\u69CB\u6210)"
   - name: src/Geometry
@@ -191,18 +191,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
-    - icon: ':warning:'
-      path: src/Graph/MinimumSpanningTree_Kruskal.hpp
-      title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
     - icon: ':heavy_check_mark:'
       path: src/Graph/ReRooting.hpp
       title: "\u5168\u65B9\u4F4D\u6728DP"
     - icon: ':heavy_check_mark:'
       path: src/Graph/StronglyConnectedComponents.hpp
       title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':warning:'
-      path: src/Graph/TwoEdgeConnectedComponents.hpp
-      title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
@@ -514,10 +508,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2559.LCT_Dual.test.cpp
       title: test/aoj/2559.LCT_Dual.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2587.test.cpp
       title: test/aoj/2587.test.cpp
     - icon: ':heavy_check_mark:'
@@ -721,7 +715,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_3_D.sparsetable.test.cpp
       title: test/aoj/DSL_3_D.sparsetable.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_2_A.kruskal.test.cpp
       title: test/aoj/GRL_2_A.kruskal.test.cpp
     - icon: ':heavy_check_mark:'
@@ -780,10 +774,10 @@ data:
       title: test/aoj/NTL_2_F.test.cpp
   - name: test/atcoder
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc117_d.test.cpp
       title: test/atcoder/abc117_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc129_e.test.cpp
       title: test/atcoder/abc129_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -795,10 +789,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc154_e.test.cpp
       title: test/atcoder/abc154_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -819,7 +813,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc208_e.test.cpp
       title: test/atcoder/abc208_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -834,7 +828,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -843,7 +837,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc231_h.matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.matroid_intersection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -864,7 +858,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc280_f.test.cpp
       title: test/atcoder/abc280_f.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/agc015_d.test.cpp
       title: test/atcoder/agc015_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -888,7 +882,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.dujiao.test.cpp
       title: test/atcoder/arc116_c.dujiao.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc127_a.test.cpp
       title: test/atcoder/arc127_a.test.cpp
     - icon: ':heavy_check_mark:'

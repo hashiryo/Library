@@ -2,6 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':x:'
+    path: src/Automaton/DFA_Compress.hpp
+    title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
+  - icon: ':x:'
+    path: src/Automaton/NFA_to_DFA.hpp
+    title: "NFA\u3092DFA\u306B\u5909\u63DB"
+  - icon: ':x:'
+    path: src/Automaton/dfa_dp.hpp
+    title: "DFA\u4E0A\u306EDP"
+  - icon: ':x:'
+    path: src/Automaton/dfa_operations.hpp
+    title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
+      \u6F14\u7B97"
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
@@ -21,9 +34,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2450.LCT.test.cpp
     title: test/aoj/2450.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2587.test.cpp
+    title: test/aoj/2587.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
@@ -33,6 +49,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc117_d.test.cpp
+    title: test/atcoder/abc117_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc129_e.test.cpp
+    title: test/atcoder/abc129_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
@@ -42,6 +64,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc138_f.test.cpp
+    title: test/atcoder/abc138_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc154_e.test.cpp
+    title: test/atcoder/abc154_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc208_e.test.cpp
+    title: test/atcoder/abc208_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc235_f.test.cpp
+    title: test/atcoder/abc235_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/agc015_d.test.cpp
+    title: test/atcoder/agc015_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc127_a.test.cpp
+    title: test/atcoder/arc127_a.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
@@ -88,6 +128,10 @@ data:
   - src/Graph/MinimumSpanningAborescense.hpp
   - src/DataStructure/SkewHeap.hpp
   - src/DataStructure/LinkCutTree.hpp
+  - src/Automaton/DFA_Compress.hpp
+  - src/Automaton/dfa_operations.hpp
+  - src/Automaton/NFA_to_DFA.hpp
+  - src/Automaton/dfa_dp.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
@@ -98,6 +142,7 @@ data:
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/2587.test.cpp
   - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/directedmst.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
@@ -105,9 +150,17 @@ data:
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/650.LCT.test.cpp
+  - test/atcoder/abc208_e.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
+  - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp
+  - test/atcoder/abc138_f.test.cpp
+  - test/atcoder/agc015_d.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/atcoder/abc117_d.test.cpp
+  - test/atcoder/abc129_e.test.cpp
+  - test/atcoder/abc154_e.test.cpp
+  - test/atcoder/arc127_a.test.cpp
 documentation_of: src/Internal/HAS_CHECK.hpp
 layout: document
 title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\u30F3\

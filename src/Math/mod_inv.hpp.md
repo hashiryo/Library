@@ -130,10 +130,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -148,7 +148,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
   - icon: ':heavy_check_mark:'
