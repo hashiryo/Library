@@ -3,35 +3,36 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1549.WM.test.cpp
     title: test/aoj/1549.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2674.WM.test.cpp
     title: test/aoj/2674.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_kth_smallest.WM.test.cpp
     title: test/yosupo/range_kth_smallest.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/static_range_frequency.WM.test.cpp
     title: test/yosupo/static_range_frequency.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/728.WM.test.cpp
     title: test/yukicoder/728.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/919.WM.test.cpp
     title: test/yukicoder/919.WM.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <bits/stdc++.h>\n\
-    template <class T= std::int64_t> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
-    \ {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
+  bundledCode: "#line 2 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <vector>\n\
+    #include <algorithm>\n#include <array>\ntemplate <class T= std::int64_t> class\
+    \ WaveletMatrix {\n struct SuccinctIndexableDictionary {\n  std::size_t len, blocks,\
+    \ zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
     \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
     \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
     \ 5]|= 1U << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks;\
@@ -68,9 +69,9 @@ data:
     \  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i])) next[mp[v[i]]]=\
     \ i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int l, int\
     \ r) const { return wm.count(l, r, l); }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <class T= std::int64_t>\
-    \ class WaveletMatrix {\n struct SuccinctIndexableDictionary {\n  std::size_t\
-    \ len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
+  code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <array>\n\
+    template <class T= std::int64_t> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
+    \ {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
     \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
     \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
     \ 5]|= 1U << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks;\
@@ -111,8 +112,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/WaveletMatrix.hpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 19:04:35+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/1549.WM.test.cpp
   - test/aoj/2674.WM.test.cpp

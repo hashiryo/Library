@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_frequency
@@ -16,9 +16,10 @@ data:
     - https://judge.yosupo.jp/problem/static_range_frequency
   bundledCode: "#line 1 \"test/yosupo/static_range_frequency.WM.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/static_range_frequency\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/DataStructure/WaveletMatrix.hpp\"\ntemplate <class\
-    \ T= std::int64_t> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
-    \ {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
+    \ <iostream>\n#include <vector>\n#line 3 \"src/DataStructure/WaveletMatrix.hpp\"\
+    \n#include <algorithm>\n#include <array>\ntemplate <class T= std::int64_t> class\
+    \ WaveletMatrix {\n struct SuccinctIndexableDictionary {\n  std::size_t len, blocks,\
+    \ zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
     \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
     \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
     \ 5]|= 1U << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks;\
@@ -54,26 +55,26 @@ data:
     \ DQuery(const std::vector<T> &v): next(v.size(), -1) {\n  std::map<T, int> mp;\n\
     \  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i])) next[mp[v[i]]]=\
     \ i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int l, int\
-    \ r) const { return wm.count(l, r, l); }\n};\n#line 4 \"test/yosupo/static_range_frequency.WM.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, x;\n\
-    \    cin >> l >> r >> x;\n    cout << (l < r ? wm.count(l, r, x, x + 1) : 0) <<\
-    \ \"\\n\";\n  }\n  return 0;\n}\n"
+    \ r) const { return wm.count(l, r, l); }\n};\n#line 5 \"test/yosupo/static_range_frequency.WM.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n vector<int> a(N);\n for (int i= 0; i < N; i++)\
+    \ cin >> a[i];\n WaveletMatrix wm(a);\n while (Q--) {\n  int l, r, x;\n  cin >>\
+    \ l >> r >> x;\n  cout << (l < r ? wm.count(l, r, x, x + 1) : 0) << \"\\n\";\n\
+    \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_frequency\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\n\
-    using namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, x;\n\
-    \    cin >> l >> r >> x;\n    cout << (l < r ? wm.count(l, r, x, x + 1) : 0) <<\
-    \ \"\\n\";\n  }\n  return 0;\n}"
+    \n#include <iostream>\n#include <vector>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n vector<int> a(N);\n for (int i= 0; i < N; i++)\
+    \ cin >> a[i];\n WaveletMatrix wm(a);\n while (Q--) {\n  int l, r, x;\n  cin >>\
+    \ l >> r >> x;\n  cout << (l < r ? wm.count(l, r, x, x + 1) : 0) << \"\\n\";\n\
+    \ }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
   isVerificationFile: true
   path: test/yosupo/static_range_frequency.WM.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 19:04:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/static_range_frequency.WM.test.cpp
 layout: document

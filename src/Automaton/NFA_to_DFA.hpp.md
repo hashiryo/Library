@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   - icon: ':question:'
@@ -13,12 +13,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2587.test.cpp
     title: test/aoj/2587.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc015_d.test.cpp
     title: test/atcoder/agc015_d.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Automaton/NFA_to_DFA.hpp\"\n#include <set>\n#include\
@@ -108,7 +108,7 @@ data:
   path: src/Automaton/NFA_to_DFA.hpp
   requiredBy: []
   timestamp: '2023-01-21 18:41:09+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2587.test.cpp
   - test/atcoder/agc015_d.test.cpp

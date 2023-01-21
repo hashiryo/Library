@@ -6,17 +6,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Automaton/DFA_Compress.hpp
       title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/DFA_Inequality.hpp
       title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
         \u7406\u3059\u308BDFA"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/NFA_to_DFA.hpp
       title: "NFA\u3092DFA\u306B\u5909\u63DB"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/dfa_dp.hpp
       title: "DFA\u4E0A\u306EDP"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Automaton/dfa_operations.hpp
       title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\
         \u5408\u6F14\u7B97"
@@ -73,7 +73,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SkewHeap.hpp
       title: Skew-Heap
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SortedPerBucket.hpp
       title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
     - icon: ':heavy_check_mark:'
@@ -91,7 +91,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -427,7 +427,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1508.WBT.test.cpp
       title: test/aoj/1508.WBT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1549.WM.test.cpp
       title: test/aoj/1549.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -535,7 +535,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2667.HLD.test.cpp
       title: test/aoj/2667.HLD.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2674.WM.test.cpp
       title: test/aoj/2674.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -804,7 +804,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.primecnt.test.cpp
       title: test/atcoder/abc172_d.primecnt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -837,7 +837,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc231_h.matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.matroid_intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -858,7 +858,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc280_f.test.cpp
       title: test/atcoder/abc280_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/agc015_d.test.cpp
       title: test/atcoder/agc015_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -882,7 +882,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.dujiao.test.cpp
       title: test/atcoder/arc116_c.dujiao.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc127_a.test.cpp
       title: test/atcoder/arc127_a.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1125,7 +1125,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1164,7 +1164,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
       title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/static_range_frequency.WM.test.cpp
       title: test/yosupo/static_range_frequency.WM.test.cpp
     - icon: ':x:'
@@ -1325,7 +1325,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.KDT.test.cpp
       title: test/yukicoder/728.KDT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp
     - icon: ':x:'
@@ -1346,10 +1346,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/886.numth.test.cpp
       title: test/yukicoder/886.numth.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/919.WM.test.cpp
       title: test/yukicoder/919.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/925.SqrtDC.test.cpp
       title: test/yukicoder/925.SqrtDC.test.cpp
     - icon: ':heavy_check_mark:'

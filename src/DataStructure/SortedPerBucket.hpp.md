@@ -12,15 +12,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
     title: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/925.SqrtDC.test.cpp
     title: test/yukicoder/925.SqrtDC.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/SortedPerBucket.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/DataStructure/SortedPerBucket.hpp\"\n#include <limits>\n\
+    #include <algorithm>\n#include <array>\n#include <vector>\n#include <numeric>\n\
     template <class T, std::size_t B= 700> class SortedPerBucket {\n static constexpr\
     \ T INF= std::numeric_limits<T>::max() / 2;\n struct Dat {\n  const std::size_t\
     \ n;\n  std::array<T, B> a, sorted;\n  std::array<T, B + 1> acc;\n  T add, lb,\
@@ -81,8 +82,9 @@ data:
     \   T a= lb - d.add, b= ub - d.add;\n   d.ub= std::clamp(d.ub, a, b), d.lb= std::clamp(d.lb,\
     \ a, b);\n  };\n  update(l, r, f, [&](T &x) { x= std::clamp(x, lb, ub); });\n\
     \ }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <class T, std::size_t B=\
-    \ 700> class SortedPerBucket {\n static constexpr T INF= std::numeric_limits<T>::max()\
+  code: "#pragma once\n#include <limits>\n#include <algorithm>\n#include <array>\n\
+    #include <vector>\n#include <numeric>\ntemplate <class T, std::size_t B= 700>\
+    \ class SortedPerBucket {\n static constexpr T INF= std::numeric_limits<T>::max()\
     \ / 2;\n struct Dat {\n  const std::size_t n;\n  std::array<T, B> a, sorted;\n\
     \  std::array<T, B + 1> acc;\n  T add, lb, ub;\n  Dat(std::size_t b): n(b), a{0},\
     \ sorted{0}, acc{0}, add(0), lb(-INF), ub(INF) {}\n  Dat(const T *bg, std::size_t\
@@ -146,8 +148,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SortedPerBucket.hpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 19:04:35+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3170.test.cpp
   - test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
@@ -158,10 +160,11 @@ layout: document
 title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
 ---
 ## 計算量
- * set - $\mathcal{O}(B)$
- * add, chmin, chmax, chclamp - $\mathcal{O}(B \log B)$
- * get - $\mathcal{O}(1)$
- * count, sum - $\mathcal{O}(B + N/B \log B)$
+ - set - $\mathcal{O}(B)$
+ - add, chmin, chmax, chclamp - $\mathcal{O}(B \log B)$
+ - get - $\mathcal{O}(1)$
+ - count, sum - $\mathcal{O}(B + N/B \log B)$
+ 
 ## 参考
 [https://rian.hatenablog.jp/entry/2020/10/01/001253](https://rian.hatenablog.jp/entry/2020/10/01/001253) \
 [https://maspypy.com/yukicoder-no-925-%e7%b4%b2%e6%98%9f-extra](https://maspypy.com/yukicoder-no-925-%e7%b4%b2%e6%98%9f-extra)

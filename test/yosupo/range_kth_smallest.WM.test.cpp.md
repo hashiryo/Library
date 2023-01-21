@@ -1,35 +1,36 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
     links:
     - https://judge.yosupo.jp/problem/range_kth_smallest
   bundledCode: "#line 1 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/DataStructure/WaveletMatrix.hpp\"\ntemplate <class T= std::int64_t>\
-    \ class WaveletMatrix {\n struct SuccinctIndexableDictionary {\n  std::size_t\
-    \ len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
-    \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
-    \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
-    \ 5]|= 1U << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks;\
-    \ i++) sum[i]= sum[i - 1] + __builtin_popcount(bit[i - 1]);\n   zeros= rank0(len);\n\
-    \  }\n  bool operator[](int k) const { return (bit[k >> 5] >> (k & 31)) & 1; }\n\
-    \  std::size_t rank(std::size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
-    \ >> 5] & ((1U << (k & 31)) - 1))); }\n  std::size_t rank0(std::size_t k) const\
-    \ { return k - rank(k); }\n };\n std::size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
-    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix()= default;\n WaveletMatrix(const\
-    \ std::vector<T> &v): len(v.size()), lg(32 - __builtin_clz(std::max<int>(len,\
-    \ 1))), mat(lg, len), vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
+    \ \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n#include <iostream>\n\
+    #include <vector>\n#line 3 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <algorithm>\n\
+    #include <array>\ntemplate <class T= std::int64_t> class WaveletMatrix {\n struct\
+    \ SuccinctIndexableDictionary {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned>\
+    \ bit, sum;\n  SuccinctIndexableDictionary()= default;\n  SuccinctIndexableDictionary(std::size_t\
+    \ len): len(len), blocks((len >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n\
+    \  void set(int k) { bit[k >> 5]|= 1U << (k & 31); }\n  void build() {\n   for\
+    \ (std::size_t i= 1; i < blocks; i++) sum[i]= sum[i - 1] + __builtin_popcount(bit[i\
+    \ - 1]);\n   zeros= rank0(len);\n  }\n  bool operator[](int k) const { return\
+    \ (bit[k >> 5] >> (k & 31)) & 1; }\n  std::size_t rank(std::size_t k) const {\
+    \ return (sum[k >> 5] + __builtin_popcount(bit[k >> 5] & ((1U << (k & 31)) - 1)));\
+    \ }\n  std::size_t rank0(std::size_t k) const { return k - rank(k); }\n };\n std::size_t\
+    \ len, lg;\n std::vector<SuccinctIndexableDictionary> mat;\n std::vector<T> vec;\n\
+    public:\n WaveletMatrix()= default;\n WaveletMatrix(const std::vector<T> &v):\
+    \ len(v.size()), lg(32 - __builtin_clz(std::max<int>(len, 1))), mat(lg, len),\
+    \ vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
     \ vec.end()), vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for\
     \ (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) -\
     \ vec.begin();\n  for (auto h= lg; h--; cur.swap(nex)) {\n   for (std::size_t\
@@ -54,26 +55,26 @@ data:
     \ DQuery(const std::vector<T> &v): next(v.size(), -1) {\n  std::map<T, int> mp;\n\
     \  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i])) next[mp[v[i]]]=\
     \ i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int l, int\
-    \ r) const { return wm.count(l, r, l); }\n};\n#line 4 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, k;\n\
-    \    cin >> l >> r >> k;\n    cout << wm.kth_smallest(l, r, k) << \"\\n\";\n \
-    \ }\n  return 0;\n}\n"
+    \ r) const { return wm.count(l, r, l); }\n};\n#line 5 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n vector<int> a(N);\n for (int i= 0; i < N; i++)\
+    \ cin >> a[i];\n WaveletMatrix wm(a);\n while (Q--) {\n  int l, r, k;\n  cin >>\
+    \ l >> r >> k;\n  cout << wm.kth_smallest(l, r, k) << \"\\n\";\n }\n return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
-    #include <bits/stdc++.h>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  vector<int> a(N);\n  for (int i = 0; i < N;\
-    \ i++) cin >> a[i];\n  WaveletMatrix wm(a);\n  while (Q--) {\n    int l, r, k;\n\
-    \    cin >> l >> r >> k;\n    cout << wm.kth_smallest(l, r, k) << \"\\n\";\n \
-    \ }\n  return 0;\n}"
+    #include <iostream>\n#include <vector>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n vector<int> a(N);\n for (int i= 0; i < N; i++)\
+    \ cin >> a[i];\n WaveletMatrix wm(a);\n while (Q--) {\n  int l, r, k;\n  cin >>\
+    \ l >> r >> k;\n  cout << wm.kth_smallest(l, r, k) << \"\\n\";\n }\n return 0;\n\
+    }"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
   isVerificationFile: true
   path: test/yosupo/range_kth_smallest.WM.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 19:04:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_kth_smallest.WM.test.cpp
 layout: document
