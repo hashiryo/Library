@@ -3,16 +3,16 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc107_f.Dinic.test.cpp
     title: test/atcoder/arc107_f.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc107_f.PushRelabel.test.cpp
     title: test/atcoder/arc107_f.PushRelabel.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: test/yukicoder/119.PushRelabel.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/monge_mincut.hpp\"\n#include <vector>\n\
@@ -74,7 +74,7 @@ data:
   path: src/Optimization/monge_mincut.hpp
   requiredBy: []
   timestamp: '2023-01-21 23:17:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/119.PushRelabel.test.cpp
   - test/yukicoder/119.Dinic.test.cpp
@@ -90,7 +90,8 @@ title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E0
 phi関数等で ∞ を返すときはその大きさに注意 (大きすぎるとオーバーフロー)
 
 ## 問題例
-[Kyoto University Programming Contest 2019 H - 123パズル](https://atcoder.jp/contests/kupc2019/tasks/kupc2019_h)
+[Kyoto University Programming Contest 2019 H - 123パズル](https://atcoder.jp/contests/kupc2019/tasks/kupc2019_h) \
+[AtCoder Regular Contest 085 E - MUL](https://atcoder.jp/contests/arc085/tasks/arc085_c)
 
 ## 参考
 [https://noshi91.hatenablog.com/entry/2021/06/29/044225](https://noshi91.hatenablog.com/entry/2021/06/29/044225)

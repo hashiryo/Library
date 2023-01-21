@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Optimization/MaxFlow.hpp
     title: "\u6700\u5927\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_A
@@ -23,123 +23,118 @@ data:
     \ this->n - 1; }\n std::vector<int> add_vertices(const std::size_t size) {\n \
     \ std::vector<int> ret(size);\n  std::iota(ret.begin(), ret.end(), this->n);\n\
     \  return this->adj.resize(this->n+= size), ret;\n }\n struct EdgePtr {\n  friend\
-    \ class MaxFlow;\n  MaxFlow *instance;\n  int v, e;\n  bool bidir;\n  Edge &edge()\
-    \ { return instance->adj[v][e]; }\n  Edge &rev() {\n   Edge &e= edge();\n   return\
-    \ instance->adj[e.dst][e.rev];\n  }\n  EdgePtr(MaxFlow *instance, int v, int e,\
-    \ bool d): instance(instance), v(v), e(e), bidir(d) {}\n public:\n  EdgePtr()=\
-    \ default;\n  int src() { return v; }\n  int dst() { return edge().dst; }\n  bool\
-    \ is_direct() const { return !bidir; }\n  flow_t flow() { return cap() - edge().cap;\
-    \ }\n  flow_t cap() { return (edge().cap + rev().cap) / (1 + bidir); }\n  flow_t\
-    \ change_cap(flow_t new_cap, int s, int t) {\n   assert(0 <= new_cap);\n   Edge\
-    \ &e= edge(), &re= rev();\n   flow_t diff= new_cap - cap(), extrusion= std::abs(flow())\
-    \ - new_cap;\n   if (extrusion <= 0) return e.cap+= diff, re.cap+= diff * bidir,\
-    \ 0;\n   int sr= src(), ds= dst();\n   if (flow() < 0) std::swap(sr, ds);\n  \
-    \ if (bidir) {\n    if (sr == src()) re.cap+= 2 * diff + e.cap, e.cap= 0;\n  \
-    \  else e.cap+= 2 * diff + re.cap, re.cap= 0;\n   } else re.cap+= diff;\n   extrusion-=\
-    \ instance->maxflow(sr, ds, extrusion);\n   if (ds != t) instance->maxflow(t,\
-    \ ds, extrusion);\n   if (sr != s) instance->maxflow(sr, s, extrusion);\n   return\
-    \ extrusion;\n  }\n };\n EdgePtr add_edge(int src, int dst, flow_t cap, bool bidir=\
-    \ false) {\n  assert(0 <= src && src < this->n), assert(0 <= dst && dst < this->n);\n\
-    \  assert(0 <= cap);\n  int e= this->adj[src].size();\n  int re= src == dst ?\
-    \ e + 1 : this->adj[dst].size();\n  return this->adj[src].push_back(Edge{dst,\
-    \ re, cap}), this->adj[dst].push_back(Edge{src, e, cap * bidir}), this->m++, EdgePtr{this,\
-    \ src, e, bidir};\n }\n flow_t maxflow(int s, int t) { return maxflow(s, t, std::numeric_limits<flow_t>::max());\
-    \ }\n flow_t maxflow(int s, int t, flow_t flow_lim) { return this->flow(s, t,\
-    \ flow_lim); }\n std::vector<bool> mincut(int s) {\n  std::vector<bool> visited(this->n);\n\
+    \ class MaxFlow;\n  MaxFlow *ins;\n  int v, e;\n  bool bd;\n  Edge &edge() { return\
+    \ ins->adj[v][e]; }\n  Edge &rev() {\n   Edge &e= edge();\n   return ins->adj[e.dst][e.rev];\n\
+    \  }\n  EdgePtr(MaxFlow *ins, int v, int e, bool d): ins(ins), v(v), e(e), bd(d)\
+    \ {}\n public:\n  EdgePtr()= default;\n  int src() const { return v; }\n  int\
+    \ dst() { return edge().dst; }\n  bool is_direct() const { return !bd; }\n  flow_t\
+    \ flow() { return cap() - edge().cap; }\n  flow_t cap() { return (edge().cap +\
+    \ rev().cap) / (1 + bd); }\n  flow_t change_cap(flow_t new_cap, int s, int t)\
+    \ {\n   assert(0 <= new_cap);\n   Edge &e= edge(), &re= rev();\n   flow_t diff=\
+    \ new_cap - cap(), ext= std::abs(flow()) - new_cap;\n   if (ext <= 0) return e.cap+=\
+    \ diff, re.cap+= diff * bd, 0;\n   int sr= src(), ds= dst();\n   if (flow() <\
+    \ 0) std::swap(sr, ds);\n   if (bd) {\n    if (sr == src()) re.cap+= 2 * diff\
+    \ + e.cap, e.cap= 0;\n    else e.cap+= 2 * diff + re.cap, re.cap= 0;\n   } else\
+    \ re.cap+= diff;\n   ext-= ins->maxflow(sr, ds, ext);\n   if (ds != t) ins->maxflow(t,\
+    \ ds, ext);\n   if (sr != s) ins->maxflow(sr, s, ext);\n   return ext;\n  }\n\
+    \ };\n EdgePtr add_edge(int src, int dst, flow_t cap, bool bidir= false) {\n \
+    \ assert(0 <= src && src < this->n), assert(0 <= dst && dst < this->n), assert(0\
+    \ <= cap);\n  int e= this->adj[src].size(), re= src == dst ? e + 1 : this->adj[dst].size();\n\
+    \  return this->adj[src].push_back(Edge{dst, re, cap}), this->adj[dst].push_back(Edge{src,\
+    \ e, cap * bidir}), this->m++, EdgePtr{this, src, e, bidir};\n }\n flow_t maxflow(int\
+    \ s, int t) { return maxflow(s, t, std::numeric_limits<flow_t>::max()); }\n flow_t\
+    \ maxflow(int s, int t, flow_t flow_lim) { return this->flow(s, t, flow_lim);\
+    \ }\n std::vector<bool> mincut(int s) {\n  std::vector<bool> visited(this->n);\n\
     \  static std::queue<int> que;\n  for (que.push(s); !que.empty();) {\n   s= que.front(),\
     \ que.pop(), visited[s]= true;\n   for (const auto &e: this->adj[s])\n    if (e.cap\
     \ && !visited[e.dst]) visited[e.dst]= true, que.push(e.dst);\n  }\n  return visited;\n\
     \ }\n};\ntemplate <typename FlowAlgo> class MaxFlowLowerBound: public FlowAlgo\
     \ {\n using Edge= typename FlowAlgo::Edge;\n using flow_t= decltype(Edge::cap);\n\
     \ std::vector<flow_t> in;\n int add_edge(int src, int dst, flow_t cap) {\n  int\
-    \ e= this->adj[src].size();\n  int re= src == dst ? e + 1 : this->adj[dst].size();\n\
+    \ e= this->adj[src].size(), re= src == dst ? e + 1 : this->adj[dst].size();\n\
     \  return this->adj[src].push_back(Edge{dst, re, cap}), this->adj[dst].push_back(Edge{src,\
     \ e, 0}), this->m++, re;\n }\npublic:\n MaxFlowLowerBound(std::size_t n= 0): FlowAlgo(n\
     \ + 2), in(n) {}\n int add_vertex() { return this->adj.resize(++this->n), in.resize(this->n\
     \ - 2, 0), this->n - 3; }\n std::vector<int> add_vertices(const std::size_t size)\
-    \ {\n  std::vector<int> ret(size);\n  std::iota(ret.begin(), ret.end(), this->n\
-    \ - 2);\n  return this->adj.resize(this->n+= size), in.resize(this->n - 2, 0),\
-    \ ret;\n }\n struct EdgePtr {\n  friend class MaxFlowLowerBound;\n  MaxFlowLowerBound\
-    \ *instance;\n  int v, e;\n  flow_t u;\n  const Edge &edge() { return instance->adj[v][e];\
-    \ }\n  const Edge &rev() {\n   Edge &e= edge();\n   return instance->adj[e.dst][e.rev];\n\
-    \  }\n  EdgePtr(MaxFlowLowerBound *instance, int v, int e, flow_t u): instance(instance),\
-    \ v(v), e(e), u(u) {}\n public:\n  EdgePtr()= default;\n  int src() const { return\
-    \ v; }\n  int dst() const { return edge().dst; }\n  flow_t flow() const { return\
+    \ {\n  std::vector<int> ret(size);\n  return std::iota(ret.begin(), ret.end(),\
+    \ this->n - 2), this->adj.resize(this->n+= size), in.resize(this->n - 2, 0), ret;\n\
+    \ }\n struct EdgePtr {\n  friend class MaxFlowLowerBound;\n  MaxFlowLowerBound\
+    \ *ins;\n  int v, e;\n  flow_t u;\n  const Edge &edge() { return ins->adj[v][e];\
+    \ }\n  const Edge &rev() {\n   Edge &e= edge();\n   return ins->adj[e.dst][e.rev];\n\
+    \  }\n  EdgePtr(MaxFlowLowerBound *ins, int v, int e, flow_t u): ins(ins), v(v),\
+    \ e(e), u(u) {}\n public:\n  EdgePtr()= default;\n  int src() const { return v;\
+    \ }\n  int dst() const { return edge().dst; }\n  flow_t flow() const { return\
     \ u - edge().cap; }\n  flow_t lower() const { return flow() - rev().cap; }\n \
     \ flow_t upper() const { return u; }\n };\n EdgePtr add_edge(int src, int dst,\
-    \ flow_t lower, flow_t upper) {\n  assert(lower <= upper), src+= 2, dst+= 2;\n\
-    \  assert(0 <= src && src < this->n), assert(0 <= dst && dst < this->n);\n  this->m++;\n\
-    \  int e= this->adj[src].size(), re= src == dst ? e + 1 : this->adj[dst].size();\n\
-    \  if (lower * upper <= 0) {\n   this->adj[src].push_back(Edge{dst, re, upper});\n\
-    \   this->adj[dst].push_back(Edge{src, e, -lower});\n  } else if (lower > 0) {\n\
-    \   in[src - 2]-= lower, in[dst - 2]+= lower;\n   this->adj[src].push_back(Edge{dst,\
-    \ re, upper - lower});\n   this->adj[dst].push_back(Edge{src, e, 0});\n  } else\
-    \ {\n   in[src - 2]-= upper, in[dst - 2]+= upper;\n   this->adj[src].push_back(Edge{dst,\
-    \ re, 0});\n   this->adj[dst].push_back(Edge{src, e, upper - lower});\n  }\n \
-    \ return EdgePtr(this, src, e, upper);\n }\n flow_t maxflow(int s, int t) {\n\
-    \  static constexpr flow_t INF= std::numeric_limits<flow_t>::max();\n  flow_t\
-    \ sum= 0;\n  for (int i= this->n - 2; i--;) {\n   if (in[i] > 0) add_edge(0, i\
-    \ + 2, in[i]), sum+= in[i];\n   if (in[i] < 0) add_edge(i + 2, 1, -in[i]);\n \
-    \ }\n  int re= add_edge(t+= 2, s+= 2, INF);\n  if (this->flow(0, 1, INF) < sum)\
-    \ return -1;  // no solution\n  return this->flow(s, t, INF) + this->adj[s][re].cap;\n\
-    \ }\n};\ntemplate <class flow_t> struct Dinic {\n Dinic(std::size_t _n= 0): n(_n),\
-    \ m(0), adj(n) {}\nprotected:\n struct Edge {\n  int dst, rev;\n  flow_t cap;\n\
-    \ };\n int n, m;\n std::vector<std::vector<Edge>> adj;\n std::vector<int> level,\
-    \ iter;\n inline void levelize(int s, int t, int u= 0) {\n  std::queue<int> que;\n\
-    \  for (que.push(s), level.assign(n, -1), level[s]= 0; !que.empty();) {\n   u=\
-    \ que.front(), que.pop();\n   for (auto &e: adj[u])\n    if (e.cap > 0 && level[e.dst]\
-    \ < 0) {\n     if (level[e.dst]= level[u] + 1; e.dst == t) return;\n     que.push(e.dst);\n\
-    \    }\n  }\n }\n inline flow_t dfs(int u, int s, flow_t cur, flow_t ret= 0, flow_t\
-    \ f= 0) {\n  if (u == s) return cur;\n  for (int &i= iter[u], ed= adj[u].size();\
-    \ i < ed; i++) {\n   Edge &e= adj[u][i], &re= adj[e.dst][e.rev];\n   if (level[u]\
-    \ <= level[e.dst] || re.cap == 0) continue;\n   if ((f= dfs(e.dst, s, std::min(cur\
-    \ - ret, re.cap))) <= 0) continue;\n   if (e.cap+= f, re.cap-= f, ret+= f; ret\
-    \ == cur) return ret;\n  }\n  return level[u]= n, ret;\n }\n flow_t flow(int s,\
-    \ int t, flow_t flow_lim, flow_t ret= 0) {\n  assert(0 <= s && s < n), assert(0\
-    \ <= t && t < n), assert(s != t);\n  for (flow_t f; ret < flow_lim; ret+= f) {\n\
-    \   if (levelize(s, t), level[t] == -1) break;\n   iter.assign(n, 0);\n   if (!(f=\
-    \ dfs(t, s, flow_lim - ret))) break;\n  }\n  return ret;\n }\n};\ntemplate <class\
-    \ flow_t, unsigned global_freq= 4, bool use_gap= true, bool freeze= false> struct\
-    \ PushRelabel {\n PushRelabel(std::size_t _n= 0): n(_n), m(0), adj(n) {}\nprotected:\n\
-    \ struct Edge {\n  int dst, rev;\n  flow_t cap;\n };\n int n, gap, m;\n struct\
-    \ {\n  std::vector<std::pair<int, int>> even, odd;\n  int se, so;\n  void init(int\
-    \ _n) { even.resize(_n), odd.resize(_n), se= so= 0; };\n  void clear() { se= so=\
-    \ 0; }\n  inline bool empty() const { return se + so == 0; }\n  void push(int\
-    \ i, int h) { (h & 1 ? odd[so++] : even[se++])= {i, h}; }\n  inline int highest()\
-    \ const {\n   int a= se ? even[se - 1].second : -1, b= so ? odd[so - 1].second\
-    \ : -1;\n   return a > b ? a : b;\n  }\n  inline int pop() {\n   if (!se || (so\
-    \ && odd[so - 1].second > even[se - 1].second)) return odd[--so].first;\n   return\
-    \ even[--se].first;\n  }\n } hque;\n std::vector<std::vector<Edge>> adj;\n std::vector<int>\
-    \ dist, dcnt;\n std::vector<flow_t> excess;\n inline void calc(int t) {\n  if\
-    \ constexpr (global_freq != 0) global_relabeling(t);\n  for (int tick= m * global_freq;\
-    \ !hque.empty();) {\n   int i= hque.pop(), dnxt= n * 2 - 1;\n   if constexpr (use_gap)\n\
-    \    if (dist[i] > gap) continue;\n   for (auto &e: adj[i])\n    if (e.cap) {\n\
-    \     if (dist[e.dst] == dist[i] - 1) {\n      if (push(i, e), excess[i] == 0)\
-    \ break;\n     } else if (dist[e.dst] + 1 < dnxt) dnxt= dist[e.dst] + 1;\n   \
-    \ }\n   if (excess[i] > 0) {\n    if constexpr (use_gap) {\n     if (dnxt != dist[i]\
-    \ && dcnt[dist[i]] == 1 && dist[i] < gap) gap= dist[i];\n     if (dnxt == gap)\
-    \ gap++;\n     while (hque.highest() > gap) hque.pop();\n     if (dnxt > gap)\
-    \ dnxt= n;\n     if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n    }\n\
-    \    dist[i]= dnxt, hq_push(i);\n   }\n   if constexpr (global_freq != 0)\n  \
-    \  if (--tick == 0) tick= m * global_freq, global_relabeling(t);\n  }\n }\n inline\
+    \ flow_t lower, flow_t upper) {\n  assert(lower <= upper), src+= 2, dst+= 2, assert(0\
+    \ <= src && src < this->n), assert(0 <= dst && dst < this->n), ++this->m;\n  int\
+    \ e= this->adj[src].size(), re= src == dst ? e + 1 : this->adj[dst].size();\n\
+    \  if (lower * upper <= 0) this->adj[src].push_back(Edge{dst, re, upper}), this->adj[dst].push_back(Edge{src,\
+    \ e, -lower});\n  else if (lower > 0) in[src - 2]-= lower, in[dst - 2]+= lower\
+    \ this->adj[src].push_back(Edge{dst, re, upper - lower}), this->adj[dst].push_back(Edge{src,\
+    \ e, 0});\n  else in[src - 2]-= upper, in[dst - 2]+= upper, this->adj[src].push_back(Edge{dst,\
+    \ re, 0}), this->adj[dst].push_back(Edge{src, e, upper - lower});\n  return EdgePtr(this,\
+    \ src, e, upper);\n }\n flow_t maxflow(int s, int t) {\n  static constexpr flow_t\
+    \ INF= std::numeric_limits<flow_t>::max();\n  flow_t sum= 0;\n  for (int i= this->n\
+    \ - 2; i--;) {\n   if (in[i] > 0) add_edge(0, i + 2, in[i]), sum+= in[i];\n  \
+    \ if (in[i] < 0) add_edge(i + 2, 1, -in[i]);\n  }\n  int re= add_edge(t+= 2, s+=\
+    \ 2, INF);\n  if (this->flow(0, 1, INF) < sum) return -1;  // no solution\n  return\
+    \ this->flow(s, t, INF) + this->adj[s][re].cap;\n }\n};\ntemplate <class flow_t>\
+    \ struct Dinic {\n Dinic(std::size_t _n= 0): n(_n), m(0), adj(n) {}\nprotected:\n\
+    \ struct Edge {\n  int dst, rev;\n  flow_t cap;\n };\n int n, m;\n std::vector<std::vector<Edge>>\
+    \ adj;\n std::vector<int> level, iter;\n inline void levelize(int s, int t, int\
+    \ u= 0) {\n  std::queue<int> que;\n  for (que.push(s), level.assign(n, -1), level[s]=\
+    \ 0; !que.empty();) {\n   u= que.front(), que.pop();\n   for (auto &e: adj[u])\n\
+    \    if (e.cap > 0 && level[e.dst] < 0) {\n     if (level[e.dst]= level[u] + 1;\
+    \ e.dst == t) return;\n     que.push(e.dst);\n    }\n  }\n }\n inline flow_t dfs(int\
+    \ u, int s, flow_t cur, flow_t ret= 0, flow_t f= 0) {\n  if (u == s) return cur;\n\
+    \  for (int &i= iter[u], ed= adj[u].size(); i < ed; i++) {\n   Edge &e= adj[u][i],\
+    \ &re= adj[e.dst][e.rev];\n   if (level[u] <= level[e.dst] || re.cap == 0) continue;\n\
+    \   if ((f= dfs(e.dst, s, std::min(cur - ret, re.cap))) <= 0) continue;\n   if\
+    \ (e.cap+= f, re.cap-= f, ret+= f; ret == cur) return ret;\n  }\n  return level[u]=\
+    \ n, ret;\n }\n flow_t flow(int s, int t, flow_t lim, flow_t ret= 0) {\n  assert(0\
+    \ <= s && s < n), assert(0 <= t && t < n), assert(s != t);\n  for (flow_t f; ret\
+    \ < lim; ret+= f) {\n   if (levelize(s, t), level[t] == -1) break;\n   if (iter.assign(n,\
+    \ 0); !(f= dfs(t, s, lim - ret))) break;\n  }\n  return ret;\n }\n};\ntemplate\
+    \ <class flow_t, unsigned global_freq= 4, bool use_gap= true, bool freeze= false>\
+    \ struct PushRelabel {\n PushRelabel(std::size_t _n= 0): n(_n), m(0), adj(n) {}\n\
+    protected:\n struct Edge {\n  int dst, rev;\n  flow_t cap;\n };\n int n, gap,\
+    \ m;\n struct {\n  std::vector<int> ei, eh, oi, oh;\n  int se, so;\n  void init(int\
+    \ _n) { ei.resize(_n), eh.resize(_n), oi.resize(_n), oh.resize(_n), se= so= 0;\
+    \ };\n  void clear() { se= so= 0; }\n  inline bool empty() const { return se +\
+    \ so == 0; }\n  void push(int i, int h) { (h & 1 ? tie(oi[so], oh[so++]) : tie(ei[se],\
+    \ eh[se++]))= {i, h}; }\n  inline int highest() const { return max(se ? eh[se\
+    \ - 1] : -1, so ? oh[so - 1] : -1); }\n  inline int pop() { return !se || (so\
+    \ && oh[so - 1] > eh[se - 1]) ? oi[--so] : ei[--se]; }\n } hque;\n std::vector<std::vector<Edge>>\
+    \ adj;\n std::vector<int> dist, dcnt;\n std::vector<flow_t> exc;\n inline void\
+    \ calc(int t) {\n  if constexpr (global_freq != 0) relabel(t);\n  for (int tick=\
+    \ m * global_freq; !hque.empty();) {\n   int i= hque.pop(), dnxt= n * 2 - 1;\n\
+    \   if constexpr (use_gap)\n    if (dist[i] > gap) continue;\n   for (auto &e:\
+    \ adj[i])\n    if (e.cap) {\n     if (dist[e.dst] == dist[i] - 1) {\n      if\
+    \ (push(i, e), exc[i] == 0) break;\n     } else if (dist[e.dst] + 1 < dnxt) dnxt=\
+    \ dist[e.dst] + 1;\n    }\n   if (exc[i] > 0) {\n    if constexpr (use_gap) {\n\
+    \     if (dnxt != dist[i] && dcnt[dist[i]] == 1 && dist[i] < gap) gap= dist[i];\n\
+    \     if (dnxt == gap) gap++;\n     while (hque.highest() > gap) hque.pop();\n\
+    \     if (dnxt > gap) dnxt= n;\n     if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n\
+    \    }\n    dist[i]= dnxt, hq_push(i);\n   }\n   if constexpr (global_freq !=\
+    \ 0)\n    if (--tick == 0) tick= m * global_freq, relabel(t);\n  }\n }\n inline\
     \ void hq_push(int i) {\n  if constexpr (!use_gap) hque.push(i, dist[i]);\n  else\
     \ if (dist[i] < gap) hque.push(i, dist[i]);\n }\n inline void push(int i, Edge\
-    \ &e) {\n  flow_t delta= std::min(e.cap, excess[i]);\n  excess[i]-= delta, e.cap-=\
-    \ delta;\n  excess[e.dst]+= delta, adj[e.dst][e.rev].cap+= delta;\n  if (0 < excess[e.dst]\
-    \ && excess[e.dst] <= delta) hq_push(e.dst);\n }\n inline void global_relabeling(int\
-    \ t) {\n  dist.assign(n, n), dist[t]= 0;\n  static std::queue<int> q;\n  q.push(t),\
-    \ hque.clear();\n  if constexpr (use_gap) gap= 1, dcnt.assign(n + 1, 0);\n  for\
-    \ (int now; !q.empty();) {\n   now= q.front(), q.pop();\n   if constexpr (use_gap)\
-    \ gap= dist[now] + 1, dcnt[dist[now]]++;\n   if (excess[now] > 0) hque.push(now,\
-    \ dist[now]);\n   for (const auto &e: adj[now])\n    if (adj[e.dst][e.rev].cap\
-    \ && dist[e.dst] == n) dist[e.dst]= dist[now] + 1, q.push(e.dst);\n  }\n }\n flow_t\
-    \ flow(int s, int t, flow_t flow_lim, flow_t ret= 0) {\n  assert(0 <= s && s <\
-    \ n), assert(0 <= t && t < n), assert(s != t);\n  hque.init(n), excess.assign(n,\
-    \ 0), excess[s]+= flow_lim;\n  excess[t]-= flow_lim, dist.assign(n, 0), dist[s]=\
-    \ n;\n  if constexpr (use_gap) gap= 1, dcnt.assign(n + 1, 0), dcnt[0]= n - 1;\n\
-    \  for (auto &e: adj[s]) push(s, e);\n  calc(t), ret= excess[t] + flow_lim;\n\
-    \  if constexpr (!freeze) {\n   excess[s]+= excess[t], excess[t]= 0;\n   if constexpr\
-    \ (global_freq != 0) global_relabeling(s);\n   calc(s), assert(excess == std::vector<flow_t>(n,\
+    \ &e) {\n  flow_t del= std::min(e.cap, exc[i]);\n  if (exc[i]-= del, e.cap-= del,\
+    \ exc[e.dst]+= del, adj[e.dst][e.rev].cap+= del; 0 < exc[e.dst] && exc[e.dst]\
+    \ <= del) hq_push(e.dst);\n }\n inline void relabel(int t) {\n  dist.assign(n,\
+    \ n), dist[t]= 0;\n  static std::queue<int> q;\n  q.push(t), hque.clear();\n \
+    \ if constexpr (use_gap) gap= 1, dcnt.assign(n + 1, 0);\n  for (int now; !q.empty();)\
+    \ {\n   now= q.front(), q.pop();\n   if constexpr (use_gap) gap= dist[now] + 1,\
+    \ dcnt[dist[now]]++;\n   if (exc[now] > 0) hque.push(now, dist[now]);\n   for\
+    \ (const auto &e: adj[now])\n    if (adj[e.dst][e.rev].cap && dist[e.dst] == n)\
+    \ dist[e.dst]= dist[now] + 1, q.push(e.dst);\n  }\n }\n flow_t flow(int s, int\
+    \ t, flow_t lim, flow_t ret= 0) {\n  assert(0 <= s && s < n), assert(0 <= t &&\
+    \ t < n), assert(s != t), hque.init(n), exc.assign(n, 0), exc[s]+= lim, exc[t]-=\
+    \ lim, dist.assign(n, 0), dist[s]= n;\n  if constexpr (use_gap) gap= 1, dcnt.assign(n\
+    \ + 1, 0), dcnt[0]= n - 1;\n  for (auto &e: adj[s]) push(s, e);\n  calc(t), ret=\
+    \ exc[t] + lim;\n  if constexpr (!freeze) {\n   exc[s]+= exc[t], exc[t]= 0;\n\
+    \   if constexpr (global_freq != 0) relabel(s);\n   calc(s), assert(exc == std::vector<flow_t>(n,\
     \ 0));\n  }\n  return ret;\n }\n};\n#line 4 \"test/aoj/GRL_6_A.Dinic.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, M;\n cin >> N >> M;\n MaxFlow<Dinic<long long>> graph(N);\n for (int\
@@ -156,8 +151,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_A.Dinic.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 23:17:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-22 00:08:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_A.Dinic.test.cpp
 layout: document
