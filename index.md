@@ -43,7 +43,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/LinkCutTree.hpp
       title: Link-Cut-Tree
     - icon: ':heavy_check_mark:'
@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SplayTree.hpp
       title: Splay-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/UnionFind.hpp
       title: Union-Find
     - icon: ':heavy_check_mark:'
@@ -108,31 +108,31 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/FFT/MultiVariateConvolution.hpp
       title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
     - icon: ':heavy_check_mark:'
       path: src/FFT/SubProductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/FFT/bostan_mori.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/FFT/convolve.hpp
       title: "\u7573\u307F\u8FBC\u307F"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/FFT/fps_div.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
     - icon: ':heavy_check_mark:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/FFT/fps_inv.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
     - icon: ':heavy_check_mark:'
@@ -175,6 +175,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "HL\u5206\u89E3"
+    - icon: ':question:'
+      path: src/Graph/IncrementalBridgeConnectivity.hpp
+      title: Incremental-Bridge-Connectivity
     - icon: ':heavy_check_mark:'
       path: src/Graph/LinearSystemIncidence.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
@@ -197,7 +200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/StronglyConnectedComponents.hpp
       title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: src/Graph/TwoEdgeConnectedComponents.hpp
       title: "\u4E8C\u91CD\u8FBA\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -206,7 +209,11 @@ data:
         \u7D1A\u6570)"
   - name: src/Internal
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
+      path: src/Internal/HAS_CHECK.hpp
+      title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
+        \u30F3\u30D7\u30EC\u30FC\u30C8"
+    - icon: ':question:'
       path: src/Internal/Remainder.hpp
       title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - name: src/LinearAlgebra
@@ -214,7 +221,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/LUDecomposition.hpp
       title: src/LinearAlgebra/LUDecomposition.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/LinearAlgebra/Matrix.hpp
       title: src/LinearAlgebra/Matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -248,7 +255,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -285,10 +292,10 @@ data:
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/mod_inv.hpp
       title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':heavy_check_mark:'
@@ -315,6 +322,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Misc/Mo.hpp
       title: Mo's Algorithm
+    - icon: ':question:'
+      path: src/Misc/compress.hpp
+      title: "\u5EA7\u6A19\u5727\u7E2E"
   - name: src/Optimization
     pages:
     - icon: ':heavy_check_mark:'
@@ -495,7 +505,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2442.test.cpp
       title: test/aoj/2442.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2450.LCT.test.cpp
       title: test/aoj/2450.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -504,7 +514,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2559.LCT_Dual.test.cpp
       title: test/aoj/2559.LCT_Dual.test.cpp
     - icon: ':heavy_check_mark:'
@@ -558,6 +568,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2863.test.cpp
       title: test/aoj/2863.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2893.test.cpp
+      title: test/aoj/2893.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
@@ -708,7 +721,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_3_D.sparsetable.test.cpp
       title: test/aoj/DSL_3_D.sparsetable.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/GRL_2_A.kruskal.test.cpp
       title: test/aoj/GRL_2_A.kruskal.test.cpp
     - icon: ':heavy_check_mark:'
@@ -962,13 +975,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
       title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
       title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1010,7 +1023,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_FPS.test.cpp
       title: test/yosupo/inv_of_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1025,7 +1038,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1139,7 +1152,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sharp_p_subset_sum.test.cpp
       title: test/yosupo/sharp_p_subset_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/shift_of_FPS.test.cpp
       title: test/yosupo/shift_of_FPS.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1199,7 +1212,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/tetration_mod.test.cpp
       title: test/yosupo/tetration_mod.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/two_edge_connected_components.test.cpp
       title: test/yosupo/two_edge_connected_components.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1258,7 +1271,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1939.test.cpp
       title: test/yukicoder/1939.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/215.Poly.test.cpp
       title: test/yukicoder/215.Poly.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1267,7 +1280,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/235.LCT.test.cpp
       title: test/yukicoder/235.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1288,7 +1301,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/502.test.cpp
       title: test/yukicoder/502.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/529.LCT.test.cpp
       title: test/yukicoder/529.LCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1306,7 +1319,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.SegTree.test.cpp
       title: test/yukicoder/649.SegTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/650.LCT.test.cpp
       title: test/yukicoder/650.LCT.test.cpp
     - icon: ':heavy_check_mark:'

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []

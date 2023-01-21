@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':heavy_check_mark:'
     path: src/Math/CartesianProduct.hpp
     title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
       times K_n$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':heavy_check_mark:'
@@ -24,13 +24,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
   bundledCode: "#line 1 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\n#define PROBLEM\
-    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
-    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\n\
+    #include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int>\
+    \ constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -153,7 +153,7 @@ data:
     \ rp(P);\n int N= P.length(), M= T.length();\n auto hash= rp.get_hash();\n for\
     \ (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i, i + N) == hash) cout << i\
     \ << \"\\n\";\n return 0;\n}\n"
-  code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
     \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\
     \n#include \"src/String/RollingHash.hpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<(1ll << 61)\
@@ -171,7 +171,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
+  timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.rollinghash.test.cpp

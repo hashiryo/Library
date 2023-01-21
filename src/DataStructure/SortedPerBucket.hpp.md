@@ -149,10 +149,10 @@ data:
   timestamp: '2022-12-31 23:54:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/925.SqrtDC.test.cpp
   - test/aoj/3170.test.cpp
-  - test/hackerrank/library-query.SqrtDC.test.cpp
   - test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
+  - test/yukicoder/925.SqrtDC.test.cpp
+  - test/hackerrank/library-query.SqrtDC.test.cpp
 documentation_of: src/DataStructure/SortedPerBucket.hpp
 layout: document
 title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"

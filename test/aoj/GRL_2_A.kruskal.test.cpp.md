@@ -1,64 +1,50 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/MinimumSpanningTree_Kruskal.hpp
-    title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A
-  bundledCode: "#line 1 \"test/aoj/GRL_2_A.kruskal.test.cpp\"\n#define PROBLEM \\\n\
-    \  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/DataStructure/UnionFind.hpp\"\nstruct UnionFind\
-    \ {\n std::vector<int> par;\n UnionFind(int size): par(size, -1) {}\n bool unite(int\
-    \ u, int v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u]\
-    \ > par[v]) std::swap(u, v);\n  return par[u]+= par[v], par[v]= u, true;\n }\n\
-    \ bool same(int u, int v) { return root(u) == root(v); }\n int root(int u) { return\
-    \ par[u] < 0 ? u : par[u]= root(par[u]); }\n int size(int u) { return -par[root(u)];\
-    \ }\n};\n#line 4 \"src/Graph/MinimumSpanningTree_Kruskal.hpp\"\n/**\n * @title\
-    \ \u6700\u5C0F\u5168\u57DF\u6728(Kruskal)\n * @category \u30B0\u30E9\u30D5\n *\
-    \  O(E log V)\n *  \u8FD4\u308A\u5024:{\u5168\u57DF\u6728\u306E\u30B3\u30B9\u30C8\
-    \u7DCF\u548C,\u5168\u57DF\u6728\u306B\u4F7F\u7528\u3059\u308B\u8FBA}\n */\n\n\
-    // BEGIN CUT HERE\n\ntemplate <typename cost_t>\nstruct MinimumSpanningTree_Kruskal\
-    \ {\n  struct Edge {\n    int u, v, id;\n    cost_t cost;\n    bool operator<(const\
-    \ Edge &rhs) const { return this->cost < rhs.cost; }\n  };\n\n private:\n  int\
-    \ n;\n\n public:\n  std::vector<Edge> edges;\n\n public:\n  MinimumSpanningTree_Kruskal(int\
-    \ n) : n(n) {}\n  void add_edge(int u, int v, cost_t cost) {\n    edges.emplace_back(Edge{u,\
-    \ v, (int)edges.size(), cost});\n  }\n  std::pair<cost_t, std::vector<Edge>> get_MST()\
-    \ {\n    UnionFind uf(n);\n    sort(begin(edges), end(edges));\n    cost_t total\
-    \ = cost_t();\n    std::vector<Edge> es;\n    for (auto &e : edges)\n      if\
-    \ (uf.unite(e.u, e.v)) {\n        es.emplace_back(e);\n        total += e.cost;\n\
-    \      }\n    return {total, es};\n  }\n};\n#line 6 \"test/aoj/GRL_2_A.kruskal.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  int N, M;\n  cin >> N >> M;\n  MinimumSpanningTree_Kruskal<int> graph(N);\n\
-    \  for (int i = 0; i < M; i++) {\n    int s, t, w;\n    cin >> s >> t >> w;\n\
-    \    graph.add_edge(s, t, w);\n  }\n  cout << graph.get_MST().first << endl;\n\
-    \  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/UnionFind.hpp\"\n#include\
-    \ \"src/Graph/MinimumSpanningTree_Kruskal.hpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, M;\n  cin\
-    \ >> N >> M;\n  MinimumSpanningTree_Kruskal<int> graph(N);\n  for (int i = 0;\
-    \ i < M; i++) {\n    int s, t, w;\n    cin >> s >> t >> w;\n    graph.add_edge(s,\
-    \ t, w);\n  }\n  cout << graph.get_MST().first << endl;\n  return 0;\n}"
+  bundledCode: "#line 1 \"test/aoj/GRL_2_A.kruskal.test.cpp\"\n#define PROBLEM \"\
+    https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A\"\n#include <iostream>\n\
+    #include <algorithm>\n#include <numeric>\n#line 2 \"src/DataStructure/UnionFind.hpp\"\
+    \n#include <vector>\n#line 4 \"src/DataStructure/UnionFind.hpp\"\nclass UnionFind\
+    \ {\n std::vector<int> par;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool\
+    \ unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v))) return false;\n \
+    \ if (par[u] > par[v]) std::swap(u, v);\n  return par[u]+= par[v], par[v]= u,\
+    \ true;\n }\n bool same(int u, int v) { return root(u) == root(v); }\n int root(int\
+    \ u) { return par[u] < 0 ? u : par[u]= root(par[u]); }\n int size(int u) { return\
+    \ -par[root(u)]; }\n};\n#line 6 \"test/aoj/GRL_2_A.kruskal.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N,\
+    \ M;\n cin >> N >> M;\n UnionFind uf(N);\n int s[N], t[N];\n long long w[N];\n\
+    \ for (int i= 0; i < M; i++) cin >> s[i] >> t[i] >> w[i];\n long long ans= 0;\n\
+    \ int ord[N];\n iota(ord, ord + N, 0), sort(ord, ord + N, [&](int l, int r) {\
+    \ return w[l] < w[r]; });\n for (int i: ord)\n  if (uf.unite(s[i], t[i])) ans+=\
+    \ w[i];\n cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_A\"\
+    \n#include <iostream>\n#include <algorithm>\n#include <numeric>\n#include \"src/DataStructure/UnionFind.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, M;\n cin >> N >> M;\n UnionFind uf(N);\n int s[N], t[N];\n long long\
+    \ w[N];\n for (int i= 0; i < M; i++) cin >> s[i] >> t[i] >> w[i];\n long long\
+    \ ans= 0;\n int ord[N];\n iota(ord, ord + N, 0), sort(ord, ord + N, [&](int l,\
+    \ int r) { return w[l] < w[r]; });\n for (int i: ord)\n  if (uf.unite(s[i], t[i]))\
+    \ ans+= w[i];\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/DataStructure/UnionFind.hpp
-  - src/Graph/MinimumSpanningTree_Kruskal.hpp
   isVerificationFile: true
   path: test/aoj/GRL_2_A.kruskal.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 22:54:50+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 15:27:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_2_A.kruskal.test.cpp
 layout: document

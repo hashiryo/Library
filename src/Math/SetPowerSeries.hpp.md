@@ -227,10 +227,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2345.test.cpp
-  - test/atcoder/abc213_g.test.cpp
+  - test/yosupo/subset_convolution.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc199_d.test.cpp
-  - test/yosupo/subset_convolution.test.cpp
+  - test/atcoder/abc213_g.test.cpp
 documentation_of: src/Math/SetPowerSeries.hpp
 layout: document
 title: "\u96C6\u5408\u51AA\u7D1A\u6570"

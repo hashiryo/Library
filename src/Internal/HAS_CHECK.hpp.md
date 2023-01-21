@@ -1,0 +1,117 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy:
+  - icon: ':question:'
+    path: src/DataStructure/LinkCutTree.hpp
+    title: Link-Cut-Tree
+  - icon: ':heavy_check_mark:'
+    path: src/DataStructure/SkewHeap.hpp
+    title: Skew-Heap
+  - icon: ':heavy_check_mark:'
+    path: src/Graph/MinimumSpanningAborescense.hpp
+    title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2270.DynSeg.test.cpp
+    title: test/aoj/2270.DynSeg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2270.Patricia.test.cpp
+    title: test/aoj/2270.Patricia.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2450.LCT.test.cpp
+    title: test/aoj/2450.LCT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2559.LCT_Dual.test.cpp
+    title: test/aoj/2559.LCT_Dual.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2647.test.cpp
+    title: test/aoj/2647.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
+    title: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_B.test.cpp
+    title: test/aoj/GRL_2_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc133_f.DynSeg.test.cpp
+    title: test/atcoder/abc133_f.DynSeg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc133_f.Patricia.test.cpp
+    title: test/atcoder/abc133_f.Patricia.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc133_f.PerArr.test.cpp
+    title: test/atcoder/abc133_f.PerArr.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/directedmst.test.cpp
+    title: test/yosupo/directedmst.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+    title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+    title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/lca.LCT.test.cpp
+    title: test/yosupo/lca.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/235.LCT.test.cpp
+    title: test/yukicoder/235.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/529.LCT.test.cpp
+    title: test/yukicoder/529.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/650.LCT.test.cpp
+    title: test/yukicoder/650.LCT.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':question:'
+  attributes:
+    links: []
+  bundledCode: "#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define\
+    \ HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member {\
+    \ \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
+    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
+    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n"
+  code: "#pragma once\n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\
+    \n template <class tClass> struct has_##member { \\\n  template <class U, Dummy>\
+    \ static std::true_type check(U *); \\\n  static std::false_type check(...); \\\
+    \n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
+    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
+    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)"
+  dependsOn: []
+  isVerificationFile: false
+  path: src/Internal/HAS_CHECK.hpp
+  requiredBy:
+  - src/Graph/MinimumSpanningAborescense.hpp
+  - src/DataStructure/SkewHeap.hpp
+  - src/DataStructure/LinkCutTree.hpp
+  timestamp: '2023-01-21 15:27:58+09:00'
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - test/aoj/2450.LCT.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
+  - test/aoj/2647.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
+  - test/aoj/2270.Patricia.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
+  - test/yosupo/lca.LCT.test.cpp
+  - test/yosupo/directedmst.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
+  - test/atcoder/abc133_f.Patricia.test.cpp
+  - test/atcoder/abc133_f.PerArr.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
+documentation_of: src/Internal/HAS_CHECK.hpp
+layout: document
+title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\u30F3\
+  \u30D7\u30EC\u30FC\u30C8"
+---
+## 参考
+[https://theolizer.com/cpp-school2/cpp-school2-10/](https://theolizer.com/cpp-school2/cpp-school2-10/)

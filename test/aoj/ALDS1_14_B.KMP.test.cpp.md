@@ -11,39 +11,38 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
-  bundledCode: "#line 1 \"test/aoj/ALDS1_14_B.KMP.test.cpp\"\n#define PROBLEM \\\n\
-    \  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/String/KnuthMorrisPratt.hpp\"\nstruct KnuthMorrisPratt\
-    \ {\n std::vector<int> KMP;\n const std::string s;\n int n;\n KnuthMorrisPratt(const\
-    \ std::string &str): s(str), n(s.length()) {\n  KMP.resize(n + 1, -1);\n  std::vector<int>\
-    \ knuth(n + 1, -1);\n  for (int i= 0, j= -1; i < n; i++) {\n   while (~j && s[i]\
-    \ != s[j]) j= knuth[j];\n   knuth[i + 1]= KMP[i + 1]= ++j;\n   if (i + 1 < n &&\
-    \ s[i + 1] == s[j]) knuth[i + 1]= knuth[j];\n  }\n }\n // the period of S[0:i]\n\
-    \ int period(int i) { return i - KMP[i]; }\n // positions for T that match s\n\
-    \ // O(|T|)\n std::vector<int> pattern_match(std::string T) {\n  int m= T.length();\n\
-    \  std::vector<int> occur;\n  for (int i= 0, k= 0; i < m; ++i) {\n   while (k\
-    \ >= 0 && T[i] != s[k]) k= KMP[k];\n   if (++k == n) {\n    /* match at T[i-n+1\
-    \ ... i] */\n    occur.push_back(i - n + 1);\n   }\n  }\n  return occur;\n }\n\
-    };\n#line 5 \"test/aoj/ALDS1_14_B.KMP.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  string T, P;\n  cin >>\
-    \ T >> P;\n  KnuthMorrisPratt KMP(P);\n  auto ans = KMP.pattern_match(T);\n  for\
-    \ (auto a : ans) {\n    cout << a << \"\\n\";\n  }\n  cout << flush;\n  return\
-    \ 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
+  bundledCode: "#line 1 \"test/aoj/ALDS1_14_B.KMP.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/String/KnuthMorrisPratt.hpp\"\nstruct\
+    \ KnuthMorrisPratt {\n std::vector<int> KMP;\n const std::string s;\n int n;\n\
+    \ KnuthMorrisPratt(const std::string &str): s(str), n(s.length()) {\n  KMP.resize(n\
+    \ + 1, -1);\n  std::vector<int> knuth(n + 1, -1);\n  for (int i= 0, j= -1; i <\
+    \ n; i++) {\n   while (~j && s[i] != s[j]) j= knuth[j];\n   knuth[i + 1]= KMP[i\
+    \ + 1]= ++j;\n   if (i + 1 < n && s[i + 1] == s[j]) knuth[i + 1]= knuth[j];\n\
+    \  }\n }\n // the period of S[0:i]\n int period(int i) { return i - KMP[i]; }\n\
+    \ // positions for T that match s\n // O(|T|)\n std::vector<int> pattern_match(std::string\
+    \ T) {\n  int m= T.length();\n  std::vector<int> occur;\n  for (int i= 0, k= 0;\
+    \ i < m; ++i) {\n   while (k >= 0 && T[i] != s[k]) k= KMP[k];\n   if (++k == n)\
+    \ {\n    /* match at T[i-n+1 ... i] */\n    occur.push_back(i - n + 1);\n   }\n\
+    \  }\n  return occur;\n }\n};\n#line 4 \"test/aoj/ALDS1_14_B.KMP.test.cpp\"\n\
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ string T, P;\n cin >> T >> P;\n KnuthMorrisPratt KMP(P);\n auto ans= KMP.pattern_match(T);\n\
+    \ for (auto a: ans) {\n  cout << a << \"\\n\";\n }\n cout << flush;\n return 0;\n\
+    }\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
     \n#include <bits/stdc++.h>\n#include \"src/String/KnuthMorrisPratt.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  string T, P;\n  cin >> T >> P;\n  KnuthMorrisPratt KMP(P);\n  auto ans = KMP.pattern_match(T);\n\
-    \  for (auto a : ans) {\n    cout << a << \"\\n\";\n  }\n  cout << flush;\n  return\
-    \ 0;\n}"
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string\
+    \ T, P;\n cin >> T >> P;\n KnuthMorrisPratt KMP(P);\n auto ans= KMP.pattern_match(T);\n\
+    \ for (auto a: ans) {\n  cout << a << \"\\n\";\n }\n cout << flush;\n return 0;\n\
+    }"
   dependsOn:
   - src/String/KnuthMorrisPratt.hpp
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.KMP.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:16:37+09:00'
+  timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.KMP.test.cpp

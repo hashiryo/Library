@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
   - icon: ':heavy_check_mark:'
@@ -55,7 +55,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
   - icon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -79,7 +79,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.Poly.test.cpp
     title: test/yukicoder/215.Poly.test.cpp
   - icon: ':heavy_check_mark:'
@@ -94,9 +94,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/convolve.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -395,34 +395,34 @@ data:
   isVerificationFile: false
   path: src/FFT/convolve.hpp
   requiredBy:
-  - src/FFT/extgcd.hpp
   - src/FFT/sequences.hpp
   - src/FFT/Polynomial.hpp
+  - src/FFT/extgcd.hpp
   - src/FFT/bostan_mori.hpp
   timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/215.Poly.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yukicoder/137.div_at.test.cpp
-  - test/yukicoder/963.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/980.test.cpp
-  - test/yukicoder/658.test.cpp
   - test/aoj/0168.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/convolution_mod_2_64.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/convolution_large.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/partition.test.cpp
-  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/convolution_large.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/convolution_mod_2_64.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yukicoder/980.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yukicoder/137.div_at.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/963.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/FFT/convolve.hpp
 layout: document
 title: "\u7573\u307F\u8FBC\u307F"

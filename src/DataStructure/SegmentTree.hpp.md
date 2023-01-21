@@ -79,9 +79,9 @@ data:
   timestamp: '2023-01-01 00:16:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/649.SegTree.test.cpp
   - test/aoj/DSL_2_A.SegTree.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
+  - test/yukicoder/649.SegTree.test.cpp
 documentation_of: src/DataStructure/SegmentTree.hpp
 layout: document
 title: Segment-Tree

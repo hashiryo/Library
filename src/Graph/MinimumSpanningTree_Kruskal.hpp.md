@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
   _extendedRequiredBy: []
@@ -9,12 +9,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2559.LCT_Dual.test.cpp
-    title: test/aoj/2559.LCT_Dual.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_2_A.kruskal.test.cpp
-    title: test/aoj/GRL_2_A.kruskal.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -22,8 +16,8 @@ data:
     document_title: "\u6700\u5C0F\u5168\u57DF\u6728(Kruskal)"
     links: []
   bundledCode: "#line 2 \"src/Graph/MinimumSpanningTree_Kruskal.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/DataStructure/UnionFind.hpp\"\nstruct UnionFind {\n std::vector<int>\
-    \ par;\n UnionFind(int size): par(size, -1) {}\n bool unite(int u, int v) {\n\
+    #line 4 \"src/DataStructure/UnionFind.hpp\"\nclass UnionFind {\n std::vector<int>\
+    \ par;\npublic:\n UnionFind(int n): par(n, -1) {}\n bool unite(int u, int v) {\n\
     \  if ((u= root(u)) == (v= root(v))) return false;\n  if (par[u] > par[v]) std::swap(u,\
     \ v);\n  return par[u]+= par[v], par[v]= u, true;\n }\n bool same(int u, int v)\
     \ { return root(u) == root(v); }\n int root(int u) { return par[u] < 0 ? u : par[u]=\
@@ -61,12 +55,10 @@ data:
   isVerificationFile: false
   path: src/Graph/MinimumSpanningTree_Kruskal.hpp
   requiredBy: []
-  timestamp: '2022-12-31 22:54:50+09:00'
+  timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/0342.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
-  - test/aoj/GRL_2_A.kruskal.test.cpp
 documentation_of: src/Graph/MinimumSpanningTree_Kruskal.hpp
 layout: document
 redirect_from:

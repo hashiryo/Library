@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.Poly.test.cpp
     title: test/yukicoder/215.Poly.test.cpp
   - icon: ':heavy_check_mark:'
@@ -42,9 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/bostan_mori.hpp\"\n#include <bits/stdc++.h>\n#line\
@@ -462,14 +462,14 @@ data:
   path: src/FFT/bostan_mori.hpp
   requiredBy: []
   timestamp: '2023-01-17 01:19:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/215.Poly.test.cpp
-  - test/yukicoder/137.div_at.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/658.test.cpp
   - test/aoj/0168.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yukicoder/137.div_at.test.cpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/FFT/bostan_mori.hpp
 layout: document
 title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"

@@ -105,9 +105,9 @@ data:
   timestamp: '2022-12-31 21:15:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1750.SparseMat.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
+  - test/yukicoder/1750.SparseMat.test.cpp
 documentation_of: src/LinearAlgebra/SparseSquareMatrix.hpp
 layout: document
 title: "\u758E\u884C\u5217"
