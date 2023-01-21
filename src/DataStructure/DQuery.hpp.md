@@ -5,25 +5,23 @@ data:
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/abc174_f.WM.test.cpp
+    title: test/atcoder/abc174_f.WM.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
-    links:
-    - https://judge.yosupo.jp/problem/range_kth_smallest
-  bundledCode: "#line 1 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n#include <iostream>\n\
-    #include <vector>\n#line 3 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <algorithm>\n\
-    #include <array>\n#include <cassert>\ntemplate <class T= long long> class WaveletMatrix\
-    \ {\n struct SuccinctIndexableDictionary {\n  std::size_t len, blocks, zeros;\n\
-    \  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()= default;\n\
-    \  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len >> 5) +\
-    \ 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >> 5]|= 1U\
-    \ << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks; i++)\
-    \ sum[i]= sum[i - 1] + __builtin_popcount(bit[i - 1]);\n   zeros= rank0(len);\n\
+    links: []
+  bundledCode: "#line 2 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <vector>\n\
+    #include <algorithm>\n#include <array>\n#include <cassert>\ntemplate <class T=\
+    \ long long> class WaveletMatrix {\n struct SuccinctIndexableDictionary {\n  std::size_t\
+    \ len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
+    \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
+    \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
+    \ 5]|= 1U << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks;\
+    \ i++) sum[i]= sum[i - 1] + __builtin_popcount(bit[i - 1]);\n   zeros= rank0(len);\n\
     \  }\n  bool operator[](int k) const { return (bit[k >> 5] >> (k & 31)) & 1; }\n\
     \  std::size_t rank(std::size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
     \ >> 5] & ((1U << (k & 31)) - 1))); }\n  std::size_t rank0(std::size_t k) const\
@@ -50,31 +48,31 @@ data:
     \ r0= mat[h].rank0(r); (x >> h) & 1) ret+= r0 - l0, l+= mat[h].zeros - l0, r+=\
     \ mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t.\
     \ (l <= i < r) && (lb <= v[i] < ub)\n std::size_t count(int l, int r, T lb, T\
-    \ ub) const { return count(l, r, ub) - count(l, r, lb); }\n};\n#line 5 \"test/yosupo/range_kth_smallest.WM.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, Q;\n cin >> N >> Q;\n vector<int> a(N);\n for (int i= 0; i < N; i++)\
-    \ cin >> a[i];\n WaveletMatrix wm(a);\n while (Q--) {\n  int l, r, k;\n  cin >>\
-    \ l >> r >> k;\n  cout << wm.kth_smallest(l, r, k) << \"\\n\";\n }\n return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
-    #include <iostream>\n#include <vector>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, Q;\n cin >> N >> Q;\n vector<int> a(N);\n for (int i= 0; i < N; i++)\
-    \ cin >> a[i];\n WaveletMatrix wm(a);\n while (Q--) {\n  int l, r, k;\n  cin >>\
-    \ l >> r >> k;\n  cout << wm.kth_smallest(l, r, k) << \"\\n\";\n }\n return 0;\n\
-    }"
+    \ ub) const { return count(l, r, ub) - count(l, r, lb); }\n};\n#line 3 \"src/DataStructure/DQuery.hpp\"\
+    \nclass DQuery {\n std::vector<int> next;\n WaveletMatrix<int> wm;\npublic:\n\
+    \ template <class T> DQuery(const std::vector<T> &v): next(v.size(), -1) {\n \
+    \ std::map<T, int> mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i]))\
+    \ next[mp[v[i]]]= i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int\
+    \ l, int r) const { return wm.count(l, r, l); }\n};\n"
+  code: "#pragma once\n#include \"src/DataStructure/WaveletMatrix.hpp\"\nclass DQuery\
+    \ {\n std::vector<int> next;\n WaveletMatrix<int> wm;\npublic:\n template <class\
+    \ T> DQuery(const std::vector<T> &v): next(v.size(), -1) {\n  std::map<T, int>\
+    \ mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i])) next[mp[v[i]]]=\
+    \ i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int l, int\
+    \ r) const { return wm.count(l, r, l); }\n};\n"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
-  isVerificationFile: true
-  path: test/yosupo/range_kth_smallest.WM.test.cpp
+  isVerificationFile: false
+  path: src/DataStructure/DQuery.hpp
   requiredBy: []
   timestamp: '2023-01-21 19:30:07+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: test/yosupo/range_kth_smallest.WM.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/atcoder/abc174_f.WM.test.cpp
+documentation_of: src/DataStructure/DQuery.hpp
 layout: document
-redirect_from:
-- /verify/test/yosupo/range_kth_smallest.WM.test.cpp
-- /verify/test/yosupo/range_kth_smallest.WM.test.cpp.html
-title: test/yosupo/range_kth_smallest.WM.test.cpp
+title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\u30A8\
+  \u30EA"
 ---
+## 参考
+[https://www.youtube.com/watch?v=Id7lmNxg21w](https://www.youtube.com/watch?v=Id7lmNxg21w)

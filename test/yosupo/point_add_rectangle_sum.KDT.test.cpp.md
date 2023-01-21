@@ -1,14 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
+  - icon: ':question:'
+    path: src/Internal/HAS_CHECK.hpp
+    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
+      \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -16,14 +20,16 @@ data:
     - https://judge.yosupo.jp/problem/point_add_rectangle_sum
   bundledCode: "#line 1 \"test/yosupo/point_add_rectangle_sum.KDT.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/DataStructure/KDTree.hpp\"\n#ifndef HAS_CHECK\n\
-    #define HAS_CHECK(member, Dummy) \\\n template <class T> struct has_##member {\
-    \ \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
-    \ std::false_type check(...); \\\n  static T *mClass; \\\n  static const bool\
-    \ value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member,\
-    \ int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class\
-    \ dummy= typename U::member)\n#endif\ntemplate <std::uint8_t K, class pos_t, class\
-    \ M> class KDTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
+    \ <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#line 4 \"\
+    src/DataStructure/KDTree.hpp\"\n#include <algorithm>\n#include <cstddef>\n#line\
+    \ 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
+    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
+    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
+    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
+    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
+    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
+    #line 7 \"src/DataStructure/KDTree.hpp\"\ntemplate <std::uint8_t K, class pos_t,\
+    \ class M> class KDTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
     \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
     \ using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n template <class\
     \ L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>, has_composition<L>>;\n\
@@ -68,7 +74,7 @@ data:
     \ \"\\\"apply\\\" is not available\");\n  if (i == -1 || outall(ns[i].range))\
     \ return;\n  if (inall(ns[i].range)) return propagate(i, x), void();\n  if (eval(i);\
     \ in(ns[i].pos)) M::mapping(ns[i].val, x);\n  apply(ns[i].ch[0], in, inall, outall,\
-    \ x);\n  apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
+    \ x), apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
     \ pushup(i);\n }\n inline std::pair<T, bool> get(int i, const std::array<pos_t,\
     \ K> &pos) {\n  if (i == -1) return {T(), false};\n  bool myself= true;\n  for\
     \ (std::uint8_t j= K; j--; myself&= pos[j] == ns[i].pos[j])\n   if (ns[i].range[j][1]\
@@ -113,44 +119,44 @@ data:
     \ &&...intervals) {\n  auto r= to_range(intervals...);\n  auto [in, inall, outall]=\
     \ funcs(r);\n  apply(0, in, inall, outall, x);\n }\n template <class F, class\
     \ G, class H> void apply(E x, const F &in, const G &inall, const H &outall) {\
-    \ apply(0, in, inall, outall, x); }\n};\n#line 4 \"test/yosupo/point_add_rectangle_sum.KDT.test.cpp\"\
-    \nusing namespace std;\n\nstruct RSQ {\n  using T = long long;\n  static T ti()\
-    \ { return 0; }\n  static T op(const T &l, const T &r) { return l + r; }\n};\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, Q;\n\
-    \  cin >> N >> Q;\n  map<array<long long, 2>, long long> mp;\n  vector<array<long\
-    \ long, 5>> query;\n  for (int i = 0; i < N; i++) {\n    long long x, y, w;\n\
-    \    cin >> x >> y >> w;\n    mp[{x, y}] += w;\n  }\n  for (int i = 0; i < Q;\
-    \ i++) {\n    int op;\n    cin >> op;\n    if (op) {\n      int l, d, r, u;\n\
-    \      cin >> l >> d >> r >> u;\n      query.push_back({op, l, d, r, u});\n  \
-    \  } else {\n      int x, y, w;\n      cin >> x >> y >> w;\n      query.push_back({op,\
-    \ x, y, w});\n      mp[{x, y}];\n    }\n  }\n  KDTree<2, long long, RSQ> kdt({mp.begin(),\
-    \ mp.end()});\n  for (int i = 0; i < Q; i++) {\n    if (query[i][0]) {\n     \
-    \ auto [_, l, d, r, u] = query[i];\n      cout << kdt.fold({l, r - 1}, {d, u -\
-    \ 1}) << '\\n';\n    } else {\n      auto [_, x, y, w, __] = query[i];\n     \
-    \ kdt.set(kdt.get(x, y) + w, x, y);\n    }\n  }\n  return 0;\n}\n"
+    \ apply(0, in, inall, outall, x); }\n};\n#line 7 \"test/yosupo/point_add_rectangle_sum.KDT.test.cpp\"\
+    \nusing namespace std;\nstruct RSQ {\n using T= long long;\n static T ti() { return\
+    \ 0; }\n static T op(const T &l, const T &r) { return l + r; }\n};\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
+    \ map<array<long long, 2>, long long> mp;\n vector<array<long long, 5>> query;\n\
+    \ for (int i= 0; i < N; i++) {\n  long long x, y, w;\n  cin >> x >> y >> w;\n\
+    \  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int op;\n  cin >> op;\n\
+    \  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >> u;\n   query.push_back({op,\
+    \ l, d, r, u});\n  } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({op,\
+    \ x, y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<2, long long, RSQ> kdt({mp.begin(),\
+    \ mp.end()});\n for (int i= 0; i < Q; i++) {\n  if (query[i][0]) {\n   auto [_,\
+    \ l, d, r, u]= query[i];\n   cout << kdt.fold({l, r - 1}, {d, u - 1}) << '\\n';\n\
+    \  } else {\n   auto [_, x, y, w, __]= query[i];\n   kdt.set(kdt.get(x, y) + w,\
+    \ x, y);\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/KDTree.hpp\"\nusing namespace\
-    \ std;\n\nstruct RSQ {\n  using T = long long;\n  static T ti() { return 0; }\n\
-    \  static T op(const T &l, const T &r) { return l + r; }\n};\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, Q;\n  cin >> N >> Q;\n\
-    \  map<array<long long, 2>, long long> mp;\n  vector<array<long long, 5>> query;\n\
-    \  for (int i = 0; i < N; i++) {\n    long long x, y, w;\n    cin >> x >> y >>\
-    \ w;\n    mp[{x, y}] += w;\n  }\n  for (int i = 0; i < Q; i++) {\n    int op;\n\
-    \    cin >> op;\n    if (op) {\n      int l, d, r, u;\n      cin >> l >> d >>\
-    \ r >> u;\n      query.push_back({op, l, d, r, u});\n    } else {\n      int x,\
-    \ y, w;\n      cin >> x >> y >> w;\n      query.push_back({op, x, y, w});\n  \
-    \    mp[{x, y}];\n    }\n  }\n  KDTree<2, long long, RSQ> kdt({mp.begin(), mp.end()});\n\
-    \  for (int i = 0; i < Q; i++) {\n    if (query[i][0]) {\n      auto [_, l, d,\
-    \ r, u] = query[i];\n      cout << kdt.fold({l, r - 1}, {d, u - 1}) << '\\n';\n\
-    \    } else {\n      auto [_, x, y, w, __] = query[i];\n      kdt.set(kdt.get(x,\
-    \ y) + w, x, y);\n    }\n  }\n  return 0;\n}"
+    \n#include <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#include\
+    \ \"src/DataStructure/KDTree.hpp\"\nusing namespace std;\nstruct RSQ {\n using\
+    \ T= long long;\n static T ti() { return 0; }\n static T op(const T &l, const\
+    \ T &r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n map<array<long long, 2>, long long> mp;\n vector<array<long\
+    \ long, 5>> query;\n for (int i= 0; i < N; i++) {\n  long long x, y, w;\n  cin\
+    \ >> x >> y >> w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int\
+    \ op;\n  cin >> op;\n  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >>\
+    \ u;\n   query.push_back({op, l, d, r, u});\n  } else {\n   int x, y, w;\n   cin\
+    \ >> x >> y >> w;\n   query.push_back({op, x, y, w});\n   mp[{x, y}];\n  }\n }\n\
+    \ KDTree<2, long long, RSQ> kdt({mp.begin(), mp.end()});\n for (int i= 0; i <\
+    \ Q; i++) {\n  if (query[i][0]) {\n   auto [_, l, d, r, u]= query[i];\n   cout\
+    \ << kdt.fold({l, r - 1}, {d, u - 1}) << '\\n';\n  } else {\n   auto [_, x, y,\
+    \ w, __]= query[i];\n   kdt.set(kdt.get(x, y) + w, x, y);\n  }\n }\n return 0;\n\
+    }"
   dependsOn:
   - src/DataStructure/KDTree.hpp
+  - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
   path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 19:30:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
 layout: document

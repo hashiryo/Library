@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SortedPerBucket.hpp
     title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
   _extendedRequiredBy: []

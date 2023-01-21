@@ -1,28 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
+  - icon: ':question:'
+    path: src/Internal/HAS_CHECK.hpp
+    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
+      \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/challenges/cube-summation
     links:
     - https://www.hackerrank.com/challenges/cube-summation
   bundledCode: "#line 1 \"test/hackerrank/cube-summation.KDT.test.cpp\"\n#define PROBLEM\
-    \ \"https://www.hackerrank.com/challenges/cube-summation\"\n\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/DataStructure/KDTree.hpp\"\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
-    \ Dummy) \\\n template <class T> struct has_##member { \\\n  template <class U,\
-    \ Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
-    \ \\\n  static T *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
-    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
-    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
-    #endif\ntemplate <std::uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
+    \ \"https://www.hackerrank.com/challenges/cube-summation\"\n#include <iostream>\n\
+    #include <map>\n#include <vector>\n#include <array>\n#line 4 \"src/DataStructure/KDTree.hpp\"\
+    \n#include <algorithm>\n#include <cstddef>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
+    \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
+    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
+    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
+    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
+    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
+    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 7 \"src/DataStructure/KDTree.hpp\"\
+    \ntemplate <std::uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
     \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
     \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
     \ has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
@@ -67,7 +73,7 @@ data:
     \ \"\\\"apply\\\" is not available\");\n  if (i == -1 || outall(ns[i].range))\
     \ return;\n  if (inall(ns[i].range)) return propagate(i, x), void();\n  if (eval(i);\
     \ in(ns[i].pos)) M::mapping(ns[i].val, x);\n  apply(ns[i].ch[0], in, inall, outall,\
-    \ x);\n  apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
+    \ x), apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
     \ pushup(i);\n }\n inline std::pair<T, bool> get(int i, const std::array<pos_t,\
     \ K> &pos) {\n  if (i == -1) return {T(), false};\n  bool myself= true;\n  for\
     \ (std::uint8_t j= K; j--; myself&= pos[j] == ns[i].pos[j])\n   if (ns[i].range[j][1]\
@@ -112,46 +118,45 @@ data:
     \ &&...intervals) {\n  auto r= to_range(intervals...);\n  auto [in, inall, outall]=\
     \ funcs(r);\n  apply(0, in, inall, outall, x);\n }\n template <class F, class\
     \ G, class H> void apply(E x, const F &in, const G &inall, const H &outall) {\
-    \ apply(0, in, inall, outall, x); }\n};\n#line 5 \"test/hackerrank/cube-summation.KDT.test.cpp\"\
-    \n\n// 3\u6B21\u5143\nusing namespace std;\n\nstruct RSQ {\n  using T = long long;\n\
-    \  static T ti() { return 0; }\n  static T op(T l, T r) { return l + r; }\n};\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using KDT = KDTree<3,\
-    \ int, RSQ>;\n  int T;\n  cin >> T;\n  while (T--) {\n    int n, m;\n    cin >>\
-    \ n >> m;\n    map<array<int, 3>, long long> mp;\n    vector<array<int, 7>> query;\n\
-    \    while (m--) {\n      string op;\n      cin >> op;\n      if (op[0] == 'U')\
-    \ {\n        int x, y, z, w;\n        cin >> x >> y >> z >> w;\n        mp[{x,\
-    \ y, z}];\n        query.push_back({0, x, y, z, w, 0, 0});\n      } else {\n \
-    \       int x1, y1, z1, x2, y2, z2;\n        cin >> x1 >> y1 >> z1 >> x2 >> y2\
-    \ >> z2;\n        query.push_back({1, x1, y1, z1, x2, y2, z2});\n      }\n   \
-    \ }\n    KDT kdt({mp.begin(), mp.end()});\n    for (auto q : query) {\n      if\
-    \ (q[0] == 0) {\n        auto [_, x, y, z, w, __, ___] = q;\n        kdt.set(w,\
-    \ {x, y, z});\n      } else {\n        auto [_, x1, y1, z1, x2, y2, z2] = q;\n\
-    \        cout << kdt.fold({x1, x2}, {y1, y2}, {z1, z2}) << '\\n';\n      }\n \
-    \   }\n  }\n  return 0;\n}\n"
+    \ apply(0, in, inall, outall, x); }\n};\n#line 7 \"test/hackerrank/cube-summation.KDT.test.cpp\"\
+    \n// 3\u6B21\u5143\nusing namespace std;\nstruct RSQ {\n using T= long long;\n\
+    \ static T ti() { return 0; }\n static T op(T l, T r) { return l + r; }\n};\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using KDT= KDTree<3,\
+    \ int, RSQ>;\n int T;\n cin >> T;\n while (T--) {\n  int n, m;\n  cin >> n >>\
+    \ m;\n  map<array<int, 3>, long long> mp;\n  vector<array<int, 7>> query;\n  while\
+    \ (m--) {\n   string op;\n   cin >> op;\n   if (op[0] == 'U') {\n    int x, y,\
+    \ z, w;\n    cin >> x >> y >> z >> w;\n    mp[{x, y, z}];\n    query.push_back({0,\
+    \ x, y, z, w, 0, 0});\n   } else {\n    int x1, y1, z1, x2, y2, z2;\n    cin >>\
+    \ x1 >> y1 >> z1 >> x2 >> y2 >> z2;\n    query.push_back({1, x1, y1, z1, x2, y2,\
+    \ z2});\n   }\n  }\n  KDT kdt({mp.begin(), mp.end()});\n  for (auto q: query)\
+    \ {\n   if (q[0] == 0) {\n    auto [_, x, y, z, w, __, ___]= q;\n    kdt.set(w,\
+    \ {x, y, z});\n   } else {\n    auto [_, x1, y1, z1, x2, y2, z2]= q;\n    cout\
+    \ << kdt.fold({x1, x2}, {y1, y2}, {z1, z2}) << '\\n';\n   }\n  }\n }\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://www.hackerrank.com/challenges/cube-summation\"\n\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/KDTree.hpp\"\n\n// 3\u6B21\
-    \u5143\nusing namespace std;\n\nstruct RSQ {\n  using T = long long;\n  static\
-    \ T ti() { return 0; }\n  static T op(T l, T r) { return l + r; }\n};\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using KDT = KDTree<3,\
-    \ int, RSQ>;\n  int T;\n  cin >> T;\n  while (T--) {\n    int n, m;\n    cin >>\
-    \ n >> m;\n    map<array<int, 3>, long long> mp;\n    vector<array<int, 7>> query;\n\
-    \    while (m--) {\n      string op;\n      cin >> op;\n      if (op[0] == 'U')\
-    \ {\n        int x, y, z, w;\n        cin >> x >> y >> z >> w;\n        mp[{x,\
-    \ y, z}];\n        query.push_back({0, x, y, z, w, 0, 0});\n      } else {\n \
-    \       int x1, y1, z1, x2, y2, z2;\n        cin >> x1 >> y1 >> z1 >> x2 >> y2\
-    \ >> z2;\n        query.push_back({1, x1, y1, z1, x2, y2, z2});\n      }\n   \
-    \ }\n    KDT kdt({mp.begin(), mp.end()});\n    for (auto q : query) {\n      if\
-    \ (q[0] == 0) {\n        auto [_, x, y, z, w, __, ___] = q;\n        kdt.set(w,\
-    \ {x, y, z});\n      } else {\n        auto [_, x1, y1, z1, x2, y2, z2] = q;\n\
-    \        cout << kdt.fold({x1, x2}, {y1, y2}, {z1, z2}) << '\\n';\n      }\n \
-    \   }\n  }\n  return 0;\n}"
+    #include <iostream>\n#include <map>\n#include <vector>\n#include <array>\n#include\
+    \ \"src/DataStructure/KDTree.hpp\"\n// 3\u6B21\u5143\nusing namespace std;\nstruct\
+    \ RSQ {\n using T= long long;\n static T ti() { return 0; }\n static T op(T l,\
+    \ T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using KDT= KDTree<3, int, RSQ>;\n int T;\n cin >> T;\n while (T--) {\n  int\
+    \ n, m;\n  cin >> n >> m;\n  map<array<int, 3>, long long> mp;\n  vector<array<int,\
+    \ 7>> query;\n  while (m--) {\n   string op;\n   cin >> op;\n   if (op[0] == 'U')\
+    \ {\n    int x, y, z, w;\n    cin >> x >> y >> z >> w;\n    mp[{x, y, z}];\n \
+    \   query.push_back({0, x, y, z, w, 0, 0});\n   } else {\n    int x1, y1, z1,\
+    \ x2, y2, z2;\n    cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2;\n    query.push_back({1,\
+    \ x1, y1, z1, x2, y2, z2});\n   }\n  }\n  KDT kdt({mp.begin(), mp.end()});\n \
+    \ for (auto q: query) {\n   if (q[0] == 0) {\n    auto [_, x, y, z, w, __, ___]=\
+    \ q;\n    kdt.set(w, {x, y, z});\n   } else {\n    auto [_, x1, y1, z1, x2, y2,\
+    \ z2]= q;\n    cout << kdt.fold({x1, x2}, {y1, y2}, {z1, z2}) << '\\n';\n   }\n\
+    \  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/KDTree.hpp
+  - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
   path: test/hackerrank/cube-summation.KDT.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 19:30:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/hackerrank/cube-summation.KDT.test.cpp
 layout: document

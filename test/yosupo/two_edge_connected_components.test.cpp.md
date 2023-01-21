@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
     title: Incremental-Bridge-Connectivity
   _extendedRequiredBy: []

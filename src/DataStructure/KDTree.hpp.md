@@ -1,62 +1,67 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Internal/HAS_CHECK.hpp
+    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
+      \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/728.KDT.test.cpp
     title: test/yukicoder/728.KDT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/KDTree.hpp\"\n#include <bits/stdc++.h>\n\
-    #ifndef HAS_CHECK\n#define HAS_CHECK(member, Dummy) \\\n template <class T> struct\
-    \ has_##member { \\\n  template <class U, Dummy> static std::true_type check(U\
-    \ *); \\\n  static std::false_type check(...); \\\n  static T *mClass; \\\n  static\
-    \ const bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy= typename U::member)\n#endif\ntemplate <std::uint8_t K, class pos_t,\
-    \ class M> class KDTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
-    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
-    \ using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n template <class\
-    \ L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>, has_composition<L>>;\n\
-    \ template <class T, class F= std::nullptr_t> struct Node_B {\n  using E= F;\n\
-    \  T val;\n  int ch[2]= {-1, -1};\n  pos_t range[K][2], pos[K];\n };\n template\
-    \ <bool sg_, bool du_, typename tEnable= void> struct Node_D: Node_B<M> {};\n\
-    \ template <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<sg_\
-    \ && !du_>>: Node_B<typename M::T> { typename M::T sum; };\n template <bool sg_,\
-    \ bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<!sg_ && du_>>: Node_B<typename\
-    \ M::T, typename M::E> {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
-    \ template <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<sg_\
-    \ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename M::T sum;\n  typename\
-    \ M::E lazy;\n  bool lazy_flg= false;\n };\n using Node= Node_D<monoid<M>::value,\
-    \ dual<M>::value>;\n using T= decltype(Node::val);\n using E= typename Node::E;\n\
-    \ std::vector<Node> ns;\npublic:\n using PosVal= std::pair<std::array<pos_t, K>,\
-    \ T>;\n using Iter= typename std::vector<PosVal>::iterator;\n using Range= std::array<std::array<pos_t,\
-    \ 2>, K>;\nprivate:\n inline void pushup(int i) {\n  ns[i].sum= ns[i].val;\n \
-    \ if (ns[i].ch[0] != -1) ns[i].sum= M::op(ns[ns[i].ch[0]].sum, ns[i].sum);\n \
-    \ if (ns[i].ch[1] != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum);\n }\n\
-    \ inline void propagate(int i, const E &x) {\n  if (i == -1) return;\n  ns[i].lazy_flg\
+  bundledCode: "#line 2 \"src/DataStructure/KDTree.hpp\"\n#include <array>\n#include\
+    \ <vector>\n#include <algorithm>\n#include <cstddef>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
+    \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
+    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
+    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
+    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
+    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
+    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 7 \"src/DataStructure/KDTree.hpp\"\
+    \ntemplate <std::uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
+    \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
+    \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
+    \ has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
+    \ has_mapping<L>, has_composition<L>>;\n template <class T, class F= std::nullptr_t>\
+    \ struct Node_B {\n  using E= F;\n  T val;\n  int ch[2]= {-1, -1};\n  pos_t range[K][2],\
+    \ pos[K];\n };\n template <bool sg_, bool du_, typename tEnable= void> struct\
+    \ Node_D: Node_B<M> {};\n template <bool sg_, bool du_> struct Node_D<sg_, du_,\
+    \ typename std::enable_if_t<sg_ && !du_>>: Node_B<typename M::T> { typename M::T\
+    \ sum; };\n template <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<!sg_\
+    \ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename M::E lazy;\n  bool\
+    \ lazy_flg= false;\n };\n template <bool sg_, bool du_> struct Node_D<sg_, du_,\
+    \ typename std::enable_if_t<sg_ && du_>>: Node_B<typename M::T, typename M::E>\
+    \ {\n  typename M::T sum;\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
+    \ using Node= Node_D<monoid<M>::value, dual<M>::value>;\n using T= decltype(Node::val);\n\
+    \ using E= typename Node::E;\n std::vector<Node> ns;\npublic:\n using PosVal=\
+    \ std::pair<std::array<pos_t, K>, T>;\n using Iter= typename std::vector<PosVal>::iterator;\n\
+    \ using Range= std::array<std::array<pos_t, 2>, K>;\nprivate:\n inline void pushup(int\
+    \ i) {\n  ns[i].sum= ns[i].val;\n  if (ns[i].ch[0] != -1) ns[i].sum= M::op(ns[ns[i].ch[0]].sum,\
+    \ ns[i].sum);\n  if (ns[i].ch[1] != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum);\n\
+    \ }\n inline void propagate(int i, const E &x) {\n  if (i == -1) return;\n  ns[i].lazy_flg\
     \ ? (M::composition(ns[i].lazy, x), x) : (ns[i].lazy= x);\n  M::mapping(ns[i].val,\
     \ x), ns[i].lazy_flg= true;\n  if constexpr (monoid<M>::value) M::mapping(ns[i].sum,\
     \ x);\n }\n inline void eval(int i) {\n  if (!ns[i].lazy_flg) return;\n  ns[i].lazy_flg=\
@@ -81,7 +86,7 @@ data:
     \ \"\\\"apply\\\" is not available\");\n  if (i == -1 || outall(ns[i].range))\
     \ return;\n  if (inall(ns[i].range)) return propagate(i, x), void();\n  if (eval(i);\
     \ in(ns[i].pos)) M::mapping(ns[i].val, x);\n  apply(ns[i].ch[0], in, inall, outall,\
-    \ x);\n  apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
+    \ x), apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
     \ pushup(i);\n }\n inline std::pair<T, bool> get(int i, const std::array<pos_t,\
     \ K> &pos) {\n  if (i == -1) return {T(), false};\n  bool myself= true;\n  for\
     \ (std::uint8_t j= K; j--; myself&= pos[j] == ns[i].pos[j])\n   if (ns[i].range[j][1]\
@@ -127,33 +132,29 @@ data:
     \ funcs(r);\n  apply(0, in, inall, outall, x);\n }\n template <class F, class\
     \ G, class H> void apply(E x, const F &in, const G &inall, const H &outall) {\
     \ apply(0, in, inall, outall, x); }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#ifndef HAS_CHECK\n#define HAS_CHECK(member,\
-    \ Dummy) \\\n template <class T> struct has_##member { \\\n  template <class U,\
-    \ Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
-    \ \\\n  static T *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
-    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
-    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
-    #endif\ntemplate <std::uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
-    \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
-    \ has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n template <class T, class F= std::nullptr_t>\
-    \ struct Node_B {\n  using E= F;\n  T val;\n  int ch[2]= {-1, -1};\n  pos_t range[K][2],\
-    \ pos[K];\n };\n template <bool sg_, bool du_, typename tEnable= void> struct\
-    \ Node_D: Node_B<M> {};\n template <bool sg_, bool du_> struct Node_D<sg_, du_,\
-    \ typename std::enable_if_t<sg_ && !du_>>: Node_B<typename M::T> { typename M::T\
-    \ sum; };\n template <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<!sg_\
-    \ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename M::E lazy;\n  bool\
-    \ lazy_flg= false;\n };\n template <bool sg_, bool du_> struct Node_D<sg_, du_,\
-    \ typename std::enable_if_t<sg_ && du_>>: Node_B<typename M::T, typename M::E>\
-    \ {\n  typename M::T sum;\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
-    \ using Node= Node_D<monoid<M>::value, dual<M>::value>;\n using T= decltype(Node::val);\n\
-    \ using E= typename Node::E;\n std::vector<Node> ns;\npublic:\n using PosVal=\
-    \ std::pair<std::array<pos_t, K>, T>;\n using Iter= typename std::vector<PosVal>::iterator;\n\
-    \ using Range= std::array<std::array<pos_t, 2>, K>;\nprivate:\n inline void pushup(int\
-    \ i) {\n  ns[i].sum= ns[i].val;\n  if (ns[i].ch[0] != -1) ns[i].sum= M::op(ns[ns[i].ch[0]].sum,\
-    \ ns[i].sum);\n  if (ns[i].ch[1] != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum);\n\
-    \ }\n inline void propagate(int i, const E &x) {\n  if (i == -1) return;\n  ns[i].lazy_flg\
+  code: "#pragma once\n#include <array>\n#include <vector>\n#include <algorithm>\n\
+    #include <cstddef>\n#include \"src/Internal/HAS_CHECK.hpp\"\ntemplate <std::uint8_t\
+    \ K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
+    \ template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n\
+    \ template <class L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
+    \ has_composition<L>>;\n template <class T, class F= std::nullptr_t> struct Node_B\
+    \ {\n  using E= F;\n  T val;\n  int ch[2]= {-1, -1};\n  pos_t range[K][2], pos[K];\n\
+    \ };\n template <bool sg_, bool du_, typename tEnable= void> struct Node_D: Node_B<M>\
+    \ {};\n template <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<sg_\
+    \ && !du_>>: Node_B<typename M::T> { typename M::T sum; };\n template <bool sg_,\
+    \ bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<!sg_ && du_>>: Node_B<typename\
+    \ M::T, typename M::E> {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
+    \ template <bool sg_, bool du_> struct Node_D<sg_, du_, typename std::enable_if_t<sg_\
+    \ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename M::T sum;\n  typename\
+    \ M::E lazy;\n  bool lazy_flg= false;\n };\n using Node= Node_D<monoid<M>::value,\
+    \ dual<M>::value>;\n using T= decltype(Node::val);\n using E= typename Node::E;\n\
+    \ std::vector<Node> ns;\npublic:\n using PosVal= std::pair<std::array<pos_t, K>,\
+    \ T>;\n using Iter= typename std::vector<PosVal>::iterator;\n using Range= std::array<std::array<pos_t,\
+    \ 2>, K>;\nprivate:\n inline void pushup(int i) {\n  ns[i].sum= ns[i].val;\n \
+    \ if (ns[i].ch[0] != -1) ns[i].sum= M::op(ns[ns[i].ch[0]].sum, ns[i].sum);\n \
+    \ if (ns[i].ch[1] != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum);\n }\n\
+    \ inline void propagate(int i, const E &x) {\n  if (i == -1) return;\n  ns[i].lazy_flg\
     \ ? (M::composition(ns[i].lazy, x), x) : (ns[i].lazy= x);\n  M::mapping(ns[i].val,\
     \ x), ns[i].lazy_flg= true;\n  if constexpr (monoid<M>::value) M::mapping(ns[i].sum,\
     \ x);\n }\n inline void eval(int i) {\n  if (!ns[i].lazy_flg) return;\n  ns[i].lazy_flg=\
@@ -178,7 +179,7 @@ data:
     \ \"\\\"apply\\\" is not available\");\n  if (i == -1 || outall(ns[i].range))\
     \ return;\n  if (inall(ns[i].range)) return propagate(i, x), void();\n  if (eval(i);\
     \ in(ns[i].pos)) M::mapping(ns[i].val, x);\n  apply(ns[i].ch[0], in, inall, outall,\
-    \ x);\n  apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
+    \ x), apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
     \ pushup(i);\n }\n inline std::pair<T, bool> get(int i, const std::array<pos_t,\
     \ K> &pos) {\n  if (i == -1) return {T(), false};\n  bool myself= true;\n  for\
     \ (std::uint8_t j= K; j--; myself&= pos[j] == ns[i].pos[j])\n   if (ns[i].range[j][1]\
@@ -224,12 +225,13 @@ data:
     \ funcs(r);\n  apply(0, in, inall, outall, x);\n }\n template <class F, class\
     \ G, class H> void apply(E x, const F &in, const G &inall, const H &outall) {\
     \ apply(0, in, inall, outall, x); }\n};"
-  dependsOn: []
+  dependsOn:
+  - src/Internal/HAS_CHECK.hpp
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 19:30:07+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2842.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
@@ -242,6 +244,8 @@ documentation_of: src/DataStructure/KDTree.hpp
 layout: document
 title: kD-Tree
 ---
+## 計算量
+$\mathcal{O}(k\cdot N^{1-1/k})$
 ## 参考
 [https://trap.jp/post/1489/](https://trap.jp/post/1489/)
 ## 問題例

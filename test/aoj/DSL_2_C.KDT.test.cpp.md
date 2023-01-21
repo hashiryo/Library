@@ -1,29 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
+  - icon: ':question:'
+    path: src/Internal/HAS_CHECK.hpp
+    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
+      \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C
-  bundledCode: "#line 1 \"test/aoj/DSL_2_C.KDT.test.cpp\"\n#define PROBLEM \\\n  \"\
-    https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/DataStructure/KDTree.hpp\"\n#ifndef HAS_CHECK\n\
-    #define HAS_CHECK(member, Dummy) \\\n template <class T> struct has_##member {\
-    \ \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
-    \ std::false_type check(...); \\\n  static T *mClass; \\\n  static const bool\
-    \ value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member,\
-    \ int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class\
-    \ dummy= typename U::member)\n#endif\ntemplate <std::uint8_t K, class pos_t, class\
-    \ M> class KDTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
+  bundledCode: "#line 1 \"test/aoj/DSL_2_C.KDT.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\
+    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/DataStructure/KDTree.hpp\"\
+    \n#include <array>\n#line 5 \"src/DataStructure/KDTree.hpp\"\n#include <cstddef>\n\
+    #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
+    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
+    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
+    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
+    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
+    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
+    #line 7 \"src/DataStructure/KDTree.hpp\"\ntemplate <std::uint8_t K, class pos_t,\
+    \ class M> class KDTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
     \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
     \ using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n template <class\
     \ L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>, has_composition<L>>;\n\
@@ -68,7 +73,7 @@ data:
     \ \"\\\"apply\\\" is not available\");\n  if (i == -1 || outall(ns[i].range))\
     \ return;\n  if (inall(ns[i].range)) return propagate(i, x), void();\n  if (eval(i);\
     \ in(ns[i].pos)) M::mapping(ns[i].val, x);\n  apply(ns[i].ch[0], in, inall, outall,\
-    \ x);\n  apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
+    \ x), apply(ns[i].ch[1], in, inall, outall, x);\n  if constexpr (monoid<M>::value)\
     \ pushup(i);\n }\n inline std::pair<T, bool> get(int i, const std::array<pos_t,\
     \ K> &pos) {\n  if (i == -1) return {T(), false};\n  bool myself= true;\n  for\
     \ (std::uint8_t j= K; j--; myself&= pos[j] == ns[i].pos[j])\n   if (ns[i].range[j][1]\
@@ -113,36 +118,37 @@ data:
     \ &&...intervals) {\n  auto r= to_range(intervals...);\n  auto [in, inall, outall]=\
     \ funcs(r);\n  apply(0, in, inall, outall, x);\n }\n template <class F, class\
     \ G, class H> void apply(E x, const F &in, const G &inall, const H &outall) {\
-    \ apply(0, in, inall, outall, x); }\n};\n#line 5 \"test/aoj/DSL_2_C.KDT.test.cpp\"\
-    \nusing namespace std;\n\nstruct IDs {\n  using T = vector<int>;\n  static T ti()\
-    \ { return {}; }\n  static T op(T l, T r) {\n    if (l.size() < r.size()) l.swap(r);\n\
-    \    for (int x : r) l.push_back(x);\n    return l;\n  }\n};\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int n;\n  cin >> n;\n  using\
-    \ KDT = KDTree<2, int, IDs>;\n  vector<typename KDT::PosVal> v(n);\n  for (int\
-    \ i = 0; i < n; i++) {\n    int x, y;\n    cin >> x >> y;\n    v[i].first = {x,\
-    \ y}, v[i].second = {i};\n  }\n  KDT kdt(v);\n  int q;\n  cin >> q;\n  while (q--)\
-    \ {\n    int sx, tx, sy, ty;\n    cin >> sx >> tx >> sy >> ty;\n    auto ans =\
-    \ kdt.fold({sx, tx}, {sy, ty});\n    sort(ans.begin(), ans.end());\n    for (auto\
-    \ x : ans) cout << x << '\\n';\n    cout << '\\n';\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/KDTree.hpp\"\nusing namespace\
-    \ std;\n\nstruct IDs {\n  using T = vector<int>;\n  static T ti() { return {};\
-    \ }\n  static T op(T l, T r) {\n    if (l.size() < r.size()) l.swap(r);\n    for\
-    \ (int x : r) l.push_back(x);\n    return l;\n  }\n};\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(false);\n  int n;\n  cin >> n;\n  using KDT = KDTree<2,\
-    \ int, IDs>;\n  vector<typename KDT::PosVal> v(n);\n  for (int i = 0; i < n; i++)\
-    \ {\n    int x, y;\n    cin >> x >> y;\n    v[i].first = {x, y}, v[i].second =\
-    \ {i};\n  }\n  KDT kdt(v);\n  int q;\n  cin >> q;\n  while (q--) {\n    int sx,\
-    \ tx, sy, ty;\n    cin >> sx >> tx >> sy >> ty;\n    auto ans = kdt.fold({sx,\
-    \ tx}, {sy, ty});\n    sort(ans.begin(), ans.end());\n    for (auto x : ans) cout\
-    \ << x << '\\n';\n    cout << '\\n';\n  }\n  return 0;\n}"
+    \ apply(0, in, inall, outall, x); }\n};\n#line 6 \"test/aoj/DSL_2_C.KDT.test.cpp\"\
+    \nusing namespace std;\nstruct IDs {\n using T= vector<int>;\n static T ti() {\
+    \ return {}; }\n static T op(T l, T r) {\n  if (l.size() < r.size()) l.swap(r);\n\
+    \  for (int x: r) l.push_back(x);\n  return l;\n }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n int n;\n cin >> n;\n using KDT= KDTree<2, int,\
+    \ IDs>;\n vector<typename KDT::PosVal> v(n);\n for (int i= 0; i < n; i++) {\n\
+    \  int x, y;\n  cin >> x >> y;\n  v[i].first= {x, y}, v[i].second= {i};\n }\n\
+    \ KDT kdt(v);\n int q;\n cin >> q;\n while (q--) {\n  int sx, tx, sy, ty;\n  cin\
+    \ >> sx >> tx >> sy >> ty;\n  auto ans= kdt.fold({sx, tx}, {sy, ty});\n  sort(ans.begin(),\
+    \ ans.end());\n  for (auto x: ans) cout << x << '\\n';\n  cout << '\\n';\n }\n\
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\
+    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/DataStructure/KDTree.hpp\"\
+    \nusing namespace std;\nstruct IDs {\n using T= vector<int>;\n static T ti() {\
+    \ return {}; }\n static T op(T l, T r) {\n  if (l.size() < r.size()) l.swap(r);\n\
+    \  for (int x: r) l.push_back(x);\n  return l;\n }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n int n;\n cin >> n;\n using KDT= KDTree<2, int,\
+    \ IDs>;\n vector<typename KDT::PosVal> v(n);\n for (int i= 0; i < n; i++) {\n\
+    \  int x, y;\n  cin >> x >> y;\n  v[i].first= {x, y}, v[i].second= {i};\n }\n\
+    \ KDT kdt(v);\n int q;\n cin >> q;\n while (q--) {\n  int sx, tx, sy, ty;\n  cin\
+    \ >> sx >> tx >> sy >> ty;\n  auto ans= kdt.fold({sx, tx}, {sy, ty});\n  sort(ans.begin(),\
+    \ ans.end());\n  for (auto x: ans) cout << x << '\\n';\n  cout << '\\n';\n }\n\
+    \ return 0;\n}"
   dependsOn:
   - src/DataStructure/KDTree.hpp
+  - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
   path: test/aoj/DSL_2_C.KDT.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 19:30:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_C.KDT.test.cpp
 layout: document
