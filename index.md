@@ -325,38 +325,28 @@ data:
       title: "\u5EA7\u6A19\u5727\u7E2E"
   - name: src/Optimization
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/Matching.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
         )"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Optimization/MatchingWeighted.hpp
       title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
         \u822C\u30B0\u30E9\u30D5)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/MaxFlow.hpp
-      title: "\u6700\u5927\u6D41\u30A4\u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
-    - icon: ':heavy_check_mark:'
-      path: src/Optimization/MaxFlowLowerBound.hpp
-      title: "\u6700\u5C0F\u6D41\u91CF\u5236\u9650\u4ED8\u304D\u6700\u5927\u6D41\u30A4\
-        \u30F3\u30BF\u30FC\u30D5\u30A7\u30FC\u30B9"
-    - icon: ':heavy_check_mark:'
-      path: src/Optimization/MaxFlow_Dinic.hpp
-      title: "\u6700\u5927\u6D41 Dinic"
-    - icon: ':heavy_check_mark:'
-      path: src/Optimization/MaxFlow_PushRelabel.hpp
-      title: "\u6700\u5927\u6D41 PushRelabel(Gap)"
+      title: "\u6700\u5927\u6D41"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/MinCostFlow.hpp
       title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Optimization/matroid_intersection.hpp
       title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/min_Lconvex.hpp
       title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
         \u30B0\u6CD5)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
@@ -437,13 +427,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1595.test.cpp
       title: test/aoj/1595.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1605.matroid_intersection.test.cpp
       title: test/aoj/1605.matroid_intersection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1615.Dinic.test.cpp
       title: test/aoj/1615.Dinic.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1615.PushRelabel.test.cpp
       title: test/aoj/1615.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -722,7 +712,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_2_A.kruskal.test.cpp
       title: test/aoj/GRL_2_A.kruskal.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/GRL_2_B.matroid_intersection.test.cpp
       title: test/aoj/GRL_2_B.matroid_intersection.test.cpp
     - icon: ':heavy_check_mark:'
@@ -740,7 +730,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_B.test.cpp
       title: test/aoj/GRL_6_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
       title: test/aoj/GRL_7_A.matroid_intersection.test.cpp
     - icon: ':heavy_check_mark:'
@@ -838,7 +828,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc230_h.test.cpp
       title: test/atcoder/abc230_h.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc231_h.matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.matroid_intersection.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1006,10 +996,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/general_weighted_matching.test.cpp
       title: test/yosupo/general_weighted_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1236,10 +1226,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1145.test.cpp
       title: test/yukicoder/1145.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/119.Dinic.test.cpp
       title: test/yukicoder/119.Dinic.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'

@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Optimization/matroid_intersection.hpp
     title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B
@@ -17,8 +17,9 @@ data:
   bundledCode: "#line 1 \"test/aoj/GRL_2_B.matroid_intersection.test.cpp\"\n#define\
     \ PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B\"\
     \n// \u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728(\u30B0\u30E9\u30D5+\u5206\u5272\
-    )\n#include <bits/stdc++.h>\n#line 3 \"src/Optimization/matroid_intersection.hpp\"\
-    \ntemplate <typename Matroid1, typename Matroid2> std::vector<int> matroid_intersection(int\
+    )\n#include <iostream>\n#include <vector>\n#line 3 \"src/Optimization/matroid_intersection.hpp\"\
+    \n#include <algorithm>\n#include <limits>\n#include <array>\n#include <cassert>\n\
+    template <typename Matroid1, typename Matroid2> std::vector<int> matroid_intersection(int\
     \ n, Matroid1 M1, Matroid2 M2) {\n std::vector<bool> b(n, false), useless(n);\n\
     \ std::vector<int> I[2];\n for (int e= 0; e < n; e++) I[0].push_back(e);\n M1.build(I[1]),\
     \ M2.build(I[1]);\n for (bool converged= false; !converged;) {\n  useless.assign(n,\
@@ -84,7 +85,7 @@ data:
     \ std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n   if (belong[e] != -1)\
     \ cnt[belong[e]]--;\n }\n inline bool oracle(int e) const { return belong[e] ==\
     \ -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e, int f) const { return\
-    \ oracle(f) || belong[e] == belong[f]; }\n};\n#line 5 \"test/aoj/GRL_2_B.matroid_intersection.test.cpp\"\
+    \ oracle(f) || belong[e] == belong[f]; }\n};\n#line 6 \"test/aoj/GRL_2_B.matroid_intersection.test.cpp\"\
     \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ int N, M, r;\n cin >> N >> M >> r;\n GraphicMatroid M1(N);\n vector<int> w(M);\n\
     \ vector<vector<int>> parts(N);\n for (int i= 0; i < M; i++) {\n  int s, t;\n\
@@ -94,7 +95,7 @@ data:
     \ S[N - 1]) ans+= w[e];\n cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/2/GRL_2_B\"\
     \n// \u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728(\u30B0\u30E9\u30D5+\u5206\u5272\
-    )\n#include <bits/stdc++.h>\n#include \"src/Optimization/matroid_intersection.hpp\"\
+    )\n#include <iostream>\n#include <vector>\n#include \"src/Optimization/matroid_intersection.hpp\"\
     \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ int N, M, r;\n cin >> N >> M >> r;\n GraphicMatroid M1(N);\n vector<int> w(M);\n\
     \ vector<vector<int>> parts(N);\n for (int i= 0; i < M; i++) {\n  int s, t;\n\
@@ -107,8 +108,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_2_B.matroid_intersection.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 23:17:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_2_B.matroid_intersection.test.cpp
 layout: document

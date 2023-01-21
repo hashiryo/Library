@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Optimization/MatchingWeighted.hpp
     title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
       \u822C\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_weighted_matching
@@ -17,22 +17,24 @@ data:
     - https://judge.yosupo.jp/problem/general_weighted_matching
   bundledCode: "#line 1 \"test/yosupo/general_weighted_matching.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/general_weighted_matching\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/Optimization/MatchingWeighted.hpp\"\ntemplate\
-    \ <class cost_t= long long> class MatchingWeighted {\n static constexpr cost_t\
-    \ INF= std::numeric_limits<cost_t>::max() / 2;\n struct E {\n  int u, v;\n  cost_t\
-    \ w;\n };\n int n, m, in;\n std::vector<std::vector<E>> G;\n std::vector<int>\
-    \ mt, slk, rt, par, isS, used;\n std::vector<std::vector<int>> fwr, blg;\n std::vector<cost_t>\
-    \ dual;\n std::queue<int> que;\n inline cost_t dist(const E &e) const { return\
-    \ dual[e.u] + dual[e.v] - e.w; }\n void recalc(int v, int i= 1) {\n  for (slk[v]=\
-    \ 0; i <= n; i++)\n   if (G[i][v].w && rt[i] != v && isS[rt[i]] == 1)\n    if\
-    \ (!slk[v] || dist(G[i][v]) < dist(G[slk[v]][v])) slk[v]= i;\n }\n void push(int\
-    \ v) {\n  if (v <= n) return que.push(v);\n  for (int nxt: fwr[v]) push(nxt);\n\
-    \ }\n void set(int v, int r) {\n  if (rt[v]= r; v > n)\n   for (int nxt: fwr[v])\
-    \ set(nxt, r);\n }\n int findeven(int b, int v, int p= 0) {\n  if (p= std::find(fwr[b].begin(),\
-    \ fwr[b].end(), v) - fwr[b].begin(); p & 1) std::reverse(fwr[b].begin() + 1, fwr[b].end()),\
-    \ p= fwr[b].size() - p;\n  return p;\n }\n void match(int u, int v) {\n  if (mt[u]=\
-    \ G[u][v].v; u > n) {\n   int x= blg[u][G[u][v].u], p= findeven(u, x);\n   for\
-    \ (int i= 0; i < p; i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), rotate(fwr[u].begin(),\
+    \ <iostream>\n#include <vector>\n#line 2 \"src/Optimization/MatchingWeighted.hpp\"\
+    \n#include <limits>\n#line 4 \"src/Optimization/MatchingWeighted.hpp\"\n#include\
+    \ <queue>\n#include <tuple>\ntemplate <class cost_t= long long> class MatchingWeighted\
+    \ {\n static constexpr cost_t INF= std::numeric_limits<cost_t>::max() / 2;\n struct\
+    \ E {\n  int u, v;\n  cost_t w;\n };\n int n, m, in;\n std::vector<std::vector<E>>\
+    \ G;\n std::vector<int> mt, slk, rt, par, isS, used;\n std::vector<std::vector<int>>\
+    \ fwr, blg;\n std::vector<cost_t> dual;\n std::queue<int> que;\n inline cost_t\
+    \ dist(const E &e) const { return dual[e.u] + dual[e.v] - e.w; }\n void recalc(int\
+    \ v, int i= 1) {\n  for (slk[v]= 0; i <= n; i++)\n   if (G[i][v].w && rt[i] !=\
+    \ v && isS[rt[i]] == 1)\n    if (!slk[v] || dist(G[i][v]) < dist(G[slk[v]][v]))\
+    \ slk[v]= i;\n }\n void push(int v) {\n  if (v <= n) return que.push(v);\n  for\
+    \ (int nxt: fwr[v]) push(nxt);\n }\n void set(int v, int r) {\n  if (rt[v]= r;\
+    \ v > n)\n   for (int nxt: fwr[v]) set(nxt, r);\n }\n int findeven(int b, int\
+    \ v, int p= 0) {\n  if (p= std::find(fwr[b].begin(), fwr[b].end(), v) - fwr[b].begin();\
+    \ p & 1) std::reverse(fwr[b].begin() + 1, fwr[b].end()), p= fwr[b].size() - p;\n\
+    \  return p;\n }\n void match(int u, int v) {\n  if (mt[u]= G[u][v].v; u > n)\
+    \ {\n   int x= blg[u][G[u][v].u], p= findeven(u, x);\n   for (int i= 0; i < p;\
+    \ i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), rotate(fwr[u].begin(),\
     \ fwr[u].begin() + p, fwr[u].end());\n  }\n }\n bool path(const E &e) {\n  if\
     \ (int u= rt[e.u], v= rt[e.v], bu= u, bv= v, x; isS[v] == 1) {\n   for (in++;\
     \ bu; bu= rt[mt[bu]] ? rt[par[rt[mt[bu]]]] : 0) used[bu]= in;\n   for (int i,\
@@ -82,28 +84,26 @@ data:
     \ ret(n);\n  int num= 0;\n  cost_t sum= 0;\n  for (int i= 1; i <= n; i++) ret[i\
     \ - 1]= mt[i] - 1;\n  for (int i= 0; i < n; i++)\n   if (ret[i] > i) num++, sum+=\
     \ G[ret[i] + 1][i + 1].w;\n  return std::make_tuple(num, sum / 2, ret);\n }\n\
-    };\n#line 4 \"test/yosupo/general_weighted_matching.test.cpp\"\nusing namespace\
-    \ std;\n\nint main() {\n  int n, m;\n  cin >> n >> m;\n  auto solver = MatchingWeighted(n);\n\
-    \  vector g(n, vector<long long>(n));\n  for (int i = 0; i < m; i++) {\n    int\
-    \ u, v, w;\n    cin >> u >> v >> w;\n    g[u][v] = g[v][u] = w;\n    solver.add_edge(u,\
-    \ v, w);\n  }\n  auto [r1, r2, res] = solver.get_matching();\n  cout << r1 <<\
-    \ \" \" << r2 << '\\n';\n  for (int i = 0; i < n; i++)\n    if (res[i] > i) cout\
-    \ << i << \" \" << res[i] << '\\n';\n  return 0;\n}\n"
+    };\n#line 5 \"test/yosupo/general_weighted_matching.test.cpp\"\nusing namespace\
+    \ std;\nint main() {\n int n, m;\n cin >> n >> m;\n auto solver= MatchingWeighted(n);\n\
+    \ for (int i= 0; i < m; i++) {\n  int u, v, w;\n  cin >> u >> v >> w;\n  solver.add_edge(u,\
+    \ v, w);\n }\n auto [r1, r2, res]= solver.get_matching();\n cout << r1 << \" \"\
+    \ << r2 << '\\n';\n for (int i= 0; i < n; i++)\n  if (res[i] > i) cout << i <<\
+    \ \" \" << res[i] << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/general_weighted_matching\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Optimization/MatchingWeighted.hpp\"\
-    \nusing namespace std;\n\nint main() {\n  int n, m;\n  cin >> n >> m;\n  auto\
-    \ solver = MatchingWeighted(n);\n  vector g(n, vector<long long>(n));\n  for (int\
-    \ i = 0; i < m; i++) {\n    int u, v, w;\n    cin >> u >> v >> w;\n    g[u][v]\
-    \ = g[v][u] = w;\n    solver.add_edge(u, v, w);\n  }\n  auto [r1, r2, res] = solver.get_matching();\n\
-    \  cout << r1 << \" \" << r2 << '\\n';\n  for (int i = 0; i < n; i++)\n    if\
-    \ (res[i] > i) cout << i << \" \" << res[i] << '\\n';\n  return 0;\n}"
+    \n#include <iostream>\n#include <vector>\n#include \"src/Optimization/MatchingWeighted.hpp\"\
+    \nusing namespace std;\nint main() {\n int n, m;\n cin >> n >> m;\n auto solver=\
+    \ MatchingWeighted(n);\n for (int i= 0; i < m; i++) {\n  int u, v, w;\n  cin >>\
+    \ u >> v >> w;\n  solver.add_edge(u, v, w);\n }\n auto [r1, r2, res]= solver.get_matching();\n\
+    \ cout << r1 << \" \" << r2 << '\\n';\n for (int i= 0; i < n; i++)\n  if (res[i]\
+    \ > i) cout << i << \" \" << res[i] << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Optimization/MatchingWeighted.hpp
   isVerificationFile: true
   path: test/yosupo/general_weighted_matching.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:54:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 23:17:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/general_weighted_matching.test.cpp
 layout: document

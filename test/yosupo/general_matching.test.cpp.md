@@ -1,23 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/Matching.hpp
     title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
       )"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_matching
     links:
     - https://judge.yosupo.jp/problem/general_matching
   bundledCode: "#line 1 \"test/yosupo/general_matching.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/general_matching\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Optimization/Matching.hpp\"\nclass Matching {\n int n, ret;\n std::vector<std::vector<int>>\
+    \ \"https://judge.yosupo.jp/problem/general_matching\"\n#include <iostream>\n\
+    #line 2 \"src/Optimization/Matching.hpp\"\n#include <vector>\n#include <array>\n\
+    #include <queue>\nclass Matching {\n int n, ret;\n std::vector<std::vector<int>>\
     \ adj;\n std::vector<int> mt, idx, p;\n std::vector<std::array<int, 2>> es;\n\
     \ void rematch(int u, int v, int w= -1) {\n  if (w= mt[u], mt[u]= v; w == -1 ||\
     \ mt[w] != u) return;\n  if (es[u][1] == -1) {\n   rematch(mt[w]= es[u][0], w);\n\
@@ -39,26 +40,26 @@ data:
     \ void add_edge(int u, int v) { adj[u].push_back(v), adj[v].push_back(u); }\n\
     \ std::pair<int, std::vector<int>> get_matching() {\n  for (int i= 0; i < n; i++)\n\
     \   if (mt[i] == -1) ret+= check(i);\n  return std::make_pair(ret, mt);\n }\n\
-    };\n#line 4 \"test/yosupo/general_matching.test.cpp\"\nusing namespace std;\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N, M;\n  cin\
-    \ >> N >> M;\n  Matching graph(N);\n  while (M--) {\n    int u, v;\n    cin >>\
-    \ u >> v;\n    graph.add_edge(u, v);\n  }\n  auto ans = graph.get_matching();\n\
-    \  cout << ans.first << endl;\n  for (int i = 0; i < N; i++)\n    if (i < ans.second[i])\
-    \ cout << i << \" \" << ans.second[i] << endl;\n  return 0;\n}\n"
+    };\n#line 4 \"test/yosupo/general_matching.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, M;\n cin >>\
+    \ N >> M;\n Matching graph(N);\n while (M--) {\n  int u, v;\n  cin >> u >> v;\n\
+    \  graph.add_edge(u, v);\n }\n auto ans= graph.get_matching();\n cout << ans.first\
+    \ << endl;\n for (int i= 0; i < N; i++)\n  if (i < ans.second[i]) cout << i <<\
+    \ \" \" << ans.second[i] << endl;\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Optimization/Matching.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int N,\
-    \ M;\n  cin >> N >> M;\n  Matching graph(N);\n  while (M--) {\n    int u, v;\n\
-    \    cin >> u >> v;\n    graph.add_edge(u, v);\n  }\n  auto ans = graph.get_matching();\n\
-    \  cout << ans.first << endl;\n  for (int i = 0; i < N; i++)\n    if (i < ans.second[i])\
-    \ cout << i << \" \" << ans.second[i] << endl;\n  return 0;\n}"
+    \ <iostream>\n#include \"src/Optimization/Matching.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, M;\n cin >>\
+    \ N >> M;\n Matching graph(N);\n while (M--) {\n  int u, v;\n  cin >> u >> v;\n\
+    \  graph.add_edge(u, v);\n }\n auto ans= graph.get_matching();\n cout << ans.first\
+    \ << endl;\n for (int i= 0; i < N; i++)\n  if (i < ans.second[i]) cout << i <<\
+    \ \" \" << ans.second[i] << endl;\n return 0;\n}"
   dependsOn:
   - src/Optimization/Matching.hpp
   isVerificationFile: true
   path: test/yosupo/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:16:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 23:17:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/general_matching.test.cpp
 layout: document
