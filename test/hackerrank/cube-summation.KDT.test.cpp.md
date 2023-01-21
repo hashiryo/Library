@@ -10,9 +10,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/challenges/cube-summation
@@ -21,13 +21,13 @@ data:
   bundledCode: "#line 1 \"test/hackerrank/cube-summation.KDT.test.cpp\"\n#define PROBLEM\
     \ \"https://www.hackerrank.com/challenges/cube-summation\"\n#include <iostream>\n\
     #include <map>\n#include <vector>\n#include <array>\n#line 4 \"src/DataStructure/KDTree.hpp\"\
-    \n#include <algorithm>\n#include <cstddef>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
+    \n#include <algorithm>\n#include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
     \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
     \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
     \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
     \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
     \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 7 \"src/DataStructure/KDTree.hpp\"\
+    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 8 \"src/DataStructure/KDTree.hpp\"\
     \ntemplate <std::uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
     \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
     \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
@@ -155,8 +155,8 @@ data:
   isVerificationFile: true
   path: test/hackerrank/cube-summation.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 19:30:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 20:06:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/cube-summation.KDT.test.cpp
 layout: document

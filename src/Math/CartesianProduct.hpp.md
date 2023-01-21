@@ -20,22 +20,8 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Math/CartesianProduct.hpp\"\n#include <bits/stdc++.h>\n\
-    template <class... Ks> struct CartesianProduct: std::tuple<Ks...> {\n static constexpr\
-    \ int N= sizeof...(Ks);\n using Self= CartesianProduct;\n using std::tuple<Ks...>::tuple;\n\
-    \ template <class T> CartesianProduct(const T &v) { fill(v, std::make_index_sequence<N>());\
-    \ }\n template <class T, std::size_t... I> std::array<int, N> fill(const T &v,\
-    \ std::index_sequence<I...>) { return {{(void(std::get<I>(*this)= v), 0)...}};\
-    \ }\n#define HELPER(name, op) \\\n template <std::size_t... I> std::array<int,\
-    \ N> name(const Self &y, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)\
-    \ op##= std::get<I>(y)), 0)...}}; } \\\n Self &operator op##=(const Self &r) {\
-    \ return name(r, std::make_index_sequence<N>()), *this; }\n HELPER(add_assign,\
-    \ +)\n HELPER(dif_assign, -)\n HELPER(mul_assign, *)\n HELPER(div_assign, /)\n\
-    #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
-    \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
-    \ Self &r) const { return Self(*this)*= r; }\n Self operator/(const Self &r) const\
-    \ { return Self(*this)/= r; }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <class... Ks> struct CartesianProduct:\
+  bundledCode: "#line 2 \"src/Math/CartesianProduct.hpp\"\n#include <tuple>\n#include\
+    \ <array>\n#include <utility>\ntemplate <class... Ks> struct CartesianProduct:\
     \ std::tuple<Ks...> {\n static constexpr int N= sizeof...(Ks);\n using Self= CartesianProduct;\n\
     \ using std::tuple<Ks...>::tuple;\n template <class T> CartesianProduct(const\
     \ T &v) { fill(v, std::make_index_sequence<N>()); }\n template <class T, std::size_t...\
@@ -48,12 +34,27 @@ data:
     #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
     \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
     \ Self &r) const { return Self(*this)*= r; }\n Self operator/(const Self &r) const\
+    \ { return Self(*this)/= r; }\n};\n"
+  code: "#pragma once\n#include <tuple>\n#include <array>\n#include <utility>\ntemplate\
+    \ <class... Ks> struct CartesianProduct: std::tuple<Ks...> {\n static constexpr\
+    \ int N= sizeof...(Ks);\n using Self= CartesianProduct;\n using std::tuple<Ks...>::tuple;\n\
+    \ template <class T> CartesianProduct(const T &v) { fill(v, std::make_index_sequence<N>());\
+    \ }\n template <class T, std::size_t... I> std::array<int, N> fill(const T &v,\
+    \ std::index_sequence<I...>) { return {{(void(std::get<I>(*this)= v), 0)...}};\
+    \ }\n#define HELPER(name, op) \\\n template <std::size_t... I> std::array<int,\
+    \ N> name(const Self &y, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)\
+    \ op##= std::get<I>(y)), 0)...}}; } \\\n Self &operator op##=(const Self &r) {\
+    \ return name(r, std::make_index_sequence<N>()), *this; }\n HELPER(add_assign,\
+    \ +)\n HELPER(dif_assign, -)\n HELPER(mul_assign, *)\n HELPER(div_assign, /)\n\
+    #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
+    \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
+    \ Self &r) const { return Self(*this)*= r; }\n Self operator/(const Self &r) const\
     \ { return Self(*this)/= r; }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/CartesianProduct.hpp
   requiredBy: []
-  timestamp: '2023-01-01 02:59:42+09:00'
+  timestamp: '2023-01-21 20:06:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2711.rollinghash.test.cpp

@@ -29,8 +29,9 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
   bundledCode: "#line 1 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\n#define PROBLEM\
     \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\n\
-    #include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int>\
-    \ constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    #include <iostream>\n#include <string>\n#line 2 \"src/Math/ModInt.hpp\"\n#include\
+    \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -111,7 +112,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/CartesianProduct.hpp\"\ntemplate <class...\
+    \ return dat[n];\n}\n#line 5 \"src/Math/CartesianProduct.hpp\"\ntemplate <class...\
     \ Ks> struct CartesianProduct: std::tuple<Ks...> {\n static constexpr int N= sizeof...(Ks);\n\
     \ using Self= CartesianProduct;\n using std::tuple<Ks...>::tuple;\n template <class\
     \ T> CartesianProduct(const T &v) { fill(v, std::make_index_sequence<N>()); }\n\
@@ -124,7 +125,7 @@ data:
     \ *)\n HELPER(div_assign, /)\n#undef HELPER\n Self operator+(const Self &r) const\
     \ { return Self(*this)+= r; }\n Self operator-(const Self &r) const { return Self(*this)-=\
     \ r; }\n Self operator*(const Self &r) const { return Self(*this)*= r; }\n Self\
-    \ operator/(const Self &r) const { return Self(*this)/= r; }\n};\n#line 3 \"src/String/RollingHash.hpp\"\
+    \ operator/(const Self &r) const { return Self(*this)/= r; }\n};\n#line 5 \"src/String/RollingHash.hpp\"\
     \ntemplate <class K> class RollingHash {\n static inline std::vector<K> pw;\n\
     \ static inline K base;\n static inline void set_pw(int n) {\n  if (int m= pw.size();\
     \ m < n)\n   for (pw.resize(n); m < n; m++) pw[m]= pw[m - 1] * base;\n }\n std::vector<K>\
@@ -145,7 +146,7 @@ data:
     \ - hash[l] * pw[r - l];\n }\n SubString sub(int l, int r) const { return SubString{this,\
     \ l, r}; }\n};\nstd::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n static\
     \ std::mt19937_64 gen(std::random_device{}());\n return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n}\n#line 6 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\nusing namespace\
+    \ r)(gen);\n}\n#line 7 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
     \ ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using RH=\
     \ RollingHash<K>;\n K base= {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll <<\
@@ -154,14 +155,15 @@ data:
     \ (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i, i + N) == hash) cout << i\
     \ << \"\\n\";\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\
-    \n#include \"src/String/RollingHash.hpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<(1ll << 61)\
-    \ - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using RH= RollingHash<K>;\n\
-    \ K base= {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll << 61) - 2)};\n RH::set_base(base);\n\
-    \ string T, P;\n cin >> T >> P;\n RH rt(T), rp(P);\n int N= P.length(), M= T.length();\n\
-    \ auto hash= rp.get_hash();\n for (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i,\
-    \ i + N) == hash) cout << i << \"\\n\";\n return 0;\n}"
+    \n#include <iostream>\n#include <string>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/Math/CartesianProduct.hpp\"\n#include \"src/String/RollingHash.hpp\"\n\
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n\
+    \ using RH= RollingHash<K>;\n K base= {get_rand(2, (1ll << 61) - 2), get_rand(2,\
+    \ (1ll << 61) - 2)};\n RH::set_base(base);\n string T, P;\n cin >> T >> P;\n RH\
+    \ rt(T), rp(P);\n int N= P.length(), M= T.length();\n auto hash= rp.get_hash();\n\
+    \ for (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i, i + N) == hash) cout <<\
+    \ i << \"\\n\";\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -171,7 +173,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 15:27:58+09:00'
+  timestamp: '2023-01-21 20:06:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.rollinghash.test.cpp

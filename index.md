@@ -31,7 +31,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/DQuery.hpp
       title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\
         \u30A8\u30EA"
@@ -365,7 +365,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/AhoCorasick.hpp
       title: Aho-Corasick
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/String/KnuthMorrisPratt.hpp
       title: Knuth-Morris-Pratt
     - icon: ':heavy_check_mark:'
@@ -560,7 +560,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2842.BIT_2D.test.cpp
       title: test/aoj/2842.BIT_2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2842.KDT.test.cpp
       title: test/aoj/2842.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -599,7 +599,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3170.test.cpp
       title: test/aoj/3170.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ALDS1_14_B.KMP.test.cpp
       title: test/aoj/ALDS1_14_B.KMP.test.cpp
     - icon: ':heavy_check_mark:'
@@ -808,7 +808,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.primecnt.test.cpp
       title: test/atcoder/abc172_d.primecnt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -903,7 +903,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
       title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-summation.KDT.test.cpp
       title: test/hackerrank/cube-summation.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1093,7 +1093,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_range_sum.BIT.test.cpp
       title: test/yosupo/point_add_range_sum.BIT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1257,7 +1257,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.test.cpp
       title: test/yukicoder/1615.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1625.KDT.test.cpp
       title: test/yukicoder/1625.KDT.test.cpp
     - icon: ':heavy_check_mark:'
