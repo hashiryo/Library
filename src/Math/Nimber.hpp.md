@@ -12,54 +12,54 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/nimber_sqrt.test.cpp
     title: test/unit_test/nimber_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/nim_product_64.test.cpp
     title: test/yosupo/nim_product_64.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Nimber.hpp\"\n#include <array>\n#include <numeric>\n\
-    #include <utility>\nclass Nimber {\n using u64= std::uint64_t;\n using u32= std::uint32_t;\n\
-    \ using u16= std::uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
-    \ <u16 h= 3> static inline u16 half(u16 A) { return A ? pw[(ln[A] + h) % 65535]\
-    \ : 0; }\n template <u16 h= 0> static inline u16 mul(u16 A, u16 B) { return A\
-    \ && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template <u16 h= 0> static inline\
-    \ u16 mul(u16 A, u16 B, u16 C) { return A && B && C ? pw[(ln[A] + ln[B] + ln[C]\
-    \ + h) % 65535] : 0; }\n static inline u16 inv(u16 A) { return assert(A), pw[65535\
-    \ - ln[A]]; }\n static inline u16 sqrt(u16 A) { return A ? pw[u16((65537 * u32(ln[A]))\
-    \ >> 1)] : 0; }\n static inline u64 mul(u64 A, u64 B) {\n  u16 a0= u16(A), a1=\
-    \ u16(A >> 16), a2= u16(A >> 32), a3= A >> 48;\n  u16 b0= u16(B), b1= u16(B >>\
-    \ 16), b2= u16(B >> 32), b3= B >> 48;\n  u16 x0= a1 ^ a0, x1= a3 ^ a2, y0= b1\
-    \ ^ b0, y1= b3 ^ b2;\n  u16 c0= mul(a0, b0), c1= mul(x0, y0) ^ c0, c2= mul<0>(a2\
-    \ ^ a0, b2 ^ b0);\n  u16 c3= mul<0>(x0 ^ x1, y0 ^ y1) ^ c2 ^ c1;\n  c2^= (c0^=\
-    \ mul<3>(a1, b1)) ^ mul<3>(u16(a3 ^ a1), u16(b3 ^ b1));\n  c1^= mul<6>(a3, b3)\
-    \ ^ mul<3>(x1, y1);\n  c0^= mul<6>(a2, b2) ^ mul<6>(x1, y1);\n  return (u64(c3)\
-    \ << 48) | (u64(c2) << 32) | (u32(c1) << 16) | c0;\n }\n static inline u64 inv(u64\
+    #include <utility>\n#include <cassert>\nclass Nimber {\n using u64= std::uint64_t;\n\
+    \ using u32= std::uint32_t;\n using u16= std::uint16_t;\n static inline std::array<u16,\
+    \ 65536> pw, ln;\n template <u16 h= 3> static inline u16 half(u16 A) { return\
+    \ A ? pw[(ln[A] + h) % 65535] : 0; }\n template <u16 h= 0> static inline u16 mul(u16\
+    \ A, u16 B) { return A && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template\
+    \ <u16 h= 0> static inline u16 mul(u16 A, u16 B, u16 C) { return A && B && C ?\
+    \ pw[(ln[A] + ln[B] + ln[C] + h) % 65535] : 0; }\n static inline u16 inv(u16 A)\
+    \ { return assert(A), pw[65535 - ln[A]]; }\n static inline u16 sqrt(u16 A) { return\
+    \ A ? pw[u16((65537 * u32(ln[A])) >> 1)] : 0; }\n static inline u64 mul(u64 A,\
+    \ u64 B) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48;\n\
+    \  u16 b0= u16(B), b1= u16(B >> 16), b2= u16(B >> 32), b3= B >> 48;\n  u16 x0=\
+    \ a1 ^ a0, x1= a3 ^ a2, y0= b1 ^ b0, y1= b3 ^ b2;\n  u16 c0= mul(a0, b0), c1=\
+    \ mul(x0, y0) ^ c0, c2= mul<0>(a2 ^ a0, b2 ^ b0);\n  u16 c3= mul<0>(x0 ^ x1, y0\
+    \ ^ y1) ^ c2 ^ c1;\n  c2^= (c0^= mul<3>(a1, b1)) ^ mul<3>(u16(a3 ^ a1), u16(b3\
+    \ ^ b1));\n  c1^= mul<6>(a3, b3) ^ mul<3>(x1, y1);\n  c0^= mul<6>(a2, b2) ^ mul<6>(x1,\
+    \ y1);\n  return (u64(c3) << 48) | (u64(c2) << 32) | (u32(c1) << 16) | c0;\n }\n\
+    \ static inline u64 inv(u64 A) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A\
+    \ >> 32), a3= A >> 48;\n  u16 x= a2 ^ a3, y= a1 ^ a3, w= a0 ^ a2, v= a0 ^ a1;\n\
+    \  u16 b3= mul(a1, a2, a1 ^ x), b2= mul(a0, a2, a0 ^ x), b1= mul(a0, a1, a0 ^\
+    \ y), b0= mul(a0, v, w), t= mul<3>(w, x, x);\n  b0^= b1 ^ b2, b1^= b3, b2^= b3,\
+    \ b0^= b3^= mul(a0, a0, a3);\n  b1^= t ^ mul<3>(a1, y, y), b0^= t ^ mul<3>(v,\
+    \ y, y);\n  b3^= t= mul<3>(a1, a3, y) ^ mul<3>(a2, x, x);\n  b2^= t ^ mul<3>(a0,\
+    \ a3, a3) ^ mul<3>(a1, a1, a2), b3^= mul<6>(a3, a3, x);\n  b2^= mul<6>(a3, x,\
+    \ x), b1^= mul<6>(a3, a3, y ^ w), b0^= mul<6>(y, x, x);\n  b2^= mul<9>(a3, a3,\
+    \ a3), b0^= mul<9>(a3, a3, y);\n  t= mul<6>(x, b3) ^ mul<6>(a3, b2) ^ mul<3>(a1,\
+    \ b1) ^ mul(a0, b0);\n  return t= inv(t), (u64(mul(b3, t)) << 48) | (u64(mul(b2,\
+    \ t)) << 32) | (u32(mul(b1, t)) << 16) | mul(b0, t);\n }\n static inline u64 square(u64\
     \ A) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48;\n \
-    \ u16 x= a2 ^ a3, y= a1 ^ a3, w= a0 ^ a2, v= a0 ^ a1;\n  u16 b3= mul(a1, a2, a1\
-    \ ^ x), b2= mul(a0, a2, a0 ^ x), b1= mul(a0, a1, a0 ^ y), b0= mul(a0, v, w), t=\
-    \ mul<3>(w, x, x);\n  b0^= b1 ^ b2, b1^= b3, b2^= b3, b0^= b3^= mul(a0, a0, a3);\n\
-    \  b1^= t ^ mul<3>(a1, y, y), b0^= t ^ mul<3>(v, y, y);\n  b3^= t= mul<3>(a1,\
-    \ a3, y) ^ mul<3>(a2, x, x);\n  b2^= t ^ mul<3>(a0, a3, a3) ^ mul<3>(a1, a1, a2),\
-    \ b3^= mul<6>(a3, a3, x);\n  b2^= mul<6>(a3, x, x), b1^= mul<6>(a3, a3, y ^ w),\
-    \ b0^= mul<6>(y, x, x);\n  b2^= mul<9>(a3, a3, a3), b0^= mul<9>(a3, a3, y);\n\
-    \  t= mul<6>(x, b3) ^ mul<6>(a3, b2) ^ mul<3>(a1, b1) ^ mul(a0, b0);\n  return\
-    \ t= inv(t), (u64(mul(b3, t)) << 48) | (u64(mul(b2, t)) << 32) | (u32(mul(b1,\
-    \ t)) << 16) | mul(b0, t);\n }\n static inline u64 square(u64 A) {\n  u16 a0=\
-    \ u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48;\n  a3= mul(a3, a3),\
-    \ a2= mul(a2, a2), a1= mul(a1, a1), a0= mul(a0, a0);\n  a0^= half(a1) ^ half<6>(a3),\
-    \ a2^= half(a3), a1^= half(a3 ^ a2);\n  return (u64(a3) << 48) | (u64(a2) << 32)\
-    \ | (u32(a1) << 16) | a0;\n }\n static inline u64 pow(u64 A, u64 k) {\n  for (u64\
-    \ ret= 1;; A= square(A))\n   if (k & 1 ? ret= mul(ret, A) : 0; !(k>>= 1)) return\
-    \ ret;\n }\n template <int mod> static inline int mdif(int a, int b) { return\
-    \ a+= mod & -((a-= b) < 0); }\n template <int mod> static inline int mmul(int\
-    \ a, int b) { return u64(a) * b % mod; }\n static inline int minv(int a, int mod)\
-    \ {\n  int x= 1, y= 0, t= mod;\n  for (int q, z, u; t;) z= x, u= a, x= y, y= z\
-    \ - y * (q= a / t), a= t, t= u - t * q;\n  return x < 0 ? mod - (-x) % mod : x\
-    \ % mod;\n }\n static inline int log16(u16 A, u16 B) {\n  int a= ln[A], b= ln[B],\
-    \ mod= 65535;\n  if (a == 0) return b == 0 ? 1 : -1;\n  if (int g= std::gcd(a,\
+    \ a3= mul(a3, a3), a2= mul(a2, a2), a1= mul(a1, a1), a0= mul(a0, a0);\n  a0^=\
+    \ half(a1) ^ half<6>(a3), a2^= half(a3), a1^= half(a3 ^ a2);\n  return (u64(a3)\
+    \ << 48) | (u64(a2) << 32) | (u32(a1) << 16) | a0;\n }\n static inline u64 pow(u64\
+    \ A, u64 k) {\n  for (u64 ret= 1;; A= square(A))\n   if (k & 1 ? ret= mul(ret,\
+    \ A) : 0; !(k>>= 1)) return ret;\n }\n template <int mod> static inline int mdif(int\
+    \ a, int b) { return a+= mod & -((a-= b) < 0); }\n template <int mod> static inline\
+    \ int mmul(int a, int b) { return u64(a) * b % mod; }\n static inline int minv(int\
+    \ a, int mod) {\n  int x= 1, y= 0, t= mod;\n  for (int q, z, u; t;) z= x, u= a,\
+    \ x= y, y= z - y * (q= a / t), a= t, t= u - t * q;\n  return x < 0 ? mod - (-x)\
+    \ % mod : x % mod;\n }\n static inline int log16(u16 A, u16 B) {\n  int a= ln[A],\
+    \ b= ln[B], mod= 65535;\n  if (a == 0) return b == 0 ? 1 : -1;\n  if (int g= std::gcd(a,\
     \ mod); g != 1) {\n   if (b % g != 0) return -1;\n   a/= g, b/= g, mod/= g;\n\
     \  }\n  return u32(b) * minv(a, mod) % mod;\n }\n template <int period, int size>\
     \ static inline int bsgs(u64 x, u64 y) {\n  static constexpr int mask= size -\
@@ -111,8 +111,8 @@ data:
     \ { return os << r.x; }\n friend std::istream &operator>>(std::istream &is, Nimber\
     \ &r) { return is >> r.x, is; }\n};\n"
   code: "#pragma once\n#include <array>\n#include <numeric>\n#include <utility>\n\
-    class Nimber {\n using u64= std::uint64_t;\n using u32= std::uint32_t;\n using\
-    \ u16= std::uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
+    #include <cassert>\nclass Nimber {\n using u64= std::uint64_t;\n using u32= std::uint32_t;\n\
+    \ using u16= std::uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
     \ <u16 h= 3> static inline u16 half(u16 A) { return A ? pw[(ln[A] + h) % 65535]\
     \ : 0; }\n template <u16 h= 0> static inline u16 mul(u16 A, u16 B) { return A\
     \ && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template <u16 h= 0> static inline\
@@ -204,8 +204,8 @@ data:
   isVerificationFile: false
   path: src/Math/Nimber.hpp
   requiredBy: []
-  timestamp: '2023-01-21 20:48:27+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-01-21 21:04:24+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/nim_product_64.test.cpp
   - test/unit_test/nimber_log.test.cpp

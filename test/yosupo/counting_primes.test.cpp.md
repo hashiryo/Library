@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/prime_count.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
   _extendedRequiredBy: []
@@ -15,8 +15,9 @@ data:
     links:
     - https://judge.yosupo.jp/problem/counting_primes
   bundledCode: "#line 1 \"test/yosupo/counting_primes.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/counting_primes\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/prime_count.hpp\"\ntemplate <class T= __int128_t> auto polynomial_prime_sum_table(std::uint64_t\
+    \ \"https://judge.yosupo.jp/problem/counting_primes\"\n#include <iostream>\n#line\
+    \ 2 \"src/Math/prime_count.hpp\"\n#include <vector>\n#include <algorithm>\n#include\
+    \ <tuple>\n#include <cmath>\ntemplate <class T= __int128_t> auto polynomial_prime_sum_table(std::uint64_t\
     \ N, const std::vector<T> &poly) {\n const int sqrtN= std::sqrt(N), d= poly.size();\n\
     \ std::vector<int> primes;\n std::vector<T> small(sqrtN + 1, 0), large(sqrtN +\
     \ 1, 0);\n std::vector<std::vector<T>> s(d, std::vector<T>(sqrtN + 1)), l(d, std::vector<T>(sqrtN\
@@ -63,19 +64,18 @@ data:
     \ / q;\n   if (!nn) break;\n   for (int e= 2; nn; nn= double(nn) / p, e++) ret+=\
     \ rc(rc, nn, i + 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n  }\n  return ret;\n\
     \ };\n return dfs(dfs, N, 0, 1);\n}\n#line 4 \"test/yosupo/counting_primes.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  long long N;\n  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n\
-    }\n"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ long long N;\n cin >> N;\n cout << prime_count(N) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/prime_count.hpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  long long\
-    \ N;\n  cin >> N;\n  cout << prime_count(N) << '\\n';\n  return 0;\n}"
+    \ <iostream>\n#include \"src/Math/prime_count.hpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n long long N;\n cin >>\
+    \ N;\n cout << prime_count(N) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/prime_count.hpp
   isVerificationFile: true
   path: test/yosupo/counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 21:15:19+09:00'
+  timestamp: '2023-01-21 21:04:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/counting_primes.test.cpp

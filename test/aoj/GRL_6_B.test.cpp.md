@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Optimization/MinCostFlow.hpp
-    title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\
-      \u6CD5)"
+    title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B
-  bundledCode: "#line 1 \"test/aoj/GRL_6_B.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Optimization/MinCostFlow.hpp\"\ntemplate\
+  bundledCode: "#line 1 \"test/aoj/GRL_6_B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
+    \n#include <iostream>\n#line 2 \"src/Optimization/MinCostFlow.hpp\"\n#include\
+    \ <vector>\n#include <algorithm>\n#include <numeric>\n#include <cmath>\ntemplate\
     \ <typename flow_t, typename cost_t, std::int_least8_t obj= 1> class NetworkSimplex\
     \ {\n struct Node {\n  int par, pred;\n  flow_t sup;\n  cost_t pi;\n };\n struct\
     \ Edge {\n  int u, v;\n  flow_t low, up, flow;\n  cost_t cost;\n  std::int_least8_t\
@@ -89,28 +89,26 @@ data:
     \ std::int_least8_t> class FlowAlgo, typename flow_t, typename cost_t> using MinCostFlow=\
     \ FlowAlgo<flow_t, cost_t, 1>;\ntemplate <template <class, class, std::int_least8_t>\
     \ class FlowAlgo, typename flow_t, typename cost_t> using MaxGainFlow= FlowAlgo<flow_t,\
-    \ cost_t, -1>;\n#line 5 \"test/aoj/GRL_6_B.test.cpp\"\nusing namespace std;\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int V, E, F;\n \
-    \ cin >> V >> E >> F;\n  MinCostFlow<NetworkSimplex, int, int> graph(V);\n  while\
-    \ (E--) {\n    int u, v, c, d;\n    cin >> u >> v >> c >> d;\n    graph.add_edge(u,\
-    \ v, 0, c, d);\n  }\n  graph.add_supply(0, F), graph.add_demand(V - 1, F);\n \
-    \ cout << (graph.b_flow() ? graph.get_result_value() : -1) << endl;\n  return\
-    \ 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Optimization/MinCostFlow.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int V, E, F;\n  cin >> V >> E >> F;\n  MinCostFlow<NetworkSimplex, int, int>\
-    \ graph(V);\n  while (E--) {\n    int u, v, c, d;\n    cin >> u >> v >> c >> d;\n\
-    \    graph.add_edge(u, v, 0, c, d);\n  }\n  graph.add_supply(0, F), graph.add_demand(V\
-    \ - 1, F);\n  cout << (graph.b_flow() ? graph.get_result_value() : -1) << endl;\n\
-    \  return 0;\n}"
+    \ cost_t, -1>;\n#line 4 \"test/aoj/GRL_6_B.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int V, E, F;\n cin\
+    \ >> V >> E >> F;\n MinCostFlow<NetworkSimplex, int, int> graph(V);\n while (E--)\
+    \ {\n  int u, v, c, d;\n  cin >> u >> v >> c >> d;\n  graph.add_edge(u, v, 0,\
+    \ c, d);\n }\n graph.add_supply(0, F), graph.add_demand(V - 1, F);\n cout << (graph.b_flow()\
+    \ ? graph.get_result_value() : -1) << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/6/GRL_6_B\"\
+    \n#include <iostream>\n#include \"src/Optimization/MinCostFlow.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int V, E, F;\n\
+    \ cin >> V >> E >> F;\n MinCostFlow<NetworkSimplex, int, int> graph(V);\n while\
+    \ (E--) {\n  int u, v, c, d;\n  cin >> u >> v >> c >> d;\n  graph.add_edge(u,\
+    \ v, 0, c, d);\n }\n graph.add_supply(0, F), graph.add_demand(V - 1, F);\n cout\
+    \ << (graph.b_flow() ? graph.get_result_value() : -1) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Optimization/MinCostFlow.hpp
   isVerificationFile: true
   path: test/aoj/GRL_6_B.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:16:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 21:04:24+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_B.test.cpp
 layout: document

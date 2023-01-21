@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -15,16 +15,17 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
     links:
     - https://judge.yosupo.jp/problem/subset_convolution
   bundledCode: "#line 1 \"test/yosupo/subset_convolution.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/subset_convolution\"\n#include <bits/stdc++.h>\n\
+    \ \"https://judge.yosupo.jp/problem/subset_convolution\"\n#include <iostream>\n\
+    #include <vector>\n#line 2 \"src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
     \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
     \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
@@ -107,7 +108,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/SetPowerSeries.hpp\"\ntemplate <unsigned\
+    \ return dat[n];\n}\n#line 4 \"src/Math/SetPowerSeries.hpp\"\ntemplate <unsigned\
     \ short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i, j, n) \\\n for\
     \ (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ < (n); __+= _2) \\\
     \n   for (int j= __, i= j | _, ___= i; j < ___; j++, i++)\n template <typename\
@@ -202,19 +203,20 @@ data:
     \ dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for (conv_na(dp2 + m - l, in, tmp,\
     \ l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n  for (int i= n\
     \ + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n#undef SUBSET_REP\n\
-    };\n#line 5 \"test/yosupo/subset_convolution.test.cpp\"\nusing namespace std;\n\
+    };\n#line 6 \"test/yosupo/subset_convolution.test.cpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
     \ int N;\n cin >> N;\n vector<Mint> a(1 << N), b(1 << N);\n for (auto &ai: a)\
     \ cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto c= SetPowerSeries<20>::convolve(a,\
     \ b);\n for (int i= 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1\
     \ << N];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
-    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/SetPowerSeries.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(1 << N),\
-    \ b(1 << N);\n for (auto &ai: a) cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto\
-    \ c= SetPowerSeries<20>::convolve(a, b);\n for (int i= 0; i < (1 << N); i++) cout\
-    \ << c[i] << \" \\n\"[i + 1 == 1 << N];\n return 0;\n}"
+    #include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/Math/SetPowerSeries.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N;\n cin >>\
+    \ N;\n vector<Mint> a(1 << N), b(1 << N);\n for (auto &ai: a) cin >> ai;\n for\
+    \ (auto &bi: b) cin >> bi;\n auto c= SetPowerSeries<20>::convolve(a, b);\n for\
+    \ (int i= 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -223,8 +225,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 21:04:24+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp
 layout: document

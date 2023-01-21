@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/nim_product_64
@@ -17,8 +17,8 @@ data:
   bundledCode: "#line 1 \"test/yosupo/nim_product_64.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/nim_product_64\"\n#include <iostream>\n#line 2\
     \ \"src/Math/Nimber.hpp\"\n#include <array>\n#include <numeric>\n#include <utility>\n\
-    class Nimber {\n using u64= std::uint64_t;\n using u32= std::uint32_t;\n using\
-    \ u16= std::uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
+    #include <cassert>\nclass Nimber {\n using u64= std::uint64_t;\n using u32= std::uint32_t;\n\
+    \ using u16= std::uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
     \ <u16 h= 3> static inline u16 half(u16 A) { return A ? pw[(ln[A] + h) % 65535]\
     \ : 0; }\n template <u16 h= 0> static inline u16 mul(u16 A, u16 B) { return A\
     \ && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template <u16 h= 0> static inline\
@@ -119,8 +119,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/nim_product_64.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 20:48:27+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 21:04:24+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/nim_product_64.test.cpp
 layout: document

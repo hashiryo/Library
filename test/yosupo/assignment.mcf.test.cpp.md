@@ -1,39 +1,39 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Optimization/MinCostFlow.hpp
-    title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\u30B0\
-      \u6CD5)"
+    title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/assignment
     links:
     - https://judge.yosupo.jp/problem/assignment
   bundledCode: "#line 1 \"test/yosupo/assignment.mcf.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/assignment\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Optimization/MinCostFlow.hpp\"\ntemplate <typename flow_t, typename\
-    \ cost_t, std::int_least8_t obj= 1> class NetworkSimplex {\n struct Node {\n \
-    \ int par, pred;\n  flow_t sup;\n  cost_t pi;\n };\n struct Edge {\n  int u, v;\n\
-    \  flow_t low, up, flow;\n  cost_t cost;\n  std::int_least8_t state= 1;\n };\n\
-    \ int n, m= 0;\n std::vector<Node> ns;\n std::vector<Edge> es;\n std::vector<int>\
-    \ bfs, next, prev;\n inline void link(int u, int v) { next[u]= v, prev[v]= u;\
-    \ }\n inline void link(int u, int v, int w) { link(u, v), link(v, w); }\n inline\
-    \ auto opp_cost(int e) const { return es[e].cost + ns[es[e].u].pi - ns[es[e].v].pi;\
-    \ }\n inline void pivot(int in_arc) {\n  int u_in= es[in_arc].u, v_in= es[in_arc].v,\
-    \ u, e, a= u_in, b= v_in;\n  while (a != b) a= ns[a].par == -1 ? v_in : ns[a].par,\
-    \ b= ns[b].par == -1 ? u_in : ns[b].par;\n  if (es[in_arc].state == -1) std::swap(u_in,\
-    \ v_in);\n  int lca= a, side= 0, u_out= -1, i= 0, S= 0;\n  flow_t delta= es[in_arc].up;\n\
-    \  for (u= u_in; u != lca && delta > 0; u= ns[u].par) {\n   flow_t d= u == es[e=\
-    \ ns[u].pred].v ? es[e].up - es[e].flow : es[e].flow;\n   if (delta > d) delta=\
-    \ d, u_out= u, side= 1;\n  }\n  for (u= v_in; u != lca; u= ns[u].par) {\n   flow_t\
-    \ d= u == es[e= ns[u].pred].u ? es[e].up - es[e].flow : es[e].flow;\n   if (delta\
-    \ >= d) delta= d, u_out= u, side= -1;\n  }\n  if (delta > 0) {\n   es[in_arc].flow+=\
+    https://judge.yosupo.jp/problem/assignment\"\n#include <iostream>\n#include <vector>\n\
+    #line 3 \"src/Optimization/MinCostFlow.hpp\"\n#include <algorithm>\n#include <numeric>\n\
+    #include <cmath>\ntemplate <typename flow_t, typename cost_t, std::int_least8_t\
+    \ obj= 1> class NetworkSimplex {\n struct Node {\n  int par, pred;\n  flow_t sup;\n\
+    \  cost_t pi;\n };\n struct Edge {\n  int u, v;\n  flow_t low, up, flow;\n  cost_t\
+    \ cost;\n  std::int_least8_t state= 1;\n };\n int n, m= 0;\n std::vector<Node>\
+    \ ns;\n std::vector<Edge> es;\n std::vector<int> bfs, next, prev;\n inline void\
+    \ link(int u, int v) { next[u]= v, prev[v]= u; }\n inline void link(int u, int\
+    \ v, int w) { link(u, v), link(v, w); }\n inline auto opp_cost(int e) const {\
+    \ return es[e].cost + ns[es[e].u].pi - ns[es[e].v].pi; }\n inline void pivot(int\
+    \ in_arc) {\n  int u_in= es[in_arc].u, v_in= es[in_arc].v, u, e, a= u_in, b= v_in;\n\
+    \  while (a != b) a= ns[a].par == -1 ? v_in : ns[a].par, b= ns[b].par == -1 ?\
+    \ u_in : ns[b].par;\n  if (es[in_arc].state == -1) std::swap(u_in, v_in);\n  int\
+    \ lca= a, side= 0, u_out= -1, i= 0, S= 0;\n  flow_t delta= es[in_arc].up;\n  for\
+    \ (u= u_in; u != lca && delta > 0; u= ns[u].par) {\n   flow_t d= u == es[e= ns[u].pred].v\
+    \ ? es[e].up - es[e].flow : es[e].flow;\n   if (delta > d) delta= d, u_out= u,\
+    \ side= 1;\n  }\n  for (u= v_in; u != lca; u= ns[u].par) {\n   flow_t d= u ==\
+    \ es[e= ns[u].pred].u ? es[e].up - es[e].flow : es[e].flow;\n   if (delta >= d)\
+    \ delta= d, u_out= u, side= -1;\n  }\n  if (delta > 0) {\n   es[in_arc].flow+=\
     \ delta*= es[in_arc].state;\n   for (u= es[in_arc].u; u != lca; u= ns[u].par)\
     \ es[e].flow+= u == es[e= ns[u].pred].u ? -delta : delta;\n   for (u= es[in_arc].v;\
     \ u != lca; u= ns[u].par) es[e].flow+= u == es[e= ns[u].pred].u ? delta : -delta;\n\
@@ -90,38 +90,36 @@ data:
     \ std::int_least8_t> class FlowAlgo, typename flow_t, typename cost_t> using MinCostFlow=\
     \ FlowAlgo<flow_t, cost_t, 1>;\ntemplate <template <class, class, std::int_least8_t>\
     \ class FlowAlgo, typename flow_t, typename cost_t> using MaxGainFlow= FlowAlgo<flow_t,\
-    \ cost_t, -1>;\n#line 4 \"test/yosupo/assignment.mcf.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
-    \ MCF = MinCostFlow<NetworkSimplex, long long, long long>;\n  int N;\n  cin >>\
-    \ N;\n  MCF graph;\n  vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n\
-    \  auto v_left = graph.add_vertices(N);\n  auto v_right = graph.add_vertices(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    graph.add_supply(v_left[i], 1);\n    graph.add_demand(v_right[i],\
-    \ 1);\n  }\n  for (int i = 0; i < N; i++) {\n    for (int j = 0; j < N; j++) {\n\
-    \      long long A;\n      cin >> A;\n      edges[i][j] = graph.add_edge(v_left[i],\
-    \ v_right[j], 0, 1, A);\n    }\n  }\n  graph.b_flow();\n  cout << graph.get_result_value()\
-    \ << endl;\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j < N; j++)\n \
-    \     if (edges[i][j].flow()) cout << j << \" \\n\"[i == N - 1];\n  return 0;\n\
-    }\n"
+    \ cost_t, -1>;\n#line 5 \"test/yosupo/assignment.mcf.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using MCF=\
+    \ MinCostFlow<NetworkSimplex, long long, long long>;\n int N;\n cin >> N;\n MCF\
+    \ graph;\n vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n auto\
+    \ v_left= graph.add_vertices(N);\n auto v_right= graph.add_vertices(N);\n for\
+    \ (int i= 0; i < N; i++) {\n  graph.add_supply(v_left[i], 1);\n  graph.add_demand(v_right[i],\
+    \ 1);\n }\n for (int i= 0; i < N; i++) {\n  for (int j= 0; j < N; j++) {\n   long\
+    \ long A;\n   cin >> A;\n   edges[i][j]= graph.add_edge(v_left[i], v_right[j],\
+    \ 0, 1, A);\n  }\n }\n graph.b_flow();\n cout << graph.get_result_value() << endl;\n\
+    \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++)\n   if (edges[i][j].flow())\
+    \ cout << j << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Optimization/MinCostFlow.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
-    \ MCF = MinCostFlow<NetworkSimplex, long long, long long>;\n  int N;\n  cin >>\
-    \ N;\n  MCF graph;\n  vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n\
-    \  auto v_left = graph.add_vertices(N);\n  auto v_right = graph.add_vertices(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    graph.add_supply(v_left[i], 1);\n    graph.add_demand(v_right[i],\
-    \ 1);\n  }\n  for (int i = 0; i < N; i++) {\n    for (int j = 0; j < N; j++) {\n\
-    \      long long A;\n      cin >> A;\n      edges[i][j] = graph.add_edge(v_left[i],\
-    \ v_right[j], 0, 1, A);\n    }\n  }\n  graph.b_flow();\n  cout << graph.get_result_value()\
-    \ << endl;\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j < N; j++)\n \
-    \     if (edges[i][j].flow()) cout << j << \" \\n\"[i == N - 1];\n  return 0;\n\
-    }\n"
+    \ <iostream>\n#include <vector>\n#include \"src/Optimization/MinCostFlow.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using MCF= MinCostFlow<NetworkSimplex, long long, long long>;\n int N;\n cin\
+    \ >> N;\n MCF graph;\n vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n\
+    \ auto v_left= graph.add_vertices(N);\n auto v_right= graph.add_vertices(N);\n\
+    \ for (int i= 0; i < N; i++) {\n  graph.add_supply(v_left[i], 1);\n  graph.add_demand(v_right[i],\
+    \ 1);\n }\n for (int i= 0; i < N; i++) {\n  for (int j= 0; j < N; j++) {\n   long\
+    \ long A;\n   cin >> A;\n   edges[i][j]= graph.add_edge(v_left[i], v_right[j],\
+    \ 0, 1, A);\n  }\n }\n graph.b_flow();\n cout << graph.get_result_value() << endl;\n\
+    \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++)\n   if (edges[i][j].flow())\
+    \ cout << j << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   dependsOn:
   - src/Optimization/MinCostFlow.hpp
   isVerificationFile: true
   path: test/yosupo/assignment.mcf.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 23:16:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 21:04:24+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/assignment.mcf.test.cpp
 layout: document

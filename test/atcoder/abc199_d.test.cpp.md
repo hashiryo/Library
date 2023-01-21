@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc199/tasks/abc199_d
     links:
     - https://atcoder.jp/contests/abc199/tasks/abc199_d
   bundledCode: "#line 1 \"test/atcoder/abc199_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc199/tasks/abc199_d\"\
-    \n\n#include <bits/stdc++.h>\n#line 3 \"src/Math/SetPowerSeries.hpp\"\ntemplate\
-    \ <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i, j,\
-    \ n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ < (n);\
-    \ __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j < ___; j++, i++)\n template\
-    \ <typename T> static inline void ranked_zeta_tr(const T f[], T ret[][MAX_N +\
-    \ 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]=\
-    \ f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
-    \ d--;) ret[S][d]+= ret[U][d];\n }\n template <typename T> static inline void\
-    \ conv_na(const T f[], const T g[], T ret[], const int sz) {\n  for (int s= sz,\
-    \ t; s--;)\n   for (ret[t= s]= f[s] * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n\
-    \ }\n template <typename T> static inline void conv_tr(const T f[], const T g[],\
-    \ T ret[], const int sz) {\n  static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N\
-    \ + 1];\n  T tmp[MAX_N + 1];\n  ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G,\
-    \ sz);\n  const int n= __builtin_ctz(sz);\n  for (int S= sz, c, d, e, bg; S--;)\
-    \ {\n   c= __builtin_popcount(S), bg= std::min(2 * c, n);\n   for (d= bg; d >=\
-    \ c; d--)\n    for (tmp[d]= 0, e= d - c; e <= c; e++) tmp[d]+= F[S][e] * G[S][d\
-    \ - e];\n   for (d= bg; d >= c; d--) F[S][d]= tmp[d];\n  }\n  SUBSET_REP(S, U,\
-    \ sz)\n  for (int c= __builtin_popcount(U), d= std::min(2 * c, n); d > c; d--)\
-    \ F[S][d]-= F[U][d];\n  for (int S= sz; S--;) ret[S]= F[S][__builtin_popcount(S)];\n\
+    \n#include <iostream>\n#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n\
+    #include <vector>\ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries {\n\
+    #define SUBSET_REP(i, j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __=\
+    \ 0, _2= _ << 1; __ < (n); __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j\
+    \ < ___; j++, i++)\n template <typename T> static inline void ranked_zeta_tr(const\
+    \ T f[], T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c=\
+    \ __builtin_popcount(S)]= f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U,\
+    \ sz)\n  for (int d= __builtin_popcount(S); d--;) ret[S][d]+= ret[U][d];\n }\n\
+    \ template <typename T> static inline void conv_na(const T f[], const T g[], T\
+    \ ret[], const int sz) {\n  for (int s= sz, t; s--;)\n   for (ret[t= s]= f[s]\
+    \ * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n }\n template <typename T> static\
+    \ inline void conv_tr(const T f[], const T g[], T ret[], const int sz) {\n  static\
+    \ T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n  T tmp[MAX_N + 1];\n\
+    \  ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n  const int n= __builtin_ctz(sz);\n\
+    \  for (int S= sz, c, d, e, bg; S--;) {\n   c= __builtin_popcount(S), bg= std::min(2\
+    \ * c, n);\n   for (d= bg; d >= c; d--)\n    for (tmp[d]= 0, e= d - c; e <= c;\
+    \ e++) tmp[d]+= F[S][e] * G[S][d - e];\n   for (d= bg; d >= c; d--) F[S][d]= tmp[d];\n\
+    \  }\n  SUBSET_REP(S, U, sz)\n  for (int c= __builtin_popcount(U), d= std::min(2\
+    \ * c, n); d > c; d--) F[S][d]-= F[U][d];\n  for (int S= sz; S--;) ret[S]= F[S][__builtin_popcount(S)];\n\
     \ }\n template <typename T, class F> static inline void onconv_na(const T g[],\
     \ T ret[], const F &phi, const int sz) {\n  for (int s= 1, t; s < sz; phi(s, ret[s]),\
     \ s++)\n   for (ret[t= s]= 0; t; --t&= s) ret[s]+= ret[s ^ t] * g[t];\n }\n template\
@@ -114,7 +114,7 @@ data:
     \ dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for (conv_na(dp2 + m - l, in, tmp,\
     \ l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n  for (int i= n\
     \ + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n#undef SUBSET_REP\n\
-    };\n#line 4 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\ntemplate <unsigned\
+    };\n#line 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\ntemplate <unsigned\
     \ short MAX_V= 21> class UndirectedGraphSetPowerSeries {\n using SPS= SetPowerSeries<MAX_V>;\n\
     \ template <class T> using sps= std::vector<T>;\n template <class T> using poly=\
     \ std::vector<T>;\n const unsigned V, sz;\n unsigned adj[MAX_V][MAX_V]= {0}, edge[MAX_V]=\
@@ -229,30 +229,28 @@ data:
     \ std::copy(h.begin(), h.end(), std::back_inserter(g));\n  }\n  for (x-= 1, t=\
     \ ~0, j= 0, i= V; i--;) j+= adj[i][i];\n  for (bfs((s= sz) - 1, [&](int u) { t^=\
     \ u; }); --s&= t;) g[s]*= x;\n  return SPS::exp(g)[sz - 1] * pow(y, j);\n }\n\
-    };\n#line 6 \"test/atcoder/abc199_d.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, M;\n  cin >> N >>\
-    \ M;\n  UndirectedGraphSetPowerSeries<20> g(N);\n  for (int i = 0; i < M; i++)\
-    \ {\n    int A, B;\n    cin >> A >> B;\n    g.add_edge(--A, --B);\n  }\n  auto\
-    \ tmp = g.colorings_using_exactly_k_colors_num<long long>();\n  long long ans\
-    \ = 0, fact = 1;\n  for (int i = 0; i < min(3, N); i++) fact *= 3 - i, ans +=\
-    \ fact * tmp[i + 1];\n  cout << ans << '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc199/tasks/abc199_d\"\n\n\
-    #include <bits/stdc++.h>\n#include \"src/Math/SetPowerSeries.hpp\"\n#include \"\
-    src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nusing namespace std;\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int N, M;\n  cin >> N >>\
-    \ M;\n  UndirectedGraphSetPowerSeries<20> g(N);\n  for (int i = 0; i < M; i++)\
-    \ {\n    int A, B;\n    cin >> A >> B;\n    g.add_edge(--A, --B);\n  }\n  auto\
-    \ tmp = g.colorings_using_exactly_k_colors_num<long long>();\n  long long ans\
-    \ = 0, fact = 1;\n  for (int i = 0; i < min(3, N); i++) fact *= 3 - i, ans +=\
-    \ fact * tmp[i + 1];\n  cout << ans << '\\n';\n  return 0;\n}"
+    };\n#line 5 \"test/atcoder/abc199_d.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, M;\n cin >> N >> M;\n\
+    \ UndirectedGraphSetPowerSeries<20> g(N);\n for (int i= 0; i < M; i++) {\n  int\
+    \ A, B;\n  cin >> A >> B;\n  g.add_edge(--A, --B);\n }\n auto tmp= g.colorings_using_exactly_k_colors_num<long\
+    \ long>();\n long long ans= 0, fact= 1;\n for (int i= 0; i < min(3, N); i++) fact*=\
+    \ 3 - i, ans+= fact * tmp[i + 1];\n cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc199/tasks/abc199_d\"\n#include\
+    \ <iostream>\n#include \"src/Math/SetPowerSeries.hpp\"\n#include \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries<20> g(N);\n for (int\
+    \ i= 0; i < M; i++) {\n  int A, B;\n  cin >> A >> B;\n  g.add_edge(--A, --B);\n\
+    \ }\n auto tmp= g.colorings_using_exactly_k_colors_num<long long>();\n long long\
+    \ ans= 0, fact= 1;\n for (int i= 0; i < min(3, N); i++) fact*= 3 - i, ans+= fact\
+    \ * tmp[i + 1];\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/SetPowerSeries.hpp
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
   isVerificationFile: true
   path: test/atcoder/abc199_d.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 22:09:43+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 21:04:24+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc199_d.test.cpp
 layout: document
