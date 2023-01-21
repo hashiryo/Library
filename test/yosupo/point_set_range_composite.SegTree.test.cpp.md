@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
@@ -25,8 +25,8 @@ data:
     - https://judge.yosupo.jp/problem/point_set_range_composite
   bundledCode: "#line 1 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SegmentTree.hpp\"\ntemplate\
-    \ <typename M> struct SegmentTree {\n using T= typename M::T;\n SegmentTree()\
+    \n#include <iostream>\n#include <vector>\n#include <utility>\n#line 3 \"src/DataStructure/SegmentTree.hpp\"\
+    \ntemplate <typename M> struct SegmentTree {\n using T= typename M::T;\n SegmentTree()\
     \ {}\n SegmentTree(int n_): n(n_), dat(n << 1, M::ti()) {}\n SegmentTree(int n_,\
     \ T v): n(n_), dat(n << 1, M::ti()) {\n  for (int i= n; i--;) dat[i + n]= v;\n\
     \  rebuild();\n }\n SegmentTree(const std::vector<T> &v): n(v.size()), dat(n <<\
@@ -52,8 +52,9 @@ data:
     \ dat[i]); check(tmp)) {\n    while (i < n)\n     if (tmp= calc_op<last>(val,\
     \ dat[i= i << 1 | last]); !check(tmp)) val= tmp, i-= last * 2 - 1;\n    return\
     \ i - n + last;\n   } else val= tmp;\n  }\n  return -1;\n }\nprivate:\n const\
-    \ int n;\n std::vector<T> dat;\n};\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate\
-    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ int n;\n std::vector<T> dat;\n};\n#line 2 \"src/Math/ModInt.hpp\"\n#include\
+    \ <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -134,7 +135,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 5 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
+    \ return dat[n];\n}\n#line 7 \"test/yosupo/point_set_range_composite.SegTree.test.cpp\"\
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RcompositeQ {\n\
     \ using T= pair<Mint, Mint>;\n static T ti() { return make_pair(Mint(1), Mint(0));\
     \ }\n static T op(const T &l, const T &r) { return make_pair(r.first * l.first,\
@@ -146,8 +147,8 @@ data:
     \ ans.first * x + ans.second << endl;\n  } else {\n   int p;\n   Mint c, d;\n\
     \   cin >> p >> c >> d;\n   seg.set(p, {c, d});\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
+    \n#include <iostream>\n#include <vector>\n#include <utility>\n#include \"src/DataStructure/SegmentTree.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
     struct RcompositeQ {\n using T= pair<Mint, Mint>;\n static T ti() { return make_pair(Mint(1),\
     \ Mint(0)); }\n static T op(const T &l, const T &r) { return make_pair(r.first\
     \ * l.first, r.first * l.second + r.second); }\n};\nsigned main() {\n cin.tie(0);\n\
@@ -166,8 +167,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_set_range_composite.SegTree.test.cpp
   requiredBy: []
-  timestamp: '2023-01-19 12:48:01+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-21 21:27:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_set_range_composite.SegTree.test.cpp
 layout: document

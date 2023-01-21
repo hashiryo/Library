@@ -2,15 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2345.test.cpp
     title: test/aoj/2345.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc199_d.test.cpp
     title: test/atcoder/abc199_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -28,11 +28,11 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n#include\
-    \ <vector>\ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define\
-    \ SUBSET_REP(i, j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2=\
-    \ _ << 1; __ < (n); __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j < ___;\
-    \ j++, i++)\n template <typename T> static inline void ranked_zeta_tr(const T\
-    \ f[], T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c=\
+    \ <vector>\n#include <cassert>\ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries\
+    \ {\n#define SUBSET_REP(i, j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int\
+    \ __= 0, _2= _ << 1; __ < (n); __+= _2) \\\n   for (int j= __, i= j | _, ___=\
+    \ i; j < ___; j++, i++)\n template <typename T> static inline void ranked_zeta_tr(const\
+    \ T f[], T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c=\
     \ __builtin_popcount(S)]= f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U,\
     \ sz)\n  for (int d= __builtin_popcount(S); d--;) ret[S][d]+= ret[U][d];\n }\n\
     \ template <typename T> static inline void conv_na(const T f[], const T g[], T\
@@ -123,13 +123,13 @@ data:
     \ l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n  for (int i= n\
     \ + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n#undef SUBSET_REP\n\
     };\n"
-  code: "#pragma once\n#include <algorithm>\n#include <vector>\ntemplate <unsigned\
-    \ short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i, j, n) \\\n for\
-    \ (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ < (n); __+= _2) \\\
-    \n   for (int j= __, i= j | _, ___= i; j < ___; j++, i++)\n template <typename\
-    \ T> static inline void ranked_zeta_tr(const T f[], T ret[][MAX_N + 1], const\
-    \ int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]= f[S],\
-    \ std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
+  code: "#pragma once\n#include <algorithm>\n#include <vector>\n#include <cassert>\n\
+    template <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i,\
+    \ j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ <\
+    \ (n); __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j < ___; j++, i++)\n\
+    \ template <typename T> static inline void ranked_zeta_tr(const T f[], T ret[][MAX_N\
+    \ + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]=\
+    \ f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
     \ d--;) ret[S][d]+= ret[U][d];\n }\n template <typename T> static inline void\
     \ conv_na(const T f[], const T g[], T ret[], const int sz) {\n  for (int s= sz,\
     \ t; s--;)\n   for (ret[t= s]= f[s] * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n\
@@ -224,7 +224,7 @@ data:
   path: src/Math/SetPowerSeries.hpp
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
-  timestamp: '2023-01-21 21:04:24+09:00'
+  timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2345.test.cpp

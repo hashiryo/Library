@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/PersistentArray.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/DataStructure/PersistentArray.hpp\"\n#include <vector>\n\
     template <class T, std::size_t M= 8> class PersistentArray {\n struct Node {\n\
     \  T val;\n  Node *ch[M];\n } * root;\n T get(Node *&t, std::size_t k) { return\
     \ t ? (k ? get(t->ch[(k - 1) % M], (k - 1) / M) : t->val) : T(); }\n bool is_null(Node\
@@ -33,10 +33,10 @@ data:
     \ k) { return is_null(root, k); }\n T get(std::size_t k) { return get(root, k);\
     \ }\n T &at(std::size_t k) { return at<true>(root, k); }\n T &operator[](std::size_t\
     \ k) { return at(k); }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <class T, std::size_t M=\
-    \ 8> class PersistentArray {\n struct Node {\n  T val;\n  Node *ch[M];\n } * root;\n\
-    \ T get(Node *&t, std::size_t k) { return t ? (k ? get(t->ch[(k - 1) % M], (k\
-    \ - 1) / M) : t->val) : T(); }\n bool is_null(Node *&t, std::size_t k) { return\
+  code: "#pragma once\n#include <vector>\ntemplate <class T, std::size_t M= 8> class\
+    \ PersistentArray {\n struct Node {\n  T val;\n  Node *ch[M];\n } * root;\n T\
+    \ get(Node *&t, std::size_t k) { return t ? (k ? get(t->ch[(k - 1) % M], (k -\
+    \ 1) / M) : t->val) : T(); }\n bool is_null(Node *&t, std::size_t k) { return\
     \ t ? (k ? is_null(t->ch[(k - 1) % M], (k - 1) / M) : false) : true; }\n template\
     \ <bool persistent= true> T &at(Node *&t, std::size_t k) {\n  if (!t) t= new Node();\n\
     \  else if constexpr (persistent) t= new Node(*t);\n  return k ? at<persistent>(t->ch[(k\
@@ -53,7 +53,7 @@ data:
   path: src/DataStructure/PersistentArray.hpp
   requiredBy:
   - src/DataStructure/UnionFind_Persistent.hpp
-  timestamp: '2023-01-08 18:54:29+09:00'
+  timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/persistent_unionfind.test.cpp

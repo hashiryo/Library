@@ -22,23 +22,26 @@ data:
     links:
     - https://atcoder.jp/contests/abc133/tasks/abc133_f
   bundledCode: "#line 1 \"test/atcoder/abc133_f.PerArr.test.cpp\"\n#define PROBLEM\
-    \ \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n\n// \u6C38\u7D9A\u914D\
-    \u5217(at) \u306E verify\n\n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/PersistentArray.hpp\"\
-    \ntemplate <class T, std::size_t M= 8> class PersistentArray {\n struct Node {\n\
-    \  T val;\n  Node *ch[M];\n } * root;\n T get(Node *&t, std::size_t k) { return\
-    \ t ? (k ? get(t->ch[(k - 1) % M], (k - 1) / M) : t->val) : T(); }\n bool is_null(Node\
-    \ *&t, std::size_t k) { return t ? (k ? is_null(t->ch[(k - 1) % M], (k - 1) /\
-    \ M) : false) : true; }\n template <bool persistent= true> T &at(Node *&t, std::size_t\
-    \ k) {\n  if (!t) t= new Node();\n  else if constexpr (persistent) t= new Node(*t);\n\
-    \  return k ? at<persistent>(t->ch[(k - 1) % M], (k - 1) / M) : t->val;\n }\n\
-    public:\n PersistentArray(): root(nullptr) {}\n PersistentArray(std::size_t n,\
-    \ T v): root(nullptr) {\n  for (std::size_t i= n; i--;) at<false>(root, i)= v;\n\
-    \ }\n PersistentArray(T *bg, T *ed): root(nullptr) {\n  for (std::size_t i= ed\
-    \ - bg; i--;) at<false>(root, i)= *(bg + i);\n }\n PersistentArray(const std::vector<T>\
-    \ &ar): PersistentArray(ar.data(), ar.data() + ar.size()) {}\n bool is_null(std::size_t\
-    \ k) { return is_null(root, k); }\n T get(std::size_t k) { return get(root, k);\
-    \ }\n T &at(std::size_t k) { return at<true>(root, k); }\n T &operator[](std::size_t\
-    \ k) { return at(k); }\n};\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    \ \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n// \u6C38\u7D9A\u914D\
+    \u5217(at) \u306E verify\n#include <iostream>\n#include <vector>\n#include <tuple>\n\
+    #line 3 \"src/DataStructure/PersistentArray.hpp\"\ntemplate <class T, std::size_t\
+    \ M= 8> class PersistentArray {\n struct Node {\n  T val;\n  Node *ch[M];\n }\
+    \ * root;\n T get(Node *&t, std::size_t k) { return t ? (k ? get(t->ch[(k - 1)\
+    \ % M], (k - 1) / M) : t->val) : T(); }\n bool is_null(Node *&t, std::size_t k)\
+    \ { return t ? (k ? is_null(t->ch[(k - 1) % M], (k - 1) / M) : false) : true;\
+    \ }\n template <bool persistent= true> T &at(Node *&t, std::size_t k) {\n  if\
+    \ (!t) t= new Node();\n  else if constexpr (persistent) t= new Node(*t);\n  return\
+    \ k ? at<persistent>(t->ch[(k - 1) % M], (k - 1) / M) : t->val;\n }\npublic:\n\
+    \ PersistentArray(): root(nullptr) {}\n PersistentArray(std::size_t n, T v): root(nullptr)\
+    \ {\n  for (std::size_t i= n; i--;) at<false>(root, i)= v;\n }\n PersistentArray(T\
+    \ *bg, T *ed): root(nullptr) {\n  for (std::size_t i= ed - bg; i--;) at<false>(root,\
+    \ i)= *(bg + i);\n }\n PersistentArray(const std::vector<T> &ar): PersistentArray(ar.data(),\
+    \ ar.data() + ar.size()) {}\n bool is_null(std::size_t k) { return is_null(root,\
+    \ k); }\n T get(std::size_t k) { return get(root, k); }\n T &at(std::size_t k)\
+    \ { return at<true>(root, k); }\n T &operator[](std::size_t k) { return at(k);\
+    \ }\n};\n#line 2 \"src/DataStructure/LinkCutTree.hpp\"\n#include <algorithm>\n\
+    #line 4 \"src/DataStructure/LinkCutTree.hpp\"\n#include <string>\n#include <cstddef>\n\
+    #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
     #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
     \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
     \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
@@ -112,39 +115,36 @@ data:
     \ || dual<M>::value) ret+= \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup<M>::value)\
     \ ret+= \"\\\"fold\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\
     \" \";\n  return ret;\n }\n};\n#line 8 \"test/atcoder/abc133_f.PerArr.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree lct(N);\n  vector<tuple<int, int,\
-    \ int>> adj[N];\n  for (int i = 0; i < N - 1; i++) {\n    int a, b, c, d;\n  \
-    \  cin >> a >> b >> c >> d;\n    lct.link(--a, --b);\n    adj[a].emplace_back(b,\
-    \ c, d);\n    adj[b].emplace_back(a, c, d);\n  }\n  using PerArr = PersistentArray<int,\
-    \ 8>;\n  PerArr Arr1[N], Arr2[N];\n  int sum[N];\n  sum[0] = 0;\n  auto dfs =\
-    \ [&adj, &Arr1, &Arr2, &sum](auto f, int v, int p) -> void {\n    for (auto [u,\
-    \ c, d] : adj[v])\n      if (u != p) {\n        Arr1[u] = Arr1[v], Arr2[u] = Arr2[v];\n\
-    \        Arr1[u][c] += 1, Arr2[u][c] += d;\n        sum[u] = sum[v] + d;\n   \
-    \     f(f, u, v);\n      }\n  };\n  dfs(dfs, 0, -1);\n  lct.evert(0);\n  for (int\
-    \ i = 0; i < Q; i++) {\n    int x, y, u, v;\n    cin >> x >> y >> u >> v;\n  \
-    \  int lca = lct.lca(--u, --v);\n    cout << sum[u] + sum[v] - 2 * sum[lca] +\n\
-    \                y * (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x))\
-    \ -\n                (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\n\
-    \         << '\\n';\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n\n\
-    // \u6C38\u7D9A\u914D\u5217(at) \u306E verify\n\n#include <bits/stdc++.h>\n#include\
-    \ \"src/DataStructure/PersistentArray.hpp\"\n#include \"src/DataStructure/LinkCutTree.hpp\"\
-    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree lct(N);\n  vector<tuple<int, int,\
-    \ int>> adj[N];\n  for (int i = 0; i < N - 1; i++) {\n    int a, b, c, d;\n  \
-    \  cin >> a >> b >> c >> d;\n    lct.link(--a, --b);\n    adj[a].emplace_back(b,\
-    \ c, d);\n    adj[b].emplace_back(a, c, d);\n  }\n  using PerArr = PersistentArray<int,\
-    \ 8>;\n  PerArr Arr1[N], Arr2[N];\n  int sum[N];\n  sum[0] = 0;\n  auto dfs =\
-    \ [&adj, &Arr1, &Arr2, &sum](auto f, int v, int p) -> void {\n    for (auto [u,\
-    \ c, d] : adj[v])\n      if (u != p) {\n        Arr1[u] = Arr1[v], Arr2[u] = Arr2[v];\n\
-    \        Arr1[u][c] += 1, Arr2[u][c] += d;\n        sum[u] = sum[v] + d;\n   \
-    \     f(f, u, v);\n      }\n  };\n  dfs(dfs, 0, -1);\n  lct.evert(0);\n  for (int\
-    \ i = 0; i < Q; i++) {\n    int x, y, u, v;\n    cin >> x >> y >> u >> v;\n  \
-    \  int lca = lct.lca(--u, --v);\n    cout << sum[u] + sum[v] - 2 * sum[lca] +\n\
-    \                y * (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x))\
-    \ -\n                (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\n\
-    \         << '\\n';\n  }\n  return 0;\n}"
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n LinkCutTree lct(N);\n vector<tuple<int, int, int>>\
+    \ adj[N];\n for (int i= 0; i < N - 1; i++) {\n  int a, b, c, d;\n  cin >> a >>\
+    \ b >> c >> d;\n  lct.link(--a, --b);\n  adj[a].emplace_back(b, c, d);\n  adj[b].emplace_back(a,\
+    \ c, d);\n }\n using PerArr= PersistentArray<int, 8>;\n PerArr Arr1[N], Arr2[N];\n\
+    \ int sum[N];\n sum[0]= 0;\n auto dfs= [&adj, &Arr1, &Arr2, &sum](auto f, int\
+    \ v, int p) -> void {\n  for (auto [u, c, d]: adj[v])\n   if (u != p) {\n    Arr1[u]=\
+    \ Arr1[v], Arr2[u]= Arr2[v];\n    Arr1[u][c]+= 1, Arr2[u][c]+= d;\n    sum[u]=\
+    \ sum[v] + d;\n    f(f, u, v);\n   }\n };\n dfs(dfs, 0, -1);\n lct.evert(0);\n\
+    \ for (int i= 0; i < Q; i++) {\n  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n\
+    \  int lca= lct.lca(--u, --v);\n  cout << sum[u] + sum[v] - 2 * sum[lca] + y *\
+    \ (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) +\
+    \ Arr2[v].get(x) - 2 * Arr2[lca].get(x)) << '\\n';\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n//\
+    \ \u6C38\u7D9A\u914D\u5217(at) \u306E verify\n#include <iostream>\n#include <vector>\n\
+    #include <tuple>\n#include \"src/DataStructure/PersistentArray.hpp\"\n#include\
+    \ \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n LinkCutTree\
+    \ lct(N);\n vector<tuple<int, int, int>> adj[N];\n for (int i= 0; i < N - 1; i++)\
+    \ {\n  int a, b, c, d;\n  cin >> a >> b >> c >> d;\n  lct.link(--a, --b);\n  adj[a].emplace_back(b,\
+    \ c, d);\n  adj[b].emplace_back(a, c, d);\n }\n using PerArr= PersistentArray<int,\
+    \ 8>;\n PerArr Arr1[N], Arr2[N];\n int sum[N];\n sum[0]= 0;\n auto dfs= [&adj,\
+    \ &Arr1, &Arr2, &sum](auto f, int v, int p) -> void {\n  for (auto [u, c, d]:\
+    \ adj[v])\n   if (u != p) {\n    Arr1[u]= Arr1[v], Arr2[u]= Arr2[v];\n    Arr1[u][c]+=\
+    \ 1, Arr2[u][c]+= d;\n    sum[u]= sum[v] + d;\n    f(f, u, v);\n   }\n };\n dfs(dfs,\
+    \ 0, -1);\n lct.evert(0);\n for (int i= 0; i < Q; i++) {\n  int x, y, u, v;\n\
+    \  cin >> x >> y >> u >> v;\n  int lca= lct.lca(--u, --v);\n  cout << sum[u] +\
+    \ sum[v] - 2 * sum[lca] + y * (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x))\
+    \ - (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x)) << '\\n';\n }\n return\
+    \ 0;\n}"
   dependsOn:
   - src/DataStructure/PersistentArray.hpp
   - src/DataStructure/LinkCutTree.hpp
@@ -152,7 +152,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.PerArr.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 16:53:05+09:00'
+  timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.PerArr.test.cpp

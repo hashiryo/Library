@@ -3,21 +3,21 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_2_A.SegTree.test.cpp
     title: test/aoj/DSL_2_A.SegTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_set_range_composite.SegTree.test.cpp
     title: test/yosupo/point_set_range_composite.SegTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/649.SegTree.test.cpp
     title: test/yukicoder/649.SegTree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/SegmentTree.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/DataStructure/SegmentTree.hpp\"\n#include <vector>\n\
     template <typename M> struct SegmentTree {\n using T= typename M::T;\n SegmentTree()\
     \ {}\n SegmentTree(int n_): n(n_), dat(n << 1, M::ti()) {}\n SegmentTree(int n_,\
     \ T v): n(n_), dat(n << 1, M::ti()) {\n  for (int i= n; i--;) dat[i + n]= v;\n\
@@ -45,7 +45,7 @@ data:
     \ dat[i= i << 1 | last]); !check(tmp)) val= tmp, i-= last * 2 - 1;\n    return\
     \ i - n + last;\n   } else val= tmp;\n  }\n  return -1;\n }\nprivate:\n const\
     \ int n;\n std::vector<T> dat;\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <typename M> struct SegmentTree\
+  code: "#pragma once\n#include <vector>\ntemplate <typename M> struct SegmentTree\
     \ {\n using T= typename M::T;\n SegmentTree() {}\n SegmentTree(int n_): n(n_),\
     \ dat(n << 1, M::ti()) {}\n SegmentTree(int n_, T v): n(n_), dat(n << 1, M::ti())\
     \ {\n  for (int i= n; i--;) dat[i + n]= v;\n  rebuild();\n }\n SegmentTree(const\
@@ -76,8 +76,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree.hpp
   requiredBy: []
-  timestamp: '2023-01-01 00:16:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 21:27:17+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/DSL_2_A.SegTree.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp

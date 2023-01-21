@@ -3,13 +3,13 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_B.test.cpp
     title: test/aoj/GRL_6_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
   - icon: ':x:'
@@ -17,14 +17,14 @@ data:
     title: test/yukicoder/1615.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/MinCostFlow.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <numeric>\n#include <cmath>\ntemplate <typename\
-    \ flow_t, typename cost_t, std::int_least8_t obj= 1> class NetworkSimplex {\n\
-    \ struct Node {\n  int par, pred;\n  flow_t sup;\n  cost_t pi;\n };\n struct Edge\
-    \ {\n  int u, v;\n  flow_t low, up, flow;\n  cost_t cost;\n  std::int_least8_t\
+    #include <algorithm>\n#include <numeric>\n#include <cmath>\n#include <cassert>\n\
+    template <typename flow_t, typename cost_t, std::int_least8_t obj= 1> class NetworkSimplex\
+    \ {\n struct Node {\n  int par, pred;\n  flow_t sup;\n  cost_t pi;\n };\n struct\
+    \ Edge {\n  int u, v;\n  flow_t low, up, flow;\n  cost_t cost;\n  std::int_least8_t\
     \ state= 1;\n };\n int n, m= 0;\n std::vector<Node> ns;\n std::vector<Edge> es;\n\
     \ std::vector<int> bfs, next, prev;\n inline void link(int u, int v) { next[u]=\
     \ v, prev[v]= u; }\n inline void link(int u, int v, int w) { link(u, v), link(v,\
@@ -96,23 +96,23 @@ data:
     \ class FlowAlgo, typename flow_t, typename cost_t> using MaxGainFlow= FlowAlgo<flow_t,\
     \ cost_t, -1>;\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\
-    #include <cmath>\ntemplate <typename flow_t, typename cost_t, std::int_least8_t\
-    \ obj= 1> class NetworkSimplex {\n struct Node {\n  int par, pred;\n  flow_t sup;\n\
-    \  cost_t pi;\n };\n struct Edge {\n  int u, v;\n  flow_t low, up, flow;\n  cost_t\
-    \ cost;\n  std::int_least8_t state= 1;\n };\n int n, m= 0;\n std::vector<Node>\
-    \ ns;\n std::vector<Edge> es;\n std::vector<int> bfs, next, prev;\n inline void\
-    \ link(int u, int v) { next[u]= v, prev[v]= u; }\n inline void link(int u, int\
-    \ v, int w) { link(u, v), link(v, w); }\n inline auto opp_cost(int e) const {\
-    \ return es[e].cost + ns[es[e].u].pi - ns[es[e].v].pi; }\n inline void pivot(int\
-    \ in_arc) {\n  int u_in= es[in_arc].u, v_in= es[in_arc].v, u, e, a= u_in, b= v_in;\n\
-    \  while (a != b) a= ns[a].par == -1 ? v_in : ns[a].par, b= ns[b].par == -1 ?\
-    \ u_in : ns[b].par;\n  if (es[in_arc].state == -1) std::swap(u_in, v_in);\n  int\
-    \ lca= a, side= 0, u_out= -1, i= 0, S= 0;\n  flow_t delta= es[in_arc].up;\n  for\
-    \ (u= u_in; u != lca && delta > 0; u= ns[u].par) {\n   flow_t d= u == es[e= ns[u].pred].v\
-    \ ? es[e].up - es[e].flow : es[e].flow;\n   if (delta > d) delta= d, u_out= u,\
-    \ side= 1;\n  }\n  for (u= v_in; u != lca; u= ns[u].par) {\n   flow_t d= u ==\
-    \ es[e= ns[u].pred].u ? es[e].up - es[e].flow : es[e].flow;\n   if (delta >= d)\
-    \ delta= d, u_out= u, side= -1;\n  }\n  if (delta > 0) {\n   es[in_arc].flow+=\
+    #include <cmath>\n#include <cassert>\ntemplate <typename flow_t, typename cost_t,\
+    \ std::int_least8_t obj= 1> class NetworkSimplex {\n struct Node {\n  int par,\
+    \ pred;\n  flow_t sup;\n  cost_t pi;\n };\n struct Edge {\n  int u, v;\n  flow_t\
+    \ low, up, flow;\n  cost_t cost;\n  std::int_least8_t state= 1;\n };\n int n,\
+    \ m= 0;\n std::vector<Node> ns;\n std::vector<Edge> es;\n std::vector<int> bfs,\
+    \ next, prev;\n inline void link(int u, int v) { next[u]= v, prev[v]= u; }\n inline\
+    \ void link(int u, int v, int w) { link(u, v), link(v, w); }\n inline auto opp_cost(int\
+    \ e) const { return es[e].cost + ns[es[e].u].pi - ns[es[e].v].pi; }\n inline void\
+    \ pivot(int in_arc) {\n  int u_in= es[in_arc].u, v_in= es[in_arc].v, u, e, a=\
+    \ u_in, b= v_in;\n  while (a != b) a= ns[a].par == -1 ? v_in : ns[a].par, b= ns[b].par\
+    \ == -1 ? u_in : ns[b].par;\n  if (es[in_arc].state == -1) std::swap(u_in, v_in);\n\
+    \  int lca= a, side= 0, u_out= -1, i= 0, S= 0;\n  flow_t delta= es[in_arc].up;\n\
+    \  for (u= u_in; u != lca && delta > 0; u= ns[u].par) {\n   flow_t d= u == es[e=\
+    \ ns[u].pred].v ? es[e].up - es[e].flow : es[e].flow;\n   if (delta > d) delta=\
+    \ d, u_out= u, side= 1;\n  }\n  for (u= v_in; u != lca; u= ns[u].par) {\n   flow_t\
+    \ d= u == es[e= ns[u].pred].u ? es[e].up - es[e].flow : es[e].flow;\n   if (delta\
+    \ >= d) delta= d, u_out= u, side= -1;\n  }\n  if (delta > 0) {\n   es[in_arc].flow+=\
     \ delta*= es[in_arc].state;\n   for (u= es[in_arc].u; u != lca; u= ns[u].par)\
     \ es[e].flow+= u == es[e= ns[u].pred].u ? -delta : delta;\n   for (u= es[in_arc].v;\
     \ u != lca; u= ns[u].par) es[e].flow+= u == es[e= ns[u].pred].u ? delta : -delta;\n\
@@ -174,8 +174,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/MinCostFlow.hpp
   requiredBy: []
-  timestamp: '2023-01-21 21:04:24+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-21 21:27:17+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/GRL_6_B.test.cpp
   - test/yosupo/min_cost_b_flow.test.cpp

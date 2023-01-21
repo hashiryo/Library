@@ -6,10 +6,10 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2345.test.cpp
     title: test/aoj/2345.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc199_d.test.cpp
     title: test/atcoder/abc199_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,17 +18,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n#include\
-    \ <vector>\ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define\
-    \ SUBSET_REP(i, j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2=\
-    \ _ << 1; __ < (n); __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j < ___;\
-    \ j++, i++)\n template <typename T> static inline void ranked_zeta_tr(const T\
-    \ f[], T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c=\
+    \ <vector>\n#include <cassert>\ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries\
+    \ {\n#define SUBSET_REP(i, j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int\
+    \ __= 0, _2= _ << 1; __ < (n); __+= _2) \\\n   for (int j= __, i= j | _, ___=\
+    \ i; j < ___; j++, i++)\n template <typename T> static inline void ranked_zeta_tr(const\
+    \ T f[], T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c=\
     \ __builtin_popcount(S)]= f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U,\
     \ sz)\n  for (int d= __builtin_popcount(S); d--;) ret[S][d]+= ret[U][d];\n }\n\
     \ template <typename T> static inline void conv_na(const T f[], const T g[], T\
@@ -355,8 +355,8 @@ data:
   isVerificationFile: false
   path: src/Graph/UndirectedGraphSetPowerSeries.hpp
   requiredBy: []
-  timestamp: '2023-01-21 21:04:24+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-01-21 21:27:17+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2345.test.cpp
   - test/atcoder/arc105_f.test.cpp

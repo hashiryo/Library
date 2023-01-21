@@ -108,7 +108,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 4 \"src/Math/SetPowerSeries.hpp\"\ntemplate <unsigned\
+    \ return dat[n];\n}\n#line 5 \"src/Math/SetPowerSeries.hpp\"\ntemplate <unsigned\
     \ short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i, j, n) \\\n for\
     \ (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ < (n); __+= _2) \\\
     \n   for (int j= __, i= j | _, ___= i; j < ___; j++, i++)\n template <typename\
@@ -225,7 +225,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:04:24+09:00'
+  timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp

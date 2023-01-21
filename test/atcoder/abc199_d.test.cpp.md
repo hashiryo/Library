@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
@@ -10,9 +10,9 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc199/tasks/abc199_d
@@ -20,55 +20,55 @@ data:
     - https://atcoder.jp/contests/abc199/tasks/abc199_d
   bundledCode: "#line 1 \"test/atcoder/abc199_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc199/tasks/abc199_d\"\
     \n#include <iostream>\n#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n\
-    #include <vector>\ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries {\n\
-    #define SUBSET_REP(i, j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __=\
-    \ 0, _2= _ << 1; __ < (n); __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j\
-    \ < ___; j++, i++)\n template <typename T> static inline void ranked_zeta_tr(const\
-    \ T f[], T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c=\
-    \ __builtin_popcount(S)]= f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U,\
-    \ sz)\n  for (int d= __builtin_popcount(S); d--;) ret[S][d]+= ret[U][d];\n }\n\
-    \ template <typename T> static inline void conv_na(const T f[], const T g[], T\
-    \ ret[], const int sz) {\n  for (int s= sz, t; s--;)\n   for (ret[t= s]= f[s]\
-    \ * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n }\n template <typename T> static\
-    \ inline void conv_tr(const T f[], const T g[], T ret[], const int sz) {\n  static\
-    \ T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n  T tmp[MAX_N + 1];\n\
-    \  ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n  const int n= __builtin_ctz(sz);\n\
-    \  for (int S= sz, c, d, e, bg; S--;) {\n   c= __builtin_popcount(S), bg= std::min(2\
-    \ * c, n);\n   for (d= bg; d >= c; d--)\n    for (tmp[d]= 0, e= d - c; e <= c;\
-    \ e++) tmp[d]+= F[S][e] * G[S][d - e];\n   for (d= bg; d >= c; d--) F[S][d]= tmp[d];\n\
-    \  }\n  SUBSET_REP(S, U, sz)\n  for (int c= __builtin_popcount(U), d= std::min(2\
-    \ * c, n); d > c; d--) F[S][d]-= F[U][d];\n  for (int S= sz; S--;) ret[S]= F[S][__builtin_popcount(S)];\n\
-    \ }\n template <typename T, class F> static inline void onconv_na(const T g[],\
-    \ T ret[], const F &phi, const int sz) {\n  for (int s= 1, t; s < sz; phi(s, ret[s]),\
-    \ s++)\n   for (ret[t= s]= 0; t; --t&= s) ret[s]+= ret[s ^ t] * g[t];\n }\n template\
-    \ <typename T, class F> static inline void onconv_tr(const T g[], T ret[], const\
-    \ F &phi, const int sz) {\n  static T G[1 << MAX_N][MAX_N + 1], mat[MAX_N + 1][1\
-    \ << MAX_N];\n  const int n= __builtin_ctz(sz);\n  ranked_zeta_tr(g, G, sz), std::fill_n(mat[0],\
-    \ sz, ret[0]);\n  for (int d= n; d; d--) std::fill_n(mat[d], sz, 0);\n  for (int\
-    \ I= sz; I>>= 1;) phi(I, mat[1][I]= ret[0] * g[I]);\n  for (int d= 2; d <= n;\
-    \ d++) {\n   SUBSET_REP(S, U, sz) mat[d - 1][S]+= mat[d - 1][U];\n   for (int\
-    \ S= sz; S--;)\n    if (int c= __builtin_popcount(S); c <= d && d <= 2 * c)\n\
-    \     for (int e= d; e--;) mat[d][S]+= mat[e][S] * G[S][d - e];\n   SUBSET_REP(S,\
-    \ U, sz) mat[d][S]-= mat[d][U];\n   for (int S= sz; S--;) __builtin_popcount(S)\
-    \ == d ? phi(S, mat[d][S]), 0 : (mat[d][S]= 0);\n  }\n  for (int S= sz; --S;)\
-    \ ret[S]= mat[__builtin_popcount(S)][S];\n }\npublic:\n template <typename T>\
-    \  // O(n 2^n)\n static inline void subset_sum(std::vector<T> &f) {\n  SUBSET_REP(S,\
-    \ U, f.size()) f[S]+= f[U];\n }\n template <typename T>  // O(n 2^n)\n static\
-    \ inline void subset_sum_inv(std::vector<T> &f) {\n  SUBSET_REP(S, U, f.size())\
-    \ f[S]-= f[U];\n }\n template <class T>  // O(n^2 2^n)\n static inline std::vector<T>\
-    \ convolve(const std::vector<T> &f, const std::vector<T> &g) {\n  const int sz=\
-    \ f.size(), n= __builtin_ctz(sz);\n  std::vector<T> ret(sz);\n  if (n <= 10) return\
-    \ conv_na(f.data(), g.data(), ret.data(), sz), ret;\n  assert(sz == 1 << n &&\
-    \ sz == g.size());\n  return conv_tr(f.data(), g.data(), ret.data(), sz), ret;\n\
-    \ }\n // f(S) = \u03C6_S ( \u03A3_{T\u228AS} f(T)g(S/T) )\n template <class T,\
-    \ class F= void (*)(int, T &)>  // O(n^2 2^n)\n static inline std::vector<T> online_convolve(\n\
-    \     const std::vector<T> &g, T init, const F &phi= [](int, T &) {}) {\n  const\
-    \ int sz= g.size(), n= __builtin_ctz(sz);\n  std::vector<T> ret(sz);\n  ret[0]=\
-    \ init;\n  if (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n\
-    \  assert(sz == 1 << n);\n  return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n\
-    \ }\n // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
-    \ } f(T)f(S/T) )\n template <class T, class F>  // O(n^2 2^n)\n static inline\
-    \ std::vector<T> online_convolve2(int sz, const F &phi) {\n  assert(__builtin_popcount(sz)\
+    #include <vector>\n#include <cassert>\ntemplate <unsigned short MAX_N= 21> struct\
+    \ SetPowerSeries {\n#define SUBSET_REP(i, j, n) \\\n for (int _= (n); _>>= 1;)\
+    \ \\\n  for (int __= 0, _2= _ << 1; __ < (n); __+= _2) \\\n   for (int j= __,\
+    \ i= j | _, ___= i; j < ___; j++, i++)\n template <typename T> static inline void\
+    \ ranked_zeta_tr(const T f[], T ret[][MAX_N + 1], const int sz) {\n  for (int\
+    \ S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]= f[S], std::fill_n(ret[S],\
+    \ c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S); d--;) ret[S][d]+=\
+    \ ret[U][d];\n }\n template <typename T> static inline void conv_na(const T f[],\
+    \ const T g[], T ret[], const int sz) {\n  for (int s= sz, t; s--;)\n   for (ret[t=\
+    \ s]= f[s] * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n }\n template <typename\
+    \ T> static inline void conv_tr(const T f[], const T g[], T ret[], const int sz)\
+    \ {\n  static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n  T tmp[MAX_N\
+    \ + 1];\n  ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n  const int n=\
+    \ __builtin_ctz(sz);\n  for (int S= sz, c, d, e, bg; S--;) {\n   c= __builtin_popcount(S),\
+    \ bg= std::min(2 * c, n);\n   for (d= bg; d >= c; d--)\n    for (tmp[d]= 0, e=\
+    \ d - c; e <= c; e++) tmp[d]+= F[S][e] * G[S][d - e];\n   for (d= bg; d >= c;\
+    \ d--) F[S][d]= tmp[d];\n  }\n  SUBSET_REP(S, U, sz)\n  for (int c= __builtin_popcount(U),\
+    \ d= std::min(2 * c, n); d > c; d--) F[S][d]-= F[U][d];\n  for (int S= sz; S--;)\
+    \ ret[S]= F[S][__builtin_popcount(S)];\n }\n template <typename T, class F> static\
+    \ inline void onconv_na(const T g[], T ret[], const F &phi, const int sz) {\n\
+    \  for (int s= 1, t; s < sz; phi(s, ret[s]), s++)\n   for (ret[t= s]= 0; t; --t&=\
+    \ s) ret[s]+= ret[s ^ t] * g[t];\n }\n template <typename T, class F> static inline\
+    \ void onconv_tr(const T g[], T ret[], const F &phi, const int sz) {\n  static\
+    \ T G[1 << MAX_N][MAX_N + 1], mat[MAX_N + 1][1 << MAX_N];\n  const int n= __builtin_ctz(sz);\n\
+    \  ranked_zeta_tr(g, G, sz), std::fill_n(mat[0], sz, ret[0]);\n  for (int d= n;\
+    \ d; d--) std::fill_n(mat[d], sz, 0);\n  for (int I= sz; I>>= 1;) phi(I, mat[1][I]=\
+    \ ret[0] * g[I]);\n  for (int d= 2; d <= n; d++) {\n   SUBSET_REP(S, U, sz) mat[d\
+    \ - 1][S]+= mat[d - 1][U];\n   for (int S= sz; S--;)\n    if (int c= __builtin_popcount(S);\
+    \ c <= d && d <= 2 * c)\n     for (int e= d; e--;) mat[d][S]+= mat[e][S] * G[S][d\
+    \ - e];\n   SUBSET_REP(S, U, sz) mat[d][S]-= mat[d][U];\n   for (int S= sz; S--;)\
+    \ __builtin_popcount(S) == d ? phi(S, mat[d][S]), 0 : (mat[d][S]= 0);\n  }\n \
+    \ for (int S= sz; --S;) ret[S]= mat[__builtin_popcount(S)][S];\n }\npublic:\n\
+    \ template <typename T>  // O(n 2^n)\n static inline void subset_sum(std::vector<T>\
+    \ &f) {\n  SUBSET_REP(S, U, f.size()) f[S]+= f[U];\n }\n template <typename T>\
+    \  // O(n 2^n)\n static inline void subset_sum_inv(std::vector<T> &f) {\n  SUBSET_REP(S,\
+    \ U, f.size()) f[S]-= f[U];\n }\n template <class T>  // O(n^2 2^n)\n static inline\
+    \ std::vector<T> convolve(const std::vector<T> &f, const std::vector<T> &g) {\n\
+    \  const int sz= f.size(), n= __builtin_ctz(sz);\n  std::vector<T> ret(sz);\n\
+    \  if (n <= 10) return conv_na(f.data(), g.data(), ret.data(), sz), ret;\n  assert(sz\
+    \ == 1 << n && sz == g.size());\n  return conv_tr(f.data(), g.data(), ret.data(),\
+    \ sz), ret;\n }\n // f(S) = \u03C6_S ( \u03A3_{T\u228AS} f(T)g(S/T) )\n template\
+    \ <class T, class F= void (*)(int, T &)>  // O(n^2 2^n)\n static inline std::vector<T>\
+    \ online_convolve(\n     const std::vector<T> &g, T init, const F &phi= [](int,\
+    \ T &) {}) {\n  const int sz= g.size(), n= __builtin_ctz(sz);\n  std::vector<T>\
+    \ ret(sz);\n  ret[0]= init;\n  if (n <= 12) return onconv_na(g.data(), ret.data(),\
+    \ phi, sz), ret;\n  assert(sz == 1 << n);\n  return onconv_tr(g.data(), ret.data(),\
+    \ phi, sz), ret;\n }\n // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T)\
+    \ as binary numbers) } f(T)f(S/T) )\n template <class T, class F>  // O(n^2 2^n)\n\
+    \ static inline std::vector<T> online_convolve2(int sz, const F &phi) {\n  assert(__builtin_popcount(sz)\
     \ == 1);\n  int I= 1, ed= std::min(1 << 13, sz);\n  std::vector<T> ret(sz, 0);\n\
     \  for (int s, t, u= 1; I < ed; I<<= 1)\n   for (t= s= 0; s < I; phi(u, ret[u]),\
     \ t= ++s, u++)\n    for (ret[u]= 0; t; --t&= s) ret[u]+= ret[u ^ t] * ret[t];\n\
@@ -249,8 +249,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc199_d.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:04:24+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-21 21:27:17+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc199_d.test.cpp
 layout: document

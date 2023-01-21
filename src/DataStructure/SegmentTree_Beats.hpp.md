@@ -3,27 +3,27 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
     title: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
     title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/880.Beats.test.cpp
     title: test/yukicoder/880.Beats.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Beats.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Beats.hpp\"\n#include <vector>\n\
     template <typename M> struct SegmentTree_Beats {\n using T= typename M::T;\n using\
     \ E= typename M::E;\n SegmentTree_Beats() {}\n SegmentTree_Beats(int n_): n(n_),\
     \ height(ceil(log2(n))), dat(n * 2, M::ti()), laz(n * 2, {E(), false}) {}\n SegmentTree_Beats(int\
@@ -55,7 +55,7 @@ data:
     \ x), x) : laz[k].val= x;\n   if (laz[k].flg= true; !success) eval(k), update(k);\n\
     \  }\n }\n inline void update(int k) { dat[k]= M::op(dat[k << 1 | 0], dat[k <<\
     \ 1 | 1]); }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <typename M> struct SegmentTree_Beats\
+  code: "#pragma once\n#include <vector>\ntemplate <typename M> struct SegmentTree_Beats\
     \ {\n using T= typename M::T;\n using E= typename M::E;\n SegmentTree_Beats()\
     \ {}\n SegmentTree_Beats(int n_): n(n_), height(ceil(log2(n))), dat(n * 2, M::ti()),\
     \ laz(n * 2, {E(), false}) {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_)\
@@ -90,8 +90,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Beats.hpp
   requiredBy: []
-  timestamp: '2023-01-01 00:16:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 21:27:17+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
@@ -105,3 +105,5 @@ title: Segment-Tree Beats!
 基本, 遅延伝搬としてつかう
 ## 参考
 [https://rsm9.hatenablog.com/entry/2021/02/01/220408](https://rsm9.hatenablog.com/entry/2021/02/01/220408)
+## 問題例
+[AtCoder Beginner Contest 256 Ex - I like Query Problem](https://atcoder.jp/contests/abc256/tasks/abc256_h) (Beats!)

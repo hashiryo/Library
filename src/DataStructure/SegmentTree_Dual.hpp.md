@@ -3,18 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Dual.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Dual.hpp\"\n#include <vector>\n\
     template <typename M> struct SegmentTree_Dual {\n using T= typename M::T;\n using\
     \ E= typename M::E;\n SegmentTree_Dual() {}\n SegmentTree_Dual(int n_, T v1= T()):\
     \ n(n_), height(ceil(log2(n))), val(n, v1), laz(n * 2, {E(), false}) {}\n SegmentTree_Dual(const\
@@ -33,7 +33,7 @@ data:
     \ 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n  laz[k].flg= false;\n }\n\
     \ inline void propagate(int k, const E &x) {\n  laz[k].flg ? (M::composition(laz[k].val,\
     \ x), x) : laz[k].val= x;\n  laz[k].flg= true;\n }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\ntemplate <typename M> struct SegmentTree_Dual\
+  code: "#pragma once\n#include <vector>\ntemplate <typename M> struct SegmentTree_Dual\
     \ {\n using T= typename M::T;\n using E= typename M::E;\n SegmentTree_Dual() {}\n\
     \ SegmentTree_Dual(int n_, T v1= T()): n(n_), height(ceil(log2(n))), val(n, v1),\
     \ laz(n * 2, {E(), false}) {}\n SegmentTree_Dual(const std::vector<T> &v): n(v.size()),\
@@ -56,8 +56,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dual.hpp
   requiredBy: []
-  timestamp: '2023-01-01 00:16:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-21 21:27:17+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
