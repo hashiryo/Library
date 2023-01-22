@@ -38,7 +38,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/DisjointSparseTable.hpp
       title: Disjoint-Sparse-Table
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
     - icon: ':heavy_check_mark:'
@@ -50,7 +50,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree.hpp
       title: Link-Cut-Tree
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
     - icon: ':heavy_check_mark:'
@@ -954,7 +954,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/division_of_Poly.test.cpp
       title: test/yosupo/division_of_Poly.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     - icon: ':heavy_check_mark:'

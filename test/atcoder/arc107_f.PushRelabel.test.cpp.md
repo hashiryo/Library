@@ -103,59 +103,59 @@ data:
     \ <class flow_t, unsigned global_freq= 4, bool use_gap= true, bool freeze= false>\
     \ struct PushRelabel {\n PushRelabel(std::size_t _n= 0): n(_n), m(0), adj(n) {}\n\
     protected:\n struct Edge {\n  int dst, rev;\n  flow_t cap;\n };\n int n, gap,\
-    \ m;\n struct {\n  std::vector<int> ei, eh, oi, oh;\n  int se, so;\n  void init(int\
-    \ _n) { ei.resize(_n), eh.resize(_n), oi.resize(_n), oh.resize(_n), se= so= 0;\
-    \ };\n  void clear() { se= so= 0; }\n  inline bool empty() const { return se +\
-    \ so == 0; }\n  void push(int i, int h) { (h & 1 ? tie(oi[so], oh[so++]) : tie(ei[se],\
-    \ eh[se++]))= {i, h}; }\n  inline int highest() const { return max(se ? eh[se\
-    \ - 1] : -1, so ? oh[so - 1] : -1); }\n  inline int pop() { return !se || (so\
-    \ && oh[so - 1] > eh[se - 1]) ? oi[--so] : ei[--se]; }\n } hque;\n std::vector<std::vector<Edge>>\
-    \ adj;\n std::vector<int> dist, dcnt;\n std::vector<flow_t> exc;\n inline void\
-    \ calc(int t) {\n  if constexpr (global_freq != 0) relabel(t);\n  for (int tick=\
-    \ m * global_freq; !hque.empty();) {\n   int i= hque.pop(), dnxt= n * 2 - 1;\n\
-    \   if constexpr (use_gap)\n    if (dist[i] > gap) continue;\n   for (auto &e:\
-    \ adj[i])\n    if (e.cap) {\n     if (dist[e.dst] == dist[i] - 1) {\n      if\
-    \ (push(i, e), exc[i] == 0) break;\n     } else if (dist[e.dst] + 1 < dnxt) dnxt=\
-    \ dist[e.dst] + 1;\n    }\n   if (exc[i] > 0) {\n    if constexpr (use_gap) {\n\
-    \     if (dnxt != dist[i] && dcnt[dist[i]] == 1 && dist[i] < gap) gap= dist[i];\n\
-    \     if (dnxt == gap) gap++;\n     while (hque.highest() > gap) hque.pop();\n\
-    \     if (dnxt > gap) dnxt= n;\n     if (dist[i] != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n\
-    \    }\n    dist[i]= dnxt, hq_push(i);\n   }\n   if constexpr (global_freq !=\
-    \ 0)\n    if (--tick == 0) tick= m * global_freq, relabel(t);\n  }\n }\n inline\
-    \ void hq_push(int i) {\n  if constexpr (!use_gap) hque.push(i, dist[i]);\n  else\
-    \ if (dist[i] < gap) hque.push(i, dist[i]);\n }\n inline void push(int i, Edge\
-    \ &e) {\n  flow_t del= std::min(e.cap, exc[i]);\n  if (exc[i]-= del, e.cap-= del,\
-    \ exc[e.dst]+= del, adj[e.dst][e.rev].cap+= del; 0 < exc[e.dst] && exc[e.dst]\
-    \ <= del) hq_push(e.dst);\n }\n inline void relabel(int t) {\n  dist.assign(n,\
-    \ n), dist[t]= 0;\n  static std::queue<int> q;\n  q.push(t), hque.clear();\n \
-    \ if constexpr (use_gap) gap= 1, dcnt.assign(n + 1, 0);\n  for (int now; !q.empty();)\
-    \ {\n   now= q.front(), q.pop();\n   if constexpr (use_gap) gap= dist[now] + 1,\
-    \ dcnt[dist[now]]++;\n   if (exc[now] > 0) hque.push(now, dist[now]);\n   for\
-    \ (const auto &e: adj[now])\n    if (adj[e.dst][e.rev].cap && dist[e.dst] == n)\
-    \ dist[e.dst]= dist[now] + 1, q.push(e.dst);\n  }\n }\n flow_t flow(int s, int\
-    \ t, flow_t lim, flow_t ret= 0) {\n  assert(0 <= s && s < n), assert(0 <= t &&\
-    \ t < n), assert(s != t), hque.init(n), exc.assign(n, 0), exc[s]+= lim, exc[t]-=\
-    \ lim, dist.assign(n, 0), dist[s]= n;\n  if constexpr (use_gap) gap= 1, dcnt.assign(n\
-    \ + 1, 0), dcnt[0]= n - 1;\n  for (auto &e: adj[s]) push(s, e);\n  calc(t), ret=\
-    \ exc[t] + lim;\n  if constexpr (!freeze) {\n   exc[s]+= exc[t], exc[t]= 0;\n\
-    \   if constexpr (global_freq != 0) relabel(s);\n   calc(s), assert(exc == std::vector<flow_t>(n,\
-    \ 0));\n  }\n  return ret;\n }\n};\n#line 5 \"src/Optimization/monge_mincut.hpp\"\
-    \n#include <utility>\ntemplate <typename MF, typename Th, typename Ph> auto monge_mincut(int\
-    \ n, int k, Th theta, Ph phi) {\n using T= typename MF::flow_t;\n static constexpr\
-    \ T INF= std::numeric_limits<T>::max();\n T ret= 0;\n MF graph;\n int s= graph.add_vertex(),\
-    \ t= graph.add_vertex();\n std::vector<std::vector<int>> x;\n std::vector<std::vector<T>>\
-    \ th(n, std::vector<T>(k));\n for (int i= 0; i < n; i++) {\n  x.emplace_back(graph.add_vertices(k\
-    \ - 1));\n  for (int l= 1; l < k - 1; l++) graph.add_edge(x[i][l], x[i][l - 1],\
-    \ INF);\n  for (int l= 0; l < k; l++) th[i][l]= theta(i, l);\n }\n for (int i=\
-    \ 0; i < n; i++)\n  for (int j= i + 1; j < n; j++) {\n   for (int l= 0; l < k\
-    \ - 1; l++)\n    for (int m= 0; m < k - 1; m++) {\n     T cost= -phi(i, j, l +\
-    \ 1, m + 1) + phi(i, j, l, m + 1) + phi(i, j, l + 1, m) - phi(i, j, l, m);\n \
-    \    assert(cost >= 0);  // monge\n     if (cost > 0) graph.add_edge(x[i][l],\
-    \ x[j][m], cost);\n    }\n   for (int l= 0; l < k; l++) th[i][l]+= phi(i, j, l,\
-    \ k - 1);\n   for (int l= 0; l < k; l++) th[j][l]+= phi(i, j, 0, l);\n   ret-=\
-    \ phi(i, j, 0, k - 1);\n  }\n for (int i= 0; i < n; i++) {\n  ret+= th[i][0];\n\
-    \  for (int l= 0; l < k - 1; l++) {\n   T cost= th[i][l] - th[i][l + 1];\n   if\
-    \ (cost > 0) graph.add_edge(s, x[i][l], cost), ret-= cost;\n   if (cost < 0) graph.add_edge(x[i][l],\
+    \ m;\n struct {\n  std::vector<std::array<int, 2>> ev, od;\n  int se, so;\n  void\
+    \ init(int _n) { ev.resize(_n), od.resize(_n), se= so= 0; };\n  void clear() {\
+    \ se= so= 0; }\n  inline bool empty() const { return se + so == 0; }\n  void push(int\
+    \ i, int h) { (h & 1 ? od[so++] : ev[se++])= {i, h}; }\n  inline int highest()\
+    \ const { return std::max(se ? ev[se - 1][1] : -1, so ? od[so - 1][1] : -1); }\n\
+    \  inline int pop() { return !se || (so && od[so - 1][1] > ev[se - 1][1]) ? od[--so][0]\
+    \ : ev[--se][0]; }\n } hque;\n std::vector<std::vector<Edge>> adj;\n std::vector<int>\
+    \ dist, dcnt;\n std::vector<flow_t> exc;\n inline void calc(int t) {\n  if constexpr\
+    \ (global_freq != 0) relabel(t);\n  for (int tick= m * global_freq; !hque.empty();)\
+    \ {\n   int i= hque.pop(), dnxt= n * 2 - 1;\n   if constexpr (use_gap)\n    if\
+    \ (dist[i] > gap) continue;\n   for (auto &e: adj[i])\n    if (e.cap) {\n    \
+    \ if (dist[e.dst] == dist[i] - 1) {\n      if (push(i, e), exc[i] == 0) break;\n\
+    \     } else if (dist[e.dst] + 1 < dnxt) dnxt= dist[e.dst] + 1;\n    }\n   if\
+    \ (exc[i] > 0) {\n    if constexpr (use_gap) {\n     if (dnxt != dist[i] && dcnt[dist[i]]\
+    \ == 1 && dist[i] < gap) gap= dist[i];\n     if (dnxt == gap) gap++;\n     while\
+    \ (hque.highest() > gap) hque.pop();\n     if (dnxt > gap) dnxt= n;\n     if (dist[i]\
+    \ != dnxt) dcnt[dist[i]]--, dcnt[dnxt]++;\n    }\n    dist[i]= dnxt, hq_push(i);\n\
+    \   }\n   if constexpr (global_freq != 0)\n    if (--tick == 0) tick= m * global_freq,\
+    \ relabel(t);\n  }\n }\n inline void hq_push(int i) {\n  if constexpr (!use_gap)\
+    \ hque.push(i, dist[i]);\n  else if (dist[i] < gap) hque.push(i, dist[i]);\n }\n\
+    \ inline void push(int i, Edge &e) {\n  flow_t del= std::min(e.cap, exc[i]);\n\
+    \  if (exc[i]-= del, e.cap-= del, exc[e.dst]+= del, adj[e.dst][e.rev].cap+= del;\
+    \ 0 < exc[e.dst] && exc[e.dst] <= del) hq_push(e.dst);\n }\n inline void relabel(int\
+    \ t) {\n  dist.assign(n, n), dist[t]= 0;\n  static std::queue<int> q;\n  q.push(t),\
+    \ hque.clear();\n  if constexpr (use_gap) gap= 1, dcnt.assign(n + 1, 0);\n  for\
+    \ (int now; !q.empty();) {\n   now= q.front(), q.pop();\n   if constexpr (use_gap)\
+    \ gap= dist[now] + 1, dcnt[dist[now]]++;\n   if (exc[now] > 0) hque.push(now,\
+    \ dist[now]);\n   for (const auto &e: adj[now])\n    if (adj[e.dst][e.rev].cap\
+    \ && dist[e.dst] == n) dist[e.dst]= dist[now] + 1, q.push(e.dst);\n  }\n }\n flow_t\
+    \ flow(int s, int t, flow_t lim, flow_t ret= 0) {\n  assert(0 <= s && s < n),\
+    \ assert(0 <= t && t < n), assert(s != t), hque.init(n), exc.assign(n, 0), exc[s]+=\
+    \ lim, exc[t]-= lim, dist.assign(n, 0), dist[s]= n;\n  if constexpr (use_gap)\
+    \ gap= 1, dcnt.assign(n + 1, 0), dcnt[0]= n - 1;\n  for (auto &e: adj[s]) push(s,\
+    \ e);\n  calc(t), ret= exc[t] + lim;\n  if constexpr (!freeze) {\n   exc[s]+=\
+    \ exc[t], exc[t]= 0;\n   if constexpr (global_freq != 0) relabel(s);\n   calc(s),\
+    \ assert(exc == std::vector<flow_t>(n, 0));\n  }\n  return ret;\n }\n};\n#line\
+    \ 5 \"src/Optimization/monge_mincut.hpp\"\n#include <utility>\ntemplate <typename\
+    \ MF, typename Th, typename Ph> auto monge_mincut(int n, int k, Th theta, Ph phi)\
+    \ {\n using T= typename MF::flow_t;\n static constexpr T INF= std::numeric_limits<T>::max();\n\
+    \ T ret= 0;\n MF graph;\n int s= graph.add_vertex(), t= graph.add_vertex();\n\
+    \ std::vector<std::vector<int>> x;\n std::vector<std::vector<T>> th(n, std::vector<T>(k));\n\
+    \ for (int i= 0; i < n; i++) {\n  x.emplace_back(graph.add_vertices(k - 1));\n\
+    \  for (int l= 1; l < k - 1; l++) graph.add_edge(x[i][l], x[i][l - 1], INF);\n\
+    \  for (int l= 0; l < k; l++) th[i][l]= theta(i, l);\n }\n for (int i= 0; i <\
+    \ n; i++)\n  for (int j= i + 1; j < n; j++) {\n   for (int l= 0; l < k - 1; l++)\n\
+    \    for (int m= 0; m < k - 1; m++) {\n     T cost= -phi(i, j, l + 1, m + 1) +\
+    \ phi(i, j, l, m + 1) + phi(i, j, l + 1, m) - phi(i, j, l, m);\n     assert(cost\
+    \ >= 0);  // monge\n     if (cost > 0) graph.add_edge(x[i][l], x[j][m], cost);\n\
+    \    }\n   for (int l= 0; l < k; l++) th[i][l]+= phi(i, j, l, k - 1);\n   for\
+    \ (int l= 0; l < k; l++) th[j][l]+= phi(i, j, 0, l);\n   ret-= phi(i, j, 0, k\
+    \ - 1);\n  }\n for (int i= 0; i < n; i++) {\n  ret+= th[i][0];\n  for (int l=\
+    \ 0; l < k - 1; l++) {\n   T cost= th[i][l] - th[i][l + 1];\n   if (cost > 0)\
+    \ graph.add_edge(s, x[i][l], cost), ret-= cost;\n   if (cost < 0) graph.add_edge(x[i][l],\
     \ t, -cost);\n  }\n }\n ret+= graph.maxflow(s, t);\n auto y= graph.mincut(s);\n\
     \ std::vector<int> sol(n, k - 1);\n for (int i= 0; i < n; i++)\n  for (int l=\
     \ 0; l < k - 1; l++)\n   if (!y[x[i][l]]) sol[i]= l, l= k;\n return std::make_pair(ret,\
@@ -190,7 +190,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc107_f.PushRelabel.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 13:38:18+09:00'
+  timestamp: '2023-01-22 15:13:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc107_f.PushRelabel.test.cpp

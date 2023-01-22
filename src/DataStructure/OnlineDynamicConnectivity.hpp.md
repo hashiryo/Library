@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   _extendedRequiredBy: []
@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Online-Dynamic-Connectivity
     links: []
@@ -139,82 +139,78 @@ data:
     \ & 0b1000))];\n      }\n    return 0;\n  }\n};\n#line 5 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
     \n/**\n * @title Online-Dynamic-Connectivity\n * @category \u30C7\u30FC\u30BF\u69CB\
     \u9020\n * @brief link,cut: O(log^2 N)\n * @brief connected: O(log N)\n */\n\n\
-    // BEGIN CUT HERE\n\ntemplate <typename M = void>\nclass OnlineDynamicConnectivity\
-    \ {\n  using T = typename EulerTourTree<M>::T;\n  using E = typename EulerTourTree<M>::E;\n\
-    \  int N;\n  std::vector<EulerTourTree<M>> ett;\n  std::vector<std::vector<std::unordered_set<int>>>\
-    \ adj;\n  void replace(int x, int y, int level) {\n    for (int k = 0; k < level;\
-    \ k++) ett[k].cut(x, y);\n    for (int k = level, loop = true; k-- > 0 && loop;)\
-    \ {\n      if (ett[k].tree_size(x) > ett[k].tree_size(y)) std::swap(x, y);\n \
-    \     ett[k].hilevel_edges(x,\n                           [&](int s, int d) {\
-    \ ett[k + 1].link(s, d, true); });\n      ett[k].subedges(x, [&](int s) {\n  \
-    \      for (auto itr = adj[k][s].begin(); itr != adj[k][s].end();) {\n       \
-    \   auto d = *itr;\n          if (adj[k][s].size() == 1) ett[k].subedge_set(s,\
-    \ 0);\n          if (adj[k][d].size() == 1) ett[k].subedge_set(d, 0);\n      \
-    \    adj[k][d].erase(s), itr = adj[k][s].erase(itr);\n          if (ett[k].connected(s,\
-    \ d)) {\n            if (adj[k + 1][s].size() == 0) ett[k + 1].subedge_set(s,\
-    \ 1);\n            if (adj[k + 1][d].size() == 0) ett[k + 1].subedge_set(d, 1);\n\
-    \            adj[k + 1][s].insert(d), adj[k + 1][d].insert(s);\n          } else\
-    \ {\n            for (int kk = k + 1; kk-- > 0;) ett[kk].link(s, d, kk == k);\n\
-    \            return loop = false, true;\n          }\n        }\n        return\
-    \ false;\n      });\n    }\n  }\n\n public:\n  OnlineDynamicConnectivity(int N)\
-    \ : N(N) {\n    ett.emplace_back(N), adj.emplace_back(N);\n  }\n  void link(int\
-    \ x, int y) {\n    if (ett[0].connected(x, y)) {\n      if (adj[0][x].size() ==\
-    \ 0) ett[0].subedge_set(x, 1);\n      if (adj[0][y].size() == 0) ett[0].subedge_set(y,\
-    \ 1);\n      adj[0][x].insert(y), adj[0][y].insert(x);\n    } else\n      ett[0].link(x,\
-    \ y, true);\n  }\n  void cut(int x, int y) {\n    for (int k = 0; k < ett.size();\
-    \ k++)\n      if (adj[k][x].count(y)) {\n        adj[k][x].erase(y), adj[k][y].erase(x);\n\
-    \        if (adj[k][x].size() == 0) ett[k].subedge_set(x, 0);\n        if (adj[k][y].size()\
-    \ == 0) ett[k].subedge_set(y, 0);\n        return;\n      }\n    for (int k =\
-    \ ett.size(); k-- > 0;)\n      if (ett[k].edge_exist(x, y)) {\n        if (k +\
-    \ 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n        replace(x,\
-    \ y, k + 1);\n      }\n  }\n  const T& operator[](int x) { return ett[0][x]; }\n\
-    \  void set(int x, T val) { ett[0].set(x, val); }\n  int size(int x) { return\
-    \ ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x); }\n  void\
-    \ apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
-    \ x, int y) { return ett[0].connected(x, y); }\n};\n"
+    // BEGIN CUT HERE\n\ntemplate <typename M= void, std::size_t NODE_SIZE= 303030\
+    \ * 4> class OnlineDynamicConnectivity {\n using T= typename EulerTourTree<M,\
+    \ NODE_SIZE>::T;\n using E= typename EulerTourTree<M, NODE_SIZE>::E;\n int N;\n\
+    \ std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
+    \ adj;\n void replace(int x, int y, int level) {\n  for (int k= 0; k < level;\
+    \ k++) ett[k].cut(x, y);\n  for (int k= level, loop= true; k-- > 0 && loop;) {\n\
+    \   if (ett[k].tree_size(x) > ett[k].tree_size(y)) std::swap(x, y);\n   ett[k].hilevel_edges(x,\
+    \ [&](int s, int d) { ett[k + 1].link(s, d, true); });\n   ett[k].subedges(x,\
+    \ [&](int s) {\n    for (auto itr= adj[k][s].begin(); itr != adj[k][s].end();)\
+    \ {\n     auto d= *itr;\n     if (adj[k][s].size() == 1) ett[k].subedge_set(s,\
+    \ 0);\n     if (adj[k][d].size() == 1) ett[k].subedge_set(d, 0);\n     adj[k][d].erase(s),\
+    \ itr= adj[k][s].erase(itr);\n     if (ett[k].connected(s, d)) {\n      if (adj[k\
+    \ + 1][s].size() == 0) ett[k + 1].subedge_set(s, 1);\n      if (adj[k + 1][d].size()\
+    \ == 0) ett[k + 1].subedge_set(d, 1);\n      adj[k + 1][s].insert(d), adj[k +\
+    \ 1][d].insert(s);\n     } else {\n      for (int kk= k + 1; kk-- > 0;) ett[kk].link(s,\
+    \ d, kk == k);\n      return loop= false, true;\n     }\n    }\n    return false;\n\
+    \   });\n  }\n }\npublic:\n OnlineDynamicConnectivity(int N): N(N) { ett.emplace_back(N),\
+    \ adj.emplace_back(N); }\n void link(int x, int y) {\n  if (ett[0].connected(x,\
+    \ y)) {\n   if (adj[0][x].size() == 0) ett[0].subedge_set(x, 1);\n   if (adj[0][y].size()\
+    \ == 0) ett[0].subedge_set(y, 1);\n   adj[0][x].insert(y), adj[0][y].insert(x);\n\
+    \  } else ett[0].link(x, y, true);\n }\n void cut(int x, int y) {\n  for (int\
+    \ k= 0; k < ett.size(); k++)\n   if (adj[k][x].count(y)) {\n    adj[k][x].erase(y),\
+    \ adj[k][y].erase(x);\n    if (adj[k][x].size() == 0) ett[k].subedge_set(x, 0);\n\
+    \    if (adj[k][y].size() == 0) ett[k].subedge_set(y, 0);\n    return;\n   }\n\
+    \  for (int k= ett.size(); k-- > 0;)\n   if (ett[k].edge_exist(x, y)) {\n    if\
+    \ (k + 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n    replace(x,\
+    \ y, k + 1);\n   }\n }\n const T& operator[](int x) { return ett[0][x]; }\n void\
+    \ set(int x, T val) { ett[0].set(x, val); }\n int size(int x) { return ett[0].tree_size(x);\
+    \ }\n T fold(int x) { return ett[0].fold_tree(x); }\n void apply(int x, E v) {\
+    \ return ett[0].apply_tree(x, v); }\n bool connected(int x, int y) { return ett[0].connected(x,\
+    \ y); }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
     \n/**\n * @title Online-Dynamic-Connectivity\n * @category \u30C7\u30FC\u30BF\u69CB\
     \u9020\n * @brief link,cut: O(log^2 N)\n * @brief connected: O(log N)\n */\n\n\
-    // BEGIN CUT HERE\n\ntemplate <typename M = void>\nclass OnlineDynamicConnectivity\
-    \ {\n  using T = typename EulerTourTree<M>::T;\n  using E = typename EulerTourTree<M>::E;\n\
-    \  int N;\n  std::vector<EulerTourTree<M>> ett;\n  std::vector<std::vector<std::unordered_set<int>>>\
-    \ adj;\n  void replace(int x, int y, int level) {\n    for (int k = 0; k < level;\
-    \ k++) ett[k].cut(x, y);\n    for (int k = level, loop = true; k-- > 0 && loop;)\
-    \ {\n      if (ett[k].tree_size(x) > ett[k].tree_size(y)) std::swap(x, y);\n \
-    \     ett[k].hilevel_edges(x,\n                           [&](int s, int d) {\
-    \ ett[k + 1].link(s, d, true); });\n      ett[k].subedges(x, [&](int s) {\n  \
-    \      for (auto itr = adj[k][s].begin(); itr != adj[k][s].end();) {\n       \
-    \   auto d = *itr;\n          if (adj[k][s].size() == 1) ett[k].subedge_set(s,\
-    \ 0);\n          if (adj[k][d].size() == 1) ett[k].subedge_set(d, 0);\n      \
-    \    adj[k][d].erase(s), itr = adj[k][s].erase(itr);\n          if (ett[k].connected(s,\
-    \ d)) {\n            if (adj[k + 1][s].size() == 0) ett[k + 1].subedge_set(s,\
-    \ 1);\n            if (adj[k + 1][d].size() == 0) ett[k + 1].subedge_set(d, 1);\n\
-    \            adj[k + 1][s].insert(d), adj[k + 1][d].insert(s);\n          } else\
-    \ {\n            for (int kk = k + 1; kk-- > 0;) ett[kk].link(s, d, kk == k);\n\
-    \            return loop = false, true;\n          }\n        }\n        return\
-    \ false;\n      });\n    }\n  }\n\n public:\n  OnlineDynamicConnectivity(int N)\
-    \ : N(N) {\n    ett.emplace_back(N), adj.emplace_back(N);\n  }\n  void link(int\
-    \ x, int y) {\n    if (ett[0].connected(x, y)) {\n      if (adj[0][x].size() ==\
-    \ 0) ett[0].subedge_set(x, 1);\n      if (adj[0][y].size() == 0) ett[0].subedge_set(y,\
-    \ 1);\n      adj[0][x].insert(y), adj[0][y].insert(x);\n    } else\n      ett[0].link(x,\
-    \ y, true);\n  }\n  void cut(int x, int y) {\n    for (int k = 0; k < ett.size();\
-    \ k++)\n      if (adj[k][x].count(y)) {\n        adj[k][x].erase(y), adj[k][y].erase(x);\n\
-    \        if (adj[k][x].size() == 0) ett[k].subedge_set(x, 0);\n        if (adj[k][y].size()\
-    \ == 0) ett[k].subedge_set(y, 0);\n        return;\n      }\n    for (int k =\
-    \ ett.size(); k-- > 0;)\n      if (ett[k].edge_exist(x, y)) {\n        if (k +\
-    \ 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n        replace(x,\
-    \ y, k + 1);\n      }\n  }\n  const T& operator[](int x) { return ett[0][x]; }\n\
-    \  void set(int x, T val) { ett[0].set(x, val); }\n  int size(int x) { return\
-    \ ett[0].tree_size(x); }\n  T fold(int x) { return ett[0].fold_tree(x); }\n  void\
-    \ apply(int x, E v) { return ett[0].apply_tree(x, v); }\n  bool connected(int\
-    \ x, int y) { return ett[0].connected(x, y); }\n};\n"
+    // BEGIN CUT HERE\n\ntemplate <typename M= void, std::size_t NODE_SIZE= 303030\
+    \ * 4> class OnlineDynamicConnectivity {\n using T= typename EulerTourTree<M,\
+    \ NODE_SIZE>::T;\n using E= typename EulerTourTree<M, NODE_SIZE>::E;\n int N;\n\
+    \ std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
+    \ adj;\n void replace(int x, int y, int level) {\n  for (int k= 0; k < level;\
+    \ k++) ett[k].cut(x, y);\n  for (int k= level, loop= true; k-- > 0 && loop;) {\n\
+    \   if (ett[k].tree_size(x) > ett[k].tree_size(y)) std::swap(x, y);\n   ett[k].hilevel_edges(x,\
+    \ [&](int s, int d) { ett[k + 1].link(s, d, true); });\n   ett[k].subedges(x,\
+    \ [&](int s) {\n    for (auto itr= adj[k][s].begin(); itr != adj[k][s].end();)\
+    \ {\n     auto d= *itr;\n     if (adj[k][s].size() == 1) ett[k].subedge_set(s,\
+    \ 0);\n     if (adj[k][d].size() == 1) ett[k].subedge_set(d, 0);\n     adj[k][d].erase(s),\
+    \ itr= adj[k][s].erase(itr);\n     if (ett[k].connected(s, d)) {\n      if (adj[k\
+    \ + 1][s].size() == 0) ett[k + 1].subedge_set(s, 1);\n      if (adj[k + 1][d].size()\
+    \ == 0) ett[k + 1].subedge_set(d, 1);\n      adj[k + 1][s].insert(d), adj[k +\
+    \ 1][d].insert(s);\n     } else {\n      for (int kk= k + 1; kk-- > 0;) ett[kk].link(s,\
+    \ d, kk == k);\n      return loop= false, true;\n     }\n    }\n    return false;\n\
+    \   });\n  }\n }\npublic:\n OnlineDynamicConnectivity(int N): N(N) { ett.emplace_back(N),\
+    \ adj.emplace_back(N); }\n void link(int x, int y) {\n  if (ett[0].connected(x,\
+    \ y)) {\n   if (adj[0][x].size() == 0) ett[0].subedge_set(x, 1);\n   if (adj[0][y].size()\
+    \ == 0) ett[0].subedge_set(y, 1);\n   adj[0][x].insert(y), adj[0][y].insert(x);\n\
+    \  } else ett[0].link(x, y, true);\n }\n void cut(int x, int y) {\n  for (int\
+    \ k= 0; k < ett.size(); k++)\n   if (adj[k][x].count(y)) {\n    adj[k][x].erase(y),\
+    \ adj[k][y].erase(x);\n    if (adj[k][x].size() == 0) ett[k].subedge_set(x, 0);\n\
+    \    if (adj[k][y].size() == 0) ett[k].subedge_set(y, 0);\n    return;\n   }\n\
+    \  for (int k= ett.size(); k-- > 0;)\n   if (ett[k].edge_exist(x, y)) {\n    if\
+    \ (k + 1 == ett.size()) ett.emplace_back(N), adj.emplace_back(N);\n    replace(x,\
+    \ y, k + 1);\n   }\n }\n const T& operator[](int x) { return ett[0][x]; }\n void\
+    \ set(int x, T val) { ett[0].set(x, val); }\n int size(int x) { return ett[0].tree_size(x);\
+    \ }\n T fold(int x) { return ett[0].fold_tree(x); }\n void apply(int x, E v) {\
+    \ return ett[0].apply_tree(x, v); }\n bool connected(int x, int y) { return ett[0].connected(x,\
+    \ y); }\n};\n"
   dependsOn:
   - src/DataStructure/EulerTourTree.hpp
   isVerificationFile: false
   path: src/DataStructure/OnlineDynamicConnectivity.hpp
   requiredBy: []
-  timestamp: '2022-06-20 22:25:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-22 15:13:02+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
