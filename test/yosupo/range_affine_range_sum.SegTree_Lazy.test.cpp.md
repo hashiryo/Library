@@ -146,7 +146,7 @@ data:
     \ 2>;\n static T ti() { return {Mint(), 0}; }\n static T op(const T &l, const\
     \ T &r) { return {l.val + r.val, l.sz + r.sz}; }\n static bool mapping(T &v, const\
     \ E &f) { return v.val= f[0] * v.val + f[1] * v.sz, true; }\n static void composition(E\
-    \ &pre, const E &suf) { pre= {pre[0] * suf[0], suf[1] * pre[1] + suf[1]}; }\n\
+    \ &pre, const E &suf) { pre= {pre[0] * suf[0], suf[0] * pre[1] + suf[1]}; }\n\
     };\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin\
     \ >> N >> Q;\n vector<RaffineQ_RsumQ::T> v(N);\n for (int i= 0; i < N; i++) {\n\
     \  Mint a;\n  cin >> a;\n  v[i]= {a, 1};\n }\n SegmentTree_Beats<RaffineQ_RsumQ>\
@@ -161,7 +161,7 @@ data:
     \ };\n using E= array<Mint, 2>;\n static T ti() { return {Mint(), 0}; }\n static\
     \ T op(const T &l, const T &r) { return {l.val + r.val, l.sz + r.sz}; }\n static\
     \ bool mapping(T &v, const E &f) { return v.val= f[0] * v.val + f[1] * v.sz, true;\
-    \ }\n static void composition(E &pre, const E &suf) { pre= {pre[0] * suf[0], suf[1]\
+    \ }\n static void composition(E &pre, const E &suf) { pre= {pre[0] * suf[0], suf[0]\
     \ * pre[1] + suf[1]}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n vector<RaffineQ_RsumQ::T> v(N);\n for (int i= 0;\
     \ i < N; i++) {\n  Mint a;\n  cin >> a;\n  v[i]= {a, 1};\n }\n SegmentTree_Beats<RaffineQ_RsumQ>\
@@ -176,7 +176,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 22:31:15+09:00'
+  timestamp: '2023-01-23 00:38:29+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

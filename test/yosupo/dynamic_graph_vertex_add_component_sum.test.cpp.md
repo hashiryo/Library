@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
   - icon: ':question:'
@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
@@ -162,22 +162,23 @@ data:
     \ namespace std;\nstruct Monoid {\n using T= long long;\n static inline T ti()\
     \ { return 0; }\n static inline T op(T lval, T rval) { return lval + rval; }\n\
     };\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >>\
-    \ N >> Q;\n OnlineDynamicConnectivity<Monoid> dicon(N);\n for (int i= 0; i < N;\
-    \ i++) {\n  int a;\n  cin >> a;\n  dicon.set(i, a);\n }\n for (int i= 0; i < Q;\
-    \ i++) {\n  int t;\n  int u, v;\n  cin >> t;\n  if (t == 0) {\n   cin >> u >>\
-    \ v;\n   dicon.link(u, v);\n  } else if (t == 1) {\n   cin >> u >> v;\n   dicon.cut(u,\
-    \ v);\n  } else if (t == 2) {\n   cin >> u >> v;\n   dicon.set(u, dicon[u] + v);\n\
-    \  } else {\n   cin >> v;\n   cout << dicon.fold(v) << '\\n';\n  }\n }\n}\n"
+    \ N >> Q;\n OnlineDynamicConnectivity<Monoid, 6'000'000> dicon(N);\n for (int\
+    \ i= 0; i < N; i++) {\n  int a;\n  cin >> a;\n  dicon.set(i, a);\n }\n for (int\
+    \ i= 0; i < Q; i++) {\n  int t;\n  int u, v;\n  cin >> t;\n  if (t == 0) {\n \
+    \  cin >> u >> v;\n   dicon.link(u, v);\n  } else if (t == 1) {\n   cin >> u >>\
+    \ v;\n   dicon.cut(u, v);\n  } else if (t == 2) {\n   cin >> u >> v;\n   dicon.set(u,\
+    \ dicon[u] + v);\n  } else {\n   cin >> v;\n   cout << dicon.fold(v) << '\\n';\n\
+    \  }\n }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
     \n#include <iostream>\n#include \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
     \nusing namespace std;\nstruct Monoid {\n using T= long long;\n static inline\
     \ T ti() { return 0; }\n static inline T op(T lval, T rval) { return lval + rval;\
     \ }\n};\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin\
-    \ >> N >> Q;\n OnlineDynamicConnectivity<Monoid> dicon(N);\n for (int i= 0; i\
-    \ < N; i++) {\n  int a;\n  cin >> a;\n  dicon.set(i, a);\n }\n for (int i= 0;\
-    \ i < Q; i++) {\n  int t;\n  int u, v;\n  cin >> t;\n  if (t == 0) {\n   cin >>\
-    \ u >> v;\n   dicon.link(u, v);\n  } else if (t == 1) {\n   cin >> u >> v;\n \
-    \  dicon.cut(u, v);\n  } else if (t == 2) {\n   cin >> u >> v;\n   dicon.set(u,\
+    \ >> N >> Q;\n OnlineDynamicConnectivity<Monoid, 6'000'000> dicon(N);\n for (int\
+    \ i= 0; i < N; i++) {\n  int a;\n  cin >> a;\n  dicon.set(i, a);\n }\n for (int\
+    \ i= 0; i < Q; i++) {\n  int t;\n  int u, v;\n  cin >> t;\n  if (t == 0) {\n \
+    \  cin >> u >> v;\n   dicon.link(u, v);\n  } else if (t == 1) {\n   cin >> u >>\
+    \ v;\n   dicon.cut(u, v);\n  } else if (t == 2) {\n   cin >> u >> v;\n   dicon.set(u,\
     \ dicon[u] + v);\n  } else {\n   cin >> v;\n   cout << dicon.fold(v) << '\\n';\n\
     \  }\n }\n}"
   dependsOn:
@@ -187,8 +188,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 23:29:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-23 00:38:29+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
 layout: document

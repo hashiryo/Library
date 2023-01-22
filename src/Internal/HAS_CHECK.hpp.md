@@ -15,7 +15,7 @@ data:
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   - icon: ':heavy_check_mark:'
@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
   - icon: ':question:'
@@ -124,7 +124,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -160,7 +160,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -169,7 +169,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.KDT.test.cpp
     title: test/yukicoder/728.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
   _isVerificationFailed: true

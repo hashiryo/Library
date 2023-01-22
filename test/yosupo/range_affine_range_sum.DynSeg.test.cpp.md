@@ -244,7 +244,7 @@ data:
     \ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T ti() { return 0; }\n\
     \ static T op(const T &l, const T &r) { return l + r; }\n static void mapping(T\
     \ &v, const E &f, int sz) { v= f[0] * v + f[1] * sz; }\n static void composition(E\
-    \ &pre, const E &suf) { pre= {pre[0] * suf[0], suf[1] * pre[1] + suf[1]}; }\n\
+    \ &pre, const E &suf) { pre= {pre[0] * suf[0], suf[0] * pre[1] + suf[1]}; }\n\
     };\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin\
     \ >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >> a[i];\n SegmentTree_Dynamic<RaffineQ_RsumQ>\
     \ seg(a, a + N);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >>\
@@ -256,7 +256,7 @@ data:
     struct RaffineQ_RsumQ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T\
     \ ti() { return 0; }\n static T op(const T &l, const T &r) { return l + r; }\n\
     \ static void mapping(T &v, const E &f, int sz) { v= f[0] * v + f[1] * sz; }\n\
-    \ static void composition(E &pre, const E &suf) { pre= {pre[0] * suf[0], suf[1]\
+    \ static void composition(E &pre, const E &suf) { pre= {pre[0] * suf[0], suf[0]\
     \ * pre[1] + suf[1]}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >>\
     \ a[i];\n SegmentTree_Dynamic<RaffineQ_RsumQ> seg(a, a + N);\n while (Q--) {\n\
@@ -272,7 +272,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 23:29:19+09:00'
+  timestamp: '2023-01-23 00:38:29+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.DynSeg.test.cpp

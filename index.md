@@ -38,7 +38,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/DisjointSparseTable.hpp
       title: Disjoint-Sparse-Table
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/EulerTourTree.hpp
       title: Euler-Tour-Tree
     - icon: ':heavy_check_mark:'
@@ -50,7 +50,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree.hpp
       title: Link-Cut-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
     - icon: ':heavy_check_mark:'
@@ -957,7 +957,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/division_of_Poly.test.cpp
       title: test/yosupo/division_of_Poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
       title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1301,7 +1301,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.BIT.test.cpp
       title: test/yukicoder/649.BIT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/649.DynSeg.test.cpp
       title: test/yukicoder/649.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1334,7 +1334,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/803.test.cpp
       title: test/yukicoder/803.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
     - icon: ':heavy_check_mark:'
