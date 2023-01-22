@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MaxFlow.hpp
     title: "\u6700\u5927\u6D41"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/monge_mincut.hpp
     title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
       \u822C\u5316"

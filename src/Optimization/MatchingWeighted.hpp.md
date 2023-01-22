@@ -3,31 +3,31 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/general_weighted_matching.test.cpp
     title: test/yosupo/general_weighted_matching.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/MatchingWeighted.hpp\"\n#include <limits>\n\
-    #include <vector>\n#include <queue>\n#include <tuple>\ntemplate <class cost_t=\
-    \ long long> class MatchingWeighted {\n static constexpr cost_t INF= std::numeric_limits<cost_t>::max()\
-    \ / 2;\n struct E {\n  int u, v;\n  cost_t w;\n };\n int n, m, in;\n std::vector<std::vector<E>>\
-    \ G;\n std::vector<int> mt, slk, rt, par, isS, used;\n std::vector<std::vector<int>>\
-    \ fwr, blg;\n std::vector<cost_t> dual;\n std::queue<int> que;\n inline cost_t\
-    \ dist(const E &e) const { return dual[e.u] + dual[e.v] - e.w; }\n void recalc(int\
-    \ v, int i= 1) {\n  for (slk[v]= 0; i <= n; i++)\n   if (G[i][v].w && rt[i] !=\
-    \ v && isS[rt[i]] == 1)\n    if (!slk[v] || dist(G[i][v]) < dist(G[slk[v]][v]))\
-    \ slk[v]= i;\n }\n void push(int v) {\n  if (v <= n) return que.push(v);\n  for\
-    \ (int nxt: fwr[v]) push(nxt);\n }\n void set(int v, int r) {\n  if (rt[v]= r;\
-    \ v > n)\n   for (int nxt: fwr[v]) set(nxt, r);\n }\n int findeven(int b, int\
-    \ v, int p= 0) {\n  if (p= std::find(fwr[b].begin(), fwr[b].end(), v) - fwr[b].begin();\
-    \ p & 1) std::reverse(fwr[b].begin() + 1, fwr[b].end()), p= fwr[b].size() - p;\n\
-    \  return p;\n }\n void match(int u, int v) {\n  if (mt[u]= G[u][v].v; u > n)\
-    \ {\n   int x= blg[u][G[u][v].u], p= findeven(u, x);\n   for (int i= 0; i < p;\
-    \ i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), rotate(fwr[u].begin(),\
+    #include <vector>\n#include <queue>\n#include <tuple>\n#include <algorithm>\n\
+    template <class cost_t= long long> class MatchingWeighted {\n static constexpr\
+    \ cost_t INF= std::numeric_limits<cost_t>::max() / 2;\n struct E {\n  int u, v;\n\
+    \  cost_t w;\n };\n int n, m, in;\n std::vector<std::vector<E>> G;\n std::vector<int>\
+    \ mt, slk, rt, par, isS, used;\n std::vector<std::vector<int>> fwr, blg;\n std::vector<cost_t>\
+    \ dual;\n std::queue<int> que;\n inline cost_t dist(const E &e) const { return\
+    \ dual[e.u] + dual[e.v] - e.w; }\n void recalc(int v, int i= 1) {\n  for (slk[v]=\
+    \ 0; i <= n; i++)\n   if (G[i][v].w && rt[i] != v && isS[rt[i]] == 1)\n    if\
+    \ (!slk[v] || dist(G[i][v]) < dist(G[slk[v]][v])) slk[v]= i;\n }\n void push(int\
+    \ v) {\n  if (v <= n) return que.push(v);\n  for (int nxt: fwr[v]) push(nxt);\n\
+    \ }\n void set(int v, int r) {\n  if (rt[v]= r; v > n)\n   for (int nxt: fwr[v])\
+    \ set(nxt, r);\n }\n int findeven(int b, int v, int p= 0) {\n  if (p= std::find(fwr[b].begin(),\
+    \ fwr[b].end(), v) - fwr[b].begin(); p & 1) std::reverse(fwr[b].begin() + 1, fwr[b].end()),\
+    \ p= fwr[b].size() - p;\n  return p;\n }\n void match(int u, int v) {\n  if (mt[u]=\
+    \ G[u][v].v; u > n) {\n   int x= blg[u][G[u][v].u], p= findeven(u, x);\n   for\
+    \ (int i= 0; i < p; i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), std::rotate(fwr[u].begin(),\
     \ fwr[u].begin() + p, fwr[u].end());\n  }\n }\n bool path(const E &e) {\n  if\
     \ (int u= rt[e.u], v= rt[e.v], bu= u, bv= v, x; isS[v] == 1) {\n   for (in++;\
     \ bu; bu= rt[mt[bu]] ? rt[par[rt[mt[bu]]]] : 0) used[bu]= in;\n   for (int i,\
@@ -79,10 +79,10 @@ data:
     \ G[ret[i] + 1][i + 1].w;\n  return std::make_tuple(num, sum / 2, ret);\n }\n\
     };\n"
   code: "#pragma once\n#include <limits>\n#include <vector>\n#include <queue>\n#include\
-    \ <tuple>\ntemplate <class cost_t= long long> class MatchingWeighted {\n static\
-    \ constexpr cost_t INF= std::numeric_limits<cost_t>::max() / 2;\n struct E {\n\
-    \  int u, v;\n  cost_t w;\n };\n int n, m, in;\n std::vector<std::vector<E>> G;\n\
-    \ std::vector<int> mt, slk, rt, par, isS, used;\n std::vector<std::vector<int>>\
+    \ <tuple>\n#include <algorithm>\ntemplate <class cost_t= long long> class MatchingWeighted\
+    \ {\n static constexpr cost_t INF= std::numeric_limits<cost_t>::max() / 2;\n struct\
+    \ E {\n  int u, v;\n  cost_t w;\n };\n int n, m, in;\n std::vector<std::vector<E>>\
+    \ G;\n std::vector<int> mt, slk, rt, par, isS, used;\n std::vector<std::vector<int>>\
     \ fwr, blg;\n std::vector<cost_t> dual;\n std::queue<int> que;\n inline cost_t\
     \ dist(const E &e) const { return dual[e.u] + dual[e.v] - e.w; }\n void recalc(int\
     \ v, int i= 1) {\n  for (slk[v]= 0; i <= n; i++)\n   if (G[i][v].w && rt[i] !=\
@@ -94,7 +94,7 @@ data:
     \ p & 1) std::reverse(fwr[b].begin() + 1, fwr[b].end()), p= fwr[b].size() - p;\n\
     \  return p;\n }\n void match(int u, int v) {\n  if (mt[u]= G[u][v].v; u > n)\
     \ {\n   int x= blg[u][G[u][v].u], p= findeven(u, x);\n   for (int i= 0; i < p;\
-    \ i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), rotate(fwr[u].begin(),\
+    \ i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), std::rotate(fwr[u].begin(),\
     \ fwr[u].begin() + p, fwr[u].end());\n  }\n }\n bool path(const E &e) {\n  if\
     \ (int u= rt[e.u], v= rt[e.v], bu= u, bv= v, x; isS[v] == 1) {\n   for (in++;\
     \ bu; bu= rt[mt[bu]] ? rt[par[rt[mt[bu]]]] : 0) used[bu]= in;\n   for (int i,\
@@ -149,8 +149,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/MatchingWeighted.hpp
   requiredBy: []
-  timestamp: '2023-01-21 23:17:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-22 22:31:15+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/general_weighted_matching.test.cpp
 documentation_of: src/Optimization/MatchingWeighted.hpp

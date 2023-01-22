@@ -25,7 +25,7 @@ data:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
-    #include <iostream>\n#include <vector>\n#line 3 \"src/DataStructure/SegmentTree_Beats.hpp\"\
+    #include <iostream>\n#include <vector>\n#include <array>\n#line 3 \"src/DataStructure/SegmentTree_Beats.hpp\"\
     \ntemplate <typename M> struct SegmentTree_Beats {\n using T= typename M::T;\n\
     \ using E= typename M::E;\n SegmentTree_Beats() {}\n SegmentTree_Beats(int n_):\
     \ n(n_), height(std::__lg(n - 1) + 1), dat(n * 2, M::ti()), laz(n * 2, {E(), false})\
@@ -139,37 +139,35 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 6 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\
+    \ return dat[n];\n}\n#line 7 \"test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp\"\
     \nusing namespace std;\nusing Mint= ModInt<998244353>;\n// RsumQ\u306F\u30E2\u30CE\
     \u30A4\u30C9\u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\u3066\u304A\u304F\nstruct\
-    \ RaffineQ_RsumQ {\n struct T {\n  Mint val;\n  int sz;\n };\n using E= pair<Mint,\
-    \ Mint>;\n static T ti() { return {0, 0}; }\n static T op(const T &l, const T\
-    \ &r) { return {l.val + r.val, l.sz + r.sz}; }\n static bool mapping(T &v, const\
-    \ E &f) { return v.val= f.first * v.val + f.second * v.sz, true; }\n static void\
-    \ composition(E &pre, const E &suf) { pre= {pre.first * suf.first, suf.first *\
-    \ pre.second + suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ RaffineQ_RsumQ {\n struct T {\n  Mint val;\n  int sz;\n };\n using E= array<Mint,\
+    \ 2>;\n static T ti() { return {Mint(), 0}; }\n static T op(const T &l, const\
+    \ T &r) { return {l.val + r.val, l.sz + r.sz}; }\n static bool mapping(T &v, const\
+    \ E &f) { return v.val= f[0] * v.val + f[1] * v.sz, true; }\n static void composition(E\
+    \ &pre, const E &suf) { pre= {pre[0] * suf[0], suf[1] * pre[1] + suf[1]}; }\n\
+    };\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin\
+    \ >> N >> Q;\n vector<RaffineQ_RsumQ::T> v(N);\n for (int i= 0; i < N; i++) {\n\
+    \  Mint a;\n  cin >> a;\n  v[i]= {a, 1};\n }\n SegmentTree_Beats<RaffineQ_RsumQ>\
+    \ seg(v);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n \
+    \ if (op) {\n   cout << seg.fold(l, r).val << endl;\n  } else {\n   Mint b, c;\n\
+    \   cin >> b >> c;\n   seg.apply(l, r, {b, c});\n  }\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
+    \n#include <iostream>\n#include <vector>\n#include <array>\n#include \"src/DataStructure/SegmentTree_Beats.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\nusing Mint= ModInt<998244353>;\n\
+    // RsumQ\u306F\u30E2\u30CE\u30A4\u30C9\u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\
+    \u3066\u304A\u304F\nstruct RaffineQ_RsumQ {\n struct T {\n  Mint val;\n  int sz;\n\
+    \ };\n using E= array<Mint, 2>;\n static T ti() { return {Mint(), 0}; }\n static\
+    \ T op(const T &l, const T &r) { return {l.val + r.val, l.sz + r.sz}; }\n static\
+    \ bool mapping(T &v, const E &f) { return v.val= f[0] * v.val + f[1] * v.sz, true;\
+    \ }\n static void composition(E &pre, const E &suf) { pre= {pre[0] * suf[0], suf[1]\
+    \ * pre[1] + suf[1]}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n vector<RaffineQ_RsumQ::T> v(N);\n for (int i= 0;\
     \ i < N; i++) {\n  Mint a;\n  cin >> a;\n  v[i]= {a, 1};\n }\n SegmentTree_Beats<RaffineQ_RsumQ>\
     \ seg(v);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n \
     \ if (op) {\n   cout << seg.fold(l, r).val << endl;\n  } else {\n   Mint b, c;\n\
-    \   cin >> b >> c;\n   seg.apply(l, r, {Mint(b), Mint(c)});\n  }\n }\n return\
-    \ 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n#include <iostream>\n#include <vector>\n#include \"src/DataStructure/SegmentTree_Beats.hpp\"\
-    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\nusing Mint= ModInt<998244353>;\n\
-    // RsumQ\u306F\u30E2\u30CE\u30A4\u30C9\u3067\u30B5\u30A4\u30BA\u3092\u6301\u3063\
-    \u3066\u304A\u304F\nstruct RaffineQ_RsumQ {\n struct T {\n  Mint val;\n  int sz;\n\
-    \ };\n using E= pair<Mint, Mint>;\n static T ti() { return {0, 0}; }\n static\
-    \ T op(const T &l, const T &r) { return {l.val + r.val, l.sz + r.sz}; }\n static\
-    \ bool mapping(T &v, const E &f) { return v.val= f.first * v.val + f.second *\
-    \ v.sz, true; }\n static void composition(E &pre, const E &suf) { pre= {pre.first\
-    \ * suf.first, suf.first * pre.second + suf.second}; }\n};\nsigned main() {\n\
-    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n vector<RaffineQ_RsumQ::T>\
-    \ v(N);\n for (int i= 0; i < N; i++) {\n  Mint a;\n  cin >> a;\n  v[i]= {a, 1};\n\
-    \ }\n SegmentTree_Beats<RaffineQ_RsumQ> seg(v);\n while (Q--) {\n  bool op;\n\
-    \  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << seg.fold(l, r).val\
-    \ << endl;\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n   seg.apply(l, r, {Mint(b),\
-    \ Mint(c)});\n  }\n }\n return 0;\n}\n"
+    \   cin >> b >> c;\n   seg.apply(l, r, {b, c});\n  }\n }\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree_Beats.hpp
   - src/Math/ModInt.hpp
@@ -178,7 +176,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 15:46:32+09:00'
+  timestamp: '2023-01-22 22:31:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

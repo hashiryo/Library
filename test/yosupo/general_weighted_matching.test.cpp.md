@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MatchingWeighted.hpp
     title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
       \u822C\u30B0\u30E9\u30D5)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_weighted_matching
@@ -19,9 +19,9 @@ data:
     \ PROBLEM \"https://judge.yosupo.jp/problem/general_weighted_matching\"\n#include\
     \ <iostream>\n#include <vector>\n#line 2 \"src/Optimization/MatchingWeighted.hpp\"\
     \n#include <limits>\n#line 4 \"src/Optimization/MatchingWeighted.hpp\"\n#include\
-    \ <queue>\n#include <tuple>\ntemplate <class cost_t= long long> class MatchingWeighted\
-    \ {\n static constexpr cost_t INF= std::numeric_limits<cost_t>::max() / 2;\n struct\
-    \ E {\n  int u, v;\n  cost_t w;\n };\n int n, m, in;\n std::vector<std::vector<E>>\
+    \ <queue>\n#include <tuple>\n#include <algorithm>\ntemplate <class cost_t= long\
+    \ long> class MatchingWeighted {\n static constexpr cost_t INF= std::numeric_limits<cost_t>::max()\
+    \ / 2;\n struct E {\n  int u, v;\n  cost_t w;\n };\n int n, m, in;\n std::vector<std::vector<E>>\
     \ G;\n std::vector<int> mt, slk, rt, par, isS, used;\n std::vector<std::vector<int>>\
     \ fwr, blg;\n std::vector<cost_t> dual;\n std::queue<int> que;\n inline cost_t\
     \ dist(const E &e) const { return dual[e.u] + dual[e.v] - e.w; }\n void recalc(int\
@@ -34,7 +34,7 @@ data:
     \ p & 1) std::reverse(fwr[b].begin() + 1, fwr[b].end()), p= fwr[b].size() - p;\n\
     \  return p;\n }\n void match(int u, int v) {\n  if (mt[u]= G[u][v].v; u > n)\
     \ {\n   int x= blg[u][G[u][v].u], p= findeven(u, x);\n   for (int i= 0; i < p;\
-    \ i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), rotate(fwr[u].begin(),\
+    \ i++) match(fwr[u][i], fwr[u][i ^ 1]);\n   match(x, v), std::rotate(fwr[u].begin(),\
     \ fwr[u].begin() + p, fwr[u].end());\n  }\n }\n bool path(const E &e) {\n  if\
     \ (int u= rt[e.u], v= rt[e.v], bu= u, bv= v, x; isS[v] == 1) {\n   for (in++;\
     \ bu; bu= rt[mt[bu]] ? rt[par[rt[mt[bu]]]] : 0) used[bu]= in;\n   for (int i,\
@@ -102,8 +102,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/general_weighted_matching.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 23:17:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-22 22:31:15+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/general_weighted_matching.test.cpp
 layout: document

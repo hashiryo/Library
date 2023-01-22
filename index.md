@@ -176,7 +176,7 @@ data:
       title: "\u6700\u8FD1\u70B9\u5BFE"
   - name: src/Graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "HL\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -207,7 +207,7 @@ data:
         \u7D1A\u6570)"
   - name: src/Internal
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Internal/HAS_CHECK.hpp
       title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
         \u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -329,11 +329,11 @@ data:
       path: src/Optimization/Matching.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
         )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MatchingWeighted.hpp
       title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
         \u822C\u30B0\u30E9\u30D5)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41"
     - icon: ':heavy_check_mark:'
@@ -346,7 +346,7 @@ data:
       path: src/Optimization/min_Lconvex.hpp
       title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
         \u30B0\u6CD5)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
@@ -556,6 +556,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2863.test.cpp
       title: test/aoj/2863.test.cpp
+    - icon: ':x:'
+      path: test/aoj/2893.Dicon.test.cpp
+      title: test/aoj/2893.Dicon.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2893.test.cpp
       title: test/aoj/2893.test.cpp
@@ -999,7 +1002,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/general_weighted_matching.test.cpp
       title: test/yosupo/general_weighted_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1116,7 +1119,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1226,10 +1229,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1145.test.cpp
       title: test/yukicoder/1145.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.Dinic.test.cpp
       title: test/yukicoder/119.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1265,7 +1268,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/215.test.cpp
       title: test/yukicoder/215.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1334,7 +1337,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/880.Beats.test.cpp
       title: test/yukicoder/880.Beats.test.cpp
     - icon: ':heavy_check_mark:'

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MaxFlow.hpp
     title: "\u6700\u5927\u6D41"
   _extendedRequiredBy: []

@@ -15,12 +15,18 @@ data:
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
+  - icon: ':question:'
+    path: src/DataStructure/EulerTourTree.hpp
+    title: Euler-Tour-Tree
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
+  - icon: ':question:'
+    path: src/DataStructure/OnlineDynamicConnectivity.hpp
+    title: Online-Dynamic-Connectivity
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
@@ -31,6 +37,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2235.onlinedicon.test.cpp
+    title: test/aoj/2235.onlinedicon.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
@@ -52,6 +61,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2893.Dicon.test.cpp
+    title: test/aoj/2893.Dicon.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
     title: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
@@ -100,9 +112,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+    title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
+    title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+    title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
@@ -127,9 +148,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.KDT.test.cpp
     title: test/yukicoder/728.KDT.test.cpp
-  _isVerificationFailed: false
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/828.ETT.test.cpp
+    title: test/yukicoder/828.ETT.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define\
@@ -153,32 +177,40 @@ data:
   - src/DataStructure/SkewHeap.hpp
   - src/DataStructure/LinkCutTree.hpp
   - src/DataStructure/KDTree.hpp
+  - src/DataStructure/OnlineDynamicConnectivity.hpp
+  - src/DataStructure/EulerTourTree.hpp
   - src/Automaton/DFA_Compress.hpp
   - src/Automaton/dfa_operations.hpp
   - src/Automaton/NFA_to_DFA.hpp
   - src/Automaton/dfa_dp.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/aoj/2235.onlinedicon.test.cpp
   - test/aoj/2450.LCT.test.cpp
   - test/aoj/GRL_2_B.test.cpp
   - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   - test/aoj/2842.KDT.test.cpp
   - test/aoj/2647.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
+  - test/aoj/2893.Dicon.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/2587.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
   - test/aoj/1068.KDT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/directedmst.test.cpp
+  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/828.ETT.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/728.KDT.test.cpp
   - test/atcoder/abc208_e.test.cpp
