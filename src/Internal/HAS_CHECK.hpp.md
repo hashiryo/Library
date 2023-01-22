@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
   - icon: ':question:'
@@ -43,7 +43,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -67,7 +67,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2893.onlinedicon.test.cpp
     title: test/aoj/2893.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3024.DynSeg.test.cpp
     title: test/aoj/3024.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -76,7 +76,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I.DynSeg.test.cpp
     title: test/aoj/DSL_2_I.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -88,7 +88,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -148,7 +148,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.DynSeg.test.cpp
     title: test/yosupo/set_xor_min.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -169,7 +169,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.KDT.test.cpp
     title: test/yukicoder/728.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
   _isVerificationFailed: true

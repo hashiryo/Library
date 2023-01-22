@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
   _isVerificationFailed: true
@@ -41,7 +41,7 @@ data:
     \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
     \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
     \ HAS_CHECK(member, class dummy= typename U::member)\n#line 6 \"src/DataStructure/EulerTourTree.hpp\"\
-    \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class EulerTourTree\
+    \ntemplate <typename M= void, std::size_t NODE_SIZE= 4'000'000> class EulerTourTree\
     \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
     \ HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>,\
     \ has_op<L>, has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>,\
@@ -139,7 +139,7 @@ data:
     \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <string>\n#include <unordered_map>\n\
     #include \"src/Internal/HAS_CHECK.hpp\"\ntemplate <typename M= void, std::size_t\
-    \ NODE_SIZE= 303030 * 4> class EulerTourTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ NODE_SIZE= 4'000'000> class EulerTourTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
     \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
     \ template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n\
     \ template <class L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
@@ -240,7 +240,7 @@ data:
   path: src/DataStructure/EulerTourTree.hpp
   requiredBy:
   - src/DataStructure/OnlineDynamicConnectivity.hpp
-  timestamp: '2023-01-22 22:31:15+09:00'
+  timestamp: '2023-01-22 23:29:19+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp

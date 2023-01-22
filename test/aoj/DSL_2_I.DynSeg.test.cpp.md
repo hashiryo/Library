@@ -10,9 +10,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_I
@@ -20,13 +20,14 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_I
   bundledCode: "#line 1 \"test/aoj/DSL_2_I.DynSeg.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_I\"\
     \n// \u9045\u5EF6\u4F1D\u642C\u306Everify\n#include <iostream>\n#line 2 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
-    \n#include <array>\n#include <vector>\n#include <string>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
-    \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
-    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
-    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
-    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
-    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 6 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
+    \n#include <array>\n#include <vector>\n#include <string>\n#include <algorithm>\n\
+    #include <tuple>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
+    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
+    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
+    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#line 8 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \ntemplate <typename M, bool persistent= false, std::uint8_t HEIGHT= 30> class\
     \ SegmentTree_Dynamic {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
     \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
@@ -170,8 +171,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_I.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 23:12:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-22 23:29:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_I.DynSeg.test.cpp
 layout: document

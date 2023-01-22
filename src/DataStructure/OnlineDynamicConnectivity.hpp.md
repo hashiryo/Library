@@ -34,7 +34,7 @@ data:
     \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
     \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
     #line 6 \"src/DataStructure/EulerTourTree.hpp\"\ntemplate <typename M= void, std::size_t\
-    \ NODE_SIZE= 303030 * 4> class EulerTourTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ NODE_SIZE= 4'000'000> class EulerTourTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
     \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
     \ template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n\
     \ template <class L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
@@ -129,7 +129,7 @@ data:
     \ (bool loop= true; loop;) {\n    if (n[v].flag & 0b0100) {\n     if (f(n[v].flag\
     \ >> 44)) return 1;\n     splay(v), loop= false;\n    } else v= n[v].ch[!(n[v].ch[0]\
     \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 5 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
-    \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class OnlineDynamicConnectivity\
+    \ntemplate <typename M= void, std::size_t NODE_SIZE= 4'000'000> class OnlineDynamicConnectivity\
     \ {\n using T= typename EulerTourTree<M, NODE_SIZE>::T;\n using E= typename EulerTourTree<M,\
     \ NODE_SIZE>::E;\n int N;\n std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
     \ adj;\n void replace(int x, int y, int level) {\n  for (int k= 0; k < level;\
@@ -160,7 +160,7 @@ data:
     \ return ett[0].fold_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
     \ v); }\n bool connected(int x, int y) { return ett[0].connected(x, y); }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <unordered_set>\n#include \"src/DataStructure/EulerTourTree.hpp\"\
-    \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class OnlineDynamicConnectivity\
+    \ntemplate <typename M= void, std::size_t NODE_SIZE= 4'000'000> class OnlineDynamicConnectivity\
     \ {\n using T= typename EulerTourTree<M, NODE_SIZE>::T;\n using E= typename EulerTourTree<M,\
     \ NODE_SIZE>::E;\n int N;\n std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
     \ adj;\n void replace(int x, int y, int level) {\n  for (int k= 0; k < level;\
@@ -196,7 +196,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/OnlineDynamicConnectivity.hpp
   requiredBy: []
-  timestamp: '2023-01-22 23:12:06+09:00'
+  timestamp: '2023-01-22 23:29:19+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp

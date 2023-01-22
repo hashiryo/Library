@@ -47,7 +47,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/LiChaoTree.hpp
       title: Li-Chao-Tree
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/LinkCutTree.hpp
       title: Link-Cut-Tree
     - icon: ':question:'
@@ -463,7 +463,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2257.test.cpp
       title: test/aoj/2257.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2270.DynSeg.test.cpp
       title: test/aoj/2270.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -565,7 +565,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3024.DynSeg.test.cpp
       title: test/aoj/3024.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -703,7 +703,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
       title: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_I.DynSeg.test.cpp
       title: test/aoj/DSL_2_I.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -777,7 +777,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc129_e.test.cpp
       title: test/atcoder/abc129_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.DynSeg.test.cpp
       title: test/atcoder/abc133_f.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1131,7 +1131,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/set_xor_min.DynSeg.test.cpp
       title: test/yosupo/set_xor_min.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1334,7 +1334,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/803.test.cpp
       title: test/yukicoder/803.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/828.ETT.test.cpp
       title: test/yukicoder/828.ETT.test.cpp
     - icon: ':heavy_check_mark:'

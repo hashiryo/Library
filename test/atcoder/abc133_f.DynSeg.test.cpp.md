@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
   - icon: ':question:'
@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc133/tasks/abc133_f
@@ -25,28 +25,28 @@ data:
     \ \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n// \u6C38\u7D9A\u914D\
     \u5217(at) \u306E verify\n#include <iostream>\n#include <vector>\n#include <tuple>\n\
     #line 2 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include <array>\n#line\
-    \ 4 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include <string>\n#line 2\
-    \ \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
-    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
-    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
-    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
-    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
-    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
-    #line 6 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\ntemplate <typename M, bool\
-    \ persistent= false, std::uint8_t HEIGHT= 30> class SegmentTree_Dynamic {\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
-    \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
-    \ has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n using id_t= long long;\n template <class\
-    \ T, class tDerived, class F= std::nullptr_t> struct Node_B {\n  using E= F;\n\
-    \  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n };\n template <bool mo_, bool\
-    \ du_, typename tEnable= void> struct Node_D: Node_B<M, Node_D<mo_, du_, tEnable>>\
-    \ {};\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename std::enable_if_t<mo_\
-    \ && !du_>>: Node_B<typename M::T, Node_D<mo_, du_>> {};\n template <bool mo_,\
-    \ bool du_> struct Node_D<mo_, du_, typename std::enable_if_t<du_>>: Node_B<typename\
-    \ M::T, Node_D<mo_, du_>, typename M::E> {\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false;\n };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\n using\
-    \ T= decltype(Node::val);\n using E= typename Node::E;\n Node *root;\n static\
+    \ 4 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include <string>\n#include\
+    \ <algorithm>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
+    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
+    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
+    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#line 8 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
+    \ntemplate <typename M, bool persistent= false, std::uint8_t HEIGHT= 30> class\
+    \ SegmentTree_Dynamic {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
+    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
+    \ using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n template <class\
+    \ L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>, has_composition<L>>;\n\
+    \ using id_t= long long;\n template <class T, class tDerived, class F= std::nullptr_t>\
+    \ struct Node_B {\n  using E= F;\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n\
+    \ };\n template <bool mo_, bool du_, typename tEnable= void> struct Node_D: Node_B<M,\
+    \ Node_D<mo_, du_, tEnable>> {};\n template <bool mo_, bool du_> struct Node_D<mo_,\
+    \ du_, typename std::enable_if_t<mo_ && !du_>>: Node_B<typename M::T, Node_D<mo_,\
+    \ du_>> {};\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename std::enable_if_t<du_>>:\
+    \ Node_B<typename M::T, Node_D<mo_, du_>, typename M::E> {\n  typename M::E lazy;\n\
+    \  bool lazy_flg= false;\n };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\n\
+    \ using T= decltype(Node::val);\n using E= typename Node::E;\n Node *root;\n static\
     \ inline constexpr T def_val() {\n  if constexpr (monoid<M>::value) return M::ti();\n\
     \  else return T();\n }\n template <class S> void build(Node *&t, const id_t &n,\
     \ std::array<id_t, 2> b, const S &bg) {\n  if (n <= b[0]) return;\n  id_t m= (b[0]\
@@ -151,9 +151,8 @@ data:
     \ {0, 1LL << HEIGHT}, ret.begin()), ret;\n }\n static std::string which_available()\
     \ {\n  std::string ret= \"\";\n  if constexpr (monoid<M>::value) ret+= \"\\\"\
     fold\\\" \\\"find\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual<M>::value)\
-    \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n};\n#line 2 \"src/DataStructure/LinkCutTree.hpp\"\
-    \n#include <algorithm>\n#line 5 \"src/DataStructure/LinkCutTree.hpp\"\n#include\
-    \ <cstddef>\n#include <cassert>\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\
+    \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n};\n#line 5 \"src/DataStructure/LinkCutTree.hpp\"\
+    \n#include <cstddef>\n#include <cassert>\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\
     \ntemplate <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
     \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
     \ using semigroup= std::conjunction<has_T<L>, has_op<L>>;\n template <class L>\
@@ -258,8 +257,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 23:12:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-22 23:29:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.DynSeg.test.cpp
 layout: document
