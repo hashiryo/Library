@@ -111,7 +111,7 @@ data:
     \ <= src && src < this->n), assert(0 <= dst && dst < this->n), ++this->m;\n  int\
     \ e= this->adj[src].size(), re= src == dst ? e + 1 : this->adj[dst].size();\n\
     \  if (lower * upper <= 0) this->adj[src].push_back(Edge{dst, re, upper}), this->adj[dst].push_back(Edge{src,\
-    \ e, -lower});\n  else if (lower > 0) in[src - 2]-= lower, in[dst - 2]+= lower\
+    \ e, -lower});\n  else if (lower > 0) in[src - 2]-= lower, in[dst - 2]+= lower,\
     \ this->adj[src].push_back(Edge{dst, re, upper - lower}), this->adj[dst].push_back(Edge{src,\
     \ e, 0});\n  else in[src - 2]-= upper, in[dst - 2]+= upper, this->adj[src].push_back(Edge{dst,\
     \ re, 0}), this->adj[dst].push_back(Edge{src, e, upper - lower});\n  return EdgePtr(this,\
@@ -231,7 +231,7 @@ data:
     \ <= src && src < this->n), assert(0 <= dst && dst < this->n), ++this->m;\n  int\
     \ e= this->adj[src].size(), re= src == dst ? e + 1 : this->adj[dst].size();\n\
     \  if (lower * upper <= 0) this->adj[src].push_back(Edge{dst, re, upper}), this->adj[dst].push_back(Edge{src,\
-    \ e, -lower});\n  else if (lower > 0) in[src - 2]-= lower, in[dst - 2]+= lower\
+    \ e, -lower});\n  else if (lower > 0) in[src - 2]-= lower, in[dst - 2]+= lower,\
     \ this->adj[src].push_back(Edge{dst, re, upper - lower}), this->adj[dst].push_back(Edge{src,\
     \ e, 0});\n  else in[src - 2]-= upper, in[dst - 2]+= upper, this->adj[src].push_back(Edge{dst,\
     \ re, 0}), this->adj[dst].push_back(Edge{src, e, upper - lower});\n  return EdgePtr(this,\
@@ -301,7 +301,7 @@ data:
   isVerificationFile: false
   path: src/Optimization/MaxFlow.hpp
   requiredBy: []
-  timestamp: '2023-01-22 00:08:35+09:00'
+  timestamp: '2023-01-22 13:38:18+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/1615.PushRelabel.test.cpp
