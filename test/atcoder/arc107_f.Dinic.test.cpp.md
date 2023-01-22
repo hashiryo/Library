@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/MaxFlow.hpp
     title: "\u6700\u5927\u6D41"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/monge_mincut.hpp
     title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
       \u822C\u5316"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc107/tasks/arc107_f
@@ -21,34 +21,35 @@ data:
   bundledCode: "#line 1 \"test/atcoder/arc107_f.Dinic.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/arc107/tasks/arc107_f\"\n#include <iostream>\n\
     #include <vector>\n#line 3 \"src/Optimization/MaxFlow.hpp\"\n#include <numeric>\n\
-    #include <algorithm>\n#include <limits>\n#include <queue>\n#include <cassert>\n\
-    template <typename FlowAlgo> struct MaxFlow: public FlowAlgo {\n using FlowAlgo::FlowAlgo;\n\
-    \ using Edge= typename FlowAlgo::Edge;\n using flow_t= decltype(Edge::cap);\n\
-    \ int add_vertex() { return this->adj.resize(++this->n), this->n - 1; }\n std::vector<int>\
-    \ add_vertices(const std::size_t size) {\n  std::vector<int> ret(size);\n  std::iota(ret.begin(),\
-    \ ret.end(), this->n);\n  return this->adj.resize(this->n+= size), ret;\n }\n\
-    \ struct EdgePtr {\n  friend class MaxFlow;\n  MaxFlow *ins;\n  int v, e;\n  bool\
-    \ bd;\n  Edge &edge() { return ins->adj[v][e]; }\n  Edge &rev() {\n   Edge &e=\
-    \ edge();\n   return ins->adj[e.dst][e.rev];\n  }\n  EdgePtr(MaxFlow *ins, int\
-    \ v, int e, bool d): ins(ins), v(v), e(e), bd(d) {}\n public:\n  EdgePtr()= default;\n\
-    \  int src() const { return v; }\n  int dst() { return edge().dst; }\n  bool is_direct()\
-    \ const { return !bd; }\n  flow_t flow() { return cap() - edge().cap; }\n  flow_t\
-    \ cap() { return (edge().cap + rev().cap) / (1 + bd); }\n  flow_t change_cap(flow_t\
-    \ new_cap, int s, int t) {\n   assert(0 <= new_cap);\n   Edge &e= edge(), &re=\
-    \ rev();\n   flow_t diff= new_cap - cap(), ext= std::abs(flow()) - new_cap;\n\
-    \   if (ext <= 0) return e.cap+= diff, re.cap+= diff * bd, 0;\n   int sr= src(),\
-    \ ds= dst();\n   if (flow() < 0) std::swap(sr, ds);\n   if (bd) {\n    if (sr\
-    \ == src()) re.cap+= 2 * diff + e.cap, e.cap= 0;\n    else e.cap+= 2 * diff +\
-    \ re.cap, re.cap= 0;\n   } else re.cap+= diff;\n   ext-= ins->maxflow(sr, ds,\
-    \ ext);\n   if (ds != t) ins->maxflow(t, ds, ext);\n   if (sr != s) ins->maxflow(sr,\
-    \ s, ext);\n   return ext;\n  }\n };\n EdgePtr add_edge(int src, int dst, flow_t\
-    \ cap, bool bidir= false) {\n  assert(0 <= src && src < this->n), assert(0 <=\
-    \ dst && dst < this->n), assert(0 <= cap);\n  int e= this->adj[src].size(), re=\
-    \ src == dst ? e + 1 : this->adj[dst].size();\n  return this->adj[src].push_back(Edge{dst,\
-    \ re, cap}), this->adj[dst].push_back(Edge{src, e, cap * bidir}), this->m++, EdgePtr{this,\
-    \ src, e, bidir};\n }\n flow_t maxflow(int s, int t) { return maxflow(s, t, std::numeric_limits<flow_t>::max());\
-    \ }\n flow_t maxflow(int s, int t, flow_t flow_lim) { return this->flow(s, t,\
-    \ flow_lim); }\n std::vector<bool> mincut(int s) {\n  std::vector<bool> visited(this->n);\n\
+    #include <algorithm>\n#include <limits>\n#include <queue>\n#include <array>\n\
+    #include <cassert>\ntemplate <typename FlowAlgo> struct MaxFlow: public FlowAlgo\
+    \ {\n using FlowAlgo::FlowAlgo;\n using Edge= typename FlowAlgo::Edge;\n using\
+    \ flow_t= decltype(Edge::cap);\n int add_vertex() { return this->adj.resize(++this->n),\
+    \ this->n - 1; }\n std::vector<int> add_vertices(const std::size_t size) {\n \
+    \ std::vector<int> ret(size);\n  std::iota(ret.begin(), ret.end(), this->n);\n\
+    \  return this->adj.resize(this->n+= size), ret;\n }\n struct EdgePtr {\n  friend\
+    \ class MaxFlow;\n  MaxFlow *ins;\n  int v, e;\n  bool bd;\n  Edge &edge() { return\
+    \ ins->adj[v][e]; }\n  Edge &rev() {\n   Edge &e= edge();\n   return ins->adj[e.dst][e.rev];\n\
+    \  }\n  EdgePtr(MaxFlow *ins, int v, int e, bool d): ins(ins), v(v), e(e), bd(d)\
+    \ {}\n public:\n  EdgePtr()= default;\n  int src() const { return v; }\n  int\
+    \ dst() { return edge().dst; }\n  bool is_direct() const { return !bd; }\n  flow_t\
+    \ flow() { return cap() - edge().cap; }\n  flow_t cap() { return (edge().cap +\
+    \ rev().cap) / (1 + bd); }\n  flow_t change_cap(flow_t new_cap, int s, int t)\
+    \ {\n   assert(0 <= new_cap);\n   Edge &e= edge(), &re= rev();\n   flow_t diff=\
+    \ new_cap - cap(), ext= std::abs(flow()) - new_cap;\n   if (ext <= 0) return e.cap+=\
+    \ diff, re.cap+= diff * bd, 0;\n   int sr= src(), ds= dst();\n   if (flow() <\
+    \ 0) std::swap(sr, ds);\n   if (bd) {\n    if (sr == src()) re.cap+= 2 * diff\
+    \ + e.cap, e.cap= 0;\n    else e.cap+= 2 * diff + re.cap, re.cap= 0;\n   } else\
+    \ re.cap+= diff;\n   ext-= ins->maxflow(sr, ds, ext);\n   if (ds != t) ins->maxflow(t,\
+    \ ds, ext);\n   if (sr != s) ins->maxflow(sr, s, ext);\n   return ext;\n  }\n\
+    \ };\n EdgePtr add_edge(int src, int dst, flow_t cap, bool bidir= false) {\n \
+    \ assert(0 <= src && src < this->n), assert(0 <= dst && dst < this->n), assert(0\
+    \ <= cap);\n  int e= this->adj[src].size(), re= src == dst ? e + 1 : this->adj[dst].size();\n\
+    \  return this->adj[src].push_back(Edge{dst, re, cap}), this->adj[dst].push_back(Edge{src,\
+    \ e, cap * bidir}), this->m++, EdgePtr{this, src, e, bidir};\n }\n flow_t maxflow(int\
+    \ s, int t) { return maxflow(s, t, std::numeric_limits<flow_t>::max()); }\n flow_t\
+    \ maxflow(int s, int t, flow_t flow_lim) { return this->flow(s, t, flow_lim);\
+    \ }\n std::vector<bool> mincut(int s) {\n  std::vector<bool> visited(this->n);\n\
     \  static std::queue<int> que;\n  for (que.push(s); !que.empty();) {\n   s= que.front(),\
     \ que.pop(), visited[s]= true;\n   for (const auto &e: this->adj[s])\n    if (e.cap\
     \ && !visited[e.dst]) visited[e.dst]= true, que.push(e.dst);\n  }\n  return visited;\n\
@@ -189,8 +190,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc107_f.Dinic.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 15:13:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-22 15:46:32+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc107_f.Dinic.test.cpp
 layout: document

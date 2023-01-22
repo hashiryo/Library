@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Beats.hpp
     title: Segment-Tree Beats!
   - icon: ':question:'
@@ -28,7 +28,7 @@ data:
     #include <iostream>\n#include <vector>\n#line 3 \"src/DataStructure/SegmentTree_Beats.hpp\"\
     \ntemplate <typename M> struct SegmentTree_Beats {\n using T= typename M::T;\n\
     \ using E= typename M::E;\n SegmentTree_Beats() {}\n SegmentTree_Beats(int n_):\
-    \ n(n_), height(ceil(log2(n))), dat(n * 2, M::ti()), laz(n * 2, {E(), false})\
+    \ n(n_), height(std::__lg(n - 1) + 1), dat(n * 2, M::ti()), laz(n * 2, {E(), false})\
     \ {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_) {\n  for (int i=\
     \ n; i--;) dat[i + n]= v1;\n  for (int i= n; --i;) update(i);\n }\n SegmentTree_Beats(const\
     \ std::vector<T> &v): SegmentTree_Beats(v.size()) {\n  for (int i= n; i--;) dat[i\
@@ -178,7 +178,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:27:17+09:00'
+  timestamp: '2023-01-22 15:46:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

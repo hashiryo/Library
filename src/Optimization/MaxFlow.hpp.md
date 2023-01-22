@@ -3,46 +3,46 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1615.Dinic.test.cpp
     title: test/aoj/1615.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1615.PushRelabel.test.cpp
     title: test/aoj/1615.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2313.Dinic.test.cpp
     title: test/aoj/2313.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2313.PushRelabel.test.cpp
     title: test/aoj/2313.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2803.Dinic.test.cpp
     title: test/aoj/2803.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2803.PushRelabel.test.cpp
     title: test/aoj/2803.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2835.Dinic.test.cpp
     title: test/aoj/2835.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2835.PushRelabel.test.cpp
     title: test/aoj/2835.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.Dinic.test.cpp
     title: test/aoj/GRL_6_A.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A.PushRelabel.test.cpp
     title: test/aoj/GRL_6_A.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.Dinic.test.cpp
     title: test/atcoder/arc107_f.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.PushRelabel.test.cpp
     title: test/atcoder/arc107_f.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - icon: ':x:'
@@ -53,14 +53,14 @@ data:
     title: test/yukicoder/119.PushRelabel.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/MaxFlow.hpp\"\n#include <vector>\n#include\
     \ <numeric>\n#include <algorithm>\n#include <limits>\n#include <queue>\n#include\
-    \ <cassert>\ntemplate <typename FlowAlgo> struct MaxFlow: public FlowAlgo {\n\
-    \ using FlowAlgo::FlowAlgo;\n using Edge= typename FlowAlgo::Edge;\n using flow_t=\
-    \ decltype(Edge::cap);\n int add_vertex() { return this->adj.resize(++this->n),\
+    \ <array>\n#include <cassert>\ntemplate <typename FlowAlgo> struct MaxFlow: public\
+    \ FlowAlgo {\n using FlowAlgo::FlowAlgo;\n using Edge= typename FlowAlgo::Edge;\n\
+    \ using flow_t= decltype(Edge::cap);\n int add_vertex() { return this->adj.resize(++this->n),\
     \ this->n - 1; }\n std::vector<int> add_vertices(const std::size_t size) {\n \
     \ std::vector<int> ret(size);\n  std::iota(ret.begin(), ret.end(), this->n);\n\
     \  return this->adj.resize(this->n+= size), ret;\n }\n struct EdgePtr {\n  friend\
@@ -177,11 +177,11 @@ data:
     \ exc[t], exc[t]= 0;\n   if constexpr (global_freq != 0) relabel(s);\n   calc(s),\
     \ assert(exc == std::vector<flow_t>(n, 0));\n  }\n  return ret;\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <numeric>\n#include <algorithm>\n\
-    #include <limits>\n#include <queue>\n#include <cassert>\ntemplate <typename FlowAlgo>\
-    \ struct MaxFlow: public FlowAlgo {\n using FlowAlgo::FlowAlgo;\n using Edge=\
-    \ typename FlowAlgo::Edge;\n using flow_t= decltype(Edge::cap);\n int add_vertex()\
-    \ { return this->adj.resize(++this->n), this->n - 1; }\n std::vector<int> add_vertices(const\
-    \ std::size_t size) {\n  std::vector<int> ret(size);\n  std::iota(ret.begin(),\
+    #include <limits>\n#include <queue>\n#include <array>\n#include <cassert>\ntemplate\
+    \ <typename FlowAlgo> struct MaxFlow: public FlowAlgo {\n using FlowAlgo::FlowAlgo;\n\
+    \ using Edge= typename FlowAlgo::Edge;\n using flow_t= decltype(Edge::cap);\n\
+    \ int add_vertex() { return this->adj.resize(++this->n), this->n - 1; }\n std::vector<int>\
+    \ add_vertices(const std::size_t size) {\n  std::vector<int> ret(size);\n  std::iota(ret.begin(),\
     \ ret.end(), this->n);\n  return this->adj.resize(this->n+= size), ret;\n }\n\
     \ struct EdgePtr {\n  friend class MaxFlow;\n  MaxFlow *ins;\n  int v, e;\n  bool\
     \ bd;\n  Edge &edge() { return ins->adj[v][e]; }\n  Edge &rev() {\n   Edge &e=\
@@ -299,8 +299,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/MaxFlow.hpp
   requiredBy: []
-  timestamp: '2023-01-22 15:13:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-22 15:46:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1615.PushRelabel.test.cpp
   - test/aoj/2313.PushRelabel.test.cpp

@@ -3,16 +3,16 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.Dinic.test.cpp
     title: test/atcoder/arc107_f.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc107_f.PushRelabel.test.cpp
     title: test/atcoder/arc107_f.PushRelabel.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.Dinic.test.cpp
     title: test/atcoder/arc129_e.Dinic.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc129_e.PushRelabel.test.cpp
     title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: test/yukicoder/119.PushRelabel.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/monge_mincut.hpp\"\n#include <vector>\n\
@@ -74,7 +74,7 @@ data:
   path: src/Optimization/monge_mincut.hpp
   requiredBy: []
   timestamp: '2023-01-21 23:17:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/119.PushRelabel.test.cpp
   - test/yukicoder/119.Dinic.test.cpp

@@ -62,10 +62,10 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':heavy_check_mark:'
@@ -333,7 +333,7 @@ data:
       path: src/Optimization/MatchingWeighted.hpp
       title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
         \u822C\u30B0\u30E9\u30D5)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41"
     - icon: ':heavy_check_mark:'
@@ -346,7 +346,7 @@ data:
       path: src/Optimization/min_Lconvex.hpp
       title: "L\u51F8\u95A2\u6570\u6700\u5C0F\u5316(\u30B9\u30B1\u30FC\u30EA\u30F3\
         \u30B0\u6CD5)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
@@ -430,10 +430,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1605.matroid_intersection.test.cpp
       title: test/aoj/1605.matroid_intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1615.Dinic.test.cpp
       title: test/aoj/1615.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1615.PushRelabel.test.cpp
       title: test/aoj/1615.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -469,10 +469,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2270.Patricia.test.cpp
       title: test/aoj/2270.Patricia.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2313.Dinic.test.cpp
       title: test/aoj/2313.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -535,16 +535,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2711.rollinghash.test.cpp
       title: test/aoj/2711.rollinghash.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2803.Dinic.test.cpp
       title: test/aoj/2803.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2803.PushRelabel.test.cpp
       title: test/aoj/2803.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2835.Dinic.test.cpp
       title: test/aoj/2835.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2835.PushRelabel.test.cpp
       title: test/aoj/2835.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -691,10 +691,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_C.KDT.test.cpp
       title: test/aoj/DSL_2_C.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
       title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
       title: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
     - icon: ':heavy_check_mark:'
@@ -721,10 +721,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_5_A.test.cpp
       title: test/aoj/GRL_5_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A.Dinic.test.cpp
       title: test/aoj/GRL_6_A.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A.PushRelabel.test.cpp
       title: test/aoj/GRL_6_A.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -867,10 +867,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc106_b.test.cpp
       title: test/atcoder/arc106_b.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.Dinic.test.cpp
       title: test/atcoder/arc107_f.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
@@ -879,10 +879,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc127_a.test.cpp
       title: test/atcoder/arc127_a.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.Dinic.test.cpp
       title: test/atcoder/arc129_e.Dinic.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc129_e.PushRelabel.test.cpp
       title: test/atcoder/arc129_e.PushRelabel.test.cpp
   - name: test/hackerrank
