@@ -13,9 +13,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
-    path: test/aoj/2893.Dicon.test.cpp
-    title: test/aoj/2893.Dicon.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2893.onlinedicon.test.cpp
+    title: test/aoj/2893.onlinedicon.test.cpp
   - icon: ':x:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
@@ -244,7 +244,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp
-  - test/aoj/2893.Dicon.test.cpp
+  - test/aoj/2893.onlinedicon.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
@@ -254,6 +254,7 @@ layout: document
 title: Euler-Tour-Tree
 ---
 単位元は必要あり（遅延側は必要なし）\
-各ノードが部分木のサイズを保持しているのでmapping関数では引数としてsizeを渡せる
+各ノードが部分木のサイズを保持しているのでmapping関数では引数としてsizeを渡せる \
+頂点数は $2^{20}$ 個が限界
 ## 計算量
 $\mathcal{O}(\log N)$

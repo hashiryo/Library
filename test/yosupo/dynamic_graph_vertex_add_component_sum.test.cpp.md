@@ -22,34 +22,36 @@ data:
     links:
     - https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
   bundledCode: "#line 1 \"test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
-    \n#include <bits/stdc++.h>\n\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include\
-    \ <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class tClass>\
-    \ struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
-    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
-    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
-    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 6 \"src/DataStructure/EulerTourTree.hpp\"\
-    \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class EulerTourTree\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
-    \ HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>,\
-    \ has_op<L>, has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n using node_id= std::int_least32_t;\n\
-    \ using vertex_id= std::int_least32_t;\n template <class U= std::nullptr_t, class\
-    \ F= std::nullptr_t> struct Node_B {\n  using T= U;\n  using E= F;\n  node_id\
-    \ ch[2], par;\n  std::uint64_t flag;\n };\n template <bool mo_, bool du_, typename\
-    \ tEnable= void> struct Node_D: Node_B<> {};\n template <bool mo_, bool du_> struct\
-    \ Node_D<mo_, du_, typename std::enable_if_t<mo_ && !du_>>: Node_B<typename M::T>\
-    \ { typename M::T val= M::ti(), sum= M::ti(); };\n template <bool mo_, bool du_>\
-    \ struct Node_D<mo_, du_, typename std::enable_if_t<!mo_ && du_>>: Node_B<typename\
-    \ M::T, typename M::E> {\n  typename M::T val;\n  typename M::E lazy;\n  bool\
-    \ lazy_flg;\n };\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename\
-    \ std::enable_if_t<mo_ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename\
-    \ M::T val= M::ti(), sum= M::ti();\n  typename M::E lazy;\n  bool lazy_flg;\n\
-    \ };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\npublic:\n using\
-    \ T= typename Node::T;\n using E= typename Node::E;\nprivate:\n static inline\
-    \ Node n[NODE_SIZE];\n static inline node_id ni= 1;\n node_id new_edge(int s,\
-    \ int d, bool hi) {\n  int i= ni++, ri= ni++;\n  n[i].flag= (std::uint64_t(s)\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
+    \n#include <iostream>\n#line 2 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
+    \n#include <vector>\n#include <unordered_set>\n#line 2 \"src/DataStructure/EulerTourTree.hpp\"\
+    \n#include <algorithm>\n#include <string>\n#include <unordered_map>\n#line 2 \"\
+    src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
+    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
+    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
+    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
+    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
+    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
+    #line 6 \"src/DataStructure/EulerTourTree.hpp\"\ntemplate <typename M= void, std::size_t\
+    \ NODE_SIZE= 303030 * 4> class EulerTourTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
+    \ template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n\
+    \ template <class L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
+    \ has_composition<L>>;\n using node_id= std::int_least32_t;\n using vertex_id=\
+    \ std::int_least32_t;\n template <class U= std::nullptr_t, class F= std::nullptr_t>\
+    \ struct Node_B {\n  using T= U;\n  using E= F;\n  node_id ch[2], par;\n  std::uint64_t\
+    \ flag;\n };\n template <bool mo_, bool du_, typename tEnable= void> struct Node_D:\
+    \ Node_B<> {};\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename\
+    \ std::enable_if_t<mo_ && !du_>>: Node_B<typename M::T> { typename M::T val= M::ti(),\
+    \ sum= M::ti(); };\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename\
+    \ std::enable_if_t<!mo_ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename\
+    \ M::T val;\n  typename M::E lazy;\n  bool lazy_flg;\n };\n template <bool mo_,\
+    \ bool du_> struct Node_D<mo_, du_, typename std::enable_if_t<mo_ && du_>>: Node_B<typename\
+    \ M::T, typename M::E> {\n  typename M::T val= M::ti(), sum= M::ti();\n  typename\
+    \ M::E lazy;\n  bool lazy_flg;\n };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\n\
+    public:\n using T= typename Node::T;\n using E= typename Node::E;\nprivate:\n\
+    \ static inline Node n[NODE_SIZE];\n static inline node_id ni= 1;\n node_id new_edge(int\
+    \ s, int d, bool hi) {\n  int i= ni++, ri= ni++;\n  n[i].flag= (std::uint64_t(s)\
     \ << 44) | (std::uint64_t(d) << 24) | hi;\n  n[ri].flag= (std::uint64_t(d) <<\
     \ 44) | (std::uint64_t(s) << 24);\n  return i;\n }\n static void pushup(node_id\
     \ i) {\n  n[i].flag&= 0xffffffffff00000f;\n  n[i].flag|= ((n[i].flag >> 44) ==\
@@ -125,7 +127,7 @@ data:
     \ v, Func f) {\n  splay(v+= n_st);\n  while (v && (n[v].flag & 0b1000))\n   for\
     \ (bool loop= true; loop;) {\n    if (n[v].flag & 0b0100) {\n     if (f(n[v].flag\
     \ >> 44)) return 1;\n     splay(v), loop= false;\n    } else v= n[v].ch[!(n[v].ch[0]\
-    \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 4 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
+    \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 5 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
     \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class OnlineDynamicConnectivity\
     \ {\n using T= typename EulerTourTree<M, NODE_SIZE>::T;\n using E= typename EulerTourTree<M,\
     \ NODE_SIZE>::E;\n int N;\n std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
@@ -156,40 +158,36 @@ data:
     \ val); }\n int size(int x) { return ett[0].tree_size(x); }\n T fold(int x) {\
     \ return ett[0].fold_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
     \ v); }\n bool connected(int x, int y) { return ett[0].connected(x, y); }\n};\n\
-    #line 7 \"test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp\"\nusing\
-    \ namespace std;\n\nstruct Monoid {\n  using T = long long;\n  static inline T\
-    \ ti() { return 0; }\n  static inline T op(const T& lval, const T& rval) { return\
-    \ lval + rval; }\n};\n\nint main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  OnlineDynamicConnectivity<Monoid> dicon(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    int a;\n    cin >> a;\n    dicon.set(i,\
-    \ a);\n  }\n  int t;\n  int u, v;\n  for (int i = 0; i < Q; i++) {\n    cin >>\
-    \ t;\n    if (t == 0) {\n      cin >> u >> v;\n      dicon.link(u, v);\n    }\
-    \ else if (t == 1) {\n      cin >> u >> v;\n      dicon.cut(u, v);\n    } else\
-    \ if (t == 2) {\n      cin >> u >> v;\n      dicon.set(u, dicon[u] + v);\n   \
-    \ } else {\n      cin >> v;\n      cout << dicon.fold(v) << '\\n';\n    }\n  }\n\
-    }\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
-    \n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
-    \n#include \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\nusing namespace\
-    \ std;\n\nstruct Monoid {\n  using T = long long;\n  static inline T ti() { return\
-    \ 0; }\n  static inline T op(const T& lval, const T& rval) { return lval + rval;\
-    \ }\n};\n\nint main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  OnlineDynamicConnectivity<Monoid> dicon(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    int a;\n    cin >> a;\n    dicon.set(i,\
-    \ a);\n  }\n  int t;\n  int u, v;\n  for (int i = 0; i < Q; i++) {\n    cin >>\
-    \ t;\n    if (t == 0) {\n      cin >> u >> v;\n      dicon.link(u, v);\n    }\
-    \ else if (t == 1) {\n      cin >> u >> v;\n      dicon.cut(u, v);\n    } else\
-    \ if (t == 2) {\n      cin >> u >> v;\n      dicon.set(u, dicon[u] + v);\n   \
-    \ } else {\n      cin >> v;\n      cout << dicon.fold(v) << '\\n';\n    }\n  }\n\
-    }"
+    #line 4 \"test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp\"\nusing\
+    \ namespace std;\nstruct Monoid {\n using T= long long;\n static inline T ti()\
+    \ { return 0; }\n static inline T op(T lval, T rval) { return lval + rval; }\n\
+    };\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >>\
+    \ N >> Q;\n OnlineDynamicConnectivity<Monoid> dicon(N);\n for (int i= 0; i < N;\
+    \ i++) {\n  int a;\n  cin >> a;\n  dicon.set(i, a);\n }\n for (int i= 0; i < Q;\
+    \ i++) {\n  int t;\n  int u, v;\n  cin >> t;\n  if (t == 0) {\n   cin >> u >>\
+    \ v;\n   dicon.link(u, v);\n  } else if (t == 1) {\n   cin >> u >> v;\n   dicon.cut(u,\
+    \ v);\n  } else if (t == 2) {\n   cin >> u >> v;\n   dicon.set(u, dicon[u] + v);\n\
+    \  } else {\n   cin >> v;\n   cout << dicon.fold(v) << '\\n';\n  }\n }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
+    \n#include <iostream>\n#include \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
+    \nusing namespace std;\nstruct Monoid {\n using T= long long;\n static inline\
+    \ T ti() { return 0; }\n static inline T op(T lval, T rval) { return lval + rval;\
+    \ }\n};\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin\
+    \ >> N >> Q;\n OnlineDynamicConnectivity<Monoid> dicon(N);\n for (int i= 0; i\
+    \ < N; i++) {\n  int a;\n  cin >> a;\n  dicon.set(i, a);\n }\n for (int i= 0;\
+    \ i < Q; i++) {\n  int t;\n  int u, v;\n  cin >> t;\n  if (t == 0) {\n   cin >>\
+    \ u >> v;\n   dicon.link(u, v);\n  } else if (t == 1) {\n   cin >> u >> v;\n \
+    \  dicon.cut(u, v);\n  } else if (t == 2) {\n   cin >> u >> v;\n   dicon.set(u,\
+    \ dicon[u] + v);\n  } else {\n   cin >> v;\n   cout << dicon.fold(v) << '\\n';\n\
+    \  }\n }\n}"
   dependsOn:
+  - src/DataStructure/OnlineDynamicConnectivity.hpp
   - src/DataStructure/EulerTourTree.hpp
   - src/Internal/HAS_CHECK.hpp
-  - src/DataStructure/OnlineDynamicConnectivity.hpp
   isVerificationFile: true
   path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 22:31:15+09:00'
+  timestamp: '2023-01-22 23:12:06+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp

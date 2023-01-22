@@ -13,9 +13,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
-    path: test/aoj/2893.Dicon.test.cpp
-    title: test/aoj/2893.Dicon.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2893.onlinedicon.test.cpp
+    title: test/aoj/2893.onlinedicon.test.cpp
   - icon: ':x:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
@@ -25,34 +25,34 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\n#include\
-    \ <vector>\n#line 2 \"src/DataStructure/EulerTourTree.hpp\"\n#include <algorithm>\n\
-    #include <string>\n#include <unordered_map>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
-    \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
-    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
-    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
-    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
-    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 6 \"src/DataStructure/EulerTourTree.hpp\"\
-    \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class EulerTourTree\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
-    \ HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>,\
-    \ has_op<L>, has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n using node_id= std::int_least32_t;\n\
-    \ using vertex_id= std::int_least32_t;\n template <class U= std::nullptr_t, class\
-    \ F= std::nullptr_t> struct Node_B {\n  using T= U;\n  using E= F;\n  node_id\
-    \ ch[2], par;\n  std::uint64_t flag;\n };\n template <bool mo_, bool du_, typename\
-    \ tEnable= void> struct Node_D: Node_B<> {};\n template <bool mo_, bool du_> struct\
-    \ Node_D<mo_, du_, typename std::enable_if_t<mo_ && !du_>>: Node_B<typename M::T>\
-    \ { typename M::T val= M::ti(), sum= M::ti(); };\n template <bool mo_, bool du_>\
-    \ struct Node_D<mo_, du_, typename std::enable_if_t<!mo_ && du_>>: Node_B<typename\
-    \ M::T, typename M::E> {\n  typename M::T val;\n  typename M::E lazy;\n  bool\
-    \ lazy_flg;\n };\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename\
-    \ std::enable_if_t<mo_ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename\
-    \ M::T val= M::ti(), sum= M::ti();\n  typename M::E lazy;\n  bool lazy_flg;\n\
-    \ };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\npublic:\n using\
-    \ T= typename Node::T;\n using E= typename Node::E;\nprivate:\n static inline\
-    \ Node n[NODE_SIZE];\n static inline node_id ni= 1;\n node_id new_edge(int s,\
-    \ int d, bool hi) {\n  int i= ni++, ri= ni++;\n  n[i].flag= (std::uint64_t(s)\
+    \ <vector>\n#include <unordered_set>\n#line 2 \"src/DataStructure/EulerTourTree.hpp\"\
+    \n#include <algorithm>\n#include <string>\n#include <unordered_map>\n#line 2 \"\
+    src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
+    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
+    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
+    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
+    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
+    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
+    #line 6 \"src/DataStructure/EulerTourTree.hpp\"\ntemplate <typename M= void, std::size_t\
+    \ NODE_SIZE= 303030 * 4> class EulerTourTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
+    \ template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>, has_ti<L>>;\n\
+    \ template <class L> using dual= std::conjunction<has_T<L>, has_E<L>, has_mapping<L>,\
+    \ has_composition<L>>;\n using node_id= std::int_least32_t;\n using vertex_id=\
+    \ std::int_least32_t;\n template <class U= std::nullptr_t, class F= std::nullptr_t>\
+    \ struct Node_B {\n  using T= U;\n  using E= F;\n  node_id ch[2], par;\n  std::uint64_t\
+    \ flag;\n };\n template <bool mo_, bool du_, typename tEnable= void> struct Node_D:\
+    \ Node_B<> {};\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename\
+    \ std::enable_if_t<mo_ && !du_>>: Node_B<typename M::T> { typename M::T val= M::ti(),\
+    \ sum= M::ti(); };\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename\
+    \ std::enable_if_t<!mo_ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename\
+    \ M::T val;\n  typename M::E lazy;\n  bool lazy_flg;\n };\n template <bool mo_,\
+    \ bool du_> struct Node_D<mo_, du_, typename std::enable_if_t<mo_ && du_>>: Node_B<typename\
+    \ M::T, typename M::E> {\n  typename M::T val= M::ti(), sum= M::ti();\n  typename\
+    \ M::E lazy;\n  bool lazy_flg;\n };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\n\
+    public:\n using T= typename Node::T;\n using E= typename Node::E;\nprivate:\n\
+    \ static inline Node n[NODE_SIZE];\n static inline node_id ni= 1;\n node_id new_edge(int\
+    \ s, int d, bool hi) {\n  int i= ni++, ri= ni++;\n  n[i].flag= (std::uint64_t(s)\
     \ << 44) | (std::uint64_t(d) << 24) | hi;\n  n[ri].flag= (std::uint64_t(d) <<\
     \ 44) | (std::uint64_t(s) << 24);\n  return i;\n }\n static void pushup(node_id\
     \ i) {\n  n[i].flag&= 0xffffffffff00000f;\n  n[i].flag|= ((n[i].flag >> 44) ==\
@@ -128,7 +128,7 @@ data:
     \ v, Func f) {\n  splay(v+= n_st);\n  while (v && (n[v].flag & 0b1000))\n   for\
     \ (bool loop= true; loop;) {\n    if (n[v].flag & 0b0100) {\n     if (f(n[v].flag\
     \ >> 44)) return 1;\n     splay(v), loop= false;\n    } else v= n[v].ch[!(n[v].ch[0]\
-    \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 4 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
+    \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 5 \"src/DataStructure/OnlineDynamicConnectivity.hpp\"\
     \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class OnlineDynamicConnectivity\
     \ {\n using T= typename EulerTourTree<M, NODE_SIZE>::T;\n using E= typename EulerTourTree<M,\
     \ NODE_SIZE>::E;\n int N;\n std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
@@ -159,7 +159,7 @@ data:
     \ val); }\n int size(int x) { return ett[0].tree_size(x); }\n T fold(int x) {\
     \ return ett[0].fold_tree(x); }\n void apply(int x, E v) { return ett[0].apply_tree(x,\
     \ v); }\n bool connected(int x, int y) { return ett[0].connected(x, y); }\n};\n"
-  code: "#pragma once\n#include <vector>\n#include \"src/DataStructure/EulerTourTree.hpp\"\
+  code: "#pragma once\n#include <vector>\n#include <unordered_set>\n#include \"src/DataStructure/EulerTourTree.hpp\"\
     \ntemplate <typename M= void, std::size_t NODE_SIZE= 303030 * 4> class OnlineDynamicConnectivity\
     \ {\n using T= typename EulerTourTree<M, NODE_SIZE>::T;\n using E= typename EulerTourTree<M,\
     \ NODE_SIZE>::E;\n int N;\n std::vector<EulerTourTree<M, NODE_SIZE>> ett;\n std::vector<std::vector<std::unordered_set<int>>>\
@@ -196,11 +196,11 @@ data:
   isVerificationFile: false
   path: src/DataStructure/OnlineDynamicConnectivity.hpp
   requiredBy: []
-  timestamp: '2023-01-22 22:31:15+09:00'
+  timestamp: '2023-01-22 23:12:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp
-  - test/aoj/2893.Dicon.test.cpp
+  - test/aoj/2893.onlinedicon.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
 documentation_of: src/DataStructure/OnlineDynamicConnectivity.hpp
 layout: document

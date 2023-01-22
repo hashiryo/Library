@@ -21,12 +21,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
   - icon: ':question:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
+  - icon: ':question:'
+    path: src/DataStructure/SegmentTree_Dynamic.hpp
+    title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
@@ -40,7 +43,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -61,15 +64,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2893.onlinedicon.test.cpp
+    title: test/aoj/2893.onlinedicon.test.cpp
   - icon: ':x:'
-    path: test/aoj/2893.Dicon.test.cpp
-    title: test/aoj/2893.Dicon.test.cpp
+    path: test/aoj/3024.DynSeg.test.cpp
+    title: test/aoj/3024.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
     title: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
+  - icon: ':x:'
+    path: test/aoj/DSL_2_I.DynSeg.test.cpp
+    title: test/aoj/DSL_2_I.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
@@ -79,7 +88,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -100,6 +109,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc256_f.DynSeg.test.cpp
+    title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc015_d.test.cpp
     title: test/atcoder/agc015_d.test.cpp
@@ -133,6 +145,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
+    title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/set_xor_min.DynSeg.test.cpp
+    title: test/yosupo/set_xor_min.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
@@ -142,6 +160,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/649.DynSeg.test.cpp
+    title: test/yukicoder/649.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
@@ -179,6 +200,7 @@ data:
   - src/DataStructure/KDTree.hpp
   - src/DataStructure/OnlineDynamicConnectivity.hpp
   - src/DataStructure/EulerTourTree.hpp
+  - src/DataStructure/SegmentTree_Dynamic.hpp
   - src/Automaton/DFA_Compress.hpp
   - src/Automaton/dfa_operations.hpp
   - src/Automaton/NFA_to_DFA.hpp
@@ -192,24 +214,29 @@ data:
   - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   - test/aoj/2842.KDT.test.cpp
   - test/aoj/2647.test.cpp
+  - test/aoj/DSL_2_I.DynSeg.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
-  - test/aoj/2893.Dicon.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/2587.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
+  - test/aoj/2893.onlinedicon.test.cpp
+  - test/aoj/3024.DynSeg.test.cpp
   - test/aoj/1068.KDT.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - test/yosupo/lca.LCT.test.cpp
   - test/yosupo/directedmst.test.cpp
+  - test/yosupo/set_xor_min.DynSeg.test.cpp
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/649.DynSeg.test.cpp
   - test/yukicoder/828.ETT.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/728.KDT.test.cpp
@@ -220,6 +247,7 @@ data:
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/agc015_d.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc117_d.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc154_e.test.cpp

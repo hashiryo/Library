@@ -19,10 +19,11 @@ data:
     links:
     - https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum
   bundledCode: "#line 1 \"test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum\"\
-    \n#include <bits/stdc++.h>\n\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include\
-    \ <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class tClass>\
-    \ struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum\"\
+    \n#include <iostream>\n#line 2 \"src/DataStructure/EulerTourTree.hpp\"\n#include\
+    \ <algorithm>\n#include <string>\n#include <unordered_map>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
+    \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
+    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
     \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
     \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
     \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
@@ -122,44 +123,41 @@ data:
     \ v, Func f) {\n  splay(v+= n_st);\n  while (v && (n[v].flag & 0b1000))\n   for\
     \ (bool loop= true; loop;) {\n    if (n[v].flag & 0b0100) {\n     if (f(n[v].flag\
     \ >> 44)) return 1;\n     splay(v), loop= false;\n    } else v= n[v].ch[!(n[v].ch[0]\
-    \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 6 \"test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp\"\
-    \nusing namespace std;\n\nstruct RsumQRaddQ {\n  using T = long long;\n  using\
-    \ E = long long;\n  static T ti() { return 0; }\n  static T op(const T &l, const\
-    \ T &r) { return l + r; }\n  static void mapping(T &t, const E &e, const std::size_t\
-    \ &sz) { t += e * sz; }\n  static void composition(E &pre, const E &suf) { pre\
-    \ += suf; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  EulerTourTree<RsumQRaddQ> ett(N);\n  for (int\
-    \ i = 0; i < N; i++) {\n    long long a;\n    cin >> a;\n    ett.set(i, a);\n\
-    \  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n\
-    \    ett.link(v, u);\n  }\n  while (Q--) {\n    int op;\n    cin >> op;\n    if\
-    \ (op == 0) {\n      int u, v, w, x;\n      cin >> u >> v >> w >> x;\n      ett.cut(u,\
-    \ v);\n      ett.link(w, x);\n    } else if (op == 1) {\n      int v, p;\n   \
-    \   long long x;\n      cin >> v >> p >> x;\n      ett.apply_subtree(v, p, x);\n\
-    \    } else {\n      int v, p;\n      cin >> v >> p;\n      cout << ett.fold_subtree(v,\
-    \ p) << endl;\n    }\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum\"\
-    \n#include <bits/stdc++.h>\n\n#include \"src/DataStructure/EulerTourTree.hpp\"\
-    \nusing namespace std;\n\nstruct RsumQRaddQ {\n  using T = long long;\n  using\
-    \ E = long long;\n  static T ti() { return 0; }\n  static T op(const T &l, const\
-    \ T &r) { return l + r; }\n  static void mapping(T &t, const E &e, const std::size_t\
-    \ &sz) { t += e * sz; }\n  static void composition(E &pre, const E &suf) { pre\
-    \ += suf; }\n};\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  EulerTourTree<RsumQRaddQ> ett(N);\n  for (int\
-    \ i = 0; i < N; i++) {\n    long long a;\n    cin >> a;\n    ett.set(i, a);\n\
-    \  }\n  for (int i = 0; i < N - 1; i++) {\n    int u, v;\n    cin >> u >> v;\n\
-    \    ett.link(v, u);\n  }\n  while (Q--) {\n    int op;\n    cin >> op;\n    if\
-    \ (op == 0) {\n      int u, v, w, x;\n      cin >> u >> v >> w >> x;\n      ett.cut(u,\
-    \ v);\n      ett.link(w, x);\n    } else if (op == 1) {\n      int v, p;\n   \
-    \   long long x;\n      cin >> v >> p >> x;\n      ett.apply_subtree(v, p, x);\n\
-    \    } else {\n      int v, p;\n      cin >> v >> p;\n      cout << ett.fold_subtree(v,\
-    \ p) << endl;\n    }\n  }\n  return 0;\n}\n"
+    \ && (n[n[v].ch[0]].flag & 0b1000))];\n   }\n  return 0;\n }\n};\n#line 4 \"test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp\"\
+    \nusing namespace std;\nstruct RsumQRaddQ {\n using T= long long;\n using E= long\
+    \ long;\n static T ti() { return 0; }\n static T op(T l, T r) { return l + r;\
+    \ }\n static void mapping(T &t, E e, std::size_t sz) { t+= e * sz; }\n static\
+    \ void composition(E &pre, E suf) { pre+= suf; }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n EulerTourTree<RsumQRaddQ>\
+    \ ett(N);\n for (int i= 0; i < N; i++) {\n  long long a;\n  cin >> a;\n  ett.set(i,\
+    \ a);\n }\n for (int i= 0; i < N - 1; i++) {\n  int u, v;\n  cin >> u >> v;\n\
+    \  ett.link(v, u);\n }\n while (Q--) {\n  int op;\n  cin >> op;\n  if (op == 0)\
+    \ {\n   int u, v, w, x;\n   cin >> u >> v >> w >> x;\n   ett.cut(u, v);\n   ett.link(w,\
+    \ x);\n  } else if (op == 1) {\n   int v, p;\n   long long x;\n   cin >> v >>\
+    \ p >> x;\n   ett.apply_subtree(v, p, x);\n  } else {\n   int v, p;\n   cin >>\
+    \ v >> p;\n   cout << ett.fold_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum\"\
+    \n#include <iostream>\n#include \"src/DataStructure/EulerTourTree.hpp\"\nusing\
+    \ namespace std;\nstruct RsumQRaddQ {\n using T= long long;\n using E= long long;\n\
+    \ static T ti() { return 0; }\n static T op(T l, T r) { return l + r; }\n static\
+    \ void mapping(T &t, E e, std::size_t sz) { t+= e * sz; }\n static void composition(E\
+    \ &pre, E suf) { pre+= suf; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n EulerTourTree<RsumQRaddQ> ett(N);\n for (int i=\
+    \ 0; i < N; i++) {\n  long long a;\n  cin >> a;\n  ett.set(i, a);\n }\n for (int\
+    \ i= 0; i < N - 1; i++) {\n  int u, v;\n  cin >> u >> v;\n  ett.link(v, u);\n\
+    \ }\n while (Q--) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int u, v, w,\
+    \ x;\n   cin >> u >> v >> w >> x;\n   ett.cut(u, v);\n   ett.link(w, x);\n  }\
+    \ else if (op == 1) {\n   int v, p;\n   long long x;\n   cin >> v >> p >> x;\n\
+    \   ett.apply_subtree(v, p, x);\n  } else {\n   int v, p;\n   cin >> v >> p;\n\
+    \   cout << ett.fold_subtree(v, p) << '\\n';\n  }\n }\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/EulerTourTree.hpp
   - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 22:31:15+09:00'
+  timestamp: '2023-01-22 23:12:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
