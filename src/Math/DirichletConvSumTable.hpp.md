@@ -21,60 +21,60 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/DirichletConvSumTable.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <cmath>\ntemplate <class T> struct DirichletConvSumTable\
-    \ {\n std::uint64_t N;  // <= K * L\n std::vector<T> x /* (1 <= i <= K) */, X\
-    \ /* \u2211^{N/i} (1 <= i <= L) */;\n static DirichletConvSumTable get_epsilon(std::uint64_t\
-    \ N, std::size_t K) {\n  std::size_t L= (N - 1 + K) / K;\n  std::vector<T> a(K\
-    \ + 1, 0);\n  return a[1]= 1, DirichletConvSumTable(N, a, std::vector<T>(L + 1,\
-    \ 1));\n }\n DirichletConvSumTable(std::uint64_t n_, const std::vector<T> &x_,\
-    \ const std::vector<T> &X_): N(n_), x(x_), X(X_) { assert(N < std::uint64_t(x.size())\
-    \ * X.size()); }\n DirichletConvSumTable(std::uint64_t n_, std::size_t k_): N(n_),\
-    \ x(k_ + 1, 0), X((n_ - 1 + k_) / k_ + 1, 0) {}\n template <class F> DirichletConvSumTable(std::uint64_t\
-    \ n_, std::size_t k_, const F &sum): N(n_), x(k_ + 1), X((n_ - 1 + k_) / k_ +\
-    \ 1) {\n  assert(N < std::uint64_t(x.size()) * X.size());\n  for (std::size_t\
-    \ i= x.size(); --i;) x[i]= sum(i);\n  for (std::size_t i= x.size(); --i > 1;)\
-    \ x[i]-= x[i - 1];\n  for (std::size_t i= X.size(); --i;) X[i]= sum(N / i);\n\
-    \ }\n DirichletConvSumTable operator*(const DirichletConvSumTable &r) const {\n\
+    #include <algorithm>\n#include <cmath>\n#include <cassert>\ntemplate <class T>\
+    \ struct DirichletConvSumTable {\n std::uint64_t N;  // <= K * L\n std::vector<T>\
+    \ x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L) */;\n static DirichletConvSumTable\
+    \ get_epsilon(std::uint64_t N, std::size_t K) {\n  std::size_t L= (N - 1 + K)\
+    \ / K;\n  std::vector<T> a(K + 1, 0);\n  return a[1]= 1, DirichletConvSumTable(N,\
+    \ a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t n_,\
+    \ const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_) { assert(N\
+    \ < std::uint64_t(x.size()) * X.size()); }\n DirichletConvSumTable(std::uint64_t\
+    \ n_, std::size_t k_): N(n_), x(k_ + 1, 0), X((n_ - 1 + k_) / k_ + 1, 0) {}\n\
+    \ template <class F> DirichletConvSumTable(std::uint64_t n_, std::size_t k_, const\
+    \ F &sum): N(n_), x(k_ + 1), X((n_ - 1 + k_) / k_ + 1) {\n  assert(N < std::uint64_t(x.size())\
+    \ * X.size());\n  for (std::size_t i= x.size(); --i;) x[i]= sum(i);\n  for (std::size_t\
+    \ i= x.size(); --i > 1;) x[i]-= x[i - 1];\n  for (std::size_t i= X.size(); --i;)\
+    \ X[i]= sum(N / i);\n }\n DirichletConvSumTable operator*(const DirichletConvSumTable\
+    \ &r) const {\n  const std::size_t K= x.size() - 1, L= X.size() - 1;\n  assert(N\
+    \ <= std::uint64_t(K) * L), assert(N == r.N);\n  assert(K == r.x.size() - 1),\
+    \ assert(L == r.X.size() - 1);\n  std::vector<T> c(K + 1, 0), C(L + 1, 0), A_l(K\
+    \ + 1, 0), B_l(K + 1, 0);\n  for (std::size_t i= 1; i <= K; i++) A_l[i]= A_l[i\
+    \ - 1] + x[i];\n  for (std::size_t i= 1; i <= K; i++) B_l[i]= B_l[i - 1] + r.x[i];\n\
+    \  auto A= [&](std::uint64_t n) { return n <= K ? A_l[n] : X[N / n]; };\n  auto\
+    \ B= [&](std::uint64_t n) { return n <= K ? B_l[n] : r.X[N / n]; };\n  std::uint64_t\
+    \ n;\n  for (std::size_t i= K, j; i; i--)\n   for (j= K / i; j; j--) c[i * j]+=\
+    \ x[i] * r.x[j];\n  for (std::size_t l= L, m, i; l; C[l--]-= A(m) * B(m))\n  \
+    \ for (i= m= std::sqrt(n= N / l); i; i--) C[l]+= x[i] * B(n / i) + r.x[i] * A(n\
+    \ / i);\n  return DirichletConvSumTable<T>(N, c, C);\n }\n DirichletConvSumTable\
+    \ &operator*=(const DirichletConvSumTable &r) { return *this= *this * r; }\n DirichletConvSumTable\
+    \ operator/(const DirichletConvSumTable &r) const { return DirichletConvSumTable(*this)/=\
+    \ r; }\n DirichletConvSumTable &operator/=(const DirichletConvSumTable &r) {\n\
     \  const std::size_t K= x.size() - 1, L= X.size() - 1;\n  assert(N <= std::uint64_t(K)\
     \ * L), assert(N == r.N);\n  assert(K == r.x.size() - 1), assert(L == r.X.size()\
-    \ - 1);\n  std::vector<T> c(K + 1, 0), C(L + 1, 0), A_l(K + 1, 0), B_l(K + 1,\
-    \ 0);\n  for (std::size_t i= 1; i <= K; i++) A_l[i]= A_l[i - 1] + x[i];\n  for\
-    \ (std::size_t i= 1; i <= K; i++) B_l[i]= B_l[i - 1] + r.x[i];\n  auto A= [&](std::uint64_t\
-    \ n) { return n <= K ? A_l[n] : X[N / n]; };\n  auto B= [&](std::uint64_t n) {\
-    \ return n <= K ? B_l[n] : r.X[N / n]; };\n  std::uint64_t n;\n  for (std::size_t\
-    \ i= K, j; i; i--)\n   for (j= K / i; j; j--) c[i * j]+= x[i] * r.x[j];\n  for\
-    \ (std::size_t l= L, m, i; l; C[l--]-= A(m) * B(m))\n   for (i= m= std::sqrt(n=\
-    \ N / l); i; i--) C[l]+= x[i] * B(n / i) + r.x[i] * A(n / i);\n  return DirichletConvSumTable<T>(N,\
-    \ c, C);\n }\n DirichletConvSumTable &operator*=(const DirichletConvSumTable &r)\
-    \ { return *this= *this * r; }\n DirichletConvSumTable operator/(const DirichletConvSumTable\
-    \ &r) const { return DirichletConvSumTable(*this)/= r; }\n DirichletConvSumTable\
-    \ &operator/=(const DirichletConvSumTable &r) {\n  const std::size_t K= x.size()\
-    \ - 1, L= X.size() - 1;\n  assert(N <= std::uint64_t(K) * L), assert(N == r.N);\n\
-    \  assert(K == r.x.size() - 1), assert(L == r.X.size() - 1);\n  std::vector<T>\
-    \ A_l(K + 1, 0), B_l(K + 1, 0);\n  for (std::size_t i= 1, j, ed; i <= K; i++)\n\
-    \   for (x[i]/= r.x[1], j= 2, ed= K / i; j <= ed; j++) x[i * j]-= x[i] * r.x[j];\n\
-    \  for (std::size_t i= 1; i <= K; i++) A_l[i]= A_l[i - 1] + r.x[i];\n  for (std::size_t\
-    \ i= 1; i <= K; i++) B_l[i]= B_l[i - 1] + x[i];\n  auto A= [&](std::uint64_t n)\
-    \ { return n <= K ? A_l[n] : r.X[N / n]; };\n  auto B= [&](std::uint64_t n) {\
-    \ return n <= K ? B_l[n] : X[N / n]; };\n  std::uint64_t n;\n  for (std::size_t\
-    \ l= L, m; l; X[l--]/= r.x[1])\n   for (m= std::sqrt(n= N / l), X[l]+= A(m) *\
-    \ B(m) - x[1] * A(n); m > 1;) X[l]-= r.x[m] * B(n / m) + x[m] * A(n / m), m--;\n\
-    \  return *this;\n }\n DirichletConvSumTable square() const {\n  const std::size_t\
-    \ K= x.size() - 1, L= X.size() - 1;\n  assert(N <= std::uint64_t(K) * L);\n  std::vector<T>\
-    \ c(K + 1, 0), C(L + 1, 0), A_l(K + 1, 0);\n  for (int i= 1; i <= K; i++) A_l[i]=\
-    \ A_l[i - 1] + x[i];\n  auto A= [&](std::uint64_t n) { return n <= K ? A_l[n]\
-    \ : X[N / n]; };\n  std::size_t i, j, l= std::sqrt(K);\n  std::uint64_t n;\n \
-    \ T tmp;\n  for (i= l; i; i--)\n   for (j= K / i; j > i; j--) c[i * j]+= x[i]\
-    \ * x[j];\n  for (i= K; i; i--) c[i]+= c[i];\n  for (i= l; i; i--) c[i * i]+=\
-    \ x[i] * x[i];\n  for (l= L; l; C[l]+= C[l], C[l--]-= tmp * tmp)\n   for (tmp=\
-    \ A(i= std::sqrt(n= N / l)); i; i--) C[l]+= x[i] * A(n / i);\n  return DirichletConvSumTable<T>(N,\
-    \ c, C);\n }\n DirichletConvSumTable pow1(std::uint64_t M) const {\n  for (auto\
-    \ ret= get_epsilon(N, x.size() - 1), b= *this;; b= b.square()) {\n   if (M & 1)\
-    \ ret*= b;\n   if (!(M>>= 1)) return ret;\n  }\n }\n DirichletConvSumTable pow2(std::uint64_t\
-    \ M) const {\n  const std::size_t K= x.size() - 1, L= X.size() - 1;\n  assert(N\
-    \ <= std::uint64_t(K) * L);\n  if (M == 0) return get_epsilon(N, K);\n  if (M\
-    \ == 1) return *this;\n  std::size_t n= 0, m, i, l, p= 2;\n  std::uint64_t e,\
-    \ j;\n  while (n <= M && (1ULL << n) <= N) n++;\n  DirichletConvSumTable ret(N,\
+    \ - 1);\n  std::vector<T> A_l(K + 1, 0), B_l(K + 1, 0);\n  for (std::size_t i=\
+    \ 1, j, ed; i <= K; i++)\n   for (x[i]/= r.x[1], j= 2, ed= K / i; j <= ed; j++)\
+    \ x[i * j]-= x[i] * r.x[j];\n  for (std::size_t i= 1; i <= K; i++) A_l[i]= A_l[i\
+    \ - 1] + r.x[i];\n  for (std::size_t i= 1; i <= K; i++) B_l[i]= B_l[i - 1] + x[i];\n\
+    \  auto A= [&](std::uint64_t n) { return n <= K ? A_l[n] : r.X[N / n]; };\n  auto\
+    \ B= [&](std::uint64_t n) { return n <= K ? B_l[n] : X[N / n]; };\n  std::uint64_t\
+    \ n;\n  for (std::size_t l= L, m; l; X[l--]/= r.x[1])\n   for (m= std::sqrt(n=\
+    \ N / l), X[l]+= A(m) * B(m) - x[1] * A(n); m > 1;) X[l]-= r.x[m] * B(n / m) +\
+    \ x[m] * A(n / m), m--;\n  return *this;\n }\n DirichletConvSumTable square()\
+    \ const {\n  const std::size_t K= x.size() - 1, L= X.size() - 1;\n  assert(N <=\
+    \ std::uint64_t(K) * L);\n  std::vector<T> c(K + 1, 0), C(L + 1, 0), A_l(K + 1,\
+    \ 0);\n  for (int i= 1; i <= K; i++) A_l[i]= A_l[i - 1] + x[i];\n  auto A= [&](std::uint64_t\
+    \ n) { return n <= K ? A_l[n] : X[N / n]; };\n  std::size_t i, j, l= std::sqrt(K);\n\
+    \  std::uint64_t n;\n  T tmp;\n  for (i= l; i; i--)\n   for (j= K / i; j > i;\
+    \ j--) c[i * j]+= x[i] * x[j];\n  for (i= K; i; i--) c[i]+= c[i];\n  for (i= l;\
+    \ i; i--) c[i * i]+= x[i] * x[i];\n  for (l= L; l; C[l]+= C[l], C[l--]-= tmp *\
+    \ tmp)\n   for (tmp= A(i= std::sqrt(n= N / l)); i; i--) C[l]+= x[i] * A(n / i);\n\
+    \  return DirichletConvSumTable<T>(N, c, C);\n }\n DirichletConvSumTable pow1(std::uint64_t\
+    \ M) const {\n  for (auto ret= get_epsilon(N, x.size() - 1), b= *this;; b= b.square())\
+    \ {\n   if (M & 1) ret*= b;\n   if (!(M>>= 1)) return ret;\n  }\n }\n DirichletConvSumTable\
+    \ pow2(std::uint64_t M) const {\n  const std::size_t K= x.size() - 1, L= X.size()\
+    \ - 1;\n  assert(N <= std::uint64_t(K) * L);\n  if (M == 0) return get_epsilon(N,\
+    \ K);\n  if (M == 1) return *this;\n  std::size_t n= 0, m, i, l, p= 2;\n  std::uint64_t\
+    \ e, j;\n  while (n <= M && (1ULL << n) <= N) n++;\n  DirichletConvSumTable ret(N,\
     \ x.size() - 1);\n  T pw[65]= {1}, b= x[1], tmp;\n  for (e= M - n + 1;; b*= b)\n\
     \   if (e & 1 ? pw[0]*= b : 0; !(e>>= 1)) break;\n  for (m= 1; m < n; m++) pw[m]=\
     \ pw[m - 1] * x[1];\n  std::vector<T> XX(X), z(K + 1, 0), Z(L + 1, 0), A_l(K +\
@@ -135,9 +135,9 @@ data:
     \ G[l]-= F.x[m] * B(n / m) + g[m] * A(n / m), m--;\n return DirichletConvSumTable<mod_t>(F.N,\
     \ g, G);\n}\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <cmath>\n\
-    template <class T> struct DirichletConvSumTable {\n std::uint64_t N;  // <= K\
-    \ * L\n std::vector<T> x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L)\
-    \ */;\n static DirichletConvSumTable get_epsilon(std::uint64_t N, std::size_t\
+    #include <cassert>\ntemplate <class T> struct DirichletConvSumTable {\n std::uint64_t\
+    \ N;  // <= K * L\n std::vector<T> x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1\
+    \ <= i <= L) */;\n static DirichletConvSumTable get_epsilon(std::uint64_t N, std::size_t\
     \ K) {\n  std::size_t L= (N - 1 + K) / K;\n  std::vector<T> a(K + 1, 0);\n  return\
     \ a[1]= 1, DirichletConvSumTable(N, a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t\
     \ n_, const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_)\
@@ -251,7 +251,7 @@ data:
   isVerificationFile: false
   path: src/Math/DirichletConvSumTable.hpp
   requiredBy: []
-  timestamp: '2023-01-23 16:45:41+09:00'
+  timestamp: '2023-01-23 17:30:16+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp

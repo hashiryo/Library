@@ -109,14 +109,14 @@ data:
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 2 \"src/Math/DirichletConvSumTable.hpp\"\n#include\
-    \ <vector>\n#include <algorithm>\n#include <cmath>\ntemplate <class T> struct\
-    \ DirichletConvSumTable {\n std::uint64_t N;  // <= K * L\n std::vector<T> x /*\
-    \ (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L) */;\n static DirichletConvSumTable\
-    \ get_epsilon(std::uint64_t N, std::size_t K) {\n  std::size_t L= (N - 1 + K)\
-    \ / K;\n  std::vector<T> a(K + 1, 0);\n  return a[1]= 1, DirichletConvSumTable(N,\
-    \ a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t n_,\
-    \ const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_) { assert(N\
-    \ < std::uint64_t(x.size()) * X.size()); }\n DirichletConvSumTable(std::uint64_t\
+    \ <vector>\n#include <algorithm>\n#include <cmath>\n#line 6 \"src/Math/DirichletConvSumTable.hpp\"\
+    \ntemplate <class T> struct DirichletConvSumTable {\n std::uint64_t N;  // <=\
+    \ K * L\n std::vector<T> x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L)\
+    \ */;\n static DirichletConvSumTable get_epsilon(std::uint64_t N, std::size_t\
+    \ K) {\n  std::size_t L= (N - 1 + K) / K;\n  std::vector<T> a(K + 1, 0);\n  return\
+    \ a[1]= 1, DirichletConvSumTable(N, a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t\
+    \ n_, const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_)\
+    \ { assert(N < std::uint64_t(x.size()) * X.size()); }\n DirichletConvSumTable(std::uint64_t\
     \ n_, std::size_t k_): N(n_), x(k_ + 1, 0), X((n_ - 1 + k_) / k_ + 1, 0) {}\n\
     \ template <class F> DirichletConvSumTable(std::uint64_t n_, std::size_t k_, const\
     \ F &sum): N(n_), x(k_ + 1), X((n_ - 1 + k_) / k_ + 1) {\n  assert(N < std::uint64_t(x.size())\
@@ -238,7 +238,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:52:41+09:00'
+  timestamp: '2023-01-23 17:30:16+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
