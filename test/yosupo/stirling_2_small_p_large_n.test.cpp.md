@@ -74,7 +74,7 @@ data:
     \ MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/StirlingNumber.hpp\"\n\
+    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/Math/StirlingNumber.hpp\"\n\
     class StirlingNumber {\n const std::uint16_t p;\n std::vector<std::vector<std::uint16_t>>\
     \ c, s1, s2;\n void buildS1() {\n  s1.resize(p), s1[0]= {1};\n  for (int i= 1,\
     \ j, t; i < p; s1[i][i]= 1, i++)\n   for (s1[i].resize(i + 1, 0), j= 1, t= p -\
@@ -115,7 +115,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_2_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 18:05:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_2_small_p_large_n.test.cpp

@@ -313,7 +313,7 @@ data:
   path: src/FFT/sample_points_shift.hpp
   requiredBy:
   - src/FFT/polynomial_matrix_prod.hpp
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 18:05:14+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp

@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -39,9 +39,9 @@ data:
     links:
     - https://judge.yosupo.jp/problem/division_of_polynomials
   bundledCode: "#line 1 \"test/yosupo/division_of_Poly.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/division_of_polynomials\"\n#include <bits/stdc++.h>\n\
-    \n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ \"https://judge.yosupo.jp/problem/division_of_polynomials\"\n#include <iostream>\n\
+    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
+    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -122,15 +122,16 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
-    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
-    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
-    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
-    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
-    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
+    \ return dat[n];\n}\n#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#line\
+    \ 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#line 3 \"src/Math/is_prime.hpp\"\n\
+    namespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
+    \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
+    \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
+    \ {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d,\
+    \ md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n   \
+    \  if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if\
+    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32,\
+    \ MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 5 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
@@ -246,7 +247,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 4 \"src/FFT/fps_inv.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/fps_inv.hpp\"\
     \nnamespace math_internal {\ntemplate <u32 LM, class mod_t> inline void inv_base(const\
     \ mod_t p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t=\
     \ nttarr_cat<mod_t, LM>, TH= (int[]){64, 64, 128, 256, 512, 512}[t];\n if (n <=\
@@ -295,7 +296,7 @@ data:
     \ mod_t, LM> : a < 3 ? inv_<2, mod_t, LM> : a < 4 ? inv_<3, mod_t, LM> : inv_<4,\
     \ mod_t, LM>)(pp, n, r);\n } else\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
     \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
-    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
+    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 3 \"\
     src/FFT/fps_div.hpp\"\nnamespace math_internal {\ntemplate <size_t LM, class mod_t>\
     \ void div_base(const mod_t p[], int n, const mod_t q[], int l, mod_t r[], const\
     \ mod_t iv[]) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){64,\
@@ -381,7 +382,7 @@ data:
     \ 1), std::copy(q.begin() + len - n + 1, q.end(), qq + len - n + 1);\n    for\
     \ (int i= len, j; i < sz; rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(),\
     \ j= i - m + 1; j < n; ++j) rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return\
-    \ std::vector(rr, rr + sz);\n}\n#line 5 \"src/FFT/Polynomial.hpp\"\ntemplate <class\
+    \ std::vector(rr, rr + sz);\n}\n#line 4 \"src/FFT/Polynomial.hpp\"\ntemplate <class\
     \ mod_t, std::size_t LM= 1 << 22> class Polynomial: public std::vector<mod_t>\
     \ {\n using Poly= Polynomial;\n struct Inde;\n struct XP_plus_C {  // x^p+c\n\
     \  Inde x;\n  mod_t c;\n  XP_plus_C(const Inde &x_): x(x_) {}\n  XP_plus_C(int\
@@ -480,7 +481,7 @@ data:
     \ || p[i] != mod_t(1)) os << p[i];\n   if (i >= 1) os << 'x';\n   if (i > 9) os\
     \ << \"^(\" << i << ')';\n   else if (i > 1) os << '^' << i;\n   if (i + 1 <=\
     \ e) os << \" + \";\n  }\n  return os;\n }\n};\n#define __POLYNOMIAL Polynomial<mod_t,\
-    \ LM>\n#ifdef __FPS_DIVAT\n__FPS_DIVAT(__POLYNOMIAL)\n#endif\n#line 6 \"test/yosupo/division_of_Poly.test.cpp\"\
+    \ LM>\n#ifdef __FPS_DIVAT\n__FPS_DIVAT(__POLYNOMIAL)\n#endif\n#line 5 \"test/yosupo/division_of_Poly.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n Polynomial<Mint>\
     \ f(N), g(M), x, y;\n for (int i= 0; i < N; i++) cin >> f[i];\n for (int i= 0;\
@@ -490,7 +491,7 @@ data:
     \ for (int i= 0, ed= r.size(); i < ed; i++) cout << r[i] << \" \\n\"[i == ed -\
     \ 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/division_of_polynomials\"\
-    \n#include <bits/stdc++.h>\n\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
+    \n#include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n Polynomial<Mint>\
     \ f(N), g(M), x, y;\n for (int i= 0; i < N; i++) cin >> f[i];\n for (int i= 0;\
@@ -512,7 +513,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/division_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 18:05:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/division_of_Poly.test.cpp

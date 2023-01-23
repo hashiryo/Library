@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -379,7 +379,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/log_of_FPS.FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 18:05:14+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/log_of_FPS.FPS.test.cpp

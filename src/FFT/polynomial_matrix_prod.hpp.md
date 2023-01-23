@@ -333,7 +333,7 @@ data:
   isVerificationFile: false
   path: src/FFT/polynomial_matrix_prod.hpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 18:05:14+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/502.test.cpp

@@ -26,24 +26,25 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/FFT/MultiVariateConvolution.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
-    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
-    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
-    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
-    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
-    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
-    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
-    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
-    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
-    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
-    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
-    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
-    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t inv(u_t n,\
-    \ int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE\
-    \ IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
+  bundledCode: "#line 2 \"src/FFT/MultiVariateConvolution.hpp\"\n#include <vector>\n\
+    #include <cassert>\n#include <numeric>\n#line 2 \"src/FFT/NTT.hpp\"\n#include\
+    \ <array>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\n\
+    using namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\n\
+    using i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL\
+    \ inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U,\
+    \ M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n\
+    \  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const {\
+    \ \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n\
+    \ static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
+    \ n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class\
+    \ du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0),\
+    \ r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE\
+    \ IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod\
+    \ << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n,\
+    \ r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL\
+    \ u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t\
+    \ inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) :\
+    \ x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
     \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
     \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
     \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
@@ -234,7 +235,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 4 \"src/FFT/MultiVariateConvolution.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 6 \"src/FFT/MultiVariateConvolution.hpp\"\
     \nclass MultiVariateConvolution {\n const int n, k, m;\n std::vector<int> chi;\n\
     public:\n MultiVariateConvolution(): MultiVariateConvolution(std::vector<int>{})\
     \ {}\n MultiVariateConvolution(const std::vector<int> &dim): n(std::accumulate(dim.begin(),\
@@ -256,10 +257,10 @@ data:
     \ k & -((l= i + j) >= k)].add(GNA::bf, 0, m);\n  for (int i= k; i--;) gt0[i].idft(0,\
     \ m);\n  for (int i= n; i--;) r[i]= gt0[chi[i]].get(i);\n  return std::vector(r,\
     \ r + n);\n }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/NTT.hpp\"\nclass\
-    \ MultiVariateConvolution {\n const int n, k, m;\n std::vector<int> chi;\npublic:\n\
-    \ MultiVariateConvolution(): MultiVariateConvolution(std::vector<int>{}) {}\n\
-    \ MultiVariateConvolution(const std::vector<int> &dim): n(std::accumulate(dim.begin(),\
+  code: "#pragma once\n#include <vector>\n#include <cassert>\n#include <numeric>\n\
+    #include \"src/FFT/NTT.hpp\"\nclass MultiVariateConvolution {\n const int n, k,\
+    \ m;\n std::vector<int> chi;\npublic:\n MultiVariateConvolution(): MultiVariateConvolution(std::vector<int>{})\
+    \ {}\n MultiVariateConvolution(const std::vector<int> &dim): n(std::accumulate(dim.begin(),\
     \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(pw2(n) * 2), chi(n,\
     \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
     \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
@@ -287,7 +288,7 @@ data:
   isVerificationFile: false
   path: src/FFT/MultiVariateConvolution.hpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 18:05:14+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/multivariate_convolution.test.cpp

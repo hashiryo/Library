@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -53,49 +53,49 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/FFT/Polynomial.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
-    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
-    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
-    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
-    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
-    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
-    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
-    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
-    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
-    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
-    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
-    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
-    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t inv(u_t n,\
-    \ int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE\
-    \ IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
-    \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
-    \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
-    \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
-    \ {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32\
-    \ m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL\
-    \ u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32,\
-    \ 31, mod) SGN(u32) private: const u8 s;\n const u64 x;\n CE IL u64 quo(u64 n)\
-    \ const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const { return n\
-    \ - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n const u64 mod;\n\
-    \ CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) /\
-    \ m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64,\
-    \ mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n) { return n;\
-    \ }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM;\
-    \ }\nprivate:\n const u64 x;\n CE IL u128 quo(const u128 &n) const { return (n\
-    \ * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) * mod;\
-    \ }\n};\nstruct MP_D2B1 {\n const u64 mod;\n CE MP_D2B1(): mod(0), s(0), d(0),\
-    \ v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)), d(m << s), v(u128(-1)\
-    \ / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l) * r) << s)\
-    \ >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const\
-    \ u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64)\
-    \ * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n\
-    \ const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t\
-    \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
-    \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
-    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\
+  bundledCode: "#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include <cassert>\n\
+    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    \nnamespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
+    \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n \
+    \ if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n\
+    \ CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return\
+    \ l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static\
+    \ CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\n\
+    template <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n\
+    \ CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
+    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
+    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
+    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static\
+    \ CE u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x\
+    \ * n)) : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) +\
+    \ mod - ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n\
+    \ CE MP_Na(): mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32\
+    \ r) const { return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n\
+    };\nstruct MP_Br {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0),\
+    \ x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) +\
+    \ m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r);\
+    \ }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: const u8 s;\n const\
+    \ u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32\
+    \ rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20\
+    \ < mod <= 2^41\n const u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64\
+    \ m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const {\
+    \ return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n\
+    \ static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n) const { NORM;\
+    \ }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n const u64 x;\n CE IL u128\
+    \ quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const u128\
+    \ &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n const u64 mod;\n\
+    \ CE MP_D2B1(): mod(0), s(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)),\
+    \ d(m << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
+    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
+    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
+    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
+    \ r;\n }\n const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE\
+    \ u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x,\
+    \ x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef\
+    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
@@ -261,7 +261,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 4 \"src/FFT/fps_inv.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/fps_inv.hpp\"\
     \nnamespace math_internal {\ntemplate <u32 LM, class mod_t> inline void inv_base(const\
     \ mod_t p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t=\
     \ nttarr_cat<mod_t, LM>, TH= (int[]){64, 64, 128, 256, 512, 512}[t];\n if (n <=\
@@ -310,7 +310,7 @@ data:
     \ mod_t, LM> : a < 3 ? inv_<2, mod_t, LM> : a < 4 ? inv_<3, mod_t, LM> : inv_<4,\
     \ mod_t, LM>)(pp, n, r);\n } else\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
     \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
-    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
+    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 3 \"\
     src/FFT/fps_div.hpp\"\nnamespace math_internal {\ntemplate <size_t LM, class mod_t>\
     \ void div_base(const mod_t p[], int n, const mod_t q[], int l, mod_t r[], const\
     \ mod_t iv[]) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){64,\
@@ -396,7 +396,7 @@ data:
     \ 1), std::copy(q.begin() + len - n + 1, q.end(), qq + len - n + 1);\n    for\
     \ (int i= len, j; i < sz; rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(),\
     \ j= i - m + 1; j < n; ++j) rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return\
-    \ std::vector(rr, rr + sz);\n}\n#line 5 \"src/FFT/Polynomial.hpp\"\ntemplate <class\
+    \ std::vector(rr, rr + sz);\n}\n#line 4 \"src/FFT/Polynomial.hpp\"\ntemplate <class\
     \ mod_t, std::size_t LM= 1 << 22> class Polynomial: public std::vector<mod_t>\
     \ {\n using Poly= Polynomial;\n struct Inde;\n struct XP_plus_C {  // x^p+c\n\
     \  Inde x;\n  mod_t c;\n  XP_plus_C(const Inde &x_): x(x_) {}\n  XP_plus_C(int\
@@ -496,37 +496,37 @@ data:
     \ << \"^(\" << i << ')';\n   else if (i > 1) os << '^' << i;\n   if (i + 1 <=\
     \ e) os << \" + \";\n  }\n  return os;\n }\n};\n#define __POLYNOMIAL Polynomial<mod_t,\
     \ LM>\n#ifdef __FPS_DIVAT\n__FPS_DIVAT(__POLYNOMIAL)\n#endif\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/fps_div.hpp\"\n\
-    #include \"src/FFT/convolve.hpp\"\ntemplate <class mod_t, std::size_t LM= 1 <<\
-    \ 22> class Polynomial: public std::vector<mod_t> {\n using Poly= Polynomial;\n\
-    \ struct Inde;\n struct XP_plus_C {  // x^p+c\n  Inde x;\n  mod_t c;\n  XP_plus_C(const\
-    \ Inde &x_): x(x_) {}\n  XP_plus_C(int p_, mod_t c_): x(p_), c(c_) {}\n };\n struct\
-    \ Inde {  // indeterminate\n  int p_;\n  Inde(int p): p_(p) {}\n  Inde(): Inde(1)\
-    \ {}\n  Inde operator^(int p) const { return Inde(p_ * p); }\n  Inde operator*(const\
-    \ Inde &rhs) const { return Inde(p_ + rhs.p_); }\n  int pow() const { return p_;\
-    \ }\n  XP_plus_C operator+(mod_t c) { return XP_plus_C(p_, c); }\n  XP_plus_C\
-    \ operator-(mod_t c) { return XP_plus_C(p_, -c); }\n };\n using GNA1= GlobalNTTArray<mod_t,\
-    \ LM, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n using GA= GlobalArray<mod_t,\
-    \ LM, 0>;\n using GAp= GlobalArray<mod_t, LM, 1>;\n using GAq= GlobalArray<mod_t,\
-    \ LM, 2>;\n using GA3= GlobalArray<mod_t, LM, 3>;\n static constexpr int A= 8;\n\
-    \ static constexpr int B= 42;\n std::pair<Poly, Poly> quorem_na(const Poly &q)\
-    \ const {\n  int n= deg(), m= q.deg(), qsz= n - m + 1, i= qsz, j;\n  std::copy_n(this->begin(),\
-    \ n + 1, GAp::bf), std::copy_n(q.begin(), m + 1, GAq::bf);\n  for (mod_t *bf=\
-    \ GAp::bf + n - m, iv= mod_t(1) / GAq::bf[m]; i--; bf--)\n   for (GA::bf[i]= bf[j=\
-    \ m] * iv; j--;) bf[j]-= GAq::bf[j] * GA::bf[i];\n  Poly rem(GAp::bf, GAp::bf\
-    \ + m);\n  return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n }\n Poly quo(const\
-    \ Poly &q) const {\n  const int n= deg() + 1, m= q.deg() + 1, qsz= n - m + 1,\
-    \ nb= this->size() - n, mb= q.size() - m;\n  auto ret= div<mod_t, LM>(Poly(this->rbegin()\
-    \ + nb, this->rbegin() + nb + qsz), Poly(q.rbegin() + mb, q.rbegin() + mb + std::min(qsz,\
-    \ m)));\n  return std::reverse(ret.begin(), ret.end()), ret;\n }\n std::pair<Poly,\
-    \ Poly> quorem_ntt(const Poly &q) const {\n  const int n= deg(), m= q.deg(), qsz=\
-    \ n - m + 1;\n  auto qu= quo(q);\n  std::copy(qu.begin(), qu.end(), GA::bf), std::copy_n(this->begin(),\
-    \ n + 1, GAp::bf), std::copy_n(q.begin(), m + 1, GAq::bf);\n  const int len= pw2(m),\
-    \ mask= len - 1;\n  if (len > qsz) std::fill_n(GA::bf + qsz, len - qsz, mod_t());\n\
-    \  if (len > m + 1) std::fill_n(GAq::bf + m + 1, len - m - 1, mod_t());\n  for\
-    \ (int i= qsz; i-- > len;) GA::bf[i & mask]+= GA::bf[i];\n  for (int i= n; i >=\
-    \ len; i--) GAp::bf[i & mask]+= GAp::bf[i];\n  if (GNA1::bf.set(GA::bf, 0, len);\
-    \ m == len) GAq::bf[0]+= GAq::bf[m];\n  GNA2::bf.set(GAq::bf, 0, len), GNA1::bf.dft(0,\
+  code: "#pragma once\n#include \"src/FFT/fps_div.hpp\"\n#include \"src/FFT/convolve.hpp\"\
+    \ntemplate <class mod_t, std::size_t LM= 1 << 22> class Polynomial: public std::vector<mod_t>\
+    \ {\n using Poly= Polynomial;\n struct Inde;\n struct XP_plus_C {  // x^p+c\n\
+    \  Inde x;\n  mod_t c;\n  XP_plus_C(const Inde &x_): x(x_) {}\n  XP_plus_C(int\
+    \ p_, mod_t c_): x(p_), c(c_) {}\n };\n struct Inde {  // indeterminate\n  int\
+    \ p_;\n  Inde(int p): p_(p) {}\n  Inde(): Inde(1) {}\n  Inde operator^(int p)\
+    \ const { return Inde(p_ * p); }\n  Inde operator*(const Inde &rhs) const { return\
+    \ Inde(p_ + rhs.p_); }\n  int pow() const { return p_; }\n  XP_plus_C operator+(mod_t\
+    \ c) { return XP_plus_C(p_, c); }\n  XP_plus_C operator-(mod_t c) { return XP_plus_C(p_,\
+    \ -c); }\n };\n using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n using GNA2= GlobalNTTArray<mod_t,\
+    \ LM, 2>;\n using GA= GlobalArray<mod_t, LM, 0>;\n using GAp= GlobalArray<mod_t,\
+    \ LM, 1>;\n using GAq= GlobalArray<mod_t, LM, 2>;\n using GA3= GlobalArray<mod_t,\
+    \ LM, 3>;\n static constexpr int A= 8;\n static constexpr int B= 42;\n std::pair<Poly,\
+    \ Poly> quorem_na(const Poly &q) const {\n  int n= deg(), m= q.deg(), qsz= n -\
+    \ m + 1, i= qsz, j;\n  std::copy_n(this->begin(), n + 1, GAp::bf), std::copy_n(q.begin(),\
+    \ m + 1, GAq::bf);\n  for (mod_t *bf= GAp::bf + n - m, iv= mod_t(1) / GAq::bf[m];\
+    \ i--; bf--)\n   for (GA::bf[i]= bf[j= m] * iv; j--;) bf[j]-= GAq::bf[j] * GA::bf[i];\n\
+    \  Poly rem(GAp::bf, GAp::bf + m);\n  return {Poly(GA::bf, GA::bf + qsz), rem.shrink()};\n\
+    \ }\n Poly quo(const Poly &q) const {\n  const int n= deg() + 1, m= q.deg() +\
+    \ 1, qsz= n - m + 1, nb= this->size() - n, mb= q.size() - m;\n  auto ret= div<mod_t,\
+    \ LM>(Poly(this->rbegin() + nb, this->rbegin() + nb + qsz), Poly(q.rbegin() +\
+    \ mb, q.rbegin() + mb + std::min(qsz, m)));\n  return std::reverse(ret.begin(),\
+    \ ret.end()), ret;\n }\n std::pair<Poly, Poly> quorem_ntt(const Poly &q) const\
+    \ {\n  const int n= deg(), m= q.deg(), qsz= n - m + 1;\n  auto qu= quo(q);\n \
+    \ std::copy(qu.begin(), qu.end(), GA::bf), std::copy_n(this->begin(), n + 1, GAp::bf),\
+    \ std::copy_n(q.begin(), m + 1, GAq::bf);\n  const int len= pw2(m), mask= len\
+    \ - 1;\n  if (len > qsz) std::fill_n(GA::bf + qsz, len - qsz, mod_t());\n  if\
+    \ (len > m + 1) std::fill_n(GAq::bf + m + 1, len - m - 1, mod_t());\n  for (int\
+    \ i= qsz; i-- > len;) GA::bf[i & mask]+= GA::bf[i];\n  for (int i= n; i >= len;\
+    \ i--) GAp::bf[i & mask]+= GAp::bf[i];\n  if (GNA1::bf.set(GA::bf, 0, len); m\
+    \ == len) GAq::bf[0]+= GAq::bf[m];\n  GNA2::bf.set(GAq::bf, 0, len), GNA1::bf.dft(0,\
     \ len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0,\
     \ len), GNA1::bf.get(GAq::bf, 0, m);\n  for (int i= m; i--;) GAp::bf[i]-= GAq::bf[i];\n\
     \  Poly rem(GAp::bf, GAp::bf + m);\n  return std::make_pair(qu, rem.shrink());\n\
@@ -609,7 +609,7 @@ data:
   path: src/FFT/Polynomial.hpp
   requiredBy:
   - src/FFT/extgcd.hpp
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 18:05:14+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/division_of_Poly.test.cpp
