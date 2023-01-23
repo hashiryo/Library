@@ -128,25 +128,26 @@ data:
     \ k, T val) { set_val(root, k, val); }\n T get(std::size_t k) { return get_val(root,\
     \ k); }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value, \"\\\"\
     at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
-    \ L= M, typename std::enable_if_t<semigroup<L>::value> *= nullptr> T operator[](std::size_t\
-    \ k) { return get(k); }\n template <class L= M, typename std::enable_if_t<!semigroup<L>::value>\
-    \ *= nullptr> T &operator[](std::size_t k) { return at(k); }\n T fold(std::size_t\
-    \ a, std::size_t b) {\n  static_assert(semigroup<M>::value, \"\\\"fold\\\" is\
-    \ not available\\n\");\n  return fold(root, a, b, 0, size());\n }\n void apply(std::size_t\
-    \ a, std::size_t b, E x) {\n  static_assert(dual<M>::value, \"\\\"apply\\\" is\
-    \ not available\\n\");\n  apply(root, a, b, 0, size(), x);\n }\n std::size_t size()\
-    \ { return n[root].size; }\n std::vector<T> dump() {\n  if (!root) return std::vector<T>();\n\
-    \  std::vector<T> ret(size());\n  return dump(root, ret.begin()), ret;\n }\n void\
-    \ clear() { root= 0; }\n static void reset() { ni= 1; }\n void rebuild() {\n \
-    \ auto dmp= dump();\n  reset(), *this= WBT(dmp);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup<M>::value) ret+= \"\\\
-    \"fold\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual<M>::value)\
-    \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n static double percentage_used()\
-    \ { return 100. * ni / NODE_SIZE; }\n};\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate\
-    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
-    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
-    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
-    \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](std::size_t\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ std::nullptr_t> = nullptr> T &operator[](std::size_t k) { return at(k); }\n\
+    \ T fold(std::size_t a, std::size_t b) {\n  static_assert(semigroup<M>::value,\
+    \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b, 0, size());\n\
+    \ }\n void apply(std::size_t a, std::size_t b, E x) {\n  static_assert(dual<M>::value,\
+    \ \"\\\"apply\\\" is not available\\n\");\n  apply(root, a, b, 0, size(), x);\n\
+    \ }\n std::size_t size() { return n[root].size; }\n std::vector<T> dump() {\n\
+    \  if (!root) return std::vector<T>();\n  std::vector<T> ret(size());\n  return\
+    \ dump(root, ret.begin()), ret;\n }\n void clear() { root= 0; }\n static void\
+    \ reset() { ni= 1; }\n void rebuild() {\n  auto dmp= dump();\n  reset(), *this=\
+    \ WBT(dmp);\n }\n static std::string which_available() {\n  std::string ret= \"\
+    \";\n  if constexpr (semigroup<M>::value) ret+= \"\\\"fold\\\" \";\n  else ret+=\
+    \ \"\\\"at\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\" \";\n\
+    \  return ret;\n }\n static double percentage_used() { return 100. * ni / NODE_SIZE;\
+    \ }\n};\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline\
+    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
+    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
+    \ - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod -\
+    \ (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -260,7 +261,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 20:22:10+09:00'
+  timestamp: '2023-01-23 20:52:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

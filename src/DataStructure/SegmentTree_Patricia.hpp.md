@@ -116,16 +116,16 @@ data:
     \ }\n T get(id_t k) { return get_val(root, k); }\n bool is_null(id_t k) { return\
     \ is_null(root, k); }\n T &at(id_t k) {\n  static_assert(!monoid<M>::value, \"\
     \\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
-    \ L= M, typename std::enable_if_t<monoid<L>::value> *= nullptr> T operator[](id_t\
-    \ k) { return get(k); }\n template <class L= M, typename std::enable_if_t<!monoid<L>::value>\
-    \ *= nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t a, id_t b,\
-    \ id_t bias= 0) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\\
-    n\");\n  return fold(root, a, b, bias);\n }\n // find i s.t.\n //  check(fold(k,i))\
-    \ == False, check(fold(k,i+1)) == True\n // return -1 if not found\n template\
-    \ <class C> id_t find_first(id_t a, C check, id_t bias= 0) {\n  std::array<T,\
-    \ 1> sum{def_val()};\n  std::array<Node *, 1> t{root};\n  return find<0>(a, {0,\
-    \ 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n }\n template <std::size_t N,\
-    \ class C> static id_t find_first(id_t a, C check, std::array<SegmentTree_Patricia,\
+    \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](id_t\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t\
+    \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\"\
+    \ is not available\\n\");\n  return fold(root, a, b, bias);\n }\n // find i s.t.\n\
+    \ //  check(fold(k,i)) == False, check(fold(k,i+1)) == True\n // return -1 if\
+    \ not found\n template <class C> id_t find_first(id_t a, C check, id_t bias= 0)\
+    \ {\n  std::array<T, 1> sum{def_val()};\n  std::array<Node *, 1> t{root};\n  return\
+    \ find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n }\n template\
+    \ <std::size_t N, class C> static id_t find_first(id_t a, C check, std::array<SegmentTree_Patricia,\
     \ N> segs, id_t bias= 0) {\n  std::array<T, N> sums;\n  sums.fill(def_val());\n\
     \  std::array<Node *, N> ts;\n  for (std::size_t i= 0; i < N; i++) ts[i]= segs[i].root;\n\
     \  return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, ts, sums);\n }\n\
@@ -224,16 +224,16 @@ data:
     \ }\n T get(id_t k) { return get_val(root, k); }\n bool is_null(id_t k) { return\
     \ is_null(root, k); }\n T &at(id_t k) {\n  static_assert(!monoid<M>::value, \"\
     \\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
-    \ L= M, typename std::enable_if_t<monoid<L>::value> *= nullptr> T operator[](id_t\
-    \ k) { return get(k); }\n template <class L= M, typename std::enable_if_t<!monoid<L>::value>\
-    \ *= nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t a, id_t b,\
-    \ id_t bias= 0) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\" is not available\\\
-    n\");\n  return fold(root, a, b, bias);\n }\n // find i s.t.\n //  check(fold(k,i))\
-    \ == False, check(fold(k,i+1)) == True\n // return -1 if not found\n template\
-    \ <class C> id_t find_first(id_t a, C check, id_t bias= 0) {\n  std::array<T,\
-    \ 1> sum{def_val()};\n  std::array<Node *, 1> t{root};\n  return find<0>(a, {0,\
-    \ 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n }\n template <std::size_t N,\
-    \ class C> static id_t find_first(id_t a, C check, std::array<SegmentTree_Patricia,\
+    \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](id_t\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t\
+    \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\"\
+    \ is not available\\n\");\n  return fold(root, a, b, bias);\n }\n // find i s.t.\n\
+    \ //  check(fold(k,i)) == False, check(fold(k,i+1)) == True\n // return -1 if\
+    \ not found\n template <class C> id_t find_first(id_t a, C check, id_t bias= 0)\
+    \ {\n  std::array<T, 1> sum{def_val()};\n  std::array<Node *, 1> t{root};\n  return\
+    \ find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n }\n template\
+    \ <std::size_t N, class C> static id_t find_first(id_t a, C check, std::array<SegmentTree_Patricia,\
     \ N> segs, id_t bias= 0) {\n  std::array<T, N> sums;\n  sums.fill(def_val());\n\
     \  std::array<Node *, N> ts;\n  for (std::size_t i= 0; i < N; i++) ts[i]= segs[i].root;\n\
     \  return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, ts, sums);\n }\n\
@@ -255,7 +255,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Patricia.hpp
   requiredBy: []
-  timestamp: '2023-01-23 20:22:10+09:00'
+  timestamp: '2023-01-23 20:52:39+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/3024.Patricia.test.cpp

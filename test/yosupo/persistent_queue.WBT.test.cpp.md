@@ -118,26 +118,27 @@ data:
     \ k, T val) { set_val(root, k, val); }\n T get(std::size_t k) { return get_val(root,\
     \ k); }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value, \"\\\"\
     at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
-    \ L= M, typename std::enable_if_t<semigroup<L>::value> *= nullptr> T operator[](std::size_t\
-    \ k) { return get(k); }\n template <class L= M, typename std::enable_if_t<!semigroup<L>::value>\
-    \ *= nullptr> T &operator[](std::size_t k) { return at(k); }\n T fold(std::size_t\
-    \ a, std::size_t b) {\n  static_assert(semigroup<M>::value, \"\\\"fold\\\" is\
-    \ not available\\n\");\n  return fold(root, a, b, 0, size());\n }\n void apply(std::size_t\
-    \ a, std::size_t b, E x) {\n  static_assert(dual<M>::value, \"\\\"apply\\\" is\
-    \ not available\\n\");\n  apply(root, a, b, 0, size(), x);\n }\n std::size_t size()\
-    \ { return n[root].size; }\n std::vector<T> dump() {\n  if (!root) return std::vector<T>();\n\
-    \  std::vector<T> ret(size());\n  return dump(root, ret.begin()), ret;\n }\n void\
-    \ clear() { root= 0; }\n static void reset() { ni= 1; }\n void rebuild() {\n \
-    \ auto dmp= dump();\n  reset(), *this= WBT(dmp);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup<M>::value) ret+= \"\\\
-    \"fold\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual<M>::value)\
-    \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n static double percentage_used()\
-    \ { return 100. * ni / NODE_SIZE; }\n};\n#line 6 \"test/yosupo/persistent_queue.WBT.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int Q;\n cin >> Q;\n vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n for\
-    \ (int i= 1; i <= Q; i++) {\n  int op, t;\n  cin >> op >> t;\n  S[i]= S[++t];\n\
-    \  if (op) {\n   cout << S[i].pop_front() << endl;\n  } else {\n   int x;\n  \
-    \ cin >> x;\n   S[i].push_back(x);\n  }\n }\n return 0;\n}\n"
+    \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](std::size_t\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ std::nullptr_t> = nullptr> T &operator[](std::size_t k) { return at(k); }\n\
+    \ T fold(std::size_t a, std::size_t b) {\n  static_assert(semigroup<M>::value,\
+    \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b, 0, size());\n\
+    \ }\n void apply(std::size_t a, std::size_t b, E x) {\n  static_assert(dual<M>::value,\
+    \ \"\\\"apply\\\" is not available\\n\");\n  apply(root, a, b, 0, size(), x);\n\
+    \ }\n std::size_t size() { return n[root].size; }\n std::vector<T> dump() {\n\
+    \  if (!root) return std::vector<T>();\n  std::vector<T> ret(size());\n  return\
+    \ dump(root, ret.begin()), ret;\n }\n void clear() { root= 0; }\n static void\
+    \ reset() { ni= 1; }\n void rebuild() {\n  auto dmp= dump();\n  reset(), *this=\
+    \ WBT(dmp);\n }\n static std::string which_available() {\n  std::string ret= \"\
+    \";\n  if constexpr (semigroup<M>::value) ret+= \"\\\"fold\\\" \";\n  else ret+=\
+    \ \"\\\"at\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\" \";\n\
+    \  return ret;\n }\n static double percentage_used() { return 100. * ni / NODE_SIZE;\
+    \ }\n};\n#line 6 \"test/yosupo/persistent_queue.WBT.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin\
+    \ >> Q;\n vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n for (int i= 1;\
+    \ i <= Q; i++) {\n  int op, t;\n  cin >> op >> t;\n  S[i]= S[++t];\n  if (op)\
+    \ {\n   cout << S[i].pop_front() << endl;\n  } else {\n   int x;\n   cin >> x;\n\
+    \   S[i].push_back(x);\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_queue\"\n//\
     \ \u6C38\u7D9A\u6027\u306Everify\n#include <iostream>\n#include <vector>\n#include\
     \ \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\nsigned main()\
@@ -152,7 +153,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 20:22:10+09:00'
+  timestamp: '2023-01-23 20:52:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/arg_sort.hpp
     title: "\u504F\u89D2\u30BD\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
@@ -150,12 +150,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/argsort.test.cpp
     title: test/yosupo/argsort.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
     links:
@@ -615,7 +615,7 @@ data:
   - src/Geometry/arg_sort.hpp
   - src/Geometry/closest_pair.hpp
   timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2626.test.cpp
   - test/aoj/CGL_7_B.test.cpp

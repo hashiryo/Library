@@ -210,35 +210,35 @@ data:
     \ k, T val) { set_val(root, k, val); }\n T get(std::size_t k) { return get_val(root,\
     \ k); }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value, \"\\\"\
     at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
-    \ L= M, typename std::enable_if_t<semigroup<L>::value> *= nullptr> T operator[](std::size_t\
-    \ k) { return get(k); }\n template <class L= M, typename std::enable_if_t<!semigroup<L>::value>\
-    \ *= nullptr> T &operator[](std::size_t k) { return at(k); }\n T fold(std::size_t\
-    \ a, std::size_t b) {\n  static_assert(semigroup<M>::value, \"\\\"fold\\\" is\
-    \ not available\\n\");\n  return fold(root, a, b, 0, size());\n }\n void apply(std::size_t\
-    \ a, std::size_t b, E x) {\n  static_assert(dual<M>::value, \"\\\"apply\\\" is\
-    \ not available\\n\");\n  apply(root, a, b, 0, size(), x);\n }\n std::size_t size()\
-    \ { return n[root].size; }\n std::vector<T> dump() {\n  if (!root) return std::vector<T>();\n\
-    \  std::vector<T> ret(size());\n  return dump(root, ret.begin()), ret;\n }\n void\
-    \ clear() { root= 0; }\n static void reset() { ni= 1; }\n void rebuild() {\n \
-    \ auto dmp= dump();\n  reset(), *this= WBT(dmp);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup<M>::value) ret+= \"\\\
-    \"fold\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual<M>::value)\
-    \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n static double percentage_used()\
-    \ { return 100. * ni / NODE_SIZE; }\n};\n#line 8 \"test/atcoder/abc256_f.WBT.test.cpp\"\
-    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
-    \ T {\n  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
-    \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
-    \ static void mapping(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0]\
-    \ - mapp[1] * x.coef[1] + mapp[2]; }\n static void composition(E &pre, const E\
-    \ &suf) { pre[0]+= suf[0], pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
-    \ Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for\
-    \ (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n WeightBalancedTree<Mono>\
-    \ wbt(N);\n for (int i= 0; i < N; i++) wbt.set(i, {i, D[i]});\n while (Q--) {\n\
-    \  int op, x;\n  cin >> op >> x, x--;\n  if (op == 1) {\n   Mint v;\n   cin >>\
-    \ v, v-= A[x], A[x]+= v;\n   wbt.apply(x, N, {v, v * x, v * x * x / 2});\n   if\
-    \ (wbt.percentage_used() > 90) wbt.rebuild();\n  } else {\n   cout << wbt[x].val\
-    \ << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](std::size_t\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ std::nullptr_t> = nullptr> T &operator[](std::size_t k) { return at(k); }\n\
+    \ T fold(std::size_t a, std::size_t b) {\n  static_assert(semigroup<M>::value,\
+    \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b, 0, size());\n\
+    \ }\n void apply(std::size_t a, std::size_t b, E x) {\n  static_assert(dual<M>::value,\
+    \ \"\\\"apply\\\" is not available\\n\");\n  apply(root, a, b, 0, size(), x);\n\
+    \ }\n std::size_t size() { return n[root].size; }\n std::vector<T> dump() {\n\
+    \  if (!root) return std::vector<T>();\n  std::vector<T> ret(size());\n  return\
+    \ dump(root, ret.begin()), ret;\n }\n void clear() { root= 0; }\n static void\
+    \ reset() { ni= 1; }\n void rebuild() {\n  auto dmp= dump();\n  reset(), *this=\
+    \ WBT(dmp);\n }\n static std::string which_available() {\n  std::string ret= \"\
+    \";\n  if constexpr (semigroup<M>::value) ret+= \"\\\"fold\\\" \";\n  else ret+=\
+    \ \"\\\"at\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\" \";\n\
+    \  return ret;\n }\n static double percentage_used() { return 100. * ni / NODE_SIZE;\
+    \ }\n};\n#line 8 \"test/atcoder/abc256_f.WBT.test.cpp\"\nusing namespace std;\n\
+    \nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct T {\n  Mint val, coef[2];\n\
+    \  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id + 1) * (id + 2) / 2,\
+    \ (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n static void mapping(T\
+    \ &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1] * x.coef[1]\
+    \ + mapp[2]; }\n static void composition(E &pre, const E &suf) { pre[0]+= suf[0],\
+    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin\
+    \ >> A[i], D[i]= A[i];\n for (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++)\
+    \ D[i]+= D[i - 1];\n WeightBalancedTree<Mono> wbt(N);\n for (int i= 0; i < N;\
+    \ i++) wbt.set(i, {i, D[i]});\n while (Q--) {\n  int op, x;\n  cin >> op >> x,\
+    \ x--;\n  if (op == 1) {\n   Mint v;\n   cin >> v, v-= A[x], A[x]+= v;\n   wbt.apply(x,\
+    \ N, {v, v * x, v * x * x / 2});\n   if (wbt.percentage_used() > 90) wbt.rebuild();\n\
+    \  } else {\n   cout << wbt[x].val << '\\n';\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
     // \u53CC\u5BFE \u306E verify\n\n#include <iostream>\n#include \"src/Math/ModInt.hpp\"\
     \n#include \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\n\
@@ -264,7 +264,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 20:22:10+09:00'
+  timestamp: '2023-01-23 20:52:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.WBT.test.cpp
