@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
@@ -28,7 +28,7 @@ data:
     - https://judge.yosupo.jp/problem/kth_root_mod
   bundledCode: "#line 1 \"test/yosupo/kth_root_mod.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/kth_root_mod\"\n#include <iostream>\n#line 2 \"\
-    src/Math/mod_kth_root.hpp\"\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\
+    src/Math/mod_kth_root.hpp\"\n#include <vector>\n#include <cmath>\n#line 2 \"src/Math/mod_inv.hpp\"\
     \n#include <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline\
     \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
     \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
@@ -113,17 +113,17 @@ data:
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
     \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
     \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
-    \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (const auto\
-    \ [q, e]: f)\n   if (ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))\
-    \ break;\n  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n\
-    \ if (assert(is_prime(p)); p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32,\
-    \ MP_Mo<u32, u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64,\
-    \ MP_Mo<u64, u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n\
-    }\n}  // namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
+    \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (auto [q,\
+    \ e]: f)\n   if (ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n\
+    \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
+    \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
+    \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
+    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
+    \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
     \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
     \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
-    \ }\n#line 5 \"src/Math/mod_kth_root.hpp\"\nnamespace math_internal {\ntemplate\
+    \ }\n#line 6 \"src/Math/mod_kth_root.hpp\"\nnamespace math_internal {\ntemplate\
     \ <class Int, class MP> inline i64 peth_root(Int c, Int pi, int ei, const MP &md)\
     \ {\n const Int p= md.mod;\n int t= 0;\n Int s= p - 1, pe= 1;\n while (s % pi\
     \ == 0) s/= pi, ++t;\n for (int i= ei; i--;) pe*= pi;\n Int u= mod_inv(pe - s\
@@ -171,8 +171,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_root_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-23 23:19:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/kth_root_mod.test.cpp
 layout: document

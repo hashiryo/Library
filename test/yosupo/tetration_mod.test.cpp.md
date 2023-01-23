@@ -106,13 +106,13 @@ data:
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
     \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
     \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
-    \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (const auto\
-    \ [q, e]: f)\n   if (ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))\
-    \ break;\n  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n\
-    \ if (assert(is_prime(p)); p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32,\
-    \ MP_Mo<u32, u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64,\
-    \ MP_Mo<u64, u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n\
-    }\n}  // namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
+    \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (auto [q,\
+    \ e]: f)\n   if (ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n\
+    \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
+    \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
+    \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
+    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
+    \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
     \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
     \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
@@ -142,7 +142,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-23 23:19:04+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp
