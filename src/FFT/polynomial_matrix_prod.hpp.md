@@ -29,7 +29,8 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/FFT/polynomial_matrix_prod.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"src/FFT/sample_points_shift.hpp\"\n#include <vector>\n#include\
+    \ <cassert>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
     #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
@@ -124,7 +125,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 5 \"src/FFT/NTT.hpp\"\nnamespace math_internal {\n\
+    \ return dat[n];\n}\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal {\n\
     #define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_, n)\
     \ __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c, ...)\
     \ \\\n mod_t r, u, *x0, *x1; \\\n for (int a= n, b= 1, s, i; a>>= 1; b<<= 1) \\\
@@ -237,7 +238,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 4 \"src/FFT/sample_points_shift.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/sample_points_shift.hpp\"\
     \ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const\
     \ std::vector<mod_t>& y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size()\
     \ <= mod_t::mod());\n static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
@@ -263,7 +264,7 @@ data:
     \ nc1 + 1, f(k, mod_t::mod() - k, bf));\n  else f(k, c_64 + m - k, bf);\n } else\
     \ if (nc1 < c_64) {\n  if (bf= f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(),\
     \ nc1 + 1, bf);\n  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n }\
-    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 4 \"src/FFT/polynomial_matrix_prod.hpp\"\
+    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 3 \"src/FFT/polynomial_matrix_prod.hpp\"\
     \n// M(0)*M(1)*...*M(k)\ntemplate <class mod_t, std::size_t LM= 1 << 20> std::vector<std::vector<mod_t>>\
     \ polynomial_matrix_prod(const std::vector<std::vector<std::vector<mod_t>>> &m,\
     \ std::uint64_t k) {\n using Mat= std::vector<std::vector<mod_t>>;\n using Poly=\
@@ -293,8 +294,8 @@ data:
     \ {\n  Mat mt(n, std::vector<mod_t>(n, mod_t(0)));\n  for (int j= n; j--;)\n \
     \  for (int l= n, p; l--;)\n    for (tmp= eval(m[j][l], i), p= n; p--;) mt[j][p]+=\
     \ tmp * ret[l][p];\n  ret.swap(mt);\n }\n return ret;\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/FFT/sample_points_shift.hpp\"\
-    \n// M(0)*M(1)*...*M(k)\ntemplate <class mod_t, std::size_t LM= 1 << 20> std::vector<std::vector<mod_t>>\
+  code: "#pragma once\n#include \"src/FFT/sample_points_shift.hpp\"\n// M(0)*M(1)*...*M(k)\n\
+    template <class mod_t, std::size_t LM= 1 << 20> std::vector<std::vector<mod_t>>\
     \ polynomial_matrix_prod(const std::vector<std::vector<std::vector<mod_t>>> &m,\
     \ std::uint64_t k) {\n using Mat= std::vector<std::vector<mod_t>>;\n using Poly=\
     \ std::vector<mod_t>;\n const int n= m.size();\n assert(n > 0), assert(n == (int)m[0].size());\n\
@@ -333,7 +334,7 @@ data:
   isVerificationFile: false
   path: src/FFT/polynomial_matrix_prod.hpp
   requiredBy: []
-  timestamp: '2023-01-23 18:05:14+09:00'
+  timestamp: '2023-01-23 18:21:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/502.test.cpp

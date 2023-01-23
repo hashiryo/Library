@@ -100,7 +100,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include <cassert>\n\
-    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
     \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
     #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
@@ -194,7 +194,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 5 \"src/FFT/NTT.hpp\"\nnamespace math_internal {\n\
+    \ return dat[n];\n}\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal {\n\
     #define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_, n)\
     \ __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c, ...)\
     \ \\\n mod_t r, u, *x0, *x1; \\\n for (int a= n, b= 1, s, i; a>>= 1; b<<= 1) \\\
@@ -466,7 +466,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/extgcd.hpp
   - src/FFT/SubProductTree.hpp
-  timestamp: '2023-01-23 18:05:14+09:00'
+  timestamp: '2023-01-23 18:21:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/division_of_Poly.test.cpp
