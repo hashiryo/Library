@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
   - icon: ':question:'
@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc133/tasks/abc133_f
@@ -23,14 +23,14 @@ data:
     - https://atcoder.jp/contests/abc133/tasks/abc133_f
   bundledCode: "#line 1 \"test/atcoder/abc133_f.Patricia.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n\n// \u6C38\u7D9A\u914D\
-    \u5217(at) \u306E verify\n\n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SegmentTree_Patricia.hpp\"\
-    \n/**\n * @title Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)\n * @category\
-    \ \u30C7\u30FC\u30BF\u69CB\u9020\n * \u30B9\u30D1\u30FC\u30B9\u306A\u3089\u30E1\
-    \u30E2\u30EA\u7BC0\u7D04\u3067\u304D\u308B\u304B\u3082\n * \u9045\u5EF6\u4F1D\u642C\
-    \u4E0D\u53EF\n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528\
-    :\n// https://codeforces.com/contest/947/problem/C (find+xor)\n// https://codeforces.com/contest/966/problem/C\
-    \ (find+xor)\n// https://codeforces.com/contest/295/problem/E (\u7279\u6B8A\u30E2\
-    \u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n// https://atcoder.jp/contests/kupc2018/tasks/kupc2018_m\
+    \u5217(at) \u306E verify\n\n#include <iostream>\n#include <vector>\n#line 2 \"\
+    src/DataStructure/SegmentTree_Patricia.hpp\"\n#include <bits/stdc++.h>\n/**\n\
+    \ * @title Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)\n * @category \u30C7\
+    \u30FC\u30BF\u69CB\u9020\n * \u30B9\u30D1\u30FC\u30B9\u306A\u3089\u30E1\u30E2\u30EA\
+    \u7BC0\u7D04\u3067\u304D\u308B\u304B\u3082\n * \u9045\u5EF6\u4F1D\u642C\u4E0D\u53EF\
+    \n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/947/problem/C\
+    \ (find+xor)\n// https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
+    \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n// https://atcoder.jp/contests/kupc2018/tasks/kupc2018_m\
     \ (\u30D1\u30C8\u30EA\u30B7\u30A2\u306E\u52B9\u529B\u767A\u63EE)\n\n// BEGIN CUT\
     \ HERE\n\n#define HAS_CHECK(member, Dummy)                              \\\n \
     \ template <class T>                                          \\\n  struct has_##member\
@@ -230,40 +230,37 @@ data:
     \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup<M>::value\
     \ || dual<M>::value) ret+= \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup<M>::value)\
     \ ret+= \"\\\"fold\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\
-    \" \";\n  return ret;\n }\n};\n#line 8 \"test/atcoder/abc133_f.Patricia.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree lct(N);\n  vector<tuple<int, int,\
-    \ int>> adj[N];\n  for (int i = 0; i < N - 1; i++) {\n    int a, b, c, d;\n  \
-    \  cin >> a >> b >> c >> d;\n    lct.link(--a, --b);\n    adj[a].emplace_back(b,\
-    \ c, d);\n    adj[b].emplace_back(a, c, d);\n  }\n  using PerArr = SegmentTree_Patricia<int,\
-    \ true, 17>;\n  PerArr Arr1[N], Arr2[N];\n  int sum[N];\n  sum[0] = 0;\n  auto\
-    \ dfs = [&adj, &Arr1, &Arr2, &sum](auto f, int v, int p) -> void {\n    for (auto\
-    \ [u, c, d] : adj[v])\n      if (u != p) {\n        Arr1[u] = Arr1[v], Arr2[u]\
-    \ = Arr2[v];\n        Arr1[u][c] += 1, Arr2[u][c] += d;\n        sum[u] = sum[v]\
-    \ + d;\n        f(f, u, v);\n      }\n  };\n  dfs(dfs, 0, -1);\n  lct.evert(0);\n\
-    \  for (int i = 0; i < Q; i++) {\n    int x, y, u, v;\n    cin >> x >> y >> u\
-    \ >> v;\n    int lca = lct.lca(--u, --v);\n    cout << sum[u] + sum[v] - 2 * sum[lca]\
-    \ +\n                y * (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x))\
-    \ -\n                (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\n\
-    \         << '\\n';\n  }\n  return 0;\n}\n"
+    \" \";\n  return ret;\n }\n};\n#line 9 \"test/atcoder/abc133_f.Patricia.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n LinkCutTree lct(N);\n vector<tuple<int, int, int>>\
+    \ adj[N];\n for (int i= 0; i < N - 1; i++) {\n  int a, b, c, d;\n  cin >> a >>\
+    \ b >> c >> d;\n  lct.link(--a, --b);\n  adj[a].emplace_back(b, c, d);\n  adj[b].emplace_back(a,\
+    \ c, d);\n }\n using PerArr= SegmentTree_Patricia<int, true, 17>;\n PerArr Arr1[N],\
+    \ Arr2[N];\n int sum[N];\n sum[0]= 0;\n auto dfs= [&adj, &Arr1, &Arr2, &sum](auto\
+    \ f, int v, int p) -> void {\n  for (auto [u, c, d]: adj[v])\n   if (u != p) {\n\
+    \    Arr1[u]= Arr1[v], Arr2[u]= Arr2[v];\n    Arr1[u][c]+= 1, Arr2[u][c]+= d;\n\
+    \    sum[u]= sum[v] + d;\n    f(f, u, v);\n   }\n };\n dfs(dfs, 0, -1);\n lct.evert(0);\n\
+    \ for (int i= 0; i < Q; i++) {\n  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n\
+    \  int lca= lct.lca(--u, --v);\n  cout << sum[u] + sum[v] - 2 * sum[lca] + y *\
+    \ (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) +\
+    \ Arr2[v].get(x) - 2 * Arr2[lca].get(x)) << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n\n\
-    // \u6C38\u7D9A\u914D\u5217(at) \u306E verify\n\n#include <bits/stdc++.h>\n#include\
-    \ \"src/DataStructure/SegmentTree_Patricia.hpp\"\n#include \"src/DataStructure/LinkCutTree.hpp\"\
-    \nusing namespace std;\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int N, Q;\n  cin >> N >> Q;\n  LinkCutTree lct(N);\n  vector<tuple<int, int,\
-    \ int>> adj[N];\n  for (int i = 0; i < N - 1; i++) {\n    int a, b, c, d;\n  \
-    \  cin >> a >> b >> c >> d;\n    lct.link(--a, --b);\n    adj[a].emplace_back(b,\
-    \ c, d);\n    adj[b].emplace_back(a, c, d);\n  }\n  using PerArr = SegmentTree_Patricia<int,\
-    \ true, 17>;\n  PerArr Arr1[N], Arr2[N];\n  int sum[N];\n  sum[0] = 0;\n  auto\
-    \ dfs = [&adj, &Arr1, &Arr2, &sum](auto f, int v, int p) -> void {\n    for (auto\
-    \ [u, c, d] : adj[v])\n      if (u != p) {\n        Arr1[u] = Arr1[v], Arr2[u]\
-    \ = Arr2[v];\n        Arr1[u][c] += 1, Arr2[u][c] += d;\n        sum[u] = sum[v]\
-    \ + d;\n        f(f, u, v);\n      }\n  };\n  dfs(dfs, 0, -1);\n  lct.evert(0);\n\
-    \  for (int i = 0; i < Q; i++) {\n    int x, y, u, v;\n    cin >> x >> y >> u\
-    \ >> v;\n    int lca = lct.lca(--u, --v);\n    cout << sum[u] + sum[v] - 2 * sum[lca]\
-    \ +\n                y * (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x))\
-    \ -\n                (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\n\
-    \         << '\\n';\n  }\n  return 0;\n}"
+    // \u6C38\u7D9A\u914D\u5217(at) \u306E verify\n\n#include <iostream>\n#include\
+    \ <vector>\n#include \"src/DataStructure/SegmentTree_Patricia.hpp\"\n#include\
+    \ \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n LinkCutTree\
+    \ lct(N);\n vector<tuple<int, int, int>> adj[N];\n for (int i= 0; i < N - 1; i++)\
+    \ {\n  int a, b, c, d;\n  cin >> a >> b >> c >> d;\n  lct.link(--a, --b);\n  adj[a].emplace_back(b,\
+    \ c, d);\n  adj[b].emplace_back(a, c, d);\n }\n using PerArr= SegmentTree_Patricia<int,\
+    \ true, 17>;\n PerArr Arr1[N], Arr2[N];\n int sum[N];\n sum[0]= 0;\n auto dfs=\
+    \ [&adj, &Arr1, &Arr2, &sum](auto f, int v, int p) -> void {\n  for (auto [u,\
+    \ c, d]: adj[v])\n   if (u != p) {\n    Arr1[u]= Arr1[v], Arr2[u]= Arr2[v];\n\
+    \    Arr1[u][c]+= 1, Arr2[u][c]+= d;\n    sum[u]= sum[v] + d;\n    f(f, u, v);\n\
+    \   }\n };\n dfs(dfs, 0, -1);\n lct.evert(0);\n for (int i= 0; i < Q; i++) {\n\
+    \  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n  int lca= lct.lca(--u, --v);\n\
+    \  cout << sum[u] + sum[v] - 2 * sum[lca] + y * (Arr1[u].get(x) + Arr1[v].get(x)\
+    \ - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\
+    \ << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SegmentTree_Patricia.hpp
   - src/DataStructure/LinkCutTree.hpp
@@ -271,8 +268,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.Patricia.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 16:53:05+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 19:28:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.Patricia.test.cpp
 layout: document

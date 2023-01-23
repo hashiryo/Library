@@ -37,12 +37,12 @@ data:
     - https://judge.yosupo.jp/problem/polynomial_interpolation
   bundledCode: "#line 1 \"test/yosupo/polynomial_interpolation.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/polynomial_interpolation\"\n#include\
-    \ <bits/stdc++.h>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
-    #line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
-    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
-    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
+    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
+    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
+    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
+    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
+    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -120,15 +120,16 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
-    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
-    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
-    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
-    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
-    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
+    \ return dat[n];\n}\n#line 3 \"src/FFT/fps_inv.hpp\"\n#include <algorithm>\n#line\
+    \ 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 3 \"src/Math/is_prime.hpp\"\
+    \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
+    \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
+    \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
+    \ {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d,\
+    \ md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n   \
+    \  if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if\
+    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32,\
+    \ MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
@@ -369,19 +370,20 @@ data:
     \ + i + k, 0, k), GNA2::bf.zeros(k, k2), GNA1::bf.dft(0, k2), GNA2::bf.dft(0,\
     \ k2), GNA1::bf.mul(p[o | 1], 0, k2), GNA2::bf.mul(p[o], 0, k2), GNA1::bf.add(GNA2::bf,\
     \ 0, k2), GNA1::bf.idft(0, k2), GNA1::bf.get(r + i, 0, k2);\n  return std::reverse(r,\
-    \ r + n), poly(r, r + n);\n }\n};\n#line 5 \"test/yosupo/polynomial_interpolation.test.cpp\"\
+    \ r + n), poly(r, r + n);\n }\n};\n#line 6 \"test/yosupo/polynomial_interpolation.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n std::vector<Mint> x(N),\
     \ y(N);\n for (int i= 0; i < N; i++) cin >> x[i];\n for (int i= 0; i < N; i++)\
     \ cin >> y[i];\n auto ans= SubProductTree(x).interpolate(y);\n for (int i= 0;\
     \ i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_interpolation\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/SubProductTree.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n std::vector<Mint> x(N),\
-    \ y(N);\n for (int i= 0; i < N; i++) cin >> x[i];\n for (int i= 0; i < N; i++)\
-    \ cin >> y[i];\n auto ans= SubProductTree(x).interpolate(y);\n for (int i= 0;\
-    \ i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}"
+    \n#include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/FFT/SubProductTree.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N;\n cin >>\
+    \ N;\n std::vector<Mint> x(N), y(N);\n for (int i= 0; i < N; i++) cin >> x[i];\n\
+    \ for (int i= 0; i < N; i++) cin >> y[i];\n auto ans= SubProductTree(x).interpolate(y);\n\
+    \ for (int i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -394,7 +396,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:57:46+09:00'
+  timestamp: '2023-01-23 19:28:35+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/polynomial_interpolation.test.cpp

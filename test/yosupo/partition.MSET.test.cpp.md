@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -30,9 +30,9 @@ data:
     links:
     - https://judge.yosupo.jp/problem/partition_function
   bundledCode: "#line 1 \"test/yosupo/partition.MSET.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/partition_function\"\n\n#include <bits/stdc++.h>\n\
-    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    https://judge.yosupo.jp/problem/partition_function\"\n\n#include <iostream>\n\
+    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
+    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -113,7 +113,9 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ return dat[n];\n}\n#line 2 \"src/FFT/FormalPowerSeries.hpp\"\n#include <vector>\n\
+    #include <functional>\n#include <memory>\n#line 2 \"src/FFT/NTT.hpp\"\n#include\
+    \ <array>\n#include <limits>\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -237,7 +239,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/FormalPowerSeries.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 6 \"src/FFT/FormalPowerSeries.hpp\"\
     \ntemplate <class T, std::size_t LM= 1 << 22> class RelaxedConvolution {\n std::vector<T>\
     \ a, b, c;\n std::vector<NTTArray<T, LM, true>> ac, bc;\n std::function<T()> ha,\
     \ hb;\n int n;\n template <class T0> static auto wrap(T0 &&f, int &n, const std::vector<T>\
@@ -364,7 +366,7 @@ data:
     \ + 1, 1)));\n for (int i= 0; i <= N; i++) cout << ans[i] << \" \\n\"[i == N];\n\
     \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/partition_function\"\n\n\
-    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
+    #include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/FormalPowerSeries.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n using FPS= FormalPowerSeries<Mint>;\n int N;\n\
     \ cin >> N;\n auto ans= MSET(FPS(vector<Mint>(N + 1, 1)));\n for (int i= 0; i\
@@ -379,7 +381,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/partition.MSET.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:21:22+09:00'
+  timestamp: '2023-01-23 19:28:35+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/partition.MSET.test.cpp

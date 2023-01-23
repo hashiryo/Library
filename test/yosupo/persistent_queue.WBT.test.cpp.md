@@ -6,9 +6,9 @@ data:
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_queue
@@ -16,16 +16,16 @@ data:
     - https://judge.yosupo.jp/problem/persistent_queue
   bundledCode: "#line 1 \"test/yosupo/persistent_queue.WBT.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/persistent_queue\"\n// \u6C38\u7D9A\u6027\u306E\
-    verify\n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\
-    \n/**\n * @title \u6C38\u7D9AWeight-Balanced-Tree\n * @category \u30C7\u30FC\u30BF\
-    \u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\u6728\
-    \n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\u9006\
-    \u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\u3088\u3046\u306B\u3057\u3066\
-    \u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\
-    \u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u8449\u306E\u30B5\
-    \u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\
-    \u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n\
-    \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
+    verify\n#include <iostream>\n#include <vector>\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \n#include <bits/stdc++.h>\n/**\n * @title \u6C38\u7D9AWeight-Balanced-Tree\n\
+    \ * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\
+    \u5E73\u8861\u4E8C\u5206\u6728\n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\
+    \u3066\u307E\u3059\uFF08\u9006\u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\
+    \u3088\u3046\u306B\u3057\u3066\u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\
+    \u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\
+    \u30C9\u304C\u8449\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\
+    \u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066\
+    size\u3092\u6E21\u305B\u308B\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
     \ (\u6C38\u7D9A)\n// https://atcoder.jp/contests/arc030/tasks/arc030_4 (\u6C38\
     \u7D9A\u9045\u5EF6\u4F1D\u642C)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define\
     \ HAS_CHECK(member, Dummy)                              \\\n  template <class\
@@ -148,27 +148,27 @@ data:
     \      ret += \"\\\"fold\\\" \";\n    else\n      ret += \"\\\"at\\\" \";\n  \
     \  if constexpr (dual<M>::value) ret += \"\\\"apply\\\" \";\n    return ret;\n\
     \  }\n  static double percentage_used() { return 100. * ni / NODE_SIZE; }\n};\n\
-    #line 5 \"test/yosupo/persistent_queue.WBT.test.cpp\"\nusing namespace std;\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >>\
-    \ Q;\n  vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n  for (int i = 1;\
-    \ i <= Q; i++) {\n    int op, t;\n    cin >> op >> t;\n    S[i] = S[++t];\n  \
-    \  if (op) {\n      cout << S[i].pop_front() << endl;\n    } else {\n      int\
-    \ x;\n      cin >> x;\n      S[i].push_back(x);\n    }\n  }\n  return 0;\n}\n"
+    #line 6 \"test/yosupo/persistent_queue.WBT.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n\
+    \ vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n for (int i= 1; i <= Q;\
+    \ i++) {\n  int op, t;\n  cin >> op >> t;\n  S[i]= S[++t];\n  if (op) {\n   cout\
+    \ << S[i].pop_front() << endl;\n  } else {\n   int x;\n   cin >> x;\n   S[i].push_back(x);\n\
+    \  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_queue\"\n//\
-    \ \u6C38\u7D9A\u6027\u306Everify\n#include <bits/stdc++.h>\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int Q;\n  cin >> Q;\n  vector<WeightBalancedTree<int, 1 << 24>> S(Q + 1);\n\
-    \  for (int i = 1; i <= Q; i++) {\n    int op, t;\n    cin >> op >> t;\n    S[i]\
-    \ = S[++t];\n    if (op) {\n      cout << S[i].pop_front() << endl;\n    } else\
-    \ {\n      int x;\n      cin >> x;\n      S[i].push_back(x);\n    }\n  }\n  return\
+    \ \u6C38\u7D9A\u6027\u306Everify\n#include <iostream>\n#include <vector>\n#include\
+    \ \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n vector<WeightBalancedTree<int,\
+    \ 1 << 24>> S(Q + 1);\n for (int i= 1; i <= Q; i++) {\n  int op, t;\n  cin >>\
+    \ op >> t;\n  S[i]= S[++t];\n  if (op) {\n   cout << S[i].pop_front() << endl;\n\
+    \  } else {\n   int x;\n   cin >> x;\n   S[i].push_back(x);\n  }\n }\n return\
     \ 0;\n}"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2022-06-20 22:21:12+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 19:28:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp
 layout: document

@@ -25,16 +25,16 @@ data:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n//\u9045\
-    \u5EF6\u4F1D\u642C\u306Everify\n#include <bits/stdc++.h>\n\n#line 3 \"src/DataStructure/WeightBalancedTree.hpp\"\
-    \n/**\n * @title \u6C38\u7D9AWeight-Balanced-Tree\n * @category \u30C7\u30FC\u30BF\
-    \u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\u5E73\u8861\u4E8C\u5206\u6728\
-    \n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\u3066\u307E\u3059\uFF08\u9006\
-    \u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\u3088\u3046\u306B\u3057\u3066\
-    \u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\u5FC5\u8981\u306A\u3057\uFF08\
-    \u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\u30C9\u304C\u8449\u306E\u30B5\
-    \u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\u308B\u306E\u3067mapping\u95A2\
-    \u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066size\u3092\u6E21\u305B\u308B\n\
-    \ */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
+    \u5EF6\u4F1D\u642C\u306Everify\n#include <iostream>\n\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \n#include <bits/stdc++.h>\n/**\n * @title \u6C38\u7D9AWeight-Balanced-Tree\n\
+    \ * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief O(logN)\n * \u6C38\u7D9A\
+    \u5E73\u8861\u4E8C\u5206\u6728\n * \u203B\u3053\u308C\u306F\u6C38\u7D9A\u5316\u3057\
+    \u3066\u307E\u3059\uFF08\u9006\u306B\u975E\u6C38\u7D9A\u306B\u3067\u304D\u308B\
+    \u3088\u3046\u306B\u3057\u3066\u307E\u305B\u3093\uFF09\n * \u5358\u4F4D\u5143\u306F\
+    \u5FC5\u8981\u306A\u3057\uFF08\u9045\u5EF6\u5074\u3082\uFF09\n * \u5404\u30CE\u30FC\
+    \u30C9\u304C\u8449\u306E\u30B5\u30A4\u30BA\u3092\u4FDD\u6301\u3057\u3066\u3044\
+    \u308B\u306E\u3067mapping\u95A2\u6570\u3067\u306F\u5F15\u6570\u3068\u3057\u3066\
+    size\u3092\u6E21\u305B\u308B\n */\n\n// verify\u7528:\n// https://atcoder.jp/contests/joisc2012/tasks/joisc2012_copypaste\
     \ (\u6C38\u7D9A)\n// https://atcoder.jp/contests/arc030/tasks/arc030_4 (\u6C38\
     \u7D9A\u9045\u5EF6\u4F1D\u642C)\n\n// BEGIN CUT HERE\n\n#ifndef HAS_CHECK\n#define\
     \ HAS_CHECK(member, Dummy)                              \\\n  template <class\
@@ -253,20 +253,19 @@ data:
     \  wbt.apply(l, r, {b, c});\n  }\n  if (WBT::percentage_used() > 90) wbt.rebuild();\n\
     \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n//\u9045\u5EF6\u4F1D\u642C\u306Everify\n#include <bits/stdc++.h>\n\n#include\
-    \ \"src/DataStructure/WeightBalancedTree.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineQ_RsumQ\
-    \ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static T op(const T &l, const\
-    \ T &r) { return l + r; }\n static void mapping(T &v, const E &f, std::size_t\
-    \ sz) { v= f.first * v + f.second * sz; }\n static void composition(E &pre, const\
-    \ E &suf) { pre= {suf.first * pre.first, suf.first * pre.second + suf.second};\
-    \ }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
-    \ cin >> N >> Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >> v[i];\n using\
-    \ WBT= WeightBalancedTree<RaffineQ_RsumQ, 1 << 24>;\n WBT wbt(v, v + N);\n while\
-    \ (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout\
-    \ << wbt.fold(l, r) << endl;\n  } else {\n   Mint b, c;\n   cin >> b >> c;\n \
-    \  wbt.apply(l, r, {b, c});\n  }\n  if (WBT::percentage_used() > 90) wbt.rebuild();\n\
-    \ }\n return 0;\n}"
+    \n//\u9045\u5EF6\u4F1D\u642C\u306Everify\n#include <iostream>\n\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
+    struct RaffineQ_RsumQ {\n using T= Mint;\n using E= pair<Mint, Mint>;\n static\
+    \ T op(const T &l, const T &r) { return l + r; }\n static void mapping(T &v, const\
+    \ E &f, std::size_t sz) { v= f.first * v + f.second * sz; }\n static void composition(E\
+    \ &pre, const E &suf) { pre= {suf.first * pre.first, suf.first * pre.second +\
+    \ suf.second}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint v[N];\n for (int i= 0; i < N; i++) cin >>\
+    \ v[i];\n using WBT= WeightBalancedTree<RaffineQ_RsumQ, 1 << 24>;\n WBT wbt(v,\
+    \ v + N);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n \
+    \ if (op) {\n   cout << wbt.fold(l, r) << endl;\n  } else {\n   Mint b, c;\n \
+    \  cin >> b >> c;\n   wbt.apply(l, r, {b, c});\n  }\n  if (WBT::percentage_used()\
+    \ > 90) wbt.rebuild();\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/WeightBalancedTree.hpp
   - src/Math/ModInt.hpp
@@ -275,7 +274,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:52:41+09:00'
+  timestamp: '2023-01-23 19:28:35+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

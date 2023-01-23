@@ -9,18 +9,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3024.Patricia.test.cpp
     title: test/aoj/3024.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/set_xor_min.Patricia.test.cpp
     title: test/yosupo/set_xor_min.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/649.Patricia.test.cpp
     title: test/yukicoder/649.Patricia.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
     links:
@@ -302,7 +302,7 @@ data:
   path: src/DataStructure/SegmentTree_Patricia.hpp
   requiredBy: []
   timestamp: '2021-11-23 17:04:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3024.Patricia.test.cpp
   - test/aoj/2270.Patricia.test.cpp

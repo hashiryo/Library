@@ -36,28 +36,28 @@ data:
     links:
     - https://judge.yosupo.jp/problem/pow_of_formal_power_series
   bundledCode: "#line 1 \"test/yosupo/pow_of_FPS.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
-    \n#include <bits/stdc++.h>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
-    #line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
-    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
-    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
-    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
-    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
-    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
-    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
-    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
-    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
-    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
-    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
-    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
-    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
-    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
-    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t inv(u_t n,\
-    \ int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE\
-    \ IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
+    \n#include <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
+    \ <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline Int\
+    \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
+    \ y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y *\
+    \ (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
+    \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    \ {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64=\
+    \ uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n\
+    #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
+    \ PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-=\
+    \ M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r)\
+    \ const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U)\
+    \ \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
+    \ n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class\
+    \ du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0),\
+    \ r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE\
+    \ IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod\
+    \ << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n,\
+    \ r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL\
+    \ u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t\
+    \ inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) :\
+    \ x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
     \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
     \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
     \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
@@ -119,18 +119,19 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
-    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
-    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
-    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
-    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
-    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
-    \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
+    \ return dat[n];\n}\n#line 2 \"src/FFT/fps_exp.hpp\"\n#include <bits/stdc++.h>\n\
+    #line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
+    \ Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP\
+    \ md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1=\
+    \ md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n\
+    \   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i= s;\
+    \ p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
+    }\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1) return (n |\
+    \ 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32, u64, 32, 31>,\
+    \ 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64, MP_Mo<u64, u128,\
+    \ 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
     \ n) __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c,\
     \ ...) \\\n mod_t r, u, *x0, *x1; \\\n for (int a= n, b= 1, s, i; a>>= 1; b<<=\
@@ -381,17 +382,18 @@ data:
     \ mod_t());\n  for (int i= sz; i--;) g[i + ofs]*= pk;\n } else fill_n(g + 1, n\
     \ - 1, mod_t());\n return vector(g, g + n);\n}\n}  // namespace math_internal\n\
     using math_internal::deriv, math_internal::integ, math_internal::log, math_internal::exp,\
-    \ math_internal::pow;\n#line 5 \"test/yosupo/pow_of_FPS.test.cpp\"\nusing namespace\
+    \ math_internal::pow;\n#line 6 \"test/yosupo/pow_of_FPS.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N,\
     \ M;\n cin >> N >> M;\n using Mint= ModInt<998244353>;\n vector<Mint> a(N);\n\
     \ for (int i= 0; i < N; i++) cin >> a[i];\n auto b= pow(a, M);\n for (int i= 0;\
     \ i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/pow_of_formal_power_series\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_exp.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ long long N, M;\n cin >> N >> M;\n using Mint= ModInt<998244353>;\n vector<Mint>\
-    \ a(N);\n for (int i= 0; i < N; i++) cin >> a[i];\n auto b= pow(a, M);\n for (int\
-    \ i= 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n return 0;\n}"
+    \n#include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/FFT/fps_exp.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n long long N, M;\n cin >> N >> M;\n using Mint= ModInt<998244353>;\n\
+    \ vector<Mint> a(N);\n for (int i= 0; i < N; i++) cin >> a[i];\n auto b= pow(a,\
+    \ M);\n for (int i= 0; i < N; i++) cout << b[i] << \" \\n\"[i == N - 1];\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -404,7 +406,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/pow_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:57:46+09:00'
+  timestamp: '2023-01-23 19:28:35+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/pow_of_FPS.test.cpp

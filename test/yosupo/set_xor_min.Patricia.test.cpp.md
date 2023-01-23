@@ -1,28 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/set_xor_min
     links:
     - https://judge.yosupo.jp/problem/set_xor_min
   bundledCode: "#line 1 \"test/yosupo/set_xor_min.Patricia.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/set_xor_min\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/DataStructure/SegmentTree_Patricia.hpp\"\n/**\n * @title Segment-Tree(\u30D1\
-    \u30C8\u30EA\u30B7\u30A2\u6728)\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n\
-    \ * \u30B9\u30D1\u30FC\u30B9\u306A\u3089\u30E1\u30E2\u30EA\u7BC0\u7D04\u3067\u304D\
-    \u308B\u304B\u3082\n * \u9045\u5EF6\u4F1D\u642C\u4E0D\u53EF\n * \u6C38\u7D9A\u5316\
-    \u53EF\n * O(logN)\n */\n\n// verify\u7528:\n// https://codeforces.com/contest/947/problem/C\
-    \ (find+xor)\n// https://codeforces.com/contest/966/problem/C (find+xor)\n// https://codeforces.com/contest/295/problem/E\
-    \ (\u7279\u6B8A\u30E2\u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n// https://atcoder.jp/contests/kupc2018/tasks/kupc2018_m\
+    \ \"https://judge.yosupo.jp/problem/set_xor_min\"\n#include <iostream>\n#line\
+    \ 2 \"src/DataStructure/SegmentTree_Patricia.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)\n * @category\
+    \ \u30C7\u30FC\u30BF\u69CB\u9020\n * \u30B9\u30D1\u30FC\u30B9\u306A\u3089\u30E1\
+    \u30E2\u30EA\u7BC0\u7D04\u3067\u304D\u308B\u304B\u3082\n * \u9045\u5EF6\u4F1D\u642C\
+    \u4E0D\u53EF\n * \u6C38\u7D9A\u5316\u53EF\n * O(logN)\n */\n\n// verify\u7528\
+    :\n// https://codeforces.com/contest/947/problem/C (find+xor)\n// https://codeforces.com/contest/966/problem/C\
+    \ (find+xor)\n// https://codeforces.com/contest/295/problem/E (\u7279\u6B8A\u30E2\
+    \u30CE\u30A4\u30C9+\u5EA7\u5727\u30B5\u30DC\u308A)\n// https://atcoder.jp/contests/kupc2018/tasks/kupc2018_m\
     \ (\u30D1\u30C8\u30EA\u30B7\u30A2\u306E\u52B9\u529B\u767A\u63EE)\n\n// BEGIN CUT\
     \ HERE\n\n#define HAS_CHECK(member, Dummy)                              \\\n \
     \ template <class T>                                          \\\n  struct has_##member\
@@ -150,31 +151,29 @@ data:
     \ ret = \"\";\n    if constexpr (monoid<M>::value)\n      ret += \"\\\"fold\\\"\
     \ \\\"find\\\"\";\n    else\n      ret += \"\\\"at\\\" \";\n    return ret;\n\
     \  }\n};\n#line 4 \"test/yosupo/set_xor_min.Patricia.test.cpp\"\n\n// find + xor\
-    \ \u306E verify\n\nusing namespace std;\n\nstruct RsumQ {\n  using T = int;\n\
-    \  static T ti() { return 0; }\n  static T op(const T &l, const T &r) { return\
-    \ l + r; }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n \
-    \ SegmentTree_Patricia<RsumQ> S;\n  auto check = [&](int x) { return x >= 1; };\n\
-    \  int Q;\n  cin >> Q;\n  while (Q--) {\n    int op, x;\n    cin >> op >> x;\n\
-    \    if (op == 0) {\n      if (S[x] == 0) S.set(x, 1);\n    } else if (op == 1)\
-    \ {\n      if (S[x] == 1) S.set(x, 0);\n    } else {\n      cout << S.find_first(0,\
-    \ check, x) << endl;\n    }\n  }\n  return 0;\n}\n"
+    \ \u306E verify\n\nusing namespace std;\nstruct RsumQ {\n using T= int;\n static\
+    \ T ti() { return 0; }\n static T op(const T &l, const T &r) { return l + r; }\n\
+    };\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n SegmentTree_Patricia<RsumQ>\
+    \ S;\n auto check= [&](int x) { return x >= 1; };\n int Q;\n cin >> Q;\n while\
+    \ (Q--) {\n  int op, x;\n  cin >> op >> x;\n  if (op == 0) {\n   if (S[x] == 0)\
+    \ S.set(x, 1);\n  } else if (op == 1) {\n   if (S[x] == 1) S.set(x, 0);\n  } else\
+    \ {\n   cout << S.find_first(0, check, x) << endl;\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/DataStructure/SegmentTree_Patricia.hpp\"\n\n\
-    // find + xor \u306E verify\n\nusing namespace std;\n\nstruct RsumQ {\n  using\
-    \ T = int;\n  static T ti() { return 0; }\n  static T op(const T &l, const T &r)\
-    \ { return l + r; }\n};\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  SegmentTree_Patricia<RsumQ> S;\n  auto check = [&](int x) { return x >= 1;\
-    \ };\n  int Q;\n  cin >> Q;\n  while (Q--) {\n    int op, x;\n    cin >> op >>\
-    \ x;\n    if (op == 0) {\n      if (S[x] == 0) S.set(x, 1);\n    } else if (op\
-    \ == 1) {\n      if (S[x] == 1) S.set(x, 0);\n    } else {\n      cout << S.find_first(0,\
-    \ check, x) << endl;\n    }\n  }\n  return 0;\n}"
+    \ <iostream>\n#include \"src/DataStructure/SegmentTree_Patricia.hpp\"\n\n// find\
+    \ + xor \u306E verify\n\nusing namespace std;\nstruct RsumQ {\n using T= int;\n\
+    \ static T ti() { return 0; }\n static T op(const T &l, const T &r) { return l\
+    \ + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n SegmentTree_Patricia<RsumQ>\
+    \ S;\n auto check= [&](int x) { return x >= 1; };\n int Q;\n cin >> Q;\n while\
+    \ (Q--) {\n  int op, x;\n  cin >> op >> x;\n  if (op == 0) {\n   if (S[x] == 0)\
+    \ S.set(x, 1);\n  } else if (op == 1) {\n   if (S[x] == 1) S.set(x, 0);\n  } else\
+    \ {\n   cout << S.find_first(0, check, x) << endl;\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SegmentTree_Patricia.hpp
   isVerificationFile: true
   path: test/yosupo/set_xor_min.Patricia.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 17:04:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 19:28:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/set_xor_min.Patricia.test.cpp
 layout: document

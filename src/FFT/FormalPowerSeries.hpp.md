@@ -18,10 +18,10 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
   - icon: ':x:'
@@ -47,28 +47,28 @@ data:
     title: test/yukicoder/963.FPS.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/FormalPowerSeries.hpp\"\n#include <vector>\n#include\
-    \ <functional>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
-    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
-    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
-    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
-    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
-    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
-    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
-    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
-    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
-    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
-    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
-    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
-    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
-    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t inv(u_t n,\
-    \ int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE\
-    \ IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
+    \ <functional>\n#include <memory>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n\
+    #include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    \ {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64=\
+    \ uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n\
+    #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
+    \ PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-=\
+    \ M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r)\
+    \ const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U)\
+    \ \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
+    \ n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class\
+    \ du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0),\
+    \ r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE\
+    \ IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod\
+    \ << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n,\
+    \ r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL\
+    \ u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t\
+    \ inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) :\
+    \ x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
     \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
     \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
     \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
@@ -259,7 +259,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/FormalPowerSeries.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 6 \"src/FFT/FormalPowerSeries.hpp\"\
     \ntemplate <class T, std::size_t LM= 1 << 22> class RelaxedConvolution {\n std::vector<T>\
     \ a, b, c;\n std::vector<NTTArray<T, LM, true>> ac, bc;\n std::function<T()> ha,\
     \ hb;\n int n;\n template <class T0> static auto wrap(T0 &&f, int &n, const std::vector<T>\
@@ -380,53 +380,53 @@ data:
     \                                             return (h0(i) - h1(i) * t0 - c[i])\
     \ * iv;\n                                                           });\n  return\
     \ FPS([rc](int i) { return rc->next(), rc->multiplier()[i]; });\n }\n};\n"
-  code: "#pragma once\n#include <vector>\n#include <functional>\n#include \"src/FFT/NTT.hpp\"\
-    \ntemplate <class T, std::size_t LM= 1 << 22> class RelaxedConvolution {\n std::vector<T>\
-    \ a, b, c;\n std::vector<NTTArray<T, LM, true>> ac, bc;\n std::function<T()> ha,\
-    \ hb;\n int n;\n template <class T0> static auto wrap(T0 &&f, int &n, const std::vector<T>\
-    \ &c, std::vector<T> &e) {\n  if constexpr (std::is_invocable_r_v<T, T0, int,\
-    \ const std::vector<T> &>) return std::bind([f](int n, const std::vector<T> &c,\
-    \ std::vector<T> &e) mutable { return T(e.emplace_back(f(n, c))); }, std::cref(n),\
-    \ std::cref(c), std::ref(e));\n  else if constexpr (std::is_invocable_r_v<T, T0,\
-    \ int>) return std::bind([f](int n, std::vector<T> &e) mutable { return T(e.emplace_back(f(n)));\
-    \ }, std::cref(n), std::ref(e));\n  else if constexpr (std::is_invocable_r_v<T,\
-    \ T0>) return std::bind([f](std::vector<T> &e) mutable { return T(e.emplace_back(f()));\
-    \ }, std::ref(e));\n  else throw;\n }\npublic:\n template <class F1, class F2>\
-    \ RelaxedConvolution(F1 &&h1, F2 &&h2): c(4), ha(wrap(h1, n, c, a)), hb(wrap(h2,\
-    \ n, c, b)), n(0) { a.reserve(LM), b.reserve(LM), c.reserve(LM); }\n const std::vector<T>\
-    \ &multiplicand() const { return a; }\n const std::vector<T> &multiplier() const\
-    \ { return b; }\n T at(int k) { return (*this)[k]; }\n T operator[](int k) {\n\
-    \  while (n <= k) next();\n  return c[k];\n }\n T next() {\n  using GNA1= GlobalNTTArray<T,\
-    \ LM, 1>;\n  using GNA2= GlobalNTTArray<T, LM, 2>;\n  static constexpr int BASE_CASE_SIZE=\
-    \ 32;\n  if (int l= pw2(n << 1 | 1); (int)c.size() < l) c.resize(l);\n  if (n\
-    \ == 0) c[0]= ha() * hb();\n  if (n == 1) c[1]= ha() * b[0] + a[0] * hb(), c[2]=\
-    \ a[1] * b[1];\n  if (n == 2) c[2]+= ha() * b[0] + a[0] * hb(), c[3]= a[2] * b[1]\
-    \ + a[1] * b[2];\n  if (n > 2) {\n   if (!(n & (n - 1))) {\n    int t0= n >> 1,\
-    \ t1= n;\n    auto &c0= ac.emplace_back(), &c1= bc.emplace_back();\n    c0.resize(t1),\
-    \ c0.set(a.data() + t0, 0, t0), c0.dft(0, t1), c1.resize(t1), c1.set(b.data()\
-    \ + t0, 0, t0), c1.dft(0, t1), GNA1::bf.mul(c0, c1, 0, t1), GNA1::bf.idft(0, t1);\n\
-    \    for (int i= t1 - 1; i--;) c[t1 + i]+= GNA1::bf.get(i);\n   }\n   c[n]+= ha()\
-    \ * b[0] + a[0] * hb(), c[n + 1]+= a[1] * b[n] + a[n] * b[1];\n   for (int t0=\
-    \ 2, sft= 0, ofs= pw2(n + 1) >> 1, t= n + 1 - ofs; !(t & 1) && t0 < ofs; t0<<=\
-    \ 1, sft++, t>>= 1)\n    if (int m= n + 1 - t0, t1= t0 << 1; t0 > BASE_CASE_SIZE)\
-    \ {\n     GNA1::bf.set(a.data() + m, 0, t0), GNA1::bf.zeros(t0, t1), GNA2::bf.set(b.data()\
-    \ + m, 0, t0), GNA2::bf.zeros(t0, t1), GNA1::bf.dft(0, t1), GNA2::bf.dft(0, t1),\
-    \ GNA1::bf.mul(bc[sft], 0, t1), GNA2::bf.mul(ac[sft], 0, t1), GNA1::bf.add(GNA2::bf,\
-    \ 0, t1), GNA1::bf.idft(0, t1);\n     for (int i= t1 - 1; i--;) c[n + 1 + i]+=\
-    \ GNA1::bf.get(i);\n    } else\n     for (int i= t0; i--;)\n      for (int j=\
-    \ t0; j--;) c[n + 1 + i + j]+= a[m + i] * b[j + t0] + a[j + t0] * b[m + i];\n\
-    \  }\n  return c[n++];\n }\n};\ntemplate <class mod_t, std::size_t LM= 1 << 22>\
-    \ class FormalPowerSeries {\n using F= std::function<mod_t(int)>;\n using FPS=\
-    \ FormalPowerSeries;\n F h_;\npublic:\n class Resetter {\n  std::shared_ptr<F>\
-    \ p_;\n public:\n  Resetter() {}\n  Resetter(std::shared_ptr<F> p): p_(p) {}\n\
-    \  void set(const FPS &rhs) { *p_= rhs.handle(); }\n };\n class Inde {  // indeterminate\n\
-    \  int p_;\n public:\n  Inde(int p): p_(p) {}\n  Inde(): Inde(1) {}\n  Inde operator^(int\
-    \ p) const { return Inde(p_ * p); }\n  Inde operator*(const Inde &rhs) const {\
-    \ return Inde(p_ + rhs.p_); }\n  int pow() const { return p_; }\n };\n FormalPowerSeries():\
-    \ h_([](int) { return mod_t(0); }) {}\n FormalPowerSeries(F f)\n     : h_([f,\
-    \ cache= std::make_shared<std::vector<mod_t>>()](int k) -> mod_t {\n        for\
-    \ (int i= (int)cache->size(); i <= k; ++i) cache->emplace_back(f(i));\n      \
-    \  return cache->at(k);\n       }) {}\n FormalPowerSeries(const std::vector<mod_t>\
+  code: "#pragma once\n#include <vector>\n#include <functional>\n#include <memory>\n\
+    #include \"src/FFT/NTT.hpp\"\ntemplate <class T, std::size_t LM= 1 << 22> class\
+    \ RelaxedConvolution {\n std::vector<T> a, b, c;\n std::vector<NTTArray<T, LM,\
+    \ true>> ac, bc;\n std::function<T()> ha, hb;\n int n;\n template <class T0> static\
+    \ auto wrap(T0 &&f, int &n, const std::vector<T> &c, std::vector<T> &e) {\n  if\
+    \ constexpr (std::is_invocable_r_v<T, T0, int, const std::vector<T> &>) return\
+    \ std::bind([f](int n, const std::vector<T> &c, std::vector<T> &e) mutable { return\
+    \ T(e.emplace_back(f(n, c))); }, std::cref(n), std::cref(c), std::ref(e));\n \
+    \ else if constexpr (std::is_invocable_r_v<T, T0, int>) return std::bind([f](int\
+    \ n, std::vector<T> &e) mutable { return T(e.emplace_back(f(n))); }, std::cref(n),\
+    \ std::ref(e));\n  else if constexpr (std::is_invocable_r_v<T, T0>) return std::bind([f](std::vector<T>\
+    \ &e) mutable { return T(e.emplace_back(f())); }, std::ref(e));\n  else throw;\n\
+    \ }\npublic:\n template <class F1, class F2> RelaxedConvolution(F1 &&h1, F2 &&h2):\
+    \ c(4), ha(wrap(h1, n, c, a)), hb(wrap(h2, n, c, b)), n(0) { a.reserve(LM), b.reserve(LM),\
+    \ c.reserve(LM); }\n const std::vector<T> &multiplicand() const { return a; }\n\
+    \ const std::vector<T> &multiplier() const { return b; }\n T at(int k) { return\
+    \ (*this)[k]; }\n T operator[](int k) {\n  while (n <= k) next();\n  return c[k];\n\
+    \ }\n T next() {\n  using GNA1= GlobalNTTArray<T, LM, 1>;\n  using GNA2= GlobalNTTArray<T,\
+    \ LM, 2>;\n  static constexpr int BASE_CASE_SIZE= 32;\n  if (int l= pw2(n << 1\
+    \ | 1); (int)c.size() < l) c.resize(l);\n  if (n == 0) c[0]= ha() * hb();\n  if\
+    \ (n == 1) c[1]= ha() * b[0] + a[0] * hb(), c[2]= a[1] * b[1];\n  if (n == 2)\
+    \ c[2]+= ha() * b[0] + a[0] * hb(), c[3]= a[2] * b[1] + a[1] * b[2];\n  if (n\
+    \ > 2) {\n   if (!(n & (n - 1))) {\n    int t0= n >> 1, t1= n;\n    auto &c0=\
+    \ ac.emplace_back(), &c1= bc.emplace_back();\n    c0.resize(t1), c0.set(a.data()\
+    \ + t0, 0, t0), c0.dft(0, t1), c1.resize(t1), c1.set(b.data() + t0, 0, t0), c1.dft(0,\
+    \ t1), GNA1::bf.mul(c0, c1, 0, t1), GNA1::bf.idft(0, t1);\n    for (int i= t1\
+    \ - 1; i--;) c[t1 + i]+= GNA1::bf.get(i);\n   }\n   c[n]+= ha() * b[0] + a[0]\
+    \ * hb(), c[n + 1]+= a[1] * b[n] + a[n] * b[1];\n   for (int t0= 2, sft= 0, ofs=\
+    \ pw2(n + 1) >> 1, t= n + 1 - ofs; !(t & 1) && t0 < ofs; t0<<= 1, sft++, t>>=\
+    \ 1)\n    if (int m= n + 1 - t0, t1= t0 << 1; t0 > BASE_CASE_SIZE) {\n     GNA1::bf.set(a.data()\
+    \ + m, 0, t0), GNA1::bf.zeros(t0, t1), GNA2::bf.set(b.data() + m, 0, t0), GNA2::bf.zeros(t0,\
+    \ t1), GNA1::bf.dft(0, t1), GNA2::bf.dft(0, t1), GNA1::bf.mul(bc[sft], 0, t1),\
+    \ GNA2::bf.mul(ac[sft], 0, t1), GNA1::bf.add(GNA2::bf, 0, t1), GNA1::bf.idft(0,\
+    \ t1);\n     for (int i= t1 - 1; i--;) c[n + 1 + i]+= GNA1::bf.get(i);\n    }\
+    \ else\n     for (int i= t0; i--;)\n      for (int j= t0; j--;) c[n + 1 + i +\
+    \ j]+= a[m + i] * b[j + t0] + a[j + t0] * b[m + i];\n  }\n  return c[n++];\n }\n\
+    };\ntemplate <class mod_t, std::size_t LM= 1 << 22> class FormalPowerSeries {\n\
+    \ using F= std::function<mod_t(int)>;\n using FPS= FormalPowerSeries;\n F h_;\n\
+    public:\n class Resetter {\n  std::shared_ptr<F> p_;\n public:\n  Resetter() {}\n\
+    \  Resetter(std::shared_ptr<F> p): p_(p) {}\n  void set(const FPS &rhs) { *p_=\
+    \ rhs.handle(); }\n };\n class Inde {  // indeterminate\n  int p_;\n public:\n\
+    \  Inde(int p): p_(p) {}\n  Inde(): Inde(1) {}\n  Inde operator^(int p) const\
+    \ { return Inde(p_ * p); }\n  Inde operator*(const Inde &rhs) const { return Inde(p_\
+    \ + rhs.p_); }\n  int pow() const { return p_; }\n };\n FormalPowerSeries(): h_([](int)\
+    \ { return mod_t(0); }) {}\n FormalPowerSeries(F f)\n     : h_([f, cache= std::make_shared<std::vector<mod_t>>()](int\
+    \ k) -> mod_t {\n        for (int i= (int)cache->size(); i <= k; ++i) cache->emplace_back(f(i));\n\
+    \        return cache->at(k);\n       }) {}\n FormalPowerSeries(const std::vector<mod_t>\
     \ &coef): h_([cache= std::make_shared<std::vector<mod_t>>(coef)](int k) -> mod_t\
     \ { return k < (int)cache->size() ? cache->at(k) : mod_t(0); }) {}\n FormalPowerSeries(mod_t\
     \ v): h_([v](int k) { return k == 0 ? v : mod_t(0); }) {}\n F handle() const {\
@@ -510,8 +510,8 @@ data:
   isVerificationFile: false
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
-  timestamp: '2023-01-23 18:21:22+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-01-23 19:28:35+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/exp_of_FPS.FPS.test.cpp
   - test/yosupo/log_of_FPS.FPS.test.cpp

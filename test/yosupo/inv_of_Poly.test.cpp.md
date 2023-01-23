@@ -42,12 +42,12 @@ data:
     links:
     - https://judge.yosupo.jp/problem/inv_of_polynomials
   bundledCode: "#line 1 \"test/yosupo/inv_of_Poly.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\
-    \n#include <bits/stdc++.h>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
-    #line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
-    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
-    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    \n#include <iostream>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
+    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
+    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
+    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
+    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
+    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -125,18 +125,20 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
-    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
-    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
-    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
-    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
-    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
-    \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
+    \ return dat[n];\n}\n#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
+    #line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
+    \ Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP\
+    \ md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1=\
+    \ md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n\
+    \   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i= s;\
+    \ p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
+    }\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1) return (n |\
+    \ 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32, u64, 32, 31>,\
+    \ 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64, MP_Mo<u64, u128,\
+    \ 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
     \ n) __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c,\
     \ ...) \\\n mod_t r, u, *x0, *x1; \\\n for (int a= n, b= 1, s, i; a>>= 1; b<<=\
@@ -345,23 +347,23 @@ data:
     \  const mod_t iv0= mod_t(1) / q[0];\n  copy(p.begin(), p.end(), r), copy(q.begin(),\
     \ q.end(), qq);\n  for (int i= 0; i < n; r[i++]*= iv0)\n   for (int j= min(i +\
     \ 1, l); --j;) r[i]-= r[i - j] * qq[j];\n }\n return vector(r, r + n);\n}\n}\n\
-    using math_internal::div;\n#line 5 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t,\
-    \ size_t LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p,\
-    \ const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq=\
-    \ GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static\
-    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n\
-    \ auto f= [](int l) -> int {\n  static constexpr double B[]= {(double[]){8.288,\
-    \ 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810,\
-    \ 13.853, 15.501}[t]};\n  return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
-    \ & 1]);\n };\n const int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n ||\
-    \ !m) return std::vector<mod_t>();\n if (std::min(n, m) < TH) {\n  std::fill_n(rr,\
-    \ sz, mod_t()), std::copy(p.begin(), p.end(), pp), std::copy(q.begin(), q.end(),\
-    \ qq);\n  for (int i= n; i--;)\n   for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n\
-    \ } else {\n  const int rl= pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static\
-    \ constexpr size_t LM2= LM >> 3;\n  static constexpr bool b= nttarr_cat<mod_t,\
-    \ LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1=\
-    \ GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
-    \   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    using math_internal::div;\n#line 3 \"src/FFT/convolve.hpp\"\n#include <cmath>\n\
+    #line 5 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t>\
+    \ convolve(const std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t\
+    \ *pp= GlobalArray<mod_t, LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr=\
+    \ GlobalArray<mod_t, LM, 2>::bf;\n static constexpr int t= nttarr_cat<mod_t, LM>,\
+    \ TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n  static\
+    \ constexpr double B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t],\
+    \ (double[]){8.252, 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n  return std::round(std::pow(l,\
+    \ 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const int n= p.size(), m= q.size(),\
+    \ sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n if (std::min(n,\
+    \ m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(), p.end(), pp),\
+    \ std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n   for (int j= m;\
+    \ j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl= pw2(sz), l= pw2(std::max(n,\
+    \ m)), fl= f(l);\n  static constexpr size_t LM2= LM >> 3;\n  static constexpr\
+    \ bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >>\
+    \ 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t,\
+    \ LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
     \ LM2, 16, 2>::bf;\n   const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l,\
     \ mm= (m + l - 1) / l, ss= nn + mm - 1;\n   for (int i= 0, k= 0, s; k < n; ++i,\
     \ k+= l) gt1[i].set(p.data() + k, 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2),\
@@ -527,7 +529,7 @@ data:
     \ '\\n';\n  x/= d[0];\n  for (int i= 0, ed= x.size(); i < ed; i++) cout << x[i]\
     \ << \" \\n\"[i == ed - 1];\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\n\
-    #include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
+    #include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/Polynomial.hpp\"\
     \n#include \"src/FFT/extgcd.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
     \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N, M;\n cin\
     \ >> N >> M;\n Polynomial<Mint> f(N), g(M), x, y;\n for (int i= 0; i < N; i++)\
@@ -550,7 +552,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:57:46+09:00'
+  timestamp: '2023-01-23 19:28:35+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp

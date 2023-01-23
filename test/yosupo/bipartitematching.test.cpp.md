@@ -1,29 +1,30 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/MatchingBipartite.hpp
     title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E8C\u90E8\u30B0\u30E9\u30D5\
       )"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
     links:
     - https://judge.yosupo.jp/problem/bipartitematching
   bundledCode: "#line 1 \"test/yosupo/bipartitematching.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Graph/MatchingBipartite.hpp\"\n/**\n * @title \u6700\u5927\u30DE\
-    \u30C3\u30C1\u30F3\u30B0(\u4E8C\u90E8\u30B0\u30E9\u30D5)\n * @category \u30B0\u30E9\
-    \u30D5\n *  O(VE) \u901F\u3044(O(E\u221AV)\u4E26?)\n *  \u8FD4\u308A\u5024:{\u30DE\
-    \u30C3\u30C1\u30F3\u30B0\u6570,{\u5DE6\u306E\u76F8\u65B9(\u3044\u306A\u3044\u306A\
-    \u3089-1),\u53F3\u306E\u76F8\u65B9(\u3044\u306A\u3044\u306A\u3089-1)}}\n *  lexicographically_matching\
-    \ \u8F9E\u66F8\u9806\u6700\u5C0F\n * @see https://snuke.hatenablog.com/entry/2019/05/07/013609\n\
-    \ */\n// \u88AB\u8986\u554F\u984C\u3068\u306E\u95A2\u4FC2 https://qiita.com/drken/items/7f98315b56c95a6181a4\n\
+    \ \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include <iostream>\n\
+    #line 2 \"src/Graph/MatchingBipartite.hpp\"\n#include <bits/stdc++.h>\n/**\n *\
+    \ @title \u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E8C\u90E8\u30B0\u30E9\u30D5\
+    )\n * @category \u30B0\u30E9\u30D5\n *  O(VE) \u901F\u3044(O(E\u221AV)\u4E26?)\n\
+    \ *  \u8FD4\u308A\u5024:{\u30DE\u30C3\u30C1\u30F3\u30B0\u6570,{\u5DE6\u306E\u76F8\
+    \u65B9(\u3044\u306A\u3044\u306A\u3089-1),\u53F3\u306E\u76F8\u65B9(\u3044\u306A\
+    \u3044\u306A\u3089-1)}}\n *  lexicographically_matching \u8F9E\u66F8\u9806\u6700\
+    \u5C0F\n * @see https://snuke.hatenablog.com/entry/2019/05/07/013609\n */\n//\
+    \ \u88AB\u8986\u554F\u984C\u3068\u306E\u95A2\u4FC2 https://qiita.com/drken/items/7f98315b56c95a6181a4\n\
     \n// BEGIN CUT HERE\n\nclass MatchingBipartite {\n  std::vector<std::vector<int>>\
     \ adj;\n  std::vector<int> pre, rt, lmate, rmate;\n  bool dfs(int v, const int\
     \ &tstamp) {\n    pre[v] = tstamp;\n    for (int u : adj[v])\n      if (int w\
@@ -47,28 +48,27 @@ data:
     \ (int)adj.size(); i++)\n      if (lmate[i] != -1)\n        lmate[i] = rmate[lmate[i]]\
     \ = -1, dfs(i, --tstamp), rt[i] = -2;\n    return std::make_pair(res, std::make_pair(lmate,\
     \ rmate));\n  }\n};\n#line 4 \"test/yosupo/bipartitematching.test.cpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int L, R, M;\n  cin >> L >> R >> M;\n  MatchingBipartite graph(L, R);\n  while\
-    \ (M--) {\n    int a, b;\n    cin >> a >> b;\n    graph.add_edge(a, b);\n  }\n\
-    \  auto ans = graph.get_matching();\n  auto left = ans.second.first;\n  cout <<\
-    \ ans.first << '\\n';\n  for (int i = 0; i < (int)left.size(); i++)\n    if (left[i]\
-    \ != -1) {\n      cout << i << \" \" << left[i] << '\\n';\n    }\n  return 0;\n\
-    }\n"
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
+    \ L, R, M;\n cin >> L >> R >> M;\n MatchingBipartite graph(L, R);\n while (M--)\
+    \ {\n  int a, b;\n  cin >> a >> b;\n  graph.add_edge(a, b);\n }\n auto ans= graph.get_matching();\n\
+    \ auto left= ans.second.first;\n cout << ans.first << '\\n';\n for (int i= 0;\
+    \ i < (int)left.size(); i++)\n  if (left[i] != -1) {\n   cout << i << \" \" <<\
+    \ left[i] << '\\n';\n  }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Graph/MatchingBipartite.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int L,\
-    \ R, M;\n  cin >> L >> R >> M;\n  MatchingBipartite graph(L, R);\n  while (M--)\
-    \ {\n    int a, b;\n    cin >> a >> b;\n    graph.add_edge(a, b);\n  }\n  auto\
-    \ ans = graph.get_matching();\n  auto left = ans.second.first;\n  cout << ans.first\
-    \ << '\\n';\n  for (int i = 0; i < (int)left.size(); i++)\n    if (left[i] !=\
-    \ -1) {\n      cout << i << \" \" << left[i] << '\\n';\n    }\n  return 0;\n}"
+    \ <iostream>\n#include \"src/Graph/MatchingBipartite.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n cin\
+    \ >> L >> R >> M;\n MatchingBipartite graph(L, R);\n while (M--) {\n  int a, b;\n\
+    \  cin >> a >> b;\n  graph.add_edge(a, b);\n }\n auto ans= graph.get_matching();\n\
+    \ auto left= ans.second.first;\n cout << ans.first << '\\n';\n for (int i= 0;\
+    \ i < (int)left.size(); i++)\n  if (left[i] != -1) {\n   cout << i << \" \" <<\
+    \ left[i] << '\\n';\n  }\n return 0;\n}"
   dependsOn:
   - src/Graph/MatchingBipartite.hpp
   isVerificationFile: true
   path: test/yosupo/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2022-10-25 15:42:12+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 19:28:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.test.cpp
 layout: document

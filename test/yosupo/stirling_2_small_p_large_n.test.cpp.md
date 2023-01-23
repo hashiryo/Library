@@ -21,18 +21,19 @@ data:
     links:
     - https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n
   bundledCode: "#line 1 \"test/yosupo/stirling_2_small_p_large_n.test.cpp\"\n#define\
-    \ PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n\"\
-    \n#include <bits/stdc++.h>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
-    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
-    using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
-    \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
-    \ return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
-    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
-    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
-    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
-    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
-    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo():\
-    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n\"\
+    \n#include <iostream>\n#line 2 \"src/Math/StirlingNumber.hpp\"\n#include <vector>\n\
+    #include <algorithm>\n#include <cassert>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    \nnamespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
+    \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n \
+    \ if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n\
+    \ CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return\
+    \ l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static\
+    \ CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\n\
+    template <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n\
+    \ CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
     \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
     \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
     \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
@@ -97,17 +98,16 @@ data:
     \  if (k > n) return 0;\n  if (!n) return 1;\n  std::uint64_t i= k / p;\n  if\
     \ (n <= i) return 0;\n  std::uint64_t a= (n - i - 1) / (p - 1);\n  std::uint16_t\
     \ j= k % p, b= (n - i) - a * (p - 1);\n  if (j > b) return 0;\n  return b == p\
-    \ - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j] % p;\n }\n};\n#line 5 \"test/yosupo/stirling_2_small_p_large_n.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  int T, p;\n  cin >> T >> p;\n  StirlingNumber SN(p, 0, 1);\n  while (T--) {\n\
-    \    long long n, k;\n    cin >> n >> k;\n    cout << SN.S2(n, k) << '\\n';\n\
-    \  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/StirlingNumber.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  int\
-    \ T, p;\n  cin >> T >> p;\n  StirlingNumber SN(p, 0, 1);\n  while (T--) {\n  \
-    \  long long n, k;\n    cin >> n >> k;\n    cout << SN.S2(n, k) << '\\n';\n  }\n\
-    \  return 0;\n}"
+    \ - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j] % p;\n }\n};\n#line 4 \"test/yosupo/stirling_2_small_p_large_n.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int T, p;\n cin >> T >> p;\n StirlingNumber SN(p, 0, 1);\n while (T--) {\n \
+    \ long long n, k;\n  cin >> n >> k;\n  cout << SN.S2(n, k) << '\\n';\n }\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_second_kind_small_p_large_n\"\
+    \n#include <iostream>\n#include \"src/Math/StirlingNumber.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int T,\
+    \ p;\n cin >> T >> p;\n StirlingNumber SN(p, 0, 1);\n while (T--) {\n  long long\
+    \ n, k;\n  cin >> n >> k;\n  cout << SN.S2(n, k) << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/Math/StirlingNumber.hpp
   - src/Math/is_prime.hpp
@@ -115,7 +115,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_2_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:05:14+09:00'
+  timestamp: '2023-01-23 19:28:35+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_2_small_p_large_n.test.cpp

@@ -6,9 +6,9 @@ data:
     title: "\u63A5\u5C3E\u8F9E\u914D\u5217(Suffix-Array)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_D
@@ -63,7 +63,7 @@ data:
   path: test/aoj/ALDS1_14_D.test.cpp
   requiredBy: []
   timestamp: '2023-01-23 18:57:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_D.test.cpp
 layout: document

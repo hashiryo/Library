@@ -4,30 +4,30 @@ data:
   - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/arg_sort.hpp
     title: "\u504F\u89D2\u30BD\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
     links:
     - https://judge.yosupo.jp/problem/sort_points_by_argument
   bundledCode: "#line 1 \"test/yosupo/argsort.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Geometry/!geometry_temp.hpp\"\n/**\n\
-    \ * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\n */\n\
-    \n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\nint\
-    \ sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1 :\
-    \ x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
-    \ r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real d) { return (d *\
-    \ PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK\
-    \ = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1,\
-    \ RIGHT = -1, IN = +2, OUT = -2 };\nenum { DISJOINT = 0, TOUCH = 1, CROSSING =\
-    \ 2, OVERLAP = 3 };\n//-----------------------------------------------------------------------------\n\
+    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/Geometry/!geometry_temp.hpp\"\
+    \n#include <bits/stdc++.h>\n/**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\
+    \n * @category \u5E7E\u4F55\n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\
+    \nusing Real = long double;\nint sgn(Real x) {\n  static constexpr Real EPS =\
+    \ 1e-8;\n  return x < -EPS ? -1 : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\n\
+    Real radian_to_degree(Real r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real\
+    \ d) { return (d * PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE\
+    \ = -1,\n  ONLINE_BACK = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum\
+    \ { ON = 0, LEFT = +1, RIGHT = -1, IN = +2, OUT = -2 };\nenum { DISJOINT = 0,\
+    \ TOUCH = 1, CROSSING = 2, OVERLAP = 3 };\n//-----------------------------------------------------------------------------\n\
     // Point\n//-----------------------------------------------------------------------------\n\
     struct Point {\n  Real x, y;\n  Point &operator+=(Point p) { return x += p.x,\
     \ y += p.y, *this; }\n  Point &operator-=(Point p) { return x -= p.x, y -= p.y,\
@@ -254,27 +254,26 @@ data:
     \ Point q) const {\n    p = p - o;\n    q = q - o;\n    if (quad(p) != quad(q))\
     \ return s * quad(p) < s * quad(q);\n    if (cross(p, q)) return s * cross(p,\
     \ q) > 0;\n    return norm2(p) < norm2(q);  // closer first\n  }\n};\n}  // namespace\
-    \ geometry\n#line 5 \"test/yosupo/argsort.test.cpp\"\nusing namespace std;\n\n\
-    signed main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  using namespace\
-    \ geometry;\n  int N;\n  cin >> N;\n  vector<Point> ps(N);\n  for (int i = 0;\
-    \ i < N; i++) cin >> ps[i];\n  sort(ps.begin(), ps.end(), polar_angle());\n  for\
-    \ (Point p : ps) cout << (long long)p.x << \" \" << (long long)p.y << endl;\n\
-    \  return 0;\n}\n"
+    \ geometry\n#line 7 \"test/yosupo/argsort.test.cpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace geometry;\n\
+    \ int N;\n cin >> N;\n vector<Point> ps(N);\n for (int i= 0; i < N; i++) cin >>\
+    \ ps[i];\n sort(ps.begin(), ps.end(), polar_angle());\n for (Point p: ps) cout\
+    \ << (long long)p.x << \" \" << (long long)p.y << endl;\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\n#include\
-    \ \"src/Geometry/arg_sort.hpp\"\nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n\
-    \  ios::sync_with_stdio(0);\n  using namespace geometry;\n  int N;\n  cin >> N;\n\
-    \  vector<Point> ps(N);\n  for (int i = 0; i < N; i++) cin >> ps[i];\n  sort(ps.begin(),\
-    \ ps.end(), polar_angle());\n  for (Point p : ps) cout << (long long)p.x << \"\
-    \ \" << (long long)p.y << endl;\n  return 0;\n}"
+    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/Geometry/!geometry_temp.hpp\"\
+    \n#include \"src/Geometry/arg_sort.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace geometry;\n int\
+    \ N;\n cin >> N;\n vector<Point> ps(N);\n for (int i= 0; i < N; i++) cin >> ps[i];\n\
+    \ sort(ps.begin(), ps.end(), polar_angle());\n for (Point p: ps) cout << (long\
+    \ long)p.x << \" \" << (long long)p.y << endl;\n return 0;\n}"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   - src/Geometry/arg_sort.hpp
   isVerificationFile: true
   path: test/yosupo/argsort.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 19:28:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/argsort.test.cpp
 layout: document

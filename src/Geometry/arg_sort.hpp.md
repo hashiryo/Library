@@ -6,12 +6,12 @@ data:
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/argsort.test.cpp
     title: test/yosupo/argsort.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u504F\u89D2\u30BD\u30FC\u30C8"
     links: []
@@ -271,7 +271,7 @@ data:
   path: src/Geometry/arg_sort.hpp
   requiredBy: []
   timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/argsort.test.cpp
 documentation_of: src/Geometry/arg_sort.hpp

@@ -7,7 +7,7 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -28,9 +28,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.KDT.test.cpp
     title: test/yukicoder/728.KDT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/KDTree.hpp\"\n#include <array>\n#include\
@@ -232,7 +232,7 @@ data:
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
   timestamp: '2023-01-21 20:28:05+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2842.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
