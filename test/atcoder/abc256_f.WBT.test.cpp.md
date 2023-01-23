@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - icon: ':question:'
@@ -19,9 +19,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
@@ -29,53 +29,53 @@ data:
     - https://atcoder.jp/contests/abc256/tasks/abc256_f
   bundledCode: "#line 1 \"test/atcoder/abc256_f.WBT.test.cpp\"\n#define PROBLEM \"\
     https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n// \u53CC\u5BFE \u306E\
-    \ verify\n\n#include <iostream>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
-    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
-    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
-    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
-    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
-    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
-    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
-    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
-    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
-    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
-    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
-    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
-    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
-    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
-    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
-    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
-    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
-    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t inv(u_t n,\
-    \ int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE\
-    \ IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
-    \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
-    \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
-    \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
-    \ {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32\
-    \ m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL\
-    \ u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32,\
-    \ 31, mod) SGN(u32) private: const u8 s;\n const u64 x;\n CE IL u64 quo(u64 n)\
-    \ const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const { return n\
-    \ - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n const u64 mod;\n\
-    \ CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) /\
-    \ m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64,\
-    \ mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n) { return n;\
-    \ }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM;\
-    \ }\nprivate:\n const u64 x;\n CE IL u128 quo(const u128 &n) const { return (n\
-    \ * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) * mod;\
-    \ }\n};\nstruct MP_D2B1 {\n const u64 mod;\n CE MP_D2B1(): mod(0), s(0), d(0),\
-    \ v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)), d(m << s), v(u128(-1)\
-    \ / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l) * r) << s)\
-    \ >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const\
-    \ u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64)\
-    \ * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n\
-    \ const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t\
-    \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
-    \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
-    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\
+    \ verify\n\n#include <iostream>\n#include <array>\n#line 2 \"src/Math/mod_inv.hpp\"\
+    \n#include <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline\
+    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
+    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
+    \ - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod -\
+    \ (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
+    using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
+    \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
+    \ return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
+    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
+    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
+    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
+    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
+    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo():\
+    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
+    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
+    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
+    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static\
+    \ CE u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x\
+    \ * n)) : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) +\
+    \ mod - ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n\
+    \ CE MP_Na(): mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32\
+    \ r) const { return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n\
+    };\nstruct MP_Br {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0),\
+    \ x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) +\
+    \ m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r);\
+    \ }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: const u8 s;\n const\
+    \ u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32\
+    \ rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20\
+    \ < mod <= 2^41\n const u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64\
+    \ m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const {\
+    \ return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n\
+    \ static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n) const { NORM;\
+    \ }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n const u64 x;\n CE IL u128\
+    \ quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const u128\
+    \ &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n const u64 mod;\n\
+    \ CE MP_D2B1(): mod(0), s(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)),\
+    \ d(m << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
+    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
+    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
+    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
+    \ r;\n }\n const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE\
+    \ u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x,\
+    \ x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef\
+    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\
     \nnamespace math_internal {\n#define CE constexpr\nstruct m_b {};\nstruct s_b:\
     \ m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\n\
     template <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\n\
@@ -113,13 +113,14 @@ data:
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\n#include\
-    \ <vector>\n#include <string>\n#include <tuple>\n#include <cstddef>\n#line 3 \"\
-    src/Internal/HAS_CHECK.hpp\"\n#define HAS_CHECK(member, Dummy) \\\n template <class\
-    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
-    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
-    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
-    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 8 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \ <vector>\n#line 4 \"src/DataStructure/WeightBalancedTree.hpp\"\n#include <string>\n\
+    #include <tuple>\n#include <cstddef>\n#line 3 \"src/Internal/HAS_CHECK.hpp\"\n\
+    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
+    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
+    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
+    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#line 9 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \ntemplate <typename M, std::size_t NODE_SIZE= 1 << 23> class WeightBalancedTree\
     \ {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
     \ HAS_TYPE(E);\n template <class L> using semigroup= std::conjunction<has_T<L>,\
@@ -225,7 +226,7 @@ data:
     \";\n  if constexpr (semigroup<M>::value) ret+= \"\\\"fold\\\" \";\n  else ret+=\
     \ \"\\\"at\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\" \";\n\
     \  return ret;\n }\n static double percentage_used() { return 100. * ni / NODE_SIZE;\
-    \ }\n};\n#line 8 \"test/atcoder/abc256_f.WBT.test.cpp\"\nusing namespace std;\n\
+    \ }\n};\n#line 9 \"test/atcoder/abc256_f.WBT.test.cpp\"\nusing namespace std;\n\
     \nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct T {\n  Mint val, coef[2];\n\
     \  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id + 1) * (id + 2) / 2,\
     \ (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n static void mapping(T\
@@ -240,21 +241,22 @@ data:
     \ N, {v, v * x, v * x * x / 2});\n   if (wbt.percentage_used() > 90) wbt.rebuild();\n\
     \  } else {\n   cout << wbt[x].val << '\\n';\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
-    // \u53CC\u5BFE \u306E verify\n\n#include <iostream>\n#include \"src/Math/ModInt.hpp\"\
-    \n#include \"src/DataStructure/WeightBalancedTree.hpp\"\nusing namespace std;\n\
-    \nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct T {\n  Mint val, coef[2];\n\
-    \  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id + 1) * (id + 2) / 2,\
-    \ (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n static void mapping(T\
-    \ &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1] * x.coef[1]\
-    \ + mapp[2]; }\n static void composition(E &pre, const E &suf) { pre[0]+= suf[0],\
-    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int N, Q;\n cin >> N >> Q;\n Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin\
-    \ >> A[i], D[i]= A[i];\n for (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++)\
-    \ D[i]+= D[i - 1];\n WeightBalancedTree<Mono> wbt(N);\n for (int i= 0; i < N;\
-    \ i++) wbt.set(i, {i, D[i]});\n while (Q--) {\n  int op, x;\n  cin >> op >> x,\
-    \ x--;\n  if (op == 1) {\n   Mint v;\n   cin >> v, v-= A[x], A[x]+= v;\n   wbt.apply(x,\
-    \ N, {v, v * x, v * x * x / 2});\n   if (wbt.percentage_used() > 90) wbt.rebuild();\n\
-    \  } else {\n   cout << wbt[x].val << '\\n';\n  }\n }\n return 0;\n}"
+    // \u53CC\u5BFE \u306E verify\n\n#include <iostream>\n#include <array>\n#include\
+    \ \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
+    \ T {\n  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
+    \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
+    \ static void mapping(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0]\
+    \ - mapp[1] * x.coef[1] + mapp[2]; }\n static void composition(E &pre, const E\
+    \ &suf) { pre[0]+= suf[0], pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
+    \ Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for\
+    \ (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n WeightBalancedTree<Mono>\
+    \ wbt(N);\n for (int i= 0; i < N; i++) wbt.set(i, {i, D[i]});\n while (Q--) {\n\
+    \  int op, x;\n  cin >> op >> x, x--;\n  if (op == 1) {\n   Mint v;\n   cin >>\
+    \ v, v-= A[x], A[x]+= v;\n   wbt.apply(x, N, {v, v * x, v * x * x / 2});\n   if\
+    \ (wbt.percentage_used() > 90) wbt.rebuild();\n  } else {\n   cout << wbt[x].val\
+    \ << '\\n';\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -264,8 +266,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 21:38:23+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-23 22:42:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.WBT.test.cpp
 layout: document

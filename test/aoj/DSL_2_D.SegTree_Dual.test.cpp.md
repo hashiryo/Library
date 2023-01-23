@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dual.hpp
     title: "Segment-Tree(\u53CC\u5BFE)"
   _extendedRequiredBy: []
@@ -27,7 +27,7 @@ data:
     \   if (((b >> i) << i) != b) eval((b - 1) >> i);\n  for (int l= a, r= b; l <\
     \ r; l>>= 1, r>>= 1) {\n   if (l & 1) propagate(l++, x);\n   if (r & 1) propagate(--r,\
     \ x);\n  }\n }\n void set(int k, T x) {\n  for (int i= height; i; i--) eval((k\
-    \ + n) >> i);\n  val[k]= x, laz[k + n].flg= false;\n }\n T operator[](const int\
+    \ + n) >> i);\n  val[k]= x, laz[k + n].flg= false;\n }\n T &operator[](const int\
     \ k) {\n  for (int i= height; i; i--) eval((k + n) >> i);\n  if (laz[k + n].flg)\
     \ M::mapping(val[k], laz[k + n].val), laz[k + n].flg= false;\n  return val[k];\n\
     \ }\nprivate:\n const int n, height;\n struct Lazy {\n  E val;\n  bool flg;\n\
@@ -57,7 +57,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:05:46+09:00'
+  timestamp: '2023-01-23 22:42:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_D.SegTree_Dual.test.cpp

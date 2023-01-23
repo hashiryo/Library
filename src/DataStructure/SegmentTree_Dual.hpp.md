@@ -6,12 +6,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
     title: test/aoj/DSL_2_D.SegTree_Dual.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Dual.hpp\"\n#include <vector>\n\
@@ -25,7 +25,7 @@ data:
     \   if (((b >> i) << i) != b) eval((b - 1) >> i);\n  for (int l= a, r= b; l <\
     \ r; l>>= 1, r>>= 1) {\n   if (l & 1) propagate(l++, x);\n   if (r & 1) propagate(--r,\
     \ x);\n  }\n }\n void set(int k, T x) {\n  for (int i= height; i; i--) eval((k\
-    \ + n) >> i);\n  val[k]= x, laz[k + n].flg= false;\n }\n T operator[](const int\
+    \ + n) >> i);\n  val[k]= x, laz[k + n].flg= false;\n }\n T &operator[](const int\
     \ k) {\n  for (int i= height; i; i--) eval((k + n) >> i);\n  if (laz[k + n].flg)\
     \ M::mapping(val[k], laz[k + n].val), laz[k + n].flg= false;\n  return val[k];\n\
     \ }\nprivate:\n const int n, height;\n struct Lazy {\n  E val;\n  bool flg;\n\
@@ -45,20 +45,21 @@ data:
     \ b) eval((b - 1) >> i);\n  for (int l= a, r= b; l < r; l>>= 1, r>>= 1) {\n  \
     \ if (l & 1) propagate(l++, x);\n   if (r & 1) propagate(--r, x);\n  }\n }\n void\
     \ set(int k, T x) {\n  for (int i= height; i; i--) eval((k + n) >> i);\n  val[k]=\
-    \ x, laz[k + n].flg= false;\n }\n T operator[](const int k) {\n  for (int i= height;\
-    \ i; i--) eval((k + n) >> i);\n  if (laz[k + n].flg) M::mapping(val[k], laz[k\
-    \ + n].val), laz[k + n].flg= false;\n  return val[k];\n }\nprivate:\n const int\
-    \ n, height;\n struct Lazy {\n  E val;\n  bool flg;\n };\n std::vector<T> val;\n\
-    \ std::vector<Lazy> laz;\n inline void eval(int k) {\n  if (!laz[k].flg) return;\n\
-    \  propagate(k << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n  laz[k].flg=\
-    \ false;\n }\n inline void propagate(int k, const E &x) {\n  laz[k].flg ? (M::composition(laz[k].val,\
-    \ x), x) : laz[k].val= x;\n  laz[k].flg= true;\n }\n};"
+    \ x, laz[k + n].flg= false;\n }\n T &operator[](const int k) {\n  for (int i=\
+    \ height; i; i--) eval((k + n) >> i);\n  if (laz[k + n].flg) M::mapping(val[k],\
+    \ laz[k + n].val), laz[k + n].flg= false;\n  return val[k];\n }\nprivate:\n const\
+    \ int n, height;\n struct Lazy {\n  E val;\n  bool flg;\n };\n std::vector<T>\
+    \ val;\n std::vector<Lazy> laz;\n inline void eval(int k) {\n  if (!laz[k].flg)\
+    \ return;\n  propagate(k << 1 | 0, laz[k].val), propagate(k << 1 | 1, laz[k].val);\n\
+    \  laz[k].flg= false;\n }\n inline void propagate(int k, const E &x) {\n  laz[k].flg\
+    \ ? (M::composition(laz[k].val, x), x) : laz[k].val= x;\n  laz[k].flg= true;\n\
+    \ }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dual.hpp
   requiredBy: []
-  timestamp: '2023-01-23 16:05:46+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-01-23 22:42:18+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_D.SegTree_Dual.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp

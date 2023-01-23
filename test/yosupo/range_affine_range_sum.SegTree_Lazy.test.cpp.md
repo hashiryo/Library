@@ -28,11 +28,11 @@ data:
     #include <iostream>\n#include <vector>\n#include <array>\n#line 3 \"src/DataStructure/SegmentTree_Beats.hpp\"\
     \ntemplate <typename M> struct SegmentTree_Beats {\n using T= typename M::T;\n\
     \ using E= typename M::E;\n SegmentTree_Beats() {}\n SegmentTree_Beats(int n_):\
-    \ n(n_), height(n == 1 ? 0 : std::__lg(n - 1) + 1), dat(n * 2, M::ti()), laz(n\
-    \ * 2, {E(), false}) {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_)\
-    \ {\n  for (int i= n; i--;) dat[i + n]= v1;\n  for (int i= n; --i;) update(i);\n\
-    \ }\n SegmentTree_Beats(const std::vector<T> &v): SegmentTree_Beats(v.size())\
-    \ {\n  for (int i= n; i--;) dat[i + n]= v[i];\n  for (int i= n; --i;) update(i);\n\
+    \ n(n_), height(n == 1 ? 0 : std::__lg(n - 1) + 1), dat(n * 2, M::ti()), laz(n,\
+    \ {E(), false}) {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_) {\n\
+    \  for (int i= n; i--;) dat[i + n]= v1;\n  for (int i= n; --i;) update(i);\n }\n\
+    \ SegmentTree_Beats(const std::vector<T> &v): SegmentTree_Beats(v.size()) {\n\
+    \  for (int i= n; i--;) dat[i + n]= v[i];\n  for (int i= n; --i;) update(i);\n\
     \ }\n void unsafe_set(int k, T x) { dat[k + n]= x; }\n void rebuild() {\n  for\
     \ (int i= n + n; i--;) laz[i].flg= false;\n  for (int i= n; --i;) update(i);\n\
     \ }\n void apply(int a, int b, E x) {\n  a+= n, b+= n;\n  for (int i= height;\
@@ -176,7 +176,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:52:41+09:00'
+  timestamp: '2023-01-23 22:42:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

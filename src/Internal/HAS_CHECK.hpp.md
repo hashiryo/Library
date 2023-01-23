@@ -36,10 +36,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
     title: Splay-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - icon: ':heavy_check_mark:'
@@ -52,7 +52,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1508.SplayTree.test.cpp
     title: test/aoj/1508.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1508.WBT.test.cpp
     title: test/aoj/1508.WBT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -85,10 +85,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3024.DynSeg.test.cpp
     title: test/aoj/3024.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3024.Patricia.test.cpp
     title: test/aoj/3024.Patricia.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3024.WBT.test.cpp
     title: test/aoj/3024.WBT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -145,7 +145,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -163,7 +163,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -175,7 +175,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - icon: ':heavy_check_mark:'

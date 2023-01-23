@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - icon: ':question:'
@@ -30,14 +30,14 @@ data:
   bundledCode: "#line 1 \"test/yosupo/range_affine_range_sum.WBT.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n//\u9045\
     \u5EF6\u4F1D\u642C\u306Everify\n#include <iostream>\n\n#line 2 \"src/DataStructure/WeightBalancedTree.hpp\"\
-    \n#include <vector>\n#include <string>\n#include <tuple>\n#include <cstddef>\n\
-    #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
-    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
-    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
-    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
-    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy= typename U::member)\n#line 8 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \n#include <vector>\n#include <array>\n#include <string>\n#include <tuple>\n#include\
+    \ <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include\
+    \ <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class tClass>\
+    \ struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
+    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
+    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
+    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
+    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 9 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \ntemplate <typename M, std::size_t NODE_SIZE= 1 << 23> class WeightBalancedTree\
     \ {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
     \ HAS_TYPE(E);\n template <class L> using semigroup= std::conjunction<has_T<L>,\
@@ -261,7 +261,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 21:38:23+09:00'
+  timestamp: '2023-01-23 22:42:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.WBT.test.cpp

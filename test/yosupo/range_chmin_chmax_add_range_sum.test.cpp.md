@@ -6,9 +6,9 @@ data:
     title: Segment-Tree Beats!
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
@@ -20,7 +20,7 @@ data:
     \ <vector>\ntemplate <typename M> struct SegmentTree_Beats {\n using T= typename\
     \ M::T;\n using E= typename M::E;\n SegmentTree_Beats() {}\n SegmentTree_Beats(int\
     \ n_): n(n_), height(n == 1 ? 0 : std::__lg(n - 1) + 1), dat(n * 2, M::ti()),\
-    \ laz(n * 2, {E(), false}) {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_)\
+    \ laz(n, {E(), false}) {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_)\
     \ {\n  for (int i= n; i--;) dat[i + n]= v1;\n  for (int i= n; --i;) update(i);\n\
     \ }\n SegmentTree_Beats(const std::vector<T> &v): SegmentTree_Beats(v.size())\
     \ {\n  for (int i= n; i--;) dat[i + n]= v[i];\n  for (int i= n; --i;) update(i);\n\
@@ -125,8 +125,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:05:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 22:42:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
 layout: document
