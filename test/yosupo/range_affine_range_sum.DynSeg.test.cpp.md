@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -244,7 +244,7 @@ data:
     \ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T ti() { return 0; }\n\
     \ static T op(const T &l, const T &r) { return l + r; }\n static void mapping(T\
     \ &v, const E &f, int sz) { v= f[0] * v + f[1] * sz; }\n static void composition(E\
-    \ &pre, const E &suf) { pre= {pre[0] * suf[0], suf[0] * pre[1] + suf[1]}; }\n\
+    \ &pre, const E &suf) { pre[0]*= suf[0], pre[1]= suf[0] * pre[1] + suf[1]; }\n\
     };\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin\
     \ >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >> a[i];\n SegmentTree_Dynamic<RaffineQ_RsumQ>\
     \ seg(a, a + N);\n while (Q--) {\n  bool op;\n  int l, r;\n  cin >> op >> l >>\
@@ -256,8 +256,8 @@ data:
     struct RaffineQ_RsumQ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T\
     \ ti() { return 0; }\n static T op(const T &l, const T &r) { return l + r; }\n\
     \ static void mapping(T &v, const E &f, int sz) { v= f[0] * v + f[1] * sz; }\n\
-    \ static void composition(E &pre, const E &suf) { pre= {pre[0] * suf[0], suf[0]\
-    \ * pre[1] + suf[1]}; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ static void composition(E &pre, const E &suf) { pre[0]*= suf[0], pre[1]= suf[0]\
+    \ * pre[1] + suf[1]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >>\
     \ a[i];\n SegmentTree_Dynamic<RaffineQ_RsumQ> seg(a, a + N);\n while (Q--) {\n\
     \  bool op;\n  int l, r;\n  cin >> op >> l >> r;\n  if (op) {\n   cout << seg.fold(l,\
@@ -272,8 +272,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 00:38:29+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-23 16:05:46+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
 layout: document

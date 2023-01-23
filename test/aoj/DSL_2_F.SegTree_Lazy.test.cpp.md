@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Beats.hpp
     title: Segment-Tree Beats!
   _extendedRequiredBy: []
@@ -19,9 +19,9 @@ data:
     \ <iostream>\n#line 2 \"src/DataStructure/SegmentTree_Beats.hpp\"\n#include <vector>\n\
     template <typename M> struct SegmentTree_Beats {\n using T= typename M::T;\n using\
     \ E= typename M::E;\n SegmentTree_Beats() {}\n SegmentTree_Beats(int n_): n(n_),\
-    \ height(std::__lg(n - 1) + 1), dat(n * 2, M::ti()), laz(n * 2, {E(), false})\
-    \ {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_) {\n  for (int i=\
-    \ n; i--;) dat[i + n]= v1;\n  for (int i= n; --i;) update(i);\n }\n SegmentTree_Beats(const\
+    \ height(n == 1 ? 0 : std::__lg(n - 1) + 1), dat(n * 2, M::ti()), laz(n * 2, {E(),\
+    \ false}) {}\n SegmentTree_Beats(int n_, T v1): SegmentTree_Beats(n_) {\n  for\
+    \ (int i= n; i--;) dat[i + n]= v1;\n  for (int i= n; --i;) update(i);\n }\n SegmentTree_Beats(const\
     \ std::vector<T> &v): SegmentTree_Beats(v.size()) {\n  for (int i= n; i--;) dat[i\
     \ + n]= v[i];\n  for (int i= n; --i;) update(i);\n }\n void unsafe_set(int k,\
     \ T x) { dat[k + n]= x; }\n void rebuild() {\n  for (int i= n + n; i--;) laz[i].flg=\
@@ -71,7 +71,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 15:46:32+09:00'
+  timestamp: '2023-01-23 16:05:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
