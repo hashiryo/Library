@@ -390,7 +390,7 @@ data:
     \ mod_t());\n  for (int i= sz; i--;) g[i + ofs]*= pk;\n } else fill_n(g + 1, n\
     \ - 1, mod_t());\n return vector(g, g + n);\n}\n}  // namespace math_internal\n\
     using math_internal::deriv, math_internal::integ, math_internal::log, math_internal::exp,\
-    \ math_internal::pow;\n#line 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t,\
+    \ math_internal::pow;\n#line 5 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t,\
     \ size_t LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p,\
     \ const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq=\
     \ GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static\
@@ -487,7 +487,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bernoulli.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:21:22+09:00'
+  timestamp: '2023-01-23 18:42:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bernoulli.test.cpp

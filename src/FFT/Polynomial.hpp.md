@@ -357,23 +357,23 @@ data:
     \  const mod_t iv0= mod_t(1) / q[0];\n  copy(p.begin(), p.end(), r), copy(q.begin(),\
     \ q.end(), qq);\n  for (int i= 0; i < n; r[i++]*= iv0)\n   for (int j= min(i +\
     \ 1, l); --j;) r[i]-= r[i - j] * qq[j];\n }\n return vector(r, r + n);\n}\n}\n\
-    using math_internal::div;\n#line 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t,\
-    \ size_t LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p,\
-    \ const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq=\
-    \ GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static\
-    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n\
-    \ auto f= [](int l) -> int {\n  static constexpr double B[]= {(double[]){8.288,\
-    \ 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810,\
-    \ 13.853, 15.501}[t]};\n  return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
-    \ & 1]);\n };\n const int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n ||\
-    \ !m) return std::vector<mod_t>();\n if (std::min(n, m) < TH) {\n  std::fill_n(rr,\
-    \ sz, mod_t()), std::copy(p.begin(), p.end(), pp), std::copy(q.begin(), q.end(),\
-    \ qq);\n  for (int i= n; i--;)\n   for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n\
-    \ } else {\n  const int rl= pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static\
-    \ constexpr size_t LM2= LM >> 3;\n  static constexpr bool b= nttarr_cat<mod_t,\
-    \ LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1=\
-    \ GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
-    \   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+    using math_internal::div;\n#line 3 \"src/FFT/convolve.hpp\"\n#include <cmath>\n\
+    #line 5 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t>\
+    \ convolve(const std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t\
+    \ *pp= GlobalArray<mod_t, LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr=\
+    \ GlobalArray<mod_t, LM, 2>::bf;\n static constexpr int t= nttarr_cat<mod_t, LM>,\
+    \ TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n  static\
+    \ constexpr double B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t],\
+    \ (double[]){8.252, 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n  return std::round(std::pow(l,\
+    \ 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const int n= p.size(), m= q.size(),\
+    \ sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n if (std::min(n,\
+    \ m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(), p.end(), pp),\
+    \ std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n   for (int j= m;\
+    \ j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl= pw2(sz), l= pw2(std::max(n,\
+    \ m)), fl= f(l);\n  static constexpr size_t LM2= LM >> 3;\n  static constexpr\
+    \ bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >>\
+    \ 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t,\
+    \ LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
     \ LM2, 16, 2>::bf;\n   const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l,\
     \ mm= (m + l - 1) / l, ss= nn + mm - 1;\n   for (int i= 0, k= 0, s; k < n; ++i,\
     \ k+= l) gt1[i].set(p.data() + k, 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2),\
@@ -609,7 +609,7 @@ data:
   path: src/FFT/Polynomial.hpp
   requiredBy:
   - src/FFT/extgcd.hpp
-  timestamp: '2023-01-23 18:21:22+09:00'
+  timestamp: '2023-01-23 18:42:32+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/division_of_Poly.test.cpp

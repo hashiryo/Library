@@ -345,7 +345,7 @@ data:
     \  const mod_t iv0= mod_t(1) / q[0];\n  copy(p.begin(), p.end(), r), copy(q.begin(),\
     \ q.end(), qq);\n  for (int i= 0; i < n; r[i++]*= iv0)\n   for (int j= min(i +\
     \ 1, l); --j;) r[i]-= r[i - j] * qq[j];\n }\n return vector(r, r + n);\n}\n}\n\
-    using math_internal::div;\n#line 4 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t,\
+    using math_internal::div;\n#line 5 \"src/FFT/convolve.hpp\"\ntemplate <class mod_t,\
     \ size_t LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>& p,\
     \ const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf, *qq=\
     \ GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static\
@@ -550,7 +550,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_Poly.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:21:22+09:00'
+  timestamp: '2023-01-23 18:42:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_Poly.test.cpp

@@ -99,9 +99,9 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/FFT/convolve.hpp\"\n#include <vector>\n#line 2 \"src/FFT/NTT.hpp\"\
-    \n#include <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\n\
-    namespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
+  bundledCode: "#line 2 \"src/FFT/convolve.hpp\"\n#include <vector>\n#include <cmath>\n\
+    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    \nnamespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
     \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
     #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
     \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n \
@@ -307,7 +307,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 4 \"src/FFT/convolve.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/convolve.hpp\"\
     \ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t> convolve(const\
     \ std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t,\
     \ LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM,\
@@ -347,23 +347,23 @@ data:
     \ (int i= len, j; i < sz; rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(),\
     \ j= i - m + 1; j < n; ++j) rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return\
     \ std::vector(rr, rr + sz);\n}\n"
-  code: "#pragma once\n#include <vector>\n#include \"src/FFT/NTT.hpp\"\ntemplate <class\
-    \ mod_t, size_t LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>&\
-    \ p, const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf,\
-    \ *qq= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static\
-    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n\
-    \ auto f= [](int l) -> int {\n  static constexpr double B[]= {(double[]){8.288,\
-    \ 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810,\
-    \ 13.853, 15.501}[t]};\n  return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
-    \ & 1]);\n };\n const int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n ||\
-    \ !m) return std::vector<mod_t>();\n if (std::min(n, m) < TH) {\n  std::fill_n(rr,\
-    \ sz, mod_t()), std::copy(p.begin(), p.end(), pp), std::copy(q.begin(), q.end(),\
-    \ qq);\n  for (int i= n; i--;)\n   for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n\
-    \ } else {\n  const int rl= pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static\
-    \ constexpr size_t LM2= LM >> 3;\n  static constexpr bool b= nttarr_cat<mod_t,\
-    \ LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1=\
-    \ GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
-    \   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
+  code: "#pragma once\n#include <vector>\n#include <cmath>\n#include \"src/FFT/NTT.hpp\"\
+    \ntemplate <class mod_t, size_t LM= 1 << 22> std::vector<mod_t> convolve(const\
+    \ std::vector<mod_t>& p, const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t,\
+    \ LM, 0>::bf, *qq= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM,\
+    \ 2>::bf;\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30,\
+    \ 70, 100, 135, 150}[t];\n auto f= [](int l) -> int {\n  static constexpr double\
+    \ B[]= {(double[]){8.288, 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252,\
+    \ 6.578, 9.283, 12.810, 13.853, 15.501}[t]};\n  return std::round(std::pow(l,\
+    \ 0.535) * B[__builtin_ctz(l) & 1]);\n };\n const int n= p.size(), m= q.size(),\
+    \ sz= n + m - 1;\n if (!n || !m) return std::vector<mod_t>();\n if (std::min(n,\
+    \ m) < TH) {\n  std::fill_n(rr, sz, mod_t()), std::copy(p.begin(), p.end(), pp),\
+    \ std::copy(q.begin(), q.end(), qq);\n  for (int i= n; i--;)\n   for (int j= m;\
+    \ j--;) rr[i + j]+= pp[i] * qq[j];\n } else {\n  const int rl= pw2(sz), l= pw2(std::max(n,\
+    \ m)), fl= f(l);\n  static constexpr size_t LM2= LM >> 3;\n  static constexpr\
+    \ bool b= nttarr_cat<mod_t, LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >>\
+    \ 3) * 5)) {\n   using GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t,\
+    \ LM2, 2>;\n   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
     \ LM2, 16, 2>::bf;\n   const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l,\
     \ mm= (m + l - 1) / l, ss= nn + mm - 1;\n   for (int i= 0, k= 0, s; k < n; ++i,\
     \ k+= l) gt1[i].set(p.data() + k, 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2),\
@@ -400,7 +400,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/extgcd.hpp
   - src/FFT/bostan_mori.hpp
-  timestamp: '2023-01-23 18:21:22+09:00'
+  timestamp: '2023-01-23 18:42:32+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/0168.test.cpp
