@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dual.hpp
     title: "Segment-Tree(\u53CC\u5BFE)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
@@ -25,11 +25,11 @@ data:
     - https://atcoder.jp/contests/abc256/tasks/abc256_f
   bundledCode: "#line 1 \"test/atcoder/abc256_f.SegDual.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n#include <iostream>\n\
-    #line 2 \"src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n#line 3 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
+    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
-    \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -70,7 +70,7 @@ data:
     \ r;\n }\n const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE\
     \ u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x,\
     \ x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef\
-    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 5 \"src/Math/ModInt.hpp\"\
+    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\
     \nnamespace math_internal {\n#define CE constexpr\nstruct m_b {};\nstruct s_b:\
     \ m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\n\
     template <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\n\
@@ -98,28 +98,28 @@ data:
     \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
     \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
     \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
-    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t<(MOD\
-    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<INT_MAX,\
-    \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
-    \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
+    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
+    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
+    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
     \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/DataStructure/SegmentTree_Dual.hpp\"\ntemplate\
-    \ <typename M> struct SegmentTree_Dual {\n using T= typename M::T;\n using E=\
-    \ typename M::E;\n SegmentTree_Dual() {}\n SegmentTree_Dual(int n_, T v1= T()):\
-    \ n(n_), height(n == 1 ? 0 : std::__lg(n - 1) + 1), val(n, v1), laz(n * 2, {E(),\
-    \ false}) {}\n SegmentTree_Dual(const std::vector<T> &v): n(v.size()), height(n\
-    \ == 1 ? 1 : std::__lg(n - 1) + 1), val(v), laz(n * 2, {E(), false}) {}\n void\
-    \ apply(int a, int b, E x) {\n  a+= n, b+= n;\n  for (int i= height; i >= 1; i--)\n\
-    \   if (((a >> i) << i) != a) eval(a >> i);\n  for (int i= height; i >= 1; i--)\n\
-    \   if (((b >> i) << i) != b) eval((b - 1) >> i);\n  for (int l= a, r= b; l <\
-    \ r; l>>= 1, r>>= 1) {\n   if (l & 1) propagate(l++, x);\n   if (r & 1) propagate(--r,\
-    \ x);\n  }\n }\n void set(int k, T x) {\n  for (int i= height; i; i--) eval((k\
-    \ + n) >> i);\n  val[k]= x, laz[k + n].flg= false;\n }\n T operator[](const int\
-    \ k) {\n  for (int i= height; i; i--) eval((k + n) >> i);\n  if (laz[k + n].flg)\
+    \ return dat[n];\n}\n#line 2 \"src/DataStructure/SegmentTree_Dual.hpp\"\n#include\
+    \ <vector>\ntemplate <typename M> struct SegmentTree_Dual {\n using T= typename\
+    \ M::T;\n using E= typename M::E;\n SegmentTree_Dual() {}\n SegmentTree_Dual(int\
+    \ n_, T v1= T()): n(n_), height(n == 1 ? 0 : std::__lg(n - 1) + 1), val(n, v1),\
+    \ laz(n * 2, {E(), false}) {}\n SegmentTree_Dual(const std::vector<T> &v): n(v.size()),\
+    \ height(n == 1 ? 1 : std::__lg(n - 1) + 1), val(v), laz(n * 2, {E(), false})\
+    \ {}\n void apply(int a, int b, E x) {\n  a+= n, b+= n;\n  for (int i= height;\
+    \ i >= 1; i--)\n   if (((a >> i) << i) != a) eval(a >> i);\n  for (int i= height;\
+    \ i >= 1; i--)\n   if (((b >> i) << i) != b) eval((b - 1) >> i);\n  for (int l=\
+    \ a, r= b; l < r; l>>= 1, r>>= 1) {\n   if (l & 1) propagate(l++, x);\n   if (r\
+    \ & 1) propagate(--r, x);\n  }\n }\n void set(int k, T x) {\n  for (int i= height;\
+    \ i; i--) eval((k + n) >> i);\n  val[k]= x, laz[k + n].flg= false;\n }\n T operator[](const\
+    \ int k) {\n  for (int i= height; i; i--) eval((k + n) >> i);\n  if (laz[k + n].flg)\
     \ M::mapping(val[k], laz[k + n].val), laz[k + n].flg= false;\n  return val[k];\n\
     \ }\nprivate:\n const int n, height;\n struct Lazy {\n  E val;\n  bool flg;\n\
     \ };\n std::vector<T> val;\n std::vector<Lazy> laz;\n inline void eval(int k)\
@@ -163,8 +163,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.SegDual.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:05:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 16:52:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.SegDual.test.cpp
 layout: document

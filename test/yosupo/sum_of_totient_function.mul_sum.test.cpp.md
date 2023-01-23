@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/multiplicative_and_additive.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/prime_count.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -28,12 +28,12 @@ data:
     - https://judge.yosupo.jp/problem/sum_of_totient_function
   bundledCode: "#line 1 \"test/yosupo/sum_of_totient_function.mul_sum.test.cpp\"\n\
     #define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\n\
-    #include <iostream>\n#line 2 \"src/Math/ModInt.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
-    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
-    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    #include <iostream>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
+    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
+    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
+    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
+    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
+    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -74,7 +74,7 @@ data:
     \ const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t\
     \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
     \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
-    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 5 \"src/Math/ModInt.hpp\"\
+    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\
     \nnamespace math_internal {\n#define CE constexpr\nstruct m_b {};\nstruct s_b:\
     \ m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\n\
     template <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\n\
@@ -102,19 +102,20 @@ data:
     \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
     \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
     \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
-    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t<(MOD\
-    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<INT_MAX,\
-    \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
-    \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
+    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
+    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
+    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
     \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 6 \"src/Math/prime_count.hpp\"\ntemplate <class T=\
-    \ __int128_t> auto polynomial_prime_sum_table(std::uint64_t N, const std::vector<T>\
-    \ &poly) {\n const int sqrtN= std::sqrt(N), d= poly.size();\n std::vector<int>\
-    \ primes;\n std::vector<T> small(sqrtN + 1, 0), large(sqrtN + 1, 0);\n std::vector<std::vector<T>>\
+    \ return dat[n];\n}\n#line 2 \"src/Math/prime_count.hpp\"\n#include <vector>\n\
+    #include <algorithm>\n#include <tuple>\n#include <cmath>\ntemplate <class T= __int128_t>\
+    \ auto polynomial_prime_sum_table(std::uint64_t N, const std::vector<T> &poly)\
+    \ {\n const int sqrtN= std::sqrt(N), d= poly.size();\n std::vector<int> primes;\n\
+    \ std::vector<T> small(sqrtN + 1, 0), large(sqrtN + 1, 0);\n std::vector<std::vector<T>>\
     \ s(d, std::vector<T>(sqrtN + 1)), l(d, std::vector<T>(sqrtN + 1));\n for (int\
     \ n= 1, k= 0; n <= sqrtN; n++, k= 0)\n  for (T prd= n; k < d; prd*= (n + ++k))\
     \ s[k][n]= prd / (k + 1);\n for (int n= 1, k= 0; n <= sqrtN; n++, k= 0)\n  for\
@@ -206,8 +207,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:04:24+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 16:52:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 layout: document

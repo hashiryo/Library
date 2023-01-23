@@ -1,28 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/DirichletConvSumTable.hpp
     title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_c
     links:
     - https://atcoder.jp/contests/abc179/tasks/abc179_c
   bundledCode: "#line 1 \"test/atcoder/abc179_c.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\
-    \n// O(\u221AN)\n#include <bits/stdc++.h>\n#line 3 \"src/Math/DirichletConvSumTable.hpp\"\
-    \ntemplate <class T> struct DirichletConvSumTable {\n std::uint64_t N;  // <=\
-    \ K * L\n std::vector<T> x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L)\
-    \ */;\n static DirichletConvSumTable get_epsilon(std::uint64_t N, std::size_t\
-    \ K) {\n  std::size_t L= (N - 1 + K) / K;\n  std::vector<T> a(K + 1, 0);\n  return\
-    \ a[1]= 1, DirichletConvSumTable(N, a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t\
-    \ n_, const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_)\
-    \ { assert(N < std::uint64_t(x.size()) * X.size()); }\n DirichletConvSumTable(std::uint64_t\
+    \n// O(\u221AN)\n#include <iostream>\n#line 2 \"src/Math/DirichletConvSumTable.hpp\"\
+    \n#include <vector>\n#include <algorithm>\n#include <cmath>\ntemplate <class T>\
+    \ struct DirichletConvSumTable {\n std::uint64_t N;  // <= K * L\n std::vector<T>\
+    \ x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L) */;\n static DirichletConvSumTable\
+    \ get_epsilon(std::uint64_t N, std::size_t K) {\n  std::size_t L= (N - 1 + K)\
+    \ / K;\n  std::vector<T> a(K + 1, 0);\n  return a[1]= 1, DirichletConvSumTable(N,\
+    \ a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t n_,\
+    \ const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_) { assert(N\
+    \ < std::uint64_t(x.size()) * X.size()); }\n DirichletConvSumTable(std::uint64_t\
     \ n_, std::size_t k_): N(n_), x(k_ + 1, 0), X((n_ - 1 + k_) / k_ + 1, 0) {}\n\
     \ template <class F> DirichletConvSumTable(std::uint64_t n_, std::size_t k_, const\
     \ F &sum): N(n_), x(k_ + 1), X((n_ - 1 + k_) / k_ + 1) {\n  assert(N < std::uint64_t(x.size())\
@@ -128,21 +129,21 @@ data:
     \ t)\n  for (m= std::sqrt(n= F.N / l), G[l]= A(m) * B(m) - g[1] * A(n); m > 1;)\
     \ G[l]-= F.x[m] * B(n / m) + g[m] * A(n / m), m--;\n return DirichletConvSumTable<mod_t>(F.N,\
     \ g, G);\n}\n#line 5 \"test/atcoder/abc179_c.test.cpp\"\nusing namespace std;\n\
-    \nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  long long N;\n\
-    \  cin >> N;\n  auto f = get_1<long long>(N - 1, (int)sqrt(N - 1));\n  cout <<\
-    \ dirichlet_mul_sum<long long>(f, f) << '\\n';\n  return 0;\n}\n"
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N;\n cin\
+    \ >> N;\n auto f= get_1<long long>(N - 1, (int)sqrt(N - 1));\n cout << dirichlet_mul_sum<long\
+    \ long>(f, f) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n//\
-    \ O(\u221AN)\n#include <bits/stdc++.h>\n#include \"src/Math/DirichletConvSumTable.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  long long N;\n  cin >> N;\n  auto f = get_1<long long>(N - 1, (int)sqrt(N -\
-    \ 1));\n  cout << dirichlet_mul_sum<long long>(f, f) << '\\n';\n  return 0;\n}"
+    \ O(\u221AN)\n#include <iostream>\n#include \"src/Math/DirichletConvSumTable.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ long long N;\n cin >> N;\n auto f= get_1<long long>(N - 1, (int)sqrt(N - 1));\n\
+    \ cout << dirichlet_mul_sum<long long>(f, f) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/DirichletConvSumTable.hpp
   isVerificationFile: true
   path: test/atcoder/abc179_c.test.cpp
   requiredBy: []
-  timestamp: '2022-12-31 19:53:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 16:45:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.test.cpp
 layout: document

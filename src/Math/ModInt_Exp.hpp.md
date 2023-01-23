@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Math/ModInt_Exp.hpp\"\n#include <bits/stdc++.h>\n#line\
-    \ 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+  bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <bits/stdc++.h>\n#line\
+    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -110,7 +110,7 @@ data:
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
     \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
     \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
-    \ }\n#line 4 \"src/Math/ModInt_Exp.hpp\"\ntemplate <std::uint64_t MOD> class ModInt_Exp\
+    \ }\n#line 3 \"src/Math/ModInt_Exp.hpp\"\ntemplate <std::uint64_t MOD> class ModInt_Exp\
     \ {\n static_assert(MOD < 1uLL << 63, \"MOD must be smaller than 2^63\");\n using\
     \ Uint= std::conditional_t < MOD<UINT_MAX, std::uint32_t, std::uint64_t>;\n using\
     \ DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>, __uint128_t,\
@@ -142,14 +142,14 @@ data:
     \ &os, const ModInt_Exp<MOD> &r) { return os << r.val(); }\ntemplate <std::uint64_t\
     \ MOD> std::istream &operator>>(std::istream &is, ModInt_Exp<MOD> &r) {\n std::uint64_t\
     \ v;\n return is >> v, r= ModInt_Exp<MOD>(v), is;\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/Factors.hpp\"\
-    \ntemplate <std::uint64_t MOD> class ModInt_Exp {\n static_assert(MOD < 1uLL <<\
-    \ 63, \"MOD must be smaller than 2^63\");\n using Uint= std::conditional_t < MOD<UINT_MAX,\
-    \ std::uint32_t, std::uint64_t>;\n using DUint= std::conditional_t<std::is_same_v<Uint,\
-    \ std::uint64_t>, __uint128_t, std::uint64_t>;\n using mod_t= ModInt_Exp;\n static\
-    \ constexpr inline Uint mod(DUint x) { return x < MOD * 2 ? Uint(x) : Uint(x %\
-    \ MOD) + MOD; }\n static constexpr inline Uint mul(Uint a, Uint b) { return mod(DUint(a)\
-    \ * b); }\n static constexpr inline Uint pow(Uint b, Uint k) {\n  for (Uint ret(1);;\
+  code: "#pragma once\n#include \"src/Math/Factors.hpp\"\ntemplate <std::uint64_t\
+    \ MOD> class ModInt_Exp {\n static_assert(MOD < 1uLL << 63, \"MOD must be smaller\
+    \ than 2^63\");\n using Uint= std::conditional_t < MOD<UINT_MAX, std::uint32_t,\
+    \ std::uint64_t>;\n using DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>,\
+    \ __uint128_t, std::uint64_t>;\n using mod_t= ModInt_Exp;\n static constexpr inline\
+    \ Uint mod(DUint x) { return x < MOD * 2 ? Uint(x) : Uint(x % MOD) + MOD; }\n\
+    \ static constexpr inline Uint mul(Uint a, Uint b) { return mod(DUint(a) * b);\
+    \ }\n static constexpr inline Uint pow(Uint b, Uint k) {\n  for (Uint ret(1);;\
     \ b= mul(b, b))\n   if (k & 1 ? ret= mul(ret, b) : 0; !(k>>= 1)) return ret;\n\
     \ }\n static constexpr inline std::uint64_t f(std::uint64_t x) {\n  std::uint64_t\
     \ ret= 1, i= 0, tmp= 1;\n  for (const auto &[p, e]: Factors(x)) {\n   for (tmp=\
@@ -181,8 +181,8 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Exp.hpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-01-23 16:50:15+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/ModInt_Exp.hpp

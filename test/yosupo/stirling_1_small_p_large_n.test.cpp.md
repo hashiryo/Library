@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_small_p_large_n
@@ -22,7 +22,7 @@ data:
     - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_small_p_large_n
   bundledCode: "#line 1 \"test/yosupo/stirling_1_small_p_large_n.test.cpp\"\n#define\
     \ PROBLEM \\\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_small_p_large_n\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \n#include <bits/stdc++.h>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -115,8 +115,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_1_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 16:50:15+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_1_small_p_large_n.test.cpp
 layout: document

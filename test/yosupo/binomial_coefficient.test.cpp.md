@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient
@@ -28,7 +28,7 @@ data:
     - https://judge.yosupo.jp/problem/binomial_coefficient
   bundledCode: "#line 1 \"test/yosupo/binomial_coefficient.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -117,37 +117,37 @@ data:
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
     \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
     \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
-    \ }\n#line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int\
-    \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
-    \ y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y *\
-    \ (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
-    \ % mod : x % mod;\n}\n#line 5 \"src/Math/BinomialCoefficient.hpp\"\nclass BinomialCoefficient\
-    \ {  // mod <= 1e6\n using i64= std::int64_t;\n struct ModPe {\n  ModPe()= default;\n\
-    \  ModPe(int p, int e, std::size_t pre_size= 1 << 14): p(p), e(e), ppows(e + 1,\
-    \ 1) {\n   for (int i= 1; i <= e; ++i) ppows[i]= ppows[i - 1] * p;\n   for (pp=\
-    \ pe= ppows[e]; std::size_t(pp) * p <= pre_size;) pp*= p;\n   q= pp / pe * p,\
-    \ facts.resize(pp, 1);\n   for (int qq= 1, l= pp / p; qq < q; qq*= p, l/= p)\n\
-    \    for (int i= 0; i < l; ++i)\n     for (int j= i * p + 1; j < i * p + p; ++j)\
-    \ facts[j * qq]= j;\n   for (int i= 1; i < pp; ++i) facts[i]= i64(facts[i - 1])\
-    \ * facts[i] % pe;\n   mask= (facts[pp - 1] == pe - 1), ds.resize(q, 0);\n   for\
-    \ (int i= 0; i < pp / pe; ++i)\n    for (int j= 0, s= ds[i]; j < p; ++j) ds[i\
-    \ * p + j]= s + j;\n  }\n  int operator()(i64 n, i64 m) const {\n   int num= 1,\
-    \ den= 1, x= 0, s= 0;\n   if (i64 r= n - m; e > 1)\n    for (i64 n1, m1, r1; n\
-    \ > 0; n= n1, m= m1, r= r1) {\n     n1= n / pp, m1= m / pp, r1= r / pp;\n    \
-    \ num= i64(num) * facts[n - n1 * pp] % pp;\n     den= i64(den) * facts[m - m1\
-    \ * pp] % pp * facts[r - r1 * pp] % pp;\n     s+= n1 - m1 - r1, n1= n / q, m1=\
-    \ m / q, r1= r / q;\n     x+= ds[m - m1 * q] + ds[r - r1 * q] - ds[n - n1 * q];\n\
-    \    }\n   else\n    for (i64 n1, m1, r1; n > 0; n= n1, m= m1, r= r1) {\n    \
-    \ n1= n / pp, m1= m / pp, r1= r / pp;\n     int nr= n - n1 * pp, mr= m - m1 *\
-    \ pp, rr= r - r1 * pp;\n     num= i64(num) * facts[nr] % pp;\n     den= i64(den)\
-    \ * facts[mr] % pp * facts[rr] % pp;\n     s+= n1 - m1 - r1, x+= ds[mr] + ds[rr]\
-    \ - ds[nr];\n    }\n   if (x >= e * (p - 1)) return 0;\n   if (p > 2) x/= p -\
-    \ 1;\n   int ret= i64(num) * mod_inv(den, pe) % pe * ppows[x] % pe;\n   return\
-    \ (s & mask) && ret > 0 ? pe - ret : ret;\n  }\n  int p, e, mask, pe, q, pp;\n\
-    \  std::vector<int> ppows, facts, ds;\n };\n int mod;\n std::vector<ModPe> binom_pp;\n\
-    \ std::vector<int> iprods;\npublic:\n BinomialCoefficient(int mod, std::size_t\
-    \ pre_size= 1 << 14): mod(mod) {\n  Factors f(mod);\n  if (f.size() == 1) pre_size=\
-    \ 1 << 20;\n  int prod= 1;\n  for (auto [p, e]: f) {\n   binom_pp.emplace_back(ModPe(p,\
+    \ }\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
+    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
+    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
+    \ - (-x) % mod : x % mod;\n}\n#line 5 \"src/Math/BinomialCoefficient.hpp\"\nclass\
+    \ BinomialCoefficient {  // mod <= 1e6\n using i64= std::int64_t;\n struct ModPe\
+    \ {\n  ModPe()= default;\n  ModPe(int p, int e, std::size_t pre_size= 1 << 14):\
+    \ p(p), e(e), ppows(e + 1, 1) {\n   for (int i= 1; i <= e; ++i) ppows[i]= ppows[i\
+    \ - 1] * p;\n   for (pp= pe= ppows[e]; std::size_t(pp) * p <= pre_size;) pp*=\
+    \ p;\n   q= pp / pe * p, facts.resize(pp, 1);\n   for (int qq= 1, l= pp / p; qq\
+    \ < q; qq*= p, l/= p)\n    for (int i= 0; i < l; ++i)\n     for (int j= i * p\
+    \ + 1; j < i * p + p; ++j) facts[j * qq]= j;\n   for (int i= 1; i < pp; ++i) facts[i]=\
+    \ i64(facts[i - 1]) * facts[i] % pe;\n   mask= (facts[pp - 1] == pe - 1), ds.resize(q,\
+    \ 0);\n   for (int i= 0; i < pp / pe; ++i)\n    for (int j= 0, s= ds[i]; j < p;\
+    \ ++j) ds[i * p + j]= s + j;\n  }\n  int operator()(i64 n, i64 m) const {\n  \
+    \ int num= 1, den= 1, x= 0, s= 0;\n   if (i64 r= n - m; e > 1)\n    for (i64 n1,\
+    \ m1, r1; n > 0; n= n1, m= m1, r= r1) {\n     n1= n / pp, m1= m / pp, r1= r /\
+    \ pp;\n     num= i64(num) * facts[n - n1 * pp] % pp;\n     den= i64(den) * facts[m\
+    \ - m1 * pp] % pp * facts[r - r1 * pp] % pp;\n     s+= n1 - m1 - r1, n1= n / q,\
+    \ m1= m / q, r1= r / q;\n     x+= ds[m - m1 * q] + ds[r - r1 * q] - ds[n - n1\
+    \ * q];\n    }\n   else\n    for (i64 n1, m1, r1; n > 0; n= n1, m= m1, r= r1)\
+    \ {\n     n1= n / pp, m1= m / pp, r1= r / pp;\n     int nr= n - n1 * pp, mr= m\
+    \ - m1 * pp, rr= r - r1 * pp;\n     num= i64(num) * facts[nr] % pp;\n     den=\
+    \ i64(den) * facts[mr] % pp * facts[rr] % pp;\n     s+= n1 - m1 - r1, x+= ds[mr]\
+    \ + ds[rr] - ds[nr];\n    }\n   if (x >= e * (p - 1)) return 0;\n   if (p > 2)\
+    \ x/= p - 1;\n   int ret= i64(num) * mod_inv(den, pe) % pe * ppows[x] % pe;\n\
+    \   return (s & mask) && ret > 0 ? pe - ret : ret;\n  }\n  int p, e, mask, pe,\
+    \ q, pp;\n  std::vector<int> ppows, facts, ds;\n };\n int mod;\n std::vector<ModPe>\
+    \ binom_pp;\n std::vector<int> iprods;\npublic:\n BinomialCoefficient(int mod,\
+    \ std::size_t pre_size= 1 << 14): mod(mod) {\n  Factors f(mod);\n  if (f.size()\
+    \ == 1) pre_size= 1 << 20;\n  int prod= 1;\n  for (auto [p, e]: f) {\n   binom_pp.emplace_back(ModPe(p,\
     \ e, pre_size));\n   iprods.push_back(mod_inv(prod, binom_pp.back().pe));\n  \
     \ prod*= binom_pp.back().pe;\n  }\n }\n inline int nCr(i64 n, i64 r) const {\n\
     \  assert(r >= 0);\n  if (n < r) return 0;\n  if (r == 0) return (mod > 1);\n\
@@ -174,8 +174,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/binomial_coefficient.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 16:50:15+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/binomial_coefficient.test.cpp
 layout: document

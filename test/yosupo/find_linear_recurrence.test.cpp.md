@@ -1,35 +1,36 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
     links:
     - https://judge.yosupo.jp/problem/find_linear_recurrence
   bundledCode: "#line 1 \"test/yosupo/find_linear_recurrence.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
-    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
-    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 3 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n#include <iostream>\n\
+    #include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
+    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
+    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
+    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
+    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
+    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -70,7 +71,7 @@ data:
     \ const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t\
     \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
     \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
-    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 5 \"src/Math/ModInt.hpp\"\
+    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\
     \nnamespace math_internal {\n#define CE constexpr\nstruct m_b {};\nstruct s_b:\
     \ m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\n\
     template <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\n\
@@ -98,10 +99,10 @@ data:
     \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
     \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
     \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
-    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t<(MOD\
-    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<INT_MAX,\
-    \ MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD <= UINT_MAX, MInt<i64, u32,\
-    \ SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
+    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
+    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
+    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
     \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
     \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
@@ -116,19 +117,19 @@ data:
     \  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-=\
     \ coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i + 1 - d, b= tmp, x= y,\
     \ m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n\
-    \ return c;\n}\n#line 5 \"test/yosupo/find_linear_recurrence.test.cpp\"\nusing\
+    \ return c;\n}\n#line 6 \"test/yosupo/find_linear_recurrence.test.cpp\"\nusing\
     \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
     \ Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N);\n for (int\
     \ i= 0; i < N; i++) cin >> a[i];\n vector<Mint> c= berlekamp_massey(a);\n int\
     \ d= c.size();\n cout << d << '\\n';\n for (int i= 0; i < d; i++) cout << c[i]\
     \ << \" \\n\"[i == d - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/berlekamp_massey.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N);\n for\
-    \ (int i= 0; i < N; i++) cin >> a[i];\n vector<Mint> c= berlekamp_massey(a);\n\
-    \ int d= c.size();\n cout << d << '\\n';\n for (int i= 0; i < d; i++) cout <<\
-    \ c[i] << \" \\n\"[i == d - 1];\n return 0;\n}"
+    \n#include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/Math/berlekamp_massey.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N;\n cin >>\
+    \ N;\n vector<Mint> a(N);\n for (int i= 0; i < N; i++) cin >> a[i];\n vector<Mint>\
+    \ c= berlekamp_massey(a);\n int d= c.size();\n cout << d << '\\n';\n for (int\
+    \ i= 0; i < d; i++) cout << c[i] << \" \\n\"[i == d - 1];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -137,8 +138,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2023-01-15 15:10:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 16:52:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/find_linear_recurrence.test.cpp
 layout: document

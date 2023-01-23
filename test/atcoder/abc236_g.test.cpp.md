@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
-    title: src/LinearAlgebra/Matrix.hpp
+    title: "\u884C\u5217"
   - icon: ':heavy_check_mark:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
