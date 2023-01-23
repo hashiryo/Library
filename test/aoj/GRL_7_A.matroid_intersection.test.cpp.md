@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/matroid_intersection.hpp
     title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A
@@ -17,10 +17,10 @@ data:
   bundledCode: "#line 1 \"test/aoj/GRL_7_A.matroid_intersection.test.cpp\"\n#define\
     \ PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
     \n// \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0 (\u5206\u5272+\u5206\u5272)\n\
-    #include <iostream>\n#line 2 \"src/Optimization/matroid_intersection.hpp\"\n#include\
-    \ <vector>\n#include <algorithm>\n#include <limits>\n#include <array>\n#include\
-    \ <queue>\n#include <cassert>\ntemplate <typename Matroid1, typename Matroid2>\
-    \ std::vector<int> matroid_intersection(int n, Matroid1 M1, Matroid2 M2) {\n std::vector<bool>\
+    #include <iostream>\n#include <vector>\n#line 3 \"src/Optimization/matroid_intersection.hpp\"\
+    \n#include <algorithm>\n#include <limits>\n#include <array>\n#include <queue>\n\
+    #include <cassert>\ntemplate <typename Matroid1, typename Matroid2> std::vector<int>\
+    \ matroid_intersection(int n, Matroid1 M1, Matroid2 M2) {\n std::vector<bool>\
     \ b(n, false), useless(n);\n std::vector<int> I[2];\n for (int e= 0; e < n; e++)\
     \ I[0].push_back(e);\n M1.build(I[1]), M2.build(I[1]);\n for (bool converged=\
     \ false; !converged;) {\n  useless.assign(n, false);\n  std::vector L(1, std::vector<int>());\n\
@@ -94,7 +94,7 @@ data:
     \ M1, M2);\n cout << S.size() << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
     \n// \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0 (\u5206\u5272+\u5206\u5272)\n\
-    #include <iostream>\n#include <iostream>\n#include \"src/Optimization/matroid_intersection.hpp\"\
+    #include <iostream>\n#include <vector>\n#include \"src/Optimization/matroid_intersection.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int L, R, M;\n cin >> L >> R >> M;\n vector<vector<int>> partl(L), partr(R);\n\
     \ for (int i= 0; i < M; i++) {\n  int a, b;\n  cin >> a >> b;\n  partl[a].push_back(i),\
@@ -106,8 +106,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 00:08:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 18:57:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_7_A.matroid_intersection.test.cpp
 layout: document

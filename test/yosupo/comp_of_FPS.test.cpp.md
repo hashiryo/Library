@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -122,19 +122,20 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#line\
-    \ 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 3 \"src/Math/is_prime.hpp\"\
-    \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
-    \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
-    \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
-    \ {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d,\
-    \ md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n   \
-    \  if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if\
-    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32,\
-    \ MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
-    \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
+    \ return dat[n];\n}\n#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
+    #line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
+    \ Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP\
+    \ md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1=\
+    \ md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n\
+    \   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i= s;\
+    \ p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
+    }\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1) return (n |\
+    \ 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32, u64, 32, 31>,\
+    \ 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64, MP_Mo<u64, u128,\
+    \ 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
     \ n) __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c,\
     \ ...) \\\n mod_t r, u, *x0, *x1; \\\n for (int a= n, b= 1, s, i; a>>= 1; b<<=\
@@ -247,7 +248,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/fps_inv.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 6 \"src/FFT/fps_inv.hpp\"\
     \nnamespace math_internal {\ntemplate <u32 LM, class mod_t> inline void inv_base(const\
     \ mod_t p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t=\
     \ nttarr_cat<mod_t, LM>, TH= (int[]){64, 64, 128, 256, 512, 512}[t];\n if (n <=\
@@ -507,7 +508,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/comp_of_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:42:32+09:00'
+  timestamp: '2023-01-23 18:57:46+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/comp_of_FPS.test.cpp

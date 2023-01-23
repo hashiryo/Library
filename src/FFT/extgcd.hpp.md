@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/convolve.hpp
     title: "\u7573\u307F\u8FBC\u307F"
   - icon: ':x:'
@@ -39,15 +39,15 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/extgcd.hpp\"\n#include <array>\n#line 2 \"src/FFT/fps_inv.hpp\"\
-    \n#include <vector>\n#include <cassert>\n#line 3 \"src/FFT/NTT.hpp\"\n#include\
-    \ <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\n\
-    using namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\n\
-    using i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL\
-    \ inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U,\
-    \ M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n\
-    \  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const {\
-    \ \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n\
-    \ static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
+    \n#include <vector>\n#include <algorithm>\n#include <cassert>\n#line 3 \"src/FFT/NTT.hpp\"\
+    \n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    \ {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64=\
+    \ uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n\
+    #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
+    \ PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-=\
+    \ M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r)\
+    \ const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U)\
+    \ \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
     \ n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class\
     \ du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0),\
     \ r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE\
@@ -247,7 +247,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 5 \"src/FFT/fps_inv.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 6 \"src/FFT/fps_inv.hpp\"\
     \nnamespace math_internal {\ntemplate <u32 LM, class mod_t> inline void inv_base(const\
     \ mod_t p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t=\
     \ nttarr_cat<mod_t, LM>, TH= (int[]){64, 64, 128, 256, 512, 512}[t];\n if (n <=\
@@ -564,7 +564,7 @@ data:
   isVerificationFile: false
   path: src/FFT/extgcd.hpp
   requiredBy: []
-  timestamp: '2023-01-23 18:42:32+09:00'
+  timestamp: '2023-01-23 18:57:46+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/inv_of_Poly.test.cpp

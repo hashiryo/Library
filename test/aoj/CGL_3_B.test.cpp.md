@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B
-  bundledCode: "#line 1 \"test/aoj/CGL_3_B.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Geometry/!geometry_temp.hpp\"\n/**\n\
-    \ * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\n */\n\
-    \n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\nint\
-    \ sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1 :\
-    \ x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
+  bundledCode: "#line 1 \"test/aoj/CGL_3_B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B\"\
+    \n#include <iostream>\n#line 2 \"src/Geometry/!geometry_temp.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
+    \n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\n\
+    int sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1\
+    \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
     \ r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real d) { return (d *\
     \ PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK\
     \ = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1,\
@@ -239,23 +239,22 @@ data:
     \ << \" \" << c.r << '\\n', *this;\n  }\n  Visualizer &operator<<(Polygon g) {\n\
     \    ofs << \"Polygon\" << '\\n';\n    for (Point p : g) ofs << p << '\\n';\n\
     \    ofs << \"...\" << '\\n';\n    return *this;\n  }\n};\n\n}  // namespace geometry\n\
-    #line 5 \"test/aoj/CGL_3_B.test.cpp\"\nusing namespace std;\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using namespace geometry;\n\
-    \  int n;\n  cin >> n;\n  Polygon g(n);\n  for (int i = 0; i < n; i++) cin >>\
-    \ g[i];\n  cout << g.is_convex() << endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using namespace geometry;\n  int n;\n  cin >> n;\n  Polygon g(n);\n  for (int\
-    \ i = 0; i < n; i++) cin >> g[i];\n  cout << g.is_convex() << endl;\n  return\
-    \ 0;\n}"
+    #line 4 \"test/aoj/CGL_3_B.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geometry;\n int\
+    \ n;\n cin >> n;\n Polygon g(n);\n for (int i= 0; i < n; i++) cin >> g[i];\n cout\
+    \ << g.is_convex() << endl;\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/3/CGL_3_B\"\
+    \n#include <iostream>\n#include \"src/Geometry/!geometry_temp.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
+    \ geometry;\n int n;\n cin >> n;\n Polygon g(n);\n for (int i= 0; i < n; i++)\
+    \ cin >> g[i];\n cout << g.is_convex() << endl;\n return 0;\n}"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   isVerificationFile: true
   path: test/aoj/CGL_3_B.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 18:57:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_3_B.test.cpp
 layout: document

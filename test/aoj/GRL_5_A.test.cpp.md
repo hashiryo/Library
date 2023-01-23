@@ -1,22 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/ReRooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
-  bundledCode: "#line 1 \"test/aoj/GRL_5_A.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/Graph/ReRooting.hpp\"\n/**\n * @title\
-    \ \u5168\u65B9\u4F4D\u6728DP\n * @category \u30B0\u30E9\u30D5\n * @see https://ei1333.hateblo.jp/entry/2018/12/21/004022\n\
+  bundledCode: "#line 1 \"test/aoj/GRL_5_A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
+    \n#include <iostream>\n#include <algorithm>\n#line 2 \"src/Graph/ReRooting.hpp\"\
+    \n#include <bits/stdc++.h>\n/**\n * @title \u5168\u65B9\u4F4D\u6728DP\n * @category\
+    \ \u30B0\u30E9\u30D5\n * @see https://ei1333.hateblo.jp/entry/2018/12/21/004022\n\
     \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename T, typename E = int>\nstruct ReRooting\
     \ {\n  struct Edge {\n    int to;\n    E data;\n    T dp, ndp;\n  };\n  std::vector<std::vector<Edge>>\
     \ adj;\n\n private:\n  const std::function<T(T, T)> op;\n  const T id;\n  const\
@@ -36,32 +37,31 @@ data:
     \ subdp(N, id_), dp(N, id_) {}\n  void add_edge(int src, int dst, E d = E()) {\n\
     \    adj[src].emplace_back((Edge){dst, d, id, id});\n  }\n  std::vector<T> run()\
     \ {\n    dfs_sub(0, -1);\n    dfs_all(0, -1, id);\n    return dp;\n  }\n};\n#line\
-    \ 5 \"test/aoj/GRL_5_A.test.cpp\"\nusing namespace std;\n\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  int n;\n  cin >> n;\n  auto op =\
-    \ [](long long l, long long r) { return max(l, r); };\n  auto lift = [](long long\
-    \ l, long long dat) { return l + dat; };\n  ReRooting<long long, long long> tree(n,\
-    \ op, 0, lift);\n  for (int i = 0; i < n - 1; i++) {\n    int s, t;\n    long\
-    \ long w;\n    cin >> s >> t >> w;\n    tree.add_edge(s, t, w);\n    tree.add_edge(t,\
-    \ s, w);\n  }\n  auto ret = tree.run();\n  long long ans = 0;\n  for (int i =\
-    \ 0; i < n; i++) ans = max(ans, ret[i]);\n  cout << ans << '\\n';\n  return 0;\n\
-    }\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Graph/ReRooting.hpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int n;\n\
-    \  cin >> n;\n  auto op = [](long long l, long long r) { return max(l, r); };\n\
-    \  auto lift = [](long long l, long long dat) { return l + dat; };\n  ReRooting<long\
-    \ long, long long> tree(n, op, 0, lift);\n  for (int i = 0; i < n - 1; i++) {\n\
-    \    int s, t;\n    long long w;\n    cin >> s >> t >> w;\n    tree.add_edge(s,\
-    \ t, w);\n    tree.add_edge(t, s, w);\n  }\n  auto ret = tree.run();\n  long long\
-    \ ans = 0;\n  for (int i = 0; i < n; i++) ans = max(ans, ret[i]);\n  cout << ans\
-    \ << '\\n';\n  return 0;\n}"
+    \ 5 \"test/aoj/GRL_5_A.test.cpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int n;\n cin >> n;\n auto op= [](long long l, long\
+    \ long r) { return max(l, r); };\n auto lift= [](long long l, long long dat) {\
+    \ return l + dat; };\n ReRooting<long long, long long> tree(n, op, 0, lift);\n\
+    \ for (int i= 0; i < n - 1; i++) {\n  int s, t;\n  long long w;\n  cin >> s >>\
+    \ t >> w;\n  tree.add_edge(s, t, w);\n  tree.add_edge(t, s, w);\n }\n auto ret=\
+    \ tree.run();\n long long ans= 0;\n for (int i= 0; i < n; i++) ans= max(ans, ret[i]);\n\
+    \ cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
+    \n#include <iostream>\n#include <algorithm>\n#include \"src/Graph/ReRooting.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int n;\n cin >> n;\n auto op= [](long long l, long long r) { return max(l, r);\
+    \ };\n auto lift= [](long long l, long long dat) { return l + dat; };\n ReRooting<long\
+    \ long, long long> tree(n, op, 0, lift);\n for (int i= 0; i < n - 1; i++) {\n\
+    \  int s, t;\n  long long w;\n  cin >> s >> t >> w;\n  tree.add_edge(s, t, w);\n\
+    \  tree.add_edge(t, s, w);\n }\n auto ret= tree.run();\n long long ans= 0;\n for\
+    \ (int i= 0; i < n; i++) ans= max(ans, ret[i]);\n cout << ans << '\\n';\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Graph/ReRooting.hpp
   isVerificationFile: true
   path: test/aoj/GRL_5_A.test.cpp
   requiredBy: []
-  timestamp: '2020-10-23 23:21:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 18:57:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_5_A.test.cpp
 layout: document

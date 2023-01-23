@@ -6,18 +6,18 @@ data:
     title: Splay-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C
   bundledCode: "#line 1 \"test/aoj/ITP2_4_C.SplayTree.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C\"\
-    \n#include <bits/stdc++.h>\n#line 3 \"src/DataStructure/SplayTree.hpp\"\n/**\n\
-    \ * @title Splay-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
+    \ \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C\"\n#include\
+    \ <iostream>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title Splay-Tree\n * @category \u30C7\u30FC\u30BF\u69CB\u9020\n * @brief\
     \ O(logN)\n * \u6728\u306E\u6DF1\u3055\u304C10^5\u3050\u3089\u3044\u306B\u306A\
     \u308B\u3068\u518D\u5E30\u95A2\u6570\u304C\u30B9\u30BF\u30C3\u30AF\u30AA\u30FC\
     \u30D0\u30FC\u30D5\u30ED\u30FC\u8D77\u3053\u3059\u306E\u3067\u6CE8\u610F\n * set_balance()\
@@ -165,32 +165,32 @@ data:
     \ erase(0); }\n  T erase(std::size_t k) {\n    assert(root && k < root->size);\n\
     \    splay(root, k);\n    T ret = root->val;\n    splay(root->ch[1], 0);\n   \
     \ if (root->ch[1])\n      root->ch[1]->ch[0] = root->ch[0], root = pushup(root->ch[1]);\n\
-    \    else\n      root = root->ch[0];\n    return ret;\n  }\n};\n#line 5 \"test/aoj/ITP2_4_C.SplayTree.test.cpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int n;\n  cin >> n;\n  int a[n];\n  for (int i = 0; i < n; i++) cin >> a[i];\n\
-    \  SplayTree<int> ar(a, a + n);\n  int q;\n  cin >> q;\n  for (int i = 0; i <\
-    \ q; i++) {\n    int b, e, t;\n    cin >> b >> e >> t;\n    int f = t + e - b;\n\
-    \    if (t < b) swap(b, t), swap(e, f);\n    auto [tl, tc, tr] = ar.split3(t,\
-    \ f);\n    auto [bl, bc, br] = tl.split3(b, e);\n    ar = bl + tc + br + bc +\
-    \ tr;\n  }\n  auto ans = ar.dump();\n  for (int i = 0; i < n; i++) cout << (i\
-    \ ? \" \" : \"\") << ans[i];\n  cout << '\\n';\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C\"\
-    \n#include <bits/stdc++.h>\n#include \"src/DataStructure/SplayTree.hpp\"\nusing\
-    \ namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n\
-    \  int n;\n  cin >> n;\n  int a[n];\n  for (int i = 0; i < n; i++) cin >> a[i];\n\
-    \  SplayTree<int> ar(a, a + n);\n  int q;\n  cin >> q;\n  for (int i = 0; i <\
-    \ q; i++) {\n    int b, e, t;\n    cin >> b >> e >> t;\n    int f = t + e - b;\n\
-    \    if (t < b) swap(b, t), swap(e, f);\n    auto [tl, tc, tr] = ar.split3(t,\
-    \ f);\n    auto [bl, bc, br] = tl.split3(b, e);\n    ar = bl + tc + br + bc +\
-    \ tr;\n  }\n  auto ans = ar.dump();\n  for (int i = 0; i < n; i++) cout << (i\
-    \ ? \" \" : \"\") << ans[i];\n  cout << '\\n';\n  return 0;\n}"
+    \    else\n      root = root->ch[0];\n    return ret;\n  }\n};\n#line 4 \"test/aoj/ITP2_4_C.SplayTree.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int n;\n cin >> n;\n int a[n];\n for (int i= 0; i < n; i++) cin >> a[i];\n SplayTree<int>\
+    \ ar(a, a + n);\n int q;\n cin >> q;\n for (int i= 0; i < q; i++) {\n  int b,\
+    \ e, t;\n  cin >> b >> e >> t;\n  int f= t + e - b;\n  if (t < b) swap(b, t),\
+    \ swap(e, f);\n  auto [tl, tc, tr]= ar.split3(t, f);\n  auto [bl, bc, br]= tl.split3(b,\
+    \ e);\n  ar= bl + tc + br + bc + tr;\n }\n auto ans= ar.dump();\n for (int i=\
+    \ 0; i < n; i++) cout << (i ? \" \" : \"\") << ans[i];\n cout << '\\n';\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C\"\
+    \n#include <iostream>\n#include \"src/DataStructure/SplayTree.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n;\n cin\
+    \ >> n;\n int a[n];\n for (int i= 0; i < n; i++) cin >> a[i];\n SplayTree<int>\
+    \ ar(a, a + n);\n int q;\n cin >> q;\n for (int i= 0; i < q; i++) {\n  int b,\
+    \ e, t;\n  cin >> b >> e >> t;\n  int f= t + e - b;\n  if (t < b) swap(b, t),\
+    \ swap(e, f);\n  auto [tl, tc, tr]= ar.split3(t, f);\n  auto [bl, bc, br]= tl.split3(b,\
+    \ e);\n  ar= bl + tc + br + bc + tr;\n }\n auto ans= ar.dump();\n for (int i=\
+    \ 0; i < n; i++) cout << (i ? \" \" : \"\") << ans[i];\n cout << '\\n';\n return\
+    \ 0;\n}"
   dependsOn:
   - src/DataStructure/SplayTree.hpp
   isVerificationFile: true
   path: test/aoj/ITP2_4_C.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2022-09-21 14:30:01+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 18:57:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_C.SplayTree.test.cpp
 layout: document

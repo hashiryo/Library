@@ -1,23 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A
-  bundledCode: "#line 1 \"test/aoj/CGL_4_A.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A\"\
-    \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#line 3 \"src/Geometry/!geometry_temp.hpp\"\
-    \n/**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
+  bundledCode: "#line 1 \"test/aoj/CGL_4_A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A\"\
+    \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
+    \ <vector>\n#line 2 \"src/Geometry/!geometry_temp.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
     \n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\n\
     int sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1\
     \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
@@ -240,30 +241,31 @@ data:
     \ << \" \" << c.r << '\\n', *this;\n  }\n  Visualizer &operator<<(Polygon g) {\n\
     \    ofs << \"Polygon\" << '\\n';\n    for (Point p : g) ofs << p << '\\n';\n\
     \    ofs << \"...\" << '\\n';\n    return *this;\n  }\n};\n\n}  // namespace geometry\n\
-    #line 6 \"test/aoj/CGL_4_A.test.cpp\"\nusing namespace std;\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using namespace geometry;\n\
-    \  cout << fixed << setprecision(12);\n  int n;\n  cin >> n;\n  vector<Point>\
-    \ ps(n);\n  for (int i = 0; i < n; i++) cin >> ps[i];\n  Convex g = convex_hull(ps);\n\
-    \  cout << g.size() << endl;\n  int st = 0;\n  for (int i = 0; i < (int)g.size();\
-    \ i++)\n    if (g[st].y > g[i].y || (g[st].y == g[i].y && g[st].x > g[i].x)) st\
-    \ = i;\n  for (int i = 0, j = st; i < (int)g.size(); i++, j = g.next(j))\n   \
-    \ cout << g[j] << endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A\"\
-    \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\
-    \nusing namespace std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n\
-    \  using namespace geometry;\n  cout << fixed << setprecision(12);\n  int n;\n\
-    \  cin >> n;\n  vector<Point> ps(n);\n  for (int i = 0; i < n; i++) cin >> ps[i];\n\
-    \  Convex g = convex_hull(ps);\n  cout << g.size() << endl;\n  int st = 0;\n \
-    \ for (int i = 0; i < (int)g.size(); i++)\n    if (g[st].y > g[i].y || (g[st].y\
-    \ == g[i].y && g[st].x > g[i].x)) st = i;\n  for (int i = 0, j = st; i < (int)g.size();\
-    \ i++, j = g.next(j))\n    cout << g[j] << endl;\n  return 0;\n}"
+    #line 7 \"test/aoj/CGL_4_A.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geometry;\n cout\
+    \ << fixed << setprecision(12);\n int n;\n cin >> n;\n vector<Point> ps(n);\n\
+    \ for (int i= 0; i < n; i++) cin >> ps[i];\n Convex g= convex_hull(ps);\n cout\
+    \ << g.size() << endl;\n int st= 0;\n for (int i= 0; i < (int)g.size(); i++)\n\
+    \  if (g[st].y > g[i].y || (g[st].y == g[i].y && g[st].x > g[i].x)) st= i;\n for\
+    \ (int i= 0, j= st; i < (int)g.size(); i++, j= g.next(j)) cout << g[j] << endl;\n\
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A\"\
+    \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
+    \ <vector>\n#include \"src/Geometry/!geometry_temp.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
+    \ geometry;\n cout << fixed << setprecision(12);\n int n;\n cin >> n;\n vector<Point>\
+    \ ps(n);\n for (int i= 0; i < n; i++) cin >> ps[i];\n Convex g= convex_hull(ps);\n\
+    \ cout << g.size() << endl;\n int st= 0;\n for (int i= 0; i < (int)g.size(); i++)\n\
+    \  if (g[st].y > g[i].y || (g[st].y == g[i].y && g[st].x > g[i].x)) st= i;\n for\
+    \ (int i= 0, j= st; i < (int)g.size(); i++, j= g.next(j)) cout << g[j] << endl;\n\
+    \ return 0;\n}"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   isVerificationFile: true
   path: test/aoj/CGL_4_A.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 18:57:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_4_A.test.cpp
 layout: document

@@ -1,34 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/circle_functions.hpp
     title: "\u5186\u306E\u3042\u308C\u3053\u308C"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_G
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_G
-  bundledCode: "#line 1 \"test/aoj/CGL_7_G.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_G\"\
-    \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#line 3 \"src/Geometry/!geometry_temp.hpp\"\
-    \n/**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
-    \n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\n\
-    int sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1\
-    \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
-    \ r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real d) { return (d *\
-    \ PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE = -1,\n  ONLINE_BACK\
-    \ = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum { ON = 0, LEFT = +1,\
-    \ RIGHT = -1, IN = +2, OUT = -2 };\nenum { DISJOINT = 0, TOUCH = 1, CROSSING =\
-    \ 2, OVERLAP = 3 };\n//-----------------------------------------------------------------------------\n\
+  bundledCode: "#line 1 \"test/aoj/CGL_7_G.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_G\"\
+    \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
+    \ <algorithm>\n#include <vector>\n#line 2 \"src/Geometry/!geometry_temp.hpp\"\n\
+    #include <bits/stdc++.h>\n/**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n\
+    \ * @category \u5E7E\u4F55\n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\
+    \nusing Real = long double;\nint sgn(Real x) {\n  static constexpr Real EPS =\
+    \ 1e-8;\n  return x < -EPS ? -1 : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\n\
+    Real radian_to_degree(Real r) { return (r * 180.0 / PI); }\nReal degree_to_radian(Real\
+    \ d) { return (d * PI / 180.0); }\nenum {\n  COUNTER_CLOCKWISE = +1,\n  CLOCKWISE\
+    \ = -1,\n  ONLINE_BACK = +2,\n  ONLINE_FRONT = -2,\n  ON_SEGMENT = 0\n};\nenum\
+    \ { ON = 0, LEFT = +1, RIGHT = -1, IN = +2, OUT = -2 };\nenum { DISJOINT = 0,\
+    \ TOUCH = 1, CROSSING = 2, OVERLAP = 3 };\n//-----------------------------------------------------------------------------\n\
     // Point\n//-----------------------------------------------------------------------------\n\
     struct Point {\n  Real x, y;\n  Point &operator+=(Point p) { return x += p.x,\
     \ y += p.y, *this; }\n  Point &operator-=(Point p) { return x -= p.x, y -= p.y,\
@@ -301,28 +302,29 @@ data:
     \ break;\n            rec(qs[i], w, pss[i]);\n          }\n        };\n  Real\
     \ w = 0;\n  for (Point p : ps) w = std::max<Real>({w, std::abs(p.x), std::abs(p.y)});\n\
     \  rec({0, 0}, w, ps);\n  return {best, best_p};\n}\n\n}  // namespace geometry\n\
-    #line 7 \"test/aoj/CGL_7_G.test.cpp\"\nusing namespace std;\n\nsigned main() {\n\
-    \  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using namespace geometry;\n\
-    \  cout << fixed << setprecision(12);\n  Circle c, d;\n  cin >> c.o >> c.r;\n\
-    \  cin >> d.o >> d.r;\n  auto ls = common_tangent(c, d);\n  vector<Point> ps;\n\
-    \  for (Line l : ls) ps.push_back(l.p1);\n  sort(ps.begin(), ps.end());\n  for\
-    \ (Point p : ps) cout << p << endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_G\"\
-    \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\
-    \n#include \"src/Geometry/circle_functions.hpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using namespace geometry;\n\
-    \  cout << fixed << setprecision(12);\n  Circle c, d;\n  cin >> c.o >> c.r;\n\
-    \  cin >> d.o >> d.r;\n  auto ls = common_tangent(c, d);\n  vector<Point> ps;\n\
-    \  for (Line l : ls) ps.push_back(l.p1);\n  sort(ps.begin(), ps.end());\n  for\
-    \ (Point p : ps) cout << p << endl;\n  return 0;\n}"
+    #line 9 \"test/aoj/CGL_7_G.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geometry;\n cout\
+    \ << fixed << setprecision(12);\n Circle c, d;\n cin >> c.o >> c.r;\n cin >> d.o\
+    \ >> d.r;\n auto ls= common_tangent(c, d);\n vector<Point> ps;\n for (Line l:\
+    \ ls) ps.push_back(l.p1);\n sort(ps.begin(), ps.end());\n for (Point p: ps) cout\
+    \ << p << endl;\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_G\"\
+    \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
+    \ <algorithm>\n#include <vector>\n#include \"src/Geometry/!geometry_temp.hpp\"\
+    \n#include \"src/Geometry/circle_functions.hpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geometry;\n\
+    \ cout << fixed << setprecision(12);\n Circle c, d;\n cin >> c.o >> c.r;\n cin\
+    \ >> d.o >> d.r;\n auto ls= common_tangent(c, d);\n vector<Point> ps;\n for (Line\
+    \ l: ls) ps.push_back(l.p1);\n sort(ps.begin(), ps.end());\n for (Point p: ps)\
+    \ cout << p << endl;\n return 0;\n}"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   - src/Geometry/circle_functions.hpp
   isVerificationFile: true
   path: test/aoj/CGL_7_G.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 18:57:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_G.test.cpp
 layout: document

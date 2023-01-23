@@ -1,26 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/!geometry_temp.hpp
     title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/closest_pair.hpp
     title: "\u6700\u8FD1\u70B9\u5BFE"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A
-  bundledCode: "#line 1 \"test/aoj/CGL_5_A.test.cpp\"\n#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A\"\
-    \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#line 3 \"src/Geometry/!geometry_temp.hpp\"\
-    \n/**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
+  bundledCode: "#line 1 \"test/aoj/CGL_5_A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A\"\
+    \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
+    \ <vector>\n#line 2 \"src/Geometry/!geometry_temp.hpp\"\n#include <bits/stdc++.h>\n\
+    /**\n * @title \u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC\n * @category \u5E7E\u4F55\
     \n */\n\n// BEGIN CUT HERE\n\nnamespace geometry {\n\nusing Real = long double;\n\
     int sgn(Real x) {\n  static constexpr Real EPS = 1e-8;\n  return x < -EPS ? -1\
     \ : x > +EPS ? 1 : 0;\n}\nconst Real PI = std::acos(-1.0);\nReal radian_to_degree(Real\
@@ -260,26 +261,27 @@ data:
     \ >= best) break;\n          update(qs[j], ps[i]);\n        }\n        qs.push_back(ps[i]);\n\
     \      }\n    }\n  };\n  rec(0, ps.size());\n  return {u, v};\n}\n\nstd::pair<Point,\
     \ Point> farthest_pair(std::vector<Point> ps) {\n  return convex_hull(ps).farthest();\n\
-    }\n\n}  // namespace geometry\n#line 7 \"test/aoj/CGL_5_A.test.cpp\"\nusing namespace\
-    \ std;\n\nsigned main() {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using\
-    \ namespace geometry;\n  int n;\n  cin >> n;\n  vector<Point> ps(n);\n  for (int\
-    \ i = 0; i < n; i++) cin >> ps[i];\n  auto pp = closest_pair(ps);\n  cout << fixed\
-    \ << setprecision(12) << dist(pp.first, pp.second) << endl;\n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A\"\
-    \n#define ERROR \"0.00000001\"\n#include <bits/stdc++.h>\n#include \"src/Geometry/!geometry_temp.hpp\"\
-    \n#include \"src/Geometry/closest_pair.hpp\"\nusing namespace std;\n\nsigned main()\
-    \ {\n  cin.tie(0);\n  ios::sync_with_stdio(false);\n  using namespace geometry;\n\
-    \  int n;\n  cin >> n;\n  vector<Point> ps(n);\n  for (int i = 0; i < n; i++)\
-    \ cin >> ps[i];\n  auto pp = closest_pair(ps);\n  cout << fixed << setprecision(12)\
-    \ << dist(pp.first, pp.second) << endl;\n  return 0;\n}"
+    }\n\n}  // namespace geometry\n#line 8 \"test/aoj/CGL_5_A.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
+    \ geometry;\n int n;\n cin >> n;\n vector<Point> ps(n);\n for (int i= 0; i < n;\
+    \ i++) cin >> ps[i];\n auto pp= closest_pair(ps);\n cout << fixed << setprecision(12)\
+    \ << dist(pp.first, pp.second) << endl;\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A\"\
+    \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
+    \ <vector>\n#include \"src/Geometry/!geometry_temp.hpp\"\n#include \"src/Geometry/closest_pair.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using namespace geometry;\n int n;\n cin >> n;\n vector<Point> ps(n);\n for\
+    \ (int i= 0; i < n; i++) cin >> ps[i];\n auto pp= closest_pair(ps);\n cout <<\
+    \ fixed << setprecision(12) << dist(pp.first, pp.second) << endl;\n return 0;\n\
+    }"
   dependsOn:
   - src/Geometry/!geometry_temp.hpp
   - src/Geometry/closest_pair.hpp
   isVerificationFile: true
   path: test/aoj/CGL_5_A.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 14:03:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 18:57:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_5_A.test.cpp
 layout: document
