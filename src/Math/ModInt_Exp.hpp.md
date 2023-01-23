@@ -12,12 +12,12 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
@@ -112,8 +112,8 @@ data:
     \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
     \ }\n#line 3 \"src/Math/ModInt_Exp.hpp\"\ntemplate <std::uint64_t MOD> class ModInt_Exp\
     \ {\n static_assert(MOD < 1uLL << 63, \"MOD must be smaller than 2^63\");\n using\
-    \ Uint= std::conditional_t < MOD<UINT_MAX, std::uint32_t, std::uint64_t>;\n using\
-    \ DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>, __uint128_t,\
+    \ Uint= std::conditional_t < MOD<(1ull << 32), std::uint32_t, std::uint64_t>;\n\
+    \ using DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>, __uint128_t,\
     \ std::uint64_t>;\n using mod_t= ModInt_Exp;\n static constexpr inline Uint mod(DUint\
     \ x) { return x < MOD * 2 ? Uint(x) : Uint(x % MOD) + MOD; }\n static constexpr\
     \ inline Uint mul(Uint a, Uint b) { return mod(DUint(a) * b); }\n static constexpr\
@@ -144,7 +144,7 @@ data:
     \ v;\n return is >> v, r= ModInt_Exp<MOD>(v), is;\n}\n"
   code: "#pragma once\n#include \"src/Math/Factors.hpp\"\ntemplate <std::uint64_t\
     \ MOD> class ModInt_Exp {\n static_assert(MOD < 1uLL << 63, \"MOD must be smaller\
-    \ than 2^63\");\n using Uint= std::conditional_t < MOD<UINT_MAX, std::uint32_t,\
+    \ than 2^63\");\n using Uint= std::conditional_t < MOD<(1ull << 32), std::uint32_t,\
     \ std::uint64_t>;\n using DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>,\
     \ __uint128_t, std::uint64_t>;\n using mod_t= ModInt_Exp;\n static constexpr inline\
     \ Uint mod(DUint x) { return x < MOD * 2 ? Uint(x) : Uint(x % MOD) + MOD; }\n\
@@ -181,8 +181,8 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Exp.hpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-23 22:57:31+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/ModInt_Exp.hpp

@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc228/tasks/abc228_e
@@ -116,8 +116,8 @@ data:
     \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
     \ }\n#line 3 \"src/Math/ModInt_Exp.hpp\"\ntemplate <std::uint64_t MOD> class ModInt_Exp\
     \ {\n static_assert(MOD < 1uLL << 63, \"MOD must be smaller than 2^63\");\n using\
-    \ Uint= std::conditional_t < MOD<UINT_MAX, std::uint32_t, std::uint64_t>;\n using\
-    \ DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>, __uint128_t,\
+    \ Uint= std::conditional_t < MOD<(1ull << 32), std::uint32_t, std::uint64_t>;\n\
+    \ using DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>, __uint128_t,\
     \ std::uint64_t>;\n using mod_t= ModInt_Exp;\n static constexpr inline Uint mod(DUint\
     \ x) { return x < MOD * 2 ? Uint(x) : Uint(x % MOD) + MOD; }\n static constexpr\
     \ inline Uint mul(Uint a, Uint b) { return mod(DUint(a) * b); }\n static constexpr\
@@ -162,8 +162,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc228_e.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-23 22:57:31+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc228_e.test.cpp
 layout: document
