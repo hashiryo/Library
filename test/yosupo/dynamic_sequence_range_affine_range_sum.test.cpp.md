@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/SplayTree.hpp
     title: Splay-Tree
   - icon: ':question:'
@@ -123,11 +123,11 @@ data:
     \ ret+= \"\\\"at\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\"\
     \ \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n\
     \ }\n std::size_t size() { return root ? root->size : 0; }\n void clear() { root=\
-    \ nullptr; }\n template <class L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t>\
+    \ nullptr; }\n template <class L= M, std::enable_if_t<semigroup<L>::value, std::nullptr_t>\
     \ = nullptr> const T &operator[](std::size_t k) { return get(k); }\n template\
-    \ <class L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T\
-    \ &operator[](std::size_t k) { return at(k); }\n const T &get(std::size_t k) {\
-    \ return splay(root, k), root->val; }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value,\
+    \ <class L= M, std::enable_if_t<!semigroup<L>::value, std::nullptr_t> = nullptr>\
+    \ T &operator[](std::size_t k) { return at(k); }\n const T &get(std::size_t k)\
+    \ { return splay(root, k), root->val; }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value,\
     \ \"\\\"at\\\" is not available\");\n  return splay(root, k), root->val;\n }\n\
     \ void set(std::size_t k, T val) { splay(root, k), root->val= val, pushup(root);\
     \ }\n void set_balance() {\n  if (root) splay(root, xor128() % size()), splay(root,\
@@ -283,7 +283,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 20:52:39+09:00'
+  timestamp: '2023-01-23 21:38:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

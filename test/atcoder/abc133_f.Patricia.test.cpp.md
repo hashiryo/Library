@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
   - icon: ':question:'
@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc133/tasks/abc133_f
@@ -113,7 +113,7 @@ data:
     \ is_null(root, k); }\n T &at(id_t k) {\n  static_assert(!monoid<M>::value, \"\
     \\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
     \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](id_t\
-    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<!monoid<L>::value,\
     \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t\
     \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\"\
     \ is not available\\n\");\n  return fold(root, a, b, bias);\n }\n // find i s.t.\n\
@@ -243,8 +243,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.Patricia.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 20:52:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-23 21:38:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.Patricia.test.cpp
 layout: document

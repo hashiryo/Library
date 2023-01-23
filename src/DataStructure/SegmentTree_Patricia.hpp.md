@@ -7,13 +7,13 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
   - icon: ':x:'
     path: test/aoj/3024.Patricia.test.cpp
     title: test/aoj/3024.Patricia.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
   - icon: ':x:'
@@ -24,7 +24,7 @@ data:
     title: test/yukicoder/649.Patricia.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Patricia.hpp\"\n#include <array>\n\
@@ -117,7 +117,7 @@ data:
     \ is_null(root, k); }\n T &at(id_t k) {\n  static_assert(!monoid<M>::value, \"\
     \\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
     \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](id_t\
-    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<!monoid<L>::value,\
     \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t\
     \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\"\
     \ is not available\\n\");\n  return fold(root, a, b, bias);\n }\n // find i s.t.\n\
@@ -225,7 +225,7 @@ data:
     \ is_null(root, k); }\n T &at(id_t k) {\n  static_assert(!monoid<M>::value, \"\
     \\\"at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
     \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](id_t\
-    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<!monoid<L>::value,\
     \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t\
     \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\"\
     \ is not available\\n\");\n  return fold(root, a, b, bias);\n }\n // find i s.t.\n\
@@ -255,8 +255,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Patricia.hpp
   requiredBy: []
-  timestamp: '2023-01-23 20:52:39+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-23 21:38:23+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3024.Patricia.test.cpp
   - test/aoj/2270.Patricia.test.cpp

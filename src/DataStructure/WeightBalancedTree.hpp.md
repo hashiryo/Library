@@ -125,8 +125,8 @@ data:
     \ k, T val) { set_val(root, k, val); }\n T get(std::size_t k) { return get_val(root,\
     \ k); }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value, \"\\\"\
     at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
-    \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](std::size_t\
-    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ L= M, std::enable_if_t<semigroup<L>::value, std::nullptr_t> = nullptr> T operator[](std::size_t\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<!semigroup<L>::value,\
     \ std::nullptr_t> = nullptr> T &operator[](std::size_t k) { return at(k); }\n\
     \ T fold(std::size_t a, std::size_t b) {\n  static_assert(semigroup<M>::value,\
     \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b, 0, size());\n\
@@ -232,8 +232,8 @@ data:
     \ k, T val) { set_val(root, k, val); }\n T get(std::size_t k) { return get_val(root,\
     \ k); }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value, \"\\\"\
     at\\\" is not available\\n\");\n  return at_val(root, k);\n }\n template <class\
-    \ L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T operator[](std::size_t\
-    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    \ L= M, std::enable_if_t<semigroup<L>::value, std::nullptr_t> = nullptr> T operator[](std::size_t\
+    \ k) { return get(k); }\n template <class L= M, std::enable_if_t<!semigroup<L>::value,\
     \ std::nullptr_t> = nullptr> T &operator[](std::size_t k) { return at(k); }\n\
     \ T fold(std::size_t a, std::size_t b) {\n  static_assert(semigroup<M>::value,\
     \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b, 0, size());\n\
@@ -253,7 +253,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/WeightBalancedTree.hpp
   requiredBy: []
-  timestamp: '2023-01-23 20:52:39+09:00'
+  timestamp: '2023-01-23 21:38:23+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/3024.WBT.test.cpp

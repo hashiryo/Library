@@ -7,19 +7,19 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1508.SplayTree.test.cpp
     title: test/aoj/1508.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_2_D.SplayTree.test.cpp
     title: test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.SplayTree.test.cpp
     title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_B.SplayTree.test.cpp
     title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
   - icon: ':x:'
@@ -27,7 +27,7 @@ data:
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <vector>\n#include\
@@ -121,11 +121,11 @@ data:
     \ ret+= \"\\\"at\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\"\
     \ \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n\
     \ }\n std::size_t size() { return root ? root->size : 0; }\n void clear() { root=\
-    \ nullptr; }\n template <class L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t>\
+    \ nullptr; }\n template <class L= M, std::enable_if_t<semigroup<L>::value, std::nullptr_t>\
     \ = nullptr> const T &operator[](std::size_t k) { return get(k); }\n template\
-    \ <class L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T\
-    \ &operator[](std::size_t k) { return at(k); }\n const T &get(std::size_t k) {\
-    \ return splay(root, k), root->val; }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value,\
+    \ <class L= M, std::enable_if_t<!semigroup<L>::value, std::nullptr_t> = nullptr>\
+    \ T &operator[](std::size_t k) { return at(k); }\n const T &get(std::size_t k)\
+    \ { return splay(root, k), root->val; }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value,\
     \ \"\\\"at\\\" is not available\");\n  return splay(root, k), root->val;\n }\n\
     \ void set(std::size_t k, T val) { splay(root, k), root->val= val, pushup(root);\
     \ }\n void set_balance() {\n  if (root) splay(root, xor128() % size()), splay(root,\
@@ -239,11 +239,11 @@ data:
     \ ret+= \"\\\"at\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\"\
     \ \";\n  if constexpr (reversible) ret+= \"\\\"reverse\\\" \";\n  return ret;\n\
     \ }\n std::size_t size() { return root ? root->size : 0; }\n void clear() { root=\
-    \ nullptr; }\n template <class L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t>\
+    \ nullptr; }\n template <class L= M, std::enable_if_t<semigroup<L>::value, std::nullptr_t>\
     \ = nullptr> const T &operator[](std::size_t k) { return get(k); }\n template\
-    \ <class L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr> T\
-    \ &operator[](std::size_t k) { return at(k); }\n const T &get(std::size_t k) {\
-    \ return splay(root, k), root->val; }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value,\
+    \ <class L= M, std::enable_if_t<!semigroup<L>::value, std::nullptr_t> = nullptr>\
+    \ T &operator[](std::size_t k) { return at(k); }\n const T &get(std::size_t k)\
+    \ { return splay(root, k), root->val; }\n T &at(std::size_t k) {\n  static_assert(!semigroup<M>::value,\
     \ \"\\\"at\\\" is not available\");\n  return splay(root, k), root->val;\n }\n\
     \ void set(std::size_t k, T val) { splay(root, k), root->val= val, pushup(root);\
     \ }\n void set_balance() {\n  if (root) splay(root, xor128() % size()), splay(root,\
@@ -278,8 +278,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
-  timestamp: '2023-01-23 20:52:39+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-23 21:38:23+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/ITP2_4_A.SplayTree.test.cpp
   - test/aoj/ITP2_4_C.SplayTree.test.cpp
