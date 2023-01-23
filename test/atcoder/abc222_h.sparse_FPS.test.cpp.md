@@ -13,26 +13,26 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc222/tasks/abc222_h
     links:
     - https://atcoder.jp/contests/abc222/tasks/abc222_h
   bundledCode: "#line 1 \"test/atcoder/abc222_h.sparse_FPS.test.cpp\"\n#define PROBLEM\
-    \ \"https://atcoder.jp/contests/abc222/tasks/abc222_h\"\n#include <bits/stdc++.h>\n\
-    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ \"https://atcoder.jp/contests/abc222/tasks/abc222_h\"\n#include <iostream>\n\
+    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
+    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -113,39 +113,40 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
-    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
-    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
-    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
-    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
-    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
-    \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\nnamespace\
-    \ math_internal {\ntemplate <class Int, class MP> constexpr i64 inner_sqrt(Int\
-    \ a, Int p) {\n const MP md(p);\n Int e= (p - 1) >> 1, one= md.set(1);\n if (a=\
-    \ md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n Int b= 0, d= md.diff(0,\
-    \ a), ret= one, r2= 0, b2= one;\n while (md.norm(pow(d, e, md)) == one) b= md.plus(b,\
-    \ one), d= md.diff(md.mul(b, b), a);\n auto mult= [&md, d](Int &u1, Int &u2, Int\
-    \ v1, Int v2) {\n  Int tmp= md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2), d));\n\
-    \  u2= md.plus(md.mul(u1, v2), md.mul(u2, v1)), u1= tmp;\n };\n for (++e;; mult(b,\
-    \ b2, b, b2)) {\n  if (e & 1) mult(ret, r2, b, b2);\n  if (!(e>>= 1)) return ret=\
-    \ md.get(ret), ret * 2 < p ? ret : p - ret;\n }\n}\nconstexpr i64 mod_sqrt(i64\
-    \ a, i64 p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if\
-    \ (a <= 1 || p == 2) return a;\n if (p < (1 << 30)) return inner_sqrt<u32, MP_Mo<u32,\
-    \ u64, 32, 31>>(a, p);\n if (p < (1ll << 62)) return inner_sqrt<u64, MP_Mo<u64,\
-    \ u128, 64, 63>>(a, p);\n return inner_sqrt<u64, MP_D2B1>(a, p);\n}\n}\nusing\
-    \ math_internal::mod_sqrt;\n#line 5 \"src/Math/sparse_fps.hpp\"\ntemplate <class\
-    \ K> std::vector<K> sparse_inv(const std::vector<K> &f, int n) {\n assert(f[0]\
-    \ != K(0));\n std::vector<std::pair<int, K>> dat;\n for (int i= 1, ed= std::min<int>(n,\
-    \ f.size()); i < ed; ++i)\n  if (f[i] != K(0)) dat.emplace_back(i, f[i]);\n std::vector<K>\
-    \ ret(n);\n const K iv= ret[0]= K(1) / f[0];\n for (int i= 1; i < n; ret[i++]*=\
-    \ iv)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   ret[i]-= ret[i -\
-    \ j] * v;\n  }\n return ret;\n}\ntemplate <class K> std::vector<K> sparse_div(std::vector<K>\
-    \ f, const std::vector<K> &g, int n) {\n assert(g[0] != K(0));\n std::vector<std::pair<int,\
+    \ return dat[n];\n}\n#line 2 \"src/Math/sparse_fps.hpp\"\n#include <vector>\n\
+    #line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
+    \ Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP\
+    \ md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1=\
+    \ md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n\
+    \   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i= s;\
+    \ p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
+    }\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1) return (n |\
+    \ 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32, u64, 32, 31>,\
+    \ 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64, MP_Mo<u64, u128,\
+    \ 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 3 \"src/Math/mod_sqrt.hpp\"\nnamespace math_internal\
+    \ {\ntemplate <class Int, class MP> constexpr i64 inner_sqrt(Int a, Int p) {\n\
+    \ const MP md(p);\n Int e= (p - 1) >> 1, one= md.set(1);\n if (a= md.set(a); md.norm(pow(a,\
+    \ e, md)) != one) return -1;\n Int b= 0, d= md.diff(0, a), ret= one, r2= 0, b2=\
+    \ one;\n while (md.norm(pow(d, e, md)) == one) b= md.plus(b, one), d= md.diff(md.mul(b,\
+    \ b), a);\n auto mult= [&md, d](Int &u1, Int &u2, Int v1, Int v2) {\n  Int tmp=\
+    \ md.plus(md.mul(u1, v1), md.mul(md.mul(u2, v2), d));\n  u2= md.plus(md.mul(u1,\
+    \ v2), md.mul(u2, v1)), u1= tmp;\n };\n for (++e;; mult(b, b2, b, b2)) {\n  if\
+    \ (e & 1) mult(ret, r2, b, b2);\n  if (!(e>>= 1)) return ret= md.get(ret), ret\
+    \ * 2 < p ? ret : p - ret;\n }\n}\nconstexpr i64 mod_sqrt(i64 a, i64 p) {\n assert(p\
+    \ > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if (a <= 1 || p == 2) return\
+    \ a;\n if (p < (1 << 30)) return inner_sqrt<u32, MP_Mo<u32, u64, 32, 31>>(a, p);\n\
+    \ if (p < (1ll << 62)) return inner_sqrt<u64, MP_Mo<u64, u128, 64, 63>>(a, p);\n\
+    \ return inner_sqrt<u64, MP_D2B1>(a, p);\n}\n}\nusing math_internal::mod_sqrt;\n\
+    #line 5 \"src/Math/sparse_fps.hpp\"\ntemplate <class K> std::vector<K> sparse_inv(const\
+    \ std::vector<K> &f, int n) {\n assert(f[0] != K(0));\n std::vector<std::pair<int,\
+    \ K>> dat;\n for (int i= 1, ed= std::min<int>(n, f.size()); i < ed; ++i)\n  if\
+    \ (f[i] != K(0)) dat.emplace_back(i, f[i]);\n std::vector<K> ret(n);\n const K\
+    \ iv= ret[0]= K(1) / f[0];\n for (int i= 1; i < n; ret[i++]*= iv)\n  for (auto\
+    \ &&[j, v]: dat) {\n   if (i < j) break;\n   ret[i]-= ret[i - j] * v;\n  }\n return\
+    \ ret;\n}\ntemplate <class K> std::vector<K> sparse_div(std::vector<K> f, const\
+    \ std::vector<K> &g, int n) {\n assert(g[0] != K(0));\n std::vector<std::pair<int,\
     \ K>> dat;\n for (int i= 1, ed= std::min<int>(n, g.size()); i < ed; ++i)\n  if\
     \ (g[i] != K(0)) dat.emplace_back(i, g[i]);\n f.resize(n);\n const K iv= K(1)\
     \ / g[0];\n for (int i= 0; i < n; f[i++]*= iv)\n  for (auto &&[j, v]: dat) {\n\
@@ -217,7 +218,7 @@ data:
     \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto F= sparse_pow<Mint>({1,\
     \ 3, 1}, 2 * N, N);\n cout << F[N - 1] / N << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc222/tasks/abc222_h\"\n#include\
-    \ <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
+    \ <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto F= sparse_pow<Mint>({1,\
     \ 3, 1}, 2 * N, N);\n cout << F[N - 1] / N << '\\n';\n return 0;\n}"
@@ -231,8 +232,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc222_h.sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:52:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-01-23 17:48:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc222_h.sparse_FPS.test.cpp
 layout: document

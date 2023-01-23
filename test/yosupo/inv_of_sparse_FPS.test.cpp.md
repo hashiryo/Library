@@ -13,10 +13,10 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
@@ -31,12 +31,12 @@ data:
     - https://judge.yosupo.jp/problem/inv_of_formal_power_series_sparse
   bundledCode: "#line 1 \"test/yosupo/inv_of_sparse_FPS.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/inv_of_formal_power_series_sparse\"\n#include\
-    \ <bits/stdc++.h>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
-    #line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int mod_inv(Int\
-    \ a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n\
-    \ for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b,\
-    \ b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n\
-    }\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
+    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
+    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
+    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
+    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
+    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -114,7 +114,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 4 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -125,7 +125,7 @@ data:
     \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\nnamespace\
+    }\n}\nusing math_internal::is_prime;\n#line 3 \"src/Math/mod_sqrt.hpp\"\nnamespace\
     \ math_internal {\ntemplate <class Int, class MP> constexpr i64 inner_sqrt(Int\
     \ a, Int p) {\n const MP md(p);\n Int e= (p - 1) >> 1, one= md.set(1);\n if (a=\
     \ md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n Int b= 0, d= md.diff(0,\
@@ -213,19 +213,19 @@ data:
     \ b(2 * g.size() - 1);\n for (auto &&[i, x]: dat_f)\n  for (auto &&[j, y]: dat_g)\n\
     \   if (i || j) a[i + j - 1]+= x * y * (i - j) * k;\n for (auto &&[i, x]: dat_f)\n\
     \  for (auto &&[j, y]: dat_g) b[i + j]+= x * y;  // a = k(f'g-fg'), b = fg\n return\
-    \ sparse_log_differentiation<mod_t, LM>(a, b, n);\n}\n#line 5 \"test/yosupo/inv_of_sparse_FPS.test.cpp\"\
+    \ sparse_log_differentiation<mod_t, LM>(a, b, n);\n}\n#line 6 \"test/yosupo/inv_of_sparse_FPS.test.cpp\"\
     \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ using Mint= ModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
     \ a(N);\n while (K--) {\n  int i;\n  cin >> i;\n  cin >> a[i];\n }\n auto ans=\
     \ sparse_inv(a, N);\n for (int i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i\
     \ == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series_sparse\"\
-    \n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
-    \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n long long N, K;\n cin >> N >> K;\n vector<Mint>\
-    \ a(N);\n while (K--) {\n  int i;\n  cin >> i;\n  cin >> a[i];\n }\n auto ans=\
-    \ sparse_inv(a, N);\n for (int i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i\
-    \ == N - 1];\n return 0;\n}"
+    \n#include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/Math/sparse_fps.hpp\"\nusing namespace std;\nint main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n long long N,\
+    \ K;\n cin >> N >> K;\n vector<Mint> a(N);\n while (K--) {\n  int i;\n  cin >>\
+    \ i;\n  cin >> a[i];\n }\n auto ans= sparse_inv(a, N);\n for (int i= 0; i < N;\
+    \ i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -236,7 +236,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inv_of_sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:52:41+09:00'
+  timestamp: '2023-01-23 17:48:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/inv_of_sparse_FPS.test.cpp

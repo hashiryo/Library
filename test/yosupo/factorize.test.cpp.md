@@ -21,7 +21,8 @@ data:
     links:
     - https://judge.yosupo.jp/problem/factorize
   bundledCode: "#line 1 \"test/yosupo/factorize.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\
-    \n#include <bits/stdc++.h>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \n#include <iostream>\n#include <vector>\n#line 2 \"src/Math/Factors.hpp\"\n#include\
+    \ <numeric>\n#include <cassert>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -62,7 +63,7 @@ data:
     \ r;\n }\n const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE\
     \ u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x,\
     \ x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef\
-    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/is_prime.hpp\"\
+    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
@@ -73,7 +74,7 @@ data:
     \ MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/Factors.hpp\"\nnamespace\
+    }\n}\nusing math_internal::is_prime;\n#line 5 \"src/Math/Factors.hpp\"\nnamespace\
     \ math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg, T *ed)\
     \ {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n\
     \   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n\
@@ -110,19 +111,19 @@ data:
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
     \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
     \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
-    \ }\n#line 4 \"test/yosupo/factorize.test.cpp\"\nusing namespace std;\n\nsigned\
-    \ main() {\n  cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n\
-    \  while (Q--) {\n    long long a;\n    cin >> a;\n    vector<long long> ans;\n\
-    \    for (auto& [p, e] : Factors(a))\n      for (int i = 0; i < e; i++) ans.push_back(p);\n\
-    \    cout << ans.size();\n    for (auto x : ans) cout << \" \" << x;\n    cout\
-    \ << '\\n';\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include <bits/stdc++.h>\n\
-    #include \"src/Math/Factors.hpp\"\nusing namespace std;\n\nsigned main() {\n \
-    \ cin.tie(0);\n  ios::sync_with_stdio(0);\n  int Q;\n  cin >> Q;\n  while (Q--)\
-    \ {\n    long long a;\n    cin >> a;\n    vector<long long> ans;\n    for (auto&\
-    \ [p, e] : Factors(a))\n      for (int i = 0; i < e; i++) ans.push_back(p);\n\
-    \    cout << ans.size();\n    for (auto x : ans) cout << \" \" << x;\n    cout\
-    \ << '\\n';\n  }\n  return 0;\n}"
+    \ }\n#line 5 \"test/yosupo/factorize.test.cpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n while\
+    \ (Q--) {\n  long long a;\n  cin >> a;\n  vector<long long> ans;\n  for (auto&\
+    \ [p, e]: Factors(a))\n   for (int i= 0; i < e; i++) ans.push_back(p);\n  cout\
+    \ << ans.size();\n  for (auto x: ans) cout << \" \" << x;\n  cout << '\\n';\n\
+    \ }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include <iostream>\n\
+    #include <vector>\n#include \"src/Math/Factors.hpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n while\
+    \ (Q--) {\n  long long a;\n  cin >> a;\n  vector<long long> ans;\n  for (auto&\
+    \ [p, e]: Factors(a))\n   for (int i= 0; i < e; i++) ans.push_back(p);\n  cout\
+    \ << ans.size();\n  for (auto x: ans) cout << \" \" << x;\n  cout << '\\n';\n\
+    \ }\n return 0;\n}"
   dependsOn:
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
@@ -130,7 +131,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:50:15+09:00'
+  timestamp: '2023-01-23 17:48:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/factorize.test.cpp

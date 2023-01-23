@@ -108,7 +108,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/hafnian.hpp\"\ntemplate <typename T, unsigned\
+    \ return dat[n];\n}\n#line 5 \"src/Math/hafnian.hpp\"\ntemplate <typename T, unsigned\
     \ short MAX_N= 38> T hafnian(const std::vector<std::vector<T>> &mat) {\n using\
     \ Poly= std::array<T, MAX_N / 2 + 1>;\n const int n= mat.size(), n2= n / 2;\n\
     \ assert(!(n & 1));\n for (int i= n; i--;)\n  for (int j= i; j--;) assert(mat[i][j]\
@@ -140,7 +140,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/hafnian_of_matrix.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 16:52:41+09:00'
+  timestamp: '2023-01-23 17:48:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/hafnian_of_matrix.test.cpp

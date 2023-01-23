@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/DirichletConvSumTable.hpp
     title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_c
@@ -17,9 +17,9 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc179_c.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\
     \n// O(\u221AN)\n#include <iostream>\n#line 2 \"src/Math/DirichletConvSumTable.hpp\"\
     \n#include <vector>\n#include <algorithm>\n#include <cmath>\n#include <cassert>\n\
-    template <class T> struct DirichletConvSumTable {\n std::uint64_t N;  // <= K\
-    \ * L\n std::vector<T> x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1 <= i <= L)\
-    \ */;\n static DirichletConvSumTable get_epsilon(std::uint64_t N, std::size_t\
+    #include <numeric>\ntemplate <class T> struct DirichletConvSumTable {\n std::uint64_t\
+    \ N;  // <= K * L\n std::vector<T> x /* (1 <= i <= K) */, X /* \u2211^{N/i} (1\
+    \ <= i <= L) */;\n static DirichletConvSumTable get_epsilon(std::uint64_t N, std::size_t\
     \ K) {\n  std::size_t L= (N - 1 + K) / K;\n  std::vector<T> a(K + 1, 0);\n  return\
     \ a[1]= 1, DirichletConvSumTable(N, a, std::vector<T>(L + 1, 1));\n }\n DirichletConvSumTable(std::uint64_t\
     \ n_, const std::vector<T> &x_, const std::vector<T> &X_): N(n_), x(x_), X(X_)\
@@ -142,8 +142,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc179_c.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 17:30:16+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-23 17:48:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.test.cpp
 layout: document
