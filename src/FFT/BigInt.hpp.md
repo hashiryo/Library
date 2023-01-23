@@ -18,73 +18,73 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_B.test.cpp
     title: test/aoj/NTL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/BigInt.hpp\"\n#include <sstream>\n#include <iomanip>\n\
-    #include <vector>\n#include <string>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n\
-    #include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
-    \ {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64=\
-    \ uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n\
-    #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
-    \ PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-=\
-    \ M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r)\
-    \ const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U)\
-    \ \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
-    \ n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class\
-    \ du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0),\
-    \ r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE\
-    \ IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod\
-    \ << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n,\
-    \ r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL\
-    \ u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t\
-    \ inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) :\
-    \ x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
-    \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
-    \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
-    \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
-    \ {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32\
-    \ m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL\
-    \ u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32,\
-    \ 31, mod) SGN(u32) private: const u8 s;\n const u64 x;\n CE IL u64 quo(u64 n)\
-    \ const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const { return n\
-    \ - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n const u64 mod;\n\
-    \ CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) /\
-    \ m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64,\
-    \ mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n) { return n;\
-    \ }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM;\
-    \ }\nprivate:\n const u64 x;\n CE IL u128 quo(const u128 &n) const { return (n\
-    \ * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) * mod;\
-    \ }\n};\nstruct MP_D2B1 {\n const u64 mod;\n CE MP_D2B1(): mod(0), s(0), d(0),\
-    \ v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)), d(m << s), v(u128(-1)\
-    \ / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l) * r) << s)\
-    \ >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const\
-    \ u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64)\
-    \ * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n\
-    \ const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t\
-    \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
-    \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
-    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\
+    #include <vector>\n#include <string>\n#include <cmath>\n#include <algorithm>\n\
+    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    \nnamespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
+    \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n \
+    \ if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n\
+    \ CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return\
+    \ l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static\
+    \ CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\n\
+    template <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n\
+    \ CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
+    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
+    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
+    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static\
+    \ CE u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x\
+    \ * n)) : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) +\
+    \ mod - ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n\
+    \ CE MP_Na(): mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32\
+    \ r) const { return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n\
+    };\nstruct MP_Br {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0),\
+    \ x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) +\
+    \ m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r);\
+    \ }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: const u8 s;\n const\
+    \ u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32\
+    \ rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20\
+    \ < mod <= 2^41\n const u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64\
+    \ m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const {\
+    \ return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n\
+    \ static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n) const { NORM;\
+    \ }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n const u64 x;\n CE IL u128\
+    \ quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const u128\
+    \ &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n const u64 mod;\n\
+    \ CE MP_D2B1(): mod(0), s(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)),\
+    \ d(m << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
+    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
+    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
+    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
+    \ r;\n }\n const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE\
+    \ u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x,\
+    \ x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef\
+    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
@@ -250,7 +250,7 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 7 \"src/FFT/BigInt.hpp\"\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 9 \"src/FFT/BigInt.hpp\"\
     \nclass BigInt {\n static constexpr unsigned BASE= 10000000, D= 7;\n using mod_t=\
     \ ModInt<0x3ffffffffa000001>;\n using Vec= std::vector<unsigned>;\n using ntt=\
     \ NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt shift(int sz) const { return {neg,\
@@ -344,32 +344,33 @@ data:
     \ s, v= BigInt(s), is;\n }\n friend std::ostream &operator<<(std::ostream &os,\
     \ const BigInt &v) { return os << v.to_str(), os; }\n};\n"
   code: "#pragma once\n#include <sstream>\n#include <iomanip>\n#include <vector>\n\
-    #include <string>\n#include \"src/FFT/NTT.hpp\"\nclass BigInt {\n static constexpr\
-    \ unsigned BASE= 10000000, D= 7;\n using mod_t= ModInt<0x3ffffffffa000001>;\n\
-    \ using Vec= std::vector<unsigned>;\n using ntt= NTT<mod_t>;\n bool neg;\n Vec\
-    \ dat;\n BigInt shift(int sz) const { return {neg, Vec(dat.begin() + sz, dat.end())};\
-    \ }\n BigInt(bool n, const Vec &d): neg(n), dat(d) {}\npublic:\n BigInt(): neg(false),\
-    \ dat() {}\n BigInt(long long v): neg(v < 0) {\n  for (v= std::abs(v); v; v/=\
-    \ BASE) dat.push_back(v % BASE);\n }\n BigInt(const std::string &s): neg(false)\
-    \ {\n  int p= 0, x= 0;\n  for (; p < (int)s.size() && (s[p] == '-' || s[p] ==\
-    \ '+'); p++)\n   if (s[p] == '-') neg= !neg;\n  for (int i= s.size(), j; i > p;\
-    \ i-= D, dat.push_back(x), x= 0)\n   for (j= std::max(p, i - int(D)); j < i;)\
-    \ x= x * 10 + s[j++] - '0';\n  shrink();\n }\n inline void shrink() {\n  while\
-    \ (!dat.empty() && !dat.back()) dat.pop_back();\n  if (dat.empty()) neg= false;\n\
-    \ }\n std::string to_str() const {\n  if (is_zero()) return \"0\";\n  std::stringstream\
-    \ ss;\n  if (neg) ss << '-';\n  ss << (dat.empty() ? 0 : dat.back());\n  for (long\
-    \ long i= dat.size() - 1; i-- > 0;) ss << std::setw(D) << std::setfill('0') <<\
-    \ dat[i];\n  std::string ret;\n  return ss >> ret, ret;\n }\n bool is_zero() const\
-    \ { return dat.empty() || (dat.size() == 1 && !dat[0]); }\n bool operator<(const\
-    \ BigInt &r) const {\n  if (neg != r.neg) return neg;\n  if (dat.size() != r.dat.size())\
-    \ return (dat.size() < r.dat.size()) ^ neg;\n  for (int i= dat.size(); i--;)\n\
-    \   if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n  return false;\n\
-    \ }\n bool operator>(const BigInt &r) const { return r < *this; }\n bool operator<=(const\
-    \ BigInt &r) const { return !(r < *this); }\n bool operator>=(const BigInt &r)\
-    \ const { return !(*this < r); }\n bool operator==(const BigInt &r) const { return\
-    \ (neg == r.neg && dat == r.dat) || (is_zero() && r.is_zero()); }\n bool operator!=(const\
-    \ BigInt &r) const { return !(*this == r); }\n BigInt abs() const { return BigInt(false,\
-    \ dat); }\n BigInt operator-() const { return BigInt(!neg, dat); }\n BigInt operator+(const\
+    #include <string>\n#include <cmath>\n#include <algorithm>\n#include \"src/FFT/NTT.hpp\"\
+    \nclass BigInt {\n static constexpr unsigned BASE= 10000000, D= 7;\n using mod_t=\
+    \ ModInt<0x3ffffffffa000001>;\n using Vec= std::vector<unsigned>;\n using ntt=\
+    \ NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt shift(int sz) const { return {neg,\
+    \ Vec(dat.begin() + sz, dat.end())}; }\n BigInt(bool n, const Vec &d): neg(n),\
+    \ dat(d) {}\npublic:\n BigInt(): neg(false), dat() {}\n BigInt(long long v): neg(v\
+    \ < 0) {\n  for (v= std::abs(v); v; v/= BASE) dat.push_back(v % BASE);\n }\n BigInt(const\
+    \ std::string &s): neg(false) {\n  int p= 0, x= 0;\n  for (; p < (int)s.size()\
+    \ && (s[p] == '-' || s[p] == '+'); p++)\n   if (s[p] == '-') neg= !neg;\n  for\
+    \ (int i= s.size(), j; i > p; i-= D, dat.push_back(x), x= 0)\n   for (j= std::max(p,\
+    \ i - int(D)); j < i;) x= x * 10 + s[j++] - '0';\n  shrink();\n }\n inline void\
+    \ shrink() {\n  while (!dat.empty() && !dat.back()) dat.pop_back();\n  if (dat.empty())\
+    \ neg= false;\n }\n std::string to_str() const {\n  if (is_zero()) return \"0\"\
+    ;\n  std::stringstream ss;\n  if (neg) ss << '-';\n  ss << (dat.empty() ? 0 :\
+    \ dat.back());\n  for (long long i= dat.size() - 1; i-- > 0;) ss << std::setw(D)\
+    \ << std::setfill('0') << dat[i];\n  std::string ret;\n  return ss >> ret, ret;\n\
+    \ }\n bool is_zero() const { return dat.empty() || (dat.size() == 1 && !dat[0]);\
+    \ }\n bool operator<(const BigInt &r) const {\n  if (neg != r.neg) return neg;\n\
+    \  if (dat.size() != r.dat.size()) return (dat.size() < r.dat.size()) ^ neg;\n\
+    \  for (int i= dat.size(); i--;)\n   if (dat[i] != r.dat[i]) return (dat[i] <\
+    \ r.dat[i]) ^ neg;\n  return false;\n }\n bool operator>(const BigInt &r) const\
+    \ { return r < *this; }\n bool operator<=(const BigInt &r) const { return !(r\
+    \ < *this); }\n bool operator>=(const BigInt &r) const { return !(*this < r);\
+    \ }\n bool operator==(const BigInt &r) const { return (neg == r.neg && dat ==\
+    \ r.dat) || (is_zero() && r.is_zero()); }\n bool operator!=(const BigInt &r) const\
+    \ { return !(*this == r); }\n BigInt abs() const { return BigInt(false, dat);\
+    \ }\n BigInt operator-() const { return BigInt(!neg, dat); }\n BigInt operator+(const\
     \ BigInt &r) const {\n  if (neg != r.neg) return *this - (-r);\n  auto [ret, tmp]=\
     \ dat.size() > r.dat.size() ? std::make_pair(*this, &r) : std::make_pair(r, this);\n\
     \  int car= 0, i, n= ret.dat.size(), m= tmp->dat.size();\n  for (i= 0; i < m;\
@@ -445,8 +446,8 @@ data:
   isVerificationFile: false
   path: src/FFT/BigInt.hpp
   requiredBy: []
-  timestamp: '2023-01-23 18:57:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-23 19:46:15+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp

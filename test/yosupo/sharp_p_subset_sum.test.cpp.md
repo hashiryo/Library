@@ -120,7 +120,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/FFT/fps_exp.hpp\"\n#include <bits/stdc++.h>\n\
+    \ return dat[n];\n}\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
     #line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
     \ Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP\
     \ md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1=\
@@ -341,7 +341,7 @@ data:
     \  const mod_t iv0= mod_t(1) / q[0];\n  copy(p.begin(), p.end(), r), copy(q.begin(),\
     \ q.end(), qq);\n  for (int i= 0; i < n; r[i++]*= iv0)\n   for (int j= min(i +\
     \ 1, l); --j;) r[i]-= r[i - j] * qq[j];\n }\n return vector(r, r + n);\n}\n}\n\
-    using math_internal::div;\n#line 5 \"src/FFT/fps_exp.hpp\"\nnamespace math_internal\
+    using math_internal::div;\n#line 4 \"src/FFT/fps_exp.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class mod_t> vector<mod_t> deriv(const vector<mod_t> &p) {\n vector<mod_t>\
     \ ret(p.size() - 1);\n for (int i= p.size(); --i;) ret[i - 1]= p[i] * i;\n return\
     \ ret;\n}\ntemplate <class mod_t, size_t LM= 1 << 22> vector<mod_t> integ(const\
@@ -414,7 +414,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 19:28:35+09:00'
+  timestamp: '2023-01-23 19:46:15+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.test.cpp

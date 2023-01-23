@@ -6,9 +6,9 @@ data:
     title: Splay-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_2_D
@@ -189,7 +189,7 @@ data:
   path: test/aoj/ITP2_2_D.SplayTree.test.cpp
   requiredBy: []
   timestamp: '2023-01-23 18:57:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_2_D.SplayTree.test.cpp
 layout: document

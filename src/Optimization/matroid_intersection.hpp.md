@@ -9,15 +9,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.matroid_intersection.test.cpp
     title: test/aoj/GRL_2_B.matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
     title: test/aoj/GRL_7_A.matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.matroid_intersection.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/matroid_intersection.hpp\"\n#include <vector>\n\
@@ -163,7 +163,7 @@ data:
   path: src/Optimization/matroid_intersection.hpp
   requiredBy: []
   timestamp: '2023-01-22 00:08:35+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1605.matroid_intersection.test.cpp
   - test/aoj/GRL_7_A.matroid_intersection.test.cpp

@@ -66,53 +66,53 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/FFT/fps_exp.hpp\"\n#include <bits/stdc++.h>\n#line 2\
-    \ \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
-    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
-    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
-    \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
-    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
-    using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
-    \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
-    \ return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
-    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
-    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
-    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
-    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
-    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo():\
-    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
-    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
-    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
-    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
-    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static\
-    \ CE u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x\
-    \ * n)) : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) +\
-    \ mod - ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n\
-    \ CE MP_Na(): mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32\
-    \ r) const { return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n\
-    };\nstruct MP_Br {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0),\
-    \ x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) +\
-    \ m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r);\
-    \ }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: const u8 s;\n const\
-    \ u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32\
-    \ rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20\
-    \ < mod <= 2^41\n const u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64\
-    \ m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const {\
-    \ return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n\
-    \ static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n) const { NORM;\
-    \ }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n const u64 x;\n CE IL u128\
-    \ quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const u128\
-    \ &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n const u64 mod;\n\
-    \ CE MP_D2B1(): mod(0), s(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)),\
-    \ d(m << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
-    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
-    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
-    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
-    \ r;\n }\n const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE\
-    \ u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x,\
-    \ x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef\
-    \ NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\
+  bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
+    \ <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod)\
+    \ {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for (Int\
+    \ q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b= c -\
+    \ b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line\
+    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
+    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
+    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
+    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
+    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
+    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
+    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
+    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
+    \ B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
+    \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
+    \ mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n\
+    \ DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n\
+    \ CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t\
+    \ n) const { NORM; }\nprivate:\n const u_t iv, r2;\n static CE u_t inv(u_t n,\
+    \ int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE\
+    \ IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
+    \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n const u32 mod;\n CE MP_Na(): mod(0){};\n\
+    \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
+    \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
+    \ {  // mod < 2^31\n const u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32\
+    \ m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL\
+    \ u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32,\
+    \ 31, mod) SGN(u32) private: const u8 s;\n const u64 x;\n CE IL u64 quo(u64 n)\
+    \ const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const { return n\
+    \ - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n const u64 mod;\n\
+    \ CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) /\
+    \ m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64,\
+    \ mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n) { return n;\
+    \ }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM;\
+    \ }\nprivate:\n const u64 x;\n CE IL u128 quo(const u128 &n) const { return (n\
+    \ * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) * mod;\
+    \ }\n};\nstruct MP_D2B1 {\n const u64 mod;\n CE MP_D2B1(): mod(0), s(0), d(0),\
+    \ v(0) {}\n CE MP_D2B1(u64 m): mod(m), s(__builtin_clzll(m)), d(m << s), v(u128(-1)\
+    \ / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l) * r) << s)\
+    \ >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const\
+    \ u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64)\
+    \ * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n\
+    \ const u8 s;\n const u64 d, v;\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t\
+    \ x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if\
+    \ (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef\
+    \ PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\
     \nnamespace math_internal {\n#define CE constexpr\nstruct m_b {};\nstruct s_b:\
     \ m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\n\
     template <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\n\
@@ -149,18 +149,20 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
-    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
-    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
-    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
-    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
-    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
-    \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
+    \ return dat[n];\n}\n#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
+    #line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
+    \ Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP\
+    \ md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1=\
+    \ md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n\
+    \   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i= s;\
+    \ p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
+    }\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1) return (n |\
+    \ 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32, u64, 32, 31>,\
+    \ 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64, MP_Mo<u64, u128,\
+    \ 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
+    \ MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
+    \ math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
     \ n) __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c,\
     \ ...) \\\n mod_t r, u, *x0, *x1; \\\n for (int a= n, b= 1, s, i; a>>= 1; b<<=\
@@ -369,7 +371,7 @@ data:
     \  const mod_t iv0= mod_t(1) / q[0];\n  copy(p.begin(), p.end(), r), copy(q.begin(),\
     \ q.end(), qq);\n  for (int i= 0; i < n; r[i++]*= iv0)\n   for (int j= min(i +\
     \ 1, l); --j;) r[i]-= r[i - j] * qq[j];\n }\n return vector(r, r + n);\n}\n}\n\
-    using math_internal::div;\n#line 5 \"src/FFT/fps_exp.hpp\"\nnamespace math_internal\
+    using math_internal::div;\n#line 4 \"src/FFT/fps_exp.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class mod_t> vector<mod_t> deriv(const vector<mod_t> &p) {\n vector<mod_t>\
     \ ret(p.size() - 1);\n for (int i= p.size(); --i;) ret[i - 1]= p[i] * i;\n return\
     \ ret;\n}\ntemplate <class mod_t, size_t LM= 1 << 22> vector<mod_t> integ(const\
@@ -412,50 +414,49 @@ data:
     \ - 1, mod_t());\n return vector(g, g + n);\n}\n}  // namespace math_internal\n\
     using math_internal::deriv, math_internal::integ, math_internal::log, math_internal::exp,\
     \ math_internal::pow;\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/ModInt.hpp\"\n\
-    #include \"src/FFT/fps_div.hpp\"\nnamespace math_internal {\ntemplate <class mod_t>\
-    \ vector<mod_t> deriv(const vector<mod_t> &p) {\n vector<mod_t> ret(p.size() -\
-    \ 1);\n for (int i= p.size(); --i;) ret[i - 1]= p[i] * i;\n return ret;\n}\ntemplate\
-    \ <class mod_t, size_t LM= 1 << 22> vector<mod_t> integ(const vector<mod_t> &p)\
-    \ {\n vector<mod_t> ret(p.size() + 1, mod_t());\n for (int i= p.size(); i; --i)\
-    \ ret[i]= p[i - 1] * get_inv<mod_t, LM>(i);\n return ret;\n}\ntemplate <class\
-    \ mod_t, size_t LM= 1 << 22> vector<mod_t> log(const vector<mod_t> &p) {\n assert(p[0]\
-    \ == mod_t(1));\n return integ<mod_t, LM>(div<mod_t, LM>(deriv(p), p));\n}\ntemplate\
-    \ <class mod_t, size_t LM= 1 << 22> vector<mod_t> exp(const vector<mod_t> &p)\
-    \ {\n static constexpr int LM2= LM * 2 / 15;\n static constexpr int TH= 64 <<\
-    \ ((!is_nttfriend<mod_t, LM>()) << 1);\n mod_t *dp= GlobalArray<mod_t, LM, 1>::bf,\
-    \ *rr= GlobalArray<mod_t, LM, 2>::bf, *g= GlobalArray<mod_t, LM2, 0>::bf;\n using\
-    \ GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2,\
-    \ 2>;\n auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
-    \ LM2, 16, 2>::bf;\n const int n= p.size(), m= pw2(n);\n assert(n > 0), assert(p[0]\
-    \ == mod_t());\n copy(p.begin(), p.end(), dp);\n for (int i= n; --i;) dp[i]*=\
-    \ i;\n fill_n(rr, n, mod_t()), rr[0]= 1;\n for (int r= m, d= 0, R, k, i; r > TH;\
-    \ d+= k) {\n  k= (r/= (R= pw2(__builtin_ctz(r) + 1) >> 1)) << 1;\n  for (i= min(R\
-    \ - 1, (n - 1) / r); i--;) gt1[i].set(dp + i * r - d, d, d + k), gt1[i].dft(d,\
-    \ d + k);\n }\n auto rec= [&](auto f, int l, int r, int d) -> void {\n  if (int\
-    \ i= l | (!l), ed= min(r, n), j; r - l > TH) {\n   int R= pw2(__builtin_ctz(r\
-    \ - l) + 1) >> 1, len= (r - l) / R, k= len << 1;\n   for (i= 0, ed= min(R, (n\
-    \ - l + len - 1) / len);; i++) {\n    if (mod_t *ret= rr + l + i * len, *bf= g\
-    \ + d + len; i) {\n     for (GNA1::bf.zeros(d, d + k), j= i; j--;) GNA2::bf.mul(gt2[j],\
-    \ gt1[i - j - 1], d, d + k), GNA1::bf.add(GNA2::bf, d, d + k);\n     GNA1::bf.idft(d,\
-    \ d + k), GNA1::bf.get(g, d + len, d + k);\n     for (int t= len; t--;) ret[t]+=\
-    \ bf[t];\n    }\n    if (f(f, l + i * len, l + (i + 1) * len, d + k); i == ed\
-    \ - 1) break;\n    gt2[i].set(rr + l + i * len - d, d, d + len);\n    gt2[i].zeros(d\
-    \ + len, d + k), gt2[i].dft(d, d + k);\n   }\n  } else\n   for (; i < ed; rr[i]*=\
-    \ get_inv<mod_t, LM>(i), ++i)\n    for (j= l; j < i; j++) rr[i]+= rr[j] * dp[i\
-    \ - j];\n };\n return rec(rec, 0, m, 0), vector(rr, rr + n);\n}\ntemplate <class\
-    \ mod_t, size_t LM= 1 << 22> vector<mod_t> pow(const vector<mod_t> &p, uint64_t\
-    \ k) {\n mod_t *g= GlobalArray<mod_t, LM, 4>::bf;\n const mod_t MK(k);\n int n=\
-    \ p.size(), cnt= 0;\n if (g[0]= 1; k) {\n  while (cnt < n && p[cnt] == mod_t())\
-    \ cnt++;\n  const __int128_t ofs= (__int128_t)k * cnt, sz= n - ofs;\n  if (sz\
-    \ <= 0) return vector<mod_t>(n, mod_t());\n  const mod_t p0= p[cnt], iv= mod_t(1)\
-    \ / p0, pk= p0.pow(k);\n  for (int i= sz; --i;) g[i]= p[i + cnt] * iv;\n  auto\
-    \ q= log<mod_t, LM>(vector<mod_t>(g, g + sz));\n  for (int i= sz; --i;) q[i]*=\
-    \ MK;\n  copy_n(exp<mod_t, LM>(q).begin(), (int)sz, g + ofs);\n  fill_n(g, (int)ofs,\
-    \ mod_t());\n  for (int i= sz; i--;) g[i + ofs]*= pk;\n } else fill_n(g + 1, n\
-    \ - 1, mod_t());\n return vector(g, g + n);\n}\n}  // namespace math_internal\n\
-    using math_internal::deriv, math_internal::integ, math_internal::log, math_internal::exp,\
-    \ math_internal::pow;"
+  code: "#pragma once\n#include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/fps_div.hpp\"\
+    \nnamespace math_internal {\ntemplate <class mod_t> vector<mod_t> deriv(const\
+    \ vector<mod_t> &p) {\n vector<mod_t> ret(p.size() - 1);\n for (int i= p.size();\
+    \ --i;) ret[i - 1]= p[i] * i;\n return ret;\n}\ntemplate <class mod_t, size_t\
+    \ LM= 1 << 22> vector<mod_t> integ(const vector<mod_t> &p) {\n vector<mod_t> ret(p.size()\
+    \ + 1, mod_t());\n for (int i= p.size(); i; --i) ret[i]= p[i - 1] * get_inv<mod_t,\
+    \ LM>(i);\n return ret;\n}\ntemplate <class mod_t, size_t LM= 1 << 22> vector<mod_t>\
+    \ log(const vector<mod_t> &p) {\n assert(p[0] == mod_t(1));\n return integ<mod_t,\
+    \ LM>(div<mod_t, LM>(deriv(p), p));\n}\ntemplate <class mod_t, size_t LM= 1 <<\
+    \ 22> vector<mod_t> exp(const vector<mod_t> &p) {\n static constexpr int LM2=\
+    \ LM * 2 / 15;\n static constexpr int TH= 64 << ((!is_nttfriend<mod_t, LM>())\
+    \ << 1);\n mod_t *dp= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM,\
+    \ 2>::bf, *g= GlobalArray<mod_t, LM2, 0>::bf;\n using GNA1= GlobalNTTArray<mod_t,\
+    \ LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n auto gt1= GlobalNTTArray2D<mod_t,\
+    \ LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM2, 16, 2>::bf;\n const int n=\
+    \ p.size(), m= pw2(n);\n assert(n > 0), assert(p[0] == mod_t());\n copy(p.begin(),\
+    \ p.end(), dp);\n for (int i= n; --i;) dp[i]*= i;\n fill_n(rr, n, mod_t()), rr[0]=\
+    \ 1;\n for (int r= m, d= 0, R, k, i; r > TH; d+= k) {\n  k= (r/= (R= pw2(__builtin_ctz(r)\
+    \ + 1) >> 1)) << 1;\n  for (i= min(R - 1, (n - 1) / r); i--;) gt1[i].set(dp +\
+    \ i * r - d, d, d + k), gt1[i].dft(d, d + k);\n }\n auto rec= [&](auto f, int\
+    \ l, int r, int d) -> void {\n  if (int i= l | (!l), ed= min(r, n), j; r - l >\
+    \ TH) {\n   int R= pw2(__builtin_ctz(r - l) + 1) >> 1, len= (r - l) / R, k= len\
+    \ << 1;\n   for (i= 0, ed= min(R, (n - l + len - 1) / len);; i++) {\n    if (mod_t\
+    \ *ret= rr + l + i * len, *bf= g + d + len; i) {\n     for (GNA1::bf.zeros(d,\
+    \ d + k), j= i; j--;) GNA2::bf.mul(gt2[j], gt1[i - j - 1], d, d + k), GNA1::bf.add(GNA2::bf,\
+    \ d, d + k);\n     GNA1::bf.idft(d, d + k), GNA1::bf.get(g, d + len, d + k);\n\
+    \     for (int t= len; t--;) ret[t]+= bf[t];\n    }\n    if (f(f, l + i * len,\
+    \ l + (i + 1) * len, d + k); i == ed - 1) break;\n    gt2[i].set(rr + l + i *\
+    \ len - d, d, d + len);\n    gt2[i].zeros(d + len, d + k), gt2[i].dft(d, d + k);\n\
+    \   }\n  } else\n   for (; i < ed; rr[i]*= get_inv<mod_t, LM>(i), ++i)\n    for\
+    \ (j= l; j < i; j++) rr[i]+= rr[j] * dp[i - j];\n };\n return rec(rec, 0, m, 0),\
+    \ vector(rr, rr + n);\n}\ntemplate <class mod_t, size_t LM= 1 << 22> vector<mod_t>\
+    \ pow(const vector<mod_t> &p, uint64_t k) {\n mod_t *g= GlobalArray<mod_t, LM,\
+    \ 4>::bf;\n const mod_t MK(k);\n int n= p.size(), cnt= 0;\n if (g[0]= 1; k) {\n\
+    \  while (cnt < n && p[cnt] == mod_t()) cnt++;\n  const __int128_t ofs= (__int128_t)k\
+    \ * cnt, sz= n - ofs;\n  if (sz <= 0) return vector<mod_t>(n, mod_t());\n  const\
+    \ mod_t p0= p[cnt], iv= mod_t(1) / p0, pk= p0.pow(k);\n  for (int i= sz; --i;)\
+    \ g[i]= p[i + cnt] * iv;\n  auto q= log<mod_t, LM>(vector<mod_t>(g, g + sz));\n\
+    \  for (int i= sz; --i;) q[i]*= MK;\n  copy_n(exp<mod_t, LM>(q).begin(), (int)sz,\
+    \ g + ofs);\n  fill_n(g, (int)ofs, mod_t());\n  for (int i= sz; i--;) g[i + ofs]*=\
+    \ pk;\n } else fill_n(g + 1, n - 1, mod_t());\n return vector(g, g + n);\n}\n\
+    }  // namespace math_internal\nusing math_internal::deriv, math_internal::integ,\
+    \ math_internal::log, math_internal::exp, math_internal::pow;"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -468,7 +469,7 @@ data:
   path: src/FFT/fps_exp.hpp
   requiredBy:
   - src/FFT/sequences.hpp
-  timestamp: '2023-01-23 18:57:46+09:00'
+  timestamp: '2023-01-23 19:46:15+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/partition.test.cpp
