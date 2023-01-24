@@ -5,24 +5,42 @@ data:
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
   - icon: ':question:'
-    path: src/DataStructure/UnionFind.hpp
-    title: Union-Find
+    path: src/Graph/BiConnectedComponents.hpp
+    title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/problems/2559
+    PROBLEM: https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde
     links:
-    - https://onlinejudge.u-aizu.ac.jp/problems/2559
-  bundledCode: "#line 1 \"test/aoj/2559.LCT_Dual.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/2559\"\
-    \n#include <iostream>\n#include <vector>\n#include <numeric>\n#include <algorithm>\n\
+    - https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde
+  bundledCode: "#line 1 \"test/hackerrank/bonnie-and-clyde.test.cpp\"\n#define PROBLEM\
+    \ \"https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde\"\n#include\
+    \ <iostream>\n#line 2 \"src/Graph/BiConnectedComponents.hpp\"\n#include <vector>\n\
+    #include <algorithm>\nclass BiConnectedComponents {\n std::vector<std::vector<int>>\
+    \ adj;\npublic:\n BiConnectedComponents(int n): adj(n) {}\n void add_edge(int\
+    \ u, int v) { adj[u].push_back(v), adj[v].push_back(u); }\n std::vector<std::vector<int>>\
+    \ block_cut_tree() {\n  const int n= adj.size();\n  std::vector<int> ord(n), par(n,\
+    \ -2), dat(n, 0), low;\n  std::vector<std::vector<int>> ret(n);\n  auto add= [&](int\
+    \ u, int v) { ret[u].push_back(v), ret[v].push_back(u); };\n  int k= 0;\n  for\
+    \ (int s= 0; s < n; ++s)\n   if (par[s] == -2) {\n    par[s]= -1;\n    for (int\
+    \ p= s, nx; p >= 0;) {\n     if (dat[p] == 0) ord[k++]= p;\n     if (dat[p] ==\
+    \ (int)adj[p].size()) {\n      p= par[p];\n      continue;\n     }\n     if (par[nx=\
+    \ adj[p][dat[p]++]] != -2) continue;\n     par[nx]= p, p= nx;\n    }\n   }\n \
+    \ for (int i= 0; i < n; ++i) dat[ord[i]]= i;\n  low= dat;\n  for (int v= 0; v\
+    \ < n; ++v)\n   for (int u: adj[v]) low[v]= std::min(low[v], dat[u]);\n  for (int\
+    \ i= n; i--;)\n   if (int p= ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp],\
+    \ low[p]);\n  for (int p: ord)\n   if (par[p] >= 0) {\n    if (int pp= par[p];\
+    \ low[p] < dat[pp]) low[p]= low[pp], add(low[p], p);\n    else ret.resize(k +\
+    \ 1), add(k, pp), add(k, p), low[p]= k++;\n   }\n  for (int s= 0; s < n; ++s)\n\
+    \   if (!adj[s].size()) ret.resize(k + 1), add(k++, s);\n  return ret;\n }\n};\n\
     #line 4 \"src/DataStructure/LinkCutTree.hpp\"\n#include <string>\n#include <cstddef>\n\
     #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
     #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
@@ -98,62 +116,44 @@ data:
     \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup<M>::value\
     \ || dual<M>::value) ret+= \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup<M>::value)\
     \ ret+= \"\\\"fold\\\" \";\n  if constexpr (dual<M>::value) ret+= \"\\\"apply\\\
-    \" \";\n  return ret;\n }\n};\n#line 4 \"src/DataStructure/UnionFind.hpp\"\nclass\
-    \ UnionFind {\n std::vector<int> par;\npublic:\n UnionFind(int n): par(n, -1)\
-    \ {}\n bool unite(int u, int v) {\n  if ((u= root(u)) == (v= root(v))) return\
-    \ false;\n  if (par[u] > par[v]) std::swap(u, v);\n  return par[u]+= par[v], par[v]=\
-    \ u, true;\n }\n bool same(int u, int v) { return root(u) == root(v); }\n int\
-    \ root(int u) { return par[u] < 0 ? u : par[u]= root(par[u]); }\n int size(int\
-    \ u) { return -par[root(u)]; }\n};\n#line 8 \"test/aoj/2559.LCT_Dual.test.cpp\"\
-    \nusing namespace std;\nstruct RchminQ {\n using T= long long;\n using E= long\
-    \ long;\n static void mapping(T &v, const E &f) {\n  if (v > f) v= f;\n }\n static\
-    \ void composition(E &pre, const E &suf) {\n  if (pre > suf) pre= suf;\n }\n};\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, m;\n cin >>\
-    \ n >> m;\n UnionFind uf(n);\n int a[m], b[m];\n long long w[m];\n for (int i=\
-    \ 0; i < m; i++) {\n  cin >> a[i] >> b[i] >> w[i];\n  --a[i], --b[i];\n }\n int\
-    \ ord[m];\n iota(ord, ord + m, 0), sort(ord, ord + m, [&](int l, int r) { return\
-    \ w[l] < w[r]; });\n vector<int> mst_es;\n long long mst_cost= 0;\n for (int i:\
-    \ ord)\n  if (uf.unite(a[i], b[i])) mst_cost+= w[i], mst_es.push_back(i);\n\n\
-    \ static constexpr int INF= 1 << 30;\n LinkCutTree<RchminQ> lct(2 * n - 1, INF);\n\
-    \ int id[m];\n fill_n(id, m, -1);\n int num= n;\n for (int i: mst_es) id[i]= num++,\
-    \ lct.link(a[i], id[i]), lct.link(id[i], b[i]);\n for (int i= 0; i < m; ++i)\n\
-    \  if (id[i] == -1) lct.apply(a[i], b[i], w[i]);\n long long ans[m];\n for (int\
-    \ i= 0; i < m; ++i) {\n  if (id[i] == -1) ans[i]= mst_cost;\n  else {\n   long\
-    \ long tmp= lct[id[i]];\n   ans[i]= tmp == INF ? -1 : mst_cost - w[i] + tmp;\n\
-    \  }\n }\n for (auto a: ans) cout << a << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/problems/2559\"\n#include\
-    \ <iostream>\n#include <vector>\n#include <numeric>\n#include <algorithm>\n#include\
-    \ \"src/DataStructure/LinkCutTree.hpp\"\n#include \"src/DataStructure/UnionFind.hpp\"\
-    \nusing namespace std;\nstruct RchminQ {\n using T= long long;\n using E= long\
-    \ long;\n static void mapping(T &v, const E &f) {\n  if (v > f) v= f;\n }\n static\
-    \ void composition(E &pre, const E &suf) {\n  if (pre > suf) pre= suf;\n }\n};\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, m;\n cin >>\
-    \ n >> m;\n UnionFind uf(n);\n int a[m], b[m];\n long long w[m];\n for (int i=\
-    \ 0; i < m; i++) {\n  cin >> a[i] >> b[i] >> w[i];\n  --a[i], --b[i];\n }\n int\
-    \ ord[m];\n iota(ord, ord + m, 0), sort(ord, ord + m, [&](int l, int r) { return\
-    \ w[l] < w[r]; });\n vector<int> mst_es;\n long long mst_cost= 0;\n for (int i:\
-    \ ord)\n  if (uf.unite(a[i], b[i])) mst_cost+= w[i], mst_es.push_back(i);\n\n\
-    \ static constexpr int INF= 1 << 30;\n LinkCutTree<RchminQ> lct(2 * n - 1, INF);\n\
-    \ int id[m];\n fill_n(id, m, -1);\n int num= n;\n for (int i: mst_es) id[i]= num++,\
-    \ lct.link(a[i], id[i]), lct.link(id[i], b[i]);\n for (int i= 0; i < m; ++i)\n\
-    \  if (id[i] == -1) lct.apply(a[i], b[i], w[i]);\n long long ans[m];\n for (int\
-    \ i= 0; i < m; ++i) {\n  if (id[i] == -1) ans[i]= mst_cost;\n  else {\n   long\
-    \ long tmp= lct[id[i]];\n   ans[i]= tmp == INF ? -1 : mst_cost - w[i] + tmp;\n\
-    \  }\n }\n for (auto a: ans) cout << a << '\\n';\n return 0;\n}"
+    \" \";\n  return ret;\n }\n};\n#line 5 \"test/hackerrank/bonnie-and-clyde.test.cpp\"\
+    \nusing namespace std;\nstruct RSQ {\n using T= int;\n static T op(T l, T r) {\
+    \ return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int n, m, q;\n cin >> n >> m >> q;\n BiConnectedComponents bcc(n);\n for (int\
+    \ i= 0; i < m; ++i) {\n  int u, v;\n  cin >> u >> v;\n  bcc.add_edge(--u, --v);\n\
+    \ }\n auto bct= bcc.block_cut_tree();\n int N= bct.size();\n LinkCutTree<RSQ>\
+    \ lct(N, 1);\n for (int v= 0; v < n; ++v)\n  for (int u: bct[v]) lct.link(u, v);\n\
+    \ while (q--) {\n  int u, v, w;\n  cin >> u >> v >> w;\n  --u, --v, --w;\n  if\
+    \ (lct.lca(u, w) == -1 || lct.lca(w, v) == -1) cout << \"NO\" << '\\n';\n  else\
+    \ {\n   int tmp= lct.fold(u, w) + lct.fold(w, v) - lct.fold(u, v);\n   cout <<\
+    \ (tmp == 1 || tmp == 3 ? \"YES\" : \"NO\") << '\\n';\n  }\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde\"\
+    \n#include <iostream>\n#include \"src/Graph/BiConnectedComponents.hpp\"\n#include\
+    \ \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace std;\nstruct RSQ {\n\
+    \ using T= int;\n static T op(T l, T r) { return l + r; }\n};\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int n, m, q;\n cin >> n >> m >> q;\n\
+    \ BiConnectedComponents bcc(n);\n for (int i= 0; i < m; ++i) {\n  int u, v;\n\
+    \  cin >> u >> v;\n  bcc.add_edge(--u, --v);\n }\n auto bct= bcc.block_cut_tree();\n\
+    \ int N= bct.size();\n LinkCutTree<RSQ> lct(N, 1);\n for (int v= 0; v < n; ++v)\n\
+    \  for (int u: bct[v]) lct.link(u, v);\n while (q--) {\n  int u, v, w;\n  cin\
+    \ >> u >> v >> w;\n  --u, --v, --w;\n  if (lct.lca(u, w) == -1 || lct.lca(w, v)\
+    \ == -1) cout << \"NO\" << '\\n';\n  else {\n   int tmp= lct.fold(u, w) + lct.fold(w,\
+    \ v) - lct.fold(u, v);\n   cout << (tmp == 1 || tmp == 3 ? \"YES\" : \"NO\") <<\
+    \ '\\n';\n  }\n }\n return 0;\n}"
   dependsOn:
+  - src/Graph/BiConnectedComponents.hpp
   - src/DataStructure/LinkCutTree.hpp
   - src/Internal/HAS_CHECK.hpp
-  - src/DataStructure/UnionFind.hpp
   isVerificationFile: true
-  path: test/aoj/2559.LCT_Dual.test.cpp
+  path: test/hackerrank/bonnie-and-clyde.test.cpp
   requiredBy: []
   timestamp: '2023-01-25 00:50:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/2559.LCT_Dual.test.cpp
+documentation_of: test/hackerrank/bonnie-and-clyde.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/2559.LCT_Dual.test.cpp
-- /verify/test/aoj/2559.LCT_Dual.test.cpp.html
-title: test/aoj/2559.LCT_Dual.test.cpp
+- /verify/test/hackerrank/bonnie-and-clyde.test.cpp
+- /verify/test/hackerrank/bonnie-and-clyde.test.cpp.html
+title: test/hackerrank/bonnie-and-clyde.test.cpp
 ---
