@@ -38,6 +38,9 @@ data:
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1326.test.cpp
+    title: test/yukicoder/1326.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -212,6 +215,7 @@ data:
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/1326.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp

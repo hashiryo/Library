@@ -10,6 +10,9 @@ data:
     path: test/aoj/2893.test.cpp
     title: test/aoj/2893.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_3_B.test.cpp
+    title: test/aoj/GRL_3_B.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/two_edge_connected_components.test.cpp
     title: test/yosupo/two_edge_connected_components.test.cpp
   - icon: ':heavy_check_mark:'
@@ -63,12 +66,13 @@ data:
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/GRL_3_B.test.cpp
   - test/aoj/2893.test.cpp
   - test/yosupo/two_edge_connected_components.test.cpp
   - test/yukicoder/529.LCT.test.cpp
 documentation_of: src/Graph/IncrementalBridgeConnectivity.hpp
 layout: document
-title: Incremental-Bridge-Connectivity
+title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
 ---
 ## 参考
 [https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity](https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity)

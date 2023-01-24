@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
-    title: Incremental-Bridge-Connectivity
+    title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
   - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
@@ -30,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_3_B.test.cpp
+    title: test/aoj/GRL_3_B.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
@@ -69,6 +72,7 @@ data:
   verifiedWith:
   - test/aoj/GRL_2_B.test.cpp
   - test/aoj/2647.test.cpp
+  - test/aoj/GRL_3_B.test.cpp
   - test/aoj/DSL_1_A.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/2893.test.cpp

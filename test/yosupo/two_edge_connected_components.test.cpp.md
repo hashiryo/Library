@@ -6,7 +6,7 @@ data:
     title: Union-Find
   - icon: ':heavy_check_mark:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
-    title: Incremental-Bridge-Connectivity
+    title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
