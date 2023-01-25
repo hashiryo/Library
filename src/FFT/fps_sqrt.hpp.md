@@ -290,7 +290,7 @@ data:
     \ mod_t, LM> : a < 3 ? inv_<2, mod_t, LM> : a < 4 ? inv_<3, mod_t, LM> : inv_<4,\
     \ mod_t, LM>)(pp, n, r);\n } else\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
     \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
-    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 3 \"\
+    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 4 \"\
     src/Math/mod_sqrt.hpp\"\nnamespace math_internal {\ntemplate <class Int, class\
     \ MP> constexpr i64 inner_sqrt(Int a, Int p) {\n const MP md(p);\n Int e= (p -\
     \ 1) >> 1, one= md.set(1);\n if (a= md.set(a); md.norm(pow(a, e, md)) != one)\
@@ -387,7 +387,7 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_sqrt.hpp
   requiredBy: []
-  timestamp: '2023-01-23 18:57:46+09:00'
+  timestamp: '2023-01-25 14:23:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sqrt_of_FPS.test.cpp

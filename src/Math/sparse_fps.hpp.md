@@ -147,7 +147,7 @@ data:
     \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 3 \"src/Math/mod_sqrt.hpp\"\nnamespace\
+    }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/mod_sqrt.hpp\"\nnamespace\
     \ math_internal {\ntemplate <class Int, class MP> constexpr i64 inner_sqrt(Int\
     \ a, Int p) {\n const MP md(p);\n Int e= (p - 1) >> 1, one= md.set(1);\n if (a=\
     \ md.set(a); md.norm(pow(a, e, md)) != one) return -1;\n Int b= 0, d= md.diff(0,\
@@ -321,7 +321,7 @@ data:
   isVerificationFile: false
   path: src/Math/sparse_fps.hpp
   requiredBy: []
-  timestamp: '2023-01-23 17:48:22+09:00'
+  timestamp: '2023-01-25 14:23:48+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/pow_of_sparse_FPS.test.cpp

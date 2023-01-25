@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/prime_count.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
   _extendedRequiredBy: []

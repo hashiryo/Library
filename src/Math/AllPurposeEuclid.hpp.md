@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_floor_of_linear.test.cpp
     title: test/yosupo/sum_of_floor_of_linear.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/AllPurposeEuclid.hpp\"\n#include <algorithm>\n\
@@ -94,7 +94,7 @@ data:
   path: src/Math/AllPurposeEuclid.hpp
   requiredBy: []
   timestamp: '2023-01-23 16:45:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_floor_of_linear.test.cpp
 documentation_of: src/Math/AllPurposeEuclid.hpp
