@@ -6,61 +6,69 @@ data:
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/two_sat.test.cpp
     title: test/yosupo/two_sat.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/StronglyConnectedComponents.hpp\"\n#include <vector>\n\
-    #include <functional>\n#include <algorithm>\nstruct StronglyConnectedComponents\
-    \ {\n std::vector<std::vector<int>> adj;\n StronglyConnectedComponents(int n):\
-    \ adj(n) {}\n void add_edge(int src, int dst) { adj[src].push_back(dst); }\n std::pair<std::vector<std::vector<int>>,\
-    \ std::vector<int>> get_SCC() {\n  std::vector<std::vector<int>> scc;\n  std::vector<int>\
-    \ S, B, index(adj.size());\n  std::function<void(int)> dfs= [&](int u) {\n   B.push_back(index[u]=\
-    \ S.size());\n   S.push_back(u);\n   for (int v: adj[u]) {\n    if (!index[v])\
-    \ dfs(v);\n    else\n     while (index[v] < B.back()) B.pop_back();\n   }\n  \
-    \ if (index[u] == B.back()) {\n    scc.push_back({});\n    B.pop_back();\n   \
-    \ for (; index[u] < (int)S.size(); S.pop_back()) {\n     scc.back().push_back(S.back());\n\
-    \     index[S.back()]= adj.size() + scc.size();\n    }\n   }\n  };\n  for (std::size_t\
-    \ u= 0; u < adj.size(); u++)\n   if (!index[u]) dfs(u);\n  reverse(scc.begin(),\
-    \ scc.end());\n  for (std::size_t u= 0; u < adj.size(); u++) index[u]= scc.size()\
-    \ - index[u] + adj.size();\n  return std::make_pair(scc, index);\n }\n};\n#line\
-    \ 3 \"src/Math/TwoSatisfiability.hpp\"\nstruct TwoSatisfiability {\nprivate:\n\
-    \ int sz;\n StronglyConnectedComponents scc;\npublic:\n TwoSatisfiability(int\
-    \ n): sz(n), scc(2 * n) {}\n void add_if(int u, int v) {\n  scc.add_edge(u, v);\n\
-    \  scc.add_edge(neg(v), neg(u));\n }                                         \
-    \          // u -> v <=> !v -> !u\n void add_or(int u, int v) { add_if(neg(u),\
-    \ v); }    // u or v <=> !u -> v\n void add_nand(int u, int v) { add_if(u, neg(v));\
-    \ }  // u nand v <=> u -> !v\n void set_true(int u) { scc.add_edge(neg(u), u);\
-    \ }   // u <=> !u -> u\n void set_false(int u) { scc.add_edge(u, neg(u)); }  //\
-    \ !u <=> u -> !u\n inline int neg(int x) { return x >= sz ? x - sz : x + sz; }\n\
-    \ std::vector<short> solve() {\n  std::vector<int> I= scc.get_SCC().second;\n\
-    \  std::vector<short> ret(sz);\n  for (int i= 0; i < sz; i++) {\n   if (I[i] ==\
-    \ I[neg(i)]) return {};\n   ret[i]= I[i] > I[neg(i)];\n  }\n  return ret;\n }\n\
-    };\n"
-  code: "#pragma once\n#include \"src/Graph/StronglyConnectedComponents.hpp\"\nstruct\
-    \ TwoSatisfiability {\nprivate:\n int sz;\n StronglyConnectedComponents scc;\n\
-    public:\n TwoSatisfiability(int n): sz(n), scc(2 * n) {}\n void add_if(int u,\
-    \ int v) {\n  scc.add_edge(u, v);\n  scc.add_edge(neg(v), neg(u));\n }       \
-    \                                            // u -> v <=> !v -> !u\n void add_or(int\
-    \ u, int v) { add_if(neg(u), v); }    // u or v <=> !u -> v\n void add_nand(int\
-    \ u, int v) { add_if(u, neg(v)); }  // u nand v <=> u -> !v\n void set_true(int\
-    \ u) { scc.add_edge(neg(u), u); }   // u <=> !u -> u\n void set_false(int u) {\
-    \ scc.add_edge(u, neg(u)); }  // !u <=> u -> !u\n inline int neg(int x) { return\
-    \ x >= sz ? x - sz : x + sz; }\n std::vector<short> solve() {\n  std::vector<int>\
-    \ I= scc.get_SCC().second;\n  std::vector<short> ret(sz);\n  for (int i= 0; i\
-    \ < sz; i++) {\n   if (I[i] == I[neg(i)]) return {};\n   ret[i]= I[i] > I[neg(i)];\n\
-    \  }\n  return ret;\n }\n};\n"
+    #include <array>\n#include <algorithm>\nclass StronglyConnectedComponents {\n\
+    \ std::vector<std::vector<int>> adj, rev;\npublic:\n StronglyConnectedComponents(int\
+    \ n): adj(n), rev(n) {}\n void add_edge(int src, int dst) { adj[src].push_back(dst),\
+    \ rev[dst].push_back(src); }\n std::vector<std::vector<int>> get_block() const\
+    \ {\n  const int n= adj.size();\n  std::vector<std::vector<int>> blk;\n  std::vector<int>\
+    \ ord(n), par(n, -2), dat(n, 0);\n  int k= n;\n  for (int s= 0; s < n; ++s)\n\
+    \   if (par[s] == -2) {\n    par[s]= -1;\n    for (int p= s; p >= 0;) {\n    \
+    \ if (dat[p] == (int)adj[p].size()) {\n      ord[--k]= p, p= par[p];\n      continue;\n\
+    \     }\n     if (int q= adj[p][dat[p]++]; par[q] == -2) par[q]= p, p= q;\n  \
+    \  }\n   }\n  dat.assign(n, 1);\n  for (int s: ord)\n   if (dat[s]) {\n    blk.resize(++k),\
+    \ dat[s]= 0, blk.back().push_back(s);\n    for (int i= 0; i < (int)blk.back().size();\
+    \ ++i)\n     for (int v: rev[blk.back()[i]])\n      if (dat[v]) dat[v]= 0, blk.back().push_back(v);\n\
+    \   }\n  return blk;\n }\n std::vector<int> get_index(const std::vector<std::vector<int>>\
+    \ &blk) const {\n  std::vector<int> index(adj.size());\n  for (int i= blk.size();\
+    \ i--;)\n   for (int v: blk[i]) index[v]= i;\n  return index;\n }\n std::vector<std::vector<int>>\
+    \ get_dag(const std::vector<int> &index, int num) const {\n  std::vector<std::vector<int>>\
+    \ dag(num);\n  std::vector<std::array<int, 2>> es;\n  for (int i= adj.size();\
+    \ i--;)\n   for (int j: adj[i])\n    if (int u= index[i], v= index[j]; u != v)\
+    \ es.push_back({u, v});\n  std::sort(es.begin(), es.end()), es.erase(std::unique(es.begin(),\
+    \ es.end()), es.end());\n  for (auto [u, v]: es) dag[u].push_back(v);\n  return\
+    \ dag;\n }\n};\n#line 3 \"src/Math/TwoSatisfiability.hpp\"\nclass TwoSatisfiability\
+    \ {\n int sz;\n StronglyConnectedComponents scc;\npublic:\n TwoSatisfiability(int\
+    \ n): sz(n), scc(2 * n) {}\n void add_if(int u, int v) { scc.add_edge(u, v), scc.add_edge(neg(v),\
+    \ neg(u)); }  // u -> v <=> !v -> !u\n void add_or(int u, int v) { add_if(neg(u),\
+    \ v); }                                 // u or v <=> !u -> v\n void add_nand(int\
+    \ u, int v) { add_if(u, neg(v)); }                               // u nand v <=>\
+    \ u -> !v\n void set_true(int u) { scc.add_edge(neg(u), u); }                \
+    \                // u <=> !u -> u\n void set_false(int u) { scc.add_edge(u, neg(u));\
+    \ }                               // !u <=> u -> !u\n inline int neg(int x) const\
+    \ { return x >= sz ? x - sz : x + sz; }\n std::vector<bool> solve() const {\n\
+    \  std::vector<int> I= scc.get_index(scc.get_block());\n  std::vector<bool> ret(sz);\n\
+    \  for (int i= 0; i < sz; i++) {\n   if (I[i] == I[neg(i)]) return {};  // no\
+    \ solution\n   ret[i]= I[i] > I[neg(i)];\n  }\n  return ret;\n }\n};\n"
+  code: "#pragma once\n#include \"src/Graph/StronglyConnectedComponents.hpp\"\nclass\
+    \ TwoSatisfiability {\n int sz;\n StronglyConnectedComponents scc;\npublic:\n\
+    \ TwoSatisfiability(int n): sz(n), scc(2 * n) {}\n void add_if(int u, int v) {\
+    \ scc.add_edge(u, v), scc.add_edge(neg(v), neg(u)); }  // u -> v <=> !v -> !u\n\
+    \ void add_or(int u, int v) { add_if(neg(u), v); }                           \
+    \      // u or v <=> !u -> v\n void add_nand(int u, int v) { add_if(u, neg(v));\
+    \ }                               // u nand v <=> u -> !v\n void set_true(int\
+    \ u) { scc.add_edge(neg(u), u); }                                // u <=> !u ->\
+    \ u\n void set_false(int u) { scc.add_edge(u, neg(u)); }                     \
+    \          // !u <=> u -> !u\n inline int neg(int x) const { return x >= sz ?\
+    \ x - sz : x + sz; }\n std::vector<bool> solve() const {\n  std::vector<int> I=\
+    \ scc.get_index(scc.get_block());\n  std::vector<bool> ret(sz);\n  for (int i=\
+    \ 0; i < sz; i++) {\n   if (I[i] == I[neg(i)]) return {};  // no solution\n  \
+    \ ret[i]= I[i] > I[neg(i)];\n  }\n  return ret;\n }\n};\n"
   dependsOn:
   - src/Graph/StronglyConnectedComponents.hpp
   isVerificationFile: false
   path: src/Math/TwoSatisfiability.hpp
   requiredBy: []
-  timestamp: '2023-01-23 20:22:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-25 18:54:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/two_sat.test.cpp
 documentation_of: src/Math/TwoSatisfiability.hpp
