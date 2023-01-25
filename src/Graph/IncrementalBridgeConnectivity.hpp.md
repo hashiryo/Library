@@ -74,5 +74,7 @@ documentation_of: src/Graph/IncrementalBridgeConnectivity.hpp
 layout: document
 title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
 ---
+## 問題例
+[AtCoder Regular Contest 039 D - 旅行会社高橋君](https://atcoder.jp/contests/arc039/tasks/arc039_d)
 ## 参考
 [https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity](https://scrapbox.io/data-structures/Incremental_Bridge-Connectivity)

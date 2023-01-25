@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde
@@ -124,9 +124,10 @@ data:
     \ }\n auto bct= bcc.block_cut_tree();\n int N= bct.size();\n LinkCutTree<RSQ>\
     \ lct(N, 1);\n for (int v= 0; v < n; ++v)\n  for (int u: bct[v]) lct.link(u, v);\n\
     \ while (q--) {\n  int u, v, w;\n  cin >> u >> v >> w;\n  --u, --v, --w;\n  if\
-    \ (lct.lca(u, w) == -1 || lct.lca(w, v) == -1) cout << \"NO\" << '\\n';\n  else\
-    \ {\n   int tmp= lct.fold(u, w) + lct.fold(w, v) - lct.fold(u, v);\n   cout <<\
-    \ (tmp == 1 || tmp == 3 ? \"YES\" : \"NO\") << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ (lct.lca(u, w) == -1 || lct.lca(w, v) == -1) cout << \"NO\";\n  else {\n   int\
+    \ tmp= lct.fold(u, w) + lct.fold(w, v) - lct.fold(u, v);\n   cout << (tmp == 1\
+    \ || tmp == 3 ? \"YES\" : \"NO\");\n  }\n  if (q) cout << '\\n';\n }\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde\"\
     \n#include <iostream>\n#include \"src/Graph/BiConnectedComponents.hpp\"\n#include\
     \ \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace std;\nstruct RSQ {\n\
@@ -137,9 +138,9 @@ data:
     \ int N= bct.size();\n LinkCutTree<RSQ> lct(N, 1);\n for (int v= 0; v < n; ++v)\n\
     \  for (int u: bct[v]) lct.link(u, v);\n while (q--) {\n  int u, v, w;\n  cin\
     \ >> u >> v >> w;\n  --u, --v, --w;\n  if (lct.lca(u, w) == -1 || lct.lca(w, v)\
-    \ == -1) cout << \"NO\" << '\\n';\n  else {\n   int tmp= lct.fold(u, w) + lct.fold(w,\
-    \ v) - lct.fold(u, v);\n   cout << (tmp == 1 || tmp == 3 ? \"YES\" : \"NO\") <<\
-    \ '\\n';\n  }\n }\n return 0;\n}"
+    \ == -1) cout << \"NO\";\n  else {\n   int tmp= lct.fold(u, w) + lct.fold(w, v)\
+    \ - lct.fold(u, v);\n   cout << (tmp == 1 || tmp == 3 ? \"YES\" : \"NO\");\n \
+    \ }\n  if (q) cout << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/Graph/BiConnectedComponents.hpp
   - src/DataStructure/LinkCutTree.hpp
@@ -147,8 +148,8 @@ data:
   isVerificationFile: true
   path: test/hackerrank/bonnie-and-clyde.test.cpp
   requiredBy: []
-  timestamp: '2023-01-25 00:50:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-01-25 13:39:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/bonnie-and-clyde.test.cpp
 layout: document
