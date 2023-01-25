@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
   - icon: ':heavy_check_mark:'
@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
   - icon: ':heavy_check_mark:'
@@ -208,19 +208,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.Patricia.test.cpp
     title: test/yukicoder/649.Patricia.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -229,9 +229,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define\
@@ -266,7 +266,7 @@ data:
   - src/Automaton/NFA_to_DFA.hpp
   - src/Automaton/dfa_dp.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/3024.WBT.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp
