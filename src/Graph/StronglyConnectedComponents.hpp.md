@@ -16,6 +16,9 @@ data:
     path: test/yosupo/two_sat.test.cpp
     title: test/yosupo/two_sat.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1170.test.cpp
+    title: test/yukicoder/1170.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
   - icon: ':heavy_check_mark:'
@@ -81,6 +84,7 @@ data:
   - test/aoj/0366.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/scc.test.cpp
+  - test/yukicoder/1170.test.cpp
   - test/yukicoder/1293.scc.test.cpp
   - test/yukicoder/1813.test.cpp
 documentation_of: src/Graph/StronglyConnectedComponents.hpp

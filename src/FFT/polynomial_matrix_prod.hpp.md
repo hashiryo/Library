@@ -1,47 +1,48 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/502.test.cpp
     title: test/yukicoder/502.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/FFT/sample_points_shift.hpp\"\n#include <vector>\n#include\
-    \ <algorithm>\n#include <numeric>\n#include <cassert>\n#line 2 \"src/FFT/NTT.hpp\"\
-    \n#include <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\n\
-    namespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
-    \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
-    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
-    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n \
-    \ if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n\
-    \ CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return\
-    \ l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static\
-    \ CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\n\
-    template <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n\
-    \ CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+  bundledCode: "#line 2 \"src/FFT/polynomial_matrix_prod.hpp\"\n#include <cmath>\n\
+    #line 2 \"src/FFT/sample_points_shift.hpp\"\n#include <vector>\n#include <algorithm>\n\
+    #include <numeric>\n#include <cassert>\n#line 2 \"src/FFT/NTT.hpp\"\n#include\
+    \ <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
+    using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
+    \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
+    \ return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
+    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
+    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
+    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
+    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
+    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n const u_t mod;\n CE MP_Mo():\
+    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
     \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
     \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
     \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
@@ -264,7 +265,7 @@ data:
     \ nc1 + 1, f(k, mod_t::mod() - k, bf));\n  else f(k, c_64 + m - k, bf);\n } else\
     \ if (nc1 < c_64) {\n  if (bf= f(c, (-c).val(), p); nc1 < k) std::copy_n(y.begin(),\
     \ nc1 + 1, bf);\n  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n }\
-    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 3 \"src/FFT/polynomial_matrix_prod.hpp\"\
+    \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 4 \"src/FFT/polynomial_matrix_prod.hpp\"\
     \n// M(0)*M(1)*...*M(k)\ntemplate <class mod_t, std::size_t LM= 1 << 20> std::vector<std::vector<mod_t>>\
     \ polynomial_matrix_prod(const std::vector<std::vector<std::vector<mod_t>>> &m,\
     \ std::uint64_t k) {\n using Mat= std::vector<std::vector<mod_t>>;\n using Poly=\
@@ -294,8 +295,8 @@ data:
     \ {\n  Mat mt(n, std::vector<mod_t>(n, mod_t(0)));\n  for (int j= n; j--;)\n \
     \  for (int l= n, p; l--;)\n    for (tmp= eval(m[j][l], i), p= n; p--;) mt[j][p]+=\
     \ tmp * ret[l][p];\n  ret.swap(mt);\n }\n return ret;\n}\n"
-  code: "#pragma once\n#include \"src/FFT/sample_points_shift.hpp\"\n// M(0)*M(1)*...*M(k)\n\
-    template <class mod_t, std::size_t LM= 1 << 20> std::vector<std::vector<mod_t>>\
+  code: "#pragma once\n#include <cmath>\n#include \"src/FFT/sample_points_shift.hpp\"\
+    \n// M(0)*M(1)*...*M(k)\ntemplate <class mod_t, std::size_t LM= 1 << 20> std::vector<std::vector<mod_t>>\
     \ polynomial_matrix_prod(const std::vector<std::vector<std::vector<mod_t>>> &m,\
     \ std::uint64_t k) {\n using Mat= std::vector<std::vector<mod_t>>;\n using Poly=\
     \ std::vector<mod_t>;\n const int n= m.size();\n assert(n > 0), assert(n == (int)m[0].size());\n\
@@ -334,8 +335,8 @@ data:
   isVerificationFile: false
   path: src/FFT/polynomial_matrix_prod.hpp
   requiredBy: []
-  timestamp: '2023-01-25 14:23:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-01-27 14:20:00+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/502.test.cpp
 documentation_of: src/FFT/polynomial_matrix_prod.hpp

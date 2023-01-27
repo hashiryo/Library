@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/880.Beats.test.cpp
     title: test/yukicoder/880.Beats.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Beats.hpp\"\n#include <vector>\n\
@@ -90,7 +90,7 @@ data:
   path: src/DataStructure/SegmentTree_Beats.hpp
   requiredBy: []
   timestamp: '2023-01-25 13:39:36+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

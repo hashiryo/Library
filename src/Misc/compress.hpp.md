@@ -7,6 +7,9 @@ data:
     path: test/aoj/2893.test.cpp
     title: test/aoj/2893.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/3506.test.cpp
+    title: test/aoj/3506.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
   - icon: ':heavy_check_mark:'
@@ -41,6 +44,7 @@ data:
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/3506.test.cpp
   - test/aoj/2893.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yukicoder/529.LCT.test.cpp
