@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
@@ -24,11 +24,11 @@ data:
     \ n): adj(n), rev(n) {}\n void add_edge(int src, int dst) { adj[src].push_back(dst),\
     \ rev[dst].push_back(src); }\n std::vector<std::vector<int>> get_block() const\
     \ {\n  const int n= adj.size();\n  std::vector<std::vector<int>> blk;\n  std::vector<int>\
-    \ ord(n), par(n, -2), dat(n, 0);\n  int k= n;\n  for (int s= 0; s < n; ++s)\n\
-    \   if (par[s] == -2) {\n    par[s]= -1;\n    for (int p= s; p >= 0;) {\n    \
-    \ if (dat[p] == (int)adj[p].size()) {\n      ord[--k]= p, p= par[p];\n      continue;\n\
-    \     }\n     if (int q= adj[p][dat[p]++]; par[q] == -2) par[q]= p, p= q;\n  \
-    \  }\n   }\n  dat.assign(n, 1);\n  for (int s: ord)\n   if (dat[s]) {\n    blk.resize(++k),\
+    \ ord(n), par(n, -2), dat(n, 0);\n  int k= n;\n  for (int s= 0, p; s < n; ++s)\n\
+    \   if (par[s] == -2)\n    for (par[p= s]= -1; p >= 0;) {\n     if (dat[p] ==\
+    \ (int)adj[p].size()) {\n      ord[--k]= p, p= par[p];\n      continue;\n    \
+    \ }\n     if (int q= adj[p][dat[p]++]; par[q] == -2) par[q]= p, p= q;\n    }\n\
+    \  dat.assign(n, 1);\n  for (int s: ord)\n   if (dat[s]) {\n    blk.resize(++k),\
     \ dat[s]= 0, blk.back().push_back(s);\n    for (int i= 0; i < (int)blk.back().size();\
     \ ++i)\n     for (int v: rev[blk.back()[i]])\n      if (dat[v]) dat[v]= 0, blk.back().push_back(v);\n\
     \   }\n  return blk;\n }\n std::vector<int> get_index(const std::vector<std::vector<int>>\
@@ -78,8 +78,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/two_sat.test.cpp
   requiredBy: []
-  timestamp: '2023-01-25 18:54:50+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-02-07 17:34:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/two_sat.test.cpp
 layout: document

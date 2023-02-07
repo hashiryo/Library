@@ -2,26 +2,26 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/two_sat.test.cpp
     title: test/yosupo/two_sat.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1170.test.cpp
     title: test/yukicoder/1170.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
   _isVerificationFailed: true
@@ -35,11 +35,11 @@ data:
     \ n): adj(n), rev(n) {}\n void add_edge(int src, int dst) { adj[src].push_back(dst),\
     \ rev[dst].push_back(src); }\n std::vector<std::vector<int>> get_block() const\
     \ {\n  const int n= adj.size();\n  std::vector<std::vector<int>> blk;\n  std::vector<int>\
-    \ ord(n), par(n, -2), dat(n, 0);\n  int k= n;\n  for (int s= 0; s < n; ++s)\n\
-    \   if (par[s] == -2) {\n    par[s]= -1;\n    for (int p= s; p >= 0;) {\n    \
-    \ if (dat[p] == (int)adj[p].size()) {\n      ord[--k]= p, p= par[p];\n      continue;\n\
-    \     }\n     if (int q= adj[p][dat[p]++]; par[q] == -2) par[q]= p, p= q;\n  \
-    \  }\n   }\n  dat.assign(n, 1);\n  for (int s: ord)\n   if (dat[s]) {\n    blk.resize(++k),\
+    \ ord(n), par(n, -2), dat(n, 0);\n  int k= n;\n  for (int s= 0, p; s < n; ++s)\n\
+    \   if (par[s] == -2)\n    for (par[p= s]= -1; p >= 0;) {\n     if (dat[p] ==\
+    \ (int)adj[p].size()) {\n      ord[--k]= p, p= par[p];\n      continue;\n    \
+    \ }\n     if (int q= adj[p][dat[p]++]; par[q] == -2) par[q]= p, p= q;\n    }\n\
+    \  dat.assign(n, 1);\n  for (int s: ord)\n   if (dat[s]) {\n    blk.resize(++k),\
     \ dat[s]= 0, blk.back().push_back(s);\n    for (int i= 0; i < (int)blk.back().size();\
     \ ++i)\n     for (int v: rev[blk.back()[i]])\n      if (dat[v]) dat[v]= 0, blk.back().push_back(v);\n\
     \   }\n  return blk;\n }\n std::vector<int> get_index(const std::vector<std::vector<int>>\
@@ -57,16 +57,16 @@ data:
     \ src, int dst) { adj[src].push_back(dst), rev[dst].push_back(src); }\n std::vector<std::vector<int>>\
     \ get_block() const {\n  const int n= adj.size();\n  std::vector<std::vector<int>>\
     \ blk;\n  std::vector<int> ord(n), par(n, -2), dat(n, 0);\n  int k= n;\n  for\
-    \ (int s= 0; s < n; ++s)\n   if (par[s] == -2) {\n    par[s]= -1;\n    for (int\
-    \ p= s; p >= 0;) {\n     if (dat[p] == (int)adj[p].size()) {\n      ord[--k]=\
-    \ p, p= par[p];\n      continue;\n     }\n     if (int q= adj[p][dat[p]++]; par[q]\
-    \ == -2) par[q]= p, p= q;\n    }\n   }\n  dat.assign(n, 1);\n  for (int s: ord)\n\
-    \   if (dat[s]) {\n    blk.resize(++k), dat[s]= 0, blk.back().push_back(s);\n\
-    \    for (int i= 0; i < (int)blk.back().size(); ++i)\n     for (int v: rev[blk.back()[i]])\n\
-    \      if (dat[v]) dat[v]= 0, blk.back().push_back(v);\n   }\n  return blk;\n\
-    \ }\n std::vector<int> get_index(const std::vector<std::vector<int>> &blk) const\
-    \ {\n  std::vector<int> index(adj.size());\n  for (int i= blk.size(); i--;)\n\
-    \   for (int v: blk[i]) index[v]= i;\n  return index;\n }\n std::vector<std::vector<int>>\
+    \ (int s= 0, p; s < n; ++s)\n   if (par[s] == -2)\n    for (par[p= s]= -1; p >=\
+    \ 0;) {\n     if (dat[p] == (int)adj[p].size()) {\n      ord[--k]= p, p= par[p];\n\
+    \      continue;\n     }\n     if (int q= adj[p][dat[p]++]; par[q] == -2) par[q]=\
+    \ p, p= q;\n    }\n  dat.assign(n, 1);\n  for (int s: ord)\n   if (dat[s]) {\n\
+    \    blk.resize(++k), dat[s]= 0, blk.back().push_back(s);\n    for (int i= 0;\
+    \ i < (int)blk.back().size(); ++i)\n     for (int v: rev[blk.back()[i]])\n   \
+    \   if (dat[v]) dat[v]= 0, blk.back().push_back(v);\n   }\n  return blk;\n }\n\
+    \ std::vector<int> get_index(const std::vector<std::vector<int>> &blk) const {\n\
+    \  std::vector<int> index(adj.size());\n  for (int i= blk.size(); i--;)\n   for\
+    \ (int v: blk[i]) index[v]= i;\n  return index;\n }\n std::vector<std::vector<int>>\
     \ get_dag(const std::vector<int> &index, int num) const {\n  std::vector<std::vector<int>>\
     \ dag(num);\n  std::vector<std::array<int, 2>> es;\n  for (int i= adj.size();\
     \ i--;)\n   for (int j: adj[i])\n    if (int u= index[i], v= index[j]; u != v)\
@@ -78,7 +78,7 @@ data:
   path: src/Graph/StronglyConnectedComponents.hpp
   requiredBy:
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2023-01-25 18:54:50+09:00'
+  timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/0366.test.cpp

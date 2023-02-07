@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
@@ -46,6 +49,7 @@ data:
   verifiedWith:
   - test/aoj/3506.test.cpp
   - test/aoj/2893.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/649.BIT.test.cpp

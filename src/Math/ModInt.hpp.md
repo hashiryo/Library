@@ -97,10 +97,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_D.test.cpp
     title: test/aoj/DPL_5_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_E.test.cpp
     title: test/aoj/DPL_5_E.test.cpp
   - icon: ':x:'
@@ -130,6 +130,9 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc160_f.test.cpp
+    title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
@@ -287,6 +290,9 @@ data:
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
   - icon: ':x:'
+    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
     title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - icon: ':x:'
@@ -338,17 +344,26 @@ data:
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1075.test.cpp
+    title: test/yukicoder/1075.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1124.test.cpp
+    title: test/yukicoder/1124.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1333.test.cpp
+    title: test/yukicoder/1333.test.cpp
   - icon: ':x:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
@@ -469,10 +484,48 @@ data:
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
     \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
     \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
-    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? B::md.mod - (-n) %\
-    \ B::md.mod : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt()\
-    \ - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret;\
-    \ \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
+    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
+    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
+    \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
+    \ r), B::md.plus(x, r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n\
+    \ FUNC(operator*(const MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x,\
+    \ k, B::md))\n#undef FUNC\n CE MInt operator/(const MInt& r) const { return *this\
+    \ * r.inv(); }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r;\
+    \ }\n CE MInt& operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt&\
+    \ operator*=(const MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const\
+    \ MInt& r) { return *this= *this / r; }\n CE bool operator==(const MInt& r) const\
+    \ { return B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt&\
+    \ r) const { return !(*this == r); }\n CE bool operator<(const MInt& r) const\
+    \ { return B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return\
+    \ mod_inv<Int>(val(), B::md.mod); }\n CE inline Uint val() const { return B::md.get(x);\
+    \ }\n friend ostream& operator<<(ostream& os, const MInt& r) { return os << r.val();\
+    \ }\n friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is\
+    \ >> v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using\
+    \ ModInt= conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32,\
+    \ u64, 32, 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64,\
+    \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
+    \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
+    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt, math_internal::is_modint_v,\
+    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, size_t LM> mod_t get_inv(int\
+    \ n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m= mod_t::mod();\n\
+    \ static mod_t dat[LM];\n static int l= 1;\n if (l == 1) dat[l++]= 1;\n while\
+    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n"
+  code: "#pragma once\n#include \"src/Math/mod_inv.hpp\"\n#include \"src/Internal/Remainder.hpp\"\
+    \nnamespace math_internal {\n#define CE constexpr\nstruct m_b {};\nstruct s_b:\
+    \ m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\n\
+    template <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\n\
+    template <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static CE MP md= MP(MOD);\n\
+    };\ntemplate <class Int, class U, class B> struct MInt: public B {\n using Uint=\
+    \ U;\n static CE inline auto mod() { return B::md.mod; }\n CE MInt(): x(0) {}\n\
+    \ CE MInt(const MInt& r): x(r.x) {}\n template <class T, enable_if_t<is_modint_v<T>,\
+    \ nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n template\
+    \ <class T, enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\
+    \ CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod - n :\
+    \ n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() - *this;\
+    \ }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\n  ret.x=\
+    \ op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
     \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
     \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
@@ -496,45 +549,7 @@ data:
     \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, size_t LM> mod_t get_inv(int\
     \ n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m= mod_t::mod();\n\
     \ static mod_t dat[LM];\n static int l= 1;\n if (l == 1) dat[l++]= 1;\n while\
-    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n"
-  code: "#pragma once\n#include \"src/Math/mod_inv.hpp\"\n#include \"src/Internal/Remainder.hpp\"\
-    \nnamespace math_internal {\n#define CE constexpr\nstruct m_b {};\nstruct s_b:\
-    \ m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\n\
-    template <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\n\
-    template <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static CE MP md= MP(MOD);\n\
-    };\ntemplate <class Int, class U, class B> struct MInt: public B {\n using Uint=\
-    \ U;\n static CE inline auto mod() { return B::md.mod; }\n CE MInt(): x(0) {}\n\
-    \ CE MInt(const MInt& r): x(r.x) {}\n template <class T, enable_if_t<is_modint_v<T>,\
-    \ nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n template\
-    \ <class T, enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr>\
-    \ CE MInt(T n): x(B::md.set((n < 0 ? B::md.mod - (-n) % B::md.mod : n % B::md.mod)))\
-    \ {}\n CE MInt operator-() const { return MInt() - *this; }\n#define FUNC(name,\
-    \ op) \\\n CE MInt name const { \\\n  MInt ret; \\\n  ret.x= op; \\\n  return\
-    \ ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x, r.x))\n FUNC(operator-(const\
-    \ MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const MInt& r), B::md.mul(x,\
-    \ r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n#undef FUNC\n CE\
-    \ MInt operator/(const MInt& r) const { return *this * r.inv(); }\n CE MInt& operator+=(const\
-    \ MInt& r) { return *this= *this + r; }\n CE MInt& operator-=(const MInt& r) {\
-    \ return *this= *this - r; }\n CE MInt& operator*=(const MInt& r) { return *this=\
-    \ *this * r; }\n CE MInt& operator/=(const MInt& r) { return *this= *this / r;\
-    \ }\n CE bool operator==(const MInt& r) const { return B::md.norm(x) == B::md.norm(r.x);\
-    \ }\n CE bool operator!=(const MInt& r) const { return !(*this == r); }\n CE bool\
-    \ operator<(const MInt& r) const { return B::md.norm(x) < B::md.norm(r.x); }\n\
-    \ CE inline MInt inv() const { return mod_inv<Int>(val(), B::md.mod); }\n CE inline\
-    \ Uint val() const { return B::md.get(x); }\n friend ostream& operator<<(ostream&\
-    \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
-    \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
-    \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
-    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
-    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
-    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
-    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
-    \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
-    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
-    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
-    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}"
+    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}"
   dependsOn:
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
@@ -559,7 +574,7 @@ data:
   - src/FFT/bostan_mori.hpp
   - src/Math/sparse_fps.hpp
   - src/Math/ModInt_Runtime.hpp
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DPL_5_B.test.cpp
@@ -590,6 +605,7 @@ data:
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/partition.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/hafnian_of_matrix.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/convolution_large.test.cpp
@@ -641,6 +657,7 @@ data:
   - test/yukicoder/980.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/215.test.cpp
+  - test/yukicoder/1075.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/3046.test.cpp
@@ -660,11 +677,14 @@ data:
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/650.LCT.test.cpp
+  - test/yukicoder/1333.test.cpp
   - test/yukicoder/42.test.cpp
+  - test/yukicoder/1124.test.cpp
   - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
+  - test/atcoder/abc160_f.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/arc116_c.dujiao.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp

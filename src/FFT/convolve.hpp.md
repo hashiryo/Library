@@ -167,10 +167,10 @@ data:
     \ MInt& r): x(r.x) {}\n template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
     \ = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n template <class\
     \ T, enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr> CE MInt(T\
-    \ n): x(B::md.set((n < 0 ? B::md.mod - (-n) % B::md.mod : n % B::md.mod))) {}\n\
-    \ CE MInt operator-() const { return MInt() - *this; }\n#define FUNC(name, op)\
-    \ \\\n CE MInt name const { \\\n  MInt ret; \\\n  ret.x= op; \\\n  return ret;\
-    \ \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x, r.x))\n FUNC(operator-(const\
+    \ n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod - n : n) : n % B::md.mod)))\
+    \ {}\n CE MInt operator-() const { return MInt() - *this; }\n#define FUNC(name,\
+    \ op) \\\n CE MInt name const { \\\n  MInt ret; \\\n  ret.x= op; \\\n  return\
+    \ ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x, r.x))\n FUNC(operator-(const\
     \ MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const MInt& r), B::md.mul(x,\
     \ r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n#undef FUNC\n CE\
     \ MInt operator/(const MInt& r) const { return *this * r.inv(); }\n CE MInt& operator+=(const\
@@ -400,7 +400,7 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/extgcd.hpp
   - src/FFT/bostan_mori.hpp
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/0168.test.cpp

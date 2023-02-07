@@ -2,22 +2,79 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/Graph/ReRooting.hpp
-    title: src/Graph/ReRooting.hpp
+  - icon: ':x:'
+    path: src/Graph/rerooting.hpp
+    title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/1595.test.cpp
+    title: test/aoj/1595.test.cpp
   - icon: ':x:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':x:'
+    path: test/aoj/GRL_5_A.test.cpp
+    title: test/aoj/GRL_5_A.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc160_f.test.cpp
+    title: test/atcoder/abc160_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc220_f.test.cpp
+    title: test/atcoder/abc220_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc222_f.test.cpp
+    title: test/atcoder/abc222_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc223_g.test.cpp
+    title: test/atcoder/abc223_g.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc097_d.test.cpp
+    title: test/atcoder/arc097_d.test.cpp
+  - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1075.test.cpp
+    title: test/yukicoder/1075.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1124.test.cpp
+    title: test/yukicoder/1124.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1153.test.cpp
+    title: test/yukicoder/1153.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1295.test.cpp
+    title: test/yukicoder/1295.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1333.test.cpp
+    title: test/yukicoder/1333.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1418.test.cpp
+    title: test/yukicoder/1418.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1494.test.cpp
+    title: test/yukicoder/1494.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1718.test.cpp
+    title: test/yukicoder/1718.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1976.test.cpp
+    title: test/yukicoder/1976.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/768.test.cpp
+    title: test/yukicoder/768.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/922.test.cpp
+    title: test/yukicoder/922.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -138,14 +195,33 @@ data:
   isVerificationFile: false
   path: src/Graph/Tree.hpp
   requiredBy:
-  - src/Graph/ReRooting.hpp
+  - src/Graph/rerooting.hpp
   timestamp: '2023-02-07 15:39:13+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/aoj/1595.test.cpp
   - test/aoj/2667.HLD.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/lca.HLD.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1976.test.cpp
+  - test/yukicoder/1075.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/768.test.cpp
+  - test/yukicoder/1153.test.cpp
+  - test/yukicoder/1718.test.cpp
+  - test/yukicoder/1494.test.cpp
+  - test/yukicoder/1295.test.cpp
+  - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1418.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc160_f.test.cpp
+  - test/atcoder/abc220_f.test.cpp
+  - test/atcoder/arc097_d.test.cpp
+  - test/atcoder/abc223_g.test.cpp
 documentation_of: src/Graph/Tree.hpp
 layout: document
 title: "\u6728\u30AF\u30E9\u30B9"

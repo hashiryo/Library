@@ -13,34 +13,38 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Graph/LinearSystemIncidence.hpp\"\n#include <vector>\n\
     #include <tuple>\n#include <type_traits>\ntemplate <typename T> class LinearSystemIncidence\
-    \ {\n int m;\n std::vector<std::vector<std::tuple<int, int, bool>>> adj;\npublic:\n\
-    \ LinearSystemIncidence(int n): m(0), adj(n) {}\n void add_edge(int src, int dst)\
-    \ { adj[src].emplace_back(m, dst, true), adj[dst].emplace_back(m++, src, false);\
-    \ }\n std::vector<T> solve(const std::vector<T> &b) const {\n  std::vector<T>\
-    \ x(m);\n  std::vector<bool> used(adj.size());\n  auto dfs= [&](auto self, int\
-    \ u) -> T {\n   used[u]= true;\n   T ret= b[u];\n   for (auto [id, to, fwd]: adj[u])\n\
-    \    if (!used[to]) {\n     T tmp= self(self, to);\n     if constexpr (std::is_same_v<T,\
-    \ bool>) x[id]= tmp, ret^= tmp;\n     else x[id]= fwd ? tmp : -tmp, ret+= tmp;\n\
-    \    }\n   return ret;\n  };\n  for (std::size_t u= adj.size(); u--;)\n   if (!used[u]\
-    \ && dfs(dfs, u) != T(0)) return std::vector<T>();  // no sloutions\n  return\
-    \ x;\n }\n};\n"
+    \ {\n std::vector<std::array<int, 2>> es;\n std::vector<std::vector<int>> adj;\n\
+    public:\n LinearSystemIncidence(int n): adj(n) {}\n void add_edge(int src, int\
+    \ dst) {\n  int m= es.size();\n  adj[src].push_back(m), adj[dst].push_back(m),\
+    \ es.push_back({src, dst});\n }\n std::vector<T> solve(std::vector<T> b) const\
+    \ {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
+    \ pre(n, -2), dat(n, 0);\n  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s]\
+    \ == -2)\n    for (pre[p= s]= -1;;) {\n     if (dat[p] == (int)adj[p].size())\
+    \ {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return {};  // no\
+    \ solution\n       break;\n      }\n      f= (es[e][0] == p), q= es[e][f];\n \
+    \     T tmp= b[p];\n      if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[q]=\
+    \ tmp ^ b[q];\n      else x[e]= f ? -tmp : tmp, b[q]+= tmp;\n      p= q;\n   \
+    \   continue;\n     }\n     if (e= adj[p][dat[p]++], q= es[e][es[e][0] == p];\
+    \ pre[q] == -2) pre[q]= e, p= q;\n    }\n  return x;\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <tuple>\n#include <type_traits>\n\
-    template <typename T> class LinearSystemIncidence {\n int m;\n std::vector<std::vector<std::tuple<int,\
-    \ int, bool>>> adj;\npublic:\n LinearSystemIncidence(int n): m(0), adj(n) {}\n\
-    \ void add_edge(int src, int dst) { adj[src].emplace_back(m, dst, true), adj[dst].emplace_back(m++,\
-    \ src, false); }\n std::vector<T> solve(const std::vector<T> &b) const {\n  std::vector<T>\
-    \ x(m);\n  std::vector<bool> used(adj.size());\n  auto dfs= [&](auto self, int\
-    \ u) -> T {\n   used[u]= true;\n   T ret= b[u];\n   for (auto [id, to, fwd]: adj[u])\n\
-    \    if (!used[to]) {\n     T tmp= self(self, to);\n     if constexpr (std::is_same_v<T,\
-    \ bool>) x[id]= tmp, ret^= tmp;\n     else x[id]= fwd ? tmp : -tmp, ret+= tmp;\n\
-    \    }\n   return ret;\n  };\n  for (std::size_t u= adj.size(); u--;)\n   if (!used[u]\
-    \ && dfs(dfs, u) != T(0)) return std::vector<T>();  // no sloutions\n  return\
-    \ x;\n }\n};"
+    template <typename T> class LinearSystemIncidence {\n std::vector<std::array<int,\
+    \ 2>> es;\n std::vector<std::vector<int>> adj;\npublic:\n LinearSystemIncidence(int\
+    \ n): adj(n) {}\n void add_edge(int src, int dst) {\n  int m= es.size();\n  adj[src].push_back(m),\
+    \ adj[dst].push_back(m), es.push_back({src, dst});\n }\n std::vector<T> solve(std::vector<T>\
+    \ b) const {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
+    \ pre(n, -2), dat(n, 0);\n  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s]\
+    \ == -2)\n    for (pre[p= s]= -1;;) {\n     if (dat[p] == (int)adj[p].size())\
+    \ {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return {};  // no\
+    \ solution\n       break;\n      }\n      f= (es[e][0] == p), q= es[e][f];\n \
+    \     T tmp= b[p];\n      if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[q]=\
+    \ tmp ^ b[q];\n      else x[e]= f ? -tmp : tmp, b[q]+= tmp;\n      p= q;\n   \
+    \   continue;\n     }\n     if (e= adj[p][dat[p]++], q= es[e][es[e][0] == p];\
+    \ pre[q] == -2) pre[q]= e, p= q;\n    }\n  return x;\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/LinearSystemIncidence.hpp
   requiredBy: []
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/arc106_b.test.cpp

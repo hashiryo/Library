@@ -6,9 +6,9 @@ data:
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/biconnected_components
@@ -23,10 +23,10 @@ data:
     \ {\n  const int n= adj.size();\n  std::vector<int> ord(n), par(n, -2), dat(n,\
     \ 0), low;\n  std::vector<std::vector<int>> ret(n);\n  auto add= [&](int u, int\
     \ v) { ret[u].push_back(v), ret[v].push_back(u); };\n  int k= 0;\n  for (int s=\
-    \ 0; s < n; ++s)\n   if (par[s] == -2) {\n    par[s]= -1;\n    for (int p= s;\
-    \ p >= 0;) {\n     if (dat[p] == 0) ord[k++]= p;\n     if (dat[p] == (int)adj[p].size())\
-    \ {\n      p= par[p];\n      continue;\n     }\n     if (int q= adj[p][dat[p]++];\
-    \ par[q] == -2) par[q]= p, p= q;\n    }\n   }\n  for (int i= 0; i < n; ++i) dat[ord[i]]=\
+    \ 0, p; s < n; ++s)\n   if (par[s] == -2)\n    for (par[p= s]= -1; p >= 0;) {\n\
+    \     if (dat[p] == 0) ord[k++]= p;\n     if (dat[p] == (int)adj[p].size()) {\n\
+    \      p= par[p];\n      continue;\n     }\n     if (int q= adj[p][dat[p]++];\
+    \ par[q] == -2) par[q]= p, p= q;\n    }\n  for (int i= 0; i < n; ++i) dat[ord[i]]=\
     \ i;\n  low= dat;\n  for (int v= 0; v < n; ++v)\n   for (int u: adj[v]) low[v]=\
     \ std::min(low[v], dat[u]);\n  for (int i= n; i--;)\n   if (int p= ord[i], pp=\
     \ par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  for (int p: ord)\n \
@@ -53,8 +53,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2023-01-25 18:54:50+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-02-07 17:34:35+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/biconnected_components.test.cpp
 layout: document
