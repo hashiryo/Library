@@ -6,22 +6,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1170.test.cpp
     title: test/yukicoder/1170.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1868.test.cpp
     title: test/yukicoder/1868.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Graph/Range2RangeGraph.hpp\"\n#include <vector>\n#include\
-    \ <tuple>\ntemplate <typename T= int> class Range2RangeGraph {\n const int n;\n\
+  bundledCode: "#line 2 \"src/Graph/RangeToRangeGraph.hpp\"\n#include <vector>\n#include\
+    \ <tuple>\ntemplate <typename T= int> class RangeToRangeGraph {\n const int n;\n\
     \ int nn;\n std::vector<std::tuple<int, int, T>> es;\n inline int to_upper_idx(int\
     \ i) const { return i >= n ? i - n : n + i; }\n inline int to_lower_idx(int i)\
-    \ const { return i >= n ? i - n : n + n + i; }\npublic:\n Range2RangeGraph(int\
+    \ const { return i >= n ? i - n : n + n + i; }\npublic:\n RangeToRangeGraph(int\
     \ n): n(n), nn(n * 3) {\n  for (int i= 2; i < n + n; ++i) add(to_upper_idx(i /\
     \ 2), to_upper_idx(i));\n  for (int i= 2; i < n + n; ++i) add(to_lower_idx(i),\
     \ to_lower_idx(i / 2));\n }\n void add(int s, int t, T w= 0) { es.emplace_back(s,\
@@ -36,10 +36,10 @@ data:
     \ t_l, t_r, 0), ++nn; }\n int node_size() const { return nn; }\n std::vector<std::tuple<int,\
     \ int, T>> get_edges() const { return es; }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <tuple>\ntemplate <typename T=\
-    \ int> class Range2RangeGraph {\n const int n;\n int nn;\n std::vector<std::tuple<int,\
+    \ int> class RangeToRangeGraph {\n const int n;\n int nn;\n std::vector<std::tuple<int,\
     \ int, T>> es;\n inline int to_upper_idx(int i) const { return i >= n ? i - n\
     \ : n + i; }\n inline int to_lower_idx(int i) const { return i >= n ? i - n :\
-    \ n + n + i; }\npublic:\n Range2RangeGraph(int n): n(n), nn(n * 3) {\n  for (int\
+    \ n + n + i; }\npublic:\n RangeToRangeGraph(int n): n(n), nn(n * 3) {\n  for (int\
     \ i= 2; i < n + n; ++i) add(to_upper_idx(i / 2), to_upper_idx(i));\n  for (int\
     \ i= 2; i < n + n; ++i) add(to_lower_idx(i), to_lower_idx(i / 2));\n }\n void\
     \ add(int s, int t, T w= 0) { es.emplace_back(s, t, w); }\n // [s_l, s_r) -> t\n\
@@ -55,15 +55,15 @@ data:
     \ T>> get_edges() const { return es; }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: src/Graph/Range2RangeGraph.hpp
+  path: src/Graph/RangeToRangeGraph.hpp
   requiredBy: []
-  timestamp: '2023-01-27 14:20:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-02-07 15:39:13+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3506.test.cpp
   - test/yukicoder/1170.test.cpp
   - test/yukicoder/1868.test.cpp
-documentation_of: src/Graph/Range2RangeGraph.hpp
+documentation_of: src/Graph/RangeToRangeGraph.hpp
 layout: document
 title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
 ---

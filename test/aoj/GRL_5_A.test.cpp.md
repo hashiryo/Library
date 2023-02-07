@@ -1,67 +1,39 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Graph/ReRooting.hpp
-    title: "\u5168\u65B9\u4F4D\u6728DP"
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
-  attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
-    links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
-  bundledCode: "#line 1 \"test/aoj/GRL_5_A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
-    \n#include <iostream>\n#include <algorithm>\n#line 2 \"src/Graph/ReRooting.hpp\"\
-    \n#include <bits/stdc++.h>\n/**\n * @title \u5168\u65B9\u4F4D\u6728DP\n * @category\
-    \ \u30B0\u30E9\u30D5\n * @see https://ei1333.hateblo.jp/entry/2018/12/21/004022\n\
-    \ */\n\n// BEGIN CUT HERE\n\ntemplate <typename T, typename E = int>\nstruct ReRooting\
-    \ {\n  struct Edge {\n    int to;\n    E data;\n    T dp, ndp;\n  };\n  std::vector<std::vector<Edge>>\
-    \ adj;\n\n private:\n  const std::function<T(T, T)> op;\n  const T id;\n  const\
-    \ std::function<T(T, E)> lift;\n  std::vector<T> subdp, dp;\n\n private:\n  void\
-    \ dfs_sub(int idx, int par) {\n    for (auto &e : adj[idx]) {\n      if (e.to\
-    \ == par) continue;\n      dfs_sub(e.to, idx);\n      subdp[idx] = op(subdp[idx],\
-    \ lift(subdp[e.to], e.data));\n    }\n  }\n  void dfs_all(int idx, int par, const\
-    \ T &top) {\n    T buff = id;\n    for (int i = 0; i < (int)adj[idx].size(); i++)\
-    \ {\n      auto &e = adj[idx][i];\n      e.ndp = buff;\n      e.dp = lift(par\
-    \ == e.to ? top : subdp[e.to], e.data);\n      buff = op(buff, e.dp);\n    }\n\
-    \    dp[idx] = buff;\n    buff = id;\n    for (int i = (int)adj[idx].size() -\
-    \ 1; i >= 0; i--) {\n      auto &e = adj[idx][i];\n      if (e.to != par) dfs_all(e.to,\
-    \ idx, op(e.ndp, buff));\n      e.ndp = op(e.ndp, buff);\n      buff = op(buff,\
-    \ e.dp);\n    }\n  }\n\n public:\n  ReRooting(\n      int N, const std::function<T(T,\
-    \ T)> &op_, T id_,\n      const std::function<T(T, E)> &lift_\n      = [](const\
-    \ T &dp, const E &dat) { return dp; })\n      : adj(N), op(op_), id(id_), lift(lift_),\
-    \ subdp(N, id_), dp(N, id_) {}\n  void add_edge(int src, int dst, E d = E()) {\n\
-    \    adj[src].emplace_back((Edge){dst, d, id, id});\n  }\n  std::vector<T> run()\
-    \ {\n    dfs_sub(0, -1);\n    dfs_all(0, -1, id);\n    return dp;\n  }\n};\n#line\
-    \ 5 \"test/aoj/GRL_5_A.test.cpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n int n;\n cin >> n;\n auto op= [](long long l, long\
-    \ long r) { return max(l, r); };\n auto lift= [](long long l, long long dat) {\
-    \ return l + dat; };\n ReRooting<long long, long long> tree(n, op, 0, lift);\n\
-    \ for (int i= 0; i < n - 1; i++) {\n  int s, t;\n  long long w;\n  cin >> s >>\
-    \ t >> w;\n  tree.add_edge(s, t, w);\n  tree.add_edge(t, s, w);\n }\n auto ret=\
-    \ tree.run();\n long long ans= 0;\n for (int i= 0; i < n; i++) ans= max(ans, ret[i]);\n\
-    \ cout << ans << '\\n';\n return 0;\n}\n"
+  _verificationStatusIcon: ':x:'
+  attributes: {}
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/documentation/build.py\"\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n          \
+    \         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\
+    \  File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
+    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
+    \                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n \
+    \ File \"/opt/hostedtoolcache/Python/3.11.1/x64/lib/python3.11/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
+    , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
+    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: src/Graph/rerooting.hpp:\
+    \ line -1: no such header\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
-    \n#include <iostream>\n#include <algorithm>\n#include \"src/Graph/ReRooting.hpp\"\
+    \n#include <iostream>\n#include <algorithm>\n#include \"src/Graph/rerooting.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n;\n cin >> n;\n auto op= [](long long l, long long r) { return max(l, r);\
-    \ };\n auto lift= [](long long l, long long dat) { return l + dat; };\n ReRooting<long\
-    \ long, long long> tree(n, op, 0, lift);\n for (int i= 0; i < n - 1; i++) {\n\
-    \  int s, t;\n  long long w;\n  cin >> s >> t >> w;\n  tree.add_edge(s, t, w);\n\
-    \  tree.add_edge(t, s, w);\n }\n auto ret= tree.run();\n long long ans= 0;\n for\
-    \ (int i= 0; i < n; i++) ans= max(ans, ret[i]);\n cout << ans << '\\n';\n return\
-    \ 0;\n}"
-  dependsOn:
-  - src/Graph/ReRooting.hpp
+    \ int n;\n cin >> n;\n Tree<int> tree(n);\n for (int i= 0; i < n - 1; ++i) {\n\
+    \  int s, t, w;\n  cin >> s >> t >> w;\n  tree.add_edge(s, t, w);\n }\n tree.build();\n\
+    \ auto f_ee= [&](int l, int r) { return max(l, r); };\n auto f_ve= [&](int d,\
+    \ int, const auto &e) { return d + e.cost; };\n auto f_ev= [&](int d, int) { return\
+    \ d; };\n auto dp= rerooting<int>(tree, f_ee, f_ve, f_ev, 0);\n cout << *max_element(dp.begin(),\
+    \ dp.end()) << '\\n';\n return 0;\n}"
+  dependsOn: []
   isVerificationFile: true
   path: test/aoj/GRL_5_A.test.cpp
   requiredBy: []
-  timestamp: '2023-01-23 18:57:46+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '1970-01-01 00:00:00+00:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/GRL_5_A.test.cpp
 layout: document
