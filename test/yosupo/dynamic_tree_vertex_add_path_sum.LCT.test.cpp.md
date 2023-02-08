@@ -76,26 +76,26 @@ data:
     \ {\n  evert(p), expose(&ns[c]), assert(ns[c].ch[0] == &ns[p]), ns[c].ch[0]= ns[c].ch[0]->par=\
     \ nullptr;\n  if constexpr (semigroup_v<M>) pushup(&ns[c]);\n }\n int root(std::size_t\
     \ x) {\n  expose(&ns[x]);\n  Node *t= &ns[x];\n  while (t->ch[0]) t= t->ch[0];\n\
-    \  return t - &ns[0];\n }\n int par(std::size_t x) {\n  expose(&ns[x]);\n  Node\
-    \ *t= ns[x].ch[0];\n  if (!t) return -1;\n  while (t->ch[1]) t= t->ch[1];\n  return\
-    \ t - &ns[0];\n }\n int lca(std::size_t x, std::size_t y) {\n  if (x == y) return\
-    \ x;\n  expose(&ns[x]);\n  Node *u= expose(&ns[y]);\n  return ns[x].par ? u -\
-    \ &ns[0] : -1;\n }\n const T &operator[](std::size_t k) { return get(k); }\n const\
-    \ T &get(std::size_t k) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\"\
-    get\\\" is not available\\n\");\n  return expose(&ns[k]), ns[k].val;\n }\n void\
-    \ set(std::size_t k, T v) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\
-    \"set\\\" is not available\\n\");\n  expose(&ns[k]), ns[k].val= v;\n  if constexpr\
-    \ (semigroup_v<M>) pushup(&ns[k]);\n }\n T fold(std::size_t a, std::size_t b)\
-    \ {  // [a,b] closed section\n  static_assert(semigroup_v<M>, \"\\\"fold\\\" is\
-    \ not available\\n\");\n  if (a == b) return get(a);\n  return evert(a), expose(&ns[b]),\
-    \ assert(ns[a].par), ns[b].sum;\n }\n void apply(std::size_t a, std::size_t b,\
-    \ E v) {  // [a,b] closed section\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
-    \ is not available\\n\");\n  evert(a), expose(&ns[b]), assert(a == b || ns[a].par),\
-    \ propagate(&ns[b], v), eval(&ns[b]);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M> || dual_v<M>) ret+=\
-    \ \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"\
-    fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \";\n  return ret;\n\
-    \ }\n};\n#line 4 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\
+    \  return t - &ns[0];\n }\n int parent(std::size_t x) {\n  expose(&ns[x]);\n \
+    \ Node *t= ns[x].ch[0];\n  if (!t) return -1;\n  while (t->ch[1]) eval(t), t=\
+    \ t->ch[1];\n  return splay(t), t - &ns[0];\n }\n int lca(std::size_t x, std::size_t\
+    \ y) {\n  if (x == y) return x;\n  expose(&ns[x]);\n  Node *u= expose(&ns[y]);\n\
+    \  return ns[x].par ? u - &ns[0] : -1;\n }\n const T &operator[](std::size_t k)\
+    \ { return get(k); }\n const T &get(std::size_t k) {\n  static_assert(semigroup_v<M>\
+    \ || dual_v<M>, \"\\\"get\\\" is not available\\n\");\n  return expose(&ns[k]),\
+    \ ns[k].val;\n }\n void set(std::size_t k, T v) {\n  static_assert(semigroup_v<M>\
+    \ || dual_v<M>, \"\\\"set\\\" is not available\\n\");\n  expose(&ns[k]), ns[k].val=\
+    \ v;\n  if constexpr (semigroup_v<M>) pushup(&ns[k]);\n }\n T fold(std::size_t\
+    \ a, std::size_t b) {  // [a,b] closed section\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"fold\\\" is not available\\n\");\n  if (a == b) return get(a);\n  return\
+    \ evert(a), expose(&ns[b]), assert(ns[a].par), ns[b].sum;\n }\n void apply(std::size_t\
+    \ a, std::size_t b, E v) {  // [a,b] closed section\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply\\\" is not available\\n\");\n  evert(a), expose(&ns[b]), assert(a\
+    \ == b || ns[a].par), propagate(&ns[b], v), eval(&ns[b]);\n }\n static std::string\
+    \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M>\
+    \ || dual_v<M>) ret+= \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>)\
+    \ ret+= \"\\\"fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \"\
+    ;\n  return ret;\n }\n};\n#line 4 \"test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp\"\
     \nusing namespace std;\nstruct RsumQ {\n using T= long long;\n static T op(const\
     \ T &l, const T &r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n LinkCutTree<RsumQ> lct(N);\n for (int i= 0; i <\
@@ -124,7 +124,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2023-02-09 01:54:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp

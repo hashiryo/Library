@@ -85,30 +85,30 @@ data:
     \ {\n  evert(p), expose(&ns[c]), assert(ns[c].ch[0] == &ns[p]), ns[c].ch[0]= ns[c].ch[0]->par=\
     \ nullptr;\n  if constexpr (semigroup_v<M>) pushup(&ns[c]);\n }\n int root(std::size_t\
     \ x) {\n  expose(&ns[x]);\n  Node *t= &ns[x];\n  while (t->ch[0]) t= t->ch[0];\n\
-    \  return t - &ns[0];\n }\n int par(std::size_t x) {\n  expose(&ns[x]);\n  Node\
-    \ *t= ns[x].ch[0];\n  if (!t) return -1;\n  while (t->ch[1]) t= t->ch[1];\n  return\
-    \ t - &ns[0];\n }\n int lca(std::size_t x, std::size_t y) {\n  if (x == y) return\
-    \ x;\n  expose(&ns[x]);\n  Node *u= expose(&ns[y]);\n  return ns[x].par ? u -\
-    \ &ns[0] : -1;\n }\n const T &operator[](std::size_t k) { return get(k); }\n const\
-    \ T &get(std::size_t k) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\"\
-    get\\\" is not available\\n\");\n  return expose(&ns[k]), ns[k].val;\n }\n void\
-    \ set(std::size_t k, T v) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\
-    \"set\\\" is not available\\n\");\n  expose(&ns[k]), ns[k].val= v;\n  if constexpr\
-    \ (semigroup_v<M>) pushup(&ns[k]);\n }\n T fold(std::size_t a, std::size_t b)\
-    \ {  // [a,b] closed section\n  static_assert(semigroup_v<M>, \"\\\"fold\\\" is\
-    \ not available\\n\");\n  if (a == b) return get(a);\n  return evert(a), expose(&ns[b]),\
-    \ assert(ns[a].par), ns[b].sum;\n }\n void apply(std::size_t a, std::size_t b,\
-    \ E v) {  // [a,b] closed section\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
-    \ is not available\\n\");\n  evert(a), expose(&ns[b]), assert(a == b || ns[a].par),\
-    \ propagate(&ns[b], v), eval(&ns[b]);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M> || dual_v<M>) ret+=\
-    \ \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"\
-    fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \";\n  return ret;\n\
-    \ }\n};\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline\
-    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
-    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z\
-    \ - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod -\
-    \ (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \  return t - &ns[0];\n }\n int parent(std::size_t x) {\n  expose(&ns[x]);\n \
+    \ Node *t= ns[x].ch[0];\n  if (!t) return -1;\n  while (t->ch[1]) eval(t), t=\
+    \ t->ch[1];\n  return splay(t), t - &ns[0];\n }\n int lca(std::size_t x, std::size_t\
+    \ y) {\n  if (x == y) return x;\n  expose(&ns[x]);\n  Node *u= expose(&ns[y]);\n\
+    \  return ns[x].par ? u - &ns[0] : -1;\n }\n const T &operator[](std::size_t k)\
+    \ { return get(k); }\n const T &get(std::size_t k) {\n  static_assert(semigroup_v<M>\
+    \ || dual_v<M>, \"\\\"get\\\" is not available\\n\");\n  return expose(&ns[k]),\
+    \ ns[k].val;\n }\n void set(std::size_t k, T v) {\n  static_assert(semigroup_v<M>\
+    \ || dual_v<M>, \"\\\"set\\\" is not available\\n\");\n  expose(&ns[k]), ns[k].val=\
+    \ v;\n  if constexpr (semigroup_v<M>) pushup(&ns[k]);\n }\n T fold(std::size_t\
+    \ a, std::size_t b) {  // [a,b] closed section\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"fold\\\" is not available\\n\");\n  if (a == b) return get(a);\n  return\
+    \ evert(a), expose(&ns[b]), assert(ns[a].par), ns[b].sum;\n }\n void apply(std::size_t\
+    \ a, std::size_t b, E v) {  // [a,b] closed section\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply\\\" is not available\\n\");\n  evert(a), expose(&ns[b]), assert(a\
+    \ == b || ns[a].par), propagate(&ns[b], v), eval(&ns[b]);\n }\n static std::string\
+    \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M>\
+    \ || dual_v<M>) ret+= \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>)\
+    \ ret+= \"\\\"fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \"\
+    ;\n  return ret;\n }\n};\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int>\
+    \ constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
+    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
+    \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
     \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
     using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
     \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
@@ -223,7 +223,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 17:34:35+09:00'
+  timestamp: '2023-02-09 01:54:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp

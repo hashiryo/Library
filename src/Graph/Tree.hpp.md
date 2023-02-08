@@ -9,7 +9,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2270.DynSeg.test.cpp
+    title: test/aoj/2270.DynSeg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,13 +21,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.test.cpp
     title: test/atcoder/abc223_g.test.cpp
   - icon: ':x:'
@@ -201,6 +204,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1595.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/GRL_5_A.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp

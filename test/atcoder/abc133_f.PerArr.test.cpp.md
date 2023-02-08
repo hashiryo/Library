@@ -95,39 +95,39 @@ data:
     \ {\n  evert(p), expose(&ns[c]), assert(ns[c].ch[0] == &ns[p]), ns[c].ch[0]= ns[c].ch[0]->par=\
     \ nullptr;\n  if constexpr (semigroup_v<M>) pushup(&ns[c]);\n }\n int root(std::size_t\
     \ x) {\n  expose(&ns[x]);\n  Node *t= &ns[x];\n  while (t->ch[0]) t= t->ch[0];\n\
-    \  return t - &ns[0];\n }\n int par(std::size_t x) {\n  expose(&ns[x]);\n  Node\
-    \ *t= ns[x].ch[0];\n  if (!t) return -1;\n  while (t->ch[1]) t= t->ch[1];\n  return\
-    \ t - &ns[0];\n }\n int lca(std::size_t x, std::size_t y) {\n  if (x == y) return\
-    \ x;\n  expose(&ns[x]);\n  Node *u= expose(&ns[y]);\n  return ns[x].par ? u -\
-    \ &ns[0] : -1;\n }\n const T &operator[](std::size_t k) { return get(k); }\n const\
-    \ T &get(std::size_t k) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\"\
-    get\\\" is not available\\n\");\n  return expose(&ns[k]), ns[k].val;\n }\n void\
-    \ set(std::size_t k, T v) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\
-    \"set\\\" is not available\\n\");\n  expose(&ns[k]), ns[k].val= v;\n  if constexpr\
-    \ (semigroup_v<M>) pushup(&ns[k]);\n }\n T fold(std::size_t a, std::size_t b)\
-    \ {  // [a,b] closed section\n  static_assert(semigroup_v<M>, \"\\\"fold\\\" is\
-    \ not available\\n\");\n  if (a == b) return get(a);\n  return evert(a), expose(&ns[b]),\
-    \ assert(ns[a].par), ns[b].sum;\n }\n void apply(std::size_t a, std::size_t b,\
-    \ E v) {  // [a,b] closed section\n  static_assert(dual_v<M>, \"\\\"apply\\\"\
-    \ is not available\\n\");\n  evert(a), expose(&ns[b]), assert(a == b || ns[a].par),\
-    \ propagate(&ns[b], v), eval(&ns[b]);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M> || dual_v<M>) ret+=\
-    \ \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"\
-    fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \";\n  return ret;\n\
-    \ }\n};\n#line 8 \"test/atcoder/abc133_f.PerArr.test.cpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >>\
-    \ N >> Q;\n LinkCutTree lct(N);\n vector<tuple<int, int, int>> adj[N];\n for (int\
-    \ i= 0; i < N - 1; i++) {\n  int a, b, c, d;\n  cin >> a >> b >> c >> d;\n  lct.link(--a,\
-    \ --b);\n  adj[a].emplace_back(b, c, d);\n  adj[b].emplace_back(a, c, d);\n }\n\
-    \ using PerArr= PersistentArray<int, 8>;\n PerArr Arr1[N], Arr2[N];\n int sum[N];\n\
-    \ sum[0]= 0;\n auto dfs= [&adj, &Arr1, &Arr2, &sum](auto f, int v, int p) -> void\
-    \ {\n  for (auto [u, c, d]: adj[v])\n   if (u != p) {\n    Arr1[u]= Arr1[v], Arr2[u]=\
-    \ Arr2[v];\n    Arr1[u][c]+= 1, Arr2[u][c]+= d;\n    sum[u]= sum[v] + d;\n   \
-    \ f(f, u, v);\n   }\n };\n dfs(dfs, 0, -1);\n lct.evert(0);\n for (int i= 0; i\
-    \ < Q; i++) {\n  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n  int lca= lct.lca(--u,\
-    \ --v);\n  cout << sum[u] + sum[v] - 2 * sum[lca] + y * (Arr1[u].get(x) + Arr1[v].get(x)\
-    \ - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) + Arr2[v].get(x) - 2 * Arr2[lca].get(x))\
-    \ << '\\n';\n }\n return 0;\n}\n"
+    \  return t - &ns[0];\n }\n int parent(std::size_t x) {\n  expose(&ns[x]);\n \
+    \ Node *t= ns[x].ch[0];\n  if (!t) return -1;\n  while (t->ch[1]) eval(t), t=\
+    \ t->ch[1];\n  return splay(t), t - &ns[0];\n }\n int lca(std::size_t x, std::size_t\
+    \ y) {\n  if (x == y) return x;\n  expose(&ns[x]);\n  Node *u= expose(&ns[y]);\n\
+    \  return ns[x].par ? u - &ns[0] : -1;\n }\n const T &operator[](std::size_t k)\
+    \ { return get(k); }\n const T &get(std::size_t k) {\n  static_assert(semigroup_v<M>\
+    \ || dual_v<M>, \"\\\"get\\\" is not available\\n\");\n  return expose(&ns[k]),\
+    \ ns[k].val;\n }\n void set(std::size_t k, T v) {\n  static_assert(semigroup_v<M>\
+    \ || dual_v<M>, \"\\\"set\\\" is not available\\n\");\n  expose(&ns[k]), ns[k].val=\
+    \ v;\n  if constexpr (semigroup_v<M>) pushup(&ns[k]);\n }\n T fold(std::size_t\
+    \ a, std::size_t b) {  // [a,b] closed section\n  static_assert(semigroup_v<M>,\
+    \ \"\\\"fold\\\" is not available\\n\");\n  if (a == b) return get(a);\n  return\
+    \ evert(a), expose(&ns[b]), assert(ns[a].par), ns[b].sum;\n }\n void apply(std::size_t\
+    \ a, std::size_t b, E v) {  // [a,b] closed section\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply\\\" is not available\\n\");\n  evert(a), expose(&ns[b]), assert(a\
+    \ == b || ns[a].par), propagate(&ns[b], v), eval(&ns[b]);\n }\n static std::string\
+    \ which_available() {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M>\
+    \ || dual_v<M>) ret+= \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>)\
+    \ ret+= \"\\\"fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \"\
+    ;\n  return ret;\n }\n};\n#line 8 \"test/atcoder/abc133_f.PerArr.test.cpp\"\n\
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n LinkCutTree lct(N);\n vector<tuple<int, int, int>>\
+    \ adj[N];\n for (int i= 0; i < N - 1; i++) {\n  int a, b, c, d;\n  cin >> a >>\
+    \ b >> c >> d;\n  lct.link(--a, --b);\n  adj[a].emplace_back(b, c, d);\n  adj[b].emplace_back(a,\
+    \ c, d);\n }\n using PerArr= PersistentArray<int, 8>;\n PerArr Arr1[N], Arr2[N];\n\
+    \ int sum[N];\n sum[0]= 0;\n auto dfs= [&adj, &Arr1, &Arr2, &sum](auto f, int\
+    \ v, int p) -> void {\n  for (auto [u, c, d]: adj[v])\n   if (u != p) {\n    Arr1[u]=\
+    \ Arr1[v], Arr2[u]= Arr2[v];\n    Arr1[u][c]+= 1, Arr2[u][c]+= d;\n    sum[u]=\
+    \ sum[v] + d;\n    f(f, u, v);\n   }\n };\n dfs(dfs, 0, -1);\n lct.evert(0);\n\
+    \ for (int i= 0; i < Q; i++) {\n  int x, y, u, v;\n  cin >> x >> y >> u >> v;\n\
+    \  int lca= lct.lca(--u, --v);\n  cout << sum[u] + sum[v] - 2 * sum[lca] + y *\
+    \ (Arr1[u].get(x) + Arr1[v].get(x) - 2 * Arr1[lca].get(x)) - (Arr2[u].get(x) +\
+    \ Arr2[v].get(x) - 2 * Arr2[lca].get(x)) << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc133/tasks/abc133_f\"\n//\
     \ \u6C38\u7D9A\u914D\u5217(at) \u306E verify\n#include <iostream>\n#include <vector>\n\
     #include <tuple>\n#include \"src/DataStructure/PersistentArray.hpp\"\n#include\
@@ -152,7 +152,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.PerArr.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2023-02-09 01:54:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.PerArr.test.cpp

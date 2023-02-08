@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
   - icon: ':question:'
@@ -186,12 +186,12 @@ data:
     \ }\n void cut(std::size_t c, std::size_t p) {\n  evert(p), expose(&ns[c]), assert(ns[c].ch[0]\
     \ == &ns[p]), ns[c].ch[0]= ns[c].ch[0]->par= nullptr;\n  if constexpr (semigroup_v<M>)\
     \ pushup(&ns[c]);\n }\n int root(std::size_t x) {\n  expose(&ns[x]);\n  Node *t=\
-    \ &ns[x];\n  while (t->ch[0]) t= t->ch[0];\n  return t - &ns[0];\n }\n int par(std::size_t\
+    \ &ns[x];\n  while (t->ch[0]) t= t->ch[0];\n  return t - &ns[0];\n }\n int parent(std::size_t\
     \ x) {\n  expose(&ns[x]);\n  Node *t= ns[x].ch[0];\n  if (!t) return -1;\n  while\
-    \ (t->ch[1]) t= t->ch[1];\n  return t - &ns[0];\n }\n int lca(std::size_t x, std::size_t\
-    \ y) {\n  if (x == y) return x;\n  expose(&ns[x]);\n  Node *u= expose(&ns[y]);\n\
-    \  return ns[x].par ? u - &ns[0] : -1;\n }\n const T &operator[](std::size_t k)\
-    \ { return get(k); }\n const T &get(std::size_t k) {\n  static_assert(semigroup_v<M>\
+    \ (t->ch[1]) eval(t), t= t->ch[1];\n  return splay(t), t - &ns[0];\n }\n int lca(std::size_t\
+    \ x, std::size_t y) {\n  if (x == y) return x;\n  expose(&ns[x]);\n  Node *u=\
+    \ expose(&ns[y]);\n  return ns[x].par ? u - &ns[0] : -1;\n }\n const T &operator[](std::size_t\
+    \ k) { return get(k); }\n const T &get(std::size_t k) {\n  static_assert(semigroup_v<M>\
     \ || dual_v<M>, \"\\\"get\\\" is not available\\n\");\n  return expose(&ns[k]),\
     \ ns[k].val;\n }\n void set(std::size_t k, T v) {\n  static_assert(semigroup_v<M>\
     \ || dual_v<M>, \"\\\"set\\\" is not available\\n\");\n  expose(&ns[k]), ns[k].val=\
@@ -243,7 +243,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.Patricia.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2023-02-09 01:54:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.Patricia.test.cpp

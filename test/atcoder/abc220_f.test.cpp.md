@@ -9,9 +9,9 @@ data:
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc220/tasks/abc220_f
@@ -97,7 +97,7 @@ data:
     }\n#line 5 \"test/atcoder/abc220_f.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n Tree tree(N);\n\
     \ for (int i= 0; i < N - 1; ++i) {\n  int u, v;\n  cin >> u >> v;\n  tree.add_edge(--u,\
-    \ --v);\n }\n tree.build();\n using Data= array<int, 2>;\n auto f_ee= [&](const\
+    \ --v);\n }\n tree.build();\n using Data= array<long long, 2>;\n auto f_ee= [&](const\
     \ Data& l, const Data& r) { return Data{l[0] + r[0], l[1] + r[1]}; };\n auto f_ve=\
     \ [&](const Data& d, int, auto) { return Data{d[0], d[0] + d[1]}; };\n auto f_ev=\
     \ [&](const Data& d, int) { return Data{d[0] + 1, d[1]}; };\n auto dp= rerooting<Data>(tree,\
@@ -107,11 +107,11 @@ data:
     \ <iostream>\n#include <array>\n#include \"src/Graph/rerooting.hpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin\
     \ >> N;\n Tree tree(N);\n for (int i= 0; i < N - 1; ++i) {\n  int u, v;\n  cin\
-    \ >> u >> v;\n  tree.add_edge(--u, --v);\n }\n tree.build();\n using Data= array<int,\
-    \ 2>;\n auto f_ee= [&](const Data& l, const Data& r) { return Data{l[0] + r[0],\
-    \ l[1] + r[1]}; };\n auto f_ve= [&](const Data& d, int, auto) { return Data{d[0],\
-    \ d[0] + d[1]}; };\n auto f_ev= [&](const Data& d, int) { return Data{d[0] + 1,\
-    \ d[1]}; };\n auto dp= rerooting<Data>(tree, f_ee, f_ve, f_ev, Data{0, 0});\n\
+    \ >> u >> v;\n  tree.add_edge(--u, --v);\n }\n tree.build();\n using Data= array<long\
+    \ long, 2>;\n auto f_ee= [&](const Data& l, const Data& r) { return Data{l[0]\
+    \ + r[0], l[1] + r[1]}; };\n auto f_ve= [&](const Data& d, int, auto) { return\
+    \ Data{d[0], d[0] + d[1]}; };\n auto f_ev= [&](const Data& d, int) { return Data{d[0]\
+    \ + 1, d[1]}; };\n auto dp= rerooting<Data>(tree, f_ee, f_ve, f_ev, Data{0, 0});\n\
     \ for (auto [_, x]: dp) cout << x << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Graph/rerooting.hpp
@@ -119,8 +119,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc220_f.test.cpp
   requiredBy: []
-  timestamp: '2023-02-09 01:04:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-02-09 01:54:17+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc220_f.test.cpp
 layout: document
