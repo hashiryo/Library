@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':question:'
@@ -22,9 +22,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc160/tasks/abc160_f
@@ -126,15 +126,16 @@ data:
     \ * finv(n - r); }\n static mint nCr(int n, int r) { return nPr(n, r) * finv(r);\
     \ }\n static mint nHr(int n, int r) { return !r ? mint(1) : nCr(n + r - 1, r);\
     \ }\n};\n#line 3 \"src/Graph/Tree.hpp\"\n#include <cstddef>\n#include <vector>\n\
-    #line 6 \"src/Graph/Tree.hpp\"\n#include <array>\ntemplate <class Cost= void>\
-    \ class Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
-    \ };\n template <class D> struct Edge_B<D, void> { int to; };\n using Edge= Edge_B<void,\
-    \ Cost>;\n std::vector<std::vector<Edge>> adj;\n std::vector<int> P, PP, D, I,\
-    \ L, R;\npublic:\n Tree(int n): adj(n) {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T,\
-    \ void>, std::nullptr_t> = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}),\
-    \ adj[v].emplace_back(Edge{u}); }\n template <class T, std::enable_if_t<std::is_convertible_v<T,\
-    \ Cost>, std::nullptr_t> = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v,\
-    \ c}), adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    #line 6 \"src/Graph/Tree.hpp\"\n#include <array>\n#include <numeric>\ntemplate\
+    \ <class Cost= void> class Tree {\n template <class D, class T> struct Edge_B\
+    \ {\n  int to;\n  T cost;\n };\n template <class D> struct Edge_B<D, void> { int\
+    \ to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>> adj;\n\
+    \ std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n template\
+    \ <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t> =\
+    \ nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
+    \ }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
+    \ = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v, c}),\
+    \ adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { adj[u].emplace_back(Edge{v, c}),\
     \ adj[v].emplace_back(Edge{u, d}); }\n const std::vector<Edge> &operator[](int\
@@ -232,8 +233,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc160_f.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 17:37:23+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-02-08 23:13:49+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc160_f.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
@@ -12,7 +12,7 @@ data:
   - icon: ':x:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'
@@ -65,18 +65,18 @@ data:
     title: test/yukicoder/922.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
-    #include <vector>\n#include <algorithm>\n#include <array>\ntemplate <class Cost=\
-    \ void> class Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n\
-    \  T cost;\n };\n template <class D> struct Edge_B<D, void> { int to; };\n using\
-    \ Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>> adj;\n std::vector<int>\
-    \ P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n template <class T= Cost,\
-    \ std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t> = nullptr> void add_edge(int\
-    \ u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u}); }\n\
-    \ template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
+    #include <vector>\n#include <algorithm>\n#include <array>\n#include <numeric>\n\
+    template <class Cost= void> class Tree {\n template <class D, class T> struct\
+    \ Edge_B {\n  int to;\n  T cost;\n };\n template <class D> struct Edge_B<D, void>\
+    \ { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
+    \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
+    \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
+    \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
+    \ }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
     \ = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v, c}),\
     \ adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
@@ -170,8 +170,8 @@ data:
   isVerificationFile: false
   path: src/Graph/rerooting.hpp
   requiredBy: []
-  timestamp: '2023-02-07 17:37:23+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-02-08 23:13:49+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1595.test.cpp
   - test/aoj/GRL_5_A.test.cpp

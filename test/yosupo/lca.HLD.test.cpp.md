@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
@@ -17,9 +17,9 @@ data:
   bundledCode: "#line 1 \"test/yosupo/lca.HLD.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\
     \n#include <iostream>\n#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n\
     #include <cstddef>\n#include <vector>\n#include <algorithm>\n#include <array>\n\
-    template <class Cost= void> class Tree {\n template <class D, class T> struct\
-    \ Edge_B {\n  int to;\n  T cost;\n };\n template <class D> struct Edge_B<D, void>\
-    \ { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
+    #include <numeric>\ntemplate <class Cost= void> class Tree {\n template <class\
+    \ D, class T> struct Edge_B {\n  int to;\n  T cost;\n };\n template <class D>\
+    \ struct Edge_B<D, void> { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
     \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
     \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
     \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
@@ -86,7 +86,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/lca.HLD.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 15:39:13+09:00'
+  timestamp: '2023-02-08 23:13:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/lca.HLD.test.cpp
