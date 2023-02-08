@@ -305,7 +305,7 @@ data:
     - icon: ':x:'
       path: src/Math/mod_kth_root.hpp
       title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
     - icon: ':x:'
@@ -318,7 +318,7 @@ data:
     - icon: ':question:'
       path: src/Math/prime_count.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - name: src/Misc
@@ -430,7 +430,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1549.WM.test.cpp
       title: test/aoj/1549.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1595.test.cpp
       title: test/aoj/1595.test.cpp
     - icon: ':heavy_check_mark:'
@@ -742,7 +742,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_3_B.test.cpp
       title: test/aoj/GRL_3_B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_5_A.test.cpp
       title: test/aoj/GRL_5_A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -849,10 +849,10 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_h.sparse_FPS.test.cpp
       title: test/atcoder/abc222_h.sparse_FPS.test.cpp
     - icon: ':x:'

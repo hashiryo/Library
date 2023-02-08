@@ -112,14 +112,14 @@ data:
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 3 \"src/Graph/Tree.hpp\"\n#include <cstddef>\n#line\
-    \ 6 \"src/Graph/Tree.hpp\"\n#include <array>\n#include <numeric>\ntemplate <class\
-    \ Cost= void> class Tree {\n template <class D, class T> struct Edge_B {\n  int\
-    \ to;\n  T cost;\n };\n template <class D> struct Edge_B<D, void> { int to; };\n\
-    \ using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>> adj;\n std::vector<int>\
-    \ P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n template <class T= Cost,\
-    \ std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t> = nullptr> void add_edge(int\
-    \ u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u}); }\n\
-    \ template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
+    \ 6 \"src/Graph/Tree.hpp\"\n#include <array>\n#include <numeric>\n#line 9 \"src/Graph/Tree.hpp\"\
+    \ntemplate <class Cost= void> class Tree {\n template <class D, class T> struct\
+    \ Edge_B {\n  int to;\n  T cost;\n };\n template <class D> struct Edge_B<D, void>\
+    \ { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
+    \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
+    \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
+    \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
+    \ }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
     \ = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v, c}),\
     \ adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
@@ -235,7 +235,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   requiredBy: []
-  timestamp: '2023-02-08 23:13:49+09:00'
+  timestamp: '2023-02-09 01:04:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/vertex_set_path_composite.HLD.test.cpp

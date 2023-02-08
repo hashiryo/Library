@@ -20,15 +20,15 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc223_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc223/tasks/abc223_g\"\
     \n#include <iostream>\n#include <algorithm>\n#include <array>\n#line 2 \"src/Graph/Tree.hpp\"\
     \n#include <type_traits>\n#include <cstddef>\n#include <vector>\n#line 7 \"src/Graph/Tree.hpp\"\
-    \n#include <numeric>\ntemplate <class Cost= void> class Tree {\n template <class\
-    \ D, class T> struct Edge_B {\n  int to;\n  T cost;\n };\n template <class D>\
-    \ struct Edge_B<D, void> { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
-    \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
-    \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
-    \ }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v, c}),\
-    \ adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \n#include <numeric>\n#include <cassert>\ntemplate <class Cost= void> class Tree\
+    \ {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n };\n\
+    \ template <class D> struct Edge_B<D, void> { int to; };\n using Edge= Edge_B<void,\
+    \ Cost>;\n std::vector<std::vector<Edge>> adj;\n std::vector<int> P, PP, D, I,\
+    \ L, R;\npublic:\n Tree(int n): adj(n) {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T,\
+    \ void>, std::nullptr_t> = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}),\
+    \ adj[v].emplace_back(Edge{u}); }\n template <class T, std::enable_if_t<std::is_convertible_v<T,\
+    \ Cost>, std::nullptr_t> = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v,\
+    \ c}), adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { adj[u].emplace_back(Edge{v, c}),\
     \ adj[v].emplace_back(Edge{u, d}); }\n const std::vector<Edge> &operator[](int\
@@ -121,7 +121,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc223_g.test.cpp
   requiredBy: []
-  timestamp: '2023-02-08 23:13:49+09:00'
+  timestamp: '2023-02-09 01:04:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.test.cpp

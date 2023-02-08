@@ -21,9 +21,9 @@ data:
     \n#include <iostream>\n#include <string>\n#include <array>\n#include <tuple>\n\
     #include <algorithm>\n#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n\
     #include <cstddef>\n#include <vector>\n#line 7 \"src/Graph/Tree.hpp\"\n#include\
-    \ <numeric>\ntemplate <class Cost= void> class Tree {\n template <class D, class\
-    \ T> struct Edge_B {\n  int to;\n  T cost;\n };\n template <class D> struct Edge_B<D,\
-    \ void> { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
+    \ <numeric>\n#include <cassert>\ntemplate <class Cost= void> class Tree {\n template\
+    \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n };\n template <class\
+    \ D> struct Edge_B<D, void> { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
     \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
     \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
     \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
@@ -126,7 +126,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc097_d.test.cpp
   requiredBy: []
-  timestamp: '2023-02-08 23:13:49+09:00'
+  timestamp: '2023-02-09 01:04:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc097_d.test.cpp
