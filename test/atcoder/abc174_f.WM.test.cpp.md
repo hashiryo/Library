@@ -56,9 +56,9 @@ data:
     \ mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t.\
     \ (l <= i < r) && (lb <= v[i] < ub)\n std::size_t count(int l, int r, T lb, T\
     \ ub) const { return count(l, r, ub) - count(l, r, lb); }\n};\n#line 4 \"src/DataStructure/DQuery.hpp\"\
-    \nclass DQuery {\n std::vector<int> next;\n WaveletMatrix<int> wm;\npublic:\n\
-    \ template <class T> DQuery(const std::vector<T> &v): next(v.size(), -1) {\n \
-    \ std::map<T, int> mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i]))\
+    \nclass DQuery {\n WaveletMatrix<int> wm;\npublic:\n template <class T> DQuery(const\
+    \ std::vector<T> &v) {\n  std::vector<int> next(v.size(), -1);\n  std::map<T,\
+    \ int> mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i]))\
     \ next[mp[v[i]]]= i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int\
     \ l, int r) const { return wm.count(l, r, l); }\n};\n#line 5 \"test/atcoder/abc174_f.WM.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -77,7 +77,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc174_f.WM.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 20:06:06+09:00'
+  timestamp: '2023-02-10 13:10:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc174_f.WM.test.cpp

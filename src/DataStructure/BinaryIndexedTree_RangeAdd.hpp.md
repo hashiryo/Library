@@ -22,10 +22,10 @@ data:
     \ l;\n  for (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w * r;\n  for (int k=\
     \ l + 1; k < n; k+= k & -k) dat2[k]+= w;\n  for (int k= r + 1; k < n; k+= k &\
     \ -k) dat2[k]-= w;\n }\n T sum(int x) const {  // sum [0,x)\n  T s= 0;\n  for\
-    \ (int k= x; k; k&= k - 1) s+= dat1[k];\n  for (int k= x; k; k&= k - 1) s+= dat2[k]\
-    \ * x;\n  return s;\n }\n T sum(int l, int r) const { return sum(r) - sum(l);\
-    \ }  // sum [l,r)\n T operator[](size_t k) const { return sum(k + 1) - sum(k);\
-    \ }\n};\n"
+    \ (int k= x; k; k&= k - 1) s+= dat2[k];\n  s*= x;\n  for (int k= x; k; k&= k -\
+    \ 1) s+= dat1[k];\n  return s;\n }\n T sum(int l, int r) const { return sum(r)\
+    \ - sum(l); }  // sum [l,r)\n T operator[](size_t k) const { return sum(k + 1)\
+    \ - sum(k); }\n};\n"
   code: "#pragma once\n#include <vector>\ntemplate <typename T> class BinaryIndexedTree_RangeAdd\
     \ {\n std::vector<T> dat1, dat2;\npublic:\n BinaryIndexedTree_RangeAdd(int n):\
     \ dat1(n + 1, T()), dat2(n + 1, T()) {}\n void add_range(int l, int r, T w) {\
@@ -33,15 +33,15 @@ data:
     \ -k) dat1[k]-= w * l;\n  for (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w *\
     \ r;\n  for (int k= l + 1; k < n; k+= k & -k) dat2[k]+= w;\n  for (int k= r +\
     \ 1; k < n; k+= k & -k) dat2[k]-= w;\n }\n T sum(int x) const {  // sum [0,x)\n\
-    \  T s= 0;\n  for (int k= x; k; k&= k - 1) s+= dat1[k];\n  for (int k= x; k; k&=\
-    \ k - 1) s+= dat2[k] * x;\n  return s;\n }\n T sum(int l, int r) const { return\
-    \ sum(r) - sum(l); }  // sum [l,r)\n T operator[](size_t k) const { return sum(k\
-    \ + 1) - sum(k); }\n};\n"
+    \  T s= 0;\n  for (int k= x; k; k&= k - 1) s+= dat2[k];\n  s*= x;\n  for (int\
+    \ k= x; k; k&= k - 1) s+= dat1[k];\n  return s;\n }\n T sum(int l, int r) const\
+    \ { return sum(r) - sum(l); }  // sum [l,r)\n T operator[](size_t k) const { return\
+    \ sum(k + 1) - sum(k); }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
   requiredBy: []
-  timestamp: '2023-01-21 16:53:05+09:00'
+  timestamp: '2023-02-10 13:10:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp

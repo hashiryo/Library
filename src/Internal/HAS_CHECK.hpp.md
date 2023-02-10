@@ -154,9 +154,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc127_a.test.cpp
     title: test/atcoder/arc127_a.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/bonnie-and-clyde.test.cpp
-    title: test/hackerrank/bonnie-and-clyde.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
@@ -202,9 +199,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.Patricia.test.cpp
     title: test/yosupo/set_xor_min.Patricia.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1326.test.cpp
-    title: test/yukicoder/1326.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
@@ -310,7 +304,6 @@ data:
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/649.DynSeg.test.cpp
   - test/yukicoder/828.ETT.test.cpp
-  - test/yukicoder/1326.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/728.KDT.test.cpp
   - test/yukicoder/649.Patricia.test.cpp
@@ -327,7 +320,6 @@ data:
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc154_e.test.cpp
   - test/atcoder/arc127_a.test.cpp
-  - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
 documentation_of: src/Internal/HAS_CHECK.hpp
 layout: document

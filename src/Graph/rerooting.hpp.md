@@ -25,9 +25,6 @@ data:
     path: test/atcoder/abc223_g.test.cpp
     title: test/atcoder/abc223_g.test.cpp
   - icon: ':x:'
-    path: test/atcoder/arc097_d.test.cpp
-    title: test/atcoder/arc097_d.test.cpp
-  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':x:'
@@ -190,7 +187,6 @@ data:
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc220_f.test.cpp
-  - test/atcoder/arc097_d.test.cpp
   - test/atcoder/abc223_g.test.cpp
 documentation_of: src/Graph/rerooting.hpp
 layout: document
@@ -209,6 +205,7 @@ title: "\u5168\u65B9\u4F4D\u6728DP"
 `unit` : モノイド `U` の単位元
 
 ## 問題例
+[AtCoder Regular Contest 097 F - Monochrome Cat](https://atcoder.jp/contests/arc097/tasks/arc097_d) \
 [AtCoder Regular Contest 022 C - ロミオとジュリエット](https://atcoder.jp/contests/arc022/tasks/arc022_3) \
 [AtCoder Regular Contest 028 C - 高橋王国の分割統治](https://atcoder.jp/contests/arc028/tasks/arc028_3) \
 [Educational DP Contest V - Subtree](https://atcoder.jp/contests/dp/tasks/dp_v) \

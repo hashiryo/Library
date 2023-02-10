@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':question:'
+    path: src/Graph/BiConnectedComponents.hpp
+    title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+  - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedVerifiedWith:
@@ -15,6 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
+  - icon: ':x:'
+    path: test/aoj/3022.test.cpp
+    title: test/aoj/3022.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_3_A.test.cpp
+    title: test/aoj/GRL_3_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
@@ -31,8 +40,11 @@ data:
     path: test/atcoder/abc223_g.test.cpp
     title: test/atcoder/abc223_g.test.cpp
   - icon: ':x:'
-    path: test/atcoder/arc097_d.test.cpp
-    title: test/atcoder/arc097_d.test.cpp
+    path: test/hackerrank/bonnie-and-clyde.test.cpp
+    title: test/hackerrank/bonnie-and-clyde.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/biconnected_components.test.cpp
+    title: test/yosupo/biconnected_components.test.cpp
   - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
@@ -54,6 +66,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1326.test.cpp
+    title: test/yukicoder/1326.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1333.test.cpp
     title: test/yukicoder/1333.test.cpp
@@ -200,15 +215,19 @@ data:
   path: src/Graph/Tree.hpp
   requiredBy:
   - src/Graph/rerooting.hpp
+  - src/Graph/BiConnectedComponents.hpp
   timestamp: '2023-02-09 01:04:11+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/aoj/GRL_3_A.test.cpp
   - test/aoj/1595.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/GRL_5_A.test.cpp
+  - test/aoj/3022.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/lca.HLD.test.cpp
+  - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yukicoder/922.test.cpp
   - test/yukicoder/1976.test.cpp
@@ -219,14 +238,15 @@ data:
   - test/yukicoder/1718.test.cpp
   - test/yukicoder/1494.test.cpp
   - test/yukicoder/1295.test.cpp
+  - test/yukicoder/1326.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/1418.test.cpp
   - test/yukicoder/1124.test.cpp
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc220_f.test.cpp
-  - test/atcoder/arc097_d.test.cpp
   - test/atcoder/abc223_g.test.cpp
+  - test/hackerrank/bonnie-and-clyde.test.cpp
 documentation_of: src/Graph/Tree.hpp
 layout: document
 title: "\u6728\u30AF\u30E9\u30B9"
