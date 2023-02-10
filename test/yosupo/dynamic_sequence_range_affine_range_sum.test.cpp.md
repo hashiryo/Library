@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
     title: Splay-Tree
   - icon: ':question:'
@@ -19,9 +19,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
@@ -29,73 +29,73 @@ data:
     - https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
   bundledCode: "#line 1 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n#include <iostream>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <vector>\n\
-    #include <string>\n#include <tuple>\n#include <cstddef>\n#include <cassert>\n\
-    #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define HAS_CHECK(member,\
-    \ Dummy) \\\n template <class tClass> struct has_##member { \\\n  template <class\
-    \ U, Dummy> static std::true_type check(U *); \\\n  static std::false_type check(...);\
-    \ \\\n  static tClass *mClass; \\\n  static const bool value= decltype(check(mClass))::value;\
-    \ \\\n };\n#define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member,\
-    \ 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n\
-    #line 8 \"src/DataStructure/SplayTree.hpp\"\ntemplate <class M, bool reversible=\
-    \ false> class SplayTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
-    \ HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L> static constexpr bool semigroup_v=\
-    \ std::conjunction_v<has_T<L>, has_op<L>>;\n template <class L> static constexpr\
-    \ bool dual_v= std::conjunction_v<has_T<L>, has_E<L>, has_mapping<L>, has_composition<L>>;\n\
-    \ template <class T, class tDerived, class F= std::nullptr_t> struct Node_B {\n\
-    \  using E= F;\n  T val;\n  tDerived *ch[2];\n  std::size_t size;\n };\n template\
-    \ <class D, bool sg, bool du, bool rev> struct Node_D: Node_B<M, Node_D<D, sg,\
-    \ du, rev>> {};\n template <class D> struct Node_D<D, 1, 0, 0>: Node_B<typename\
-    \ M::T, Node_D<D, 1, 0, 0>> { typename M::T sum; };\n template <class D> struct\
-    \ Node_D<D, 0, 1, 0>: Node_B<typename M::T, Node_D<D, 0, 1, 0>, typename M::E>\
-    \ {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n template <class D>\
-    \ struct Node_D<D, 1, 1, 0>: Node_B<typename M::T, Node_D<D, 1, 1, 0>, typename\
-    \ M::E> {\n  typename M::T sum;\n  typename M::E lazy;\n  bool lazy_flg= false;\n\
-    \ };\n template <class D> struct Node_D<D, 0, 0, 1>: Node_B<M, Node_D<D, 0, 0,\
-    \ 1>> { bool revflg= false; };\n template <class D> struct Node_D<D, 1, 0, 1>:\
-    \ Node_B<typename M::T, Node_D<D, 1, 0, 1>> {\n  typename M::T sum, rsum;\n  bool\
-    \ revflg= false;\n };\n template <class D> struct Node_D<D, 0, 1, 1>: Node_B<typename\
-    \ M::T, Node_D<D, 0, 1, 1>, typename M::E> {\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false, revflg= false;\n };\n template <class D> struct Node_D<D, 1, 1, 1>: Node_B<typename\
-    \ M::T, Node_D<D, 1, 1, 1>, typename M::E> {\n  typename M::T sum, rsum;\n  typename\
-    \ M::E lazy;\n  bool lazy_flg= false, revflg= false;\n };\n using Node= Node_D<void,\
-    \ semigroup_v<M>, dual_v<M>, reversible>;\n using T= decltype(Node::val);\n using\
-    \ E= typename Node::E;\n Node *root;\n static inline Node *build(const T *bg,\
-    \ const T *ed) {\n  if (bg == ed) return nullptr;\n  const T *mid= bg + (ed -\
-    \ bg) / 2;\n  return pushup(new Node{*mid, {build(bg, mid), build(mid + 1, ed)}});\n\
-    \ }\n static inline Node *build(std::size_t bg, std::size_t ed, const T &val)\
-    \ {\n  if (bg == ed) return nullptr;\n  std::size_t mid= bg + (ed - bg) / 2;\n\
-    \  return pushup(new Node{val, {build(bg, mid, val), build(mid + 1, ed, val)}});\n\
-    \ }\n static inline void dump(typename std::vector<T>::iterator itr, Node *t)\
-    \ {\n  if (!t) return;\n  if constexpr (dual_v<M>) eval_propagate(t);\n  if constexpr\
-    \ (reversible) eval_toggle(t);\n  std::size_t sz= t->ch[0] ? t->ch[0]->size :\
-    \ 0;\n  *(itr + sz)= t->val, dump(itr, t->ch[0]), dump(itr + sz + 1, t->ch[1]);\n\
-    \ }\n template <bool b> static inline void helper(Node *&t) {\n  if (!t->ch[b])\
-    \ return;\n  t->size+= t->ch[b]->size;\n  if constexpr (semigroup_v<M>)\n   if\
-    \ constexpr (b) {\n    t->sum= M::op(t->sum, t->ch[1]->sum);\n    if constexpr\
-    \ (reversible) t->rsum= M::op(t->ch[1]->rsum, t->rsum);\n   } else {\n    t->sum=\
-    \ M::op(t->ch[0]->sum, t->sum);\n    if constexpr (reversible) t->rsum= M::op(t->rsum,\
-    \ t->ch[0]->rsum);\n   }\n }\n static inline Node *pushup(Node *t) {\n  if (!t)\
-    \ return t;\n  t->size= 1;\n  if constexpr (semigroup_v<M>) {\n   t->sum= t->val;\n\
-    \   if constexpr (reversible) t->rsum= t->sum;\n  }\n  return helper<0>(t), helper<1>(t),\
-    \ t;\n }\n static inline void propagate(Node *t, const E &x) {\n  if (!t) return;\n\
-    \  t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy= x;\n  if constexpr\
-    \ (semigroup_v<M>) {\n   M::mapping(t->sum, x, t->size);\n   if constexpr (reversible)\
-    \ M::mapping(t->rsum, x, t->size);\n  }\n  M::mapping(t->val, x, 1), t->lazy_flg=\
-    \ true;\n }\n static inline void toggle(Node *t) {\n  if (!t) return;\n  if constexpr\
-    \ (semigroup_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0], t->ch[1]),\
-    \ t->revflg= !t->revflg;\n }\n static inline void eval_propagate(Node *t) {\n\
-    \  if (t->lazy_flg) propagate(t->ch[0], t->lazy), propagate(t->ch[1], t->lazy),\
-    \ t->lazy_flg= false;\n }\n static inline void eval_toggle(Node *t) {\n  if (t->revflg)\
-    \ toggle(t->ch[0]), toggle(t->ch[1]), t->revflg= false;\n }\n static inline void\
-    \ rot(Node *&t, bool d) {\n  Node *s= t->ch[d];\n  t->ch[d]= s->ch[!d], s->ch[!d]=\
-    \ pushup(t), t= pushup(s);\n }\n static inline void splay(Node *&t, std::size_t\
-    \ k) {\n  if (!t) return;\n  if constexpr (dual_v<M>) eval_propagate(t);\n  if\
-    \ constexpr (reversible) eval_toggle(t);\n  std::size_t sz= t->ch[0] ? t->ch[0]->size\
-    \ : 0;\n  if (sz == k) return;\n  bool d= sz < k;\n  if (d) k-= sz + 1;\n  if\
-    \ constexpr (dual_v<M>) eval_propagate(t->ch[d]);\n  if constexpr (reversible)\
-    \ eval_toggle(t->ch[d]);\n  sz= t->ch[d]->ch[0] ? t->ch[d]->ch[0]->size : 0;\n\
-    \  if (sz != k) {\n   bool c= sz < k;\n   if (c) k-= sz + 1;\n   splay(t->ch[d]->ch[c],\
+    \n#include <iostream>\n#include <array>\n#line 2 \"src/DataStructure/SplayTree.hpp\"\
+    \n#include <vector>\n#include <string>\n#include <tuple>\n#include <cstddef>\n\
+    #include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
+    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
+    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
+    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
+    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#line 8 \"src/DataStructure/SplayTree.hpp\"\
+    \ntemplate <class M, bool reversible= false> class SplayTree {\n HAS_MEMBER(op);\n\
+    \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
+    \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
+    \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
+    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n template <class T, class tDerived,\
+    \ class F= std::nullptr_t> struct Node_B {\n  using E= F;\n  T val;\n  tDerived\
+    \ *ch[2];\n  std::size_t size;\n };\n template <class D, bool sg, bool du, bool\
+    \ rev> struct Node_D: Node_B<M, Node_D<D, sg, du, rev>> {};\n template <class\
+    \ D> struct Node_D<D, 1, 0, 0>: Node_B<typename M::T, Node_D<D, 1, 0, 0>> { typename\
+    \ M::T sum; };\n template <class D> struct Node_D<D, 0, 1, 0>: Node_B<typename\
+    \ M::T, Node_D<D, 0, 1, 0>, typename M::E> {\n  typename M::E lazy;\n  bool lazy_flg=\
+    \ false;\n };\n template <class D> struct Node_D<D, 1, 1, 0>: Node_B<typename\
+    \ M::T, Node_D<D, 1, 1, 0>, typename M::E> {\n  typename M::T sum;\n  typename\
+    \ M::E lazy;\n  bool lazy_flg= false;\n };\n template <class D> struct Node_D<D,\
+    \ 0, 0, 1>: Node_B<M, Node_D<D, 0, 0, 1>> { bool revflg= false; };\n template\
+    \ <class D> struct Node_D<D, 1, 0, 1>: Node_B<typename M::T, Node_D<D, 1, 0, 1>>\
+    \ {\n  typename M::T sum, rsum;\n  bool revflg= false;\n };\n template <class\
+    \ D> struct Node_D<D, 0, 1, 1>: Node_B<typename M::T, Node_D<D, 0, 1, 1>, typename\
+    \ M::E> {\n  typename M::E lazy;\n  bool lazy_flg= false, revflg= false;\n };\n\
+    \ template <class D> struct Node_D<D, 1, 1, 1>: Node_B<typename M::T, Node_D<D,\
+    \ 1, 1, 1>, typename M::E> {\n  typename M::T sum, rsum;\n  typename M::E lazy;\n\
+    \  bool lazy_flg= false, revflg= false;\n };\n using Node= Node_D<void, semigroup_v<M>,\
+    \ dual_v<M>, reversible>;\n using T= decltype(Node::val);\n using E= typename\
+    \ Node::E;\n Node *root;\n static inline Node *build(const T *bg, const T *ed)\
+    \ {\n  if (bg == ed) return nullptr;\n  const T *mid= bg + (ed - bg) / 2;\n  return\
+    \ pushup(new Node{*mid, {build(bg, mid), build(mid + 1, ed)}});\n }\n static inline\
+    \ Node *build(std::size_t bg, std::size_t ed, const T &val) {\n  if (bg == ed)\
+    \ return nullptr;\n  std::size_t mid= bg + (ed - bg) / 2;\n  return pushup(new\
+    \ Node{val, {build(bg, mid, val), build(mid + 1, ed, val)}});\n }\n static inline\
+    \ void dump(typename std::vector<T>::iterator itr, Node *t) {\n  if (!t) return;\n\
+    \  if constexpr (dual_v<M>) eval_propagate(t);\n  if constexpr (reversible) eval_toggle(t);\n\
+    \  std::size_t sz= t->ch[0] ? t->ch[0]->size : 0;\n  *(itr + sz)= t->val, dump(itr,\
+    \ t->ch[0]), dump(itr + sz + 1, t->ch[1]);\n }\n template <bool b> static inline\
+    \ void helper(Node *&t) {\n  if (!t->ch[b]) return;\n  t->size+= t->ch[b]->size;\n\
+    \  if constexpr (semigroup_v<M>) {\n   if constexpr (b) {\n    t->sum= M::op(t->sum,\
+    \ t->ch[1]->sum);\n    if constexpr (reversible) t->rsum= M::op(t->ch[1]->rsum,\
+    \ t->rsum);\n   } else {\n    t->sum= M::op(t->ch[0]->sum, t->sum);\n    if constexpr\
+    \ (reversible) t->rsum= M::op(t->rsum, t->ch[0]->rsum);\n   }\n  }\n }\n static\
+    \ inline Node *pushup(Node *t) {\n  if (!t) return t;\n  t->size= 1;\n  if constexpr\
+    \ (semigroup_v<M>) {\n   t->sum= t->val;\n   if constexpr (reversible) t->rsum=\
+    \ t->sum;\n  }\n  return helper<0>(t), helper<1>(t), t;\n }\n static inline void\
+    \ propagate(Node *t, const E &x) {\n  if (!t) return;\n  t->lazy_flg ? (M::composition(t->lazy,\
+    \ x), x) : t->lazy= x;\n  if constexpr (semigroup_v<M>) {\n   M::mapping(t->sum,\
+    \ x, t->size);\n   if constexpr (reversible) M::mapping(t->rsum, x, t->size);\n\
+    \  }\n  M::mapping(t->val, x, 1), t->lazy_flg= true;\n }\n static inline void\
+    \ toggle(Node *t) {\n  if (!t) return;\n  if constexpr (semigroup_v<M>) std::swap(t->sum,\
+    \ t->rsum);\n  std::swap(t->ch[0], t->ch[1]), t->revflg= !t->revflg;\n }\n static\
+    \ inline void eval_propagate(Node *t) {\n  if (t->lazy_flg) propagate(t->ch[0],\
+    \ t->lazy), propagate(t->ch[1], t->lazy), t->lazy_flg= false;\n }\n static inline\
+    \ void eval_toggle(Node *t) {\n  if (t->revflg) toggle(t->ch[0]), toggle(t->ch[1]),\
+    \ t->revflg= false;\n }\n static inline void rot(Node *&t, bool d) {\n  Node *s=\
+    \ t->ch[d];\n  t->ch[d]= s->ch[!d], s->ch[!d]= pushup(t), t= pushup(s);\n }\n\
+    \ static inline void splay(Node *&t, std::size_t k) {\n  if (!t) return;\n  if\
+    \ constexpr (dual_v<M>) eval_propagate(t);\n  if constexpr (reversible) eval_toggle(t);\n\
+    \  std::size_t sz= t->ch[0] ? t->ch[0]->size : 0;\n  if (sz == k) return;\n  bool\
+    \ d= sz < k;\n  if (d) k-= sz + 1;\n  if constexpr (dual_v<M>) eval_propagate(t->ch[d]);\n\
+    \  if constexpr (reversible) eval_toggle(t->ch[d]);\n  sz= t->ch[d]->ch[0] ? t->ch[d]->ch[0]->size\
+    \ : 0;\n  if (sz != k) {\n   bool c= sz < k;\n   if (c) k-= sz + 1;\n   splay(t->ch[d]->ch[c],\
     \ k);\n   c == d ? rot(t, d) : rot(t->ch[d], !d);\n  }\n  rot(t, d);\n }\n template\
     \ <class F> void query(std::size_t a, std::size_t b, const F &f) {\n  if (size()\
     \ == b) a-- ? (splay(root, a), f(root->ch[1]), pushup(root)) : (f(root), root);\n\
@@ -223,7 +223,7 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 5 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
+    \ return dat[n];\n}\n#line 6 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineRsumQ\
     \ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T vl, T vr) { return\
     \ vl + vr; }\n static void mapping(T &val, const E &f, int sz) { val= f[0] * val\
@@ -239,8 +239,8 @@ data:
     \ l, r;\n   cin >> l >> r;\n   cout << splay.fold(l, r) << '\\n';\n  }\n }\n return\
     \ 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n#include <iostream>\n#include \"src/DataStructure/SplayTree.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
+    \n#include <iostream>\n#include <array>\n#include \"src/DataStructure/SplayTree.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
     struct RaffineRsumQ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T\
     \ vl, T vr) { return vl + vr; }\n static void mapping(T &val, const E &f, int\
     \ sz) { val= f[0] * val + f[1] * sz; }\n static void composition(E &pre, const\
@@ -263,8 +263,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-02-10 11:42:12+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-02-10 16:45:25+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
 layout: document

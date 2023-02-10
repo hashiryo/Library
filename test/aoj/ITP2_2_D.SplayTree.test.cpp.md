@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
     title: Splay-Tree
   - icon: ':question:'
@@ -62,27 +62,27 @@ data:
     \ (reversible) eval_toggle(t);\n  std::size_t sz= t->ch[0] ? t->ch[0]->size :\
     \ 0;\n  *(itr + sz)= t->val, dump(itr, t->ch[0]), dump(itr + sz + 1, t->ch[1]);\n\
     \ }\n template <bool b> static inline void helper(Node *&t) {\n  if (!t->ch[b])\
-    \ return;\n  t->size+= t->ch[b]->size;\n  if constexpr (semigroup_v<M>)\n   if\
-    \ constexpr (b) {\n    t->sum= M::op(t->sum, t->ch[1]->sum);\n    if constexpr\
+    \ return;\n  t->size+= t->ch[b]->size;\n  if constexpr (semigroup_v<M>) {\n  \
+    \ if constexpr (b) {\n    t->sum= M::op(t->sum, t->ch[1]->sum);\n    if constexpr\
     \ (reversible) t->rsum= M::op(t->ch[1]->rsum, t->rsum);\n   } else {\n    t->sum=\
     \ M::op(t->ch[0]->sum, t->sum);\n    if constexpr (reversible) t->rsum= M::op(t->rsum,\
-    \ t->ch[0]->rsum);\n   }\n }\n static inline Node *pushup(Node *t) {\n  if (!t)\
-    \ return t;\n  t->size= 1;\n  if constexpr (semigroup_v<M>) {\n   t->sum= t->val;\n\
-    \   if constexpr (reversible) t->rsum= t->sum;\n  }\n  return helper<0>(t), helper<1>(t),\
-    \ t;\n }\n static inline void propagate(Node *t, const E &x) {\n  if (!t) return;\n\
-    \  t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy= x;\n  if constexpr\
-    \ (semigroup_v<M>) {\n   M::mapping(t->sum, x, t->size);\n   if constexpr (reversible)\
-    \ M::mapping(t->rsum, x, t->size);\n  }\n  M::mapping(t->val, x, 1), t->lazy_flg=\
-    \ true;\n }\n static inline void toggle(Node *t) {\n  if (!t) return;\n  if constexpr\
-    \ (semigroup_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0], t->ch[1]),\
-    \ t->revflg= !t->revflg;\n }\n static inline void eval_propagate(Node *t) {\n\
-    \  if (t->lazy_flg) propagate(t->ch[0], t->lazy), propagate(t->ch[1], t->lazy),\
-    \ t->lazy_flg= false;\n }\n static inline void eval_toggle(Node *t) {\n  if (t->revflg)\
-    \ toggle(t->ch[0]), toggle(t->ch[1]), t->revflg= false;\n }\n static inline void\
-    \ rot(Node *&t, bool d) {\n  Node *s= t->ch[d];\n  t->ch[d]= s->ch[!d], s->ch[!d]=\
-    \ pushup(t), t= pushup(s);\n }\n static inline void splay(Node *&t, std::size_t\
-    \ k) {\n  if (!t) return;\n  if constexpr (dual_v<M>) eval_propagate(t);\n  if\
-    \ constexpr (reversible) eval_toggle(t);\n  std::size_t sz= t->ch[0] ? t->ch[0]->size\
+    \ t->ch[0]->rsum);\n   }\n  }\n }\n static inline Node *pushup(Node *t) {\n  if\
+    \ (!t) return t;\n  t->size= 1;\n  if constexpr (semigroup_v<M>) {\n   t->sum=\
+    \ t->val;\n   if constexpr (reversible) t->rsum= t->sum;\n  }\n  return helper<0>(t),\
+    \ helper<1>(t), t;\n }\n static inline void propagate(Node *t, const E &x) {\n\
+    \  if (!t) return;\n  t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy=\
+    \ x;\n  if constexpr (semigroup_v<M>) {\n   M::mapping(t->sum, x, t->size);\n\
+    \   if constexpr (reversible) M::mapping(t->rsum, x, t->size);\n  }\n  M::mapping(t->val,\
+    \ x, 1), t->lazy_flg= true;\n }\n static inline void toggle(Node *t) {\n  if (!t)\
+    \ return;\n  if constexpr (semigroup_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0],\
+    \ t->ch[1]), t->revflg= !t->revflg;\n }\n static inline void eval_propagate(Node\
+    \ *t) {\n  if (t->lazy_flg) propagate(t->ch[0], t->lazy), propagate(t->ch[1],\
+    \ t->lazy), t->lazy_flg= false;\n }\n static inline void eval_toggle(Node *t)\
+    \ {\n  if (t->revflg) toggle(t->ch[0]), toggle(t->ch[1]), t->revflg= false;\n\
+    \ }\n static inline void rot(Node *&t, bool d) {\n  Node *s= t->ch[d];\n  t->ch[d]=\
+    \ s->ch[!d], s->ch[!d]= pushup(t), t= pushup(s);\n }\n static inline void splay(Node\
+    \ *&t, std::size_t k) {\n  if (!t) return;\n  if constexpr (dual_v<M>) eval_propagate(t);\n\
+    \  if constexpr (reversible) eval_toggle(t);\n  std::size_t sz= t->ch[0] ? t->ch[0]->size\
     \ : 0;\n  if (sz == k) return;\n  bool d= sz < k;\n  if (d) k-= sz + 1;\n  if\
     \ constexpr (dual_v<M>) eval_propagate(t->ch[d]);\n  if constexpr (reversible)\
     \ eval_toggle(t->ch[d]);\n  sz= t->ch[d]->ch[0] ? t->ch[d]->ch[0]->size : 0;\n\
@@ -156,7 +156,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_2_D.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2023-02-10 11:42:12+09:00'
+  timestamp: '2023-02-10 16:45:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_2_D.SplayTree.test.cpp
