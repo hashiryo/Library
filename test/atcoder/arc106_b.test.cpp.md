@@ -20,8 +20,8 @@ data:
     \ {\n std::vector<std::array<int, 2>> es;\n std::vector<std::vector<int>> adj;\n\
     public:\n LinearSystemIncidence(int n): adj(n) {}\n void add_edge(int src, int\
     \ dst) {\n  int m= es.size();\n  adj[src].push_back(m), adj[dst].push_back(m),\
-    \ es.push_back({src, dst});\n }\n std::vector<T> solve(std::vector<T> b) const\
-    \ {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
+    \ es.push_back(std::array{src, dst});\n }\n std::vector<T> solve(std::vector<T>\
+    \ b) const {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
     \ pre(n, -2), dat(n, 0);\n  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s]\
     \ == -2)\n    for (pre[p= s]= -1;;) {\n     if (dat[p] == (int)adj[p].size())\
     \ {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return {};  // no\
@@ -53,7 +53,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc106_b.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 17:34:35+09:00'
+  timestamp: '2023-02-10 15:36:01+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc106_b.test.cpp

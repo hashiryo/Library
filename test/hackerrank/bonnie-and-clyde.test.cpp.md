@@ -9,9 +9,9 @@ data:
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde
@@ -96,9 +96,9 @@ data:
     \ int n, m, q;\n cin >> n >> m >> q;\n BiConnectedComponents bcc(n);\n for (int\
     \ i= 0; i < m; ++i) {\n  int u, v;\n  cin >> u >> v;\n  bcc.add_edge(--u, --v);\n\
     \ }\n auto bct= bcc.block_cut_tree();\n bct.build();\n while (q--) {\n  int u,\
-    \ v, w;\n  cin >> u >> v >> w;\n  --u, --v, --w;\n  if (bct.lca(u, w) == -1 ||\
-    \ bct.lca(w, v) == -1) cout << \"NO\";\n  else {\n   int tmp= bct.dist(u, w) +\
-    \ bct.dist(w, v) - bct.dist(u, v);\n   cout << (tmp == 0 || tmp == 2 ? \"YES\"\
+    \ v, w;\n  cin >> u >> v >> w;\n  --u, --v, --w;\n  if (!bct.connected(u, w) ||\
+    \ !bct.connected(w, v)) cout << \"NO\";\n  else {\n   int tmp= bct.dist(u, w)\
+    \ + bct.dist(w, v) - bct.dist(u, v);\n   cout << (tmp == 0 || tmp == 2 ? \"YES\"\
     \ : \"NO\");\n  }\n  if (q) cout << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://www.hackerrank.com/contests/w33/challenges/bonnie-and-clyde\"\
     \n#include <iostream>\n#include \"src/Graph/BiConnectedComponents.hpp\"\nusing\
@@ -106,9 +106,9 @@ data:
     \ n, m, q;\n cin >> n >> m >> q;\n BiConnectedComponents bcc(n);\n for (int i=\
     \ 0; i < m; ++i) {\n  int u, v;\n  cin >> u >> v;\n  bcc.add_edge(--u, --v);\n\
     \ }\n auto bct= bcc.block_cut_tree();\n bct.build();\n while (q--) {\n  int u,\
-    \ v, w;\n  cin >> u >> v >> w;\n  --u, --v, --w;\n  if (bct.lca(u, w) == -1 ||\
-    \ bct.lca(w, v) == -1) cout << \"NO\";\n  else {\n   int tmp= bct.dist(u, w) +\
-    \ bct.dist(w, v) - bct.dist(u, v);\n   cout << (tmp == 0 || tmp == 2 ? \"YES\"\
+    \ v, w;\n  cin >> u >> v >> w;\n  --u, --v, --w;\n  if (!bct.connected(u, w) ||\
+    \ !bct.connected(w, v)) cout << \"NO\";\n  else {\n   int tmp= bct.dist(u, w)\
+    \ + bct.dist(w, v) - bct.dist(u, v);\n   cout << (tmp == 0 || tmp == 2 ? \"YES\"\
     \ : \"NO\");\n  }\n  if (q) cout << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/Graph/BiConnectedComponents.hpp
@@ -116,8 +116,8 @@ data:
   isVerificationFile: true
   path: test/hackerrank/bonnie-and-clyde.test.cpp
   requiredBy: []
-  timestamp: '2023-02-10 14:46:13+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-02-10 15:36:01+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/bonnie-and-clyde.test.cpp
 layout: document
