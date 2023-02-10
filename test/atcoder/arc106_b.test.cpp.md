@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/LinearSystemIncidence.hpp
     title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc106/tasks/arc106_b
@@ -16,12 +16,12 @@ data:
     - https://atcoder.jp/contests/arc106/tasks/arc106_b
   bundledCode: "#line 1 \"test/atcoder/arc106_b.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/arc106/tasks/arc106_b\"\
     \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 3 \"src/Graph/LinearSystemIncidence.hpp\"\
-    \n#include <tuple>\n#include <type_traits>\ntemplate <typename T> class LinearSystemIncidence\
-    \ {\n std::vector<std::array<int, 2>> es;\n std::vector<std::vector<int>> adj;\n\
-    public:\n LinearSystemIncidence(int n): adj(n) {}\n void add_edge(int src, int\
-    \ dst) {\n  int m= es.size();\n  adj[src].push_back(m), adj[dst].push_back(m),\
-    \ es.push_back(std::array{src, dst});\n }\n std::vector<T> solve(std::vector<T>\
-    \ b) const {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
+    \n#include <tuple>\n#include <array>\n#include <type_traits>\ntemplate <typename\
+    \ T> class LinearSystemIncidence {\n std::vector<std::array<int, 2>> es;\n std::vector<std::vector<int>>\
+    \ adj;\npublic:\n LinearSystemIncidence(int n): adj(n) {}\n void add_edge(int\
+    \ src, int dst) {\n  int m= es.size();\n  adj[src].push_back(m), adj[dst].push_back(m),\
+    \ es.push_back({src, dst});\n }\n std::vector<T> solve(std::vector<T> b) const\
+    \ {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
     \ pre(n, -2), dat(n, 0);\n  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s]\
     \ == -2)\n    for (pre[p= s]= -1;;) {\n     if (dat[p] == (int)adj[p].size())\
     \ {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return {};  // no\
@@ -53,8 +53,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc106_b.test.cpp
   requiredBy: []
-  timestamp: '2023-02-10 15:36:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-02-10 15:59:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc106_b.test.cpp
 layout: document

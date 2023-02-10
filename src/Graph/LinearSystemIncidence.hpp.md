@@ -3,21 +3,21 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc106_b.test.cpp
     title: test/atcoder/arc106_b.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/LinearSystemIncidence.hpp\"\n#include <vector>\n\
-    #include <tuple>\n#include <type_traits>\ntemplate <typename T> class LinearSystemIncidence\
-    \ {\n std::vector<std::array<int, 2>> es;\n std::vector<std::vector<int>> adj;\n\
-    public:\n LinearSystemIncidence(int n): adj(n) {}\n void add_edge(int src, int\
-    \ dst) {\n  int m= es.size();\n  adj[src].push_back(m), adj[dst].push_back(m),\
-    \ es.push_back(std::array{src, dst});\n }\n std::vector<T> solve(std::vector<T>\
-    \ b) const {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
+    #include <tuple>\n#include <array>\n#include <type_traits>\ntemplate <typename\
+    \ T> class LinearSystemIncidence {\n std::vector<std::array<int, 2>> es;\n std::vector<std::vector<int>>\
+    \ adj;\npublic:\n LinearSystemIncidence(int n): adj(n) {}\n void add_edge(int\
+    \ src, int dst) {\n  int m= es.size();\n  adj[src].push_back(m), adj[dst].push_back(m),\
+    \ es.push_back({src, dst});\n }\n std::vector<T> solve(std::vector<T> b) const\
+    \ {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
     \ pre(n, -2), dat(n, 0);\n  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s]\
     \ == -2)\n    for (pre[p= s]= -1;;) {\n     if (dat[p] == (int)adj[p].size())\
     \ {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return {};  // no\
@@ -26,27 +26,26 @@ data:
     \ tmp ^ b[q];\n      else x[e]= f ? -tmp : tmp, b[q]+= tmp;\n      p= q;\n   \
     \   continue;\n     }\n     if (e= adj[p][dat[p]++], q= es[e][es[e][0] == p];\
     \ pre[q] == -2) pre[q]= e, p= q;\n    }\n  return x;\n }\n};\n"
-  code: "#pragma once\n#include <vector>\n#include <tuple>\n#include <type_traits>\n\
-    template <typename T> class LinearSystemIncidence {\n std::vector<std::array<int,\
+  code: "#pragma once\n#include <vector>\n#include <tuple>\n#include <array>\n#include\
+    \ <type_traits>\ntemplate <typename T> class LinearSystemIncidence {\n std::vector<std::array<int,\
     \ 2>> es;\n std::vector<std::vector<int>> adj;\npublic:\n LinearSystemIncidence(int\
     \ n): adj(n) {}\n void add_edge(int src, int dst) {\n  int m= es.size();\n  adj[src].push_back(m),\
-    \ adj[dst].push_back(m), es.push_back(std::array{src, dst});\n }\n std::vector<T>\
-    \ solve(std::vector<T> b) const {\n  const int n= adj.size();\n  std::vector<T>\
-    \ x(es.size());\n  std::vector<int> pre(n, -2), dat(n, 0);\n  for (int s= 0, p,\
-    \ e, q, f; s < n; ++s)\n   if (pre[s] == -2)\n    for (pre[p= s]= -1;;) {\n  \
-    \   if (dat[p] == (int)adj[p].size()) {\n      if (e= pre[p]; e < 0) {\n     \
-    \  if (b[p] != T()) return {};  // no solution\n       break;\n      }\n     \
-    \ f= (es[e][0] == p), q= es[e][f];\n      T tmp= b[p];\n      if constexpr (std::is_same_v<T,\
-    \ bool>) x[e]= tmp, b[q]= tmp ^ b[q];\n      else x[e]= f ? -tmp : tmp, b[q]+=\
-    \ tmp;\n      p= q;\n      continue;\n     }\n     if (e= adj[p][dat[p]++], q=\
-    \ es[e][es[e][0] == p]; pre[q] == -2) pre[q]= e, p= q;\n    }\n  return x;\n }\n\
-    };"
+    \ adj[dst].push_back(m), es.push_back({src, dst});\n }\n std::vector<T> solve(std::vector<T>\
+    \ b) const {\n  const int n= adj.size();\n  std::vector<T> x(es.size());\n  std::vector<int>\
+    \ pre(n, -2), dat(n, 0);\n  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s]\
+    \ == -2)\n    for (pre[p= s]= -1;;) {\n     if (dat[p] == (int)adj[p].size())\
+    \ {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return {};  // no\
+    \ solution\n       break;\n      }\n      f= (es[e][0] == p), q= es[e][f];\n \
+    \     T tmp= b[p];\n      if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[q]=\
+    \ tmp ^ b[q];\n      else x[e]= f ? -tmp : tmp, b[q]+= tmp;\n      p= q;\n   \
+    \   continue;\n     }\n     if (e= adj[p][dat[p]++], q= es[e][es[e][0] == p];\
+    \ pre[q] == -2) pre[q]= e, p= q;\n    }\n  return x;\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/LinearSystemIncidence.hpp
   requiredBy: []
-  timestamp: '2023-02-10 15:36:01+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-02-10 15:59:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/arc106_b.test.cpp
 documentation_of: src/Graph/LinearSystemIncidence.hpp
