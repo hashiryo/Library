@@ -13,6 +13,9 @@ data:
     path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
     title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1270.test.cpp
+    title: test/yukicoder/1270.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -95,6 +98,7 @@ data:
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
   - test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
+  - test/yukicoder/1270.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/880.Beats.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Beats.hpp

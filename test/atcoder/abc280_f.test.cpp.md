@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/UnionFind_Potential.hpp
     title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc280/tasks/abc280_f
@@ -54,7 +54,7 @@ data:
   path: test/atcoder/abc280_f.test.cpp
   requiredBy: []
   timestamp: '2023-01-23 20:22:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc280_f.test.cpp
 layout: document
