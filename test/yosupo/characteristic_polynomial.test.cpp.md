@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/characteristic_polynomial
@@ -148,7 +148,7 @@ data:
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
   timestamp: '2023-02-07 17:34:35+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp
 layout: document

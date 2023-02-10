@@ -6,7 +6,7 @@ data:
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
   - icon: ':heavy_check_mark:'
@@ -15,7 +15,7 @@ data:
   - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
   - icon: ':x:'
