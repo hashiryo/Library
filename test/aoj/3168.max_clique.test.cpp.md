@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MaxClique.hpp
     title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
   _extendedRequiredBy: []

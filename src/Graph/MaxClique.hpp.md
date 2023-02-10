@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_7_A.max_clique.test.cpp
     title: test/aoj/GRL_7_A.max_clique.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/maximum_independent_set.test.cpp
     title: test/yosupo/maximum_independent_set.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/MaxClique.hpp\"\n#include <vector>\n#include <algorithm>\n\
@@ -98,7 +98,7 @@ data:
   path: src/Graph/MaxClique.hpp
   requiredBy: []
   timestamp: '2023-02-08 22:23:50+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/3168.max_clique.test.cpp
   - test/aoj/GRL_7_A.max_clique.test.cpp
