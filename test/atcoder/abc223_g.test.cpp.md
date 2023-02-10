@@ -21,8 +21,9 @@ data:
     \n#include <iostream>\n#include <algorithm>\n#include <array>\n#line 2 \"src/Graph/Tree.hpp\"\
     \n#include <type_traits>\n#include <cstddef>\n#include <vector>\n#line 7 \"src/Graph/Tree.hpp\"\
     \n#include <numeric>\n#include <cassert>\ntemplate <class Cost= void> class Tree\
-    \ {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n };\n\
-    \ template <class D> struct Edge_B<D, void> { int to; };\n using Edge= Edge_B<void,\
+    \ {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator\
+    \ int() const { return to; }\n };\n template <class D> struct Edge_B<D, void>\
+    \ {\n  int to;\n  operator int() const { return to; }\n };\n using Edge= Edge_B<void,\
     \ Cost>;\n std::vector<std::vector<Edge>> adj;\n std::vector<int> P, PP, D, I,\
     \ L, R;\npublic:\n Tree(int n): adj(n) {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T,\
     \ void>, std::nullptr_t> = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}),\
@@ -121,7 +122,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc223_g.test.cpp
   requiredBy: []
-  timestamp: '2023-02-09 01:04:11+09:00'
+  timestamp: '2023-02-10 14:46:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.test.cpp

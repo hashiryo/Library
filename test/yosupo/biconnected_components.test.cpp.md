@@ -22,8 +22,9 @@ data:
     #line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n#include\
     \ <vector>\n#include <algorithm>\n#include <array>\n#include <numeric>\n#include\
     \ <cassert>\ntemplate <class Cost= void> class Tree {\n template <class D, class\
-    \ T> struct Edge_B {\n  int to;\n  T cost;\n };\n template <class D> struct Edge_B<D,\
-    \ void> { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
+    \ T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const { return to;\
+    \ }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n  operator\
+    \ int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
     \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
     \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
     \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
@@ -92,7 +93,7 @@ data:
     \ es.push_back({k++, s});\n  Tree ret(k);\n  for (auto [u, v]: es) ret.add_edge(u,\
     \ v);\n  return ret;\n }\n};\n#line 4 \"test/yosupo/biconnected_components.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M;\n cin >> N >> M;\n BiConnectedComponents bcc(N);\n for (int i= 0;\
+    \ int N, M;\n\n cin >> N >> M;\n BiConnectedComponents bcc(N);\n for (int i= 0;\
     \ i < M; ++i) {\n  int a, b;\n  cin >> a >> b;\n  bcc.add_edge(a, b);\n }\n auto\
     \ bct= bcc.block_cut_tree();\n int K= bct.size();\n cout << K - N << '\\n';\n\
     \ for (int i= N; i < K; i++) {\n  cout << bct[i].size();\n  for (int v: bct[i])\
@@ -100,18 +101,18 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/biconnected_components\"\
     \n#include <iostream>\n#include \"src/Graph/BiConnectedComponents.hpp\"\nusing\
     \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
-    \ N, M;\n cin >> N >> M;\n BiConnectedComponents bcc(N);\n for (int i= 0; i <\
-    \ M; ++i) {\n  int a, b;\n  cin >> a >> b;\n  bcc.add_edge(a, b);\n }\n auto bct=\
-    \ bcc.block_cut_tree();\n int K= bct.size();\n cout << K - N << '\\n';\n for (int\
-    \ i= N; i < K; i++) {\n  cout << bct[i].size();\n  for (int v: bct[i]) cout <<\
-    \ \" \" << v;\n  cout << '\\n';\n }\n return 0;\n}\n"
+    \ N, M;\n\n cin >> N >> M;\n BiConnectedComponents bcc(N);\n for (int i= 0; i\
+    \ < M; ++i) {\n  int a, b;\n  cin >> a >> b;\n  bcc.add_edge(a, b);\n }\n auto\
+    \ bct= bcc.block_cut_tree();\n int K= bct.size();\n cout << K - N << '\\n';\n\
+    \ for (int i= N; i < K; i++) {\n  cout << bct[i].size();\n  for (int v: bct[i])\
+    \ cout << \" \" << v;\n  cout << '\\n';\n }\n return 0;\n}\n"
   dependsOn:
   - src/Graph/BiConnectedComponents.hpp
   - src/Graph/Tree.hpp
   isVerificationFile: true
   path: test/yosupo/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2023-02-10 12:48:16+09:00'
+  timestamp: '2023-02-10 14:46:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/biconnected_components.test.cpp

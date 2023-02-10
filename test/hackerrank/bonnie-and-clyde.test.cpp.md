@@ -22,14 +22,15 @@ data:
     \ <iostream>\n#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include\
     \ <cstddef>\n#include <vector>\n#include <algorithm>\n#include <array>\n#include\
     \ <numeric>\n#include <cassert>\ntemplate <class Cost= void> class Tree {\n template\
-    \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n };\n template <class\
-    \ D> struct Edge_B<D, void> { int to; };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
-    \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
-    \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
-    \ }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v, c}),\
-    \ adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const\
+    \ { return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
+    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
+    \ std::vector<std::vector<Edge>> adj;\n std::vector<int> P, PP, D, I, L, R;\n\
+    public:\n Tree(int n): adj(n) {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T,\
+    \ void>, std::nullptr_t> = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}),\
+    \ adj[v].emplace_back(Edge{u}); }\n template <class T, std::enable_if_t<std::is_convertible_v<T,\
+    \ Cost>, std::nullptr_t> = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v,\
+    \ c}), adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { adj[u].emplace_back(Edge{v, c}),\
     \ adj[v].emplace_back(Edge{u, d}); }\n const std::vector<Edge> &operator[](int\
@@ -115,7 +116,7 @@ data:
   isVerificationFile: true
   path: test/hackerrank/bonnie-and-clyde.test.cpp
   requiredBy: []
-  timestamp: '2023-02-10 12:48:16+09:00'
+  timestamp: '2023-02-10 14:46:13+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/hackerrank/bonnie-and-clyde.test.cpp
