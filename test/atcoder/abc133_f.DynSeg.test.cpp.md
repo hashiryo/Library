@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   - icon: ':question:'

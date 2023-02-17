@@ -36,10 +36,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.MSET.test.cpp
     title: test/yosupo/partition.MSET.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_FPS.FPS.test.cpp
     title: test/yosupo/pow_of_FPS.FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
     title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - icon: ':x:'
