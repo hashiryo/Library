@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/PiecewiseLinearConvexfunction.hpp
     title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc250/tasks/abc250_g
@@ -18,10 +18,10 @@ data:
     https://atcoder.jp/contests/abc250/tasks/abc250_g\"\n#include <iostream>\n#line\
     \ 2 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\n#include <vector>\n\
     #include <algorithm>\n#include <array>\n#include <sstream>\n#include <string>\n\
-    #line 8 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\ntemplate <std::size_t\
-    \ NODE_SIZE= 1 << 22> class PiecewiseLinearConvexfunction {\n using i64= long\
-    \ long;\n using i128= __int128_t;\n using node_id= std::int_least32_t;\n static\
-    \ constexpr i64 INF= 1ll << 41;\n template <class Int> static inline std::string\
+    #line 8 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\n#include <cassert>\n\
+    template <std::size_t NODE_SIZE= 1 << 22> class PiecewiseLinearConvexfunction\
+    \ {\n using i64= long long;\n using i128= __int128_t;\n using node_id= std::int_least32_t;\n\
+    \ static constexpr i64 INF= 1ll << 41;\n template <class Int> static inline std::string\
     \ str(Int x) {\n  if (x >= INF) return \"inf\";\n  if (x <= -INF) return \"-inf\"\
     ;\n  std::stringstream ss;\n  ss << x;\n  return ss.str();\n }\n struct Node {\n\
     \  node_id ch[2], par;\n  int sz;\n  i64 dx, slope, laz, x;\n  i128 y;\n };\n\
@@ -150,8 +150,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc250_g.conj.test.cpp
   requiredBy: []
-  timestamp: '2023-02-28 19:35:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-02-28 20:02:51+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc250_g.conj.test.cpp
 layout: document

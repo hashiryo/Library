@@ -3,25 +3,25 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0661.test.cpp
     title: test/aoj/0661.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2865.test.cpp
     title: test/aoj/2865.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc127_f.test.cpp
     title: test/atcoder/abc127_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.test.cpp
     title: test/atcoder/abc217_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.test.cpp
     title: test/atcoder/abc250_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc123_d.test.cpp
     title: test/atcoder/arc123_d.test.cpp
   - icon: ':x:'
@@ -32,18 +32,18 @@ data:
     title: test/yukicoder/1467.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\n#include\
     \ <vector>\n#include <algorithm>\n#include <array>\n#include <sstream>\n#include\
-    \ <string>\n#include <iostream>\ntemplate <std::size_t NODE_SIZE= 1 << 22> class\
-    \ PiecewiseLinearConvexfunction {\n using i64= long long;\n using i128= __int128_t;\n\
-    \ using node_id= std::int_least32_t;\n static constexpr i64 INF= 1ll << 41;\n\
-    \ template <class Int> static inline std::string str(Int x) {\n  if (x >= INF)\
-    \ return \"inf\";\n  if (x <= -INF) return \"-inf\";\n  std::stringstream ss;\n\
-    \  ss << x;\n  return ss.str();\n }\n struct Node {\n  node_id ch[2], par;\n \
-    \ int sz;\n  i64 dx, slope, laz, x;\n  i128 y;\n };\n friend std::ostream &operator<<(std::ostream\
+    \ <string>\n#include <iostream>\n#include <cassert>\ntemplate <std::size_t NODE_SIZE=\
+    \ 1 << 22> class PiecewiseLinearConvexfunction {\n using i64= long long;\n using\
+    \ i128= __int128_t;\n using node_id= std::int_least32_t;\n static constexpr i64\
+    \ INF= 1ll << 41;\n template <class Int> static inline std::string str(Int x)\
+    \ {\n  if (x >= INF) return \"inf\";\n  if (x <= -INF) return \"-inf\";\n  std::stringstream\
+    \ ss;\n  ss << x;\n  return ss.str();\n }\n struct Node {\n  node_id ch[2], par;\n\
+    \  int sz;\n  i64 dx, slope, laz, x;\n  i128 y;\n };\n friend std::ostream &operator<<(std::ostream\
     \ &os, Node *t) {\n  if (!t) return os << \"nullptr\";\n  return os << \"{dx:\"\
     \ << str(t->dx) << \",slope:\" << str(t->slope) << \",x:\" << str(t->x) << \"\
     ,y:\" << str(t->y) << \",laz:\" << str(t->laz) << \"}\";\n }\n static inline Node\
@@ -155,10 +155,10 @@ data:
     \ &operator+=(PiecewiseLinearConvexfunction &r) { return *this= *this + r; }\n\
     };\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <array>\n\
-    #include <sstream>\n#include <string>\n#include <iostream>\ntemplate <std::size_t\
-    \ NODE_SIZE= 1 << 22> class PiecewiseLinearConvexfunction {\n using i64= long\
-    \ long;\n using i128= __int128_t;\n using node_id= std::int_least32_t;\n static\
-    \ constexpr i64 INF= 1ll << 41;\n template <class Int> static inline std::string\
+    #include <sstream>\n#include <string>\n#include <iostream>\n#include <cassert>\n\
+    template <std::size_t NODE_SIZE= 1 << 22> class PiecewiseLinearConvexfunction\
+    \ {\n using i64= long long;\n using i128= __int128_t;\n using node_id= std::int_least32_t;\n\
+    \ static constexpr i64 INF= 1ll << 41;\n template <class Int> static inline std::string\
     \ str(Int x) {\n  if (x >= INF) return \"inf\";\n  if (x <= -INF) return \"-inf\"\
     ;\n  std::stringstream ss;\n  ss << x;\n  return ss.str();\n }\n struct Node {\n\
     \  node_id ch[2], par;\n  int sz;\n  i64 dx, slope, laz, x;\n  i128 y;\n };\n\
@@ -276,8 +276,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/PiecewiseLinearConvexfunction.hpp
   requiredBy: []
-  timestamp: '2023-02-28 19:35:01+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-02-28 20:02:51+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1077.test.cpp
   - test/yukicoder/1467.test.cpp
@@ -296,33 +296,35 @@ splay木でがんばった. 一般の min-plus 畳み込みは実装していな
 メモリプールしている. static 関数 `clear` でノードリセット. 
 
 ## メンバ関数
-コンストラクタ `PiecewiseLinearConvexfunction()` : $f(x) := 0$ \
-`add_const(c)` : $f(x)\leftarrow f(x)+c$ \
-`add_linear(a,c)` : $f(x)\leftarrow f(x) + ax+c$ \
-`shift(a)` : $f(x)\leftarrow f(x-a)$ \
-`add_relu(a,c)` : $f(x)\leftarrow f(x) + \begin{cases}  0 & x < c \\ a(x-c) & x \ge c \end{cases}$ \
-`add_ax_bx_c(a,b,c)` : $f(x)\leftarrow f(x) + \begin{cases}  a(x-c) & x < c \\ b(x-c) & x \ge c \end{cases}$ \
-`add_abs(a,c)` : $f(x)\leftarrow f(x) + a|x-c|$ \
-`chinfty_right(a)` : $f(x)\leftarrow  \begin{cases} f(x) & x \le a \\ \infty & x > a \end{cases} $ \
-`chinfty_left(a)` : $f(x)\leftarrow  \begin{cases} \infty & x < a \\ f(x) & x \ge a \end{cases} $ \
-`cumulative_chmin()` : $f(x)\leftarrow\min_{y\le x}f(y)$ \
-`cumulative_chmin_with_condition(a)` : $f(x)\leftarrow\min_{y\le x \land y\le a}f(y)$ \
-`cumulative_chmin_rev()` : $f(x)\leftarrow\min_{y\ge x}f(y)$ \
-`cumulative_chmin_rev_with_condition(a)` : $f(x)\leftarrow\min_{y\ge x \land y\ge a}f(y)$ \
-`chmin_sliding_window(a,b)` : $f(x)\leftarrow\min_{x-b\le y\le x-a}f(y)$ \
-`convex_convolution_with_ax_bx_c(a,b,c)` : $f(x)\leftarrow \min_y \left\{f(x-y)+ \begin{cases}  a(y-c) & y < c \\ b(y-c) & y \ge c \end{cases}\right\}$ \
-`convex_convolution_with_abs(a,c)` : $f(x)\leftarrow \min_y\left\{f(x-y)+a|y-c|\right\}$ \
-`operator+(f,g)` : $f(x)+g(x)$ を返す. 破壊的なので注意 \
-`eval(a)` : $f(a)$ を返す. `operator()(a)` も同じ \
-`argmin()` : 閉区間 $[l, r] = \{y:f(y) = \min_x f(x)\}$ を返す \
-`min()` : $\min_x f(x)$ を返す
+| 関数名                                   | 内容                                                                                                           |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `PiecewiseLinearConvexfunction()`        | コンストラクタ $$f(x) := 0$$                                                                                   |
+| `add_const(c)`                           | $$ f(x)\leftarrow f(x)+c $$                                                                                    |
+| `add_linear(a,c)`                        | $$f(x)\leftarrow f(x) + ax+c$$                                                                                 |
+| `shift(a)`                               | $$f(x)\leftarrow f(x-a)$$                                                                                      |
+| `add_relu(a,c)`                          | $$f(x)\leftarrow f(x) + \begin{cases}  0 & x < c \\ a(x-c) & x \ge c \end{cases}$$                             |
+| `add_ax_bx_c(a,b,c)`                     | $$f(x)\leftarrow f(x) + \begin{cases}  a(x-c) & x < c \\ b(x-c) & x \ge c \end{cases}$$                        |
+| `add_abs(a,c)`                           | $$f(x)\leftarrow f(x) + a\lvert  x-c \rvert  $$                                                                |
+| `chinfty_right(a)`                       | $$f(x)\leftarrow  \begin{cases} f(x) & x \le a \\ \infty & x > a \end{cases} $$                                |
+| `chinfty_left(a)`                        | $$f(x)\leftarrow  \begin{cases} \infty & x < a \\ f(x) & x \ge a \end{cases} $$                                |
+| `cumulative_chmin()`                     | $$f(x)\leftarrow\min_{y\le x}f(y)$$                                                                            |
+| `cumulative_chmin_with_condition(a)`     | $$f(x)\leftarrow\min_{y\le x \land y\le a}f(y)$$                                                               |
+| `cumulative_chmin_rev()`                 | $$f(x)\leftarrow\min_{y\ge x}f(y)$$                                                                            |
+| `cumulative_chmin_rev_with_condition(a)` | $$f(x)\leftarrow\min_{y\ge x \land y\ge a}f(y)$$                                                               |
+| `chmin_sliding_window(a,b)`              | $$f(x)\leftarrow\min_{x-b\le y\le x-a}f(y)$$                                                                   |
+| `convex_convolution_with_ax_bx_c(a,b,c)` | $$f(x)\leftarrow \min_y \left\{f(x-y)+ \begin{cases}  a(y-c) & y < c \\ b(y-c) & y \ge c \end{cases}\right\}$$ |
+| `convex_convolution_with_abs(a,c)`       | $f(x)\leftarrow \min_y\left\{f(x-y)+a\lvert y-c\rvert\right\}$                                                 |
+| `operator+(f,g)`                         | $f(x)+g(x)$ を返す. 破壊的なので注意                                                                           |
+| `eval(a)`, `operator()(a)`               | $f(a)$ を返す.                                                                                                 |
+| `argmin()`                               | 閉区間 $[l, r] = \{y:f(y) = \min_x f(x)\}$ を返す.                                                             |
+| `min()`                                  | $\min_x f(x)$ を返す.                                                                                          |
 
 ## 問題例
 [Kyoto University Programming Contest 2016 H - 壁壁壁壁壁壁壁](https://atcoder.jp/contests/kupc2016/tasks/kupc2016_h) \
 [東京大学プログラミングコンテスト2012 L - じょうしょうツリー](https://atcoder.jp/contests/utpc2012/tasks/utpc2012_12) (`operator+` のverify)\
 [第2回 ドワンゴからの挑戦状 予選 E - 花火](https://atcoder.jp/contests/dwango2016-prelims/tasks/dwango2016qual_e) \
 [AtCoder Regular Contest 070 E - NarrowRectangles](https://atcoder.jp/contests/arc070/tasks/arc070_c) \
-[AtCoder Beginner Contest 275 Ex - Monster](https://atcoder.jp/contests/abc275/tasks/abc275_h) (`operator+`　のverify)
+[AtCoder Beginner Contest 275 Ex - Monster](https://atcoder.jp/contests/abc275/tasks/abc275_h) (`operator+` のverify)
 
 ## 参考
 [https://tokoharuland.hateblo.jp/entry/2019/12/25/000000](https://tokoharuland.hateblo.jp/entry/2019/12/25/000000)\
