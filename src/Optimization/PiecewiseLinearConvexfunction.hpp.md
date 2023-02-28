@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc123_d.test.cpp
     title: test/atcoder/arc123_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1077.test.cpp
     title: test/yukicoder/1077.test.cpp
   - icon: ':x:'
@@ -297,7 +297,7 @@ splay木でがんばった. 一般の min-plus 畳み込みは実装していな
 
 ## メンバ関数
 | 関数名                                   | 内容                                                                                                           |
-| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| :--------------------------------------- | :------------------------------------------------------------------------------------------------------------- |
 | `PiecewiseLinearConvexfunction()`        | コンストラクタ $$f(x) := 0$$                                                                                   |
 | `add_const(c)`                           | $$ f(x)\leftarrow f(x)+c $$                                                                                    |
 | `add_linear(a,c)`                        | $$f(x)\leftarrow f(x) + ax+c$$                                                                                 |
