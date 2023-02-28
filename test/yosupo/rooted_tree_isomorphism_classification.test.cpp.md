@@ -11,6 +11,10 @@ data:
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
+    path: src/Math/CartesianProduct.hpp
+    title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
+      times K_n$)"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -194,37 +198,53 @@ data:
     \ 1]);\n   for (int j= 0; j < deg; ++j) {\n    const auto &e= t[v][j];\n    if\
     \ (int u= e.to;u != t.parent(v)) dp2[u]= f_ev(f_ee(f[j], b[j + 1]), v);\n   }\n\
     \   dp[v]= f_ev(f[deg], v);\n  }\n return RerootingData<T,C>(t, dp1, dp2, dp);\n\
-    }\n#line 7 \"test/yosupo/rooted_tree_isomorphism_classification.test.cpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
-    \ N;\n cin >> N;\n Tree tree(N);\n for (int i= 1; i < N; ++i) {\n  int p;\n  cin\
-    \ >> p;\n  tree.add_edge(p, i);\n }\n tree.build(0);\n using Mint= ModInt<(1ll\
-    \ << 61) - 1>;\n using Data= pair<int, Mint>;\n vector<Mint> hash(N);\n random_device\
-    \ rng;\n for (auto& x: hash) x= uniform_int_distribution<long long>(1, Mint::mod()\
-    \ - 1)(rng);\n auto f_ee= [&](const Data& l, const Data& r) { return Data{max(l.first,\
-    \ r.first), l.second * r.second}; };\n auto f_ve= [&](const Data& d, int, auto)\
-    \ { return Data{d.first, d.second + hash[d.first]}; };\n auto f_ev= [&](const\
-    \ Data& d, int) { return Data{d.first + 1, d.second}; };\n auto dp= rerooting<Data>(tree,\
-    \ f_ee, f_ve, f_ev, Data{0, Mint(1)});\n vector<int> ans(N);\n for (int i= 0;\
-    \ i < N; ++i) ans[i]= dp.get(0, i).second.val();\n auto vec= ans;\n auto id= compress(vec);\n\
-    \ for (auto& x: ans) x= id(x);\n cout << *max_element(ans.begin(), ans.end())\
-    \ + 1 << '\\n';\n for (int i= 0; i < N; ++i) cout << ans[i] << \" \\n\"[i == N\
-    \ - 1];\n return 0;\n}\n"
+    }\n#line 2 \"src/Math/CartesianProduct.hpp\"\n#include <tuple>\n#line 4 \"src/Math/CartesianProduct.hpp\"\
+    \n#include <utility>\ntemplate <class... Ks> struct CartesianProduct: std::tuple<Ks...>\
+    \ {\n static constexpr int N= sizeof...(Ks);\n using Self= CartesianProduct;\n\
+    \ using std::tuple<Ks...>::tuple;\n template <class T> CartesianProduct(const\
+    \ T &v) { fill(v, std::make_index_sequence<N>()); }\n template <class T, std::size_t...\
+    \ I> std::array<int, N> fill(const T &v, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)=\
+    \ v), 0)...}}; }\n#define HELPER(name, op) \\\n template <std::size_t... I> std::array<int,\
+    \ N> name(const Self &y, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)\
+    \ op##= std::get<I>(y)), 0)...}}; } \\\n Self &operator op##=(const Self &r) {\
+    \ return name(r, std::make_index_sequence<N>()), *this; }\n HELPER(add_assign,\
+    \ +)\n HELPER(dif_assign, -)\n HELPER(mul_assign, *)\n HELPER(div_assign, /)\n\
+    #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
+    \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
+    \ Self &r) const { return Self(*this)*= r; }\n Self operator/(const Self &r) const\
+    \ { return Self(*this)/= r; }\n};\n#line 8 \"test/yosupo/rooted_tree_isomorphism_classification.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n Tree tree(N);\n for (int i= 1; i < N; ++i) {\n  int p;\n\
+    \  cin >> p;\n  tree.add_edge(p, i);\n }\n tree.build(0);\n using Mint= ModInt<(1ll\
+    \ << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using Data= pair<int,\
+    \ K>;\n vector<K> hash(N);\n auto randint= [&]() {\n  static random_device rng;\n\
+    \  return uniform_int_distribution<long long>(1, Mint::mod() - 1)(rng);\n };\n\
+    \ for (auto& x: hash) x= {randint(), randint()};\n auto f_ee= [&](const Data&\
+    \ l, const Data& r) { return Data{max(l.first, r.first), l.second * r.second};\
+    \ };\n auto f_ve= [&](const Data& d, int, auto) { return Data{d.first, d.second\
+    \ + hash[d.first]}; };\n auto f_ev= [&](const Data& d, int) { return Data{d.first\
+    \ + 1, d.second}; };\n auto dp= rerooting<Data>(tree, f_ee, f_ve, f_ev, Data{0,\
+    \ K{1, 1}});\n vector<K> ans(N);\n for (int i= 0; i < N; ++i) ans[i]= dp.get(0,\
+    \ i).second;\n auto vec= ans;\n auto id= compress(vec);\n cout << vec.size() <<\
+    \ '\\n';\n for (int i= 0; i < N; ++i) cout << id(ans[i]) << \" \\n\"[i == N -\
+    \ 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification\"\
     \n#include <iostream>\n#include <random>\n#include \"src/Misc/compress.hpp\"\n\
-    #include \"src/Math/ModInt.hpp\"\n#include \"src/Graph/rerooting.hpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
-    \ N;\n cin >> N;\n Tree tree(N);\n for (int i= 1; i < N; ++i) {\n  int p;\n  cin\
-    \ >> p;\n  tree.add_edge(p, i);\n }\n tree.build(0);\n using Mint= ModInt<(1ll\
-    \ << 61) - 1>;\n using Data= pair<int, Mint>;\n vector<Mint> hash(N);\n random_device\
-    \ rng;\n for (auto& x: hash) x= uniform_int_distribution<long long>(1, Mint::mod()\
-    \ - 1)(rng);\n auto f_ee= [&](const Data& l, const Data& r) { return Data{max(l.first,\
-    \ r.first), l.second * r.second}; };\n auto f_ve= [&](const Data& d, int, auto)\
-    \ { return Data{d.first, d.second + hash[d.first]}; };\n auto f_ev= [&](const\
-    \ Data& d, int) { return Data{d.first + 1, d.second}; };\n auto dp= rerooting<Data>(tree,\
-    \ f_ee, f_ve, f_ev, Data{0, Mint(1)});\n vector<int> ans(N);\n for (int i= 0;\
-    \ i < N; ++i) ans[i]= dp.get(0, i).second.val();\n auto vec= ans;\n auto id= compress(vec);\n\
-    \ for (auto& x: ans) x= id(x);\n cout << *max_element(ans.begin(), ans.end())\
-    \ + 1 << '\\n';\n for (int i= 0; i < N; ++i) cout << ans[i] << \" \\n\"[i == N\
+    #include \"src/Math/ModInt.hpp\"\n#include \"src/Graph/rerooting.hpp\"\n#include\
+    \ \"src/Math/CartesianProduct.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N;\n cin >> N;\n Tree tree(N);\n for (int i=\
+    \ 1; i < N; ++i) {\n  int p;\n  cin >> p;\n  tree.add_edge(p, i);\n }\n tree.build(0);\n\
+    \ using Mint= ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n\
+    \ using Data= pair<int, K>;\n vector<K> hash(N);\n auto randint= [&]() {\n  static\
+    \ random_device rng;\n  return uniform_int_distribution<long long>(1, Mint::mod()\
+    \ - 1)(rng);\n };\n for (auto& x: hash) x= {randint(), randint()};\n auto f_ee=\
+    \ [&](const Data& l, const Data& r) { return Data{max(l.first, r.first), l.second\
+    \ * r.second}; };\n auto f_ve= [&](const Data& d, int, auto) { return Data{d.first,\
+    \ d.second + hash[d.first]}; };\n auto f_ev= [&](const Data& d, int) { return\
+    \ Data{d.first + 1, d.second}; };\n auto dp= rerooting<Data>(tree, f_ee, f_ve,\
+    \ f_ev, Data{0, K{1, 1}});\n vector<K> ans(N);\n for (int i= 0; i < N; ++i) ans[i]=\
+    \ dp.get(0, i).second;\n auto vec= ans;\n auto id= compress(vec);\n cout << vec.size()\
+    \ << '\\n';\n for (int i= 0; i < N; ++i) cout << id(ans[i]) << \" \\n\"[i == N\
     \ - 1];\n return 0;\n}"
   dependsOn:
   - src/Misc/compress.hpp
@@ -233,10 +253,11 @@ data:
   - src/Internal/Remainder.hpp
   - src/Graph/rerooting.hpp
   - src/Graph/Tree.hpp
+  - src/Math/CartesianProduct.hpp
   isVerificationFile: true
   path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   requiredBy: []
-  timestamp: '2023-02-10 14:46:13+09:00'
+  timestamp: '2023-02-28 19:56:25+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/rooted_tree_isomorphism_classification.test.cpp

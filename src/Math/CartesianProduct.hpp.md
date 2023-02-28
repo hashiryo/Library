@@ -13,6 +13,9 @@ data:
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - icon: ':x:'
+    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+  - icon: ':x:'
     path: test/yosupo/z_algorithm.rollinghash.test.cpp
     title: test/yosupo/z_algorithm.rollinghash.test.cpp
   _isVerificationFailed: true
@@ -58,6 +61,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/z_algorithm.rollinghash.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - test/aoj/2614.rollinghash.test.cpp
   - test/aoj/2711.rollinghash.test.cpp
