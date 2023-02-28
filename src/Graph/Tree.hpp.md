@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
@@ -54,19 +54,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1153.test.cpp
-    title: test/yukicoder/1153.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1326.test.cpp
     title: test/yukicoder/1326.test.cpp
   - icon: ':x:'
@@ -75,16 +72,16 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1418.test.cpp
     title: test/yukicoder/1418.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1494.test.cpp
     title: test/yukicoder/1494.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':x:'
@@ -233,7 +230,6 @@ data:
   - test/yukicoder/1418.test.cpp
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/1718.test.cpp
-  - test/yukicoder/1153.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp

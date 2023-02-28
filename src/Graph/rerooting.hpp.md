@@ -27,16 +27,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1153.test.cpp
-    title: test/yukicoder/1153.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
   - icon: ':x:'
@@ -45,13 +42,13 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1418.test.cpp
     title: test/yukicoder/1418.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1494.test.cpp
     title: test/yukicoder/1494.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
   - icon: ':x:'
@@ -181,7 +178,6 @@ data:
   - test/yukicoder/1418.test.cpp
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/1718.test.cpp
-  - test/yukicoder/1153.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/aoj/1595.test.cpp
   - test/aoj/GRL_5_A.test.cpp
@@ -213,4 +209,5 @@ title: "\u5168\u65B9\u4F4D\u6728DP"
 [Typical DP Contest N - 木](https://atcoder.jp/contests/tdpc/tasks/tdpc_tree) \
 [square869120Contest #4 D - Driving on a Tree](https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_d)\
 [NJPC2017 E - 限界集落](https://atcoder.jp/contests/njpc2017/tasks/njpc2017_e)\
-[第二回全国統一プログラミング王決定戦本戦 D - 木、](https://atcoder.jp/contests/nikkei2019-2-final/tasks/nikkei2019_2_final_d) (根付き木ハッシュ)
+[第二回全国統一プログラミング王決定戦本戦 D - 木、](https://atcoder.jp/contests/nikkei2019-2-final/tasks/nikkei2019_2_final_d) (根付き木ハッシュ) \
+[yukicoder No.1153 ねこちゃんゲーム](https://yukicoder.me/problems/no/1153) (sp judge)

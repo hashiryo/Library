@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   - icon: ':question:'

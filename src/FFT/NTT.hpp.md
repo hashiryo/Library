@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
   - icon: ':heavy_check_mark:'
@@ -187,16 +187,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.Poly.test.cpp
     title: test/yukicoder/215.Poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
   - icon: ':x:'
