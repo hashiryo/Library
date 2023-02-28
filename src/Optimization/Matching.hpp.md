@@ -68,8 +68,8 @@ data:
   timestamp: '2023-01-21 23:17:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/3032.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/aoj/3032.test.cpp
 documentation_of: src/Optimization/Matching.hpp
 layout: document
 title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5)"

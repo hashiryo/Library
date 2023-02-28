@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
   - icon: ':x:'
@@ -111,9 +111,9 @@ data:
   timestamp: '2023-01-23 16:45:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2397.SparseMat.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
 documentation_of: src/LinearAlgebra/MinimalPolynomial.hpp
 layout: document
 title: "\u758E\u884C\u5217\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"

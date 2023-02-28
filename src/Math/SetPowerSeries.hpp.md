@@ -227,11 +227,11 @@ data:
   timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2345.test.cpp
   - test/yosupo/subset_convolution.test.cpp
+  - test/aoj/2345.test.cpp
+  - test/atcoder/abc213_g.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc199_d.test.cpp
-  - test/atcoder/abc213_g.test.cpp
 documentation_of: src/Math/SetPowerSeries.hpp
 layout: document
 title: "\u96C6\u5408\u51AA\u7D1A\u6570"

@@ -21,7 +21,7 @@ data:
     path: src/FFT/polynomial_matrix_prod.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u7DCF\u7A4D"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   - icon: ':x:'
@@ -38,7 +38,7 @@ data:
     title: test/yukicoder/665.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/sample_points_shift.hpp\"\n#include <vector>\n#include\
@@ -316,13 +316,13 @@ data:
   requiredBy:
   - src/FFT/polynomial_matrix_prod.hpp
   timestamp: '2023-02-07 17:34:35+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/502.test.cpp
+  - test/yukicoder/42.test.cpp
+  - test/yukicoder/665.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/yukicoder/502.test.cpp
-  - test/yukicoder/665.test.cpp
-  - test/yukicoder/42.test.cpp
 documentation_of: src/FFT/sample_points_shift.hpp
 layout: document
 title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"

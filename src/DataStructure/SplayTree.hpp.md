@@ -257,12 +257,12 @@ data:
   timestamp: '2023-02-10 16:45:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - test/aoj/1508.SplayTree.test.cpp
-  - test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - test/aoj/ITP2_4_B.SplayTree.test.cpp
   - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/aoj/ITP2_4_A.SplayTree.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
+  - test/aoj/ITP2_4_B.SplayTree.test.cpp
+  - test/aoj/1508.SplayTree.test.cpp
 documentation_of: src/DataStructure/SplayTree.hpp
 layout: document
 title: Splay-Tree

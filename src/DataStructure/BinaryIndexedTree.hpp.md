@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_range_sum.BIT.test.cpp
     title: test/yosupo/point_add_range_sum.BIT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
   - icon: ':x:'
@@ -59,11 +59,11 @@ data:
   timestamp: '2023-01-21 16:53:05+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/static_range_inversions_query.mo.test.cpp
-  - test/yosupo/point_add_range_sum.BIT.test.cpp
-  - test/yukicoder/1270.test.cpp
-  - test/yukicoder/649.BIT.test.cpp
   - test/yukicoder/738.BIT.test.cpp
+  - test/yukicoder/649.BIT.test.cpp
+  - test/yukicoder/1270.test.cpp
+  - test/yosupo/point_add_range_sum.BIT.test.cpp
+  - test/yosupo/static_range_inversions_query.mo.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree.hpp
 layout: document
 title: Binary-Indexed-Tree

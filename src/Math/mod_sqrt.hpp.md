@@ -8,7 +8,7 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
   - icon: ':question:'
@@ -33,13 +33,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_sparse_FPS.test.cpp
     title: test/yosupo/pow_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_mod.test.cpp
     title: test/yosupo/sqrt_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
     title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - icon: ':x:'
@@ -147,22 +147,22 @@ data:
   isVerificationFile: false
   path: src/Math/mod_sqrt.hpp
   requiredBy:
-  - src/FFT/fps_sqrt.hpp
   - src/Math/sparse_fps.hpp
+  - src/FFT/fps_sqrt.hpp
   timestamp: '2023-02-07 15:39:13+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_mod.test.cpp
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/inv_of_sparse_FPS.test.cpp
-  - test/yosupo/log_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
-  - test/yukicoder/1939.test.cpp
   - test/yukicoder/1533.test.cpp
   - test/yukicoder/1080.test.cpp
+  - test/yukicoder/1939.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_mod.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
 documentation_of: src/Math/mod_sqrt.hpp

@@ -126,12 +126,12 @@ data:
   timestamp: '2023-01-21 18:41:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc208_e.test.cpp
   - test/atcoder/abc235_f.test.cpp
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc154_e.test.cpp
   - test/atcoder/arc127_a.test.cpp
+  - test/atcoder/abc208_e.test.cpp
+  - test/atcoder/abc138_f.test.cpp
+  - test/atcoder/abc129_e.test.cpp
 documentation_of: src/Automaton/dfa_operations.hpp
 layout: document
 title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\

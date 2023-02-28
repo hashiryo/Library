@@ -139,13 +139,13 @@ data:
     - icon: ':question:'
       path: src/FFT/fps_inv.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/fps_sqrt.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
     - icon: ':x:'
       path: src/FFT/polynomial_matrix_prod.hpp
       title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u7DCF\u7A4D"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/sample_points_shift.hpp
       title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
     - icon: ':question:'
@@ -323,6 +323,9 @@ data:
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - name: src/Misc
     pages:
+    - icon: ':question:'
+      path: src/Misc/CartesianTree.hpp
+      title: Cartesian-Tree
     - icon: ':question:'
       path: src/Misc/Mo.hpp
       title: Mo's Algorithm
@@ -689,6 +692,12 @@ data:
       path: test/aoj/CGL_7_I.test.cpp
       title: test/aoj/CGL_7_I.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/DPL_3_B.test.cpp
+      title: test/aoj/DPL_3_B.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/DPL_3_C.test.cpp
+      title: test/aoj/DPL_3_C.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_B.test.cpp
       title: test/aoj/DPL_5_B.test.cpp
     - icon: ':heavy_check_mark:'
@@ -871,6 +880,9 @@ data:
       path: test/atcoder/abc231_h.matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.matroid_intersection.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc234_g.test.cpp
+      title: test/atcoder/abc234_g.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -912,6 +924,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/arc115_e.test.cpp
+      title: test/atcoder/arc115_e.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.dujiao.test.cpp
       title: test/atcoder/arc116_c.dujiao.test.cpp
@@ -972,6 +987,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/cartesian_tree.test.cpp
+      title: test/yosupo/cartesian_tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/characteristic_polynomial.test.cpp
       title: test/yosupo/characteristic_polynomial.test.cpp
@@ -1191,31 +1209,31 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sharp_p_subset_sum.test.cpp
       title: test/yosupo/sharp_p_subset_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/shift_of_FPS.test.cpp
       title: test/yosupo/shift_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
       title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sparse_matrix_det.test.cpp
       title: test/yosupo/sparse_matrix_det.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_mod.test.cpp
       title: test/yosupo/sqrt_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_of_FPS.test.cpp
       title: test/yosupo/sqrt_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
       title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_frequency.WM.test.cpp
       title: test/yosupo/static_range_frequency.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_inversions_query.mo.test.cpp
       title: test/yosupo/static_range_inversions_query.mo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/stirling_1.test.cpp
       title: test/yosupo/stirling_1.test.cpp
     - icon: ':x:'
@@ -1271,6 +1289,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1019.test.cpp
       title: test/yukicoder/1019.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1031.test.cpp
+      title: test/yukicoder/1031.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1075.test.cpp
       title: test/yukicoder/1075.test.cpp

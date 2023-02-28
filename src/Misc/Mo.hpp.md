@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0425.test.cpp
     title: test/aoj/0425.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
   - icon: ':x:'
@@ -53,9 +53,9 @@ data:
   timestamp: '2023-02-09 16:12:29+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/0425.test.cpp
-  - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yukicoder/1270.test.cpp
+  - test/yosupo/static_range_inversions_query.mo.test.cpp
+  - test/aoj/0425.test.cpp
 documentation_of: src/Misc/Mo.hpp
 layout: document
 title: Mo's Algorithm

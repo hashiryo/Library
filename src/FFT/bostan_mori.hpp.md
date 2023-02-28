@@ -466,12 +466,12 @@ data:
   timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/0168.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
+  - test/yukicoder/658.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/137.div_at.test.cpp
-  - test/yukicoder/658.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/aoj/0168.test.cpp
 documentation_of: src/FFT/bostan_mori.hpp
 layout: document
 title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"

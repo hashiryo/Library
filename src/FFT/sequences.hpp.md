@@ -36,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
   - icon: ':x:'
@@ -520,11 +520,11 @@ data:
   timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/partition.test.cpp
+  - test/yukicoder/963.test.cpp
+  - test/yosupo/stirling_1.test.cpp
   - test/yosupo/stirling_2.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yukicoder/963.test.cpp
+  - test/yosupo/partition.test.cpp
 documentation_of: src/FFT/sequences.hpp
 layout: document
 title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\u7528\

@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
   - icon: ':x:'
@@ -54,10 +54,10 @@ data:
   timestamp: '2023-01-23 16:45:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2397.SparseMat.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
-  - test/yosupo/find_linear_recurrence.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
+  - test/yosupo/find_linear_recurrence.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp
 layout: document
 title: Berlekamp-Massey

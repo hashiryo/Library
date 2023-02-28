@@ -9,6 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
     title: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc234_g.test.cpp
+    title: test/atcoder/abc234_g.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/arc115_e.test.cpp
+    title: test/atcoder/arc115_e.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -46,6 +52,8 @@ data:
   verifiedWith:
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
   - test/aoj/2667.HLD.test.cpp
+  - test/atcoder/arc115_e.test.cpp
+  - test/atcoder/abc234_g.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
 layout: document
 title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"

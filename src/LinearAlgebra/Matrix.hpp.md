@@ -101,10 +101,10 @@ data:
   timestamp: '2023-01-21 20:28:05+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2624.test.cpp
-  - test/aoj/2397.test.cpp
   - test/yukicoder/1340.test.cpp
   - test/yukicoder/650.LCT.test.cpp
+  - test/aoj/2397.test.cpp
+  - test/aoj/2624.test.cpp
   - test/atcoder/abc236_g.test.cpp
 documentation_of: src/LinearAlgebra/Matrix.hpp
 layout: document

@@ -36,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_sparse_FPS.test.cpp
     title: test/yosupo/pow_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
     title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - icon: ':x:'
@@ -324,14 +324,14 @@ data:
   timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/inv_of_sparse_FPS.test.cpp
-  - test/yosupo/log_of_sparse_FPS.test.cpp
-  - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
-  - test/yukicoder/1939.test.cpp
   - test/yukicoder/1533.test.cpp
+  - test/yukicoder/1939.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
 documentation_of: src/Math/sparse_fps.hpp

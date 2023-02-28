@@ -84,9 +84,9 @@ data:
   timestamp: '2023-01-21 20:48:27+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/1019.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
