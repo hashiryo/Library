@@ -236,7 +236,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -398,7 +398,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -407,7 +407,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.test.cpp
     title: test/yukicoder/1019.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
   - icon: ':heavy_check_mark:'
@@ -416,7 +416,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
   - icon: ':heavy_check_mark:'
@@ -425,7 +425,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1333.test.cpp
     title: test/yukicoder/1333.test.cpp
   - icon: ':heavy_check_mark:'
@@ -446,7 +446,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':x:'

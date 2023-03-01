@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedVerifiedWith:
@@ -36,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.test.cpp
     title: test/atcoder/abc223_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,48 +51,48 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1326.test.cpp
     title: test/yukicoder/1326.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1333.test.cpp
     title: test/yukicoder/1333.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1418.test.cpp
     title: test/yukicoder/1418.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1494.test.cpp
     title: test/yukicoder/1494.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/922.test.cpp
     title: test/yukicoder/922.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -135,23 +135,23 @@ data:
     \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
     \ {\n  assert(builded()), assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] +\
     \ 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int\
-    \ u, int v, int k) const {\n  if (assert(builded()); u == v) return -1;\n  if\
-    \ (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w=\
-    \ lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ?\
-    \ -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int dist(int u, int\
-    \ v) const { return assert(builded()), depth(u) + depth(v) - depth(lca(u, v))\
-    \ * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const { return assert(builded()),\
-    \ L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return assert(builded()),\
-    \ R[v] - L[v]; }\n std::array<int, 2> subtree(int v) /* half-open interval */\
-    \ const { return assert(builded()), std::array{L[v], R[v]}; }\n template <bool\
-    \ edge= 0> std::vector<std::array<int, 2>> path(int u, int v) /* sequence of closed\
-    \ intervals */ const {\n  assert(builded());\n  std::vector<std::array<int, 2>>\
-    \ up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n"
+    \ u, int v, int k) const {\n  if (assert(builded()); !k) return u;\n  if (u ==\
+    \ v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1)\
+    \ : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return\
+    \ k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n\
+    \ int dist(int u, int v) const { return assert(builded()), depth(u) + depth(v)\
+    \ - depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
+    \ { return assert(builded()), L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return assert(builded()), R[v] - L[v]; }\n std::array<int, 2> subtree(int\
+    \ v) /* half-open interval */ const { return assert(builded()), std::array{L[v],\
+    \ R[v]}; }\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) /* sequence of closed intervals */ const {\n  assert(builded());\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n"
   code: "#pragma once\n#include <type_traits>\n#include <cstddef>\n#include <vector>\n\
     #include <algorithm>\n#include <array>\n#include <numeric>\n#include <cassert>\n\
     template <class Cost= void> class Tree {\n template <class D, class T> struct\
@@ -192,31 +192,31 @@ data:
     \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
     \ {\n  assert(builded()), assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] +\
     \ 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int\
-    \ u, int v, int k) const {\n  if (assert(builded()); u == v) return -1;\n  if\
-    \ (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w=\
-    \ lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ?\
-    \ -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int dist(int u, int\
-    \ v) const { return assert(builded()), depth(u) + depth(v) - depth(lca(u, v))\
-    \ * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const { return assert(builded()),\
-    \ L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return assert(builded()),\
-    \ R[v] - L[v]; }\n std::array<int, 2> subtree(int v) /* half-open interval */\
-    \ const { return assert(builded()), std::array{L[v], R[v]}; }\n template <bool\
-    \ edge= 0> std::vector<std::array<int, 2>> path(int u, int v) /* sequence of closed\
-    \ intervals */ const {\n  assert(builded());\n  std::vector<std::array<int, 2>>\
-    \ up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };"
+    \ u, int v, int k) const {\n  if (assert(builded()); !k) return u;\n  if (u ==\
+    \ v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1)\
+    \ : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return\
+    \ k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n\
+    \ int dist(int u, int v) const { return assert(builded()), depth(u) + depth(v)\
+    \ - depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
+    \ { return assert(builded()), L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return assert(builded()), R[v] - L[v]; }\n std::array<int, 2> subtree(int\
+    \ v) /* half-open interval */ const { return assert(builded()), std::array{L[v],\
+    \ R[v]}; }\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) /* sequence of closed intervals */ const {\n  assert(builded());\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/Tree.hpp
   requiredBy:
   - src/Graph/rerooting.hpp
   - src/Graph/BiConnectedComponents.hpp
-  timestamp: '2023-02-10 14:46:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-03-02 03:48:21+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/1326.test.cpp

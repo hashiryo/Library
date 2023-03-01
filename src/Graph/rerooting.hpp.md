@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
@@ -21,45 +21,45 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.test.cpp
     title: test/atcoder/abc223_g.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1333.test.cpp
     title: test/yukicoder/1333.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1418.test.cpp
     title: test/yukicoder/1418.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1494.test.cpp
     title: test/yukicoder/1494.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/922.test.cpp
     title: test/yukicoder/922.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -102,43 +102,43 @@ data:
     \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
     \ {\n  assert(builded()), assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] +\
     \ 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int\
-    \ u, int v, int k) const {\n  if (assert(builded()); u == v) return -1;\n  if\
-    \ (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w=\
-    \ lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ?\
-    \ -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int dist(int u, int\
-    \ v) const { return assert(builded()), depth(u) + depth(v) - depth(lca(u, v))\
-    \ * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const { return assert(builded()),\
-    \ L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return assert(builded()),\
-    \ R[v] - L[v]; }\n std::array<int, 2> subtree(int v) /* half-open interval */\
-    \ const { return assert(builded()), std::array{L[v], R[v]}; }\n template <bool\
-    \ edge= 0> std::vector<std::array<int, 2>> path(int u, int v) /* sequence of closed\
-    \ intervals */ const {\n  assert(builded());\n  std::vector<std::array<int, 2>>\
-    \ up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/rerooting.hpp\"\ntemplate <class T, class C> class RerootingData\
-    \ {\n Tree<C> &tree;\n std::vector<T> dp1, dp2, dp;\npublic:\nRerootingData(Tree<C>\
-    \ &t,std::vector<T>& d1,std::vector<T>& d2,std::vector<T>& d):tree(t),dp1(d1),dp2(d2),dp(d){}\n\
-    \ T operator[](int v)const { return dp[v]; }\n auto begin() const { return dp.begin();\
-    \ }\n auto end() const { return dp.end(); }\n const T& get(int root, int v)const{\n\
-    \  return root==v?dp[v]:tree.in_subtree(root,v)? dp2[tree.jump(v,root,1)]:dp1[v];\n\
-    \ }\n};\ntemplate <class T, class U, class C,  class F1, class F2, class F3>\n\
-    RerootingData<T,C> rerooting(Tree<C> &t, const F1 &f_ee, const F2 &f_ve, const\
-    \ F3 &f_ev, const U &unit){\n  const int n= t.size();\n  std::vector<T> dp1(n),\
-    \ dp2(n), dp(n);\n  for (int i= n; i--;) {\n   int v= t.to_node(i);\n   U sum=\
-    \ unit;\n   for (const auto &e: t[v])\n    if (int u=e.to;u != t.parent(v)) sum=\
-    \ f_ee(sum, f_ve(dp1[u], v, e));\n   dp1[v]= f_ev(sum, v);\n  }\n  for (int i=\
-    \ 0; i < n; ++i) {\n   int v= t.to_node(i), deg= t[v].size();\n   std::vector<U>\
-    \ f(deg + 1), b(deg + 1);\n   for (int j= 0; j < deg; ++j) {\n    const auto &e=\
-    \ t[v][j];\n    int u= e.to;\n    f[j + 1]= f_ve(u == t.parent(v) ? dp2[v] : dp1[u],v,\
-    \ e);\n   }\n   f[0]= b[deg]= unit;\n   for (int j= deg; j--;) b[j]= f_ee(f[j\
-    \ + 1], b[j + 1]);\n   for (int j= 0; j < deg; ++j) f[j + 1]= f_ee(f[j], f[j +\
-    \ 1]);\n   for (int j= 0; j < deg; ++j) {\n    const auto &e= t[v][j];\n    if\
-    \ (int u= e.to;u != t.parent(v)) dp2[u]= f_ev(f_ee(f[j], b[j + 1]), v);\n   }\n\
-    \   dp[v]= f_ev(f[deg], v);\n  }\n return RerootingData<T,C>(t, dp1, dp2, dp);\n\
-    }\n"
+    \ u, int v, int k) const {\n  if (assert(builded()); !k) return u;\n  if (u ==\
+    \ v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1)\
+    \ : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return\
+    \ k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n\
+    \ int dist(int u, int v) const { return assert(builded()), depth(u) + depth(v)\
+    \ - depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
+    \ { return assert(builded()), L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return assert(builded()), R[v] - L[v]; }\n std::array<int, 2> subtree(int\
+    \ v) /* half-open interval */ const { return assert(builded()), std::array{L[v],\
+    \ R[v]}; }\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) /* sequence of closed intervals */ const {\n  assert(builded());\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 3 \"src/Graph/rerooting.hpp\"\
+    \ntemplate <class T, class C> class RerootingData {\n Tree<C> &tree;\n std::vector<T>\
+    \ dp1, dp2, dp;\npublic:\nRerootingData(Tree<C> &t,std::vector<T>& d1,std::vector<T>&\
+    \ d2,std::vector<T>& d):tree(t),dp1(d1),dp2(d2),dp(d){}\n T operator[](int v)const\
+    \ { return dp[v]; }\n auto begin() const { return dp.begin(); }\n auto end() const\
+    \ { return dp.end(); }\n const T& get(int root, int v)const{\n  return root==v?dp[v]:tree.in_subtree(root,v)?\
+    \ dp2[tree.jump(v,root,1)]:dp1[v];\n }\n};\ntemplate <class T, class U, class\
+    \ C,  class F1, class F2, class F3>\nRerootingData<T,C> rerooting(Tree<C> &t,\
+    \ const F1 &f_ee, const F2 &f_ve, const F3 &f_ev, const U &unit){\n  const int\
+    \ n= t.size();\n  std::vector<T> dp1(n), dp2(n), dp(n);\n  for (int i= n; i--;)\
+    \ {\n   int v= t.to_node(i);\n   U sum= unit;\n   for (const auto &e: t[v])\n\
+    \    if (int u=e.to;u != t.parent(v)) sum= f_ee(sum, f_ve(dp1[u], v, e));\n  \
+    \ dp1[v]= f_ev(sum, v);\n  }\n  for (int i= 0; i < n; ++i) {\n   int v= t.to_node(i),\
+    \ deg= t[v].size();\n   std::vector<U> f(deg + 1), b(deg + 1);\n   for (int j=\
+    \ 0; j < deg; ++j) {\n    const auto &e= t[v][j];\n    int u= e.to;\n    f[j +\
+    \ 1]= f_ve(u == t.parent(v) ? dp2[v] : dp1[u],v, e);\n   }\n   f[0]= b[deg]= unit;\n\
+    \   for (int j= deg; j--;) b[j]= f_ee(f[j + 1], b[j + 1]);\n   for (int j= 0;\
+    \ j < deg; ++j) f[j + 1]= f_ee(f[j], f[j + 1]);\n   for (int j= 0; j < deg; ++j)\
+    \ {\n    const auto &e= t[v][j];\n    if (int u= e.to;u != t.parent(v)) dp2[u]=\
+    \ f_ev(f_ee(f[j], b[j + 1]), v);\n   }\n   dp[v]= f_ev(f[deg], v);\n  }\n return\
+    \ RerootingData<T,C>(t, dp1, dp2, dp);\n}\n"
   code: "#pragma once\n#include \"src/Graph/Tree.hpp\"\ntemplate <class T, class C>\
     \ class RerootingData {\n Tree<C> &tree;\n std::vector<T> dp1, dp2, dp;\npublic:\n\
     RerootingData(Tree<C> &t,std::vector<T>& d1,std::vector<T>& d2,std::vector<T>&\
@@ -165,8 +165,8 @@ data:
   isVerificationFile: false
   path: src/Graph/rerooting.hpp
   requiredBy: []
-  timestamp: '2023-02-10 14:46:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-03-02 03:48:21+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/768.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1326.test.cpp
     title: test/yukicoder/1326.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -66,39 +66,39 @@ data:
     \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
     \ {\n  assert(builded()), assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] +\
     \ 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int\
-    \ u, int v, int k) const {\n  if (assert(builded()); u == v) return -1;\n  if\
-    \ (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w=\
-    \ lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ?\
-    \ -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int dist(int u, int\
-    \ v) const { return assert(builded()), depth(u) + depth(v) - depth(lca(u, v))\
-    \ * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const { return assert(builded()),\
-    \ L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return assert(builded()),\
-    \ R[v] - L[v]; }\n std::array<int, 2> subtree(int v) /* half-open interval */\
-    \ const { return assert(builded()), std::array{L[v], R[v]}; }\n template <bool\
-    \ edge= 0> std::vector<std::array<int, 2>> path(int u, int v) /* sequence of closed\
-    \ intervals */ const {\n  assert(builded());\n  std::vector<std::array<int, 2>>\
-    \ up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/BiConnectedComponents.hpp\"\nclass BiConnectedComponents\
-    \ {\n std::vector<std::vector<int>> adj;\npublic:\n BiConnectedComponents(int\
-    \ n): adj(n) {}\n void add_edge(int u, int v) { adj[u].push_back(v), adj[v].push_back(u);\
-    \ }\n Tree<void> block_cut_tree() const {\n  const int n= adj.size();\n  std::vector<int>\
-    \ ord(n), par(n, -2), dat(n, 0), low;\n  std::vector<std::array<int, 2>> es;\n\
-    \  int k= 0;\n  for (int s= 0, p; s < n; ++s)\n   if (par[s] == -2)\n    for (par[p=\
-    \ s]= -1; p >= 0;) {\n     if (dat[p] == 0) ord[k++]= p;\n     if (dat[p] == (int)adj[p].size())\
-    \ {\n      p= par[p];\n      continue;\n     }\n     if (int q= adj[p][dat[p]++];\
-    \ par[q] == -2) par[q]= p, p= q;\n    }\n  for (int i= 0; i < n; ++i) dat[ord[i]]=\
-    \ i;\n  low= dat;\n  for (int v= 0; v < n; ++v)\n   for (int u: adj[v]) low[v]=\
-    \ std::min(low[v], dat[u]);\n  for (int i= n; i--;)\n   if (int p= ord[i], pp=\
-    \ par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  for (int p: ord)\n \
-    \  if (par[p] >= 0) {\n    if (int pp= par[p]; low[p] < dat[pp]) low[p]= low[pp],\
-    \ es.push_back({low[p], p});\n    else es.push_back({k, pp}), es.push_back({k,\
-    \ p}), low[p]= k++;\n   }\n  for (int s= 0; s < n; ++s)\n   if (!adj[s].size())\
-    \ es.push_back({k++, s});\n  Tree ret(k);\n  for (auto [u, v]: es) ret.add_edge(u,\
-    \ v);\n  return ret;\n }\n};\n"
+    \ u, int v, int k) const {\n  if (assert(builded()); !k) return u;\n  if (u ==\
+    \ v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1)\
+    \ : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return\
+    \ k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n\
+    \ int dist(int u, int v) const { return assert(builded()), depth(u) + depth(v)\
+    \ - depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
+    \ { return assert(builded()), L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return assert(builded()), R[v] - L[v]; }\n std::array<int, 2> subtree(int\
+    \ v) /* half-open interval */ const { return assert(builded()), std::array{L[v],\
+    \ R[v]}; }\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) /* sequence of closed intervals */ const {\n  assert(builded());\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 3 \"src/Graph/BiConnectedComponents.hpp\"\
+    \nclass BiConnectedComponents {\n std::vector<std::vector<int>> adj;\npublic:\n\
+    \ BiConnectedComponents(int n): adj(n) {}\n void add_edge(int u, int v) { adj[u].push_back(v),\
+    \ adj[v].push_back(u); }\n Tree<void> block_cut_tree() const {\n  const int n=\
+    \ adj.size();\n  std::vector<int> ord(n), par(n, -2), dat(n, 0), low;\n  std::vector<std::array<int,\
+    \ 2>> es;\n  int k= 0;\n  for (int s= 0, p; s < n; ++s)\n   if (par[s] == -2)\n\
+    \    for (par[p= s]= -1; p >= 0;) {\n     if (dat[p] == 0) ord[k++]= p;\n    \
+    \ if (dat[p] == (int)adj[p].size()) {\n      p= par[p];\n      continue;\n   \
+    \  }\n     if (int q= adj[p][dat[p]++]; par[q] == -2) par[q]= p, p= q;\n    }\n\
+    \  for (int i= 0; i < n; ++i) dat[ord[i]]= i;\n  low= dat;\n  for (int v= 0; v\
+    \ < n; ++v)\n   for (int u: adj[v]) low[v]= std::min(low[v], dat[u]);\n  for (int\
+    \ i= n; i--;)\n   if (int p= ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp],\
+    \ low[p]);\n  for (int p: ord)\n   if (par[p] >= 0) {\n    if (int pp= par[p];\
+    \ low[p] < dat[pp]) low[p]= low[pp], es.push_back({low[p], p});\n    else es.push_back({k,\
+    \ pp}), es.push_back({k, p}), low[p]= k++;\n   }\n  for (int s= 0; s < n; ++s)\n\
+    \   if (!adj[s].size()) es.push_back({k++, s});\n  Tree ret(k);\n  for (auto [u,\
+    \ v]: es) ret.add_edge(u, v);\n  return ret;\n }\n};\n"
   code: "#pragma once\n#include \"src/Graph/Tree.hpp\"\nclass BiConnectedComponents\
     \ {\n std::vector<std::vector<int>> adj;\npublic:\n BiConnectedComponents(int\
     \ n): adj(n) {}\n void add_edge(int u, int v) { adj[u].push_back(v), adj[v].push_back(u);\
@@ -121,8 +121,8 @@ data:
   isVerificationFile: false
   path: src/Graph/BiConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2023-02-10 14:46:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-03-02 03:48:21+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1326.test.cpp
   - test/yosupo/biconnected_components.test.cpp
