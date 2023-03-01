@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum
@@ -38,8 +38,8 @@ data:
     \ ch[2], par;\n  std::uint64_t flag;\n };\n template <bool mo_, bool du_, typename\
     \ tEnable= void> struct Node_D: Node_B<> {};\n template <bool mo_, bool du_> struct\
     \ Node_D<mo_, du_, typename std::enable_if_t<mo_ && !du_>>: Node_B<typename M::T>\
-    \ { typename M::T val= M::ti(), sum= M::ti(); };\n template <bool mo_, bool du_>\
-    \ struct Node_D<mo_, du_, typename std::enable_if_t<!mo_ && du_>>: Node_B<typename\
+    \ {\n  typename M::T val= M::ti(), sum= M::ti();\n };\n template <bool mo_, bool\
+    \ du_> struct Node_D<mo_, du_, typename std::enable_if_t<!mo_ && du_>>: Node_B<typename\
     \ M::T, typename M::E> {\n  typename M::T val;\n  typename M::E lazy;\n  bool\
     \ lazy_flg;\n };\n template <bool mo_, bool du_> struct Node_D<mo_, du_, typename\
     \ std::enable_if_t<mo_ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename\
@@ -64,48 +64,47 @@ data:
     \ >> 4) & 0xfffff));\n  n[i].lazy_flg= true;\n }\n inline void eval(node_id i)\
     \ {\n  if (!n[i].lazy_flg) return;\n  if (n[i].ch[0]) propagate(n[i].ch[0], n[i].lazy);\n\
     \  if (n[i].ch[1]) propagate(n[i].ch[1], n[i].lazy);\n  n[i].lazy_flg= false;\n\
-    \ }\n inline int dir(node_id i) {\n  if (n[i].par) {\n   if (n[n[i].par].ch[0]\
-    \ == i) return 0;\n   if (n[n[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n\
-    \ }\n inline void rot(node_id x) {\n  node_id p= n[x].par;\n  int d= dir(x);\n\
-    \  if ((n[p].ch[d]= n[x].ch[!d])) n[n[p].ch[d]].par= p;\n  n[x].ch[!d]= p, pushup(p),\
-    \ pushup(x), n[x].par= n[p].par;\n  if ((d= dir(p)) < 2) n[n[p].par].ch[d]= x,\
-    \ pushup(n[p].par);\n  n[p].par= x;\n }\n inline void splay(node_id i) {\n  if\
-    \ constexpr (dual<M>::value) eval(i);\n  for (int i_dir= dir(i), p_dir; i_dir\
-    \ < 2; rot(i), i_dir= dir(i)) {\n   p_dir= dir(n[i].par);\n   if constexpr (dual<M>::value)\
-    \ {\n    if (p_dir < 2) eval(n[n[i].par].par);\n    eval(n[i].par), eval(i);\n\
-    \   }\n   if (p_dir < 2) rot(i_dir == p_dir ? n[i].par : i);\n  }\n }\n inline\
-    \ node_id merge_back(node_id l, node_id r) {\n  if (!l) return r;\n  if (!r) return\
-    \ l;\n  while (n[l].ch[1]) l= n[l].ch[1];\n  return splay(l), n[n[r].par= l].ch[1]=\
-    \ r, pushup(l), l;\n }\n inline std::pair<node_id, node_id> split(node_id i) {\n\
-    \  splay(i);\n  node_id l= n[i].ch[0];\n  return n[i].ch[0]= n[l].par= 0, pushup(i),\
-    \ std::make_pair(l, i);\n }\n inline void reroot(node_id v) {\n  auto p= split(v);\n\
-    \  merge_back(p.second, p.first), splay(v);\n }\n inline bool same_root(node_id\
-    \ i, node_id j) {\n  if (i) splay(i);\n  if (j) splay(j);\n  while (n[i].par)\
-    \ i= n[i].par;\n  while (n[j].par) j= n[j].par;\n  return i == j;\n }\n node_id\
-    \ n_st;\n std::unordered_map<std::uint64_t, node_id> emp;\npublic:\n EulerTourTree()\
-    \ {}\n EulerTourTree(int N): n_st(ni) {\n  ni+= N;\n  for (int i= 0; i < N; i++)\
-    \ n[i + n_st].flag= 0x100001000000 * i;\n }\n const T &operator[](vertex_id x)\
-    \ { return get(x); }\n const T &get(vertex_id x) {\n  static_assert(monoid<M>::value\
-    \ || dual<M>::value, \"\\\"get\\\" is not available\\n\");\n  return n[x + n_st].val;\n\
-    \ }\n void set(vertex_id x, T val) {\n  static_assert(monoid<M>::value || dual<M>::value,\
-    \ \"\\\"set\\\" is not available\\n\");\n  splay(x+= n_st), n[x].val= val, pushup(x);\n\
-    \ }\n bool edge_exist(vertex_id x, vertex_id y) {\n  if (x > y) std::swap(x, y);\n\
-    \  return emp.count(((long long)x << 32) | y);\n }\n void link(vertex_id x, vertex_id\
-    \ y, bool hi= true) {\n  if (x > y) std::swap(x, y);\n  int ei= new_edge(x, y,\
-    \ hi);\n  emp.insert(std::make_pair(((long long)x << 32) | y, ei));\n  x+= n_st,\
-    \ y+= n_st, reroot(x), reroot(y);\n  n[n[x].par= ei].ch[0]= x, n[n[y].par= ei].ch[1]=\
-    \ y;\n  pushup(ei), merge_back(ei, ei + 1);\n }\n void cut(vertex_id x, vertex_id\
-    \ y) {\n  if (x > y) std::swap(x, y);\n  int ei= emp[((long long)x << 32) | y],\
-    \ rei= ei + 1;\n  emp.erase(((long long)x << 32) | y);\n  auto [pl, pr]= split(ei);\n\
-    \  node_id left, center, right;\n  if (pl && same_root(pl, rei)) {\n   auto [ql,\
-    \ qr]= split(rei);\n   left= ql, center= n[qr].ch[1], right= n[pr].ch[1], n[center].par=\
-    \ 0;\n  } else {\n   splay(ei), n[ei= n[ei].ch[1]].par= 0;\n   auto [ql, qr]=\
-    \ split(rei);\n   splay(pl), left= pl, right= n[qr].ch[1];\n  }\n  n[right].par=\
-    \ 0, merge_back(left, right);\n }\n bool connected(vertex_id x, vertex_id y) {\
-    \ return same_root(x + n_st, y + n_st); }\n void subedge_set(vertex_id x, bool\
-    \ val) {\n  splay(x+= n_st);\n  if (val) n[x].flag|= 0b0100;\n  else n[x].flag&=\
-    \ -5ll;\n  pushup(x);\n }\n std::size_t tree_size(vertex_id x) { return splay(x+=\
-    \ n_st), ((n[x].flag >> 4) & 0xfffff); }\n T fold_tree(vertex_id x) {\n  static_assert(monoid<M>::value,\
+    \ }\n static inline int dir(node_id i) { return n[n[i].par].ch[1] == i; }\n static\
+    \ inline void rot(node_id i) {\n  node_id p= n[i].par;\n  int d= dir(i);\n  if\
+    \ ((n[p].ch[d]= n[i].ch[!d])) n[n[p].ch[d]].par= p;\n  n[i].ch[!d]= p;\n  if ((n[i].par=\
+    \ n[p].par)) n[n[p].par].ch[dir(p)]= i;\n  n[p].par= i;\n }\n static inline void\
+    \ splay(node_id i) {\n  if constexpr (dual<M>::value) eval(i);\n  for (node_id\
+    \ p= n[i].par; p; p= n[i].par) {\n   node_id pp= n[p].par;\n   if constexpr (dual<M>::value)\
+    \ {\n    if (pp) eval(pp);\n    eval(p), eval(i);\n   }\n   if (pp) rot(dir(i)\
+    \ == dir(p) ? p : i), rot(i), pushup(pp), pushup(p);\n   else rot(i), pushup(p);\n\
+    \  }\n  pushup(i);\n }\n inline node_id merge_back(node_id l, node_id r) {\n \
+    \ if (!l) return r;\n  if (!r) return l;\n  while (n[l].ch[1]) l= n[l].ch[1];\n\
+    \  return splay(l), n[n[r].par= l].ch[1]= r, pushup(l), l;\n }\n inline std::pair<node_id,\
+    \ node_id> split(node_id i) {\n  splay(i);\n  node_id l= n[i].ch[0];\n  return\
+    \ n[i].ch[0]= n[l].par= 0, pushup(i), std::make_pair(l, i);\n }\n inline void\
+    \ reroot(node_id v) {\n  auto p= split(v);\n  merge_back(p.second, p.first), splay(v);\n\
+    \ }\n inline bool same_root(node_id i, node_id j) {\n  if (i) splay(i);\n  if\
+    \ (j) splay(j);\n  while (n[i].par) i= n[i].par;\n  while (n[j].par) j= n[j].par;\n\
+    \  return i == j;\n }\n node_id n_st;\n std::unordered_map<std::uint64_t, node_id>\
+    \ emp;\npublic:\n EulerTourTree() {}\n EulerTourTree(int N): n_st(ni) {\n  ni+=\
+    \ N;\n  for (int i= 0; i < N; i++) n[i + n_st].flag= 0x100001000000 * i;\n }\n\
+    \ const T &operator[](vertex_id x) { return get(x); }\n const T &get(vertex_id\
+    \ x) {\n  static_assert(monoid<M>::value || dual<M>::value, \"\\\"get\\\" is not\
+    \ available\\n\");\n  return n[x + n_st].val;\n }\n void set(vertex_id x, T val)\
+    \ {\n  static_assert(monoid<M>::value || dual<M>::value, \"\\\"set\\\" is not\
+    \ available\\n\");\n  splay(x+= n_st), n[x].val= val, pushup(x);\n }\n bool edge_exist(vertex_id\
+    \ x, vertex_id y) {\n  if (x > y) std::swap(x, y);\n  return emp.count(((long\
+    \ long)x << 32) | y);\n }\n void link(vertex_id x, vertex_id y, bool hi= true)\
+    \ {\n  if (x > y) std::swap(x, y);\n  int ei= new_edge(x, y, hi);\n  emp.insert(std::make_pair(((long\
+    \ long)x << 32) | y, ei));\n  x+= n_st, y+= n_st, reroot(x), reroot(y);\n  n[n[x].par=\
+    \ ei].ch[0]= x, n[n[y].par= ei].ch[1]= y;\n  pushup(ei), merge_back(ei, ei + 1);\n\
+    \ }\n void cut(vertex_id x, vertex_id y) {\n  if (x > y) std::swap(x, y);\n  int\
+    \ ei= emp[((long long)x << 32) | y], rei= ei + 1;\n  emp.erase(((long long)x <<\
+    \ 32) | y);\n  auto [pl, pr]= split(ei);\n  node_id left, center, right;\n  if\
+    \ (pl && same_root(pl, rei)) {\n   auto [ql, qr]= split(rei);\n   left= ql, center=\
+    \ n[qr].ch[1], right= n[pr].ch[1], n[center].par= 0;\n  } else {\n   splay(ei),\
+    \ n[ei= n[ei].ch[1]].par= 0;\n   auto [ql, qr]= split(rei);\n   splay(pl), left=\
+    \ pl, right= n[qr].ch[1];\n  }\n  n[right].par= 0, merge_back(left, right);\n\
+    \ }\n bool connected(vertex_id x, vertex_id y) { return same_root(x + n_st, y\
+    \ + n_st); }\n void subedge_set(vertex_id x, bool val) {\n  splay(x+= n_st);\n\
+    \  if (val) n[x].flag|= 0b0100;\n  else n[x].flag&= -5ll;\n  pushup(x);\n }\n\
+    \ std::size_t tree_size(vertex_id x) { return splay(x+= n_st), ((n[x].flag >>\
+    \ 4) & 0xfffff); }\n T fold_tree(vertex_id x) {\n  static_assert(monoid<M>::value,\
     \ \"\\\"fold\\\" is not available\\n\");\n  return splay(x+= n_st), n[x].sum;\n\
     \ }\n T fold_subtree(vertex_id x, vertex_id par= -1) {\n  if (par == -1) return\
     \ fold_tree(x);\n  cut(x, par);\n  T ret= fold_tree(x);\n  link(x, par);\n  return\
@@ -157,8 +156,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-01-22 23:29:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-03-01 09:00:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
 layout: document
