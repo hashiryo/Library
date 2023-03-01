@@ -6,7 +6,7 @@ data:
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
   _extendedVerifiedWith:
@@ -16,13 +16,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2893.onlinedicon.test.cpp
     title: test/aoj/2893.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - icon: ':x:'

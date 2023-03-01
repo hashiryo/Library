@@ -24,7 +24,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
   - icon: ':heavy_check_mark:'
@@ -160,19 +160,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
     title: test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
     title: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   - icon: ':x:'
