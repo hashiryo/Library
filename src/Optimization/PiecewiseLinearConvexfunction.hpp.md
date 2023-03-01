@@ -15,24 +15,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc217_h.test.cpp
     title: test/atcoder/abc217_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc250_g.conj.test.cpp
     title: test/atcoder/abc250_g.conj.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc250_g.test.cpp
     title: test/atcoder/abc250_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc123_d.test.cpp
     title: test/atcoder/arc123_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1077.test.cpp
     title: test/yukicoder/1077.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1467.test.cpp
     title: test/yukicoder/1467.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\n#include\
@@ -61,18 +61,17 @@ data:
     \ }\n static inline int dir(node_id i) { return ns[ns[i].par].ch[1] == i; }\n\
     \ static inline void rot(node_id i) {\n  node_id p= ns[i].par;\n  int d= dir(i);\n\
     \  if ((ns[p].ch[d]= ns[i].ch[!d])) ns[ns[p].ch[d]].par= p;\n  ns[i].ch[!d]= p;\n\
-    \  if ((ns[i].par= ns[p].par)) ns[ns[p].par].ch[dir(p)]= i;\n  ns[p].par= i;\n\
-    \ }\n static inline void splay(node_id i) {\n  for (node_id p= ns[i].par; p; p=\
-    \ ns[i].par) {\n   if (node_id pp= ns[p].par; pp) rot(dir(i) == dir(p) ? p : i),\
-    \ rot(i), pushup(pp), pushup(p);\n   else rot(i), pushup(p);\n  }\n  pushup(i);\n\
-    \ }\n static inline void slope_search(node_id &i, i64 k) {\n  for (node_id s;;\
-    \ i= s) {\n   push(i);\n   i64 tmp= ns[i].slope;\n   if (tmp == k) break;\n  \
-    \ if (s= ns[i].ch[tmp < k]; !s) break;\n  }\n  splay(i);\n }\n static inline void\
-    \ x_search(node_id &i, i64 x) {\n  for (bool c;; i= ns[i].ch[c]) {\n   push(i);\n\
-    \   i64 l= ns[i].ch[0] ? ns[ns[i].ch[0]].x : 0, r= l + ns[i].dx;\n   if (l <=\
-    \ x && x <= r) return splay(i);\n   if ((c= (r < x))) x-= r;\n  }\n }\n static\
-    \ inline void add(node_id i, i64 &x, i64 &p, PiecewiseLinearConvexfunction &f)\
-    \ {\n  if (!i) return;\n  push(i);\n  add(ns[i].ch[0], x, p, f);\n  f.add_ax_bx_c(0,\
+    \  if ((ns[i].par= ns[p].par)) ns[ns[p].par].ch[dir(p)]= i;\n  ns[p].par= i, pushup(p);\n\
+    \ }\n static inline void splay(node_id i) {\n  for (node_id p= ns[i].par; p; rot(i),\
+    \ p= ns[i].par)\n   if (node_id pp= ns[p].par; pp) rot(dir(i) == dir(p) ? p :\
+    \ i);\n  pushup(i);\n }\n static inline void slope_search(node_id &i, i64 k) {\n\
+    \  for (node_id s;; i= s) {\n   push(i);\n   i64 tmp= ns[i].slope;\n   if (tmp\
+    \ == k) break;\n   if (s= ns[i].ch[tmp < k]; !s) break;\n  }\n  splay(i);\n }\n\
+    \ static inline void x_search(node_id &i, i64 x) {\n  for (bool c;; i= ns[i].ch[c])\
+    \ {\n   push(i);\n   i64 l= ns[i].ch[0] ? ns[ns[i].ch[0]].x : 0, r= l + ns[i].dx;\n\
+    \   if (l <= x && x <= r) return splay(i);\n   if ((c= (r < x))) x-= r;\n  }\n\
+    \ }\n static inline void add(node_id i, i64 &x, i64 &p, PiecewiseLinearConvexfunction\
+    \ &f) {\n  if (!i) return;\n  push(i);\n  add(ns[i].ch[0], x, p, f);\n  f.add_ax_bx_c(0,\
     \ ns[i].slope - p, x);\n  x+= ns[i].dx, p= ns[i].slope;\n  add(ns[i].ch[1], x,\
     \ p, f);\n }\n static inline void debugoutput(node_id i, int d) {\n  if (!i) return;\n\
     \  push(i);\n  debugoutput(ns[i].ch[0], d + 1);\n  for (int i= 0; i < d; ++i)\
@@ -180,13 +179,12 @@ data:
     \ ns[ns[i].par].ch[1] == i; }\n static inline void rot(node_id i) {\n  node_id\
     \ p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]= ns[i].ch[!d])) ns[ns[p].ch[d]].par=\
     \ p;\n  ns[i].ch[!d]= p;\n  if ((ns[i].par= ns[p].par)) ns[ns[p].par].ch[dir(p)]=\
-    \ i;\n  ns[p].par= i;\n }\n static inline void splay(node_id i) {\n  for (node_id\
-    \ p= ns[i].par; p; p= ns[i].par) {\n   if (node_id pp= ns[p].par; pp) rot(dir(i)\
-    \ == dir(p) ? p : i), rot(i), pushup(pp), pushup(p);\n   else rot(i), pushup(p);\n\
-    \  }\n  pushup(i);\n }\n static inline void slope_search(node_id &i, i64 k) {\n\
-    \  for (node_id s;; i= s) {\n   push(i);\n   i64 tmp= ns[i].slope;\n   if (tmp\
-    \ == k) break;\n   if (s= ns[i].ch[tmp < k]; !s) break;\n  }\n  splay(i);\n }\n\
-    \ static inline void x_search(node_id &i, i64 x) {\n  for (bool c;; i= ns[i].ch[c])\
+    \ i;\n  ns[p].par= i, pushup(p);\n }\n static inline void splay(node_id i) {\n\
+    \  for (node_id p= ns[i].par; p; rot(i), p= ns[i].par)\n   if (node_id pp= ns[p].par;\
+    \ pp) rot(dir(i) == dir(p) ? p : i);\n  pushup(i);\n }\n static inline void slope_search(node_id\
+    \ &i, i64 k) {\n  for (node_id s;; i= s) {\n   push(i);\n   i64 tmp= ns[i].slope;\n\
+    \   if (tmp == k) break;\n   if (s= ns[i].ch[tmp < k]; !s) break;\n  }\n  splay(i);\n\
+    \ }\n static inline void x_search(node_id &i, i64 x) {\n  for (bool c;; i= ns[i].ch[c])\
     \ {\n   push(i);\n   i64 l= ns[i].ch[0] ? ns[ns[i].ch[0]].x : 0, r= l + ns[i].dx;\n\
     \   if (l <= x && x <= r) return splay(i);\n   if ((c= (r < x))) x-= r;\n  }\n\
     \ }\n static inline void add(node_id i, i64 &x, i64 &p, PiecewiseLinearConvexfunction\
@@ -276,8 +274,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/PiecewiseLinearConvexfunction.hpp
   requiredBy: []
-  timestamp: '2023-02-28 20:02:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-03-01 11:27:21+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1077.test.cpp
   - test/yukicoder/1467.test.cpp

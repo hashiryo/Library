@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/PiecewiseLinearConvexfunction.hpp
     title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc123/tasks/arc123_d
@@ -42,13 +42,12 @@ data:
     \ ns[ns[i].par].ch[1] == i; }\n static inline void rot(node_id i) {\n  node_id\
     \ p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]= ns[i].ch[!d])) ns[ns[p].ch[d]].par=\
     \ p;\n  ns[i].ch[!d]= p;\n  if ((ns[i].par= ns[p].par)) ns[ns[p].par].ch[dir(p)]=\
-    \ i;\n  ns[p].par= i;\n }\n static inline void splay(node_id i) {\n  for (node_id\
-    \ p= ns[i].par; p; p= ns[i].par) {\n   if (node_id pp= ns[p].par; pp) rot(dir(i)\
-    \ == dir(p) ? p : i), rot(i), pushup(pp), pushup(p);\n   else rot(i), pushup(p);\n\
-    \  }\n  pushup(i);\n }\n static inline void slope_search(node_id &i, i64 k) {\n\
-    \  for (node_id s;; i= s) {\n   push(i);\n   i64 tmp= ns[i].slope;\n   if (tmp\
-    \ == k) break;\n   if (s= ns[i].ch[tmp < k]; !s) break;\n  }\n  splay(i);\n }\n\
-    \ static inline void x_search(node_id &i, i64 x) {\n  for (bool c;; i= ns[i].ch[c])\
+    \ i;\n  ns[p].par= i, pushup(p);\n }\n static inline void splay(node_id i) {\n\
+    \  for (node_id p= ns[i].par; p; rot(i), p= ns[i].par)\n   if (node_id pp= ns[p].par;\
+    \ pp) rot(dir(i) == dir(p) ? p : i);\n  pushup(i);\n }\n static inline void slope_search(node_id\
+    \ &i, i64 k) {\n  for (node_id s;; i= s) {\n   push(i);\n   i64 tmp= ns[i].slope;\n\
+    \   if (tmp == k) break;\n   if (s= ns[i].ch[tmp < k]; !s) break;\n  }\n  splay(i);\n\
+    \ }\n static inline void x_search(node_id &i, i64 x) {\n  for (bool c;; i= ns[i].ch[c])\
     \ {\n   push(i);\n   i64 l= ns[i].ch[0] ? ns[ns[i].ch[0]].x : 0, r= l + ns[i].dx;\n\
     \   if (l <= x && x <= r) return splay(i);\n   if ((c= (r < x))) x-= r;\n  }\n\
     \ }\n static inline void add(node_id i, i64 &x, i64 &p, PiecewiseLinearConvexfunction\
@@ -151,8 +150,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc123_d.test.cpp
   requiredBy: []
-  timestamp: '2023-02-28 20:02:51+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-03-01 11:27:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc123_d.test.cpp
 layout: document

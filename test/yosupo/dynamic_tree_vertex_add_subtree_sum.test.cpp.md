@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
   - icon: ':question:'
@@ -55,32 +55,33 @@ data:
     \ & 0b1010;\n   if constexpr (monoid_v<M>) n[i].sum= M::op(n[n[i].ch[0]].sum,\
     \ n[i].sum);\n  }\n  if (n[i].ch[1]) {\n   n[i].flag+= (n[n[i].ch[1]].flag & 0xfffff0),\
     \ n[i].flag|= n[n[i].ch[1]].flag & 0b1010;\n   if constexpr (monoid_v<M>) n[i].sum=\
-    \ M::op(n[i].sum, n[n[i].ch[1]].sum);\n  }\n }\n inline void propagate(node_id\
+    \ M::op(n[i].sum, n[n[i].ch[1]].sum);\n  }\n }\n static inline void propagate(node_id\
     \ i, const E &v) {\n  n[i].lazy_flg ? (M::composition(n[i].lazy, v), v) : n[i].lazy=\
     \ v;\n  if ((n[i].flag >> 44) == ((n[i].flag >> 24) & 0xfffff)) M::mapping(n[i].val,\
     \ v, 1);\n  if constexpr (monoid_v<M>) M::mapping(n[i].sum, v, ((n[i].flag >>\
-    \ 4) & 0xfffff));\n  n[i].lazy_flg= true;\n }\n inline void eval(node_id i) {\n\
-    \  if (!n[i].lazy_flg) return;\n  if (n[i].ch[0]) propagate(n[i].ch[0], n[i].lazy);\n\
-    \  if (n[i].ch[1]) propagate(n[i].ch[1], n[i].lazy);\n  n[i].lazy_flg= false;\n\
-    \ }\n static inline int dir(node_id i) { return n[n[i].par].ch[1] == i; }\n static\
-    \ inline void rot(node_id i) {\n  node_id p= n[i].par;\n  int d= dir(i);\n  if\
-    \ ((n[p].ch[d]= n[i].ch[!d])) n[n[p].ch[d]].par= p;\n  n[i].ch[!d]= p;\n  if ((n[i].par=\
-    \ n[p].par)) n[n[p].par].ch[dir(p)]= i;\n  n[p].par= i, pushup(p);\n }\n static\
-    \ inline void splay(node_id i) {\n  if constexpr (dual_v<M>) eval(i);\n  for (node_id\
-    \ p= n[i].par; p; rot(i), p= n[i].par) {\n   node_id pp= n[p].par;\n   if constexpr\
-    \ (dual_v<M>) {\n    if (pp) eval(pp);\n    eval(p), eval(i);\n   }\n   if (pp)\
-    \ rot(dir(i) == dir(p) ? p : i);\n  }\n  pushup(i);\n }\n inline node_id merge_back(node_id\
-    \ l, node_id r) {\n  if (!l) return r;\n  if (!r) return l;\n  while (n[l].ch[1])\
-    \ l= n[l].ch[1];\n  return splay(l), n[n[r].par= l].ch[1]= r, pushup(l), l;\n\
-    \ }\n inline std::pair<node_id, node_id> split(node_id i) {\n  splay(i);\n  node_id\
-    \ l= n[i].ch[0];\n  return n[i].ch[0]= n[l].par= 0, pushup(i), std::make_pair(l,\
-    \ i);\n }\n inline void reroot(node_id v) {\n  auto p= split(v);\n  merge_back(p.second,\
-    \ p.first), splay(v);\n }\n inline bool same_root(node_id i, node_id j) {\n  if\
-    \ (i) splay(i);\n  if (j) splay(j);\n  while (n[i].par) i= n[i].par;\n  while\
-    \ (n[j].par) j= n[j].par;\n  return i == j;\n }\n node_id n_st;\n std::unordered_map<std::uint64_t,\
-    \ node_id> emp;\npublic:\n EulerTourTree() {}\n EulerTourTree(int N): n_st(ni)\
-    \ {\n  ni+= N;\n  for (int i= 0; i < N; i++) n[i + n_st].flag= 0x100001000000\
-    \ * i;\n }\n const T &operator[](vertex_id x) { return get(x); }\n const T &get(vertex_id\
+    \ 4) & 0xfffff));\n  n[i].lazy_flg= true;\n }\n static inline void eval(node_id\
+    \ i) {\n  if (!n[i].lazy_flg) return;\n  if (n[i].ch[0]) propagate(n[i].ch[0],\
+    \ n[i].lazy);\n  if (n[i].ch[1]) propagate(n[i].ch[1], n[i].lazy);\n  n[i].lazy_flg=\
+    \ false;\n }\n static inline int dir(node_id i) { return n[n[i].par].ch[1] ==\
+    \ i; }\n static inline void rot(node_id i) {\n  node_id p= n[i].par;\n  int d=\
+    \ dir(i);\n  if ((n[p].ch[d]= n[i].ch[!d])) n[n[p].ch[d]].par= p;\n  n[i].ch[!d]=\
+    \ p;\n  if ((n[i].par= n[p].par)) n[n[p].par].ch[dir(p)]= i;\n  n[p].par= i, pushup(p);\n\
+    \ }\n static inline void splay(node_id i) {\n  if constexpr (dual_v<M>) eval(i);\n\
+    \  for (node_id p= n[i].par; p; rot(i), p= n[i].par) {\n   node_id pp= n[p].par;\n\
+    \   if constexpr (dual_v<M>) {\n    if (pp) eval(pp);\n    eval(p), eval(i);\n\
+    \   }\n   if (pp) rot(dir(i) == dir(p) ? p : i);\n  }\n  pushup(i);\n }\n static\
+    \ inline node_id merge_back(node_id l, node_id r) {\n  if (!l) return r;\n  if\
+    \ (!r) return l;\n  while (n[l].ch[1]) l= n[l].ch[1];\n  return splay(l), n[n[r].par=\
+    \ l].ch[1]= r, pushup(l), l;\n }\n static inline std::pair<node_id, node_id> split(node_id\
+    \ i) {\n  splay(i);\n  node_id l= n[i].ch[0];\n  return n[i].ch[0]= n[l].par=\
+    \ 0, pushup(i), std::make_pair(l, i);\n }\n static inline void reroot(node_id\
+    \ v) {\n  auto p= split(v);\n  merge_back(p.second, p.first), splay(v);\n }\n\
+    \ static inline bool same_root(node_id i, node_id j) {\n  if (i) splay(i);\n \
+    \ if (j) splay(j);\n  while (n[i].par) i= n[i].par;\n  while (n[j].par) j= n[j].par;\n\
+    \  return i == j;\n }\n node_id n_st;\n std::unordered_map<std::uint64_t, node_id>\
+    \ emp;\npublic:\n EulerTourTree() {}\n EulerTourTree(int N): n_st(ni) {\n  ni+=\
+    \ N;\n  for (int i= 0; i < N; i++) n[i + n_st].flag= 0x100001000000 * i;\n }\n\
+    \ const T &operator[](vertex_id x) { return get(x); }\n const T &get(vertex_id\
     \ x) {\n  static_assert(monoid_v<M> || dual_v<M>, \"\\\"get\\\" is not available\\\
     n\");\n  return n[x + n_st].val;\n }\n void set(vertex_id x, T val) {\n  static_assert(monoid_v<M>\
     \ || dual_v<M>, \"\\\"set\\\" is not available\\n\");\n  splay(x+= n_st), n[x].val=\
@@ -147,7 +148,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-03-01 10:56:45+09:00'
+  timestamp: '2023-03-01 11:30:01+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
