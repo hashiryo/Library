@@ -186,6 +186,9 @@ data:
       path: src/Graph/BipartiteMatching.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
+      path: src/Graph/DulmageMendelsohn.hpp
+      title: "Dulmage-Mendelsohn \u5206\u89E3"
+    - icon: ':heavy_check_mark:'
       path: src/Graph/IncrementalBridgeConnectivity.hpp
       title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
     - icon: ':heavy_check_mark:'
@@ -1385,14 +1388,20 @@ data:
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/yukicoder/1615.test.cpp
-      title: test/yukicoder/1615.test.cpp
+      path: test/yukicoder/1615.MCF.test.cpp
+      title: test/yukicoder/1615.MCF.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1625.KDT.test.cpp
       title: test/yukicoder/1625.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1718.test.cpp
       title: test/yukicoder/1718.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/1744.test.cpp
+      title: test/yukicoder/1744.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/1745.test.cpp
+      title: test/yukicoder/1745.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1750.SparseMat.test.cpp
       title: test/yukicoder/1750.SparseMat.test.cpp

@@ -13,8 +13,8 @@ data:
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1615.test.cpp
-    title: test/yukicoder/1615.test.cpp
+    path: test/yukicoder/1615.MCF.test.cpp
+    title: test/yukicoder/1615.MCF.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -177,7 +177,7 @@ data:
   timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1615.test.cpp
+  - test/yukicoder/1615.MCF.test.cpp
   - test/yosupo/min_cost_b_flow.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
   - test/aoj/GRL_6_B.test.cpp
