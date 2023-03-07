@@ -18,16 +18,16 @@ data:
     \ src, int dst) { es.push_back({src, dst}); }\n std::vector<T> solve(std::vector<T>\
     \ b) const {\n  assert((int)b.size() == n);\n  const int m= es.size();\n  std::vector<T>\
     \ x(m);\n  std::vector<int> adj(m + m), pos(n + 1, 0);\n  for (auto [s, d]: es)\
-    \ ++pos[s], ++pos[d];\n  for (int i= 1; i <= n; ++i) pos[i]+= pos[i - 1];\n  for\
-    \ (int i= m; i--;) {\n   auto [s, d]= es[i];\n   adj[--pos[s]]= i, adj[--pos[d]]=\
-    \ i;\n  }\n  std::vector<int> pre(n, -2), dat(pos.begin(), pos.begin() + n);\n\
-    \  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s] == -2)\n    for (pre[p=\
-    \ s]= -1;;) {\n     if (dat[p] == pos[p + 1]) {\n      if (e= pre[p]; e < 0) {\n\
-    \       if (b[p] != T()) return {};  // no solution\n       break;\n      }\n\
-    \      T tmp= b[p];\n      p= es[e][f= (es[e][0] == p)];\n      if constexpr (std::is_same_v<T,\
-    \ bool>) x[e]= tmp, b[p]= tmp ^ b[p];\n      else x[e]= f ? -tmp : tmp, b[p]+=\
-    \ tmp;\n     } else if (e= adj[dat[p]++], q= es[e][es[e][0] == p]; pre[q] == -2)\
-    \ pre[p= q]= e;\n    }\n  return x;\n }\n};\n"
+    \ ++pos[s], ++pos[d];\n  for (int i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n  for\
+    \ (int i= m; i--;) adj[--pos[es[i][0]]]= i, adj[--pos[es[i][1]]]= i;\n  std::vector<int>\
+    \ pre(n, -2), ei(pos.begin(), pos.begin() + n);\n  for (int s= 0, p, e, q, f;\
+    \ s < n; ++s)\n   if (pre[s] == -2)\n    for (pre[p= s]= -1;;) {\n     if (ei[p]\
+    \ == pos[p + 1]) {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return\
+    \ {};  // no solution\n       break;\n      }\n      T tmp= b[p];\n      p= es[e][f=\
+    \ (es[e][0] == p)];\n      if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]=\
+    \ tmp ^ b[p];\n      else x[e]= f ? -tmp : tmp, b[p]+= tmp;\n     } else if (e=\
+    \ adj[ei[p]++], q= es[e][es[e][0] == p]; pre[q] == -2) pre[p= q]= e;\n    }\n\
+    \  return x;\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <tuple>\n#include <array>\n#include\
     \ <type_traits>\ntemplate <typename T> class LinearSystemIncidence {\n const int\
     \ n;\n std::vector<std::array<int, 2>> es;\npublic:\n LinearSystemIncidence(int\
@@ -35,21 +35,21 @@ data:
     \ std::vector<T> solve(std::vector<T> b) const {\n  assert((int)b.size() == n);\n\
     \  const int m= es.size();\n  std::vector<T> x(m);\n  std::vector<int> adj(m +\
     \ m), pos(n + 1, 0);\n  for (auto [s, d]: es) ++pos[s], ++pos[d];\n  for (int\
-    \ i= 1; i <= n; ++i) pos[i]+= pos[i - 1];\n  for (int i= m; i--;) {\n   auto [s,\
-    \ d]= es[i];\n   adj[--pos[s]]= i, adj[--pos[d]]= i;\n  }\n  std::vector<int>\
-    \ pre(n, -2), dat(pos.begin(), pos.begin() + n);\n  for (int s= 0, p, e, q, f;\
-    \ s < n; ++s)\n   if (pre[s] == -2)\n    for (pre[p= s]= -1;;) {\n     if (dat[p]\
-    \ == pos[p + 1]) {\n      if (e= pre[p]; e < 0) {\n       if (b[p] != T()) return\
-    \ {};  // no solution\n       break;\n      }\n      T tmp= b[p];\n      p= es[e][f=\
-    \ (es[e][0] == p)];\n      if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]=\
-    \ tmp ^ b[p];\n      else x[e]= f ? -tmp : tmp, b[p]+= tmp;\n     } else if (e=\
-    \ adj[dat[p]++], q= es[e][es[e][0] == p]; pre[q] == -2) pre[p= q]= e;\n    }\n\
-    \  return x;\n }\n};"
+    \ i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n  for (int i= m; i--;) adj[--pos[es[i][0]]]=\
+    \ i, adj[--pos[es[i][1]]]= i;\n  std::vector<int> pre(n, -2), ei(pos.begin(),\
+    \ pos.begin() + n);\n  for (int s= 0, p, e, q, f; s < n; ++s)\n   if (pre[s] ==\
+    \ -2)\n    for (pre[p= s]= -1;;) {\n     if (ei[p] == pos[p + 1]) {\n      if\
+    \ (e= pre[p]; e < 0) {\n       if (b[p] != T()) return {};  // no solution\n \
+    \      break;\n      }\n      T tmp= b[p];\n      p= es[e][f= (es[e][0] == p)];\n\
+    \      if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]= tmp ^ b[p];\n \
+    \     else x[e]= f ? -tmp : tmp, b[p]+= tmp;\n     } else if (e= adj[ei[p]++],\
+    \ q= es[e][es[e][0] == p]; pre[q] == -2) pre[p= q]= e;\n    }\n  return x;\n }\n\
+    };"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/LinearSystemIncidence.hpp
   requiredBy: []
-  timestamp: '2023-03-05 16:57:48+09:00'
+  timestamp: '2023-03-07 14:46:42+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/arc106_b.test.cpp

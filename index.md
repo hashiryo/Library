@@ -32,6 +32,9 @@ data:
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
     - icon: ':heavy_check_mark:'
+      path: src/DataStructure/CsrArray.hpp
+      title: "CSR\u5F62\u5F0F"
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/DQuery.hpp
       title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\
         \u30A8\u30EA"
