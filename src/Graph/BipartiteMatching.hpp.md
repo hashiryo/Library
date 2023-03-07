@@ -10,6 +10,9 @@ data:
     path: test/aoj/2423.test.cpp
     title: test/aoj/2423.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/3198.test.cpp
+    title: test/aoj/3198.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.test.cpp
     title: test/yosupo/bipartitematching.test.cpp
   - icon: ':heavy_check_mark:'
@@ -90,6 +93,7 @@ data:
   verifiedWith:
   - test/yukicoder/421.test.cpp
   - test/yosupo/bipartitematching.test.cpp
+  - test/aoj/3198.test.cpp
   - test/aoj/2423.test.cpp
   - test/aoj/0334.test.cpp
 documentation_of: src/Graph/BipartiteMatching.hpp

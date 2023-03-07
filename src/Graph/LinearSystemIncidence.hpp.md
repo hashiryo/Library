@@ -3,17 +3,17 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc106_b.test.cpp
     title: test/atcoder/arc106_b.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/LinearSystemIncidence.hpp\"\n#include <vector>\n\
-    #include <tuple>\n#include <array>\n#include <type_traits>\ntemplate <typename\
-    \ T> class LinearSystemIncidence {\n const int n;\n std::vector<std::array<int,\
+    #include <tuple>\n#include <array>\n#include <cassert>\n#include <type_traits>\n\
+    template <typename T> class LinearSystemIncidence {\n const int n;\n std::vector<std::array<int,\
     \ 2>> es;\npublic:\n LinearSystemIncidence(int n): n(n) {}\n void add_edge(int\
     \ src, int dst) { es.push_back({src, dst}); }\n std::vector<T> solve(std::vector<T>\
     \ b) const {\n  assert((int)b.size() == n);\n  const int m= es.size();\n  std::vector<T>\
@@ -29,8 +29,8 @@ data:
     \ adj[ei[p]++], q= es[e][es[e][0] == p]; pre[q] == -2) pre[p= q]= e;\n    }\n\
     \  return x;\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <tuple>\n#include <array>\n#include\
-    \ <type_traits>\ntemplate <typename T> class LinearSystemIncidence {\n const int\
-    \ n;\n std::vector<std::array<int, 2>> es;\npublic:\n LinearSystemIncidence(int\
+    \ <cassert>\n#include <type_traits>\ntemplate <typename T> class LinearSystemIncidence\
+    \ {\n const int n;\n std::vector<std::array<int, 2>> es;\npublic:\n LinearSystemIncidence(int\
     \ n): n(n) {}\n void add_edge(int src, int dst) { es.push_back({src, dst}); }\n\
     \ std::vector<T> solve(std::vector<T> b) const {\n  assert((int)b.size() == n);\n\
     \  const int m= es.size();\n  std::vector<T> x(m);\n  std::vector<int> adj(m +\
@@ -49,8 +49,8 @@ data:
   isVerificationFile: false
   path: src/Graph/LinearSystemIncidence.hpp
   requiredBy: []
-  timestamp: '2023-03-07 14:46:42+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-03-08 02:35:54+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/arc106_b.test.cpp
 documentation_of: src/Graph/LinearSystemIncidence.hpp

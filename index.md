@@ -188,7 +188,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/IncrementalBridgeConnectivity.hpp
       title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/LinearSystemIncidence.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
     - icon: ':heavy_check_mark:'
@@ -619,6 +619,9 @@ data:
       path: test/aoj/3170.test.cpp
       title: test/aoj/3170.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/3198.test.cpp
+      title: test/aoj/3198.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3506.test.cpp
       title: test/aoj/3506.test.cpp
     - icon: ':heavy_check_mark:'
@@ -938,7 +941,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc106_b.test.cpp
       title: test/atcoder/arc106_b.test.cpp
     - icon: ':heavy_check_mark:'

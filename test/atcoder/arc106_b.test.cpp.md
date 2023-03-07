@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/LinearSystemIncidence.hpp
     title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc106/tasks/arc106_b
@@ -16,8 +16,8 @@ data:
     - https://atcoder.jp/contests/arc106/tasks/arc106_b
   bundledCode: "#line 1 \"test/atcoder/arc106_b.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/arc106/tasks/arc106_b\"\
     \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 3 \"src/Graph/LinearSystemIncidence.hpp\"\
-    \n#include <tuple>\n#include <array>\n#include <type_traits>\ntemplate <typename\
-    \ T> class LinearSystemIncidence {\n const int n;\n std::vector<std::array<int,\
+    \n#include <tuple>\n#include <array>\n#include <cassert>\n#include <type_traits>\n\
+    template <typename T> class LinearSystemIncidence {\n const int n;\n std::vector<std::array<int,\
     \ 2>> es;\npublic:\n LinearSystemIncidence(int n): n(n) {}\n void add_edge(int\
     \ src, int dst) { es.push_back({src, dst}); }\n std::vector<T> solve(std::vector<T>\
     \ b) const {\n  assert((int)b.size() == n);\n  const int m= es.size();\n  std::vector<T>\
@@ -54,8 +54,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc106_b.test.cpp
   requiredBy: []
-  timestamp: '2023-03-07 14:46:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-03-08 02:35:54+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc106_b.test.cpp
 layout: document
