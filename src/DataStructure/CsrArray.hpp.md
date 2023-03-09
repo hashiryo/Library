@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1744.test.cpp
     title: test/yukicoder/1744.test.cpp
   - icon: ':heavy_check_mark:'
@@ -36,9 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/CsrArray.hpp\"\n#include <vector>\n#include\
@@ -68,7 +68,7 @@ data:
   - src/Graph/DulmageMendelsohn.hpp
   - src/Graph/StronglyConnectedComponents.hpp
   timestamp: '2023-03-07 14:46:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp
   - test/yukicoder/1170.test.cpp

@@ -31,7 +31,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/CsrArray.hpp
       title: "CSR\u5F62\u5F0F"
     - icon: ':heavy_check_mark:'
@@ -185,7 +185,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteMatching.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Graph/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -1396,7 +1396,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1718.test.cpp
       title: test/yukicoder/1718.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1744.test.cpp
       title: test/yukicoder/1744.test.cpp
     - icon: ':heavy_check_mark:'
