@@ -49,8 +49,8 @@ data:
     \ && pre[u] == -1) pre[u]= l, l= u;\n     }\n     rt[v]= 0;\n    }\n  }\n }\n\
     \ inline size_t left_size() const { return lmate.size(); }\n inline size_t right_size()\
     \ const { return rmate.size(); }\n inline int l_to_r(int l) const { return lmate[l];\
-    \ }\n inline int r_to_l(int r) const { return rmate[r]; }\n std::vector<std::array<int,\
-    \ 2>> edges() const { return es; }\n std::vector<std::array<int, 2>> max_matching()\
+    \ }\n inline int r_to_l(int r) const { return rmate[r]; }\n const std::vector<std::array<int,\
+    \ 2>> &edges() const { return es; }\n std::vector<std::array<int, 2>> max_matching()\
     \ const {\n  std::vector<std::array<int, 2>> ret;\n  for (int l= 0, n= lmate.size();\
     \ l < n; ++l)\n   if (int r= lmate[l]; r != -1) ret.push_back({l, r});\n  return\
     \ ret;\n }\n};\n"
@@ -80,15 +80,16 @@ data:
     \     }\n     rt[v]= 0;\n    }\n  }\n }\n inline size_t left_size() const { return\
     \ lmate.size(); }\n inline size_t right_size() const { return rmate.size(); }\n\
     \ inline int l_to_r(int l) const { return lmate[l]; }\n inline int r_to_l(int\
-    \ r) const { return rmate[r]; }\n std::vector<std::array<int, 2>> edges() const\
-    \ { return es; }\n std::vector<std::array<int, 2>> max_matching() const {\n  std::vector<std::array<int,\
-    \ 2>> ret;\n  for (int l= 0, n= lmate.size(); l < n; ++l)\n   if (int r= lmate[l];\
-    \ r != -1) ret.push_back({l, r});\n  return ret;\n }\n};"
+    \ r) const { return rmate[r]; }\n const std::vector<std::array<int, 2>> &edges()\
+    \ const { return es; }\n std::vector<std::array<int, 2>> max_matching() const\
+    \ {\n  std::vector<std::array<int, 2>> ret;\n  for (int l= 0, n= lmate.size();\
+    \ l < n; ++l)\n   if (int r= lmate[l]; r != -1) ret.push_back({l, r});\n  return\
+    \ ret;\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/BipartiteMatching.hpp
   requiredBy: []
-  timestamp: '2023-03-07 15:16:22+09:00'
+  timestamp: '2023-03-09 17:39:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/421.test.cpp

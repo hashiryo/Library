@@ -42,15 +42,16 @@ data:
     \     }\n     rt[v]= 0;\n    }\n  }\n }\n inline size_t left_size() const { return\
     \ lmate.size(); }\n inline size_t right_size() const { return rmate.size(); }\n\
     \ inline int l_to_r(int l) const { return lmate[l]; }\n inline int r_to_l(int\
-    \ r) const { return rmate[r]; }\n std::vector<std::array<int, 2>> edges() const\
-    \ { return es; }\n std::vector<std::array<int, 2>> max_matching() const {\n  std::vector<std::array<int,\
-    \ 2>> ret;\n  for (int l= 0, n= lmate.size(); l < n; ++l)\n   if (int r= lmate[l];\
-    \ r != -1) ret.push_back({l, r});\n  return ret;\n }\n};\n#line 4 \"test/yosupo/bipartitematching.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int L, R, M;\n cin >> L >> R >> M;\n BipartiteMatching bm(L, R);\n while (M--)\
-    \ {\n  int a, b;\n  cin >> a >> b;\n  bm.add_edge(a, b);\n }\n bm.build();\n auto\
-    \ ans= bm.max_matching();\n cout << ans.size() << '\\n';\n for (auto [l, r]: ans)\
-    \ cout << l << \" \" << r << '\\n';\n return 0;\n}\n"
+    \ r) const { return rmate[r]; }\n const std::vector<std::array<int, 2>> &edges()\
+    \ const { return es; }\n std::vector<std::array<int, 2>> max_matching() const\
+    \ {\n  std::vector<std::array<int, 2>> ret;\n  for (int l= 0, n= lmate.size();\
+    \ l < n; ++l)\n   if (int r= lmate[l]; r != -1) ret.push_back({l, r});\n  return\
+    \ ret;\n }\n};\n#line 4 \"test/yosupo/bipartitematching.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n\
+    \ cin >> L >> R >> M;\n BipartiteMatching bm(L, R);\n while (M--) {\n  int a,\
+    \ b;\n  cin >> a >> b;\n  bm.add_edge(a, b);\n }\n bm.build();\n auto ans= bm.max_matching();\n\
+    \ cout << ans.size() << '\\n';\n for (auto [l, r]: ans) cout << l << \" \" <<\
+    \ r << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
     \ <iostream>\n#include \"src/Graph/BipartiteMatching.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n cin\
@@ -63,7 +64,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2023-03-07 15:16:22+09:00'
+  timestamp: '2023-03-09 17:39:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.test.cpp

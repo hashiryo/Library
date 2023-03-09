@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1744.test.cpp
     title: test/yukicoder/1744.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1745.test.cpp
     title: test/yukicoder/1745.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <array>\n#include\
@@ -57,7 +57,7 @@ data:
     \ == -3)\n    for (que[e++]= p, blg[0][s]= blg[1][p]= ++k; i < e; ++i)\n     for\
     \ (int v= que[i], j= pos[1][v]; j < pos[1][v + 1]; ++j)\n      if (int u= g[1][j],\
     \ w= mate[0][u]; blg[1][w] == -3) que[e++]= w, blg[0][u]= blg[1][w]= k;\n  ++k;\n\
-    \  for (int b= 2, s; b--;) {\n   for (pos[b].assign(k + 1, 0), s= n[b]; s--; ++pos[b][blg[b][s]])\n\
+    \  for (int b= 2, s; b--;) {\n   for (pos[b].assign(k + 2, 0), s= n[b]; s--; ++pos[b][blg[b][s]])\n\
     \    if (blg[b][s] == -1) blg[b][s]= k;\n   for (std::partial_sum(pos[b].begin(),\
     \ pos[b].end(), pos[b].begin()), s= n[b]; s--;) mate[b][--pos[b][blg[b][s]]]=\
     \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
@@ -96,7 +96,7 @@ data:
     \ == -3)\n    for (que[e++]= p, blg[0][s]= blg[1][p]= ++k; i < e; ++i)\n     for\
     \ (int v= que[i], j= pos[1][v]; j < pos[1][v + 1]; ++j)\n      if (int u= g[1][j],\
     \ w= mate[0][u]; blg[1][w] == -3) que[e++]= w, blg[0][u]= blg[1][w]= k;\n  ++k;\n\
-    \  for (int b= 2, s; b--;) {\n   for (pos[b].assign(k + 1, 0), s= n[b]; s--; ++pos[b][blg[b][s]])\n\
+    \  for (int b= 2, s; b--;) {\n   for (pos[b].assign(k + 2, 0), s= n[b]; s--; ++pos[b][blg[b][s]])\n\
     \    if (blg[b][s] == -1) blg[b][s]= k;\n   for (std::partial_sum(pos[b].begin(),\
     \ pos[b].end(), pos[b].begin()), s= n[b]; s--;) mate[b][--pos[b][blg[b][s]]]=\
     \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
@@ -110,8 +110,8 @@ data:
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2023-03-09 14:18:30+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-03-09 17:39:21+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp
