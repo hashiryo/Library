@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.test.cpp
     title: test/yosupo/bipartitematching.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1615.bm.test.cpp
     title: test/yukicoder/1615.bm.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/421.test.cpp
     title: test/yukicoder/421.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/BipartiteMatching.hpp\"\n#include <vector>\n#include\
@@ -97,7 +97,7 @@ data:
   path: src/Graph/BipartiteMatching.hpp
   requiredBy: []
   timestamp: '2023-03-10 17:02:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/bipartitematching.test.cpp
   - test/aoj/2423.test.cpp

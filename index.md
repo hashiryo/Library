@@ -188,7 +188,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteGraph.hpp
       title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteMatching.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
@@ -1423,7 +1423,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.MCF.test.cpp
       title: test/yukicoder/1615.MCF.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.bm.test.cpp
       title: test/yukicoder/1615.bm.test.cpp
     - icon: ':heavy_check_mark:'
