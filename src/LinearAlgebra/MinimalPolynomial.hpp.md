@@ -111,9 +111,9 @@ data:
   timestamp: '2023-01-23 16:45:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1750.SparseMat.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
+  - test/yukicoder/1750.SparseMat.test.cpp
 documentation_of: src/LinearAlgebra/MinimalPolynomial.hpp
 layout: document
 title: "\u758E\u884C\u5217\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"

@@ -17,9 +17,10 @@ data:
     PROBLEM: https://atcoder.jp/contests/abc223/tasks/abc223_g
     links:
     - https://atcoder.jp/contests/abc223/tasks/abc223_g
-  bundledCode: "#line 1 \"test/atcoder/abc223_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc223/tasks/abc223_g\"\
-    \n#include <iostream>\n#include <algorithm>\n#include <array>\n#line 2 \"src/Graph/Tree.hpp\"\
-    \n#include <type_traits>\n#include <cstddef>\n#include <vector>\n#line 7 \"src/Graph/Tree.hpp\"\
+  bundledCode: "#line 1 \"test/atcoder/abc223_g.rerooting.test.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/abc223/tasks/abc223_g\"\n#include <iostream>\n\
+    #include <algorithm>\n#include <array>\n#line 2 \"src/Graph/Tree.hpp\"\n#include\
+    \ <type_traits>\n#include <cstddef>\n#include <vector>\n#line 7 \"src/Graph/Tree.hpp\"\
     \n#include <numeric>\n#include <cassert>\ntemplate <class Cost= void> class Tree\
     \ {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator\
     \ int() const { return to; }\n };\n template <class D> struct Edge_B<D, void>\
@@ -94,7 +95,7 @@ data:
     \ j < deg; ++j) f[j + 1]= f_ee(f[j], f[j + 1]);\n   for (int j= 0; j < deg; ++j)\
     \ {\n    const auto &e= t[v][j];\n    if (int u= e.to;u != t.parent(v)) dp2[u]=\
     \ f_ev(f_ee(f[j], b[j + 1]), v);\n   }\n   dp[v]= f_ev(f[deg], v);\n  }\n return\
-    \ RerootingData<T,C>(t, dp1, dp2, dp);\n}\n#line 6 \"test/atcoder/abc223_g.test.cpp\"\
+    \ RerootingData<T,C>(t, dp1, dp2, dp);\n}\n#line 6 \"test/atcoder/abc223_g.rerooting.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N;\n cin >> N;\n Tree tree(N);\n for (int i= 0; i < N - 1; ++i) {\n  int\
     \ u, v;\n  cin >> u >> v;\n  tree.add_edge(--u, --v);\n }\n tree.build();\n using\
@@ -121,15 +122,15 @@ data:
   - src/Graph/rerooting.hpp
   - src/Graph/Tree.hpp
   isVerificationFile: true
-  path: test/atcoder/abc223_g.test.cpp
+  path: test/atcoder/abc223_g.rerooting.test.cpp
   requiredBy: []
-  timestamp: '2023-03-02 03:48:21+09:00'
+  timestamp: '2023-03-10 17:02:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/atcoder/abc223_g.test.cpp
+documentation_of: test/atcoder/abc223_g.rerooting.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/abc223_g.test.cpp
-- /verify/test/atcoder/abc223_g.test.cpp.html
-title: test/atcoder/abc223_g.test.cpp
+- /verify/test/atcoder/abc223_g.rerooting.test.cpp
+- /verify/test/atcoder/abc223_g.rerooting.test.cpp.html
+title: test/atcoder/abc223_g.rerooting.test.cpp
 ---

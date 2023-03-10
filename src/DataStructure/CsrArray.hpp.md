@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':question:'
+    path: src/Graph/BipartiteGraph.hpp
+    title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
@@ -15,6 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3168.bm.test.cpp
+    title: test/aoj/3168.bm.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc223_g.dm.test.cpp
+    title: test/atcoder/abc223_g.dm.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
@@ -36,9 +45,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/CsrArray.hpp\"\n#include <vector>\n#include\
@@ -67,17 +76,20 @@ data:
   - src/Math/TwoSatisfiability.hpp
   - src/Graph/DulmageMendelsohn.hpp
   - src/Graph/StronglyConnectedComponents.hpp
+  - src/Graph/BipartiteGraph.hpp
   timestamp: '2023-03-07 14:46:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1744.test.cpp
-  - test/yukicoder/1170.test.cpp
-  - test/yukicoder/1813.test.cpp
-  - test/yukicoder/1293.scc.test.cpp
-  - test/yukicoder/1745.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/scc.test.cpp
+  - test/aoj/3168.bm.test.cpp
   - test/aoj/0366.test.cpp
+  - test/yukicoder/1813.test.cpp
+  - test/yukicoder/1744.test.cpp
+  - test/yukicoder/1170.test.cpp
+  - test/yukicoder/1293.scc.test.cpp
+  - test/yukicoder/1745.test.cpp
+  - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/DataStructure/CsrArray.hpp
 layout: document
 title: "CSR\u5F62\u5F0F"

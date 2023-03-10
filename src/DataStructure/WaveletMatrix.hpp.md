@@ -111,12 +111,12 @@ data:
   timestamp: '2023-01-21 19:30:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/919.WM.test.cpp
-  - test/yukicoder/728.WM.test.cpp
   - test/yosupo/static_range_frequency.WM.test.cpp
   - test/yosupo/range_kth_smallest.WM.test.cpp
   - test/aoj/2674.WM.test.cpp
   - test/aoj/1549.WM.test.cpp
+  - test/yukicoder/728.WM.test.cpp
+  - test/yukicoder/919.WM.test.cpp
   - test/atcoder/abc174_f.WM.test.cpp
 documentation_of: src/DataStructure/WaveletMatrix.hpp
 layout: document

@@ -257,8 +257,8 @@ data:
   verifiedWith:
   - test/yosupo/sum_of_totient_function.test.cpp
   - test/atcoder/arc116_c.dujiao.test.cpp
-  - test/atcoder/abc179_c.test.cpp
   - test/atcoder/abc172_d.dujiao.test.cpp
+  - test/atcoder/abc179_c.test.cpp
 documentation_of: src/Math/DirichletConvSumTable.hpp
 layout: document
 title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"

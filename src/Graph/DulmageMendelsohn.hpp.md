@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy: []
@@ -122,8 +122,9 @@ title: "Dulmage-Mendelsohn \u5206\u89E3"
 明示的に二部グラフを表現する \
 頂点の添字は左右それぞれ [0,L), [0,R) で表現 \
 K+1 個 に分割された集合(0~K)が得られたとして
-- 左側の頂点： 0~K-1番目の集合に属する $\iff$ マッチングに必ず使う
-- 右側の頂点： 1~K番目の集合に属する $\iff$ マッチングに必ず使う
+- 左側の頂点： 0~K-1番目のいずれかの集合に属する $\iff$ マッチングに必ず使う
+- 右側の頂点： 1~K番目のいずれかの集合に属する $\iff$ マッチングに必ず使う
+- 左側の頂点lがa番目の集合, 右側の頂点rがb番目の集合に属する: 辺(l,r)が存在 $\implies$ a $\le$ b
 
 ## メンバ関数
 

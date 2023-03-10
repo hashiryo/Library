@@ -84,11 +84,11 @@ data:
   timestamp: '2023-01-21 20:48:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/1019.test.cpp
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/atcoder/abc172_d.numth.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+  - test/atcoder/abc172_d.numth.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document
 title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"

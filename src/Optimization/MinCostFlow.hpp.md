@@ -177,10 +177,10 @@ data:
   timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1615.MCF.test.cpp
   - test/yosupo/min_cost_b_flow.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
   - test/aoj/GRL_6_B.test.cpp
+  - test/yukicoder/1615.MCF.test.cpp
 documentation_of: src/Optimization/MinCostFlow.hpp
 layout: document
 title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
