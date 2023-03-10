@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/RangeSet.hpp
     title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc214/tasks/abc214_e
@@ -16,13 +16,13 @@ data:
     - https://atcoder.jp/contests/abc214/tasks/abc214_e
   bundledCode: "#line 1 \"test/atcoder/abc214_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc214/tasks/abc214_e\"\
     \n#include <iostream>\n#include <algorithm>\n#include <numeric>\n#line 3 \"src/DataStructure/RangeSet.hpp\"\
-    \n#include <set>\n#include <iterator>\n#include <cassert>\ntemplate <class Int,\
-    \ bool merge= true> class RangeSet {\n struct ClosedSection {\n  Int l, r;\n \
-    \ Int length() const { return r - l + 1; }\n  bool operator<(const ClosedSection\
-    \ &cs) const { return l < cs.l || (l == cs.l && r > cs.r); }\n  operator bool()\
-    \ const { return l <= r; }\n  friend std::ostream &operator<<(std::ostream &os,\
-    \ const ClosedSection &cs) { return cs ? os << \"[\" << cs.l << \",\" << cs.r\
-    \ << \"]\" : os << \"\u2205\"; }\n };\n std::set<ClosedSection> mp;\npublic:\n\
+    \n#include <set>\n#include <iterator>\n#include <limits>\n#include <cassert>\n\
+    template <class Int, bool merge= true> class RangeSet {\n struct ClosedSection\
+    \ {\n  Int l, r;\n  Int length() const { return r - l + 1; }\n  bool operator<(const\
+    \ ClosedSection &cs) const { return l < cs.l || (l == cs.l && r > cs.r); }\n \
+    \ operator bool() const { return l <= r; }\n  friend std::ostream &operator<<(std::ostream\
+    \ &os, const ClosedSection &cs) { return cs ? os << \"[\" << cs.l << \",\" <<\
+    \ cs.r << \"]\" : os << \"\u2205\"; }\n };\n std::set<ClosedSection> mp;\npublic:\n\
     \ RangeSet() {\n  constexpr Int INF= std::numeric_limits<Int>::max() / 2;\n  mp.insert({INF,\
     \ INF}), mp.insert({-INF, -INF});\n }\n ClosedSection covered_by(Int l, Int r)\
     \ const {\n  assert(l <= r);\n  if (auto it= std::prev(mp.upper_bound(ClosedSection{l,\
@@ -72,8 +72,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc214_e.test.cpp
   requiredBy: []
-  timestamp: '2023-03-10 17:02:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-03-10 17:20:51+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc214_e.test.cpp
 layout: document

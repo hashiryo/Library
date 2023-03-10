@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/RangeSet.hpp
     title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
   - icon: ':question:'
@@ -9,14 +9,16 @@ data:
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://www.hackerrank.com/contests/university-codesprint-4/challenges/drawing-rectangles
     links:
     - https://www.hackerrank.com/contests/university-codesprint-4/challenges/drawing-rectangles
-  bundledCode: "#line 1 \"test/hackerrank/bonnie-and-clyde.test copy.cpp\"\n#define\
-    \ PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-4/challenges/drawing-rectangles\"\
+  bundledCode: "#line 1 \"test/hackerrank/drawing-rectangles.test.cpp\"\n#define PROBLEM\
+    \ \"https://www.hackerrank.com/contests/university-codesprint-4/challenges/drawing-rectangles\"\
     \n#include <iostream>\n#include <vector>\n#line 3 \"src/Graph/BipartiteMatching.hpp\"\
     \n#include <array>\n#include <algorithm>\n#include <cassert>\nclass BipartiteMatching\
     \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> lmate, rmate, rt;\n\
@@ -50,7 +52,7 @@ data:
     \ r});\n  return ret;\n }\n bool used_as_vertex_cover_left(int l) const { return\
     \ rt[l] == -1; }\n bool used_as_vertex_cover_right(int r) const { return r= rmate[r],\
     \ r != -1 && rt[r] != -1; }\n};\n#line 3 \"src/DataStructure/RangeSet.hpp\"\n\
-    #include <set>\n#include <iterator>\n#line 6 \"src/DataStructure/RangeSet.hpp\"\
+    #include <set>\n#include <iterator>\n#include <limits>\n#line 7 \"src/DataStructure/RangeSet.hpp\"\
     \ntemplate <class Int, bool merge= true> class RangeSet {\n struct ClosedSection\
     \ {\n  Int l, r;\n  Int length() const { return r - l + 1; }\n  bool operator<(const\
     \ ClosedSection &cs) const { return l < cs.l || (l == cs.l && r > cs.r); }\n \
@@ -84,8 +86,8 @@ data:
     \ const {\n  auto cs= covered_by(x);\n  return cs ? cs.r + 1 : x;\n }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const RangeSet &rs) {\n  os << \"\
     [\";\n  for (auto it= rs.begin(); it != rs.end(); ++it) os << (it == rs.begin()\
-    \ ? \"\" : \",\") << *it;\n  return os << \"]\";\n }\n};\n#line 6 \"test/hackerrank/bonnie-and-clyde.test\
-    \ copy.cpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ ? \"\" : \",\") << *it;\n  return os << \"]\";\n }\n};\n#line 6 \"test/hackerrank/drawing-rectangles.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ static constexpr int N= 300'001;\n BipartiteMatching bm(N, N);\n int n;\n cin\
     \ >> n;\n vector<RangeSet<int>> ys(N);\n for (int i= 0; i < n; ++i) {\n  int x1,\
     \ y1, x2, y2;\n  cin >> x1 >> y1 >> x2 >> y2;\n  for (int x= x1; x <= x2; ++x)\
@@ -115,16 +117,16 @@ data:
   dependsOn:
   - src/Graph/BipartiteMatching.hpp
   - src/DataStructure/RangeSet.hpp
-  isVerificationFile: false
-  path: test/hackerrank/bonnie-and-clyde.test copy.cpp
+  isVerificationFile: true
+  path: test/hackerrank/drawing-rectangles.test.cpp
   requiredBy: []
-  timestamp: '2023-03-10 17:02:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2023-03-10 17:20:51+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/hackerrank/bonnie-and-clyde.test copy.cpp
+documentation_of: test/hackerrank/drawing-rectangles.test.cpp
 layout: document
 redirect_from:
-- /library/test/hackerrank/bonnie-and-clyde.test copy.cpp
-- /library/test/hackerrank/bonnie-and-clyde.test copy.cpp.html
-title: test/hackerrank/bonnie-and-clyde.test copy.cpp
+- /verify/test/hackerrank/drawing-rectangles.test.cpp
+- /verify/test/hackerrank/drawing-rectangles.test.cpp.html
+title: test/hackerrank/drawing-rectangles.test.cpp
 ---
