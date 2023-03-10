@@ -62,7 +62,7 @@ data:
     - icon: ':warning:'
       path: src/DataStructure/RadixHeap.hpp
       title: Radix-Heap
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/RangeSet.hpp
       title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
     - icon: ':heavy_check_mark:'
@@ -1018,9 +1018,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-summation.KDT.test.cpp
       title: test/hackerrank/cube-summation.KDT.test.cpp
-    - icon: ':x:'
-      path: test/hackerrank/drawing-rectangles.test.cpp
-      title: test/hackerrank/drawing-rectangles.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/library-query.SqrtDC.test.cpp
       title: test/hackerrank/library-query.SqrtDC.test.cpp

@@ -24,15 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_d.test.cpp
     title: test/atcoder/abc256_d.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/drawing-rectangles.test.cpp
-    title: test/hackerrank/drawing-rectangles.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/674.test.cpp
     title: test/yukicoder/674.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/RangeSet.hpp\"\n#include <iostream>\n\
@@ -112,12 +109,11 @@ data:
   path: src/DataStructure/RangeSet.hpp
   requiredBy: []
   timestamp: '2023-03-10 17:20:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2880.test.cpp
   - test/aoj/0655.test.cpp
   - test/yukicoder/674.test.cpp
-  - test/hackerrank/drawing-rectangles.test.cpp
   - test/atcoder/abc256_d.test.cpp
   - test/atcoder/abc214_e.test.cpp
   - test/atcoder/abc182_e.test.cpp

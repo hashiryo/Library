@@ -12,9 +12,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3198.test.cpp
     title: test/aoj/3198.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/drawing-rectangles.test.cpp
-    title: test/hackerrank/drawing-rectangles.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.test.cpp
     title: test/yosupo/bipartitematching.test.cpp
@@ -108,7 +105,6 @@ data:
   - test/aoj/0334.test.cpp
   - test/yukicoder/1615.bm.test.cpp
   - test/yukicoder/421.test.cpp
-  - test/hackerrank/drawing-rectangles.test.cpp
 documentation_of: src/Graph/BipartiteMatching.hpp
 layout: document
 title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
