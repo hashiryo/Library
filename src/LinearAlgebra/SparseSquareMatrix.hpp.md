@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
-    title: "\u758E\u884C\u5217\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
+    title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   - icon: ':heavy_check_mark:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
@@ -112,8 +112,5 @@ documentation_of: src/LinearAlgebra/SparseSquareMatrix.hpp
 layout: document
 title: "\u758E\u884C\u5217"
 ---
-## 計算量
-$\mathcal{O} (N^2+N \cdot T(N))$ \
-$T(N)$: 行列とベクトルの乗算にかかる時間
 ## 参考
 [https://yukicoder.me/wiki/black_box_linear_algebra](https://yukicoder.me/wiki/black_box_linear_algebra)

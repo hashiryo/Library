@@ -15,6 +15,9 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':heavy_check_mark:'
+    path: src/Misc/rng.hpp
+    title: "\u7591\u4F3C\u4E71\u6570"
+  - icon: ':heavy_check_mark:'
     path: src/String/RollingHash.hpp
     title: Rolling-Hash
   _extendedRequiredBy: []
@@ -126,11 +129,14 @@ data:
     #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
     \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
     \ Self &r) const { return Self(*this)*= r; }\n Self operator/(const Self &r) const\
-    \ { return Self(*this)/= r; }\n};\n#line 2 \"src/String/RollingHash.hpp\"\n#include\
-    \ <vector>\n#include <random>\n#line 5 \"src/String/RollingHash.hpp\"\ntemplate\
-    \ <class K> class RollingHash {\n static inline std::vector<K> pw;\n static inline\
-    \ K base;\n static inline void set_pw(int n) {\n  if (int m= pw.size(); m < n)\n\
-    \   for (pw.resize(n); m < n; m++) pw[m]= pw[m - 1] * base;\n }\n std::vector<K>\
+    \ { return Self(*this)/= r; }\n};\n#line 2 \"src/Misc/rng.hpp\"\n#include <random>\n\
+    uint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
+    \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
+    \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
+    #line 2 \"src/String/RollingHash.hpp\"\n#include <vector>\n#line 4 \"src/String/RollingHash.hpp\"\
+    \ntemplate <class K> class RollingHash {\n static inline std::vector<K> pw;\n\
+    \ static inline K base;\n static inline void set_pw(int n) {\n  if (int m= pw.size();\
+    \ m < n)\n   for (pw.resize(n); m < n; m++) pw[m]= pw[m - 1] * base;\n }\n std::vector<K>\
     \ hash;\npublic:\n class SubString {\n  const RollingHash *instance;\n  const\
     \ int bg, ed;\n public:\n  SubString(const RollingHash &rh): instance(&rh), bg(0),\
     \ ed(rh.hash.size()) {}\n  SubString(const RollingHash *i, int b, int e): instance(i),\
@@ -146,22 +152,20 @@ data:
     \ RollingHash(std::vector<char>(s.begin(), s.end())) {}\n inline K get_hash(int\
     \ l= 0, int r= -1) const {\n  if (r < 0) r= hash.size() - 1;\n  return hash[r]\
     \ - hash[l] * pw[r - l];\n }\n SubString sub(int l, int r) const { return SubString{this,\
-    \ l, r}; }\n};\nstd::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n static\
-    \ std::mt19937_64 gen(std::random_device{}());\n return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n}\n#line 7 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\nusing namespace\
+    \ l, r}; }\n};\n#line 8 \"test/aoj/ALDS1_14_B.rollinghash.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
     \ ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using RH=\
-    \ RollingHash<K>;\n K base= {get_rand(2, (1ll << 61) - 2), get_rand(2, (1ll <<\
-    \ 61) - 2)};\n RH::set_base(base);\n string T, P;\n cin >> T >> P;\n RH rt(T),\
-    \ rp(P);\n int N= P.length(), M= T.length();\n auto hash= rp.get_hash();\n for\
-    \ (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i, i + N) == hash) cout << i\
-    \ << \"\\n\";\n return 0;\n}\n"
+    \ RollingHash<K>;\n K base= {rng(2, (1ll << 61) - 2), rng(2, (1ll << 61) - 2)};\n\
+    \ RH::set_base(base);\n string T, P;\n cin >> T >> P;\n RH rt(T), rp(P);\n int\
+    \ N= P.length(), M= T.length();\n auto hash= rp.get_hash();\n for (int i= 0; i\
+    \ + N <= M; i++)\n  if (rt.get_hash(i, i + N) == hash) cout << i << \"\\n\";\n\
+    \ return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
     \n#include <iostream>\n#include <string>\n#include \"src/Math/ModInt.hpp\"\n#include\
-    \ \"src/Math/CartesianProduct.hpp\"\n#include \"src/String/RollingHash.hpp\"\n\
-    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n\
-    \ using RH= RollingHash<K>;\n K base= {get_rand(2, (1ll << 61) - 2), get_rand(2,\
+    \ \"src/Math/CartesianProduct.hpp\"\n#include \"src/Misc/rng.hpp\"\n#include \"\
+    src/String/RollingHash.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint,\
+    \ Mint>;\n using RH= RollingHash<K>;\n K base= {rng(2, (1ll << 61) - 2), rng(2,\
     \ (1ll << 61) - 2)};\n RH::set_base(base);\n string T, P;\n cin >> T >> P;\n RH\
     \ rt(T), rp(P);\n int N= P.length(), M= T.length();\n auto hash= rp.get_hash();\n\
     \ for (int i= 0; i + N <= M; i++)\n  if (rt.get_hash(i, i + N) == hash) cout <<\
@@ -171,11 +175,12 @@ data:
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Math/CartesianProduct.hpp
+  - src/Misc/rng.hpp
   - src/String/RollingHash.hpp
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 17:34:35+09:00'
+  timestamp: '2023-03-12 01:58:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.rollinghash.test.cpp

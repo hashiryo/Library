@@ -116,7 +116,7 @@ data:
   - test/yukicoder/1750.SparseMat.test.cpp
 documentation_of: src/LinearAlgebra/MinimalPolynomial.hpp
 layout: document
-title: "\u758E\u884C\u5217\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
+title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
 ---
 ## 計算量
 $\mathcal{O} (N^2+N \cdot T(N))$ \
