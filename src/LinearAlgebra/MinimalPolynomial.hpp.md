@@ -1,125 +1,277 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/Internal/Remainder.hpp
+    title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
+  - icon: ':question:'
+    path: src/LinearAlgebra/Vector.hpp
+    title: "\u30D9\u30AF\u30C8\u30EB"
+  - icon: ':question:'
+    path: src/Math/ModInt.hpp
+    title: ModInt
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: src/LinearAlgebra/SparseSquareMatrix.hpp
-    title: "\u758E\u884C\u5217"
+  - icon: ':question:'
+    path: src/Math/mod_inv.hpp
+    title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/aoj/2397.MinPoly.test.cpp
+    title: test/aoj/2397.MinPoly.test.cpp
+  - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yukicoder/1750.MinPoly.test.cpp
+    title: test/yukicoder/1750.MinPoly.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n#include <bits/stdc++.h>\n\
     #line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2]\
     \ + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class K> std::vector<K> berlekamp_massey(const\
-    \ std::vector<K> &a) {\n std::size_t n= a.size(), d= 0, m= 0, i, j;\n if (n ==\
-    \ 0) return {};\n std::vector<K> c(n), b(n), tmp;\n K x= 1, y, coef;\n const K\
-    \ Z= 0;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m, y= a[i], j=\
-    \ 1; j <= d; ++j) y+= c[j] * a[i - j];\n  if (y == Z) continue;\n  for (tmp= c,\
-    \ coef= y / x, j= m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n\
-    \  d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n\
-    \ for (auto &x: c) x= -x;\n return c;\n}\n#line 4 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
-    \n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\n\
-    template <class Mat, class Vec> class MinimalPolynomial {\n using mod_t= std::remove_reference_t<decltype((Vec{1})[0])>;\n\
-    \ static const inline mod_t ZERO= 0;\n std::vector<mod_t> poly, rev;\n std::vector<Vec>\
-    \ bs;\n std::size_t dg, n;\n static inline int deg(const std::vector<mod_t> &p)\
-    \ {\n  for (int d= p.size() - 1;; d--)\n   if (d < 0 || p[d] != ZERO) return d;\n\
-    \ }\n static inline std::vector<mod_t> bostan_mori_msb(const std::vector<mod_t>\
-    \ &q, std::uint64_t k) {\n  int d= deg(q);\n  assert(d >= 0), assert(q[0] != ZERO);\n\
-    \  std::vector<mod_t> ret(std::max(d, 1));\n  if (k == 0) return ret.back()= mod_t(1),\
-    \ ret;\n  std::vector<mod_t> v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for\
-    \ (int j= 0; j <= d; j+= 2) v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i\
-    \ <= d; i+= 2)\n   for (int j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n\
-    \  auto w= bostan_mori_msb(v, k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >=\
-    \ d; i-= 2)\n   for (int j= 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >>\
-    \ 1];\n  for (int i= 2 * d - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j\
-    \ <= d; j+= 2) ret[i - d]-= q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t>\
-    \ x_pow_mod(std::uint64_t k) const {\n  assert(k >= n);\n  std::vector<mod_t>\
-    \ ret(n), u= bostan_mori_msb(rev, k - n + dg);\n  for (int i= dg; i--;)\n   for\
-    \ (int j= i + 1; j--;) ret[n - 1 - i]+= u[j] * rev[i - j];\n  return ret;\n }\n\
-    public:\n MinimalPolynomial(const Mat &M, Vec b): n(M.size()) {\n  std::size_t\
-    \ i, j;\n  assert(n == b.size());\n  std::vector<mod_t> a(n), v;\n  for (auto\
-    \ &x: a) x= get_rand(1, mod_t::mod() - 1);\n  mod_t tmp;\n  for (i= (n + 1) <<\
-    \ 1; i--; v.push_back(tmp)) {\n   if (i > n) bs.emplace_back(b);\n   for (tmp=\
-    \ 0, j= n; j--;) tmp+= a[j] * b[j];\n   if (i) b= M * b;\n  }\n  rev= berlekamp_massey(v);\n\
-    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly= rev;\n  rev.erase(rev.begin()\
-    \ + (dg= deg(rev)) + 1, rev.end());\n  std::reverse(poly.begin(), poly.end());\n\
-    \ }\n static std::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n  static\
-    \ std::mt19937_64 gen(std::random_device{}());\n  return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n }\n Vec pow(std::uint64_t k) const {  // M^k * b\n  if (k < n) return\
-    \ bs[k];\n  auto r= x_pow_mod(k);\n  Vec ret= bs[0];\n  for (auto &x: ret) x*=\
-    \ r[0];\n  for (int i= 1, e= r.size(), j; i < e; i++)\n   for (j= n; j--;) ret[j]+=\
-    \ r[i] * bs[i][j];\n  return ret;\n }\n const mod_t operator[](std::size_t k)\
-    \ const { return poly[k]; }\n const auto begin() const { return poly.begin();\
-    \ }\n const auto end() const { return poly.end(); }\n const std::size_t size()\
-    \ const { return dg + 1; }\n};\n"
+    \ std::vector<K> &a) {\n size_t n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return\
+    \ {};\n std::vector<K> c(n), b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for\
+    \ (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j)\
+    \ y+= c[j] * a[i - j];\n  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j=\
+    \ m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i +\
+    \ 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for\
+    \ (auto &x: c) x= -x;\n return c;\n}\n#line 3 \"src/LinearAlgebra/Vector.hpp\"\
+    \nnamespace la_internal {\ntemplate <class R> struct Vector: public std::valarray<R>\
+    \ {\n using std::valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8=\
+    \ uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r,\
+    \ u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i)\
+    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(bool b) { return val= b, *this;\
+    \ }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+    \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
+    \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
+    \ {\n size_t n;\n std::valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
+    \ n): n(n), dat((n + 127) >> 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b),\
+    \ (n + 127) >> 7) {}\n Ref operator[](int i) {\n  u128 *ref= std::begin(dat) +\
+    \ (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref >> j) & 1;\n  return Ref{ref,\
+    \ j, val};\n }\n bool operator[](int i) const { return (dat[i >> 7] >> (i & 127))\
+    \ & 1; }\n Vector &operator+=(const Vector &r) { return dat^= r.dat, *this; }\n\
+    \ Vector &operator-=(const Vector &r) { return dat^= r.dat, *this; }\n Vector\
+    \ &operator*=(bool b) {\n  if (!b) dat= 0;\n  return *this;\n }\n Vector operator+(const\
+    \ Vector &r) const { return Vector(*this)+= r; }\n Vector operator-(const Vector\
+    \ &r) const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
+    \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
+    \ std::begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return\
+    \ r * b; }\n};\ntemplate <class R> struct DiagonalMatrix: public Vector<R> {\n\
+    \ using Vector<R>::Vector;\n R det() const {\n  R ret(true);\n  for (auto x: *this)\
+    \ ret*= x;\n  return ret;\n }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n\
+    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
+    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
+    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
+    \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
+    using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
+    \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
+    \ return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
+    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
+    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
+    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
+    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
+    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
+    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
+    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
+    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
+    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n u_t iv, r2;\n static CE\
+    \ u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n))\
+    \ : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod -\
+    \ ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na():\
+    \ mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const {\
+    \ return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\n\
+    struct MP_Br {  // mod < 2^31\n u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n\
+    \ CE MP_Br(u32 m): mod(m), s(__lg(m - 1) + 64), x(((u128(1) << s) + m - 1) / m)\
+    \ {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32,\
+    \ mod) DIFF(u32, 31, mod) SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64\
+    \ n) const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const { return\
+    \ n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n\
+    \ CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) /\
+    \ m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64,\
+    \ mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n) { return n;\
+    \ }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM;\
+    \ }\nprivate:\n u64 x;\n CE IL u128 quo(const u128 &n) const { return (n * x)\
+    \ >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) * mod; }\n\
+    };\nstruct MP_D2B1 {\n u8 s;\n u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0),\
+    \ v(0) {}\n CE MP_D2B1(u64 m): s(__builtin_clzll(m)), mod(m), d(m << s), v(u128(-1)\
+    \ / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l) * r) << s)\
+    \ >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const\
+    \ u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64)\
+    \ * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n\
+    };\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n\
+    \ for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x)\
+    \ : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
+    \ SGN\n#undef CE\n}\n#line 4 \"src/Math/ModInt.hpp\"\nnamespace math_internal\
+    \ {\n#define CE constexpr\nstruct m_b {};\nstruct s_b: m_b {};\ntemplate <class\
+    \ mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t>\
+    \ CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\ntemplate <class MP, u64\
+    \ MOD> struct SB: s_b {\nprotected:\n static CE MP md= MP(MOD);\n};\ntemplate\
+    \ <class Int, class U, class B> struct MInt: public B {\n using Uint= U;\n static\
+    \ CE inline auto mod() { return B::md.mod; }\n CE MInt(): x(0) {}\n CE MInt(const\
+    \ MInt& r): x(r.x) {}\n template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
+    \ = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n template <class\
+    \ T, enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr> CE MInt(T\
+    \ n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod - n : n) : n % B::md.mod)))\
+    \ {}\n CE MInt operator-() const { return MInt() - *this; }\n#define FUNC(name,\
+    \ op) \\\n CE MInt name const { \\\n  MInt ret; \\\n  ret.x= op; \\\n  return\
+    \ ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x, r.x))\n FUNC(operator-(const\
+    \ MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const MInt& r), B::md.mul(x,\
+    \ r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n#undef FUNC\n CE\
+    \ MInt operator/(const MInt& r) const { return *this * r.inv(); }\n CE MInt& operator+=(const\
+    \ MInt& r) { return *this= *this + r; }\n CE MInt& operator-=(const MInt& r) {\
+    \ return *this= *this - r; }\n CE MInt& operator*=(const MInt& r) { return *this=\
+    \ *this * r; }\n CE MInt& operator/=(const MInt& r) { return *this= *this / r;\
+    \ }\n CE bool operator==(const MInt& r) const { return B::md.norm(x) == B::md.norm(r.x);\
+    \ }\n CE bool operator!=(const MInt& r) const { return !(*this == r); }\n CE bool\
+    \ operator<(const MInt& r) const { return B::md.norm(x) < B::md.norm(r.x); }\n\
+    \ CE inline MInt inv() const { return mod_inv<Int>(val(), B::md.mod); }\n CE inline\
+    \ Uint val() const { return B::md.get(x); }\n friend ostream& operator<<(ostream&\
+    \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
+    \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
+    \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
+    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
+    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
+    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
+    \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
+    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 6 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n// c\
+    \ s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate\
+    \ <class mod_t, template <class> class Mat> class MinimalPolynomial {\n std::vector<mod_t>\
+    \ poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline\
+    \ int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size() - 1;; d--)\n\
+    \   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
+    \ bostan_mori_msb(const std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n\
+    \  assert(d >= 0), assert(q[0] != mod_t());\n  std::vector<mod_t> ret(std::max(d,\
+    \ 1));\n  if (k == 0) return ret.back()= mod_t(1), ret;\n  std::vector<mod_t>\
+    \ v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for (int j= 0; j <= d; j+= 2)\
+    \ v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i <= d; i+= 2)\n   for (int\
+    \ j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n  auto w= bostan_mori_msb(v,\
+    \ k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >= d; i-= 2)\n   for (int j=\
+    \ 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >> 1];\n  for (int i= 2 * d\
+    \ - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j <= d; j+= 2) ret[i - d]-=\
+    \ q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t> x_pow_mod(uint64_t\
+    \ k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n), u= bostan_mori_msb(rev,\
+    \ k - n + dg);\n  for (int i= dg; i--;)\n   for (int j= i + 1; j--;) ret[n - 1\
+    \ - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n MinimalPolynomial(const\
+    \ Mat<mod_t> &M, Vector<mod_t> b): n(M.width()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  assert(n == b.size()), assert(n == M.height());\n  Vector<mod_t> a(n);\n  for\
+    \ (auto &x: a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t> v((n + 1) <<\
+    \ 1);\n  for (size_t i= v.size(), j= 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n\
+    \   if (v[j++]= (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n\
+    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(),\
+    \ rev.rend()), rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
+    \ pow(uint64_t k) const {  // M^k * b\n  if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n\
+    \  Vector<mod_t> ret= r[0] * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i]\
+    \ * bs[i];\n  return ret;\n }\n const mod_t &operator[](size_t k) const { return\
+    \ poly[k]; }\n const auto begin() const { return poly.begin(); }\n const auto\
+    \ end() const { return poly.end(); }\n size_t degree() const { return dg; }\n\
+    };\ntemplate <class mod_t, template <class> class Mat> mod_t det(const Mat<mod_t>\
+    \ &M) {\n size_t n= M.height();\n assert(n == M.width());\n Vector<mod_t> b(n);\n\
+    \ for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n DiagonalMatrix<mod_t> D(n);\n\
+    \ for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n mod_t ret= MinimalPolynomial(M\
+    \ * D, b)[0];\n if (n & 1) ret= -ret;\n return ret / D.det();\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/berlekamp_massey.hpp\"\
-    \n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\n\
-    template <class Mat, class Vec> class MinimalPolynomial {\n using mod_t= std::remove_reference_t<decltype((Vec{1})[0])>;\n\
-    \ static const inline mod_t ZERO= 0;\n std::vector<mod_t> poly, rev;\n std::vector<Vec>\
-    \ bs;\n std::size_t dg, n;\n static inline int deg(const std::vector<mod_t> &p)\
-    \ {\n  for (int d= p.size() - 1;; d--)\n   if (d < 0 || p[d] != ZERO) return d;\n\
-    \ }\n static inline std::vector<mod_t> bostan_mori_msb(const std::vector<mod_t>\
-    \ &q, std::uint64_t k) {\n  int d= deg(q);\n  assert(d >= 0), assert(q[0] != ZERO);\n\
-    \  std::vector<mod_t> ret(std::max(d, 1));\n  if (k == 0) return ret.back()= mod_t(1),\
-    \ ret;\n  std::vector<mod_t> v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for\
-    \ (int j= 0; j <= d; j+= 2) v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i\
-    \ <= d; i+= 2)\n   for (int j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n\
-    \  auto w= bostan_mori_msb(v, k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >=\
-    \ d; i-= 2)\n   for (int j= 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >>\
-    \ 1];\n  for (int i= 2 * d - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j\
-    \ <= d; j+= 2) ret[i - d]-= q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t>\
-    \ x_pow_mod(std::uint64_t k) const {\n  assert(k >= n);\n  std::vector<mod_t>\
-    \ ret(n), u= bostan_mori_msb(rev, k - n + dg);\n  for (int i= dg; i--;)\n   for\
-    \ (int j= i + 1; j--;) ret[n - 1 - i]+= u[j] * rev[i - j];\n  return ret;\n }\n\
-    public:\n MinimalPolynomial(const Mat &M, Vec b): n(M.size()) {\n  std::size_t\
-    \ i, j;\n  assert(n == b.size());\n  std::vector<mod_t> a(n), v;\n  for (auto\
-    \ &x: a) x= get_rand(1, mod_t::mod() - 1);\n  mod_t tmp;\n  for (i= (n + 1) <<\
-    \ 1; i--; v.push_back(tmp)) {\n   if (i > n) bs.emplace_back(b);\n   for (tmp=\
-    \ 0, j= n; j--;) tmp+= a[j] * b[j];\n   if (i) b= M * b;\n  }\n  rev= berlekamp_massey(v);\n\
-    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly= rev;\n  rev.erase(rev.begin()\
-    \ + (dg= deg(rev)) + 1, rev.end());\n  std::reverse(poly.begin(), poly.end());\n\
-    \ }\n static std::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n  static\
-    \ std::mt19937_64 gen(std::random_device{}());\n  return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n }\n Vec pow(std::uint64_t k) const {  // M^k * b\n  if (k < n) return\
-    \ bs[k];\n  auto r= x_pow_mod(k);\n  Vec ret= bs[0];\n  for (auto &x: ret) x*=\
-    \ r[0];\n  for (int i= 1, e= r.size(), j; i < e; i++)\n   for (j= n; j--;) ret[j]+=\
-    \ r[i] * bs[i][j];\n  return ret;\n }\n const mod_t operator[](std::size_t k)\
-    \ const { return poly[k]; }\n const auto begin() const { return poly.begin();\
-    \ }\n const auto end() const { return poly.end(); }\n const std::size_t size()\
-    \ const { return dg + 1; }\n};"
+    \n#include \"src/LinearAlgebra/Vector.hpp\"\n#include \"src/Math/ModInt.hpp\"\n\
+    // c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate\
+    \ <class mod_t, template <class> class Mat> class MinimalPolynomial {\n std::vector<mod_t>\
+    \ poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline\
+    \ int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size() - 1;; d--)\n\
+    \   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
+    \ bostan_mori_msb(const std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n\
+    \  assert(d >= 0), assert(q[0] != mod_t());\n  std::vector<mod_t> ret(std::max(d,\
+    \ 1));\n  if (k == 0) return ret.back()= mod_t(1), ret;\n  std::vector<mod_t>\
+    \ v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for (int j= 0; j <= d; j+= 2)\
+    \ v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i <= d; i+= 2)\n   for (int\
+    \ j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n  auto w= bostan_mori_msb(v,\
+    \ k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >= d; i-= 2)\n   for (int j=\
+    \ 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >> 1];\n  for (int i= 2 * d\
+    \ - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j <= d; j+= 2) ret[i - d]-=\
+    \ q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t> x_pow_mod(uint64_t\
+    \ k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n), u= bostan_mori_msb(rev,\
+    \ k - n + dg);\n  for (int i= dg; i--;)\n   for (int j= i + 1; j--;) ret[n - 1\
+    \ - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n MinimalPolynomial(const\
+    \ Mat<mod_t> &M, Vector<mod_t> b): n(M.width()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  assert(n == b.size()), assert(n == M.height());\n  Vector<mod_t> a(n);\n  for\
+    \ (auto &x: a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t> v((n + 1) <<\
+    \ 1);\n  for (size_t i= v.size(), j= 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n\
+    \   if (v[j++]= (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n\
+    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(),\
+    \ rev.rend()), rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
+    \ pow(uint64_t k) const {  // M^k * b\n  if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n\
+    \  Vector<mod_t> ret= r[0] * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i]\
+    \ * bs[i];\n  return ret;\n }\n const mod_t &operator[](size_t k) const { return\
+    \ poly[k]; }\n const auto begin() const { return poly.begin(); }\n const auto\
+    \ end() const { return poly.end(); }\n size_t degree() const { return dg; }\n\
+    };\ntemplate <class mod_t, template <class> class Mat> mod_t det(const Mat<mod_t>\
+    \ &M) {\n size_t n= M.height();\n assert(n == M.width());\n Vector<mod_t> b(n);\n\
+    \ for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n DiagonalMatrix<mod_t> D(n);\n\
+    \ for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n mod_t ret= MinimalPolynomial(M\
+    \ * D, b)[0];\n if (n & 1) ret= -ret;\n return ret / D.det();\n}"
   dependsOn:
   - src/Math/berlekamp_massey.hpp
+  - src/LinearAlgebra/Vector.hpp
+  - src/Math/ModInt.hpp
+  - src/Math/mod_inv.hpp
+  - src/Internal/Remainder.hpp
   isVerificationFile: false
   path: src/LinearAlgebra/MinimalPolynomial.hpp
-  requiredBy:
-  - src/LinearAlgebra/SparseSquareMatrix.hpp
-  timestamp: '2023-01-23 16:45:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy: []
+  timestamp: '2023-03-12 20:26:06+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/sparse_matrix_det.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
 documentation_of: src/LinearAlgebra/MinimalPolynomial.hpp
 layout: document
 title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
 ---
-## 計算量
-$\mathcal{O} (N^2+N \cdot T(N))$ \
-$T(N)$: 行列とベクトルの乗算にかかる時間
+
+## `MinimalPolynomial` クラス
+正方行列 $M$ と ベクトル $\bm{b}$ を与えて 最小多項式 $p(x)=p_0+p_1x+\cdots+p_{d-1}x^{d-1}+x^d$ を求める. \
+ただしここでの最小多項式とは、モニックな多項式であって
+$$
+p(M)\bm{b} = p_0\bm{b}+p_1M\bm{b}+\cdots+p_{d-1}M^{d-1}\bm{b} + M^d\bm{b} = \bm{0}
+$$
+を満たす最小次数のものを指す.
+
+`ModInt` クラスを前提にしている.
+
+### メンバ関数
+
+| 関数                     | 概要                                                                                                                                         | 計算量                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `MinimalPolynomial(M,b)` | コンストラクタ. 正方行列 $M$ ( `Matrix` クラス or `SparseMatrix` クラス ) とベクトル $\bm{b}$ ( `Vector` クラス ) を与えて最小多項式を求める | $\mathcal{O}(n^2+nT(n))$<br> ただし $T(n)$ は $M$ とベクトルの乗算にかかる時間 |
+| `degree()`               | 最小多項式の次元を返す                                                                                                                       | $\mathcal{O}(1)$                                                               |
+| `operator[](i)`          | 最小多項式の$x^i$の係数を返す                                                                                                                | $\mathcal{O}(1)$                                                               |
+| `pow(k)`                 | $M^k\bm{b}$ ( `Vector` クラス ) を返す                                                                                                       | $\mathcal{O}(n^2\log k)$                                                       |
+
+## その他関数
+| 関数     | 概要                                                                                   | 計算量                                                                         |
+| -------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `det(M)` | 正方行列 $M$ ( `Matrix` クラス or `SparseMatrix` クラス ) の行列式 $\det M$ の値を返す | $\mathcal{O}(n^2+nT(n))$<br> ただし $T(n)$ は $M$ とベクトルの乗算にかかる時間 |
+
+
 ## 参考
 [https://yukicoder.me/wiki/black_box_linear_algebra](https://yukicoder.me/wiki/black_box_linear_algebra)

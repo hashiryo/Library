@@ -1,29 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
-    path: src/LinearAlgebra/SparseSquareMatrix.hpp
+  - icon: ':x:'
+    path: src/LinearAlgebra/SparseMatrix.hpp
     title: "\u758E\u884C\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/LinearAlgebra/Vector.hpp
+    title: "\u30D9\u30AF\u30C8\u30EB"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
@@ -113,87 +116,113 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\n#include\
-    \ <bits/stdc++.h>\n#line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n] = c[0] *\
-    \ a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class\
-    \ K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n std::size_t\
+    \ return dat[n];\n}\n#line 2 \"src/LinearAlgebra/SparseMatrix.hpp\"\n#include\
+    \ <vector>\n#include <tuple>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include\
+    \ <valarray>\nnamespace la_internal {\ntemplate <class R> struct Vector: public\
+    \ std::valarray<R> {\n using std::valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
+    using u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128\
+    \ *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >>\
+    \ i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(bool b) { return val= b,\
+    \ *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+    \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
+    \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
+    \ {\n size_t n;\n std::valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
+    \ n): n(n), dat((n + 127) >> 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b),\
+    \ (n + 127) >> 7) {}\n Ref operator[](int i) {\n  u128 *ref= std::begin(dat) +\
+    \ (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref >> j) & 1;\n  return Ref{ref,\
+    \ j, val};\n }\n bool operator[](int i) const { return (dat[i >> 7] >> (i & 127))\
+    \ & 1; }\n Vector &operator+=(const Vector &r) { return dat^= r.dat, *this; }\n\
+    \ Vector &operator-=(const Vector &r) { return dat^= r.dat, *this; }\n Vector\
+    \ &operator*=(bool b) {\n  if (!b) dat= 0;\n  return *this;\n }\n Vector operator+(const\
+    \ Vector &r) const { return Vector(*this)+= r; }\n Vector operator-(const Vector\
+    \ &r) const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
+    \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
+    \ std::begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return\
+    \ r * b; }\n};\ntemplate <class R> struct DiagonalMatrix: public Vector<R> {\n\
+    \ using Vector<R>::Vector;\n R det() const {\n  R ret(true);\n  for (auto x: *this)\
+    \ ret*= x;\n  return ret;\n }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n\
+    #line 6 \"src/LinearAlgebra/SparseMatrix.hpp\"\ntemplate <class R> class SparseMatrix\
+    \ {\n std::vector<std::tuple<size_t, size_t, R>> dat;\n size_t H, W;\npublic:\n\
+    \ SparseMatrix(size_t h, size_t w): H(h), W(w) {}\n size_t width() const { return\
+    \ W; }\n size_t height() const { return H; }\n void add_component(size_t i, size_t\
+    \ j, R v) { dat.emplace_back(i, j, v); }\n Vector<R> operator*(const Vector<R>\
+    \ &r) const {\n  assert(W == r.size());\n  Vector<R> ret(H);\n  for (auto [i,\
+    \ j, v]: dat) ret[i]+= v * r[j];\n  return ret;\n }\n SparseMatrix &operator*=(const\
+    \ DiagonalMatrix<R> &r) {\n  assert(W == r.size());\n  for (auto &[i, j, v]: dat)\
+    \ v*= r[j];\n  return *this;\n }\n SparseMatrix operator*(const DiagonalMatrix<R>\
+    \ &r) const { return SparseMatrix(*this)*= r; }\n friend SparseMatrix operator*(const\
+    \ DiagonalMatrix<R> &l, SparseMatrix r) {\n  assert(r.H == l.size());\n  for (auto\
+    \ &[i, j, v]: r.dat) v*= l[i];\n  return r;\n }\n};\n#line 2 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
+    \n#include <bits/stdc++.h>\n#line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n]\
+    \ = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\ntemplate\
+    \ <class K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n size_t\
     \ n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K> c(n),\
     \ b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for (c[0]= b[0]= 1, i= 0, j;\
     \ i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i - j];\n\
     \  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-=\
     \ coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i + 1 - d, b= tmp, x= y,\
     \ m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n\
-    \ return c;\n}\n#line 4 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n// c s.t.\
+    \ return c;\n}\n#line 6 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n// c s.t.\
     \ (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate <class\
-    \ Mat, class Vec> class MinimalPolynomial {\n using mod_t= std::remove_reference_t<decltype((Vec{1})[0])>;\n\
-    \ static const inline mod_t ZERO= 0;\n std::vector<mod_t> poly, rev;\n std::vector<Vec>\
-    \ bs;\n std::size_t dg, n;\n static inline int deg(const std::vector<mod_t> &p)\
-    \ {\n  for (int d= p.size() - 1;; d--)\n   if (d < 0 || p[d] != ZERO) return d;\n\
-    \ }\n static inline std::vector<mod_t> bostan_mori_msb(const std::vector<mod_t>\
-    \ &q, std::uint64_t k) {\n  int d= deg(q);\n  assert(d >= 0), assert(q[0] != ZERO);\n\
-    \  std::vector<mod_t> ret(std::max(d, 1));\n  if (k == 0) return ret.back()= mod_t(1),\
-    \ ret;\n  std::vector<mod_t> v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for\
-    \ (int j= 0; j <= d; j+= 2) v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i\
-    \ <= d; i+= 2)\n   for (int j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n\
-    \  auto w= bostan_mori_msb(v, k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >=\
-    \ d; i-= 2)\n   for (int j= 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >>\
-    \ 1];\n  for (int i= 2 * d - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j\
-    \ <= d; j+= 2) ret[i - d]-= q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t>\
-    \ x_pow_mod(std::uint64_t k) const {\n  assert(k >= n);\n  std::vector<mod_t>\
-    \ ret(n), u= bostan_mori_msb(rev, k - n + dg);\n  for (int i= dg; i--;)\n   for\
-    \ (int j= i + 1; j--;) ret[n - 1 - i]+= u[j] * rev[i - j];\n  return ret;\n }\n\
-    public:\n MinimalPolynomial(const Mat &M, Vec b): n(M.size()) {\n  std::size_t\
-    \ i, j;\n  assert(n == b.size());\n  std::vector<mod_t> a(n), v;\n  for (auto\
-    \ &x: a) x= get_rand(1, mod_t::mod() - 1);\n  mod_t tmp;\n  for (i= (n + 1) <<\
-    \ 1; i--; v.push_back(tmp)) {\n   if (i > n) bs.emplace_back(b);\n   for (tmp=\
-    \ 0, j= n; j--;) tmp+= a[j] * b[j];\n   if (i) b= M * b;\n  }\n  rev= berlekamp_massey(v);\n\
-    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly= rev;\n  rev.erase(rev.begin()\
-    \ + (dg= deg(rev)) + 1, rev.end());\n  std::reverse(poly.begin(), poly.end());\n\
-    \ }\n static std::uint64_t get_rand(std::uint64_t l, std::uint64_t r) {\n  static\
-    \ std::mt19937_64 gen(std::random_device{}());\n  return std::uniform_int_distribution<std::uint64_t>(l,\
-    \ r)(gen);\n }\n Vec pow(std::uint64_t k) const {  // M^k * b\n  if (k < n) return\
-    \ bs[k];\n  auto r= x_pow_mod(k);\n  Vec ret= bs[0];\n  for (auto &x: ret) x*=\
-    \ r[0];\n  for (int i= 1, e= r.size(), j; i < e; i++)\n   for (j= n; j--;) ret[j]+=\
-    \ r[i] * bs[i][j];\n  return ret;\n }\n const mod_t operator[](std::size_t k)\
-    \ const { return poly[k]; }\n const auto begin() const { return poly.begin();\
-    \ }\n const auto end() const { return poly.end(); }\n const std::size_t size()\
-    \ const { return dg + 1; }\n};\n#line 4 \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
-    \ntemplate <class mod_t> struct SparseSquareMatrix {\n SparseSquareMatrix(std::size_t\
-    \ n_): n(n_) {}\n void add_component(std::size_t i, std::size_t j, mod_t val)\
-    \ { dat.emplace_back(i, j, val); }\n std::vector<mod_t> operator*(const std::vector<mod_t>\
-    \ &vec) const {\n  std::vector<mod_t> ret(n);\n  assert(vec.size() == n);\n  for\
-    \ (const auto &[i, j, val]: dat) ret[i]+= val * vec[j];\n  return ret;\n }\n auto\
-    \ begin() { return dat.begin(); }\n auto end() { return dat.end(); }\n std::size_t\
-    \ size() const { return n; }\n mod_t det() const {\n  const std::uint64_t MOD=\
-    \ mod_t::mod();\n  using MinPoly= MinimalPolynomial<SparseSquareMatrix, std::vector<mod_t>>;\n\
-    \  SparseSquareMatrix M(*this);\n  std::vector<mod_t> d(n), b(n);\n  for (auto\
-    \ &x: b) x= MinPoly::get_rand(1, MOD - 1);\n  for (auto &x: d) x= MinPoly::get_rand(1,\
-    \ MOD - 1);\n  for (auto &[i, j, val]: M) val*= d[j];\n  mod_t ret= MinPoly(M,\
-    \ b)[0], tmp= 1;\n  for (const auto &x: d) tmp*= x;\n  if (n & 1) ret= -ret;\n\
-    \  return ret / tmp;\n }\nprivate:\n std::size_t n;\n std::vector<std::tuple<std::size_t,\
-    \ std::size_t, mod_t>> dat;\n};\n#line 5 \"test/yosupo/sparse_matrix_det.test.cpp\"\
+    \ mod_t, template <class> class Mat> class MinimalPolynomial {\n std::vector<mod_t>\
+    \ poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline\
+    \ int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size() - 1;; d--)\n\
+    \   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
+    \ bostan_mori_msb(const std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n\
+    \  assert(d >= 0), assert(q[0] != mod_t());\n  std::vector<mod_t> ret(std::max(d,\
+    \ 1));\n  if (k == 0) return ret.back()= mod_t(1), ret;\n  std::vector<mod_t>\
+    \ v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for (int j= 0; j <= d; j+= 2)\
+    \ v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i <= d; i+= 2)\n   for (int\
+    \ j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n  auto w= bostan_mori_msb(v,\
+    \ k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >= d; i-= 2)\n   for (int j=\
+    \ 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >> 1];\n  for (int i= 2 * d\
+    \ - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j <= d; j+= 2) ret[i - d]-=\
+    \ q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t> x_pow_mod(uint64_t\
+    \ k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n), u= bostan_mori_msb(rev,\
+    \ k - n + dg);\n  for (int i= dg; i--;)\n   for (int j= i + 1; j--;) ret[n - 1\
+    \ - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n MinimalPolynomial(const\
+    \ Mat<mod_t> &M, Vector<mod_t> b): n(M.width()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  assert(n == b.size()), assert(n == M.height());\n  Vector<mod_t> a(n);\n  for\
+    \ (auto &x: a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t> v((n + 1) <<\
+    \ 1);\n  for (size_t i= v.size(), j= 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n\
+    \   if (v[j++]= (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n\
+    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(),\
+    \ rev.rend()), rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
+    \ pow(uint64_t k) const {  // M^k * b\n  if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n\
+    \  Vector<mod_t> ret= r[0] * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i]\
+    \ * bs[i];\n  return ret;\n }\n const mod_t &operator[](size_t k) const { return\
+    \ poly[k]; }\n const auto begin() const { return poly.begin(); }\n const auto\
+    \ end() const { return poly.end(); }\n size_t degree() const { return dg; }\n\
+    };\ntemplate <class mod_t, template <class> class Mat> mod_t det(const Mat<mod_t>\
+    \ &M) {\n size_t n= M.height();\n assert(n == M.width());\n Vector<mod_t> b(n);\n\
+    \ for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n DiagonalMatrix<mod_t> D(n);\n\
+    \ for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n mod_t ret= MinimalPolynomial(M\
+    \ * D, b)[0];\n if (n & 1) ret= -ret;\n return ret / D.det();\n}\n#line 6 \"test/yosupo/sparse_matrix_det.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n int N, K;\n cin >> N >> K;\n SparseSquareMatrix<Mint>\
-    \ M(N);\n for (int i= 0; i < K; i++) {\n  int a, b, c;\n  cin >> a >> b >> c;\n\
-    \  M.add_component(a, b, c);\n }\n cout << M.det() << '\\n';\n return 0;\n}\n"
+    \ using Mint= ModInt<998244353>;\n int N, K;\n cin >> N >> K;\n SparseMatrix<Mint>\
+    \ M(N, N);\n for (int i= 0; i < K; i++) {\n  int a, b, c;\n  cin >> a >> b >>\
+    \ c;\n  M.add_component(a, b, c);\n }\n cout << det(M) << '\\n';\n return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\n#include\
-    \ <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/LinearAlgebra/SparseSquareMatrix.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n int N, K;\n cin >> N >> K;\n SparseSquareMatrix<Mint>\
-    \ M(N);\n for (int i= 0; i < K; i++) {\n  int a, b, c;\n  cin >> a >> b >> c;\n\
-    \  M.add_component(a, b, c);\n }\n cout << M.det() << '\\n';\n return 0;\n}"
+    \ <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/LinearAlgebra/SparseMatrix.hpp\"\
+    \n#include \"src/LinearAlgebra/MinimalPolynomial.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ int N, K;\n cin >> N >> K;\n SparseMatrix<Mint> M(N, N);\n for (int i= 0; i\
+    \ < K; i++) {\n  int a, b, c;\n  cin >> a >> b >> c;\n  M.add_component(a, b,\
+    \ c);\n }\n cout << det(M) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
-  - src/LinearAlgebra/SparseSquareMatrix.hpp
+  - src/LinearAlgebra/SparseMatrix.hpp
+  - src/LinearAlgebra/Vector.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
   - src/Math/berlekamp_massey.hpp
   isVerificationFile: true
   path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 17:34:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-03-12 20:26:06+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sparse_matrix_det.test.cpp
 layout: document
