@@ -38,7 +38,8 @@ data:
     \ using std::valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8= uint8_t;\n\
     class Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool\
     \ v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^=\
-    \ u128(1) << i;\n }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
+    \ u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val= r.val, *this;\
+    \ }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
     \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
     \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
     \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n std::valarray<u128>\
@@ -302,7 +303,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/inverse_matrix.test.cpp
   requiredBy: []
-  timestamp: '2023-03-12 22:42:01+09:00'
+  timestamp: '2023-03-12 23:00:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/inverse_matrix.test.cpp

@@ -55,26 +55,27 @@ data:
     \ {\n using std::valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8=\
     \ uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r,\
     \ u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i)\
-    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(bool b) { return val= b, *this;\
-    \ }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
-    \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
-    \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
-    \ {\n size_t n;\n std::valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
-    \ n): n(n), dat((n + 127) >> 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b),\
-    \ (n + 127) >> 7) {}\n Ref operator[](int i) {\n  u128 *ref= std::begin(dat) +\
-    \ (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref >> j) & 1;\n  return Ref{ref,\
-    \ j, val};\n }\n bool operator[](int i) const { return (dat[i >> 7] >> (i & 127))\
-    \ & 1; }\n Vector &operator+=(const Vector &r) { return dat^= r.dat, *this; }\n\
-    \ Vector &operator-=(const Vector &r) { return dat^= r.dat, *this; }\n Vector\
-    \ &operator*=(bool b) {\n  if (!b) dat= 0;\n  return *this;\n }\n Vector operator+(const\
-    \ Vector &r) const { return Vector(*this)+= r; }\n Vector operator-(const Vector\
-    \ &r) const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
-    \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
-    \ std::begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return\
-    \ r * b; }\n};\ntemplate <class R> struct DiagonalMatrix: public Vector<R> {\n\
-    \ using Vector<R>::Vector;\n R det() const {\n  R ret(true);\n  for (auto x: *this)\
-    \ ret*= x;\n  return ret;\n }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n\
-    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
+    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
+    \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
+    \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
+    \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
+    \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n std::valarray<u128>\
+    \ dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >>\
+    \ 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref\
+    \ operator[](int i) {\n  u128 *ref= std::begin(dat) + (i >> 7);\n  u8 j= i & 127;\n\
+    \  bool val= (*ref >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int\
+    \ i) const { return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const\
+    \ Vector &r) { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector\
+    \ &r) { return dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b)\
+    \ dat= 0;\n  return *this;\n }\n Vector operator+(const Vector &r) const { return\
+    \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
+    \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
+    \ size() const { return n; }\n u128 *data() { return std::begin(dat); }\n friend\
+    \ Vector operator*(bool b, const Vector &r) { return r * b; }\n};\ntemplate <class\
+    \ R> struct DiagonalMatrix: public Vector<R> {\n using Vector<R>::Vector;\n R\
+    \ det() const {\n  R ret(true);\n  for (auto x: *this) ret*= x;\n  return ret;\n\
+    \ }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n#line 2 \"\
+    src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
     \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
@@ -243,7 +244,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
-  timestamp: '2023-03-12 20:55:52+09:00'
+  timestamp: '2023-03-12 23:00:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sparse_matrix_det.test.cpp
