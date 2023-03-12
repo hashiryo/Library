@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,7 +144,7 @@ data:
     \ -1 : 1;\n  for (size_t i= dat.width(); i--;) ret*= dat[perm[i]][i];\n  return\
     \ ret;\n }\n std::vector<Vector<K>> kernel() const {\n  const size_t w= dat.width(),\
     \ n= rank();\n  std::vector ker(w - n, Vector<K>(w));\n  for (size_t c= 0, i=\
-    \ 0; c < w; ++c) {\n   if (i < n && piv[i] == c) ++i;\n   else {\n    auto a=\
+    \ 0; c < w; ++c) {\n   if (i < n && piv[i] == c) ++i;\n   else {\n    auto &a=\
     \ ker[c - i];\n    a[c]= 1;\n    for (size_t r= i; r--;) a[r]= -dat[perm[r]][c];\n\
     \    for (size_t j= i, k, r; j--;) {\n     K x= a[j] / dat[perm[j]][k= piv[j]];\n\
     \     for (a[j]= 0, a[k]= x, r= j; r--;) a[r]-= dat[perm[r]][k] * x;\n    }\n\
@@ -187,7 +187,7 @@ data:
     \ && rank() == dat.width(); }\n bool det() const { return is_regular(); }\n std::vector<Vector<bool>>\
     \ kernel() const {\n  const size_t w= dat.height(), n= rank();\n  std::vector\
     \ ker(w - rank(), Vector<bool>(w));\n  for (size_t c= 0, i= 0; c < w; ++c) {\n\
-    \   if (i < n && piv[i] == c) ++i;\n   else {\n    auto a= ker[c - i];\n    subst_lower(a.data(),\
+    \   if (i < n && piv[i] == c) ++i;\n   else {\n    auto &a= ker[c - i];\n    subst_lower(a.data(),\
     \ dat[c].data(), i), a[c]= 1;\n    for (size_t j= i, k; j--;) {\n     bool x=\
     \ a[j];\n     if (a[j]= 0, a[k= piv[j]]= x; x) add_lower(a.data(), dat[k].data(),\
     \ j);\n    }\n   }\n  }\n  return ker;\n }\n Vector<bool> linear_equations(const\
@@ -225,7 +225,7 @@ data:
     \ ret*= dat[perm[i]][i];\n  return ret;\n }\n std::vector<Vector<K>> kernel()\
     \ const {\n  const size_t w= dat.width(), n= rank();\n  std::vector ker(w - n,\
     \ Vector<K>(w));\n  for (size_t c= 0, i= 0; c < w; ++c) {\n   if (i < n && piv[i]\
-    \ == c) ++i;\n   else {\n    auto a= ker[c - i];\n    a[c]= 1;\n    for (size_t\
+    \ == c) ++i;\n   else {\n    auto &a= ker[c - i];\n    a[c]= 1;\n    for (size_t\
     \ r= i; r--;) a[r]= -dat[perm[r]][c];\n    for (size_t j= i, k, r; j--;) {\n \
     \    K x= a[j] / dat[perm[j]][k= piv[j]];\n     for (a[j]= 0, a[k]= x, r= j; r--;)\
     \ a[r]-= dat[perm[r]][k] * x;\n    }\n   }\n  }\n  return ker;\n }\n Vector<K>\
@@ -268,8 +268,8 @@ data:
     \ }\n std::vector<Vector<bool>> kernel() const {\n  const size_t w= dat.height(),\
     \ n= rank();\n  std::vector ker(w - rank(), Vector<bool>(w));\n  for (size_t c=\
     \ 0, i= 0; c < w; ++c) {\n   if (i < n && piv[i] == c) ++i;\n   else {\n    auto\
-    \ a= ker[c - i];\n    subst_lower(a.data(), dat[c].data(), i), a[c]= 1;\n    for\
-    \ (size_t j= i, k; j--;) {\n     bool x= a[j];\n     if (a[j]= 0, a[k= piv[j]]=\
+    \ &a= ker[c - i];\n    subst_lower(a.data(), dat[c].data(), i), a[c]= 1;\n   \
+    \ for (size_t j= i, k; j--;) {\n     bool x= a[j];\n     if (a[j]= 0, a[k= piv[j]]=\
     \ x; x) add_lower(a.data(), dat[k].data(), j);\n    }\n   }\n  }\n  return ker;\n\
     \ }\n Vector<bool> linear_equations(const Vector<bool> &b) const {\n  const size_t\
     \ h= dat.width(), w= dat.height(), n= rank();\n  assert(h == b.size());\n  Vector<bool>\
@@ -290,7 +290,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/LU_Decomposition.hpp
   requiredBy: []
-  timestamp: '2023-03-12 23:00:15+09:00'
+  timestamp: '2023-03-12 23:35:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp

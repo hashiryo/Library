@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
@@ -137,7 +137,7 @@ data:
     \ -1 : 1;\n  for (size_t i= dat.width(); i--;) ret*= dat[perm[i]][i];\n  return\
     \ ret;\n }\n std::vector<Vector<K>> kernel() const {\n  const size_t w= dat.width(),\
     \ n= rank();\n  std::vector ker(w - n, Vector<K>(w));\n  for (size_t c= 0, i=\
-    \ 0; c < w; ++c) {\n   if (i < n && piv[i] == c) ++i;\n   else {\n    auto a=\
+    \ 0; c < w; ++c) {\n   if (i < n && piv[i] == c) ++i;\n   else {\n    auto &a=\
     \ ker[c - i];\n    a[c]= 1;\n    for (size_t r= i; r--;) a[r]= -dat[perm[r]][c];\n\
     \    for (size_t j= i, k, r; j--;) {\n     K x= a[j] / dat[perm[j]][k= piv[j]];\n\
     \     for (a[j]= 0, a[k]= x, r= j; r--;) a[r]-= dat[perm[r]][k] * x;\n    }\n\
@@ -180,7 +180,7 @@ data:
     \ && rank() == dat.width(); }\n bool det() const { return is_regular(); }\n std::vector<Vector<bool>>\
     \ kernel() const {\n  const size_t w= dat.height(), n= rank();\n  std::vector\
     \ ker(w - rank(), Vector<bool>(w));\n  for (size_t c= 0, i= 0; c < w; ++c) {\n\
-    \   if (i < n && piv[i] == c) ++i;\n   else {\n    auto a= ker[c - i];\n    subst_lower(a.data(),\
+    \   if (i < n && piv[i] == c) ++i;\n   else {\n    auto &a= ker[c - i];\n    subst_lower(a.data(),\
     \ dat[c].data(), i), a[c]= 1;\n    for (size_t j= i, k; j--;) {\n     bool x=\
     \ a[j];\n     if (a[j]= 0, a[k= piv[j]]= x; x) add_lower(a.data(), dat[k].data(),\
     \ j);\n    }\n   }\n  }\n  return ker;\n }\n Vector<bool> linear_equations(const\
@@ -308,8 +308,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/linear_equations.test.cpp
   requiredBy: []
-  timestamp: '2023-03-12 23:00:15+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-03-12 23:35:49+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/linear_equations.test.cpp
 layout: document
