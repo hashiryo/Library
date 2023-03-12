@@ -9,12 +9,12 @@ data:
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\n#include\
@@ -48,14 +48,14 @@ data:
     \ identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
     \ w, R v= R()): W(w), dat(v, h * w) {}\n size_t width() const { return W; }\n\
-    \ size_t height() const { return dat.size() / W; }\n operator bool() const { return\
-    \ W; }\n auto operator[](int i) { return std::next(std::begin(dat), i * W); }\n\
-    \ auto operator[](int i) const { return std::next(std::cbegin(dat), i * W); }\n\
-    \ Matrix &operator+=(const Matrix &r) { return assert(dat.size() == r.dat.size()),\
-    \ assert(W == r.W), dat+= r.dat, *this; }\n Matrix operator+(const Matrix &r)\
-    \ const { return Matrix(*this)+= r; }\n Matrix operator*(const Matrix &r) const\
-    \ {\n  const size_t h= height(), w= r.W, l= W;\n  assert(l == r.height());\n \
-    \ Matrix ret(h, w);\n  auto a= std::cbegin(dat);\n  auto c= std::begin(ret.dat);\n\
+    \ size_t height() const { return W ? dat.size() / W : 0; }\n operator bool() const\
+    \ { return W; }\n auto operator[](int i) { return std::next(std::begin(dat), i\
+    \ * W); }\n auto operator[](int i) const { return std::next(std::cbegin(dat),\
+    \ i * W); }\n Matrix &operator+=(const Matrix &r) { return assert(dat.size() ==\
+    \ r.dat.size()), assert(W == r.W), dat+= r.dat, *this; }\n Matrix operator+(const\
+    \ Matrix &r) const { return Matrix(*this)+= r; }\n Matrix operator*(const Matrix\
+    \ &r) const {\n  const size_t h= height(), w= r.W, l= W;\n  assert(l == r.height());\n\
+    \  Matrix ret(h, w);\n  auto a= std::cbegin(dat);\n  auto c= std::begin(ret.dat);\n\
     \  for (int i= h; i--; std::advance(c, w)) {\n   auto b= std::cbegin(r.dat);\n\
     \   for (int k= l; k--; ++a) {\n    auto d= c;\n    auto v= *a;\n    for (int\
     \ j= w; j--; ++b, ++d) *d+= v * *b;\n   }\n  }\n  return ret;\n }\n Matrix &operator*=(const\
@@ -86,6 +86,7 @@ data:
     \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
     \ H; }\n operator bool() const { return W; }\n Array operator[](int i) { return\
     \ {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
+    \ { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int i) const\
     \ { return {std::next(std::cbegin(dat), i * m)}; }\n Matrix &operator+=(const\
     \ Matrix &r) { return assert(H == r.H), assert(W == r.W), dat^= r.dat, *this;\
     \ }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+= r; }\n\
@@ -141,8 +142,8 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
-  timestamp: '2023-03-12 20:26:06+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-03-12 22:40:31+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/characteristic_polynomial.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp

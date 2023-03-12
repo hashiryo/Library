@@ -5,10 +5,10 @@ data:
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/LU_Decomposition.hpp
     title: "LU\u5206\u89E3"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
   _extendedVerifiedWith:
@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':x:'
@@ -30,16 +30,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
   - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,13 +51,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
   - icon: ':x:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
   _isVerificationFailed: true
@@ -95,7 +95,7 @@ data:
     \  Matrix ret(n, n);\n  return ret.dat[std::slice(0, n, n + 1)]= R(true), ret;\n\
     \ }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t w, R v= R()): W(w), dat(v, h\
     \ * w) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ dat.size() / W; }\n operator bool() const { return W; }\n auto operator[](int\
+    \ W ? dat.size() / W : 0; }\n operator bool() const { return W; }\n auto operator[](int\
     \ i) { return std::next(std::begin(dat), i * W); }\n auto operator[](int i) const\
     \ { return std::next(std::cbegin(dat), i * W); }\n Matrix &operator+=(const Matrix\
     \ &r) { return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+= r.dat,\
@@ -133,6 +133,7 @@ data:
     \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
     \ H; }\n operator bool() const { return W; }\n Array operator[](int i) { return\
     \ {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
+    \ { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int i) const\
     \ { return {std::next(std::cbegin(dat), i * m)}; }\n Matrix &operator+=(const\
     \ Matrix &r) { return assert(H == r.H), assert(W == r.W), dat^= r.dat, *this;\
     \ }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+= r; }\n\
@@ -153,7 +154,7 @@ data:
     \  Matrix ret(n, n);\n  return ret.dat[std::slice(0, n, n + 1)]= R(true), ret;\n\
     \ }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t w, R v= R()): W(w), dat(v, h\
     \ * w) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ dat.size() / W; }\n operator bool() const { return W; }\n auto operator[](int\
+    \ W ? dat.size() / W : 0; }\n operator bool() const { return W; }\n auto operator[](int\
     \ i) { return std::next(std::begin(dat), i * W); }\n auto operator[](int i) const\
     \ { return std::next(std::cbegin(dat), i * W); }\n Matrix &operator+=(const Matrix\
     \ &r) { return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+= r.dat,\
@@ -191,6 +192,7 @@ data:
     \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
     \ H; }\n operator bool() const { return W; }\n Array operator[](int i) { return\
     \ {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
+    \ { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int i) const\
     \ { return {std::next(std::cbegin(dat), i * m)}; }\n Matrix &operator+=(const\
     \ Matrix &r) { return assert(H == r.H), assert(W == r.W), dat^= r.dat, *this;\
     \ }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+= r; }\n\
@@ -212,7 +214,7 @@ data:
   requiredBy:
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/LU_Decomposition.hpp
-  timestamp: '2023-03-12 20:26:06+09:00'
+  timestamp: '2023-03-12 22:40:31+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp
