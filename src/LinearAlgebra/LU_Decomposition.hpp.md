@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,9 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/LU_Decomposition.hpp\"\n#include <type_traits>\n\
@@ -291,7 +291,7 @@ data:
   path: src/LinearAlgebra/LU_Decomposition.hpp
   requiredBy: []
   timestamp: '2023-03-12 23:35:49+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
@@ -311,12 +311,12 @@ title: "LU\u5206\u89E3"
 
 ## メンバ関数
 
-| 関数名                | 概要                                                                                                                                | 計算量             |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `LU_Decomposition(A)` | コンストラクタ. 行列 $A$ ( `Matrix` クラス ) のLU分解を実行.                                                                        | $\mathcal{O}(n^3)$ |
-| `rank()`              | 行列のランク $\mathrm{rank}\; A$ を返す                                                                                             | $\mathcal{O}(1)$   |
-| `is_regular()`        | 行列が正則なら true                                                                                                                 | $\mathcal{O}(1)$   |
-| `det()`               | 行列式 $\det A$ の値を返す                                                                                                          | $\mathcal{O}(n)$   |
-| `kernel()`            | 行列のカーネル $\mathrm{Ker}\;A \stackrel{\mathrm{def}}{=} \lbrace \bm{x}: A\bm{x}=\bm{0}\rbrace$ を返す. ( `Vector` クラスの集合 ) | $\mathcal{O}(n^3)$ |
-| `linear_equations(b)` | 線形方程式 $A\bm{x}=\bm{b}$ の解の一つ ( `Vector` クラス ) を返す. 存在しないならサイズ0のものを返す                                | $\mathcal{O}(n^2)$ |
-| `inverse_matrix()`    | 逆行列 $A^{-1}$ を返す. 存在しないなら高さ・幅 0の `Matrix` を返す                                                                  | $\mathcal{O}(n^3)$ |
+| 関数名                | 概要                                                                                                                                                        | 計算量             |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `LU_Decomposition(A)` | コンストラクタ. 行列 $A$ ( `Matrix` クラス ) のLU分解を実行.                                                                                                | $\mathcal{O}(n^3)$ |
+| `rank()`              | 行列のランク $\mathrm{rank}\; A$ を返す                                                                                                                     | $\mathcal{O}(1)$   |
+| `is_regular()`        | 行列が正則なら true                                                                                                                                         | $\mathcal{O}(1)$   |
+| `det()`               | 行列式 $\det A$ の値を返す                                                                                                                                  | $\mathcal{O}(n)$   |
+| `kernel()`            | 行列のカーネル $\mathrm{Ker}\;A \stackrel{\mathrm{def}}{=} \lbrace \boldsymbol{x}: A\boldsymbol{x}=\boldsymbol{0}\rbrace$ を返す. ( `Vector` クラスの集合 ) | $\mathcal{O}(n^3)$ |
+| `linear_equations(b)` | 線形方程式 $A\boldsymbol{x}=\boldsymbol{b}$ の解の一つ ( `Vector` クラス ) を返す. 存在しないならサイズ0のものを返す                                        | $\mathcal{O}(n^2)$ |
+| `inverse_matrix()`    | 逆行列 $A^{-1}$ を返す. 存在しないなら高さ・幅 0の `Matrix` を返す                                                                                          | $\mathcal{O}(n^3)$ |
