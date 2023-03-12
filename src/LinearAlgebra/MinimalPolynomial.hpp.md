@@ -10,32 +10,35 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':heavy_check_mark:'
+    path: src/Misc/rng.hpp
+    title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n#include <bits/stdc++.h>\n\
@@ -153,12 +156,15 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 6 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n// c\
-    \ s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate\
-    \ <class mod_t, template <class> class Mat> class MinimalPolynomial {\n std::vector<mod_t>\
-    \ poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline\
-    \ int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size() - 1;; d--)\n\
-    \   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
+    \ return dat[n];\n}\n#line 3 \"src/Misc/rng.hpp\"\nuint64_t rng() {\n static uint64_t\
+    \ x= 10150724397891781847ULL * std::random_device{}();\n return x^= x << 7, x^=\
+    \ x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
+    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 7 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
+    \n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\n\
+    template <class mod_t, template <class> class Mat> class MinimalPolynomial {\n\
+    \ std::vector<mod_t> poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n\
+    \ static inline int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size()\
+    \ - 1;; d--)\n   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
     \ bostan_mori_msb(const std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n\
     \  assert(d >= 0), assert(q[0] != mod_t());\n  std::vector<mod_t> ret(std::max(d,\
     \ 1));\n  if (k == 0) return ret.back()= mod_t(1), ret;\n  std::vector<mod_t>\
@@ -191,52 +197,54 @@ data:
     \ * D, b)[0];\n if (n & 1) ret= -ret;\n return ret / D.det();\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Math/berlekamp_massey.hpp\"\
     \n#include \"src/LinearAlgebra/Vector.hpp\"\n#include \"src/Math/ModInt.hpp\"\n\
-    // c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate\
-    \ <class mod_t, template <class> class Mat> class MinimalPolynomial {\n std::vector<mod_t>\
-    \ poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline\
-    \ int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size() - 1;; d--)\n\
-    \   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
-    \ bostan_mori_msb(const std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n\
-    \  assert(d >= 0), assert(q[0] != mod_t());\n  std::vector<mod_t> ret(std::max(d,\
-    \ 1));\n  if (k == 0) return ret.back()= mod_t(1), ret;\n  std::vector<mod_t>\
-    \ v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for (int j= 0; j <= d; j+= 2)\
-    \ v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i <= d; i+= 2)\n   for (int\
-    \ j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n  auto w= bostan_mori_msb(v,\
-    \ k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >= d; i-= 2)\n   for (int j=\
-    \ 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >> 1];\n  for (int i= 2 * d\
-    \ - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j <= d; j+= 2) ret[i - d]-=\
-    \ q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t> x_pow_mod(uint64_t\
-    \ k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n), u= bostan_mori_msb(rev,\
-    \ k - n + dg);\n  for (int i= dg; i--;)\n   for (int j= i + 1; j--;) ret[n - 1\
-    \ - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n MinimalPolynomial(const\
-    \ Mat<mod_t> &M, Vector<mod_t> b): n(M.width()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n\
-    \  assert(n == b.size()), assert(n == M.height());\n  Vector<mod_t> a(n);\n  for\
-    \ (auto &x: a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t> v((n + 1) <<\
-    \ 1);\n  for (size_t i= v.size(), j= 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n\
-    \   if (v[j++]= (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n\
-    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(),\
-    \ rev.rend()), rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
-    \ pow(uint64_t k) const {  // M^k * b\n  if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n\
-    \  Vector<mod_t> ret= r[0] * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i]\
-    \ * bs[i];\n  return ret;\n }\n const mod_t &operator[](size_t k) const { return\
-    \ poly[k]; }\n const auto begin() const { return poly.begin(); }\n const auto\
-    \ end() const { return poly.end(); }\n size_t degree() const { return dg; }\n\
-    };\ntemplate <class mod_t, template <class> class Mat> mod_t det(const Mat<mod_t>\
-    \ &M) {\n size_t n= M.height();\n assert(n == M.width());\n Vector<mod_t> b(n);\n\
-    \ for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n DiagonalMatrix<mod_t> D(n);\n\
-    \ for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n mod_t ret= MinimalPolynomial(M\
-    \ * D, b)[0];\n if (n & 1) ret= -ret;\n return ret / D.det();\n}"
+    #include \"src/Misc/rng.hpp\"\n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ...\
+    \ + c[1] * M + c[0]) * b = 0\ntemplate <class mod_t, template <class> class Mat>\
+    \ class MinimalPolynomial {\n std::vector<mod_t> poly, rev;\n size_t dg, n;\n\
+    \ std::vector<Vector<mod_t>> bs;\n static inline int deg(const std::vector<mod_t>\
+    \ &p) {\n  for (int d= p.size() - 1;; d--)\n   if (d < 0 || p[d] != mod_t()) return\
+    \ d;\n }\n static inline std::vector<mod_t> bostan_mori_msb(const std::vector<mod_t>\
+    \ &q, uint64_t k) {\n  int d= deg(q);\n  assert(d >= 0), assert(q[0] != mod_t());\n\
+    \  std::vector<mod_t> ret(std::max(d, 1));\n  if (k == 0) return ret.back()= mod_t(1),\
+    \ ret;\n  std::vector<mod_t> v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for\
+    \ (int j= 0; j <= d; j+= 2) v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i\
+    \ <= d; i+= 2)\n   for (int j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n\
+    \  auto w= bostan_mori_msb(v, k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >=\
+    \ d; i-= 2)\n   for (int j= 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >>\
+    \ 1];\n  for (int i= 2 * d - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j\
+    \ <= d; j+= 2) ret[i - d]-= q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t>\
+    \ x_pow_mod(uint64_t k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n),\
+    \ u= bostan_mori_msb(rev, k - n + dg);\n  for (int i= dg; i--;)\n   for (int j=\
+    \ i + 1; j--;) ret[n - 1 - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n\
+    \ MinimalPolynomial(const Mat<mod_t> &M, Vector<mod_t> b): n(M.width()), bs(n)\
+    \ {\n  static_assert(is_modint_v<mod_t>);\n  assert(n == b.size()), assert(n ==\
+    \ M.height());\n  Vector<mod_t> a(n);\n  for (auto &x: a) x= rng(1, mod_t::mod()\
+    \ - 1);\n  std::vector<mod_t> v((n + 1) << 1);\n  for (size_t i= v.size(), j=\
+    \ 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n   if (v[j++]= (a * b).sum(); !(--i))\
+    \ break;\n  }\n  rev= berlekamp_massey(v);\n  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(),\
+    \ 1), poly.assign(rev.rbegin(), rev.rend()), rev.erase(rev.begin() + (dg= deg(rev))\
+    \ + 1, rev.end());\n }\n Vector<mod_t> pow(uint64_t k) const {  // M^k * b\n \
+    \ if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n  Vector<mod_t> ret= r[0]\
+    \ * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i] * bs[i];\n  return ret;\n\
+    \ }\n const mod_t &operator[](size_t k) const { return poly[k]; }\n const auto\
+    \ begin() const { return poly.begin(); }\n const auto end() const { return poly.end();\
+    \ }\n size_t degree() const { return dg; }\n};\ntemplate <class mod_t, template\
+    \ <class> class Mat> mod_t det(const Mat<mod_t> &M) {\n size_t n= M.height();\n\
+    \ assert(n == M.width());\n Vector<mod_t> b(n);\n for (auto &x: b) x= rng(1, mod_t::mod()\
+    \ - 1);\n DiagonalMatrix<mod_t> D(n);\n for (auto &x: D) x= rng(1, mod_t::mod()\
+    \ - 1);\n mod_t ret= MinimalPolynomial(M * D, b)[0];\n if (n & 1) ret= -ret;\n\
+    \ return ret / D.det();\n}"
   dependsOn:
   - src/Math/berlekamp_massey.hpp
   - src/LinearAlgebra/Vector.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
+  - src/Misc/rng.hpp
   isVerificationFile: false
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
-  timestamp: '2023-03-12 20:26:06+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-03-12 20:55:52+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
