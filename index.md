@@ -200,6 +200,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/LinearSystemIncidence.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
+    - icon: ':question:'
+      path: src/Graph/Matching.hpp
+      title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
       path: src/Graph/MaxClique.hpp
       title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
@@ -352,13 +355,8 @@ data:
   - name: src/Optimization
     pages:
     - icon: ':heavy_check_mark:'
-      path: src/Optimization/Matching.hpp
-      title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\u30B0\u30E9\u30D5\
-        )"
-    - icon: ':heavy_check_mark:'
       path: src/Optimization/MatchingWeighted.hpp
-      title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\
-        \u822C\u30B0\u30E9\u30D5)"
+      title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41"
@@ -396,6 +394,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
+  - name: test/yosupo
+    pages:
+    - icon: ':warning:'
+      path: test/yosupo/bipartitematching.bipatite_graph.cpp
+      title: test/yosupo/bipartitematching.bipatite_graph.cpp
+    - icon: ':warning:'
+      path: test/yosupo/bipartitematching.matching.cpp
+      title: test/yosupo/bipartitematching.matching.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -1136,7 +1142,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
     - icon: ':heavy_check_mark:'

@@ -155,8 +155,7 @@ data:
   - test/yosupo/general_weighted_matching.test.cpp
 documentation_of: src/Optimization/MatchingWeighted.hpp
 layout: document
-title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0(\u4E00\u822C\
-  \u30B0\u30E9\u30D5)"
+title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
 ---
  -  返り値:{マッチング数, 最大値, 各頂点の相方(いないなら-1）}
 

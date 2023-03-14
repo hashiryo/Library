@@ -6,16 +6,14 @@ data:
     title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/general_matching
     links:
-    - https://judge.yosupo.jp/problem/general_matching
-  bundledCode: "#line 1 \"test/yosupo/general_matching.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/general_matching\"\n#include <iostream>\n\
+    - https://judge.yosupo.jp/problem/bipartitematching
+  bundledCode: "#line 1 \"test/yosupo/bipartitematching.matching.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include <iostream>\n\
     #line 2 \"src/Graph/Matching.hpp\"\n#include <vector>\n#include <array>\nclass\
     \ Matching {\n std::vector<std::array<int, 2>> es;\n std::vector<int> mate;\n\
     public:\n Matching(int n): mate(n, -1) {}\n void add_edge(int u, int v) { es.push_back({u,\
@@ -44,31 +42,32 @@ data:
     \ u) const { return mate[u]; }\n std::vector<std::array<int, 2>> max_matching()\
     \ const {\n  std::vector<std::array<int, 2>> ret;\n  const int n= mate.size();\n\
     \  for (int i= 0; i < n; ++i)\n   if (int j= mate[i]; i < j) ret.push_back({i,\
-    \ j});\n  return ret;\n }\n};\n#line 4 \"test/yosupo/general_matching.test.cpp\"\
+    \ j});\n  return ret;\n }\n};\n#line 4 \"test/yosupo/bipartitematching.matching.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M;\n cin >> N >> M;\n Matching graph(N);\n while (M--) {\n  int u, v;\n\
-    \  cin >> u >> v;\n  graph.add_edge(u, v);\n }\n graph.build();\n cout << graph.max_matching().size()\
-    \ << endl;\n for (int i= 0; i < N; i++)\n  if (int j= i; i < j) cout << i << \"\
-    \ \" << j << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\n#include\
+    \ int L, R, M;\n cin >> L >> R >> M;\n Matching graph(L + R);\n while (M--) {\n\
+    \  int a, b;\n  cin >> a >> b;\n  graph.add_edge(a, L + b);\n }\n graph.build();\n\
+    \ cout << graph.max_matching().size() << '\\n';\n for (int l= 0; l < L; ++l)\n\
+    \  if (int r= graph.match(l); r != -1) cout << l << \" \" << r - L << '\\n';\n\
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
     \ <iostream>\n#include \"src/Graph/Matching.hpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, M;\n cin >> N >>\
-    \ M;\n Matching graph(N);\n while (M--) {\n  int u, v;\n  cin >> u >> v;\n  graph.add_edge(u,\
-    \ v);\n }\n graph.build();\n cout << graph.max_matching().size() << endl;\n for\
-    \ (int i= 0; i < N; i++)\n  if (int j= i; i < j) cout << i << \" \" << j << '\\\
-    n';\n return 0;\n}"
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n cin >> L\
+    \ >> R >> M;\n Matching graph(L + R);\n while (M--) {\n  int a, b;\n  cin >> a\
+    \ >> b;\n  graph.add_edge(a, L + b);\n }\n graph.build();\n cout << graph.max_matching().size()\
+    \ << '\\n';\n for (int l= 0; l < L; ++l)\n  if (int r= graph.match(l); r != -1)\
+    \ cout << l << \" \" << r - L << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Graph/Matching.hpp
-  isVerificationFile: true
-  path: test/yosupo/general_matching.test.cpp
+  isVerificationFile: false
+  path: test/yosupo/bipartitematching.matching.cpp
   requiredBy: []
   timestamp: '2023-03-14 17:54:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: test/yosupo/general_matching.test.cpp
+documentation_of: test/yosupo/bipartitematching.matching.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/general_matching.test.cpp
-- /verify/test/yosupo/general_matching.test.cpp.html
-title: test/yosupo/general_matching.test.cpp
+- /library/test/yosupo/bipartitematching.matching.cpp
+- /library/test/yosupo/bipartitematching.matching.cpp.html
+title: test/yosupo/bipartitematching.matching.cpp
 ---

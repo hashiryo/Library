@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: test/yosupo/bipartitematching.bipatite_graph.cpp
+    title: test/yosupo/bipartitematching.bipatite_graph.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
@@ -156,7 +159,8 @@ data:
   - src/DataStructure/CsrArray.hpp
   isVerificationFile: false
   path: src/Graph/BipartiteGraph.hpp
-  requiredBy: []
+  requiredBy:
+  - test/yosupo/bipartitematching.bipatite_graph.cpp
   timestamp: '2023-03-10 17:02:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -166,7 +170,7 @@ documentation_of: src/Graph/BipartiteGraph.hpp
 layout: document
 title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
 ---
-明示的に二部グラフを表現しない \
+明示的に二部グラフを与えない \
 内部で頂点の色分けを自動で行う \
 色0が左、色1が右を意味する
 
@@ -188,4 +192,5 @@ title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
 
 
 ## 問題例
+[Chokudai SpeedRun 002 K - 種類数 β](https://atcoder.jp/contests/chokudai_S002/tasks/chokudai_S002_k) (頂点:2e5+4e5, 辺:4e5) \
 [東京大学プログラミングコンテスト2013 K - 辞書順最小頂点被覆](https://atcoder.jp/contests/utpc2013/tasks/utpc2013_11) (辞書順最小頂点被覆のverify)

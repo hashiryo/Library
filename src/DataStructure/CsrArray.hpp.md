@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
+  - icon: ':warning:'
+    path: test/yosupo/bipartitematching.bipatite_graph.cpp
+    title: test/yosupo/bipartitematching.bipatite_graph.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
@@ -73,6 +76,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/CsrArray.hpp
   requiredBy:
+  - test/yosupo/bipartitematching.bipatite_graph.cpp
   - src/Math/TwoSatisfiability.hpp
   - src/Graph/DulmageMendelsohn.hpp
   - src/Graph/StronglyConnectedComponents.hpp
