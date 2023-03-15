@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/yosupo/bipartitematching.matching.cpp
-    title: test/yosupo/bipartitematching.matching.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3032.test.cpp
     title: test/aoj/3032.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/bipartitematching.matching.test.cpp
+    title: test/yosupo/bipartitematching.matching.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/general_matching.test.cpp
     title: test/yosupo/general_matching.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Matching.hpp\"\n#include <vector>\n#include <array>\n\
@@ -77,12 +77,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/Matching.hpp
-  requiredBy:
-  - test/yosupo/bipartitematching.matching.cpp
+  requiredBy: []
   timestamp: '2023-03-14 17:54:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/general_matching.test.cpp
+  - test/yosupo/bipartitematching.matching.test.cpp
   - test/aoj/3032.test.cpp
 documentation_of: src/Graph/Matching.hpp
 layout: document
@@ -94,7 +94,7 @@ GabowのEdmonds' Algorithm
 | 関数名           | 内容                                             | 計算量                                  |
 | ---------------- | ------------------------------------------------ | --------------------------------------- |
 | `Matching(N)`    | コンストラクタ. グラフの頂点数 N を渡す          |                                         |
-| `add_edge(l,r)`  | 辺 (l,r) を追加                                  |                                         |
+| `add_edge(u,v)`  | 辺 (u,v) を追加                                  |                                         |
 | `build()`        | マッチングを実行                                 | $\mathcal{O}(VE \log V)$ 思ったより速い |
 | `match(v)`       | 頂点 v のマッチング相手を返す. 存在しないなら -1 |                                         |
 | `max_matching()` | マッチングに使う辺を返す                         |                                         |

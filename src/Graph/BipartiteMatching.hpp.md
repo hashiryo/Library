@@ -53,12 +53,11 @@ data:
     \ 0;\n    }\n  }\n }\n inline size_t left_size() const { return lmate.size();\
     \ }\n inline size_t right_size() const { return rmate.size(); }\n inline int l_to_r(int\
     \ l) const { return lmate[l]; }\n inline int r_to_l(int r) const { return rmate[r];\
-    \ }\n std::vector<std::array<int, 2>> edges() const { return es; }\n std::vector<std::array<int,\
-    \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
-    \ l= 0, n= lmate.size(); l < n; ++l)\n   if (int r= lmate[l]; r != -1) ret.push_back({l,\
-    \ r});\n  return ret;\n }\n bool used_as_vertex_cover_left(int l) const { return\
-    \ rt[l] == -1; }\n bool used_as_vertex_cover_right(int r) const { return r= rmate[r],\
-    \ r != -1 && rt[r] != -1; }\n};\n"
+    \ }\n std::vector<std::array<int, 2>> max_matching() const {\n  std::vector<std::array<int,\
+    \ 2>> ret;\n  for (int l= 0, n= lmate.size(); l < n; ++l)\n   if (int r= lmate[l];\
+    \ r != -1) ret.push_back({l, r});\n  return ret;\n }\n bool used_as_vertex_cover_left(int\
+    \ l) const { return rt[l] == -1; }\n bool used_as_vertex_cover_right(int r) const\
+    \ { return r= rmate[r], r != -1 && rt[r] != -1; }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <array>\n#include <algorithm>\n\
     #include <cassert>\nclass BipartiteMatching {\n std::vector<std::array<int, 2>>\
     \ es;\n std::vector<int> lmate, rmate, rt;\npublic:\n BipartiteMatching() {}\n\
@@ -86,17 +85,16 @@ data:
     \ inline size_t left_size() const { return lmate.size(); }\n inline size_t right_size()\
     \ const { return rmate.size(); }\n inline int l_to_r(int l) const { return lmate[l];\
     \ }\n inline int r_to_l(int r) const { return rmate[r]; }\n std::vector<std::array<int,\
-    \ 2>> edges() const { return es; }\n std::vector<std::array<int, 2>> max_matching()\
-    \ const {\n  std::vector<std::array<int, 2>> ret;\n  for (int l= 0, n= lmate.size();\
-    \ l < n; ++l)\n   if (int r= lmate[l]; r != -1) ret.push_back({l, r});\n  return\
-    \ ret;\n }\n bool used_as_vertex_cover_left(int l) const { return rt[l] == -1;\
-    \ }\n bool used_as_vertex_cover_right(int r) const { return r= rmate[r], r !=\
-    \ -1 && rt[r] != -1; }\n};"
+    \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
+    \ l= 0, n= lmate.size(); l < n; ++l)\n   if (int r= lmate[l]; r != -1) ret.push_back({l,\
+    \ r});\n  return ret;\n }\n bool used_as_vertex_cover_left(int l) const { return\
+    \ rt[l] == -1; }\n bool used_as_vertex_cover_right(int r) const { return r= rmate[r],\
+    \ r != -1 && rt[r] != -1; }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Graph/BipartiteMatching.hpp
   requiredBy: []
-  timestamp: '2023-03-10 17:02:52+09:00'
+  timestamp: '2023-03-16 02:01:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/bipartitematching.test.cpp

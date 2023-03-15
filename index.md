@@ -200,7 +200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/LinearSystemIncidence.hpp
       title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/Matching.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
@@ -355,9 +355,6 @@ data:
   - name: src/Optimization
     pages:
     - icon: ':heavy_check_mark:'
-      path: src/Optimization/MatchingWeighted.hpp
-      title: "\u91CD\u307F\u4ED8\u304D\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41"
     - icon: ':heavy_check_mark:'
@@ -367,6 +364,9 @@ data:
       path: src/Optimization/PiecewiseLinearConvexfunction.hpp
       title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"
     - icon: ':heavy_check_mark:'
+      path: src/Optimization/WeightedMatching.hpp
+      title: "\u91CD\u307F\u4ED8\u304D\u30DE\u30C3\u30C1\u30F3\u30B0"
+    - icon: ':question:'
       path: src/Optimization/matroid_intersection.hpp
       title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
     - icon: ':heavy_check_mark:'
@@ -394,14 +394,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
+  - name: test/atcoder
+    pages:
+    - icon: ':warning:'
+      path: test/atcoder/arc080_d.WeightedMatching.cpp
+      title: test/atcoder/arc080_d.WeightedMatching.cpp
   - name: test/yosupo
     pages:
     - icon: ':warning:'
       path: test/yosupo/bipartitematching.bipatite_graph.cpp
       title: test/yosupo/bipartitematching.bipatite_graph.cpp
-    - icon: ':warning:'
-      path: test/yosupo/bipartitematching.matching.cpp
-      title: test/yosupo/bipartitematching.matching.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -537,6 +539,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2423.test.cpp
       title: test/aoj/2423.test.cpp
+    - icon: ':x:'
+      path: test/aoj/2429.matroid_intersection.test.cpp
+      title: test/aoj/2429.matroid_intersection.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2442.test.cpp
       title: test/aoj/2442.test.cpp
@@ -1056,6 +1061,9 @@ data:
       path: test/yosupo/argsort.test.cpp
       title: test/yosupo/argsort.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yosupo/assignment.WeightedMatching.test.cpp
+      title: test/yosupo/assignment.WeightedMatching.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1067,6 +1075,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/binomial_coefficient.test.cpp
       title: test/yosupo/binomial_coefficient.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/bipartitematching.matching.test.cpp
+      title: test/yosupo/bipartitematching.matching.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
@@ -1142,7 +1153,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/general_matching.test.cpp
       title: test/yosupo/general_matching.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1513,6 +1524,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/502.test.cpp
       title: test/yukicoder/502.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/519.test.cpp
+      title: test/yukicoder/519.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/529.LCT.test.cpp
       title: test/yukicoder/529.LCT.test.cpp

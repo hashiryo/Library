@@ -11,12 +11,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/general_weighted_matching
+    PROBLEM: https://judge.yosupo.jp/problem/assignment
     links:
-    - https://judge.yosupo.jp/problem/general_weighted_matching
-  bundledCode: "#line 1 \"test/yosupo/general_weighted_matching.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/general_weighted_matching\"\n#include\
-    \ <iostream>\n#include <vector>\n#line 2 \"src/Optimization/WeightedMatching.hpp\"\
+    - https://judge.yosupo.jp/problem/assignment
+  bundledCode: "#line 1 \"test/yosupo/assignment.WeightedMatching.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n// \u3000\u4E8C\u90E8\
+    \u30B0\u30E9\u30D5\n#include <iostream>\n#include <vector>\n#line 2 \"src/Optimization/WeightedMatching.hpp\"\
     \n#include <limits>\n#include <iterator>\n#line 5 \"src/Optimization/WeightedMatching.hpp\"\
     \n#include <queue>\n#include <algorithm>\ntemplate <class cost_t, bool min_perfect=\
     \ false> class WeightedMatching {\n static constexpr cost_t INF= std::numeric_limits<cost_t>::max()\
@@ -109,33 +109,35 @@ data:
     \ 0; i < n; ++i)\n    if (int16_t j= match(i); i < j) ret.push_back(E{i, j, adj[i][j]});\n\
     \   if (2 * int(ret.size()) != n) return {};  // no solution\n  } else\n   for\
     \ (int16_t i= 0; i < n; ++i)\n    if (int16_t j= match(i); i < j) ret.push_back(E{i,\
-    \ j, adj[i][j]});\n  return ret;\n }\n};\n#line 5 \"test/yosupo/general_weighted_matching.test.cpp\"\
-    \nusing namespace std;\nint main() {\n int n, m;\n cin >> n >> m;\n WeightedMatching<long\
-    \ long> graph(n);\n for (int i= 0; i < m; i++) {\n  int u, v, w;\n  cin >> u >>\
-    \ v >> w;\n  graph.add_edge(u, v, w);\n }\n graph.build();\n auto ans= graph.weight_matching();\n\
-    \ long long sum= 0;\n for (auto [u, v, w]: ans) sum+= w;\n cout << ans.size()\
-    \ << \" \" << sum << '\\n';\n for (int i= 0; i < n; i++)\n  if (int j= graph.match(i);\
-    \ i < j) cout << i << \" \" << j << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/general_weighted_matching\"\
-    \n#include <iostream>\n#include <vector>\n#include \"src/Optimization/WeightedMatching.hpp\"\
-    \nusing namespace std;\nint main() {\n int n, m;\n cin >> n >> m;\n WeightedMatching<long\
-    \ long> graph(n);\n for (int i= 0; i < m; i++) {\n  int u, v, w;\n  cin >> u >>\
-    \ v >> w;\n  graph.add_edge(u, v, w);\n }\n graph.build();\n auto ans= graph.weight_matching();\n\
-    \ long long sum= 0;\n for (auto [u, v, w]: ans) sum+= w;\n cout << ans.size()\
-    \ << \" \" << sum << '\\n';\n for (int i= 0; i < n; i++)\n  if (int j= graph.match(i);\
-    \ i < j) cout << i << \" \" << j << '\\n';\n return 0;\n}"
+    \ j, adj[i][j]});\n  return ret;\n }\n};\n#line 6 \"test/yosupo/assignment.WeightedMatching.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n WeightedMatching<long long, true> graph(N + N);\n for (int\
+    \ i= 0; i < N; ++i)\n  for (int j= 0; j < N; ++j) {\n   long long a;\n   cin >>\
+    \ a;\n   graph.add_edge(i, N + j, a);\n  }\n graph.build();\n long long ans= 0;\n\
+    \ for (auto [u, v, w]: graph.weight_matching()) ans+= w;\n cout << ans << '\\\
+    n';\n for (int i= 0; i < N; ++i) cout << graph.match(i) - N << \" \\n\"[i == N\
+    \ - 1];\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n// \u3000\
+    \u4E8C\u90E8\u30B0\u30E9\u30D5\n#include <iostream>\n#include <vector>\n#include\
+    \ \"src/Optimization/WeightedMatching.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n WeightedMatching<long\
+    \ long, true> graph(N + N);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j <\
+    \ N; ++j) {\n   long long a;\n   cin >> a;\n   graph.add_edge(i, N + j, a);\n\
+    \  }\n graph.build();\n long long ans= 0;\n for (auto [u, v, w]: graph.weight_matching())\
+    \ ans+= w;\n cout << ans << '\\n';\n for (int i= 0; i < N; ++i) cout << graph.match(i)\
+    \ - N << \" \\n\"[i == N - 1];\n return 0;\n}"
   dependsOn:
   - src/Optimization/WeightedMatching.hpp
   isVerificationFile: true
-  path: test/yosupo/general_weighted_matching.test.cpp
+  path: test/yosupo/assignment.WeightedMatching.test.cpp
   requiredBy: []
   timestamp: '2023-03-16 02:01:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/general_weighted_matching.test.cpp
+documentation_of: test/yosupo/assignment.WeightedMatching.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/general_weighted_matching.test.cpp
-- /verify/test/yosupo/general_weighted_matching.test.cpp.html
-title: test/yosupo/general_weighted_matching.test.cpp
+- /verify/test/yosupo/assignment.WeightedMatching.test.cpp
+- /verify/test/yosupo/assignment.WeightedMatching.test.cpp.html
+title: test/yosupo/assignment.WeightedMatching.test.cpp
 ---

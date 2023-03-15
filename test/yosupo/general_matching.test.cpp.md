@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/Matching.hpp
     title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/general_matching
@@ -48,22 +48,22 @@ data:
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, M;\n cin >> N >> M;\n Matching graph(N);\n while (M--) {\n  int u, v;\n\
     \  cin >> u >> v;\n  graph.add_edge(u, v);\n }\n graph.build();\n cout << graph.max_matching().size()\
-    \ << endl;\n for (int i= 0; i < N; i++)\n  if (int j= i; i < j) cout << i << \"\
-    \ \" << j << '\\n';\n return 0;\n}\n"
+    \ << '\\n';\n for (int i= 0; i < N; i++)\n  if (int j= graph.match(i); i < j)\
+    \ cout << i << \" \" << j << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/general_matching\"\n#include\
     \ <iostream>\n#include \"src/Graph/Matching.hpp\"\nusing namespace std;\nsigned\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, M;\n cin >> N >>\
     \ M;\n Matching graph(N);\n while (M--) {\n  int u, v;\n  cin >> u >> v;\n  graph.add_edge(u,\
-    \ v);\n }\n graph.build();\n cout << graph.max_matching().size() << endl;\n for\
-    \ (int i= 0; i < N; i++)\n  if (int j= i; i < j) cout << i << \" \" << j << '\\\
-    n';\n return 0;\n}"
+    \ v);\n }\n graph.build();\n cout << graph.max_matching().size() << '\\n';\n for\
+    \ (int i= 0; i < N; i++)\n  if (int j= graph.match(i); i < j) cout << i << \"\
+    \ \" << j << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Graph/Matching.hpp
   isVerificationFile: true
   path: test/yosupo/general_matching.test.cpp
   requiredBy: []
-  timestamp: '2023-03-14 17:54:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-03-16 02:01:56+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/general_matching.test.cpp
 layout: document

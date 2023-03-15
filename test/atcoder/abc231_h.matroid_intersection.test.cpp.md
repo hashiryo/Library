@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/matroid_intersection.hpp
     title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
   _extendedRequiredBy: []
@@ -15,17 +15,17 @@ data:
     links:
     - https://atcoder.jp/contests/abc231/tasks/abc231_h
   bundledCode: "#line 1 \"test/atcoder/abc231_h.matroid_intersection.test.cpp\"\n\
-    #define PROBLEM \"https://atcoder.jp/contests/abc231/tasks/abc231_h\"\n// (\u5206\
-    \u5272 + \u5206\u5272)\n#include <iostream>\n#include <vector>\n#include <numeric>\n\
-    #line 3 \"src/Optimization/matroid_intersection.hpp\"\n#include <algorithm>\n\
-    #include <limits>\n#include <array>\n#include <queue>\n#include <cassert>\ntemplate\
-    \ <typename Matroid1, typename Matroid2> std::vector<int> matroid_intersection(int\
-    \ n, Matroid1 M1, Matroid2 M2) {\n std::vector<int> b(n, false), pre(n), I[2];\n\
-    \ for (int e= 0; e < n; e++) I[0].push_back(e);\n M1.build(I[1]), M2.build(I[1]);\n\
-    \ for (bool converged= false; !converged;) {\n  pre.assign(n, false);\n  std::vector\
-    \ L(1, std::vector<int>());\n  for (int u: I[0])\n   if (M1.oracle(u)) pre[u]=\
-    \ true, L[0].push_back(u);\n  int m= 0;\n  for (; L.back().size(); m+= 2) {\n\
-    \   L.push_back({});\n   for (int e: L[m]) {\n    if (converged= M2.oracle(e))\
+    #define PROBLEM \"https://atcoder.jp/contests/abc231/tasks/abc231_h\"\n// \u91CD\
+    \u307F\u4ED8\u304D\n// (\u5206\u5272 + \u5206\u5272)\n#include <iostream>\n#include\
+    \ <vector>\n#include <numeric>\n#line 3 \"src/Optimization/matroid_intersection.hpp\"\
+    \n#include <algorithm>\n#include <limits>\n#include <array>\n#include <queue>\n\
+    #include <cassert>\ntemplate <typename Matroid1, typename Matroid2> std::vector<int>\
+    \ matroid_intersection(int n, Matroid1 M1, Matroid2 M2) {\n std::vector<int> b(n,\
+    \ false), pre(n), I[2];\n for (int e= 0; e < n; e++) I[0].push_back(e);\n M1.build(I[1]),\
+    \ M2.build(I[1]);\n for (bool converged= false; !converged;) {\n  pre.assign(n,\
+    \ false);\n  std::vector L(1, std::vector<int>());\n  for (int u: I[0])\n   if\
+    \ (M1.oracle(u)) pre[u]= true, L[0].push_back(u);\n  int m= 0;\n  for (; L.back().size();\
+    \ m+= 2) {\n   L.push_back({});\n   for (int e: L[m]) {\n    if (converged= M2.oracle(e))\
     \ break;\n    for (int f: I[1])\n     if (!pre[f] && M2.oracle(f, e)) L[m + 1].push_back(f),\
     \ pre[f]= true;\n   }\n   if (converged) break;\n   L.push_back({});\n   for (int\
     \ e: L[m + 1])\n    for (int f: I[0])\n     if (!pre[f] && M1.oracle(e, f)) L[m\
@@ -87,7 +87,7 @@ data:
     \ i;\n }\n void build(const std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n\
     \   if (belong[e] != -1) cnt[belong[e]]--;\n }\n inline bool oracle(int e) const\
     \ { return belong[e] == -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e,\
-    \ int f) const { return oracle(f) || belong[e] == belong[f]; }\n};\n#line 7 \"\
+    \ int f) const { return oracle(f) || belong[e] == belong[f]; }\n};\n#line 8 \"\
     test/atcoder/abc231_h.matroid_intersection.test.cpp\"\nusing namespace std;\n\
     int main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int H, W, N;\n cin\
     \ >> H >> W >> N;\n vector<long long> C(N);\n vector<vector<int>> parts1(H), parts2(W);\n\
@@ -99,12 +99,12 @@ data:
     \ for (int e: S[i]) sum+= C[e];\n  if (s < sum) s= sum;\n }\n cout << accumulate(C.begin(),\
     \ C.end(), 0ll) - s << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc231/tasks/abc231_h\"\n//\
-    \ (\u5206\u5272 + \u5206\u5272)\n#include <iostream>\n#include <vector>\n#include\
-    \ <numeric>\n#include \"src/Optimization/matroid_intersection.hpp\"\nusing namespace\
-    \ std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int H, W,\
-    \ N;\n cin >> H >> W >> N;\n vector<long long> C(N);\n vector<vector<int>> parts1(H),\
-    \ parts2(W);\n vector<int> sz1(H, -1), sz2(W, -1);\n for (int i= 0; i < N; i++)\
-    \ {\n  int A, B;\n  cin >> A >> B >> C[i], A--, B--;\n  parts1[A].push_back(i);\n\
+    \ \u91CD\u307F\u4ED8\u304D\n// (\u5206\u5272 + \u5206\u5272)\n#include <iostream>\n\
+    #include <vector>\n#include <numeric>\n#include \"src/Optimization/matroid_intersection.hpp\"\
+    \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int H, W, N;\n cin >> H >> W >> N;\n vector<long long> C(N);\n vector<vector<int>>\
+    \ parts1(H), parts2(W);\n vector<int> sz1(H, -1), sz2(W, -1);\n for (int i= 0;\
+    \ i < N; i++) {\n  int A, B;\n  cin >> A >> B >> C[i], A--, B--;\n  parts1[A].push_back(i);\n\
     \  parts2[B].push_back(i);\n  sz1[A]++, sz2[B]++;\n }\n PartitionMatroid M1(N,\
     \ parts1, sz1), M2(N, parts2, sz2);\n auto S= weighted_matroid_intersection<+1>(N,\
     \ M1, M2, C);\n long long s= 0;\n for (int i= 1, ed= S.size(); i < ed; i++) {\n\
@@ -115,7 +115,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc231_h.matroid_intersection.test.cpp
   requiredBy: []
-  timestamp: '2023-03-14 02:51:35+09:00'
+  timestamp: '2023-03-16 02:01:56+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc231_h.matroid_intersection.test.cpp

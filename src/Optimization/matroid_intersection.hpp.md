@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1605.matroid_intersection.test.cpp
     title: test/aoj/1605.matroid_intersection.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2429.matroid_intersection.test.cpp
+    title: test/aoj/2429.matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.matroid_intersection.test.cpp
     title: test/aoj/GRL_2_B.matroid_intersection.test.cpp
@@ -21,9 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/421.matroid_intersection.test.cpp
     title: test/yukicoder/421.matroid_intersection.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/matroid_intersection.hpp\"\n#include <vector>\n\
@@ -173,11 +176,12 @@ data:
   path: src/Optimization/matroid_intersection.hpp
   requiredBy: []
   timestamp: '2023-03-14 02:51:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/GRL_2_B.matroid_intersection.test.cpp
   - test/aoj/1605.matroid_intersection.test.cpp
   - test/aoj/1163.matroid_intersection.test.cpp
+  - test/aoj/2429.matroid_intersection.test.cpp
   - test/aoj/GRL_7_A.matroid_intersection.test.cpp
   - test/yukicoder/421.matroid_intersection.test.cpp
   - test/atcoder/abc231_h.matroid_intersection.test.cpp
@@ -185,11 +189,23 @@ documentation_of: src/Optimization/matroid_intersection.hpp
 layout: document
 title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
 ---
- -  unweighted: return 要素数最大の共通独立集合
- -  weighted: return { 要素数 = k の共通独立集合のうち重みが最大(最小)のもの }
+
+## 重みなし
+
+| 関数名                          | 概要                                                                                | 計算量                                                                                                                          |
+| ------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `matroid_intersection(n,M1,M2)` | (引数) `n` : 台集合のサイズ, `M1`・`M2` : マトロイド <br> (返り値) 最大共通独立集合 | $\mathcal{O}(nr^{1.5}\tau)$ <br> $n$は台集合のサイズ, $r$は最大共通独立集合のサイズ, $\tau$は独立性オラクル呼び出しにかかる時間 |
+
+## 重みあり
+| 関数名                                          | 概要                                                                                                                                                                                                  | 計算量                                                                                                                      |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `weighted_matroid_intersection<sgn>(n,M1,M2,w)` | (引数) `n` : 台集合のサイズ, `M1`・`M2` : マトロイド, `w` : 重み <br> (返り値) 共通独立集合の集合 ( k番目の集合は 要素数 = k かつ 重みが最大(最小)のもの )　<br> template引数が正なら最大, 負なら最小 | $\mathcal{O}(n^2r\tau)$ <br> $n$は台集合のサイズ, $r$は最大共通独立集合のサイズ, $\tau$は独立性オラクル呼び出しにかかる時間 |
+
 
 ## 参考
+[https://hitonanode.github.io/cplib-cpp/combinatorial_opt/matroid_intersection.hpp](https://hitonanode.github.io/cplib-cpp/combinatorial_opt/matroid_intersection.hpp) \
 William H. Cunningham. Improved bounds for matroid partition and intersection algorithms. SIAMJournal on Computing (SICOMP), 15(4):948–957, 1986.
 ## 問題例
 [AtCoder Library Practice Contest E - MinCostFlow](https://atcoder.jp/contests/practice2/tasks/practice2_e) (分割+分割) \
-[beecrowd | 2128 Demonstration of Honesty!](https://www.beecrowd.com.br/judge/en/problems/view/2128) (グラフ+分割)
+[beecrowd | 2128 Demonstration of Honesty!](https://www.beecrowd.com.br/judge/en/problems/view/2128) (グラフ+分割) \
+[幾何コンテスト2013 B - 玉座の間](https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b) (重み二部マッチング, 重みが実数)
