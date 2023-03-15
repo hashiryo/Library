@@ -11,14 +11,16 @@ data:
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
     links:
     - https://judge.yosupo.jp/problem/bipartitematching
-  bundledCode: "#line 1 \"test/yosupo/bipartitematching.bipatite_graph.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include <iostream>\n\
-    #line 2 \"src/Graph/BipartiteGraph.hpp\"\n#include <array>\n#include <algorithm>\n\
-    #include <numeric>\n#include <cassert>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\
+  bundledCode: "#line 1 \"test/yosupo/bipartitematching.bipatite_graph.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n#include\
+    \ <iostream>\n#line 2 \"src/Graph/BipartiteGraph.hpp\"\n#include <array>\n#include\
+    \ <algorithm>\n#include <numeric>\n#include <cassert>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\
     \n#include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange\
     \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
     \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
@@ -89,7 +91,7 @@ data:
     \ col[v], s= sel[k= blg[v]]; s == -1)\n    for (sel[que[0]= k]= s= !c, i= 0, t=\
     \ 1; i < t; ++i)\n     for (int u: dag_[c][que[i]])\n      if (sel[u] == -1) sel[u]=\
     \ s, que[t++]= u;\n   if (c ^ s) ret.push_back(v);\n  }\n  return ret;\n }\n};\n\
-    #line 4 \"test/yosupo/bipartitematching.bipatite_graph.cpp\"\nusing namespace\
+    #line 4 \"test/yosupo/bipartitematching.bipatite_graph.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n\
     \ cin >> L >> R >> M;\n BipartiteGraph graph(L + R);\n while (M--) {\n  int a,\
     \ b;\n  cin >> a >> b;\n  graph.add_edge(a, L + b);\n }\n graph.build();\n cout\
@@ -107,16 +109,16 @@ data:
   dependsOn:
   - src/Graph/BipartiteGraph.hpp
   - src/DataStructure/CsrArray.hpp
-  isVerificationFile: false
-  path: test/yosupo/bipartitematching.bipatite_graph.cpp
+  isVerificationFile: true
+  path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   requiredBy: []
-  timestamp: '2023-03-14 17:54:07+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2023-03-16 03:16:31+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/bipartitematching.bipatite_graph.cpp
+documentation_of: test/yosupo/bipartitematching.bipatite_graph.test.cpp
 layout: document
 redirect_from:
-- /library/test/yosupo/bipartitematching.bipatite_graph.cpp
-- /library/test/yosupo/bipartitematching.bipatite_graph.cpp.html
-title: test/yosupo/bipartitematching.bipatite_graph.cpp
+- /verify/test/yosupo/bipartitematching.bipatite_graph.test.cpp
+- /verify/test/yosupo/bipartitematching.bipatite_graph.test.cpp.html
+title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
 ---

@@ -14,9 +14,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
-  - icon: ':warning:'
-    path: test/yosupo/bipartitematching.bipatite_graph.cpp
-    title: test/yosupo/bipartitematching.bipatite_graph.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
@@ -27,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
+    title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
@@ -76,24 +76,24 @@ data:
   isVerificationFile: false
   path: src/DataStructure/CsrArray.hpp
   requiredBy:
-  - test/yosupo/bipartitematching.bipatite_graph.cpp
-  - src/Math/TwoSatisfiability.hpp
-  - src/Graph/DulmageMendelsohn.hpp
-  - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/BipartiteGraph.hpp
+  - src/Graph/StronglyConnectedComponents.hpp
+  - src/Graph/DulmageMendelsohn.hpp
+  - src/Math/TwoSatisfiability.hpp
   timestamp: '2023-03-07 14:46:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/two_sat.test.cpp
   - test/yosupo/scc.test.cpp
+  - test/yosupo/bipartitematching.bipatite_graph.test.cpp
+  - test/yosupo/two_sat.test.cpp
   - test/aoj/3168.bm.test.cpp
   - test/aoj/0366.test.cpp
-  - test/yukicoder/1813.test.cpp
-  - test/yukicoder/1744.test.cpp
+  - test/atcoder/abc223_g.dm.test.cpp
   - test/yukicoder/1170.test.cpp
+  - test/yukicoder/1744.test.cpp
+  - test/yukicoder/1813.test.cpp
   - test/yukicoder/1293.scc.test.cpp
   - test/yukicoder/1745.test.cpp
-  - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/DataStructure/CsrArray.hpp
 layout: document
 title: "CSR\u5F62\u5F0F"

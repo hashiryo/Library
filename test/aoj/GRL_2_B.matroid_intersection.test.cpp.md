@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/matroid_intersection.hpp
     title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
   _extendedRequiredBy: []

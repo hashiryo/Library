@@ -76,8 +76,8 @@ data:
   timestamp: '2023-01-21 20:28:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/line_add_get_min.test.cpp
   - test/yosupo/segment_add_get_min.test.cpp
+  - test/yosupo/line_add_get_min.test.cpp
 documentation_of: src/DataStructure/LiChaoTree.hpp
 layout: document
 title: Li-Chao-Tree

@@ -81,8 +81,8 @@ data:
   timestamp: '2023-03-14 17:54:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/general_matching.test.cpp
   - test/yosupo/bipartitematching.matching.test.cpp
+  - test/yosupo/general_matching.test.cpp
   - test/aoj/3032.test.cpp
 documentation_of: src/Graph/Matching.hpp
 layout: document

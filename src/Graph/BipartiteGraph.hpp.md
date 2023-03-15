@@ -4,10 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/yosupo/bipartitematching.bipatite_graph.cpp
-    title: test/yosupo/bipartitematching.bipatite_graph.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
@@ -15,6 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
+    title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -159,11 +159,11 @@ data:
   - src/DataStructure/CsrArray.hpp
   isVerificationFile: false
   path: src/Graph/BipartiteGraph.hpp
-  requiredBy:
-  - test/yosupo/bipartitematching.bipatite_graph.cpp
+  requiredBy: []
   timestamp: '2023-03-10 17:02:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - test/aoj/3168.bm.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
 documentation_of: src/Graph/BipartiteGraph.hpp

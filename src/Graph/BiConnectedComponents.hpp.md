@@ -125,8 +125,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/biconnected_components.test.cpp
-  - test/aoj/GRL_3_A.test.cpp
   - test/aoj/3022.test.cpp
+  - test/aoj/GRL_3_A.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
 documentation_of: src/Graph/BiConnectedComponents.hpp

@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/atcoder/arc080_d.WeightedMatching.cpp
-    title: test/atcoder/arc080_d.WeightedMatching.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.WeightedMatching.test.cpp
@@ -210,8 +207,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/Optimization/WeightedMatching.hpp
-  requiredBy:
-  - test/atcoder/arc080_d.WeightedMatching.cpp
+  requiredBy: []
   timestamp: '2023-03-16 02:01:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

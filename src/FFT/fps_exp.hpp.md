@@ -471,17 +471,17 @@ data:
   timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/stirling_2.test.cpp
   - test/yosupo/partition.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
   - test/yukicoder/1080.test.cpp
-  - test/yukicoder/1145.test.cpp
   - test/yukicoder/963.test.cpp
+  - test/yukicoder/1145.test.cpp
 documentation_of: src/FFT/fps_exp.hpp
 layout: document
 title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
