@@ -18,10 +18,10 @@ data:
     \ \"https://judge.yosupo.jp/problem/min_cost_b_flow\"\n#include <iostream>\n#include\
     \ <vector>\n#line 3 \"src/Optimization/MinCostFlow.hpp\"\n#include <algorithm>\n\
     #include <numeric>\n#include <cmath>\n#include <cassert>\ntemplate <typename flow_t,\
-    \ typename cost_t, std::int_least8_t obj= 1> class NetworkSimplex {\n struct Node\
-    \ {\n  int par, pred;\n  flow_t sup;\n  cost_t pi;\n };\n struct Edge {\n  int\
-    \ u, v;\n  flow_t low, up, flow;\n  cost_t cost;\n  std::int_least8_t state= 1;\n\
-    \ };\n int n, m= 0;\n std::vector<Node> ns;\n std::vector<Edge> es;\n std::vector<int>\
+    \ typename cost_t, int_least8_t obj= 1> class NetworkSimplex {\n struct Node {\n\
+    \  int par, pred;\n  flow_t sup;\n  cost_t pi;\n };\n struct Edge {\n  int u,\
+    \ v;\n  flow_t low, up, flow;\n  cost_t cost;\n  int_least8_t state= 1;\n };\n\
+    \ int n, m= 0;\n std::vector<Node> ns;\n std::vector<Edge> es;\n std::vector<int>\
     \ bfs, next, prev;\n inline void link(int u, int v) { next[u]= v, prev[v]= u;\
     \ }\n inline void link(int u, int v, int w) { link(u, v), link(v, w); }\n inline\
     \ auto opp_cost(int e) const { return es[e].cost + ns[es[e].u].pi - ns[es[e].v].pi;\
@@ -87,8 +87,8 @@ data:
     \ u < n; u++) sum_supply+= ns[u].sup;\n  if (sum_supply != 0) return false;\n\
     \  calc();\n  for (int e= m; e < m + n; e++)\n   if (es[e].flow != 0) return es.resize(m),\
     \ false;\n  return es.resize(m), true;\n }\n};\n\ntemplate <template <class, class,\
-    \ std::int_least8_t> class FlowAlgo, typename flow_t, typename cost_t> using MinCostFlow=\
-    \ FlowAlgo<flow_t, cost_t, 1>;\ntemplate <template <class, class, std::int_least8_t>\
+    \ int_least8_t> class FlowAlgo, typename flow_t, typename cost_t> using MinCostFlow=\
+    \ FlowAlgo<flow_t, cost_t, 1>;\ntemplate <template <class, class, int_least8_t>\
     \ class FlowAlgo, typename flow_t, typename cost_t> using MaxGainFlow= FlowAlgo<flow_t,\
     \ cost_t, -1>;\n#line 5 \"test/yosupo/min_cost_b_flow.test.cpp\"\nusing namespace\
     \ std;\nostream &operator<<(ostream &stream, const __int128_t &v) {\n if (v ==\
@@ -124,7 +124,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/min_cost_b_flow.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:27:17+09:00'
+  timestamp: '2023-03-16 12:34:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/min_cost_b_flow.test.cpp

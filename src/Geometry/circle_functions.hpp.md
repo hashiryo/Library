@@ -394,17 +394,17 @@ data:
   timestamp: '2021-02-02 14:03:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/1132.test.cpp
-  - test/aoj/CGL_7_B.test.cpp
-  - test/aoj/CGL_7_A.test.cpp
+  - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp
   - test/aoj/2514.test.cpp
-  - test/aoj/CGL_7_G.test.cpp
-  - test/aoj/CGL_7_H.test.cpp
   - test/aoj/2201.test.cpp
-  - test/aoj/2423.test.cpp
-  - test/aoj/CGL_7_I.test.cpp
   - test/aoj/CGL_7_C.test.cpp
+  - test/aoj/CGL_7_G.test.cpp
+  - test/aoj/1132.test.cpp
+  - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/CGL_7_A.test.cpp
+  - test/aoj/CGL_7_I.test.cpp
+  - test/aoj/CGL_7_B.test.cpp
 documentation_of: src/Geometry/circle_functions.hpp
 layout: document
 redirect_from:

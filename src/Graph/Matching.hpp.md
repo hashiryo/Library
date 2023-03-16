@@ -81,8 +81,8 @@ data:
   timestamp: '2023-03-14 17:54:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/bipartitematching.matching.test.cpp
   - test/yosupo/general_matching.test.cpp
+  - test/yosupo/bipartitematching.matching.test.cpp
   - test/aoj/3032.test.cpp
 documentation_of: src/Graph/Matching.hpp
 layout: document
@@ -101,4 +101,4 @@ GabowのEdmonds' Algorithm
 
 
 ## 問題例
-[Chokudai SpeedRun 002 K - 種類数 β](https://atcoder.jp/contests/chokudai_S002/tasks/chokudai_S002_k) (二部マッチング, 頂点:2e5+4e5, 辺:4e5) \
+[Chokudai SpeedRun 002 K - 種類数 β](https://atcoder.jp/contests/chokudai_S002/tasks/chokudai_S002_k) (二部マッチング, 頂点:2e5+4e5, 辺:4e5) 

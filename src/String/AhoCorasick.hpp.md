@@ -102,8 +102,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2212.test.cpp
-  - test/aoj/2257.test.cpp
   - test/aoj/2863.test.cpp
+  - test/aoj/2257.test.cpp
   - test/yukicoder/1269.test.cpp
   - test/yukicoder/430.AhoCora.test.cpp
 documentation_of: src/String/AhoCorasick.hpp

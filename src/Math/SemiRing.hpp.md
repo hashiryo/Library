@@ -92,8 +92,8 @@ data:
   timestamp: '2023-01-21 20:28:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc236_g.test.cpp
   - test/yukicoder/1340.test.cpp
+  - test/atcoder/abc236_g.test.cpp
 documentation_of: src/Math/SemiRing.hpp
 layout: document
 title: "\u534A\u74B0"

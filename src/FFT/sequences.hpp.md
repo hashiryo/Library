@@ -520,10 +520,10 @@ data:
   timestamp: '2023-02-07 17:34:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/stirling_2.test.cpp
   - test/yosupo/partition.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/stirling_1.test.cpp
   - test/yukicoder/963.test.cpp
 documentation_of: src/FFT/sequences.hpp
 layout: document
