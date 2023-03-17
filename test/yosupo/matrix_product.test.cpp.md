@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_product
@@ -196,15 +196,15 @@ data:
     \ return dat[n];\n}\n#line 5 \"test/yosupo/matrix_product.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
     \ ModInt<998244353>;\n int N, M, K;\n cin >> N >> M >> K;\n Matrix<Mint> A(N,\
-    \ M), B(M, K);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < M; +j) cin >>\
-    \ A[i][j];\n for (int i= 0; i < M; ++i)\n  for (int j= 0; j < K; ++j) cin >> B[i][j];\n\
-    \ auto C= A * B;\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < K; ++j) cout\
-    \ << C[i][j] << \" \\n\"[j == K - 1];\n return 0;\n}\n"
+    \ M), B(M, K);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < M; ++j) cin\
+    \ >> A[i][j];\n for (int i= 0; i < M; ++i)\n  for (int j= 0; j < K; ++j) cin >>\
+    \ B[i][j];\n auto C= A * B;\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j <\
+    \ K; ++j) cout << C[i][j] << \" \\n\"[j == K - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\n#include\
     \ <iostream>\n#include \"src/LinearAlgebra/Matrix.hpp\"\n#include \"src/Math/ModInt.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n int N, M, K;\n cin >> N >> M >> K;\n Matrix<Mint>\
-    \ A(N, M), B(M, K);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < M; +j)\
+    \ A(N, M), B(M, K);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < M; ++j)\
     \ cin >> A[i][j];\n for (int i= 0; i < M; ++i)\n  for (int j= 0; j < K; ++j) cin\
     \ >> B[i][j];\n auto C= A * B;\n for (int i= 0; i < N; ++i)\n  for (int j= 0;\
     \ j < K; ++j) cout << C[i][j] << \" \\n\"[j == K - 1];\n return 0;\n}"
@@ -217,8 +217,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_product.test.cpp
   requiredBy: []
-  timestamp: '2023-03-17 18:15:59+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-03-17 18:36:42+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/matrix_product.test.cpp
 layout: document
