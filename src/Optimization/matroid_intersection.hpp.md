@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/421.matroid_intersection.test.cpp
     title: test/yukicoder/421.matroid_intersection.test.cpp
   - icon: ':x:'
@@ -80,26 +80,27 @@ data:
     \ }\n return ret;\n}\nclass GraphicMatroid {\n int n;\n std::vector<std::array<int,\
     \ 2>> es;\n std::vector<int> g, pos, comp, in, out;\n inline bool is_ancestor(int\
     \ u, int v) const { return in[u] <= in[v] && in[v] < out[u]; }\npublic:\n GraphicMatroid(int\
-    \ n_): n(n_), comp(n), in(n), out(n) {}\n void add_edge(int u, int v) { es.push_back({u,\
-    \ v}); }\n void build(const std::vector<int> &I) {\n  in.assign(n, -1), g.resize(I.size()\
-    \ * 2), pos.assign(n + 1, 0);\n  for (int e: I) {\n   auto [u, v]= es[e];\n  \
-    \ ++pos[u], ++pos[v];\n  }\n  for (int i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n\
-    \  for (int e: I) {\n   auto [u, v]= es[e];\n   g[--pos[u]]= v, g[--pos[v]]= u;\n\
-    \  }\n  std::vector<int> ei(pos.begin(), pos.begin() + n), pre(n, -1);\n  for\
-    \ (int u= 0, t= 0, p; u < n; u++)\n   if (in[u] == -1)\n    for (in [comp[u]=\
-    \ p= u]= t++; p >= 0;) {\n     if (ei[p] == pos[p + 1]) out[p]= t, p= pre[p];\n\
-    \     else if (int v= g[ei[p]++]; in[v] == -1) comp[v]= comp[u], pre[v]= p, in[p=\
-    \ v]= t++;\n    }\n }\n inline bool oracle(int e) const { return comp[es[e][0]]\
-    \ != comp[es[e][1]]; }\n inline bool oracle(int e, int f) const {\n  if (oracle(f))\
-    \ return true;\n  return e= es[e][in[es[e][0]] < in[es[e][1]]], is_ancestor(e,\
-    \ es[f][0]) != is_ancestor(e, es[f][1]);\n }\n};\nstruct PartitionMatroid {\n\
-    \ std::vector<int> belong, R, cnt;\n PartitionMatroid(int m_, const std::vector<std::vector<int>>\
-    \ &parts, const std::vector<int> &R_): belong(m_, -1), R(R_) {\n  assert(parts.size()\
-    \ == R.size());\n  for (int i= parts.size(); i--;)\n   for (int e: parts[i]) belong[e]=\
-    \ i;\n }\n void build(const std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n\
-    \   if (belong[e] != -1) cnt[belong[e]]--;\n }\n inline bool oracle(int e) const\
-    \ { return belong[e] == -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e,\
-    \ int f) const { return oracle(f) || belong[e] == belong[f]; }\n};\n"
+    \ n_): n(n_), comp(n), in(n), out(n) {}\n int add_edge(int u, int v) { return\
+    \ es.push_back({u, v}), es.size() - 1; }\n void build(const std::vector<int> &I)\
+    \ {\n  in.assign(n, -1), g.resize(I.size() * 2), pos.assign(n + 1, 0);\n  for\
+    \ (int e: I) {\n   auto [u, v]= es[e];\n   ++pos[u], ++pos[v];\n  }\n  for (int\
+    \ i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n  for (int e: I) {\n   auto [u, v]=\
+    \ es[e];\n   g[--pos[u]]= v, g[--pos[v]]= u;\n  }\n  std::vector<int> ei(pos.begin(),\
+    \ pos.begin() + n), pre(n, -1);\n  for (int u= 0, t= 0, p; u < n; u++)\n   if\
+    \ (in[u] == -1)\n    for (in [comp[u]= p= u]= t++; p >= 0;) {\n     if (ei[p]\
+    \ == pos[p + 1]) out[p]= t, p= pre[p];\n     else if (int v= g[ei[p]++]; in[v]\
+    \ == -1) comp[v]= comp[u], pre[v]= p, in[p= v]= t++;\n    }\n }\n inline bool\
+    \ oracle(int e) const { return comp[es[e][0]] != comp[es[e][1]]; }\n inline bool\
+    \ oracle(int e, int f) const {\n  if (oracle(f)) return true;\n  return e= es[e][in[es[e][0]]\
+    \ < in[es[e][1]]], is_ancestor(e, es[f][0]) != is_ancestor(e, es[f][1]);\n }\n\
+    };\nstruct PartitionMatroid {\n std::vector<int> belong, R, cnt;\n PartitionMatroid(int\
+    \ m_, const std::vector<std::vector<int>> &parts, const std::vector<int> &R_):\
+    \ belong(m_, -1), R(R_) {\n  assert(parts.size() == R.size());\n  for (int i=\
+    \ parts.size(); i--;)\n   for (int e: parts[i]) belong[e]= i;\n }\n void build(const\
+    \ std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n   if (belong[e] != -1)\
+    \ cnt[belong[e]]--;\n }\n inline bool oracle(int e) const { return belong[e] ==\
+    \ -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e, int f) const { return\
+    \ oracle(f) || belong[e] == belong[f]; }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <limits>\n\
     #include <array>\n#include <queue>\n#include <cassert>\ntemplate <typename Matroid1,\
     \ typename Matroid2> std::vector<int> matroid_intersection(int n, Matroid1 M1,\
@@ -151,40 +152,41 @@ data:
     \ }\n return ret;\n}\nclass GraphicMatroid {\n int n;\n std::vector<std::array<int,\
     \ 2>> es;\n std::vector<int> g, pos, comp, in, out;\n inline bool is_ancestor(int\
     \ u, int v) const { return in[u] <= in[v] && in[v] < out[u]; }\npublic:\n GraphicMatroid(int\
-    \ n_): n(n_), comp(n), in(n), out(n) {}\n void add_edge(int u, int v) { es.push_back({u,\
-    \ v}); }\n void build(const std::vector<int> &I) {\n  in.assign(n, -1), g.resize(I.size()\
-    \ * 2), pos.assign(n + 1, 0);\n  for (int e: I) {\n   auto [u, v]= es[e];\n  \
-    \ ++pos[u], ++pos[v];\n  }\n  for (int i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n\
-    \  for (int e: I) {\n   auto [u, v]= es[e];\n   g[--pos[u]]= v, g[--pos[v]]= u;\n\
-    \  }\n  std::vector<int> ei(pos.begin(), pos.begin() + n), pre(n, -1);\n  for\
-    \ (int u= 0, t= 0, p; u < n; u++)\n   if (in[u] == -1)\n    for (in [comp[u]=\
-    \ p= u]= t++; p >= 0;) {\n     if (ei[p] == pos[p + 1]) out[p]= t, p= pre[p];\n\
-    \     else if (int v= g[ei[p]++]; in[v] == -1) comp[v]= comp[u], pre[v]= p, in[p=\
-    \ v]= t++;\n    }\n }\n inline bool oracle(int e) const { return comp[es[e][0]]\
-    \ != comp[es[e][1]]; }\n inline bool oracle(int e, int f) const {\n  if (oracle(f))\
-    \ return true;\n  return e= es[e][in[es[e][0]] < in[es[e][1]]], is_ancestor(e,\
-    \ es[f][0]) != is_ancestor(e, es[f][1]);\n }\n};\nstruct PartitionMatroid {\n\
-    \ std::vector<int> belong, R, cnt;\n PartitionMatroid(int m_, const std::vector<std::vector<int>>\
-    \ &parts, const std::vector<int> &R_): belong(m_, -1), R(R_) {\n  assert(parts.size()\
-    \ == R.size());\n  for (int i= parts.size(); i--;)\n   for (int e: parts[i]) belong[e]=\
-    \ i;\n }\n void build(const std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n\
-    \   if (belong[e] != -1) cnt[belong[e]]--;\n }\n inline bool oracle(int e) const\
-    \ { return belong[e] == -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e,\
-    \ int f) const { return oracle(f) || belong[e] == belong[f]; }\n};"
+    \ n_): n(n_), comp(n), in(n), out(n) {}\n int add_edge(int u, int v) { return\
+    \ es.push_back({u, v}), es.size() - 1; }\n void build(const std::vector<int> &I)\
+    \ {\n  in.assign(n, -1), g.resize(I.size() * 2), pos.assign(n + 1, 0);\n  for\
+    \ (int e: I) {\n   auto [u, v]= es[e];\n   ++pos[u], ++pos[v];\n  }\n  for (int\
+    \ i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n  for (int e: I) {\n   auto [u, v]=\
+    \ es[e];\n   g[--pos[u]]= v, g[--pos[v]]= u;\n  }\n  std::vector<int> ei(pos.begin(),\
+    \ pos.begin() + n), pre(n, -1);\n  for (int u= 0, t= 0, p; u < n; u++)\n   if\
+    \ (in[u] == -1)\n    for (in [comp[u]= p= u]= t++; p >= 0;) {\n     if (ei[p]\
+    \ == pos[p + 1]) out[p]= t, p= pre[p];\n     else if (int v= g[ei[p]++]; in[v]\
+    \ == -1) comp[v]= comp[u], pre[v]= p, in[p= v]= t++;\n    }\n }\n inline bool\
+    \ oracle(int e) const { return comp[es[e][0]] != comp[es[e][1]]; }\n inline bool\
+    \ oracle(int e, int f) const {\n  if (oracle(f)) return true;\n  return e= es[e][in[es[e][0]]\
+    \ < in[es[e][1]]], is_ancestor(e, es[f][0]) != is_ancestor(e, es[f][1]);\n }\n\
+    };\nstruct PartitionMatroid {\n std::vector<int> belong, R, cnt;\n PartitionMatroid(int\
+    \ m_, const std::vector<std::vector<int>> &parts, const std::vector<int> &R_):\
+    \ belong(m_, -1), R(R_) {\n  assert(parts.size() == R.size());\n  for (int i=\
+    \ parts.size(); i--;)\n   for (int e: parts[i]) belong[e]= i;\n }\n void build(const\
+    \ std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n   if (belong[e] != -1)\
+    \ cnt[belong[e]]--;\n }\n inline bool oracle(int e) const { return belong[e] ==\
+    \ -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e, int f) const { return\
+    \ oracle(f) || belong[e] == belong[f]; }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Optimization/matroid_intersection.hpp
   requiredBy: []
-  timestamp: '2023-03-14 02:51:35+09:00'
+  timestamp: '2023-03-17 18:15:59+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1605.weighted_matroid_intersection.test.cpp
   - test/aoj/1163.matroid_intersection.test.cpp
-  - test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
   - test/aoj/GRL_7_A.matroid_intersection.test.cpp
+  - test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
+  - test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
   - test/yukicoder/421.weighted_matroid_intersection.test.cpp
   - test/yukicoder/421.matroid_intersection.test.cpp
-  - test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
 documentation_of: src/Optimization/matroid_intersection.hpp
 layout: document
 title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
@@ -209,7 +211,12 @@ $n$は台集合のサイズ, $r$は最大共通独立集合のサイズ, $\tau$�
 [https://hitonanode.github.io/cplib-cpp/combinatorial_opt/matroid_intersection.hpp](https://hitonanode.github.io/cplib-cpp/combinatorial_opt/matroid_intersection.hpp) \
 William H. Cunningham. Improved bounds for matroid partition and intersection algorithms. SIAMJournal on Computing (SICOMP), 15(4):948–957, 1986.
 ## 問題例
-[AtCoder Library Practice Contest E - MinCostFlow](https://atcoder.jp/contests/practice2/tasks/practice2_e) (分割+分割, 重み付き) \
 [beecrowd | 2128 Demonstration of Honesty!](https://www.beecrowd.com.br/judge/en/problems/view/2128) (グラフ+分割) \
+[Hello 2020 G. Seollal - Codeforces](https://codeforces.com/contest/1284/problem/G) (グラフ+分割)\
+[2019 Petrozavodsk Winter Camp, Yandex Cup D. Pick Your Own Nim - Codeforces](https://codeforces.com/gym/102156/problem/D) (二値+分割)\
 [幾何コンテスト2013 B - 玉座の間](https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b) (重み二部マッチング, 重みが実数) \
-[ACM-ICPC Japan Alumni Group Summer Camp 2012 Day 2 まるかいて](https://onlinejudge.u-aizu.ac.jp/problems/2429) (重み二部マッチング, |台集合| <= 1e4, 構築, sp judge)
+[ACM-ICPC Japan Alumni Group Summer Camp 2012 Day 2 まるかいて](https://onlinejudge.u-aizu.ac.jp/problems/2429) (重み二部マッチング, |台集合| <= 1e4, 構築, sp judge) \
+[AtCoder Library Practice Contest E - MinCostFlow](https://atcoder.jp/contests/practice2/tasks/practice2_e) (重み付き, 分割+分割) \
+[Deltix Round, Summer 2021 H. DIY Tree - Codeforces](https://codeforces.com/contest/1556/problem/H) (重み付き, グラフ+分割) \
+[NAIPC 2018 G Rainbow Graph](https://www.acmicpc.net/problem/16046)(重み付き, あるマトロイド (グラフマトロイドの双対マトロイドと自由マトロイドの直和?) 同士の交差) \
+[2021 ICPC Asia Taiwan Online Programming Contest I. ICPC Kingdom - Codeforces](https://codeforces.com/gym/103373/problem/I) (重み付き, グラフ+横断)

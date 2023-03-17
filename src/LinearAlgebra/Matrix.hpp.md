@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy:
@@ -42,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/matrix_product.test.cpp
+    title: test/yosupo/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
@@ -60,9 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#line\
@@ -215,24 +218,25 @@ data:
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/LU_Decomposition.hpp
   timestamp: '2023-03-12 23:00:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/matrix_product.test.cpp
+  - test/yosupo/linear_equations.test.cpp
+  - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
-  - test/yosupo/characteristic_polynomial.test.cpp
-  - test/yosupo/linear_equations.test.cpp
-  - test/aoj/2397.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
   - test/aoj/2530.test.cpp
   - test/aoj/1328.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/2397.test.cpp
   - test/aoj/2624.test.cpp
-  - test/yukicoder/650.LCT.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
-  - test/yukicoder/184.test.cpp
-  - test/yukicoder/1750.test.cpp
-  - test/yukicoder/803.test.cpp
-  - test/yukicoder/1340.test.cpp
   - test/atcoder/abc236_g.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
+  - test/yukicoder/803.test.cpp
+  - test/yukicoder/1750.test.cpp
+  - test/yukicoder/184.test.cpp
+  - test/yukicoder/1340.test.cpp
 documentation_of: src/LinearAlgebra/Matrix.hpp
 layout: document
 title: "\u884C\u5217"

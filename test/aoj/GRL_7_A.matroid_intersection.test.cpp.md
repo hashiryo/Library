@@ -68,33 +68,33 @@ data:
     \ }\n return ret;\n}\nclass GraphicMatroid {\n int n;\n std::vector<std::array<int,\
     \ 2>> es;\n std::vector<int> g, pos, comp, in, out;\n inline bool is_ancestor(int\
     \ u, int v) const { return in[u] <= in[v] && in[v] < out[u]; }\npublic:\n GraphicMatroid(int\
-    \ n_): n(n_), comp(n), in(n), out(n) {}\n void add_edge(int u, int v) { es.push_back({u,\
-    \ v}); }\n void build(const std::vector<int> &I) {\n  in.assign(n, -1), g.resize(I.size()\
-    \ * 2), pos.assign(n + 1, 0);\n  for (int e: I) {\n   auto [u, v]= es[e];\n  \
-    \ ++pos[u], ++pos[v];\n  }\n  for (int i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n\
-    \  for (int e: I) {\n   auto [u, v]= es[e];\n   g[--pos[u]]= v, g[--pos[v]]= u;\n\
-    \  }\n  std::vector<int> ei(pos.begin(), pos.begin() + n), pre(n, -1);\n  for\
-    \ (int u= 0, t= 0, p; u < n; u++)\n   if (in[u] == -1)\n    for (in [comp[u]=\
-    \ p= u]= t++; p >= 0;) {\n     if (ei[p] == pos[p + 1]) out[p]= t, p= pre[p];\n\
-    \     else if (int v= g[ei[p]++]; in[v] == -1) comp[v]= comp[u], pre[v]= p, in[p=\
-    \ v]= t++;\n    }\n }\n inline bool oracle(int e) const { return comp[es[e][0]]\
-    \ != comp[es[e][1]]; }\n inline bool oracle(int e, int f) const {\n  if (oracle(f))\
-    \ return true;\n  return e= es[e][in[es[e][0]] < in[es[e][1]]], is_ancestor(e,\
-    \ es[f][0]) != is_ancestor(e, es[f][1]);\n }\n};\nstruct PartitionMatroid {\n\
-    \ std::vector<int> belong, R, cnt;\n PartitionMatroid(int m_, const std::vector<std::vector<int>>\
-    \ &parts, const std::vector<int> &R_): belong(m_, -1), R(R_) {\n  assert(parts.size()\
-    \ == R.size());\n  for (int i= parts.size(); i--;)\n   for (int e: parts[i]) belong[e]=\
-    \ i;\n }\n void build(const std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n\
-    \   if (belong[e] != -1) cnt[belong[e]]--;\n }\n inline bool oracle(int e) const\
-    \ { return belong[e] == -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e,\
-    \ int f) const { return oracle(f) || belong[e] == belong[f]; }\n};\n#line 6 \"\
-    test/aoj/GRL_7_A.matroid_intersection.test.cpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int L, R, M;\n cin >> L\
-    \ >> R >> M;\n vector<vector<int>> partl(L), partr(R);\n for (int i= 0; i < M;\
-    \ i++) {\n  int a, b;\n  cin >> a >> b;\n  partl[a].push_back(i), partr[b].push_back(i);\n\
-    \ }\n PartitionMatroid M1(M, partl, vector<int>(L, 1));\n PartitionMatroid M2(M,\
-    \ partr, vector<int>(R, 1));\n auto S= matroid_intersection(M, M1, M2);\n cout\
-    \ << S.size() << '\\n';\n return 0;\n}\n"
+    \ n_): n(n_), comp(n), in(n), out(n) {}\n int add_edge(int u, int v) { return\
+    \ es.push_back({u, v}), es.size() - 1; }\n void build(const std::vector<int> &I)\
+    \ {\n  in.assign(n, -1), g.resize(I.size() * 2), pos.assign(n + 1, 0);\n  for\
+    \ (int e: I) {\n   auto [u, v]= es[e];\n   ++pos[u], ++pos[v];\n  }\n  for (int\
+    \ i= 0; i < n; ++i) pos[i + 1]+= pos[i];\n  for (int e: I) {\n   auto [u, v]=\
+    \ es[e];\n   g[--pos[u]]= v, g[--pos[v]]= u;\n  }\n  std::vector<int> ei(pos.begin(),\
+    \ pos.begin() + n), pre(n, -1);\n  for (int u= 0, t= 0, p; u < n; u++)\n   if\
+    \ (in[u] == -1)\n    for (in [comp[u]= p= u]= t++; p >= 0;) {\n     if (ei[p]\
+    \ == pos[p + 1]) out[p]= t, p= pre[p];\n     else if (int v= g[ei[p]++]; in[v]\
+    \ == -1) comp[v]= comp[u], pre[v]= p, in[p= v]= t++;\n    }\n }\n inline bool\
+    \ oracle(int e) const { return comp[es[e][0]] != comp[es[e][1]]; }\n inline bool\
+    \ oracle(int e, int f) const {\n  if (oracle(f)) return true;\n  return e= es[e][in[es[e][0]]\
+    \ < in[es[e][1]]], is_ancestor(e, es[f][0]) != is_ancestor(e, es[f][1]);\n }\n\
+    };\nstruct PartitionMatroid {\n std::vector<int> belong, R, cnt;\n PartitionMatroid(int\
+    \ m_, const std::vector<std::vector<int>> &parts, const std::vector<int> &R_):\
+    \ belong(m_, -1), R(R_) {\n  assert(parts.size() == R.size());\n  for (int i=\
+    \ parts.size(); i--;)\n   for (int e: parts[i]) belong[e]= i;\n }\n void build(const\
+    \ std::vector<int> &I) {\n  cnt= R;\n  for (int e: I)\n   if (belong[e] != -1)\
+    \ cnt[belong[e]]--;\n }\n inline bool oracle(int e) const { return belong[e] ==\
+    \ -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e, int f) const { return\
+    \ oracle(f) || belong[e] == belong[f]; }\n};\n#line 6 \"test/aoj/GRL_7_A.matroid_intersection.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int L, R, M;\n cin >> L >> R >> M;\n vector<vector<int>> partl(L), partr(R);\n\
+    \ for (int i= 0; i < M; i++) {\n  int a, b;\n  cin >> a >> b;\n  partl[a].push_back(i),\
+    \ partr[b].push_back(i);\n }\n PartitionMatroid M1(M, partl, vector<int>(L, 1));\n\
+    \ PartitionMatroid M2(M, partr, vector<int>(R, 1));\n auto S= matroid_intersection(M,\
+    \ M1, M2);\n cout << S.size() << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
     \n// \u4E8C\u90E8\u30DE\u30C3\u30C1\u30F3\u30B0 (\u5206\u5272+\u5206\u5272)\n\
     #include <iostream>\n#include <vector>\n#include \"src/Optimization/matroid_intersection.hpp\"\
@@ -109,7 +109,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
   requiredBy: []
-  timestamp: '2023-03-14 02:51:35+09:00'
+  timestamp: '2023-03-17 18:15:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_7_A.matroid_intersection.test.cpp

@@ -94,8 +94,8 @@ data:
   verifiedWith:
   - test/yosupo/number_of_substrings.test.cpp
   - test/yosupo/suffixarray.test.cpp
-  - test/aoj/ALDS1_14_D.test.cpp
   - test/aoj/2644.test.cpp
+  - test/aoj/ALDS1_14_D.test.cpp
 documentation_of: src/String/SuffixArray.hpp
 layout: document
 redirect_from:

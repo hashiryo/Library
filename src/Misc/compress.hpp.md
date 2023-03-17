@@ -56,11 +56,11 @@ data:
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/aoj/3506.test.cpp
-  - test/aoj/2893.test.cpp
   - test/aoj/0655.test.cpp
-  - test/yukicoder/649.SegTree.test.cpp
-  - test/yukicoder/1467.test.cpp
+  - test/aoj/2893.test.cpp
   - test/yukicoder/738.BIT.test.cpp
+  - test/yukicoder/1467.test.cpp
+  - test/yukicoder/649.SegTree.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/649.BIT.test.cpp
 documentation_of: src/Misc/compress.hpp

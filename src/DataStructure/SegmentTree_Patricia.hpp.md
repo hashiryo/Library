@@ -261,8 +261,8 @@ data:
   - test/yosupo/set_xor_min.Patricia.test.cpp
   - test/aoj/2270.Patricia.test.cpp
   - test/aoj/3024.Patricia.test.cpp
-  - test/yukicoder/649.Patricia.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
+  - test/yukicoder/649.Patricia.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Patricia.hpp
 layout: document
 title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"

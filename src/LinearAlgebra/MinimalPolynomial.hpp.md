@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':heavy_check_mark:'
@@ -250,8 +250,8 @@ data:
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
 documentation_of: src/LinearAlgebra/MinimalPolynomial.hpp
 layout: document
 title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"

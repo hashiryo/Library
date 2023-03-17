@@ -7,65 +7,55 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':heavy_check_mark:'
-    path: src/LinearAlgebra/MinimalPolynomial.hpp
-    title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
-    path: src/Math/berlekamp_massey.hpp
-    title: Berlekamp-Massey
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
-    path: src/Misc/rng.hpp
-    title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Spring/2397
+    PROBLEM: https://judge.yosupo.jp/problem/matrix_product
     links:
-    - https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Spring/2397
-  bundledCode: "#line 1 \"test/aoj/2397.MinPoly.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Spring/2397\"\
-    \n// \u6700\u5C0F\u591A\u9805\u5F0F\u3092\u7528\u3044\u305F\u884C\u5217\u7D2F\u4E57\
-    \n#include <iostream>\n#include <algorithm>\n#line 2 \"src/LinearAlgebra/Matrix.hpp\"\
-    \n#include <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\n\
-    namespace la_internal {\ntemplate <class R> struct Vector: public std::valarray<R>\
-    \ {\n using std::valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8=\
-    \ uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r,\
-    \ u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i)\
-    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
-    \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
-    \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
-    \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
-    \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n std::valarray<u128>\
-    \ dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >>\
-    \ 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref\
-    \ operator[](int i) {\n  u128 *ref= std::begin(dat) + (i >> 7);\n  u8 j= i & 127;\n\
-    \  bool val= (*ref >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int\
-    \ i) const { return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const\
-    \ Vector &r) { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector\
-    \ &r) { return dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b)\
-    \ dat= 0;\n  return *this;\n }\n Vector operator+(const Vector &r) const { return\
-    \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
-    \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
-    \ size() const { return n; }\n u128 *data() { return std::begin(dat); }\n friend\
-    \ Vector operator*(bool b, const Vector &r) { return r * b; }\n};\ntemplate <class\
-    \ R> struct DiagonalMatrix: public Vector<R> {\n using Vector<R>::Vector;\n R\
-    \ det() const {\n  R ret(true);\n  for (auto x: *this) ret*= x;\n  return ret;\n\
-    \ }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n#line 4 \"\
-    src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class R> class\
-    \ Matrix {\npublic:\n size_t W;\n std::valarray<R> dat;\npublic:\n static Matrix\
-    \ identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
+    - https://judge.yosupo.jp/problem/matrix_product
+  bundledCode: "#line 1 \"test/yosupo/matrix_product.test.cpp\"\n#define PROBLEM \"\
+    https://judge.yosupo.jp/problem/matrix_product\"\n#include <iostream>\n#line 2\
+    \ \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\
+    \n#include <valarray>\nnamespace la_internal {\ntemplate <class R> struct Vector:\
+    \ public std::valarray<R> {\n using std::valarray<R>::valarray;\n};\nusing u128=\
+    \ __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\n\
+    public:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if\
+    \ (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref\
+    \ &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val= b,\
+    \ *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+    \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
+    \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
+    \ {\n size_t n;\n std::valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
+    \ n): n(n), dat((n + 127) >> 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b),\
+    \ (n + 127) >> 7) {}\n Ref operator[](int i) {\n  u128 *ref= std::begin(dat) +\
+    \ (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref >> j) & 1;\n  return Ref{ref,\
+    \ j, val};\n }\n bool operator[](int i) const { return (dat[i >> 7] >> (i & 127))\
+    \ & 1; }\n Vector &operator+=(const Vector &r) { return dat^= r.dat, *this; }\n\
+    \ Vector &operator-=(const Vector &r) { return dat^= r.dat, *this; }\n Vector\
+    \ &operator*=(bool b) {\n  if (!b) dat= 0;\n  return *this;\n }\n Vector operator+(const\
+    \ Vector &r) const { return Vector(*this)+= r; }\n Vector operator-(const Vector\
+    \ &r) const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
+    \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
+    \ std::begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return\
+    \ r * b; }\n};\ntemplate <class R> struct DiagonalMatrix: public Vector<R> {\n\
+    \ using Vector<R>::Vector;\n R det() const {\n  R ret(true);\n  for (auto x: *this)\
+    \ ret*= x;\n  return ret;\n }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n\
+    #line 4 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
+    \ R> class Matrix {\npublic:\n size_t W;\n std::valarray<R> dat;\npublic:\n static\
+    \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
     \ w, R v= R()): W(w), dat(v, h * w) {}\n size_t width() const { return W; }\n\
     \ size_t height() const { return W ? dat.size() / W : 0; }\n operator bool() const\
@@ -121,18 +111,8 @@ data:
     \ *a & r[j];\n  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W ==\
     \ H);\n  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ?\
     \ ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n\
-    #line 2 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2]\
-    \ + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class K> std::vector<K> berlekamp_massey(const\
-    \ std::vector<K> &a) {\n size_t n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return\
-    \ {};\n std::vector<K> c(n), b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for\
-    \ (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j)\
-    \ y+= c[j] * a[i - j];\n  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j=\
-    \ m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i +\
-    \ 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for\
-    \ (auto &x: c) x= -x;\n return c;\n}\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
-    \ <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
-    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
+    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -213,90 +193,37 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Misc/rng.hpp\"\nuint64_t rng() {\n static uint64_t\
-    \ x= 10150724397891781847ULL * std::random_device{}();\n return x^= x << 7, x^=\
-    \ x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
-    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 7 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
-    \n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\n\
-    template <class mod_t, template <class> class Mat> class MinimalPolynomial {\n\
-    \ std::vector<mod_t> poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n\
-    \ static inline int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size()\
-    \ - 1;; d--)\n   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
-    \ bostan_mori_msb(const std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n\
-    \  assert(d >= 0), assert(q[0] != mod_t());\n  std::vector<mod_t> ret(std::max(d,\
-    \ 1));\n  if (k == 0) return ret.back()= mod_t(1), ret;\n  std::vector<mod_t>\
-    \ v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for (int j= 0; j <= d; j+= 2)\
-    \ v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i <= d; i+= 2)\n   for (int\
-    \ j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n  auto w= bostan_mori_msb(v,\
-    \ k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >= d; i-= 2)\n   for (int j=\
-    \ 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >> 1];\n  for (int i= 2 * d\
-    \ - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j <= d; j+= 2) ret[i - d]-=\
-    \ q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t> x_pow_mod(uint64_t\
-    \ k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n), u= bostan_mori_msb(rev,\
-    \ k - n + dg);\n  for (int i= dg; i--;)\n   for (int j= i + 1; j--;) ret[n - 1\
-    \ - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n MinimalPolynomial(const\
-    \ Mat<mod_t> &M, Vector<mod_t> b): n(M.width()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n\
-    \  assert(n == b.size()), assert(n == M.height());\n  Vector<mod_t> a(n);\n  for\
-    \ (auto &x: a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t> v((n + 1) <<\
-    \ 1);\n  for (size_t i= v.size(), j= 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n\
-    \   if (v[j++]= (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n\
-    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(),\
-    \ rev.rend()), rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
-    \ pow(uint64_t k) const {  // M^k * b\n  if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n\
-    \  Vector<mod_t> ret= r[0] * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i]\
-    \ * bs[i];\n  return ret;\n }\n const mod_t &operator[](size_t k) const { return\
-    \ poly[k]; }\n const auto begin() const { return poly.begin(); }\n const auto\
-    \ end() const { return poly.end(); }\n size_t degree() const { return dg; }\n\
-    };\ntemplate <class mod_t, template <class> class Mat> mod_t det(const Mat<mod_t>\
-    \ &M) {\n size_t n= M.height();\n assert(n == M.width());\n Vector<mod_t> b(n);\n\
-    \ for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n DiagonalMatrix<mod_t> D(n);\n\
-    \ for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n mod_t ret= MinimalPolynomial(M\
-    \ * D, b)[0];\n if (n & 1) ret= -ret;\n return ret / D.det();\n}\n#line 8 \"test/aoj/2397.MinPoly.test.cpp\"\
+    \ return dat[n];\n}\n#line 5 \"test/yosupo/matrix_product.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
+    \ ModInt<998244353>;\n int N, M, K;\n cin >> N >> M >> K;\n Matrix<Mint> A(N,\
+    \ M), B(M, K);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < M; +j) cin >>\
+    \ A[i][j];\n for (int i= 0; i < M; ++i)\n  for (int j= 0; j < K; ++j) cin >> B[i][j];\n\
+    \ auto C= A * B;\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < K; ++j) cout\
+    \ << C[i][j] << \" \\n\"[j == K - 1];\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\n#include\
+    \ <iostream>\n#include \"src/LinearAlgebra/Matrix.hpp\"\n#include \"src/Math/ModInt.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<int(1e9 + 9)>;\n long long W, H, N;\n for (int cnt= 0; cin\
-    \ >> W >> H >> N && W;) {\n  pair<long long, int> obst[N];\n  for (long long i=\
-    \ 0, x, y; i < N; i++) cin >> x >> y, obst[i]= make_pair(y - 1, x - 1);\n  sort(obst,\
-    \ obst + N);\n  Matrix<Mint> A(W, W);\n  for (int i= 0; i < W; i++) {\n   A[i][i]=\
-    \ 1;\n   if (i) A[i][i - 1]= 1;\n   if (i + 1 < W) A[i][i + 1]= 1;\n  }\n  Vector<Mint>\
-    \ b(W);\n  b[0]= 1;\n  long long y= 0;\n  for (int i= 0; i < N; i++) {\n   b=\
-    \ MinimalPolynomial(A, b).pow(obst[i].first - y);\n   int j= i;\n   while (j <\
-    \ N && obst[i].first == obst[j].first) b[obst[j++].second]= 0;\n   i= j - 1;\n\
-    \   y= obst[i].first;\n  }\n  b= MinimalPolynomial(A, b).pow(H - 1 - y);\n  cout\
-    \ << \"Case \" << ++cnt << \": \" << b[W - 1] << '\\n';\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Spring/2397\"\
-    \n// \u6700\u5C0F\u591A\u9805\u5F0F\u3092\u7528\u3044\u305F\u884C\u5217\u7D2F\u4E57\
-    \n#include <iostream>\n#include <algorithm>\n#include \"src/LinearAlgebra/Matrix.hpp\"\
-    \n#include \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<int(1e9 + 9)>;\n long long W, H, N;\n for (int cnt= 0; cin\
-    \ >> W >> H >> N && W;) {\n  pair<long long, int> obst[N];\n  for (long long i=\
-    \ 0, x, y; i < N; i++) cin >> x >> y, obst[i]= make_pair(y - 1, x - 1);\n  sort(obst,\
-    \ obst + N);\n  Matrix<Mint> A(W, W);\n  for (int i= 0; i < W; i++) {\n   A[i][i]=\
-    \ 1;\n   if (i) A[i][i - 1]= 1;\n   if (i + 1 < W) A[i][i + 1]= 1;\n  }\n  Vector<Mint>\
-    \ b(W);\n  b[0]= 1;\n  long long y= 0;\n  for (int i= 0; i < N; i++) {\n   b=\
-    \ MinimalPolynomial(A, b).pow(obst[i].first - y);\n   int j= i;\n   while (j <\
-    \ N && obst[i].first == obst[j].first) b[obst[j++].second]= 0;\n   i= j - 1;\n\
-    \   y= obst[i].first;\n  }\n  b= MinimalPolynomial(A, b).pow(H - 1 - y);\n  cout\
-    \ << \"Case \" << ++cnt << \": \" << b[W - 1] << '\\n';\n }\n return 0;\n}"
+    \ using Mint= ModInt<998244353>;\n int N, M, K;\n cin >> N >> M >> K;\n Matrix<Mint>\
+    \ A(N, M), B(M, K);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < M; +j)\
+    \ cin >> A[i][j];\n for (int i= 0; i < M; ++i)\n  for (int j= 0; j < K; ++j) cin\
+    \ >> B[i][j];\n auto C= A * B;\n for (int i= 0; i < N; ++i)\n  for (int j= 0;\
+    \ j < K; ++j) cout << C[i][j] << \" \\n\"[j == K - 1];\n return 0;\n}"
   dependsOn:
   - src/LinearAlgebra/Matrix.hpp
   - src/LinearAlgebra/Vector.hpp
-  - src/LinearAlgebra/MinimalPolynomial.hpp
-  - src/Math/berlekamp_massey.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
-  - src/Misc/rng.hpp
   isVerificationFile: true
-  path: test/aoj/2397.MinPoly.test.cpp
+  path: test/yosupo/matrix_product.test.cpp
   requiredBy: []
-  timestamp: '2023-03-12 23:00:15+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-03-17 18:15:59+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/2397.MinPoly.test.cpp
+documentation_of: test/yosupo/matrix_product.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/2397.MinPoly.test.cpp
-- /verify/test/aoj/2397.MinPoly.test.cpp.html
-title: test/aoj/2397.MinPoly.test.cpp
+- /verify/test/yosupo/matrix_product.test.cpp
+- /verify/test/yosupo/matrix_product.test.cpp.html
+title: test/yosupo/matrix_product.test.cpp
 ---
