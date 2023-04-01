@@ -12,16 +12,16 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':x:'
@@ -29,7 +29,7 @@ data:
     title: test/yukicoder/950.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
@@ -126,8 +126,8 @@ data:
     \ u64, RB<MP_Mo<u64, u128, 64, 63>, (1ull << 62), id>>, conditional_t<is_same_v<Int,\
     \ Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31), id>>, conditional_t<is_same_v<Int,\
     \ Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull << 41), id>>, conditional_t<disjunction_v<is_same<Int,\
-    \ i64>, is_same<Int, u64>>, MInt<i64, u64, RB<MP_D2B1, ULLONG_MAX, id>>, MInt<int,\
-    \ u32, RB<MP_Na, UINT_MAX, id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>,\
+    \ i64>, is_same<Int, u64>>, MInt<i64, u64, RB<MP_D2B1, u64(-1), id>>, MInt<int,\
+    \ u32, RB<MP_Na, u32(-1), id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>,\
     \ nullptr_t> = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
     \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
     \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n"
@@ -143,7 +143,7 @@ data:
     \ conditional_t<is_same_v<Int, Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31),\
     \ id>>, conditional_t<is_same_v<Int, Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull\
     \ << 41), id>>, conditional_t<disjunction_v<is_same<Int, i64>, is_same<Int, u64>>,\
-    \ MInt<i64, u64, RB<MP_D2B1, ULLONG_MAX, id>>, MInt<int, u32, RB<MP_Na, UINT_MAX,\
+    \ MInt<i64, u64, RB<MP_D2B1, u64(-1), id>>, MInt<int, u32, RB<MP_Na, u32(-1),\
     \ id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>, nullptr_t>\
     \ = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
     \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
@@ -155,8 +155,8 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Runtime.hpp
   requiredBy: []
-  timestamp: '2023-02-07 17:34:35+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-04-02 01:58:46+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/atcoder/abc270_g.test.cpp

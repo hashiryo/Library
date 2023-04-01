@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   - icon: ':heavy_check_mark:'
@@ -16,13 +16,13 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []

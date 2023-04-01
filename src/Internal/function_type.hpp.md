@@ -2,20 +2,20 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/yukicoder/950.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/function_type.hpp\"\n#include <type_traits>\n\
@@ -65,7 +65,7 @@ data:
   requiredBy:
   - src/Math/DiscreteLogarithm.hpp
   timestamp: '2023-04-02 00:58:03+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/atcoder/abc270_g.test.cpp

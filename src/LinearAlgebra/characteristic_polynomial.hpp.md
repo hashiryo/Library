@@ -9,12 +9,12 @@ data:
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\n#include\
@@ -150,7 +150,7 @@ data:
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
   timestamp: '2023-04-02 00:58:03+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/characteristic_polynomial.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp
