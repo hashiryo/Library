@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
@@ -57,10 +57,10 @@ data:
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':warning:'
+  - icon: ':x:'
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':heavy_check_mark:'
@@ -145,6 +145,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc222_g.test.cpp
+    title: test/atcoder/abc222_g.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
@@ -166,6 +169,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc270_g.test.cpp
+    title: test/atcoder/abc270_g.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
@@ -184,7 +190,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -199,6 +205,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/convolution_mod_2_64.test.cpp
     title: test/yosupo/convolution_mod_2_64.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/discrete_logarithm_mod.test.cpp
+    title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
@@ -241,7 +250,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/inv_of_sparse_FPS.test.cpp
     title: test/yosupo/inv_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -250,7 +259,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/lcm_convolution.test.cpp
     title: test/yosupo/lcm_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
   - icon: ':heavy_check_mark:'
@@ -262,10 +271,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/log_of_sparse_FPS.test.cpp
     title: test/yosupo/log_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_product.test.cpp
     title: test/yosupo/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
@@ -379,19 +388,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1333.test.cpp
     title: test/yukicoder/1333.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1339.test.cpp
+    title: test/yukicoder/1339.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1533.test.cpp
     title: test/yukicoder/1533.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
   - icon: ':heavy_check_mark:'
@@ -421,7 +433,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -430,12 +442,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/665.test.cpp
     title: test/yukicoder/665.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/950.test.cpp
+    title: test/yukicoder/950.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/963.FPS.test.cpp
     title: test/yukicoder/963.FPS.test.cpp
@@ -445,9 +460,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
@@ -597,7 +612,7 @@ data:
   - src/Math/ModInt_Runtime.hpp
   - src/Math/sparse_fps.hpp
   timestamp: '2023-02-07 17:34:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
@@ -621,6 +636,7 @@ data:
   - test/yosupo/convolution_large.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/stirling_1.test.cpp
   - test/yosupo/bernoulli.test.cpp
@@ -693,6 +709,8 @@ data:
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/atcoder/abc234_g.test.cpp
   - test/atcoder/abc213_h.test.cpp
+  - test/atcoder/abc270_g.test.cpp
+  - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc160_f.test.cpp
   - test/yukicoder/644.test.cpp
@@ -719,11 +737,13 @@ data:
   - test/yukicoder/1750.test.cpp
   - test/yukicoder/1269.test.cpp
   - test/yukicoder/1145.test.cpp
+  - test/yukicoder/950.test.cpp
   - test/yukicoder/215.test.cpp
   - test/yukicoder/658.test.cpp
   - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/963.FPS.test.cpp
+  - test/yukicoder/1339.test.cpp
   - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/Math/ModInt.hpp
 layout: document

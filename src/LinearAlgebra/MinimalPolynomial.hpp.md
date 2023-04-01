@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
@@ -30,15 +30,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n#include <bits/stdc++.h>\n\
@@ -245,7 +245,7 @@ data:
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
   timestamp: '2023-03-12 23:00:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/aoj/2397.MinPoly.test.cpp

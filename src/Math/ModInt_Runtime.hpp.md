@@ -1,20 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/abc222_g.test.cpp
+    title: test/atcoder/abc222_g.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc270_g.test.cpp
+    title: test/atcoder/abc270_g.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/discrete_logarithm_mod.test.cpp
+    title: test/yosupo/discrete_logarithm_mod.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1339.test.cpp
+    title: test/yukicoder/1339.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/950.test.cpp
+    title: test/yukicoder/950.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
@@ -141,8 +156,13 @@ data:
   path: src/Math/ModInt_Runtime.hpp
   requiredBy: []
   timestamp: '2023-02-07 17:34:35+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/yosupo/discrete_logarithm_mod.test.cpp
+  - test/atcoder/abc270_g.test.cpp
+  - test/atcoder/abc222_g.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/1339.test.cpp
 documentation_of: src/Math/ModInt_Runtime.hpp
 layout: document
 title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
