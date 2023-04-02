@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -54,14 +54,14 @@ data:
     \ { return u64(a) * b % mod; }\n static inline int log16(u16 A, u16 B) {\n  int\
     \ a= ln[A], b= ln[B], x= 1;\n  if (a == 0) return b == 0 ? 1 : -1;\n  for (int\
     \ q, z, u, y= 0, t= 65535; t;) z= x, u= a, x= y, y= z - y * (q= a / t), a= t,\
-    \ t= u - t * q;\n  return b % a ? -1 : (b / a) * (x < 0 ? 65535 - (-x) % 65535\
-    \ : x % 65535) % 65535;\n }\n template <int period, int size> static inline int\
-    \ bsgs(u64 x, u64 y) {\n  static constexpr int mask= size - 1;\n  std::pair<u64,\
-    \ int> vs[size];\n  int os[size + 1]= {};\n  u64 so[size], big= 1;\n  for (int\
-    \ i= 0; i < size; ++i, big= mul(big, x)) ++os[(so[i]= big) & mask];\n  for (int\
-    \ i= 0; i < size; ++i) os[i + 1]+= os[i];\n  for (int i= 0; i < size; ++i) vs[--os[so[i]\
-    \ & mask]]= {so[i], i};\n  for (int t= 0; t < period; t+= size, y= mul(y, big))\n\
-    \   for (int m= (y & mask), i= os[m], ret; i < os[m + 1]; ++i)\n    if (y == vs[i].first)\
+    \ t= u - t * q;\n  return b % a ? -1 : u32(b / a) * (x < 0 ? 65535 + x : x) %\
+    \ 65535;\n }\n template <int period, int size> static inline int bsgs(u64 x, u64\
+    \ y) {\n  static constexpr int mask= size - 1;\n  std::pair<u64, int> vs[size];\n\
+    \  int os[size + 1]= {};\n  u64 so[size], big= 1;\n  for (int i= 0; i < size;\
+    \ ++i, big= mul(big, x)) ++os[(so[i]= big) & mask];\n  for (int i= 0; i < size;\
+    \ ++i) os[i + 1]+= os[i];\n  for (int i= 0; i < size; ++i) vs[--os[so[i] & mask]]=\
+    \ {so[i], i};\n  for (int t= 0; t < period; t+= size, y= mul(y, big))\n   for\
+    \ (int m= (y & mask), i= os[m], ret; i < os[m + 1]; ++i)\n    if (y == vs[i].first)\
     \ return (ret= vs[i].second - t) < 0 ? ret + period : ret;\n  return -1;\n }\n\
     \ static inline u64 log(u64 A, u64 B) {\n  if (B == 1) return 0;\n  if (!A &&\
     \ !B) return 1;\n  if (!A || !B) return u64(-1);\n  static constexpr int P0= 641,\
@@ -124,8 +124,8 @@ data:
   isVerificationFile: true
   path: test/unit_test/nimber_log.test.cpp
   requiredBy: []
-  timestamp: '2023-04-02 00:58:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-03 04:36:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/unit_test/nimber_log.test.cpp
 layout: document
