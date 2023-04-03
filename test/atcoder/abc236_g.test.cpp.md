@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc236/tasks/abc236_g
@@ -22,74 +22,69 @@ data:
     - https://atcoder.jp/contests/abc236/tasks/abc236_g
   bundledCode: "#line 1 \"test/atcoder/abc236_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc236/tasks/abc236_g\"\
     \n// (min,max)\u534A\u74B0\n#include <iostream>\n#line 2 \"src/Math/SemiRing.hpp\"\
-    \n#include <limits>\n#include <type_traits>\n#include <cstddef>\ntemplate <typename\
-    \ T, T (*o)(), T (*i)(), T (*add)(T, T), T (*mul)(T, T)> struct SemiRing {\n T\
-    \ x;\n SemiRing(): x(o()) {}\n SemiRing(bool y): x(y ? i() : o()) {}\n template\
-    \ <class U, std::enable_if_t<std::is_convertible_v<U, T>, std::nullptr_t> = nullptr>\
-    \ SemiRing(U y): x((T)y) {}\n SemiRing &operator+=(const SemiRing &r) { return\
-    \ x == o() ? *this= r : r.x == o() ? *this : *this= add(x, r.x); }\n SemiRing\
-    \ &operator*=(const SemiRing &r) {\n  if (x == o() || r.x == o()) return *this=\
-    \ o();\n  return x == i() ? *this= r : r.x == i() ? *this : *this= mul(x, r.x);\n\
-    \ }\n SemiRing operator+(const SemiRing &r) const { return SemiRing(*this)+= r;\
-    \ }\n SemiRing operator*(const SemiRing &r) const { return SemiRing(*this)*= r;\
-    \ }\n bool operator==(const SemiRing &r) const { return x == r.x; }\n bool operator!=(const\
-    \ SemiRing &r) const { return x != r.x; }\n friend std::istream &operator>>(std::istream\
-    \ &is, SemiRing &r) { return is >> r.x, is; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const SemiRing &r) { return os << r.x; }\n};\ntemplate <class M> using\
-    \ Rig= SemiRing<typename M::T, M::o, M::i, M::add, M::mul>;\ntemplate <class Arith>\
-    \ struct MinPlus {\n using T= Arith;\n static T o() { return std::numeric_limits<T>::max();\
-    \ }\n static T i() { return T(0); }\n static T add(T vl, T vr) { return std::min(vl,\
-    \ vr); }\n static T mul(T vl, T vr) { return vl + vr; }\n};\ntemplate <class T>\
-    \ using MinPlusRig= Rig<MinPlus<T>>;\ntemplate <class Arith> struct MaxPlus {\n\
-    \ using T= Arith;\n static T o() { return std::numeric_limits<T>::min(); }\n static\
-    \ T i() { return T(0); }\n static T add(T vl, T vr) { return std::max(vl, vr);\
-    \ }\n static T mul(T vl, T vr) { return vl + vr; }\n};\ntemplate <class T> using\
-    \ MaxPlusRig= Rig<MaxPlus<T>>;\ntemplate <class Arith> struct MinMax {\n using\
-    \ T= Arith;\n static T o() { return std::numeric_limits<T>::max(); }\n static\
-    \ T i() { return std::numeric_limits<T>::min(); }\n static T add(T vl, T vr) {\
-    \ return std::min(vl, vr); }\n static T mul(T vl, T vr) { return std::max(vl,\
-    \ vr); }\n};\ntemplate <class T> using MinMaxRig= Rig<MinMax<T>>;\ntemplate <class\
-    \ Uint> struct BitwiseOrAnd {\n using T= Uint;\n static T o() { return 0; }\n\
-    \ static T i() { return T(-1); }\n static T add(T vl, T vr) { return vl | vr;\
-    \ }\n static T mul(T vl, T vr) { return vl & vr; }\n};\ntemplate <class T= unsigned\
-    \ long long> using BitwiseOrAndRig= Rig<BitwiseOrAnd<T>>;\ntemplate <class Uint>\
-    \ struct BitwiseXorAnd {\n using T= Uint;\n static T o() { return 0; }\n static\
-    \ T i() { return T(-1); }\n static T add(T vl, T vr) { return vl ^ vr; }\n static\
-    \ T mul(T vl, T vr) { return vl & vr; }\n};\ntemplate <class T= unsigned long\
-    \ long> using BitwiseXorAndRig= Rig<BitwiseXorAnd<T>>;\n#line 2 \"src/LinearAlgebra/Matrix.hpp\"\
-    \n#include <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\n\
-    namespace la_internal {\ntemplate <class R> struct Vector: public std::valarray<R>\
-    \ {\n using std::valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8=\
-    \ uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r,\
-    \ u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i)\
-    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
-    \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
-    \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
-    \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
-    \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n std::valarray<u128>\
-    \ dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >>\
-    \ 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref\
-    \ operator[](int i) {\n  u128 *ref= std::begin(dat) + (i >> 7);\n  u8 j= i & 127;\n\
-    \  bool val= (*ref >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int\
-    \ i) const { return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const\
-    \ Vector &r) { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector\
-    \ &r) { return dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b)\
-    \ dat= 0;\n  return *this;\n }\n Vector operator+(const Vector &r) const { return\
-    \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
-    \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
-    \ size() const { return n; }\n u128 *data() { return std::begin(dat); }\n friend\
-    \ Vector operator*(bool b, const Vector &r) { return r * b; }\n};\ntemplate <class\
-    \ R> struct DiagonalMatrix: public Vector<R> {\n using Vector<R>::Vector;\n R\
-    \ det() const {\n  R ret(true);\n  for (auto x: *this) ret*= x;\n  return ret;\n\
-    \ }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n#line 4 \"\
-    src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class R> class\
-    \ Matrix {\npublic:\n size_t W;\n std::valarray<R> dat;\npublic:\n static Matrix\
-    \ identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
+    \n#include <limits>\n#include <type_traits>\n#include <cstddef>\ntemplate <class\
+    \ M> struct SemiRing {\n using T= typename M::T;\n T x;\n SemiRing(): x(M::o)\
+    \ {}\n SemiRing(bool y): x(y ? M::i : M::o) {}\n template <class U, std::enable_if_t<std::is_convertible_v<U,\
+    \ T>, std::nullptr_t> = nullptr> SemiRing(U y): x((T)y) {}\n SemiRing &operator+=(const\
+    \ SemiRing &r) { return M::add(x, r.x), *this; }\n SemiRing &operator*=(const\
+    \ SemiRing &r) { return x == M::o || r.x == M::o ? *this= M::o : (M::mul(x, r.x),\
+    \ *this); }\n SemiRing operator+(const SemiRing &r) const { return SemiRing(*this)+=\
+    \ r; }\n SemiRing operator*(const SemiRing &r) const { return SemiRing(*this)*=\
+    \ r; }\n bool operator==(const SemiRing &r) const { return x == r.x; }\n bool\
+    \ operator!=(const SemiRing &r) const { return x != r.x; }\n friend std::istream\
+    \ &operator>>(std::istream &is, SemiRing &r) { return is >> r.x, is; }\n friend\
+    \ std::ostream &operator<<(std::ostream &os, const SemiRing &r) { return os <<\
+    \ r.x; }\n};\ntemplate <class Arith> struct MinPlus {\n using T= Arith;\n static\
+    \ inline T o= std::numeric_limits<T>::max(), i= T();\n static void add(T &vl,\
+    \ T vr) { vl= std::min(vl, vr); }\n static void mul(T &vl, T vr) { vl+= vr; }\n\
+    };\ntemplate <class T> using MinPlusRig= Rig<MinPlus<T>>;\ntemplate <class Arith>\
+    \ struct MaxPlus {\n using T= Arith;\n static inline T o= std::numeric_limits<T>::min(),\
+    \ i= T();\n static void add(T &vl, T vr) { vl= std::max(vl, vr); }\n static void\
+    \ mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate <class T> using MaxPlusRig= Rig<MaxPlus<T>>;\n\
+    template <class Arith> struct MinMax {\n using T= Arith;\n static inline T o=\
+    \ std::numeric_limits<T>::max(), i= std::numeric_limits<T>::min();\n static void\
+    \ add(T &vl, T vr) { vl= std::min(vl, vr); }\n static void mul(T &vl, T vr) {\
+    \ vl= std::max(vl, vr); }\n};\ntemplate <class T> using MinMaxRig= Rig<MinMax<T>>;\n\
+    template <class Uint> struct BitwiseOrAnd {\n using T= Uint;\n static constexpr\
+    \ T o= 0, i= T(-1);\n static void add(T &vl, T vr) { vl|= vr; }\n static void\
+    \ mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate <class T= unsigned long long> using\
+    \ BitwiseOrAndRig= Rig<BitwiseOrAnd<T>>;\ntemplate <class Uint> struct BitwiseXorAnd\
+    \ {\n using T= Uint;\n static constexpr T o= 0, i= T(-1);\n static void add(T\
+    \ &vl, T vr) { vl^= vr; }\n static void mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate\
+    \ <class T= unsigned long long> using BitwiseXorAndRig= Rig<BitwiseXorAnd<T>>;\n\
+    #line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\
+    \n#include <valarray>\nnamespace la_internal {\ntemplate <class R> struct Vector:\
+    \ public std::valarray<R> {\n using std::valarray<R>::valarray;\n};\nusing u128=\
+    \ __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\n\
+    public:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if\
+    \ (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref\
+    \ &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val= b,\
+    \ *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+    \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
+    \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
+    \ {\n size_t n;\n std::valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
+    \ n): n(n), dat((n + 127) >> 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b),\
+    \ (n + 127) >> 7) {}\n Ref operator[](int i) {\n  u128 *ref= std::begin(dat) +\
+    \ (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref >> j) & 1;\n  return Ref{ref,\
+    \ j, val};\n }\n bool operator[](int i) const { return (dat[i >> 7] >> (i & 127))\
+    \ & 1; }\n Vector &operator+=(const Vector &r) { return dat^= r.dat, *this; }\n\
+    \ Vector &operator-=(const Vector &r) { return dat^= r.dat, *this; }\n Vector\
+    \ &operator*=(bool b) {\n  if (!b) dat= 0;\n  return *this;\n }\n Vector operator+(const\
+    \ Vector &r) const { return Vector(*this)+= r; }\n Vector operator-(const Vector\
+    \ &r) const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
+    \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
+    \ std::begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return\
+    \ r * b; }\n};\ntemplate <class R> struct DiagonalMatrix: public Vector<R> {\n\
+    \ using Vector<R>::Vector;\n R det() const {\n  R ret(true);\n  for (auto x: *this)\
+    \ ret*= x;\n  return ret;\n }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n\
+    #line 4 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
+    \ R> class Matrix {\npublic:\n size_t W;\n std::valarray<R> dat;\npublic:\n static\
+    \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
     \ w, R v= R()): W(w), dat(v, h * w) {}\n size_t width() const { return W; }\n\
-    \ size_t height() const { return W ? dat.size() / W : 0; }\n operator bool() const\
-    \ { return W; }\n auto operator[](int i) { return std::next(std::begin(dat), i\
-    \ * W); }\n auto operator[](int i) const { return std::next(std::cbegin(dat),\
+    \ size_t height() const { return W ? dat.size() / W : 0; }\n explicit operator\
+    \ bool() const { return W; }\n auto operator[](int i) { return std::next(std::begin(dat),\
+    \ i * W); }\n auto operator[](int i) const { return std::next(std::cbegin(dat),\
     \ i * W); }\n bool operator==(const Matrix &r) const { return W == r.W && dat.size()\
     \ == r.dat.size() && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r)\
     \ const { return W != r.W || dat.size() != r.dat.size() || (dat != r.dat).max();\
@@ -126,31 +121,32 @@ data:
     \  for (; n--;) ret[n][n]= 1;\n  return ret;\n }\n Matrix(): H(0), W(0), m(0)\
     \ {}\n Matrix(size_t h, size_t w): H(h), W(w), m((w + 127) >> 7), dat(u128(0),\
     \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ H; }\n operator bool() const { return W; }\n Array operator[](int i) { return\
-    \ {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const Matrix\
-    \ &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const\
-    \ Matrix &r) const { return W != r.W || H != r.H || (dat != r.dat).max(); }\n\
-    \ Matrix &operator+=(const Matrix &r) { return assert(H == r.H), assert(W == r.W),\
-    \ dat^= r.dat, *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
-    \ r; }\n Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix\
-    \ ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n  for (size_t i= 0; i < H; ++i,\
-    \ std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n   const u128\
-    \ *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b, r.m))\n\
-    \    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n  return\
-    \ ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this * r; }\n\
-    \ Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W == r.size());\n\
-    \  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t i= 0; i <\
-    \ H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n  return\
-    \ ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for (auto ret=\
-    \ identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>= 1) : !(k>>=\
-    \ 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 6 \"test/atcoder/abc236_g.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using R= MinMaxRig<int>;\n int N, T, L;\n cin >> N >> T >> L;\n Matrix<R> A(N,\
-    \ N);\n for (int t= 1; t <= T; t++) {\n  int u, v;\n  cin >> u >> v, u--, v--;\n\
-    \  A[v][u]= t;\n }\n A= A.pow(L);\n for (int i= 0; i < N; i++) cout << (A[i][0]\
-    \ == R(false) ? -1 : A[i][0]) << \" \\n\"[i == N - 1];\n return 0;\n}\n"
+    \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
+    \ { return {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const\
+    \ Matrix &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n\
+    \ bool operator!=(const Matrix &r) const { return W != r.W || H != r.H || (dat\
+    \ != r.dat).max(); }\n Matrix &operator+=(const Matrix &r) { return assert(H ==\
+    \ r.H), assert(W == r.W), dat^= r.dat, *this; }\n Matrix operator+(const Matrix\
+    \ &r) const { return Matrix(*this)+= r; }\n Matrix operator*(const Matrix &r)\
+    \ const {\n  assert(W == r.H);\n  Matrix ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n\
+    \  for (size_t i= 0; i < H; ++i, std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n\
+    \   const u128 *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b,\
+    \ r.m))\n    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n\
+    \  return ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this\
+    \ * r; }\n Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W ==\
+    \ r.size());\n  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t\
+    \ i= 0; i < H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n\
+    \  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for\
+    \ (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>=\
+    \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 6\
+    \ \"test/atcoder/abc236_g.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n using R= MinMaxRig<int>;\n int N, T,\
+    \ L;\n cin >> N >> T >> L;\n Matrix<R> A(N, N);\n for (int t= 1; t <= T; t++)\
+    \ {\n  int u, v;\n  cin >> u >> v, u--, v--;\n  A[v][u]= t;\n }\n A= A.pow(L);\n\
+    \ for (int i= 0; i < N; i++) cout << (A[i][0] == R(false) ? -1 : A[i][0]) << \"\
+    \ \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc236/tasks/abc236_g\"\n//\
     \ (min,max)\u534A\u74B0\n#include <iostream>\n#include \"src/Math/SemiRing.hpp\"\
     \n#include \"src/LinearAlgebra/Matrix.hpp\"\nusing namespace std;\nsigned main()\
@@ -166,8 +162,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2023-04-02 00:58:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-04-03 21:10:08+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp
 layout: document

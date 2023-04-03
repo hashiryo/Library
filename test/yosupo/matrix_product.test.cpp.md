@@ -58,9 +58,9 @@ data:
     \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
     \ w, R v= R()): W(w), dat(v, h * w) {}\n size_t width() const { return W; }\n\
-    \ size_t height() const { return W ? dat.size() / W : 0; }\n operator bool() const\
-    \ { return W; }\n auto operator[](int i) { return std::next(std::begin(dat), i\
-    \ * W); }\n auto operator[](int i) const { return std::next(std::cbegin(dat),\
+    \ size_t height() const { return W ? dat.size() / W : 0; }\n explicit operator\
+    \ bool() const { return W; }\n auto operator[](int i) { return std::next(std::begin(dat),\
+    \ i * W); }\n auto operator[](int i) const { return std::next(std::cbegin(dat),\
     \ i * W); }\n bool operator==(const Matrix &r) const { return W == r.W && dat.size()\
     \ == r.dat.size() && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r)\
     \ const { return W != r.W || dat.size() != r.dat.size() || (dat != r.dat).max();\
@@ -97,28 +97,28 @@ data:
     \  for (; n--;) ret[n][n]= 1;\n  return ret;\n }\n Matrix(): H(0), W(0), m(0)\
     \ {}\n Matrix(size_t h, size_t w): H(h), W(w), m((w + 127) >> 7), dat(u128(0),\
     \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ H; }\n operator bool() const { return W; }\n Array operator[](int i) { return\
-    \ {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const Matrix\
-    \ &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const\
-    \ Matrix &r) const { return W != r.W || H != r.H || (dat != r.dat).max(); }\n\
-    \ Matrix &operator+=(const Matrix &r) { return assert(H == r.H), assert(W == r.W),\
-    \ dat^= r.dat, *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
-    \ r; }\n Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix\
-    \ ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n  for (size_t i= 0; i < H; ++i,\
-    \ std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n   const u128\
-    \ *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b, r.m))\n\
-    \    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n  return\
-    \ ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this * r; }\n\
-    \ Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W == r.size());\n\
-    \  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t i= 0; i <\
-    \ H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n  return\
-    \ ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for (auto ret=\
-    \ identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>= 1) : !(k>>=\
-    \ 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 2 \"src/Math/mod_inv.hpp\"\
-    \n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int>\
-    \ constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
+    \ { return {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const\
+    \ Matrix &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n\
+    \ bool operator!=(const Matrix &r) const { return W != r.W || H != r.H || (dat\
+    \ != r.dat).max(); }\n Matrix &operator+=(const Matrix &r) { return assert(H ==\
+    \ r.H), assert(W == r.W), dat^= r.dat, *this; }\n Matrix operator+(const Matrix\
+    \ &r) const { return Matrix(*this)+= r; }\n Matrix operator*(const Matrix &r)\
+    \ const {\n  assert(W == r.H);\n  Matrix ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n\
+    \  for (size_t i= 0; i < H; ++i, std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n\
+    \   const u128 *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b,\
+    \ r.m))\n    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n\
+    \  return ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this\
+    \ * r; }\n Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W ==\
+    \ r.size());\n  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t\
+    \ i= 0; i < H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n\
+    \  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for\
+    \ (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>=\
+    \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 2\
+    \ \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
+    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -223,7 +223,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_product.test.cpp
   requiredBy: []
-  timestamp: '2023-04-02 00:58:03+09:00'
+  timestamp: '2023-04-03 21:10:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/matrix_product.test.cpp

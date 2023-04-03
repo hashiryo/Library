@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,7 +45,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/matrix_product.test.cpp
     title: test/yosupo/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
   - icon: ':heavy_check_mark:'
@@ -101,9 +101,9 @@ data:
     \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
     \ w, R v= R()): W(w), dat(v, h * w) {}\n size_t width() const { return W; }\n\
-    \ size_t height() const { return W ? dat.size() / W : 0; }\n operator bool() const\
-    \ { return W; }\n auto operator[](int i) { return std::next(std::begin(dat), i\
-    \ * W); }\n auto operator[](int i) const { return std::next(std::cbegin(dat),\
+    \ size_t height() const { return W ? dat.size() / W : 0; }\n explicit operator\
+    \ bool() const { return W; }\n auto operator[](int i) { return std::next(std::begin(dat),\
+    \ i * W); }\n auto operator[](int i) const { return std::next(std::cbegin(dat),\
     \ i * W); }\n bool operator==(const Matrix &r) const { return W == r.W && dat.size()\
     \ == r.dat.size() && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r)\
     \ const { return W != r.W || dat.size() != r.dat.size() || (dat != r.dat).max();\
@@ -140,40 +140,40 @@ data:
     \  for (; n--;) ret[n][n]= 1;\n  return ret;\n }\n Matrix(): H(0), W(0), m(0)\
     \ {}\n Matrix(size_t h, size_t w): H(h), W(w), m((w + 127) >> 7), dat(u128(0),\
     \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ H; }\n operator bool() const { return W; }\n Array operator[](int i) { return\
-    \ {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const Matrix\
-    \ &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const\
-    \ Matrix &r) const { return W != r.W || H != r.H || (dat != r.dat).max(); }\n\
-    \ Matrix &operator+=(const Matrix &r) { return assert(H == r.H), assert(W == r.W),\
-    \ dat^= r.dat, *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
-    \ r; }\n Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix\
-    \ ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n  for (size_t i= 0; i < H; ++i,\
-    \ std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n   const u128\
-    \ *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b, r.m))\n\
-    \    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n  return\
-    \ ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this * r; }\n\
-    \ Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W == r.size());\n\
-    \  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t i= 0; i <\
-    \ H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n  return\
-    \ ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for (auto ret=\
-    \ identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>= 1) : !(k>>=\
-    \ 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n"
+    \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
+    \ { return {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const\
+    \ Matrix &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n\
+    \ bool operator!=(const Matrix &r) const { return W != r.W || H != r.H || (dat\
+    \ != r.dat).max(); }\n Matrix &operator+=(const Matrix &r) { return assert(H ==\
+    \ r.H), assert(W == r.W), dat^= r.dat, *this; }\n Matrix operator+(const Matrix\
+    \ &r) const { return Matrix(*this)+= r; }\n Matrix operator*(const Matrix &r)\
+    \ const {\n  assert(W == r.H);\n  Matrix ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n\
+    \  for (size_t i= 0; i < H; ++i, std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n\
+    \   const u128 *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b,\
+    \ r.m))\n    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n\
+    \  return ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this\
+    \ * r; }\n Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W ==\
+    \ r.size());\n  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t\
+    \ i= 0; i < H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n\
+    \  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for\
+    \ (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>=\
+    \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n"
   code: "#pragma once\n#include <cassert>\n#include \"src/LinearAlgebra/Vector.hpp\"\
     \nnamespace la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
     \ W;\n std::valarray<R> dat;\npublic:\n static Matrix identity_matrix(int n) {\n\
     \  Matrix ret(n, n);\n  return ret.dat[std::slice(0, n, n + 1)]= R(true), ret;\n\
     \ }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t w, R v= R()): W(w), dat(v, h\
     \ * w) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ W ? dat.size() / W : 0; }\n operator bool() const { return W; }\n auto operator[](int\
-    \ i) { return std::next(std::begin(dat), i * W); }\n auto operator[](int i) const\
-    \ { return std::next(std::cbegin(dat), i * W); }\n bool operator==(const Matrix\
-    \ &r) const { return W == r.W && dat.size() == r.dat.size() && (dat == r.dat).min();\
-    \ }\n bool operator!=(const Matrix &r) const { return W != r.W || dat.size() !=\
-    \ r.dat.size() || (dat != r.dat).max(); }\n Matrix &operator+=(const Matrix &r)\
-    \ { return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+= r.dat,\
-    \ *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
+    \ W ? dat.size() / W : 0; }\n explicit operator bool() const { return W; }\n auto\
+    \ operator[](int i) { return std::next(std::begin(dat), i * W); }\n auto operator[](int\
+    \ i) const { return std::next(std::cbegin(dat), i * W); }\n bool operator==(const\
+    \ Matrix &r) const { return W == r.W && dat.size() == r.dat.size() && (dat ==\
+    \ r.dat).min(); }\n bool operator!=(const Matrix &r) const { return W != r.W ||\
+    \ dat.size() != r.dat.size() || (dat != r.dat).max(); }\n Matrix &operator+=(const\
+    \ Matrix &r) { return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+=\
+    \ r.dat, *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
     \ r; }\n Matrix operator*(const Matrix &r) const {\n  const size_t h= height(),\
     \ w= r.W, l= W;\n  assert(l == r.height());\n  Matrix ret(h, w);\n  auto a= std::cbegin(dat);\n\
     \  auto c= std::begin(ret.dat);\n  for (int i= h; i--; std::advance(c, w)) {\n\
@@ -205,26 +205,26 @@ data:
     \  for (; n--;) ret[n][n]= 1;\n  return ret;\n }\n Matrix(): H(0), W(0), m(0)\
     \ {}\n Matrix(size_t h, size_t w): H(h), W(w), m((w + 127) >> 7), dat(u128(0),\
     \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ H; }\n operator bool() const { return W; }\n Array operator[](int i) { return\
-    \ {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int i) const\
-    \ { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const Matrix\
-    \ &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const\
-    \ Matrix &r) const { return W != r.W || H != r.H || (dat != r.dat).max(); }\n\
-    \ Matrix &operator+=(const Matrix &r) { return assert(H == r.H), assert(W == r.W),\
-    \ dat^= r.dat, *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
-    \ r; }\n Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix\
-    \ ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n  for (size_t i= 0; i < H; ++i,\
-    \ std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n   const u128\
-    \ *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b, r.m))\n\
-    \    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n  return\
-    \ ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this * r; }\n\
-    \ Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W == r.size());\n\
-    \  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t i= 0; i <\
-    \ H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n  return\
-    \ ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for (auto ret=\
-    \ identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>= 1) : !(k>>=\
-    \ 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;"
+    \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
+    \ { return {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n ConstArray get(int\
+    \ i) const { return {std::next(std::cbegin(dat), i * m)}; }\n bool operator==(const\
+    \ Matrix &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n\
+    \ bool operator!=(const Matrix &r) const { return W != r.W || H != r.H || (dat\
+    \ != r.dat).max(); }\n Matrix &operator+=(const Matrix &r) { return assert(H ==\
+    \ r.H), assert(W == r.W), dat^= r.dat, *this; }\n Matrix operator+(const Matrix\
+    \ &r) const { return Matrix(*this)+= r; }\n Matrix operator*(const Matrix &r)\
+    \ const {\n  assert(W == r.H);\n  Matrix ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n\
+    \  for (size_t i= 0; i < H; ++i, std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n\
+    \   const u128 *b= std::cbegin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b,\
+    \ r.m))\n    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n\
+    \  return ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this\
+    \ * r; }\n Vector<bool> operator*(const Vector<bool> &r) const {\n  assert(W ==\
+    \ r.size());\n  Vector<bool> ret(H);\n  auto a= std::cbegin(dat);\n  for (size_t\
+    \ i= 0; i < H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n\
+    \  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for\
+    \ (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>=\
+    \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;"
   dependsOn:
   - src/LinearAlgebra/Vector.hpp
   isVerificationFile: false
@@ -232,7 +232,7 @@ data:
   requiredBy:
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/LU_Decomposition.hpp
-  timestamp: '2023-04-02 00:58:03+09:00'
+  timestamp: '2023-04-03 21:10:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_product.test.cpp
