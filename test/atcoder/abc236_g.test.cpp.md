@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc236/tasks/abc236_g
@@ -37,21 +37,21 @@ data:
     \ r.x; }\n};\ntemplate <class Arith> struct MinPlus {\n using T= Arith;\n static\
     \ inline T o= std::numeric_limits<T>::max(), i= T();\n static void add(T &vl,\
     \ T vr) { vl= std::min(vl, vr); }\n static void mul(T &vl, T vr) { vl+= vr; }\n\
-    };\ntemplate <class T> using MinPlusRig= Rig<MinPlus<T>>;\ntemplate <class Arith>\
-    \ struct MaxPlus {\n using T= Arith;\n static inline T o= std::numeric_limits<T>::min(),\
+    };\ntemplate <class T> using MinPlusRig= SemiRing<MinPlus<T>>;\ntemplate <class\
+    \ Arith> struct MaxPlus {\n using T= Arith;\n static inline T o= std::numeric_limits<T>::min(),\
     \ i= T();\n static void add(T &vl, T vr) { vl= std::max(vl, vr); }\n static void\
-    \ mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate <class T> using MaxPlusRig= Rig<MaxPlus<T>>;\n\
+    \ mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate <class T> using MaxPlusRig= SemiRing<MaxPlus<T>>;\n\
     template <class Arith> struct MinMax {\n using T= Arith;\n static inline T o=\
     \ std::numeric_limits<T>::max(), i= std::numeric_limits<T>::min();\n static void\
     \ add(T &vl, T vr) { vl= std::min(vl, vr); }\n static void mul(T &vl, T vr) {\
-    \ vl= std::max(vl, vr); }\n};\ntemplate <class T> using MinMaxRig= Rig<MinMax<T>>;\n\
+    \ vl= std::max(vl, vr); }\n};\ntemplate <class T> using MinMaxRig= SemiRing<MinMax<T>>;\n\
     template <class Uint> struct BitwiseOrAnd {\n using T= Uint;\n static constexpr\
     \ T o= 0, i= T(-1);\n static void add(T &vl, T vr) { vl|= vr; }\n static void\
     \ mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate <class T= unsigned long long> using\
-    \ BitwiseOrAndRig= Rig<BitwiseOrAnd<T>>;\ntemplate <class Uint> struct BitwiseXorAnd\
+    \ BitwiseOrAndRig= SemiRing<BitwiseOrAnd<T>>;\ntemplate <class Uint> struct BitwiseXorAnd\
     \ {\n using T= Uint;\n static constexpr T o= 0, i= T(-1);\n static void add(T\
     \ &vl, T vr) { vl^= vr; }\n static void mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate\
-    \ <class T= unsigned long long> using BitwiseXorAndRig= Rig<BitwiseXorAnd<T>>;\n\
+    \ <class T= unsigned long long> using BitwiseXorAndRig= SemiRing<BitwiseXorAnd<T>>;\n\
     #line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\
     \n#include <valarray>\nnamespace la_internal {\ntemplate <class R> struct Vector:\
     \ public std::valarray<R> {\n using std::valarray<R>::valarray;\n};\nusing u128=\
@@ -162,8 +162,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2023-04-03 21:10:08+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-04 01:00:07+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp
 layout: document

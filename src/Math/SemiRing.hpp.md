@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/SemiRing.hpp\"\n#include <limits>\n#include <type_traits>\n\
@@ -29,22 +29,22 @@ data:
     \ &os, const SemiRing &r) { return os << r.x; }\n};\ntemplate <class Arith> struct\
     \ MinPlus {\n using T= Arith;\n static inline T o= std::numeric_limits<T>::max(),\
     \ i= T();\n static void add(T &vl, T vr) { vl= std::min(vl, vr); }\n static void\
-    \ mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate <class T> using MinPlusRig= Rig<MinPlus<T>>;\n\
+    \ mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate <class T> using MinPlusRig= SemiRing<MinPlus<T>>;\n\
     template <class Arith> struct MaxPlus {\n using T= Arith;\n static inline T o=\
     \ std::numeric_limits<T>::min(), i= T();\n static void add(T &vl, T vr) { vl=\
     \ std::max(vl, vr); }\n static void mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate\
-    \ <class T> using MaxPlusRig= Rig<MaxPlus<T>>;\ntemplate <class Arith> struct\
+    \ <class T> using MaxPlusRig= SemiRing<MaxPlus<T>>;\ntemplate <class Arith> struct\
     \ MinMax {\n using T= Arith;\n static inline T o= std::numeric_limits<T>::max(),\
     \ i= std::numeric_limits<T>::min();\n static void add(T &vl, T vr) { vl= std::min(vl,\
     \ vr); }\n static void mul(T &vl, T vr) { vl= std::max(vl, vr); }\n};\ntemplate\
-    \ <class T> using MinMaxRig= Rig<MinMax<T>>;\ntemplate <class Uint> struct BitwiseOrAnd\
-    \ {\n using T= Uint;\n static constexpr T o= 0, i= T(-1);\n static void add(T\
-    \ &vl, T vr) { vl|= vr; }\n static void mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate\
-    \ <class T= unsigned long long> using BitwiseOrAndRig= Rig<BitwiseOrAnd<T>>;\n\
+    \ <class T> using MinMaxRig= SemiRing<MinMax<T>>;\ntemplate <class Uint> struct\
+    \ BitwiseOrAnd {\n using T= Uint;\n static constexpr T o= 0, i= T(-1);\n static\
+    \ void add(T &vl, T vr) { vl|= vr; }\n static void mul(T &vl, T vr) { vl&= vr;\
+    \ }\n};\ntemplate <class T= unsigned long long> using BitwiseOrAndRig= SemiRing<BitwiseOrAnd<T>>;\n\
     template <class Uint> struct BitwiseXorAnd {\n using T= Uint;\n static constexpr\
     \ T o= 0, i= T(-1);\n static void add(T &vl, T vr) { vl^= vr; }\n static void\
     \ mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate <class T= unsigned long long> using\
-    \ BitwiseXorAndRig= Rig<BitwiseXorAnd<T>>;\n"
+    \ BitwiseXorAndRig= SemiRing<BitwiseXorAnd<T>>;\n"
   code: "#pragma once\n#include <limits>\n#include <type_traits>\n#include <cstddef>\n\
     template <class M> struct SemiRing {\n using T= typename M::T;\n T x;\n SemiRing():\
     \ x(M::o) {}\n SemiRing(bool y): x(y ? M::i : M::o) {}\n template <class U, std::enable_if_t<std::is_convertible_v<U,\
@@ -60,27 +60,27 @@ data:
     \ r.x; }\n};\ntemplate <class Arith> struct MinPlus {\n using T= Arith;\n static\
     \ inline T o= std::numeric_limits<T>::max(), i= T();\n static void add(T &vl,\
     \ T vr) { vl= std::min(vl, vr); }\n static void mul(T &vl, T vr) { vl+= vr; }\n\
-    };\ntemplate <class T> using MinPlusRig= Rig<MinPlus<T>>;\ntemplate <class Arith>\
-    \ struct MaxPlus {\n using T= Arith;\n static inline T o= std::numeric_limits<T>::min(),\
+    };\ntemplate <class T> using MinPlusRig= SemiRing<MinPlus<T>>;\ntemplate <class\
+    \ Arith> struct MaxPlus {\n using T= Arith;\n static inline T o= std::numeric_limits<T>::min(),\
     \ i= T();\n static void add(T &vl, T vr) { vl= std::max(vl, vr); }\n static void\
-    \ mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate <class T> using MaxPlusRig= Rig<MaxPlus<T>>;\n\
+    \ mul(T &vl, T vr) { vl+= vr; }\n};\ntemplate <class T> using MaxPlusRig= SemiRing<MaxPlus<T>>;\n\
     template <class Arith> struct MinMax {\n using T= Arith;\n static inline T o=\
     \ std::numeric_limits<T>::max(), i= std::numeric_limits<T>::min();\n static void\
     \ add(T &vl, T vr) { vl= std::min(vl, vr); }\n static void mul(T &vl, T vr) {\
-    \ vl= std::max(vl, vr); }\n};\ntemplate <class T> using MinMaxRig= Rig<MinMax<T>>;\n\
+    \ vl= std::max(vl, vr); }\n};\ntemplate <class T> using MinMaxRig= SemiRing<MinMax<T>>;\n\
     template <class Uint> struct BitwiseOrAnd {\n using T= Uint;\n static constexpr\
     \ T o= 0, i= T(-1);\n static void add(T &vl, T vr) { vl|= vr; }\n static void\
     \ mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate <class T= unsigned long long> using\
-    \ BitwiseOrAndRig= Rig<BitwiseOrAnd<T>>;\ntemplate <class Uint> struct BitwiseXorAnd\
+    \ BitwiseOrAndRig= SemiRing<BitwiseOrAnd<T>>;\ntemplate <class Uint> struct BitwiseXorAnd\
     \ {\n using T= Uint;\n static constexpr T o= 0, i= T(-1);\n static void add(T\
     \ &vl, T vr) { vl^= vr; }\n static void mul(T &vl, T vr) { vl&= vr; }\n};\ntemplate\
-    \ <class T= unsigned long long> using BitwiseXorAndRig= Rig<BitwiseXorAnd<T>>;\n"
+    \ <class T= unsigned long long> using BitwiseXorAndRig= SemiRing<BitwiseXorAnd<T>>;\n"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/SemiRing.hpp
   requiredBy: []
-  timestamp: '2023-04-03 21:10:08+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-04-04 01:00:07+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc236_g.test.cpp
   - test/yukicoder/1340.test.cpp
