@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -22,15 +22,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc208_e.test.cpp
     title: test/atcoder/abc208_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc127_a.test.cpp
     title: test/atcoder/arc127_a.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Automaton/dfa_operations.hpp\"\n#include <cassert>\n\
@@ -124,14 +124,14 @@ data:
   path: src/Automaton/dfa_operations.hpp
   requiredBy: []
   timestamp: '2023-01-21 18:41:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc154_e.test.cpp
-  - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc208_e.test.cpp
   - test/atcoder/arc127_a.test.cpp
+  - test/atcoder/abc235_f.test.cpp
+  - test/atcoder/abc138_f.test.cpp
   - test/atcoder/abc129_e.test.cpp
+  - test/atcoder/abc154_e.test.cpp
 documentation_of: src/Automaton/dfa_operations.hpp
 layout: document
 title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\

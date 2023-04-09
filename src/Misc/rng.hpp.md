@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   _extendedVerifiedWith:
@@ -21,24 +21,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/z_algorithm.rollinghash.test.cpp
     title: test/yosupo/z_algorithm.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/rng.hpp\"\n#include <random>\nuint64_t rng() {\n\
@@ -55,16 +55,16 @@ data:
   requiredBy:
   - src/LinearAlgebra/MinimalPolynomial.hpp
   timestamp: '2023-03-12 01:58:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/z_algorithm.rollinghash.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - test/aoj/2614.rollinghash.test.cpp
-  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
-  - test/aoj/2397.SparseMat.test.cpp
+  - test/aoj/2614.rollinghash.test.cpp
   - test/aoj/2711.rollinghash.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
+  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
 documentation_of: src/Misc/rng.hpp

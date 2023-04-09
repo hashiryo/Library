@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/DFA_Inequality.hpp
     title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
       \u7406\u3059\u308BDFA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"

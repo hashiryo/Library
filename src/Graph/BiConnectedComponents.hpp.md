@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/DirichletConvSumTable.hpp
     title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -50,16 +50,16 @@ data:
     \ }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na(): mod(0){};\n CE MP_Na(u32 m):\
     \ mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l) * r % mod; }\n\
     \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br {  // mod < 2^31\n\
-    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m\
-    \ - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r)\
-    \ const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\
-    \ private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n)\
-    \ >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct\
-    \ MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n\
-    \ CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64\
-    \ r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63,\
-    \ mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n)\
-    \ const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
+    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(95\
+    \ - __builtin_clz(m - 1)), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32\
+    \ l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod)\
+    \ SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x)\
+    \ * n) >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\n\
+    struct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0)\
+    \ {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64\
+    \ l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64,\
+    \ 63, mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64\
+    \ n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
     \ CE IL u128 quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const\
     \ u128 &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n\
     \ u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0), v(0) {}\n CE MP_D2B1(u64\
@@ -238,8 +238,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.test.cpp
   requiredBy: []
-  timestamp: '2023-02-07 17:34:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-04-09 22:20:03+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.test.cpp
 layout: document

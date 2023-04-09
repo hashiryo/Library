@@ -12,16 +12,16 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':x:'
@@ -29,7 +29,7 @@ data:
     title: test/yukicoder/950.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
@@ -57,16 +57,16 @@ data:
     \ }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na(): mod(0){};\n CE MP_Na(u32 m):\
     \ mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l) * r % mod; }\n\
     \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br {  // mod < 2^31\n\
-    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m\
-    \ - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r)\
-    \ const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\
-    \ private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n)\
-    \ >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct\
-    \ MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n\
-    \ CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64\
-    \ r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63,\
-    \ mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n)\
-    \ const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
+    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(95\
+    \ - __builtin_clz(m - 1)), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32\
+    \ l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod)\
+    \ SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x)\
+    \ * n) >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\n\
+    struct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0)\
+    \ {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64\
+    \ l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64,\
+    \ 63, mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64\
+    \ n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
     \ CE IL u128 quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const\
     \ u128 &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n\
     \ u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0), v(0) {}\n CE MP_D2B1(u64\
@@ -155,14 +155,14 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Runtime.hpp
   requiredBy: []
-  timestamp: '2023-04-02 01:58:46+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-04-09 22:20:03+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc222_g.test.cpp
-  - test/yukicoder/950.test.cpp
+  - test/atcoder/abc270_g.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yukicoder/1339.test.cpp
+  - test/yukicoder/950.test.cpp
 documentation_of: src/Math/ModInt_Runtime.hpp
 layout: document
 title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"

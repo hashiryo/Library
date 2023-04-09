@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3506.test.cpp
     title: test/aoj/3506.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,9 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/738.BIT.test.cpp
     title: test/yukicoder/738.BIT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/compress.hpp\"\n#include <vector>\n#include <algorithm>\n\
@@ -51,18 +51,18 @@ data:
   path: src/Misc/compress.hpp
   requiredBy: []
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - test/aoj/3506.test.cpp
   - test/aoj/0655.test.cpp
   - test/aoj/2893.test.cpp
-  - test/yukicoder/738.BIT.test.cpp
+  - test/aoj/3506.test.cpp
   - test/yukicoder/1467.test.cpp
+  - test/yukicoder/738.BIT.test.cpp
+  - test/yukicoder/649.BIT.test.cpp
   - test/yukicoder/649.SegTree.test.cpp
   - test/yukicoder/529.LCT.test.cpp
-  - test/yukicoder/649.BIT.test.cpp
 documentation_of: src/Misc/compress.hpp
 layout: document
 title: "\u5EA7\u6A19\u5727\u7E2E"

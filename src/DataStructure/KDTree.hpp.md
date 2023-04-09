@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -235,11 +235,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/aoj/1068.KDT.test.cpp
-  - test/aoj/2842.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/yukicoder/728.KDT.test.cpp
+  - test/aoj/2842.KDT.test.cpp
+  - test/aoj/1068.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/728.KDT.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
 documentation_of: src/DataStructure/KDTree.hpp
 layout: document

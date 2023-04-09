@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/PersistentArray.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"

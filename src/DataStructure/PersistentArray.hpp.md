@@ -56,8 +56,8 @@ data:
   timestamp: '2023-01-21 21:27:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/persistent_unionfind.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp
+  - test/yosupo/persistent_unionfind.test.cpp
 documentation_of: src/DataStructure/PersistentArray.hpp
 layout: document
 title: "\u6C38\u7D9A\u914D\u5217"

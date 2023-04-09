@@ -4,20 +4,20 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
@@ -25,27 +25,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
@@ -69,16 +69,16 @@ data:
     \ }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na(): mod(0){};\n CE MP_Na(u32 m):\
     \ mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l) * r % mod; }\n\
     \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br {  // mod < 2^31\n\
-    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(__lg(m\
-    \ - 1) + 64), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r)\
-    \ const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\
-    \ private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x) * n)\
-    \ >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\nstruct\
-    \ MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n\
-    \ CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64 l, u64\
-    \ r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64, 63,\
-    \ mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64 n)\
-    \ const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
+    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(95\
+    \ - __builtin_clz(m - 1)), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32\
+    \ l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod)\
+    \ SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x)\
+    \ * n) >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\n\
+    struct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0)\
+    \ {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64\
+    \ l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64,\
+    \ 63, mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64\
+    \ n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
     \ CE IL u128 quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const\
     \ u128 &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n\
     \ u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0), v(0) {}\n CE MP_D2B1(u64\
@@ -182,20 +182,20 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
-  - src/Math/ModInt_Exp.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
+  - src/Math/ModInt_Exp.hpp
   - src/Math/mod_tetration.hpp
-  timestamp: '2023-02-07 15:39:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-04-09 22:20:03+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc228_e.test.cpp
   - test/yosupo/factorize.test.cpp
-  - test/yosupo/kth_root_mod.test.cpp
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/kth_root_mod.test.cpp
   - test/aoj/NTL_1_D.test.cpp
-  - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/Factors.hpp
 layout: document
 title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"

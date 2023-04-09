@@ -75,15 +75,15 @@ data:
   verifiedWith:
   - test/yosupo/directedmst.test.cpp
   - test/yosupo/two_edge_connected_components.test.cpp
-  - test/aoj/DSL_1_A.test.cpp
   - test/aoj/GRL_2_B.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/GRL_2_A.kruskal.test.cpp
-  - test/aoj/3506.test.cpp
   - test/aoj/GRL_3_B.test.cpp
-  - test/aoj/2893.test.cpp
+  - test/aoj/0342.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/2893.test.cpp
   - test/aoj/2647.test.cpp
+  - test/aoj/3506.test.cpp
+  - test/aoj/DSL_1_A.test.cpp
+  - test/aoj/GRL_2_A.kruskal.test.cpp
   - test/yukicoder/529.LCT.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,19 +24,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1333.test.cpp
     title: test/yukicoder/1333.test.cpp
   - icon: ':heavy_check_mark:'
@@ -57,9 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/922.test.cpp
     title: test/yukicoder/922.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -166,25 +166,25 @@ data:
   path: src/Graph/rerooting.hpp
   requiredBy: []
   timestamp: '2023-03-02 03:48:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - test/aoj/GRL_5_A.test.cpp
-  - test/aoj/1595.test.cpp
+  - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc220_f.test.cpp
-  - test/atcoder/abc160_f.test.cpp
-  - test/yukicoder/1494.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1718.test.cpp
-  - test/yukicoder/768.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+  - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
   - test/yukicoder/1418.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/1333.test.cpp
-  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/1718.test.cpp
+  - test/yukicoder/1124.test.cpp
   - test/yukicoder/1976.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/768.test.cpp
   - test/yukicoder/1295.test.cpp
+  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1494.test.cpp
 documentation_of: src/Graph/rerooting.hpp
 layout: document
 title: "\u5168\u65B9\u4F4D\u6728DP"

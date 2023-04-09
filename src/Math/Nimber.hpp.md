@@ -200,8 +200,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/nim_product_64.test.cpp
-  - test/unit_test/nimber_inv.test.cpp
   - test/unit_test/nimber_log.test.cpp
+  - test/unit_test/nimber_inv.test.cpp
   - test/unit_test/nimber_sqrt.test.cpp
 documentation_of: src/Math/Nimber.hpp
 layout: document
