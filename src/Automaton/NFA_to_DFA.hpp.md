@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   - icon: ':question:'
@@ -9,16 +9,10 @@ data:
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2587.test.cpp
-    title: test/aoj/2587.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/agc015_d.test.cpp
-    title: test/atcoder/agc015_d.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Automaton/NFA_to_DFA.hpp\"\n#include <set>\n#include\
@@ -108,10 +102,8 @@ data:
   path: src/Automaton/NFA_to_DFA.hpp
   requiredBy: []
   timestamp: '2023-01-21 18:41:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/atcoder/agc015_d.test.cpp
-  - test/aoj/2587.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Automaton/NFA_to_DFA.hpp
 layout: document
 title: "NFA\u3092DFA\u306B\u5909\u63DB"

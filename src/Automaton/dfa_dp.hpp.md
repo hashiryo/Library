@@ -6,47 +6,20 @@ data:
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Automaton/DFA_Compress.hpp
     title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Automaton/NFA_to_DFA.hpp
     title: "NFA\u3092DFA\u306B\u5909\u63DB"
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2587.test.cpp
-    title: test/aoj/2587.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc117_d.test.cpp
-    title: test/atcoder/abc117_d.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc129_e.test.cpp
-    title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc138_f.test.cpp
-    title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc154_e.test.cpp
-    title: test/atcoder/abc154_e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc208_e.test.cpp
-    title: test/atcoder/abc208_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc235_f.test.cpp
-    title: test/atcoder/abc235_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/agc015_d.test.cpp
-    title: test/atcoder/agc015_d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc127_a.test.cpp
-    title: test/atcoder/arc127_a.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Automaton/dfa_dp.hpp\"\n#include <vector>\n#line 2 \"\
@@ -108,17 +81,8 @@ data:
   - src/Automaton/dfa_operations.hpp
   - src/Automaton/DFA_Compress.hpp
   timestamp: '2023-01-21 17:49:49+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/atcoder/abc208_e.test.cpp
-  - test/atcoder/arc127_a.test.cpp
-  - test/atcoder/abc235_f.test.cpp
-  - test/atcoder/abc117_d.test.cpp
-  - test/atcoder/agc015_d.test.cpp
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc129_e.test.cpp
-  - test/atcoder/abc154_e.test.cpp
-  - test/aoj/2587.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Automaton/dfa_dp.hpp
 layout: document
 title: "DFA\u4E0A\u306EDP"

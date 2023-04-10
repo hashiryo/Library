@@ -2,21 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Automaton/DFA_Inequality.hpp
-    title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\
-      \u7406\u3059\u308BDFA"
-  - icon: ':question:'
-    path: src/Automaton/dfa_dp.hpp
-    title: "DFA\u4E0A\u306EDP"
-  - icon: ':question:'
-    path: src/Automaton/dfa_operations.hpp
-    title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
-      \u6F14\u7B97"
-  - icon: ':question:'
-    path: src/Internal/HAS_CHECK.hpp
-    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
-      \u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
@@ -25,6 +10,9 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':x:'
+    path: src/Misc/Automaton.hpp
+    title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -36,78 +24,87 @@ data:
     links:
     - https://atcoder.jp/contests/abc138/tasks/abc138_f
   bundledCode: "#line 1 \"test/atcoder/abc138_f.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc138/tasks/abc138_f\"\
-    \n#include <iostream>\n#include <vector>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
-    \n#include <type_traits>\n#define HAS_CHECK(member, Dummy) \\\n template <class\
-    \ tClass> struct has_##member { \\\n  template <class U, Dummy> static std::true_type\
-    \ check(U *); \\\n  static std::false_type check(...); \\\n  static tClass *mClass;\
-    \ \\\n  static const bool value= decltype(check(mClass))::value; \\\n };\n#define\
-    \ HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member)\
-    \ HAS_CHECK(member, class dummy= typename U::member)\n#line 4 \"src/Automaton/dfa_dp.hpp\"\
-    \nHAS_TYPE(symbol_t);\nHAS_MEMBER(alphabet);\nHAS_MEMBER(initial_state);\nHAS_MEMBER(transition);\n\
-    HAS_MEMBER(is_accept);\nHAS_MEMBER(state_size);\nHAS_MEMBER(eps_transition);\n\
-    HAS_MEMBER(is_reject);\ntemplate <class A> using is_automaton= std::conjunction<has_symbol_t<A>,\
-    \ has_alphabet<A>, has_initial_state<A>, has_transition<A>, has_is_accept<A>>;\n\
-    template <class A> using trans_t= std::invoke_result_t<decltype(&A::transition),\
-    \ A, int, typename A::symbol_t, int>;\ntemplate <class DFA> constexpr bool is_dfa_v=\
-    \ std::conjunction_v<has_state_size<DFA>, is_automaton<DFA>, std::is_same<trans_t<DFA>,\
-    \ int>>;\ntemplate <class T, class DFA, class Add, class F> T dfa_dp(const DFA\
-    \ &dfa, int len, const Add &add, const F &f, const T t0= T(0), const T init= T(1))\
-    \ {\n static_assert(is_dfa_v<DFA>);\n const auto alphabet= dfa.alphabet();\n const\
-    \ int S= dfa.state_size();\n std::vector<T> dp(S, t0);\n std::vector<char> visit(S,\
-    \ false);\n dp[dfa.initial_state()]= init, visit[dfa.initial_state()]= true;\n\
-    \ for (int i= 0; i < len; i++) {\n  std::vector<T> next(S, t0);\n  std::vector<char>\
-    \ next_visit(S, false);\n  for (int s= S; s--;)\n   if (visit[s])\n    for (const\
-    \ auto &a: alphabet)\n     if (int q= dfa.transition(s, a, i); q != -1) add(next[q],\
-    \ f(dp[s], a, i)), next_visit[q]= true;\n  dp.swap(next), visit.swap(next_visit);\n\
-    \ }\n T ret= t0;\n for (int s= S; s--;)\n  if (dfa.is_accept(s)) add(ret, dp[s]);\n\
-    \ return ret;\n}\ntemplate <class T, class DFA> T dfa_dp(const DFA &dfa, int len,\
-    \ const T t0= T(0), const T init= T(1)) {\n return dfa_dp<T>(\n     dfa, len,\
-    \ [](T &l, const T &r) { l+= r; }, [](const T &v, const typename DFA::symbol_t\
-    \ &, int) { return v; }, t0, init);\n}\n#line 3 \"src/Automaton/DFA_Inequality.hpp\"\
-    \n#include <algorithm>\n#include <string>\n#include <cassert>\ntemplate <bool\
-    \ ge= false>  // le or ge\nstruct DFA_Inequality {    // view from the top digit\n\
-    \ using symbol_t= int;\n DFA_Inequality(std::vector<symbol_t> &&str_, std::vector<symbol_t>\
-    \ &&alp_): str(std::move(str_)), alp(std::move(alp_)) {}\n DFA_Inequality(const\
-    \ std::string &n, int m) {  // n : m-ary notation\n  assert(2 <= m && m <= 10);\n\
-    \  for (int l= n.length(), i= 0; i < l;) str.push_back(n[i++] - '0');\n  for (int\
-    \ i= 0; i < m; i++) alp.push_back(i);\n }\n template <class Int>  // m-ary number\n\
-    \ DFA_Inequality(Int n, int m, int len= 0) {\n  for (; n; n/= m, len--) str.push_back(n\
-    \ % m);\n  while (len-- > 0) str.push_back(0);\n  for (int i= 0; i < m; i++) alp.push_back(i);\n\
-    \  std::reverse(str.begin(), str.end());\n }\n inline std::vector<symbol_t> alphabet()\
-    \ const { return alp; }\n inline int initial_state() const { return 0; }\n inline\
-    \ int transition(int s, const symbol_t &a, int i) const {\n  if (s != 0) return\
-    \ s;\n  if (i >= (int)str.size()) return -1;\n  if (a == str[i]) return 0;\n \
-    \ if constexpr (ge) return a < str[i] ? -1 : 1;\n  else return a > str[i] ? -1\
-    \ : 1;\n }\n inline bool is_accept(int s) const { return s >= 0; }\n inline int\
-    \ state_size() const { return 2; }\nprivate:\n std::vector<symbol_t> str, alp;\n\
-    };\n#line 4 \"src/Automaton/dfa_operations.hpp\"\ntemplate <class DFA, class S,\
-    \ class F> struct DFA_SymbolMap {\n using symbol_t= S;\n DFA_SymbolMap(const DFA\
-    \ &dfa_, const std::vector<symbol_t> &alp_, const F &f_): dfa(dfa_), alp(alp_),\
-    \ f(f_) { static_assert(is_dfa_v<DFA>); }\n std::vector<symbol_t> alphabet() const\
-    \ { return alp; }\n inline int initial_state() const { return dfa.initial_state();\
-    \ }\n inline int transition(int s, const symbol_t &a, int i) const { return dfa.transition(s,\
-    \ f(a), i); }\n inline bool is_accept(int s) const { return dfa.is_accept(s);\
-    \ }\n inline int state_size() const { return dfa.state_size(); }\nprivate:\n const\
-    \ DFA dfa;\n const std::vector<symbol_t> alp;\n const F f;\n};\ntemplate <class\
-    \ DFA0, class DFA1> struct DFA_Intersection {\n using symbol_t= typename DFA0::symbol_t;\n\
-    \ static_assert(std::is_same_v<symbol_t, typename DFA1::symbol_t>);\n DFA_Intersection(const\
-    \ DFA0 &dfa0_, const DFA1 &dfa1_): dfa0(dfa0_), dfa1(dfa1_) {\n  static_assert(is_dfa_v<DFA0>);\n\
-    \  static_assert(is_dfa_v<DFA1>);\n }\n inline std::vector<symbol_t> alphabet()\
-    \ const {\n  auto alphabet= dfa0.alphabet();\n  assert(alphabet == dfa1.alphabet());\n\
-    \  return alphabet;\n }\n inline int initial_state() const { return product(dfa0.initial_state(),\
-    \ dfa1.initial_state()); }\n inline int transition(int s, const symbol_t &c, int\
-    \ i) const {\n  auto [s0, s1]= projection(s);\n  return product(dfa0.transition(s0,\
-    \ c, i), dfa1.transition(s1, c, i));\n }\n inline bool is_accept(int s) const\
-    \ {\n  auto [s0, s1]= projection(s);\n  return dfa0.is_accept(s0) && dfa1.is_accept(s1);\n\
-    \ }\n inline int state_size() const { return dfa0.state_size() * dfa1.state_size();\
-    \ }\nprivate:\n inline int product(int s0, int s1) const { return s0 == -1 ||\
-    \ s1 == -1 ? -1 : s0 + s1 * dfa0.state_size(); }\n inline std::pair<int, int>\
-    \ projection(int s) const { return {s % dfa0.state_size(), s / dfa0.state_size()};\
-    \ }\n const DFA0 dfa0;\n const DFA1 dfa1;\n};\ntemplate <class DFA0, class DFA1,\
-    \ typename std::enable_if_t<is_dfa_v<DFA0> && is_dfa_v<DFA1>, std::nullptr_t>\
-    \ = nullptr> DFA_Intersection<DFA0, DFA1> operator&(const DFA0 &dfa0, const DFA1\
-    \ &dfa1) { return DFA_Intersection<DFA0, DFA1>(dfa0, dfa1); }\n#line 4 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \n#include <iostream>\n#include <vector>\n#include <array>\n#line 2 \"src/Misc/Automaton.hpp\"\
+    \n#include <type_traits>\n#include <set>\n#include <map>\n#include <unordered_map>\n\
+    #line 7 \"src/Misc/Automaton.hpp\"\n#include <algorithm>\n#include <queue>\n#include\
+    \ <cstdlib>\ntemplate <class symbol_t> class Automaton {\n std::vector<int> table;\n\
+    \ std::vector<int8_t> info;\n std::vector<symbol_t> alph;\n const int m;\n template\
+    \ <template <class, class> class Map, class state_t, class F, class G, class H>\
+    \ void build(const state_t &initial_state, const F &transition, const G &is_accept,\
+    \ const H &abs_reject) {\n  static_assert(std::is_same_v<bool, std::invoke_result_t<G,\
+    \ state_t>>);\n  static_assert(std::is_same_v<bool, std::invoke_result_t<H, state_t>>);\n\
+    \  Map<state_t, int> encode;\n  std::vector<state_t> decode;\n  int ts= 0;\n \
+    \ decode.push_back(initial_state), encode.emplace(initial_state, ts++);\n  for\
+    \ (int i= 0, k= 0; i < ts; ++i) {\n   auto s= decode[i];\n   table.resize(table.size()\
+    \ + m);\n   for (int j= 0; j < m; ++j) {\n    if (auto t= transition(s, j); abs_reject(t))\
+    \ table[k++]= -1;\n    else if (auto it= encode.find(t); it != encode.end()) table[k++]=\
+    \ it->second;\n    else table[k++]= ts, decode.push_back(t), encode.emplace(t,\
+    \ ts++);\n   }\n  }\n  info.resize(ts);\n  for (int i= ts; i--;) info[i]= is_accept(decode[i]);\n\
+    \ }\n Automaton(const std::vector<symbol_t> &alphabet): alph(alphabet), m(alph.size())\
+    \ {}\npublic:\n template <class state_t, class F, class G, std::enable_if_t<std::is_same_v<state_t,\
+    \ std::invoke_result_t<F, state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const\
+    \ std::vector<symbol_t> &alphabet, const state_t &initial_state, const F &transition,\
+    \ const G &is_accept): alph(alphabet), m(alph.size()) {\n  std::sort(alph.begin(),\
+    \ alph.end());\n  auto tr= [&](const state_t &s, int i) { return transition(s,\
+    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map>(initial_state,\
+    \ tr, is_accept, [](const state_t &) { return false; });\n  else build<std::map>(initial_state,\
+    \ tr, is_accept, [](const state_t &) { return false; });\n }\n template <class\
+    \ state_t, class F, class G, std::enable_if_t<std::is_same_v<state_t, std::invoke_result_t<F,\
+    \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
+    \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept,\
+    \ const state_t &abs_rej_state): alph(alphabet), m(alph.size()) {\n  std::sort(alph.begin(),\
+    \ alph.end());\n  auto tr= [&](const state_t &s, int i) { return transition(s,\
+    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map>(initial_state,\
+    \ tr, is_accept, [abs_rej_state](const state_t &s) { return s == abs_rej_state;\
+    \ });\n  else build<std::map>(initial_state, tr, is_accept, [abs_rej_state](const\
+    \ state_t &s) { return s == abs_rej_state; });\n }\n template <class state_t,\
+    \ class F, class G, std::enable_if_t<std::is_same_v<std::set<state_t>, std::invoke_result_t<F,\
+    \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
+    \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept):\
+    \ alph(alphabet), m(alph.size()) {\n  static_assert(std::is_same_v<bool, std::invoke_result_t<G,\
+    \ state_t>>);\n  std::sort(alph.begin(), alph.end());\n  auto tr= [&](const std::set<state_t>\
+    \ &s, int i) {\n   std::set<state_t> ret;\n   for (const auto &x: s) {\n    auto\
+    \ ys= transition(x, alph[i]);\n    ret.insert(ys.begin(), ys.end());\n   }\n \
+    \  return ret;\n  };\n  auto ac= [&](const std::set<state_t> &s) { return std::any_of(s.begin(),\
+    \ s.end(), is_accept); };\n  build<std::map>(std::set<state_t>({initial_state}),\
+    \ tr, ac, [](const std::set<state_t> &s) { return s == std::set<state_t>(); });\n\
+    \ }\n template <class state_t, class F, class G, class H, std::enable_if_t<std::is_same_v<std::set<state_t>,\
+    \ std::invoke_result_t<F, state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const\
+    \ std::vector<symbol_t> &alphabet, const state_t &initial_state, const F &transition,\
+    \ const G &is_accept, const H &eps_trans): alph(alphabet), m(alph.size()) {\n\
+    \  static_assert(std::is_same_v<bool, std::invoke_result_t<G, state_t>>);\n  static_assert(std::is_same_v<std::set<state_t>,\
+    \ std::invoke_result_t<H, state_t>>);\n  std::sort(alph.begin(), alph.end());\n\
+    \  auto eps_closure= [&](std::set<state_t> s) {\n   for (std::set<state_t> t;\
+    \ s != t;) {\n    t= s;\n    for (const auto &x: t) {\n     auto ys= eps_trans(x);\n\
+    \     s.insert(ys.begin(), ys.end());\n    }\n   }\n   return s;\n  };\n  auto\
+    \ tr= [&](const std::set<state_t> &s, int i) {\n   std::set<state_t> ret;\n  \
+    \ for (const auto &x: s) {\n    auto ys= transition(x, alph[i]);\n    ret.insert(ys.begin(),\
+    \ ys.end());\n   }\n   return eps_closure(ret);\n  };\n  auto ac= [&](const std::set<state_t>\
+    \ &s) { return std::any_of(s.begin(), s.end(), is_accept); };\n  build<std::map>(eps_closure({initial_state}),\
+    \ tr, ac, [](const std::set<state_t> &s) { return s == std::set<state_t>(); });\n\
+    \ }\n size_t alphabet_size() const { return m; }\n Automaton operator&(const Automaton\
+    \ &r) const {\n  assert(alph == r.alph);\n  const int S= info.size();\n  auto\
+    \ tr= [&](int s, int q) {\n   auto [s1, s0]= std::div(s, S);\n   int t1= r.table[s1\
+    \ * m + q], t0= table[s0 * m + q];\n   return t0 == -1 || t1 == -1 ? -1 : t1 *\
+    \ S + t0;\n  };\n  auto ac= [&](int s) {\n   auto [s1, s0]= std::div(s, S);\n\
+    \   return info[s0] == 1 && r.info[s1] == 1;\n  };\n  Automaton ret(alph);\n \
+    \ return ret.build<std::unordered_map>(0, tr, ac, [](int s) { return s == -1;\
+    \ }), ret;\n }\n template <class T, class A, class F> T dp_run(int n, const A\
+    \ &op, const T &ti, const F &f, const T &init) const {\n  static_assert(std::is_same_v<T,\
+    \ std::invoke_result_t<A, T, T>>);\n  static_assert(std::is_same_v<T, std::invoke_result_t<F,\
+    \ T, symbol_t, int>>);\n  const size_t S= info.size();\n  std::queue<std::pair<int,\
+    \ int>> que;\n  T dp[2][S], ret= ti;\n  bool in[2][S];\n  for (std::fill_n(dp[0],\
+    \ S, ti), std::fill_n(dp[1], S, ti), std::fill_n(in[0], S, 0), std::fill_n(in[1],\
+    \ S, 0), dp[0][0]= init, que.emplace(0, 0), in[0][0]= 1; que.size();) {\n   auto\
+    \ [s, i]= que.front();\n   bool b= i & 1;\n   T tmp= dp[b][s];\n   if (que.pop(),\
+    \ in[b][s]= 0, dp[b][s]= ti; i == n) {\n    if (info[s] == 1) ret= op(ret, tmp);\n\
+    \    continue;\n   }\n   auto l= table.cbegin() + s * m;\n   for (int j= m; j--;)\n\
+    \    if (int t= l[j]; t != -1)\n     if (dp[!b][t]= op(dp[!b][t], f(tmp, alph[j],\
+    \ i)); !in[!b][t]) que.emplace(t, i + 1), in[!b][t]= 1;\n  }\n  return ret;\n\
+    \ }\n template <class T> T num(int n) const {\n  return dp_run(\n      n, [](const\
+    \ T &l, const T &r) { return l + r; }, T(), [](const T &x, const auto &, auto)\
+    \ { return x; }, T(1));\n }\n};\n#line 3 \"src/Math/mod_inv.hpp\"\n#include <cassert>\n\
+    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -188,47 +185,40 @@ data:
     \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 8 \"test/atcoder/abc138_f.test.cpp\"\nusing namespace\
-    \ std;\n\nusing Pii= pair<int, int>;\nstruct DFA_SameLen {\n using symbol_t= Pii;\n\
-    \ vector<symbol_t> alphabet() const { return {{0, 0}, {0, 1}, {1, 1}}; }\n inline\
-    \ int initial_state() const { return 0; }\n inline int transition(int s, const\
-    \ symbol_t &a, int) const {\n  const auto &[u, v]= a;\n  if (s == 1) return 1;\n\
-    \  if (u != v) return -1;\n  return u == 1;\n }\n inline bool is_accept(int s)\
-    \ const { return s >= 0; }\n inline int state_size() const { return 2; }\n};\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<int(1e9\
-    \ + 7)>;\n long long L, R;\n cin >> L >> R;\n auto dfa_samelen= DFA_SameLen();\n\
-    \ auto alp= dfa_samelen.alphabet();\n auto dfa_y_le= DFA_SymbolMap(DFA_Inequality(R,\
-    \ 2, 61), alp, [](const Pii &a) { return a.second; });\n auto dfa_x_ge= DFA_SymbolMap(DFA_Inequality<true>(L,\
-    \ 2, 61), alp, [](const Pii &a) { return a.first; });\n cout << dfa_dp<Mint>(dfa_x_ge\
-    \ & dfa_y_le & dfa_samelen, 61) << '\\n';\n return 0;\n}\n"
+    \ return dat[n];\n}\n#line 7 \"test/atcoder/abc138_f.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint=\
+    \ ModInt<int(1e9 + 7)>;\n int64_t L, R;\n cin >> L >> R;\n using symbol_t= array<bool,\
+    \ 2>;\n vector<symbol_t> alp= {{0, 0}, {0, 1}, {1, 1}};\n auto tr_le= [](int64_t\
+    \ s, symbol_t c) { return (s - c[1] + 2) / 2 - 1; };\n auto tr_ge= [](int64_t\
+    \ s, symbol_t c) { return (s - c[0] + 1) / 2; };\n auto ac= [](int64_t s) { return\
+    \ s == 0; };\n Automaton dfa_le(alp, R, tr_le, ac, int64_t(-1)), dfa_ge(alp, L,\
+    \ tr_ge, ac, int64_t(-1));\n auto tr_len= [](bool s, symbol_t c) {\n  if (c[0]\
+    \ == 1 && c[1] == 1) s= 1;\n  if (c[0] != c[1]) s= 0;\n  return s;\n };\n auto\
+    \ ac_len= [](bool s) { return s; };\n Automaton dfa_len(alp, true, tr_len, ac_len);\n\
+    \ auto dfa= dfa_le & dfa_ge & dfa_len;\n cout << dfa.num<Mint>(60) << '\\n';\n\
+    \ return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc138/tasks/abc138_f\"\n#include\
-    \ <iostream>\n#include <vector>\n#include \"src/Automaton/dfa_dp.hpp\"\n#include\
-    \ \"src/Automaton/DFA_Inequality.hpp\"\n#include \"src/Automaton/dfa_operations.hpp\"\
-    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Pii= pair<int,\
-    \ int>;\nstruct DFA_SameLen {\n using symbol_t= Pii;\n vector<symbol_t> alphabet()\
-    \ const { return {{0, 0}, {0, 1}, {1, 1}}; }\n inline int initial_state() const\
-    \ { return 0; }\n inline int transition(int s, const symbol_t &a, int) const {\n\
-    \  const auto &[u, v]= a;\n  if (s == 1) return 1;\n  if (u != v) return -1;\n\
-    \  return u == 1;\n }\n inline bool is_accept(int s) const { return s >= 0; }\n\
-    \ inline int state_size() const { return 2; }\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n using Mint= ModInt<int(1e9 + 7)>;\n long long\
-    \ L, R;\n cin >> L >> R;\n auto dfa_samelen= DFA_SameLen();\n auto alp= dfa_samelen.alphabet();\n\
-    \ auto dfa_y_le= DFA_SymbolMap(DFA_Inequality(R, 2, 61), alp, [](const Pii &a)\
-    \ { return a.second; });\n auto dfa_x_ge= DFA_SymbolMap(DFA_Inequality<true>(L,\
-    \ 2, 61), alp, [](const Pii &a) { return a.first; });\n cout << dfa_dp<Mint>(dfa_x_ge\
-    \ & dfa_y_le & dfa_samelen, 61) << '\\n';\n return 0;\n}"
+    \ <iostream>\n#include <vector>\n#include <array>\n#include \"src/Misc/Automaton.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n using Mint= ModInt<int(1e9 + 7)>;\n int64_t L,\
+    \ R;\n cin >> L >> R;\n using symbol_t= array<bool, 2>;\n vector<symbol_t> alp=\
+    \ {{0, 0}, {0, 1}, {1, 1}};\n auto tr_le= [](int64_t s, symbol_t c) { return (s\
+    \ - c[1] + 2) / 2 - 1; };\n auto tr_ge= [](int64_t s, symbol_t c) { return (s\
+    \ - c[0] + 1) / 2; };\n auto ac= [](int64_t s) { return s == 0; };\n Automaton\
+    \ dfa_le(alp, R, tr_le, ac, int64_t(-1)), dfa_ge(alp, L, tr_ge, ac, int64_t(-1));\n\
+    \ auto tr_len= [](bool s, symbol_t c) {\n  if (c[0] == 1 && c[1] == 1) s= 1;\n\
+    \  if (c[0] != c[1]) s= 0;\n  return s;\n };\n auto ac_len= [](bool s) { return\
+    \ s; };\n Automaton dfa_len(alp, true, tr_len, ac_len);\n auto dfa= dfa_le & dfa_ge\
+    \ & dfa_len;\n cout << dfa.num<Mint>(60) << '\\n';\n return 0;\n}"
   dependsOn:
-  - src/Automaton/dfa_dp.hpp
-  - src/Internal/HAS_CHECK.hpp
-  - src/Automaton/DFA_Inequality.hpp
-  - src/Automaton/dfa_operations.hpp
+  - src/Misc/Automaton.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   isVerificationFile: true
   path: test/atcoder/abc138_f.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-04-11 01:02:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc138_f.test.cpp

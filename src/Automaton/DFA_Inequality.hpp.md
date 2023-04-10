@@ -2,31 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc117_d.test.cpp
-    title: test/atcoder/abc117_d.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc129_e.test.cpp
-    title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc138_f.test.cpp
-    title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc154_e.test.cpp
-    title: test/atcoder/abc154_e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc208_e.test.cpp
-    title: test/atcoder/abc208_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc235_f.test.cpp
-    title: test/atcoder/abc235_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc127_a.test.cpp
-    title: test/atcoder/arc127_a.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Automaton/DFA_Inequality.hpp\"\n#include <vector>\n\
@@ -69,15 +48,8 @@ data:
   path: src/Automaton/DFA_Inequality.hpp
   requiredBy: []
   timestamp: '2023-01-21 18:41:09+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/atcoder/abc208_e.test.cpp
-  - test/atcoder/arc127_a.test.cpp
-  - test/atcoder/abc235_f.test.cpp
-  - test/atcoder/abc117_d.test.cpp
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc129_e.test.cpp
-  - test/atcoder/abc154_e.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Automaton/DFA_Inequality.hpp
 layout: document
 title: "$N$\u4EE5\u4E0B(\u4EE5\u4E0A)\u306E\u975E\u8CA0\u6574\u6570\u3092\u53D7\u7406\

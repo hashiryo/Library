@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Automaton/DFA_Compress.hpp
     title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: src/Automaton/NFA_to_DFA.hpp
     title: "NFA\u3092DFA\u306B\u5909\u63DB"
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Automaton/dfa_operations.hpp
     title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
       \u6F14\u7B97"
@@ -71,9 +71,6 @@ data:
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2587.test.cpp
-    title: test/aoj/2587.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
   - icon: ':heavy_check_mark:'
@@ -116,12 +113,6 @@ data:
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc117_d.test.cpp
-    title: test/atcoder/abc117_d.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc129_e.test.cpp
-    title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -131,29 +122,11 @@ data:
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':x:'
-    path: test/atcoder/abc138_f.test.cpp
-    title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc154_e.test.cpp
-    title: test/atcoder/abc154_e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc208_e.test.cpp
-    title: test/atcoder/abc208_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc235_f.test.cpp
-    title: test/atcoder/abc235_f.test.cpp
-  - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/agc015_d.test.cpp
-    title: test/atcoder/agc015_d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc127_a.test.cpp
-    title: test/atcoder/arc127_a.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
@@ -265,16 +238,8 @@ data:
   - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp
-  - test/atcoder/abc208_e.test.cpp
-  - test/atcoder/arc127_a.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
-  - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
-  - test/atcoder/abc117_d.test.cpp
-  - test/atcoder/agc015_d.test.cpp
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc129_e.test.cpp
-  - test/atcoder/abc154_e.test.cpp
   - test/yosupo/set_xor_min.DynSeg.test.cpp
   - test/yosupo/persistent_queue.WBT.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
@@ -296,7 +261,6 @@ data:
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/ITP2_4_A.SplayTree.test.cpp
   - test/aoj/2450.LCT.test.cpp
-  - test/aoj/2587.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp
   - test/aoj/1508.SplayTree.test.cpp

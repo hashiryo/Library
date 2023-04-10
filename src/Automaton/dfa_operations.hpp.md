@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':warning:'
     path: src/Automaton/dfa_dp.hpp
     title: "DFA\u4E0A\u306EDP"
   - icon: ':question:'
@@ -9,28 +9,10 @@ data:
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/atcoder/abc129_e.test.cpp
-    title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc138_f.test.cpp
-    title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc154_e.test.cpp
-    title: test/atcoder/abc154_e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc208_e.test.cpp
-    title: test/atcoder/abc208_e.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc235_f.test.cpp
-    title: test/atcoder/abc235_f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc127_a.test.cpp
-    title: test/atcoder/arc127_a.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Automaton/dfa_operations.hpp\"\n#include <cassert>\n\
@@ -124,14 +106,8 @@ data:
   path: src/Automaton/dfa_operations.hpp
   requiredBy: []
   timestamp: '2023-01-21 18:41:09+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/atcoder/abc208_e.test.cpp
-  - test/atcoder/arc127_a.test.cpp
-  - test/atcoder/abc235_f.test.cpp
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc129_e.test.cpp
-  - test/atcoder/abc154_e.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: src/Automaton/dfa_operations.hpp
 layout: document
 title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
