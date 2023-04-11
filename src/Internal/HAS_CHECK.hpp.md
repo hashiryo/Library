@@ -2,19 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: src/Automaton/DFA_Compress.hpp
-    title: "\u72B6\u614B\u3092int\u3067\u5727\u7E2E"
-  - icon: ':warning:'
-    path: src/Automaton/NFA_to_DFA.hpp
-    title: "NFA\u3092DFA\u306B\u5909\u63DB"
-  - icon: ':warning:'
-    path: src/Automaton/dfa_dp.hpp
-    title: "DFA\u4E0A\u306EDP"
-  - icon: ':warning:'
-    path: src/Automaton/dfa_operations.hpp
-    title: "DFA\u306E\u6587\u5B57\u96C6\u5408\u306E\u5909\u63DB\u3068\u7A4D\u96C6\u5408\
-      \u6F14\u7B97"
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
@@ -228,10 +215,6 @@ data:
   - src/DataStructure/SegmentTree_Patricia.hpp
   - src/DataStructure/KDTree.hpp
   - src/DataStructure/SkewHeap.hpp
-  - src/Automaton/dfa_dp.hpp
-  - src/Automaton/NFA_to_DFA.hpp
-  - src/Automaton/dfa_operations.hpp
-  - src/Automaton/DFA_Compress.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
