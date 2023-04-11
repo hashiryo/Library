@@ -289,7 +289,7 @@ data:
     - icon: ':x:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/ModInt_Runtime.hpp
       title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
     - icon: ':heavy_check_mark:'
@@ -326,7 +326,7 @@ data:
     - icon: ':x:'
       path: src/Math/mod_kth_root.hpp
       title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
     - icon: ':x:'
@@ -339,7 +339,7 @@ data:
     - icon: ':question:'
       path: src/Math/prime_count.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - name: src/Misc
@@ -932,10 +932,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_g.test.cpp
       title: test/atcoder/abc222_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_h.sparse_FPS.test.cpp
       title: test/atcoder/abc222_h.sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
