@@ -73,7 +73,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0168.test.cpp
     title: test/aoj/0168.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0570.test.cpp
     title: test/aoj/0570.test.cpp
   - icon: ':heavy_check_mark:'
@@ -163,7 +163,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
   - icon: ':heavy_check_mark:'

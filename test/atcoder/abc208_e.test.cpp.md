@@ -74,14 +74,13 @@ data:
     \ ys.end());\n   }\n   return eps_closure(ret);\n  };\n  auto ac= [&](const std::set<state_t>\
     \ &s) { return std::any_of(s.begin(), s.end(), is_accept); };\n  auto rej= [](const\
     \ std::set<state_t> &s) { return s == std::set<state_t>(); };\n  build<std::map<std::set<state_t>,\
-    \ int>, std::set<state_t>>(eps_closure({initial_state}), tr, ac, rej);\n }\n size_t\
-    \ alphabet_size() const { return m; }\n Automaton operator&(const Automaton &r)\
-    \ const {\n  assert(alph == r.alph);\n  const int S= info.size();\n  auto tr=\
-    \ [&](int s, int q) {\n   auto [s1, s0]= std::div(s, S);\n   int t1= r.table[s1\
-    \ * m + q], t0= table[s0 * m + q];\n   return t0 == -1 || t1 == -1 ? -1 : t1 *\
-    \ S + t0;\n  };\n  auto ac= [&](int s) {\n   auto [s1, s0]= std::div(s, S);\n\
-    \   return info[s0] == 1 && r.info[s1] == 1;\n  };\n  auto rej= [](int s) { return\
-    \ s == -1; };\n  Automaton ret(alph);\n  return ret.build<std::unordered_map<int,\
+    \ int>, std::set<state_t>>(eps_closure({initial_state}), tr, ac, rej);\n }\n Automaton\
+    \ operator&(const Automaton &r) const {\n  assert(alph == r.alph);\n  const int\
+    \ S= info.size();\n  auto tr= [&](int s, int q) {\n   auto [s1, s0]= std::div(s,\
+    \ S);\n   int t1= r.table[s1 * m + q], t0= table[s0 * m + q];\n   return t0 ==\
+    \ -1 || t1 == -1 ? -1 : t1 * S + t0;\n  };\n  auto ac= [&](int s) {\n   auto [s1,\
+    \ s0]= std::div(s, S);\n   return info[s0] == 1 && r.info[s1] == 1;\n  };\n  auto\
+    \ rej= [](int s) { return s == -1; };\n  Automaton ret(alph);\n  return ret.build<std::unordered_map<int,\
     \ int>, int>(0, tr, ac, rej), ret;\n }\n template <class T, class A, class F>\
     \ T dp_run(int n, const A &op, const T &ti, const F &f, const T &init) const {\n\
     \  static_assert(std::is_same_v<T, std::invoke_result_t<A, T, T>>);\n  static_assert(std::is_same_v<T,\
@@ -126,7 +125,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc208_e.test.cpp
   requiredBy: []
-  timestamp: '2023-04-11 14:01:12+09:00'
+  timestamp: '2023-04-11 14:48:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc208_e.test.cpp
