@@ -56,19 +56,21 @@ data:
     \ std::vector<symbol_t> &alphabet, const state_t &initial_state, const F &transition,\
     \ const G &is_accept): alph(alphabet), m(alph.size()) {\n  std::sort(alph.begin(),\
     \ alph.end());\n  auto tr= [&](const state_t &s, int i) { return transition(s,\
-    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map>(initial_state,\
-    \ tr, is_accept, [](const state_t &) { return false; });\n  else build<std::map>(initial_state,\
+    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map,\
+    \ state_t, decltype(tr), G>(initial_state, tr, is_accept, [](const state_t &)\
+    \ { return false; });\n  else build<std::map, state_t, decltype(tr), G>(initial_state,\
     \ tr, is_accept, [](const state_t &) { return false; });\n }\n template <class\
     \ state_t, class F, class G, std::enable_if_t<std::is_same_v<state_t, std::invoke_result_t<F,\
     \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
     \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept,\
     \ const state_t &abs_rej_state): alph(alphabet), m(alph.size()) {\n  std::sort(alph.begin(),\
     \ alph.end());\n  auto tr= [&](const state_t &s, int i) { return transition(s,\
-    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map>(initial_state,\
-    \ tr, is_accept, [abs_rej_state](const state_t &s) { return s == abs_rej_state;\
-    \ });\n  else build<std::map>(initial_state, tr, is_accept, [abs_rej_state](const\
-    \ state_t &s) { return s == abs_rej_state; });\n }\n template <class state_t,\
-    \ class F, class G, std::enable_if_t<std::is_same_v<std::set<state_t>, std::invoke_result_t<F,\
+    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map,\
+    \ state_t, decltype(tr), G>(initial_state, tr, is_accept, [abs_rej_state](const\
+    \ state_t &s) { return s == abs_rej_state; });\n  else build<std::map, state_t,\
+    \ decltype(tr), G>(initial_state, tr, is_accept, [abs_rej_state](const state_t\
+    \ &s) { return s == abs_rej_state; });\n }\n template <class state_t, class F,\
+    \ class G, std::enable_if_t<std::is_same_v<std::set<state_t>, std::invoke_result_t<F,\
     \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
     \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept):\
     \ alph(alphabet), m(alph.size()) {\n  static_assert(std::is_same_v<bool, std::invoke_result_t<G,\
@@ -76,13 +78,14 @@ data:
     \ &s, int i) {\n   std::set<state_t> ret;\n   for (const auto &x: s) {\n    auto\
     \ ys= transition(x, alph[i]);\n    ret.insert(ys.begin(), ys.end());\n   }\n \
     \  return ret;\n  };\n  auto ac= [&](const std::set<state_t> &s) { return std::any_of(s.begin(),\
-    \ s.end(), is_accept); };\n  build<std::map>(std::set<state_t>({initial_state}),\
-    \ tr, ac, [](const std::set<state_t> &s) { return s == std::set<state_t>(); });\n\
-    \ }\n template <class state_t, class F, class G, class H, std::enable_if_t<std::is_same_v<std::set<state_t>,\
-    \ std::invoke_result_t<F, state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const\
-    \ std::vector<symbol_t> &alphabet, const state_t &initial_state, const F &transition,\
-    \ const G &is_accept, const H &eps_trans): alph(alphabet), m(alph.size()) {\n\
-    \  static_assert(std::is_same_v<bool, std::invoke_result_t<G, state_t>>);\n  static_assert(std::is_same_v<std::set<state_t>,\
+    \ s.end(), is_accept); };\n  build<std::map, std::set<state_t>, decltype(tr),\
+    \ decltype(ac)>(std::set<state_t>({initial_state}), tr, ac, [](const std::set<state_t>\
+    \ &s) { return s == std::set<state_t>(); });\n }\n template <class state_t, class\
+    \ F, class G, class H, std::enable_if_t<std::is_same_v<std::set<state_t>, std::invoke_result_t<F,\
+    \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
+    \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept,\
+    \ const H &eps_trans): alph(alphabet), m(alph.size()) {\n  static_assert(std::is_same_v<bool,\
+    \ std::invoke_result_t<G, state_t>>);\n  static_assert(std::is_same_v<std::set<state_t>,\
     \ std::invoke_result_t<H, state_t>>);\n  std::sort(alph.begin(), alph.end());\n\
     \  auto eps_closure= [&](std::set<state_t> s) {\n   for (std::set<state_t> t;\
     \ s != t;) {\n    t= s;\n    for (const auto &x: t) {\n     auto ys= eps_trans(x);\n\
@@ -90,7 +93,8 @@ data:
     \ tr= [&](const std::set<state_t> &s, int i) {\n   std::set<state_t> ret;\n  \
     \ for (const auto &x: s) {\n    auto ys= transition(x, alph[i]);\n    ret.insert(ys.begin(),\
     \ ys.end());\n   }\n   return eps_closure(ret);\n  };\n  auto ac= [&](const std::set<state_t>\
-    \ &s) { return std::any_of(s.begin(), s.end(), is_accept); };\n  build<std::map>(eps_closure({initial_state}),\
+    \ &s) { return std::any_of(s.begin(), s.end(), is_accept); };\n  build<std::map,\
+    \ std::set<state_t>, decltype(tr), decltype(ac)>(eps_closure({initial_state}),\
     \ tr, ac, [](const std::set<state_t> &s) { return s == std::set<state_t>(); });\n\
     \ }\n size_t alphabet_size() const { return m; }\n Automaton operator&(const Automaton\
     \ &r) const {\n  assert(alph == r.alph);\n  const int S= info.size();\n  auto\
@@ -98,22 +102,22 @@ data:
     \ * m + q], t0= table[s0 * m + q];\n   return t0 == -1 || t1 == -1 ? -1 : t1 *\
     \ S + t0;\n  };\n  auto ac= [&](int s) {\n   auto [s1, s0]= std::div(s, S);\n\
     \   return info[s0] == 1 && r.info[s1] == 1;\n  };\n  Automaton ret(alph);\n \
-    \ return ret.build<std::unordered_map>(0, tr, ac, [](int s) { return s == -1;\
-    \ }), ret;\n }\n template <class T, class A, class F> T dp_run(int n, const A\
-    \ &op, const T &ti, const F &f, const T &init) const {\n  static_assert(std::is_same_v<T,\
-    \ std::invoke_result_t<A, T, T>>);\n  static_assert(std::is_same_v<T, std::invoke_result_t<F,\
-    \ T, symbol_t, int>>);\n  const size_t S= info.size();\n  std::queue<std::pair<int,\
-    \ int>> que;\n  T dp[2][S], ret= ti;\n  bool in[2][S];\n  for (std::fill_n(dp[0],\
-    \ S, ti), std::fill_n(dp[1], S, ti), std::fill_n(in[0], S, 0), std::fill_n(in[1],\
-    \ S, 0), dp[0][0]= init, que.emplace(0, 0), in[0][0]= 1; que.size();) {\n   auto\
-    \ [s, i]= que.front();\n   bool b= i & 1;\n   T tmp= dp[b][s];\n   if (que.pop(),\
-    \ in[b][s]= 0, dp[b][s]= ti; i == n) {\n    if (info[s] == 1) ret= op(ret, tmp);\n\
-    \    continue;\n   }\n   auto l= table.cbegin() + s * m;\n   for (int j= m; j--;)\n\
-    \    if (int t= l[j]; t != -1)\n     if (dp[!b][t]= op(dp[!b][t], f(tmp, alph[j],\
-    \ i)); !in[!b][t]) que.emplace(t, i + 1), in[!b][t]= 1;\n  }\n  return ret;\n\
-    \ }\n template <class T> T num(int n) const {\n  return dp_run(\n      n, [](const\
-    \ T &l, const T &r) { return l + r; }, T(), [](const T &x, const auto &, auto)\
-    \ { return x; }, T(1));\n }\n};\n"
+    \ return ret.build<std::unordered_map, int, decltype(tr), decltype(ac)>(0, tr,\
+    \ ac, [](int s) { return s == -1; }), ret;\n }\n template <class T, class A, class\
+    \ F> T dp_run(int n, const A &op, const T &ti, const F &f, const T &init) const\
+    \ {\n  static_assert(std::is_same_v<T, std::invoke_result_t<A, T, T>>);\n  static_assert(std::is_same_v<T,\
+    \ std::invoke_result_t<F, T, symbol_t, int>>);\n  const size_t S= info.size();\n\
+    \  std::queue<std::pair<int, int>> que;\n  T dp[2][S], ret= ti;\n  bool in[2][S];\n\
+    \  for (std::fill_n(dp[0], S, ti), std::fill_n(dp[1], S, ti), std::fill_n(in[0],\
+    \ S, 0), std::fill_n(in[1], S, 0), dp[0][0]= init, que.emplace(0, 0), in[0][0]=\
+    \ 1; que.size();) {\n   auto [s, i]= que.front();\n   bool b= i & 1;\n   T tmp=\
+    \ dp[b][s];\n   if (que.pop(), in[b][s]= 0, dp[b][s]= ti; i == n) {\n    if (info[s]\
+    \ == 1) ret= op(ret, tmp);\n    continue;\n   }\n   auto l= table.cbegin() + s\
+    \ * m;\n   for (int j= m; j--;)\n    if (int t= l[j]; t != -1)\n     if (dp[!b][t]=\
+    \ op(dp[!b][t], f(tmp, alph[j], i)); !in[!b][t]) que.emplace(t, i + 1), in[!b][t]=\
+    \ 1;\n  }\n  return ret;\n }\n template <class T> T num(int n) const {\n  return\
+    \ dp_run(\n      n, [](const T &l, const T &r) { return l + r; }, T(), [](const\
+    \ T &x, const auto &, auto) { return x; }, T(1));\n }\n};\n"
   code: "#pragma once\n#include <type_traits>\n#include <set>\n#include <map>\n#include\
     \ <unordered_map>\n#include <vector>\n#include <algorithm>\n#include <queue>\n\
     #include <cstdlib>\ntemplate <class symbol_t> class Automaton {\n std::vector<int>\
@@ -135,19 +139,21 @@ data:
     \ std::vector<symbol_t> &alphabet, const state_t &initial_state, const F &transition,\
     \ const G &is_accept): alph(alphabet), m(alph.size()) {\n  std::sort(alph.begin(),\
     \ alph.end());\n  auto tr= [&](const state_t &s, int i) { return transition(s,\
-    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map>(initial_state,\
-    \ tr, is_accept, [](const state_t &) { return false; });\n  else build<std::map>(initial_state,\
+    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map,\
+    \ state_t, decltype(tr), G>(initial_state, tr, is_accept, [](const state_t &)\
+    \ { return false; });\n  else build<std::map, state_t, decltype(tr), G>(initial_state,\
     \ tr, is_accept, [](const state_t &) { return false; });\n }\n template <class\
     \ state_t, class F, class G, std::enable_if_t<std::is_same_v<state_t, std::invoke_result_t<F,\
     \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
     \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept,\
     \ const state_t &abs_rej_state): alph(alphabet), m(alph.size()) {\n  std::sort(alph.begin(),\
     \ alph.end());\n  auto tr= [&](const state_t &s, int i) { return transition(s,\
-    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map>(initial_state,\
-    \ tr, is_accept, [abs_rej_state](const state_t &s) { return s == abs_rej_state;\
-    \ });\n  else build<std::map>(initial_state, tr, is_accept, [abs_rej_state](const\
-    \ state_t &s) { return s == abs_rej_state; });\n }\n template <class state_t,\
-    \ class F, class G, std::enable_if_t<std::is_same_v<std::set<state_t>, std::invoke_result_t<F,\
+    \ alph[i]); };\n  if constexpr (std::is_integral_v<state_t>) build<std::unordered_map,\
+    \ state_t, decltype(tr), G>(initial_state, tr, is_accept, [abs_rej_state](const\
+    \ state_t &s) { return s == abs_rej_state; });\n  else build<std::map, state_t,\
+    \ decltype(tr), G>(initial_state, tr, is_accept, [abs_rej_state](const state_t\
+    \ &s) { return s == abs_rej_state; });\n }\n template <class state_t, class F,\
+    \ class G, std::enable_if_t<std::is_same_v<std::set<state_t>, std::invoke_result_t<F,\
     \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
     \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept):\
     \ alph(alphabet), m(alph.size()) {\n  static_assert(std::is_same_v<bool, std::invoke_result_t<G,\
@@ -155,13 +161,14 @@ data:
     \ &s, int i) {\n   std::set<state_t> ret;\n   for (const auto &x: s) {\n    auto\
     \ ys= transition(x, alph[i]);\n    ret.insert(ys.begin(), ys.end());\n   }\n \
     \  return ret;\n  };\n  auto ac= [&](const std::set<state_t> &s) { return std::any_of(s.begin(),\
-    \ s.end(), is_accept); };\n  build<std::map>(std::set<state_t>({initial_state}),\
-    \ tr, ac, [](const std::set<state_t> &s) { return s == std::set<state_t>(); });\n\
-    \ }\n template <class state_t, class F, class G, class H, std::enable_if_t<std::is_same_v<std::set<state_t>,\
-    \ std::invoke_result_t<F, state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const\
-    \ std::vector<symbol_t> &alphabet, const state_t &initial_state, const F &transition,\
-    \ const G &is_accept, const H &eps_trans): alph(alphabet), m(alph.size()) {\n\
-    \  static_assert(std::is_same_v<bool, std::invoke_result_t<G, state_t>>);\n  static_assert(std::is_same_v<std::set<state_t>,\
+    \ s.end(), is_accept); };\n  build<std::map, std::set<state_t>, decltype(tr),\
+    \ decltype(ac)>(std::set<state_t>({initial_state}), tr, ac, [](const std::set<state_t>\
+    \ &s) { return s == std::set<state_t>(); });\n }\n template <class state_t, class\
+    \ F, class G, class H, std::enable_if_t<std::is_same_v<std::set<state_t>, std::invoke_result_t<F,\
+    \ state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const std::vector<symbol_t>\
+    \ &alphabet, const state_t &initial_state, const F &transition, const G &is_accept,\
+    \ const H &eps_trans): alph(alphabet), m(alph.size()) {\n  static_assert(std::is_same_v<bool,\
+    \ std::invoke_result_t<G, state_t>>);\n  static_assert(std::is_same_v<std::set<state_t>,\
     \ std::invoke_result_t<H, state_t>>);\n  std::sort(alph.begin(), alph.end());\n\
     \  auto eps_closure= [&](std::set<state_t> s) {\n   for (std::set<state_t> t;\
     \ s != t;) {\n    t= s;\n    for (const auto &x: t) {\n     auto ys= eps_trans(x);\n\
@@ -169,7 +176,8 @@ data:
     \ tr= [&](const std::set<state_t> &s, int i) {\n   std::set<state_t> ret;\n  \
     \ for (const auto &x: s) {\n    auto ys= transition(x, alph[i]);\n    ret.insert(ys.begin(),\
     \ ys.end());\n   }\n   return eps_closure(ret);\n  };\n  auto ac= [&](const std::set<state_t>\
-    \ &s) { return std::any_of(s.begin(), s.end(), is_accept); };\n  build<std::map>(eps_closure({initial_state}),\
+    \ &s) { return std::any_of(s.begin(), s.end(), is_accept); };\n  build<std::map,\
+    \ std::set<state_t>, decltype(tr), decltype(ac)>(eps_closure({initial_state}),\
     \ tr, ac, [](const std::set<state_t> &s) { return s == std::set<state_t>(); });\n\
     \ }\n size_t alphabet_size() const { return m; }\n Automaton operator&(const Automaton\
     \ &r) const {\n  assert(alph == r.alph);\n  const int S= info.size();\n  auto\
@@ -177,27 +185,27 @@ data:
     \ * m + q], t0= table[s0 * m + q];\n   return t0 == -1 || t1 == -1 ? -1 : t1 *\
     \ S + t0;\n  };\n  auto ac= [&](int s) {\n   auto [s1, s0]= std::div(s, S);\n\
     \   return info[s0] == 1 && r.info[s1] == 1;\n  };\n  Automaton ret(alph);\n \
-    \ return ret.build<std::unordered_map>(0, tr, ac, [](int s) { return s == -1;\
-    \ }), ret;\n }\n template <class T, class A, class F> T dp_run(int n, const A\
-    \ &op, const T &ti, const F &f, const T &init) const {\n  static_assert(std::is_same_v<T,\
-    \ std::invoke_result_t<A, T, T>>);\n  static_assert(std::is_same_v<T, std::invoke_result_t<F,\
-    \ T, symbol_t, int>>);\n  const size_t S= info.size();\n  std::queue<std::pair<int,\
-    \ int>> que;\n  T dp[2][S], ret= ti;\n  bool in[2][S];\n  for (std::fill_n(dp[0],\
-    \ S, ti), std::fill_n(dp[1], S, ti), std::fill_n(in[0], S, 0), std::fill_n(in[1],\
-    \ S, 0), dp[0][0]= init, que.emplace(0, 0), in[0][0]= 1; que.size();) {\n   auto\
-    \ [s, i]= que.front();\n   bool b= i & 1;\n   T tmp= dp[b][s];\n   if (que.pop(),\
-    \ in[b][s]= 0, dp[b][s]= ti; i == n) {\n    if (info[s] == 1) ret= op(ret, tmp);\n\
-    \    continue;\n   }\n   auto l= table.cbegin() + s * m;\n   for (int j= m; j--;)\n\
-    \    if (int t= l[j]; t != -1)\n     if (dp[!b][t]= op(dp[!b][t], f(tmp, alph[j],\
-    \ i)); !in[!b][t]) que.emplace(t, i + 1), in[!b][t]= 1;\n  }\n  return ret;\n\
-    \ }\n template <class T> T num(int n) const {\n  return dp_run(\n      n, [](const\
-    \ T &l, const T &r) { return l + r; }, T(), [](const T &x, const auto &, auto)\
-    \ { return x; }, T(1));\n }\n};"
+    \ return ret.build<std::unordered_map, int, decltype(tr), decltype(ac)>(0, tr,\
+    \ ac, [](int s) { return s == -1; }), ret;\n }\n template <class T, class A, class\
+    \ F> T dp_run(int n, const A &op, const T &ti, const F &f, const T &init) const\
+    \ {\n  static_assert(std::is_same_v<T, std::invoke_result_t<A, T, T>>);\n  static_assert(std::is_same_v<T,\
+    \ std::invoke_result_t<F, T, symbol_t, int>>);\n  const size_t S= info.size();\n\
+    \  std::queue<std::pair<int, int>> que;\n  T dp[2][S], ret= ti;\n  bool in[2][S];\n\
+    \  for (std::fill_n(dp[0], S, ti), std::fill_n(dp[1], S, ti), std::fill_n(in[0],\
+    \ S, 0), std::fill_n(in[1], S, 0), dp[0][0]= init, que.emplace(0, 0), in[0][0]=\
+    \ 1; que.size();) {\n   auto [s, i]= que.front();\n   bool b= i & 1;\n   T tmp=\
+    \ dp[b][s];\n   if (que.pop(), in[b][s]= 0, dp[b][s]= ti; i == n) {\n    if (info[s]\
+    \ == 1) ret= op(ret, tmp);\n    continue;\n   }\n   auto l= table.cbegin() + s\
+    \ * m;\n   for (int j= m; j--;)\n    if (int t= l[j]; t != -1)\n     if (dp[!b][t]=\
+    \ op(dp[!b][t], f(tmp, alph[j], i)); !in[!b][t]) que.emplace(t, i + 1), in[!b][t]=\
+    \ 1;\n  }\n  return ret;\n }\n template <class T> T num(int n) const {\n  return\
+    \ dp_run(\n      n, [](const T &l, const T &r) { return l + r; }, T(), [](const\
+    \ T &x, const auto &, auto) { return x; }, T(1));\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Misc/Automaton.hpp
   requiredBy: []
-  timestamp: '2023-04-11 01:02:22+09:00'
+  timestamp: '2023-04-11 12:08:34+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc208_e.test.cpp
@@ -222,5 +230,5 @@ title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
 [AtCoder Beginner Contest 029 D - 1](https://atcoder.jp/contests/abc029/tasks/abc029_d) \
 [Donuts プロコンチャレンジ2014 B - 7th](https://atcoder.jp/contests/donuts-live2014/tasks/donuts_live2014_2) \
 [yukicoder No.1953 ８](https://yukicoder.me/problems/no/1953) (sp judge) \
-[AtCoder Beginner Contest 050 D - Xor Sum](https://atcoder.jp/contests/abc050/tasks/arc066_b) (NFA)\
+[AtCoder Beginner Contest 050 D - Xor Sum](https://atcoder.jp/contests/abc050/tasks/arc066_b) (ナイーブにNFA)\
 [https://blog.knshnb.com/posts/aoj2587/](https://blog.knshnb.com/posts/aoj2587/)
