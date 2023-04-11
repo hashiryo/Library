@@ -71,7 +71,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
@@ -878,10 +878,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc154_e.test.cpp
       title: test/atcoder/abc154_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -977,13 +977,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_d.test.cpp
       title: test/atcoder/abc256_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
     - icon: ':x:'
@@ -1453,6 +1453,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/137.div_at.test.cpp
       title: test/yukicoder/137.div_at.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1417.test.cpp
+      title: test/yukicoder/1417.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1418.test.cpp
       title: test/yukicoder/1418.test.cpp
@@ -1529,6 +1532,9 @@ data:
       path: test/yukicoder/3046.test.cpp
       title: test/yukicoder/3046.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/315.test.cpp
+      title: test/yukicoder/315.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/42.test.cpp
       title: test/yukicoder/42.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1579,12 +1585,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/674.test.cpp
       title: test/yukicoder/674.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/685.test.cpp
+      title: test/yukicoder/685.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.KDT.test.cpp
       title: test/yukicoder/728.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/737.test.cpp
+      title: test/yukicoder/737.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/738.BIT.test.cpp
       title: test/yukicoder/738.BIT.test.cpp

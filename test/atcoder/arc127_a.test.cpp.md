@@ -18,13 +18,13 @@ data:
     \n#include <iostream>\n#include <vector>\n#include <array>\n#line 2 \"src/Misc/Automaton.hpp\"\
     \n#include <type_traits>\n#include <set>\n#include <map>\n#include <unordered_map>\n\
     #line 7 \"src/Misc/Automaton.hpp\"\n#include <algorithm>\n#include <queue>\n#include\
-    \ <cstdlib>\ntemplate <class symbol_t> class Automaton {\n std::vector<int> table;\n\
-    \ std::vector<int8_t> info;\n std::vector<symbol_t> alph;\n const int m;\n template\
-    \ <class Map, class state_t, class F, class G, class H> void build(const state_t\
-    \ &initial_state, const F &transition, const G &is_accept, const H &abs_reject)\
-    \ {\n  static_assert(std::is_same_v<bool, std::invoke_result_t<G, state_t>>);\n\
-    \  static_assert(std::is_same_v<bool, std::invoke_result_t<H, state_t>>);\n  Map\
-    \ encode;\n  std::vector<state_t> decode;\n  int ts= 0;\n  decode.push_back(initial_state),\
+    \ <cstdlib>\n#include <cassert>\ntemplate <class symbol_t> class Automaton {\n\
+    \ std::vector<int> table;\n std::vector<int8_t> info;\n std::vector<symbol_t>\
+    \ alph;\n const int m;\n template <class Map, class state_t, class F, class G,\
+    \ class H> void build(const state_t &initial_state, const F &transition, const\
+    \ G &is_accept, const H &abs_reject) {\n  static_assert(std::is_same_v<bool, std::invoke_result_t<G,\
+    \ state_t>>);\n  static_assert(std::is_same_v<bool, std::invoke_result_t<H, state_t>>);\n\
+    \  Map encode;\n  std::vector<state_t> decode;\n  int ts= 0;\n  decode.push_back(initial_state),\
     \ encode.emplace(initial_state, ts++);\n  for (int i= 0, k= 0; i < ts; ++i) {\n\
     \   auto s= decode[i];\n   table.resize(table.size() + m);\n   for (int j= 0;\
     \ j < m; ++j) {\n    if (auto t= transition(s, j); abs_reject(t)) table[k++]=\
@@ -120,7 +120,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc127_a.test.cpp
   requiredBy: []
-  timestamp: '2023-04-11 13:20:54+09:00'
+  timestamp: '2023-04-11 13:39:47+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc127_a.test.cpp
