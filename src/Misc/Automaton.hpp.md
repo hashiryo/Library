@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0570.test.cpp
+    title: test/aoj/0570.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2587.test.cpp
     title: test/aoj/2587.test.cpp
@@ -18,10 +21,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc154_e.test.cpp
     title: test/atcoder/abc154_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc155_e.test.cpp
+    title: test/atcoder/abc155_e.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc208_e.test.cpp
     title: test/atcoder/abc208_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
   - icon: ':x:'
@@ -31,17 +37,29 @@ data:
     path: test/atcoder/arc127_a.test.cpp
     title: test/atcoder/arc127_a.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1106.test.cpp
+    title: test/yukicoder/1106.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1417.test.cpp
     title: test/yukicoder/1417.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1740.test.cpp
+    title: test/yukicoder/1740.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/315.test.cpp
     title: test/yukicoder/315.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/362.test.cpp
+    title: test/yukicoder/362.test.cpp
   - icon: ':x:'
     path: test/yukicoder/685.test.cpp
     title: test/yukicoder/685.test.cpp
   - icon: ':x:'
     path: test/yukicoder/737.test.cpp
     title: test/yukicoder/737.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/911.test.cpp
+    title: test/yukicoder/911.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -219,15 +237,21 @@ data:
   - test/atcoder/abc208_e.test.cpp
   - test/atcoder/arc127_a.test.cpp
   - test/atcoder/abc235_f.test.cpp
+  - test/atcoder/abc155_e.test.cpp
   - test/atcoder/abc117_d.test.cpp
   - test/atcoder/agc015_d.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc154_e.test.cpp
   - test/aoj/2587.test.cpp
+  - test/aoj/0570.test.cpp
+  - test/yukicoder/1106.test.cpp
   - test/yukicoder/737.test.cpp
   - test/yukicoder/685.test.cpp
+  - test/yukicoder/362.test.cpp
+  - test/yukicoder/1740.test.cpp
   - test/yukicoder/315.test.cpp
+  - test/yukicoder/911.test.cpp
   - test/yukicoder/1417.test.cpp
 documentation_of: src/Misc/Automaton.hpp
 layout: document

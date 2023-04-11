@@ -11,26 +11,26 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/abc208/tasks/abc208_e
+    PROBLEM: https://atcoder.jp/contests/abc155/tasks/abc155_e
     links:
-    - https://atcoder.jp/contests/abc208/tasks/abc208_e
-  bundledCode: "#line 1 \"test/atcoder/abc208_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc208/tasks/abc208_e\"\
-    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/Misc/Automaton.hpp\"\
-    \n#include <type_traits>\n#include <set>\n#include <map>\n#include <unordered_map>\n\
-    #line 8 \"src/Misc/Automaton.hpp\"\n#include <queue>\n#include <cstdlib>\n#include\
-    \ <cassert>\ntemplate <class symbol_t> class Automaton {\n std::vector<int> table;\n\
-    \ std::vector<int8_t> info;\n std::vector<symbol_t> alph;\n const int m;\n template\
-    \ <class Map, class state_t, class F, class G, class H> void build(const state_t\
-    \ &initial_state, const F &transition, const G &is_accept, const H &abs_reject)\
-    \ {\n  static_assert(std::is_same_v<bool, std::invoke_result_t<G, state_t>>);\n\
-    \  static_assert(std::is_same_v<bool, std::invoke_result_t<H, state_t>>);\n  Map\
-    \ encode;\n  std::vector<state_t> decode;\n  int ts= 0;\n  decode.push_back(initial_state),\
-    \ encode.emplace(initial_state, ts++);\n  for (int i= 0, k= 0; i < ts; ++i) {\n\
-    \   auto s= decode[i];\n   table.resize(table.size() + m);\n   for (int j= 0;\
-    \ j < m; ++j) {\n    if (auto t= transition(s, j); abs_reject(t)) table[k++]=\
-    \ -1;\n    else if (auto it= encode.find(t); it != encode.end()) table[k++]= it->second;\n\
-    \    else table[k++]= ts, decode.push_back(t), encode.emplace(t, ts++);\n   }\n\
-    \  }\n  info.resize(ts);\n  for (int i= ts; i--;) info[i]= is_accept(decode[i]);\n\
+    - https://atcoder.jp/contests/abc155/tasks/abc155_e
+  bundledCode: "#line 1 \"test/atcoder/abc155_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc155/tasks/abc155_e\"\
+    \n#include <iostream>\n#include <vector>\n#include <string>\n#include <array>\n\
+    #line 2 \"src/Misc/Automaton.hpp\"\n#include <type_traits>\n#include <set>\n#include\
+    \ <map>\n#include <unordered_map>\n#line 7 \"src/Misc/Automaton.hpp\"\n#include\
+    \ <algorithm>\n#include <queue>\n#include <cstdlib>\n#include <cassert>\ntemplate\
+    \ <class symbol_t> class Automaton {\n std::vector<int> table;\n std::vector<int8_t>\
+    \ info;\n std::vector<symbol_t> alph;\n const int m;\n template <class Map, class\
+    \ state_t, class F, class G, class H> void build(const state_t &initial_state,\
+    \ const F &transition, const G &is_accept, const H &abs_reject) {\n  static_assert(std::is_same_v<bool,\
+    \ std::invoke_result_t<G, state_t>>);\n  static_assert(std::is_same_v<bool, std::invoke_result_t<H,\
+    \ state_t>>);\n  Map encode;\n  std::vector<state_t> decode;\n  int ts= 0;\n \
+    \ decode.push_back(initial_state), encode.emplace(initial_state, ts++);\n  for\
+    \ (int i= 0, k= 0; i < ts; ++i) {\n   auto s= decode[i];\n   table.resize(table.size()\
+    \ + m);\n   for (int j= 0; j < m; ++j) {\n    if (auto t= transition(s, j); abs_reject(t))\
+    \ table[k++]= -1;\n    else if (auto it= encode.find(t); it != encode.end()) table[k++]=\
+    \ it->second;\n    else table[k++]= ts, decode.push_back(t), encode.emplace(t,\
+    \ ts++);\n   }\n  }\n  info.resize(ts);\n  for (int i= ts; i--;) info[i]= is_accept(decode[i]);\n\
     \ }\n Automaton(const std::vector<symbol_t> &alphabet): alph(alphabet), m(alph.size())\
     \ {}\npublic:\n template <class state_t, class F, class G, std::enable_if_t<std::is_same_v<state_t,\
     \ std::invoke_result_t<F, state_t, symbol_t>>, std::nullptr_t> = nullptr> Automaton(const\
@@ -96,43 +96,42 @@ data:
     \ op(dp[!b][t], f(tmp, alph[j], i)); !in[!b][t]) que.emplace(t, i + 1), in[!b][t]=\
     \ 1;\n  }\n  return ret;\n }\n template <class T> T num(int n) const {\n  return\
     \ dp_run(\n      n, [](const T &l, const T &r) { return l + r; }, T(), [](const\
-    \ T &x, const auto &, auto) { return x; }, T(1));\n }\n};\n#line 6 \"test/atcoder/abc208_e.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ string N;\n int K;\n cin >> N >> K;\n int n= N.length();\n std::vector<int>\
-    \ alp= {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};\n auto tr_le= [&](int s, int q) {\n  if\
-    \ (s >= n) return s;\n  int c= N[s] - '0';\n  if (q > c) return n + 1;\n  if (q\
-    \ < c) return n;\n  return s + 1;\n };\n auto ac_le= [&](int s) { return true;\
-    \ };\n Automaton dfa_le(alp, 0, tr_le, ac_le, n + 1);\n auto tr_k= [&](int s,\
-    \ int q) -> int {\n  auto p= (int64_t)s * q;\n  if (p > K) return K + 1;\n  return\
-    \ p;\n };\n auto ac_k= [&](int s) { return s <= K; };\n Automaton dfa_k(alp, 1,\
-    \ tr_k, ac_k);\n auto dfa= dfa_le & dfa_k;\n int64_t ans= 0, pw= 1;\n for (int\
-    \ i= 1; i < n; ++i, pw*= 10) ans+= dfa_k.num<int64_t>(i) - pw;\n ans+= dfa.num<int64_t>(n)\
-    \ - pw;\n cout << ans << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc208/tasks/abc208_e\"\n#include\
-    \ <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/Misc/Automaton.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ string N;\n int K;\n cin >> N >> K;\n int n= N.length();\n std::vector<int>\
-    \ alp= {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};\n auto tr_le= [&](int s, int q) {\n  if\
-    \ (s >= n) return s;\n  int c= N[s] - '0';\n  if (q > c) return n + 1;\n  if (q\
-    \ < c) return n;\n  return s + 1;\n };\n auto ac_le= [&](int s) { return true;\
-    \ };\n Automaton dfa_le(alp, 0, tr_le, ac_le, n + 1);\n auto tr_k= [&](int s,\
-    \ int q) -> int {\n  auto p= (int64_t)s * q;\n  if (p > K) return K + 1;\n  return\
-    \ p;\n };\n auto ac_k= [&](int s) { return s <= K; };\n Automaton dfa_k(alp, 1,\
-    \ tr_k, ac_k);\n auto dfa= dfa_le & dfa_k;\n int64_t ans= 0, pw= 1;\n for (int\
-    \ i= 1; i < n; ++i, pw*= 10) ans+= dfa_k.num<int64_t>(i) - pw;\n ans+= dfa.num<int64_t>(n)\
-    \ - pw;\n cout << ans << '\\n';\n return 0;\n}"
+    \ T &x, const auto &, auto) { return x; }, T(1));\n }\n};\n#line 7 \"test/atcoder/abc155_e.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ vector<int> alp(19);\n for (int i= 0; i < 19; ++i) alp[i]= i - 9;\n string N;\n\
+    \ cin >> N;\n N= \"0\" + N;\n int n= N.length();\n using state_t= array<int, 2>;\n\
+    \ auto tr= [&](state_t s, int c) -> state_t {\n  auto [i, b]= s;\n  if (i < 0)\
+    \ return {-1, -1};\n  int d= (N[i] - '0' + b) % 10;\n  if (c == d || 10 + c ==\
+    \ d) return {i - 1, (N[i] - '0' + b - c) / 10};\n  return {-1, -1};\n };\n auto\
+    \ ac= [&](state_t s) { return s[1] == 0; };\n Automaton dfa(alp, state_t{n - 1,\
+    \ 0}, tr, ac, state_t{-1, -1});\n auto op= [&](int l, int r) { return min(l, r);\
+    \ };\n auto f= [&](int x, int c, int) { return x + abs(c); };\n cout << dfa.dp_run(n,\
+    \ op, 1 << 30, f, 0) << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc155/tasks/abc155_e\"\n#include\
+    \ <iostream>\n#include <vector>\n#include <string>\n#include <array>\n#include\
+    \ \"src/Misc/Automaton.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n vector<int> alp(19);\n for (int i= 0; i < 19; ++i)\
+    \ alp[i]= i - 9;\n string N;\n cin >> N;\n N= \"0\" + N;\n int n= N.length();\n\
+    \ using state_t= array<int, 2>;\n auto tr= [&](state_t s, int c) -> state_t {\n\
+    \  auto [i, b]= s;\n  if (i < 0) return {-1, -1};\n  int d= (N[i] - '0' + b) %\
+    \ 10;\n  if (c == d || 10 + c == d) return {i - 1, (N[i] - '0' + b - c) / 10};\n\
+    \  return {-1, -1};\n };\n auto ac= [&](state_t s) { return s[1] == 0; };\n Automaton\
+    \ dfa(alp, state_t{n - 1, 0}, tr, ac, state_t{-1, -1});\n auto op= [&](int l,\
+    \ int r) { return min(l, r); };\n auto f= [&](int x, int c, int) { return x +\
+    \ abs(c); };\n cout << dfa.dp_run(n, op, 1 << 30, f, 0) << '\\n';\n return 0;\n\
+    }"
   dependsOn:
   - src/Misc/Automaton.hpp
   isVerificationFile: true
-  path: test/atcoder/abc208_e.test.cpp
+  path: test/atcoder/abc155_e.test.cpp
   requiredBy: []
   timestamp: '2023-04-11 14:01:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/atcoder/abc208_e.test.cpp
+documentation_of: test/atcoder/abc155_e.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/abc208_e.test.cpp
-- /verify/test/atcoder/abc208_e.test.cpp.html
-title: test/atcoder/abc208_e.test.cpp
+- /verify/test/atcoder/abc155_e.test.cpp
+- /verify/test/atcoder/abc155_e.test.cpp.html
+title: test/atcoder/abc155_e.test.cpp
 ---
