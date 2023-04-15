@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy: []
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/BipartiteGraph.hpp\"\n#include <array>\n#include\
@@ -30,8 +30,8 @@ data:
     \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
     \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
     \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.begin() + pos[i], csr.begin() + pos[i + 1]}; }\n};\n#line 7 \"\
-    src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph {\n std::vector<std::array<int,\
+    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 7\
+    \ \"src/Graph/BipartiteGraph.hpp\"\nclass BipartiteGraph {\n std::vector<std::array<int,\
     \ 2>> es;\n std::vector<int> col, pos, ord, pre, mate, blg;\n CsrArray<int> dag_[2];\n\
     \ int l;\npublic:\n BipartiteGraph(int n): col(n, -1), pos(n + 1), ord(n), mate(n,\
     \ -1), blg(n, -3), l(0) {}\n void add_edge(int u, int v) { es.push_back({u, v});\
@@ -72,11 +72,11 @@ data:
     \  for (auto [u, v]: es_) dg0[--sp0[u]]= v, dg1[--sp1[v]]= u;\n  dag_[0]= {dg0,\
     \ sp0}, dag_[1]= {dg1, sp1};\n }\n const std::vector<std::array<int, 2>> &edges()\
     \ const { return es; }\n bool color(int v) const { return col[v]; }\n const ListRange<int>\
-    \ left_vertices() const { return {ord.begin(), ord.begin() + l}; }\n const ListRange<int>\
-    \ right_vertices() const { return {ord.begin() + l, ord.end()}; }\n int match(int\
+    \ left_vertices() const { return {ord.cbegin(), ord.cbegin() + l}; }\n const ListRange<int>\
+    \ right_vertices() const { return {ord.cbegin() + l, ord.cend()}; }\n int match(int\
     \ v) const { return mate[v]; }\n int component_num() const { return pos.size()\
     \ - 1; }\n int belong(int v) const { return blg[v]; }\n const ListRange<int> block(int\
-    \ k) const { return {pre.begin() + pos[k], pre.begin() + pos[k + 1]}; }\n template\
+    \ k) const { return {pre.cbegin() + pos[k], pre.cbegin() + pos[k + 1]}; }\n template\
     \ <bool rev> const CsrArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
     \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
     \ i= l; i--;)\n   if (int v= ord[i], u= mate[v]; u != -1) ret.push_back({v, u});\n\
@@ -135,11 +135,11 @@ data:
     \  for (auto [u, v]: es_) dg0[--sp0[u]]= v, dg1[--sp1[v]]= u;\n  dag_[0]= {dg0,\
     \ sp0}, dag_[1]= {dg1, sp1};\n }\n const std::vector<std::array<int, 2>> &edges()\
     \ const { return es; }\n bool color(int v) const { return col[v]; }\n const ListRange<int>\
-    \ left_vertices() const { return {ord.begin(), ord.begin() + l}; }\n const ListRange<int>\
-    \ right_vertices() const { return {ord.begin() + l, ord.end()}; }\n int match(int\
+    \ left_vertices() const { return {ord.cbegin(), ord.cbegin() + l}; }\n const ListRange<int>\
+    \ right_vertices() const { return {ord.cbegin() + l, ord.cend()}; }\n int match(int\
     \ v) const { return mate[v]; }\n int component_num() const { return pos.size()\
     \ - 1; }\n int belong(int v) const { return blg[v]; }\n const ListRange<int> block(int\
-    \ k) const { return {pre.begin() + pos[k], pre.begin() + pos[k + 1]}; }\n template\
+    \ k) const { return {pre.cbegin() + pos[k], pre.cbegin() + pos[k + 1]}; }\n template\
     \ <bool rev> const CsrArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
     \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
     \ i= l; i--;)\n   if (int v= ord[i], u= mate[v]; u != -1) ret.push_back({v, u});\n\
@@ -160,8 +160,8 @@ data:
   isVerificationFile: false
   path: src/Graph/BipartiteGraph.hpp
   requiredBy: []
-  timestamp: '2023-03-10 17:02:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-04-15 19:40:03+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc223_g.dm.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp

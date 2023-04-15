@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/DataStructure/CsrArray.hpp
+    title: "CSR\u5F62\u5F0F"
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   - icon: ':question:'
@@ -112,89 +115,97 @@ data:
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 3 \"src/Graph/Tree.hpp\"\n#include <cstddef>\n#line\
-    \ 6 \"src/Graph/Tree.hpp\"\n#include <array>\n#include <numeric>\n#line 9 \"src/Graph/Tree.hpp\"\
-    \ntemplate <class Cost= void> class Tree {\n template <class D, class T> struct\
+    \ 5 \"src/Graph/Tree.hpp\"\n#include <array>\n#include <numeric>\n#line 3 \"src/DataStructure/CsrArray.hpp\"\
+    \n#include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator=\
+    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
+    \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
+    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
+    \ bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T> csr;\n std::vector<int>\
+    \ pos;\npublic:\n CsrArray()= default;\n CsrArray(const std::vector<T> &c, const\
+    \ std::vector<int> &p): csr(c), pos(p) {}\n size_t size() const { return pos.size()\
+    \ - 1; }\n const ListRange<T> operator[](int i) const { return {csr.cbegin() +\
+    \ pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 9 \"src/Graph/Tree.hpp\"\n\
+    template <class Cost= void> class Tree {\n template <class D, class T> struct\
     \ Edge_B {\n  int to;\n  T cost;\n  operator int() const { return to; }\n };\n\
     \ template <class D> struct Edge_B<D, void> {\n  int to;\n  operator int() const\
-    \ { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::vector<Edge>>\
-    \ adj;\n std::vector<int> P, PP, D, I, L, R;\npublic:\n Tree(int n): adj(n) {}\n\
-    \ template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v) { adj[u].emplace_back(Edge{v}), adj[v].emplace_back(Edge{u});\
-    \ }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v, T c) { adj[u].emplace_back(Edge{v, c}),\
-    \ adj[v].emplace_back(Edge{u, c}); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \ { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::conditional_t<std::is_same_v<Cost,\
+    \ void>, std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge>\
+    \ g;\n std::vector<int> P, PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2)\
+    \ {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
+    \ = nullptr> void add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v,\
+    \ u); }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>,\
+    \ std::nullptr_t> = nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u,\
+    \ v, c), es.emplace_back(v, u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
-    \ u, int v, T c, U d) /* c:u->v, d:v->u */ { adj[u].emplace_back(Edge{v, c}),\
-    \ adj[v].emplace_back(Edge{u, d}); }\n const std::vector<Edge> &operator[](int\
-    \ v) const { return adj[v]; }\n void build(int root= 0) {\n  const int n= adj.size();\n\
-    \  P.assign(n, -2), I.reserve(n), PP.resize(n), std::iota(PP.begin(), PP.end(),\
-    \ 0), D.assign(n, 0), L.assign(n, 0), R.assign(n, 0);\n  auto f= [&, i= 0, v=\
-    \ 0](int r) mutable {\n   for (P[r]= -1, I.push_back(r); i < (int)I.size(); ++i)\n\
-    \    for (const Edge &e: adj[v= I[i]])\n     if (P[v] != e.to) I.push_back(e.to),\
-    \ P[e.to]= v;\n  };\n  f(root);\n  for (int r= 0; r < n; ++r)\n   if (P[r] ==\
-    \ -2) f(r);\n  std::vector<int> Z(n, 1), nx(n, -1);\n  for (int i= n, v; i--;)\
-    \ {\n   if (P[v= I[i]] == -1) continue;\n   if (Z[P[v]]+= Z[v]; nx[P[v]] == -1)\
-    \ nx[P[v]]= v;\n   if (Z[nx[P[v]]] < Z[v]) nx[P[v]]= v;\n  }\n  for (int v: I)\n\
-    \   if (nx[v] != -1) PP[nx[v]]= v;\n  for (int v: I)\n   if (P[v] != -1) PP[v]=\
-    \ PP[PP[v]], D[v]= D[P[v]] + 1;\n  for (int i= 0; i < n; ++i) L[I[i]]= i;\n  for\
-    \ (int v: I) {\n   int ir= R[v]= L[v] + Z[v];\n   for (const Edge &e: adj[v])\n\
-    \    if (int u= e.to; u != P[v] && u != nx[v]) L[u]= ir-= Z[u];\n   if (nx[v]\
-    \ != -1) L[nx[v]]= L[v] + 1;\n  }\n  for (int i= 0; i < n; ++i) I[L[i]]= i;\n\
-    \ }\n int size() const { return adj.size(); }\n bool builded() const { return\
-    \ L.size() == adj.size(); }\n int depth(int v) const { return assert(builded()),\
-    \ D[v]; }\n int to_seq(int v) const { return assert(builded()), L[v]; }\n int\
-    \ to_node(int i) const { return assert(builded()), I[i]; }\n int parent(int v)\
-    \ const { return assert(builded()), P[v]; }\n int root(int v) const {\n  for (assert(builded()),\
-    \ v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n bool connected(int\
+    \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
+    \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
+    \ PP.resize(n), std::iota(PP.begin(), PP.end(), 0), D.assign(n, 0), L.assign(n,\
+    \ 0), R.assign(n, 0), pos.resize(n + 1), g.resize(es.size());\n  for (const auto\
+    \ &e: es) ++pos[std::get<0>(e)];\n  std::partial_sum(pos.begin(), pos.end(), pos.begin());\n\
+    \  if constexpr (std::is_same_v<Cost, void>)\n   for (const auto &[f, t]: es)\
+    \ g[--pos[f]]= {t};\n  else\n   for (const auto &[f, t, c]: es) g[--pos[f]]= {t,\
+    \ c};\n  auto f= [&, i= 0, v= 0, t= 0](int r) mutable {\n   for (P[r]= -1, I[t++]=\
+    \ r; i < t; ++i)\n    for (int u: operator[](v= I[i]))\n     if (P[v] != u) P[I[t++]=\
+    \ u]= v;\n  };\n  f(root);\n  for (size_t r= 0; r < n; ++r)\n   if (P[r] == -2)\
+    \ f(r);\n  std::vector<int> Z(n, 1), nx(n, -1);\n  for (int i= n, v; i--;) {\n\
+    \   if (P[v= I[i]] == -1) continue;\n   if (Z[P[v]]+= Z[v]; nx[P[v]] == -1) nx[P[v]]=\
+    \ v;\n   if (Z[nx[P[v]]] < Z[v]) nx[P[v]]= v;\n  }\n  for (int v: I)\n   if (nx[v]\
+    \ != -1) PP[nx[v]]= v;\n  for (int v: I)\n   if (P[v] != -1) PP[v]= PP[PP[v]],\
+    \ D[v]= D[P[v]] + 1;\n  for (int i= n; i--;) L[I[i]]= i;\n  for (int v: I) {\n\
+    \   int ir= R[v]= L[v] + Z[v];\n   for (int u: operator[](v))\n    if (u != P[v]\
+    \ && u != nx[v]) L[u]= ir-= Z[u];\n   if (nx[v] != -1) L[nx[v]]= L[v] + 1;\n \
+    \ }\n  for (int i= n; i--;) I[L[i]]= i;\n }\n size_t size() const { return P.size();\
+    \ }\n const ListRange<Edge> operator[](int v) const { return {g.cbegin() + pos[v],\
+    \ g.cbegin() + pos[v + 1]}; }\n int depth(int v) const { return D[v]; }\n int\
+    \ to_seq(int v) const { return L[v]; }\n int to_node(int i) const { return I[i];\
+    \ }\n int parent(int v) const { return P[v]; }\n int root(int v) const {\n  for\
+    \ (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n bool connected(int\
     \ u, int v) const { return root(u) == root(v); }\n int lca(int u, int v) const\
-    \ {\n  for (assert(builded());; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
-    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
-    \ {\n  assert(builded()), assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] +\
-    \ 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int\
-    \ u, int v, int k) const {\n  if (assert(builded()); !k) return u;\n  if (u ==\
-    \ v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1)\
-    \ : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return\
-    \ k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n\
-    \ int dist(int u, int v) const { return assert(builded()), depth(u) + depth(v)\
-    \ - depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
-    \ { return assert(builded()), L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
-    \ v) const { return assert(builded()), R[v] - L[v]; }\n std::array<int, 2> subtree(int\
-    \ v) /* half-open interval */ const { return assert(builded()), std::array{L[v],\
-    \ R[v]}; }\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
-    \ u, int v) /* sequence of closed intervals */ const {\n  assert(builded());\n\
-    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
-    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
-    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
-    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
-    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
-    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 4 \"src/DataStructure/SegmentTree.hpp\"\
-    \ntemplate <typename M> struct SegmentTree {\n using T= typename M::T;\n SegmentTree()\
-    \ {}\n SegmentTree(int n_): n(n_), dat(n << 1, M::ti()) {}\n SegmentTree(int n_,\
-    \ T v): n(n_), dat(n << 1, M::ti()) {\n  for (int i= n; i--;) dat[i + n]= v;\n\
-    \  rebuild();\n }\n SegmentTree(const std::vector<T> &v): n(v.size()), dat(n <<\
-    \ 1, M::ti()) {\n  for (int i= n; i--;) dat[i + n]= v[i];\n  rebuild();\n }\n\
-    \ void set(int k, T x) {\n  for (dat[k+= n]= x; k>>= 1;) dat[k]= M::op(dat[(k\
-    \ << 1) | 0], dat[(k << 1) | 1]);\n }\n void unsafe_set(int k, T x) { dat[k +\
-    \ n]= x; }\n void rebuild() {\n  for (int i= n; --i;) dat[i]= M::op(dat[i << 1\
-    \ | 0], dat[i << 1 | 1]);\n }\n void clear() { fill(dat.begin(), dat.end(), M::ti());\
-    \ }\n inline T fold(int l, int r) const {  //[l,r)\n  T vl= M::ti(), vr= M::ti();\n\
-    \  for (int a= l + n, b= r + n; a < b; a>>= 1, b>>= 1) {\n   if (a & 1) vl= M::op(vl,\
-    \ dat[a++]);\n   if (b & 1) vr= M::op(dat[--b], vr);\n  }\n  return M::op(vl,\
-    \ vr);\n }\n T operator[](const int &k) const { return dat[k + n]; }\n template\
-    \ <bool last> static inline T calc_op(const T &v, const T &d) {\n  if constexpr\
-    \ (last) return M::op(d, v);\n  else return M::op(v, d);\n }\n // Case 0. find\
-    \ i s.t check(fold(k,i)) == False, check(fold(k,i+1)) == True\n // Case 1. find\
-    \ i s.t check(fold(i+1,b)) == False, check(fold(i,b)) == True\n // return -1 if\
-    \ not found\n template <bool last, class C> int find(const C &check, int k) const\
-    \ {\n  assert(!check(M::ti()));\n  std::vector<int> id[2];\n  int a= n + (k &\
-    \ -(!last)), b= n + n + ((k - n) & -(last));\n  for (; a < b; a>>= 1, b>>= 1)\
-    \ {\n   if (a & 1) id[0].push_back(a++);\n   if (b & 1) id[1].push_back(--b);\n\
-    \  }\n  id[last].insert(id[last].end(), id[!last].rbegin(), id[!last].rend());\n\
-    \  T val= M::ti();\n  for (int i: id[last]) {\n   if (T tmp= calc_op<last>(val,\
-    \ dat[i]); check(tmp)) {\n    while (i < n)\n     if (tmp= calc_op<last>(val,\
-    \ dat[i= i << 1 | last]); !check(tmp)) val= tmp, i-= last * 2 - 1;\n    return\
-    \ i - n + last;\n   } else val= tmp;\n  }\n  return -1;\n }\nprivate:\n const\
-    \ int n;\n std::vector<T> dat;\n};\n#line 8 \"test/yosupo/vertex_set_path_composite.HLD.test.cpp\"\
+    \ {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u]\
+    \ == PP[v]) return u;\n  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n\
+    \  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]])\
+    \ return I[L[v] - k];\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
+    \ u;\n  if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v,\
+    \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
+    \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
+    \ d_vw - k);\n }\n int dist(int u, int v) const { return depth(u) + depth(v) -\
+    \ depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
+    \ { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return\
+    \ R[v] - L[v]; }\n std::array<int, 2> subtree(int v) /* half-open interval */\
+    \ const { return std::array{L[v], R[v]}; }\n template <bool edge= 0> std::vector<std::array<int,\
+    \ 2>> path(int u, int v) /* sequence of closed intervals */ const {\n  std::vector<std::array<int,\
+    \ 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
+    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
+    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
+    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
+    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
+    };\n#line 4 \"src/DataStructure/SegmentTree.hpp\"\ntemplate <typename M> struct\
+    \ SegmentTree {\n using T= typename M::T;\n SegmentTree() {}\n SegmentTree(int\
+    \ n_): n(n_), dat(n << 1, M::ti()) {}\n SegmentTree(int n_, T v): n(n_), dat(n\
+    \ << 1, M::ti()) {\n  for (int i= n; i--;) dat[i + n]= v;\n  rebuild();\n }\n\
+    \ SegmentTree(const std::vector<T> &v): n(v.size()), dat(n << 1, M::ti()) {\n\
+    \  for (int i= n; i--;) dat[i + n]= v[i];\n  rebuild();\n }\n void set(int k,\
+    \ T x) {\n  for (dat[k+= n]= x; k>>= 1;) dat[k]= M::op(dat[(k << 1) | 0], dat[(k\
+    \ << 1) | 1]);\n }\n void unsafe_set(int k, T x) { dat[k + n]= x; }\n void rebuild()\
+    \ {\n  for (int i= n; --i;) dat[i]= M::op(dat[i << 1 | 0], dat[i << 1 | 1]);\n\
+    \ }\n void clear() { fill(dat.begin(), dat.end(), M::ti()); }\n inline T fold(int\
+    \ l, int r) const {  //[l,r)\n  T vl= M::ti(), vr= M::ti();\n  for (int a= l +\
+    \ n, b= r + n; a < b; a>>= 1, b>>= 1) {\n   if (a & 1) vl= M::op(vl, dat[a++]);\n\
+    \   if (b & 1) vr= M::op(dat[--b], vr);\n  }\n  return M::op(vl, vr);\n }\n T\
+    \ operator[](const int &k) const { return dat[k + n]; }\n template <bool last>\
+    \ static inline T calc_op(const T &v, const T &d) {\n  if constexpr (last) return\
+    \ M::op(d, v);\n  else return M::op(v, d);\n }\n // Case 0. find i s.t check(fold(k,i))\
+    \ == False, check(fold(k,i+1)) == True\n // Case 1. find i s.t check(fold(i+1,b))\
+    \ == False, check(fold(i,b)) == True\n // return -1 if not found\n template <bool\
+    \ last, class C> int find(const C &check, int k) const {\n  assert(!check(M::ti()));\n\
+    \  std::vector<int> id[2];\n  int a= n + (k & -(!last)), b= n + n + ((k - n) &\
+    \ -(last));\n  for (; a < b; a>>= 1, b>>= 1) {\n   if (a & 1) id[0].push_back(a++);\n\
+    \   if (b & 1) id[1].push_back(--b);\n  }\n  id[last].insert(id[last].end(), id[!last].rbegin(),\
+    \ id[!last].rend());\n  T val= M::ti();\n  for (int i: id[last]) {\n   if (T tmp=\
+    \ calc_op<last>(val, dat[i]); check(tmp)) {\n    while (i < n)\n     if (tmp=\
+    \ calc_op<last>(val, dat[i= i << 1 | last]); !check(tmp)) val= tmp, i-= last *\
+    \ 2 - 1;\n    return i - n + last;\n   } else val= tmp;\n  }\n  return -1;\n }\n\
+    private:\n const int n;\n std::vector<T> dat;\n};\n#line 8 \"test/yosupo/vertex_set_path_composite.HLD.test.cpp\"\
     \nusing namespace std;\nusing Mint= ModInt<998244353>;\nstruct Mono {\n using\
     \ T= array<Mint, 2>;\n static T ti() { return {Mint(1), Mint()}; }\n static T\
     \ op(const T &l, const T &r) { return {l[0] * r[0], l[1] * r[0] + r[1]}; }\n};\n\
@@ -233,11 +244,12 @@ data:
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Graph/Tree.hpp
+  - src/DataStructure/CsrArray.hpp
   - src/DataStructure/SegmentTree.hpp
   isVerificationFile: true
   path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-04-15 19:40:03+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/vertex_set_path_composite.HLD.test.cpp

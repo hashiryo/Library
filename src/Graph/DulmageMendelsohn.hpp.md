@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1744.test.cpp
     title: test/yukicoder/1744.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1745.test.cpp
     title: test/yukicoder/1745.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <array>\n#include\
@@ -27,8 +27,8 @@ data:
     \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
     \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
     \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.begin() + pos[i], csr.begin() + pos[i + 1]}; }\n};\n#line 6 \"\
-    src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
+    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 6\
+    \ \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
     \ blg[2], mate[2], pos[2];\n std::vector<std::array<int, 2>> es;\npublic:\n DulmageMendelsohn(int\
     \ L, int R): blg{std::vector(L, -3), std::vector(R, -3)} {}\n void add_edge(int\
     \ l, int r) { es.push_back({l, r}); }\n void build() {\n  const int n[]= {(int)blg[0].size(),\
@@ -63,9 +63,9 @@ data:
     \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
     \ left_belong(int l) const { return blg[0][l]; }\n int right_belong(int r) const\
     \ { return blg[1][r]; }\n const ListRange<int> left_block(int k) const { return\
-    \ {mate[0].begin() + pos[0][k], mate[0].begin() + pos[0][k + 1]}; }\n const ListRange<int>\
-    \ right_block(int k) const { return {mate[1].begin() + pos[1][k], mate[1].begin()\
-    \ + pos[1][k + 1]}; }\n};\n"
+    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n const\
+    \ ListRange<int> right_block(int k) const { return {mate[1].cbegin() + pos[1][k],\
+    \ mate[1].cbegin() + pos[1][k + 1]}; }\n};\n"
   code: "#pragma once\n#include <array>\n#include <algorithm>\n#include <numeric>\n\
     #include \"src/DataStructure/CsrArray.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
     \ blg[2], mate[2], pos[2];\n std::vector<std::array<int, 2>> es;\npublic:\n DulmageMendelsohn(int\
@@ -102,16 +102,16 @@ data:
     \ s;\n  }\n }\n int component_num() const { return pos[0].size() - 1; }\n int\
     \ left_belong(int l) const { return blg[0][l]; }\n int right_belong(int r) const\
     \ { return blg[1][r]; }\n const ListRange<int> left_block(int k) const { return\
-    \ {mate[0].begin() + pos[0][k], mate[0].begin() + pos[0][k + 1]}; }\n const ListRange<int>\
-    \ right_block(int k) const { return {mate[1].begin() + pos[1][k], mate[1].begin()\
-    \ + pos[1][k + 1]}; }\n};"
+    \ {mate[0].cbegin() + pos[0][k], mate[0].cbegin() + pos[0][k + 1]}; }\n const\
+    \ ListRange<int> right_block(int k) const { return {mate[1].cbegin() + pos[1][k],\
+    \ mate[1].cbegin() + pos[1][k + 1]}; }\n};"
   dependsOn:
   - src/DataStructure/CsrArray.hpp
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2023-03-09 17:39:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-04-15 19:40:03+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1745.test.cpp
   - test/yukicoder/1744.test.cpp

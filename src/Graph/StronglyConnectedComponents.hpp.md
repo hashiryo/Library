@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/two_sat.test.cpp
     title: test/yosupo/two_sat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1170.test.cpp
     title: test/yukicoder/1170.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/StronglyConnectedComponents.hpp\"\n#include <algorithm>\n\
@@ -42,8 +42,8 @@ data:
     \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
     \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
     \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.begin() + pos[i], csr.begin() + pos[i + 1]}; }\n};\n#line 6 \"\
-    src/Graph/StronglyConnectedComponents.hpp\"\nclass StronglyConnectedComponents\
+    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 6\
+    \ \"src/Graph/StronglyConnectedComponents.hpp\"\nclass StronglyConnectedComponents\
     \ {\n std::vector<std::array<int, 2>> es;\n std::vector<int> csr, pos, id;\npublic:\n\
     \ StronglyConnectedComponents(int n): csr(n, -2), id(n) {}\n void add_edge(int\
     \ src, int dst) { es.push_back({src, dst}); }\n void build() {\n  const int n=\
@@ -60,7 +60,7 @@ data:
     \      if (dat[u= g[j]] >= 0) dat[u]= -1, csr[k++]= u;\n    pos.push_back(k);\n\
     \   }\n  for (int i= pos.size() - 1; i--;)\n   while (k > pos[i]) id[csr[--k]]=\
     \ i;\n }\n int components_num() const { return pos.size() - 1; }\n const ListRange<int>\
-    \ block(int k) const { return {csr.begin() + pos[k], csr.begin() + pos[k + 1]};\
+    \ block(int k) const { return {csr.cbegin() + pos[k], csr.cbegin() + pos[k + 1]};\
     \ }\n int belong(int i) const { return id[i]; }\n const CsrArray<int> dag() const\
     \ {\n  std::vector<std::array<int, 2>> es_;\n  for (auto [s, d]: es)\n   if (s=\
     \ id[s], d= id[d]; s != d) es_.push_back({s, d});\n  std::sort(es_.begin(), es_.end()),\
@@ -86,7 +86,7 @@ data:
     \      if (dat[u= g[j]] >= 0) dat[u]= -1, csr[k++]= u;\n    pos.push_back(k);\n\
     \   }\n  for (int i= pos.size() - 1; i--;)\n   while (k > pos[i]) id[csr[--k]]=\
     \ i;\n }\n int components_num() const { return pos.size() - 1; }\n const ListRange<int>\
-    \ block(int k) const { return {csr.begin() + pos[k], csr.begin() + pos[k + 1]};\
+    \ block(int k) const { return {csr.cbegin() + pos[k], csr.cbegin() + pos[k + 1]};\
     \ }\n int belong(int i) const { return id[i]; }\n const CsrArray<int> dag() const\
     \ {\n  std::vector<std::array<int, 2>> es_;\n  for (auto [s, d]: es)\n   if (s=\
     \ id[s], d= id[d]; s != d) es_.push_back({s, d});\n  std::sort(es_.begin(), es_.end()),\
@@ -100,8 +100,8 @@ data:
   path: src/Graph/StronglyConnectedComponents.hpp
   requiredBy:
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2023-03-07 14:46:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-04-15 19:40:03+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/scc.test.cpp
