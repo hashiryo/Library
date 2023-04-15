@@ -13,8 +13,14 @@ data:
     path: test/atcoder/abc117_d.test.cpp
     title: test/atcoder/abc117_d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc121_d.test.cpp
+    title: test/atcoder/abc121_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc135_d.test.cpp
+    title: test/atcoder/abc135_d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
@@ -33,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc015_d.test.cpp
     title: test/atcoder/agc015_d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/agc021_a.test.cpp
+    title: test/atcoder/agc021_a.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc127_a.test.cpp
     title: test/atcoder/arc127_a.test.cpp
@@ -232,6 +241,9 @@ data:
   timestamp: '2023-04-11 14:48:15+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc135_d.test.cpp
+  - test/atcoder/abc121_d.test.cpp
+  - test/atcoder/agc021_a.test.cpp
   - test/atcoder/abc208_e.test.cpp
   - test/atcoder/arc127_a.test.cpp
   - test/atcoder/abc235_f.test.cpp
@@ -274,7 +286,9 @@ title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
 [https://blog.knshnb.com/posts/aoj2587/](https://blog.knshnb.com/posts/aoj2587/)
 ## 問題例
 [Typical DP Contest E - 数](https://atcoder.jp/contests/tdpc/tasks/tdpc_number) \
+[AtCoder Beginner Contest 007 D - 禁止された数字](https://atcoder.jp/contests/abc007/tasks/abc007_4) \
 [AtCoder Beginner Contest 029 D - 1](https://atcoder.jp/contests/abc029/tasks/abc029_d) \
 [AtCoder Beginner Contest 050 D - Xor Sum](https://atcoder.jp/contests/abc050/tasks/arc066_b) (ナイーブにNFA) \
 [Donuts プロコンチャレンジ2014 B - 7th](https://atcoder.jp/contests/donuts-live2014/tasks/donuts_live2014_2) \
+[CODE FESTIVAL 2014 予選A D - 壊れた電卓](https://atcoder.jp/contests/code-festival-2014-quala/tasks/code_festival_qualA_d) \
 [yukicoder No.1953 ８](https://yukicoder.me/problems/no/1953) (sp judge)
