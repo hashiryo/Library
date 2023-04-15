@@ -23,28 +23,28 @@ data:
   bundledCode: "#line 1 \"test/yosupo/biconnected_components.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/biconnected_components\"\n#include <iostream>\n\
     #line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n#include\
-    \ <algorithm>\n#include <array>\n#include <numeric>\n#include <cassert>\n#line\
-    \ 2 \"src/DataStructure/CsrArray.hpp\"\n#include <vector>\n#include <iterator>\n\
-    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray\
-    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
-    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
-    \ {}\n size_t size() const { return pos.size() - 1; }\n const ListRange<T> operator[](int\
-    \ i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n\
-    #line 9 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void> class Tree {\n template\
-    \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const\
-    \ { return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
-    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
-    \ std::vector<std::conditional_t<std::is_same_v<Cost, void>, std::pair<int, int>,\
-    \ std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int> P,\
-    \ PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2) {}\n template <class T=\
-    \ Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t> = nullptr> void\
-    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
-    \ <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t> =\
-    \ nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v,\
-    \ u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \ <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n#include\
+    \ <cassert>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\n#include <vector>\n#include\
+    \ <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
+    \ std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin() const\
+    \ { return bg; }\n Iterator end() const { return ed; }\n size_t size() const {\
+    \ return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
+    \ bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T> csr;\n std::vector<int>\
+    \ pos;\npublic:\n CsrArray()= default;\n CsrArray(const std::vector<T> &c, const\
+    \ std::vector<int> &p): csr(c), pos(p) {}\n size_t size() const { return pos.size()\
+    \ - 1; }\n const ListRange<T> operator[](int i) const { return {csr.cbegin() +\
+    \ pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 10 \"src/Graph/Tree.hpp\"\n\
+    template <class Cost= void> class Tree {\n template <class D, class T> struct\
+    \ Edge_B {\n  int to;\n  T cost;\n  operator int() const { return to; }\n };\n\
+    \ template <class D> struct Edge_B<D, void> {\n  int to;\n  operator int() const\
+    \ { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::conditional_t<std::is_same_v<Cost,\
+    \ void>, std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge>\
+    \ g;\n std::vector<int> P, PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2)\
+    \ {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
+    \ = nullptr> void add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v,\
+    \ u); }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>,\
+    \ std::nullptr_t> = nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u,\
+    \ v, c), es.emplace_back(v, u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -89,28 +89,31 @@ data:
     \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
     \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
     };\n#line 3 \"src/Graph/BiConnectedComponents.hpp\"\nclass BiConnectedComponents\
-    \ {\n std::vector<std::vector<int>> adj;\npublic:\n BiConnectedComponents(int\
-    \ n): adj(n) {}\n void add_edge(int u, int v) { adj[u].push_back(v), adj[v].push_back(u);\
-    \ }\n Tree<void> block_cut_tree() const {\n  const int n= adj.size();\n  std::vector<int>\
-    \ ord(n), par(n, -2), dat(n, 0), low;\n  std::vector<std::array<int, 2>> es;\n\
-    \  int k= 0;\n  for (int s= 0, p; s < n; ++s)\n   if (par[s] == -2)\n    for (par[p=\
-    \ s]= -1; p >= 0;) {\n     if (dat[p] == 0) ord[k++]= p;\n     if (dat[p] == (int)adj[p].size())\
-    \ {\n      p= par[p];\n      continue;\n     }\n     if (int q= adj[p][dat[p]++];\
-    \ par[q] == -2) par[q]= p, p= q;\n    }\n  for (int i= 0; i < n; ++i) dat[ord[i]]=\
-    \ i;\n  low= dat;\n  for (int v= 0; v < n; ++v)\n   for (int u: adj[v]) low[v]=\
-    \ std::min(low[v], dat[u]);\n  for (int i= n; i--;)\n   if (int p= ord[i], pp=\
-    \ par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  for (int p: ord)\n \
-    \  if (par[p] >= 0) {\n    if (int pp= par[p]; low[p] < dat[pp]) low[p]= low[pp],\
-    \ es.push_back({low[p], p});\n    else es.push_back({k, pp}), es.push_back({k,\
-    \ p}), low[p]= k++;\n   }\n  for (int s= 0; s < n; ++s)\n   if (!adj[s].size())\
-    \ es.push_back({k++, s});\n  Tree ret(k);\n  for (auto [u, v]: es) ret.add_edge(u,\
-    \ v);\n  return ret;\n }\n};\n#line 4 \"test/yosupo/biconnected_components.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M;\n\n cin >> N >> M;\n BiConnectedComponents bcc(N);\n for (int i= 0;\
-    \ i < M; ++i) {\n  int a, b;\n  cin >> a >> b;\n  bcc.add_edge(a, b);\n }\n auto\
-    \ bct= bcc.block_cut_tree();\n int K= bct.size();\n cout << K - N << '\\n';\n\
-    \ for (int i= N; i < K; i++) {\n  cout << bct[i].size();\n  for (int v: bct[i])\
-    \ cout << \" \" << v;\n  cout << '\\n';\n }\n return 0;\n}\n"
+    \ {\n const size_t n;\n std::vector<std::pair<int, int>> E;\npublic:\n BiConnectedComponents(int\
+    \ n): n(n) {}\n void add_edge(int u, int v) { E.emplace_back(u, v); }\n Tree<void>\
+    \ block_cut_tree() const {\n  std::vector<int> pos(n + 1), g(E.size() * 2);\n\
+    \  for (auto [u, v]: E) ++pos[u], ++pos[v];\n  std::partial_sum(pos.begin(), pos.end(),\
+    \ pos.begin());\n  for (auto [u, v]: E) g[--pos[u]]= v, g[--pos[v]]= u;\n  std::vector<int>\
+    \ ord(n), par(n, -2), dat(pos.begin(), pos.begin() + n);\n  int k= 0;\n  for (int\
+    \ s= 0, p; s < n; ++s)\n   if (par[s] == -2)\n    for (par[p= s]= -1; p >= 0;)\
+    \ {\n     if (dat[p] == pos[p]) ord[k++]= p;\n     if (dat[p] == pos[p + 1]) {\n\
+    \      p= par[p];\n      continue;\n     }\n     if (int q= g[dat[p]++]; par[q]\
+    \ == -2) par[q]= p, p= q;\n    }\n  for (int i= n; i--;) dat[ord[i]]= i;\n  auto\
+    \ low= dat;\n  for (int v= n; v--;)\n   for (int j= pos[v]; j < pos[v + 1]; ++j)\
+    \ low[v]= std::min(low[v], dat[g[j]]);\n  for (int i= n; i--;)\n   if (int p=\
+    \ ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  std::vector<std::pair<int,\
+    \ int>> es;\n  for (int p: ord)\n   if (par[p] >= 0) {\n    if (int pp= par[p];\
+    \ low[p] < dat[pp]) low[p]= low[pp], es.emplace_back(low[p], p);\n    else es.emplace_back(k,\
+    \ pp), es.emplace_back(k, p), low[p]= k++;\n   }\n  for (int s= n; s--;)\n   if\
+    \ (pos[s] == pos[s + 1]) es.emplace_back(k++, s);\n  Tree ret(k);\n  for (auto\
+    \ [u, v]: es) ret.add_edge(u, v);\n  return ret.build(), ret;\n }\n};\n#line 4\
+    \ \"test/yosupo/biconnected_components.test.cpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, M;\n\n cin >> N >>\
+    \ M;\n BiConnectedComponents bcc(N);\n for (int i= 0; i < M; ++i) {\n  int a,\
+    \ b;\n  cin >> a >> b;\n  bcc.add_edge(a, b);\n }\n auto bct= bcc.block_cut_tree();\n\
+    \ int K= bct.size();\n cout << K - N << '\\n';\n for (int i= N; i < K; i++) {\n\
+    \  cout << bct[i].size();\n  for (int v: bct[i]) cout << \" \" << v;\n  cout <<\
+    \ '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/biconnected_components\"\
     \n#include <iostream>\n#include \"src/Graph/BiConnectedComponents.hpp\"\nusing\
     \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
@@ -126,7 +129,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 19:40:03+09:00'
+  timestamp: '2023-04-15 21:17:37+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/biconnected_components.test.cpp

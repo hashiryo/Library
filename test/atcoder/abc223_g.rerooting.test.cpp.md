@@ -24,16 +24,16 @@ data:
     \ \"https://atcoder.jp/contests/abc223/tasks/abc223_g\"\n#include <iostream>\n\
     #include <algorithm>\n#include <array>\n#line 2 \"src/Graph/Tree.hpp\"\n#include\
     \ <type_traits>\n#include <cstddef>\n#line 6 \"src/Graph/Tree.hpp\"\n#include\
-    \ <numeric>\n#include <cassert>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\n\
-    #include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange {\n\
-    \ using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
+    \ <tuple>\n#include <numeric>\n#include <cassert>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\
+    \n#include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange\
+    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
+    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
+    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
     \ i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T>\
     \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
     \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
     \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 9\
+    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 10\
     \ \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void> class Tree {\n template\
     \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const\
     \ { return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
@@ -139,7 +139,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc223_g.rerooting.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 19:40:03+09:00'
+  timestamp: '2023-04-15 21:17:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.rerooting.test.cpp

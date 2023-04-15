@@ -6,9 +6,9 @@ data:
     title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc127/tasks/arc127_a
@@ -101,9 +101,10 @@ data:
     \ tr= [](int64_t s, int c) { return (s - c + 10) / 10 - 1; };\n auto ac= [](int64_t)\
     \ { return true; };\n Automaton dfa(alp, N, tr, ac, int64_t(-1));\n using T= array<int64_t,\
     \ 2>;\n auto op= [](const T& l, const T& r) { return T{l[0] + r[0], l[1] + r[1]};\
-    \ };\n auto f= [](T x, int c, int) {\n  if (c > 1) x[1]= 0;\n  if (c == 1) x[1]+=\
-    \ x[0];\n  return x;\n };\n cout << dfa.dp_run(60, op, T{0, 0}, f, T{1, 0})[1]\
-    \ << '\\n';\n return 0;\n}\n"
+    \ };\n auto f= [](T x, int c, int) {\n  if (c == 1) x[1]+= x[0];\n  else x[1]=\
+    \ 0;\n  return x;\n };\n int64_t ans= 0;\n for (int i= 1; i <= 60; ++i) ans+=\
+    \ dfa.dp_run(i, op, T{0, 0}, f, T{1, 0})[1];\n cout << ans << '\\n';\n return\
+    \ 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc127/tasks/arc127_a\"\n#include\
     \ <iostream>\n#include <vector>\n#include <array>\n#include \"src/Misc/Automaton.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
@@ -111,16 +112,17 @@ data:
     \ tr= [](int64_t s, int c) { return (s - c + 10) / 10 - 1; };\n auto ac= [](int64_t)\
     \ { return true; };\n Automaton dfa(alp, N, tr, ac, int64_t(-1));\n using T= array<int64_t,\
     \ 2>;\n auto op= [](const T& l, const T& r) { return T{l[0] + r[0], l[1] + r[1]};\
-    \ };\n auto f= [](T x, int c, int) {\n  if (c > 1) x[1]= 0;\n  if (c == 1) x[1]+=\
-    \ x[0];\n  return x;\n };\n cout << dfa.dp_run(60, op, T{0, 0}, f, T{1, 0})[1]\
-    \ << '\\n';\n return 0;\n}"
+    \ };\n auto f= [](T x, int c, int) {\n  if (c == 1) x[1]+= x[0];\n  else x[1]=\
+    \ 0;\n  return x;\n };\n int64_t ans= 0;\n for (int i= 1; i <= 60; ++i) ans+=\
+    \ dfa.dp_run(i, op, T{0, 0}, f, T{1, 0})[1];\n cout << ans << '\\n';\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Misc/Automaton.hpp
   isVerificationFile: true
   path: test/atcoder/arc127_a.test.cpp
   requiredBy: []
-  timestamp: '2023-04-11 14:48:15+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-15 21:17:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc127_a.test.cpp
 layout: document

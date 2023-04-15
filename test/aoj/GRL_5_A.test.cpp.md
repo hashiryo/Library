@@ -12,9 +12,9 @@ data:
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A
@@ -23,17 +23,17 @@ data:
   bundledCode: "#line 1 \"test/aoj/GRL_5_A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/5/GRL_5_A\"\
     \n#include <iostream>\n#include <algorithm>\n#line 2 \"src/Graph/Tree.hpp\"\n\
     #include <type_traits>\n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n#include\
-    \ <array>\n#include <numeric>\n#include <cassert>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\
-    \n#include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
-    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
-    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
-    \ i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T>\
-    \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
-    \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
-    \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 9\
-    \ \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void> class Tree {\n template\
+    \ <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#line 2 \"\
+    src/DataStructure/CsrArray.hpp\"\n#include <vector>\n#include <iterator>\ntemplate\
+    \ <class T> struct ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray\
+    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
+    \ {}\n size_t size() const { return pos.size() - 1; }\n const ListRange<T> operator[](int\
+    \ i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n\
+    #line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void> class Tree {\n template\
     \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const\
     \ { return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
     \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
@@ -132,8 +132,8 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_5_A.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 19:40:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-15 21:17:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_5_A.test.cpp
 layout: document

@@ -12,9 +12,9 @@ data:
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc222/tasks/abc222_f
@@ -23,27 +23,28 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc222_f.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc222/tasks/abc222_f\"\
     \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/Graph/Tree.hpp\"\
     \n#include <type_traits>\n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n\
-    #include <array>\n#include <numeric>\n#include <cassert>\n#line 3 \"src/DataStructure/CsrArray.hpp\"\
-    \n#include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator=\
-    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
-    \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T> csr;\n std::vector<int>\
-    \ pos;\npublic:\n CsrArray()= default;\n CsrArray(const std::vector<T> &c, const\
-    \ std::vector<int> &p): csr(c), pos(p) {}\n size_t size() const { return pos.size()\
-    \ - 1; }\n const ListRange<T> operator[](int i) const { return {csr.cbegin() +\
-    \ pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 9 \"src/Graph/Tree.hpp\"\n\
-    template <class Cost= void> class Tree {\n template <class D, class T> struct\
-    \ Edge_B {\n  int to;\n  T cost;\n  operator int() const { return to; }\n };\n\
-    \ template <class D> struct Edge_B<D, void> {\n  int to;\n  operator int() const\
-    \ { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::conditional_t<std::is_same_v<Cost,\
-    \ void>, std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge>\
-    \ g;\n std::vector<int> P, PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2)\
-    \ {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v,\
-    \ u); }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>,\
-    \ std::nullptr_t> = nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u,\
-    \ v, c), es.emplace_back(v, u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    #include <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#line\
+    \ 3 \"src/DataStructure/CsrArray.hpp\"\n#include <iterator>\ntemplate <class T>\
+    \ struct ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray\
+    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
+    \ {}\n size_t size() const { return pos.size() - 1; }\n const ListRange<T> operator[](int\
+    \ i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n\
+    #line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void> class Tree {\n template\
+    \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const\
+    \ { return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
+    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
+    \ std::vector<std::conditional_t<std::is_same_v<Cost, void>, std::pair<int, int>,\
+    \ std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int> P,\
+    \ PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2) {}\n template <class T=\
+    \ Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t> = nullptr> void\
+    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
+    \ <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t> =\
+    \ nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v,\
+    \ u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -134,8 +135,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc222_f.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 19:40:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-04-15 21:17:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc222_f.test.cpp
 layout: document
