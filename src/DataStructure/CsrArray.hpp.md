@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
   - icon: ':x:'
