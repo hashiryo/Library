@@ -104,7 +104,7 @@ data:
     \ low[v]= std::min(low[v], dat[g[j]]);\n  for (int i= n; i--;)\n   if (int p=\
     \ ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  std::vector<std::pair<int,\
     \ int>> es;\n  for (int p: ord)\n   if (par[p] >= 0) {\n    if (int pp= par[p];\
-    \ low[p] < dat[pp]) low[p]= low[pp], es.emplace_back(low[p], p);\n    else es.emplace_back(k,\
+    \ low[p] < dat[pp]) es.emplace_back(low[p]= low[pp], p);\n    else es.emplace_back(k,\
     \ pp), es.emplace_back(k, p), low[p]= k++;\n   }\n  for (int s= n; s--;)\n   if\
     \ (pos[s] == pos[s + 1]) es.emplace_back(k++, s);\n  Tree ret(k);\n  for (auto\
     \ [u, v]: es) ret.add_edge(u, v);\n  return ret.build(), ret;\n }\n};\n#line 4\
@@ -134,7 +134,7 @@ data:
   isVerificationFile: true
   path: test/hackerrank/bonnie-and-clyde.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 21:17:37+09:00'
+  timestamp: '2023-04-16 20:09:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/bonnie-and-clyde.test.cpp

@@ -110,7 +110,7 @@ data:
     \ low[v]= std::min(low[v], dat[g[j]]);\n  for (int i= n; i--;)\n   if (int p=\
     \ ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  std::vector<std::pair<int,\
     \ int>> es;\n  for (int p: ord)\n   if (par[p] >= 0) {\n    if (int pp= par[p];\
-    \ low[p] < dat[pp]) low[p]= low[pp], es.emplace_back(low[p], p);\n    else es.emplace_back(k,\
+    \ low[p] < dat[pp]) es.emplace_back(low[p]= low[pp], p);\n    else es.emplace_back(k,\
     \ pp), es.emplace_back(k, p), low[p]= k++;\n   }\n  for (int s= n; s--;)\n   if\
     \ (pos[s] == pos[s + 1]) es.emplace_back(k++, s);\n  Tree ret(k);\n  for (auto\
     \ [u, v]: es) ret.add_edge(u, v);\n  return ret.build(), ret;\n }\n};\n"
@@ -129,7 +129,7 @@ data:
     \ low[v]= std::min(low[v], dat[g[j]]);\n  for (int i= n; i--;)\n   if (int p=\
     \ ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  std::vector<std::pair<int,\
     \ int>> es;\n  for (int p: ord)\n   if (par[p] >= 0) {\n    if (int pp= par[p];\
-    \ low[p] < dat[pp]) low[p]= low[pp], es.emplace_back(low[p], p);\n    else es.emplace_back(k,\
+    \ low[p] < dat[pp]) es.emplace_back(low[p]= low[pp], p);\n    else es.emplace_back(k,\
     \ pp), es.emplace_back(k, p), low[p]= k++;\n   }\n  for (int s= n; s--;)\n   if\
     \ (pos[s] == pos[s + 1]) es.emplace_back(k++, s);\n  Tree ret(k);\n  for (auto\
     \ [u, v]: es) ret.add_edge(u, v);\n  return ret.build(), ret;\n }\n};"
@@ -139,7 +139,7 @@ data:
   isVerificationFile: false
   path: src/Graph/BiConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2023-04-15 21:17:37+09:00'
+  timestamp: '2023-04-16 20:09:48+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/biconnected_components.test.cpp
@@ -151,8 +151,14 @@ documentation_of: src/Graph/BiConnectedComponents.hpp
 layout: document
 title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
 ---
+
+![bct.png](../../img/bct.png)
+
 [0, n)：もとの頂点 \
-[n, n + n_block)：block \
+[n, n + n_block)：block\
+$\mathrm{deg} > 1 $ $\rightarrow$ 関節点
+
+
 非再帰 [参考](https://nachiavivias.github.io/cp-library/column/2022/01.html)
 ## 問題例
 [AtCoder Regular Contest 062 F - AtCoDeerくんとグラフ色塗り](https://atcoder.jp/contests/arc062/tasks/arc062_d)
