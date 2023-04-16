@@ -42,16 +42,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':x:'
@@ -154,17 +154,17 @@ data:
     \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
     \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
     \ d_vw - k);\n }\n int dist(int u, int v) const { return depth(u) + depth(v) -\
-    \ depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
+    \ depth(lca(u, v)) * 2; }\n // u is in v\n bool in_subtree(int u, int v) const\
     \ { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return\
-    \ R[v] - L[v]; }\n std::array<int, 2> subtree(int v) /* half-open interval */\
-    \ const { return std::array{L[v], R[v]}; }\n template <bool edge= 0> std::vector<std::array<int,\
-    \ 2>> path(int u, int v) /* sequence of closed intervals */ const {\n  std::vector<std::array<int,\
-    \ 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n"
+    \ R[v] - L[v]; }\n // half-open interval\n std::array<int, 2> subtree(int v) const\
+    \ { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n template\
+    \ <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const {\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n"
   code: "#pragma once\n#include <type_traits>\n#include <cstddef>\n#include <algorithm>\n\
     #include <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#include\
     \ \"src/DataStructure/CsrArray.hpp\"\ntemplate <class Cost= void> class Tree {\n\
@@ -212,17 +212,17 @@ data:
     \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
     \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
     \ d_vw - k);\n }\n int dist(int u, int v) const { return depth(u) + depth(v) -\
-    \ depth(lca(u, v)) * 2; }\n bool in_subtree(int u, int v) /* u is in v */ const\
+    \ depth(lca(u, v)) * 2; }\n // u is in v\n bool in_subtree(int u, int v) const\
     \ { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return\
-    \ R[v] - L[v]; }\n std::array<int, 2> subtree(int v) /* half-open interval */\
-    \ const { return std::array{L[v], R[v]}; }\n template <bool edge= 0> std::vector<std::array<int,\
-    \ 2>> path(int u, int v) /* sequence of closed intervals */ const {\n  std::vector<std::array<int,\
-    \ 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };"
+    \ R[v] - L[v]; }\n // half-open interval\n std::array<int, 2> subtree(int v) const\
+    \ { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n template\
+    \ <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const {\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};"
   dependsOn:
   - src/DataStructure/CsrArray.hpp
   isVerificationFile: false
@@ -230,7 +230,7 @@ data:
   requiredBy:
   - src/Graph/rerooting.hpp
   - src/Graph/BiConnectedComponents.hpp
-  timestamp: '2023-04-15 21:17:37+09:00'
+  timestamp: '2023-04-16 21:58:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc160_f.test.cpp
@@ -270,25 +270,25 @@ HL分解＋オイラーツアーで頂点集合を数列に \
 ## メンバ関数
 **※`add_edge` (とコンストラクタと`build`) 以外の関数は `build` 関数が実行済みであることを前提とする**
 
-| 名前                                             | 概要                                                                                                 | 備考                          |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `Tree(n)`                                        | コンストラクタ. 頂点数 n を渡す                                                                      |                               |
-| `add_edge(u,v)`                                  | 無向辺 (u, v) を追加                                                                                 | 重みなし(Cost=void)の場合のみ |
-| 1. `add_edge(u,v,c) `<br> 2. `add_edge(u,v,c,d)` | 1.  無向辺 (u, v) を重み c で追加 <br> 2.  有向辺 (u, v) を重み c で、 有向辺 (v, u) を重み d で追加 | 重みあり(Cost≠void)の場合のみ |
-| `build(root=0)`                                  | 頂点 root を根としてHL分解を実行. 辺をセットし終えたらとにかく最初に実行.                            |                               |
-| `size()`                                         | 頂点数を返す.                                                                                        |                               |
-| `operator[](v)`                                  | 頂点 v から隣接する辺集合                                                                            |                               |
-| `path(u,v)`                                      | 頂点 u から頂点 v へのパスを表す"閉"区間列を返す.                                                    |                               |
-| `subtree(v)`                                     | 頂点 v を根とする部分木を表す"開"区間を返す.                                                         |                               |
-| `depth(v)`                                       | 頂点 v の深さを返す                                                                                  |                               |
-| `to_seq(v)`                                      | 頂点 v がオイラーツアー列で何番目に対応するかを返す                                                  |                               |
-| `to_node(i)`                                     | オイラーツアー列で i 番目が指す頂点を返す                                                            |                               |
-| `parent(v)`                                      | 頂点 v の親を返す. v が根なら -1                                                                     |                               |
-| `root(v)`                                        | 頂点 v が属する木の根を返す                                                                          |                               |
-| `lca(u,v)`                                       | 頂点 u と 頂点 v の最小共通祖先を返す. u と v が非連結の場合は未定義.                                |                               |  |
-| `la(v,k)`                                        | 頂点 v から根へ向けて 長さ k 移動した先の頂点を返す.  存在しないなら -1                              |                               |
-| `jump(u,v,k)`                                    | 頂点 u から 頂点 v へ向けて 長さ k 移動した先の頂点を返す.  存在しないなら -1                        |                               |
-| `dist(u,v)`                                      | 頂点 u から 頂点 v までの辺の数を返す. u と v が非連結の場合は未定義.                                |                               |
-| `connected(u,v)`                                 | 頂点 u と 頂点 v が連結なら true, 非連結なら false                                                   |                               |
-| `in_subtree(u,v)`                                | 頂点 u が 頂点 v を根とする部分木に属するなら true, そうでないなら false.                            |                               |
-| `subtree_size(v)`                                | 頂点 v を根とする部分木の頂点数を返す.                                                               |                               |
+| 名前                                             | 概要                                                                                                              | 備考                          |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `Tree(n)`                                        | コンストラクタ. 頂点数 n を渡す                                                                                   |                               |
+| `add_edge(u,v)`                                  | 無向辺 (u, v) を追加                                                                                              | 重みなし(Cost=void)の場合のみ |
+| 1. `add_edge(u,v,c) `<br> 2. `add_edge(u,v,c,d)` | 1.  無向辺 (u, v) を重み c で追加 <br> 2.  有向辺 (u, v) を重み c で、 有向辺 (v, u) を重み d で追加              | 重みあり(Cost≠void)の場合のみ |
+| `build(root=0)`                                  | 頂点 root を根としてHL分解を実行. 辺をセットし終えたらとにかく最初に実行.                                         |                               |
+| `size()`                                         | 頂点数を返す.                                                                                                     |                               |
+| `operator[](v)`                                  | 頂点 v から隣接する辺集合                                                                                         |                               |
+| `path<edge=0>(u,v)`                              | 頂点 u から頂点 v へのパスを表す"閉"区間列を返す. <br> `edge`フラグが true なら lca を含めないような区間列を返す. |                               |
+| `subtree(v)`                                     | 頂点 v を根とする部分木を表す"開"区間を返す.                                                                      |                               |
+| `depth(v)`                                       | 頂点 v の深さを返す                                                                                               |                               |
+| `to_seq(v)`                                      | 頂点 v がオイラーツアー列で何番目に対応するかを返す                                                               |                               |
+| `to_node(i)`                                     | オイラーツアー列で i 番目が指す頂点を返す                                                                         |                               |
+| `parent(v)`                                      | 頂点 v の親を返す. v が根なら -1                                                                                  |                               |
+| `root(v)`                                        | 頂点 v が属する木の根を返す                                                                                       |                               |
+| `lca(u,v)`                                       | 頂点 u と 頂点 v の最小共通祖先を返す. u と v が非連結の場合は未定義.                                             |                               |  |
+| `la(v,k)`                                        | 頂点 v から根へ向けて 長さ k 移動した先の頂点を返す.  存在しないなら -1                                           |                               |
+| `jump(u,v,k)`                                    | 頂点 u から 頂点 v へ向けて 長さ k 移動した先の頂点を返す.  存在しないなら -1                                     |                               |
+| `dist(u,v)`                                      | 頂点 u から 頂点 v までの辺の数を返す. u と v が非連結の場合は未定義.                                             |                               |
+| `connected(u,v)`                                 | 頂点 u と 頂点 v が連結なら true, 非連結なら false                                                                |                               |
+| `in_subtree(u,v)`                                | 頂点 u が 頂点 v を根とする部分木に属するなら true, そうでないなら false.                                         |                               |
+| `subtree_size(v)`                                | 頂点 v を根とする部分木の頂点数を返す.                                                                            |                               |

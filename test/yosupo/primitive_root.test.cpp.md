@@ -12,9 +12,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/primitive_root
@@ -109,8 +109,8 @@ data:
     \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
-    \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
-    \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
+    \ 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return\
+    \ ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
     \ }\n#line 4 \"test/yosupo/primitive_root.test.cpp\"\nusing namespace std;\nsigned\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int Q;\n cin >> Q;\n\
     \ while (Q--) {\n  long long p;\n  cin >> p;\n  cout << primitive_root(p) << '\\\
@@ -127,8 +127,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/primitive_root.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-04-16 21:58:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/primitive_root.test.cpp
 layout: document

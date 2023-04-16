@@ -8,13 +8,13 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
@@ -25,19 +25,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
   - icon: ':x:'
@@ -135,8 +135,8 @@ data:
     \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
-    \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
-    \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
+    \ 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return\
+    \ ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
     \ }\n"
   code: "#pragma once\n#include <numeric>\n#include <cassert>\n#include \"src/Math/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
@@ -173,8 +173,8 @@ data:
     \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
-    \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
-    \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
+    \ 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return\
+    \ ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
     \ }"
   dependsOn:
   - src/Math/is_prime.hpp
@@ -186,7 +186,7 @@ data:
   - src/Math/mod_kth_root.hpp
   - src/Math/ModInt_Exp.hpp
   - src/Math/mod_tetration.hpp
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-04-16 21:58:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp

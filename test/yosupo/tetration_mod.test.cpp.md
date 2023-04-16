@@ -113,8 +113,8 @@ data:
     \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
-    \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
-    \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
+    \ 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return\
+    \ ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
     \ }\n#line 3 \"src/Math/mod_tetration.hpp\"\nnamespace math_internal {\nconstexpr\
     \ u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n if (b ==\
     \ 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const auto [p,\
@@ -141,7 +141,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-04-16 21:58:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp

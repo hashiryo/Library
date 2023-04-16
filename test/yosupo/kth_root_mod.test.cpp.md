@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
@@ -120,8 +120,8 @@ data:
     \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
     constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
-    \ 0;\n for (const auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n\
-    \ return ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
+    \ 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return\
+    \ ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
     \ }\n#line 6 \"src/Math/mod_kth_root.hpp\"\nnamespace math_internal {\ntemplate\
     \ <class Int, class MP> inline i64 peth_root(Int c, Int pi, int ei, const MP &md)\
     \ {\n const Int p= md.mod;\n int t= 0;\n Int s= p - 1, pe= 1;\n while (s % pi\
@@ -170,8 +170,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_root_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-04-16 21:58:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/kth_root_mod.test.cpp
 layout: document

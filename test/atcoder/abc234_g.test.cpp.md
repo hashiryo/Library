@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
     title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
   - icon: ':question:'
@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc234/tasks/abc234_g
@@ -115,35 +115,33 @@ data:
     \ par;\n int rt;\npublic:\n template <class T> CartesianTree(const std::vector<T>&\
     \ a, bool is_min= 1): rg(a.size()), ch(a.size(), std::array{-1, -1}), par(a.size(),\
     \ -1) {\n  const int n= a.size();\n  auto comp= [&](int l, int r) { return (is_min\
-    \ ? a[l] < a[r] : a[l] > a[r]) || (a[l] == a[r] && l < r); };\n  std::vector<int>\
-    \ st;\n  st.reserve(n);\n  for (int i= 0; i < n; rg[i][0]= (st.empty() ? 0 : st.back()\
-    \ + 1), st.push_back(i++))\n   for (; !st.empty() && comp(i, st.back()); st.pop_back())\
-    \ ch[i][0]= st.back();\n  st.clear();\n  for (int i= n; i--; rg[i][1]= (st.empty()\
-    \ ? n : st.back()), st.push_back(i))\n   for (; !st.empty() && comp(i, st.back());\
-    \ st.pop_back()) ch[i][1]= st.back();\n  for (int i= 0; i < n; ++i)\n   for (int\
-    \ b= 2; b--;)\n    if (ch[i][b] != -1) par[ch[i][b]]= i;\n  for (int i= 0; i <\
-    \ n; ++i)\n   if (par[i] == -1) rt= i;\n }\n std::array<int, 2> children(int i)\
-    \ const { return ch[i]; }\n int parent(int i) const { return par[i]; }\n int root()\
-    \ const { return rt; }\n // [l,r)\n std::array<int, 2> range(int i) const { return\
-    \ rg[i]; }\n};\n#line 3 \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\n\
-    template <typename T> class BinaryIndexedTree_RangeAdd {\n std::vector<T> dat1,\
-    \ dat2;\npublic:\n BinaryIndexedTree_RangeAdd(int n): dat1(n + 1, T()), dat2(n\
-    \ + 1, T()) {}\n void add_range(int l, int r, T w) {  // add w [l,r)\n  int n=\
-    \ dat1.size();\n  for (int k= l + 1; k < n; k+= k & -k) dat1[k]-= w * l;\n  for\
-    \ (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w * r;\n  for (int k= l + 1; k <\
-    \ n; k+= k & -k) dat2[k]+= w;\n  for (int k= r + 1; k < n; k+= k & -k) dat2[k]-=\
-    \ w;\n }\n T sum(int x) const {  // sum [0,x)\n  T s= 0;\n  for (int k= x; k;\
-    \ k&= k - 1) s+= dat2[k];\n  s*= x;\n  for (int k= x; k; k&= k - 1) s+= dat1[k];\n\
-    \  return s;\n }\n T sum(int l, int r) const { return sum(r) - sum(l); }  // sum\
-    \ [l,r)\n T operator[](size_t k) const { return sum(k + 1) - sum(k); }\n};\n#line\
-    \ 7 \"test/atcoder/abc234_g.test.cpp\"\nusing namespace std;\nsigned main() {\n\
-    \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int\
-    \ N;\n cin >> N;\n vector<int> A(N);\n for (int i= 0; i < N; ++i) cin >> A[i];\n\
-    \ CartesianTree ct1(A), ct2(A, false);\n BinaryIndexedTree_RangeAdd<Mint> dp(N\
-    \ + 1);\n dp.add_range(0, 1, 1);\n for (int i= 0; i < N; ++i) {\n  auto [l1, r1]=\
-    \ ct1.range(i);\n  dp.add_range(i + 1, r1 + 1, -dp.sum(l1, i + 1) * A[i]);\n \
-    \ auto [l2, r2]= ct2.range(i);\n  dp.add_range(i + 1, r2 + 1, dp.sum(l2, i + 1)\
-    \ * A[i]);\n }\n cout << dp[N] << '\\n';\n return 0;\n}\n"
+    \ ? a[l] < a[r] : a[l] > a[r]) || (a[l] == a[r] && l < r); };\n  int st[n], t=\
+    \ 0;\n  for (int i= n; i--; rg[i][1]= (t ? st[t - 1] : n), st[t++]= i)\n   while\
+    \ (t && comp(i, st[t - 1])) ch[i][1]= st[--t];\n  for (int i= t= 0; i < n; rg[i][0]=\
+    \ (t ? st[t - 1] + 1 : 0), st[t++]= i++)\n   while (t && comp(i, st[t - 1])) ch[i][0]=\
+    \ st[--t];\n  for (int i= 0; i < n; ++i)\n   for (int b= 2; b--;)\n    if (ch[i][b]\
+    \ != -1) par[ch[i][b]]= i;\n  for (int i= 0; i < n; ++i)\n   if (par[i] == -1)\
+    \ rt= i;\n }\n std::array<int, 2> children(int i) const { return ch[i]; }\n int\
+    \ parent(int i) const { return par[i]; }\n int root() const { return rt; }\n //\
+    \ [l,r)\n std::array<int, 2> range(int i) const { return rg[i]; }\n};\n#line 3\
+    \ \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\ntemplate <typename T>\
+    \ class BinaryIndexedTree_RangeAdd {\n std::vector<T> dat1, dat2;\npublic:\n BinaryIndexedTree_RangeAdd(int\
+    \ n): dat1(n + 1, T()), dat2(n + 1, T()) {}\n void add_range(int l, int r, T w)\
+    \ {  // add w [l,r)\n  int n= dat1.size();\n  for (int k= l + 1; k < n; k+= k\
+    \ & -k) dat1[k]-= w * l;\n  for (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w\
+    \ * r;\n  for (int k= l + 1; k < n; k+= k & -k) dat2[k]+= w;\n  for (int k= r\
+    \ + 1; k < n; k+= k & -k) dat2[k]-= w;\n }\n T sum(int x) const {  // sum [0,x)\n\
+    \  T s= 0;\n  for (int k= x; k; k&= k - 1) s+= dat2[k];\n  s*= x;\n  for (int\
+    \ k= x; k; k&= k - 1) s+= dat1[k];\n  return s;\n }\n T sum(int l, int r) const\
+    \ { return sum(r) - sum(l); }  // sum [l,r)\n T operator[](size_t k) const { return\
+    \ sum(k + 1) - sum(k); }\n};\n#line 7 \"test/atcoder/abc234_g.test.cpp\"\nusing\
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
+    \ Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<int> A(N);\n for (int\
+    \ i= 0; i < N; ++i) cin >> A[i];\n CartesianTree ct1(A), ct2(A, false);\n BinaryIndexedTree_RangeAdd<Mint>\
+    \ dp(N + 1);\n dp.add_range(0, 1, 1);\n for (int i= 0; i < N; ++i) {\n  auto [l1,\
+    \ r1]= ct1.range(i);\n  dp.add_range(i + 1, r1 + 1, -dp.sum(l1, i + 1) * A[i]);\n\
+    \  auto [l2, r2]= ct2.range(i);\n  dp.add_range(i + 1, r2 + 1, dp.sum(l2, i +\
+    \ 1) * A[i]);\n }\n cout << dp[N] << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc234/tasks/abc234_g\"\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"\
     src/Misc/CartesianTree.hpp\"\n#include \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\
@@ -164,8 +162,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc234_g.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-04-16 21:58:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc234_g.test.cpp
 layout: document
