@@ -63,7 +63,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':question:'
@@ -182,13 +182,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
   - icon: ':heavy_check_mark:'

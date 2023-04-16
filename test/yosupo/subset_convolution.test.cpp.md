@@ -150,18 +150,18 @@ data:
     \ conv_na(f.data(), g.data(), ret.data(), sz), ret;\n  assert(sz == 1 << n &&\
     \ sz == g.size());\n  return conv_tr(f.data(), g.data(), ret.data(), sz), ret;\n\
     \ }\n // f(S) = \u03C6_S ( \u03A3_{T\u228AS} f(T)g(S/T) )\n template <class T,\
-    \ class F= void (*)(int, T &)>  // O(n^2 2^n)\n static inline std::vector<T> online_convolve(\n\
+    \ class F= void (*)(int, T &)>  // O(n^2 2^n)\n static inline std::vector<T> semi_relaxed_convolve(\n\
     \     const std::vector<T> &g, T init, const F &phi= [](int, T &) {}) {\n  const\
     \ int sz= g.size(), n= __builtin_ctz(sz);\n  std::vector<T> ret(sz);\n  ret[0]=\
     \ init;\n  if (n <= 12) return onconv_na(g.data(), ret.data(), phi, sz), ret;\n\
     \  assert(sz == 1 << n);\n  return onconv_tr(g.data(), ret.data(), phi, sz), ret;\n\
     \ }\n // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T) as binary numbers)\
     \ } f(T)f(S/T) )\n template <class T, class F>  // O(n^2 2^n)\n static inline\
-    \ std::vector<T> online_convolve2(int sz, const F &phi) {\n  assert(__builtin_popcount(sz)\
-    \ == 1);\n  int I= 1, ed= std::min(1 << 13, sz);\n  std::vector<T> ret(sz, 0);\n\
+    \ std::vector<T> self_relaxed_convolve(int n, const F &phi) {\n  assert(__builtin_popcount(n)\
+    \ == 1);\n  int I= 1, ed= std::min(1 << 13, n);\n  std::vector<T> ret(n, 0);\n\
     \  for (int s, t, u= 1; I < ed; I<<= 1)\n   for (t= s= 0; s < I; phi(u, ret[u]),\
     \ t= ++s, u++)\n    for (ret[u]= 0; t; --t&= s) ret[u]+= ret[u ^ t] * ret[t];\n\
-    \  T *h= ret.data();\n  for (; I < sz; I<<= 1)\n   phi(I, ret[I]), onconv_tr(\n\
+    \  T *h= ret.data();\n  for (; I < n; I<<= 1)\n   phi(I, ret[I]), onconv_tr(\n\
     \                       h, h + I, [&](int s, T &x) { phi(s | I, x); }, I);\n \
     \ return ret;\n }\n // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n //\
     \ \"f[\u2205] = 0\" is required.\n template <class T, class EGF>  // O(n^2 2^n)\n\
@@ -225,7 +225,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-04-16 23:40:45+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp

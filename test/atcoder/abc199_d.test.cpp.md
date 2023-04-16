@@ -62,34 +62,34 @@ data:
     \ == 1 << n && sz == g.size());\n  return conv_tr(f.data(), g.data(), ret.data(),\
     \ sz), ret;\n }\n // f(S) = \u03C6_S ( \u03A3_{T\u228AS} f(T)g(S/T) )\n template\
     \ <class T, class F= void (*)(int, T &)>  // O(n^2 2^n)\n static inline std::vector<T>\
-    \ online_convolve(\n     const std::vector<T> &g, T init, const F &phi= [](int,\
-    \ T &) {}) {\n  const int sz= g.size(), n= __builtin_ctz(sz);\n  std::vector<T>\
+    \ semi_relaxed_convolve(\n     const std::vector<T> &g, T init, const F &phi=\
+    \ [](int, T &) {}) {\n  const int sz= g.size(), n= __builtin_ctz(sz);\n  std::vector<T>\
     \ ret(sz);\n  ret[0]= init;\n  if (n <= 12) return onconv_na(g.data(), ret.data(),\
     \ phi, sz), ret;\n  assert(sz == 1 << n);\n  return onconv_tr(g.data(), ret.data(),\
     \ phi, sz), ret;\n }\n // f(S) = \u03C6_S ( \u03A3_{\u2205\u2260T\u228AS & (T<(S/T)\
     \ as binary numbers) } f(T)f(S/T) )\n template <class T, class F>  // O(n^2 2^n)\n\
-    \ static inline std::vector<T> online_convolve2(int sz, const F &phi) {\n  assert(__builtin_popcount(sz)\
-    \ == 1);\n  int I= 1, ed= std::min(1 << 13, sz);\n  std::vector<T> ret(sz, 0);\n\
-    \  for (int s, t, u= 1; I < ed; I<<= 1)\n   for (t= s= 0; s < I; phi(u, ret[u]),\
-    \ t= ++s, u++)\n    for (ret[u]= 0; t; --t&= s) ret[u]+= ret[u ^ t] * ret[t];\n\
-    \  T *h= ret.data();\n  for (; I < sz; I<<= 1)\n   phi(I, ret[I]), onconv_tr(\n\
-    \                       h, h + I, [&](int s, T &x) { phi(s | I, x); }, I);\n \
-    \ return ret;\n }\n // F(f) : F[i] is coefficient of EGF ( = F^{(i)}(0) )\n //\
-    \ \"f[\u2205] = 0\" is required.\n template <class T, class EGF>  // O(n^2 2^n)\n\
-    \ static inline std::vector<T> composite(const std::vector<T> &f, const EGF &F)\
-    \ {\n  const int sz= f.size(), m= __builtin_ctz(sz), sz2= sz >> 1;\n  assert(sz\
-    \ == 1 << m), assert(f.at(0) == 0);\n  std::vector<T> ret(sz);\n  T *h= ret.data()\
-    \ + sz;\n  const T *g= f.data();\n  for (int i= 0; i <= m; i++) ret[sz - (1 <<\
-    \ i)]= F[m - i];\n  int l= 1, ed= std::min(sz, 1 << 11), j;\n  for (; l < ed;\
-    \ l<<= 1)\n   for (j= sz2; j >= l; j>>= 1) conv_na(h - j, g + l, h - j - j + l,\
-    \ l);\n  for (; l < sz; l<<= 1)\n   for (j= sz2; j >= l; j>>= 1) conv_tr(h - j,\
-    \ g + l, h - j - j + l, l);\n  return ret;\n }\n // exp(f) : \"f[\u2205] = 0\"\
-    \ is required.\n template <class T>  // O(n^2 2^n)\n static inline std::vector<T>\
-    \ exp(const std::vector<T> &f) {\n  const int sz= f.size();\n  assert(!(sz & (sz\
-    \ - 1))), assert(f.at(0) == 0);\n  T h[sz];\n  const T *g= f.data();\n  int l=\
-    \ 1, ed= std::min(sz, 1 << 11);\n  for (h[0]= 1; l < ed; l<<= 1) conv_na(h, g\
-    \ + l, h + l, l);\n  for (; l < sz; l<<= 1) conv_tr(h, g + l, h + l, l);\n  return\
-    \ std::vector<T>(h, h + sz);\n }\n // log(f) : \"f[\u2205] = 1\" is required.\n\
+    \ static inline std::vector<T> self_relaxed_convolve(int n, const F &phi) {\n\
+    \  assert(__builtin_popcount(n) == 1);\n  int I= 1, ed= std::min(1 << 13, n);\n\
+    \  std::vector<T> ret(n, 0);\n  for (int s, t, u= 1; I < ed; I<<= 1)\n   for (t=\
+    \ s= 0; s < I; phi(u, ret[u]), t= ++s, u++)\n    for (ret[u]= 0; t; --t&= s) ret[u]+=\
+    \ ret[u ^ t] * ret[t];\n  T *h= ret.data();\n  for (; I < n; I<<= 1)\n   phi(I,\
+    \ ret[I]), onconv_tr(\n                       h, h + I, [&](int s, T &x) { phi(s\
+    \ | I, x); }, I);\n  return ret;\n }\n // F(f) : F[i] is coefficient of EGF (\
+    \ = F^{(i)}(0) )\n // \"f[\u2205] = 0\" is required.\n template <class T, class\
+    \ EGF>  // O(n^2 2^n)\n static inline std::vector<T> composite(const std::vector<T>\
+    \ &f, const EGF &F) {\n  const int sz= f.size(), m= __builtin_ctz(sz), sz2= sz\
+    \ >> 1;\n  assert(sz == 1 << m), assert(f.at(0) == 0);\n  std::vector<T> ret(sz);\n\
+    \  T *h= ret.data() + sz;\n  const T *g= f.data();\n  for (int i= 0; i <= m; i++)\
+    \ ret[sz - (1 << i)]= F[m - i];\n  int l= 1, ed= std::min(sz, 1 << 11), j;\n \
+    \ for (; l < ed; l<<= 1)\n   for (j= sz2; j >= l; j>>= 1) conv_na(h - j, g + l,\
+    \ h - j - j + l, l);\n  for (; l < sz; l<<= 1)\n   for (j= sz2; j >= l; j>>= 1)\
+    \ conv_tr(h - j, g + l, h - j - j + l, l);\n  return ret;\n }\n // exp(f) : \"\
+    f[\u2205] = 0\" is required.\n template <class T>  // O(n^2 2^n)\n static inline\
+    \ std::vector<T> exp(const std::vector<T> &f) {\n  const int sz= f.size();\n \
+    \ assert(!(sz & (sz - 1))), assert(f.at(0) == 0);\n  T h[sz];\n  const T *g= f.data();\n\
+    \  int l= 1, ed= std::min(sz, 1 << 11);\n  for (h[0]= 1; l < ed; l<<= 1) conv_na(h,\
+    \ g + l, h + l, l);\n  for (; l < sz; l<<= 1) conv_tr(h, g + l, h + l, l);\n \
+    \ return std::vector<T>(h, h + sz);\n }\n // log(f) : \"f[\u2205] = 1\" is required.\n\
     \ template <class T>  // O(n^2 2^n)\n static inline std::vector<T> log(const std::vector<T>\
     \ &f) {\n  const int sz= f.size();\n  assert(!(sz & (sz - 1))), assert(f.at(0)\
     \ == T(1));\n  int I= 2, ed= std::min(sz, 1 << 13);\n  T h[sz];\n  for (std::copy_n(f.begin(),\
@@ -209,12 +209,12 @@ data:
     \ <class T>  // O(V^2 2^V)\n inline sps<T> acyclic_orientations() const {\n  auto\
     \ k= connected_component_num();\n  sps<T> g(sz, 0);\n  for (int s= sz; --s;)\n\
     \   if (k[s] == __builtin_popcount(s)) g[s]= (k[s] + 1) & 1 ? -1 : 1;\n  return\
-    \ SPS::template online_convolve<T>(g, 1);\n }\n template <class T>  // O(V^2 2^V)\n\
-    \ inline std::vector<T> colorings_using_exactly_k_colors_num() const {\n  if (V\
-    \ == 0) return {0};  // impossible in any number of ways\n  for (int i= V; i--;)\n\
-    \   if (adj[i][i]) return {0};  // impossible in any number of ways\n  auto k=\
-    \ connected_component_num();\n  std::vector<T> indep(sz, 0);\n  for (int s= sz;\
-    \ --s;) indep[s]= k[s] == __builtin_popcount(s);\n  return SPS::egf(indep);\n\
+    \ SPS::template semi_relaxed_convolve<T>(g, 1);\n }\n template <class T>  // O(V^2\
+    \ 2^V)\n inline std::vector<T> colorings_using_exactly_k_colors_num() const {\n\
+    \  if (V == 0) return {0};  // impossible in any number of ways\n  for (int i=\
+    \ V; i--;)\n   if (adj[i][i]) return {0};  // impossible in any number of ways\n\
+    \  auto k= connected_component_num();\n  std::vector<T> indep(sz, 0);\n  for (int\
+    \ s= sz; --s;) indep[s]= k[s] == __builtin_popcount(s);\n  return SPS::egf(indep);\n\
     \ }\n template <class T>  // O(V^2 2^V)\n inline poly<T> chromatic_polynomial()\
     \ const {\n  auto e= colorings_using_exactly_k_colors_num<T>();\n  if (e.back()\
     \ == 0) return {0};\n  poly<T> ret(V + 1, 0);\n  T tmp[V]= {1};\n  for (int i=\
@@ -249,7 +249,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc199_d.test.cpp
   requiredBy: []
-  timestamp: '2023-01-21 21:27:17+09:00'
+  timestamp: '2023-04-16 23:40:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc199_d.test.cpp

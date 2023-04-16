@@ -267,7 +267,7 @@ data:
     - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     - icon: ':question:'
@@ -940,7 +940,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_d.test.cpp
       title: test/atcoder/abc228_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -952,7 +952,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc234_g.test.cpp
       title: test/atcoder/abc234_g.test.cpp
     - icon: ':heavy_check_mark:'

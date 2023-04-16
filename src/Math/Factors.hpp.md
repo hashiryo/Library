@@ -11,7 +11,7 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':x:'
@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'
@@ -201,5 +201,13 @@ layout: document
 title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
 ---
 
-## 計算量
- $\mathcal{O} \left(N^{1/4}\right) $
+どれも constexpr でよべる
+
+## 関数
+
+| 名前                                 | 概要                                                                                                                                                                                                 | 計算量                                                                                      |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `Factors(n)`                         | $n = p_1^{e_1}p_2^{e_2}\cdots p_k^{e_k}$ を素因数分解して 列 $( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を作る.                                                                                    | $\mathcal{O} \left(n^{1/4}\right) $                                                         |
+| `primitive_root(p)`                  | 素数 $p$ の原始根を返す. 引数が素数でないと assert で死ぬ                                                                                                                                            | $\mathcal{O} \left(p^{1/4}\right) $                                                         |
+| 1. `totient(n)` <br> 2. `totient(f)` | オイラーのトーシェント関数 $\phi(n)$ を計算する. <br> 1. $n$ を引数として与える. <br> 2. あらかじめ 素因数分解しておいて その列 $f = ( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を直接引数で与える. | 1. $\mathcal{O} \left(n^{1/4}\right) $ <br> 2. $\mathcal{O} \left(\sum_{i=1}^k e_i\right) $ |
+
