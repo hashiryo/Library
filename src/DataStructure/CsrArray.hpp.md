@@ -20,7 +20,7 @@ data:
   - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
   _extendedVerifiedWith:
@@ -81,13 +81,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/two_sat.test.cpp
     title: test/yosupo/two_sat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
   - icon: ':x:'
