@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'

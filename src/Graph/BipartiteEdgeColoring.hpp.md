@@ -1,20 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/atcoder/agc037_d.test.cpp
-    title: test/atcoder/agc037_d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartite_edge_coloring.test.cpp
     title: test/yosupo/bipartite_edge_coloring.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/BipartiteEdgeColoring.hpp\"\n#include <array>\n\
@@ -136,9 +133,8 @@ data:
   path: src/Graph/BipartiteEdgeColoring.hpp
   requiredBy: []
   timestamp: '2023-04-17 21:44:00+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/agc037_d.test.cpp
   - test/yosupo/bipartite_edge_coloring.test.cpp
 documentation_of: src/Graph/BipartiteEdgeColoring.hpp
 layout: document
@@ -154,6 +150,9 @@ title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
 | `add_edge(l,r)`              | 辺 (l,r) を追加                                                   |                                                                                  |
 | `edge_coloring()`            | 辺彩色をした結果を返す. 辺は `add_edge` をした順で番号付けをする. | $\mathcal{O}(E\sqrt{V}\log \Delta)$ <br> ただし $\Delta = \max_{v\in V} \deg(v)$ |
 
+
+## 問題例
+[AtCoder Grand Contest 037 D - Sorting a Grid](https://atcoder.jp/contests/agc037/tasks/agc037_d) (sp judge)
 
 ## 参考
 [https://ei1333.hateblo.jp/entry/2020/08/25/015955](https://ei1333.hateblo.jp/entry/2020/08/25/015955)

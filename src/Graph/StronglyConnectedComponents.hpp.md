@@ -24,12 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/StronglyConnectedComponents.hpp\"\n#include <algorithm>\n\
@@ -101,7 +101,7 @@ data:
   requiredBy:
   - src/Math/TwoSatisfiability.hpp
   timestamp: '2023-04-15 19:40:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/scc.test.cpp

@@ -6,15 +6,15 @@ data:
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1744.test.cpp
     title: test/yukicoder/1744.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1745.test.cpp
     title: test/yukicoder/1745.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <array>\n#include\
@@ -111,7 +111,7 @@ data:
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
   timestamp: '2023-04-15 19:40:03+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1745.test.cpp
   - test/yukicoder/1744.test.cpp
