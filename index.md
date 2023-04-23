@@ -221,7 +221,7 @@ data:
     - icon: ':question:'
       path: src/Internal/Remainder.hpp
       title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Internal/function_type.hpp
       title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
         \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -230,7 +230,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/LU_Decomposition.hpp
       title: "LU\u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
     - icon: ':heavy_check_mark:'
@@ -239,7 +239,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/SparseMatrix.hpp
       title: "\u758E\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/LinearAlgebra/Vector.hpp
       title: "\u30D9\u30AF\u30C8\u30EB"
     - icon: ':heavy_check_mark:'
@@ -264,7 +264,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/DirichletConvSumTable.hpp
       title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/DiscreteLogarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
     - icon: ':heavy_check_mark:'
@@ -276,7 +276,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt_Runtime.hpp
       title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
     - icon: ':heavy_check_mark:'
@@ -1662,7 +1662,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/925.SqrtDC.test.cpp
       title: test/yukicoder/925.SqrtDC.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/950.test.cpp
       title: test/yukicoder/950.test.cpp
     - icon: ':heavy_check_mark:'

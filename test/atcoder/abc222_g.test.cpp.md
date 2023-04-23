@@ -4,17 +4,17 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':question:'

@@ -60,7 +60,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':heavy_check_mark:'
@@ -475,7 +475,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
   - icon: ':heavy_check_mark:'

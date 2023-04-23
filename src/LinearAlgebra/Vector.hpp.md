@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/LU_Decomposition.hpp
     title: "LU\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
   - icon: ':heavy_check_mark:'
@@ -78,12 +78,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace\
@@ -145,7 +145,7 @@ data:
   - src/LinearAlgebra/SparseMatrix.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
   timestamp: '2023-03-12 23:00:15+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc236_g.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp

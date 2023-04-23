@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/SparseMatrix.hpp
     title: "\u758E\u884C\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   - icon: ':question:'

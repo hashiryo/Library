@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/LU_Decomposition.hpp
     title: "LU\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   - icon: ':question:'
