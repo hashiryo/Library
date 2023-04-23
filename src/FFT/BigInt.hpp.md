@@ -36,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc136_d.test.cpp
+    title: test/atcoder/abc136_d.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -342,7 +345,8 @@ data:
     \ BigInt &operator%=(const BigInt &r) { return *this= *this % r; }\n friend std::istream\
     \ &operator>>(std::istream &is, BigInt &v) {\n  std::string s;\n  return is >>\
     \ s, v= BigInt(s), is;\n }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const BigInt &v) { return os << v.to_str(), os; }\n};\n"
+    \ const BigInt &v) { return os << v.to_str(), os; }\n explicit operator int()\
+    \ { return is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};\n"
   code: "#pragma once\n#include <sstream>\n#include <iomanip>\n#include <vector>\n\
     #include <string>\n#include <cmath>\n#include <algorithm>\n#include \"src/FFT/NTT.hpp\"\
     \nclass BigInt {\n static constexpr unsigned BASE= 10000000, D= 7;\n using mod_t=\
@@ -436,7 +440,8 @@ data:
     \ BigInt &operator%=(const BigInt &r) { return *this= *this % r; }\n friend std::istream\
     \ &operator>>(std::istream &is, BigInt &v) {\n  std::string s;\n  return is >>\
     \ s, v= BigInt(s), is;\n }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const BigInt &v) { return os << v.to_str(), os; }\n};"
+    \ const BigInt &v) { return os << v.to_str(), os; }\n explicit operator int()\
+    \ { return is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};"
   dependsOn:
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
@@ -446,9 +451,10 @@ data:
   isVerificationFile: false
   path: src/FFT/BigInt.hpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-04-23 14:23:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/atcoder/abc136_d.test.cpp
   - test/aoj/NTL_2_B.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_E.test.cpp

@@ -86,6 +86,9 @@ data:
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc136_d.test.cpp
+    title: test/atcoder/abc136_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
   - icon: ':heavy_check_mark:'
@@ -574,6 +577,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc230_h.test.cpp
+  - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc213_h.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/inv_of_FPS.FPS.test.cpp

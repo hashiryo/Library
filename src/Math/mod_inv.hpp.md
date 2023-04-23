@@ -143,6 +143,9 @@ data:
     path: test/atcoder/abc135_d.test.cpp
     title: test/atcoder/abc135_d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc136_d.test.cpp
+    title: test/atcoder/abc136_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -550,6 +553,7 @@ data:
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/arc116_c.dujiao.test.cpp
+  - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/atcoder/abc213_g.test.cpp

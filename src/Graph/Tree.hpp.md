@@ -9,6 +9,9 @@ data:
     path: src/Graph/BiConnectedComponents.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
+    path: src/Graph/FunctionalGraph.hpp
+    title: "Functional\u30B0\u30E9\u30D5"
+  - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedVerifiedWith:
@@ -31,8 +34,17 @@ data:
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc136_d.test.cpp
+    title: test/atcoder/abc136_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc167_d.test.cpp
+    title: test/atcoder/abc167_d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc179_e.test.cpp
+    title: test/atcoder/abc179_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
@@ -42,6 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc241_e.test.cpp
+    title: test/atcoder/abc241_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
@@ -63,6 +78,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1211.test.cpp
+    title: test/yukicoder/1211.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1242.test.cpp
+    title: test/yukicoder/1242.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
@@ -229,13 +250,18 @@ data:
   path: src/Graph/Tree.hpp
   requiredBy:
   - src/Graph/rerooting.hpp
+  - src/Graph/FunctionalGraph.hpp
   - src/Graph/BiConnectedComponents.hpp
   timestamp: '2023-04-16 21:58:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc241_e.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp
   - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
@@ -247,6 +273,7 @@ data:
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/GRL_3_A.test.cpp
+  - test/yukicoder/1211.test.cpp
   - test/yukicoder/1418.test.cpp
   - test/yukicoder/1718.test.cpp
   - test/yukicoder/1124.test.cpp
@@ -258,6 +285,7 @@ data:
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/1242.test.cpp
   - test/yukicoder/1494.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
 documentation_of: src/Graph/Tree.hpp
@@ -286,7 +314,7 @@ HL分解＋オイラーツアーで頂点集合を数列に \
 | `parent(v)`                                      | 頂点 v の親を返す. v が根なら -1                                                                                  |                               |
 | `root(v)`                                        | 頂点 v が属する木の根を返す                                                                                       |                               |
 | `lca(u,v)`                                       | 頂点 u と 頂点 v の最小共通祖先を返す. u と v が非連結の場合は未定義.                                             |                               |  |
-| `la(v,k)`                                        | 頂点 v から根へ向けて 長さ k 移動した先の頂点を返す.  存在しないなら -1                                           |                               |
+| `la(v,k)`                                        | 頂点 v の祖先であって深さ k の頂点を返す.  存在しないなら -1                                                      |                               |
 | `jump(u,v,k)`                                    | 頂点 u から 頂点 v へ向けて 長さ k 移動した先の頂点を返す.  存在しないなら -1                                     |                               |
 | `dist(u,v)`                                      | 頂点 u から 頂点 v までの辺の数を返す. u と v が非連結の場合は未定義.                                             |                               |
 | `connected(u,v)`                                 | 頂点 u と 頂点 v が連結なら true, 非連結なら false                                                                |                               |

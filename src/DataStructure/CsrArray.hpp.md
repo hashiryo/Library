@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
+  - icon: ':question:'
+    path: src/Graph/FunctionalGraph.hpp
+    title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
@@ -49,8 +52,17 @@ data:
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc136_d.test.cpp
+    title: test/atcoder/abc136_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc167_d.test.cpp
+    title: test/atcoder/abc167_d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc179_e.test.cpp
+    title: test/atcoder/abc179_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
@@ -63,6 +75,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc241_e.test.cpp
+    title: test/atcoder/abc241_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
@@ -96,6 +111,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1170.test.cpp
     title: test/yukicoder/1170.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1211.test.cpp
+    title: test/yukicoder/1211.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1242.test.cpp
+    title: test/yukicoder/1242.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
@@ -171,6 +192,7 @@ data:
   - src/Graph/BipartiteGraph.hpp
   - src/Graph/rerooting.hpp
   - src/Graph/DulmageMendelsohn.hpp
+  - src/Graph/FunctionalGraph.hpp
   - src/Graph/BiConnectedComponents.hpp
   - src/Math/TwoSatisfiability.hpp
   timestamp: '2023-04-15 19:40:03+09:00'
@@ -178,8 +200,12 @@ data:
   verifiedWith:
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc241_e.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/biconnected_components.test.cpp
@@ -198,6 +224,7 @@ data:
   - test/aoj/GRL_3_A.test.cpp
   - test/yukicoder/1813.test.cpp
   - test/yukicoder/1293.scc.test.cpp
+  - test/yukicoder/1211.test.cpp
   - test/yukicoder/1418.test.cpp
   - test/yukicoder/1718.test.cpp
   - test/yukicoder/1124.test.cpp
@@ -210,6 +237,7 @@ data:
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/1242.test.cpp
   - test/yukicoder/1494.test.cpp
   - test/yukicoder/1745.test.cpp
   - test/yukicoder/1744.test.cpp

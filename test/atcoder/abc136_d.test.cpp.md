@@ -1,12 +1,21 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: src/DataStructure/CsrArray.hpp
+    title: "CSR\u5F62\u5F0F"
   - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
+  - icon: ':question:'
+    path: src/Graph/FunctionalGraph.hpp
+    title: "Functional\u30B0\u30E9\u30D5"
+  - icon: ':question:'
+    path: src/Graph/Tree.hpp
+    title: "\u6728\u30AF\u30E9\u30B9"
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
@@ -26,70 +35,71 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A
+    PROBLEM: https://atcoder.jp/contests/abc136/tasks/abc136_d
     links:
-    - https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A
-  bundledCode: "#line 1 \"test/aoj/NTL_2_A.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A\"\
-    \n#include <iostream>\n#line 2 \"src/FFT/BigInt.hpp\"\n#include <sstream>\n#include\
-    \ <iomanip>\n#include <vector>\n#include <string>\n#include <cmath>\n#include\
-    \ <algorithm>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
-    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
-    \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
-    #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
-    \ CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return\
-    \ l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if\
-    \ (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE\
-    \ IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\n\
-    \ static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
-    \ B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE\
-    \ MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t mul(u_t\
-    \ l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n DIFF(u_t,\
-    \ A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n CE IL u_t\
-    \ get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t n) const\
-    \ { NORM; }\nprivate:\n u_t iv, r2;\n static CE u_t inv(u_t n, int e= 6, u_t x=\
-    \ 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE IL u_t reduce(const\
-    \ du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w) * iv) * mod) >> B);\
-    \ }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na(): mod(0){};\n CE MP_Na(u32 m):\
-    \ mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l) * r % mod; }\n\
-    \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br {  // mod < 2^31\n\
-    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(95\
-    \ - __builtin_clz(m - 1)), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32\
-    \ l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod)\
-    \ SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x)\
-    \ * n) >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\n\
-    struct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0)\
-    \ {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64\
-    \ l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64,\
-    \ 63, mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64\
-    \ n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
-    \ CE IL u128 quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const\
-    \ u128 &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n\
-    \ u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0), v(0) {}\n CE MP_D2B1(u64\
-    \ m): s(__builtin_clzll(m)), mod(m), d(m << s), v(u128(-1) / d) {}\n CE IL u64\
-    \ mul(u64 l, u64 r) const { return rem((u128(l) * r) << s) >> s; }\n PLUS(u64,\
-    \ mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const u128 &u) const\
-    \ {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64) * d - d;\n  if\
-    \ (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n};\ntemplate <class\
-    \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
-    \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
-    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
-    src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint, class\
-    \ MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n const\
-    \ Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
-    \ - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b),\
-    \ d, md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n\
-    \     if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n\
-    \ if (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < (1 << 30)) return\
-    \ miller_rabin<u32, MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull <<\
-    \ 62)) return miller_rabin<u64, MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178,\
-    \ 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64, MP_D2B1, 2, 325,\
-    \ 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing math_internal::is_prime;\n\
-    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
-    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
-    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
-    \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
-    \ - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/ModInt.hpp\"\nnamespace math_internal\
+    - https://atcoder.jp/contests/abc136/tasks/abc136_d
+  bundledCode: "#line 1 \"test/atcoder/abc136_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc136/tasks/abc136_d\"\
+    \n#include <iostream>\n#include <vector>\n#line 2 \"src/FFT/BigInt.hpp\"\n#include\
+    \ <sstream>\n#include <iomanip>\n#line 5 \"src/FFT/BigInt.hpp\"\n#include <string>\n\
+    #include <cmath>\n#include <algorithm>\n#line 2 \"src/FFT/NTT.hpp\"\n#include\
+    \ <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
+    \ math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\n\
+    using u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE\
+    \ constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n\
+    \ return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
+    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
+    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
+    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
+    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
+    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
+    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
+    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
+    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
+    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n u_t iv, r2;\n static CE\
+    \ u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n))\
+    \ : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod -\
+    \ ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na():\
+    \ mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const {\
+    \ return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\n\
+    struct MP_Br {  // mod < 2^31\n u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n\
+    \ CE MP_Br(u32 m): mod(m), s(95 - __builtin_clz(m - 1)), x(((u128(1) << s) + m\
+    \ - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n\
+    \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: u8 s;\n u64 x;\n CE IL u64\
+    \ quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const\
+    \ { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n u64\
+    \ mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) <<\
+    \ 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n\
+    \ PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n)\
+    \ { return n; }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n)\
+    \ const { NORM; }\nprivate:\n u64 x;\n CE IL u128 quo(const u128 &n) const { return\
+    \ (n * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) *\
+    \ mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n u64 mod, d, v;\n CE MP_D2B1(): s(0),\
+    \ mod(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): s(__builtin_clzll(m)), mod(m), d(m\
+    \ << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
+    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
+    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
+    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
+    \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
+    \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
+    \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
+    \ SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
+    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
+    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
+    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
+    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
+    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
+    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
+    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
+    \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
+    \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
+    }\n}\nusing math_internal::is_prime;\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
+    \ <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline Int\
+    \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
+    \ y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y *\
+    \ (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
+    \ % mod : x % mod;\n}\n#line 4 \"src/Math/ModInt.hpp\"\nnamespace math_internal\
     \ {\n#define CE constexpr\nstruct m_b {};\nstruct s_b: m_b {};\ntemplate <class\
     \ mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t>\
     \ CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\ntemplate <class MP, u64\
@@ -332,13 +342,110 @@ data:
     \ &operator>>(std::istream &is, BigInt &v) {\n  std::string s;\n  return is >>\
     \ s, v= BigInt(s), is;\n }\n friend std::ostream &operator<<(std::ostream &os,\
     \ const BigInt &v) { return os << v.to_str(), os; }\n explicit operator int()\
-    \ { return is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};\n#line 4 \"test/aoj/NTL_2_A.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ BigInt A, B;\n cin >> A >> B;\n cout << A + B << endl;\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_A\"\
-    \n#include <iostream>\n#include \"src/FFT/BigInt.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n BigInt A, B;\n\
-    \ cin >> A >> B;\n cout << A + B << endl;\n return 0;\n}"
+    \ { return is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};\n#line 3 \"src/Graph/Tree.hpp\"\
+    \n#include <cstddef>\n#line 6 \"src/Graph/Tree.hpp\"\n#include <tuple>\n#include\
+    \ <numeric>\n#line 3 \"src/DataStructure/CsrArray.hpp\"\n#include <iterator>\n\
+    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray\
+    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
+    \ {}\n size_t size() const { return pos.size() - 1; }\n const ListRange<T> operator[](int\
+    \ i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n\
+    #line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void> class Tree {\n template\
+    \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const\
+    \ { return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
+    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
+    \ std::vector<std::conditional_t<std::is_same_v<Cost, void>, std::pair<int, int>,\
+    \ std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int> P,\
+    \ PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2) {}\n template <class T=\
+    \ Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t> = nullptr> void\
+    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
+    \ <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t> =\
+    \ nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v,\
+    \ u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
+    \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
+    \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
+    \ PP.resize(n), std::iota(PP.begin(), PP.end(), 0), D.assign(n, 0), L.assign(n,\
+    \ 0), R.assign(n, 0), pos.resize(n + 1), g.resize(es.size());\n  for (const auto\
+    \ &e: es) ++pos[std::get<0>(e)];\n  std::partial_sum(pos.begin(), pos.end(), pos.begin());\n\
+    \  if constexpr (std::is_same_v<Cost, void>)\n   for (const auto &[f, t]: es)\
+    \ g[--pos[f]]= {t};\n  else\n   for (const auto &[f, t, c]: es) g[--pos[f]]= {t,\
+    \ c};\n  auto f= [&, i= 0, v= 0, t= 0](int r) mutable {\n   for (P[r]= -1, I[t++]=\
+    \ r; i < t; ++i)\n    for (int u: operator[](v= I[i]))\n     if (P[v] != u) P[I[t++]=\
+    \ u]= v;\n  };\n  f(root);\n  for (size_t r= 0; r < n; ++r)\n   if (P[r] == -2)\
+    \ f(r);\n  std::vector<int> Z(n, 1), nx(n, -1);\n  for (int i= n, v; i--;) {\n\
+    \   if (P[v= I[i]] == -1) continue;\n   if (Z[P[v]]+= Z[v]; nx[P[v]] == -1) nx[P[v]]=\
+    \ v;\n   if (Z[nx[P[v]]] < Z[v]) nx[P[v]]= v;\n  }\n  for (int v: I)\n   if (nx[v]\
+    \ != -1) PP[nx[v]]= v;\n  for (int v: I)\n   if (P[v] != -1) PP[v]= PP[PP[v]],\
+    \ D[v]= D[P[v]] + 1;\n  for (int i= n; i--;) L[I[i]]= i;\n  for (int v: I) {\n\
+    \   int ir= R[v]= L[v] + Z[v];\n   for (int u: operator[](v))\n    if (u != P[v]\
+    \ && u != nx[v]) L[u]= ir-= Z[u];\n   if (nx[v] != -1) L[nx[v]]= L[v] + 1;\n \
+    \ }\n  for (int i= n; i--;) I[L[i]]= i;\n }\n size_t size() const { return P.size();\
+    \ }\n const ListRange<Edge> operator[](int v) const { return {g.cbegin() + pos[v],\
+    \ g.cbegin() + pos[v + 1]}; }\n int depth(int v) const { return D[v]; }\n int\
+    \ to_seq(int v) const { return L[v]; }\n int to_node(int i) const { return I[i];\
+    \ }\n int parent(int v) const { return P[v]; }\n int root(int v) const {\n  for\
+    \ (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n bool connected(int\
+    \ u, int v) const { return root(u) == root(v); }\n int lca(int u, int v) const\
+    \ {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u]\
+    \ == PP[v]) return u;\n  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n\
+    \  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]])\
+    \ return I[L[v] - k];\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
+    \ u;\n  if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v,\
+    \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
+    \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
+    \ d_vw - k);\n }\n int dist(int u, int v) const { return depth(u) + depth(v) -\
+    \ depth(lca(u, v)) * 2; }\n // u is in v\n bool in_subtree(int u, int v) const\
+    \ { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const { return\
+    \ R[v] - L[v]; }\n // half-open interval\n std::array<int, 2> subtree(int v) const\
+    \ { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n template\
+    \ <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const {\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 3 \"src/Graph/FunctionalGraph.hpp\"\
+    \nclass FunctionalGraph {\n std::vector<int> to, rt;\n Tree<> tree;\npublic:\n\
+    \ FunctionalGraph(int n): to(n, -1), rt(n, -1), tree(n + 1) {}\n void add_edge(int\
+    \ src, int dst) { assert(to[src] == -1), to[src]= dst; }\n void build() {\n  const\
+    \ int n= to.size();\n  for (int u, w, v= n; v--;)\n   if (rt[v] == -1) {\n   \
+    \ for (rt[v]= -2, w= to[v];; rt[w]= -2, w= to[w])\n     if (assert(w != -1); rt[w]\
+    \ != -1) {\n      if (rt[w] != -2) w= rt[w];\n      break;\n     }\n    for (u=\
+    \ v; rt[u] == -2; u= to[u]) rt[u]= w;\n   }\n  for (int v= n; v--;)\n   if (rt[v]\
+    \ == v) tree.add_edge(v, n);\n   else tree.add_edge(v, to[v]);\n  tree.build(n);\n\
+    \ }\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>, int>\
+    \ jump(int v, Int k) const {\n  int n= to.size(), d= tree.depth(v) - 1;\n  if\
+    \ (k <= d) return tree.jump(v, n, (int)k);\n  int b= to[v= rt[v]], l= (k-= d)\
+    \ % tree.depth(b);\n  if (l == 0) return v;\n  return tree.jump(b, n, l - 1);\n\
+    \ }\n // ((a_0,...,a_{i-1}) x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x\
+    \ 1)\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
+    \ std::array<std::pair<std::vector<int>, Int>, 3>> path(int v, Int k) const {\n\
+    \  std::array<std::pair<std::vector<int>, Int>, 3> ret;\n  int n= to.size(), d=\
+    \ tree.depth(v) - 1;\n  if (ret[0].second= 1; k <= d) {\n   for (int e= k; e--;\
+    \ v= to[v]) ret[0].first.push_back(v);\n   return ret;\n  }\n  for (int e= d;\
+    \ e--; v= to[v]) ret[0].first.push_back(v);\n  int b= to[v= rt[v]], c= tree.depth(b),\
+    \ l= (k-= d) % c;\n  ret[1].second= k / c, ret[2].second= 1;\n  for (int e= c;\
+    \ e--; v= to[v]) ret[1].first.push_back(v);\n  for (int e= l; e--; v= to[v]) ret[2].first.push_back(v);\n\
+    \  return ret;\n }\n};\n#line 6 \"test/atcoder/abc136_d.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string S;\n\
+    \ cin >> S;\n int N= S.length();\n FunctionalGraph graph(N);\n for (int i= 0;\
+    \ i < N; ++i)\n  if (S[i] == 'L') graph.add_edge(i, i - 1);\n  else graph.add_edge(i,\
+    \ i + 1);\n graph.build();\n BigInt K(\"1\" + string(100, '0'));\n vector cnt(N,\
+    \ 0);\n for (int i= 0; i < N; ++i) ++cnt[graph.jump(i, K)];\n for (int i= 0; i\
+    \ < N; ++i) cout << cnt[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc136/tasks/abc136_d\"\n#include\
+    \ <iostream>\n#include <vector>\n#include \"src/FFT/BigInt.hpp\"\n#include \"\
+    src/Graph/FunctionalGraph.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n string S;\n cin >> S;\n int N= S.length();\n FunctionalGraph\
+    \ graph(N);\n for (int i= 0; i < N; ++i)\n  if (S[i] == 'L') graph.add_edge(i,\
+    \ i - 1);\n  else graph.add_edge(i, i + 1);\n graph.build();\n BigInt K(\"1\"\
+    \ + string(100, '0'));\n vector cnt(N, 0);\n for (int i= 0; i < N; ++i) ++cnt[graph.jump(i,\
+    \ K)];\n for (int i= 0; i < N; ++i) cout << cnt[i] << \" \\n\"[i == N - 1];\n\
+    \ return 0;\n}"
   dependsOn:
   - src/FFT/BigInt.hpp
   - src/FFT/NTT.hpp
@@ -346,16 +453,19 @@ data:
   - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
+  - src/Graph/FunctionalGraph.hpp
+  - src/Graph/Tree.hpp
+  - src/DataStructure/CsrArray.hpp
   isVerificationFile: true
-  path: test/aoj/NTL_2_A.test.cpp
+  path: test/atcoder/abc136_d.test.cpp
   requiredBy: []
   timestamp: '2023-04-23 14:23:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/NTL_2_A.test.cpp
+documentation_of: test/atcoder/abc136_d.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/NTL_2_A.test.cpp
-- /verify/test/aoj/NTL_2_A.test.cpp.html
-title: test/aoj/NTL_2_A.test.cpp
+- /verify/test/atcoder/abc136_d.test.cpp
+- /verify/test/atcoder/abc136_d.test.cpp.html
+title: test/atcoder/abc136_d.test.cpp
 ---

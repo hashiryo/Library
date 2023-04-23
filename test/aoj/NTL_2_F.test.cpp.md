@@ -331,7 +331,8 @@ data:
     \ BigInt &operator%=(const BigInt &r) { return *this= *this % r; }\n friend std::istream\
     \ &operator>>(std::istream &is, BigInt &v) {\n  std::string s;\n  return is >>\
     \ s, v= BigInt(s), is;\n }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const BigInt &v) { return os << v.to_str(), os; }\n};\n#line 4 \"test/aoj/NTL_2_F.test.cpp\"\
+    \ const BigInt &v) { return os << v.to_str(), os; }\n explicit operator int()\
+    \ { return is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};\n#line 4 \"test/aoj/NTL_2_F.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ BigInt A, B;\n cin >> A >> B;\n cout << A * B << endl;\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/2/NTL_2_F\"\
@@ -348,7 +349,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_F.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-04-23 14:23:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_F.test.cpp

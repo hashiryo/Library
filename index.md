@@ -178,6 +178,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
+    - icon: ':question:'
+      path: src/Graph/FunctionalGraph.hpp
+      title: "Functional\u30B0\u30E9\u30D5"
     - icon: ':heavy_check_mark:'
       path: src/Graph/IncrementalBridgeConnectivity.hpp
       title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
@@ -872,6 +875,9 @@ data:
       path: test/atcoder/abc135_d.test.cpp
       title: test/atcoder/abc135_d.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc136_d.test.cpp
+      title: test/atcoder/abc136_d.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -883,6 +889,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc160_f.test.cpp
       title: test/atcoder/abc160_f.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc167_d.test.cpp
+      title: test/atcoder/abc167_d.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.dujiao.test.cpp
       title: test/atcoder/abc172_d.dujiao.test.cpp
@@ -898,6 +907,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.test.cpp
       title: test/atcoder/abc179_c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc179_e.test.cpp
+      title: test/atcoder/abc179_e.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc182_e.test.cpp
       title: test/atcoder/abc182_e.test.cpp
@@ -964,6 +976,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc241_e.test.cpp
+      title: test/atcoder/abc241_e.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.conj.test.cpp
       title: test/atcoder/abc250_g.conj.test.cpp
@@ -1431,6 +1446,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1211.test.cpp
+      title: test/yukicoder/1211.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1242.test.cpp
+      title: test/yukicoder/1242.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1269.test.cpp
       title: test/yukicoder/1269.test.cpp
