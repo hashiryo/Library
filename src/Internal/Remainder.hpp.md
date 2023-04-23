@@ -60,7 +60,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'
@@ -518,10 +518,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/665.test.cpp
     title: test/yukicoder/665.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/685.test.cpp
     title: test/yukicoder/685.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/737.test.cpp
     title: test/yukicoder/737.test.cpp
   - icon: ':heavy_check_mark:'
@@ -542,9 +542,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\n\
@@ -663,7 +663,7 @@ data:
   - src/Math/StirlingNumber.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
   timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc135_d.test.cpp

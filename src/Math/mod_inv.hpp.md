@@ -57,7 +57,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'
@@ -472,10 +472,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/665.test.cpp
     title: test/yukicoder/665.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/685.test.cpp
     title: test/yukicoder/685.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/737.test.cpp
     title: test/yukicoder/737.test.cpp
   - icon: ':heavy_check_mark:'
@@ -496,9 +496,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
@@ -538,7 +538,7 @@ data:
   - src/Math/ModInt_Runtime.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
   timestamp: '2023-01-23 16:50:15+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc135_d.test.cpp

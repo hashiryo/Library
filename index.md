@@ -218,7 +218,7 @@ data:
       path: src/Internal/HAS_CHECK.hpp
       title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
         \u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Internal/Remainder.hpp
       title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
     - icon: ':heavy_check_mark:'
@@ -270,7 +270,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -307,7 +307,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/mod_inv.hpp
       title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':heavy_check_mark:'
@@ -331,7 +331,7 @@ data:
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - name: src/Misc
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Misc/Automaton.hpp
       title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
     - icon: ':heavy_check_mark:'
@@ -1620,7 +1620,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/674.test.cpp
       title: test/yukicoder/674.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/685.test.cpp
       title: test/yukicoder/685.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1629,7 +1629,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/737.test.cpp
       title: test/yukicoder/737.test.cpp
     - icon: ':heavy_check_mark:'
