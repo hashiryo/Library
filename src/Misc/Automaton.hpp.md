@@ -66,7 +66,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/737.test.cpp
     title: test/yukicoder/737.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/911.test.cpp
     title: test/yukicoder/911.test.cpp
   _isVerificationFailed: true
