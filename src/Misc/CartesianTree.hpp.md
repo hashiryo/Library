@@ -63,10 +63,10 @@ data:
   verifiedWith:
   - test/atcoder/abc234_g.test.cpp
   - test/atcoder/arc115_e.test.cpp
-  - test/yosupo/cartesian_tree.test.cpp
-  - test/aoj/DPL_3_C.test.cpp
-  - test/aoj/DPL_3_B.test.cpp
   - test/yukicoder/1031.test.cpp
+  - test/yosupo/cartesian_tree.test.cpp
+  - test/aoj/DPL_3_B.test.cpp
+  - test/aoj/DPL_3_C.test.cpp
 documentation_of: src/Misc/CartesianTree.hpp
 layout: document
 title: Cartesian-Tree

@@ -101,8 +101,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/maximum_independent_set.test.cpp
-  - test/aoj/GRL_7_A.max_clique.test.cpp
   - test/aoj/3168.max_clique.test.cpp
+  - test/aoj/GRL_7_A.max_clique.test.cpp
 documentation_of: src/Graph/MaxClique.hpp
 layout: document
 title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"

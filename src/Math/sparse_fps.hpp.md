@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':heavy_check_mark:'
@@ -326,14 +326,14 @@ data:
   verifiedWith:
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/yukicoder/1080.sparse_FPS.test.cpp
+  - test/yukicoder/1533.test.cpp
+  - test/yukicoder/1939.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
   - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yukicoder/1939.test.cpp
-  - test/yukicoder/1533.test.cpp
-  - test/yukicoder/1080.sparse_FPS.test.cpp
 documentation_of: src/Math/sparse_fps.hpp
 layout: document
 title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
@@ -154,17 +154,17 @@ data:
   verifiedWith:
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - test/yosupo/log_of_sparse_FPS.test.cpp
-  - test/yosupo/exp_of_sparse_FPS.test.cpp
-  - test/yosupo/inv_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/sqrt_mod.test.cpp
-  - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yukicoder/1939.test.cpp
   - test/yukicoder/1080.test.cpp
-  - test/yukicoder/1533.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
+  - test/yukicoder/1533.test.cpp
+  - test/yukicoder/1939.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_mod.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
 documentation_of: src/Math/mod_sqrt.hpp
 layout: document
 title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"

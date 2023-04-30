@@ -85,9 +85,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc172_d.numth.test.cpp
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/1019.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document

@@ -69,10 +69,10 @@ data:
   verifiedWith:
   - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc270_g.test.cpp
-  - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/yukicoder/1339.test.cpp
-  - test/yukicoder/950.test.cpp
   - test/yukicoder/261.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/1339.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Internal/function_type.hpp
 layout: document
 title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\

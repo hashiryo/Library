@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -160,9 +160,9 @@ data:
   verifiedWith:
   - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc270_g.test.cpp
-  - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/yukicoder/1339.test.cpp
   - test/yukicoder/950.test.cpp
+  - test/yukicoder/1339.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Math/ModInt_Runtime.hpp
 layout: document
 title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"

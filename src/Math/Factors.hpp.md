@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
@@ -182,19 +182,19 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
+  - src/Math/ModInt_Exp.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
-  - src/Math/ModInt_Exp.hpp
   - src/Math/mod_tetration.hpp
   timestamp: '2023-04-16 21:58:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp
+  - test/yosupo/kth_root_mod.test.cpp
+  - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/factorize.test.cpp
   - test/yosupo/tetration_mod.test.cpp
-  - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/primitive_root.test.cpp
-  - test/yosupo/kth_root_mod.test.cpp
   - test/aoj/NTL_1_D.test.cpp
 documentation_of: src/Math/Factors.hpp
 layout: document

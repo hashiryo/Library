@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -196,45 +196,50 @@ data:
     \ ed= std::min<std::uint64_t>(n, k);\n  for (; i <= ed; i++) F[i]= F[i - 1] *\
     \ (k - i + 1);\n  for (auto e= k - --i; e; e>>= 1, bs*= bs)\n   if (e & 1) pw*=\
     \ bs;\n  for (; i >= 0; i--, pw*= f[0]) F[i]*= pw;\n  return f[0]= 0, composite(f,\
-    \ F);\n }\n // {[X^{[n]}](f^k)/(k!)} for k=0,1,...,n\n template <class T>  //\
-    \ O(n^2 2^n)\n static inline std::vector<T> egf(std::vector<T> f) {\n  const int\
-    \ sz= f.size(), n= __builtin_ctz(sz), md= 1 << 11, sz4= sz >> 2;\n  assert(sz\
-    \ == 1 << n);\n  if (n == 1) return {0, f[1]};\n  int l= sz4, m;\n  T *in= f.data()\
-    \ + l, *dp= in + l, tmp[sz4], *dp2;\n  for (int s; l > md; conv_tr(dp, in, dp,\
-    \ l), in-= (l>>= 1))\n   for (s= l, m= sz4; dp2= dp + (m - l), m > l; m>>= 1,\
-    \ s= l)\n    for (conv_tr(dp2 + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n \
-    \ for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n   for (s= l, m= sz4;\
-    \ dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for (conv_na(dp2 + m - l, in, tmp,\
-    \ l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n  for (int i= n\
-    \ + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n#undef SUBSET_REP\n\
-    };\n#line 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\ntemplate <unsigned\
-    \ short MAX_V= 21> class UndirectedGraphSetPowerSeries {\n using SPS= SetPowerSeries<MAX_V>;\n\
-    \ template <class T> using sps= std::vector<T>;\n template <class T> using poly=\
-    \ std::vector<T>;\n const unsigned V, sz;\n unsigned adj[MAX_V][MAX_V]= {0}, edge[MAX_V]=\
-    \ {0};\n template <class T> static inline T pow(T x, int k) {\n  for (T ret(1);;\
-    \ x*= x)\n   if (k & 1 ? ret*= x : 0; !(k>>= 1)) return ret;\n }\n template <class\
-    \ F> inline void bfs(int s, const F &f) const {\n  for (int t= s, u, j; t;)\n\
-    \   for (f(u= 1 << __builtin_ctz(t)); u;) j= __builtin_ctz(u), t^= 1 << j, u^=\
-    \ 1 << j, u|= edge[j] & t;\n }\npublic:\n UndirectedGraphSetPowerSeries(int n):\
-    \ V(n), sz(1 << V) {}\n UndirectedGraphSetPowerSeries(const std::vector<std::vector<int>>\
-    \ &g): V(g.size()), sz(1 << V) {\n  for (int i= V; i--;)\n   for (int j= i; j--;)\
-    \ assert(g[i][j] == g[j][i]);\n  for (int i= V; i--;)\n   for (int j= V; j--;)\
-    \ adj[i][j]= g[i][j];\n  for (int i= V; i--;)\n   for (int j= V; j--;) edge[i]|=\
-    \ !(!(adj[i][j])) << j;\n }\n int *operator[](int u) const { return adj[u]; }\n\
-    \ void add_edge(int u, int v, int cnt= 1) {\n  adj[u][v]= (adj[v][u]+= cnt), edge[u]|=\
-    \ (1 << v), edge[v]|= (1 << u);\n  if (!(adj[u][v])) edge[u]^= (1 << v), edge[v]^=\
-    \ (1 << u);\n }\n template <class T> static inline sps<T> space_size(const sps<int>\
-    \ &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
-    \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T, class G> static\
-    \ inline void transform(sps<T> &f, const G &g) {\n  const int sz2= f.size() /\
-    \ 2;\n  sps<T> tmp(sz2);\n  for (int I= sz2; I; I>>= 1) {\n   for (int t= 0; t\
-    \ < sz2; t+= I)\n    for (int u= I, t2= t << 1; u--;) tmp[t | u]= f[t2 | I | u];\n\
-    \   tmp= g(tmp);\n   for (int t= 0; t < sz2; t+= I)\n    for (int u= I, t2= t\
-    \ << 1; u--;) f[t2 | I | u]= tmp[t | u];\n  }\n }\n template <class T>  // O(V^3\
-    \ 2^V)\n static inline void connect_to_biconnect(sps<T> &f) {\n  transform(f,\
-    \ SPS::template log<T>);\n }\n template <class T>  // O(V^3 2^V)\n static inline\
-    \ void biconnect_to_connect(sps<T> &f) {\n  transform(f, SPS::template exp<T>);\n\
-    \ }\n template <class T>  // O(V 2^V)\n inline void loop_ignored_to_loop_permitted(sps<T>\
+    \ F);\n }\n // g(f), g is polynomial\n template <class T> static inline std::vector<T>\
+    \ polynomial_composite(std::vector<T> f, std::vector<T> g) {\n  const int sz=\
+    \ f.size(), n= __builtin_ctz(sz);\n  assert(sz == 1 << n);\n  T F[MAX_N + 1]=\
+    \ {};\n  for (int j= 0, e= g.size();; ++j, --e) {\n   for (int i= e; i--;) (F[j]*=\
+    \ f[0])+= g[i];\n   if (j == n || e == 1) break;\n   for (int i= 1; i < e; ++i)\
+    \ g[i - 1]= g[i] * i;\n  }\n  return f[0]= 0, composite(f, F);\n }\n // {[X^{[n]}](f^k)/(k!)}\
+    \ for k=0,1,...,n\n template <class T>  // O(n^2 2^n)\n static inline std::vector<T>\
+    \ egf(std::vector<T> f) {\n  const int sz= f.size(), n= __builtin_ctz(sz), md=\
+    \ 1 << 11, sz4= sz >> 2;\n  assert(sz == 1 << n);\n  if (n == 1) return {0, f[1]};\n\
+    \  int l= sz4, m;\n  T *in= f.data() + l, *dp= in + l, tmp[sz4], *dp2;\n  for\
+    \ (int s; l > md; conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (s= l, m= sz4;\
+    \ dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for (conv_tr(dp2 + m - l, in, tmp,\
+    \ l); s--;) dp2[s]+= tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>=\
+    \ 1))\n   for (s= l, m= sz4; dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for\
+    \ (conv_na(dp2 + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T>\
+    \ ret(n + 1, 0);\n  for (int i= n + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n\
+    \  return ret;\n }\n#undef SUBSET_REP\n};\n#line 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
+    \ntemplate <unsigned short MAX_V= 21> class UndirectedGraphSetPowerSeries {\n\
+    \ using SPS= SetPowerSeries<MAX_V>;\n template <class T> using sps= std::vector<T>;\n\
+    \ template <class T> using poly= std::vector<T>;\n const unsigned V, sz;\n unsigned\
+    \ adj[MAX_V][MAX_V]= {0}, edge[MAX_V]= {0};\n template <class T> static inline\
+    \ T pow(T x, int k) {\n  for (T ret(1);; x*= x)\n   if (k & 1 ? ret*= x : 0; !(k>>=\
+    \ 1)) return ret;\n }\n template <class F> inline void bfs(int s, const F &f)\
+    \ const {\n  for (int t= s, u, j; t;)\n   for (f(u= 1 << __builtin_ctz(t)); u;)\
+    \ j= __builtin_ctz(u), t^= 1 << j, u^= 1 << j, u|= edge[j] & t;\n }\npublic:\n\
+    \ UndirectedGraphSetPowerSeries(int n): V(n), sz(1 << V) {}\n UndirectedGraphSetPowerSeries(const\
+    \ std::vector<std::vector<int>> &g): V(g.size()), sz(1 << V) {\n  for (int i=\
+    \ V; i--;)\n   for (int j= i; j--;) assert(g[i][j] == g[j][i]);\n  for (int i=\
+    \ V; i--;)\n   for (int j= V; j--;) adj[i][j]= g[i][j];\n  for (int i= V; i--;)\n\
+    \   for (int j= V; j--;) edge[i]|= !(!(adj[i][j])) << j;\n }\n int *operator[](int\
+    \ u) const { return adj[u]; }\n void add_edge(int u, int v, int cnt= 1) {\n  adj[u][v]=\
+    \ (adj[v][u]+= cnt), edge[u]|= (1 << v), edge[v]|= (1 << u);\n  if (!(adj[u][v]))\
+    \ edge[u]^= (1 << v), edge[v]^= (1 << u);\n }\n template <class T> static inline\
+    \ sps<T> space_size(const sps<int> &rank) {\n  sps<T> ret(rank.size());\n  for\
+    \ (int s= rank.size(); s--;) ret[s]= pow<T>(2, rank[s]);\n  return ret;\n }\n\
+    \ template <class T, class G> static inline void transform(sps<T> &f, const G\
+    \ &g) {\n  const int sz2= f.size() / 2;\n  sps<T> tmp(sz2);\n  for (int I= sz2;\
+    \ I; I>>= 1) {\n   for (int t= 0; t < sz2; t+= I)\n    for (int u= I, t2= t <<\
+    \ 1; u--;) tmp[t | u]= f[t2 | I | u];\n   tmp= g(tmp);\n   for (int t= 0; t <\
+    \ sz2; t+= I)\n    for (int u= I, t2= t << 1; u--;) f[t2 | I | u]= tmp[t | u];\n\
+    \  }\n }\n template <class T>  // O(V^3 2^V)\n static inline void connect_to_biconnect(sps<T>\
+    \ &f) {\n  transform(f, SPS::template log<T>);\n }\n template <class T>  // O(V^3\
+    \ 2^V)\n static inline void biconnect_to_connect(sps<T> &f) {\n  transform(f,\
+    \ SPS::template exp<T>);\n }\n template <class T>  // O(V 2^V)\n inline void loop_ignored_to_loop_permitted(sps<T>\
     \ &f) const {\n  auto tmp= space_size<T>(loop_size());\n  for (int s= sz; s--;)\
     \ f[s]*= tmp[s];\n }\n inline sps<int> edge_space_rank() const {  // O(V 2^V)\n\
     \  sps<int> ret(sz, 0);\n  for (int i= V; i--;)\n   for (int j= i + 1; j--;) ret[(1\
@@ -345,7 +350,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc105_f.test.cpp
   requiredBy: []
-  timestamp: '2023-04-16 23:40:45+09:00'
+  timestamp: '2023-04-30 17:47:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc105_f.test.cpp
