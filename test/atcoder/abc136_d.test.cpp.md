@@ -250,7 +250,7 @@ data:
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
     \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 9 \"src/FFT/BigInt.hpp\"\
-    \nclass BigInt {\n static constexpr unsigned BASE= 10000000, D= 7;\n using mod_t=\
+    \nclass BigInt {\n static constexpr unsigned BASE= 1000000, D= 6;\n using mod_t=\
     \ ModInt<0x3ffffffffa000001>;\n using Vec= std::vector<unsigned>;\n using ntt=\
     \ NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt shift(int sz) const { return {neg,\
     \ Vec(dat.begin() + sz, dat.end())}; }\n BigInt(bool n, const Vec &d): neg(n),\
@@ -293,55 +293,45 @@ data:
     \ i--;) ret= (ret * BASE + dat[i]) % r;\n  return ret;\n }\n BigInt operator*(const\
     \ BigInt &r) const {\n  if (is_zero() || r.is_zero()) return 0;\n  const int n=\
     \ dat.size(), m= r.dat.size(), sz= n + m - 1;\n  static mod_t f[1 << 20], g[1\
-    \ << 20], f2[1 << 17][16], g2[1 << 17][16];\n  static long long h[1 << 20];\n\
-    \  if (int i= n, j; std::min(n, m) >= 74) {\n   const int rl= pw2(sz), l= pw2(std::max(n,\
-    \ m));\n   const int fl= std::pow(l, 0.535) * 8.288;\n   if (l + fl < sz && sz\
-    \ <= (rl >> 3) * 5) {\n    const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) /\
-    \ l, mm= (m + l - 1) / l, ss= nn + mm - 1;\n    for (int k= i= 0, s; k < n; i++,\
-    \ k+= l) {\n     for (j= s= std::min(l, n - k); j--;) f2[i][j]= dat[k + j];\n\
-    \     std::fill_n(f2[i] + s, l2 - s, mod_t()), ntt::dft(l2, f2[i]);\n    }\n \
-    \   if (this != &r)\n     for (int k= i= 0, s; k < m; i++, k+= l) {\n      for\
-    \ (j= s= std::min(l, m - k); j--;) g2[i][j]= dat[k + j];\n      std::fill_n(g2[i]\
-    \ + s, l2 - s, mod_t()), ntt::dft(l2, g2[i]);\n     }\n    else\n     for (i=\
-    \ nn; i--;) std::copy_n(f2[i], l2, g2[i]);\n    for (i= l2; i--;) f[i]= f2[0][i]\
-    \ * g2[0][i];\n    for (ntt::idft(l2, f), i= l2; i--;) h[i]= f[i].val();\n   \
-    \ for (int k= l, ed, ii= 1; ii < ss; ++ii, k+= l) {\n     j= std::max(0, ii -\
-    \ nn + 1), ed= std::min(mm - 1, ii);\n     for (i= l2; i--;) f[i]= f2[ii - ed][i]\
-    \ * g2[ed][i];\n     for (; j < ed; ++j)\n      for (i= l2; i--;) f[i]+= f2[ii\
-    \ - j][i] * g2[j][i];\n     for (ntt::idft(l2, f), i= std::min(l, sz - k); i--;)\
-    \ h[i + k]+= f[i].val();\n     for (i= std::min(l2, sz - k); i-- > l;) h[i + k]=\
-    \ f[i].val();\n    }\n   } else {\n    const int len= sz <= l + fl ? l : pw2(sz);\n\
-    \    for (i= n; i--;) f[i]= dat[i];\n    std::fill_n(f + n, len - n, mod_t()),\
-    \ ntt::dft(len, f);\n    if (this != &r) {\n     for (i= m; i--;) g[i]= r.dat[i];\n\
-    \     std::fill_n(g + m, len - m, mod_t()), ntt::dft(len, g);\n     for (i= len;\
-    \ i--;) f[i]*= g[i];\n    } else\n     for (i= len; i--;) f[i]*= f[i];\n    for\
-    \ (ntt::idft(len, f), i= len; i < sz; f[i - len]-= h[i], i++)\n     for (h[i]=\
-    \ 0, j= i - m + 1; j < n; j++) h[i]+= (long long)dat[j] * r.dat[i - j];\n    for\
-    \ (i= std::min(sz, len); i--;) h[i]= f[i].val();\n   }\n  } else\n   for (std::fill_n(h,\
-    \ sz, 0); i--;)\n    for (j= m; j--;) h[i + j]+= (long long)dat[i] * r.dat[j];\n\
-    \  BigInt ret(neg ^ r.neg, Vec(sz));\n  long long car= 0;\n  for (int i= 0; i\
-    \ < sz; i++, car/= BASE) ret.dat[i]= (car+= h[i]) % BASE;\n  for (; car; car/=\
-    \ BASE) ret.dat.emplace_back(car % BASE);\n  return ret;\n }\n BigInt operator/(const\
-    \ BigInt &r) const {\n  assert(!r.is_zero());\n  if (r.dat.size() == 1 && r.dat.back()\
-    \ == 1) return r.neg ? -*this : *this;\n  BigInt a= this->abs(), b= r.abs();\n\
-    \  if (a < b) return 0;\n  const int pb= dat.size(), qb= r.dat.size(), prec= std::max(pb\
-    \ - qb, 1);\n  int l= std::min(prec, 3), ql= std::min(qb, 6), nl, nql;\n  BigInt\
-    \ x(0, Vec(l + 1)), p, rr= b.shift(qb - ql), c(0, Vec(l + ql + 1));\n  x.dat.back()=\
-    \ 1, c.dat.back()= 2;\n  while (x != p) p.dat.swap(x.dat), x= (p * (c - rr * p)).shift(l\
-    \ + ql);\n  if (l != prec)\n   for (p.neg= true; x != p; l= nl, ql= nql) {\n \
-    \   nl= std::min(l * 2 + 1, prec), nql= std::min(ql * 2 + 1, qb);\n    p.dat.swap(x.dat),\
-    \ x= (p * (c - rr * p)).shift(2 * l - nl + ql);\n    if (p.neg= false; nql !=\
-    \ ql) rr= b.shift(qb - nql);\n    c.dat.back()= 0, c.dat.resize(nql + nl + 1),\
-    \ c.dat.back()= 2;\n   }\n  if (x= (x * a).shift(pb + (pb == qb)); a >= (x + 1)\
-    \ * b) x+= 1;\n  return x.neg= neg ^ r.neg, x;\n }\n BigInt operator%(const BigInt\
-    \ &r) const { return *this - (*this / r) * r; }\n BigInt &operator+=(const BigInt\
-    \ &r) { return *this= *this + r; }\n BigInt &operator-=(const BigInt &r) { return\
-    \ *this= *this - r; }\n BigInt &operator*=(const BigInt &r) { return *this= *this\
-    \ * r; }\n BigInt &operator/=(const BigInt &r) { return *this= *this / r; }\n\
-    \ BigInt &operator%=(const BigInt &r) { return *this= *this % r; }\n friend std::istream\
-    \ &operator>>(std::istream &is, BigInt &v) {\n  std::string s;\n  return is >>\
-    \ s, v= BigInt(s), is;\n }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const BigInt &v) { return os << v.to_str(), os; }\n explicit operator int()\
+    \ << 20];\n  static long long h[1 << 20];\n  if (int i= n, j; std::min(n, m) >=\
+    \ 74) {\n   const int rl= pw2(sz), l= pw2(std::max(n, m)), fl= std::pow(l, 0.535)\
+    \ * 8.288, len= sz <= l + fl ? l : pw2(sz);\n   for (i= n; i--;) f[i]= dat[i];\n\
+    \   std::fill_n(f + n, len - n, mod_t()), ntt::dft(len, f);\n   if (this != &r)\
+    \ {\n    for (i= m; i--;) g[i]= r.dat[i];\n    std::fill_n(g + m, len - m, mod_t()),\
+    \ ntt::dft(len, g);\n    for (i= len; i--;) f[i]*= g[i];\n   } else\n    for (i=\
+    \ len; i--;) f[i]*= f[i];\n   for (ntt::idft(len, f), i= len; i < sz; f[i - len]-=\
+    \ h[i], i++)\n    for (h[i]= 0, j= i - m + 1; j < n; j++) h[i]+= (long long)dat[j]\
+    \ * r.dat[i - j];\n   for (i= std::min(sz, len); i--;) h[i]= f[i].val();\n  }\
+    \ else\n   for (std::fill_n(h, sz, 0); i--;)\n    for (j= m; j--;) h[i + j]+=\
+    \ (long long)dat[i] * r.dat[j];\n  BigInt ret(neg ^ r.neg, Vec(sz));\n  long long\
+    \ car= 0;\n  for (int i= 0; i < sz; i++, car/= BASE) ret.dat[i]= (car+= h[i])\
+    \ % BASE;\n  for (; car; car/= BASE) ret.dat.emplace_back(car % BASE);\n  return\
+    \ ret;\n }\n BigInt operator/(const BigInt &r) const {\n  assert(!r.is_zero());\n\
+    \  BigInt a= this->abs(), b= r.abs();\n  if (a < b) return 0;\n  const int norm=\
+    \ BASE / (b.dat.back() + 1), s= (a*= norm).dat.size(), t= (b*= norm).dat.size(),\
+    \ deg= s - t + 2, yb= b.dat.back();\n  int k= deg;\n  while (k > 64) k= (k + 1)\
+    \ / 2;\n  BigInt z(0, Vec(k + 2)), rem(0, Vec(t));\n  rem.dat.back()= 1;\n  for\
+    \ (int i= z.dat.size(); i--;) {\n   if (rem.dat.size() == t) {\n    if (b <= rem)\
+    \ z.dat[i]= 1, rem-= b;\n   } else if (rem.dat.size() > t) {\n    int q= ((long\
+    \ long)rem.dat[rem.dat.size() - 1] * BASE + rem.dat[rem.dat.size() - 2]) / yb;\n\
+    \    BigInt yq= b * q;\n    while (rem < yq) --q, yq-= b;\n    for (rem-= yq;\
+    \ b <= rem;) ++q, rem-= b;\n    z.dat[i]= q;\n   }\n   if (i) rem.dat.insert(rem.dat.begin(),\
+    \ 0);\n  }\n  for (z.shrink(); k < deg; k<<= 1) {\n   int d= std::min(t, 2 * k\
+    \ + 1);\n   BigInt x= z * z, w2= z + z;\n   Vec w_(k + 1);\n   x.dat.insert(x.dat.begin(),\
+    \ 0), x*= BigInt(0, Vec(b.dat.end() - d, b.dat.end())), x.dat.erase(x.dat.begin(),\
+    \ x.dat.begin() + d), std::copy(w2.dat.begin(), w2.dat.end(), std::back_inserter(w_)),\
+    \ z= BigInt(0, w_) - x, z.dat.erase(z.dat.begin());\n  }\n  z.dat.erase(z.dat.begin(),\
+    \ z.dat.begin() + k - deg);\n  BigInt q= a * z;\n  for (q.dat.erase(q.dat.begin(),\
+    \ q.dat.begin() + t + deg), z= b * q; a < z;) q-= 1, z-= b;\n  for (rem= a - z;\
+    \ b <= rem;) q+= 1, rem-= b;\n  return q.shrink(), q.neg= neg ^ r.neg, q;\n }\n\
+    \ BigInt operator%(const BigInt &r) const { return *this - (*this / r) * r; }\n\
+    \ BigInt &operator+=(const BigInt &r) { return *this= *this + r; }\n BigInt &operator-=(const\
+    \ BigInt &r) { return *this= *this - r; }\n BigInt &operator*=(const BigInt &r)\
+    \ { return *this= *this * r; }\n BigInt &operator/=(const BigInt &r) { return\
+    \ *this= *this / r; }\n BigInt &operator%=(const BigInt &r) { return *this= *this\
+    \ % r; }\n friend std::istream &operator>>(std::istream &is, BigInt &v) {\n  std::string\
+    \ s;\n  return is >> s, v= BigInt(s), is;\n }\n friend std::ostream &operator<<(std::ostream\
+    \ &os, const BigInt &v) { return os << v.to_str(), os; }\n explicit operator int()\
     \ { return is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};\n#line 3 \"src/Graph/Tree.hpp\"\
     \n#include <cstddef>\n#line 6 \"src/Graph/Tree.hpp\"\n#include <tuple>\n#include\
     \ <numeric>\n#line 3 \"src/DataStructure/CsrArray.hpp\"\n#include <iterator>\n\
@@ -459,7 +449,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc136_d.test.cpp
   requiredBy: []
-  timestamp: '2023-04-23 14:23:50+09:00'
+  timestamp: '2023-05-01 03:16:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc136_d.test.cpp

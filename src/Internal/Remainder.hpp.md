@@ -149,10 +149,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
   - icon: ':heavy_check_mark:'
@@ -173,7 +173,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -215,7 +215,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -407,7 +407,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
