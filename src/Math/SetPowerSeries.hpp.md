@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
@@ -16,18 +16,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_composite_set_power_series.test.cpp
     title: test/yosupo/polynomial_composite_set_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n#include\
@@ -240,7 +240,7 @@ data:
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
   timestamp: '2023-05-01 03:16:08+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc213_g.test.cpp
@@ -268,9 +268,9 @@ title: "\u96C6\u5408\u51AA\u7D1A\u6570"
 | `composite(f,F)`                      | \\[ F(f) = \sum_{i=0}^{\infty} \frac{F_i}{i!} f^i \\] を返す. <br> 逆元のない型でもOK <br> $f(\varnothing)=0$ でないと assert で死ぬ.                                                                                                                                                                                                   | $\mathcal{O}(n^22^n)$    |
 | `exp(f)`                              | \\[ \exp(f) =  \sum_{i=0}^{\infty} \frac{1}{i!} f^i \\] を返す. <br> あるいは言い換えると $g(\varnothing)=1 $ かつ $\mathfrak{D}g = (\mathfrak{D}f) g$ つまり $ \vert S\vert g(S)=\sum_{T\subseteq S} \vert T \vert f(T)g(S\backslash T) $ を満たす $g$ を返す. <br> 逆元のない型でもOK <br> $f(\varnothing)=0$ でないと assert で死ぬ. | $\mathcal{O}(n^22^n)$    |
 | `log(f)`                              | $ \log f $ を返す.  <br> あるいは言い換えると $g(\varnothing)=0$ かつ $\mathfrak{D}f = (\mathfrak{D}g) f$ つまり$ \vert S\vert f(S)=\sum_{T\subseteq S} \vert T \vert g(T)f(S\backslash T) $ を満たす $g$ を返す.<br> 逆元のない型でもOK <br> $f(\varnothing)=1$ でないと assert で死ぬ.                                                | $\mathcal{O}(n^22^n)$    |
-| `pow(f,k)`                            | $f^k$ を返す. <br>逆元のない型でもOK                                                                                                                                                                                                                                                                                                    | $\mathcal{O}(n^22^n)$    |
+| `pow(f,k)`                            | $f^k$ を返す.                                                                                                                                                                                                                                                                                                                           | $\mathcal{O}(n^22^n)$    |
 | `polynomial_composite(f,g)`           | \\[ g(x) = \sum_{i=0}^{m-1}g_ix^i \\] <br> に対して $g(f)$ を返す.                                                                                                                                                                                                                                                                      | $\mathcal{O}(n^22^n+nm)$ |
-| `egf(f)`                              | $k=0,1,\dots,n$ について \\[ \left\lbrack X^{\lbrack n \rbrack}\right\rbrack \frac{f^k}{k!}\\] を返す. <br>逆元のない型でもOK                                                                                                                                                                                                           | $\mathcal{O}(n^22^n)$    |
+| `egf(f)`                              | $k=0,1,\dots,n$ について \\[ \rbrack \frac{f^k}{k!}\left(\lbrace 0,1,\dots,n \rbrace\right)\\] を返す. <br>逆元のない型でもOK                                                                                                                                                                                                           | $\mathcal{O}(n^22^n)$    |
 
 ## 参考
 [https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex](https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex) \

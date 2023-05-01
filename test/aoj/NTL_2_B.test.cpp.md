@@ -242,10 +242,9 @@ data:
     \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 9 \"src/FFT/BigInt.hpp\"\
     \nclass BigInt {\n static constexpr unsigned BASE= 1000000, D= 6;\n using mod_t=\
     \ ModInt<0x3ffffffffa000001>;\n using Vec= std::vector<unsigned>;\n using ntt=\
-    \ NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt shift(int sz) const { return {neg,\
-    \ Vec(dat.begin() + sz, dat.end())}; }\n BigInt(bool n, const Vec &d): neg(n),\
-    \ dat(d) {}\npublic:\n BigInt(): neg(false), dat() {}\n BigInt(long long v): neg(v\
-    \ < 0) {\n  for (v= std::abs(v); v; v/= BASE) dat.push_back(v % BASE);\n }\n BigInt(const\
+    \ NTT<mod_t>;\n bool neg;\n Vec dat;\n BigInt(bool n, const Vec &d): neg(n), dat(d)\
+    \ {}\npublic:\n BigInt(): neg(false), dat() {}\n BigInt(long long v): neg(v <\
+    \ 0) {\n  for (v= std::abs(v); v; v/= BASE) dat.push_back(v % BASE);\n }\n BigInt(const\
     \ std::string &s): neg(false) {\n  int p= 0, x= 0;\n  for (; p < (int)s.size()\
     \ && (s[p] == '-' || s[p] == '+'); p++)\n   if (s[p] == '-') neg= !neg;\n  for\
     \ (int i= s.size(), j; i > p; i-= D, dat.push_back(x), x= 0)\n   for (j= std::max(p,\
@@ -296,18 +295,21 @@ data:
     \ (long long)dat[i] * r.dat[j];\n  BigInt ret(neg ^ r.neg, Vec(sz));\n  long long\
     \ car= 0;\n  for (int i= 0; i < sz; i++, car/= BASE) ret.dat[i]= (car+= h[i])\
     \ % BASE;\n  for (; car; car/= BASE) ret.dat.emplace_back(car % BASE);\n  return\
-    \ ret;\n }\n BigInt operator/(const BigInt &r) const {\n  assert(!r.is_zero());\n\
-    \  BigInt a= this->abs(), b= r.abs();\n  if (a < b) return 0;\n  const int norm=\
-    \ BASE / (b.dat.back() + 1), s= (a*= norm).dat.size(), t= (b*= norm).dat.size(),\
-    \ deg= s - t + 2, yb= b.dat.back();\n  int k= deg;\n  while (k > 64) k= (k + 1)\
-    \ / 2;\n  BigInt z(0, Vec(k + 2)), rem(0, Vec(t));\n  rem.dat.back()= 1;\n  for\
-    \ (int i= z.dat.size(); i--;) {\n   if (rem.dat.size() == t) {\n    if (b <= rem)\
-    \ z.dat[i]= 1, rem-= b;\n   } else if (rem.dat.size() > t) {\n    int q= ((long\
-    \ long)rem.dat[rem.dat.size() - 1] * BASE + rem.dat[rem.dat.size() - 2]) / yb;\n\
-    \    BigInt yq= b * q;\n    while (rem < yq) --q, yq-= b;\n    for (rem-= yq;\
-    \ b <= rem;) ++q, rem-= b;\n    z.dat[i]= q;\n   }\n   if (i) rem.dat.insert(rem.dat.begin(),\
-    \ 0);\n  }\n  for (z.shrink(); k < deg; k<<= 1) {\n   int d= std::min(t, 2 * k\
-    \ + 1);\n   BigInt x= z * z, w2= z + z;\n   Vec w_(k + 1);\n   x.dat.insert(x.dat.begin(),\
+    \ ret;\n }\n BigInt operator/(const BigInt &r) const {\n  if (assert(!r.is_zero());\
+    \ r.dat.size() == 1) {\n   BigInt qu(neg ^ r.neg, Vec(dat.size()));\n   long long\
+    \ d= 0;\n   for (int i= dat.size(), r0= r.dat[0], q; i--;) (d*= D)+= dat[i], q=\
+    \ d / r0, d= d % r0, qu.dat[i]= q;\n   return qu.shrink(), qu;\n  }\n  BigInt\
+    \ a= this->abs(), b= r.abs();\n  if (a < b) return 0;\n  const int norm= BASE\
+    \ / (b.dat.back() + 1), s= (a*= norm).dat.size(), t= (b*= norm).dat.size(), deg=\
+    \ s - t + 2, yb= b.dat.back();\n  int k= deg;\n  while (k > 64) k= (k + 1) / 2;\n\
+    \  BigInt z(0, Vec(k + 2)), rem(0, Vec(t));\n  rem.dat.back()= 1;\n  for (int\
+    \ i= z.dat.size(); i--;) {\n   if (rem.dat.size() == t) {\n    if (b <= rem) z.dat[i]=\
+    \ 1, rem-= b;\n   } else if (rem.dat.size() > t) {\n    int q= ((long long)rem.dat[rem.dat.size()\
+    \ - 1] * BASE + rem.dat[rem.dat.size() - 2]) / yb;\n    BigInt yq= b * q;\n  \
+    \  while (rem < yq) --q, yq-= b;\n    for (rem-= yq; b <= rem;) ++q, rem-= b;\n\
+    \    z.dat[i]= q;\n   }\n   if (i) rem.dat.insert(rem.dat.begin(), 0);\n  }\n\
+    \  for (z.shrink(); k < deg; k<<= 1) {\n   int d= std::min(t, 2 * k + 1);\n  \
+    \ BigInt x= z * z, w2= z + z;\n   Vec w_(k + 1);\n   x.dat.insert(x.dat.begin(),\
     \ 0), x*= BigInt(0, Vec(b.dat.end() - d, b.dat.end())), x.dat.erase(x.dat.begin(),\
     \ x.dat.begin() + d), std::copy(w2.dat.begin(), w2.dat.end(), std::back_inserter(w_)),\
     \ z= BigInt(0, w_) - x, z.dat.erase(z.dat.begin());\n  }\n  z.dat.erase(z.dat.begin(),\
@@ -339,7 +341,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_B.test.cpp
   requiredBy: []
-  timestamp: '2023-05-01 03:16:08+09:00'
+  timestamp: '2023-05-01 14:03:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_B.test.cpp
