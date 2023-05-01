@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -297,8 +297,8 @@ data:
     \ % BASE;\n  for (; car; car/= BASE) ret.dat.emplace_back(car % BASE);\n  return\
     \ ret;\n }\n BigInt operator/(const BigInt &r) const {\n  if (assert(!r.is_zero());\
     \ r.dat.size() == 1) {\n   BigInt qu(neg ^ r.neg, Vec(dat.size()));\n   long long\
-    \ d= 0;\n   for (int i= dat.size(), r0= r.dat[0], q; i--;) (d*= D)+= dat[i], q=\
-    \ d / r0, d= d % r0, qu.dat[i]= q;\n   return qu.shrink(), qu;\n  }\n  BigInt\
+    \ d= 0;\n   for (int i= dat.size(), r0= r.dat[0], q; i--;) (d*= BASE)+= dat[i],\
+    \ q= d / r0, d= d % r0, qu.dat[i]= q;\n   return qu.shrink(), qu;\n  }\n  BigInt\
     \ a= this->abs(), b= r.abs();\n  if (a < b) return 0;\n  const int norm= BASE\
     \ / (b.dat.back() + 1), s= (a*= norm).dat.size(), t= (b*= norm).dat.size(), deg=\
     \ s - t + 2, yb= b.dat.back();\n  int k= deg;\n  while (k > 64) k= (k + 1) / 2;\n\
@@ -341,7 +341,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_A.test.cpp
   requiredBy: []
-  timestamp: '2023-05-01 14:03:57+09:00'
+  timestamp: '2023-05-01 14:45:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_A.test.cpp
