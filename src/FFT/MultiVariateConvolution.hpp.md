@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -21,9 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/multivariate_convolution.test.cpp
     title: test/yosupo/multivariate_convolution.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yosupo/subset_convolution.multivar_conv.test.cpp
+    title: test/yosupo/subset_convolution.multivar_conv.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/MultiVariateConvolution.hpp\"\n#include <vector>\n\
@@ -289,8 +292,9 @@ data:
   path: src/FFT/MultiVariateConvolution.hpp
   requiredBy: []
   timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/subset_convolution.multivar_conv.test.cpp
   - test/yosupo/multivariate_convolution.test.cpp
 documentation_of: src/FFT/MultiVariateConvolution.hpp
 layout: document

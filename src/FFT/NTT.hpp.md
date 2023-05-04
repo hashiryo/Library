@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
   - icon: ':heavy_check_mark:'
@@ -76,10 +76,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_C.test.cpp
     title: test/aoj/NTL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_D.test.cpp
     title: test/aoj/NTL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
   - icon: ':heavy_check_mark:'
@@ -112,7 +112,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/division_of_big_integers.test.cpp
     title: test/yosupo/division_of_big_integers.test.cpp
   - icon: ':heavy_check_mark:'
@@ -184,6 +184,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2.test.cpp
     title: test/yosupo/stirling_2.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/subset_convolution.multivar_conv.test.cpp
+    title: test/yosupo/subset_convolution.multivar_conv.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
@@ -229,9 +232,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
@@ -580,7 +583,7 @@ data:
   - src/FFT/convolve.hpp
   - src/FFT/sequences.hpp
   timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc230_h.test.cpp
@@ -605,6 +608,7 @@ data:
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/multipoint_evaluation.test.cpp
   - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+  - test/yosupo/subset_convolution.multivar_conv.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp

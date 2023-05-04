@@ -2,17 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/FFT/MultiVariateConvolution.hpp
+    title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
-    path: src/FFT/bostan_mori.hpp
-    title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':heavy_check_mark:'
-    path: src/FFT/convolve.hpp
-    title: "\u7573\u307F\u8FBC\u307F"
-  - icon: ':heavy_check_mark:'
-    path: src/FFT/fps_inv.hpp
-    title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
@@ -27,16 +21,17 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/658
+    PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
     links:
-    - https://yukicoder.me/problems/no/658
-  bundledCode: "#line 1 \"test/yukicoder/658.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/658\"\
-    \n#include <iostream>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
+    - https://judge.yosupo.jp/problem/subset_convolution
+  bundledCode: "#line 1 \"test/yosupo/subset_convolution.multivar_conv.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n#include\
+    \ <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
     #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
     \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
     \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
@@ -118,8 +113,8 @@ data:
     \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, size_t LM> mod_t get_inv(int\
     \ n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m= mod_t::mod();\n\
     \ static mod_t dat[LM];\n static int l= 1;\n if (l == 1) dat[l++]= 1;\n while\
-    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n#line 2 \"\
-    src/FFT/fps_inv.hpp\"\n#include <vector>\n#include <algorithm>\n#line 2 \"src/FFT/NTT.hpp\"\
+    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n#line 4 \"\
+    src/FFT/MultiVariateConvolution.hpp\"\n#include <numeric>\n#line 2 \"src/FFT/NTT.hpp\"\
     \n#include <array>\n#include <limits>\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace\
     \ math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr bool\
     \ miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n -\
@@ -244,177 +239,59 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 6 \"src/FFT/fps_inv.hpp\"\
-    \nnamespace math_internal {\ntemplate <u32 LM, class mod_t> inline void inv_base(const\
-    \ mod_t p[], int n, mod_t r[], int i= 1, int l= -1) {\n static constexpr int t=\
-    \ nttarr_cat<mod_t, LM>, TH= (int[]){64, 64, 128, 256, 512, 512}[t];\n if (n <=\
-    \ i) return;\n if (l < 0) l= n;\n assert(((n & -n) == n)), assert(i && ((i & -i)\
-    \ == i));\n const mod_t miv= -r[0];\n for (int j, m= min(n, TH); i < m; r[i++]*=\
-    \ miv)\n  for (r[i]= mod_t(), j= min(i + 1, l); --j;) r[i]+= r[i - j] * p[j];\n\
-    \ static constexpr int lnR= 2 + (!t), R= (1 << lnR) - 1;\n using GNA1= GlobalNTTArray<mod_t,\
-    \ LM, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n for (auto gt1= GlobalNTTArray2D<mod_t,\
-    \ LM, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM, R, 2>::bf; i < n;) {\n  mod_t*\
-    \ rr= r;\n  const mod_t* pp= p;\n  const int s= i, e= s << 1, ss= (l - 1) / s;\n\
-    \  for (int k= 0, j; i < n && k < R; ++k, i+= s, pp+= s) {\n   if (j= min(e, l\
-    \ - k * s); j > 0) gt2[k].set(pp, 0, j), gt2[k].zeros(j, e), gt2[k].dft(0, e);\n\
-    \   for (gt1[k].set(rr, 0, s), gt1[k].zeros(s, e), gt1[k].dft(0, e), GNA2::bf.mul(gt1[k],\
-    \ gt2[0], 0, e), j= min(k, ss) + 1; --j;) GNA1::bf.mul(gt1[k - j], gt2[j], 0,\
-    \ e), GNA2::bf.add(GNA1::bf, 0, e);\n   GNA2::bf.idft(0, e), GNA2::bf.zeros(0,\
-    \ s);\n   if constexpr (!is_nttfriend<mod_t, LM>()) GNA2::bf.get(rr, s, e), GNA2::bf.set(rr,\
-    \ s, e);\n   for (GNA2::bf.dft(0, e), GNA2::bf.mul(gt1[0], 0, e), GNA2::bf.idft(0,\
-    \ e), GNA2::bf.get(rr, s, e), rr+= j= s; j--;) rr[j]= -rr[j];\n  }\n }\n}\ntemplate\
-    \ <u32 lnR, class mod_t, u32 LM= 1 << 22> void inv_(const mod_t p[], int n, mod_t\
-    \ r[]) {\n static constexpr u32 R= (1 << lnR) - 1, LM2= LM >> (lnR - 1);\n using\
-    \ GNA1= GlobalNTTArray<mod_t, LM2, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM2,\
-    \ 2>;\n auto gt1= GlobalNTTArray2D<mod_t, LM2, R, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
-    \ LM2, R, 2>::bf;\n assert(n > 0), assert(p[0] != mod_t());\n const int m= pw2(n)\
-    \ >> lnR, m2= m << 1, ed= (n - 1) / m;\n inv_base<LM2>(p, m, r);\n for (int k=\
-    \ 0, l; k < ed; p+= m) {\n  for (gt2[k].set(p, 0, l= min(m2, n - m * k)), gt2[k].zeros(l,\
-    \ m2), gt2[k].dft(0, m2), gt1[k].set(r, 0, m), gt1[k].zeros(m, m2), gt1[k].dft(0,\
-    \ m2), GNA2::bf.mul(gt1[k], gt2[0], 0, m2), l= k; l--;) GNA1::bf.mul(gt1[l], gt2[k\
-    \ - l], 0, m2), GNA2::bf.add(GNA1::bf, 0, m2);\n  GNA2::bf.idft(0, m2), GNA2::bf.zeros(0,\
-    \ m);\n  if constexpr (!is_nttfriend<mod_t, LM>()) GNA2::bf.get(r, m, m2), GNA2::bf.set(r,\
-    \ m, m2);\n  for (GNA2::bf.dft(0, m2), GNA2::bf.mul(gt1[0], 0, m2), GNA2::bf.idft(0,\
-    \ m2), GNA2::bf.get(r, m, m + (l= min(m, n - m * ++k))), r+= m; l--;) r[l]= -r[l];\n\
-    \ }\n}\ntemplate <class mod_t, u32 LM= 1 << 22> vector<mod_t> inv(const vector<mod_t>&\
-    \ p) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){234, 106,\
-    \ 280, 458, 603, 861}[t];\n mod_t *pp= GlobalArray<mod_t, LM, 1>::bf, *r= GlobalArray<mod_t,\
-    \ LM, 2>::bf;\n const int n= p.size();\n copy_n(p.begin(), n, pp), assert(n >\
-    \ 0), assert(p[0] != mod_t());\n if (const mod_t miv= -(r[0]= mod_t(1) / p[0]);\
-    \ n > TH) {\n  const int l= pw2(n), l1= l >> 1, k= (n - l1 - 1) / (l1 >> 3), bl=\
-    \ __builtin_ctz(l1);\n  int a= 4;\n  if constexpr (!t) a= bl < 8 ? k > 5 ? 1 :\
-    \ 3 : bl < 9 ? k & 1 ? 3 : 4 : bl < 10 ? k & 1 && k > 4 ? 3 : 4 : bl < 11 ? k\
-    \ > 6 ? 3 : 4 : 4;\n  else if constexpr (t < 2) a= bl < 7 ? 2 : bl < 9 ? k ? 3\
-    \ : 4 : k & 1 ? 3 : 4;\n  else if constexpr (t < 3) a= bl < 9 ? k > 5 ? 1 : k\
-    \ ? 3 : 4 : k & 1 ? 3 : 4;\n  else if constexpr (t < 4) a= bl < 9 ? 1 : bl < 10\
-    \ ? k > 5 ? 1 : !k ? 4 : k & 2 ? 2 : 3 : k & 1 ? 3 : 4;\n  else if constexpr (t\
-    \ < 5) a= bl < 10 ? k & 2 ? 2 : 3 : k & 1 ? 3 : 4;\n  else a= bl < 10 ? 1 : bl\
-    \ < 11 ? k > 5 ? 1 : !k ? 4 : k & 2 ? 2 : 3 : k & 1 ? 3 : 4;\n  (a < 2 ? inv_<1,\
-    \ mod_t, LM> : a < 3 ? inv_<2, mod_t, LM> : a < 4 ? inv_<3, mod_t, LM> : inv_<4,\
-    \ mod_t, LM>)(pp, n, r);\n } else\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
-    \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
-    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 3 \"\
-    src/FFT/convolve.hpp\"\n#include <cmath>\n#line 5 \"src/FFT/convolve.hpp\"\ntemplate\
-    \ <class mod_t, size_t LM= 1 << 22> std::vector<mod_t> convolve(const std::vector<mod_t>&\
-    \ p, const std::vector<mod_t>& q) {\n mod_t *pp= GlobalArray<mod_t, LM, 0>::bf,\
-    \ *qq= GlobalArray<mod_t, LM, 1>::bf, *rr= GlobalArray<mod_t, LM, 2>::bf;\n static\
-    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){70, 30, 70, 100, 135, 150}[t];\n\
-    \ auto f= [](int l) -> int {\n  static constexpr double B[]= {(double[]){8.288,\
-    \ 5.418, 7.070, 9.676, 11.713, 13.374}[t], (double[]){8.252, 6.578, 9.283, 12.810,\
-    \ 13.853, 15.501}[t]};\n  return std::round(std::pow(l, 0.535) * B[__builtin_ctz(l)\
-    \ & 1]);\n };\n const int n= p.size(), m= q.size(), sz= n + m - 1;\n if (!n ||\
-    \ !m) return std::vector<mod_t>();\n if (std::min(n, m) < TH) {\n  std::fill_n(rr,\
-    \ sz, mod_t()), std::copy(p.begin(), p.end(), pp), std::copy(q.begin(), q.end(),\
-    \ qq);\n  for (int i= n; i--;)\n   for (int j= m; j--;) rr[i + j]+= pp[i] * qq[j];\n\
-    \ } else {\n  const int rl= pw2(sz), l= pw2(std::max(n, m)), fl= f(l);\n  static\
-    \ constexpr size_t LM2= LM >> 3;\n  static constexpr bool b= nttarr_cat<mod_t,\
-    \ LM2> < t;\n  if (b || (l + fl < sz && sz <= (rl >> 3) * 5)) {\n   using GNA1=\
-    \ GlobalNTTArray<mod_t, LM2, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM2, 2>;\n\
-    \   auto gt1= GlobalNTTArray2D<mod_t, LM2, 16, 1>::bf, gt2= GlobalNTTArray2D<mod_t,\
-    \ LM2, 16, 2>::bf;\n   const int l= rl >> 4, l2= l << 1, nn= (n + l - 1) / l,\
-    \ mm= (m + l - 1) / l, ss= nn + mm - 1;\n   for (int i= 0, k= 0, s; k < n; ++i,\
-    \ k+= l) gt1[i].set(p.data() + k, 0, s= std::min(l, n - k)), gt1[i].zeros(s, l2),\
-    \ gt1[i].dft(0, l2);\n   if (&p != &q)\n    for (int i= 0, k= 0, s; k < m; ++i,\
-    \ k+= l) gt2[i].set(q.data() + k, 0, s= std::min(l, m - k)), gt2[i].zeros(s, l2),\
-    \ gt2[i].dft(0, l2);\n   else\n    for (int i= nn; i--;) gt2[i].subst(gt1[i],\
-    \ 0, l2);\n   GNA2::bf.mul(gt1[0], gt2[0], 0, l2), GNA2::bf.idft(0, l2), GNA2::bf.get(rr,\
-    \ 0, l2);\n   for (int i= 1, k= l, j, ed; i < ss; ++i, k+= l) {\n    for (j= std::max(0,\
-    \ i - nn + 1), ed= std::min(mm - 1, i), GNA2::bf.mul(gt1[i - ed], gt2[ed], 0,\
-    \ l2); j < ed; ++j) GNA1::bf.mul(gt1[i - j], gt2[j], 0, l2), GNA2::bf.add(GNA1::bf,\
-    \ 0, l2);\n    for (GNA2::bf.idft(0, l2), GNA2::bf.get(pp, 0, j= std::min(l, sz\
-    \ - k)); j--;) rr[k + j]+= pp[j];\n    if (l < sz - k) GNA2::bf.get(rr + k, l,\
-    \ std::min(l2, sz - k));\n   }\n  } else {\n   using GNA1= GlobalNTTArray<mod_t,\
-    \ LM, 1>;\n   using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n   const int len= sz\
-    \ <= l + fl ? l : rl;\n   if (GNA1::bf.set(p.data(), 0, n), GNA1::bf.zeros(n,\
-    \ len), GNA1::bf.dft(0, len); &p != &q) GNA2::bf.set(q.data(), 0, m), GNA2::bf.zeros(m,\
-    \ len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf, 0, len);\n   else GNA1::bf.mul(GNA1::bf,\
-    \ 0, len);\n   if (GNA1::bf.idft(0, len), GNA1::bf.get(rr, 0, std::min(sz, len));\
-    \ len < sz) {\n    std::copy(p.begin() + len - m + 1, p.end(), pp + len - m +\
-    \ 1), std::copy(q.begin() + len - n + 1, q.end(), qq + len - n + 1);\n    for\
-    \ (int i= len, j; i < sz; rr[i - len]-= rr[i], ++i)\n     for (rr[i]= mod_t(),\
-    \ j= i - m + 1; j < n; ++j) rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return\
-    \ std::vector(rr, rr + sz);\n}\n#line 4 \"src/FFT/bostan_mori.hpp\"\nnamespace\
-    \ div_at_internal {\ntemplate <class K> int deg(const std::vector<K> &p) {\n const\
-    \ K ZERO= 0;\n for (int n= p.size() - 1;; n--)\n  if (n < 0 || p[n] != ZERO) return\
-    \ n;\n}\ntemplate <class mod_t> void div_at_na(std::vector<mod_t> &p, std::vector<mod_t>\
-    \ &q, std::uint64_t &k) {\n unsigned n= deg(p), nn, j;\n const unsigned m= deg(q),\
-    \ l= std::max(n, m) + 1;\n std::vector<mod_t> tmp(l);\n for (p.resize(l), q.resize(l);\
-    \ k > m; q.swap(p), p.swap(tmp)) {\n  std::fill_n(tmp.begin(), (nn= (n + m - ((n\
-    \ ^ m ^ k) & 1)) >> 1) + 1, mod_t());\n  for (j= 0; j <= m; j+= 2)\n   for (int\
-    \ i= k & 1; i <= n; i+= 2) tmp[(i + j) >> 1]+= p[i] * q[j];\n  for (j= 1; j <=\
-    \ m; j+= 2)\n   for (int i= (~k) & 1; i <= n; i+= 2) tmp[(i + j) >> 1]-= p[i]\
-    \ * q[j];\n  for (std::fill_n(p.begin(), m + 1, mod_t()), j= 2; j <= m; j+= 2)\n\
-    \   for (int i= j; (i-= 2) >= 0;) p[(i + j) >> 1]+= q[i] * q[j];\n  for (k>>=\
-    \ 1, n= nn, j= 3; j <= m; j+= 2)\n   for (int i= j; (i-= 2) >= 0;) p[(i + j) >>\
-    \ 1]-= q[i] * q[j];\n  for (int i= m; i >= 0; i--) p[i]+= p[i];\n  for (int i=\
-    \ 0; i <= m; i+= 2) p[i]+= q[i] * q[i];\n  for (int i= 1; i <= m; i+= 2) p[i]-=\
-    \ q[i] * q[i];\n }\n p.resize(n + 1), q.resize(m + 1);\n}\ntemplate <std::size_t\
-    \ LM, class mod_t> void div_at_ntt(std::vector<mod_t> &p, std::vector<mod_t> &q,\
-    \ std::uint64_t &k) {\n static_assert(!is_nttfriend<mod_t, LM>());\n using GNA=\
-    \ GlobalNTTArray<mod_t, LM, 0>;\n using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n\
-    \ using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n const unsigned m= deg(q) + 1, offset=\
-    \ std::max<unsigned>(deg(p) + 1, m), len= pw2((offset + m) - 1);\n for (p.resize(len\
-    \ >> 1); k >= offset; k>>= 1) {\n  GNA::bf.set(p.data(), 0, len >> 1), GNA::bf.zeros(len\
-    \ >> 1, len), GNA1::bf.set(q.data(), 0, m), GNA1::bf.zeros(m, len), GNA2::bf.zeros(m,\
-    \ len);\n  for (int i= m; i--;) GNA2::bf.set(i, i & 1 ? -q[i] : q[i]);\n  GNA::bf.dft(0,\
-    \ len), GNA1::bf.dft(0, len), GNA2::bf.dft(0, len), GNA::bf.mul(GNA2::bf, 0, len),\
-    \ GNA::bf.idft(0, len), GNA1::bf.mul(GNA2::bf, 0, len), GNA1::bf.idft(0, len);\n\
-    \  for (int i= k & 1; i < len; i+= 2) p[i >> 1]= GNA::bf.get(i);\n  for (int i=\
-    \ m; i--;) q[i]= GNA1::bf.get(i << 1);\n }\n}\ntemplate <std::size_t LM, class\
-    \ mod_t> void div_at_ntt_fast(std::vector<mod_t> &p, std::vector<mod_t> &q, std::uint64_t\
-    \ &k) {\n static_assert(is_nttfriend<mod_t, LM>());\n using ntt= NTT<mod_t>;\n\
-    \ const unsigned m= deg(q) + 1, offset= std::max<unsigned>(deg(p) + 1, m), len=\
-    \ pw2((offset + m) - 1), len2= len >> 1;\n p.resize(len), q.resize(len), ntt::dft(len,\
-    \ p.data()), ntt::dft(len, q.data());\n while (1) {\n  for (int i= len; i--;)\
-    \ p[i]*= q[i ^ 1];\n  k & 1 ? ntt::odd_dft(len, p.data()) : ntt::even_dft(len,\
-    \ p.data());\n  for (int i= 0; i < len; i+= 2) q[i]= q[i + 1]= q[i] * q[i + 1];\n\
-    \  ntt::even_dft(len, q.data());\n  if ((k>>= 1) < offset) break;\n  ntt::dft_doubling(len2,\
-    \ p.data()), ntt::dft_doubling(len2, q.data());\n }\n ntt::idft(len2, p.data()),\
-    \ ntt::idft(len2, q.data());\n}\n}  // namespace div_at_internal\n#define __FPS_DIVAT(Vec)\
-    \ \\\n template <class mod_t, std::size_t LM= 1 << 22> mod_t div_at(Vec p, Vec\
-    \ q, std::uint64_t k) { \\\n  using namespace div_at_internal; \\\n  const int\
-    \ n= deg(p) + 1, m= deg(q) + 1; \\\n  assert(m != 0); \\\n  mod_t ret= 0; \\\n\
-    \  if (n == 0) return ret; \\\n  if (m == 1) return k <= (std::uint64_t)n ? p[k]\
-    \ / q[0] : ret; \\\n  if (k >= m) { \\\n   if constexpr (is_nttfriend<mod_t, LM>())\
-    \ m <= 44 ? div_at_na(p, q, k) : div_at_ntt_fast<LM>(p, q, k); \\\n   else m <=\
-    \ 340 ? div_at_na(p, q, k) : div_at_ntt<LM>(p, q, k); \\\n  } \\\n  p.resize(k\
-    \ + 1, ret), q.resize(k + 1, ret), q= inv<mod_t, LM>(q); \\\n  for (int i= k;\
-    \ i >= 0; i--) ret+= q[i] * p[k - i]; \\\n  return ret; \\\n }\n\n__FPS_DIVAT(std::vector<mod_t>)\n\
-    #ifdef __POLYNOMIAL\n__FPS_DIVAT(__POLYNOMIAL)\n#endif\n// a[n] = c[0] * a[n-1]\
-    \ + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return a[k]\ntemplate <class mod_t,\
-    \ std::size_t LM= 1 << 22> mod_t linear_recurrence(std::vector<mod_t> c, std::vector<mod_t>\
-    \ a, std::uint64_t k) {\n const std::size_t d= c.size();\n assert(d <= a.size());\n\
-    \ for (auto &x: c) x= -x;\n c.insert(c.begin(), mod_t(1)), a.resize(d);\n auto\
-    \ p= convolve<mod_t, LM>(c, a);\n return p.resize(d), div_at<mod_t, LM>(p, c,\
-    \ k);\n}\n#line 5 \"test/yukicoder/658.test.cpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<17>;\n\
-    \ int Q;\n cin >> Q;\n while (Q--) {\n  long long n;\n  cin >> n;\n  cout << linear_recurrence<Mint>({1,\
-    \ 1, 1, 1}, {0, 0, 0, 1}, n - 1) << \"\\n\";\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/658\"\n#include <iostream>\n\
-    #include \"src/Math/ModInt.hpp\"\n#include \"src/FFT/bostan_mori.hpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
-    \ Mint= ModInt<17>;\n int Q;\n cin >> Q;\n while (Q--) {\n  long long n;\n  cin\
-    \ >> n;\n  cout << linear_recurrence<Mint>({1, 1, 1, 1}, {0, 0, 0, 1}, n - 1)\
-    \ << \"\\n\";\n }\n return 0;\n}"
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 6 \"src/FFT/MultiVariateConvolution.hpp\"\
+    \nclass MultiVariateConvolution {\n const int n, k, m;\n std::vector<int> chi;\n\
+    public:\n MultiVariateConvolution(): MultiVariateConvolution(std::vector<int>{})\
+    \ {}\n MultiVariateConvolution(const std::vector<int> &dim): n(std::accumulate(dim.begin(),\
+    \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(pw2(n) * 2), chi(n,\
+    \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
+    \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
+    \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
+    \ mod_t, std::size_t LM= 1 << 19, std::size_t LM2= 18> std::vector<mod_t> convolve(const\
+    \ std::vector<mod_t> &f, const std::vector<mod_t> &g) const {\n  assert((int)f.size()\
+    \ == n), assert((int)g.size() == n);\n  if (!k) return {f[0] * g[0]};\n  mod_t\
+    \ *r= GlobalArray<mod_t, LM, 0>::bf;\n  using GNA= GlobalNTTArray<mod_t, LM, 0>;\n\
+    \  auto gt0= GlobalNTTArray2D<mod_t, LM, LM2, 0>::bf, gt1= GlobalNTTArray2D<mod_t,\
+    \ LM, LM2, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM, LM2, 2>::bf;\n  for (int i=\
+    \ k; i--;) gt0[i].zeros(0, m);\n  for (int i= k; i--;) gt1[i].zeros(0, m);\n \
+    \ for (int i= k; i--;) gt2[i].zeros(0, m);\n  for (int i= n; i--;) gt1[chi[i]].set(i,\
+    \ f[i]);\n  for (int i= n; i--;) gt2[chi[i]].set(i, g[i]);\n  for (int i= k; i--;)\
+    \ gt1[i].dft(0, m);\n  for (int i= k; i--;) gt2[i].dft(0, m);\n  for (int i= k,\
+    \ j, l; i--;)\n   for (j= k; j--;) GNA::bf.mul(gt1[i], gt2[j], 0, m), gt0[l-=\
+    \ k & -((l= i + j) >= k)].add(GNA::bf, 0, m);\n  for (int i= k; i--;) gt0[i].idft(0,\
+    \ m);\n  for (int i= n; i--;) r[i]= gt0[chi[i]].get(i);\n  return std::vector(r,\
+    \ r + n);\n }\n};\n#line 6 \"test/yosupo/subset_convolution.multivar_conv.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n MultiVariateConvolution\
+    \ mvc(vector(N, 2));\n vector<Mint> a(1 << N), b(1 << N);\n for (auto &ai: a)\
+    \ cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto c= mvc.convolve(a, b);\n for\
+    \ (int i= 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
+    #include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/FFT/MultiVariateConvolution.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ int N;\n cin >> N;\n MultiVariateConvolution mvc(vector(N, 2));\n vector<Mint>\
+    \ a(1 << N), b(1 << N);\n for (auto &ai: a) cin >> ai;\n for (auto &bi: b) cin\
+    \ >> bi;\n auto c= mvc.convolve(a, b);\n for (int i= 0; i < (1 << N); i++) cout\
+    \ << c[i] << \" \\n\"[i + 1 == 1 << N];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
-  - src/FFT/bostan_mori.hpp
-  - src/FFT/fps_inv.hpp
+  - src/FFT/MultiVariateConvolution.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
-  - src/FFT/convolve.hpp
   isVerificationFile: true
-  path: test/yukicoder/658.test.cpp
+  path: test/yosupo/subset_convolution.multivar_conv.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-05-04 16:49:54+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yukicoder/658.test.cpp
+documentation_of: test/yosupo/subset_convolution.multivar_conv.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/658.test.cpp
-- /verify/test/yukicoder/658.test.cpp.html
-title: test/yukicoder/658.test.cpp
+- /verify/test/yosupo/subset_convolution.multivar_conv.test.cpp
+- /verify/test/yosupo/subset_convolution.multivar_conv.test.cpp.html
+title: test/yosupo/subset_convolution.multivar_conv.test.cpp
 ---
