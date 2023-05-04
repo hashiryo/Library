@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -327,17 +327,18 @@ data:
     \ x*= BigInt(0, Vec(b.dat.end() - d, b.dat.end())), x.dat.erase(x.dat.begin(),\
     \ x.dat.begin() + d), copy(w2.dat.begin(), w2.dat.end(), back_inserter(w_)), z=\
     \ BigInt(0, w_) - x, z.dat.erase(z.dat.begin());\n  }\n  z.dat.erase(z.dat.begin(),\
-    \ z.dat.begin() + k - deg);\n  BigInt q= a * z;\n  return q.dat.erase(q.dat.begin(),\
-    \ q.dat.begin() + t + deg), q.shrink(), q.neg= neg ^ r.neg, q;\n }\n BigInt operator%(const\
-    \ BigInt &r) const { return *this - (*this / r) * r; }\n BigInt &operator+=(const\
-    \ BigInt &r) { return *this= *this + r; }\n BigInt &operator-=(const BigInt &r)\
-    \ { return *this= *this - r; }\n BigInt &operator*=(const BigInt &r) { return\
-    \ *this= *this * r; }\n BigInt &operator/=(const BigInt &r) { return *this= *this\
-    \ / r; }\n BigInt &operator%=(const BigInt &r) { return *this= *this % r; }\n\
-    \ friend istream &operator>>(istream &is, BigInt &v) {\n  string s;\n  return\
-    \ is >> s, v= BigInt(s), is;\n }\n friend ostream &operator<<(ostream &os, const\
-    \ BigInt &v) { return os << v.to_str(), os; }\n explicit operator int() { return\
-    \ is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};\n}\nusing math_internal::BigInt;\n\
+    \ z.dat.begin() + k - deg);\n  BigInt q= a * z;\n  for (q.dat.erase(q.dat.begin(),\
+    \ q.dat.begin() + t + deg), z= b * q; a < z;) q-= 1, z-= b;\n  for (rem= a - z;\
+    \ b <= rem;) q+= 1, rem-= b;\n  return q.shrink(), q.neg= neg ^ r.neg, q;\n }\n\
+    \ BigInt operator%(const BigInt &r) const { return *this - (*this / r) * r; }\n\
+    \ BigInt &operator+=(const BigInt &r) { return *this= *this + r; }\n BigInt &operator-=(const\
+    \ BigInt &r) { return *this= *this - r; }\n BigInt &operator*=(const BigInt &r)\
+    \ { return *this= *this * r; }\n BigInt &operator/=(const BigInt &r) { return\
+    \ *this= *this / r; }\n BigInt &operator%=(const BigInt &r) { return *this= *this\
+    \ % r; }\n friend istream &operator>>(istream &is, BigInt &v) {\n  string s;\n\
+    \  return is >> s, v= BigInt(s), is;\n }\n friend ostream &operator<<(ostream\
+    \ &os, const BigInt &v) { return os << v.to_str(), os; }\n explicit operator int()\
+    \ { return is_zero() ? 0 : neg ? -dat[0] : dat[0]; }\n};\n}\nusing math_internal::BigInt;\n\
     #line 4 \"test/aoj/NTL_2_B.test.cpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(false);\n BigInt A, B;\n cin >> A >> B;\n\
     \ cout << A - B << endl;\n return 0;\n}\n"
@@ -355,7 +356,7 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_2_B.test.cpp
   requiredBy: []
-  timestamp: '2023-05-04 17:19:22+09:00'
+  timestamp: '2023-05-04 17:37:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_2_B.test.cpp
