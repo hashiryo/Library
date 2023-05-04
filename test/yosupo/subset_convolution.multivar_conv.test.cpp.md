@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
@@ -246,7 +246,7 @@ data:
     \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(pw2(n) * 2), chi(n,\
     \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
     \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
-    \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
+    \ size() const { return n; }\n int dim() const { return k; }\n template <class\
     \ mod_t, std::size_t LM= 1 << 19, std::size_t LM2= 18> std::vector<mod_t> convolve(const\
     \ std::vector<mod_t> &f, const std::vector<mod_t> &g) const {\n  assert((int)f.size()\
     \ == n), assert((int)g.size() == n);\n  if (!k) return {f[0] * g[0]};\n  mod_t\
@@ -264,17 +264,17 @@ data:
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n MultiVariateConvolution\
     \ mvc(vector(N, 2));\n vector<Mint> a(1 << N), b(1 << N);\n for (auto &ai: a)\
-    \ cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto c= mvc.convolve(a, b);\n for\
-    \ (int i= 0; i < (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n return\
-    \ 0;\n}\n"
+    \ cin >> ai;\n for (auto &bi: b) cin >> bi;\n auto c= mvc.convolve<Mint, 1 <<\
+    \ 21, 20>(a, b);\n for (int i= 0; i < (1 << N); i++) cout << c[i] << \" \\n\"\
+    [i + 1 == 1 << N];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\
     #include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
     \ \"src/FFT/MultiVariateConvolution.hpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
     \ int N;\n cin >> N;\n MultiVariateConvolution mvc(vector(N, 2));\n vector<Mint>\
     \ a(1 << N), b(1 << N);\n for (auto &ai: a) cin >> ai;\n for (auto &bi: b) cin\
-    \ >> bi;\n auto c= mvc.convolve(a, b);\n for (int i= 0; i < (1 << N); i++) cout\
-    \ << c[i] << \" \\n\"[i + 1 == 1 << N];\n return 0;\n}"
+    \ >> bi;\n auto c= mvc.convolve<Mint, 1 << 21, 20>(a, b);\n for (int i= 0; i <\
+    \ (1 << N); i++) cout << c[i] << \" \\n\"[i + 1 == 1 << N];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -285,8 +285,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.multivar_conv.test.cpp
   requiredBy: []
-  timestamp: '2023-05-04 16:49:54+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-05-04 17:19:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.multivar_conv.test.cpp
 layout: document

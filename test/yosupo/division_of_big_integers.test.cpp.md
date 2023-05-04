@@ -246,42 +246,41 @@ data:
     \ BigInt(bool n, const Vec &d): neg(n), dat(d) {}\npublic:\n BigInt(): neg(false),\
     \ dat() {}\n BigInt(__int128_t v): neg(v < 0) {\n  for (v= v < 0 ? -v : v; v;\
     \ v/= BASE) dat.push_back(v % BASE);\n }\n BigInt(const string &s): neg(false)\
-    \ {\n  int p= 0;\n  u64 x= 0;\n  for (; p < (int)s.size() && (s[p] == '-' || s[p]\
-    \ == '+'); ++p)\n   if (s[p] == '-') neg= !neg;\n  for (int i= s.size(), j; i\
-    \ > p; i-= D, dat.push_back(x), x= 0)\n   for (j= max(p, i - D); j < i;) x= x\
-    \ * 10 + s[j++] - '0';\n  shrink();\n }\n inline void shrink() {\n  while (!dat.empty()\
-    \ && !dat.back()) dat.pop_back();\n  if (dat.empty()) neg= false;\n }\n string\
-    \ to_str() const {\n  if (is_zero()) return \"0\";\n  stringstream ss;\n  if (neg)\
-    \ ss << '-';\n  ss << (dat.empty() ? 0 : dat.back());\n  for (int i= dat.size()\
-    \ - 1; i-- > 0;) ss << setw(D) << setfill('0') << dat[i];\n  string ret;\n  return\
-    \ ss >> ret, ret;\n }\n bool is_zero() const { return dat.empty() || (dat.size()\
-    \ == 1 && !dat[0]); }\n bool operator<(const BigInt &r) const {\n  if (neg !=\
-    \ r.neg) return neg;\n  if (dat.size() != r.dat.size()) return (dat.size() < r.dat.size())\
-    \ ^ neg;\n  for (int i= dat.size(); i--;)\n   if (dat[i] != r.dat[i]) return (dat[i]\
-    \ < r.dat[i]) ^ neg;\n  return false;\n }\n bool operator>(const BigInt &r) const\
-    \ { return r < *this; }\n bool operator<=(const BigInt &r) const { return !(r\
-    \ < *this); }\n bool operator>=(const BigInt &r) const { return !(*this < r);\
-    \ }\n bool operator==(const BigInt &r) const { return (neg == r.neg && dat ==\
-    \ r.dat) || (is_zero() && r.is_zero()); }\n bool operator!=(const BigInt &r) const\
-    \ { return !(*this == r); }\n BigInt abs() const { return BigInt(false, dat);\
-    \ }\n BigInt operator-() const { return BigInt(!neg, dat); }\n BigInt operator+(const\
-    \ BigInt &r) const {\n  if (neg != r.neg) return *this - (-r);\n  auto [ret, tmp]=\
-    \ dat.size() > r.dat.size() ? make_pair(*this, &r) : make_pair(r, this);\n  int\
-    \ car= 0, i, n= ret.dat.size(), m= tmp->dat.size();\n  for (i= 0; i < m; i++)\
-    \ ret.dat[i]-= BASE & -(car= ((ret.dat[i]+= car + tmp->dat[i]) >= BASE));\n  if\
-    \ (car) {\n   while (i < n && ret.dat[i] == BASE - 1) ret.dat[i++]= 0;\n   i <\
-    \ n ? ++ret.dat[i] : (ret.dat.push_back(1), 0);\n  }\n  return ret;\n }\n BigInt\
-    \ operator-(const BigInt &r) const {\n  if (neg != r.neg) return *this + (-r);\n\
-    \  if (r.is_zero()) return *this;\n  if (is_zero()) return -r;\n  auto [ret, tmp]=\
-    \ abs() > r.abs() ? make_pair(*this, &r) : make_pair(r, this);\n  int car= 0,\
-    \ i, n= ret.dat.size(), m= tmp->dat.size();\n  for (i= 0; i < m; i++) ret.dat[i]+=\
-    \ BASE & -(car= ((ret.dat[i]-= car + tmp->dat[i]) >> 63));\n  while (car && i\
-    \ < n && !ret.dat[i]) ret.dat[i++]= BASE - 1;\n  return ret.neg^= (tmp == this),\
-    \ ret.dat[i]-= car, ret.shrink(), ret;\n }\n long long operator%(long long r)\
-    \ const {\n  long long ret= 0;\n  for (int i= dat.size(); i--;) ret= ((u128)ret\
-    \ * BASE + dat[i]) % r;\n  return ret;\n }\n BigInt operator*(const BigInt &r)\
-    \ const {\n  using mint1= ModInt<MOD1>;\n  using mint2= ModInt<MOD2>;\n  using\
-    \ mint3= ModInt<MOD3>;\n  using mint4= ModInt<MOD4>;\n  using ntt1= NTT<mint1>;\n\
+    \ {\n  int p= 0, i= s.size(), j;\n  for (; p < i && (s[p] == '-' || s[p] == '+');\
+    \ ++p)\n   if (s[p] == '-') neg= !neg;\n  for (u64 x= 0; i > p; i-= D, dat.push_back(x),\
+    \ x= 0)\n   for (j= max(p, i - D); j < i;) x= x * 10 + s[j++] - '0';\n  shrink();\n\
+    \ }\n inline void shrink() {\n  while (!dat.empty() && !dat.back()) dat.pop_back();\n\
+    \  if (dat.empty()) neg= false;\n }\n string to_str() const {\n  if (is_zero())\
+    \ return \"0\";\n  stringstream ss;\n  if (neg) ss << '-';\n  ss << (dat.empty()\
+    \ ? 0 : dat.back());\n  for (int i= dat.size() - 1; i-- > 0;) ss << setw(D) <<\
+    \ setfill('0') << dat[i];\n  string ret;\n  return ss >> ret, ret;\n }\n bool\
+    \ is_zero() const { return dat.empty() || (dat.size() == 1 && !dat[0]); }\n bool\
+    \ operator<(const BigInt &r) const {\n  if (neg != r.neg) return neg;\n  if (dat.size()\
+    \ != r.dat.size()) return (dat.size() < r.dat.size()) ^ neg;\n  for (int i= dat.size();\
+    \ i--;)\n   if (dat[i] != r.dat[i]) return (dat[i] < r.dat[i]) ^ neg;\n  return\
+    \ false;\n }\n bool operator>(const BigInt &r) const { return r < *this; }\n bool\
+    \ operator<=(const BigInt &r) const { return !(r < *this); }\n bool operator>=(const\
+    \ BigInt &r) const { return !(*this < r); }\n bool operator==(const BigInt &r)\
+    \ const { return (neg == r.neg && dat == r.dat) || (is_zero() && r.is_zero());\
+    \ }\n bool operator!=(const BigInt &r) const { return !(*this == r); }\n BigInt\
+    \ abs() const { return BigInt(false, dat); }\n BigInt operator-() const { return\
+    \ BigInt(!neg, dat); }\n BigInt operator+(const BigInt &r) const {\n  if (neg\
+    \ != r.neg) return *this - (-r);\n  auto [ret, tmp]= dat.size() > r.dat.size()\
+    \ ? make_pair(*this, &r) : make_pair(r, this);\n  int car= 0, i, n= ret.dat.size(),\
+    \ m= tmp->dat.size();\n  for (i= 0; i < m; i++) ret.dat[i]-= BASE & -(car= ((ret.dat[i]+=\
+    \ car + tmp->dat[i]) >= BASE));\n  if (car) {\n   while (i < n && ret.dat[i] ==\
+    \ BASE - 1) ret.dat[i++]= 0;\n   i < n ? ++ret.dat[i] : (ret.dat.push_back(1),\
+    \ 0);\n  }\n  return ret;\n }\n BigInt operator-(const BigInt &r) const {\n  if\
+    \ (neg != r.neg) return *this + (-r);\n  if (r.is_zero()) return *this;\n  if\
+    \ (is_zero()) return -r;\n  auto [ret, tmp]= abs() > r.abs() ? make_pair(*this,\
+    \ &r) : make_pair(r, this);\n  int car= 0, i, n= ret.dat.size(), m= tmp->dat.size();\n\
+    \  for (i= 0; i < m; i++) ret.dat[i]+= BASE & -(car= ((ret.dat[i]-= car + tmp->dat[i])\
+    \ >> 63));\n  while (car && i < n && !ret.dat[i]) ret.dat[i++]= BASE - 1;\n  return\
+    \ ret.neg^= (tmp == this), ret.dat[i]-= car, ret.shrink(), ret;\n }\n long long\
+    \ operator%(long long r) const {\n  long long ret= 0;\n  for (int i= dat.size();\
+    \ i--;) ret= ((u128)ret * BASE + dat[i]) % r;\n  return ret;\n }\n BigInt operator*(const\
+    \ BigInt &r) const {\n  using mint1= ModInt<MOD1>;\n  using mint2= ModInt<MOD2>;\n\
+    \  using mint3= ModInt<MOD3>;\n  using mint4= ModInt<MOD4>;\n  using ntt1= NTT<mint1>;\n\
     \  using ntt2= NTT<mint2>;\n  using ntt3= NTT<mint3>;\n  using ntt4= NTT<mint4>;\n\
     \  static constexpr mint2 iv21= mint2(1) / MOD1;\n  static constexpr mint3 iv32=\
     \ mint3(1) / MOD2, iv31= iv32 / MOD1;\n  static constexpr mint4 iv43= mint4(1)\
@@ -310,15 +309,18 @@ data:
     \ * r3).val() * MOD3 + r3) * MOD2 + r2) * MOD1 + r1;\n   }\n  } else\n   for (fill_n(h,\
     \ sz, 0); i--;)\n    for (j= m; j--;) h[i + j]+= (u128)dat[i] * r.dat[j];\n  BigInt\
     \ ret(neg ^ r.neg, Vec(sz));\n  u128 car= 0;\n  for (int i= 0; i < sz; ++i, car/=\
-    \ BASE) ret.dat[i]= (car+= h[i]) % BASE;\n  for (; car; car/= BASE) ret.dat.emplace_back(car\
-    \ % BASE);\n  return ret;\n }\n BigInt operator/(const BigInt &r) const {\n  assert(!r.is_zero());\n\
-    \  BigInt a= this->abs(), b= r.abs();\n  if (a < b) return 0;\n  const u64 norm=\
-    \ BASE / (b.dat.back() + 1);\n  const int s= (a*= norm).dat.size(), t= (b*= norm).dat.size(),\
-    \ deg= s - t + 2;\n  const u64 yb= b.dat.back();\n  int k= deg;\n  while (k >\
-    \ 64) k= (k + 1) / 2;\n  BigInt z(0, Vec(k + 2)), rem(0, Vec(t));\n  rem.dat.back()=\
-    \ 1;\n  for (int i= z.dat.size(); i--;) {\n   if (rem.dat.size() == t) {\n   \
-    \ if (b <= rem) z.dat[i]= 1, rem-= b;\n   } else if (rem.dat.size() > t) {\n \
-    \   u64 q= ((u128)rem.dat[rem.dat.size() - 1] * BASE + rem.dat[rem.dat.size()\
+    \ BASE) ret.dat[i]= (car+= h[i]) % BASE;\n  for (; car; car/= BASE) ret.dat.push_back(car\
+    \ % BASE);\n  return ret;\n }\n BigInt operator/(const BigInt &r) const {\n  if\
+    \ (assert(!r.is_zero()); r.dat.size() == 1) {\n   BigInt qu(neg ^ r.neg, Vec(dat.size()));\n\
+    \   u128 d= 0, q;\n   u64 r0= r.dat[0];\n   for (int i= dat.size(); i--;) (d*=\
+    \ BASE)+= dat[i], q= d / r0, d= d % r0, qu.dat[i]= q;\n   return qu.shrink(),\
+    \ qu;\n  }\n  BigInt a= this->abs(), b= r.abs();\n  if (a < b) return 0;\n  const\
+    \ u64 norm= BASE / (b.dat.back() + 1);\n  const u32 s= (a*= norm).dat.size(),\
+    \ t= (b*= norm).dat.size(), deg= s - t + 2;\n  const u64 yb= b.dat.back();\n \
+    \ u32 k= deg;\n  while (k > 64) k= (k + 1) / 2;\n  BigInt z(0, Vec(k + 2)), rem(0,\
+    \ Vec(t));\n  rem.dat.back()= 1;\n  for (int i= z.dat.size(); i--;) {\n   if (rem.dat.size()\
+    \ == t) {\n    if (b <= rem) z.dat[i]= 1, rem-= b;\n   } else if (rem.dat.size()\
+    \ > t) {\n    u64 q= ((u128)rem.dat[rem.dat.size() - 1] * BASE + rem.dat[rem.dat.size()\
     \ - 2]) / yb;\n    BigInt yq= b * q;\n    while (rem < yq) --q, yq-= b;\n    rem-=\
     \ yq, z.dat[i]= q;\n   }\n   if (i) rem.dat.insert(rem.dat.begin(), 0);\n  }\n\
     \  for (z.shrink(); k < deg; k<<= 1) {\n   int d= min(t, 2 * k + 1);\n   BigInt\
@@ -356,7 +358,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/division_of_big_integers.test.cpp
   requiredBy: []
-  timestamp: '2023-05-04 16:49:54+09:00'
+  timestamp: '2023-05-04 17:19:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/division_of_big_integers.test.cpp

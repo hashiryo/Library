@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/multivariate_convolution.test.cpp
     title: test/yosupo/multivariate_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.multivar_conv.test.cpp
     title: test/yosupo/subset_convolution.multivar_conv.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/MultiVariateConvolution.hpp\"\n#include <vector>\n\
@@ -245,7 +245,7 @@ data:
     \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(pw2(n) * 2), chi(n,\
     \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
     \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
-    \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
+    \ size() const { return n; }\n int dim() const { return k; }\n template <class\
     \ mod_t, std::size_t LM= 1 << 19, std::size_t LM2= 18> std::vector<mod_t> convolve(const\
     \ std::vector<mod_t> &f, const std::vector<mod_t> &g) const {\n  assert((int)f.size()\
     \ == n), assert((int)g.size() == n);\n  if (!k) return {f[0] * g[0]};\n  mod_t\
@@ -267,7 +267,7 @@ data:
     \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(pw2(n) * 2), chi(n,\
     \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
     \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
-    \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
+    \ size() const { return n; }\n int dim() const { return k; }\n template <class\
     \ mod_t, std::size_t LM= 1 << 19, std::size_t LM2= 18> std::vector<mod_t> convolve(const\
     \ std::vector<mod_t> &f, const std::vector<mod_t> &g) const {\n  assert((int)f.size()\
     \ == n), assert((int)g.size() == n);\n  if (!k) return {f[0] * g[0]};\n  mod_t\
@@ -291,8 +291,8 @@ data:
   isVerificationFile: false
   path: src/FFT/MultiVariateConvolution.hpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-05-04 17:19:22+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/subset_convolution.multivar_conv.test.cpp
   - test/yosupo/multivariate_convolution.test.cpp

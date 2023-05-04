@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -246,7 +246,7 @@ data:
     \ dim.end(), 1, std::multiplies<int>())), k(dim.size()), m(pw2(n) * 2), chi(n,\
     \ 0) {\n  for (int i= n; i--;)\n   for (int den= 1, j= 0; j < k; ++j) chi[i]+=\
     \ i / (den*= dim[j]);\n  if (k)\n   for (int i= n; i--;) chi[i]%= k;\n }\n int\
-    \ size() const { return n; }\n int dim() const { return k; }\n template <typename\
+    \ size() const { return n; }\n int dim() const { return k; }\n template <class\
     \ mod_t, std::size_t LM= 1 << 19, std::size_t LM2= 18> std::vector<mod_t> convolve(const\
     \ std::vector<mod_t> &f, const std::vector<mod_t> &g) const {\n  assert((int)f.size()\
     \ == n), assert((int)g.size() == n);\n  if (!k) return {f[0] * g[0]};\n  mod_t\
@@ -287,7 +287,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
+  timestamp: '2023-05-04 17:19:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/multivariate_convolution.test.cpp

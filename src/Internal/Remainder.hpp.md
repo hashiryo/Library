@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -407,7 +407,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.multivar_conv.test.cpp
     title: test/yosupo/subset_convolution.multivar_conv.test.cpp
   - icon: ':heavy_check_mark:'
