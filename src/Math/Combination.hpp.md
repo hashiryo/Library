@@ -19,6 +19,9 @@ data:
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
+    title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -60,6 +63,7 @@ data:
   verifiedWith:
   - test/atcoder/abc160_f.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/aoj/DPL_5_E.test.cpp
   - test/aoj/DPL_5_B.test.cpp

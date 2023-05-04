@@ -11,25 +11,24 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/maximum_independent_set
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A
     links:
-    - https://judge.yosupo.jp/problem/maximum_independent_set
-  bundledCode: "#line 1 \"test/yosupo/maximum_independent_set.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/maximum_independent_set\"\n#include\
-    \ <iostream>\n#line 2 \"src/Graph/CliqueProblem.hpp\"\n#include <vector>\n#include\
-    \ <algorithm>\nclass CliqueProblem {\n using u128= __uint128_t;\n using u64= uint64_t;\n\
-    \ using u16= uint16_t;\n const u16 n, m;\n struct id_num {\n  u16 id, num;\n };\n\
-    \ std::vector<u128> adj_;\n std::vector<u16> calc(bool complement) const {\n \
-    \ std::vector<u128> buf, adj(adj_);\n  std::vector<u16> deg(n), clique, cur;\n\
-    \  if (complement)\n   for (int u= n; u--;)\n    for (int v= u; v--;) adj[u *\
-    \ m + (v >> 7)]^= u128(1) << (v & 127), adj[v * m + (u >> 7)]^= u128(1) << (u\
-    \ & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num> &rem) -> void {\n   if\
-    \ (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(), rem.end(),\
-    \ [&](id_num l, id_num r) { return deg[l.id] > deg[r.id]; }), buf.assign((n +\
-    \ 1) * m, 0);\n   for (auto &v: rem) {\n    int b= v.id * m, bb= 0;\n    for (v.num=\
-    \ 0;; ++v.num, bb+= m) {\n     bool any= 1;\n     for (u16 i= 0; i < m; ++i) any&=\
-    \ !(adj[b + i] & buf[bb + i]);\n     if (any) break;\n    }\n    buf[bb + (v.id\
-    \ >> 7)]|= u128(1) << (v.id & 127);\n   }\n   std::sort(rem.begin(), rem.end(),\
+    - https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A
+  bundledCode: "#line 1 \"test/aoj/GRL_7_A.clique.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
+    \n// 200 (=100+100) \u9802\u70B9\n#include <iostream>\n#line 2 \"src/Graph/CliqueProblem.hpp\"\
+    \n#include <vector>\n#include <algorithm>\nclass CliqueProblem {\n using u128=\
+    \ __uint128_t;\n using u64= uint64_t;\n using u16= uint16_t;\n const u16 n, m;\n\
+    \ struct id_num {\n  u16 id, num;\n };\n std::vector<u128> adj_;\n std::vector<u16>\
+    \ calc(bool complement) const {\n  std::vector<u128> buf, adj(adj_);\n  std::vector<u16>\
+    \ deg(n), clique, cur;\n  if (complement)\n   for (int u= n; u--;)\n    for (int\
+    \ v= u; v--;) adj[u * m + (v >> 7)]^= u128(1) << (v & 127), adj[v * m + (u >>\
+    \ 7)]^= u128(1) << (u & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num> &rem)\
+    \ -> void {\n   if (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(),\
+    \ rem.end(), [&](id_num l, id_num r) { return deg[l.id] > deg[r.id]; }), buf.assign((n\
+    \ + 1) * m, 0);\n   for (auto &v: rem) {\n    int b= v.id * m, bb= 0;\n    for\
+    \ (v.num= 0;; ++v.num, bb+= m) {\n     bool any= 1;\n     for (u16 i= 0; i < m;\
+    \ ++i) any&= !(adj[b + i] & buf[bb + i]);\n     if (any) break;\n    }\n    buf[bb\
+    \ + (v.id >> 7)]|= u128(1) << (v.id & 127);\n   }\n   std::sort(rem.begin(), rem.end(),\
     \ [&](id_num l, id_num r) { return l.num < r.num; });\n   std::vector<id_num>\
     \ nrem;\n   for (nrem.reserve(rem.size()); !rem.empty();) {\n    auto p= rem.back();\n\
     \    if (p.num + cur.size() < clique.size()) break;\n    nrem.clear();\n    auto\
@@ -66,31 +65,31 @@ data:
     \ 0), buf[v >> 7]|= u128(1) << (v & 127);\n   auto a= adj_.cbegin() + v * m;\n\
     \   for (int i= 0; i < n; ++i)\n    if ((a[i >> 7] >> (i & 127)) & unused[i])\
     \ nbd.push_back(i);\n   nn= nbd.size(), dfs(dfs, 0), unused[v]= 0;\n   for (auto\
-    \ u: nbd) --deg[u];\n  }\n }\n};\n#line 4 \"test/yosupo/maximum_independent_set.test.cpp\"\
+    \ u: nbd) --deg[u];\n  }\n }\n};\n#line 5 \"test/aoj/GRL_7_A.clique.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M;\n cin >> N >> M;\n CliqueProblem graph(N);\n while (M--) {\n  int\
-    \ u, v;\n  cin >> u >> v;\n  graph.add_edge(u, v);\n }\n auto ans= graph.get_max_independent_set();\n\
-    \ int n= ans.size();\n cout << n << '\\n';\n for (int i= 0; i < n; i++) cout <<\
-    \ ans[i] << \" \\n\"[i == n - 1];\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/maximum_independent_set\"\
-    \n#include <iostream>\n#include \"src/Graph/CliqueProblem.hpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, M;\n\
-    \ cin >> N >> M;\n CliqueProblem graph(N);\n while (M--) {\n  int u, v;\n  cin\
-    \ >> u >> v;\n  graph.add_edge(u, v);\n }\n auto ans= graph.get_max_independent_set();\n\
-    \ int n= ans.size();\n cout << n << '\\n';\n for (int i= 0; i < n; i++) cout <<\
-    \ ans[i] << \" \\n\"[i == n - 1];\n return 0;\n}"
+    \ int X, Y, E;\n cin >> X >> Y >> E;\n CliqueProblem graph(X + Y);\n for (int\
+    \ i= 0; i < E; ++i) {\n  int x, y;\n  cin >> x >> y;\n  graph.add_edge(x, X +\
+    \ y);\n }\n cout << graph.get_min_vertex_cover().size() << '\\n';\n return 0;\n\
+    }\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
+    \n// 200 (=100+100) \u9802\u70B9\n#include <iostream>\n#include \"src/Graph/CliqueProblem.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int X, Y, E;\n cin >> X >> Y >> E;\n CliqueProblem graph(X + Y);\n for (int\
+    \ i= 0; i < E; ++i) {\n  int x, y;\n  cin >> x >> y;\n  graph.add_edge(x, X +\
+    \ y);\n }\n cout << graph.get_min_vertex_cover().size() << '\\n';\n return 0;\n\
+    }"
   dependsOn:
   - src/Graph/CliqueProblem.hpp
   isVerificationFile: true
-  path: test/yosupo/maximum_independent_set.test.cpp
+  path: test/aoj/GRL_7_A.clique.test.cpp
   requiredBy: []
   timestamp: '2023-05-05 01:22:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/maximum_independent_set.test.cpp
+documentation_of: test/aoj/GRL_7_A.clique.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/maximum_independent_set.test.cpp
-- /verify/test/yosupo/maximum_independent_set.test.cpp.html
-title: test/yosupo/maximum_independent_set.test.cpp
+- /verify/test/aoj/GRL_7_A.clique.test.cpp
+- /verify/test/aoj/GRL_7_A.clique.test.cpp.html
+title: test/aoj/GRL_7_A.clique.test.cpp
 ---

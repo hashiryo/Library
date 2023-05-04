@@ -176,6 +176,9 @@ data:
       path: src/Graph/BipartiteMatching.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
     - icon: ':heavy_check_mark:'
+      path: src/Graph/CliqueProblem.hpp
+      title: "\u30AF\u30EA\u30FC\u30AF\u554F\u984C"
+    - icon: ':heavy_check_mark:'
       path: src/Graph/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -190,9 +193,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/Matching.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':heavy_check_mark:'
-      path: src/Graph/MaxClique.hpp
-      title: "\u6700\u5927\u30AF\u30EA\u30FC\u30AF"
     - icon: ':heavy_check_mark:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
@@ -507,6 +507,9 @@ data:
       path: test/aoj/2270.Patricia.test.cpp
       title: test/aoj/2270.Patricia.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/2306.test.cpp
+      title: test/aoj/2306.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2313.Dinic.test.cpp
       title: test/aoj/2313.Dinic.test.cpp
     - icon: ':heavy_check_mark:'
@@ -642,8 +645,8 @@ data:
       path: test/aoj/3168.bm.test.cpp
       title: test/aoj/3168.bm.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/3168.max_clique.test.cpp
-      title: test/aoj/3168.max_clique.test.cpp
+      path: test/aoj/3168.clique.test.cpp
+      title: test/aoj/3168.clique.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/3170.test.cpp
       title: test/aoj/3170.test.cpp
@@ -810,11 +813,11 @@ data:
       path: test/aoj/GRL_6_B.test.cpp
       title: test/aoj/GRL_6_B.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/GRL_7_A.clique.test.cpp
+      title: test/aoj/GRL_7_A.clique.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
       title: test/aoj/GRL_7_A.matroid_intersection.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/aoj/GRL_7_A.max_clique.test.cpp
-      title: test/aoj/GRL_7_A.max_clique.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_2_D.SplayTree.test.cpp
       title: test/aoj/ITP2_2_D.SplayTree.test.cpp
@@ -1097,6 +1100,9 @@ data:
       path: test/yosupo/binomial_coefficient.test.cpp
       title: test/yosupo/binomial_coefficient.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
+      title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartite_edge_coloring.test.cpp
       title: test/yosupo/bipartite_edge_coloring.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1159,6 +1165,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
       title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/enumerate_cliques.test.cpp
+      title: test/yosupo/enumerate_cliques.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/enumerate_primes.test.cpp
       title: test/yosupo/enumerate_primes.test.cpp

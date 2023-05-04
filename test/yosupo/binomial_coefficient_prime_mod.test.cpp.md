@@ -5,42 +5,36 @@ data:
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':heavy_check_mark:'
+    path: src/Math/Combination.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97)\
+      \ ($\\mathbb{F}_p$)"
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
+  - icon: ':heavy_check_mark:'
+    path: src/Math/ModInt_Runtime.hpp
+    title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc222_g.test.cpp
-    title: test/atcoder/abc222_g.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc270_g.test.cpp
-    title: test/atcoder/abc270_g.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
-    title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/discrete_logarithm_mod.test.cpp
-    title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1339.test.cpp
-    title: test/yukicoder/1339.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/950.test.cpp
-    title: test/yukicoder/950.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
-    \ <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod)\
-    \ {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for (Int\
-    \ q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b= c -\
-    \ b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line\
-    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
+    links:
+    - https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
+  bundledCode: "#line 1 \"test/yosupo/binomial_coefficient_prime_mod.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod\"\
+    \n#include <iostream>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
+    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
+    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
+    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
+    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
+    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -133,43 +127,44 @@ data:
     \ u32, RB<MP_Na, u32(-1), id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>,\
     \ nullptr_t> = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
     \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
-    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n"
-  code: "#pragma once\n#include \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n\
-    struct r_b: m_b {};\ntemplate <class mod_t> constexpr bool is_runtimemodint_v=\
-    \ is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64 M, int id> struct RB: r_b\
-    \ {\n static inline void set_mod(u64 m) { md= MP(m); }\n static inline u64 max()\
-    \ { return M; }\nprotected:\n static inline MP md;\n};\nclass Montgomery32 {};\n\
-    class Montgomery64 {};\nclass Barrett {};\nclass Barrett2 {};\ntemplate <class\
-    \ Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int, Montgomery32>,\
-    \ MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
-    \ Montgomery64>, MInt<i64, u64, RB<MP_Mo<u64, u128, 64, 63>, (1ull << 62), id>>,\
-    \ conditional_t<is_same_v<Int, Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31),\
-    \ id>>, conditional_t<is_same_v<Int, Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull\
-    \ << 41), id>>, conditional_t<disjunction_v<is_same<Int, i64>, is_same<Int, u64>>,\
-    \ MInt<i64, u64, RB<MP_D2B1, u64(-1), id>>, MInt<int, u32, RB<MP_Na, u32(-1),\
-    \ id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>, nullptr_t>\
-    \ = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
-    \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
-    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n"
+    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n#line 2 \"src/Math/Combination.hpp\"\
+    \ntemplate <class mint, std::size_t LIM= (1 << 24)> class Combination {\n static\
+    \ inline mint _fact[LIM], _finv[LIM];\n static inline int lim= 0;\n static inline\
+    \ void set(int sz) {\n  if (lim > sz) return;\n  if (lim == 0) _fact[0]= 1, _finv[0]=\
+    \ 1, lim= 1;\n  for (int i= lim; i <= sz; i++) _fact[i]= _fact[i - 1] * i;\n \
+    \ _finv[sz]= mint(1) / _fact[sz];\n  for (int i= sz; i >= lim; i--) _finv[i -\
+    \ 1]= _finv[i] * i;\n  lim= sz + 1;\n }\npublic:\n static inline mint fact(int\
+    \ n) { return set(n), n < 0 ? mint(0) : _fact[n]; }\n static inline mint finv(int\
+    \ n) { return set(n), n < 0 ? mint(0) : _finv[n]; }\n static mint nPr(int n, int\
+    \ r) { return fact(n) * finv(n - r); }\n static mint nCr(int n, int r) { return\
+    \ nPr(n, r) * finv(r); }\n static mint nHr(int n, int r) { return !r ? mint(1)\
+    \ : nCr(n + r - 1, r); }\n};\n#line 5 \"test/yosupo/binomial_coefficient_prime_mod.test.cpp\"\
+    \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt_Runtime<int>;\n using Comb= Combination<Mint>;\n int T, m;\n\
+    \ cin >> T >> m;\n Mint::set_mod(m);\n while (T--) {\n  int n, k;\n  cin >> n\
+    \ >> k;\n  cout << Comb::nCr(n, k) << '\\n';\n }\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod\"\
+    \n#include <iostream>\n#include \"src/Math/ModInt_Runtime.hpp\"\n#include \"src/Math/Combination.hpp\"\
+    \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt_Runtime<int>;\n using Comb= Combination<Mint>;\n int T, m;\n\
+    \ cin >> T >> m;\n Mint::set_mod(m);\n while (T--) {\n  int n, k;\n  cin >> n\
+    \ >> k;\n  cout << Comb::nCr(n, k) << '\\n';\n }\n return 0;\n}\n"
   dependsOn:
+  - src/Math/ModInt_Runtime.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
-  isVerificationFile: false
-  path: src/Math/ModInt_Runtime.hpp
+  - src/Math/Combination.hpp
+  isVerificationFile: true
+  path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/atcoder/abc222_g.test.cpp
-  - test/atcoder/abc270_g.test.cpp
-  - test/yukicoder/950.test.cpp
-  - test/yukicoder/1339.test.cpp
-  - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
-documentation_of: src/Math/ModInt_Runtime.hpp
+  timestamp: '2023-05-05 01:22:35+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: test/yosupo/binomial_coefficient_prime_mod.test.cpp
 layout: document
-title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
+redirect_from:
+- /verify/test/yosupo/binomial_coefficient_prime_mod.test.cpp
+- /verify/test/yosupo/binomial_coefficient_prime_mod.test.cpp.html
+title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
 ---
-## 問題例
-[Educational DP Contest  V - Subtree](https://atcoder.jp/contests/dp/tasks/dp_v)

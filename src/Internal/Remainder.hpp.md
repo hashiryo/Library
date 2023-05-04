@@ -231,6 +231,9 @@ data:
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
+    title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -260,6 +263,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
     title: test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/enumerate_cliques.test.cpp
+    title: test/yosupo/enumerate_cliques.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.FPS.test.cpp
     title: test/yosupo/exp_of_FPS.FPS.test.cpp
@@ -743,6 +749,7 @@ data:
   - test/yosupo/kth_root_mod.test.cpp
   - test/yosupo/convolution_large.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yosupo/enumerate_cliques.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/sqrt_of_sparse_FPS.test.cpp
@@ -796,6 +803,7 @@ data:
   - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
+  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/yosupo/sum_of_totient_function.test.cpp
