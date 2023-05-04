@@ -20,6 +20,9 @@ data:
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/exp_of_set_power_series.test.cpp
+    title: test/yosupo/exp_of_set_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_composite_set_power_series.test.cpp
     title: test/yosupo/polynomial_composite_set_power_series.test.cpp
   - icon: ':heavy_check_mark:'
@@ -247,6 +250,7 @@ data:
   - test/atcoder/abc199_d.test.cpp
   - test/yosupo/subset_convolution.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
+  - test/yosupo/exp_of_set_power_series.test.cpp
   - test/aoj/2345.test.cpp
 documentation_of: src/Math/SetPowerSeries.hpp
 layout: document

@@ -267,6 +267,9 @@ data:
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/exp_of_set_power_series.test.cpp
+    title: test/yosupo/exp_of_set_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_sparse_FPS.test.cpp
     title: test/yosupo/exp_of_sparse_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -803,6 +806,7 @@ data:
   - test/yosupo/inv_of_FPS.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/exp_of_set_power_series.test.cpp
   - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/aoj/DPL_5_E.test.cpp
