@@ -94,12 +94,12 @@ data:
   timestamp: '2023-04-02 00:58:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc222_g.test.cpp
-  - test/atcoder/abc270_g.test.cpp
   - test/yukicoder/261.test.cpp
-  - test/yukicoder/950.test.cpp
   - test/yukicoder/1339.test.cpp
+  - test/yukicoder/950.test.cpp
   - test/yosupo/discrete_logarithm_mod.test.cpp
+  - test/atcoder/abc270_g.test.cpp
+  - test/atcoder/abc222_g.test.cpp
 documentation_of: src/Math/DiscreteLogarithm.hpp
 layout: document
 title: "\u96E2\u6563\u5BFE\u6570"
@@ -107,14 +107,14 @@ title: "\u96E2\u6563\u5BFE\u6570"
 
 半群 $E$ が 集合 $T$ に(右)作用するとする. \
 入力 : $x\in E$, $s,t\in T$, $n\in \mathbb{N}$ \
-出力 : $ \begin{cases} -1 & I = \empty, \\ \min I &\mathrm{otherwise}.\end{cases}$ ただし $I= \lbrace $ $ i \in \mathbb{N}:$ $0 \le i < n$ かつ $sx^i=t$  $\rbrace$ 
+出力 : //[ \begin{cases} -1 & I = \varnothing, \\ \min I &\mathrm{otherwise}.\end{cases} //] ただし $I= \lbrace $ $ i \in \mathbb{N}:$ $0 \le i < n$ かつ $sx^i=t$  $\rbrace$ 
 
 ## メンバ関数
 
-| 名前                                     | 概要                                                                                                                                                                                          | 計算量                                                                                                                  |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `DiscreteLogarithm(mapping,op,hash,lim)` | コンストラクタ.  <br> `mapping` : $ T \times E \rightarrow T$ ( 作用 ) <br> `op` : $E \times E \rightarrow E$ ( 半群 $E$ の二項演算 ) <br> `hash` : $T \rightarrow \mathbb{N}$ ( int に変換 ) |                                                                                                                         |
-| `operator()(x,s,t,n)`                    | 離散対数を計算                                                                                                                                                                                | $\mathcal{O}(A\sqrt{n}+B\log{n})$ <br> ただし作用, 二項演算の 計算量 をそれぞれ $\mathcal{O}(A), \mathcal{O}(B)$ とした |
+| 名前                                     | 概要                                                                                                                                                                                          | 計算量                                                                                                   |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `DiscreteLogarithm(mapping,op,hash,lim)` | コンストラクタ.  <br> `mapping` : $ T \times E \rightarrow T$ ( 作用 ) <br> `op` : $E \times E \rightarrow E$ ( 半群 $E$ の二項演算 ) <br> `hash` : $T \rightarrow \mathbb{N}$ ( int に変換 ) |                                                                                                          |
+| `operator()(x,s,t,n)`                    | 離散対数を計算                                                                                                                                                                                | $\mathcal{O}(A\sqrt{n}+B\log{n})$ <br> 作用, 二項演算の計算量がそれぞれ $\mathcal{O}(A), \mathcal{O}(B)$ |
 
 ## 参考
 [https://maspypy.com/モノイド作用に関する離散対数問題](https://maspypy.com/%E3%83%A2%E3%83%8E%E3%82%A4%E3%83%89%E4%BD%9C%E7%94%A8%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E9%9B%A2%E6%95%A3%E5%AF%BE%E6%95%B0%E5%95%8F%E9%A1%8C)

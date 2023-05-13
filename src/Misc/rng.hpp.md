@@ -60,13 +60,13 @@ data:
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/z_algorithm.rollinghash.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/aoj/2711.rollinghash.test.cpp
   - test/aoj/2614.rollinghash.test.cpp
-  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
 documentation_of: src/Misc/rng.hpp
 layout: document
 title: "\u7591\u4F3C\u4E71\u6570"

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -84,22 +84,25 @@ data:
     \ ConstexprArray {\n constexpr size_t size() const { return sz; }\n constexpr\
     \ auto &operator[](int i) const { return dat[i]; }\n constexpr auto *begin() const\
     \ { return dat; }\n constexpr auto *end() const { return dat + sz; }\nprotected:\n\
-    \ T dat[_Nm]= {};\n size_t sz= 0;\n};\nclass Factors: public ConstexprArray<pair<u64,\
-    \ uint16_t>, 16> {\n template <class Uint, class MP> static constexpr Uint rho(Uint\
-    \ n, Uint c) {\n  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x,\
-    \ x), c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2),\
-    \ z= 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for\
-    \ (x= y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= gcd(md.get(q),\
-    \ n), k+= m)\n    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y,\
-    \ x));\n  }\n  if (g == n) do {\n    z= f(z), g= gcd(md.get(md.diff(z, x)), n);\n\
-    \   } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
-    \ n) {\n  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n <\
-    \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
-    \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
-    \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; p++)\n   if (n % p == 0)\n    for (dat[sz++].first=\
-    \ p; n % p == 0;) n/= p, dat[sz - 1].second++;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
-    \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, dat[sz].second++;\n\
+    \ T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream &os, const\
+    \ ConstexprArray &r) {\n  os << \"[\";\n  for (size_t i= 0; i < r.sz; ++i) os\
+    \ << r[i] << \",]\"[i == r.sz - 1];\n  return os;\n }\n};\nclass Factors: public\
+    \ ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class MP>\
+    \ static constexpr Uint rho(Uint n, Uint c) {\n  const MP md(n);\n  auto f= [&md,\
+    \ n, c](Uint x) { return md.plus(md.mul(x, x), c); };\n  const Uint m= 1LL <<\
+    \ (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z= 1, q= md.set(1), g= 1;\n  for\
+    \ (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x= y, i= r; i--;) y= f(y);\n  \
+    \ for (Uint k= 0; k < r && g == 1; g= gcd(md.get(q), n), k+= m)\n    for (z= y,\
+    \ i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y, x));\n  }\n  if (g\
+    \ == n) do {\n    z= f(z), g= gcd(md.get(md.diff(z, x)), n);\n   } while (g ==\
+    \ 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64 n) {\n  if\
+    \ (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n < (1 << 30) ?\
+    \ rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ? rho<u64, MP_Mo<u64,\
+    \ u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1); is_prime(n)) return\
+    \ n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for (u64 p= 2; p < 100\
+    \ && p * p <= n; p++)\n   if (n % p == 0)\n    for (dat[sz++].first= p; n % p\
+    \ == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
+    \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
     \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
     \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
@@ -108,13 +111,20 @@ data:
     \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
     \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
     \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
-    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
-    \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
-    constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
-    \ 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return\
-    \ ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
-    \ }\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\nclass\
+    \ Divisors: public ConstexprArray<u64, 110600> {\n constexpr void init(const Factors\
+    \ &f) {\n  dat[sz++]= 1;\n  for (auto [p, e]: f) {\n   u64 pw= p;\n   size_t psz=\
+    \ sz;\n   for (uint16_t i= 1; i <= e; ++i, pw*= p)\n    for (size_t j= 0; j <\
+    \ psz; ++j) dat[sz++]= dat[j] * pw;\n  }\n }\npublic:\n constexpr Divisors()=\
+    \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
+    \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
+    \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
+    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
+    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
+    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
+    \ n) { return totient(Factors(n)); }\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
+    \ <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 5 \"src/Math/BinomialCoefficient.hpp\"\nclass\
@@ -193,7 +203,7 @@ data:
   isVerificationFile: false
   path: src/Math/BinomialCoefficient.hpp
   requiredBy: []
-  timestamp: '2023-04-16 21:58:58+09:00'
+  timestamp: '2023-05-13 17:48:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/binomial_coefficient.test.cpp

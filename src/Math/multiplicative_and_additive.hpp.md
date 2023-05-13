@@ -6,21 +6,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc179_c.mul_sum.test.cpp
+    title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1019.test.cpp
-    title: test/yukicoder/1019.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1019.numth.test.cpp
+    title: test/yukicoder/1019.numth.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/multiplicative_and_additive.hpp\"\n#include <vector>\n\
@@ -82,13 +85,14 @@ data:
   path: src/Math/multiplicative_and_additive.hpp
   requiredBy: []
   timestamp: '2023-01-21 20:48:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc172_d.numth.test.cpp
+  - test/yukicoder/1019.numth.test.cpp
   - test/yukicoder/644.test.cpp
-  - test/yukicoder/1019.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+  - test/atcoder/abc172_d.numth.test.cpp
+  - test/atcoder/abc179_c.mul_sum.test.cpp
 documentation_of: src/Math/multiplicative_and_additive.hpp
 layout: document
 title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"

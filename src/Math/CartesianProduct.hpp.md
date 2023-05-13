@@ -60,8 +60,8 @@ data:
   timestamp: '2023-01-21 20:06:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/z_algorithm.rollinghash.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/aoj/2711.rollinghash.test.cpp
   - test/aoj/2614.rollinghash.test.cpp
   - test/aoj/ALDS1_14_B.rollinghash.test.cpp

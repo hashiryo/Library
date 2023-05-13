@@ -7,16 +7,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
@@ -461,33 +461,33 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_div.hpp
   requiredBy:
+  - src/FFT/sequences.hpp
+  - src/FFT/extgcd.hpp
   - src/FFT/SubProductTree.hpp
   - src/FFT/Polynomial.hpp
-  - src/FFT/extgcd.hpp
   - src/FFT/fps_exp.hpp
-  - src/FFT/sequences.hpp
   timestamp: '2023-04-09 22:20:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1080.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/963.test.cpp
+  - test/yukicoder/1080.test.cpp
   - test/yukicoder/1145.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/stirling_2.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/stirling_2.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/partition.test.cpp
 documentation_of: src/FFT/fps_div.hpp
 layout: document
 title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"

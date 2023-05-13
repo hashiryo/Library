@@ -218,7 +218,7 @@ data:
       path: src/Internal/HAS_CHECK.hpp
       title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
         \u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Internal/Remainder.hpp
       title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
     - icon: ':heavy_check_mark:'
@@ -261,19 +261,19 @@ data:
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97\
         ) ($\\mathbb{F}_p$)"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/DirichletConvSumTable.hpp
-      title: "\u6570\u8AD6\u95A2\u6570\u306E\u7D2F\u7A4D\u548C"
+    - icon: ':question:'
+      path: src/Math/DirichletSeries.hpp
+      title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
       path: src/Math/DiscreteLogarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     - icon: ':heavy_check_mark:'
@@ -288,7 +288,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/SetPowerSeries.hpp
       title: "\u96C6\u5408\u51AA\u7D1A\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/Sieve.hpp
       title: "\u7BE9\u306A\u3069"
     - icon: ':heavy_check_mark:'
@@ -300,14 +300,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
+    - icon: ':x:'
+      path: src/Math/enumerate_quotients.hpp
+      title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
     - icon: ':heavy_check_mark:'
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/mod_inv.hpp
       title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':heavy_check_mark:'
@@ -320,10 +323,10 @@ data:
       path: src/Math/mod_tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/multiplicative_and_additive.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/prime_count.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
     - icon: ':heavy_check_mark:'
@@ -895,21 +898,30 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc167_d.test.cpp
       title: test/atcoder/abc167_d.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/atcoder/abc172_d.dujiao.test.cpp
-      title: test/atcoder/abc172_d.dujiao.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc172_d.Dirichlet.test.cpp
+      title: test/atcoder/abc172_d.Dirichlet.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc172_d.enum_quo.test.cpp
+      title: test/atcoder/abc172_d.enum_quo.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc172_d.mul_sum.test.cpp
+      title: test/atcoder/abc172_d.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/atcoder/abc172_d.primecnt.test.cpp
-      title: test/atcoder/abc172_d.primecnt.test.cpp
-    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/atcoder/abc179_c.test.cpp
-      title: test/atcoder/abc179_c.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc179_c.Dirichlet.test.cpp
+      title: test/atcoder/abc179_c.Dirichlet.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc179_c.enum_quo.test.cpp
+      title: test/atcoder/abc179_c.enum_quo.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc179_c.mul_sum.test.cpp
+      title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_e.test.cpp
       title: test/atcoder/abc179_e.test.cpp
@@ -958,7 +970,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_d.test.cpp
       title: test/atcoder/abc228_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1036,9 +1048,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/atcoder/arc116_c.dujiao.test.cpp
-      title: test/atcoder/arc116_c.dujiao.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/arc116_c.Dirichlet.test.cpp
+      title: test/atcoder/arc116_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc123_d.test.cpp
       title: test/atcoder/arc123_d.test.cpp
@@ -1171,6 +1183,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/enumerate_primes.test.cpp
       title: test/yosupo/enumerate_primes.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/enumerate_quotients.test.cpp
+      title: test/yosupo/enumerate_quotients.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/exp_of_FPS.FPS.test.cpp
       title: test/yosupo/exp_of_FPS.FPS.test.cpp
@@ -1406,14 +1421,17 @@ data:
       path: test/yosupo/sum_of_floor_of_linear.test.cpp
       title: test/yosupo/sum_of_floor_of_linear.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
+      title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/yosupo/sum_of_totient_function.test.cpp
-      title: test/yosupo/sum_of_totient_function.test.cpp
-    - icon: ':heavy_check_mark:'
       path: test/yosupo/tetration_mod.test.cpp
       title: test/yosupo/tetration_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yosupo/tree_path_composite_sum.test.cpp
+      title: test/yosupo/tree_path_composite_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/two_edge_connected_components.test.cpp
       title: test/yosupo/two_edge_connected_components.test.cpp
@@ -1431,9 +1449,12 @@ data:
       title: test/yosupo/z_algorithm.test.cpp
   - name: test/yukicoder
     pages:
-    - icon: ':heavy_check_mark:'
-      path: test/yukicoder/1019.test.cpp
-      title: test/yukicoder/1019.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1019.Dirichlet.test.cpp
+      title: test/yukicoder/1019.Dirichlet.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1019.numth.test.cpp
+      title: test/yukicoder/1019.numth.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1031.test.cpp
       title: test/yukicoder/1031.test.cpp
@@ -1473,12 +1494,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1242.test.cpp
       title: test/yukicoder/1242.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1260.test.cpp
+      title: test/yukicoder/1260.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1269.test.cpp
       title: test/yukicoder/1269.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1270.test.cpp
       title: test/yukicoder/1270.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1276.Dirichlet.test.cpp
+      title: test/yukicoder/1276.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1293.scc.test.cpp
       title: test/yukicoder/1293.scc.test.cpp
@@ -1515,6 +1542,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1573.Dirichlet.test.cpp
+      title: test/yukicoder/1573.Dirichlet.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1573.enum_quo.test.cpp
+      title: test/yukicoder/1573.enum_quo.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1615.MCF.test.cpp
       title: test/yukicoder/1615.MCF.test.cpp

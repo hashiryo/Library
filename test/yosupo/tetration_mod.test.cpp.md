@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':heavy_check_mark:'
@@ -85,23 +85,25 @@ data:
     }\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr size_t size()\
     \ const { return sz; }\n constexpr auto &operator[](int i) const { return dat[i];\
     \ }\n constexpr auto *begin() const { return dat; }\n constexpr auto *end() const\
-    \ { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n};\nclass\
-    \ Factors: public ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class\
-    \ Uint, class MP> static constexpr Uint rho(Uint n, Uint c) {\n  const MP md(n);\n\
-    \  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x, x), c); };\n  const\
-    \ Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z= 1, q= md.set(1),\
-    \ g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x= y, i= r; i--;)\
-    \ y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= gcd(md.get(q), n), k+= m)\n\
-    \    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y, x));\n\
-    \  }\n  if (g == n) do {\n    z= f(z), g= gcd(md.get(md.diff(z, x)), n);\n   }\
-    \ while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
+    \ { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend\
+    \ ostream &operator<<(ostream &os, const ConstexprArray &r) {\n  os << \"[\";\n\
+    \  for (size_t i= 0; i < r.sz; ++i) os << r[i] << \",]\"[i == r.sz - 1];\n  return\
+    \ os;\n }\n};\nclass Factors: public ConstexprArray<pair<u64, uint16_t>, 16> {\n\
+    \ template <class Uint, class MP> static constexpr Uint rho(Uint n, Uint c) {\n\
+    \  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x, x),\
+    \ c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z=\
+    \ 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x=\
+    \ y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= gcd(md.get(q),\
+    \ n), k+= m)\n    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y,\
+    \ x));\n  }\n  if (g == n) do {\n    z= f(z), g= gcd(md.get(md.diff(z, x)), n);\n\
+    \   } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
     \ n) {\n  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n <\
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
     \ (u64 p= 2; p < 100 && p * p <= n; p++)\n   if (n % p == 0)\n    for (dat[sz++].first=\
-    \ p; n % p == 0;) n/= p, dat[sz - 1].second++;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
-    \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, dat[sz].second++;\n\
+    \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
+    \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
     \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
     \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
@@ -110,24 +112,30 @@ data:
     \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
     \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
     \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
-    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\n}  //\
-    \ namespace math_internal\nusing math_internal::Factors, math_internal::primitive_root;\n\
-    constexpr std::uint64_t totient(const Factors &f) {\n std::uint64_t ret= 1, i=\
-    \ 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return\
-    \ ret;\n}\nconstexpr auto totient(std::uint64_t n) { return totient(Factors(n));\
-    \ }\n#line 3 \"src/Math/mod_tetration.hpp\"\nnamespace math_internal {\nconstexpr\
-    \ u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n if (b ==\
-    \ 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const auto [p,\
-    \ e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;) tmp*=\
-    \ p;\n  k= std::lcm(k, tmp);\n }\n auto mod= [m](u128 x) { return x < m ? x :\
-    \ x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a) * a))\n\
-    \  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\nconstexpr\
-    \ u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >= m ? a -\
-    \ m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n\
-    #line 4 \"test/yosupo/tetration_mod.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int T;\n cin >> T;\n while (T--)\
-    \ {\n  int A, B, M;\n  cin >> A >> B >> M;\n  cout << mod_tetration(A, B, M) <<\
-    \ '\\n';\n }\n return 0;\n}\n"
+    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\nclass\
+    \ Divisors: public ConstexprArray<u64, 110600> {\n constexpr void init(const Factors\
+    \ &f) {\n  dat[sz++]= 1;\n  for (auto [p, e]: f) {\n   u64 pw= p;\n   size_t psz=\
+    \ sz;\n   for (uint16_t i= 1; i <= e; ++i, pw*= p)\n    for (size_t j= 0; j <\
+    \ psz; ++j) dat[sz++]= dat[j] * pw;\n  }\n }\npublic:\n constexpr Divisors()=\
+    \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
+    \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
+    \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
+    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
+    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
+    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
+    \ n) { return totient(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\n\
+    namespace math_internal {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a ==\
+    \ 0) return (b ^ 1) & 1;\n if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1,\
+    \ tmp= 1, i= 0;\n for (const auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i=\
+    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n  k= std::lcm(k, tmp);\n }\n auto mod=\
+    \ [m](u128 x) { return x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a=\
+    \ mod(a);; a= mod(u128(a) * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>=\
+    \ 1)) return ret;\n}\nconstexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return\
+    \ (a= rec(a, b, m)) >= m ? a - m : a; }\n}  // namespace math_internal\nusing\
+    \ math_internal::mod_tetration;\n#line 4 \"test/yosupo/tetration_mod.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int T;\n cin >> T;\n while (T--) {\n  int A, B, M;\n  cin >> A >> B >> M;\n\
+    \  cout << mod_tetration(A, B, M) << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tetration_mod\"\n#include\
     \ <iostream>\n#include \"src/Math/mod_tetration.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int T;\n cin >> T;\n\
@@ -141,7 +149,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-04-16 21:58:58+09:00'
+  timestamp: '2023-05-13 17:48:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp

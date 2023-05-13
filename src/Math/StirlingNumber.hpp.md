@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -131,8 +131,8 @@ data:
   timestamp: '2023-04-09 22:20:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/stirling_2_small_p_large_n.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp
+  - test/yosupo/stirling_2_small_p_large_n.test.cpp
 documentation_of: src/Math/StirlingNumber.hpp
 layout: document
 title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"

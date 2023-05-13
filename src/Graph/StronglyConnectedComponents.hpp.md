@@ -103,9 +103,9 @@ data:
   timestamp: '2023-04-15 19:40:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1813.test.cpp
   - test/yukicoder/1293.scc.test.cpp
   - test/yukicoder/1170.test.cpp
+  - test/yukicoder/1813.test.cpp
   - test/yosupo/two_sat.test.cpp
   - test/yosupo/scc.test.cpp
   - test/aoj/0366.test.cpp

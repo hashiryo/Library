@@ -61,14 +61,14 @@ data:
   timestamp: '2023-01-21 20:28:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc160_f.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/binomial_coefficient_prime_mod.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - test/aoj/DPL_5_E.test.cpp
-  - test/aoj/DPL_5_B.test.cpp
   - test/aoj/DPL_5_D.test.cpp
+  - test/aoj/DPL_5_E.test.cpp
   - test/aoj/DPL_5_F.test.cpp
+  - test/aoj/DPL_5_B.test.cpp
+  - test/atcoder/abc160_f.test.cpp
 documentation_of: src/Math/Combination.hpp
 layout: document
 title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\

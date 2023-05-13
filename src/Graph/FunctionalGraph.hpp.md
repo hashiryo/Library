@@ -155,13 +155,13 @@ data:
   timestamp: '2023-04-23 14:23:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc136_d.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc241_e.test.cpp
   - test/yukicoder/1242.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1211.test.cpp
+  - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc136_d.test.cpp
+  - test/atcoder/abc179_e.test.cpp
 documentation_of: src/Graph/FunctionalGraph.hpp
 layout: document
 title: "Functional\u30B0\u30E9\u30D5"
@@ -169,12 +169,13 @@ title: "Functional\u30B0\u30E9\u30D5"
 
 ## メンバ関数
 
-| 関数名               | 内容                                                                                                                                                                                     | 計算量                |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `FunctionalGraph(N)` | コンストラクタ. 有向グラフの頂点数 N を渡す                                                                                                                                              |                       |
-| `add_edge(s,d)`      | 有向辺 (s,d) を追加. すでに頂点 s から出る辺が add されていたら assert で落ちる.                                                                                                         |                       |
-| `build()`            | 前処理.　辺を追加し終えたら必ず呼ぶ.                                                                                                                                                     | $\mathcal{O}(N)$      |
-| `jump(v, k)`         | 頂点 v から k ステップ 進んだ先の頂点を返す.                                                                                                                                             | $\mathcal{O}(\log N)$ |
-| `path(v, k)`         | 頂点 v から k ステップ 進むときの頂点のパスを返す.<br> ただし パスは (サイクルに入るまで, サイクル, 余り) の3つに分解し, それぞれ何周するかの情報も持たせる. (1,3 番目の成分は 高々 1周) | $\mathcal{O}(N)$      |
+| 名前                 | 概要                                                                                                                                                                                    | 計算量                |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| `FunctionalGraph(N)` | コンストラクタ. 有向グラフの頂点数 N を渡す                                                                                                                                             |                       |
+| `add_edge(s,d)`      | 有向辺 (s,d) を追加. すでに頂点 s から出る辺が add されていたら assert で落ちる.                                                                                                        |                       |
+| `build()`            | 前処理.　辺を追加し終えたら必ず呼ぶ.                                                                                                                                                    | $\mathcal{O}(N)$      |
+| `jump(v,k)`          | 頂点 v から k ステップ 進んだ先の頂点を返す.                                                                                                                                            | $\mathcal{O}(\log N)$ |
+| `path(v,k)`          | 頂点 v から k ステップ 進むときの頂点のパスを返す.<br>ただし パスは (サイクルに入るまで, サイクル, 余り) の3つに分解し, それぞれ何周するかの情報も持たせる. (1,3 番目の成分は 高々 1周) | $\mathcal{O}(N)$      |
+
 ## 問題例
 [AtCoder Beginner Contest 030 D - へんてこ辞書](https://atcoder.jp/contests/abc030/tasks/abc030_d)

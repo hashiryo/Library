@@ -145,9 +145,9 @@ data:
   verifiedWith:
   - test/yukicoder/1326.test.cpp
   - test/yosupo/biconnected_components.test.cpp
+  - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/GRL_3_A.test.cpp
-  - test/hackerrank/bonnie-and-clyde.test.cpp
 documentation_of: src/Graph/BiConnectedComponents.hpp
 layout: document
 title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
