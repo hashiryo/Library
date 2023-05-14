@@ -15,9 +15,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1019.Dirichlet.test.cpp
-    title: test/yukicoder/1019.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1276.Dirichlet.test.cpp
     title: test/yukicoder/1276.Dirichlet.test.cpp
@@ -271,7 +268,6 @@ data:
   verifiedWith:
   - test/yukicoder/1573.Dirichlet.test.cpp
   - test/yukicoder/1276.Dirichlet.test.cpp
-  - test/yukicoder/1019.Dirichlet.test.cpp
   - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
   - test/atcoder/abc179_c.Dirichlet.test.cpp
   - test/atcoder/arc116_c.Dirichlet.test.cpp

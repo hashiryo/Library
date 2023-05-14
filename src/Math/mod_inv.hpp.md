@@ -394,7 +394,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -406,9 +406,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.rollinghash.test.cpp
     title: test/yosupo/z_algorithm.rollinghash.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1019.Dirichlet.test.cpp
-    title: test/yukicoder/1019.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
@@ -596,7 +593,6 @@ data:
   - test/yukicoder/1276.Dirichlet.test.cpp
   - test/yukicoder/1417.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
-  - test/yukicoder/1019.Dirichlet.test.cpp
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/803.test.cpp
