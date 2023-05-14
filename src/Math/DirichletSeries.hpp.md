@@ -18,10 +18,10 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1019.Dirichlet.test.cpp
     title: test/yukicoder/1019.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1276.Dirichlet.test.cpp
     title: test/yukicoder/1276.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1573.Dirichlet.test.cpp
     title: test/yukicoder/1573.Dirichlet.test.cpp
   _isVerificationFailed: true
@@ -293,4 +293,5 @@ $\mathcal{O} (N^{2/3}(\log N)^{1/3})$
 [AtCoder Beginner Contest 239 Ex - Dice Product 2](https://atcoder.jp/contests/abc239/tasks/abc239_h) \
 [LibreOJ #6491. 「XXOI 2018」简单的最大公约数](https://loj.ac/p/6491) \
 [LibreOJ #6686. Stupid GCD](https://loj.ac/p/6686) \
-[LibreOJ #6714. Stupid Product](https://loj.ac/p/6714)
+[LibreOJ #6714. Stupid Product](https://loj.ac/p/6714)\
+[LibreOJ #572. 「LibreOJ Round #11」Misaka Network 与求和](https://loj.ac/p/572) (prime count もいる)
