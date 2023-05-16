@@ -60,7 +60,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':heavy_check_mark:'
@@ -266,7 +266,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_cliques.test.cpp
     title: test/yosupo/enumerate_cliques.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_quotients.test.cpp
     title: test/yosupo/enumerate_quotients.test.cpp
   - icon: ':heavy_check_mark:'
@@ -431,7 +431,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
@@ -473,7 +473,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1276.Dirichlet.test.cpp
     title: test/yukicoder/1276.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
@@ -491,7 +491,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1533.test.cpp
     title: test/yukicoder/1533.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1573.Dirichlet.test.cpp
     title: test/yukicoder/1573.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
@@ -578,9 +578,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/980.test.cpp
     title: test/yukicoder/980.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\n\
@@ -699,7 +699,7 @@ data:
   - src/FFT/sample_points_shift.hpp
   - src/FFT/MultiVariateConvolution.hpp
   timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/3046.test.cpp
   - test/yukicoder/963.test.cpp

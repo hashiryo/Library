@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/DirichletSeries.hpp
     title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
   _extendedRequiredBy: []

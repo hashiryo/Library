@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/enumerate_quotients.hpp
     title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_quotients
@@ -116,14 +116,15 @@ data:
     \ for (int l= sq; l >= 1; --l) ret.emplace_back(double(N) / l, l - 1, l);\n return\
     \ ret;\n}\n#line 5 \"test/yosupo/enumerate_quotients.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N;\n\
-    \ cin >> N;\n auto ans= enumerate_quotients(N);\n for (int i= 0, e= ans.size();\
-    \ i < e; ++i) cout << get<0>(ans[i]) << \" \\n\"[i == e - 1];\n return 0;\n}\n"
+    \ cin >> N;\n auto ans= enumerate_quotients(N);\n int k= ans.size();\n cout <<\
+    \ k << '\\n';\n for (int i= 0; i < k; ++i) cout << get<0>(ans[i]) << \" \\n\"\
+    [i == k - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_quotients\"\n\
     #include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/enumerate_quotients.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ long long N;\n cin >> N;\n auto ans= enumerate_quotients(N);\n for (int i= 0,\
-    \ e= ans.size(); i < e; ++i) cout << get<0>(ans[i]) << \" \\n\"[i == e - 1];\n\
-    \ return 0;\n}"
+    \ long long N;\n cin >> N;\n auto ans= enumerate_quotients(N);\n int k= ans.size();\n\
+    \ cout << k << '\\n';\n for (int i= 0; i < k; ++i) cout << get<0>(ans[i]) << \"\
+    \ \\n\"[i == k - 1];\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -132,8 +133,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/enumerate_quotients.test.cpp
   requiredBy: []
-  timestamp: '2023-05-16 15:13:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-05-16 16:21:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/enumerate_quotients.test.cpp
 layout: document

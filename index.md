@@ -218,7 +218,7 @@ data:
       path: src/Internal/HAS_CHECK.hpp
       title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
         \u30F3\u30D7\u30EC\u30FC\u30C8"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Internal/Remainder.hpp
       title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
     - icon: ':heavy_check_mark:'
@@ -261,7 +261,7 @@ data:
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570\u306A\u3069 (\u968E\u4E57\u524D\u8A08\u7B97\
         ) ($\\mathbb{F}_p$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/DirichletSeries.hpp
       title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
@@ -270,7 +270,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt.hpp
       title: ModInt
     - icon: ':heavy_check_mark:'
@@ -300,7 +300,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/enumerate_quotients.hpp
       title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
     - icon: ':heavy_check_mark:'
@@ -310,7 +310,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/mod_inv.hpp
       title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':heavy_check_mark:'
@@ -1183,7 +1183,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/enumerate_primes.test.cpp
       title: test/yosupo/enumerate_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/enumerate_quotients.test.cpp
       title: test/yosupo/enumerate_quotients.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1420,7 +1420,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_floor_of_linear.test.cpp
       title: test/yosupo/sum_of_floor_of_linear.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
       title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1500,7 +1500,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1270.test.cpp
       title: test/yukicoder/1270.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1276.Dirichlet.test.cpp
       title: test/yukicoder/1276.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1539,7 +1539,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1573.Dirichlet.test.cpp
       title: test/yukicoder/1573.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
