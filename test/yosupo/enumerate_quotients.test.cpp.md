@@ -20,11 +20,11 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: ' https://judge.yosupo.jp/problem/enumerate_quotients'
+    PROBLEM: https://judge.yosupo.jp/problem/enumerate_quotients
     links:
-    - https://judge.yosupo.jp/problem/enumerate_quotients"
+    - https://judge.yosupo.jp/problem/enumerate_quotients
   bundledCode: "#line 1 \"test/yosupo/enumerate_quotients.test.cpp\"\n#define PROBLEM\
-    \ \" https://judge.yosupo.jp/problem/enumerate_quotients\"\n#include <iostream>\n\
+    \ \"https://judge.yosupo.jp/problem/enumerate_quotients\"\n#include <iostream>\n\
     #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
     template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
@@ -118,7 +118,7 @@ data:
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N;\n\
     \ cin >> N;\n auto ans= enumerate_quotients(N);\n for (int i= 0, e= ans.size();\
     \ i < e; ++i) cout << get<0>(ans[i]) << \" \\n\"[i == e - 1];\n return 0;\n}\n"
-  code: "#define PROBLEM \" https://judge.yosupo.jp/problem/enumerate_quotients\"\n\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_quotients\"\n\
     #include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/enumerate_quotients.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ long long N;\n cin >> N;\n auto ans= enumerate_quotients(N);\n for (int i= 0,\
@@ -132,7 +132,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/enumerate_quotients.test.cpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
+  timestamp: '2023-05-16 15:13:34+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/enumerate_quotients.test.cpp

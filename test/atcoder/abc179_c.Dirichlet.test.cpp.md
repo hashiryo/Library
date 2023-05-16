@@ -84,27 +84,28 @@ data:
     \ ret;\n   }\n  size_t n= 0, m, i, l, p= 2;\n  uint64_t e, j;\n  while (n <= M\
     \ && (1ULL << n) <= N) ++n;\n  Self ret(N);\n  T pw[65]= {1}, b= x[1], tmp;\n\
     \  for (e= M - n + 1;; b*= b)\n   if (e & 1 ? pw[0]*= b : T(); !(e>>= 1)) break;\n\
-    \  for (m= 1; m < n; ++m) pw[m]= pw[m - 1] * x[1];\n  std::vector<T> XX(Xl), z(K\
-    \ + 1, 0), Z(L + 1, 0);\n  for (i= L; i; --i) XX[i]-= x[1];\n  auto A= [&](uint64_t\
-    \ n) { return n <= K ? Xs[n] : XX[(double)N / n]; };\n  std::vector<T> y(x), Y(XX),\
-    \ Bs(Xs), c(y), Cs(K + 1), C(Y);\n  auto B= [&](uint64_t n) { return n <= K ?\
-    \ Bs[n] : Y[(double)N / n]; };\n  for (tmp= pw[n - 2] * M, l= L; l; l--) C[l]*=\
-    \ tmp;\n  for (i= 2; i <= K; ++i) c[i]*= tmp;\n  for (c[1]= pw[n - 1], l= L; l;\
-    \ l--) C[l]+= c[1];\n  for (m= 1, b= M, l= std::min<uint64_t>(L, uint64_t((double)N\
-    \ / p) / 2); m + 1 < n;) {\n   for (b*= M - m, b/= ++m, tmp= b * pw[n - 1 - m];\
-    \ l; C[l--]+= Z[l] * tmp) {\n    for (i= j= std::sqrt(e= (double)N / l); i >=\
-    \ p; --i) Z[l]+= y[i] * A((double)e / i);\n    for (i= std::min(j, e / p); i >=\
-    \ 2; --i) Z[l]+= x[i] * B((double)e / i);\n    if (j >= p) Z[l]-= A(j) * B(j);\n\
-    \   }\n   for (i= K; i >= p; --i)\n    for (l= K / i; l >= 2; l--) z[i * l]+=\
-    \ y[i] * x[l];\n   for (i= p= 1 << m; i <= K; ++i) c[i]+= z[i] * tmp;\n   if (m\
-    \ + 1 == n) break;\n   if (l= std::min<uint64_t>(L, uint64_t((double)N / p) /\
-    \ 2), y.swap(z), Y.swap(Z), std::fill_n(Z.begin() + 1, l, 0); p * 2 <= K) std::fill(z.begin()\
-    \ + p * 2, z.end(), 0);\n   if (p <= K)\n    for (Bs[p]= y[p], i= p + 1; i <=\
-    \ K; ++i) Bs[i]= Bs[i - 1] + y[i];\n  }\n  for (size_t i= 1; i <= K; ++i) Cs[i]=\
-    \ Cs[i - 1] + c[i];\n  return Self(N, c, Cs, C);\n }\n inline T sum() const {\
-    \ return Xl[1]; }\n inline T sum(uint64_t n) const { return n <= K ? Xs[n] : Xl[(double)N\
-    \ / n]; }\n};\ntemplate <class T>  // 1, zeta(s), O(N)\nDirichletSeries<T> get_1(uint64_t\
-    \ N) {\n DirichletSeries<T> ret(N);\n for (size_t i= ret.Xl.size(); --i;) ret.Xl[i]=\
+    \  for (m= 1; m < n; ++m) pw[m]= pw[m - 1] * x[1];\n  std::vector<T> Al(Xl), z(K\
+    \ + 1, 0), Z(L + 1, 0), As(Xs);\n  for (i= K; i; --i) As[i]-= x[1];\n  for (i=\
+    \ L; i; --i) Al[i]-= x[1];\n  auto A= [&](uint64_t n) { return n <= K ? As[n]\
+    \ : Al[(double)N / n]; };\n  std::vector<T> y(x), Y(Al), Bs(As), c(y), Cs(K +\
+    \ 1), C(Y);\n  auto B= [&](uint64_t n) { return n <= K ? Bs[n] : Y[(double)N /\
+    \ n]; };\n  for (tmp= pw[n - 2] * M, l= L; l; l--) C[l]*= tmp;\n  for (i= 2; i\
+    \ <= K; ++i) c[i]*= tmp;\n  for (c[1]= pw[n - 1], l= L; l; l--) C[l]+= c[1];\n\
+    \  for (m= 1, b= M, l= std::min<uint64_t>(L, uint64_t((double)N / p) / 2); m +\
+    \ 1 < n;) {\n   for (b*= M - m, b/= ++m, tmp= b * pw[n - 1 - m]; l; C[l--]+= Z[l]\
+    \ * tmp) {\n    for (i= j= std::sqrt(e= (double)N / l); i >= p; --i) Z[l]+= y[i]\
+    \ * A((double)e / i);\n    for (i= std::min(j, e / p); i >= 2; --i) Z[l]+= x[i]\
+    \ * B((double)e / i);\n    if (j >= p) Z[l]-= A(j) * B(j);\n   }\n   for (i= K;\
+    \ i >= p; --i)\n    for (l= K / i; l >= 2; l--) z[i * l]+= y[i] * x[l];\n   for\
+    \ (i= p= 1 << m; i <= K; ++i) c[i]+= z[i] * tmp;\n   if (m + 1 == n) break;\n\
+    \   if (l= std::min<uint64_t>(L, uint64_t((double)N / p) / 2), y.swap(z), Y.swap(Z),\
+    \ std::fill_n(Z.begin() + 1, l, 0); p * 2 <= K) std::fill(z.begin() + p * 2, z.end(),\
+    \ 0);\n   if (p <= K)\n    for (Bs[p]= y[p], i= p + 1; i <= K; ++i) Bs[i]= Bs[i\
+    \ - 1] + y[i];\n  }\n  for (size_t i= 1; i <= K; ++i) Cs[i]= Cs[i - 1] + c[i];\n\
+    \  return Self(N, c, Cs, C);\n }\n inline T sum() const { return Xl[1]; }\n inline\
+    \ T sum(uint64_t n) const { return n <= K ? Xs[n] : Xl[(double)N / n]; }\n};\n\
+    template <class T>  // 1, zeta(s), O(N)\nDirichletSeries<T> get_1(uint64_t N)\
+    \ {\n DirichletSeries<T> ret(N);\n for (size_t i= ret.Xl.size(); --i;) ret.Xl[i]=\
     \ uint64_t((double)N / i);\n return std::fill(ret.x.begin() + 1, ret.x.end(),\
     \ T(1)), std::iota(ret.Xs.begin(), ret.Xs.end(), 0), ret;\n}\n// M\xF6bius, 1/zeta(s),\
     \ O(N^(2/3)log^(1/3)N))\ntemplate <class T> DirichletSeries<T> get_mu(uint64_t\
@@ -146,7 +147,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc179_c.Dirichlet.test.cpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
+  timestamp: '2023-05-16 15:13:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.Dirichlet.test.cpp

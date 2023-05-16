@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/multiplicative_and_additive.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/prime_count.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_c
@@ -96,13 +96,13 @@ data:
     \ poly() { return {0, 1}; }\n};\n}  // namespace additive_functions\n#line 6 \"\
     test/atcoder/abc179_c.mul_sum.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace multiplicative_functions;\n\
-    \ long long N;\n cin >> N;\n cout << multiplicative_sum<long long>(N, Divisor<long\
+    \ long long N;\n cin >> N;\n cout << multiplicative_sum<long long>(N - 1, Divisor<long\
     \ long, 0>::f, Divisor<long long, 0>::poly()) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n//\
     \ O(N^(2/3)log^(1/3)N))\n#include <iostream>\n#include \"src/Math/prime_count.hpp\"\
     \n#include \"src/Math/multiplicative_and_additive.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace multiplicative_functions;\n\
-    \ long long N;\n cin >> N;\n cout << multiplicative_sum<long long>(N, Divisor<long\
+    \ long long N;\n cin >> N;\n cout << multiplicative_sum<long long>(N - 1, Divisor<long\
     \ long, 0>::f, Divisor<long long, 0>::poly()) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/prime_count.hpp
@@ -110,8 +110,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc179_c.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-05-14 19:41:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-05-16 15:13:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.mul_sum.test.cpp
 layout: document
