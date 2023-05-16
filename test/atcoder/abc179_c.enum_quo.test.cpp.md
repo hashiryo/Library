@@ -6,9 +6,9 @@ data:
     title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_c
@@ -38,7 +38,7 @@ data:
   path: test/atcoder/abc179_c.enum_quo.test.cpp
   requiredBy: []
   timestamp: '2023-05-13 17:48:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.enum_quo.test.cpp
 layout: document

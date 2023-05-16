@@ -20,7 +20,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'

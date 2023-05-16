@@ -3,10 +3,10 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.enum_quo.test.cpp
     title: test/atcoder/abc172_d.enum_quo.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.enum_quo.test.cpp
     title: test/atcoder/abc179_c.enum_quo.test.cpp
   - icon: ':x:'
