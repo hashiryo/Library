@@ -117,23 +117,35 @@ data:
     \ ed= std::min<std::uint64_t>(n, k);\n  for (; i <= ed; i++) F[i]= F[i - 1] *\
     \ (k - i + 1);\n  for (auto e= k - --i; e; e>>= 1, bs*= bs)\n   if (e & 1) pw*=\
     \ bs;\n  for (; i >= 0; --i, pw*= f[0]) F[i]*= pw;\n  return f[0]= 0, composite(f,\
-    \ F);\n }\n // g(f), g is polynomial\n template <class T> static inline std::vector<T>\
-    \ polynomial_composite(std::vector<T> f, std::vector<T> g) {\n  const int sz=\
+    \ F);\n }\n // P(f), P is polynomial\n template <class T> static inline std::vector<T>\
+    \ polynomial_composite(std::vector<T> f, std::vector<T> P) {\n  const int sz=\
     \ f.size(), n= __builtin_ctz(sz);\n  assert(sz == 1 << n);\n  T F[MAX_N + 1]=\
-    \ {};\n  int e= g.size();\n  if (!e) return std::vector<T>(sz);\n  for (int j=\
-    \ 0;; ++j, --e) {\n   for (int i= e; i--;) (F[j]*= f[0])+= g[i];\n   if (j ==\
-    \ n || e == 1) break;\n   for (int i= 1; i < e; ++i) g[i - 1]= g[i] * i;\n  }\n\
-    \  return f[0]= 0, composite(f, F);\n }\n // {[X^{[n]}](f^k)/(k!)} for k=0,1,...,n\n\
+    \ {};\n  int e= P.size();\n  if (!e) return std::vector<T>(sz);\n  for (int j=\
+    \ 0;; ++j, --e) {\n   for (int i= e; i--;) (F[j]*= f[0])+= P[i];\n   if (j ==\
+    \ n || e == 1) break;\n   for (int i= 1; i < e; ++i) P[i - 1]= P[i] * i;\n  }\n\
+    \  return f[0]= 0, composite(f, F);\n }\n // {[X^{[n]}]f^k/k!} for k=0,1,...,n\n\
     \ template <class T>  // O(n^2 2^n)\n static inline std::vector<T> egf(std::vector<T>\
-    \ f) {\n  const int sz= f.size(), n= __builtin_ctz(sz), md= 1 << 11, sz4= sz >>\
-    \ 2;\n  assert(sz == 1 << n);\n  if (n == 1) return {0, f[1]};\n  int l= sz4,\
-    \ m;\n  T *in= f.data() + l, *dp= in + l, tmp[sz4], *dp2;\n  for (int s; l > md;\
-    \ conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (s= l, m= sz4; dp2= dp + (m -\
-    \ l), m > l; m>>= 1, s= l)\n    for (conv_tr(dp2 + m - l, in, tmp, l); s--;) dp2[s]+=\
-    \ tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n   for (s=\
-    \ l, m= sz4; dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for (conv_na(dp2 + m\
-    \ - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n\
+    \ f) {\n  static constexpr int M= 1 << 11;\n  const int sz= f.size(), n= __builtin_ctz(sz),\
+    \ sz4= sz >> 2;\n  assert(sz == 1 << n);\n  if (n == 1) return {0, f[1]};\n  int\
+    \ l= sz4, m;\n  T *in= f.data() + l, *dp= in + l, tmp[sz4], *dp2;\n  for (int\
+    \ s; l > M; conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (m= sz4; dp2= dp +\
+    \ (m - l), m > l; m>>= 1)\n    for (s= l, conv_tr(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s]+= tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n\
+    \   for (m= sz4; dp2= dp + (m - l), m > l; m>>= 1)\n    for (s= l, conv_na(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n\
     \  for (int i= n + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n\
+    \ // {[X^{[n]}]g*f^k/k!} for k=0,1,...,n\n template <class T>  // O(n^2 2^n)\n\
+    \ static inline std::vector<T> egf(const std::vector<T> &f, std::vector<T> g)\
+    \ {\n  static constexpr int M= 1 << 11;\n  const int sz= f.size(), n= __builtin_ctz(sz),\
+    \ sz2= sz >> 1, sz4= sz >> 2;\n  assert(sz == 1 << n), assert(sz == (int)g.size());\n\
+    \  if (n == 1) return {g[1], f[1] * g[0] + f[0] * g[1]};\n  int l= sz2, m;\n \
+    \ const T *in= f.data() + sz2;\n  T *dp= g.data(), tmp[sz2], *dp2;\n  for (int\
+    \ s; l > M; conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (m= sz2; dp2= dp +\
+    \ (m - l), m > l; m>>= 1)\n    for (s= l, conv_tr(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s]+= tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n\
+    \   for (m= sz2; dp2= dp + (m - l), m > l; m>>= 1)\n    for (s= l, conv_na(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1);\n\
+    \  for (int i= n + 1; i--;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n\
     #undef SUBSET_REP\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <vector>\n#include <cassert>\n\
     template <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i,\
@@ -219,30 +231,42 @@ data:
     \ ed= std::min<std::uint64_t>(n, k);\n  for (; i <= ed; i++) F[i]= F[i - 1] *\
     \ (k - i + 1);\n  for (auto e= k - --i; e; e>>= 1, bs*= bs)\n   if (e & 1) pw*=\
     \ bs;\n  for (; i >= 0; --i, pw*= f[0]) F[i]*= pw;\n  return f[0]= 0, composite(f,\
-    \ F);\n }\n // g(f), g is polynomial\n template <class T> static inline std::vector<T>\
-    \ polynomial_composite(std::vector<T> f, std::vector<T> g) {\n  const int sz=\
+    \ F);\n }\n // P(f), P is polynomial\n template <class T> static inline std::vector<T>\
+    \ polynomial_composite(std::vector<T> f, std::vector<T> P) {\n  const int sz=\
     \ f.size(), n= __builtin_ctz(sz);\n  assert(sz == 1 << n);\n  T F[MAX_N + 1]=\
-    \ {};\n  int e= g.size();\n  if (!e) return std::vector<T>(sz);\n  for (int j=\
-    \ 0;; ++j, --e) {\n   for (int i= e; i--;) (F[j]*= f[0])+= g[i];\n   if (j ==\
-    \ n || e == 1) break;\n   for (int i= 1; i < e; ++i) g[i - 1]= g[i] * i;\n  }\n\
-    \  return f[0]= 0, composite(f, F);\n }\n // {[X^{[n]}](f^k)/(k!)} for k=0,1,...,n\n\
+    \ {};\n  int e= P.size();\n  if (!e) return std::vector<T>(sz);\n  for (int j=\
+    \ 0;; ++j, --e) {\n   for (int i= e; i--;) (F[j]*= f[0])+= P[i];\n   if (j ==\
+    \ n || e == 1) break;\n   for (int i= 1; i < e; ++i) P[i - 1]= P[i] * i;\n  }\n\
+    \  return f[0]= 0, composite(f, F);\n }\n // {[X^{[n]}]f^k/k!} for k=0,1,...,n\n\
     \ template <class T>  // O(n^2 2^n)\n static inline std::vector<T> egf(std::vector<T>\
-    \ f) {\n  const int sz= f.size(), n= __builtin_ctz(sz), md= 1 << 11, sz4= sz >>\
-    \ 2;\n  assert(sz == 1 << n);\n  if (n == 1) return {0, f[1]};\n  int l= sz4,\
-    \ m;\n  T *in= f.data() + l, *dp= in + l, tmp[sz4], *dp2;\n  for (int s; l > md;\
-    \ conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (s= l, m= sz4; dp2= dp + (m -\
-    \ l), m > l; m>>= 1, s= l)\n    for (conv_tr(dp2 + m - l, in, tmp, l); s--;) dp2[s]+=\
-    \ tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n   for (s=\
-    \ l, m= sz4; dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for (conv_na(dp2 + m\
-    \ - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n\
+    \ f) {\n  static constexpr int M= 1 << 11;\n  const int sz= f.size(), n= __builtin_ctz(sz),\
+    \ sz4= sz >> 2;\n  assert(sz == 1 << n);\n  if (n == 1) return {0, f[1]};\n  int\
+    \ l= sz4, m;\n  T *in= f.data() + l, *dp= in + l, tmp[sz4], *dp2;\n  for (int\
+    \ s; l > M; conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (m= sz4; dp2= dp +\
+    \ (m - l), m > l; m>>= 1)\n    for (s= l, conv_tr(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s]+= tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n\
+    \   for (m= sz4; dp2= dp + (m - l), m > l; m>>= 1)\n    for (s= l, conv_na(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n\
     \  for (int i= n + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n\
+    \ // {[X^{[n]}]g*f^k/k!} for k=0,1,...,n\n template <class T>  // O(n^2 2^n)\n\
+    \ static inline std::vector<T> egf(const std::vector<T> &f, std::vector<T> g)\
+    \ {\n  static constexpr int M= 1 << 11;\n  const int sz= f.size(), n= __builtin_ctz(sz),\
+    \ sz2= sz >> 1, sz4= sz >> 2;\n  assert(sz == 1 << n), assert(sz == (int)g.size());\n\
+    \  if (n == 1) return {g[1], f[1] * g[0] + f[0] * g[1]};\n  int l= sz2, m;\n \
+    \ const T *in= f.data() + sz2;\n  T *dp= g.data(), tmp[sz2], *dp2;\n  for (int\
+    \ s; l > M; conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (m= sz2; dp2= dp +\
+    \ (m - l), m > l; m>>= 1)\n    for (s= l, conv_tr(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s]+= tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n\
+    \   for (m= sz2; dp2= dp + (m - l), m > l; m>>= 1)\n    for (s= l, conv_na(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1);\n\
+    \  for (int i= n + 1; i--;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n\
     #undef SUBSET_REP\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/SetPowerSeries.hpp
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
-  timestamp: '2023-05-01 03:16:08+09:00'
+  timestamp: '2023-05-17 15:52:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
@@ -257,30 +281,40 @@ layout: document
 title: "\u96C6\u5408\u51AA\u7D1A\u6570"
 ---
 
-実装上は $S,T \in 2^{\lbrace0,1,\dots,n-1\rbrace}$ を ２進数表記の非負整数で表現する.
-
+集合 $S,T \in 2^{\lbrace0,1,\dots,n-1\rbrace}$ を ２進数表記の非負整数で表現する.\
+集合冪級数 $f,g,h$ を 
+\\[
+\begin{aligned}
+f(X) = \sum_{S=0}^{2^n-1}f_SX^S, &&g(X) = \sum_{S=0}^{2^n-1}g_SX^S, &&h(X) = \sum_{S=0}^{2^n-1}h_SX^S
+\end{aligned}
+\\]
+とする.\
+環で定義されるので乗法の逆元は必要としない.
 ## static メンバ関数
 
 
-| 名前                                  | 概要                                                                                                                                                                                                                                                                                                                                     | 計算量                   |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `subset_sum(f)`                       | $g_S = \sum_{T \subseteq S} f_T$ となる $g$ を返す.                                                                                                                                                                                                                                                                                      | $\mathcal{O}(n2^n)$      |
-| `subset_sum_inv(f)`                   | $f_S = \sum_{T \subseteq S} g_T$ となる $g$ を返す.                                                                                                                                                                                                                                                                                      | $\mathcal{O}(n2^n)$      |
-| `convolve(f,g)`                       | $h = fg$ つまり $h_S = \sum_{T \subseteq S} f_Tg_{S\backslash T}$ となる $h$ を返す.                                                                                                                                                                                                                                                     | $\mathcal{O}(n^22^n)$    |
-| `semi_relaxed_convolve(g, init, phi)` | \\[ \begin{cases} f_{\varnothing} = \text{init}& \\\\ f_S = \phi_S\left(\sum_{T \subsetneq S} f_Tg_{S\backslash T}\right) & S \neq \varnothing \end{cases}\\] となる $f$ を返す. <br> 実際は $\phi_S$ は `phi(int,T&)` で参照渡しの関数を与える.                                                                                         | $\mathcal{O}(n^22^n)$    |
-| `self_relaxed_convolve<T>(n, phi)`    | \\[\begin{cases} f_{\varnothing} = 0 & \\\\ f_S = \phi_S\left(\frac{1}{2}\sum_{\varnothing \neq T \subsetneq S}  f_Tf_{S\backslash T}\right) & S \neq \varnothing \end{cases}\\] となる $f$ を返す. <br> 実際は $\phi_S$ は `phi(int,T&)` で参照渡しの関数を与える.　<br>                                                                | $\mathcal{O}(n^22^n)$    |
-| `composite(f,F)`                      | \\[ F(f) = \sum_{i=0}^{\infty} \frac{F_i}{i!} f^i \\] を返す. <br> 逆元のない型でもOK <br> $f_{\varnothing}=0$ でないと assert で死ぬ.                                                                                                                                                                                                   | $\mathcal{O}(n^22^n)$    |
-| `exp(f)`                              | \\[ \exp(f) =  \sum_{i=0}^{\infty} \frac{1}{i!} f^i \\] を返す. <br> あるいは言い換えると $g_{\varnothing}=1 $ かつ $\mathfrak{D}g = (\mathfrak{D}f) g$ つまり $ \vert S\vert g_S=\sum_{T\subseteq S} \vert T \vert f_Tg_{S\backslash T} $ を満たす $g$ を返す. <br> 逆元のない型でもOK <br> $f_{\varnothing}=0$ でないと assert で死ぬ. | $\mathcal{O}(n^22^n)$    |
-| `log(f)`                              | $ \log f $ を返す.  <br> あるいは言い換えると $g_{\varnothing}=0$ かつ $\mathfrak{D}f = (\mathfrak{D}g) f$ つまり$ \vert S\vert f_S=\sum_{T\subseteq S} \vert T \vert g_Tf_{S\backslash T} $ を満たす $g$ を返す.<br> 逆元のない型でもOK <br> $f_{\varnothing}=1$ でないと assert で死ぬ.                                                | $\mathcal{O}(n^22^n)$    |
-| `pow(f,k)`                            | $f^k$ を返す.                                                                                                                                                                                                                                                                                                                            | $\mathcal{O}(n^22^n)$    |
-| `polynomial_composite(f,g)`           | \\[ g(x) = \sum_{i=0}^{m-1}g_ix^i \\] <br> に対して $g(f)$ を返す.                                                                                                                                                                                                                                                                       | $\mathcal{O}(n^22^n+nm)$ |
-| `egf(f)`                              | $k=0,1,\dots,n$ について \\[ \left(\frac{1}{k!}f^k\right)_{\lbrace 0,1,\dots,n \rbrace} \\] を返す. <br>逆元のない型でもOK                                                                                                                                                                                                               | $\mathcal{O}(n^22^n)$    |
+| 名前                                  | 概要                                                                                                                                                                                                                                                                                                             | 計算量                   |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `subset_sum(f)`                       | $g_S = \sum_{T \subseteq S} f_T$ となる $g$ を返す.                                                                                                                                                                                                                                                              | $\mathcal{O}(n2^n)$      |
+| `subset_sum_inv(f)`                   | $f_S = \sum_{T \subseteq S} g_T$ となる $g$ を返す.                                                                                                                                                                                                                                                              | $\mathcal{O}(n2^n)$      |
+| `convolve(f,g)`                       | $h = fg$ つまり $h_S = \sum_{T \subseteq S} f_Tg_{S\backslash T}$ となる $h$ を返す.                                                                                                                                                                                                                             | $\mathcal{O}(n^22^n)$    |
+| `semi_relaxed_convolve(g, init, phi)` | \\[ \begin{cases} f_{\varnothing} = \text{init}& \\\\ f_S = \phi_S\left(\sum_{T \subsetneq S} f_Tg_{S\backslash T}\right) & S \neq \varnothing \end{cases}\\] となる $f$ を返す. <br> 実際は $\phi_S$ は `phi(int,T&)` で参照渡しの関数を与える.                                                                 | $\mathcal{O}(n^22^n)$    |
+| `self_relaxed_convolve<T>(n, phi)`    | \\[\begin{cases} f_{\varnothing} = 0 & \\\\ f_S = \phi_S\left(\frac{1}{2}\sum_{\varnothing \neq T \subsetneq S}  f_Tf_{S\backslash T}\right) & S \neq \varnothing \end{cases}\\] となる $f$ を返す. <br> 実際は $\phi_S$ は `phi(int,T&)` で参照渡しの関数を与える.　<br>                                        | $\mathcal{O}(n^22^n)$    |
+| `composite(f,F)`                      | \\[ F(f) = \sum_{i=0}^{\infty} \frac{F_i}{i!} f^i \\] を返す. <br> $f_{\varnothing}=0$ でないと assert で死ぬ.                                                                                                                                                                                                   | $\mathcal{O}(n^22^n)$    |
+| `exp(f)`                              | \\[ \exp(f) =  \sum_{i=0}^{\infty} \frac{1}{i!} f^i \\] を返す. <br> あるいは言い換えると $g_{\varnothing}=1 $ かつ $\mathfrak{D}g = (\mathfrak{D}f) g$ つまり $ \vert S\vert g_S=\sum_{T\subseteq S} \vert T \vert f_Tg_{S\backslash T} $ を満たす $g$ を返す. <br> $f_{\varnothing}=0$ でないと assert で死ぬ. | $\mathcal{O}(n^22^n)$    |
+| `log(f)`                              | $ \log f $ を返す.  <br> あるいは言い換えると $g_{\varnothing}=0$ かつ $\mathfrak{D}f = (\mathfrak{D}g) f$ つまり$ \vert S\vert f_S=\sum_{T\subseteq S} \vert T \vert g_Tf_{S\backslash T} $ を満たす $g$ を返す. <br> $f_{\varnothing}=1$ でないと assert で死ぬ.                                               | $\mathcal{O}(n^22^n)$    |
+| `pow(f,k)`                            | $f^k$ を返す.                                                                                                                                                                                                                                                                                                    | $\mathcal{O}(n^22^n)$    |
+| `polynomial_composite(f,P)`           | 多項式 \\[ P(x) = \sum_{i=0}^{m-1}P_ix^i \\] に対して $P(f)$ を返す.                                                                                                                                                                                                                                             | $\mathcal{O}(n^22^n+nm)$ |
+| `egf(f)`                              | $k=0,1,\dots,n$ について \\[\left\lbrack X^{2^n-1}\right\rbrack\frac{1}{k!}f^k\\] を返す.                                                                                                                                                                                                                        | $\mathcal{O}(n^22^n)$    |
+| `egf(f,g)`                            | $k=0,1,\dots,n$ について \\[\left\lbrack X^{2^n-1}\right\rbrack\frac{1}{k!}gf^k\\] を返す.                                                                                                                                                                                                                       | $\mathcal{O}(n^22^n)$    |
 
 ## 参考
 [https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex](https://github.com/EntropyIncreaser/ioi2021-homework/blob/master/thesis/main.tex) \
 [https://notes.sshwy.name/Math/Subset-Power-Series](https://notes.sshwy.name/Math/Subset-Power-Series)
+[https://maspypy.com/category/集合べき級数](https://maspypy.com/category/%e9%9b%86%e5%90%88%e3%81%b9%e3%81%8d%e7%b4%9a%e6%95%b0)
 ## 問題例
 [Xmas Contest 2020 H - Hierarchical Phylogeny](https://atcoder.jp/contests/xmascon20/tasks/xmascon20_h) (self relax or 合成 1-√(1-2f)) \
+[Xmas Contest 2022 F - Fast as Fast as Ryser](https://atcoder.jp/contests/xmascon22/tasks/xmascon22_f) (exp, egf)\
 [AtCoder Beginner Contest 253 Ex - We Love Forest](https://atcoder.jp/contests/abc253/tasks/abc253_h) (egf)\
 [AtCoder Beginner Contest 236 Ex - Distinct Multiples](https://atcoder.jp/contests/abc236/tasks/abc236_h) (exp) \
 [LibraOJ #2340. 「WC2018」州区划分](https://loj.ac/p/2340) (semi relax)

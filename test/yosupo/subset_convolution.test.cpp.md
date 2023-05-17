@@ -192,23 +192,35 @@ data:
     \ ed= std::min<std::uint64_t>(n, k);\n  for (; i <= ed; i++) F[i]= F[i - 1] *\
     \ (k - i + 1);\n  for (auto e= k - --i; e; e>>= 1, bs*= bs)\n   if (e & 1) pw*=\
     \ bs;\n  for (; i >= 0; --i, pw*= f[0]) F[i]*= pw;\n  return f[0]= 0, composite(f,\
-    \ F);\n }\n // g(f), g is polynomial\n template <class T> static inline std::vector<T>\
-    \ polynomial_composite(std::vector<T> f, std::vector<T> g) {\n  const int sz=\
+    \ F);\n }\n // P(f), P is polynomial\n template <class T> static inline std::vector<T>\
+    \ polynomial_composite(std::vector<T> f, std::vector<T> P) {\n  const int sz=\
     \ f.size(), n= __builtin_ctz(sz);\n  assert(sz == 1 << n);\n  T F[MAX_N + 1]=\
-    \ {};\n  int e= g.size();\n  if (!e) return std::vector<T>(sz);\n  for (int j=\
-    \ 0;; ++j, --e) {\n   for (int i= e; i--;) (F[j]*= f[0])+= g[i];\n   if (j ==\
-    \ n || e == 1) break;\n   for (int i= 1; i < e; ++i) g[i - 1]= g[i] * i;\n  }\n\
-    \  return f[0]= 0, composite(f, F);\n }\n // {[X^{[n]}](f^k)/(k!)} for k=0,1,...,n\n\
+    \ {};\n  int e= P.size();\n  if (!e) return std::vector<T>(sz);\n  for (int j=\
+    \ 0;; ++j, --e) {\n   for (int i= e; i--;) (F[j]*= f[0])+= P[i];\n   if (j ==\
+    \ n || e == 1) break;\n   for (int i= 1; i < e; ++i) P[i - 1]= P[i] * i;\n  }\n\
+    \  return f[0]= 0, composite(f, F);\n }\n // {[X^{[n]}]f^k/k!} for k=0,1,...,n\n\
     \ template <class T>  // O(n^2 2^n)\n static inline std::vector<T> egf(std::vector<T>\
-    \ f) {\n  const int sz= f.size(), n= __builtin_ctz(sz), md= 1 << 11, sz4= sz >>\
-    \ 2;\n  assert(sz == 1 << n);\n  if (n == 1) return {0, f[1]};\n  int l= sz4,\
-    \ m;\n  T *in= f.data() + l, *dp= in + l, tmp[sz4], *dp2;\n  for (int s; l > md;\
-    \ conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (s= l, m= sz4; dp2= dp + (m -\
-    \ l), m > l; m>>= 1, s= l)\n    for (conv_tr(dp2 + m - l, in, tmp, l); s--;) dp2[s]+=\
-    \ tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n   for (s=\
-    \ l, m= sz4; dp2= dp + (m - l), m > l; m>>= 1, s= l)\n    for (conv_na(dp2 + m\
-    \ - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n\
+    \ f) {\n  static constexpr int M= 1 << 11;\n  const int sz= f.size(), n= __builtin_ctz(sz),\
+    \ sz4= sz >> 2;\n  assert(sz == 1 << n);\n  if (n == 1) return {0, f[1]};\n  int\
+    \ l= sz4, m;\n  T *in= f.data() + l, *dp= in + l, tmp[sz4], *dp2;\n  for (int\
+    \ s; l > M; conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (m= sz4; dp2= dp +\
+    \ (m - l), m > l; m>>= 1)\n    for (s= l, conv_tr(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s]+= tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n\
+    \   for (m= sz4; dp2= dp + (m - l), m > l; m>>= 1)\n    for (s= l, conv_na(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1, 0);\n\
     \  for (int i= n + 1; --i;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n\
+    \ // {[X^{[n]}]g*f^k/k!} for k=0,1,...,n\n template <class T>  // O(n^2 2^n)\n\
+    \ static inline std::vector<T> egf(const std::vector<T> &f, std::vector<T> g)\
+    \ {\n  static constexpr int M= 1 << 11;\n  const int sz= f.size(), n= __builtin_ctz(sz),\
+    \ sz2= sz >> 1, sz4= sz >> 2;\n  assert(sz == 1 << n), assert(sz == (int)g.size());\n\
+    \  if (n == 1) return {g[1], f[1] * g[0] + f[0] * g[1]};\n  int l= sz2, m;\n \
+    \ const T *in= f.data() + sz2;\n  T *dp= g.data(), tmp[sz2], *dp2;\n  for (int\
+    \ s; l > M; conv_tr(dp, in, dp, l), in-= (l>>= 1))\n   for (m= sz2; dp2= dp +\
+    \ (m - l), m > l; m>>= 1)\n    for (s= l, conv_tr(dp2 + m - l, in, tmp, l); s--;)\
+    \ dp2[s]+= tmp[s];\n  for (int s; l; conv_na(dp, in, dp, l), in-= (l>>= 1))\n\
+    \   for (m= sz2; dp2= dp + (m - l), m > l; m>>= 1)\n    for (s= l, conv_na(dp2\
+    \ + m - l, in, tmp, l); s--;) dp2[s]+= tmp[s];\n  std::vector<T> ret(n + 1);\n\
+    \  for (int i= n + 1; i--;) ret[i]= dp[(1 << (n - i)) - 1];\n  return ret;\n }\n\
     #undef SUBSET_REP\n};\n#line 6 \"test/yosupo/subset_convolution.test.cpp\"\nusing\
     \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
     \ Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(1 << N), b(1\
@@ -231,7 +243,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-05-01 03:16:08+09:00'
+  timestamp: '2023-05-17 15:52:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/subset_convolution.test.cpp
