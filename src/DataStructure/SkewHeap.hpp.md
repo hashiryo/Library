@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -92,10 +92,10 @@ data:
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/directedmst.test.cpp
-  - test/aoj/2647.test.cpp
   - test/aoj/GRL_2_B.test.cpp
   - test/aoj/ALDS1_9_C.SkewHeap.test.cpp
+  - test/aoj/2647.test.cpp
+  - test/yosupo/directedmst.test.cpp
 documentation_of: src/DataStructure/SkewHeap.hpp
 layout: document
 title: Skew-Heap

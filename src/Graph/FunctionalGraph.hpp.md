@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,12 +27,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1242.test.cpp
     title: test/yukicoder/1242.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -153,15 +153,15 @@ data:
   path: src/Graph/FunctionalGraph.hpp
   requiredBy: []
   timestamp: '2023-04-23 14:23:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc136_d.test.cpp
+  - test/atcoder/abc241_e.test.cpp
   - test/yukicoder/1242.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1211.test.cpp
-  - test/atcoder/abc241_e.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc136_d.test.cpp
-  - test/atcoder/abc179_e.test.cpp
 documentation_of: src/Graph/FunctionalGraph.hpp
 layout: document
 title: "Functional\u30B0\u30E9\u30D5"

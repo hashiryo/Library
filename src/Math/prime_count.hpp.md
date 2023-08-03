@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/prime_count.hpp\"\n#include <vector>\n#include\
@@ -123,12 +123,12 @@ data:
   path: src/Math/prime_count.hpp
   requiredBy: []
   timestamp: '2023-05-14 19:41:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/yosupo/counting_primes.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/counting_primes.test.cpp
 documentation_of: src/Math/prime_count.hpp
 layout: document
 title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"

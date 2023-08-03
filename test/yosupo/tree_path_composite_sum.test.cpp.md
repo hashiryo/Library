@@ -1,29 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728\u30AF\u30E9\u30B9"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/Internal/modint_traits.hpp
+    title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_path_composite_sum
@@ -76,11 +79,12 @@ data:
     \ (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n};\ntemplate <class\
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
-    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"\
-    src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\nstruct\
-    \ m_b {};\nstruct s_b: m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b,\
-    \ mod_t>;\ntemplate <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b,\
-    \ mod_t>;\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
+    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
+    src/Internal/modint_traits.hpp\"\nnamespace math_internal {\nstruct m_b {};\n\
+    struct s_b: m_b {};\n}\ntemplate <class mod_t> constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b,\
+    \ mod_t>;\ntemplate <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
+    \ mod_t>;\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define\
+    \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
@@ -109,33 +113,33 @@ data:
     \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
     \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt, math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, size_t LM> mod_t get_inv(int\
-    \ n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m= mod_t::mod();\n\
-    \ static mod_t dat[LM];\n static int l= 1;\n if (l == 1) dat[l++]= 1;\n while\
-    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n#line 3 \"\
-    src/Graph/Tree.hpp\"\n#include <cstddef>\n#include <algorithm>\n#include <array>\n\
-    #include <tuple>\n#include <numeric>\n#line 3 \"src/DataStructure/CsrArray.hpp\"\
-    \n#include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator=\
-    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
-    \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T> csr;\n std::vector<int>\
-    \ pos;\npublic:\n CsrArray()= default;\n CsrArray(const std::vector<T> &c, const\
-    \ std::vector<int> &p): csr(c), pos(p) {}\n size_t size() const { return pos.size()\
-    \ - 1; }\n const ListRange<T> operator[](int i) const { return {csr.cbegin() +\
-    \ pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 10 \"src/Graph/Tree.hpp\"\n\
-    template <class Cost= void> class Tree {\n template <class D, class T> struct\
-    \ Edge_B {\n  int to;\n  T cost;\n  operator int() const { return to; }\n };\n\
-    \ template <class D> struct Edge_B<D, void> {\n  int to;\n  operator int() const\
-    \ { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n std::vector<std::conditional_t<std::is_same_v<Cost,\
-    \ void>, std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge>\
-    \ g;\n std::vector<int> P, PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2)\
-    \ {}\n template <class T= Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t>\
-    \ = nullptr> void add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v,\
-    \ u); }\n template <class T, std::enable_if_t<std::is_convertible_v<T, Cost>,\
-    \ std::nullptr_t> = nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u,\
-    \ v, c), es.emplace_back(v, u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
+    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/Graph/Tree.hpp\"\n#include <cstddef>\n#include\
+    \ <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n#line 3\
+    \ \"src/DataStructure/CsrArray.hpp\"\n#include <iterator>\ntemplate <class T>\
+    \ struct ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray\
+    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
+    \ {}\n size_t size() const { return pos.size() - 1; }\n const ListRange<T> operator[](int\
+    \ i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n\
+    #line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void> class Tree {\n template\
+    \ <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const\
+    \ { return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
+    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
+    \ std::vector<std::conditional_t<std::is_same_v<Cost, void>, std::pair<int, int>,\
+    \ std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int> P,\
+    \ PP, D, I, L, R, pos;\npublic:\n Tree(int n): P(n, -2) {}\n template <class T=\
+    \ Cost, std::enable_if_t<std::is_same_v<T, void>, std::nullptr_t> = nullptr> void\
+    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
+    \ <class T, std::enable_if_t<std::is_convertible_v<T, Cost>, std::nullptr_t> =\
+    \ nullptr> void add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v,\
+    \ u, c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -231,14 +235,15 @@ data:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
+  - src/Internal/modint_traits.hpp
   - src/Graph/Tree.hpp
   - src/DataStructure/CsrArray.hpp
   - src/Graph/rerooting.hpp
   isVerificationFile: true
   path: test/yosupo/tree_path_composite_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-08-03 16:16:01+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tree_path_composite_sum.test.cpp
 layout: document

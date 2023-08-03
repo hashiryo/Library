@@ -1,33 +1,33 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/261.test.cpp
     title: test/yukicoder/261.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/DiscreteLogarithm.hpp\"\n#include <cmath>\n#include\
@@ -92,14 +92,14 @@ data:
   path: src/Math/DiscreteLogarithm.hpp
   requiredBy: []
   timestamp: '2023-04-02 00:58:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/261.test.cpp
+  - test/atcoder/abc222_g.test.cpp
+  - test/atcoder/abc270_g.test.cpp
   - test/yukicoder/1339.test.cpp
+  - test/yukicoder/261.test.cpp
   - test/yukicoder/950.test.cpp
   - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/atcoder/abc270_g.test.cpp
-  - test/atcoder/abc222_g.test.cpp
 documentation_of: src/Math/DiscreteLogarithm.hpp
 layout: document
 title: "\u96E2\u6563\u5BFE\u6570"

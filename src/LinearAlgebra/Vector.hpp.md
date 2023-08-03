@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/LU_Decomposition.hpp
     title: "LU\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/SparseMatrix.hpp
     title: "\u758E\u884C\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
   _extendedVerifiedWith:
@@ -39,51 +39,51 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_product.test.cpp
     title: test/yosupo/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace\
@@ -139,35 +139,35 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/Vector.hpp
   requiredBy:
-  - src/LinearAlgebra/SparseMatrix.hpp
-  - src/LinearAlgebra/characteristic_polynomial.hpp
-  - src/LinearAlgebra/LU_Decomposition.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
+  - src/LinearAlgebra/SparseMatrix.hpp
+  - src/LinearAlgebra/LU_Decomposition.hpp
+  - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/Matrix.hpp
   timestamp: '2023-03-12 23:00:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1340.test.cpp
-  - test/yukicoder/650.LCT.test.cpp
-  - test/yukicoder/1750.SparseMat.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
-  - test/yukicoder/803.test.cpp
-  - test/yukicoder/1750.test.cpp
-  - test/yukicoder/184.test.cpp
-  - test/yukicoder/950.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
-  - test/yosupo/linear_equations.test.cpp
-  - test/yosupo/inverse_matrix.test.cpp
-  - test/yosupo/matrix_product.test.cpp
-  - test/yosupo/characteristic_polynomial.test.cpp
-  - test/yosupo/matrix_det.test.cpp
-  - test/aoj/2530.test.cpp
-  - test/aoj/2397.SparseMat.test.cpp
-  - test/aoj/1328.test.cpp
+  - test/atcoder/abc236_g.test.cpp
   - test/aoj/2624.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
   - test/aoj/2397.test.cpp
-  - test/atcoder/abc236_g.test.cpp
+  - test/aoj/2530.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
+  - test/aoj/1328.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
+  - test/yukicoder/184.test.cpp
+  - test/yukicoder/803.test.cpp
+  - test/yukicoder/1750.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yukicoder/1750.SparseMat.test.cpp
+  - test/yukicoder/1340.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yosupo/matrix_product.test.cpp
+  - test/yosupo/characteristic_polynomial.test.cpp
+  - test/yosupo/linear_equations.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/yosupo/matrix_det.test.cpp
+  - test/yosupo/inverse_matrix.test.cpp
 documentation_of: src/LinearAlgebra/Vector.hpp
 layout: document
 title: "\u30D9\u30AF\u30C8\u30EB"

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\n#include\
@@ -111,31 +111,31 @@ data:
     \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 5\
     \ \"src/LinearAlgebra/characteristic_polynomial.hpp\"\ntemplate <class K> Matrix<K>\
     \ hessenberg(const Matrix<K> &A) {\n size_t n= A.width();\n assert(n == A.height());\n\
-    \ auto ret= A;\n for (size_t j= 0, i; j + 2 < n; ++j) {\n  for (i= j + 1; i <\
-    \ n; ++i)\n   if (ret[i][j] != K()) {\n    for (size_t r= n; r--;) std::swap(ret[j\
-    \ + 1][r], ret[i][r]);\n    for (size_t r= n; r--;) std::swap(ret[r][j + 1], ret[r][i]);\n\
-    \    break;\n   }\n  if (K iv; ret[j + 1][j] != K())\n   for (iv= K(1) / ret[j\
-    \ + 1][j], i= j + 2; i < n; ++i) {\n    K m= ret[i][j] * iv;\n    for (size_t\
-    \ c= j; c < n; ++c) ret[i][c]-= m * ret[j + 1][c];\n    for (size_t r= n; r--;)\
-    \ ret[r][j + 1]+= m * ret[r][i];\n   }\n }\n return ret;\n}\ntemplate <class K>\
-    \ std::vector<K> characteristic_polynomial(const Matrix<K> &A) {\n size_t n= A.width();\n\
-    \ assert(n == A.height());\n auto b= hessenberg(A);\n std::vector<K> fss((n +\
-    \ 1) * (n + 2) / 2);\n K *pr= fss.data(), *nx= pr, prod, tmp, s;\n fss[0]= 1;\n\
-    \ for (size_t i= 0; i < n; ++i, pr= nx) {\n  prod= 1, tmp= -b[i][i], nx= pr +\
-    \ i + 1, std::copy_n(pr, i + 1, nx + 1);\n  for (size_t k= 0; k <= i; ++k) nx[k]+=\
-    \ tmp * pr[k];\n  for (size_t j= i, k; j--;)\n   for (pr-= j + 1, s= (prod*= b[j\
-    \ + 1][j]) * -b[j][i], k= 0; k <= j; ++k) nx[k]+= s * pr[k];\n }\n return std::vector<K>(fss.begin()\
+    \ auto ret= A;\n for (size_t j= 0, i, r; j + 2 < n; ++j) {\n  if (ret[j + 1][j]\
+    \ == K())\n   for (i= j + 2; i < n; ++i)\n    if (ret[i][j] != K()) {\n     for\
+    \ (r= 0; r < n; ++r) std::swap(ret[j + 1][r], ret[i][r]);\n     for (; r--;) std::swap(ret[r][j\
+    \ + 1], ret[r][i]);\n     break;\n    }\n  if (K iv; ret[j + 1][j] != K())\n \
+    \  for (iv= K(1) / ret[j + 1][j], i= j + 2; i < n; ++i) {\n    for (K m= ret[i][r=\
+    \ j] * iv; r < n; ++r) ret[i][r]-= m * ret[j + 1][r];\n    for (; r--;) ret[r][j\
+    \ + 1]+= m * ret[r][i];\n   }\n }\n return ret;\n}\ntemplate <class K> std::vector<K>\
+    \ characteristic_polynomial(const Matrix<K> &A) {\n size_t n= A.width();\n assert(n\
+    \ == A.height());\n auto b= hessenberg(A);\n std::vector<K> fss((n + 1) * (n +\
+    \ 2) / 2);\n K *pr= fss.data(), *nx= pr, prod, tmp, s;\n fss[0]= 1;\n for (size_t\
+    \ i= 0; i < n; ++i, pr= nx) {\n  prod= 1, tmp= -b[i][i], nx= pr + i + 1, std::copy_n(pr,\
+    \ i + 1, nx + 1);\n  for (size_t k= 0; k <= i; ++k) nx[k]+= tmp * pr[k];\n  for\
+    \ (size_t j= i, k; j--;)\n   for (pr-= j + 1, s= (prod*= b[j + 1][j]) * -b[j][i],\
+    \ k= 0; k <= j; ++k) nx[k]+= s * pr[k];\n }\n return std::vector<K>(fss.begin()\
     \ + n * (n + 1) / 2, fss.end());\n}\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include \"src/LinearAlgebra/Matrix.hpp\"\
     \ntemplate <class K> Matrix<K> hessenberg(const Matrix<K> &A) {\n size_t n= A.width();\n\
-    \ assert(n == A.height());\n auto ret= A;\n for (size_t j= 0, i; j + 2 < n; ++j)\
-    \ {\n  for (i= j + 1; i < n; ++i)\n   if (ret[i][j] != K()) {\n    for (size_t\
-    \ r= n; r--;) std::swap(ret[j + 1][r], ret[i][r]);\n    for (size_t r= n; r--;)\
-    \ std::swap(ret[r][j + 1], ret[r][i]);\n    break;\n   }\n  if (K iv; ret[j +\
-    \ 1][j] != K())\n   for (iv= K(1) / ret[j + 1][j], i= j + 2; i < n; ++i) {\n \
-    \   K m= ret[i][j] * iv;\n    for (size_t c= j; c < n; ++c) ret[i][c]-= m * ret[j\
-    \ + 1][c];\n    for (size_t r= n; r--;) ret[r][j + 1]+= m * ret[r][i];\n   }\n\
-    \ }\n return ret;\n}\ntemplate <class K> std::vector<K> characteristic_polynomial(const\
+    \ assert(n == A.height());\n auto ret= A;\n for (size_t j= 0, i, r; j + 2 < n;\
+    \ ++j) {\n  if (ret[j + 1][j] == K())\n   for (i= j + 2; i < n; ++i)\n    if (ret[i][j]\
+    \ != K()) {\n     for (r= 0; r < n; ++r) std::swap(ret[j + 1][r], ret[i][r]);\n\
+    \     for (; r--;) std::swap(ret[r][j + 1], ret[r][i]);\n     break;\n    }\n\
+    \  if (K iv; ret[j + 1][j] != K())\n   for (iv= K(1) / ret[j + 1][j], i= j + 2;\
+    \ i < n; ++i) {\n    for (K m= ret[i][r= j] * iv; r < n; ++r) ret[i][r]-= m *\
+    \ ret[j + 1][r];\n    for (; r--;) ret[r][j + 1]+= m * ret[r][i];\n   }\n }\n\
+    \ return ret;\n}\ntemplate <class K> std::vector<K> characteristic_polynomial(const\
     \ Matrix<K> &A) {\n size_t n= A.width();\n assert(n == A.height());\n auto b=\
     \ hessenberg(A);\n std::vector<K> fss((n + 1) * (n + 2) / 2);\n K *pr= fss.data(),\
     \ *nx= pr, prod, tmp, s;\n fss[0]= 1;\n for (size_t i= 0; i < n; ++i, pr= nx)\
@@ -150,8 +150,8 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
-  timestamp: '2023-04-24 14:08:14+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-08-03 16:16:01+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/characteristic_polynomial.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp

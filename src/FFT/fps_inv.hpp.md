@@ -1,44 +1,47 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/Internal/modint_traits.hpp
+    title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/Polynomial.hpp
     title: "\u591A\u9805\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/SubProductTree.hpp
     title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/bostan_mori.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/extgcd.hpp
     title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
@@ -49,90 +52,90 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.test.cpp
     title: test/yosupo/inv_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_Poly.test.cpp
     title: test/yosupo/inv_of_Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.test.cpp
     title: test/yosupo/log_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/multipoint_evaluation.test.cpp
     title: test/yosupo/multipoint_evaluation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.test.cpp
     title: test/yosupo/partition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/polynomial_interpolation.test.cpp
     title: test/yosupo/polynomial_interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_2.test.cpp
     title: test/yosupo/stirling_2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.Poly.test.cpp
     title: test/yukicoder/215.Poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/658.test.cpp
     title: test/yukicoder/658.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/963.test.cpp
     title: test/yukicoder/963.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include <algorithm>\n\
@@ -193,41 +196,42 @@ data:
     \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
-    \ - (-x) % mod : x % mod;\n}\n#line 4 \"src/Math/ModInt.hpp\"\nnamespace math_internal\
-    \ {\n#define CE constexpr\nstruct m_b {};\nstruct s_b: m_b {};\ntemplate <class\
-    \ mod_t> CE bool is_modint_v= is_base_of_v<m_b, mod_t>;\ntemplate <class mod_t>\
-    \ CE bool is_staticmodint_v= is_base_of_v<s_b, mod_t>;\ntemplate <class MP, u64\
-    \ MOD> struct SB: s_b {\nprotected:\n static CE MP md= MP(MOD);\n};\ntemplate\
-    \ <class Int, class U, class B> struct MInt: public B {\n using Uint= U;\n static\
-    \ CE inline auto mod() { return B::md.mod; }\n CE MInt(): x(0) {}\n CE MInt(const\
-    \ MInt& r): x(r.x) {}\n template <class T, enable_if_t<is_modint_v<T>, nullptr_t>\
-    \ = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n template <class\
-    \ T, enable_if_t<is_convertible_v<T, __int128_t>, nullptr_t> = nullptr> CE MInt(T\
-    \ n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod - n : n) : n % B::md.mod)))\
-    \ {}\n CE MInt operator-() const { return MInt() - *this; }\n#define FUNC(name,\
-    \ op) \\\n CE MInt name const { \\\n  MInt ret; \\\n  ret.x= op; \\\n  return\
-    \ ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x, r.x))\n FUNC(operator-(const\
-    \ MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const MInt& r), B::md.mul(x,\
-    \ r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n#undef FUNC\n CE\
-    \ MInt operator/(const MInt& r) const { return *this * r.inv(); }\n CE MInt& operator+=(const\
-    \ MInt& r) { return *this= *this + r; }\n CE MInt& operator-=(const MInt& r) {\
-    \ return *this= *this - r; }\n CE MInt& operator*=(const MInt& r) { return *this=\
-    \ *this * r; }\n CE MInt& operator/=(const MInt& r) { return *this= *this / r;\
-    \ }\n CE bool operator==(const MInt& r) const { return B::md.norm(x) == B::md.norm(r.x);\
-    \ }\n CE bool operator!=(const MInt& r) const { return !(*this == r); }\n CE bool\
-    \ operator<(const MInt& r) const { return B::md.norm(x) < B::md.norm(r.x); }\n\
-    \ CE inline MInt inv() const { return mod_inv<Int>(val(), B::md.mod); }\n CE inline\
-    \ Uint val() const { return B::md.get(x); }\n friend ostream& operator<<(ostream&\
-    \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
-    \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
-    \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
-    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
-    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
-    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
-    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
-    \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt,\
-    \ math_internal::is_modint_v, math_internal::is_staticmodint_v;\ntemplate <class\
-    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ - (-x) % mod : x % mod;\n}\n#line 3 \"src/Internal/modint_traits.hpp\"\nnamespace\
+    \ math_internal {\nstruct m_b {};\nstruct s_b: m_b {};\n}\ntemplate <class mod_t>\
+    \ constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b, mod_t>;\n\
+    template <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
+    \ mod_t>;\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define\
+    \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
+    \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
+    \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
+    \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
+    \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
+    \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
+    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
+    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
+    \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
+    \ r), B::md.plus(x, r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n\
+    \ FUNC(operator*(const MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x,\
+    \ k, B::md))\n#undef FUNC\n CE MInt operator/(const MInt& r) const { return *this\
+    \ * r.inv(); }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r;\
+    \ }\n CE MInt& operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt&\
+    \ operator*=(const MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const\
+    \ MInt& r) { return *this= *this / r; }\n CE bool operator==(const MInt& r) const\
+    \ { return B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt&\
+    \ r) const { return !(*this == r); }\n CE bool operator<(const MInt& r) const\
+    \ { return B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return\
+    \ mod_inv<Int>(val(), B::md.mod); }\n CE inline Uint val() const { return B::md.get(x);\
+    \ }\n friend ostream& operator<<(ostream& os, const MInt& r) { return os << r.val();\
+    \ }\n friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is\
+    \ >> v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using\
+    \ ModInt= conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32,\
+    \ u64, 32, 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64,\
+    \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
+    \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
+    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
+    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal {\n\
@@ -450,49 +454,50 @@ data:
   - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
+  - src/Internal/modint_traits.hpp
   isVerificationFile: false
   path: src/FFT/fps_inv.hpp
   requiredBy:
-  - src/FFT/sequences.hpp
+  - src/FFT/Polynomial.hpp
   - src/FFT/bostan_mori.hpp
+  - src/FFT/fps_div.hpp
   - src/FFT/extgcd.hpp
   - src/FFT/SubProductTree.hpp
-  - src/FFT/fps_div.hpp
-  - src/FFT/fps_sqrt.hpp
-  - src/FFT/Polynomial.hpp
   - src/FFT/fps_exp.hpp
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - src/FFT/fps_sqrt.hpp
+  - src/FFT/sequences.hpp
+  timestamp: '2023-08-03 16:16:01+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/3046.test.cpp
-  - test/yukicoder/963.test.cpp
-  - test/yukicoder/1080.test.cpp
-  - test/yukicoder/137.div_at.test.cpp
-  - test/yukicoder/2122.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
-  - test/yukicoder/658.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/stirling_2.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/division_of_Poly.test.cpp
-  - test/yosupo/inv_of_FPS.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/partition.test.cpp
   - test/aoj/3072.test.cpp
   - test/aoj/0168.test.cpp
+  - test/yukicoder/963.test.cpp
+  - test/yukicoder/137.div_at.test.cpp
+  - test/yukicoder/3046.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yukicoder/2122.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
 documentation_of: src/FFT/fps_inv.hpp
 layout: document
 title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"

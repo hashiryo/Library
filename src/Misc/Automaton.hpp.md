@@ -15,13 +15,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc121_d.test.cpp
     title: test/atcoder/abc121_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc135_d.test.cpp
     title: test/atcoder/abc135_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc208_e.test.cpp
     title: test/atcoder/abc208_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,30 +48,30 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1106.test.cpp
     title: test/yukicoder/1106.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1417.test.cpp
     title: test/yukicoder/1417.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1740.test.cpp
     title: test/yukicoder/1740.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/315.test.cpp
     title: test/yukicoder/315.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/362.test.cpp
     title: test/yukicoder/362.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/685.test.cpp
     title: test/yukicoder/685.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/737.test.cpp
     title: test/yukicoder/737.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/911.test.cpp
     title: test/yukicoder/911.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/Automaton.hpp\"\n#include <type_traits>\n#include\
@@ -239,30 +239,30 @@ data:
   path: src/Misc/Automaton.hpp
   requiredBy: []
   timestamp: '2023-04-11 14:48:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1106.test.cpp
-  - test/yukicoder/1740.test.cpp
+  - test/atcoder/abc155_e.test.cpp
+  - test/atcoder/agc021_a.test.cpp
+  - test/atcoder/abc135_d.test.cpp
+  - test/atcoder/abc117_d.test.cpp
+  - test/atcoder/agc015_d.test.cpp
+  - test/atcoder/abc121_d.test.cpp
+  - test/atcoder/abc154_e.test.cpp
+  - test/atcoder/arc127_a.test.cpp
+  - test/atcoder/abc235_f.test.cpp
+  - test/atcoder/abc208_e.test.cpp
+  - test/atcoder/abc138_f.test.cpp
+  - test/atcoder/abc129_e.test.cpp
+  - test/aoj/2587.test.cpp
+  - test/aoj/0570.test.cpp
   - test/yukicoder/1417.test.cpp
   - test/yukicoder/737.test.cpp
   - test/yukicoder/685.test.cpp
   - test/yukicoder/315.test.cpp
-  - test/yukicoder/362.test.cpp
   - test/yukicoder/911.test.cpp
-  - test/aoj/0570.test.cpp
-  - test/aoj/2587.test.cpp
-  - test/atcoder/abc117_d.test.cpp
-  - test/atcoder/abc155_e.test.cpp
-  - test/atcoder/abc121_d.test.cpp
-  - test/atcoder/agc021_a.test.cpp
-  - test/atcoder/arc127_a.test.cpp
-  - test/atcoder/abc154_e.test.cpp
-  - test/atcoder/agc015_d.test.cpp
-  - test/atcoder/abc138_f.test.cpp
-  - test/atcoder/abc135_d.test.cpp
-  - test/atcoder/abc208_e.test.cpp
-  - test/atcoder/abc129_e.test.cpp
-  - test/atcoder/abc235_f.test.cpp
+  - test/yukicoder/1740.test.cpp
+  - test/yukicoder/362.test.cpp
+  - test/yukicoder/1106.test.cpp
 documentation_of: src/Misc/Automaton.hpp
 layout: document
 title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
@@ -276,7 +276,7 @@ title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1. `Automaton(alp,init,tr,ac)` <br> 2. `Automaton(alp,init,tr,ac,rej)` <br> 3. `Automaton(alp,init,tr,ac)`<br> 4. `Automaton(alp,init,tr,ac,eps)` | コンストラクタ. <br>4種類共通: `alp`はアルファベット(std::vector&lt;symbol_t&gt;), `init` は初期状態(state_t), `ac` は受理状態か判定する関数(state_t $\rightarrow$ bool) . <br> 1. `tr` は決定的な遷移関数 (state_t $\times$ symbol_t $\rightarrow$ state_t). <br> 2. `tr` は決定的な遷移関数 (state_t $\times$ symbol_t $\rightarrow$ state_t), `rej` は絶対この先受理状態に行くことのない状態 (state_t). <br> 3. `tr` は非決定的な遷移関数 (state_t $\times$ symbol_t $\rightarrow$ std::set&lt;symbol_t&gt;). <br> 4. `tr` は非決定的な遷移関数 (state_t $\times$ symbol_t $\rightarrow$ std::set&lt;symbol_t&gt;), `eps` はイプシロン遷移を表す関数 (state_t  $\rightarrow$ std::set&lt;symbol_t&gt;). |
 | `operator&`                                                                                                                                       | 二項演算. 2つのオートマトンの積を表すオートマトンを返す                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `dp_run<T>(n,op,ti,f,init)`                                                                                                                       | オートマトンが受理する長さ n の文字列に対し、与えた関数に従ってDPを計算させて値を返す. <br> T はモノイドで `op` はその二項演算 (T $\times$ T $\rightarrow$ T), `ti` は単位元 . <br> `init`  は dp[初期状態][0文字目]の値. (※イメージ) <br> `f` は dpの遷移を表す関数 ( T $\times$ state_t $\times$ (i文字目) $\rightarrow$ T ).  モノイドに対して分配法則が成り立つ必要あり(遅延セグ木の作用素みたいなこと)                                                                                                                                                                                                                                                                                                |
+| `dp_run<T>(n,op,ti,f,init)`                                                                                                                       | オートマトンが受理する長さ n の文字列に対し、与えた関数に従ってDPを計算させて値を返す. <br> T はモノイドで `op` はその二項演算 (T $\times$ T $\rightarrow$ T), `ti` は単位元 . <br> `init`  は dp[初期状態][0文字目]の値. (※イメージ) <br> `f` は dpの遷移を表す関数 ( T $\times$ symbol_t $\times$ (i文字目) $\rightarrow$ T ).  モノイドに対して分配法則が成り立つ必要あり(遅延セグ木の作用素みたいなこと)                                                                                                                                                                                                                                                                                               |
 | `num<T>(n)`                                                                                                                                       | オートマトンが受理する長さ n の文字列の個数を返す.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ## 参考

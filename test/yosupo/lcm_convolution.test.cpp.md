@@ -1,23 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/Internal/modint_traits.hpp
+    title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lcm_convolution
@@ -147,11 +150,12 @@ data:
     \ (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n};\ntemplate <class\
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
-    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"\
-    src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\nstruct\
-    \ m_b {};\nstruct s_b: m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b,\
-    \ mod_t>;\ntemplate <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b,\
-    \ mod_t>;\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
+    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
+    src/Internal/modint_traits.hpp\"\nnamespace math_internal {\nstruct m_b {};\n\
+    struct s_b: m_b {};\n}\ntemplate <class mod_t> constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b,\
+    \ mod_t>;\ntemplate <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
+    \ mod_t>;\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define\
+    \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
@@ -180,17 +184,16 @@ data:
     \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
     \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt, math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, size_t LM> mod_t get_inv(int\
-    \ n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m= mod_t::mod();\n\
-    \ static mod_t dat[LM];\n static int l= 1;\n if (l == 1) dat[l++]= 1;\n while\
-    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n#line 6 \"\
-    test/yosupo/lcm_convolution.test.cpp\"\nusing namespace std;\nsigned main() {\n\
-    \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int\
-    \ N;\n cin >> N;\n vector<Mint> a(N + 1), b(N + 1);\n for (int i= 1; i <= N; i++)\
-    \ cin >> a[i];\n for (int i= 1; i <= N; i++) cin >> b[i];\n auto c= Sieve<>::lcm_conv(a,\
-    \ b);\n for (int i= 1; i <= N; i++) cout << c[i] << \" \\n\"[i == N];\n return\
-    \ 0;\n}\n"
+    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
+    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 6 \"test/yosupo/lcm_convolution.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
+    \ ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N + 1), b(N + 1);\n\
+    \ for (int i= 1; i <= N; i++) cin >> a[i];\n for (int i= 1; i <= N; i++) cin >>\
+    \ b[i];\n auto c= Sieve<>::lcm_conv(a, b);\n for (int i= 1; i <= N; i++) cout\
+    \ << c[i] << \" \\n\"[i == N];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lcm_convolution\"\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/Math/Sieve.hpp\"\n#include \"\
     src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -203,11 +206,12 @@ data:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
+  - src/Internal/modint_traits.hpp
   isVerificationFile: true
   path: test/yosupo/lcm_convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-08-03 16:16:01+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/lcm_convolution.test.cpp
 layout: document

@@ -199,9 +199,9 @@ data:
   timestamp: '2023-04-03 04:36:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/unit_test/nimber_inv.test.cpp
   - test/unit_test/nimber_log.test.cpp
   - test/unit_test/nimber_sqrt.test.cpp
+  - test/unit_test/nimber_inv.test.cpp
   - test/yosupo/nim_product_64.test.cpp
 documentation_of: src/Math/Nimber.hpp
 layout: document

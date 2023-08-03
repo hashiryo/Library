@@ -1,24 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: src/Internal/modint_traits.hpp
+    title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/hafnian.hpp
     title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\u5B8C\
       \u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/hafnian_of_matrix
@@ -71,11 +74,12 @@ data:
     \ (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n};\ntemplate <class\
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
-    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 4 \"\
-    src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\nstruct\
-    \ m_b {};\nstruct s_b: m_b {};\ntemplate <class mod_t> CE bool is_modint_v= is_base_of_v<m_b,\
-    \ mod_t>;\ntemplate <class mod_t> CE bool is_staticmodint_v= is_base_of_v<s_b,\
-    \ mod_t>;\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
+    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
+    src/Internal/modint_traits.hpp\"\nnamespace math_internal {\nstruct m_b {};\n\
+    struct s_b: m_b {};\n}\ntemplate <class mod_t> constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b,\
+    \ mod_t>;\ntemplate <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
+    \ mod_t>;\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define\
+    \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
@@ -104,29 +108,28 @@ data:
     \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
     \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt, math_internal::is_modint_v,\
-    \ math_internal::is_staticmodint_v;\ntemplate <class mod_t, size_t LM> mod_t get_inv(int\
-    \ n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m= mod_t::mod();\n\
-    \ static mod_t dat[LM];\n static int l= 1;\n if (l == 1) dat[l++]= 1;\n while\
-    \ (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n return dat[n];\n}\n#line 3 \"\
-    src/Math/hafnian.hpp\"\n#include <array>\n#line 5 \"src/Math/hafnian.hpp\"\ntemplate\
-    \ <typename T, unsigned short MAX_N= 38> T hafnian(const std::vector<std::vector<T>>\
-    \ &mat) {\n using Poly= std::array<T, MAX_N / 2 + 1>;\n const int n= mat.size(),\
-    \ n2= n / 2;\n assert(!(n & 1));\n for (int i= n; i--;)\n  for (int j= i; j--;)\
-    \ assert(mat[i][j] == mat[j][i]);\n std::vector<std::vector<Poly>> a(n);\n for\
-    \ (int i= n, j; i--;)\n  for (a[j= i].resize(i); j--;) a[i][j][0]= mat[i][j];\n\
-    \ auto rec= [&](auto self, const auto &b) -> Poly {\n  const int m= b.size() -\
-    \ 2;\n  if (m < 0) return Poly{1};\n  auto c= b;\n  c.resize(m);\n  Poly r= self(self,\
-    \ c);\n  for (int i= m; i--;)\n   for (int j= i; j--;)\n    for (int k= n2 - m\
-    \ / 2; k--;)\n     for (int l= k; l >= 0; l--) c[i][j][k + 1]+= b[m][i][l] * b[m\
-    \ + 1][j][k - l] + b[m + 1][i][l] * b[m][j][k - l];\n  Poly t= self(self, c);\n\
-    \  for (int i= n2, j; i >= 0; i--)\n   for (r[i]= t[j= i] - r[i]; j--;) r[i]+=\
-    \ t[j] * b[m + 1][m][i - j - 1];\n  return r;\n };\n return rec(rec, a)[n2];\n\
-    }\n#line 6 \"test/yosupo/hafnian_of_matrix.test.cpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
-    \ int N;\n cin >> N;\n vector a(N, vector<Mint>(N));\n for (int i= 0; i < N; i++)\n\
-    \  for (int j= 0; j < N; j++) cin >> a[i][j];\n cout << hafnian(a) << '\\n';\n\
-    \ return 0;\n}\n"
+    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
+    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\n#line 3 \"src/Math/hafnian.hpp\"\n#include <array>\n#line\
+    \ 5 \"src/Math/hafnian.hpp\"\ntemplate <typename T, unsigned short MAX_N= 38>\
+    \ T hafnian(const std::vector<std::vector<T>> &mat) {\n using Poly= std::array<T,\
+    \ MAX_N / 2 + 1>;\n const int n= mat.size(), n2= n / 2;\n assert(!(n & 1));\n\
+    \ for (int i= n; i--;)\n  for (int j= i; j--;) assert(mat[i][j] == mat[j][i]);\n\
+    \ std::vector<std::vector<Poly>> a(n);\n for (int i= n, j; i--;)\n  for (a[j=\
+    \ i].resize(i); j--;) a[i][j][0]= mat[i][j];\n auto rec= [&](auto self, const\
+    \ auto &b) -> Poly {\n  const int m= b.size() - 2;\n  if (m < 0) return Poly{1};\n\
+    \  auto c= b;\n  c.resize(m);\n  Poly r= self(self, c);\n  for (int i= m; i--;)\n\
+    \   for (int j= i; j--;)\n    for (int k= n2 - m / 2; k--;)\n     for (int l=\
+    \ k; l >= 0; l--) c[i][j][k + 1]+= b[m][i][l] * b[m + 1][j][k - l] + b[m + 1][i][l]\
+    \ * b[m][j][k - l];\n  Poly t= self(self, c);\n  for (int i= n2, j; i >= 0; i--)\n\
+    \   for (r[i]= t[j= i] - r[i]; j--;) r[i]+= t[j] * b[m + 1][m][i - j - 1];\n \
+    \ return r;\n };\n return rec(rec, a)[n2];\n}\n#line 6 \"test/yosupo/hafnian_of_matrix.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector a(N, vector<Mint>(N));\n\
+    \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++) cin >> a[i][j];\n cout\
+    \ << hafnian(a) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/hafnian_of_matrix\"\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"\
     src/Math/hafnian.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
@@ -138,12 +141,13 @@ data:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
+  - src/Internal/modint_traits.hpp
   - src/Math/hafnian.hpp
   isVerificationFile: true
   path: test/yosupo/hafnian_of_matrix.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-08-03 16:16:01+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/hafnian_of_matrix.test.cpp
 layout: document
