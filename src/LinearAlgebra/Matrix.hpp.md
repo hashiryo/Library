@@ -15,10 +15,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,6 +48,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/matrix_product.test.cpp
     title: test/yosupo/matrix_product.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1303.test.cpp
+    title: test/yukicoder/1303.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
@@ -110,9 +113,12 @@ data:
     \ width() const { return W; }\n size_t height() const { return W ? dat.size()\
     \ / W : 0; }\n explicit operator bool() const { return W; }\n auto operator[](int\
     \ i) { return next(begin(dat), i * W); }\n auto operator[](int i) const { return\
-    \ next(begin(dat), i * W); }\n bool operator==(const Matrix &r) const {\n  if\
-    \ (W != r.W || dat.size() != r.dat.size()) return false;\n  for (int i= dat.size();\
-    \ i--;)\n   if (dat[i] != r.dat[i]) return false;\n  return true;\n }\n bool operator!=(const\
+    \ next(begin(dat), i * W); }\n Matrix submatrix(const vector<int> &rows, const\
+    \ vector<int> &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int\
+    \ i= rows.size(); i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
+    \  return ret;\n }\n bool operator==(const Matrix &r) const {\n  if (W != r.W\
+    \ || dat.size() != r.dat.size()) return false;\n  for (int i= dat.size(); i--;)\n\
+    \   if (dat[i] != r.dat[i]) return false;\n  return true;\n }\n bool operator!=(const\
     \ Matrix &r) const { return !(*this == r); }\n Matrix &operator+=(const Matrix\
     \ &r) { return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+= r.dat,\
     \ *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
@@ -150,13 +156,16 @@ data:
     \ const { return H; }\n explicit operator bool() const { return W; }\n Array operator[](int\
     \ i) { return {next(begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
     \ { return {next(begin(dat), i * m)}; }\n ConstArray get(int i) const { return\
-    \ {next(begin(dat), i * m)}; }\n bool operator==(const Matrix &r) const { return\
-    \ W == r.W && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix\
-    \ &r) const { return W != r.W || H != r.H || (dat != r.dat).max(); }\n Matrix\
-    \ &operator+=(const Matrix &r) { return assert(H == r.H), assert(W == r.W), dat^=\
-    \ r.dat, *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
-    \ r; }\n Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix\
-    \ ret(H, r.W);\n  u128 *c= begin(ret.dat);\n  for (size_t i= 0; i < H; ++i, advance(c,\
+    \ {next(begin(dat), i * m)}; }\n Matrix submatrix(const vector<int> &rows, const\
+    \ vector<int> &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int\
+    \ i= rows.size(); i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
+    \  return ret;\n }\n bool operator==(const Matrix &r) const { return W == r.W\
+    \ && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r) const\
+    \ { return W != r.W || H != r.H || (dat != r.dat).max(); }\n Matrix &operator+=(const\
+    \ Matrix &r) { return assert(H == r.H), assert(W == r.W), dat^= r.dat, *this;\
+    \ }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+= r; }\n\
+    \ Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix ret(H,\
+    \ r.W);\n  u128 *c= begin(ret.dat);\n  for (size_t i= 0; i < H; ++i, advance(c,\
     \ m)) {\n   ConstArray a= this->operator[](i);\n   const u128 *b= begin(r.dat);\n\
     \   for (size_t k= 0; k < W; ++k, advance(b, r.m))\n    if (a[k])\n     for (size_t\
     \ j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n  return ret;\n }\n Matrix &operator*=(const\
@@ -176,9 +185,12 @@ data:
     \ width() const { return W; }\n size_t height() const { return W ? dat.size()\
     \ / W : 0; }\n explicit operator bool() const { return W; }\n auto operator[](int\
     \ i) { return next(begin(dat), i * W); }\n auto operator[](int i) const { return\
-    \ next(begin(dat), i * W); }\n bool operator==(const Matrix &r) const {\n  if\
-    \ (W != r.W || dat.size() != r.dat.size()) return false;\n  for (int i= dat.size();\
-    \ i--;)\n   if (dat[i] != r.dat[i]) return false;\n  return true;\n }\n bool operator!=(const\
+    \ next(begin(dat), i * W); }\n Matrix submatrix(const vector<int> &rows, const\
+    \ vector<int> &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int\
+    \ i= rows.size(); i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
+    \  return ret;\n }\n bool operator==(const Matrix &r) const {\n  if (W != r.W\
+    \ || dat.size() != r.dat.size()) return false;\n  for (int i= dat.size(); i--;)\n\
+    \   if (dat[i] != r.dat[i]) return false;\n  return true;\n }\n bool operator!=(const\
     \ Matrix &r) const { return !(*this == r); }\n Matrix &operator+=(const Matrix\
     \ &r) { return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+= r.dat,\
     \ *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
@@ -216,13 +228,16 @@ data:
     \ const { return H; }\n explicit operator bool() const { return W; }\n Array operator[](int\
     \ i) { return {next(begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
     \ { return {next(begin(dat), i * m)}; }\n ConstArray get(int i) const { return\
-    \ {next(begin(dat), i * m)}; }\n bool operator==(const Matrix &r) const { return\
-    \ W == r.W && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix\
-    \ &r) const { return W != r.W || H != r.H || (dat != r.dat).max(); }\n Matrix\
-    \ &operator+=(const Matrix &r) { return assert(H == r.H), assert(W == r.W), dat^=\
-    \ r.dat, *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
-    \ r; }\n Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix\
-    \ ret(H, r.W);\n  u128 *c= begin(ret.dat);\n  for (size_t i= 0; i < H; ++i, advance(c,\
+    \ {next(begin(dat), i * m)}; }\n Matrix submatrix(const vector<int> &rows, const\
+    \ vector<int> &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int\
+    \ i= rows.size(); i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
+    \  return ret;\n }\n bool operator==(const Matrix &r) const { return W == r.W\
+    \ && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r) const\
+    \ { return W != r.W || H != r.H || (dat != r.dat).max(); }\n Matrix &operator+=(const\
+    \ Matrix &r) { return assert(H == r.H), assert(W == r.W), dat^= r.dat, *this;\
+    \ }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+= r; }\n\
+    \ Matrix operator*(const Matrix &r) const {\n  assert(W == r.H);\n  Matrix ret(H,\
+    \ r.W);\n  u128 *c= begin(ret.dat);\n  for (size_t i= 0; i < H; ++i, advance(c,\
     \ m)) {\n   ConstArray a= this->operator[](i);\n   const u128 *b= begin(r.dat);\n\
     \   for (size_t k= 0; k < W; ++k, advance(b, r.m))\n    if (a[k])\n     for (size_t\
     \ j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n  return ret;\n }\n Matrix &operator*=(const\
@@ -241,7 +256,7 @@ data:
   requiredBy:
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/LU_Decomposition.hpp
-  timestamp: '2023-08-03 22:39:15+09:00'
+  timestamp: '2023-08-04 01:31:11+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp
@@ -255,6 +270,7 @@ data:
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/1907.test.cpp
   - test/yukicoder/950.test.cpp
+  - test/yukicoder/1303.test.cpp
   - test/yukicoder/1750.test.cpp
   - test/yukicoder/184.test.cpp
   - test/yukicoder/803.test.cpp

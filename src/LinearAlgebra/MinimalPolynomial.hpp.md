@@ -15,7 +15,7 @@ data:
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
   - icon: ':heavy_check_mark:'
