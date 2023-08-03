@@ -113,8 +113,7 @@ data:
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
     \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
-    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
     \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
     \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
     \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
@@ -320,14 +319,14 @@ data:
   path: src/FFT/sample_points_shift.hpp
   requiredBy:
   - src/FFT/polynomial_matrix_prod.hpp
-  timestamp: '2023-08-03 16:16:01+09:00'
+  timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/502.test.cpp
-  - test/yukicoder/665.test.cpp
-  - test/yukicoder/42.test.cpp
   - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yukicoder/665.test.cpp
+  - test/yukicoder/502.test.cpp
+  - test/yukicoder/42.test.cpp
 documentation_of: src/FFT/sample_points_shift.hpp
 layout: document
 title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"

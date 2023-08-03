@@ -101,8 +101,7 @@ data:
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
     \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
-    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
     \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
     \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
     \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
@@ -296,11 +295,11 @@ data:
   isVerificationFile: false
   path: src/FFT/MultiVariateConvolution.hpp
   requiredBy: []
-  timestamp: '2023-08-03 16:16:01+09:00'
+  timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/multivariate_convolution.test.cpp
   - test/yosupo/subset_convolution.multivar_conv.test.cpp
+  - test/yosupo/multivariate_convolution.test.cpp
 documentation_of: src/FFT/MultiVariateConvolution.hpp
 layout: document
 title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"

@@ -2,13 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/LinkCutTree.hpp
-    title: Link-Cut-Tree
-  - icon: ':question:'
-    path: src/Internal/HAS_CHECK.hpp
-    title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
-      \u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
@@ -20,9 +13,15 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
+  - icon: ':x:'
+    path: src/LinearAlgebra/characteristic_polynomial.hpp
+    title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
+  - icon: ':x:'
+    path: src/Math/ModInt_Runtime.hpp
+    title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
@@ -33,16 +32,17 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/650
+    PROBLEM: https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod
     links:
-    - https://yukicoder.me/problems/no/650
-  bundledCode: "#line 1 \"test/yukicoder/650.LCT.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/650\"\
-    \n#include <iostream>\n\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
-    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
-    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
-    \ (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b=\
-    \ c - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n\
-    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    - https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod
+  bundledCode: "#line 1 \"test/yosupo/matrix_det_arbitrary_mod.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod\"\n#include\
+    \ <iostream>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
+    \ <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod)\
+    \ {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for (Int\
+    \ q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y= z - y * (q= a / b), a= b, b= c -\
+    \ b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line\
+    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing\
     \ i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n\
     #define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n\
@@ -119,34 +119,51 @@ data:
     \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\n\
-    namespace la_internal {\ntemplate <class R> struct Vector: public std::valarray<R>\
-    \ {\n using std::valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8=\
-    \ uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r,\
-    \ u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i)\
-    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
-    \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
-    \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
-    \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
-    \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n std::valarray<u128>\
-    \ dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >>\
-    \ 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref\
-    \ operator[](int i) {\n  u128 *ref= std::begin(dat) + (i >> 7);\n  u8 j= i & 127;\n\
-    \  bool val= (*ref >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int\
-    \ i) const { return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const\
-    \ Vector &r) { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector\
-    \ &r) { return dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b)\
-    \ dat= 0;\n  return *this;\n }\n Vector operator+(const Vector &r) const { return\
-    \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
-    \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
-    \ size() const { return n; }\n u128 *data() { return std::begin(dat); }\n friend\
-    \ Vector operator*(bool b, const Vector &r) { return r * b; }\n};\ntemplate <class\
-    \ R> struct DiagonalMatrix: public Vector<R> {\n using Vector<R>::Vector;\n R\
-    \ det() const {\n  R ret(true);\n  for (auto x: *this) ret*= x;\n  return ret;\n\
-    \ }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n#line 4 \"\
-    src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class R> class\
-    \ Matrix {\npublic:\n size_t W;\n std::valarray<R> dat;\npublic:\n static Matrix\
-    \ identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
+    \ return dat[n];\n}\n#line 3 \"src/Math/ModInt_Runtime.hpp\"\nnamespace math_internal\
+    \ {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr bool is_runtimemodint_v=\
+    \ is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64 M, int id> struct RB: r_b\
+    \ {\n static inline void set_mod(u64 m) { md= MP(m); }\n static inline u64 max()\
+    \ { return M; }\nprotected:\n static inline MP md;\n};\nclass Montgomery32 {};\n\
+    class Montgomery64 {};\nclass Barrett {};\nclass Barrett2 {};\ntemplate <class\
+    \ Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int, Montgomery32>,\
+    \ MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
+    \ Montgomery64>, MInt<i64, u64, RB<MP_Mo<u64, u128, 64, 63>, (1ull << 62), id>>,\
+    \ conditional_t<is_same_v<Int, Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31),\
+    \ id>>, conditional_t<is_same_v<Int, Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull\
+    \ << 41), id>>, conditional_t<disjunction_v<is_same<Int, i64>, is_same<Int, u64>>,\
+    \ MInt<i64, u64, RB<MP_D2B1, u64(-1), id>>, MInt<int, u32, RB<MP_Na, u32(-1),\
+    \ id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>, nullptr_t>\
+    \ = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
+    \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
+    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\
+    \n#include <vector>\n#include <algorithm>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\
+    \n#include <valarray>\nnamespace la_internal {\ntemplate <class R> struct Vector:\
+    \ public std::valarray<R> {\n using std::valarray<R>::valarray;\n};\nusing u128=\
+    \ __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\n\
+    public:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if\
+    \ (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref\
+    \ &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val= b,\
+    \ *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+    \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
+    \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
+    \ {\n size_t n;\n std::valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
+    \ n): n(n), dat((n + 127) >> 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b),\
+    \ (n + 127) >> 7) {}\n Ref operator[](int i) {\n  u128 *ref= std::begin(dat) +\
+    \ (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref >> j) & 1;\n  return Ref{ref,\
+    \ j, val};\n }\n bool operator[](int i) const { return (dat[i >> 7] >> (i & 127))\
+    \ & 1; }\n Vector &operator+=(const Vector &r) { return dat^= r.dat, *this; }\n\
+    \ Vector &operator-=(const Vector &r) { return dat^= r.dat, *this; }\n Vector\
+    \ &operator*=(bool b) {\n  if (!b) dat= 0;\n  return *this;\n }\n Vector operator+(const\
+    \ Vector &r) const { return Vector(*this)+= r; }\n Vector operator-(const Vector\
+    \ &r) const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
+    \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
+    \ std::begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return\
+    \ r * b; }\n};\ntemplate <class R> struct DiagonalMatrix: public Vector<R> {\n\
+    \ using Vector<R>::Vector;\n R det() const {\n  R ret(true);\n  for (auto x: *this)\
+    \ ret*= x;\n  return ret;\n }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n\
+    #line 4 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
+    \ R> class Matrix {\npublic:\n size_t W;\n std::valarray<R> dat;\npublic:\n static\
+    \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[std::slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
     \ w, R v= R()): W(w), dat(v, h * w) {}\n size_t width() const { return W; }\n\
     \ size_t height() const { return W ? dat.size() / W : 0; }\n explicit operator\
@@ -209,125 +226,67 @@ data:
     \ i= 0; i < H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^= *a & r[j];\n\
     \  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W == H);\n  for\
     \ (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>=\
-    \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 2\
-    \ \"src/DataStructure/LinkCutTree.hpp\"\n#include <algorithm>\n#include <vector>\n\
-    #include <string>\n#include <cstddef>\n#line 3 \"src/Internal/HAS_CHECK.hpp\"\n\
-    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
-    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
-    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
-    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy= typename U::member)\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\
-    \ntemplate <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
-    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n template <class L>\
-    \ static constexpr bool semigroup_v= std::conjunction_v<has_T<L>, has_op<L>>;\n\
-    \ template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n using node_id= std::int_least32_t;\n\
-    \ template <class U= std::nullptr_t, class F= std::nullptr_t> struct Node_B {\n\
-    \  using T= U;\n  using E= F;\n  node_id ch[2]= {-1, -1}, par= -1;\n  bool rev_flg;\n\
-    \ };\n template <class D, bool sg, bool du> struct Node_D: Node_B<> {};\n template\
-    \ <class D> struct Node_D<D, 1, 0>: Node_B<typename M::T> {\n  typename M::T val,\
-    \ sum, rsum;\n };\n template <class D> struct Node_D<D, 0, 1>: Node_B<typename\
-    \ M::T, typename M::E> {\n  typename M::T val;\n  typename M::E lazy;\n  bool\
-    \ lazy_flg;\n };\n template <class D> struct Node_D<D, 1, 1>: Node_B<typename\
-    \ M::T, typename M::E> {\n  typename M::T val, sum, rsum;\n  typename M::E lazy;\n\
-    \  bool lazy_flg;\n };\n using Node= Node_D<void, semigroup_v<M>, dual_v<M>>;\n\
-    \ using T= typename Node::T;\n using E= typename Node::E;\n inline int dir(node_id\
-    \ i) {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0] == i) return 0;\n\
-    \   if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n }\n inline void\
-    \ rot(node_id i) {\n  node_id p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]=\
-    \ ns[i].ch[!d]) != -1) ns[ns[p].ch[d]].par= p;\n  ns[i].ch[!d]= p, ns[i].par=\
-    \ ns[p].par;\n  if ((d= dir(p)) < 2) ns[ns[p].par].ch[d]= i;\n  ns[p].par= i;\n\
-    \  if constexpr (semigroup_v<M>) pushup(p);\n }\n inline void splay(node_id i)\
-    \ {\n  eval(i);\n  node_id p= ns[i].par, pp;\n  for (int d= dir(i), c; d < 2;\
-    \ rot(i), d= dir(i), p= ns[i].par) {\n   if (c= dir(p), pp= ns[p].par; c < 2)\
-    \ eval(pp), eval(p), eval(i), rot(d == c ? p : i);\n   else eval(p), eval(i);\n\
-    \  }\n  if constexpr (semigroup_v<M>) pushup(i);\n }\n inline void pushup(node_id\
-    \ i) {\n  ns[i].rsum= ns[i].sum= ns[i].val;\n  if (ns[i].ch[0] != -1) ns[i].sum=\
-    \ M::op(ns[ns[i].ch[0]].sum, ns[i].sum), ns[i].rsum= M::op(ns[i].rsum, ns[ns[i].ch[0]].rsum);\n\
-    \  if (ns[i].ch[1] != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum), ns[i].rsum=\
-    \ M::op(ns[ns[i].ch[1]].rsum, ns[i].rsum);\n }\n inline void propagate(node_id\
-    \ i, const E &x) {\n  if (i == -1) return;\n  M::mapping(ns[i].val, x), ns[i].lazy_flg\
-    \ ? (M::composition(ns[i].lazy, x), x) : ns[i].lazy= x;\n  if constexpr (semigroup_v<M>)\
-    \ M::mapping(ns[i].sum, x), M::mapping(ns[i].rsum, x);\n  ns[i].lazy_flg= true;\n\
-    \ }\n inline void toggle(node_id i) {\n  if (i == -1) return;\n  std::swap(ns[i].ch[0],\
-    \ ns[i].ch[1]);\n  if constexpr (semigroup_v<M>) std::swap(ns[i].sum, ns[i].rsum);\n\
-    \  ns[i].rev_flg= !ns[i].rev_flg;\n }\n inline void eval(node_id i) {\n  if (ns[i].rev_flg)\
-    \ toggle(ns[i].ch[0]), toggle(ns[i].ch[1]), ns[i].rev_flg= false;\n  if constexpr\
-    \ (dual_v<M>)\n   if (ns[i].lazy_flg) propagate(ns[i].ch[0], ns[i].lazy), propagate(ns[i].ch[1],\
-    \ ns[i].lazy), ns[i].lazy_flg= false;\n }\n inline node_id expose(node_id i) {\n\
-    \  node_id r= -1;\n  for (node_id p= i; p != -1; r= p, p= ns[p].par) {\n   splay(p),\
-    \ ns[p].ch[1]= r;\n   if constexpr (semigroup_v<M>) pushup(p);\n  }\n  return\
-    \ splay(i), r;\n }\n std::vector<Node> ns;\npublic:\n LinkCutTree(std::size_t\
-    \ n): ns(n) {}\n LinkCutTree(std::size_t n, T val): ns(n) {\n  for (int i= n;\
-    \ i--;) ns[i].val= val;\n }\n void evert(int k) { expose(k), toggle(k), eval(k);\
-    \ }\n void link(int c, int p) {\n  evert(c), expose(p), assert(ns[c].par == -1),\
-    \ ns[p].ch[1]= c, ns[c].par= p;\n  if constexpr (semigroup_v<M>) pushup(p);\n\
-    \ }\n void cut(int c, int p) {\n  evert(p), expose(c), assert(ns[c].ch[0] == p),\
-    \ ns[c].ch[0]= ns[p].par= -1;\n  if constexpr (semigroup_v<M>) pushup(c);\n }\n\
-    \ int root(int x) {\n  for (expose(x);; x= ns[x].ch[0])\n   if (eval(x); ns[x].ch[0]\
-    \ == -1) return splay(x), x;\n }\n int parent(int x) {\n  if (expose(x), x= ns[x].ch[0];\
-    \ x == -1) return -1;\n  for (;; x= ns[x].ch[1])\n   if (eval(x); ns[x].ch[1]\
-    \ == -1) return splay(x), x;\n }\n int lca(int x, int y) { return x == y ? x :\
-    \ (expose(x), y= expose(y), ns[x].par == -1) ? -1 : y; }\n const T &operator[](int\
-    \ k) { return get(k); }\n const T &get(int k) {\n  static_assert(semigroup_v<M>\
-    \ || dual_v<M>, \"\\\"get\\\" is not available\\n\");\n  return expose(k), ns[k].val;\n\
-    \ }\n void set(int k, T v) {\n  static_assert(semigroup_v<M> || dual_v<M>, \"\\\
-    \"set\\\" is not available\\n\");\n  expose(k), ns[k].val= v;\n  if constexpr\
-    \ (semigroup_v<M>) pushup(k);\n }\n T fold(int a, int b) {  // [a,b] closed section\n\
-    \  static_assert(semigroup_v<M>, \"\\\"fold\\\" is not available\\n\");\n  return\
-    \ a == b ? get(a) : (evert(a), expose(b), assert(ns[a].par != -1), ns[b].sum);\n\
-    \ }\n void apply(int a, int b, E v) {  // [a,b] closed section\n  static_assert(dual_v<M>,\
-    \ \"\\\"apply\\\" is not available\\n\");\n  evert(a), expose(b), assert(a ==\
-    \ b || ns[a].par != -1), propagate(b, v), eval(b);\n }\n static std::string which_available()\
-    \ {\n  std::string ret= \"\";\n  if constexpr (semigroup_v<M> || dual_v<M>) ret+=\
-    \ \"\\\"set\\\" \\\"get\\\" \";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"\
-    fold\\\" \";\n  if constexpr (dual_v<M>) ret+= \"\\\"apply\\\" \";\n  return ret;\n\
-    \ }\n};\n#line 7 \"test/yukicoder/650.LCT.test.cpp\"\nusing namespace std;\n\n\
-    using Mint= ModInt<int(1e9) + 7>;\nusing Mat= Matrix<Mint>;\nconst Mat I= Mat::identity_matrix(2);\n\
-    struct Monoid {\n using T= Mat;\n static T ti() { return I; }\n static T op(const\
-    \ T &l, const T &r) { return l * r; }\n};\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int n;\n cin >> n;\n LinkCutTree<Monoid> lct(n + n - 1, I);\n for (int i= 0;\
-    \ i < n - 1; i++) {\n  int a, b;\n  cin >> a >> b;\n  lct.link(a, i + n);\n  lct.link(i\
-    \ + n, b);\n }\n int q;\n cin >> q;\n while (q--) {\n  char t;\n  cin >> t;\n\
-    \  if (t == 'x') {\n   int i;\n   cin >> i;\n   Mat X(2, 2);\n   cin >> X[0][0]\
-    \ >> X[0][1] >> X[1][0] >> X[1][1];\n   lct.set(i + n, X);\n  } else {\n   int\
-    \ i, j;\n   cin >> i >> j;\n   auto ans= lct.fold(i, j);\n   cout << ans[0][0]\
-    \ << \" \" << ans[0][1] << \" \" << ans[1][0] << \" \" << ans[1][1] << '\\n';\n\
-    \  }\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/650\"\n#include <iostream>\n\
-    \n#include \"src/Math/ModInt.hpp\"\n#include \"src/LinearAlgebra/Matrix.hpp\"\n\
-    #include \"src/DataStructure/LinkCutTree.hpp\"\nusing namespace std;\n\nusing\
-    \ Mint= ModInt<int(1e9) + 7>;\nusing Mat= Matrix<Mint>;\nconst Mat I= Mat::identity_matrix(2);\n\
-    struct Monoid {\n using T= Mat;\n static T ti() { return I; }\n static T op(const\
-    \ T &l, const T &r) { return l * r; }\n};\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int n;\n cin >> n;\n LinkCutTree<Monoid> lct(n + n - 1, I);\n for (int i= 0;\
-    \ i < n - 1; i++) {\n  int a, b;\n  cin >> a >> b;\n  lct.link(a, i + n);\n  lct.link(i\
-    \ + n, b);\n }\n int q;\n cin >> q;\n while (q--) {\n  char t;\n  cin >> t;\n\
-    \  if (t == 'x') {\n   int i;\n   cin >> i;\n   Mat X(2, 2);\n   cin >> X[0][0]\
-    \ >> X[0][1] >> X[1][0] >> X[1][1];\n   lct.set(i + n, X);\n  } else {\n   int\
-    \ i, j;\n   cin >> i >> j;\n   auto ans= lct.fold(i, j);\n   cout << ans[0][0]\
-    \ << \" \" << ans[0][1] << \" \" << ans[1][0] << \" \" << ans[1][1] << '\\n';\n\
-    \  }\n }\n return 0;\n}\n"
+    \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 5\
+    \ \"src/LinearAlgebra/characteristic_polynomial.hpp\"\ntemplate <class K> Matrix<K>\
+    \ hessenberg(const Matrix<K> &A, bool mint= false) {\n size_t n= A.width();\n\
+    \ assert(n == A.height());\n auto ret= A;\n auto is_zero= [](K x) {\n  if constexpr\
+    \ (std::is_floating_point_v<K>) return std::abs(x) < 1e-8;\n  else return x ==\
+    \ K();\n };\n for (size_t j= 0, i, r; j + 2 < n; ++j) {\n  if constexpr (std::is_floating_point_v<K>)\
+    \ {\n   for (i= j + 1, r= j + 2; r < n; ++r)\n    if (std::abs(ret[i][j]) < std::abs(ret[r][j]))\
+    \ i= r;\n  } else\n   for (i= j + 1; i < n; ++i)\n    if (ret[i][j] != K()) break;\n\
+    \  if (i != j + 1) {\n   for (r= 0; r < n; ++r) std::swap(ret[j + 1][r], ret[i][r]);\n\
+    \   for (; r--;) std::swap(ret[r][j + 1], ret[r][i]);\n  }\n  if (is_zero(ret[j\
+    \ + 1][j])) continue;\n  if (K s, iv; mint) {\n   for (i= j + 2; i < n; ++i)\n\
+    \    if (!is_zero(ret[i][j])) {\n     K m00= K(1), m01= K(), m10= K(), m11= K(1);\n\
+    \     for (uint64_t a= ret[j + 1][j].val(), b= ret[i][j].val(), t, l; b;) l= b,\
+    \ b= a - (t= a / b) * b, a= l, s= m10, m10= m00 - m10 * t, m00= s, s= m11, m11=\
+    \ m01 - m11 * t, m01= s;\n     for (r= 0; r < n; ++r) s= m00 * ret[j + 1][r] +\
+    \ m01 * ret[i][r], ret[i][r]= m10 * ret[j + 1][r] + m11 * ret[i][r], ret[j + 1][r]=\
+    \ s;\n     for (; r--;) s= m11 * ret[r][j + 1] - m10 * ret[r][i], ret[r][j + 1]=\
+    \ m00 * ret[r][i] - m01 * ret[r][j + 1], ret[r][i]= s;\n    }\n  } else {\n  \
+    \ for (iv= K(1) / ret[j + 1][j], i= j + 2; i < n; ++i)\n    if (!is_zero(ret[i][j]))\
+    \ {\n     for (s= ret[i][r= j] * iv; r < n; ++r) ret[i][r]-= s * ret[j + 1][r];\n\
+    \     for (; r--;) ret[r][j + 1]+= s * ret[r][i];\n    }\n  }\n }\n return ret;\n\
+    }\ntemplate <class K> std::vector<K> characteristic_polynomial(const Matrix<K>\
+    \ &A, bool mint= false) {\n size_t n= A.width(), i= 0, k, j;\n assert(n == A.height());\n\
+    \ auto b= hessenberg(A, mint);\n std::vector<K> fss((n + 1) * (n + 2) / 2);\n\
+    \ K *pr= fss.data(), *nx= pr, prod, tmp, s;\n for (fss[0]= 1; i < n; ++i, pr=\
+    \ nx) {\n  for (prod= 1, tmp= -b[i][i], nx= pr + i + 1, std::copy_n(pr, i + 1,\
+    \ nx + 1), k= 0; k <= i; ++k) nx[k]+= tmp * pr[k];\n  for (j= i; j--;)\n   for\
+    \ (pr-= j + 1, s= (prod*= b[j + 1][j]) * -b[j][i], k= 0; k <= j; ++k) nx[k]+=\
+    \ s * pr[k];\n }\n return std::vector<K>(fss.begin() + n * (n + 1) / 2, fss.end());\n\
+    }\n#line 5 \"test/yosupo/matrix_det_arbitrary_mod.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
+    \ ModInt_Runtime<int>;\n int N, m;\n cin >> N >> m;\n Mint::set_mod(m);\n Matrix<Mint>\
+    \ a(N, N);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < N; ++j) cin >> a[i][j];\n\
+    \ cout << characteristic_polynomial(a * Mint(-1), true)[0] << '\\n';\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod\"\
+    \n#include <iostream>\n#include \"src/Math/ModInt_Runtime.hpp\"\n#include \"src/LinearAlgebra/characteristic_polynomial.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt_Runtime<int>;\n int N, m;\n cin >> N >> m;\n Mint::set_mod(m);\n\
+    \ Matrix<Mint> a(N, N);\n for (int i= 0; i < N; ++i)\n  for (int j= 0; j < N;\
+    \ ++j) cin >> a[i][j];\n cout << characteristic_polynomial(a * Mint(-1), true)[0]\
+    \ << '\\n';\n return 0;\n}\n"
   dependsOn:
+  - src/Math/ModInt_Runtime.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
+  - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/Matrix.hpp
   - src/LinearAlgebra/Vector.hpp
-  - src/DataStructure/LinkCutTree.hpp
-  - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
-  path: test/yukicoder/650.LCT.test.cpp
+  path: test/yosupo/matrix_det_arbitrary_mod.test.cpp
   requiredBy: []
   timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yukicoder/650.LCT.test.cpp
+documentation_of: test/yosupo/matrix_det_arbitrary_mod.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/650.LCT.test.cpp
-- /verify/test/yukicoder/650.LCT.test.cpp.html
-title: test/yukicoder/650.LCT.test.cpp
+- /verify/test/yosupo/matrix_det_arbitrary_mod.test.cpp
+- /verify/test/yosupo/matrix_det_arbitrary_mod.test.cpp.html
+title: test/yosupo/matrix_det_arbitrary_mod.test.cpp
 ---

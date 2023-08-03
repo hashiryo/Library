@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
   - icon: ':x:'
@@ -43,9 +43,12 @@ data:
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
   - icon: ':x:'
+    path: test/yosupo/matrix_det_arbitrary_mod.test.cpp
+    title: test/yosupo/matrix_det_arbitrary_mod.test.cpp
+  - icon: ':x:'
     path: test/yosupo/matrix_product.test.cpp
     title: test/yosupo/matrix_product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1340.test.cpp
     title: test/yukicoder/1340.test.cpp
   - icon: ':x:'
@@ -54,7 +57,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
   - icon: ':x:'
@@ -116,12 +119,13 @@ data:
     \   auto b= std::begin(r.dat);\n   for (int k= l; k--; ++a) {\n    auto d= c;\n\
     \    auto v= *a;\n    for (int j= w; j--; ++b, ++d) *d+= v * *b;\n   }\n  }\n\
     \  return ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this\
-    \ * r; }\n Matrix &operator*=(const DiagonalMatrix<R> &r) {\n  assert(W == r.size());\n\
-    \  const size_t h= height();\n  auto a= std::begin(dat);\n  for (int i= 0; i <\
-    \ h; ++i)\n   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n  return *this;\n }\n\
-    \ Matrix operator*(const DiagonalMatrix<R> &r) const { return Matrix(*this)*=\
-    \ r; }\n friend Matrix operator*(const DiagonalMatrix<R> &l, Matrix r) {\n  const\
-    \ size_t h= r.height();\n  assert(h == l.size());\n  auto a= std::begin(r.dat);\n\
+    \ * r; }\n Matrix &operator*=(R r) { return dat*= r, *this; }\n Matrix operator*(R\
+    \ r) const { return Matrix(*this)*= r; }\n Matrix &operator*=(const DiagonalMatrix<R>\
+    \ &r) {\n  assert(W == r.size());\n  const size_t h= height();\n  auto a= std::begin(dat);\n\
+    \  for (int i= 0; i < h; ++i)\n   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n\
+    \  return *this;\n }\n Matrix operator*(const DiagonalMatrix<R> &r) const { return\
+    \ Matrix(*this)*= r; }\n friend Matrix operator*(const DiagonalMatrix<R> &l, Matrix\
+    \ r) {\n  const size_t h= r.height();\n  assert(h == l.size());\n  auto a= std::begin(r.dat);\n\
     \  for (int i= 0; i < h; ++i) {\n   auto v= l[i];\n   for (int j= 0; j < r.W;\
     \ ++j, ++a) *a*= v;\n  }\n  return r;\n }\n Vector<R> operator*(const Vector<R>\
     \ &r) const {\n  assert(W == r.size());\n  const size_t h= height();\n  Vector<R>\
@@ -181,41 +185,42 @@ data:
     \  for (int i= h; i--; std::advance(c, w)) {\n   auto b= std::begin(r.dat);\n\
     \   for (int k= l; k--; ++a) {\n    auto d= c;\n    auto v= *a;\n    for (int\
     \ j= w; j--; ++b, ++d) *d+= v * *b;\n   }\n  }\n  return ret;\n }\n Matrix &operator*=(const\
-    \ Matrix &r) { return *this= *this * r; }\n Matrix &operator*=(const DiagonalMatrix<R>\
-    \ &r) {\n  assert(W == r.size());\n  const size_t h= height();\n  auto a= std::begin(dat);\n\
-    \  for (int i= 0; i < h; ++i)\n   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n\
-    \  return *this;\n }\n Matrix operator*(const DiagonalMatrix<R> &r) const { return\
-    \ Matrix(*this)*= r; }\n friend Matrix operator*(const DiagonalMatrix<R> &l, Matrix\
-    \ r) {\n  const size_t h= r.height();\n  assert(h == l.size());\n  auto a= std::begin(r.dat);\n\
-    \  for (int i= 0; i < h; ++i) {\n   auto v= l[i];\n   for (int j= 0; j < r.W;\
-    \ ++j, ++a) *a*= v;\n  }\n  return r;\n }\n Vector<R> operator*(const Vector<R>\
-    \ &r) const {\n  assert(W == r.size());\n  const size_t h= height();\n  Vector<R>\
-    \ ret(h);\n  auto a= std::begin(dat);\n  for (int i= 0; i < h; ++i)\n   for (int\
-    \ k= 0; k < W; ++k, ++a) ret[i]+= *a * r[k];\n  return ret;\n }\n Matrix pow(uint64_t\
-    \ k) const {\n  assert(W * W == dat.size());\n  for (auto ret= identity_matrix(W),\
-    \ b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n\
-    \ }\n};\ntemplate <> class Matrix<bool> {\n size_t H, W, m;\n std::valarray<u128>\
-    \ dat;\n class Array {\n  u128 *bg;\n public:\n  Array(u128 *it): bg(it) {}\n\
-    \  u128 *data() const { return bg; }\n  Ref operator[](int i) {\n   u128 *ref=\
-    \ bg + (i >> 7);\n   u8 j= i & 127;\n   bool val= (*ref >> j) & 1;\n   return\
-    \ Ref{ref, j, val};\n  }\n  bool operator[](int i) const { return (bg[i >> 7]\
-    \ >> (i & 127)) & 1; }\n };\n class ConstArray {\n  const u128 *bg;\n public:\n\
-    \  ConstArray(const u128 *it): bg(it) {}\n  const u128 *data() const { return\
-    \ bg; }\n  bool operator[](int i) const { return (bg[i >> 7] >> (i & 127)) & 1;\
-    \ }\n };\npublic:\n static Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n\
-    \  for (; n--;) ret[n][n]= 1;\n  return ret;\n }\n Matrix(): H(0), W(0), m(0)\
-    \ {}\n Matrix(size_t h, size_t w): H(h), W(w), m((w + 127) >> 7), dat(u128(0),\
-    \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
-    \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
-    \ { return {std::next(std::begin(dat), i * m)}; }\n ConstArray operator[](int\
-    \ i) const { return {std::next(std::begin(dat), i * m)}; }\n ConstArray get(int\
-    \ i) const { return {std::next(std::begin(dat), i * m)}; }\n bool operator==(const\
-    \ Matrix &r) const { return W == r.W && H == r.H && (dat == r.dat).min(); }\n\
-    \ bool operator!=(const Matrix &r) const { return W != r.W || H != r.H || (dat\
-    \ != r.dat).max(); }\n Matrix &operator+=(const Matrix &r) { return assert(H ==\
-    \ r.H), assert(W == r.W), dat^= r.dat, *this; }\n Matrix operator+(const Matrix\
-    \ &r) const { return Matrix(*this)+= r; }\n Matrix operator*(const Matrix &r)\
-    \ const {\n  assert(W == r.H);\n  Matrix ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n\
+    \ Matrix &r) { return *this= *this * r; }\n Matrix &operator*=(R r) { return dat*=\
+    \ r, *this; }\n Matrix operator*(R r) const { return Matrix(*this)*= r; }\n Matrix\
+    \ &operator*=(const DiagonalMatrix<R> &r) {\n  assert(W == r.size());\n  const\
+    \ size_t h= height();\n  auto a= std::begin(dat);\n  for (int i= 0; i < h; ++i)\n\
+    \   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n  return *this;\n }\n Matrix operator*(const\
+    \ DiagonalMatrix<R> &r) const { return Matrix(*this)*= r; }\n friend Matrix operator*(const\
+    \ DiagonalMatrix<R> &l, Matrix r) {\n  const size_t h= r.height();\n  assert(h\
+    \ == l.size());\n  auto a= std::begin(r.dat);\n  for (int i= 0; i < h; ++i) {\n\
+    \   auto v= l[i];\n   for (int j= 0; j < r.W; ++j, ++a) *a*= v;\n  }\n  return\
+    \ r;\n }\n Vector<R> operator*(const Vector<R> &r) const {\n  assert(W == r.size());\n\
+    \  const size_t h= height();\n  Vector<R> ret(h);\n  auto a= std::begin(dat);\n\
+    \  for (int i= 0; i < h; ++i)\n   for (int k= 0; k < W; ++k, ++a) ret[i]+= *a\
+    \ * r[k];\n  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W * W\
+    \ == dat.size());\n  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n  \
+    \ if (k & 1 ? ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <>\
+    \ class Matrix<bool> {\n size_t H, W, m;\n std::valarray<u128> dat;\n class Array\
+    \ {\n  u128 *bg;\n public:\n  Array(u128 *it): bg(it) {}\n  u128 *data() const\
+    \ { return bg; }\n  Ref operator[](int i) {\n   u128 *ref= bg + (i >> 7);\n  \
+    \ u8 j= i & 127;\n   bool val= (*ref >> j) & 1;\n   return Ref{ref, j, val};\n\
+    \  }\n  bool operator[](int i) const { return (bg[i >> 7] >> (i & 127)) & 1; }\n\
+    \ };\n class ConstArray {\n  const u128 *bg;\n public:\n  ConstArray(const u128\
+    \ *it): bg(it) {}\n  const u128 *data() const { return bg; }\n  bool operator[](int\
+    \ i) const { return (bg[i >> 7] >> (i & 127)) & 1; }\n };\npublic:\n static Matrix\
+    \ identity_matrix(int n) {\n  Matrix ret(n, n);\n  for (; n--;) ret[n][n]= 1;\n\
+    \  return ret;\n }\n Matrix(): H(0), W(0), m(0) {}\n Matrix(size_t h, size_t w):\
+    \ H(h), W(w), m((w + 127) >> 7), dat(u128(0), h * m) {}\n size_t width() const\
+    \ { return W; }\n size_t height() const { return H; }\n explicit operator bool()\
+    \ const { return W; }\n Array operator[](int i) { return {std::next(std::begin(dat),\
+    \ i * m)}; }\n ConstArray operator[](int i) const { return {std::next(std::begin(dat),\
+    \ i * m)}; }\n ConstArray get(int i) const { return {std::next(std::begin(dat),\
+    \ i * m)}; }\n bool operator==(const Matrix &r) const { return W == r.W && H ==\
+    \ r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r) const { return\
+    \ W != r.W || H != r.H || (dat != r.dat).max(); }\n Matrix &operator+=(const Matrix\
+    \ &r) { return assert(H == r.H), assert(W == r.W), dat^= r.dat, *this; }\n Matrix\
+    \ operator+(const Matrix &r) const { return Matrix(*this)+= r; }\n Matrix operator*(const\
+    \ Matrix &r) const {\n  assert(W == r.H);\n  Matrix ret(H, r.W);\n  u128 *c= std::begin(ret.dat);\n\
     \  for (size_t i= 0; i < H; ++i, std::advance(c, m)) {\n   ConstArray a= this->operator[](i);\n\
     \   const u128 *b= std::begin(r.dat);\n   for (size_t k= 0; k < W; ++k, std::advance(b,\
     \ r.m))\n    if (a[k])\n     for (size_t j= 0; j < r.m; ++j) c[j]^= b[j];\n  }\n\
@@ -231,29 +236,30 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/Matrix.hpp
   requiredBy:
-  - src/LinearAlgebra/LU_Decomposition.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
-  timestamp: '2023-04-24 14:08:14+09:00'
+  - src/LinearAlgebra/LU_Decomposition.hpp
+  timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc236_g.test.cpp
-  - test/aoj/2624.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
-  - test/aoj/2397.test.cpp
-  - test/aoj/2530.test.cpp
-  - test/aoj/1328.test.cpp
-  - test/yukicoder/650.LCT.test.cpp
-  - test/yukicoder/184.test.cpp
-  - test/yukicoder/803.test.cpp
-  - test/yukicoder/1750.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
-  - test/yukicoder/1340.test.cpp
-  - test/yukicoder/950.test.cpp
+  - test/yosupo/matrix_det.test.cpp
   - test/yosupo/matrix_product.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/linear_equations.test.cpp
-  - test/yosupo/matrix_det.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yukicoder/1340.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/1750.test.cpp
+  - test/yukicoder/184.test.cpp
+  - test/yukicoder/803.test.cpp
+  - test/aoj/2624.test.cpp
+  - test/aoj/2397.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/2530.test.cpp
+  - test/aoj/1328.test.cpp
+  - test/atcoder/abc236_g.test.cpp
 documentation_of: src/LinearAlgebra/Matrix.hpp
 layout: document
 title: "\u884C\u5217"

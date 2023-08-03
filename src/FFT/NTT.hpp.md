@@ -17,7 +17,7 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':x:'
@@ -70,7 +70,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
   - icon: ':x:'
@@ -307,8 +307,7 @@ data:
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
     \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
-    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
     \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
     \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
     \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
@@ -572,81 +571,81 @@ data:
   isVerificationFile: false
   path: src/FFT/NTT.hpp
   requiredBy:
-  - src/FFT/Polynomial.hpp
-  - src/FFT/MultiVariateConvolution.hpp
-  - src/FFT/sample_points_shift.hpp
-  - src/FFT/BigInt.hpp
-  - src/FFT/bostan_mori.hpp
-  - src/FFT/FormalPowerSeries.hpp
-  - src/FFT/fps_div.hpp
-  - src/FFT/convolve.hpp
-  - src/FFT/extgcd.hpp
-  - src/FFT/polynomial_matrix_prod.hpp
-  - src/FFT/SubProductTree.hpp
-  - src/FFT/fps_inv.hpp
   - src/FFT/fps_exp.hpp
+  - src/FFT/BigInt.hpp
+  - src/FFT/fps_div.hpp
+  - src/FFT/polynomial_matrix_prod.hpp
   - src/FFT/fps_sqrt.hpp
+  - src/FFT/sample_points_shift.hpp
+  - src/FFT/bostan_mori.hpp
+  - src/FFT/fps_inv.hpp
+  - src/FFT/extgcd.hpp
+  - src/FFT/convolve.hpp
+  - src/FFT/MultiVariateConvolution.hpp
+  - src/FFT/FormalPowerSeries.hpp
   - src/FFT/sequences.hpp
-  timestamp: '2023-08-03 16:16:01+09:00'
+  - src/FFT/SubProductTree.hpp
+  - src/FFT/Polynomial.hpp
+  timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc230_h.test.cpp
-  - test/atcoder/abc136_d.test.cpp
-  - test/atcoder/abc213_h.test.cpp
-  - test/aoj/NTL_2_C.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/3072.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
+  - test/yosupo/partition.test.cpp
+  - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
+  - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/partition.MSET.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/frequency_table_of_tree_distance.test.cpp
+  - test/yosupo/bernoulli.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/division_of_big_integers.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+  - test/yosupo/subset_convolution.multivar_conv.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/exp_of_FPS.FPS.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/polynomial_interpolation.test.cpp
+  - test/yosupo/log_of_FPS.FPS.test.cpp
+  - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/multivariate_convolution.test.cpp
+  - test/yosupo/pow_of_FPS.FPS.test.cpp
+  - test/yosupo/convolution_mod_2_64.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/convolution_large.test.cpp
+  - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yukicoder/980.test.cpp
+  - test/yukicoder/665.test.cpp
+  - test/yukicoder/963.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
+  - test/yukicoder/963.FPS.test.cpp
+  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/137.div_at.test.cpp
+  - test/yukicoder/1145.test.cpp
+  - test/yukicoder/502.test.cpp
+  - test/yukicoder/3046.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yukicoder/2122.test.cpp
+  - test/yukicoder/658.test.cpp
+  - test/yukicoder/42.test.cpp
   - test/aoj/NTL_2_B.test.cpp
+  - test/aoj/NTL_2_A.test.cpp
+  - test/aoj/NTL_2_D.test.cpp
+  - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_F.test.cpp
   - test/aoj/0168.test.cpp
-  - test/yukicoder/963.FPS.test.cpp
-  - test/yukicoder/963.test.cpp
-  - test/yukicoder/502.test.cpp
-  - test/yukicoder/980.test.cpp
-  - test/yukicoder/137.div_at.test.cpp
-  - test/yukicoder/3046.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
-  - test/yukicoder/658.test.cpp
-  - test/yukicoder/665.test.cpp
-  - test/yukicoder/1080.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/42.test.cpp
-  - test/yukicoder/2122.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yosupo/multivariate_convolution.test.cpp
-  - test/yosupo/partition.MSET.test.cpp
-  - test/yosupo/exp_of_FPS.test.cpp
-  - test/yosupo/convolution_large.test.cpp
-  - test/yosupo/pow_of_FPS.FPS.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/inv_of_FPS.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/polynomial_interpolation.test.cpp
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yosupo/inv_of_FPS.FPS.test.cpp
-  - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/yosupo/log_of_FPS.FPS.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/convolution_mod_2_64.test.cpp
-  - test/yosupo/stirling_2.test.cpp
-  - test/yosupo/division_of_Poly.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/exp_of_FPS.FPS.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/sqrt_of_FPS.test.cpp
-  - test/yosupo/subset_convolution.multivar_conv.test.cpp
-  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/partition.test.cpp
-  - test/yosupo/convolution1000000007.test.cpp
-  - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/division_of_big_integers.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
+  - test/aoj/NTL_2_E.test.cpp
+  - test/aoj/NTL_2_C.test.cpp
+  - test/atcoder/abc136_d.test.cpp
+  - test/atcoder/abc230_h.test.cpp
+  - test/atcoder/abc213_h.test.cpp
 documentation_of: src/FFT/NTT.hpp
 layout: document
 title: Number-Theoretic-Transform

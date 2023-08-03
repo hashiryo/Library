@@ -28,6 +28,9 @@ data:
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':x:'
+    path: test/yosupo/matrix_det_arbitrary_mod.test.cpp
+    title: test/yosupo/matrix_det_arbitrary_mod.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':x:'
@@ -93,8 +96,7 @@ data:
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
     \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
-    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
     \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
     \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
     \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
@@ -163,15 +165,16 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Runtime.hpp
   requiredBy: []
-  timestamp: '2023-08-03 16:16:01+09:00'
+  timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/atcoder/abc222_g.test.cpp
-  - test/atcoder/abc270_g.test.cpp
-  - test/yukicoder/1339.test.cpp
-  - test/yukicoder/950.test.cpp
   - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yosupo/binomial_coefficient_prime_mod.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/1339.test.cpp
+  - test/atcoder/abc222_g.test.cpp
+  - test/atcoder/abc270_g.test.cpp
 documentation_of: src/Math/ModInt_Runtime.hpp
 layout: document
 title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"

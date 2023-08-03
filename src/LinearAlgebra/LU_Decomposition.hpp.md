@@ -27,7 +27,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/matrix_det.test.cpp
     title: test/yosupo/matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/184.test.cpp
     title: test/yukicoder/184.test.cpp
   - icon: ':x:'
@@ -85,12 +85,13 @@ data:
     \   auto b= std::begin(r.dat);\n   for (int k= l; k--; ++a) {\n    auto d= c;\n\
     \    auto v= *a;\n    for (int j= w; j--; ++b, ++d) *d+= v * *b;\n   }\n  }\n\
     \  return ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this\
-    \ * r; }\n Matrix &operator*=(const DiagonalMatrix<R> &r) {\n  assert(W == r.size());\n\
-    \  const size_t h= height();\n  auto a= std::begin(dat);\n  for (int i= 0; i <\
-    \ h; ++i)\n   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n  return *this;\n }\n\
-    \ Matrix operator*(const DiagonalMatrix<R> &r) const { return Matrix(*this)*=\
-    \ r; }\n friend Matrix operator*(const DiagonalMatrix<R> &l, Matrix r) {\n  const\
-    \ size_t h= r.height();\n  assert(h == l.size());\n  auto a= std::begin(r.dat);\n\
+    \ * r; }\n Matrix &operator*=(R r) { return dat*= r, *this; }\n Matrix operator*(R\
+    \ r) const { return Matrix(*this)*= r; }\n Matrix &operator*=(const DiagonalMatrix<R>\
+    \ &r) {\n  assert(W == r.size());\n  const size_t h= height();\n  auto a= std::begin(dat);\n\
+    \  for (int i= 0; i < h; ++i)\n   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n\
+    \  return *this;\n }\n Matrix operator*(const DiagonalMatrix<R> &r) const { return\
+    \ Matrix(*this)*= r; }\n friend Matrix operator*(const DiagonalMatrix<R> &l, Matrix\
+    \ r) {\n  const size_t h= r.height();\n  assert(h == l.size());\n  auto a= std::begin(r.dat);\n\
     \  for (int i= 0; i < h; ++i) {\n   auto v= l[i];\n   for (int j= 0; j < r.W;\
     \ ++j, ++a) *a*= v;\n  }\n  return r;\n }\n Vector<R> operator*(const Vector<R>\
     \ &r) const {\n  assert(W == r.size());\n  const size_t h= height();\n  Vector<R>\
@@ -297,17 +298,17 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/LU_Decomposition.hpp
   requiredBy: []
-  timestamp: '2023-04-24 14:08:14+09:00'
+  timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/matrix_det.test.cpp
+  - test/yosupo/linear_equations.test.cpp
+  - test/yosupo/inverse_matrix.test.cpp
+  - test/yukicoder/184.test.cpp
+  - test/yukicoder/803.test.cpp
   - test/aoj/2624.test.cpp
   - test/aoj/2530.test.cpp
   - test/aoj/1328.test.cpp
-  - test/yukicoder/184.test.cpp
-  - test/yukicoder/803.test.cpp
-  - test/yosupo/linear_equations.test.cpp
-  - test/yosupo/matrix_det.test.cpp
-  - test/yosupo/inverse_matrix.test.cpp
 documentation_of: src/LinearAlgebra/LU_Decomposition.hpp
 layout: document
 title: "LU\u5206\u89E3"

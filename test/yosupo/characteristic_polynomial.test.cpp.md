@@ -81,12 +81,13 @@ data:
     \   auto b= std::begin(r.dat);\n   for (int k= l; k--; ++a) {\n    auto d= c;\n\
     \    auto v= *a;\n    for (int j= w; j--; ++b, ++d) *d+= v * *b;\n   }\n  }\n\
     \  return ret;\n }\n Matrix &operator*=(const Matrix &r) { return *this= *this\
-    \ * r; }\n Matrix &operator*=(const DiagonalMatrix<R> &r) {\n  assert(W == r.size());\n\
-    \  const size_t h= height();\n  auto a= std::begin(dat);\n  for (int i= 0; i <\
-    \ h; ++i)\n   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n  return *this;\n }\n\
-    \ Matrix operator*(const DiagonalMatrix<R> &r) const { return Matrix(*this)*=\
-    \ r; }\n friend Matrix operator*(const DiagonalMatrix<R> &l, Matrix r) {\n  const\
-    \ size_t h= r.height();\n  assert(h == l.size());\n  auto a= std::begin(r.dat);\n\
+    \ * r; }\n Matrix &operator*=(R r) { return dat*= r, *this; }\n Matrix operator*(R\
+    \ r) const { return Matrix(*this)*= r; }\n Matrix &operator*=(const DiagonalMatrix<R>\
+    \ &r) {\n  assert(W == r.size());\n  const size_t h= height();\n  auto a= std::begin(dat);\n\
+    \  for (int i= 0; i < h; ++i)\n   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n\
+    \  return *this;\n }\n Matrix operator*(const DiagonalMatrix<R> &r) const { return\
+    \ Matrix(*this)*= r; }\n friend Matrix operator*(const DiagonalMatrix<R> &l, Matrix\
+    \ r) {\n  const size_t h= r.height();\n  assert(h == l.size());\n  auto a= std::begin(r.dat);\n\
     \  for (int i= 0; i < h; ++i) {\n   auto v= l[i];\n   for (int j= 0; j < r.W;\
     \ ++j, ++a) *a*= v;\n  }\n  return r;\n }\n Vector<R> operator*(const Vector<R>\
     \ &r) const {\n  assert(W == r.size());\n  const size_t h= height();\n  Vector<R>\
@@ -127,24 +128,35 @@ data:
     \ (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>=\
     \ 1) : !(k>>= 1)) return ret;\n }\n};\n}\nusing la_internal::Matrix;\n#line 5\
     \ \"src/LinearAlgebra/characteristic_polynomial.hpp\"\ntemplate <class K> Matrix<K>\
-    \ hessenberg(const Matrix<K> &A) {\n size_t n= A.width();\n assert(n == A.height());\n\
-    \ auto ret= A;\n for (size_t j= 0, i, r; j + 2 < n; ++j) {\n  if (ret[j + 1][j]\
-    \ == K())\n   for (i= j + 2; i < n; ++i)\n    if (ret[i][j] != K()) {\n     for\
-    \ (r= 0; r < n; ++r) std::swap(ret[j + 1][r], ret[i][r]);\n     for (; r--;) std::swap(ret[r][j\
-    \ + 1], ret[r][i]);\n     break;\n    }\n  if (K iv; ret[j + 1][j] != K())\n \
-    \  for (iv= K(1) / ret[j + 1][j], i= j + 2; i < n; ++i) {\n    for (K m= ret[i][r=\
-    \ j] * iv; r < n; ++r) ret[i][r]-= m * ret[j + 1][r];\n    for (; r--;) ret[r][j\
-    \ + 1]+= m * ret[r][i];\n   }\n }\n return ret;\n}\ntemplate <class K> std::vector<K>\
-    \ characteristic_polynomial(const Matrix<K> &A) {\n size_t n= A.width();\n assert(n\
-    \ == A.height());\n auto b= hessenberg(A);\n std::vector<K> fss((n + 1) * (n +\
-    \ 2) / 2);\n K *pr= fss.data(), *nx= pr, prod, tmp, s;\n fss[0]= 1;\n for (size_t\
-    \ i= 0; i < n; ++i, pr= nx) {\n  prod= 1, tmp= -b[i][i], nx= pr + i + 1, std::copy_n(pr,\
-    \ i + 1, nx + 1);\n  for (size_t k= 0; k <= i; ++k) nx[k]+= tmp * pr[k];\n  for\
-    \ (size_t j= i, k; j--;)\n   for (pr-= j + 1, s= (prod*= b[j + 1][j]) * -b[j][i],\
-    \ k= 0; k <= j; ++k) nx[k]+= s * pr[k];\n }\n return std::vector<K>(fss.begin()\
-    \ + n * (n + 1) / 2, fss.end());\n}\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
-    \ <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
-    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ hessenberg(const Matrix<K> &A, bool mint= false) {\n size_t n= A.width();\n\
+    \ assert(n == A.height());\n auto ret= A;\n auto is_zero= [](K x) {\n  if constexpr\
+    \ (std::is_floating_point_v<K>) return std::abs(x) < 1e-8;\n  else return x ==\
+    \ K();\n };\n for (size_t j= 0, i, r; j + 2 < n; ++j) {\n  if constexpr (std::is_floating_point_v<K>)\
+    \ {\n   for (i= j + 1, r= j + 2; r < n; ++r)\n    if (std::abs(ret[i][j]) < std::abs(ret[r][j]))\
+    \ i= r;\n  } else\n   for (i= j + 1; i < n; ++i)\n    if (ret[i][j] != K()) break;\n\
+    \  if (i != j + 1) {\n   for (r= 0; r < n; ++r) std::swap(ret[j + 1][r], ret[i][r]);\n\
+    \   for (; r--;) std::swap(ret[r][j + 1], ret[r][i]);\n  }\n  if (is_zero(ret[j\
+    \ + 1][j])) continue;\n  if (K s, iv; mint) {\n   for (i= j + 2; i < n; ++i)\n\
+    \    if (!is_zero(ret[i][j])) {\n     K m00= K(1), m01= K(), m10= K(), m11= K(1);\n\
+    \     for (uint64_t a= ret[j + 1][j].val(), b= ret[i][j].val(), t, l; b;) l= b,\
+    \ b= a - (t= a / b) * b, a= l, s= m10, m10= m00 - m10 * t, m00= s, s= m11, m11=\
+    \ m01 - m11 * t, m01= s;\n     for (r= 0; r < n; ++r) s= m00 * ret[j + 1][r] +\
+    \ m01 * ret[i][r], ret[i][r]= m10 * ret[j + 1][r] + m11 * ret[i][r], ret[j + 1][r]=\
+    \ s;\n     for (; r--;) s= m11 * ret[r][j + 1] - m10 * ret[r][i], ret[r][j + 1]=\
+    \ m00 * ret[r][i] - m01 * ret[r][j + 1], ret[r][i]= s;\n    }\n  } else {\n  \
+    \ for (iv= K(1) / ret[j + 1][j], i= j + 2; i < n; ++i)\n    if (!is_zero(ret[i][j]))\
+    \ {\n     for (s= ret[i][r= j] * iv; r < n; ++r) ret[i][r]-= s * ret[j + 1][r];\n\
+    \     for (; r--;) ret[r][j + 1]+= s * ret[r][i];\n    }\n  }\n }\n return ret;\n\
+    }\ntemplate <class K> std::vector<K> characteristic_polynomial(const Matrix<K>\
+    \ &A, bool mint= false) {\n size_t n= A.width(), i= 0, k, j;\n assert(n == A.height());\n\
+    \ auto b= hessenberg(A, mint);\n std::vector<K> fss((n + 1) * (n + 2) / 2);\n\
+    \ K *pr= fss.data(), *nx= pr, prod, tmp, s;\n for (fss[0]= 1; i < n; ++i, pr=\
+    \ nx) {\n  for (prod= 1, tmp= -b[i][i], nx= pr + i + 1, std::copy_n(pr, i + 1,\
+    \ nx + 1), k= 0; k <= i; ++k) nx[k]+= tmp * pr[k];\n  for (j= i; j--;)\n   for\
+    \ (pr-= j + 1, s= (prod*= b[j + 1][j]) * -b[j][i], k= 0; k <= j; ++k) nx[k]+=\
+    \ s * pr[k];\n }\n return std::vector<K>(fss.begin() + n * (n + 1) / 2, fss.end());\n\
+    }\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\
+    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
@@ -198,8 +210,7 @@ data:
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
     \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
-    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
     \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
     \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
     \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
@@ -250,7 +261,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-08-03 16:16:01+09:00'
+  timestamp: '2023-08-03 20:58:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp

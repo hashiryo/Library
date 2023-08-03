@@ -81,9 +81,9 @@ data:
   timestamp: '2023-03-14 17:54:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/3032.test.cpp
   - test/yosupo/general_matching.test.cpp
   - test/yosupo/bipartitematching.matching.test.cpp
+  - test/aoj/3032.test.cpp
 documentation_of: src/Graph/Matching.hpp
 layout: document
 title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"

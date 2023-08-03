@@ -21,7 +21,7 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/NTL_2_A.test.cpp
     title: test/aoj/NTL_2_A.test.cpp
   - icon: ':x:'
@@ -47,7 +47,7 @@ data:
     title: test/yosupo/division_of_big_integers.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/BigInt.hpp\"\n#include <sstream>\n#include <iomanip>\n\
@@ -119,8 +119,7 @@ data:
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
     \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
     \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n template <class T, enable_if_t<is_convertible_v<T, __int128_t>,\
-    \ nullptr_t> = nullptr> CE MInt(T n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
+    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
     \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
     \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
     \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
@@ -471,17 +470,17 @@ data:
   isVerificationFile: false
   path: src/FFT/BigInt.hpp
   requiredBy: []
-  timestamp: '2023-08-03 16:16:01+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-08-03 20:58:30+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/atcoder/abc136_d.test.cpp
-  - test/aoj/NTL_2_C.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
-  - test/aoj/NTL_2_B.test.cpp
-  - test/aoj/NTL_2_F.test.cpp
   - test/yosupo/division_of_big_integers.test.cpp
+  - test/aoj/NTL_2_B.test.cpp
+  - test/aoj/NTL_2_A.test.cpp
+  - test/aoj/NTL_2_D.test.cpp
+  - test/aoj/NTL_2_F.test.cpp
+  - test/aoj/NTL_2_E.test.cpp
+  - test/aoj/NTL_2_C.test.cpp
+  - test/atcoder/abc136_d.test.cpp
 documentation_of: src/FFT/BigInt.hpp
 layout: document
 title: "\u591A\u500D\u9577\u6574\u6570"
