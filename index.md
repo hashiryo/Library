@@ -90,7 +90,7 @@ data:
       title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - name: src/FFT
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/BigInt.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':x:'
@@ -247,7 +247,7 @@ data:
       title: "\u30D9\u30AF\u30C8\u30EB"
     - icon: ':x:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
-      title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F"
+      title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   - name: src/Math
     pages:
     - icon: ':heavy_check_mark:'
@@ -758,10 +758,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_D.test.cpp
       title: test/aoj/DPL_5_D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_E.test.cpp
       title: test/aoj/DPL_5_E.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_F.test.cpp
       title: test/aoj/DPL_5_F.test.cpp
     - icon: ':heavy_check_mark:'
@@ -839,22 +839,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_1_D.test.cpp
       title: test/aoj/NTL_1_D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_A.test.cpp
       title: test/aoj/NTL_2_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_B.test.cpp
       title: test/aoj/NTL_2_B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_C.test.cpp
       title: test/aoj/NTL_2_C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_D.test.cpp
       title: test/aoj/NTL_2_D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_E.test.cpp
       title: test/aoj/NTL_2_E.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_F.test.cpp
       title: test/aoj/NTL_2_F.test.cpp
   - name: test/atcoder
@@ -868,7 +868,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc127_f.test.cpp
       title: test/atcoder/abc127_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc129_e.test.cpp
       title: test/atcoder/abc129_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -880,10 +880,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc135_d.test.cpp
       title: test/atcoder/abc135_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc136_d.test.cpp
       title: test/atcoder/abc136_d.test.cpp
     - icon: ':x:'
@@ -1593,6 +1593,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1868.test.cpp
       title: test/yukicoder/1868.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1907.test.cpp
+      title: test/yukicoder/1907.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1939.test.cpp
       title: test/yukicoder/1939.test.cpp
