@@ -49,63 +49,55 @@ data:
     \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
     \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
     \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
-    \ operator*(bool b, const Vector &r) { return r * b; }\n};\ntemplate <class R>\
-    \ struct DiagonalMatrix: public Vector<R> {\n using Vector<R>::Vector;\n R det()\
-    \ const {\n  R ret(true);\n  for (auto x: *this) ret*= x;\n  return ret;\n }\n\
-    };\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n#line 4 \"src/LinearAlgebra/Matrix.hpp\"\
-    \nnamespace la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
-    \ W;\n valarray<R> dat;\npublic:\n static Matrix identity_matrix(int n) {\n  Matrix\
-    \ ret(n, n);\n  return ret.dat[slice(0, n, n + 1)]= R(true), ret;\n }\n Matrix():\
-    \ W(0) {}\n Matrix(size_t h, size_t w, R v= R()): W(w), dat(v, h * w) {}\n size_t\
-    \ width() const { return W; }\n size_t height() const { return W ? dat.size()\
-    \ / W : 0; }\n explicit operator bool() const { return W; }\n auto operator[](int\
-    \ i) { return next(begin(dat), i * W); }\n auto operator[](int i) const { return\
-    \ next(begin(dat), i * W); }\n Matrix submatrix(const vector<int> &rows, const\
-    \ vector<int> &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int\
-    \ i= rows.size(); i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
-    \  return ret;\n }\n bool operator==(const Matrix &r) const {\n  if (W != r.W\
-    \ || dat.size() != r.dat.size()) return false;\n  for (int i= dat.size(); i--;)\n\
-    \   if (dat[i] != r.dat[i]) return false;\n  return true;\n }\n bool operator!=(const\
-    \ Matrix &r) const { return !(*this == r); }\n Matrix &operator+=(const Matrix\
-    \ &r) { return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+= r.dat,\
-    \ *this; }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+=\
-    \ r; }\n Matrix operator*(const Matrix &r) const {\n  const size_t h= height(),\
-    \ w= r.W, l= W;\n  assert(l == r.height());\n  Matrix ret(h, w);\n  auto a= begin(dat);\n\
+    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;\n\
+    #line 4 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
+    \ R> class Matrix {\npublic:\n size_t W;\n valarray<R> dat;\npublic:\n static\
+    \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[slice(0,\
+    \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
+    \ w, R v= R()): W(w), dat(v, h * w) {}\n size_t width() const { return W; }\n\
+    \ size_t height() const { return W ? dat.size() / W : 0; }\n explicit operator\
+    \ bool() const { return W; }\n auto operator[](int i) { return next(begin(dat),\
+    \ i * W); }\n auto operator[](int i) const { return next(begin(dat), i * W); }\n\
+    \ Matrix submatrix(const vector<int> &rows, const vector<int> &cols) const {\n\
+    \  Matrix ret(rows.size(), cols.size());\n  for (int i= rows.size(); i--;)\n \
+    \  for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n  return\
+    \ ret;\n }\n bool operator==(const Matrix &r) const {\n  if (W != r.W || dat.size()\
+    \ != r.dat.size()) return false;\n  for (int i= dat.size(); i--;)\n   if (dat[i]\
+    \ != r.dat[i]) return false;\n  return true;\n }\n bool operator!=(const Matrix\
+    \ &r) const { return !(*this == r); }\n Matrix &operator+=(const Matrix &r) {\
+    \ return assert(dat.size() == r.dat.size()), assert(W == r.W), dat+= r.dat, *this;\
+    \ }\n Matrix operator+(const Matrix &r) const { return Matrix(*this)+= r; }\n\
+    \ Matrix operator*(const Matrix &r) const {\n  const size_t h= height(), w= r.W,\
+    \ l= W;\n  assert(l == r.height());\n  Matrix ret(h, w);\n  auto a= begin(dat);\n\
     \  auto c= begin(ret.dat);\n  for (int i= h; i--; advance(c, w)) {\n   auto b=\
     \ begin(r.dat);\n   for (int k= l; k--; ++a) {\n    auto d= c;\n    auto v= *a;\n\
     \    for (int j= w; j--; ++b, ++d) *d+= v * *b;\n   }\n  }\n  return ret;\n }\n\
     \ Matrix &operator*=(const Matrix &r) { return *this= *this * r; }\n Matrix &operator*=(R\
     \ r) { return dat*= r, *this; }\n Matrix operator*(R r) const { return Matrix(*this)*=\
-    \ r; }\n Matrix &operator*=(const DiagonalMatrix<R> &r) {\n  assert(W == r.size());\n\
-    \  const size_t h= height();\n  auto a= begin(dat);\n  for (int i= 0; i < h; ++i)\n\
-    \   for (int j= 0; j < W; ++j, ++a) *a*= r[j];\n  return *this;\n }\n Matrix operator*(const\
-    \ DiagonalMatrix<R> &r) const { return Matrix(*this)*= r; }\n friend Matrix operator*(const\
-    \ DiagonalMatrix<R> &l, Matrix r) {\n  const size_t h= r.height();\n  assert(h\
-    \ == l.size());\n  auto a= begin(r.dat);\n  for (int i= 0; i < h; ++i) {\n   auto\
-    \ v= l[i];\n   for (int j= 0; j < r.W; ++j, ++a) *a*= v;\n  }\n  return r;\n }\n\
-    \ Vector<R> operator*(const Vector<R> &r) const {\n  assert(W == r.size());\n\
+    \ r; }\n Vector<R> operator*(const Vector<R> &r) const {\n  assert(W == r.size());\n\
     \  const size_t h= height();\n  Vector<R> ret(h);\n  auto a= begin(dat);\n  for\
     \ (int i= 0; i < h; ++i)\n   for (int k= 0; k < W; ++k, ++a) ret[i]+= *a * r[k];\n\
-    \  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W * W == dat.size());\n\
-    \  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*=\
-    \ b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <> class Matrix<bool>\
-    \ {\n size_t H, W, m;\n valarray<u128> dat;\n class Array {\n  u128 *bg;\n public:\n\
-    \  Array(u128 *it): bg(it) {}\n  u128 *data() const { return bg; }\n  Ref operator[](int\
-    \ i) {\n   u128 *ref= bg + (i >> 7);\n   u8 j= i & 127;\n   bool val= (*ref >>\
-    \ j) & 1;\n   return Ref{ref, j, val};\n  }\n  bool operator[](int i) const {\
-    \ return (bg[i >> 7] >> (i & 127)) & 1; }\n };\n class ConstArray {\n  const u128\
-    \ *bg;\n public:\n  ConstArray(const u128 *it): bg(it) {}\n  const u128 *data()\
-    \ const { return bg; }\n  bool operator[](int i) const { return (bg[i >> 7] >>\
-    \ (i & 127)) & 1; }\n };\npublic:\n static Matrix identity_matrix(int n) {\n \
-    \ Matrix ret(n, n);\n  for (; n--;) ret[n][n]= 1;\n  return ret;\n }\n Matrix():\
-    \ H(0), W(0), m(0) {}\n Matrix(size_t h, size_t w): H(h), W(w), m((w + 127) >>\
-    \ 7), dat(u128(0), h * m) {}\n size_t width() const { return W; }\n size_t height()\
-    \ const { return H; }\n explicit operator bool() const { return W; }\n Array operator[](int\
-    \ i) { return {next(begin(dat), i * m)}; }\n ConstArray operator[](int i) const\
-    \ { return {next(begin(dat), i * m)}; }\n ConstArray get(int i) const { return\
-    \ {next(begin(dat), i * m)}; }\n Matrix submatrix(const vector<int> &rows, const\
-    \ vector<int> &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int\
-    \ i= rows.size(); i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
+    \  return ret;\n }\n Vector<R> operator()(const Vector<R> &r) const { return *this\
+    \ * r; }\n Matrix pow(uint64_t k) const {\n  assert(W * W == dat.size());\n  for\
+    \ (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ? ret*= b, !(k>>=\
+    \ 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <> class Matrix<bool> {\n size_t\
+    \ H, W, m;\n valarray<u128> dat;\n class Array {\n  u128 *bg;\n public:\n  Array(u128\
+    \ *it): bg(it) {}\n  u128 *data() const { return bg; }\n  Ref operator[](int i)\
+    \ {\n   u128 *ref= bg + (i >> 7);\n   u8 j= i & 127;\n   bool val= (*ref >> j)\
+    \ & 1;\n   return Ref{ref, j, val};\n  }\n  bool operator[](int i) const { return\
+    \ (bg[i >> 7] >> (i & 127)) & 1; }\n };\n class ConstArray {\n  const u128 *bg;\n\
+    \ public:\n  ConstArray(const u128 *it): bg(it) {}\n  const u128 *data() const\
+    \ { return bg; }\n  bool operator[](int i) const { return (bg[i >> 7] >> (i &\
+    \ 127)) & 1; }\n };\npublic:\n static Matrix identity_matrix(int n) {\n  Matrix\
+    \ ret(n, n);\n  for (; n--;) ret[n][n]= 1;\n  return ret;\n }\n Matrix(): H(0),\
+    \ W(0), m(0) {}\n Matrix(size_t h, size_t w): H(h), W(w), m((w + 127) >> 7), dat(u128(0),\
+    \ h * m) {}\n size_t width() const { return W; }\n size_t height() const { return\
+    \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
+    \ { return {next(begin(dat), i * m)}; }\n ConstArray operator[](int i) const {\
+    \ return {next(begin(dat), i * m)}; }\n ConstArray get(int i) const { return {next(begin(dat),\
+    \ i * m)}; }\n Matrix submatrix(const vector<int> &rows, const vector<int> &cols)\
+    \ const {\n  Matrix ret(rows.size(), cols.size());\n  for (int i= rows.size();\
+    \ i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
     \  return ret;\n }\n bool operator==(const Matrix &r) const { return W == r.W\
     \ && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r) const\
     \ { return W != r.W || H != r.H || (dat != r.dat).max(); }\n Matrix &operator+=(const\
@@ -119,7 +111,8 @@ data:
     \ Matrix &r) { return *this= *this * r; }\n Vector<bool> operator*(const Vector<bool>\
     \ &r) const {\n  assert(W == r.size());\n  Vector<bool> ret(H);\n  auto a= begin(dat);\n\
     \  for (size_t i= 0; i < H; ++i)\n   for (size_t j= 0; j < m; ++j, ++a) ret[i]^=\
-    \ *a & r[j];\n  return ret;\n }\n Matrix pow(uint64_t k) const {\n  assert(W ==\
+    \ *a & r[j];\n  return ret;\n }\n Vector<bool> operator()(const Vector<bool> &r)\
+    \ const { return *this * r; }\n Matrix pow(uint64_t k) const {\n  assert(W ==\
     \ H);\n  for (auto ret= identity_matrix(W), b= *this;; b*= b)\n   if (k & 1 ?\
     \ ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <class K> static\
     \ bool is_zero(K x) {\n if constexpr (is_floating_point_v<K>) return abs(x) <\
@@ -216,7 +209,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
-  timestamp: '2023-08-04 01:31:11+09:00'
+  timestamp: '2023-08-04 15:19:28+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/matrix_det_arbitrary_mod.test.cpp

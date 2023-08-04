@@ -11,9 +11,6 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':question:'
-    path: src/LinearAlgebra/SparseMatrix.hpp
-    title: "\u758E\u884C\u5217"
   - icon: ':x:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
@@ -116,10 +113,7 @@ data:
     \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
     \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
     \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
-    \ operator*(bool b, const Vector &r) { return r * b; }\n};\ntemplate <class R>\
-    \ struct DiagonalMatrix: public Vector<R> {\n using Vector<R>::Vector;\n R det()\
-    \ const {\n  R ret(true);\n  for (auto x: *this) ret*= x;\n  return ret;\n }\n\
-    };\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n"
+    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;\n"
   code: "#pragma once\n#include <valarray>\nnamespace la_internal {\nusing namespace\
     \ std;\ntemplate <class R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n\
     };\nusing u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8\
@@ -141,19 +135,16 @@ data:
     \ const { return Vector(*this)-= r; }\n Vector operator*(bool b) const { return\
     \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
     \ begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return r\
-    \ * b; }\n};\ntemplate <class R> struct DiagonalMatrix: public Vector<R> {\n using\
-    \ Vector<R>::Vector;\n R det() const {\n  R ret(true);\n  for (auto x: *this)\
-    \ ret*= x;\n  return ret;\n }\n};\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;"
+    \ * b; }\n};\n}\nusing la_internal::Vector;"
   dependsOn: []
   isVerificationFile: false
   path: src/LinearAlgebra/Vector.hpp
   requiredBy:
-  - src/LinearAlgebra/SparseMatrix.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/LU_Decomposition.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
   - src/LinearAlgebra/Matrix.hpp
-  timestamp: '2023-08-03 22:39:15+09:00'
+  timestamp: '2023-08-04 15:19:28+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp

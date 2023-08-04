@@ -69,17 +69,14 @@ data:
     \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
     \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
     \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
-    \ operator*(bool b, const Vector &r) { return r * b; }\n};\ntemplate <class R>\
-    \ struct DiagonalMatrix: public Vector<R> {\n using Vector<R>::Vector;\n R det()\
-    \ const {\n  R ret(true);\n  for (auto x: *this) ret*= x;\n  return ret;\n }\n\
-    };\n}\nusing la_internal::Vector, la_internal::DiagonalMatrix;\n#line 3 \"src/Misc/rng.hpp\"\
-    \nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
-    \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
-    \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
-    #line 7 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n// c s.t. (c[d] * M^d + c[d-1]\
-    \ * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate <class mod_t, template\
-    \ <class> class Mat> class MinimalPolynomial {\n std::vector<mod_t> poly, rev;\n\
-    \ size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline int deg(const\
+    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;\n\
+    #line 3 \"src/Misc/rng.hpp\"\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL\
+    \ * std::random_device{}();\n return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t\
+    \ lim) { return rng() % lim; }\nint64_t rng(int64_t l, int64_t r) { return l +\
+    \ rng() % (r - l); }\n#line 7 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n//\
+    \ c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\ntemplate\
+    \ <class mod_t, class LinMap> class MinimalPolynomial {\n std::vector<mod_t> poly,\
+    \ rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline int deg(const\
     \ std::vector<mod_t> &p) {\n  for (int d= p.size() - 1;; d--)\n   if (d < 0 ||\
     \ p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t> bostan_mori_msb(const\
     \ std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n  assert(d >= 0), assert(q[0]\
@@ -94,62 +91,61 @@ data:
     \ ret;\n }\n std::vector<mod_t> x_pow_mod(uint64_t k) const {\n  assert(k >= n);\n\
     \  std::vector<mod_t> ret(n), u= bostan_mori_msb(rev, k - n + dg);\n  for (int\
     \ i= dg; i--;)\n   for (int j= i + 1; j--;) ret[n - 1 - i]+= u[j] * rev[i - j];\n\
-    \  return ret;\n }\npublic:\n MinimalPolynomial(const Mat<mod_t> &M, Vector<mod_t>\
-    \ b): n(M.width()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n  assert(n\
-    \ == b.size()), assert(n == M.height());\n  Vector<mod_t> a(n);\n  for (auto &x:\
-    \ a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t> v((n + 1) << 1);\n  for\
-    \ (size_t i= v.size(), j= 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n   if (v[j++]=\
-    \ (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n  for (auto\
-    \ &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(), rev.rend()),\
-    \ rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
+    \  return ret;\n }\npublic:\n MinimalPolynomial(const LinMap &M, Vector<mod_t>\
+    \ b): n(b.size()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n  Vector<mod_t>\
+    \ a(n);\n  for (auto &x: a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t>\
+    \ v((n + 1) << 1);\n  for (size_t i= v.size(), j= 0;; b= M(b)) {\n   if (j < n)\
+    \ bs[j]= b;\n   if (v[j++]= (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n\
+    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(),\
+    \ rev.rend()), rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
     \ pow(uint64_t k) const {  // M^k * b\n  if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n\
     \  Vector<mod_t> ret= r[0] * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i]\
     \ * bs[i];\n  return ret;\n }\n const mod_t &operator[](size_t k) const { return\
     \ poly[k]; }\n const auto begin() const { return poly.begin(); }\n const auto\
     \ end() const { return poly.end(); }\n size_t degree() const { return dg; }\n\
-    };\ntemplate <class mod_t, template <class> class Mat> mod_t det(const Mat<mod_t>\
-    \ &M) {\n size_t n= M.height();\n assert(n == M.width());\n Vector<mod_t> b(n);\n\
-    \ for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n DiagonalMatrix<mod_t> D(n);\n\
-    \ for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n mod_t ret= MinimalPolynomial(M\
-    \ * D, b)[0];\n if (n & 1) ret= -ret;\n return ret / D.det();\n}\n"
+    };\ntemplate <class mod_t, class LinMap> mod_t linear_map_det(const LinMap &M,\
+    \ int n) {\n Vector<mod_t> b(n);\n for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n\
+    \ std::vector<mod_t> D(n);\n for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n auto\
+    \ f= [&](Vector<mod_t> a) {\n  for (int i= n; i--;) a[i]*= D[i];\n  return M(a);\n\
+    \ };\n mod_t ret= MinimalPolynomial(f, b)[0], den= 1;\n if (n & 1) ret= -ret;\n\
+    \ for (const auto &x: D) den*= x;\n return ret / den;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include \"src/Internal/modint_traits.hpp\"\
     \n#include \"src/Math/berlekamp_massey.hpp\"\n#include \"src/LinearAlgebra/Vector.hpp\"\
     \n#include \"src/Misc/rng.hpp\"\n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ...\
-    \ + c[1] * M + c[0]) * b = 0\ntemplate <class mod_t, template <class> class Mat>\
-    \ class MinimalPolynomial {\n std::vector<mod_t> poly, rev;\n size_t dg, n;\n\
-    \ std::vector<Vector<mod_t>> bs;\n static inline int deg(const std::vector<mod_t>\
-    \ &p) {\n  for (int d= p.size() - 1;; d--)\n   if (d < 0 || p[d] != mod_t()) return\
-    \ d;\n }\n static inline std::vector<mod_t> bostan_mori_msb(const std::vector<mod_t>\
-    \ &q, uint64_t k) {\n  int d= deg(q);\n  assert(d >= 0), assert(q[0] != mod_t());\n\
-    \  std::vector<mod_t> ret(std::max(d, 1));\n  if (k == 0) return ret.back()= mod_t(1),\
-    \ ret;\n  std::vector<mod_t> v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for\
-    \ (int j= 0; j <= d; j+= 2) v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i\
-    \ <= d; i+= 2)\n   for (int j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n\
-    \  auto w= bostan_mori_msb(v, k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >=\
-    \ d; i-= 2)\n   for (int j= 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >>\
-    \ 1];\n  for (int i= 2 * d - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j\
-    \ <= d; j+= 2) ret[i - d]-= q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t>\
-    \ x_pow_mod(uint64_t k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n),\
-    \ u= bostan_mori_msb(rev, k - n + dg);\n  for (int i= dg; i--;)\n   for (int j=\
-    \ i + 1; j--;) ret[n - 1 - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n\
-    \ MinimalPolynomial(const Mat<mod_t> &M, Vector<mod_t> b): n(M.width()), bs(n)\
-    \ {\n  static_assert(is_modint_v<mod_t>);\n  assert(n == b.size()), assert(n ==\
-    \ M.height());\n  Vector<mod_t> a(n);\n  for (auto &x: a) x= rng(1, mod_t::mod()\
-    \ - 1);\n  std::vector<mod_t> v((n + 1) << 1);\n  for (size_t i= v.size(), j=\
-    \ 0;; b= M * b) {\n   if (j < n) bs[j]= b;\n   if (v[j++]= (a * b).sum(); !(--i))\
-    \ break;\n  }\n  rev= berlekamp_massey(v);\n  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(),\
-    \ 1), poly.assign(rev.rbegin(), rev.rend()), rev.erase(rev.begin() + (dg= deg(rev))\
-    \ + 1, rev.end());\n }\n Vector<mod_t> pow(uint64_t k) const {  // M^k * b\n \
-    \ if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n  Vector<mod_t> ret= r[0]\
-    \ * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i] * bs[i];\n  return ret;\n\
-    \ }\n const mod_t &operator[](size_t k) const { return poly[k]; }\n const auto\
-    \ begin() const { return poly.begin(); }\n const auto end() const { return poly.end();\
-    \ }\n size_t degree() const { return dg; }\n};\ntemplate <class mod_t, template\
-    \ <class> class Mat> mod_t det(const Mat<mod_t> &M) {\n size_t n= M.height();\n\
-    \ assert(n == M.width());\n Vector<mod_t> b(n);\n for (auto &x: b) x= rng(1, mod_t::mod()\
-    \ - 1);\n DiagonalMatrix<mod_t> D(n);\n for (auto &x: D) x= rng(1, mod_t::mod()\
-    \ - 1);\n mod_t ret= MinimalPolynomial(M * D, b)[0];\n if (n & 1) ret= -ret;\n\
-    \ return ret / D.det();\n}"
+    \ + c[1] * M + c[0]) * b = 0\ntemplate <class mod_t, class LinMap> class MinimalPolynomial\
+    \ {\n std::vector<mod_t> poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>>\
+    \ bs;\n static inline int deg(const std::vector<mod_t> &p) {\n  for (int d= p.size()\
+    \ - 1;; d--)\n   if (d < 0 || p[d] != mod_t()) return d;\n }\n static inline std::vector<mod_t>\
+    \ bostan_mori_msb(const std::vector<mod_t> &q, uint64_t k) {\n  int d= deg(q);\n\
+    \  assert(d >= 0), assert(q[0] != mod_t());\n  std::vector<mod_t> ret(std::max(d,\
+    \ 1));\n  if (k == 0) return ret.back()= mod_t(1), ret;\n  std::vector<mod_t>\
+    \ v(d + 1);\n  for (int i= 0; i <= d; i+= 2)\n   for (int j= 0; j <= d; j+= 2)\
+    \ v[(i + j) >> 1]+= q[i] * q[j];\n  for (int i= 1; i <= d; i+= 2)\n   for (int\
+    \ j= 1; j <= d; j+= 2) v[(i + j) >> 1]-= q[i] * q[j];\n  auto w= bostan_mori_msb(v,\
+    \ k >> 1);\n  for (int i= 2 * d - 1 - (k & 1); i >= d; i-= 2)\n   for (int j=\
+    \ 0; j <= d; j+= 2) ret[i - d]+= q[j] * w[(i - j) >> 1];\n  for (int i= 2 * d\
+    \ - 1 - !(k & 1); i >= d; i-= 2)\n   for (int j= 1; j <= d; j+= 2) ret[i - d]-=\
+    \ q[j] * w[(i - j) >> 1];\n  return ret;\n }\n std::vector<mod_t> x_pow_mod(uint64_t\
+    \ k) const {\n  assert(k >= n);\n  std::vector<mod_t> ret(n), u= bostan_mori_msb(rev,\
+    \ k - n + dg);\n  for (int i= dg; i--;)\n   for (int j= i + 1; j--;) ret[n - 1\
+    \ - i]+= u[j] * rev[i - j];\n  return ret;\n }\npublic:\n MinimalPolynomial(const\
+    \ LinMap &M, Vector<mod_t> b): n(b.size()), bs(n) {\n  static_assert(is_modint_v<mod_t>);\n\
+    \  Vector<mod_t> a(n);\n  for (auto &x: a) x= rng(1, mod_t::mod() - 1);\n  std::vector<mod_t>\
+    \ v((n + 1) << 1);\n  for (size_t i= v.size(), j= 0;; b= M(b)) {\n   if (j < n)\
+    \ bs[j]= b;\n   if (v[j++]= (a * b).sum(); !(--i)) break;\n  }\n  rev= berlekamp_massey(v);\n\
+    \  for (auto &x: rev) x= -x;\n  rev.insert(rev.begin(), 1), poly.assign(rev.rbegin(),\
+    \ rev.rend()), rev.erase(rev.begin() + (dg= deg(rev)) + 1, rev.end());\n }\n Vector<mod_t>\
+    \ pow(uint64_t k) const {  // M^k * b\n  if (k < n) return bs[k];\n  auto r= x_pow_mod(k);\n\
+    \  Vector<mod_t> ret= r[0] * bs[0];\n  for (int i= r.size(); --i;) ret+= r[i]\
+    \ * bs[i];\n  return ret;\n }\n const mod_t &operator[](size_t k) const { return\
+    \ poly[k]; }\n const auto begin() const { return poly.begin(); }\n const auto\
+    \ end() const { return poly.end(); }\n size_t degree() const { return dg; }\n\
+    };\ntemplate <class mod_t, class LinMap> mod_t linear_map_det(const LinMap &M,\
+    \ int n) {\n Vector<mod_t> b(n);\n for (auto &x: b) x= rng(1, mod_t::mod() - 1);\n\
+    \ std::vector<mod_t> D(n);\n for (auto &x: D) x= rng(1, mod_t::mod() - 1);\n auto\
+    \ f= [&](Vector<mod_t> a) {\n  for (int i= n; i--;) a[i]*= D[i];\n  return M(a);\n\
+    \ };\n mod_t ret= MinimalPolynomial(f, b)[0], den= 1;\n if (n & 1) ret= -ret;\n\
+    \ for (const auto &x: D) den*= x;\n return ret / den;\n}"
   dependsOn:
   - src/Internal/modint_traits.hpp
   - src/Math/berlekamp_massey.hpp
@@ -158,7 +154,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
-  timestamp: '2023-08-03 22:39:15+09:00'
+  timestamp: '2023-08-04 15:19:28+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sparse_matrix_det.test.cpp
@@ -185,7 +181,7 @@ p(M)\boldsymbol{b} = p_0\boldsymbol{b}+p_1M\boldsymbol{b}+\cdots+p_{d-1}M^{d-1}\
 
 | 関数                     | 概要                                                                                                                                                 | 計算量                                                                         |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `MinimalPolynomial(M,b)` | コンストラクタ. 正方行列 $M$ ( `Matrix` クラス or `SparseMatrix` クラス ) とベクトル $\boldsymbol{b}$ ( `Vector` クラス ) を与えて最小多項式を求める | $\mathcal{O}(n^2+nT(n))$<br> ただし $T(n)$ は $M$ とベクトルの乗算にかかる時間 |
+| `MinimalPolynomial(M,b)` | コンストラクタ. 表現行列が $n\times n$ 正方行列な線型写像 $M$ ( `Vector` $\rightarrow$ `Vector` の関数 or `Matrix` クラス) とベクトル $\boldsymbol{b}$ ( `Vector` クラス ) を与えて最小多項式を求める | $\mathcal{O}(n^2+nT(n))$<br> ただし $T(n)$ は $M$ とベクトルの乗算にかかる時間 |
 | `degree()`               | 最小多項式の次元を返す                                                                                                                               | $\mathcal{O}(1)$                                                               |
 | `operator[](i)`          | 最小多項式の$x^i$の係数を返す                                                                                                                        | $\mathcal{O}(1)$                                                               |
 | `pow(k)`                 | $M^k\boldsymbol{b}$ ( `Vector` クラス ) を返す                                                                                                       | $\mathcal{O}(n^2\log k)$                                                       |
@@ -194,7 +190,7 @@ p(M)\boldsymbol{b} = p_0\boldsymbol{b}+p_1M\boldsymbol{b}+\cdots+p_{d-1}M^{d-1}\
 
 | 関数     | 概要                                                                                   | 計算量                                                                         |
 | -------- | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `det(M)` | 正方行列 $M$ ( `Matrix` クラス or `SparseMatrix` クラス ) の行列式 $\det M$ の値を返す | $\mathcal{O}(n^2+nT(n))$<br> ただし $T(n)$ は $M$ とベクトルの乗算にかかる時間 |
+| `linear_map_det(M)` | 表現行列が $n\times n$ 正方行列な線型写像 $M$ ( `Vector` $\rightarrow$ `Vector` の関数 or `Matrix` クラス) の行列式 $\det M$ の値を返す | $\mathcal{O}(n^2+nT(n))$<br> ただし $T(n)$ は $M$ とベクトルの乗算にかかる時間 |
 
 
 ## 参考
