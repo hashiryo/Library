@@ -18,13 +18,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
   - icon: ':x:'
@@ -78,6 +78,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1907.test.cpp
     title: test/yukicoder/1907.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/310.test.cpp
+    title: test/yukicoder/310.test.cpp
   - icon: ':x:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
@@ -154,6 +157,7 @@ data:
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
+  - test/yukicoder/310.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1340.test.cpp
   - test/yukicoder/650.LCT.test.cpp

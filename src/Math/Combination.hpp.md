@@ -27,6 +27,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/310.test.cpp
+    title: test/yukicoder/310.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -64,6 +67,7 @@ data:
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/binomial_coefficient_prime_mod.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yukicoder/310.test.cpp
   - test/aoj/DPL_5_E.test.cpp
   - test/aoj/DPL_5_F.test.cpp
   - test/aoj/DPL_5_D.test.cpp

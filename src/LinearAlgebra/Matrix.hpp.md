@@ -15,10 +15,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
   - icon: ':x:'
@@ -80,14 +80,14 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#line\
-    \ 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace la_internal\
-    \ {\nusing namespace std;\ntemplate <class R> struct Vector: public valarray<R>\
-    \ {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8= uint8_t;\n\
-    class Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool\
-    \ v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^=\
-    \ u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val= r.val, *this;\
-    \ }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
+  bundledCode: "#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#include\
+    \ <vector>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace\
+    \ la_internal {\nusing namespace std;\ntemplate <class R> struct Vector: public\
+    \ valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
+    using u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128\
+    \ *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >>\
+    \ i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
+    \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
     \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
     \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
     \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n valarray<u128>\
@@ -103,7 +103,7 @@ data:
     \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
     \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
     \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;\n\
-    #line 4 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
+    #line 5 \"src/LinearAlgebra/Matrix.hpp\"\nnamespace la_internal {\ntemplate <class\
     \ R> class Matrix {\npublic:\n size_t W;\n valarray<R> dat;\npublic:\n static\
     \ Matrix identity_matrix(int n) {\n  Matrix ret(n, n);\n  return ret.dat[slice(0,\
     \ n, n + 1)]= R(true), ret;\n }\n Matrix(): W(0) {}\n Matrix(size_t h, size_t\
@@ -148,8 +148,8 @@ data:
     \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
     \ { return {next(begin(dat), i * m)}; }\n ConstArray operator[](int i) const {\
     \ return {next(begin(dat), i * m)}; }\n ConstArray get(int i) const { return {next(begin(dat),\
-    \ i * m)}; }\n Matrix submatrix(const vector<int> &rows, const vector<int> &cols)\
-    \ const {\n  Matrix ret(rows.size(), cols.size());\n  for (int i= rows.size();\
+    \ i * m)}; }\n Matrix submatrix(const std::vector<int> &rows, const std::vector<int>\
+    \ &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int i= rows.size();\
     \ i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
     \  return ret;\n }\n bool operator==(const Matrix &r) const { return W == r.W\
     \ && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r) const\
@@ -170,7 +170,7 @@ data:
     \ ret*= b, !(k>>= 1) : !(k>>= 1)) return ret;\n }\n};\ntemplate <class K> static\
     \ bool is_zero(K x) {\n if constexpr (is_floating_point_v<K>) return abs(x) <\
     \ 1e-8;\n else return x == K();\n}\n}\nusing la_internal::Matrix;\n"
-  code: "#pragma once\n#include <cassert>\n#include \"src/LinearAlgebra/Vector.hpp\"\
+  code: "#pragma once\n#include <cassert>\n#include <vector>\n#include \"src/LinearAlgebra/Vector.hpp\"\
     \nnamespace la_internal {\ntemplate <class R> class Matrix {\npublic:\n size_t\
     \ W;\n valarray<R> dat;\npublic:\n static Matrix identity_matrix(int n) {\n  Matrix\
     \ ret(n, n);\n  return ret.dat[slice(0, n, n + 1)]= R(true), ret;\n }\n Matrix():\
@@ -215,8 +215,8 @@ data:
     \ H; }\n explicit operator bool() const { return W; }\n Array operator[](int i)\
     \ { return {next(begin(dat), i * m)}; }\n ConstArray operator[](int i) const {\
     \ return {next(begin(dat), i * m)}; }\n ConstArray get(int i) const { return {next(begin(dat),\
-    \ i * m)}; }\n Matrix submatrix(const vector<int> &rows, const vector<int> &cols)\
-    \ const {\n  Matrix ret(rows.size(), cols.size());\n  for (int i= rows.size();\
+    \ i * m)}; }\n Matrix submatrix(const std::vector<int> &rows, const std::vector<int>\
+    \ &cols) const {\n  Matrix ret(rows.size(), cols.size());\n  for (int i= rows.size();\
     \ i--;)\n   for (int j= cols.size(); j--;) ret[i][j]= (*this)[rows[i]][cols[j]];\n\
     \  return ret;\n }\n bool operator==(const Matrix &r) const { return W == r.W\
     \ && H == r.H && (dat == r.dat).min(); }\n bool operator!=(const Matrix &r) const\
@@ -244,7 +244,7 @@ data:
   requiredBy:
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/LU_Decomposition.hpp
-  timestamp: '2023-08-04 15:19:28+09:00'
+  timestamp: '2023-08-04 18:10:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/matrix_det.test.cpp

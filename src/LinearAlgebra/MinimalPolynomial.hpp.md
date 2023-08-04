@@ -15,7 +15,7 @@ data:
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
   - icon: ':heavy_check_mark:'
@@ -30,6 +30,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/310.test.cpp
+    title: test/yukicoder/310.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -158,6 +161,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sparse_matrix_det.test.cpp
+  - test/yukicoder/310.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
