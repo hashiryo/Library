@@ -128,13 +128,13 @@ data:
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0, c= 0; b;) z= x, c= a, x= y, y=\
     \ z - y * (q= a / b), a= b, b= c - b * q;\n return assert(a == 1), x < 0 ? mod\
     \ - (-x) % mod : x % mod;\n}\n#line 5 \"src/Math/BinomialCoefficient.hpp\"\nclass\
-    \ BinomialCoefficient {  // mod <= 1e6\n using i64= std::int64_t;\n struct ModPe\
-    \ {\n  ModPe()= default;\n  ModPe(int p, int e, std::size_t pre_size= 1 << 14):\
-    \ p(p), e(e), ppows(e + 1, 1) {\n   for (int i= 1; i <= e; ++i) ppows[i]= ppows[i\
-    \ - 1] * p;\n   for (pp= pe= ppows[e]; std::size_t(pp) * p <= pre_size;) pp*=\
-    \ p;\n   q= pp / pe * p, facts.resize(pp, 1);\n   for (int qq= 1, l= pp / p; qq\
-    \ < q; qq*= p, l/= p)\n    for (int i= 0; i < l; ++i)\n     for (int j= i * p\
-    \ + 1; j < i * p + p; ++j) facts[j * qq]= j;\n   for (int i= 1; i < pp; ++i) facts[i]=\
+    \ BinomialCoefficient {  // mod <= 1e6\n using i64= int64_t;\n struct ModPe {\n\
+    \  ModPe()= default;\n  ModPe(int p, int e, std::size_t pre_size= 1 << 14): p(p),\
+    \ e(e), ppows(e + 1, 1) {\n   for (int i= 1; i <= e; ++i) ppows[i]= ppows[i -\
+    \ 1] * p;\n   for (pp= pe= ppows[e]; std::size_t(pp) * p <= pre_size;) pp*= p;\n\
+    \   q= pp / pe * p, facts.resize(pp, 1);\n   for (int qq= 1, l= pp / p; qq < q;\
+    \ qq*= p, l/= p)\n    for (int i= 0; i < l; ++i)\n     for (int j= i * p + 1;\
+    \ j < i * p + p; ++j) facts[j * qq]= j;\n   for (int i= 1; i < pp; ++i) facts[i]=\
     \ i64(facts[i - 1]) * facts[i] % pe;\n   mask= (facts[pp - 1] == pe - 1), ds.resize(q,\
     \ 0);\n   for (int i= 0; i < pp / pe; ++i)\n    for (int j= 0, s= ds[i]; j < p;\
     \ ++j) ds[i * p + j]= s + j;\n  }\n  int operator()(i64 n, i64 m) const {\n  \
@@ -163,9 +163,9 @@ data:
     \ !r ? 1 : nCr(n + r - 1, r); }\n};\n"
   code: "#pragma once\n#include <vector>\n#include \"src/Math/Factors.hpp\"\n#include\
     \ \"src/Math/mod_inv.hpp\"\nclass BinomialCoefficient {  // mod <= 1e6\n using\
-    \ i64= std::int64_t;\n struct ModPe {\n  ModPe()= default;\n  ModPe(int p, int\
-    \ e, std::size_t pre_size= 1 << 14): p(p), e(e), ppows(e + 1, 1) {\n   for (int\
-    \ i= 1; i <= e; ++i) ppows[i]= ppows[i - 1] * p;\n   for (pp= pe= ppows[e]; std::size_t(pp)\
+    \ i64= int64_t;\n struct ModPe {\n  ModPe()= default;\n  ModPe(int p, int e, std::size_t\
+    \ pre_size= 1 << 14): p(p), e(e), ppows(e + 1, 1) {\n   for (int i= 1; i <= e;\
+    \ ++i) ppows[i]= ppows[i - 1] * p;\n   for (pp= pe= ppows[e]; std::size_t(pp)\
     \ * p <= pre_size;) pp*= p;\n   q= pp / pe * p, facts.resize(pp, 1);\n   for (int\
     \ qq= 1, l= pp / p; qq < q; qq*= p, l/= p)\n    for (int i= 0; i < l; ++i)\n \
     \    for (int j= i * p + 1; j < i * p + p; ++j) facts[j * qq]= j;\n   for (int\
@@ -203,7 +203,7 @@ data:
   isVerificationFile: false
   path: src/Math/BinomialCoefficient.hpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
+  timestamp: '2023-08-04 22:51:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/binomial_coefficient.test.cpp
