@@ -457,21 +457,21 @@ data:
     \ -f[i];\n s[0]+= 1, f= div<mod_t, LM>(s, c);\n for (int i= 1; i <= N; fact*=\
     \ ++i) f[i]*= fact;\n return f;\n}\n// enumeration for k = 0,...,K in \u2211_{n=0}^{N-1}\
     \ n^k\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t> sum_kth_pows(int\
-    \ K, std::uint64_t N) {  // O(K log K)\n std::vector<mod_t> a(K + 1), b(K + 1);\n\
-    \ int i= 1;\n for (a[0]= 1; i <= K; i++) a[i]= a[i - 1] * get_inv<mod_t, LM>(i\
-    \ + 1);\n for (b[0]= N, i= 1; i <= K; i++) b[i]= b[i - 1] * N;\n for (i= 0; i\
-    \ <= K; i++) b[i]*= a[i];\n mod_t fact= 1;\n for (a= div<mod_t, LM>(b, a), i=\
-    \ 1; i <= K; fact*= ++i) a[i]*= fact;\n return a;\n}\n// enumeration for k = 0,...,K\
-    \ in s(N, N-k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t>\
-    \ stirling_first(int K, std::uint64_t N= 0) {  // O(K log K)\n if (N < K) N= K;\n\
-    \ auto a= sum_kth_pows<mod_t, LM>(K, N);\n for (int i= 1; i <= K; i++) a[i]*=\
-    \ -get_inv<mod_t, LM>(i);\n return a[0]= 0, exp<mod_t, LM>(a);\n}\n// enumeration\
-    \ for k = 0,...,N in S(N, k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22>\
-    \ std::vector<mod_t> stirling_second(int N) {  // O(N log N)\n std::vector<mod_t>\
-    \ a(N + 1, 1), b(N + 1);\n for (int i= 1; i <= N; i++) a[i]= a[i - 1] * get_inv<mod_t,\
-    \ LM>(i);\n for (int i= 0; i <= N; i+= 2) b[i]= a[i];\n for (int i= 1; i <= N;\
-    \ i+= 2) b[i]= -a[i];\n for (int i= 0; i <= N; i++) a[i]*= mod_t(i).pow(N);\n\
-    \ return a= convolve<mod_t, LM>(a, b), a.resize(N + 1), a;\n}\n"
+    \ K, uint64_t N) {  // O(K log K)\n std::vector<mod_t> a(K + 1), b(K + 1);\n int\
+    \ i= 1;\n for (a[0]= 1; i <= K; i++) a[i]= a[i - 1] * get_inv<mod_t, LM>(i + 1);\n\
+    \ for (b[0]= N, i= 1; i <= K; i++) b[i]= b[i - 1] * N;\n for (i= 0; i <= K; i++)\
+    \ b[i]*= a[i];\n mod_t fact= 1;\n for (a= div<mod_t, LM>(b, a), i= 1; i <= K;\
+    \ fact*= ++i) a[i]*= fact;\n return a;\n}\n// enumeration for k = 0,...,K in s(N,\
+    \ N-k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t>\
+    \ stirling_first(int K, uint64_t N= 0) {  // O(K log K)\n if (N < K) N= K;\n auto\
+    \ a= sum_kth_pows<mod_t, LM>(K, N);\n for (int i= 1; i <= K; i++) a[i]*= -get_inv<mod_t,\
+    \ LM>(i);\n return a[0]= 0, exp<mod_t, LM>(a);\n}\n// enumeration for k = 0,...,N\
+    \ in S(N, k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t>\
+    \ stirling_second(int N) {  // O(N log N)\n std::vector<mod_t> a(N + 1, 1), b(N\
+    \ + 1);\n for (int i= 1; i <= N; i++) a[i]= a[i - 1] * get_inv<mod_t, LM>(i);\n\
+    \ for (int i= 0; i <= N; i+= 2) b[i]= a[i];\n for (int i= 1; i <= N; i+= 2) b[i]=\
+    \ -a[i];\n for (int i= 0; i <= N; i++) a[i]*= mod_t(i).pow(N);\n return a= convolve<mod_t,\
+    \ LM>(a, b), a.resize(N + 1), a;\n}\n"
   code: "#pragma once\n#include \"src/FFT/fps_inv.hpp\"\n#include \"src/FFT/fps_exp.hpp\"\
     \n#include \"src/FFT/convolve.hpp\"\ntemplate <typename mod_t, std::size_t LM=\
     \ 1 << 22> std::vector<mod_t> bernoulli(int N) {  // O(N log N)\n std::vector<mod_t>\
@@ -492,21 +492,21 @@ data:
     \ -f[i];\n s[0]+= 1, f= div<mod_t, LM>(s, c);\n for (int i= 1; i <= N; fact*=\
     \ ++i) f[i]*= fact;\n return f;\n}\n// enumeration for k = 0,...,K in \u2211_{n=0}^{N-1}\
     \ n^k\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t> sum_kth_pows(int\
-    \ K, std::uint64_t N) {  // O(K log K)\n std::vector<mod_t> a(K + 1), b(K + 1);\n\
-    \ int i= 1;\n for (a[0]= 1; i <= K; i++) a[i]= a[i - 1] * get_inv<mod_t, LM>(i\
-    \ + 1);\n for (b[0]= N, i= 1; i <= K; i++) b[i]= b[i - 1] * N;\n for (i= 0; i\
-    \ <= K; i++) b[i]*= a[i];\n mod_t fact= 1;\n for (a= div<mod_t, LM>(b, a), i=\
-    \ 1; i <= K; fact*= ++i) a[i]*= fact;\n return a;\n}\n// enumeration for k = 0,...,K\
-    \ in s(N, N-k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t>\
-    \ stirling_first(int K, std::uint64_t N= 0) {  // O(K log K)\n if (N < K) N= K;\n\
-    \ auto a= sum_kth_pows<mod_t, LM>(K, N);\n for (int i= 1; i <= K; i++) a[i]*=\
-    \ -get_inv<mod_t, LM>(i);\n return a[0]= 0, exp<mod_t, LM>(a);\n}\n// enumeration\
-    \ for k = 0,...,N in S(N, k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22>\
-    \ std::vector<mod_t> stirling_second(int N) {  // O(N log N)\n std::vector<mod_t>\
-    \ a(N + 1, 1), b(N + 1);\n for (int i= 1; i <= N; i++) a[i]= a[i - 1] * get_inv<mod_t,\
-    \ LM>(i);\n for (int i= 0; i <= N; i+= 2) b[i]= a[i];\n for (int i= 1; i <= N;\
-    \ i+= 2) b[i]= -a[i];\n for (int i= 0; i <= N; i++) a[i]*= mod_t(i).pow(N);\n\
-    \ return a= convolve<mod_t, LM>(a, b), a.resize(N + 1), a;\n}"
+    \ K, uint64_t N) {  // O(K log K)\n std::vector<mod_t> a(K + 1), b(K + 1);\n int\
+    \ i= 1;\n for (a[0]= 1; i <= K; i++) a[i]= a[i - 1] * get_inv<mod_t, LM>(i + 1);\n\
+    \ for (b[0]= N, i= 1; i <= K; i++) b[i]= b[i - 1] * N;\n for (i= 0; i <= K; i++)\
+    \ b[i]*= a[i];\n mod_t fact= 1;\n for (a= div<mod_t, LM>(b, a), i= 1; i <= K;\
+    \ fact*= ++i) a[i]*= fact;\n return a;\n}\n// enumeration for k = 0,...,K in s(N,\
+    \ N-k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t>\
+    \ stirling_first(int K, uint64_t N= 0) {  // O(K log K)\n if (N < K) N= K;\n auto\
+    \ a= sum_kth_pows<mod_t, LM>(K, N);\n for (int i= 1; i <= K; i++) a[i]*= -get_inv<mod_t,\
+    \ LM>(i);\n return a[0]= 0, exp<mod_t, LM>(a);\n}\n// enumeration for k = 0,...,N\
+    \ in S(N, k)\ntemplate <typename mod_t, std::size_t LM= 1 << 22> std::vector<mod_t>\
+    \ stirling_second(int N) {  // O(N log N)\n std::vector<mod_t> a(N + 1, 1), b(N\
+    \ + 1);\n for (int i= 1; i <= N; i++) a[i]= a[i - 1] * get_inv<mod_t, LM>(i);\n\
+    \ for (int i= 0; i <= N; i+= 2) b[i]= a[i];\n for (int i= 1; i <= N; i+= 2) b[i]=\
+    \ -a[i];\n for (int i= 0; i <= N; i++) a[i]*= mod_t(i).pow(N);\n return a= convolve<mod_t,\
+    \ LM>(a, b), a.resize(N + 1), a;\n}"
   dependsOn:
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
@@ -521,7 +521,7 @@ data:
   isVerificationFile: false
   path: src/FFT/sequences.hpp
   requiredBy: []
-  timestamp: '2023-08-03 20:58:30+09:00'
+  timestamp: '2023-08-05 15:21:48+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/partition.test.cpp
