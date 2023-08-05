@@ -87,30 +87,28 @@ data:
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 2 \"src/Math/binary_gcd.hpp\"\n#include\
     \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate <class Int> int\
-    \ bsf(Int a) {\n if constexpr (std::disjunction_v<std::is_same<Int, __uint128_t>,\
-    \ std::is_same<Int, __int128_t>>) {\n  uint64_t lo= a & uint64_t(-1);\n  return\
-    \ lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n } else if constexpr\
-    \ (std::disjunction_v<std::is_same<Int, uint64_t>, std::is_same<Int, int64_t>>)\
-    \ return __builtin_ctzll(a);\n else return __builtin_ctz(a);\n}\ntemplate <class\
-    \ Int> Int binary_gcd(Int a, Int b) {\n if (a == 0 || b == 0) return a + b;\n\
-    \ int n= bsf(a), m= bsf(b), s;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a -\
-    \ b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n\
-    \ return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\nnamespace\
-    \ math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg, T *ed)\
-    \ {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n\
-    \   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n\
-    }\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr size_t size()\
-    \ const { return sz; }\n constexpr auto &operator[](int i) const { return dat[i];\
-    \ }\n constexpr auto *begin() const { return dat; }\n constexpr auto *end() const\
-    \ { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend\
-    \ ostream &operator<<(ostream &os, const ConstexprArray &r) {\n  os << \"[\";\n\
-    \  for (size_t i= 0; i < r.sz; ++i) os << r[i] << \",]\"[i == r.sz - 1];\n  return\
-    \ os;\n }\n};\nclass Factors: public ConstexprArray<pair<u64, uint16_t>, 16> {\n\
-    \ template <class Uint, class MP> static constexpr Uint rho(Uint n, Uint c) {\n\
-    \  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x, x),\
-    \ c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z=\
-    \ 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x=\
-    \ y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q),\
+    \ bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
+    \  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n } else if\
+    \ constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n else return __builtin_ctz(a);\n\
+    }\ntemplate <class Int> Int binary_gcd(Int a, Int b) {\n if (a == 0 || b == 0)\
+    \ return a + b;\n int n= bsf(a), m= bsf(b), s;\n for (a>>= n, b>>= m; a != b;)\
+    \ {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a, a= (f ? d :\
+    \ -d) >> s;\n }\n return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\
+    \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
+    \ T *ed) {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j >\
+    \ i;)\n   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]=\
+    \ tmp;\n}\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr\
+    \ size_t size() const { return sz; }\n constexpr auto &operator[](int i) const\
+    \ { return dat[i]; }\n constexpr auto *begin() const { return dat; }\n constexpr\
+    \ auto *end() const { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t\
+    \ sz= 0;\n friend ostream &operator<<(ostream &os, const ConstexprArray &r) {\n\
+    \  os << \"[\";\n  for (size_t i= 0; i < r.sz; ++i) os << r[i] << \",]\"[i ==\
+    \ r.sz - 1];\n  return os;\n }\n};\nclass Factors: public ConstexprArray<pair<u64,\
+    \ uint16_t>, 16> {\n template <class Uint, class MP> static constexpr Uint rho(Uint\
+    \ n, Uint c) {\n  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x,\
+    \ x), c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2),\
+    \ z= 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for\
+    \ (x= y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q),\
     \ n), k+= m)\n    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y,\
     \ x));\n  }\n  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z,\
     \ x)), n);\n   } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
@@ -118,7 +116,7 @@ data:
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; p++)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ (u64 p= 2; p < 100 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
@@ -198,7 +196,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/binomial_coefficient.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 22:03:40+09:00'
+  timestamp: '2023-08-05 23:01:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/binomial_coefficient.test.cpp

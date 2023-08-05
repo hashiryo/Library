@@ -47,11 +47,11 @@ data:
     \ + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class K> std::vector<K>\
     \ berlekamp_massey(const std::vector<K> &a) {\n size_t n= a.size(), d= 0, m= 0,\
     \ i, j;\n if (n == 0) return {};\n std::vector<K> c(n), b(n), tmp;\n K x= 1, y,\
-    \ coef;\n const K Z= 0;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m,\
-    \ y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i - j];\n  if (y == Z) continue;\n\
-    \  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2\
-    \ * d > i) continue;\n  d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1),\
-    \ c.erase(c.begin());\n for (auto &x: c) x= -x;\n return c;\n}\n#line 3 \"src/LinearAlgebra/Vector.hpp\"\
+    \ coef;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m, y= a[i], j=\
+    \ 1; j <= d; ++j) y+= c[j] * a[i - j];\n  if (y == K()) continue;\n  for (tmp=\
+    \ c, coef= y / x, j= m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2 * d <= i)\
+    \ d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n\
+    \ for (auto &x: c) x= -x;\n return c;\n}\n#line 3 \"src/LinearAlgebra/Vector.hpp\"\
     \nnamespace la_internal {\nusing namespace std;\ntemplate <class R> struct Vector:\
     \ public valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
     using u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128\
@@ -157,7 +157,7 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
-  timestamp: '2023-08-04 15:19:28+09:00'
+  timestamp: '2023-08-05 23:01:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sparse_matrix_det.test.cpp

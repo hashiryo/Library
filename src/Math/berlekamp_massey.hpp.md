@@ -36,27 +36,26 @@ data:
     \ = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\ntemplate\
     \ <class K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n size_t\
     \ n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K> c(n),\
-    \ b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for (c[0]= b[0]= 1, i= 0, j;\
-    \ i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i - j];\n\
-    \  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-=\
-    \ coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i + 1 - d, b= tmp, x= y,\
-    \ m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n\
-    \ return c;\n}\n"
+    \ b(n), tmp;\n K x= 1, y, coef;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n\
+    \  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i - j];\n  if (y == K())\
+    \ continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-= coef * b[j -\
+    \ m];\n  if (2 * d <= i) d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d +\
+    \ 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n return c;\n}\n"
   code: "#pragma once\n#include <vector>\n// a[n] = c[0] * a[n-1] + c[1] * a[n-2]\
     \ + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class K> std::vector<K> berlekamp_massey(const\
     \ std::vector<K> &a) {\n size_t n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return\
-    \ {};\n std::vector<K> c(n), b(n), tmp;\n K x= 1, y, coef;\n const K Z= 0;\n for\
-    \ (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j)\
-    \ y+= c[j] * a[i - j];\n  if (y == Z) continue;\n  for (tmp= c, coef= y / x, j=\
-    \ m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2 * d > i) continue;\n  d= i +\
-    \ 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for\
-    \ (auto &x: c) x= -x;\n return c;\n}"
+    \ {};\n std::vector<K> c(n), b(n), tmp;\n K x= 1, y, coef;\n for (c[0]= b[0]=\
+    \ 1, i= 0, j; i < n; ++i) {\n  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j]\
+    \ * a[i - j];\n  if (y == K()) continue;\n  for (tmp= c, coef= y / x, j= m; j\
+    \ < n; ++j) c[j]-= coef * b[j - m];\n  if (2 * d <= i) d= i + 1 - d, b= tmp, x=\
+    \ y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n\
+    \ return c;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/berlekamp_massey.hpp
   requiredBy:
   - src/LinearAlgebra/MinimalPolynomial.hpp
-  timestamp: '2023-03-12 20:26:06+09:00'
+  timestamp: '2023-08-05 23:01:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/find_linear_recurrence.test.cpp
