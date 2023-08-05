@@ -102,7 +102,7 @@ data:
     - icon: ':question:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
     - icon: ':x:'
@@ -111,16 +111,16 @@ data:
     - icon: ':x:'
       path: src/FFT/bostan_mori.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/convolve.hpp
       title: "\u7573\u307F\u8FBC\u307F"
     - icon: ':x:'
       path: src/FFT/extgcd.hpp
       title: "\u591A\u9805\u5F0F\u306E\u62E1\u5F35\u4E92\u9664\u6CD5"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_div.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
     - icon: ':question:'
@@ -135,7 +135,7 @@ data:
     - icon: ':x:'
       path: src/FFT/sample_points_shift.hpp
       title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/sequences.hpp
       title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
         \u7528)"
@@ -242,7 +242,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Vector.hpp
       title: "\u30D9\u30AF\u30C8\u30EB"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
       title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   - name: src/Math
@@ -250,7 +250,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/BinomialCoefficient.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':question:'
@@ -325,7 +325,7 @@ data:
     - icon: ':question:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/mod_tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
@@ -1054,7 +1054,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.Dirichlet.test.cpp
       title: test/atcoder/arc116_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1074,7 +1074,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/bonnie-and-clyde.test.cpp
       title: test/hackerrank/bonnie-and-clyde.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
       title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1088,25 +1088,25 @@ data:
       title: test/hackerrank/library-query.SqrtDC.test.cpp
   - name: test/unit_test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_binary_gcd.test.cpp
       title: test/unit_test/constexpr_binary_gcd.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_factors.test.cpp
       title: test/unit_test/constexpr_factors.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_is_prime.test.cpp
       title: test/unit_test/constexpr_is_prime.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_mod_inv.test.cpp
       title: test/unit_test/constexpr_mod_inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_mod_sqrt.test.cpp
       title: test/unit_test/constexpr_mod_sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_mod_tetration.test.cpp
       title: test/unit_test/constexpr_mod_tetration.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_modint.test.cpp
       title: test/unit_test/constexpr_modint.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1129,16 +1129,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.mcf.test.cpp
       title: test/yosupo/assignment.mcf.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/biconnected_components.test.cpp
       title: test/yosupo/biconnected_components.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/binomial_coefficient.test.cpp
       title: test/yosupo/binomial_coefficient.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
       title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1156,10 +1156,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/cartesian_tree.test.cpp
       title: test/yosupo/cartesian_tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/characteristic_polynomial.test.cpp
       title: test/yosupo/characteristic_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
     - icon: ':x:'

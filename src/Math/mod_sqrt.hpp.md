@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_mod_sqrt.test.cpp
     title: test/unit_test/constexpr_mod_sqrt.test.cpp
   - icon: ':x:'

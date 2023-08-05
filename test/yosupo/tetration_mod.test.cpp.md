@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
@@ -113,7 +113,7 @@ data:
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
@@ -139,7 +139,7 @@ data:
     \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
     \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
     \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
-    \ tmp*= p;\n  k= k / binary_gcd(k, tmp) * tmp;\n }\n auto mod= [m](u128 x) { return\
+    \ tmp*= p;\n  k= tmp / binary_gcd(k, tmp) * k;\n }\n auto mod= [m](u128 x) { return\
     \ x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
     \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
     constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
@@ -162,7 +162,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-08-06 00:46:02+09:00'
+  timestamp: '2023-08-06 01:42:03+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp

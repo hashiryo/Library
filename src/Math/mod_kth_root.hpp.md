@@ -116,7 +116,7 @@ data:
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
@@ -209,7 +209,7 @@ data:
   isVerificationFile: false
   path: src/Math/mod_kth_root.hpp
   requiredBy: []
-  timestamp: '2023-08-06 00:46:02+09:00'
+  timestamp: '2023-08-06 01:42:03+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/kth_root_mod.test.cpp

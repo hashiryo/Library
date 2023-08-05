@@ -11,7 +11,7 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':heavy_check_mark:'
@@ -20,7 +20,7 @@ data:
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
@@ -31,13 +31,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_factors.test.cpp
     title: test/unit_test/constexpr_factors.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_mod_tetration.test.cpp
     title: test/unit_test/constexpr_mod_tetration.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
   - icon: ':x:'
@@ -141,7 +141,7 @@ data:
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
@@ -188,7 +188,7 @@ data:
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
@@ -222,7 +222,7 @@ data:
   - src/Math/mod_tetration.hpp
   - src/Math/ModInt_Exp.hpp
   - src/Math/mod_kth_root.hpp
-  timestamp: '2023-08-06 00:46:02+09:00'
+  timestamp: '2023-08-06 01:42:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp

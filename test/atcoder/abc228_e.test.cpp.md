@@ -112,7 +112,7 @@ data:
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
@@ -145,11 +145,11 @@ data:
     \ b= mul(b, b))\n   if (k & 1 ? ret= mul(ret, b) : 0; !(k>>= 1)) return ret;\n\
     \ }\n static constexpr inline uint64_t f(uint64_t x) {\n  uint64_t ret= 1, i=\
     \ 0, tmp= 1;\n  for (const auto &[p, e]: Factors(x)) {\n   for (tmp= p - 1, i=\
-    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n   ret= std::lcm(ret, tmp);\n  }\n  return\
-    \ ret;\n }\npublic:\n Uint a;\n ModInt_Exp<f(MOD)> b;\n constexpr ModInt_Exp()=\
-    \ default;\n constexpr ModInt_Exp(uint64_t x): a(mod(x)), b(x) {}\n constexpr\
-    \ ModInt_Exp(Uint a_, ModInt_Exp<f(MOD)> b_): a(a_), b(b_) {}\n constexpr Uint\
-    \ val() const { return a < MOD ? a : a - MOD; }\n constexpr mod_t &operator*=(const\
+    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n   ret= tmp / binary_gcd(ret, tmp) *\
+    \ ret;\n  }\n  return ret;\n }\npublic:\n Uint a;\n ModInt_Exp<f(MOD)> b;\n constexpr\
+    \ ModInt_Exp()= default;\n constexpr ModInt_Exp(uint64_t x): a(mod(x)), b(x) {}\n\
+    \ constexpr ModInt_Exp(Uint a_, ModInt_Exp<f(MOD)> b_): a(a_), b(b_) {}\n constexpr\
+    \ Uint val() const { return a < MOD ? a : a - MOD; }\n constexpr mod_t &operator*=(const\
     \ mod_t &r) { return a= mul(a, r.a), b*= r.b, *this; }\n constexpr mod_t &operator+=(const\
     \ mod_t &r) { return a-= MOD & -((a+= r.a) >= MOD * 2), b+= r.b, *this; }\n constexpr\
     \ mod_t operator*(const mod_t &r) const { return mod_t(*this)*= r; }\n constexpr\
@@ -183,7 +183,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc228_e.test.cpp
   requiredBy: []
-  timestamp: '2023-08-06 00:46:02+09:00'
+  timestamp: '2023-08-06 01:42:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc228_e.test.cpp

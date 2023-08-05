@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
   - icon: ':question:'
@@ -26,12 +26,12 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/sequences.hpp
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':x:'
@@ -66,7 +66,7 @@ data:
     title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
@@ -473,7 +473,7 @@ data:
   requiredBy:
   - src/FFT/sequences.hpp
   timestamp: '2023-08-05 18:38:55+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/partition.test.cpp
   - test/yosupo/exp_of_FPS.test.cpp

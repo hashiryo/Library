@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient
@@ -116,7 +116,7 @@ data:
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
     \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 100 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
@@ -196,8 +196,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/binomial_coefficient.test.cpp
   requiredBy: []
-  timestamp: '2023-08-06 00:46:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-08-06 01:42:03+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/binomial_coefficient.test.cpp
 layout: document
