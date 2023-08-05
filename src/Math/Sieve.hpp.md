@@ -9,7 +9,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - icon: ':heavy_check_mark:'
@@ -222,7 +222,7 @@ data:
   - test/atcoder/agc038_c.numth.test.cpp
 documentation_of: src/Math/Sieve.hpp
 layout: document
-title: "\u7BE9\u306A\u3069"
+title: "\u7BE9 \u4ED6"
 ---
 線形篩による素数列挙の前処理 \
 乗法的関数 テーブル列挙 や gcd畳み込みなど

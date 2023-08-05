@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Math/Sieve.hpp
-    title: "\u7BE9\u306A\u3069"
+    title: "\u7BE9 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

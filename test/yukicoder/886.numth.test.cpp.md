@@ -12,7 +12,7 @@ data:
     title: ModInt
   - icon: ':question:'
     path: src/Math/Sieve.hpp
-    title: "\u7BE9\u306A\u3069"
+    title: "\u7BE9 \u4ED6"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"

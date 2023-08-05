@@ -131,7 +131,7 @@ data:
   - test/atcoder/abc179_c.mul_sum.test.cpp
 documentation_of: src/Math/prime_count.hpp
 layout: document
-title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
+title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8 \u4ED6"
 ---
 乗法的関数や加法的関数の累積和も添えて
 

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Math/prime_count.hpp
-    title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
+    title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

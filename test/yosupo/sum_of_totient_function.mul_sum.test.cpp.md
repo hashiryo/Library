@@ -18,7 +18,7 @@ data:
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
   - icon: ':question:'
     path: src/Math/prime_count.hpp
-    title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8\u306A\u3069"
+    title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -170,8 +170,8 @@ data:
     \ short e) { return (e == 0) - (e == 1); }\n static std::vector<T> poly() { return\
     \ {-1}; }\n};\ntemplate <class T> struct Liouville {\n static constexpr T f(std::uint64_t,\
     \ short e) { return e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return\
-    \ {-1}; }\n};\ntemplate <class T, std::uint64_t k> struct Divisor {\n static constexpr\
-    \ T f(std::uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (std::uint64_t\
+    \ {-1}; }\n};\ntemplate <class T, uint64_t k> struct Divisor {\n static constexpr\
+    \ T f(std::uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t\
     \ kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <=\
     \ e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static std::vector<T> poly()\
     \ {\n  std::vector<T> ret(k + 1, 0);\n  ret[0]+= 1, ret[k]+= 1;\n  return ret;\n\
@@ -211,7 +211,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
+  timestamp: '2023-08-05 22:03:40+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

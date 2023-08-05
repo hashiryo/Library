@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - icon: ':x:'
@@ -34,8 +34,8 @@ data:
     \ short e) { return (e == 0) - (e == 1); }\n static std::vector<T> poly() { return\
     \ {-1}; }\n};\ntemplate <class T> struct Liouville {\n static constexpr T f(std::uint64_t,\
     \ short e) { return e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return\
-    \ {-1}; }\n};\ntemplate <class T, std::uint64_t k> struct Divisor {\n static constexpr\
-    \ T f(std::uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (std::uint64_t\
+    \ {-1}; }\n};\ntemplate <class T, uint64_t k> struct Divisor {\n static constexpr\
+    \ T f(std::uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t\
     \ kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <=\
     \ e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static std::vector<T> poly()\
     \ {\n  std::vector<T> ret(k + 1, 0);\n  ret[0]+= 1, ret[k]+= 1;\n  return ret;\n\
@@ -60,14 +60,14 @@ data:
     \ constexpr T f(std::uint64_t, short e) { return (e == 0) - (e == 1); }\n static\
     \ std::vector<T> poly() { return {-1}; }\n};\ntemplate <class T> struct Liouville\
     \ {\n static constexpr T f(std::uint64_t, short e) { return e & 1 ? -1 : 1; }\n\
-    \ static std::vector<T> poly() { return {-1}; }\n};\ntemplate <class T, std::uint64_t\
+    \ static std::vector<T> poly() { return {-1}; }\n};\ntemplate <class T, uint64_t\
     \ k> struct Divisor {\n static constexpr T f(std::uint64_t p, short e) {\n  T\
-    \ ret= 0, pk= 1, pkpw= 1, b= p;\n  for (std::uint64_t kk= k; kk; kk>>= 1, b*=\
-    \ b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <= e; i++, pkpw*= pk) ret+=\
-    \ pkpw;\n  return ret;\n }\n static std::vector<T> poly() {\n  std::vector<T>\
-    \ ret(k + 1, 0);\n  ret[0]+= 1, ret[k]+= 1;\n  return ret;\n }\n};\ntemplate <class\
-    \ T> struct Dedekind {\n static constexpr T f(std::uint64_t p, short e) {\n  T\
-    \ ret= p + 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T>\
+    \ ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t kk= k; kk; kk>>= 1, b*= b)\n\
+    \   if (kk & 1) pk*= b;\n  for (short i= 0; i <= e; i++, pkpw*= pk) ret+= pkpw;\n\
+    \  return ret;\n }\n static std::vector<T> poly() {\n  std::vector<T> ret(k +\
+    \ 1, 0);\n  ret[0]+= 1, ret[k]+= 1;\n  return ret;\n }\n};\ntemplate <class T>\
+    \ struct Dedekind {\n static constexpr T f(std::uint64_t p, short e) {\n  T ret=\
+    \ p + 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T>\
     \ poly() { return {1, 1}; }\n};\n}  // namespace multiplicative_functions\nnamespace\
     \ additive_functions {\ntemplate <class T> struct BigOmega {  // the total number\
     \ of prime factors of n\n static constexpr T f(std::uint64_t, short e) { return\
@@ -84,7 +84,7 @@ data:
   isVerificationFile: false
   path: src/Math/multiplicative_and_additive.hpp
   requiredBy: []
-  timestamp: '2023-01-21 20:48:27+09:00'
+  timestamp: '2023-08-05 22:03:40+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp

@@ -165,7 +165,7 @@ data:
     \ ret[0]= 1;\n for (int i= 1; i < n; ret[i]*= get_inv<mod_t, LM>(i), ++i)\n  for\
     \ (auto &&[j, v]: dat) {\n   if (i <= j) break;\n   ret[i]+= ret[i - 1 - j] *\
     \ v;\n  }\n return ret;\n}\ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t>\
-    \ sparse_pow(const std::vector<mod_t> &f, std::uint64_t k, int n) {\n std::vector<mod_t>\
+    \ sparse_pow(const std::vector<mod_t> &f, uint64_t k, int n) {\n std::vector<mod_t>\
     \ ret(n);\n if (k == 0) return ret[0]= 1, ret;\n int cnt= 0, ed= std::min<int>(n,\
     \ f.size());\n while (cnt < ed && f[cnt] == mod_t(0)) cnt++;\n const __int128_t\
     \ ofs= (__int128_t)k * cnt, sz= n - ofs;\n if (sz <= 0) return ret;\n std::vector<std::pair<int,\
@@ -207,7 +207,7 @@ data:
     \ // a = f'g-fg', b = g^2\n return sparse_log_differentiation<mod_t, LM>(a, b,\
     \ n);\n}\ntemplate <class mod_t, std::size_t LM= 1 << 24>  // (f/g)^k\nstd::vector<mod_t>\
     \ sparse_pow_of_div(const std::vector<mod_t> &f, const std::vector<mod_t> &g,\
-    \ std::uint64_t k, int n) {\n assert(f[0] == mod_t(1)), assert(g[0] == mod_t(1));\n\
+    \ uint64_t k, int n) {\n assert(f[0] == mod_t(1)), assert(g[0] == mod_t(1));\n\
     \ std::vector<std::pair<int, mod_t>> dat_f, dat_g;\n for (int i= 0, ed= std::min<int>(f.size(),\
     \ n); i < ed; ++i)\n  if (f[i] != mod_t(0)) dat_f.emplace_back(i, f[i]);\n for\
     \ (int i= 0, ed= std::min<int>(g.size(), n); i < ed; ++i)\n  if (g[i] != mod_t(0))\
@@ -239,7 +239,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/exp_of_sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
+  timestamp: '2023-08-05 22:03:40+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/exp_of_sparse_FPS.test.cpp

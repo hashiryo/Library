@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_small_p_large_n
@@ -76,30 +76,30 @@ data:
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 6 \"src/Math/StirlingNumber.hpp\"\n\
-    class StirlingNumber {\n const std::uint16_t p;\n std::vector<std::vector<std::uint16_t>>\
+    class StirlingNumber {\n const uint16_t p;\n std::vector<std::vector<uint16_t>>\
     \ c, s1, s2;\n void buildS1() {\n  s1.resize(p), s1[0]= {1};\n  for (int i= 1,\
     \ j, t; i < p; s1[i][i]= 1, i++)\n   for (s1[i].resize(i + 1, 0), j= 1, t= p -\
     \ i + 1; j < i; j++) s1[i][j]= (t * s1[i - 1][j] + s1[i - 1][j - 1]) % p;\n }\n\
     \ void buildS2() {\n  s2.resize(p), s2[0]= {1};\n  for (int i= 1, j; i < p; s2[i][i]=\
     \ 1, i++)\n   for (s2[i].resize(i + 1, 0), j= 1; j < i; j++) s2[i][j]= (j * s2[i\
-    \ - 1][j] + s2[i - 1][j - 1]) % p;\n }\npublic:\n StirlingNumber(std::uint32_t\
-    \ p_, bool first= true, bool second= true): p(p_), c(p) {\n  assert(is_prime(p_)),\
+    \ - 1][j] + s2[i - 1][j - 1]) % p;\n }\npublic:\n StirlingNumber(uint32_t p_,\
+    \ bool first= true, bool second= true): p(p_), c(p) {\n  assert(is_prime(p_)),\
     \ assert(p_ < (1 << 15)), c[0]= {1};\n  for (int i= 1, j; i < p; i++)\n   for\
     \ (c[i]= c[i - 1], c[i].emplace_back(0), j= 1; j <= i; j++) c[i][j]-= p & -((c[i][j]+=\
     \ c[i - 1][j - 1]) >= p);\n  if (first) buildS1();\n  if (second) buildS2();\n\
-    \ }\n int nCk(std::uint64_t n, std::uint64_t k) {\n  if (k > n) return 0;\n  int\
-    \ ret= 1, i, j;\n  for (k= std::min(k, n - k); k; ret= ret * c[i][j] % p, n/=\
-    \ p, k/= p)\n   if (i= n % p, j= k % p; j > i) return 0;\n  return ret;\n }\n\
-    \ int S1(std::uint64_t n, std::uint64_t k) {\n  if (k > n) return 0;\n  std::uint64_t\
-    \ i= n / p;\n  if (i > k) return 0;\n  std::int64_t a= (k - i) / (p - 1);\n  std::uint16_t\
-    \ j= n % p, b= (k - i) % (p - 1);\n  if (!b && j) b+= (p - 1), a-= 1;\n  if (a\
-    \ < 0 || i < a || b > j) return 0;\n  return (j= nCk(i, a) * s1[j][b] % p) &&\
-    \ ((i + a) & 1) ? p - j : j;\n }\n int S2(std::uint64_t n, std::uint64_t k) {\n\
-    \  if (k > n) return 0;\n  if (!n) return 1;\n  std::uint64_t i= k / p;\n  if\
-    \ (n <= i) return 0;\n  std::uint64_t a= (n - i - 1) / (p - 1);\n  std::uint16_t\
-    \ j= k % p, b= (n - i) - a * (p - 1);\n  if (j > b) return 0;\n  return b == p\
-    \ - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j] % p;\n }\n};\n#line 4 \"test/yosupo/stirling_1_small_p_large_n.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ }\n int nCk(uint64_t n, uint64_t k) {\n  if (k > n) return 0;\n  int ret= 1,\
+    \ i, j;\n  for (k= std::min(k, n - k); k; ret= ret * c[i][j] % p, n/= p, k/= p)\n\
+    \   if (i= n % p, j= k % p; j > i) return 0;\n  return ret;\n }\n int S1(uint64_t\
+    \ n, uint64_t k) {\n  if (k > n) return 0;\n  uint64_t i= n / p;\n  if (i > k)\
+    \ return 0;\n  int64_t a= (k - i) / (p - 1);\n  uint16_t j= n % p, b= (k - i)\
+    \ % (p - 1);\n  if (!b && j) b+= (p - 1), a-= 1;\n  if (a < 0 || i < a || b >\
+    \ j) return 0;\n  return (j= nCk(i, a) * s1[j][b] % p) && ((i + a) & 1) ? p -\
+    \ j : j;\n }\n int S2(uint64_t n, uint64_t k) {\n  if (k > n) return 0;\n  if\
+    \ (!n) return 1;\n  uint64_t i= k / p;\n  if (n <= i) return 0;\n  uint64_t a=\
+    \ (n - i - 1) / (p - 1);\n  uint16_t j= k % p, b= (n - i) - a * (p - 1);\n  if\
+    \ (j > b) return 0;\n  return b == p - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j]\
+    \ % p;\n }\n};\n#line 4 \"test/yosupo/stirling_1_small_p_large_n.test.cpp\"\n\
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ int T, p;\n cin >> T >> p;\n StirlingNumber SN(p, 1, 0);\n while (T--) {\n \
     \ long long n, k;\n  cin >> n >> k;\n  cout << SN.S1(n, k) << '\\n';\n }\n return\
     \ 0;\n}\n"
@@ -115,8 +115,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_1_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2023-04-09 22:20:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-08-05 22:03:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_1_small_p_large_n.test.cpp
 layout: document
