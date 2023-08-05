@@ -16,6 +16,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
+    path: test/unit_test/constexpr_mod_tetration.test.cpp
+    title: test/unit_test/constexpr_mod_tetration.test.cpp
+  - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
   _isVerificationFailed: true
@@ -77,14 +80,14 @@ data:
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 2 \"src/Math/binary_gcd.hpp\"\n#include\
-    \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate <class Int> int\
-    \ bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
+    \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate <class Int> constexpr\
+    \ int bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
     \  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n } else if\
     \ constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n else return __builtin_ctz(a);\n\
-    }\ntemplate <class Int> Int binary_gcd(Int a, Int b) {\n if (a == 0 || b == 0)\
-    \ return a + b;\n int n= bsf(a), m= bsf(b), s;\n for (a>>= n, b>>= m; a != b;)\
-    \ {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a, a= (f ? d :\
-    \ -d) >> s;\n }\n return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\
+    }\ntemplate <class Int> constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0\
+    \ || b == 0) return a + b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>=\
+    \ m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a,\
+    \ a= (f ? d : -d) >> s;\n }\n return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\
     \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
     \ T *ed) {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j >\
     \ i;)\n   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]=\
@@ -114,7 +117,7 @@ data:
     \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
     \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
     \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (auto [q,\
-    \ e]: f)\n   if (ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n\
+    \ e]: f)\n   if ((ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))) break;\n\
     \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
     \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
     \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
@@ -133,20 +136,20 @@ data:
     \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
     \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
     \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
-    \ tmp*= p;\n  k= std::lcm(k, tmp);\n }\n auto mod= [m](u128 x) { return x < m\
-    \ ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a) *\
-    \ a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\nconstexpr\
-    \ u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >= m ? a -\
-    \ m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n"
+    \ tmp*= p;\n  k= k / binary_gcd(k, tmp) * tmp;\n }\n auto mod= [m](u128 x) { return\
+    \ x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
+    \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
+    constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
+    \ m ? a - m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n"
   code: "#pragma once\n#include \"src/Math/Factors.hpp\"\nnamespace math_internal\
     \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
     \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
     \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
-    \ tmp*= p;\n  k= std::lcm(k, tmp);\n }\n auto mod= [m](u128 x) { return x < m\
-    \ ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a) *\
-    \ a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\nconstexpr\
-    \ u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >= m ? a -\
-    \ m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;"
+    \ tmp*= p;\n  k= k / binary_gcd(k, tmp) * tmp;\n }\n auto mod= [m](u128 x) { return\
+    \ x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
+    \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
+    constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
+    \ m ? a - m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;"
   dependsOn:
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
@@ -155,10 +158,11 @@ data:
   isVerificationFile: false
   path: src/Math/mod_tetration.hpp
   requiredBy: []
-  timestamp: '2023-08-05 23:01:07+09:00'
+  timestamp: '2023-08-06 00:46:02+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
 documentation_of: src/Math/mod_tetration.hpp
 layout: document
 title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\

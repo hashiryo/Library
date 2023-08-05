@@ -77,14 +77,14 @@ data:
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 2 \"src/Math/binary_gcd.hpp\"\n#include\
-    \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate <class Int> int\
-    \ bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
+    \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate <class Int> constexpr\
+    \ int bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
     \  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n } else if\
     \ constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n else return __builtin_ctz(a);\n\
-    }\ntemplate <class Int> Int binary_gcd(Int a, Int b) {\n if (a == 0 || b == 0)\
-    \ return a + b;\n int n= bsf(a), m= bsf(b), s;\n for (a>>= n, b>>= m; a != b;)\
-    \ {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a, a= (f ? d :\
-    \ -d) >> s;\n }\n return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\
+    }\ntemplate <class Int> constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0\
+    \ || b == 0) return a + b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>=\
+    \ m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a,\
+    \ a= (f ? d : -d) >> s;\n }\n return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\
     \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
     \ T *ed) {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j >\
     \ i;)\n   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]=\
@@ -114,7 +114,7 @@ data:
     \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
     \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
     \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (auto [q,\
-    \ e]: f)\n   if (ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one)) break;\n\
+    \ e]: f)\n   if ((ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))) break;\n\
     \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
     \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
     \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
@@ -201,7 +201,7 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Exp.hpp
   requiredBy: []
-  timestamp: '2023-08-05 23:01:07+09:00'
+  timestamp: '2023-08-06 00:46:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp

@@ -18,9 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_mod_sqrt.test.cpp
+    title: test/unit_test/constexpr_mod_sqrt.test.cpp
   - icon: ':x:'
     path: test/yosupo/exp_of_sparse_FPS.test.cpp
     title: test/yosupo/exp_of_sparse_FPS.test.cpp
@@ -165,6 +168,7 @@ data:
   - test/yukicoder/1533.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/unit_test/constexpr_mod_sqrt.test.cpp
 documentation_of: src/Math/mod_sqrt.hpp
 layout: document
 title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"

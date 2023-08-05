@@ -9,7 +9,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_2D.hpp
       title: "Binary-Indexed-Tree(2\u6B21\u5143)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
     - icon: ':question:'
@@ -52,7 +52,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
@@ -205,7 +205,7 @@ data:
     - icon: ':question:'
       path: src/Graph/Tree.hpp
       title: "\u6728\u30AF\u30E9\u30B9"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -343,7 +343,7 @@ data:
     - icon: ':question:'
       path: src/Misc/Automaton.hpp
       title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Misc/CartesianTree.hpp
       title: Cartesian-Tree
     - icon: ':heavy_check_mark:'
@@ -1009,19 +1009,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_d.test.cpp
       title: test/atcoder/abc256_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc270_g.test.cpp
       title: test/atcoder/abc270_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc276_g.sparse_FPS.test.cpp
       title: test/atcoder/abc276_g.sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1036,10 +1036,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc021_a.test.cpp
       title: test/atcoder/agc021_a.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1051,7 +1051,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
     - icon: ':x:'
@@ -1088,6 +1088,27 @@ data:
       title: test/hackerrank/library-query.SqrtDC.test.cpp
   - name: test/unit_test
     pages:
+    - icon: ':x:'
+      path: test/unit_test/constexpr_binary_gcd.test.cpp
+      title: test/unit_test/constexpr_binary_gcd.test.cpp
+    - icon: ':x:'
+      path: test/unit_test/constexpr_factors.test.cpp
+      title: test/unit_test/constexpr_factors.test.cpp
+    - icon: ':x:'
+      path: test/unit_test/constexpr_is_prime.test.cpp
+      title: test/unit_test/constexpr_is_prime.test.cpp
+    - icon: ':x:'
+      path: test/unit_test/constexpr_mod_inv.test.cpp
+      title: test/unit_test/constexpr_mod_inv.test.cpp
+    - icon: ':x:'
+      path: test/unit_test/constexpr_mod_sqrt.test.cpp
+      title: test/unit_test/constexpr_mod_sqrt.test.cpp
+    - icon: ':x:'
+      path: test/unit_test/constexpr_mod_tetration.test.cpp
+      title: test/unit_test/constexpr_mod_tetration.test.cpp
+    - icon: ':x:'
+      path: test/unit_test/constexpr_modint.test.cpp
+      title: test/unit_test/constexpr_modint.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp

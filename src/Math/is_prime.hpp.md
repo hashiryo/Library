@@ -119,9 +119,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_factors.test.cpp
+    title: test/unit_test/constexpr_factors.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_is_prime.test.cpp
+    title: test/unit_test/constexpr_is_prime.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_mod_sqrt.test.cpp
+    title: test/unit_test/constexpr_mod_sqrt.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_mod_tetration.test.cpp
+    title: test/unit_test/constexpr_mod_tetration.test.cpp
   - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
@@ -486,6 +498,10 @@ data:
   - test/atcoder/abc230_h.test.cpp
   - test/atcoder/abc213_h.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
+  - test/unit_test/constexpr_factors.test.cpp
+  - test/unit_test/constexpr_mod_sqrt.test.cpp
+  - test/unit_test/constexpr_is_prime.test.cpp
 documentation_of: src/Math/is_prime.hpp
 layout: document
 title: "\u7D20\u6570\u5224\u5B9A"

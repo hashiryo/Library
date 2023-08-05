@@ -166,33 +166,39 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.SegDual.test.cpp
     title: test/atcoder/abc256_f.SegDual.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/arc116_c.Dirichlet.test.cpp
     title: test/atcoder/arc116_c.Dirichlet.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_mod_inv.test.cpp
+    title: test/unit_test/constexpr_mod_inv.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_modint.test.cpp
+    title: test/unit_test/constexpr_modint.test.cpp
   - icon: ':x:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
@@ -738,6 +744,8 @@ data:
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc235_f.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
+  - test/unit_test/constexpr_mod_inv.test.cpp
+  - test/unit_test/constexpr_modint.test.cpp
 documentation_of: src/Math/mod_inv.hpp
 layout: document
 title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"

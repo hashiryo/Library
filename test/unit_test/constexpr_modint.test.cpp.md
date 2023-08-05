@@ -1,9 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
-    title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
@@ -16,26 +13,23 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
-    path: src/Misc/CartesianTree.hpp
-    title: Cartesian-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/arc115/tasks/arc115_e
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://atcoder.jp/contests/arc115/tasks/arc115_e
-  bundledCode: "#line 1 \"test/atcoder/arc115_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/arc115/tasks/arc115_e\"\
-    \n#include <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
-    \ <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline Int\
-    \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
-    \ y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b),\
-    \ z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod\
-    \ : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"test/unit_test/constexpr_modint.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n#line 2 \"\
+    src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\ntemplate <class\
+    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
+    \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
+    \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
     \ {\nusing namespace std;\nusing u8= uint8_t;\nusing u32= uint32_t;\nusing u64=\
     \ uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n#define CE constexpr\n\
     #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
@@ -113,65 +107,32 @@ data:
     \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Misc/CartesianTree.hpp\"\n#include <array>\n\
-    class CartesianTree {\n std::vector<std::array<int, 2>> rg, ch;\n std::vector<int>\
-    \ par;\n int rt;\npublic:\n template <class T> CartesianTree(const std::vector<T>&\
-    \ a, bool is_min= 1): rg(a.size()), ch(a.size(), std::array{-1, -1}), par(a.size(),\
-    \ -1) {\n  const int n= a.size();\n  auto comp= [&](int l, int r) { return (is_min\
-    \ ? a[l] < a[r] : a[l] > a[r]) || (a[l] == a[r] && l < r); };\n  int st[n], t=\
-    \ 0;\n  for (int i= n; i--; rg[i][1]= (t ? st[t - 1] : n), st[t++]= i)\n   while\
-    \ (t && comp(i, st[t - 1])) ch[i][1]= st[--t];\n  for (int i= t= 0; i < n; rg[i][0]=\
-    \ (t ? st[t - 1] + 1 : 0), st[t++]= i++)\n   while (t && comp(i, st[t - 1])) ch[i][0]=\
-    \ st[--t];\n  for (int i= 0; i < n; ++i)\n   for (int b= 2; b--;)\n    if (ch[i][b]\
-    \ != -1) par[ch[i][b]]= i;\n  for (int i= 0; i < n; ++i)\n   if (par[i] == -1)\
-    \ rt= i;\n }\n std::array<int, 2> children(int i) const { return ch[i]; }\n int\
-    \ parent(int i) const { return par[i]; }\n int root() const { return rt; }\n //\
-    \ [l,r)\n std::array<int, 2> range(int i) const { return rg[i]; }\n};\n#line 3\
-    \ \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\ntemplate <typename T>\
-    \ class BinaryIndexedTree_RangeAdd {\n std::vector<T> dat1, dat2;\npublic:\n BinaryIndexedTree_RangeAdd(int\
-    \ n): dat1(n + 1, T()), dat2(n + 1, T()) {}\n void add_range(int l, int r, T w)\
-    \ {  // add w [l,r)\n  int n= dat1.size();\n  for (int k= l + 1; k < n; k+= k\
-    \ & -k) dat1[k]-= w * l;\n  for (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w\
-    \ * r;\n  for (int k= l + 1; k < n; k+= k & -k) dat2[k]+= w;\n  for (int k= r\
-    \ + 1; k < n; k+= k & -k) dat2[k]-= w;\n }\n T sum(int x) const {  // sum [0,x)\n\
-    \  T s= 0;\n  for (int k= x; k; k&= k - 1) s+= dat2[k];\n  s*= x;\n  for (int\
-    \ k= x; k; k&= k - 1) s+= dat1[k];\n  return s;\n }\n T sum(int l, int r) const\
-    \ { return sum(r) - sum(l); }  // sum [l,r)\n T operator[](size_t k) const { return\
-    \ sum(k + 1) - sum(k); }\n};\n#line 7 \"test/atcoder/arc115_e.test.cpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
-    \ Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<int> A(N);\n for (int\
-    \ i= 0; i < N; ++i) cin >> A[i];\n CartesianTree ct(A);\n array dp{BinaryIndexedTree_RangeAdd<Mint>(N\
-    \ + 1), BinaryIndexedTree_RangeAdd<Mint>(N + 1)};\n dp[0].add_range(0, 1, 1);\n\
-    \ for (int i= 0; i < N; ++i) {\n  auto [l, r]= ct.range(i);\n  for (int b= 0;\
-    \ b < 2; ++b) dp[!b].add_range(i + 1, r + 1, dp[b].sum(l, i + 1) * A[i]);\n }\n\
-    \ bool b= N & 1;\n cout << dp[b][N] - dp[!b][N] << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/arc115/tasks/arc115_e\"\n#include\
-    \ <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"\
-    src/Misc/CartesianTree.hpp\"\n#include \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<int> A(N);\n for\
-    \ (int i= 0; i < N; ++i) cin >> A[i];\n CartesianTree ct(A);\n array dp{BinaryIndexedTree_RangeAdd<Mint>(N\
-    \ + 1), BinaryIndexedTree_RangeAdd<Mint>(N + 1)};\n dp[0].add_range(0, 1, 1);\n\
-    \ for (int i= 0; i < N; ++i) {\n  auto [l, r]= ct.range(i);\n  for (int b= 0;\
-    \ b < 2; ++b) dp[!b].add_range(i + 1, r + 1, dp[b].sum(l, i + 1) * A[i]);\n }\n\
-    \ bool b= N & 1;\n cout << dp[b][N] - dp[!b][N] << '\\n';\n return 0;\n}"
+    \ return dat[n];\n}\n#line 4 \"test/unit_test/constexpr_modint.test.cpp\"\nusing\
+    \ namespace std;\nusing Mint= ModInt<1000000007>;\nconstexpr auto f= Mint(3).pow(1000000004);\n\
+    static_assert(f == 111111112);\nconstexpr auto g= Mint(2) / 3;\nstatic_assert(g\
+    \ == 666666672);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
+    #include \"src/Math/ModInt.hpp\"\nusing namespace std;\nusing Mint= ModInt<1000000007>;\n\
+    constexpr auto f= Mint(3).pow(1000000004);\nstatic_assert(f == 111111112);\nconstexpr\
+    \ auto g= Mint(2) / 3;\nstatic_assert(g == 666666672);\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n int A, B;\n cin >> A >> B;\n cout << A + B <<\
+    \ '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
-  - src/Misc/CartesianTree.hpp
-  - src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
   isVerificationFile: true
-  path: test/atcoder/arc115_e.test.cpp
+  path: test/unit_test/constexpr_modint.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-08-06 00:46:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/atcoder/arc115_e.test.cpp
+documentation_of: test/unit_test/constexpr_modint.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/arc115_e.test.cpp
-- /verify/test/atcoder/arc115_e.test.cpp.html
-title: test/atcoder/arc115_e.test.cpp
+- /verify/test/unit_test/constexpr_modint.test.cpp
+- /verify/test/unit_test/constexpr_modint.test.cpp.html
+title: test/unit_test/constexpr_modint.test.cpp
 ---

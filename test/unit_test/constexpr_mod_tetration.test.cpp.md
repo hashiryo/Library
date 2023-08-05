@@ -13,12 +13,10 @@ data:
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
-    path: src/Math/mod_inv.hpp
-    title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':x:'
-    path: src/Math/mod_kth_root.hpp
-    title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
+    path: src/Math/mod_tetration.hpp
+    title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
+      mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -26,18 +24,13 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/kth_root_mod
-  bundledCode: "#line 1 \"test/yosupo/kth_root_mod.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/kth_root_mod\"\n#include <iostream>\n#line 2 \"\
-    src/Math/mod_kth_root.hpp\"\n#include <vector>\n#include <cmath>\n#line 2 \"src/Math/mod_inv.hpp\"\
-    \n#include <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline\
-    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
-    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a\
-    \ / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
-    \ % mod : x % mod;\n}\n#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n\
-    #line 5 \"src/Math/Factors.hpp\"\n#include <algorithm>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"test/unit_test/constexpr_mod_tetration.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n#line\
+    \ 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n#line 5\
+    \ \"src/Math/Factors.hpp\"\n#include <algorithm>\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= uint8_t;\nusing u32=\
     \ uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\nusing u128= __uint128_t;\n\
     #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
@@ -89,33 +82,33 @@ data:
     \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate\
-    \ <class Int> constexpr int bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n\
-    \  uint64_t lo= a & uint64_t(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a\
-    \ >> 64);\n } else if constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n\
-    \ else return __builtin_ctz(a);\n}\ntemplate <class Int> constexpr Int binary_gcd(Int\
-    \ a, Int b) {\n if (a == 0 || b == 0) return a + b;\n int n= bsf(a), m= bsf(b),\
-    \ s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n\
-    \  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n return a << std::min(n,\
-    \ m);\n}\n#line 8 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
-    \ <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg,\
-    \ i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1];\
-    \ bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t\
-    \ _Nm> struct ConstexprArray {\n constexpr size_t size() const { return sz; }\n\
-    \ constexpr auto &operator[](int i) const { return dat[i]; }\n constexpr auto\
-    \ *begin() const { return dat; }\n constexpr auto *end() const { return dat +\
-    \ sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream\
-    \ &os, const ConstexprArray &r) {\n  os << \"[\";\n  for (size_t i= 0; i < r.sz;\
-    \ ++i) os << r[i] << \",]\"[i == r.sz - 1];\n  return os;\n }\n};\nclass Factors:\
-    \ public ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class\
-    \ MP> static constexpr Uint rho(Uint n, Uint c) {\n  const MP md(n);\n  auto f=\
-    \ [&md, n, c](Uint x) { return md.plus(md.mul(x, x), c); };\n  const Uint m= 1LL\
-    \ << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z= 1, q= md.set(1), g= 1;\n  for\
-    \ (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x= y, i= r; i--;) y= f(y);\n  \
-    \ for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q), n), k+= m)\n    for\
-    \ (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y, x));\n  }\n\
-    \  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z, x)), n);\n \
-    \  } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
+    }\n}\nusing math_internal::is_prime;\n#line 2 \"src/Math/binary_gcd.hpp\"\n#include\
+    \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate <class Int> constexpr\
+    \ int bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
+    \  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n } else if\
+    \ constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n else return __builtin_ctz(a);\n\
+    }\ntemplate <class Int> constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0\
+    \ || b == 0) return a + b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>=\
+    \ m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a,\
+    \ a= (f ? d : -d) >> s;\n }\n return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\
+    \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
+    \ T *ed) {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j >\
+    \ i;)\n   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]=\
+    \ tmp;\n}\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr\
+    \ size_t size() const { return sz; }\n constexpr auto &operator[](int i) const\
+    \ { return dat[i]; }\n constexpr auto *begin() const { return dat; }\n constexpr\
+    \ auto *end() const { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t\
+    \ sz= 0;\n friend ostream &operator<<(ostream &os, const ConstexprArray &r) {\n\
+    \  os << \"[\";\n  for (size_t i= 0; i < r.sz; ++i) os << r[i] << \",]\"[i ==\
+    \ r.sz - 1];\n  return os;\n }\n};\nclass Factors: public ConstexprArray<pair<u64,\
+    \ uint16_t>, 16> {\n template <class Uint, class MP> static constexpr Uint rho(Uint\
+    \ n, Uint c) {\n  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x,\
+    \ x), c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2),\
+    \ z= 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for\
+    \ (x= y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q),\
+    \ n), k+= m)\n    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y,\
+    \ x));\n  }\n  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z,\
+    \ x)), n);\n   } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
     \ n) {\n  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n <\
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
@@ -142,62 +135,42 @@ data:
     \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
     \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
     \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
-    \ totient(Factors(n)); }\n#line 7 \"src/Math/mod_kth_root.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Int, class MP> inline i64 peth_root(Int c, Int pi, int ei,\
-    \ const MP &md) {\n const Int p= md.mod;\n int t= 0;\n Int s= p - 1, pe= 1;\n\
-    \ while (s % pi == 0) s/= pi, ++t;\n for (int i= ei; i--;) pe*= pi;\n Int u= mod_inv(pe\
-    \ - s % pe, pe), ONE= md.set(1), z= pow(c, (s * u + 1) / pe, md), zpe= md.norm(pow(c,\
-    \ s * u, md));\n if (zpe == ONE) return z;\n Int ptm1= 1, vs= 0, bs= 0;\n for\
-    \ (int i= t; --i;) ptm1*= pi;\n for (Int v= md.set(2);; v= md.plus(v, ONE))\n\
-    \  if (vs= pow(v, s, md), bs= md.norm(pow(vs, ptm1, md)); bs != ONE) break;\n\
-    \ int size= 1 << __lg(int(sqrt(pi)) + 1), mask= size - 1, vsc[size];\n vector<int>\
-    \ os(size + 1);\n Int vf[size];\n Int x= ONE, vspe= pow(vs, pe, md);\n for (int\
-    \ i= 0; i < size; i++, x= md.mul(x, bs)) os[md.norm(x) & mask]++;\n for (int i=\
-    \ 1; i < size; i++) os[i]+= os[i - 1];\n x= ONE, os[size]= size;\n for (int i=\
-    \ 0, j= 0; i < size; i++, x= md.mul(x, bs)) vf[j= --os[md.norm(x) & mask]]= md.norm(x),\
-    \ vsc[j]= i;\n for (int vs_e= ei, td= 0, n= 0; zpe != ONE; z= md.mul(z, pow(vs,\
-    \ n, md)), zpe= md.norm(md.mul(zpe, pow(vspe, n, md)))) {\n  for (u= zpe, td=\
-    \ 0; u != ONE; td++) u= md.norm(pow(bs= u, pi, md));\n  for (int e= t - td; vs_e\
-    \ != e; vs_e++) vs= pow(vs, pi, md), vspe= pow(vspe, pi, md);\n  for (int tt=\
-    \ 0, upd= 1; upd; tt+= size, bs= md.mul(bs, x))\n   for (int m= (md.norm(bs) &\
-    \ mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs) == vf[i]) {\n    \
-    \ if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n    }\n }\n return\
-    \ z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int a, u64 k, Int p)\
-    \ {\n const MP md(p);\n Int g= binary_gcd(k, p - 1), pp= (p - 1) / g, kk= (k /\
-    \ g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) != md.set(1)) return -1;\n\
-    \ a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]: Factors(g)) a= peth_root<Int>(a,\
-    \ pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64 a, u64 k, i64 p) {\n\
-    \ assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if (k == 0) return\
-    \ a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n if (p < (1 << 30)) return\
-    \ inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k, p);\n if (p < (1ll << 62))\
-    \ return inner_kth_root<i64, MP_Mo<u64, u128, 64, 63>>(a, k, p);\n return inner_kth_root<i64,\
-    \ MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\nusing math_internal::mod_kth_root;\n\
-    #line 4 \"test/yosupo/kth_root_mod.test.cpp\"\nusing namespace std;\nint main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int T;\n cin >> T;\n while\
-    \ (T--) {\n  int K, Y, P;\n  cin >> K >> Y >> P;\n  cout << mod_kth_root(Y, K,\
-    \ P) << '\\n';\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_root_mod\"\n#include\
-    \ <iostream>\n#include \"src/Math/mod_kth_root.hpp\"\nusing namespace std;\nint\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int T;\n cin >> T;\n\
-    \ while (T--) {\n  int K, Y, P;\n  cin >> K >> Y >> P;\n  cout << mod_kth_root(Y,\
-    \ K, P) << '\\n';\n }\n return 0;\n}"
+    \ totient(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\nnamespace math_internal\
+    \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
+    \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
+    \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
+    \ tmp*= p;\n  k= k / binary_gcd(k, tmp) * tmp;\n }\n auto mod= [m](u128 x) { return\
+    \ x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
+    \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
+    constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
+    \ m ? a - m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n\
+    #line 4 \"test/unit_test/constexpr_mod_tetration.test.cpp\"\nusing namespace std;\n\
+    constexpr auto f= mod_tetration(2, 3, 1000000007);\nstatic_assert(f == 16);\n\
+    constexpr auto g= mod_tetration(2, 10000, 998244353);\nstatic_assert(g == 220050301);\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin\
+    \ >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
+    #include \"src/Math/mod_tetration.hpp\"\nusing namespace std;\nconstexpr auto\
+    \ f= mod_tetration(2, 3, 1000000007);\nstatic_assert(f == 16);\nconstexpr auto\
+    \ g= mod_tetration(2, 10000, 998244353);\nstatic_assert(g == 220050301);\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin >> A\
+    \ >> B;\n cout << A + B << '\\n';\n return 0;\n}"
   dependsOn:
-  - src/Math/mod_kth_root.hpp
-  - src/Math/mod_inv.hpp
+  - src/Math/mod_tetration.hpp
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
   isVerificationFile: true
-  path: test/yosupo/kth_root_mod.test.cpp
+  path: test/unit_test/constexpr_mod_tetration.test.cpp
   requiredBy: []
   timestamp: '2023-08-06 00:46:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/kth_root_mod.test.cpp
+documentation_of: test/unit_test/constexpr_mod_tetration.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/kth_root_mod.test.cpp
-- /verify/test/yosupo/kth_root_mod.test.cpp.html
-title: test/yosupo/kth_root_mod.test.cpp
+- /verify/test/unit_test/constexpr_mod_tetration.test.cpp
+- /verify/test/unit_test/constexpr_mod_tetration.test.cpp.html
+title: test/unit_test/constexpr_mod_tetration.test.cpp
 ---
