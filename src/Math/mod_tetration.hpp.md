@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -12,12 +12,12 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
@@ -115,19 +115,18 @@ data:
     \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
     \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
-    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
-    \ n) { return totient(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\n\
-    namespace math_internal {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a ==\
-    \ 0) return (b ^ 1) & 1;\n if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1,\
-    \ tmp= 1, i= 0;\n for (const auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i=\
-    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n  k= std::lcm(k, tmp);\n }\n auto mod=\
-    \ [m](u128 x) { return x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a=\
-    \ mod(a);; a= mod(u128(a) * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>=\
-    \ 1)) return ret;\n}\nconstexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return\
-    \ (a= rec(a, b, m)) >= m ? a - m : a; }\n}  // namespace math_internal\nusing\
-    \ math_internal::mod_tetration;\n"
+    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
+    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
+    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
+    \ totient(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\nnamespace math_internal\
+    \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
+    \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
+    \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
+    \ tmp*= p;\n  k= std::lcm(k, tmp);\n }\n auto mod= [m](u128 x) { return x < m\
+    \ ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a) *\
+    \ a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\nconstexpr\
+    \ u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >= m ? a -\
+    \ m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n"
   code: "#pragma once\n#include \"src/Math/Factors.hpp\"\nnamespace math_internal\
     \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
     \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
@@ -144,8 +143,8 @@ data:
   isVerificationFile: false
   path: src/Math/mod_tetration.hpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-08-05 18:38:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
 documentation_of: src/Math/mod_tetration.hpp

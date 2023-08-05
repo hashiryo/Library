@@ -8,16 +8,16 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
@@ -25,27 +25,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/binomial_coefficient.test.cpp
     title: test/yosupo/binomial_coefficient.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
@@ -143,10 +143,10 @@ data:
     \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
     \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
-    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
-    \ n) { return totient(Factors(n)); }\n"
+    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
+    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
+    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
+    \ totient(Factors(n)); }\n"
   code: "#pragma once\n#include <numeric>\n#include <cassert>\n#include \"src/Math/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
     \ T *ed) {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j >\
@@ -189,10 +189,10 @@ data:
     \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
     \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
-    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
-    \ n) { return totient(Factors(n)); }"
+    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
+    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
+    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
+    \ totient(Factors(n)); }"
   dependsOn:
   - src/Math/is_prime.hpp
   - src/Internal/Remainder.hpp
@@ -203,8 +203,8 @@ data:
   - src/Math/mod_tetration.hpp
   - src/Math/ModInt_Exp.hpp
   - src/Math/mod_kth_root.hpp
-  timestamp: '2023-05-13 17:48:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-08-05 18:38:55+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp

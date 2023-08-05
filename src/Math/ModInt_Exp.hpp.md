@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -12,12 +12,12 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
@@ -115,17 +115,17 @@ data:
     \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
     \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
-    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
-    \ n) { return totient(Factors(n)); }\n#line 3 \"src/Math/ModInt_Exp.hpp\"\ntemplate\
-    \ <std::uint64_t MOD> class ModInt_Exp {\n static_assert(MOD < 1uLL << 63, \"\
-    MOD must be smaller than 2^63\");\n using Uint= std::conditional_t < MOD<(1ull\
-    \ << 32), std::uint32_t, std::uint64_t>;\n using DUint= std::conditional_t<std::is_same_v<Uint,\
-    \ std::uint64_t>, __uint128_t, std::uint64_t>;\n using mod_t= ModInt_Exp;\n static\
-    \ constexpr inline Uint mod(DUint x) { return x < MOD * 2 ? Uint(x) : Uint(x %\
-    \ MOD) + MOD; }\n static constexpr inline Uint mul(Uint a, Uint b) { return mod(DUint(a)\
-    \ * b); }\n static constexpr inline Uint pow(Uint b, Uint k) {\n  for (Uint ret(1);;\
+    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
+    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
+    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
+    \ totient(Factors(n)); }\n#line 3 \"src/Math/ModInt_Exp.hpp\"\ntemplate <std::uint64_t\
+    \ MOD> class ModInt_Exp {\n static_assert(MOD < 1uLL << 63, \"MOD must be smaller\
+    \ than 2^63\");\n using Uint= std::conditional_t < MOD<(1ull << 32), std::uint32_t,\
+    \ std::uint64_t>;\n using DUint= std::conditional_t<std::is_same_v<Uint, std::uint64_t>,\
+    \ __uint128_t, std::uint64_t>;\n using mod_t= ModInt_Exp;\n static constexpr inline\
+    \ Uint mod(DUint x) { return x < MOD * 2 ? Uint(x) : Uint(x % MOD) + MOD; }\n\
+    \ static constexpr inline Uint mul(Uint a, Uint b) { return mod(DUint(a) * b);\
+    \ }\n static constexpr inline Uint pow(Uint b, Uint k) {\n  for (Uint ret(1);;\
     \ b= mul(b, b))\n   if (k & 1 ? ret= mul(ret, b) : 0; !(k>>= 1)) return ret;\n\
     \ }\n static constexpr inline std::uint64_t f(std::uint64_t x) {\n  std::uint64_t\
     \ ret= 1, i= 0, tmp= 1;\n  for (const auto &[p, e]: Factors(x)) {\n   for (tmp=\
@@ -189,8 +189,8 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Exp.hpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-08-05 18:38:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/ModInt_Exp.hpp

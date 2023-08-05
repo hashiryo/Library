@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -116,15 +116,15 @@ data:
     \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
     \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
-    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
-    \ n) { return totient(Factors(n)); }\n#line 5 \"test/yosupo/factorize.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int Q;\n cin >> Q;\n while (Q--) {\n  long long a;\n  cin >> a;\n  vector<long\
-    \ long> ans;\n  for (auto& [p, e]: Factors(a))\n   for (int i= 0; i < e; i++)\
-    \ ans.push_back(p);\n  cout << ans.size();\n  for (auto x: ans) cout << \" \"\
-    \ << x;\n  cout << '\\n';\n }\n return 0;\n}\n"
+    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
+    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
+    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
+    \ totient(Factors(n)); }\n#line 5 \"test/yosupo/factorize.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin\
+    \ >> Q;\n while (Q--) {\n  long long a;\n  cin >> a;\n  vector<long long> ans;\n\
+    \  for (auto& [p, e]: Factors(a))\n   for (int i= 0; i < e; i++) ans.push_back(p);\n\
+    \  cout << ans.size();\n  for (auto x: ans) cout << \" \" << x;\n  cout << '\\\
+    n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n#include <iostream>\n\
     #include <vector>\n#include \"src/Math/Factors.hpp\"\nusing namespace std;\nsigned\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n while\
@@ -139,8 +139,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/factorize.test.cpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-08-05 18:38:55+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/factorize.test.cpp
 layout: document

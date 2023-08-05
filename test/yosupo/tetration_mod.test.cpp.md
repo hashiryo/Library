@@ -4,21 +4,21 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tetration_mod
@@ -120,22 +120,22 @@ data:
     \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
     \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
     \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr std::uint64_t totient(const Factors\
-    \ &f) {\n std::uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p -\
-    \ 1, i= e; --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(std::uint64_t\
-    \ n) { return totient(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\n\
-    namespace math_internal {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a ==\
-    \ 0) return (b ^ 1) & 1;\n if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1,\
-    \ tmp= 1, i= 0;\n for (const auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i=\
-    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n  k= std::lcm(k, tmp);\n }\n auto mod=\
-    \ [m](u128 x) { return x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a=\
-    \ mod(a);; a= mod(u128(a) * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>=\
-    \ 1)) return ret;\n}\nconstexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return\
-    \ (a= rec(a, b, m)) >= m ? a - m : a; }\n}  // namespace math_internal\nusing\
-    \ math_internal::mod_tetration;\n#line 4 \"test/yosupo/tetration_mod.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int T;\n cin >> T;\n while (T--) {\n  int A, B, M;\n  cin >> A >> B >> M;\n\
-    \  cout << mod_tetration(A, B, M) << '\\n';\n }\n return 0;\n}\n"
+    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
+    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
+    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
+    \ totient(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\nnamespace math_internal\
+    \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
+    \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
+    \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
+    \ tmp*= p;\n  k= std::lcm(k, tmp);\n }\n auto mod= [m](u128 x) { return x < m\
+    \ ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a) *\
+    \ a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\nconstexpr\
+    \ u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >= m ? a -\
+    \ m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n\
+    #line 4 \"test/yosupo/tetration_mod.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int T;\n cin >> T;\n while (T--)\
+    \ {\n  int A, B, M;\n  cin >> A >> B >> M;\n  cout << mod_tetration(A, B, M) <<\
+    \ '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tetration_mod\"\n#include\
     \ <iostream>\n#include \"src/Math/mod_tetration.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int T;\n cin >> T;\n\
@@ -149,8 +149,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-08-05 18:38:55+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp
 layout: document
