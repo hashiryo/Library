@@ -279,9 +279,12 @@ data:
     - icon: ':question:'
       path: src/Math/ModInt_Runtime.hpp
       title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
+    - icon: ':question:'
+      path: src/Math/Rational.hpp
+      title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
     - icon: ':question:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
@@ -413,6 +416,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0342.test.cpp
       title: test/aoj/0342.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/0350.test.cpp
+      title: test/aoj/0350.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/0366.test.cpp
       title: test/aoj/0366.test.cpp
@@ -1110,6 +1116,9 @@ data:
       path: test/unit_test/constexpr_modint.test.cpp
       title: test/unit_test/constexpr_modint.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/unit_test/constexpr_rational.test.cpp
+      title: test/unit_test/constexpr_rational.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/unit_test/nimber_inv.test.cpp
       title: test/unit_test/nimber_inv.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1162,10 +1171,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution1000000007.test.cpp
       title: test/yosupo/convolution1000000007.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution_large.test.cpp
       title: test/yosupo/convolution_large.test.cpp
     - icon: ':x:'
@@ -1312,7 +1321,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/multivariate_convolution.test.cpp
       title: test/yosupo/multivariate_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/nim_product_64.test.cpp
       title: test/yosupo/nim_product_64.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1572,6 +1581,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1494.test.cpp
       title: test/yukicoder/1494.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1501.test.cpp
+      title: test/yukicoder/1501.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp

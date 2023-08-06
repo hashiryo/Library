@@ -12,17 +12,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/nimber_sqrt.test.cpp
     title: test/unit_test/nimber_sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/nim_product_64.test.cpp
     title: test/yosupo/nim_product_64.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Nimber.hpp\"\n#include <array>\n#include <numeric>\n\
-    #include <utility>\n#include <cassert>\nclass Nimber {\n using u64= std::uint64_t;\n\
-    \ using u32= std::uint32_t;\n using u16= std::uint16_t;\n static inline std::array<u16,\
+    #include <utility>\n#include <cassert>\nclass Nimber {\n using u64= uint64_t;\n\
+    \ using u32= uint32_t;\n using u16= uint16_t;\n static inline std::array<u16,\
     \ 65536> pw, ln;\n template <u16 h= 3> static inline u16 half(u16 A) { return\
     \ A ? pw[(ln[A] + h) % 65535] : 0; }\n template <u16 h= 0> static inline u16 mul(u16\
     \ A, u16 B) { return A && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template\
@@ -107,8 +107,8 @@ data:
     \ std::istream &operator>>(std::istream &is, Nimber &r) { return is >> r.x, is;\
     \ }\n};\n"
   code: "#pragma once\n#include <array>\n#include <numeric>\n#include <utility>\n\
-    #include <cassert>\nclass Nimber {\n using u64= std::uint64_t;\n using u32= std::uint32_t;\n\
-    \ using u16= std::uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
+    #include <cassert>\nclass Nimber {\n using u64= uint64_t;\n using u32= uint32_t;\n\
+    \ using u16= uint16_t;\n static inline std::array<u16, 65536> pw, ln;\n template\
     \ <u16 h= 3> static inline u16 half(u16 A) { return A ? pw[(ln[A] + h) % 65535]\
     \ : 0; }\n template <u16 h= 0> static inline u16 mul(u16 A, u16 B) { return A\
     \ && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template <u16 h= 0> static inline\
@@ -196,8 +196,8 @@ data:
   isVerificationFile: false
   path: src/Math/Nimber.hpp
   requiredBy: []
-  timestamp: '2023-04-03 04:36:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-08-06 16:57:02+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/nim_product_64.test.cpp
   - test/unit_test/nimber_inv.test.cpp

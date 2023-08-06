@@ -140,8 +140,8 @@ data:
     \ b= mul(b, b))\n   if (k & 1 ? ret= mul(ret, b) : 0; !(k>>= 1)) return ret;\n\
     \ }\n static constexpr inline uint64_t f(uint64_t x) {\n  uint64_t ret= 1, i=\
     \ 0, tmp= 1;\n  for (const auto &[p, e]: Factors(x)) {\n   for (tmp= p - 1, i=\
-    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n   ret= tmp / binary_gcd(ret, tmp) *\
-    \ ret;\n  }\n  return ret;\n }\npublic:\n Uint a;\n ModInt_Exp<f(MOD)> b;\n constexpr\
+    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n   ret*= tmp / binary_gcd(ret, tmp);\n\
+    \  }\n  return ret;\n }\npublic:\n Uint a;\n ModInt_Exp<f(MOD)> b;\n constexpr\
     \ ModInt_Exp()= default;\n constexpr ModInt_Exp(uint64_t x): a(mod(x)), b(x) {}\n\
     \ constexpr ModInt_Exp(Uint a_, ModInt_Exp<f(MOD)> b_): a(a_), b(b_) {}\n constexpr\
     \ Uint val() const { return a < MOD ? a : a - MOD; }\n constexpr mod_t &operator*=(const\
@@ -172,27 +172,27 @@ data:
     \ (k & 1 ? ret= mul(ret, b) : 0; !(k>>= 1)) return ret;\n }\n static constexpr\
     \ inline uint64_t f(uint64_t x) {\n  uint64_t ret= 1, i= 0, tmp= 1;\n  for (const\
     \ auto &[p, e]: Factors(x)) {\n   for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
-    \ tmp*= p;\n   ret= tmp / binary_gcd(ret, tmp) * ret;\n  }\n  return ret;\n }\n\
-    public:\n Uint a;\n ModInt_Exp<f(MOD)> b;\n constexpr ModInt_Exp()= default;\n\
-    \ constexpr ModInt_Exp(uint64_t x): a(mod(x)), b(x) {}\n constexpr ModInt_Exp(Uint\
-    \ a_, ModInt_Exp<f(MOD)> b_): a(a_), b(b_) {}\n constexpr Uint val() const { return\
-    \ a < MOD ? a : a - MOD; }\n constexpr mod_t &operator*=(const mod_t &r) { return\
-    \ a= mul(a, r.a), b*= r.b, *this; }\n constexpr mod_t &operator+=(const mod_t\
-    \ &r) { return a-= MOD & -((a+= r.a) >= MOD * 2), b+= r.b, *this; }\n constexpr\
-    \ mod_t operator*(const mod_t &r) const { return mod_t(*this)*= r; }\n constexpr\
-    \ mod_t operator+(const mod_t &r) const { return mod_t(*this)+= r; }\n constexpr\
-    \ mod_t pow(const mod_t &r) const { return mod_t{pow(a, r.b.a), b.pow(r.b)}; };\n\
-    };\ntemplate <> struct ModInt_Exp<1> {\n using mod_t= ModInt_Exp;\n bool a;\n\
-    \ constexpr ModInt_Exp(): a(0) {}\n constexpr ModInt_Exp(uint64_t x): a(x) {}\n\
-    \ constexpr uint32_t val() { return 0; }\n constexpr mod_t &operator*=(const mod_t\
-    \ &r) { return a&= r.a, *this; }\n constexpr mod_t &operator+=(const mod_t &r)\
-    \ { return a|= r.a, *this; }\n constexpr mod_t operator*(const mod_t &r) const\
-    \ { return mod_t(*this)*= r; }\n constexpr mod_t operator+(const mod_t &r) const\
-    \ { return mod_t(*this)+= r; }\n constexpr mod_t pow(const mod_t &r) const { return\
-    \ {a || !r.a}; };\n};\ntemplate <uint64_t MOD> std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt_Exp<MOD> &r) { return os << r.val(); }\ntemplate <uint64_t\
-    \ MOD> std::istream &operator>>(std::istream &is, ModInt_Exp<MOD> &r) {\n uint64_t\
-    \ v;\n return is >> v, r= ModInt_Exp<MOD>(v), is;\n}\n"
+    \ tmp*= p;\n   ret*= tmp / binary_gcd(ret, tmp);\n  }\n  return ret;\n }\npublic:\n\
+    \ Uint a;\n ModInt_Exp<f(MOD)> b;\n constexpr ModInt_Exp()= default;\n constexpr\
+    \ ModInt_Exp(uint64_t x): a(mod(x)), b(x) {}\n constexpr ModInt_Exp(Uint a_, ModInt_Exp<f(MOD)>\
+    \ b_): a(a_), b(b_) {}\n constexpr Uint val() const { return a < MOD ? a : a -\
+    \ MOD; }\n constexpr mod_t &operator*=(const mod_t &r) { return a= mul(a, r.a),\
+    \ b*= r.b, *this; }\n constexpr mod_t &operator+=(const mod_t &r) { return a-=\
+    \ MOD & -((a+= r.a) >= MOD * 2), b+= r.b, *this; }\n constexpr mod_t operator*(const\
+    \ mod_t &r) const { return mod_t(*this)*= r; }\n constexpr mod_t operator+(const\
+    \ mod_t &r) const { return mod_t(*this)+= r; }\n constexpr mod_t pow(const mod_t\
+    \ &r) const { return mod_t{pow(a, r.b.a), b.pow(r.b)}; };\n};\ntemplate <> struct\
+    \ ModInt_Exp<1> {\n using mod_t= ModInt_Exp;\n bool a;\n constexpr ModInt_Exp():\
+    \ a(0) {}\n constexpr ModInt_Exp(uint64_t x): a(x) {}\n constexpr uint32_t val()\
+    \ { return 0; }\n constexpr mod_t &operator*=(const mod_t &r) { return a&= r.a,\
+    \ *this; }\n constexpr mod_t &operator+=(const mod_t &r) { return a|= r.a, *this;\
+    \ }\n constexpr mod_t operator*(const mod_t &r) const { return mod_t(*this)*=\
+    \ r; }\n constexpr mod_t operator+(const mod_t &r) const { return mod_t(*this)+=\
+    \ r; }\n constexpr mod_t pow(const mod_t &r) const { return {a || !r.a}; };\n\
+    };\ntemplate <uint64_t MOD> std::ostream &operator<<(std::ostream &os, const ModInt_Exp<MOD>\
+    \ &r) { return os << r.val(); }\ntemplate <uint64_t MOD> std::istream &operator>>(std::istream\
+    \ &is, ModInt_Exp<MOD> &r) {\n uint64_t v;\n return is >> v, r= ModInt_Exp<MOD>(v),\
+    \ is;\n}\n"
   dependsOn:
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
@@ -201,7 +201,7 @@ data:
   isVerificationFile: false
   path: src/Math/ModInt_Exp.hpp
   requiredBy: []
-  timestamp: '2023-08-06 01:42:03+09:00'
+  timestamp: '2023-08-06 16:57:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc228_e.test.cpp

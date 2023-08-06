@@ -136,7 +136,7 @@ data:
     \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
     \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
     \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
-    \ tmp*= p;\n  k= tmp / binary_gcd(k, tmp) * k;\n }\n auto mod= [m](u128 x) { return\
+    \ tmp*= p;\n  k*= tmp / binary_gcd(k, tmp);\n }\n auto mod= [m](u128 x) { return\
     \ x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
     \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
     constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
@@ -145,7 +145,7 @@ data:
     \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
     \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
     \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
-    \ tmp*= p;\n  k= tmp / binary_gcd(k, tmp) * k;\n }\n auto mod= [m](u128 x) { return\
+    \ tmp*= p;\n  k*= tmp / binary_gcd(k, tmp);\n }\n auto mod= [m](u128 x) { return\
     \ x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
     \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
     constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
@@ -158,7 +158,7 @@ data:
   isVerificationFile: false
   path: src/Math/mod_tetration.hpp
   requiredBy: []
-  timestamp: '2023-08-06 01:42:03+09:00'
+  timestamp: '2023-08-06 16:57:02+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/tetration_mod.test.cpp

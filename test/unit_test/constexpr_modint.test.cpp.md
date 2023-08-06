@@ -108,16 +108,23 @@ data:
     \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 4 \"test/unit_test/constexpr_modint.test.cpp\"\nusing\
-    \ namespace std;\nusing Mint= ModInt<1000000007>;\nconstexpr auto f= Mint(3).pow(1000000004);\n\
-    static_assert(f == 111111112);\nconstexpr auto g= Mint(2) / 3;\nstatic_assert(g\
-    \ == 666666672);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
+    \ namespace std;\nusing Mint= ModInt<1000000007>;\nconstexpr auto a= Mint(2) +\
+    \ 3;\nstatic_assert(a == 5);\nconstexpr auto b= Mint(2) - 3;\nstatic_assert(b\
+    \ == 1000000006);\nconstexpr auto c= Mint(2) * 3;\nstatic_assert(c == 6);\nconstexpr\
+    \ auto d= Mint(2) / 3;\nstatic_assert(d == 666666672);\nconstexpr auto e= Mint(2).pow(3);\n\
+    static_assert(e == 8);\nconstexpr auto f= -Mint(2);\nstatic_assert(f == 1000000005);\n\
+    constexpr auto g= Mint(2).inv();\nstatic_assert(g == 500000004);\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin >> A >> B;\n\
+    \ cout << A + B << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
     #include \"src/Math/ModInt.hpp\"\nusing namespace std;\nusing Mint= ModInt<1000000007>;\n\
-    constexpr auto f= Mint(3).pow(1000000004);\nstatic_assert(f == 111111112);\nconstexpr\
-    \ auto g= Mint(2) / 3;\nstatic_assert(g == 666666672);\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n int A, B;\n cin >> A >> B;\n cout << A + B <<\
-    \ '\\n';\n return 0;\n}"
+    constexpr auto a= Mint(2) + 3;\nstatic_assert(a == 5);\nconstexpr auto b= Mint(2)\
+    \ - 3;\nstatic_assert(b == 1000000006);\nconstexpr auto c= Mint(2) * 3;\nstatic_assert(c\
+    \ == 6);\nconstexpr auto d= Mint(2) / 3;\nstatic_assert(d == 666666672);\nconstexpr\
+    \ auto e= Mint(2).pow(3);\nstatic_assert(e == 8);\nconstexpr auto f= -Mint(2);\n\
+    static_assert(f == 1000000005);\nconstexpr auto g= Mint(2).inv();\nstatic_assert(g\
+    \ == 500000004);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -126,7 +133,7 @@ data:
   isVerificationFile: true
   path: test/unit_test/constexpr_modint.test.cpp
   requiredBy: []
-  timestamp: '2023-08-06 00:46:02+09:00'
+  timestamp: '2023-08-06 16:57:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/unit_test/constexpr_modint.test.cpp
