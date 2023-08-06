@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':question:'
@@ -15,7 +15,7 @@ data:
     title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Graph/Tree.hpp
-    title: "\u6728\u30AF\u30E9\u30B9"
+    title: "\u6728"
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"

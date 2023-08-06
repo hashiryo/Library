@@ -9,7 +9,7 @@ data:
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
     path: src/Graph/Tree.hpp
-    title: "\u6728\u30AF\u30E9\u30B9"
+    title: "\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false

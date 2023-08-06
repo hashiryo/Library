@@ -298,7 +298,7 @@ data:
   - test/atcoder/abc160_f.test.cpp
 documentation_of: src/Graph/Tree.hpp
 layout: document
-title: "\u6728\u30AF\u30E9\u30B9"
+title: "\u6728"
 ---
 HL分解＋オイラーツアーで頂点集合を数列に \
 非連結(森)でも動くはず

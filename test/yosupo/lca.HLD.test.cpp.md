@@ -6,7 +6,7 @@ data:
     title: "CSR\u5F62\u5F0F"
   - icon: ':question:'
     path: src/Graph/Tree.hpp
-    title: "\u6728\u30AF\u30E9\u30B9"
+    title: "\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
