@@ -1,12 +1,16 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Optimization/MinMaxEnum.hpp
+    title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
+      \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1163.matroid_intersection.test.cpp
     title: test/aoj/1163.matroid_intersection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1605.weighted_matroid_intersection.test.cpp
     title: test/aoj/1605.weighted_matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,26 +22,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/421.matroid_intersection.test.cpp
     title: test/yukicoder/421.matroid_intersection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/421.weighted_matroid_intersection.test.cpp
     title: test/yukicoder/421.weighted_matroid_intersection.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/matroid_intersection.hpp\"\n#include <vector>\n\
     #include <algorithm>\n#include <limits>\n#include <array>\n#include <queue>\n\
-    #include <cassert>\ntemplate <typename Matroid1, typename Matroid2> std::vector<int>\
-    \ matroid_intersection(int n, Matroid1 M1, Matroid2 M2) {\n std::vector<int> b(n,\
-    \ false), pre(n), I[2];\n for (int e= 0; e < n; e++) I[0].push_back(e);\n M1.build(I[1]),\
-    \ M2.build(I[1]);\n for (bool converged= false; !converged;) {\n  pre.assign(n,\
-    \ false);\n  std::vector L(1, std::vector<int>());\n  for (int u: I[0])\n   if\
-    \ (M1.oracle(u)) pre[u]= true, L[0].push_back(u);\n  int m= 0;\n  for (; L.back().size();\
-    \ m+= 2) {\n   L.push_back({});\n   for (int e: L[m]) {\n    if (converged= M2.oracle(e))\
+    #include <cassert>\n#line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum\
+    \ { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 9 \"src/Optimization/matroid_intersection.hpp\"\
+    \ntemplate <typename Matroid1, typename Matroid2> std::vector<int> matroid_intersection(int\
+    \ n, Matroid1 M1, Matroid2 M2) {\n std::vector<int> b(n, false), pre(n), I[2];\n\
+    \ for (int e= 0; e < n; e++) I[0].push_back(e);\n M1.build(I[1]), M2.build(I[1]);\n\
+    \ for (bool converged= false; !converged;) {\n  pre.assign(n, false);\n  std::vector\
+    \ L(1, std::vector<int>());\n  for (int u: I[0])\n   if (M1.oracle(u)) pre[u]=\
+    \ true, L[0].push_back(u);\n  int m= 0;\n  for (; L.back().size(); m+= 2) {\n\
+    \   L.push_back({});\n   for (int e: L[m]) {\n    if (converged= M2.oracle(e))\
     \ break;\n    for (int f: I[1])\n     if (!pre[f] && M2.oracle(f, e)) L[m + 1].push_back(f),\
     \ pre[f]= true;\n   }\n   if (converged) break;\n   L.push_back({});\n   for (int\
     \ e: L[m + 1])\n    for (int f: I[0])\n     if (!pre[f] && M1.oracle(e, f)) L[m\
@@ -56,16 +62,15 @@ data:
     \ --i;\n       }\n     }\n    } else if (M2.oracle(e)) isok= true, b[e]= 1;\n\
     \    if (isok) {\n     converged= false, I[0].clear(), I[1].clear();\n     for\
     \ (int u= 0; u < n; u++) I[b[u]].push_back(u);\n     M1.build(I[1]), M2.build(I[1]);\n\
-    \    }\n   }\n }\n return I[1];\n}\n// sgn: + -> max, - -> min, 0 -> unweighted\n\
-    template <std::int_least8_t sgn, class Matroid1, class Matroid2, class cost_t>\
-    \ std::vector<std::vector<int>> weighted_matroid_intersection(int n, Matroid1\
-    \ M1, Matroid2 M2, std::vector<cost_t> c) {\n assert(n == (int)c.size());\n bool\
-    \ b[n];\n std::fill_n(b, n, false);\n std::vector<int> I[2], p;\n std::vector<std::vector<int>>\
+    \    }\n   }\n }\n return I[1];\n}\ntemplate <MinMaxEnum sgn, class Matroid1,\
+    \ class Matroid2, class cost_t> std::vector<std::vector<int>> weighted_matroid_intersection(int\
+    \ n, Matroid1 M1, Matroid2 M2, std::vector<cost_t> c) {\n assert(n == (int)c.size());\n\
+    \ bool b[n];\n std::fill_n(b, n, false);\n std::vector<int> I[2], p;\n std::vector<std::vector<int>>\
     \ ret(1);\n for (int u= 0; u < n; u++) I[0].push_back(u);\n if constexpr (sgn\
-    \ > 0) {\n  auto cmx= *std::max_element(c.begin(), c.end());\n  for (auto &x:\
-    \ c) x-= cmx;\n } else {\n  auto cmi= *std::min_element(c.begin(), c.end());\n\
-    \  for (auto &x: c) x-= cmi;\n }\n for (auto &x: c) x*= sgn * (n + 1);\n for (bool\
-    \ converged= false; !converged;) {\n  converged= true, M1.build(I[1]), M2.build(I[1]);\n\
+    \ == MAXIMIZE) {\n  auto cmx= *std::max_element(c.begin(), c.end());\n  for (auto\
+    \ &x: c) x-= cmx;\n } else {\n  auto cmi= *std::min_element(c.begin(), c.end());\n\
+    \  for (auto &x: c) x-= cmi;\n }\n for (auto &x: c) x*= -sgn * (n + 1);\n for\
+    \ (bool converged= false; !converged;) {\n  converged= true, M1.build(I[1]), M2.build(I[1]);\n\
     \  std::priority_queue<std::pair<cost_t, int>> pq;\n  std::vector<cost_t> dist(n,\
     \ std::numeric_limits<cost_t>::lowest());\n  for (int u: I[0])\n   if (M1.oracle(u))\
     \ pq.emplace(dist[u]= c[u] - 1, u);\n  for (p.assign(n, -1); pq.size();) {\n \
@@ -102,18 +107,18 @@ data:
     \ -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e, int f) const { return\
     \ oracle(f) || belong[e] == belong[f]; }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <limits>\n\
-    #include <array>\n#include <queue>\n#include <cassert>\ntemplate <typename Matroid1,\
-    \ typename Matroid2> std::vector<int> matroid_intersection(int n, Matroid1 M1,\
-    \ Matroid2 M2) {\n std::vector<int> b(n, false), pre(n), I[2];\n for (int e= 0;\
-    \ e < n; e++) I[0].push_back(e);\n M1.build(I[1]), M2.build(I[1]);\n for (bool\
-    \ converged= false; !converged;) {\n  pre.assign(n, false);\n  std::vector L(1,\
-    \ std::vector<int>());\n  for (int u: I[0])\n   if (M1.oracle(u)) pre[u]= true,\
-    \ L[0].push_back(u);\n  int m= 0;\n  for (; L.back().size(); m+= 2) {\n   L.push_back({});\n\
-    \   for (int e: L[m]) {\n    if (converged= M2.oracle(e)) break;\n    for (int\
-    \ f: I[1])\n     if (!pre[f] && M2.oracle(f, e)) L[m + 1].push_back(f), pre[f]=\
-    \ true;\n   }\n   if (converged) break;\n   L.push_back({});\n   for (int e: L[m\
-    \ + 1])\n    for (int f: I[0])\n     if (!pre[f] && M1.oracle(e, f)) L[m + 2].push_back(f),\
-    \ pre[f]= true;\n  }\n  if (!converged) break;\n  std::vector<std::vector<int>>\
+    #include <array>\n#include <queue>\n#include <cassert>\n#include \"src/Optimization/MinMaxEnum.hpp\"\
+    \ntemplate <typename Matroid1, typename Matroid2> std::vector<int> matroid_intersection(int\
+    \ n, Matroid1 M1, Matroid2 M2) {\n std::vector<int> b(n, false), pre(n), I[2];\n\
+    \ for (int e= 0; e < n; e++) I[0].push_back(e);\n M1.build(I[1]), M2.build(I[1]);\n\
+    \ for (bool converged= false; !converged;) {\n  pre.assign(n, false);\n  std::vector\
+    \ L(1, std::vector<int>());\n  for (int u: I[0])\n   if (M1.oracle(u)) pre[u]=\
+    \ true, L[0].push_back(u);\n  int m= 0;\n  for (; L.back().size(); m+= 2) {\n\
+    \   L.push_back({});\n   for (int e: L[m]) {\n    if (converged= M2.oracle(e))\
+    \ break;\n    for (int f: I[1])\n     if (!pre[f] && M2.oracle(f, e)) L[m + 1].push_back(f),\
+    \ pre[f]= true;\n   }\n   if (converged) break;\n   L.push_back({});\n   for (int\
+    \ e: L[m + 1])\n    for (int f: I[0])\n     if (!pre[f] && M1.oracle(e, f)) L[m\
+    \ + 2].push_back(f), pre[f]= true;\n  }\n  if (!converged) break;\n  std::vector<std::vector<int>>\
     \ L2(m + 1);\n  for (int e: L[m])\n   if (M2.oracle(e)) L2[m].push_back(e);\n\
     \  for (int i= m; i; i-= 2) {\n   for (int e: L[i - 1])\n    for (int f: L2[i])\n\
     \     if (M1.oracle(e, f)) {\n      L2[i - 1].push_back(e);\n      break;\n  \
@@ -128,16 +133,15 @@ data:
     \ --i;\n       }\n     }\n    } else if (M2.oracle(e)) isok= true, b[e]= 1;\n\
     \    if (isok) {\n     converged= false, I[0].clear(), I[1].clear();\n     for\
     \ (int u= 0; u < n; u++) I[b[u]].push_back(u);\n     M1.build(I[1]), M2.build(I[1]);\n\
-    \    }\n   }\n }\n return I[1];\n}\n// sgn: + -> max, - -> min, 0 -> unweighted\n\
-    template <std::int_least8_t sgn, class Matroid1, class Matroid2, class cost_t>\
-    \ std::vector<std::vector<int>> weighted_matroid_intersection(int n, Matroid1\
-    \ M1, Matroid2 M2, std::vector<cost_t> c) {\n assert(n == (int)c.size());\n bool\
-    \ b[n];\n std::fill_n(b, n, false);\n std::vector<int> I[2], p;\n std::vector<std::vector<int>>\
+    \    }\n   }\n }\n return I[1];\n}\ntemplate <MinMaxEnum sgn, class Matroid1,\
+    \ class Matroid2, class cost_t> std::vector<std::vector<int>> weighted_matroid_intersection(int\
+    \ n, Matroid1 M1, Matroid2 M2, std::vector<cost_t> c) {\n assert(n == (int)c.size());\n\
+    \ bool b[n];\n std::fill_n(b, n, false);\n std::vector<int> I[2], p;\n std::vector<std::vector<int>>\
     \ ret(1);\n for (int u= 0; u < n; u++) I[0].push_back(u);\n if constexpr (sgn\
-    \ > 0) {\n  auto cmx= *std::max_element(c.begin(), c.end());\n  for (auto &x:\
-    \ c) x-= cmx;\n } else {\n  auto cmi= *std::min_element(c.begin(), c.end());\n\
-    \  for (auto &x: c) x-= cmi;\n }\n for (auto &x: c) x*= sgn * (n + 1);\n for (bool\
-    \ converged= false; !converged;) {\n  converged= true, M1.build(I[1]), M2.build(I[1]);\n\
+    \ == MAXIMIZE) {\n  auto cmx= *std::max_element(c.begin(), c.end());\n  for (auto\
+    \ &x: c) x-= cmx;\n } else {\n  auto cmi= *std::min_element(c.begin(), c.end());\n\
+    \  for (auto &x: c) x-= cmi;\n }\n for (auto &x: c) x*= -sgn * (n + 1);\n for\
+    \ (bool converged= false; !converged;) {\n  converged= true, M1.build(I[1]), M2.build(I[1]);\n\
     \  std::priority_queue<std::pair<cost_t, int>> pq;\n  std::vector<cost_t> dist(n,\
     \ std::numeric_limits<cost_t>::lowest());\n  for (int u: I[0])\n   if (M1.oracle(u))\
     \ pq.emplace(dist[u]= c[u] - 1, u);\n  for (p.assign(n, -1); pq.size();) {\n \
@@ -173,12 +177,13 @@ data:
     \ cnt[belong[e]]--;\n }\n inline bool oracle(int e) const { return belong[e] ==\
     \ -1 || cnt[belong[e]] > 0; }\n inline bool oracle(int e, int f) const { return\
     \ oracle(f) || belong[e] == belong[f]; }\n};"
-  dependsOn: []
+  dependsOn:
+  - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: false
   path: src/Optimization/matroid_intersection.hpp
   requiredBy: []
-  timestamp: '2023-03-17 18:15:59+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-08-10 15:00:06+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/421.matroid_intersection.test.cpp
   - test/yukicoder/421.weighted_matroid_intersection.test.cpp
@@ -204,7 +209,7 @@ $n$は台集合のサイズ, $r$は最大共通独立集合のサイズ, $\tau$�
 
 | 関数名                                          | 概要                                                                                                                                                                                                  | 計算量                  |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| `weighted_matroid_intersection<sgn>(n,M1,M2,w)` | (引数) `n` : 台集合のサイズ, `M1`・`M2` : マトロイド, `w` : 重み <br> (返り値) 共通独立集合の集合 ( k番目の集合は 要素数 = k かつ 重みが最大(最小)のもの )　<br> template引数が正なら最大, 負なら最小 | $\mathcal{O}(nr^2\tau)$ |
+| `weighted_matroid_intersection<sgn>(n,M1,M2,w)` | (引数) `n` : 台集合のサイズ, `M1`・`M2` : マトロイド, `w` : 重み <br> (返り値) 共通独立集合の集合 ( k番目の集合は 要素数 = k かつ 重みが最大(最小)のもの )　<br> template引数で最大最小を指定する | $\mathcal{O}(nr^2\tau)$ |
 
 
 ## 参考

@@ -8,17 +8,35 @@ data:
   - icon: ':question:'
     path: src/Optimization/NetworkSimplex.hpp
     title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
+  - icon: ':question:'
+    path: src/Optimization/matroid_intersection.hpp
+    title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1163.matroid_intersection.test.cpp
+    title: test/aoj/1163.matroid_intersection.test.cpp
+  - icon: ':x:'
+    path: test/aoj/1605.weighted_matroid_intersection.test.cpp
+    title: test/aoj/1605.weighted_matroid_intersection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
+    title: test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_B.test.cpp
     title: test/aoj/GRL_6_B.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
+    title: test/aoj/GRL_7_A.matroid_intersection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
+    title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
   - icon: ':x:'
     path: test/yosupo/line_add_get_min.test.cpp
     title: test/yosupo/line_add_get_min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
   - icon: ':x:'
@@ -27,6 +45,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1615.MCF.test.cpp
     title: test/yukicoder/1615.MCF.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/421.matroid_intersection.test.cpp
+    title: test/yukicoder/421.matroid_intersection.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/421.weighted_matroid_intersection.test.cpp
+    title: test/yukicoder/421.weighted_matroid_intersection.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -45,6 +69,7 @@ data:
   path: src/Optimization/MinMaxEnum.hpp
   requiredBy:
   - src/Optimization/NetworkSimplex.hpp
+  - src/Optimization/matroid_intersection.hpp
   - src/Optimization/LiChaoTree.hpp
   timestamp: '2023-08-10 14:03:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
@@ -54,7 +79,14 @@ data:
   - test/yosupo/segment_add_get_min.test.cpp
   - test/yosupo/min_cost_b_flow.test.cpp
   - test/yukicoder/1615.MCF.test.cpp
+  - test/yukicoder/421.matroid_intersection.test.cpp
+  - test/yukicoder/421.weighted_matroid_intersection.test.cpp
+  - test/aoj/1163.matroid_intersection.test.cpp
+  - test/aoj/1605.weighted_matroid_intersection.test.cpp
   - test/aoj/GRL_6_B.test.cpp
+  - test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
+  - test/aoj/GRL_7_A.matroid_intersection.test.cpp
+  - test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
 documentation_of: src/Optimization/MinMaxEnum.hpp
 layout: document
 title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\u5217\
