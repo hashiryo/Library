@@ -1,9 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Optimization/MinCostFlow.hpp
-    title: "\u6700\u5C0F\u8CBB\u7528\u6D41"
+  - icon: ':question:'
+    path: src/Optimization/MinMaxEnum.hpp
+    title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
+      \u5217\u6319\u578B"
+  - icon: ':question:'
+    path: src/Optimization/NetworkSimplex.hpp
+    title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,39 +20,40 @@ data:
     - https://judge.yosupo.jp/problem/assignment
   bundledCode: "#line 1 \"test/yosupo/assignment.mcf.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/assignment\"\n#include <iostream>\n#include <vector>\n\
-    #line 3 \"src/Optimization/MinCostFlow.hpp\"\n#include <algorithm>\n#include <numeric>\n\
-    #include <cmath>\n#include <cassert>\ntemplate <typename flow_t, typename cost_t,\
-    \ int_least8_t obj= 1> class NetworkSimplex {\n struct Node {\n  int par, pred;\n\
-    \  flow_t sup;\n  cost_t pi;\n };\n struct Edge {\n  int u, v;\n  flow_t low,\
-    \ up, flow;\n  cost_t cost;\n  int_least8_t state= 1;\n };\n int n, m= 0;\n std::vector<Node>\
-    \ ns;\n std::vector<Edge> es;\n std::vector<int> bfs, next, prev;\n inline void\
-    \ link(int u, int v) { next[u]= v, prev[v]= u; }\n inline void link(int u, int\
-    \ v, int w) { link(u, v), link(v, w); }\n inline auto opp_cost(int e) const {\
-    \ return es[e].cost + ns[es[e].u].pi - ns[es[e].v].pi; }\n inline void pivot(int\
-    \ in_arc) {\n  int u_in= es[in_arc].u, v_in= es[in_arc].v, u, e, a= u_in, b= v_in;\n\
-    \  while (a != b) a= ns[a].par == -1 ? v_in : ns[a].par, b= ns[b].par == -1 ?\
-    \ u_in : ns[b].par;\n  if (es[in_arc].state == -1) std::swap(u_in, v_in);\n  int\
-    \ lca= a, side= 0, u_out= -1, i= 0, S= 0;\n  flow_t delta= es[in_arc].up;\n  for\
-    \ (u= u_in; u != lca && delta > 0; u= ns[u].par) {\n   flow_t d= u == es[e= ns[u].pred].v\
-    \ ? es[e].up - es[e].flow : es[e].flow;\n   if (delta > d) delta= d, u_out= u,\
-    \ side= 1;\n  }\n  for (u= v_in; u != lca; u= ns[u].par) {\n   flow_t d= u ==\
-    \ es[e= ns[u].pred].u ? es[e].up - es[e].flow : es[e].flow;\n   if (delta >= d)\
-    \ delta= d, u_out= u, side= -1;\n  }\n  if (delta > 0) {\n   es[in_arc].flow+=\
-    \ delta*= es[in_arc].state;\n   for (u= es[in_arc].u; u != lca; u= ns[u].par)\
-    \ es[e].flow+= u == es[e= ns[u].pred].u ? -delta : delta;\n   for (u= es[in_arc].v;\
-    \ u != lca; u= ns[u].par) es[e].flow+= u == es[e= ns[u].pred].u ? delta : -delta;\n\
-    \  }\n  if (side == 0) return es[in_arc].state*= -1, void();\n  int out_arc= ns[u_out].pred,\
-    \ p;\n  es[in_arc].state= 0, es[out_arc].state= es[out_arc].flow ? -1 : 1;\n \
-    \ if (side == -1) std::swap(u_in, v_in);\n  for (u= u_in; u != u_out; u= ns[u].par)\
-    \ bfs[S++]= u;\n  assert(S <= n);\n  for (i= S; i--;) ns[p= ns[u].par].par= u=\
-    \ bfs[i], ns[p].pred= ns[u].pred, link(prev[p], next[p]), link(prev[u + n + 1],\
-    \ p, u + n + 1);\n  link(prev[u_in], next[u_in]), link(prev[v_in + n + 1], u_in,\
-    \ v_in + n + 1);\n  ns[u_in].par= v_in, ns[u_in].pred= in_arc;\n  cost_t pi_delta=\
-    \ u_in == es[in_arc].u ? -opp_cost(in_arc) : opp_cost(in_arc);\n  for (i= 0, S=\
-    \ 1, bfs[0]= u_in; i < S; i++) {\n   ns[u= bfs[i]].pi+= pi_delta;\n   for (int\
-    \ v= next[u + n + 1]; v != u + n + 1; v= next[v]) bfs[S++]= v;\n  }\n }\n void\
-    \ calc() {\n  cost_t inf_cost= 1;\n  for (int e= 0; e < m; e++) es[e].flow= 0,\
-    \ es[e].state= 1, es[e].up-= es[e].low, ns[es[e].u].sup-= es[e].low, ns[es[e].v].sup+=\
+    #line 3 \"src/Optimization/NetworkSimplex.hpp\"\n#include <algorithm>\n#include\
+    \ <numeric>\n#include <cmath>\n#include <cassert>\n#line 2 \"src/Optimization/MinMaxEnum.hpp\"\
+    \nenum MinMaxEnum { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 8 \"src/Optimization/NetworkSimplex.hpp\"\
+    \ntemplate <typename flow_t, typename cost_t, MinMaxEnum obj= MINIMIZE> class\
+    \ NetworkSimplex {\n struct Node {\n  int par, pred;\n  flow_t sup;\n  cost_t\
+    \ pi;\n };\n struct Edge {\n  int u, v;\n  flow_t low, up, flow;\n  cost_t cost;\n\
+    \  int_least8_t state= 1;\n };\n int n, m= 0;\n std::vector<Node> ns;\n std::vector<Edge>\
+    \ es;\n std::vector<int> bfs, next, prev;\n inline void link(int u, int v) { next[u]=\
+    \ v, prev[v]= u; }\n inline void link(int u, int v, int w) { link(u, v), link(v,\
+    \ w); }\n inline auto opp_cost(int e) const { return es[e].cost + ns[es[e].u].pi\
+    \ - ns[es[e].v].pi; }\n inline void pivot(int in_arc) {\n  int u_in= es[in_arc].u,\
+    \ v_in= es[in_arc].v, u, e, a= u_in, b= v_in;\n  while (a != b) a= ns[a].par ==\
+    \ -1 ? v_in : ns[a].par, b= ns[b].par == -1 ? u_in : ns[b].par;\n  if (es[in_arc].state\
+    \ == -1) std::swap(u_in, v_in);\n  int lca= a, side= 0, u_out= -1, i= 0, S= 0;\n\
+    \  flow_t delta= es[in_arc].up;\n  for (u= u_in; u != lca && delta > 0; u= ns[u].par)\
+    \ {\n   flow_t d= u == es[e= ns[u].pred].v ? es[e].up - es[e].flow : es[e].flow;\n\
+    \   if (delta > d) delta= d, u_out= u, side= 1;\n  }\n  for (u= v_in; u != lca;\
+    \ u= ns[u].par) {\n   flow_t d= u == es[e= ns[u].pred].u ? es[e].up - es[e].flow\
+    \ : es[e].flow;\n   if (delta >= d) delta= d, u_out= u, side= -1;\n  }\n  if (delta\
+    \ > 0) {\n   es[in_arc].flow+= delta*= es[in_arc].state;\n   for (u= es[in_arc].u;\
+    \ u != lca; u= ns[u].par) es[e].flow+= u == es[e= ns[u].pred].u ? -delta : delta;\n\
+    \   for (u= es[in_arc].v; u != lca; u= ns[u].par) es[e].flow+= u == es[e= ns[u].pred].u\
+    \ ? delta : -delta;\n  }\n  if (side == 0) return es[in_arc].state*= -1, void();\n\
+    \  int out_arc= ns[u_out].pred, p;\n  es[in_arc].state= 0, es[out_arc].state=\
+    \ es[out_arc].flow ? -1 : 1;\n  if (side == -1) std::swap(u_in, v_in);\n  for\
+    \ (u= u_in; u != u_out; u= ns[u].par) bfs[S++]= u;\n  assert(S <= n);\n  for (i=\
+    \ S; i--;) ns[p= ns[u].par].par= u= bfs[i], ns[p].pred= ns[u].pred, link(prev[p],\
+    \ next[p]), link(prev[u + n + 1], p, u + n + 1);\n  link(prev[u_in], next[u_in]),\
+    \ link(prev[v_in + n + 1], u_in, v_in + n + 1);\n  ns[u_in].par= v_in, ns[u_in].pred=\
+    \ in_arc;\n  cost_t pi_delta= u_in == es[in_arc].u ? -opp_cost(in_arc) : opp_cost(in_arc);\n\
+    \  for (i= 0, S= 1, bfs[0]= u_in; i < S; i++) {\n   ns[u= bfs[i]].pi+= pi_delta;\n\
+    \   for (int v= next[u + n + 1]; v != u + n + 1; v= next[v]) bfs[S++]= v;\n  }\n\
+    \ }\n void calc() {\n  cost_t inf_cost= 1;\n  for (int e= 0; e < m; e++) es[e].flow=\
+    \ 0, es[e].state= 1, es[e].up-= es[e].low, ns[es[e].u].sup-= es[e].low, ns[es[e].v].sup+=\
     \ es[e].low, inf_cost+= std::abs(es[e].cost);\n  ns[n]= {-1, -1, 0, 0}, es.resize(m\
     \ + n), bfs.resize(n + 1);\n  next.resize(2 * n + 2), std::iota(next.begin() +\
     \ n + 1, next.end(), n + 1);\n  prev.resize(2 * n + 2), std::iota(prev.begin()\
@@ -86,13 +91,9 @@ data:
     \ sum * obj;\n }\n bool b_flow() {\n  flow_t sum_supply= 0;\n  for (int u= 0;\
     \ u < n; u++) sum_supply+= ns[u].sup;\n  if (sum_supply != 0) return false;\n\
     \  calc();\n  for (int e= m; e < m + n; e++)\n   if (es[e].flow != 0) return es.resize(m),\
-    \ false;\n  return es.resize(m), true;\n }\n};\n\ntemplate <template <class, class,\
-    \ int_least8_t> class FlowAlgo, typename flow_t, typename cost_t> using MinCostFlow=\
-    \ FlowAlgo<flow_t, cost_t, 1>;\ntemplate <template <class, class, int_least8_t>\
-    \ class FlowAlgo, typename flow_t, typename cost_t> using MaxGainFlow= FlowAlgo<flow_t,\
-    \ cost_t, -1>;\n#line 5 \"test/yosupo/assignment.mcf.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using MCF=\
-    \ MinCostFlow<NetworkSimplex, long long, long long>;\n int N;\n cin >> N;\n MCF\
+    \ false;\n  return es.resize(m), true;\n }\n};\n#line 5 \"test/yosupo/assignment.mcf.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using MCF= NetworkSimplex<long long, long long>;\n int N;\n cin >> N;\n MCF\
     \ graph;\n vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n auto\
     \ v_left= graph.add_vertices(N);\n auto v_right= graph.add_vertices(N);\n for\
     \ (int i= 0; i < N; i++) {\n  graph.add_supply(v_left[i], 1);\n  graph.add_demand(v_right[i],\
@@ -102,23 +103,24 @@ data:
     \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++)\n   if (edges[i][j].flow())\
     \ cout << j << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/assignment\"\n#include\
-    \ <iostream>\n#include <vector>\n#include \"src/Optimization/MinCostFlow.hpp\"\
+    \ <iostream>\n#include <vector>\n#include \"src/Optimization/NetworkSimplex.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using MCF= MinCostFlow<NetworkSimplex, long long, long long>;\n int N;\n cin\
-    \ >> N;\n MCF graph;\n vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n\
-    \ auto v_left= graph.add_vertices(N);\n auto v_right= graph.add_vertices(N);\n\
-    \ for (int i= 0; i < N; i++) {\n  graph.add_supply(v_left[i], 1);\n  graph.add_demand(v_right[i],\
+    \ using MCF= NetworkSimplex<long long, long long>;\n int N;\n cin >> N;\n MCF\
+    \ graph;\n vector<vector<MCF::EdgePtr>> edges(N, vector<MCF::EdgePtr>(N));\n auto\
+    \ v_left= graph.add_vertices(N);\n auto v_right= graph.add_vertices(N);\n for\
+    \ (int i= 0; i < N; i++) {\n  graph.add_supply(v_left[i], 1);\n  graph.add_demand(v_right[i],\
     \ 1);\n }\n for (int i= 0; i < N; i++) {\n  for (int j= 0; j < N; j++) {\n   long\
     \ long A;\n   cin >> A;\n   edges[i][j]= graph.add_edge(v_left[i], v_right[j],\
     \ 0, 1, A);\n  }\n }\n graph.b_flow();\n cout << graph.get_result_value() << endl;\n\
     \ for (int i= 0; i < N; i++)\n  for (int j= 0; j < N; j++)\n   if (edges[i][j].flow())\
     \ cout << j << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   dependsOn:
-  - src/Optimization/MinCostFlow.hpp
+  - src/Optimization/NetworkSimplex.hpp
+  - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: true
   path: test/yosupo/assignment.mcf.test.cpp
   requiredBy: []
-  timestamp: '2023-03-16 12:34:48+09:00'
+  timestamp: '2023-08-10 14:03:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/assignment.mcf.test.cpp
