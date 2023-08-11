@@ -8,6 +8,9 @@ data:
   - icon: ':question:'
     path: src/Optimization/NetworkSimplex.hpp
     title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
+  - icon: ':x:'
+    path: src/Optimization/fibonacci_search.hpp
+    title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
   - icon: ':question:'
     path: src/Optimization/matroid_intersection.hpp
     title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
@@ -15,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1163.matroid_intersection.test.cpp
     title: test/aoj/1163.matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1605.weighted_matroid_intersection.test.cpp
     title: test/aoj/1605.weighted_matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
@@ -46,6 +49,9 @@ data:
     path: test/yukicoder/1615.MCF.test.cpp
     title: test/yukicoder/1615.MCF.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/2276.test.cpp
+    title: test/yukicoder/2276.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/421.matroid_intersection.test.cpp
     title: test/yukicoder/421.matroid_intersection.test.cpp
   - icon: ':x:'
@@ -69,6 +75,7 @@ data:
   path: src/Optimization/MinMaxEnum.hpp
   requiredBy:
   - src/Optimization/NetworkSimplex.hpp
+  - src/Optimization/fibonacci_search.hpp
   - src/Optimization/matroid_intersection.hpp
   - src/Optimization/LiChaoTree.hpp
   timestamp: '2023-08-10 14:03:01+09:00'
@@ -81,6 +88,7 @@ data:
   - test/yukicoder/1615.MCF.test.cpp
   - test/yukicoder/421.matroid_intersection.test.cpp
   - test/yukicoder/421.weighted_matroid_intersection.test.cpp
+  - test/yukicoder/2276.test.cpp
   - test/aoj/1163.matroid_intersection.test.cpp
   - test/aoj/1605.weighted_matroid_intersection.test.cpp
   - test/aoj/GRL_6_B.test.cpp

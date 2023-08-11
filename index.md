@@ -102,7 +102,7 @@ data:
     - icon: ':question:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/SubProductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
     - icon: ':question:'
@@ -276,7 +276,7 @@ data:
     - icon: ':question:'
       path: src/Math/ModInt_Runtime.hpp
       title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
     - icon: ':question:'
@@ -380,6 +380,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/WeightedMatching.hpp
       title: "\u91CD\u307F\u4ED8\u304D\u30DE\u30C3\u30C1\u30F3\u30B0"
+    - icon: ':x:'
+      path: src/Optimization/fibonacci_search.hpp
+      title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
     - icon: ':question:'
       path: src/Optimization/matroid_intersection.hpp
       title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
@@ -483,7 +486,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1595.test.cpp
       title: test/aoj/1595.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1605.weighted_matroid_intersection.test.cpp
       title: test/aoj/1605.weighted_matroid_intersection.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1325,16 +1328,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/multivariate_convolution.test.cpp
       title: test/yosupo/multivariate_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/nim_product_64.test.cpp
       title: test/yosupo/nim_product_64.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/number_of_substrings.test.cpp
       title: test/yosupo/number_of_substrings.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/partition.MSET.test.cpp
       title: test/yosupo/partition.MSET.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/partition.test.cpp
       title: test/yosupo/partition.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1349,22 +1352,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/polynomial_composite_set_power_series.test.cpp
       title: test/yosupo/polynomial_composite_set_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/polynomial_interpolation.test.cpp
       title: test/yosupo/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.FPS.test.cpp
       title: test/yosupo/pow_of_FPS.FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.test.cpp
       title: test/yosupo/pow_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_sparse_FPS.test.cpp
       title: test/yosupo/pow_of_sparse_FPS.test.cpp
     - icon: ':x:'
@@ -1654,6 +1657,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/215.test.cpp
       title: test/yukicoder/215.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2276.test.cpp
+      title: test/yukicoder/2276.test.cpp
     - icon: ':x:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp

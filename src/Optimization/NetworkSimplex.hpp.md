@@ -184,6 +184,6 @@ documentation_of: src/Optimization/NetworkSimplex.hpp
 layout: document
 title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
 ---
-テンプレートの第三引数で最大最小を指定. デフォルトは最小値取得.
+templateの第三引数で最大最小を指定. デフォルトは最小値取得.
 ## 問題例
 [幾何コンテスト2013 B - 玉座の間](https://atcoder.jp/contests/geocon2013/tasks/geocon2013_b) (コスト実数)

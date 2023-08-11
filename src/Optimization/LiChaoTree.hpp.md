@@ -21,7 +21,7 @@ data:
   bundledCode: "#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include\
     \ <algorithm>\n#line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum {\
     \ MAXIMIZE= -1, MINIMIZE= 1 };\n#line 5 \"src/Optimization/LiChaoTree.hpp\"\n\
-    template <typename T, MinMaxEnum d= MINIMIZE> class LiChaoTree {\n struct Line\
+    template <typename T, MinMaxEnum obj= MINIMIZE> class LiChaoTree {\n struct Line\
     \ {\n  T a, b;\n  inline T get(T x) const { return a * x + b; }\n };\n struct\
     \ Node {\n  Line f;\n  Node *ch[2]= {nullptr, nullptr};\n } *root;\n const T L,\
     \ U, INF;\n static inline int node_count;\n int sgn(const T &x) const {\n  if\
@@ -46,12 +46,12 @@ data:
     \ : query(t->ch[1], x_m, x_r, x)));\n }\npublic:\n LiChaoTree(T l= -2e9, T u=\
     \ 2e9, T inf= std::numeric_limits<T>::max() / 2): root{nullptr}, L(l), U(u), INF(inf)\
     \ {}\n T get_inf() { return INF; }\n // ax+b\n void insert_line(T a, T b) { addl(root,\
-    \ Line{a * d, b * d}, L, U); }\n // ax+b for x in [l,r)\n void insert_segment(T\
-    \ l, T r, T a, T b) { adds(root, Line{a * d, b * d}, l, r, L, U); }\n T query(T\
-    \ x) const { else return query(root, L, U, x) * d; }\n};\n"
+    \ Line{a * obj, b * obj}, L, U); }\n // ax+b for x in [l,r)\n void insert_segment(T\
+    \ l, T r, T a, T b) { adds(root, Line{a * obj, b * obj}, l, r, L, U); }\n T query(T\
+    \ x) const { else return query(root, L, U, x) * obj; }\n};\n"
   code: "#pragma once\n#include <limits>\n#include <algorithm>\n#include \"src/Optimization/MinMaxEnum.hpp\"\
-    \ntemplate <typename T, MinMaxEnum d= MINIMIZE> class LiChaoTree {\n struct Line\
-    \ {\n  T a, b;\n  inline T get(T x) const { return a * x + b; }\n };\n struct\
+    \ntemplate <typename T, MinMaxEnum obj= MINIMIZE> class LiChaoTree {\n struct\
+    \ Line {\n  T a, b;\n  inline T get(T x) const { return a * x + b; }\n };\n struct\
     \ Node {\n  Line f;\n  Node *ch[2]= {nullptr, nullptr};\n } *root;\n const T L,\
     \ U, INF;\n static inline int node_count;\n int sgn(const T &x) const {\n  if\
     \ constexpr (std::is_floating_point_v<T>) {\n   static constexpr T EPS= 1e-10;\n\
@@ -75,15 +75,15 @@ data:
     \ : query(t->ch[1], x_m, x_r, x)));\n }\npublic:\n LiChaoTree(T l= -2e9, T u=\
     \ 2e9, T inf= std::numeric_limits<T>::max() / 2): root{nullptr}, L(l), U(u), INF(inf)\
     \ {}\n T get_inf() { return INF; }\n // ax+b\n void insert_line(T a, T b) { addl(root,\
-    \ Line{a * d, b * d}, L, U); }\n // ax+b for x in [l,r)\n void insert_segment(T\
-    \ l, T r, T a, T b) { adds(root, Line{a * d, b * d}, l, r, L, U); }\n T query(T\
-    \ x) const { else return query(root, L, U, x) * d; }\n};\n"
+    \ Line{a * obj, b * obj}, L, U); }\n // ax+b for x in [l,r)\n void insert_segment(T\
+    \ l, T r, T a, T b) { adds(root, Line{a * obj, b * obj}, l, r, L, U); }\n T query(T\
+    \ x) const { else return query(root, L, U, x) * obj; }\n};\n"
   dependsOn:
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: false
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2023-08-10 14:03:01+09:00'
+  timestamp: '2023-08-11 21:45:36+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/line_add_get_min.test.cpp

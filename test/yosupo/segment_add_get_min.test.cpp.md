@@ -23,7 +23,7 @@ data:
     #line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include <algorithm>\n\
     #line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum { MAXIMIZE= -1, MINIMIZE=\
     \ 1 };\n#line 5 \"src/Optimization/LiChaoTree.hpp\"\ntemplate <typename T, MinMaxEnum\
-    \ d= MINIMIZE> class LiChaoTree {\n struct Line {\n  T a, b;\n  inline T get(T\
+    \ obj= MINIMIZE> class LiChaoTree {\n struct Line {\n  T a, b;\n  inline T get(T\
     \ x) const { return a * x + b; }\n };\n struct Node {\n  Line f;\n  Node *ch[2]=\
     \ {nullptr, nullptr};\n } *root;\n const T L, U, INF;\n static inline int node_count;\n\
     \ int sgn(const T &x) const {\n  if constexpr (std::is_floating_point_v<T>) {\n\
@@ -47,10 +47,10 @@ data:
     \ - x_m) < 0 ? query(t->ch[0], x_l, x_m, x) : query(t->ch[1], x_m, x_r, x)));\n\
     \ }\npublic:\n LiChaoTree(T l= -2e9, T u= 2e9, T inf= std::numeric_limits<T>::max()\
     \ / 2): root{nullptr}, L(l), U(u), INF(inf) {}\n T get_inf() { return INF; }\n\
-    \ // ax+b\n void insert_line(T a, T b) { addl(root, Line{a * d, b * d}, L, U);\
-    \ }\n // ax+b for x in [l,r)\n void insert_segment(T l, T r, T a, T b) { adds(root,\
-    \ Line{a * d, b * d}, l, r, L, U); }\n T query(T x) const { else return query(root,\
-    \ L, U, x) * d; }\n};\n#line 4 \"test/yosupo/segment_add_get_min.test.cpp\"\n\
+    \ // ax+b\n void insert_line(T a, T b) { addl(root, Line{a * obj, b * obj}, L,\
+    \ U); }\n // ax+b for x in [l,r)\n void insert_segment(T l, T r, T a, T b) { adds(root,\
+    \ Line{a * obj, b * obj}, l, r, L, U); }\n T query(T x) const { else return query(root,\
+    \ L, U, x) * obj; }\n};\n#line 4 \"test/yosupo/segment_add_get_min.test.cpp\"\n\
     using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n LiChaoTree<long long> cht;\n while (N--) {\n  long\
     \ long l, r, a, b;\n  cin >> l >> r >> a >> b;\n  cht.insert_segment(l, r, a,\
@@ -75,7 +75,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/segment_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:03:01+09:00'
+  timestamp: '2023-08-11 21:45:36+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/segment_add_get_min.test.cpp

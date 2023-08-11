@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1163.matroid_intersection.test.cpp
     title: test/aoj/1163.matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1605.weighted_matroid_intersection.test.cpp
     title: test/aoj/1605.weighted_matroid_intersection.test.cpp
   - icon: ':heavy_check_mark:'
