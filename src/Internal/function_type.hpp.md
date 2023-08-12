@@ -5,19 +5,46 @@ data:
   - icon: ':question:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
+  - icon: ':question:'
+    path: src/Optimization/fibonacci_search.hpp
+    title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3044.test.cpp
+    title: test/aoj/3044.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc204_e.test.cpp
+    title: test/atcoder/abc204_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc268_e.test.cpp
+    title: test/atcoder/abc268_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc279_d.test.cpp
+    title: test/atcoder/abc279_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc147_c.test.cpp
+    title: test/atcoder/arc147_c.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/180.test.cpp
+    title: test/yukicoder/180.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2276.test.cpp
+    title: test/yukicoder/2276.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2309.test.cpp
+    title: test/yukicoder/2309.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/261.test.cpp
     title: test/yukicoder/261.test.cpp
@@ -63,16 +90,25 @@ data:
   isVerificationFile: false
   path: src/Internal/function_type.hpp
   requiredBy:
+  - src/Optimization/fibonacci_search.hpp
   - src/Math/DiscreteLogarithm.hpp
   timestamp: '2023-04-02 00:58:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
+  - test/yukicoder/2309.test.cpp
   - test/yukicoder/950.test.cpp
   - test/yukicoder/261.test.cpp
+  - test/yukicoder/180.test.cpp
   - test/yukicoder/1339.test.cpp
+  - test/yukicoder/2276.test.cpp
+  - test/aoj/3044.test.cpp
+  - test/atcoder/abc279_d.test.cpp
   - test/atcoder/abc222_g.test.cpp
+  - test/atcoder/arc147_c.test.cpp
+  - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc270_g.test.cpp
+  - test/atcoder/abc268_e.test.cpp
 documentation_of: src/Internal/function_type.hpp
 layout: document
 title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\
