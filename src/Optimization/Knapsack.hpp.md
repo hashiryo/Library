@@ -64,6 +64,7 @@ title: "0-1 \u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C (\u534A\u5206\u5168
 | `add(v,w)`   | 価値 v, 重さ w のアイテムを追加                      |                                |
 | `build()`    | 下準備 (半分に分けて全列挙する)                      | $\mathcal{O}(2^{\frac{n}{2}})$ |
 | `solve(cap)` | 容量が cap 以下になるような価値の最大値を返す (尺取) | $\mathcal{O}(2^{\frac{n}{2}})$ |
+
 ## 参考
 [https://twitter.com/noshi91/status/1271857111903825920](https://twitter.com/noshi91/status/1271857111903825920) 
 ## 問題例

@@ -27,12 +27,12 @@ data:
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include <algorithm>\n\
@@ -391,7 +391,7 @@ data:
   path: src/FFT/fps_sqrt.hpp
   requiredBy: []
   timestamp: '2023-08-05 18:38:55+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sqrt_of_FPS.test.cpp
 documentation_of: src/FFT/fps_sqrt.hpp
