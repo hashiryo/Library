@@ -14,9 +14,9 @@ data:
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc147/tasks/arc147_c
@@ -48,25 +48,24 @@ data:
     \ x;) {\n  if (y= a + b - x; r < y) b= a, a= y;\n  else {\n   if constexpr (obj\
     \ == MINIMIZE) g= fx < (fy= f(y));\n   else g= fx > (fy= f(y));\n   if (g) b=\
     \ a, a= y;\n   else a= x, x= y, fx= fy;\n  }\n }\n return {x, fx};\n}\n#line 5\
-    \ \"test/atcoder/arc147_c.test.cpp\"\nusing namespace std;\nnamespace arc147c\
-    \ {\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >>\
-    \ N;\n int L[N], R[N];\n int mn= 1e9, mx= 0;\n for (int i= 0; i < N; ++i) cin\
-    \ >> L[i] >> R[i], mn= min(mn, L[i]), mx= max(mx, R[i]);\n auto f= [&](int t)\
-    \ {\n  long long x[N];\n  for (int i= 0; i < N; ++i) x[i]= clamp(t, L[i], R[i]);\n\
-    \  sort(x, x + N);\n  long long ret= 0, now= 0;\n  for (int i= 1; i < N; ++i)\
-    \ now+= (x[i] - x[i - 1]) * i, ret+= now;\n  return ret;\n };\n auto [x, fx]=\
-    \ fibonacci_search<MINIMIZE>(f, mn, mx);\n cout << fx << '\\n';\n return 0;\n\
-    }\n}\n"
+    \ \"test/atcoder/arc147_c.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n int L[N], R[N];\n\
+    \ int mn= 1e9, mx= 0;\n for (int i= 0; i < N; ++i) cin >> L[i] >> R[i], mn= min(mn,\
+    \ L[i]), mx= max(mx, R[i]);\n auto f= [&](int t) {\n  long long x[N];\n  for (int\
+    \ i= 0; i < N; ++i) x[i]= clamp(t, L[i], R[i]);\n  sort(x, x + N);\n  long long\
+    \ ret= 0, now= 0;\n  for (int i= 1; i < N; ++i) now+= (x[i] - x[i - 1]) * i, ret+=\
+    \ now;\n  return ret;\n };\n auto [x, fx]= fibonacci_search<MINIMIZE>(f, mn, mx);\n\
+    \ cout << fx << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/arc147/tasks/arc147_c\"\n#include\
     \ <iostream>\n#include <algorithm>\n#include \"src/Optimization/fibonacci_search.hpp\"\
-    \nusing namespace std;\nnamespace arc147c {\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N;\n cin >> N;\n int L[N], R[N];\n int mn= 1e9, mx= 0;\n for (int i= 0;\
     \ i < N; ++i) cin >> L[i] >> R[i], mn= min(mn, L[i]), mx= max(mx, R[i]);\n auto\
     \ f= [&](int t) {\n  long long x[N];\n  for (int i= 0; i < N; ++i) x[i]= clamp(t,\
     \ L[i], R[i]);\n  sort(x, x + N);\n  long long ret= 0, now= 0;\n  for (int i=\
     \ 1; i < N; ++i) now+= (x[i] - x[i - 1]) * i, ret+= now;\n  return ret;\n };\n\
     \ auto [x, fx]= fibonacci_search<MINIMIZE>(f, mn, mx);\n cout << fx << '\\n';\n\
-    \ return 0;\n}\n}"
+    \ return 0;\n}"
   dependsOn:
   - src/Optimization/fibonacci_search.hpp
   - src/Internal/function_type.hpp
@@ -74,8 +73,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc147_c.test.cpp
   requiredBy: []
-  timestamp: '2023-08-13 00:05:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-08-13 16:05:31+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc147_c.test.cpp
 layout: document

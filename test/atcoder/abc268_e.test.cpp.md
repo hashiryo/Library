@@ -51,19 +51,19 @@ data:
     \ \"test/atcoder/abc268_e.test.cpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n int x[N];\n for\
     \ (int i= 0; i < N; ++i) {\n  int p;\n  cin >> p;\n  x[p]= i;\n }\n auto f= [&](int\
-    \ n) {\n  int ret= 0;\n  for (int i= 0; i < N; ++i) {\n   int tmp= (x[i] + n -\
-    \ i + N) % N;\n   ret+= min(tmp, N - tmp);\n  }\n  return ret;\n };\n auto [x1,\
-    \ fx1]= fibonacci_search<MINIMIZE>(f, 0, N / 2);\n auto [x2, fx2]= fibonacci_search<MINIMIZE>(f,\
+    \ n) {\n  long long ret= 0;\n  for (int i= 0; i < N; ++i) {\n   int tmp= (x[i]\
+    \ + n - i + N) % N;\n   ret+= min(tmp, N - tmp);\n  }\n  return ret;\n };\n auto\
+    \ [x1, fx1]= fibonacci_search<MINIMIZE>(f, 0, N / 2);\n auto [x2, fx2]= fibonacci_search<MINIMIZE>(f,\
     \ N / 2, N);\n cout << min(fx1, fx2) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc268/tasks/abc268_e\"\n#include\
     \ <iostream>\n#include <algorithm>\n#include \"src/Optimization/fibonacci_search.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N;\n cin >> N;\n int x[N];\n for (int i= 0; i < N; ++i) {\n  int p;\n  cin\
-    \ >> p;\n  x[p]= i;\n }\n auto f= [&](int n) {\n  int ret= 0;\n  for (int i= 0;\
-    \ i < N; ++i) {\n   int tmp= (x[i] + n - i + N) % N;\n   ret+= min(tmp, N - tmp);\n\
-    \  }\n  return ret;\n };\n auto [x1, fx1]= fibonacci_search<MINIMIZE>(f, 0, N\
-    \ / 2);\n auto [x2, fx2]= fibonacci_search<MINIMIZE>(f, N / 2, N);\n cout << min(fx1,\
-    \ fx2) << '\\n';\n return 0;\n}\n"
+    \ >> p;\n  x[p]= i;\n }\n auto f= [&](int n) {\n  long long ret= 0;\n  for (int\
+    \ i= 0; i < N; ++i) {\n   int tmp= (x[i] + n - i + N) % N;\n   ret+= min(tmp,\
+    \ N - tmp);\n  }\n  return ret;\n };\n auto [x1, fx1]= fibonacci_search<MINIMIZE>(f,\
+    \ 0, N / 2);\n auto [x2, fx2]= fibonacci_search<MINIMIZE>(f, N / 2, N);\n cout\
+    \ << min(fx1, fx2) << '\\n';\n return 0;\n}\n"
   dependsOn:
   - src/Optimization/fibonacci_search.hpp
   - src/Internal/function_type.hpp
@@ -71,7 +71,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc268_e.test.cpp
   requiredBy: []
-  timestamp: '2023-08-13 00:05:37+09:00'
+  timestamp: '2023-08-13 16:05:31+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc268_e.test.cpp
