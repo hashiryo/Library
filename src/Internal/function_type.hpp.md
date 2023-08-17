@@ -8,10 +8,16 @@ data:
   - icon: ':question:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
+  - icon: ':x:'
+    path: src/Optimization/simplified_larsch_dp.hpp
+    title: monotone minima
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
+  - icon: ':x:'
+    path: test/aoj/3086.test.cpp
+    title: test/aoj/3086.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc204_e.test.cpp
     title: test/atcoder/abc204_e.test.cpp
@@ -27,9 +33,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc147_c.test.cpp
-    title: test/atcoder/arc147_c.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
@@ -48,6 +51,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/261.test.cpp
     title: test/yukicoder/261.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/409.test.cpp
+    title: test/yukicoder/409.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/703.test.cpp
+    title: test/yukicoder/703.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/704.test.cpp
+    title: test/yukicoder/704.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/705.test.cpp
+    title: test/yukicoder/705.test.cpp
   - icon: ':x:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
@@ -91,21 +106,26 @@ data:
   path: src/Internal/function_type.hpp
   requiredBy:
   - src/Optimization/fibonacci_search.hpp
+  - src/Optimization/simplified_larsch_dp.hpp
   - src/Math/DiscreteLogarithm.hpp
   timestamp: '2023-04-02 00:58:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
+  - test/yukicoder/704.test.cpp
   - test/yukicoder/2309.test.cpp
   - test/yukicoder/950.test.cpp
+  - test/yukicoder/409.test.cpp
+  - test/yukicoder/705.test.cpp
   - test/yukicoder/261.test.cpp
   - test/yukicoder/180.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/2276.test.cpp
+  - test/yukicoder/703.test.cpp
+  - test/aoj/3086.test.cpp
   - test/aoj/3044.test.cpp
   - test/atcoder/abc279_d.test.cpp
   - test/atcoder/abc222_g.test.cpp
-  - test/atcoder/arc147_c.test.cpp
   - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc268_e.test.cpp

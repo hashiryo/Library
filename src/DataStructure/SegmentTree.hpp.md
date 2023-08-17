@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/3086.test.cpp
+    title: test/aoj/3086.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_A.SegTree.test.cpp
     title: test/aoj/DSL_2_A.SegTree.test.cpp
@@ -86,6 +89,7 @@ data:
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yukicoder/649.SegTree.test.cpp
   - test/aoj/DSL_2_A.SegTree.test.cpp
+  - test/aoj/3086.test.cpp
 documentation_of: src/DataStructure/SegmentTree.hpp
 layout: document
 title: Segment-Tree

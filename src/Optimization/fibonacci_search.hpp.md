@@ -23,9 +23,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc147_c.test.cpp
-    title: test/atcoder/arc147_c.test.cpp
   - icon: ':x:'
     path: test/yukicoder/180.test.cpp
     title: test/yukicoder/180.test.cpp
@@ -88,7 +85,6 @@ data:
   - test/yukicoder/2276.test.cpp
   - test/aoj/3044.test.cpp
   - test/atcoder/abc279_d.test.cpp
-  - test/atcoder/arc147_c.test.cpp
   - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc268_e.test.cpp
 documentation_of: src/Optimization/fibonacci_search.hpp

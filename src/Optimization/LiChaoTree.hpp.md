@@ -7,15 +7,18 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2725.test.cpp
+    title: test/aoj/2725.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.test.cpp
     title: test/yosupo/line_add_get_min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include\
@@ -48,7 +51,7 @@ data:
     \ {}\n T get_inf() { return INF; }\n // ax+b\n void insert_line(T a, T b) { addl(root,\
     \ Line{a * obj, b * obj}, L, U); }\n // ax+b for x in [l,r)\n void insert_segment(T\
     \ l, T r, T a, T b) { adds(root, Line{a * obj, b * obj}, l, r, L, U); }\n T query(T\
-    \ x) const { else return query(root, L, U, x) * obj; }\n};\n"
+    \ x) const { return query(root, L, U, x) * obj; }\n};\n"
   code: "#pragma once\n#include <limits>\n#include <algorithm>\n#include \"src/Optimization/MinMaxEnum.hpp\"\
     \ntemplate <typename T, MinMaxEnum obj= MINIMIZE> class LiChaoTree {\n struct\
     \ Line {\n  T a, b;\n  inline T get(T x) const { return a * x + b; }\n };\n struct\
@@ -77,17 +80,18 @@ data:
     \ {}\n T get_inf() { return INF; }\n // ax+b\n void insert_line(T a, T b) { addl(root,\
     \ Line{a * obj, b * obj}, L, U); }\n // ax+b for x in [l,r)\n void insert_segment(T\
     \ l, T r, T a, T b) { adds(root, Line{a * obj, b * obj}, l, r, L, U); }\n T query(T\
-    \ x) const { else return query(root, L, U, x) * obj; }\n};\n"
+    \ x) const { return query(root, L, U, x) * obj; }\n};\n"
   dependsOn:
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: false
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2023-08-11 21:45:36+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-08-17 22:34:53+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/line_add_get_min.test.cpp
   - test/yosupo/segment_add_get_min.test.cpp
+  - test/aoj/2725.test.cpp
 documentation_of: src/Optimization/LiChaoTree.hpp
 layout: document
 title: Li-Chao-Tree

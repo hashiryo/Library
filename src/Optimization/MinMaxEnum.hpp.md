@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
   - icon: ':question:'
@@ -21,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1605.weighted_matroid_intersection.test.cpp
     title: test/aoj/1605.weighted_matroid_intersection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2725.test.cpp
+    title: test/aoj/2725.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
@@ -46,18 +49,15 @@ data:
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc147_c.test.cpp
-    title: test/atcoder/arc147_c.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.test.cpp
     title: test/yosupo/line_add_get_min.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
   - icon: ':x:'
@@ -112,6 +112,7 @@ data:
   - test/yukicoder/180.test.cpp
   - test/yukicoder/421.weighted_matroid_intersection.test.cpp
   - test/yukicoder/2276.test.cpp
+  - test/aoj/2725.test.cpp
   - test/aoj/1163.matroid_intersection.test.cpp
   - test/aoj/1605.weighted_matroid_intersection.test.cpp
   - test/aoj/GRL_6_B.test.cpp
@@ -120,7 +121,6 @@ data:
   - test/aoj/3044.test.cpp
   - test/atcoder/abc279_d.test.cpp
   - test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-  - test/atcoder/arc147_c.test.cpp
   - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc268_e.test.cpp
 documentation_of: src/Optimization/MinMaxEnum.hpp

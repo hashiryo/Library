@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
   - icon: ':question:'
@@ -10,9 +10,9 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/line_add_get_min
@@ -49,7 +49,7 @@ data:
     \ / 2): root{nullptr}, L(l), U(u), INF(inf) {}\n T get_inf() { return INF; }\n\
     \ // ax+b\n void insert_line(T a, T b) { addl(root, Line{a * obj, b * obj}, L,\
     \ U); }\n // ax+b for x in [l,r)\n void insert_segment(T l, T r, T a, T b) { adds(root,\
-    \ Line{a * obj, b * obj}, l, r, L, U); }\n T query(T x) const { else return query(root,\
+    \ Line{a * obj, b * obj}, l, r, L, U); }\n T query(T x) const { return query(root,\
     \ L, U, x) * obj; }\n};\n#line 4 \"test/yosupo/line_add_get_min.test.cpp\"\nusing\
     \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
     \ N, Q;\n cin >> N >> Q;\n LiChaoTree<long long> cht;\n while (N--) {\n  long\
@@ -71,8 +71,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/line_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2023-08-11 21:45:36+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-08-17 22:34:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/line_add_get_min.test.cpp
 layout: document
