@@ -123,9 +123,9 @@ data:
   timestamp: '2023-08-06 20:57:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1501.test.cpp
   - test/aoj/0350.test.cpp
   - test/unit_test/constexpr_rational.test.cpp
+  - test/yukicoder/1501.test.cpp
 documentation_of: src/Math/Rational.hpp
 layout: document
 title: "\u6709\u7406\u6570 $\\mathbb{Q}$"

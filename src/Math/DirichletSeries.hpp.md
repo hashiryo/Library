@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.Dirichlet.test.cpp
     title: test/atcoder/arc116_c.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
   - icon: ':x:'
@@ -269,11 +269,11 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - test/yukicoder/1276.Dirichlet.test.cpp
-  - test/yukicoder/1573.Dirichlet.test.cpp
   - test/atcoder/abc179_c.Dirichlet.test.cpp
-  - test/atcoder/abc172_d.Dirichlet.test.cpp
   - test/atcoder/arc116_c.Dirichlet.test.cpp
+  - test/atcoder/abc172_d.Dirichlet.test.cpp
+  - test/yukicoder/1573.Dirichlet.test.cpp
+  - test/yukicoder/1276.Dirichlet.test.cpp
 documentation_of: src/Math/DirichletSeries.hpp
 layout: document
 title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"

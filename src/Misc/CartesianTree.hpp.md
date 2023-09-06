@@ -62,11 +62,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/cartesian_tree.test.cpp
-  - test/yukicoder/1031.test.cpp
-  - test/aoj/DPL_3_C.test.cpp
   - test/aoj/DPL_3_B.test.cpp
+  - test/aoj/DPL_3_C.test.cpp
   - test/atcoder/arc115_e.test.cpp
   - test/atcoder/abc234_g.test.cpp
+  - test/yukicoder/1031.test.cpp
 documentation_of: src/Misc/CartesianTree.hpp
 layout: document
 title: Cartesian-Tree

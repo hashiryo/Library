@@ -212,8 +212,8 @@ data:
   timestamp: '2023-08-04 18:10:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
   - test/yukicoder/1907.test.cpp
   - test/yukicoder/1303.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp

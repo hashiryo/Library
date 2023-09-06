@@ -91,25 +91,25 @@ data:
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_tetration.hpp
   - src/Math/ModInt_Exp.hpp
-  - src/Math/mod_kth_root.hpp
-  - src/Math/Factors.hpp
   - src/Math/Rational.hpp
+  - src/Math/Factors.hpp
+  - src/Math/mod_kth_root.hpp
   timestamp: '2023-08-06 00:46:02+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
-  - test/yosupo/factorize.test.cpp
-  - test/yosupo/primitive_root.test.cpp
   - test/yosupo/kth_root_mod.test.cpp
-  - test/yukicoder/1501.test.cpp
+  - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
+  - test/yosupo/factorize.test.cpp
   - test/aoj/NTL_1_D.test.cpp
   - test/aoj/0350.test.cpp
   - test/atcoder/abc228_e.test.cpp
   - test/unit_test/constexpr_binary_gcd.test.cpp
-  - test/unit_test/constexpr_mod_tetration.test.cpp
   - test/unit_test/constexpr_factors.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
   - test/unit_test/constexpr_rational.test.cpp
+  - test/yukicoder/1501.test.cpp
 documentation_of: src/Math/binary_gcd.hpp
 layout: document
 title: Binary GCD

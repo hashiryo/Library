@@ -67,9 +67,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/two_edge_connected_components.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
-  - test/aoj/GRL_3_B.test.cpp
   - test/aoj/2893.test.cpp
+  - test/aoj/GRL_3_B.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
 documentation_of: src/Graph/IncrementalBridgeConnectivity.hpp
 layout: document
 title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"

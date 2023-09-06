@@ -524,10 +524,10 @@ data:
   timestamp: '2023-08-05 18:38:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/stirling_2.test.cpp
+  - test/yosupo/stirling_1.test.cpp
   - test/yosupo/partition.test.cpp
   - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_1.test.cpp
-  - test/yosupo/stirling_2.test.cpp
   - test/yukicoder/963.test.cpp
 documentation_of: src/FFT/sequences.hpp
 layout: document

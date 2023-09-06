@@ -8,6 +8,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
+    path: test/aoj/2603.AlienDP.test.cpp
+    title: test/aoj/2603.AlienDP.test.cpp
+  - icon: ':x:'
     path: test/aoj/3086.test.cpp
     title: test/aoj/3086.test.cpp
   - icon: ':x:'
@@ -70,20 +73,22 @@ data:
   timestamp: '2023-08-17 22:34:53+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/704.test.cpp
-  - test/yukicoder/409.test.cpp
-  - test/yukicoder/705.test.cpp
-  - test/yukicoder/703.test.cpp
   - test/aoj/3086.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
+  - test/yukicoder/703.test.cpp
+  - test/yukicoder/705.test.cpp
+  - test/yukicoder/409.test.cpp
+  - test/yukicoder/704.test.cpp
 documentation_of: src/Optimization/simplified_larsch_dp.hpp
 layout: document
-title: monotone minima
+title: "\u7C21\u6613\u7248LARSCH"
 ---
 
 ## 関数
 
 | 名前         | 概要                                                 | 計算量                         |
 | ------------ | ---------------------------------------------------- | ------------------------------ |
-| `simplified_larsch_dp(N,w)` | \\[\mathrm{dp}_i =\begin{cases}0&i=0 \newline\min_{j\lt i}\lbrace \mathrm{dp}_j + w(i,j)\rbrace & i>0\end{cases}\\] の形のDPを解く. <br>ただしコスト $w$ は Monge. <br> 返り値は$\mathrm{dp}_i$ ( $i=0,\dots,N$ の $N+1$ 成分 ) |           $\mathcal{O}(N\log N)$             |
+| `simplified_larsch_dp(N,w)` | \\[\mathrm{dp}_i =\begin{cases}0&i=0 \newline\min_{j\lt i}\lbrace \mathrm{dp}_j + w(i,j)\rbrace & i\gt 0\end{cases}\\] の形のDPを解く.<br>ただしコスト $w$ は Monge.<br> 返り値は$\mathrm{dp}_i$ ( $i=0,\dots,N$ の $N+1$ 成分 ) |           $\mathcal{O}(N\log N)$             |
+
 ## 参考
 [https://noshi91.hatenablog.com/entry/2023/02/18/005856](https://noshi91.hatenablog.com/entry/2023/02/18/005856)

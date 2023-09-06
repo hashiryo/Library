@@ -82,8 +82,8 @@ data:
   timestamp: '2023-04-04 01:00:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1340.test.cpp
   - test/atcoder/abc236_g.test.cpp
+  - test/yukicoder/1340.test.cpp
 documentation_of: src/Math/SemiRing.hpp
 layout: document
 title: "\u534A\u74B0"

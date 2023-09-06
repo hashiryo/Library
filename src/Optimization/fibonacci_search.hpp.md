@@ -11,12 +11,18 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/2603.AlienDP.test.cpp
+    title: test/aoj/2603.AlienDP.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc204_e.test.cpp
     title: test/atcoder/abc204_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc218_h.test.cpp
+    title: test/atcoder/abc218_h.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc268_e.test.cpp
     title: test/atcoder/abc268_e.test.cpp
@@ -80,13 +86,15 @@ data:
   timestamp: '2023-08-13 00:05:37+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/2309.test.cpp
-  - test/yukicoder/180.test.cpp
-  - test/yukicoder/2276.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
   - test/aoj/3044.test.cpp
-  - test/atcoder/abc279_d.test.cpp
   - test/atcoder/abc204_e.test.cpp
+  - test/atcoder/abc218_h.test.cpp
   - test/atcoder/abc268_e.test.cpp
+  - test/atcoder/abc279_d.test.cpp
+  - test/yukicoder/2276.test.cpp
+  - test/yukicoder/180.test.cpp
+  - test/yukicoder/2309.test.cpp
 documentation_of: src/Optimization/fibonacci_search.hpp
 layout: document
 title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
@@ -95,7 +103,11 @@ title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
 
 | 名前         | 概要                                                 | 計算量                         |
 | ------------ | ---------------------------------------------------- | ------------------------------ |
-| `fibonacci_search<sgn>(f,l,r)`   | $\lbrack l, r\rbrack \cap\mathbb{Z}$ 上で単峰となる関数 $f(x)$ の最適値とその最適解を返す. <br> 返り値は { 最適解 $x^*$, 最適値 $f(x^*)$ } <br> templateの引数で最大最小を指定.           | $n=r-l$ とおき, $f(x)$ の評価が$\mathcal{O}(A)$ かかるとしたとき<br>                  $\mathcal{O}(A\log n)$    |
+| `fibonacci_search<sgn>(f,l,r)`   | $\lbrack l, r\rbrack \cap\mathbb{Z}$ 上で単峰となる関数 $f(x)$ の最適値とその最適解を返す. <br> 返り値は { 最適解 $x^\ast$, 最適値 $f(x^\ast)$ } <br> templateの引数で最大最小を指定.           | $n=r-l$ とおき, $f(x)$ の評価が$\mathcal{O}(A)$ かかるとしたとき<br>                  $\mathcal{O}(A\log n)$    |
+
+
+## 問題例
+[京セラプログラミングコンテスト2023(AtCoder Beginner Contest 305) Ex - Shojin](https://atcoder.jp/contests/abc305/tasks/abc305_h) (Alien DP)
 
 ## 参考
 [https://qiita.com/tanaka-a/items/f380257328da421c6584](https://qiita.com/tanaka-a/items/f380257328da421c6584) 

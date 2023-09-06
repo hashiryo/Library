@@ -247,27 +247,27 @@ data:
   timestamp: '2023-08-04 18:10:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/characteristic_polynomial.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
   - test/yosupo/matrix_det.test.cpp
   - test/yosupo/matrix_product.test.cpp
-  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
-  - test/yosupo/characteristic_polynomial.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
+  - test/aoj/2397.test.cpp
+  - test/aoj/2530.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/1328.test.cpp
+  - test/aoj/2624.test.cpp
+  - test/atcoder/abc236_g.test.cpp
+  - test/yukicoder/184.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1340.test.cpp
-  - test/yukicoder/650.LCT.test.cpp
-  - test/yukicoder/1907.test.cpp
   - test/yukicoder/950.test.cpp
-  - test/yukicoder/1303.test.cpp
-  - test/yukicoder/1750.test.cpp
-  - test/yukicoder/184.test.cpp
   - test/yukicoder/803.test.cpp
-  - test/aoj/2624.test.cpp
-  - test/aoj/2397.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
-  - test/aoj/2530.test.cpp
-  - test/aoj/1328.test.cpp
-  - test/atcoder/abc236_g.test.cpp
+  - test/yukicoder/1907.test.cpp
+  - test/yukicoder/1750.test.cpp
+  - test/yukicoder/1303.test.cpp
 documentation_of: src/LinearAlgebra/Matrix.hpp
 layout: document
 title: "\u884C\u5217"
