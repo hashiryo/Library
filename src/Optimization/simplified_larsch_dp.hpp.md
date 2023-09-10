@@ -10,7 +10,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3086.test.cpp
     title: test/aoj/3086.test.cpp
   - icon: ':x:'
@@ -27,11 +27,11 @@ data:
     title: test/yukicoder/705.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/simplified_larsch_dp.hpp\"\n#include <vector>\n\
-    #include <numeric>\n#line 2 \"src/Internal/function_type.hpp\"\n#include <type_traits>\n\
+    #include <limits>\n#line 2 \"src/Internal/function_type.hpp\"\n#include <type_traits>\n\
     template <class C> struct is_function_object {\n template <class U, int dummy=\
     \ (&U::operator(), 0)> static std::true_type check(U *);\n static std::false_type\
     \ check(...);\n static C *m;\n static constexpr bool value= decltype(check(m))::value;\n\
@@ -55,7 +55,7 @@ data:
     \ <= 1) return;\n  int m= (l + r) / 2;\n  for (int i= x[l]; i <= x[r]; ++i) check(m,\
     \ i);\n  rec(rec, l, m);\n  for (int i= l + 1; i <= m; ++i) check(r, i);\n  rec(rec,\
     \ m, r);\n };\n return dp[0]= 0, check(n, 0), rec(rec, 0, n), dp;\n}\n"
-  code: "#pragma once\n#include <vector>\n#include <numeric>\n#include \"src/Internal/function_type.hpp\"\
+  code: "#pragma once\n#include <vector>\n#include <limits>\n#include \"src/Internal/function_type.hpp\"\
     \n// dp[i] = min_{j<i} (dp[j] + w(i,j))\n// w(i,j) -> monge cost\ntemplate <class\
     \ F> std::vector<result_type_t<F>> simplified_larsch_dp(int n, const F &w) {\n\
     \ using T= result_type_t<F>;\n std::vector<T> dp(n + 1, std::numeric_limits<T>::max());\n\
@@ -70,8 +70,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/simplified_larsch_dp.hpp
   requiredBy: []
-  timestamp: '2023-09-10 18:49:06+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-09-10 19:51:40+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3086.test.cpp
   - test/aoj/2603.AlienDP.test.cpp

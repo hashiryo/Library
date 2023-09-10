@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/simplified_larsch_dp.hpp
     title: "\u7C21\u6613\u7248LARSCH"
   _extendedVerifiedWith:
@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3086.test.cpp
     title: test/aoj/3086.test.cpp
   - icon: ':heavy_check_mark:'

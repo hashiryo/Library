@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/CartesianProduct.hpp
     title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
       times K_n$)"
@@ -20,7 +20,7 @@ data:
   - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/RollingHash.hpp
     title: Rolling-Hash
   _extendedRequiredBy: []

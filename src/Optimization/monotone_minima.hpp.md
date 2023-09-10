@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2603.monotone_minima.test.cpp
     title: test/aoj/2603.monotone_minima.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
     title: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
   - icon: ':x:'
