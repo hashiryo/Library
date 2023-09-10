@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2603.monotone_minima.test.cpp
     title: test/aoj/2603.monotone_minima.test.cpp
   - icon: ':x:'
@@ -17,7 +17,7 @@ data:
     title: test/yukicoder/952.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/monotone_minima.hpp\"\n#include <vector>\n\
@@ -40,7 +40,7 @@ data:
   path: src/Optimization/monotone_minima.hpp
   requiredBy: []
   timestamp: '2023-08-17 22:34:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
   - test/aoj/2603.monotone_minima.test.cpp

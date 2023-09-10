@@ -18,12 +18,12 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_kth_root.hpp\"\n#include <vector>\n#include\
@@ -159,9 +159,9 @@ data:
     \ mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs) == vf[i]) {\n    \
     \ if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n    }\n }\n return\
     \ z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int a, u64 k, Int p)\
-    \ {\n const MP md(p);\n Int g= binary_gcd(k, p - 1), pp= (p - 1) / g, kk= (k /\
-    \ g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) != md.set(1)) return -1;\n\
-    \ a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]: Factors(g)) a= peth_root<Int>(a,\
+    \ {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp= (p - 1) / g, kk=\
+    \ (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) != md.set(1)) return\
+    \ -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]: Factors(g)) a= peth_root<Int>(a,\
     \ pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64 a, u64 k, i64 p) {\n\
     \ assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if (k == 0) return\
     \ a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n if (p < (1 << 30)) return\
@@ -190,10 +190,10 @@ data:
     \ m= (md.norm(bs) & mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs)\
     \ == vf[i]) {\n     if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n\
     \    }\n }\n return z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int\
-    \ a, u64 k, Int p) {\n const MP md(p);\n Int g= binary_gcd(k, p - 1), pp= (p -\
-    \ 1) / g, kk= (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) != md.set(1))\
-    \ return -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]: Factors(g))\
-    \ a= peth_root<Int>(a, pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64\
+    \ a, u64 k, Int p) {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp=\
+    \ (p - 1) / g, kk= (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) !=\
+    \ md.set(1)) return -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]:\
+    \ Factors(g)) a= peth_root<Int>(a, pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64\
     \ a, u64 k, i64 p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%=\
     \ p;\n if (k == 0) return a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n\
     \ if (p < (1 << 30)) return inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k,\
@@ -209,8 +209,8 @@ data:
   isVerificationFile: false
   path: src/Math/mod_kth_root.hpp
   requiredBy: []
-  timestamp: '2023-08-06 01:42:03+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-09-10 18:49:06+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/kth_root_mod.test.cpp
 documentation_of: src/Math/mod_kth_root.hpp

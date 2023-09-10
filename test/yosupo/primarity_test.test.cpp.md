@@ -9,16 +9,16 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/primarity_test
+    PROBLEM: https://judge.yosupo.jp/problem/primality_test
     links:
-    - https://judge.yosupo.jp/problem/primarity_test
+    - https://judge.yosupo.jp/problem/primality_test
   bundledCode: "#line 1 \"test/yosupo/primarity_test.test.cpp\"\n#define PROBLEM \"\
-    https://judge.yosupo.jp/problem/primarity_test\"\n#include <iostream>\n#line 2\
+    https://judge.yosupo.jp/problem/primality_test\"\n#include <iostream>\n#line 2\
     \ \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace std;\n\
     using u8= uint8_t;\nusing u32= uint32_t;\nusing u64= uint64_t;\nusing i64= int64_t;\n\
     using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
@@ -74,7 +74,7 @@ data:
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int Q;\n cin >> Q;\n while (Q--) {\n  long long N;\n  cin >> N;\n  cout << (is_prime(N)\
     \ ? \"Yes\" : \"No\") << '\\n';\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primarity_test\"\n#include\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primality_test\"\n#include\
     \ <iostream>\n#include \"src/Math/is_prime.hpp\"\nusing namespace std;\nsigned\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n while\
     \ (Q--) {\n  long long N;\n  cin >> N;\n  cout << (is_prime(N) ? \"Yes\" : \"\
@@ -85,8 +85,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/primarity_test.test.cpp
   requiredBy: []
-  timestamp: '2023-08-03 16:16:01+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-10 18:49:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/primarity_test.test.cpp
 layout: document

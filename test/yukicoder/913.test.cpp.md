@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/monotone_minima.hpp
     title: monotone minima
   _extendedRequiredBy: []

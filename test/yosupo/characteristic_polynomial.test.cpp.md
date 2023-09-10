@@ -139,8 +139,8 @@ data:
     \ a - (t= a / b) * b, a= l, s= m10, m10= m00 - m10 * t, m00= s, s= m11, m11= m01\
     \ - m11 * t, m01= s;\n     for (r= 0; r < n; ++r) s= m00 * A[j + 1][r] + m01 *\
     \ A[i][r], A[i][r]= m10 * A[j + 1][r] + m11 * A[i][r], A[j + 1][r]= s;\n     for\
-    \ (; r--;) s= m11 * A[r][j + 1] - m10 * A[r][i], A[r][j + 1]= m00 * A[r][i] -\
-    \ m01 * A[r][j + 1], A[r][i]= s;\n    }\n  } else {\n   for (iv= K(1) / A[j +\
+    \ (; r--;) s= m11 * A[r][j + 1] - m10 * A[r][i], A[r][i]= m00 * A[r][i] - m01\
+    \ * A[r][j + 1], A[r][j + 1]= s;\n    }\n  } else {\n   for (iv= K(1) / A[j +\
     \ 1][j], i= j + 2; i < n; ++i)\n    if (!is_zero(A[i][j])) {\n     for (s= A[i][r=\
     \ j] * iv; r < n; ++r) A[i][r]-= s * A[j + 1][r];\n     for (; r--;) A[r][j +\
     \ 1]+= s * A[r][i];\n    }\n  }\n }\n return A;\n}\ntemplate <class K> std::vector<K>\
@@ -274,7 +274,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
+  timestamp: '2023-09-10 18:49:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp
