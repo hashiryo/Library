@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/NetworkSimplex.hpp
     title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
   - icon: ':question:'
@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1605.weighted_matroid_intersection.test.cpp
     title: test/aoj/1605.weighted_matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,9 +48,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc268_e.test.cpp
-    title: test/atcoder/abc268_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
@@ -66,7 +63,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1615.MCF.test.cpp
     title: test/yukicoder/1615.MCF.test.cpp
   - icon: ':x:'
@@ -122,7 +119,6 @@ data:
   - test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
   - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc218_h.test.cpp
-  - test/atcoder/abc268_e.test.cpp
   - test/atcoder/abc279_d.test.cpp
   - test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
   - test/yukicoder/421.weighted_matroid_intersection.test.cpp

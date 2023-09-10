@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Rational.hpp
     title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
   - icon: ':heavy_check_mark:'
@@ -58,12 +58,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1501.test.cpp
     title: test/yukicoder/1501.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/binary_gcd.hpp\"\n#include <type_traits>\n#include\
@@ -95,7 +95,7 @@ data:
   - src/Math/Factors.hpp
   - src/Math/mod_kth_root.hpp
   timestamp: '2023-08-06 00:46:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/kth_root_mod.test.cpp

@@ -11,7 +11,7 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
   - icon: ':heavy_check_mark:'
@@ -23,9 +23,6 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc218_h.test.cpp
     title: test/atcoder/abc218_h.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc268_e.test.cpp
-    title: test/atcoder/abc268_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
@@ -90,7 +87,6 @@ data:
   - test/aoj/3044.test.cpp
   - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc218_h.test.cpp
-  - test/atcoder/abc268_e.test.cpp
   - test/atcoder/abc279_d.test.cpp
   - test/yukicoder/2276.test.cpp
   - test/yukicoder/180.test.cpp

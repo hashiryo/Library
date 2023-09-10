@@ -51,9 +51,9 @@ data:
     \ \"test/atcoder/abc218_h.test.cpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(false);\n int N, R;\n cin >> N >> R;\n if\
     \ (R > N - R) R= N - R;\n long long A[N - 1];\n for (int i= 0; i < N - 1; ++i)\
-    \ cin >> A[i];\n long long B[N]= {};\n for (int i= 0; i < N - 1; ++i) B[i]+= A[i],\
-    \ B[i + 1]+= A[i];\n auto f= [&](long long p) {\n  long long dp[N + 1][2];\n \
-    \ dp[0][0]= 0, dp[0][1]= -1e18;\n  for (int i= 0; i < N; ++i) {\n   dp[i + 1][1]=\
+    \ cin >> A[i];\n long long B[N];\n B[0]= 0;\n for (int i= 0; i < N - 1; ++i) B[i]+=\
+    \ A[i], B[i + 1]+= A[i];\n auto f= [&](long long p) {\n  long long dp[N + 1][2];\n\
+    \  dp[0][0]= 0, dp[0][1]= -1e18;\n  for (int i= 0; i < N; ++i) {\n   dp[i + 1][1]=\
     \ dp[i][0] + B[i] - p;\n   dp[i + 1][0]= max(dp[i][0], dp[i][1]);\n  }\n  return\
     \ max(dp[N][0], dp[N][1]) + p * R;\n };\n auto a= *max_element(B, B + N);\n auto\
     \ [_, ans]= fibonacci_search<MINIMIZE>(f, -3 * a, 3 * a);\n cout << ans << '\\\
@@ -62,10 +62,10 @@ data:
     \ Alien DP\n#include <iostream>\n#include <algorithm>\n#include \"src/Optimization/fibonacci_search.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ int N, R;\n cin >> N >> R;\n if (R > N - R) R= N - R;\n long long A[N - 1];\n\
-    \ for (int i= 0; i < N - 1; ++i) cin >> A[i];\n long long B[N]= {};\n for (int\
-    \ i= 0; i < N - 1; ++i) B[i]+= A[i], B[i + 1]+= A[i];\n auto f= [&](long long\
-    \ p) {\n  long long dp[N + 1][2];\n  dp[0][0]= 0, dp[0][1]= -1e18;\n  for (int\
-    \ i= 0; i < N; ++i) {\n   dp[i + 1][1]= dp[i][0] + B[i] - p;\n   dp[i + 1][0]=\
+    \ for (int i= 0; i < N - 1; ++i) cin >> A[i];\n long long B[N];\n B[0]= 0;\n for\
+    \ (int i= 0; i < N - 1; ++i) B[i]+= A[i], B[i + 1]+= A[i];\n auto f= [&](long\
+    \ long p) {\n  long long dp[N + 1][2];\n  dp[0][0]= 0, dp[0][1]= -1e18;\n  for\
+    \ (int i= 0; i < N; ++i) {\n   dp[i + 1][1]= dp[i][0] + B[i] - p;\n   dp[i + 1][0]=\
     \ max(dp[i][0], dp[i][1]);\n  }\n  return max(dp[N][0], dp[N][1]) + p * R;\n };\n\
     \ auto a= *max_element(B, B + N);\n auto [_, ans]= fibonacci_search<MINIMIZE>(f,\
     \ -3 * a, 3 * a);\n cout << ans << '\\n';\n return 0;\n}"
@@ -76,7 +76,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc218_h.test.cpp
   requiredBy: []
-  timestamp: '2023-09-06 14:38:29+09:00'
+  timestamp: '2023-09-10 21:05:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc218_h.test.cpp

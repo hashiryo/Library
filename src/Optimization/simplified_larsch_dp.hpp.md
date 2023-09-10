@@ -7,7 +7,7 @@ data:
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
   - icon: ':heavy_check_mark:'
@@ -88,7 +88,7 @@ title: "\u7C21\u6613\u7248LARSCH"
 
 | 名前         | 概要                                                 | 計算量                         |
 | ------------ | ---------------------------------------------------- | ------------------------------ |
-| `simplified_larsch_dp(N,w)` | \\[\mathrm{dp}_ {i}=\begin{cases} 0 & i=0 \newline \min _{j\lt i}\lbrace\mathrm{dp}_j+w(i,j)\rbrace&i\gt 0\end{cases}\\] <br>の形のDPを解く.<br>ただしコスト $w$ は Monge.<br> 返り値は$\mathrm{dp}_i$ ( $i=0,\dots,N$ の $N+1$ 成分 ) |           $\mathcal{O}(N\log N)$             |
+| `simplified_larsch_dp(N,w)` | \\[\mathrm{dp}_ {i}=\begin{cases} 0 & i=0 \newline \min _{j\lt i}\lbrace\mathrm{dp}_j+w(i,j)\rbrace&i\gt 0\end{cases}\\] の形のDPを解く.<br>ただしコスト $w$ は Monge.<br> 返り値は$\mathrm{dp}_i$ ( $i=0,\dots,N$ の $N+1$ 成分 ) |           $\mathcal{O}(N\log N)$             |
 
 ## 参考
 [https://noshi91.hatenablog.com/entry/2023/02/18/005856](https://noshi91.hatenablog.com/entry/2023/02/18/005856)

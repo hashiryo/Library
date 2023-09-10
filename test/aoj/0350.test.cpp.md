@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Rational.hpp
     title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   _extendedRequiredBy: []

@@ -12,7 +12,7 @@ data:
     path: src/Optimization/simplified_larsch_dp.hpp
     title: "\u7C21\u6613\u7248LARSCH"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
   - icon: ':heavy_check_mark:'
@@ -30,9 +30,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc268_e.test.cpp
-    title: test/atcoder/abc268_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
@@ -42,7 +39,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':x:'
@@ -124,7 +121,6 @@ data:
   - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc218_h.test.cpp
-  - test/atcoder/abc268_e.test.cpp
   - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc279_d.test.cpp
   - test/yukicoder/950.test.cpp
