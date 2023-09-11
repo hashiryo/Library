@@ -5,7 +5,7 @@ data:
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
       \u5217\u6319\u578B"
@@ -20,24 +20,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc204_e.test.cpp
     title: test/atcoder/abc204_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc218_h.test.cpp
     title: test/atcoder/abc218_h.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/180.test.cpp
     title: test/yukicoder/180.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2276.test.cpp
     title: test/yukicoder/2276.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/fibonacci_search.hpp\"\n#include <algorithm>\n\
@@ -81,7 +81,7 @@ data:
   path: src/Optimization/fibonacci_search.hpp
   requiredBy: []
   timestamp: '2023-08-13 00:05:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2603.AlienDP.test.cpp
   - test/aoj/3044.test.cpp

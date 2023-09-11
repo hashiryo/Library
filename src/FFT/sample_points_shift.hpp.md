@@ -20,7 +20,7 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/polynomial_matrix_prod.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u7DCF\u7A4D"
   _extendedVerifiedWith:
@@ -30,10 +30,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/42.test.cpp
     title: test/yukicoder/42.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/502.test.cpp
     title: test/yukicoder/502.test.cpp
   - icon: ':x:'

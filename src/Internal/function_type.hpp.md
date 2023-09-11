@@ -5,7 +5,7 @@ data:
   - icon: ':question:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
   - icon: ':question:'
@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc204_e.test.cpp
     title: test/atcoder/abc204_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc218_h.test.cpp
     title: test/atcoder/abc218_h.test.cpp
   - icon: ':heavy_check_mark:'
@@ -42,13 +42,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/180.test.cpp
     title: test/yukicoder/180.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2276.test.cpp
     title: test/yukicoder/2276.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
   - icon: ':heavy_check_mark:'

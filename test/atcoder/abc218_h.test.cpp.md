@@ -5,18 +5,18 @@ data:
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
       \u5217\u6319\u578B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc218/tasks/abc218_h
@@ -51,23 +51,23 @@ data:
     \ \"test/atcoder/abc218_h.test.cpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(false);\n int N, R;\n cin >> N >> R;\n if\
     \ (R > N - R) R= N - R;\n long long A[N - 1];\n for (int i= 0; i < N - 1; ++i)\
-    \ cin >> A[i];\n long long B[N];\n B[0]= 0;\n for (int i= 0; i < N - 1; ++i) B[i]+=\
-    \ A[i], B[i + 1]+= A[i];\n auto f= [&](long long p) {\n  long long dp[N + 1][2];\n\
-    \  dp[0][0]= 0, dp[0][1]= -1e18;\n  for (int i= 0; i < N; ++i) {\n   dp[i + 1][1]=\
-    \ dp[i][0] + B[i] - p;\n   dp[i + 1][0]= max(dp[i][0], dp[i][1]);\n  }\n  return\
-    \ max(dp[N][0], dp[N][1]) + p * R;\n };\n auto a= *max_element(B, B + N);\n auto\
-    \ [_, ans]= fibonacci_search<MINIMIZE>(f, -3 * a, 3 * a);\n cout << ans << '\\\
-    n';\n return 0;\n}\n"
+    \ cin >> A[i];\n long long B[N];\n fill_n(B, N, 0);\n for (int i= 0; i < N - 1;\
+    \ ++i) B[i]+= A[i], B[i + 1]+= A[i];\n auto f= [&](long long p) {\n  long long\
+    \ dp[N + 1][2];\n  dp[0][0]= 0, dp[0][1]= -1e18;\n  for (int i= 0; i < N; ++i)\
+    \ {\n   dp[i + 1][1]= dp[i][0] + B[i] - p;\n   dp[i + 1][0]= max(dp[i][0], dp[i][1]);\n\
+    \  }\n  return max(dp[N][0], dp[N][1]) + p * R;\n };\n auto a= *max_element(B,\
+    \ B + N);\n auto [_, ans]= fibonacci_search<MINIMIZE>(f, -3 * a, 3 * a);\n cout\
+    \ << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc218/tasks/abc218_h\"\n//\
     \ Alien DP\n#include <iostream>\n#include <algorithm>\n#include \"src/Optimization/fibonacci_search.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ int N, R;\n cin >> N >> R;\n if (R > N - R) R= N - R;\n long long A[N - 1];\n\
-    \ for (int i= 0; i < N - 1; ++i) cin >> A[i];\n long long B[N];\n B[0]= 0;\n for\
-    \ (int i= 0; i < N - 1; ++i) B[i]+= A[i], B[i + 1]+= A[i];\n auto f= [&](long\
-    \ long p) {\n  long long dp[N + 1][2];\n  dp[0][0]= 0, dp[0][1]= -1e18;\n  for\
-    \ (int i= 0; i < N; ++i) {\n   dp[i + 1][1]= dp[i][0] + B[i] - p;\n   dp[i + 1][0]=\
-    \ max(dp[i][0], dp[i][1]);\n  }\n  return max(dp[N][0], dp[N][1]) + p * R;\n };\n\
-    \ auto a= *max_element(B, B + N);\n auto [_, ans]= fibonacci_search<MINIMIZE>(f,\
+    \ for (int i= 0; i < N - 1; ++i) cin >> A[i];\n long long B[N];\n fill_n(B, N,\
+    \ 0);\n for (int i= 0; i < N - 1; ++i) B[i]+= A[i], B[i + 1]+= A[i];\n auto f=\
+    \ [&](long long p) {\n  long long dp[N + 1][2];\n  dp[0][0]= 0, dp[0][1]= -1e18;\n\
+    \  for (int i= 0; i < N; ++i) {\n   dp[i + 1][1]= dp[i][0] + B[i] - p;\n   dp[i\
+    \ + 1][0]= max(dp[i][0], dp[i][1]);\n  }\n  return max(dp[N][0], dp[N][1]) + p\
+    \ * R;\n };\n auto a= *max_element(B, B + N);\n auto [_, ans]= fibonacci_search<MINIMIZE>(f,\
     \ -3 * a, 3 * a);\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Optimization/fibonacci_search.hpp
@@ -76,8 +76,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc218_h.test.cpp
   requiredBy: []
-  timestamp: '2023-09-10 21:05:23+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-11 13:10:21+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc218_h.test.cpp
 layout: document

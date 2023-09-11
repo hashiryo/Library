@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
@@ -108,10 +108,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,9 +120,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/922.test.cpp
     title: test/yukicoder/922.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -259,7 +259,7 @@ data:
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/BiConnectedComponents.hpp
   timestamp: '2023-04-16 21:58:58+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp

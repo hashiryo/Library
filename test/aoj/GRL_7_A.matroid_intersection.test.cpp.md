@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
       \u5217\u6319\u578B"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/matroid_intersection.hpp
     title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
   _extendedRequiredBy: []

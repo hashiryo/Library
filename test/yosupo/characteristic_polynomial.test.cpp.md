@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   - icon: ':question:'
@@ -153,13 +153,13 @@ data:
     \ -b[j][i], k= 0; k <= j; ++k) nx[k]+= s * pr[k];\n }\n return std::vector<K>(fss.begin()\
     \ + n * (n + 1) / 2, fss.end());\n}\ntemplate <class K> std::vector<K> det_of_first_degree_poly_mat(Matrix<K>\
     \ M0, Matrix<K> M1) {\n const size_t n= M0.height();\n assert(n == M1.height()),\
-    \ assert(n == M0.width()), assert(n == M1.width());\n int cnt= 0;\n K det= 1,\
-    \ v, iv;\n for (size_t p= 0, piv, r, i; p < n;) {\n  if constexpr (std::is_floating_point_v<K>)\
+    \ assert(n == M0.width()), assert(n == M1.width());\n size_t cnt= 0;\n K det=\
+    \ 1, v, iv;\n for (size_t p= 0, piv, r, i; p < n;) {\n  if constexpr (std::is_floating_point_v<K>)\
     \ {\n   for (piv= p, r= p + 1; r < n; ++r)\n    if (std::abs(M1[piv][p]) < std::abs(M1[r][p]))\
     \ piv= r;\n  } else\n   for (piv= p; piv < n; ++piv)\n    if (M1[piv][p] != K())\
-    \ break;\n  if (la_internal::is_zero(M1[piv][p])) {\n   if (++cnt > n) return\
-    \ std::vector<K>(n + 1);\n   for (r= p; r--;)\n    for (v= M1[r][p], M1[r][p]=\
-    \ K(), i= n; i--;) M0[i][p]-= v * M0[i][r];\n   for (i= n; i--;) std::swap(M0[i][p],\
+    \ break;\n  if (piv == n || la_internal::is_zero(M1[piv][p])) {\n   if (++cnt\
+    \ > n) return std::vector<K>(n + 1);\n   for (r= p; r--;)\n    for (v= M1[r][p],\
+    \ M1[r][p]= K(), i= n; i--;) M0[i][p]-= v * M0[i][r];\n   for (i= n; i--;) std::swap(M0[i][p],\
     \ M1[i][p]);\n   continue;\n  }\n  if (piv != p) {\n   for (det*= -1, i= 0; i\
     \ < n; ++i) std::swap(M0[p][i], M0[piv][i]);\n   for (; i--;) std::swap(M1[p][i],\
     \ M1[piv][i]);\n  }\n  for (det*= v= M1[p][p], iv= K(1) / v, i= 0; i < n; ++i)\
@@ -274,7 +274,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-09-10 18:49:06+09:00'
+  timestamp: '2023-09-11 13:10:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp

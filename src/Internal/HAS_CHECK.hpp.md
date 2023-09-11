@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   - icon: ':question:'
@@ -162,13 +162,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
   - icon: ':x:'
