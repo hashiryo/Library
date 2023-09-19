@@ -2,12 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   - icon: ':heavy_check_mark:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
+  - icon: ':x:'
+    path: src/Optimization/golden_search.hpp
+    title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
   - icon: ':question:'
     path: src/Optimization/simplified_larsch_dp.hpp
     title: "\u7C21\u6613\u7248LARSCH"
@@ -15,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2972.test.cpp
+    title: test/aoj/2972.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
@@ -27,19 +33,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc218_h.test.cpp
     title: test/atcoder/abc218_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,7 +57,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/261.test.cpp
     title: test/yukicoder/261.test.cpp
   - icon: ':x:'
@@ -108,31 +114,33 @@ data:
   isVerificationFile: false
   path: src/Internal/function_type.hpp
   requiredBy:
-  - src/Optimization/simplified_larsch_dp.hpp
-  - src/Optimization/fibonacci_search.hpp
   - src/Math/DiscreteLogarithm.hpp
+  - src/Optimization/simplified_larsch_dp.hpp
+  - src/Optimization/golden_search.hpp
+  - src/Optimization/fibonacci_search.hpp
   timestamp: '2023-04-02 00:58:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/aoj/3086.test.cpp
-  - test/aoj/2603.AlienDP.test.cpp
-  - test/aoj/3044.test.cpp
-  - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc218_h.test.cpp
-  - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc279_d.test.cpp
-  - test/yukicoder/950.test.cpp
-  - test/yukicoder/2276.test.cpp
+  - test/atcoder/abc204_e.test.cpp
+  - test/atcoder/abc222_g.test.cpp
+  - test/yukicoder/705.test.cpp
+  - test/yukicoder/704.test.cpp
+  - test/yukicoder/409.test.cpp
+  - test/yukicoder/2309.test.cpp
   - test/yukicoder/180.test.cpp
   - test/yukicoder/1339.test.cpp
+  - test/yukicoder/950.test.cpp
   - test/yukicoder/703.test.cpp
-  - test/yukicoder/705.test.cpp
-  - test/yukicoder/2309.test.cpp
-  - test/yukicoder/409.test.cpp
-  - test/yukicoder/704.test.cpp
+  - test/yukicoder/2276.test.cpp
   - test/yukicoder/261.test.cpp
+  - test/aoj/2972.test.cpp
+  - test/aoj/3086.test.cpp
+  - test/aoj/3044.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Internal/function_type.hpp
 layout: document
 title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\

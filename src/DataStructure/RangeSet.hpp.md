@@ -7,6 +7,12 @@ data:
     path: test/aoj/0655.test.cpp
     title: test/aoj/0655.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/1242.longdouble.test.cpp
+    title: test/aoj/1242.longdouble.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1242.rational.test.cpp
+    title: test/aoj/1242.rational.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2880.test.cpp
     title: test/aoj/2880.test.cpp
   - icon: ':heavy_check_mark:'
@@ -111,14 +117,16 @@ data:
   timestamp: '2023-03-10 17:20:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/0655.test.cpp
-  - test/aoj/2880.test.cpp
-  - test/atcoder/abc214_e.test.cpp
-  - test/atcoder/abc194_e.test.cpp
-  - test/atcoder/abc228_d.test.cpp
-  - test/atcoder/abc256_d.test.cpp
   - test/atcoder/abc182_e.test.cpp
+  - test/atcoder/abc194_e.test.cpp
+  - test/atcoder/abc256_d.test.cpp
+  - test/atcoder/abc214_e.test.cpp
+  - test/atcoder/abc228_d.test.cpp
   - test/yukicoder/674.test.cpp
+  - test/aoj/1242.longdouble.test.cpp
+  - test/aoj/1242.rational.test.cpp
+  - test/aoj/2880.test.cpp
+  - test/aoj/0655.test.cpp
 documentation_of: src/DataStructure/RangeSet.hpp
 layout: document
 title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
@@ -127,7 +135,7 @@ title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
 ## `ClosedSection` クラス
 `pair<Int,Int>` みたいなもん. 閉区間  $\lbrack l, r\rbrack$ を表すクラス. \
 メンバ変数 `l`, `r` を持っていてそれぞれ区間の左端，右端を表す. \
-bool にキャストできて、valid (具体的には $l\le r$) ならtrueを返す. \
+bool にキャストできて、valid (具体的には $l\gt r$) ならtrueを返す. \
 メンバ関数 `length()` で 閉区間の長さを返す.
 
 ## メンバ関数

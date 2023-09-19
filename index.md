@@ -146,18 +146,39 @@ data:
       title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0 (Conway\u306E\u69CB\u6210)"
   - name: src/Geometry
     pages:
+    - icon: ':question:'
+      path: src/Geometry/Circle.hpp
+      title: src/Geometry/Circle.hpp
+    - icon: ':question:'
+      path: src/Geometry/Convex.hpp
+      title: src/Geometry/Convex.hpp
     - icon: ':heavy_check_mark:'
-      path: src/Geometry/!geometry_temp.hpp
-      title: "\u5E7E\u4F55\u30C6\u30F3\u30D7\u30EC"
-    - icon: ':heavy_check_mark:'
-      path: src/Geometry/arg_sort.hpp
-      title: "\u504F\u89D2\u30BD\u30FC\u30C8"
-    - icon: ':heavy_check_mark:'
-      path: src/Geometry/circle_functions.hpp
-      title: "\u5186\u306E\u3042\u308C\u3053\u308C"
-    - icon: ':heavy_check_mark:'
+      path: src/Geometry/IncrementalConvexHull.hpp
+      title: src/Geometry/IncrementalConvexHull.hpp
+    - icon: ':question:'
+      path: src/Geometry/Line.hpp
+      title: src/Geometry/Line.hpp
+    - icon: ':question:'
+      path: src/Geometry/Point.hpp
+      title: src/Geometry/Point.hpp
+    - icon: ':x:'
+      path: src/Geometry/Polar.hpp
+      title: src/Geometry/Polar.hpp
+    - icon: ':question:'
+      path: src/Geometry/Polygon.hpp
+      title: src/Geometry/Polygon.hpp
+    - icon: ':question:'
+      path: src/Geometry/Segment.hpp
+      title: src/Geometry/Segment.hpp
+    - icon: ':x:'
       path: src/Geometry/closest_pair.hpp
-      title: "\u6700\u8FD1\u70B9\u5BFE"
+      title: src/Geometry/closest_pair.hpp
+    - icon: ':question:'
+      path: src/Geometry/intersection_area.hpp
+      title: src/Geometry/intersection_area.hpp
+    - icon: ':heavy_check_mark:'
+      path: src/Geometry/min_enclosing_circle.hpp
+      title: src/Geometry/min_enclosing_circle.hpp
   - name: src/Graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -261,7 +282,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/DirichletSeries.hpp
       title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/DiscreteLogarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
     - icon: ':heavy_check_mark:'
@@ -279,7 +300,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/Rational.hpp
       title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
     - icon: ':heavy_check_mark:'
@@ -300,7 +321,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/binary_gcd.hpp
       title: Binary GCD
     - icon: ':question:'
@@ -367,7 +388,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/MinMaxEnum.hpp
       title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
         \u5217\u6319\u578B"
@@ -383,6 +404,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/fibonacci_search.hpp
       title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
+    - icon: ':x:'
+      path: src/Optimization/golden_search.hpp
+      title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/matroid_intersection.hpp
       title: "\u30DE\u30C8\u30ED\u30A4\u30C9\u4EA4\u53C9"
@@ -462,7 +486,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1163.matroid_intersection.test.cpp
       title: test/aoj/1163.matroid_intersection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1171.test.cpp
       title: test/aoj/1171.test.cpp
     - icon: ':heavy_check_mark:'
@@ -472,12 +496,15 @@ data:
       path: test/aoj/1190.test.cpp
       title: test/aoj/1190.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/1242.test.cpp
-      title: test/aoj/1242.test.cpp
+      path: test/aoj/1242.longdouble.test.cpp
+      title: test/aoj/1242.longdouble.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/1242.rational.test.cpp
+      title: test/aoj/1242.rational.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
     - icon: ':heavy_check_mark:'
@@ -502,14 +529,23 @@ data:
       path: test/aoj/1615.PushRelabel.test.cpp
       title: test/aoj/1615.PushRelabel.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/2003.test.cpp
-      title: test/aoj/2003.test.cpp
+      path: test/aoj/2003.longdouble.test.cpp
+      title: test/aoj/2003.longdouble.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/2009.test.cpp
-      title: test/aoj/2009.test.cpp
+      path: test/aoj/2003.rational.test.cpp
+      title: test/aoj/2003.rational.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/2159.test.cpp
-      title: test/aoj/2159.test.cpp
+      path: test/aoj/2009.longdouble.test.cpp
+      title: test/aoj/2009.longdouble.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2009.rational.test.cpp
+      title: test/aoj/2009.rational.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2159.longdouble.test.cpp
+      title: test/aoj/2159.longdouble.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2159.rational.test.cpp
+      title: test/aoj/2159.rational.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2201.test.cpp
       title: test/aoj/2201.test.cpp
@@ -555,13 +591,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2402.test.cpp
       title: test/aoj/2402.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2423.test.cpp
       title: test/aoj/2423.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2442.test.cpp
       title: test/aoj/2442.test.cpp
     - icon: ':heavy_check_mark:'
@@ -591,7 +627,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2626.test.cpp
       title: test/aoj/2626.test.cpp
     - icon: ':heavy_check_mark:'
@@ -648,7 +684,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2893.test.cpp
       title: test/aoj/2893.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
     - icon: ':heavy_check_mark:'
@@ -672,7 +708,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3044.test.cpp
       title: test/aoj/3044.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3049.test.cpp
       title: test/aoj/3049.test.cpp
     - icon: ':heavy_check_mark:'
@@ -723,43 +759,43 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_A.test.cpp
       title: test/aoj/CGL_2_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_2_B.test.cpp
       title: test/aoj/CGL_2_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_2_C.test.cpp
       title: test/aoj/CGL_2_C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_2_D.test.cpp
       title: test/aoj/CGL_2_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_3_A.test.cpp
       title: test/aoj/CGL_3_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_3_B.test.cpp
       title: test/aoj/CGL_3_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_3_C.test.cpp
       title: test/aoj/CGL_3_C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_4_A.test.cpp
       title: test/aoj/CGL_4_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_4_B.test.cpp
       title: test/aoj/CGL_4_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_4_C.test.cpp
       title: test/aoj/CGL_4_C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_5_A.test.cpp
       title: test/aoj/CGL_5_A.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_A.test.cpp
       title: test/aoj/CGL_7_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_7_B.test.cpp
       title: test/aoj/CGL_7_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_7_C.test.cpp
       title: test/aoj/CGL_7_C.test.cpp
     - icon: ':heavy_check_mark:'
@@ -774,7 +810,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_G.test.cpp
       title: test/aoj/CGL_7_G.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_7_H.test.cpp
       title: test/aoj/CGL_7_H.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1001,7 +1037,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc222_g.test.cpp
       title: test/atcoder/abc222_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1058,7 +1094,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc270_g.test.cpp
       title: test/atcoder/abc270_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1152,7 +1188,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_modint.test.cpp
       title: test/unit_test/constexpr_modint.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/constexpr_rational.test.cpp
       title: test/unit_test/constexpr_rational.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1166,9 +1202,6 @@ data:
       title: test/unit_test/nimber_sqrt.test.cpp
   - name: test/yosupo
     pages:
-    - icon: ':heavy_check_mark:'
-      path: test/yosupo/argsort.test.cpp
-      title: test/yosupo/argsort.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/assignment.WeightedMatching.test.cpp
       title: test/yosupo/assignment.WeightedMatching.test.cpp
@@ -1223,7 +1256,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/directedmst.test.cpp
       title: test/yosupo/directedmst.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/discrete_logarithm_mod.test.cpp
       title: test/yosupo/discrete_logarithm_mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1454,6 +1487,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
       title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/sort_points_by_argument.test.cpp
+      title: test/yosupo/sort_points_by_argument.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sparse_matrix_det.test.cpp
       title: test/yosupo/sparse_matrix_det.test.cpp
@@ -1600,7 +1636,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1333.test.cpp
       title: test/yukicoder/1333.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1339.test.cpp
       title: test/yukicoder/1339.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1621,7 +1657,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1494.test.cpp
       title: test/yukicoder/1494.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1501.test.cpp
       title: test/yukicoder/1501.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1705,7 +1741,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/235.LCT.test.cpp
       title: test/yukicoder/235.LCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/261.test.cpp
       title: test/yukicoder/261.test.cpp
     - icon: ':heavy_check_mark:'

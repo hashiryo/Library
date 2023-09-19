@@ -328,16 +328,16 @@ data:
   timestamp: '2023-08-06 16:57:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/log_of_sparse_FPS.test.cpp
-  - test/yosupo/inv_of_sparse_FPS.test.cpp
-  - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/yukicoder/1939.test.cpp
-  - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1533.test.cpp
+  - test/yukicoder/1080.sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
 documentation_of: src/Math/sparse_fps.hpp
 layout: document
 title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"

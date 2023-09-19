@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Rational.hpp
     title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
   - icon: ':heavy_check_mark:'
@@ -25,6 +25,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0350.test.cpp
     title: test/aoj/0350.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1242.rational.test.cpp
+    title: test/aoj/1242.rational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2003.rational.test.cpp
+    title: test/aoj/2003.rational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2009.rational.test.cpp
+    title: test/aoj/2009.rational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2159.rational.test.cpp
+    title: test/aoj/2159.rational.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
@@ -40,7 +52,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_mod_tetration.test.cpp
     title: test/unit_test/constexpr_mod_tetration.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/unit_test/constexpr_rational.test.cpp
     title: test/unit_test/constexpr_rational.test.cpp
   - icon: ':heavy_check_mark:'
@@ -58,12 +70,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1501.test.cpp
     title: test/yukicoder/1501.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/binary_gcd.hpp\"\n#include <type_traits>\n#include\
@@ -88,28 +100,32 @@ data:
   isVerificationFile: false
   path: src/Math/binary_gcd.hpp
   requiredBy:
-  - src/Math/BinomialCoefficient.hpp
-  - src/Math/mod_tetration.hpp
-  - src/Math/ModInt_Exp.hpp
   - src/Math/Rational.hpp
-  - src/Math/Factors.hpp
+  - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
+  - src/Math/ModInt_Exp.hpp
+  - src/Math/mod_tetration.hpp
+  - src/Math/Factors.hpp
   timestamp: '2023-08-06 00:46:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/binomial_coefficient.test.cpp
-  - test/yosupo/kth_root_mod.test.cpp
-  - test/yosupo/primitive_root.test.cpp
-  - test/yosupo/tetration_mod.test.cpp
-  - test/yosupo/factorize.test.cpp
+  - test/atcoder/abc228_e.test.cpp
+  - test/yukicoder/1501.test.cpp
+  - test/aoj/2003.rational.test.cpp
+  - test/aoj/2009.rational.test.cpp
+  - test/aoj/1242.rational.test.cpp
   - test/aoj/NTL_1_D.test.cpp
   - test/aoj/0350.test.cpp
-  - test/atcoder/abc228_e.test.cpp
+  - test/aoj/2159.rational.test.cpp
+  - test/unit_test/constexpr_rational.test.cpp
   - test/unit_test/constexpr_binary_gcd.test.cpp
   - test/unit_test/constexpr_factors.test.cpp
   - test/unit_test/constexpr_mod_tetration.test.cpp
-  - test/unit_test/constexpr_rational.test.cpp
-  - test/yukicoder/1501.test.cpp
+  - test/yosupo/binomial_coefficient.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
+  - test/yosupo/factorize.test.cpp
+  - test/yosupo/kth_root_mod.test.cpp
+  - test/yosupo/primitive_root.test.cpp
 documentation_of: src/Math/binary_gcd.hpp
 layout: document
 title: Binary GCD

@@ -11,7 +11,7 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   - icon: ':question:'
@@ -25,9 +25,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc222/tasks/abc222_g
@@ -149,29 +149,28 @@ data:
     \ (C::*)(Args...)> {\n using type= R;\n};\ntemplate <class C, class R, class...\
     \ Args> struct result_type_impl<R (C::*)(Args...) const> {\n using type= R;\n\
     };\ntemplate <class F> using result_type_t= typename result_type_impl<function_type_t<F>>::type;\n\
-    #line 5 \"src/Math/DiscreteLogarithm.hpp\"\n// mapping : T \xD7 E -> T\n// op\
-    \ : E \xD7 E -> E\n// hash : T -> int\n// s,t \u2208 T, x \u2208 E\n// return\
-    \ min{ i : x^i(s) = t and i \u2208 [0,N) } or -1 (not found)\ntemplate <class\
-    \ F, class G, class H> class DiscreteLogarithm {\n const F &mapping;\n const G\
-    \ &op;\n const H &hash;\n const int64_t lim;\n using T= result_type_t<F>;\n using\
-    \ E= result_type_t<G>;\npublic:\n DiscreteLogarithm(const F &mapping, const G\
-    \ &op, const H &hash, int64_t lim= 1ll << 50): mapping(mapping), op(op), hash(hash),\
-    \ lim(lim) { static_assert(std::is_convertible_v<std::invoke_result_t<H, T>, int>);\
-    \ }\n int64_t operator()(const E &x, T s, const T &t, int64_t N= -1) const {\n\
-    \  if (N < 0) N= lim;\n  const int m= 1 << std::__lg(int(std::sqrt(N) + 1)), mask=\
-    \ m - 1;\n  std::vector<T> val(m), vs(m);\n  std::vector<int> os(m + 1), so(m);\n\
-    \  T s1= t;\n  for (int i= 0; i < m; ++i) ++os[so[i]= hash(val[i]= s1= mapping(s1,\
-    \ x)) & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n  for (int i=\
-    \ 0; i < m; ++i) vs[--os[so[i]]]= val[i];\n  E y= x;\n  for (int k= m; k>>= 1;)\
-    \ y= op(y, y);\n  bool failed= false;\n  for (int64_t n= 0;; s= s1) {\n   for\
-    \ (int a= hash(s1= mapping(s, y)) & mask, j= os[a]; j < os[a + 1]; ++j) {\n  \
-    \  if (s1 == vs[j]) {\n     for (int i= 0;; s= mapping(s, x)) {\n      if (s ==\
-    \ t) return n + i < N ? n + i : -1;\n      if (++i == m) break;\n     }\n    \
-    \ if (failed) return -1;\n     failed= true;\n     break;\n    }\n   }\n   if\
-    \ ((n+= m) >= N) break;\n  }\n  return -1;\n }\n};\n#line 6 \"test/atcoder/abc222_g.test.cpp\"\
+    #line 5 \"src/Math/DiscreteLogarithm.hpp\"\n// mp : E \xD7 T -> T\n// op : E \xD7\
+    \ E -> E\n// hash : T -> int\n// s,t \u2208 T, x \u2208 E\n// return min{ i :\
+    \ x^i(s) = t and i \u2208 [0,N) } or -1 (not found)\ntemplate <class F, class\
+    \ G, class H> class DiscreteLogarithm {\n const F &mp;\n const G &op;\n const\
+    \ H &hash;\n const int64_t lim;\n using T= result_type_t<F>;\n using E= result_type_t<G>;\n\
+    public:\n DiscreteLogarithm(const F &mp, const G &op, const H &hash, int64_t lim=\
+    \ 1ll << 50): mp(mp), op(op), hash(hash), lim(lim) { static_assert(std::is_convertible_v<std::invoke_result_t<H,\
+    \ T>, int>); }\n int64_t operator()(const E &x, T s, const T &t, int64_t N= -1)\
+    \ const {\n  if (N < 0) N= lim;\n  const int m= 1 << std::__lg(int(std::sqrt(N)\
+    \ + 1)), mask= m - 1;\n  std::vector<T> val(m), vs(m);\n  std::vector<int> os(m\
+    \ + 1), so(m);\n  T s1= t;\n  for (int i= 0; i < m; ++i) ++os[so[i]= hash(val[i]=\
+    \ s1= mp(s1, x)) & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n \
+    \ for (int i= 0; i < m; ++i) vs[--os[so[i]]]= val[i];\n  E y= x;\n  for (int k=\
+    \ m; k>>= 1;) y= op(y, y);\n  bool failed= false;\n  for (int64_t n= 0;; s= s1)\
+    \ {\n   for (int a= hash(s1= mp(y, s)) & mask, j= os[a]; j < os[a + 1]; ++j) {\n\
+    \    if (s1 == vs[j]) {\n     for (int i= 0;; s= mp(x, s)) {\n      if (s == t)\
+    \ return n + i < N ? n + i : -1;\n      if (++i == m) break;\n     }\n     if\
+    \ (failed) return -1;\n     failed= true;\n     break;\n    }\n   }\n   if ((n+=\
+    \ m) >= N) break;\n  }\n  return -1;\n }\n};\n#line 6 \"test/atcoder/abc222_g.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt_Runtime<int>;\n using Aff= array<Mint, 2>;\n auto mp= [](Mint\
-    \ x, Aff f) { return f[0] * x + f[1]; };\n auto op= [](Aff l, Aff r) { return\
+    \ using Mint= ModInt_Runtime<int>;\n using Aff= array<Mint, 2>;\n auto mp= [](Aff\
+    \ f, Mint x) { return f[0] * x + f[1]; };\n auto op= [](Aff l, Aff r) { return\
     \ Aff{l[0] * r[0], l[0] * r[1] + l[1]}; };\n DiscreteLogarithm log(\n     mp,\
     \ op, [](Mint x) { return x.val(); }, 1e8);\n int T;\n cin >> T;\n while (T--)\
     \ {\n  int K;\n  cin >> K;\n  Mint::set_mod(K);\n  int ans= log({10, 2}, 2, 0)\
@@ -180,7 +179,7 @@ data:
     \ <iostream>\n#include <array>\n#include \"src/Math/ModInt_Runtime.hpp\"\n#include\
     \ \"src/Math/DiscreteLogarithm.hpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt_Runtime<int>;\n\
-    \ using Aff= array<Mint, 2>;\n auto mp= [](Mint x, Aff f) { return f[0] * x +\
+    \ using Aff= array<Mint, 2>;\n auto mp= [](Aff f, Mint x) { return f[0] * x +\
     \ f[1]; };\n auto op= [](Aff l, Aff r) { return Aff{l[0] * r[0], l[0] * r[1] +\
     \ l[1]}; };\n DiscreteLogarithm log(\n     mp, op, [](Mint x) { return x.val();\
     \ }, 1e8);\n int T;\n cin >> T;\n while (T--) {\n  int K;\n  cin >> K;\n  Mint::set_mod(K);\n\
@@ -197,8 +196,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc222_g.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-09-19 22:38:57+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc222_g.test.cpp
 layout: document

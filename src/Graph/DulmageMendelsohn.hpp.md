@@ -113,8 +113,8 @@ data:
   timestamp: '2023-04-15 19:40:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp
+  - test/yukicoder/1744.test.cpp
 documentation_of: src/Graph/DulmageMendelsohn.hpp
 layout: document
 title: "Dulmage-Mendelsohn \u5206\u89E3"

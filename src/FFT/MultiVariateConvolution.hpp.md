@@ -298,8 +298,8 @@ data:
   timestamp: '2023-08-05 18:38:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/multivariate_convolution.test.cpp
   - test/yosupo/subset_convolution.multivar_conv.test.cpp
+  - test/yosupo/multivariate_convolution.test.cpp
 documentation_of: src/FFT/MultiVariateConvolution.hpp
 layout: document
 title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"

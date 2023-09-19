@@ -60,11 +60,11 @@ data:
   timestamp: '2023-01-21 20:06:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/z_algorithm.rollinghash.test.cpp
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/aoj/2614.rollinghash.test.cpp
   - test/aoj/2711.rollinghash.test.cpp
   - test/aoj/ALDS1_14_B.rollinghash.test.cpp
+  - test/yosupo/z_algorithm.rollinghash.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Math/CartesianProduct.hpp
 layout: document
 title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\times\

@@ -322,11 +322,11 @@ data:
   timestamp: '2023-08-05 18:38:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/502.test.cpp
   - test/yukicoder/665.test.cpp
+  - test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 documentation_of: src/FFT/sample_points_shift.hpp
 layout: document
 title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"

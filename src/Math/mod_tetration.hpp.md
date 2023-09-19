@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
@@ -161,8 +161,8 @@ data:
   timestamp: '2023-08-06 16:57:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/tetration_mod.test.cpp
   - test/unit_test/constexpr_mod_tetration.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
 documentation_of: src/Math/mod_tetration.hpp
 layout: document
 title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\

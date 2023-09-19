@@ -235,12 +235,12 @@ data:
   timestamp: '2023-03-01 11:30:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
-  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/yukicoder/828.ETT.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp
-  - test/yukicoder/828.ETT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
+  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
+  - test/yosupo/dynamic_tree_subtree_add_subtree_sum.test.cpp
 documentation_of: src/DataStructure/EulerTourTree.hpp
 layout: document
 title: Euler-Tour-Tree
