@@ -8,13 +8,13 @@ data:
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: src/Geometry/Polygon.hpp
   - icon: ':heavy_check_mark:'
@@ -24,6 +24,9 @@ data:
     path: src/Geometry/min_enclosing_circle.hpp
     title: src/Geometry/min_enclosing_circle.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0253.test.cpp
+    title: test/aoj/0253.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
@@ -73,6 +76,9 @@ data:
     path: test/aoj/2402.test.cpp
     title: test/aoj/2402.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
   - icon: ':heavy_check_mark:'
@@ -114,10 +120,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_B.test.cpp
     title: test/aoj/CGL_7_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_C.test.cpp
     title: test/aoj/CGL_7_C.test.cpp
   - icon: ':heavy_check_mark:'
@@ -374,6 +380,7 @@ data:
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_4_B.test.cpp
+  - test/aoj/0253.test.cpp
   - test/aoj/1242.longdouble.test.cpp
   - test/aoj/CGL_4_A.test.cpp
   - test/aoj/CGL_3_B.test.cpp
@@ -405,6 +412,7 @@ data:
   - test/aoj/CGL_7_E.test.cpp
   - test/aoj/1342.test.cpp
   - test/aoj/0342.test.cpp
+  - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp
 documentation_of: src/Geometry/Segment.hpp
 layout: document

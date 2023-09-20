@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: src/Geometry/Polygon.hpp
   - icon: ':question:'

@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Polar.hpp
     title: src/Geometry/Polar.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
@@ -94,23 +94,24 @@ data:
     \ o); a != b) return a < b;\n  return cross(p, q) > 0;\n }\n};\n}\n#line 6 \"\
     test/yosupo/sort_points_by_argument.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace geo;\n int N;\n\
-    \ cin >> N;\n vector<Point<int>> ps(N);\n for (int i= 0; i < N; ++i) cin >> ps[i];\n\
-    \ sort(ps.begin(), ps.end(), Polar<int>());\n for (auto &p: ps) cout << p.x <<\
-    \ \" \" << p.y << \"\\n\";\n return 0;\n}\n"
+    \ cin >> N;\n vector<Point<long long>> ps(N);\n for (int i= 0; i < N; ++i) cin\
+    \ >> ps[i];\n sort(ps.begin(), ps.end(), Polar<long long>());\n for (auto &p:\
+    \ ps) cout << p.x << \" \" << p.y << \"\\n\";\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
     \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/Geometry/Polar.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using namespace geo;\n int N;\n cin >> N;\n vector<Point<int>> ps(N);\n for\
-    \ (int i= 0; i < N; ++i) cin >> ps[i];\n sort(ps.begin(), ps.end(), Polar<int>());\n\
-    \ for (auto &p: ps) cout << p.x << \" \" << p.y << \"\\n\";\n return 0;\n}"
+    \ using namespace geo;\n int N;\n cin >> N;\n vector<Point<long long>> ps(N);\n\
+    \ for (int i= 0; i < N; ++i) cin >> ps[i];\n sort(ps.begin(), ps.end(), Polar<long\
+    \ long>());\n for (auto &p: ps) cout << p.x << \" \" << p.y << \"\\n\";\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Geometry/Polar.hpp
   - src/Geometry/Point.hpp
   isVerificationFile: true
   path: test/yosupo/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2023-09-20 18:34:32+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-21 00:43:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sort_points_by_argument.test.cpp
 layout: document

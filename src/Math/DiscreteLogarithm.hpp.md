@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -25,9 +25,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/DiscreteLogarithm.hpp\"\n#include <cmath>\n#include\
@@ -57,7 +57,7 @@ data:
     \ const {\n  if (N < 0) N= lim;\n  const int m= 1 << std::__lg(int(std::sqrt(N)\
     \ + 1)), mask= m - 1;\n  std::vector<T> val(m), vs(m);\n  std::vector<int> os(m\
     \ + 1), so(m);\n  T s1= t;\n  for (int i= 0; i < m; ++i) ++os[so[i]= hash(val[i]=\
-    \ s1= mp(s1, x)) & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n \
+    \ s1= mp(x, s1)) & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n \
     \ for (int i= 0; i < m; ++i) vs[--os[so[i]]]= val[i];\n  E y= x;\n  for (int k=\
     \ m; k>>= 1;) y= op(y, y);\n  bool failed= false;\n  for (int64_t n= 0;; s= s1)\
     \ {\n   for (int a= hash(s1= mp(y, s)) & mask, j= os[a]; j < os[a + 1]; ++j) {\n\
@@ -76,22 +76,22 @@ data:
     \ int64_t operator()(const E &x, T s, const T &t, int64_t N= -1) const {\n  if\
     \ (N < 0) N= lim;\n  const int m= 1 << std::__lg(int(std::sqrt(N) + 1)), mask=\
     \ m - 1;\n  std::vector<T> val(m), vs(m);\n  std::vector<int> os(m + 1), so(m);\n\
-    \  T s1= t;\n  for (int i= 0; i < m; ++i) ++os[so[i]= hash(val[i]= s1= mp(s1,\
-    \ x)) & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n  for (int i=\
-    \ 0; i < m; ++i) vs[--os[so[i]]]= val[i];\n  E y= x;\n  for (int k= m; k>>= 1;)\
-    \ y= op(y, y);\n  bool failed= false;\n  for (int64_t n= 0;; s= s1) {\n   for\
-    \ (int a= hash(s1= mp(y, s)) & mask, j= os[a]; j < os[a + 1]; ++j) {\n    if (s1\
-    \ == vs[j]) {\n     for (int i= 0;; s= mp(x, s)) {\n      if (s == t) return n\
-    \ + i < N ? n + i : -1;\n      if (++i == m) break;\n     }\n     if (failed)\
-    \ return -1;\n     failed= true;\n     break;\n    }\n   }\n   if ((n+= m) >=\
-    \ N) break;\n  }\n  return -1;\n }\n};"
+    \  T s1= t;\n  for (int i= 0; i < m; ++i) ++os[so[i]= hash(val[i]= s1= mp(x, s1))\
+    \ & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n  for (int i= 0;\
+    \ i < m; ++i) vs[--os[so[i]]]= val[i];\n  E y= x;\n  for (int k= m; k>>= 1;) y=\
+    \ op(y, y);\n  bool failed= false;\n  for (int64_t n= 0;; s= s1) {\n   for (int\
+    \ a= hash(s1= mp(y, s)) & mask, j= os[a]; j < os[a + 1]; ++j) {\n    if (s1 ==\
+    \ vs[j]) {\n     for (int i= 0;; s= mp(x, s)) {\n      if (s == t) return n +\
+    \ i < N ? n + i : -1;\n      if (++i == m) break;\n     }\n     if (failed) return\
+    \ -1;\n     failed= true;\n     break;\n    }\n   }\n   if ((n+= m) >= N) break;\n\
+    \  }\n  return -1;\n }\n};"
   dependsOn:
   - src/Internal/function_type.hpp
   isVerificationFile: false
   path: src/Math/DiscreteLogarithm.hpp
   requiredBy: []
-  timestamp: '2023-09-19 22:38:57+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-09-21 00:43:35+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc222_g.test.cpp

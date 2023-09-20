@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
@@ -160,7 +160,7 @@ data:
     \ const {\n  if (N < 0) N= lim;\n  const int m= 1 << std::__lg(int(std::sqrt(N)\
     \ + 1)), mask= m - 1;\n  std::vector<T> val(m), vs(m);\n  std::vector<int> os(m\
     \ + 1), so(m);\n  T s1= t;\n  for (int i= 0; i < m; ++i) ++os[so[i]= hash(val[i]=\
-    \ s1= mp(s1, x)) & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n \
+    \ s1= mp(x, s1)) & mask];\n  for (int i= 0; i < m; ++i) os[i + 1]+= os[i];\n \
     \ for (int i= 0; i < m; ++i) vs[--os[so[i]]]= val[i];\n  E y= x;\n  for (int k=\
     \ m; k>>= 1;) y= op(y, y);\n  bool failed= false;\n  for (int64_t n= 0;; s= s1)\
     \ {\n   for (int a= hash(s1= mp(y, s)) & mask, j= os[a]; j < os[a + 1]; ++j) {\n\
@@ -191,7 +191,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/discrete_logarithm_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-09-19 22:38:57+09:00'
+  timestamp: '2023-09-21 00:43:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/discrete_logarithm_mod.test.cpp

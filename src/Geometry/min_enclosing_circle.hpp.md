@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
   - icon: ':question:'
@@ -18,6 +18,9 @@ data:
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3034.test.cpp
     title: test/aoj/3034.test.cpp
@@ -268,6 +271,7 @@ data:
   timestamp: '2023-09-20 20:25:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp
 documentation_of: src/Geometry/min_enclosing_circle.hpp
 layout: document

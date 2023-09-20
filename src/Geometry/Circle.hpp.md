@@ -34,15 +34,18 @@ data:
     path: test/aoj/2201.test.cpp
     title: test/aoj/2201.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3034.test.cpp
     title: test/aoj/3034.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_B.test.cpp
     title: test/aoj/CGL_7_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_C.test.cpp
     title: test/aoj/CGL_7_C.test.cpp
   - icon: ':heavy_check_mark:'
@@ -63,9 +66,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
@@ -334,7 +337,7 @@ data:
   - src/Geometry/intersection_area.hpp
   - src/Geometry/min_enclosing_circle.hpp
   timestamp: '2023-09-20 20:25:45+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1183.test.cpp
   - test/aoj/CGL_7_F.test.cpp
@@ -350,6 +353,7 @@ data:
   - test/aoj/CGL_7_B.test.cpp
   - test/aoj/CGL_7_E.test.cpp
   - test/aoj/1342.test.cpp
+  - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp
 documentation_of: src/Geometry/Circle.hpp
 layout: document

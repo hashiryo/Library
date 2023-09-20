@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
   - icon: ':heavy_check_mark:'
@@ -14,16 +14,16 @@ data:
   - icon: ':question:'
     path: src/Geometry/Line.hpp
     title: src/Geometry/Line.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Polar.hpp
     title: src/Geometry/Polar.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: src/Geometry/Polygon.hpp
   - icon: ':question:'
     path: src/Geometry/Segment.hpp
     title: src/Geometry/Segment.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/closest_pair.hpp
     title: src/Geometry/closest_pair.hpp
   - icon: ':heavy_check_mark:'
@@ -33,6 +33,9 @@ data:
     path: src/Geometry/min_enclosing_circle.hpp
     title: src/Geometry/min_enclosing_circle.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0253.test.cpp
+    title: test/aoj/0253.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
@@ -87,6 +90,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2402.test.cpp
     title: test/aoj/2402.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
   - icon: ':x:'
     path: test/aoj/2442.test.cpp
     title: test/aoj/2442.test.cpp
@@ -150,16 +156,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_C.test.cpp
     title: test/aoj/CGL_4_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_5_A.test.cpp
     title: test/aoj/CGL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_B.test.cpp
     title: test/aoj/CGL_7_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_C.test.cpp
     title: test/aoj/CGL_7_C.test.cpp
   - icon: ':heavy_check_mark:'
@@ -180,7 +186,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sort_points_by_argument.test.cpp
     title: test/yosupo/sort_points_by_argument.test.cpp
   _isVerificationFailed: true
@@ -349,6 +355,7 @@ data:
   - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_4_B.test.cpp
   - test/aoj/CGL_5_A.test.cpp
+  - test/aoj/0253.test.cpp
   - test/aoj/1242.longdouble.test.cpp
   - test/aoj/CGL_4_A.test.cpp
   - test/aoj/CGL_1_B.test.cpp
@@ -389,6 +396,7 @@ data:
   - test/aoj/CGL_7_E.test.cpp
   - test/aoj/1342.test.cpp
   - test/aoj/0342.test.cpp
+  - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp
   - test/yosupo/sort_points_by_argument.test.cpp
 documentation_of: src/Geometry/Point.hpp

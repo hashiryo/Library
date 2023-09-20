@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
@@ -235,14 +235,15 @@ data:
     \ ls;\n}\n}\n#line 6 \"test/aoj/CGL_7_B.test.cpp\"\nusing namespace std;\nsigned\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geo;\n\
     \ Point<long double> A, B, C;\n cin >> A >> B >> C;\n Circle c= inscribed_circle(A,\
-    \ B, C);\n cout << fixed << setprecision(12) << c.o << \" \" << c.r << '\\n';\n\
-    \ return 0;\n}\n"
+    \ B, C);\n cout << fixed << setprecision(12) << c.o.x << \" \" << c.o.y << \"\
+    \ \" << c.r << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/7/CGL_7_B\"\
     \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
     \ \"src/Geometry/Circle.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
     \ ios::sync_with_stdio(false);\n using namespace geo;\n Point<long double> A,\
     \ B, C;\n cin >> A >> B >> C;\n Circle c= inscribed_circle(A, B, C);\n cout <<\
-    \ fixed << setprecision(12) << c.o << \" \" << c.r << '\\n';\n return 0;\n}"
+    \ fixed << setprecision(12) << c.o.x << \" \" << c.o.y << \" \" << c.r << '\\\
+    n';\n return 0;\n}"
   dependsOn:
   - src/Geometry/Circle.hpp
   - src/Geometry/Segment.hpp
@@ -251,8 +252,8 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_7_B.test.cpp
   requiredBy: []
-  timestamp: '2023-09-20 20:25:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-21 00:43:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_B.test.cpp
 layout: document

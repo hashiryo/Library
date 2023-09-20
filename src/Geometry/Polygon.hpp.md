@@ -11,13 +11,16 @@ data:
     path: src/Geometry/Segment.hpp
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
   - icon: ':heavy_check_mark:'
     path: src/Geometry/intersection_area.hpp
     title: src/Geometry/intersection_area.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0253.test.cpp
+    title: test/aoj/0253.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
@@ -69,9 +72,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
@@ -343,9 +346,10 @@ data:
   - src/Geometry/intersection_area.hpp
   - src/Geometry/Convex.hpp
   timestamp: '2023-09-20 20:25:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/CGL_4_B.test.cpp
+  - test/aoj/0253.test.cpp
   - test/aoj/1242.longdouble.test.cpp
   - test/aoj/CGL_4_A.test.cpp
   - test/aoj/CGL_3_B.test.cpp

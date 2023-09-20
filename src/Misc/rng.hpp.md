@@ -16,6 +16,9 @@ data:
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/2423.test.cpp
+    title: test/aoj/2423.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2614.rollinghash.test.cpp
     title: test/aoj/2614.rollinghash.test.cpp
   - icon: ':heavy_check_mark:'
@@ -75,6 +78,7 @@ data:
   - test/aoj/2711.rollinghash.test.cpp
   - test/aoj/ALDS1_14_B.rollinghash.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
+  - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/z_algorithm.rollinghash.test.cpp
