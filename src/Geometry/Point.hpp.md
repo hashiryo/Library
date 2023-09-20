@@ -5,7 +5,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':x:'
     path: src/Geometry/Polar.hpp
     title: src/Geometry/Polar.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Polygon.hpp
     title: src/Geometry/Polygon.hpp
   - icon: ':question:'
@@ -33,10 +33,7 @@ data:
     path: src/Geometry/min_enclosing_circle.hpp
     title: src/Geometry/min_enclosing_circle.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/aoj/0204.test.cpp
-    title: test/aoj/0204.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -96,7 +93,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2626.test.cpp
     title: test/aoj/2626.test.cpp
   - icon: ':heavy_check_mark:'
@@ -108,7 +105,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3034.test.cpp
     title: test/aoj/3034.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3049.test.cpp
     title: test/aoj/3049.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,13 +141,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_3_C.test.cpp
     title: test/aoj/CGL_3_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_A.test.cpp
     title: test/aoj/CGL_4_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_B.test.cpp
     title: test/aoj/CGL_4_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_C.test.cpp
     title: test/aoj/CGL_4_C.test.cpp
   - icon: ':x:'
@@ -350,7 +347,6 @@ data:
   - test/aoj/2003.rational.test.cpp
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/CGL_7_A.test.cpp
-  - test/aoj/0204.test.cpp
   - test/aoj/CGL_4_B.test.cpp
   - test/aoj/CGL_5_A.test.cpp
   - test/aoj/1242.longdouble.test.cpp

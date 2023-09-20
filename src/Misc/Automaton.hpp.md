@@ -60,18 +60,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/362.test.cpp
     title: test/yukicoder/362.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/685.test.cpp
     title: test/yukicoder/685.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/737.test.cpp
     title: test/yukicoder/737.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/911.test.cpp
     title: test/yukicoder/911.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/Automaton.hpp\"\n#include <type_traits>\n#include\
@@ -239,7 +239,7 @@ data:
   path: src/Misc/Automaton.hpp
   requiredBy: []
   timestamp: '2023-04-11 14:48:15+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/arc127_a.test.cpp
   - test/atcoder/agc021_a.test.cpp

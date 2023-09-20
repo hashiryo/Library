@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Polygon.hpp
     title: src/Geometry/Polygon.hpp
   - icon: ':question:'

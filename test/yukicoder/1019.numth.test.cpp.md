@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Sieve.hpp
     title: "\u7BE9 \u4ED6"
   - icon: ':question:'

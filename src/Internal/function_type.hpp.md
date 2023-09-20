@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Optimization/golden_search.hpp
     title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/simplified_larsch_dp.hpp
     title: "\u7C21\u6613\u7248LARSCH"
   _extendedVerifiedWith:
@@ -60,19 +60,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/261.test.cpp
     title: test/yukicoder/261.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/409.test.cpp
     title: test/yukicoder/409.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/703.test.cpp
     title: test/yukicoder/703.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/704.test.cpp
     title: test/yukicoder/704.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/705.test.cpp
     title: test/yukicoder/705.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
   _isVerificationFailed: true

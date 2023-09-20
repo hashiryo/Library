@@ -18,9 +18,6 @@ data:
     path: src/Geometry/min_enclosing_circle.hpp
     title: src/Geometry/min_enclosing_circle.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/aoj/0204.test.cpp
-    title: test/aoj/0204.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
@@ -342,7 +339,6 @@ data:
   - test/aoj/1183.test.cpp
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/CGL_7_A.test.cpp
-  - test/aoj/0204.test.cpp
   - test/aoj/CGL_7_D.test.cpp
   - test/aoj/1190.test.cpp
   - test/aoj/CGL_7_H.test.cpp
