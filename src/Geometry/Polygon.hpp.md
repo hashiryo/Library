@@ -11,26 +11,14 @@ data:
     path: src/Geometry/Segment.hpp
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/intersection_area.hpp
     title: src/Geometry/intersection_area.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: test/aoj/0143.test.cpp
-    title: test/aoj/0143.test.cpp
-  - icon: ':x:'
-    path: test/aoj/0153.test.cpp
-    title: test/aoj/0153.test.cpp
-  - icon: ':x:'
-    path: test/aoj/0187.longdouble.test.cpp
-    title: test/aoj/0187.longdouble.test.cpp
-  - icon: ':x:'
-    path: test/aoj/0187.rational.test.cpp
-    title: test/aoj/0187.rational.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,10 +39,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2626.test.cpp
     title: test/aoj/2626.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3049.test.cpp
     title: test/aoj/3049.test.cpp
   - icon: ':heavy_check_mark:'
@@ -66,7 +54,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_3_C.test.cpp
     title: test/aoj/CGL_3_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_4_A.test.cpp
     title: test/aoj/CGL_4_A.test.cpp
   - icon: ':x:'
@@ -75,10 +63,10 @@ data:
   - icon: ':x:'
     path: test/aoj/CGL_4_C.test.cpp
     title: test/aoj/CGL_4_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_H.test.cpp
     title: test/aoj/CGL_7_H.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
   _isVerificationFailed: true
@@ -359,20 +347,16 @@ data:
   verifiedWith:
   - test/aoj/CGL_4_B.test.cpp
   - test/aoj/1242.longdouble.test.cpp
-  - test/aoj/0143.test.cpp
   - test/aoj/CGL_4_A.test.cpp
   - test/aoj/CGL_3_B.test.cpp
   - test/aoj/2402.test.cpp
   - test/aoj/1242.rational.test.cpp
-  - test/aoj/0187.rational.test.cpp
   - test/aoj/CGL_3_A.test.cpp
   - test/aoj/CGL_7_H.test.cpp
   - test/aoj/CGL_7_I.test.cpp
   - test/aoj/CGL_4_C.test.cpp
-  - test/aoj/0153.test.cpp
   - test/aoj/1157.test.cpp
   - test/aoj/2514.test.cpp
-  - test/aoj/0187.longdouble.test.cpp
   - test/aoj/2626.test.cpp
   - test/aoj/3049.test.cpp
   - test/aoj/CGL_3_C.test.cpp

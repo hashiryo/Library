@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
@@ -245,22 +245,23 @@ data:
     \ i--; ch[k++]= ps[i])\n   while (k > t && sgn(cross(ch[k - 1] - ch[k - 2], ps[i]\
     \ - ch[k - 2])) < strict) --k;\n  ch.resize(k - 1), this->build();\n }\n pair<P,\
     \ P> farthest_pair() const {\n  auto &ch= this->dat;\n  int n= ch.size(), i= 0,\
-    \ j= 0;\n  for (int k= n; k--;) {\n   if (ch[i] < ch[k]) i= k;\n   if (ch[j] >\
+    \ j= 0;\n  for (int k= n; k--;) {\n   if (ch[i] > ch[k]) i= k;\n   if (ch[j] <\
     \ ch[k]) j= k;\n  }\n  pair<P, P> ret{ch[i], ch[j]};\n  K mx= dist2(ch[i], ch[j]);\n\
-    \  for (int si= i, sj= j; i != sj || j != si;) {\n   if (int ni= this->next(i),\
-    \ nj= this->next(j); sgn(cross(ch[ni] - ch[i], ch[nj] - ch[j])) < 0) j= nj;\n\
-    \   else i= ni;\n   if (K len= dist2(ch[i], ch[j]); mx < len) mx= len, ret= {ch[i],\
-    \ ch[j]};\n  }\n  return ret;\n }\n long double diameter() const {\n  auto [p,\
-    \ q]= farthest_pair();\n  return dist(p, q);\n }\n // side>0 => left, side<0 =>\
-    \ right\n Convex half_plane(const Line<K> &l, int side= 1) const {\n  Convex ret;\n\
-    \  for (const auto &e: this->edges()) {\n   auto d= e.q - e.p;\n   K a= cross(d,\
-    \ l.d), b= cross(l.p - e.p, l.d);\n   int s= sgn(b);\n   if (s * side >= 0) ret.dat.emplace_back(e.p);\n\
-    \   if (s && sgn(a))\n    if (b/= a; 0 < sgn(b) && sgn(b - 1) < 0) ret.dat.emplace_back(e.p\
-    \ + b * d);\n  }\n  return ret.build(), ret;\n }\n // { (x,y): (x,y) in polygon\
-    \ and (ax+by+c) * side >= 0 }\n Convex half_plane(K a, K b, K c, int side= 1)\
-    \ const {\n  int sa= sgn(a), sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return\
-    \ sc * side < 0 ? Convex() : *this;\n  return half_plane(Line<K>(a, b, c), side);\n\
-    \ }\n friend Affine<K>;\n};\ntemplate <class K> pair<Point<K>, Point<K>> farthest_pair(const\
+    \  for (int si= i, sj= j; i != sj || j != si;) {\n   debug(i, j, si, sj);\n  \
+    \ if (int ni= this->next(i), nj= this->next(j); sgn(cross(ch[ni] - ch[i], ch[nj]\
+    \ - ch[j])) < 0) i= ni;\n   else j= nj;\n   if (K len= dist2(ch[i], ch[j]); mx\
+    \ < len) mx= len, ret= {ch[i], ch[j]};\n  }\n  return ret;\n }\n long double diameter()\
+    \ const {\n  auto [p, q]= farthest_pair();\n  return dist(p, q);\n }\n // side>0\
+    \ => left, side<0 => right\n Convex half_plane(const Line<K> &l, int side= 1)\
+    \ const {\n  Convex ret;\n  for (const auto &e: this->edges()) {\n   auto d= e.q\
+    \ - e.p;\n   K a= cross(d, l.d), b= cross(l.p - e.p, l.d);\n   int s= sgn(b);\n\
+    \   if (s * side >= 0) ret.dat.emplace_back(e.p);\n   if (s && sgn(a))\n    if\
+    \ (b/= a; 0 < sgn(b) && sgn(b - 1) < 0) ret.dat.emplace_back(e.p + b * d);\n \
+    \ }\n  return ret.build(), ret;\n }\n // { (x,y): (x,y) in polygon and (ax+by+c)\
+    \ * side >= 0 }\n Convex half_plane(K a, K b, K c, int side= 1) const {\n  int\
+    \ sa= sgn(a), sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return sc * side < 0\
+    \ ? Convex() : *this;\n  return half_plane(Line<K>(a, b, c), side);\n }\n friend\
+    \ Affine<K>;\n};\ntemplate <class K> pair<Point<K>, Point<K>> farthest_pair(const\
     \ vector<Point<K>> &ps) { return Convex(ps).farthest_pair(); }\ntemplate <class\
     \ K> Convex<K> Affine<K>::operator()(const Convex<K> &c) {\n Convex<K> d;\n for\
     \ (const auto &p: c) d.dat.emplace_back((*this)(p));\n return d.build(), d;\n\
@@ -289,8 +290,8 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_4_A.test.cpp
   requiredBy: []
-  timestamp: '2023-09-20 20:25:45+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-09-20 22:16:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_4_A.test.cpp
 layout: document

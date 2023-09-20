@@ -11,7 +11,7 @@ data:
     path: src/Geometry/Segment.hpp
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/intersection_area.hpp
     title: src/Geometry/intersection_area.hpp
   - icon: ':heavy_check_mark:'
@@ -19,14 +19,8 @@ data:
     title: src/Geometry/min_enclosing_circle.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: test/aoj/0090.test.cpp
-    title: test/aoj/0090.test.cpp
-  - icon: ':x:'
-    path: test/aoj/0129.test.cpp
-    title: test/aoj/0129.test.cpp
-  - icon: ':x:'
-    path: test/aoj/0153.test.cpp
-    title: test/aoj/0153.test.cpp
+    path: test/aoj/0204.test.cpp
+    title: test/aoj/0204.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
@@ -45,7 +39,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3034.test.cpp
     title: test/aoj/3034.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
   - icon: ':x:'
@@ -54,22 +48,22 @@ data:
   - icon: ':x:'
     path: test/aoj/CGL_7_C.test.cpp
     title: test/aoj/CGL_7_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_D.test.cpp
     title: test/aoj/CGL_7_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_E.test.cpp
     title: test/aoj/CGL_7_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_F.test.cpp
     title: test/aoj/CGL_7_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_G.test.cpp
     title: test/aoj/CGL_7_G.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_H.test.cpp
     title: test/aoj/CGL_7_H.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
   _isVerificationFailed: true
@@ -348,17 +342,15 @@ data:
   - test/aoj/1183.test.cpp
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/CGL_7_A.test.cpp
-  - test/aoj/0090.test.cpp
+  - test/aoj/0204.test.cpp
   - test/aoj/CGL_7_D.test.cpp
   - test/aoj/1190.test.cpp
-  - test/aoj/0129.test.cpp
   - test/aoj/CGL_7_H.test.cpp
   - test/aoj/CGL_7_G.test.cpp
   - test/aoj/CGL_7_C.test.cpp
   - test/aoj/CGL_7_I.test.cpp
   - test/aoj/1132.test.cpp
   - test/aoj/2201.test.cpp
-  - test/aoj/0153.test.cpp
   - test/aoj/CGL_7_B.test.cpp
   - test/aoj/CGL_7_E.test.cpp
   - test/aoj/1342.test.cpp

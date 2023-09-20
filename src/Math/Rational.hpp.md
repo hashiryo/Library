@@ -6,9 +6,6 @@ data:
     title: Binary GCD
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/aoj/0187.rational.test.cpp
-    title: test/aoj/0187.rational.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0350.test.cpp
     title: test/aoj/0350.test.cpp
@@ -24,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2159.rational.test.cpp
     title: test/aoj/2159.rational.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_rational.test.cpp
     title: test/unit_test/constexpr_rational.test.cpp
   - icon: ':x:'
@@ -168,7 +165,6 @@ data:
   - test/aoj/2003.rational.test.cpp
   - test/aoj/2009.rational.test.cpp
   - test/aoj/1242.rational.test.cpp
-  - test/aoj/0187.rational.test.cpp
   - test/aoj/0350.test.cpp
   - test/aoj/2159.rational.test.cpp
   - test/unit_test/constexpr_rational.test.cpp
