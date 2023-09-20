@@ -19,8 +19,8 @@ data:
     title: src/Geometry/min_enclosing_circle.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: test/aoj/0010.test.cpp
-    title: test/aoj/0010.test.cpp
+    path: test/aoj/0090.test.cpp
+    title: test/aoj/0090.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
@@ -84,50 +84,51 @@ data:
     \ (is_floating_point_v<K>)\n  if (K z= y - 1, w= x - z; 0 < sgn(w + 1) && sgn(w)\
     \ <= 0) return z;\n return y;\n}\nlong double radian_to_degree(long double r)\
     \ { return r * 180.0 / M_PI; }\nlong double degree_to_radian(long double d) {\
-    \ return d * M_PI / 180.0; }\ntemplate <class K> struct Point {\n K x= 0, y= 0;\n\
-    \ Point &operator+=(const Point &p) { return x+= p.x, y+= p.y, *this; }\n Point\
-    \ &operator-=(const Point &p) { return x-= p.x, y-= p.y, *this; }\n Point &operator*=(K\
-    \ a) { return x*= a, y*= a, *this; }\n Point &operator/=(K a) { return x/= a,\
-    \ y/= a, *this; }\n Point operator+(const Point &p) const { return {x + p.x, y\
-    \ + p.y}; }\n Point operator-(const Point &p) const { return {x - p.x, y - p.y};\
-    \ }\n Point operator*(K a) const { return {x * a, y * a}; }\n Point operator/(K\
-    \ a) const { return {x / a, y / a}; }\n friend Point operator*(K a, const Point\
-    \ &p) { return {a * p.x, a * p.y}; }\n Point operator-() const { return {-x, -y};\
-    \ }\n bool operator<(const Point &p) const {\n  int s= sgn(x - p.x);\n  return\
-    \ s ? s < 0 : sgn(y - p.y) < 0;\n }\n bool operator>(const Point &p) const { return\
-    \ p < *this; }\n bool operator<=(const Point &p) const { return !(p < *this);\
-    \ }\n bool operator>=(const Point &p) const { return !(*this < p); }\n bool operator==(const\
-    \ Point &p) const { return !sgn(x - p.x) && !sgn(y - p.y); }\n bool operator!=(const\
-    \ Point &p) const { return sgn(x - p.x) || sgn(y - p.y); }\n Point operator!()\
-    \ const { return {-y, x}; }  // rotate 90 degree\n friend istream &operator>>(istream\
-    \ &is, Point &p) { return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream\
-    \ &os, const Point &p) { return os << \"(\" << p.x << \", \" << p.y << \")\";\
-    \ }\n friend Visualizer &operator<<(Visualizer &vis, const Point &p) { return\
-    \ vis.ofs << p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K\
-    \ dot(const Point<K> &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n\
-    // left turn: > 0, right turn: < 0\ntemplate <class K> K cross(const Point<K>\
-    \ &p, const Point<K> &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K>\
-    \ K norm(const Point<K> &p) { return dot(p, p); }\ntemplate <class K> long double\
-    \ abs(const Point<K> &p) { return sqrt(norm(p)); }\ntemplate <class K> K dist2(const\
-    \ Point<K> &p, const Point<K> &q) { return norm(p - q); }\ntemplate <class T,\
-    \ class U> long double dist(const T &a, const U &b) { return sqrt(dist2(a, b));\
-    \ }\ntemplate <class K> long double angle(const Point<K> &p) { return atan2(p.y,\
-    \ p.x); }\ntemplate <class K> long double angle(const Point<K> &p, const Point<K>\
-    \ &q) { return atan2(cross(p, q), dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE,\
-    \ CLOCKWISE, ONLINE_BACK, ONLINE_FRONT, ON_SEGMENT };\nostream &operator<<(ostream\
-    \ &os, CCW c) { return os << (c == COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" :\
-    \ c == CLOCKWISE ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT\
-    \ ? \"ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K>\
-    \ &p0, const Point<K> &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n\
-    \ if (int s= sgn(cross(a, b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n\
-    \ if (K d= dot(a, b); sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a))\
-    \ > 0 ? ONLINE_FRONT : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate\
-    \ <class K> struct Segment;\ntemplate <class K> struct Circle;\ntemplate <class\
-    \ K> struct Polygon;\ntemplate <class K> struct Convex;\ntemplate <class K> struct\
-    \ Affine {\n K a00= 1, a01= 0, a10= 0, a11= 1;\n Point<K> b;\n Point<K> operator()(const\
-    \ Point<K> &p) const { return {a00 * p.x + a01 * p.y + b.x, a10 * p.x + a11 *\
-    \ p.y + b.y}; }\n Line<K> operator()(const Line<K> &l);\n Segment<K> operator()(const\
-    \ Segment<K> &s);\n Circle<K> operator()(const Circle<K> &c);\n Polygon<K> operator()(const\
+    \ return d * M_PI / 180.0; }\ntemplate <class K> struct Point {\n K x, y;\n Point(K\
+    \ x= K(), K y= K()): x(x), y(y) {}\n Point &operator+=(const Point &p) { return\
+    \ x+= p.x, y+= p.y, *this; }\n Point &operator-=(const Point &p) { return x-=\
+    \ p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return x*= a, y*= a, *this;\
+    \ }\n Point &operator/=(K a) { return x/= a, y/= a, *this; }\n Point operator+(const\
+    \ Point &p) const { return {x + p.x, y + p.y}; }\n Point operator-(const Point\
+    \ &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K a) const { return\
+    \ {x * a, y * a}; }\n Point operator/(K a) const { return {x / a, y / a}; }\n\
+    \ friend Point operator*(K a, const Point &p) { return {a * p.x, a * p.y}; }\n\
+    \ Point operator-() const { return {-x, -y}; }\n bool operator<(const Point &p)\
+    \ const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y) < 0;\n }\n\
+    \ bool operator>(const Point &p) const { return p < *this; }\n bool operator<=(const\
+    \ Point &p) const { return !(p < *this); }\n bool operator>=(const Point &p) const\
+    \ { return !(*this < p); }\n bool operator==(const Point &p) const { return !sgn(x\
+    \ - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p) const { return\
+    \ sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return {-y, x};\
+    \ }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point &p) {\
+    \ return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const Point\
+    \ &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend Visualizer\
+    \ &operator<<(Visualizer &vis, const Point &p) { return vis.ofs << p.x << \" \"\
+    \ << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K> &p, const\
+    \ Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn:\
+    \ < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K> &q) { return\
+    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm(const Point<K> &p) { return\
+    \ dot(p, p); }\ntemplate <class K> long double abs(const Point<K> &p) { return\
+    \ sqrt(norm(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
+    \ &q) { return norm(p - q); }\ntemplate <class T, class U> long double dist(const\
+    \ T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate <class K> long double\
+    \ angle(const Point<K> &p) { return atan2(p.y, p.x); }\ntemplate <class K> long\
+    \ double angle(const Point<K> &p, const Point<K> &q) { return atan2(cross(p, q),\
+    \ dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK, ONLINE_FRONT,\
+    \ ON_SEGMENT };\nostream &operator<<(ostream &os, CCW c) { return os << (c ==\
+    \ COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"CLOCKWISE\" :\
+    \ c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"ONLINE_FRONT\" :\
+    \ \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
+    \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
+    \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
+    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a)) > 0 ? ONLINE_FRONT\
+    \ : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate <class K> struct\
+    \ Segment;\ntemplate <class K> struct Circle;\ntemplate <class K> struct Polygon;\n\
+    template <class K> struct Convex;\ntemplate <class K> struct Affine {\n K a00=\
+    \ 1, a01= 0, a10= 0, a11= 1;\n Point<K> b;\n Point<K> operator()(const Point<K>\
+    \ &p) const { return {a00 * p.x + a01 * p.y + b.x, a10 * p.x + a11 * p.y + b.y};\
+    \ }\n Line<K> operator()(const Line<K> &l);\n Segment<K> operator()(const Segment<K>\
+    \ &s);\n Circle<K> operator()(const Circle<K> &c);\n Polygon<K> operator()(const\
     \ Polygon<K> &p);\n Convex<K> operator()(const Convex<K> &c);\n Affine operator*(const\
     \ Affine &r) const { return {a00 * r.a00 + a01 * r.a10, a00 * r.a01 + a01 * r.a11,\
     \ a10 * r.a00 + a11 * r.a10, a10 * r.a01 + a11 * r.a11, (*this)(r)}; }\n Affine\
@@ -334,17 +335,17 @@ data:
   requiredBy:
   - src/Geometry/intersection_area.hpp
   - src/Geometry/min_enclosing_circle.hpp
-  timestamp: '2023-09-20 15:31:03+09:00'
+  timestamp: '2023-09-20 18:34:32+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1183.test.cpp
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/CGL_7_A.test.cpp
+  - test/aoj/0090.test.cpp
   - test/aoj/CGL_7_D.test.cpp
   - test/aoj/1190.test.cpp
   - test/aoj/CGL_7_H.test.cpp
   - test/aoj/CGL_7_G.test.cpp
-  - test/aoj/0010.test.cpp
   - test/aoj/CGL_7_C.test.cpp
   - test/aoj/CGL_7_I.test.cpp
   - test/aoj/1132.test.cpp

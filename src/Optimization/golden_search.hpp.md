@@ -5,18 +5,18 @@ data:
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2972.test.cpp
     title: test/aoj/2972.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/golden_search.hpp\"\n#include <cmath>\n\
@@ -39,28 +39,28 @@ data:
     \ 1 };\n#line 6 \"src/Optimization/golden_search.hpp\"\n// [l,r]\ntemplate <MinMaxEnum\
     \ obj, class F> std::pair<long double, result_type_t<F>> golden_search(const F\
     \ &f, long double l, long double r, int iter= 100) {\n static constexpr long double\
-    \ c= 2 / (3 + std::sqrt(5.0l));\n assert(l <= r);\n long double x= l + (r - l)\
-    \ * c, y= r - (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool\
-    \ g; iter--;) {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx >\
-    \ fy;\n  if (g) r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x=\
-    \ y, fx= fy, fy= f(y= r - (r - l) * c);\n }\n return {x, fx};\n}\n"
+    \ c= 0.38196601125;\n assert(l <= r);\n long double x= l + (r - l) * c, y= r -\
+    \ (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool g; iter--;)\
+    \ {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx > fy;\n  if (g)\
+    \ r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x= y, fx= fy, fy=\
+    \ f(y= r - (r - l) * c);\n }\n return {x, fx};\n}\n"
   code: "#pragma once\n#include <cmath>\n#include <cassert>\n#include \"src/Internal/function_type.hpp\"\
     \n#include \"src/Optimization/MinMaxEnum.hpp\"\n// [l,r]\ntemplate <MinMaxEnum\
     \ obj, class F> std::pair<long double, result_type_t<F>> golden_search(const F\
     \ &f, long double l, long double r, int iter= 100) {\n static constexpr long double\
-    \ c= 2 / (3 + std::sqrt(5.0l));\n assert(l <= r);\n long double x= l + (r - l)\
-    \ * c, y= r - (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool\
-    \ g; iter--;) {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx >\
-    \ fy;\n  if (g) r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x=\
-    \ y, fx= fy, fy= f(y= r - (r - l) * c);\n }\n return {x, fx};\n}"
+    \ c= 0.38196601125;\n assert(l <= r);\n long double x= l + (r - l) * c, y= r -\
+    \ (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool g; iter--;)\
+    \ {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx > fy;\n  if (g)\
+    \ r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x= y, fx= fy, fy=\
+    \ f(y= r - (r - l) * c);\n }\n return {x, fx};\n}"
   dependsOn:
   - src/Internal/function_type.hpp
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: false
   path: src/Optimization/golden_search.hpp
   requiredBy: []
-  timestamp: '2023-09-20 15:31:03+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-09-20 18:34:32+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2972.test.cpp
 documentation_of: src/Optimization/golden_search.hpp

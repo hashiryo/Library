@@ -388,7 +388,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/MaxFlow.hpp
       title: "\u6700\u5927\u6D41"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/MinMaxEnum.hpp
       title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
         \u5217\u6319\u578B"
@@ -404,7 +404,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/fibonacci_search.hpp
       title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/golden_search.hpp
       title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
     - icon: ':heavy_check_mark:'
@@ -445,14 +445,11 @@ data:
   - name: test/aoj
     pages:
     - icon: ':x:'
-      path: test/aoj/0010.test.cpp
-      title: test/aoj/0010.test.cpp
-    - icon: ':x:'
-      path: test/aoj/0012.test.cpp
-      title: test/aoj/0012.test.cpp
-    - icon: ':x:'
       path: test/aoj/0016.test.cpp
       title: test/aoj/0016.test.cpp
+    - icon: ':x:'
+      path: test/aoj/0090.test.cpp
+      title: test/aoj/0090.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/0168.test.cpp
       title: test/aoj/0168.test.cpp
@@ -693,7 +690,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2893.test.cpp
       title: test/aoj/2893.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
     - icon: ':heavy_check_mark:'
@@ -768,10 +765,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_A.test.cpp
       title: test/aoj/CGL_2_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_B.test.cpp
       title: test/aoj/CGL_2_B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_C.test.cpp
       title: test/aoj/CGL_2_C.test.cpp
     - icon: ':x:'

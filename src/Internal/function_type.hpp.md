@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/golden_search.hpp
     title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
   - icon: ':question:'
@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2972.test.cpp
     title: test/aoj/2972.test.cpp
   - icon: ':heavy_check_mark:'
