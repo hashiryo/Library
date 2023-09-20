@@ -450,9 +450,24 @@ data:
     - icon: ':x:'
       path: test/aoj/0090.test.cpp
       title: test/aoj/0090.test.cpp
+    - icon: ':x:'
+      path: test/aoj/0129.test.cpp
+      title: test/aoj/0129.test.cpp
+    - icon: ':x:'
+      path: test/aoj/0143.test.cpp
+      title: test/aoj/0143.test.cpp
+    - icon: ':x:'
+      path: test/aoj/0153.test.cpp
+      title: test/aoj/0153.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/0168.test.cpp
       title: test/aoj/0168.test.cpp
+    - icon: ':x:'
+      path: test/aoj/0187.longdouble.test.cpp
+      title: test/aoj/0187.longdouble.test.cpp
+    - icon: ':x:'
+      path: test/aoj/0187.rational.test.cpp
+      title: test/aoj/0187.rational.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/0334.test.cpp
       title: test/aoj/0334.test.cpp
@@ -510,7 +525,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
     - icon: ':heavy_check_mark:'
@@ -771,7 +786,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_C.test.cpp
       title: test/aoj/CGL_2_C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_D.test.cpp
       title: test/aoj/CGL_2_D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -783,7 +798,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_3_C.test.cpp
       title: test/aoj/CGL_3_C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_4_A.test.cpp
       title: test/aoj/CGL_4_A.test.cpp
     - icon: ':x:'

@@ -21,6 +21,12 @@ data:
   - icon: ':x:'
     path: test/aoj/0090.test.cpp
     title: test/aoj/0090.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0129.test.cpp
+    title: test/aoj/0129.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0153.test.cpp
+    title: test/aoj/0153.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
@@ -30,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1190.test.cpp
     title: test/aoj/1190.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1342.test.cpp
     title: test/aoj/1342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -71,7 +77,8 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Geometry/Line.hpp\"\n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\
+  bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
+    \ 2 \"src/Geometry/Line.hpp\"\n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\
     \n#include <iostream>\n#include <fstream>\n#include <iomanip>\n#include <cmath>\n\
     #include <cassert>\nnamespace geo {\nusing namespace std;\nstruct Visualizer {\n\
     \ ofstream ofs;\n Visualizer(string s= \"visualize.txt\"): ofs(s) { ofs << fixed\
@@ -181,7 +188,7 @@ data:
     \ * 2, c= l.d.y * l.d.y, d= a + c;\n a/= d, b/= d, c/= d, d= a - c;\n return {d,\
     \ b, b, -d, Point<K>{c * 2 * l.p.x - b * l.p.y, a * 2 * l.p.y - b * l.p.x}};\n\
     }\ntemplate <class K> Line<K> Affine<K>::operator()(const Line<K> &l) { return\
-    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 3 \"src/Geometry/Segment.hpp\"\
+    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 4 \"src/Geometry/Segment.hpp\"\
     \nnamespace geo {\ntemplate <class K> struct Segment {\n using P= Point<K>;\n\
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
@@ -261,8 +268,8 @@ data:
     \ s.p, v= s.p - c.o;\n R a= norm(u), b= dot(u, v) / a, d= b * b - (norm(v) - c.r\
     \ * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n if (!t && sgn(b) <= 0\
     \ && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d), a= -b - d, b= -b + d;\n\
-    \ vector<Point<R>> ps;\n if (sgn(a) >= 0 && sgn(1 - a) <= 0) ps.emplace_back(s.p\
-    \ + a * u);\n if (sgn(b) >= 0 && sgn(1 - b) <= 0) ps.emplace_back(s.p + b * u);\n\
+    \ vector<Point<R>> ps;\n if (0 <= sgn(a) && sgn(a - 1) <= 0) ps.emplace_back(s.p\
+    \ + a * u);\n if (0 <= sgn(b) && sgn(b - 1) <= 0) ps.emplace_back(s.p + b * u);\n\
     \ return ps;\n}\ntemplate <class R> vector<Point<R>> cross_points(const Segment<R>\
     \ &s, const Circle<R> &c) { return cross_points(c, s); }\ntemplate <class R> Circle<R>\
     \ circumscribed_circle(const Point<R> &A, const Point<R> &B, const Point<R> &C)\
@@ -309,8 +316,8 @@ data:
     \ Point<R> u= s.q - s.p, v= s.p - c.o;\n R a= norm(u), b= dot(u, v) / a, d= b\
     \ * b - (norm(v) - c.r * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n\
     \ if (!t && sgn(b) <= 0 && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d),\
-    \ a= -b - d, b= -b + d;\n vector<Point<R>> ps;\n if (sgn(a) >= 0 && sgn(1 - a)\
-    \ <= 0) ps.emplace_back(s.p + a * u);\n if (sgn(b) >= 0 && sgn(1 - b) <= 0) ps.emplace_back(s.p\
+    \ a= -b - d, b= -b + d;\n vector<Point<R>> ps;\n if (0 <= sgn(a) && sgn(a - 1)\
+    \ <= 0) ps.emplace_back(s.p + a * u);\n if (0 <= sgn(b) && sgn(b - 1) <= 0) ps.emplace_back(s.p\
     \ + b * u);\n return ps;\n}\ntemplate <class R> vector<Point<R>> cross_points(const\
     \ Segment<R> &s, const Circle<R> &c) { return cross_points(c, s); }\ntemplate\
     \ <class R> Circle<R> circumscribed_circle(const Point<R> &A, const Point<R> &B,\
@@ -335,7 +342,7 @@ data:
   requiredBy:
   - src/Geometry/intersection_area.hpp
   - src/Geometry/min_enclosing_circle.hpp
-  timestamp: '2023-09-20 18:34:32+09:00'
+  timestamp: '2023-09-20 20:25:45+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1183.test.cpp
@@ -344,12 +351,14 @@ data:
   - test/aoj/0090.test.cpp
   - test/aoj/CGL_7_D.test.cpp
   - test/aoj/1190.test.cpp
+  - test/aoj/0129.test.cpp
   - test/aoj/CGL_7_H.test.cpp
   - test/aoj/CGL_7_G.test.cpp
   - test/aoj/CGL_7_C.test.cpp
   - test/aoj/CGL_7_I.test.cpp
   - test/aoj/1132.test.cpp
   - test/aoj/2201.test.cpp
+  - test/aoj/0153.test.cpp
   - test/aoj/CGL_7_B.test.cpp
   - test/aoj/CGL_7_E.test.cpp
   - test/aoj/1342.test.cpp

@@ -27,6 +27,21 @@ data:
   - icon: ':x:'
     path: test/aoj/0090.test.cpp
     title: test/aoj/0090.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0129.test.cpp
+    title: test/aoj/0129.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0143.test.cpp
+    title: test/aoj/0143.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0153.test.cpp
+    title: test/aoj/0153.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0187.longdouble.test.cpp
+    title: test/aoj/0187.longdouble.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0187.rational.test.cpp
+    title: test/aoj/0187.rational.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
@@ -51,7 +66,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1242.rational.test.cpp
     title: test/aoj/1242.rational.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1342.test.cpp
     title: test/aoj/1342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -93,7 +108,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_2_C.test.cpp
     title: test/aoj/CGL_2_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_2_D.test.cpp
     title: test/aoj/CGL_2_D.test.cpp
   - icon: ':heavy_check_mark:'
@@ -105,7 +120,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_3_C.test.cpp
     title: test/aoj/CGL_3_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_A.test.cpp
     title: test/aoj/CGL_4_A.test.cpp
   - icon: ':x:'
@@ -146,7 +161,8 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Geometry/Line.hpp\"\n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\
+  bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
+    \ 2 \"src/Geometry/Line.hpp\"\n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\
     \n#include <iostream>\n#include <fstream>\n#include <iomanip>\n#include <cmath>\n\
     #include <cassert>\nnamespace geo {\nusing namespace std;\nstruct Visualizer {\n\
     \ ofstream ofs;\n Visualizer(string s= \"visualize.txt\"): ofs(s) { ofs << fixed\
@@ -256,7 +272,7 @@ data:
     \ * 2, c= l.d.y * l.d.y, d= a + c;\n a/= d, b/= d, c/= d, d= a - c;\n return {d,\
     \ b, b, -d, Point<K>{c * 2 * l.p.x - b * l.p.y, a * 2 * l.p.y - b * l.p.x}};\n\
     }\ntemplate <class K> Line<K> Affine<K>::operator()(const Line<K> &l) { return\
-    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 3 \"src/Geometry/Segment.hpp\"\
+    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 4 \"src/Geometry/Segment.hpp\"\
     \nnamespace geo {\ntemplate <class K> struct Segment {\n using P= Point<K>;\n\
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
@@ -306,25 +322,26 @@ data:
     \ t.p), dist2(s, t.q), dist2(t, s.p), dist2(t, s.q)}); }\ntemplate <class K> Segment<K>\
     \ Affine<K>::operator()(const Segment<K> &s) { return {(*this)(s.p), (*this)(s.q)};\
     \ }\n}\n"
-  code: "#pragma once\n#include \"src/Geometry/Line.hpp\"\nnamespace geo {\ntemplate\
-    \ <class K> struct Segment {\n using P= Point<K>;\n P p, q;\n Segment() {}\n Segment(const\
-    \ P &p, const P &q): p(p), q(q) {}\n // do not consider the direction\n bool operator==(const\
-    \ Segment &s) const { return (p == s.p && q == s.q) || (p == s.q && q == s.p);\
-    \ }\n bool operator!=(const Segment &s) const { return !(*this == s); }\n bool\
-    \ is_on(const P &r) const { return ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int\
-    \ i) { return i ? q : p; }\n const P &operator[](int i) const { return i ? q :\
-    \ p; }\n long double length() const { return dist(p, q); }\n P closest_point(const\
-    \ P &r) const {\n  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0\
-    \ ? sgn(a - (b= norm(d))) < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream\
-    \ &os, const Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer\
-    \ &operator<<(Visualizer &vis, const Segment &s) { return vis.ofs << \"Segment\
-    \ \" << s.p1 << \" \" << s.p2 << '\\n', vis; }\n};\n// 1: properly crossing, 0:\
-    \ no intersect, 2: same line\ntemplate <class K> vector<Point<K>> cross_points(const\
-    \ Segment<K> &s, const Line<K> &l) {\n Point d= s.q - s.p;\n K a= cross(d, l.d),\
-    \ b= cross(l.p - s.p, l.d);\n if (sgn(a)) {\n  if (b/= a; sgn(b) < 0 || sgn(b\
-    \ - 1) > 0) return {};  // no intersect\n  else return {s.p + b * d};        \
-    \                   // properly crossing}\n }\n if (sgn(b)) return {};  // disjoint\
-    \ parallel\n return {s.p, s.q};      // same line\n}\ntemplate <class K> vector<Point<K>>\
+  code: "#pragma once\n#include <algorithm>\n#include \"src/Geometry/Line.hpp\"\n\
+    namespace geo {\ntemplate <class K> struct Segment {\n using P= Point<K>;\n P\
+    \ p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n // do\
+    \ not consider the direction\n bool operator==(const Segment &s) const { return\
+    \ (p == s.p && q == s.q) || (p == s.q && q == s.p); }\n bool operator!=(const\
+    \ Segment &s) const { return !(*this == s); }\n bool is_on(const P &r) const {\
+    \ return ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q :\
+    \ p; }\n const P &operator[](int i) const { return i ? q : p; }\n long double\
+    \ length() const { return dist(p, q); }\n P closest_point(const P &r) const {\n\
+    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm(d)))\
+    \ < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream &os, const\
+    \ Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer &operator<<(Visualizer\
+    \ &vis, const Segment &s) { return vis.ofs << \"Segment \" << s.p1 << \" \" <<\
+    \ s.p2 << '\\n', vis; }\n};\n// 1: properly crossing, 0: no intersect, 2: same\
+    \ line\ntemplate <class K> vector<Point<K>> cross_points(const Segment<K> &s,\
+    \ const Line<K> &l) {\n Point d= s.q - s.p;\n K a= cross(d, l.d), b= cross(l.p\
+    \ - s.p, l.d);\n if (sgn(a)) {\n  if (b/= a; sgn(b) < 0 || sgn(b - 1) > 0) return\
+    \ {};  // no intersect\n  else return {s.p + b * d};                         \
+    \  // properly crossing}\n }\n if (sgn(b)) return {};  // disjoint parallel\n\
+    \ return {s.p, s.q};      // same line\n}\ntemplate <class K> vector<Point<K>>\
     \ cross_points(const Line<K> &l, const Segment<K> &s) { return cross_points(s,\
     \ l); }\n// 2: same line, 0: no intersect, 1: ...\ntemplate <class K> vector<Point<K>>\
     \ cross_points(const Segment<K> &s, const Segment<K> &t) {\n Point d= s.q - s.p,\
@@ -366,7 +383,7 @@ data:
   - src/Geometry/Polygon.hpp
   - src/Geometry/min_enclosing_circle.hpp
   - src/Geometry/Circle.hpp
-  timestamp: '2023-09-20 18:34:32+09:00'
+  timestamp: '2023-09-20 20:25:45+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/CGL_2_D.test.cpp
@@ -376,6 +393,7 @@ data:
   - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_4_B.test.cpp
   - test/aoj/1242.longdouble.test.cpp
+  - test/aoj/0143.test.cpp
   - test/aoj/CGL_4_A.test.cpp
   - test/aoj/CGL_3_B.test.cpp
   - test/aoj/CGL_2_C.test.cpp
@@ -385,7 +403,9 @@ data:
   - test/aoj/2009.rational.test.cpp
   - test/aoj/CGL_7_D.test.cpp
   - test/aoj/1242.rational.test.cpp
+  - test/aoj/0187.rational.test.cpp
   - test/aoj/1190.test.cpp
+  - test/aoj/0129.test.cpp
   - test/aoj/CGL_3_A.test.cpp
   - test/aoj/CGL_7_H.test.cpp
   - test/aoj/CGL_7_G.test.cpp
@@ -394,9 +414,11 @@ data:
   - test/aoj/1132.test.cpp
   - test/aoj/2201.test.cpp
   - test/aoj/CGL_4_C.test.cpp
+  - test/aoj/0153.test.cpp
   - test/aoj/1157.test.cpp
   - test/aoj/2514.test.cpp
   - test/aoj/2003.longdouble.test.cpp
+  - test/aoj/0187.longdouble.test.cpp
   - test/aoj/CGL_7_B.test.cpp
   - test/aoj/2256.test.cpp
   - test/aoj/2626.test.cpp

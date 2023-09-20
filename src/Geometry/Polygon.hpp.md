@@ -18,6 +18,18 @@ data:
     path: src/Geometry/intersection_area.hpp
     title: src/Geometry/intersection_area.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0143.test.cpp
+    title: test/aoj/0143.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0153.test.cpp
+    title: test/aoj/0153.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0187.longdouble.test.cpp
+    title: test/aoj/0187.longdouble.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0187.rational.test.cpp
+    title: test/aoj/0187.rational.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
@@ -30,7 +42,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1242.rational.test.cpp
     title: test/aoj/1242.rational.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1342.test.cpp
     title: test/aoj/1342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -54,7 +66,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_3_C.test.cpp
     title: test/aoj/CGL_3_C.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_A.test.cpp
     title: test/aoj/CGL_4_A.test.cpp
   - icon: ':x:'
@@ -74,7 +86,7 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Geometry/Polygon.hpp\"\n#include <algorithm>\n#line\
+  bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
     \ 2 \"src/Geometry/Line.hpp\"\n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\
     \n#include <iostream>\n#include <fstream>\n#include <iomanip>\n#include <cmath>\n\
     #include <cassert>\nnamespace geo {\nusing namespace std;\nstruct Visualizer {\n\
@@ -185,7 +197,7 @@ data:
     \ * 2, c= l.d.y * l.d.y, d= a + c;\n a/= d, b/= d, c/= d, d= a - c;\n return {d,\
     \ b, b, -d, Point<K>{c * 2 * l.p.x - b * l.p.y, a * 2 * l.p.y - b * l.p.x}};\n\
     }\ntemplate <class K> Line<K> Affine<K>::operator()(const Line<K> &l) { return\
-    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 3 \"src/Geometry/Segment.hpp\"\
+    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 4 \"src/Geometry/Segment.hpp\"\
     \nnamespace geo {\ntemplate <class K> struct Segment {\n using P= Point<K>;\n\
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
@@ -234,7 +246,7 @@ data:
     \ const Segment<K> &t) { return cross_points(s, t).size() ? 0 : min({dist2(s,\
     \ t.p), dist2(s, t.q), dist2(t, s.p), dist2(t, s.q)}); }\ntemplate <class K> Segment<K>\
     \ Affine<K>::operator()(const Segment<K> &s) { return {(*this)(s.p), (*this)(s.q)};\
-    \ }\n}\n#line 4 \"src/Geometry/Polygon.hpp\"\nnamespace geo {\n// build counterclockwise\n\
+    \ }\n}\n#line 3 \"src/Geometry/Polygon.hpp\"\nnamespace geo {\n// build counterclockwise\n\
     template <class K> class Polygon {\n K a2= 0;\nprotected:\n vector<Point<K>> dat;\n\
     \ void build() {\n  if (dat.empty()) return;\n  a2= cross(dat.back(), dat[0]);\n\
     \  for (int i= this->size(); --i;) a2+= cross(dat[i - 1], dat[i]);\n  if (a2 <\
@@ -283,30 +295,30 @@ data:
     \ min(ret, dist2(h, e));\n return ret;\n}\ntemplate <class K> Polygon<K> Affine<K>::operator()(const\
     \ Polygon<K> &g) {\n vector<Point<K>> ps;\n for (const auto &p: g) ps.emplace_back((*this)(p));\n\
     \ return Polygon(ps);\n}\n}\n"
-  code: "#pragma once\n#include <algorithm>\n#include \"src/Geometry/Segment.hpp\"\
-    \nnamespace geo {\n// build counterclockwise\ntemplate <class K> class Polygon\
-    \ {\n K a2= 0;\nprotected:\n vector<Point<K>> dat;\n void build() {\n  if (dat.empty())\
-    \ return;\n  a2= cross(dat.back(), dat[0]);\n  for (int i= this->size(); --i;)\
-    \ a2+= cross(dat[i - 1], dat[i]);\n  if (a2 < 0) reverse(dat.begin(), dat.end()),\
-    \ a2= -a2;\n }\npublic:\n Polygon() {}\n Polygon(const vector<Point<K>> &ps):\
-    \ dat(ps) { build(); }\n inline int prev(int i) const { return i ? i - 1 : (int)this->size()\
-    \ - 1; }\n inline int next(int i) const { return i + 1 >= (int)this->size() ?\
-    \ 0 : i + 1; }\n Point<K> &operator[](int i) { return dat[i]; }\n const Point<K>\
-    \ &operator[](int i) const { return dat[i]; }\n auto begin() { return dat.begin();\
-    \ }\n auto end() { return dat.end(); }\n auto begin() const { return dat.begin();\
-    \ }\n auto end() const { return dat.end(); }\n size_t size() const { return dat.size();\
-    \ }\n vector<Segment<K>> edges() const {\n  vector<Segment<K>> es;\n  for (int\
-    \ i= 0, e= dat.size(); i < e; ++i) es.emplace_back(dat[i], dat[next(i)]);\n  return\
-    \ es;\n }\n // assuming no self-intersections\n bool is_convex() const {\n  for\
-    \ (int i= dat.size(); i--;)\n   if (Point<K> a= dat[i], b= a - dat[prev(i)], c=\
-    \ dat[next(i)] - a; sgn(cross(b, c)) < 0) return false;\n  return true;\n }\n\
-    \ K area() const { return a2 / 2; }\n // for integer\n K area2() const { return\
-    \ a2; }\n // 1: in, 0: on, -1: out\n int where(const Point<K> &p) const {\n  bool\
-    \ in= false;\n  for (int i= dat.size(); i--;) {\n   Point a= dat[i] - p, b= dat[next(i)]\
-    \ - p;\n   if (a.y > b.y) swap(a, b);\n   int s= sgn(cross(a, b));\n   if (!s\
-    \ && sgn(dot(a, b)) <= 0) return 0;\n   if (s < 0 && sgn(a.y) <= 0 && 0 < sgn(b.y))\
-    \ in= !in;\n  }\n  return in ? 1 : -1;\n }\n bool contain(const Segment<K> &s)\
-    \ const {\n  if (where(s.p) == -1 || where(s.q) == -1) return false;\n  vector<Point<K>>\
+  code: "#pragma once\n#include \"src/Geometry/Segment.hpp\"\nnamespace geo {\n//\
+    \ build counterclockwise\ntemplate <class K> class Polygon {\n K a2= 0;\nprotected:\n\
+    \ vector<Point<K>> dat;\n void build() {\n  if (dat.empty()) return;\n  a2= cross(dat.back(),\
+    \ dat[0]);\n  for (int i= this->size(); --i;) a2+= cross(dat[i - 1], dat[i]);\n\
+    \  if (a2 < 0) reverse(dat.begin(), dat.end()), a2= -a2;\n }\npublic:\n Polygon()\
+    \ {}\n Polygon(const vector<Point<K>> &ps): dat(ps) { build(); }\n inline int\
+    \ prev(int i) const { return i ? i - 1 : (int)this->size() - 1; }\n inline int\
+    \ next(int i) const { return i + 1 >= (int)this->size() ? 0 : i + 1; }\n Point<K>\
+    \ &operator[](int i) { return dat[i]; }\n const Point<K> &operator[](int i) const\
+    \ { return dat[i]; }\n auto begin() { return dat.begin(); }\n auto end() { return\
+    \ dat.end(); }\n auto begin() const { return dat.begin(); }\n auto end() const\
+    \ { return dat.end(); }\n size_t size() const { return dat.size(); }\n vector<Segment<K>>\
+    \ edges() const {\n  vector<Segment<K>> es;\n  for (int i= 0, e= dat.size(); i\
+    \ < e; ++i) es.emplace_back(dat[i], dat[next(i)]);\n  return es;\n }\n // assuming\
+    \ no self-intersections\n bool is_convex() const {\n  for (int i= dat.size();\
+    \ i--;)\n   if (Point<K> a= dat[i], b= a - dat[prev(i)], c= dat[next(i)] - a;\
+    \ sgn(cross(b, c)) < 0) return false;\n  return true;\n }\n K area() const { return\
+    \ a2 / 2; }\n // for integer\n K area2() const { return a2; }\n // 1: in, 0: on,\
+    \ -1: out\n int where(const Point<K> &p) const {\n  bool in= false;\n  for (int\
+    \ i= dat.size(); i--;) {\n   Point a= dat[i] - p, b= dat[next(i)] - p;\n   if\
+    \ (a.y > b.y) swap(a, b);\n   int s= sgn(cross(a, b));\n   if (!s && sgn(dot(a,\
+    \ b)) <= 0) return 0;\n   if (s < 0 && sgn(a.y) <= 0 && 0 < sgn(b.y)) in= !in;\n\
+    \  }\n  return in ? 1 : -1;\n }\n bool contain(const Segment<K> &s) const {\n\
+    \  if (where(s.p) == -1 || where(s.q) == -1) return false;\n  vector<Point<K>>\
     \ ps, qs;\n  for (const auto &e: edges())\n   if (auto cp= cross_points(s, e);\
     \ cp.size()) ps.insert(ps.end(), cp.begin(), cp.end());\n  if (ps.empty()) return\
     \ true;\n  sort(ps.begin(), ps.end()), ps.erase(unique(ps.begin(), ps.end()),\
@@ -342,21 +354,25 @@ data:
   requiredBy:
   - src/Geometry/intersection_area.hpp
   - src/Geometry/Convex.hpp
-  timestamp: '2023-09-20 18:34:32+09:00'
+  timestamp: '2023-09-20 20:25:45+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/CGL_4_B.test.cpp
   - test/aoj/1242.longdouble.test.cpp
+  - test/aoj/0143.test.cpp
   - test/aoj/CGL_4_A.test.cpp
   - test/aoj/CGL_3_B.test.cpp
   - test/aoj/2402.test.cpp
   - test/aoj/1242.rational.test.cpp
+  - test/aoj/0187.rational.test.cpp
   - test/aoj/CGL_3_A.test.cpp
   - test/aoj/CGL_7_H.test.cpp
   - test/aoj/CGL_7_I.test.cpp
   - test/aoj/CGL_4_C.test.cpp
+  - test/aoj/0153.test.cpp
   - test/aoj/1157.test.cpp
   - test/aoj/2514.test.cpp
+  - test/aoj/0187.longdouble.test.cpp
   - test/aoj/2626.test.cpp
   - test/aoj/3049.test.cpp
   - test/aoj/CGL_3_C.test.cpp

@@ -29,7 +29,7 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Geometry/Polygon.hpp\"\n#include <algorithm>\n#line\
+  bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
     \ 2 \"src/Geometry/Line.hpp\"\n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\
     \n#include <iostream>\n#include <fstream>\n#include <iomanip>\n#include <cmath>\n\
     #include <cassert>\nnamespace geo {\nusing namespace std;\nstruct Visualizer {\n\
@@ -140,7 +140,7 @@ data:
     \ * 2, c= l.d.y * l.d.y, d= a + c;\n a/= d, b/= d, c/= d, d= a - c;\n return {d,\
     \ b, b, -d, Point<K>{c * 2 * l.p.x - b * l.p.y, a * 2 * l.p.y - b * l.p.x}};\n\
     }\ntemplate <class K> Line<K> Affine<K>::operator()(const Line<K> &l) { return\
-    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 3 \"src/Geometry/Segment.hpp\"\
+    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 4 \"src/Geometry/Segment.hpp\"\
     \nnamespace geo {\ntemplate <class K> struct Segment {\n using P= Point<K>;\n\
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
@@ -189,7 +189,7 @@ data:
     \ const Segment<K> &t) { return cross_points(s, t).size() ? 0 : min({dist2(s,\
     \ t.p), dist2(s, t.q), dist2(t, s.p), dist2(t, s.q)}); }\ntemplate <class K> Segment<K>\
     \ Affine<K>::operator()(const Segment<K> &s) { return {(*this)(s.p), (*this)(s.q)};\
-    \ }\n}\n#line 4 \"src/Geometry/Polygon.hpp\"\nnamespace geo {\n// build counterclockwise\n\
+    \ }\n}\n#line 3 \"src/Geometry/Polygon.hpp\"\nnamespace geo {\n// build counterclockwise\n\
     template <class K> class Polygon {\n K a2= 0;\nprotected:\n vector<Point<K>> dat;\n\
     \ void build() {\n  if (dat.empty()) return;\n  a2= cross(dat.back(), dat[0]);\n\
     \  for (int i= this->size(); --i;) a2+= cross(dat[i - 1], dat[i]);\n  if (a2 <\
@@ -268,8 +268,8 @@ data:
     \ Point<R> u= s.q - s.p, v= s.p - c.o;\n R a= norm(u), b= dot(u, v) / a, d= b\
     \ * b - (norm(v) - c.r * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n\
     \ if (!t && sgn(b) <= 0 && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d),\
-    \ a= -b - d, b= -b + d;\n vector<Point<R>> ps;\n if (sgn(a) >= 0 && sgn(1 - a)\
-    \ <= 0) ps.emplace_back(s.p + a * u);\n if (sgn(b) >= 0 && sgn(1 - b) <= 0) ps.emplace_back(s.p\
+    \ a= -b - d, b= -b + d;\n vector<Point<R>> ps;\n if (0 <= sgn(a) && sgn(a - 1)\
+    \ <= 0) ps.emplace_back(s.p + a * u);\n if (0 <= sgn(b) && sgn(b - 1) <= 0) ps.emplace_back(s.p\
     \ + b * u);\n return ps;\n}\ntemplate <class R> vector<Point<R>> cross_points(const\
     \ Segment<R> &s, const Circle<R> &c) { return cross_points(c, s); }\ntemplate\
     \ <class R> Circle<R> circumscribed_circle(const Point<R> &A, const Point<R> &B,\
@@ -325,7 +325,7 @@ data:
   isVerificationFile: false
   path: src/Geometry/intersection_area.hpp
   requiredBy: []
-  timestamp: '2023-09-20 18:34:32+09:00'
+  timestamp: '2023-09-20 20:25:45+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/CGL_7_H.test.cpp

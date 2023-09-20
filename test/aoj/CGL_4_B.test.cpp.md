@@ -29,7 +29,7 @@ data:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_B
   bundledCode: "#line 1 \"test/aoj/CGL_4_B.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_B\"\
     \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#line\
-    \ 2 \"src/Geometry/Polygon.hpp\"\n#include <algorithm>\n#line 2 \"src/Geometry/Line.hpp\"\
+    \ 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line 2 \"src/Geometry/Line.hpp\"\
     \n#include <vector>\n#line 3 \"src/Geometry/Point.hpp\"\n#include <fstream>\n\
     #line 5 \"src/Geometry/Point.hpp\"\n#include <cmath>\n#include <cassert>\nnamespace\
     \ geo {\nusing namespace std;\nstruct Visualizer {\n ofstream ofs;\n Visualizer(string\
@@ -139,7 +139,7 @@ data:
     \ * 2, c= l.d.y * l.d.y, d= a + c;\n a/= d, b/= d, c/= d, d= a - c;\n return {d,\
     \ b, b, -d, Point<K>{c * 2 * l.p.x - b * l.p.y, a * 2 * l.p.y - b * l.p.x}};\n\
     }\ntemplate <class K> Line<K> Affine<K>::operator()(const Line<K> &l) { return\
-    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 3 \"src/Geometry/Segment.hpp\"\
+    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 4 \"src/Geometry/Segment.hpp\"\
     \nnamespace geo {\ntemplate <class K> struct Segment {\n using P= Point<K>;\n\
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
@@ -188,7 +188,7 @@ data:
     \ const Segment<K> &t) { return cross_points(s, t).size() ? 0 : min({dist2(s,\
     \ t.p), dist2(s, t.q), dist2(t, s.p), dist2(t, s.q)}); }\ntemplate <class K> Segment<K>\
     \ Affine<K>::operator()(const Segment<K> &s) { return {(*this)(s.p), (*this)(s.q)};\
-    \ }\n}\n#line 4 \"src/Geometry/Polygon.hpp\"\nnamespace geo {\n// build counterclockwise\n\
+    \ }\n}\n#line 3 \"src/Geometry/Polygon.hpp\"\nnamespace geo {\n// build counterclockwise\n\
     template <class K> class Polygon {\n K a2= 0;\nprotected:\n vector<Point<K>> dat;\n\
     \ void build() {\n  if (dat.empty()) return;\n  a2= cross(dat.back(), dat[0]);\n\
     \  for (int i= this->size(); --i;) a2+= cross(dat[i - 1], dat[i]);\n  if (a2 <\
@@ -238,29 +238,29 @@ data:
     \ Polygon<K> &g) {\n vector<Point<K>> ps;\n for (const auto &p: g) ps.emplace_back((*this)(p));\n\
     \ return Polygon(ps);\n}\n}\n#line 3 \"src/Geometry/Convex.hpp\"\nnamespace geo\
     \ {\ntemplate <class K> struct Convex: Polygon<K> {\n using P= Point<K>;\n Convex()\
-    \ {}\n Convex(vector<P> ps) {\n  int n= ps.size(), k= 0;\n  auto &ch= this->dat;\n\
-    \  ch.resize(2 * n), sort(ps.begin(), ps.end());\n  for (int i= 0; i < n; ch[k++]=\
-    \ ps[i++])\n   while (k > 1 && sgn(cross(ch[k - 1] - ch[k - 2], ps[i] - ch[k -\
-    \ 2])) <= 0) --k;\n  for (int i= n - 1, t= k; i--; ch[k++]= ps[i])\n   while (k\
-    \ > t && sgn(cross(ch[k - 1] - ch[k - 2], ps[i] - ch[k - 2])) <= 0) --k;\n  ch.resize(k\
-    \ - 1), this->build();\n }\n pair<P, P> farthest_pair() const {\n  auto &ch= this->dat;\n\
-    \  int n= ch.size(), i= 0, j= 0;\n  for (int k= n; k--;) {\n   if (ch[i] < ch[k])\
-    \ i= k;\n   if (ch[j] > ch[k]) j= k;\n  }\n  pair<P, P> ret{ch[i], ch[j]};\n \
-    \ K mx= dist2(ch[i], ch[j]);\n  int si= i, sj= j;\n  do {\n   if (int ni= this->next(i),\
+    \ {}\n Convex(vector<P> ps, bool strict= true) {\n  int n= ps.size(), k= 0;\n\
+    \  auto &ch= this->dat;\n  ch.resize(2 * n), sort(ps.begin(), ps.end());\n  for\
+    \ (int i= 0; i < n; ch[k++]= ps[i++])\n   while (k > 1 && sgn(cross(ch[k - 1]\
+    \ - ch[k - 2], ps[i] - ch[k - 2])) < strict) --k;\n  for (int i= n - 1, t= k;\
+    \ i--; ch[k++]= ps[i])\n   while (k > t && sgn(cross(ch[k - 1] - ch[k - 2], ps[i]\
+    \ - ch[k - 2])) < strict) --k;\n  ch.resize(k - 1), this->build();\n }\n pair<P,\
+    \ P> farthest_pair() const {\n  auto &ch= this->dat;\n  int n= ch.size(), i= 0,\
+    \ j= 0;\n  for (int k= n; k--;) {\n   if (ch[i] < ch[k]) i= k;\n   if (ch[j] >\
+    \ ch[k]) j= k;\n  }\n  pair<P, P> ret{ch[i], ch[j]};\n  K mx= dist2(ch[i], ch[j]);\n\
+    \  for (int si= i, sj= j; i != sj || j != si;) {\n   if (int ni= this->next(i),\
     \ nj= this->next(j); sgn(cross(ch[ni] - ch[i], ch[nj] - ch[j])) < 0) j= nj;\n\
     \   else i= ni;\n   if (K len= dist2(ch[i], ch[j]); mx < len) mx= len, ret= {ch[i],\
-    \ ch[j]};\n  } while (i != si || j != sj);\n  return ret;\n }\n long double diameter()\
-    \ const {\n  auto [p, q]= farthest_pair();\n  return dist(p, q);\n }\n // side>0\
-    \ => left, side<0 => right\n Convex half_plane(const Line<K> &l, int side= 1)\
-    \ const {\n  Convex ret;\n  for (const auto &e: this->edges()) {\n   auto d= e.q\
-    \ - e.p;\n   K a= cross(d, l.d), b= cross(l.p - e.p, l.d);\n   int s= sgn(b);\n\
-    \   if (s * side >= 0) ret.dat.emplace_back(e.p);\n   if (s && sgn(a))\n    if\
-    \ (b/= a; 0 < sgn(b) && sgn(b - 1) < 0) ret.dat.emplace_back(e.p + b * d);\n \
-    \ }\n  return ret.build(), ret;\n }\n // { (x,y): (x,y) in polygon and (ax+by+c)\
-    \ * side >= 0 }\n Convex half_plane(K a, K b, K c, int side= 1) const {\n  int\
-    \ sa= sgn(a), sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return sc * side < 0\
-    \ ? Convex() : *this;\n  return half_plane(Line<K>(a, b, c), side);\n }\n friend\
-    \ Affine<K>;\n};\ntemplate <class K> pair<Point<K>, Point<K>> farthest_pair(const\
+    \ ch[j]};\n  }\n  return ret;\n }\n long double diameter() const {\n  auto [p,\
+    \ q]= farthest_pair();\n  return dist(p, q);\n }\n // side>0 => left, side<0 =>\
+    \ right\n Convex half_plane(const Line<K> &l, int side= 1) const {\n  Convex ret;\n\
+    \  for (const auto &e: this->edges()) {\n   auto d= e.q - e.p;\n   K a= cross(d,\
+    \ l.d), b= cross(l.p - e.p, l.d);\n   int s= sgn(b);\n   if (s * side >= 0) ret.dat.emplace_back(e.p);\n\
+    \   if (s && sgn(a))\n    if (b/= a; 0 < sgn(b) && sgn(b - 1) < 0) ret.dat.emplace_back(e.p\
+    \ + b * d);\n  }\n  return ret.build(), ret;\n }\n // { (x,y): (x,y) in polygon\
+    \ and (ax+by+c) * side >= 0 }\n Convex half_plane(K a, K b, K c, int side= 1)\
+    \ const {\n  int sa= sgn(a), sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return\
+    \ sc * side < 0 ? Convex() : *this;\n  return half_plane(Line<K>(a, b, c), side);\n\
+    \ }\n friend Affine<K>;\n};\ntemplate <class K> pair<Point<K>, Point<K>> farthest_pair(const\
     \ vector<Point<K>> &ps) { return Convex(ps).farthest_pair(); }\ntemplate <class\
     \ K> Convex<K> Affine<K>::operator()(const Convex<K> &c) {\n Convex<K> d;\n for\
     \ (const auto &p: c) d.dat.emplace_back((*this)(p));\n return d.build(), d;\n\
@@ -268,13 +268,13 @@ data:
     \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geo;\n int\
     \ n;\n cin >> n;\n vector<Point<long double>> ps(n);\n for (int i= 0; i < n; ++i)\
     \ cin >> ps[i];\n Convex g(ps);\n cout << fixed << setprecision(12) << g.diameter()\
-    \ << endl;\n return 0;\n}\n"
+    \ << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_B\"\
     \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
     \ \"src/Geometry/Convex.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
     \ ios::sync_with_stdio(false);\n using namespace geo;\n int n;\n cin >> n;\n vector<Point<long\
     \ double>> ps(n);\n for (int i= 0; i < n; ++i) cin >> ps[i];\n Convex g(ps);\n\
-    \ cout << fixed << setprecision(12) << g.diameter() << endl;\n return 0;\n}"
+    \ cout << fixed << setprecision(12) << g.diameter() << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Geometry/Convex.hpp
   - src/Geometry/Polygon.hpp
@@ -284,7 +284,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_4_B.test.cpp
   requiredBy: []
-  timestamp: '2023-09-20 18:34:32+09:00'
+  timestamp: '2023-09-20 20:25:45+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_4_B.test.cpp

@@ -22,6 +22,9 @@ data:
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/0187.rational.test.cpp
+    title: test/aoj/0187.rational.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0350.test.cpp
     title: test/aoj/0350.test.cpp
@@ -114,6 +117,7 @@ data:
   - test/aoj/2003.rational.test.cpp
   - test/aoj/2009.rational.test.cpp
   - test/aoj/1242.rational.test.cpp
+  - test/aoj/0187.rational.test.cpp
   - test/aoj/NTL_1_D.test.cpp
   - test/aoj/0350.test.cpp
   - test/aoj/2159.rational.test.cpp

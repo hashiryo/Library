@@ -135,7 +135,7 @@ data:
     \ * 2, c= l.d.y * l.d.y, d= a + c;\n a/= d, b/= d, c/= d, d= a - c;\n return {d,\
     \ b, b, -d, Point<K>{c * 2 * l.p.x - b * l.p.y, a * 2 * l.p.y - b * l.p.x}};\n\
     }\ntemplate <class K> Line<K> Affine<K>::operator()(const Line<K> &l) { return\
-    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 3 \"src/Geometry/Segment.hpp\"\
+    \ line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n#line 4 \"src/Geometry/Segment.hpp\"\
     \nnamespace geo {\ntemplate <class K> struct Segment {\n using P= Point<K>;\n\
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
@@ -215,8 +215,8 @@ data:
     \ s.p, v= s.p - c.o;\n R a= norm(u), b= dot(u, v) / a, d= b * b - (norm(v) - c.r\
     \ * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n if (!t && sgn(b) <= 0\
     \ && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d), a= -b - d, b= -b + d;\n\
-    \ vector<Point<R>> ps;\n if (sgn(a) >= 0 && sgn(1 - a) <= 0) ps.emplace_back(s.p\
-    \ + a * u);\n if (sgn(b) >= 0 && sgn(1 - b) <= 0) ps.emplace_back(s.p + b * u);\n\
+    \ vector<Point<R>> ps;\n if (0 <= sgn(a) && sgn(a - 1) <= 0) ps.emplace_back(s.p\
+    \ + a * u);\n if (0 <= sgn(b) && sgn(b - 1) <= 0) ps.emplace_back(s.p + b * u);\n\
     \ return ps;\n}\ntemplate <class R> vector<Point<R>> cross_points(const Segment<R>\
     \ &s, const Circle<R> &c) { return cross_points(c, s); }\ntemplate <class R> Circle<R>\
     \ circumscribed_circle(const Point<R> &A, const Point<R> &B, const Point<R> &C)\
@@ -255,7 +255,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_7_G.test.cpp
   requiredBy: []
-  timestamp: '2023-09-20 18:34:32+09:00'
+  timestamp: '2023-09-20 20:25:45+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_G.test.cpp
