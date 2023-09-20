@@ -27,65 +27,66 @@ data:
     \ K &x) {\n K y= ceil(x);\n if constexpr (is_floating_point_v<K>)\n  if (K z=\
     \ y - 1, w= x - z; 0 < sgn(w + 1) && sgn(w) <= 0) return z;\n return y;\n}\nlong\
     \ double radian_to_degree(long double r) { return r * 180.0 / M_PI; }\nlong double\
-    \ degree_to_radian(long double d) { return d * M_PI / 180.0; }\nenum CCW { COUNTER_CLOCKWISE,\
-    \ CLOCKWISE, ONLINE_BACK, ONLINE_FRONT, ON_SEGMENT };\nostream &operator<<(ostream\
-    \ &os, CCW c) { return os << (c == COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" :\
-    \ c == CLOCKWISE ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT\
-    \ ? \"ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class K> struct Point {\n\
-    \ K x= 0, y= 0;\n Point &operator+=(const Point &p) { return x+= p.x, y+= p.y,\
-    \ *this; }\n Point &operator-=(const Point &p) { return x-= p.x, y-= p.y, *this;\
-    \ }\n Point &operator*=(K a) { return x*= a, y*= a, *this; }\n Point &operator/=(K\
-    \ a) { return x/= a, y/= a, *this; }\n Point operator+(const Point &p) const {\
-    \ return {x + p.x, y + p.y}; }\n Point operator-(const Point &p) const { return\
-    \ {x - p.x, y - p.y}; }\n Point operator*(K a) const { return {x * a, y * a};\
-    \ }\n Point operator/(K a) const { return {x / a, y / a}; }\n friend Point operator*(K\
-    \ a, const Point &p) { return {a * p.x, a * p.y}; }\n Point operator-() const\
-    \ { return {-x, -y}; }\n bool operator<(const Point &p) const {\n  int s= sgn(x\
-    \ - p.x);\n  return s ? s < 0 : sgn(y - p.y) < 0;\n }\n bool operator>(const Point\
-    \ &p) const { return p < *this; }\n bool operator<=(const Point &p) const { return\
-    \ !(p < *this); }\n bool operator>=(const Point &p) const { return !(*this < p);\
-    \ }\n bool operator==(const Point &p) const { return !sgn(x - p.x) && !sgn(y -\
-    \ p.y); }\n bool operator!=(const Point &p) const { return sgn(x - p.x) || sgn(y\
-    \ - p.y); }\n Point operator!() const { return {-y, x}; }  // rotate 90 degree\n\
-    \ friend istream &operator>>(istream &is, Point &p) { return is >> p.x >> p.y;\
-    \ }\n friend ostream &operator<<(ostream &os, const Point &p) { return os << \"\
-    (\" << p.x << \", \" << p.y << \")\"; }\n friend Visualizer &operator<<(Visualizer\
-    \ &vis, const Point &p) { return vis.ofs << p.x << \" \" << p.y << \"\\n\", vis;\
-    \ }\n};\ntemplate <class K> K dot(const Point<K> &p, const Point<K> &q) { return\
-    \ p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn: < 0\ntemplate <class\
-    \ K> K cross(const Point<K> &p, const Point<K> &q) { return p.x * q.y - p.y *\
-    \ q.x; }\ntemplate <class K> K norm(const Point<K> &p) { return dot(p, p); }\n\
-    template <class K> long double abs(const Point<K> &p) { return sqrt(norm(p));\
-    \ }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K> &q) { return\
-    \ norm(p - q); }\ntemplate <class T, class U> long double dist(const T &a, const\
-    \ U &b) { return sqrt(dist2(a, b)); }\ntemplate <class K> long double angle(const\
-    \ Point<K> &p) { return atan2(p.y, p.x); }\ntemplate <class K> long double angle(const\
-    \ Point<K> &p, const Point<K> &q) { return atan2(cross(p, q), dot(p, q)); }\n\
-    template <class K> CCW ccw(const Point<K> &p0, const Point<K> &p1, const Point<K>\
-    \ &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a, b)); s) return\
-    \ s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b); sgn(d) < 0) return\
-    \ ONLINE_BACK;\n else return sgn(d - norm(a)) > 0 ? ONLINE_FRONT : ON_SEGMENT;\n\
-    }\ntemplate <class K> struct Line;\ntemplate <class K> struct Segment;\ntemplate\
-    \ <class K> struct Circle;\ntemplate <class K> struct Polygon;\ntemplate <class\
-    \ K> struct Convex;\ntemplate <class K> struct Affine {\n K a00= 1, a01= 0, a10=\
-    \ 0, a11= 1;\n Point<K> b;\n Point<K> operator()(const Point<K> &p) const { return\
-    \ {a00 * p.x + a01 * p.y + b.x, a10 * p.x + a11 * p.y + b.y}; }\n Line<K> operator()(const\
-    \ Line<K> &l);\n Segment<K> operator()(const Segment<K> &s);\n Circle<K> operator()(const\
-    \ Circle<K> &c);\n Polygon<K> operator()(const Polygon<K> &p);\n Convex<K> operator()(const\
-    \ Convex<K> &c);\n Affine operator*(const Affine &r) const { return {a00 * r.a00\
-    \ + a01 * r.a10, a00 * r.a01 + a01 * r.a11, a10 * r.a00 + a11 * r.a10, a10 * r.a01\
-    \ + a11 * r.a11, (*this)(r)}; }\n Affine &operator*=(const Affine &r) { return\
-    \ *this= *this * r; }\n};\ntemplate <class K> Affine<K> translate(const Point<K>\
-    \ &p) { return {1, 0, 0, 1, p}; }\ntemplate <class K> Affine<K> rotate(long double\
-    \ theta) {\n K c= cos(theta), s= sin(theta);\n return {c, -s, s, c, Point<K>{0,\
-    \ 0}};\n}\ntemplate <class K> Affine<K> rotate(const Point<K> &p, long double\
-    \ theta) {\n K c= cos(theta), s= sin(theta);\n return {c, -s, s, c, Point<K>{p.x\
-    \ - c * p.x + s * p.y, p.y - s * p.x - c * p.y}};\n}\ntemplate <class K> Affine<K>\
-    \ rotate90(const Point<K> &p) { return {0, -1, 1, 0, p - !p}; }\n}\n#line 4 \"\
-    test/aoj/CGL_1_C.test.cpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n using namespace geo;\n using P= Point<int>;\n\
-    \ P p0, p1;\n cin >> p0 >> p1;\n int q;\n cin >> q;\n while (q--) {\n  P p2;\n\
-    \  cin >> p2;\n  cout << ccw(p0, p1, p2) << '\\n';\n }\n return 0;\n}\n"
+    \ degree_to_radian(long double d) { return d * M_PI / 180.0; }\ntemplate <class\
+    \ K> struct Point {\n K x= 0, y= 0;\n Point &operator+=(const Point &p) { return\
+    \ x+= p.x, y+= p.y, *this; }\n Point &operator-=(const Point &p) { return x-=\
+    \ p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return x*= a, y*= a, *this;\
+    \ }\n Point &operator/=(K a) { return x/= a, y/= a, *this; }\n Point operator+(const\
+    \ Point &p) const { return {x + p.x, y + p.y}; }\n Point operator-(const Point\
+    \ &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K a) const { return\
+    \ {x * a, y * a}; }\n Point operator/(K a) const { return {x / a, y / a}; }\n\
+    \ friend Point operator*(K a, const Point &p) { return {a * p.x, a * p.y}; }\n\
+    \ Point operator-() const { return {-x, -y}; }\n bool operator<(const Point &p)\
+    \ const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y) < 0;\n }\n\
+    \ bool operator>(const Point &p) const { return p < *this; }\n bool operator<=(const\
+    \ Point &p) const { return !(p < *this); }\n bool operator>=(const Point &p) const\
+    \ { return !(*this < p); }\n bool operator==(const Point &p) const { return !sgn(x\
+    \ - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p) const { return\
+    \ sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return {-y, x};\
+    \ }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point &p) {\
+    \ return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const Point\
+    \ &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend Visualizer\
+    \ &operator<<(Visualizer &vis, const Point &p) { return vis.ofs << p.x << \" \"\
+    \ << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K> &p, const\
+    \ Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn:\
+    \ < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K> &q) { return\
+    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm(const Point<K> &p) { return\
+    \ dot(p, p); }\ntemplate <class K> long double abs(const Point<K> &p) { return\
+    \ sqrt(norm(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
+    \ &q) { return norm(p - q); }\ntemplate <class T, class U> long double dist(const\
+    \ T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate <class K> long double\
+    \ angle(const Point<K> &p) { return atan2(p.y, p.x); }\ntemplate <class K> long\
+    \ double angle(const Point<K> &p, const Point<K> &q) { return atan2(cross(p, q),\
+    \ dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK, ONLINE_FRONT,\
+    \ ON_SEGMENT };\nostream &operator<<(ostream &os, CCW c) { return os << (c ==\
+    \ COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"CLOCKWISE\" :\
+    \ c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"ONLINE_FRONT\" :\
+    \ \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
+    \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
+    \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
+    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a)) > 0 ? ONLINE_FRONT\
+    \ : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate <class K> struct\
+    \ Segment;\ntemplate <class K> struct Circle;\ntemplate <class K> struct Polygon;\n\
+    template <class K> struct Convex;\ntemplate <class K> struct Affine {\n K a00=\
+    \ 1, a01= 0, a10= 0, a11= 1;\n Point<K> b;\n Point<K> operator()(const Point<K>\
+    \ &p) const { return {a00 * p.x + a01 * p.y + b.x, a10 * p.x + a11 * p.y + b.y};\
+    \ }\n Line<K> operator()(const Line<K> &l);\n Segment<K> operator()(const Segment<K>\
+    \ &s);\n Circle<K> operator()(const Circle<K> &c);\n Polygon<K> operator()(const\
+    \ Polygon<K> &p);\n Convex<K> operator()(const Convex<K> &c);\n Affine operator*(const\
+    \ Affine &r) const { return {a00 * r.a00 + a01 * r.a10, a00 * r.a01 + a01 * r.a11,\
+    \ a10 * r.a00 + a11 * r.a10, a10 * r.a01 + a11 * r.a11, (*this)(r)}; }\n Affine\
+    \ &operator*=(const Affine &r) { return *this= *this * r; }\n};\ntemplate <class\
+    \ K> Affine<K> translate(const Point<K> &p) { return {1, 0, 0, 1, p}; }\ntemplate\
+    \ <class K> Affine<K> rotate(long double theta) {\n K c= cos(theta), s= sin(theta);\n\
+    \ return {c, -s, s, c, Point<K>{0, 0}};\n}\ntemplate <class K> Affine<K> rotate(const\
+    \ Point<K> &p, long double theta) {\n K c= cos(theta), s= sin(theta);\n return\
+    \ {c, -s, s, c, Point<K>{p.x - c * p.x + s * p.y, p.y - s * p.x - c * p.y}};\n\
+    }\ntemplate <class K> Affine<K> rotate90(const Point<K> &p) { return {0, -1, 1,\
+    \ 0, p - !p}; }\n}\n#line 4 \"test/aoj/CGL_1_C.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
+    \ geo;\n using P= Point<int>;\n P p0, p1;\n cin >> p0 >> p1;\n int q;\n cin >>\
+    \ q;\n while (q--) {\n  P p2;\n  cin >> p2;\n  cout << ccw(p0, p1, p2) << '\\\
+    n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_C\"\
     \n#include <iostream>\n#include \"src/Geometry/Point.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
@@ -97,7 +98,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_1_C.test.cpp
   requiredBy: []
-  timestamp: '2023-09-19 22:38:57+09:00'
+  timestamp: '2023-09-20 15:31:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/CGL_1_C.test.cpp

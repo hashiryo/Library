@@ -43,40 +43,40 @@ data:
     \ (is_floating_point_v<K>)\n  if (K z= y - 1, w= x - z; 0 < sgn(w + 1) && sgn(w)\
     \ <= 0) return z;\n return y;\n}\nlong double radian_to_degree(long double r)\
     \ { return r * 180.0 / M_PI; }\nlong double degree_to_radian(long double d) {\
-    \ return d * M_PI / 180.0; }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK,\
-    \ ONLINE_FRONT, ON_SEGMENT };\nostream &operator<<(ostream &os, CCW c) { return\
-    \ os << (c == COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"\
-    CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"ONLINE_FRONT\"\
-    \ : \"ON_SEGMENT\"); }\ntemplate <class K> struct Point {\n K x= 0, y= 0;\n Point\
-    \ &operator+=(const Point &p) { return x+= p.x, y+= p.y, *this; }\n Point &operator-=(const\
-    \ Point &p) { return x-= p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return\
-    \ x*= a, y*= a, *this; }\n Point &operator/=(K a) { return x/= a, y/= a, *this;\
-    \ }\n Point operator+(const Point &p) const { return {x + p.x, y + p.y}; }\n Point\
-    \ operator-(const Point &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K\
-    \ a) const { return {x * a, y * a}; }\n Point operator/(K a) const { return {x\
-    \ / a, y / a}; }\n friend Point operator*(K a, const Point &p) { return {a * p.x,\
-    \ a * p.y}; }\n Point operator-() const { return {-x, -y}; }\n bool operator<(const\
-    \ Point &p) const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y)\
-    \ < 0;\n }\n bool operator>(const Point &p) const { return p < *this; }\n bool\
-    \ operator<=(const Point &p) const { return !(p < *this); }\n bool operator>=(const\
-    \ Point &p) const { return !(*this < p); }\n bool operator==(const Point &p) const\
-    \ { return !sgn(x - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p)\
-    \ const { return sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return\
-    \ {-y, x}; }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point\
-    \ &p) { return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const\
-    \ Point &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend\
-    \ Visualizer &operator<<(Visualizer &vis, const Point &p) { return vis.ofs <<\
-    \ p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K>\
-    \ &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0,\
-    \ right turn: < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K>\
-    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm(const Point<K>\
-    \ &p) { return dot(p, p); }\ntemplate <class K> long double abs(const Point<K>\
-    \ &p) { return sqrt(norm(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
-    \ const Point<K> &q) { return norm(p - q); }\ntemplate <class T, class U> long\
-    \ double dist(const T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate\
-    \ <class K> long double angle(const Point<K> &p) { return atan2(p.y, p.x); }\n\
-    template <class K> long double angle(const Point<K> &p, const Point<K> &q) { return\
-    \ atan2(cross(p, q), dot(p, q)); }\ntemplate <class K> CCW ccw(const Point<K>\
+    \ return d * M_PI / 180.0; }\ntemplate <class K> struct Point {\n K x= 0, y= 0;\n\
+    \ Point &operator+=(const Point &p) { return x+= p.x, y+= p.y, *this; }\n Point\
+    \ &operator-=(const Point &p) { return x-= p.x, y-= p.y, *this; }\n Point &operator*=(K\
+    \ a) { return x*= a, y*= a, *this; }\n Point &operator/=(K a) { return x/= a,\
+    \ y/= a, *this; }\n Point operator+(const Point &p) const { return {x + p.x, y\
+    \ + p.y}; }\n Point operator-(const Point &p) const { return {x - p.x, y - p.y};\
+    \ }\n Point operator*(K a) const { return {x * a, y * a}; }\n Point operator/(K\
+    \ a) const { return {x / a, y / a}; }\n friend Point operator*(K a, const Point\
+    \ &p) { return {a * p.x, a * p.y}; }\n Point operator-() const { return {-x, -y};\
+    \ }\n bool operator<(const Point &p) const {\n  int s= sgn(x - p.x);\n  return\
+    \ s ? s < 0 : sgn(y - p.y) < 0;\n }\n bool operator>(const Point &p) const { return\
+    \ p < *this; }\n bool operator<=(const Point &p) const { return !(p < *this);\
+    \ }\n bool operator>=(const Point &p) const { return !(*this < p); }\n bool operator==(const\
+    \ Point &p) const { return !sgn(x - p.x) && !sgn(y - p.y); }\n bool operator!=(const\
+    \ Point &p) const { return sgn(x - p.x) || sgn(y - p.y); }\n Point operator!()\
+    \ const { return {-y, x}; }  // rotate 90 degree\n friend istream &operator>>(istream\
+    \ &is, Point &p) { return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream\
+    \ &os, const Point &p) { return os << \"(\" << p.x << \", \" << p.y << \")\";\
+    \ }\n friend Visualizer &operator<<(Visualizer &vis, const Point &p) { return\
+    \ vis.ofs << p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K\
+    \ dot(const Point<K> &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n\
+    // left turn: > 0, right turn: < 0\ntemplate <class K> K cross(const Point<K>\
+    \ &p, const Point<K> &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K>\
+    \ K norm(const Point<K> &p) { return dot(p, p); }\ntemplate <class K> long double\
+    \ abs(const Point<K> &p) { return sqrt(norm(p)); }\ntemplate <class K> K dist2(const\
+    \ Point<K> &p, const Point<K> &q) { return norm(p - q); }\ntemplate <class T,\
+    \ class U> long double dist(const T &a, const U &b) { return sqrt(dist2(a, b));\
+    \ }\ntemplate <class K> long double angle(const Point<K> &p) { return atan2(p.y,\
+    \ p.x); }\ntemplate <class K> long double angle(const Point<K> &p, const Point<K>\
+    \ &q) { return atan2(cross(p, q), dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE,\
+    \ CLOCKWISE, ONLINE_BACK, ONLINE_FRONT, ON_SEGMENT };\nostream &operator<<(ostream\
+    \ &os, CCW c) { return os << (c == COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" :\
+    \ c == CLOCKWISE ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT\
+    \ ? \"ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K>\
     \ &p0, const Point<K> &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n\
     \ if (int s= sgn(cross(a, b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n\
     \ if (K d= dot(a, b); sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a))\
@@ -172,72 +172,79 @@ data:
     \ };\n if (sgn(dot(t.p - s.p, t.q - s.p)) <= 0) insert_if_possible(s.p);\n if\
     \ (sgn(dot(t.p - s.q, t.q - s.q)) <= 0) insert_if_possible(s.q);\n if (sgn(dot(s.p\
     \ - t.p, s.q - t.p)) <= 0) insert_if_possible(t.p);\n if (sgn(dot(s.p - t.q, s.q\
-    \ - t.q)) <= 0) insert_if_possible(t.q);\n return ps;\n}\ntemplate <class K> K\
-    \ dist2(const Segment<K> &s, const Point<K> &p) { return dist2(p, s.closest_point(p));\
-    \ }\ntemplate <class K> K dist2(const Point<K> &p, const Segment<K> &s) { return\
-    \ dist2(s, p); }\ntemplate <class K> K dist2(const Segment<K> &s, const Line<K>\
-    \ &l) { return cross_points(s, l).size() ? 0 : min(dist2(s.p, l), dist2(s.q, l));\
-    \ }\ntemplate <class K> K dist2(const Line<K> &l, const Segment<K> &s) { return\
-    \ dist2(s, l); }\ntemplate <class K> K dist2(const Segment<K> &s, const Segment<K>\
-    \ &t) { return cross_points(s, t).size() ? 0 : min({dist2(s, t.p), dist2(s, t.q),\
-    \ dist2(t, s.p), dist2(t, s.q)}); }\ntemplate <class K> Segment<K> Affine<K>::operator()(const\
-    \ Segment<K> &s) { return {(*this)(s.p), (*this)(s.q)}; }\n}\n#line 3 \"src/Geometry/Circle.hpp\"\
-    \nnamespace geo {\ntemplate <class R> struct Circle {\n using P= Point<R>;\n P\
-    \ o;\n R r;\n Circle() {}\n Circle(const P &o, R r): o(o), r(r) {}\n long double\
-    \ area() const { return r * r * M_PI; }\n // +1: in, 0: on, -1: out\n int where(const\
-    \ P &p) const { return sgn(r * r - dist2(p, o)); }\n // +1: intersect, 0: contact,\
-    \ -1: disjoint\n int where(const Line<R> &l) const { return sgn(r * r - dist2(l,\
-    \ o)); }\n vector<Line<R>> tangent(const P &p) const {\n  P d= p - o, e= !d;\n\
-    \  R b= norm(d), a= b - r * r;\n  if (int s= sgn(a); s < 0) return {};\n  else\
-    \ if (s == 0) return {{p, e}};\n  d*= r, e*= sqrt(a);\n  return {Line(p, !(d +\
-    \ e)), Line(p, !(d - e))};\n }\n friend ostream &operator<<(ostream &os, const\
-    \ Circle &c) { return os << c.o << \" \" << c.r; }\n friend Visualizer &operator<<(Visualizer\
-    \ &vis, const Circle &c) { return vis.ofs << \"Circle \" << c.o << \" \" << c.r\
-    \ << '\\n', vis; }\n};\n// 2: properly intersect, 1: contact, 0: disjoint, 3:\
-    \ same\ntemplate <class R> vector<Point<R>> cross_points(const Circle<R> &c, const\
-    \ Circle<R> &d) {\n Point v= d.o - c.o;\n R g= norm(v), a= c.r - d.r, b= c.r +\
-    \ d.r;\n if (!sgn(g)) {\n  if (sgn(a)) return {};\n  return {{c.o.x + c.r, c.o.y},\
-    \ {c.o.x - c.r, c.o.y}, {c.o.x, c.o.y + c.r}};\n }\n int in= sgn(g - a * a), out=\
-    \ sgn(g - b * b);\n if (in < 0 || out > 0) return {};\n if (!in) return {(c.r\
-    \ * d.o - d.r * c.o) / a};\n if (!out) return {(c.r * d.o + d.r * c.o) / b};\n\
-    \ R e= (a * b + g) / (g * 2);\n Point q= c.o + e * v, n= !v * sqrt(c.r * c.r /\
-    \ g - e * e);\n return {q + n, q - n};\n}\n// 2: properly intersect, 1: contact,\
-    \ 0: disjoint\ntemplate <class R> vector<Point<R>> cross_points(const Circle<R>\
-    \ &c, const Line<R> &l) {\n Point<R> v= l.p - c.o;\n R a= norm(l.d), b= dot(l.d,\
-    \ v) / a, d= b * b - (norm(v) - c.r * c.r) / a;\n int s= sgn(d);\n if (s < 0)\
-    \ return {};\n if (!s) return {l.p - b * l.d};\n d= sqrt(d);\n return {l.p - (b\
-    \ + d) * l.d, l.p - (b - d) * l.d};\n}\ntemplate <class R> vector<Point<R>> cross_points(const\
-    \ Line<R> &l, const Circle<R> &c) { return cross_points(c, l); }\ntemplate <class\
-    \ R> vector<Point<R>> cross_points(const Circle<R> &c, const Segment<R> &s) {\n\
-    \ Point<R> u= s.q - s.p, v= s.p - c.o;\n R a= norm(u), b= dot(u, v) / a, d= b\
-    \ * b - (norm(v) - c.r * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n\
-    \ if (!t && sgn(b) <= 0 && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d),\
-    \ a= -b - d, b= -b + d;\n vector<Point<R>> ps;\n if (sgn(a) >= 0 && sgn(1 - a)\
-    \ <= 0) ps.emplace_back(s.p + a * u);\n if (sgn(b) >= 0 && sgn(1 - b) <= 0) ps.emplace_back(s.p\
-    \ + b * u);\n return ps;\n}\ntemplate <class R> vector<Point<R>> cross_points(const\
-    \ Segment<R> &s, const Circle<R> &c) { return cross_points(c, s); }\ntemplate\
-    \ <class R> Circle<R> circumscribed_circle(const Point<R> &A, const Point<R> &B,\
-    \ const Point<R> &C) {\n Point u= !(B - A), v= C - A, o= (A + B + dot(C - B, v)\
-    \ / dot(u, v) * u) / 2;\n return {o, dist(A, o)};\n}\ntemplate <class R> Circle<R>\
-    \ inscribed_circle(const Point<R> &A, const Point<R> &B, const Point<R> &C) {\n\
-    \ R a= dist(B, C), b= dist(C, A), c= dist(A, B), s= (a + b + c) / 2;\n return\
-    \ {(a * A + b * B + c * C) / (s * 2), sqrt((s - a) * (s - b) * (s - c) / s)};\n\
-    }\ntemplate <class R> vector<Line<R>> common_tangent(const Circle<R> &c, const\
-    \ Circle<R> &d) {\n Point u= d.o - c.o, v= !u;\n R g= norm(u), b;\n if (!sgn(g))\
-    \ return {};  // same origin\n vector<Line<R>> ls;\n for (R a: {c.r - d.r, c.r\
-    \ + d.r}) {\n  if (int s= sgn(b= g - a * a); !s) ls.emplace_back(Line(c.o + c.r\
-    \ * a / g * u, v));\n  else if (s > 0) {\n   Point x= a / g * u, y= sqrt(b) /\
-    \ g * v, e= x + y, f= x - y;\n   ls.emplace_back(Line(c.o + c.r * e, !e)), ls.emplace_back(Line(c.o\
-    \ + c.r * f, !f));\n  }\n }\n return ls;\n}\n}\n#line 4 \"src/Geometry/min_enclosing_circle.hpp\"\
-    \nnamespace geo {\ntemplate <class R> Circle<R> min_enclosing_circle(vector<Point<R>>\
-    \ ps) {\n assert(ps.size());\n if (ps.size() == 1) return {ps[0], 0.};\n const\
-    \ int n= ps.size();\n for (int i= n; --i;) swap(ps[i], ps[rng(i + 1)]);\n Circle\
-    \ c= {(ps[0] + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n for (int i= 2; i < n; ++i)\n\
-    \  if (c.where(ps[i]) == -1) {\n   c= {(ps[0] + ps[i]) / 2, dist(ps[0], ps[i])\
-    \ / 2};\n   for (int j= 1; j < i; ++j)\n    if (c.where(ps[j]) == -1) {\n    \
-    \ c= {(ps[i] + ps[j]) / 2, dist(ps[i], ps[j]) / 2};\n     for (int k= 0; k < j;\
-    \ ++k)\n      if (c.where(ps[k]) == -1) c= circumscribed_circle(ps[i], ps[j],\
-    \ ps[k]);\n    }\n  }\n return c;\n}\n}\n"
+    \ - t.q)) <= 0) insert_if_possible(t.q);\n return ps;\n}\nenum INTERSECTION {\
+    \ CROSSING, TOUCHING, DISJOINT, OVERLAP };\nostream &operator<<(ostream &os, INTERSECTION\
+    \ i) { return os << (i == CROSSING ? \"CROSSING\" : i == TOUCHING ? \"TOUCHING\"\
+    \ : i == DISJOINT ? \"DISJOINT\" : \"OVERLAP\"); }\ntemplate <class K> INTERSECTION\
+    \ intersection(const Segment<K> &s, const Segment<K> &t) {\n auto cp= cross_points(s,\
+    \ t);\n return cp.size() == 0 ? DISJOINT : cp.size() == 2 ? OVERLAP : cp[0] ==\
+    \ s.p || cp[0] == s.q || cp[0] == t.p || cp[0] == t.q ? TOUCHING : CROSSING;\n\
+    }\ntemplate <class K> K dist2(const Segment<K> &s, const Point<K> &p) { return\
+    \ dist2(p, s.closest_point(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
+    \ const Segment<K> &s) { return dist2(s, p); }\ntemplate <class K> K dist2(const\
+    \ Segment<K> &s, const Line<K> &l) { return cross_points(s, l).size() ? 0 : min(dist2(s.p,\
+    \ l), dist2(s.q, l)); }\ntemplate <class K> K dist2(const Line<K> &l, const Segment<K>\
+    \ &s) { return dist2(s, l); }\ntemplate <class K> K dist2(const Segment<K> &s,\
+    \ const Segment<K> &t) { return cross_points(s, t).size() ? 0 : min({dist2(s,\
+    \ t.p), dist2(s, t.q), dist2(t, s.p), dist2(t, s.q)}); }\ntemplate <class K> Segment<K>\
+    \ Affine<K>::operator()(const Segment<K> &s) { return {(*this)(s.p), (*this)(s.q)};\
+    \ }\n}\n#line 3 \"src/Geometry/Circle.hpp\"\nnamespace geo {\ntemplate <class\
+    \ R> struct Circle {\n using P= Point<R>;\n P o;\n R r;\n Circle() {}\n Circle(const\
+    \ P &o, R r): o(o), r(r) {}\n long double area() const { return r * r * M_PI;\
+    \ }\n // +1: in, 0: on, -1: out\n int where(const P &p) const { return sgn(r *\
+    \ r - dist2(p, o)); }\n // +1: intersect, 0: contact, -1: disjoint\n int where(const\
+    \ Line<R> &l) const { return sgn(r * r - dist2(l, o)); }\n vector<Line<R>> tangent(const\
+    \ P &p) const {\n  P d= p - o, e= !d;\n  R b= norm(d), a= b - r * r;\n  if (int\
+    \ s= sgn(a); s < 0) return {};\n  else if (s == 0) return {{p, e}};\n  d*= r,\
+    \ e*= sqrt(a);\n  return {Line(p, !(d + e)), Line(p, !(d - e))};\n }\n friend\
+    \ ostream &operator<<(ostream &os, const Circle &c) { return os << c.o << \" \"\
+    \ << c.r; }\n friend Visualizer &operator<<(Visualizer &vis, const Circle &c)\
+    \ { return vis.ofs << \"Circle \" << c.o << \" \" << c.r << '\\n', vis; }\n};\n\
+    // 2: properly intersect, 1: contact, 0: disjoint, 3: same\ntemplate <class R>\
+    \ vector<Point<R>> cross_points(const Circle<R> &c, const Circle<R> &d) {\n Point\
+    \ v= d.o - c.o;\n R g= norm(v), a= c.r - d.r, b= c.r + d.r;\n if (!sgn(g)) {\n\
+    \  if (sgn(a)) return {};\n  return {{c.o.x + c.r, c.o.y}, {c.o.x - c.r, c.o.y},\
+    \ {c.o.x, c.o.y + c.r}};\n }\n int in= sgn(g - a * a), out= sgn(g - b * b);\n\
+    \ if (in < 0 || out > 0) return {};\n if (!in) return {(c.r * d.o - d.r * c.o)\
+    \ / a};\n if (!out) return {(c.r * d.o + d.r * c.o) / b};\n R e= (a * b + g) /\
+    \ (g * 2);\n Point q= c.o + e * v, n= !v * sqrt(c.r * c.r / g - e * e);\n return\
+    \ {q + n, q - n};\n}\n// 2: properly intersect, 1: contact, 0: disjoint\ntemplate\
+    \ <class R> vector<Point<R>> cross_points(const Circle<R> &c, const Line<R> &l)\
+    \ {\n Point<R> v= l.p - c.o;\n R a= norm(l.d), b= dot(l.d, v) / a, d= b * b -\
+    \ (norm(v) - c.r * c.r) / a;\n int s= sgn(d);\n if (s < 0) return {};\n if (!s)\
+    \ return {l.p - b * l.d};\n d= sqrt(d);\n return {l.p - (b + d) * l.d, l.p - (b\
+    \ - d) * l.d};\n}\ntemplate <class R> vector<Point<R>> cross_points(const Line<R>\
+    \ &l, const Circle<R> &c) { return cross_points(c, l); }\ntemplate <class R> vector<Point<R>>\
+    \ cross_points(const Circle<R> &c, const Segment<R> &s) {\n Point<R> u= s.q -\
+    \ s.p, v= s.p - c.o;\n R a= norm(u), b= dot(u, v) / a, d= b * b - (norm(v) - c.r\
+    \ * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n if (!t && sgn(b) <= 0\
+    \ && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d), a= -b - d, b= -b + d;\n\
+    \ vector<Point<R>> ps;\n if (sgn(a) >= 0 && sgn(1 - a) <= 0) ps.emplace_back(s.p\
+    \ + a * u);\n if (sgn(b) >= 0 && sgn(1 - b) <= 0) ps.emplace_back(s.p + b * u);\n\
+    \ return ps;\n}\ntemplate <class R> vector<Point<R>> cross_points(const Segment<R>\
+    \ &s, const Circle<R> &c) { return cross_points(c, s); }\ntemplate <class R> Circle<R>\
+    \ circumscribed_circle(const Point<R> &A, const Point<R> &B, const Point<R> &C)\
+    \ {\n Point u= !(B - A), v= C - A, o= (A + B + dot(C - B, v) / dot(u, v) * u)\
+    \ / 2;\n return {o, dist(A, o)};\n}\ntemplate <class R> Circle<R> inscribed_circle(const\
+    \ Point<R> &A, const Point<R> &B, const Point<R> &C) {\n R a= dist(B, C), b= dist(C,\
+    \ A), c= dist(A, B), s= (a + b + c) / 2;\n return {(a * A + b * B + c * C) / (s\
+    \ * 2), sqrt((s - a) * (s - b) * (s - c) / s)};\n}\ntemplate <class R> vector<Line<R>>\
+    \ common_tangent(const Circle<R> &c, const Circle<R> &d) {\n Point u= d.o - c.o,\
+    \ v= !u;\n R g= norm(u), b;\n if (!sgn(g)) return {};  // same origin\n vector<Line<R>>\
+    \ ls;\n for (R a: {c.r - d.r, c.r + d.r}) {\n  if (int s= sgn(b= g - a * a); !s)\
+    \ ls.emplace_back(Line(c.o + c.r * a / g * u, v));\n  else if (s > 0) {\n   Point\
+    \ x= a / g * u, y= sqrt(b) / g * v, e= x + y, f= x - y;\n   ls.emplace_back(Line(c.o\
+    \ + c.r * e, !e)), ls.emplace_back(Line(c.o + c.r * f, !f));\n  }\n }\n return\
+    \ ls;\n}\n}\n#line 4 \"src/Geometry/min_enclosing_circle.hpp\"\nnamespace geo\
+    \ {\ntemplate <class R> Circle<R> min_enclosing_circle(vector<Point<R>> ps) {\n\
+    \ assert(ps.size());\n if (ps.size() == 1) return {ps[0], 0.};\n const int n=\
+    \ ps.size();\n for (int i= n; --i;) swap(ps[i], ps[rng(i + 1)]);\n Circle c= {(ps[0]\
+    \ + ps[1]) / 2, dist(ps[0], ps[1]) / 2};\n for (int i= 2; i < n; ++i)\n  if (c.where(ps[i])\
+    \ == -1) {\n   c= {(ps[0] + ps[i]) / 2, dist(ps[0], ps[i]) / 2};\n   for (int\
+    \ j= 1; j < i; ++j)\n    if (c.where(ps[j]) == -1) {\n     c= {(ps[i] + ps[j])\
+    \ / 2, dist(ps[i], ps[j]) / 2};\n     for (int k= 0; k < j; ++k)\n      if (c.where(ps[k])\
+    \ == -1) c= circumscribed_circle(ps[i], ps[j], ps[k]);\n    }\n  }\n return c;\n\
+    }\n}\n"
   code: "#pragma once\n#include \"src/Misc/rng.hpp\"\n#include \"src/Geometry/Circle.hpp\"\
     \nnamespace geo {\ntemplate <class R> Circle<R> min_enclosing_circle(vector<Point<R>>\
     \ ps) {\n assert(ps.size());\n if (ps.size() == 1) return {ps[0], 0.};\n const\
@@ -257,7 +264,7 @@ data:
   isVerificationFile: false
   path: src/Geometry/min_enclosing_circle.hpp
   requiredBy: []
-  timestamp: '2023-09-19 22:38:57+09:00'
+  timestamp: '2023-09-20 15:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/3034.test.cpp

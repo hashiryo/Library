@@ -39,27 +39,27 @@ data:
     \ 1 };\n#line 6 \"src/Optimization/golden_search.hpp\"\n// [l,r]\ntemplate <MinMaxEnum\
     \ obj, class F> std::pair<long double, result_type_t<F>> golden_search(const F\
     \ &f, long double l, long double r, int iter= 100) {\n static constexpr long double\
-    \ c= 2 / (3 + std::sqrt(5));\n assert(l <= r);\n long double x= l + (r - l) *\
-    \ c, y= r - (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool g;\
-    \ iter--;) {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx > fy;\n\
-    \  if (g) r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x= y, fx=\
-    \ fy, fy= f(y= r - (r - l) * c);\n }\n return {x, fx};\n}\n"
+    \ c= 2 / (3 + std::sqrt(5.0l));\n assert(l <= r);\n long double x= l + (r - l)\
+    \ * c, y= r - (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool\
+    \ g; iter--;) {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx >\
+    \ fy;\n  if (g) r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x=\
+    \ y, fx= fy, fy= f(y= r - (r - l) * c);\n }\n return {x, fx};\n}\n"
   code: "#pragma once\n#include <cmath>\n#include <cassert>\n#include \"src/Internal/function_type.hpp\"\
     \n#include \"src/Optimization/MinMaxEnum.hpp\"\n// [l,r]\ntemplate <MinMaxEnum\
     \ obj, class F> std::pair<long double, result_type_t<F>> golden_search(const F\
     \ &f, long double l, long double r, int iter= 100) {\n static constexpr long double\
-    \ c= 2 / (3 + std::sqrt(5));\n assert(l <= r);\n long double x= l + (r - l) *\
-    \ c, y= r - (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool g;\
-    \ iter--;) {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx > fy;\n\
-    \  if (g) r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x= y, fx=\
-    \ fy, fy= f(y= r - (r - l) * c);\n }\n return {x, fx};\n}"
+    \ c= 2 / (3 + std::sqrt(5.0l));\n assert(l <= r);\n long double x= l + (r - l)\
+    \ * c, y= r - (r - l) * c;\n result_type_t<F> fx= f(x), fy= f(y);\n for (bool\
+    \ g; iter--;) {\n  if constexpr (obj == MINIMIZE) g= fx < fy;\n  else g= fx >\
+    \ fy;\n  if (g) r= y, y= x, fy= fx, fx= f(x= l + (r - l) * c);\n  else l= x, x=\
+    \ y, fx= fy, fy= f(y= r - (r - l) * c);\n }\n return {x, fx};\n}"
   dependsOn:
   - src/Internal/function_type.hpp
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: false
   path: src/Optimization/golden_search.hpp
   requiredBy: []
-  timestamp: '2023-09-19 22:38:57+09:00'
+  timestamp: '2023-09-20 15:31:03+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2972.test.cpp
