@@ -8,7 +8,7 @@ data:
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
   - icon: ':question:'
@@ -17,7 +17,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: src/Geometry/Polygon.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/intersection_area.hpp
     title: src/Geometry/intersection_area.hpp
   - icon: ':heavy_check_mark:'
@@ -28,9 +28,12 @@ data:
     path: test/aoj/0253.test.cpp
     title: test/aoj/0253.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0265.test.cpp
+    title: test/aoj/0265.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
   - icon: ':heavy_check_mark:'
@@ -39,10 +42,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1171.test.cpp
     title: test/aoj/1171.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1183.test.cpp
     title: test/aoj/1183.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1190.test.cpp
     title: test/aoj/1190.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,7 +54,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1242.rational.test.cpp
     title: test/aoj/1242.rational.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1342.test.cpp
     title: test/aoj/1342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -66,7 +69,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2009.rational.test.cpp
     title: test/aoj/2009.rational.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2201.test.cpp
     title: test/aoj/2201.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,31 +120,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_4_C.test.cpp
     title: test/aoj/CGL_4_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_B.test.cpp
     title: test/aoj/CGL_7_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_C.test.cpp
     title: test/aoj/CGL_7_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_D.test.cpp
     title: test/aoj/CGL_7_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_E.test.cpp
     title: test/aoj/CGL_7_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_F.test.cpp
     title: test/aoj/CGL_7_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_G.test.cpp
     title: test/aoj/CGL_7_G.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_H.test.cpp
     title: test/aoj/CGL_7_H.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
   _isVerificationFailed: true
@@ -186,10 +189,10 @@ data:
     \ << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K> &p, const\
     \ Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn:\
     \ < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K> &q) { return\
-    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm(const Point<K> &p) { return\
-    \ dot(p, p); }\ntemplate <class K> long double abs(const Point<K> &p) { return\
-    \ sqrt(norm(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
-    \ &q) { return norm(p - q); }\ntemplate <class T, class U> long double dist(const\
+    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K> &p) { return\
+    \ dot(p, p); }\ntemplate <class K> long double norm(const Point<K> &p) { return\
+    \ sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
+    \ &q) { return norm2(p - q); }\ntemplate <class T, class U> long double dist(const\
     \ T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate <class K> long double\
     \ angle(const Point<K> &p) { return atan2(p.y, p.x); }\ntemplate <class K> long\
     \ double angle(const Point<K> &p, const Point<K> &q) { return atan2(cross(p, q),\
@@ -200,7 +203,7 @@ data:
     \ \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
     \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
     \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
-    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a)) > 0 ? ONLINE_FRONT\
+    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT\
     \ : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate <class K> struct\
     \ Segment;\ntemplate <class K> struct Circle;\ntemplate <class K> struct Polygon;\n\
     template <class K> struct Convex;\ntemplate <class K> struct Affine {\n K a00=\
@@ -220,7 +223,7 @@ data:
     }\ntemplate <class K> Affine<K> rotate90(const Point<K> &p) { return {0, -1, 1,\
     \ 0, p - !p}; }\n}\n#line 4 \"src/Geometry/Line.hpp\"\nnamespace geo {\ntemplate\
     \ <class K> struct Line {\n using P= Point<K>;\n P p, d;  // p+td\n Line() {}\n\
-    \ // p + td\n Line(const P &p, const P &d): p(p), d(d) { assert(sgn(norm(d)));\
+    \ // p + td\n Line(const P &p, const P &d): p(p), d(d) { assert(sgn(norm2(d)));\
     \ }\n // ax+by+c=0 ................. ax+by+c>0: left, ax+by+c=0: on, ax+by+c<0:\
     \ right\n Line(K a, K b, K c) {\n  int sa= sgn(a), sb= sgn(b);\n  assert(sa ||\
     \ sb);\n  if (sb) p= {0, -c / b}, d= sb > 0 ? P{1, -a / b} : P{-1, a / b};\n \
@@ -228,7 +231,7 @@ data:
     \ Line &l) const { return !sgn(cross(d, l.d)) && !where(l.p); }\n bool operator!=(const\
     \ Line &l) const { return sgn(cross(d, l.d)) || where(l.p); }\n // +1: left, 0:\
     \ on, -1: right\n int where(const P &q) const { return sgn(cross(d, q - p)); }\n\
-    \ P project(const P &q) const { return p + dot(q - p, d) / norm(d) * d; }\n //\
+    \ P project(const P &q) const { return p + dot(q - p, d) / norm2(d) * d; }\n //\
     \ return  a,b,c of ax+by+c=0\n tuple<K, K, K> coef() const { return make_tuple(-d.y,\
     \ d.x, cross(p, d)); }\n friend ostream &operator<<(ostream &os, const Line &l)\
     \ { return os << l.p << \" + t\" << l.d; }\n friend Visualizer &operator<<(Visualizer\
@@ -248,9 +251,9 @@ data:
     \ q) / 2, !(q - p)); }\n// angle bisector ........... parallel -> 1 line, non-parallel\
     \ -> 2 lines\ntemplate <class K> vector<Line<K>> bisector(const Line<K> &l, const\
     \ Line<K> &m) {\n auto cp= cross_points(l, m);\n if (cp.size() != 1) return {Line((l.p\
-    \ + m.p) / 2, l.d)};\n auto d= l.d / abs(l.d) + m.d / abs(m.d);\n return {Line(cp[0],\
+    \ + m.p) / 2, l.d)};\n auto d= l.d / norm(l.d) + m.d / norm(m.d);\n return {Line(cp[0],\
     \ d), Line(cp[0], !d)};\n}\ntemplate <class K> K dist2(const Line<K> &l, const\
-    \ Point<K> &p) {\n K a= cross(l.d, p - l.p);\n return a * a / norm(l.d);\n}\n\
+    \ Point<K> &p) {\n K a= cross(l.d, p - l.p);\n return a * a / norm2(l.d);\n}\n\
     template <class K> K dist2(const Point<K> &p, const Line<K> &l) { return dist2(l,\
     \ p); }\ntemplate <class K> K dist2(const Line<K> &l, const Line<K> &m) { return\
     \ is_parallel(l, m) ? dist2(l, m.p) : 0; }\ntemplate <class K> long double angle(const\
@@ -269,7 +272,7 @@ data:
     \ return ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q :\
     \ p; }\n const P &operator[](int i) const { return i ? q : p; }\n long double\
     \ length() const { return dist(p, q); }\n P closest_point(const P &r) const {\n\
-    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm(d)))\
+    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
     \ < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream &os, const\
     \ Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer &operator<<(Visualizer\
     \ &vis, const Segment &s) { return vis.ofs << \"Segment \" << s.p1 << \" \" <<\
@@ -319,7 +322,7 @@ data:
     \ return ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q :\
     \ p; }\n const P &operator[](int i) const { return i ? q : p; }\n long double\
     \ length() const { return dist(p, q); }\n P closest_point(const P &r) const {\n\
-    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm(d)))\
+    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
     \ < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream &os, const\
     \ Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer &operator<<(Visualizer\
     \ &vis, const Segment &s) { return vis.ofs << \"Segment \" << s.p1 << \" \" <<\
@@ -371,7 +374,7 @@ data:
   - src/Geometry/Polygon.hpp
   - src/Geometry/min_enclosing_circle.hpp
   - src/Geometry/Circle.hpp
-  timestamp: '2023-09-20 20:25:45+09:00'
+  timestamp: '2023-09-21 16:13:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/CGL_2_D.test.cpp
@@ -380,6 +383,7 @@ data:
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_4_B.test.cpp
+  - test/aoj/0265.test.cpp
   - test/aoj/0253.test.cpp
   - test/aoj/1242.longdouble.test.cpp
   - test/aoj/CGL_4_A.test.cpp

@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/Polar.hpp
     title: src/Geometry/Polar.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
@@ -54,10 +54,10 @@ data:
     \ p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K>\
     \ &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0,\
     \ right turn: < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K>\
-    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm(const Point<K>\
-    \ &p) { return dot(p, p); }\ntemplate <class K> long double abs(const Point<K>\
-    \ &p) { return sqrt(norm(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
-    \ const Point<K> &q) { return norm(p - q); }\ntemplate <class T, class U> long\
+    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K>\
+    \ &p) { return dot(p, p); }\ntemplate <class K> long double norm(const Point<K>\
+    \ &p) { return sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
+    \ const Point<K> &q) { return norm2(p - q); }\ntemplate <class T, class U> long\
     \ double dist(const T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate\
     \ <class K> long double angle(const Point<K> &p) { return atan2(p.y, p.x); }\n\
     template <class K> long double angle(const Point<K> &p, const Point<K> &q) { return\
@@ -68,7 +68,7 @@ data:
     \ : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
     \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
     \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
-    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a)) > 0 ? ONLINE_FRONT\
+    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT\
     \ : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate <class K> struct\
     \ Segment;\ntemplate <class K> struct Circle;\ntemplate <class K> struct Polygon;\n\
     template <class K> struct Convex;\ntemplate <class K> struct Affine {\n K a00=\
@@ -110,8 +110,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2023-09-21 00:43:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-09-21 16:13:43+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sort_points_by_argument.test.cpp
 layout: document

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
   - icon: ':question:'
@@ -14,7 +14,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/Line.hpp
     title: src/Geometry/Line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/Polar.hpp
     title: src/Geometry/Polar.hpp
   - icon: ':question:'
@@ -26,7 +26,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/closest_pair.hpp
     title: src/Geometry/closest_pair.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Geometry/intersection_area.hpp
     title: src/Geometry/intersection_area.hpp
   - icon: ':heavy_check_mark:'
@@ -37,9 +37,15 @@ data:
     path: test/aoj/0253.test.cpp
     title: test/aoj/0253.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0265.test.cpp
+    title: test/aoj/0265.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/0269.test.cpp
+    title: test/aoj/0269.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,10 +54,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1171.test.cpp
     title: test/aoj/1171.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1183.test.cpp
     title: test/aoj/1183.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1190.test.cpp
     title: test/aoj/1190.test.cpp
   - icon: ':heavy_check_mark:'
@@ -60,7 +66,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1242.rational.test.cpp
     title: test/aoj/1242.rational.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1342.test.cpp
     title: test/aoj/1342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -81,7 +87,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2159.rational.test.cpp
     title: test/aoj/2159.rational.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2201.test.cpp
     title: test/aoj/2201.test.cpp
   - icon: ':heavy_check_mark:'
@@ -93,7 +99,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2423.test.cpp
     title: test/aoj/2423.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2442.test.cpp
     title: test/aoj/2442.test.cpp
   - icon: ':heavy_check_mark:'
@@ -114,7 +120,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3049.test.cpp
     title: test/aoj/3049.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3056.test.cpp
     title: test/aoj/3056.test.cpp
   - icon: ':heavy_check_mark:'
@@ -159,34 +165,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_5_A.test.cpp
     title: test/aoj/CGL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_B.test.cpp
     title: test/aoj/CGL_7_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_C.test.cpp
     title: test/aoj/CGL_7_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_D.test.cpp
     title: test/aoj/CGL_7_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_E.test.cpp
     title: test/aoj/CGL_7_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_F.test.cpp
     title: test/aoj/CGL_7_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_G.test.cpp
     title: test/aoj/CGL_7_G.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_H.test.cpp
     title: test/aoj/CGL_7_H.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sort_points_by_argument.test.cpp
     title: test/yosupo/sort_points_by_argument.test.cpp
   _isVerificationFailed: true
@@ -229,10 +235,10 @@ data:
     \ p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K>\
     \ &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0,\
     \ right turn: < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K>\
-    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm(const Point<K>\
-    \ &p) { return dot(p, p); }\ntemplate <class K> long double abs(const Point<K>\
-    \ &p) { return sqrt(norm(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
-    \ const Point<K> &q) { return norm(p - q); }\ntemplate <class T, class U> long\
+    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K>\
+    \ &p) { return dot(p, p); }\ntemplate <class K> long double norm(const Point<K>\
+    \ &p) { return sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
+    \ const Point<K> &q) { return norm2(p - q); }\ntemplate <class T, class U> long\
     \ double dist(const T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate\
     \ <class K> long double angle(const Point<K> &p) { return atan2(p.y, p.x); }\n\
     template <class K> long double angle(const Point<K> &p, const Point<K> &q) { return\
@@ -243,7 +249,7 @@ data:
     \ : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
     \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
     \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
-    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a)) > 0 ? ONLINE_FRONT\
+    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT\
     \ : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate <class K> struct\
     \ Segment;\ntemplate <class K> struct Circle;\ntemplate <class K> struct Polygon;\n\
     template <class K> struct Convex;\ntemplate <class K> struct Affine {\n K a00=\
@@ -297,10 +303,10 @@ data:
     \ << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K> &p, const\
     \ Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn:\
     \ < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K> &q) { return\
-    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm(const Point<K> &p) { return\
-    \ dot(p, p); }\ntemplate <class K> long double abs(const Point<K> &p) { return\
-    \ sqrt(norm(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
-    \ &q) { return norm(p - q); }\ntemplate <class T, class U> long double dist(const\
+    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K> &p) { return\
+    \ dot(p, p); }\ntemplate <class K> long double norm(const Point<K> &p) { return\
+    \ sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
+    \ &q) { return norm2(p - q); }\ntemplate <class T, class U> long double dist(const\
     \ T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate <class K> long double\
     \ angle(const Point<K> &p) { return atan2(p.y, p.x); }\ntemplate <class K> long\
     \ double angle(const Point<K> &p, const Point<K> &q) { return atan2(cross(p, q),\
@@ -311,7 +317,7 @@ data:
     \ \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
     \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
     \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
-    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm(a)) > 0 ? ONLINE_FRONT\
+    \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT\
     \ : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate <class K> struct\
     \ Segment;\ntemplate <class K> struct Circle;\ntemplate <class K> struct Polygon;\n\
     template <class K> struct Convex;\ntemplate <class K> struct Affine {\n K a00=\
@@ -344,7 +350,7 @@ data:
   - src/Geometry/min_enclosing_circle.hpp
   - src/Geometry/Circle.hpp
   - src/Geometry/Segment.hpp
-  timestamp: '2023-09-20 18:34:32+09:00'
+  timestamp: '2023-09-21 16:13:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/CGL_2_D.test.cpp
@@ -354,6 +360,7 @@ data:
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/CGL_7_A.test.cpp
   - test/aoj/CGL_4_B.test.cpp
+  - test/aoj/0265.test.cpp
   - test/aoj/CGL_5_A.test.cpp
   - test/aoj/0253.test.cpp
   - test/aoj/1242.longdouble.test.cpp
@@ -373,6 +380,7 @@ data:
   - test/aoj/2442.test.cpp
   - test/aoj/CGL_7_G.test.cpp
   - test/aoj/CGL_1_A.test.cpp
+  - test/aoj/0269.test.cpp
   - test/aoj/CGL_7_C.test.cpp
   - test/aoj/CGL_7_I.test.cpp
   - test/aoj/1132.test.cpp

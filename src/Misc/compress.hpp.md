@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0265.test.cpp
+    title: test/aoj/0265.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0655.test.cpp
     title: test/aoj/0655.test.cpp
   - icon: ':heavy_check_mark:'
@@ -64,6 +67,7 @@ data:
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/1467.test.cpp
   - test/yukicoder/649.BIT.test.cpp
+  - test/aoj/0265.test.cpp
   - test/aoj/2893.test.cpp
   - test/aoj/0655.test.cpp
   - test/aoj/2514.test.cpp
