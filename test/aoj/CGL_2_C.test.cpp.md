@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Line.hpp
     title: src/Geometry/Line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Segment.hpp
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy: []
@@ -138,11 +138,11 @@ data:
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
     \ (p == s.p && q == s.q) || (p == s.q && q == s.p); }\n bool operator!=(const\
-    \ Segment &s) const { return !(*this == s); }\n bool is_on(const P &r) const {\
-    \ return ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q :\
-    \ p; }\n const P &operator[](int i) const { return i ? q : p; }\n long double\
-    \ length() const { return dist(p, q); }\n P closest_point(const P &r) const {\n\
-    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
+    \ Segment &s) const { return !(*this == s); }\n bool on(const P &r) const { return\
+    \ ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q : p; }\n\
+    \ const P &operator[](int i) const { return i ? q : p; }\n long double length()\
+    \ const { return dist(p, q); }\n P closest_point(const P &r) const {\n  P d= q\
+    \ - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
     \ < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream &os, const\
     \ Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer &operator<<(Visualizer\
     \ &vis, const Segment &s) { return vis.ofs << \"Segment \" << s.p1 << \" \" <<\
@@ -201,7 +201,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_2_C.test.cpp
   requiredBy: []
-  timestamp: '2023-09-21 16:13:43+09:00'
+  timestamp: '2023-09-21 23:45:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/CGL_2_C.test.cpp

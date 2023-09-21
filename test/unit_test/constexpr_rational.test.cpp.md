@@ -9,9 +9,9 @@ data:
     title: Binary GCD
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -72,13 +72,12 @@ data:
     \ -num : num, den); }\n constexpr friend Int floor(const Rational &r) { return\
     \ r.floor(); }\n constexpr friend Int ceil(const Rational &r) { return r.ceil();\
     \ }\n constexpr friend Rational abs(const Rational &r) { return r.abs(); }\n std::string\
-    \ to_string(bool frac_force= false) const {\n  if (!num) return frac_force ? \"\
-    0/1\" : \"0\";\n  std::stringstream ss;\n  if (!frac_force && den == 1) return\
-    \ ss << num, ss.str();\n  return ss << num << \"/\" << den, ss.str();\n }\n friend\
-    \ std::istream &operator>>(std::istream &is, Rational &r) {\n  std::string s;\n\
-    \  if (is >> s; s != \"\") r= Rational(s);\n  return is;\n }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const Rational &r) { return os << r.to_string();\
-    \ }\n};\ntemplate <class Int, bool reduction> struct std::numeric_limits<Rational<Int,\
+    \ to_string() const {\n  if (!num) return \"0\";\n  std::stringstream ss;\n  if\
+    \ (den == 1) return ss << num, ss.str();\n  return ss << num << \"/\" << den,\
+    \ ss.str();\n }\n friend std::istream &operator>>(std::istream &is, Rational &r)\
+    \ {\n  std::string s;\n  if (is >> s; s != \"\") r= Rational(s);\n  return is;\n\
+    \ }\n friend std::ostream &operator<<(std::ostream &os, const Rational &r) { return\
+    \ os << r.to_string(); }\n};\ntemplate <class Int, bool reduction> struct std::numeric_limits<Rational<Int,\
     \ reduction>> {\n static constexpr Rational<Int, reduction> max() noexcept { return\
     \ Rational<Int, reduction>(1, 0); }\n static constexpr Rational<Int, reduction>\
     \ min() noexcept { return Rational<Int, reduction>(1, std::numeric_limits<Int>::max());\
@@ -107,8 +106,8 @@ data:
   isVerificationFile: true
   path: test/unit_test/constexpr_rational.test.cpp
   requiredBy: []
-  timestamp: '2023-09-19 22:38:57+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-09-21 23:45:18+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/constexpr_rational.test.cpp
 layout: document

@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Line.hpp
     title: src/Geometry/Line.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
   - icon: ':heavy_check_mark:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: src/Geometry/Polygon.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/intersection_area.hpp
     title: src/Geometry/intersection_area.hpp
   - icon: ':heavy_check_mark:'
@@ -27,12 +27,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0253.test.cpp
     title: test/aoj/0253.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/0265.test.cpp
     title: test/aoj/0265.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0356.test.cpp
+    title: test/aoj/0356.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0375.test.cpp
+    title: test/aoj/0375.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
@@ -81,7 +87,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2423.test.cpp
     title: test/aoj/2423.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
   - icon: ':heavy_check_mark:'
@@ -147,9 +153,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
@@ -268,11 +274,11 @@ data:
     \ P p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n //\
     \ do not consider the direction\n bool operator==(const Segment &s) const { return\
     \ (p == s.p && q == s.q) || (p == s.q && q == s.p); }\n bool operator!=(const\
-    \ Segment &s) const { return !(*this == s); }\n bool is_on(const P &r) const {\
-    \ return ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q :\
-    \ p; }\n const P &operator[](int i) const { return i ? q : p; }\n long double\
-    \ length() const { return dist(p, q); }\n P closest_point(const P &r) const {\n\
-    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
+    \ Segment &s) const { return !(*this == s); }\n bool on(const P &r) const { return\
+    \ ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q : p; }\n\
+    \ const P &operator[](int i) const { return i ? q : p; }\n long double length()\
+    \ const { return dist(p, q); }\n P closest_point(const P &r) const {\n  P d= q\
+    \ - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
     \ < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream &os, const\
     \ Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer &operator<<(Visualizer\
     \ &vis, const Segment &s) { return vis.ofs << \"Segment \" << s.p1 << \" \" <<\
@@ -318,11 +324,11 @@ data:
     \ p, q;\n Segment() {}\n Segment(const P &p, const P &q): p(p), q(q) {}\n // do\
     \ not consider the direction\n bool operator==(const Segment &s) const { return\
     \ (p == s.p && q == s.q) || (p == s.q && q == s.p); }\n bool operator!=(const\
-    \ Segment &s) const { return !(*this == s); }\n bool is_on(const P &r) const {\
-    \ return ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q :\
-    \ p; }\n const P &operator[](int i) const { return i ? q : p; }\n long double\
-    \ length() const { return dist(p, q); }\n P closest_point(const P &r) const {\n\
-    \  P d= q - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
+    \ Segment &s) const { return !(*this == s); }\n bool on(const P &r) const { return\
+    \ ccw(p, q, r) == ON_SEGMENT; }\n P &operator[](int i) { return i ? q : p; }\n\
+    \ const P &operator[](int i) const { return i ? q : p; }\n long double length()\
+    \ const { return dist(p, q); }\n P closest_point(const P &r) const {\n  P d= q\
+    \ - p;\n  K a= dot(r - p, d), b;\n  return sgn(a) > 0 ? sgn(a - (b= norm2(d)))\
     \ < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream &os, const\
     \ Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer &operator<<(Visualizer\
     \ &vis, const Segment &s) { return vis.ofs << \"Segment \" << s.p1 << \" \" <<\
@@ -374,8 +380,8 @@ data:
   - src/Geometry/Polygon.hpp
   - src/Geometry/min_enclosing_circle.hpp
   - src/Geometry/Circle.hpp
-  timestamp: '2023-09-21 16:13:43+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-09-21 23:45:18+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/CGL_2_D.test.cpp
   - test/aoj/1183.test.cpp
@@ -395,10 +401,12 @@ data:
   - test/aoj/CGL_7_D.test.cpp
   - test/aoj/1242.rational.test.cpp
   - test/aoj/1190.test.cpp
+  - test/aoj/0375.test.cpp
   - test/aoj/CGL_3_A.test.cpp
   - test/aoj/CGL_7_H.test.cpp
   - test/aoj/CGL_7_G.test.cpp
   - test/aoj/CGL_7_C.test.cpp
+  - test/aoj/0356.test.cpp
   - test/aoj/CGL_7_I.test.cpp
   - test/aoj/1132.test.cpp
   - test/aoj/2201.test.cpp
