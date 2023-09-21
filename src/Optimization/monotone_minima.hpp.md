@@ -9,15 +9,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
     title: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/913.test.cpp
     title: test/yukicoder/913.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/952.test.cpp
     title: test/yukicoder/952.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/monotone_minima.hpp\"\n#include <vector>\n\
@@ -40,7 +40,7 @@ data:
   path: src/Optimization/monotone_minima.hpp
   requiredBy: []
   timestamp: '2023-08-17 22:34:53+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/952.test.cpp
   - test/yukicoder/913.test.cpp

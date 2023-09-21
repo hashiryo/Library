@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Line.hpp
     title: src/Geometry/Line.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Point.hpp
     title: src/Geometry/Point.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Segment.hpp
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
@@ -191,7 +191,7 @@ data:
     \ }\n // +1: in, 0: on, -1: out\n int where(const P &p) const { return sgn(r *\
     \ r - dist2(p, o)); }\n // +1: intersect, 0: contact, -1: disjoint\n int where(const\
     \ Line<R> &l) const { return sgn(r * r - dist2(l, o)); }\n vector<Line<R>> tangent(const\
-    \ P &p) const {\n  P d= p - o, e= !d;\n  R b= norm(d), a= b - r * r;\n  if (int\
+    \ P &p) const {\n  P d= p - o, e= !d;\n  R b= norm2(d), a= b - r * r;\n  if (int\
     \ s= sgn(a); s < 0) return {};\n  else if (s == 0) return {{p, e}};\n  d*= r,\
     \ e*= sqrt(a);\n  return {Line(p, !(d + e)), Line(p, !(d - e))};\n }\n friend\
     \ ostream &operator<<(ostream &os, const Circle &c) { return os << c.o << \" \"\
@@ -199,7 +199,7 @@ data:
     \ { return vis.ofs << \"Circle \" << c.o << \" \" << c.r << '\\n', vis; }\n};\n\
     // 2: properly intersect, 1: contact, 0: disjoint, 3: same\ntemplate <class R>\
     \ vector<Point<R>> cross_points(const Circle<R> &c, const Circle<R> &d) {\n Point\
-    \ v= d.o - c.o;\n R g= norm(v), a= c.r - d.r, b= c.r + d.r;\n if (!sgn(g)) {\n\
+    \ v= d.o - c.o;\n R g= norm2(v), a= c.r - d.r, b= c.r + d.r;\n if (!sgn(g)) {\n\
     \  if (sgn(a)) return {};\n  return {{c.o.x + c.r, c.o.y}, {c.o.x - c.r, c.o.y},\
     \ {c.o.x, c.o.y + c.r}};\n }\n int in= sgn(g - a * a), out= sgn(g - b * b);\n\
     \ if (in < 0 || out > 0) return {};\n if (!in) return {(c.r * d.o - d.r * c.o)\
@@ -207,16 +207,16 @@ data:
     \ (g * 2);\n Point q= c.o + e * v, n= !v * sqrt(c.r * c.r / g - e * e);\n return\
     \ {q + n, q - n};\n}\n// 2: properly intersect, 1: contact, 0: disjoint\ntemplate\
     \ <class R> vector<Point<R>> cross_points(const Circle<R> &c, const Line<R> &l)\
-    \ {\n Point<R> v= l.p - c.o;\n R a= norm(l.d), b= dot(l.d, v) / a, d= b * b -\
-    \ (norm(v) - c.r * c.r) / a;\n int s= sgn(d);\n if (s < 0) return {};\n if (!s)\
+    \ {\n Point<R> v= l.p - c.o;\n R a= norm2(l.d), b= dot(l.d, v) / a, d= b * b -\
+    \ (norm2(v) - c.r * c.r) / a;\n int s= sgn(d);\n if (s < 0) return {};\n if (!s)\
     \ return {l.p - b * l.d};\n d= sqrt(d);\n return {l.p - (b + d) * l.d, l.p - (b\
     \ - d) * l.d};\n}\ntemplate <class R> vector<Point<R>> cross_points(const Line<R>\
     \ &l, const Circle<R> &c) { return cross_points(c, l); }\ntemplate <class R> vector<Point<R>>\
     \ cross_points(const Circle<R> &c, const Segment<R> &s) {\n Point<R> u= s.q -\
-    \ s.p, v= s.p - c.o;\n R a= norm(u), b= dot(u, v) / a, d= b * b - (norm(v) - c.r\
-    \ * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n if (!t && sgn(b) <= 0\
-    \ && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d), a= -b - d, b= -b + d;\n\
-    \ vector<Point<R>> ps;\n if (0 <= sgn(a) && sgn(a - 1) <= 0) ps.emplace_back(s.p\
+    \ s.p, v= s.p - c.o;\n R a= norm2(u), b= dot(u, v) / a, d= b * b - (norm2(v) -\
+    \ c.r * c.r) / a;\n int t= sgn(d);\n if (t < 0) return {};\n if (!t && sgn(b)\
+    \ <= 0 && sgn(1 + b) >= 0) return {s.p - b * u};\n d= sqrt(d), a= -b - d, b= -b\
+    \ + d;\n vector<Point<R>> ps;\n if (0 <= sgn(a) && sgn(a - 1) <= 0) ps.emplace_back(s.p\
     \ + a * u);\n if (0 <= sgn(b) && sgn(b - 1) <= 0) ps.emplace_back(s.p + b * u);\n\
     \ return ps;\n}\ntemplate <class R> vector<Point<R>> cross_points(const Segment<R>\
     \ &s, const Circle<R> &c) { return cross_points(c, s); }\ntemplate <class R> Circle<R>\
@@ -227,7 +227,7 @@ data:
     \ A), c= dist(A, B), s= (a + b + c) / 2;\n return {(a * A + b * B + c * C) / (s\
     \ * 2), sqrt((s - a) * (s - b) * (s - c) / s)};\n}\ntemplate <class R> vector<Line<R>>\
     \ common_tangent(const Circle<R> &c, const Circle<R> &d) {\n Point u= d.o - c.o,\
-    \ v= !u;\n R g= norm(u), b;\n if (!sgn(g)) return {};  // same origin\n vector<Line<R>>\
+    \ v= !u;\n R g= norm2(u), b;\n if (!sgn(g)) return {};  // same origin\n vector<Line<R>>\
     \ ls;\n for (R a: {c.r - d.r, c.r + d.r}) {\n  if (int s= sgn(b= g - a * a); !s)\
     \ ls.emplace_back(Line(c.o + c.r * a / g * u, v));\n  else if (s > 0) {\n   Point\
     \ x= a / g * u, y= sqrt(b) / g * v, e= x + y, f= x - y;\n   ls.emplace_back(Line(c.o\
@@ -254,8 +254,8 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_7_E.test.cpp
   requiredBy: []
-  timestamp: '2023-09-21 16:13:43+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-09-21 16:57:48+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/CGL_7_E.test.cpp
 layout: document

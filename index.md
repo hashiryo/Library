@@ -146,34 +146,34 @@ data:
       title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0 (Conway\u306E\u69CB\u6210)"
   - name: src/Geometry
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Circle.hpp
       title: src/Geometry/Circle.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Convex.hpp
       title: src/Geometry/Convex.hpp
     - icon: ':heavy_check_mark:'
       path: src/Geometry/IncrementalConvexHull.hpp
       title: src/Geometry/IncrementalConvexHull.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Line.hpp
       title: src/Geometry/Line.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Point.hpp
       title: src/Geometry/Point.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Polar.hpp
       title: src/Geometry/Polar.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Polygon.hpp
       title: src/Geometry/Polygon.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Segment.hpp
       title: src/Geometry/Segment.hpp
     - icon: ':heavy_check_mark:'
       path: src/Geometry/closest_pair.hpp
       title: src/Geometry/closest_pair.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/intersection_area.hpp
       title: src/Geometry/intersection_area.hpp
     - icon: ':heavy_check_mark:'
@@ -418,7 +418,7 @@ data:
       path: src/Optimization/monge_mincut.hpp
       title: "\u6700\u5C0F\u30AB\u30C3\u30C8\u554F\u984C\u306Ek\u5024\u3078\u306E\u4E00\
         \u822C\u5316"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/monotone_minima.hpp
       title: monotone minima
     - icon: ':heavy_check_mark:'
@@ -447,7 +447,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0168.test.cpp
       title: test/aoj/0168.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0253.test.cpp
       title: test/aoj/0253.test.cpp
     - icon: ':heavy_check_mark:'
@@ -486,7 +486,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1068.KDT.test.cpp
       title: test/aoj/1068.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1132.test.cpp
       title: test/aoj/1132.test.cpp
     - icon: ':heavy_check_mark:'
@@ -498,10 +498,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1171.test.cpp
       title: test/aoj/1171.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1183.test.cpp
       title: test/aoj/1183.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1190.test.cpp
       title: test/aoj/1190.test.cpp
     - icon: ':heavy_check_mark:'
@@ -513,7 +513,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1342.test.cpp
       title: test/aoj/1342.test.cpp
     - icon: ':heavy_check_mark:'
@@ -555,7 +555,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2159.rational.test.cpp
       title: test/aoj/2159.rational.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2201.test.cpp
       title: test/aoj/2201.test.cpp
     - icon: ':heavy_check_mark:'
@@ -720,7 +720,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3049.test.cpp
       title: test/aoj/3049.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3056.test.cpp
       title: test/aoj/3056.test.cpp
     - icon: ':heavy_check_mark:'
@@ -798,31 +798,31 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_5_A.test.cpp
       title: test/aoj/CGL_5_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_A.test.cpp
       title: test/aoj/CGL_7_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_B.test.cpp
       title: test/aoj/CGL_7_B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_C.test.cpp
       title: test/aoj/CGL_7_C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_D.test.cpp
       title: test/aoj/CGL_7_D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_E.test.cpp
       title: test/aoj/CGL_7_E.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_F.test.cpp
       title: test/aoj/CGL_7_F.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_G.test.cpp
       title: test/aoj/CGL_7_G.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_H.test.cpp
       title: test/aoj/CGL_7_H.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_7_I.test.cpp
       title: test/aoj/CGL_7_I.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1496,7 +1496,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
       title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sort_points_by_argument.test.cpp
       title: test/yosupo/sort_points_by_argument.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1864,7 +1864,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/911.test.cpp
       title: test/yukicoder/911.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/913.test.cpp
       title: test/yukicoder/913.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1879,7 +1879,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/950.test.cpp
       title: test/yukicoder/950.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/952.test.cpp
       title: test/yukicoder/952.test.cpp
     - icon: ':heavy_check_mark:'
