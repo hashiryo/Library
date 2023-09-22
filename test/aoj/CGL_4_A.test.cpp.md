@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: src/Geometry/Segment.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
@@ -42,41 +42,42 @@ data:
     \ (is_floating_point_v<K>)\n  if (K z= y - 1, w= x - z; 0 < sgn(w + 1) && sgn(w)\
     \ <= 0) return z;\n return y;\n}\nlong double radian_to_degree(long double r)\
     \ { return r * 180.0 / M_PI; }\nlong double degree_to_radian(long double d) {\
-    \ return d * M_PI / 180.0; }\ntemplate <class K> struct Point {\n K x, y;\n Point(K\
-    \ x= K(), K y= K()): x(x), y(y) {}\n Point &operator+=(const Point &p) { return\
-    \ x+= p.x, y+= p.y, *this; }\n Point &operator-=(const Point &p) { return x-=\
-    \ p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return x*= a, y*= a, *this;\
-    \ }\n Point &operator/=(K a) { return x/= a, y/= a, *this; }\n Point operator+(const\
-    \ Point &p) const { return {x + p.x, y + p.y}; }\n Point operator-(const Point\
-    \ &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K a) const { return\
-    \ {x * a, y * a}; }\n Point operator/(K a) const { return {x / a, y / a}; }\n\
-    \ friend Point operator*(K a, const Point &p) { return {a * p.x, a * p.y}; }\n\
-    \ Point operator-() const { return {-x, -y}; }\n bool operator<(const Point &p)\
-    \ const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y) < 0;\n }\n\
-    \ bool operator>(const Point &p) const { return p < *this; }\n bool operator<=(const\
-    \ Point &p) const { return !(p < *this); }\n bool operator>=(const Point &p) const\
-    \ { return !(*this < p); }\n bool operator==(const Point &p) const { return !sgn(x\
-    \ - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p) const { return\
-    \ sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return {-y, x};\
-    \ }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point &p) {\
-    \ return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const Point\
-    \ &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend Visualizer\
-    \ &operator<<(Visualizer &vis, const Point &p) { return vis.ofs << p.x << \" \"\
-    \ << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K> &p, const\
-    \ Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn:\
-    \ < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K> &q) { return\
-    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K> &p) { return\
-    \ dot(p, p); }\ntemplate <class K> long double norm(const Point<K> &p) { return\
-    \ sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
-    \ &q) { return norm2(p - q); }\ntemplate <class T, class U> long double dist(const\
-    \ T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate <class K> long double\
-    \ angle(const Point<K> &p) { return atan2(p.y, p.x); }\ntemplate <class K> long\
-    \ double angle(const Point<K> &p, const Point<K> &q) { return atan2(cross(p, q),\
-    \ dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK, ONLINE_FRONT,\
-    \ ON_SEGMENT };\nostream &operator<<(ostream &os, CCW c) { return os << (c ==\
-    \ COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"CLOCKWISE\" :\
-    \ c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"ONLINE_FRONT\" :\
-    \ \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
+    \ return d * M_PI / 180.0; }\nlong double normalize_radian(long double r) { return\
+    \ r= fmod(r + M_PI, 2 * M_PI), r < 0 ? r + M_PI : r - M_PI; }\ntemplate <class\
+    \ K> struct Point {\n K x, y;\n Point(K x= K(), K y= K()): x(x), y(y) {}\n Point\
+    \ &operator+=(const Point &p) { return x+= p.x, y+= p.y, *this; }\n Point &operator-=(const\
+    \ Point &p) { return x-= p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return\
+    \ x*= a, y*= a, *this; }\n Point &operator/=(K a) { return x/= a, y/= a, *this;\
+    \ }\n Point operator+(const Point &p) const { return {x + p.x, y + p.y}; }\n Point\
+    \ operator-(const Point &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K\
+    \ a) const { return {x * a, y * a}; }\n Point operator/(K a) const { return {x\
+    \ / a, y / a}; }\n friend Point operator*(K a, const Point &p) { return {a * p.x,\
+    \ a * p.y}; }\n Point operator-() const { return {-x, -y}; }\n bool operator<(const\
+    \ Point &p) const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y)\
+    \ < 0;\n }\n bool operator>(const Point &p) const { return p < *this; }\n bool\
+    \ operator<=(const Point &p) const { return !(p < *this); }\n bool operator>=(const\
+    \ Point &p) const { return !(*this < p); }\n bool operator==(const Point &p) const\
+    \ { return !sgn(x - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p)\
+    \ const { return sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return\
+    \ {-y, x}; }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point\
+    \ &p) { return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const\
+    \ Point &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend\
+    \ Visualizer &operator<<(Visualizer &vis, const Point &p) { return vis.ofs <<\
+    \ p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K>\
+    \ &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0,\
+    \ right turn: < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K>\
+    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K>\
+    \ &p) { return dot(p, p); }\ntemplate <class K> long double norm(const Point<K>\
+    \ &p) { return sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
+    \ const Point<K> &q) { return norm2(p - q); }\ntemplate <class T, class U> long\
+    \ double dist(const T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate\
+    \ <class K> long double angle(const Point<K> &p) { return atan2(p.y, p.x); }\n\
+    template <class K> long double angle(const Point<K> &p, const Point<K> &q) { return\
+    \ atan2(cross(p, q), dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK,\
+    \ ONLINE_FRONT, ON_SEGMENT };\nostream &operator<<(ostream &os, CCW c) { return\
+    \ os << (c == COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"\
+    CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"ONLINE_FRONT\"\
+    \ : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
     \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
     \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
     \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT\
@@ -255,15 +256,15 @@ data:
     \   else j= nj;\n   if (K len= dist2(ch[i], ch[j]); mx < len) mx= len, ret= {ch[i],\
     \ ch[j]};\n  }\n  return ret;\n }\n long double diameter() const {\n  auto [p,\
     \ q]= farthest_pair();\n  return dist(p, q);\n }\n // side>0 => left, side<0 =>\
-    \ right\n Convex half_plane(const Line<K> &l, int side= 1) const {\n  Convex ret;\n\
-    \  for (const auto &e: this->edges()) {\n   auto d= e.q - e.p;\n   K a= cross(d,\
+    \ right\n Convex cut(const Line<K> &l, int side= 1) const {\n  Convex ret;\n \
+    \ for (const auto &e: this->edges()) {\n   auto d= e.q - e.p;\n   K a= cross(d,\
     \ l.d), b= cross(l.p - e.p, l.d);\n   int s= sgn(b);\n   if (s * side >= 0) ret.dat.emplace_back(e.p);\n\
     \   if (s && sgn(a))\n    if (b/= a; 0 < sgn(b) && sgn(b - 1) < 0) ret.dat.emplace_back(e.p\
     \ + b * d);\n  }\n  return ret.build(), ret;\n }\n // { (x,y): (x,y) in polygon\
-    \ and (ax+by+c) * side >= 0 }\n Convex half_plane(K a, K b, K c, int side= 1)\
-    \ const {\n  int sa= sgn(a), sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return\
-    \ sc * side < 0 ? Convex() : *this;\n  return half_plane(Line<K>(a, b, c), side);\n\
-    \ }\n friend Affine<K>;\n};\ntemplate <class K> pair<Point<K>, Point<K>> farthest_pair(const\
+    \ and (ax+by+c) * side >= 0 }\n Convex cut(K a, K b, K c, int side= 1) const {\n\
+    \  int sa= sgn(a), sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return sc * side\
+    \ < 0 ? Convex() : *this;\n  return half_plane(Line<K>(a, b, c), side);\n }\n\
+    \ friend Affine<K>;\n};\ntemplate <class K> pair<Point<K>, Point<K>> farthest_pair(const\
     \ vector<Point<K>> &ps) { return Convex(ps).farthest_pair(); }\ntemplate <class\
     \ K> Convex<K> Affine<K>::operator()(const Convex<K> &c) {\n Convex<K> d;\n for\
     \ (const auto &p: c) d.dat.emplace_back((*this)(p));\n return d.build(), d;\n\
@@ -292,8 +293,8 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_4_A.test.cpp
   requiredBy: []
-  timestamp: '2023-09-21 23:45:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-09-22 22:48:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_4_A.test.cpp
 layout: document

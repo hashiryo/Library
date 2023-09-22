@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Geometry/Circle.hpp
     title: src/Geometry/Circle.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Convex.hpp
     title: src/Geometry/Convex.hpp
   - icon: ':question:'
@@ -27,18 +27,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0253.test.cpp
     title: test/aoj/0253.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0265.test.cpp
     title: test/aoj/0265.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0342.test.cpp
     title: test/aoj/0342.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0356.test.cpp
     title: test/aoj/0356.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0375.test.cpp
     title: test/aoj/0375.test.cpp
+  - icon: ':x:'
+    path: test/aoj/0445.test.cpp
+    title: test/aoj/0445.test.cpp
+  - icon: ':x:'
+    path: test/aoj/1033.test.cpp
+    title: test/aoj/1033.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1047.test.cpp
+    title: test/aoj/1047.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1132.test.cpp
     title: test/aoj/1132.test.cpp
@@ -93,10 +102,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2423.test.cpp
     title: test/aoj/2423.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2626.test.cpp
     title: test/aoj/2626.test.cpp
   - icon: ':heavy_check_mark:'
@@ -111,61 +120,61 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_1_B.test.cpp
     title: test/aoj/CGL_1_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_2_A.test.cpp
     title: test/aoj/CGL_2_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_2_B.test.cpp
     title: test/aoj/CGL_2_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_2_C.test.cpp
     title: test/aoj/CGL_2_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_2_D.test.cpp
     title: test/aoj/CGL_2_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_3_A.test.cpp
     title: test/aoj/CGL_3_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_3_B.test.cpp
     title: test/aoj/CGL_3_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_3_C.test.cpp
     title: test/aoj/CGL_3_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_4_A.test.cpp
     title: test/aoj/CGL_4_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_4_B.test.cpp
     title: test/aoj/CGL_4_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_4_C.test.cpp
     title: test/aoj/CGL_4_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_A.test.cpp
     title: test/aoj/CGL_7_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_B.test.cpp
     title: test/aoj/CGL_7_B.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_C.test.cpp
     title: test/aoj/CGL_7_C.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_D.test.cpp
     title: test/aoj/CGL_7_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_E.test.cpp
     title: test/aoj/CGL_7_E.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_F.test.cpp
     title: test/aoj/CGL_7_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_G.test.cpp
     title: test/aoj/CGL_7_G.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_H.test.cpp
     title: test/aoj/CGL_7_H.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
   _isVerificationFailed: true
@@ -186,41 +195,42 @@ data:
     \ (is_floating_point_v<K>)\n  if (K z= y - 1, w= x - z; 0 < sgn(w + 1) && sgn(w)\
     \ <= 0) return z;\n return y;\n}\nlong double radian_to_degree(long double r)\
     \ { return r * 180.0 / M_PI; }\nlong double degree_to_radian(long double d) {\
-    \ return d * M_PI / 180.0; }\ntemplate <class K> struct Point {\n K x, y;\n Point(K\
-    \ x= K(), K y= K()): x(x), y(y) {}\n Point &operator+=(const Point &p) { return\
-    \ x+= p.x, y+= p.y, *this; }\n Point &operator-=(const Point &p) { return x-=\
-    \ p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return x*= a, y*= a, *this;\
-    \ }\n Point &operator/=(K a) { return x/= a, y/= a, *this; }\n Point operator+(const\
-    \ Point &p) const { return {x + p.x, y + p.y}; }\n Point operator-(const Point\
-    \ &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K a) const { return\
-    \ {x * a, y * a}; }\n Point operator/(K a) const { return {x / a, y / a}; }\n\
-    \ friend Point operator*(K a, const Point &p) { return {a * p.x, a * p.y}; }\n\
-    \ Point operator-() const { return {-x, -y}; }\n bool operator<(const Point &p)\
-    \ const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y) < 0;\n }\n\
-    \ bool operator>(const Point &p) const { return p < *this; }\n bool operator<=(const\
-    \ Point &p) const { return !(p < *this); }\n bool operator>=(const Point &p) const\
-    \ { return !(*this < p); }\n bool operator==(const Point &p) const { return !sgn(x\
-    \ - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p) const { return\
-    \ sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return {-y, x};\
-    \ }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point &p) {\
-    \ return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const Point\
-    \ &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend Visualizer\
-    \ &operator<<(Visualizer &vis, const Point &p) { return vis.ofs << p.x << \" \"\
-    \ << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K> &p, const\
-    \ Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn:\
-    \ < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K> &q) { return\
-    \ p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K> &p) { return\
-    \ dot(p, p); }\ntemplate <class K> long double norm(const Point<K> &p) { return\
-    \ sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K>\
-    \ &q) { return norm2(p - q); }\ntemplate <class T, class U> long double dist(const\
-    \ T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate <class K> long double\
-    \ angle(const Point<K> &p) { return atan2(p.y, p.x); }\ntemplate <class K> long\
-    \ double angle(const Point<K> &p, const Point<K> &q) { return atan2(cross(p, q),\
-    \ dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK, ONLINE_FRONT,\
-    \ ON_SEGMENT };\nostream &operator<<(ostream &os, CCW c) { return os << (c ==\
-    \ COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"CLOCKWISE\" :\
-    \ c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"ONLINE_FRONT\" :\
-    \ \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
+    \ return d * M_PI / 180.0; }\nlong double normalize_radian(long double r) { return\
+    \ r= fmod(r + M_PI, 2 * M_PI), r < 0 ? r + M_PI : r - M_PI; }\ntemplate <class\
+    \ K> struct Point {\n K x, y;\n Point(K x= K(), K y= K()): x(x), y(y) {}\n Point\
+    \ &operator+=(const Point &p) { return x+= p.x, y+= p.y, *this; }\n Point &operator-=(const\
+    \ Point &p) { return x-= p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return\
+    \ x*= a, y*= a, *this; }\n Point &operator/=(K a) { return x/= a, y/= a, *this;\
+    \ }\n Point operator+(const Point &p) const { return {x + p.x, y + p.y}; }\n Point\
+    \ operator-(const Point &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K\
+    \ a) const { return {x * a, y * a}; }\n Point operator/(K a) const { return {x\
+    \ / a, y / a}; }\n friend Point operator*(K a, const Point &p) { return {a * p.x,\
+    \ a * p.y}; }\n Point operator-() const { return {-x, -y}; }\n bool operator<(const\
+    \ Point &p) const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y)\
+    \ < 0;\n }\n bool operator>(const Point &p) const { return p < *this; }\n bool\
+    \ operator<=(const Point &p) const { return !(p < *this); }\n bool operator>=(const\
+    \ Point &p) const { return !(*this < p); }\n bool operator==(const Point &p) const\
+    \ { return !sgn(x - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p)\
+    \ const { return sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return\
+    \ {-y, x}; }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point\
+    \ &p) { return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const\
+    \ Point &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend\
+    \ Visualizer &operator<<(Visualizer &vis, const Point &p) { return vis.ofs <<\
+    \ p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K>\
+    \ &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0,\
+    \ right turn: < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K>\
+    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K>\
+    \ &p) { return dot(p, p); }\ntemplate <class K> long double norm(const Point<K>\
+    \ &p) { return sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
+    \ const Point<K> &q) { return norm2(p - q); }\ntemplate <class T, class U> long\
+    \ double dist(const T &a, const U &b) { return sqrt(dist2(a, b)); }\ntemplate\
+    \ <class K> long double angle(const Point<K> &p) { return atan2(p.y, p.x); }\n\
+    template <class K> long double angle(const Point<K> &p, const Point<K> &q) { return\
+    \ atan2(cross(p, q), dot(p, q)); }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK,\
+    \ ONLINE_FRONT, ON_SEGMENT };\nostream &operator<<(ostream &os, CCW c) { return\
+    \ os << (c == COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"\
+    CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"ONLINE_FRONT\"\
+    \ : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K> &p0, const Point<K>\
     \ &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a,\
     \ b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b);\
     \ sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT\
@@ -338,7 +348,7 @@ data:
   - src/Geometry/min_enclosing_circle.hpp
   - src/Geometry/Circle.hpp
   - src/Geometry/Segment.hpp
-  timestamp: '2023-09-21 16:13:43+09:00'
+  timestamp: '2023-09-22 22:48:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/CGL_2_D.test.cpp
@@ -358,6 +368,7 @@ data:
   - test/aoj/1171.test.cpp
   - test/aoj/2009.rational.test.cpp
   - test/aoj/CGL_7_D.test.cpp
+  - test/aoj/0445.test.cpp
   - test/aoj/1242.rational.test.cpp
   - test/aoj/1190.test.cpp
   - test/aoj/0375.test.cpp
@@ -386,6 +397,8 @@ data:
   - test/aoj/CGL_2_B.test.cpp
   - test/aoj/CGL_7_E.test.cpp
   - test/aoj/1342.test.cpp
+  - test/aoj/1033.test.cpp
+  - test/aoj/1047.test.cpp
   - test/aoj/0342.test.cpp
   - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp

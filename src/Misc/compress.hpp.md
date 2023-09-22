@@ -3,16 +3,22 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0265.test.cpp
     title: test/aoj/0265.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/0655.test.cpp
     title: test/aoj/0655.test.cpp
+  - icon: ':x:'
+    path: test/aoj/1033.test.cpp
+    title: test/aoj/1033.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1047.test.cpp
+    title: test/aoj/1047.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2256.test.cpp
     title: test/aoj/2256.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
   - icon: ':heavy_check_mark:'
@@ -73,6 +79,8 @@ data:
   - test/aoj/2514.test.cpp
   - test/aoj/2256.test.cpp
   - test/aoj/3506.test.cpp
+  - test/aoj/1033.test.cpp
+  - test/aoj/1047.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Misc/compress.hpp

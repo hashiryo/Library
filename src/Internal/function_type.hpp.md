@@ -8,14 +8,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/golden_search.hpp
     title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
   - icon: ':heavy_check_mark:'
     path: src/Optimization/simplified_larsch_dp.hpp
     title: "\u7C21\u6613\u7248LARSCH"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0323.test.cpp
     title: test/aoj/0323.test.cpp
   - icon: ':heavy_check_mark:'
@@ -78,9 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/function_type.hpp\"\n#include <type_traits>\n\
@@ -122,7 +122,7 @@ data:
   - src/Optimization/golden_search.hpp
   - src/Optimization/fibonacci_search.hpp
   timestamp: '2023-04-02 00:58:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc218_h.test.cpp
