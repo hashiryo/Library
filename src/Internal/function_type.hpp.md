@@ -118,33 +118,33 @@ data:
   path: src/Internal/function_type.hpp
   requiredBy:
   - src/Math/DiscreteLogarithm.hpp
-  - src/Optimization/simplified_larsch_dp.hpp
-  - src/Optimization/golden_search.hpp
   - src/Optimization/fibonacci_search.hpp
+  - src/Optimization/golden_search.hpp
+  - src/Optimization/simplified_larsch_dp.hpp
   timestamp: '2023-04-02 00:58:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc270_g.test.cpp
-  - test/atcoder/abc218_h.test.cpp
-  - test/atcoder/abc279_d.test.cpp
-  - test/atcoder/abc204_e.test.cpp
-  - test/atcoder/abc222_g.test.cpp
-  - test/yukicoder/705.test.cpp
-  - test/yukicoder/704.test.cpp
-  - test/yukicoder/409.test.cpp
-  - test/yukicoder/2309.test.cpp
-  - test/yukicoder/180.test.cpp
-  - test/yukicoder/1339.test.cpp
-  - test/yukicoder/950.test.cpp
-  - test/yukicoder/703.test.cpp
-  - test/yukicoder/2276.test.cpp
-  - test/yukicoder/261.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
+  - test/aoj/3044.test.cpp
   - test/aoj/2972.test.cpp
   - test/aoj/0323.test.cpp
   - test/aoj/3086.test.cpp
-  - test/aoj/3044.test.cpp
-  - test/aoj/2603.AlienDP.test.cpp
   - test/yosupo/discrete_logarithm_mod.test.cpp
+  - test/yukicoder/2276.test.cpp
+  - test/yukicoder/705.test.cpp
+  - test/yukicoder/261.test.cpp
+  - test/yukicoder/704.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/180.test.cpp
+  - test/yukicoder/1339.test.cpp
+  - test/yukicoder/2309.test.cpp
+  - test/yukicoder/703.test.cpp
+  - test/yukicoder/409.test.cpp
+  - test/atcoder/abc279_d.test.cpp
+  - test/atcoder/abc270_g.test.cpp
+  - test/atcoder/abc222_g.test.cpp
+  - test/atcoder/abc204_e.test.cpp
+  - test/atcoder/abc218_h.test.cpp
 documentation_of: src/Internal/function_type.hpp
 layout: document
 title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u3092\

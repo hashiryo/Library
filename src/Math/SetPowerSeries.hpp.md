@@ -269,13 +269,13 @@ data:
   timestamp: '2023-05-18 20:05:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc199_d.test.cpp
-  - test/atcoder/abc213_g.test.cpp
-  - test/atcoder/arc105_f.test.cpp
   - test/aoj/2345.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
   - test/yosupo/subset_convolution.test.cpp
   - test/yosupo/exp_of_set_power_series.test.cpp
+  - test/atcoder/abc213_g.test.cpp
+  - test/atcoder/arc105_f.test.cpp
+  - test/atcoder/abc199_d.test.cpp
 documentation_of: src/Math/SetPowerSeries.hpp
 layout: document
 title: "\u96C6\u5408\u51AA\u7D1A\u6570"

@@ -101,11 +101,11 @@ data:
   timestamp: '2023-01-21 18:41:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/430.AhoCora.test.cpp
-  - test/yukicoder/1269.test.cpp
   - test/aoj/2212.test.cpp
   - test/aoj/2257.test.cpp
   - test/aoj/2863.test.cpp
+  - test/yukicoder/430.AhoCora.test.cpp
+  - test/yukicoder/1269.test.cpp
 documentation_of: src/String/AhoCorasick.hpp
 layout: document
 title: Aho-Corasick

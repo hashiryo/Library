@@ -517,15 +517,15 @@ data:
   timestamp: '2023-08-05 18:38:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc213_h.test.cpp
-  - test/atcoder/abc230_h.test.cpp
-  - test/yukicoder/963.FPS.test.cpp
-  - test/yosupo/pow_of_FPS.FPS.test.cpp
+  - test/yosupo/log_of_FPS.FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+  - test/yosupo/partition.MSET.test.cpp
   - test/yosupo/exp_of_FPS.FPS.test.cpp
   - test/yosupo/inv_of_FPS.FPS.test.cpp
-  - test/yosupo/partition.MSET.test.cpp
-  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
-  - test/yosupo/log_of_FPS.FPS.test.cpp
+  - test/yosupo/pow_of_FPS.FPS.test.cpp
+  - test/yukicoder/963.FPS.test.cpp
+  - test/atcoder/abc213_h.test.cpp
+  - test/atcoder/abc230_h.test.cpp
 documentation_of: src/FFT/FormalPowerSeries.hpp
 layout: document
 title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"

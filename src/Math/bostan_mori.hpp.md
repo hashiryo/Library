@@ -72,9 +72,9 @@ data:
   timestamp: '2023-09-11 13:10:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/658.test.cpp
-  - test/yukicoder/2122.test.cpp
   - test/aoj/0168.test.cpp
+  - test/yukicoder/2122.test.cpp
+  - test/yukicoder/658.test.cpp
 documentation_of: src/Math/bostan_mori.hpp
 layout: document
 title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"

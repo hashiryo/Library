@@ -148,37 +148,37 @@ data:
     pages:
     - icon: ':question:'
       path: src/Geometry/Circle.hpp
-      title: src/Geometry/Circle.hpp
+      title: "\u5186"
     - icon: ':question:'
       path: src/Geometry/Convex.hpp
-      title: src/Geometry/Convex.hpp
+      title: "\u51F8\u591A\u89D2\u5F62"
     - icon: ':heavy_check_mark:'
       path: src/Geometry/IncrementalConvexHull.hpp
-      title: src/Geometry/IncrementalConvexHull.hpp
+      title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
     - icon: ':question:'
       path: src/Geometry/Line.hpp
-      title: src/Geometry/Line.hpp
+      title: "\u76F4\u7DDA"
     - icon: ':question:'
       path: src/Geometry/Point.hpp
-      title: src/Geometry/Point.hpp
-    - icon: ':x:'
-      path: src/Geometry/Polar.hpp
-      title: src/Geometry/Polar.hpp
+      title: "\u70B9"
     - icon: ':question:'
       path: src/Geometry/Polygon.hpp
-      title: src/Geometry/Polygon.hpp
+      title: "\u591A\u89D2\u5F62"
     - icon: ':question:'
       path: src/Geometry/Segment.hpp
-      title: src/Geometry/Segment.hpp
+      title: "\u7DDA\u5206"
+    - icon: ':question:'
+      path: src/Geometry/angle.hpp
+      title: "\u89D2\u5EA6\u30FB\u56DE\u8EE2\u95A2\u9023"
     - icon: ':x:'
       path: src/Geometry/closest_pair.hpp
-      title: src/Geometry/closest_pair.hpp
+      title: "\u6700\u8FD1\u70B9\u5BFE"
     - icon: ':question:'
       path: src/Geometry/intersection_area.hpp
-      title: src/Geometry/intersection_area.hpp
+      title: "\u5186\u3068\u306E\u5171\u901A\u90E8\u5206\u306E\u9762\u7A4D"
     - icon: ':heavy_check_mark:'
       path: src/Geometry/min_enclosing_circle.hpp
-      title: src/Geometry/min_enclosing_circle.hpp
+      title: "\u6700\u5C0F\u5305\u542B\u5186"
   - name: src/Graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -453,7 +453,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0265.test.cpp
       title: test/aoj/0265.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/0269.test.cpp
       title: test/aoj/0269.test.cpp
     - icon: ':heavy_check_mark:'
@@ -489,7 +489,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0425.test.cpp
       title: test/aoj/0425.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0445.test.cpp
       title: test/aoj/0445.test.cpp
     - icon: ':heavy_check_mark:'
@@ -513,7 +513,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1039.test.cpp
       title: test/aoj/1039.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1047.test.cpp
       title: test/aoj/1047.test.cpp
     - icon: ':heavy_check_mark:'
@@ -633,7 +633,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2402.test.cpp
       title: test/aoj/2402.test.cpp
     - icon: ':heavy_check_mark:'
@@ -669,7 +669,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2626.test.cpp
       title: test/aoj/2626.test.cpp
     - icon: ':heavy_check_mark:'
@@ -795,25 +795,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_1_B.test.cpp
       title: test/aoj/CGL_1_B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_1_C.test.cpp
       title: test/aoj/CGL_1_C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_A.test.cpp
       title: test/aoj/CGL_2_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_B.test.cpp
       title: test/aoj/CGL_2_B.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_C.test.cpp
       title: test/aoj/CGL_2_C.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_2_D.test.cpp
       title: test/aoj/CGL_2_D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_3_A.test.cpp
       title: test/aoj/CGL_3_A.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/CGL_3_B.test.cpp
       title: test/aoj/CGL_3_B.test.cpp
     - icon: ':x:'
