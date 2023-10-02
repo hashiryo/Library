@@ -33,77 +33,79 @@ data:
     \ 3 \"src/Geometry/Point.hpp\"\n#include <fstream>\n#line 5 \"src/Geometry/Point.hpp\"\
     \n#include <cmath>\n#include <cassert>\nnamespace geo {\nusing namespace std;\n\
     struct Visualizer {\n ofstream ofs;\n Visualizer(string s= \"visualize.txt\"):\
-    \ ofs(s) { ofs << fixed << setprecision(10); }\n};\ntemplate <class K> int sgn(K\
-    \ x) {\n if constexpr (is_floating_point_v<K>) {\n  static constexpr K EPS= 1e-9;\n\
-    \  return x < -EPS ? -1 : x > EPS;\n } else return x < 0 ? -1 : x > 0;\n}\ntemplate\
-    \ <class K> K err_floor(K x) {\n K y= floor(x);\n if constexpr (is_floating_point_v<K>)\n\
-    \  if (K z= y + 1, w= x - z; 0 <= sgn(w) && sgn(w - 1) < 0) return z;\n return\
-    \ y;\n}\ntemplate <class K> K err_ceil(K x) {\n K y= ceil(x);\n if constexpr (is_floating_point_v<K>)\n\
-    \  if (K z= y - 1, w= x - z; 0 < sgn(w + 1) && sgn(w) <= 0) return z;\n return\
-    \ y;\n}\ntemplate <class K> struct Point {\n K x, y;\n Point(K x= K(), K y= K()):\
-    \ x(x), y(y) {}\n Point &operator+=(const Point &p) { return x+= p.x, y+= p.y,\
-    \ *this; }\n Point &operator-=(const Point &p) { return x-= p.x, y-= p.y, *this;\
-    \ }\n Point &operator*=(K a) { return x*= a, y*= a, *this; }\n Point &operator/=(K\
-    \ a) { return x/= a, y/= a, *this; }\n Point operator+(const Point &p) const {\
-    \ return {x + p.x, y + p.y}; }\n Point operator-(const Point &p) const { return\
-    \ {x - p.x, y - p.y}; }\n Point operator*(K a) const { return {x * a, y * a};\
-    \ }\n Point operator/(K a) const { return {x / a, y / a}; }\n friend Point operator*(K\
-    \ a, const Point &p) { return {a * p.x, a * p.y}; }\n Point operator-() const\
-    \ { return {-x, -y}; }\n bool operator<(const Point &p) const {\n  int s= sgn(x\
-    \ - p.x);\n  return s ? s < 0 : sgn(y - p.y) < 0;\n }\n bool operator>(const Point\
-    \ &p) const { return p < *this; }\n bool operator<=(const Point &p) const { return\
-    \ !(p < *this); }\n bool operator>=(const Point &p) const { return !(*this < p);\
-    \ }\n bool operator==(const Point &p) const { return !sgn(x - p.x) && !sgn(y -\
-    \ p.y); }\n bool operator!=(const Point &p) const { return sgn(x - p.x) || sgn(y\
-    \ - p.y); }\n Point operator!() const { return {-y, x}; }  // rotate 90 degree\n\
-    \ friend istream &operator>>(istream &is, Point &p) { return is >> p.x >> p.y;\
-    \ }\n friend ostream &operator<<(ostream &os, const Point &p) { return os << \"\
-    (\" << p.x << \", \" << p.y << \")\"; }\n friend Visualizer &operator<<(Visualizer\
-    \ &vis, const Point &p) { return vis.ofs << p.x << \" \" << p.y << \"\\n\", vis;\
-    \ }\n};\ntemplate <class K> K dot(const Point<K> &p, const Point<K> &q) { return\
-    \ p.x * q.x + p.y * q.y; }\n// left turn: > 0, right turn: < 0\ntemplate <class\
-    \ K> K cross(const Point<K> &p, const Point<K> &q) { return p.x * q.y - p.y *\
-    \ q.x; }\ntemplate <class K> K norm2(const Point<K> &p) { return dot(p, p); }\n\
-    template <class K> long double norm(const Point<K> &p) { return sqrt(norm2(p));\
-    \ }\ntemplate <class K> K dist2(const Point<K> &p, const Point<K> &q) { return\
-    \ norm2(p - q); }\ntemplate <class T, class U> long double dist(const T &a, const\
-    \ U &b) { return sqrt(dist2(a, b)); }\nenum CCW { COUNTER_CLOCKWISE, CLOCKWISE,\
-    \ ONLINE_BACK, ONLINE_FRONT, ON_SEGMENT };\nostream &operator<<(ostream &os, CCW\
-    \ c) { return os << (c == COUNTER_CLOCKWISE ? \"COUNTER_CLOCKWISE\" : c == CLOCKWISE\
-    \ ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"\
-    ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K>\
-    \ &p0, const Point<K> &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n\
-    \ if (int s= sgn(cross(a, b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n\
-    \ if (K d= dot(a, b); sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a))\
-    \ > 0 ? ONLINE_FRONT : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate\
-    \ <class K> struct Segment;\ntemplate <class K> struct Polygon;\ntemplate <class\
-    \ K> struct Convex;\ntemplate <class K> struct Affine {\n K a00= 1, a01= 0, a10=\
-    \ 0, a11= 1;\n Point<K> b;\n Point<K> operator()(const Point<K> &p) const { return\
-    \ {a00 * p.x + a01 * p.y + b.x, a10 * p.x + a11 * p.y + b.y}; }\n Line<K> operator()(const\
-    \ Line<K> &l);\n Segment<K> operator()(const Segment<K> &s);\n Polygon<K> operator()(const\
-    \ Polygon<K> &p);\n Convex<K> operator()(const Convex<K> &c);\n Affine operator*(const\
-    \ Affine &r) const { return {a00 * r.a00 + a01 * r.a10, a00 * r.a01 + a01 * r.a11,\
-    \ a10 * r.a00 + a11 * r.a10, a10 * r.a01 + a11 * r.a11, (*this)(r)}; }\n Affine\
-    \ &operator*=(const Affine &r) { return *this= *this * r; }\n};\ntemplate <class\
-    \ K> Affine<K> translate(const Point<K> &p) { return {1, 0, 0, 1, p}; }\n}\n#line\
-    \ 4 \"src/Geometry/Line.hpp\"\nnamespace geo {\ntemplate <class K> struct Line\
-    \ {\n using P= Point<K>;\n P p, d;  // p+td\n Line() {}\n // p + td\n Line(const\
-    \ P &p, const P &d): p(p), d(d) { assert(sgn(norm2(d))); }\n // ax+by+c=0 .................\
-    \ ax+by+c>0: left, ax+by+c=0: on, ax+by+c<0: right\n Line(K a, K b, K c) {\n \
-    \ int sa= sgn(a), sb= sgn(b);\n  assert(sa || sb);\n  d= P{b, -a}, p= sb ? P{0,\
-    \ -c / b} : P{-c / a, 0};\n }\n bool operator==(const Line &l) const { return\
-    \ !sgn(cross(d, l.d)) && !where(l.p); }\n bool operator!=(const Line &l) const\
-    \ { return sgn(cross(d, l.d)) || where(l.p); }\n // +1: left, 0: on, -1: right\n\
-    \ int where(const P &q) const { return sgn(cross(d, q - p)); }\n P project(const\
-    \ P &q) const { return p + dot(q - p, d) / norm2(d) * d; }\n // return  a,b,c\
-    \ of ax+by+c=0\n tuple<K, K, K> coef() const { return make_tuple(-d.y, d.x, cross(p,\
-    \ d)); }\n friend ostream &operator<<(ostream &os, const Line &l) { return os\
-    \ << l.p << \" + t\" << l.d; }\n friend Visualizer &operator<<(Visualizer &vis,\
-    \ const Line &l) {\n  auto [a, b, c]= l.coef();\n  return vis.ofs << \"Line \"\
-    \ << a << \" \" << b << \" \" << c << '\\n', vis;\n }\n};\n// p + t(q-p)\ntemplate\
-    \ <class K> Line<K> line_through(const Point<K> &p, const Point<K> &q) { return\
-    \ Line(p, q - p); }\ntemplate <class K> bool is_parallel(const Line<K> &l, const\
-    \ Line<K> &m) { return !sgn(cross(l.d, m.d)); }\ntemplate <class K> bool is_orthogonal(const\
+    \ ofs(s) { ofs << fixed << setprecision(10); }\n friend Visualizer &operator<<(Visualizer\
+    \ &vis, const string &s) { return vis.ofs << s, vis; }\n};\ntemplate <class K>\
+    \ int sgn(K x) {\n if constexpr (is_floating_point_v<K>) {\n  static constexpr\
+    \ K EPS= 1e-9;\n  return x < -EPS ? -1 : x > EPS;\n } else return x < 0 ? -1 :\
+    \ x > 0;\n}\ntemplate <class K> K err_floor(K x) {\n K y= floor(x);\n if constexpr\
+    \ (is_floating_point_v<K>)\n  if (K z= y + 1, w= x - z; 0 <= sgn(w) && sgn(w -\
+    \ 1) < 0) return z;\n return y;\n}\ntemplate <class K> K err_ceil(K x) {\n K y=\
+    \ ceil(x);\n if constexpr (is_floating_point_v<K>)\n  if (K z= y - 1, w= x - z;\
+    \ 0 < sgn(w + 1) && sgn(w) <= 0) return z;\n return y;\n}\ntemplate <class K>\
+    \ struct Point {\n K x, y;\n Point(K x= K(), K y= K()): x(x), y(y) {}\n Point\
+    \ &operator+=(const Point &p) { return x+= p.x, y+= p.y, *this; }\n Point &operator-=(const\
+    \ Point &p) { return x-= p.x, y-= p.y, *this; }\n Point &operator*=(K a) { return\
+    \ x*= a, y*= a, *this; }\n Point &operator/=(K a) { return x/= a, y/= a, *this;\
+    \ }\n Point operator+(const Point &p) const { return {x + p.x, y + p.y}; }\n Point\
+    \ operator-(const Point &p) const { return {x - p.x, y - p.y}; }\n Point operator*(K\
+    \ a) const { return {x * a, y * a}; }\n Point operator/(K a) const { return {x\
+    \ / a, y / a}; }\n friend Point operator*(K a, const Point &p) { return {a * p.x,\
+    \ a * p.y}; }\n Point operator-() const { return {-x, -y}; }\n bool operator<(const\
+    \ Point &p) const {\n  int s= sgn(x - p.x);\n  return s ? s < 0 : sgn(y - p.y)\
+    \ < 0;\n }\n bool operator>(const Point &p) const { return p < *this; }\n bool\
+    \ operator<=(const Point &p) const { return !(p < *this); }\n bool operator>=(const\
+    \ Point &p) const { return !(*this < p); }\n bool operator==(const Point &p) const\
+    \ { return !sgn(x - p.x) && !sgn(y - p.y); }\n bool operator!=(const Point &p)\
+    \ const { return sgn(x - p.x) || sgn(y - p.y); }\n Point operator!() const { return\
+    \ {-y, x}; }  // rotate 90 degree\n friend istream &operator>>(istream &is, Point\
+    \ &p) { return is >> p.x >> p.y; }\n friend ostream &operator<<(ostream &os, const\
+    \ Point &p) { return os << \"(\" << p.x << \", \" << p.y << \")\"; }\n friend\
+    \ Visualizer &operator<<(Visualizer &vis, const Point &p) { return vis.ofs <<\
+    \ p.x << \" \" << p.y << \"\\n\", vis; }\n};\ntemplate <class K> K dot(const Point<K>\
+    \ &p, const Point<K> &q) { return p.x * q.x + p.y * q.y; }\n// left turn: > 0,\
+    \ right turn: < 0\ntemplate <class K> K cross(const Point<K> &p, const Point<K>\
+    \ &q) { return p.x * q.y - p.y * q.x; }\ntemplate <class K> K norm2(const Point<K>\
+    \ &p) { return dot(p, p); }\ntemplate <class K> long double norm(const Point<K>\
+    \ &p) { return sqrt(norm2(p)); }\ntemplate <class K> K dist2(const Point<K> &p,\
+    \ const Point<K> &q) { return norm2(p - q); }\ntemplate <class T, class U> long\
+    \ double dist(const T &a, const U &b) { return sqrt(dist2(a, b)); }\nenum CCW\
+    \ { COUNTER_CLOCKWISE, CLOCKWISE, ONLINE_BACK, ONLINE_FRONT, ON_SEGMENT };\nostream\
+    \ &operator<<(ostream &os, CCW c) { return os << (c == COUNTER_CLOCKWISE ? \"\
+    COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\"\
+    \ : c == ONLINE_FRONT ? \"ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class\
+    \ K> CCW ccw(const Point<K> &p0, const Point<K> &p1, const Point<K> &p2) {\n Point\
+    \ a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a, b) / norm2(a)); s) return\
+    \ s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b); sgn(d) < 0) return\
+    \ ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT : ON_SEGMENT;\n\
+    }\ntemplate <class K> struct Line;\ntemplate <class K> struct Segment;\ntemplate\
+    \ <class K> struct Polygon;\ntemplate <class K> struct Convex;\ntemplate <class\
+    \ K> struct Affine {\n K a00= 1, a01= 0, a10= 0, a11= 1;\n Point<K> b;\n Point<K>\
+    \ operator()(const Point<K> &p) const { return {a00 * p.x + a01 * p.y + b.x, a10\
+    \ * p.x + a11 * p.y + b.y}; }\n Line<K> operator()(const Line<K> &l);\n Segment<K>\
+    \ operator()(const Segment<K> &s);\n Polygon<K> operator()(const Polygon<K> &p);\n\
+    \ Convex<K> operator()(const Convex<K> &c);\n Affine operator*(const Affine &r)\
+    \ const { return {a00 * r.a00 + a01 * r.a10, a00 * r.a01 + a01 * r.a11, a10 *\
+    \ r.a00 + a11 * r.a10, a10 * r.a01 + a11 * r.a11, (*this)(r)}; }\n Affine &operator*=(const\
+    \ Affine &r) { return *this= *this * r; }\n};\ntemplate <class K> Affine<K> translate(const\
+    \ Point<K> &p) { return {1, 0, 0, 1, p}; }\n}\n#line 4 \"src/Geometry/Line.hpp\"\
+    \nnamespace geo {\ntemplate <class K> struct Line {\n using P= Point<K>;\n P p,\
+    \ d;  // p+td\n Line() {}\n // p + td\n Line(const P &p, const P &d): p(p), d(d)\
+    \ { assert(sgn(norm2(d))); }\n // ax+by+c=0 ................. ax+by+c>0: left,\
+    \ ax+by+c=0: on, ax+by+c<0: right\n Line(K a, K b, K c) {\n  int sa= sgn(a), sb=\
+    \ sgn(b);\n  assert(sa || sb);\n  d= P{b, -a}, p= sb ? P{0, -c / b} : P{-c / a,\
+    \ 0};\n }\n bool operator==(const Line &l) const { return !sgn(cross(d, l.d))\
+    \ && !where(l.p); }\n bool operator!=(const Line &l) const { return sgn(cross(d,\
+    \ l.d)) || where(l.p); }\n // +1: left, 0: on, -1: right\n int where(const P &q)\
+    \ const { return sgn(cross(d, q - p)); }\n P project(const P &q) const { return\
+    \ p + dot(q - p, d) / norm2(d) * d; }\n // return  a,b,c of ax+by+c=0\n tuple<K,\
+    \ K, K> coef() const { return make_tuple(-d.y, d.x, cross(p, d)); }\n friend ostream\
+    \ &operator<<(ostream &os, const Line &l) { return os << l.p << \" + t\" << l.d;\
+    \ }\n friend Visualizer &operator<<(Visualizer &vis, const Line &l) {\n  auto\
+    \ [a, b, c]= l.coef();\n  return vis.ofs << \"Line \" << a << \" \" << b << \"\
+    \ \" << c << \"\\n\", vis;\n }\n};\n// p + t(q-p)\ntemplate <class K> Line<K>\
+    \ line_through(const Point<K> &p, const Point<K> &q) { return Line(p, q - p);\
+    \ }\ntemplate <class K> bool is_parallel(const Line<K> &l, const Line<K> &m) {\
+    \ return !sgn(cross(l.d, m.d)); }\ntemplate <class K> bool is_orthogonal(const\
     \ Line<K> &l, const Line<K> &m) { return !sgn(dot(l.d, m.d)); }\n// 1 : properly\
     \ crossing, 0 : disjoint parallel, 2 : same line\ntemplate <class K> vector<Point<K>>\
     \ cross_points(const Line<K> &l, const Line<K> &m) {\n K a= cross(m.d, l.d), b=\
@@ -137,28 +139,29 @@ data:
     \ ? sgn(a - (b= norm2(d))) < 0 ? p + a / b * d : q : p;\n }\n friend ostream &operator<<(ostream\
     \ &os, const Segment &s) { return os << s.p << \"---\" << s.q; }\n friend Visualizer\
     \ &operator<<(Visualizer &vis, const Segment &s) { return vis.ofs << \"Segment\
-    \ \" << s.p1 << \" \" << s.p2 << '\\n', vis; }\n};\n// 1: properly crossing, 0:\
-    \ no intersect, 2: same line\ntemplate <class K> vector<Point<K>> cross_points(const\
-    \ Segment<K> &s, const Line<K> &l) {\n Point d= s.q - s.p;\n K a= cross(d, l.d),\
-    \ b= cross(l.p - s.p, l.d);\n if (sgn(a)) {\n  if (b/= a; sgn(b) < 0 || sgn(b\
-    \ - 1) > 0) return {};  // no intersect\n  else return {s.p + b * d};        \
-    \                   // properly crossing}\n }\n if (sgn(b)) return {};  // disjoint\
-    \ parallel\n return {s.p, s.q};      // same line\n}\ntemplate <class K> vector<Point<K>>\
-    \ cross_points(const Line<K> &l, const Segment<K> &s) { return cross_points(s,\
-    \ l); }\n// 2: same line, 0: no intersect, 1: ...\ntemplate <class K> vector<Point<K>>\
-    \ cross_points(const Segment<K> &s, const Segment<K> &t) {\n Point d= s.q - s.p,\
-    \ e= t.q - t.p;\n K a= cross(d, e), b= cross(t.p - s.p, e);\n if (sgn(a)) {\n\
-    \  if (b/= a; sgn(b) < 0 || sgn(b - 1) > 0) return {};                       //\
-    \ no intersect\n  if (b= cross(d, s.p - t.p) / a; sgn(b) < 0 || sgn(b - 1) > 0)\
-    \ return {};  // no intersect\n  return {t.p + b * e};                       \
-    \                              // properly crossing\n }\n if (sgn(b)) return {};\
-    \  // disjoint parallel\n vector<Point<K>> ps;    // same line\n auto insert_if_possible=\
-    \ [&](const Point<K> &p) {\n  for (auto q: ps)\n   if (p == q) return;\n  ps.emplace_back(p);\n\
-    \ };\n if (sgn(dot(t.p - s.p, t.q - s.p)) <= 0) insert_if_possible(s.p);\n if\
-    \ (sgn(dot(t.p - s.q, t.q - s.q)) <= 0) insert_if_possible(s.q);\n if (sgn(dot(s.p\
-    \ - t.p, s.q - t.p)) <= 0) insert_if_possible(t.p);\n if (sgn(dot(s.p - t.q, s.q\
-    \ - t.q)) <= 0) insert_if_possible(t.q);\n return ps;\n}\nenum INTERSECTION {\
-    \ CROSSING, TOUCHING, DISJOINT, OVERLAP };\nostream &operator<<(ostream &os, INTERSECTION\
+    \ \" << s.p.x << \" \" << s.p.y << \" \" << s.q.x << \" \" << s.q.y << \"\\n\"\
+    , vis; }\n};\n// 1: properly crossing, 0: no intersect, 2: same line\ntemplate\
+    \ <class K> vector<Point<K>> cross_points(const Segment<K> &s, const Line<K> &l)\
+    \ {\n Point d= s.q - s.p;\n K a= cross(d, l.d), b= cross(l.p - s.p, l.d);\n if\
+    \ (sgn(a)) {\n  if (b/= a; sgn(b) < 0 || sgn(b - 1) > 0) return {};  // no intersect\n\
+    \  else return {s.p + b * d};                           // properly crossing}\n\
+    \ }\n if (sgn(b)) return {};  // disjoint parallel\n return {s.p, s.q};      //\
+    \ same line\n}\ntemplate <class K> vector<Point<K>> cross_points(const Line<K>\
+    \ &l, const Segment<K> &s) { return cross_points(s, l); }\n// 2: same line, 0:\
+    \ no intersect, 1: ...\ntemplate <class K> vector<Point<K>> cross_points(const\
+    \ Segment<K> &s, const Segment<K> &t) {\n Point d= s.q - s.p, e= t.q - t.p;\n\
+    \ K a= cross(d, e), b= cross(t.p - s.p, e);\n if (sgn(a)) {\n  if (b/= a; sgn(b)\
+    \ < 0 || sgn(b - 1) > 0) return {};                       // no intersect\n  if\
+    \ (b= cross(d, s.p - t.p) / a; sgn(b) < 0 || sgn(b - 1) > 0) return {};  // no\
+    \ intersect\n  return {t.p + b * e};                                         \
+    \            // properly crossing\n }\n if (sgn(b)) return {};  // disjoint parallel\n\
+    \ vector<Point<K>> ps;    // same line\n auto insert_if_possible= [&](const Point<K>\
+    \ &p) {\n  for (auto q: ps)\n   if (p == q) return;\n  ps.emplace_back(p);\n };\n\
+    \ if (sgn(dot(t.p - s.p, t.q - s.p)) <= 0) insert_if_possible(s.p);\n if (sgn(dot(t.p\
+    \ - s.q, t.q - s.q)) <= 0) insert_if_possible(s.q);\n if (sgn(dot(s.p - t.p, s.q\
+    \ - t.p)) <= 0) insert_if_possible(t.p);\n if (sgn(dot(s.p - t.q, s.q - t.q))\
+    \ <= 0) insert_if_possible(t.q);\n return ps;\n}\nenum INTERSECTION { CROSSING,\
+    \ TOUCHING, DISJOINT, OVERLAP };\nostream &operator<<(ostream &os, INTERSECTION\
     \ i) { return os << (i == CROSSING ? \"CROSSING\" : i == TOUCHING ? \"TOUCHING\"\
     \ : i == DISJOINT ? \"DISJOINT\" : \"OVERLAP\"); }\ntemplate <class K> INTERSECTION\
     \ intersection(const Segment<K> &s, const Segment<K> &t) {\n auto cp= cross_points(s,\
@@ -206,58 +209,57 @@ data:
     \ }\n friend ostream &operator<<(ostream &os, const Polygon &g) {\n  for (int\
     \ i= 0, e= g.size(); i < e; ++i) os << \"--\" << g[i] << \"-\";\n  return os;\n\
     \ }\n friend Visualizer &operator<<(Visualizer &vis, const Polygon &g) {\n  vis.ofs\
-    \ << \"Polygon\" << '\\n';\n  for (const auto &p: g) vis.ofs << p << '\\n';\n\
-    \  return vis.ofs << \"...\" << '\\n', vis;\n }\n};\ntemplate <class K> K dist2(const\
-    \ Polygon<K> &g, const Point<K> &p) {\n if (g.where(p) != -1) return 0;\n K ret=\
-    \ numeric_limits<K>::max();\n for (const auto &e: g.edges()) ret= min(ret, dist2(e,\
-    \ p));\n return ret;\n}\ntemplate <class K> K dist2(const Point<K> &p, const Polygon<K>\
-    \ &g) { return dist2(g, p); }\ntemplate <class K> K dist2(const Polygon<K> &g,\
-    \ const Line<K> &l) {\n K ret= numeric_limits<K>::max();\n for (const auto &e:\
-    \ g.edges()) ret= min(ret, dist2(e, l));\n return ret;\n}\ntemplate <class K>\
-    \ K dist2(const Line<K> &l, const Polygon<K> &g) { return dist2(g, l); }\ntemplate\
-    \ <class K> K dist2(const Polygon<K> &g, const Segment<K> &s) {\n if (g.where(s.p)\
-    \ != -1 || g.where(s.q) != -1) return 0;\n K ret= numeric_limits<K>::max();\n\
-    \ for (const auto &e: g.edges()) ret= min(ret, dist2(e, s));\n return ret;\n}\n\
-    template <class K> K dist2(const Segment<K> &s, const Polygon<K> &g) { return\
-    \ dist2(g, s); }\ntemplate <class K> K dist2(const Polygon<K> &g, const Polygon<K>\
-    \ &h) {\n K ret= numeric_limits<K>::max();\n for (const auto &e: g.edges()) ret=\
-    \ min(ret, dist2(h, e));\n return ret;\n}\ntemplate <class K> Polygon<K> Affine<K>::operator()(const\
-    \ Polygon<K> &g) {\n vector<Point<K>> ps;\n for (const auto &p: g) ps.emplace_back((*this)(p));\n\
-    \ return Polygon(ps);\n}\n}\n#line 3 \"src/Geometry/Convex.hpp\"\nnamespace geo\
-    \ {\ntemplate <class K> struct Convex: Polygon<K> {\n using P= Point<K>;\n Convex()\
-    \ {}\n Convex(vector<P> ps, bool strict= true) {\n  int n= ps.size(), k= 0;\n\
-    \  auto &ch= this->dat;\n  ch.resize(2 * n), sort(ps.begin(), ps.end());\n  for\
-    \ (int i= 0; i < n; ch[k++]= ps[i++])\n   while (k > 1 && sgn(cross(ch[k - 1]\
-    \ - ch[k - 2], ps[i] - ch[k - 2])) < strict) --k;\n  for (int i= n - 1, t= k;\
-    \ i--; ch[k++]= ps[i])\n   while (k > t && sgn(cross(ch[k - 1] - ch[k - 2], ps[i]\
-    \ - ch[k - 2])) < strict) --k;\n  ch.resize(k - 1), this->build();\n }\n pair<P,\
-    \ P> farthest_pair() const {\n  auto &ch= this->dat;\n  int n= ch.size(), i= 0,\
-    \ j= 0;\n  for (int k= n; k--;) {\n   if (ch[i] > ch[k]) i= k;\n   if (ch[j] <\
-    \ ch[k]) j= k;\n  }\n  pair<P, P> ret{ch[i], ch[j]};\n  K mx= dist2(ch[i], ch[j]);\n\
-    \  for (int si= i, sj= j; i != sj || j != si;) {\n   if (int ni= this->next(i),\
-    \ nj= this->next(j); sgn(cross(ch[ni] - ch[i], ch[nj] - ch[j])) < 0) i= ni;\n\
-    \   else j= nj;\n   if (K len= dist2(ch[i], ch[j]); mx < len) mx= len, ret= {ch[i],\
-    \ ch[j]};\n  }\n  return ret;\n }\n long double diameter() const {\n  auto [p,\
-    \ q]= farthest_pair();\n  return dist(p, q);\n }\n // side>0 => left, side<0 =>\
-    \ right\n Convex cut(const Line<K> &l, int side= 1) const {\n  Convex ret;\n \
-    \ for (const auto &e: this->edges()) {\n   auto d= e.q - e.p;\n   K a= cross(d,\
-    \ l.d), b= cross(l.p - e.p, l.d);\n   int s= sgn(b);\n   if (s * side >= 0) ret.dat.emplace_back(e.p);\n\
-    \   if (s && sgn(a))\n    if (b/= a; 0 < sgn(b) && sgn(b - 1) < 0) ret.dat.emplace_back(e.p\
-    \ + b * d);\n  }\n  return ret.build(), ret;\n }\n // { (x,y): (x,y) in polygon\
-    \ and (ax+by+c) * side >= 0 }\n Convex cut(K a, K b, K c, int side= 1) const {\n\
-    \  int sa= sgn(a), sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return sc * side\
-    \ < 0 ? Convex() : *this;\n  return cut(Line<K>(a, b, c), side);\n }\n friend\
-    \ Affine<K>;\n};\ntemplate <class K> pair<Point<K>, Point<K>> farthest_pair(const\
-    \ vector<Point<K>> &ps) { return Convex(ps).farthest_pair(); }\ntemplate <class\
-    \ K> Convex<K> Affine<K>::operator()(const Convex<K> &c) {\n Convex<K> d;\n for\
-    \ (const auto &p: c) d.dat.emplace_back((*this)(p));\n return d.build(), d;\n\
-    }\n}\n#line 7 \"test/aoj/CGL_4_A.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geo;\n int\
-    \ n;\n cin >> n;\n vector<Point<int>> ps(n);\n for (int i= 0; i < n; i++) cin\
-    \ >> ps[i];\n Convex g(ps, false);\n n= g.size();\n cout << n << '\\n';\n int\
-    \ st= 0;\n for (int i= 0; i < n; i++)\n  if (g[st].y > g[i].y || (g[st].y == g[i].y\
-    \ && g[st].x > g[i].x)) st= i;\n for (int i= 0, j= st; i < n; ++i, j= g.next(j))\
-    \ cout << g[j].x << \" \" << g[j].y << '\\n';\n return 0;\n}\n"
+    \ << \"Polygon\" << '\\n';\n  for (const auto &p: g) vis << p;\n  return vis.ofs\
+    \ << \"...\" << '\\n', vis;\n }\n};\ntemplate <class K> K dist2(const Polygon<K>\
+    \ &g, const Point<K> &p) {\n if (g.where(p) != -1) return 0;\n K ret= numeric_limits<K>::max();\n\
+    \ for (const auto &e: g.edges()) ret= min(ret, dist2(e, p));\n return ret;\n}\n\
+    template <class K> K dist2(const Point<K> &p, const Polygon<K> &g) { return dist2(g,\
+    \ p); }\ntemplate <class K> K dist2(const Polygon<K> &g, const Line<K> &l) {\n\
+    \ K ret= numeric_limits<K>::max();\n for (const auto &e: g.edges()) ret= min(ret,\
+    \ dist2(e, l));\n return ret;\n}\ntemplate <class K> K dist2(const Line<K> &l,\
+    \ const Polygon<K> &g) { return dist2(g, l); }\ntemplate <class K> K dist2(const\
+    \ Polygon<K> &g, const Segment<K> &s) {\n if (g.where(s.p) != -1 || g.where(s.q)\
+    \ != -1) return 0;\n K ret= numeric_limits<K>::max();\n for (const auto &e: g.edges())\
+    \ ret= min(ret, dist2(e, s));\n return ret;\n}\ntemplate <class K> K dist2(const\
+    \ Segment<K> &s, const Polygon<K> &g) { return dist2(g, s); }\ntemplate <class\
+    \ K> K dist2(const Polygon<K> &g, const Polygon<K> &h) {\n K ret= numeric_limits<K>::max();\n\
+    \ for (const auto &e: g.edges()) ret= min(ret, dist2(h, e));\n return ret;\n}\n\
+    template <class K> Polygon<K> Affine<K>::operator()(const Polygon<K> &g) {\n vector<Point<K>>\
+    \ ps;\n for (const auto &p: g) ps.emplace_back((*this)(p));\n return Polygon(ps);\n\
+    }\n}\n#line 3 \"src/Geometry/Convex.hpp\"\nnamespace geo {\ntemplate <class K>\
+    \ struct Convex: Polygon<K> {\n using P= Point<K>;\n Convex() {}\n Convex(vector<P>\
+    \ ps, bool strict= true) {\n  int n= ps.size(), k= 0;\n  auto &ch= this->dat;\n\
+    \  ch.resize(2 * n), sort(ps.begin(), ps.end());\n  for (int i= 0; i < n; ch[k++]=\
+    \ ps[i++])\n   while (k > 1 && sgn(cross(ch[k - 1] - ch[k - 2], ps[i] - ch[k -\
+    \ 2])) < strict) --k;\n  for (int i= n - 1, t= k; i--; ch[k++]= ps[i])\n   while\
+    \ (k > t && sgn(cross(ch[k - 1] - ch[k - 2], ps[i] - ch[k - 2])) < strict) --k;\n\
+    \  ch.resize(k - 1), this->build();\n }\n pair<P, P> farthest_pair() const {\n\
+    \  auto &ch= this->dat;\n  int n= ch.size(), i= 0, j= 0;\n  for (int k= n; k--;)\
+    \ {\n   if (ch[i] > ch[k]) i= k;\n   if (ch[j] < ch[k]) j= k;\n  }\n  pair<P,\
+    \ P> ret{ch[i], ch[j]};\n  K mx= dist2(ch[i], ch[j]);\n  for (int si= i, sj= j;\
+    \ i != sj || j != si;) {\n   if (int ni= this->next(i), nj= this->next(j); sgn(cross(ch[ni]\
+    \ - ch[i], ch[nj] - ch[j])) < 0) i= ni;\n   else j= nj;\n   if (K len= dist2(ch[i],\
+    \ ch[j]); mx < len) mx= len, ret= {ch[i], ch[j]};\n  }\n  return ret;\n }\n long\
+    \ double diameter() const {\n  auto [p, q]= farthest_pair();\n  return dist(p,\
+    \ q);\n }\n // side>0 => left, side<0 => right\n Convex cut(const Line<K> &l,\
+    \ int side= 1) const {\n  Convex ret;\n  for (const auto &e: this->edges()) {\n\
+    \   auto d= e.q - e.p;\n   K a= cross(d, l.d), b= cross(l.p - e.p, l.d);\n   int\
+    \ s= sgn(b);\n   if (s * side >= 0) ret.dat.emplace_back(e.p);\n   if (s && sgn(a))\n\
+    \    if (b/= a; 0 < sgn(b) && sgn(b - 1) < 0) ret.dat.emplace_back(e.p + b * d);\n\
+    \  }\n  return ret.build(), ret;\n }\n // { (x,y): (x,y) in polygon and (ax+by+c)\
+    \ * side >= 0 }\n Convex cut(K a, K b, K c, int side= 1) const {\n  int sa= sgn(a),\
+    \ sb= sgn(b), sc= sgn(c);\n  if (!sa && !sb) return sc * side < 0 ? Convex() :\
+    \ *this;\n  return cut(Line<K>(a, b, c), side);\n }\n friend Affine<K>;\n};\n\
+    template <class K> pair<Point<K>, Point<K>> farthest_pair(const vector<Point<K>>\
+    \ &ps) { return Convex(ps).farthest_pair(); }\ntemplate <class K> Convex<K> Affine<K>::operator()(const\
+    \ Convex<K> &c) {\n Convex<K> d;\n for (const auto &p: c) d.dat.emplace_back((*this)(p));\n\
+    \ return d.build(), d;\n}\n}\n#line 7 \"test/aoj/CGL_4_A.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
+    \ geo;\n int n;\n cin >> n;\n vector<Point<int>> ps(n);\n for (int i= 0; i < n;\
+    \ i++) cin >> ps[i];\n Convex g(ps, false);\n n= g.size();\n cout << n << '\\\
+    n';\n int st= 0;\n for (int i= 0; i < n; i++)\n  if (g[st].y > g[i].y || (g[st].y\
+    \ == g[i].y && g[st].x > g[i].x)) st= i;\n for (int i= 0, j= st; i < n; ++i, j=\
+    \ g.next(j)) cout << g[j].x << \" \" << g[j].y << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/4/CGL_4_A\"\
     \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
     \ <vector>\n#include \"src/Geometry/Convex.hpp\"\nusing namespace std;\nsigned\
@@ -276,7 +278,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_4_A.test.cpp
   requiredBy: []
-  timestamp: '2023-09-28 16:56:23+09:00'
+  timestamp: '2023-10-02 19:27:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_4_A.test.cpp

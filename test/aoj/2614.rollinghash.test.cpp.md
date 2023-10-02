@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
   - icon: ':heavy_check_mark:'

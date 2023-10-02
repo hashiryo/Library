@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: src/Geometry/SegmentArrangement.hpp
+    title: src/Geometry/SegmentArrangement.hpp
+  - icon: ':heavy_check_mark:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -28,14 +31,32 @@ data:
     title: 2-SAT
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0273.test.cpp
+    title: test/aoj/0273.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1033.test.cpp
+    title: test/aoj/1033.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1050.test.cpp
+    title: test/aoj/1050.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1198.test.cpp
+    title: test/aoj/1198.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/1226.test.cpp
+    title: test/aoj/1226.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2448.test.cpp
+    title: test/aoj/2448.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
@@ -201,17 +222,24 @@ data:
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/BipartiteGraph.hpp
   - src/Math/TwoSatisfiability.hpp
+  - src/Geometry/SegmentArrangement.hpp
   timestamp: '2023-04-15 19:40:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/1198.test.cpp
   - test/aoj/GRL_5_A.test.cpp
   - test/aoj/0366.test.cpp
+  - test/aoj/0273.test.cpp
   - test/aoj/GRL_3_A.test.cpp
   - test/aoj/3168.bm.test.cpp
+  - test/aoj/1226.test.cpp
   - test/aoj/1595.test.cpp
+  - test/aoj/1050.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/2667.HLD.test.cpp
+  - test/aoj/1033.test.cpp
+  - test/aoj/2448.test.cpp
   - test/yosupo/scc.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - test/yosupo/lca.HLD.test.cpp

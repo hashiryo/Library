@@ -167,6 +167,9 @@ data:
     - icon: ':question:'
       path: src/Geometry/Segment.hpp
       title: "\u7DDA\u5206"
+    - icon: ':heavy_check_mark:'
+      path: src/Geometry/SegmentArrangement.hpp
+      title: src/Geometry/SegmentArrangement.hpp
     - icon: ':question:'
       path: src/Geometry/angle.hpp
       title: "\u89D2\u5EA6\u30FB\u56DE\u8EE2\u95A2\u9023"
@@ -176,7 +179,7 @@ data:
     - icon: ':question:'
       path: src/Geometry/intersection_area.hpp
       title: "\u5186\u3068\u306E\u5171\u901A\u90E8\u5206\u306E\u9762\u7A4D"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Geometry/min_enclosing_circle.hpp
       title: "\u6700\u5C0F\u5305\u542B\u5186"
   - name: src/Graph
@@ -370,10 +373,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Misc/Mo.hpp
       title: Mo's Algorithm
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Misc/compress.hpp
       title: "\u5EA7\u6A19\u5727\u7E2E"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Misc/rng.hpp
       title: "\u7591\u4F3C\u4E71\u6570"
   - name: src/Optimization
@@ -453,10 +456,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0265.test.cpp
       title: test/aoj/0265.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0269.test.cpp
       title: test/aoj/0269.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/0273.test.cpp
+      title: test/aoj/0273.test.cpp
+    - icon: ':x:'
       path: test/aoj/0284.test.cpp
       title: test/aoj/0284.test.cpp
     - icon: ':heavy_check_mark:'
@@ -507,21 +513,36 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0661.test.cpp
       title: test/aoj/0661.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1033.test.cpp
       title: test/aoj/1033.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1039.test.cpp
       title: test/aoj/1039.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1047.test.cpp
       title: test/aoj/1047.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/1050.test.cpp
+      title: test/aoj/1050.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/1066.test.cpp
+      title: test/aoj/1066.test.cpp
+    - icon: ':x:'
+      path: test/aoj/1067.test.cpp
+      title: test/aoj/1067.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1068.KDT.test.cpp
       title: test/aoj/1068.KDT.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/1107.test.cpp
+      title: test/aoj/1107.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1132.test.cpp
       title: test/aoj/1132.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/1136.test.cpp
+      title: test/aoj/1136.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1157.test.cpp
       title: test/aoj/1157.test.cpp
@@ -537,6 +558,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1190.test.cpp
       title: test/aoj/1190.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/1198.test.cpp
+      title: test/aoj/1198.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/1226.test.cpp
+      title: test/aoj/1226.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/1242.longdouble.test.cpp
       title: test/aoj/1242.longdouble.test.cpp
@@ -633,7 +660,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2402.test.cpp
       title: test/aoj/2402.test.cpp
     - icon: ':heavy_check_mark:'
@@ -642,6 +669,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2442.test.cpp
       title: test/aoj/2442.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2448.test.cpp
+      title: test/aoj/2448.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2450.LCT.test.cpp
       title: test/aoj/2450.LCT.test.cpp
@@ -744,16 +774,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3032.test.cpp
       title: test/aoj/3032.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3034.test.cpp
       title: test/aoj/3034.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/3044.test.cpp
       title: test/aoj/3044.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3049.test.cpp
       title: test/aoj/3049.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3056.test.cpp
       title: test/aoj/3056.test.cpp
     - icon: ':heavy_check_mark:'
@@ -789,31 +819,31 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
       title: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_1_A.test.cpp
       title: test/aoj/CGL_1_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_1_B.test.cpp
       title: test/aoj/CGL_1_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_1_C.test.cpp
       title: test/aoj/CGL_1_C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_2_A.test.cpp
       title: test/aoj/CGL_2_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_2_B.test.cpp
       title: test/aoj/CGL_2_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_2_C.test.cpp
       title: test/aoj/CGL_2_C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_2_D.test.cpp
       title: test/aoj/CGL_2_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_3_A.test.cpp
       title: test/aoj/CGL_3_A.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/CGL_3_B.test.cpp
       title: test/aoj/CGL_3_B.test.cpp
     - icon: ':x:'

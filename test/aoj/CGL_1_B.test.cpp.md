@@ -9,9 +9,9 @@ data:
     title: "\u70B9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     ERROR: '0.00000001'
@@ -24,7 +24,8 @@ data:
     \n#include <fstream>\n#line 5 \"src/Geometry/Point.hpp\"\n#include <cmath>\n#include\
     \ <cassert>\nnamespace geo {\nusing namespace std;\nstruct Visualizer {\n ofstream\
     \ ofs;\n Visualizer(string s= \"visualize.txt\"): ofs(s) { ofs << fixed << setprecision(10);\
-    \ }\n};\ntemplate <class K> int sgn(K x) {\n if constexpr (is_floating_point_v<K>)\
+    \ }\n friend Visualizer &operator<<(Visualizer &vis, const string &s) { return\
+    \ vis.ofs << s, vis; }\n};\ntemplate <class K> int sgn(K x) {\n if constexpr (is_floating_point_v<K>)\
     \ {\n  static constexpr K EPS= 1e-9;\n  return x < -EPS ? -1 : x > EPS;\n } else\
     \ return x < 0 ? -1 : x > 0;\n}\ntemplate <class K> K err_floor(K x) {\n K y=\
     \ floor(x);\n if constexpr (is_floating_point_v<K>)\n  if (K z= y + 1, w= x -\
@@ -64,64 +65,64 @@ data:
     \ ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"\
     ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K>\
     \ &p0, const Point<K> &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n\
-    \ if (int s= sgn(cross(a, b)); s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n\
-    \ if (K d= dot(a, b); sgn(d) < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a))\
-    \ > 0 ? ONLINE_FRONT : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate\
-    \ <class K> struct Segment;\ntemplate <class K> struct Polygon;\ntemplate <class\
-    \ K> struct Convex;\ntemplate <class K> struct Affine {\n K a00= 1, a01= 0, a10=\
-    \ 0, a11= 1;\n Point<K> b;\n Point<K> operator()(const Point<K> &p) const { return\
-    \ {a00 * p.x + a01 * p.y + b.x, a10 * p.x + a11 * p.y + b.y}; }\n Line<K> operator()(const\
-    \ Line<K> &l);\n Segment<K> operator()(const Segment<K> &s);\n Polygon<K> operator()(const\
-    \ Polygon<K> &p);\n Convex<K> operator()(const Convex<K> &c);\n Affine operator*(const\
-    \ Affine &r) const { return {a00 * r.a00 + a01 * r.a10, a00 * r.a01 + a01 * r.a11,\
-    \ a10 * r.a00 + a11 * r.a10, a10 * r.a01 + a11 * r.a11, (*this)(r)}; }\n Affine\
-    \ &operator*=(const Affine &r) { return *this= *this * r; }\n};\ntemplate <class\
-    \ K> Affine<K> translate(const Point<K> &p) { return {1, 0, 0, 1, p}; }\n}\n#line\
-    \ 4 \"src/Geometry/Line.hpp\"\nnamespace geo {\ntemplate <class K> struct Line\
-    \ {\n using P= Point<K>;\n P p, d;  // p+td\n Line() {}\n // p + td\n Line(const\
-    \ P &p, const P &d): p(p), d(d) { assert(sgn(norm2(d))); }\n // ax+by+c=0 .................\
-    \ ax+by+c>0: left, ax+by+c=0: on, ax+by+c<0: right\n Line(K a, K b, K c) {\n \
-    \ int sa= sgn(a), sb= sgn(b);\n  assert(sa || sb);\n  d= P{b, -a}, p= sb ? P{0,\
-    \ -c / b} : P{-c / a, 0};\n }\n bool operator==(const Line &l) const { return\
-    \ !sgn(cross(d, l.d)) && !where(l.p); }\n bool operator!=(const Line &l) const\
-    \ { return sgn(cross(d, l.d)) || where(l.p); }\n // +1: left, 0: on, -1: right\n\
-    \ int where(const P &q) const { return sgn(cross(d, q - p)); }\n P project(const\
-    \ P &q) const { return p + dot(q - p, d) / norm2(d) * d; }\n // return  a,b,c\
-    \ of ax+by+c=0\n tuple<K, K, K> coef() const { return make_tuple(-d.y, d.x, cross(p,\
-    \ d)); }\n friend ostream &operator<<(ostream &os, const Line &l) { return os\
-    \ << l.p << \" + t\" << l.d; }\n friend Visualizer &operator<<(Visualizer &vis,\
-    \ const Line &l) {\n  auto [a, b, c]= l.coef();\n  return vis.ofs << \"Line \"\
-    \ << a << \" \" << b << \" \" << c << '\\n', vis;\n }\n};\n// p + t(q-p)\ntemplate\
-    \ <class K> Line<K> line_through(const Point<K> &p, const Point<K> &q) { return\
-    \ Line(p, q - p); }\ntemplate <class K> bool is_parallel(const Line<K> &l, const\
-    \ Line<K> &m) { return !sgn(cross(l.d, m.d)); }\ntemplate <class K> bool is_orthogonal(const\
-    \ Line<K> &l, const Line<K> &m) { return !sgn(dot(l.d, m.d)); }\n// 1 : properly\
-    \ crossing, 0 : disjoint parallel, 2 : same line\ntemplate <class K> vector<Point<K>>\
-    \ cross_points(const Line<K> &l, const Line<K> &m) {\n K a= cross(m.d, l.d), b=\
-    \ cross(l.p - m.p, l.d);\n if (sgn(a)) return {m.p + b / a * m.d};  // properly\
-    \ crossing\n if (sgn(b)) return {};                   // disjoint parallel\n return\
-    \ {m.p, m.p + m.d};                 // same line\n}\n// perpendicular bisector\
-    \ ............ p on leftside\ntemplate <class K> Line<K> bisector(const Point<K>\
-    \ &p, const Point<K> &q) { return Line((p + q) / 2, !(q - p)); }\n// angle bisector\
-    \ ........... parallel -> 1 line, non-parallel -> 2 lines\ntemplate <class K>\
-    \ vector<Line<K>> bisector(const Line<K> &l, const Line<K> &m) {\n auto cp= cross_points(l,\
-    \ m);\n if (cp.size() != 1) return {Line((l.p + m.p) / 2, l.d)};\n auto d= l.d\
-    \ / norm(l.d) + m.d / norm(m.d);\n return {Line(cp[0], d), Line(cp[0], !d)};\n\
-    }\ntemplate <class K> K dist2(const Line<K> &l, const Point<K> &p) {\n K a= cross(l.d,\
-    \ p - l.p);\n return a * a / norm2(l.d);\n}\ntemplate <class K> K dist2(const\
-    \ Point<K> &p, const Line<K> &l) { return dist2(l, p); }\ntemplate <class K> K\
-    \ dist2(const Line<K> &l, const Line<K> &m) { return is_parallel(l, m) ? dist2(l,\
-    \ m.p) : 0; }\ntemplate <class K> Affine<K> reflect(const Line<K> &l) {\n K a=\
-    \ l.d.x * l.d.x, b= l.d.x * l.d.y * 2, c= l.d.y * l.d.y, d= a + c;\n a/= d, b/=\
-    \ d, c/= d, d= a - c;\n return {d, b, b, -d, Point<K>{c * 2 * l.p.x - b * l.p.y,\
-    \ a * 2 * l.p.y - b * l.p.x}};\n}\ntemplate <class K> Line<K> Affine<K>::operator()(const\
-    \ Line<K> &l) { return line_through((*this)(l.p), (*this)(l.p + l.d)); }\n}\n\
-    #line 6 \"test/aoj/CGL_1_B.test.cpp\"\nusing namespace std;\nsigned main() {\n\
-    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geo;\n cout <<\
-    \ fixed << setprecision(12);\n using P= Point<long double>;\n P p1, p2;\n cin\
-    \ >> p1 >> p2;\n auto ref= reflect(line_through(p1, p2));\n int q;\n cin >> q;\n\
-    \ while (q--) {\n  P p;\n  cin >> p;\n  auto ans= ref(p);\n  cout << ans.x <<\
-    \ \" \" << ans.y << '\\n';\n }\n return 0;\n}\n"
+    \ if (int s= sgn(cross(a, b) / norm2(a)); s) return s > 0 ? COUNTER_CLOCKWISE\
+    \ : CLOCKWISE;\n if (K d= dot(a, b); sgn(d) < 0) return ONLINE_BACK;\n else return\
+    \ sgn(d - norm2(a)) > 0 ? ONLINE_FRONT : ON_SEGMENT;\n}\ntemplate <class K> struct\
+    \ Line;\ntemplate <class K> struct Segment;\ntemplate <class K> struct Polygon;\n\
+    template <class K> struct Convex;\ntemplate <class K> struct Affine {\n K a00=\
+    \ 1, a01= 0, a10= 0, a11= 1;\n Point<K> b;\n Point<K> operator()(const Point<K>\
+    \ &p) const { return {a00 * p.x + a01 * p.y + b.x, a10 * p.x + a11 * p.y + b.y};\
+    \ }\n Line<K> operator()(const Line<K> &l);\n Segment<K> operator()(const Segment<K>\
+    \ &s);\n Polygon<K> operator()(const Polygon<K> &p);\n Convex<K> operator()(const\
+    \ Convex<K> &c);\n Affine operator*(const Affine &r) const { return {a00 * r.a00\
+    \ + a01 * r.a10, a00 * r.a01 + a01 * r.a11, a10 * r.a00 + a11 * r.a10, a10 * r.a01\
+    \ + a11 * r.a11, (*this)(r)}; }\n Affine &operator*=(const Affine &r) { return\
+    \ *this= *this * r; }\n};\ntemplate <class K> Affine<K> translate(const Point<K>\
+    \ &p) { return {1, 0, 0, 1, p}; }\n}\n#line 4 \"src/Geometry/Line.hpp\"\nnamespace\
+    \ geo {\ntemplate <class K> struct Line {\n using P= Point<K>;\n P p, d;  // p+td\n\
+    \ Line() {}\n // p + td\n Line(const P &p, const P &d): p(p), d(d) { assert(sgn(norm2(d)));\
+    \ }\n // ax+by+c=0 ................. ax+by+c>0: left, ax+by+c=0: on, ax+by+c<0:\
+    \ right\n Line(K a, K b, K c) {\n  int sa= sgn(a), sb= sgn(b);\n  assert(sa ||\
+    \ sb);\n  d= P{b, -a}, p= sb ? P{0, -c / b} : P{-c / a, 0};\n }\n bool operator==(const\
+    \ Line &l) const { return !sgn(cross(d, l.d)) && !where(l.p); }\n bool operator!=(const\
+    \ Line &l) const { return sgn(cross(d, l.d)) || where(l.p); }\n // +1: left, 0:\
+    \ on, -1: right\n int where(const P &q) const { return sgn(cross(d, q - p)); }\n\
+    \ P project(const P &q) const { return p + dot(q - p, d) / norm2(d) * d; }\n //\
+    \ return  a,b,c of ax+by+c=0\n tuple<K, K, K> coef() const { return make_tuple(-d.y,\
+    \ d.x, cross(p, d)); }\n friend ostream &operator<<(ostream &os, const Line &l)\
+    \ { return os << l.p << \" + t\" << l.d; }\n friend Visualizer &operator<<(Visualizer\
+    \ &vis, const Line &l) {\n  auto [a, b, c]= l.coef();\n  return vis.ofs << \"\
+    Line \" << a << \" \" << b << \" \" << c << \"\\n\", vis;\n }\n};\n// p + t(q-p)\n\
+    template <class K> Line<K> line_through(const Point<K> &p, const Point<K> &q)\
+    \ { return Line(p, q - p); }\ntemplate <class K> bool is_parallel(const Line<K>\
+    \ &l, const Line<K> &m) { return !sgn(cross(l.d, m.d)); }\ntemplate <class K>\
+    \ bool is_orthogonal(const Line<K> &l, const Line<K> &m) { return !sgn(dot(l.d,\
+    \ m.d)); }\n// 1 : properly crossing, 0 : disjoint parallel, 2 : same line\ntemplate\
+    \ <class K> vector<Point<K>> cross_points(const Line<K> &l, const Line<K> &m)\
+    \ {\n K a= cross(m.d, l.d), b= cross(l.p - m.p, l.d);\n if (sgn(a)) return {m.p\
+    \ + b / a * m.d};  // properly crossing\n if (sgn(b)) return {};             \
+    \      // disjoint parallel\n return {m.p, m.p + m.d};                 // same\
+    \ line\n}\n// perpendicular bisector ............ p on leftside\ntemplate <class\
+    \ K> Line<K> bisector(const Point<K> &p, const Point<K> &q) { return Line((p +\
+    \ q) / 2, !(q - p)); }\n// angle bisector ........... parallel -> 1 line, non-parallel\
+    \ -> 2 lines\ntemplate <class K> vector<Line<K>> bisector(const Line<K> &l, const\
+    \ Line<K> &m) {\n auto cp= cross_points(l, m);\n if (cp.size() != 1) return {Line((l.p\
+    \ + m.p) / 2, l.d)};\n auto d= l.d / norm(l.d) + m.d / norm(m.d);\n return {Line(cp[0],\
+    \ d), Line(cp[0], !d)};\n}\ntemplate <class K> K dist2(const Line<K> &l, const\
+    \ Point<K> &p) {\n K a= cross(l.d, p - l.p);\n return a * a / norm2(l.d);\n}\n\
+    template <class K> K dist2(const Point<K> &p, const Line<K> &l) { return dist2(l,\
+    \ p); }\ntemplate <class K> K dist2(const Line<K> &l, const Line<K> &m) { return\
+    \ is_parallel(l, m) ? dist2(l, m.p) : 0; }\ntemplate <class K> Affine<K> reflect(const\
+    \ Line<K> &l) {\n K a= l.d.x * l.d.x, b= l.d.x * l.d.y * 2, c= l.d.y * l.d.y,\
+    \ d= a + c;\n a/= d, b/= d, c/= d, d= a - c;\n return {d, b, b, -d, Point<K>{c\
+    \ * 2 * l.p.x - b * l.p.y, a * 2 * l.p.y - b * l.p.x}};\n}\ntemplate <class K>\
+    \ Line<K> Affine<K>::operator()(const Line<K> &l) { return line_through((*this)(l.p),\
+    \ (*this)(l.p + l.d)); }\n}\n#line 6 \"test/aoj/CGL_1_B.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
+    \ geo;\n cout << fixed << setprecision(12);\n using P= Point<long double>;\n P\
+    \ p1, p2;\n cin >> p1 >> p2;\n auto ref= reflect(line_through(p1, p2));\n int\
+    \ q;\n cin >> q;\n while (q--) {\n  P p;\n  cin >> p;\n  auto ans= ref(p);\n \
+    \ cout << ans.x << \" \" << ans.y << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/1/CGL_1_B\"\
     \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
     \ \"src/Geometry/Line.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
@@ -135,8 +136,8 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_1_B.test.cpp
   requiredBy: []
-  timestamp: '2023-09-28 16:56:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-02 19:27:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_1_B.test.cpp
 layout: document
