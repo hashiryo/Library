@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/line_add_get_min
     links:
     - https://judge.yosupo.jp/problem/line_add_get_min
-  bundledCode: "#line 1 \"test/yosupo/line_add_get_min.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"test/yosupo/line_add_get_min.LiCT.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/line_add_get_min\"\n#include <iostream>\n\
     #line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include <algorithm>\n\
     #line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum { MAXIMIZE= -1, MINIMIZE=\
@@ -50,9 +50,9 @@ data:
     \ // ax+b\n void insert_line(T a, T b) { addl(root, Line{a * obj, b * obj}, L,\
     \ U); }\n // ax+b for x in [l,r)\n void insert_segment(T l, T r, T a, T b) { adds(root,\
     \ Line{a * obj, b * obj}, l, r, L, U); }\n T query(T x) const { return query(root,\
-    \ L, U, x) * obj; }\n};\n#line 4 \"test/yosupo/line_add_get_min.test.cpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
-    \ N, Q;\n cin >> N >> Q;\n LiChaoTree<long long> cht;\n while (N--) {\n  long\
+    \ L, U, x) * obj; }\n};\n#line 4 \"test/yosupo/line_add_get_min.LiCT.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n LiChaoTree<long long> cht;\n while (N--) {\n  long\
     \ long a, b;\n  cin >> a >> b;\n  cht.insert_line(a, b);\n }\n while (Q--) {\n\
     \  bool op;\n  cin >> op;\n  if (op) {\n   long long p;\n   cin >> p;\n   cout\
     \ << cht.query(p) << '\\n';\n  } else {\n   long long a, b;\n   cin >> a >> b;\n\
@@ -69,15 +69,15 @@ data:
   - src/Optimization/LiChaoTree.hpp
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: true
-  path: test/yosupo/line_add_get_min.test.cpp
+  path: test/yosupo/line_add_get_min.LiCT.test.cpp
   requiredBy: []
-  timestamp: '2023-08-17 22:34:53+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-10 00:58:36+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/line_add_get_min.test.cpp
+documentation_of: test/yosupo/line_add_get_min.LiCT.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/line_add_get_min.test.cpp
-- /verify/test/yosupo/line_add_get_min.test.cpp.html
-title: test/yosupo/line_add_get_min.test.cpp
+- /verify/test/yosupo/line_add_get_min.LiCT.test.cpp
+- /verify/test/yosupo/line_add_get_min.LiCT.test.cpp.html
+title: test/yosupo/line_add_get_min.LiCT.test.cpp
 ---

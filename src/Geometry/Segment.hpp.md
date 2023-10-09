@@ -17,9 +17,9 @@ data:
   - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: "\u591A\u89D2\u5F62"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/SegmentArrangement.hpp
-    title: src/Geometry/SegmentArrangement.hpp
+    title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
   - icon: ':question:'
     path: src/Geometry/intersection_area.hpp
     title: "\u5186\u3068\u306E\u5171\u901A\u90E8\u5206\u306E\u9762\u7A4D"
@@ -88,6 +88,9 @@ data:
     path: test/aoj/1242.rational.test.cpp
     title: test/aoj/1242.rational.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/1267.test.cpp
+    title: test/aoj/1267.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1342.test.cpp
     title: test/aoj/1342.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,6 +120,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2448.test.cpp
     title: test/aoj/2448.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2495.test.cpp
+    title: test/aoj/2495.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2514.test.cpp
     title: test/aoj/2514.test.cpp
@@ -129,6 +135,9 @@ data:
   - icon: ':x:'
     path: test/aoj/3049.test.cpp
     title: test/aoj/3049.test.cpp
+  - icon: ':x:'
+    path: test/aoj/3176.test.cpp
+    title: test/aoj/3176.test.cpp
   - icon: ':x:'
     path: test/aoj/CGL_2_B.test.cpp
     title: test/aoj/CGL_2_B.test.cpp
@@ -183,6 +192,9 @@ data:
   - icon: ':x:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc202_f.test.cpp
+    title: test/atcoder/abc202_f.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -234,7 +246,8 @@ data:
     \ ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"\
     ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K>\
     \ &p0, const Point<K> &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n\
-    \ if (int s= sgn(cross(a, b) / norm2(a)); s) return s > 0 ? COUNTER_CLOCKWISE\
+    \ int s;\n if constexpr (is_floating_point_v<K>) s= sgn(sgn(cross(a, b) / sqrt(norm2(a)\
+    \ * norm2(b))));\n else s= sgn(cross(a, b));\n if (s) return s > 0 ? COUNTER_CLOCKWISE\
     \ : CLOCKWISE;\n if (K d= dot(a, b); sgn(d) < 0) return ONLINE_BACK;\n else return\
     \ sgn(d - norm2(a)) > 0 ? ONLINE_FRONT : ON_SEGMENT;\n}\ntemplate <class K> struct\
     \ Line;\ntemplate <class K> struct Segment;\ntemplate <class K> struct Polygon;\n\
@@ -398,7 +411,7 @@ data:
   - src/Geometry/Polygon.hpp
   - src/Geometry/intersection_area.hpp
   - src/Geometry/Circle.hpp
-  timestamp: '2023-10-02 19:27:07+09:00'
+  timestamp: '2023-10-10 00:58:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1198.test.cpp
@@ -408,6 +421,7 @@ data:
   - test/aoj/0273.test.cpp
   - test/aoj/0445.test.cpp
   - test/aoj/1157.test.cpp
+  - test/aoj/3176.test.cpp
   - test/aoj/2009.rational.test.cpp
   - test/aoj/CGL_4_C.test.cpp
   - test/aoj/CGL_7_B.test.cpp
@@ -439,6 +453,7 @@ data:
   - test/aoj/0265.test.cpp
   - test/aoj/CGL_7_F.test.cpp
   - test/aoj/3034.test.cpp
+  - test/aoj/1267.test.cpp
   - test/aoj/2626.test.cpp
   - test/aoj/1033.test.cpp
   - test/aoj/1242.rational.test.cpp
@@ -450,9 +465,11 @@ data:
   - test/aoj/CGL_2_B.test.cpp
   - test/aoj/CGL_3_A.test.cpp
   - test/aoj/CGL_3_B.test.cpp
+  - test/aoj/2495.test.cpp
   - test/aoj/2448.test.cpp
   - test/aoj/CGL_4_A.test.cpp
   - test/aoj/1183.test.cpp
+  - test/atcoder/abc202_f.test.cpp
 documentation_of: src/Geometry/Segment.hpp
 layout: document
 title: "\u7DDA\u5206"

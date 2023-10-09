@@ -65,36 +65,38 @@ data:
     COUNTER_CLOCKWISE\" : c == CLOCKWISE ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\"\
     \ : c == ONLINE_FRONT ? \"ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class\
     \ K> CCW ccw(const Point<K> &p0, const Point<K> &p1, const Point<K> &p2) {\n Point\
-    \ a= p1 - p0, b= p2 - p0;\n if (int s= sgn(cross(a, b) / norm2(a)); s) return\
-    \ s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b); sgn(d) < 0) return\
-    \ ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT : ON_SEGMENT;\n\
-    }\ntemplate <class K> struct Line;\ntemplate <class K> struct Segment;\ntemplate\
-    \ <class K> struct Polygon;\ntemplate <class K> struct Convex;\ntemplate <class\
-    \ K> struct Affine {\n K a00= 1, a01= 0, a10= 0, a11= 1;\n Point<K> b;\n Point<K>\
-    \ operator()(const Point<K> &p) const { return {a00 * p.x + a01 * p.y + b.x, a10\
-    \ * p.x + a11 * p.y + b.y}; }\n Line<K> operator()(const Line<K> &l);\n Segment<K>\
-    \ operator()(const Segment<K> &s);\n Polygon<K> operator()(const Polygon<K> &p);\n\
-    \ Convex<K> operator()(const Convex<K> &c);\n Affine operator*(const Affine &r)\
-    \ const { return {a00 * r.a00 + a01 * r.a10, a00 * r.a01 + a01 * r.a11, a10 *\
-    \ r.a00 + a11 * r.a10, a10 * r.a01 + a11 * r.a11, (*this)(r)}; }\n Affine &operator*=(const\
-    \ Affine &r) { return *this= *this * r; }\n};\ntemplate <class K> Affine<K> translate(const\
-    \ Point<K> &p) { return {1, 0, 0, 1, p}; }\n}\n#line 5 \"src/Geometry/closest_pair.hpp\"\
-    \nnamespace geo {\ntemplate <class K> pair<Point<K>, Point<K>> closest_pair(vector<Point<K>>\
-    \ ps) {\n int n= ps.size();\n assert(n >= 2);\n sort(ps.begin(), ps.end(), [](const\
-    \ Point<K> &p, const Point<K> &q) { return p.y < q.y; });\n vector<Point<K>> memo(n);\n\
-    \ pair<Point<K>, Point<K>> ret= {ps[0], ps[1]};\n K best= dist2(ps[0], ps[1]),\
-    \ tmp;\n auto rec= [&](auto &rec, int l, int r) -> void {\n  if (r - l == 1) return;\n\
-    \  int m= (l + r) / 2;\n  K y= ps[m].y, d;\n  rec(rec, l, m), rec(rec, m, r),\
-    \ inplace_merge(ps.begin() + l, ps.begin() + m, ps.begin() + r);\n  for (int i=\
-    \ l, cnt= 0; i < r; ++i) {\n   if (d= ps[i].y - y; d * d >= best) continue;\n\
-    \   for (int j= cnt; j--;) {\n    if (d= ps[i].x - memo[j].x, tmp= d * d; tmp\
-    \ >= best) break;\n    if (d= ps[i].y - memo[j].y, tmp+= d * d; best > tmp) best=\
-    \ tmp, ret= {ps[i], memo[j]};\n   }\n   memo[cnt++]= ps[i];\n  }\n };\n return\
-    \ rec(rec, 0, n), ret;\n}\n}\n#line 7 \"test/aoj/CGL_5_A.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
-    \ geo;\n int n;\n cin >> n;\n vector<Point<long double>> ps(n);\n for (int i=\
-    \ 0; i < n; i++) cin >> ps[i];\n auto [p, q]= closest_pair(ps);\n cout << fixed\
-    \ << setprecision(12) << dist(p, q) << '\\n';\n return 0;\n}\n"
+    \ a= p1 - p0, b= p2 - p0;\n int s;\n if constexpr (is_floating_point_v<K>) s=\
+    \ sgn(sgn(cross(a, b) / sqrt(norm2(a) * norm2(b))));\n else s= sgn(cross(a, b));\n\
+    \ if (s) return s > 0 ? COUNTER_CLOCKWISE : CLOCKWISE;\n if (K d= dot(a, b); sgn(d)\
+    \ < 0) return ONLINE_BACK;\n else return sgn(d - norm2(a)) > 0 ? ONLINE_FRONT\
+    \ : ON_SEGMENT;\n}\ntemplate <class K> struct Line;\ntemplate <class K> struct\
+    \ Segment;\ntemplate <class K> struct Polygon;\ntemplate <class K> struct Convex;\n\
+    template <class K> struct Affine {\n K a00= 1, a01= 0, a10= 0, a11= 1;\n Point<K>\
+    \ b;\n Point<K> operator()(const Point<K> &p) const { return {a00 * p.x + a01\
+    \ * p.y + b.x, a10 * p.x + a11 * p.y + b.y}; }\n Line<K> operator()(const Line<K>\
+    \ &l);\n Segment<K> operator()(const Segment<K> &s);\n Polygon<K> operator()(const\
+    \ Polygon<K> &p);\n Convex<K> operator()(const Convex<K> &c);\n Affine operator*(const\
+    \ Affine &r) const { return {a00 * r.a00 + a01 * r.a10, a00 * r.a01 + a01 * r.a11,\
+    \ a10 * r.a00 + a11 * r.a10, a10 * r.a01 + a11 * r.a11, (*this)(r)}; }\n Affine\
+    \ &operator*=(const Affine &r) { return *this= *this * r; }\n};\ntemplate <class\
+    \ K> Affine<K> translate(const Point<K> &p) { return {1, 0, 0, 1, p}; }\n}\n#line\
+    \ 5 \"src/Geometry/closest_pair.hpp\"\nnamespace geo {\ntemplate <class K> pair<Point<K>,\
+    \ Point<K>> closest_pair(vector<Point<K>> ps) {\n int n= ps.size();\n assert(n\
+    \ >= 2);\n sort(ps.begin(), ps.end(), [](const Point<K> &p, const Point<K> &q)\
+    \ { return p.y < q.y; });\n vector<Point<K>> memo(n);\n pair<Point<K>, Point<K>>\
+    \ ret= {ps[0], ps[1]};\n K best= dist2(ps[0], ps[1]), tmp;\n auto rec= [&](auto\
+    \ &rec, int l, int r) -> void {\n  if (r - l == 1) return;\n  int m= (l + r) /\
+    \ 2;\n  K y= ps[m].y, d;\n  rec(rec, l, m), rec(rec, m, r), inplace_merge(ps.begin()\
+    \ + l, ps.begin() + m, ps.begin() + r);\n  for (int i= l, cnt= 0; i < r; ++i)\
+    \ {\n   if (d= ps[i].y - y; d * d >= best) continue;\n   for (int j= cnt; j--;)\
+    \ {\n    if (d= ps[i].x - memo[j].x, tmp= d * d; tmp >= best) break;\n    if (d=\
+    \ ps[i].y - memo[j].y, tmp+= d * d; best > tmp) best= tmp, ret= {ps[i], memo[j]};\n\
+    \   }\n   memo[cnt++]= ps[i];\n  }\n };\n return rec(rec, 0, n), ret;\n}\n}\n\
+    #line 7 \"test/aoj/CGL_5_A.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace geo;\n int n;\n\
+    \ cin >> n;\n vector<Point<long double>> ps(n);\n for (int i= 0; i < n; i++) cin\
+    \ >> ps[i];\n auto [p, q]= closest_pair(ps);\n cout << fixed << setprecision(12)\
+    \ << dist(p, q) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/5/CGL_5_A\"\
     \n#define ERROR \"0.00000001\"\n#include <iostream>\n#include <iomanip>\n#include\
     \ <vector>\n#include \"src/Geometry/closest_pair.hpp\"\nusing namespace std;\n\
@@ -108,7 +110,7 @@ data:
   isVerificationFile: true
   path: test/aoj/CGL_5_A.test.cpp
   requiredBy: []
-  timestamp: '2023-10-02 19:27:07+09:00'
+  timestamp: '2023-10-10 00:58:36+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/CGL_5_A.test.cpp

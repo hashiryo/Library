@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   - icon: ':question:'
@@ -36,9 +36,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2448.test.cpp
     title: test/aoj/2448.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/aoj/3176.test.cpp
+    title: test/aoj/3176.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/SegmentArrangement.hpp\"\n#include <algorithm>\n\
@@ -88,7 +91,8 @@ data:
     \ ? \"CLOCKWISE\" : c == ONLINE_BACK ? \"ONLINE_BACK\" : c == ONLINE_FRONT ? \"\
     ONLINE_FRONT\" : \"ON_SEGMENT\"); }\ntemplate <class K> CCW ccw(const Point<K>\
     \ &p0, const Point<K> &p1, const Point<K> &p2) {\n Point a= p1 - p0, b= p2 - p0;\n\
-    \ if (int s= sgn(cross(a, b) / norm2(a)); s) return s > 0 ? COUNTER_CLOCKWISE\
+    \ int s;\n if constexpr (is_floating_point_v<K>) s= sgn(sgn(cross(a, b) / sqrt(norm2(a)\
+    \ * norm2(b))));\n else s= sgn(cross(a, b));\n if (s) return s > 0 ? COUNTER_CLOCKWISE\
     \ : CLOCKWISE;\n if (K d= dot(a, b); sgn(d) < 0) return ONLINE_BACK;\n else return\
     \ sgn(d - norm2(a)) > 0 ? ONLINE_FRONT : ON_SEGMENT;\n}\ntemplate <class K> struct\
     \ Line;\ntemplate <class K> struct Segment;\ntemplate <class K> struct Polygon;\n\
@@ -298,19 +302,43 @@ data:
   isVerificationFile: false
   path: src/Geometry/SegmentArrangement.hpp
   requiredBy: []
-  timestamp: '2023-10-02 19:27:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-10-10 00:58:36+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1198.test.cpp
   - test/aoj/0273.test.cpp
+  - test/aoj/3176.test.cpp
   - test/aoj/1226.test.cpp
   - test/aoj/1050.test.cpp
   - test/aoj/1033.test.cpp
   - test/aoj/2448.test.cpp
 documentation_of: src/Geometry/SegmentArrangement.hpp
 layout: document
-redirect_from:
-- /library/src/Geometry/SegmentArrangement.hpp
-- /library/src/Geometry/SegmentArrangement.hpp.html
-title: src/Geometry/SegmentArrangement.hpp
+title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
 ---
+
+## `SegmentArrangement<K>` クラス
+二次元空間上の線分の端点および交点を頂点とし, 線分上をたどって辿り着ける点どうしが連結するように辺を張ってグラフを構築する線分アレンジメントを doubly connected edge list (DCEL) で表現するクラス. 
+
+|メンバ関数|概要|
+|---|---|
+|`SegmentArrangement(ss)`|コンストラクタ. `vector<Segment<K>>` を引数にとる. 線分アレンジメントを実行. | 
+|`vertex_size()`|頂点数を返す.|
+|`face_size()`|面数を返す.|
+|`out_edges(v)`|頂点 v から出る辺を隣接リストのように返す.|
+|`point(v)`|頂点 v に対応する二次元空間上の点 ( `Point<K>` クラス ) を返す.|
+|`vertex(p)`|二次元空間上の点 ( `Point<K>` クラス ) $\boldsymbol{p}$ に対応する頂点番号を返す. |
+|`to_v(e)`| 有向辺 e の行き先の頂点を返す.|
+|`from_v(e)`|有向辺 e が出てくる頂点を返す.|
+|`twin(e)`|有向辺 e の頂点を逆にした有向辺を返す.|
+|`next(e)`|有向辺 e の次の有向辺を返す. この順というのは反時計回りに多角形面の辺を辿る順を指す.|
+|`prev(e)`|有向辺 e の前の有向辺を返す. この順というのは反時計回りに多角形面の辺を辿る順を指す.|
+|`incident_face(e)`|有向辺 e が面している面番号を返す.|
+|`component_e(f)`|面 f を構成する辺の一つを返す.|
+|`area2(f)`|面 f の面積の二倍を返す. 面 f が有界でないなら値は負になる.|
+|`area(f)`|面 f の面積を返す. 面 f が有界でないなら値は負になる.|
+|`is_outside(f)`|面 f が有界でないならtrueを返す.|
+
+## 参考
+[https://en.wikipedia.org/wiki/Doubly_connected_edge_list](https://en.wikipedia.org/wiki/Doubly_connected_edge_list)
+

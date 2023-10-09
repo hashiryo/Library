@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2725.test.cpp
-    title: test/aoj/2725.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/line_add_get_min.test.cpp
-    title: test/yosupo/line_add_get_min.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2725.LiCT.test.cpp
+    title: test/aoj/2725.LiCT.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/line_add_get_min.LiCT.test.cpp
+    title: test/yosupo/line_add_get_min.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include\
@@ -87,11 +87,11 @@ data:
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
   timestamp: '2023-08-17 22:34:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2725.test.cpp
+  - test/aoj/2725.LiCT.test.cpp
   - test/yosupo/segment_add_get_min.test.cpp
-  - test/yosupo/line_add_get_min.test.cpp
+  - test/yosupo/line_add_get_min.LiCT.test.cpp
 documentation_of: src/Optimization/LiChaoTree.hpp
 layout: document
 title: Li-Chao-Tree
