@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -14,12 +14,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0323.test.cpp
     title: test/aoj/0323.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2972.test.cpp
     title: test/aoj/2972.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/golden_search.hpp\"\n#include <cmath>\n\
@@ -63,7 +63,7 @@ data:
   path: src/Optimization/golden_search.hpp
   requiredBy: []
   timestamp: '2023-09-20 18:34:32+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2972.test.cpp
   - test/aoj/0323.test.cpp

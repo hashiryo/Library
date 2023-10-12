@@ -2,22 +2,26 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: src/Geometry/IncrementalConvexHull.hpp
+    title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
+  - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: "\u70B9"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/CGL_5_A.test.cpp
-    title: test/aoj/CGL_5_A.test.cpp
-  _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _extendedVerifiedWith: []
+  _isVerificationFailed: true
+  _pathExtension: cpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"src/Geometry/closest_pair.hpp\"\n#include <vector>\n#include\
-    \ <algorithm>\n#line 2 \"src/Geometry/Point.hpp\"\n#include <iostream>\n#include\
-    \ <fstream>\n#include <iomanip>\n#include <cmath>\n#include <cassert>\nnamespace\
-    \ geo {\nusing namespace std;\nstruct Visualizer {\n ofstream ofs;\n Visualizer(string\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://atcoder.jp/contests/abc296/tasks/abc296_g
+    links:
+    - https://atcoder.jp/contests/abc296/tasks/abc296_g
+  bundledCode: "#line 1 \"test/atcoder/abc296_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc296/tasks/abc296_g\"\
+    \n#include <iostream>\n#line 2 \"src/Geometry/IncrementalConvexHull.hpp\"\n#include\
+    \ <vector>\n#include <algorithm>\n#include <set>\n#line 3 \"src/Geometry/Point.hpp\"\
+    \n#include <fstream>\n#include <iomanip>\n#include <cmath>\n#include <cassert>\n\
+    namespace geo {\nusing namespace std;\nstruct Visualizer {\n ofstream ofs;\n Visualizer(string\
     \ s= \"visualize.txt\"): ofs(s) { ofs << fixed << setprecision(10); }\n friend\
     \ Visualizer &operator<<(Visualizer &vis, const string &s) { return vis.ofs <<\
     \ s, vis; }\n};\ntemplate <class K> int sgn(K x) {\n if constexpr (is_floating_point_v<K>)\
@@ -74,49 +78,57 @@ data:
     \ + a01 * r.a10, a00 * r.a01 + a01 * r.a11, a10 * r.a00 + a11 * r.a10, a10 * r.a01\
     \ + a11 * r.a11, (*this)(r)}; }\n Affine &operator*=(const Affine &r) { return\
     \ *this= *this * r; }\n};\ntemplate <class K> Affine<K> translate(const Point<K>\
-    \ &p) { return {1, 0, 0, 1, p}; }\n}\n#line 5 \"src/Geometry/closest_pair.hpp\"\
-    \nnamespace geo {\ntemplate <class K> pair<Point<K>, Point<K>> closest_pair(vector<Point<K>>\
-    \ ps) {\n int n= ps.size();\n assert(n >= 2);\n sort(ps.begin(), ps.end(), [](const\
-    \ Point<K> &p, const Point<K> &q) { return p.y < q.y; });\n vector<Point<K>> memo(n);\n\
-    \ pair<Point<K>, Point<K>> ret= {ps[0], ps[1]};\n K best= dist2(ps[0], ps[1]),\
-    \ tmp;\n auto rec= [&](auto &rec, int l, int r) -> void {\n  if (r - l == 1) return;\n\
-    \  int m= (l + r) / 2;\n  K y= ps[m].y, d;\n  rec(rec, l, m), rec(rec, m, r),\
-    \ inplace_merge(ps.begin() + l, ps.begin() + m, ps.begin() + r);\n  for (int i=\
-    \ l, cnt= 0; i < r; ++i) {\n   if (d= ps[i].y - y; d * d >= best) continue;\n\
-    \   for (int j= cnt; j--;) {\n    if (d= ps[i].x - memo[j].x, tmp= d * d; tmp\
-    \ >= best) break;\n    if (d= ps[i].y - memo[j].y, tmp+= d * d; best > tmp) best=\
-    \ tmp, ret= {ps[i], memo[j]};\n   }\n   memo[cnt++]= ps[i];\n  }\n };\n return\
-    \ rec(rec, 0, n), ret;\n}\n}\n"
-  code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include \"src/Geometry/Point.hpp\"\
-    \nnamespace geo {\ntemplate <class K> pair<Point<K>, Point<K>> closest_pair(vector<Point<K>>\
-    \ ps) {\n int n= ps.size();\n assert(n >= 2);\n sort(ps.begin(), ps.end(), [](const\
-    \ Point<K> &p, const Point<K> &q) { return p.y < q.y; });\n vector<Point<K>> memo(n);\n\
-    \ pair<Point<K>, Point<K>> ret= {ps[0], ps[1]};\n K best= dist2(ps[0], ps[1]),\
-    \ tmp;\n auto rec= [&](auto &rec, int l, int r) -> void {\n  if (r - l == 1) return;\n\
-    \  int m= (l + r) / 2;\n  K y= ps[m].y, d;\n  rec(rec, l, m), rec(rec, m, r),\
-    \ inplace_merge(ps.begin() + l, ps.begin() + m, ps.begin() + r);\n  for (int i=\
-    \ l, cnt= 0; i < r; ++i) {\n   if (d= ps[i].y - y; d * d >= best) continue;\n\
-    \   for (int j= cnt; j--;) {\n    if (d= ps[i].x - memo[j].x, tmp= d * d; tmp\
-    \ >= best) break;\n    if (d= ps[i].y - memo[j].y, tmp+= d * d; best > tmp) best=\
-    \ tmp, ret= {ps[i], memo[j]};\n   }\n   memo[cnt++]= ps[i];\n  }\n };\n return\
-    \ rec(rec, 0, n), ret;\n}\n}"
+    \ &p) { return {1, 0, 0, 1, p}; }\n}\n#line 6 \"src/Geometry/IncrementalConvexHull.hpp\"\
+    \nnamespace geo {\ntemplate <class K> class IncrementalConvexHull {\n using P=\
+    \ Point<K>;\n struct Lower {\n  set<P> S;\n  template <class A, class R> void\
+    \ insert(const P &p, const A &ad, const R &rm) {\n   if (where(p) >= 0) return;\n\
+    \   S.insert(p);\n   vector<P> l, r;\n   auto st= S.find(p);\n   for (auto it=\
+    \ st; it != S.begin();) {\n    if (--it; l.empty()) {\n     l.emplace_back(*it);\n\
+    \     continue;\n    }\n    if (sgn(cross(*it - p, l.back() - p)) > 0) break;\n\
+    \    rm(*it, l.back()), l.emplace_back(*it);\n   }\n   for (auto it= st; ++it\
+    \ != S.end();) {\n    if (r.empty()) {\n     r.emplace_back(*it);\n     continue;\n\
+    \    }\n    if (sgn(cross(r.back() - p, *it - p)) > 0) break;\n    rm(r.back(),\
+    \ *it), r.emplace_back(*it);\n   }\n   if (l.size() > 1) S.erase(next(S.find(l.back())),\
+    \ S.find(p));\n   if (l.size()) ad(l.back(), p);\n   if (r.size() > 1) S.erase(next(S.find(p)),\
+    \ S.find(r.back()));\n   if (r.size()) ad(p, r.back());\n   if (l.size() && r.size())\
+    \ rm(l[0], r[0]);\n  }\n  int where(const P &p) const {\n   auto r= S.lower_bound(p);\n\
+    \   if (r == S.begin()) return S.size() && *r == p ? 0 : -1;\n   if (r == S.end())\
+    \ return -1;\n   return sgn(cross(*prev(r) - p, *r - p));\n  }\n } L, U;\n size_t\
+    \ m;\n K a;\npublic:\n IncrementalConvexHull(): m(0), a(0) {}\n size_t edge_size()\
+    \ const { return m; }\n K area() const { return a / 2; }\n // for integer\n K\
+    \ area2() const { return a; }\n // +1: in, 0: on, -1: out\n int where(const P\
+    \ &p) const {\n  int l= L.where(p), u= U.where(-p);\n  return !l || !u ? 0 : min(l,\
+    \ u);\n }\n void insert(const P &p) {\n  auto ad= [&](const P &q, const P &r)\
+    \ { a+= cross(q, r), ++m; };\n  auto rm= [&](const P &q, const P &r) { a-= cross(q,\
+    \ r), --m; };\n  L.insert(p, ad, rm), U.insert(-p, ad, rm);\n }\n};\n}\n#line\
+    \ 4 \"test/atcoder/abc296_g.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace geo;\n int N;\n cin\
+    \ >> N;\n IncrementalConvexHull<long long> ch;\n for (int i= 0; i < N; ++i) {\n\
+    \  Point<long long> p;\n  cin >> p;\n  ch.insert(p);\n }\n int Q;\n cin >> Q;\n\
+    \ while (Q--) {\n  Point<long long> p;\n  cin >> p;\n  int ans= ch.where(p);\n\
+    \  cout << (ans > 0 ? \"IN\" : ans < 0 ? \"OUT\" : \"ON\") << '\\n';\n }\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc296/tasks/abc296_g\"\n#include\
+    \ <iostream>\n#include \"src/Geometry/IncrementalConvexHull.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace\
+    \ geo;\n int N;\n cin >> N;\n IncrementalConvexHull<long long> ch;\n for (int\
+    \ i= 0; i < N; ++i) {\n  Point<long long> p;\n  cin >> p;\n  ch.insert(p);\n }\n\
+    \ int Q;\n cin >> Q;\n while (Q--) {\n  Point<long long> p;\n  cin >> p;\n  int\
+    \ ans= ch.where(p);\n  cout << (ans > 0 ? \"IN\" : ans < 0 ? \"OUT\" : \"ON\"\
+    ) << '\\n';\n }\n return 0;\n}"
   dependsOn:
+  - src/Geometry/IncrementalConvexHull.hpp
   - src/Geometry/Point.hpp
-  isVerificationFile: false
-  path: src/Geometry/closest_pair.hpp
+  isVerificationFile: true
+  path: test/atcoder/abc296_g.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 00:58:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/aoj/CGL_5_A.test.cpp
-documentation_of: src/Geometry/closest_pair.hpp
+  timestamp: '2023-10-13 01:19:21+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
+  verifiedWith: []
+documentation_of: test/atcoder/abc296_g.test.cpp
 layout: document
-title: "\u6700\u8FD1\u70B9\u5BFE"
+redirect_from:
+- /verify/test/atcoder/abc296_g.test.cpp
+- /verify/test/atcoder/abc296_g.test.cpp.html
+title: test/atcoder/abc296_g.test.cpp
 ---
-
-分割統治+枝刈り
-## 関数
-
-|名前|概要|計算量|
-|---|---|---|
-|`closest_pair(ps)`| 引数は `vector<Point<K>>`. <br>点群のペアのうち2点間の距離が最も近いもの (最近点対) を返す. |$\mathcal{O}(n \log n)$ <br> ただし引数の点の個数を $n$ とした|

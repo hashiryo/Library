@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':x:'
     path: src/Optimization/ConvexHullTrick.hpp
-    title: src/Optimization/ConvexHullTrick.hpp
+    title: Convex-Hull-Trick
   - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/golden_search.hpp
     title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
   - icon: ':heavy_check_mark:'
@@ -39,7 +39,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2725.LiCT.test.cpp
     title: test/aoj/2725.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2972.test.cpp
     title: test/aoj/2972.test.cpp
   - icon: ':heavy_check_mark:'

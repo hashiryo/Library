@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':x:'
     path: src/Optimization/ConvexHullTrick.hpp
-    title: src/Optimization/ConvexHullTrick.hpp
+    title: Convex-Hull-Trick
   - icon: ':question:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\

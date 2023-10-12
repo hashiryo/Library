@@ -12,9 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2635.test.cpp
     title: test/aoj/2635.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/atcoder/abc296_g.test.cpp
+    title: test/atcoder/abc296_g.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/IncrementalConvexHull.hpp\"\n#include <vector>\n\
@@ -129,10 +132,11 @@ data:
   path: src/Geometry/IncrementalConvexHull.hpp
   requiredBy: []
   timestamp: '2023-10-10 00:58:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2635.test.cpp
   - test/aoj/0412.test.cpp
+  - test/atcoder/abc296_g.test.cpp
 documentation_of: src/Geometry/IncrementalConvexHull.hpp
 layout: document
 title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
