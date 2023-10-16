@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree.hpp
     title: Segment-Tree
   - icon: ':heavy_check_mark:'

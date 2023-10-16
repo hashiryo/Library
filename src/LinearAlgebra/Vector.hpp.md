@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/LinearAlgebra/LU_Decomposition.hpp
     title: "LU\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
   - icon: ':heavy_check_mark:'
@@ -87,12 +87,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace\
@@ -148,7 +148,7 @@ data:
   - src/LinearAlgebra/Matrix.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
   timestamp: '2023-08-04 15:19:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2397.test.cpp
   - test/aoj/2397.SparseMat.test.cpp

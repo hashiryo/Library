@@ -6,18 +6,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2603.monotone_minima.test.cpp
     title: test/aoj/2603.monotone_minima.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
-    title: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/913.test.cpp
-    title: test/yukicoder/913.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/952.test.cpp
-    title: test/yukicoder/952.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
+    title: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/913.monotone_minima.test.cpp
+    title: test/yukicoder/913.monotone_minima.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/952.monotone_minima.test.cpp
+    title: test/yukicoder/952.monotone_minima.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/monotone_minima.hpp\"\n#include <vector>\n\
@@ -40,12 +40,12 @@ data:
   path: src/Optimization/monotone_minima.hpp
   requiredBy: []
   timestamp: '2023-08-17 22:34:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2603.monotone_minima.test.cpp
-  - test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
-  - test/yukicoder/913.test.cpp
-  - test/yukicoder/952.test.cpp
+  - test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
+  - test/yukicoder/952.monotone_minima.test.cpp
+  - test/yukicoder/913.monotone_minima.test.cpp
 documentation_of: src/Optimization/monotone_minima.hpp
 layout: document
 title: monotone minima

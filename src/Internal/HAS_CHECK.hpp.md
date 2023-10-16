@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
   - icon: ':heavy_check_mark:'
@@ -114,7 +114,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,7 +144,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_queue.WBT.test.cpp
     title: test/yosupo/persistent_queue.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -159,7 +159,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.Patricia.test.cpp
     title: test/yosupo/set_xor_min.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -177,15 +177,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/728.KDT.test.cpp
     title: test/yukicoder/728.KDT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define\
@@ -216,7 +216,7 @@ data:
   - src/DataStructure/SkewHeap.hpp
   - src/DataStructure/SegmentTree_Dynamic.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1068.KDT.test.cpp
   - test/aoj/GRL_2_B.test.cpp

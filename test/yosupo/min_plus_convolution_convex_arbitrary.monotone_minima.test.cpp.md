@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/monotone_minima.hpp
     title: monotone minima
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
     links:
     - https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
-  bundledCode: "#line 1 \"test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp\"\
+  bundledCode: "#line 1 \"test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
     \n#include <iostream>\n#line 2 \"src/Optimization/monotone_minima.hpp\"\n#include\
     \ <vector>\n// select(i,j,k) -> true if (i,k) is better than (i,j)\ntemplate <typename\
@@ -23,7 +23,7 @@ data:
     \  if (h1 == h2) return;\n  int h= (h1 + h2) / 2, best_w= w1;\n  for (int w= w1\
     \ + 1; w < w2; ++w)\n   if (select(h, best_w, w)) best_w= w;\n  ret[h]= best_w,\
     \ rec(rec, h1, h, w1, best_w + 1), rec(rec, h + 1, h2, best_w, w2);\n };\n return\
-    \ rec(rec, 0, H, 0, W), ret;\n}\n#line 4 \"test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp\"\
+    \ rec(rec, 0, H, 0, W), ret;\n}\n#line 4 \"test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, M;\n cin >> N >> M;\n long long a[N], b[M];\n for (int i= 0; i < N; ++i)\
     \ cin >> a[i];\n for (int j= 0; j < M; ++j) cin >> b[j];\n auto select= [&](int\
@@ -43,15 +43,15 @@ data:
   dependsOn:
   - src/Optimization/monotone_minima.hpp
   isVerificationFile: true
-  path: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
+  path: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
   requiredBy: []
-  timestamp: '2023-09-10 19:51:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-17 01:28:06+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
+documentation_of: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
-- /verify/test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp.html
-title: test/yosupo/min_plus_convolution_convex_arbitrary.test.cpp
+- /verify/test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
+- /verify/test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp.html
+title: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
 ---

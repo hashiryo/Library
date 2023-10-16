@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/ConvexHullTrick.hpp
     title: Convex-Hull-Trick
   - icon: ':question:'
@@ -32,7 +32,7 @@ data:
     \ std::less<>>;\n ms ls;\n bool insect(typename ms::iterator x, typename ms::iterator\
     \ y) {\n  if (y == ls.end()) return x->p= INF, false;\n  if (x->k == y->k) x->p=\
     \ (x->m > y->m ? INF : -INF);\n  else x->p= lc_div(y->m - x->m, x->k - y->k);\n\
-    \  return x->p >= y->p;\n }\npublic:\n void insert_line(T k, T m) {\n  if constexpr\
+    \  return x->p >= y->p;\n }\npublic:\n void insert(T k, T m) {\n  if constexpr\
     \ (obj == MINIMIZE) k= -k, m= -m;\n  auto z= ls.insert({k, m, 0}), y= z++, x=\
     \ y;\n  while (insect(y, z)) z= ls.erase(z);\n  if (x != ls.begin() && insect(--x,\
     \ y)) insect(x, y= ls.erase(y));\n  while ((y= x) != ls.begin() && (--x)->p >=\
@@ -43,28 +43,28 @@ data:
     \  return k * x + m;\n }\n};\ntemplate <typename T> class ConvexHullTrick_XY {\n\
     \ ConvexHullTrick<long double, MINIMIZE> cht_mn;\n ConvexHullTrick<long double,\
     \ MAXIMIZE> cht_mx;\n T amx= std::numeric_limits<T>::lowest(), amn= std::numeric_limits<T>::max();\n\
-    public:\n void insert_line(T a, T b) { cht_mn.insert_line(a, b), cht_mx.insert_line(a,\
-    \ b), amn= std::min(amn, a), amx= std::max(amx, a); }\n bool empty() const { return\
-    \ cht_mn.empty(); }\n T get_max(T x, T y) const {\n  assert(!cht_mn.empty());\n\
-    \  if (y == 0) return std::max(amn * x, amx * x);\n  auto z= (long double)x /\
-    \ y;\n  auto [a, b]= y > 0 ? cht_mx.query_line(z) : cht_mn.query_line(z);\n  return\
-    \ T(a) * x + T(b) * y;\n }\n T get_min(T x, T y) const {\n  assert(!cht_mn.empty());\n\
-    \  if (y == 0) return std::min(amn * x, amx * x);\n  auto z= (long double)x /\
-    \ y;\n  auto [a, b]= y > 0 ? cht_mn.query_line(z) : cht_mx.query_line(z);\n  return\
-    \ T(a) * x + T(b) * y;\n }\n};\n#line 4 \"test/yosupo/line_add_get_min.CHT.test.cpp\"\
+    public:\n void insert(T a, T b) { cht_mn.insert(a, b), cht_mx.insert(a, b), amn=\
+    \ std::min(amn, a), amx= std::max(amx, a); }\n bool empty() const { return cht_mn.empty();\
+    \ }\n T get_max(T x, T y) const {\n  assert(!cht_mn.empty());\n  if (y == 0) return\
+    \ std::max(amn * x, amx * x);\n  auto z= (long double)x / y;\n  auto [a, b]= y\
+    \ > 0 ? cht_mx.query_line(z) : cht_mn.query_line(z);\n  return T(a) * x + T(b)\
+    \ * y;\n }\n T get_min(T x, T y) const {\n  assert(!cht_mn.empty());\n  if (y\
+    \ == 0) return std::min(amn * x, amx * x);\n  auto z= (long double)x / y;\n  auto\
+    \ [a, b]= y > 0 ? cht_mn.query_line(z) : cht_mx.query_line(z);\n  return T(a)\
+    \ * x + T(b) * y;\n }\n};\n#line 4 \"test/yosupo/line_add_get_min.CHT.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n ConvexHullTrick<int64_t, MINIMIZE> cht;\n for (int\
-    \ i= 0; i < N; ++i) {\n  int a, b;\n  cin >> a >> b;\n  cht.insert_line(a, b);\n\
-    \ }\n while (Q--) {\n  int t;\n  cin >> t;\n  if (t) {\n   int p;\n   cin >> p;\n\
+    \ i= 0; i < N; ++i) {\n  int a, b;\n  cin >> a >> b;\n  cht.insert(a, b);\n }\n\
+    \ while (Q--) {\n  int t;\n  cin >> t;\n  if (t) {\n   int p;\n   cin >> p;\n\
     \   cout << cht.query(p) << '\\n';\n  } else {\n   int a, b;\n   cin >> a >> b;\n\
-    \   cht.insert_line(a, b);\n  }\n }\n return 0;\n}\n"
+    \   cht.insert(a, b);\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\n#include\
     \ <iostream>\n#include \"src/Optimization/ConvexHullTrick.hpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
     \ cin >> N >> Q;\n ConvexHullTrick<int64_t, MINIMIZE> cht;\n for (int i= 0; i\
-    \ < N; ++i) {\n  int a, b;\n  cin >> a >> b;\n  cht.insert_line(a, b);\n }\n while\
+    \ < N; ++i) {\n  int a, b;\n  cin >> a >> b;\n  cht.insert(a, b);\n }\n while\
     \ (Q--) {\n  int t;\n  cin >> t;\n  if (t) {\n   int p;\n   cin >> p;\n   cout\
-    \ << cht.query(p) << '\\n';\n  } else {\n   int a, b;\n   cin >> a >> b;\n   cht.insert_line(a,\
+    \ << cht.query(p) << '\\n';\n  } else {\n   int a, b;\n   cin >> a >> b;\n   cht.insert(a,\
     \ b);\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/Optimization/ConvexHullTrick.hpp
@@ -72,7 +72,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/line_add_get_min.CHT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 00:58:36+09:00'
+  timestamp: '2023-10-17 01:28:06+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/line_add_get_min.CHT.test.cpp

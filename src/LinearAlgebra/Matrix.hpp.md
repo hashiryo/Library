@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy:
@@ -72,12 +72,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#include\
@@ -245,7 +245,7 @@ data:
   - src/LinearAlgebra/LU_Decomposition.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
   timestamp: '2023-08-04 18:10:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2397.test.cpp
   - test/aoj/2530.test.cpp

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3170.test.cpp
     title: test/aoj/3170.test.cpp
   - icon: ':x:'
@@ -17,7 +17,7 @@ data:
     title: test/yukicoder/925.SqrtDC.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SortedPerBucket.hpp\"\n#include <limits>\n\
@@ -30,8 +30,8 @@ data:
     \ *(bg + i);\n   build();\n  }\n  inline bool eval() {\n   if (add == 0 && lb\
     \ == -INF && ub == INF) return false;\n   for (auto &x: a) x= std::clamp(x, lb,\
     \ ub) + add;\n   return add= 0, lb= -INF, ub= INF, true;\n  }\n  inline void build()\
-    \ { sorted= a, std::sort(sorted, sorted + n), std::partial_sum(sorted, sorted\
-    \ + n, acc + 1); }\n  inline size_t idx(T x) const { return std::lower_bound(sorted,\
+    \ { std::copy_n(a, B, sorted), std::sort(sorted, sorted + n), std::partial_sum(sorted,\
+    \ sorted + n, acc + 1); }\n  inline size_t idx(T x) const { return std::lower_bound(sorted,\
     \ sorted + n, x) - sorted; }\n  inline size_t count(T x) const { return x-= add,\
     \ (x <= lb ? 0 : ub < x ? n : idx(x)); }\n  inline T sum() const {\n   size_t\
     \ l= idx(lb), u= idx(ub);\n   return acc[u] - acc[l] + lb * l + ub * (n - u) +\
@@ -88,21 +88,21 @@ data:
     \ ub(INF) {\n   for (int i= n; i--;) a[i]= *(bg + i);\n   build();\n  }\n  inline\
     \ bool eval() {\n   if (add == 0 && lb == -INF && ub == INF) return false;\n \
     \  for (auto &x: a) x= std::clamp(x, lb, ub) + add;\n   return add= 0, lb= -INF,\
-    \ ub= INF, true;\n  }\n  inline void build() { sorted= a, std::sort(sorted, sorted\
-    \ + n), std::partial_sum(sorted, sorted + n, acc + 1); }\n  inline size_t idx(T\
-    \ x) const { return std::lower_bound(sorted, sorted + n, x) - sorted; }\n  inline\
-    \ size_t count(T x) const { return x-= add, (x <= lb ? 0 : ub < x ? n : idx(x));\
-    \ }\n  inline T sum() const {\n   size_t l= idx(lb), u= idx(ub);\n   return acc[u]\
-    \ - acc[l] + lb * l + ub * (n - u) + add * n;\n  }\n  inline T sum(T x) const\
-    \ {\n   if (x-= add; x <= lb) return 0;\n   if (ub < x) return sum();\n   size_t\
-    \ l= idx(lb), u= idx(x);\n   return acc[u] - acc[l] + lb * l + add * u;\n  }\n\
-    \  inline T get(size_t k) const { return std::clamp(a[k], lb, ub) + add; }\n };\n\
-    \ const size_t n;\n std::vector<Dat> dat;\n template <class U, class All, class\
-    \ One> inline U fold(size_t l, size_t r, const All &all, const One &one) const\
-    \ {\n  U ret= 0;\n  if (size_t i= l / B, j= r / B, k= l % B, m= r % B; i < j)\
-    \ {\n   if (k) {\n    for (; k < dat[i].n; k++) ret+= one(dat[i].get(k));\n  \
-    \  i++;\n   }\n   for (; i < j; i++) ret+= all(dat[i]);\n   if (m)\n    for (;\
-    \ m--;) ret+= one(dat[j].get(m));\n  } else\n   for (; k < m; k++) ret+= one(dat[i].get(k));\n\
+    \ ub= INF, true;\n  }\n  inline void build() { std::copy_n(a, B, sorted), std::sort(sorted,\
+    \ sorted + n), std::partial_sum(sorted, sorted + n, acc + 1); }\n  inline size_t\
+    \ idx(T x) const { return std::lower_bound(sorted, sorted + n, x) - sorted; }\n\
+    \  inline size_t count(T x) const { return x-= add, (x <= lb ? 0 : ub < x ? n\
+    \ : idx(x)); }\n  inline T sum() const {\n   size_t l= idx(lb), u= idx(ub);\n\
+    \   return acc[u] - acc[l] + lb * l + ub * (n - u) + add * n;\n  }\n  inline T\
+    \ sum(T x) const {\n   if (x-= add; x <= lb) return 0;\n   if (ub < x) return\
+    \ sum();\n   size_t l= idx(lb), u= idx(x);\n   return acc[u] - acc[l] + lb * l\
+    \ + add * u;\n  }\n  inline T get(size_t k) const { return std::clamp(a[k], lb,\
+    \ ub) + add; }\n };\n const size_t n;\n std::vector<Dat> dat;\n template <class\
+    \ U, class All, class One> inline U fold(size_t l, size_t r, const All &all, const\
+    \ One &one) const {\n  U ret= 0;\n  if (size_t i= l / B, j= r / B, k= l % B, m=\
+    \ r % B; i < j) {\n   if (k) {\n    for (; k < dat[i].n; k++) ret+= one(dat[i].get(k));\n\
+    \    i++;\n   }\n   for (; i < j; i++) ret+= all(dat[i]);\n   if (m)\n    for\
+    \ (; m--;) ret+= one(dat[j].get(m));\n  } else\n   for (; k < m; k++) ret+= one(dat[i].get(k));\n\
     \  return ret;\n }\n template <class All, class One> inline void update(size_t\
     \ l, size_t r, const All &all, const One &one) {\n  if (size_t i= l / B, j= r\
     \ / B, k= l % B, m= r % B; i < j) {\n   if (k) {\n    for (dat[i].eval(); k <\
@@ -141,8 +141,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SortedPerBucket.hpp
   requiredBy: []
-  timestamp: '2023-10-13 01:19:21+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-17 01:28:06+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3170.test.cpp
   - test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp

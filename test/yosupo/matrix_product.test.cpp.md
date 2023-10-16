@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   - icon: ':question:'
