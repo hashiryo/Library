@@ -43,7 +43,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/RangeSet.hpp
       title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':heavy_check_mark:'
@@ -155,16 +155,16 @@ data:
     - icon: ':question:'
       path: src/Geometry/IncrementalConvexHull.hpp
       title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Line.hpp
       title: "\u76F4\u7DDA"
     - icon: ':question:'
       path: src/Geometry/Point.hpp
       title: "\u70B9"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Polygon.hpp
       title: "\u591A\u89D2\u5F62"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/Segment.hpp
       title: "\u7DDA\u5206"
     - icon: ':heavy_check_mark:'
@@ -699,7 +699,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2603.AlienDP.test.cpp
       title: test/aoj/2603.AlienDP.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2603.LiCT.test.cpp
       title: test/aoj/2603.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -807,7 +807,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3086.LARSCH.test.cpp
       title: test/aoj/3086.LARSCH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3086.LiCT.test.cpp
       title: test/aoj/3086.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1103,10 +1103,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc202_f.test.cpp
       title: test/atcoder/abc202_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc204_e.test.cpp
       title: test/atcoder/abc204_e.test.cpp
     - icon: ':heavy_check_mark:'

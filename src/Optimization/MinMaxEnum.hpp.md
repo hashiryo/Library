@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2603.LiCT.test.cpp
     title: test/aoj/2603.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,7 +48,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3086.LiCT.test.cpp
     title: test/aoj/3086.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -60,7 +60,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_7_A.matroid_intersection.test.cpp
     title: test/aoj/GRL_7_A.matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc204_e.test.cpp
     title: test/atcoder/abc204_e.test.cpp
   - icon: ':heavy_check_mark:'

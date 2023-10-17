@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Line.hpp
     title: "\u76F4\u7DDA"
   - icon: ':question:'

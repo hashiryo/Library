@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Line.hpp
     title: "\u76F4\u7DDA"
   - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: "\u70B9"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Polygon.hpp
     title: "\u591A\u89D2\u5F62"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Segment.hpp
     title: "\u7DDA\u5206"
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc202/tasks/abc202_f
@@ -318,7 +318,7 @@ data:
     \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 6 \"test/atcoder/abc202_f.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
-    \ geo;\n using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Point<int>>\
+    \ geo;\n using Mint= ModInt<int(1e9) + 7>;\n int N;\n cin >> N;\n vector<Point<int>>\
     \ ps(N);\n for (int i= 0; i < N; ++i) cin >> ps[i];\n sort(ps.begin(), ps.end());\n\
     \ int parity[N][N][N], inside[N][N][N];\n for (int i= N; i--;)\n  for (int j=\
     \ N; j--;) {\n   if (i == j) continue;\n   for (int k= N; k--;) {\n    if (i ==\
@@ -340,9 +340,9 @@ data:
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc202/tasks/abc202_f\"\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/Geometry/Polygon.hpp\"\n#include\
     \ \"src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n using namespace geo;\n using Mint= ModInt<998244353>;\n\
-    \ int N;\n cin >> N;\n vector<Point<int>> ps(N);\n for (int i= 0; i < N; ++i)\
-    \ cin >> ps[i];\n sort(ps.begin(), ps.end());\n int parity[N][N][N], inside[N][N][N];\n\
+    \ ios::sync_with_stdio(false);\n using namespace geo;\n using Mint= ModInt<int(1e9)\
+    \ + 7>;\n int N;\n cin >> N;\n vector<Point<int>> ps(N);\n for (int i= 0; i <\
+    \ N; ++i) cin >> ps[i];\n sort(ps.begin(), ps.end());\n int parity[N][N][N], inside[N][N][N];\n\
     \ for (int i= N; i--;)\n  for (int j= N; j--;) {\n   if (i == j) continue;\n \
     \  for (int k= N; k--;) {\n    if (i == k || j == k) continue;\n    Polygon<int>\
     \ g({ps[i], ps[j], ps[k]});\n    parity[i][j][k]= g.area2() & 1, inside[i][j][k]=\
@@ -371,8 +371,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc202_f.test.cpp
   requiredBy: []
-  timestamp: '2023-10-10 00:58:36+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-10-17 15:04:14+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc202_f.test.cpp
 layout: document

@@ -11,13 +11,13 @@ data:
   - icon: ':question:'
     path: src/Geometry/IncrementalConvexHull.hpp
     title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Line.hpp
     title: "\u76F4\u7DDA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Polygon.hpp
     title: "\u591A\u89D2\u5F62"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Segment.hpp
     title: "\u7DDA\u5206"
   - icon: ':heavy_check_mark:'
@@ -261,7 +261,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_f.test.cpp
     title: test/atcoder/abc202_f.test.cpp
   - icon: ':x:'
