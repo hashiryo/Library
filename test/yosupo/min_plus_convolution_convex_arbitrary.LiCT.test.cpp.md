@@ -5,7 +5,7 @@ data:
     path: src/Internal/function_type.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   bundledCode: "#line 1 \"test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
     \n#include <iostream>\n#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n\
-    #include <algorithm>\n#include <vector>\n#line 2 \"src/Internal/function_type.hpp\"\
+    #include <algorithm>\n#include <vector>\n#include <tuple>\n#line 2 \"src/Internal/function_type.hpp\"\
     \n#include <type_traits>\nnamespace function_template_internal {\ntemplate <class\
     \ C> struct is_function_object {\n template <class U, int dummy= (&U::operator(),\
     \ 0)> static std::true_type check(U *);\n static std::false_type check(...);\n\
@@ -54,7 +54,7 @@ data:
     \ typename other_than_first_argument_type_impl<T>::type;\n}\nusing function_template_internal::result_type_t,\
     \ function_template_internal::argument_type_t, function_template_internal::other_than_first_argument_type_t;\n\
     #line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum { MAXIMIZE= -1, MINIMIZE=\
-    \ 1 };\n#line 7 \"src/Optimization/LiChaoTree.hpp\"\ntemplate <class F> class\
+    \ 1 };\n#line 8 \"src/Optimization/LiChaoTree.hpp\"\ntemplate <class F> class\
     \ LiChaoTree {\n using A= argument_type_t<F>;\n static_assert(std::tuple_size_v<A>\
     \ > 1);\n using T= std::tuple_element_t<0, A>;\n using P= other_than_first_argument_type_t<A>;\n\
     \ using R= result_type_t<F>;\n F f;\n const T LB, UB;\n std::vector<P> ps;\n template\
@@ -119,7 +119,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-17 01:28:06+09:00'
+  timestamp: '2023-10-17 09:08:33+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp

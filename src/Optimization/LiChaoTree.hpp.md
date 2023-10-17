@@ -14,7 +14,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2603.LiCT.test.cpp
     title: test/aoj/2603.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2725.LiCT.test.cpp
     title: test/aoj/2725.LiCT.test.cpp
   - icon: ':x:'
@@ -61,12 +61,12 @@ data:
     title: test/yukicoder/952.LiCT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include\
-    \ <algorithm>\n#include <vector>\n#line 2 \"src/Internal/function_type.hpp\"\n\
-    #include <type_traits>\nnamespace function_template_internal {\ntemplate <class\
+    \ <algorithm>\n#include <vector>\n#include <tuple>\n#line 2 \"src/Internal/function_type.hpp\"\
+    \n#include <type_traits>\nnamespace function_template_internal {\ntemplate <class\
     \ C> struct is_function_object {\n template <class U, int dummy= (&U::operator(),\
     \ 0)> static std::true_type check(U *);\n static std::false_type check(...);\n\
     \ static C *m;\n static constexpr bool value= decltype(check(m))::value;\n};\n\
@@ -94,7 +94,7 @@ data:
     \ typename other_than_first_argument_type_impl<T>::type;\n}\nusing function_template_internal::result_type_t,\
     \ function_template_internal::argument_type_t, function_template_internal::other_than_first_argument_type_t;\n\
     #line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum { MAXIMIZE= -1, MINIMIZE=\
-    \ 1 };\n#line 7 \"src/Optimization/LiChaoTree.hpp\"\ntemplate <class F> class\
+    \ 1 };\n#line 8 \"src/Optimization/LiChaoTree.hpp\"\ntemplate <class F> class\
     \ LiChaoTree {\n using A= argument_type_t<F>;\n static_assert(std::tuple_size_v<A>\
     \ > 1);\n using T= std::tuple_element_t<0, A>;\n using P= other_than_first_argument_type_t<A>;\n\
     \ using R= result_type_t<F>;\n F f;\n const T LB, UB;\n std::vector<P> ps;\n template\
@@ -136,7 +136,7 @@ data:
     \ f(f), LB(LB), UB(UB) {}\n template <MinMaxEnum sgn= MINIMIZE, bool persistent=\
     \ false> LiChaoTreeInterface<sgn, persistent> make_tree() { return this; }\n};\n"
   code: "#pragma once\n#include <limits>\n#include <algorithm>\n#include <vector>\n\
-    #include \"src/Internal/function_type.hpp\"\n#include \"src/Optimization/MinMaxEnum.hpp\"\
+    #include <tuple>\n#include \"src/Internal/function_type.hpp\"\n#include \"src/Optimization/MinMaxEnum.hpp\"\
     \ntemplate <class F> class LiChaoTree {\n using A= argument_type_t<F>;\n static_assert(std::tuple_size_v<A>\
     \ > 1);\n using T= std::tuple_element_t<0, A>;\n using P= other_than_first_argument_type_t<A>;\n\
     \ using R= result_type_t<F>;\n F f;\n const T LB, UB;\n std::vector<P> ps;\n template\
@@ -183,8 +183,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2023-10-17 01:28:06+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-17 09:08:33+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2725.LiCT.test.cpp
   - test/aoj/3086.LiCT.test.cpp

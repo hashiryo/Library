@@ -388,7 +388,7 @@ data:
       path: src/Optimization/Knapsack.hpp
       title: "0-1 \u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C (\u534A\u5206\u5168\
         \u5217\u6319)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Optimization/LiChaoTree.hpp
       title: Li-Chao-Tree
     - icon: ':heavy_check_mark:'
@@ -735,7 +735,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2725.CHT.test.cpp
       title: test/aoj/2725.CHT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2725.LiCT.test.cpp
       title: test/aoj/2725.LiCT.test.cpp
     - icon: ':heavy_check_mark:'

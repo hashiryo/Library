@@ -5,7 +5,7 @@ data:
   - icon: ':x:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
   - icon: ':question:'
@@ -27,7 +27,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2603.LiCT.test.cpp
     title: test/aoj/2603.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2725.LiCT.test.cpp
     title: test/aoj/2725.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
