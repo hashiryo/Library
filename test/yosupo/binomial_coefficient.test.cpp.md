@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'

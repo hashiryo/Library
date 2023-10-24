@@ -10,50 +10,50 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_sparse_FPS.test.cpp
     title: test/yosupo/exp_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_sparse_FPS.test.cpp
     title: test/yosupo/inv_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_sparse_FPS.test.cpp
     title: test/yosupo/log_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_sparse_FPS.test.cpp
     title: test/yosupo/pow_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
     title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1533.test.cpp
     title: test/yukicoder/1533.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1939.test.cpp
     title: test/yukicoder/1939.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/sparse_fps.hpp\"\n#include <vector>\n#line 2 \"\
@@ -110,35 +110,35 @@ data:
     \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
-    \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
-    \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
-    \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
-    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
-    \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
-    \ r), B::md.plus(x, r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n\
-    \ FUNC(operator*(const MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x,\
-    \ k, B::md))\n#undef FUNC\n CE MInt operator/(const MInt& r) const { return *this\
-    \ * r.inv(); }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r;\
-    \ }\n CE MInt& operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt&\
-    \ operator*=(const MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const\
-    \ MInt& r) { return *this= *this / r; }\n CE bool operator==(const MInt& r) const\
-    \ { return B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt&\
-    \ r) const { return !(*this == r); }\n CE bool operator<(const MInt& r) const\
-    \ { return B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return\
-    \ mod_inv<Int>(val(), B::md.mod); }\n CE inline Uint val() const { return B::md.get(x);\
-    \ }\n friend ostream& operator<<(ostream& os, const MInt& r) { return os << r.val();\
-    \ }\n friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is\
-    \ >> v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using\
-    \ ModInt= conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32,\
-    \ u64, 32, 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64,\
-    \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
-    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
-    \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
-    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
-    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
-    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ }\n CE MInt(): x(0) {}\n template <class T, enable_if_t<is_modint_v<T> && !is_same_v<T,\
+    \ MInt>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod))\
+    \ {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
+    \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
+    \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
+    \n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
+    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
+    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
+    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
+    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
+    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
+    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
+    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
+    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
+    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
+    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using ModInt=\
+    \ conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32,\
+    \ 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64,\
+    \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
+    \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
+    \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
+    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
+    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
+    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
@@ -325,19 +325,19 @@ data:
   isVerificationFile: false
   path: src/Math/sparse_fps.hpp
   requiredBy: []
-  timestamp: '2023-08-06 16:57:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-10-25 00:54:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/log_of_sparse_FPS.test.cpp
-  - test/yosupo/exp_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yosupo/inv_of_sparse_FPS.test.cpp
-  - test/yukicoder/1533.test.cpp
   - test/yukicoder/1939.test.cpp
+  - test/yukicoder/1533.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
-  - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
 documentation_of: src/Math/sparse_fps.hpp
 layout: document
 title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"

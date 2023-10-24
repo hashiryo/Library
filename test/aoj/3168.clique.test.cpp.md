@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/CliqueProblem.hpp
     title: "\u30AF\u30EA\u30FC\u30AF\u554F\u984C"
   _extendedRequiredBy: []

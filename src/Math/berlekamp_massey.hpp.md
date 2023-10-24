@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   _extendedVerifiedWith:
@@ -12,24 +12,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/310.test.cpp
     title: test/yukicoder/310.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/berlekamp_massey.hpp\"\n#include <vector>\n// a[n]\
@@ -56,15 +56,15 @@ data:
   requiredBy:
   - src/LinearAlgebra/MinimalPolynomial.hpp
   timestamp: '2023-08-05 23:01:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2397.SparseMat.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
-  - test/yosupo/find_linear_recurrence.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/310.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yosupo/find_linear_recurrence.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp
 layout: document
 title: Berlekamp-Massey

@@ -19,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -31,9 +31,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.DynSeg.test.cpp
     title: test/yukicoder/649.DynSeg.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\n#include <array>\n\
@@ -289,16 +289,16 @@ data:
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy: []
   timestamp: '2023-09-10 18:49:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/DSL_2_I.DynSeg.test.cpp
-  - test/aoj/2270.DynSeg.test.cpp
-  - test/aoj/3024.DynSeg.test.cpp
-  - test/yosupo/set_xor_min.DynSeg.test.cpp
-  - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yukicoder/649.DynSeg.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/yosupo/set_xor_min.DynSeg.test.cpp
+  - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
+  - test/aoj/DSL_2_I.DynSeg.test.cpp
+  - test/aoj/3024.DynSeg.test.cpp
+  - test/aoj/2270.DynSeg.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Dynamic.hpp
 layout: document
 title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"

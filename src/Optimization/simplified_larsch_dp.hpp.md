@@ -86,12 +86,12 @@ data:
   timestamp: '2023-10-17 01:28:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2603.AlienDP.test.cpp
-  - test/aoj/3086.LARSCH.test.cpp
-  - test/yukicoder/409.LARSCH.test.cpp
   - test/yukicoder/705.LARSCH.test.cpp
   - test/yukicoder/703.LARSCH.test.cpp
   - test/yukicoder/704.LARSCH.test.cpp
+  - test/yukicoder/409.LARSCH.test.cpp
+  - test/aoj/3086.LARSCH.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
 documentation_of: src/Optimization/simplified_larsch_dp.hpp
 layout: document
 title: "\u7C21\u6613\u7248LARSCH"

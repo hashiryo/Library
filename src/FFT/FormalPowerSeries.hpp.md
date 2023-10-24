@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':question:'
@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -21,36 +21,36 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/exp_of_FPS.FPS.test.cpp
     title: test/yosupo/exp_of_FPS.FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/inv_of_FPS.FPS.test.cpp
     title: test/yosupo/inv_of_FPS.FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/log_of_FPS.FPS.test.cpp
     title: test/yosupo/log_of_FPS.FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/partition.MSET.test.cpp
     title: test/yosupo/partition.MSET.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/pow_of_FPS.FPS.test.cpp
     title: test/yosupo/pow_of_FPS.FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
     title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/963.FPS.test.cpp
     title: test/yukicoder/963.FPS.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/FormalPowerSeries.hpp\"\n#include <vector>\n#include\
@@ -120,35 +120,35 @@ data:
     \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
-    \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
-    \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
-    \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
-    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
-    \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
-    \ r), B::md.plus(x, r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n\
-    \ FUNC(operator*(const MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x,\
-    \ k, B::md))\n#undef FUNC\n CE MInt operator/(const MInt& r) const { return *this\
-    \ * r.inv(); }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r;\
-    \ }\n CE MInt& operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt&\
-    \ operator*=(const MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const\
-    \ MInt& r) { return *this= *this / r; }\n CE bool operator==(const MInt& r) const\
-    \ { return B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt&\
-    \ r) const { return !(*this == r); }\n CE bool operator<(const MInt& r) const\
-    \ { return B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return\
-    \ mod_inv<Int>(val(), B::md.mod); }\n CE inline Uint val() const { return B::md.get(x);\
-    \ }\n friend ostream& operator<<(ostream& os, const MInt& r) { return os << r.val();\
-    \ }\n friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is\
-    \ >> v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using\
-    \ ModInt= conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32,\
-    \ u64, 32, 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64,\
-    \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
-    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
-    \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
-    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
-    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
-    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ }\n CE MInt(): x(0) {}\n template <class T, enable_if_t<is_modint_v<T> && !is_same_v<T,\
+    \ MInt>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod))\
+    \ {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
+    \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
+    \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
+    \n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
+    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
+    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
+    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
+    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
+    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
+    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
+    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
+    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
+    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
+    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using ModInt=\
+    \ conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32,\
+    \ 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64,\
+    \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
+    \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
+    \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
+    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
+    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
+    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal {\n\
     #define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_, n)\
     \ __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c, ...)\
@@ -514,18 +514,18 @@ data:
   isVerificationFile: false
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-10-25 00:54:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/log_of_FPS.FPS.test.cpp
-  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
-  - test/yosupo/partition.MSET.test.cpp
-  - test/yosupo/exp_of_FPS.FPS.test.cpp
-  - test/yosupo/inv_of_FPS.FPS.test.cpp
-  - test/yosupo/pow_of_FPS.FPS.test.cpp
   - test/yukicoder/963.FPS.test.cpp
-  - test/atcoder/abc213_h.test.cpp
   - test/atcoder/abc230_h.test.cpp
+  - test/atcoder/abc213_h.test.cpp
+  - test/yosupo/sharp_p_subset_sum.PSET.test.cpp
+  - test/yosupo/log_of_FPS.FPS.test.cpp
+  - test/yosupo/pow_of_FPS.FPS.test.cpp
+  - test/yosupo/partition.MSET.test.cpp
+  - test/yosupo/inv_of_FPS.FPS.test.cpp
+  - test/yosupo/exp_of_FPS.FPS.test.cpp
 documentation_of: src/FFT/FormalPowerSeries.hpp
 layout: document
 title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"

@@ -48,15 +48,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/two_edge_connected_components.test.cpp
     title: test/yosupo/two_edge_connected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/UnionFind.hpp\"\n#include <vector>\n#include\
@@ -77,26 +77,26 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
-  - src/Graph/MinimumSpanningAborescense.hpp
   - src/Graph/BipartiteEdgeColoring.hpp
   - src/Graph/IncrementalBridgeConnectivity.hpp
+  - src/Graph/MinimumSpanningAborescense.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/1303.test.cpp
+  - test/yosupo/directedmst.test.cpp
+  - test/yosupo/two_edge_connected_components.test.cpp
+  - test/yosupo/bipartite_edge_coloring.test.cpp
+  - test/aoj/0342.test.cpp
+  - test/aoj/GRL_2_A.kruskal.test.cpp
+  - test/aoj/2647.test.cpp
+  - test/aoj/GRL_3_B.test.cpp
   - test/aoj/GRL_2_B.test.cpp
   - test/aoj/DSL_1_A.test.cpp
-  - test/aoj/2647.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/GRL_3_B.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
-  - test/aoj/3506.test.cpp
-  - test/aoj/GRL_2_A.kruskal.test.cpp
   - test/aoj/2893.test.cpp
-  - test/yosupo/directedmst.test.cpp
-  - test/yosupo/bipartite_edge_coloring.test.cpp
-  - test/yosupo/two_edge_connected_components.test.cpp
-  - test/yukicoder/1303.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
+  - test/aoj/3506.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document
 title: Union-Find

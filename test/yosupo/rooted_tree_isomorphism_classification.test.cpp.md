@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/CartesianProduct.hpp
     title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
       times K_n$)"
@@ -26,17 +26,17 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/compress.hpp
     title: "\u5EA7\u6A19\u5727\u7E2E"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification
@@ -101,35 +101,35 @@ data:
     \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
-    \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
-    \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
-    \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
-    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
-    \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
-    \ r), B::md.plus(x, r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n\
-    \ FUNC(operator*(const MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x,\
-    \ k, B::md))\n#undef FUNC\n CE MInt operator/(const MInt& r) const { return *this\
-    \ * r.inv(); }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r;\
-    \ }\n CE MInt& operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt&\
-    \ operator*=(const MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const\
-    \ MInt& r) { return *this= *this / r; }\n CE bool operator==(const MInt& r) const\
-    \ { return B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt&\
-    \ r) const { return !(*this == r); }\n CE bool operator<(const MInt& r) const\
-    \ { return B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return\
-    \ mod_inv<Int>(val(), B::md.mod); }\n CE inline Uint val() const { return B::md.get(x);\
-    \ }\n friend ostream& operator<<(ostream& os, const MInt& r) { return os << r.val();\
-    \ }\n friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is\
-    \ >> v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using\
-    \ ModInt= conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32,\
-    \ u64, 32, 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64,\
-    \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
-    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
-    \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
-    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
-    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
-    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ }\n CE MInt(): x(0) {}\n template <class T, enable_if_t<is_modint_v<T> && !is_same_v<T,\
+    \ MInt>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod))\
+    \ {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
+    \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
+    \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
+    \n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
+    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
+    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
+    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
+    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
+    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
+    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
+    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
+    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
+    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
+    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using ModInt=\
+    \ conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32,\
+    \ 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64,\
+    \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
+    \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
+    \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
+    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
+    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
+    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 3 \"src/Graph/Tree.hpp\"\n#include <cstddef>\n#line\
     \ 5 \"src/Graph/Tree.hpp\"\n#include <array>\n#include <tuple>\n#include <numeric>\n\
     #line 3 \"src/DataStructure/CsrArray.hpp\"\n#include <iterator>\ntemplate <class\
@@ -277,8 +277,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-25 00:54:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 layout: document

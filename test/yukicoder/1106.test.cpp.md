@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/Automaton.hpp
     title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
   _extendedRequiredBy: []

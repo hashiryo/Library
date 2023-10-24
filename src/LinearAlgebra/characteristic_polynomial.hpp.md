@@ -9,21 +9,21 @@ data:
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/matrix_det_arbitrary_mod.test.cpp
     title: test/yosupo/matrix_det_arbitrary_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1907.test.cpp
     title: test/yukicoder/1907.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\n#include\
@@ -210,12 +210,12 @@ data:
   path: src/LinearAlgebra/characteristic_polynomial.hpp
   requiredBy: []
   timestamp: '2023-09-11 13:10:21+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
-  - test/yosupo/characteristic_polynomial.test.cpp
   - test/yukicoder/1907.test.cpp
   - test/yukicoder/1303.test.cpp
+  - test/yosupo/characteristic_polynomial.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp
 layout: document
 title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"

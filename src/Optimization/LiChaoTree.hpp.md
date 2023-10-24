@@ -190,22 +190,22 @@ data:
   timestamp: '2023-10-17 15:04:14+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2725.LiCT.test.cpp
-  - test/aoj/3086.LiCT.test.cpp
-  - test/aoj/2603.LiCT.test.cpp
-  - test/yosupo/segment_add_get_min.test.cpp
-  - test/yosupo/line_add_get_min.LiCT.test.cpp
-  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - test/yukicoder/705.LiCT.test.cpp
-  - test/yukicoder/704.LiCT.test.cpp
+  - test/yukicoder/703.LiCT.test.cpp
   - test/yukicoder/952.LiCT.test.cpp
   - test/yukicoder/1297.LiCT.2.test.cpp
-  - test/yukicoder/703.LiCT.test.cpp
-  - test/yukicoder/913.LiCT.test.cpp
-  - test/yukicoder/1867.test.cpp
-  - test/yukicoder/1297.LiCT.1.test.cpp
+  - test/yukicoder/705.LiCT.test.cpp
   - test/yukicoder/409.LiCT.test.cpp
+  - test/yukicoder/1867.test.cpp
+  - test/yukicoder/913.LiCT.test.cpp
+  - test/yukicoder/704.LiCT.test.cpp
   - test/yukicoder/2458.LiCT.test.cpp
+  - test/yukicoder/1297.LiCT.1.test.cpp
+  - test/yosupo/line_add_get_min.LiCT.test.cpp
+  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
+  - test/yosupo/segment_add_get_min.test.cpp
+  - test/aoj/2725.LiCT.test.cpp
+  - test/aoj/2603.LiCT.test.cpp
+  - test/aoj/3086.LiCT.test.cpp
 documentation_of: src/Optimization/LiChaoTree.hpp
 layout: document
 title: Li-Chao-Tree
@@ -215,10 +215,14 @@ title: Li-Chao-Tree
 2点以上で交わる可能性がある関数群を挿入した時の動作は未定義.
 
 ## 使用例
+宣言
 ```c++
 auto f = [](long long x, int a, int b){return a * x + b;}; // ax+b
 LiChaoTree lct(f);
 auto tree = lct.make_tree<MINIMIZE>();
+```
+クエリ
+```c++
 tree.insert(2, 3); // 2x+3
 tree.insert(0, 2, 1, 1); // x+1 (0<= x < 2)
 auto [val1, id1] = tree.query(1);

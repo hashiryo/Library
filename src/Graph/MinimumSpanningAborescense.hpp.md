@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/UnionFind.hpp
     title: Union-Find
   - icon: ':question:'
@@ -124,9 +124,9 @@ data:
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_2_B.test.cpp
-  - test/aoj/2647.test.cpp
   - test/yosupo/directedmst.test.cpp
+  - test/aoj/2647.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
 documentation_of: src/Graph/MinimumSpanningAborescense.hpp
 layout: document
 title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"

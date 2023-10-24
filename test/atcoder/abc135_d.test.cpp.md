@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/Automaton.hpp
     title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc135/tasks/abc135_d
@@ -160,35 +160,35 @@ data:
     \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
-    \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
-    \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
-    \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
-    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
-    \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
-    \ r), B::md.plus(x, r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n\
-    \ FUNC(operator*(const MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x,\
-    \ k, B::md))\n#undef FUNC\n CE MInt operator/(const MInt& r) const { return *this\
-    \ * r.inv(); }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r;\
-    \ }\n CE MInt& operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt&\
-    \ operator*=(const MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const\
-    \ MInt& r) { return *this= *this / r; }\n CE bool operator==(const MInt& r) const\
-    \ { return B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt&\
-    \ r) const { return !(*this == r); }\n CE bool operator<(const MInt& r) const\
-    \ { return B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return\
-    \ mod_inv<Int>(val(), B::md.mod); }\n CE inline Uint val() const { return B::md.get(x);\
-    \ }\n friend ostream& operator<<(ostream& os, const MInt& r) { return os << r.val();\
-    \ }\n friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is\
-    \ >> v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using\
-    \ ModInt= conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32,\
-    \ u64, 32, 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64,\
-    \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
-    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
-    \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
-    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
-    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
-    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ }\n CE MInt(): x(0) {}\n template <class T, enable_if_t<is_modint_v<T> && !is_same_v<T,\
+    \ MInt>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod))\
+    \ {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
+    \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
+    \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
+    \n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
+    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
+    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
+    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
+    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
+    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
+    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
+    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
+    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
+    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
+    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using ModInt=\
+    \ conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32,\
+    \ 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64,\
+    \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
+    \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
+    \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
+    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
+    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
+    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 6 \"test/atcoder/abc135_d.test.cpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint=\
     \ ModInt<int(1e9 + 7)>;\n string S;\n cin >> S;\n int n= S.length();\n vector\
@@ -218,8 +218,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc135_d.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 18:38:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-25 00:54:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc135_d.test.cpp
 layout: document

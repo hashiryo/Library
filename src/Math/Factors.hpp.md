@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
@@ -218,22 +218,22 @@ data:
   isVerificationFile: false
   path: src/Math/Factors.hpp
   requiredBy:
-  - src/Math/ModInt_Exp.hpp
-  - src/Math/mod_tetration.hpp
-  - src/Math/mod_kth_root.hpp
   - src/Math/BinomialCoefficient.hpp
+  - src/Math/mod_kth_root.hpp
+  - src/Math/mod_tetration.hpp
+  - src/Math/ModInt_Exp.hpp
   timestamp: '2023-08-06 01:42:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/NTL_1_D.test.cpp
+  - test/unit_test/constexpr_factors.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
+  - test/atcoder/abc228_e.test.cpp
+  - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/binomial_coefficient.test.cpp
+  - test/yosupo/factorize.test.cpp
   - test/yosupo/kth_root_mod.test.cpp
   - test/yosupo/tetration_mod.test.cpp
-  - test/yosupo/primitive_root.test.cpp
-  - test/yosupo/factorize.test.cpp
-  - test/yosupo/binomial_coefficient.test.cpp
-  - test/atcoder/abc228_e.test.cpp
-  - test/unit_test/constexpr_mod_tetration.test.cpp
-  - test/unit_test/constexpr_factors.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
 documentation_of: src/Math/Factors.hpp
 layout: document
 title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"

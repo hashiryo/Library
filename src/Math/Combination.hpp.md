@@ -15,24 +15,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
     title: test/yosupo/binomial_coefficient_prime_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/310.test.cpp
     title: test/yukicoder/310.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Combination.hpp\"\ntemplate <class mint, std::size_t\
@@ -62,17 +62,17 @@ data:
   path: src/Math/Combination.hpp
   requiredBy: []
   timestamp: '2023-01-21 20:28:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/DPL_5_D.test.cpp
-  - test/aoj/DPL_5_E.test.cpp
-  - test/aoj/DPL_5_F.test.cpp
-  - test/aoj/DPL_5_B.test.cpp
-  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yukicoder/310.test.cpp
   - test/atcoder/abc160_f.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/aoj/DPL_5_B.test.cpp
+  - test/aoj/DPL_5_E.test.cpp
+  - test/aoj/DPL_5_D.test.cpp
+  - test/aoj/DPL_5_F.test.cpp
 documentation_of: src/Math/Combination.hpp
 layout: document
 title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\mathbb{F}_p$)"

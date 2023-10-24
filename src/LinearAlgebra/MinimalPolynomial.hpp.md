@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
@@ -21,21 +21,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1750.SparseMat.test.cpp
     title: test/yukicoder/1750.SparseMat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/310.test.cpp
     title: test/yukicoder/310.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n#include <bits/stdc++.h>\n\
@@ -158,14 +158,14 @@ data:
   path: src/LinearAlgebra/MinimalPolynomial.hpp
   requiredBy: []
   timestamp: '2023-08-05 23:01:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2397.SparseMat.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/yukicoder/310.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
 documentation_of: src/LinearAlgebra/MinimalPolynomial.hpp
 layout: document
 title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"

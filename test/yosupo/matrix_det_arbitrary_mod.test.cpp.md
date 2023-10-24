@@ -13,13 +13,13 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod
@@ -90,35 +90,35 @@ data:
     \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
     \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
     \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
-    \ }\n CE MInt(): x(0) {}\n CE MInt(const MInt& r): x(r.x) {}\n template <class\
-    \ T, enable_if_t<is_modint_v<T>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val()\
-    \ % B::md.mod)) {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod)\
-    \ ? B::md.mod - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return\
-    \ MInt() - *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt\
-    \ ret; \\\n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt&\
-    \ r), B::md.plus(x, r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n\
-    \ FUNC(operator*(const MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x,\
-    \ k, B::md))\n#undef FUNC\n CE MInt operator/(const MInt& r) const { return *this\
-    \ * r.inv(); }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r;\
-    \ }\n CE MInt& operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt&\
-    \ operator*=(const MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const\
-    \ MInt& r) { return *this= *this / r; }\n CE bool operator==(const MInt& r) const\
-    \ { return B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt&\
-    \ r) const { return !(*this == r); }\n CE bool operator<(const MInt& r) const\
-    \ { return B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return\
-    \ mod_inv<Int>(val(), B::md.mod); }\n CE inline Uint val() const { return B::md.get(x);\
-    \ }\n friend ostream& operator<<(ostream& os, const MInt& r) { return os << r.val();\
-    \ }\n friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is\
-    \ >> v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using\
-    \ ModInt= conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32,\
-    \ u64, 32, 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64,\
-    \ SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int,\
-    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na,\
-    \ MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64,\
-    \ u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate\
-    \ <class mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
-    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
-    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ }\n CE MInt(): x(0) {}\n template <class T, enable_if_t<is_modint_v<T> && !is_same_v<T,\
+    \ MInt>, nullptr_t> = nullptr> CE MInt(T v): x(B::md.set(v.val() % B::md.mod))\
+    \ {}\n CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
+    \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
+    \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
+    \n  ret.x= op; \\\n  return ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
+    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
+    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
+    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
+    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
+    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
+    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
+    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
+    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
+    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
+    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
+    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using ModInt=\
+    \ conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32,\
+    \ 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64,\
+    \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
+    \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
+    \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
+    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
+    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
+    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 3 \"src/Math/ModInt_Runtime.hpp\"\nnamespace math_internal\
     \ {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr bool is_runtimemodint_v=\
     \ is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64 M, int id> struct RB: r_b\
@@ -292,8 +292,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/matrix_det_arbitrary_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-09-11 13:10:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-25 00:54:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/matrix_det_arbitrary_mod.test.cpp
 layout: document
