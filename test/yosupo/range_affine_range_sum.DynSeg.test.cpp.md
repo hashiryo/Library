@@ -133,8 +133,8 @@ data:
     \ HEIGHT); }\n T get(id_t k) { return get_val(root, k, HEIGHT); }\n bool is_null(id_t\
     \ k) { return is_null(root, k, HEIGHT); }\n T &at(id_t k) {\n  static_assert(!monoid_v<M>,\
     \ \"\\\"at\\\" is not available\\n\");\n  return at_val(root, k, HEIGHT);\n }\n\
-    \ template <class L= M, std::enable_if_t<monoid<L>::value, std::nullptr_t> = nullptr>\
-    \ T operator[](id_t k) { return get(k); }\n template <class L= M, std::enable_if_t<!monoid<L>::value,\
+    \ template <class L= M, std::enable_if_t<monoid_v<L>, std::nullptr_t> = nullptr>\
+    \ T operator[](id_t k) { return get(k); }\n template <class L= M, std::enable_if_t<!monoid_v<L>,\
     \ std::nullptr_t> = nullptr> T &operator[](id_t k) { return at(k); }\n T fold(id_t\
     \ a, id_t b, id_t bias= 0) {\n  static_assert(monoid_v<M>, \"\\\"fold\\\" is not\
     \ available\\n\");\n  return fold(root, a, b, {0, 1LL << HEIGHT}, bias);\n }\n\
@@ -276,7 +276,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-10-29 17:46:55+09:00'
+  timestamp: '2023-10-29 20:17:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/range_affine_range_sum.DynSeg.test.cpp

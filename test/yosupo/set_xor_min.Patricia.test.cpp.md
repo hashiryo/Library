@@ -113,17 +113,16 @@ data:
     \ {}\n void set(id_t k, T val) { set_val(root, k, val); }\n T get(id_t k) { return\
     \ get_val(root, k); }\n bool is_null(id_t k) { return is_null(root, k); }\n T\
     \ &at(id_t k) {\n  static_assert(!monoid_v<M>, \"\\\"at\\\" is not available\\\
-    n\");\n  return at_val(root, k);\n }\n template <class L= M, std::enable_if_t<monoid<L>::value,\
+    n\");\n  return at_val(root, k);\n }\n template <class L= M, std::enable_if_t<monoid_v<L>,\
     \ std::nullptr_t> = nullptr> T operator[](id_t k) { return get(k); }\n template\
-    \ <class L= M, std::enable_if_t<!monoid<L>::value, std::nullptr_t> = nullptr>\
-    \ T &operator[](id_t k) { return at(k); }\n T fold(id_t a, id_t b, id_t bias=\
-    \ 0) {\n  static_assert(monoid_v<M>, \"\\\"fold\\\" is not available\\n\");\n\
-    \  return fold(root, a, b, bias);\n }\n // find i s.t.\n //  check(fold(k,i))\
-    \ == False, check(fold(k,i+1)) == True\n // return -1 if not found\n template\
-    \ <class C> id_t find_first(id_t a, C check, id_t bias= 0) {\n  std::array<T,\
-    \ 1> sum{def_val()};\n  std::array<np, 1> t{root};\n  return find<0>(a, {0, 1LL\
-    \ << HEIGHT}, bias, HEIGHT, check, t, sum);\n }\n template <std::size_t N, class\
-    \ C> static id_t find_first(id_t a, C check, std::array<SegmentTree_Patricia,\
+    \ <class L= M, std::enable_if_t<!monoid_v<L>, std::nullptr_t> = nullptr> T &operator[](id_t\
+    \ k) { return at(k); }\n T fold(id_t a, id_t b, id_t bias= 0) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold\\\" is not available\\n\");\n  return fold(root, a, b, bias);\n }\n\
+    \ // find i s.t.\n //  check(fold(k,i)) == False, check(fold(k,i+1)) == True\n\
+    \ // return -1 if not found\n template <class C> id_t find_first(id_t a, C check,\
+    \ id_t bias= 0) {\n  std::array<T, 1> sum{def_val()};\n  std::array<np, 1> t{root};\n\
+    \  return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, t, sum);\n }\n template\
+    \ <std::size_t N, class C> static id_t find_first(id_t a, C check, std::array<SegmentTree_Patricia,\
     \ N> segs, id_t bias= 0) {\n  std::array<T, N> sums;\n  sums.fill(def_val());\n\
     \  std::array<np, N> ts;\n  for (std::size_t i= 0; i < N; i++) ts[i]= segs[i].root;\n\
     \  return find<0>(a, {0, 1LL << HEIGHT}, bias, HEIGHT, check, ts, sums);\n }\n\
@@ -162,7 +161,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/set_xor_min.Patricia.test.cpp
   requiredBy: []
-  timestamp: '2023-10-29 17:46:55+09:00'
+  timestamp: '2023-10-29 20:17:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/set_xor_min.Patricia.test.cpp
