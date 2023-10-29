@@ -2,9 +2,13 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Internal/function_type.hpp
+    path: src/Internal/function_traits.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
-      \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+      \u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
+    path: src/Internal/tuple_traits.hpp
+    title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
+      \u30C8 \u4ED6"
   - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
@@ -25,36 +29,52 @@ data:
   bundledCode: "#line 1 \"test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
     \n#include <iostream>\n#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n\
-    #include <algorithm>\n#include <vector>\n#include <tuple>\n#line 2 \"src/Internal/function_type.hpp\"\
-    \n#include <type_traits>\nnamespace function_template_internal {\ntemplate <class\
-    \ C> struct is_function_object {\n template <class U, int dummy= (&U::operator(),\
-    \ 0)> static std::true_type check(U *);\n static std::false_type check(...);\n\
-    \ static C *m;\n static constexpr bool value= decltype(check(m))::value;\n};\n\
-    template <class F, bool, bool> struct function_type_impl {\n using type= void;\n\
-    };\ntemplate <class F> struct function_type_impl<F, true, false> {\n using type=\
-    \ F *;\n};\ntemplate <class F> struct function_type_impl<F, false, true> {\n using\
-    \ type= decltype(&F::operator());\n};\ntemplate <class F> using function_type_t=\
-    \ typename function_type_impl<F, std::is_function_v<F>, is_function_object<F>::value>::type;\n\
-    template <class... Args> struct result_type_impl {\n using type= void;\n};\ntemplate\
-    \ <class R, class... Args> struct result_type_impl<R (*)(Args...)> {\n using type=\
-    \ R;\n};\ntemplate <class C, class R, class... Args> struct result_type_impl<R\
-    \ (C::*)(Args...)> {\n using type= R;\n};\ntemplate <class C, class R, class...\
-    \ Args> struct result_type_impl<R (C::*)(Args...) const> {\n using type= R;\n\
-    };\ntemplate <class F> using result_type_t= typename result_type_impl<function_type_t<F>>::type;\n\
-    template <class... Args> struct argument_type_impl {\n using type= void;\n};\n\
-    template <class R, class... Args> struct argument_type_impl<R (*)(Args...)> {\n\
-    \ using type= std::tuple<Args...>;\n};\ntemplate <class C, class R, class... Args>\
-    \ struct argument_type_impl<R (C::*)(Args...)> {\n using type= std::tuple<Args...>;\n\
-    };\ntemplate <class C, class R, class... Args> struct argument_type_impl<R (C::*)(Args...)\
-    \ const> {\n using type= std::tuple<Args...>;\n};\ntemplate <class F> using argument_type_t=\
-    \ typename argument_type_impl<function_type_t<F>>::type;\ntemplate <class T> struct\
-    \ other_than_first_argument_type_impl {\n using type= void;\n};\ntemplate <class\
-    \ T, class... Args> struct other_than_first_argument_type_impl<std::tuple<T, Args...>>\
-    \ {\n using type= std::tuple<Args...>;\n};\ntemplate <class T> using other_than_first_argument_type_t=\
-    \ typename other_than_first_argument_type_impl<T>::type;\n}\nusing function_template_internal::result_type_t,\
-    \ function_template_internal::argument_type_t, function_template_internal::other_than_first_argument_type_t;\n\
+    #include <algorithm>\n#include <vector>\n#include <tuple>\n#line 2 \"src/Internal/function_traits.hpp\"\
+    \n#include <type_traits>\n// clang-format off\nnamespace function_template_internal{\n\
+    template<class C>struct is_function_object{\n template<class U,int dummy=(&U::operator(),0)>\
+    \ static std::true_type check(U *);\n static std::false_type check(...);\n static\
+    \ C *m;\n static constexpr bool value= decltype(check(m))::value;\n};\ntemplate<class\
+    \ F,bool,bool>struct function_type_impl{using type= void;};\ntemplate<class F>struct\
+    \ function_type_impl<F,true,false>{using type= F *;};\ntemplate<class F>struct\
+    \ function_type_impl<F,false,true>{using type= decltype(&F::operator());};\ntemplate<class\
+    \ F> using function_type_t= typename function_type_impl<F,std::is_function_v<F>,is_function_object<F>::value>::type;\n\
+    template<class... Args>struct result_type_impl{using type= void;};\ntemplate<class\
+    \ R,class... Args>struct result_type_impl<R(*)(Args...)>{using type= R;};\ntemplate<class\
+    \ C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)>{using type=\
+    \ R;};\ntemplate<class C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)const>{using\
+    \ type= R;};\ntemplate<class F> using result_type_t= typename result_type_impl<function_type_t<F>>::type;\n\
+    template<class... Args>struct argument_type_impl{using type= void;};\ntemplate<class\
+    \ R,class... Args>struct argument_type_impl<R(*)(Args...)>{using type= std::tuple<Args...>;};\n\
+    template<class C,class R,class... Args>struct argument_type_impl<R(C::*)(Args...)>{using\
+    \ type= std::tuple<Args...>;};\ntemplate<class C,class R,class... Args>struct\
+    \ argument_type_impl<R(C::*)(Args...)const>{using type= std::tuple<Args...>;};\n\
+    template<class F> using argument_type_t= typename argument_type_impl<function_type_t<F>>::type;\n\
+    }\nusing function_template_internal::result_type_t,function_template_internal::argument_type_t;\n\
+    // clang-format on\n#line 3 \"src/Internal/tuple_traits.hpp\"\n#include <array>\n\
+    #line 5 \"src/Internal/tuple_traits.hpp\"\n#include <cstddef>\ntemplate <class\
+    \ T> static constexpr bool tuple_like_v= false;\ntemplate <class... Args> static\
+    \ constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate <class T,\
+    \ class U> static constexpr bool tuple_like_v<std::pair<T, U>> = true;\ntemplate\
+    \ <class T, size_t K> static constexpr bool tuple_like_v<std::array<T, K>> = true;\n\
+    template <class T> auto to_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
+    \ return std::apply([](auto &&...x) { return std::make_tuple(x...); }, t);\n}\n\
+    template <class T> auto forward_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
+    \ return std::apply([](auto &&...x) { return std::forward_as_tuple(x...); }, t);\n\
+    }\ntemplate <class T> static constexpr bool array_like_v= false;\ntemplate <class\
+    \ T, size_t K> static constexpr bool array_like_v<std::array<T, K>> = true;\n\
+    template <class T, class U> static constexpr bool array_like_v<std::pair<T, U>>\
+    \ = std::is_convertible_v<T, U>;\ntemplate <class T> static constexpr bool array_like_v<std::tuple<T>>\
+    \ = true;\ntemplate <class T, class U, class... Args> static constexpr bool array_like_v<std::tuple<T,\
+    \ U, Args...>> = array_like_v<std::tuple<T, Args...>> && std::is_convertible_v<U,\
+    \ T>;\ntemplate <class T> auto to_array(const T &t) {\n if constexpr (array_like_v<T>)\
+    \ return std::apply([](auto &&...x) { return std::array{x...}; }, t);\n}\ntemplate\
+    \ <class T> using to_tuple_t= decltype(to_tuple(T()));\ntemplate <class T> using\
+    \ to_array_t= decltype(to_array(T()));\ntemplate <class T> struct other_than_first_argument_type_impl\
+    \ {\n using type= void;\n};\ntemplate <class T, class... Args> struct other_than_first_argument_type_impl<std::tuple<T,\
+    \ Args...>> {\n using type= std::tuple<Args...>;\n};\ntemplate <class T> using\
+    \ other_than_first_argument_type_t= typename other_than_first_argument_type_impl<T>::type;\n\
     #line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum { MAXIMIZE= -1, MINIMIZE=\
-    \ 1 };\n#line 8 \"src/Optimization/LiChaoTree.hpp\"\ntemplate <class F> class\
+    \ 1 };\n#line 9 \"src/Optimization/LiChaoTree.hpp\"\ntemplate <class F> class\
     \ LiChaoTree {\n using A= argument_type_t<F>;\n static_assert(std::tuple_size_v<A>\
     \ > 1);\n using T= std::tuple_element_t<0, A>;\n using P= other_than_first_argument_type_t<A>;\n\
     \ using R= result_type_t<F>;\n F f;\n const T LB, UB;\n std::vector<P> ps;\n template\
@@ -115,12 +135,13 @@ data:
     \ 0;\n}"
   dependsOn:
   - src/Optimization/LiChaoTree.hpp
-  - src/Internal/function_type.hpp
+  - src/Internal/function_traits.hpp
+  - src/Internal/tuple_traits.hpp
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: true
   path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-17 15:04:14+09:00'
+  timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp

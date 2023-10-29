@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/two_edge_connected_components.test.cpp
     title: test/yosupo/two_edge_connected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/IncrementalBridgeConnectivity.hpp\"\n#include\
@@ -64,12 +64,12 @@ data:
   path: src/Graph/IncrementalBridgeConnectivity.hpp
   requiredBy: []
   timestamp: '2023-01-21 15:27:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yosupo/two_edge_connected_components.test.cpp
   - test/aoj/GRL_3_B.test.cpp
   - test/aoj/2893.test.cpp
+  - test/yosupo/two_edge_connected_components.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
 documentation_of: src/Graph/IncrementalBridgeConnectivity.hpp
 layout: document
 title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"

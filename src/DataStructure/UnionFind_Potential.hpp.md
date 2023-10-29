@@ -43,8 +43,8 @@ data:
   timestamp: '2023-01-23 20:22:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc280_f.test.cpp
   - test/aoj/2207.test.cpp
+  - test/atcoder/abc280_f.test.cpp
 documentation_of: src/DataStructure/UnionFind_Potential.hpp
 layout: document
 title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"

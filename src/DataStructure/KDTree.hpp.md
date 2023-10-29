@@ -4,16 +4,27 @@ data:
   - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
-      \u30F3\u30D7\u30EC\u30FC\u30C8"
+      \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
+  - icon: ':x:'
+    path: src/Internal/long_traits.hpp
+    title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\u30FC\
+      \u30C8"
+  - icon: ':question:'
+    path: src/Internal/tuple_traits.hpp
+    title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
+      \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/aoj/1023.KDT.test.cpp
+    title: test/aoj/1023.KDT.test.cpp
+  - icon: ':x:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
   - icon: ':x:'
@@ -30,213 +41,394 @@ data:
     title: test/yukicoder/728.KDT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/KDTree.hpp\"\n#include <array>\n#include\
     \ <vector>\n#include <algorithm>\n#include <tuple>\n#include <cstddef>\n#include\
     \ <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
-    #define HAS_CHECK(member, Dummy) \\\n template <class tClass> struct has_##member\
-    \ { \\\n  template <class U, Dummy> static std::true_type check(U *); \\\n  static\
-    \ std::false_type check(...); \\\n  static tClass *mClass; \\\n  static const\
-    \ bool value= decltype(check(mClass))::value; \\\n };\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy= typename U::member)\n#line 9 \"src/DataStructure/KDTree.hpp\"\n\
-    template <uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
-    \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
-    \ has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n template <class T, class F= std::nullptr_t>\
-    \ struct Node_B {\n  using E= F;\n  T val;\n  int ch[2]= {-1, -1};\n  pos_t range[K][2],\
-    \ pos[K];\n };\n template <bool sg_, bool du_, typename tEnable= void> struct\
-    \ Node_D: Node_B<M> {};\n template <bool sg_, bool du_> struct Node_D<sg_, du_,\
-    \ typename std::enable_if_t<sg_ && !du_>>: Node_B<typename M::T> {\n  typename\
-    \ M::T sum;\n };\n template <bool sg_, bool du_> struct Node_D<sg_, du_, typename\
-    \ std::enable_if_t<!sg_ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename\
-    \ M::E lazy;\n  bool lazy_flg= false;\n };\n template <bool sg_, bool du_> struct\
-    \ Node_D<sg_, du_, typename std::enable_if_t<sg_ && du_>>: Node_B<typename M::T,\
-    \ typename M::E> {\n  typename M::T sum;\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false;\n };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\n using\
-    \ T= decltype(Node::val);\n using E= typename Node::E;\n std::vector<Node> ns;\n\
-    public:\n using PosVal= std::pair<std::array<pos_t, K>, T>;\n using Iter= typename\
-    \ std::vector<PosVal>::iterator;\n using Range= std::array<std::array<pos_t, 2>,\
-    \ K>;\nprivate:\n inline void pushup(int i) {\n  ns[i].sum= ns[i].val;\n  if (ns[i].ch[0]\
-    \ != -1) ns[i].sum= M::op(ns[ns[i].ch[0]].sum, ns[i].sum);\n  if (ns[i].ch[1]\
-    \ != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum);\n }\n inline void propagate(int\
-    \ i, const E &x) {\n  if (i == -1) return;\n  ns[i].lazy_flg ? (M::composition(ns[i].lazy,\
-    \ x), x) : (ns[i].lazy= x);\n  M::mapping(ns[i].val, x), ns[i].lazy_flg= true;\n\
-    \  if constexpr (monoid<M>::value) M::mapping(ns[i].sum, x);\n }\n inline void\
-    \ eval(int i) {\n  if (!ns[i].lazy_flg) return;\n  ns[i].lazy_flg= false;\n  propagate(ns[i].ch[0],\
-    \ ns[i].lazy), propagate(ns[i].ch[1], ns[i].lazy);\n }\n inline void build(int\
-    \ &i, Iter bg, Iter ed, int &ts, uint8_t div= 0) {\n  if (ed - bg < 1) return;\n\
-    \  const int n= ed - bg;\n  auto md= bg + n / 2;\n  std::nth_element(bg, md, ed,\
-    \ [div](const PosVal &l, const PosVal &r) { return l.first[div] < r.first[div];\
-    \ });\n  ns[i= ts++].val= md->second;\n  for (uint8_t j= K; j--; ns[i].pos[j]=\
-    \ md->first[j]) {\n   auto [mn, mx]= std::minmax_element(bg, ed, [j](const PosVal\
-    \ &l, const PosVal &r) { return l.first[j] < r.first[j]; });\n   ns[i].range[j][0]=\
-    \ mn->first[j], ns[i].range[j][1]= mx->first[j];\n  }\n  if (uint8_t nex= (div\
-    \ + 1) % K; n > 1) build(ns[i].ch[0], bg, md, ts, nex), build(ns[i].ch[1], md\
-    \ + 1, ed, ts, nex);\n  if constexpr (monoid<M>::value) pushup(i);\n }\n template\
-    \ <class F, class G, class H> inline T fold(int i, const F &in, const G &inall,\
-    \ const H &outall) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\" is not\
-    \ available\");\n  if (i == -1 || outall(ns[i].range)) return M::ti();\n  if (inall(ns[i].range))\
-    \ return ns[i].sum;\n  if constexpr (dual<M>::value) eval(i);\n  T ret= M::op(fold(ns[i].ch[0],\
-    \ in, inall, outall), fold(ns[i].ch[1], in, inall, outall));\n  ret= in(ns[i].pos)\
-    \ ? M::op(ret, ns[i].val) : ret;\n  return ret;\n }\n template <class F, class\
-    \ G, class H> inline void apply(int i, const F &in, const G &inall, const H &outall,\
-    \ const E &x) {\n  static_assert(dual<M>::value, \"\\\"apply\\\" is not available\"\
-    );\n  if (i == -1 || outall(ns[i].range)) return;\n  if (inall(ns[i].range)) return\
-    \ propagate(i, x), void();\n  if (eval(i); in(ns[i].pos)) M::mapping(ns[i].val,\
-    \ x);\n  apply(ns[i].ch[0], in, inall, outall, x), apply(ns[i].ch[1], in, inall,\
-    \ outall, x);\n  if constexpr (monoid<M>::value) pushup(i);\n }\n inline std::pair<T,\
-    \ bool> get(int i, const std::array<pos_t, K> &pos) {\n  if (i == -1) return {T(),\
-    \ false};\n  bool myself= true;\n  for (uint8_t j= K; j--; myself&= pos[j] ==\
-    \ ns[i].pos[j])\n   if (ns[i].range[j][1] < pos[j] || pos[j] < ns[i].range[j][0])\
-    \ return {T(), false};\n  if (myself) return {ns[i].val, true};\n  if constexpr\
-    \ (dual<M>::value) eval(i);\n  auto ret= get(ns[i].ch[0], pos);\n  return !ret.second\
-    \ ? get(ns[i].ch[1], pos) : ret;\n }\n inline bool set(int i, const std::array<pos_t,\
-    \ K> &pos, const T &x) {\n  if (i == -1) return false;\n  bool myself= true, ret=\
-    \ true;\n  for (uint8_t j= K; j--; myself&= pos[j] == ns[i].pos[j])\n   if (ns[i].range[j][1]\
-    \ < pos[j] || pos[j] < ns[i].range[j][0]) return false;\n  if constexpr (dual<M>::value)\
-    \ eval(i);\n  if (myself) ns[i].val= x;\n  else if (!(ret= set(ns[i].ch[0], pos,\
-    \ x))) ret= set(ns[i].ch[1], pos, x);\n  if constexpr (monoid<M>::value) pushup(i);\n\
-    \  return ret;\n }\n template <typename... Args> static inline Range to_range(std::initializer_list<Args>...\
-    \ intervals) {\n  static_assert(sizeof...(intervals) == K);\n  static_assert(std::conjunction_v<std::is_same<Args,\
-    \ pos_t>...>);\n  Range r;\n  uint8_t i= 0;\n  for (auto &&x: {intervals...})\
-    \ {\n   std::vector<pos_t> tmp(x);\n   assert(tmp.size() == 2), assert(tmp[0]\
-    \ <= tmp[1]);\n   r[i][0]= tmp[0], r[i][1]= tmp[1], i++;\n  }\n  return r;\n }\n\
-    \ static inline auto funcs(const Range &r) {\n  return std::make_tuple(\n    \
-    \  [r](pos_t pos[K]) {\n       for (uint8_t i= K; i--;)\n        if (pos[i] <\
-    \ r[i][0] || r[i][1] < pos[i]) return false;\n       return true;\n      },\n\
-    \      [r](pos_t range[K][2]) {\n       for (uint8_t i= K; i--;)\n        if (range[i][0]\
-    \ < r[i][0] || r[i][1] < range[i][1]) return false;\n       return true;\n   \
-    \   },\n      [r](pos_t range[K][2]) {\n       for (uint8_t i= K; i--;)\n    \
-    \    if (range[i][1] < r[i][0] || r[i][1] < range[i][0]) return true;\n      \
-    \ return false;\n      });\n }\npublic:\n KDTree(std::vector<PosVal> v): ns(v.size())\
-    \ {\n  int root, timestamp= 0;\n  build(root, v.begin(), v.end(), timestamp);\n\
-    \ }\n T get(std::array<pos_t, K> pos) {\n  auto [ret, flg]= get(0, pos);\n  return\
-    \ assert(flg), ret;\n }\n template <typename... Args> T get(Args... ids) {\n \
-    \ static_assert(sizeof...(ids) == K);\n  static_assert(std::conjunction_v<std::is_convertible<Args,\
-    \ pos_t>...>);\n  auto [ret, flg]= get(0, {ids...});\n  return assert(flg), ret;\n\
-    \ }\n void set(T x, std::array<pos_t, K> pos) { assert(set(0, pos, x)); }\n template\
-    \ <typename... Args> void set(T x, Args... ids) {\n  static_assert(sizeof...(ids)\
-    \ == K);\n  static_assert(std::conjunction_v<std::is_convertible<Args, pos_t>...>);\n\
-    \  assert(set(0, {ids...}, x));\n }\n T fold(const Range &r) {\n  auto [in, inall,\
-    \ outall]= funcs(r);\n  return fold(0, in, inall, outall);\n }\n template <typename...\
-    \ Args> T fold(std::initializer_list<Args> &&...intervals) { return fold(to_range(intervals...));\
-    \ }\n template <class F, class G, class H> T fold(const F &in, const G &inall,\
-    \ const H &outall) { return fold(0, in, inall, outall); }\n void apply(E x, const\
-    \ Range &r) {\n  auto [in, inall, outall]= funcs(r);\n  apply(0, in, inall, outall,\
-    \ x);\n }\n template <typename... Args> void apply(E x, std::initializer_list<Args>\
-    \ &&...intervals) { apply(x, to_range(intervals...)); }\n template <class F, class\
-    \ G, class H> void apply(E x, const F &in, const G &inall, const H &outall) {\
-    \ apply(0, in, inall, outall, x); }\n};\n"
+    #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
+    \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
+    \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
+    \ \\\n };\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_,\
+    \ std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
+    \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
+    \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
+    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
+    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
+    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
+    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 6 \"src/Internal/tuple_traits.hpp\"\
+    \ntemplate <class T> static constexpr bool tuple_like_v= false;\ntemplate <class...\
+    \ Args> static constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate\
+    \ <class T, class U> static constexpr bool tuple_like_v<std::pair<T, U>> = true;\n\
+    template <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
+    \ K>> = true;\ntemplate <class T> auto to_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
+    \ return std::apply([](auto &&...x) { return std::make_tuple(x...); }, t);\n}\n\
+    template <class T> auto forward_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
+    \ return std::apply([](auto &&...x) { return std::forward_as_tuple(x...); }, t);\n\
+    }\ntemplate <class T> static constexpr bool array_like_v= false;\ntemplate <class\
+    \ T, size_t K> static constexpr bool array_like_v<std::array<T, K>> = true;\n\
+    template <class T, class U> static constexpr bool array_like_v<std::pair<T, U>>\
+    \ = std::is_convertible_v<T, U>;\ntemplate <class T> static constexpr bool array_like_v<std::tuple<T>>\
+    \ = true;\ntemplate <class T, class U, class... Args> static constexpr bool array_like_v<std::tuple<T,\
+    \ U, Args...>> = array_like_v<std::tuple<T, Args...>> && std::is_convertible_v<U,\
+    \ T>;\ntemplate <class T> auto to_array(const T &t) {\n if constexpr (array_like_v<T>)\
+    \ return std::apply([](auto &&...x) { return std::array{x...}; }, t);\n}\ntemplate\
+    \ <class T> using to_tuple_t= decltype(to_tuple(T()));\ntemplate <class T> using\
+    \ to_array_t= decltype(to_array(T()));\ntemplate <class T> struct other_than_first_argument_type_impl\
+    \ {\n using type= void;\n};\ntemplate <class T, class... Args> struct other_than_first_argument_type_impl<std::tuple<T,\
+    \ Args...>> {\n using type= std::tuple<Args...>;\n};\ntemplate <class T> using\
+    \ other_than_first_argument_type_t= typename other_than_first_argument_type_impl<T>::type;\n\
+    #line 2 \"src/Internal/long_traits.hpp\"\n#include <cstdint>\n// clang-format\
+    \ off\ntemplate<class T>struct make_long{using type= T;};\ntemplate<>struct make_long<int8_t>{using\
+    \ type= int16_t;};\ntemplate<>struct make_long<uint8_t>{using type= uint16_t;};\n\
+    template<>struct make_long<int16_t>{using type= int32_t;};\ntemplate<>struct make_long<uint16_t>{using\
+    \ type= uint32_t;};\ntemplate<>struct make_long<int32_t>{using type= int64_t;};\n\
+    template<>struct make_long<uint32_t>{using type= uint64_t;};\ntemplate<>struct\
+    \ make_long<int64_t>{using type= __int128_t;};\ntemplate<>struct make_long<uint64_t>{using\
+    \ type= __uint128_t;};\ntemplate<>struct make_long<float>{using type= double;};\n\
+    template<>struct make_long<double>{using type= long double;};\ntemplate<class\
+    \ T> using make_long_t= typename make_long<T>::type;\n// clang-format on\n#line\
+    \ 11 \"src/DataStructure/KDTree.hpp\"\nnamespace kdtree_internal {\ntemplate <class\
+    \ pos_t, size_t K, class M, class A, class B> class KDTreeImpl {};\ntemplate <class\
+    \ pos_t, size_t K, class M, class... PK, class... PK2> class KDTreeImpl<pos_t,\
+    \ K, M, std::tuple<PK...>, std::tuple<PK2...>> {\npublic:\n HAS_MEMBER(op);\n\
+    \ HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
+    \ MYSELF_OR(T);\n NULLPTR_OR(E);\n using Sec= std::array<pos_t, 2>;\n using Pos=\
+    \ std::array<pos_t, K>;\n using Range= std::array<Sec, K>;\n using long_pos_t=\
+    \ make_long_t<pos_t>;\n template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
+    \ has_op<L>, has_ti<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct Node_BB {\n  int ch[2]= {-1, -1};\n\
+    \  Pos pos;\n  pos_t range[K][2];\n };\n template <class U> struct Node_B: Node_BB\
+    \ {\n  U val;\n };\n template <class D, bool sg, bool du> struct Node_D: Node_B<M>\
+    \ {};\n template <bool sg, bool du> struct Node_D<void, sg, du>: Node_BB {};\n\
+    \ template <class D> struct Node_D<D, 1, 0>: Node_B<typename M::T> {\n  typename\
+    \ M::T sum;\n };\n template <class D> struct Node_D<D, 0, 1>: Node_B<typename\
+    \ M::T> {\n  typename M::E laz;\n  bool laz_flg= false;\n };\n template <class\
+    \ D> struct Node_D<D, 1, 1>: Node_B<typename M::T> {\n  typename M::T sum;\n \
+    \ typename M::E laz;\n  bool laz_flg= false;\n };\n using Node= Node_D<M, monoid_v<M>,\
+    \ dual_v<M>>;\n using Iter= typename std::vector<int>::iterator;\n using T= std::conditional_t<std::is_void_v<M>,\
+    \ std::nullptr_t, myself_or_T_t<M>>;\n using E= nullptr_or_E_t<M>;\n template\
+    \ <class P> using canbe_Pos= std::is_convertible<to_tuple_t<P>, std::tuple<PK...>>;\n\
+    \ template <class P> using canbe_PosV= std::is_convertible<to_tuple_t<P>, std::tuple<PK...,\
+    \ T>>;\n template <class P, class U> static constexpr bool canbe_Pos_and_T_v=\
+    \ std::conjunction_v<canbe_Pos<P>, std::is_convertible<U, T>>;\n std::vector<Node>\
+    \ ns;\n static inline T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n\
+    \  else return T();\n }\n template <bool z, size_t k, class P> static inline auto\
+    \ get_(const P &p) {\n  if constexpr (z == 0) return std::get<k>(p);\n  else return\
+    \ std::get<k>(p.first);\n }\n template <class P, size_t... I> Range to_range(const\
+    \ P &p, std::index_sequence<I...>) { return {(assert(std::get<I + I>(p) <= std::get<I\
+    \ + I + 1>(p)), Sec{std::get<I + I>(p), std::get<I + I + 1>(p)})...}; }\n inline\
+    \ void update(int t) {\n  ns[t].sum= ns[t].val;\n  if (ns[t].ch[0] != -1) ns[t].sum=\
+    \ M::op(ns[t].sum, ns[ns[t].ch[0]].sum);\n  if (ns[t].ch[1] != -1) ns[t].sum=\
+    \ M::op(ns[t].sum, ns[ns[t].ch[1]].sum);\n }\n inline void propagate(int t, const\
+    \ E &x) {\n  if (t == -1) return;\n  if (ns[t].laz_flg) M::cp(ns[t].laz, x);\n\
+    \  else ns[t].laz= x, ns[t].laz_flg= true;\n  M::mp(ns[t].val, x);\n  if constexpr\
+    \ (monoid_v<M>) M::mp(ns[t].sum, x);\n }\n inline void push(int t) {\n  if (ns[t].laz_flg)\
+    \ ns[t].laz_flg= false, propagate(ns[t].ch[0], ns[t].laz), propagate(ns[t].ch[1],\
+    \ ns[t].laz);\n }\n template <bool z, class P, size_t k> inline void set_range(int\
+    \ t, int m, Iter bg, Iter ed, const P *p) {\n  auto [mn, mx]= std::minmax_element(bg,\
+    \ ed, [&](int a, int b) { return get_<z, k>(p[a]) < get_<z, k>(p[b]); });\n  ns[t].range[k][0]=\
+    \ get_<z, k>(p[*mn]), ns[t].range[k][1]= get_<z, k>(p[*mx]), ns[t].pos[k]= get_<z,\
+    \ k>(p[m]);\n }\n template <bool z, class P, size_t... I> inline void set_range_lp(int\
+    \ t, int m, Iter bg, Iter ed, const P *p, std::index_sequence<I...>) { (void)(int[]){(set_range<z,\
+    \ P, I>(t, m, bg, ed, p), 0)...}; }\n template <bool z, uint8_t div, class P>\
+    \ inline int build(int &ts, Iter bg, Iter ed, const P *p, const T &v= def_val())\
+    \ {\n  if (bg == ed) return -1;\n  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n\
+    \  std::nth_element(bg, md, ed, [&](int a, int b) { return get_<z, div>(p[a])\
+    \ < get_<z, div>(p[b]); }), set_range_lp<z>(t, *md, bg, ed, p, std::make_index_sequence<K>());\n\
+    \  if constexpr (z == 0) {\n   if constexpr (!std::is_void_v<M>) {\n    if constexpr\
+    \ (std::tuple_size_v<P> == K + 1) ns[t].val= std::get<K>(p[*md]);\n    else ns[t].val=\
+    \ v;\n   }\n  } else ns[t].val= p[*md].second;\n  static constexpr uint8_t nx=\
+    \ div + 1 == K ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(ts, bg, md, p, v),\
+    \ ns[t].ch[1]= build<z, nx>(ts, md + 1, ed, p, v);\n  if constexpr (monoid_v<M>)\
+    \ update(t);\n  return t;\n }\n template <bool z, uint8_t div, class P> inline\
+    \ int build(Iter bg, Iter ed, const P *p, int &ts) {\n  if (bg == ed) return -1;\n\
+    \  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n  std::nth_element(bg, md, ed,\
+    \ [&](int a, int b) { return get_<z, div>(p[a]) < get_<z, div>(p[b]); }), set_range_lp<z>(t,\
+    \ bg, ed, p, std::make_index_sequence<K>());\n  if constexpr (z == 0) {\n   if\
+    \ constexpr (!std::is_void_v<M>) {\n    if constexpr (std::tuple_size_v<P> ==\
+    \ K + 1) ns[t].val= std::get<K>(p[t]);\n    else ns[t].val= def_val();\n   }\n\
+    \  } else ns[t].val= p[t].second;\n  static constexpr uint8_t nx= div + 1 == K\
+    \ ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(bg, md, p, ts), ns[t].ch[1]= build<z,\
+    \ nx>(md + 1, ed, p, ts);\n  if constexpr (monoid_v<M>) update(t);\n  return t;\n\
+    \ }\n static inline auto in_cuboid(const Range &r) {\n  return [r](const Pos &pos)\
+    \ {\n   for (uint8_t k= K; k--;)\n    if (r[k][1] < pos[k] || pos[k] < r[k][0])\
+    \ return false;\n   return true;\n  };\n }\n static inline auto out_cuboid(const\
+    \ Range &r) {\n  return [r](const pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n\
+    \    if (rr[k][1] < r[k][0] || r[k][1] < rr[k][0]) return true;\n   return false;\n\
+    \  };\n }\n static inline auto inall_cuboid(const Range &r) {\n  return [r](const\
+    \ pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n    if (rr[k][0] < r[k][0] ||\
+    \ r[k][1] < rr[k][1]) return false;\n   return true;\n  };\n }\n static inline\
+    \ long_pos_t min_dist2(const pos_t r[K][2], const Pos &pos) {\n  long_pos_t d2=\
+    \ 0, dx;\n  for (uint8_t k= K; k--;) dx= std::clamp(pos[k], r[k][0], r[k][1])\
+    \ - pos[k], d2+= dx * dx;\n  return d2;\n }\n static inline auto in_ball(const\
+    \ Pos &c, long_pos_t r2) {\n  return [c, r2](const Pos &pos) {\n   long_pos_t\
+    \ d2= 0, dx;\n   for (uint8_t k= K; k--;) dx= pos[k] - c[k], d2+= dx * dx;\n \
+    \  return d2 <= r2;\n  };\n }\n static inline auto inall_ball(const Pos &c, long_pos_t\
+    \ r2) {\n  return [c, r2](const pos_t rr[K][2]) {\n   long_pos_t d2= 0, dx0, dx1;\n\
+    \   for (uint8_t k= K; k--;) dx0= rr[k][0] - c[k], dx1= rr[k][1] - c[k], d2+=\
+    \ std::max(dx0 * dx0, dx1 * dx1);\n   return d2 <= r2;\n  };\n }\n static inline\
+    \ auto out_ball(const Pos &c, long_pos_t r2) {\n  return [c, r2](const pos_t r[K][2])\
+    \ { return min_dist2(r, c) > r2; };\n }\n inline void nns(int t, const Pos &pos,\
+    \ std::pair<int, long_pos_t> &ret) const {\n  if (t == -1) return;\n  long_pos_t\
+    \ d2= min_dist2(ns[t].range, pos);\n  if (ret.first != -1 && d2 >= ret.second)\
+    \ return;\n  long_pos_t dx= d2= 0;\n  for (uint8_t k= K; k--;) dx= pos[k] - ns[t].pos[k],\
+    \ d2+= dx * dx;\n  if (ret.first == -1 || d2 < ret.second) ret= {t, d2};\n  bool\
+    \ f= 0;\n  if (auto [l, r]= ns[t].ch; l != -1 && r != -1) f= min_dist2(ns[l].range,\
+    \ pos) > min_dist2(ns[r].range, pos);\n  nns(ns[t].ch[f], pos, ret), nns(ns[t].ch[!f],\
+    \ pos, ret);\n }\n template <class In, class Out> inline void col(int t, const\
+    \ In &in, const Out &out, std::vector<T> &ret) const {\n  if (t == -1 || out(ns[t].range))\
+    \ return;\n  if (in(ns[t].pos)) ret.push_back(ns[t].val);\n  col(ns[t].ch[0],\
+    \ in, out, ret), col(ns[t].ch[1], in, out, ret);\n }\n template <class In, class\
+    \ InAll, class Out> inline T fld(int t, const In &in, const InAll &inall, const\
+    \ Out &out) {\n  if (t == -1 || out(ns[t].range)) return def_val();\n  if (inall(ns[t].range))\
+    \ return ns[t].sum;\n  if constexpr (dual_v<M>) push(t);\n  T ret= M::op(fld(ns[t].ch[0],\
+    \ in, inall, out), fld(ns[t].ch[1], in, inall, out));\n  return in(ns[t].pos)\
+    \ ? M::op(ret, ns[t].val) : ret;\n }\n template <class In, class InAll, class\
+    \ Out> inline void app(int t, const In &in, const InAll &inall, const Out &out,\
+    \ const E &x) {\n  if (t == -1 || out(ns[t].range)) return;\n  if (inall(ns[t].range))\
+    \ return propagate(t, x);\n  if (push(t); in(ns[t].pos)) M::mp(ns[t].val, x);\n\
+    \  app(ns[t].ch[0], in, inall, out, x), app(ns[t].ch[1], in, inall, out, x);\n\
+    \  if constexpr (monoid_v<M>) update(t);\n }\n inline bool set(int t, const pos_t\
+    \ pos[K], const T &x) {\n  if (t == -1) return false;\n  bool isok= true;\n  for\
+    \ (uint8_t k= K; k--; isok&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
+    \ < pos[k] || pos[k] < ns[t].range[k][0]) return false;\n  if (isok) ns[t].val=\
+    \ x;\n  else {\n   if constexpr (dual_v<M>) push(t);\n   if (!(isok= set(ns[t].ch[0],\
+    \ pos, x))) isok= set(ns[t].ch[1], pos, x);\n  }\n  if constexpr (monoid_v<M>)\n\
+    \   if (isok) update(t);\n  return isok;\n }\n inline std::pair<T, bool> get(int\
+    \ t, const Pos &pos) {\n  if (t == -1) return {T(), false};\n  bool myself= true;\n\
+    \  for (uint8_t k= K; k--; myself&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
+    \ < pos[k] || pos[k] < ns[t].range[k][0]) return {T(), false};\n  if (myself)\
+    \ return {ns[t].val, true};\n  if constexpr (dual_v<M>) push(t);\n  auto ret=\
+    \ get(ns[t].ch[0], pos);\n  return !ret.second ? get(ns[t].ch[1], pos) : ret;\n\
+    \ }\npublic:\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
+    \ canbe_PosV<P>>>> KDTreeImpl(const P *p, size_t n): ns(n) {\n  std::vector<int>\
+    \ ids(n);\n  int ts= 0;\n  std::iota(ids.begin(), ids.end(), 0), build<0, 0>(ts,\
+    \ ids.begin(), ids.end(), p);\n }\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
+    \ canbe_PosV<P>>>> KDTreeImpl(const std::vector<P> &p): KDTreeImpl(p.data(), p.size())\
+    \ {}\n template <class P, typename= std::enable_if_t<canbe_Pos<P>::value>> KDTreeImpl(const\
+    \ std::set<P> &p): KDTreeImpl(std::vector(p.begin(), p.end())) {}\n template <class\
+    \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ P *p, size_t n, U v): ns(n) {\n  std::vector<int> ids(n);\n  int ts= 0;\n  std::iota(ids.begin(),\
+    \ ids.end(), 0), build<0, 0>(ts, ids.begin(), ids.end(), p, v);\n }\n template\
+    \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ std::vector<P> &p, U v): KDTreeImpl(p.data(), p.size(), v) {}\n template <class\
+    \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ std::set<P> &p, U v): KDTreeImpl(std::vector(p.begin(), p.end()), v) {}\n template\
+    \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ std::pair<P, U> *p, size_t n): ns(n) {\n  std::vector<int> ids(n);\n  int ts=\
+    \ 0;\n  std::iota(ids.begin(), ids.end(), 0), build<1, 0>(ts, ids.begin(), ids.end(),\
+    \ p);\n }\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
+    \ U>>> KDTreeImpl(const std::vector<std::pair<P, U>> &p): KDTreeImpl(p.data(),\
+    \ p.size()) {}\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
+    \ U>>> KDTreeImpl(const std::map<P, U> &p): KDTreeImpl(std::vector(p.begin(),\
+    \ p.end())) {}\n std::vector<T> enum_cuboid(PK2... xs) {\n  static_assert(!std::is_void_v<M>,\
+    \ \"\\\"enum_cuboid\\\" is not available\");\n  std::vector<T> ret;\n  auto r=\
+    \ to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n  return\
+    \ col(0, in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T> enum_ball(PK...\
+    \ xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\\\"enum_ball\\\"\
+    \ is not available\");\n  std::vector<T> ret;\n  long_pos_t r2= long_pos_t(r)\
+    \ * r;\n  return col(0, in_ball({xs...}, r2), out_ball({xs...}, r2), ret), ret;\n\
+    \ }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>, \"\\\"fold_cuboid\\\
+    \" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
+    \  return fld(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r));\n }\n T fold_ball(PK...\
+    \ xs, pos_t r) {\n  static_assert(monoid_v<M>, \"\\\"fold_ball\\\" is not available\"\
+    );\n  long_pos_t r2= long_pos_t(r) * r;\n  return fld(0, in_ball({xs...}, r2),\
+    \ inall_ball({xs...}, r2), out_ball({xs...}, r2));\n }\n void apply_cuboid(PK2...\
+    \ xs, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_cuboid\\\" is not available\"\
+    );\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
+    \  app(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r), x);\n }\n void apply_ball(PK...\
+    \ xs, pos_t r, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_ball\\\" is not\
+    \ available\");\n  long_pos_t r2= long_pos_t(r) * r;\n  app(0, in_ball({xs...},\
+    \ r2), inall_ball({xs...}, r2), out({xs...}, r2), x);\n }\n void set(PK... p,\
+    \ T v) { assert(set(0, {p...}, v)); }\n T get(PK... p) {\n  auto [ret, flg]= get(0,\
+    \ {p...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const\
+    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
+    \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
+    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
+    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n"
   code: "#pragma once\n#include <array>\n#include <vector>\n#include <algorithm>\n\
     #include <tuple>\n#include <cstddef>\n#include <cassert>\n#include \"src/Internal/HAS_CHECK.hpp\"\
-    \ntemplate <uint8_t K, class pos_t, class M> class KDTree {\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
-    \ HAS_TYPE(E);\n template <class L> using monoid= std::conjunction<has_T<L>, has_op<L>,\
-    \ has_ti<L>>;\n template <class L> using dual= std::conjunction<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n template <class T, class F= std::nullptr_t>\
-    \ struct Node_B {\n  using E= F;\n  T val;\n  int ch[2]= {-1, -1};\n  pos_t range[K][2],\
-    \ pos[K];\n };\n template <bool sg_, bool du_, typename tEnable= void> struct\
-    \ Node_D: Node_B<M> {};\n template <bool sg_, bool du_> struct Node_D<sg_, du_,\
-    \ typename std::enable_if_t<sg_ && !du_>>: Node_B<typename M::T> {\n  typename\
-    \ M::T sum;\n };\n template <bool sg_, bool du_> struct Node_D<sg_, du_, typename\
-    \ std::enable_if_t<!sg_ && du_>>: Node_B<typename M::T, typename M::E> {\n  typename\
-    \ M::E lazy;\n  bool lazy_flg= false;\n };\n template <bool sg_, bool du_> struct\
-    \ Node_D<sg_, du_, typename std::enable_if_t<sg_ && du_>>: Node_B<typename M::T,\
-    \ typename M::E> {\n  typename M::T sum;\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false;\n };\n using Node= Node_D<monoid<M>::value, dual<M>::value>;\n using\
-    \ T= decltype(Node::val);\n using E= typename Node::E;\n std::vector<Node> ns;\n\
-    public:\n using PosVal= std::pair<std::array<pos_t, K>, T>;\n using Iter= typename\
-    \ std::vector<PosVal>::iterator;\n using Range= std::array<std::array<pos_t, 2>,\
-    \ K>;\nprivate:\n inline void pushup(int i) {\n  ns[i].sum= ns[i].val;\n  if (ns[i].ch[0]\
-    \ != -1) ns[i].sum= M::op(ns[ns[i].ch[0]].sum, ns[i].sum);\n  if (ns[i].ch[1]\
-    \ != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum);\n }\n inline void propagate(int\
-    \ i, const E &x) {\n  if (i == -1) return;\n  ns[i].lazy_flg ? (M::composition(ns[i].lazy,\
-    \ x), x) : (ns[i].lazy= x);\n  M::mapping(ns[i].val, x), ns[i].lazy_flg= true;\n\
-    \  if constexpr (monoid<M>::value) M::mapping(ns[i].sum, x);\n }\n inline void\
-    \ eval(int i) {\n  if (!ns[i].lazy_flg) return;\n  ns[i].lazy_flg= false;\n  propagate(ns[i].ch[0],\
-    \ ns[i].lazy), propagate(ns[i].ch[1], ns[i].lazy);\n }\n inline void build(int\
-    \ &i, Iter bg, Iter ed, int &ts, uint8_t div= 0) {\n  if (ed - bg < 1) return;\n\
-    \  const int n= ed - bg;\n  auto md= bg + n / 2;\n  std::nth_element(bg, md, ed,\
-    \ [div](const PosVal &l, const PosVal &r) { return l.first[div] < r.first[div];\
-    \ });\n  ns[i= ts++].val= md->second;\n  for (uint8_t j= K; j--; ns[i].pos[j]=\
-    \ md->first[j]) {\n   auto [mn, mx]= std::minmax_element(bg, ed, [j](const PosVal\
-    \ &l, const PosVal &r) { return l.first[j] < r.first[j]; });\n   ns[i].range[j][0]=\
-    \ mn->first[j], ns[i].range[j][1]= mx->first[j];\n  }\n  if (uint8_t nex= (div\
-    \ + 1) % K; n > 1) build(ns[i].ch[0], bg, md, ts, nex), build(ns[i].ch[1], md\
-    \ + 1, ed, ts, nex);\n  if constexpr (monoid<M>::value) pushup(i);\n }\n template\
-    \ <class F, class G, class H> inline T fold(int i, const F &in, const G &inall,\
-    \ const H &outall) {\n  static_assert(monoid<M>::value, \"\\\"fold\\\" is not\
-    \ available\");\n  if (i == -1 || outall(ns[i].range)) return M::ti();\n  if (inall(ns[i].range))\
-    \ return ns[i].sum;\n  if constexpr (dual<M>::value) eval(i);\n  T ret= M::op(fold(ns[i].ch[0],\
-    \ in, inall, outall), fold(ns[i].ch[1], in, inall, outall));\n  ret= in(ns[i].pos)\
-    \ ? M::op(ret, ns[i].val) : ret;\n  return ret;\n }\n template <class F, class\
-    \ G, class H> inline void apply(int i, const F &in, const G &inall, const H &outall,\
-    \ const E &x) {\n  static_assert(dual<M>::value, \"\\\"apply\\\" is not available\"\
-    );\n  if (i == -1 || outall(ns[i].range)) return;\n  if (inall(ns[i].range)) return\
-    \ propagate(i, x), void();\n  if (eval(i); in(ns[i].pos)) M::mapping(ns[i].val,\
-    \ x);\n  apply(ns[i].ch[0], in, inall, outall, x), apply(ns[i].ch[1], in, inall,\
-    \ outall, x);\n  if constexpr (monoid<M>::value) pushup(i);\n }\n inline std::pair<T,\
-    \ bool> get(int i, const std::array<pos_t, K> &pos) {\n  if (i == -1) return {T(),\
-    \ false};\n  bool myself= true;\n  for (uint8_t j= K; j--; myself&= pos[j] ==\
-    \ ns[i].pos[j])\n   if (ns[i].range[j][1] < pos[j] || pos[j] < ns[i].range[j][0])\
-    \ return {T(), false};\n  if (myself) return {ns[i].val, true};\n  if constexpr\
-    \ (dual<M>::value) eval(i);\n  auto ret= get(ns[i].ch[0], pos);\n  return !ret.second\
-    \ ? get(ns[i].ch[1], pos) : ret;\n }\n inline bool set(int i, const std::array<pos_t,\
-    \ K> &pos, const T &x) {\n  if (i == -1) return false;\n  bool myself= true, ret=\
-    \ true;\n  for (uint8_t j= K; j--; myself&= pos[j] == ns[i].pos[j])\n   if (ns[i].range[j][1]\
-    \ < pos[j] || pos[j] < ns[i].range[j][0]) return false;\n  if constexpr (dual<M>::value)\
-    \ eval(i);\n  if (myself) ns[i].val= x;\n  else if (!(ret= set(ns[i].ch[0], pos,\
-    \ x))) ret= set(ns[i].ch[1], pos, x);\n  if constexpr (monoid<M>::value) pushup(i);\n\
-    \  return ret;\n }\n template <typename... Args> static inline Range to_range(std::initializer_list<Args>...\
-    \ intervals) {\n  static_assert(sizeof...(intervals) == K);\n  static_assert(std::conjunction_v<std::is_same<Args,\
-    \ pos_t>...>);\n  Range r;\n  uint8_t i= 0;\n  for (auto &&x: {intervals...})\
-    \ {\n   std::vector<pos_t> tmp(x);\n   assert(tmp.size() == 2), assert(tmp[0]\
-    \ <= tmp[1]);\n   r[i][0]= tmp[0], r[i][1]= tmp[1], i++;\n  }\n  return r;\n }\n\
-    \ static inline auto funcs(const Range &r) {\n  return std::make_tuple(\n    \
-    \  [r](pos_t pos[K]) {\n       for (uint8_t i= K; i--;)\n        if (pos[i] <\
-    \ r[i][0] || r[i][1] < pos[i]) return false;\n       return true;\n      },\n\
-    \      [r](pos_t range[K][2]) {\n       for (uint8_t i= K; i--;)\n        if (range[i][0]\
-    \ < r[i][0] || r[i][1] < range[i][1]) return false;\n       return true;\n   \
-    \   },\n      [r](pos_t range[K][2]) {\n       for (uint8_t i= K; i--;)\n    \
-    \    if (range[i][1] < r[i][0] || r[i][1] < range[i][0]) return true;\n      \
-    \ return false;\n      });\n }\npublic:\n KDTree(std::vector<PosVal> v): ns(v.size())\
-    \ {\n  int root, timestamp= 0;\n  build(root, v.begin(), v.end(), timestamp);\n\
-    \ }\n T get(std::array<pos_t, K> pos) {\n  auto [ret, flg]= get(0, pos);\n  return\
-    \ assert(flg), ret;\n }\n template <typename... Args> T get(Args... ids) {\n \
-    \ static_assert(sizeof...(ids) == K);\n  static_assert(std::conjunction_v<std::is_convertible<Args,\
-    \ pos_t>...>);\n  auto [ret, flg]= get(0, {ids...});\n  return assert(flg), ret;\n\
-    \ }\n void set(T x, std::array<pos_t, K> pos) { assert(set(0, pos, x)); }\n template\
-    \ <typename... Args> void set(T x, Args... ids) {\n  static_assert(sizeof...(ids)\
-    \ == K);\n  static_assert(std::conjunction_v<std::is_convertible<Args, pos_t>...>);\n\
-    \  assert(set(0, {ids...}, x));\n }\n T fold(const Range &r) {\n  auto [in, inall,\
-    \ outall]= funcs(r);\n  return fold(0, in, inall, outall);\n }\n template <typename...\
-    \ Args> T fold(std::initializer_list<Args> &&...intervals) { return fold(to_range(intervals...));\
-    \ }\n template <class F, class G, class H> T fold(const F &in, const G &inall,\
-    \ const H &outall) { return fold(0, in, inall, outall); }\n void apply(E x, const\
-    \ Range &r) {\n  auto [in, inall, outall]= funcs(r);\n  apply(0, in, inall, outall,\
-    \ x);\n }\n template <typename... Args> void apply(E x, std::initializer_list<Args>\
-    \ &&...intervals) { apply(x, to_range(intervals...)); }\n template <class F, class\
-    \ G, class H> void apply(E x, const F &in, const G &inall, const H &outall) {\
-    \ apply(0, in, inall, outall, x); }\n};"
+    \n#include \"src/Internal/tuple_traits.hpp\"\n#include \"src/Internal/long_traits.hpp\"\
+    \nnamespace kdtree_internal {\ntemplate <class pos_t, size_t K, class M, class\
+    \ A, class B> class KDTreeImpl {};\ntemplate <class pos_t, size_t K, class M,\
+    \ class... PK, class... PK2> class KDTreeImpl<pos_t, K, M, std::tuple<PK...>,\
+    \ std::tuple<PK2...>> {\npublic:\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n\
+    \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n MYSELF_OR(T);\n NULLPTR_OR(E);\n\
+    \ using Sec= std::array<pos_t, 2>;\n using Pos= std::array<pos_t, K>;\n using\
+    \ Range= std::array<Sec, K>;\n using long_pos_t= make_long_t<pos_t>;\n template\
+    \ <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>,\
+    \ has_ti<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct Node_BB {\n  int ch[2]= {-1, -1};\n\
+    \  Pos pos;\n  pos_t range[K][2];\n };\n template <class U> struct Node_B: Node_BB\
+    \ {\n  U val;\n };\n template <class D, bool sg, bool du> struct Node_D: Node_B<M>\
+    \ {};\n template <bool sg, bool du> struct Node_D<void, sg, du>: Node_BB {};\n\
+    \ template <class D> struct Node_D<D, 1, 0>: Node_B<typename M::T> {\n  typename\
+    \ M::T sum;\n };\n template <class D> struct Node_D<D, 0, 1>: Node_B<typename\
+    \ M::T> {\n  typename M::E laz;\n  bool laz_flg= false;\n };\n template <class\
+    \ D> struct Node_D<D, 1, 1>: Node_B<typename M::T> {\n  typename M::T sum;\n \
+    \ typename M::E laz;\n  bool laz_flg= false;\n };\n using Node= Node_D<M, monoid_v<M>,\
+    \ dual_v<M>>;\n using Iter= typename std::vector<int>::iterator;\n using T= std::conditional_t<std::is_void_v<M>,\
+    \ std::nullptr_t, myself_or_T_t<M>>;\n using E= nullptr_or_E_t<M>;\n template\
+    \ <class P> using canbe_Pos= std::is_convertible<to_tuple_t<P>, std::tuple<PK...>>;\n\
+    \ template <class P> using canbe_PosV= std::is_convertible<to_tuple_t<P>, std::tuple<PK...,\
+    \ T>>;\n template <class P, class U> static constexpr bool canbe_Pos_and_T_v=\
+    \ std::conjunction_v<canbe_Pos<P>, std::is_convertible<U, T>>;\n std::vector<Node>\
+    \ ns;\n static inline T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n\
+    \  else return T();\n }\n template <bool z, size_t k, class P> static inline auto\
+    \ get_(const P &p) {\n  if constexpr (z == 0) return std::get<k>(p);\n  else return\
+    \ std::get<k>(p.first);\n }\n template <class P, size_t... I> Range to_range(const\
+    \ P &p, std::index_sequence<I...>) { return {(assert(std::get<I + I>(p) <= std::get<I\
+    \ + I + 1>(p)), Sec{std::get<I + I>(p), std::get<I + I + 1>(p)})...}; }\n inline\
+    \ void update(int t) {\n  ns[t].sum= ns[t].val;\n  if (ns[t].ch[0] != -1) ns[t].sum=\
+    \ M::op(ns[t].sum, ns[ns[t].ch[0]].sum);\n  if (ns[t].ch[1] != -1) ns[t].sum=\
+    \ M::op(ns[t].sum, ns[ns[t].ch[1]].sum);\n }\n inline void propagate(int t, const\
+    \ E &x) {\n  if (t == -1) return;\n  if (ns[t].laz_flg) M::cp(ns[t].laz, x);\n\
+    \  else ns[t].laz= x, ns[t].laz_flg= true;\n  M::mp(ns[t].val, x);\n  if constexpr\
+    \ (monoid_v<M>) M::mp(ns[t].sum, x);\n }\n inline void push(int t) {\n  if (ns[t].laz_flg)\
+    \ ns[t].laz_flg= false, propagate(ns[t].ch[0], ns[t].laz), propagate(ns[t].ch[1],\
+    \ ns[t].laz);\n }\n template <bool z, class P, size_t k> inline void set_range(int\
+    \ t, int m, Iter bg, Iter ed, const P *p) {\n  auto [mn, mx]= std::minmax_element(bg,\
+    \ ed, [&](int a, int b) { return get_<z, k>(p[a]) < get_<z, k>(p[b]); });\n  ns[t].range[k][0]=\
+    \ get_<z, k>(p[*mn]), ns[t].range[k][1]= get_<z, k>(p[*mx]), ns[t].pos[k]= get_<z,\
+    \ k>(p[m]);\n }\n template <bool z, class P, size_t... I> inline void set_range_lp(int\
+    \ t, int m, Iter bg, Iter ed, const P *p, std::index_sequence<I...>) { (void)(int[]){(set_range<z,\
+    \ P, I>(t, m, bg, ed, p), 0)...}; }\n template <bool z, uint8_t div, class P>\
+    \ inline int build(int &ts, Iter bg, Iter ed, const P *p, const T &v= def_val())\
+    \ {\n  if (bg == ed) return -1;\n  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n\
+    \  std::nth_element(bg, md, ed, [&](int a, int b) { return get_<z, div>(p[a])\
+    \ < get_<z, div>(p[b]); }), set_range_lp<z>(t, *md, bg, ed, p, std::make_index_sequence<K>());\n\
+    \  if constexpr (z == 0) {\n   if constexpr (!std::is_void_v<M>) {\n    if constexpr\
+    \ (std::tuple_size_v<P> == K + 1) ns[t].val= std::get<K>(p[*md]);\n    else ns[t].val=\
+    \ v;\n   }\n  } else ns[t].val= p[*md].second;\n  static constexpr uint8_t nx=\
+    \ div + 1 == K ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(ts, bg, md, p, v),\
+    \ ns[t].ch[1]= build<z, nx>(ts, md + 1, ed, p, v);\n  if constexpr (monoid_v<M>)\
+    \ update(t);\n  return t;\n }\n template <bool z, uint8_t div, class P> inline\
+    \ int build(Iter bg, Iter ed, const P *p, int &ts) {\n  if (bg == ed) return -1;\n\
+    \  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n  std::nth_element(bg, md, ed,\
+    \ [&](int a, int b) { return get_<z, div>(p[a]) < get_<z, div>(p[b]); }), set_range_lp<z>(t,\
+    \ bg, ed, p, std::make_index_sequence<K>());\n  if constexpr (z == 0) {\n   if\
+    \ constexpr (!std::is_void_v<M>) {\n    if constexpr (std::tuple_size_v<P> ==\
+    \ K + 1) ns[t].val= std::get<K>(p[t]);\n    else ns[t].val= def_val();\n   }\n\
+    \  } else ns[t].val= p[t].second;\n  static constexpr uint8_t nx= div + 1 == K\
+    \ ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(bg, md, p, ts), ns[t].ch[1]= build<z,\
+    \ nx>(md + 1, ed, p, ts);\n  if constexpr (monoid_v<M>) update(t);\n  return t;\n\
+    \ }\n static inline auto in_cuboid(const Range &r) {\n  return [r](const Pos &pos)\
+    \ {\n   for (uint8_t k= K; k--;)\n    if (r[k][1] < pos[k] || pos[k] < r[k][0])\
+    \ return false;\n   return true;\n  };\n }\n static inline auto out_cuboid(const\
+    \ Range &r) {\n  return [r](const pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n\
+    \    if (rr[k][1] < r[k][0] || r[k][1] < rr[k][0]) return true;\n   return false;\n\
+    \  };\n }\n static inline auto inall_cuboid(const Range &r) {\n  return [r](const\
+    \ pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n    if (rr[k][0] < r[k][0] ||\
+    \ r[k][1] < rr[k][1]) return false;\n   return true;\n  };\n }\n static inline\
+    \ long_pos_t min_dist2(const pos_t r[K][2], const Pos &pos) {\n  long_pos_t d2=\
+    \ 0, dx;\n  for (uint8_t k= K; k--;) dx= std::clamp(pos[k], r[k][0], r[k][1])\
+    \ - pos[k], d2+= dx * dx;\n  return d2;\n }\n static inline auto in_ball(const\
+    \ Pos &c, long_pos_t r2) {\n  return [c, r2](const Pos &pos) {\n   long_pos_t\
+    \ d2= 0, dx;\n   for (uint8_t k= K; k--;) dx= pos[k] - c[k], d2+= dx * dx;\n \
+    \  return d2 <= r2;\n  };\n }\n static inline auto inall_ball(const Pos &c, long_pos_t\
+    \ r2) {\n  return [c, r2](const pos_t rr[K][2]) {\n   long_pos_t d2= 0, dx0, dx1;\n\
+    \   for (uint8_t k= K; k--;) dx0= rr[k][0] - c[k], dx1= rr[k][1] - c[k], d2+=\
+    \ std::max(dx0 * dx0, dx1 * dx1);\n   return d2 <= r2;\n  };\n }\n static inline\
+    \ auto out_ball(const Pos &c, long_pos_t r2) {\n  return [c, r2](const pos_t r[K][2])\
+    \ { return min_dist2(r, c) > r2; };\n }\n inline void nns(int t, const Pos &pos,\
+    \ std::pair<int, long_pos_t> &ret) const {\n  if (t == -1) return;\n  long_pos_t\
+    \ d2= min_dist2(ns[t].range, pos);\n  if (ret.first != -1 && d2 >= ret.second)\
+    \ return;\n  long_pos_t dx= d2= 0;\n  for (uint8_t k= K; k--;) dx= pos[k] - ns[t].pos[k],\
+    \ d2+= dx * dx;\n  if (ret.first == -1 || d2 < ret.second) ret= {t, d2};\n  bool\
+    \ f= 0;\n  if (auto [l, r]= ns[t].ch; l != -1 && r != -1) f= min_dist2(ns[l].range,\
+    \ pos) > min_dist2(ns[r].range, pos);\n  nns(ns[t].ch[f], pos, ret), nns(ns[t].ch[!f],\
+    \ pos, ret);\n }\n template <class In, class Out> inline void col(int t, const\
+    \ In &in, const Out &out, std::vector<T> &ret) const {\n  if (t == -1 || out(ns[t].range))\
+    \ return;\n  if (in(ns[t].pos)) ret.push_back(ns[t].val);\n  col(ns[t].ch[0],\
+    \ in, out, ret), col(ns[t].ch[1], in, out, ret);\n }\n template <class In, class\
+    \ InAll, class Out> inline T fld(int t, const In &in, const InAll &inall, const\
+    \ Out &out) {\n  if (t == -1 || out(ns[t].range)) return def_val();\n  if (inall(ns[t].range))\
+    \ return ns[t].sum;\n  if constexpr (dual_v<M>) push(t);\n  T ret= M::op(fld(ns[t].ch[0],\
+    \ in, inall, out), fld(ns[t].ch[1], in, inall, out));\n  return in(ns[t].pos)\
+    \ ? M::op(ret, ns[t].val) : ret;\n }\n template <class In, class InAll, class\
+    \ Out> inline void app(int t, const In &in, const InAll &inall, const Out &out,\
+    \ const E &x) {\n  if (t == -1 || out(ns[t].range)) return;\n  if (inall(ns[t].range))\
+    \ return propagate(t, x);\n  if (push(t); in(ns[t].pos)) M::mp(ns[t].val, x);\n\
+    \  app(ns[t].ch[0], in, inall, out, x), app(ns[t].ch[1], in, inall, out, x);\n\
+    \  if constexpr (monoid_v<M>) update(t);\n }\n inline bool set(int t, const pos_t\
+    \ pos[K], const T &x) {\n  if (t == -1) return false;\n  bool isok= true;\n  for\
+    \ (uint8_t k= K; k--; isok&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
+    \ < pos[k] || pos[k] < ns[t].range[k][0]) return false;\n  if (isok) ns[t].val=\
+    \ x;\n  else {\n   if constexpr (dual_v<M>) push(t);\n   if (!(isok= set(ns[t].ch[0],\
+    \ pos, x))) isok= set(ns[t].ch[1], pos, x);\n  }\n  if constexpr (monoid_v<M>)\n\
+    \   if (isok) update(t);\n  return isok;\n }\n inline std::pair<T, bool> get(int\
+    \ t, const Pos &pos) {\n  if (t == -1) return {T(), false};\n  bool myself= true;\n\
+    \  for (uint8_t k= K; k--; myself&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
+    \ < pos[k] || pos[k] < ns[t].range[k][0]) return {T(), false};\n  if (myself)\
+    \ return {ns[t].val, true};\n  if constexpr (dual_v<M>) push(t);\n  auto ret=\
+    \ get(ns[t].ch[0], pos);\n  return !ret.second ? get(ns[t].ch[1], pos) : ret;\n\
+    \ }\npublic:\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
+    \ canbe_PosV<P>>>> KDTreeImpl(const P *p, size_t n): ns(n) {\n  std::vector<int>\
+    \ ids(n);\n  int ts= 0;\n  std::iota(ids.begin(), ids.end(), 0), build<0, 0>(ts,\
+    \ ids.begin(), ids.end(), p);\n }\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
+    \ canbe_PosV<P>>>> KDTreeImpl(const std::vector<P> &p): KDTreeImpl(p.data(), p.size())\
+    \ {}\n template <class P, typename= std::enable_if_t<canbe_Pos<P>::value>> KDTreeImpl(const\
+    \ std::set<P> &p): KDTreeImpl(std::vector(p.begin(), p.end())) {}\n template <class\
+    \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ P *p, size_t n, U v): ns(n) {\n  std::vector<int> ids(n);\n  int ts= 0;\n  std::iota(ids.begin(),\
+    \ ids.end(), 0), build<0, 0>(ts, ids.begin(), ids.end(), p, v);\n }\n template\
+    \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ std::vector<P> &p, U v): KDTreeImpl(p.data(), p.size(), v) {}\n template <class\
+    \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ std::set<P> &p, U v): KDTreeImpl(std::vector(p.begin(), p.end()), v) {}\n template\
+    \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
+    \ std::pair<P, U> *p, size_t n): ns(n) {\n  std::vector<int> ids(n);\n  int ts=\
+    \ 0;\n  std::iota(ids.begin(), ids.end(), 0), build<1, 0>(ts, ids.begin(), ids.end(),\
+    \ p);\n }\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
+    \ U>>> KDTreeImpl(const std::vector<std::pair<P, U>> &p): KDTreeImpl(p.data(),\
+    \ p.size()) {}\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
+    \ U>>> KDTreeImpl(const std::map<P, U> &p): KDTreeImpl(std::vector(p.begin(),\
+    \ p.end())) {}\n std::vector<T> enum_cuboid(PK2... xs) {\n  static_assert(!std::is_void_v<M>,\
+    \ \"\\\"enum_cuboid\\\" is not available\");\n  std::vector<T> ret;\n  auto r=\
+    \ to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n  return\
+    \ col(0, in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T> enum_ball(PK...\
+    \ xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\\\"enum_ball\\\"\
+    \ is not available\");\n  std::vector<T> ret;\n  long_pos_t r2= long_pos_t(r)\
+    \ * r;\n  return col(0, in_ball({xs...}, r2), out_ball({xs...}, r2), ret), ret;\n\
+    \ }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>, \"\\\"fold_cuboid\\\
+    \" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
+    \  return fld(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r));\n }\n T fold_ball(PK...\
+    \ xs, pos_t r) {\n  static_assert(monoid_v<M>, \"\\\"fold_ball\\\" is not available\"\
+    );\n  long_pos_t r2= long_pos_t(r) * r;\n  return fld(0, in_ball({xs...}, r2),\
+    \ inall_ball({xs...}, r2), out_ball({xs...}, r2));\n }\n void apply_cuboid(PK2...\
+    \ xs, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_cuboid\\\" is not available\"\
+    );\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
+    \  app(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r), x);\n }\n void apply_ball(PK...\
+    \ xs, pos_t r, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_ball\\\" is not\
+    \ available\");\n  long_pos_t r2= long_pos_t(r) * r;\n  app(0, in_ball({xs...},\
+    \ r2), inall_ball({xs...}, r2), out({xs...}, r2), x);\n }\n void set(PK... p,\
+    \ T v) { assert(set(0, {p...}, v)); }\n T get(PK... p) {\n  auto [ret, flg]= get(0,\
+    \ {p...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const\
+    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
+    \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
+    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
+    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;"
   dependsOn:
   - src/Internal/HAS_CHECK.hpp
+  - src/Internal/tuple_traits.hpp
+  - src/Internal/long_traits.hpp
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2023-10-17 01:28:06+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-10-29 17:46:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/aoj/1023.KDT.test.cpp
+  - test/aoj/DSL_2_C.KDT.test.cpp
+  - test/aoj/2842.KDT.test.cpp
+  - test/aoj/1068.KDT.test.cpp
+  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/728.KDT.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
-  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/aoj/1068.KDT.test.cpp
-  - test/aoj/2842.KDT.test.cpp
-  - test/aoj/DSL_2_C.KDT.test.cpp
 documentation_of: src/DataStructure/KDTree.hpp
 layout: document
 title: kD-Tree

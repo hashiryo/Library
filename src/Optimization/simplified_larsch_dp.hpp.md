@@ -2,9 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Internal/function_type.hpp
+    path: src/Internal/function_traits.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
-      \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+      \u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -31,35 +31,29 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/simplified_larsch_dp.hpp\"\n#include <vector>\n\
-    #include <limits>\n#line 2 \"src/Internal/function_type.hpp\"\n#include <type_traits>\n\
-    namespace function_template_internal {\ntemplate <class C> struct is_function_object\
-    \ {\n template <class U, int dummy= (&U::operator(), 0)> static std::true_type\
-    \ check(U *);\n static std::false_type check(...);\n static C *m;\n static constexpr\
-    \ bool value= decltype(check(m))::value;\n};\ntemplate <class F, bool, bool> struct\
-    \ function_type_impl {\n using type= void;\n};\ntemplate <class F> struct function_type_impl<F,\
-    \ true, false> {\n using type= F *;\n};\ntemplate <class F> struct function_type_impl<F,\
-    \ false, true> {\n using type= decltype(&F::operator());\n};\ntemplate <class\
-    \ F> using function_type_t= typename function_type_impl<F, std::is_function_v<F>,\
-    \ is_function_object<F>::value>::type;\ntemplate <class... Args> struct result_type_impl\
-    \ {\n using type= void;\n};\ntemplate <class R, class... Args> struct result_type_impl<R\
-    \ (*)(Args...)> {\n using type= R;\n};\ntemplate <class C, class R, class... Args>\
-    \ struct result_type_impl<R (C::*)(Args...)> {\n using type= R;\n};\ntemplate\
-    \ <class C, class R, class... Args> struct result_type_impl<R (C::*)(Args...)\
-    \ const> {\n using type= R;\n};\ntemplate <class F> using result_type_t= typename\
-    \ result_type_impl<function_type_t<F>>::type;\ntemplate <class... Args> struct\
-    \ argument_type_impl {\n using type= void;\n};\ntemplate <class R, class... Args>\
-    \ struct argument_type_impl<R (*)(Args...)> {\n using type= std::tuple<Args...>;\n\
-    };\ntemplate <class C, class R, class... Args> struct argument_type_impl<R (C::*)(Args...)>\
-    \ {\n using type= std::tuple<Args...>;\n};\ntemplate <class C, class R, class...\
-    \ Args> struct argument_type_impl<R (C::*)(Args...) const> {\n using type= std::tuple<Args...>;\n\
-    };\ntemplate <class F> using argument_type_t= typename argument_type_impl<function_type_t<F>>::type;\n\
-    template <class T> struct other_than_first_argument_type_impl {\n using type=\
-    \ void;\n};\ntemplate <class T, class... Args> struct other_than_first_argument_type_impl<std::tuple<T,\
-    \ Args...>> {\n using type= std::tuple<Args...>;\n};\ntemplate <class T> using\
-    \ other_than_first_argument_type_t= typename other_than_first_argument_type_impl<T>::type;\n\
-    }\nusing function_template_internal::result_type_t, function_template_internal::argument_type_t,\
-    \ function_template_internal::other_than_first_argument_type_t;\n#line 5 \"src/Optimization/simplified_larsch_dp.hpp\"\
-    \n// dp[i] = min_{j<i} (dp[j] + w(i,j))\n// w(i,j) -> monge cost\ntemplate <class\
+    #include <limits>\n#line 2 \"src/Internal/function_traits.hpp\"\n#include <type_traits>\n\
+    // clang-format off\nnamespace function_template_internal{\ntemplate<class C>struct\
+    \ is_function_object{\n template<class U,int dummy=(&U::operator(),0)> static\
+    \ std::true_type check(U *);\n static std::false_type check(...);\n static C *m;\n\
+    \ static constexpr bool value= decltype(check(m))::value;\n};\ntemplate<class\
+    \ F,bool,bool>struct function_type_impl{using type= void;};\ntemplate<class F>struct\
+    \ function_type_impl<F,true,false>{using type= F *;};\ntemplate<class F>struct\
+    \ function_type_impl<F,false,true>{using type= decltype(&F::operator());};\ntemplate<class\
+    \ F> using function_type_t= typename function_type_impl<F,std::is_function_v<F>,is_function_object<F>::value>::type;\n\
+    template<class... Args>struct result_type_impl{using type= void;};\ntemplate<class\
+    \ R,class... Args>struct result_type_impl<R(*)(Args...)>{using type= R;};\ntemplate<class\
+    \ C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)>{using type=\
+    \ R;};\ntemplate<class C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)const>{using\
+    \ type= R;};\ntemplate<class F> using result_type_t= typename result_type_impl<function_type_t<F>>::type;\n\
+    template<class... Args>struct argument_type_impl{using type= void;};\ntemplate<class\
+    \ R,class... Args>struct argument_type_impl<R(*)(Args...)>{using type= std::tuple<Args...>;};\n\
+    template<class C,class R,class... Args>struct argument_type_impl<R(C::*)(Args...)>{using\
+    \ type= std::tuple<Args...>;};\ntemplate<class C,class R,class... Args>struct\
+    \ argument_type_impl<R(C::*)(Args...)const>{using type= std::tuple<Args...>;};\n\
+    template<class F> using argument_type_t= typename argument_type_impl<function_type_t<F>>::type;\n\
+    }\nusing function_template_internal::result_type_t,function_template_internal::argument_type_t;\n\
+    // clang-format on\n#line 5 \"src/Optimization/simplified_larsch_dp.hpp\"\n//\
+    \ dp[i] = min_{j<i} (dp[j] + w(i,j))\n// w(i,j) -> monge cost\ntemplate <class\
     \ F> std::vector<result_type_t<F>> simplified_larsch_dp(int n, const F &w) {\n\
     \ using T= result_type_t<F>;\n std::vector<T> dp(n + 1, std::numeric_limits<T>::max());\n\
     \ std::vector<int> x(n + 1);\n auto check= [&](int i, int j) {\n  if (T cost=\
@@ -68,7 +62,7 @@ data:
     \ (int i= x[l]; i <= x[r]; ++i) check(m, i);\n  rec(rec, l, m);\n  for (int i=\
     \ l + 1; i <= m; ++i) check(r, i);\n  rec(rec, m, r);\n };\n return dp[0]= 0,\
     \ check(n, 0), rec(rec, 0, n), dp;\n}\n"
-  code: "#pragma once\n#include <vector>\n#include <limits>\n#include \"src/Internal/function_type.hpp\"\
+  code: "#pragma once\n#include <vector>\n#include <limits>\n#include \"src/Internal/function_traits.hpp\"\
     \n// dp[i] = min_{j<i} (dp[j] + w(i,j))\n// w(i,j) -> monge cost\ntemplate <class\
     \ F> std::vector<result_type_t<F>> simplified_larsch_dp(int n, const F &w) {\n\
     \ using T= result_type_t<F>;\n std::vector<T> dp(n + 1, std::numeric_limits<T>::max());\n\
@@ -79,19 +73,19 @@ data:
     \ l + 1; i <= m; ++i) check(r, i);\n  rec(rec, m, r);\n };\n return dp[0]= 0,\
     \ check(n, 0), rec(rec, 0, n), dp;\n}"
   dependsOn:
-  - src/Internal/function_type.hpp
+  - src/Internal/function_traits.hpp
   isVerificationFile: false
   path: src/Optimization/simplified_larsch_dp.hpp
   requiredBy: []
-  timestamp: '2023-10-17 01:28:06+09:00'
+  timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/aoj/3086.LARSCH.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
   - test/yukicoder/705.LARSCH.test.cpp
   - test/yukicoder/703.LARSCH.test.cpp
   - test/yukicoder/704.LARSCH.test.cpp
   - test/yukicoder/409.LARSCH.test.cpp
-  - test/aoj/3086.LARSCH.test.cpp
-  - test/aoj/2603.AlienDP.test.cpp
 documentation_of: src/Optimization/simplified_larsch_dp.hpp
 layout: document
 title: "\u7C21\u6613\u7248LARSCH"

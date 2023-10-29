@@ -2,9 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/Internal/function_type.hpp
+    path: src/Internal/function_traits.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
-      \u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+      \u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
     path: src/Optimization/MinMaxEnum.hpp
     title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\
@@ -17,10 +17,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc204_e.test.cpp
     title: test/atcoder/abc204_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc218_h.test.cpp
     title: test/atcoder/abc218_h.test.cpp
   - icon: ':x:'
@@ -41,35 +41,29 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/fibonacci_search.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#line 2 \"src/Internal/function_type.hpp\"\n#include <type_traits>\n\
-    namespace function_template_internal {\ntemplate <class C> struct is_function_object\
-    \ {\n template <class U, int dummy= (&U::operator(), 0)> static std::true_type\
-    \ check(U *);\n static std::false_type check(...);\n static C *m;\n static constexpr\
-    \ bool value= decltype(check(m))::value;\n};\ntemplate <class F, bool, bool> struct\
-    \ function_type_impl {\n using type= void;\n};\ntemplate <class F> struct function_type_impl<F,\
-    \ true, false> {\n using type= F *;\n};\ntemplate <class F> struct function_type_impl<F,\
-    \ false, true> {\n using type= decltype(&F::operator());\n};\ntemplate <class\
-    \ F> using function_type_t= typename function_type_impl<F, std::is_function_v<F>,\
-    \ is_function_object<F>::value>::type;\ntemplate <class... Args> struct result_type_impl\
-    \ {\n using type= void;\n};\ntemplate <class R, class... Args> struct result_type_impl<R\
-    \ (*)(Args...)> {\n using type= R;\n};\ntemplate <class C, class R, class... Args>\
-    \ struct result_type_impl<R (C::*)(Args...)> {\n using type= R;\n};\ntemplate\
-    \ <class C, class R, class... Args> struct result_type_impl<R (C::*)(Args...)\
-    \ const> {\n using type= R;\n};\ntemplate <class F> using result_type_t= typename\
-    \ result_type_impl<function_type_t<F>>::type;\ntemplate <class... Args> struct\
-    \ argument_type_impl {\n using type= void;\n};\ntemplate <class R, class... Args>\
-    \ struct argument_type_impl<R (*)(Args...)> {\n using type= std::tuple<Args...>;\n\
-    };\ntemplate <class C, class R, class... Args> struct argument_type_impl<R (C::*)(Args...)>\
-    \ {\n using type= std::tuple<Args...>;\n};\ntemplate <class C, class R, class...\
-    \ Args> struct argument_type_impl<R (C::*)(Args...) const> {\n using type= std::tuple<Args...>;\n\
-    };\ntemplate <class F> using argument_type_t= typename argument_type_impl<function_type_t<F>>::type;\n\
-    template <class T> struct other_than_first_argument_type_impl {\n using type=\
-    \ void;\n};\ntemplate <class T, class... Args> struct other_than_first_argument_type_impl<std::tuple<T,\
-    \ Args...>> {\n using type= std::tuple<Args...>;\n};\ntemplate <class T> using\
-    \ other_than_first_argument_type_t= typename other_than_first_argument_type_impl<T>::type;\n\
-    }\nusing function_template_internal::result_type_t, function_template_internal::argument_type_t,\
-    \ function_template_internal::other_than_first_argument_type_t;\n#line 2 \"src/Optimization/MinMaxEnum.hpp\"\
-    \nenum MinMaxEnum { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 6 \"src/Optimization/fibonacci_search.hpp\"\
+    #include <cassert>\n#line 2 \"src/Internal/function_traits.hpp\"\n#include <type_traits>\n\
+    // clang-format off\nnamespace function_template_internal{\ntemplate<class C>struct\
+    \ is_function_object{\n template<class U,int dummy=(&U::operator(),0)> static\
+    \ std::true_type check(U *);\n static std::false_type check(...);\n static C *m;\n\
+    \ static constexpr bool value= decltype(check(m))::value;\n};\ntemplate<class\
+    \ F,bool,bool>struct function_type_impl{using type= void;};\ntemplate<class F>struct\
+    \ function_type_impl<F,true,false>{using type= F *;};\ntemplate<class F>struct\
+    \ function_type_impl<F,false,true>{using type= decltype(&F::operator());};\ntemplate<class\
+    \ F> using function_type_t= typename function_type_impl<F,std::is_function_v<F>,is_function_object<F>::value>::type;\n\
+    template<class... Args>struct result_type_impl{using type= void;};\ntemplate<class\
+    \ R,class... Args>struct result_type_impl<R(*)(Args...)>{using type= R;};\ntemplate<class\
+    \ C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)>{using type=\
+    \ R;};\ntemplate<class C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)const>{using\
+    \ type= R;};\ntemplate<class F> using result_type_t= typename result_type_impl<function_type_t<F>>::type;\n\
+    template<class... Args>struct argument_type_impl{using type= void;};\ntemplate<class\
+    \ R,class... Args>struct argument_type_impl<R(*)(Args...)>{using type= std::tuple<Args...>;};\n\
+    template<class C,class R,class... Args>struct argument_type_impl<R(C::*)(Args...)>{using\
+    \ type= std::tuple<Args...>;};\ntemplate<class C,class R,class... Args>struct\
+    \ argument_type_impl<R(C::*)(Args...)const>{using type= std::tuple<Args...>;};\n\
+    template<class F> using argument_type_t= typename argument_type_impl<function_type_t<F>>::type;\n\
+    }\nusing function_template_internal::result_type_t,function_template_internal::argument_type_t;\n\
+    // clang-format on\n#line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum\
+    \ { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 6 \"src/Optimization/fibonacci_search.hpp\"\
     \n// [l,r]\ntemplate <MinMaxEnum obj, class F> std::pair<int64_t, result_type_t<F>>\
     \ fibonacci_search(const F &f, int64_t l, int64_t r) {\n assert(l <= r);\n int64_t\
     \ s= 1, t= 2, a= l - 1, x, b, y;\n for (int64_t e= r - l + 2; t < e;) std::swap(s+=\
@@ -78,7 +72,7 @@ data:
     \ constexpr (obj == MINIMIZE) g= fx < (fy= f(y));\n   else g= fx > (fy= f(y));\n\
     \   if (g) b= a, a= y;\n   else a= x, x= y, fx= fy;\n  }\n }\n return {x, fx};\n\
     }\n"
-  code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include \"src/Internal/function_type.hpp\"\
+  code: "#pragma once\n#include <algorithm>\n#include <cassert>\n#include \"src/Internal/function_traits.hpp\"\
     \n#include \"src/Optimization/MinMaxEnum.hpp\"\n// [l,r]\ntemplate <MinMaxEnum\
     \ obj, class F> std::pair<int64_t, result_type_t<F>> fibonacci_search(const F\
     \ &f, int64_t l, int64_t r) {\n assert(l <= r);\n int64_t s= 1, t= 2, a= l - 1,\
@@ -88,22 +82,22 @@ data:
     \ MINIMIZE) g= fx < (fy= f(y));\n   else g= fx > (fy= f(y));\n   if (g) b= a,\
     \ a= y;\n   else a= x, x= y, fx= fy;\n  }\n }\n return {x, fx};\n}"
   dependsOn:
-  - src/Internal/function_type.hpp
+  - src/Internal/function_traits.hpp
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: false
   path: src/Optimization/fibonacci_search.hpp
   requiredBy: []
-  timestamp: '2023-10-17 01:28:06+09:00'
+  timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/2276.test.cpp
-  - test/yukicoder/2309.test.cpp
-  - test/yukicoder/180.test.cpp
-  - test/atcoder/abc279_d.test.cpp
-  - test/atcoder/abc204_e.test.cpp
-  - test/atcoder/abc218_h.test.cpp
   - test/aoj/2603.AlienDP.test.cpp
   - test/aoj/3044.test.cpp
+  - test/yukicoder/180.test.cpp
+  - test/yukicoder/2309.test.cpp
+  - test/yukicoder/2276.test.cpp
+  - test/atcoder/abc279_d.test.cpp
+  - test/atcoder/abc218_h.test.cpp
+  - test/atcoder/abc204_e.test.cpp
 documentation_of: src/Optimization/fibonacci_search.hpp
 layout: document
 title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"

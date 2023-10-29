@@ -347,10 +347,10 @@ data:
   timestamp: '2023-10-10 00:58:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2495.test.cpp
-  - test/aoj/CGL_7_I.test.cpp
   - test/aoj/0356.test.cpp
   - test/aoj/CGL_7_H.test.cpp
+  - test/aoj/CGL_7_I.test.cpp
+  - test/aoj/2495.test.cpp
 documentation_of: src/Geometry/intersection_area.hpp
 layout: document
 title: "\u5186\u3068\u306E\u5171\u901A\u90E8\u5206\u306E\u9762\u7A4D"
