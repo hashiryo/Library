@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -36,9 +36,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/728.KDT.test.cpp
-    title: test/yukicoder/728.KDT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -228,28 +225,29 @@ data:
     \ p.end())) {}\n std::vector<T> enum_cuboid(PK2... xs) {\n  static_assert(!std::is_void_v<M>,\
     \ \"\\\"enum_cuboid\\\" is not available\");\n  std::vector<T> ret;\n  auto r=\
     \ to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n  return\
-    \ col(0, in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T> enum_ball(PK...\
-    \ xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\\\"enum_ball\\\"\
-    \ is not available\");\n  std::vector<T> ret;\n  long_pos_t r2= long_pos_t(r)\
-    \ * r;\n  return col(0, in_ball({xs...}, r2), out_ball({xs...}, r2), ret), ret;\n\
-    \ }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>, \"\\\"fold_cuboid\\\
-    \" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  return fld(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r));\n }\n T fold_ball(PK...\
-    \ xs, pos_t r) {\n  static_assert(monoid_v<M>, \"\\\"fold_ball\\\" is not available\"\
-    );\n  long_pos_t r2= long_pos_t(r) * r;\n  return fld(0, in_ball({xs...}, r2),\
-    \ inall_ball({xs...}, r2), out_ball({xs...}, r2));\n }\n void apply_cuboid(PK2...\
-    \ xs, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_cuboid\\\" is not available\"\
-    );\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  app(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r), x);\n }\n void apply_ball(PK...\
-    \ xs, pos_t r, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_ball\\\" is not\
-    \ available\");\n  long_pos_t r2= long_pos_t(r) * r;\n  app(0, in_ball({xs...},\
-    \ r2), inall_ball({xs...}, r2), out({xs...}, r2), x);\n }\n void set(PK... p,\
-    \ T v) { assert(set(0, {p...}, v)); }\n T get(PK... p) {\n  auto [ret, flg]= get(0,\
-    \ {p...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const\
-    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
-    \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
-    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
-    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n"
+    \ col(-ns.empty(), in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T>\
+    \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
+    \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
+    \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
+    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
+    \ r2));\n }\n void apply_cuboid(PK2... xs, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  app(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r), x);\n }\n void apply_ball(PK... xs, pos_t r, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) *\
+    \ r;\n  app(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out({xs...},\
+    \ r2), x);\n }\n void set(PK... p, T v) { assert(ns.size()), assert(set(0, {p...},\
+    \ v)); }\n T get(PK... p) {\n  assert(ns.size());\n  auto [ret, flg]= get(0, {p...});\n\
+    \  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const {\n  assert(ns.size());\n\
+    \  std::pair<int, long_pos_t> ret= {-1, -1};\n  return nns(0, {p...}, ret), ns[ret.first].pos;\n\
+    \ }\n};\ntemplate <class pos_t, size_t K, class M= void> using KDTree= KDTreeImpl<pos_t,\
+    \ K, M, to_tuple_t<std::array<pos_t, K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n\
+    }\nusing kdtree_internal::KDTree;\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\
     #include <map>\n#include <set>\n#include <cassert>\n#include \"src/Internal/HAS_CHECK.hpp\"\
     \n#include \"src/Internal/tuple_traits.hpp\"\n#include \"src/Internal/long_traits.hpp\"\
@@ -390,28 +388,29 @@ data:
     \ p.end())) {}\n std::vector<T> enum_cuboid(PK2... xs) {\n  static_assert(!std::is_void_v<M>,\
     \ \"\\\"enum_cuboid\\\" is not available\");\n  std::vector<T> ret;\n  auto r=\
     \ to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n  return\
-    \ col(0, in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T> enum_ball(PK...\
-    \ xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\\\"enum_ball\\\"\
-    \ is not available\");\n  std::vector<T> ret;\n  long_pos_t r2= long_pos_t(r)\
-    \ * r;\n  return col(0, in_ball({xs...}, r2), out_ball({xs...}, r2), ret), ret;\n\
-    \ }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>, \"\\\"fold_cuboid\\\
-    \" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  return fld(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r));\n }\n T fold_ball(PK...\
-    \ xs, pos_t r) {\n  static_assert(monoid_v<M>, \"\\\"fold_ball\\\" is not available\"\
-    );\n  long_pos_t r2= long_pos_t(r) * r;\n  return fld(0, in_ball({xs...}, r2),\
-    \ inall_ball({xs...}, r2), out_ball({xs...}, r2));\n }\n void apply_cuboid(PK2...\
-    \ xs, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_cuboid\\\" is not available\"\
-    );\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  app(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r), x);\n }\n void apply_ball(PK...\
-    \ xs, pos_t r, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_ball\\\" is not\
-    \ available\");\n  long_pos_t r2= long_pos_t(r) * r;\n  app(0, in_ball({xs...},\
-    \ r2), inall_ball({xs...}, r2), out({xs...}, r2), x);\n }\n void set(PK... p,\
-    \ T v) { assert(set(0, {p...}, v)); }\n T get(PK... p) {\n  auto [ret, flg]= get(0,\
-    \ {p...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const\
-    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
-    \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
-    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
-    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;"
+    \ col(-ns.empty(), in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T>\
+    \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
+    \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
+    \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
+    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
+    \ r2));\n }\n void apply_cuboid(PK2... xs, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  app(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r), x);\n }\n void apply_ball(PK... xs, pos_t r, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) *\
+    \ r;\n  app(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out({xs...},\
+    \ r2), x);\n }\n void set(PK... p, T v) { assert(ns.size()), assert(set(0, {p...},\
+    \ v)); }\n T get(PK... p) {\n  assert(ns.size());\n  auto [ret, flg]= get(0, {p...});\n\
+    \  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const {\n  assert(ns.size());\n\
+    \  std::pair<int, long_pos_t> ret= {-1, -1};\n  return nns(0, {p...}, ret), ns[ret.first].pos;\n\
+    \ }\n};\ntemplate <class pos_t, size_t K, class M= void> using KDTree= KDTreeImpl<pos_t,\
+    \ K, M, to_tuple_t<std::array<pos_t, K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n\
+    }\nusing kdtree_internal::KDTree;"
   dependsOn:
   - src/Internal/HAS_CHECK.hpp
   - src/Internal/tuple_traits.hpp
@@ -419,7 +418,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2023-10-30 09:38:10+09:00'
+  timestamp: '2023-10-30 12:32:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1023.KDT.test.cpp
@@ -428,7 +427,6 @@ data:
   - test/aoj/1068.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
-  - test/yukicoder/728.KDT.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
 documentation_of: src/DataStructure/KDTree.hpp
 layout: document

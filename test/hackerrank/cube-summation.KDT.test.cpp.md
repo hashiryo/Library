@@ -212,41 +212,42 @@ data:
     \ p.end())) {}\n std::vector<T> enum_cuboid(PK2... xs) {\n  static_assert(!std::is_void_v<M>,\
     \ \"\\\"enum_cuboid\\\" is not available\");\n  std::vector<T> ret;\n  auto r=\
     \ to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n  return\
-    \ col(0, in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T> enum_ball(PK...\
-    \ xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\\\"enum_ball\\\"\
-    \ is not available\");\n  std::vector<T> ret;\n  long_pos_t r2= long_pos_t(r)\
-    \ * r;\n  return col(0, in_ball({xs...}, r2), out_ball({xs...}, r2), ret), ret;\n\
-    \ }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>, \"\\\"fold_cuboid\\\
-    \" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  return fld(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r));\n }\n T fold_ball(PK...\
-    \ xs, pos_t r) {\n  static_assert(monoid_v<M>, \"\\\"fold_ball\\\" is not available\"\
-    );\n  long_pos_t r2= long_pos_t(r) * r;\n  return fld(0, in_ball({xs...}, r2),\
-    \ inall_ball({xs...}, r2), out_ball({xs...}, r2));\n }\n void apply_cuboid(PK2...\
-    \ xs, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_cuboid\\\" is not available\"\
-    );\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  app(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r), x);\n }\n void apply_ball(PK...\
-    \ xs, pos_t r, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_ball\\\" is not\
-    \ available\");\n  long_pos_t r2= long_pos_t(r) * r;\n  app(0, in_ball({xs...},\
-    \ r2), inall_ball({xs...}, r2), out({xs...}, r2), x);\n }\n void set(PK... p,\
-    \ T v) { assert(set(0, {p...}, v)); }\n T get(PK... p) {\n  auto [ret, flg]= get(0,\
-    \ {p...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const\
-    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
-    \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
-    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
-    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n\
-    #line 7 \"test/hackerrank/cube-summation.KDT.test.cpp\"\n// 3\u6B21\u5143\nusing\
-    \ namespace std;\nstruct RSQ {\n using T= long long;\n static T ti() { return\
-    \ 0; }\n static T op(T l, T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n int T;\n cin >> T;\n while (T--) {\n  int n, m;\n\
-    \  cin >> n >> m;\n  set<array<int, 3>> xyz;\n  vector<array<int, 7>> query;\n\
-    \  while (m--) {\n   string op;\n   cin >> op;\n   if (op[0] == 'U') {\n    int\
-    \ x, y, z, w;\n    cin >> x >> y >> z >> w;\n    xyz.insert({x, y, z});\n    query.push_back({0,\
-    \ x, y, z, w, 0, 0});\n   } else {\n    int x1, y1, z1, x2, y2, z2;\n    cin >>\
-    \ x1 >> y1 >> z1 >> x2 >> y2 >> z2;\n    query.push_back({1, x1, y1, z1, x2, y2,\
-    \ z2});\n   }\n  }\n  KDTree<int, 3, RSQ> kdt(xyz);\n  for (auto q: query) {\n\
-    \   if (q[0] == 0) {\n    auto [_, x, y, z, w, __, ___]= q;\n    kdt.set(x, y,\
-    \ z, w);\n   } else {\n    auto [_, x1, y1, z1, x2, y2, z2]= q;\n    cout << kdt.fold_cuboid(x1,\
-    \ x2, y1, y2, z1, z2) << '\\n';\n   }\n  }\n }\n return 0;\n}\n"
+    \ col(-ns.empty(), in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T>\
+    \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
+    \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
+    \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
+    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
+    \ r2));\n }\n void apply_cuboid(PK2... xs, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  app(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r), x);\n }\n void apply_ball(PK... xs, pos_t r, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) *\
+    \ r;\n  app(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out({xs...},\
+    \ r2), x);\n }\n void set(PK... p, T v) { assert(ns.size()), assert(set(0, {p...},\
+    \ v)); }\n T get(PK... p) {\n  assert(ns.size());\n  auto [ret, flg]= get(0, {p...});\n\
+    \  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const {\n  assert(ns.size());\n\
+    \  std::pair<int, long_pos_t> ret= {-1, -1};\n  return nns(0, {p...}, ret), ns[ret.first].pos;\n\
+    \ }\n};\ntemplate <class pos_t, size_t K, class M= void> using KDTree= KDTreeImpl<pos_t,\
+    \ K, M, to_tuple_t<std::array<pos_t, K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n\
+    }\nusing kdtree_internal::KDTree;\n#line 7 \"test/hackerrank/cube-summation.KDT.test.cpp\"\
+    \n// 3\u6B21\u5143\nusing namespace std;\nstruct RSQ {\n using T= long long;\n\
+    \ static T ti() { return 0; }\n static T op(T l, T r) { return l + r; }\n};\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int T;\n cin >> T;\n\
+    \ while (T--) {\n  int n, m;\n  cin >> n >> m;\n  set<array<int, 3>> xyz;\n  vector<array<int,\
+    \ 7>> query;\n  while (m--) {\n   string op;\n   cin >> op;\n   if (op[0] == 'U')\
+    \ {\n    int x, y, z, w;\n    cin >> x >> y >> z >> w;\n    xyz.insert({x, y,\
+    \ z});\n    query.push_back({0, x, y, z, w, 0, 0});\n   } else {\n    int x1,\
+    \ y1, z1, x2, y2, z2;\n    cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2;\n    query.push_back({1,\
+    \ x1, y1, z1, x2, y2, z2});\n   }\n  }\n  KDTree<int, 3, RSQ> kdt(xyz);\n  for\
+    \ (auto q: query) {\n   if (q[0] == 0) {\n    auto [_, x, y, z, w, __, ___]= q;\n\
+    \    kdt.set(x, y, z, w);\n   } else {\n    auto [_, x1, y1, z1, x2, y2, z2]=\
+    \ q;\n    cout << kdt.fold_cuboid(x1, x2, y1, y2, z1, z2) << '\\n';\n   }\n  }\n\
+    \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://www.hackerrank.com/challenges/cube-summation\"\n\
     #include <iostream>\n#include <set>\n#include <vector>\n#include <array>\n#include\
     \ \"src/DataStructure/KDTree.hpp\"\n// 3\u6B21\u5143\nusing namespace std;\nstruct\
@@ -270,7 +271,7 @@ data:
   isVerificationFile: true
   path: test/hackerrank/cube-summation.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 09:38:10+09:00'
+  timestamp: '2023-10-30 12:32:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/hackerrank/cube-summation.KDT.test.cpp

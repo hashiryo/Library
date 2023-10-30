@@ -211,35 +211,36 @@ data:
     \ p.end())) {}\n std::vector<T> enum_cuboid(PK2... xs) {\n  static_assert(!std::is_void_v<M>,\
     \ \"\\\"enum_cuboid\\\" is not available\");\n  std::vector<T> ret;\n  auto r=\
     \ to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n  return\
-    \ col(0, in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T> enum_ball(PK...\
-    \ xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\\\"enum_ball\\\"\
-    \ is not available\");\n  std::vector<T> ret;\n  long_pos_t r2= long_pos_t(r)\
-    \ * r;\n  return col(0, in_ball({xs...}, r2), out_ball({xs...}, r2), ret), ret;\n\
-    \ }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>, \"\\\"fold_cuboid\\\
-    \" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  return fld(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r));\n }\n T fold_ball(PK...\
-    \ xs, pos_t r) {\n  static_assert(monoid_v<M>, \"\\\"fold_ball\\\" is not available\"\
-    );\n  long_pos_t r2= long_pos_t(r) * r;\n  return fld(0, in_ball({xs...}, r2),\
-    \ inall_ball({xs...}, r2), out_ball({xs...}, r2));\n }\n void apply_cuboid(PK2...\
-    \ xs, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_cuboid\\\" is not available\"\
-    );\n  auto r= to_range(std::forward_as_tuple(xs...), std::make_index_sequence<K>());\n\
-    \  app(0, in_cuboid(r), inall_cuboid(r), out_cuboid(r), x);\n }\n void apply_ball(PK...\
-    \ xs, pos_t r, E x) {\n  static_assert(dual_v<M>, \"\\\"apply_ball\\\" is not\
-    \ available\");\n  long_pos_t r2= long_pos_t(r) * r;\n  app(0, in_ball({xs...},\
-    \ r2), inall_ball({xs...}, r2), out({xs...}, r2), x);\n }\n void set(PK... p,\
-    \ T v) { assert(set(0, {p...}, v)); }\n T get(PK... p) {\n  auto [ret, flg]= get(0,\
-    \ {p...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const\
-    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
-    \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
-    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
-    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n\
-    #line 9 \"test/aoj/DSL_2_C.KDT.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n;\n cin >> n;\n vector<array<int,\
-    \ 3>> xy(n);\n for (int i= 0; i < n; ++i) cin >> xy[i][0] >> xy[i][1], xy[i][2]=\
-    \ i;\n KDTree<int, 2, int> kdt(xy);\n int q;\n cin >> q;\n while (q--) {\n  int\
-    \ sx, tx, sy, ty;\n  cin >> sx >> tx >> sy >> ty;\n  auto ans= kdt.enum_cuboid(sx,\
-    \ tx, sy, ty);\n  sort(ans.begin(), ans.end());\n  for (auto x: ans) cout << x\
-    \ << '\\n';\n  cout << '\\n';\n }\n return 0;\n}\n"
+    \ col(-ns.empty(), in_cuboid(r), out_cuboid(r), ret), ret;\n }\n std::vector<T>\
+    \ enum_ball(PK... xs, pos_t r) const {\n  static_assert(!std::is_void_v<M>, \"\
+    \\\"enum_ball\\\" is not available\");\n  std::vector<T> ret;\n  long_pos_t r2=\
+    \ long_pos_t(r) * r;\n  return col(-ns.empty(), in_ball({xs...}, r2), out_ball({xs...},\
+    \ r2), ret), ret;\n }\n T fold_cuboid(PK2... xs) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  return fld(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r));\n }\n T fold_ball(PK... xs, pos_t r) {\n  static_assert(monoid_v<M>,\
+    \ \"\\\"fold_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) * r;\n\
+    \  return fld(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out_ball({xs...},\
+    \ r2));\n }\n void apply_cuboid(PK2... xs, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_cuboid\\\" is not available\");\n  auto r= to_range(std::forward_as_tuple(xs...),\
+    \ std::make_index_sequence<K>());\n  app(-ns.empty(), in_cuboid(r), inall_cuboid(r),\
+    \ out_cuboid(r), x);\n }\n void apply_ball(PK... xs, pos_t r, E x) {\n  static_assert(dual_v<M>,\
+    \ \"\\\"apply_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) *\
+    \ r;\n  app(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out({xs...},\
+    \ r2), x);\n }\n void set(PK... p, T v) { assert(ns.size()), assert(set(0, {p...},\
+    \ v)); }\n T get(PK... p) {\n  assert(ns.size());\n  auto [ret, flg]= get(0, {p...});\n\
+    \  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const {\n  assert(ns.size());\n\
+    \  std::pair<int, long_pos_t> ret= {-1, -1};\n  return nns(0, {p...}, ret), ns[ret.first].pos;\n\
+    \ }\n};\ntemplate <class pos_t, size_t K, class M= void> using KDTree= KDTreeImpl<pos_t,\
+    \ K, M, to_tuple_t<std::array<pos_t, K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n\
+    }\nusing kdtree_internal::KDTree;\n#line 9 \"test/aoj/DSL_2_C.KDT.test.cpp\"\n\
+    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int n;\n cin >> n;\n vector<array<int, 3>> xy(n);\n for (int i= 0; i < n; ++i)\
+    \ cin >> xy[i][0] >> xy[i][1], xy[i][2]= i;\n KDTree<int, 2, int> kdt(xy);\n int\
+    \ q;\n cin >> q;\n while (q--) {\n  int sx, tx, sy, ty;\n  cin >> sx >> tx >>\
+    \ sy >> ty;\n  auto ans= kdt.enum_cuboid(sx, tx, sy, ty);\n  sort(ans.begin(),\
+    \ ans.end());\n  for (auto x: ans) cout << x << '\\n';\n  cout << '\\n';\n }\n\
+    \ return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\
     \n\n// \u5217\u6319\u306Everify\n\n#include <iostream>\n#include <vector>\n#include\
     \ <algorithm>\n#include \"src/DataStructure/KDTree.hpp\"\nusing namespace std;\n\
@@ -257,7 +258,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_C.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 09:38:10+09:00'
+  timestamp: '2023-10-30 12:32:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_C.KDT.test.cpp

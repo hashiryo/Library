@@ -96,7 +96,7 @@ data:
     - icon: ':x:'
       path: src/FFT/MultiVariateConvolution.hpp
       title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/NTT.hpp
       title: Number-Theoretic-Transform
     - icon: ':x:'
@@ -120,7 +120,7 @@ data:
     - icon: ':x:'
       path: src/FFT/fps_exp.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/FFT/fps_inv.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
     - icon: ':x:'
@@ -239,7 +239,7 @@ data:
       path: src/Internal/HAS_CHECK.hpp
       title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
         \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Internal/Remainder.hpp
       title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
     - icon: ':question:'
@@ -250,7 +250,7 @@ data:
       path: src/Internal/long_traits.hpp
       title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\
         \u30FC\u30C8"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Internal/modint_traits.hpp
       title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
     - icon: ':question:'
@@ -265,7 +265,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
       title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
     - icon: ':question:'
@@ -279,14 +279,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/AllPurposeEuclid.hpp
       title: "\u4E07\u80FD\u6B27\u51E0\u91CC\u5F97"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/BinomialCoefficient.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/CartesianProduct.hpp
       title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
         times K_n$)"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
         mathbb{F}_p$)"
@@ -296,13 +296,13 @@ data:
     - icon: ':x:'
       path: src/Math/DiscreteLogarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     - icon: ':x:'
@@ -323,13 +323,13 @@ data:
     - icon: ':question:'
       path: src/Math/Sieve.hpp
       title: "\u7BE9 \u4ED6"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/StirlingNumber.hpp
       title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
     - icon: ':question:'
@@ -345,19 +345,19 @@ data:
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
         \u5B8C\u5168\u30DE\u30C3\u30C1\u30F3\u30B0\u6570)"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
     - icon: ':question:'
       path: src/Math/mod_inv.hpp
       title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/mod_kth_root.hpp
       title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/mod_sqrt.hpp
       title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/mod_tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
@@ -446,7 +446,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/KnuthMorrisPratt.hpp
       title: Knuth-Morris-Pratt
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
     - icon: ':heavy_check_mark:'
@@ -515,7 +515,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0524.test.cpp
       title: test/aoj/0524.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/0570.test.cpp
       title: test/aoj/0570.test.cpp
     - icon: ':heavy_check_mark:'
@@ -647,7 +647,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2256.test.cpp
       title: test/aoj/2256.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2257.test.cpp
       title: test/aoj/2257.test.cpp
     - icon: ':heavy_check_mark:'
@@ -668,13 +668,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2345.test.cpp
       title: test/aoj/2345.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2397.MinPoly.test.cpp
       title: test/aoj/2397.MinPoly.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2397.SparseMat.test.cpp
       title: test/aoj/2397.SparseMat.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2397.test.cpp
       title: test/aoj/2397.test.cpp
     - icon: ':heavy_check_mark:'
@@ -698,7 +698,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2514.test.cpp
       title: test/aoj/2514.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2530.test.cpp
       title: test/aoj/2530.test.cpp
     - icon: ':heavy_check_mark:'
@@ -716,7 +716,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2603.monotone_minima.test.cpp
       title: test/aoj/2603.monotone_minima.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2614.rollinghash.test.cpp
       title: test/aoj/2614.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
@@ -740,7 +740,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2674.WM.test.cpp
       title: test/aoj/2674.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2711.rollinghash.test.cpp
       title: test/aoj/2711.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
@@ -764,10 +764,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2842.BIT_2D.test.cpp
       title: test/aoj/2842.BIT_2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2842.KDT.test.cpp
       title: test/aoj/2842.KDT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2863.test.cpp
       title: test/aoj/2863.test.cpp
     - icon: ':heavy_check_mark:'
@@ -812,7 +812,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3056.test.cpp
       title: test/aoj/3056.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/3072.test.cpp
       title: test/aoj/3072.test.cpp
     - icon: ':heavy_check_mark:'
@@ -842,7 +842,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.KMP.test.cpp
       title: test/aoj/ALDS1_14_B.KMP.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
       title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
@@ -929,16 +929,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_3_C.test.cpp
       title: test/aoj/DPL_3_C.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_B.test.cpp
       title: test/aoj/DPL_5_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_D.test.cpp
       title: test/aoj/DPL_5_D.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_E.test.cpp
       title: test/aoj/DPL_5_E.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DPL_5_F.test.cpp
       title: test/aoj/DPL_5_F.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1019,7 +1019,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.WBT.test.cpp
       title: test/aoj/ITP2_4_C.WBT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/NTL_1_D.test.cpp
       title: test/aoj/NTL_1_D.test.cpp
     - icon: ':x:'
@@ -1165,7 +1165,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_d.test.cpp
       title: test/atcoder/abc228_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1289,19 +1289,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_binary_gcd.test.cpp
       title: test/unit_test/constexpr_binary_gcd.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/constexpr_factors.test.cpp
       title: test/unit_test/constexpr_factors.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/constexpr_is_prime.test.cpp
       title: test/unit_test/constexpr_is_prime.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/unit_test/constexpr_mod_inv.test.cpp
       title: test/unit_test/constexpr_mod_inv.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/constexpr_mod_sqrt.test.cpp
       title: test/unit_test/constexpr_mod_sqrt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/constexpr_mod_tetration.test.cpp
       title: test/unit_test/constexpr_mod_tetration.test.cpp
     - icon: ':x:'
@@ -1333,7 +1333,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/biconnected_components.test.cpp
       title: test/yosupo/biconnected_components.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/binomial_coefficient.test.cpp
       title: test/yosupo/binomial_coefficient.test.cpp
     - icon: ':x:'
@@ -1423,7 +1423,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/exp_of_sparse_FPS.test.cpp
       title: test/yosupo/exp_of_sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/factorize.test.cpp
       title: test/yosupo/factorize.test.cpp
     - icon: ':x:'
@@ -1459,7 +1459,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/inverse_matrix.test.cpp
       title: test/yosupo/inverse_matrix.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/kth_root_mod.test.cpp
       title: test/yosupo/kth_root_mod.test.cpp
     - icon: ':x:'
@@ -1561,10 +1561,10 @@ data:
     - icon: ':x:'
       path: test/yosupo/pow_of_sparse_FPS.test.cpp
       title: test/yosupo/pow_of_sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/primarity_test.test.cpp
       title: test/yosupo/primarity_test.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/primitive_root.test.cpp
       title: test/yosupo/primitive_root.test.cpp
     - icon: ':x:'
@@ -1618,7 +1618,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/sparse_matrix_det.test.cpp
       title: test/yosupo/sparse_matrix_det.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/sqrt_mod.test.cpp
       title: test/yosupo/sqrt_mod.test.cpp
     - icon: ':x:'
@@ -1636,13 +1636,13 @@ data:
     - icon: ':x:'
       path: test/yosupo/stirling_1.test.cpp
       title: test/yosupo/stirling_1.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/stirling_1_small_p_large_n.test.cpp
       title: test/yosupo/stirling_1_small_p_large_n.test.cpp
     - icon: ':x:'
       path: test/yosupo/stirling_2.test.cpp
       title: test/yosupo/stirling_2.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/stirling_2_small_p_large_n.test.cpp
       title: test/yosupo/stirling_2_small_p_large_n.test.cpp
     - icon: ':x:'
@@ -1669,7 +1669,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/tetration_mod.test.cpp
       title: test/yosupo/tetration_mod.test.cpp
     - icon: ':x:'
@@ -1890,7 +1890,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/261.test.cpp
       title: test/yukicoder/261.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/3030.test.cpp
       title: test/yukicoder/3030.test.cpp
     - icon: ':x:'
@@ -1983,9 +1983,6 @@ data:
     - icon: ':x:'
       path: test/yukicoder/705.LiCT.test.cpp
       title: test/yukicoder/705.LiCT.test.cpp
-    - icon: ':x:'
-      path: test/yukicoder/728.KDT.test.cpp
-      title: test/yukicoder/728.KDT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp

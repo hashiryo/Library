@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,9 +27,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/728.KDT.test.cpp
-    title: test/yukicoder/728.KDT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -113,7 +110,6 @@ data:
   - test/aoj/1068.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
-  - test/yukicoder/728.KDT.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
 documentation_of: src/Internal/long_traits.hpp
 layout: document

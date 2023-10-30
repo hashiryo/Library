@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2725.LiCT.test.cpp
     title: test/aoj/2725.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -72,9 +72,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/705.LiCT.test.cpp
     title: test/yukicoder/705.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/728.KDT.test.cpp
-    title: test/yukicoder/728.KDT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/913.LiCT.test.cpp
     title: test/yukicoder/913.LiCT.test.cpp
@@ -162,7 +159,6 @@ data:
   - test/yukicoder/952.LiCT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/913.LiCT.test.cpp
-  - test/yukicoder/728.KDT.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
 documentation_of: src/Internal/tuple_traits.hpp
 layout: document

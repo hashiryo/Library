@@ -63,7 +63,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2647.test.cpp
     title: test/aoj/2647.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -190,9 +190,6 @@ data:
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/728.KDT.test.cpp
-    title: test/yukicoder/728.KDT.test.cpp
-  - icon: ':x:'
     path: test/yukicoder/828.ETT.test.cpp
     title: test/yukicoder/828.ETT.test.cpp
   _isVerificationFailed: true
@@ -287,7 +284,6 @@ data:
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
-  - test/yukicoder/728.KDT.test.cpp
   - test/yukicoder/649.DynSeg.test.cpp
   - test/yukicoder/649.Patricia.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp

@@ -6,10 +6,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2212.test.cpp
     title: test/aoj/2212.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2257.test.cpp
     title: test/aoj/2257.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2863.test.cpp
     title: test/aoj/2863.test.cpp
   - icon: ':x:'
