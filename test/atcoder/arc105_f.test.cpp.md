@@ -115,13 +115,13 @@ data:
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n\
-    #include <vector>\n#line 5 \"src/Math/SetPowerSeries.hpp\"\ntemplate <unsigned\
-    \ short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i, j, n) \\\n for\
-    \ (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ < (n); __+= _2) \\\
-    \n   for (int j= __, i= j | _, ___= i; j < ___; ++j, ++i)\n template <typename\
-    \ T> static inline void ranked_zeta_tr(const T f[], T ret[][MAX_N + 1], const\
-    \ int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]= f[S],\
-    \ std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
+    #include <vector>\n#line 5 \"src/Math/SetPowerSeries.hpp\"\n#include <cstdint>\n\
+    template <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i,\
+    \ j, n) \\\n for (int _= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ << 1; __ <\
+    \ (n); __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j < ___; ++j, ++i)\n\
+    \ template <typename T> static inline void ranked_zeta_tr(const T f[], T ret[][MAX_N\
+    \ + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]=\
+    \ f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
     \ d--;) ret[S][d]+= ret[U][d];\n }\n template <typename T> static inline void\
     \ conv_na(const T f[], const T g[], T ret[], const int sz) {\n  for (int s= sz,\
     \ t; s--;)\n   for (ret[t= s]= f[s] * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n\
@@ -194,12 +194,12 @@ data:
     \ f[t];\n  for (; I < sz; I<<= 1)\n   h[I]= g[I], onconv_tr(\n               \
     \    g, h + I, [&](int s, T &x) { x= g[I | s] - x; }, I);\n  return h[0]= 0, std::vector<T>(h,\
     \ h + sz);\n }\n // f^k\n template <class T>  // O(n^2 2^n)\n static inline std::vector<T>\
-    \ pow(std::vector<T> f, std::uint64_t k) {\n  const int sz= f.size(), n= __builtin_ctz(sz);\n\
+    \ pow(std::vector<T> f, uint64_t k) {\n  const int sz= f.size(), n= __builtin_ctz(sz);\n\
     \  assert(sz == 1 << n);\n  T F[MAX_N + 1]= {1}, pw= 1, bs= f[0];\n  int i= 1,\
-    \ ed= std::min<std::uint64_t>(n, k);\n  for (; i <= ed; ++i) F[i]= F[i - 1] *\
-    \ (k - i + 1);\n  for (auto e= k - --i; e; e>>= 1, bs*= bs)\n   if (e & 1) pw*=\
-    \ bs;\n  for (; i >= 0; --i, pw*= f[0]) F[i]*= pw;\n  return f[0]= 0, composite(f,\
-    \ F);\n }\n // P(f), P is polynomial\n template <class T> static inline std::vector<T>\
+    \ ed= std::min<uint64_t>(n, k);\n  for (; i <= ed; ++i) F[i]= F[i - 1] * (k -\
+    \ i + 1);\n  for (auto e= k - --i; e; e>>= 1, bs*= bs)\n   if (e & 1) pw*= bs;\n\
+    \  for (; i >= 0; --i, pw*= f[0]) F[i]*= pw;\n  return f[0]= 0, composite(f, F);\n\
+    \ }\n // P(f), P is polynomial\n template <class T> static inline std::vector<T>\
     \ polynomial_composite(std::vector<T> f, std::vector<T> P) {\n  const int sz=\
     \ f.size(), n= __builtin_ctz(sz);\n  assert(sz == 1 << n);\n  T F[MAX_N + 1]=\
     \ {};\n  int e= P.size();\n  if (!e) return std::vector<T>(sz);\n  for (int j=\
@@ -367,7 +367,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc105_f.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 17:57:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc105_f.test.cpp

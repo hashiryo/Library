@@ -153,7 +153,7 @@ data:
     #line 2 \"src/Misc/rng.hpp\"\n#include <random>\nuint64_t rng() {\n static uint64_t\
     \ x= 10150724397891781847ULL * std::random_device{}();\n return x^= x << 7, x^=\
     \ x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
-    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 6 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
+    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 7 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
     \n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\n\
     template <class mod_t, class LinMap> class MinimalPolynomial {\n std::vector<mod_t>\
     \ poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline\
@@ -215,7 +215,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 16:37:49+09:00'
+  timestamp: '2023-10-30 17:57:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sparse_matrix_det.test.cpp

@@ -30,9 +30,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_inversions_query.mo.test.cpp
     title: test/yosupo/static_range_inversions_query.mo.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1467.test.cpp
     title: test/yukicoder/1467.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2114.test.cpp
+    title: test/yukicoder/2114.test.cpp
   - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
@@ -75,6 +78,7 @@ data:
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/2114.test.cpp
   - test/yukicoder/1467.test.cpp
   - test/yukicoder/649.SegTree.test.cpp
   - test/yukicoder/738.BIT.test.cpp

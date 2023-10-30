@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/PiecewiseLinearConvexfunction.hpp
     title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"
   _extendedRequiredBy: []
@@ -19,7 +19,7 @@ data:
     \n#include <vector>\n#include <algorithm>\n#include <array>\n#include <sstream>\n\
     #include <string>\n#line 8 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\
     \n#include <cassert>\ntemplate <std::size_t NODE_SIZE= 1 << 22> class PiecewiseLinearConvexfunction\
-    \ {\n using i64= long long;\n using i128= __int128_t;\n using node_id= std::int_least32_t;\n\
+    \ {\n using i64= long long;\n using i128= __int128_t;\n using node_id= int;\n\
     \ static constexpr i64 INF= 1ll << 41;\n template <class Int> static inline std::string\
     \ str(Int x) {\n  if (x >= INF) return \"inf\";\n  if (x <= -INF) return \"-inf\"\
     ;\n  std::stringstream ss;\n  ss << x;\n  return ss.str();\n }\n struct Node {\n\
@@ -35,16 +35,16 @@ data:
     \ a) {\n  if (i) ns[i].slope+= a, ns[i].laz+= a, ns[i].y+= i128(a) * ns[i].x;\n\
     \ }\n static inline void push(node_id i) {\n  if (ns[i].laz) propagate(ns[i].ch[0],\
     \ ns[i].laz), propagate(ns[i].ch[1], ns[i].laz), ns[i].laz= 0;\n }\n static inline\
-    \ void pushup(node_id i) {\n  ns[i].sz= 1, ns[i].x= ns[i].dx, ns[i].y= i128(ns[i].slope)\
+    \ void update(node_id i) {\n  ns[i].sz= 1, ns[i].x= ns[i].dx, ns[i].y= i128(ns[i].slope)\
     \ * ns[i].dx;\n  if (int j= ns[i].ch[0]; j) ns[i].sz+= ns[j].sz, ns[i].x+= ns[j].x,\
     \ ns[i].y+= ns[j].y;\n  if (int j= ns[i].ch[1]; j) ns[i].sz+= ns[j].sz, ns[i].x+=\
     \ ns[j].x, ns[i].y+= ns[j].y;\n }\n static inline int dir(node_id i) { return\
     \ ns[ns[i].par].ch[1] == i; }\n static inline void rot(node_id i) {\n  node_id\
     \ p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]= ns[i].ch[!d])) ns[ns[p].ch[d]].par=\
     \ p;\n  ns[i].ch[!d]= p;\n  if ((ns[i].par= ns[p].par)) ns[ns[p].par].ch[dir(p)]=\
-    \ i;\n  ns[p].par= i, pushup(p);\n }\n static inline void splay(node_id i) {\n\
+    \ i;\n  ns[p].par= i, update(p);\n }\n static inline void splay(node_id i) {\n\
     \  for (node_id p= ns[i].par; p; rot(i), p= ns[i].par)\n   if (node_id pp= ns[p].par;\
-    \ pp) rot(dir(i) == dir(p) ? p : i);\n  pushup(i);\n }\n static inline void slope_search(node_id\
+    \ pp) rot(dir(i) == dir(p) ? p : i);\n  update(i);\n }\n static inline void slope_search(node_id\
     \ &i, i64 k) {\n  for (node_id s;; i= s) {\n   push(i);\n   i64 tmp= ns[i].slope;\n\
     \   if (tmp == k) break;\n   if (s= ns[i].ch[tmp < k]; !s) break;\n  }\n  splay(i);\n\
     \ }\n static inline void x_search(node_id &i, i64 x) {\n  for (bool c;; i= ns[i].ch[c])\
@@ -60,8 +60,8 @@ data:
     \ lslope;\n i128 ly;\n void chmin_sliding_window(i64 a) {\n  if (!a) return;\n\
     \  assert(a > 0);\n  if (root) {\n   slope_search(root, 0);\n   if (ns[root].slope)\
     \ {\n    node_id i= new_node(a, 0);\n    bool c= ns[root].slope < 0;\n    if ((ns[i].ch[c]=\
-    \ ns[root].ch[c])) ns[ns[i].ch[c]].par= i;\n    pushup(i), ns[root].ch[c]= i,\
-    \ ns[i].par= root;\n   } else ns[root].dx+= a;\n   pushup(root);\n  } else if\
+    \ ns[root].ch[c])) ns[ns[i].ch[c]].par= i;\n    update(i), ns[root].ch[c]= i,\
+    \ ns[i].par= root;\n   } else ns[root].dx+= a;\n   update(root);\n  } else if\
     \ (lslope >= 0) lx+= a;\n  else root= new_node(a, 0);\n }\npublic:\n static inline\
     \ void clear() { ni= 1; }\n void debugoutput() { debugoutput(root, 0); }\n i64\
     \ upper_bound() { return lx + (root ? ns[root].x : 0); }\n // f(x) := 0\n PiecewiseLinearConvexfunction():\
@@ -71,43 +71,43 @@ data:
     \ a) { lx+= a; }\n // f(x) + a * max{x-c, 0}\n void add_relu(i64 a, i64 c) {\n\
     \  if (!a) return;\n  assert(a > 0);\n  if (c < lx) {\n   if (lslope < -INF) return\
     \ add_linear(a, -i128(a) * c);\n   node_id i= new_node(lx - c, lslope);\n   if\
-    \ (root) x_search(root, 0), ns[root].ch[0]= i, ns[i].par= root, pushup(root);\n\
+    \ (root) x_search(root, 0), ns[root].ch[0]= i, ns[i].par= root, update(root);\n\
     \   else root= i;\n   ly-= ns[i].y, lx= c, propagate(root, a);\n   return;\n \
     \ }\n  if (upper_bound() <= c) return;\n  c-= lx, x_search(root, c);\n  i64 l=\
     \ ns[root].ch[0] ? ns[ns[root].ch[0]].x : 0, r= l + ns[root].dx;\n  if (l == c)\
     \ {\n   node_id i= ns[root].ch[0];\n   ns[root].ch[0]= 0, propagate(root, a),\
     \ push(root), ns[root].ch[0]= i;\n  } else if (r == c) {\n   propagate(ns[root].ch[1],\
     \ a);\n  } else {\n   node_id i= new_node(r - c, ns[root].slope);\n   if ((ns[i].ch[1]=\
-    \ ns[root].ch[1])) ns[ns[i].ch[1]].par= i;\n   pushup(i), propagate(i, a), ns[root].ch[1]=\
-    \ i, ns[i].par= root, ns[root].dx= c - l, pushup(root);\n  }\n }\n // f(x) + a\
+    \ ns[root].ch[1])) ns[ns[i].ch[1]].par= i;\n   update(i), propagate(i, a), ns[root].ch[1]=\
+    \ i, ns[i].par= root, ns[root].dx= c - l, update(root);\n  }\n }\n // f(x) + a\
     \ * min{x-c,0} + b * max{x-c,0}\n void add_ax_bx_c(i64 a, i64 b, i64 c) { assert(a\
     \ <= b), add_linear(a, -i128(a) * c), add_relu(b - a, c); }\n // f(x) + a * |x-c|\n\
     \ void add_abs(i64 a, i64 c) { add_ax_bx_c(-a, a, c); }\n // \u221E if x>a else\
     \ f(x)\n void chinfty_right(i64 a= 0) {\n  assert(lx <= a || lslope >= -INF);\n\
     \  if (root) {\n   if (a-= lx; ns[root].x <= a) return;\n   x_search(root, a);\n\
     \   i64 l= ns[root].ch[0] ? ns[ns[root].ch[0]].x : 0;\n   if (l == a) root= ns[root].ch[0],\
-    \ ns[root].par= 0;\n   else ns[root].dx= a - l, ns[root].ch[1]= 0, pushup(root);\n\
+    \ ns[root].par= 0;\n   else ns[root].dx= a - l, ns[root].ch[1]= 0, update(root);\n\
     \  } else lx= a;\n }\n // \u221E if x<a else f(x)\n void chinfty_left(i64 a= 0)\
     \ {\n  assert(a <= upper_bound());\n  if (a-= lx; a < 0) {\n   if (lslope < -INF)\
     \ return;\n   node_id i= new_node(-a, lslope);\n   if (root) x_search(root, 0),\
-    \ ns[root].ch[0]= i, ns[i].par= root, pushup(root);\n   else root= i;\n   ly-=\
+    \ ns[root].ch[0]= i, ns[i].par= root, update(root);\n   else root= i;\n   ly-=\
     \ ns[i].y;\n  } else if (a > 0) {\n   assert(root);\n   x_search(root, a);\n \
     \  i64 r= ns[root].dx;\n   if (int i= ns[root].ch[0]; i) ly+= ns[i].y + i128(a\
     \ - ns[i].x) * ns[root].slope, r+= ns[i].x;\n   else ly+= i128(a) * ns[root].slope;\n\
     \   if (r == a) root= ns[root].ch[1], ns[root].par= 0;\n   else ns[root].dx= r\
-    \ - a, ns[root].ch[0]= 0, pushup(root);\n  }\n  lx+= a, lslope= -INF * 2;\n }\n\
+    \ - a, ns[root].ch[0]= 0, update(root);\n  }\n  lx+= a, lslope= -INF * 2;\n }\n\
     \ // min_{y<=x} f(y)\n void cumulative_chmin() {\n  assert(lslope <= 0);\n  if\
     \ (root) {\n   slope_search(root, 0);\n   if (ns[root].slope < 0) {\n    if (!ns[root].ch[1])\
     \ ns[root].ch[1]= new_node();\n    node_id i= ns[root].ch[1];\n    ns[i].sz= 1,\
     \ ns[i].x= ns[i].dx= INF * 2, ns[i].slope= ns[i].ch[0]= ns[i].ch[1]= ns[i].laz=\
     \ ns[i].y= 0, ns[i].par= root;\n   } else ns[root].ch[1]= 0, ns[root].dx= INF\
-    \ * 2, ns[root].slope= 0;\n   pushup(root);\n  } else if (lslope) root= new_node(INF\
+    \ * 2, ns[root].slope= 0;\n   update(root);\n  } else if (lslope) root= new_node(INF\
     \ * 2, 0);\n  else lx= INF * 2;\n }\n // min_{y<=x \u2227 y<=a} f(y)\n void cumulative_chmin_with_condition(i64\
     \ a) { chinfty_right(a), cumulative_chmin(); }\n // min_{y>=x} f(y)\n void cumulative_chmin_rev()\
     \ {\n  if (root) {\n   slope_search(root, 0);\n   i64 l= ns[root].ch[0] ? ns[ns[root].ch[0]].x\
     \ : 0, r= l + ns[root].dx, x= ns[root].slope > 0 ? l : r;\n   if (int i= ns[root].ch[0];\
     \ i) ly+= ns[i].y + i128(x - ns[i].x) * ns[root].slope;\n   else ly+= i128(x)\
-    \ * ns[root].slope;\n   if (ns[root].slope > 0) ns[root].ch[0]= 0, pushup(root);\n\
+    \ * ns[root].slope;\n   if (ns[root].slope > 0) ns[root].ch[0]= 0, update(root);\n\
     \   else root= ns[root].ch[1], ns[root].par= 0;\n   lx+= x;\n  }\n  lslope= 0;\n\
     \ }\n // min_{y>=x \u2227 y>=a} f(y)\n void cumulative_chmin_rev_with_condition(i64\
     \ a) { chinfty_left(a), cumulative_chmin_rev(); }\n // min_{x-b<=y<=x-a} f(y)\n\
@@ -152,7 +152,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc217_h.test.cpp
   requiredBy: []
-  timestamp: '2023-03-01 11:27:21+09:00'
+  timestamp: '2023-10-30 17:57:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc217_h.test.cpp
