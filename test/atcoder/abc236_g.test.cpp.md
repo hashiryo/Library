@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc236/tasks/abc236_g
@@ -55,11 +55,11 @@ data:
     #line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#include <vector>\n\
     #line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace la_internal\
     \ {\nusing namespace std;\ntemplate <class R> struct Vector: public valarray<R>\
-    \ {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8= uint8_t;\n\
-    class Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool\
-    \ v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^=\
-    \ u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val= r.val, *this;\
-    \ }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
+    \ {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8= unsigned\
+    \ char;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r,\
+    \ u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i)\
+    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
+    \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
     \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
     \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
     \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n valarray<u128>\
@@ -163,8 +163,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_g.test.cpp
   requiredBy: []
-  timestamp: '2023-08-04 18:10:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-30 14:26:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc236_g.test.cpp
 layout: document

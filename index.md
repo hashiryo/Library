@@ -55,7 +55,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Dynamic.hpp
       title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/DataStructure/SegmentTree_Patricia.hpp
       title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
     - icon: ':question:'
@@ -259,10 +259,10 @@ data:
         \u30C8 \u4ED6"
   - name: src/LinearAlgebra
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/LU_Decomposition.hpp
       title: "LU\u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
     - icon: ':question:'
@@ -314,7 +314,7 @@ data:
     - icon: ':question:'
       path: src/Math/Rational.hpp
       title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':question:'
@@ -587,7 +587,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1267.test.cpp
       title: test/aoj/1267.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1328.test.cpp
       title: test/aoj/1328.test.cpp
     - icon: ':heavy_check_mark:'
@@ -647,13 +647,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2256.test.cpp
       title: test/aoj/2256.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2257.test.cpp
       title: test/aoj/2257.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2270.DynSeg.test.cpp
       title: test/aoj/2270.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2270.Patricia.test.cpp
       title: test/aoj/2270.Patricia.test.cpp
     - icon: ':heavy_check_mark:'
@@ -719,7 +719,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2614.rollinghash.test.cpp
       title: test/aoj/2614.rollinghash.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
     - icon: ':heavy_check_mark:'
@@ -791,7 +791,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3024.DynSeg.test.cpp
       title: test/aoj/3024.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3024.Patricia.test.cpp
       title: test/aoj/3024.Patricia.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1007,16 +1007,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_A.SplayTree.test.cpp
       title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.SplayTree.test.cpp
       title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_B.WBT.test.cpp
       title: test/aoj/ITP2_4_B.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.SplayTree.test.cpp
       title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.WBT.test.cpp
       title: test/aoj/ITP2_4_C.WBT.test.cpp
     - icon: ':x:'
@@ -1186,7 +1186,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1776,7 +1776,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1339.test.cpp
       title: test/yukicoder/1339.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
     - icon: ':x:'
@@ -1845,7 +1845,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1813.test.cpp
       title: test/yukicoder/1813.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
     - icon: ':x:'

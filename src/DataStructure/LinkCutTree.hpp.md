@@ -7,7 +7,7 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
   - icon: ':heavy_check_mark:'

@@ -17,7 +17,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Patricia.hpp
     title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
   - icon: ':question:'
@@ -51,7 +51,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
   - icon: ':heavy_check_mark:'
@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3024.DynSeg.test.cpp
     title: test/aoj/3024.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3024.Patricia.test.cpp
     title: test/aoj/3024.Patricia.test.cpp
   - icon: ':heavy_check_mark:'
@@ -96,16 +96,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_A.SplayTree.test.cpp
     title: test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_B.SplayTree.test.cpp
     title: test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_B.WBT.test.cpp
     title: test/aoj/ITP2_4_B.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.WBT.test.cpp
     title: test/aoj/ITP2_4_C.WBT.test.cpp
   - icon: ':x:'
