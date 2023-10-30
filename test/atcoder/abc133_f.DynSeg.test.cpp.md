@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc133/tasks/abc133_f
@@ -119,9 +119,9 @@ data:
     \   if (ret >= 0) return ret;\n  }\n  for (std::size_t i= N; i--;) ss[i]= ts[i]\
     \ ? ts[i]->ch[!flg] : nullptr;\n  return find<last>(k, {m, b[1]}, bias, h - 1,\
     \ check, ss, sums);\n }\npublic:\n SegmentTree_Dynamic(np t= nullptr): root(t)\
-    \ {}\n SegmentTree_Dynamic(std::size_t n, T val) { root= build(n, 0, 1LL << HEIGHT,\
-    \ val); }\n SegmentTree_Dynamic(const T *bg, const T *ed) { root= build(ed - bg,\
-    \ 0, 1LL << HEIGHT, bg); }\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
+    \ {}\n SegmentTree_Dynamic(std::size_t n, T val): root(build(n, 0, 1LL << HEIGHT,\
+    \ val)) {}\n SegmentTree_Dynamic(const T *bg, const T *ed): root(build(ed - bg,\
+    \ 0, 1LL << HEIGHT, bg)) {}\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
     \ ar.data() + ar.size()) {}\n void set(id_t k, T val) { set_val(root, k, val,\
     \ HEIGHT); }\n T get(id_t k) { return get_val(root, k, HEIGHT); }\n bool is_null(id_t\
     \ k) { return is_null(root, k, HEIGHT); }\n T &at(id_t k) {\n  static_assert(!monoid_v<M>,\
@@ -254,8 +254,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 09:38:10+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-30 13:15:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.DynSeg.test.cpp
 layout: document

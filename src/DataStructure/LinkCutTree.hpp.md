@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
   - icon: ':x:'

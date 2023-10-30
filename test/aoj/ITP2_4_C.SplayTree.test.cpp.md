@@ -10,9 +10,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_C
@@ -100,9 +100,9 @@ data:
     \  if (!a) splay(t, b), t= t->ch[0];\n  else if (b == t->size) splay(t, a - 1),\
     \ t= t->ch[1];\n  else splay(t, b), t->ch[0]->par= nullptr, splay(t->ch[0], a\
     \ - 1), t->ch[0]->par= t, t= t->ch[0]->ch[1];\n }\npublic:\n SplayTree(np t= nullptr):\
-    \ root(t) {}\n SplayTree(size_t n, T val= T()) { root= build(0, n, nullptr, val);\
-    \ }\n SplayTree(const T *bg, const T *ed) { root= build(0, ed - bg, nullptr, bg);\
-    \ }\n SplayTree(const std::vector<T> &ar): SplayTree(ar.data(), ar.data() + ar.size())\
+    \ root(t) {}\n SplayTree(size_t n, T val= T()): root(build(0, n, nullptr, val))\
+    \ {}\n SplayTree(const T *bg, const T *ed): root(build(0, ed - bg, nullptr, bg))\
+    \ {}\n SplayTree(const std::vector<T> &ar): SplayTree(ar.data(), ar.data() + ar.size())\
     \ {}\n std::vector<T> dump() {\n  std::vector<T> ret(size());\n  return dump(ret.begin(),\
     \ root), ret;\n }\n static std::string which_available() {\n  std::string ret=\
     \ \"\";\n  if constexpr (semigroup_v<M>) ret+= \"\\\"fold\\\" \";\n  else ret+=\
@@ -161,8 +161,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_C.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2023-10-29 17:46:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-30 13:15:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_C.SplayTree.test.cpp
 layout: document

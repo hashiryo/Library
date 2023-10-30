@@ -9,7 +9,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2257.test.cpp
     title: test/aoj/2257.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2863.test.cpp
     title: test/aoj/2863.test.cpp
   - icon: ':x:'

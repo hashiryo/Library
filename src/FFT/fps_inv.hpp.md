@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -46,7 +46,7 @@ data:
     title: "\u6709\u540D\u306A\u6570\u5217(\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u4F7F\
       \u7528)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
   - icon: ':x:'
@@ -126,19 +126,19 @@ data:
     title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include <algorithm>\n\
     #include <cassert>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
     #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing i64= long long;\n\
-    using u64= unsigned i64;\nusing u128= __uint128_t;\n#define CE constexpr\n#define\
-    \ IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U,\
-    \ M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n\
-    \  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const {\
-    \ \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U) \\\n\
-    \ static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
+    using u64= unsigned long long;\nusing u128= __uint128_t;\n#define CE constexpr\n\
+    #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
+    \ PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+= r; l >= M) l-=\
+    \ M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r)\
+    \ const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n }\n#define SGN(U)\
+    \ \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return\
     \ n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class\
     \ du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0)\
     \ {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t\
@@ -457,8 +457,8 @@ data:
   - src/FFT/fps_div.hpp
   - src/FFT/Polynomial.hpp
   - src/FFT/fps_exp.hpp
-  timestamp: '2023-10-30 12:32:49+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-30 13:15:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3072.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp

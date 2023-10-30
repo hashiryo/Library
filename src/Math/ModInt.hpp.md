@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
@@ -20,7 +20,7 @@ data:
   - icon: ':x:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
   - icon: ':x:'
@@ -44,7 +44,7 @@ data:
   - icon: ':x:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
   - icon: ':x:'
@@ -67,7 +67,7 @@ data:
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0570.test.cpp
     title: test/aoj/0570.test.cpp
   - icon: ':x:'
@@ -76,7 +76,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':x:'
@@ -85,31 +85,31 @@ data:
   - icon: ':x:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2614.rollinghash.test.cpp
     title: test/aoj/2614.rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2711.rollinghash.test.cpp
     title: test/aoj/2711.rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2863.test.cpp
     title: test/aoj/2863.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
     title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_D.test.cpp
     title: test/aoj/DPL_5_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_E.test.cpp
     title: test/aoj/DPL_5_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
   - icon: ':x:'
@@ -543,7 +543,7 @@ data:
     title: test/yukicoder/980.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include\
@@ -552,10 +552,10 @@ data:
     \ q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b), z= a, a= b, b= z - b * q;\n\
     \ return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\n\
-    using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned i64;\nusing u128=\
-    \ __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM \\\n if\
-    \ (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l,\
-    \ U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define\
+    using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\n\
+    using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
+    \ \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
+    \ l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define\
     \ DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+=\
     \ M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return\
     \ n; } \\\n static CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n)\
@@ -689,8 +689,8 @@ data:
   - src/FFT/Polynomial.hpp
   - src/FFT/fps_exp.hpp
   - src/FFT/NTT.hpp
-  timestamp: '2023-10-30 12:32:49+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-30 13:15:22+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2711.rollinghash.test.cpp
   - test/aoj/DPL_5_F.test.cpp

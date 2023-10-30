@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':x:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
@@ -25,10 +25,10 @@ data:
     \n#include <iostream>\n#line 2 \"src/Math/StirlingNumber.hpp\"\n#include <vector>\n\
     #include <algorithm>\n#include <cassert>\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\n\
-    using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned i64;\nusing u128=\
-    \ __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM \\\n if\
-    \ (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l,\
-    \ U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define\
+    using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\n\
+    using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
+    \ \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
+    \ l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define\
     \ DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+=\
     \ M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return\
     \ n; } \\\n static CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n)\
@@ -115,7 +115,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_1_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 12:32:49+09:00'
+  timestamp: '2023-10-30 13:15:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/stirling_1_small_p_large_n.test.cpp

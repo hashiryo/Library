@@ -8,13 +8,13 @@ data:
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -39,14 +39,14 @@ data:
     \ / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
     \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
     \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
-    \ i64= long long;\nusing u64= unsigned i64;\nusing u128= __uint128_t;\n#define\
-    \ CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\
-    \n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
-    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
-    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
-    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
-    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
-    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
+    \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n \
+    \ if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n\
+    \ CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return\
+    \ l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static\
+    \ CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\n\
+    template <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
     \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
     \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
     \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
@@ -209,9 +209,9 @@ data:
     \   if (ret >= 0) return ret;\n  }\n  for (std::size_t i= N; i--;) ss[i]= ts[i]\
     \ ? ts[i]->ch[!flg] : nullptr;\n  return find<last>(k, {m, b[1]}, bias, h - 1,\
     \ check, ss, sums);\n }\npublic:\n SegmentTree_Dynamic(np t= nullptr): root(t)\
-    \ {}\n SegmentTree_Dynamic(std::size_t n, T val) { root= build(n, 0, 1LL << HEIGHT,\
-    \ val); }\n SegmentTree_Dynamic(const T *bg, const T *ed) { root= build(ed - bg,\
-    \ 0, 1LL << HEIGHT, bg); }\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
+    \ {}\n SegmentTree_Dynamic(std::size_t n, T val): root(build(n, 0, 1LL << HEIGHT,\
+    \ val)) {}\n SegmentTree_Dynamic(const T *bg, const T *ed): root(build(ed - bg,\
+    \ 0, 1LL << HEIGHT, bg)) {}\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
     \ ar.data() + ar.size()) {}\n void set(id_t k, T val) { set_val(root, k, val,\
     \ HEIGHT); }\n T get(id_t k) { return get_val(root, k, HEIGHT); }\n bool is_null(id_t\
     \ k) { return is_null(root, k, HEIGHT); }\n T &at(id_t k) {\n  static_assert(!monoid_v<M>,\
@@ -283,7 +283,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 12:32:49+09:00'
+  timestamp: '2023-10-30 13:15:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.DynSeg.test.cpp

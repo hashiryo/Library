@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
@@ -99,10 +99,10 @@ data:
   bundledCode: "#line 2 \"src/FFT/convolve.hpp\"\n#include <vector>\n#include <cmath>\n\
     #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\n\
-    using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned i64;\nusing u128=\
-    \ __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM \\\n if\
-    \ (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l,\
-    \ U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define\
+    using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\n\
+    using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
+    \ \\\n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
+    \ l, U r) const { \\\n  if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define\
     \ DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+=\
     \ M; \\\n  return l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return\
     \ n; } \\\n static CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n)\
@@ -398,7 +398,7 @@ data:
   - src/FFT/extgcd.hpp
   - src/FFT/sequences.hpp
   - src/FFT/Polynomial.hpp
-  timestamp: '2023-10-30 12:32:49+09:00'
+  timestamp: '2023-10-30 13:15:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/comp_of_FPS.test.cpp

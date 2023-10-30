@@ -10,9 +10,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/8/ITP2/all/ITP2_4_B
@@ -113,9 +113,9 @@ data:
     \ (dual_v<M>) push(t);\n  size_t lsz= ch(cp_nm(t), 0)->size();\n  return lsz >\
     \ k ? at_val(ch(t, 0), k) : at_val(ch(t, 1), k - lsz);\n }\n static WBT id_to_wbt(np\
     \ t) {\n  WBT ret;\n  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree():\
-    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()) { root= build(0,\
-    \ n, val); }\n WeightBalancedTree(const T *bg, const T *ed) { root= build(0, ed\
-    \ - bg, bg); }\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
+    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()): root(build(0, n,\
+    \ val)) {}\n WeightBalancedTree(const T *bg, const T *ed): root(build(0, ed -\
+    \ bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
     \ ar.data() + ar.size()){};\n WBT &operator+=(WBT rhs) { return root= merge(root,\
     \ rhs.root), *this; }\n WBT operator+(WBT rhs) { return WBT(*this)+= rhs; }\n\
     \ std::pair<WBT, WBT> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
@@ -169,8 +169,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_4_B.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-29 17:46:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-10-30 13:15:22+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ITP2_4_B.WBT.test.cpp
 layout: document

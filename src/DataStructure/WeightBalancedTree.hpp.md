@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3024.WBT.test.cpp
     title: test/aoj/3024.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/ITP2_4_B.WBT.test.cpp
     title: test/aoj/ITP2_4_B.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/ITP2_4_C.WBT.test.cpp
     title: test/aoj/ITP2_4_C.WBT.test.cpp
   - icon: ':x:'
@@ -127,9 +127,9 @@ data:
     \ (dual_v<M>) push(t);\n  size_t lsz= ch(cp_nm(t), 0)->size();\n  return lsz >\
     \ k ? at_val(ch(t, 0), k) : at_val(ch(t, 1), k - lsz);\n }\n static WBT id_to_wbt(np\
     \ t) {\n  WBT ret;\n  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree():\
-    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()) { root= build(0,\
-    \ n, val); }\n WeightBalancedTree(const T *bg, const T *ed) { root= build(0, ed\
-    \ - bg, bg); }\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
+    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()): root(build(0, n,\
+    \ val)) {}\n WeightBalancedTree(const T *bg, const T *ed): root(build(0, ed -\
+    \ bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
     \ ar.data() + ar.size()){};\n WBT &operator+=(WBT rhs) { return root= merge(root,\
     \ rhs.root), *this; }\n WBT operator+(WBT rhs) { return WBT(*this)+= rhs; }\n\
     \ std::pair<WBT, WBT> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
@@ -242,9 +242,9 @@ data:
     \ (dual_v<M>) push(t);\n  size_t lsz= ch(cp_nm(t), 0)->size();\n  return lsz >\
     \ k ? at_val(ch(t, 0), k) : at_val(ch(t, 1), k - lsz);\n }\n static WBT id_to_wbt(np\
     \ t) {\n  WBT ret;\n  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree():\
-    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()) { root= build(0,\
-    \ n, val); }\n WeightBalancedTree(const T *bg, const T *ed) { root= build(0, ed\
-    \ - bg, bg); }\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
+    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()): root(build(0, n,\
+    \ val)) {}\n WeightBalancedTree(const T *bg, const T *ed): root(build(0, ed -\
+    \ bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
     \ ar.data() + ar.size()){};\n WBT &operator+=(WBT rhs) { return root= merge(root,\
     \ rhs.root), *this; }\n WBT operator+(WBT rhs) { return WBT(*this)+= rhs; }\n\
     \ std::pair<WBT, WBT> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
@@ -281,7 +281,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/WeightBalancedTree.hpp
   requiredBy: []
-  timestamp: '2023-10-29 17:46:55+09:00'
+  timestamp: '2023-10-30 13:15:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/ITP2_4_B.WBT.test.cpp

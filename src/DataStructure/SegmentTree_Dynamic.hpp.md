@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I.DynSeg.test.cpp
     title: test/aoj/DSL_2_I.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
   - icon: ':x:'
@@ -130,9 +130,9 @@ data:
     \   if (ret >= 0) return ret;\n  }\n  for (std::size_t i= N; i--;) ss[i]= ts[i]\
     \ ? ts[i]->ch[!flg] : nullptr;\n  return find<last>(k, {m, b[1]}, bias, h - 1,\
     \ check, ss, sums);\n }\npublic:\n SegmentTree_Dynamic(np t= nullptr): root(t)\
-    \ {}\n SegmentTree_Dynamic(std::size_t n, T val) { root= build(n, 0, 1LL << HEIGHT,\
-    \ val); }\n SegmentTree_Dynamic(const T *bg, const T *ed) { root= build(ed - bg,\
-    \ 0, 1LL << HEIGHT, bg); }\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
+    \ {}\n SegmentTree_Dynamic(std::size_t n, T val): root(build(n, 0, 1LL << HEIGHT,\
+    \ val)) {}\n SegmentTree_Dynamic(const T *bg, const T *ed): root(build(ed - bg,\
+    \ 0, 1LL << HEIGHT, bg)) {}\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
     \ ar.data() + ar.size()) {}\n void set(id_t k, T val) { set_val(root, k, val,\
     \ HEIGHT); }\n T get(id_t k) { return get_val(root, k, HEIGHT); }\n bool is_null(id_t\
     \ k) { return is_null(root, k, HEIGHT); }\n T &at(id_t k) {\n  static_assert(!monoid_v<M>,\
@@ -247,9 +247,9 @@ data:
     \   if (ret >= 0) return ret;\n  }\n  for (std::size_t i= N; i--;) ss[i]= ts[i]\
     \ ? ts[i]->ch[!flg] : nullptr;\n  return find<last>(k, {m, b[1]}, bias, h - 1,\
     \ check, ss, sums);\n }\npublic:\n SegmentTree_Dynamic(np t= nullptr): root(t)\
-    \ {}\n SegmentTree_Dynamic(std::size_t n, T val) { root= build(n, 0, 1LL << HEIGHT,\
-    \ val); }\n SegmentTree_Dynamic(const T *bg, const T *ed) { root= build(ed - bg,\
-    \ 0, 1LL << HEIGHT, bg); }\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
+    \ {}\n SegmentTree_Dynamic(std::size_t n, T val): root(build(n, 0, 1LL << HEIGHT,\
+    \ val)) {}\n SegmentTree_Dynamic(const T *bg, const T *ed): root(build(ed - bg,\
+    \ 0, 1LL << HEIGHT, bg)) {}\n SegmentTree_Dynamic(const std::vector<T> &ar): SegmentTree_Dynamic(ar.data(),\
     \ ar.data() + ar.size()) {}\n void set(id_t k, T val) { set_val(root, k, val,\
     \ HEIGHT); }\n T get(id_t k) { return get_val(root, k, HEIGHT); }\n bool is_null(id_t\
     \ k) { return is_null(root, k, HEIGHT); }\n T &at(id_t k) {\n  static_assert(!monoid_v<M>,\
@@ -287,7 +287,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy: []
-  timestamp: '2023-10-30 09:38:10+09:00'
+  timestamp: '2023-10-30 13:15:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2270.DynSeg.test.cpp

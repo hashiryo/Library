@@ -8,13 +8,13 @@ data:
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -39,14 +39,14 @@ data:
     \ / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
     \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
     \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
-    \ i64= long long;\nusing u64= unsigned i64;\nusing u128= __uint128_t;\n#define\
-    \ CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\
-    \n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n  if (l+=\
-    \ r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n CE IL U\
-    \ diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return l; \\\n\
-    \ }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE\
-    \ IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
-    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
+    \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { \\\n \
+    \ if (l+= r; l >= M) l-= M; \\\n  return l; \\\n }\n#define DIFF(U, C, M) \\\n\
+    \ CE IL U diff(U l, U r) const { \\\n  if (l-= r; l >> C) l+= M; \\\n  return\
+    \ l; \\\n }\n#define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static\
+    \ CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\n\
+    template <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
     \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
     \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
     \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
@@ -209,9 +209,9 @@ data:
     \ (dual_v<M>) push(t);\n  size_t lsz= ch(cp_nm(t), 0)->size();\n  return lsz >\
     \ k ? at_val(ch(t, 0), k) : at_val(ch(t, 1), k - lsz);\n }\n static WBT id_to_wbt(np\
     \ t) {\n  WBT ret;\n  return ret.root= t, ret;\n }\npublic:\n WeightBalancedTree():\
-    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()) { root= build(0,\
-    \ n, val); }\n WeightBalancedTree(const T *bg, const T *ed) { root= build(0, ed\
-    \ - bg, bg); }\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
+    \ root(nullptr) {}\n WeightBalancedTree(size_t n, T val= T()): root(build(0, n,\
+    \ val)) {}\n WeightBalancedTree(const T *bg, const T *ed): root(build(0, ed -\
+    \ bg, bg)) {}\n WeightBalancedTree(const std::vector<T> &ar): WeightBalancedTree(ar.data(),\
     \ ar.data() + ar.size()){};\n WBT &operator+=(WBT rhs) { return root= merge(root,\
     \ rhs.root), *this; }\n WBT operator+(WBT rhs) { return WBT(*this)+= rhs; }\n\
     \ std::pair<WBT, WBT> split(size_t k) {\n  assert(root);\n  auto [l, r]= split(root,\
@@ -284,7 +284,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 12:32:49+09:00'
+  timestamp: '2023-10-30 13:15:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.WBT.test.cpp

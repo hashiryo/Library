@@ -16,21 +16,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc202_e.test.cpp
+    title: test/atcoder/abc202_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_kth_smallest.WM.test.cpp
     title: test/yosupo/range_kth_smallest.WM.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_frequency.WM.test.cpp
     title: test/yosupo/static_range_frequency.WM.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1371.WM.test.cpp
+    title: test/yukicoder/1371.WM.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/728.WM.test.cpp
     title: test/yukicoder/728.WM.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/919.WM.test.cpp
     title: test/yukicoder/919.WM.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <vector>\n\
@@ -109,7 +115,7 @@ data:
   requiredBy:
   - src/DataStructure/DQuery.hpp
   timestamp: '2023-01-21 19:30:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2674.WM.test.cpp
   - test/aoj/1549.WM.test.cpp
@@ -117,7 +123,9 @@ data:
   - test/yosupo/static_range_frequency.WM.test.cpp
   - test/yukicoder/919.WM.test.cpp
   - test/yukicoder/728.WM.test.cpp
+  - test/yukicoder/1371.WM.test.cpp
   - test/atcoder/abc174_f.WM.test.cpp
+  - test/atcoder/abc202_e.test.cpp
 documentation_of: src/DataStructure/WaveletMatrix.hpp
 layout: document
 title: "Wavelet\u884C\u5217"
