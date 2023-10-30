@@ -5,7 +5,7 @@ data:
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/long_traits.hpp
     title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -15,16 +15,16 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
     title: test/aoj/1023.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
   - icon: ':x:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
   - icon: ':x:'
@@ -41,25 +41,26 @@ data:
     title: test/yukicoder/728.KDT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/DataStructure/KDTree.hpp\"\n#include <array>\n#include\
-    \ <vector>\n#include <algorithm>\n#include <tuple>\n#include <cstddef>\n#include\
-    \ <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
-    #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
-    \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
-    \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
-    \ \\\n };\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_,\
-    \ std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
-    #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
-    \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
-    \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
-    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
-    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
-    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 6 \"src/Internal/tuple_traits.hpp\"\
-    \ntemplate <class T> static constexpr bool tuple_like_v= false;\ntemplate <class...\
+  bundledCode: "#line 2 \"src/DataStructure/KDTree.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#include <numeric>\n#include <map>\n#include <set>\n#include <cassert>\n\
+    #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
+    \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
+    \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
+    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member,\
+    \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
+    \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
+    \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
+    \ type2, using type= decltype(check(mClass))) \\\n template <class tClass> using\
+    \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
+    \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
+    \ myself_or_, tClass);\n#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n\
+    #include <array>\n#line 5 \"src/Internal/tuple_traits.hpp\"\n#include <cstddef>\n\
+    template <class T> static constexpr bool tuple_like_v= false;\ntemplate <class...\
     \ Args> static constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate\
     \ <class T, class U> static constexpr bool tuple_like_v<std::pair<T, U>> = true;\n\
     template <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
@@ -93,11 +94,11 @@ data:
     \ 11 \"src/DataStructure/KDTree.hpp\"\nnamespace kdtree_internal {\ntemplate <class\
     \ pos_t, size_t K, class M, class A, class B> class KDTreeImpl {};\ntemplate <class\
     \ pos_t, size_t K, class M, class... PK, class... PK2> class KDTreeImpl<pos_t,\
-    \ K, M, std::tuple<PK...>, std::tuple<PK2...>> {\npublic:\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
-    \ MYSELF_OR(T);\n NULLPTR_OR(E);\n using Sec= std::array<pos_t, 2>;\n using Pos=\
-    \ std::array<pos_t, K>;\n using Range= std::array<Sec, K>;\n using long_pos_t=\
-    \ make_long_t<pos_t>;\n template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
+    \ K, M, std::tuple<PK...>, std::tuple<PK2...>> {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n MYSELF_OR(T);\n\
+    \ NULLPTR_OR(E);\n using Sec= std::array<pos_t, 2>;\n using Pos= std::array<pos_t,\
+    \ K>;\n using Range= std::array<Sec, K>;\n using long_pos_t= make_long_t<pos_t>;\n\
+    \ template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>, has_ti<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
     \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct Node_BB {\n  int ch[2]= {-1, -1};\n\
     \  Pos pos;\n  pos_t range[K][2];\n };\n template <class U> struct Node_B: Node_BB\
@@ -249,13 +250,13 @@ data:
     \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
     \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
     \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n"
-  code: "#pragma once\n#include <array>\n#include <vector>\n#include <algorithm>\n\
-    #include <tuple>\n#include <cstddef>\n#include <cassert>\n#include \"src/Internal/HAS_CHECK.hpp\"\
+  code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\
+    #include <map>\n#include <set>\n#include <cassert>\n#include \"src/Internal/HAS_CHECK.hpp\"\
     \n#include \"src/Internal/tuple_traits.hpp\"\n#include \"src/Internal/long_traits.hpp\"\
     \nnamespace kdtree_internal {\ntemplate <class pos_t, size_t K, class M, class\
     \ A, class B> class KDTreeImpl {};\ntemplate <class pos_t, size_t K, class M,\
     \ class... PK, class... PK2> class KDTreeImpl<pos_t, K, M, std::tuple<PK...>,\
-    \ std::tuple<PK2...>> {\npublic:\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n\
+    \ std::tuple<PK2...>> {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n\
     \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n MYSELF_OR(T);\n NULLPTR_OR(E);\n\
     \ using Sec= std::array<pos_t, 2>;\n using Pos= std::array<pos_t, K>;\n using\
     \ Range= std::array<Sec, K>;\n using long_pos_t= make_long_t<pos_t>;\n template\
@@ -418,8 +419,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2023-10-29 20:17:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-30 09:38:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
@@ -438,6 +439,8 @@ $\mathcal{O}(k\cdot N^{1-1/k})$
 ## 参考
 [https://trap.jp/post/1489/](https://trap.jp/post/1489/)
 ## 問題例
-[square869120Contest #4 G - Get the Salary of Atcoder](https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g) (オイラーツアー+遅延伝搬) \
+[square869120Contest #4 G - Get the Salary of Atcoder](https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g) (遅延伝搬) \
 [第二回 アルゴリズム実技検定 過去問 N - ビルの建設](https://atcoder.jp/contests/past202004-open/tasks/past202004_n) (双対) \
-[AtCoder Beginner Contest 234 Ex - Enumerate Pairs](https://atcoder.jp/contests/abc234/tasks/abc234_h) (円形クエリ)
+[AtCoder Beginner Contest 234 Ex - Enumerate Pairs](https://atcoder.jp/contests/abc234/tasks/abc234_h) (円形クエリ, 列挙) \
+[AtCoder Regular Contest 010 D - 情報伝播](https://atcoder.jp/contests/arc010/tasks/arc010_4) (最近傍探索) \
+[Happy Query Contest 2019 Grid Xor Query](https://www.hackerrank.com/contests/happy-query-contest/challenges/grid-xor-query) (2D xor)

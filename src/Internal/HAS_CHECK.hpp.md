@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/EulerTourTree.hpp
     title: Euler-Tour-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/LinkCutTree.hpp
     title: Link-Cut-Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_Dynamic.hpp
     title: "Segment-Tree(\u52D5\u7684\u69CB\u7BC9)"
   - icon: ':x:'
@@ -33,10 +33,10 @@ data:
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
     title: test/aoj/1023.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -45,19 +45,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1508.WBT.test.cpp
     title: test/aoj/1508.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
   - icon: ':x:'
     path: test/aoj/2270.Patricia.test.cpp
     title: test/aoj/2270.Patricia.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2450.LCT.test.cpp
     title: test/aoj/2450.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2559.LCT_Dual.test.cpp
     title: test/aoj/2559.LCT_Dual.test.cpp
   - icon: ':heavy_check_mark:'
@@ -66,10 +66,10 @@ data:
   - icon: ':x:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2893.onlinedicon.test.cpp
     title: test/aoj/2893.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3024.DynSeg.test.cpp
     title: test/aoj/3024.DynSeg.test.cpp
   - icon: ':x:'
@@ -81,10 +81,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
     title: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I.DynSeg.test.cpp
     title: test/aoj/DSL_2_I.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -108,13 +108,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.WBT.test.cpp
     title: test/aoj/ITP2_4_C.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':x:'

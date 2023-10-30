@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
   - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Internal/long_traits.hpp
     title: "int \u304B\u3089 long long \u306A\u3069\u306E\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8"
@@ -18,18 +18,18 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C
   bundledCode: "#line 1 \"test/aoj/DSL_2_C.KDT.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\
-    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/DataStructure/KDTree.hpp\"\
-    \n#include <array>\n#line 5 \"src/DataStructure/KDTree.hpp\"\n#include <tuple>\n\
-    #include <cstddef>\n#include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
+    \n\n// \u5217\u6319\u306Everify\n\n#include <iostream>\n#include <vector>\n#include\
+    \ <algorithm>\n#line 4 \"src/DataStructure/KDTree.hpp\"\n#include <numeric>\n\
+    #include <map>\n#include <set>\n#include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
     \n#include <type_traits>\n#define MEMBER_MACRO(member, Dummy, name, type1, type2,\
     \ last) \\\n template <class tClass> struct name##member { \\\n  template <class\
     \ U, Dummy> static type1 check(U *); \\\n  static type2 check(...); \\\n  static\
@@ -41,11 +41,12 @@ data:
     \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
     \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 6 \"src/Internal/tuple_traits.hpp\"\
-    \ntemplate <class T> static constexpr bool tuple_like_v= false;\ntemplate <class...\
-    \ Args> static constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate\
-    \ <class T, class U> static constexpr bool tuple_like_v<std::pair<T, U>> = true;\n\
-    template <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
+    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 2 \"src/Internal/tuple_traits.hpp\"\
+    \n#include <tuple>\n#include <array>\n#line 5 \"src/Internal/tuple_traits.hpp\"\
+    \n#include <cstddef>\ntemplate <class T> static constexpr bool tuple_like_v= false;\n\
+    template <class... Args> static constexpr bool tuple_like_v<std::tuple<Args...>>\
+    \ = true;\ntemplate <class T, class U> static constexpr bool tuple_like_v<std::pair<T,\
+    \ U>> = true;\ntemplate <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
     \ K>> = true;\ntemplate <class T> auto to_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
     \ return std::apply([](auto &&...x) { return std::make_tuple(x...); }, t);\n}\n\
     template <class T> auto forward_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
@@ -76,11 +77,11 @@ data:
     \ 11 \"src/DataStructure/KDTree.hpp\"\nnamespace kdtree_internal {\ntemplate <class\
     \ pos_t, size_t K, class M, class A, class B> class KDTreeImpl {};\ntemplate <class\
     \ pos_t, size_t K, class M, class... PK, class... PK2> class KDTreeImpl<pos_t,\
-    \ K, M, std::tuple<PK...>, std::tuple<PK2...>> {\npublic:\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
-    \ MYSELF_OR(T);\n NULLPTR_OR(E);\n using Sec= std::array<pos_t, 2>;\n using Pos=\
-    \ std::array<pos_t, K>;\n using Range= std::array<Sec, K>;\n using long_pos_t=\
-    \ make_long_t<pos_t>;\n template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
+    \ K, M, std::tuple<PK...>, std::tuple<PK2...>> {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n MYSELF_OR(T);\n\
+    \ NULLPTR_OR(E);\n using Sec= std::array<pos_t, 2>;\n using Pos= std::array<pos_t,\
+    \ K>;\n using Range= std::array<Sec, K>;\n using long_pos_t= make_long_t<pos_t>;\n\
+    \ template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>, has_ti<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
     \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct Node_BB {\n  int ch[2]= {-1, -1};\n\
     \  Pos pos;\n  pos_t range[K][2];\n };\n template <class U> struct Node_B: Node_BB\
@@ -232,7 +233,7 @@ data:
     \ nns(0, {p...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
     \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
     \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n\
-    #line 6 \"test/aoj/DSL_2_C.KDT.test.cpp\"\nusing namespace std;\nsigned main()\
+    #line 9 \"test/aoj/DSL_2_C.KDT.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n;\n cin >> n;\n vector<array<int,\
     \ 3>> xy(n);\n for (int i= 0; i < n; ++i) cin >> xy[i][0] >> xy[i][1], xy[i][2]=\
     \ i;\n KDTree<int, 2, int> kdt(xy);\n int q;\n cin >> q;\n while (q--) {\n  int\
@@ -240,14 +241,14 @@ data:
     \ tx, sy, ty);\n  sort(ans.begin(), ans.end());\n  for (auto x: ans) cout << x\
     \ << '\\n';\n  cout << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C\"\
-    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/DataStructure/KDTree.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n;\n cin >> n;\n vector<array<int, 3>> xy(n);\n for (int i= 0; i < n; ++i)\
-    \ cin >> xy[i][0] >> xy[i][1], xy[i][2]= i;\n KDTree<int, 2, int> kdt(xy);\n int\
-    \ q;\n cin >> q;\n while (q--) {\n  int sx, tx, sy, ty;\n  cin >> sx >> tx >>\
-    \ sy >> ty;\n  auto ans= kdt.enum_cuboid(sx, tx, sy, ty);\n  sort(ans.begin(),\
-    \ ans.end());\n  for (auto x: ans) cout << x << '\\n';\n  cout << '\\n';\n }\n\
-    \ return 0;\n}"
+    \n\n// \u5217\u6319\u306Everify\n\n#include <iostream>\n#include <vector>\n#include\
+    \ <algorithm>\n#include \"src/DataStructure/KDTree.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n;\n cin >> n;\n\
+    \ vector<array<int, 3>> xy(n);\n for (int i= 0; i < n; ++i) cin >> xy[i][0] >>\
+    \ xy[i][1], xy[i][2]= i;\n KDTree<int, 2, int> kdt(xy);\n int q;\n cin >> q;\n\
+    \ while (q--) {\n  int sx, tx, sy, ty;\n  cin >> sx >> tx >> sy >> ty;\n  auto\
+    \ ans= kdt.enum_cuboid(sx, tx, sy, ty);\n  sort(ans.begin(), ans.end());\n  for\
+    \ (auto x: ans) cout << x << '\\n';\n  cout << '\\n';\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/KDTree.hpp
   - src/Internal/HAS_CHECK.hpp
@@ -256,8 +257,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_C.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-29 20:17:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-10-30 09:38:10+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_C.KDT.test.cpp
 layout: document

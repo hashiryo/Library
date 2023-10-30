@@ -29,19 +29,19 @@ data:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree_Patricia.hpp\"\n#include <array>\n\
     #include <vector>\n#include <string>\n#include <algorithm>\n#include <tuple>\n\
-    #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
-    \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
-    \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
-    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member,\
-    \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
-    \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
-    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
-    \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
-    \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
-    \ type2, using type= decltype(check(mClass))) \\\n template <class tClass> using\
-    \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
-    \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
-    \ myself_or_, tClass);\n#line 8 \"src/DataStructure/SegmentTree_Patricia.hpp\"\
+    #include <cstddef>\n#include <cstdint>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
+    \n#include <type_traits>\n#define MEMBER_MACRO(member, Dummy, name, type1, type2,\
+    \ last) \\\n template <class tClass> struct name##member { \\\n  template <class\
+    \ U, Dummy> static type1 check(U *); \\\n  static type2 check(...); \\\n  static\
+    \ tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member,\
+    \ Dummy, has_, std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
+    \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
+    \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
+    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
+    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
+    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
+    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 10 \"src/DataStructure/SegmentTree_Patricia.hpp\"\
     \ntemplate <typename M, bool persistent= false, uint8_t HEIGHT= 31> class SegmentTree_Patricia\
     \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_TYPE(T);\n template <class L> static\
     \ constexpr bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n\
@@ -147,72 +147,72 @@ data:
     \ ret+= \"\\\"fold\\\" \\\"find\\\"\";\n  else ret+= \"\\\"at\\\" \";\n  return\
     \ ret;\n }\n};\n"
   code: "#pragma once\n#include <array>\n#include <vector>\n#include <string>\n#include\
-    \ <algorithm>\n#include <tuple>\n#include \"src/Internal/HAS_CHECK.hpp\"\ntemplate\
-    \ <typename M, bool persistent= false, uint8_t HEIGHT= 31> class SegmentTree_Patricia\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_TYPE(T);\n template <class L> static\
-    \ constexpr bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n\
-    \ using id_t= long long;\n template <class T, class tDerived> struct Node_B {\n\
-    \  id_t bits;\n  uint8_t len;\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n\
-    \ };\n template <bool mo, typename tEnable= void> struct Node_D: Node_B<M, Node_D<mo,\
-    \ tEnable>> {};\n template <bool mo> struct Node_D<mo, typename std::enable_if_t<mo>>:\
-    \ Node_B<typename M::T, Node_D<mo>> {};\n using Node= Node_D<monoid_v<M>>;\n using\
-    \ T= decltype(Node::val);\n using np= Node *;\n np root;\n static inline constexpr\
-    \ T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n  else return T();\n\
-    \ }\n template <class S> np build(const id_t &n, id_t l, id_t r, const S &bg)\
-    \ {\n  if (n <= l) return;\n  id_t m= (l + r) / 2;\n  while (n <= m) r= m, m=\
-    \ (l + r) / 2;\n  if (r - l == 1) {\n   if constexpr (std::is_same_v<S, T>) return\
-    \ new Node{b[0], HEIGHT + 1, bg};\n   else return new Node{b[0], HEIGHT + 1, *(bg\
-    \ + l)};\n  }\n  uint8_t h= __builtin_ctzll(r - l);\n  np t= new Node{m >> h,\
-    \ uint8_t(HEIGHT + 1 - h), def_val(), {build(n, l, m, bg), build(n, m, r, bg)}};\n\
-    \  if constexpr (monoid_v<M>) t->val= M::op(t->ch[0]->val, t->ch[1]->val);\n \
-    \ return t;\n }\n void dump(np t, const id_t &l, const id_t &r, std::array<id_t,\
-    \ 2> b, typename std::vector<T>::iterator itr, uint8_t h) {\n  if (r <= b[0] ||\
-    \ b[1] <= l) return;\n  if (l <= b[0] && b[1] <= r && !t) {\n   for (id_t i= b[0];\
-    \ i < b[1]; i++) *(itr + i)= def_val();\n  } else if (b[1] - b[0] != 1) {\n  \
-    \ auto m= (b[0] + b[1]) >> 1;\n   dump(next(t, h, 0), l, r, {b[0], m}, itr, h\
-    \ - 1);\n   dump(next(t, h, 1), l, r, {m, b[1]}, itr, h - 1);\n  } else *(itr\
-    \ + b[0])= t->val;\n }\n T fold(np &t, const id_t &l, const id_t &r, const id_t\
-    \ &bias) {\n  static id_t bits, b[2];\n  if (!t) return def_val();\n  uint8_t\
-    \ h= (HEIGHT + 1) - t->len;\n  bits= (bias >> h) ^ t->bits, b[0]= bits << h, b[1]=\
-    \ (bits + 1) << h;\n  if (r <= b[0] || b[1] <= l) return def_val();\n  if (l <=\
-    \ b[0] && b[1] <= r) return t->val;\n  bool flg= (bias >> (h - 1)) & 1;\n  return\
-    \ M::op(fold(t->ch[flg], l, r, bias), fold(t->ch[!flg], l, r, bias));\n }\n void\
-    \ set_val(np &t, const id_t &k, const T &val) {\n  if (!t) return t= new Node{k,\
-    \ HEIGHT + 1, val}, void();\n  if constexpr (persistent) t= new Node{*t};\n  id_t\
-    \ bits= (k >> ((HEIGHT + 1) - t->len));\n  if (bits != t->bits) {\n   uint8_t\
-    \ i= 64 - __builtin_clzll(bits ^ t->bits);\n   bool flg= (t->bits >> (i - 1))\
-    \ & 1;\n   t->ch[flg]= new Node{*t}, t->ch[!flg]= new Node{k, HEIGHT + 1, val};\n\
-    \   t->len-= i, t->bits>>= i;\n  } else if (t->len != HEIGHT + 1) {\n   set_val(t->ch[(k\
-    \ >> (HEIGHT - t->len)) & 1], k, val);\n  } else return t->val= val, void();\n\
-    \  if constexpr (monoid_v<M>) t->val= M::op(t->ch[0]->val, t->ch[1]->val);\n }\n\
-    \ T &at_val(np &t, const id_t &k) {\n  if (!t) return t= new Node{k, HEIGHT +\
-    \ 1, def_val()}, t->val;\n  if constexpr (persistent) t= new Node{*t};\n  id_t\
-    \ bits= (k >> ((HEIGHT + 1) - t->len));\n  if (bits != t->bits) {\n   uint8_t\
-    \ i= 64 - __builtin_clzll(bits ^ t->bits);\n   bool flg= (t->bits >> (i - 1))\
-    \ & 1;\n   t->ch[flg]= new Node{*t}, t->ch[!flg]= new Node{k, HEIGHT + 1, def_val()};\n\
-    \   t->len-= i, t->bits>>= i;\n   return t->ch[!flg]->val;\n  } else if (t->len\
-    \ != HEIGHT + 1) return at_val(t->ch[(k >> (HEIGHT - t->len)) & 1], k);\n  return\
-    \ t->val;\n }\n bool is_null(np &t, const id_t &k) {\n  if (!t || (k >> ((HEIGHT\
-    \ + 1) - t->len)) != t->bits) return true;\n  if (t->len == HEIGHT + 1) return\
-    \ false;\n  return is_null(t->ch[(k >> (HEIGHT - t->len)) & 1], k);\n }\n T get_val(np\
-    \ &t, const id_t &k) {\n  if (!t || (k >> ((HEIGHT + 1) - t->len)) != t->bits)\
-    \ return def_val();\n  if (t->len == HEIGHT + 1) return t->val;\n  return get_val(t->ch[(k\
-    \ >> (HEIGHT - t->len)) & 1], k);\n }\n template <bool last> static inline T calc_op(np\
-    \ &t, const T &v) {\n  if constexpr (last) return M::op((t ? t->val : def_val()),\
-    \ v);\n  else return M::op(v, (t ? t->val : def_val()));\n }\n template <bool\
-    \ last> static inline bool is_in(const id_t &m, const id_t &k) {\n  if constexpr\
-    \ (last) return k <= m;\n  else return m <= k;\n }\n static inline np next(np\
-    \ &t, const uint8_t &h, const bool &f) {\n  if (!t) return nullptr;\n  uint8_t\
-    \ len= h + t->len - (HEIGHT + 1);\n  if (!len) return t->ch[f];\n  return (f ==\
-    \ ((t->bits >> (len - 1)) & 1)) ? t : nullptr;\n }\n template <bool last, class\
-    \ C, std::size_t N> static id_t find(const id_t &k, std::array<id_t, 2> b, const\
-    \ id_t &bias, uint8_t h, const C &check, std::array<np, N> &ts, std::array<T,\
-    \ N> &sums) {\n  static_assert(monoid_v<M>, \"\\\"find\\\" is not available\\\
-    n\");\n  static std::array<T, N> sums2;\n  if (std::all_of(ts.begin(), ts.end(),\
-    \ [](np t) { return !t; })) return -1;\n  if (!h) {\n   for (std::size_t i= N;\
-    \ i--;) sums[i]= calc_op<last>(ts[i], sums[i]);\n   return std::apply(check, sums)\
-    \ ? std::get<last>(b) : -1;\n  } else if (is_in<last>(k, b[0])) {\n   for (std::size_t\
-    \ i= N; i--;) sums2[i]= calc_op<last>(ts[i], sums[i]);\n   if (!std::apply(check,\
+    \ <algorithm>\n#include <tuple>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ \"src/Internal/HAS_CHECK.hpp\"\ntemplate <typename M, bool persistent= false,\
+    \ uint8_t HEIGHT= 31> class SegmentTree_Patricia {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
+    \ HAS_TYPE(T);\n template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
+    \ has_op<L>, has_ti<L>>;\n using id_t= long long;\n template <class T, class tDerived>\
+    \ struct Node_B {\n  id_t bits;\n  uint8_t len;\n  T val;\n  tDerived *ch[2]=\
+    \ {nullptr, nullptr};\n };\n template <bool mo, typename tEnable= void> struct\
+    \ Node_D: Node_B<M, Node_D<mo, tEnable>> {};\n template <bool mo> struct Node_D<mo,\
+    \ typename std::enable_if_t<mo>>: Node_B<typename M::T, Node_D<mo>> {};\n using\
+    \ Node= Node_D<monoid_v<M>>;\n using T= decltype(Node::val);\n using np= Node\
+    \ *;\n np root;\n static inline constexpr T def_val() {\n  if constexpr (monoid_v<M>)\
+    \ return M::ti();\n  else return T();\n }\n template <class S> np build(const\
+    \ id_t &n, id_t l, id_t r, const S &bg) {\n  if (n <= l) return;\n  id_t m= (l\
+    \ + r) / 2;\n  while (n <= m) r= m, m= (l + r) / 2;\n  if (r - l == 1) {\n   if\
+    \ constexpr (std::is_same_v<S, T>) return new Node{b[0], HEIGHT + 1, bg};\n  \
+    \ else return new Node{b[0], HEIGHT + 1, *(bg + l)};\n  }\n  uint8_t h= __builtin_ctzll(r\
+    \ - l);\n  np t= new Node{m >> h, uint8_t(HEIGHT + 1 - h), def_val(), {build(n,\
+    \ l, m, bg), build(n, m, r, bg)}};\n  if constexpr (monoid_v<M>) t->val= M::op(t->ch[0]->val,\
+    \ t->ch[1]->val);\n  return t;\n }\n void dump(np t, const id_t &l, const id_t\
+    \ &r, std::array<id_t, 2> b, typename std::vector<T>::iterator itr, uint8_t h)\
+    \ {\n  if (r <= b[0] || b[1] <= l) return;\n  if (l <= b[0] && b[1] <= r && !t)\
+    \ {\n   for (id_t i= b[0]; i < b[1]; i++) *(itr + i)= def_val();\n  } else if\
+    \ (b[1] - b[0] != 1) {\n   auto m= (b[0] + b[1]) >> 1;\n   dump(next(t, h, 0),\
+    \ l, r, {b[0], m}, itr, h - 1);\n   dump(next(t, h, 1), l, r, {m, b[1]}, itr,\
+    \ h - 1);\n  } else *(itr + b[0])= t->val;\n }\n T fold(np &t, const id_t &l,\
+    \ const id_t &r, const id_t &bias) {\n  static id_t bits, b[2];\n  if (!t) return\
+    \ def_val();\n  uint8_t h= (HEIGHT + 1) - t->len;\n  bits= (bias >> h) ^ t->bits,\
+    \ b[0]= bits << h, b[1]= (bits + 1) << h;\n  if (r <= b[0] || b[1] <= l) return\
+    \ def_val();\n  if (l <= b[0] && b[1] <= r) return t->val;\n  bool flg= (bias\
+    \ >> (h - 1)) & 1;\n  return M::op(fold(t->ch[flg], l, r, bias), fold(t->ch[!flg],\
+    \ l, r, bias));\n }\n void set_val(np &t, const id_t &k, const T &val) {\n  if\
+    \ (!t) return t= new Node{k, HEIGHT + 1, val}, void();\n  if constexpr (persistent)\
+    \ t= new Node{*t};\n  id_t bits= (k >> ((HEIGHT + 1) - t->len));\n  if (bits !=\
+    \ t->bits) {\n   uint8_t i= 64 - __builtin_clzll(bits ^ t->bits);\n   bool flg=\
+    \ (t->bits >> (i - 1)) & 1;\n   t->ch[flg]= new Node{*t}, t->ch[!flg]= new Node{k,\
+    \ HEIGHT + 1, val};\n   t->len-= i, t->bits>>= i;\n  } else if (t->len != HEIGHT\
+    \ + 1) {\n   set_val(t->ch[(k >> (HEIGHT - t->len)) & 1], k, val);\n  } else return\
+    \ t->val= val, void();\n  if constexpr (monoid_v<M>) t->val= M::op(t->ch[0]->val,\
+    \ t->ch[1]->val);\n }\n T &at_val(np &t, const id_t &k) {\n  if (!t) return t=\
+    \ new Node{k, HEIGHT + 1, def_val()}, t->val;\n  if constexpr (persistent) t=\
+    \ new Node{*t};\n  id_t bits= (k >> ((HEIGHT + 1) - t->len));\n  if (bits != t->bits)\
+    \ {\n   uint8_t i= 64 - __builtin_clzll(bits ^ t->bits);\n   bool flg= (t->bits\
+    \ >> (i - 1)) & 1;\n   t->ch[flg]= new Node{*t}, t->ch[!flg]= new Node{k, HEIGHT\
+    \ + 1, def_val()};\n   t->len-= i, t->bits>>= i;\n   return t->ch[!flg]->val;\n\
+    \  } else if (t->len != HEIGHT + 1) return at_val(t->ch[(k >> (HEIGHT - t->len))\
+    \ & 1], k);\n  return t->val;\n }\n bool is_null(np &t, const id_t &k) {\n  if\
+    \ (!t || (k >> ((HEIGHT + 1) - t->len)) != t->bits) return true;\n  if (t->len\
+    \ == HEIGHT + 1) return false;\n  return is_null(t->ch[(k >> (HEIGHT - t->len))\
+    \ & 1], k);\n }\n T get_val(np &t, const id_t &k) {\n  if (!t || (k >> ((HEIGHT\
+    \ + 1) - t->len)) != t->bits) return def_val();\n  if (t->len == HEIGHT + 1) return\
+    \ t->val;\n  return get_val(t->ch[(k >> (HEIGHT - t->len)) & 1], k);\n }\n template\
+    \ <bool last> static inline T calc_op(np &t, const T &v) {\n  if constexpr (last)\
+    \ return M::op((t ? t->val : def_val()), v);\n  else return M::op(v, (t ? t->val\
+    \ : def_val()));\n }\n template <bool last> static inline bool is_in(const id_t\
+    \ &m, const id_t &k) {\n  if constexpr (last) return k <= m;\n  else return m\
+    \ <= k;\n }\n static inline np next(np &t, const uint8_t &h, const bool &f) {\n\
+    \  if (!t) return nullptr;\n  uint8_t len= h + t->len - (HEIGHT + 1);\n  if (!len)\
+    \ return t->ch[f];\n  return (f == ((t->bits >> (len - 1)) & 1)) ? t : nullptr;\n\
+    \ }\n template <bool last, class C, std::size_t N> static id_t find(const id_t\
+    \ &k, std::array<id_t, 2> b, const id_t &bias, uint8_t h, const C &check, std::array<np,\
+    \ N> &ts, std::array<T, N> &sums) {\n  static_assert(monoid_v<M>, \"\\\"find\\\
+    \" is not available\\n\");\n  static std::array<T, N> sums2;\n  if (std::all_of(ts.begin(),\
+    \ ts.end(), [](np t) { return !t; })) return -1;\n  if (!h) {\n   for (std::size_t\
+    \ i= N; i--;) sums[i]= calc_op<last>(ts[i], sums[i]);\n   return std::apply(check,\
+    \ sums) ? std::get<last>(b) : -1;\n  } else if (is_in<last>(k, b[0])) {\n   for\
+    \ (std::size_t i= N; i--;) sums2[i]= calc_op<last>(ts[i], sums[i]);\n   if (!std::apply(check,\
     \ sums2)) return sums= std::move(sums2), -1;\n  }\n  std::array<np, N> ss;\n \
     \ id_t m= (b[0] + b[1]) >> 1;\n  bool flg= (bias >> (h - 1)) & 1;\n  if (!is_in<last>(m,\
     \ k)) {\n   for (std::size_t i= N; i--;) ss[i]= next(ts[i], h, flg);\n   id_t\
@@ -257,7 +257,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Patricia.hpp
   requiredBy: []
-  timestamp: '2023-10-29 20:17:22+09:00'
+  timestamp: '2023-10-30 09:38:10+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2270.Patricia.test.cpp

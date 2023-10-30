@@ -2,17 +2,17 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
   - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
     title: test/aoj/1023.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3086.LiCT.test.cpp
     title: test/aoj/3086.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
   - icon: ':x:'

@@ -6,14 +6,14 @@ data:
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/OnlineDynamicConnectivity.hpp
     title: Online-Dynamic-Connectivity
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2893.onlinedicon.test.cpp
     title: test/aoj/2893.onlinedicon.test.cpp
   - icon: ':x:'
@@ -30,36 +30,37 @@ data:
     title: test/yukicoder/828.ETT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/EulerTourTree.hpp\"\n#include <algorithm>\n\
-    #include <string>\n#include <unordered_map>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\
-    \n#include <type_traits>\n#define MEMBER_MACRO(member, Dummy, name, type1, type2,\
-    \ last) \\\n template <class tClass> struct name##member { \\\n  template <class\
-    \ U, Dummy> static type1 check(U *); \\\n  static type2 check(...); \\\n  static\
-    \ tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member,\
-    \ Dummy, has_, std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
-    #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
-    \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
-    \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
-    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
-    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
-    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 6 \"src/DataStructure/EulerTourTree.hpp\"\
-    \ntemplate <typename M= void, size_t NODE_SIZE= 4'000'000> class EulerTourTree\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
-    \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n template <class\
-    \ L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n\
-    \ template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n using node_id= int;\n using\
-    \ vertex_id= int;\n struct Node_B {\n  node_id ch[2], par;\n  uint64_t flag;\n\
-    \ };\n template <class D, bool mo, bool du> struct Node_D: Node_B {};\n template\
-    \ <class D> struct Node_D<D, 1, 0>: Node_B {\n  typename M::T val= M::ti(), sum=\
-    \ M::ti();\n };\n template <class D> struct Node_D<D, 0, 1>: Node_B {\n  typename\
-    \ M::T val;\n  typename M::E laz;\n  bool laz_flg;\n };\n template <class D> struct\
-    \ Node_D<D, 1, 1>: Node_B {\n  typename M::T val= M::ti(), sum= M::ti();\n  typename\
-    \ M::E laz;\n  bool laz_flg;\n };\n using Node= Node_D<void, monoid_v<M>, dual_v<M>>;\n\
+    #include <string>\n#include <unordered_map>\n#include <cstddef>\n#include <cstdint>\n\
+    #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
+    \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
+    \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
+    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member,\
+    \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
+    \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
+    \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
+    \ type2, using type= decltype(check(mClass))) \\\n template <class tClass> using\
+    \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
+    \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
+    \ myself_or_, tClass);\n#line 8 \"src/DataStructure/EulerTourTree.hpp\"\ntemplate\
+    \ <typename M= void, size_t NODE_SIZE= 4'000'000> class EulerTourTree {\n HAS_MEMBER(op);\n\
+    \ HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n\
+    \ HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n template <class L> static constexpr\
+    \ bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n template\
+    \ <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>, has_E<L>,\
+    \ has_mapping<L>, has_composition<L>>;\n using node_id= int;\n using vertex_id=\
+    \ int;\n struct Node_B {\n  node_id ch[2], par;\n  uint64_t flag;\n };\n template\
+    \ <class D, bool mo, bool du> struct Node_D: Node_B {};\n template <class D> struct\
+    \ Node_D<D, 1, 0>: Node_B {\n  typename M::T val= M::ti(), sum= M::ti();\n };\n\
+    \ template <class D> struct Node_D<D, 0, 1>: Node_B {\n  typename M::T val;\n\
+    \  typename M::E laz;\n  bool laz_flg;\n };\n template <class D> struct Node_D<D,\
+    \ 1, 1>: Node_B {\n  typename M::T val= M::ti(), sum= M::ti();\n  typename M::E\
+    \ laz;\n  bool laz_flg;\n };\n using Node= Node_D<void, monoid_v<M>, dual_v<M>>;\n\
     public:\n using T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\nprivate:\n\
     \ static inline Node n[NODE_SIZE];\n static inline node_id ni= 1;\n node_id new_edge(int\
     \ s, int d, bool hi) {\n  int i= ni++, ri= ni++;\n  n[i].flag= (uint64_t(s) <<\
@@ -137,11 +138,12 @@ data:
     \    splay(v), loop= false;\n    } else v= n[v].ch[!(n[v].ch[0] && (n[n[v].ch[0]].flag\
     \ & 0b1000))];\n   }\n  return 0;\n }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <string>\n#include <unordered_map>\n\
-    #include \"src/Internal/HAS_CHECK.hpp\"\ntemplate <typename M= void, size_t NODE_SIZE=\
-    \ 4'000'000> class EulerTourTree {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n\
-    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
-    \ template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
-    \ has_op<L>, has_ti<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
+    #include <cstddef>\n#include <cstdint>\n#include \"src/Internal/HAS_CHECK.hpp\"\
+    \ntemplate <typename M= void, size_t NODE_SIZE= 4'000'000> class EulerTourTree\
+    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
+    \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n template <class\
+    \ L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n\
+    \ template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
     \ has_E<L>, has_mapping<L>, has_composition<L>>;\n using node_id= int;\n using\
     \ vertex_id= int;\n struct Node_B {\n  node_id ch[2], par;\n  uint64_t flag;\n\
     \ };\n template <class D, bool mo, bool du> struct Node_D: Node_B {};\n template\
@@ -232,8 +234,8 @@ data:
   path: src/DataStructure/EulerTourTree.hpp
   requiredBy:
   - src/DataStructure/OnlineDynamicConnectivity.hpp
-  timestamp: '2023-10-29 20:17:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-30 09:38:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2235.onlinedicon.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp
