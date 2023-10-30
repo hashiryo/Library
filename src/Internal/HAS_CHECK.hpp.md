@@ -108,13 +108,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.WBT.test.cpp
     title: test/aoj/ITP2_4_C.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':x:'

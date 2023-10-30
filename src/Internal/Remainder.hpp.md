@@ -54,7 +54,7 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -95,7 +95,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':x:'
@@ -131,7 +131,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
   - icon: ':heavy_check_mark:'
@@ -149,22 +149,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_d.test.cpp
     title: test/atcoder/abc135_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'

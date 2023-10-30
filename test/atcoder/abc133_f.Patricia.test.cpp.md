@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc133/tasks/abc133_f
@@ -244,7 +244,7 @@ data:
   path: test/atcoder/abc133_f.Patricia.test.cpp
   requiredBy: []
   timestamp: '2023-10-30 14:53:23+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.Patricia.test.cpp
 layout: document

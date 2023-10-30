@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'

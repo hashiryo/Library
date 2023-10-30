@@ -21,9 +21,9 @@ data:
     \ \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n#line 2 \"\
     src/Math/Rational.hpp\"\n#include <string>\n#include <limits>\n#include <sstream>\n\
     #line 2 \"src/Math/binary_gcd.hpp\"\n#include <type_traits>\n#include <algorithm>\n\
-    template <class Int> constexpr int bsf(Int a) {\n if constexpr (sizeof(Int) ==\
-    \ 16) {\n  uint64_t lo= a & uint64_t(-1);\n  return lo ? __builtin_ctzll(lo) :\
-    \ 64 + __builtin_ctzll(a >> 64);\n } else if constexpr (sizeof(Int) == 8) return\
+    #include <cstdint>\ntemplate <class Int> constexpr int bsf(Int a) {\n if constexpr\
+    \ (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n  return lo ? __builtin_ctzll(lo)\
+    \ : 64 + __builtin_ctzll(a >> 64);\n } else if constexpr (sizeof(Int) == 8) return\
     \ __builtin_ctzll(a);\n else return __builtin_ctz(a);\n}\ntemplate <class Int>\
     \ constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0 || b == 0) return a +\
     \ b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int\
@@ -106,7 +106,7 @@ data:
   isVerificationFile: true
   path: test/unit_test/constexpr_rational.test.cpp
   requiredBy: []
-  timestamp: '2023-09-21 23:45:18+09:00'
+  timestamp: '2023-10-30 16:02:30+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/constexpr_rational.test.cpp

@@ -10,7 +10,7 @@ data:
   - icon: ':x:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   - icon: ':question:'

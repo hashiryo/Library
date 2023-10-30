@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy:

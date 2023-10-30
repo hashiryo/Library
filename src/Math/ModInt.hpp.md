@@ -76,7 +76,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':x:'
@@ -127,22 +127,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_E.test.cpp
     title: test/aoj/NTL_2_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_d.test.cpp
     title: test/atcoder/abc135_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'

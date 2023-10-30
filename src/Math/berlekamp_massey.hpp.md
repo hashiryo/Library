@@ -2,14 +2,14 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
   - icon: ':x:'
@@ -29,7 +29,7 @@ data:
     title: test/yukicoder/310.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/berlekamp_massey.hpp\"\n#include <vector>\n// a[n]\
@@ -56,7 +56,7 @@ data:
   requiredBy:
   - src/LinearAlgebra/MinimalPolynomial.hpp
   timestamp: '2023-08-05 23:01:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/2397.SparseMat.test.cpp
   - test/aoj/2397.MinPoly.test.cpp

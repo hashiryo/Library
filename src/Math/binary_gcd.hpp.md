@@ -5,7 +5,7 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':x:'
@@ -37,13 +37,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2159.rational.test.cpp
     title: test/aoj/2159.rational.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/unit_test/constexpr_binary_gcd.test.cpp
     title: test/unit_test/constexpr_binary_gcd.test.cpp
   - icon: ':x:'
@@ -79,23 +79,23 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/binary_gcd.hpp\"\n#include <type_traits>\n#include\
-    \ <algorithm>\ntemplate <class Int> constexpr int bsf(Int a) {\n if constexpr\
-    \ (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n  return lo ? __builtin_ctzll(lo)\
-    \ : 64 + __builtin_ctzll(a >> 64);\n } else if constexpr (sizeof(Int) == 8) return\
+    \ <algorithm>\n#include <cstdint>\ntemplate <class Int> constexpr int bsf(Int\
+    \ a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
+    \  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n } else if\
+    \ constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n else return __builtin_ctz(a);\n\
+    }\ntemplate <class Int> constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0\
+    \ || b == 0) return a + b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>=\
+    \ m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a,\
+    \ a= (f ? d : -d) >> s;\n }\n return a << std::min(n, m);\n}\n"
+  code: "#pragma once\n#include <type_traits>\n#include <algorithm>\n#include <cstdint>\n\
+    template <class Int> constexpr int bsf(Int a) {\n if constexpr (sizeof(Int) ==\
+    \ 16) {\n  uint64_t lo= a & uint64_t(-1);\n  return lo ? __builtin_ctzll(lo) :\
+    \ 64 + __builtin_ctzll(a >> 64);\n } else if constexpr (sizeof(Int) == 8) return\
     \ __builtin_ctzll(a);\n else return __builtin_ctz(a);\n}\ntemplate <class Int>\
     \ constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0 || b == 0) return a +\
     \ b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int\
     \ d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n\
-    \ }\n return a << std::min(n, m);\n}\n"
-  code: "#pragma once\n#include <type_traits>\n#include <algorithm>\ntemplate <class\
-    \ Int> constexpr int bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t\
-    \ lo= a & uint64_t(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a\
-    \ >> 64);\n } else if constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n\
-    \ else return __builtin_ctz(a);\n}\ntemplate <class Int> constexpr Int binary_gcd(Int\
-    \ a, Int b) {\n if (a == 0 || b == 0) return a + b;\n int n= bsf(a), m= bsf(b),\
-    \ s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n\
-    \  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n return a << std::min(n,\
-    \ m);\n}"
+    \ }\n return a << std::min(n, m);\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/binary_gcd.hpp
@@ -106,7 +106,7 @@ data:
   - src/Math/Factors.hpp
   - src/Math/mod_tetration.hpp
   - src/Math/ModInt_Exp.hpp
-  timestamp: '2023-08-06 00:46:02+09:00'
+  timestamp: '2023-10-30 16:02:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2009.rational.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D
@@ -79,32 +79,33 @@ data:
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 2 \"src/Math/binary_gcd.hpp\"\n#include\
-    \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\ntemplate <class Int> constexpr\
-    \ int bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n  uint64_t lo= a & uint64_t(-1);\n\
-    \  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n } else if\
-    \ constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n else return __builtin_ctz(a);\n\
-    }\ntemplate <class Int> constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0\
-    \ || b == 0) return a + b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>=\
-    \ m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a,\
-    \ a= (f ? d : -d) >> s;\n }\n return a << std::min(n, m);\n}\n#line 8 \"src/Math/Factors.hpp\"\
-    \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
-    \ T *ed) {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j >\
-    \ i;)\n   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]=\
-    \ tmp;\n}\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr\
-    \ size_t size() const { return sz; }\n constexpr auto &operator[](int i) const\
-    \ { return dat[i]; }\n constexpr auto *begin() const { return dat; }\n constexpr\
-    \ auto *end() const { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t\
-    \ sz= 0;\n friend ostream &operator<<(ostream &os, const ConstexprArray &r) {\n\
-    \  os << \"[\";\n  for (size_t i= 0; i < r.sz; ++i) os << r[i] << \",]\"[i ==\
-    \ r.sz - 1];\n  return os;\n }\n};\nclass Factors: public ConstexprArray<pair<u64,\
-    \ uint16_t>, 16> {\n template <class Uint, class MP> static constexpr Uint rho(Uint\
-    \ n, Uint c) {\n  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x,\
-    \ x), c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2),\
-    \ z= 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for\
-    \ (x= y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q),\
-    \ n), k+= m)\n    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y,\
-    \ x));\n  }\n  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z,\
-    \ x)), n);\n   } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
+    \ <type_traits>\n#line 4 \"src/Math/binary_gcd.hpp\"\n#include <cstdint>\ntemplate\
+    \ <class Int> constexpr int bsf(Int a) {\n if constexpr (sizeof(Int) == 16) {\n\
+    \  uint64_t lo= a & uint64_t(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a\
+    \ >> 64);\n } else if constexpr (sizeof(Int) == 8) return __builtin_ctzll(a);\n\
+    \ else return __builtin_ctz(a);\n}\ntemplate <class Int> constexpr Int binary_gcd(Int\
+    \ a, Int b) {\n if (a == 0 || b == 0) return a + b;\n int n= bsf(a), m= bsf(b),\
+    \ s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n\
+    \  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n return a << std::min(n,\
+    \ m);\n}\n#line 8 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
+    \ <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg,\
+    \ i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1];\
+    \ bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t\
+    \ _Nm> struct ConstexprArray {\n constexpr size_t size() const { return sz; }\n\
+    \ constexpr auto &operator[](int i) const { return dat[i]; }\n constexpr auto\
+    \ *begin() const { return dat; }\n constexpr auto *end() const { return dat +\
+    \ sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream\
+    \ &os, const ConstexprArray &r) {\n  os << \"[\";\n  for (size_t i= 0; i < r.sz;\
+    \ ++i) os << r[i] << \",]\"[i == r.sz - 1];\n  return os;\n }\n};\nclass Factors:\
+    \ public ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class\
+    \ MP> static constexpr Uint rho(Uint n, Uint c) {\n  const MP md(n);\n  auto f=\
+    \ [&md, n, c](Uint x) { return md.plus(md.mul(x, x), c); };\n  const Uint m= 1LL\
+    \ << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z= 1, q= md.set(1), g= 1;\n  for\
+    \ (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x= y, i= r; i--;) y= f(y);\n  \
+    \ for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q), n), k+= m)\n    for\
+    \ (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y, x));\n  }\n\
+    \  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z, x)), n);\n \
+    \  } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
     \ n) {\n  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n <\
     \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
     \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
@@ -146,8 +147,8 @@ data:
   isVerificationFile: true
   path: test/aoj/NTL_1_D.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-10-30 16:02:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_1_D.test.cpp
 layout: document

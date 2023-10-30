@@ -34,7 +34,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/PersistentArray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':warning:'
@@ -265,10 +265,10 @@ data:
     - icon: ':x:'
       path: src/LinearAlgebra/Matrix.hpp
       title: "\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/MinimalPolynomial.hpp
       title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/LinearAlgebra/Vector.hpp
       title: "\u30D9\u30AF\u30C8\u30EB"
     - icon: ':x:'
@@ -296,7 +296,7 @@ data:
     - icon: ':x:'
       path: src/Math/DiscreteLogarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':question:'
@@ -329,7 +329,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/TwoSatisfiability.hpp
       title: 2-SAT
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
     - icon: ':question:'
@@ -671,7 +671,7 @@ data:
     - icon: ':x:'
       path: test/aoj/2397.MinPoly.test.cpp
       title: test/aoj/2397.MinPoly.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2397.SparseMat.test.cpp
       title: test/aoj/2397.SparseMat.test.cpp
     - icon: ':x:'
@@ -1019,7 +1019,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_4_C.WBT.test.cpp
       title: test/aoj/ITP2_4_C.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_1_D.test.cpp
       title: test/aoj/NTL_1_D.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1037,7 +1037,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_E.test.cpp
       title: test/aoj/NTL_2_E.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/NTL_2_F.test.cpp
       title: test/aoj/NTL_2_F.test.cpp
   - name: test/atcoder
@@ -1051,25 +1051,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc127_f.test.cpp
       title: test/atcoder/abc127_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc129_e.test.cpp
       title: test/atcoder/abc129_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.DynSeg.test.cpp
       title: test/atcoder/abc133_f.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.Patricia.test.cpp
       title: test/atcoder/abc133_f.Patricia.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc135_d.test.cpp
       title: test/atcoder/abc135_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc136_d.test.cpp
       title: test/atcoder/abc136_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1078,7 +1078,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc155_e.test.cpp
       title: test/atcoder/abc155_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc160_f.test.cpp
       title: test/atcoder/abc160_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1289,7 +1289,7 @@ data:
       title: test/hackerrank/library-query.SqrtDC.test.cpp
   - name: test/unit_test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/unit_test/constexpr_binary_gcd.test.cpp
       title: test/unit_test/constexpr_binary_gcd.test.cpp
     - icon: ':x:'
