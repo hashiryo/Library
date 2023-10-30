@@ -36,47 +36,47 @@ data:
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
     \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 9 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \ntemplate <class M, size_t NODE_SIZE= 1 << 22> class WeightBalancedTree {\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
-    \ NULLPTR_OR(E);\n template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
+    \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n\
+    \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n struct NodeB {\n  size_t sz=\
-    \ 0;\n };\n template <class D, bool sg, bool du> struct NodeD: NodeB {\n  inline\
-    \ size_t size() const { return this->sz; }\n };\n template <class D> struct NodeD<D,\
-    \ 1, 0>: NodeB {\n  typename M::T val;\n  inline size_t size() const { return\
-    \ this->sz; }\n };\n template <class D> struct NodeD<D, 0, 1>: NodeB {\n  typename\
-    \ M::E laz;\n  inline bool laz_flg() const { return this->sz >> 31; }\n  inline\
-    \ size_t size() const { return this->sz & 0x7fffffff; }\n };\n template <class\
-    \ D> struct NodeD<D, 1, 1>: NodeB {\n  typename M::T val;\n  typename M::E laz;\n\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct NodeB {\n  size_t sz= 0;\n };\n template\
+    \ <class D, bool sg, bool du> struct NodeD: NodeB {\n  inline size_t size() const\
+    \ { return this->sz; }\n };\n template <class D> struct NodeD<D, 1, 0>: NodeB\
+    \ {\n  typename M::T val;\n  inline size_t size() const { return this->sz; }\n\
+    \ };\n template <class D> struct NodeD<D, 0, 1>: NodeB {\n  typename M::E laz;\n\
     \  inline bool laz_flg() const { return this->sz >> 31; }\n  inline size_t size()\
-    \ const { return this->sz & 0x7fffffff; }\n };\n using Node= NodeD<void, semigroup_v<M>,\
-    \ dual_v<M>>;\n using np= Node *;\n struct NodeM: Node {\n  np ch[2];\n  NodeM()\
-    \ {}\n  NodeM(np l, np r): ch{l, r} {}\n };\n template <class D, bool sg, bool\
-    \ du> struct NodeLD: Node {};\n template <class D> struct NodeLD<D, 0, 1>: Node\
-    \ {\n  typename M::T val;\n };\n template <class D> struct NodeLD<D, 0, 0>: Node\
-    \ {\n  M val;\n };\n using NodeL= NodeLD<void, semigroup_v<M>, dual_v<M>>;\n using\
-    \ T= decltype(NodeL::val);\n using E= nullptr_or_E_t<M>;\n using WBT= WeightBalancedTree;\n\
-    \ static inline int nmi= 0, nli= 0;\n static inline NodeM nm[NODE_SIZE];\n static\
-    \ inline NodeL nl[NODE_SIZE];\n np root;\n static inline np &ch(np t, bool rig)\
-    \ { return ((NodeM *)t)->ch[rig]; }\n static inline np new_nm(np l, np r) { return\
-    \ &(nm[nmi++]= NodeM(l, r)); }\n static inline np new_nl(T x) { return nl[nli]=\
-    \ NodeL(), nl[nli].val= x, nl[nli].sz= 1, nl + nli++; }\n static inline np cp_nm(np\
-    \ &t) { return t= &(nm[nmi++]= NodeM(*((NodeM *)t))); }\n static inline np cp_nl(np\
-    \ &t) { return t= &(nl[nli++]= NodeL(*((NodeL *)t))); }\n static inline np cp_node(np\
-    \ &t) { return t->size() == 1 ? cp_nl(t) : cp_nm(t); }\n static inline void update(np\
+    \ const { return this->sz & 0x7fffffff; }\n };\n template <class D> struct NodeD<D,\
+    \ 1, 1>: NodeB {\n  typename M::T val;\n  typename M::E laz;\n  inline bool laz_flg()\
+    \ const { return this->sz >> 31; }\n  inline size_t size() const { return this->sz\
+    \ & 0x7fffffff; }\n };\n using Node= NodeD<void, semigroup_v<M>, dual_v<M>>;\n\
+    \ using np= Node *;\n struct NodeM: Node {\n  np ch[2];\n  NodeM() {}\n  NodeM(np\
+    \ l, np r): ch{l, r} {}\n };\n template <class D, bool sg, bool du> struct NodeLD:\
+    \ Node {};\n template <class D> struct NodeLD<D, 0, 1>: Node {\n  typename M::T\
+    \ val;\n };\n template <class D> struct NodeLD<D, 0, 0>: Node {\n  M val;\n };\n\
+    \ using NodeL= NodeLD<void, semigroup_v<M>, dual_v<M>>;\n using T= decltype(NodeL::val);\n\
+    \ using E= nullptr_or_E_t<M>;\n using WBT= WeightBalancedTree;\n static inline\
+    \ int nmi= 0, nli= 0;\n static inline NodeM nm[NODE_SIZE];\n static inline NodeL\
+    \ nl[NODE_SIZE];\n np root;\n static inline np &ch(np t, bool rig) { return ((NodeM\
+    \ *)t)->ch[rig]; }\n static inline np new_nm(np l, np r) { return &(nm[nmi++]=\
+    \ NodeM(l, r)); }\n static inline np new_nl(T x) { return nl[nli]= NodeL(), nl[nli].val=\
+    \ x, nl[nli].sz= 1, nl + nli++; }\n static inline np cp_nm(np &t) { return t=\
+    \ &(nm[nmi++]= NodeM(*((NodeM *)t))); }\n static inline np cp_nl(np &t) { return\
+    \ t= &(nl[nli++]= NodeL(*((NodeL *)t))); }\n static inline np cp_node(np &t) {\
+    \ return t->size() == 1 ? cp_nl(t) : cp_nm(t); }\n static inline void update(np\
     \ t) {\n  if constexpr (dual_v<M>) t->sz= (ch(t, 0)->size() + ch(t, 1)->size())\
     \ | (t->sz & 0x80000000);\n  else t->sz= ch(t, 0)->size() + ch(t, 1)->size();\n\
     \  if constexpr (semigroup_v<M>) t->val= M::op(ch(t, 0)->val, ch(t, 1)->val);\n\
     \ }\n static inline T &reflect(np t) {\n  if constexpr (dual_v<M> && !semigroup_v<M>)\n\
-    \   if (t->laz_flg()) M::mapping(((NodeL *)t)->val, t->laz, 1), t->sz&= 0x7fffffff;\n\
+    \   if (t->laz_flg()) M::mp(((NodeL *)t)->val, t->laz, 1), t->sz&= 0x7fffffff;\n\
     \  return ((NodeL *)t)->val;\n }\n static inline void propagate(np t, const E\
-    \ &x) {\n  if (t->laz_flg()) M::composition(t->laz, x);\n  else t->laz= x;\n \
-    \ if constexpr (semigroup_v<M>) M::mapping(t->val, x, t->size());\n  t->sz|= 0x80000000;\n\
-    \ }\n static inline void push(np t) {\n  if (t->laz_flg()) propagate(cp_node(ch(t,\
-    \ 0)), t->laz), propagate(cp_node(ch(t, 1)), t->laz), t->sz&= 0x7fffffff;\n }\n\
-    \ template <bool b> static inline np helper(std::array<np, 2> &m) {\n  if constexpr\
-    \ (dual_v<M>) push(m[b]);\n  np c;\n  if constexpr (b) c= submerge({m[0], ch(m[1],\
-    \ 0)});\n  else c= submerge({ch(m[0], 1), m[1]});\n  if (ch(cp_nm(m[b]), b)->size()\
-    \ * 4 >= c->size()) return ch(m[b], !b)= c, update(m[b]), m[b];\n  return ch(m[b],\
+    \ &x) {\n  if (t->laz_flg()) M::cp(t->laz, x);\n  else t->laz= x;\n  if constexpr\
+    \ (semigroup_v<M>) M::mp(t->val, x, t->size());\n  t->sz|= 0x80000000;\n }\n static\
+    \ inline void push(np t) {\n  if (t->laz_flg()) propagate(cp_node(ch(t, 0)), t->laz),\
+    \ propagate(cp_node(ch(t, 1)), t->laz), t->sz&= 0x7fffffff;\n }\n template <bool\
+    \ b> static inline np helper(std::array<np, 2> &m) {\n  if constexpr (dual_v<M>)\
+    \ push(m[b]);\n  np c;\n  if constexpr (b) c= submerge({m[0], ch(m[1], 0)});\n\
+    \  else c= submerge({ch(m[0], 1), m[1]});\n  if (ch(cp_nm(m[b]), b)->size() *\
+    \ 4 >= c->size()) return ch(m[b], !b)= c, update(m[b]), m[b];\n  return ch(m[b],\
     \ !b)= ch(c, b), update(ch(c, b)= m[b]), update(c), c;\n }\n static inline np\
     \ submerge(std::array<np, 2> m) {\n  if (m[0]->size() > m[1]->size() * 4) return\
     \ helper<0>(m);\n  if (m[1]->size() > m[0]->size() * 4) return helper<1>(m);\n\
@@ -167,7 +167,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/persistent_queue.WBT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/persistent_queue.WBT.test.cpp

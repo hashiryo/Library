@@ -52,18 +52,18 @@ data:
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
     \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 10 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \ntemplate <typename M, bool persistent= false, uint8_t HEIGHT= 31> class SegmentTree_Dynamic\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
+    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n\
     \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class L> static constexpr\
     \ bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n template\
     \ <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n using id_t= long long;\n template <class\
-    \ T, class tDerived> struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n\
-    \ };\n template <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M,\
-    \ Node_D<mo, du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo,\
-    \ du, typename std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo,\
-    \ du>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>:\
-    \ Node_B<typename M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false;\n };\n using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
+    \ has_mp<L>, has_cp<L>>;\n using id_t= long long;\n template <class T, class tDerived>\
+    \ struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n };\n template\
+    \ <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M, Node_D<mo,\
+    \ du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename\
+    \ std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo, du>> {};\n template\
+    \ <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>: Node_B<typename\
+    \ M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
+    \ using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
     \ using E= nullptr_or_E_t<M>;\n using np= Node *;\n np root;\n static inline constexpr\
     \ T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n  else return T();\n\
     \ }\n template <class S> np build(id_t n, id_t l, id_t r, const S &bg) {\n  if\
@@ -80,10 +80,10 @@ data:
     \ *(itr + b[0])= t->val;\n }\n static inline void update(np &t) {\n  t->val= def_val();\n\
     \  if (t->ch[0]) t->val= M::op(t->ch[0]->val, t->val);\n  if (t->ch[1]) t->val=\
     \ M::op(t->val, t->ch[1]->val);\n }\n static inline T &reflect(np &t) {\n  if\
-    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mapping(t->val,\
-    \ t->lazy, 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void\
-    \ propagate(np &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::composition(t->lazy,\
-    \ x), x) : t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mapping(t->val,\
+    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mp(t->val, t->lazy,\
+    \ 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void propagate(np\
+    \ &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::cp(t->lazy, x), x) :\
+    \ t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mp(t->val,\
     \ x, sz);\n }\n static inline void cp_node(np &t) {\n  if (!t) t= new Node{def_val()};\n\
     \  else if constexpr (persistent) t= new Node(*t);\n }\n static inline void push(np\
     \ &t, const id_t &sz) {\n  if (!t->lazy_flg) return;\n  cp_node(t->ch[0]), cp_node(t->ch[1]),\
@@ -169,41 +169,40 @@ data:
     \ <algorithm>\n#include <tuple>\n#include <cstddef>\n#include <cstdint>\n#include\
     \ \"src/Internal/HAS_CHECK.hpp\"\ntemplate <typename M, bool persistent= false,\
     \ uint8_t HEIGHT= 31> class SegmentTree_Dynamic {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n\
-    \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
-    \ NULLPTR_OR(E);\n template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
+    \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n\
+    \ template <class L> static constexpr bool monoid_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>, has_ti<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n using id_t= long long;\n template\
-    \ <class T, class tDerived> struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr,\
-    \ nullptr};\n };\n template <bool mo, bool du, typename tEnable= void> struct\
-    \ Node_D: Node_B<M, Node_D<mo, du, tEnable>> {};\n template <bool mo, bool du>\
-    \ struct Node_D<mo, du, typename std::enable_if_t<mo && !du>>: Node_B<typename\
-    \ M::T, Node_D<mo, du>> {};\n template <bool mo, bool du> struct Node_D<mo, du,\
-    \ typename std::enable_if_t<du>>: Node_B<typename M::T, Node_D<mo, du>> {\n  typename\
-    \ M::E lazy;\n  bool lazy_flg= false;\n };\n using Node= Node_D<monoid_v<M>, dual_v<M>>;\n\
-    \ using T= decltype(Node::val);\n using E= nullptr_or_E_t<M>;\n using np= Node\
-    \ *;\n np root;\n static inline constexpr T def_val() {\n  if constexpr (monoid_v<M>)\
-    \ return M::ti();\n  else return T();\n }\n template <class S> np build(id_t n,\
-    \ id_t l, id_t r, const S &bg) {\n  if (n <= l) return nullptr;\n  if (r - l ==\
-    \ 1) {\n   if constexpr (std::is_same_v<S, T>) return new Node{bg};\n   else return\
-    \ new Node{*(bg + l)};\n  }\n  id_t m= (r + l) / 2;\n  np t= new Node{def_val(),\
-    \ {build(n, l, m, bg), build(n, m, r, bg)}};\n  if constexpr (monoid_v<M>) update(t);\n\
-    \  return t;\n }\n void dump(np t, const id_t &l, const id_t &r, std::array<id_t,\
-    \ 2> b, typename std::vector<T>::iterator itr) {\n  if (r <= b[0] || b[1] <= l)\
-    \ return;\n  if (l <= b[0] && b[1] <= r && !t) {\n   for (id_t i= b[0]; i < b[1];\
-    \ i++) *(itr + i)= def_val();\n  } else if (b[1] - b[0] != 1) {\n   if constexpr\
-    \ (dual_v<M>) push(t, b[1] - b[0]);\n   auto m= (b[0] + b[1]) >> 1;\n   dump(t\
-    \ ? t->ch[0] : nullptr, l, r, {b[0], m}, itr);\n   dump(t ? t->ch[1] : nullptr,\
-    \ l, r, {m, b[1]}, itr);\n  } else *(itr + b[0])= t->val;\n }\n static inline\
-    \ void update(np &t) {\n  t->val= def_val();\n  if (t->ch[0]) t->val= M::op(t->ch[0]->val,\
-    \ t->val);\n  if (t->ch[1]) t->val= M::op(t->val, t->ch[1]->val);\n }\n static\
-    \ inline T &reflect(np &t) {\n  if constexpr (dual_v<M> && !monoid_v<M>)\n   if\
-    \ (t->lazy_flg) M::mapping(t->val, t->lazy, 1), t->lazy_flg= false;\n  return\
-    \ t->val;\n }\n static inline void propagate(np &t, const E &x, const id_t &sz)\
-    \ {\n  t->lazy_flg ? (M::composition(t->lazy, x), x) : t->lazy= x;\n  t->lazy_flg=\
-    \ true;\n  if constexpr (monoid_v<M>) M::mapping(t->val, x, sz);\n }\n static\
-    \ inline void cp_node(np &t) {\n  if (!t) t= new Node{def_val()};\n  else if constexpr\
-    \ (persistent) t= new Node(*t);\n }\n static inline void push(np &t, const id_t\
-    \ &sz) {\n  if (!t->lazy_flg) return;\n  cp_node(t->ch[0]), cp_node(t->ch[1]),\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n using id_t= long long;\n template <class\
+    \ T, class tDerived> struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n\
+    \ };\n template <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M,\
+    \ Node_D<mo, du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo,\
+    \ du, typename std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo,\
+    \ du>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>:\
+    \ Node_B<typename M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg=\
+    \ false;\n };\n using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
+    \ using E= nullptr_or_E_t<M>;\n using np= Node *;\n np root;\n static inline constexpr\
+    \ T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n  else return T();\n\
+    \ }\n template <class S> np build(id_t n, id_t l, id_t r, const S &bg) {\n  if\
+    \ (n <= l) return nullptr;\n  if (r - l == 1) {\n   if constexpr (std::is_same_v<S,\
+    \ T>) return new Node{bg};\n   else return new Node{*(bg + l)};\n  }\n  id_t m=\
+    \ (r + l) / 2;\n  np t= new Node{def_val(), {build(n, l, m, bg), build(n, m, r,\
+    \ bg)}};\n  if constexpr (monoid_v<M>) update(t);\n  return t;\n }\n void dump(np\
+    \ t, const id_t &l, const id_t &r, std::array<id_t, 2> b, typename std::vector<T>::iterator\
+    \ itr) {\n  if (r <= b[0] || b[1] <= l) return;\n  if (l <= b[0] && b[1] <= r\
+    \ && !t) {\n   for (id_t i= b[0]; i < b[1]; i++) *(itr + i)= def_val();\n  } else\
+    \ if (b[1] - b[0] != 1) {\n   if constexpr (dual_v<M>) push(t, b[1] - b[0]);\n\
+    \   auto m= (b[0] + b[1]) >> 1;\n   dump(t ? t->ch[0] : nullptr, l, r, {b[0],\
+    \ m}, itr);\n   dump(t ? t->ch[1] : nullptr, l, r, {m, b[1]}, itr);\n  } else\
+    \ *(itr + b[0])= t->val;\n }\n static inline void update(np &t) {\n  t->val= def_val();\n\
+    \  if (t->ch[0]) t->val= M::op(t->ch[0]->val, t->val);\n  if (t->ch[1]) t->val=\
+    \ M::op(t->val, t->ch[1]->val);\n }\n static inline T &reflect(np &t) {\n  if\
+    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mp(t->val, t->lazy,\
+    \ 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void propagate(np\
+    \ &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::cp(t->lazy, x), x) :\
+    \ t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mp(t->val,\
+    \ x, sz);\n }\n static inline void cp_node(np &t) {\n  if (!t) t= new Node{def_val()};\n\
+    \  else if constexpr (persistent) t= new Node(*t);\n }\n static inline void push(np\
+    \ &t, const id_t &sz) {\n  if (!t->lazy_flg) return;\n  cp_node(t->ch[0]), cp_node(t->ch[1]),\
     \ t->lazy_flg= false;\n  propagate(t->ch[0], t->lazy, sz / 2), propagate(t->ch[1],\
     \ t->lazy, sz / 2);\n }\n T fold(np &t, const id_t &l, const id_t &r, std::array<id_t,\
     \ 2> b, const id_t &bias) {\n  if (!t || r <= b[0] || b[1] <= l) return def_val();\n\
@@ -287,7 +286,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_Dynamic.hpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2270.DynSeg.test.cpp

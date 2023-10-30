@@ -22,7 +22,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':x:'
@@ -63,21 +63,21 @@ data:
     \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
     \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
     \ myself_or_, tClass);\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\ntemplate\
-    \ <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
-    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
+    \ <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n\
+    \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
     \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n struct Node_B {\n  int ch[2]=\
-    \ {-1, -1}, par= -1;\n  bool rev_flg;\n };\n template <class D, bool sg, bool\
-    \ du> struct Node_D: Node_B {};\n template <class D> struct Node_D<D, 1, 0>: Node_B\
-    \ {\n  typename M::T val, sum, rsum;\n };\n template <class D> struct Node_D<D,\
-    \ 0, 1>: Node_B {\n  typename M::T val;\n  typename M::E laz;\n  bool laz_flg;\n\
-    \ };\n template <class D> struct Node_D<D, 1, 1>: Node_B {\n  typename M::T val,\
-    \ sum, rsum;\n  typename M::E laz;\n  bool laz_flg;\n };\n using Node= Node_D<void,\
-    \ semigroup_v<M>, dual_v<M>>;\n using T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\n\
-    \ inline int dir(int i) {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0]\
-    \ == i) return 0;\n   if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n\
-    \ }\n inline void rot(int i) {\n  int p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]=\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct Node_B {\n  int ch[2]= {-1, -1}, par=\
+    \ -1;\n  bool rev_flg;\n };\n template <class D, bool sg, bool du> struct Node_D:\
+    \ Node_B {};\n template <class D> struct Node_D<D, 1, 0>: Node_B {\n  typename\
+    \ M::T val, sum, rsum;\n };\n template <class D> struct Node_D<D, 0, 1>: Node_B\
+    \ {\n  typename M::T val;\n  typename M::E laz;\n  bool laz_flg;\n };\n template\
+    \ <class D> struct Node_D<D, 1, 1>: Node_B {\n  typename M::T val, sum, rsum;\n\
+    \  typename M::E laz;\n  bool laz_flg;\n };\n using Node= Node_D<void, semigroup_v<M>,\
+    \ dual_v<M>>;\n using T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\n inline\
+    \ int dir(int i) {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0] == i)\
+    \ return 0;\n   if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n }\n\
+    \ inline void rot(int i) {\n  int p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]=\
     \ ns[i].ch[!d]) != -1) ns[ns[p].ch[d]].par= p;\n  ns[i].ch[!d]= p, ns[i].par=\
     \ ns[p].par;\n  if ((d= dir(p)) < 2) ns[ns[p].par].ch[d]= i;\n  ns[p].par= i;\n\
     \  if constexpr (semigroup_v<M>) update(p);\n }\n inline void splay(int i) {\n\
@@ -89,10 +89,10 @@ data:
     \ ns[i].sum), ns[i].rsum= M::op(ns[i].rsum, ns[ns[i].ch[0]].rsum);\n  if (ns[i].ch[1]\
     \ != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum), ns[i].rsum= M::op(ns[ns[i].ch[1]].rsum,\
     \ ns[i].rsum);\n }\n inline void propagate(int i, const E &x) {\n  if (i == -1)\
-    \ return;\n  if (ns[i].laz_flg) M::composition(ns[i].laz, x);\n  else ns[i].laz=\
-    \ x;\n  if constexpr (semigroup_v<M>) M::mapping(ns[i].sum, x), M::mapping(ns[i].rsum,\
-    \ x);\n  M::mapping(ns[i].val, x), ns[i].laz_flg= true;\n }\n inline void toggle(int\
-    \ i) {\n  if (i == -1) return;\n  std::swap(ns[i].ch[0], ns[i].ch[1]);\n  if constexpr\
+    \ return;\n  if (ns[i].laz_flg) M::cp(ns[i].laz, x);\n  else ns[i].laz= x;\n \
+    \ if constexpr (semigroup_v<M>) M::mp(ns[i].sum, x), M::mp(ns[i].rsum, x);\n \
+    \ M::mp(ns[i].val, x), ns[i].laz_flg= true;\n }\n inline void toggle(int i) {\n\
+    \  if (i == -1) return;\n  std::swap(ns[i].ch[0], ns[i].ch[1]);\n  if constexpr\
     \ (semigroup_v<M>) std::swap(ns[i].sum, ns[i].rsum);\n  ns[i].rev_flg= !ns[i].rev_flg;\n\
     \ }\n inline void push(int i) {\n  if (ns[i].rev_flg) toggle(ns[i].ch[0]), toggle(ns[i].ch[1]),\
     \ ns[i].rev_flg= false;\n  if constexpr (dual_v<M>)\n   if (ns[i].laz_flg) propagate(ns[i].ch[0],\
@@ -127,21 +127,21 @@ data:
     \ }\n};\n"
   code: "#pragma once\n#include <algorithm>\n#include <vector>\n#include <string>\n\
     #include <cstddef>\n#include <cassert>\n#include \"src/Internal/HAS_CHECK.hpp\"\
-    \ntemplate <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
-    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
+    \ntemplate <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n\
+    \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
     \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n struct Node_B {\n  int ch[2]=\
-    \ {-1, -1}, par= -1;\n  bool rev_flg;\n };\n template <class D, bool sg, bool\
-    \ du> struct Node_D: Node_B {};\n template <class D> struct Node_D<D, 1, 0>: Node_B\
-    \ {\n  typename M::T val, sum, rsum;\n };\n template <class D> struct Node_D<D,\
-    \ 0, 1>: Node_B {\n  typename M::T val;\n  typename M::E laz;\n  bool laz_flg;\n\
-    \ };\n template <class D> struct Node_D<D, 1, 1>: Node_B {\n  typename M::T val,\
-    \ sum, rsum;\n  typename M::E laz;\n  bool laz_flg;\n };\n using Node= Node_D<void,\
-    \ semigroup_v<M>, dual_v<M>>;\n using T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\n\
-    \ inline int dir(int i) {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0]\
-    \ == i) return 0;\n   if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n\
-    \ }\n inline void rot(int i) {\n  int p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]=\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct Node_B {\n  int ch[2]= {-1, -1}, par=\
+    \ -1;\n  bool rev_flg;\n };\n template <class D, bool sg, bool du> struct Node_D:\
+    \ Node_B {};\n template <class D> struct Node_D<D, 1, 0>: Node_B {\n  typename\
+    \ M::T val, sum, rsum;\n };\n template <class D> struct Node_D<D, 0, 1>: Node_B\
+    \ {\n  typename M::T val;\n  typename M::E laz;\n  bool laz_flg;\n };\n template\
+    \ <class D> struct Node_D<D, 1, 1>: Node_B {\n  typename M::T val, sum, rsum;\n\
+    \  typename M::E laz;\n  bool laz_flg;\n };\n using Node= Node_D<void, semigroup_v<M>,\
+    \ dual_v<M>>;\n using T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\n inline\
+    \ int dir(int i) {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0] == i)\
+    \ return 0;\n   if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n }\n\
+    \ inline void rot(int i) {\n  int p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]=\
     \ ns[i].ch[!d]) != -1) ns[ns[p].ch[d]].par= p;\n  ns[i].ch[!d]= p, ns[i].par=\
     \ ns[p].par;\n  if ((d= dir(p)) < 2) ns[ns[p].par].ch[d]= i;\n  ns[p].par= i;\n\
     \  if constexpr (semigroup_v<M>) update(p);\n }\n inline void splay(int i) {\n\
@@ -153,10 +153,10 @@ data:
     \ ns[i].sum), ns[i].rsum= M::op(ns[i].rsum, ns[ns[i].ch[0]].rsum);\n  if (ns[i].ch[1]\
     \ != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum), ns[i].rsum= M::op(ns[ns[i].ch[1]].rsum,\
     \ ns[i].rsum);\n }\n inline void propagate(int i, const E &x) {\n  if (i == -1)\
-    \ return;\n  if (ns[i].laz_flg) M::composition(ns[i].laz, x);\n  else ns[i].laz=\
-    \ x;\n  if constexpr (semigroup_v<M>) M::mapping(ns[i].sum, x), M::mapping(ns[i].rsum,\
-    \ x);\n  M::mapping(ns[i].val, x), ns[i].laz_flg= true;\n }\n inline void toggle(int\
-    \ i) {\n  if (i == -1) return;\n  std::swap(ns[i].ch[0], ns[i].ch[1]);\n  if constexpr\
+    \ return;\n  if (ns[i].laz_flg) M::cp(ns[i].laz, x);\n  else ns[i].laz= x;\n \
+    \ if constexpr (semigroup_v<M>) M::mp(ns[i].sum, x), M::mp(ns[i].rsum, x);\n \
+    \ M::mp(ns[i].val, x), ns[i].laz_flg= true;\n }\n inline void toggle(int i) {\n\
+    \  if (i == -1) return;\n  std::swap(ns[i].ch[0], ns[i].ch[1]);\n  if constexpr\
     \ (semigroup_v<M>) std::swap(ns[i].sum, ns[i].rsum);\n  ns[i].rev_flg= !ns[i].rev_flg;\n\
     \ }\n inline void push(int i) {\n  if (ns[i].rev_flg) toggle(ns[i].ch[0]), toggle(ns[i].ch[1]),\
     \ ns[i].rev_flg= false;\n  if constexpr (dual_v<M>)\n   if (ns[i].laz_flg) propagate(ns[i].ch[0],\
@@ -194,7 +194,7 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree.hpp
   requiredBy: []
-  timestamp: '2023-10-30 09:38:10+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2450.LCT.test.cpp

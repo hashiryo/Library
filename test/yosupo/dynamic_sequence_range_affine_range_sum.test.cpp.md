@@ -48,11 +48,11 @@ data:
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
     \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 8 \"src/DataStructure/SplayTree.hpp\"\
     \ntemplate <class M, bool reversible= false> class SplayTree {\n HAS_MEMBER(op);\n\
-    \ HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n\
-    \ NULLPTR_OR(E);\n template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
+    \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n\
+    \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n template <class T, class tDerived>\
-    \ struct Node_B {\n  T val;\n  tDerived *ch[2], *par;\n  size_t size;\n };\n template\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n template <class T, class tDerived> struct\
+    \ Node_B {\n  T val;\n  tDerived *ch[2], *par;\n  size_t size;\n };\n template\
     \ <class D, bool sg, bool du, bool rev> struct Node_D: Node_B<M, Node_D<D, sg,\
     \ du, rev>> {};\n template <class D> struct Node_D<D, 1, 0, 0>: Node_B<typename\
     \ M::T, Node_D<D, 1, 0, 0>> {\n  typename M::T sum;\n };\n template <class D>\
@@ -88,17 +88,17 @@ data:
     \ np update(np t) {\n  if (!t) return t;\n  t->size= 1;\n  if constexpr (semigroup_v<M>)\
     \ {\n   t->sum= t->val;\n   if constexpr (reversible) t->rsum= t->sum;\n  }\n\
     \  return helper<0>(t), helper<1>(t), t;\n }\n static inline void propagate(np\
-    \ t, const E &x) {\n  if (!t) return;\n  if (t->laz_flg) M::composition(t->laz,\
-    \ x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>) {\n   M::mapping(t->sum,\
-    \ x, t->size);\n   if constexpr (reversible) M::mapping(t->rsum, x, t->size);\n\
-    \  }\n  M::mapping(t->val, x, 1), t->laz_flg= true;\n }\n static inline void toggle(np\
-    \ t) {\n  if (!t) return;\n  if constexpr (semigroup_v<M>) std::swap(t->sum, t->rsum);\n\
-    \  std::swap(t->ch[0], t->ch[1]), t->revflg= !t->revflg;\n }\n static inline void\
-    \ push_propagate(np t) {\n  if (t->laz_flg) propagate(t->ch[0], t->laz), propagate(t->ch[1],\
-    \ t->laz), t->laz_flg= false;\n }\n static inline void push_toggle(np t) {\n \
-    \ if (t->revflg) toggle(t->ch[0]), toggle(t->ch[1]), t->revflg= false;\n }\n static\
-    \ inline int dir(np t) { return t->par->ch[1] == t; }\n static inline void rot(np\
-    \ t) {\n  np p= t->par;\n  int d= dir(t);\n  if ((p->ch[d]= t->ch[!d])) p->ch[d]->par=\
+    \ t, const E &x) {\n  if (!t) return;\n  if (t->laz_flg) M::cp(t->laz, x);\n \
+    \ else t->laz= x;\n  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->size);\n\
+    \   if constexpr (reversible) M::mp(t->rsum, x, t->size);\n  }\n  M::mp(t->val,\
+    \ x, 1), t->laz_flg= true;\n }\n static inline void toggle(np t) {\n  if (!t)\
+    \ return;\n  if constexpr (semigroup_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0],\
+    \ t->ch[1]), t->revflg= !t->revflg;\n }\n static inline void push_propagate(np\
+    \ t) {\n  if (t->laz_flg) propagate(t->ch[0], t->laz), propagate(t->ch[1], t->laz),\
+    \ t->laz_flg= false;\n }\n static inline void push_toggle(np t) {\n  if (t->revflg)\
+    \ toggle(t->ch[0]), toggle(t->ch[1]), t->revflg= false;\n }\n static inline int\
+    \ dir(np t) { return t->par->ch[1] == t; }\n static inline void rot(np t) {\n\
+    \  np p= t->par;\n  int d= dir(t);\n  if ((p->ch[d]= t->ch[!d])) p->ch[d]->par=\
     \ p;\n  t->ch[!d]= p;\n  if ((t->par= p->par)) p->par->ch[dir(p)]= t;\n  p->par=\
     \ t, update(p);\n }\n static inline void splay_(np t) {\n  if constexpr (dual_v<M>)\
     \ push_propagate(t);\n  if constexpr (reversible) push_toggle(t);\n  for (np p=\
@@ -233,9 +233,9 @@ data:
     \ return dat[n];\n}\n#line 6 \"test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp\"\
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct RaffineRsumQ\
     \ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T vl, T vr) { return\
-    \ vl + vr; }\n static void mapping(T &val, const E &f, int sz) { val= f[0] * val\
-    \ + f[1] * sz; }\n static void composition(E &pre, const E &suf) { pre[0]*= suf[0],\
-    \ pre[1]= suf[0] * pre[1] + suf[1]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ vl + vr; }\n static void mp(T &val, const E &f, int sz) { val= f[0] * val +\
+    \ f[1] * sz; }\n static void cp(E &pre, const E &suf) { pre[0]*= suf[0], pre[1]=\
+    \ suf[0] * pre[1] + suf[1]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int i= 0; i < N; i++) cin >>\
     \ a[i];\n SplayTree<RaffineRsumQ, true> splay(a, a + N);\n for (int q= 0; q <\
     \ Q; q++) {\n  int op;\n  cin >> op;\n  if (op == 0) {\n   int i, x;\n   cin >>\
@@ -249,16 +249,16 @@ data:
     \n#include <iostream>\n#include <array>\n#include \"src/DataStructure/SplayTree.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\nusing namespace std;\n\nusing Mint= ModInt<998244353>;\n\
     struct RaffineRsumQ {\n using T= Mint;\n using E= array<Mint, 2>;\n static T op(T\
-    \ vl, T vr) { return vl + vr; }\n static void mapping(T &val, const E &f, int\
-    \ sz) { val= f[0] * val + f[1] * sz; }\n static void composition(E &pre, const\
-    \ E &suf) { pre[0]*= suf[0], pre[1]= suf[0] * pre[1] + suf[1]; }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n Mint\
-    \ a[N];\n for (int i= 0; i < N; i++) cin >> a[i];\n SplayTree<RaffineRsumQ, true>\
-    \ splay(a, a + N);\n for (int q= 0; q < Q; q++) {\n  int op;\n  cin >> op;\n \
-    \ if (op == 0) {\n   int i, x;\n   cin >> i >> x;\n   splay.insert(i, x);\n  }\
-    \ else if (op == 1) {\n   int i;\n   cin >> i;\n   splay.erase(i);\n  } else if\
-    \ (op == 2) {\n   int l, r;\n   cin >> l >> r;\n   splay.reverse(l, r);\n  } else\
-    \ if (op == 3) {\n   int l, r, b, c;\n   cin >> l >> r >> b >> c;\n   splay.apply(l,\
+    \ vl, T vr) { return vl + vr; }\n static void mp(T &val, const E &f, int sz) {\
+    \ val= f[0] * val + f[1] * sz; }\n static void cp(E &pre, const E &suf) { pre[0]*=\
+    \ suf[0], pre[1]= suf[0] * pre[1] + suf[1]; }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >> Q;\n Mint a[N];\n for (int\
+    \ i= 0; i < N; i++) cin >> a[i];\n SplayTree<RaffineRsumQ, true> splay(a, a +\
+    \ N);\n for (int q= 0; q < Q; q++) {\n  int op;\n  cin >> op;\n  if (op == 0)\
+    \ {\n   int i, x;\n   cin >> i >> x;\n   splay.insert(i, x);\n  } else if (op\
+    \ == 1) {\n   int i;\n   cin >> i;\n   splay.erase(i);\n  } else if (op == 2)\
+    \ {\n   int l, r;\n   cin >> l >> r;\n   splay.reverse(l, r);\n  } else if (op\
+    \ == 3) {\n   int l, r, b, c;\n   cin >> l >> r >> b >> c;\n   splay.apply(l,\
     \ r, {b, c});\n  } else {\n   int l, r;\n   cin >> l >> r;\n   cout << splay.fold(l,\
     \ r) << '\\n';\n  }\n }\n return 0;\n}"
   dependsOn:
@@ -271,7 +271,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp

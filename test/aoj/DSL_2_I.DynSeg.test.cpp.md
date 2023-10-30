@@ -35,18 +35,18 @@ data:
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
     \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 10 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \ntemplate <typename M, bool persistent= false, uint8_t HEIGHT= 31> class SegmentTree_Dynamic\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
+    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n\
     \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class L> static constexpr\
     \ bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n template\
     \ <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n using id_t= long long;\n template <class\
-    \ T, class tDerived> struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n\
-    \ };\n template <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M,\
-    \ Node_D<mo, du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo,\
-    \ du, typename std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo,\
-    \ du>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>:\
-    \ Node_B<typename M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false;\n };\n using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
+    \ has_mp<L>, has_cp<L>>;\n using id_t= long long;\n template <class T, class tDerived>\
+    \ struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n };\n template\
+    \ <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M, Node_D<mo,\
+    \ du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename\
+    \ std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo, du>> {};\n template\
+    \ <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>: Node_B<typename\
+    \ M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
+    \ using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
     \ using E= nullptr_or_E_t<M>;\n using np= Node *;\n np root;\n static inline constexpr\
     \ T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n  else return T();\n\
     \ }\n template <class S> np build(id_t n, id_t l, id_t r, const S &bg) {\n  if\
@@ -63,10 +63,10 @@ data:
     \ *(itr + b[0])= t->val;\n }\n static inline void update(np &t) {\n  t->val= def_val();\n\
     \  if (t->ch[0]) t->val= M::op(t->ch[0]->val, t->val);\n  if (t->ch[1]) t->val=\
     \ M::op(t->val, t->ch[1]->val);\n }\n static inline T &reflect(np &t) {\n  if\
-    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mapping(t->val,\
-    \ t->lazy, 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void\
-    \ propagate(np &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::composition(t->lazy,\
-    \ x), x) : t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mapping(t->val,\
+    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mp(t->val, t->lazy,\
+    \ 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void propagate(np\
+    \ &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::cp(t->lazy, x), x) :\
+    \ t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mp(t->val,\
     \ x, sz);\n }\n static inline void cp_node(np &t) {\n  if (!t) t= new Node{def_val()};\n\
     \  else if constexpr (persistent) t= new Node(*t);\n }\n static inline void push(np\
     \ &t, const id_t &sz) {\n  if (!t->lazy_flg) return;\n  cp_node(t->ch[0]), cp_node(t->ch[1]),\
@@ -150,29 +150,29 @@ data:
     \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n};\n#line 5 \"test/aoj/DSL_2_I.DynSeg.test.cpp\"\
     \nusing namespace std;\nstruct RSQandRUQ {\n using T= int;\n using E= int;\n static\
     \ T op(T l, T r) { return l + r; }\n static T ti() { return 0; }\n static void\
-    \ mapping(T& v, E f, int sz) { v= f * sz; }\n static void composition(E& pre,\
-    \ E suf) { pre= suf; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n, q;\n cin >> n >> q;\n SegmentTree_Dynamic<RSQandRUQ> seg(n, 0);\n for\
-    \ (int i= 0; i < q; i++) {\n  int op, s, t;\n  cin >> op >> s >> t;\n  if (op\
-    \ == 0) {\n   int x;\n   cin >> x;\n   seg.apply(s, t + 1, x);\n  } else {\n \
-    \  cout << seg.fold(s, t + 1) << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ mp(T& v, E f, int sz) { v= f * sz; }\n static void cp(E& pre, E suf) { pre=\
+    \ suf; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n,\
+    \ q;\n cin >> n >> q;\n SegmentTree_Dynamic<RSQandRUQ> seg(n, 0);\n for (int i=\
+    \ 0; i < q; i++) {\n  int op, s, t;\n  cin >> op >> s >> t;\n  if (op == 0) {\n\
+    \   int x;\n   cin >> x;\n   seg.apply(s, t + 1, x);\n  } else {\n   cout << seg.fold(s,\
+    \ t + 1) << '\\n';\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/2/DSL_2_I\"\
     \n// \u9045\u5EF6\u4F1D\u642C\u306Everify\n#include <iostream>\n#include \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \nusing namespace std;\nstruct RSQandRUQ {\n using T= int;\n using E= int;\n static\
     \ T op(T l, T r) { return l + r; }\n static T ti() { return 0; }\n static void\
-    \ mapping(T& v, E f, int sz) { v= f * sz; }\n static void composition(E& pre,\
-    \ E suf) { pre= suf; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int n, q;\n cin >> n >> q;\n SegmentTree_Dynamic<RSQandRUQ> seg(n, 0);\n for\
-    \ (int i= 0; i < q; i++) {\n  int op, s, t;\n  cin >> op >> s >> t;\n  if (op\
-    \ == 0) {\n   int x;\n   cin >> x;\n   seg.apply(s, t + 1, x);\n  } else {\n \
-    \  cout << seg.fold(s, t + 1) << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ mp(T& v, E f, int sz) { v= f * sz; }\n static void cp(E& pre, E suf) { pre=\
+    \ suf; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n,\
+    \ q;\n cin >> n >> q;\n SegmentTree_Dynamic<RSQandRUQ> seg(n, 0);\n for (int i=\
+    \ 0; i < q; i++) {\n  int op, s, t;\n  cin >> op >> s >> t;\n  if (op == 0) {\n\
+    \   int x;\n   cin >> x;\n   seg.apply(s, t + 1, x);\n  } else {\n   cout << seg.fold(s,\
+    \ t + 1) << '\\n';\n  }\n }\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree_Dynamic.hpp
   - src/Internal/HAS_CHECK.hpp
   isVerificationFile: true
   path: test/aoj/DSL_2_I.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_I.DynSeg.test.cpp

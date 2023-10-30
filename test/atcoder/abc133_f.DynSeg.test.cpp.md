@@ -41,18 +41,18 @@ data:
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
     \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 10 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \ntemplate <typename M, bool persistent= false, uint8_t HEIGHT= 31> class SegmentTree_Dynamic\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
+    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n\
     \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class L> static constexpr\
     \ bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n template\
     \ <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n using id_t= long long;\n template <class\
-    \ T, class tDerived> struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n\
-    \ };\n template <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M,\
-    \ Node_D<mo, du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo,\
-    \ du, typename std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo,\
-    \ du>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>:\
-    \ Node_B<typename M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false;\n };\n using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
+    \ has_mp<L>, has_cp<L>>;\n using id_t= long long;\n template <class T, class tDerived>\
+    \ struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n };\n template\
+    \ <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M, Node_D<mo,\
+    \ du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename\
+    \ std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo, du>> {};\n template\
+    \ <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>: Node_B<typename\
+    \ M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
+    \ using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
     \ using E= nullptr_or_E_t<M>;\n using np= Node *;\n np root;\n static inline constexpr\
     \ T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n  else return T();\n\
     \ }\n template <class S> np build(id_t n, id_t l, id_t r, const S &bg) {\n  if\
@@ -69,10 +69,10 @@ data:
     \ *(itr + b[0])= t->val;\n }\n static inline void update(np &t) {\n  t->val= def_val();\n\
     \  if (t->ch[0]) t->val= M::op(t->ch[0]->val, t->val);\n  if (t->ch[1]) t->val=\
     \ M::op(t->val, t->ch[1]->val);\n }\n static inline T &reflect(np &t) {\n  if\
-    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mapping(t->val,\
-    \ t->lazy, 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void\
-    \ propagate(np &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::composition(t->lazy,\
-    \ x), x) : t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mapping(t->val,\
+    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mp(t->val, t->lazy,\
+    \ 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void propagate(np\
+    \ &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::cp(t->lazy, x), x) :\
+    \ t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mp(t->val,\
     \ x, sz);\n }\n static inline void cp_node(np &t) {\n  if (!t) t= new Node{def_val()};\n\
     \  else if constexpr (persistent) t= new Node(*t);\n }\n static inline void push(np\
     \ &t, const id_t &sz) {\n  if (!t->lazy_flg) return;\n  cp_node(t->ch[0]), cp_node(t->ch[1]),\
@@ -155,21 +155,21 @@ data:
     \" \\\"find\\\" \";\n  else ret+= \"\\\"at\\\" \";\n  if constexpr (dual_v<M>)\
     \ ret+= \"\\\"apply\\\" \";\n  return ret;\n }\n};\n#line 6 \"src/DataStructure/LinkCutTree.hpp\"\
     \n#include <cassert>\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\ntemplate\
-    \ <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
-    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
+    \ <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n\
+    \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
     \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
     \ has_op<L>>;\n template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n struct Node_B {\n  int ch[2]=\
-    \ {-1, -1}, par= -1;\n  bool rev_flg;\n };\n template <class D, bool sg, bool\
-    \ du> struct Node_D: Node_B {};\n template <class D> struct Node_D<D, 1, 0>: Node_B\
-    \ {\n  typename M::T val, sum, rsum;\n };\n template <class D> struct Node_D<D,\
-    \ 0, 1>: Node_B {\n  typename M::T val;\n  typename M::E laz;\n  bool laz_flg;\n\
-    \ };\n template <class D> struct Node_D<D, 1, 1>: Node_B {\n  typename M::T val,\
-    \ sum, rsum;\n  typename M::E laz;\n  bool laz_flg;\n };\n using Node= Node_D<void,\
-    \ semigroup_v<M>, dual_v<M>>;\n using T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\n\
-    \ inline int dir(int i) {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0]\
-    \ == i) return 0;\n   if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n\
-    \ }\n inline void rot(int i) {\n  int p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]=\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n struct Node_B {\n  int ch[2]= {-1, -1}, par=\
+    \ -1;\n  bool rev_flg;\n };\n template <class D, bool sg, bool du> struct Node_D:\
+    \ Node_B {};\n template <class D> struct Node_D<D, 1, 0>: Node_B {\n  typename\
+    \ M::T val, sum, rsum;\n };\n template <class D> struct Node_D<D, 0, 1>: Node_B\
+    \ {\n  typename M::T val;\n  typename M::E laz;\n  bool laz_flg;\n };\n template\
+    \ <class D> struct Node_D<D, 1, 1>: Node_B {\n  typename M::T val, sum, rsum;\n\
+    \  typename M::E laz;\n  bool laz_flg;\n };\n using Node= Node_D<void, semigroup_v<M>,\
+    \ dual_v<M>>;\n using T= nullptr_or_T_t<M>;\n using E= nullptr_or_E_t<M>;\n inline\
+    \ int dir(int i) {\n  if (ns[i].par != -1) {\n   if (ns[ns[i].par].ch[0] == i)\
+    \ return 0;\n   if (ns[ns[i].par].ch[1] == i) return 1;\n  }\n  return 2;\n }\n\
+    \ inline void rot(int i) {\n  int p= ns[i].par;\n  int d= dir(i);\n  if ((ns[p].ch[d]=\
     \ ns[i].ch[!d]) != -1) ns[ns[p].ch[d]].par= p;\n  ns[i].ch[!d]= p, ns[i].par=\
     \ ns[p].par;\n  if ((d= dir(p)) < 2) ns[ns[p].par].ch[d]= i;\n  ns[p].par= i;\n\
     \  if constexpr (semigroup_v<M>) update(p);\n }\n inline void splay(int i) {\n\
@@ -181,10 +181,10 @@ data:
     \ ns[i].sum), ns[i].rsum= M::op(ns[i].rsum, ns[ns[i].ch[0]].rsum);\n  if (ns[i].ch[1]\
     \ != -1) ns[i].sum= M::op(ns[i].sum, ns[ns[i].ch[1]].sum), ns[i].rsum= M::op(ns[ns[i].ch[1]].rsum,\
     \ ns[i].rsum);\n }\n inline void propagate(int i, const E &x) {\n  if (i == -1)\
-    \ return;\n  if (ns[i].laz_flg) M::composition(ns[i].laz, x);\n  else ns[i].laz=\
-    \ x;\n  if constexpr (semigroup_v<M>) M::mapping(ns[i].sum, x), M::mapping(ns[i].rsum,\
-    \ x);\n  M::mapping(ns[i].val, x), ns[i].laz_flg= true;\n }\n inline void toggle(int\
-    \ i) {\n  if (i == -1) return;\n  std::swap(ns[i].ch[0], ns[i].ch[1]);\n  if constexpr\
+    \ return;\n  if (ns[i].laz_flg) M::cp(ns[i].laz, x);\n  else ns[i].laz= x;\n \
+    \ if constexpr (semigroup_v<M>) M::mp(ns[i].sum, x), M::mp(ns[i].rsum, x);\n \
+    \ M::mp(ns[i].val, x), ns[i].laz_flg= true;\n }\n inline void toggle(int i) {\n\
+    \  if (i == -1) return;\n  std::swap(ns[i].ch[0], ns[i].ch[1]);\n  if constexpr\
     \ (semigroup_v<M>) std::swap(ns[i].sum, ns[i].rsum);\n  ns[i].rev_flg= !ns[i].rev_flg;\n\
     \ }\n inline void push(int i) {\n  if (ns[i].rev_flg) toggle(ns[i].ch[0]), toggle(ns[i].ch[1]),\
     \ ns[i].rev_flg= false;\n  if constexpr (dual_v<M>)\n   if (ns[i].laz_flg) propagate(ns[i].ch[0],\
@@ -254,7 +254,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.DynSeg.test.cpp

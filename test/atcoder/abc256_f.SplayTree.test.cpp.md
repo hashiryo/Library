@@ -130,12 +130,12 @@ data:
     \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
     \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
     \ myself_or_, tClass);\n#line 8 \"src/DataStructure/SplayTree.hpp\"\ntemplate\
-    \ <class M, bool reversible= false> class SplayTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mapping);\n\
-    \ HAS_MEMBER(composition);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template\
-    \ <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>, has_op<L>>;\n\
+    \ <class M, bool reversible= false> class SplayTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n\
+    \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class\
+    \ L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>, has_op<L>>;\n\
     \ template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
-    \ has_E<L>, has_mapping<L>, has_composition<L>>;\n template <class T, class tDerived>\
-    \ struct Node_B {\n  T val;\n  tDerived *ch[2], *par;\n  size_t size;\n };\n template\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n template <class T, class tDerived> struct\
+    \ Node_B {\n  T val;\n  tDerived *ch[2], *par;\n  size_t size;\n };\n template\
     \ <class D, bool sg, bool du, bool rev> struct Node_D: Node_B<M, Node_D<D, sg,\
     \ du, rev>> {};\n template <class D> struct Node_D<D, 1, 0, 0>: Node_B<typename\
     \ M::T, Node_D<D, 1, 0, 0>> {\n  typename M::T sum;\n };\n template <class D>\
@@ -171,17 +171,17 @@ data:
     \ np update(np t) {\n  if (!t) return t;\n  t->size= 1;\n  if constexpr (semigroup_v<M>)\
     \ {\n   t->sum= t->val;\n   if constexpr (reversible) t->rsum= t->sum;\n  }\n\
     \  return helper<0>(t), helper<1>(t), t;\n }\n static inline void propagate(np\
-    \ t, const E &x) {\n  if (!t) return;\n  if (t->laz_flg) M::composition(t->laz,\
-    \ x);\n  else t->laz= x;\n  if constexpr (semigroup_v<M>) {\n   M::mapping(t->sum,\
-    \ x, t->size);\n   if constexpr (reversible) M::mapping(t->rsum, x, t->size);\n\
-    \  }\n  M::mapping(t->val, x, 1), t->laz_flg= true;\n }\n static inline void toggle(np\
-    \ t) {\n  if (!t) return;\n  if constexpr (semigroup_v<M>) std::swap(t->sum, t->rsum);\n\
-    \  std::swap(t->ch[0], t->ch[1]), t->revflg= !t->revflg;\n }\n static inline void\
-    \ push_propagate(np t) {\n  if (t->laz_flg) propagate(t->ch[0], t->laz), propagate(t->ch[1],\
-    \ t->laz), t->laz_flg= false;\n }\n static inline void push_toggle(np t) {\n \
-    \ if (t->revflg) toggle(t->ch[0]), toggle(t->ch[1]), t->revflg= false;\n }\n static\
-    \ inline int dir(np t) { return t->par->ch[1] == t; }\n static inline void rot(np\
-    \ t) {\n  np p= t->par;\n  int d= dir(t);\n  if ((p->ch[d]= t->ch[!d])) p->ch[d]->par=\
+    \ t, const E &x) {\n  if (!t) return;\n  if (t->laz_flg) M::cp(t->laz, x);\n \
+    \ else t->laz= x;\n  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->size);\n\
+    \   if constexpr (reversible) M::mp(t->rsum, x, t->size);\n  }\n  M::mp(t->val,\
+    \ x, 1), t->laz_flg= true;\n }\n static inline void toggle(np t) {\n  if (!t)\
+    \ return;\n  if constexpr (semigroup_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0],\
+    \ t->ch[1]), t->revflg= !t->revflg;\n }\n static inline void push_propagate(np\
+    \ t) {\n  if (t->laz_flg) propagate(t->ch[0], t->laz), propagate(t->ch[1], t->laz),\
+    \ t->laz_flg= false;\n }\n static inline void push_toggle(np t) {\n  if (t->revflg)\
+    \ toggle(t->ch[0]), toggle(t->ch[1]), t->revflg= false;\n }\n static inline int\
+    \ dir(np t) { return t->par->ch[1] == t; }\n static inline void rot(np t) {\n\
+    \  np p= t->par;\n  int d= dir(t);\n  if ((p->ch[d]= t->ch[!d])) p->ch[d]->par=\
     \ p;\n  t->ch[!d]= p;\n  if ((t->par= p->par)) p->par->ch[dir(p)]= t;\n  p->par=\
     \ t, update(p);\n }\n static inline void splay_(np t) {\n  if constexpr (dual_v<M>)\
     \ push_propagate(t);\n  if constexpr (reversible) push_toggle(t);\n  for (np p=\
@@ -235,32 +235,32 @@ data:
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
     \ T {\n  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
     \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
-    \ static void mapping(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0]\
-    \ - mapp[1] * x.coef[1] + mapp[2]; }\n static void composition(E &pre, const E\
-    \ &suf) { pre[0]+= suf[0], pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
-    \ Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for\
-    \ (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n SplayTree<Mono>\
-    \ spt(N);\n for (int i= 0; i < N; i++) spt.set(i, {i, D[i]});\n while (Q--) {\n\
-    \  int op, x;\n  cin >> op >> x, x--;\n  if (op == 1) {\n   Mint v;\n   cin >>\
-    \ v, v-= A[x], A[x]+= v;\n   spt.apply(x, N, {v, v * x, v * x * x / 2});\n  }\
-    \ else {\n   cout << spt[x].val << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ static void mp(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1]\
+    \ * x.coef[1] + mapp[2]; }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0],\
+    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin\
+    \ >> A[i], D[i]= A[i];\n for (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++)\
+    \ D[i]+= D[i - 1];\n SplayTree<Mono> spt(N);\n for (int i= 0; i < N; i++) spt.set(i,\
+    \ {i, D[i]});\n while (Q--) {\n  int op, x;\n  cin >> op >> x, x--;\n  if (op\
+    \ == 1) {\n   Mint v;\n   cin >> v, v-= A[x], A[x]+= v;\n   spt.apply(x, N, {v,\
+    \ v * x, v * x * x / 2});\n  } else {\n   cout << spt[x].val << '\\n';\n  }\n\
+    \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n\n\
     // \u53CC\u5BFE \u306E verify\n\n#include <iostream>\n#include <array>\n#include\
     \ \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SplayTree.hpp\"\nusing\
     \ namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct T {\n\
     \  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
     \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
-    \ static void mapping(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0]\
-    \ - mapp[1] * x.coef[1] + mapp[2]; }\n static void composition(E &pre, const E\
-    \ &suf) { pre[0]+= suf[0], pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
-    \ Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for\
-    \ (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n SplayTree<Mono>\
-    \ spt(N);\n for (int i= 0; i < N; i++) spt.set(i, {i, D[i]});\n while (Q--) {\n\
-    \  int op, x;\n  cin >> op >> x, x--;\n  if (op == 1) {\n   Mint v;\n   cin >>\
-    \ v, v-= A[x], A[x]+= v;\n   spt.apply(x, N, {v, v * x, v * x * x / 2});\n  }\
-    \ else {\n   cout << spt[x].val << '\\n';\n  }\n }\n return 0;\n}"
+    \ static void mp(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1]\
+    \ * x.coef[1] + mapp[2]; }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0],\
+    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin\
+    \ >> A[i], D[i]= A[i];\n for (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++)\
+    \ D[i]+= D[i - 1];\n SplayTree<Mono> spt(N);\n for (int i= 0; i < N; i++) spt.set(i,\
+    \ {i, D[i]});\n while (Q--) {\n  int op, x;\n  cin >> op >> x, x--;\n  if (op\
+    \ == 1) {\n   Mint v;\n   cin >> v, v-= A[x], A[x]+= v;\n   spt.apply(x, N, {v,\
+    \ v * x, v * x * x / 2});\n  } else {\n   cout << spt[x].val << '\\n';\n  }\n\
+    \ }\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -271,7 +271,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.SplayTree.test.cpp

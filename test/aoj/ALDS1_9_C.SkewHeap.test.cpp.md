@@ -35,25 +35,24 @@ data:
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
     \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 6 \"src/DataStructure/SkewHeap.hpp\"\
     \ntemplate <typename T, typename Compare= std::less<T>, typename M= void> struct\
-    \ SkewHeap {\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n HAS_TYPE(E);\n\
-    \ NULLPTR_OR(E);\n template <class L> using dual= std::conjunction<has_E<L>, has_mapping<L>,\
-    \ has_composition<L>>;\n template <class tDerived> struct Node_B {\n  T key;\n\
-    \  tDerived *ch[2];\n };\n template <bool du_, typename tEnable= void> struct\
-    \ Node_D: Node_B<Node_D<du_>> {};\n template <bool du_> struct Node_D<du_, typename\
-    \ std::enable_if_t<du_>>: Node_B<Node_D<du_>> {\n  typename M::E lazy;\n  bool\
-    \ lazy_flg= false;\n };\n using Node= Node_D<dual<M>::value>;\n using E= nullptr_or_E_t<M>;\n\
-    \ Node *root;\n static inline void propagate(Node *&t, const E &x) {\n  if (!t)\
-    \ return;\n  t->lazy_flg ? (M::composition(t->lazy, x), x) : (t->lazy= x);\n \
-    \ M::mapping(t->key, x), t->lazy_flg= true;\n }\n static inline void push(Node\
-    \ *t) {\n  if (t->lazy_flg) propagate(t->ch[0], t->lazy), propagate(t->ch[1],\
-    \ t->lazy), t->lazy_flg= false;\n }\n Node *merge(Node *a, Node *b) {\n  if (!a\
-    \ || !b) return a ? a : b;\n  if (Compare()(a->key, b->key)) std::swap(a, b);\n\
-    \  if constexpr (dual<M>::value) push(a);\n  return std::swap(a->ch[0], a->ch[1]=\
-    \ merge(b, a->ch[1])), a;\n }\npublic:\n /* max heap */ SkewHeap(): root(nullptr)\
-    \ {}\n void push(T key) { root= merge(root, new Node{key}); }\n T pop() {\n  T\
-    \ ret= root->key;\n  if constexpr (dual<M>::value) push(root);\n  return root=\
-    \ merge(root->ch[0], root->ch[1]), ret;\n }\n T top() { return root->key; }\n\
-    \ bool empty() { return !root; }\n void apply(E v) {\n  static_assert(dual<M>::value,\
+    \ SkewHeap {\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n\
+    \ template <class L> using dual= std::conjunction<has_E<L>, has_mp<L>, has_cp<L>>;\n\
+    \ template <class tDerived> struct Node_B {\n  T key;\n  tDerived *ch[2];\n };\n\
+    \ template <bool du_, typename tEnable= void> struct Node_D: Node_B<Node_D<du_>>\
+    \ {};\n template <bool du_> struct Node_D<du_, typename std::enable_if_t<du_>>:\
+    \ Node_B<Node_D<du_>> {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
+    \ using Node= Node_D<dual<M>::value>;\n using E= nullptr_or_E_t<M>;\n Node *root;\n\
+    \ static inline void propagate(Node *&t, const E &x) {\n  if (!t) return;\n  t->lazy_flg\
+    \ ? (M::cp(t->lazy, x), x) : (t->lazy= x);\n  M::mp(t->key, x), t->lazy_flg= true;\n\
+    \ }\n static inline void push(Node *t) {\n  if (t->lazy_flg) propagate(t->ch[0],\
+    \ t->lazy), propagate(t->ch[1], t->lazy), t->lazy_flg= false;\n }\n Node *merge(Node\
+    \ *a, Node *b) {\n  if (!a || !b) return a ? a : b;\n  if (Compare()(a->key, b->key))\
+    \ std::swap(a, b);\n  if constexpr (dual<M>::value) push(a);\n  return std::swap(a->ch[0],\
+    \ a->ch[1]= merge(b, a->ch[1])), a;\n }\npublic:\n /* max heap */ SkewHeap():\
+    \ root(nullptr) {}\n void push(T key) { root= merge(root, new Node{key}); }\n\
+    \ T pop() {\n  T ret= root->key;\n  if constexpr (dual<M>::value) push(root);\n\
+    \  return root= merge(root->ch[0], root->ch[1]), ret;\n }\n T top() { return root->key;\
+    \ }\n bool empty() { return !root; }\n void apply(E v) {\n  static_assert(dual<M>::value,\
     \ \"\\\"apply\\\" is not available\\n\");\n  propagate(root, v);\n }\n SkewHeap\
     \ &operator+=(SkewHeap r) { return root= merge(root, r.root), *this; }\n SkewHeap\
     \ operator+(SkewHeap r) { return SkewHeap(*this)+= r; }\n};\n#line 5 \"test/aoj/ALDS1_9_C.SkewHeap.test.cpp\"\
@@ -73,7 +72,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_9_C.SkewHeap.test.cpp
   requiredBy: []
-  timestamp: '2023-10-29 17:46:55+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_9_C.SkewHeap.test.cpp

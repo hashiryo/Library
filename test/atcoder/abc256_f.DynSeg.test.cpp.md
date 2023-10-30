@@ -131,18 +131,18 @@ data:
     #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
     \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 10 \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \ntemplate <typename M, bool persistent= false, uint8_t HEIGHT= 31> class SegmentTree_Dynamic\
-    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mapping);\n HAS_MEMBER(composition);\n\
+    \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n\
     \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class L> static constexpr\
     \ bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n template\
     \ <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>, has_E<L>,\
-    \ has_mapping<L>, has_composition<L>>;\n using id_t= long long;\n template <class\
-    \ T, class tDerived> struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n\
-    \ };\n template <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M,\
-    \ Node_D<mo, du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo,\
-    \ du, typename std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo,\
-    \ du>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>:\
-    \ Node_B<typename M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg=\
-    \ false;\n };\n using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
+    \ has_mp<L>, has_cp<L>>;\n using id_t= long long;\n template <class T, class tDerived>\
+    \ struct Node_B {\n  T val;\n  tDerived *ch[2]= {nullptr, nullptr};\n };\n template\
+    \ <bool mo, bool du, typename tEnable= void> struct Node_D: Node_B<M, Node_D<mo,\
+    \ du, tEnable>> {};\n template <bool mo, bool du> struct Node_D<mo, du, typename\
+    \ std::enable_if_t<mo && !du>>: Node_B<typename M::T, Node_D<mo, du>> {};\n template\
+    \ <bool mo, bool du> struct Node_D<mo, du, typename std::enable_if_t<du>>: Node_B<typename\
+    \ M::T, Node_D<mo, du>> {\n  typename M::E lazy;\n  bool lazy_flg= false;\n };\n\
+    \ using Node= Node_D<monoid_v<M>, dual_v<M>>;\n using T= decltype(Node::val);\n\
     \ using E= nullptr_or_E_t<M>;\n using np= Node *;\n np root;\n static inline constexpr\
     \ T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n  else return T();\n\
     \ }\n template <class S> np build(id_t n, id_t l, id_t r, const S &bg) {\n  if\
@@ -159,10 +159,10 @@ data:
     \ *(itr + b[0])= t->val;\n }\n static inline void update(np &t) {\n  t->val= def_val();\n\
     \  if (t->ch[0]) t->val= M::op(t->ch[0]->val, t->val);\n  if (t->ch[1]) t->val=\
     \ M::op(t->val, t->ch[1]->val);\n }\n static inline T &reflect(np &t) {\n  if\
-    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mapping(t->val,\
-    \ t->lazy, 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void\
-    \ propagate(np &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::composition(t->lazy,\
-    \ x), x) : t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mapping(t->val,\
+    \ constexpr (dual_v<M> && !monoid_v<M>)\n   if (t->lazy_flg) M::mp(t->val, t->lazy,\
+    \ 1), t->lazy_flg= false;\n  return t->val;\n }\n static inline void propagate(np\
+    \ &t, const E &x, const id_t &sz) {\n  t->lazy_flg ? (M::cp(t->lazy, x), x) :\
+    \ t->lazy= x;\n  t->lazy_flg= true;\n  if constexpr (monoid_v<M>) M::mp(t->val,\
     \ x, sz);\n }\n static inline void cp_node(np &t) {\n  if (!t) t= new Node{def_val()};\n\
     \  else if constexpr (persistent) t= new Node(*t);\n }\n static inline void push(np\
     \ &t, const id_t &sz) {\n  if (!t->lazy_flg) return;\n  cp_node(t->ch[0]), cp_node(t->ch[1]),\
@@ -247,32 +247,32 @@ data:
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
     \ T {\n  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
     \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
-    \ static void mapping(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0]\
-    \ - mapp[1] * x.coef[1] + mapp[2]; }\n static void composition(E &pre, const E\
-    \ &suf) { pre[0]+= suf[0], pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
-    \ Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for\
-    \ (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n SegmentTree_Dynamic<Mono>\
-    \ seg;\n for (int i= 0; i < N; i++) seg.set(i, {i, D[i]});\n while (Q--) {\n \
-    \ int op, x;\n  cin >> op >> x, x--;\n  if (op == 1) {\n   Mint v;\n   cin >>\
-    \ v, v-= A[x], A[x]+= v;\n   seg.apply(x, N, {v, v * x, v * x * x / 2});\n  }\
-    \ else {\n   cout << seg[x].val << '\\n';\n  }\n }\n return 0;\n}\n"
+    \ static void mp(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1]\
+    \ * x.coef[1] + mapp[2]; }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0],\
+    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin\
+    \ >> A[i], D[i]= A[i];\n for (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++)\
+    \ D[i]+= D[i - 1];\n SegmentTree_Dynamic<Mono> seg;\n for (int i= 0; i < N; i++)\
+    \ seg.set(i, {i, D[i]});\n while (Q--) {\n  int op, x;\n  cin >> op >> x, x--;\n\
+    \  if (op == 1) {\n   Mint v;\n   cin >> v, v-= A[x], A[x]+= v;\n   seg.apply(x,\
+    \ N, {v, v * x, v * x * x / 2});\n  } else {\n   cout << seg[x].val << '\\n';\n\
+    \  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc256/tasks/abc256_f\"\n//\
     \ \u53CC\u5BFE \u306E verify\n#include <iostream>\n#include <array>\n#include\
     \ \"src/Math/ModInt.hpp\"\n#include \"src/DataStructure/SegmentTree_Dynamic.hpp\"\
     \nusing namespace std;\n\nusing Mint= ModInt<998244353>;\nstruct Mono {\n struct\
     \ T {\n  Mint val, coef[2];\n  T()= default;\n  T(Mint id, Mint v): val(v), coef{(id\
     \ + 1) * (id + 2) / 2, (id * 2 + 3) / 2} {}\n };\n using E= array<Mint, 3>;\n\
-    \ static void mapping(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0]\
-    \ - mapp[1] * x.coef[1] + mapp[2]; }\n static void composition(E &pre, const E\
-    \ &suf) { pre[0]+= suf[0], pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
-    \ Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin >> A[i], D[i]= A[i];\n for\
-    \ (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++) D[i]+= D[i - 1];\n SegmentTree_Dynamic<Mono>\
-    \ seg;\n for (int i= 0; i < N; i++) seg.set(i, {i, D[i]});\n while (Q--) {\n \
-    \ int op, x;\n  cin >> op >> x, x--;\n  if (op == 1) {\n   Mint v;\n   cin >>\
-    \ v, v-= A[x], A[x]+= v;\n   seg.apply(x, N, {v, v * x, v * x * x / 2});\n  }\
-    \ else {\n   cout << seg[x].val << '\\n';\n  }\n }\n return 0;\n}"
+    \ static void mp(T &x, const E &mapp, int) { x.val+= mapp[0] * x.coef[0] - mapp[1]\
+    \ * x.coef[1] + mapp[2]; }\n static void cp(E &pre, const E &suf) { pre[0]+= suf[0],\
+    \ pre[1]+= suf[1], pre[2]+= suf[2]; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n Mint A[N], D[N];\n for (int i= 0; i < N; i++) cin\
+    \ >> A[i], D[i]= A[i];\n for (int j= 0; j < 3; j++)\n  for (int i= 1; i < N; i++)\
+    \ D[i]+= D[i - 1];\n SegmentTree_Dynamic<Mono> seg;\n for (int i= 0; i < N; i++)\
+    \ seg.set(i, {i, D[i]});\n while (Q--) {\n  int op, x;\n  cin >> op >> x, x--;\n\
+    \  if (op == 1) {\n   Mint v;\n   cin >> v, v-= A[x], A[x]+= v;\n   seg.apply(x,\
+    \ N, {v, v * x, v * x * x / 2});\n  } else {\n   cout << seg[x].val << '\\n';\n\
+    \  }\n }\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -283,7 +283,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.DynSeg.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-30 14:53:23+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.DynSeg.test.cpp
