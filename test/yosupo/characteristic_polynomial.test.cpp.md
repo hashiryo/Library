@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   - icon: ':x:'
@@ -36,14 +36,14 @@ data:
     \ PROBLEM \"https://judge.yosupo.jp/problem/characteristic_polynomial\"\n#include\
     \ <iostream>\n#line 2 \"src/LinearAlgebra/characteristic_polynomial.hpp\"\n#include\
     \ <vector>\n#include <algorithm>\n#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include\
-    \ <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace\
-    \ la_internal {\nusing namespace std;\ntemplate <class R> struct Vector: public\
-    \ valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
-    using u8= unsigned char;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n\
-    \ Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^\
-    \ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) {\
-    \ return val= r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this;\
-    \ }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+    \ <cassert>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include\
+    \ <valarray>\nnamespace la_internal {\nusing namespace std;\ntemplate <class R>\
+    \ struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\nusing\
+    \ u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool\
+    \ val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
+    \ {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
+    \ Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val=\
+    \ b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
     \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
     \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
     \ {\n size_t n;\n valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
@@ -274,7 +274,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/characteristic_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 14:26:42+09:00'
+  timestamp: '2023-10-30 16:37:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/characteristic_polynomial.test.cpp

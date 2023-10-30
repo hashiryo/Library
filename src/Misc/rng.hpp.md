@@ -5,11 +5,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/min_enclosing_circle.hpp
     title: "\u6700\u5C0F\u5305\u542B\u5186"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
   - icon: ':x:'

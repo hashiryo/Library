@@ -29,6 +29,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
+  - icon: ':warning:'
+    path: test/yukicoder/1625.KDT.test copy.cpp
+    title: test/yukicoder/1625.KDT.test copy.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0273.test.cpp
@@ -87,7 +90,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':heavy_check_mark:'
@@ -229,6 +232,7 @@ data:
   - src/Graph/Tree.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Math/TwoSatisfiability.hpp
+  - test/yukicoder/1625.KDT.test copy.cpp
   timestamp: '2023-04-15 19:40:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

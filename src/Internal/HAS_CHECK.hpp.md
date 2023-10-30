@@ -32,6 +32,9 @@ data:
   - icon: ':question:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
+  - icon: ':warning:'
+    path: test/yukicoder/1625.KDT.test copy.cpp
+    title: test/yukicoder/1625.KDT.test copy.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
@@ -237,6 +240,7 @@ data:
   - src/DataStructure/KDTree.hpp
   - src/DataStructure/SegmentTree_Dynamic.hpp
   - src/Graph/MinimumSpanningAborescense.hpp
+  - test/yukicoder/1625.KDT.test copy.cpp
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

@@ -2,35 +2,35 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/LU_Decomposition.hpp
     title: "LU\u5206\u89E3"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Matrix.hpp
     title: "\u884C\u5217"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   - icon: ':x:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
   - icon: ':x:'
     path: test/aoj/2397.SparseMat.test.cpp
     title: test/aoj/2397.SparseMat.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
   - icon: ':x:'
@@ -92,17 +92,17 @@ data:
     title: test/yukicoder/950.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace\
-    \ la_internal {\nusing namespace std;\ntemplate <class R> struct Vector: public\
-    \ valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
-    using u8= unsigned char;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n\
-    \ Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^\
-    \ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) {\
-    \ return val= r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this;\
-    \ }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+  bundledCode: "#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include\
+    \ <valarray>\nnamespace la_internal {\nusing namespace std;\ntemplate <class R>\
+    \ struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\nusing\
+    \ u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool\
+    \ val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
+    \ {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
+    \ Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val=\
+    \ b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
     \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
     \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
     \ {\n size_t n;\n valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
@@ -118,28 +118,28 @@ data:
     \ Vector(*this)*= b; }\n size_t size() const { return n; }\n u128 *data() { return\
     \ begin(dat); }\n friend Vector operator*(bool b, const Vector &r) { return r\
     \ * b; }\n};\n}\nusing la_internal::Vector;\n"
-  code: "#pragma once\n#include <valarray>\nnamespace la_internal {\nusing namespace\
-    \ std;\ntemplate <class R> struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n\
-    };\nusing u128= __uint128_t;\nusing u8= unsigned char;\nclass Ref {\n u128 *ref;\n\
-    \ u8 i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v)\
-    \ {}\n ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref\
-    \ &operator=(const Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool\
-    \ b) { return val= b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this;\
-    \ }\n Ref &operator&=(bool b) { return val&= b, *this; }\n Ref &operator^=(bool\
-    \ b) { return val^= b, *this; }\n operator bool() const { return val; }\n};\n\
-    template <> class Vector<bool> {\n size_t n;\n valarray<u128> dat;\npublic:\n\
-    \ Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >> 7) {}\n Vector(bool\
-    \ b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref operator[](int i)\
-    \ {\n  u128 *ref= begin(dat) + (i >> 7);\n  u8 j= i & 127;\n  bool val= (*ref\
-    \ >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int i) const {\
-    \ return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const Vector &r)\
-    \ { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector &r) { return\
-    \ dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b) dat= 0;\n  return\
-    \ *this;\n }\n Vector operator+(const Vector &r) const { return Vector(*this)+=\
-    \ r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-= r; }\n\
-    \ Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t size()\
-    \ const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector operator*(bool\
-    \ b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;"
+  code: "#pragma once\n#include <cstdint>\n#include <valarray>\nnamespace la_internal\
+    \ {\nusing namespace std;\ntemplate <class R> struct Vector: public valarray<R>\
+    \ {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8= uint8_t;\n\
+    class Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r, u8 j, bool\
+    \ v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i) & 1)) *ref^=\
+    \ u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val= r.val, *this;\
+    \ }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
+    \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
+    \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
+    \ { return val; }\n};\ntemplate <> class Vector<bool> {\n size_t n;\n valarray<u128>\
+    \ dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t n): n(n), dat((n + 127) >>\
+    \ 7) {}\n Vector(bool b, size_t n): n(n), dat(-u128(b), (n + 127) >> 7) {}\n Ref\
+    \ operator[](int i) {\n  u128 *ref= begin(dat) + (i >> 7);\n  u8 j= i & 127;\n\
+    \  bool val= (*ref >> j) & 1;\n  return Ref{ref, j, val};\n }\n bool operator[](int\
+    \ i) const { return (dat[i >> 7] >> (i & 127)) & 1; }\n Vector &operator+=(const\
+    \ Vector &r) { return dat^= r.dat, *this; }\n Vector &operator-=(const Vector\
+    \ &r) { return dat^= r.dat, *this; }\n Vector &operator*=(bool b) {\n  if (!b)\
+    \ dat= 0;\n  return *this;\n }\n Vector operator+(const Vector &r) const { return\
+    \ Vector(*this)+= r; }\n Vector operator-(const Vector &r) const { return Vector(*this)-=\
+    \ r; }\n Vector operator*(bool b) const { return Vector(*this)*= b; }\n size_t\
+    \ size() const { return n; }\n u128 *data() { return begin(dat); }\n friend Vector\
+    \ operator*(bool b, const Vector &r) { return r * b; }\n};\n}\nusing la_internal::Vector;"
   dependsOn: []
   isVerificationFile: false
   path: src/LinearAlgebra/Vector.hpp
@@ -148,8 +148,8 @@ data:
   - src/LinearAlgebra/MinimalPolynomial.hpp
   - src/LinearAlgebra/LU_Decomposition.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
-  timestamp: '2023-10-30 14:26:42+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-30 16:37:49+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2624.test.cpp
   - test/aoj/2397.SparseMat.test.cpp

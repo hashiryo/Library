@@ -8,6 +8,9 @@ data:
   - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
+  - icon: ':warning:'
+    path: test/yukicoder/1625.KDT.test copy.cpp
+    title: test/yukicoder/1625.KDT.test copy.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
@@ -134,6 +137,7 @@ data:
   requiredBy:
   - src/Optimization/LiChaoTree.hpp
   - src/DataStructure/KDTree.hpp
+  - test/yukicoder/1625.KDT.test copy.cpp
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

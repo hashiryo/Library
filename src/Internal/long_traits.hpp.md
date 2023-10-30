@@ -5,6 +5,9 @@ data:
   - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
+  - icon: ':warning:'
+    path: test/yukicoder/1625.KDT.test copy.cpp
+    title: test/yukicoder/1625.KDT.test copy.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
@@ -101,6 +104,7 @@ data:
   path: src/Internal/long_traits.hpp
   requiredBy:
   - src/DataStructure/KDTree.hpp
+  - test/yukicoder/1625.KDT.test copy.cpp
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

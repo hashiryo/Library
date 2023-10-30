@@ -7,16 +7,16 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/MinimalPolynomial.hpp
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   - icon: ':question:'
@@ -119,9 +119,8 @@ data:
     \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\n#include\
-    \ <cstdint>\n#line 2 \"src/Math/berlekamp_massey.hpp\"\n#include <vector>\n//\
-    \ a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\n\
+    \ return dat[n];\n}\n#line 2 \"src/Math/berlekamp_massey.hpp\"\n#include <vector>\n\
+    // a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\n\
     template <class K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n\
     \ size_t n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K>\
     \ c(n), b(n), tmp;\n K x= 1, y, coef;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i)\
@@ -129,12 +128,12 @@ data:
     \ K()) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-= coef *\
     \ b[j - m];\n  if (2 * d <= i) d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d\
     \ + 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n return c;\n}\n#line 2\
-    \ \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace la_internal\
-    \ {\nusing namespace std;\ntemplate <class R> struct Vector: public valarray<R>\
-    \ {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\nusing u8= unsigned\
-    \ char;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128 *r,\
-    \ u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >> i)\
-    \ & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
+    \ \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include <valarray>\n\
+    namespace la_internal {\nusing namespace std;\ntemplate <class R> struct Vector:\
+    \ public valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
+    using u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n Ref(u128\
+    \ *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^ ((*ref >>\
+    \ i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) { return val=\
     \ r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this; }\n Ref &operator|=(bool\
     \ b) { return val|= b, *this; }\n Ref &operator&=(bool b) { return val&= b, *this;\
     \ }\n Ref &operator^=(bool b) { return val^= b, *this; }\n operator bool() const\
@@ -154,7 +153,7 @@ data:
     #line 2 \"src/Misc/rng.hpp\"\n#include <random>\nuint64_t rng() {\n static uint64_t\
     \ x= 10150724397891781847ULL * std::random_device{}();\n return x^= x << 7, x^=\
     \ x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
-    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 7 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
+    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 6 \"src/LinearAlgebra/MinimalPolynomial.hpp\"\
     \n// c s.t. (c[d] * M^d + c[d-1] * M^(d-1)  + ... + c[1] * M + c[0]) * b = 0\n\
     template <class mod_t, class LinMap> class MinimalPolynomial {\n std::vector<mod_t>\
     \ poly, rev;\n size_t dg, n;\n std::vector<Vector<mod_t>> bs;\n static inline\
@@ -216,7 +215,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 16:02:30+09:00'
+  timestamp: '2023-10-30 16:37:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sparse_matrix_det.test.cpp

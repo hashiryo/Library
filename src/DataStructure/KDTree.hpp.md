@@ -13,7 +13,10 @@ data:
     path: src/Internal/tuple_traits.hpp
     title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8 \u4ED6"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: test/yukicoder/1625.KDT.test copy.cpp
+    title: test/yukicoder/1625.KDT.test copy.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
@@ -417,7 +420,8 @@ data:
   - src/Internal/long_traits.hpp
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
-  requiredBy: []
+  requiredBy:
+  - test/yukicoder/1625.KDT.test copy.cpp
   timestamp: '2023-10-30 14:26:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

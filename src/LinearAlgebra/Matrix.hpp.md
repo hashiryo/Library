@@ -1,30 +1,30 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/LinearAlgebra/LU_Decomposition.hpp
     title: "LU\u5206\u89E3"
   - icon: ':x:'
     path: src/LinearAlgebra/characteristic_polynomial.hpp
     title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1328.test.cpp
     title: test/aoj/1328.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.MinPoly.test.cpp
     title: test/aoj/2397.MinPoly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2397.test.cpp
     title: test/aoj/2397.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2624.test.cpp
     title: test/aoj/2624.test.cpp
   - icon: ':x:'
@@ -77,18 +77,18 @@ data:
     title: test/yukicoder/950.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/LinearAlgebra/Matrix.hpp\"\n#include <cassert>\n#include\
-    \ <vector>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <valarray>\nnamespace\
-    \ la_internal {\nusing namespace std;\ntemplate <class R> struct Vector: public\
-    \ valarray<R> {\n using valarray<R>::valarray;\n};\nusing u128= __uint128_t;\n\
-    using u8= unsigned char;\nclass Ref {\n u128 *ref;\n u8 i;\n bool val;\npublic:\n\
-    \ Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref() {\n  if (val ^\
-    \ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const Ref &r) {\
-    \ return val= r.val, *this; }\n Ref &operator=(bool b) { return val= b, *this;\
-    \ }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
+    \ <vector>\n#line 2 \"src/LinearAlgebra/Vector.hpp\"\n#include <cstdint>\n#include\
+    \ <valarray>\nnamespace la_internal {\nusing namespace std;\ntemplate <class R>\
+    \ struct Vector: public valarray<R> {\n using valarray<R>::valarray;\n};\nusing\
+    \ u128= __uint128_t;\nusing u8= uint8_t;\nclass Ref {\n u128 *ref;\n u8 i;\n bool\
+    \ val;\npublic:\n Ref(u128 *r, u8 j, bool v): ref(r), i(j), val(v) {}\n ~Ref()\
+    \ {\n  if (val ^ ((*ref >> i) & 1)) *ref^= u128(1) << i;\n }\n Ref &operator=(const\
+    \ Ref &r) { return val= r.val, *this; }\n Ref &operator=(bool b) { return val=\
+    \ b, *this; }\n Ref &operator|=(bool b) { return val|= b, *this; }\n Ref &operator&=(bool\
     \ b) { return val&= b, *this; }\n Ref &operator^=(bool b) { return val^= b, *this;\
     \ }\n operator bool() const { return val; }\n};\ntemplate <> class Vector<bool>\
     \ {\n size_t n;\n valarray<u128> dat;\npublic:\n Vector(): n(0) {}\n Vector(size_t\
@@ -244,8 +244,8 @@ data:
   requiredBy:
   - src/LinearAlgebra/LU_Decomposition.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
-  timestamp: '2023-10-30 14:26:42+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-30 16:37:49+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2624.test.cpp
   - test/aoj/1328.test.cpp
