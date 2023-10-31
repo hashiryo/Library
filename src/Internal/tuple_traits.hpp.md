@@ -5,9 +5,6 @@ data:
   - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':question:'
-    path: src/Optimization/LiChaoTree.hpp
-    title: Li-Chao-Tree
   - icon: ':warning:'
     path: test/yukicoder/1625.KDT.test copy.cpp
     title: test/yukicoder/1625.KDT.test copy.cpp
@@ -19,17 +16,8 @@ data:
     path: test/aoj/1068.KDT.test.cpp
     title: test/aoj/1068.KDT.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2603.LiCT.test.cpp
-    title: test/aoj/2603.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2725.LiCT.test.cpp
-    title: test/aoj/2725.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/2842.KDT.test.cpp
     title: test/aoj/2842.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/3086.LiCT.test.cpp
-    title: test/aoj/3086.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
@@ -37,50 +25,11 @@ data:
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':x:'
-    path: test/yosupo/line_add_get_min.LiCT.test.cpp
-    title: test/yosupo/line_add_get_min.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-    title: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - icon: ':x:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - icon: ':x:'
-    path: test/yosupo/segment_add_get_min.test.cpp
-    title: test/yosupo/segment_add_get_min.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1297.LiCT.1.test.cpp
-    title: test/yukicoder/1297.LiCT.1.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1297.LiCT.2.test.cpp
-    title: test/yukicoder/1297.LiCT.2.test.cpp
-  - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1867.test.cpp
-    title: test/yukicoder/1867.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/2458.LiCT.test.cpp
-    title: test/yukicoder/2458.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/409.LiCT.test.cpp
-    title: test/yukicoder/409.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/703.LiCT.test.cpp
-    title: test/yukicoder/703.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/704.LiCT.test.cpp
-    title: test/yukicoder/704.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/705.LiCT.test.cpp
-    title: test/yukicoder/705.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/913.LiCT.test.cpp
-    title: test/yukicoder/913.LiCT.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/952.LiCT.test.cpp
-    title: test/yukicoder/952.LiCT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -105,10 +54,7 @@ data:
     \ T>;\ntemplate <class T> auto to_array(const T &t) {\n if constexpr (array_like_v<T>)\
     \ return std::apply([](auto &&...x) { return std::array{x...}; }, t);\n}\ntemplate\
     \ <class T> using to_tuple_t= decltype(to_tuple(T()));\ntemplate <class T> using\
-    \ to_array_t= decltype(to_array(T()));\ntemplate <class T> struct other_than_first_argument_type_impl\
-    \ {\n using type= void;\n};\ntemplate <class T, class... Args> struct other_than_first_argument_type_impl<std::tuple<T,\
-    \ Args...>> {\n using type= std::tuple<Args...>;\n};\ntemplate <class T> using\
-    \ other_than_first_argument_type_t= typename other_than_first_argument_type_impl<T>::type;\n"
+    \ to_array_t= decltype(to_array(T()));\n"
   code: "#pragma once\n#include <tuple>\n#include <array>\n#include <type_traits>\n\
     #include <cstddef>\ntemplate <class T> static constexpr bool tuple_like_v= false;\n\
     template <class... Args> static constexpr bool tuple_like_v<std::tuple<Args...>>\
@@ -127,42 +73,22 @@ data:
     \ T>;\ntemplate <class T> auto to_array(const T &t) {\n if constexpr (array_like_v<T>)\
     \ return std::apply([](auto &&...x) { return std::array{x...}; }, t);\n}\ntemplate\
     \ <class T> using to_tuple_t= decltype(to_tuple(T()));\ntemplate <class T> using\
-    \ to_array_t= decltype(to_array(T()));\ntemplate <class T> struct other_than_first_argument_type_impl\
-    \ {\n using type= void;\n};\ntemplate <class T, class... Args> struct other_than_first_argument_type_impl<std::tuple<T,\
-    \ Args...>> {\n using type= std::tuple<Args...>;\n};\ntemplate <class T> using\
-    \ other_than_first_argument_type_t= typename other_than_first_argument_type_impl<T>::type;"
+    \ to_array_t= decltype(to_array(T()));"
   dependsOn: []
   isVerificationFile: false
   path: src/Internal/tuple_traits.hpp
   requiredBy:
-  - src/Optimization/LiChaoTree.hpp
   - src/DataStructure/KDTree.hpp
   - test/yukicoder/1625.KDT.test copy.cpp
-  timestamp: '2023-10-29 17:46:55+09:00'
+  timestamp: '2023-10-31 18:36:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/3086.LiCT.test.cpp
   - test/aoj/1023.KDT.test.cpp
-  - test/aoj/2603.LiCT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
   - test/aoj/2842.KDT.test.cpp
   - test/aoj/1068.KDT.test.cpp
-  - test/aoj/2725.LiCT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - test/yosupo/segment_add_get_min.test.cpp
-  - test/yosupo/line_add_get_min.LiCT.test.cpp
-  - test/yukicoder/2458.LiCT.test.cpp
-  - test/yukicoder/703.LiCT.test.cpp
-  - test/yukicoder/704.LiCT.test.cpp
-  - test/yukicoder/409.LiCT.test.cpp
-  - test/yukicoder/1297.LiCT.1.test.cpp
-  - test/yukicoder/1297.LiCT.2.test.cpp
-  - test/yukicoder/705.LiCT.test.cpp
-  - test/yukicoder/1867.test.cpp
-  - test/yukicoder/952.LiCT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
-  - test/yukicoder/913.LiCT.test.cpp
   - test/hackerrank/cube-summation.KDT.test.cpp
 documentation_of: src/Internal/tuple_traits.hpp
 layout: document

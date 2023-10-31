@@ -22,9 +22,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_g
@@ -335,17 +335,17 @@ data:
     \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
     \ int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries<17> g(N);\n for (int\
     \ i= 0; i < M; i++) {\n  int a, b;\n  cin >> a >> b;\n  g.add_edge(--a, --b);\n\
-    \ }\n auto tmp= g.edge_space_size<Mint>();\n auto tmp2= SetPowerSeries<17>::log(tmp);\n\
-    \ for (int k= 1; k < N; k++) {\n  Mint ans= 0;\n  for (int s= 1; s < (1 << N);\
-    \ s+= 2)\n   if ((s >> k) & 1) ans+= tmp2[s] * tmp[((1 << N) - 1) ^ s];\n  cout\
-    \ << ans << '\\n';\n }\n return 0;\n}\n"
+    \ }\n auto tmp= g.graph<Mint>();\n auto tmp2= g.connected_graph<Mint>();\n for\
+    \ (int k= 1; k < N; k++) {\n  Mint ans= 0;\n  for (int s= 1; s < (1 << N); s+=\
+    \ 2)\n   if ((s >> k) & 1) ans+= tmp2[s] * tmp[((1 << N) - 1) ^ s];\n  cout <<\
+    \ ans << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_g\"\n//\
     \ \u9023\u7D50\u30B0\u30E9\u30D5\n#include <iostream>\n#include \"src/Math/ModInt.hpp\"\
     \n#include \"src/Math/SetPowerSeries.hpp\"\n#include \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries<17>\
     \ g(N);\n for (int i= 0; i < M; i++) {\n  int a, b;\n  cin >> a >> b;\n  g.add_edge(--a,\
-    \ --b);\n }\n auto tmp= g.edge_space_size<Mint>();\n auto tmp2= SetPowerSeries<17>::log(tmp);\n\
+    \ --b);\n }\n auto tmp= g.graph<Mint>();\n auto tmp2= g.connected_graph<Mint>();\n\
     \ for (int k= 1; k < N; k++) {\n  Mint ans= 0;\n  for (int s= 1; s < (1 << N);\
     \ s+= 2)\n   if ((s >> k) & 1) ans+= tmp2[s] * tmp[((1 << N) - 1) ^ s];\n  cout\
     \ << ans << '\\n';\n }\n return 0;\n}\n"
@@ -359,8 +359,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2023-10-31 17:32:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-10-31 18:36:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp
 layout: document
