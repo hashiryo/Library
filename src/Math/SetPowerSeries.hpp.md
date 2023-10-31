@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
@@ -10,7 +10,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2345.test.cpp
     title: test/aoj/2345.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc199_d.test.cpp
     title: test/atcoder/abc199_d.test.cpp
   - icon: ':x:'
@@ -33,7 +33,7 @@ data:
     title: test/yukicoder/2507.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n#include\
@@ -270,7 +270,7 @@ data:
   requiredBy:
   - src/Graph/UndirectedGraphSetPowerSeries.hpp
   timestamp: '2023-10-31 14:54:28+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2345.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp

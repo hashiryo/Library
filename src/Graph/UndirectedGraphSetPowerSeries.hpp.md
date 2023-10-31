@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
@@ -9,7 +9,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2345.test.cpp
     title: test/aoj/2345.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc199_d.test.cpp
     title: test/atcoder/abc199_d.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: test/yukicoder/2507.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n#include\
@@ -187,7 +187,7 @@ data:
     \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n template\
     \ <class T> inline void selfloop_num(sps<T> &f) const {\n  sps<int> ret(sz, 0);\n\
     \  for (int i= V; i--;) ret[1 << i]= adj[i][i];\n  return SPS::subset_sum(ret),\
-    \ ret;\n }\n template <class T> static inline sps<T> space_num(const sps<int>\
+    \ ret;\n }\n template <class T> static inline sps<T> space_size(const sps<int>\
     \ &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
     \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T> graph()\
     \ const { return space_size<T>(edge_num()); }\n template <class T> inline sps<T>\
@@ -287,7 +287,7 @@ data:
     \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n template\
     \ <class T> inline void selfloop_num(sps<T> &f) const {\n  sps<int> ret(sz, 0);\n\
     \  for (int i= V; i--;) ret[1 << i]= adj[i][i];\n  return SPS::subset_sum(ret),\
-    \ ret;\n }\n template <class T> static inline sps<T> space_num(const sps<int>\
+    \ ret;\n }\n template <class T> static inline sps<T> space_size(const sps<int>\
     \ &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
     \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T> graph()\
     \ const { return space_size<T>(edge_num()); }\n template <class T> inline sps<T>\
@@ -344,8 +344,8 @@ data:
   isVerificationFile: false
   path: src/Graph/UndirectedGraphSetPowerSeries.hpp
   requiredBy: []
-  timestamp: '2023-10-31 14:54:28+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-31 16:08:34+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2345.test.cpp
   - test/yukicoder/2507.test.cpp

@@ -16,12 +16,12 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -53,12 +53,12 @@ data:
     title: test/yukicoder/1939.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Math/sparse_fps.hpp\"\n#include <vector>\n#line 2 \"\
-    src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\ntemplate <class\
-    \ Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+  bundledCode: "#line 2 \"src/Math/sparse_fps.hpp\"\n#include <vector>\n#include <cstdint>\n\
+    #line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
+    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
     \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
     \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
@@ -164,7 +164,7 @@ data:
     \ (a <= 1 || p == 2) return a;\n if (p < (1 << 30)) return inner_sqrt<u32, MP_Mo<u32,\
     \ u64, 32, 31>>(a, p);\n if (p < (1ll << 62)) return inner_sqrt<u64, MP_Mo<u64,\
     \ u128, 64, 63>>(a, p);\n return inner_sqrt<u64, MP_D2B1>(a, p);\n}\n}\nusing\
-    \ math_internal::mod_sqrt;\n#line 5 \"src/Math/sparse_fps.hpp\"\ntemplate <class\
+    \ math_internal::mod_sqrt;\n#line 6 \"src/Math/sparse_fps.hpp\"\ntemplate <class\
     \ K> std::vector<K> sparse_inv(const std::vector<K> &f, int n) {\n assert(f[0]\
     \ != K(0));\n std::vector<std::pair<int, K>> dat;\n for (int i= 1, ed= std::min<int>(n,\
     \ f.size()); i < ed; ++i)\n  if (f[i] != K(0)) dat.emplace_back(i, f[i]);\n std::vector<K>\
@@ -239,8 +239,8 @@ data:
     \   if (i || j) a[i + j - 1]+= x * y * (i - j) * k;\n for (auto &&[i, x]: dat_f)\n\
     \  for (auto &&[j, y]: dat_g) b[i + j]+= x * y;  // a = k(f'g-fg'), b = fg\n return\
     \ sparse_log_differentiation<mod_t, LM>(a, b, n);\n}\n"
-  code: "#pragma once\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
-    \ \"src/Math/mod_sqrt.hpp\"\ntemplate <class K> std::vector<K> sparse_inv(const\
+  code: "#pragma once\n#include <vector>\n#include <cstdint>\n#include \"src/Math/ModInt.hpp\"\
+    \n#include \"src/Math/mod_sqrt.hpp\"\ntemplate <class K> std::vector<K> sparse_inv(const\
     \ std::vector<K> &f, int n) {\n assert(f[0] != K(0));\n std::vector<std::pair<int,\
     \ K>> dat;\n for (int i= 1, ed= std::min<int>(n, f.size()); i < ed; ++i)\n  if\
     \ (f[i] != K(0)) dat.emplace_back(i, f[i]);\n std::vector<K> ret(n);\n const K\
@@ -325,8 +325,8 @@ data:
   isVerificationFile: false
   path: src/Math/sparse_fps.hpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-10-31 16:08:34+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp

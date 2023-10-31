@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc199/tasks/abc199_d
@@ -181,7 +181,7 @@ data:
     \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n template\
     \ <class T> inline void selfloop_num(sps<T> &f) const {\n  sps<int> ret(sz, 0);\n\
     \  for (int i= V; i--;) ret[1 << i]= adj[i][i];\n  return SPS::subset_sum(ret),\
-    \ ret;\n }\n template <class T> static inline sps<T> space_num(const sps<int>\
+    \ ret;\n }\n template <class T> static inline sps<T> space_size(const sps<int>\
     \ &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
     \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T> graph()\
     \ const { return space_size<T>(edge_num()); }\n template <class T> inline sps<T>\
@@ -252,8 +252,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc199_d.test.cpp
   requiredBy: []
-  timestamp: '2023-10-31 14:54:28+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-10-31 16:08:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc199_d.test.cpp
 layout: document
