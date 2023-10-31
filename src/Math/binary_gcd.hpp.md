@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':question:'
@@ -40,7 +40,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'

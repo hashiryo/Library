@@ -14,7 +14,7 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':x:'
@@ -28,7 +28,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'

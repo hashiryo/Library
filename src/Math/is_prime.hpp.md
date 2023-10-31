@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -60,7 +60,7 @@ data:
   - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':x:'
@@ -107,13 +107,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'

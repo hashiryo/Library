@@ -7,7 +7,7 @@ data:
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
   - icon: ':heavy_check_mark:'
     path: src/Graph/BiConnectedComponents.hpp
-    title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: src/Graph/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"

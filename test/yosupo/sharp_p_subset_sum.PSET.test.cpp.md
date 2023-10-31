@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -118,16 +118,16 @@ data:
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 3 \"src/FFT/FormalPowerSeries.hpp\"\n#include <functional>\n\
-    #include <memory>\n#include <optional>\n#line 2 \"src/FFT/NTT.hpp\"\n#include\
-    \ <array>\n#include <limits>\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
-    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
-    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
-    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
-    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
-    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
-    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
-    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
+    #include <memory>\n#include <optional>\n#include <cstdint>\n#include <cstddef>\n\
+    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 3 \"src/Math/is_prime.hpp\"\
+    \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
+    \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
+    \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
+    \ {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d,\
+    \ md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n   \
+    \  if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if\
+    \ (n < 2 || n % 6 % 4 != 1) return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32,\
+    \ MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
@@ -243,8 +243,8 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 7 \"src/FFT/FormalPowerSeries.hpp\"\
-    \ntemplate <class T, std::size_t LM= 1 << 22> class RelaxedConvolution {\n std::vector<T>\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 9 \"src/FFT/FormalPowerSeries.hpp\"\
+    \ntemplate <class T, size_t LM= 1 << 22> class RelaxedConvolution {\n std::vector<T>\
     \ a, b, c;\n std::vector<NTTArray<T, LM, true>> ac, bc;\n std::function<T()> ha,\
     \ hb;\n int n;\n template <class T0> static auto wrap(T0 &&f, int &n, const std::vector<T>\
     \ &c, std::vector<T> &e) {\n  if constexpr (std::is_invocable_r_v<T, T0, int,\
@@ -278,18 +278,17 @@ data:
     \ 0, t1), GNA1::bf.idft(0, t1);\n     for (int i= t1 - 1; i--;) c[n + 1 + i]+=\
     \ GNA1::bf.get(i);\n    } else\n     for (int i= t0; i--;)\n      for (int j=\
     \ t0; j--;) c[n + 1 + i + j]+= a[m + i] * b[j + t0] + a[j + t0] * b[m + i];\n\
-    \  }\n  return c[n++];\n }\n};\ntemplate <class mod_t, std::size_t LM= 1 << 22>\
-    \ class FormalPowerSeries {\n using F= std::function<mod_t(int)>;\n using FPS=\
-    \ FormalPowerSeries;\n F h_;\npublic:\n class Resetter {\n  std::shared_ptr<F>\
-    \ p_;\n public:\n  Resetter() {}\n  Resetter(std::shared_ptr<F> p): p_(p) {}\n\
-    \  void set(const FPS &rhs) { *p_= rhs.handle(); }\n };\n class Inde {  // indeterminate\n\
-    \  int p_;\n public:\n  Inde(int p): p_(p) {}\n  Inde(): Inde(1) {}\n  Inde operator^(int\
-    \ p) const { return Inde(p_ * p); }\n  Inde operator*(const Inde &rhs) const {\
-    \ return Inde(p_ + rhs.p_); }\n  int pow() const { return p_; }\n };\n FormalPowerSeries():\
-    \ h_([](int) { return mod_t(0); }) {}\n FormalPowerSeries(F f)\n     : h_([f,\
-    \ cache= std::make_shared<std::vector<mod_t>>()](int k) -> mod_t {\n        for\
-    \ (int i= (int)cache->size(); i <= k; ++i) cache->emplace_back(f(i));\n      \
-    \  return cache->at(k);\n       }) {}\n FormalPowerSeries(const std::vector<mod_t>\
+    \  }\n  return c[n++];\n }\n};\ntemplate <class mod_t, size_t LM= 1 << 22> class\
+    \ FormalPowerSeries {\n using F= std::function<mod_t(int)>;\n using FPS= FormalPowerSeries;\n\
+    \ F h_;\npublic:\n class Resetter {\n  std::shared_ptr<F> p_;\n public:\n  Resetter()\
+    \ {}\n  Resetter(std::shared_ptr<F> p): p_(p) {}\n  void set(const FPS &rhs) {\
+    \ *p_= rhs.handle(); }\n };\n class Inde {  // indeterminate\n  int p_;\n public:\n\
+    \  Inde(int p): p_(p) {}\n  Inde(): Inde(1) {}\n  Inde operator^(int p) const\
+    \ { return Inde(p_ * p); }\n  Inde operator*(const Inde &rhs) const { return Inde(p_\
+    \ + rhs.p_); }\n  int pow() const { return p_; }\n };\n FormalPowerSeries(): h_([](int)\
+    \ { return mod_t(0); }) {}\n FormalPowerSeries(F f)\n     : h_([f, cache= std::make_shared<std::vector<mod_t>>()](int\
+    \ k) -> mod_t {\n        for (int i= (int)cache->size(); i <= k; ++i) cache->emplace_back(f(i));\n\
+    \        return cache->at(k);\n       }) {}\n FormalPowerSeries(const std::vector<mod_t>\
     \ &coef): h_([cache= std::make_shared<std::vector<mod_t>>(coef)](int k) -> mod_t\
     \ { return k < (int)cache->size() ? cache->at(k) : mod_t(0); }) {}\n FormalPowerSeries(mod_t\
     \ v): h_([v](int k) { return k == 0 ? v : mod_t(0); }) {}\n F handle() const {\
@@ -326,28 +325,27 @@ data:
     \ fps.h_](int i) { return h(i + 1) * mod_t(i + 1); }, [](int i, const auto &c)\
     \ { return i ? c[i - 1] * get_inv<mod_t, LM>(i) : mod_t(1); });\n  return FPS([rc](int\
     \ i) { return i ? rc->at(i - 1) * get_inv<mod_t, LM>(i) : mod_t(1); });\n }\n\
-    \ friend FPS pow(const FPS &fps, std::uint64_t k) {\n  if (!k) return FPS(1);\n\
-    \  return FPS([h= fps.h_, kk= mod_t(k), k, cnt= 0ull, s= std::optional<std::function<mod_t(int)>>()](int\
-    \ i) mutable {\n   if (s) return (std::uint64_t)i < cnt ? mod_t(0) : (*s)(i -\
-    \ (int)cnt);\n   mod_t v= h(i);\n   if (v == mod_t(0)) return cnt++, mod_t(0);\n\
-    \   cnt*= k;\n   FPS t0([os= i, iv= mod_t(1) / v, h](int i) { return h(i + os)\
-    \ * iv; });\n   FPS t1([h0= log(t0).handle(), kk](int i) { return h0(i) * kk;\
-    \ });\n   s.emplace([vk= v.pow(k), h1= exp(t1).handle()](int i) { return h1(i)\
-    \ * vk; });\n   return cnt ? mod_t(0) : (*s)(i);\n  });\n }\n friend FPS SEQ(const\
-    \ FPS &fps) {  // SEQUENCE `fps[0]==0` is required\n  return FPS([h= fps.h_](int\
-    \ i) { return i == 0 ? mod_t(1) : -h(i); }).inv();\n }\n friend FPS MSET(const\
-    \ FPS &fps) {  // MULTISET `fps[0]==0` is required\n  return exp(FPS([h= fps.h_,\
-    \ cache= std::make_shared<std::vector<mod_t>>()](int i) {\n   if (i == 0) return\
-    \ mod_t(0);\n   if ((i & (i - 1)) == 0) {\n    cache->resize(i * 2, mod_t(0));\n\
-    \    for (int j= 1; j < i; ++j) {\n     mod_t hj= h(j);\n     for (int k= (i +\
-    \ j - 1) / j, ed= (i * 2 + j - 1) / j; k < ed; k++) cache->at(j * k)+= hj * get_inv<mod_t,\
-    \ LM>(k);\n    }\n   }\n   return mod_t(cache->at(i)+= h(i));\n  }));\n }\n friend\
-    \ FPS PSET(const FPS &fps) {  //  POWERSET `fps[0]==0` is required\n  return exp(FPS([h=\
-    \ fps.h_, cache= std::make_shared<std::vector<mod_t>>()](int i) {\n   if (i ==\
-    \ 0) return mod_t(0);\n   if ((i & (i - 1)) == 0) {\n    cache->resize(i * 2,\
-    \ mod_t(0));\n    for (int j= 1; j < i; ++j) {\n     mod_t hj= h(j);\n     for\
-    \ (int k= (i + j - 1) / j, ed= (i * 2 + j - 1) / j; k < ed; k++)\n      if (k\
-    \ & 1) cache->at(j * k)+= hj * get_inv<mod_t, LM>(k);\n      else cache->at(j\
+    \ friend FPS pow(const FPS &fps, uint64_t k) {\n  if (!k) return FPS(1);\n  return\
+    \ FPS([h= fps.h_, kk= mod_t(k), k, cnt= 0ull, s= std::optional<std::function<mod_t(int)>>()](int\
+    \ i) mutable {\n   if (s) return (uint64_t)i < cnt ? mod_t(0) : (*s)(i - (int)cnt);\n\
+    \   mod_t v= h(i);\n   if (v == mod_t(0)) return cnt++, mod_t(0);\n   cnt*= k;\n\
+    \   FPS t0([os= i, iv= mod_t(1) / v, h](int i) { return h(i + os) * iv; });\n\
+    \   FPS t1([h0= log(t0).handle(), kk](int i) { return h0(i) * kk; });\n   s.emplace([vk=\
+    \ v.pow(k), h1= exp(t1).handle()](int i) { return h1(i) * vk; });\n   return cnt\
+    \ ? mod_t(0) : (*s)(i);\n  });\n }\n friend FPS SEQ(const FPS &fps) {  // SEQUENCE\
+    \ `fps[0]==0` is required\n  return FPS([h= fps.h_](int i) { return i == 0 ? mod_t(1)\
+    \ : -h(i); }).inv();\n }\n friend FPS MSET(const FPS &fps) {  // MULTISET `fps[0]==0`\
+    \ is required\n  return exp(FPS([h= fps.h_, cache= std::make_shared<std::vector<mod_t>>()](int\
+    \ i) {\n   if (i == 0) return mod_t(0);\n   if ((i & (i - 1)) == 0) {\n    cache->resize(i\
+    \ * 2, mod_t(0));\n    for (int j= 1; j < i; ++j) {\n     mod_t hj= h(j);\n  \
+    \   for (int k= (i + j - 1) / j, ed= (i * 2 + j - 1) / j; k < ed; k++) cache->at(j\
+    \ * k)+= hj * get_inv<mod_t, LM>(k);\n    }\n   }\n   return mod_t(cache->at(i)+=\
+    \ h(i));\n  }));\n }\n friend FPS PSET(const FPS &fps) {  //  POWERSET `fps[0]==0`\
+    \ is required\n  return exp(FPS([h= fps.h_, cache= std::make_shared<std::vector<mod_t>>()](int\
+    \ i) {\n   if (i == 0) return mod_t(0);\n   if ((i & (i - 1)) == 0) {\n    cache->resize(i\
+    \ * 2, mod_t(0));\n    for (int j= 1; j < i; ++j) {\n     mod_t hj= h(j);\n  \
+    \   for (int k= (i + j - 1) / j, ed= (i * 2 + j - 1) / j; k < ed; k++)\n     \
+    \ if (k & 1) cache->at(j * k)+= hj * get_inv<mod_t, LM>(k);\n      else cache->at(j\
     \ * k)-= hj * get_inv<mod_t, LM>(k);\n    }\n   }\n   return mod_t(cache->at(i)+=\
     \ h(i));\n  }));\n };\n FPS operator+(const FPS &rhs) const {\n  return FPS([h0=\
     \ h_, h1= rhs.h_](int i) { return h0(i) + h1(i); });\n }\n FPS operator-(const\
@@ -388,7 +386,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 13:15:22+09:00'
+  timestamp: '2023-10-31 14:54:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.PSET.test.cpp

@@ -90,7 +90,7 @@ data:
     - icon: ':question:'
       path: src/FFT/BigInt.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     - icon: ':x:'
@@ -186,7 +186,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: src/Graph/BiConnectedComponents.hpp
-      title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+      title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteEdgeColoring.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
@@ -226,7 +226,7 @@ data:
     - icon: ':question:'
       path: src/Graph/Tree.hpp
       title: "\u6728"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -293,7 +293,7 @@ data:
     - icon: ':question:'
       path: src/Math/DirichletSeries.hpp
       title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/DiscreteLogarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
     - icon: ':question:'
@@ -302,10 +302,10 @@ data:
     - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Math/ModInt_Runtime.hpp
       title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
     - icon: ':heavy_check_mark:'
@@ -317,7 +317,7 @@ data:
     - icon: ':x:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Math/SetPowerSeries.hpp
       title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     - icon: ':question:'
@@ -670,7 +670,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2345.test.cpp
       title: test/aoj/2345.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1122,7 +1122,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc194_e.test.cpp
       title: test/atcoder/abc194_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1137,10 +1137,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc208_e.test.cpp
       title: test/atcoder/abc208_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_h.test.cpp
       title: test/atcoder/abc213_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1149,7 +1149,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc217_h.test.cpp
       title: test/atcoder/abc217_h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc218_h.test.cpp
       title: test/atcoder/abc218_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1158,7 +1158,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_g.test.cpp
       title: test/atcoder/abc222_g.test.cpp
     - icon: ':x:'
@@ -1173,7 +1173,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_d.test.cpp
       title: test/atcoder/abc228_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1901,6 +1901,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/2458.LiCT.test.cpp
       title: test/yukicoder/2458.LiCT.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2507.test.cpp
+      title: test/yukicoder/2507.test.cpp
     - icon: ':x:'
       path: test/yukicoder/261.test.cpp
       title: test/yukicoder/261.test.cpp

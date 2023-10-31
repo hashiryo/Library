@@ -6,7 +6,7 @@ data:
     title: "CSR\u5F62\u5F0F"
   - icon: ':heavy_check_mark:'
     path: src/Graph/BiConnectedComponents.hpp
-    title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"

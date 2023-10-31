@@ -7,7 +7,7 @@ data:
       \u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
   - icon: ':x:'
@@ -27,7 +27,7 @@ data:
     title: test/yukicoder/950.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/DiscreteLogarithm.hpp\"\n#include <cmath>\n#include\
@@ -98,7 +98,7 @@ data:
   path: src/Math/DiscreteLogarithm.hpp
   requiredBy: []
   timestamp: '2023-10-29 17:46:55+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yukicoder/1339.test.cpp

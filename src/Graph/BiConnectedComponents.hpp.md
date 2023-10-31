@@ -150,7 +150,7 @@ data:
   - test/hackerrank/bonnie-and-clyde.test.cpp
 documentation_of: src/Graph/BiConnectedComponents.hpp
 layout: document
-title: "\u4E8C\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
 ---
 
 ![bct.png](https://github.com/hashiryo/Library/blob/master/img/bct.png?raw=true)
