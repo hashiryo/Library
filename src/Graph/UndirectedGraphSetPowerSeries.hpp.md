@@ -6,7 +6,7 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2345.test.cpp
     title: test/aoj/2345.test.cpp
   - icon: ':heavy_check_mark:'
@@ -142,7 +142,7 @@ data:
     #undef SUBSET_REP\n};\n#line 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
     \ntemplate <unsigned short MAX_V= 21> class UndirectedGraphSetPowerSeries {\n\
     \ using SPS= SetPowerSeries<MAX_V>;\n template <class T> using sps= std::vector<T>;\n\
-    \ template <class T> using poly= std::vector<T>;\n const unsigned V, sz;\n unsigned\
+    \ template <class T> using poly= std::vector<T>;\n const int V, sz;\n unsigned\
     \ adj[MAX_V][MAX_V]= {0}, edge[MAX_V]= {0};\n template <class T> static inline\
     \ T pow(T x, int k) {\n  for (T ret(1);; x*= x)\n   if (k & 1 ? ret*= x : 0; !(k>>=\
     \ 1)) return ret;\n }\n template <class F> inline void bfs(int s, const F &f)\
@@ -184,15 +184,19 @@ data:
     \ {\n  sps<int> ret(sz, 0);\n  for (int s= sz; s--;) bfs(s, [&](int) { ret[s]++;\
     \ });\n  return ret;\n }\n inline sps<int> cycle_space_rank() const {\n  sps<int>\
     \ e= edge_num(), k= connected_component_num(), ret(sz, 0);\n  for (int s= sz;\
-    \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n template\
-    \ <class T> inline void selfloop_num(sps<T> &f) const {\n  sps<int> ret(sz, 0);\n\
-    \  for (int i= V; i--;) ret[1 << i]= adj[i][i];\n  return SPS::subset_sum(ret),\
-    \ ret;\n }\n template <class T> static inline sps<T> space_size(const sps<int>\
-    \ &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
-    \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T> graph()\
-    \ const { return space_size<T>(edge_num()); }\n template <class T> inline sps<T>\
-    \ cycle_space_size() const { return space_size<T>(cycle_space_rank()); }\n template\
-    \ <class T> inline sps<T> connected_graph() const { return SPS::log(graph<T>());\
+    \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n inline\
+    \ sps<int> odd_deg_num() const {\n  sps<int> ret(sz, 0);\n  for (int i= V, I=\
+    \ sz; I>>= 1, i--;)\n   for (int t= 0, I2= I << 1; t < sz; t+= I2)\n    for (int\
+    \ u= I, cnt, v, j; u--; ret[t | I | u]+= cnt & 1)\n     for (cnt= 0, v= t | u;\
+    \ v; v^= 1 << j) cnt+= adj[i][j= __builtin_ctz(v)];\n  return ret;\n }\n inline\
+    \ sps<int> selfloop_num() const {\n  sps<int> ret(sz, 0);\n  for (int i= 0, I=\
+    \ 1; i < V; ++i, I<<= 1)\n   for (int u= I; u--;) ret[I | u]= ret[u] + adj[i][i];\n\
+    \  return ret;\n }\n template <class T> static inline sps<T> space_size(const\
+    \ sps<int> &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;)\
+    \ ret[s]= pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T>\
+    \ graph() const { return space_size<T>(edge_num()); }\n template <class T> inline\
+    \ sps<T> cycle_space_size() const { return space_size<T>(cycle_space_rank());\
+    \ }\n template <class T> inline sps<T> connected_graph() const { return SPS::log(graph<T>());\
     \ }\n template <class T> inline sps<T> eulerian_graph() const { return SPS::log(cycle_space_size<T>());\
     \ }\n template <class T> inline sps<T> connected_biparate_graph() const {\n  sps<T>\
     \ tmp= graph<T>(), ret(sz, 1);\n  for (int s= sz; s--;) ret[s]/= tmp[s];\n  ret=\
@@ -242,7 +246,7 @@ data:
   code: "#pragma once\n#include \"src/Math/SetPowerSeries.hpp\"\ntemplate <unsigned\
     \ short MAX_V= 21> class UndirectedGraphSetPowerSeries {\n using SPS= SetPowerSeries<MAX_V>;\n\
     \ template <class T> using sps= std::vector<T>;\n template <class T> using poly=\
-    \ std::vector<T>;\n const unsigned V, sz;\n unsigned adj[MAX_V][MAX_V]= {0}, edge[MAX_V]=\
+    \ std::vector<T>;\n const int V, sz;\n unsigned adj[MAX_V][MAX_V]= {0}, edge[MAX_V]=\
     \ {0};\n template <class T> static inline T pow(T x, int k) {\n  for (T ret(1);;\
     \ x*= x)\n   if (k & 1 ? ret*= x : 0; !(k>>= 1)) return ret;\n }\n template <class\
     \ F> inline void bfs(int s, const F &f) const {\n  for (int t= s, u, j; t;)\n\
@@ -284,15 +288,19 @@ data:
     \ {\n  sps<int> ret(sz, 0);\n  for (int s= sz; s--;) bfs(s, [&](int) { ret[s]++;\
     \ });\n  return ret;\n }\n inline sps<int> cycle_space_rank() const {\n  sps<int>\
     \ e= edge_num(), k= connected_component_num(), ret(sz, 0);\n  for (int s= sz;\
-    \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n template\
-    \ <class T> inline void selfloop_num(sps<T> &f) const {\n  sps<int> ret(sz, 0);\n\
-    \  for (int i= V; i--;) ret[1 << i]= adj[i][i];\n  return SPS::subset_sum(ret),\
-    \ ret;\n }\n template <class T> static inline sps<T> space_size(const sps<int>\
-    \ &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
-    \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T> graph()\
-    \ const { return space_size<T>(edge_num()); }\n template <class T> inline sps<T>\
-    \ cycle_space_size() const { return space_size<T>(cycle_space_rank()); }\n template\
-    \ <class T> inline sps<T> connected_graph() const { return SPS::log(graph<T>());\
+    \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n inline\
+    \ sps<int> odd_deg_num() const {\n  sps<int> ret(sz, 0);\n  for (int i= V, I=\
+    \ sz; I>>= 1, i--;)\n   for (int t= 0, I2= I << 1; t < sz; t+= I2)\n    for (int\
+    \ u= I, cnt, v, j; u--; ret[t | I | u]+= cnt & 1)\n     for (cnt= 0, v= t | u;\
+    \ v; v^= 1 << j) cnt+= adj[i][j= __builtin_ctz(v)];\n  return ret;\n }\n inline\
+    \ sps<int> selfloop_num() const {\n  sps<int> ret(sz, 0);\n  for (int i= 0, I=\
+    \ 1; i < V; ++i, I<<= 1)\n   for (int u= I; u--;) ret[I | u]= ret[u] + adj[i][i];\n\
+    \  return ret;\n }\n template <class T> static inline sps<T> space_size(const\
+    \ sps<int> &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;)\
+    \ ret[s]= pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T>\
+    \ graph() const { return space_size<T>(edge_num()); }\n template <class T> inline\
+    \ sps<T> cycle_space_size() const { return space_size<T>(cycle_space_rank());\
+    \ }\n template <class T> inline sps<T> connected_graph() const { return SPS::log(graph<T>());\
     \ }\n template <class T> inline sps<T> eulerian_graph() const { return SPS::log(cycle_space_size<T>());\
     \ }\n template <class T> inline sps<T> connected_biparate_graph() const {\n  sps<T>\
     \ tmp= graph<T>(), ret(sz, 1);\n  for (int s= sz; s--;) ret[s]/= tmp[s];\n  ret=\
@@ -344,7 +352,7 @@ data:
   isVerificationFile: false
   path: src/Graph/UndirectedGraphSetPowerSeries.hpp
   requiredBy: []
-  timestamp: '2023-10-31 16:08:34+09:00'
+  timestamp: '2023-10-31 17:32:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2345.test.cpp
@@ -382,7 +390,8 @@ title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51A
 |`edge_num()`|辺空間の基底の数 (辺の本数) を表す集合冪級数を返す.|$\mathcal{O}(n2^n)$|
 |`connected_component_num()`|連結成分の個数を表す集合冪級数を返す.|$\mathcal{O}(n2^n)$|
 |`cycle_space_rank()`|[サイクル基底](https://en.wikipedia.org/wiki/Cycle_basis)の数を表す集合冪級数を返す.|$\mathcal{O}(n2^n)$|
-|`selfloop_num()`|自己ループの数を表す集合冪級数を返す.|$\mathcal{O}(n2^n)$|
+|`selfloop_num()`|自己ループの数を表す集合冪級数を返す.|$\mathcal{O}(2^n)$|
+|`odd_deg_num()`|奇数次数の頂点の数を表す集合冪級数を返す.|$\mathcal{O}(n^22^n)$|
 |`space_size<T>(rank)`|$\mathbb{F}_2$ベクトル空間の基底の数を表す集合冪級数 $f^{\rm rank}$ を渡して, その空間の元の個数を表す集合冪級数を返す.|$\mathcal{O}(2^n)$|
 |`graph<T>()`|辺空間の元の個数を表す集合冪級数 (任意のグラフを表す集合冪級) を返す.|$\mathcal{O}(n2^n)$|
 |`cycle_space_size<T>()`|サイクル空間の元の個数を表す集合冪級数 (全ての頂点の次数が偶数のグラフを表す集合冪級数) を返す. |$\mathcal{O}(n2^n)$|
@@ -414,4 +423,5 @@ title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51A
 [LibreOJ #6719. 「300iq Contest 2」数仙人掌 加强版](https://loj.ac/p/6719) (カクタスグラフ) \
 [LibreOJ #6729. 点双连通生成子图计数](https://loj.ac/p/6729) (二重点連結グラフ) \
 [LibreOJ #6730. 边双连通生成子图计数](https://loj.ac/p/6730) (二重辺連結グラフ) \
-[LibreOJ #6787. 色多项式](https://loj.ac/p/6787) (彩色多項式)
+[LibreOJ #6787. 色多项式](https://loj.ac/p/6787) (彩色多項式)\
+[LibraOJ #2340. 「WC2018」州区划分](https://loj.ac/p/2340) 

@@ -231,7 +231,7 @@ data:
     #undef SUBSET_REP\n};\n#line 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\
     \ntemplate <unsigned short MAX_V= 21> class UndirectedGraphSetPowerSeries {\n\
     \ using SPS= SetPowerSeries<MAX_V>;\n template <class T> using sps= std::vector<T>;\n\
-    \ template <class T> using poly= std::vector<T>;\n const unsigned V, sz;\n unsigned\
+    \ template <class T> using poly= std::vector<T>;\n const int V, sz;\n unsigned\
     \ adj[MAX_V][MAX_V]= {0}, edge[MAX_V]= {0};\n template <class T> static inline\
     \ T pow(T x, int k) {\n  for (T ret(1);; x*= x)\n   if (k & 1 ? ret*= x : 0; !(k>>=\
     \ 1)) return ret;\n }\n template <class F> inline void bfs(int s, const F &f)\
@@ -273,15 +273,19 @@ data:
     \ {\n  sps<int> ret(sz, 0);\n  for (int s= sz; s--;) bfs(s, [&](int) { ret[s]++;\
     \ });\n  return ret;\n }\n inline sps<int> cycle_space_rank() const {\n  sps<int>\
     \ e= edge_num(), k= connected_component_num(), ret(sz, 0);\n  for (int s= sz;\
-    \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n template\
-    \ <class T> inline void selfloop_num(sps<T> &f) const {\n  sps<int> ret(sz, 0);\n\
-    \  for (int i= V; i--;) ret[1 << i]= adj[i][i];\n  return SPS::subset_sum(ret),\
-    \ ret;\n }\n template <class T> static inline sps<T> space_size(const sps<int>\
-    \ &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
-    \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T> graph()\
-    \ const { return space_size<T>(edge_num()); }\n template <class T> inline sps<T>\
-    \ cycle_space_size() const { return space_size<T>(cycle_space_rank()); }\n template\
-    \ <class T> inline sps<T> connected_graph() const { return SPS::log(graph<T>());\
+    \ s--;) ret[s]= e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n inline\
+    \ sps<int> odd_deg_num() const {\n  sps<int> ret(sz, 0);\n  for (int i= V, I=\
+    \ sz; I>>= 1, i--;)\n   for (int t= 0, I2= I << 1; t < sz; t+= I2)\n    for (int\
+    \ u= I, cnt, v, j; u--; ret[t | I | u]+= cnt & 1)\n     for (cnt= 0, v= t | u;\
+    \ v; v^= 1 << j) cnt+= adj[i][j= __builtin_ctz(v)];\n  return ret;\n }\n inline\
+    \ sps<int> selfloop_num() const {\n  sps<int> ret(sz, 0);\n  for (int i= 0, I=\
+    \ 1; i < V; ++i, I<<= 1)\n   for (int u= I; u--;) ret[I | u]= ret[u] + adj[i][i];\n\
+    \  return ret;\n }\n template <class T> static inline sps<T> space_size(const\
+    \ sps<int> &rank) {\n  sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;)\
+    \ ret[s]= pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline sps<T>\
+    \ graph() const { return space_size<T>(edge_num()); }\n template <class T> inline\
+    \ sps<T> cycle_space_size() const { return space_size<T>(cycle_space_rank());\
+    \ }\n template <class T> inline sps<T> connected_graph() const { return SPS::log(graph<T>());\
     \ }\n template <class T> inline sps<T> eulerian_graph() const { return SPS::log(cycle_space_size<T>());\
     \ }\n template <class T> inline sps<T> connected_biparate_graph() const {\n  sps<T>\
     \ tmp= graph<T>(), ret(sz, 1);\n  for (int s= sz; s--;) ret[s]/= tmp[s];\n  ret=\
@@ -355,7 +359,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2023-10-31 16:08:34+09:00'
+  timestamp: '2023-10-31 17:32:03+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp
