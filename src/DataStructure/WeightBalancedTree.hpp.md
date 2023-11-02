@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.WBT.test.cpp
     title: test/aoj/ITP2_4_C.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':x:'
@@ -39,15 +39,15 @@ data:
     #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
     \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
     \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
-    \ \\\n };\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_,\
-    \ std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
+    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
     #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
     \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
     \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
-    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
-    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
-    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 9 \"src/DataStructure/WeightBalancedTree.hpp\"\
+    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)));\
+    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type\n\
+    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define\
+    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass)\n#line 9 \"src/DataStructure/WeightBalancedTree.hpp\"\
     \ntemplate <class M, size_t NODE_SIZE= 1 << 22> class WeightBalancedTree {\n HAS_MEMBER(op);\n\
     \ HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n\
     \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
@@ -281,16 +281,16 @@ data:
   isVerificationFile: false
   path: src/DataStructure/WeightBalancedTree.hpp
   requiredBy: []
-  timestamp: '2023-10-30 14:53:23+09:00'
+  timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/ITP2_4_B.WBT.test.cpp
+  - test/atcoder/abc256_f.WBT.test.cpp
+  - test/yosupo/persistent_queue.WBT.test.cpp
+  - test/yosupo/range_affine_range_sum.WBT.test.cpp
+  - test/aoj/1508.WBT.test.cpp
   - test/aoj/ITP2_4_C.WBT.test.cpp
   - test/aoj/3024.WBT.test.cpp
-  - test/aoj/1508.WBT.test.cpp
-  - test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - test/yosupo/persistent_queue.WBT.test.cpp
-  - test/atcoder/abc256_f.WBT.test.cpp
+  - test/aoj/ITP2_4_B.WBT.test.cpp
 documentation_of: src/DataStructure/WeightBalancedTree.hpp
 layout: document
 title: "\u6C38\u7D9AWeight-Balanced-Tree"

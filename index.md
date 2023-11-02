@@ -34,7 +34,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/PersistentArray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':warning:'
@@ -455,11 +455,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
-  - name: test/yukicoder
-    pages:
-    - icon: ':warning:'
-      path: test/yukicoder/1625.KDT.test copy.cpp
-      title: test/yukicoder/1625.KDT.test copy.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -1062,10 +1057,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.DynSeg.test.cpp
       title: test/atcoder/abc133_f.DynSeg.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc133_f.Patricia.test.cpp
       title: test/atcoder/abc133_f.Patricia.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1206,16 +1201,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_d.test.cpp
       title: test/atcoder/abc256_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.SplayTree.test.cpp
       title: test/atcoder/abc256_f.SplayTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1889,6 +1884,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/2309.test.cpp
       title: test/yukicoder/2309.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2342.KDT.test.cpp
+      title: test/yukicoder/2342.KDT.test.cpp
     - icon: ':x:'
       path: test/yukicoder/235.HLD.test.cpp
       title: test/yukicoder/235.HLD.test.cpp

@@ -68,21 +68,21 @@ data:
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/0655.test.cpp
-  - test/aoj/2256.test.cpp
-  - test/aoj/3506.test.cpp
-  - test/aoj/0265.test.cpp
-  - test/aoj/1047.test.cpp
-  - test/aoj/2514.test.cpp
-  - test/aoj/2893.test.cpp
+  - test/yukicoder/1467.test.cpp
+  - test/yukicoder/738.BIT.test.cpp
+  - test/yukicoder/2114.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
+  - test/yukicoder/649.SegTree.test.cpp
+  - test/yukicoder/649.BIT.test.cpp
   - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yukicoder/2114.test.cpp
-  - test/yukicoder/1467.test.cpp
-  - test/yukicoder/649.SegTree.test.cpp
-  - test/yukicoder/738.BIT.test.cpp
-  - test/yukicoder/649.BIT.test.cpp
+  - test/aoj/1047.test.cpp
+  - test/aoj/3506.test.cpp
+  - test/aoj/2514.test.cpp
+  - test/aoj/2893.test.cpp
+  - test/aoj/0655.test.cpp
+  - test/aoj/0265.test.cpp
+  - test/aoj/2256.test.cpp
 documentation_of: src/Misc/compress.hpp
 layout: document
 title: "\u5EA7\u6A19\u5727\u7E2E"

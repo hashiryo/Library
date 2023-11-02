@@ -19,10 +19,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.DynSeg.test.cpp
     title: test/atcoder/abc133_f.DynSeg.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.Patricia.test.cpp
     title: test/atcoder/abc133_f.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
   - icon: ':x:'
@@ -53,16 +53,16 @@ data:
     #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
     \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
     \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
-    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member,\
+    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member,\
     \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
     \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
     \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
     \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
     \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
-    \ type2, using type= decltype(check(mClass))) \\\n template <class tClass> using\
-    \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
-    \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
-    \ myself_or_, tClass);\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\ntemplate\
+    \ type2, using type= decltype(check(mClass))); \\\n template <class tClass> using\
+    \ name##member##_t= typename name##member<tClass>::type\n#define NULLPTR_OR(member)\
+    \ HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define MYSELF_OR(member) HOGE_OR(member,\
+    \ myself_or_, tClass)\n#line 8 \"src/DataStructure/LinkCutTree.hpp\"\ntemplate\
     \ <typename M= void> class LinkCutTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n\
     \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n\
     \ template <class L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>,\
@@ -194,21 +194,21 @@ data:
   isVerificationFile: false
   path: src/DataStructure/LinkCutTree.hpp
   requiredBy: []
-  timestamp: '2023-10-30 14:53:23+09:00'
+  timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2450.LCT.test.cpp
-  - test/aoj/2270.Patricia.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
-  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
-  - test/yosupo/lca.LCT.test.cpp
-  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/650.LCT.test.cpp
+  - test/atcoder/abc133_f.DynSeg.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
-  - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
+  - test/yosupo/lca.LCT.test.cpp
+  - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
+  - test/aoj/2450.LCT.test.cpp
+  - test/aoj/2270.Patricia.test.cpp
 documentation_of: src/DataStructure/LinkCutTree.hpp
 layout: document
 title: Link-Cut-Tree

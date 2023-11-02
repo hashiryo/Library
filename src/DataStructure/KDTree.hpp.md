@@ -13,10 +13,7 @@ data:
     path: src/Internal/tuple_traits.hpp
     title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8 \u4ED6"
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/yukicoder/1625.KDT.test copy.cpp
-    title: test/yukicoder/1625.KDT.test copy.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
@@ -39,6 +36,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2342.KDT.test.cpp
+    title: test/yukicoder/2342.KDT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -49,16 +49,16 @@ data:
     #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
     \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
     \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
-    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member,\
+    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member,\
     \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
     \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
     \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
     \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
     \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
-    \ type2, using type= decltype(check(mClass))) \\\n template <class tClass> using\
-    \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
-    \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
-    \ myself_or_, tClass);\n#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n\
+    \ type2, using type= decltype(check(mClass))); \\\n template <class tClass> using\
+    \ name##member##_t= typename name##member<tClass>::type\n#define NULLPTR_OR(member)\
+    \ HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define MYSELF_OR(member) HOGE_OR(member,\
+    \ myself_or_, tClass)\n#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n\
     #include <array>\n#line 5 \"src/Internal/tuple_traits.hpp\"\n#include <cstddef>\n\
     template <class T> static constexpr bool tuple_like_v= false;\ntemplate <class...\
     \ Args> static constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate\
@@ -416,25 +416,25 @@ data:
   - src/Internal/long_traits.hpp
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
-  requiredBy:
-  - test/yukicoder/1625.KDT.test copy.cpp
-  timestamp: '2023-10-31 18:36:36+09:00'
+  requiredBy: []
+  timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/2342.KDT.test.cpp
+  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/aoj/2842.KDT.test.cpp
   - test/aoj/1068.KDT.test.cpp
-  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/yukicoder/1625.KDT.test.cpp
-  - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/aoj/2842.KDT.test.cpp
 documentation_of: src/DataStructure/KDTree.hpp
 layout: document
 title: kD-Tree
 ---
 
 $\mathcal{O}(k\cdot N^{1-1/k})$　で動くと思っておく.\
-領域を与える類のは全て境界は含まれるとする.\
+領域を与える類のは全て境界は含まれるとする. (例えば矩形は閉区間の直積)\
 半群は乗らない. モノイドの単位元 `M::ti` は明示的に与える必要あり. \
 内部でサイズを持たせていないので, `M::mp` はsizeを渡せない(2引数).
 

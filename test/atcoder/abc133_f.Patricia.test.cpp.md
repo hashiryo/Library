@@ -13,9 +13,9 @@ data:
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc133/tasks/abc133_f
@@ -30,15 +30,15 @@ data:
     #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
     \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
     \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
-    \ \\\n };\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_,\
-    \ std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
+    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
     #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
     \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
     \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
-    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
-    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
-    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 10 \"src/DataStructure/SegmentTree_Patricia.hpp\"\
+    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)));\
+    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type\n\
+    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define\
+    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass)\n#line 10 \"src/DataStructure/SegmentTree_Patricia.hpp\"\
     \ntemplate <typename M, bool persistent= false, uint8_t HEIGHT= 31> class SegmentTree_Patricia\
     \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_TYPE(T);\n template <class L> static\
     \ constexpr bool monoid_v= std::conjunction_v<has_T<L>, has_op<L>, has_ti<L>>;\n\
@@ -243,8 +243,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc133_f.Patricia.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 14:53:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-11-02 17:27:04+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc133_f.Patricia.test.cpp
 layout: document

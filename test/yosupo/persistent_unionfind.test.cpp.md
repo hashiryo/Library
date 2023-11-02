@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/PersistentArray.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
   - icon: ':heavy_check_mark:'

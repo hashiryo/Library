@@ -262,8 +262,8 @@ data:
   timestamp: '2023-10-10 00:58:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2423.test.cpp
   - test/aoj/3034.test.cpp
+  - test/aoj/2423.test.cpp
 documentation_of: src/Geometry/min_enclosing_circle.hpp
 layout: document
 title: "\u6700\u5C0F\u5305\u542B\u5186"

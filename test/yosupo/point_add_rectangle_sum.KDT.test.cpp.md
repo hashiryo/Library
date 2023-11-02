@@ -34,16 +34,16 @@ data:
     \ 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
     \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
     \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
-    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n };\n#define HAS_CHECK(member,\
+    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member,\
     \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
     \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
     \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
     \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
     \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
-    \ type2, using type= decltype(check(mClass))) \\\n template <class tClass> using\
-    \ name##member##_t= typename name##member<tClass>::type;\n#define NULLPTR_OR(member)\
-    \ HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define MYSELF_OR(member) HOGE_OR(member,\
-    \ myself_or_, tClass);\n#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n\
+    \ type2, using type= decltype(check(mClass))); \\\n template <class tClass> using\
+    \ name##member##_t= typename name##member<tClass>::type\n#define NULLPTR_OR(member)\
+    \ HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define MYSELF_OR(member) HOGE_OR(member,\
+    \ myself_or_, tClass)\n#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n\
     #line 5 \"src/Internal/tuple_traits.hpp\"\n#include <cstddef>\ntemplate <class\
     \ T> static constexpr bool tuple_like_v= false;\ntemplate <class... Args> static\
     \ constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate <class T,\
@@ -243,7 +243,7 @@ data:
     \ x, y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for\
     \ (int i= 0; i < Q; i++) {\n  if (query[i][0]) {\n   auto [_, l, d, r, u]= query[i];\n\
     \   cout << kdt.fold_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else {\n   auto\
-    \ [_, x, y, w, __]= query[i];\n   kdt.set(kdt.get(x, y) + w, x, y);\n  }\n }\n\
+    \ [_, x, y, w, __]= query[i];\n   kdt.set(x, y, kdt.get(x, y) + w);\n  }\n }\n\
     \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
     \n#include <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#include\
@@ -258,8 +258,8 @@ data:
     \ >> x >> y >> w;\n   query.push_back({op, x, y, w});\n   mp[{x, y}];\n  }\n }\n\
     \ KDTree<long long, 2, RSQ> kdt(mp);\n for (int i= 0; i < Q; i++) {\n  if (query[i][0])\
     \ {\n   auto [_, l, d, r, u]= query[i];\n   cout << kdt.fold_cuboid(l, r - 1,\
-    \ d, u - 1) << '\\n';\n  } else {\n   auto [_, x, y, w, __]= query[i];\n   kdt.set(kdt.get(x,\
-    \ y) + w, x, y);\n  }\n }\n return 0;\n}"
+    \ d, u - 1) << '\\n';\n  } else {\n   auto [_, x, y, w, __]= query[i];\n   kdt.set(x,\
+    \ y, kdt.get(x, y) + w);\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/KDTree.hpp
   - src/Internal/HAS_CHECK.hpp
@@ -268,7 +268,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-31 18:36:36+09:00'
+  timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_add_rectangle_sum.KDT.test.cpp

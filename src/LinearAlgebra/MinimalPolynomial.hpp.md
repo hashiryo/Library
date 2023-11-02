@@ -161,12 +161,12 @@ data:
   timestamp: '2023-10-30 17:57:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2397.SparseMat.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
-  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/310.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yosupo/sparse_matrix_det.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
 documentation_of: src/LinearAlgebra/MinimalPolynomial.hpp
 layout: document
 title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"

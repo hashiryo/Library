@@ -437,10 +437,10 @@ data:
   timestamp: '2023-10-30 13:15:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/137.div_at.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/215.test.cpp
+  - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: src/FFT/bostan_mori.hpp
 layout: document
 title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"

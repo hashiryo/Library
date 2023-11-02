@@ -5,9 +5,6 @@ data:
   - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':warning:'
-    path: test/yukicoder/1625.KDT.test copy.cpp
-    title: test/yukicoder/1625.KDT.test copy.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
@@ -30,6 +27,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2342.KDT.test.cpp
+    title: test/yukicoder/2342.KDT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -79,17 +79,17 @@ data:
   path: src/Internal/tuple_traits.hpp
   requiredBy:
   - src/DataStructure/KDTree.hpp
-  - test/yukicoder/1625.KDT.test copy.cpp
   timestamp: '2023-10-31 18:36:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/2342.KDT.test.cpp
+  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/aoj/2842.KDT.test.cpp
   - test/aoj/1068.KDT.test.cpp
-  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - test/yukicoder/1625.KDT.test.cpp
-  - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/aoj/2842.KDT.test.cpp
 documentation_of: src/Internal/tuple_traits.hpp
 layout: document
 title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\

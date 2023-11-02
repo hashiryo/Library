@@ -26,15 +26,15 @@ data:
     #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
     \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
     \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
-    \ \\\n };\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_,\
-    \ std::true_type, std::false_type, static const bool value= decltype(check(mClass))::value)\n\
+    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
+    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
     #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
     \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
     \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
-    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)))\
-    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type;\n\
-    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t);\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass);\n#line 8 \"src/DataStructure/EulerTourTree.hpp\"\
+    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)));\
+    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type\n\
+    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define\
+    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass)\n#line 8 \"src/DataStructure/EulerTourTree.hpp\"\
     \ntemplate <typename M= void, size_t NODE_SIZE= 4'000'000> class EulerTourTree\
     \ {\n HAS_MEMBER(op);\n HAS_MEMBER(ti);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n\
     \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(T);\n NULLPTR_OR(E);\n template <class\
@@ -152,7 +152,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-10-30 14:53:23+09:00'
+  timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/dynamic_tree_vertex_add_subtree_sum.test.cpp
