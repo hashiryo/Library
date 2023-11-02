@@ -235,31 +235,31 @@ data:
     \nusing namespace std;\nstruct RSQ {\n using T= long long;\n static T ti() { return\
     \ 0; }\n static T op(const T &l, const T &r) { return l + r; }\n};\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n\
-    \ map<array<long long, 2>, long long> mp;\n vector<array<long long, 5>> query;\n\
-    \ for (int i= 0; i < N; i++) {\n  long long x, y, w;\n  cin >> x >> y >> w;\n\
-    \  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int op;\n  cin >> op;\n\
-    \  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >> u;\n   query.push_back({op,\
-    \ l, d, r, u});\n  } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({op,\
-    \ x, y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for\
-    \ (int i= 0; i < Q; i++) {\n  if (query[i][0]) {\n   auto [_, l, d, r, u]= query[i];\n\
-    \   cout << kdt.fold_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else {\n   auto\
-    \ [_, x, y, w, __]= query[i];\n   kdt.set(x, y, kdt.get(x, y) + w);\n  }\n }\n\
-    \ return 0;\n}\n"
+    \ map<array<int, 2>, int> mp;\n vector<array<int, 4>> query;\n for (int i= 0;\
+    \ i < N; i++) {\n  int x, y, w;\n  cin >> x >> y >> w;\n  mp[{x, y}]+= w;\n }\n\
+    \ for (int i= 0; i < Q; i++) {\n  int op;\n  cin >> op;\n  if (op) {\n   int l,\
+    \ d, r, u;\n   cin >> l >> d >> r >> u;\n   query.push_back({l, d, r, u});\n \
+    \ } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1, x,\
+    \ y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for\
+    \ (int i= 0; i < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]=\
+    \ query[i];\n   cout << kdt.fold_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else\
+    \ {\n   auto [_, x, y, w]= query[i];\n   kdt.set(x, y, kdt.get(x, y) + w);\n \
+    \ }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
     \n#include <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#include\
     \ \"src/DataStructure/KDTree.hpp\"\nusing namespace std;\nstruct RSQ {\n using\
     \ T= long long;\n static T ti() { return 0; }\n static T op(const T &l, const\
     \ T &r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int N, Q;\n cin >> N >> Q;\n map<array<long long, 2>, long long> mp;\n vector<array<long\
-    \ long, 5>> query;\n for (int i= 0; i < N; i++) {\n  long long x, y, w;\n  cin\
-    \ >> x >> y >> w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int\
-    \ op;\n  cin >> op;\n  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >>\
-    \ u;\n   query.push_back({op, l, d, r, u});\n  } else {\n   int x, y, w;\n   cin\
-    \ >> x >> y >> w;\n   query.push_back({op, x, y, w});\n   mp[{x, y}];\n  }\n }\n\
-    \ KDTree<long long, 2, RSQ> kdt(mp);\n for (int i= 0; i < Q; i++) {\n  if (query[i][0])\
-    \ {\n   auto [_, l, d, r, u]= query[i];\n   cout << kdt.fold_cuboid(l, r - 1,\
-    \ d, u - 1) << '\\n';\n  } else {\n   auto [_, x, y, w, __]= query[i];\n   kdt.set(x,\
-    \ y, kdt.get(x, y) + w);\n  }\n }\n return 0;\n}"
+    \ int N, Q;\n cin >> N >> Q;\n map<array<int, 2>, int> mp;\n vector<array<int,\
+    \ 4>> query;\n for (int i= 0; i < N; i++) {\n  int x, y, w;\n  cin >> x >> y >>\
+    \ w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int op;\n  cin >>\
+    \ op;\n  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >> u;\n   query.push_back({l,\
+    \ d, r, u});\n  } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1,\
+    \ x, y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for\
+    \ (int i= 0; i < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]=\
+    \ query[i];\n   cout << kdt.fold_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else\
+    \ {\n   auto [_, x, y, w]= query[i];\n   kdt.set(x, y, kdt.get(x, y) + w);\n \
+    \ }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/KDTree.hpp
   - src/Internal/HAS_CHECK.hpp
@@ -268,7 +268,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-02 17:27:04+09:00'
+  timestamp: '2023-11-02 21:47:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_add_rectangle_sum.KDT.test.cpp

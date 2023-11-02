@@ -34,7 +34,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/OnlineDynamicConnectivity.hpp
       title: Online-Dynamic-Connectivity
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/PersistentArray.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':warning:'
@@ -46,6 +46,9 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
+    - icon: ':question:'
+      path: src/DataStructure/SegmentTree_2D.hpp
+      title: src/DataStructure/SegmentTree_2D.hpp
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
@@ -549,6 +552,9 @@ data:
       path: test/aoj/1068.KDT.test.cpp
       title: test/aoj/1068.KDT.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/1068.Seg2D.test.cpp
+      title: test/aoj/1068.Seg2D.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1107.test.cpp
       title: test/aoj/1107.test.cpp
     - icon: ':heavy_check_mark:'
@@ -767,6 +773,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2842.KDT.test.cpp
       title: test/aoj/2842.KDT.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/2842.Seg2D.test.cpp
+      title: test/aoj/2842.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2863.test.cpp
       title: test/aoj/2863.test.cpp
@@ -1057,10 +1066,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.DynSeg.test.cpp
       title: test/atcoder/abc133_f.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.Patricia.test.cpp
       title: test/atcoder/abc133_f.Patricia.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1210,7 +1219,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc256_f.SplayTree.test.cpp
       title: test/atcoder/abc256_f.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1547,6 +1556,9 @@ data:
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     - icon: ':x:'
+      path: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
+      title: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
+    - icon: ':x:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
     - icon: ':x:'
@@ -1818,6 +1830,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1625.KDT.test.cpp
       title: test/yukicoder/1625.KDT.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1625.Seg2D.test.cpp
+      title: test/yukicoder/1625.Seg2D.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1718.test.cpp
       title: test/yukicoder/1718.test.cpp

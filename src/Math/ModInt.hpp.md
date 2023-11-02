@@ -178,7 +178,7 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc256_f.SplayTree.test.cpp
     title: test/atcoder/abc256_f.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':heavy_check_mark:'
