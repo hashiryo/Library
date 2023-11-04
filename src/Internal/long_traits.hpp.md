@@ -19,11 +19,20 @@ data:
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc309_f.KDT.3D.test.cpp
+    title: test/atcoder/abc309_f.KDT.3D.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc309_f.KDT.test.cpp
+    title: test/atcoder/abc309_f.KDT.test.cpp
+  - icon: ':x:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':x:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1216.KDT.test.cpp
+    title: test/yukicoder/1216.KDT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
@@ -110,6 +119,9 @@ data:
   - test/hackerrank/cube-summation.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
+  - test/atcoder/abc309_f.KDT.3D.test.cpp
+  - test/atcoder/abc309_f.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp

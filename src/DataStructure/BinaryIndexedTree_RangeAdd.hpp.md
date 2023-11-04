@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
   - icon: ':heavy_check_mark:'

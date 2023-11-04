@@ -16,9 +16,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc324_g.WM.test.cpp
+    title: test/atcoder/abc324_g.WM.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_kth_smallest.WM.test.cpp
     title: test/yosupo/range_kth_smallest.WM.test.cpp
@@ -121,6 +124,7 @@ data:
   - test/yukicoder/919.WM.test.cpp
   - test/yukicoder/1371.WM.test.cpp
   - test/atcoder/abc202_e.test.cpp
+  - test/atcoder/abc324_g.WM.test.cpp
   - test/atcoder/abc174_f.WM.test.cpp
   - test/yosupo/static_range_frequency.WM.test.cpp
   - test/yosupo/range_kth_smallest.WM.test.cpp

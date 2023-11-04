@@ -28,11 +28,20 @@ data:
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc309_f.KDT.3D.test.cpp
+    title: test/atcoder/abc309_f.KDT.3D.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc309_f.KDT.test.cpp
+    title: test/atcoder/abc309_f.KDT.test.cpp
+  - icon: ':x:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':x:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1216.KDT.test.cpp
+    title: test/yukicoder/1216.KDT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
@@ -113,7 +122,7 @@ data:
     \ std::conjunction_v<canbe_Pos<P>, std::is_convertible<U, T>>;\n std::vector<Node>\
     \ ns;\n static inline T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n\
     \  else return T();\n }\n template <bool z, size_t k, class P> static inline auto\
-    \ get_(const P &p) {\n  if constexpr (z == 0) return std::get<k>(p);\n  else return\
+    \ get_(const P &p) {\n  if constexpr (z) return std::get<k>(p);\n  else return\
     \ std::get<k>(p.first);\n }\n template <class P, size_t... I> Range to_range(const\
     \ P &p, std::index_sequence<I...>) { return {(assert(std::get<I + I>(p) <= std::get<I\
     \ + I + 1>(p)), Sec{std::get<I + I>(p), std::get<I + I + 1>(p)})...}; }\n inline\
@@ -135,7 +144,7 @@ data:
     \ {\n  if (bg == ed) return -1;\n  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n\
     \  std::nth_element(bg, md, ed, [&](int a, int b) { return get_<z, div>(p[a])\
     \ < get_<z, div>(p[b]); }), set_range_lp<z>(t, *md, bg, ed, p, std::make_index_sequence<K>());\n\
-    \  if constexpr (z == 0) {\n   if constexpr (!std::is_void_v<M>) {\n    if constexpr\
+    \  if constexpr (z) {\n   if constexpr (!std::is_void_v<M>) {\n    if constexpr\
     \ (std::tuple_size_v<P> == K + 1) ns[t].val= std::get<K>(p[*md]);\n    else ns[t].val=\
     \ v;\n   }\n  } else ns[t].val= p[*md].second;\n  static constexpr uint8_t nx=\
     \ div + 1 == K ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(ts, bg, md, p, v),\
@@ -144,17 +153,17 @@ data:
     \ int build(Iter bg, Iter ed, const P *p, int &ts) {\n  if (bg == ed) return -1;\n\
     \  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n  std::nth_element(bg, md, ed,\
     \ [&](int a, int b) { return get_<z, div>(p[a]) < get_<z, div>(p[b]); }), set_range_lp<z>(t,\
-    \ bg, ed, p, std::make_index_sequence<K>());\n  if constexpr (z == 0) {\n   if\
-    \ constexpr (!std::is_void_v<M>) {\n    if constexpr (std::tuple_size_v<P> ==\
-    \ K + 1) ns[t].val= std::get<K>(p[t]);\n    else ns[t].val= def_val();\n   }\n\
-    \  } else ns[t].val= p[t].second;\n  static constexpr uint8_t nx= div + 1 == K\
-    \ ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(bg, md, p, ts), ns[t].ch[1]= build<z,\
-    \ nx>(md + 1, ed, p, ts);\n  if constexpr (monoid_v<M>) update(t);\n  return t;\n\
-    \ }\n static inline auto in_cuboid(const Range &r) {\n  return [r](const Pos &pos)\
-    \ {\n   for (uint8_t k= K; k--;)\n    if (r[k][1] < pos[k] || pos[k] < r[k][0])\
-    \ return false;\n   return true;\n  };\n }\n static inline auto out_cuboid(const\
-    \ Range &r) {\n  return [r](const pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n\
-    \    if (rr[k][1] < r[k][0] || r[k][1] < rr[k][0]) return true;\n   return false;\n\
+    \ bg, ed, p, std::make_index_sequence<K>());\n  if constexpr (z) {\n   if constexpr\
+    \ (!std::is_void_v<M>) {\n    if constexpr (std::tuple_size_v<P> == K + 1) ns[t].val=\
+    \ std::get<K>(p[t]);\n    else ns[t].val= def_val();\n   }\n  } else ns[t].val=\
+    \ p[t].second;\n  static constexpr uint8_t nx= div + 1 == K ? 0 : div + 1;\n \
+    \ ns[t].ch[0]= build<z, nx>(bg, md, p, ts), ns[t].ch[1]= build<z, nx>(md + 1,\
+    \ ed, p, ts);\n  if constexpr (monoid_v<M>) update(t);\n  return t;\n }\n static\
+    \ inline auto in_cuboid(const Range &r) {\n  return [r](const Pos &pos) {\n  \
+    \ for (uint8_t k= K; k--;)\n    if (r[k][1] < pos[k] || pos[k] < r[k][0]) return\
+    \ false;\n   return true;\n  };\n }\n static inline auto out_cuboid(const Range\
+    \ &r) {\n  return [r](const pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n \
+    \   if (rr[k][1] < r[k][0] || r[k][1] < rr[k][0]) return true;\n   return false;\n\
     \  };\n }\n static inline auto inall_cuboid(const Range &r) {\n  return [r](const\
     \ pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n    if (rr[k][0] < r[k][0] ||\
     \ r[k][1] < rr[k][1]) return false;\n   return true;\n  };\n }\n static inline\
@@ -188,35 +197,36 @@ data:
     \ const E &x) {\n  if (t == -1 || out(ns[t].range)) return;\n  if (inall(ns[t].range))\
     \ return propagate(t, x);\n  if (push(t); in(ns[t].pos)) M::mp(ns[t].val, x);\n\
     \  app(ns[t].ch[0], in, inall, out, x), app(ns[t].ch[1], in, inall, out, x);\n\
-    \  if constexpr (monoid_v<M>) update(t);\n }\n inline bool set(int t, const Pos\
-    \ &pos, const T &x) {\n  if (t == -1) return false;\n  bool isok= true;\n  for\
-    \ (uint8_t k= K; k--; isok&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
+    \  if constexpr (monoid_v<M>) update(t);\n }\n template <bool z> inline bool set(int\
+    \ t, const Pos &pos, const T &x) {\n  if (t == -1) return false;\n  bool isok=\
+    \ true;\n  for (uint8_t k= K; k--; isok&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
     \ < pos[k] || pos[k] < ns[t].range[k][0]) return false;\n  if constexpr (dual_v<M>)\
-    \ push(t);\n  if (isok) ns[t].val= x;\n  else if (!(isok= set(ns[t].ch[0], pos,\
-    \ x))) isok= set(ns[t].ch[1], pos, x);\n  if constexpr (monoid_v<M>)\n   if (isok)\
-    \ update(t);\n  return isok;\n }\n inline std::pair<T, bool> get(int t, const\
-    \ Pos &pos) {\n  if (t == -1) return {T(), false};\n  bool myself= true;\n  for\
-    \ (uint8_t k= K; k--; myself&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
-    \ < pos[k] || pos[k] < ns[t].range[k][0]) return {T(), false};\n  if (myself)\
-    \ return {ns[t].val, true};\n  if constexpr (dual_v<M>) push(t);\n  auto ret=\
-    \ get(ns[t].ch[0], pos);\n  return !ret.second ? get(ns[t].ch[1], pos) : ret;\n\
-    \ }\npublic:\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
-    \ canbe_PosV<P>>>> KDTreeImpl(const P *p, size_t n): ns(n) {\n  std::vector<int>\
-    \ ids(n);\n  int ts= 0;\n  std::iota(ids.begin(), ids.end(), 0), build<0, 0>(ts,\
-    \ ids.begin(), ids.end(), p);\n }\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
+    \ push(t);\n  if (isok) {\n   if constexpr (z) ns[t].val= x;\n   else ns[t].val=\
+    \ M::op(ns[t].val, x);\n  } else if (!(isok= set<z>(ns[t].ch[0], pos, x))) isok=\
+    \ set<z>(ns[t].ch[1], pos, x);\n  if constexpr (monoid_v<M>)\n   if (isok) update(t);\n\
+    \  return isok;\n }\n inline std::pair<T, bool> get(int t, const Pos &pos) {\n\
+    \  if (t == -1) return {T(), false};\n  bool myself= true;\n  for (uint8_t k=\
+    \ K; k--; myself&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1] < pos[k]\
+    \ || pos[k] < ns[t].range[k][0]) return {T(), false};\n  if (myself) return {ns[t].val,\
+    \ true};\n  if constexpr (dual_v<M>) push(t);\n  auto ret= get(ns[t].ch[0], pos);\n\
+    \  return !ret.second ? get(ns[t].ch[1], pos) : ret;\n }\npublic:\n template <class\
+    \ P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>, canbe_PosV<P>>>>\
+    \ KDTreeImpl(const P *p, size_t n): ns(n) {\n  std::vector<int> ids(n);\n  int\
+    \ ts= 0;\n  std::iota(ids.begin(), ids.end(), 0), build<1, 0>(ts, ids.begin(),\
+    \ ids.end(), p);\n }\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
     \ canbe_PosV<P>>>> KDTreeImpl(const std::vector<P> &p): KDTreeImpl(p.data(), p.size())\
     \ {}\n template <class P, typename= std::enable_if_t<canbe_Pos<P>::value>> KDTreeImpl(const\
     \ std::set<P> &p): KDTreeImpl(std::vector(p.begin(), p.end())) {}\n template <class\
     \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ P *p, size_t n, U v): ns(n) {\n  std::vector<int> ids(n);\n  int ts= 0;\n  std::iota(ids.begin(),\
-    \ ids.end(), 0), build<0, 0>(ts, ids.begin(), ids.end(), p, v);\n }\n template\
+    \ ids.end(), 0), build<1, 0>(ts, ids.begin(), ids.end(), p, v);\n }\n template\
     \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ std::vector<P> &p, U v): KDTreeImpl(p.data(), p.size(), v) {}\n template <class\
     \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ std::set<P> &p, U v): KDTreeImpl(std::vector(p.begin(), p.end()), v) {}\n template\
     \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ std::pair<P, U> *p, size_t n): ns(n) {\n  std::vector<int> ids(n);\n  int ts=\
-    \ 0;\n  std::iota(ids.begin(), ids.end(), 0), build<1, 0>(ts, ids.begin(), ids.end(),\
+    \ 0;\n  std::iota(ids.begin(), ids.end(), 0), build<0, 0>(ts, ids.begin(), ids.end(),\
     \ p);\n }\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
     \ U>>> KDTreeImpl(const std::vector<std::pair<P, U>> &p): KDTreeImpl(p.data(),\
     \ p.size()) {}\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
@@ -240,13 +250,15 @@ data:
     \ out_cuboid(r), a);\n }\n void apply_ball(PK... xs, pos_t r, E a) {\n  static_assert(dual_v<M>,\
     \ \"\\\"apply_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) *\
     \ r;\n  app(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out({xs...},\
-    \ r2), a);\n }\n void set(PK... p, T v) { assert(ns.size()), assert(set(0, {p...},\
-    \ v)); }\n T get(PK... p) {\n  assert(ns.size());\n  auto [ret, flg]= get(0, {p...});\n\
-    \  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const {\n  assert(ns.size());\n\
-    \  std::pair<int, long_pos_t> ret= {-1, -1};\n  return nns(0, {p...}, ret), ns[ret.first].pos;\n\
-    \ }\n};\ntemplate <class pos_t, size_t K, class M= void> using KDTree= KDTreeImpl<pos_t,\
-    \ K, M, to_tuple_t<std::array<pos_t, K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n\
-    }\nusing kdtree_internal::KDTree;\n"
+    \ r2), a);\n }\n void set(PK... xs, T v) { assert(ns.size()), assert(set<1>(0,\
+    \ {xs...}, v)); }\n void mul(PK... xs, T v) {\n  static_assert(monoid_v<M>, \"\
+    \\\"mul\\\" is not available\");\n  assert(ns.size()), assert(set<0>(0, {xs...},\
+    \ v));\n }\n T get(PK... xs) {\n  assert(ns.size());\n  auto [ret, flg]= get(0,\
+    \ {xs...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... xs) const\
+    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
+    \ nns(0, {xs...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
+    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
+    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\
     #include <map>\n#include <set>\n#include <cassert>\n#include \"src/Internal/HAS_CHECK.hpp\"\
     \n#include \"src/Internal/tuple_traits.hpp\"\n#include \"src/Internal/long_traits.hpp\"\
@@ -276,7 +288,7 @@ data:
     \ std::conjunction_v<canbe_Pos<P>, std::is_convertible<U, T>>;\n std::vector<Node>\
     \ ns;\n static inline T def_val() {\n  if constexpr (monoid_v<M>) return M::ti();\n\
     \  else return T();\n }\n template <bool z, size_t k, class P> static inline auto\
-    \ get_(const P &p) {\n  if constexpr (z == 0) return std::get<k>(p);\n  else return\
+    \ get_(const P &p) {\n  if constexpr (z) return std::get<k>(p);\n  else return\
     \ std::get<k>(p.first);\n }\n template <class P, size_t... I> Range to_range(const\
     \ P &p, std::index_sequence<I...>) { return {(assert(std::get<I + I>(p) <= std::get<I\
     \ + I + 1>(p)), Sec{std::get<I + I>(p), std::get<I + I + 1>(p)})...}; }\n inline\
@@ -298,7 +310,7 @@ data:
     \ {\n  if (bg == ed) return -1;\n  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n\
     \  std::nth_element(bg, md, ed, [&](int a, int b) { return get_<z, div>(p[a])\
     \ < get_<z, div>(p[b]); }), set_range_lp<z>(t, *md, bg, ed, p, std::make_index_sequence<K>());\n\
-    \  if constexpr (z == 0) {\n   if constexpr (!std::is_void_v<M>) {\n    if constexpr\
+    \  if constexpr (z) {\n   if constexpr (!std::is_void_v<M>) {\n    if constexpr\
     \ (std::tuple_size_v<P> == K + 1) ns[t].val= std::get<K>(p[*md]);\n    else ns[t].val=\
     \ v;\n   }\n  } else ns[t].val= p[*md].second;\n  static constexpr uint8_t nx=\
     \ div + 1 == K ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(ts, bg, md, p, v),\
@@ -307,17 +319,17 @@ data:
     \ int build(Iter bg, Iter ed, const P *p, int &ts) {\n  if (bg == ed) return -1;\n\
     \  auto md= bg + (ed - bg) / 2;\n  int t= ts++;\n  std::nth_element(bg, md, ed,\
     \ [&](int a, int b) { return get_<z, div>(p[a]) < get_<z, div>(p[b]); }), set_range_lp<z>(t,\
-    \ bg, ed, p, std::make_index_sequence<K>());\n  if constexpr (z == 0) {\n   if\
-    \ constexpr (!std::is_void_v<M>) {\n    if constexpr (std::tuple_size_v<P> ==\
-    \ K + 1) ns[t].val= std::get<K>(p[t]);\n    else ns[t].val= def_val();\n   }\n\
-    \  } else ns[t].val= p[t].second;\n  static constexpr uint8_t nx= div + 1 == K\
-    \ ? 0 : div + 1;\n  ns[t].ch[0]= build<z, nx>(bg, md, p, ts), ns[t].ch[1]= build<z,\
-    \ nx>(md + 1, ed, p, ts);\n  if constexpr (monoid_v<M>) update(t);\n  return t;\n\
-    \ }\n static inline auto in_cuboid(const Range &r) {\n  return [r](const Pos &pos)\
-    \ {\n   for (uint8_t k= K; k--;)\n    if (r[k][1] < pos[k] || pos[k] < r[k][0])\
-    \ return false;\n   return true;\n  };\n }\n static inline auto out_cuboid(const\
-    \ Range &r) {\n  return [r](const pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n\
-    \    if (rr[k][1] < r[k][0] || r[k][1] < rr[k][0]) return true;\n   return false;\n\
+    \ bg, ed, p, std::make_index_sequence<K>());\n  if constexpr (z) {\n   if constexpr\
+    \ (!std::is_void_v<M>) {\n    if constexpr (std::tuple_size_v<P> == K + 1) ns[t].val=\
+    \ std::get<K>(p[t]);\n    else ns[t].val= def_val();\n   }\n  } else ns[t].val=\
+    \ p[t].second;\n  static constexpr uint8_t nx= div + 1 == K ? 0 : div + 1;\n \
+    \ ns[t].ch[0]= build<z, nx>(bg, md, p, ts), ns[t].ch[1]= build<z, nx>(md + 1,\
+    \ ed, p, ts);\n  if constexpr (monoid_v<M>) update(t);\n  return t;\n }\n static\
+    \ inline auto in_cuboid(const Range &r) {\n  return [r](const Pos &pos) {\n  \
+    \ for (uint8_t k= K; k--;)\n    if (r[k][1] < pos[k] || pos[k] < r[k][0]) return\
+    \ false;\n   return true;\n  };\n }\n static inline auto out_cuboid(const Range\
+    \ &r) {\n  return [r](const pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n \
+    \   if (rr[k][1] < r[k][0] || r[k][1] < rr[k][0]) return true;\n   return false;\n\
     \  };\n }\n static inline auto inall_cuboid(const Range &r) {\n  return [r](const\
     \ pos_t rr[K][2]) {\n   for (uint8_t k= K; k--;)\n    if (rr[k][0] < r[k][0] ||\
     \ r[k][1] < rr[k][1]) return false;\n   return true;\n  };\n }\n static inline\
@@ -351,35 +363,36 @@ data:
     \ const E &x) {\n  if (t == -1 || out(ns[t].range)) return;\n  if (inall(ns[t].range))\
     \ return propagate(t, x);\n  if (push(t); in(ns[t].pos)) M::mp(ns[t].val, x);\n\
     \  app(ns[t].ch[0], in, inall, out, x), app(ns[t].ch[1], in, inall, out, x);\n\
-    \  if constexpr (monoid_v<M>) update(t);\n }\n inline bool set(int t, const Pos\
-    \ &pos, const T &x) {\n  if (t == -1) return false;\n  bool isok= true;\n  for\
-    \ (uint8_t k= K; k--; isok&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
+    \  if constexpr (monoid_v<M>) update(t);\n }\n template <bool z> inline bool set(int\
+    \ t, const Pos &pos, const T &x) {\n  if (t == -1) return false;\n  bool isok=\
+    \ true;\n  for (uint8_t k= K; k--; isok&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
     \ < pos[k] || pos[k] < ns[t].range[k][0]) return false;\n  if constexpr (dual_v<M>)\
-    \ push(t);\n  if (isok) ns[t].val= x;\n  else if (!(isok= set(ns[t].ch[0], pos,\
-    \ x))) isok= set(ns[t].ch[1], pos, x);\n  if constexpr (monoid_v<M>)\n   if (isok)\
-    \ update(t);\n  return isok;\n }\n inline std::pair<T, bool> get(int t, const\
-    \ Pos &pos) {\n  if (t == -1) return {T(), false};\n  bool myself= true;\n  for\
-    \ (uint8_t k= K; k--; myself&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1]\
-    \ < pos[k] || pos[k] < ns[t].range[k][0]) return {T(), false};\n  if (myself)\
-    \ return {ns[t].val, true};\n  if constexpr (dual_v<M>) push(t);\n  auto ret=\
-    \ get(ns[t].ch[0], pos);\n  return !ret.second ? get(ns[t].ch[1], pos) : ret;\n\
-    \ }\npublic:\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
-    \ canbe_PosV<P>>>> KDTreeImpl(const P *p, size_t n): ns(n) {\n  std::vector<int>\
-    \ ids(n);\n  int ts= 0;\n  std::iota(ids.begin(), ids.end(), 0), build<0, 0>(ts,\
-    \ ids.begin(), ids.end(), p);\n }\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
+    \ push(t);\n  if (isok) {\n   if constexpr (z) ns[t].val= x;\n   else ns[t].val=\
+    \ M::op(ns[t].val, x);\n  } else if (!(isok= set<z>(ns[t].ch[0], pos, x))) isok=\
+    \ set<z>(ns[t].ch[1], pos, x);\n  if constexpr (monoid_v<M>)\n   if (isok) update(t);\n\
+    \  return isok;\n }\n inline std::pair<T, bool> get(int t, const Pos &pos) {\n\
+    \  if (t == -1) return {T(), false};\n  bool myself= true;\n  for (uint8_t k=\
+    \ K; k--; myself&= pos[k] == ns[t].pos[k])\n   if (ns[t].range[k][1] < pos[k]\
+    \ || pos[k] < ns[t].range[k][0]) return {T(), false};\n  if (myself) return {ns[t].val,\
+    \ true};\n  if constexpr (dual_v<M>) push(t);\n  auto ret= get(ns[t].ch[0], pos);\n\
+    \  return !ret.second ? get(ns[t].ch[1], pos) : ret;\n }\npublic:\n template <class\
+    \ P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>, canbe_PosV<P>>>>\
+    \ KDTreeImpl(const P *p, size_t n): ns(n) {\n  std::vector<int> ids(n);\n  int\
+    \ ts= 0;\n  std::iota(ids.begin(), ids.end(), 0), build<1, 0>(ts, ids.begin(),\
+    \ ids.end(), p);\n }\n template <class P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>,\
     \ canbe_PosV<P>>>> KDTreeImpl(const std::vector<P> &p): KDTreeImpl(p.data(), p.size())\
     \ {}\n template <class P, typename= std::enable_if_t<canbe_Pos<P>::value>> KDTreeImpl(const\
     \ std::set<P> &p): KDTreeImpl(std::vector(p.begin(), p.end())) {}\n template <class\
     \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ P *p, size_t n, U v): ns(n) {\n  std::vector<int> ids(n);\n  int ts= 0;\n  std::iota(ids.begin(),\
-    \ ids.end(), 0), build<0, 0>(ts, ids.begin(), ids.end(), p, v);\n }\n template\
+    \ ids.end(), 0), build<1, 0>(ts, ids.begin(), ids.end(), p, v);\n }\n template\
     \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ std::vector<P> &p, U v): KDTreeImpl(p.data(), p.size(), v) {}\n template <class\
     \ P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ std::set<P> &p, U v): KDTreeImpl(std::vector(p.begin(), p.end()), v) {}\n template\
     \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> KDTreeImpl(const\
     \ std::pair<P, U> *p, size_t n): ns(n) {\n  std::vector<int> ids(n);\n  int ts=\
-    \ 0;\n  std::iota(ids.begin(), ids.end(), 0), build<1, 0>(ts, ids.begin(), ids.end(),\
+    \ 0;\n  std::iota(ids.begin(), ids.end(), 0), build<0, 0>(ts, ids.begin(), ids.end(),\
     \ p);\n }\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
     \ U>>> KDTreeImpl(const std::vector<std::pair<P, U>> &p): KDTreeImpl(p.data(),\
     \ p.size()) {}\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
@@ -403,13 +416,15 @@ data:
     \ out_cuboid(r), a);\n }\n void apply_ball(PK... xs, pos_t r, E a) {\n  static_assert(dual_v<M>,\
     \ \"\\\"apply_ball\\\" is not available\");\n  long_pos_t r2= long_pos_t(r) *\
     \ r;\n  app(-ns.empty(), in_ball({xs...}, r2), inall_ball({xs...}, r2), out({xs...},\
-    \ r2), a);\n }\n void set(PK... p, T v) { assert(ns.size()), assert(set(0, {p...},\
-    \ v)); }\n T get(PK... p) {\n  assert(ns.size());\n  auto [ret, flg]= get(0, {p...});\n\
-    \  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... p) const {\n  assert(ns.size());\n\
-    \  std::pair<int, long_pos_t> ret= {-1, -1};\n  return nns(0, {p...}, ret), ns[ret.first].pos;\n\
-    \ }\n};\ntemplate <class pos_t, size_t K, class M= void> using KDTree= KDTreeImpl<pos_t,\
-    \ K, M, to_tuple_t<std::array<pos_t, K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n\
-    }\nusing kdtree_internal::KDTree;"
+    \ r2), a);\n }\n void set(PK... xs, T v) { assert(ns.size()), assert(set<1>(0,\
+    \ {xs...}, v)); }\n void mul(PK... xs, T v) {\n  static_assert(monoid_v<M>, \"\
+    \\\"mul\\\" is not available\");\n  assert(ns.size()), assert(set<0>(0, {xs...},\
+    \ v));\n }\n T get(PK... xs) {\n  assert(ns.size());\n  auto [ret, flg]= get(0,\
+    \ {xs...});\n  return assert(flg), ret;\n }\n Pos nearest_neighbor(PK... xs) const\
+    \ {\n  assert(ns.size());\n  std::pair<int, long_pos_t> ret= {-1, -1};\n  return\
+    \ nns(0, {xs...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
+    \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
+    \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;"
   dependsOn:
   - src/Internal/HAS_CHECK.hpp
   - src/Internal/tuple_traits.hpp
@@ -417,12 +432,15 @@ data:
   isVerificationFile: false
   path: src/DataStructure/KDTree.hpp
   requiredBy: []
-  timestamp: '2023-11-02 17:27:04+09:00'
+  timestamp: '2023-11-04 15:35:02+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/cube-summation.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
+  - test/atcoder/abc309_f.KDT.3D.test.cpp
+  - test/atcoder/abc309_f.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
@@ -434,6 +452,7 @@ title: kD-Tree
 ---
 
 $\mathcal{O}(k\cdot N^{1-1/k})$　で動くと思っておく.\
+$Q=10^5$ は大丈夫だけど $Q=2\times 10^5$ だと無理なイメージ. \
 領域を与える類のは全て境界は含まれるとする. (例えば矩形は閉区間の直積)\
 半群は乗らない. モノイドの単位元 `M::ti` は明示的に与える必要あり. \
 内部でサイズを持たせていないので, `M::mp` はsizeを渡せない(2引数).
@@ -503,6 +522,7 @@ KDTree<int,2,int> kdt(xyv);
 |`apply_ball(x_1,...x_k,r, a)`| 球(円) 内部に位置する点についてその点に乗っている値を集約した値に `a` を作用させる. <br> 引数は K+1+1 個 ( 中心: $(x_1,\dots,x_K)$, 半径: $r$ と 作用素 `a`). |
 |`set(x_1,...x_k, v)`|点 $(x_1,\dots,x_K)$ の値を `v` に変更する. <br> 点が存在しないとassertで落ちる.|
 |`get(x_1,...x_k)`|点 $(x_1,\dots,x_K)$ の値を返す.　<br> 点が存在しないとassertで落ちる.|
+|`mul(x_1,...x_k, v)`|点 $(x_1,\dots,x_K)$ の値に `v` を (モノイド演算で) かける. <br> 点が存在しないとassertで落ちる.|
 |`nearest_neighbor(x_1,...,x_k)`|点 $(x_1,\dots,x_K)$ と最も近い点を返す. <br> 点の座標を返す. <br> そもそも一つも点がない場合は assert で落ちる.|
 
 ## 参考
@@ -511,5 +531,7 @@ KDTree<int,2,int> kdt(xyv);
 [square869120Contest #4 G - Get the Salary of Atcoder](https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_g) (遅延伝搬) \
 [第二回 アルゴリズム実技検定 過去問 N - ビルの建設](https://atcoder.jp/contests/past202004-open/tasks/past202004_n) (双対) \
 [AtCoder Beginner Contest 234 Ex - Enumerate Pairs](https://atcoder.jp/contests/abc234/tasks/abc234_h) (円形クエリ, 列挙) \
+[AtCoder Beginner Contest 266 Ex - Snuke Panic (2D)](https://atcoder.jp/contests/abc266/tasks/abc266_h) (2次元 max) \
 [AtCoder Regular Contest 010 D - 情報伝播](https://atcoder.jp/contests/arc010/tasks/arc010_4) (最近傍探索) \
+[JOI 2018/2019 春合宿 過去問 A - 試験 (Examination)](https://atcoder.jp/contests/joisc2019/tasks/joisc2019_a)(3次元 sum ← 通る, or 2次元 sum + 走査 )\
 [Happy Query Contest 2019 Grid Xor Query](https://www.hackerrank.com/contests/happy-query-contest/challenges/grid-xor-query) (2次元 xor)

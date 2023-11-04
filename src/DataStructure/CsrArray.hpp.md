@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/SegmentArrangement.hpp
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
@@ -48,19 +48,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1226.test.cpp
     title: test/aoj/1226.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2448.test.cpp
     title: test/aoj/2448.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
   - icon: ':heavy_check_mark:'
@@ -69,52 +69,52 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3176.test.cpp
     title: test/aoj/3176.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
   - icon: ':x:'
@@ -141,31 +141,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1170.test.cpp
     title: test/yukicoder/1170.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1211.test.cpp
     title: test/yukicoder/1211.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/yukicoder/1216.KDT.test.cpp
+    title: test/yukicoder/1216.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1216.Seg2D.test.cpp
+    title: test/yukicoder/1216.Seg2D.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1242.test.cpp
     title: test/yukicoder/1242.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1326.test.cpp
     title: test/yukicoder/1326.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1333.test.cpp
     title: test/yukicoder/1333.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1418.test.cpp
     title: test/yukicoder/1418.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1494.test.cpp
     title: test/yukicoder/1494.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
   - icon: ':heavy_check_mark:'
@@ -177,7 +183,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1813.test.cpp
     title: test/yukicoder/1813.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
   - icon: ':x:'
@@ -189,10 +195,10 @@ data:
   - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/922.test.cpp
     title: test/yukicoder/922.test.cpp
   _isVerificationFailed: true
@@ -236,6 +242,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/1211.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1744.test.cpp
@@ -248,6 +255,7 @@ data:
   - test/yukicoder/1124.test.cpp
   - test/yukicoder/1170.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
   - test/yukicoder/1976.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/1745.test.cpp

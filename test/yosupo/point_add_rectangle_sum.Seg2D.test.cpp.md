@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/DataStructure/SegmentTree_2D.hpp
-    title: src/DataStructure/SegmentTree_2D.hpp
+    title: "Segment-Tree(2\u6B21\u5143)"
   - icon: ':question:'
     path: src/Internal/tuple_traits.hpp
     title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
@@ -22,10 +22,10 @@ data:
     \ PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n#include\
     \ <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#line 3 \"\
     src/DataStructure/SegmentTree_2D.hpp\"\n#include <algorithm>\n#include <numeric>\n\
-    #line 6 \"src/DataStructure/SegmentTree_2D.hpp\"\n#include <set>\n#line 2 \"src/Internal/tuple_traits.hpp\"\
-    \n#include <tuple>\n#line 4 \"src/Internal/tuple_traits.hpp\"\n#include <type_traits>\n\
-    #include <cstddef>\ntemplate <class T> static constexpr bool tuple_like_v= false;\n\
-    template <class... Args> static constexpr bool tuple_like_v<std::tuple<Args...>>\
+    #line 6 \"src/DataStructure/SegmentTree_2D.hpp\"\n#include <set>\n#include <cassert>\n\
+    #line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n#line 4 \"src/Internal/tuple_traits.hpp\"\
+    \n#include <type_traits>\n#include <cstddef>\ntemplate <class T> static constexpr\
+    \ bool tuple_like_v= false;\ntemplate <class... Args> static constexpr bool tuple_like_v<std::tuple<Args...>>\
     \ = true;\ntemplate <class T, class U> static constexpr bool tuple_like_v<std::pair<T,\
     \ U>> = true;\ntemplate <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
     \ K>> = true;\ntemplate <class T> auto to_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
@@ -41,7 +41,7 @@ data:
     \ T>;\ntemplate <class T> auto to_array(const T &t) {\n if constexpr (array_like_v<T>)\
     \ return std::apply([](auto &&...x) { return std::array{x...}; }, t);\n}\ntemplate\
     \ <class T> using to_tuple_t= decltype(to_tuple(T()));\ntemplate <class T> using\
-    \ to_array_t= decltype(to_array(T()));\n#line 8 \"src/DataStructure/SegmentTree_2D.hpp\"\
+    \ to_array_t= decltype(to_array(T()));\n#line 9 \"src/DataStructure/SegmentTree_2D.hpp\"\
     \ntemplate <class pos_t, class M> class SegmentTree_2D {\npublic:\n using T= typename\
     \ M::T;\n using Pos= std::array<pos_t, 2>;\n std::vector<pos_t> xs;\n std::vector<Pos>\
     \ yxs;\n std::vector<int> id, tol;\n std::vector<T> val;\n template <class P>\
@@ -52,12 +52,13 @@ data:
     \ int x2i(pos_t x) const { return std::lower_bound(xs.begin(), xs.end(), x) -\
     \ xs.begin(); }\n inline int y2i(pos_t y) const {\n  return std::lower_bound(yxs.begin(),\
     \ yxs.end(), Pos{y, 0}, [](const Pos &a, const Pos &b) { return a[0] < b[0]; })\
-    \ - yxs.begin();\n }\n inline int xy2i(pos_t x, pos_t y) const { return std::lower_bound(yxs.begin(),\
-    \ yxs.end(), Pos{y, x}) - yxs.begin(); }\n template <bool z, size_t k, class P>\
-    \ inline auto get_(const P &p) {\n  if constexpr (z == 0) return std::get<k>(p);\n\
-    \  else return std::get<k>(p.first);\n }\n template <bool z, class XYW> inline\
-    \ void build(const XYW *xyw, int n, const T &v= M::ti()) {\n  xs.resize(n), yxs.resize(n);\n\
-    \  for (int i= n; i--;) xs[i]= get_<z, 0>(xyw[i]);\n  std::sort(xs.begin(), xs.end()),\
+    \ - yxs.begin();\n }\n inline int xy2i(pos_t x, pos_t y) const {\n  Pos p{y, x};\n\
+    \  auto it= std::lower_bound(yxs.begin(), yxs.end(), p);\n  return assert(p ==\
+    \ *it), it - yxs.begin();\n }\n template <bool z, size_t k, class P> inline auto\
+    \ get_(const P &p) {\n  if constexpr (z) return std::get<k>(p);\n  else return\
+    \ std::get<k>(p.first);\n }\n template <bool z, class XYW> inline void build(const\
+    \ XYW *xyw, int n, const T &v= M::ti()) {\n  xs.resize(n), yxs.resize(n);\n  for\
+    \ (int i= n; i--;) xs[i]= get_<z, 0>(xyw[i]);\n  std::sort(xs.begin(), xs.end()),\
     \ xs.erase(std::unique(xs.begin(), xs.end()), xs.end()), id.resize((sz= 1 << (32\
     \ - __builtin_clz(xs.size()))) * 2 + 1);\n  std::vector<int> ix(n), ord(n);\n\
     \  for (int i= n; i--;) ix[i]= x2i(get_<z, 0>(xyw[i]));\n  for (int i: ix)\n \
@@ -68,8 +69,8 @@ data:
     \ 0>(xyw[i]) < get_<z, 0>(xyw[j]) : get_<z, 1>(xyw[i]) < get_<z, 1>(xyw[j]); });\n\
     \  for (int i= n; i--;) yxs[i]= {get_<z, 1>(xyw[ord[i]]), get_<z, 0>(xyw[ord[i]])};\n\
     \  std::vector<int> ptr= id;\n  for (int r: ord)\n   for (int i= ix[r] + sz, j=\
-    \ -1; i; j= i, i>>= 1) {\n    int p= ptr[i]++;\n    if constexpr (z == 0) {\n\
-    \     if constexpr (std::tuple_size_v<XYW> == 3) val[id[i + 1] + p]= std::get<2>(xyw[r]);\n\
+    \ -1; i; j= i, i>>= 1) {\n    int p= ptr[i]++;\n    if constexpr (z) {\n     if\
+    \ constexpr (std::tuple_size_v<XYW> == 3) val[id[i + 1] + p]= std::get<2>(xyw[r]);\n\
     \     else val[id[i + 1] + p]= v;\n    } else val[id[i + 1] + p]= xyw[r].second;\n\
     \    if (j != -1) tol[p + 1]= !(j & 1);\n   }\n  for (int i= 1, e= id[sz]; i <\
     \ e; ++i) tol[i + 1]+= tol[i];\n  for (int i= 0, e= sz * 2; i < e; ++i) {\n  \
@@ -78,23 +79,28 @@ data:
     \ i, int a, int b) const {\n  int n= id[i + 1] - id[i];\n  T ret= M::ti();\n \
     \ auto dat= val.begin() + id[i] * 2;\n  for (a+= n, b+= n; a < b; a>>= 1, b>>=\
     \ 1) {\n   if (a & 1) ret= M::op(ret, dat[a++]);\n   if (b & 1) ret= M::op(dat[--b],\
-    \ ret);\n  }\n  return ret;\n }\n inline void seti(int i, int j, T v) {\n  auto\
-    \ dat= val.begin() + id[i] * 2;\n  for (dat[j+= id[i + 1] - id[i]]= v; j;) j>>=\
-    \ 1, dat[j]= M::op(dat[2 * j], dat[2 * j + 1]);\n }\npublic:\n template <class\
+    \ ret);\n  }\n  return ret;\n }\n template <bool z> inline void seti(int i, int\
+    \ j, T v) {\n  auto dat= val.begin() + id[i] * 2;\n  j+= id[i + 1] - id[i];\n\
+    \  if constexpr (z) dat[j]= v;\n  else dat[j]= M::op(dat[j], v);\n  for (; j;)\
+    \ j>>= 1, dat[j]= M::op(dat[2 * j], dat[2 * j + 1]);\n }\n template <bool z> inline\
+    \ void set_(pos_t x, pos_t y, T v) {\n  for (int i= 1, p= xy2i(x, y);;) {\n  \
+    \ if (seti<z>(i, p - id[i], v); i >= sz) break;\n   if (int lc= tol[p] - tol[id[i]],\
+    \ rc= (p - id[i]) - lc; tol[p + 1] - tol[p]) p= id[2 * i] + lc, i= 2 * i;\n  \
+    \ else p= id[2 * i + 1] + rc, i= 2 * i + 1;\n  }\n }\npublic:\n template <class\
     \ P, typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>, canbe_PosV<P>>>>\
-    \ SegmentTree_2D(const P *p, size_t n) { build<0>(p, n); }\n template <class P,\
+    \ SegmentTree_2D(const P *p, size_t n) { build<1>(p, n); }\n template <class P,\
     \ typename= std::enable_if_t<std::disjunction_v<canbe_Pos<P>, canbe_PosV<P>>>>\
     \ SegmentTree_2D(const std::vector<P> &p): SegmentTree_2D(p.data(), p.size())\
     \ {}\n template <class P, typename= std::enable_if_t<canbe_Pos<P>::value>> SegmentTree_2D(const\
     \ std::set<P> &p): SegmentTree_2D(std::vector(p.begin(), p.end())) {}\n template\
     \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> SegmentTree_2D(const\
-    \ P *p, size_t n, const U &v) { build<0>(p, n, v); }\n template <class P, class\
+    \ P *p, size_t n, const U &v) { build<1>(p, n, v); }\n template <class P, class\
     \ U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> SegmentTree_2D(const\
     \ std::vector<P> &p, const U &v): SegmentTree_2D(p.data(), p.size(), v) {}\n template\
     \ <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P, U>>> SegmentTree_2D(const\
     \ std::set<P> &p, const U &v): SegmentTree_2D(std::vector(p.begin(), p.end()),\
     \ v) {}\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
-    \ U>>> SegmentTree_2D(const std::pair<P, U> *p, size_t n) { build<1>(p, n); }\n\
+    \ U>>> SegmentTree_2D(const std::pair<P, U> *p, size_t n) { build<0>(p, n); }\n\
     \ template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
     \ U>>> SegmentTree_2D(const std::vector<std::pair<P, U>> &p): SegmentTree_2D(p.data(),\
     \ p.size()) {}\n template <class P, class U, typename= std::enable_if_t<canbe_Pos_and_T_v<P,\
@@ -106,24 +112,21 @@ data:
     \ c, d)), void();\n   int m= (a + b) / 2, ac= tol[id[i] + c] - tol[id[i]], bc=\
     \ c - ac, ad= tol[id[i] + d] - tol[id[i]], bd= d - ad;\n   dfs(dfs, i * 2, a,\
     \ m, ac, ad), dfs(dfs, i * 2 + 1, m, b, bc, bd);\n  };\n  return dfs(dfs, 1, 0,\
-    \ sz, y2i(u), y2i(d)), ret;\n }\n void set(pos_t x, pos_t y, T v) {\n  for (int\
-    \ i= 1, p= xy2i(x, y);;) {\n   if (seti(i, p - id[i], v); i >= sz) break;\n  \
-    \ if (int lc= tol[p] - tol[id[i]], rc= (p - id[i]) - lc; tol[p + 1] - tol[p])\
-    \ p= id[2 * i] + lc, i= 2 * i;\n   else p= id[2 * i + 1] + rc, i= 2 * i + 1;\n\
-    \  }\n }\n T get(pos_t x, pos_t y) const { return val[xy2i(x, y) + id[2]]; }\n\
-    };\n#line 7 \"test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp\"\nusing namespace\
-    \ std;\nstruct RSQ {\n using T= long long;\n static T ti() { return 0; }\n static\
-    \ T op(T l, T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int N, Q;\n cin >> N >> Q;\n map<array<int, 2>, long long> mp;\n vector<array<int,\
-    \ 4>> query;\n for (int i= 0; i < N; i++) {\n  int x, y, w;\n  cin >> x >> y >>\
-    \ w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int op;\n  cin >>\
-    \ op;\n  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >> u;\n   query.push_back({l,\
-    \ d, r, u});\n  } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1,\
-    \ x, y, w});\n   mp[{x, y}];\n  }\n }\n SegmentTree_2D<int, RSQ> seg(mp);\n for\
-    \ (int i= 0; i < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]=\
-    \ query[i];\n   cout << seg.fold(l, r, d, u) << '\\n';\n  } else {\n   auto [_,\
-    \ x, y, w]= query[i];\n   seg.set(x, y, seg.get(x, y) + w);\n  }\n }\n return\
-    \ 0;\n}\n"
+    \ sz, y2i(u), y2i(d)), ret;\n }\n void set(pos_t x, pos_t y, T v) { set_<1>(x,\
+    \ y, v); }\n void mul(pos_t x, pos_t y, T v) { set_<0>(x, y, v); }\n T get(pos_t\
+    \ x, pos_t y) const { return val[xy2i(x, y) + id[2]]; }\n};\n#line 7 \"test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp\"\
+    \nusing namespace std;\nstruct RSQ {\n using T= long long;\n static T ti() { return\
+    \ 0; }\n static T op(T l, T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n map<array<int, 2>,\
+    \ long long> mp;\n vector<array<int, 4>> query;\n for (int i= 0; i < N; i++) {\n\
+    \  int x, y, w;\n  cin >> x >> y >> w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0;\
+    \ i < Q; i++) {\n  int op;\n  cin >> op;\n  if (op) {\n   int l, d, r, u;\n  \
+    \ cin >> l >> d >> r >> u;\n   query.push_back({l, d, r, u});\n  } else {\n  \
+    \ int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1, x, y, w});\n \
+    \  mp[{x, y}];\n  }\n }\n SegmentTree_2D<int, RSQ> seg(mp);\n for (int i= 0; i\
+    \ < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]= query[i];\n \
+    \  cout << seg.fold(l, r, d, u) << '\\n';\n  } else {\n   auto [_, x, y, w]= query[i];\n\
+    \   seg.mul(x, y, w);\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
     \n#include <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#include\
     \ \"src/DataStructure/SegmentTree_2D.hpp\"\nusing namespace std;\nstruct RSQ {\n\
@@ -137,15 +140,14 @@ data:
     \ x, y, w});\n   mp[{x, y}];\n  }\n }\n SegmentTree_2D<int, RSQ> seg(mp);\n for\
     \ (int i= 0; i < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]=\
     \ query[i];\n   cout << seg.fold(l, r, d, u) << '\\n';\n  } else {\n   auto [_,\
-    \ x, y, w]= query[i];\n   seg.set(x, y, seg.get(x, y) + w);\n  }\n }\n return\
-    \ 0;\n}"
+    \ x, y, w]= query[i];\n   seg.mul(x, y, w);\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/DataStructure/SegmentTree_2D.hpp
   - src/Internal/tuple_traits.hpp
   isVerificationFile: true
   path: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
   requiredBy: []
-  timestamp: '2023-11-02 21:47:28+09:00'
+  timestamp: '2023-11-04 15:35:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp

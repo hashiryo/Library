@@ -48,7 +48,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -127,6 +127,12 @@ data:
     path: test/atcoder/abc256_f.WBT.test.cpp
     title: test/atcoder/abc256_f.WBT.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc309_f.KDT.3D.test.cpp
+    title: test/atcoder/abc309_f.KDT.3D.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc309_f.KDT.test.cpp
+    title: test/atcoder/abc309_f.KDT.test.cpp
+  - icon: ':x:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':x:'
@@ -171,6 +177,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/set_xor_min.Patricia.test.cpp
     title: test/yosupo/set_xor_min.Patricia.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1216.KDT.test.cpp
+    title: test/yukicoder/1216.KDT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
@@ -248,15 +257,18 @@ data:
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/649.DynSeg.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/649.Patricia.test.cpp
   - test/yukicoder/828.ETT.test.cpp
   - test/atcoder/abc133_f.DynSeg.test.cpp
+  - test/atcoder/abc309_f.KDT.3D.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
   - test/atcoder/abc133_f.PerArr.test.cpp
   - test/atcoder/abc256_f.SplayTree.test.cpp
   - test/atcoder/abc133_f.Patricia.test.cpp
+  - test/atcoder/abc309_f.KDT.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/yosupo/dynamic_tree_vertex_add_path_sum.LCT.test.cpp
   - test/yosupo/lca.LCT.test.cpp

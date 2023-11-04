@@ -23,32 +23,33 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://www.hackerrank.com/challenges/cube-summation
+    PROBLEM: https://atcoder.jp/contests/abc309/tasks/abc309_f
     links:
-    - https://www.hackerrank.com/challenges/cube-summation
-  bundledCode: "#line 1 \"test/hackerrank/cube-summation.KDT.test.cpp\"\n#define PROBLEM\
-    \ \"https://www.hackerrank.com/challenges/cube-summation\"\n#include <iostream>\n\
-    #include <set>\n#include <vector>\n#include <array>\n#line 3 \"src/DataStructure/KDTree.hpp\"\
-    \n#include <algorithm>\n#include <numeric>\n#include <map>\n#line 7 \"src/DataStructure/KDTree.hpp\"\
-    \n#include <cassert>\n#line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n\
-    #define MEMBER_MACRO(member, Dummy, name, type1, type2, last) \\\n template <class\
-    \ tClass> struct name##member { \\\n  template <class U, Dummy> static type1 check(U\
-    \ *); \\\n  static type2 check(...); \\\n  static tClass *mClass; \\\n  last;\
-    \ \\\n }\n#define HAS_CHECK(member, Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type,\
-    \ std::false_type, static const bool value= decltype(check(mClass))::value)\n\
-    #define HAS_MEMBER(member) HAS_CHECK(member, int dummy= (&U::member, 0))\n#define\
-    \ HAS_TYPE(member) HAS_CHECK(member, class dummy= typename U::member)\n#define\
-    \ HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member, class dummy= typename\
-    \ U::member, name, typename U::member, type2, using type= decltype(check(mClass)));\
-    \ \\\n template <class tClass> using name##member##_t= typename name##member<tClass>::type\n\
-    #define NULLPTR_OR(member) HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define\
-    \ MYSELF_OR(member) HOGE_OR(member, myself_or_, tClass)\n#line 2 \"src/Internal/tuple_traits.hpp\"\
-    \n#include <tuple>\n#line 5 \"src/Internal/tuple_traits.hpp\"\n#include <cstddef>\n\
-    template <class T> static constexpr bool tuple_like_v= false;\ntemplate <class...\
-    \ Args> static constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate\
-    \ <class T, class U> static constexpr bool tuple_like_v<std::pair<T, U>> = true;\n\
-    template <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
-    \ K>> = true;\ntemplate <class T> auto to_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
+    - https://atcoder.jp/contests/abc309/tasks/abc309_f
+  bundledCode: "#line 1 \"test/atcoder/abc309_f.KDT.test.cpp\"\n#define PROBLEM \"\
+    https://atcoder.jp/contests/abc309/tasks/abc309_f\"\n\n// 2\u6B21\u5143 + \u8D70\
+    \u67FB\n// 3\u6B21\u5143\u3088\u308A\u9045\u3044\n\n#include <iostream>\n#include\
+    \ <vector>\n#include <array>\n#line 3 \"src/DataStructure/KDTree.hpp\"\n#include\
+    \ <algorithm>\n#include <numeric>\n#include <map>\n#include <set>\n#include <cassert>\n\
+    #line 2 \"src/Internal/HAS_CHECK.hpp\"\n#include <type_traits>\n#define MEMBER_MACRO(member,\
+    \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
+    \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
+    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member,\
+    \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
+    \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
+    \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
+    \ type2, using type= decltype(check(mClass))); \\\n template <class tClass> using\
+    \ name##member##_t= typename name##member<tClass>::type\n#define NULLPTR_OR(member)\
+    \ HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define MYSELF_OR(member) HOGE_OR(member,\
+    \ myself_or_, tClass)\n#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n\
+    #line 5 \"src/Internal/tuple_traits.hpp\"\n#include <cstddef>\ntemplate <class\
+    \ T> static constexpr bool tuple_like_v= false;\ntemplate <class... Args> static\
+    \ constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate <class T,\
+    \ class U> static constexpr bool tuple_like_v<std::pair<T, U>> = true;\ntemplate\
+    \ <class T, size_t K> static constexpr bool tuple_like_v<std::array<T, K>> = true;\n\
+    template <class T> auto to_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
     \ return std::apply([](auto &&...x) { return std::make_tuple(x...); }, t);\n}\n\
     template <class T> auto forward_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
     \ return std::apply([](auto &&...x) { return std::forward_as_tuple(x...); }, t);\n\
@@ -234,49 +235,45 @@ data:
     \ nns(0, {xs...}, ret), ns[ret.first].pos;\n }\n};\ntemplate <class pos_t, size_t\
     \ K, class M= void> using KDTree= KDTreeImpl<pos_t, K, M, to_tuple_t<std::array<pos_t,\
     \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n\
-    #line 7 \"test/hackerrank/cube-summation.KDT.test.cpp\"\n// 3\u6B21\u5143\nusing\
-    \ namespace std;\nstruct RSQ {\n using T= long long;\n static T ti() { return\
-    \ 0; }\n static T op(T l, T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n int T;\n cin >> T;\n while (T--) {\n  int n, m;\n\
-    \  cin >> n >> m;\n  set<array<int, 3>> xyz;\n  vector<array<int, 7>> query;\n\
-    \  while (m--) {\n   string op;\n   cin >> op;\n   if (op[0] == 'U') {\n    int\
-    \ x, y, z, w;\n    cin >> x >> y >> z >> w;\n    xyz.insert({x, y, z});\n    query.push_back({0,\
-    \ x, y, z, w, 0, 0});\n   } else {\n    int x1, y1, z1, x2, y2, z2;\n    cin >>\
-    \ x1 >> y1 >> z1 >> x2 >> y2 >> z2;\n    query.push_back({1, x1, y1, z1, x2, y2,\
-    \ z2});\n   }\n  }\n  KDTree<int, 3, RSQ> kdt(xyz);\n  for (auto q: query) {\n\
-    \   if (q[0] == 0) {\n    auto [_, x, y, z, w, __, ___]= q;\n    kdt.set(x, y,\
-    \ z, w);\n   } else {\n    auto [_, x1, y1, z1, x2, y2, z2]= q;\n    cout << kdt.fold_cuboid(x1,\
-    \ x2, y1, y2, z1, z2) << '\\n';\n   }\n  }\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://www.hackerrank.com/challenges/cube-summation\"\n\
-    #include <iostream>\n#include <set>\n#include <vector>\n#include <array>\n#include\
-    \ \"src/DataStructure/KDTree.hpp\"\n// 3\u6B21\u5143\nusing namespace std;\nstruct\
-    \ RSQ {\n using T= long long;\n static T ti() { return 0; }\n static T op(T l,\
-    \ T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int T;\n cin >> T;\n while (T--) {\n  int n, m;\n  cin >> n >> m;\n  set<array<int,\
-    \ 3>> xyz;\n  vector<array<int, 7>> query;\n  while (m--) {\n   string op;\n \
-    \  cin >> op;\n   if (op[0] == 'U') {\n    int x, y, z, w;\n    cin >> x >> y\
-    \ >> z >> w;\n    xyz.insert({x, y, z});\n    query.push_back({0, x, y, z, w,\
-    \ 0, 0});\n   } else {\n    int x1, y1, z1, x2, y2, z2;\n    cin >> x1 >> y1 >>\
-    \ z1 >> x2 >> y2 >> z2;\n    query.push_back({1, x1, y1, z1, x2, y2, z2});\n \
-    \  }\n  }\n  KDTree<int, 3, RSQ> kdt(xyz);\n  for (auto q: query) {\n   if (q[0]\
-    \ == 0) {\n    auto [_, x, y, z, w, __, ___]= q;\n    kdt.set(x, y, z, w);\n \
-    \  } else {\n    auto [_, x1, y1, z1, x2, y2, z2]= q;\n    cout << kdt.fold_cuboid(x1,\
-    \ x2, y1, y2, z1, z2) << '\\n';\n   }\n  }\n }\n return 0;\n}"
+    #line 10 \"test/atcoder/abc309_f.KDT.test.cpp\"\nusing namespace std;\nstruct\
+    \ ROrQ {\n using T= bool;\n static T ti() { return 0; }\n static T op(T l, T r)\
+    \ { return l | r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N;\n cin >> N;\n vector<array<int, 3>> query;\n vector<array<int, 2>> xy;\n\
+    \ for (int i= 0; i < N; ++i) {\n  int a[3];\n  cin >> a[0] >> a[1] >> a[2];\n\
+    \  sort(a, a + 3);\n  query.push_back({a[0], a[1], a[2]});\n  xy.push_back({a[1],\
+    \ a[2]});\n }\n KDTree<int, 2, ROrQ> kdt(xy);\n sort(query.begin(), query.end(),\
+    \ [](auto a, auto b) { return a[0] == b[0] ? a[1] > b[1] : a[0] < b[0]; });\n\
+    \ bool isok= false;\n for (auto [h, w, d]: query) {\n  isok= kdt.fold_cuboid(0,\
+    \ w - 1, 0, d - 1);\n  if (isok) break;\n  kdt.set(w, d, 1);\n }\n cout << (isok\
+    \ ? \"Yes\" : \"No\") << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc309/tasks/abc309_f\"\n\n\
+    // 2\u6B21\u5143 + \u8D70\u67FB\n// 3\u6B21\u5143\u3088\u308A\u9045\u3044\n\n\
+    #include <iostream>\n#include <vector>\n#include <array>\n#include \"src/DataStructure/KDTree.hpp\"\
+    \nusing namespace std;\nstruct ROrQ {\n using T= bool;\n static T ti() { return\
+    \ 0; }\n static T op(T l, T r) { return l | r; }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int N;\n cin >> N;\n vector<array<int, 3>> query;\n\
+    \ vector<array<int, 2>> xy;\n for (int i= 0; i < N; ++i) {\n  int a[3];\n  cin\
+    \ >> a[0] >> a[1] >> a[2];\n  sort(a, a + 3);\n  query.push_back({a[0], a[1],\
+    \ a[2]});\n  xy.push_back({a[1], a[2]});\n }\n KDTree<int, 2, ROrQ> kdt(xy);\n\
+    \ sort(query.begin(), query.end(), [](auto a, auto b) { return a[0] == b[0] ?\
+    \ a[1] > b[1] : a[0] < b[0]; });\n bool isok= false;\n for (auto [h, w, d]: query)\
+    \ {\n  isok= kdt.fold_cuboid(0, w - 1, 0, d - 1);\n  if (isok) break;\n  kdt.set(w,\
+    \ d, 1);\n }\n cout << (isok ? \"Yes\" : \"No\") << '\\n';\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/KDTree.hpp
   - src/Internal/HAS_CHECK.hpp
   - src/Internal/tuple_traits.hpp
   - src/Internal/long_traits.hpp
   isVerificationFile: true
-  path: test/hackerrank/cube-summation.KDT.test.cpp
+  path: test/atcoder/abc309_f.KDT.test.cpp
   requiredBy: []
   timestamp: '2023-11-04 15:35:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/hackerrank/cube-summation.KDT.test.cpp
+documentation_of: test/atcoder/abc309_f.KDT.test.cpp
 layout: document
 redirect_from:
-- /verify/test/hackerrank/cube-summation.KDT.test.cpp
-- /verify/test/hackerrank/cube-summation.KDT.test.cpp.html
-title: test/hackerrank/cube-summation.KDT.test.cpp
+- /verify/test/atcoder/abc309_f.KDT.test.cpp
+- /verify/test/atcoder/abc309_f.KDT.test.cpp.html
+title: test/atcoder/abc309_f.KDT.test.cpp
 ---

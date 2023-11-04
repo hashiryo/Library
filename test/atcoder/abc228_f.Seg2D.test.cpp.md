@@ -15,20 +15,19 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1625
+    PROBLEM: https://atcoder.jp/contests/abc228/tasks/abc228_f
     links:
-    - https://yukicoder.me/problems/no/1625
-  bundledCode: "#line 1 \"test/yukicoder/1625.Seg2D.test.cpp\"\n#define PROBLEM \"\
-    https://yukicoder.me/problems/no/1625\"\n\n// \u533A\u9593\u3092\u4E8C\u6B21\u5143\
-    \u306E\u70B9\u306B\u5909\u63DB\u3059\u308B\u30C6\u30AF max\u30AF\u30A8\u30EA\n\
-    \n#include <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#include\
-    \ <algorithm>\n#line 4 \"src/DataStructure/SegmentTree_2D.hpp\"\n#include <numeric>\n\
-    #line 6 \"src/DataStructure/SegmentTree_2D.hpp\"\n#include <set>\n#include <cassert>\n\
-    #line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n#line 4 \"src/Internal/tuple_traits.hpp\"\
-    \n#include <type_traits>\n#include <cstddef>\ntemplate <class T> static constexpr\
-    \ bool tuple_like_v= false;\ntemplate <class... Args> static constexpr bool tuple_like_v<std::tuple<Args...>>\
-    \ = true;\ntemplate <class T, class U> static constexpr bool tuple_like_v<std::pair<T,\
-    \ U>> = true;\ntemplate <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
+    - https://atcoder.jp/contests/abc228/tasks/abc228_f
+  bundledCode: "#line 1 \"test/atcoder/abc228_f.Seg2D.test.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/abc228/tasks/abc228_f\"\n\n// kdt \u306F TLE\n\
+    \n#include <iostream>\n#include <vector>\n#include <array>\n#line 3 \"src/DataStructure/SegmentTree_2D.hpp\"\
+    \n#include <algorithm>\n#include <numeric>\n#include <map>\n#include <set>\n#include\
+    \ <cassert>\n#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n#line\
+    \ 4 \"src/Internal/tuple_traits.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
+    template <class T> static constexpr bool tuple_like_v= false;\ntemplate <class...\
+    \ Args> static constexpr bool tuple_like_v<std::tuple<Args...>> = true;\ntemplate\
+    \ <class T, class U> static constexpr bool tuple_like_v<std::pair<T, U>> = true;\n\
+    template <class T, size_t K> static constexpr bool tuple_like_v<std::array<T,\
     \ K>> = true;\ntemplate <class T> auto to_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
     \ return std::apply([](auto &&...x) { return std::make_tuple(x...); }, t);\n}\n\
     template <class T> auto forward_tuple(const T &t) {\n if constexpr (tuple_like_v<T>)\
@@ -115,54 +114,51 @@ data:
     \ m, ac, ad), dfs(dfs, i * 2 + 1, m, b, bc, bd);\n  };\n  return dfs(dfs, 1, 0,\
     \ sz, y2i(u), y2i(d)), ret;\n }\n void set(pos_t x, pos_t y, T v) { set_<1>(x,\
     \ y, v); }\n void mul(pos_t x, pos_t y, T v) { set_<0>(x, y, v); }\n T get(pos_t\
-    \ x, pos_t y) const { return val[xy2i(x, y) + id[2]]; }\n};\n#line 11 \"test/yukicoder/1625.Seg2D.test.cpp\"\
-    \nusing namespace std;\nstruct RmaxQ {\n using T= long long;\n static T ti() {\
-    \ return 0; }\n static T op(T l, T r) { return max(l, r); }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n map<array<int,\
-    \ 2>, long long> mp;\n for (int i= 0; i < n; i++) {\n  int a, b, c, d, e, f;\n\
-    \  cin >> a >> b >> c >> d >> e >> f;\n  auto [l, r]= minmax({a, c, e});\n  mp[{l,\
-    \ r}]= abs((long long)(c - a) * (f - b) - (long long)(d - b) * (e - a));\n }\n\
-    \ vector<tuple<int, int, int, long long>> query;\n for (int i= 0; i < q; i++)\
-    \ {\n  int op;\n  cin >> op;\n  if (op == 1) {\n   int a, b, c, d, e, f;\n   cin\
-    \ >> a >> b >> c >> d >> e >> f;\n   auto [l, r]= minmax({a, c, e});\n   mp[{l,\
-    \ r}];\n   query.emplace_back(op, l, r, abs((long long)(c - a) * (f - b) - (long\
-    \ long)(d - b) * (e - a)));\n  } else {\n   int l, r;\n   cin >> l >> r;\n   query.emplace_back(op,\
-    \ l, r, 0);\n  }\n }\n SegmentTree_2D<int, RmaxQ> seg(mp);\n for (auto [op, l,\
-    \ r, x]: query) {\n  if (op == 1) seg.mul(l, r, x);\n  else {\n   auto ans= seg.fold(l,\
-    \ r + 1, l, r + 1);\n   cout << (ans ? ans : -1) << '\\n';\n  }\n }\n return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1625\"\n\n// \u533A\u9593\
-    \u3092\u4E8C\u6B21\u5143\u306E\u70B9\u306B\u5909\u63DB\u3059\u308B\u30C6\u30AF\
-    \ max\u30AF\u30A8\u30EA\n\n#include <iostream>\n#include <map>\n#include <array>\n\
-    #include <vector>\n#include <algorithm>\n#include \"src/DataStructure/SegmentTree_2D.hpp\"\
-    \nusing namespace std;\nstruct RmaxQ {\n using T= long long;\n static T ti() {\
-    \ return 0; }\n static T op(T l, T r) { return max(l, r); }\n};\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int n, q;\n cin >> n >> q;\n map<array<int,\
-    \ 2>, long long> mp;\n for (int i= 0; i < n; i++) {\n  int a, b, c, d, e, f;\n\
-    \  cin >> a >> b >> c >> d >> e >> f;\n  auto [l, r]= minmax({a, c, e});\n  mp[{l,\
-    \ r}]= abs((long long)(c - a) * (f - b) - (long long)(d - b) * (e - a));\n }\n\
-    \ vector<tuple<int, int, int, long long>> query;\n for (int i= 0; i < q; i++)\
-    \ {\n  int op;\n  cin >> op;\n  if (op == 1) {\n   int a, b, c, d, e, f;\n   cin\
-    \ >> a >> b >> c >> d >> e >> f;\n   auto [l, r]= minmax({a, c, e});\n   mp[{l,\
-    \ r}];\n   query.emplace_back(op, l, r, abs((long long)(c - a) * (f - b) - (long\
-    \ long)(d - b) * (e - a)));\n  } else {\n   int l, r;\n   cin >> l >> r;\n   query.emplace_back(op,\
-    \ l, r, 0);\n  }\n }\n SegmentTree_2D<int, RmaxQ> seg(mp);\n for (auto [op, l,\
-    \ r, x]: query) {\n  if (op == 1) seg.mul(l, r, x);\n  else {\n   auto ans= seg.fold(l,\
-    \ r + 1, l, r + 1);\n   cout << (ans ? ans : -1) << '\\n';\n  }\n }\n return 0;\n\
-    }"
+    \ x, pos_t y) const { return val[xy2i(x, y) + id[2]]; }\n};\n#line 9 \"test/atcoder/abc228_f.Seg2D.test.cpp\"\
+    \nusing namespace std;\nstruct RMQ {\n using T= long long;\n static T ti() { return\
+    \ 0; }\n static T op(T l, T r) { return max(l, r); }\n};\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n int H, W, h1, w1, h2, w2;\n cin >> H >> W >> h1 >>\
+    \ w1 >> h2 >> w2;\n h2= min(h2, h1), w2= min(w2, w1);\n vector A(H + 1, vector<long\
+    \ long>(W + 1));\n for (int i= 1; i <= H; ++i)\n  for (int j= 1; j <= W; ++j)\
+    \ cin >> A[i][j];\n for (int i= 0; i <= H; ++i)\n  for (int j= 0; j < W; ++j)\
+    \ A[i][j + 1]+= A[i][j];\n for (int j= 0; j <= W; ++j)\n  for (int i= 0; i < H;\
+    \ ++i) A[i + 1][j]+= A[i][j];\n auto sum= [&](int l, int r, int u, int d) { return\
+    \ A[r][d] - A[l][d] - A[r][u] + A[l][u]; };\n vector<tuple<int, int, long long>>\
+    \ v;\n for (int i= 0; i + h2 <= H; ++i)\n  for (int j= 0; j + w2 <= W; ++j) v.emplace_back(i,\
+    \ j, sum(i, i + h2, j, j + w2));\n SegmentTree_2D<int, RMQ> seg(v);\n long long\
+    \ ans= 0;\n for (int i= 0; i + h1 <= H; ++i)\n  for (int j= 0; j + w1 <= W; ++j)\
+    \ ans= max(ans, sum(i, i + h1, j, j + w1) - seg.fold(i, i + h1 - h2 + 1, j, j\
+    \ + w1 - w2 + 1));\n cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc228/tasks/abc228_f\"\n\n\
+    // kdt \u306F TLE\n\n#include <iostream>\n#include <vector>\n#include <array>\n\
+    #include \"src/DataStructure/SegmentTree_2D.hpp\"\nusing namespace std;\nstruct\
+    \ RMQ {\n using T= long long;\n static T ti() { return 0; }\n static T op(T l,\
+    \ T r) { return max(l, r); }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int H, W, h1, w1, h2, w2;\n cin >> H >> W >> h1 >> w1 >> h2 >> w2;\n h2= min(h2,\
+    \ h1), w2= min(w2, w1);\n vector A(H + 1, vector<long long>(W + 1));\n for (int\
+    \ i= 1; i <= H; ++i)\n  for (int j= 1; j <= W; ++j) cin >> A[i][j];\n for (int\
+    \ i= 0; i <= H; ++i)\n  for (int j= 0; j < W; ++j) A[i][j + 1]+= A[i][j];\n for\
+    \ (int j= 0; j <= W; ++j)\n  for (int i= 0; i < H; ++i) A[i + 1][j]+= A[i][j];\n\
+    \ auto sum= [&](int l, int r, int u, int d) { return A[r][d] - A[l][d] - A[r][u]\
+    \ + A[l][u]; };\n vector<tuple<int, int, long long>> v;\n for (int i= 0; i + h2\
+    \ <= H; ++i)\n  for (int j= 0; j + w2 <= W; ++j) v.emplace_back(i, j, sum(i, i\
+    \ + h2, j, j + w2));\n SegmentTree_2D<int, RMQ> seg(v);\n long long ans= 0;\n\
+    \ for (int i= 0; i + h1 <= H; ++i)\n  for (int j= 0; j + w1 <= W; ++j) ans= max(ans,\
+    \ sum(i, i + h1, j, j + w1) - seg.fold(i, i + h1 - h2 + 1, j, j + w1 - w2 + 1));\n\
+    \ cout << ans << '\\n';\n return 0;\n}\n"
   dependsOn:
   - src/DataStructure/SegmentTree_2D.hpp
   - src/Internal/tuple_traits.hpp
   isVerificationFile: true
-  path: test/yukicoder/1625.Seg2D.test.cpp
+  path: test/atcoder/abc228_f.Seg2D.test.cpp
   requiredBy: []
   timestamp: '2023-11-04 15:35:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yukicoder/1625.Seg2D.test.cpp
+documentation_of: test/atcoder/abc228_f.Seg2D.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/1625.Seg2D.test.cpp
-- /verify/test/yukicoder/1625.Seg2D.test.cpp.html
-title: test/yukicoder/1625.Seg2D.test.cpp
+- /verify/test/atcoder/abc228_f.Seg2D.test.cpp
+- /verify/test/atcoder/abc228_f.Seg2D.test.cpp.html
+title: test/atcoder/abc228_f.Seg2D.test.cpp
 ---
