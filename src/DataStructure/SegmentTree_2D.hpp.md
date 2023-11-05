@@ -5,7 +5,10 @@ data:
     path: src/Internal/tuple_traits.hpp
     title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8 \u4ED6"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: test/yukicoder/2065.Seg2D.cpp
+    title: test/yukicoder/2065.Seg2D.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1068.Seg2D.test.cpp
@@ -34,6 +37,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1649.Seg2D.test.cpp
     title: test/yukicoder/1649.Seg2D.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/924.Seg2D.test.cpp
+    title: test/yukicoder/924.Seg2D.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -61,8 +67,8 @@ data:
     \ return std::apply([](auto &&...x) { return std::array{x...}; }, t);\n}\ntemplate\
     \ <class T> using to_tuple_t= decltype(to_tuple(T()));\ntemplate <class T> using\
     \ to_array_t= decltype(to_array(T()));\n#line 9 \"src/DataStructure/SegmentTree_2D.hpp\"\
-    \ntemplate <class pos_t, class M> class SegmentTree_2D {\npublic:\n using T= typename\
-    \ M::T;\n using Pos= std::array<pos_t, 2>;\n std::vector<pos_t> xs;\n std::vector<Pos>\
+    \ntemplate <class pos_t, class M> class SegmentTree_2D {\n using T= typename M::T;\n\
+    \ using Pos= std::array<pos_t, 2>;\n std::vector<pos_t> xs;\n std::vector<Pos>\
     \ yxs;\n std::vector<int> id, tol;\n std::vector<T> val;\n template <class P>\
     \ using canbe_Pos= std::is_convertible<to_tuple_t<P>, std::tuple<pos_t, pos_t>>;\n\
     \ template <class P> using canbe_PosV= std::is_convertible<to_tuple_t<P>, std::tuple<pos_t,\
@@ -136,8 +142,8 @@ data:
     \ x, pos_t y) const { return val[xy2i(x, y) + id[2]]; }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\
     #include <map>\n#include <set>\n#include <cassert>\n#include \"src/Internal/tuple_traits.hpp\"\
-    \ntemplate <class pos_t, class M> class SegmentTree_2D {\npublic:\n using T= typename\
-    \ M::T;\n using Pos= std::array<pos_t, 2>;\n std::vector<pos_t> xs;\n std::vector<Pos>\
+    \ntemplate <class pos_t, class M> class SegmentTree_2D {\n using T= typename M::T;\n\
+    \ using Pos= std::array<pos_t, 2>;\n std::vector<pos_t> xs;\n std::vector<Pos>\
     \ yxs;\n std::vector<int> id, tol;\n std::vector<T> val;\n template <class P>\
     \ using canbe_Pos= std::is_convertible<to_tuple_t<P>, std::tuple<pos_t, pos_t>>;\n\
     \ template <class P> using canbe_PosV= std::is_convertible<to_tuple_t<P>, std::tuple<pos_t,\
@@ -213,14 +219,16 @@ data:
   - src/Internal/tuple_traits.hpp
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_2D.hpp
-  requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
+  requiredBy:
+  - test/yukicoder/2065.Seg2D.cpp
+  timestamp: '2023-11-05 23:34:00+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/1625.Seg2D.test.cpp
   - test/yukicoder/1649.Seg2D.test.cpp
+  - test/yukicoder/924.Seg2D.test.cpp
   - test/atcoder/abc309_f.Seg2D.test.cpp
   - test/atcoder/abc228_f.Seg2D.test.cpp
   - test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
@@ -298,7 +306,7 @@ SegmentTree_2D<int,RMQ> seg(xyv);
 
 |||計算量|
 |---|---|---|
-|`fold(l,r,u,d)`| 直方体(長方形) 内部に位置する点についてその点に乗っている値を集約した値を返す. <br> **※半開区間** $\lbrack l,r )\times \lbrack u,d)$ |以下, 点の個数を $n$ とする. $\mathcal{O}((\log n)^2)$|
+|`fold(l,r,u,d)`| 直方体(長方形) 内部に位置する点についてその点に乗っている値を集約した値を返す. <br> **※半開区間** $\lbrack l,r )\times \lbrack u,d)$ |以下, 点の個数を $n$ とする. <br> $\mathcal{O}((\log n)^2)$|
 |`set(x,y,v)`|点 $(x,y)$ の値を `v` に変更する. <br> 点が存在しないとassertで落ちる.|$\mathcal{O}(\log n)$|
 |`get(x,y)`|点 $(x,y)$ の値を返す.　<br> 点が存在しないとassertで落ちる.|$\mathcal{O}(\log n)$|
 |`mul(x,y,v)`|点 $(x,y)$ の値に `v` を (モノイド演算で) かける. <br> 点が存在しないとassertで落ちる.|$\mathcal{O}(\log n)$|

@@ -8,6 +8,9 @@ data:
   - icon: ':question:'
     path: src/DataStructure/SegmentTree_2D.hpp
     title: "Segment-Tree(2\u6B21\u5143)"
+  - icon: ':warning:'
+    path: test/yukicoder/2065.Seg2D.cpp
+    title: test/yukicoder/2065.Seg2D.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1023.KDT.test.cpp
@@ -72,6 +75,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/924.Seg2D.test.cpp
+    title: test/yukicoder/924.Seg2D.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -120,6 +126,7 @@ data:
   isVerificationFile: false
   path: src/Internal/tuple_traits.hpp
   requiredBy:
+  - test/yukicoder/2065.Seg2D.cpp
   - src/DataStructure/SegmentTree_2D.hpp
   - src/DataStructure/KDTree.hpp
   timestamp: '2023-10-31 18:36:36+09:00'
@@ -134,6 +141,7 @@ data:
   - test/yukicoder/1649.Seg2D.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1216.KDT.test.cpp
+  - test/yukicoder/924.Seg2D.test.cpp
   - test/atcoder/abc309_f.KDT.3D.test.cpp
   - test/atcoder/abc309_f.Seg2D.test.cpp
   - test/atcoder/abc228_f.Seg2D.test.cpp

@@ -458,6 +458,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
+  - name: test/yukicoder
+    pages:
+    - icon: ':warning:'
+      path: test/yukicoder/2065.Seg2D.cpp
+      title: test/yukicoder/2065.Seg2D.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -1219,7 +1224,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SplayTree.test.cpp
       title: test/atcoder/abc256_f.SplayTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1228,10 +1233,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc270_g.test.cpp
       title: test/atcoder/abc270_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc276_g.sparse_FPS.test.cpp
       title: test/atcoder/abc276_g.sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc279_d.test.cpp
       title: test/atcoder/abc279_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2082,6 +2087,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/922.test.cpp
       title: test/yukicoder/922.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/924.Seg2D.test.cpp
+      title: test/yukicoder/924.Seg2D.test.cpp
     - icon: ':x:'
       path: test/yukicoder/925.SqrtDC.test.cpp
       title: test/yukicoder/925.SqrtDC.test.cpp

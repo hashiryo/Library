@@ -42,8 +42,8 @@ data:
     \ return std::apply([](auto &&...x) { return std::array{x...}; }, t);\n}\ntemplate\
     \ <class T> using to_tuple_t= decltype(to_tuple(T()));\ntemplate <class T> using\
     \ to_array_t= decltype(to_array(T()));\n#line 9 \"src/DataStructure/SegmentTree_2D.hpp\"\
-    \ntemplate <class pos_t, class M> class SegmentTree_2D {\npublic:\n using T= typename\
-    \ M::T;\n using Pos= std::array<pos_t, 2>;\n std::vector<pos_t> xs;\n std::vector<Pos>\
+    \ntemplate <class pos_t, class M> class SegmentTree_2D {\n using T= typename M::T;\n\
+    \ using Pos= std::array<pos_t, 2>;\n std::vector<pos_t> xs;\n std::vector<Pos>\
     \ yxs;\n std::vector<int> id, tol;\n std::vector<T> val;\n template <class P>\
     \ using canbe_Pos= std::is_convertible<to_tuple_t<P>, std::tuple<pos_t, pos_t>>;\n\
     \ template <class P> using canbe_PosV= std::is_convertible<to_tuple_t<P>, std::tuple<pos_t,\
@@ -143,7 +143,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc309_f.Seg2D.test.cpp
   requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
+  timestamp: '2023-11-05 23:34:00+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc309_f.Seg2D.test.cpp

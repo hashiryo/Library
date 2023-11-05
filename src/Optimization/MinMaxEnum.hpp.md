@@ -69,7 +69,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
   - icon: ':heavy_check_mark:'
