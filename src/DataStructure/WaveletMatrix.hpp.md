@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/DQuery.hpp
     title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\
       \u30A8\u30EA"
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2674.WM.test.cpp
     title: test/aoj/2674.WM.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
   - icon: ':heavy_check_mark:'

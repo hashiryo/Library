@@ -52,6 +52,12 @@ data:
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1600.KDT.test.cpp
+    title: test/yukicoder/1600.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1600.Seg2D.test.cpp
+    title: test/yukicoder/1600.Seg2D.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/529.LCT.test.cpp
     title: test/yukicoder/529.LCT.test.cpp
   _isVerificationFailed: true
@@ -83,7 +89,9 @@ data:
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1303.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/529.LCT.test.cpp
   - test/yosupo/directedmst.test.cpp
   - test/yosupo/two_edge_connected_components.test.cpp

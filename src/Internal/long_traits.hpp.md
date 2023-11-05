@@ -34,6 +34,9 @@ data:
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1600.KDT.test.cpp
+    title: test/yukicoder/1600.KDT.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
   - icon: ':x:'
@@ -118,6 +121,7 @@ data:
   verifiedWith:
   - test/hackerrank/cube-summation.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1216.KDT.test.cpp
   - test/atcoder/abc309_f.KDT.3D.test.cpp

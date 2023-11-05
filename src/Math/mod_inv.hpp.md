@@ -169,7 +169,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -467,6 +467,12 @@ data:
     path: test/yukicoder/1573.enum_quo.test.cpp
     title: test/yukicoder/1573.enum_quo.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1600.KDT.test.cpp
+    title: test/yukicoder/1600.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1600.Seg2D.test.cpp
+    title: test/yukicoder/1600.Seg2D.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1649.Seg2D.test.cpp
     title: test/yukicoder/1649.Seg2D.test.cpp
   - icon: ':x:'
@@ -602,6 +608,7 @@ data:
   - test/yukicoder/137.div_at.test.cpp
   - test/yukicoder/1750.test.cpp
   - test/yukicoder/1417.test.cpp
+  - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/2122.test.cpp
@@ -614,6 +621,7 @@ data:
   - test/yukicoder/950.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/685.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1907.test.cpp
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/658.test.cpp

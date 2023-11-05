@@ -90,19 +90,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
   - icon: ':x:'
@@ -171,6 +171,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1494.test.cpp
     title: test/yukicoder/1494.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1600.KDT.test.cpp
+    title: test/yukicoder/1600.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1600.Seg2D.test.cpp
+    title: test/yukicoder/1600.Seg2D.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1718.test.cpp
     title: test/yukicoder/1718.test.cpp
@@ -242,6 +248,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/1211.test.cpp
   - test/yukicoder/2122.test.cpp
@@ -249,6 +256,7 @@ data:
   - test/yukicoder/1295.test.cpp
   - test/yukicoder/1494.test.cpp
   - test/yukicoder/1293.scc.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1242.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/yukicoder/1813.test.cpp

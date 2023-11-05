@@ -6,12 +6,12 @@ data:
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/DQuery.hpp\"\n#include <map>\n#line 2\
@@ -49,24 +49,26 @@ data:
     \ mat[h].zeros - r0;\n   else l= l0, r= r0;\n  return ret;\n }\n // count i s.t.\
     \ (l <= i < r) && (lb <= v[i] < ub)\n std::size_t count(int l, int r, T lb, T\
     \ ub) const { return count(l, r, ub) - count(l, r, lb); }\n};\n#line 4 \"src/DataStructure/DQuery.hpp\"\
-    \nclass DQuery {\n WaveletMatrix<int> wm;\npublic:\n template <class T> DQuery(const\
-    \ std::vector<T> &v) {\n  std::vector<int> next(v.size(), -1);\n  std::map<T,\
-    \ int> mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i]))\
-    \ next[mp[v[i]]]= i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int\
-    \ l, int r) const { return wm.count(l, r, l); }\n};\n"
+    \nclass DQuery {\n WaveletMatrix<int> wm;\n template <class T> std::vector<int>\
+    \ build(const std::vector<T> &v) {\n  std::vector<int> next(v.size(), -1);\n \
+    \ std::map<T, int> mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i]))\
+    \ next[mp[v[i]]]= i;\n  return next;\n }\npublic:\n template <class T> DQuery(const\
+    \ std::vector<T> &v): wm(build(v)) {}\n std::size_t number_of_types(int l, int\
+    \ r) const { return wm.count(l, r, l); }\n};\n"
   code: "#pragma once\n#include <map>\n#include \"src/DataStructure/WaveletMatrix.hpp\"\
-    \nclass DQuery {\n WaveletMatrix<int> wm;\npublic:\n template <class T> DQuery(const\
-    \ std::vector<T> &v) {\n  std::vector<int> next(v.size(), -1);\n  std::map<T,\
-    \ int> mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i]))\
-    \ next[mp[v[i]]]= i;\n  wm= WaveletMatrix(next);\n }\n std::size_t number_of_types(int\
-    \ l, int r) const { return wm.count(l, r, l); }\n};\n"
+    \nclass DQuery {\n WaveletMatrix<int> wm;\n template <class T> std::vector<int>\
+    \ build(const std::vector<T> &v) {\n  std::vector<int> next(v.size(), -1);\n \
+    \ std::map<T, int> mp;\n  for (int i= v.size(); i--; mp[v[i]]= i)\n   if (mp.count(v[i]))\
+    \ next[mp[v[i]]]= i;\n  return next;\n }\npublic:\n template <class T> DQuery(const\
+    \ std::vector<T> &v): wm(build(v)) {}\n std::size_t number_of_types(int l, int\
+    \ r) const { return wm.count(l, r, l); }\n};\n"
   dependsOn:
   - src/DataStructure/WaveletMatrix.hpp
   isVerificationFile: false
   path: src/DataStructure/DQuery.hpp
   requiredBy: []
-  timestamp: '2023-11-05 12:06:09+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-11-05 18:47:29+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/atcoder/abc174_f.WM.test.cpp
 documentation_of: src/DataStructure/DQuery.hpp

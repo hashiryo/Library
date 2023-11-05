@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_C.KDT.test.cpp
     title: test/aoj/DSL_2_C.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_f.Seg2D.test.cpp
     title: test/atcoder/abc228_f.Seg2D.test.cpp
   - icon: ':x:'
@@ -54,6 +54,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1600.KDT.test.cpp
+    title: test/yukicoder/1600.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1600.Seg2D.test.cpp
+    title: test/yukicoder/1600.Seg2D.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
@@ -120,9 +126,11 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/1625.Seg2D.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1649.Seg2D.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1216.KDT.test.cpp

@@ -117,7 +117,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc133_f.PerArr.test.cpp
     title: test/atcoder/abc133_f.PerArr.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
   - icon: ':x:'
@@ -180,6 +180,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1600.KDT.test.cpp
+    title: test/yukicoder/1600.KDT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
@@ -254,6 +257,7 @@ data:
   verifiedWith:
   - test/hackerrank/cube-summation.KDT.test.cpp
   - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/235.LCT.test.cpp
   - test/yukicoder/649.DynSeg.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
