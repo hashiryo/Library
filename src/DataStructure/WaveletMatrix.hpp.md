@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/DataStructure/DQuery.hpp
     title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\
       \u30A8\u30EA"
@@ -13,28 +13,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2674.WM.test.cpp
     title: test/aoj/2674.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc324_g.WM.test.cpp
     title: test/atcoder/abc324_g.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/range_kth_smallest.WM.test.cpp
     title: test/yosupo/range_kth_smallest.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/static_range_frequency.WM.test.cpp
     title: test/yosupo/static_range_frequency.WM.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1371.WM.test.cpp
     title: test/yukicoder/1371.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/728.WM.test.cpp
     title: test/yukicoder/728.WM.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/919.WM.test.cpp
     title: test/yukicoder/919.WM.test.cpp
   _isVerificationFailed: true
@@ -43,8 +43,8 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <array>\n#include <cassert>\ntemplate <class T=\
-    \ long long> class WaveletMatrix {\n struct SuccinctIndexableDictionary {\n  std::size_t\
+    #include <algorithm>\n#include <array>\n#include <cassert>\ntemplate <class T>\
+    \ class WaveletMatrix {\n struct SuccinctIndexableDictionary {\n  std::size_t\
     \ len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
     \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
     \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
@@ -54,9 +54,9 @@ data:
     \  std::size_t rank(std::size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
     \ >> 5] & ((1U << (k & 31)) - 1))); }\n  std::size_t rank0(std::size_t k) const\
     \ { return k - rank(k); }\n };\n std::size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
-    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix()= default;\n WaveletMatrix(const\
-    \ std::vector<T> &v): len(v.size()), lg(32 - __builtin_clz(std::max<int>(len,\
-    \ 1))), mat(lg, len), vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
+    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix(const std::vector<T> &v):\
+    \ len(v.size()), lg(32 - __builtin_clz(std::max<int>(len, 1))), mat(lg, len),\
+    \ vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
     \ vec.end()), vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for\
     \ (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) -\
     \ vec.begin();\n  for (auto h= lg; h--; cur.swap(nex)) {\n   for (std::size_t\
@@ -78,18 +78,17 @@ data:
     \ (l <= i < r) && (lb <= v[i] < ub)\n std::size_t count(int l, int r, T lb, T\
     \ ub) const { return count(l, r, ub) - count(l, r, lb); }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <array>\n\
-    #include <cassert>\ntemplate <class T= long long> class WaveletMatrix {\n struct\
-    \ SuccinctIndexableDictionary {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned>\
-    \ bit, sum;\n  SuccinctIndexableDictionary()= default;\n  SuccinctIndexableDictionary(std::size_t\
-    \ len): len(len), blocks((len >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n\
-    \  void set(int k) { bit[k >> 5]|= 1U << (k & 31); }\n  void build() {\n   for\
-    \ (std::size_t i= 1; i < blocks; i++) sum[i]= sum[i - 1] + __builtin_popcount(bit[i\
-    \ - 1]);\n   zeros= rank0(len);\n  }\n  bool operator[](int k) const { return\
-    \ (bit[k >> 5] >> (k & 31)) & 1; }\n  std::size_t rank(std::size_t k) const {\
-    \ return (sum[k >> 5] + __builtin_popcount(bit[k >> 5] & ((1U << (k & 31)) - 1)));\
-    \ }\n  std::size_t rank0(std::size_t k) const { return k - rank(k); }\n };\n std::size_t\
-    \ len, lg;\n std::vector<SuccinctIndexableDictionary> mat;\n std::vector<T> vec;\n\
-    public:\n WaveletMatrix()= default;\n WaveletMatrix(const std::vector<T> &v):\
+    #include <cassert>\ntemplate <class T> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
+    \ {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
+    \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
+    \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
+    \ 5]|= 1U << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks;\
+    \ i++) sum[i]= sum[i - 1] + __builtin_popcount(bit[i - 1]);\n   zeros= rank0(len);\n\
+    \  }\n  bool operator[](int k) const { return (bit[k >> 5] >> (k & 31)) & 1; }\n\
+    \  std::size_t rank(std::size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
+    \ >> 5] & ((1U << (k & 31)) - 1))); }\n  std::size_t rank0(std::size_t k) const\
+    \ { return k - rank(k); }\n };\n std::size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
+    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix(const std::vector<T> &v):\
     \ len(v.size()), lg(32 - __builtin_clz(std::max<int>(len, 1))), mat(lg, len),\
     \ vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
     \ vec.end()), vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for\
@@ -117,7 +116,7 @@ data:
   path: src/DataStructure/WaveletMatrix.hpp
   requiredBy:
   - src/DataStructure/DQuery.hpp
-  timestamp: '2023-01-21 19:30:07+09:00'
+  timestamp: '2023-11-05 12:06:09+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/728.WM.test.cpp

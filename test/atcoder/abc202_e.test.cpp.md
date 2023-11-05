@@ -12,9 +12,9 @@ data:
     title: "\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc202/tasks/abc202_e
@@ -77,17 +77,17 @@ data:
     \ {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n\
     \  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n  for (int u;;\
     \ k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v]\
-    \ - k];\n }\n int la_w(int v, Cost w) const {\n  static_assert(weight, \"\\'la_w\\\
-    ' is not available\");\n  for (Cost c;; w-= c) {\n   int u= PP[v];\n   c= DW[v]\
-    \ - DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while\
-    \ (ok - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
+    \ - k];\n }\n int la_w(int v, C w) const {\n  static_assert(weight, \"\\'la_w\\\
+    ' is not available\");\n  for (C c;; w-= c) {\n   int u= PP[v];\n   c= DW[v] -\
+    \ DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while (ok\
+    \ - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
     \     else ng= m;\n    }\n    return I[ok];\n   }\n   if (v= P[u]; v == -1) return\
     \ u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return u;\n \
     \ if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] -\
     \ D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n\
     \  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n\
-    \ }\n int jump_w(int u, int v, Cost w) const {\n  static_assert(weight, \"\\'jump_w\\\
-    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  Cost d_uz=\
+    \ }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight, \"\\'jump_w\\\
+    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  C d_uz=\
     \ DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz ? v : w <= d_uz\
     \ ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int u, int v) const\
     \ { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u, int v) const {\n\
@@ -103,7 +103,7 @@ data:
     \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
     \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
     \ down.rbegin(), down.rend()), up;\n }\n};\n#line 6 \"src/DataStructure/WaveletMatrix.hpp\"\
-    \ntemplate <class T= long long> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
+    \ntemplate <class T> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
     \ {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
     \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
     \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
@@ -113,9 +113,9 @@ data:
     \  std::size_t rank(std::size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
     \ >> 5] & ((1U << (k & 31)) - 1))); }\n  std::size_t rank0(std::size_t k) const\
     \ { return k - rank(k); }\n };\n std::size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
-    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix()= default;\n WaveletMatrix(const\
-    \ std::vector<T> &v): len(v.size()), lg(32 - __builtin_clz(std::max<int>(len,\
-    \ 1))), mat(lg, len), vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
+    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix(const std::vector<T> &v):\
+    \ len(v.size()), lg(32 - __builtin_clz(std::max<int>(len, 1))), mat(lg, len),\
+    \ vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
     \ vec.end()), vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for\
     \ (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) -\
     \ vec.begin();\n  for (auto h= lg; h--; cur.swap(nex)) {\n   for (std::size_t\
@@ -159,8 +159,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc202_e.test.cpp
   requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-05 12:06:09+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc202_e.test.cpp
 layout: document

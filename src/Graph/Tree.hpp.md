@@ -5,47 +5,47 @@ data:
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'
@@ -193,17 +193,17 @@ data:
     \ {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n\
     \  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n  for (int u;;\
     \ k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v]\
-    \ - k];\n }\n int la_w(int v, Cost w) const {\n  static_assert(weight, \"\\'la_w\\\
-    ' is not available\");\n  for (Cost c;; w-= c) {\n   int u= PP[v];\n   c= DW[v]\
-    \ - DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while\
-    \ (ok - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
+    \ - k];\n }\n int la_w(int v, C w) const {\n  static_assert(weight, \"\\'la_w\\\
+    ' is not available\");\n  for (C c;; w-= c) {\n   int u= PP[v];\n   c= DW[v] -\
+    \ DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while (ok\
+    \ - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
     \     else ng= m;\n    }\n    return I[ok];\n   }\n   if (v= P[u]; v == -1) return\
     \ u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return u;\n \
     \ if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] -\
     \ D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n\
     \  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n\
-    \ }\n int jump_w(int u, int v, Cost w) const {\n  static_assert(weight, \"\\'jump_w\\\
-    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  Cost d_uz=\
+    \ }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight, \"\\'jump_w\\\
+    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  C d_uz=\
     \ DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz ? v : w <= d_uz\
     \ ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int u, int v) const\
     \ { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u, int v) const {\n\
@@ -266,17 +266,17 @@ data:
     \ {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n\
     \  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n  for (int u;;\
     \ k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v]\
-    \ - k];\n }\n int la_w(int v, Cost w) const {\n  static_assert(weight, \"\\'la_w\\\
-    ' is not available\");\n  for (Cost c;; w-= c) {\n   int u= PP[v];\n   c= DW[v]\
-    \ - DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while\
-    \ (ok - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
+    \ - k];\n }\n int la_w(int v, C w) const {\n  static_assert(weight, \"\\'la_w\\\
+    ' is not available\");\n  for (C c;; w-= c) {\n   int u= PP[v];\n   c= DW[v] -\
+    \ DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while (ok\
+    \ - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
     \     else ng= m;\n    }\n    return I[ok];\n   }\n   if (v= P[u]; v == -1) return\
     \ u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return u;\n \
     \ if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] -\
     \ D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n\
     \  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n\
-    \ }\n int jump_w(int u, int v, Cost w) const {\n  static_assert(weight, \"\\'jump_w\\\
-    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  Cost d_uz=\
+    \ }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight, \"\\'jump_w\\\
+    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  C d_uz=\
     \ DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz ? v : w <= d_uz\
     \ ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int u, int v) const\
     \ { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u, int v) const {\n\
@@ -300,7 +300,7 @@ data:
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/rerooting.hpp
   - src/Graph/BiConnectedComponents.hpp
-  timestamp: '2023-11-04 15:35:02+09:00'
+  timestamp: '2023-11-05 12:06:09+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/bonnie-and-clyde.test.cpp

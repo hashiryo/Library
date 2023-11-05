@@ -15,7 +15,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/CsrArray.hpp
       title: "CSR\u5F62\u5F0F"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/DataStructure/DQuery.hpp
       title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\
         \u30A8\u30EA"
@@ -187,7 +187,7 @@ data:
       title: "\u6700\u5C0F\u5305\u542B\u5186"
   - name: src/Graph
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/BiConnectedComponents.hpp
       title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -205,7 +205,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/FunctionalGraph.hpp
       title: "Functional\u30B0\u30E9\u30D5"
     - icon: ':question:'
@@ -608,7 +608,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1549.WM.test.cpp
       title: test/aoj/1549.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1595.test.cpp
       title: test/aoj/1595.test.cpp
     - icon: ':heavy_check_mark:'
@@ -656,7 +656,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2257.test.cpp
       title: test/aoj/2257.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2270.DynSeg.test.cpp
       title: test/aoj/2270.DynSeg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -740,7 +740,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2647.test.cpp
       title: test/aoj/2647.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2667.HLD.test.cpp
       title: test/aoj/2667.HLD.test.cpp
     - icon: ':heavy_check_mark:'
@@ -794,7 +794,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2972.test.cpp
       title: test/aoj/2972.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3022.test.cpp
       title: test/aoj/3022.test.cpp
     - icon: ':heavy_check_mark:'
@@ -986,7 +986,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
       title: test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_3_A.test.cpp
       title: test/aoj/GRL_3_A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1075,7 +1075,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc135_d.test.cpp
       title: test/atcoder/abc135_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc136_d.test.cpp
       title: test/atcoder/abc136_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1087,10 +1087,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc155_e.test.cpp
       title: test/atcoder/abc155_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc160_f.test.cpp
       title: test/atcoder/abc160_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc167_d.test.cpp
       title: test/atcoder/abc167_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1105,7 +1105,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1117,7 +1117,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_e.test.cpp
       title: test/atcoder/abc179_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1129,7 +1129,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1612,7 +1612,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
     - icon: ':x:'
@@ -1657,7 +1657,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
       title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/static_range_frequency.WM.test.cpp
       title: test/yosupo/static_range_frequency.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2037,7 +2037,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/705.LiCT.test.cpp
       title: test/yukicoder/705.LiCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/728.WM.test.cpp
       title: test/yukicoder/728.WM.test.cpp
     - icon: ':x:'
@@ -2070,7 +2070,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/913.monotone_minima.test.cpp
       title: test/yukicoder/913.monotone_minima.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/919.WM.test.cpp
       title: test/yukicoder/919.WM.test.cpp
     - icon: ':x:'

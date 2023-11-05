@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/SegmentArrangement.hpp
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Graph/DulmageMendelsohn.hpp
     title: "Dulmage-Mendelsohn \u5206\u89E3"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
@@ -48,19 +48,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1226.test.cpp
     title: test/aoj/1226.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2448.test.cpp
     title: test/aoj/2448.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2667.HLD.test.cpp
     title: test/aoj/2667.HLD.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/3022.test.cpp
     title: test/aoj/3022.test.cpp
   - icon: ':heavy_check_mark:'
@@ -69,25 +69,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3176.test.cpp
     title: test/aoj/3176.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':x:'

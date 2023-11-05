@@ -48,7 +48,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2235.onlinedicon.test.cpp
     title: test/aoj/2235.onlinedicon.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
     title: test/aoj/2270.DynSeg.test.cpp
   - icon: ':heavy_check_mark:'

@@ -6,29 +6,28 @@ data:
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/DQuery.hpp\"\n#include <map>\n#line 2\
     \ \"src/DataStructure/WaveletMatrix.hpp\"\n#include <vector>\n#include <algorithm>\n\
-    #include <array>\n#include <cassert>\ntemplate <class T= long long> class WaveletMatrix\
-    \ {\n struct SuccinctIndexableDictionary {\n  std::size_t len, blocks, zeros;\n\
-    \  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()= default;\n\
-    \  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len >> 5) +\
-    \ 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >> 5]|= 1U\
-    \ << (k & 31); }\n  void build() {\n   for (std::size_t i= 1; i < blocks; i++)\
-    \ sum[i]= sum[i - 1] + __builtin_popcount(bit[i - 1]);\n   zeros= rank0(len);\n\
-    \  }\n  bool operator[](int k) const { return (bit[k >> 5] >> (k & 31)) & 1; }\n\
-    \  std::size_t rank(std::size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
-    \ >> 5] & ((1U << (k & 31)) - 1))); }\n  std::size_t rank0(std::size_t k) const\
-    \ { return k - rank(k); }\n };\n std::size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
-    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix()= default;\n WaveletMatrix(const\
-    \ std::vector<T> &v): len(v.size()), lg(32 - __builtin_clz(std::max<int>(len,\
+    #include <array>\n#include <cassert>\ntemplate <class T> class WaveletMatrix {\n\
+    \ struct SuccinctIndexableDictionary {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned>\
+    \ bit, sum;\n  SuccinctIndexableDictionary()= default;\n  SuccinctIndexableDictionary(std::size_t\
+    \ len): len(len), blocks((len >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n\
+    \  void set(int k) { bit[k >> 5]|= 1U << (k & 31); }\n  void build() {\n   for\
+    \ (std::size_t i= 1; i < blocks; i++) sum[i]= sum[i - 1] + __builtin_popcount(bit[i\
+    \ - 1]);\n   zeros= rank0(len);\n  }\n  bool operator[](int k) const { return\
+    \ (bit[k >> 5] >> (k & 31)) & 1; }\n  std::size_t rank(std::size_t k) const {\
+    \ return (sum[k >> 5] + __builtin_popcount(bit[k >> 5] & ((1U << (k & 31)) - 1)));\
+    \ }\n  std::size_t rank0(std::size_t k) const { return k - rank(k); }\n };\n std::size_t\
+    \ len, lg;\n std::vector<SuccinctIndexableDictionary> mat;\n std::vector<T> vec;\n\
+    public:\n WaveletMatrix(const std::vector<T> &v): len(v.size()), lg(32 - __builtin_clz(std::max<int>(len,\
     \ 1))), mat(lg, len), vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
     \ vec.end()), vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for\
     \ (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) -\
@@ -66,8 +65,8 @@ data:
   isVerificationFile: false
   path: src/DataStructure/DQuery.hpp
   requiredBy: []
-  timestamp: '2023-02-10 13:10:01+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2023-11-05 12:06:09+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc174_f.WM.test.cpp
 documentation_of: src/DataStructure/DQuery.hpp

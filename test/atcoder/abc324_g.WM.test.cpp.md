@@ -18,7 +18,7 @@ data:
     https://atcoder.jp/contests/abc324/tasks/abc324_g\"\n#include <iostream>\n#include\
     \ <vector>\n#include <array>\n#line 3 \"src/DataStructure/WaveletMatrix.hpp\"\n\
     #include <algorithm>\n#line 5 \"src/DataStructure/WaveletMatrix.hpp\"\n#include\
-    \ <cassert>\ntemplate <class T= long long> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
+    \ <cassert>\ntemplate <class T> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
     \ {\n  std::size_t len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary()=\
     \ default;\n  SuccinctIndexableDictionary(std::size_t len): len(len), blocks((len\
     \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
@@ -28,9 +28,9 @@ data:
     \  std::size_t rank(std::size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
     \ >> 5] & ((1U << (k & 31)) - 1))); }\n  std::size_t rank0(std::size_t k) const\
     \ { return k - rank(k); }\n };\n std::size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
-    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix()= default;\n WaveletMatrix(const\
-    \ std::vector<T> &v): len(v.size()), lg(32 - __builtin_clz(std::max<int>(len,\
-    \ 1))), mat(lg, len), vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
+    \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix(const std::vector<T> &v):\
+    \ len(v.size()), lg(32 - __builtin_clz(std::max<int>(len, 1))), mat(lg, len),\
+    \ vec(v) {\n  std::sort(vec.begin(), vec.end());\n  vec.erase(std::unique(vec.begin(),\
     \ vec.end()), vec.end());\n  std::vector<unsigned> cur(len), nex(len);\n  for\
     \ (int i= len; i--;) cur[i]= std::lower_bound(vec.begin(), vec.end(), v[i]) -\
     \ vec.begin();\n  for (auto h= lg; h--; cur.swap(nex)) {\n   for (std::size_t\
@@ -84,7 +84,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc324_g.WM.test.cpp
   requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
+  timestamp: '2023-11-05 12:06:09+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc324_g.WM.test.cpp
