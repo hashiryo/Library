@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   - icon: ':question:'
@@ -48,10 +48,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc218_h.test.cpp
     title: test/atcoder/abc218_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
   - icon: ':heavy_check_mark:'

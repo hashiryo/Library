@@ -37,6 +37,9 @@ data:
     path: test/atcoder/abc236_g.test.cpp
     title: test/atcoder/abc236_g.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc323_g.test.cpp
+    title: test/atcoder/abc323_g.test.cpp
+  - icon: ':x:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
   - icon: ':x:'
@@ -163,6 +166,7 @@ data:
   - test/yukicoder/310.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/atcoder/abc236_g.test.cpp
+  - test/atcoder/abc323_g.test.cpp
   - test/yosupo/matrix_det_arbitrary_mod.test.cpp
   - test/yosupo/inverse_matrix.test.cpp
   - test/yosupo/matrix_det.test.cpp

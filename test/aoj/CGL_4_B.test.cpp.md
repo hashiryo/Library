@@ -4,16 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/Convex.hpp
     title: "\u51F8\u591A\u89D2\u5F62"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Line.hpp
     title: "\u76F4\u7DDA"
   - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: "\u70B9"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: "\u591A\u89D2\u5F62"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Segment.hpp
     title: "\u7DDA\u5206"
   _extendedRequiredBy: []

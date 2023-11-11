@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
     title: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
   - icon: ':x:'

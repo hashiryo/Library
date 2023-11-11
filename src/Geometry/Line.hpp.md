@@ -11,10 +11,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/Convex.hpp
     title: "\u51F8\u591A\u89D2\u5F62"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: "\u591A\u89D2\u5F62"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Segment.hpp
     title: "\u7DDA\u5206"
   - icon: ':heavy_check_mark:'
@@ -210,12 +210,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_f.test.cpp
     title: test/atcoder/abc202_f.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/Line.hpp\"\n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\
@@ -370,7 +370,7 @@ data:
   - src/Geometry/Convex.hpp
   - src/Geometry/Circle.hpp
   timestamp: '2023-10-10 00:58:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc202_f.test.cpp
   - test/aoj/0375.test.cpp

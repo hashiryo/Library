@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP2_4_C.SplayTree.test.cpp
     title: test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc256_f.SplayTree.test.cpp
     title: test/atcoder/abc256_f.SplayTree.test.cpp
   - icon: ':x:'
