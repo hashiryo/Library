@@ -15,10 +15,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc121_d.test.cpp
     title: test/atcoder/abc121_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc129_e.test.cpp
     title: test/atcoder/abc129_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_d.test.cpp
     title: test/atcoder/abc135_d.test.cpp
   - icon: ':x:'
