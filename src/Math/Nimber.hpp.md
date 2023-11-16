@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/abc150_f.RH.Nimber.test.cpp
+    title: test/atcoder/abc150_f.RH.Nimber.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/unit_test/nimber_inv.test.cpp
     title: test/unit_test/nimber_inv.test.cpp
@@ -15,9 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/nim_product_64.test.cpp
     title: test/yosupo/nim_product_64.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Nimber.hpp\"\n#include <array>\n#include <numeric>\n\
@@ -197,8 +200,9 @@ data:
   path: src/Math/Nimber.hpp
   requiredBy: []
   timestamp: '2023-08-06 16:57:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc150_f.RH.Nimber.test.cpp
   - test/yosupo/nim_product_64.test.cpp
   - test/unit_test/nimber_log.test.cpp
   - test/unit_test/nimber_sqrt.test.cpp

@@ -287,8 +287,8 @@ data:
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
     - icon: ':question:'
       path: src/Math/CartesianProduct.hpp
-      title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\\
-        times K_n$)"
+      title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times\
+        \ K_2\\times\\cdots\\times K_n$)"
     - icon: ':question:'
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
@@ -311,7 +311,7 @@ data:
     - icon: ':x:'
       path: src/Math/ModInt_Runtime.hpp
       title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
     - icon: ':question:'
@@ -728,8 +728,8 @@ data:
       path: test/aoj/2603.monotone_minima.test.cpp
       title: test/aoj/2603.monotone_minima.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/2614.rollinghash.test.cpp
-      title: test/aoj/2614.rollinghash.test.cpp
+      path: test/aoj/2614.RH.test.cpp
+      title: test/aoj/2614.RH.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2624.test.cpp
       title: test/aoj/2624.test.cpp
@@ -751,9 +751,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2674.WM.test.cpp
       title: test/aoj/2674.WM.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: test/aoj/2711.rollinghash.test.cpp
-      title: test/aoj/2711.rollinghash.test.cpp
+    - icon: ':x:'
+      path: test/aoj/2711.RH.test.cpp
+      title: test/aoj/2711.RH.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/2725.CHT.test.cpp
       title: test/aoj/2725.CHT.test.cpp
@@ -857,8 +857,8 @@ data:
       path: test/aoj/ALDS1_14_B.KMP.test.cpp
       title: test/aoj/ALDS1_14_B.KMP.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-      title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+      path: test/aoj/ALDS1_14_B.RH.test.cpp
+      title: test/aoj/ALDS1_14_B.RH.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_D.test.cpp
       title: test/aoj/ALDS1_14_D.test.cpp
@@ -1081,11 +1081,20 @@ data:
       path: test/atcoder/abc135_d.test.cpp
       title: test/atcoder/abc135_d.test.cpp
     - icon: ':x:'
+      path: test/atcoder/abc135_f.RH.test.cpp
+      title: test/atcoder/abc135_f.RH.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc136_d.test.cpp
       title: test/atcoder/abc136_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc141_e.RH.test.cpp
+      title: test/atcoder/abc141_e.RH.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc150_f.RH.Nimber.test.cpp
+      title: test/atcoder/abc150_f.RH.Nimber.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc154_e.test.cpp
       title: test/atcoder/abc154_e.test.cpp
@@ -1234,6 +1243,9 @@ data:
       path: test/atcoder/abc270_g.test.cpp
       title: test/atcoder/abc270_g.test.cpp
     - icon: ':x:'
+      path: test/atcoder/abc272_f.RH.test.cpp
+      title: test/atcoder/abc272_f.RH.test.cpp
+    - icon: ':x:'
       path: test/atcoder/abc276_g.sparse_FPS.test.cpp
       title: test/atcoder/abc276_g.sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1272,6 +1284,9 @@ data:
     - icon: ':x:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/agc047_b.RH.test.cpp
+      title: test/atcoder/agc047_b.RH.test.cpp
     - icon: ':x:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
@@ -1723,8 +1738,8 @@ data:
       path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
       title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     - icon: ':x:'
-      path: test/yosupo/z_algorithm.rollinghash.test.cpp
-      title: test/yosupo/z_algorithm.rollinghash.test.cpp
+      path: test/yosupo/z_algorithm.RH.test.cpp
+      title: test/yosupo/z_algorithm.RH.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/z_algorithm.test.cpp
       title: test/yosupo/z_algorithm.test.cpp

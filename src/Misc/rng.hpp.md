@@ -19,17 +19,32 @@ data:
     path: test/aoj/2423.test.cpp
     title: test/aoj/2423.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2614.rollinghash.test.cpp
-    title: test/aoj/2614.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2711.rollinghash.test.cpp
-    title: test/aoj/2711.rollinghash.test.cpp
+    path: test/aoj/2614.RH.test.cpp
+    title: test/aoj/2614.RH.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2711.RH.test.cpp
+    title: test/aoj/2711.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/3034.test.cpp
     title: test/aoj/3034.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-    title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+    path: test/aoj/ALDS1_14_B.RH.test.cpp
+    title: test/aoj/ALDS1_14_B.RH.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc135_f.RH.test.cpp
+    title: test/atcoder/abc135_f.RH.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc141_e.RH.test.cpp
+    title: test/atcoder/abc141_e.RH.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc150_f.RH.Nimber.test.cpp
+    title: test/atcoder/abc150_f.RH.Nimber.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc272_f.RH.test.cpp
+    title: test/atcoder/abc272_f.RH.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/agc047_b.RH.test.cpp
+    title: test/atcoder/agc047_b.RH.test.cpp
   - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
@@ -37,8 +52,8 @@ data:
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
   - icon: ':x:'
-    path: test/yosupo/z_algorithm.rollinghash.test.cpp
-    title: test/yosupo/z_algorithm.rollinghash.test.cpp
+    path: test/yosupo/z_algorithm.RH.test.cpp
+    title: test/yosupo/z_algorithm.RH.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1750.MinPoly.test.cpp
     title: test/yukicoder/1750.MinPoly.test.cpp
@@ -73,16 +88,21 @@ data:
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/310.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
-  - test/yosupo/z_algorithm.rollinghash.test.cpp
+  - test/atcoder/abc272_f.RH.test.cpp
+  - test/atcoder/abc141_e.RH.test.cpp
+  - test/atcoder/agc047_b.RH.test.cpp
+  - test/atcoder/abc150_f.RH.Nimber.test.cpp
+  - test/atcoder/abc135_f.RH.test.cpp
+  - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - test/aoj/2711.rollinghash.test.cpp
+  - test/aoj/2711.RH.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/2614.RH.test.cpp
   - test/aoj/3034.test.cpp
   - test/aoj/2423.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
-  - test/aoj/2614.rollinghash.test.cpp
-  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
+  - test/aoj/ALDS1_14_B.RH.test.cpp
 documentation_of: src/Misc/rng.hpp
 layout: document
 title: "\u7591\u4F3C\u4E71\u6570"

@@ -86,11 +86,11 @@ data:
     path: test/aoj/2530.test.cpp
     title: test/aoj/2530.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2614.rollinghash.test.cpp
-    title: test/aoj/2614.rollinghash.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/2711.rollinghash.test.cpp
-    title: test/aoj/2711.rollinghash.test.cpp
+    path: test/aoj/2614.RH.test.cpp
+    title: test/aoj/2614.RH.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2711.RH.test.cpp
+    title: test/aoj/2711.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2863.test.cpp
     title: test/aoj/2863.test.cpp
@@ -98,8 +98,8 @@ data:
     path: test/aoj/3072.test.cpp
     title: test/aoj/3072.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-    title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+    path: test/aoj/ALDS1_14_B.RH.test.cpp
+    title: test/aoj/ALDS1_14_B.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_B.test.cpp
     title: test/aoj/DPL_5_B.test.cpp
@@ -137,11 +137,17 @@ data:
     path: test/atcoder/abc135_d.test.cpp
     title: test/atcoder/abc135_d.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc135_f.RH.test.cpp
+    title: test/atcoder/abc135_f.RH.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc141_e.RH.test.cpp
+    title: test/atcoder/abc141_e.RH.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
@@ -185,6 +191,9 @@ data:
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc272_f.RH.test.cpp
+    title: test/atcoder/abc272_f.RH.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -193,6 +202,9 @@ data:
   - icon: ':x:'
     path: test/atcoder/agc038_c.numth.test.cpp
     title: test/atcoder/agc038_c.numth.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/agc047_b.RH.test.cpp
+    title: test/atcoder/agc047_b.RH.test.cpp
   - icon: ':x:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
@@ -416,8 +428,8 @@ data:
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - icon: ':x:'
-    path: test/yosupo/z_algorithm.rollinghash.test.cpp
-    title: test/yosupo/z_algorithm.rollinghash.test.cpp
+    path: test/yosupo/z_algorithm.RH.test.cpp
+    title: test/yosupo/z_algorithm.RH.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
@@ -661,6 +673,8 @@ data:
   - test/atcoder/abc213_h.test.cpp
   - test/atcoder/arc116_c.Dirichlet.test.cpp
   - test/atcoder/arc105_f.test.cpp
+  - test/atcoder/abc272_f.RH.test.cpp
+  - test/atcoder/abc141_e.RH.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
   - test/atcoder/abc138_f.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp
@@ -668,6 +682,7 @@ data:
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/atcoder/abc135_d.test.cpp
   - test/atcoder/abc202_f.test.cpp
+  - test/atcoder/agc047_b.RH.test.cpp
   - test/atcoder/abc213_g.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc323_g.test.cpp
@@ -679,6 +694,7 @@ data:
   - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc234_g.test.cpp
   - test/atcoder/abc235_f.test.cpp
+  - test/atcoder/abc135_f.RH.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/arc115_e.test.cpp
   - test/yosupo/multivariate_convolution.test.cpp
@@ -705,8 +721,8 @@ data:
   - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/hafnian_of_matrix.test.cpp
-  - test/yosupo/z_algorithm.rollinghash.test.cpp
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
+  - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/convolution_large.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/dynamic_tree_vertex_set_path_composite.LCT.test.cpp
@@ -755,25 +771,25 @@ data:
   - test/unit_test/constexpr_mod_inv.test.cpp
   - test/aoj/NTL_2_F.test.cpp
   - test/aoj/2397.test.cpp
-  - test/aoj/2711.rollinghash.test.cpp
   - test/aoj/0570.test.cpp
   - test/aoj/DPL_5_F.test.cpp
+  - test/aoj/2711.RH.test.cpp
   - test/aoj/NTL_2_B.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
   - test/aoj/2530.test.cpp
   - test/aoj/NTL_2_E.test.cpp
+  - test/aoj/2614.RH.test.cpp
   - test/aoj/2257.test.cpp
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
   - test/aoj/NTL_2_C.test.cpp
+  - test/aoj/ALDS1_14_B.RH.test.cpp
   - test/aoj/2863.test.cpp
-  - test/aoj/2614.rollinghash.test.cpp
   - test/aoj/DPL_5_E.test.cpp
   - test/aoj/DPL_5_B.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/DPL_5_D.test.cpp
   - test/aoj/3072.test.cpp
-  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
 documentation_of: src/Math/mod_inv.hpp
 layout: document
 title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"

@@ -4,20 +4,32 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2614.rollinghash.test.cpp
-    title: test/aoj/2614.rollinghash.test.cpp
+    path: test/aoj/2614.RH.test.cpp
+    title: test/aoj/2614.RH.test.cpp
+  - icon: ':x:'
+    path: test/aoj/2711.RH.test.cpp
+    title: test/aoj/2711.RH.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2711.rollinghash.test.cpp
-    title: test/aoj/2711.rollinghash.test.cpp
+    path: test/aoj/ALDS1_14_B.RH.test.cpp
+    title: test/aoj/ALDS1_14_B.RH.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc135_f.RH.test.cpp
+    title: test/atcoder/abc135_f.RH.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/ALDS1_14_B.rollinghash.test.cpp
-    title: test/aoj/ALDS1_14_B.rollinghash.test.cpp
+    path: test/atcoder/abc141_e.RH.test.cpp
+    title: test/atcoder/abc141_e.RH.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc272_f.RH.test.cpp
+    title: test/atcoder/abc272_f.RH.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/agc047_b.RH.test.cpp
+    title: test/atcoder/agc047_b.RH.test.cpp
   - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':x:'
-    path: test/yosupo/z_algorithm.rollinghash.test.cpp
-    title: test/yosupo/z_algorithm.rollinghash.test.cpp
+    path: test/yosupo/z_algorithm.RH.test.cpp
+    title: test/yosupo/z_algorithm.RH.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -60,16 +72,21 @@ data:
   timestamp: '2023-01-21 20:06:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/z_algorithm.rollinghash.test.cpp
+  - test/atcoder/abc272_f.RH.test.cpp
+  - test/atcoder/abc141_e.RH.test.cpp
+  - test/atcoder/agc047_b.RH.test.cpp
+  - test/atcoder/abc135_f.RH.test.cpp
+  - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - test/aoj/2711.rollinghash.test.cpp
-  - test/aoj/2614.rollinghash.test.cpp
-  - test/aoj/ALDS1_14_B.rollinghash.test.cpp
+  - test/aoj/2711.RH.test.cpp
+  - test/aoj/2614.RH.test.cpp
+  - test/aoj/ALDS1_14_B.RH.test.cpp
 documentation_of: src/Math/CartesianProduct.hpp
 layout: document
-title: "\u4EE3\u6570\u7CFB\u306E\u76F4\u7A4D ($K_1\\times K_2\\times\\cdots\\times\
-  \ K_n$)"
+title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\\
+  times\\cdots\\times K_n$)"
 ---
-ロリハのために作った
+[Rolling Hash](RollingHash.md) などのハッシュ計算をする時に, baseを変えたパターンのを並行して扱うのを便利にするために作った.
 ## 問題例
+[AtCoder Regular Contest 099 F - Eating Symbols Hard](https://atcoder.jp/contests/arc099/tasks/arc099_d)(多項式ハッシュ)\
 [第二回全国統一プログラミング王決定戦本戦 D - 木、](https://atcoder.jp/contests/nikkei2019-2-final/tasks/nikkei2019_2_final_d) (根付き木ハッシュ)
