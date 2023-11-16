@@ -69,7 +69,7 @@ data:
       title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SparseTable.hpp
-      title: "Sparse-Table(\u533A\u9593min)"
+      title: Sparse-Table
     - icon: ':question:'
       path: src/DataStructure/SplayTree.hpp
       title: Splay-Tree
@@ -458,6 +458,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
+  - name: test/yosupo
+    pages:
+    - icon: ':warning:'
+      path: test/yosupo/static_range_frequency.WM.test copy.cpp
+      title: test/yosupo/static_range_frequency.WM.test copy.cpp
   - name: test/yukicoder
     pages:
     - icon: ':warning:'
@@ -1200,16 +1205,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc230_h.test.cpp
       title: test/atcoder/abc230_h.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc234_g.test.cpp
       title: test/atcoder/abc234_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
     - icon: ':heavy_check_mark:'
