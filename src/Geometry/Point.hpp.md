@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/Convex.hpp
     title: "\u51F8\u591A\u89D2\u5F62"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/IncrementalConvexHull.hpp
     title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
   - icon: ':heavy_check_mark:'
@@ -264,7 +264,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_f.test.cpp
     title: test/atcoder/abc202_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc296_g.test.cpp
     title: test/atcoder/abc296_g.test.cpp
   - icon: ':x:'

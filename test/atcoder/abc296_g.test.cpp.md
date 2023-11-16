@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/IncrementalConvexHull.hpp
     title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: "\u70B9"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc296/tasks/abc296_g
@@ -123,7 +123,7 @@ data:
   path: test/atcoder/abc296_g.test.cpp
   requiredBy: []
   timestamp: '2023-10-13 01:19:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc296_g.test.cpp
 layout: document

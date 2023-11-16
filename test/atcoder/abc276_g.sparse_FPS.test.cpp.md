@@ -24,9 +24,9 @@ data:
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc276/tasks/abc276_g
@@ -242,7 +242,7 @@ data:
   path: test/atcoder/abc276_g.sparse_FPS.test.cpp
   requiredBy: []
   timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc276_g.sparse_FPS.test.cpp
 layout: document

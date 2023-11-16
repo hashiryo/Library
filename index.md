@@ -52,7 +52,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Beats.hpp
       title: Segment-Tree Beats!
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree_Dual.hpp
       title: "Segment-Tree(\u53CC\u5BFE)"
     - icon: ':question:'
@@ -155,7 +155,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Geometry/Convex.hpp
       title: "\u51F8\u591A\u89D2\u5F62"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Geometry/IncrementalConvexHull.hpp
       title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
     - icon: ':heavy_check_mark:'
@@ -1232,25 +1232,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_d.test.cpp
       title: test/atcoder/abc256_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SegDual.test.cpp
       title: test/atcoder/abc256_f.SegDual.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.SplayTree.test.cpp
       title: test/atcoder/abc256_f.SplayTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_f.WBT.test.cpp
       title: test/atcoder/abc256_f.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc270_g.test.cpp
       title: test/atcoder/abc270_g.test.cpp
     - icon: ':x:'
       path: test/atcoder/abc272_f.RH.test.cpp
       title: test/atcoder/abc272_f.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc276_g.sparse_FPS.test.cpp
       title: test/atcoder/abc276_g.sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1259,7 +1259,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc280_f.test.cpp
       title: test/atcoder/abc280_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc296_g.test.cpp
       title: test/atcoder/abc296_g.test.cpp
     - icon: ':x:'
