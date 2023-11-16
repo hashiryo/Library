@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/Nimber.hpp
     title: Nimber $\mathbb{F}_{2^{64}}$
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc150/tasks/abc150_f
@@ -23,13 +23,13 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc150_f.RH.Nimber.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc150/tasks/abc150_f\"\n#include <iostream>\n\
     #include <vector>\n#line 3 \"src/String/RollingHash.hpp\"\n#include <string>\n\
-    template <class K, class Int= int> class RollingHash {\n static inline std::vector<K>\
-    \ pw, hsh;\n static inline K bs;\n static inline std::vector<Int> str;\n static\
-    \ inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n   for (pw.resize(n\
-    \ + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n RollingHash(int\
-    \ b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int ok, int\
-    \ ng, const C &check) {\n  for (int x; ng - ok > 1;) (check(x= (ok + ng) / 2)\
-    \ ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
+    #include <array>\ntemplate <class K, class Int= int> class RollingHash {\n static\
+    \ inline std::vector<K> pw, hsh;\n static inline K bs;\n static inline std::vector<Int>\
+    \ str;\n static inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n\
+    \   for (pw.resize(n + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n\
+    \ RollingHash(int b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int\
+    \ ok, int ng, const C &check) {\n  for (int x; ng - ok > 1;) (check(x= (ok + ng)\
+    \ / 2) ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
     \ std::array<RollingHash, I> &v) {\n  K ret= 0;\n  for (int i= 0; i < I; ++i)\
     \ ret= ret * pw[v[i].n] + v[i].hash();\n  return ret;\n }\npublic:\n static void\
     \ init(K b) { bs= b, pw.assign(1, 1), hsh.assign(1, 0); }\n static K base_pow(int\
@@ -64,33 +64,33 @@ data:
     \n#include <random>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL\
     \ * std::random_device{}();\n return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t\
     \ lim) { return rng() % lim; }\nint64_t rng(int64_t l, int64_t r) { return l +\
-    \ rng() % (r - l); }\n#line 2 \"src/Math/Nimber.hpp\"\n#include <array>\n#include\
-    \ <numeric>\n#include <utility>\n#include <cassert>\nclass Nimber {\n using u64=\
-    \ uint64_t;\n using u32= uint32_t;\n using u16= uint16_t;\n static inline std::array<u16,\
-    \ 65536> pw, ln;\n template <u16 h= 3> static inline u16 half(u16 A) { return\
-    \ A ? pw[(ln[A] + h) % 65535] : 0; }\n template <u16 h= 0> static inline u16 mul(u16\
-    \ A, u16 B) { return A && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template\
-    \ <u16 h= 0> static inline u16 mul(u16 A, u16 B, u16 C) { return A && B && C ?\
-    \ pw[(ln[A] + ln[B] + ln[C] + h) % 65535] : 0; }\n static inline u16 inv(u16 A)\
-    \ { return assert(A), pw[65535 - ln[A]]; }\n static inline u16 sqrt(u16 A) { return\
-    \ A ? pw[u16((65537 * u32(ln[A])) >> 1)] : 0; }\n static inline u64 mul(u64 A,\
-    \ u64 B) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48,\
-    \ b0= u16(B), b1= u16(B >> 16), b2= u16(B >> 32), b3= B >> 48, x0= a1 ^ a0, x1=\
-    \ a3 ^ a2, y0= b1 ^ b0, y1= b3 ^ b2, c0= mul(a0, b0), c1= mul(x0, y0) ^ c0, c2=\
-    \ mul<0>(a2 ^ a0, b2 ^ b0), c3= mul<0>(x0 ^ x1, y0 ^ y1) ^ c2 ^ c1;\n  return\
-    \ c2^= (c0^= mul<3>(a1, b1)) ^ mul<3>(u16(a3 ^ a1), u16(b3 ^ b1)), c1^= mul<6>(a3,\
-    \ b3) ^ mul<3>(x1, y1), c0^= mul<6>(a2, b2) ^ mul<6>(x1, y1), (u64(c3) << 48)\
-    \ | (u64(c2) << 32) | (u32(c1) << 16) | c0;\n }\n static inline u64 inv(u64 A)\
-    \ {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48, x= a2\
-    \ ^ a3, y= a1 ^ a3, w= a0 ^ a2, v= a0 ^ a1, b3= mul(a1, a2, a1 ^ x), b2= mul(a0,\
-    \ a2, a0 ^ x), b1= mul(a0, a1, a0 ^ y), b0= mul(a0, v, w), t= mul<3>(w, x, x);\n\
-    \  return b0^= b1 ^ b2, b1^= b3, b2^= b3, b0^= b3^= mul(a0, a0, a3), b1^= t ^\
-    \ mul<3>(a1, y, y), b0^= t ^ mul<3>(v, y, y), b3^= t= mul<3>(a1, a3, y) ^ mul<3>(a2,\
-    \ x, x), b2^= t ^ mul<3>(a0, a3, a3) ^ mul<3>(a1, a1, a2), b3^= mul<6>(a3, a3,\
-    \ x), b2^= mul<6>(a3, x, x), b1^= mul<6>(a3, a3, y ^ w), b0^= mul<6>(y, x, x),\
-    \ b2^= mul<9>(a3, a3, a3), b0^= mul<9>(a3, a3, y), t= mul<6>(x, b3) ^ mul<6>(a3,\
-    \ b2) ^ mul<3>(a1, b1) ^ mul(a0, b0), t= inv(t), (u64(mul(b3, t)) << 48) | (u64(mul(b2,\
-    \ t)) << 32) | (u32(mul(b1, t)) << 16) | mul(b0, t);\n }\n static inline u64 square(u64\
+    \ rng() % (r - l); }\n#line 3 \"src/Math/Nimber.hpp\"\n#include <numeric>\n#include\
+    \ <utility>\n#include <cassert>\nclass Nimber {\n using u64= uint64_t;\n using\
+    \ u32= uint32_t;\n using u16= uint16_t;\n static inline std::array<u16, 65536>\
+    \ pw, ln;\n template <u16 h= 3> static inline u16 half(u16 A) { return A ? pw[(ln[A]\
+    \ + h) % 65535] : 0; }\n template <u16 h= 0> static inline u16 mul(u16 A, u16\
+    \ B) { return A && B ? pw[(ln[A] + ln[B] + h) % 65535] : 0; }\n template <u16\
+    \ h= 0> static inline u16 mul(u16 A, u16 B, u16 C) { return A && B && C ? pw[(ln[A]\
+    \ + ln[B] + ln[C] + h) % 65535] : 0; }\n static inline u16 inv(u16 A) { return\
+    \ assert(A), pw[65535 - ln[A]]; }\n static inline u16 sqrt(u16 A) { return A ?\
+    \ pw[u16((65537 * u32(ln[A])) >> 1)] : 0; }\n static inline u64 mul(u64 A, u64\
+    \ B) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48, b0=\
+    \ u16(B), b1= u16(B >> 16), b2= u16(B >> 32), b3= B >> 48, x0= a1 ^ a0, x1= a3\
+    \ ^ a2, y0= b1 ^ b0, y1= b3 ^ b2, c0= mul(a0, b0), c1= mul(x0, y0) ^ c0, c2= mul<0>(a2\
+    \ ^ a0, b2 ^ b0), c3= mul<0>(x0 ^ x1, y0 ^ y1) ^ c2 ^ c1;\n  return c2^= (c0^=\
+    \ mul<3>(a1, b1)) ^ mul<3>(u16(a3 ^ a1), u16(b3 ^ b1)), c1^= mul<6>(a3, b3) ^\
+    \ mul<3>(x1, y1), c0^= mul<6>(a2, b2) ^ mul<6>(x1, y1), (u64(c3) << 48) | (u64(c2)\
+    \ << 32) | (u32(c1) << 16) | c0;\n }\n static inline u64 inv(u64 A) {\n  u16 a0=\
+    \ u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48, x= a2 ^ a3, y= a1 ^\
+    \ a3, w= a0 ^ a2, v= a0 ^ a1, b3= mul(a1, a2, a1 ^ x), b2= mul(a0, a2, a0 ^ x),\
+    \ b1= mul(a0, a1, a0 ^ y), b0= mul(a0, v, w), t= mul<3>(w, x, x);\n  return b0^=\
+    \ b1 ^ b2, b1^= b3, b2^= b3, b0^= b3^= mul(a0, a0, a3), b1^= t ^ mul<3>(a1, y,\
+    \ y), b0^= t ^ mul<3>(v, y, y), b3^= t= mul<3>(a1, a3, y) ^ mul<3>(a2, x, x),\
+    \ b2^= t ^ mul<3>(a0, a3, a3) ^ mul<3>(a1, a1, a2), b3^= mul<6>(a3, a3, x), b2^=\
+    \ mul<6>(a3, x, x), b1^= mul<6>(a3, a3, y ^ w), b0^= mul<6>(y, x, x), b2^= mul<9>(a3,\
+    \ a3, a3), b0^= mul<9>(a3, a3, y), t= mul<6>(x, b3) ^ mul<6>(a3, b2) ^ mul<3>(a1,\
+    \ b1) ^ mul(a0, b0), t= inv(t), (u64(mul(b3, t)) << 48) | (u64(mul(b2, t)) <<\
+    \ 32) | (u32(mul(b1, t)) << 16) | mul(b0, t);\n }\n static inline u64 square(u64\
     \ A) {\n  u16 a0= u16(A), a1= u16(A >> 16), a2= u16(A >> 32), a3= A >> 48;\n \
     \ return a3= mul(a3, a3), a2= mul(a2, a2), a1= mul(a1, a1), a0= mul(a0, a0), a0^=\
     \ half(a1) ^ half<6>(a3), a2^= half(a3), a1^= half(a3 ^ a2), (u64(a3) << 48) |\
@@ -174,8 +174,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc150_f.RH.Nimber.test.cpp
   requiredBy: []
-  timestamp: '2023-11-16 15:39:56+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-16 19:35:47+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc150_f.RH.Nimber.test.cpp
 layout: document

@@ -134,7 +134,7 @@ data:
     uint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
     \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
     \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
-    #line 2 \"src/String/RollingHash.hpp\"\n#include <vector>\n#line 4 \"src/String/RollingHash.hpp\"\
+    #line 2 \"src/String/RollingHash.hpp\"\n#include <vector>\n#line 5 \"src/String/RollingHash.hpp\"\
     \ntemplate <class K, class Int= int> class RollingHash {\n static inline std::vector<K>\
     \ pw, hsh;\n static inline K bs;\n static inline std::vector<Int> str;\n static\
     \ inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n   for (pw.resize(n\
@@ -199,7 +199,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.RH.test.cpp
   requiredBy: []
-  timestamp: '2023-11-16 15:39:56+09:00'
+  timestamp: '2023-11-16 19:35:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.RH.test.cpp

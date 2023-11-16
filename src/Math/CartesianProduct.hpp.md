@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.RH.test.cpp
     title: test/aoj/ALDS1_14_B.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_f.RH.test.cpp
     title: test/atcoder/abc135_f.RH.test.cpp
   - icon: ':heavy_check_mark:'
