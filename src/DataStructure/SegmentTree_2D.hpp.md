@@ -5,10 +5,7 @@ data:
     path: src/Internal/tuple_traits.hpp
     title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\
       \u30C8 \u4ED6"
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/yukicoder/2065.Seg2D.cpp
-    title: test/yukicoder/2065.Seg2D.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1068.Seg2D.test.cpp
@@ -19,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_f.Seg2D.test.cpp
     title: test/atcoder/abc228_f.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.Seg2D.test.cpp
     title: test/atcoder/abc309_f.Seg2D.test.cpp
   - icon: ':x:'
@@ -37,6 +34,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1649.Seg2D.test.cpp
     title: test/yukicoder/1649.Seg2D.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2065.Seg2D.test.cpp
+    title: test/yukicoder/2065.Seg2D.test.cpp
   - icon: ':x:'
     path: test/yukicoder/924.Seg2D.test.cpp
     title: test/yukicoder/924.Seg2D.test.cpp
@@ -219,14 +219,14 @@ data:
   - src/Internal/tuple_traits.hpp
   isVerificationFile: false
   path: src/DataStructure/SegmentTree_2D.hpp
-  requiredBy:
-  - test/yukicoder/2065.Seg2D.cpp
+  requiredBy: []
   timestamp: '2023-11-05 23:34:00+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/1625.Seg2D.test.cpp
+  - test/yukicoder/2065.Seg2D.test.cpp
   - test/yukicoder/1649.Seg2D.test.cpp
   - test/yukicoder/924.Seg2D.test.cpp
   - test/atcoder/abc309_f.Seg2D.test.cpp

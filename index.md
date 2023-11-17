@@ -274,7 +274,7 @@ data:
     - icon: ':question:'
       path: src/LinearAlgebra/Vector.hpp
       title: "\u30D9\u30AF\u30C8\u30EB"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/LinearAlgebra/characteristic_polynomial.hpp
       title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"
   - name: src/Math
@@ -463,11 +463,6 @@ data:
     - icon: ':warning:'
       path: test/yosupo/static_range_frequency.WM.test copy.cpp
       title: test/yosupo/static_range_frequency.WM.test copy.cpp
-  - name: test/yukicoder
-    pages:
-    - icon: ':warning:'
-      path: test/yukicoder/2065.Seg2D.cpp
-      title: test/yukicoder/2065.Seg2D.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -1262,16 +1257,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc296_g.test.cpp
       title: test/atcoder/abc296_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.KDT.3D.test.cpp
       title: test/atcoder/abc309_f.KDT.3D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.KDT.test.cpp
       title: test/atcoder/abc309_f.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.Seg2D.test.cpp
       title: test/atcoder/abc309_f.Seg2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc323_g.test.cpp
       title: test/atcoder/abc323_g.test.cpp
     - icon: ':x:'
@@ -1939,6 +1934,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/2012.test.cpp
       title: test/yukicoder/2012.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2065.Seg2D.test.cpp
+      title: test/yukicoder/2065.Seg2D.test.cpp
     - icon: ':x:'
       path: test/yukicoder/2114.test.cpp
       title: test/yukicoder/2114.test.cpp
