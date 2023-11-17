@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\n#include\
@@ -48,12 +48,12 @@ data:
   path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
   requiredBy: []
   timestamp: '2023-02-10 13:10:01+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/atcoder/abc234_g.test.cpp
+  - test/atcoder/arc115_e.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
-  - test/atcoder/arc115_e.test.cpp
-  - test/atcoder/abc234_g.test.cpp
 documentation_of: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
 layout: document
 title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"

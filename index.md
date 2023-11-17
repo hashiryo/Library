@@ -9,7 +9,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_2D.hpp
       title: "Binary-Indexed-Tree(2\u6B21\u5143)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
     - icon: ':question:'
@@ -67,7 +67,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SortedPerBucket.hpp
       title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SparseTable.hpp
       title: Sparse-Table
     - icon: ':question:'
@@ -378,7 +378,7 @@ data:
     - icon: ':question:'
       path: src/Misc/Automaton.hpp
       title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Misc/CartesianTree.hpp
       title: Cartesian-Tree
     - icon: ':heavy_check_mark:'
@@ -458,11 +458,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
-  - name: test/yosupo
-    pages:
-    - icon: ':warning:'
-      path: test/yosupo/static_range_frequency.WM.test copy.cpp
-      title: test/yosupo/static_range_frequency.WM.test copy.cpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -1269,7 +1264,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc323_g.test.cpp
       title: test/atcoder/abc323_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc324_g.WM.test.cpp
       title: test/atcoder/abc324_g.WM.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1284,10 +1279,10 @@ data:
     - icon: ':x:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/agc047_b.RH.test.cpp
       title: test/atcoder/agc047_b.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc105_f.test.cpp
       title: test/atcoder/arc105_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1299,7 +1294,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
     - icon: ':x:'
@@ -1686,6 +1681,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/static_range_inversions_query.mo.test.cpp
       title: test/yosupo/static_range_inversions_query.mo.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/staticrmq.SparseTable.test.cpp
+      title: test/yosupo/staticrmq.SparseTable.test.cpp
     - icon: ':x:'
       path: test/yosupo/stirling_1.test.cpp
       title: test/yosupo/stirling_1.test.cpp

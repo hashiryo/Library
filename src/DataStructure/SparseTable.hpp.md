@@ -1,44 +1,46 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/yosupo/static_range_frequency.WM.test copy.cpp
-    title: test/yosupo/static_range_frequency.WM.test copy.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_3_D.sparsetable.test.cpp
     title: test/aoj/DSL_3_D.sparsetable.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yosupo/staticrmq.SparseTable.test.cpp
+    title: test/yosupo/staticrmq.SparseTable.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SparseTable.hpp\"\n#include <vector>\n\
-    template <class T, class F> struct SparseTable {\n std::vector<std::vector<T>>\
-    \ dat;\n const F &f;\n SparseTable(const std::vector<T> &v, const F &f): f(f)\
-    \ {\n  int n= v.size(), log= n > 1 ? 31 - __builtin_clz(n - 1) : 0;\n  dat.resize(log\
-    \ + 1), dat[0].assign(v.begin(), v.end());\n  for (int i= 0, I= 1, j; i < log;\
-    \ ++i, I<<= 1)\n   for (dat[i + 1].resize(j= dat[i].size() - I); j--;) dat[i +\
-    \ 1][j]= f(dat[i][j], dat[i][j + I]);\n }\n // [l, r)\n T fold(int l, int r) {\n\
-    \  if (r == l + 1) return dat[0][l];\n  int k= 31 - __builtin_clz(r - l - 1);\n\
-    \  return f(dat[k][l], dat[k][r - (1 << k)]);\n }\n};\n"
-  code: "#pragma once\n#include <vector>\ntemplate <class T, class F> struct SparseTable\
-    \ {\n std::vector<std::vector<T>> dat;\n const F &f;\n SparseTable(const std::vector<T>\
-    \ &v, const F &f): f(f) {\n  int n= v.size(), log= n > 1 ? 31 - __builtin_clz(n\
-    \ - 1) : 0;\n  dat.resize(log + 1), dat[0].assign(v.begin(), v.end());\n  for\
-    \ (int i= 0, I= 1, j; i < log; ++i, I<<= 1)\n   for (dat[i + 1].resize(j= dat[i].size()\
+    template <class T, class F> class SparseTable {\n std::vector<std::vector<T>>\
+    \ dat;\n F f;\npublic:\n SparseTable() {}\n SparseTable(const std::vector<T> &v,\
+    \ const F &f): f(f) {\n  int n= v.size(), log= n > 1 ? 31 - __builtin_clz(n -\
+    \ 1) : 0;\n  dat.resize(log + 1), dat[0].assign(v.begin(), v.end());\n  for (int\
+    \ i= 0, I= 1, j; i < log; ++i, I<<= 1)\n   for (dat[i + 1].resize(j= dat[i].size()\
     \ - I); j--;) dat[i + 1][j]= f(dat[i][j], dat[i][j + I]);\n }\n // [l, r)\n T\
-    \ fold(int l, int r) {\n  if (r == l + 1) return dat[0][l];\n  int k= 31 - __builtin_clz(r\
-    \ - l - 1);\n  return f(dat[k][l], dat[k][r - (1 << k)]);\n }\n};"
+    \ fold(int l, int r) const {\n  if (r == l + 1) return dat[0][l];\n  int k= 31\
+    \ - __builtin_clz(r - l - 1);\n  return f(dat[k][l], dat[k][r - (1 << k)]);\n\
+    \ }\n};\n"
+  code: "#pragma once\n#include <vector>\ntemplate <class T, class F> class SparseTable\
+    \ {\n std::vector<std::vector<T>> dat;\n F f;\npublic:\n SparseTable() {}\n SparseTable(const\
+    \ std::vector<T> &v, const F &f): f(f) {\n  int n= v.size(), log= n > 1 ? 31 -\
+    \ __builtin_clz(n - 1) : 0;\n  dat.resize(log + 1), dat[0].assign(v.begin(), v.end());\n\
+    \  for (int i= 0, I= 1, j; i < log; ++i, I<<= 1)\n   for (dat[i + 1].resize(j=\
+    \ dat[i].size() - I); j--;) dat[i + 1][j]= f(dat[i][j], dat[i][j + I]);\n }\n\
+    \ // [l, r)\n T fold(int l, int r) const {\n  if (r == l + 1) return dat[0][l];\n\
+    \  int k= 31 - __builtin_clz(r - l - 1);\n  return f(dat[k][l], dat[k][r - (1\
+    \ << k)]);\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SparseTable.hpp
-  requiredBy:
-  - test/yosupo/static_range_frequency.WM.test copy.cpp
-  timestamp: '2023-11-16 23:12:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy: []
+  timestamp: '2023-11-17 21:21:46+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/staticrmq.SparseTable.test.cpp
   - test/aoj/DSL_3_D.sparsetable.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document

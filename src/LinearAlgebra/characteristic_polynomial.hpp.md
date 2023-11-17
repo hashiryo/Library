@@ -215,11 +215,11 @@ data:
   timestamp: '2023-10-30 16:37:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1303.test.cpp
+  - test/yukicoder/1907.test.cpp
+  - test/atcoder/abc323_g.test.cpp
   - test/yosupo/matrix_det_arbitrary_mod.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
-  - test/yukicoder/1907.test.cpp
-  - test/yukicoder/1303.test.cpp
-  - test/atcoder/abc323_g.test.cpp
 documentation_of: src/LinearAlgebra/characteristic_polynomial.hpp
 layout: document
 title: "\u884C\u5217\u306E\u7279\u6027\u591A\u9805\u5F0F \u4ED6"

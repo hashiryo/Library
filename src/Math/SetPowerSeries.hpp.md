@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
   - icon: ':x:'
@@ -272,14 +272,14 @@ data:
   timestamp: '2023-10-31 14:54:28+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/2507.test.cpp
+  - test/atcoder/arc105_f.test.cpp
+  - test/atcoder/abc213_g.test.cpp
+  - test/atcoder/abc199_d.test.cpp
+  - test/yosupo/subset_convolution.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
   - test/yosupo/exp_of_set_power_series.test.cpp
-  - test/yosupo/subset_convolution.test.cpp
-  - test/yukicoder/2507.test.cpp
   - test/aoj/2345.test.cpp
-  - test/atcoder/abc199_d.test.cpp
-  - test/atcoder/abc213_g.test.cpp
-  - test/atcoder/arc105_f.test.cpp
 documentation_of: src/Math/SetPowerSeries.hpp
 layout: document
 title: "\u96C6\u5408\u51AA\u7D1A\u6570"
