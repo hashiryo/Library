@@ -85,7 +85,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2614.RH.test.cpp
     title: test/aoj/2614.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2711.RH.test.cpp
     title: test/aoj/2711.RH.test.cpp
   - icon: ':heavy_check_mark:'
@@ -133,7 +133,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_d.test.cpp
     title: test/atcoder/abc135_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc135_f.RH.test.cpp
     title: test/atcoder/abc135_f.RH.test.cpp
   - icon: ':heavy_check_mark:'
@@ -142,7 +142,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc141_e.RH.test.cpp
     title: test/atcoder/abc141_e.RH.test.cpp
   - icon: ':heavy_check_mark:'

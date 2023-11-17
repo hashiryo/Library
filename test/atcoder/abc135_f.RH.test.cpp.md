@@ -25,9 +25,9 @@ data:
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc135/tasks/abc135_f
@@ -36,13 +36,13 @@ data:
   bundledCode: "#line 1 \"test/atcoder/abc135_f.RH.test.cpp\"\n#define PROBLEM \"\
     https://atcoder.jp/contests/abc135/tasks/abc135_f\"\n#include <iostream>\n#include\
     \ <vector>\n#line 3 \"src/String/RollingHash.hpp\"\n#include <string>\n#include\
-    \ <array>\ntemplate <class K, class Int= int> class RollingHash {\n static inline\
-    \ std::vector<K> pw, hsh;\n static inline K bs;\n static inline std::vector<Int>\
+    \ <array>\ntemplate <class K, class Int= int> class RollingHash {\npublic:\n static\
+    \ inline std::vector<K> pw, hsh;\n static inline K bs;\n static inline std::vector<Int>\
     \ str;\n static inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n\
     \   for (pw.resize(n + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n\
     \ RollingHash(int b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int\
-    \ ok, int ng, const C &check) {\n  for (int x; ng - ok > 1;) (check(x= (ok + ng)\
-    \ / 2) ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
+    \ ok, int ng, const C &check) {\n  for (int x; ng - ok > 1;) x= (ok + ng) / 2,\
+    \ (check(x) ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
     \ std::array<RollingHash, I> &v) {\n  K ret= 0;\n  for (int i= 0; i < I; ++i)\
     \ ret= ret * pw[v[i].n] + v[i].hash();\n  return ret;\n }\npublic:\n static void\
     \ init(K b) { bs= b, pw.assign(1, 1), hsh.assign(1, 0); }\n static K base_pow(int\
@@ -52,11 +52,12 @@ data:
     \ < n; ++i) hsh[bg + i + 1]= hsh[bg + i] * bs + v[i];\n }\n RollingHash(const\
     \ std::string &s): RollingHash(std::vector<Int>(s.begin(), s.end())) {}\n inline\
     \ size_t length() const { return n; }\n inline K hash() const { return hsh[bg\
-    \ + n] - hsh[bg] * pw[n]; }\n RollingHash sub(int b, int n) const { return {bg\
-    \ + b, n}; }\n RollingHash sub(int b) const { return {bg + b, n - b}; }\n template\
-    \ <class... Args> friend std::enable_if_t<std::conjunction_v<std::is_same<Args,\
-    \ RollingHash>...>, K> concat_hash(const Args &...rh) { return concat(std::array{rh...});\
-    \ }\n friend int lcp(const RollingHash &l, const RollingHash &r) {\n  return bin_srch(0,\
+    \ + n] - hsh[bg] * pw[n]; }\n RollingHash sub(int b, int m) const {\n  assert(b\
+    \ + m <= n), assert(m >= 0);\n  return {bg + b, m};\n }\n RollingHash sub(int\
+    \ b) const {\n  assert(b <= n);\n  return {bg + b, n - b};\n }\n template <class...\
+    \ Args> friend std::enable_if_t<std::conjunction_v<std::is_same<Args, RollingHash>...>,\
+    \ K> concat_hash(const Args &...rh) { return concat(std::array{rh...}); }\n friend\
+    \ int lcp(const RollingHash &l, const RollingHash &r) {\n  return bin_srch(0,\
     \ std::min(l.n, r.n) + 1, [&](int x) { return l.sub(0, x) == r.sub(0, x); });\n\
     \ }\n friend int lcs(const RollingHash &l, const RollingHash &r) {\n  return bin_srch(0,\
     \ std::min(l.n, r.n) + 1, [&](int x) { return l.sub(l.n - x) == r.sub(r.n - x);\
@@ -211,8 +212,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc135_f.RH.test.cpp
   requiredBy: []
-  timestamp: '2023-11-17 11:57:49+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-11-17 13:32:20+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc135_f.RH.test.cpp
 layout: document
