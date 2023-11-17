@@ -25,9 +25,9 @@ data:
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc141/tasks/abc141_e
@@ -50,14 +50,14 @@ data:
     \ { return Self(*this)+= r; }\n Self operator-(const Self &r) const { return Self(*this)-=\
     \ r; }\n Self operator*(const Self &r) const { return Self(*this)*= r; }\n Self\
     \ operator/(const Self &r) const { return Self(*this)/= r; }\n};\n#line 2 \"src/String/RollingHash.hpp\"\
-    \n#include <vector>\n#line 5 \"src/String/RollingHash.hpp\"\ntemplate <class K,\
-    \ class Int= int> class RollingHash {\npublic:\n static inline std::vector<K>\
-    \ pw, hsh;\n static inline K bs;\n static inline std::vector<Int> str;\n static\
-    \ inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n   for (pw.resize(n\
-    \ + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n RollingHash(int\
-    \ b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int ok, int\
-    \ ng, const C &check) {\n  for (int x; ng - ok > 1;) x= (ok + ng) / 2, (check(x)\
-    \ ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
+    \n#include <vector>\n#line 5 \"src/String/RollingHash.hpp\"\n#include <cassert>\n\
+    template <class K, class Int= int> class RollingHash {\npublic:\n static inline\
+    \ std::vector<K> pw, hsh;\n static inline K bs;\n static inline std::vector<Int>\
+    \ str;\n static inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n\
+    \   for (pw.resize(n + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n\
+    \ RollingHash(int b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int\
+    \ ok, int ng, const C &check) {\n  for (int x; ng - ok > 1;) x= (ok + ng) / 2,\
+    \ (check(x) ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
     \ std::array<RollingHash, I> &v) {\n  K ret= 0;\n  for (int i= 0; i < I; ++i)\
     \ ret= ret * pw[v[i].n] + v[i].hash();\n  return ret;\n }\npublic:\n static void\
     \ init(K b) { bs= b, pw.assign(1, 1), hsh.assign(1, 0); }\n static K base_pow(int\
@@ -94,10 +94,10 @@ data:
     \ 10150724397891781847ULL * std::random_device{}();\n return x^= x << 7, x^= x\
     \ >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
     \ l, int64_t r) { return l + rng() % (r - l); }\n#line 2 \"src/Math/mod_inv.hpp\"\
-    \n#include <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline\
-    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
-    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a\
-    \ / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
+    \n#include <type_traits>\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int>\
+    \ constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
+    \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
     \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
     \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
     \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
@@ -206,8 +206,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc141_e.RH.test.cpp
   requiredBy: []
-  timestamp: '2023-11-17 13:32:20+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-17 14:39:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc141_e.RH.test.cpp
 layout: document

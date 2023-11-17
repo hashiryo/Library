@@ -71,8 +71,8 @@ data:
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/2972.test.cpp
   - test/aoj/0323.test.cpp
+  - test/aoj/2972.test.cpp
 documentation_of: src/Optimization/golden_search.hpp
 layout: document
 title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"

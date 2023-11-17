@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc150_f.RH.Nimber.test.cpp
     title: test/atcoder/abc150_f.RH.Nimber.test.cpp
   - icon: ':heavy_check_mark:'
@@ -18,9 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/nim_product_64.test.cpp
     title: test/yosupo/nim_product_64.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Nimber.hpp\"\n#include <array>\n#include <numeric>\n\
@@ -200,13 +200,13 @@ data:
   path: src/Math/Nimber.hpp
   requiredBy: []
   timestamp: '2023-08-06 16:57:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc150_f.RH.Nimber.test.cpp
   - test/yosupo/nim_product_64.test.cpp
-  - test/unit_test/nimber_log.test.cpp
   - test/unit_test/nimber_sqrt.test.cpp
   - test/unit_test/nimber_inv.test.cpp
+  - test/unit_test/nimber_log.test.cpp
+  - test/atcoder/abc150_f.RH.Nimber.test.cpp
 documentation_of: src/Math/Nimber.hpp
 layout: document
 title: Nimber $\mathbb{F}_{2^{64}}$
