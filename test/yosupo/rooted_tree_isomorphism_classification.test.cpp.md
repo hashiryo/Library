@@ -230,8 +230,8 @@ data:
     \  for (int j= 0; j < deg; ++j) f[j + 1]= f_ee(f[j], f[j + 1]);\n  for (int j=\
     \ 0; j < deg; ++j)\n   if (int u= t[v][j]; u != t.parent(v)) dp2[u]= f_ev(f_ee(f[j],\
     \ b[j + 1]), v);\n  dp[v]= f_ev(f[deg], v);\n }\n return RerootingData<T, C>(t,\
-    \ dp1, dp2, dp);\n}\n#line 2 \"src/Misc/rng.hpp\"\n#include <random>\nuint64_t\
-    \ rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
+    \ dp1, dp2, dp);\n}\n#line 2 \"src/Misc/rng.hpp\"\n#include <random>\n#include\
+    \ <cstdint>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
     \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
     \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
     #line 4 \"src/Math/CartesianProduct.hpp\"\n#include <utility>\ntemplate <class...\
@@ -291,7 +291,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
+  timestamp: '2023-11-17 11:57:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/rooted_tree_isomorphism_classification.test.cpp

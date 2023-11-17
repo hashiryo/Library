@@ -170,8 +170,8 @@ data:
     \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/Misc/rng.hpp\"\n#include <random>\nuint64_t\
-    \ rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
+    \ return dat[n];\n}\n#line 2 \"src/Misc/rng.hpp\"\n#include <random>\n#include\
+    \ <cstdint>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
     \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
     \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
     #line 10 \"test/atcoder/agc047_b.RH.test.cpp\"\nusing namespace std;\nsigned main()\
@@ -214,7 +214,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/agc047_b.RH.test.cpp
   requiredBy: []
-  timestamp: '2023-11-16 19:35:47+09:00'
+  timestamp: '2023-11-17 11:57:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/agc047_b.RH.test.cpp

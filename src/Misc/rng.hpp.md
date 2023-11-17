@@ -68,21 +68,21 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Misc/rng.hpp\"\n#include <random>\nuint64_t rng() {\n\
-    \ static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n return\
-    \ x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim;\
-    \ }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n"
-  code: "#pragma once\n#include <random>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL\
-    \ * std::random_device{}();\n return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t\
-    \ lim) { return rng() % lim; }\nint64_t rng(int64_t l, int64_t r) { return l +\
-    \ rng() % (r - l); }"
+  bundledCode: "#line 2 \"src/Misc/rng.hpp\"\n#include <random>\n#include <cstdint>\n\
+    uint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
+    \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
+    \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n"
+  code: "#pragma once\n#include <random>\n#include <cstdint>\nuint64_t rng() {\n static\
+    \ uint64_t x= 10150724397891781847ULL * std::random_device{}();\n return x^= x\
+    \ << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t\
+    \ rng(int64_t l, int64_t r) { return l + rng() % (r - l); }"
   dependsOn: []
   isVerificationFile: false
   path: src/Misc/rng.hpp
   requiredBy:
   - src/Geometry/min_enclosing_circle.hpp
   - src/LinearAlgebra/MinimalPolynomial.hpp
-  timestamp: '2023-03-12 01:58:49+09:00'
+  timestamp: '2023-11-17 11:57:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1750.MinPoly.test.cpp

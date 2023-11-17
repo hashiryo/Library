@@ -29,11 +29,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Misc/rng.hpp\"\n#include <random>\nuint64_t rng() {\n\
-    \ static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n return\
-    \ x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim;\
-    \ }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n#line\
-    \ 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line 2 \"src/Geometry/Line.hpp\"\
+  bundledCode: "#line 2 \"src/Misc/rng.hpp\"\n#include <random>\n#include <cstdint>\n\
+    uint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
+    \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
+    \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
+    #line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line 2 \"src/Geometry/Line.hpp\"\
     \n#include <vector>\n#line 2 \"src/Geometry/Point.hpp\"\n#include <iostream>\n\
     #include <fstream>\n#include <iomanip>\n#include <cmath>\n#include <cassert>\n\
     namespace geo {\nusing namespace std;\nstruct Visualizer {\n ofstream ofs;\n Visualizer(string\
@@ -259,7 +259,7 @@ data:
   isVerificationFile: false
   path: src/Geometry/min_enclosing_circle.hpp
   requiredBy: []
-  timestamp: '2023-10-10 00:58:36+09:00'
+  timestamp: '2023-11-17 11:57:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/3034.test.cpp
