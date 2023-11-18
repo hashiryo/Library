@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
   - icon: ':x:'
@@ -125,39 +125,34 @@ data:
   timestamp: '2023-11-17 14:39:53+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/z_algorithm.RH.test.cpp
-  - test/yosupo/enumerate_palindromes.RH.test.cpp
-  - test/aoj/2711.RH.test.cpp
-  - test/aoj/ALDS1_14_B.RH.test.cpp
-  - test/aoj/2614.RH.test.cpp
   - test/atcoder/abc272_f.RH.test.cpp
   - test/atcoder/abc141_e.RH.test.cpp
   - test/atcoder/agc047_b.RH.test.cpp
   - test/atcoder/abc150_f.RH.Nimber.test.cpp
   - test/atcoder/abc135_f.RH.test.cpp
+  - test/yosupo/enumerate_palindromes.RH.test.cpp
+  - test/yosupo/z_algorithm.RH.test.cpp
+  - test/aoj/2711.RH.test.cpp
+  - test/aoj/2614.RH.test.cpp
+  - test/aoj/ALDS1_14_B.RH.test.cpp
 documentation_of: src/String/RollingHash.hpp
 layout: document
 title: Rolling-Hash
 ---
 ## `RollingHash<K, Int=int>` クラス
 
-`K`: 演算子オーバーロード `+`, `-`, `*` が定義されているクラスが乗せられる.\
+`K`: 演算子オーバーロード `+`, `-`, `*` が定義されているクラス.\
 （衝突確率のことを考慮しても有限体をなす代数的構造であることが望ましい. ） \
 `Int`: 対象とする文字列のアルファベットを表現する型. 通常 `char` か `int`.\
 （辞書順による比較のために `operator<` が定義されていて欲しい）
 
 
-#### `static` 関数
-
-|||
+|`static` 関数|概要|
 |---|---|
 |`init(b)`|基底 $b$ をセットして初期化する. 最初に必ず呼ぶ.|
 |`base_pow(i)`|$b^i$ を返す.|
 
-
-#### メンバ　関数
-
-|||
+|メンバ関数|概要|
 |---|---|
 |`RollingHash(s)`|コンストラクタ. 文字列 $S$ を渡す. <br> 引数のクラスは`vector<Int>`か`string` を想定している.|
 |`length()`|文字列の長さを返す.|
@@ -165,17 +160,13 @@ title: Rolling-Hash
 |`sub(int b,int n)`|部分文字列 $S\lbrack b:b+n\rbrack$ に対応する `RollingHash` クラスのインスタンスを返す. |
 |`to_str()`|文字列に直して`string`で返す. デバッグ用.|
 
-#### 演算子 オーバーロード
-
-|||計算量|
+|演算子オーバーロード|概要|計算量|
 |---|---|---|
 |`operator==(r)`|文字列が等しいなら `true`.|$\mathcal{O}(1)$|
 |`operator!=(r)`|文字列が等しくないなら `true`.|$\mathcal{O}(1)$|
 |`operator<(r)`|左辺が右辺より辞書順で小さいなら `true`. |$\mathcal{O}(\log n)$<br> ただし $n=\min(\lvert S_l\rvert,\lvert S_r\rvert)$|
 
-#### 関数
-
-|||
+|関数|概要|
 |---|---|
 |`concat_hash(rh...)`| 複数の `RollingHash` クラスのインスタンスを与える. <br> 対応する文字列をその順にconcatしたときのハッシュ値を返す.|
 |`lcp(l,r)`|2つの `RollingHash` クラスのインスタンスを与える. <br>対応する2つの文字列のLCP(最長共通接頭辞; Longest Common Prefix)の長さを返す.|

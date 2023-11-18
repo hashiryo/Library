@@ -42,12 +42,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_big_integers.test.cpp
     title: test/yosupo/division_of_big_integers.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/BigInt.hpp\"\n#include <sstream>\n#include <iomanip>\n\
@@ -471,16 +471,16 @@ data:
   path: src/FFT/BigInt.hpp
   requiredBy: []
   timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/atcoder/abc136_d.test.cpp
   - test/yosupo/division_of_big_integers.test.cpp
   - test/aoj/NTL_2_F.test.cpp
-  - test/aoj/NTL_2_E.test.cpp
-  - test/aoj/NTL_2_D.test.cpp
-  - test/aoj/NTL_2_C.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_B.test.cpp
-  - test/atcoder/abc136_d.test.cpp
+  - test/aoj/NTL_2_E.test.cpp
+  - test/aoj/NTL_2_A.test.cpp
+  - test/aoj/NTL_2_C.test.cpp
+  - test/aoj/NTL_2_D.test.cpp
 documentation_of: src/FFT/BigInt.hpp
 layout: document
 title: "\u591A\u500D\u9577\u6574\u6570"

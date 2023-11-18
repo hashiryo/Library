@@ -62,14 +62,14 @@ data:
   timestamp: '2023-11-17 21:21:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/staticrmq.SparseTable.test.cpp
-  - test/yosupo/longest_common_substring.test.cpp
   - test/yosupo/suffixarray.test.cpp
+  - test/yosupo/staticrmq.SparseTable.test.cpp
   - test/yosupo/number_of_substrings.SA.test.cpp
+  - test/yosupo/longest_common_substring.test.cpp
   - test/aoj/DSL_3_D.sparsetable.test.cpp
   - test/aoj/ALDS1_14_D.SA.test.cpp
-  - test/aoj/2644.test.cpp
   - test/aoj/ALDS1_14_B.SA.test.cpp
+  - test/aoj/2644.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document
 title: Sparse-Table

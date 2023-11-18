@@ -25,12 +25,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.SplayTree.test.cpp
     title: test/atcoder/abc256_f.SplayTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
     title: test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <vector>\n#include\
@@ -260,15 +260,15 @@ data:
   path: src/DataStructure/SplayTree.hpp
   requiredBy: []
   timestamp: '2023-11-02 17:27:04+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
-  - test/aoj/ITP2_4_A.SplayTree.test.cpp
-  - test/aoj/ITP2_4_C.SplayTree.test.cpp
-  - test/aoj/ITP2_4_B.SplayTree.test.cpp
-  - test/aoj/ITP2_2_D.SplayTree.test.cpp
-  - test/aoj/1508.SplayTree.test.cpp
   - test/atcoder/abc256_f.SplayTree.test.cpp
+  - test/yosupo/dynamic_sequence_range_affine_range_sum.test.cpp
+  - test/aoj/ITP2_2_D.SplayTree.test.cpp
+  - test/aoj/ITP2_4_C.SplayTree.test.cpp
+  - test/aoj/ITP2_4_A.SplayTree.test.cpp
+  - test/aoj/ITP2_4_B.SplayTree.test.cpp
+  - test/aoj/1508.SplayTree.test.cpp
 documentation_of: src/DataStructure/SplayTree.hpp
 layout: document
 title: Splay-Tree

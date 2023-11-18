@@ -168,13 +168,13 @@ data:
   timestamp: '2023-11-12 11:44:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
-  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/950.test.cpp
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc222_g.test.cpp
+  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Math/ModInt_Runtime.hpp
 layout: document
 title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"

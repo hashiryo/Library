@@ -170,29 +170,29 @@ data:
   isVerificationFile: false
   path: src/Geometry/angle.hpp
   requiredBy:
-  - src/Geometry/intersection_area.hpp
   - src/Geometry/SegmentArrangement.hpp
+  - src/Geometry/intersection_area.hpp
   timestamp: '2023-10-10 00:58:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sort_points_by_argument.test.cpp
-  - test/aoj/CGL_7_H.test.cpp
-  - test/aoj/2495.test.cpp
-  - test/aoj/1107.test.cpp
-  - test/aoj/0356.test.cpp
-  - test/aoj/1136.test.cpp
-  - test/aoj/0273.test.cpp
-  - test/aoj/CGL_7_I.test.cpp
-  - test/aoj/1198.test.cpp
-  - test/aoj/1050.test.cpp
-  - test/aoj/3176.test.cpp
-  - test/aoj/0269.test.cpp
-  - test/aoj/2402.test.cpp
-  - test/aoj/1226.test.cpp
-  - test/aoj/2448.test.cpp
-  - test/aoj/1066.test.cpp
   - test/aoj/1047.test.cpp
   - test/aoj/1033.test.cpp
+  - test/aoj/1050.test.cpp
+  - test/aoj/0269.test.cpp
+  - test/aoj/2448.test.cpp
+  - test/aoj/1136.test.cpp
+  - test/aoj/1198.test.cpp
+  - test/aoj/1066.test.cpp
+  - test/aoj/CGL_7_I.test.cpp
+  - test/aoj/0356.test.cpp
+  - test/aoj/3176.test.cpp
+  - test/aoj/0273.test.cpp
+  - test/aoj/1107.test.cpp
+  - test/aoj/2495.test.cpp
+  - test/aoj/1226.test.cpp
+  - test/aoj/2402.test.cpp
+  - test/aoj/CGL_7_H.test.cpp
 documentation_of: src/Geometry/angle.hpp
 layout: document
 title: "\u89D2\u5EA6\u30FB\u56DE\u8EE2\u95A2\u9023"

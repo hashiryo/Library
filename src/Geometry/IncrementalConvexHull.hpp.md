@@ -134,9 +134,9 @@ data:
   timestamp: '2023-10-10 00:58:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/atcoder/abc296_g.test.cpp
   - test/aoj/0412.test.cpp
   - test/aoj/2635.test.cpp
-  - test/atcoder/abc296_g.test.cpp
 documentation_of: src/Geometry/IncrementalConvexHull.hpp
 layout: document
 title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
