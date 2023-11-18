@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':x:'
@@ -100,12 +100,12 @@ data:
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/261.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/950.test.cpp
+  - test/yukicoder/261.test.cpp
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc222_g.test.cpp
-  - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Math/DiscreteLogarithm.hpp
 layout: document
 title: "\u96E2\u6563\u5BFE\u6570"

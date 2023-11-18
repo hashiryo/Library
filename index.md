@@ -61,7 +61,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/SegmentTree_Patricia.hpp
       title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SkewHeap.hpp
       title: Skew-Heap
     - icon: ':question:'
@@ -217,7 +217,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/Matching.hpp
       title: "\u6700\u5927\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/MinimumSpanningAborescense.hpp
       title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
     - icon: ':heavy_check_mark:'
@@ -1408,10 +1408,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/comp_of_FPS.test.cpp
       title: test/yosupo/comp_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution1000000007.test.cpp
       title: test/yosupo/convolution1000000007.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution_large.test.cpp
       title: test/yosupo/convolution_large.test.cpp
     - icon: ':x:'
@@ -1420,13 +1420,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/directedmst.test.cpp
       title: test/yosupo/directedmst.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/discrete_logarithm_mod.test.cpp
       title: test/yosupo/discrete_logarithm_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/division_of_Poly.test.cpp
       title: test/yosupo/division_of_Poly.test.cpp
     - icon: ':x:'
@@ -1453,6 +1453,9 @@ data:
     - icon: ':x:'
       path: test/yosupo/enumerate_cliques.test.cpp
       title: test/yosupo/enumerate_cliques.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/enumerate_palindromes.RH.test.cpp
+      title: test/yosupo/enumerate_palindromes.RH.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/enumerate_primes.test.cpp
       title: test/yosupo/enumerate_primes.test.cpp
@@ -1541,6 +1544,9 @@ data:
       path: test/yosupo/log_of_sparse_FPS.test.cpp
       title: test/yosupo/log_of_sparse_FPS.test.cpp
     - icon: ':x:'
+      path: test/yosupo/longest_common_substring.test.cpp
+      title: test/yosupo/longest_common_substring.test.cpp
+    - icon: ':x:'
       path: test/yosupo/matrix_det.test.cpp
       title: test/yosupo/matrix_det.test.cpp
     - icon: ':x:'
@@ -1571,8 +1577,8 @@ data:
       path: test/yosupo/nim_product_64.test.cpp
       title: test/yosupo/nim_product_64.test.cpp
     - icon: ':x:'
-      path: test/yosupo/number_of_substrings.test.cpp
-      title: test/yosupo/number_of_substrings.test.cpp
+      path: test/yosupo/number_of_substrings.SA.test.cpp
+      title: test/yosupo/number_of_substrings.SA.test.cpp
     - icon: ':x:'
       path: test/yosupo/partition.MSET.test.cpp
       title: test/yosupo/partition.MSET.test.cpp

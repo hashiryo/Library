@@ -36,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':x:'
@@ -616,12 +616,12 @@ data:
   timestamp: '2023-11-12 11:44:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/215.Poly.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/division_of_Poly.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/division_of_Poly.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
 documentation_of: src/FFT/Polynomial.hpp
 layout: document
 title: "\u591A\u9805\u5F0F"

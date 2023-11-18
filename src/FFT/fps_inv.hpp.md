@@ -55,7 +55,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/comp_of_FPS.test.cpp
     title: test/yosupo/comp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/division_of_Poly.test.cpp
     title: test/yosupo/division_of_Poly.test.cpp
   - icon: ':x:'
@@ -448,42 +448,42 @@ data:
   isVerificationFile: false
   path: src/FFT/fps_inv.hpp
   requiredBy:
-  - src/FFT/extgcd.hpp
-  - src/FFT/sequences.hpp
-  - src/FFT/bostan_mori.hpp
-  - src/FFT/fps_div.hpp
   - src/FFT/fps_sqrt.hpp
   - src/FFT/fps_exp.hpp
-  - src/FFT/Polynomial.hpp
+  - src/FFT/fps_div.hpp
+  - src/FFT/extgcd.hpp
+  - src/FFT/bostan_mori.hpp
+  - src/FFT/sequences.hpp
   - src/FFT/SubProductTree.hpp
+  - src/FFT/Polynomial.hpp
   timestamp: '2023-11-12 11:44:18+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/137.div_at.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
-  - test/yukicoder/3046.test.cpp
-  - test/yukicoder/1145.test.cpp
-  - test/yukicoder/1080.test.cpp
-  - test/yukicoder/215.test.cpp
-  - test/yukicoder/963.test.cpp
-  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
-  - test/yosupo/stirling_2.test.cpp
-  - test/yosupo/bernoulli.test.cpp
-  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/inv_of_FPS.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
+  - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
+  - test/yosupo/stirling_2.test.cpp
   - test/yosupo/exp_of_FPS.test.cpp
+  - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/polynomial_interpolation.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
-  - test/yosupo/inv_of_Poly.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/multipoint_evaluation.test.cpp
-  - test/yosupo/pow_of_FPS.test.cpp
-  - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/inv_of_FPS.test.cpp
+  - test/yosupo/stirling_1.test.cpp
+  - test/yosupo/bernoulli.test.cpp
   - test/yosupo/partition.test.cpp
+  - test/yosupo/multipoint_evaluation.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/sharp_p_subset_sum.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/yukicoder/215.Poly.test.cpp
+  - test/yukicoder/215.test.cpp
+  - test/yukicoder/963.test.cpp
+  - test/yukicoder/1080.test.cpp
+  - test/yukicoder/3046.test.cpp
+  - test/yukicoder/137.div_at.test.cpp
+  - test/yukicoder/1145.test.cpp
   - test/aoj/3072.test.cpp
 documentation_of: src/FFT/fps_inv.hpp
 layout: document

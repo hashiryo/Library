@@ -19,8 +19,11 @@ data:
     path: test/aoj/DSL_3_D.sparsetable.test.cpp
     title: test/aoj/DSL_3_D.sparsetable.test.cpp
   - icon: ':x:'
-    path: test/yosupo/number_of_substrings.test.cpp
-    title: test/yosupo/number_of_substrings.test.cpp
+    path: test/yosupo/longest_common_substring.test.cpp
+    title: test/yosupo/longest_common_substring.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/number_of_substrings.SA.test.cpp
+    title: test/yosupo/number_of_substrings.SA.test.cpp
   - icon: ':x:'
     path: test/yosupo/staticrmq.SparseTable.test.cpp
     title: test/yosupo/staticrmq.SparseTable.test.cpp
@@ -59,13 +62,14 @@ data:
   timestamp: '2023-11-17 21:21:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/suffixarray.test.cpp
   - test/yosupo/staticrmq.SparseTable.test.cpp
-  - test/yosupo/number_of_substrings.test.cpp
+  - test/yosupo/longest_common_substring.test.cpp
+  - test/yosupo/suffixarray.test.cpp
+  - test/yosupo/number_of_substrings.SA.test.cpp
   - test/aoj/DSL_3_D.sparsetable.test.cpp
   - test/aoj/ALDS1_14_D.SA.test.cpp
-  - test/aoj/ALDS1_14_B.SA.test.cpp
   - test/aoj/2644.test.cpp
+  - test/aoj/ALDS1_14_B.SA.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document
 title: Sparse-Table

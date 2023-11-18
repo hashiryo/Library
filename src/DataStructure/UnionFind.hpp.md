@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/Graph/IncrementalBridgeConnectivity.hpp
     title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/MinimumSpanningAborescense.hpp
     title: "\u6700\u5C0F\u5168\u57DF\u6709\u5411\u6728"
   _extendedVerifiedWith:
@@ -42,7 +42,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartite_edge_coloring.test.cpp
     title: test/yosupo/bipartite_edge_coloring.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
   - icon: ':heavy_check_mark:'
@@ -83,27 +83,27 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
+  - src/Graph/IncrementalBridgeConnectivity.hpp
   - src/Graph/BipartiteEdgeColoring.hpp
   - src/Graph/MinimumSpanningAborescense.hpp
-  - src/Graph/IncrementalBridgeConnectivity.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/two_edge_connected_components.test.cpp
+  - test/yosupo/directedmst.test.cpp
+  - test/yosupo/bipartite_edge_coloring.test.cpp
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1303.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/529.LCT.test.cpp
-  - test/yosupo/directedmst.test.cpp
-  - test/yosupo/two_edge_connected_components.test.cpp
-  - test/yosupo/bipartite_edge_coloring.test.cpp
-  - test/aoj/2647.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/GRL_3_B.test.cpp
-  - test/aoj/2559.LCT_Dual.test.cpp
-  - test/aoj/GRL_2_A.kruskal.test.cpp
-  - test/aoj/3506.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/aoj/DSL_1_A.test.cpp
+  - test/aoj/2647.test.cpp
+  - test/aoj/GRL_3_B.test.cpp
+  - test/aoj/0342.test.cpp
+  - test/aoj/GRL_2_A.kruskal.test.cpp
+  - test/aoj/2559.LCT_Dual.test.cpp
   - test/aoj/2893.test.cpp
+  - test/aoj/3506.test.cpp
   - test/aoj/GRL_2_B.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document

@@ -16,8 +16,11 @@ data:
     path: test/aoj/ALDS1_14_D.SA.test.cpp
     title: test/aoj/ALDS1_14_D.SA.test.cpp
   - icon: ':x:'
-    path: test/yosupo/number_of_substrings.test.cpp
-    title: test/yosupo/number_of_substrings.test.cpp
+    path: test/yosupo/longest_common_substring.test.cpp
+    title: test/yosupo/longest_common_substring.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/number_of_substrings.SA.test.cpp
+    title: test/yosupo/number_of_substrings.SA.test.cpp
   - icon: ':x:'
     path: test/yosupo/suffixarray.test.cpp
     title: test/yosupo/suffixarray.test.cpp
@@ -153,11 +156,12 @@ data:
   timestamp: '2023-11-18 09:59:21+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/longest_common_substring.test.cpp
   - test/yosupo/suffixarray.test.cpp
-  - test/yosupo/number_of_substrings.test.cpp
+  - test/yosupo/number_of_substrings.SA.test.cpp
   - test/aoj/ALDS1_14_D.SA.test.cpp
-  - test/aoj/ALDS1_14_B.SA.test.cpp
   - test/aoj/2644.test.cpp
+  - test/aoj/ALDS1_14_B.SA.test.cpp
 documentation_of: src/String/SuffixArray.hpp
 layout: document
 title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"

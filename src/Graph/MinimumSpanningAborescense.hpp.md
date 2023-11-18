@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SkewHeap.hpp
     title: Skew-Heap
   - icon: ':question:'
@@ -19,12 +19,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_B.test.cpp
     title: test/aoj/GRL_2_B.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/directedmst.test.cpp
     title: test/yosupo/directedmst.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/MinimumSpanningAborescense.hpp\"\n#include <cstddef>\n\
@@ -127,7 +127,7 @@ data:
   path: src/Graph/MinimumSpanningAborescense.hpp
   requiredBy: []
   timestamp: '2023-11-02 17:27:04+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/directedmst.test.cpp
   - test/aoj/2647.test.cpp

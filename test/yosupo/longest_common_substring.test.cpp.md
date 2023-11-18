@@ -14,14 +14,14 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/number_of_substrings
+    PROBLEM: https://judge.yosupo.jp/problem/longest_common_substring
     links:
-    - https://judge.yosupo.jp/problem/number_of_substrings
-  bundledCode: "#line 1 \"test/yosupo/number_of_substrings.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/number_of_substrings\"\n#include <iostream>\n\
-    #include <string>\n#line 3 \"src/String/SuffixArray.hpp\"\n#include <algorithm>\n\
-    #include <cassert>\n#line 2 \"src/DataStructure/SparseTable.hpp\"\n#include <vector>\n\
-    template <class T, class F> class SparseTable {\n std::vector<std::vector<T>>\
+    - https://judge.yosupo.jp/problem/longest_common_substring
+  bundledCode: "#line 1 \"test/yosupo/longest_common_substring.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/longest_common_substring\"\n#include\
+    \ <iostream>\n#include <string>\n#line 3 \"src/String/SuffixArray.hpp\"\n#include\
+    \ <algorithm>\n#include <cassert>\n#line 2 \"src/DataStructure/SparseTable.hpp\"\
+    \n#include <vector>\ntemplate <class T, class F> class SparseTable {\n std::vector<std::vector<T>>\
     \ dat;\n F f;\npublic:\n SparseTable() {}\n SparseTable(const std::vector<T> &v,\
     \ const F &f): f(f) {\n  int n= v.size(), log= n > 1 ? 31 - __builtin_clz(n -\
     \ 1) : 0;\n  dat.resize(log + 1), dat[0].assign(v.begin(), v.end());\n  for (int\
@@ -82,30 +82,36 @@ data:
     \ n, -1);\n  for (int i= n1; i--;) sa[--bkt[s[p1[sa1[i]]]]]= p1[sa1[i]];\n  for\
     \ (int i= 0, j; i < n; ++i)\n   if ((j= sa[i] - 1) >= 0 && !t[j]) sa[bkt_l[s[j]]++]=\
     \ j;\n  for (int i= n, j; i--;)\n   if ((j= sa[i] - 1) >= 0 && t[j]) sa[--bkt_r[s[j]]]=\
-    \ j;\n  return sa;\n }\n};\n#line 5 \"test/yosupo/number_of_substrings.test.cpp\"\
+    \ j;\n  return sa;\n }\n};\n#line 5 \"test/yosupo/longest_common_substring.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ string S;\n cin >> S;\n SuffixArray sa(S);\n int N= S.length();\n long long\
-    \ ans= (long long)N * (N + 1) / 2;\n for (int i= N; --i;) ans-= sa.LCP[i - 1];\n\
-    \ cout << ans << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\n\
-    #include <iostream>\n#include <string>\n#include \"src/String/SuffixArray.hpp\"\
+    \ string S, T;\n cin >> S >> T;\n int N= S.length();\n S+= \"$\" + T;\n SuffixArray\
+    \ sa(S);\n int a= 0, c= 0, len= 0;\n for (int i= 0; i + 1 < N; ++i) {\n  int x=\
+    \ sa.SA[i], y= sa.SA[i + 1];\n  if (x > y) swap(x, y);\n  if (x < N && N < y &&\
+    \ len < sa.LCP[i]) {\n   len= sa.LCP[i];\n   a= x, c= y - N - 1;\n  }\n }\n cout\
+    \ << a << \" \" << a + len << \" \" << c << \" \" << c + len << \"\\n\";\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/longest_common_substring\"\
+    \n#include <iostream>\n#include <string>\n#include \"src/String/SuffixArray.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ string S;\n cin >> S;\n SuffixArray sa(S);\n int N= S.length();\n long long\
-    \ ans= (long long)N * (N + 1) / 2;\n for (int i= N; --i;) ans-= sa.LCP[i - 1];\n\
-    \ cout << ans << '\\n';\n return 0;\n}"
+    \ string S, T;\n cin >> S >> T;\n int N= S.length();\n S+= \"$\" + T;\n SuffixArray\
+    \ sa(S);\n int a= 0, c= 0, len= 0;\n for (int i= 0; i + 1 < N; ++i) {\n  int x=\
+    \ sa.SA[i], y= sa.SA[i + 1];\n  if (x > y) swap(x, y);\n  if (x < N && N < y &&\
+    \ len < sa.LCP[i]) {\n   len= sa.LCP[i];\n   a= x, c= y - N - 1;\n  }\n }\n cout\
+    \ << a << \" \" << a + len << \" \" << c << \" \" << c + len << \"\\n\";\n return\
+    \ 0;\n}"
   dependsOn:
   - src/String/SuffixArray.hpp
   - src/DataStructure/SparseTable.hpp
   isVerificationFile: true
-  path: test/yosupo/number_of_substrings.test.cpp
+  path: test/yosupo/longest_common_substring.test.cpp
   requiredBy: []
-  timestamp: '2023-11-18 09:59:21+09:00'
+  timestamp: '2023-11-18 10:50:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/number_of_substrings.test.cpp
+documentation_of: test/yosupo/longest_common_substring.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/number_of_substrings.test.cpp
-- /verify/test/yosupo/number_of_substrings.test.cpp.html
-title: test/yosupo/number_of_substrings.test.cpp
+- /verify/test/yosupo/longest_common_substring.test.cpp
+- /verify/test/yosupo/longest_common_substring.test.cpp.html
+title: test/yosupo/longest_common_substring.test.cpp
 ---
