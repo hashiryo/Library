@@ -39,7 +39,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.Seg2D.test.cpp
     title: test/atcoder/abc309_f.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':x:'

@@ -9,15 +9,15 @@ data:
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/suffixarray
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_D
     links:
-    - https://judge.yosupo.jp/problem/suffixarray
-  bundledCode: "#line 1 \"test/yosupo/suffixarray.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_D
+  bundledCode: "#line 1 \"test/aoj/ALDS1_14_D.SA.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_D\"\
     \n#include <iostream>\n#include <string>\n#line 3 \"src/String/SuffixArray.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#line 2 \"src/DataStructure/SparseTable.hpp\"\
     \n#include <vector>\ntemplate <class T, class F> class SparseTable {\n std::vector<std::vector<T>>\
@@ -81,28 +81,30 @@ data:
     \ n, -1);\n  for (int i= n1; i--;) sa[--bkt[s[p1[sa1[i]]]]]= p1[sa1[i]];\n  for\
     \ (int i= 0, j; i < n; ++i)\n   if ((j= sa[i] - 1) >= 0 && !t[j]) sa[bkt_l[s[j]]++]=\
     \ j;\n  for (int i= n, j; i--;)\n   if ((j= sa[i] - 1) >= 0 && t[j]) sa[--bkt_r[s[j]]]=\
-    \ j;\n  return sa;\n }\n};\n#line 5 \"test/yosupo/suffixarray.test.cpp\"\nusing\
+    \ j;\n  return sa;\n }\n};\n#line 5 \"test/aoj/ALDS1_14_D.SA.test.cpp\"\nusing\
     \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string\
-    \ S;\n cin >> S;\n int n= S.length();\n SuffixArray sa(S);\n for (int i= 0; i\
-    \ < n; ++i) cout << sa[i] << \" \\n\"[i + 1 == n];\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\n#include\
-    \ <iostream>\n#include <string>\n#include \"src/String/SuffixArray.hpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string\
-    \ S;\n cin >> S;\n int n= S.length();\n SuffixArray sa(S);\n for (int i= 0; i\
-    \ < n; ++i) cout << sa[i] << \" \\n\"[i + 1 == n];\n return 0;\n}"
+    \ t;\n cin >> t;\n SuffixArray sa(t);\n int Q;\n cin >> Q;\n while (Q--) {\n \
+    \ string p;\n  cin >> p;\n  auto [l, r]= sa.pattern_matching(p);\n  cout << (r\
+    \ > l) << '\\n';\n }\n cout << flush;\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_D\"\
+    \n#include <iostream>\n#include <string>\n#include \"src/String/SuffixArray.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ string t;\n cin >> t;\n SuffixArray sa(t);\n int Q;\n cin >> Q;\n while (Q--)\
+    \ {\n  string p;\n  cin >> p;\n  auto [l, r]= sa.pattern_matching(p);\n  cout\
+    \ << (r > l) << '\\n';\n }\n cout << flush;\n return 0;\n}"
   dependsOn:
   - src/String/SuffixArray.hpp
   - src/DataStructure/SparseTable.hpp
   isVerificationFile: true
-  path: test/yosupo/suffixarray.test.cpp
+  path: test/aoj/ALDS1_14_D.SA.test.cpp
   requiredBy: []
   timestamp: '2023-11-18 09:59:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/suffixarray.test.cpp
+documentation_of: test/aoj/ALDS1_14_D.SA.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/suffixarray.test.cpp
-- /verify/test/yosupo/suffixarray.test.cpp.html
-title: test/yosupo/suffixarray.test.cpp
+- /verify/test/aoj/ALDS1_14_D.SA.test.cpp
+- /verify/test/aoj/ALDS1_14_D.SA.test.cpp.html
+title: test/aoj/ALDS1_14_D.SA.test.cpp
 ---

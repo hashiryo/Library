@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2159.rational.test.cpp
     title: test/aoj/2159.rational.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_rational.test.cpp
     title: test/unit_test/constexpr_rational.test.cpp
   - icon: ':x:'

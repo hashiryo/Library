@@ -4,9 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/aoj/2644.test.cpp
-    title: test/aoj/2644.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
     title: test/aoj/DSL_3_D.disjointsparsetable.test.cpp
   _isVerificationFailed: false
@@ -54,7 +51,6 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_3_D.disjointsparsetable.test.cpp
-  - test/aoj/2644.test.cpp
 documentation_of: src/DataStructure/DisjointSparseTable.hpp
 layout: document
 redirect_from:

@@ -132,7 +132,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.KDT.test.cpp
     title: test/atcoder/abc309_f.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-summation.KDT.test.cpp
     title: test/hackerrank/cube-summation.KDT.test.cpp
   - icon: ':x:'

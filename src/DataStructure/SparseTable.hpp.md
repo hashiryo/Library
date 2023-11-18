@@ -1,14 +1,32 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':question:'
+    path: src/String/SuffixArray.hpp
+    title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2644.test.cpp
+    title: test/aoj/2644.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_14_B.SA.test.cpp
+    title: test/aoj/ALDS1_14_B.SA.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_14_D.SA.test.cpp
+    title: test/aoj/ALDS1_14_D.SA.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_3_D.sparsetable.test.cpp
     title: test/aoj/DSL_3_D.sparsetable.test.cpp
   - icon: ':x:'
+    path: test/yosupo/number_of_substrings.test.cpp
+    title: test/yosupo/number_of_substrings.test.cpp
+  - icon: ':x:'
     path: test/yosupo/staticrmq.SparseTable.test.cpp
     title: test/yosupo/staticrmq.SparseTable.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/suffixarray.test.cpp
+    title: test/yosupo/suffixarray.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -36,12 +54,18 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/DataStructure/SparseTable.hpp
-  requiredBy: []
+  requiredBy:
+  - src/String/SuffixArray.hpp
   timestamp: '2023-11-17 21:21:46+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/suffixarray.test.cpp
   - test/yosupo/staticrmq.SparseTable.test.cpp
+  - test/yosupo/number_of_substrings.test.cpp
   - test/aoj/DSL_3_D.sparsetable.test.cpp
+  - test/aoj/ALDS1_14_D.SA.test.cpp
+  - test/aoj/ALDS1_14_B.SA.test.cpp
+  - test/aoj/2644.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document
 title: Sparse-Table
