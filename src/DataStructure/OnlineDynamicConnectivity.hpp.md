@@ -200,8 +200,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
-  - test/aoj/2893.onlinedicon.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp
+  - test/aoj/2893.onlinedicon.test.cpp
 documentation_of: src/DataStructure/OnlineDynamicConnectivity.hpp
 layout: document
 title: Online-Dynamic-Connectivity

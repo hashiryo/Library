@@ -11,19 +11,20 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
+    PROBLEM: https://judge.yosupo.jp/problem/runenumerate
     links:
-    - https://judge.yosupo.jp/problem/zalgorithm
-  bundledCode: "#line 1 \"test/yosupo/z_algorithm.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\
-    \n#include <iostream>\n#include <string>\n#include <vector>\n#line 3 \"src/String/z_algorithm.hpp\"\
-    \n#include <algorithm>\n#line 5 \"src/String/z_algorithm.hpp\"\n#include <tuple>\n\
-    template <class Int> std::vector<int> z_algorithm(const std::vector<Int> &s) {\n\
-    \ const int n= s.size();\n if (n == 0) return {};\n std::vector<int> z(n);\n for\
-    \ (int i= 1, j= 0; i < n; ++i) {\n  int &k= z[i];\n  for (k= (j + z[j] <= i) ?\
-    \ 0 : std::min(j + z[j] - i, z[i - j]); i + k < n && s[k] == s[i + k];) ++k;\n\
-    \  if (j + z[j] < i + z[i]) j= i;\n }\n return z[0]= n, z;\n}\nstd::vector<int>\
-    \ z_algorithm(const std::string &s) { return z_algorithm(std::vector<int>(s.begin(),\
-    \ s.end())); }\nnamespace string_internal {\ntemplate <class String> auto run_enumerate_(const\
+    - https://judge.yosupo.jp/problem/runenumerate
+  bundledCode: "#line 1 \"test/yosupo/runenumerate.zalgo.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/runenumerate\"\n#include <iostream>\n#include\
+    \ <string>\n#line 2 \"src/String/z_algorithm.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#line 5 \"src/String/z_algorithm.hpp\"\n#include <tuple>\ntemplate\
+    \ <class Int> std::vector<int> z_algorithm(const std::vector<Int> &s) {\n const\
+    \ int n= s.size();\n if (n == 0) return {};\n std::vector<int> z(n);\n for (int\
+    \ i= 1, j= 0; i < n; ++i) {\n  int &k= z[i];\n  for (k= (j + z[j] <= i) ? 0 :\
+    \ std::min(j + z[j] - i, z[i - j]); i + k < n && s[k] == s[i + k];) ++k;\n  if\
+    \ (j + z[j] < i + z[i]) j= i;\n }\n return z[0]= n, z;\n}\nstd::vector<int> z_algorithm(const\
+    \ std::string &s) { return z_algorithm(std::vector<int>(s.begin(), s.end()));\
+    \ }\nnamespace string_internal {\ntemplate <class String> auto run_enumerate_(const\
     \ String &s, typename String::value_type a= 0) {\n using Run= std::tuple<int,\
     \ int, int>;\n std::vector<Run> glb;\n auto rec= [&](auto rec, int l, int r) ->\
     \ std::vector<Run> {\n  if (r - l <= 1) return {};\n  const int m= (l + r) / 2,\
@@ -61,28 +62,28 @@ data:
     template <class Int> auto run_enumerate(const std::vector<Int> &s) { return run_enumerate_(s,\
     \ *std::max_element(s.begin(), s.end()) + 1); }\nauto run_enumerate(const std::string\
     \ &s) { return run_enumerate_(s); }\n}\nusing string_internal::run_enumerate;\n\
-    #line 6 \"test/yosupo/z_algorithm.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string s;\n cin >> s;\n vector<int>\
-    \ ans= z_algorithm(s);\n int N= s.length();\n for (int i= 0; i < N; i++) cout\
-    \ << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n#include\
-    \ <iostream>\n#include <string>\n#include <vector>\n#include \"src/String/z_algorithm.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ string s;\n cin >> s;\n vector<int> ans= z_algorithm(s);\n int N= s.length();\n\
-    \ for (int i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return\
-    \ 0;\n}"
+    #line 5 \"test/yosupo/runenumerate.zalgo.test.cpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string S;\n cin >> S;\n\
+    \ auto ans= run_enumerate(S);\n cout << ans.size() << '\\n';\n for (auto [t, l,\
+    \ r]: ans) cout << t << \" \" << l << \" \" << r << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\n#include\
+    \ <iostream>\n#include <string>\n#include \"src/String/z_algorithm.hpp\"\nusing\
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string\
+    \ S;\n cin >> S;\n auto ans= run_enumerate(S);\n cout << ans.size() << '\\n';\n\
+    \ for (auto [t, l, r]: ans) cout << t << \" \" << l << \" \" << r << '\\n';\n\
+    \ return 0;\n}"
   dependsOn:
   - src/String/z_algorithm.hpp
   isVerificationFile: true
-  path: test/yosupo/z_algorithm.test.cpp
+  path: test/yosupo/runenumerate.zalgo.test.cpp
   requiredBy: []
   timestamp: '2023-11-20 22:04:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/yosupo/z_algorithm.test.cpp
+documentation_of: test/yosupo/runenumerate.zalgo.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/z_algorithm.test.cpp
-- /verify/test/yosupo/z_algorithm.test.cpp.html
-title: test/yosupo/z_algorithm.test.cpp
+- /verify/test/yosupo/runenumerate.zalgo.test.cpp
+- /verify/test/yosupo/runenumerate.zalgo.test.cpp.html
+title: test/yosupo/runenumerate.zalgo.test.cpp
 ---

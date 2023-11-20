@@ -42,7 +42,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/inverse_matrix.test.cpp
     title: test/yosupo/inverse_matrix.test.cpp
   - icon: ':x:'
@@ -147,39 +147,39 @@ data:
   isVerificationFile: false
   path: src/LinearAlgebra/Vector.hpp
   requiredBy:
-  - src/LinearAlgebra/MinimalPolynomial.hpp
-  - src/LinearAlgebra/LU_Decomposition.hpp
   - src/LinearAlgebra/characteristic_polynomial.hpp
   - src/LinearAlgebra/Matrix.hpp
+  - src/LinearAlgebra/MinimalPolynomial.hpp
+  - src/LinearAlgebra/LU_Decomposition.hpp
   timestamp: '2023-10-30 16:37:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1750.test.cpp
-  - test/yukicoder/1750.MinPoly.test.cpp
-  - test/yukicoder/1340.test.cpp
-  - test/yukicoder/1303.test.cpp
-  - test/yukicoder/950.test.cpp
-  - test/yukicoder/184.test.cpp
-  - test/yukicoder/1907.test.cpp
-  - test/yukicoder/650.LCT.test.cpp
-  - test/yukicoder/803.test.cpp
-  - test/yukicoder/310.test.cpp
-  - test/yukicoder/1750.SparseMat.test.cpp
-  - test/atcoder/abc236_g.test.cpp
-  - test/atcoder/abc323_g.test.cpp
-  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
-  - test/yosupo/inverse_matrix.test.cpp
-  - test/yosupo/matrix_det.test.cpp
-  - test/yosupo/linear_equations.test.cpp
   - test/yosupo/matrix_product.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
+  - test/yosupo/matrix_det_arbitrary_mod.test.cpp
+  - test/yosupo/inverse_matrix.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
+  - test/yosupo/matrix_det.test.cpp
+  - test/yosupo/linear_equations.test.cpp
+  - test/yukicoder/1907.test.cpp
+  - test/yukicoder/310.test.cpp
+  - test/yukicoder/184.test.cpp
+  - test/yukicoder/1750.test.cpp
+  - test/yukicoder/650.LCT.test.cpp
+  - test/yukicoder/1303.test.cpp
+  - test/yukicoder/803.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/1340.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yukicoder/1750.SparseMat.test.cpp
   - test/aoj/2397.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
-  - test/aoj/2530.test.cpp
-  - test/aoj/1328.test.cpp
   - test/aoj/2624.test.cpp
   - test/aoj/2397.SparseMat.test.cpp
+  - test/aoj/1328.test.cpp
+  - test/aoj/2530.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
+  - test/atcoder/abc323_g.test.cpp
+  - test/atcoder/abc236_g.test.cpp
 documentation_of: src/LinearAlgebra/Vector.hpp
 layout: document
 title: "\u30D9\u30AF\u30C8\u30EB"

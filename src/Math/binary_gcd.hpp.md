@@ -14,7 +14,7 @@ data:
   - icon: ':question:'
     path: src/Math/Rational.hpp
     title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
   - icon: ':question:'
@@ -61,7 +61,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/factorize.test.cpp
     title: test/yosupo/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
   - icon: ':x:'
@@ -100,32 +100,32 @@ data:
   isVerificationFile: false
   path: src/Math/binary_gcd.hpp
   requiredBy:
-  - src/Math/mod_tetration.hpp
-  - src/Math/Factors.hpp
-  - src/Math/mod_kth_root.hpp
   - src/Math/ModInt_Exp.hpp
   - src/Math/BinomialCoefficient.hpp
+  - src/Math/Factors.hpp
   - src/Math/Rational.hpp
+  - src/Math/mod_kth_root.hpp
+  - src/Math/mod_tetration.hpp
   timestamp: '2023-10-30 16:02:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1501.test.cpp
-  - test/atcoder/abc228_e.test.cpp
-  - test/yosupo/primitive_root.test.cpp
   - test/yosupo/factorize.test.cpp
-  - test/yosupo/kth_root_mod.test.cpp
-  - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
-  - test/unit_test/constexpr_rational.test.cpp
-  - test/unit_test/constexpr_factors.test.cpp
-  - test/unit_test/constexpr_mod_tetration.test.cpp
-  - test/unit_test/constexpr_binary_gcd.test.cpp
-  - test/aoj/NTL_1_D.test.cpp
+  - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
+  - test/yosupo/kth_root_mod.test.cpp
+  - test/yukicoder/1501.test.cpp
   - test/aoj/1242.rational.test.cpp
+  - test/aoj/2003.rational.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
   - test/aoj/0350.test.cpp
   - test/aoj/2009.rational.test.cpp
   - test/aoj/2159.rational.test.cpp
-  - test/aoj/2003.rational.test.cpp
+  - test/unit_test/constexpr_binary_gcd.test.cpp
+  - test/unit_test/constexpr_factors.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
+  - test/unit_test/constexpr_rational.test.cpp
+  - test/atcoder/abc228_e.test.cpp
 documentation_of: src/Math/binary_gcd.hpp
 layout: document
 title: Binary GCD

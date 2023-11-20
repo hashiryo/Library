@@ -354,7 +354,7 @@ data:
     - icon: ':question:'
       path: src/Math/mod_inv.hpp
       title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/mod_kth_root.hpp
       title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
     - icon: ':question:'
@@ -455,9 +455,9 @@ data:
     - icon: ':x:'
       path: src/String/SuffixArray.hpp
       title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: src/String/z_algorithm.hpp
-      title: "\u6700\u9577\u5171\u901A\u63A5\u982D\u8F9E(Z-Algorithm)"
+      title: Z-Algorithm
   verificationCategories:
   - name: test/aoj
     pages:
@@ -1504,22 +1504,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_Poly.test.cpp
       title: test/yosupo/inv_of_Poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inv_of_sparse_FPS.test.cpp
       title: test/yosupo/inv_of_sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/inverse_matrix.test.cpp
       title: test/yosupo/inverse_matrix.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/kth_root_mod.test.cpp
       title: test/yosupo/kth_root_mod.test.cpp
     - icon: ':x:'
       path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.HLD.test.cpp
       title: test/yosupo/lca.HLD.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
     - icon: ':x:'
@@ -1645,6 +1645,9 @@ data:
     - icon: ':x:'
       path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
       title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/runenumerate.zalgo.test.cpp
+      title: test/yosupo/runenumerate.zalgo.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/scc.test.cpp
       title: test/yosupo/scc.test.cpp
@@ -1747,7 +1750,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/z_algorithm.RH.test.cpp
       title: test/yosupo/z_algorithm.RH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/z_algorithm.test.cpp
       title: test/yosupo/z_algorithm.test.cpp
   - name: test/yukicoder

@@ -155,12 +155,12 @@ data:
   timestamp: '2023-11-20 13:52:58+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/yosupo/longest_common_substring.test.cpp
   - test/yosupo/suffixarray.test.cpp
   - test/yosupo/number_of_substrings.SA.test.cpp
-  - test/yosupo/longest_common_substring.test.cpp
   - test/aoj/ALDS1_14_D.SA.test.cpp
-  - test/aoj/ALDS1_14_B.SA.test.cpp
   - test/aoj/2644.test.cpp
+  - test/aoj/ALDS1_14_B.SA.test.cpp
 documentation_of: src/String/SuffixArray.hpp
 layout: document
 title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
