@@ -9,16 +9,19 @@ data:
   - icon: ':x:'
     path: test/yosupo/z_algorithm.test.cpp
     title: test/yosupo/z_algorithm.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1848.test.zalgo.cpp
+    title: test/yukicoder/1848.test.zalgo.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/z_algorithm.hpp\"\n#include <vector>\n#include\
-    \ <algorithm>\n#include <string>\n#include <tuple>\ntemplate <class Int> std::vector<int>\
-    \ z_algorithm(const std::vector<Int> &s) {\n const int n= s.size();\n if (n ==\
-    \ 0) return {};\n std::vector<int> z(n);\n for (int i= 1, j= 0; i < n; ++i) {\n\
-    \  int &k= z[i];\n  for (k= (j + z[j] <= i) ? 0 : std::min(j + z[j] - i, z[i -\
+    \ <algorithm>\n#include <string>\n#include <tuple>\ntemplate <class T> std::vector<int>\
+    \ z_algorithm(const std::vector<T> &s) {\n const int n= s.size();\n if (n == 0)\
+    \ return {};\n std::vector<int> z(n);\n for (int i= 1, j= 0; i < n; ++i) {\n \
+    \ int &k= z[i];\n  for (k= (j + z[j] <= i) ? 0 : std::min(j + z[j] - i, z[i -\
     \ j]); i + k < n && s[k] == s[i + k];) ++k;\n  if (j + z[j] < i + z[i]) j= i;\n\
     \ }\n return z[0]= n, z;\n}\nstd::vector<int> z_algorithm(const std::string &s)\
     \ { return z_algorithm(std::vector<int>(s.begin(), s.end())); }\nnamespace string_internal\
@@ -61,7 +64,7 @@ data:
     \ s.end()) + 1); }\nauto run_enumerate(const std::string &s) { return run_enumerate_(s);\
     \ }\n}\nusing string_internal::run_enumerate;\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <string>\n\
-    #include <tuple>\ntemplate <class Int> std::vector<int> z_algorithm(const std::vector<Int>\
+    #include <tuple>\ntemplate <class T> std::vector<int> z_algorithm(const std::vector<T>\
     \ &s) {\n const int n= s.size();\n if (n == 0) return {};\n std::vector<int> z(n);\n\
     \ for (int i= 1, j= 0; i < n; ++i) {\n  int &k= z[i];\n  for (k= (j + z[j] <=\
     \ i) ? 0 : std::min(j + z[j] - i, z[i - j]); i + k < n && s[k] == s[i + k];) ++k;\n\
@@ -109,11 +112,12 @@ data:
   isVerificationFile: false
   path: src/String/z_algorithm.hpp
   requiredBy: []
-  timestamp: '2023-11-20 22:04:39+09:00'
+  timestamp: '2023-11-20 23:06:19+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/runenumerate.zalgo.test.cpp
   - test/yosupo/z_algorithm.test.cpp
+  - test/yukicoder/1848.test.zalgo.cpp
 documentation_of: src/String/z_algorithm.hpp
 layout: document
 title: Z-Algorithm
@@ -126,5 +130,5 @@ title: Z-Algorithm
 
 |関数|概要|計算量|
 |---|---|---|
-|`z_algorithm(S)`| 長さ $n$ の配列 $Z$ を返す. <br> $Z_k := $ $S$ と $S_{k:}$ の最長共通接頭辞の長さ. <br> 引数は `vector<Int>` か `string` を渡せる.|$\mathcal{O}(n)$|
+|`z_algorithm(S)`| 長さ $n$ の配列 $Z$ を返す. <br> $Z_k := $ $S$ と $S_{k:}$ の最長共通接頭辞の長さ. <br> 引数は `vector<T>` か `string` を渡せる.|$\mathcal{O}(n)$|
 |`run_enumerate(S)`|文字列 $S$ の [**連 (run)**](https://www.iss.is.tohoku.ac.jp/stringology/Algorithms/Basic/run.html) を列挙する. <br> タプル $(t,l,r)$ で部分文字列 $S_{l:r}$ の最小周期が $t$ であることを表現する. <br> 返り値は `vector<tuple<int,int,int>>`. <br> 引数は `vector<Int>` か `string` を渡せる.|$\mathcal{O}(n\log n)$|

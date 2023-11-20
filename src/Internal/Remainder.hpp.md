@@ -561,6 +561,9 @@ data:
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1848.test.zalgo.cpp
+    title: test/yukicoder/1848.test.zalgo.cpp
+  - icon: ':x:'
     path: test/yukicoder/1907.test.cpp
     title: test/yukicoder/1907.test.cpp
   - icon: ':x:'
@@ -881,6 +884,7 @@ data:
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1417.test.cpp
   - test/yukicoder/1075.test.cpp
+  - test/yukicoder/1848.test.zalgo.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/3030.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp

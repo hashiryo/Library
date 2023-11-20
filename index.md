@@ -1927,6 +1927,9 @@ data:
       path: test/yukicoder/184.test.cpp
       title: test/yukicoder/184.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/1848.test.zalgo.cpp
+      title: test/yukicoder/1848.test.zalgo.cpp
+    - icon: ':x:'
       path: test/yukicoder/1867.test.cpp
       title: test/yukicoder/1867.test.cpp
     - icon: ':heavy_check_mark:'
