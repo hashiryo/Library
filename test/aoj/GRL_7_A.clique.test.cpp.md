@@ -17,13 +17,13 @@ data:
   bundledCode: "#line 1 \"test/aoj/GRL_7_A.clique.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/7/GRL_7_A\"\
     \n// 200 (=100+100) \u9802\u70B9\n#include <iostream>\n#line 2 \"src/Graph/CliqueProblem.hpp\"\
     \n#include <vector>\n#include <algorithm>\nclass CliqueProblem {\n using u128=\
-    \ __uint128_t;\n using u64= uint64_t;\n using u16= uint16_t;\n const u16 n, m;\n\
-    \ struct id_num {\n  u16 id, num;\n };\n std::vector<u128> adj_;\n std::vector<u16>\
-    \ calc(bool complement) const {\n  std::vector<u128> buf, adj(adj_);\n  std::vector<u16>\
-    \ deg(n), clique, cur;\n  if (complement)\n   for (int u= n; u--;)\n    for (int\
-    \ v= u; v--;) adj[u * m + (v >> 7)]^= u128(1) << (v & 127), adj[v * m + (u >>\
-    \ 7)]^= u128(1) << (u & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num> &rem)\
-    \ -> void {\n   if (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(),\
+    \ __uint128_t;\n using u64= unsigned long long;\n using u16= unsigned short;\n\
+    \ const u16 n, m;\n struct id_num {\n  u16 id, num;\n };\n std::vector<u128> adj_;\n\
+    \ std::vector<u16> calc(bool complement) const {\n  std::vector<u128> buf, adj(adj_);\n\
+    \  std::vector<u16> deg(n), clique, cur;\n  if (complement)\n   for (int u= n;\
+    \ u--;)\n    for (int v= u; v--;) adj[u * m + (v >> 7)]^= u128(1) << (v & 127),\
+    \ adj[v * m + (u >> 7)]^= u128(1) << (u & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num>\
+    \ &rem) -> void {\n   if (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(),\
     \ rem.end(), [&](id_num l, id_num r) { return deg[l.id] > deg[r.id]; }), buf.assign((n\
     \ + 1) * m, 0);\n   for (auto &v: rem) {\n    int b= v.id * m, bb= 0;\n    for\
     \ (v.num= 0;; ++v.num, bb+= m) {\n     bool any= 1;\n     for (u16 i= 0; i < m;\
@@ -83,7 +83,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_7_A.clique.test.cpp
   requiredBy: []
-  timestamp: '2023-05-05 01:22:35+09:00'
+  timestamp: '2023-11-20 23:40:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_7_A.clique.test.cpp

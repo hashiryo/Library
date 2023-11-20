@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
@@ -51,18 +51,18 @@ data:
     \ }\n size_t size() const { return sa.size(); }\n auto begin() const { return\
     \ sa.begin(); }\n auto end() const { return sa.end(); }\n // return {l,r} s.t.\
     \ P is a prefix of S[sa[i]:] ( i in [l,r) )\n // l == r if P is not a substring\
-    \ of S\n // O(|P|log|S|)\n auto pattern_matching(const std::vector<Int> &P) const\
-    \ {\n  const int n= s.size(), m= P.size();\n  if (n < m) return {0, 0};\n  auto\
-    \ f1= [&](int h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n\
-    \ - h, m); j < e; ++j) {\n    if (t[j] < P[j]) return true;\n    if (t[j] > P[j])\
-    \ return false;\n   }\n   return n - h < m;\n  };\n  auto f2= [&](int h) {\n \
-    \  auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n\
-    \    if (t[j] > P[j]) return false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(),\
-    \ sa.end(), f1), R= std::partition_point(L, sa.end(), f2);\n  return std::make_pair(L\
-    \ - sa.begin(), R - sa.begin());\n }\n auto pattern_matching(const std::string\
-    \ &P) const { return pattern_matching(std::vector<Int>(P.begin(), P.end())); }\n\
-    };\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>> dat;\n\
-    public:\n template <class Int> LCPArray(const SuffixArray<Int> &sa): rnk(sa.size())\
+    \ of S\n // O(|P|log|S|)\n std::pair<int, int> pattern_matching(const std::vector<Int>\
+    \ &P) const {\n  const int n= s.size(), m= P.size();\n  if (n < m) return {0,\
+    \ 0};\n  auto f1= [&](int h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e=\
+    \ std::min(n - h, m); j < e; ++j) {\n    if (t[j] < P[j]) return true;\n    if\
+    \ (t[j] > P[j]) return false;\n   }\n   return n - h < m;\n  };\n  auto f2= [&](int\
+    \ h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j\
+    \ < e; ++j)\n    if (t[j] > P[j]) return false;\n   return true;\n  };\n  auto\
+    \ L= std::partition_point(sa.begin(), sa.end(), f1), R= std::partition_point(L,\
+    \ sa.end(), f2);\n  return {L - sa.begin(), R - sa.begin()};\n }\n auto pattern_matching(const\
+    \ std::string &P) const { return pattern_matching(std::vector<Int>(P.begin(),\
+    \ P.end())); }\n};\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>>\
+    \ dat;\npublic:\n template <class Int> LCPArray(const SuffixArray<Int> &sa): rnk(sa.size())\
     \ {\n  const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n - 2) : 0;\n \
     \ dat.resize(log + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n  for (int\
     \ i= n; i--;) rnk[sa[i]]= i;\n  for (int i= 0, h= 0; i < n; ++i) {\n   if (rnk[i]\
@@ -92,8 +92,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.SA.test.cpp
   requiredBy: []
-  timestamp: '2023-11-20 13:52:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-20 23:40:07+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.SA.test.cpp
 layout: document

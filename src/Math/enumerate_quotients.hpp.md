@@ -24,25 +24,26 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/enumerate_quotients.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <tuple>\n#include <cmath>\n// (q,l,r) : i in (l,r],\
-    \ \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t, uint64_t, uint64_t>> enumerate_quotients(uint64_t\
-    \ N) {\n uint64_t sq= std::sqrt(N), prev= N, x;\n std::vector<std::tuple<uint64_t,\
-    \ uint64_t, uint64_t>> ret;\n for (int q= 1, n= (sq * sq + sq <= N ? sq : sq -\
-    \ 1); q <= n; ++q) ret.emplace_back(q, x= double(N) / (q + 1), prev), prev= x;\n\
-    \ for (int l= sq; l >= 1; --l) ret.emplace_back(double(N) / l, l - 1, l);\n return\
-    \ ret;\n}\n"
-  code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <tuple>\n\
-    #include <cmath>\n// (q,l,r) : i in (l,r], \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t,\
+    #include <algorithm>\n#include <tuple>\n#include <cmath>\n#include <cstdint>\n\
+    // (q,l,r) : i in (l,r], \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t,\
     \ uint64_t, uint64_t>> enumerate_quotients(uint64_t N) {\n uint64_t sq= std::sqrt(N),\
     \ prev= N, x;\n std::vector<std::tuple<uint64_t, uint64_t, uint64_t>> ret;\n for\
     \ (int q= 1, n= (sq * sq + sq <= N ? sq : sq - 1); q <= n; ++q) ret.emplace_back(q,\
     \ x= double(N) / (q + 1), prev), prev= x;\n for (int l= sq; l >= 1; --l) ret.emplace_back(double(N)\
-    \ / l, l - 1, l);\n return ret;\n}"
+    \ / l, l - 1, l);\n return ret;\n}\n"
+  code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <tuple>\n\
+    #include <cmath>\n#include <cstdint>\n// (q,l,r) : i in (l,r], \u230AN/i\u230B\
+    \ = q\nstd::vector<std::tuple<uint64_t, uint64_t, uint64_t>> enumerate_quotients(uint64_t\
+    \ N) {\n uint64_t sq= std::sqrt(N), prev= N, x;\n std::vector<std::tuple<uint64_t,\
+    \ uint64_t, uint64_t>> ret;\n for (int q= 1, n= (sq * sq + sq <= N ? sq : sq -\
+    \ 1); q <= n; ++q) ret.emplace_back(q, x= double(N) / (q + 1), prev), prev= x;\n\
+    \ for (int l= sq; l >= 1; --l) ret.emplace_back(double(N) / l, l - 1, l);\n return\
+    \ ret;\n}"
   dependsOn: []
   isVerificationFile: false
   path: src/Math/enumerate_quotients.hpp
   requiredBy: []
-  timestamp: '2023-05-13 17:48:52+09:00'
+  timestamp: '2023-11-20 23:40:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/enumerate_quotients.test.cpp

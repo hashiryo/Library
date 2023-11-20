@@ -111,18 +111,18 @@ data:
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 2 \"src/Graph/CliqueProblem.hpp\"\n#include <vector>\n\
     #include <algorithm>\nclass CliqueProblem {\n using u128= __uint128_t;\n using\
-    \ u64= uint64_t;\n using u16= uint16_t;\n const u16 n, m;\n struct id_num {\n\
-    \  u16 id, num;\n };\n std::vector<u128> adj_;\n std::vector<u16> calc(bool complement)\
-    \ const {\n  std::vector<u128> buf, adj(adj_);\n  std::vector<u16> deg(n), clique,\
-    \ cur;\n  if (complement)\n   for (int u= n; u--;)\n    for (int v= u; v--;) adj[u\
-    \ * m + (v >> 7)]^= u128(1) << (v & 127), adj[v * m + (u >> 7)]^= u128(1) << (u\
-    \ & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num> &rem) -> void {\n   if\
-    \ (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(), rem.end(),\
-    \ [&](id_num l, id_num r) { return deg[l.id] > deg[r.id]; }), buf.assign((n +\
-    \ 1) * m, 0);\n   for (auto &v: rem) {\n    int b= v.id * m, bb= 0;\n    for (v.num=\
-    \ 0;; ++v.num, bb+= m) {\n     bool any= 1;\n     for (u16 i= 0; i < m; ++i) any&=\
-    \ !(adj[b + i] & buf[bb + i]);\n     if (any) break;\n    }\n    buf[bb + (v.id\
-    \ >> 7)]|= u128(1) << (v.id & 127);\n   }\n   std::sort(rem.begin(), rem.end(),\
+    \ u64= unsigned long long;\n using u16= unsigned short;\n const u16 n, m;\n struct\
+    \ id_num {\n  u16 id, num;\n };\n std::vector<u128> adj_;\n std::vector<u16> calc(bool\
+    \ complement) const {\n  std::vector<u128> buf, adj(adj_);\n  std::vector<u16>\
+    \ deg(n), clique, cur;\n  if (complement)\n   for (int u= n; u--;)\n    for (int\
+    \ v= u; v--;) adj[u * m + (v >> 7)]^= u128(1) << (v & 127), adj[v * m + (u >>\
+    \ 7)]^= u128(1) << (u & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num> &rem)\
+    \ -> void {\n   if (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(),\
+    \ rem.end(), [&](id_num l, id_num r) { return deg[l.id] > deg[r.id]; }), buf.assign((n\
+    \ + 1) * m, 0);\n   for (auto &v: rem) {\n    int b= v.id * m, bb= 0;\n    for\
+    \ (v.num= 0;; ++v.num, bb+= m) {\n     bool any= 1;\n     for (u16 i= 0; i < m;\
+    \ ++i) any&= !(adj[b + i] & buf[bb + i]);\n     if (any) break;\n    }\n    buf[bb\
+    \ + (v.id >> 7)]|= u128(1) << (v.id & 127);\n   }\n   std::sort(rem.begin(), rem.end(),\
     \ [&](id_num l, id_num r) { return l.num < r.num; });\n   std::vector<id_num>\
     \ nrem;\n   for (nrem.reserve(rem.size()); !rem.empty();) {\n    auto p= rem.back();\n\
     \    if (p.num + cur.size() < clique.size()) break;\n    nrem.clear();\n    auto\
@@ -185,7 +185,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/enumerate_cliques.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
+  timestamp: '2023-11-20 23:40:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/enumerate_cliques.test.cpp

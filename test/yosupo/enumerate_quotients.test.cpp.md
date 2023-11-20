@@ -110,17 +110,17 @@ data:
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 2 \"src/Math/enumerate_quotients.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <tuple>\n#include <cmath>\n// (q,l,r) : i in (l,r],\
-    \ \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t, uint64_t, uint64_t>> enumerate_quotients(uint64_t\
-    \ N) {\n uint64_t sq= std::sqrt(N), prev= N, x;\n std::vector<std::tuple<uint64_t,\
-    \ uint64_t, uint64_t>> ret;\n for (int q= 1, n= (sq * sq + sq <= N ? sq : sq -\
-    \ 1); q <= n; ++q) ret.emplace_back(q, x= double(N) / (q + 1), prev), prev= x;\n\
-    \ for (int l= sq; l >= 1; --l) ret.emplace_back(double(N) / l, l - 1, l);\n return\
-    \ ret;\n}\n#line 5 \"test/yosupo/enumerate_quotients.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N;\n\
-    \ cin >> N;\n auto ans= enumerate_quotients(N);\n int k= ans.size();\n cout <<\
-    \ k << '\\n';\n for (int i= 0; i < k; ++i) cout << get<0>(ans[i]) << \" \\n\"\
-    [i == k - 1];\n return 0;\n}\n"
+    #include <algorithm>\n#include <tuple>\n#include <cmath>\n#include <cstdint>\n\
+    // (q,l,r) : i in (l,r], \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t,\
+    \ uint64_t, uint64_t>> enumerate_quotients(uint64_t N) {\n uint64_t sq= std::sqrt(N),\
+    \ prev= N, x;\n std::vector<std::tuple<uint64_t, uint64_t, uint64_t>> ret;\n for\
+    \ (int q= 1, n= (sq * sq + sq <= N ? sq : sq - 1); q <= n; ++q) ret.emplace_back(q,\
+    \ x= double(N) / (q + 1), prev), prev= x;\n for (int l= sq; l >= 1; --l) ret.emplace_back(double(N)\
+    \ / l, l - 1, l);\n return ret;\n}\n#line 5 \"test/yosupo/enumerate_quotients.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ long long N;\n cin >> N;\n auto ans= enumerate_quotients(N);\n int k= ans.size();\n\
+    \ cout << k << '\\n';\n for (int i= 0; i < k; ++i) cout << get<0>(ans[i]) << \"\
+    \ \\n\"[i == k - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_quotients\"\n\
     #include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/enumerate_quotients.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -136,7 +136,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/enumerate_quotients.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
+  timestamp: '2023-11-20 23:40:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/enumerate_quotients.test.cpp

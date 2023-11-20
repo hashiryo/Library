@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: src/FFT/fps_div.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 div"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/fps_exp.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 exp"
   - icon: ':question:'
@@ -33,7 +33,7 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/bernoulli.test.cpp
     title: test/yosupo/bernoulli.test.cpp
   - icon: ':x:'
@@ -50,7 +50,7 @@ data:
     title: test/yukicoder/963.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/fps_inv.hpp\"\n#include <vector>\n#include <algorithm>\n\
@@ -310,15 +310,16 @@ data:
     \ mod_t, LM> : a < 3 ? inv_<2, mod_t, LM> : a < 4 ? inv_<3, mod_t, LM> : inv_<4,\
     \ mod_t, LM>)(pp, n, r);\n } else\n  for (int j, i= 1; i < n; r[i++]*= miv)\n\
     \   for (r[j= i]= mod_t(); j--;) r[i]+= r[j] * pp[i - j];\n return vector(r, r\
-    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 3 \"\
-    src/FFT/fps_div.hpp\"\nnamespace math_internal {\ntemplate <size_t LM, class mod_t>\
-    \ void div_base(const mod_t p[], int n, const mod_t q[], int l, mod_t r[], const\
-    \ mod_t iv[]) {\n static constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){64,\
-    \ 64, 256, 256, 256, 256}[t];\n assert(n > 0), assert(((n & -n) == n)), assert(l\
-    \ > 0);\n const mod_t iv0= iv[0];\n const int m= min(TH, n);\n int i= 0;\n for\
-    \ (copy_n(p, m, r); i < m; r[i++]*= iv0)\n  for (int j= min(i + 1, l); --j;) r[i]-=\
-    \ r[i - j] * q[j];\n using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n using GNA2= GlobalNTTArray<mod_t,\
-    \ LM, 2>;\n using GNA3= GlobalNTTArray<mod_t, LM, 3>;\n auto gt1= GlobalNTTArray2D<mod_t,\
+    \ + n);\n}\n}\nusing math_internal::inv_base, math_internal::inv;\n#line 2 \"\
+    src/FFT/fps_exp.hpp\"\n#include <cstdint>\n#line 3 \"src/FFT/fps_div.hpp\"\nnamespace\
+    \ math_internal {\ntemplate <size_t LM, class mod_t> void div_base(const mod_t\
+    \ p[], int n, const mod_t q[], int l, mod_t r[], const mod_t iv[]) {\n static\
+    \ constexpr int t= nttarr_cat<mod_t, LM>, TH= (int[]){64, 64, 256, 256, 256, 256}[t];\n\
+    \ assert(n > 0), assert(((n & -n) == n)), assert(l > 0);\n const mod_t iv0= iv[0];\n\
+    \ const int m= min(TH, n);\n int i= 0;\n for (copy_n(p, m, r); i < m; r[i++]*=\
+    \ iv0)\n  for (int j= min(i + 1, l); --j;) r[i]-= r[i - j] * q[j];\n using GNA1=\
+    \ GlobalNTTArray<mod_t, LM, 1>;\n using GNA2= GlobalNTTArray<mod_t, LM, 2>;\n\
+    \ using GNA3= GlobalNTTArray<mod_t, LM, 3>;\n auto gt1= GlobalNTTArray2D<mod_t,\
     \ LM, 7, 1>::bf, gt2= GlobalNTTArray2D<mod_t, LM, 7, 2>::bf;\n int skip= (__builtin_ctz(n\
     \ / i) + 2) % 3 + 1;\n for (int ed= (1 << skip) - 1; i < n; ed= 7) {\n  mod_t*\
     \ rr= r;\n  const mod_t *qq= q, *pp= p;\n  const int s= i, e= s << 1, ss= (l -\
@@ -357,7 +358,7 @@ data:
     \  const mod_t iv0= mod_t(1) / q[0];\n  copy(p.begin(), p.end(), r), copy(q.begin(),\
     \ q.end(), qq);\n  for (int i= 0; i < n; r[i++]*= iv0)\n   for (int j= min(i +\
     \ 1, l); --j;) r[i]-= r[i - j] * qq[j];\n }\n return vector(r, r + n);\n}\n}\n\
-    using math_internal::div;\n#line 4 \"src/FFT/fps_exp.hpp\"\nnamespace math_internal\
+    using math_internal::div;\n#line 5 \"src/FFT/fps_exp.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class mod_t> vector<mod_t> deriv(const vector<mod_t> &p) {\n vector<mod_t>\
     \ ret(p.size() - 1);\n for (int i= p.size(); --i;) ret[i - 1]= p[i] * i;\n return\
     \ ret;\n}\ntemplate <class mod_t, size_t LM= 1 << 22> vector<mod_t> integ(const\
@@ -521,8 +522,8 @@ data:
   isVerificationFile: false
   path: src/FFT/sequences.hpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-11-20 23:40:07+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/stirling_2.test.cpp
   - test/yosupo/stirling_1.test.cpp

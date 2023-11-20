@@ -3,13 +3,13 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2644.test.cpp
     title: test/aoj/2644.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.SA.test.cpp
     title: test/aoj/ALDS1_14_B.SA.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_D.SA.test.cpp
     title: test/aoj/ALDS1_14_D.SA.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: test/yosupo/suffixarray.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/SuffixArray.hpp\"\n#include <string>\n#include\
@@ -62,18 +62,18 @@ data:
     \ }\n size_t size() const { return sa.size(); }\n auto begin() const { return\
     \ sa.begin(); }\n auto end() const { return sa.end(); }\n // return {l,r} s.t.\
     \ P is a prefix of S[sa[i]:] ( i in [l,r) )\n // l == r if P is not a substring\
-    \ of S\n // O(|P|log|S|)\n auto pattern_matching(const std::vector<Int> &P) const\
-    \ {\n  const int n= s.size(), m= P.size();\n  if (n < m) return {0, 0};\n  auto\
-    \ f1= [&](int h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n\
-    \ - h, m); j < e; ++j) {\n    if (t[j] < P[j]) return true;\n    if (t[j] > P[j])\
-    \ return false;\n   }\n   return n - h < m;\n  };\n  auto f2= [&](int h) {\n \
-    \  auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n\
-    \    if (t[j] > P[j]) return false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(),\
-    \ sa.end(), f1), R= std::partition_point(L, sa.end(), f2);\n  return std::make_pair(L\
-    \ - sa.begin(), R - sa.begin());\n }\n auto pattern_matching(const std::string\
-    \ &P) const { return pattern_matching(std::vector<Int>(P.begin(), P.end())); }\n\
-    };\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>> dat;\n\
-    public:\n template <class Int> LCPArray(const SuffixArray<Int> &sa): rnk(sa.size())\
+    \ of S\n // O(|P|log|S|)\n std::pair<int, int> pattern_matching(const std::vector<Int>\
+    \ &P) const {\n  const int n= s.size(), m= P.size();\n  if (n < m) return {0,\
+    \ 0};\n  auto f1= [&](int h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e=\
+    \ std::min(n - h, m); j < e; ++j) {\n    if (t[j] < P[j]) return true;\n    if\
+    \ (t[j] > P[j]) return false;\n   }\n   return n - h < m;\n  };\n  auto f2= [&](int\
+    \ h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j\
+    \ < e; ++j)\n    if (t[j] > P[j]) return false;\n   return true;\n  };\n  auto\
+    \ L= std::partition_point(sa.begin(), sa.end(), f1), R= std::partition_point(L,\
+    \ sa.end(), f2);\n  return {L - sa.begin(), R - sa.begin()};\n }\n auto pattern_matching(const\
+    \ std::string &P) const { return pattern_matching(std::vector<Int>(P.begin(),\
+    \ P.end())); }\n};\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>>\
+    \ dat;\npublic:\n template <class Int> LCPArray(const SuffixArray<Int> &sa): rnk(sa.size())\
     \ {\n  const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n - 2) : 0;\n \
     \ dat.resize(log + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n  for (int\
     \ i= n; i--;) rnk[sa[i]]= i;\n  for (int i= 0, h= 0; i < n; ++i) {\n   if (rnk[i]\
@@ -123,37 +123,37 @@ data:
     \ size_t size() const { return sa.size(); }\n auto begin() const { return sa.begin();\
     \ }\n auto end() const { return sa.end(); }\n // return {l,r} s.t. P is a prefix\
     \ of S[sa[i]:] ( i in [l,r) )\n // l == r if P is not a substring of S\n // O(|P|log|S|)\n\
-    \ auto pattern_matching(const std::vector<Int> &P) const {\n  const int n= s.size(),\
-    \ m= P.size();\n  if (n < m) return {0, 0};\n  auto f1= [&](int h) {\n   auto\
-    \ t= s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j) {\n\
-    \    if (t[j] < P[j]) return true;\n    if (t[j] > P[j]) return false;\n   }\n\
-    \   return n - h < m;\n  };\n  auto f2= [&](int h) {\n   auto t= s.begin() + h;\n\
-    \   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n    if (t[j] > P[j]) return\
-    \ false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(), sa.end(),\
-    \ f1), R= std::partition_point(L, sa.end(), f2);\n  return std::make_pair(L -\
-    \ sa.begin(), R - sa.begin());\n }\n auto pattern_matching(const std::string &P)\
-    \ const { return pattern_matching(std::vector<Int>(P.begin(), P.end())); }\n};\n\
-    class LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>> dat;\n\
-    public:\n template <class Int> LCPArray(const SuffixArray<Int> &sa): rnk(sa.size())\
-    \ {\n  const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n - 2) : 0;\n \
-    \ dat.resize(log + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n  for (int\
-    \ i= n; i--;) rnk[sa[i]]= i;\n  for (int i= 0, h= 0; i < n; ++i) {\n   if (rnk[i]\
-    \ == n - 1) {\n    h= 0;\n    continue;\n   }\n   for (int j= sa[rnk[i] + 1];\
-    \ i + h < n && j + h < n && sa.s[i + h] == sa.s[j + h];) ++h;\n   if ((lcp[rnk[i]]=\
-    \ h)) --h;\n  }\n  for (int i= 0, I= 1, j; i < log; ++i, I<<= 1)\n   for (dat[i\
-    \ + 1].resize(j= dat[i].size() - I); j--;) dat[i + 1][j]= std::min(dat[i][j],\
-    \ dat[i][j + I]);\n }\n int operator[](int i) const { return dat[0][i]; }\n size_t\
-    \ size() const { return dat[0].size(); }\n auto begin() const { return dat[0].begin();\
-    \ }\n auto end() const { return dat[0].end(); }\n int operator()(int i, int j)\
-    \ const {\n  if (i == j) return rnk.size() - i;\n  auto [l, r]= std::minmax(rnk[i],\
+    \ std::pair<int, int> pattern_matching(const std::vector<Int> &P) const {\n  const\
+    \ int n= s.size(), m= P.size();\n  if (n < m) return {0, 0};\n  auto f1= [&](int\
+    \ h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j\
+    \ < e; ++j) {\n    if (t[j] < P[j]) return true;\n    if (t[j] > P[j]) return\
+    \ false;\n   }\n   return n - h < m;\n  };\n  auto f2= [&](int h) {\n   auto t=\
+    \ s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n    if\
+    \ (t[j] > P[j]) return false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(),\
+    \ sa.end(), f1), R= std::partition_point(L, sa.end(), f2);\n  return {L - sa.begin(),\
+    \ R - sa.begin()};\n }\n auto pattern_matching(const std::string &P) const { return\
+    \ pattern_matching(std::vector<Int>(P.begin(), P.end())); }\n};\nclass LCPArray\
+    \ {\n std::vector<int> rnk;\n std::vector<std::vector<int>> dat;\npublic:\n template\
+    \ <class Int> LCPArray(const SuffixArray<Int> &sa): rnk(sa.size()) {\n  const\
+    \ int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n - 2) : 0;\n  dat.resize(log\
+    \ + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n  for (int i= n; i--;) rnk[sa[i]]=\
+    \ i;\n  for (int i= 0, h= 0; i < n; ++i) {\n   if (rnk[i] == n - 1) {\n    h=\
+    \ 0;\n    continue;\n   }\n   for (int j= sa[rnk[i] + 1]; i + h < n && j + h <\
+    \ n && sa.s[i + h] == sa.s[j + h];) ++h;\n   if ((lcp[rnk[i]]= h)) --h;\n  }\n\
+    \  for (int i= 0, I= 1, j; i < log; ++i, I<<= 1)\n   for (dat[i + 1].resize(j=\
+    \ dat[i].size() - I); j--;) dat[i + 1][j]= std::min(dat[i][j], dat[i][j + I]);\n\
+    \ }\n int operator[](int i) const { return dat[0][i]; }\n size_t size() const\
+    \ { return dat[0].size(); }\n auto begin() const { return dat[0].begin(); }\n\
+    \ auto end() const { return dat[0].end(); }\n int operator()(int i, int j) const\
+    \ {\n  if (i == j) return rnk.size() - i;\n  auto [l, r]= std::minmax(rnk[i],\
     \ rnk[j]);\n  if (r == l + 1) return dat[0][l];\n  int k= 31 - __builtin_clz(r\
     \ - l - 1);\n  return std::min(dat[k][l], dat[k][r - (1 << k)]);\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/String/SuffixArray.hpp
   requiredBy: []
-  timestamp: '2023-11-20 13:52:58+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-11-20 23:40:07+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/longest_common_substring.test.cpp
   - test/yosupo/suffixarray.test.cpp
