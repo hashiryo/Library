@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_mod_sqrt.test.cpp
     title: test/unit_test/constexpr_mod_sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_sparse_FPS.test.cpp
     title: test/yosupo/exp_of_sparse_FPS.test.cpp
   - icon: ':x:'

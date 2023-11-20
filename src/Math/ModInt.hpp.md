@@ -262,22 +262,22 @@ data:
   - icon: ':x:'
     path: test/yosupo/enumerate_quotients.test.cpp
     title: test/yosupo/enumerate_quotients.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_FPS.FPS.test.cpp
     title: test/yosupo/exp_of_FPS.FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/exp_of_FPS.test.cpp
     title: test/yosupo/exp_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_set_power_series.test.cpp
     title: test/yosupo/exp_of_set_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/exp_of_sparse_FPS.test.cpp
     title: test/yosupo/exp_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/find_linear_recurrence.test.cpp
     title: test/yosupo/find_linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'

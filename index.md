@@ -452,7 +452,7 @@ data:
     - icon: ':question:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/String/SuffixArray.hpp
       title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
     - icon: ':heavy_check_mark:'
@@ -734,7 +734,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2635.test.cpp
       title: test/aoj/2635.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2644.test.cpp
       title: test/aoj/2644.test.cpp
     - icon: ':heavy_check_mark:'
@@ -854,10 +854,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.RH.test.cpp
       title: test/aoj/ALDS1_14_B.RH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ALDS1_14_B.SA.test.cpp
       title: test/aoj/ALDS1_14_B.SA.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/ALDS1_14_D.SA.test.cpp
       title: test/aoj/ALDS1_14_D.SA.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1462,25 +1462,25 @@ data:
     - icon: ':x:'
       path: test/yosupo/enumerate_quotients.test.cpp
       title: test/yosupo/enumerate_quotients.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/exp_of_FPS.FPS.test.cpp
       title: test/yosupo/exp_of_FPS.FPS.test.cpp
     - icon: ':x:'
       path: test/yosupo/exp_of_FPS.test.cpp
       title: test/yosupo/exp_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/exp_of_set_power_series.test.cpp
       title: test/yosupo/exp_of_set_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/exp_of_sparse_FPS.test.cpp
       title: test/yosupo/exp_of_sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/factorize.test.cpp
       title: test/yosupo/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/find_linear_recurrence.test.cpp
       title: test/yosupo/find_linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/frequency_table_of_tree_distance.test.cpp
       title: test/yosupo/frequency_table_of_tree_distance.test.cpp
     - icon: ':x:'
