@@ -24,9 +24,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_2_64
@@ -283,16 +283,16 @@ data:
     \ j= i - m + 1; j < n; ++j) rr[i]+= pp[j] * qq[i - j];\n   }\n  }\n }\n return\
     \ std::vector(rr, rr + sz);\n}\n#line 5 \"test/yosupo/convolution_mod_2_64.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, M;\n cin >> N >> M;\n vector<std::uint64_t> a(N), b(M);\n for (int i=\
-    \ 0; i < N; i++) cin >> a[i];\n for (int j= 0; j < M; j++) cin >> b[j];\n auto\
+    \ int N, M;\n cin >> N >> M;\n vector<unsigned long long> a(N), b(M);\n for (int\
+    \ i= 0; i < N; i++) cin >> a[i];\n for (int j= 0; j < M; j++) cin >> b[j];\n auto\
     \ c= convolve(a, b);\n c.resize(N + M - 1);\n for (int k= 0; k < N + M - 1; k++)\
     \ {\n  cout << c[k] << \" \\n\"[k == N + M - 2];\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_2_64\"\n\
     #include <iostream>\n#include <vector>\n#include \"src/FFT/convolve.hpp\"\nusing\
     \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int\
-    \ N, M;\n cin >> N >> M;\n vector<std::uint64_t> a(N), b(M);\n for (int i= 0;\
-    \ i < N; i++) cin >> a[i];\n for (int j= 0; j < M; j++) cin >> b[j];\n auto c=\
-    \ convolve(a, b);\n c.resize(N + M - 1);\n for (int k= 0; k < N + M - 1; k++)\
+    \ N, M;\n cin >> N >> M;\n vector<unsigned long long> a(N), b(M);\n for (int i=\
+    \ 0; i < N; i++) cin >> a[i];\n for (int j= 0; j < M; j++) cin >> b[j];\n auto\
+    \ c= convolve(a, b);\n c.resize(N + M - 1);\n for (int k= 0; k < N + M - 1; k++)\
     \ {\n  cout << c[k] << \" \\n\"[k == N + M - 2];\n }\n return 0;\n}"
   dependsOn:
   - src/FFT/convolve.hpp
@@ -305,8 +305,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/convolution_mod_2_64.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-21 22:54:11+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/convolution_mod_2_64.test.cpp
 layout: document

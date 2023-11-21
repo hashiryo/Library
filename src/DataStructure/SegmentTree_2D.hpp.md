@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc309_f.Seg2D.test.cpp
     title: test/atcoder/abc309_f.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
     title: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
   - icon: ':x:'

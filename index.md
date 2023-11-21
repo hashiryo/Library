@@ -105,7 +105,7 @@ data:
     - icon: ':question:'
       path: src/FFT/Polynomial.hpp
       title: "\u591A\u9805\u5F0F"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/FFT/SubProductTree.hpp
       title: "\u8907\u6570\u306E\u5024\u4EE3\u5165\u3068\u591A\u9805\u5F0F\u88DC\u9593"
     - icon: ':question:'
@@ -731,7 +731,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2635.test.cpp
       title: test/aoj/2635.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2644.test.cpp
       title: test/aoj/2644.test.cpp
     - icon: ':heavy_check_mark:'
@@ -848,13 +848,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.RH.test.cpp
       title: test/aoj/ALDS1_14_B.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.SA.test.cpp
       title: test/aoj/ALDS1_14_B.SA.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.zalgo.test.cpp
       title: test/aoj/ALDS1_14_B.zalgo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_D.SA.test.cpp
       title: test/aoj/ALDS1_14_D.SA.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1414,7 +1414,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution_large.test.cpp
       title: test/yosupo/convolution_large.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/convolution_mod_2_64.test.cpp
       title: test/yosupo/convolution_mod_2_64.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1585,7 +1585,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/partition.test.cpp
       title: test/yosupo/partition.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/persistent_queue.WBT.test.cpp
       title: test/yosupo/persistent_queue.WBT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1597,22 +1597,22 @@ data:
     - icon: ':x:'
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
       title: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_set_range_composite.SegTree.test.cpp
       title: test/yosupo/point_set_range_composite.SegTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/polynomial_composite_set_power_series.test.cpp
       title: test/yosupo/polynomial_composite_set_power_series.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/polynomial_interpolation.test.cpp
       title: test/yosupo/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.FPS.test.cpp
       title: test/yosupo/pow_of_FPS.FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.test.cpp
       title: test/yosupo/pow_of_FPS.test.cpp
     - icon: ':x:'

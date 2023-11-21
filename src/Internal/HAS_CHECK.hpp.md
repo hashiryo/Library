@@ -159,7 +159,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/lca.LCT.test.cpp
     title: test/yosupo/lca.LCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_queue.WBT.test.cpp
     title: test/yosupo/persistent_queue.WBT.test.cpp
   - icon: ':x:'

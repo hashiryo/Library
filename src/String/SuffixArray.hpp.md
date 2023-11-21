@@ -3,13 +3,13 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2644.test.cpp
     title: test/aoj/2644.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.SA.test.cpp
     title: test/aoj/ALDS1_14_B.SA.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_D.SA.test.cpp
     title: test/aoj/ALDS1_14_D.SA.test.cpp
   - icon: ':heavy_check_mark:'
@@ -72,7 +72,7 @@ data:
     \ f2= [&](int h) {\n   auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n\
     \ - h, m); j < e; ++j)\n    if (t[j] > P[j]) return false;\n   return true;\n\
     \  };\n  auto L= std::partition_point(sa.begin(), sa.end(), f1), R= std::partition_point(L,\
-    \ sa.end(), f2);\n  return {L + sa.begin(), R + sa.begin()};\n }\n};\nclass LCPArray\
+    \ sa.end(), f2);\n  return {L - sa.begin(), R - sa.begin()};\n }\n};\nclass LCPArray\
     \ {\n std::vector<int> rnk;\n std::vector<std::vector<int>> dat;\npublic:\n template\
     \ <class String> LCPArray(const SuffixArray<String> &sa): rnk(sa.size()) {\n \
     \ const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n - 2) : 0;\n  dat.resize(log\
@@ -130,8 +130,8 @@ data:
     \  }\n   return n - h < m;\n  };\n  auto f2= [&](int h) {\n   auto t= s.begin()\
     \ + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n    if (t[j] > P[j])\
     \ return false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(),\
-    \ sa.end(), f1), R= std::partition_point(L, sa.end(), f2);\n  return {L + sa.begin(),\
-    \ R + sa.begin()};\n }\n};\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>>\
+    \ sa.end(), f1), R= std::partition_point(L, sa.end(), f2);\n  return {L - sa.begin(),\
+    \ R - sa.begin()};\n }\n};\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>>\
     \ dat;\npublic:\n template <class String> LCPArray(const SuffixArray<String> &sa):\
     \ rnk(sa.size()) {\n  const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n\
     \ - 2) : 0;\n  dat.resize(log + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n\
@@ -150,7 +150,7 @@ data:
   isVerificationFile: false
   path: src/String/SuffixArray.hpp
   requiredBy: []
-  timestamp: '2023-11-21 19:03:34+09:00'
+  timestamp: '2023-11-21 22:54:11+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/longest_common_substring.test.cpp
@@ -199,6 +199,7 @@ $\mathrm{LCP}_k:=$ $S_{\SA_k:}$ と $S_{\SA_{k+1}:}$ の共通接頭辞の長さ
 |`end()`|$\mathrm{LCP}$ の `end()` を返す||
 |`lcp(i,j)`|$S_{\SA_i:}$ と $S_{\SA_j:}$ の共通接頭辞の長さを返す. |$\mathcal{O}(1)$|
 ## 問題例
-[AtCoder Beginner Contest 240 Ex - Sequence of Substrings](https://atcoder.jp/contests/abc240/tasks/abc240_h) (lcp, 部分文字列ソート, ロリハでTLE)\
+[AtCoder Beginner Contest 240 Ex - Sequence of Substrings](https://atcoder.jp/contests/abc240/tasks/abc240_h) (lcp(i,j), 部分文字列ソート, ロリハでTLE)\
+[square869120Contest #2 E - 部分文字列](https://atcoder.jp/contests/s8pc-2/tasks/s8pc_2_e) (lcp配列)\
 [DISCO presents ディスカバリーチャンネル プログラミングコンテスト2016 予選 C - アメージングな文字列は、きみが作る！](https://atcoder.jp/contests/discovery2016-qual/tasks/discovery_2016_qual_c)\
 [DISCO presents ディスカバリーチャンネル コードコンテスト2020 本戦 C - Smaller-Suffix-Free Sequences](https://atcoder.jp/contests/ddcc2020-final/tasks/ddcc2020_final_c)
