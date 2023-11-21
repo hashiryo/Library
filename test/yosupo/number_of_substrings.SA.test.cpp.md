@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/number_of_substrings
@@ -51,15 +51,15 @@ data:
     \ { return sa.size(); }\n auto begin() const { return sa.begin(); }\n auto end()\
     \ const { return sa.end(); }\n // return {l,r} s.t. P is a prefix of S[sa[i]:]\
     \ ( i in [l,r) )\n // l == r if P is not a substring of S\n // O(|P|log|S|)\n\
-    \ auto pattern_matching(const String &P) const {\n  const int n= s.size(), m=\
-    \ P.size();\n  if (n < m) return {0, 0};\n  auto f1= [&](int h) {\n   auto t=\
-    \ s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j) {\n   \
-    \ if (t[j] < P[j]) return true;\n    if (t[j] > P[j]) return false;\n   }\n  \
-    \ return n - h < m;\n  };\n  auto f2= [&](int h) {\n   auto t= s.begin() + h;\n\
-    \   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n    if (t[j] > P[j]) return\
-    \ false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(), sa.end(),\
-    \ f1), R= std::partition_point(L, sa.end(), f2);\n  return std::make_pair(L, R);\n\
-    \ }\n};\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>>\
+    \ std::pair<int, int> pattern_matching(const String &P) const {\n  const int n=\
+    \ s.size(), m= P.size();\n  if (n < m) return {0, 0};\n  auto f1= [&](int h) {\n\
+    \   auto t= s.begin() + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\
+    \ {\n    if (t[j] < P[j]) return true;\n    if (t[j] > P[j]) return false;\n \
+    \  }\n   return n - h < m;\n  };\n  auto f2= [&](int h) {\n   auto t= s.begin()\
+    \ + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n    if (t[j] > P[j])\
+    \ return false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(),\
+    \ sa.end(), f1), R= std::partition_point(L, sa.end(), f2);\n  return {L + sa.begin(),\
+    \ R + sa.begin()};\n }\n};\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>>\
     \ dat;\npublic:\n template <class String> LCPArray(const SuffixArray<String> &sa):\
     \ rnk(sa.size()) {\n  const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n\
     \ - 2) : 0;\n  dat.resize(log + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n\
@@ -90,8 +90,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/number_of_substrings.SA.test.cpp
   requiredBy: []
-  timestamp: '2023-11-21 13:51:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-21 19:03:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/number_of_substrings.SA.test.cpp
 layout: document

@@ -75,10 +75,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.CHT.test.cpp
     title: test/yosupo/line_add_get_min.CHT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.LiCT.test.cpp
     title: test/yosupo/line_add_get_min.LiCT.test.cpp
   - icon: ':heavy_check_mark:'

@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2725.CHT.test.cpp
     title: test/aoj/2725.CHT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.CHT.test.cpp
     title: test/yosupo/line_add_get_min.CHT.test.cpp
   - icon: ':x:'

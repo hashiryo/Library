@@ -10,9 +10,9 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/line_add_get_min
@@ -53,27 +53,27 @@ data:
     \ [a, b]= y > 0 ? cht_mn.query_line(z) : cht_mx.query_line(z);\n  return T(a)\
     \ * x + T(b) * y;\n }\n};\n#line 4 \"test/yosupo/line_add_get_min.CHT.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ int N, Q;\n cin >> N >> Q;\n ConvexHullTrick<int64_t, MINIMIZE> cht;\n for (int\
-    \ i= 0; i < N; ++i) {\n  int a, b;\n  cin >> a >> b;\n  cht.insert(a, b);\n }\n\
-    \ while (Q--) {\n  int t;\n  cin >> t;\n  if (t) {\n   int p;\n   cin >> p;\n\
-    \   cout << cht.query(p) << '\\n';\n  } else {\n   int a, b;\n   cin >> a >> b;\n\
-    \   cht.insert(a, b);\n  }\n }\n return 0;\n}\n"
+    \ int N, Q;\n cin >> N >> Q;\n ConvexHullTrick<long long, MINIMIZE> cht;\n for\
+    \ (int i= 0; i < N; ++i) {\n  long long a, b;\n  cin >> a >> b;\n  cht.insert(a,\
+    \ b);\n }\n while (Q--) {\n  int t;\n  cin >> t;\n  if (t) {\n   int p;\n   cin\
+    \ >> p;\n   cout << cht.query(p) << '\\n';\n  } else {\n   long long a, b;\n \
+    \  cin >> a >> b;\n   cht.insert(a, b);\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\n#include\
     \ <iostream>\n#include \"src/Optimization/ConvexHullTrick.hpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
-    \ cin >> N >> Q;\n ConvexHullTrick<int64_t, MINIMIZE> cht;\n for (int i= 0; i\
-    \ < N; ++i) {\n  int a, b;\n  cin >> a >> b;\n  cht.insert(a, b);\n }\n while\
-    \ (Q--) {\n  int t;\n  cin >> t;\n  if (t) {\n   int p;\n   cin >> p;\n   cout\
-    \ << cht.query(p) << '\\n';\n  } else {\n   int a, b;\n   cin >> a >> b;\n   cht.insert(a,\
-    \ b);\n  }\n }\n return 0;\n}"
+    \ cin >> N >> Q;\n ConvexHullTrick<long long, MINIMIZE> cht;\n for (int i= 0;\
+    \ i < N; ++i) {\n  long long a, b;\n  cin >> a >> b;\n  cht.insert(a, b);\n }\n\
+    \ while (Q--) {\n  int t;\n  cin >> t;\n  if (t) {\n   int p;\n   cin >> p;\n\
+    \   cout << cht.query(p) << '\\n';\n  } else {\n   long long a, b;\n   cin >>\
+    \ a >> b;\n   cht.insert(a, b);\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/Optimization/ConvexHullTrick.hpp
   - src/Optimization/MinMaxEnum.hpp
   isVerificationFile: true
   path: test/yosupo/line_add_get_min.CHT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-17 01:28:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-21 19:03:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/line_add_get_min.CHT.test.cpp
 layout: document

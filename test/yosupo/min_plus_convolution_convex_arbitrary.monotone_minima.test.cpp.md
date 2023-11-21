@@ -6,9 +6,9 @@ data:
     title: monotone minima
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
@@ -46,7 +46,7 @@ data:
   path: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
   requiredBy: []
   timestamp: '2023-10-17 01:28:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
 layout: document

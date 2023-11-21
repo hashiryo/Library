@@ -9,9 +9,9 @@ data:
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers
@@ -20,53 +20,53 @@ data:
   bundledCode: "#line 1 \"test/hackerrank/cube-loving-numbers.mobius_func.test.cpp\"\
     \n#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
     \n#include <iostream>\n#line 2 \"src/Math/multiplicative_and_additive.hpp\"\n\
-    #include <vector>\nnamespace multiplicative_functions {\ntemplate <class T> struct\
-    \ Totient {\n static constexpr T f(std::uint64_t p, short e) {\n  T ret= p - 1;\n\
-    \  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T> poly()\
-    \ { return {-1, 1}; }\n};\ntemplate <class T> struct Moebius {\n static constexpr\
-    \ T f(std::uint64_t, short e) { return (e == 0) - (e == 1); }\n static std::vector<T>\
+    #include <vector>\n#include <cstdint>\nnamespace multiplicative_functions {\n\
+    template <class T> struct Totient {\n static constexpr T f(uint64_t p, short e)\
+    \ {\n  T ret= p - 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T>\
+    \ poly() { return {-1, 1}; }\n};\ntemplate <class T> struct Moebius {\n static\
+    \ constexpr T f(uint64_t, short e) { return (e == 0) - (e == 1); }\n static std::vector<T>\
     \ poly() { return {-1}; }\n};\ntemplate <class T> struct Liouville {\n static\
-    \ constexpr T f(std::uint64_t, short e) { return e & 1 ? -1 : 1; }\n static std::vector<T>\
+    \ constexpr T f(uint64_t, short e) { return e & 1 ? -1 : 1; }\n static std::vector<T>\
     \ poly() { return {-1}; }\n};\ntemplate <class T, uint64_t k> struct Divisor {\n\
-    \ static constexpr T f(std::uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1,\
-    \ b= p;\n  for (uint64_t kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n\
-    \  for (short i= 0; i <= e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static\
+    \ static constexpr T f(uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b=\
+    \ p;\n  for (uint64_t kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n  for\
+    \ (short i= 0; i <= e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static\
     \ std::vector<T> poly() {\n  std::vector<T> ret(k + 1, 0);\n  ret[0]+= 1, ret[k]+=\
     \ 1;\n  return ret;\n }\n};\ntemplate <class T> struct Dedekind {\n static constexpr\
-    \ T f(std::uint64_t p, short e) {\n  T ret= p + 1;\n  while (e-- > 1) ret*= p;\n\
-    \  return ret;\n }\n static std::vector<T> poly() { return {1, 1}; }\n};\n}  //\
-    \ namespace multiplicative_functions\nnamespace additive_functions {\ntemplate\
-    \ <class T> struct BigOmega {  // the total number of prime factors of n\n static\
-    \ constexpr T f(std::uint64_t, short e) { return e; }\n static std::vector<T>\
-    \ poly() { return {1}; }\n};\ntemplate <class T> struct LittleOmega {  // the\
-    \ total number of different prime factors of n\n static constexpr T f(std::uint64_t,\
-    \ short) { return 1; }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate\
-    \ <class T> struct Sopfr {  // the sum of primes dividing n counting multiplicity\n\
-    \ static constexpr T f(std::uint64_t p, short e) { return p * e; }\n static std::vector<T>\
+    \ T f(uint64_t p, short e) {\n  T ret= p + 1;\n  while (e-- > 1) ret*= p;\n  return\
+    \ ret;\n }\n static std::vector<T> poly() { return {1, 1}; }\n};\n}  // namespace\
+    \ multiplicative_functions\nnamespace additive_functions {\ntemplate <class T>\
+    \ struct BigOmega {  // the total number of prime factors of n\n static constexpr\
+    \ T f(uint64_t, short e) { return e; }\n static std::vector<T> poly() { return\
+    \ {1}; }\n};\ntemplate <class T> struct LittleOmega {  // the total number of\
+    \ different prime factors of n\n static constexpr T f(uint64_t, short) { return\
+    \ 1; }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate <class T>\
+    \ struct Sopfr {  // the sum of primes dividing n counting multiplicity\n static\
+    \ constexpr T f(uint64_t p, short e) { return p * e; }\n static std::vector<T>\
     \ poly() { return {0, 1}; }\n};\ntemplate <class T> struct Sopf {  // the sum\
-    \ of the distinct primes dividing n\n static constexpr T f(std::uint64_t p, short)\
+    \ of the distinct primes dividing n\n static constexpr T f(uint64_t p, short)\
     \ { return p; }\n static std::vector<T> poly() { return {0, 1}; }\n};\n}  // namespace\
     \ additive_functions\n#line 3 \"src/Math/Sieve.hpp\"\n#include <algorithm>\n#include\
-    \ <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n static\
-    \ inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static inline\
-    \ int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n  static\
-    \ int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N; n+= 2, i++)\
-    \ {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
-    \ N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n\
-    \ static inline void set_lpfe(int N) {  // O(N)\n  static int n= 3, i= 1;\n  if\
-    \ (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >> 1) + 1, lpfpw +\
-    \ i);\n  for (std::fill(lpfe + i, lpfe + (N >> 1) + 1, 1); n <= N; n+= 2, i++)\n\
-    \   if (int j= (n / lpf[i]) >> 1; lpf[i] == lpf[j]) lpfe[i]+= lpfe[j], lpfpw[i]*=\
-    \ lpfpw[j];\n }\npublic:\n static int least_prime_factor(int n) { return sieve(n),\
-    \ lpf[n]; }\n // O(log n)\n static std::map<int, short> factorize(int n) {\n \
-    \ std::map<int, short> ret;\n  if (int t; !(n & 1)) ret[2]= t= __builtin_ctz(n),\
-    \ n>>= t;\n  if (int i= n >> 1; n > 1)\n   for (set_lpfe(n); n > 1; i= n >> 1)\
-    \ ret[lpf[i]]= lpfe[i], n/= lpfpw[i];\n  return ret;\n }\n // O(log n)\n static\
-    \ std::vector<int> divisors(int n) {\n  std::vector<int> ret= {1};\n  for (auto\
-    \ [p, e]: factorize(n))\n   for (std::size_t sz= ret.size(), pw= p; e--; pw*=\
-    \ p)\n    for (int i= sz - 1; i >= 0; i--) ret.push_back(ret[i] * pw);\n  return\
-    \ std::sort(ret.begin(), ret.end()), ret;\n }\n // O(N)\n static std::vector<int>\
-    \ get_primes(int N) { return sieve(N), std::vector<int>(ps, std::upper_bound(ps,\
+    \ <map>\n#line 6 \"src/Math/Sieve.hpp\"\ntemplate <int LIM= 1 << 24> class Sieve\
+    \ {\n static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n\
+    \ static inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  //\
+    \ O(N)\n  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n\
+    \ <= N; n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1,\
+    \ e= std::min(lpf[i], N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]=\
+    \ ps[j];\n  }\n }\n static inline void set_lpfe(int N) {  // O(N)\n  static int\
+    \ n= 3, i= 1;\n  if (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >>\
+    \ 1) + 1, lpfpw + i);\n  for (std::fill(lpfe + i, lpfe + (N >> 1) + 1, 1); n <=\
+    \ N; n+= 2, i++)\n   if (int j= (n / lpf[i]) >> 1; lpf[i] == lpf[j]) lpfe[i]+=\
+    \ lpfe[j], lpfpw[i]*= lpfpw[j];\n }\npublic:\n static int least_prime_factor(int\
+    \ n) { return sieve(n), lpf[n]; }\n // O(log n)\n static std::map<int, short>\
+    \ factorize(int n) {\n  std::map<int, short> ret;\n  if (int t; !(n & 1)) ret[2]=\
+    \ t= __builtin_ctz(n), n>>= t;\n  if (int i= n >> 1; n > 1)\n   for (set_lpfe(n);\
+    \ n > 1; i= n >> 1) ret[lpf[i]]= lpfe[i], n/= lpfpw[i];\n  return ret;\n }\n //\
+    \ O(log n)\n static std::vector<int> divisors(int n) {\n  std::vector<int> ret=\
+    \ {1};\n  for (auto [p, e]: factorize(n))\n   for (std::size_t sz= ret.size(),\
+    \ pw= p; e--; pw*= p)\n    for (int i= sz - 1; i >= 0; i--) ret.push_back(ret[i]\
+    \ * pw);\n  return std::sort(ret.begin(), ret.end()), ret;\n }\n // O(N)\n static\
+    \ std::vector<int> get_primes(int N) { return sieve(N), std::vector<int>(ps, std::upper_bound(ps,\
     \ ps + psz, N)); }\n template <class T, class F> static inline std::vector<T>\
     \ completely_multiplicative_table(int N, const F &f) {\n  std::vector<T> ret(N\
     \ + 1);\n  sieve(N);\n  for (int n= 3, i= 1; n <= N; n+= 2, i++) ret[n]= lpf[i]\
@@ -145,8 +145,8 @@ data:
   isVerificationFile: true
   path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   requiredBy: []
-  timestamp: '2023-11-20 23:40:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-21 19:03:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
 layout: document

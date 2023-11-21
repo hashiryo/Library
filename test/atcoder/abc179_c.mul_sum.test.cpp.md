@@ -9,9 +9,9 @@ data:
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_c
@@ -68,36 +68,37 @@ data:
     \   if (!nn) break;\n   for (int e= 2; nn; nn= double(nn) / p, ++e) ret+= rc(rc,\
     \ nn, i + 1, cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n  }\n  return ret;\n };\n\
     \ return dfs(dfs, N, 0, 1);\n}\n#line 3 \"src/Math/multiplicative_and_additive.hpp\"\
-    \nnamespace multiplicative_functions {\ntemplate <class T> struct Totient {\n\
-    \ static constexpr T f(std::uint64_t p, short e) {\n  T ret= p - 1;\n  while (e--\
-    \ > 1) ret*= p;\n  return ret;\n }\n static std::vector<T> poly() { return {-1,\
-    \ 1}; }\n};\ntemplate <class T> struct Moebius {\n static constexpr T f(std::uint64_t,\
-    \ short e) { return (e == 0) - (e == 1); }\n static std::vector<T> poly() { return\
-    \ {-1}; }\n};\ntemplate <class T> struct Liouville {\n static constexpr T f(std::uint64_t,\
-    \ short e) { return e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return\
-    \ {-1}; }\n};\ntemplate <class T, uint64_t k> struct Divisor {\n static constexpr\
-    \ T f(std::uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t\
-    \ kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <=\
-    \ e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static std::vector<T> poly()\
-    \ {\n  std::vector<T> ret(k + 1, 0);\n  ret[0]+= 1, ret[k]+= 1;\n  return ret;\n\
-    \ }\n};\ntemplate <class T> struct Dedekind {\n static constexpr T f(std::uint64_t\
-    \ p, short e) {\n  T ret= p + 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n\
-    \ }\n static std::vector<T> poly() { return {1, 1}; }\n};\n}  // namespace multiplicative_functions\n\
-    namespace additive_functions {\ntemplate <class T> struct BigOmega {  // the total\
-    \ number of prime factors of n\n static constexpr T f(std::uint64_t, short e)\
-    \ { return e; }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate <class\
-    \ T> struct LittleOmega {  // the total number of different prime factors of n\n\
-    \ static constexpr T f(std::uint64_t, short) { return 1; }\n static std::vector<T>\
-    \ poly() { return {1}; }\n};\ntemplate <class T> struct Sopfr {  // the sum of\
-    \ primes dividing n counting multiplicity\n static constexpr T f(std::uint64_t\
-    \ p, short e) { return p * e; }\n static std::vector<T> poly() { return {0, 1};\
-    \ }\n};\ntemplate <class T> struct Sopf {  // the sum of the distinct primes dividing\
-    \ n\n static constexpr T f(std::uint64_t p, short) { return p; }\n static std::vector<T>\
-    \ poly() { return {0, 1}; }\n};\n}  // namespace additive_functions\n#line 6 \"\
-    test/atcoder/abc179_c.mul_sum.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace multiplicative_functions;\n\
-    \ long long N;\n cin >> N;\n cout << multiplicative_sum<long long>(N - 1, Divisor<long\
-    \ long, 0>::f, Divisor<long long, 0>::poly()) << '\\n';\n return 0;\n}\n"
+    \n#include <cstdint>\nnamespace multiplicative_functions {\ntemplate <class T>\
+    \ struct Totient {\n static constexpr T f(uint64_t p, short e) {\n  T ret= p -\
+    \ 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T> poly()\
+    \ { return {-1, 1}; }\n};\ntemplate <class T> struct Moebius {\n static constexpr\
+    \ T f(uint64_t, short e) { return (e == 0) - (e == 1); }\n static std::vector<T>\
+    \ poly() { return {-1}; }\n};\ntemplate <class T> struct Liouville {\n static\
+    \ constexpr T f(uint64_t, short e) { return e & 1 ? -1 : 1; }\n static std::vector<T>\
+    \ poly() { return {-1}; }\n};\ntemplate <class T, uint64_t k> struct Divisor {\n\
+    \ static constexpr T f(uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b=\
+    \ p;\n  for (uint64_t kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n  for\
+    \ (short i= 0; i <= e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static\
+    \ std::vector<T> poly() {\n  std::vector<T> ret(k + 1, 0);\n  ret[0]+= 1, ret[k]+=\
+    \ 1;\n  return ret;\n }\n};\ntemplate <class T> struct Dedekind {\n static constexpr\
+    \ T f(uint64_t p, short e) {\n  T ret= p + 1;\n  while (e-- > 1) ret*= p;\n  return\
+    \ ret;\n }\n static std::vector<T> poly() { return {1, 1}; }\n};\n}  // namespace\
+    \ multiplicative_functions\nnamespace additive_functions {\ntemplate <class T>\
+    \ struct BigOmega {  // the total number of prime factors of n\n static constexpr\
+    \ T f(uint64_t, short e) { return e; }\n static std::vector<T> poly() { return\
+    \ {1}; }\n};\ntemplate <class T> struct LittleOmega {  // the total number of\
+    \ different prime factors of n\n static constexpr T f(uint64_t, short) { return\
+    \ 1; }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate <class T>\
+    \ struct Sopfr {  // the sum of primes dividing n counting multiplicity\n static\
+    \ constexpr T f(uint64_t p, short e) { return p * e; }\n static std::vector<T>\
+    \ poly() { return {0, 1}; }\n};\ntemplate <class T> struct Sopf {  // the sum\
+    \ of the distinct primes dividing n\n static constexpr T f(uint64_t p, short)\
+    \ { return p; }\n static std::vector<T> poly() { return {0, 1}; }\n};\n}  // namespace\
+    \ additive_functions\n#line 6 \"test/atcoder/abc179_c.mul_sum.test.cpp\"\nusing\
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
+    \ namespace multiplicative_functions;\n long long N;\n cin >> N;\n cout << multiplicative_sum<long\
+    \ long>(N - 1, Divisor<long long, 0>::f, Divisor<long long, 0>::poly()) << '\\\
+    n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n//\
     \ O(N^(2/3)log^(1/3)N))\n#include <iostream>\n#include \"src/Math/prime_count.hpp\"\
     \n#include \"src/Math/multiplicative_and_additive.hpp\"\nusing namespace std;\n\
@@ -110,8 +111,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc179_c.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-08-05 22:03:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-11-21 19:03:34+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.mul_sum.test.cpp
 layout: document

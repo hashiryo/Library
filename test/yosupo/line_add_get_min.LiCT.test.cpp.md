@@ -14,9 +14,9 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/line_add_get_min
@@ -91,20 +91,20 @@ data:
     \ argument_type_t<F>>;\ntemplate <class F> LiChaoTree(F) -> LiChaoTree<F, argument_type_t<F>>;\n\
     #line 4 \"test/yosupo/line_add_get_min.LiCT.test.cpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >>\
-    \ N >> Q;\n LiChaoTree lct([](int x, int a, long long b) { return a * x + b; });\n\
-    \ auto cht= lct.make_tree<MINIMIZE>();\n while (N--) {\n  long long a, b;\n  cin\
-    \ >> a >> b;\n  cht.insert(a, b);\n }\n while (Q--) {\n  bool op;\n  cin >> op;\n\
-    \  if (op) {\n   long long p;\n   cin >> p;\n   cout << cht.query(p).first <<\
-    \ '\\n';\n  } else {\n   long long a, b;\n   cin >> a >> b;\n   cht.insert(a,\
+    \ N >> Q;\n LiChaoTree lct([](int x, long long a, long long b) { return a * x\
+    \ + b; });\n auto cht= lct.make_tree<MINIMIZE>();\n while (N--) {\n  long long\
+    \ a, b;\n  cin >> a >> b;\n  cht.insert(a, b);\n }\n while (Q--) {\n  bool op;\n\
+    \  cin >> op;\n  if (op) {\n   int p;\n   cin >> p;\n   cout << cht.query(p).first\
+    \ << '\\n';\n  } else {\n   long long a, b;\n   cin >> a >> b;\n   cht.insert(a,\
     \ b);\n  }\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\n#include\
     \ <iostream>\n#include \"src/Optimization/LiChaoTree.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >>\
-    \ N >> Q;\n LiChaoTree lct([](int x, int a, long long b) { return a * x + b; });\n\
-    \ auto cht= lct.make_tree<MINIMIZE>();\n while (N--) {\n  long long a, b;\n  cin\
-    \ >> a >> b;\n  cht.insert(a, b);\n }\n while (Q--) {\n  bool op;\n  cin >> op;\n\
-    \  if (op) {\n   long long p;\n   cin >> p;\n   cout << cht.query(p).first <<\
-    \ '\\n';\n  } else {\n   long long a, b;\n   cin >> a >> b;\n   cht.insert(a,\
+    \ N >> Q;\n LiChaoTree lct([](int x, long long a, long long b) { return a * x\
+    \ + b; });\n auto cht= lct.make_tree<MINIMIZE>();\n while (N--) {\n  long long\
+    \ a, b;\n  cin >> a >> b;\n  cht.insert(a, b);\n }\n while (Q--) {\n  bool op;\n\
+    \  cin >> op;\n  if (op) {\n   int p;\n   cin >> p;\n   cout << cht.query(p).first\
+    \ << '\\n';\n  } else {\n   long long a, b;\n   cin >> a >> b;\n   cht.insert(a,\
     \ b);\n  }\n }\n return 0;\n}"
   dependsOn:
   - src/Optimization/LiChaoTree.hpp
@@ -113,8 +113,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/line_add_get_min.LiCT.test.cpp
   requiredBy: []
-  timestamp: '2023-10-31 18:36:36+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-21 19:03:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/line_add_get_min.LiCT.test.cpp
 layout: document

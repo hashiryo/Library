@@ -6,20 +6,20 @@ data:
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/longest_common_substring
+    PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_f
     links:
-    - https://judge.yosupo.jp/problem/longest_common_substring
-  bundledCode: "#line 1 \"test/yosupo/longest_common_substring.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/longest_common_substring\"\n#include\
-    \ <iostream>\n#include <string>\n#line 3 \"src/String/SuffixArray.hpp\"\n#include\
-    \ <vector>\n#include <algorithm>\ntemplate <class String> struct SuffixArray {\n\
-    \ String s;\n std::vector<int> sa;\n static inline std::vector<int> sa_is(const\
-    \ std::vector<int> &s, int K) {\n  const int n= s.size();\n  std::vector<char>\
+    - https://atcoder.jp/contests/abc213/tasks/abc213_f
+  bundledCode: "#line 1 \"test/atcoder/abc213_f.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_f\"\
+    \n\n// \u30ED\u30EA\u30CF\u3067SA\u69CB\u7BC9\u306FTLE\n\n#include <iostream>\n\
+    #include <vector>\n#include <algorithm>\n#include <stack>\n#line 2 \"src/String/SuffixArray.hpp\"\
+    \n#include <string>\n#line 5 \"src/String/SuffixArray.hpp\"\ntemplate <class String>\
+    \ struct SuffixArray {\n String s;\n std::vector<int> sa;\n static inline std::vector<int>\
+    \ sa_is(const std::vector<int> &s, int K) {\n  const int n= s.size();\n  std::vector<char>\
     \ t(n);\n  std::vector<int> bkt(K, 0), bkt_l(K), bkt_r(K), sa(n), p1;\n  t.back()=\
     \ true;\n  for (int i= n; --i;)\n   if (t[i - 1]= (s[i - 1] < s[i] || (t[i] &&\
     \ s[i - 1] == s[i])); t[i] && !t[i - 1]) p1.push_back(i);\n  std::reverse(p1.begin(),\
@@ -75,35 +75,47 @@ data:
     \ {\n  if (i == j) return rnk.size() - i;\n  auto [l, r]= std::minmax(rnk[i],\
     \ rnk[j]);\n  if (r == l + 1) return dat[0][l];\n  int k= 31 - __builtin_clz(r\
     \ - l - 1);\n  return std::min(dat[k][l], dat[k][r - (1 << k)]);\n }\n};\n#line\
-    \ 5 \"test/yosupo/longest_common_substring.test.cpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string S, T;\n cin\
-    \ >> S >> T;\n int N= S.length();\n S+= \"$\" + T;\n SuffixArray sa(S);\n LCPArray\
-    \ lcp(sa);\n int a= 0, c= 0, len= 0;\n for (int i= 0; i + 1 < N; ++i) {\n  int\
-    \ x= sa[i], y= sa[i + 1];\n  if (x > y) swap(x, y);\n  if (x < N && N < y && len\
-    \ < lcp[i]) {\n   len= lcp[i];\n   a= x, c= y - N - 1;\n  }\n }\n cout << a <<\
-    \ \" \" << a + len << \" \" << c << \" \" << c + len << \"\\n\";\n return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/longest_common_substring\"\
-    \n#include <iostream>\n#include <string>\n#include \"src/String/SuffixArray.hpp\"\
+    \ 10 \"test/atcoder/abc213_f.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n cin >> N;\n string S;\n cin\
+    \ >> S;\n SuffixArray sa(S);\n LCPArray lcp(sa);\n vector<long long> B(N), C(N);\n\
+    \ stack<pair<long long, int>> stb, stc;\n for (int i= 1; i < N; ++i) {\n  int\
+    \ cnt= 1;\n  B[i]= B[i - 1];\n  while (stb.size()) {\n   auto [h, c]= stb.top();\n\
+    \   if (h < lcp[i - 1]) break;\n   stb.pop();\n   cnt+= c;\n   B[i]-= h * c;\n\
+    \  }\n  B[i]+= (long long)lcp[i - 1] * cnt;\n  stb.emplace(lcp[i - 1], cnt);\n\
+    \ }\n for (int i= N; --i;) {\n  int cnt= 1;\n  C[i - 1]= C[i];\n  while (stc.size())\
+    \ {\n   auto [h, c]= stc.top();\n   if (h < lcp[i - 1]) break;\n   stc.pop();\n\
+    \   cnt+= c;\n   C[i - 1]-= h * c;\n  }\n  C[i - 1]+= (long long)lcp[i - 1] *\
+    \ cnt;\n  stc.emplace(lcp[i - 1], cnt);\n }\n vector<long long> ans(N);\n for\
+    \ (int i= 0; i < N; ++i) {\n  int j= sa[i];\n  ans[j]= B[i] + C[i] + N - j;\n\
+    \ }\n for (int i= 0; i < N; ++i) cout << ans[i] << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_f\"\n\n\
+    // \u30ED\u30EA\u30CF\u3067SA\u69CB\u7BC9\u306FTLE\n\n#include <iostream>\n#include\
+    \ <vector>\n#include <algorithm>\n#include <stack>\n#include \"src/String/SuffixArray.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ string S, T;\n cin >> S >> T;\n int N= S.length();\n S+= \"$\" + T;\n SuffixArray\
-    \ sa(S);\n LCPArray lcp(sa);\n int a= 0, c= 0, len= 0;\n for (int i= 0; i + 1\
-    \ < N; ++i) {\n  int x= sa[i], y= sa[i + 1];\n  if (x > y) swap(x, y);\n  if (x\
-    \ < N && N < y && len < lcp[i]) {\n   len= lcp[i];\n   a= x, c= y - N - 1;\n \
-    \ }\n }\n cout << a << \" \" << a + len << \" \" << c << \" \" << c + len << \"\
-    \\n\";\n return 0;\n}"
+    \ int N;\n cin >> N;\n string S;\n cin >> S;\n SuffixArray sa(S);\n LCPArray lcp(sa);\n\
+    \ vector<long long> B(N), C(N);\n stack<pair<long long, int>> stb, stc;\n for\
+    \ (int i= 1; i < N; ++i) {\n  int cnt= 1;\n  B[i]= B[i - 1];\n  while (stb.size())\
+    \ {\n   auto [h, c]= stb.top();\n   if (h < lcp[i - 1]) break;\n   stb.pop();\n\
+    \   cnt+= c;\n   B[i]-= h * c;\n  }\n  B[i]+= (long long)lcp[i - 1] * cnt;\n \
+    \ stb.emplace(lcp[i - 1], cnt);\n }\n for (int i= N; --i;) {\n  int cnt= 1;\n\
+    \  C[i - 1]= C[i];\n  while (stc.size()) {\n   auto [h, c]= stc.top();\n   if\
+    \ (h < lcp[i - 1]) break;\n   stc.pop();\n   cnt+= c;\n   C[i - 1]-= h * c;\n\
+    \  }\n  C[i - 1]+= (long long)lcp[i - 1] * cnt;\n  stc.emplace(lcp[i - 1], cnt);\n\
+    \ }\n vector<long long> ans(N);\n for (int i= 0; i < N; ++i) {\n  int j= sa[i];\n\
+    \  ans[j]= B[i] + C[i] + N - j;\n }\n for (int i= 0; i < N; ++i) cout << ans[i]\
+    \ << '\\n';\n return 0;\n}"
   dependsOn:
   - src/String/SuffixArray.hpp
   isVerificationFile: true
-  path: test/yosupo/longest_common_substring.test.cpp
+  path: test/atcoder/abc213_f.test.cpp
   requiredBy: []
   timestamp: '2023-11-21 19:03:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/longest_common_substring.test.cpp
+documentation_of: test/atcoder/abc213_f.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/longest_common_substring.test.cpp
-- /verify/test/yosupo/longest_common_substring.test.cpp.html
-title: test/yosupo/longest_common_substring.test.cpp
+- /verify/test/atcoder/abc213_f.test.cpp
+- /verify/test/atcoder/abc213_f.test.cpp.html
+title: test/atcoder/abc213_f.test.cpp
 ---
