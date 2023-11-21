@@ -112,12 +112,12 @@ data:
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 2 \"src/Math/DirichletSeries.hpp\"\n#include <vector>\n\
     #include <algorithm>\n#include <cmath>\n#line 6 \"src/Math/DirichletSeries.hpp\"\
-    \n#include <numeric>\ntemplate <class T> struct DirichletSeries {\n using Self=\
-    \ DirichletSeries;\n uint64_t N;  // <= K * L\n size_t K;\n // x: i (1 <= i <=\
-    \ K), Xl : 1+2+...+\u230AN/i\u230B (1 <= i <= L)\n std::vector<T> x, Xs, Xl;\n\
-    \ DirichletSeries(uint64_t N, const std::vector<T> &x, const std::vector<T> &Xs,\
-    \ const std::vector<T> &Xl): N(N), K(x.size() - 1), x(x), Xs(Xs), Xl(Xl) { assert(K\
-    \ + 1 == Xs.size()), assert(N < uint64_t(K) * Xl.size()); }\n DirichletSeries(uint64_t\
+    \n#include <numeric>\n#include <cstdint>\ntemplate <class T> struct DirichletSeries\
+    \ {\n using Self= DirichletSeries;\n uint64_t N;  // <= K * L\n size_t K;\n //\
+    \ x: i (1 <= i <= K), Xl : 1+2+...+\u230AN/i\u230B (1 <= i <= L)\n std::vector<T>\
+    \ x, Xs, Xl;\n DirichletSeries(uint64_t N, const std::vector<T> &x, const std::vector<T>\
+    \ &Xs, const std::vector<T> &Xl): N(N), K(x.size() - 1), x(x), Xs(Xs), Xl(Xl)\
+    \ { assert(K + 1 == Xs.size()), assert(N < uint64_t(K) * Xl.size()); }\n DirichletSeries(uint64_t\
     \ N, bool unit= false): N(N), K(N > 1 ? std::max(std::ceil(std::pow((double)N\
     \ / std::log2(N), 2. / 3)), std::sqrt(N) + 1) : 1) {\n  if (assert(N > 0), x.resize(K\
     \ + 1), Xs.resize(K + 1), Xl.resize(size_t(double(N - 1 + K) / K) + 1); unit)\
@@ -246,7 +246,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
+  timestamp: '2023-11-21 15:50:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp

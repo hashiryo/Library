@@ -6,31 +6,32 @@ data:
     title: Z-Algorithm
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
+    PROBLEM: https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
     links:
-    - https://judge.yosupo.jp/problem/zalgorithm
-  bundledCode: "#line 1 \"test/yosupo/z_algorithm.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\
-    \n#include <iostream>\n#include <string>\n#include <vector>\n#line 3 \"src/String/z_algorithm.hpp\"\
-    \n#include <algorithm>\n#line 5 \"src/String/z_algorithm.hpp\"\n#include <tuple>\n\
-    template <class String> std::vector<int> z_algorithm(const String &s) {\n const\
-    \ int n= s.size();\n if (n == 0) return {};\n std::vector<int> z(n);\n for (int\
-    \ i= 1, j= 0; i < n; ++i) {\n  int &k= z[i];\n  for (k= (j + z[j] <= i) ? 0 :\
-    \ std::min(j + z[j] - i, z[i - j]); i + k < n && s[k] == s[i + k];) ++k;\n  if\
-    \ (j + z[j] < i + z[i]) j= i;\n }\n return z[0]= n, z;\n}\nstd::vector<int> z_to_kmp(const\
-    \ std::vector<int> &z) {\n const int n= z.size();\n std::vector<int> kmp(n + 1);\n\
-    \ kmp[0]= -1;\n for (int i= n; --i;) kmp[i + z[i]]= std::max(kmp[i + z[i]], z[i]);\n\
-    \ for (int i= n; i--;) kmp[i]= std::max(kmp[i], kmp[i + 1] - 1);\n return kmp;\n\
-    }\nnamespace string_internal {\ntemplate <class String> auto run_enumerate_(const\
-    \ String &s, typename String::value_type a= 0) {\n using Run= std::tuple<int,\
-    \ int, int>;\n std::vector<Run> glb;\n auto rec= [&](auto rec, int l, int r) ->\
-    \ std::vector<Run> {\n  if (r - l <= 1) return {};\n  const int m= (l + r) / 2,\
-    \ lsz= m - l, rsz= r - m;\n  std::vector<Run> run_l= lsz > 1 ? rec(rec, l, m)\
-    \ : std::vector<Run>(), run_r= rsz > 1 ? rec(rec, m, r) : std::vector<Run>();\n\
+    - https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B
+  bundledCode: "#line 1 \"test/aoj/ALDS1_14_B.zalgo.test.cpp\"\n#define PROBLEM \"\
+    https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\n#include\
+    \ <iostream>\n#include <string>\n#line 2 \"src/String/z_algorithm.hpp\"\n#include\
+    \ <vector>\n#include <algorithm>\n#line 5 \"src/String/z_algorithm.hpp\"\n#include\
+    \ <tuple>\ntemplate <class String> std::vector<int> z_algorithm(const String &s)\
+    \ {\n const int n= s.size();\n if (n == 0) return {};\n std::vector<int> z(n);\n\
+    \ for (int i= 1, j= 0; i < n; ++i) {\n  int &k= z[i];\n  for (k= (j + z[j] <=\
+    \ i) ? 0 : std::min(j + z[j] - i, z[i - j]); i + k < n && s[k] == s[i + k];) ++k;\n\
+    \  if (j + z[j] < i + z[i]) j= i;\n }\n return z[0]= n, z;\n}\nstd::vector<int>\
+    \ z_to_kmp(const std::vector<int> &z) {\n const int n= z.size();\n std::vector<int>\
+    \ kmp(n + 1);\n kmp[0]= -1;\n for (int i= n; --i;) kmp[i + z[i]]= std::max(kmp[i\
+    \ + z[i]], z[i]);\n for (int i= n; i--;) kmp[i]= std::max(kmp[i], kmp[i + 1] -\
+    \ 1);\n return kmp;\n}\nnamespace string_internal {\ntemplate <class String> auto\
+    \ run_enumerate_(const String &s, typename String::value_type a= 0) {\n using\
+    \ Run= std::tuple<int, int, int>;\n std::vector<Run> glb;\n auto rec= [&](auto\
+    \ rec, int l, int r) -> std::vector<Run> {\n  if (r - l <= 1) return {};\n  const\
+    \ int m= (l + r) / 2, lsz= m - l, rsz= r - m;\n  std::vector<Run> run_l= lsz >\
+    \ 1 ? rec(rec, l, m) : std::vector<Run>(), run_r= rsz > 1 ? rec(rec, m, r) : std::vector<Run>();\n\
     \  std::vector<typename String::value_type> rl(r - l + 1, a);\n  std::copy(s.begin()\
     \ + m, s.begin() + r, rl.begin()), std::copy(s.begin() + l, s.begin() + m, rl.begin()\
     \ + rsz + 1);\n  std::vector<int> zrl= z_algorithm(rl);\n  std::reverse(rl.begin(),\
@@ -66,28 +67,29 @@ data:
     \ i--;) t[i]= std::lower_bound(v.begin(), v.end(), s[i]) - v.begin();\n return\
     \ run_enumerate_(t, v.size() + 1);\n}\nauto run_enumerate(const std::string &s)\
     \ { return run_enumerate_(s); }\n}\nusing string_internal::run_enumerate;\n#line\
-    \ 6 \"test/yosupo/z_algorithm.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string s;\n cin >> s;\n vector<int>\
-    \ ans= z_algorithm(s);\n int N= s.length();\n for (int i= 0; i < N; i++) cout\
-    \ << ans[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n#include\
-    \ <iostream>\n#include <string>\n#include <vector>\n#include \"src/String/z_algorithm.hpp\"\
+    \ 5 \"test/aoj/ALDS1_14_B.zalgo.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string T, P;\n cin >> T >> P;\n\
+    \ int n= P.size(), m= T.size();\n P+= '$' + T;\n auto Z= z_algorithm(P);\n for\
+    \ (int i= n + 1; i <= m + n; ++i)\n  if (Z[i] == n) cout << i - n - 1 << '\\n';\n\
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
+    \n#include <iostream>\n#include <string>\n#include \"src/String/z_algorithm.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ string s;\n cin >> s;\n vector<int> ans= z_algorithm(s);\n int N= s.length();\n\
-    \ for (int i= 0; i < N; i++) cout << ans[i] << \" \\n\"[i == N - 1];\n return\
-    \ 0;\n}"
+    \ string T, P;\n cin >> T >> P;\n int n= P.size(), m= T.size();\n P+= '$' + T;\n\
+    \ auto Z= z_algorithm(P);\n for (int i= n + 1; i <= m + n; ++i)\n  if (Z[i] ==\
+    \ n) cout << i - n - 1 << '\\n';\n return 0;\n}"
   dependsOn:
   - src/String/z_algorithm.hpp
   isVerificationFile: true
-  path: test/yosupo/z_algorithm.test.cpp
+  path: test/aoj/ALDS1_14_B.zalgo.test.cpp
   requiredBy: []
   timestamp: '2023-11-21 15:50:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yosupo/z_algorithm.test.cpp
+documentation_of: test/aoj/ALDS1_14_B.zalgo.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yosupo/z_algorithm.test.cpp
-- /verify/test/yosupo/z_algorithm.test.cpp.html
-title: test/yosupo/z_algorithm.test.cpp
+- /verify/test/aoj/ALDS1_14_B.zalgo.test.cpp
+- /verify/test/aoj/ALDS1_14_B.zalgo.test.cpp.html
+title: test/aoj/ALDS1_14_B.zalgo.test.cpp
 ---

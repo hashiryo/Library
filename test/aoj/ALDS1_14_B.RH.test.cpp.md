@@ -179,7 +179,7 @@ data:
     \ RH= RollingHash<K>;\n RH::init({rng(), rng()});\n string T, P;\n cin >> T >>\
     \ P;\n RH rt(T), rp(P);\n int N= P.length(), M= T.length();\n auto hash= rp.hash();\n\
     \ for (int i= 0; i + N <= M; i++)\n  if (rt.sub(i, N).hash() == hash) cout <<\
-    \ i << \"\\n\";\n return 0;\n}\n"
+    \ i << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
     \n#include <iostream>\n#include <string>\n#include \"src/Math/ModInt.hpp\"\n#include\
     \ \"src/Math/CartesianProduct.hpp\"\n#include \"src/Misc/rng.hpp\"\n#include \"\
@@ -188,7 +188,7 @@ data:
     \ Mint>;\n using RH= RollingHash<K>;\n RH::init({rng(), rng()});\n string T, P;\n\
     \ cin >> T >> P;\n RH rt(T), rp(P);\n int N= P.length(), M= T.length();\n auto\
     \ hash= rp.hash();\n for (int i= 0; i + N <= M; i++)\n  if (rt.sub(i, N).hash()\
-    \ == hash) cout << i << \"\\n\";\n return 0;\n}"
+    \ == hash) cout << i << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -200,7 +200,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.RH.test.cpp
   requiredBy: []
-  timestamp: '2023-11-17 14:39:53+09:00'
+  timestamp: '2023-11-21 15:50:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.RH.test.cpp

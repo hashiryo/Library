@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.Dirichlet.test.cpp
     title: test/atcoder/abc179_c.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.Dirichlet.test.cpp
     title: test/atcoder/arc116_c.Dirichlet.test.cpp
   - icon: ':x:'
@@ -27,12 +27,12 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/DirichletSeries.hpp\"\n#include <vector>\n#include\
-    \ <algorithm>\n#include <cmath>\n#include <cassert>\n#include <numeric>\ntemplate\
-    \ <class T> struct DirichletSeries {\n using Self= DirichletSeries;\n uint64_t\
-    \ N;  // <= K * L\n size_t K;\n // x: i (1 <= i <= K), Xl : 1+2+...+\u230AN/i\u230B\
-    \ (1 <= i <= L)\n std::vector<T> x, Xs, Xl;\n DirichletSeries(uint64_t N, const\
-    \ std::vector<T> &x, const std::vector<T> &Xs, const std::vector<T> &Xl): N(N),\
-    \ K(x.size() - 1), x(x), Xs(Xs), Xl(Xl) { assert(K + 1 == Xs.size()), assert(N\
+    \ <algorithm>\n#include <cmath>\n#include <cassert>\n#include <numeric>\n#include\
+    \ <cstdint>\ntemplate <class T> struct DirichletSeries {\n using Self= DirichletSeries;\n\
+    \ uint64_t N;  // <= K * L\n size_t K;\n // x: i (1 <= i <= K), Xl : 1+2+...+\u230A\
+    N/i\u230B (1 <= i <= L)\n std::vector<T> x, Xs, Xl;\n DirichletSeries(uint64_t\
+    \ N, const std::vector<T> &x, const std::vector<T> &Xs, const std::vector<T> &Xl):\
+    \ N(N), K(x.size() - 1), x(x), Xs(Xs), Xl(Xl) { assert(K + 1 == Xs.size()), assert(N\
     \ < uint64_t(K) * Xl.size()); }\n DirichletSeries(uint64_t N, bool unit= false):\
     \ N(N), K(N > 1 ? std::max(std::ceil(std::pow((double)N / std::log2(N), 2. / 3)),\
     \ std::sqrt(N) + 1) : 1) {\n  if (assert(N > 0), x.resize(K + 1), Xs.resize(K\
@@ -145,17 +145,17 @@ data:
     \ }\n// |\xB5|, zeta(s)/zeta(2s), O(N^(2/3)log^(1/3)N))\ntemplate <class T> DirichletSeries<T>\
     \ get_absmu(uint64_t N) { return get_1<T>(N)/= get_1sq<T>(N); }\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <cmath>\n\
-    #include <cassert>\n#include <numeric>\ntemplate <class T> struct DirichletSeries\
-    \ {\n using Self= DirichletSeries;\n uint64_t N;  // <= K * L\n size_t K;\n //\
-    \ x: i (1 <= i <= K), Xl : 1+2+...+\u230AN/i\u230B (1 <= i <= L)\n std::vector<T>\
-    \ x, Xs, Xl;\n DirichletSeries(uint64_t N, const std::vector<T> &x, const std::vector<T>\
-    \ &Xs, const std::vector<T> &Xl): N(N), K(x.size() - 1), x(x), Xs(Xs), Xl(Xl)\
-    \ { assert(K + 1 == Xs.size()), assert(N < uint64_t(K) * Xl.size()); }\n DirichletSeries(uint64_t\
-    \ N, bool unit= false): N(N), K(N > 1 ? std::max(std::ceil(std::pow((double)N\
-    \ / std::log2(N), 2. / 3)), std::sqrt(N) + 1) : 1) {\n  if (assert(N > 0), x.resize(K\
-    \ + 1), Xs.resize(K + 1), Xl.resize(size_t(double(N - 1 + K) / K) + 1); unit)\
-    \ x[1]= 1, std::fill(Xl.begin() + 1, Xl.end(), 1), std::fill(Xs.begin() + 1, Xs.end(),\
-    \ 1);\n }\n template <class F, std::enable_if_t<std::is_convertible_v<std::invoke_result_t<F,\
+    #include <cassert>\n#include <numeric>\n#include <cstdint>\ntemplate <class T>\
+    \ struct DirichletSeries {\n using Self= DirichletSeries;\n uint64_t N;  // <=\
+    \ K * L\n size_t K;\n // x: i (1 <= i <= K), Xl : 1+2+...+\u230AN/i\u230B (1 <=\
+    \ i <= L)\n std::vector<T> x, Xs, Xl;\n DirichletSeries(uint64_t N, const std::vector<T>\
+    \ &x, const std::vector<T> &Xs, const std::vector<T> &Xl): N(N), K(x.size() -\
+    \ 1), x(x), Xs(Xs), Xl(Xl) { assert(K + 1 == Xs.size()), assert(N < uint64_t(K)\
+    \ * Xl.size()); }\n DirichletSeries(uint64_t N, bool unit= false): N(N), K(N >\
+    \ 1 ? std::max(std::ceil(std::pow((double)N / std::log2(N), 2. / 3)), std::sqrt(N)\
+    \ + 1) : 1) {\n  if (assert(N > 0), x.resize(K + 1), Xs.resize(K + 1), Xl.resize(size_t(double(N\
+    \ - 1 + K) / K) + 1); unit) x[1]= 1, std::fill(Xl.begin() + 1, Xl.end(), 1), std::fill(Xs.begin()\
+    \ + 1, Xs.end(), 1);\n }\n template <class F, std::enable_if_t<std::is_convertible_v<std::invoke_result_t<F,\
     \ uint64_t>, T>, std::nullptr_t> = nullptr> DirichletSeries(uint64_t N, const\
     \ F &sum): DirichletSeries(N) {\n  for (size_t i= Xs.size(); --i;) Xs[i]= sum(i);\n\
     \  for (size_t i= x.size(); --i;) x[i]= Xs[i] - Xs[i - 1];\n  for (size_t i= Xl.size();\
@@ -265,7 +265,7 @@ data:
   isVerificationFile: false
   path: src/Math/DirichletSeries.hpp
   requiredBy: []
-  timestamp: '2023-05-16 15:13:34+09:00'
+  timestamp: '2023-11-21 15:50:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp

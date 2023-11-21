@@ -77,19 +77,19 @@ data:
     using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ string T, P;\n cin >> T >> P;\n SuffixArray sa(T);\n auto [l, r]= sa.pattern_matching(P);\n\
     \ vector<int> ans(sa.begin() + l, sa.begin() + r);\n sort(ans.begin(), ans.end());\n\
-    \ for (auto a: ans) cout << a << \"\\n\";\n return 0;\n}\n"
+    \ for (auto a: ans) cout << a << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/14/ALDS1_14_B\"\
     \n#include <iostream>\n#include <string>\n#include \"src/String/SuffixArray.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ string T, P;\n cin >> T >> P;\n SuffixArray sa(T);\n auto [l, r]= sa.pattern_matching(P);\n\
     \ vector<int> ans(sa.begin() + l, sa.begin() + r);\n sort(ans.begin(), ans.end());\n\
-    \ for (auto a: ans) cout << a << \"\\n\";\n return 0;\n}"
+    \ for (auto a: ans) cout << a << '\\n';\n return 0;\n}"
   dependsOn:
   - src/String/SuffixArray.hpp
   isVerificationFile: true
   path: test/aoj/ALDS1_14_B.SA.test.cpp
   requiredBy: []
-  timestamp: '2023-11-21 13:51:34+09:00'
+  timestamp: '2023-11-21 15:50:22+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_14_B.SA.test.cpp

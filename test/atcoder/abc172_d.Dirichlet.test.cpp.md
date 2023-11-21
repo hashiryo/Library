@@ -18,54 +18,54 @@ data:
     \ \"https://atcoder.jp/contests/abc172/tasks/abc172_d\"\n// O(N^(2/3)log^(1/3)N))\n\
     #include <iostream>\n#line 2 \"src/Math/DirichletSeries.hpp\"\n#include <vector>\n\
     #include <algorithm>\n#include <cmath>\n#include <cassert>\n#include <numeric>\n\
-    template <class T> struct DirichletSeries {\n using Self= DirichletSeries;\n uint64_t\
-    \ N;  // <= K * L\n size_t K;\n // x: i (1 <= i <= K), Xl : 1+2+...+\u230AN/i\u230B\
-    \ (1 <= i <= L)\n std::vector<T> x, Xs, Xl;\n DirichletSeries(uint64_t N, const\
-    \ std::vector<T> &x, const std::vector<T> &Xs, const std::vector<T> &Xl): N(N),\
-    \ K(x.size() - 1), x(x), Xs(Xs), Xl(Xl) { assert(K + 1 == Xs.size()), assert(N\
-    \ < uint64_t(K) * Xl.size()); }\n DirichletSeries(uint64_t N, bool unit= false):\
-    \ N(N), K(N > 1 ? std::max(std::ceil(std::pow((double)N / std::log2(N), 2. / 3)),\
-    \ std::sqrt(N) + 1) : 1) {\n  if (assert(N > 0), x.resize(K + 1), Xs.resize(K\
-    \ + 1), Xl.resize(size_t(double(N - 1 + K) / K) + 1); unit) x[1]= 1, std::fill(Xl.begin()\
-    \ + 1, Xl.end(), 1), std::fill(Xs.begin() + 1, Xs.end(), 1);\n }\n template <class\
-    \ F, std::enable_if_t<std::is_convertible_v<std::invoke_result_t<F, uint64_t>,\
-    \ T>, std::nullptr_t> = nullptr> DirichletSeries(uint64_t N, const F &sum): DirichletSeries(N)\
-    \ {\n  for (size_t i= Xs.size(); --i;) Xs[i]= sum(i);\n  for (size_t i= x.size();\
-    \ --i;) x[i]= Xs[i] - Xs[i - 1];\n  for (size_t i= Xl.size(); --i;) Xl[i]= sum(uint64_t((double)N\
-    \ / i));\n }\n Self &operator*=(const T &r) {\n  for (size_t i= x.size(); --i;)\
-    \ x[i]*= r;\n  for (size_t i= Xs.size(); --i;) Xs[i]*= r;\n  for (size_t i= Xl.size();\
-    \ --i;) Xl[i]*= r;\n  return *this;\n }\n Self operator*(const T &r) const { return\
-    \ Self(*this)*= r; }\n Self &operator+=(const Self &r) {\n  assert(N == r.N),\
+    #include <cstdint>\ntemplate <class T> struct DirichletSeries {\n using Self=\
+    \ DirichletSeries;\n uint64_t N;  // <= K * L\n size_t K;\n // x: i (1 <= i <=\
+    \ K), Xl : 1+2+...+\u230AN/i\u230B (1 <= i <= L)\n std::vector<T> x, Xs, Xl;\n\
+    \ DirichletSeries(uint64_t N, const std::vector<T> &x, const std::vector<T> &Xs,\
+    \ const std::vector<T> &Xl): N(N), K(x.size() - 1), x(x), Xs(Xs), Xl(Xl) { assert(K\
+    \ + 1 == Xs.size()), assert(N < uint64_t(K) * Xl.size()); }\n DirichletSeries(uint64_t\
+    \ N, bool unit= false): N(N), K(N > 1 ? std::max(std::ceil(std::pow((double)N\
+    \ / std::log2(N), 2. / 3)), std::sqrt(N) + 1) : 1) {\n  if (assert(N > 0), x.resize(K\
+    \ + 1), Xs.resize(K + 1), Xl.resize(size_t(double(N - 1 + K) / K) + 1); unit)\
+    \ x[1]= 1, std::fill(Xl.begin() + 1, Xl.end(), 1), std::fill(Xs.begin() + 1, Xs.end(),\
+    \ 1);\n }\n template <class F, std::enable_if_t<std::is_convertible_v<std::invoke_result_t<F,\
+    \ uint64_t>, T>, std::nullptr_t> = nullptr> DirichletSeries(uint64_t N, const\
+    \ F &sum): DirichletSeries(N) {\n  for (size_t i= Xs.size(); --i;) Xs[i]= sum(i);\n\
+    \  for (size_t i= x.size(); --i;) x[i]= Xs[i] - Xs[i - 1];\n  for (size_t i= Xl.size();\
+    \ --i;) Xl[i]= sum(uint64_t((double)N / i));\n }\n Self &operator*=(const T &r)\
+    \ {\n  for (size_t i= x.size(); --i;) x[i]*= r;\n  for (size_t i= Xs.size(); --i;)\
+    \ Xs[i]*= r;\n  for (size_t i= Xl.size(); --i;) Xl[i]*= r;\n  return *this;\n\
+    \ }\n Self operator*(const T &r) const { return Self(*this)*= r; }\n Self &operator+=(const\
+    \ Self &r) {\n  assert(N == r.N), assert(K == r.K), assert(Xl.size() == r.Xl.size());\n\
+    \  for (size_t i= x.size(); --i;) x[i]+= r.x[i];\n  for (size_t i= Xs.size();\
+    \ --i;) Xs[i]+= r.Xs[i];\n  for (size_t i= Xl.size(); --i;) Xl[i]+= r.Xl[i];\n\
+    \  return *this;\n }\n Self &operator-=(const Self &r) {\n  assert(N == r.N),\
     \ assert(K == r.K), assert(Xl.size() == r.Xl.size());\n  for (size_t i= x.size();\
-    \ --i;) x[i]+= r.x[i];\n  for (size_t i= Xs.size(); --i;) Xs[i]+= r.Xs[i];\n \
-    \ for (size_t i= Xl.size(); --i;) Xl[i]+= r.Xl[i];\n  return *this;\n }\n Self\
-    \ &operator-=(const Self &r) {\n  assert(N == r.N), assert(K == r.K), assert(Xl.size()\
-    \ == r.Xl.size());\n  for (size_t i= x.size(); --i;) x[i]-= r.x[i];\n  for (size_t\
-    \ i= Xs.size(); --i;) Xs[i]-= r.Xs[i];\n  for (size_t i= Xl.size(); --i;) Xl[i]-=\
-    \ r.Xl[i];\n }\n Self operator+(const Self &r) const { return Self(*this)+= r;\
-    \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator-()\
-    \ const {\n  std::vector<T> a(x.size()), As(Xl.size()), A(Xl.size());\n  for (size_t\
-    \ i= x.size(); --i;) a[i]= -x[i];\n  for (size_t i= Xs.size(); --i;) As[i]= -Xs[i];\n\
-    \  for (size_t i= Xl.size(); --i;) A[i]= -Xl[i];\n  return Self(N, a, As, A);\n\
-    \ }\n Self &operator+=(const T &r) {\n  for (size_t i= Xl.size(); --i;) Xl[i]+=\
-    \ r;\n  for (size_t i= Xs.size(); --i;) Xs[i]+= r;\n  return x[1]+= r, *this;\n\
-    \ }\n Self &operator-=(const T &r) {\n  for (size_t i= Xl.size(); --i;) Xl[i]-=\
-    \ r;\n  for (size_t i= Xs.size(); --i;) Xs[i]-= r;\n  return x[1]-= r, *this;\n\
-    \ }\n Self operator+(const T &r) const { return Self(*this)+= r; }\n Self operator-(const\
-    \ T &r) const { return Self(*this)-= r; }\n friend Self operator+(const T &l,\
-    \ Self r) { return r+= l; }\n friend Self operator-(const T &l, Self r) { return\
-    \ -(r-= l); }\n friend Self operator*(const T &l, Self r) { return r*= l; }\n\
-    \ friend Self operator/(const T &l, Self r) { return (Self(r.N, true)/= r)*= l;\
-    \ }\n Self operator*(const Self &r) const {\n  assert(N == r.N), assert(K == r.K),\
-    \ assert(Xl.size() == r.Xl.size());\n  std::vector<T> c(K + 1), Cs(K + 1), C(Xl.size());\n\
-    \  uint64_t n;\n  for (size_t i= K, j; i; --i)\n   for (j= K / i; j; --j) c[i\
-    \ * j]+= x[i] * r.x[j];\n  for (size_t l= Xl.size(), m, i; --l; C[l]-= sum(m)\
-    \ * r.sum(m))\n   for (i= m= std::sqrt(n= (double)N / l); i; --i) C[l]+= x[i]\
-    \ * r.sum((double)n / i) + r.x[i] * sum((double)n / i);\n  for (size_t i= 1; i\
-    \ <= K; ++i) Cs[i]= Cs[i - 1] + c[i];\n  return Self(N, c, Cs, C);\n }\n Self\
-    \ &operator*=(const Self &r) { return *this= *this * r; }\n Self operator/(const\
-    \ Self &r) const { return Self(*this)/= r; }\n Self &operator/=(const Self &r)\
-    \ {\n  assert(N == r.N), assert(K == r.K), assert(Xl.size() == r.Xl.size());\n\
+    \ --i;) x[i]-= r.x[i];\n  for (size_t i= Xs.size(); --i;) Xs[i]-= r.Xs[i];\n \
+    \ for (size_t i= Xl.size(); --i;) Xl[i]-= r.Xl[i];\n }\n Self operator+(const\
+    \ Self &r) const { return Self(*this)+= r; }\n Self operator-(const Self &r) const\
+    \ { return Self(*this)-= r; }\n Self operator-() const {\n  std::vector<T> a(x.size()),\
+    \ As(Xl.size()), A(Xl.size());\n  for (size_t i= x.size(); --i;) a[i]= -x[i];\n\
+    \  for (size_t i= Xs.size(); --i;) As[i]= -Xs[i];\n  for (size_t i= Xl.size();\
+    \ --i;) A[i]= -Xl[i];\n  return Self(N, a, As, A);\n }\n Self &operator+=(const\
+    \ T &r) {\n  for (size_t i= Xl.size(); --i;) Xl[i]+= r;\n  for (size_t i= Xs.size();\
+    \ --i;) Xs[i]+= r;\n  return x[1]+= r, *this;\n }\n Self &operator-=(const T &r)\
+    \ {\n  for (size_t i= Xl.size(); --i;) Xl[i]-= r;\n  for (size_t i= Xs.size();\
+    \ --i;) Xs[i]-= r;\n  return x[1]-= r, *this;\n }\n Self operator+(const T &r)\
+    \ const { return Self(*this)+= r; }\n Self operator-(const T &r) const { return\
+    \ Self(*this)-= r; }\n friend Self operator+(const T &l, Self r) { return r+=\
+    \ l; }\n friend Self operator-(const T &l, Self r) { return -(r-= l); }\n friend\
+    \ Self operator*(const T &l, Self r) { return r*= l; }\n friend Self operator/(const\
+    \ T &l, Self r) { return (Self(r.N, true)/= r)*= l; }\n Self operator*(const Self\
+    \ &r) const {\n  assert(N == r.N), assert(K == r.K), assert(Xl.size() == r.Xl.size());\n\
+    \  std::vector<T> c(K + 1), Cs(K + 1), C(Xl.size());\n  uint64_t n;\n  for (size_t\
+    \ i= K, j; i; --i)\n   for (j= K / i; j; --j) c[i * j]+= x[i] * r.x[j];\n  for\
+    \ (size_t l= Xl.size(), m, i; --l; C[l]-= sum(m) * r.sum(m))\n   for (i= m= std::sqrt(n=\
+    \ (double)N / l); i; --i) C[l]+= x[i] * r.sum((double)n / i) + r.x[i] * sum((double)n\
+    \ / i);\n  for (size_t i= 1; i <= K; ++i) Cs[i]= Cs[i - 1] + c[i];\n  return Self(N,\
+    \ c, Cs, C);\n }\n Self &operator*=(const Self &r) { return *this= *this * r;\
+    \ }\n Self operator/(const Self &r) const { return Self(*this)/= r; }\n Self &operator/=(const\
+    \ Self &r) {\n  assert(N == r.N), assert(K == r.K), assert(Xl.size() == r.Xl.size());\n\
     \  for (size_t i= 1, j, ed; i <= K; i++)\n   for (x[i]/= r.x[1], j= 2, ed= K /\
     \ i; j <= ed; j++) x[i * j]-= x[i] * r.x[j];\n  for (size_t i= 1; i <= K; ++i)\
     \ Xs[i]= Xs[i - 1] + x[i];\n  uint64_t n;\n  for (size_t l= Xl.size(), m; --l;\
@@ -147,7 +147,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc172_d.Dirichlet.test.cpp
   requiredBy: []
-  timestamp: '2023-05-16 15:13:34+09:00'
+  timestamp: '2023-11-21 15:50:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc172_d.Dirichlet.test.cpp

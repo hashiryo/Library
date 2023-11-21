@@ -199,7 +199,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteMatching.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/CliqueProblem.hpp
       title: "\u30AF\u30EA\u30FC\u30AF\u554F\u984C"
     - icon: ':heavy_check_mark:'
@@ -446,16 +446,13 @@ data:
     - icon: ':question:'
       path: src/String/AhoCorasick.hpp
       title: Aho-Corasick
-    - icon: ':heavy_check_mark:'
-      path: src/String/KnuthMorrisPratt.hpp
-      title: Knuth-Morris-Pratt
     - icon: ':question:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
     - icon: ':x:'
       path: src/String/SuffixArray.hpp
       title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/String/z_algorithm.hpp
       title: Z-Algorithm
   verificationCategories:
@@ -849,14 +846,14 @@ data:
       path: test/aoj/3506.test.cpp
       title: test/aoj/3506.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/aoj/ALDS1_14_B.KMP.test.cpp
-      title: test/aoj/ALDS1_14_B.KMP.test.cpp
-    - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_14_B.RH.test.cpp
       title: test/aoj/ALDS1_14_B.RH.test.cpp
     - icon: ':x:'
       path: test/aoj/ALDS1_14_B.SA.test.cpp
       title: test/aoj/ALDS1_14_B.SA.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/ALDS1_14_B.zalgo.test.cpp
+      title: test/aoj/ALDS1_14_B.zalgo.test.cpp
     - icon: ':x:'
       path: test/aoj/ALDS1_14_D.SA.test.cpp
       title: test/aoj/ALDS1_14_D.SA.test.cpp
@@ -1300,7 +1297,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc116_c.Dirichlet.test.cpp
       title: test/atcoder/arc116_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1549,19 +1546,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/matrix_det.test.cpp
       title: test/yosupo/matrix_det.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/matrix_det_arbitrary_mod.test.cpp
       title: test/yosupo/matrix_det_arbitrary_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/matrix_product.test.cpp
       title: test/yosupo/matrix_product.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/maximum_independent_set.test.cpp
       title: test/yosupo/maximum_independent_set.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/min_cost_b_flow.test.cpp
       title: test/yosupo/min_cost_b_flow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
       title: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
     - icon: ':x:'
