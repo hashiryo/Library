@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/polynomial_composite_set_power_series.test.cpp
     title: test/yosupo/polynomial_composite_set_power_series.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
   - icon: ':x:'

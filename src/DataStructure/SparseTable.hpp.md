@@ -9,12 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_3_D.sparsetable.test.cpp
     title: test/aoj/DSL_3_D.sparsetable.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/staticrmq.SparseTable.test.cpp
     title: test/yosupo/staticrmq.SparseTable.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SparseTable.hpp\"\n#include <vector>\n\
@@ -41,7 +41,7 @@ data:
   path: src/DataStructure/SparseTable.hpp
   requiredBy: []
   timestamp: '2023-11-17 21:21:46+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/staticrmq.SparseTable.test.cpp
   - test/aoj/DSL_3_D.sparsetable.test.cpp

@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_kth_smallest.WM.test.cpp
     title: test/yosupo/range_kth_smallest.WM.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/static_range_frequency.WM.test.cpp
     title: test/yosupo/static_range_frequency.WM.test.cpp
   - icon: ':x:'

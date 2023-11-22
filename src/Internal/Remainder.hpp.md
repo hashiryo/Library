@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/MultiVariateConvolution.hpp
     title: "\u591A\u5909\u6570\u7573\u307F\u8FBC\u307F"
   - icon: ':question:'
@@ -38,13 +38,13 @@ data:
   - icon: ':question:'
     path: src/FFT/fps_inv.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 inv"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/fps_sqrt.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570 sqrt"
   - icon: ':x:'
     path: src/FFT/polynomial_matrix_prod.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u7DCF\u7A4D"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
   - icon: ':question:'
@@ -422,49 +422,49 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
     title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sharp_p_subset_sum.test.cpp
     title: test/yosupo/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/shift_of_FPS.test.cpp
     title: test/yosupo/shift_of_FPS.test.cpp
   - icon: ':x:'
     path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_mod.test.cpp
     title: test/yosupo/sqrt_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_FPS.test.cpp
     title: test/yosupo/sqrt_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sqrt_of_sparse_FPS.test.cpp
     title: test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
   - icon: ':x:'
     path: test/yosupo/stirling_1_small_p_large_n.test.cpp
     title: test/yosupo/stirling_1_small_p_large_n.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/stirling_2.test.cpp
     title: test/yosupo/stirling_2.test.cpp
   - icon: ':x:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.multivar_conv.test.cpp
     title: test/yosupo/subset_convolution.multivar_conv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.test.cpp
     title: test/yosupo/subset_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':x:'
@@ -561,8 +561,8 @@ data:
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/1848.test.zalgo.cpp
-    title: test/yukicoder/1848.test.zalgo.cpp
+    path: test/yukicoder/1848.zalgo.test.cpp
+    title: test/yukicoder/1848.zalgo.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1907.test.cpp
     title: test/yukicoder/1907.test.cpp
@@ -612,6 +612,9 @@ data:
     path: test/yukicoder/502.test.cpp
     title: test/yukicoder/502.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/599.RH.test.cpp
+    title: test/yukicoder/599.RH.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
   - icon: ':x:'
@@ -629,6 +632,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/737.test.cpp
     title: test/yukicoder/737.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/765.RH.test.cpp
+    title: test/yukicoder/765.RH.test.cpp
   - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
@@ -861,6 +867,7 @@ data:
   - test/yukicoder/1276.Dirichlet.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/1533.test.cpp
+  - test/yukicoder/765.RH.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/1269.test.cpp
   - test/yukicoder/963.test.cpp
@@ -885,14 +892,15 @@ data:
   - test/yukicoder/950.test.cpp
   - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/3046.test.cpp
+  - test/yukicoder/1848.zalgo.test.cpp
   - test/yukicoder/1573.Dirichlet.test.cpp
   - test/yukicoder/315.test.cpp
   - test/yukicoder/137.div_at.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1417.test.cpp
+  - test/yukicoder/599.RH.test.cpp
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/2454.RH.test.cpp
-  - test/yukicoder/1848.test.zalgo.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/3030.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp

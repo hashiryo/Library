@@ -51,7 +51,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sparse_matrix_det.test.cpp
     title: test/yosupo/sparse_matrix_det.test.cpp
   - icon: ':x:'
@@ -72,6 +72,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/310.test.cpp
     title: test/yukicoder/310.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/599.RH.test.cpp
+    title: test/yukicoder/599.RH.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/765.RH.test.cpp
+    title: test/yukicoder/765.RH.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -98,9 +104,11 @@ data:
   - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/enumerate_palindromes.RH.test.cpp
+  - test/yukicoder/765.RH.test.cpp
   - test/yukicoder/310.test.cpp
   - test/yukicoder/2332.RH.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
+  - test/yukicoder/599.RH.test.cpp
   - test/yukicoder/2454.RH.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
   - test/aoj/2711.RH.test.cpp

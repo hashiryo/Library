@@ -24,12 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/multivariate_convolution.test.cpp
     title: test/yosupo/multivariate_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/subset_convolution.multivar_conv.test.cpp
     title: test/yosupo/subset_convolution.multivar_conv.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/MultiVariateConvolution.hpp\"\n#include <vector>\n\
@@ -296,7 +296,7 @@ data:
   path: src/FFT/MultiVariateConvolution.hpp
   requiredBy: []
   timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/subset_convolution.multivar_conv.test.cpp
   - test/yosupo/multivariate_convolution.test.cpp

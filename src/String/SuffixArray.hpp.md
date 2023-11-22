@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/number_of_substrings.SA.test.cpp
     title: test/yosupo/number_of_substrings.SA.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/suffixarray.test.cpp
     title: test/yosupo/suffixarray.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/SuffixArray.hpp\"\n#include <string>\n#include\
@@ -152,7 +152,7 @@ data:
   path: src/String/SuffixArray.hpp
   requiredBy: []
   timestamp: '2023-11-22 11:53:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/longest_common_substring.test.cpp
   - test/yosupo/suffixarray.test.cpp

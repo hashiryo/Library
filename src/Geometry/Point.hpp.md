@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/SegmentArrangement.hpp
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/angle.hpp
     title: "\u89D2\u5EA6\u30FB\u56DE\u8EE2\u95A2\u9023"
   - icon: ':heavy_check_mark:'
@@ -267,12 +267,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc296_g.test.cpp
     title: test/atcoder/abc296_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sort_points_by_argument.test.cpp
     title: test/yosupo/sort_points_by_argument.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/Point.hpp\"\n#include <iostream>\n#include\
@@ -410,7 +410,7 @@ data:
   - src/Geometry/Convex.hpp
   - src/Geometry/angle.hpp
   timestamp: '2023-10-10 00:58:36+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sort_points_by_argument.test.cpp
   - test/aoj/2003.longdouble.test.cpp
