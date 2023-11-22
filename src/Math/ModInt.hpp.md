@@ -68,6 +68,12 @@ data:
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0322.RH.test.cpp
+    title: test/aoj/0322.RH.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/0355.test.cpp
+    title: test/aoj/0355.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0570.test.cpp
     title: test/aoj/0570.test.cpp
   - icon: ':heavy_check_mark:'
@@ -91,6 +97,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2711.RH.test.cpp
     title: test/aoj/2711.RH.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2763.RH.test.cpp
+    title: test/aoj/2763.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2863.test.cpp
     title: test/aoj/2863.test.cpp
@@ -406,49 +415,49 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/tree_path_composite_sum.test.cpp
     title: test/yosupo/tree_path_composite_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1260.test.cpp
     title: test/yukicoder/1260.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1276.Dirichlet.test.cpp
     title: test/yukicoder/1276.Dirichlet.test.cpp
   - icon: ':x:'
@@ -865,8 +874,10 @@ data:
   - test/aoj/DPL_5_B.test.cpp
   - test/aoj/DPL_5_D.test.cpp
   - test/aoj/2711.RH.test.cpp
+  - test/aoj/0322.RH.test.cpp
   - test/aoj/NTL_2_E.test.cpp
   - test/aoj/NTL_2_D.test.cpp
+  - test/aoj/2763.RH.test.cpp
   - test/aoj/2397.test.cpp
   - test/aoj/ALDS1_14_B.RH.test.cpp
   - test/aoj/2863.test.cpp
@@ -876,6 +887,7 @@ data:
   - test/aoj/2530.test.cpp
   - test/aoj/NTL_2_C.test.cpp
   - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/0355.test.cpp
   - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_A.test.cpp
   - test/aoj/0570.test.cpp

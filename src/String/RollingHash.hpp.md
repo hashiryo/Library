@@ -4,11 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0322.RH.test.cpp
+    title: test/aoj/0322.RH.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2614.RH.test.cpp
     title: test/aoj/2614.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2711.RH.test.cpp
     title: test/aoj/2711.RH.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2763.RH.test.cpp
+    title: test/aoj/2763.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.RH.test.cpp
     title: test/aoj/ALDS1_14_B.RH.test.cpp
@@ -30,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
   - icon: ':x:'
@@ -144,6 +150,8 @@ data:
   - test/yukicoder/599.RH.test.cpp
   - test/yukicoder/2454.RH.test.cpp
   - test/aoj/2711.RH.test.cpp
+  - test/aoj/0322.RH.test.cpp
+  - test/aoj/2763.RH.test.cpp
   - test/aoj/ALDS1_14_B.RH.test.cpp
   - test/aoj/2614.RH.test.cpp
   - test/atcoder/abc272_f.RH.test.cpp

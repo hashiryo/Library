@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/runenumerate.zalgo.test.cpp
     title: test/yosupo/runenumerate.zalgo.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.test.cpp
     title: test/yosupo/z_algorithm.test.cpp
   - icon: ':x:'

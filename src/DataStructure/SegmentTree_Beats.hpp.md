@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/0355.test.cpp
+    title: test/aoj/0355.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
     title: test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - icon: ':heavy_check_mark:'
@@ -100,6 +103,7 @@ data:
   - test/yukicoder/880.Beats.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/1270.test.cpp
+  - test/aoj/0355.test.cpp
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Beats.hpp
 layout: document
