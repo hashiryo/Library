@@ -85,7 +85,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WeightBalancedTree.hpp
       title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - name: src/FFT
@@ -1123,7 +1123,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1543,7 +1543,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/log_of_sparse_FPS.test.cpp
       title: test/yosupo/log_of_sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/longest_common_substring.test.cpp
       title: test/yosupo/longest_common_substring.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1594,7 +1594,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_range_sum.BIT.test.cpp
       title: test/yosupo/point_add_range_sum.BIT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
       title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1615,46 +1615,46 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_FPS.test.cpp
       title: test/yosupo/pow_of_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/pow_of_sparse_FPS.test.cpp
       title: test/yosupo/pow_of_sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/primarity_test.test.cpp
       title: test/yosupo/primarity_test.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/primitive_root.test.cpp
       title: test/yosupo/primitive_root.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
       title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
       title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_affine_range_sum.WBT.test.cpp
       title: test/yosupo/range_affine_range_sum.WBT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
       title: test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
       title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/runenumerate.zalgo.test.cpp
       title: test/yosupo/runenumerate.zalgo.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/scc.test.cpp
       title: test/yosupo/scc.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/set_xor_min.DynSeg.test.cpp
       title: test/yosupo/set_xor_min.DynSeg.test.cpp
     - icon: ':x:'
@@ -1969,6 +1969,12 @@ data:
       path: test/yukicoder/2309.test.cpp
       title: test/yukicoder/2309.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/2332.RH.test.cpp
+      title: test/yukicoder/2332.RH.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2332.zalgo.test.cpp
+      title: test/yukicoder/2332.zalgo.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/2342.KDT.test.cpp
       title: test/yukicoder/2342.KDT.test.cpp
     - icon: ':x:'
@@ -1977,6 +1983,12 @@ data:
     - icon: ':x:'
       path: test/yukicoder/235.LCT.test.cpp
       title: test/yukicoder/235.LCT.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2454.RH.test.cpp
+      title: test/yukicoder/2454.RH.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/2454.zalgo.test.cpp
+      title: test/yukicoder/2454.zalgo.test.cpp
     - icon: ':x:'
       path: test/yukicoder/2458.CHT.test.cpp
       title: test/yukicoder/2458.CHT.test.cpp

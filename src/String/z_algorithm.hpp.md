@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.zalgo.test.cpp
     title: test/aoj/ALDS1_14_B.zalgo.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/runenumerate.zalgo.test.cpp
     title: test/yosupo/runenumerate.zalgo.test.cpp
   - icon: ':x:'
@@ -15,6 +15,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1848.test.zalgo.cpp
     title: test/yukicoder/1848.test.zalgo.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2332.zalgo.test.cpp
+    title: test/yukicoder/2332.zalgo.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2454.zalgo.test.cpp
+    title: test/yukicoder/2454.zalgo.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -129,6 +135,8 @@ data:
   verifiedWith:
   - test/yosupo/runenumerate.zalgo.test.cpp
   - test/yosupo/z_algorithm.test.cpp
+  - test/yukicoder/2454.zalgo.test.cpp
+  - test/yukicoder/2332.zalgo.test.cpp
   - test/yukicoder/1848.test.zalgo.cpp
   - test/aoj/ALDS1_14_B.zalgo.test.cpp
 documentation_of: src/String/z_algorithm.hpp

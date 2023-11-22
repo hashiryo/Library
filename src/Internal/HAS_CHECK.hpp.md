@@ -26,7 +26,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/SplayTree.hpp
     title: Splay-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/WeightBalancedTree.hpp
     title: "\u6C38\u7D9AWeight-Balanced-Tree"
   - icon: ':heavy_check_mark:'
@@ -162,16 +162,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/persistent_queue.WBT.test.cpp
     title: test/yosupo/persistent_queue.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
     title: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.DynSeg.test.cpp
     title: test/yosupo/set_xor_min.DynSeg.test.cpp
   - icon: ':x:'

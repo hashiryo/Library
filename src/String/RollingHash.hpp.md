@@ -33,6 +33,12 @@ data:
   - icon: ':x:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2332.RH.test.cpp
+    title: test/yukicoder/2332.RH.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2454.RH.test.cpp
+    title: test/yukicoder/2454.RH.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -127,6 +133,8 @@ data:
   verifiedWith:
   - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/enumerate_palindromes.RH.test.cpp
+  - test/yukicoder/2332.RH.test.cpp
+  - test/yukicoder/2454.RH.test.cpp
   - test/aoj/2711.RH.test.cpp
   - test/aoj/ALDS1_14_B.RH.test.cpp
   - test/aoj/2614.RH.test.cpp

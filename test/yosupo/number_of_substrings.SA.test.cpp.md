@@ -59,26 +59,26 @@ data:
     \ + h;\n   for (int j= 0, e= std::min(n - h, m); j < e; ++j)\n    if (t[j] > P[j])\
     \ return false;\n   return true;\n  };\n  auto L= std::partition_point(sa.begin(),\
     \ sa.end(), f1), R= std::partition_point(L, sa.end(), f2);\n  return {L - sa.begin(),\
-    \ R - sa.begin()};\n }\n};\nclass LCPArray {\n std::vector<int> rnk;\n std::vector<std::vector<int>>\
-    \ dat;\npublic:\n template <class String> LCPArray(const SuffixArray<String> &sa):\
-    \ rnk(sa.size()) {\n  const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n\
-    \ - 2) : 0;\n  dat.resize(log + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n\
-    \  for (int i= n; i--;) rnk[sa[i]]= i;\n  for (int i= 0, h= 0; i < n; ++i) {\n\
-    \   if (rnk[i] == n - 1) {\n    h= 0;\n    continue;\n   }\n   for (int j= sa[rnk[i]\
-    \ + 1]; i + h < n && j + h < n && sa.s[i + h] == sa.s[j + h];) ++h;\n   if ((lcp[rnk[i]]=\
-    \ h)) --h;\n  }\n  for (int i= 0, I= 1, j; i < log; ++i, I<<= 1)\n   for (dat[i\
-    \ + 1].resize(j= dat[i].size() - I); j--;) dat[i + 1][j]= std::min(dat[i][j],\
-    \ dat[i][j + I]);\n }\n int operator[](int i) const { return dat[0][i]; }\n size_t\
-    \ size() const { return dat[0].size(); }\n auto begin() const { return dat[0].begin();\
-    \ }\n auto end() const { return dat[0].end(); }\n int operator()(int i, int j)\
-    \ const {\n  if (i == j) return rnk.size() - i;\n  auto [l, r]= std::minmax(rnk[i],\
+    \ R - sa.begin()};\n }\n};\nstruct LCPArray {\n std::vector<int> rnk;\n template\
+    \ <class String> LCPArray(const SuffixArray<String> &sa): rnk(sa.size()) {\n \
+    \ const int n= sa.size(), log= n > 2 ? 31 - __builtin_clz(n - 2) : 0;\n  dat.resize(log\
+    \ + 1), dat[0].resize(n - 1);\n  auto &lcp= dat[0];\n  for (int i= n; i--;) rnk[sa[i]]=\
+    \ i;\n  for (int i= 0, h= 0; i < n; ++i) {\n   if (rnk[i] == n - 1) {\n    h=\
+    \ 0;\n    continue;\n   }\n   for (int j= sa[rnk[i] + 1]; i + h < n && j + h <\
+    \ n && sa.s[i + h] == sa.s[j + h];) ++h;\n   if ((lcp[rnk[i]]= h)) --h;\n  }\n\
+    \  for (int i= 0, I= 1, j; i < log; ++i, I<<= 1)\n   for (dat[i + 1].resize(j=\
+    \ dat[i].size() - I); j--;) dat[i + 1][j]= std::min(dat[i][j], dat[i][j + I]);\n\
+    \ }\n int operator[](int i) const { return dat[0][i]; }\n size_t size() const\
+    \ { return dat[0].size(); }\n auto begin() const { return dat[0].begin(); }\n\
+    \ auto end() const { return dat[0].end(); }\n int operator()(int i, int j) const\
+    \ {\n  if (i == j) return rnk.size() - i;\n  auto [l, r]= std::minmax(rnk[i],\
     \ rnk[j]);\n  if (r == l + 1) return dat[0][l];\n  int k= 31 - __builtin_clz(r\
-    \ - l - 1);\n  return std::min(dat[k][l], dat[k][r - (1 << k)]);\n }\n};\n#line\
-    \ 5 \"test/yosupo/number_of_substrings.SA.test.cpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string S;\n cin >> S;\n\
-    \ SuffixArray sa(S);\n LCPArray lcp(sa);\n int N= S.length();\n long long ans=\
-    \ (long long)N * (N + 1) / 2;\n for (int i= N; --i;) ans-= lcp[i - 1];\n cout\
-    \ << ans << '\\n';\n return 0;\n}\n"
+    \ - l - 1);\n  return std::min(dat[k][l], dat[k][r - (1 << k)]);\n }\nprivate:\n\
+    \ std::vector<std::vector<int>> dat;\n};\n#line 5 \"test/yosupo/number_of_substrings.SA.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ string S;\n cin >> S;\n SuffixArray sa(S);\n LCPArray lcp(sa);\n int N= S.length();\n\
+    \ long long ans= (long long)N * (N + 1) / 2;\n for (int i= N; --i;) ans-= lcp[i\
+    \ - 1];\n cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\n\
     #include <iostream>\n#include <string>\n#include \"src/String/SuffixArray.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
@@ -90,7 +90,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/number_of_substrings.SA.test.cpp
   requiredBy: []
-  timestamp: '2023-11-21 22:54:11+09:00'
+  timestamp: '2023-11-22 11:53:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/number_of_substrings.SA.test.cpp

@@ -18,9 +18,9 @@ data:
       \u30C8 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -237,23 +237,23 @@ data:
     \ K>>, to_tuple_t<std::array<pos_t, K + K>>>;\n}\nusing kdtree_internal::KDTree;\n\
     #line 7 \"test/yosupo/point_add_rectangle_sum.KDT.test.cpp\"\nusing namespace\
     \ std;\nstruct RSQ {\n using T= long long;\n static T ti() { return 0; }\n static\
-    \ T op(const T &l, const T &r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n int N, Q;\n cin >> N >> Q;\n map<array<int, 2>,\
-    \ int> mp;\n vector<array<int, 4>> query;\n for (int i= 0; i < N; i++) {\n  int\
-    \ x, y, w;\n  cin >> x >> y >> w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0; i <\
-    \ Q; i++) {\n  int op;\n  cin >> op;\n  if (op) {\n   int l, d, r, u;\n   cin\
-    \ >> l >> d >> r >> u;\n   query.push_back({l, d, r, u});\n  } else {\n   int\
-    \ x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1, x, y, w});\n   mp[{x,\
-    \ y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for (int i= 0; i < Q; i++)\
-    \ {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]= query[i];\n   cout << kdt.fold_cuboid(l,\
-    \ r - 1, d, u - 1) << '\\n';\n  } else {\n   auto [_, x, y, w]= query[i];\n  \
-    \ kdt.mul(x, y, w);\n  }\n }\n return 0;\n}\n"
+    \ T op(T l, T r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n map<array<int, 2>, long long> mp;\n vector<array<int,\
+    \ 4>> query;\n for (int i= 0; i < N; i++) {\n  int x, y, w;\n  cin >> x >> y >>\
+    \ w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int op;\n  cin >>\
+    \ op;\n  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >> u;\n   query.push_back({l,\
+    \ d, r, u});\n  } else {\n   int x, y, w;\n   cin >> x >> y >> w;\n   query.push_back({-1,\
+    \ x, y, w});\n   mp[{x, y}];\n  }\n }\n KDTree<long long, 2, RSQ> kdt(mp);\n for\
+    \ (int i= 0; i < Q; i++) {\n  if (query[i][0] != -1) {\n   auto [l, d, r, u]=\
+    \ query[i];\n   cout << kdt.fold_cuboid(l, r - 1, d, u - 1) << '\\n';\n  } else\
+    \ {\n   auto [_, x, y, w]= query[i];\n   kdt.mul(x, y, w);\n  }\n }\n return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
     \n#include <iostream>\n#include <map>\n#include <array>\n#include <vector>\n#include\
     \ \"src/DataStructure/KDTree.hpp\"\nusing namespace std;\nstruct RSQ {\n using\
-    \ T= long long;\n static T ti() { return 0; }\n static T op(const T &l, const\
-    \ T &r) { return l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int N, Q;\n cin >> N >> Q;\n map<array<int, 2>, int> mp;\n vector<array<int,\
+    \ T= long long;\n static T ti() { return 0; }\n static T op(T l, T r) { return\
+    \ l + r; }\n};\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ int N, Q;\n cin >> N >> Q;\n map<array<int, 2>, long long> mp;\n vector<array<int,\
     \ 4>> query;\n for (int i= 0; i < N; i++) {\n  int x, y, w;\n  cin >> x >> y >>\
     \ w;\n  mp[{x, y}]+= w;\n }\n for (int i= 0; i < Q; i++) {\n  int op;\n  cin >>\
     \ op;\n  if (op) {\n   int l, d, r, u;\n   cin >> l >> d >> r >> u;\n   query.push_back({l,\
@@ -271,8 +271,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-04 15:35:02+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-22 11:53:03+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/point_add_rectangle_sum.KDT.test.cpp
 layout: document

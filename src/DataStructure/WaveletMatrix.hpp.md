@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc324_g.WM.test.cpp
     title: test/atcoder/abc324_g.WM.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_kth_smallest.WM.test.cpp
     title: test/yosupo/range_kth_smallest.WM.test.cpp
   - icon: ':x:'

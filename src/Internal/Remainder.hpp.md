@@ -401,25 +401,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_FPS.test.cpp
     title: test/yosupo/pow_of_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/pow_of_sparse_FPS.test.cpp
     title: test/yosupo/pow_of_sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/primarity_test.test.cpp
     title: test/yosupo/primarity_test.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
     title: test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':x:'
@@ -579,6 +579,9 @@ data:
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/2332.RH.test.cpp
+    title: test/yukicoder/2332.RH.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
   - icon: ':x:'
@@ -587,6 +590,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/235.LCT.test.cpp
     title: test/yukicoder/235.LCT.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2454.RH.test.cpp
+    title: test/yukicoder/2454.RH.test.cpp
   - icon: ':x:'
     path: test/yukicoder/3030.test.cpp
     title: test/yukicoder/3030.test.cpp
@@ -862,6 +868,7 @@ data:
   - test/yukicoder/310.test.cpp
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/2122.test.cpp
+  - test/yukicoder/2332.RH.test.cpp
   - test/yukicoder/1750.test.cpp
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/650.LCT.test.cpp
@@ -884,6 +891,7 @@ data:
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/1417.test.cpp
   - test/yukicoder/1075.test.cpp
+  - test/yukicoder/2454.RH.test.cpp
   - test/yukicoder/1848.test.zalgo.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/3030.test.cpp

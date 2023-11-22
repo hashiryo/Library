@@ -22,10 +22,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc256_f.DynSeg.test.cpp
     title: test/atcoder/abc256_f.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
     title: test/yosupo/range_affine_range_sum.DynSeg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.DynSeg.test.cpp
     title: test/yosupo/set_xor_min.DynSeg.test.cpp
   - icon: ':x:'

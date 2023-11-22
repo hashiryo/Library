@@ -87,7 +87,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
     title: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
   - icon: ':x:'
@@ -117,6 +117,12 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2332.RH.test.cpp
+    title: test/yukicoder/2332.RH.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2332.zalgo.test.cpp
+    title: test/yukicoder/2332.zalgo.test.cpp
   - icon: ':x:'
     path: test/yukicoder/2458.CHT.test.cpp
     title: test/yukicoder/2458.CHT.test.cpp
@@ -186,6 +192,8 @@ data:
   - test/yukicoder/421.weighted_matroid_intersection.test.cpp
   - test/yukicoder/2458.CHT.test.cpp
   - test/yukicoder/421.matroid_intersection.test.cpp
+  - test/yukicoder/2332.RH.test.cpp
+  - test/yukicoder/2332.zalgo.test.cpp
   - test/yukicoder/180.test.cpp
   - test/yukicoder/2012.test.cpp
   - test/yukicoder/704.LiCT.test.cpp
