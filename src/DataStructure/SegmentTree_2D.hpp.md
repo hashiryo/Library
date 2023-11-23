@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
     title: test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
   - icon: ':x:'

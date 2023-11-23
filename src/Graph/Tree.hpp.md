@@ -14,6 +14,9 @@ data:
   - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
+  - icon: ':question:'
+    path: src/String/SuffixTree.hpp
+    title: src/String/SuffixTree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
@@ -37,66 +40,78 @@ data:
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc141_e.SuffixTree.test.cpp
+    title: test/atcoder/abc141_e.SuffixTree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/atcoder/abc213_f.SuffixTree.test.cpp
+    title: test/atcoder/abc213_f.SuffixTree.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
+    title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
+  - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+    title: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+  - icon: ':x:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tree_path_composite_sum.test.cpp
     title: test/yosupo/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1211.test.cpp
     title: test/yukicoder/1211.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1242.test.cpp
     title: test/yukicoder/1242.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
   - icon: ':x:'
@@ -132,6 +147,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2361.SuffixTree.test.cpp
+    title: test/yukicoder/2361.SuffixTree.test.cpp
   - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
@@ -193,38 +211,38 @@ data:
     \ v) const { return D[v]; }\n C depth_w(int v) const {\n  static_assert(weight,\
     \ \"\\'depth_w\\' is not available\");\n  return DW[v];\n }\n int to_seq(int v)\
     \ const { return L[v]; }\n int to_node(int i) const { return I[i]; }\n int parent(int\
-    \ v) const { return P[v]; }\n int root(int v) const {\n  for (v= PP[v];; v= PP[P[v]])\n\
-    \   if (P[v] == -1) return v;\n }\n bool connected(int u, int v) const { return\
-    \ root(u) == root(v); }\n int lca(int u, int v) const {\n  for (;; v= P[PP[v]])\
-    \ {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n\
-    \  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n  for (int u;;\
-    \ k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v]\
-    \ - k];\n }\n int la_w(int v, C w) const {\n  static_assert(weight, \"\\'la_w\\\
-    ' is not available\");\n  for (C c;; w-= c) {\n   int u= PP[v];\n   c= DW[v] -\
-    \ DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while (ok\
-    \ - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
-    \     else ng= m;\n    }\n    return I[ok];\n   }\n   if (v= P[u]; v == -1) return\
-    \ u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return u;\n \
-    \ if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] -\
-    \ D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n\
-    \  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n\
-    \ }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight, \"\\'jump_w\\\
-    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  C d_uz=\
-    \ DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz ? v : w <= d_uz\
-    \ ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int u, int v) const\
-    \ { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u, int v) const {\n\
-    \  static_assert(weight, \"\\'dist_w\\' is not available\");\n  return DW[u] +\
-    \ DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int u, int v)\
-    \ const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const\
-    \ { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2> subtree(int\
-    \ v) const { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const\
-    \ {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n\
-    \   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
-    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
-    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
-    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
-    \ down.rbegin(), down.rend()), up;\n }\n};\n"
+    \ v) const { return P[v]; }\n int head(int v) const { return PP[v]; }\n int root(int\
+    \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
+    \ bool connected(int u, int v) const { return root(u) == root(v); }\n int lca(int\
+    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
+    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
+    \ {\n  assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if\
+    \ (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int la_w(int v, C w) const\
+    \ {\n  static_assert(weight, \"\\'la_w\\' is not available\");\n  for (C c;; w-=\
+    \ c) {\n   int u= PP[v];\n   if (c= DW[v] - DW[u] + W[u]; w < c) {\n    int ok=\
+    \ L[v], ng= L[u] - 1;\n    for (int m; ok - ng > 1;) m= (ok + ng) / 2, (DW[v]\
+    \ - DW[I[m]] <= w ? ok : ng)= m;\n    return I[ok];\n   }\n   if (v= P[u]; v ==\
+    \ -1) return u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
+    \ u;\n  if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v,\
+    \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
+    \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
+    \ d_vw - k);\n }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight,\
+    \ \"\\'jump_w\\' is not available\");\n  if (u == v) return u;\n  int z= lca(u,\
+    \ v);\n  C d_uz= DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz\
+    \ ? v : w <= d_uz ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int\
+    \ u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u,\
+    \ int v) const {\n  static_assert(weight, \"\\'dist_w\\' is not available\");\n\
+    \  return DW[u] + DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int\
+    \ u, int v) const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2>\
+    \ subtree(int v) const { return std::array{L[v], R[v]}; }\n // sequence of closed\
+    \ intervals\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u]\
+    \ != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}),\
+    \ v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n\
+    \  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n \
+    \ else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n\
+    \  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n};\n"
   code: "#pragma once\n#include <type_traits>\n#include <cstddef>\n#include <algorithm>\n\
     #include <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#include\
     \ \"src/DataStructure/CsrArray.hpp\"\ntemplate <class Cost= void, bool weight=\
@@ -266,38 +284,38 @@ data:
     \ v) const { return D[v]; }\n C depth_w(int v) const {\n  static_assert(weight,\
     \ \"\\'depth_w\\' is not available\");\n  return DW[v];\n }\n int to_seq(int v)\
     \ const { return L[v]; }\n int to_node(int i) const { return I[i]; }\n int parent(int\
-    \ v) const { return P[v]; }\n int root(int v) const {\n  for (v= PP[v];; v= PP[P[v]])\n\
-    \   if (P[v] == -1) return v;\n }\n bool connected(int u, int v) const { return\
-    \ root(u) == root(v); }\n int lca(int u, int v) const {\n  for (;; v= P[PP[v]])\
-    \ {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n\
-    \  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n  for (int u;;\
-    \ k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v]\
-    \ - k];\n }\n int la_w(int v, C w) const {\n  static_assert(weight, \"\\'la_w\\\
-    ' is not available\");\n  for (C c;; w-= c) {\n   int u= PP[v];\n   c= DW[v] -\
-    \ DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while (ok\
-    \ - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
-    \     else ng= m;\n    }\n    return I[ok];\n   }\n   if (v= P[u]; v == -1) return\
-    \ u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return u;\n \
-    \ if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] -\
-    \ D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n\
-    \  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n\
-    \ }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight, \"\\'jump_w\\\
-    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  C d_uz=\
-    \ DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz ? v : w <= d_uz\
-    \ ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int u, int v) const\
-    \ { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u, int v) const {\n\
-    \  static_assert(weight, \"\\'dist_w\\' is not available\");\n  return DW[u] +\
-    \ DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int u, int v)\
-    \ const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const\
-    \ { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2> subtree(int\
-    \ v) const { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const\
-    \ {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n\
-    \   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
-    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
-    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
-    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
-    \ down.rbegin(), down.rend()), up;\n }\n};"
+    \ v) const { return P[v]; }\n int head(int v) const { return PP[v]; }\n int root(int\
+    \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
+    \ bool connected(int u, int v) const { return root(u) == root(v); }\n int lca(int\
+    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
+    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
+    \ {\n  assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if\
+    \ (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int la_w(int v, C w) const\
+    \ {\n  static_assert(weight, \"\\'la_w\\' is not available\");\n  for (C c;; w-=\
+    \ c) {\n   int u= PP[v];\n   if (c= DW[v] - DW[u] + W[u]; w < c) {\n    int ok=\
+    \ L[v], ng= L[u] - 1;\n    for (int m; ok - ng > 1;) m= (ok + ng) / 2, (DW[v]\
+    \ - DW[I[m]] <= w ? ok : ng)= m;\n    return I[ok];\n   }\n   if (v= P[u]; v ==\
+    \ -1) return u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
+    \ u;\n  if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v,\
+    \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
+    \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
+    \ d_vw - k);\n }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight,\
+    \ \"\\'jump_w\\' is not available\");\n  if (u == v) return u;\n  int z= lca(u,\
+    \ v);\n  C d_uz= DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz\
+    \ ? v : w <= d_uz ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int\
+    \ u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u,\
+    \ int v) const {\n  static_assert(weight, \"\\'dist_w\\' is not available\");\n\
+    \  return DW[u] + DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int\
+    \ u, int v) const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2>\
+    \ subtree(int v) const { return std::array{L[v], R[v]}; }\n // sequence of closed\
+    \ intervals\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u]\
+    \ != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}),\
+    \ v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n\
+    \  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n \
+    \ else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n\
+    \  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n};"
   dependsOn:
   - src/DataStructure/CsrArray.hpp
   isVerificationFile: false
@@ -306,9 +324,12 @@ data:
   - src/Graph/rerooting.hpp
   - src/Graph/BiConnectedComponents.hpp
   - src/Graph/FunctionalGraph.hpp
-  timestamp: '2023-11-05 12:06:09+09:00'
+  - src/String/SuffixTree.hpp
+  timestamp: '2023-11-24 00:33:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+  - test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
@@ -324,6 +345,7 @@ data:
   - test/yukicoder/922.test.cpp
   - test/yukicoder/1124.test.cpp
   - test/yukicoder/2122.test.cpp
+  - test/yukicoder/2361.SuffixTree.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/yukicoder/1333.test.cpp
@@ -345,6 +367,8 @@ data:
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc179_e.test.cpp
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc136_d.test.cpp
@@ -380,6 +404,7 @@ HL分解＋オイラーツアーで頂点集合を数列に \
 | `to_seq(v)`                                      | 頂点 v がオイラーツアー列で何番目に対応するかを返す                                                               |                               |
 | `to_node(i)`                                     | オイラーツアー列で i 番目が指す頂点を返す                                                                         |                               |
 | `parent(v)`                                      | 頂点 v の親を返す. v が根なら -1                                                                                  |                               |
+| `head(v)`                                      | HL分解における頂点 v の head を返す.  |                               |
 | `root(v)`                                        | 頂点 v が属する木の根を返す                                                                                       |                               |
 | `lca(u,v)`                                       | 頂点 u と 頂点 v の最小共通祖先を返す. u と v が非連結の場合は未定義.                                             |                               |  |
 | `la(v,k)`                                        | 頂点 v から距離 k の祖先頂点を返す. k が頂点 v の深さより大きいと assert で落ちる.                             |                               |

@@ -54,10 +54,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/morgan-and-a-string.RH.test.cpp
+    title: test/hackerrank/morgan-and-a-string.RH.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/save-humanity.RH.test.cpp
+    title: test/hackerrank/save-humanity.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':heavy_check_mark:'
@@ -109,6 +115,8 @@ data:
   timestamp: '2023-11-17 11:57:49+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/save-humanity.RH.test.cpp
+  - test/hackerrank/morgan-and-a-string.RH.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp

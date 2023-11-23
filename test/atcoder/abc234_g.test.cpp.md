@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
     title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
   - icon: ':question:'
@@ -16,14 +16,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc234/tasks/abc234_g
@@ -114,9 +114,9 @@ data:
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\n#line 3 \"src/Misc/CartesianTree.hpp\"\n#include <array>\n\
     class CartesianTree {\n std::vector<std::array<int, 2>> rg, ch;\n std::vector<int>\
-    \ par;\n int rt;\npublic:\n template <class T> CartesianTree(const std::vector<T>&\
-    \ a, bool is_min= 1): rg(a.size()), ch(a.size(), std::array{-1, -1}), par(a.size(),\
-    \ -1) {\n  const int n= a.size();\n  auto comp= [&](int l, int r) { return (is_min\
+    \ par;\n int rt;\npublic:\n template <class Vec> CartesianTree(const Vec &a, bool\
+    \ is_min= 1): rg(a.size()), ch(a.size(), std::array{-1, -1}), par(a.size(), -1)\
+    \ {\n  const int n= a.size();\n  auto comp= [&](int l, int r) { return (is_min\
     \ ? a[l] < a[r] : a[l] > a[r]) || (a[l] == a[r] && l < r); };\n  int st[n], t=\
     \ 0;\n  for (int i= n; i--; rg[i][1]= (t ? st[t - 1] : n), st[t++]= i)\n   while\
     \ (t && comp(i, st[t - 1])) ch[i][1]= st[--t];\n  for (int i= t= 0; i < n; rg[i][0]=\
@@ -165,8 +165,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc234_g.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-11-24 00:33:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc234_g.test.cpp
 layout: document

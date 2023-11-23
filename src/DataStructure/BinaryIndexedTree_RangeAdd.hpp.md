@@ -9,15 +9,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
     title: test/aoj/DSL_2_G.BIT_rangeadd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\n#include\
@@ -48,7 +48,7 @@ data:
   path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
   requiredBy: []
   timestamp: '2023-02-10 13:10:01+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/DSL_2_G.BIT_rangeadd.test.cpp

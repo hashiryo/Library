@@ -33,6 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/morgan-and-a-string.RH.test.cpp
+    title: test/hackerrank/morgan-and-a-string.RH.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/save-humanity.RH.test.cpp
+    title: test/hackerrank/save-humanity.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
@@ -143,6 +149,8 @@ data:
   timestamp: '2023-11-17 14:39:53+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/save-humanity.RH.test.cpp
+  - test/hackerrank/morgan-and-a-string.RH.test.cpp
   - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/enumerate_palindromes.RH.test.cpp
   - test/yukicoder/765.RH.test.cpp
@@ -183,6 +191,7 @@ title: Rolling-Hash
 |`length()`|文字列の長さを返す.|
 |`hash()`|文字列を指すハッシュ値を返す.|
 |`sub(int b,int n)`|部分文字列 $S_{b:b+n}$ に対応する `RollingHash` クラスのインスタンスを返す. |
+|`sub(int b)`|接尾辞 $S_{b:}$ に対応する `RollingHash` クラスのインスタンスを返す. |
 |`to_str()`|文字列に直して`string`で返す. デバッグ用.|
 
 |演算子オーバーロード|概要|計算量|

@@ -203,7 +203,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -242,12 +242,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc105_f.test.cpp
     title: test/atcoder/arc105_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc116_c.Dirichlet.test.cpp
     title: test/atcoder/arc116_c.Dirichlet.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/morgan-and-a-string.RH.test.cpp
+    title: test/hackerrank/morgan-and-a-string.RH.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/save-humanity.RH.test.cpp
+    title: test/hackerrank/save-humanity.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_factors.test.cpp
     title: test/unit_test/constexpr_factors.test.cpp
@@ -428,7 +434,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':heavy_check_mark:'
@@ -488,10 +494,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tree_path_composite_sum.test.cpp
     title: test/yosupo/tree_path_composite_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - icon: ':heavy_check_mark:'
@@ -500,7 +506,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
   - icon: ':heavy_check_mark:'
@@ -509,7 +515,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
   - icon: ':heavy_check_mark:'
@@ -783,6 +789,8 @@ data:
   timestamp: '2023-11-11 11:24:47+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/save-humanity.RH.test.cpp
+  - test/hackerrank/morgan-and-a-string.RH.test.cpp
   - test/yosupo/find_linear_recurrence.test.cpp
   - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/lcm_convolution.test.cpp

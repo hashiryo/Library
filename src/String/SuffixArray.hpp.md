@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':question:'
+    path: src/String/SuffixTree.hpp
+    title: src/String/SuffixTree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2644.test.cpp
     title: test/aoj/2644.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/3112.SA.test.cpp
+    title: test/aoj/3112.SA.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.SA.test.cpp
     title: test/aoj/ALDS1_14_B.SA.test.cpp
@@ -13,8 +19,20 @@ data:
     path: test/aoj/ALDS1_14_D.SA.test.cpp
     title: test/aoj/ALDS1_14_D.SA.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc213_f.test.cpp
-    title: test/atcoder/abc213_f.test.cpp
+    path: test/atcoder/abc141_e.SuffixTree.test.cpp
+    title: test/atcoder/abc141_e.SuffixTree.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc213_f.SA.test.cpp
+    title: test/atcoder/abc213_f.SA.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc213_f.SuffixTree.test.cpp
+    title: test/atcoder/abc213_f.SuffixTree.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
+    title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+    title: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/longest_common_substring.test.cpp
     title: test/yosupo/longest_common_substring.test.cpp
@@ -24,9 +42,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/suffixarray.test.cpp
     title: test/yosupo/suffixarray.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/2361.SuffixTree.test.cpp
+    title: test/yukicoder/2361.SuffixTree.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/SuffixArray.hpp\"\n#include <string>\n#include\
@@ -150,17 +171,24 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: src/String/SuffixArray.hpp
-  requiredBy: []
+  requiredBy:
+  - src/String/SuffixTree.hpp
   timestamp: '2023-11-22 11:53:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+  - test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - test/yosupo/longest_common_substring.test.cpp
   - test/yosupo/suffixarray.test.cpp
   - test/yosupo/number_of_substrings.SA.test.cpp
+  - test/yukicoder/2361.SuffixTree.test.cpp
   - test/aoj/ALDS1_14_D.SA.test.cpp
   - test/aoj/2644.test.cpp
+  - test/aoj/3112.SA.test.cpp
   - test/aoj/ALDS1_14_B.SA.test.cpp
-  - test/atcoder/abc213_f.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/atcoder/abc213_f.SA.test.cpp
+  - test/atcoder/abc213_f.SuffixTree.test.cpp
 documentation_of: src/String/SuffixArray.hpp
 layout: document
 title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"

@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.zalgo.test.cpp
     title: test/aoj/ALDS1_14_B.zalgo.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/cutting-the-string.zalgo.test.cpp
+    title: test/hackerrank/cutting-the-string.zalgo.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/runenumerate.zalgo.test.cpp
     title: test/yosupo/runenumerate.zalgo.test.cpp
@@ -133,6 +136,7 @@ data:
   timestamp: '2023-11-21 15:50:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/cutting-the-string.zalgo.test.cpp
   - test/yosupo/runenumerate.zalgo.test.cpp
   - test/yosupo/z_algorithm.test.cpp
   - test/yukicoder/2454.zalgo.test.cpp

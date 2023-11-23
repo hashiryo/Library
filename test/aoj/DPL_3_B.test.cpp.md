@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
   _extendedRequiredBy: []
@@ -35,7 +35,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DPL_3_B.test.cpp
   requiredBy: []
-  timestamp: '2023-04-16 21:58:58+09:00'
+  timestamp: '2023-11-24 00:33:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_3_B.test.cpp

@@ -12,9 +12,9 @@ data:
     title: "\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc202/tasks/abc202_e
@@ -71,47 +71,48 @@ data:
     \ v) const { return D[v]; }\n C depth_w(int v) const {\n  static_assert(weight,\
     \ \"\\'depth_w\\' is not available\");\n  return DW[v];\n }\n int to_seq(int v)\
     \ const { return L[v]; }\n int to_node(int i) const { return I[i]; }\n int parent(int\
-    \ v) const { return P[v]; }\n int root(int v) const {\n  for (v= PP[v];; v= PP[P[v]])\n\
-    \   if (P[v] == -1) return v;\n }\n bool connected(int u, int v) const { return\
-    \ root(u) == root(v); }\n int lca(int u, int v) const {\n  for (;; v= P[PP[v]])\
-    \ {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n\
-    \  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n  for (int u;;\
-    \ k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v]\
-    \ - k];\n }\n int la_w(int v, C w) const {\n  static_assert(weight, \"\\'la_w\\\
-    ' is not available\");\n  for (C c;; w-= c) {\n   int u= PP[v];\n   c= DW[v] -\
-    \ DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while (ok\
-    \ - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
-    \     else ng= m;\n    }\n    return I[ok];\n   }\n   if (v= P[u]; v == -1) return\
-    \ u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return u;\n \
-    \ if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] -\
-    \ D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n\
-    \  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n\
-    \ }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight, \"\\'jump_w\\\
-    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  C d_uz=\
-    \ DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz ? v : w <= d_uz\
-    \ ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int u, int v) const\
-    \ { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u, int v) const {\n\
-    \  static_assert(weight, \"\\'dist_w\\' is not available\");\n  return DW[u] +\
-    \ DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int u, int v)\
-    \ const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const\
-    \ { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2> subtree(int\
-    \ v) const { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const\
-    \ {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n\
-    \   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
-    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
-    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
-    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
-    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 6 \"src/DataStructure/WaveletMatrix.hpp\"\
-    \ntemplate <class T> class WaveletMatrix {\n struct SuccinctIndexableDictionary\
-    \ {\n  size_t len, blocks, zeros;\n  std::vector<unsigned> bit, sum;\n  SuccinctIndexableDictionary(size_t\
-    \ len): len(len), blocks((len >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n\
-    \  void set(int k) { bit[k >> 5]|= 1U << (k & 31); }\n  void build() {\n   for\
-    \ (size_t i= 1; i < blocks; ++i) sum[i]= sum[i - 1] + __builtin_popcount(bit[i\
-    \ - 1]);\n   zeros= rank0(len);\n  }\n  bool operator[](int k) const { return\
-    \ (bit[k >> 5] >> (k & 31)) & 1; }\n  size_t rank(size_t k) const { return (sum[k\
-    \ >> 5] + __builtin_popcount(bit[k >> 5] & ((1U << (k & 31)) - 1))); }\n  size_t\
-    \ rank0(size_t k) const { return k - rank(k); }\n };\n size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
+    \ v) const { return P[v]; }\n int head(int v) const { return PP[v]; }\n int root(int\
+    \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
+    \ bool connected(int u, int v) const { return root(u) == root(v); }\n int lca(int\
+    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
+    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
+    \ {\n  assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if\
+    \ (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int la_w(int v, C w) const\
+    \ {\n  static_assert(weight, \"\\'la_w\\' is not available\");\n  for (C c;; w-=\
+    \ c) {\n   int u= PP[v];\n   if (c= DW[v] - DW[u] + W[u]; w < c) {\n    int ok=\
+    \ L[v], ng= L[u] - 1;\n    for (int m; ok - ng > 1;) m= (ok + ng) / 2, (DW[v]\
+    \ - DW[I[m]] <= w ? ok : ng)= m;\n    return I[ok];\n   }\n   if (v= P[u]; v ==\
+    \ -1) return u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
+    \ u;\n  if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v,\
+    \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
+    \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
+    \ d_vw - k);\n }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight,\
+    \ \"\\'jump_w\\' is not available\");\n  if (u == v) return u;\n  int z= lca(u,\
+    \ v);\n  C d_uz= DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz\
+    \ ? v : w <= d_uz ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int\
+    \ u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u,\
+    \ int v) const {\n  static_assert(weight, \"\\'dist_w\\' is not available\");\n\
+    \  return DW[u] + DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int\
+    \ u, int v) const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2>\
+    \ subtree(int v) const { return std::array{L[v], R[v]}; }\n // sequence of closed\
+    \ intervals\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u]\
+    \ != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}),\
+    \ v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n\
+    \  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n \
+    \ else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n\
+    \  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n};\n#line\
+    \ 6 \"src/DataStructure/WaveletMatrix.hpp\"\ntemplate <class T> class WaveletMatrix\
+    \ {\n struct SuccinctIndexableDictionary {\n  size_t len, blocks, zeros;\n  std::vector<unsigned>\
+    \ bit, sum;\n  SuccinctIndexableDictionary(size_t len): len(len), blocks((len\
+    \ >> 5) + 1), bit(blocks, 0), sum(blocks, 0) {}\n  void set(int k) { bit[k >>\
+    \ 5]|= 1U << (k & 31); }\n  void build() {\n   for (size_t i= 1; i < blocks; ++i)\
+    \ sum[i]= sum[i - 1] + __builtin_popcount(bit[i - 1]);\n   zeros= rank0(len);\n\
+    \  }\n  bool operator[](int k) const { return (bit[k >> 5] >> (k & 31)) & 1; }\n\
+    \  size_t rank(size_t k) const { return (sum[k >> 5] + __builtin_popcount(bit[k\
+    \ >> 5] & ((1U << (k & 31)) - 1))); }\n  size_t rank0(size_t k) const { return\
+    \ k - rank(k); }\n };\n size_t len, lg;\n std::vector<SuccinctIndexableDictionary>\
     \ mat;\n std::vector<T> vec;\npublic:\n WaveletMatrix(const std::vector<T> &v):\
     \ len(v.size()), lg(len ? 32 - __builtin_clz(len) : 1), mat(lg, len), vec(v) {\n\
     \  std::sort(vec.begin(), vec.end()), vec.erase(std::unique(vec.begin(), vec.end()),\
@@ -158,8 +159,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc202_e.test.cpp
   requiredBy: []
-  timestamp: '2023-11-16 23:12:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-11-24 00:33:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc202_e.test.cpp
 layout: document

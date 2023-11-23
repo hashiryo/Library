@@ -15,10 +15,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
   - icon: ':x:'
@@ -79,52 +79,52 @@ data:
     \ v) const { return D[v]; }\n C depth_w(int v) const {\n  static_assert(weight,\
     \ \"\\'depth_w\\' is not available\");\n  return DW[v];\n }\n int to_seq(int v)\
     \ const { return L[v]; }\n int to_node(int i) const { return I[i]; }\n int parent(int\
-    \ v) const { return P[v]; }\n int root(int v) const {\n  for (v= PP[v];; v= PP[P[v]])\n\
-    \   if (P[v] == -1) return v;\n }\n bool connected(int u, int v) const { return\
-    \ root(u) == root(v); }\n int lca(int u, int v) const {\n  for (;; v= P[PP[v]])\
-    \ {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v]) return u;\n\
-    \  }\n }\n int la(int v, int k) const {\n  assert(k <= D[v]);\n  for (int u;;\
-    \ k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]]) return I[L[v]\
-    \ - k];\n }\n int la_w(int v, C w) const {\n  static_assert(weight, \"\\'la_w\\\
-    ' is not available\");\n  for (C c;; w-= c) {\n   int u= PP[v];\n   c= DW[v] -\
-    \ DW[u] + W[u];\n   if (w < c) {\n    int ok= L[v], ng= L[u] - 1;\n    while (ok\
-    \ - ng > 1) {\n     if (int m= (ok + ng) / 2; DW[v] - DW[I[m]] <= w) ok= m;\n\
-    \     else ng= m;\n    }\n    return I[ok];\n   }\n   if (v= P[u]; v == -1) return\
-    \ u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return u;\n \
-    \ if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v, D[v] -\
-    \ D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n\
-    \  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n\
-    \ }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight, \"\\'jump_w\\\
-    ' is not available\");\n  if (u == v) return u;\n  int z= lca(u, v);\n  C d_uz=\
-    \ DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz ? v : w <= d_uz\
-    \ ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int u, int v) const\
-    \ { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u, int v) const {\n\
-    \  static_assert(weight, \"\\'dist_w\\' is not available\");\n  return DW[u] +\
-    \ DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int u, int v)\
-    \ const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int v) const\
-    \ { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2> subtree(int\
-    \ v) const { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n\
-    \ template <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const\
-    \ {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n\
-    \   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
-    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
-    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
-    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
-    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 3 \"src/Graph/BiConnectedComponents.hpp\"\
-    \nclass BiConnectedComponents {\n const size_t n;\n std::vector<std::pair<int,\
-    \ int>> E;\npublic:\n BiConnectedComponents(int n): n(n) {}\n void add_edge(int\
-    \ u, int v) { E.emplace_back(u, v); }\n Tree<void> block_cut_tree() const {\n\
-    \  std::vector<int> pos(n + 1), g(E.size() * 2);\n  for (auto [u, v]: E) ++pos[u],\
-    \ ++pos[v];\n  std::partial_sum(pos.begin(), pos.end(), pos.begin());\n  for (auto\
-    \ [u, v]: E) g[--pos[u]]= v, g[--pos[v]]= u;\n  std::vector<int> ord(n), par(n,\
-    \ -2), dat(pos.begin(), pos.begin() + n);\n  int k= 0;\n  for (int s= 0, p; s\
-    \ < n; ++s)\n   if (par[s] == -2)\n    for (par[p= s]= -1; p >= 0;) {\n     if\
-    \ (dat[p] == pos[p]) ord[k++]= p;\n     if (dat[p] == pos[p + 1]) {\n      p=\
-    \ par[p];\n      continue;\n     }\n     if (int q= g[dat[p]++]; par[q] == -2)\
-    \ par[q]= p, p= q;\n    }\n  for (int i= n; i--;) dat[ord[i]]= i;\n  auto low=\
-    \ dat;\n  for (int v= n; v--;)\n   for (int j= pos[v]; j < pos[v + 1]; ++j) low[v]=\
-    \ std::min(low[v], dat[g[j]]);\n  for (int i= n; i--;)\n   if (int p= ord[i],\
-    \ pp= par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  std::vector<std::pair<int,\
+    \ v) const { return P[v]; }\n int head(int v) const { return PP[v]; }\n int root(int\
+    \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
+    \ bool connected(int u, int v) const { return root(u) == root(v); }\n int lca(int\
+    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
+    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
+    \ {\n  assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if\
+    \ (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int la_w(int v, C w) const\
+    \ {\n  static_assert(weight, \"\\'la_w\\' is not available\");\n  for (C c;; w-=\
+    \ c) {\n   int u= PP[v];\n   if (c= DW[v] - DW[u] + W[u]; w < c) {\n    int ok=\
+    \ L[v], ng= L[u] - 1;\n    for (int m; ok - ng > 1;) m= (ok + ng) / 2, (DW[v]\
+    \ - DW[I[m]] <= w ? ok : ng)= m;\n    return I[ok];\n   }\n   if (v= P[u]; v ==\
+    \ -1) return u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
+    \ u;\n  if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v,\
+    \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
+    \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
+    \ d_vw - k);\n }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight,\
+    \ \"\\'jump_w\\' is not available\");\n  if (u == v) return u;\n  int z= lca(u,\
+    \ v);\n  C d_uz= DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz\
+    \ ? v : w <= d_uz ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int\
+    \ u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u,\
+    \ int v) const {\n  static_assert(weight, \"\\'dist_w\\' is not available\");\n\
+    \  return DW[u] + DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int\
+    \ u, int v) const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2>\
+    \ subtree(int v) const { return std::array{L[v], R[v]}; }\n // sequence of closed\
+    \ intervals\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
+    \ u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u]\
+    \ != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}),\
+    \ v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n\
+    \  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n \
+    \ else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n\
+    \  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n};\n#line\
+    \ 3 \"src/Graph/BiConnectedComponents.hpp\"\nclass BiConnectedComponents {\n const\
+    \ size_t n;\n std::vector<std::pair<int, int>> E;\npublic:\n BiConnectedComponents(int\
+    \ n): n(n) {}\n void add_edge(int u, int v) { E.emplace_back(u, v); }\n Tree<void>\
+    \ block_cut_tree() const {\n  std::vector<int> pos(n + 1), g(E.size() * 2);\n\
+    \  for (auto [u, v]: E) ++pos[u], ++pos[v];\n  std::partial_sum(pos.begin(), pos.end(),\
+    \ pos.begin());\n  for (auto [u, v]: E) g[--pos[u]]= v, g[--pos[v]]= u;\n  std::vector<int>\
+    \ ord(n), par(n, -2), dat(pos.begin(), pos.begin() + n);\n  int k= 0;\n  for (int\
+    \ s= 0, p; s < n; ++s)\n   if (par[s] == -2)\n    for (par[p= s]= -1; p >= 0;)\
+    \ {\n     if (dat[p] == pos[p]) ord[k++]= p;\n     if (dat[p] == pos[p + 1]) {\n\
+    \      p= par[p];\n      continue;\n     }\n     if (int q= g[dat[p]++]; par[q]\
+    \ == -2) par[q]= p, p= q;\n    }\n  for (int i= n; i--;) dat[ord[i]]= i;\n  auto\
+    \ low= dat;\n  for (int v= n; v--;)\n   for (int j= pos[v]; j < pos[v + 1]; ++j)\
+    \ low[v]= std::min(low[v], dat[g[j]]);\n  for (int i= n; i--;)\n   if (int p=\
+    \ ord[i], pp= par[p]; pp >= 0) low[pp]= std::min(low[pp], low[p]);\n  std::vector<std::pair<int,\
     \ int>> es;\n  for (int p: ord)\n   if (par[p] >= 0) {\n    if (int pp= par[p];\
     \ low[p] < dat[pp]) es.emplace_back(low[p]= low[pp], p);\n    else es.emplace_back(k,\
     \ pp), es.emplace_back(k, p), low[p]= k++;\n   }\n  for (int s= n; s--;)\n   if\
@@ -155,7 +155,7 @@ data:
   isVerificationFile: false
   path: src/Graph/BiConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2023-11-05 12:06:09+09:00'
+  timestamp: '2023-11-24 00:33:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/bonnie-and-clyde.test.cpp

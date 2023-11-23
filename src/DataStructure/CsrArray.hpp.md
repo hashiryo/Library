@@ -29,6 +29,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
+  - icon: ':question:'
+    path: src/String/SuffixTree.hpp
+    title: src/String/SuffixTree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0273.test.cpp
@@ -79,84 +82,96 @@ data:
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc141_e.SuffixTree.test.cpp
+    title: test/atcoder/abc141_e.SuffixTree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/atcoder/abc213_f.SuffixTree.test.cpp
+    title: test/atcoder/abc213_f.SuffixTree.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
+    title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
+  - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+    title: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+  - icon: ':x:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/lca.HLD.test.cpp
     title: test/yosupo/lca.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/scc.test.cpp
     title: test/yosupo/scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/tree_path_composite_sum.test.cpp
     title: test/yosupo/tree_path_composite_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/two_sat.test.cpp
     title: test/yosupo/two_sat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1170.test.cpp
     title: test/yukicoder/1170.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1211.test.cpp
     title: test/yukicoder/1211.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1242.test.cpp
     title: test/yukicoder/1242.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1293.scc.test.cpp
     title: test/yukicoder/1293.scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
   - icon: ':x:'
@@ -202,6 +217,9 @@ data:
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/2361.SuffixTree.test.cpp
+    title: test/yukicoder/2361.SuffixTree.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
   - icon: ':x:'
@@ -244,9 +262,12 @@ data:
   - src/Graph/Tree.hpp
   - src/Math/TwoSatisfiability.hpp
   - src/Geometry/SegmentArrangement.hpp
+  - src/String/SuffixTree.hpp
   timestamp: '2023-04-15 19:40:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/hackerrank/string-function-calculation.SuffixTree.test.cpp
+  - test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - test/yosupo/scc.test.cpp
@@ -269,6 +290,7 @@ data:
   - test/yukicoder/1124.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1745.test.cpp
+  - test/yukicoder/2361.SuffixTree.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/yukicoder/1333.test.cpp
@@ -300,6 +322,8 @@ data:
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
   - test/atcoder/abc179_e.test.cpp
   - test/atcoder/abc222_f.test.cpp

@@ -2,14 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
-    title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
-  - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
+    path: src/Math/CartesianProduct.hpp
+    title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\\
+      times\\cdots\\times K_n$)"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -17,8 +18,11 @@ data:
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'
-    path: src/Misc/CartesianTree.hpp
-    title: Cartesian-Tree
+    path: src/Misc/rng.hpp
+    title: "\u7591\u4F3C\u4E71\u6570"
+  - icon: ':question:'
+    path: src/String/RollingHash.hpp
+    title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -26,11 +30,12 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/arc115/tasks/arc115_e
+    PROBLEM: https://www.hackerrank.com/challenges/save-humanity
     links:
-    - https://atcoder.jp/contests/arc115/tasks/arc115_e
-  bundledCode: "#line 1 \"test/atcoder/arc115_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/arc115/tasks/arc115_e\"\
-    \n#include <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
+    - https://www.hackerrank.com/challenges/save-humanity
+  bundledCode: "#line 1 \"test/hackerrank/save-humanity.RH.test.cpp\"\n#define PROBLEM\
+    \ \"https://www.hackerrank.com/challenges/save-humanity\"\n#include <iostream>\n\
+    #include <string>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
     \ <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline Int\
     \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
     \ y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b),\
@@ -112,65 +117,105 @@ data:
     \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Misc/CartesianTree.hpp\"\n#include <array>\n\
-    class CartesianTree {\n std::vector<std::array<int, 2>> rg, ch;\n std::vector<int>\
-    \ par;\n int rt;\npublic:\n template <class Vec> CartesianTree(const Vec &a, bool\
-    \ is_min= 1): rg(a.size()), ch(a.size(), std::array{-1, -1}), par(a.size(), -1)\
-    \ {\n  const int n= a.size();\n  auto comp= [&](int l, int r) { return (is_min\
-    \ ? a[l] < a[r] : a[l] > a[r]) || (a[l] == a[r] && l < r); };\n  int st[n], t=\
-    \ 0;\n  for (int i= n; i--; rg[i][1]= (t ? st[t - 1] : n), st[t++]= i)\n   while\
-    \ (t && comp(i, st[t - 1])) ch[i][1]= st[--t];\n  for (int i= t= 0; i < n; rg[i][0]=\
-    \ (t ? st[t - 1] + 1 : 0), st[t++]= i++)\n   while (t && comp(i, st[t - 1])) ch[i][0]=\
-    \ st[--t];\n  for (int i= 0; i < n; ++i)\n   for (int b= 2; b--;)\n    if (ch[i][b]\
-    \ != -1) par[ch[i][b]]= i;\n  for (int i= 0; i < n; ++i)\n   if (par[i] == -1)\
-    \ rt= i;\n }\n std::array<int, 2> children(int i) const { return ch[i]; }\n int\
-    \ parent(int i) const { return par[i]; }\n int root() const { return rt; }\n //\
-    \ [l,r)\n std::array<int, 2> range(int i) const { return rg[i]; }\n};\n#line 3\
-    \ \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\ntemplate <typename T>\
-    \ class BinaryIndexedTree_RangeAdd {\n std::vector<T> dat1, dat2;\npublic:\n BinaryIndexedTree_RangeAdd(int\
-    \ n): dat1(n + 1, T()), dat2(n + 1, T()) {}\n void add_range(int l, int r, T w)\
-    \ {  // add w [l,r)\n  int n= dat1.size();\n  for (int k= l + 1; k < n; k+= k\
-    \ & -k) dat1[k]-= w * l;\n  for (int k= r + 1; k < n; k+= k & -k) dat1[k]+= w\
-    \ * r;\n  for (int k= l + 1; k < n; k+= k & -k) dat2[k]+= w;\n  for (int k= r\
-    \ + 1; k < n; k+= k & -k) dat2[k]-= w;\n }\n T sum(int x) const {  // sum [0,x)\n\
-    \  T s= 0;\n  for (int k= x; k; k&= k - 1) s+= dat2[k];\n  s*= x;\n  for (int\
-    \ k= x; k; k&= k - 1) s+= dat1[k];\n  return s;\n }\n T sum(int l, int r) const\
-    \ { return sum(r) - sum(l); }  // sum [l,r)\n T operator[](size_t k) const { return\
-    \ sum(k + 1) - sum(k); }\n};\n#line 7 \"test/atcoder/arc115_e.test.cpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
-    \ Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<int> A(N);\n for (int\
-    \ i= 0; i < N; ++i) cin >> A[i];\n CartesianTree ct(A);\n array dp{BinaryIndexedTree_RangeAdd<Mint>(N\
-    \ + 1), BinaryIndexedTree_RangeAdd<Mint>(N + 1)};\n dp[0].add_range(0, 1, 1);\n\
-    \ for (int i= 0; i < N; ++i) {\n  auto [l, r]= ct.range(i);\n  for (int b= 0;\
-    \ b < 2; ++b) dp[!b].add_range(i + 1, r + 1, dp[b].sum(l, i + 1) * A[i]);\n }\n\
-    \ bool b= N & 1;\n cout << dp[b][N] - dp[!b][N] << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/arc115/tasks/arc115_e\"\n#include\
-    \ <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"\
-    src/Misc/CartesianTree.hpp\"\n#include \"src/DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\
+    \ return dat[n];\n}\n#line 2 \"src/Math/CartesianProduct.hpp\"\n#include <tuple>\n\
+    #include <array>\n#include <utility>\ntemplate <class... Ks> struct CartesianProduct:\
+    \ std::tuple<Ks...> {\n static constexpr int N= sizeof...(Ks);\n using Self= CartesianProduct;\n\
+    \ using std::tuple<Ks...>::tuple;\n template <class T> CartesianProduct(const\
+    \ T &v) { fill(v, std::make_index_sequence<N>()); }\n template <class T, std::size_t...\
+    \ I> std::array<int, N> fill(const T &v, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)=\
+    \ v), 0)...}}; }\n#define HELPER(name, op) \\\n template <std::size_t... I> std::array<int,\
+    \ N> name(const Self &y, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)\
+    \ op##= std::get<I>(y)), 0)...}}; } \\\n Self &operator op##=(const Self &r) {\
+    \ return name(r, std::make_index_sequence<N>()), *this; }\n HELPER(add_assign,\
+    \ +)\n HELPER(dif_assign, -)\n HELPER(mul_assign, *)\n HELPER(div_assign, /)\n\
+    #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
+    \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
+    \ Self &r) const { return Self(*this)*= r; }\n Self operator/(const Self &r) const\
+    \ { return Self(*this)/= r; }\n};\n#line 6 \"src/String/RollingHash.hpp\"\ntemplate\
+    \ <class K, class Int= int> class RollingHash {\npublic:\n static inline std::vector<K>\
+    \ pw, hsh;\n static inline K bs;\n static inline std::vector<Int> str;\n static\
+    \ inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n   for (pw.resize(n\
+    \ + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n RollingHash(int\
+    \ b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int ok, int\
+    \ ng, const C &check) {\n  for (int x; ng - ok > 1;) x= (ok + ng) / 2, (check(x)\
+    \ ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
+    \ std::array<RollingHash, I> &v) {\n  K ret= 0;\n  for (int i= 0; i < I; ++i)\
+    \ ret= ret * pw[v[i].n] + v[i].hash();\n  return ret;\n }\npublic:\n static void\
+    \ init(K b) { bs= b, pw.assign(1, 1), hsh.assign(1, 0); }\n static K base_pow(int\
+    \ i) { return set_pw(i), pw[i]; }\n RollingHash()= default;\n RollingHash(const\
+    \ std::vector<Int> &v): bg(hsh.size() - 1), n(v.size()) {\n  str.insert(str.end(),\
+    \ v.begin(), v.end()), set_pw(n), hsh.resize(bg + n + 1);\n  for (int i= 0; i\
+    \ < n; ++i) hsh[bg + i + 1]= hsh[bg + i] * bs + v[i];\n }\n RollingHash(const\
+    \ std::string &s): RollingHash(std::vector<Int>(s.begin(), s.end())) {}\n inline\
+    \ size_t length() const { return n; }\n inline K hash() const { return hsh[bg\
+    \ + n] - hsh[bg] * pw[n]; }\n RollingHash sub(int b, int m) const {\n  assert(b\
+    \ + m <= n), assert(m >= 0);\n  return {bg + b, m};\n }\n RollingHash sub(int\
+    \ b) const {\n  assert(b <= n);\n  return {bg + b, n - b};\n }\n template <class...\
+    \ Args> friend std::enable_if_t<std::conjunction_v<std::is_same<Args, RollingHash>...>,\
+    \ K> concat_hash(const Args &...rh) { return concat(std::array{rh...}); }\n friend\
+    \ int lcp(const RollingHash &l, const RollingHash &r) {\n  return bin_srch(0,\
+    \ std::min(l.n, r.n) + 1, [&](int x) { return l.sub(0, x) == r.sub(0, x); });\n\
+    \ }\n friend int lcs(const RollingHash &l, const RollingHash &r) {\n  return bin_srch(0,\
+    \ std::min(l.n, r.n) + 1, [&](int x) { return l.sub(l.n - x) == r.sub(r.n - x);\
+    \ });\n }\n bool operator==(const RollingHash &r) const { return hash() == r.hash();\
+    \ }\n bool operator!=(const RollingHash &r) const { return !(*this == r); }\n\
+    \ bool operator<(const RollingHash &r) const {\n  int k= lcp(*this, r);\n  return\
+    \ k == std::min(n, r.n) ? n < r.n : str[bg + k] < str[r.bg + k];\n }\n friend\
+    \ bool concat_cmp(const RollingHash &l, const RollingHash &r) {\n  int k= lcp(l,\
+    \ r);\n  if (l.n < r.n) {\n   if (k < l.n) return str[l.bg + k] < str[r.bg + k];\n\
+    \   if (k= lcp(r, r.sub(l.n)); k < r.n - l.n) return str[r.bg + k] < str[r.bg\
+    \ + l.n + k];\n   if (k= lcp(r.sub(r.n - l.n), l); k < l.n) return str[r.bg +\
+    \ r.n - l.n + k] < str[l.bg + k];\n  } else {\n   if (k < r.n) return str[l.bg\
+    \ + k] < str[r.bg + k];\n   if (k= lcp(l.sub(r.n), l); k < l.n - r.n) return str[l.bg\
+    \ + r.n + k] < str[l.bg + k];\n   if (k= lcp(r, l.sub(l.n - r.n)); k < r.n) return\
+    \ str[r.bg + k] < str[l.bg + l.n - r.n + k];\n  }\n  return false;\n }\n std::string\
+    \ to_str() const {  // for debug\n  std::string ret;\n  for (int i= bg; i < bg\
+    \ + n; ++i) ret+= (char)str[i];\n  return ret;\n }\n};\n#line 2 \"src/Misc/rng.hpp\"\
+    \n#include <random>\n#include <cstdint>\nuint64_t rng() {\n static uint64_t x=\
+    \ 10150724397891781847ULL * std::random_device{}();\n return x^= x << 7, x^= x\
+    \ >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
+    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 9 \"test/hackerrank/save-humanity.RH.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<int> A(N);\n for\
-    \ (int i= 0; i < N; ++i) cin >> A[i];\n CartesianTree ct(A);\n array dp{BinaryIndexedTree_RangeAdd<Mint>(N\
-    \ + 1), BinaryIndexedTree_RangeAdd<Mint>(N + 1)};\n dp[0].add_range(0, 1, 1);\n\
-    \ for (int i= 0; i < N; ++i) {\n  auto [l, r]= ct.range(i);\n  for (int b= 0;\
-    \ b < 2; ++b) dp[!b].add_range(i + 1, r + 1, dp[b].sum(l, i + 1) * A[i]);\n }\n\
-    \ bool b= N & 1;\n cout << dp[b][N] - dp[!b][N] << '\\n';\n return 0;\n}"
+    \ using Mint= ModInt<998244353>;\n using K= CartesianProduct<Mint, Mint>;\n using\
+    \ RH= RollingHash<K>;\n RH::init({rng(), rng()});\n int t;\n cin >> t;\n auto\
+    \ check= [&](RH a, RH b) {\n  int l= lcp(a, b);\n  return l == b.length() || a.sub(l\
+    \ + 1) == b.sub(l + 1);\n };\n while (t--) {\n  string p, v;\n  cin >> p >> v;\n\
+    \  RH rhp(p), rhv(v);\n  int n= p.size(), m= v.size();\n  vector<int> ans;\n \
+    \ for (int i= 0; i + m <= n; ++i)\n   if (check(rhp.sub(i, m), rhv)) ans.push_back(i);\n\
+    \  if (ans.empty()) cout << \"No Match!\" << '\\n';\n  else\n   for (int i= 0,\
+    \ e= ans.size(); i < e; ++i) cout << ans[i] << \" \\n\"[i + 1 == e];\n }\n return\
+    \ 0;\n}\n"
+  code: "#define PROBLEM \"https://www.hackerrank.com/challenges/save-humanity\"\n\
+    #include <iostream>\n#include <string>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\
+    \n#include \"src/Math/CartesianProduct.hpp\"\n#include \"src/String/RollingHash.hpp\"\
+    \n#include \"src/Misc/rng.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n using K= CartesianProduct<Mint,\
+    \ Mint>;\n using RH= RollingHash<K>;\n RH::init({rng(), rng()});\n int t;\n cin\
+    \ >> t;\n auto check= [&](RH a, RH b) {\n  int l= lcp(a, b);\n  return l == b.length()\
+    \ || a.sub(l + 1) == b.sub(l + 1);\n };\n while (t--) {\n  string p, v;\n  cin\
+    \ >> p >> v;\n  RH rhp(p), rhv(v);\n  int n= p.size(), m= v.size();\n  vector<int>\
+    \ ans;\n  for (int i= 0; i + m <= n; ++i)\n   if (check(rhp.sub(i, m), rhv)) ans.push_back(i);\n\
+    \  if (ans.empty()) cout << \"No Match!\" << '\\n';\n  else\n   for (int i= 0,\
+    \ e= ans.size(); i < e; ++i) cout << ans[i] << \" \\n\"[i + 1 == e];\n }\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
-  - src/Misc/CartesianTree.hpp
-  - src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
+  - src/Math/CartesianProduct.hpp
+  - src/String/RollingHash.hpp
+  - src/Misc/rng.hpp
   isVerificationFile: true
-  path: test/atcoder/arc115_e.test.cpp
+  path: test/hackerrank/save-humanity.RH.test.cpp
   requiredBy: []
   timestamp: '2023-11-24 00:33:42+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/atcoder/arc115_e.test.cpp
+documentation_of: test/hackerrank/save-humanity.RH.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/arc115_e.test.cpp
-- /verify/test/atcoder/arc115_e.test.cpp.html
-title: test/atcoder/arc115_e.test.cpp
+- /verify/test/hackerrank/save-humanity.RH.test.cpp
+- /verify/test/hackerrank/save-humanity.RH.test.cpp.html
+title: test/hackerrank/save-humanity.RH.test.cpp
 ---

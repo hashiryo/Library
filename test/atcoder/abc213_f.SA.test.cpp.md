@@ -1,25 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_f
     links:
     - https://atcoder.jp/contests/abc213/tasks/abc213_f
-  bundledCode: "#line 1 \"test/atcoder/abc213_f.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc213/tasks/abc213_f\"\
-    \n\n// \u30ED\u30EA\u30CF\u3067SA\u69CB\u7BC9\u306FTLE\n\n#include <iostream>\n\
-    #include <vector>\n#include <algorithm>\n#include <stack>\n#line 2 \"src/String/SuffixArray.hpp\"\
-    \n#include <string>\n#line 5 \"src/String/SuffixArray.hpp\"\ntemplate <class String>\
-    \ struct SuffixArray {\n String s;\n std::vector<int> sa;\n static inline std::vector<int>\
-    \ sa_is(const std::vector<int> &s, int K) {\n  const int n= s.size();\n  std::vector<char>\
+  bundledCode: "#line 1 \"test/atcoder/abc213_f.SA.test.cpp\"\n#define PROBLEM \"\
+    https://atcoder.jp/contests/abc213/tasks/abc213_f\"\n\n// \u30ED\u30EA\u30CF\u3067\
+    SA\u69CB\u7BC9\u306FTLE\n\n#include <iostream>\n#include <vector>\n#include <algorithm>\n\
+    #include <stack>\n#line 2 \"src/String/SuffixArray.hpp\"\n#include <string>\n\
+    #line 5 \"src/String/SuffixArray.hpp\"\ntemplate <class String> struct SuffixArray\
+    \ {\n String s;\n std::vector<int> sa;\n static inline std::vector<int> sa_is(const\
+    \ std::vector<int> &s, int K) {\n  const int n= s.size();\n  std::vector<char>\
     \ t(n);\n  std::vector<int> bkt(K, 0), bkt_l(K), bkt_r(K), sa(n), p1;\n  t.back()=\
     \ true;\n  for (int i= n; --i;)\n   if (t[i - 1]= (s[i - 1] < s[i] || (t[i] &&\
     \ s[i - 1] == s[i])); t[i] && !t[i - 1]) p1.push_back(i);\n  std::reverse(p1.begin(),\
@@ -74,7 +75,7 @@ data:
     \ const {\n  if (i == j) return rnk.size() - i;\n  auto [l, r]= std::minmax(rnk[i],\
     \ rnk[j]);\n  if (r == l + 1) return dat[0][l];\n  int k= 31 - __builtin_clz(r\
     \ - l - 1);\n  return std::min(dat[k][l], dat[k][r - (1 << k)]);\n }\nprivate:\n\
-    \ std::vector<std::vector<int>> dat;\n};\n#line 10 \"test/atcoder/abc213_f.test.cpp\"\
+    \ std::vector<std::vector<int>> dat;\n};\n#line 10 \"test/atcoder/abc213_f.SA.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N;\n cin >> N;\n string S;\n cin >> S;\n SuffixArray sa(S);\n LCPArray lcp(sa);\n\
     \ vector<long long> B(N), C(N);\n stack<pair<long long, int>> stb, stc;\n for\
@@ -107,15 +108,15 @@ data:
   dependsOn:
   - src/String/SuffixArray.hpp
   isVerificationFile: true
-  path: test/atcoder/abc213_f.test.cpp
+  path: test/atcoder/abc213_f.SA.test.cpp
   requiredBy: []
-  timestamp: '2023-11-22 11:53:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-11-24 00:33:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/atcoder/abc213_f.test.cpp
+documentation_of: test/atcoder/abc213_f.SA.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/abc213_f.test.cpp
-- /verify/test/atcoder/abc213_f.test.cpp.html
-title: test/atcoder/abc213_f.test.cpp
+- /verify/test/atcoder/abc213_f.SA.test.cpp
+- /verify/test/atcoder/abc213_f.SA.test.cpp.html
+title: test/atcoder/abc213_f.SA.test.cpp
 ---

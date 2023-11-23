@@ -10,6 +10,9 @@ data:
     path: test/aoj/DSL_3_D.sparsetable.test.cpp
     title: test/aoj/DSL_3_D.sparsetable.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc141_e.SuffixTree.test.cpp
+    title: test/atcoder/abc141_e.SuffixTree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/staticrmq.SparseTable.test.cpp
     title: test/yosupo/staticrmq.SparseTable.test.cpp
   _isVerificationFailed: false
@@ -46,6 +49,7 @@ data:
   - test/yosupo/staticrmq.SparseTable.test.cpp
   - test/aoj/DSL_3_D.sparsetable.test.cpp
   - test/aoj/2644.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document
 title: Sparse-Table
