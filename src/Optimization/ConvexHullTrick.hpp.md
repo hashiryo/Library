@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.CHT.test.cpp
     title: test/yosupo/line_add_get_min.CHT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1297.CHT.test.cpp
     title: test/yukicoder/1297.CHT.test.cpp
   - icon: ':x:'

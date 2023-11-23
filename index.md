@@ -9,7 +9,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_2D.hpp
       title: "Binary-Indexed-Tree(2\u6B21\u5143)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
     - icon: ':question:'
@@ -43,7 +43,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/RangeSet.hpp
       title: "\u533A\u9593\u3092set\u3067\u7BA1\u7406\u3059\u308B\u3084\u3064"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SegmentTree.hpp
       title: Segment-Tree
     - icon: ':question:'
@@ -187,7 +187,7 @@ data:
       title: "\u6700\u5C0F\u5305\u542B\u5186"
   - name: src/Graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/BiConnectedComponents.hpp
       title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -317,7 +317,7 @@ data:
     - icon: ':question:'
       path: src/Math/Rational.hpp
       title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
     - icon: ':question:'
@@ -791,7 +791,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2865.test.cpp
       title: test/aoj/2865.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/2873.test.cpp
       title: test/aoj/2873.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1237,7 +1237,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc241_e.test.cpp
       title: test/atcoder/abc241_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1321,7 +1321,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc107_f.PushRelabel.test.cpp
       title: test/atcoder/arc107_f.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1344,7 +1344,7 @@ data:
     - icon: ':x:'
       path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
       title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/bonnie-and-clyde.test.cpp
       title: test/hackerrank/bonnie-and-clyde.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1356,7 +1356,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-summation.KDT.test.cpp
       title: test/hackerrank/cube-summation.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cutting-the-string.zalgo.test.cpp
       title: test/hackerrank/cutting-the-string.zalgo.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1417,7 +1417,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bernoulli.test.cpp
       title: test/yosupo/bernoulli.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/biconnected_components.test.cpp
       title: test/yosupo/biconnected_components.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1438,7 +1438,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/cartesian_tree.test.cpp
       title: test/yosupo/cartesian_tree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1555,7 +1555,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.HLD.test.cpp
       title: test/yosupo/lca.HLD.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1681,7 +1681,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/range_kth_smallest.WM.test.cpp
       title: test/yosupo/range_kth_smallest.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
       title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1774,7 +1774,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/tetration_mod.test.cpp
       title: test/yosupo/tetration_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/tree_path_composite_sum.test.cpp
       title: test/yosupo/tree_path_composite_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1783,7 +1783,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/two_sat.test.cpp
       title: test/yosupo/two_sat.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
       title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1797,10 +1797,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1019.numth.test.cpp
       title: test/yukicoder/1019.numth.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1031.test.cpp
       title: test/yukicoder/1031.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1075.test.cpp
       title: test/yukicoder/1075.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1815,7 +1815,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1106.test.cpp
       title: test/yukicoder/1106.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1124.test.cpp
       title: test/yukicoder/1124.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1830,22 +1830,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/119.PushRelabel.test.cpp
       title: test/yukicoder/119.PushRelabel.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1211.test.cpp
       title: test/yukicoder/1211.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1216.KDT.test.cpp
       title: test/yukicoder/1216.KDT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1216.Seg2D.test.cpp
       title: test/yukicoder/1216.Seg2D.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1242.test.cpp
       title: test/yukicoder/1242.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1260.test.cpp
       title: test/yukicoder/1260.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1269.test.cpp
       title: test/yukicoder/1269.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1857,10 +1857,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1293.scc.test.cpp
       title: test/yukicoder/1293.scc.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1295.test.cpp
       title: test/yukicoder/1295.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1297.CHT.test.cpp
       title: test/yukicoder/1297.CHT.test.cpp
     - icon: ':x:'
@@ -1869,22 +1869,22 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1297.LiCT.2.test.cpp
       title: test/yukicoder/1297.LiCT.2.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1303.test.cpp
       title: test/yukicoder/1303.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1326.test.cpp
       title: test/yukicoder/1326.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1333.test.cpp
       title: test/yukicoder/1333.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1339.test.cpp
       title: test/yukicoder/1339.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1340.test.cpp
       title: test/yukicoder/1340.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/137.div_at.test.cpp
       title: test/yukicoder/137.div_at.test.cpp
     - icon: ':x:'

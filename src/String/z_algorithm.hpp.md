@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.zalgo.test.cpp
     title: test/aoj/ALDS1_14_B.zalgo.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/cutting-the-string.zalgo.test.cpp
     title: test/hackerrank/cutting-the-string.zalgo.test.cpp
   - icon: ':heavy_check_mark:'

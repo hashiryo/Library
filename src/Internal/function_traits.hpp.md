@@ -75,7 +75,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1297.LiCT.2.test.cpp
     title: test/yukicoder/1297.LiCT.2.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':x:'

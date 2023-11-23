@@ -6,9 +6,9 @@ data:
     title: Z-Algorithm
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/contests/101hack50/challenges/cutting-the-string
@@ -89,7 +89,7 @@ data:
   path: test/hackerrank/cutting-the-string.zalgo.test.cpp
   requiredBy: []
   timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/hackerrank/cutting-the-string.zalgo.test.cpp
 layout: document

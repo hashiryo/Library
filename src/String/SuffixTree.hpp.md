@@ -276,7 +276,7 @@ documentation_of: src/String/SuffixTree.hpp
 layout: document
 title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
 ---
-![mississippi.html](/img/suffixtree.svg)
+![suffixtree.svg](https://github.com/hashiryo/Library/blob/master/img/suffixtree.svg?raw=true)
 
 ## `SuffixTree` クラス
 

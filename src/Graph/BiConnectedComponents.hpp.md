@@ -15,18 +15,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1326.test.cpp
     title: test/yukicoder/1326.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -156,7 +156,7 @@ data:
   path: src/Graph/BiConnectedComponents.hpp
   requiredBy: []
   timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yosupo/biconnected_components.test.cpp
@@ -168,7 +168,7 @@ layout: document
 title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
 ---
 
-![bct.png](https://github.com/hashiryo/Library/blob/master/img/bct.png?raw=true)
+![bct.svg](https://github.com/hashiryo/Library/blob/master/img/bct.svg?raw=true)
 
 [0, n)：もとの頂点 \
 [n, n + n_block)：block\

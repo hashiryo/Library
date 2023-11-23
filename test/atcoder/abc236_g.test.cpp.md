@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/LinearAlgebra/Vector.hpp
     title: "\u30D9\u30AF\u30C8\u30EB"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/SemiRing.hpp
     title: "\u534A\u74B0"
   _extendedRequiredBy: []

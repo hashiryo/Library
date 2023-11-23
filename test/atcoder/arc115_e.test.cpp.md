@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
     title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: Cartesian-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc115/tasks/arc115_e
@@ -165,7 +165,7 @@ data:
   path: test/atcoder/arc115_e.test.cpp
   requiredBy: []
   timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/arc115_e.test.cpp
 layout: document
