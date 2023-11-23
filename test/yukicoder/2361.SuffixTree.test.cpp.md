@@ -15,7 +15,7 @@ data:
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   - icon: ':question:'
     path: src/String/SuffixTree.hpp
-    title: src/String/SuffixTree.hpp
+    title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true

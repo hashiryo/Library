@@ -15,12 +15,12 @@ data:
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   - icon: ':question:'
     path: src/String/SuffixTree.hpp
-    title: src/String/SuffixTree.hpp
+    title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_f
@@ -243,7 +243,7 @@ data:
   path: test/atcoder/abc213_f.SuffixTree.test.cpp
   requiredBy: []
   timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc213_f.SuffixTree.test.cpp
 layout: document

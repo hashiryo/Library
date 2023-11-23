@@ -15,7 +15,7 @@ data:
   - icon: ':x:'
     path: test/aoj/2873.test.cpp
     title: test/aoj/2873.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
   - icon: ':x:'
@@ -54,8 +54,8 @@ data:
     \ match[r].end());\n   }\n }\n inline int initial_state() const { return 0; }\n\
     \ inline std::vector<int> matched_patterns(int s) const { return match[s]; }\n\
     \ inline bool is_accept(int s) const { return !match[s].empty(); }\n inline int\
-    \ transition(int u, symbol_t c) const {\n  for (; u >= 0; u= fail[u])\n   if (int\
-    \ v= next(u, c); v != -1) return v;\n  return 0;\n }\n inline int state_size()\
+    \ transition(int s, symbol_t c) const {\n  for (; s >= 0; s= fail[s])\n   if (int\
+    \ v= next(s, c); v != -1) return v;\n  return 0;\n }\n inline int state_size()\
     \ const { return match.size(); }\nprivate:\n std::vector<int> bg, fail;\n std::vector<symbol_t>\
     \ es;\n std::vector<std::vector<int>> match;\n inline int next(int s, symbol_t\
     \ c) const {\n  int index= std::lower_bound(es.begin() + bg[s], es.begin() + bg[s\
@@ -89,8 +89,8 @@ data:
     \ match[r].end());\n   }\n }\n inline int initial_state() const { return 0; }\n\
     \ inline std::vector<int> matched_patterns(int s) const { return match[s]; }\n\
     \ inline bool is_accept(int s) const { return !match[s].empty(); }\n inline int\
-    \ transition(int u, symbol_t c) const {\n  for (; u >= 0; u= fail[u])\n   if (int\
-    \ v= next(u, c); v != -1) return v;\n  return 0;\n }\n inline int state_size()\
+    \ transition(int s, symbol_t c) const {\n  for (; s >= 0; s= fail[s])\n   if (int\
+    \ v= next(s, c); v != -1) return v;\n  return 0;\n }\n inline int state_size()\
     \ const { return match.size(); }\nprivate:\n std::vector<int> bg, fail;\n std::vector<symbol_t>\
     \ es;\n std::vector<std::vector<int>> match;\n inline int next(int s, symbol_t\
     \ c) const {\n  int index= std::lower_bound(es.begin() + bg[s], es.begin() + bg[s\
@@ -100,7 +100,7 @@ data:
   isVerificationFile: false
   path: src/String/AhoCorasick.hpp
   requiredBy: []
-  timestamp: '2023-11-22 16:55:55+09:00'
+  timestamp: '2023-11-24 02:08:56+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1269.test.cpp

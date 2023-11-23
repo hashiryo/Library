@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':question:'
     path: src/String/SuffixTree.hpp
-    title: src/String/SuffixTree.hpp
+    title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_3_B.test.cpp
@@ -15,10 +15,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
   - icon: ':x:'
