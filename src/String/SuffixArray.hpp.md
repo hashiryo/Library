@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
@@ -27,12 +27,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-    title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-    title: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/longest_common_substring.test.cpp
     title: test/yosupo/longest_common_substring.test.cpp
@@ -42,12 +36,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/suffixarray.test.cpp
     title: test/yosupo/suffixarray.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/SuffixArray.hpp\"\n#include <string>\n#include\
@@ -174,10 +168,8 @@ data:
   requiredBy:
   - src/String/SuffixTree.hpp
   timestamp: '2023-11-22 11:53:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-  - test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - test/yosupo/longest_common_substring.test.cpp
   - test/yosupo/suffixarray.test.cpp
   - test/yosupo/number_of_substrings.SA.test.cpp

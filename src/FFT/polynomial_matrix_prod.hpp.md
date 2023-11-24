@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
   - icon: ':question:'
@@ -24,58 +24,58 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/502.test.cpp
     title: test/yukicoder/502.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/polynomial_matrix_prod.hpp\"\n#include <cmath>\n\
     #line 2 \"src/FFT/sample_points_shift.hpp\"\n#include <vector>\n#include <algorithm>\n\
-    #include <numeric>\n#include <cassert>\n#line 2 \"src/FFT/NTT.hpp\"\n#include\
-    \ <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace\
-    \ math_internal {\nusing namespace std;\nusing u8= unsigned char;\nusing u32=\
-    \ unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\nusing u128=\
-    \ __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM \\\n if\
-    \ (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l,\
-    \ U r) const { return l+= r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M) \\\
-    \n CE IL U diff(U l, U r) const { return l-= r, l >> C ? l + (M) : l; }\n#define\
-    \ SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U get(U\
-    \ n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate <class\
-    \ u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo(): mod(0),\
-    \ iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod)\
-    \ {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t,\
-    \ mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n,\
-    \ r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL\
-    \ u_t norm(u_t n) const { NORM; }\nprivate:\n u_t iv, r2;\n static CE u_t inv(u_t\
-    \ n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n\
-    \ CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w)\
-    \ * iv) * mod) >> B); }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na(): mod(0){};\n\
-    \ CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l)\
-    \ * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br\
-    \ {  // mod < 2^31\n u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32\
-    \ m): mod(m), s(95 - __builtin_clz(m - 1)), x(((u128(1) << s) + m - 1) / m) {}\n\
-    \ CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod)\
-    \ DIFF(u32, 31, mod) SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const\
-    \ { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n)\
-    \ * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2():\
-    \ mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL\
-    \ u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64, mod <<\
-    \ 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE\
-    \ IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\n\
-    private:\n u64 x;\n CE IL u128 quo(const u128 &n) const { return (n * x) >> 84;\
-    \ }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) * mod; }\n};\nstruct\
-    \ MP_D2B1 {\n u8 s;\n u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0), v(0)\
-    \ {}\n CE MP_D2B1(u64 m): s(__builtin_clzll(m)), mod(m), d(m << s), v(u128(-1)\
-    \ / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l) * r) << s)\
-    \ >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const\
-    \ u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64)\
-    \ * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n\
-    };\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n\
-    \ for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x)\
-    \ : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
+    #include <numeric>\n#include <cassert>\n#include <cstdint>\n#line 2 \"src/FFT/NTT.hpp\"\
+    \n#include <array>\n#include <limits>\n#line 2 \"src/Internal/Remainder.hpp\"\n\
+    namespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\nusing\
+    \ u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\nusing\
+    \ u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM \\\
+    \n if (n >= mod) n-= mod; \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U\
+    \ l, U r) const { return l+= r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M)\
+    \ \\\n CE IL U diff(U l, U r) const { return l-= r, l >> C ? l + (M) : l; }\n\
+    #define SGN(U) \\\n static CE IL U set(U n) { return n; } \\\n static CE IL U\
+    \ get(U n) { return n; } \\\n static CE IL U norm(U n) { return n; }\ntemplate\
+    \ <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo():\
+    \ mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod)\
+    \ % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l) * r);\
+    \ }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n) const\
+    \ { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n  NORM;\n\
+    \ }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n u_t iv, r2;\n static CE\
+    \ u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x * (2 - x * n))\
+    \ : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >> B) + mod -\
+    \ ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na():\
+    \ mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const {\
+    \ return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\n\
+    struct MP_Br {  // mod < 2^31\n u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n\
+    \ CE MP_Br(u32 m): mod(m), s(95 - __builtin_clz(m - 1)), x(((u128(1) << s) + m\
+    \ - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r); }\n\
+    \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: u8 s;\n u64 x;\n CE IL u64\
+    \ quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n) const\
+    \ { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n u64\
+    \ mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) <<\
+    \ 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r); }\n\
+    \ PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64 n)\
+    \ { return n; }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64 n)\
+    \ const { NORM; }\nprivate:\n u64 x;\n CE IL u128 quo(const u128 &n) const { return\
+    \ (n * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n - quo(n) *\
+    \ mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n u64 mod, d, v;\n CE MP_D2B1(): s(0),\
+    \ mod(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): s(__builtin_clzll(m)), mod(m), d(m\
+    \ << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
+    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
+    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
+    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
+    \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
+    \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
+    \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
     \ SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
@@ -242,23 +242,23 @@ data:
     \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
     template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
     \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 7 \"src/FFT/sample_points_shift.hpp\"\
-    \ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const\
+    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 8 \"src/FFT/sample_points_shift.hpp\"\
+    \ntemplate <class mod_t, size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const\
     \ std::vector<mod_t>& y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size()\
     \ <= mod_t::mod());\n static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
-    \ LM>];\n if (m == 0) return {};\n std::uint64_t c_64= c.val(), nc1= (c + (m -\
-    \ 1)).val();\n std::uint32_t k= y.size(), d= k - 1, i= d, e;\n if (c_64 + m <=\
-    \ k) return std::vector<mod_t>(y.begin() + c_64, y.begin() + c_64 + m);\n mod_t\
-    \ *x= GlobalArray<mod_t, LM, 0>::bf, *p= GlobalArray<mod_t, LM, 1>::bf, *bf;\n\
-    \ for (x[d]= 1; i; i--) x[i - 1]= x[i] * i;\n mod_t t= mod_t(1) / (x[0] * x[0]);\n\
-    \ for (i= d / 2 + 1; i--;) x[i]= x[d - i]= x[i] * x[d - i] * t;\n for (i= k; i--;)\
-    \ x[i]*= y[i];\n for (i= 1; i < k; i+= 2) x[d - i]= -x[d - i];\n auto f= [&](mod_t\
-    \ a, int n, mod_t ret[]) {\n  using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n  using\
-    \ GNA2= GlobalNTTArray<mod_t, LM, 2>;\n  mod_t* q= GlobalArray<mod_t, LM, 2>::bf;\n\
-    \  for (e= d + n, i= 0, t= a - d; i < e; ++i, t+= 1) ret[i]= t;\n  std::partial_sum(ret,\
-    \ ret + e, q, std::multiplies<>());\n  for (t= mod_t(1) / q[e - 1]; --i;) q[i]=\
-    \ t * q[i - 1], t*= ret[i];\n  if (q[0]= t; k >= TH && n >= TH) {\n   const int\
-    \ len= pw2(e + (d > 0));\n   GNA1::bf.set(x, 0, k), GNA1::bf.zeros(k, len), GNA1::bf.dft(0,\
+    \ LM>];\n if (m == 0) return {};\n uint64_t c_64= c.val(), nc1= (c + (m - 1)).val();\n\
+    \ uint32_t k= y.size(), d= k - 1, i= d, e;\n if (c_64 + m <= k) return std::vector<mod_t>(y.begin()\
+    \ + c_64, y.begin() + c_64 + m);\n mod_t *x= GlobalArray<mod_t, LM, 0>::bf, *p=\
+    \ GlobalArray<mod_t, LM, 1>::bf, *bf;\n for (x[d]= 1; i; i--) x[i - 1]= x[i] *\
+    \ i;\n mod_t t= mod_t(1) / (x[0] * x[0]);\n for (i= d / 2 + 1; i--;) x[i]= x[d\
+    \ - i]= x[i] * x[d - i] * t;\n for (i= k; i--;) x[i]*= y[i];\n for (i= 1; i <\
+    \ k; i+= 2) x[d - i]= -x[d - i];\n auto f= [&](mod_t a, int n, mod_t ret[]) {\n\
+    \  using GNA1= GlobalNTTArray<mod_t, LM, 1>;\n  using GNA2= GlobalNTTArray<mod_t,\
+    \ LM, 2>;\n  mod_t* q= GlobalArray<mod_t, LM, 2>::bf;\n  for (e= d + n, i= 0,\
+    \ t= a - d; i < e; ++i, t+= 1) ret[i]= t;\n  std::partial_sum(ret, ret + e, q,\
+    \ std::multiplies<>());\n  for (t= mod_t(1) / q[e - 1]; --i;) q[i]= t * q[i -\
+    \ 1], t*= ret[i];\n  if (q[0]= t; k >= TH && n >= TH) {\n   const int len= pw2(e\
+    \ + (d > 0));\n   GNA1::bf.set(x, 0, k), GNA1::bf.zeros(k, len), GNA1::bf.dft(0,\
     \ len), GNA2::bf.set(q, 0, e), GNA2::bf.zeros(e, len), GNA2::bf.dft(0, len), GNA1::bf.mul(GNA2::bf,\
     \ 0, len), GNA1::bf.idft(0, len), GNA1::bf.get(ret - d, d, e);\n  } else\n   for\
     \ (std::fill_n(ret, n, mod_t()), i= k; i--;)\n    for (int b= d - i, j= n; j--;)\
@@ -339,8 +339,8 @@ data:
   isVerificationFile: false
   path: src/FFT/polynomial_matrix_prod.hpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-11-24 18:27:47+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/502.test.cpp
 documentation_of: src/FFT/polynomial_matrix_prod.hpp

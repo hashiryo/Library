@@ -33,12 +33,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/morgan-and-a-string.RH.test.cpp
-    title: test/hackerrank/morgan-and-a-string.RH.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/save-humanity.RH.test.cpp
-    title: test/hackerrank/save-humanity.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
@@ -48,16 +42,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2454.RH.test.cpp
     title: test/yukicoder/2454.RH.test.cpp
   - icon: ':x:'
     path: test/yukicoder/599.RH.test.cpp
     title: test/yukicoder/599.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/765.RH.test.cpp
     title: test/yukicoder/765.RH.test.cpp
   _isVerificationFailed: true
@@ -102,8 +96,6 @@ data:
   timestamp: '2023-01-21 20:06:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/save-humanity.RH.test.cpp
-  - test/hackerrank/morgan-and-a-string.RH.test.cpp
   - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/enumerate_palindromes.RH.test.cpp

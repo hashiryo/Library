@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
@@ -114,15 +114,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-    title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-    title: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
@@ -210,16 +204,16 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
   - icon: ':x:'
@@ -266,8 +260,6 @@ data:
   timestamp: '2023-04-15 19:40:03+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-  - test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - test/yosupo/scc.test.cpp

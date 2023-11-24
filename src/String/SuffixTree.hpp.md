@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
   _extendedRequiredBy: []
@@ -21,18 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-    title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-    title: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/SuffixArray.hpp\"\n#include <string>\n#include\
@@ -265,10 +259,8 @@ data:
   path: src/String/SuffixTree.hpp
   requiredBy: []
   timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-  - test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
@@ -297,7 +289,9 @@ title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
 |`substr(l,n)`|部分文字列 $S_{l:l+n}$ を構成する頂点のうちの末端の頂点を返す. |$\mathcal{O}(\log n)$|
 
 ## 問題例
-[デンソークリエイトプログラミングコンテスト2022 Winter(AtCoder Beginner Contest 280) Ex - Substring Sort](https://atcoder.jp/contests/abc280/tasks/abc280_h)
+[デンソークリエイトプログラミングコンテスト2022 Winter(AtCoder Beginner Contest 280) Ex - Substring Sort](https://atcoder.jp/contests/abc280/tasks/abc280_h)\
+[HackerRank Ashton and String](https://www.hackerrank.com/challenges/ashton-and-string)\
+[HackerRank String Function Calculation](https://www.hackerrank.com/challenges/string-function-calculation)
 
 ## 参考
 [https://twitter.com/maspy_stars/status/1565901414236205057?s=20&t=S2Tu6ayozHcakxai8dmh4g](https://twitter.com/maspy_stars/status/1565901414236205057?s=20&t=S2Tu6ayozHcakxai8dmh4g)

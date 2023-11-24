@@ -13,21 +13,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3086.LARSCH.test.cpp
     title: test/aoj/3086.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/409.LARSCH.test.cpp
     title: test/yukicoder/409.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/703.LARSCH.test.cpp
     title: test/yukicoder/703.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/704.LARSCH.test.cpp
     title: test/yukicoder/704.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/705.LARSCH.test.cpp
     title: test/yukicoder/705.LARSCH.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/simplified_larsch_dp.hpp\"\n#include <vector>\n\
@@ -78,7 +78,7 @@ data:
   path: src/Optimization/simplified_larsch_dp.hpp
   requiredBy: []
   timestamp: '2023-10-29 17:46:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/409.LARSCH.test.cpp
   - test/yukicoder/705.LARSCH.test.cpp

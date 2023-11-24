@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_small_p_large_n
@@ -23,7 +23,7 @@ data:
   bundledCode: "#line 1 \"test/yosupo/stirling_1_small_p_large_n.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_small_p_large_n\"\
     \n#include <iostream>\n#line 2 \"src/Math/StirlingNumber.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <cassert>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    #include <algorithm>\n#include <cassert>\n#include <cstdint>\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\n\
     using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\n\
     using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
@@ -75,7 +75,7 @@ data:
     \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/Math/StirlingNumber.hpp\"\n\
+    }\n}\nusing math_internal::is_prime;\n#line 7 \"src/Math/StirlingNumber.hpp\"\n\
     class StirlingNumber {\n const uint16_t p;\n std::vector<std::vector<uint16_t>>\
     \ c, s1, s2;\n void buildS1() {\n  s1.resize(p), s1[0]= {1};\n  for (int i= 1,\
     \ j, t; i < p; s1[i][i]= 1, i++)\n   for (s1[i].resize(i + 1, 0), j= 1, t= p -\
@@ -115,8 +115,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/stirling_1_small_p_large_n.test.cpp
   requiredBy: []
-  timestamp: '2023-11-11 11:24:47+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-24 18:27:47+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/stirling_1_small_p_large_n.test.cpp
 layout: document

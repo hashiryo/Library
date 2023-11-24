@@ -33,28 +33,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/morgan-and-a-string.RH.test.cpp
-    title: test/hackerrank/morgan-and-a-string.RH.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/save-humanity.RH.test.cpp
-    title: test/hackerrank/save-humanity.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2454.RH.test.cpp
     title: test/yukicoder/2454.RH.test.cpp
   - icon: ':x:'
     path: test/yukicoder/599.RH.test.cpp
     title: test/yukicoder/599.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/765.RH.test.cpp
     title: test/yukicoder/765.RH.test.cpp
   _isVerificationFailed: true
@@ -149,8 +143,6 @@ data:
   timestamp: '2023-11-17 14:39:53+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/save-humanity.RH.test.cpp
-  - test/hackerrank/morgan-and-a-string.RH.test.cpp
   - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/enumerate_palindromes.RH.test.cpp
   - test/yukicoder/765.RH.test.cpp
@@ -219,4 +211,6 @@ title: Rolling-Hash
 [AtCoder Beginner Contest 274 Ex - XOR Sum of Arrays](https://atcoder.jp/contests/abc274/tasks/abc274_h) (標数2の体 e.g. Nimber)\
 [AtCoder Beginner Contest 284 F - ABCBAC](https://atcoder.jp/contests/abc284/tasks/abc284_f) (sp judge)\
 [競プロ典型 90 問 047 - Monochromatic Diagonal（★7）](https://atcoder.jp/contests/typical90/tasks/typical90_au)\
-[早稲田大学プログラミングコンテスト2019 E - Artist](https://atcoder.jp/contests/wupc2019/tasks/wupc2019_e)
+[早稲田大学プログラミングコンテスト2019 E - Artist](https://atcoder.jp/contests/wupc2019/tasks/wupc2019_e)\
+[HackerRank Save Humanity](https://www.hackerrank.com/challenges/save-humanity")\
+[HackerRank Morgan and a String](https://www.hackerrank.com/challenges/morgan-and-a-string)

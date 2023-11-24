@@ -7,13 +7,13 @@ data:
   - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedRequiredBy: []

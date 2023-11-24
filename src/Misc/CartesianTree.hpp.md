@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
@@ -24,24 +24,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-    title: test/hackerrank/ashton-and-string.SuffixTree.test.cpp
-  - icon: ':x:'
-    path: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-    title: test/hackerrank/string-function-calculation.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/cartesian_tree.test.cpp
     title: test/yosupo/cartesian_tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1031.test.cpp
     title: test/yukicoder/1031.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/CartesianTree.hpp\"\n#include <vector>\n#include\
@@ -78,10 +72,8 @@ data:
   requiredBy:
   - src/String/SuffixTree.hpp
   timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/hackerrank/string-function-calculation.SuffixTree.test.cpp
-  - test/hackerrank/ashton-and-string.SuffixTree.test.cpp
   - test/yosupo/cartesian_tree.test.cpp
   - test/yukicoder/1031.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
