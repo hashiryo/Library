@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
   - icon: ':question:'
@@ -132,7 +132,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
   - icon: ':heavy_check_mark:'

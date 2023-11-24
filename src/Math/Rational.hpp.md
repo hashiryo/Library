@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   _extendedRequiredBy: []
@@ -24,12 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_rational.test.cpp
     title: test/unit_test/constexpr_rational.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1501.test.cpp
     title: test/yukicoder/1501.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/Rational.hpp\"\n#include <string>\n#include <limits>\n\
@@ -159,7 +159,7 @@ data:
   path: src/Math/Rational.hpp
   requiredBy: []
   timestamp: '2023-10-30 16:02:30+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1501.test.cpp
   - test/aoj/1242.rational.test.cpp

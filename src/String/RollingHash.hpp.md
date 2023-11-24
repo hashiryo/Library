@@ -39,7 +39,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
   - icon: ':heavy_check_mark:'

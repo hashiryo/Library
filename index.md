@@ -205,7 +205,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/DulmageMendelsohn.hpp
       title: "Dulmage-Mendelsohn \u5206\u89E3"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/FunctionalGraph.hpp
       title: "Functional\u30B0\u30E9\u30D5"
     - icon: ':heavy_check_mark:'
@@ -314,7 +314,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/Nimber.hpp
       title: Nimber $\mathbb{F}_{2^{64}}$
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/Rational.hpp
       title: "\u6709\u7406\u6570 $\\mathbb{Q}$"
     - icon: ':heavy_check_mark:'
@@ -335,7 +335,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/berlekamp_massey.hpp
       title: Berlekamp-Massey
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/binary_gcd.hpp
       title: Binary GCD
     - icon: ':question:'
@@ -455,7 +455,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/SuffixTree.hpp
       title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/String/z_algorithm.hpp
       title: Z-Algorithm
   verificationCategories:
@@ -1588,7 +1588,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/min_cost_b_flow.test.cpp
       title: test/yosupo/min_cost_b_flow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
       title: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1678,7 +1678,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/scc.test.cpp
       title: test/yosupo/scc.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/segment_add_get_min.test.cpp
       title: test/yosupo/segment_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1851,7 +1851,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1297.CHT.test.cpp
       title: test/yukicoder/1297.CHT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1297.LiCT.1.test.cpp
       title: test/yukicoder/1297.LiCT.1.test.cpp
     - icon: ':x:'
@@ -1890,7 +1890,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1494.test.cpp
       title: test/yukicoder/1494.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1501.test.cpp
       title: test/yukicoder/1501.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1980,7 +1980,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/2114.test.cpp
       title: test/yukicoder/2114.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/2122.test.cpp
       title: test/yukicoder/2122.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1995,10 +1995,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/2309.test.cpp
       title: test/yukicoder/2309.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/2332.RH.test.cpp
       title: test/yukicoder/2332.RH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/2332.zalgo.test.cpp
       title: test/yukicoder/2332.zalgo.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2049,7 +2049,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/409.LARSCH.test.cpp
       title: test/yukicoder/409.LARSCH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/409.LiCT.test.cpp
       title: test/yukicoder/409.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2112,19 +2112,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/703.LARSCH.test.cpp
       title: test/yukicoder/703.LARSCH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/703.LiCT.test.cpp
       title: test/yukicoder/703.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/704.LARSCH.test.cpp
       title: test/yukicoder/704.LARSCH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/704.LiCT.test.cpp
       title: test/yukicoder/704.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/705.LARSCH.test.cpp
       title: test/yukicoder/705.LARSCH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/705.LiCT.test.cpp
       title: test/yukicoder/705.LiCT.test.cpp
     - icon: ':heavy_check_mark:'

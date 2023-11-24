@@ -14,9 +14,9 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/segment_add_get_min
@@ -52,52 +52,53 @@ data:
     \ class... Prms> class LiChaoTree<F, std::tuple<T, Prms...>> {\n using R= result_type_t<F>;\n\
     \ F f;\n const T LB, UB;\n std::vector<std::tuple<Prms...>> ps;\n template <MinMaxEnum\
     \ sgn, bool persistent> class LiChaoTreeInterface {\n  LiChaoTree *ins;\n  struct\
-    \ Node {\n   int id= -1;\n   Node *ch[2]= {nullptr, nullptr};\n  } *root;\n  static\
-    \ constexpr R ID= (sgn == MINIMIZE ? std::numeric_limits<R>::max() : std::numeric_limits<R>::lowest())\
-    \ / 2;\n  static inline bool cmp(R p, R n, int pi, int ni) {\n   if constexpr\
-    \ (sgn == MINIMIZE) return p > n || (p == n && pi > ni);\n   else return p < n\
-    \ || (p == n && pi > ni);\n  }\n  static inline bool end(T l, T r) {\n   if constexpr\
-    \ (std::is_floating_point_v<T>) return r - l < 1e-9;\n   else return r - l ==\
-    \ 1;\n  }\n  static inline T ub(T r) {\n   if constexpr (std::is_floating_point_v<T>)\
-    \ return r;\n   else return r - 1;\n  }\n  inline R eval(int id, T x) const {\
-    \ return id < 0 ? ID : std::apply(ins->f, std::tuple_cat(std::make_tuple(x), ins->ps[id]));\
+    \ Node {\n   int id= -1;\n   Node *ch[2]= {nullptr, nullptr};\n  } *root;\n  inline\
+    \ R eval(int id, T x) const { return std::apply(ins->f, std::tuple_cat(std::make_tuple(x),\
+    \ ins->ps[id])); }\n  static inline bool cmp_res(const R &p, const R &n, int pi,\
+    \ int ni) {\n   if constexpr (sgn == MINIMIZE) return p > n || (p == n && pi >\
+    \ ni);\n   else return p < n || (p == n && pi > ni);\n  }\n  inline bool cmp(T\
+    \ x, int pi, int ni) const {\n   if (pi == -1) true;\n   if (ni == -1) false;\n\
+    \   return cmp_res(eval(pi, x), eval(ni, x), pi, ni);\n  }\n  static inline bool\
+    \ end(T l, T r) {\n   if constexpr (std::is_floating_point_v<T>) return r - l\
+    \ < 1e-9;\n   else return r - l == 1;\n  }\n  static inline T ub(T r) {\n   if\
+    \ constexpr (std::is_floating_point_v<T>) return r;\n   else return r - 1;\n \
     \ }\n  inline void addl(Node *&t, int id, T xl, T xr) {\n   if (!t) return t=\
-    \ new Node{id}, void();\n   T xr_= ub(xr);\n   bool bl= cmp(eval(t->id, xl), eval(id,\
-    \ xl), t->id, id), br= cmp(eval(t->id, xr_), eval(id, xr_), t->id, id);\n   if\
-    \ (!bl && !br) return;\n   if constexpr (persistent) t= new Node(*t);\n   if (bl\
-    \ && br) return t->id= id, void();\n   T xm= (xl + xr) / 2;\n   if (cmp(eval(t->id,\
-    \ xm), eval(id, xm), t->id, id)) std::swap(t->id, id), bl= !bl;\n   if (!end(xl,\
+    \ new Node{id}, void();\n   T xr_= ub(xr);\n   bool bl= cmp(xl, t->id, id), br=\
+    \ cmp(xr_, t->id, id);\n   if (!bl && !br) return;\n   if constexpr (persistent)\
+    \ t= new Node(*t);\n   if (bl && br) return t->id= id, void();\n   T xm= (xl +\
+    \ xr) / 2;\n   if (cmp(xm, t->id, id)) std::swap(t->id, id), bl= !bl;\n   if (!end(xl,\
     \ xr)) bl ? addl(t->ch[0], id, xl, xm) : addl(t->ch[1], id, xm, xr);\n  }\n  inline\
     \ void adds(Node *&t, int id, T l, T r, T xl, T xr) {\n   if (r <= xl || xr <=\
     \ l) return;\n   if (l <= xl && xr <= r) return addl(t, id, xl, xr);\n   if (!t)\
     \ t= new Node;\n   else if constexpr (persistent) t= new Node(*t);\n   T xm= (xl\
     \ + xr) / 2;\n   adds(t->ch[0], id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm,\
     \ xr);\n  }\n  inline std::pair<R, int> query(const Node *t, T x, T xl, T xr)\
-    \ const {\n   if (!t) return {ID, -1};\n   R a= eval(t->id, x);\n   if (end(xl,\
+    \ const {\n   if (!t) return {R(), -1};\n   R a= eval(t->id, x);\n   if (end(xl,\
     \ xr)) return {a, t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x < xm ? query(t->ch[0],\
-    \ x, xl, xm) : query(t->ch[1], x, xm, xr);\n   return cmp(a, b.first, t->id, b.second)\
-    \ ? b : std::make_pair(a, t->id);\n  }\n public:\n  LiChaoTreeInterface()= default;\n\
-    \  LiChaoTreeInterface(LiChaoTree *ins): ins(ins), root(nullptr) {}\n  void insert(const\
-    \ Prms &...args) { ins->ps.emplace_back(args...), addl(root, ins->ps.size() -\
-    \ 1, ins->LB, ins->UB); }\n  // [l,r)\n  void insert(T l, T r, const Prms &...args)\
-    \ {\n   if (l < r) ins->ps.emplace_back(args...), adds(root, ins->ps.size() -\
-    \ 1, l, r, ins->LB, ins->UB);\n  }\n  std::pair<R, int> query(T x) const { return\
-    \ query(root, x, ins->LB, ins->UB); }\n  const std::tuple<Prms...> &params(int\
-    \ id) const { return ins->ps[id]; }\n };\npublic:\n LiChaoTree(const F &f, T LB=\
-    \ -2e9, T UB= 2e9): f(f), LB(LB), UB(UB) {}\n template <MinMaxEnum sgn= MINIMIZE,\
-    \ bool persistent= false> LiChaoTreeInterface<sgn, persistent> make_tree() { return\
-    \ this; }\n};\ntemplate <class F, class T, class U> LiChaoTree(F, T, U) -> LiChaoTree<F,\
-    \ argument_type_t<F>>;\ntemplate <class F, class T> LiChaoTree(F, T) -> LiChaoTree<F,\
-    \ argument_type_t<F>>;\ntemplate <class F> LiChaoTree(F) -> LiChaoTree<F, argument_type_t<F>>;\n\
-    #line 4 \"test/yosupo/segment_add_get_min.test.cpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n cin >> N >>\
-    \ Q;\n LiChaoTree lct([](long long x, int a, long long b) { return a * x + b;\
-    \ });\n auto cht= lct.make_tree<MINIMIZE>();\n while (N--) {\n  long long l, r,\
-    \ a, b;\n  cin >> l >> r >> a >> b;\n  cht.insert(l, r, a, b);\n }\n while (Q--)\
-    \ {\n  bool op;\n  cin >> op;\n  if (op) {\n   long long p;\n   cin >> p;\n  \
-    \ auto [ans, id]= cht.query(p);\n   if (id == -1) cout << \"INFINITY\" << '\\\
-    n';\n   else cout << ans << '\\n';\n  } else {\n   long long l, r, a, b;\n   cin\
-    \ >> l >> r >> a >> b;\n   cht.insert(l, r, a, b);\n  }\n }\n return 0;\n}\n"
+    \ x, xl, xm) : query(t->ch[1], x, xm, xr);\n   return b.second != -1 && cmp_res(a,\
+    \ b.first, t->id, b.second) ? b : std::make_pair(a, t->id);\n  }\n public:\n \
+    \ LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree *ins): ins(ins),\
+    \ root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
+    \ addl(root, ins->ps.size() - 1, ins->LB, ins->UB); }\n  // [l,r)\n  void insert(T\
+    \ l, T r, const Prms &...args) {\n   if (l < r) ins->ps.emplace_back(args...),\
+    \ adds(root, ins->ps.size() - 1, l, r, ins->LB, ins->UB);\n  }\n  std::pair<R,\
+    \ int> query(T x) const { return query(root, x, ins->LB, ins->UB); }\n  const\
+    \ std::tuple<Prms...> &params(int id) const { return ins->ps[id]; }\n };\npublic:\n\
+    \ LiChaoTree(const F &f, T LB= -2e9, T UB= 2e9): f(f), LB(LB), UB(UB) {}\n template\
+    \ <MinMaxEnum sgn= MINIMIZE, bool persistent= false> LiChaoTreeInterface<sgn,\
+    \ persistent> make_tree() { return this; }\n};\ntemplate <class F, class T, class\
+    \ U> LiChaoTree(F, T, U) -> LiChaoTree<F, argument_type_t<F>>;\ntemplate <class\
+    \ F, class T> LiChaoTree(F, T) -> LiChaoTree<F, argument_type_t<F>>;\ntemplate\
+    \ <class F> LiChaoTree(F) -> LiChaoTree<F, argument_type_t<F>>;\n#line 4 \"test/yosupo/segment_add_get_min.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int N, Q;\n cin >> N >> Q;\n LiChaoTree lct([](long long x, int a, long long\
+    \ b) { return a * x + b; });\n auto cht= lct.make_tree<MINIMIZE>();\n while (N--)\
+    \ {\n  long long l, r, a, b;\n  cin >> l >> r >> a >> b;\n  cht.insert(l, r, a,\
+    \ b);\n }\n while (Q--) {\n  bool op;\n  cin >> op;\n  if (op) {\n   long long\
+    \ p;\n   cin >> p;\n   auto [ans, id]= cht.query(p);\n   if (id == -1) cout <<\
+    \ \"INFINITY\" << '\\n';\n   else cout << ans << '\\n';\n  } else {\n   long long\
+    \ l, r, a, b;\n   cin >> l >> r >> a >> b;\n   cht.insert(l, r, a, b);\n  }\n\
+    \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/segment_add_get_min\"\n\
     #include <iostream>\n#include \"src/Optimization/LiChaoTree.hpp\"\nusing namespace\
     \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N, Q;\n\
@@ -116,8 +117,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/segment_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2023-10-31 18:36:36+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2023-11-24 19:46:15+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/segment_add_get_min.test.cpp
 layout: document

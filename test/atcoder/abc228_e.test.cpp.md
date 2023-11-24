@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'

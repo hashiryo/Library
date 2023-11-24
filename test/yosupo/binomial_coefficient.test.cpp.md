@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
