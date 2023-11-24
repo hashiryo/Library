@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1260.test.cpp
     title: test/yukicoder/1260.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1573.enum_quo.test.cpp
     title: test/yukicoder/1573.enum_quo.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/enumerate_quotients.hpp\"\n#include <vector>\n\
@@ -44,7 +44,7 @@ data:
   path: src/Math/enumerate_quotients.hpp
   requiredBy: []
   timestamp: '2023-11-20 23:40:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/enumerate_quotients.test.cpp
   - test/yukicoder/1573.enum_quo.test.cpp

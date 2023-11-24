@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/enumerate_quotients.hpp
     title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
   - icon: ':question:'

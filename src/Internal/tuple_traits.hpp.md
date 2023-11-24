@@ -54,22 +54,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1600.Seg2D.test.cpp
     title: test/yukicoder/1600.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.Seg2D.test.cpp
     title: test/yukicoder/1625.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1649.Seg2D.test.cpp
     title: test/yukicoder/1649.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2065.Seg2D.test.cpp
     title: test/yukicoder/2065.Seg2D.test.cpp
   - icon: ':x:'

@@ -33,10 +33,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.KDT.test.cpp
     title: test/yukicoder/1625.KDT.test.cpp
   - icon: ':x:'

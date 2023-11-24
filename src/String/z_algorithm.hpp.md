@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.test.cpp
     title: test/yosupo/z_algorithm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1848.zalgo.test.cpp
     title: test/yukicoder/1848.zalgo.test.cpp
   - icon: ':x:'

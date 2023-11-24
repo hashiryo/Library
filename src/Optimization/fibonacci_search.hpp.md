@@ -26,10 +26,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/180.test.cpp
     title: test/yukicoder/180.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2276.test.cpp
     title: test/yukicoder/2276.test.cpp
   - icon: ':x:'

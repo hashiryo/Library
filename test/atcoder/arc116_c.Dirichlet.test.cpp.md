@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Math/DirichletSeries.hpp
     title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
   - icon: ':question:'
