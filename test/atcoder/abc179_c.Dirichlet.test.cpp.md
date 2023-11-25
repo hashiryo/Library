@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: src/NumberTheory/DirichletSeries.hpp
-    title: src/NumberTheory/DirichletSeries.hpp
+    title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_c
@@ -104,14 +104,14 @@ data:
     \ + p * 2, z.end(), 0);\n   if (p <= K)\n    for (Bs[p]= y[p], i= p + 1; i <=\
     \ K; ++i) Bs[i]= Bs[i - 1] + y[i];\n  }\n  for (size_t i= 1; i <= K; ++i) Cs[i]=\
     \ Cs[i - 1] + c[i];\n  return Self(N, c, Cs, C);\n }\n inline T sum() const {\
-    \ return Xl[1]; }\n inline T &sum(uint64_t n) const { return n <= K ? Xs[n] :\
-    \ Xl[(double)N / n]; }\n};\ntemplate <class T>  // 1, zeta(s), O(K+L)\nDirichletSeries<T>\
-    \ get_1(uint64_t N) {\n DirichletSeries<T> ret(N);\n for (size_t i= ret.Xl.size();\
-    \ --i;) ret.Xl[i]= uint64_t((double)N / i);\n return std::fill(ret.x.begin() +\
-    \ 1, ret.x.end(), T(1)), std::iota(ret.Xs.begin(), ret.Xs.end(), 0), ret;\n}\n\
-    // M\xF6bius, 1/zeta(s), O(N^(2/3)log^(1/3)N))\ntemplate <class T> DirichletSeries<T>\
-    \ get_mu(uint64_t N) { return DirichletSeries<T>(N, true)/= get_1<T>(N); }\ntemplate\
-    \ <class T>  // n, zeta(s-1)\nDirichletSeries<T> get_Id(uint64_t N) {\n DirichletSeries<T>\
+    \ return Xl[1]; }\n inline T sum(uint64_t n) const { return n <= K ? Xs[n] : Xl[(double)N\
+    \ / n]; }\n};\ntemplate <class T>  // 1, zeta(s), O(K+L)\nDirichletSeries<T> get_1(uint64_t\
+    \ N) {\n DirichletSeries<T> ret(N);\n for (size_t i= ret.Xl.size(); --i;) ret.Xl[i]=\
+    \ uint64_t((double)N / i);\n return std::fill(ret.x.begin() + 1, ret.x.end(),\
+    \ T(1)), std::iota(ret.Xs.begin(), ret.Xs.end(), 0), ret;\n}\n// M\xF6bius, 1/zeta(s),\
+    \ O(N^(2/3)log^(1/3)N))\ntemplate <class T> DirichletSeries<T> get_mu(uint64_t\
+    \ N) { return DirichletSeries<T>(N, true)/= get_1<T>(N); }\ntemplate <class T>\
+    \  // n, zeta(s-1)\nDirichletSeries<T> get_Id(uint64_t N) {\n DirichletSeries<T>\
     \ ret(N);\n __uint128_t a;\n for (size_t l= ret.Xl.size(); --l;) a= (double)N\
     \ / l, ret.Xl[l]= (a * (a + 1)) >> 1;\n std::iota(ret.x.begin(), ret.x.end(),\
     \ 0);\n for (size_t i= 1; i <= ret.K; ++i) ret.Xs[i]= ret.Xs[i - 1] + ret.x[i];\n\
@@ -148,8 +148,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc179_c.Dirichlet.test.cpp
   requiredBy: []
-  timestamp: '2023-11-25 22:39:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-26 00:08:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.Dirichlet.test.cpp
 layout: document

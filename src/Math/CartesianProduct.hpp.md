@@ -42,21 +42,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2454.RH.test.cpp
     title: test/yukicoder/2454.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/599.RH.test.cpp
     title: test/yukicoder/599.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/765.RH.test.cpp
     title: test/yukicoder/765.RH.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/CartesianProduct.hpp\"\n#include <tuple>\n#include\
@@ -94,7 +94,7 @@ data:
   path: src/Math/CartesianProduct.hpp
   requiredBy: []
   timestamp: '2023-01-21 20:06:06+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/z_algorithm.RH.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp

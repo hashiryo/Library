@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/DataStructure/SegmentTree_2D.hpp
     title: "Segment-Tree(2\u6B21\u5143)"
   _extendedVerifiedWith:
@@ -75,12 +75,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/924.Seg2D.test.cpp
     title: test/yukicoder/924.Seg2D.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n#include\
@@ -129,7 +129,7 @@ data:
   - src/DataStructure/KDTree.hpp
   - src/DataStructure/SegmentTree_2D.hpp
   timestamp: '2023-10-31 18:36:36+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/hackerrank/cube-summation.KDT.test.cpp
   - test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp

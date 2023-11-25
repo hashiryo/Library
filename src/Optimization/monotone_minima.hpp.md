@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
     title: test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/913.monotone_minima.test.cpp
     title: test/yukicoder/913.monotone_minima.test.cpp
   - icon: ':x:'

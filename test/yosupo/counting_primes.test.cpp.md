@@ -32,7 +32,7 @@ data:
     \ { return PrimeSum(*this)*= r; }\n friend PrimeSum operator*(T l, const PrimeSum\
     \ &r) { return r * l; }\n PrimeSum operator+(const PrimeSum &r) const { return\
     \ PrimeSum(*this)+= r; }\n PrimeSum operator-(const PrimeSum &r) const { return\
-    \ PrimeSum(*this)-= r; }\n inline T sum() const { return Xl[1]; }\n inline T &sum(uint64_t\
+    \ PrimeSum(*this)-= r; }\n inline T sum() const { return Xl[1]; }\n inline T sum(uint64_t\
     \ n) const { return n <= K ? Xs[n] : Xl[N / n]; }\n void add(uint64_t p, T v)\
     \ {\n  for (size_t i= p; i <= K; ++i) Xs[i]+= v;\n  for (size_t i= std::min<uint64_t>(N\
     \ / p, K); i; --i) Xl[i]+= v;\n }\n};\ntemplate <class T> class ExtendedEratosthenesSieve\
@@ -93,7 +93,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2023-11-25 22:39:19+09:00'
+  timestamp: '2023-11-26 00:08:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/counting_primes.test.cpp

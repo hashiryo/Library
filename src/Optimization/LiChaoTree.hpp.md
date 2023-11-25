@@ -23,13 +23,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.LiCT.test.cpp
     title: test/yosupo/line_add_get_min.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
     title: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1297.LiCT.1.test.cpp
     title: test/yukicoder/1297.LiCT.1.test.cpp
   - icon: ':x:'
@@ -38,28 +38,28 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1867.test.cpp
     title: test/yukicoder/1867.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2332.zalgo.test.cpp
     title: test/yukicoder/2332.zalgo.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2458.LiCT.test.cpp
     title: test/yukicoder/2458.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/409.LiCT.test.cpp
     title: test/yukicoder/409.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/703.LiCT.test.cpp
     title: test/yukicoder/703.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/704.LiCT.test.cpp
     title: test/yukicoder/704.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/705.LiCT.test.cpp
     title: test/yukicoder/705.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/913.LiCT.test.cpp
     title: test/yukicoder/913.LiCT.test.cpp
   - icon: ':x:'
@@ -119,9 +119,10 @@ data:
     \ t= new Node;\n   else if constexpr (persistent) t= new Node(*t);\n   T xm= (xl\
     \ + xr) / 2;\n   adds(t->ch[0], id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm,\
     \ xr);\n  }\n  inline std::pair<R, int> query(const Node *t, T x, T xl, T xr)\
-    \ const {\n   if (!t) return {R(), -1};\n   R a= eval(t->id, x);\n   if (end(xl,\
-    \ xr)) return {a, t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x < xm ? query(t->ch[0],\
-    \ x, xl, xm) : query(t->ch[1], x, xm, xr);\n   return b.second != -1 && cmp_res(a,\
+    \ const {\n   if (!t) return {R(), -1};\n   if (end(xl, xr)) return {t->id ==\
+    \ -1 ? R() : eval(t->id, x), t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x <\
+    \ xm ? query(t->ch[0], x, xl, xm) : query(t->ch[1], x, xm, xr);\n   if (t->id\
+    \ == -1) return b;\n   R a= eval(t->id, x);\n   return b.second != -1 && cmp_res(a,\
     \ b.first, t->id, b.second) ? b : std::make_pair(a, t->id);\n  }\n public:\n \
     \ LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree *ins): ins(ins),\
     \ root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
@@ -163,9 +164,10 @@ data:
     \ t= new Node;\n   else if constexpr (persistent) t= new Node(*t);\n   T xm= (xl\
     \ + xr) / 2;\n   adds(t->ch[0], id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm,\
     \ xr);\n  }\n  inline std::pair<R, int> query(const Node *t, T x, T xl, T xr)\
-    \ const {\n   if (!t) return {R(), -1};\n   R a= eval(t->id, x);\n   if (end(xl,\
-    \ xr)) return {a, t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x < xm ? query(t->ch[0],\
-    \ x, xl, xm) : query(t->ch[1], x, xm, xr);\n   return b.second != -1 && cmp_res(a,\
+    \ const {\n   if (!t) return {R(), -1};\n   if (end(xl, xr)) return {t->id ==\
+    \ -1 ? R() : eval(t->id, x), t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x <\
+    \ xm ? query(t->ch[0], x, xl, xm) : query(t->ch[1], x, xm, xr);\n   if (t->id\
+    \ == -1) return b;\n   R a= eval(t->id, x);\n   return b.second != -1 && cmp_res(a,\
     \ b.first, t->id, b.second) ? b : std::make_pair(a, t->id);\n  }\n public:\n \
     \ LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree *ins): ins(ins),\
     \ root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
@@ -186,7 +188,7 @@ data:
   isVerificationFile: false
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2023-11-25 22:39:19+09:00'
+  timestamp: '2023-11-26 00:08:30+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/line_add_get_min.LiCT.test.cpp

@@ -14,9 +14,9 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/segment_add_get_min
@@ -73,9 +73,10 @@ data:
     \ t= new Node;\n   else if constexpr (persistent) t= new Node(*t);\n   T xm= (xl\
     \ + xr) / 2;\n   adds(t->ch[0], id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm,\
     \ xr);\n  }\n  inline std::pair<R, int> query(const Node *t, T x, T xl, T xr)\
-    \ const {\n   if (!t) return {R(), -1};\n   R a= eval(t->id, x);\n   if (end(xl,\
-    \ xr)) return {a, t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x < xm ? query(t->ch[0],\
-    \ x, xl, xm) : query(t->ch[1], x, xm, xr);\n   return b.second != -1 && cmp_res(a,\
+    \ const {\n   if (!t) return {R(), -1};\n   if (end(xl, xr)) return {t->id ==\
+    \ -1 ? R() : eval(t->id, x), t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x <\
+    \ xm ? query(t->ch[0], x, xl, xm) : query(t->ch[1], x, xm, xr);\n   if (t->id\
+    \ == -1) return b;\n   R a= eval(t->id, x);\n   return b.second != -1 && cmp_res(a,\
     \ b.first, t->id, b.second) ? b : std::make_pair(a, t->id);\n  }\n public:\n \
     \ LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree *ins): ins(ins),\
     \ root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
@@ -117,8 +118,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/segment_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2023-11-25 22:39:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2023-11-26 00:08:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/segment_add_get_min.test.cpp
 layout: document

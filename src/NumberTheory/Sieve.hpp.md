@@ -30,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1019.numth.test.cpp
+    title: test/yukicoder/1019.numth.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -207,6 +210,7 @@ data:
   - test/yosupo/enumerate_primes.test.cpp
   - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yukicoder/1019.numth.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
 documentation_of: src/NumberTheory/Sieve.hpp

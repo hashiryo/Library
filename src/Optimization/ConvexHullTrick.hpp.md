@@ -19,12 +19,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2012.test.cpp
     title: test/yukicoder/2012.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2458.CHT.test.cpp
     title: test/yukicoder/2458.CHT.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/ConvexHullTrick.hpp\"\n#include <limits>\n\
@@ -95,7 +95,7 @@ data:
   path: src/Optimization/ConvexHullTrick.hpp
   requiredBy: []
   timestamp: '2023-10-17 01:28:06+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/line_add_get_min.CHT.test.cpp
   - test/yukicoder/2458.CHT.test.cpp
