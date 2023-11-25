@@ -377,7 +377,7 @@ data:
       title: "\u7591\u4F3C\u4E71\u6570"
   - name: src/NumberTheory
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/NumberTheory/DirichletSeries.hpp
       title: src/NumberTheory/DirichletSeries.hpp
     - icon: ':question:'
@@ -1125,7 +1125,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc167_d.test.cpp
       title: test/atcoder/abc167_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc172_d.Dirichlet.test.cpp
       title: test/atcoder/abc172_d.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1140,7 +1140,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc179_c.Dirichlet.test.cpp
       title: test/atcoder/abc179_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1305,7 +1305,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc021_a.test.cpp
       title: test/atcoder/agc021_a.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1346,10 +1346,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/bonnie-and-clyde.test.cpp
       title: test/hackerrank/bonnie-and-clyde.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
       title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
       title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1512,7 +1512,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/frequency_table_of_tree_distance.test.cpp
       title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1551,7 +1551,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/lcm_convolution.test.cpp
       title: test/yosupo/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1755,10 +1755,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_floor_of_linear.test.cpp
       title: test/yosupo/sum_of_floor_of_linear.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
       title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1853,7 +1853,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1297.CHT.test.cpp
       title: test/yukicoder/1297.CHT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1297.LiCT.1.test.cpp
       title: test/yukicoder/1297.LiCT.1.test.cpp
     - icon: ':x:'

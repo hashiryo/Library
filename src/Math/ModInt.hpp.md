@@ -209,6 +209,9 @@ data:
     path: test/atcoder/abc323_g.test.cpp
     title: test/atcoder/abc323_g.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/agc038_c.numth.test.cpp
+    title: test/atcoder/agc038_c.numth.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
   - icon: ':heavy_check_mark:'
@@ -284,6 +287,9 @@ data:
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yosupo/gcd_convolution.test.cpp
+    title: test/yosupo/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/hafnian_of_matrix.test.cpp
     title: test/yosupo/hafnian_of_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -304,6 +310,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yosupo/lcm_convolution.test.cpp
+    title: test/yosupo/lcm_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
@@ -406,10 +415,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -724,6 +733,7 @@ data:
   verifiedWith:
   - test/yosupo/find_linear_recurrence.test.cpp
   - test/yosupo/sqrt_of_sparse_FPS.test.cpp
+  - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/log_of_sparse_FPS.test.cpp
   - test/yosupo/pow_of_FPS.FPS.test.cpp
   - test/yosupo/range_affine_range_sum.WBT.test.cpp
@@ -776,6 +786,7 @@ data:
   - test/yosupo/exp_of_set_power_series.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
+  - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
@@ -887,6 +898,7 @@ data:
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc234_g.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc135_f.RH.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp

@@ -99,9 +99,9 @@ data:
     \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
     \ a;\n }\n};\n#line 4 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\nnamespace\
     \ famous_arithmetic_functions {\nnamespace mul {\ntemplate <class T> struct Totient\
-    \ {\n static constexpr T f(uint64_t p, short e) {\n  T ret= p - 1;\n  while (e--\
-    \ > 1) ret*= p;\n  return ret;\n }\n static std::vector<T> poly() { return {-1,\
-    \ 1}; }\n};\ntemplate <class T> struct Moebius {\n static constexpr T f(uint64_t,\
+    \ {\n static constexpr T f(uint64_t p, short e) {\n  T ret= p - 1;\n  while (--e)\
+    \ ret*= p;\n  return ret;\n }\n static std::vector<T> poly() { return {-1, 1};\
+    \ }\n};\ntemplate <class T> struct Moebius {\n static constexpr T f(uint64_t,\
     \ short e) { return (e == 0) - (e == 1); }\n static std::vector<T> poly() { return\
     \ {-1}; }\n};\ntemplate <class T> struct Liouville {\n static constexpr T f(uint64_t,\
     \ short e) { return e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return\
@@ -142,7 +142,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc172_d.numth.test.cpp
   requiredBy: []
-  timestamp: '2023-11-25 18:44:26+09:00'
+  timestamp: '2023-11-25 22:39:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc172_d.numth.test.cpp

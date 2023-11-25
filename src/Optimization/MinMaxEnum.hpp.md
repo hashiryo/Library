@@ -93,7 +93,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1297.CHT.test.cpp
     title: test/yukicoder/1297.CHT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1297.LiCT.1.test.cpp
     title: test/yukicoder/1297.LiCT.1.test.cpp
   - icon: ':x:'

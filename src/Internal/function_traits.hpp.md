@@ -69,7 +69,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1297.LiCT.1.test.cpp
     title: test/yukicoder/1297.LiCT.1.test.cpp
   - icon: ':x:'
