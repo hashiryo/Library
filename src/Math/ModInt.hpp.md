@@ -209,9 +209,6 @@ data:
     path: test/atcoder/abc323_g.test.cpp
     title: test/atcoder/abc323_g.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/agc038_c.numth.test.cpp
-    title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
   - icon: ':heavy_check_mark:'
@@ -220,9 +217,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/arc116_c.Dirichlet.test.cpp
-    title: test/atcoder/arc116_c.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_modint.test.cpp
     title: test/unit_test/constexpr_modint.test.cpp
@@ -290,9 +284,6 @@ data:
     path: test/yosupo/frequency_table_of_tree_distance.test.cpp
     title: test/yosupo/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yosupo/gcd_convolution.test.cpp
-    title: test/yosupo/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/hafnian_of_matrix.test.cpp
     title: test/yosupo/hafnian_of_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -313,9 +304,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/lcm_convolution.test.cpp
-    title: test/yosupo/lcm_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/linear_equations.test.cpp
     title: test/yosupo/linear_equations.test.cpp
@@ -434,9 +422,6 @@ data:
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1019.numth.test.cpp
-    title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1075.test.cpp
     title: test/yukicoder/1075.test.cpp
   - icon: ':heavy_check_mark:'
@@ -458,9 +443,6 @@ data:
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1276.Dirichlet.test.cpp
-    title: test/yukicoder/1276.Dirichlet.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
   - icon: ':heavy_check_mark:'
@@ -478,10 +460,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1533.test.cpp
     title: test/yukicoder/1533.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1573.Dirichlet.test.cpp
     title: test/yukicoder/1573.Dirichlet.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1573.enum_quo.test.cpp
     title: test/yukicoder/1573.enum_quo.test.cpp
   - icon: ':heavy_check_mark:'
@@ -557,9 +539,6 @@ data:
     path: test/yukicoder/599.RH.test.cpp
     title: test/yukicoder/599.RH.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/yukicoder/644.test.cpp
-    title: test/yukicoder/644.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
   - icon: ':x:'
@@ -580,9 +559,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/886.numth.test.cpp
-    title: test/yukicoder/886.numth.test.cpp
   - icon: ':x:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
@@ -748,7 +724,6 @@ data:
   verifiedWith:
   - test/yosupo/find_linear_recurrence.test.cpp
   - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/log_of_sparse_FPS.test.cpp
   - test/yosupo/pow_of_FPS.FPS.test.cpp
   - test/yosupo/range_affine_range_sum.WBT.test.cpp
@@ -801,7 +776,6 @@ data:
   - test/yosupo/exp_of_set_power_series.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/convolution1000000007.test.cpp
-  - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
@@ -817,9 +791,7 @@ data:
   - test/yosupo/enumerate_palindromes.RH.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/235.LCT.test.cpp
-  - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/980.test.cpp
-  - test/yukicoder/1019.numth.test.cpp
   - test/yukicoder/1740.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/1907.test.cpp
@@ -827,11 +799,9 @@ data:
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/665.test.cpp
   - test/yukicoder/215.test.cpp
-  - test/yukicoder/1276.Dirichlet.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/1533.test.cpp
   - test/yukicoder/765.RH.test.cpp
-  - test/yukicoder/644.test.cpp
   - test/yukicoder/1269.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/1124.test.cpp
@@ -903,7 +873,6 @@ data:
   - test/atcoder/abc135_d.test.cpp
   - test/atcoder/agc047_b.RH.test.cpp
   - test/atcoder/abc323_g.test.cpp
-  - test/atcoder/arc116_c.Dirichlet.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc213_g.test.cpp
   - test/atcoder/abc138_f.test.cpp
@@ -918,7 +887,6 @@ data:
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc234_g.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/arc105_f.test.cpp
   - test/atcoder/abc135_f.RH.test.cpp
   - test/atcoder/abc256_f.WBT.test.cpp

@@ -10,12 +10,12 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
-    path: src/Math/enumerate_quotients.hpp
-    title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/NumberTheory/enumerate_quotients.hpp
+    title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -109,9 +109,9 @@ data:
     \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/Math/enumerate_quotients.hpp\"\n#include <vector>\n\
-    #include <algorithm>\n#include <tuple>\n#include <cmath>\n#include <cstdint>\n\
-    // (q,l,r) : i in (l,r], \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t,\
+    \ return dat[n];\n}\n#line 2 \"src/NumberTheory/enumerate_quotients.hpp\"\n#include\
+    \ <vector>\n#include <algorithm>\n#include <tuple>\n#include <cmath>\n#include\
+    \ <cstdint>\n// (q,l,r) : i in (l,r], \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t,\
     \ uint64_t, uint64_t>> enumerate_quotients(uint64_t N) {\n uint64_t sq= std::sqrt(N),\
     \ prev= N, x;\n std::vector<std::tuple<uint64_t, uint64_t, uint64_t>> ret;\n for\
     \ (int q= 1, n= (sq * sq + sq <= N ? sq : sq - 1); q <= n; ++q) ret.emplace_back(q,\
@@ -122,7 +122,7 @@ data:
     \ cout << k << '\\n';\n for (int i= 0; i < k; ++i) cout << get<0>(ans[i]) << \"\
     \ \\n\"[i == k - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_quotients\"\n\
-    #include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/enumerate_quotients.hpp\"\
+    #include <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/NumberTheory/enumerate_quotients.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ long long N;\n cin >> N;\n auto ans= enumerate_quotients(N);\n int k= ans.size();\n\
     \ cout << k << '\\n';\n for (int i= 0; i < k; ++i) cout << get<0>(ans[i]) << \"\
@@ -132,11 +132,11 @@ data:
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
-  - src/Math/enumerate_quotients.hpp
+  - src/NumberTheory/enumerate_quotients.hpp
   isVerificationFile: true
   path: test/yosupo/enumerate_quotients.test.cpp
   requiredBy: []
-  timestamp: '2023-11-20 23:40:07+09:00'
+  timestamp: '2023-11-25 18:44:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/enumerate_quotients.test.cpp

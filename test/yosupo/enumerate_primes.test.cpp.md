@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: src/Math/Sieve.hpp
-    title: "\u7BE9 \u4ED6"
+  - icon: ':heavy_check_mark:'
+    path: src/NumberTheory/Sieve.hpp
+    title: "\u7DDA\u5F62\u7BE9 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -16,12 +16,12 @@ data:
     - https://judge.yosupo.jp/problem/enumerate_primes
   bundledCode: "#line 1 \"test/yosupo/enumerate_primes.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include <iostream>\n\
-    #include <vector>\n#line 3 \"src/Math/Sieve.hpp\"\n#include <algorithm>\n#include\
-    \ <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n static\
-    \ inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static inline\
-    \ int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n  static\
-    \ int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N; n+= 2, i++)\
-    \ {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
+    #include <vector>\n#line 3 \"src/NumberTheory/Sieve.hpp\"\n#include <algorithm>\n\
+    #include <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n\
+    \ static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static\
+    \ inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n\
+    \  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N;\
+    \ n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
     \ N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n\
     \ static inline void set_lpfe(int N) {  // O(N)\n  static int n= 3, i= 1;\n  if\
     \ (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >> 1) + 1, lpfpw +\
@@ -102,19 +102,19 @@ data:
     \ X << '\\n';\n for (int i= 0; i < X; i++) cout << ans[i] << \" \\n\"[i == X -\
     \ 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
-    \ <iostream>\n#include <vector>\n#include \"src/Math/Sieve.hpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using S=\
-    \ Sieve<int(5e8 + 10)>;\n int N, A, B;\n cin >> N >> A >> B;\n auto ps= S::get_primes(N);\n\
-    \ int pi= ps.size();\n vector<int> ans;\n for (int i= 0; A * i + B < pi; i++)\
-    \ ans.push_back(ps[A * i + B]);\n int X= ans.size();\n cout << pi << \" \" <<\
-    \ X << '\\n';\n for (int i= 0; i < X; i++) cout << ans[i] << \" \\n\"[i == X -\
-    \ 1];\n return 0;\n}"
+    \ <iostream>\n#include <vector>\n#include \"src/NumberTheory/Sieve.hpp\"\nusing\
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using S= Sieve<int(5e8 + 10)>;\n int N, A, B;\n cin >> N >> A >> B;\n auto ps=\
+    \ S::get_primes(N);\n int pi= ps.size();\n vector<int> ans;\n for (int i= 0; A\
+    \ * i + B < pi; i++) ans.push_back(ps[A * i + B]);\n int X= ans.size();\n cout\
+    \ << pi << \" \" << X << '\\n';\n for (int i= 0; i < X; i++) cout << ans[i] <<\
+    \ \" \\n\"[i == X - 1];\n return 0;\n}"
   dependsOn:
-  - src/Math/Sieve.hpp
+  - src/NumberTheory/Sieve.hpp
   isVerificationFile: true
   path: test/yosupo/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2023-11-20 23:40:07+09:00'
+  timestamp: '2023-11-25 18:44:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/enumerate_primes.test.cpp

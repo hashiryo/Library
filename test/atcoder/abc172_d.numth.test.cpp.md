@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: src/Math/Sieve.hpp
-    title: "\u7BE9 \u4ED6"
   - icon: ':heavy_check_mark:'
-    path: src/Math/multiplicative_and_additive.hpp
-    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
+    path: src/NumberTheory/Sieve.hpp
+    title: "\u7DDA\u5F62\u7BE9 \u4ED6"
+  - icon: ':question:'
+    path: src/NumberTheory/famous_arithmetic_functions.hpp
+    title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -19,12 +19,12 @@ data:
     - https://atcoder.jp/contests/abc172/tasks/abc172_d
   bundledCode: "#line 1 \"test/atcoder/abc172_d.numth.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc172/tasks/abc172_d\"\n// O(N)\n#include <iostream>\n\
-    #line 2 \"src/Math/Sieve.hpp\"\n#include <vector>\n#include <algorithm>\n#include\
-    \ <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n static\
-    \ inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static inline\
-    \ int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n  static\
-    \ int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N; n+= 2, i++)\
-    \ {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
+    #line 2 \"src/NumberTheory/Sieve.hpp\"\n#include <vector>\n#include <algorithm>\n\
+    #include <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n\
+    \ static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static\
+    \ inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n\
+    \  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N;\
+    \ n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
     \ N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n\
     \ static inline void set_lpfe(int N) {  // O(N)\n  static int n= 3, i= 1;\n  if\
     \ (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >> 1) + 1, lpfpw +\
@@ -97,25 +97,25 @@ data:
     \ static std::vector<T> gcd_conv(std::vector<T> a, std::vector<T> b) {\n  std::size_t\
     \ N= std::max(a.size(), b.size());\n  a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
-    \ a;\n }\n};\n#line 4 \"src/Math/multiplicative_and_additive.hpp\"\nnamespace\
-    \ multiplicative_functions {\ntemplate <class T> struct Totient {\n static constexpr\
-    \ T f(uint64_t p, short e) {\n  T ret= p - 1;\n  while (e-- > 1) ret*= p;\n  return\
-    \ ret;\n }\n static std::vector<T> poly() { return {-1, 1}; }\n};\ntemplate <class\
-    \ T> struct Moebius {\n static constexpr T f(uint64_t, short e) { return (e ==\
-    \ 0) - (e == 1); }\n static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
-    \ <class T> struct Liouville {\n static constexpr T f(uint64_t, short e) { return\
-    \ e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
-    \ <class T, uint64_t k> struct Divisor {\n static constexpr T f(uint64_t p, short\
-    \ e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t kk= k; kk; kk>>= 1,\
-    \ b*= b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <= e; i++, pkpw*= pk) ret+=\
-    \ pkpw;\n  return ret;\n }\n static std::vector<T> poly() {\n  std::vector<T>\
-    \ ret(k + 1, 0);\n  ret[0]+= 1, ret[k]+= 1;\n  return ret;\n }\n};\ntemplate <class\
-    \ T> struct Dedekind {\n static constexpr T f(uint64_t p, short e) {\n  T ret=\
-    \ p + 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T>\
-    \ poly() { return {1, 1}; }\n};\n}  // namespace multiplicative_functions\nnamespace\
-    \ additive_functions {\ntemplate <class T> struct BigOmega {  // the total number\
-    \ of prime factors of n\n static constexpr T f(uint64_t, short e) { return e;\
-    \ }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate <class T> struct\
+    \ a;\n }\n};\n#line 4 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\nnamespace\
+    \ famous_arithmetic_functions {\nnamespace mul {\ntemplate <class T> struct Totient\
+    \ {\n static constexpr T f(uint64_t p, short e) {\n  T ret= p - 1;\n  while (e--\
+    \ > 1) ret*= p;\n  return ret;\n }\n static std::vector<T> poly() { return {-1,\
+    \ 1}; }\n};\ntemplate <class T> struct Moebius {\n static constexpr T f(uint64_t,\
+    \ short e) { return (e == 0) - (e == 1); }\n static std::vector<T> poly() { return\
+    \ {-1}; }\n};\ntemplate <class T> struct Liouville {\n static constexpr T f(uint64_t,\
+    \ short e) { return e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return\
+    \ {-1}; }\n};\ntemplate <class T, uint64_t k> struct Divisor {\n static constexpr\
+    \ T f(uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t\
+    \ kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <=\
+    \ e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static std::vector<T> poly()\
+    \ {\n  std::vector<T> ret(k + 1, 0);\n  return ret[0]+= 1, ret[k]+= 1, ret;\n\
+    \ }\n};\ntemplate <class T> struct Dedekind {\n static constexpr T f(uint64_t\
+    \ p, short e) {\n  T ret= p + 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n\
+    \ }\n static std::vector<T> poly() { return {1, 1}; }\n};\n}  // namespace mul\n\
+    namespace add {\ntemplate <class T> struct BigOmega {  // the total number of\
+    \ prime factors of n\n static constexpr T f(uint64_t, short e) { return e; }\n\
+    \ static std::vector<T> poly() { return {1}; }\n};\ntemplate <class T> struct\
     \ LittleOmega {  // the total number of different prime factors of n\n static\
     \ constexpr T f(uint64_t, short) { return 1; }\n static std::vector<T> poly()\
     \ { return {1}; }\n};\ntemplate <class T> struct Sopfr {  // the sum of primes\
@@ -123,24 +123,26 @@ data:
     \ { return p * e; }\n static std::vector<T> poly() { return {0, 1}; }\n};\ntemplate\
     \ <class T> struct Sopf {  // the sum of the distinct primes dividing n\n static\
     \ constexpr T f(uint64_t p, short) { return p; }\n static std::vector<T> poly()\
-    \ { return {0, 1}; }\n};\n}  // namespace additive_functions\n#line 6 \"test/atcoder/abc172_d.numth.test.cpp\"\
+    \ { return {0, 1}; }\n};\n}  // namespace add\n}\n#line 6 \"test/atcoder/abc172_d.numth.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using namespace multiplicative_functions;\n int N;\n cin >> N;\n auto d= Sieve<>::multiplicative_table<long\
-    \ long>(N, Divisor<int, 0>::f);\n long long ans= 0;\n for (long long i= 1; i <=\
-    \ N; i++) ans+= d[i] * i;\n cout << ans << endl;\n return 0;\n}\n"
+    \ using namespace famous_arithmetic_functions;\n int N;\n cin >> N;\n auto d=\
+    \ Sieve<>::multiplicative_table<long long>(N, mul::Divisor<int, 0>::f);\n long\
+    \ long ans= 0;\n for (long long i= 1; i <= N; i++) ans+= d[i] * i;\n cout << ans\
+    \ << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc172/tasks/abc172_d\"\n//\
-    \ O(N)\n#include <iostream>\n#include \"src/Math/Sieve.hpp\"\n#include \"src/Math/multiplicative_and_additive.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using namespace multiplicative_functions;\n int N;\n cin >> N;\n auto d= Sieve<>::multiplicative_table<long\
-    \ long>(N, Divisor<int, 0>::f);\n long long ans= 0;\n for (long long i= 1; i <=\
-    \ N; i++) ans+= d[i] * i;\n cout << ans << endl;\n return 0;\n}"
+    \ O(N)\n#include <iostream>\n#include \"src/NumberTheory/Sieve.hpp\"\n#include\
+    \ \"src/NumberTheory/famous_arithmetic_functions.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
+    \ famous_arithmetic_functions;\n int N;\n cin >> N;\n auto d= Sieve<>::multiplicative_table<long\
+    \ long>(N, mul::Divisor<int, 0>::f);\n long long ans= 0;\n for (long long i= 1;\
+    \ i <= N; i++) ans+= d[i] * i;\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
-  - src/Math/Sieve.hpp
-  - src/Math/multiplicative_and_additive.hpp
+  - src/NumberTheory/Sieve.hpp
+  - src/NumberTheory/famous_arithmetic_functions.hpp
   isVerificationFile: true
   path: test/atcoder/abc172_d.numth.test.cpp
   requiredBy: []
-  timestamp: '2023-11-21 19:03:34+09:00'
+  timestamp: '2023-11-25 18:44:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc172_d.numth.test.cpp

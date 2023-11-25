@@ -1,8 +1,8 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: src/Math/enumerate_quotients.hpp
+  - icon: ':question:'
+    path: src/NumberTheory/enumerate_quotients.hpp
     title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -16,7 +16,7 @@ data:
     - https://atcoder.jp/contests/abc179/tasks/abc179_c
   bundledCode: "#line 1 \"test/atcoder/abc179_c.enum_quo.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n// O(\u221AN)\n#include\
-    \ <iostream>\n#line 2 \"src/Math/enumerate_quotients.hpp\"\n#include <vector>\n\
+    \ <iostream>\n#line 2 \"src/NumberTheory/enumerate_quotients.hpp\"\n#include <vector>\n\
     #include <algorithm>\n#include <tuple>\n#include <cmath>\n#include <cstdint>\n\
     // (q,l,r) : i in (l,r], \u230AN/i\u230B = q\nstd::vector<std::tuple<uint64_t,\
     \ uint64_t, uint64_t>> enumerate_quotients(uint64_t N) {\n uint64_t sq= std::sqrt(N),\
@@ -28,16 +28,16 @@ data:
     \ int N;\n cin >> N;\n long long ans= 0;\n for (auto [q, l, r]: enumerate_quotients(N\
     \ - 1)) ans+= (r - l) * q;\n cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n//\
-    \ O(\u221AN)\n#include <iostream>\n#include \"src/Math/enumerate_quotients.hpp\"\
+    \ O(\u221AN)\n#include <iostream>\n#include \"src/NumberTheory/enumerate_quotients.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N;\n cin >> N;\n long long ans= 0;\n for (auto [q, l, r]: enumerate_quotients(N\
     \ - 1)) ans+= (r - l) * q;\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
-  - src/Math/enumerate_quotients.hpp
+  - src/NumberTheory/enumerate_quotients.hpp
   isVerificationFile: true
   path: test/atcoder/abc179_c.enum_quo.test.cpp
   requiredBy: []
-  timestamp: '2023-11-20 23:40:07+09:00'
+  timestamp: '2023-11-25 18:44:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.enum_quo.test.cpp

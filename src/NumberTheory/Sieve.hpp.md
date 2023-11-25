@@ -7,64 +7,40 @@ data:
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/agc038_c.numth.test.cpp
-    title: test/atcoder/agc038_c.numth.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-    title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-    title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/yosupo/enumerate_primes.test.cpp
     title: test/yosupo/enumerate_primes.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/gcd_convolution.test.cpp
-    title: test/yosupo/gcd_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yosupo/lcm_convolution.test.cpp
-    title: test/yosupo/lcm_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1019.numth.test.cpp
-    title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/644.test.cpp
-    title: test/yukicoder/644.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/886.numth.test.cpp
-    title: test/yukicoder/886.numth.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Math/Sieve.hpp\"\n#include <vector>\n#include <algorithm>\n\
-    #include <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n\
-    \ static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static\
-    \ inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n\
-    \  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N;\
-    \ n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
-    \ N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n\
-    \ static inline void set_lpfe(int N) {  // O(N)\n  static int n= 3, i= 1;\n  if\
-    \ (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >> 1) + 1, lpfpw +\
-    \ i);\n  for (std::fill(lpfe + i, lpfe + (N >> 1) + 1, 1); n <= N; n+= 2, i++)\n\
-    \   if (int j= (n / lpf[i]) >> 1; lpf[i] == lpf[j]) lpfe[i]+= lpfe[j], lpfpw[i]*=\
-    \ lpfpw[j];\n }\npublic:\n static int least_prime_factor(int n) { return sieve(n),\
-    \ lpf[n]; }\n // O(log n)\n static std::map<int, short> factorize(int n) {\n \
-    \ std::map<int, short> ret;\n  if (int t; !(n & 1)) ret[2]= t= __builtin_ctz(n),\
-    \ n>>= t;\n  if (int i= n >> 1; n > 1)\n   for (set_lpfe(n); n > 1; i= n >> 1)\
-    \ ret[lpf[i]]= lpfe[i], n/= lpfpw[i];\n  return ret;\n }\n // O(log n)\n static\
-    \ std::vector<int> divisors(int n) {\n  std::vector<int> ret= {1};\n  for (auto\
-    \ [p, e]: factorize(n))\n   for (std::size_t sz= ret.size(), pw= p; e--; pw*=\
-    \ p)\n    for (int i= sz - 1; i >= 0; i--) ret.push_back(ret[i] * pw);\n  return\
-    \ std::sort(ret.begin(), ret.end()), ret;\n }\n // O(N)\n static std::vector<int>\
-    \ get_primes(int N) { return sieve(N), std::vector<int>(ps, std::upper_bound(ps,\
+  bundledCode: "#line 2 \"src/NumberTheory/Sieve.hpp\"\n#include <vector>\n#include\
+    \ <algorithm>\n#include <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24>\
+    \ class Sieve {\n static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >>\
+    \ 1], psz= 0;\n static inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int\
+    \ N) {  // O(N)\n  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n\
+    \  for (; n <= N; n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for\
+    \ (int j= 1, e= std::min(lpf[i], N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j]\
+    \ * n) >> 1]= ps[j];\n  }\n }\n static inline void set_lpfe(int N) {  // O(N)\n\
+    \  static int n= 3, i= 1;\n  if (N < n) return;\n  sieve(N), std::copy(lpf + i,\
+    \ lpf + (N >> 1) + 1, lpfpw + i);\n  for (std::fill(lpfe + i, lpfe + (N >> 1)\
+    \ + 1, 1); n <= N; n+= 2, i++)\n   if (int j= (n / lpf[i]) >> 1; lpf[i] == lpf[j])\
+    \ lpfe[i]+= lpfe[j], lpfpw[i]*= lpfpw[j];\n }\npublic:\n static int least_prime_factor(int\
+    \ n) { return sieve(n), lpf[n]; }\n // O(log n)\n static std::map<int, short>\
+    \ factorize(int n) {\n  std::map<int, short> ret;\n  if (int t; !(n & 1)) ret[2]=\
+    \ t= __builtin_ctz(n), n>>= t;\n  if (int i= n >> 1; n > 1)\n   for (set_lpfe(n);\
+    \ n > 1; i= n >> 1) ret[lpf[i]]= lpfe[i], n/= lpfpw[i];\n  return ret;\n }\n //\
+    \ O(log n)\n static std::vector<int> divisors(int n) {\n  std::vector<int> ret=\
+    \ {1};\n  for (auto [p, e]: factorize(n))\n   for (std::size_t sz= ret.size(),\
+    \ pw= p; e--; pw*= p)\n    for (int i= sz - 1; i >= 0; i--) ret.push_back(ret[i]\
+    \ * pw);\n  return std::sort(ret.begin(), ret.end()), ret;\n }\n // O(N)\n static\
+    \ std::vector<int> get_primes(int N) { return sieve(N), std::vector<int>(ps, std::upper_bound(ps,\
     \ ps + psz, N)); }\n template <class T, class F> static inline std::vector<T>\
     \ completely_multiplicative_table(int N, const F &f) {\n  std::vector<T> ret(N\
     \ + 1);\n  sieve(N);\n  for (int n= 3, i= 1; n <= N; n+= 2, i++) ret[n]= lpf[i]\
@@ -204,26 +180,18 @@ data:
     \ a;\n }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: src/Math/Sieve.hpp
+  path: src/NumberTheory/Sieve.hpp
   requiredBy: []
-  timestamp: '2023-11-20 23:40:07+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-11-25 18:44:26+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-  - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/enumerate_primes.test.cpp
-  - test/yosupo/gcd_convolution.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - test/yukicoder/886.numth.test.cpp
-  - test/yukicoder/1019.numth.test.cpp
-  - test/yukicoder/644.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
-  - test/atcoder/agc038_c.numth.test.cpp
-documentation_of: src/Math/Sieve.hpp
+documentation_of: src/NumberTheory/Sieve.hpp
 layout: document
-title: "\u7BE9 \u4ED6"
+title: "\u7DDA\u5F62\u7BE9 \u4ED6"
 ---
 線形篩による素数列挙の前処理 \
 乗法的関数 テーブル列挙 や gcd畳み込みなど

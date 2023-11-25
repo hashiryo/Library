@@ -21,14 +21,14 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
-    path: src/Math/Sieve.hpp
-    title: "\u7BE9 \u4ED6"
-  - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':heavy_check_mark:'
+    path: src/NumberTheory/Sieve.hpp
+    title: "\u7DDA\u5F62\u7BE9 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -136,12 +136,12 @@ data:
     \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
     \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
     \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/Sieve.hpp\"\n#include <algorithm>\n#include\
-    \ <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n static\
-    \ inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static inline\
-    \ int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n  static\
-    \ int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N; n+= 2, i++)\
-    \ {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
+    \ return dat[n];\n}\n#line 3 \"src/NumberTheory/Sieve.hpp\"\n#include <algorithm>\n\
+    #include <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n\
+    \ static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static\
+    \ inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n\
+    \  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N;\
+    \ n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
     \ N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n\
     \ static inline void set_lpfe(int N) {  // O(N)\n  static int n= 3, i= 1;\n  if\
     \ (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >> 1) + 1, lpfpw +\
@@ -383,35 +383,35 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/Math/Combination.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\n#include \"src/Math/Sieve.hpp\"\n#include \"src/FFT/sample_points_shift.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n long long r,\
-    \ d, n;\n cin >> r >> d >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n  return\
-    \ 0;\n }\n if (r == 0) {\n  cout << (d ? 0 : 1) << '\\n';\n  return 0;\n }\n vector<Mint>\
-    \ sum(d + 2), rpow(d + 2), pd= Sieve<>::pow_table<Mint>(d + 2, d);\n rpow[0]=\
-    \ 1, sum[0]= rpow[0] * pd[0];\n for (int i= 1; i <= d + 1; i++) rpow[i]= rpow[i\
-    \ - 1] * r;\n for (int i= 1; i <= d + 1; i++) sum[i]= sum[i - 1] + rpow[i] * pd[i];\n\
-    \ Mint ans= 0;\n if (r == 1) ans= sample_points_shift<Mint>(sum, n)[0];\n else\
-    \ {\n  for (int i= 0; i <= d; i++) {\n   Mint tmp= C::nCr(d + 1, i + 1) * rpow[d\
-    \ - i] * sum[i];\n   ans+= (d - i) & 1 ? -tmp : tmp;\n  }\n  ans/= Mint(1 - r).pow(d\
-    \ + 1);\n  vector<Mint> y(d + 1);\n  Mint rinv= Mint(1) / r, rinvpow= 1;\n  for\
-    \ (int i= 0; i <= d; i++) {\n   y[i]= Mint(sum[i] - ans) * rinvpow;\n   rinvpow*=\
-    \ rinv;\n  }\n  ans+= Mint(r).pow(n) * sample_points_shift<Mint>(y, n)[0];\n }\n\
-    \ cout << ans << '\\n';\n return 0;\n}"
+    \ \"src/Math/ModInt.hpp\"\n#include \"src/NumberTheory/Sieve.hpp\"\n#include \"\
+    src/FFT/sample_points_shift.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n\
+    \ long long r, d, n;\n cin >> r >> d >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n\
+    \  return 0;\n }\n if (r == 0) {\n  cout << (d ? 0 : 1) << '\\n';\n  return 0;\n\
+    \ }\n vector<Mint> sum(d + 2), rpow(d + 2), pd= Sieve<>::pow_table<Mint>(d + 2,\
+    \ d);\n rpow[0]= 1, sum[0]= rpow[0] * pd[0];\n for (int i= 1; i <= d + 1; i++)\
+    \ rpow[i]= rpow[i - 1] * r;\n for (int i= 1; i <= d + 1; i++) sum[i]= sum[i -\
+    \ 1] + rpow[i] * pd[i];\n Mint ans= 0;\n if (r == 1) ans= sample_points_shift<Mint>(sum,\
+    \ n)[0];\n else {\n  for (int i= 0; i <= d; i++) {\n   Mint tmp= C::nCr(d + 1,\
+    \ i + 1) * rpow[d - i] * sum[i];\n   ans+= (d - i) & 1 ? -tmp : tmp;\n  }\n  ans/=\
+    \ Mint(1 - r).pow(d + 1);\n  vector<Mint> y(d + 1);\n  Mint rinv= Mint(1) / r,\
+    \ rinvpow= 1;\n  for (int i= 0; i <= d; i++) {\n   y[i]= Mint(sum[i] - ans) *\
+    \ rinvpow;\n   rinvpow*= rinv;\n  }\n  ans+= Mint(r).pow(n) * sample_points_shift<Mint>(y,\
+    \ n)[0];\n }\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/Combination.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
-  - src/Math/Sieve.hpp
+  - src/NumberTheory/Sieve.hpp
   - src/FFT/sample_points_shift.hpp
   - src/FFT/NTT.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-11-24 18:27:47+09:00'
+  timestamp: '2023-11-25 18:44:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp

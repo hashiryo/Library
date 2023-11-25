@@ -293,9 +293,6 @@ data:
       path: src/Math/Combination.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
         mathbb{F}_p$)"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/DirichletSeries.hpp
-      title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
     - icon: ':question:'
       path: src/Math/DiscreteLogarithm.hpp
       title: "\u96E2\u6563\u5BFE\u6570"
@@ -323,9 +320,6 @@ data:
     - icon: ':question:'
       path: src/Math/SetPowerSeries.hpp
       title: "\u96C6\u5408\u51AA\u7D1A\u6570"
-    - icon: ':question:'
-      path: src/Math/Sieve.hpp
-      title: "\u7BE9 \u4ED6"
     - icon: ':heavy_check_mark:'
       path: src/Math/StirlingNumber.hpp
       title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
@@ -341,9 +335,6 @@ data:
     - icon: ':question:'
       path: src/Math/bostan_mori.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u7684\u6570\u5217\u306E\u7B2C$k$\u9805"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/enumerate_quotients.hpp
-      title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
     - icon: ':heavy_check_mark:'
       path: src/Math/hafnian.hpp
       title: "\u30CF\u30D5\u30CB\u30A2\u30F3 (\u7121\u5411\u30B0\u30E9\u30D5\u306E\
@@ -365,12 +356,6 @@ data:
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
     - icon: ':heavy_check_mark:'
-      path: src/Math/multiplicative_and_additive.hpp
-      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30FB\u52A0\u6CD5\u7684\u95A2\u6570"
-    - icon: ':heavy_check_mark:'
-      path: src/Math/prime_count.hpp
-      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8 \u4ED6"
-    - icon: ':heavy_check_mark:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - name: src/Misc
@@ -390,6 +375,23 @@ data:
     - icon: ':question:'
       path: src/Misc/rng.hpp
       title: "\u7591\u4F3C\u4E71\u6570"
+  - name: src/NumberTheory
+    pages:
+    - icon: ':question:'
+      path: src/NumberTheory/DirichletSeries.hpp
+      title: src/NumberTheory/DirichletSeries.hpp
+    - icon: ':question:'
+      path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
+      title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"
+    - icon: ':heavy_check_mark:'
+      path: src/NumberTheory/Sieve.hpp
+      title: "\u7DDA\u5F62\u7BE9 \u4ED6"
+    - icon: ':question:'
+      path: src/NumberTheory/enumerate_quotients.hpp
+      title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
+    - icon: ':question:'
+      path: src/NumberTheory/famous_arithmetic_functions.hpp
+      title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   - name: src/Optimization
     pages:
     - icon: ':question:'
@@ -1129,7 +1131,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.enum_quo.test.cpp
       title: test/atcoder/abc172_d.enum_quo.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc172_d.mul_sum.test.cpp
       title: test/atcoder/abc172_d.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1144,7 +1146,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1303,7 +1305,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/agc021_a.test.cpp
       title: test/atcoder/agc021_a.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/agc038_c.numth.test.cpp
       title: test/atcoder/agc038_c.numth.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1324,7 +1326,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/arc115_e.test.cpp
       title: test/atcoder/arc115_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/arc116_c.Dirichlet.test.cpp
       title: test/atcoder/arc116_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1344,10 +1346,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/hackerrank/bonnie-and-clyde.test.cpp
       title: test/hackerrank/bonnie-and-clyde.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
       title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
       title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1510,7 +1512,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/frequency_table_of_tree_distance.test.cpp
       title: test/yosupo/frequency_table_of_tree_distance.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/gcd_convolution.test.cpp
       title: test/yosupo/gcd_convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1549,7 +1551,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/lca.LCT.test.cpp
       title: test/yosupo/lca.LCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/lcm_convolution.test.cpp
       title: test/yosupo/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1782,7 +1784,7 @@ data:
       title: test/yosupo/z_algorithm.test.cpp
   - name: test/yukicoder
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1019.numth.test.cpp
       title: test/yukicoder/1019.numth.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1839,7 +1841,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1270.test.cpp
       title: test/yukicoder/1270.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1276.Dirichlet.test.cpp
       title: test/yukicoder/1276.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1896,10 +1898,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1533.test.cpp
       title: test/yukicoder/1533.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1573.Dirichlet.test.cpp
       title: test/yukicoder/1573.Dirichlet.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/1573.enum_quo.test.cpp
       title: test/yukicoder/1573.enum_quo.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2079,7 +2081,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/599.RH.test.cpp
       title: test/yukicoder/599.RH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/644.test.cpp
       title: test/yukicoder/644.test.cpp
     - icon: ':heavy_check_mark:'
