@@ -11,25 +11,25 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2603.LiCT.test.cpp
     title: test/aoj/2603.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2725.LiCT.test.cpp
     title: test/aoj/2725.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3086.LiCT.test.cpp
     title: test/aoj/3086.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/line_add_get_min.LiCT.test.cpp
     title: test/yosupo/line_add_get_min.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
     title: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1297.LiCT.1.test.cpp
     title: test/yukicoder/1297.LiCT.1.test.cpp
   - icon: ':x:'
@@ -38,28 +38,28 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1867.test.cpp
     title: test/yukicoder/1867.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.zalgo.test.cpp
     title: test/yukicoder/2332.zalgo.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2458.LiCT.test.cpp
     title: test/yukicoder/2458.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/409.LiCT.test.cpp
     title: test/yukicoder/409.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/703.LiCT.test.cpp
     title: test/yukicoder/703.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/704.LiCT.test.cpp
     title: test/yukicoder/704.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/705.LiCT.test.cpp
     title: test/yukicoder/705.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/913.LiCT.test.cpp
     title: test/yukicoder/913.LiCT.test.cpp
   - icon: ':x:'
@@ -67,7 +67,7 @@ data:
     title: test/yukicoder/952.LiCT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include\
@@ -100,39 +100,38 @@ data:
     \ sgn, bool persistent> class LiChaoTreeInterface {\n  LiChaoTree *ins;\n  struct\
     \ Node {\n   int id= -1;\n   Node *ch[2]= {nullptr, nullptr};\n  } *root;\n  inline\
     \ R eval(int id, T x) const { return std::apply(ins->f, std::tuple_cat(std::make_tuple(x),\
-    \ ins->ps[id])); }\n  static inline bool cmp_res(const R &p, const R &n, int pi,\
-    \ int ni) {\n   if constexpr (sgn == MINIMIZE) return p > n || (p == n && pi >\
-    \ ni);\n   else return p < n || (p == n && pi > ni);\n  }\n  inline bool cmp(T\
-    \ x, int pi, int ni) const {\n   if (pi == -1) return true;\n   if (ni == -1)\
-    \ return false;\n   return cmp_res(eval(pi, x), eval(ni, x), pi, ni);\n  }\n \
-    \ static inline bool end(T l, T r) {\n   if constexpr (std::is_floating_point_v<T>)\
-    \ return r - l < 1e-9;\n   else return r - l == 1;\n  }\n  static inline T ub(T\
-    \ r) {\n   if constexpr (std::is_floating_point_v<T>) return r;\n   else return\
-    \ r - 1;\n  }\n  inline void addl(Node *&t, int id, T xl, T xr) {\n   if (!t)\
-    \ return t= new Node{id}, void();\n   T xr_= ub(xr);\n   bool bl= cmp(xl, t->id,\
-    \ id), br= cmp(xr_, t->id, id);\n   if (!bl && !br) return;\n   if constexpr (persistent)\
-    \ t= new Node(*t);\n   if (bl && br) return t->id= id, void();\n   T xm= (xl +\
-    \ xr) / 2;\n   if (cmp(xm, t->id, id)) std::swap(t->id, id), bl= !bl;\n   if (!end(xl,\
-    \ xr)) bl ? addl(t->ch[0], id, xl, xm) : addl(t->ch[1], id, xm, xr);\n  }\n  inline\
-    \ void adds(Node *&t, int id, T l, T r, T xl, T xr) {\n   if (r <= xl || xr <=\
-    \ l) return;\n   if (l <= xl && xr <= r) return addl(t, id, xl, xr);\n   if (!t)\
-    \ t= new Node;\n   else if constexpr (persistent) t= new Node(*t);\n   T xm= (xl\
-    \ + xr) / 2;\n   adds(t->ch[0], id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm,\
-    \ xr);\n  }\n  inline std::pair<R, int> query(const Node *t, T x, T xl, T xr)\
-    \ const {\n   if (!t) return {R(), -1};\n   if (end(xl, xr)) return {t->id ==\
-    \ -1 ? R() : eval(t->id, x), t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x <\
-    \ xm ? query(t->ch[0], x, xl, xm) : query(t->ch[1], x, xm, xr);\n   if (t->id\
-    \ == -1) return b;\n   R a= eval(t->id, x);\n   return b.second != -1 && cmp_res(a,\
-    \ b.first, t->id, b.second) ? b : std::make_pair(a, t->id);\n  }\n public:\n \
-    \ LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree *ins): ins(ins),\
-    \ root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
-    \ addl(root, ins->ps.size() - 1, ins->LB, ins->UB); }\n  // [l,r)\n  void insert(T\
-    \ l, T r, const Prms &...args) {\n   if (l < r) ins->ps.emplace_back(args...),\
-    \ adds(root, ins->ps.size() - 1, l, r, ins->LB, ins->UB);\n  }\n  std::pair<R,\
-    \ int> query(T x) const { return query(root, x, ins->LB, ins->UB); }\n  const\
-    \ std::tuple<Prms...> &params(int id) const { return ins->ps[id]; }\n };\npublic:\n\
-    \ LiChaoTree(const F &f, T LB= -2e9, T UB= 2e9): f(f), LB(LB), UB(UB) {}\n template\
-    \ <MinMaxEnum sgn= MINIMIZE, bool persistent= false> LiChaoTreeInterface<sgn,\
+    \ ins->ps[id])); }\n  static inline bool cmp(const R &p, const R &n, int pi, int\
+    \ ni) {\n   if constexpr (sgn == MINIMIZE) return p > n || (p == n && pi > ni);\n\
+    \   else return p < n || (p == n && pi > ni);\n  }\n  inline bool cmp(T x, int\
+    \ pi, int ni) const {\n   if (ni == -1) return false;\n   if (pi == -1) return\
+    \ true;\n   return cmp(eval(pi, x), eval(ni, x), pi, ni);\n  }\n  static inline\
+    \ T ub(T r) {\n   if constexpr (std::is_floating_point_v<T>) return r;\n   else\
+    \ return r - 1;\n  }\n  inline void addl(Node *&t, int id, T xl, T xr) {\n   if\
+    \ (!t) return t= new Node{id}, void();\n   bool bl= cmp(xl, t->id, id), br= cmp(ub(xr),\
+    \ t->id, id);\n   if (!bl && !br) return;\n   if constexpr (persistent) t= new\
+    \ Node(*t);\n   if (bl && br) return t->id= id, void();\n   T xm= (xl + xr) /\
+    \ 2;\n   if (cmp(xm, t->id, id)) std::swap(t->id, id), bl= !bl;\n   if constexpr\
+    \ (std::is_floating_point_v<T>)\n    if (xr - xl < 1e-9) return;\n   bl ? addl(t->ch[0],\
+    \ id, xl, xm) : addl(t->ch[1], id, xm, xr);\n  }\n  inline void adds(Node *&t,\
+    \ int id, T l, T r, T xl, T xr) {\n   if (r <= xl || xr <= l) return;\n   if (l\
+    \ <= xl && xr <= r) return addl(t, id, xl, xr);\n   if (!t) t= new Node;\n   else\
+    \ if constexpr (persistent) t= new Node(*t);\n   T xm= (xl + xr) / 2;\n   adds(t->ch[0],\
+    \ id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm, xr);\n  }\n  inline std::pair<R,\
+    \ int> query(const Node *t, T x, T xl, T xr) const {\n   if (!t) return {R(),\
+    \ -1};\n   T xm= (xl + xr) / 2;\n   auto b= x < xm ? query(t->ch[0], x, xl, xm)\
+    \ : query(t->ch[1], x, xm, xr);\n   if (t->id == -1) return b;\n   R a= eval(t->id,\
+    \ x);\n   return b.second != -1 && cmp(a, b.first, t->id, b.second) ? b : std::make_pair(a,\
+    \ t->id);\n  }\n public:\n  LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree\
+    \ *ins): ins(ins), root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
+    \ addl(root, ins->ps.size() - 1, ins->LB, ins->UB); }\n  // [l, r)\n  void insert(const\
+    \ Prms &...args, T l, T r) {\n   assert(ins->LB <= l), assert(l < r), assert(r\
+    \ <= ins->UB);\n   ins->ps.emplace_back(args...), adds(root, ins->ps.size() -\
+    \ 1, l, r, ins->LB, ins->UB);\n  }\n  // [l, UB)\n  void insert(const Prms &...args,\
+    \ T l) { insert(args..., l, ins->UB); }\n  std::pair<R, int> query(T x) const\
+    \ { return assert(ins->LB <= x && x < ins->UB), query(root, x, ins->LB, ins->UB);\
+    \ }\n  const std::tuple<Prms...> &params(int id) const { return ins->ps[id]; }\n\
+    \ };\npublic:\n LiChaoTree(const F &f, T LB= -2e9, T UB= 2e9): f(f), LB(LB), UB(UB)\
+    \ {}\n template <MinMaxEnum sgn= MINIMIZE, bool persistent= false> LiChaoTreeInterface<sgn,\
     \ persistent> make_tree() { return this; }\n};\ntemplate <class F, class T, class\
     \ U> LiChaoTree(F, T, U) -> LiChaoTree<F, argument_type_t<F>>;\ntemplate <class\
     \ F, class T> LiChaoTree(F, T) -> LiChaoTree<F, argument_type_t<F>>;\ntemplate\
@@ -145,39 +144,38 @@ data:
     \ sgn, bool persistent> class LiChaoTreeInterface {\n  LiChaoTree *ins;\n  struct\
     \ Node {\n   int id= -1;\n   Node *ch[2]= {nullptr, nullptr};\n  } *root;\n  inline\
     \ R eval(int id, T x) const { return std::apply(ins->f, std::tuple_cat(std::make_tuple(x),\
-    \ ins->ps[id])); }\n  static inline bool cmp_res(const R &p, const R &n, int pi,\
-    \ int ni) {\n   if constexpr (sgn == MINIMIZE) return p > n || (p == n && pi >\
-    \ ni);\n   else return p < n || (p == n && pi > ni);\n  }\n  inline bool cmp(T\
-    \ x, int pi, int ni) const {\n   if (pi == -1) return true;\n   if (ni == -1)\
-    \ return false;\n   return cmp_res(eval(pi, x), eval(ni, x), pi, ni);\n  }\n \
-    \ static inline bool end(T l, T r) {\n   if constexpr (std::is_floating_point_v<T>)\
-    \ return r - l < 1e-9;\n   else return r - l == 1;\n  }\n  static inline T ub(T\
-    \ r) {\n   if constexpr (std::is_floating_point_v<T>) return r;\n   else return\
-    \ r - 1;\n  }\n  inline void addl(Node *&t, int id, T xl, T xr) {\n   if (!t)\
-    \ return t= new Node{id}, void();\n   T xr_= ub(xr);\n   bool bl= cmp(xl, t->id,\
-    \ id), br= cmp(xr_, t->id, id);\n   if (!bl && !br) return;\n   if constexpr (persistent)\
-    \ t= new Node(*t);\n   if (bl && br) return t->id= id, void();\n   T xm= (xl +\
-    \ xr) / 2;\n   if (cmp(xm, t->id, id)) std::swap(t->id, id), bl= !bl;\n   if (!end(xl,\
-    \ xr)) bl ? addl(t->ch[0], id, xl, xm) : addl(t->ch[1], id, xm, xr);\n  }\n  inline\
-    \ void adds(Node *&t, int id, T l, T r, T xl, T xr) {\n   if (r <= xl || xr <=\
-    \ l) return;\n   if (l <= xl && xr <= r) return addl(t, id, xl, xr);\n   if (!t)\
-    \ t= new Node;\n   else if constexpr (persistent) t= new Node(*t);\n   T xm= (xl\
-    \ + xr) / 2;\n   adds(t->ch[0], id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm,\
-    \ xr);\n  }\n  inline std::pair<R, int> query(const Node *t, T x, T xl, T xr)\
-    \ const {\n   if (!t) return {R(), -1};\n   if (end(xl, xr)) return {t->id ==\
-    \ -1 ? R() : eval(t->id, x), t->id};\n   T xm= (xl + xr) / 2;\n   auto b= x <\
-    \ xm ? query(t->ch[0], x, xl, xm) : query(t->ch[1], x, xm, xr);\n   if (t->id\
-    \ == -1) return b;\n   R a= eval(t->id, x);\n   return b.second != -1 && cmp_res(a,\
-    \ b.first, t->id, b.second) ? b : std::make_pair(a, t->id);\n  }\n public:\n \
-    \ LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree *ins): ins(ins),\
-    \ root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
-    \ addl(root, ins->ps.size() - 1, ins->LB, ins->UB); }\n  // [l,r)\n  void insert(T\
-    \ l, T r, const Prms &...args) {\n   if (l < r) ins->ps.emplace_back(args...),\
-    \ adds(root, ins->ps.size() - 1, l, r, ins->LB, ins->UB);\n  }\n  std::pair<R,\
-    \ int> query(T x) const { return query(root, x, ins->LB, ins->UB); }\n  const\
-    \ std::tuple<Prms...> &params(int id) const { return ins->ps[id]; }\n };\npublic:\n\
-    \ LiChaoTree(const F &f, T LB= -2e9, T UB= 2e9): f(f), LB(LB), UB(UB) {}\n template\
-    \ <MinMaxEnum sgn= MINIMIZE, bool persistent= false> LiChaoTreeInterface<sgn,\
+    \ ins->ps[id])); }\n  static inline bool cmp(const R &p, const R &n, int pi, int\
+    \ ni) {\n   if constexpr (sgn == MINIMIZE) return p > n || (p == n && pi > ni);\n\
+    \   else return p < n || (p == n && pi > ni);\n  }\n  inline bool cmp(T x, int\
+    \ pi, int ni) const {\n   if (ni == -1) return false;\n   if (pi == -1) return\
+    \ true;\n   return cmp(eval(pi, x), eval(ni, x), pi, ni);\n  }\n  static inline\
+    \ T ub(T r) {\n   if constexpr (std::is_floating_point_v<T>) return r;\n   else\
+    \ return r - 1;\n  }\n  inline void addl(Node *&t, int id, T xl, T xr) {\n   if\
+    \ (!t) return t= new Node{id}, void();\n   bool bl= cmp(xl, t->id, id), br= cmp(ub(xr),\
+    \ t->id, id);\n   if (!bl && !br) return;\n   if constexpr (persistent) t= new\
+    \ Node(*t);\n   if (bl && br) return t->id= id, void();\n   T xm= (xl + xr) /\
+    \ 2;\n   if (cmp(xm, t->id, id)) std::swap(t->id, id), bl= !bl;\n   if constexpr\
+    \ (std::is_floating_point_v<T>)\n    if (xr - xl < 1e-9) return;\n   bl ? addl(t->ch[0],\
+    \ id, xl, xm) : addl(t->ch[1], id, xm, xr);\n  }\n  inline void adds(Node *&t,\
+    \ int id, T l, T r, T xl, T xr) {\n   if (r <= xl || xr <= l) return;\n   if (l\
+    \ <= xl && xr <= r) return addl(t, id, xl, xr);\n   if (!t) t= new Node;\n   else\
+    \ if constexpr (persistent) t= new Node(*t);\n   T xm= (xl + xr) / 2;\n   adds(t->ch[0],\
+    \ id, l, r, xl, xm), adds(t->ch[1], id, l, r, xm, xr);\n  }\n  inline std::pair<R,\
+    \ int> query(const Node *t, T x, T xl, T xr) const {\n   if (!t) return {R(),\
+    \ -1};\n   T xm= (xl + xr) / 2;\n   auto b= x < xm ? query(t->ch[0], x, xl, xm)\
+    \ : query(t->ch[1], x, xm, xr);\n   if (t->id == -1) return b;\n   R a= eval(t->id,\
+    \ x);\n   return b.second != -1 && cmp(a, b.first, t->id, b.second) ? b : std::make_pair(a,\
+    \ t->id);\n  }\n public:\n  LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree\
+    \ *ins): ins(ins), root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
+    \ addl(root, ins->ps.size() - 1, ins->LB, ins->UB); }\n  // [l, r)\n  void insert(const\
+    \ Prms &...args, T l, T r) {\n   assert(ins->LB <= l), assert(l < r), assert(r\
+    \ <= ins->UB);\n   ins->ps.emplace_back(args...), adds(root, ins->ps.size() -\
+    \ 1, l, r, ins->LB, ins->UB);\n  }\n  // [l, UB)\n  void insert(const Prms &...args,\
+    \ T l) { insert(args..., l, ins->UB); }\n  std::pair<R, int> query(T x) const\
+    \ { return assert(ins->LB <= x && x < ins->UB), query(root, x, ins->LB, ins->UB);\
+    \ }\n  const std::tuple<Prms...> &params(int id) const { return ins->ps[id]; }\n\
+    \ };\npublic:\n LiChaoTree(const F &f, T LB= -2e9, T UB= 2e9): f(f), LB(LB), UB(UB)\
+    \ {}\n template <MinMaxEnum sgn= MINIMIZE, bool persistent= false> LiChaoTreeInterface<sgn,\
     \ persistent> make_tree() { return this; }\n};\ntemplate <class F, class T, class\
     \ U> LiChaoTree(F, T, U) -> LiChaoTree<F, argument_type_t<F>>;\ntemplate <class\
     \ F, class T> LiChaoTree(F, T) -> LiChaoTree<F, argument_type_t<F>>;\ntemplate\
@@ -188,8 +186,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2023-11-26 00:08:30+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2023-11-26 22:34:41+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/line_add_get_min.LiCT.test.cpp
   - test/yosupo/segment_add_get_min.test.cpp
@@ -234,7 +232,7 @@ auto tree = lct.make_tree<MINIMIZE>();
 クエリ
 ```c++
 tree.insert(2, 3); // 2x+3
-tree.insert(0, 2, 1, 1); // x+1 (0<= x < 2)
+tree.insert(1, 1, 0, 2); // x+1 (0<= x < 2)
 auto [val1, id1] = tree.query(1);
 cout << val1 << " "<< id1 << endl; // 2 1
 auto [val2, id2] = tree.query(-1);
@@ -256,7 +254,9 @@ cout << val2 << " "<< id2 << endl; // 1 0
 
 |メンバ関数|概要|計算量|
 |---|---|---|
-|1. `insert(p_0,...,p_n)` <br> 2. `insert(l,r,p_0,...,p_n)`|1. 関数 $f(x;p_0,\dots,p_n)$ を挿入. <br> 2. 半開区間制約付きの関数 $f(x;p_0,\dots,p_n) \hspace{1mm}x\in\lbrack l,r) $ を挿入. | 1. $\mathcal{O}(\log n)$ <br> 2.$\mathcal{O}((\log n)^2)$　|
+| `insert(p_0,...,p_n)` |関数 $f(x;p_0,\dots,p_n)$ を挿入. | $\mathcal{O}(\log n)$　|
+| `insert(p_0,...,p_n,l)`| 半開区間制約付きの関数 $f(x;p_0,\dots,p_n) \hspace{1mm}x\in\lbrack l,\mathrm{UB}) $ を挿入. | $\mathcal{O}((\log n)^2)$　|
+| `insert(p_0,...,p_n,l,r)`| 半開区間制約付きの関数 $f(x;p_0,\dots,p_n) \hspace{1mm}x\in\lbrack l,r) $ を挿入. | $\mathcal{O}((\log n)^2)$　|
 |`query(x)` | { $x$ における最小値(最大値), それを達成する関数の番号 } を返す. <br>存在しない場合 { 未定義, -1 } を返す. |$\mathcal{O}(\log n)$ | 
 
 ## 問題例

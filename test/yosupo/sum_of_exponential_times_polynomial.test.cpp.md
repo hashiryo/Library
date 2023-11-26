@@ -26,7 +26,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/Sieve.hpp
     title: "\u7DDA\u5F62\u7BE9 \u4ED6"
   _extendedRequiredBy: []

@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Optimization/ConvexHullTrick.hpp
     title: Convex-Hull-Trick
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
   - icon: ':heavy_check_mark:'
@@ -33,13 +33,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2603.AlienDP.test.cpp
     title: test/aoj/2603.AlienDP.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2603.LiCT.test.cpp
     title: test/aoj/2603.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/2725.CHT.test.cpp
     title: test/aoj/2725.CHT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/2725.LiCT.test.cpp
     title: test/aoj/2725.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,7 +48,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3044.test.cpp
     title: test/aoj/3044.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3086.LiCT.test.cpp
     title: test/aoj/3086.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -78,22 +78,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.CHT.test.cpp
     title: test/yosupo/line_add_get_min.CHT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/line_add_get_min.LiCT.test.cpp
     title: test/yosupo/line_add_get_min.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/min_cost_b_flow.test.cpp
     title: test/yosupo/min_cost_b_flow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
     title: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1297.CHT.test.cpp
     title: test/yukicoder/1297.CHT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1297.LiCT.1.test.cpp
     title: test/yukicoder/1297.LiCT.1.test.cpp
   - icon: ':x:'
@@ -117,19 +117,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.zalgo.test.cpp
     title: test/yukicoder/2332.zalgo.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2458.CHT.test.cpp
     title: test/yukicoder/2458.CHT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2458.LiCT.test.cpp
     title: test/yukicoder/2458.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/409.LiCT.test.cpp
     title: test/yukicoder/409.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -138,16 +138,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/421.weighted_matroid_intersection.test.cpp
     title: test/yukicoder/421.weighted_matroid_intersection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/703.LiCT.test.cpp
     title: test/yukicoder/703.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/704.LiCT.test.cpp
     title: test/yukicoder/704.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/705.LiCT.test.cpp
     title: test/yukicoder/705.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/913.LiCT.test.cpp
     title: test/yukicoder/913.LiCT.test.cpp
   - icon: ':x:'

@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/DirichletSeries.hpp
     title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
   _extendedRequiredBy: []

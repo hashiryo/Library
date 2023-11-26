@@ -9,15 +9,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.Dirichlet.test.cpp
     title: test/atcoder/abc179_c.Dirichlet.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc116_c.Dirichlet.test.cpp
+    title: test/atcoder/arc116_c.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1276.Dirichlet.test.cpp
+    title: test/yukicoder/1276.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1573.Dirichlet.test.cpp
     title: test/yukicoder/1573.Dirichlet.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/DirichletSeries.hpp\"\n#include <vector>\n\
@@ -262,11 +268,13 @@ data:
   path: src/NumberTheory/DirichletSeries.hpp
   requiredBy: []
   timestamp: '2023-11-26 00:08:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
+  - test/yukicoder/1276.Dirichlet.test.cpp
   - test/yukicoder/1573.Dirichlet.test.cpp
   - test/atcoder/abc179_c.Dirichlet.test.cpp
+  - test/atcoder/arc116_c.Dirichlet.test.cpp
   - test/atcoder/abc172_d.Dirichlet.test.cpp
 documentation_of: src/NumberTheory/DirichletSeries.hpp
 layout: document
@@ -312,9 +320,11 @@ $
 
 |メンバ変数|概要|
 |---|---|
+|`N`|$N$|
+|`K`|$K$|
 |`x`| $f(1),\dots,f(K)$ の値を保存している配列. <br> サイズは$K+1$. 0番目の値は未定義.|
 |`Xs`|$F(1),\dots,F(K)$ の値を保存している配列. <br> サイズは$K+1$. 0番目の値は未定義.|
-|`Xl`|$F(\floor{N/1}),\dots,f(\floor{N/L})$ の値を保存している配列. <br> サイズは$L+1$. 0番目の値は未定義.|
+|`Xl`|$F(\floor{N/1}),\dots,F(\floor{N/L})$ の値を保存している配列. <br> サイズは$L+1$. 0番目の値は未定義.|
 
 |演算子オーバーロード|概要 ( $f,g$ から $h$ を返すイメージ )|計算量|
 |---|---|---|

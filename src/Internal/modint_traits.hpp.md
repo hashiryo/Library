@@ -217,6 +217,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc116_c.Dirichlet.test.cpp
+    title: test/atcoder/arc116_c.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/unit_test/constexpr_modint.test.cpp
     title: test/unit_test/constexpr_modint.test.cpp
@@ -415,7 +418,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -451,6 +454,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1276.Dirichlet.test.cpp
+    title: test/yukicoder/1276.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
@@ -514,7 +520,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
   - icon: ':heavy_check_mark:'
@@ -547,6 +553,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/599.RH.test.cpp
     title: test/yukicoder/599.RH.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/644.test.cpp
+    title: test/yukicoder/644.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/650.LCT.test.cpp
     title: test/yukicoder/650.LCT.test.cpp
@@ -568,6 +577,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/803.test.cpp
     title: test/yukicoder/803.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/886.numth.test.cpp
+    title: test/yukicoder/886.numth.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
@@ -719,6 +731,7 @@ data:
   - test/yosupo/enumerate_palindromes.RH.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/235.LCT.test.cpp
+  - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/980.test.cpp
   - test/yukicoder/1019.numth.test.cpp
   - test/yukicoder/1740.test.cpp
@@ -728,9 +741,11 @@ data:
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/665.test.cpp
   - test/yukicoder/215.test.cpp
+  - test/yukicoder/1276.Dirichlet.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/1533.test.cpp
   - test/yukicoder/765.RH.test.cpp
+  - test/yukicoder/644.test.cpp
   - test/yukicoder/1269.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/1124.test.cpp
@@ -802,6 +817,7 @@ data:
   - test/atcoder/abc135_d.test.cpp
   - test/atcoder/agc047_b.RH.test.cpp
   - test/atcoder/abc323_g.test.cpp
+  - test/atcoder/arc116_c.Dirichlet.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
   - test/atcoder/abc213_g.test.cpp
   - test/atcoder/abc138_f.test.cpp

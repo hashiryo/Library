@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/CartesianProduct.hpp
     title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\\
       times\\cdots\\times K_n$)"
@@ -29,7 +29,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Misc/compress.hpp
     title: "\u5EA7\u6A19\u5727\u7E2E"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []

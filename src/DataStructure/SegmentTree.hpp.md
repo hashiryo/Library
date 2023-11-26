@@ -6,7 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3086.LARSCH.test.cpp
     title: test/aoj/3086.LARSCH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/3086.LiCT.test.cpp
     title: test/aoj/3086.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -21,9 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/649.SegTree.test.cpp
     title: test/yukicoder/649.SegTree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SegmentTree.hpp\"\n#include <vector>\n\
@@ -86,7 +86,7 @@ data:
   path: src/DataStructure/SegmentTree.hpp
   requiredBy: []
   timestamp: '2023-01-22 23:12:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp

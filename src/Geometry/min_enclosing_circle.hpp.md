@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/Segment.hpp
     title: "\u7DDA\u5206"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
   _extendedRequiredBy: []
