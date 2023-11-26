@@ -6,10 +6,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
   - icon: ':x:'
@@ -17,20 +17,20 @@ data:
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\n#include\
     \ <vector>\n#include <algorithm>\n#include <tuple>\n#include <cmath>\n#include\
     \ <cstdint>\n#include <cassert>\ntemplate <class T> struct PrimeSum {\n uint64_t\
     \ N;\n size_t K;\n std::vector<T> Xs, Xl;\n PrimeSum(uint64_t N= 0): N(N), K(std::sqrt(N)),\
-    \ Xs(K + 1), Xl(K + 1) {}\n PrimeSum(uint64_t N, size_t K, const std::vector<T>\
-    \ &s, const std::vector<T> &l): N(N), K(std::sqrt(N)), Xs(s), Xl(l) {}\n PrimeSum\
-    \ operator-() const {\n  auto Ys= Xs, Yl= Xl;\n  for (auto &x: Ys) x= -x;\n  for\
-    \ (auto &x: Yl) x= -x;\n  return PrimeSum(N, Ys, Yl);\n }\n PrimeSum &operator*=(T\
-    \ r) {\n  for (auto &x: Xs) x*= r;\n  for (auto &x: Xl) x*= r;\n  return *this;\n\
-    \ }\n PrimeSum &operator+=(const PrimeSum &r) {\n  for (size_t i= K + 1; i--;)\
-    \ Xs[i]+= r.Xs[i];\n  for (size_t i= K + 1; i--;) Xl[i]+= r.Xl[i];\n  return *this;\n\
+    \ Xs(K + 1), Xl(K + 1) {}\n PrimeSum(uint64_t N, const std::vector<T> &s, const\
+    \ std::vector<T> &l): N(N), K(std::sqrt(N)), Xs(s), Xl(l) {}\n PrimeSum operator-()\
+    \ const {\n  auto Ys= Xs, Yl= Xl;\n  for (auto &x: Ys) x= -x;\n  for (auto &x:\
+    \ Yl) x= -x;\n  return PrimeSum(N, Ys, Yl);\n }\n PrimeSum &operator*=(T r) {\n\
+    \  for (auto &x: Xs) x*= r;\n  for (auto &x: Xl) x*= r;\n  return *this;\n }\n\
+    \ PrimeSum &operator+=(const PrimeSum &r) {\n  for (size_t i= K + 1; i--;) Xs[i]+=\
+    \ r.Xs[i];\n  for (size_t i= K + 1; i--;) Xl[i]+= r.Xl[i];\n  return *this;\n\
     \ }\n PrimeSum &operator-=(const PrimeSum &r) {\n  for (size_t i= K + 1; i--;)\
     \ Xs[i]-= r.Xs[i];\n  for (size_t i= K + 1; i--;) Xl[i]-= r.Xl[i];\n  return *this;\n\
     \ }\n PrimeSum operator*(T r) const { return PrimeSum(*this)*= r; }\n friend PrimeSum\
@@ -89,9 +89,9 @@ data:
     #include <cmath>\n#include <cstdint>\n#include <cassert>\ntemplate <class T> struct\
     \ PrimeSum {\n uint64_t N;\n size_t K;\n std::vector<T> Xs, Xl;\n PrimeSum(uint64_t\
     \ N= 0): N(N), K(std::sqrt(N)), Xs(K + 1), Xl(K + 1) {}\n PrimeSum(uint64_t N,\
-    \ size_t K, const std::vector<T> &s, const std::vector<T> &l): N(N), K(std::sqrt(N)),\
-    \ Xs(s), Xl(l) {}\n PrimeSum operator-() const {\n  auto Ys= Xs, Yl= Xl;\n  for\
-    \ (auto &x: Ys) x= -x;\n  for (auto &x: Yl) x= -x;\n  return PrimeSum(N, Ys, Yl);\n\
+    \ const std::vector<T> &s, const std::vector<T> &l): N(N), K(std::sqrt(N)), Xs(s),\
+    \ Xl(l) {}\n PrimeSum operator-() const {\n  auto Ys= Xs, Yl= Xl;\n  for (auto\
+    \ &x: Ys) x= -x;\n  for (auto &x: Yl) x= -x;\n  return PrimeSum(N, Ys, Yl);\n\
     \ }\n PrimeSum &operator*=(T r) {\n  for (auto &x: Xs) x*= r;\n  for (auto &x:\
     \ Xl) x*= r;\n  return *this;\n }\n PrimeSum &operator+=(const PrimeSum &r) {\n\
     \  for (size_t i= K + 1; i--;) Xs[i]+= r.Xs[i];\n  for (size_t i= K + 1; i--;)\
@@ -153,8 +153,8 @@ data:
   isVerificationFile: false
   path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
   requiredBy: []
-  timestamp: '2023-11-26 22:34:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-11-26 23:02:36+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/counting_primes.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp

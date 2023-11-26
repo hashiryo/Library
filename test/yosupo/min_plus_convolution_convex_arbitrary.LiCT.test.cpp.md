@@ -5,7 +5,7 @@ data:
     path: src/Internal/function_traits.hpp
     title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\
       \u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Optimization/LiChaoTree.hpp
     title: Li-Chao-Tree
   - icon: ':question:'
@@ -25,15 +25,16 @@ data:
   bundledCode: "#line 1 \"test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
     \n#include <iostream>\n#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n\
-    #include <algorithm>\n#include <vector>\n#include <tuple>\n#line 2 \"src/Internal/function_traits.hpp\"\
-    \n#include <type_traits>\n// clang-format off\nnamespace function_template_internal{\n\
-    template<class C>struct is_function_object{\n template<class U,int dummy=(&U::operator(),0)>\
-    \ static std::true_type check(U *);\n static std::false_type check(...);\n static\
-    \ C *m;\n static constexpr bool value= decltype(check(m))::value;\n};\ntemplate<class\
-    \ F,bool,bool>struct function_type_impl{using type= void;};\ntemplate<class F>struct\
-    \ function_type_impl<F,true,false>{using type= F *;};\ntemplate<class F>struct\
-    \ function_type_impl<F,false,true>{using type= decltype(&F::operator());};\ntemplate<class\
-    \ F> using function_type_t= typename function_type_impl<F,std::is_function_v<F>,is_function_object<F>::value>::type;\n\
+    #include <algorithm>\n#include <vector>\n#include <tuple>\n#include <cassert>\n\
+    #line 2 \"src/Internal/function_traits.hpp\"\n#include <type_traits>\n// clang-format\
+    \ off\nnamespace function_template_internal{\ntemplate<class C>struct is_function_object{\n\
+    \ template<class U,int dummy=(&U::operator(),0)> static std::true_type check(U\
+    \ *);\n static std::false_type check(...);\n static C *m;\n static constexpr bool\
+    \ value= decltype(check(m))::value;\n};\ntemplate<class F,bool,bool>struct function_type_impl{using\
+    \ type= void;};\ntemplate<class F>struct function_type_impl<F,true,false>{using\
+    \ type= F *;};\ntemplate<class F>struct function_type_impl<F,false,true>{using\
+    \ type= decltype(&F::operator());};\ntemplate<class F> using function_type_t=\
+    \ typename function_type_impl<F,std::is_function_v<F>,is_function_object<F>::value>::type;\n\
     template<class... Args>struct result_type_impl{using type= void;};\ntemplate<class\
     \ R,class... Args>struct result_type_impl<R(*)(Args...)>{using type= R;};\ntemplate<class\
     \ C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)>{using type=\
@@ -47,7 +48,7 @@ data:
     template<class F> using argument_type_t= typename argument_type_impl<function_type_t<F>>::type;\n\
     }\nusing function_template_internal::result_type_t,function_template_internal::argument_type_t;\n\
     // clang-format on\n#line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum\
-    \ { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 8 \"src/Optimization/LiChaoTree.hpp\"\n\
+    \ { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 9 \"src/Optimization/LiChaoTree.hpp\"\n\
     template <class F, class T> class LiChaoTree {};\ntemplate <class F, class T,\
     \ class... Prms> class LiChaoTree<F, std::tuple<T, Prms...>> {\n using R= result_type_t<F>;\n\
     \ F f;\n const T LB, UB;\n std::vector<std::tuple<Prms...>> ps;\n template <MinMaxEnum\
@@ -113,7 +114,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
   requiredBy: []
-  timestamp: '2023-11-26 22:34:41+09:00'
+  timestamp: '2023-11-26 23:02:36+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp

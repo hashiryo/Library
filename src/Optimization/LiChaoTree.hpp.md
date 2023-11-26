@@ -11,16 +11,16 @@ data:
       \u5217\u6319\u578B"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2603.LiCT.test.cpp
     title: test/aoj/2603.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2725.LiCT.test.cpp
     title: test/aoj/2725.LiCT.test.cpp
   - icon: ':x:'
     path: test/aoj/3086.LiCT.test.cpp
     title: test/aoj/3086.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/line_add_get_min.LiCT.test.cpp
     title: test/yosupo/line_add_get_min.LiCT.test.cpp
   - icon: ':x:'
@@ -67,19 +67,20 @@ data:
     title: test/yukicoder/952.LiCT.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/LiChaoTree.hpp\"\n#include <limits>\n#include\
-    \ <algorithm>\n#include <vector>\n#include <tuple>\n#line 2 \"src/Internal/function_traits.hpp\"\
-    \n#include <type_traits>\n// clang-format off\nnamespace function_template_internal{\n\
-    template<class C>struct is_function_object{\n template<class U,int dummy=(&U::operator(),0)>\
-    \ static std::true_type check(U *);\n static std::false_type check(...);\n static\
-    \ C *m;\n static constexpr bool value= decltype(check(m))::value;\n};\ntemplate<class\
-    \ F,bool,bool>struct function_type_impl{using type= void;};\ntemplate<class F>struct\
-    \ function_type_impl<F,true,false>{using type= F *;};\ntemplate<class F>struct\
-    \ function_type_impl<F,false,true>{using type= decltype(&F::operator());};\ntemplate<class\
-    \ F> using function_type_t= typename function_type_impl<F,std::is_function_v<F>,is_function_object<F>::value>::type;\n\
+    \ <algorithm>\n#include <vector>\n#include <tuple>\n#include <cassert>\n#line\
+    \ 2 \"src/Internal/function_traits.hpp\"\n#include <type_traits>\n// clang-format\
+    \ off\nnamespace function_template_internal{\ntemplate<class C>struct is_function_object{\n\
+    \ template<class U,int dummy=(&U::operator(),0)> static std::true_type check(U\
+    \ *);\n static std::false_type check(...);\n static C *m;\n static constexpr bool\
+    \ value= decltype(check(m))::value;\n};\ntemplate<class F,bool,bool>struct function_type_impl{using\
+    \ type= void;};\ntemplate<class F>struct function_type_impl<F,true,false>{using\
+    \ type= F *;};\ntemplate<class F>struct function_type_impl<F,false,true>{using\
+    \ type= decltype(&F::operator());};\ntemplate<class F> using function_type_t=\
+    \ typename function_type_impl<F,std::is_function_v<F>,is_function_object<F>::value>::type;\n\
     template<class... Args>struct result_type_impl{using type= void;};\ntemplate<class\
     \ R,class... Args>struct result_type_impl<R(*)(Args...)>{using type= R;};\ntemplate<class\
     \ C,class R,class... Args>struct result_type_impl<R(C::*)(Args...)>{using type=\
@@ -93,7 +94,7 @@ data:
     template<class F> using argument_type_t= typename argument_type_impl<function_type_t<F>>::type;\n\
     }\nusing function_template_internal::result_type_t,function_template_internal::argument_type_t;\n\
     // clang-format on\n#line 2 \"src/Optimization/MinMaxEnum.hpp\"\nenum MinMaxEnum\
-    \ { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 8 \"src/Optimization/LiChaoTree.hpp\"\n\
+    \ { MAXIMIZE= -1, MINIMIZE= 1 };\n#line 9 \"src/Optimization/LiChaoTree.hpp\"\n\
     template <class F, class T> class LiChaoTree {};\ntemplate <class F, class T,\
     \ class... Prms> class LiChaoTree<F, std::tuple<T, Prms...>> {\n using R= result_type_t<F>;\n\
     \ F f;\n const T LB, UB;\n std::vector<std::tuple<Prms...>> ps;\n template <MinMaxEnum\
@@ -137,13 +138,14 @@ data:
     \ F, class T> LiChaoTree(F, T) -> LiChaoTree<F, argument_type_t<F>>;\ntemplate\
     \ <class F> LiChaoTree(F) -> LiChaoTree<F, argument_type_t<F>>;\n"
   code: "#pragma once\n#include <limits>\n#include <algorithm>\n#include <vector>\n\
-    #include <tuple>\n#include \"src/Internal/function_traits.hpp\"\n#include \"src/Optimization/MinMaxEnum.hpp\"\
-    \ntemplate <class F, class T> class LiChaoTree {};\ntemplate <class F, class T,\
-    \ class... Prms> class LiChaoTree<F, std::tuple<T, Prms...>> {\n using R= result_type_t<F>;\n\
-    \ F f;\n const T LB, UB;\n std::vector<std::tuple<Prms...>> ps;\n template <MinMaxEnum\
-    \ sgn, bool persistent> class LiChaoTreeInterface {\n  LiChaoTree *ins;\n  struct\
-    \ Node {\n   int id= -1;\n   Node *ch[2]= {nullptr, nullptr};\n  } *root;\n  inline\
-    \ R eval(int id, T x) const { return std::apply(ins->f, std::tuple_cat(std::make_tuple(x),\
+    #include <tuple>\n#include <cassert>\n#include \"src/Internal/function_traits.hpp\"\
+    \n#include \"src/Optimization/MinMaxEnum.hpp\"\ntemplate <class F, class T> class\
+    \ LiChaoTree {};\ntemplate <class F, class T, class... Prms> class LiChaoTree<F,\
+    \ std::tuple<T, Prms...>> {\n using R= result_type_t<F>;\n F f;\n const T LB,\
+    \ UB;\n std::vector<std::tuple<Prms...>> ps;\n template <MinMaxEnum sgn, bool\
+    \ persistent> class LiChaoTreeInterface {\n  LiChaoTree *ins;\n  struct Node {\n\
+    \   int id= -1;\n   Node *ch[2]= {nullptr, nullptr};\n  } *root;\n  inline R eval(int\
+    \ id, T x) const { return std::apply(ins->f, std::tuple_cat(std::make_tuple(x),\
     \ ins->ps[id])); }\n  static inline bool cmp(const R &p, const R &n, int pi, int\
     \ ni) {\n   if constexpr (sgn == MINIMIZE) return p > n || (p == n && pi > ni);\n\
     \   else return p < n || (p == n && pi > ni);\n  }\n  inline bool cmp(T x, int\
@@ -186,8 +188,8 @@ data:
   isVerificationFile: false
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2023-11-26 22:34:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2023-11-26 23:02:36+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/line_add_get_min.LiCT.test.cpp
   - test/yosupo/segment_add_get_min.test.cpp

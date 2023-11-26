@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
     title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"
   - icon: ':question:'
@@ -118,11 +118,11 @@ data:
     #include <cstdint>\n#line 8 \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\
     \ntemplate <class T> struct PrimeSum {\n uint64_t N;\n size_t K;\n std::vector<T>\
     \ Xs, Xl;\n PrimeSum(uint64_t N= 0): N(N), K(std::sqrt(N)), Xs(K + 1), Xl(K +\
-    \ 1) {}\n PrimeSum(uint64_t N, size_t K, const std::vector<T> &s, const std::vector<T>\
-    \ &l): N(N), K(std::sqrt(N)), Xs(s), Xl(l) {}\n PrimeSum operator-() const {\n\
-    \  auto Ys= Xs, Yl= Xl;\n  for (auto &x: Ys) x= -x;\n  for (auto &x: Yl) x= -x;\n\
-    \  return PrimeSum(N, Ys, Yl);\n }\n PrimeSum &operator*=(T r) {\n  for (auto\
-    \ &x: Xs) x*= r;\n  for (auto &x: Xl) x*= r;\n  return *this;\n }\n PrimeSum &operator+=(const\
+    \ 1) {}\n PrimeSum(uint64_t N, const std::vector<T> &s, const std::vector<T> &l):\
+    \ N(N), K(std::sqrt(N)), Xs(s), Xl(l) {}\n PrimeSum operator-() const {\n  auto\
+    \ Ys= Xs, Yl= Xl;\n  for (auto &x: Ys) x= -x;\n  for (auto &x: Yl) x= -x;\n  return\
+    \ PrimeSum(N, Ys, Yl);\n }\n PrimeSum &operator*=(T r) {\n  for (auto &x: Xs)\
+    \ x*= r;\n  for (auto &x: Xl) x*= r;\n  return *this;\n }\n PrimeSum &operator+=(const\
     \ PrimeSum &r) {\n  for (size_t i= K + 1; i--;) Xs[i]+= r.Xs[i];\n  for (size_t\
     \ i= K + 1; i--;) Xl[i]+= r.Xl[i];\n  return *this;\n }\n PrimeSum &operator-=(const\
     \ PrimeSum &r) {\n  for (size_t i= K + 1; i--;) Xs[i]-= r.Xs[i];\n  for (size_t\
@@ -227,7 +227,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-11-26 22:34:41+09:00'
+  timestamp: '2023-11-26 23:02:36+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
