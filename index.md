@@ -377,10 +377,10 @@ data:
       title: "\u7591\u4F3C\u4E71\u6570"
   - name: src/NumberTheory
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/NumberTheory/DirichletSeries.hpp
       title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
       title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"
     - icon: ':question:'
@@ -1131,7 +1131,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.enum_quo.test.cpp
       title: test/atcoder/abc172_d.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.mul_sum.test.cpp
       title: test/atcoder/abc172_d.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1758,7 +1758,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
       title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
       title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1841,7 +1841,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1270.test.cpp
       title: test/yukicoder/1270.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1276.Dirichlet.test.cpp
       title: test/yukicoder/1276.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1853,7 +1853,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1297.CHT.test.cpp
       title: test/yukicoder/1297.CHT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1297.LiCT.1.test.cpp
       title: test/yukicoder/1297.LiCT.1.test.cpp
     - icon: ':x:'

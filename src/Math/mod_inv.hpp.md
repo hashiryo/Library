@@ -430,7 +430,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -466,7 +466,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1269.test.cpp
     title: test/yukicoder/1269.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1276.Dirichlet.test.cpp
     title: test/yukicoder/1276.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'

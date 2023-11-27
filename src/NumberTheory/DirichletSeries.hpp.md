@@ -15,15 +15,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
     title: test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1276.Dirichlet.test.cpp
     title: test/yukicoder/1276.Dirichlet.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1573.Dirichlet.test.cpp
     title: test/yukicoder/1573.Dirichlet.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/DirichletSeries.hpp\"\n#include <vector>\n\
@@ -268,7 +268,7 @@ data:
   path: src/NumberTheory/DirichletSeries.hpp
   requiredBy: []
   timestamp: '2023-11-26 00:08:30+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
   - test/yukicoder/1276.Dirichlet.test.cpp

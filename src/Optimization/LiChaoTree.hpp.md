@@ -29,7 +29,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/segment_add_get_min.test.cpp
     title: test/yosupo/segment_add_get_min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1297.LiCT.1.test.cpp
     title: test/yukicoder/1297.LiCT.1.test.cpp
   - icon: ':x:'
@@ -125,9 +125,9 @@ data:
     \ t->id);\n  }\n public:\n  LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree\
     \ *ins): ins(ins), root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
     \ addl(root, ins->ps.size() - 1, ins->LB, ins->UB); }\n  // [l, r)\n  void insert(const\
-    \ Prms &...args, T l, T r) {\n   assert(ins->LB <= l), assert(l < r), assert(r\
-    \ <= ins->UB);\n   ins->ps.emplace_back(args...), adds(root, ins->ps.size() -\
-    \ 1, l, r, ins->LB, ins->UB);\n  }\n  // [l, UB)\n  void insert(const Prms &...args,\
+    \ Prms &...args, T l, T r) { l= std::max(l, ins->LB), r= std::min(r, ins->UB),\
+    \ assert(l < r), ins->ps.emplace_back(args...), adds(root, ins->ps.size() - 1,\
+    \ l, r, ins->LB, ins->UB); }\n  // [l, UB)\n  void insert(const Prms &...args,\
     \ T l) { insert(args..., l, ins->UB); }\n  std::pair<R, int> query(T x) const\
     \ { return assert(ins->LB <= x && x < ins->UB), query(root, x, ins->LB, ins->UB);\
     \ }\n  const std::tuple<Prms...> &params(int id) const { return ins->ps[id]; }\n\
@@ -170,9 +170,9 @@ data:
     \ t->id);\n  }\n public:\n  LiChaoTreeInterface()= default;\n  LiChaoTreeInterface(LiChaoTree\
     \ *ins): ins(ins), root(nullptr) {}\n  void insert(const Prms &...args) { ins->ps.emplace_back(args...),\
     \ addl(root, ins->ps.size() - 1, ins->LB, ins->UB); }\n  // [l, r)\n  void insert(const\
-    \ Prms &...args, T l, T r) {\n   assert(ins->LB <= l), assert(l < r), assert(r\
-    \ <= ins->UB);\n   ins->ps.emplace_back(args...), adds(root, ins->ps.size() -\
-    \ 1, l, r, ins->LB, ins->UB);\n  }\n  // [l, UB)\n  void insert(const Prms &...args,\
+    \ Prms &...args, T l, T r) { l= std::max(l, ins->LB), r= std::min(r, ins->UB),\
+    \ assert(l < r), ins->ps.emplace_back(args...), adds(root, ins->ps.size() - 1,\
+    \ l, r, ins->LB, ins->UB); }\n  // [l, UB)\n  void insert(const Prms &...args,\
     \ T l) { insert(args..., l, ins->UB); }\n  std::pair<R, int> query(T x) const\
     \ { return assert(ins->LB <= x && x < ins->UB), query(root, x, ins->LB, ins->UB);\
     \ }\n  const std::tuple<Prms...> &params(int id) const { return ins->ps[id]; }\n\
@@ -188,7 +188,7 @@ data:
   isVerificationFile: false
   path: src/Optimization/LiChaoTree.hpp
   requiredBy: []
-  timestamp: '2023-11-26 23:02:36+09:00'
+  timestamp: '2023-11-27 11:00:47+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/line_add_get_min.LiCT.test.cpp
