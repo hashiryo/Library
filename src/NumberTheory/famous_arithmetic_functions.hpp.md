@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\n#include\
@@ -86,7 +86,7 @@ data:
   path: src/NumberTheory/famous_arithmetic_functions.hpp
   requiredBy: []
   timestamp: '2023-11-25 22:39:19+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp

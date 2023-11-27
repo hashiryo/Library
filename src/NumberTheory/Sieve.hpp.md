@@ -33,15 +33,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/886.numth.test.cpp
     title: test/yukicoder/886.numth.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/Sieve.hpp\"\n#include <vector>\n#include\
@@ -207,7 +207,7 @@ data:
   path: src/NumberTheory/Sieve.hpp
   requiredBy: []
   timestamp: '2023-11-25 18:44:26+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp

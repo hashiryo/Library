@@ -229,7 +229,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/Tree.hpp
       title: "\u6728"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -285,7 +285,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/BinomialCoefficient.hpp
       title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/CartesianProduct.hpp
       title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times\
         \ K_2\\times\\cdots\\times K_n$)"
@@ -317,7 +317,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/SetPowerSeries.hpp
       title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
@@ -372,7 +372,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Misc/compress.hpp
       title: "\u5EA7\u6A19\u5727\u7E2E"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Misc/rng.hpp
       title: "\u7591\u4F3C\u4E71\u6570"
   - name: src/NumberTheory
@@ -383,13 +383,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
       title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/NumberTheory/Sieve.hpp
       title: "\u7DDA\u5F62\u7BE9 \u4ED6"
     - icon: ':heavy_check_mark:'
       path: src/NumberTheory/enumerate_quotients.hpp
       title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/NumberTheory/famous_arithmetic_functions.hpp
       title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   - name: src/Optimization
@@ -448,7 +448,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/AhoCorasick.hpp
       title: Aho-Corasick
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/String/RollingHash.hpp
       title: Rolling-Hash
     - icon: ':heavy_check_mark:'
@@ -457,7 +457,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/String/SuffixTree.hpp
       title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/String/z_algorithm.hpp
       title: Z-Algorithm
   verificationCategories:
@@ -1958,7 +1958,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1848.zalgo.test.cpp
       title: test/yukicoder/1848.zalgo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1867.test.cpp
       title: test/yukicoder/1867.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1997,10 +1997,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/2309.test.cpp
       title: test/yukicoder/2309.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/2332.RH.test.cpp
       title: test/yukicoder/2332.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/2332.zalgo.test.cpp
       title: test/yukicoder/2332.zalgo.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2024,10 +2024,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/2458.CHT.test.cpp
       title: test/yukicoder/2458.CHT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/2458.LiCT.test.cpp
       title: test/yukicoder/2458.LiCT.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/2507.test.cpp
       title: test/yukicoder/2507.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2051,7 +2051,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/409.LARSCH.test.cpp
       title: test/yukicoder/409.LARSCH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/409.LiCT.test.cpp
       title: test/yukicoder/409.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2081,7 +2081,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/599.RH.test.cpp
       title: test/yukicoder/599.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/644.test.cpp
       title: test/yukicoder/644.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2114,19 +2114,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/703.LARSCH.test.cpp
       title: test/yukicoder/703.LARSCH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/703.LiCT.test.cpp
       title: test/yukicoder/703.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/704.LARSCH.test.cpp
       title: test/yukicoder/704.LARSCH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/704.LiCT.test.cpp
       title: test/yukicoder/704.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/705.LARSCH.test.cpp
       title: test/yukicoder/705.LARSCH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/705.LiCT.test.cpp
       title: test/yukicoder/705.LiCT.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2153,13 +2153,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/880.Beats.test.cpp
       title: test/yukicoder/880.Beats.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/886.numth.test.cpp
       title: test/yukicoder/886.numth.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/911.test.cpp
       title: test/yukicoder/911.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/913.LiCT.test.cpp
       title: test/yukicoder/913.LiCT.test.cpp
     - icon: ':heavy_check_mark:'

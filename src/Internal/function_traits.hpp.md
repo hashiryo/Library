@@ -81,7 +81,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/180.test.cpp
     title: test/yukicoder/180.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1867.test.cpp
     title: test/yukicoder/1867.test.cpp
   - icon: ':heavy_check_mark:'
@@ -90,13 +90,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2332.zalgo.test.cpp
     title: test/yukicoder/2332.zalgo.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/2458.LiCT.test.cpp
     title: test/yukicoder/2458.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
@@ -105,28 +105,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/409.LARSCH.test.cpp
     title: test/yukicoder/409.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/409.LiCT.test.cpp
     title: test/yukicoder/409.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/703.LARSCH.test.cpp
     title: test/yukicoder/703.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/703.LiCT.test.cpp
     title: test/yukicoder/703.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/704.LARSCH.test.cpp
     title: test/yukicoder/704.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/704.LiCT.test.cpp
     title: test/yukicoder/704.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/705.LARSCH.test.cpp
     title: test/yukicoder/705.LARSCH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/705.LiCT.test.cpp
     title: test/yukicoder/705.LiCT.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/913.LiCT.test.cpp
     title: test/yukicoder/913.LiCT.test.cpp
   - icon: ':heavy_check_mark:'
