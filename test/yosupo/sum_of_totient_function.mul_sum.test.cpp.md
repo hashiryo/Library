@@ -13,17 +13,17 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
     title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/famous_arithmetic_functions.hpp
     title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -89,9 +89,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -109,11 +109,7 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\
     \n#include <vector>\n#include <algorithm>\n#include <tuple>\n#include <cmath>\n\
     #include <cstdint>\n#line 8 \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\
     \ntemplate <class T> struct PrimeSum {\n uint64_t N;\n size_t K;\n std::vector<T>\
@@ -225,8 +221,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-11-27 11:00:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 layout: document

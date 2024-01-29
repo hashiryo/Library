@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/berlekamp_massey.hpp
     title: Berlekamp-Massey
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -86,9 +86,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -106,24 +106,21 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/berlekamp_massey.hpp\"\n// a[n] = c[0]\
-    \ * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\ntemplate <class\
-    \ K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n size_t n= a.size(),\
-    \ d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K> c(n), b(n), tmp;\n\
-    \ K x= 1, y, coef;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i) {\n  for (++m, y=\
-    \ a[i], j= 1; j <= d; ++j) y+= c[j] * a[i - j];\n  if (y == K()) continue;\n \
-    \ for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-= coef * b[j - m];\n  if (2\
-    \ * d <= i) d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d + 1), c.erase(c.begin());\n\
-    \ for (auto &x: c) x= -x;\n return c;\n}\n#line 6 \"test/yosupo/find_linear_recurrence.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n vector<Mint> a(N);\n for\
-    \ (int i= 0; i < N; i++) cin >> a[i];\n vector<Mint> c= berlekamp_massey(a);\n\
-    \ int d= c.size();\n cout << d << '\\n';\n for (int i= 0; i < d; i++) cout <<\
-    \ c[i] << \" \\n\"[i == d - 1];\n return 0;\n}\n"
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 3 \"src/Math/berlekamp_massey.hpp\"\
+    \n// a[n] = c[0] * a[n-1] + c[1] * a[n-2] + ... + c[d-1] * a[n-d]\n// return c\n\
+    template <class K> std::vector<K> berlekamp_massey(const std::vector<K> &a) {\n\
+    \ size_t n= a.size(), d= 0, m= 0, i, j;\n if (n == 0) return {};\n std::vector<K>\
+    \ c(n), b(n), tmp;\n K x= 1, y, coef;\n for (c[0]= b[0]= 1, i= 0, j; i < n; ++i)\
+    \ {\n  for (++m, y= a[i], j= 1; j <= d; ++j) y+= c[j] * a[i - j];\n  if (y ==\
+    \ K()) continue;\n  for (tmp= c, coef= y / x, j= m; j < n; ++j) c[j]-= coef *\
+    \ b[j - m];\n  if (2 * d <= i) d= i + 1 - d, b= tmp, x= y, m= 0;\n }\n c.resize(d\
+    \ + 1), c.erase(c.begin());\n for (auto &x: c) x= -x;\n return c;\n}\n#line 6\
+    \ \"test/yosupo/find_linear_recurrence.test.cpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ int N;\n cin >> N;\n vector<Mint> a(N);\n for (int i= 0; i < N; i++) cin >>\
+    \ a[i];\n vector<Mint> c= berlekamp_massey(a);\n int d= c.size();\n cout << d\
+    \ << '\\n';\n for (int i= 0; i < d; i++) cout << c[i] << \" \\n\"[i == d - 1];\n\
+    \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
     \n#include <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include\
     \ \"src/Math/berlekamp_massey.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
@@ -140,8 +137,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/find_linear_recurrence.test.cpp
 layout: document

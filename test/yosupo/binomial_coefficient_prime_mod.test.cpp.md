@@ -7,14 +7,13 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/Combination.hpp
-    title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
-      mathbb{F}_p$)"
+  - icon: ':question:'
+    path: src/Math/FactorialPrecalculation.hpp
+    title: src/Math/FactorialPrecalculation.hpp
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Runtime.hpp
     title: "ModInt(\u5B9F\u884C\u6642mod\u30BB\u30C3\u30C8)"
   - icon: ':question:'
@@ -22,9 +21,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod
@@ -90,9 +89,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -110,18 +109,14 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Math/ModInt_Runtime.hpp\"\nnamespace math_internal\
-    \ {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr bool is_runtimemodint_v=\
-    \ is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64 M, int id> struct RB: r_b\
-    \ {\n static inline void set_mod(u64 m) { md= MP(m); }\n static inline u64 max()\
-    \ { return M; }\nprotected:\n static inline MP md;\n};\nclass Montgomery32 {};\n\
-    class Montgomery64 {};\nclass Barrett {};\nclass Barrett2 {};\ntemplate <class\
-    \ Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int, Montgomery32>,\
-    \ MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 3 \"src/Math/ModInt_Runtime.hpp\"\
+    \nnamespace math_internal {\nstruct r_b: m_b {};\ntemplate <class mod_t> constexpr\
+    \ bool is_runtimemodint_v= is_base_of_v<r_b, mod_t>;\ntemplate <class MP, u64\
+    \ M, int id> struct RB: r_b {\n static inline void set_mod(u64 m) { md= MP(m);\
+    \ }\n static inline u64 max() { return M; }\nprotected:\n static inline MP md;\n\
+    };\nclass Montgomery32 {};\nclass Montgomery64 {};\nclass Barrett {};\nclass Barrett2\
+    \ {};\ntemplate <class Int, int id= -1> using ModInt_Runtime= conditional_t<is_same_v<Int,\
+    \ Montgomery32>, MInt<int, u32, RB<MP_Mo<u32, u64, 32, 31>, (1 << 30), id>>, conditional_t<is_same_v<Int,\
     \ Montgomery64>, MInt<i64, u64, RB<MP_Mo<u64, u128, 64, 63>, (1ull << 62), id>>,\
     \ conditional_t<is_same_v<Int, Barrett>, MInt<int, u32, RB<MP_Br, (1u << 31),\
     \ id>>, conditional_t<is_same_v<Int, Barrett2>, MInt<i64, u64, RB<MP_Br2, (1ull\
@@ -130,40 +125,46 @@ data:
     \ id>>>>>>>;\ntemplate <class T, enable_if_t<is_runtimemodint_v<T>, nullptr_t>\
     \ = nullptr> constexpr u64 mv() { return T::max(); }\n}\nusing math_internal::ModInt_Runtime,\
     \ math_internal::Montgomery32, math_internal::Montgomery64, math_internal::Barrett,\
-    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n#line 2 \"src/Math/Combination.hpp\"\
-    \ntemplate <class mint, std::size_t LIM= (1 << 24)> class Combination {\n static\
-    \ inline mint _fact[LIM], _finv[LIM];\n static inline int lim= 0;\n static inline\
-    \ void set(int sz) {\n  if (lim > sz) return;\n  if (lim == 0) _fact[0]= 1, _finv[0]=\
-    \ 1, lim= 1;\n  for (int i= lim; i <= sz; i++) _fact[i]= _fact[i - 1] * i;\n \
-    \ _finv[sz]= mint(1) / _fact[sz];\n  for (int i= sz; i >= lim; i--) _finv[i -\
-    \ 1]= _finv[i] * i;\n  lim= sz + 1;\n }\npublic:\n static inline mint fact(int\
-    \ n) { return set(n), n < 0 ? mint(0) : _fact[n]; }\n static inline mint finv(int\
-    \ n) { return set(n), n < 0 ? mint(0) : _finv[n]; }\n static mint nPr(int n, int\
-    \ r) { return fact(n) * finv(n - r); }\n static mint nCr(int n, int r) { return\
-    \ nPr(n, r) * finv(r); }\n static mint nHr(int n, int r) { return !r ? mint(1)\
-    \ : nCr(n + r - 1, r); }\n};\n#line 5 \"test/yosupo/binomial_coefficient_prime_mod.test.cpp\"\
+    \ math_internal::Barrett2, math_internal::is_runtimemodint_v;\n#line 3 \"src/Math/FactorialPrecalculation.hpp\"\
+    \n#include <vector>\n#line 5 \"src/Math/FactorialPrecalculation.hpp\"\ntemplate\
+    \ <class mod_t> class FactorialPrecalculation {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static inline std::vector<mod_t> iv, fct, fiv;\npublic:\n static void reset()\
+    \ { iv.clear(), fct.clear(), fiv.clear(); }\n static inline mod_t inv(int n) {\n\
+    \  assert(0 < n);\n  if (int k= iv.size(); k <= n) {\n   if (iv.resize(n + 1);\
+    \ !k) iv[1]= 1, k= 2;\n   for (int mod= mod_t::mod(), q; k <= n; ++k) q= (mod\
+    \ + k - 1) / k, iv[k]= iv[k * q - mod] * q;\n  }\n  return iv[n];\n }\n static\
+    \ inline mod_t fact(int n) {\n  assert(0 <= n);\n  if (int k= fct.size(); k <=\
+    \ n) {\n   if (fct.resize(n + 1); !k) fct[0]= 1, k= 1;\n   for (; k <= n; ++k)\
+    \ fct[k]= fct[k - 1] * k;\n  }\n  return fct[n];\n }\n static inline mod_t finv(int\
+    \ n) {\n  assert(0 <= n);\n  if (int k= fiv.size(); k <= n) {\n   if (fiv.resize(n\
+    \ + 1); !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
+    \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
+    \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
+    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
+    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
+    \ + r - 1, r); }\n};\n#line 5 \"test/yosupo/binomial_coefficient_prime_mod.test.cpp\"\
     \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt_Runtime<int>;\n using Comb= Combination<Mint>;\n int T, m;\n\
-    \ cin >> T >> m;\n Mint::set_mod(m);\n while (T--) {\n  int n, k;\n  cin >> n\
-    \ >> k;\n  cout << Comb::nCr(n, k) << '\\n';\n }\n return 0;\n}\n"
+    \ using Mint= ModInt_Runtime<int>;\n using F= FactorialPrecalculation<Mint>;\n\
+    \ int T, m;\n cin >> T >> m;\n Mint::set_mod(m);\n while (T--) {\n  int n, k;\n\
+    \  cin >> n >> k;\n  cout << F::nCr(n, k) << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient_prime_mod\"\
-    \n#include <iostream>\n#include \"src/Math/ModInt_Runtime.hpp\"\n#include \"src/Math/Combination.hpp\"\
+    \n#include <iostream>\n#include \"src/Math/ModInt_Runtime.hpp\"\n#include \"src/Math/FactorialPrecalculation.hpp\"\
     \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt_Runtime<int>;\n using Comb= Combination<Mint>;\n int T, m;\n\
-    \ cin >> T >> m;\n Mint::set_mod(m);\n while (T--) {\n  int n, k;\n  cin >> n\
-    \ >> k;\n  cout << Comb::nCr(n, k) << '\\n';\n }\n return 0;\n}\n"
+    \ using Mint= ModInt_Runtime<int>;\n using F= FactorialPrecalculation<Mint>;\n\
+    \ int T, m;\n cin >> T >> m;\n Mint::set_mod(m);\n while (T--) {\n  int n, k;\n\
+    \  cin >> n >> k;\n  cout << F::nCr(n, k) << '\\n';\n }\n return 0;\n}\n"
   dependsOn:
   - src/Math/ModInt_Runtime.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
-  - src/Math/Combination.hpp
+  - src/Math/FactorialPrecalculation.hpp
   isVerificationFile: true
   path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/binomial_coefficient_prime_mod.test.cpp
 layout: document

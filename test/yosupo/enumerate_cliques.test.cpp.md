@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/CliqueProblem.hpp
     title: "\u30AF\u30EA\u30FC\u30AF\u554F\u984C"
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_cliques
@@ -85,9 +85,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -105,19 +105,15 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/Graph/CliqueProblem.hpp\"\n#include <vector>\n\
-    #include <algorithm>\nclass CliqueProblem {\n using u128= __uint128_t;\n using\
-    \ u64= unsigned long long;\n using u16= unsigned short;\n const u16 n, m;\n struct\
-    \ id_num {\n  u16 id, num;\n };\n std::vector<u128> adj_;\n std::vector<u16> calc(bool\
-    \ complement) const {\n  std::vector<u128> buf, adj(adj_);\n  std::vector<u16>\
-    \ deg(n), clique, cur;\n  if (complement)\n   for (int u= n; u--;)\n    for (int\
-    \ v= u; v--;) adj[u * m + (v >> 7)]^= u128(1) << (v & 127), adj[v * m + (u >>\
-    \ 7)]^= u128(1) << (u & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num> &rem)\
-    \ -> void {\n   if (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(),\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Graph/CliqueProblem.hpp\"\
+    \n#include <vector>\n#include <algorithm>\nclass CliqueProblem {\n using u128=\
+    \ __uint128_t;\n using u64= unsigned long long;\n using u16= unsigned short;\n\
+    \ const u16 n, m;\n struct id_num {\n  u16 id, num;\n };\n std::vector<u128> adj_;\n\
+    \ std::vector<u16> calc(bool complement) const {\n  std::vector<u128> buf, adj(adj_);\n\
+    \  std::vector<u16> deg(n), clique, cur;\n  if (complement)\n   for (int u= n;\
+    \ u--;)\n    for (int v= u; v--;) adj[u * m + (v >> 7)]^= u128(1) << (v & 127),\
+    \ adj[v * m + (u >> 7)]^= u128(1) << (u & 127);\n  auto dfs= [&](auto dfs, std::vector<id_num>\
+    \ &rem) -> void {\n   if (clique.size() < cur.size()) clique= cur;\n   std::sort(rem.begin(),\
     \ rem.end(), [&](id_num l, id_num r) { return deg[l.id] > deg[r.id]; }), buf.assign((n\
     \ + 1) * m, 0);\n   for (auto &v: rem) {\n    int b= v.id * m, bb= 0;\n    for\
     \ (v.num= 0;; ++v.num, bb+= m) {\n     bool any= 1;\n     for (u16 i= 0; i < m;\
@@ -185,8 +181,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/enumerate_cliques.test.cpp
   requiredBy: []
-  timestamp: '2023-11-20 23:40:07+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/enumerate_cliques.test.cpp
 layout: document

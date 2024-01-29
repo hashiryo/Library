@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
@@ -14,7 +14,7 @@ data:
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/SetPowerSeries.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   - icon: ':question:'
@@ -22,9 +22,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_g
@@ -89,9 +89,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -109,30 +109,26 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/Math/SetPowerSeries.hpp\"\n#include <algorithm>\n\
-    #include <vector>\n#line 5 \"src/Math/SetPowerSeries.hpp\"\n#include <cstdint>\n\
-    template <unsigned short MAX_N= 21> struct SetPowerSeries {\n#define SUBSET_REP(i,\
-    \ j, n) \\\n for (int _= (n), _e= (n); _>>= 1;) \\\n  for (int __= 0, _2= _ <<\
-    \ 1; __ < _e; __+= _2) \\\n   for (int j= __, i= j | _, ___= i; j < ___; ++j,\
-    \ ++i)\n template <typename T> static inline void ranked_zeta_tr(const T f[],\
-    \ T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c= __builtin_popcount(S)]=\
-    \ f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U, sz)\n  for (int d= __builtin_popcount(S);\
-    \ d--;) ret[S][d]+= ret[U][d];\n }\n template <typename T> static inline void\
-    \ conv_na(const T f[], const T g[], T ret[], const int sz) {\n  for (int s= sz,\
-    \ t; s--;)\n   for (ret[t= s]= f[s] * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n\
-    \ }\n template <typename T> static inline void conv_tr(const T f[], const T g[],\
-    \ T ret[], const int sz) {\n  static T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N\
-    \ + 1];\n  T tmp[MAX_N + 1];\n  ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G,\
-    \ sz);\n  const int n= __builtin_ctz(sz);\n  for (int S= sz, c, d, e, bg; S--;)\
-    \ {\n   c= __builtin_popcount(S), bg= std::min(2 * c, n);\n   for (d= bg; d >=\
-    \ c; d--)\n    for (tmp[d]= 0, e= d - c; e <= c; ++e) tmp[d]+= F[S][e] * G[S][d\
-    \ - e];\n   for (d= bg; d >= c; d--) F[S][d]= tmp[d];\n  }\n  SUBSET_REP(S, U,\
-    \ sz)\n  for (int c= __builtin_popcount(U), d= std::min(2 * c, n); d > c; d--)\
-    \ F[S][d]-= F[U][d];\n  for (int S= sz; S--;) ret[S]= F[S][__builtin_popcount(S)];\n\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Math/SetPowerSeries.hpp\"\
+    \n#include <algorithm>\n#include <vector>\n#line 5 \"src/Math/SetPowerSeries.hpp\"\
+    \n#include <cstdint>\ntemplate <unsigned short MAX_N= 21> struct SetPowerSeries\
+    \ {\n#define SUBSET_REP(i, j, n) \\\n for (int _= (n), _e= (n); _>>= 1;) \\\n\
+    \  for (int __= 0, _2= _ << 1; __ < _e; __+= _2) \\\n   for (int j= __, i= j |\
+    \ _, ___= i; j < ___; ++j, ++i)\n template <typename T> static inline void ranked_zeta_tr(const\
+    \ T f[], T ret[][MAX_N + 1], const int sz) {\n  for (int S= sz, c; S--;) ret[S][c=\
+    \ __builtin_popcount(S)]= f[S], std::fill_n(ret[S], c, 0);\n  SUBSET_REP(S, U,\
+    \ sz)\n  for (int d= __builtin_popcount(S); d--;) ret[S][d]+= ret[U][d];\n }\n\
+    \ template <typename T> static inline void conv_na(const T f[], const T g[], T\
+    \ ret[], const int sz) {\n  for (int s= sz, t; s--;)\n   for (ret[t= s]= f[s]\
+    \ * g[0]; t; --t&= s) ret[s]+= f[s ^ t] * g[t];\n }\n template <typename T> static\
+    \ inline void conv_tr(const T f[], const T g[], T ret[], const int sz) {\n  static\
+    \ T F[1 << MAX_N][MAX_N + 1], G[1 << MAX_N][MAX_N + 1];\n  T tmp[MAX_N + 1];\n\
+    \  ranked_zeta_tr(f, F, sz), ranked_zeta_tr(g, G, sz);\n  const int n= __builtin_ctz(sz);\n\
+    \  for (int S= sz, c, d, e, bg; S--;) {\n   c= __builtin_popcount(S), bg= std::min(2\
+    \ * c, n);\n   for (d= bg; d >= c; d--)\n    for (tmp[d]= 0, e= d - c; e <= c;\
+    \ ++e) tmp[d]+= F[S][e] * G[S][d - e];\n   for (d= bg; d >= c; d--) F[S][d]= tmp[d];\n\
+    \  }\n  SUBSET_REP(S, U, sz)\n  for (int c= __builtin_popcount(U), d= std::min(2\
+    \ * c, n); d > c; d--) F[S][d]-= F[U][d];\n  for (int S= sz; S--;) ret[S]= F[S][__builtin_popcount(S)];\n\
     \ }\n template <typename T, class F> static inline void onconv_na(const T g[],\
     \ T ret[], const F &phi, const int sz) {\n  for (int s= 1, t; s < sz; phi(s, ret[s]),\
     \ ++s)\n   for (ret[t= s]= 0; t; --t&= s) ret[s]+= ret[s ^ t] * g[t];\n }\n template\
@@ -358,8 +354,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc213_g.test.cpp
   requiredBy: []
-  timestamp: '2023-11-26 22:34:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc213_g.test.cpp
 layout: document

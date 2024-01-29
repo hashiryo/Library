@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
@@ -260,11 +260,11 @@ data:
   timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/set_xor_min.Patricia.test.cpp
   - test/yukicoder/649.Patricia.test.cpp
+  - test/yosupo/set_xor_min.Patricia.test.cpp
+  - test/atcoder/abc133_f.Patricia.test.cpp
   - test/aoj/3024.Patricia.test.cpp
   - test/aoj/2270.Patricia.test.cpp
-  - test/atcoder/abc133_f.Patricia.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Patricia.hpp
 layout: document
 title: "Segment-Tree(\u30D1\u30C8\u30EA\u30B7\u30A2\u6728)"

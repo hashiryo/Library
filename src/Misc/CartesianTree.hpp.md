@@ -18,10 +18,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/arc115_e.test.cpp
     title: test/atcoder/arc115_e.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,9 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2361.SuffixTree.test.cpp
     title: test/yukicoder/2361.SuffixTree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Misc/CartesianTree.hpp\"\n#include <vector>\n#include\
@@ -72,17 +72,17 @@ data:
   requiredBy:
   - src/String/SuffixTree.hpp
   timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/cartesian_tree.test.cpp
   - test/yukicoder/1031.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
-  - test/aoj/DPL_3_B.test.cpp
-  - test/aoj/DPL_3_C.test.cpp
-  - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/yosupo/cartesian_tree.test.cpp
+  - test/atcoder/abc234_g.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/arc115_e.test.cpp
-  - test/atcoder/abc234_g.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/aoj/DPL_3_B.test.cpp
+  - test/aoj/DPL_3_C.test.cpp
 documentation_of: src/Misc/CartesianTree.hpp
 layout: document
 title: Cartesian-Tree

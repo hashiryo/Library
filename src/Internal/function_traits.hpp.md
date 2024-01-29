@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/DiscreteLogarithm.hpp
     title: "\u96E2\u6563\u5BFE\u6570"
   - icon: ':question:'
@@ -48,16 +48,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc218_h.test.cpp
     title: test/atcoder/abc218_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_g.test.cpp
     title: test/atcoder/abc222_g.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/discrete_logarithm_mod.test.cpp
     title: test/yosupo/discrete_logarithm_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -75,7 +75,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1297.LiCT.2.test.cpp
     title: test/yukicoder/1297.LiCT.2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
   - icon: ':heavy_check_mark:'
@@ -90,7 +90,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
   - icon: ':heavy_check_mark:'
@@ -129,7 +129,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/913.LiCT.test.cpp
     title: test/yukicoder/913.LiCT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/950.test.cpp
     title: test/yukicoder/950.test.cpp
   - icon: ':x:'
@@ -187,53 +187,53 @@ data:
   isVerificationFile: false
   path: src/Internal/function_traits.hpp
   requiredBy:
+  - src/Math/DiscreteLogarithm.hpp
   - src/Optimization/simplified_larsch_dp.hpp
   - src/Optimization/golden_search.hpp
-  - src/Optimization/LiChaoTree.hpp
   - src/Optimization/fibonacci_search.hpp
-  - src/Math/DiscreteLogarithm.hpp
+  - src/Optimization/LiChaoTree.hpp
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/line_add_get_min.LiCT.test.cpp
-  - test/yosupo/discrete_logarithm_mod.test.cpp
-  - test/yosupo/segment_add_get_min.test.cpp
-  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - test/yukicoder/705.LiCT.test.cpp
-  - test/yukicoder/952.LiCT.test.cpp
-  - test/yukicoder/1867.test.cpp
-  - test/yukicoder/703.LiCT.test.cpp
-  - test/yukicoder/1339.test.cpp
+  - test/yukicoder/261.test.cpp
   - test/yukicoder/409.LARSCH.test.cpp
-  - test/yukicoder/2332.RH.test.cpp
-  - test/yukicoder/705.LARSCH.test.cpp
-  - test/yukicoder/2332.zalgo.test.cpp
-  - test/yukicoder/950.test.cpp
-  - test/yukicoder/180.test.cpp
   - test/yukicoder/704.LARSCH.test.cpp
-  - test/yukicoder/704.LiCT.test.cpp
-  - test/yukicoder/2276.test.cpp
-  - test/yukicoder/913.LiCT.test.cpp
   - test/yukicoder/1297.LiCT.1.test.cpp
+  - test/yukicoder/2276.test.cpp
+  - test/yukicoder/704.LiCT.test.cpp
+  - test/yukicoder/2332.zalgo.test.cpp
+  - test/yukicoder/1297.LiCT.2.test.cpp
+  - test/yukicoder/2332.RH.test.cpp
+  - test/yukicoder/952.LiCT.test.cpp
+  - test/yukicoder/1339.test.cpp
+  - test/yukicoder/913.LiCT.test.cpp
+  - test/yukicoder/705.LARSCH.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/1867.test.cpp
+  - test/yukicoder/703.LARSCH.test.cpp
+  - test/yukicoder/703.LiCT.test.cpp
+  - test/yukicoder/705.LiCT.test.cpp
+  - test/yukicoder/180.test.cpp
+  - test/yukicoder/409.LiCT.test.cpp
   - test/yukicoder/2458.LiCT.test.cpp
   - test/yukicoder/2309.test.cpp
-  - test/yukicoder/1297.LiCT.2.test.cpp
-  - test/yukicoder/261.test.cpp
-  - test/yukicoder/409.LiCT.test.cpp
-  - test/yukicoder/703.LARSCH.test.cpp
-  - test/aoj/3086.LARSCH.test.cpp
-  - test/aoj/2603.AlienDP.test.cpp
-  - test/aoj/3044.test.cpp
-  - test/aoj/0323.test.cpp
-  - test/aoj/3086.LiCT.test.cpp
-  - test/aoj/2972.test.cpp
-  - test/aoj/2725.LiCT.test.cpp
-  - test/aoj/2603.LiCT.test.cpp
+  - test/yosupo/segment_add_get_min.test.cpp
+  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
+  - test/yosupo/line_add_get_min.LiCT.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
+  - test/atcoder/abc222_g.test.cpp
   - test/atcoder/abc204_e.test.cpp
+  - test/atcoder/abc218_h.test.cpp
   - test/atcoder/abc279_d.test.cpp
   - test/atcoder/abc270_g.test.cpp
-  - test/atcoder/abc222_g.test.cpp
-  - test/atcoder/abc218_h.test.cpp
+  - test/aoj/2972.test.cpp
+  - test/aoj/3086.LARSCH.test.cpp
+  - test/aoj/0323.test.cpp
+  - test/aoj/3086.LiCT.test.cpp
+  - test/aoj/2603.LiCT.test.cpp
+  - test/aoj/2725.LiCT.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
+  - test/aoj/3044.test.cpp
 documentation_of: src/Internal/function_traits.hpp
 layout: document
 title: "\u95A2\u6570\u578B\u3084\u95A2\u6570\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u306B\

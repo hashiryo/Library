@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/enumerate_quotients.hpp
     title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
   _extendedRequiredBy: []

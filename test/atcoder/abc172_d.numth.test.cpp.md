@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/Sieve.hpp
     title: "\u7DDA\u5F62\u7BE9 \u4ED6"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/famous_arithmetic_functions.hpp
     title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   _extendedRequiredBy: []

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SplayTree.hpp
     title: Splay-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Internal/HAS_CHECK.hpp
     title: "\u30E1\u30F3\u30D0\u306E\u6709\u7121\u3092\u5224\u5B9A\u3059\u308B\u30C6\
       \u30F3\u30D7\u30EC\u30FC\u30C8 \u4ED6"
@@ -22,9 +22,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc256/tasks/abc256_f
@@ -90,9 +90,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -110,71 +110,67 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/DataStructure/SplayTree.hpp\"\n#include <vector>\n\
-    #include <string>\n#line 5 \"src/DataStructure/SplayTree.hpp\"\n#include <cstddef>\n\
-    #line 3 \"src/Internal/HAS_CHECK.hpp\"\n#define MEMBER_MACRO(member, Dummy, name,\
-    \ type1, type2, last) \\\n template <class tClass> struct name##member { \\\n\
-    \  template <class U, Dummy> static type1 check(U *); \\\n  static type2 check(...);\
-    \ \\\n  static tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member, Dummy)\
-    \ MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static const\
-    \ bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member) HAS_CHECK(member,\
-    \ int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member, class\
-    \ dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n MEMBER_MACRO(member,\
-    \ class dummy= typename U::member, name, typename U::member, type2, using type=\
-    \ decltype(check(mClass))); \\\n template <class tClass> using name##member##_t=\
-    \ typename name##member<tClass>::type\n#define NULLPTR_OR(member) HOGE_OR(member,\
-    \ nullptr_or_, std::nullptr_t)\n#define MYSELF_OR(member) HOGE_OR(member, myself_or_,\
-    \ tClass)\n#line 8 \"src/DataStructure/SplayTree.hpp\"\ntemplate <class M, bool\
-    \ reversible= false> class SplayTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n HAS_MEMBER(cp);\n\
-    \ HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class L> static constexpr\
-    \ bool semigroup_v= std::conjunction_v<has_T<L>, has_op<L>>;\n template <class\
-    \ L> static constexpr bool dual_v= std::conjunction_v<has_T<L>, has_E<L>, has_mp<L>,\
-    \ has_cp<L>>;\n template <class T, class tDerived> struct Node_B {\n  T val;\n\
-    \  tDerived *ch[2], *par;\n  size_t size;\n };\n template <class D, bool sg, bool\
-    \ du, bool rev> struct Node_D: Node_B<M, Node_D<D, sg, du, rev>> {};\n template\
-    \ <class D> struct Node_D<D, 1, 0, 0>: Node_B<typename M::T, Node_D<D, 1, 0, 0>>\
-    \ {\n  typename M::T sum;\n };\n template <class D> struct Node_D<D, 0, 1, 0>:\
-    \ Node_B<typename M::T, Node_D<D, 0, 1, 0>> {\n  typename M::E laz;\n  bool laz_flg=\
-    \ false;\n };\n template <class D> struct Node_D<D, 1, 1, 0>: Node_B<typename\
-    \ M::T, Node_D<D, 1, 1, 0>> {\n  typename M::T sum;\n  typename M::E laz;\n  bool\
-    \ laz_flg= false;\n };\n template <class D> struct Node_D<D, 0, 0, 1>: Node_B<M,\
-    \ Node_D<D, 0, 0, 1>> {\n  bool revflg= false;\n };\n template <class D> struct\
-    \ Node_D<D, 1, 0, 1>: Node_B<typename M::T, Node_D<D, 1, 0, 1>> {\n  typename\
-    \ M::T sum, rsum;\n  bool revflg= false;\n };\n template <class D> struct Node_D<D,\
-    \ 0, 1, 1>: Node_B<typename M::T, Node_D<D, 0, 1, 1>> {\n  typename M::E laz;\n\
-    \  bool laz_flg= false, revflg= false;\n };\n template <class D> struct Node_D<D,\
-    \ 1, 1, 1>: Node_B<typename M::T, Node_D<D, 1, 1, 1>> {\n  typename M::T sum,\
-    \ rsum;\n  typename M::E laz;\n  bool laz_flg= false, revflg= false;\n };\n using\
-    \ Node= Node_D<void, semigroup_v<M>, dual_v<M>, reversible>;\n friend std::ostream\
-    \ &operator<<(std::ostream &os, Node t) { return os << \"{ch[2]:(\" << t.ch[0]\
-    \ << \",\" << t.ch[1] << \"),par:\" << t.par << \"}\"; }\n using T= decltype(Node::val);\n\
-    \ using E= nullptr_or_E_t<M>;\n using np= Node *;\n np root;\n template <class\
-    \ S> static inline np build(size_t bg, size_t ed, np par, const S &val) {\n  if\
-    \ (bg == ed) return nullptr;\n  size_t mid= bg + (ed - bg) / 2;\n  np t;\n  if\
-    \ constexpr (std::is_same_v<S, T>) t= new Node{val};\n  else t= new Node{*(val\
-    \ + mid)};\n  return t->par= par, t->ch[0]= build(bg, mid, t, val), t->ch[1]=\
-    \ build(mid + 1, ed, t, val), update(t);\n }\n static inline void dump(typename\
-    \ std::vector<T>::iterator itr, np t) {\n  if (!t) return;\n  if constexpr (dual_v<M>)\
-    \ push_propagate(t);\n  if constexpr (reversible) push_toggle(t);\n  size_t sz=\
-    \ t->ch[0] ? t->ch[0]->size : 0;\n  *(itr + sz)= t->val, dump(itr, t->ch[0]),\
-    \ dump(itr + sz + 1, t->ch[1]);\n }\n template <bool b> static inline void helper(np\
-    \ t) {\n  if (!t->ch[b]) return;\n  t->size+= t->ch[b]->size;\n  if constexpr\
-    \ (semigroup_v<M>)\n   if constexpr (b) {\n    t->sum= M::op(t->sum, t->ch[1]->sum);\n\
-    \    if constexpr (reversible) t->rsum= M::op(t->ch[1]->rsum, t->rsum);\n   }\
-    \ else {\n    t->sum= M::op(t->ch[0]->sum, t->sum);\n    if constexpr (reversible)\
-    \ t->rsum= M::op(t->rsum, t->ch[0]->rsum);\n   }\n }\n static inline np update(np\
-    \ t) {\n  if (!t) return t;\n  t->size= 1;\n  if constexpr (semigroup_v<M>) {\n\
-    \   t->sum= t->val;\n   if constexpr (reversible) t->rsum= t->sum;\n  }\n  return\
-    \ helper<0>(t), helper<1>(t), t;\n }\n static inline void propagate(np t, const\
-    \ E &x) {\n  if (!t) return;\n  if (t->laz_flg) M::cp(t->laz, x);\n  else t->laz=\
-    \ x;\n  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->size);\n   if\
-    \ constexpr (reversible) M::mp(t->rsum, x, t->size);\n  }\n  M::mp(t->val, x,\
-    \ 1), t->laz_flg= true;\n }\n static inline void toggle(np t) {\n  if (!t) return;\n\
-    \  if constexpr (semigroup_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0],\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/DataStructure/SplayTree.hpp\"\
+    \n#include <vector>\n#include <string>\n#line 5 \"src/DataStructure/SplayTree.hpp\"\
+    \n#include <cstddef>\n#line 3 \"src/Internal/HAS_CHECK.hpp\"\n#define MEMBER_MACRO(member,\
+    \ Dummy, name, type1, type2, last) \\\n template <class tClass> struct name##member\
+    \ { \\\n  template <class U, Dummy> static type1 check(U *); \\\n  static type2\
+    \ check(...); \\\n  static tClass *mClass; \\\n  last; \\\n }\n#define HAS_CHECK(member,\
+    \ Dummy) MEMBER_MACRO(member, Dummy, has_, std::true_type, std::false_type, static\
+    \ const bool value= decltype(check(mClass))::value)\n#define HAS_MEMBER(member)\
+    \ HAS_CHECK(member, int dummy= (&U::member, 0))\n#define HAS_TYPE(member) HAS_CHECK(member,\
+    \ class dummy= typename U::member)\n#define HOGE_OR(member, name, type2) \\\n\
+    \ MEMBER_MACRO(member, class dummy= typename U::member, name, typename U::member,\
+    \ type2, using type= decltype(check(mClass))); \\\n template <class tClass> using\
+    \ name##member##_t= typename name##member<tClass>::type\n#define NULLPTR_OR(member)\
+    \ HOGE_OR(member, nullptr_or_, std::nullptr_t)\n#define MYSELF_OR(member) HOGE_OR(member,\
+    \ myself_or_, tClass)\n#line 8 \"src/DataStructure/SplayTree.hpp\"\ntemplate <class\
+    \ M, bool reversible= false> class SplayTree {\n HAS_MEMBER(op);\n HAS_MEMBER(mp);\n\
+    \ HAS_MEMBER(cp);\n HAS_TYPE(T);\n HAS_TYPE(E);\n NULLPTR_OR(E);\n template <class\
+    \ L> static constexpr bool semigroup_v= std::conjunction_v<has_T<L>, has_op<L>>;\n\
+    \ template <class L> static constexpr bool dual_v= std::conjunction_v<has_T<L>,\
+    \ has_E<L>, has_mp<L>, has_cp<L>>;\n template <class T, class tDerived> struct\
+    \ Node_B {\n  T val;\n  tDerived *ch[2], *par;\n  size_t size;\n };\n template\
+    \ <class D, bool sg, bool du, bool rev> struct Node_D: Node_B<M, Node_D<D, sg,\
+    \ du, rev>> {};\n template <class D> struct Node_D<D, 1, 0, 0>: Node_B<typename\
+    \ M::T, Node_D<D, 1, 0, 0>> {\n  typename M::T sum;\n };\n template <class D>\
+    \ struct Node_D<D, 0, 1, 0>: Node_B<typename M::T, Node_D<D, 0, 1, 0>> {\n  typename\
+    \ M::E laz;\n  bool laz_flg= false;\n };\n template <class D> struct Node_D<D,\
+    \ 1, 1, 0>: Node_B<typename M::T, Node_D<D, 1, 1, 0>> {\n  typename M::T sum;\n\
+    \  typename M::E laz;\n  bool laz_flg= false;\n };\n template <class D> struct\
+    \ Node_D<D, 0, 0, 1>: Node_B<M, Node_D<D, 0, 0, 1>> {\n  bool revflg= false;\n\
+    \ };\n template <class D> struct Node_D<D, 1, 0, 1>: Node_B<typename M::T, Node_D<D,\
+    \ 1, 0, 1>> {\n  typename M::T sum, rsum;\n  bool revflg= false;\n };\n template\
+    \ <class D> struct Node_D<D, 0, 1, 1>: Node_B<typename M::T, Node_D<D, 0, 1, 1>>\
+    \ {\n  typename M::E laz;\n  bool laz_flg= false, revflg= false;\n };\n template\
+    \ <class D> struct Node_D<D, 1, 1, 1>: Node_B<typename M::T, Node_D<D, 1, 1, 1>>\
+    \ {\n  typename M::T sum, rsum;\n  typename M::E laz;\n  bool laz_flg= false,\
+    \ revflg= false;\n };\n using Node= Node_D<void, semigroup_v<M>, dual_v<M>, reversible>;\n\
+    \ friend std::ostream &operator<<(std::ostream &os, Node t) { return os << \"\
+    {ch[2]:(\" << t.ch[0] << \",\" << t.ch[1] << \"),par:\" << t.par << \"}\"; }\n\
+    \ using T= decltype(Node::val);\n using E= nullptr_or_E_t<M>;\n using np= Node\
+    \ *;\n np root;\n template <class S> static inline np build(size_t bg, size_t\
+    \ ed, np par, const S &val) {\n  if (bg == ed) return nullptr;\n  size_t mid=\
+    \ bg + (ed - bg) / 2;\n  np t;\n  if constexpr (std::is_same_v<S, T>) t= new Node{val};\n\
+    \  else t= new Node{*(val + mid)};\n  return t->par= par, t->ch[0]= build(bg,\
+    \ mid, t, val), t->ch[1]= build(mid + 1, ed, t, val), update(t);\n }\n static\
+    \ inline void dump(typename std::vector<T>::iterator itr, np t) {\n  if (!t) return;\n\
+    \  if constexpr (dual_v<M>) push_propagate(t);\n  if constexpr (reversible) push_toggle(t);\n\
+    \  size_t sz= t->ch[0] ? t->ch[0]->size : 0;\n  *(itr + sz)= t->val, dump(itr,\
+    \ t->ch[0]), dump(itr + sz + 1, t->ch[1]);\n }\n template <bool b> static inline\
+    \ void helper(np t) {\n  if (!t->ch[b]) return;\n  t->size+= t->ch[b]->size;\n\
+    \  if constexpr (semigroup_v<M>)\n   if constexpr (b) {\n    t->sum= M::op(t->sum,\
+    \ t->ch[1]->sum);\n    if constexpr (reversible) t->rsum= M::op(t->ch[1]->rsum,\
+    \ t->rsum);\n   } else {\n    t->sum= M::op(t->ch[0]->sum, t->sum);\n    if constexpr\
+    \ (reversible) t->rsum= M::op(t->rsum, t->ch[0]->rsum);\n   }\n }\n static inline\
+    \ np update(np t) {\n  if (!t) return t;\n  t->size= 1;\n  if constexpr (semigroup_v<M>)\
+    \ {\n   t->sum= t->val;\n   if constexpr (reversible) t->rsum= t->sum;\n  }\n\
+    \  return helper<0>(t), helper<1>(t), t;\n }\n static inline void propagate(np\
+    \ t, const E &x) {\n  if (!t) return;\n  if (t->laz_flg) M::cp(t->laz, x);\n \
+    \ else t->laz= x;\n  if constexpr (semigroup_v<M>) {\n   M::mp(t->sum, x, t->size);\n\
+    \   if constexpr (reversible) M::mp(t->rsum, x, t->size);\n  }\n  M::mp(t->val,\
+    \ x, 1), t->laz_flg= true;\n }\n static inline void toggle(np t) {\n  if (!t)\
+    \ return;\n  if constexpr (semigroup_v<M>) std::swap(t->sum, t->rsum);\n  std::swap(t->ch[0],\
     \ t->ch[1]), t->revflg= !t->revflg;\n }\n static inline void push_propagate(np\
     \ t) {\n  if (t->laz_flg) propagate(t->ch[0], t->laz), propagate(t->ch[1], t->laz),\
     \ t->laz_flg= false;\n }\n static inline void push_toggle(np t) {\n  if (t->revflg)\
@@ -270,8 +266,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc256_f.SplayTree.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc256_f.SplayTree.test.cpp
 layout: document

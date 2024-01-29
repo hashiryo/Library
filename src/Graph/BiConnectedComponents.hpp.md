@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
   _extendedRequiredBy: []
@@ -158,9 +158,9 @@ data:
   timestamp: '2023-11-24 00:33:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/1326.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yosupo/biconnected_components.test.cpp
-  - test/yukicoder/1326.test.cpp
   - test/aoj/3022.test.cpp
   - test/aoj/GRL_3_A.test.cpp
 documentation_of: src/Graph/BiConnectedComponents.hpp

@@ -81,8 +81,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/409.LARSCH.test.cpp
-  - test/yukicoder/705.LARSCH.test.cpp
   - test/yukicoder/704.LARSCH.test.cpp
+  - test/yukicoder/705.LARSCH.test.cpp
   - test/yukicoder/703.LARSCH.test.cpp
   - test/aoj/3086.LARSCH.test.cpp
   - test/aoj/2603.AlienDP.test.cpp

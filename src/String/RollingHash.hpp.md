@@ -18,42 +18,42 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_14_B.RH.test.cpp
     title: test/aoj/ALDS1_14_B.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc135_f.RH.test.cpp
     title: test/atcoder/abc135_f.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc141_e.RH.test.cpp
     title: test/atcoder/abc141_e.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc150_f.RH.Nimber.test.cpp
     title: test/atcoder/abc150_f.RH.Nimber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc272_f.RH.test.cpp
     title: test/atcoder/abc272_f.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/agc047_b.RH.test.cpp
     title: test/atcoder/agc047_b.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2454.RH.test.cpp
     title: test/yukicoder/2454.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/599.RH.test.cpp
     title: test/yukicoder/599.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/765.RH.test.cpp
     title: test/yukicoder/765.RH.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/String/RollingHash.hpp\"\n#include <vector>\n#include\
@@ -141,24 +141,24 @@ data:
   path: src/String/RollingHash.hpp
   requiredBy: []
   timestamp: '2023-11-17 14:39:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/z_algorithm.RH.test.cpp
-  - test/yosupo/enumerate_palindromes.RH.test.cpp
   - test/yukicoder/765.RH.test.cpp
+  - test/yukicoder/2454.RH.test.cpp
   - test/yukicoder/2332.RH.test.cpp
   - test/yukicoder/599.RH.test.cpp
-  - test/yukicoder/2454.RH.test.cpp
-  - test/aoj/2711.RH.test.cpp
-  - test/aoj/0322.RH.test.cpp
-  - test/aoj/2763.RH.test.cpp
-  - test/aoj/ALDS1_14_B.RH.test.cpp
-  - test/aoj/2614.RH.test.cpp
+  - test/yosupo/z_algorithm.RH.test.cpp
+  - test/yosupo/enumerate_palindromes.RH.test.cpp
   - test/atcoder/abc272_f.RH.test.cpp
+  - test/atcoder/abc135_f.RH.test.cpp
+  - test/atcoder/abc150_f.RH.Nimber.test.cpp
   - test/atcoder/abc141_e.RH.test.cpp
   - test/atcoder/agc047_b.RH.test.cpp
-  - test/atcoder/abc150_f.RH.Nimber.test.cpp
-  - test/atcoder/abc135_f.RH.test.cpp
+  - test/aoj/ALDS1_14_B.RH.test.cpp
+  - test/aoj/0322.RH.test.cpp
+  - test/aoj/2711.RH.test.cpp
+  - test/aoj/2614.RH.test.cpp
+  - test/aoj/2763.RH.test.cpp
 documentation_of: src/String/RollingHash.hpp
 layout: document
 title: Rolling-Hash

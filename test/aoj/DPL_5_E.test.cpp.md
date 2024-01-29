@@ -7,10 +7,9 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/Combination.hpp
-    title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
-      mathbb{F}_p$)"
+  - icon: ':question:'
+    path: src/Math/FactorialPrecalculation.hpp
+    title: src/Math/FactorialPrecalculation.hpp
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -28,19 +27,29 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_E
   bundledCode: "#line 1 \"test/aoj/DPL_5_E.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_E\"\
-    \n#include <iostream>\n#line 2 \"src/Math/Combination.hpp\"\ntemplate <class mint,\
-    \ std::size_t LIM= (1 << 24)> class Combination {\n static inline mint _fact[LIM],\
-    \ _finv[LIM];\n static inline int lim= 0;\n static inline void set(int sz) {\n\
-    \  if (lim > sz) return;\n  if (lim == 0) _fact[0]= 1, _finv[0]= 1, lim= 1;\n\
-    \  for (int i= lim; i <= sz; i++) _fact[i]= _fact[i - 1] * i;\n  _finv[sz]= mint(1)\
-    \ / _fact[sz];\n  for (int i= sz; i >= lim; i--) _finv[i - 1]= _finv[i] * i;\n\
-    \  lim= sz + 1;\n }\npublic:\n static inline mint fact(int n) { return set(n),\
-    \ n < 0 ? mint(0) : _fact[n]; }\n static inline mint finv(int n) { return set(n),\
-    \ n < 0 ? mint(0) : _finv[n]; }\n static mint nPr(int n, int r) { return fact(n)\
-    \ * finv(n - r); }\n static mint nCr(int n, int r) { return nPr(n, r) * finv(r);\
-    \ }\n static mint nHr(int n, int r) { return !r ? mint(1) : nCr(n + r - 1, r);\
-    \ }\n};\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\n\
-    template <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \n#include <iostream>\n#line 2 \"src/Math/FactorialPrecalculation.hpp\"\n#include\
+    \ <cassert>\n#include <vector>\n#line 2 \"src/Internal/modint_traits.hpp\"\n#include\
+    \ <type_traits>\nnamespace math_internal {\nstruct m_b {};\nstruct s_b: m_b {};\n\
+    }\ntemplate <class mod_t> constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b,\
+    \ mod_t>;\ntemplate <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
+    \ mod_t>;\n#line 5 \"src/Math/FactorialPrecalculation.hpp\"\ntemplate <class mod_t>\
+    \ class FactorialPrecalculation {\n static_assert(is_modint_v<mod_t>);\n static\
+    \ inline std::vector<mod_t> iv, fct, fiv;\npublic:\n static void reset() { iv.clear(),\
+    \ fct.clear(), fiv.clear(); }\n static inline mod_t inv(int n) {\n  assert(0 <\
+    \ n);\n  if (int k= iv.size(); k <= n) {\n   if (iv.resize(n + 1); !k) iv[1]=\
+    \ 1, k= 2;\n   for (int mod= mod_t::mod(), q; k <= n; ++k) q= (mod + k - 1) /\
+    \ k, iv[k]= iv[k * q - mod] * q;\n  }\n  return iv[n];\n }\n static inline mod_t\
+    \ fact(int n) {\n  assert(0 <= n);\n  if (int k= fct.size(); k <= n) {\n   if\
+    \ (fct.resize(n + 1); !k) fct[0]= 1, k= 1;\n   for (; k <= n; ++k) fct[k]= fct[k\
+    \ - 1] * k;\n  }\n  return fct[n];\n }\n static inline mod_t finv(int n) {\n \
+    \ assert(0 <= n);\n  if (int k= fiv.size(); k <= n) {\n   if (fiv.resize(n + 1);\
+    \ !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
+    \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
+    \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
+    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
+    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
+    \ + r - 1, r); }\n};\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
     \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
     \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
     \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
@@ -83,62 +92,56 @@ data:
     \ (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n};\ntemplate <class\
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
-    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
-    src/Internal/modint_traits.hpp\"\nnamespace math_internal {\nstruct m_b {};\n\
-    struct s_b: m_b {};\n}\ntemplate <class mod_t> constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b,\
-    \ mod_t>;\ntemplate <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
-    \ mod_t>;\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define\
-    \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
-    \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
-    \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
-    \ }\n CE MInt(): x(0) {}\n template <class T, typename= enable_if_t<is_modint_v<T>\
-    \ && !is_same_v<T, MInt>>> CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n\
-    \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
-    \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
-    \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
-    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
-    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
-    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
-    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
-    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
-    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
-    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
-    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
-    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
-    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
-    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
-    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using ModInt=\
-    \ conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32,\
-    \ 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64,\
-    \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
-    \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
-    \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 5 \"test/aoj/DPL_5_E.test.cpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int n, k;\n cin\
-    \ >> n >> k;\n using Mint= ModInt<int(1e9 + 7)>;\n using C= Combination<Mint>;\n\
-    \ cout << C::nCr(k, n) << endl;\n return 0;\n}\n"
+    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 5 \"\
+    src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\ntemplate\
+    \ <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static CE MP md= MP(MOD);\n\
+    };\ntemplate <class Int, class U, class B> struct MInt: public B {\n using Uint=\
+    \ U;\n static CE inline auto mod() { return B::md.mod; }\n CE MInt(): x(0) {}\n\
+    \ template <class T, typename= enable_if_t<is_modint_v<T> && !is_same_v<T, MInt>>>\
+    \ CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n CE MInt(__int128_t n):\
+    \ x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod - n : n) : n % B::md.mod)))\
+    \ {}\n CE MInt operator-() const { return MInt() - *this; }\n#define FUNC(name,\
+    \ op) \\\n CE MInt name const { \\\n  MInt ret; \\\n  return ret.x= op, ret; \\\
+    \n }\n FUNC(operator+(const MInt & r), B::md.plus(x, r.x))\n FUNC(operator-(const\
+    \ MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const MInt & r), B::md.mul(x,\
+    \ r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n#undef FUNC\n CE\
+    \ MInt operator/(const MInt& r) const { return *this * r.inv(); }\n CE MInt& operator+=(const\
+    \ MInt& r) { return *this= *this + r; }\n CE MInt& operator-=(const MInt& r) {\
+    \ return *this= *this - r; }\n CE MInt& operator*=(const MInt& r) { return *this=\
+    \ *this * r; }\n CE MInt& operator/=(const MInt& r) { return *this= *this / r;\
+    \ }\n CE bool operator==(const MInt& r) const { return B::md.norm(x) == B::md.norm(r.x);\
+    \ }\n CE bool operator!=(const MInt& r) const { return !(*this == r); }\n CE bool\
+    \ operator<(const MInt& r) const { return B::md.norm(x) < B::md.norm(r.x); }\n\
+    \ CE inline MInt inv() const { return mod_inv<Int>(val(), B::md.mod); }\n CE inline\
+    \ Uint val() const { return B::md.get(x); }\n friend ostream& operator<<(ostream&\
+    \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
+    \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
+    \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
+    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
+    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
+    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
+    \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n\
+    #line 5 \"test/aoj/DPL_5_E.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n int n, k;\n cin >> n >> k;\n using\
+    \ Mint= ModInt<int(1e9 + 7)>;\n using F= FactorialPrecalculation<Mint>;\n cout\
+    \ << F::nCr(k, n) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/7/DPL/5/DPL_5_E\"\
-    \n#include <iostream>\n#include \"src/Math/Combination.hpp\"\n#include \"src/Math/ModInt.hpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int n, k;\n cin >> n >> k;\n using Mint= ModInt<int(1e9 + 7)>;\n using C= Combination<Mint>;\n\
-    \ cout << C::nCr(k, n) << endl;\n return 0;\n}\n"
+    \n#include <iostream>\n#include \"src/Math/FactorialPrecalculation.hpp\"\n#include\
+    \ \"src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n int n, k;\n cin >> n >> k;\n using Mint= ModInt<int(1e9\
+    \ + 7)>;\n using F= FactorialPrecalculation<Mint>;\n cout << F::nCr(k, n) << '\\\
+    n';\n return 0;\n}\n"
   dependsOn:
-  - src/Math/Combination.hpp
+  - src/Math/FactorialPrecalculation.hpp
+  - src/Internal/modint_traits.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
-  - src/Internal/modint_traits.hpp
   isVerificationFile: true
   path: test/aoj/DPL_5_E.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
+  timestamp: '2024-01-29 15:51:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DPL_5_E.test.cpp

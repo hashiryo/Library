@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/KDTree.hpp
     title: kD-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SegmentTree_2D.hpp
     title: "Segment-Tree(2\u6B21\u5143)"
   _extendedVerifiedWith:
@@ -54,10 +54,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1600.KDT.test.cpp
     title: test/yukicoder/1600.KDT.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1600.Seg2D.test.cpp
     title: test/yukicoder/1600.Seg2D.test.cpp
   - icon: ':heavy_check_mark:'
@@ -66,21 +66,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1625.Seg2D.test.cpp
     title: test/yukicoder/1625.Seg2D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1649.Seg2D.test.cpp
     title: test/yukicoder/1649.Seg2D.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2065.Seg2D.test.cpp
     title: test/yukicoder/2065.Seg2D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/924.Seg2D.test.cpp
     title: test/yukicoder/924.Seg2D.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/tuple_traits.hpp\"\n#include <tuple>\n#include\
@@ -129,31 +129,31 @@ data:
   - src/DataStructure/KDTree.hpp
   - src/DataStructure/SegmentTree_2D.hpp
   timestamp: '2023-10-31 18:36:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/cube-summation.KDT.test.cpp
-  - test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
-  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
+  - test/yukicoder/1625.KDT.test.cpp
+  - test/yukicoder/1649.Seg2D.test.cpp
+  - test/yukicoder/1625.Seg2D.test.cpp
   - test/yukicoder/2065.Seg2D.test.cpp
   - test/yukicoder/924.Seg2D.test.cpp
   - test/yukicoder/1600.Seg2D.test.cpp
-  - test/yukicoder/1625.KDT.test.cpp
-  - test/yukicoder/1625.Seg2D.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
-  - test/yukicoder/1649.Seg2D.test.cpp
-  - test/yukicoder/1216.KDT.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
+  - test/hackerrank/cube-summation.KDT.test.cpp
+  - test/yosupo/point_add_rectangle_sum.KDT.test.cpp
+  - test/yosupo/point_add_rectangle_sum.Seg2D.test.cpp
+  - test/atcoder/abc309_f.KDT.3D.test.cpp
+  - test/atcoder/abc228_f.Seg2D.test.cpp
+  - test/atcoder/abc309_f.Seg2D.test.cpp
+  - test/atcoder/abc309_f.KDT.test.cpp
   - test/aoj/1068.KDT.test.cpp
-  - test/aoj/1068.Seg2D.test.cpp
   - test/aoj/2842.Seg2D.test.cpp
+  - test/aoj/2842.KDT.test.cpp
+  - test/aoj/1068.Seg2D.test.cpp
   - test/aoj/1023.KDT.test.cpp
   - test/aoj/DSL_2_C.KDT.test.cpp
-  - test/aoj/2842.KDT.test.cpp
-  - test/atcoder/abc309_f.KDT.3D.test.cpp
-  - test/atcoder/abc309_f.KDT.test.cpp
-  - test/atcoder/abc309_f.Seg2D.test.cpp
-  - test/atcoder/abc228_f.Seg2D.test.cpp
 documentation_of: src/Internal/tuple_traits.hpp
 layout: document
 title: "tuple\u3084array\u306B\u95A2\u3059\u308B\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\

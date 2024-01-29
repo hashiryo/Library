@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/FFT/NTT.hpp
     title: Number-Theoretic-Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/FFT/sample_points_shift.hpp
     title: "\u591A\u9805\u5F0F\u306E\u8A55\u4FA1\u70B9\u30B7\u30D5\u30C8"
   - icon: ':question:'
@@ -13,10 +13,9 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/Combination.hpp
-    title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
-      mathbb{F}_p$)"
+  - icon: ':question:'
+    path: src/Math/FactorialPrecalculation.hpp
+    title: src/Math/FactorialPrecalculation.hpp
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -26,14 +25,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/NumberTheory/Sieve.hpp
     title: "\u7DDA\u5F62\u7BE9 \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
@@ -43,105 +42,107 @@ data:
   bundledCode: "#line 1 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
     \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
-    \ <iostream>\n#include <vector>\n#line 2 \"src/Math/Combination.hpp\"\ntemplate\
-    \ <class mint, std::size_t LIM= (1 << 24)> class Combination {\n static inline\
-    \ mint _fact[LIM], _finv[LIM];\n static inline int lim= 0;\n static inline void\
-    \ set(int sz) {\n  if (lim > sz) return;\n  if (lim == 0) _fact[0]= 1, _finv[0]=\
-    \ 1, lim= 1;\n  for (int i= lim; i <= sz; i++) _fact[i]= _fact[i - 1] * i;\n \
-    \ _finv[sz]= mint(1) / _fact[sz];\n  for (int i= sz; i >= lim; i--) _finv[i -\
-    \ 1]= _finv[i] * i;\n  lim= sz + 1;\n }\npublic:\n static inline mint fact(int\
-    \ n) { return set(n), n < 0 ? mint(0) : _fact[n]; }\n static inline mint finv(int\
-    \ n) { return set(n), n < 0 ? mint(0) : _finv[n]; }\n static mint nPr(int n, int\
-    \ r) { return fact(n) * finv(n - r); }\n static mint nCr(int n, int r) { return\
-    \ nPr(n, r) * finv(r); }\n static mint nHr(int n, int r) { return !r ? mint(1)\
-    \ : nCr(n + r - 1, r); }\n};\n#line 2 \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n\
-    #include <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int\
-    \ mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for\
-    \ (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b), z= a, a= b, b= z - b\
-    \ * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line\
-    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
-    \ std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing i64= long long;\n\
-    using u64= unsigned long long;\nusing u128= __uint128_t;\n#define CE constexpr\n\
-    #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
-    \ PLUS(U, M) \\\n CE IL U plus(U l, U r) const { return l+= r, l < (M) ? l : l\
-    \ - (M); }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U r) const { return l-=\
-    \ r, l >> C ? l + (M) : l; }\n#define SGN(U) \\\n static CE IL U set(U n) { return\
-    \ n; } \\\n static CE IL U get(U n) { return n; } \\\n static CE IL U norm(U n)\
-    \ { return n; }\ntemplate <class u_t, class du_t, u8 B, u8 A> struct MP_Mo {\n\
-    \ u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE MP_Mo(u_t m): mod(m), iv(inv(m)),\
-    \ r2(-du_t(mod) % mod) {}\n CE IL u_t mul(u_t l, u_t r) const { return reduce(du_t(l)\
-    \ * r); }\n PLUS(u_t, mod << 1)\n DIFF(u_t, A, mod << 1)\n CE IL u_t set(u_t n)\
-    \ const { return mul(n, r2); }\n CE IL u_t get(u_t n) const {\n  n= reduce(n);\n\
-    \  NORM;\n }\n CE IL u_t norm(u_t n) const { NORM; }\nprivate:\n u_t iv, r2;\n\
-    \ static CE u_t inv(u_t n, int e= 6, u_t x= 1) { return e ? inv(n, e - 1, x *\
-    \ (2 - x * n)) : x; }\n CE IL u_t reduce(const du_t &w) const { return u_t(w >>\
-    \ B) + mod - ((du_t(u_t(w) * iv) * mod) >> B); }\n};\nstruct MP_Na {\n u32 mod;\n\
-    \ CE MP_Na(): mod(0){};\n CE MP_Na(u32 m): mod(m) {}\n CE IL u32 mul(u32 l, u32\
-    \ r) const { return u64(l) * r % mod; }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n\
-    };\nstruct MP_Br {  // mod < 2^31\n u32 mod;\n CE MP_Br(): mod(0), s(0), x(0)\
-    \ {}\n CE MP_Br(u32 m): mod(m), s(95 - __builtin_clz(m - 1)), x(((u128(1) << s)\
-    \ + m - 1) / m) {}\n CE IL u32 mul(u32 l, u32 r) const { return rem(u64(l) * r);\
-    \ }\n PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32) private: u8 s;\n u64 x;\n CE\
-    \ IL u64 quo(u64 n) const { return (u128(x) * n) >> s; }\n CE IL u32 rem(u64 n)\
-    \ const { return n - quo(n) * mod; }\n};\nstruct MP_Br2 {  // 2^20 < mod <= 2^41\n\
-    \ u64 mod;\n CE MP_Br2(): mod(0), x(0) {}\n CE MP_Br2(u64 m): mod(m), x((u128(1)\
-    \ << 84) / m) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem(u128(l) * r);\
-    \ }\n PLUS(u64, mod << 1)\n DIFF(u64, 63, mod << 1)\n static CE IL u64 set(u64\
-    \ n) { return n; }\n CE IL u64 get(u64 n) const { NORM; }\n CE IL u64 norm(u64\
-    \ n) const { NORM; }\nprivate:\n u64 x;\n CE IL u128 quo(const u128 &n) const\
-    \ { return (n * x) >> 84; }\n CE IL u64 rem(const u128 &n) const { return n -\
-    \ quo(n) * mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n u64 mod, d, v;\n CE MP_D2B1():\
-    \ s(0), mod(0), d(0), v(0) {}\n CE MP_D2B1(u64 m): s(__builtin_clzll(m)), mod(m),\
-    \ d(m << s), v(u128(-1) / d) {}\n CE IL u64 mul(u64 l, u64 r) const { return rem((u128(l)\
-    \ * r) << s) >> s; }\n PLUS(u64, mod) DIFF(u64, 63, mod) SGN(u64) private: CE\
-    \ IL u64 rem(const u128 &u) const {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u)\
-    \ - (q >> 64) * d - d;\n  if (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return\
-    \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
-    \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
-    \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
-    \ SGN\n#undef CE\n}\n#line 3 \"src/Internal/modint_traits.hpp\"\nnamespace math_internal\
-    \ {\nstruct m_b {};\nstruct s_b: m_b {};\n}\ntemplate <class mod_t> constexpr\
-    \ bool is_modint_v= std::is_base_of_v<math_internal::m_b, mod_t>;\ntemplate <class\
-    \ mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
-    \ mod_t>;\n#line 5 \"src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define\
-    \ CE constexpr\ntemplate <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static\
-    \ CE MP md= MP(MOD);\n};\ntemplate <class Int, class U, class B> struct MInt:\
-    \ public B {\n using Uint= U;\n static CE inline auto mod() { return B::md.mod;\
-    \ }\n CE MInt(): x(0) {}\n template <class T, typename= enable_if_t<is_modint_v<T>\
-    \ && !is_same_v<T, MInt>>> CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n\
-    \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
-    \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
-    \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
-    #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
-    \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
-    \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
-    \ MInt& r) { return *this= *this * r; }\n CE MInt& operator/=(const MInt& r) {\
-    \ return *this= *this / r; }\n CE bool operator==(const MInt& r) const { return\
-    \ B::md.norm(x) == B::md.norm(r.x); }\n CE bool operator!=(const MInt& r) const\
-    \ { return !(*this == r); }\n CE bool operator<(const MInt& r) const { return\
-    \ B::md.norm(x) < B::md.norm(r.x); }\n CE inline MInt inv() const { return mod_inv<Int>(val(),\
-    \ B::md.mod); }\n CE inline Uint val() const { return B::md.get(x); }\n friend\
-    \ ostream& operator<<(ostream& os, const MInt& r) { return os << r.val(); }\n\
-    \ friend istream& operator>>(istream& is, MInt& r) {\n  i64 v;\n  return is >>\
-    \ v, r= MInt(v), is;\n }\nprivate:\n Uint x;\n};\ntemplate <u64 MOD> using ModInt=\
-    \ conditional_t < (MOD < (1 << 30)) & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32,\
-    \ 31>, MOD>>, conditional_t < (MOD < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64,\
-    \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
-    \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
-    \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/NumberTheory/Sieve.hpp\"\n#include <algorithm>\n\
-    #include <map>\n#include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n\
-    \ static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static\
-    \ inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n\
-    \  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N;\
-    \ n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
+    \ <iostream>\n#include <vector>\n#line 2 \"src/Math/FactorialPrecalculation.hpp\"\
+    \n#include <cassert>\n#line 2 \"src/Internal/modint_traits.hpp\"\n#include <type_traits>\n\
+    namespace math_internal {\nstruct m_b {};\nstruct s_b: m_b {};\n}\ntemplate <class\
+    \ mod_t> constexpr bool is_modint_v= std::is_base_of_v<math_internal::m_b, mod_t>;\n\
+    template <class mod_t> constexpr bool is_staticmodint_v= std::is_base_of_v<math_internal::s_b,\
+    \ mod_t>;\n#line 5 \"src/Math/FactorialPrecalculation.hpp\"\ntemplate <class mod_t>\
+    \ class FactorialPrecalculation {\n static_assert(is_modint_v<mod_t>);\n static\
+    \ inline std::vector<mod_t> iv, fct, fiv;\npublic:\n static void reset() { iv.clear(),\
+    \ fct.clear(), fiv.clear(); }\n static inline mod_t inv(int n) {\n  assert(0 <\
+    \ n);\n  if (int k= iv.size(); k <= n) {\n   if (iv.resize(n + 1); !k) iv[1]=\
+    \ 1, k= 2;\n   for (int mod= mod_t::mod(), q; k <= n; ++k) q= (mod + k - 1) /\
+    \ k, iv[k]= iv[k * q - mod] * q;\n  }\n  return iv[n];\n }\n static inline mod_t\
+    \ fact(int n) {\n  assert(0 <= n);\n  if (int k= fct.size(); k <= n) {\n   if\
+    \ (fct.resize(n + 1); !k) fct[0]= 1, k= 1;\n   for (; k <= n; ++k) fct[k]= fct[k\
+    \ - 1] * k;\n  }\n  return fct[n];\n }\n static inline mod_t finv(int n) {\n \
+    \ assert(0 <= n);\n  if (int k= fiv.size(); k <= n) {\n   if (fiv.resize(n + 1);\
+    \ !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
+    \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
+    \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
+    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
+    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
+    \ + r - 1, r); }\n};\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr\
+    \ inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
+    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
+    \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
+    \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
+    \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { return\
+    \ l+= r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l,\
+    \ U r) const { return l-= r, l >> C ? l + (M) : l; }\n#define SGN(U) \\\n static\
+    \ CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\
+    \n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
+    \ B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE\
+    \ MP_Mo(u_t m): mod(m), iv(inv(m)), r2(-du_t(mod) % mod) {}\n CE IL u_t mul(u_t\
+    \ l, u_t r) const { return reduce(du_t(l) * r); }\n PLUS(u_t, mod << 1)\n DIFF(u_t,\
+    \ A, mod << 1)\n CE IL u_t set(u_t n) const { return mul(n, r2); }\n CE IL u_t\
+    \ get(u_t n) const {\n  n= reduce(n);\n  NORM;\n }\n CE IL u_t norm(u_t n) const\
+    \ { NORM; }\nprivate:\n u_t iv, r2;\n static CE u_t inv(u_t n, int e= 6, u_t x=\
+    \ 1) { return e ? inv(n, e - 1, x * (2 - x * n)) : x; }\n CE IL u_t reduce(const\
+    \ du_t &w) const { return u_t(w >> B) + mod - ((du_t(u_t(w) * iv) * mod) >> B);\
+    \ }\n};\nstruct MP_Na {\n u32 mod;\n CE MP_Na(): mod(0){};\n CE MP_Na(u32 m):\
+    \ mod(m) {}\n CE IL u32 mul(u32 l, u32 r) const { return u64(l) * r % mod; }\n\
+    \ PLUS(u32, mod) DIFF(u32, 31, mod) SGN(u32)\n};\nstruct MP_Br {  // mod < 2^31\n\
+    \ u32 mod;\n CE MP_Br(): mod(0), s(0), x(0) {}\n CE MP_Br(u32 m): mod(m), s(95\
+    \ - __builtin_clz(m - 1)), x(((u128(1) << s) + m - 1) / m) {}\n CE IL u32 mul(u32\
+    \ l, u32 r) const { return rem(u64(l) * r); }\n PLUS(u32, mod) DIFF(u32, 31, mod)\
+    \ SGN(u32) private: u8 s;\n u64 x;\n CE IL u64 quo(u64 n) const { return (u128(x)\
+    \ * n) >> s; }\n CE IL u32 rem(u64 n) const { return n - quo(n) * mod; }\n};\n\
+    struct MP_Br2 {  // 2^20 < mod <= 2^41\n u64 mod;\n CE MP_Br2(): mod(0), x(0)\
+    \ {}\n CE MP_Br2(u64 m): mod(m), x((u128(1) << 84) / m) {}\n CE IL u64 mul(u64\
+    \ l, u64 r) const { return rem(u128(l) * r); }\n PLUS(u64, mod << 1)\n DIFF(u64,\
+    \ 63, mod << 1)\n static CE IL u64 set(u64 n) { return n; }\n CE IL u64 get(u64\
+    \ n) const { NORM; }\n CE IL u64 norm(u64 n) const { NORM; }\nprivate:\n u64 x;\n\
+    \ CE IL u128 quo(const u128 &n) const { return (n * x) >> 84; }\n CE IL u64 rem(const\
+    \ u128 &n) const { return n - quo(n) * mod; }\n};\nstruct MP_D2B1 {\n u8 s;\n\
+    \ u64 mod, d, v;\n CE MP_D2B1(): s(0), mod(0), d(0), v(0) {}\n CE MP_D2B1(u64\
+    \ m): s(__builtin_clzll(m)), mod(m), d(m << s), v(u128(-1) / d) {}\n CE IL u64\
+    \ mul(u64 l, u64 r) const { return rem((u128(l) * r) << s) >> s; }\n PLUS(u64,\
+    \ mod) DIFF(u64, 63, mod) SGN(u64) private: CE IL u64 rem(const u128 &u) const\
+    \ {\n  u128 q= (u >> 64) * v + u;\n  u64 r= u64(u) - (q >> 64) * d - d;\n  if\
+    \ (r > u64(q)) r+= d;\n  if (r >= d) r-= d;\n  return r;\n }\n};\ntemplate <class\
+    \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
+    \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
+    }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 5 \"\
+    src/Math/ModInt.hpp\"\nnamespace math_internal {\n#define CE constexpr\ntemplate\
+    \ <class MP, u64 MOD> struct SB: s_b {\nprotected:\n static CE MP md= MP(MOD);\n\
+    };\ntemplate <class Int, class U, class B> struct MInt: public B {\n using Uint=\
+    \ U;\n static CE inline auto mod() { return B::md.mod; }\n CE MInt(): x(0) {}\n\
+    \ template <class T, typename= enable_if_t<is_modint_v<T> && !is_same_v<T, MInt>>>\
+    \ CE MInt(T v): x(B::md.set(v.val() % B::md.mod)) {}\n CE MInt(__int128_t n):\
+    \ x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod - n : n) : n % B::md.mod)))\
+    \ {}\n CE MInt operator-() const { return MInt() - *this; }\n#define FUNC(name,\
+    \ op) \\\n CE MInt name const { \\\n  MInt ret; \\\n  return ret.x= op, ret; \\\
+    \n }\n FUNC(operator+(const MInt & r), B::md.plus(x, r.x))\n FUNC(operator-(const\
+    \ MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const MInt & r), B::md.mul(x,\
+    \ r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n#undef FUNC\n CE\
+    \ MInt operator/(const MInt& r) const { return *this * r.inv(); }\n CE MInt& operator+=(const\
+    \ MInt& r) { return *this= *this + r; }\n CE MInt& operator-=(const MInt& r) {\
+    \ return *this= *this - r; }\n CE MInt& operator*=(const MInt& r) { return *this=\
+    \ *this * r; }\n CE MInt& operator/=(const MInt& r) { return *this= *this / r;\
+    \ }\n CE bool operator==(const MInt& r) const { return B::md.norm(x) == B::md.norm(r.x);\
+    \ }\n CE bool operator!=(const MInt& r) const { return !(*this == r); }\n CE bool\
+    \ operator<(const MInt& r) const { return B::md.norm(x) < B::md.norm(r.x); }\n\
+    \ CE inline MInt inv() const { return mod_inv<Int>(val(), B::md.mod); }\n CE inline\
+    \ Uint val() const { return B::md.get(x); }\n friend ostream& operator<<(ostream&\
+    \ os, const MInt& r) { return os << r.val(); }\n friend istream& operator>>(istream&\
+    \ is, MInt& r) {\n  i64 v;\n  return is >> v, r= MInt(v), is;\n }\nprivate:\n\
+    \ Uint x;\n};\ntemplate <u64 MOD> using ModInt= conditional_t < (MOD < (1 << 30))\
+    \ & MOD, MInt<int, u32, SB<MP_Mo<u32, u64, 32, 31>, MOD>>, conditional_t < (MOD\
+    \ < (1ull << 62)) & MOD, MInt<i64, u64, SB<MP_Mo<u64, u128, 64, 63>, MOD>>, conditional_t<MOD<(1u\
+    \ << 31), MInt<int, u32, SB<MP_Na, MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64,\
+    \ u32, SB<MP_Na, MOD>>, conditional_t<MOD <= (1ull << 41), MInt<i64, u64, SB<MP_Br2,\
+    \ MOD>>, MInt<i64, u64, SB<MP_D2B1, MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n\
+    #line 3 \"src/NumberTheory/Sieve.hpp\"\n#include <algorithm>\n#include <map>\n\
+    #include <cstdint>\ntemplate <int LIM= 1 << 24> class Sieve {\n static inline\
+    \ int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz= 0;\n static inline int8_t\
+    \ lpfe[LIM >> 1];\n static inline void sieve(int N) {  // O(N)\n  static int n=\
+    \ 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for (; n <= N; n+= 2, i++) {\n\
+    \   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int j= 1, e= std::min(lpf[i],\
     \ N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n) >> 1]= ps[j];\n  }\n }\n\
     \ static inline void set_lpfe(int N) {  // O(N)\n  static int n= 3, i= 1;\n  if\
     \ (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf + (N >> 1) + 1, lpfpw +\
@@ -226,36 +227,39 @@ data:
     \ MP_Mo<u32, u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
     \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
     \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
-    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\nnamespace math_internal\
-    \ {\n#define CE constexpr\n#define ST static\n#define TP template\n#define BSF(_,\
-    \ n) __builtin_ctz##_(n)\nTP<class mod_t> struct NTT {\n#define _DFT(a, b, c,\
-    \ ...) \\\n mod_t r, u, *x0, *x1; \\\n for (int a= n, b= 1, s, i; a>>= 1; b<<=\
-    \ 1) \\\n  for (s= 0, r= I, x0= x;; r*= c[BSF(, s)], x0= x1 + p) { \\\n   for\
-    \ (x1= x0 + (i= p); i--;) __VA_ARGS__; \\\n   if (++s == e) break; \\\n  }\n ST\
-    \ inline void dft(int n, mod_t x[]) { _DFT(p, e, r2, x1[i]= x0[i] - (u= r * x1[i]),\
-    \ x0[i]+= u); }\n ST inline void idft(int n, mod_t x[]) {\n  _DFT(e, p, ir2, u=\
-    \ x0[i] - x1[i], x0[i]+= x1[i], x1[i]= r * u)\n  for (const mod_t iv= I / n; n--;)\
-    \ x[n]*= iv;\n }\n#undef _DFT\n ST inline void even_dft(int n, mod_t x[]) {\n\
-    \  for (int i= 0, j= 0; i < n; i+= 2) x[j++]= iv2 * (x[i] + x[i + 1]);\n }\n ST\
-    \ inline void odd_dft(int n, mod_t x[], mod_t r= iv2) {\n  for (int i= 0, j= 0;;\
-    \ r*= ir2[BSF(, ++j)])\n   if (x[j]= r * (x[i] - x[i + 1]); (i+= 2) == n) break;\n\
-    \ }\n ST inline void dft_doubling(int n, mod_t x[], int i= 0) {\n  mod_t k= I,\
-    \ t= rt[BSF(, n << 1)];\n  for (copy_n(x, n, x + n), idft(n, x + n); i < n; ++i)\
-    \ x[n + i]*= k, k*= t;\n  dft(n, x + n);\n }\nprotected:\n ST CE u64 md= mod_t::mod();\n\
-    \ static_assert(md & 1);\n static_assert(is_prime(md));\n ST CE u8 E= BSF(ll,\
-    \ md - 1);\n ST CE mod_t w= [](u8 e) {\n  for (mod_t r= 2;; r+= 1)\n   if (auto\
-    \ s= r.pow((md - 1) / 2); s != 1 && s * s == 1) return r.pow((md - 1) >> e);\n\
-    \  return mod_t();\n }(E);\n static_assert(w != mod_t());\n ST CE mod_t I= 1,\
-    \ iv2= (md + 1) / 2, iw= w.pow((1ULL << E) - 1);\n ST CE auto roots(mod_t w) {\n\
-    \  array<mod_t, E + 1> x= {};\n  for (u8 e= E; e; w*= w) x[e--]= w;\n  return\
-    \ x[0]= w, x;\n }\n TP<u32 N> ST CE auto ras(const array<mod_t, E + 1>& rt, const\
-    \ array<mod_t, E + 1>& irt, int i= N) {\n  array<mod_t, E + 1 - N> x= {};\n  for\
-    \ (mod_t ro= 1; i <= E; ro*= irt[i++]) x[i - N]= rt[i] * ro;\n  return x;\n }\n\
-    \ ST CE auto rt= roots(w), irt= roots(iw);\n ST CE auto r2= ras<2>(rt, irt), ir2=\
-    \ ras<2>(irt, rt);\n};\nTP<class T, u8 t, class B> struct NI: public B {\n using\
-    \ B::B;\n#define FUNC(op, name, HG, ...) \\\n inline void name(__VA_ARGS__) {\
-    \ \\\n  HG(op, 1); \\\n  if CE (t > 1) HG(op, 2); \\\n  if CE (t > 2) HG(op, 3);\
-    \ \\\n  if CE (t > 3) HG(op, 4); \\\n  if CE (t > 4) HG(op, 5); \\\n }\n#define\
+    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ return dat[n];\n}\nnamespace math_internal {\n#define CE constexpr\n#define\
+    \ ST static\n#define TP template\n#define BSF(_, n) __builtin_ctz##_(n)\nTP<class\
+    \ mod_t> struct NTT {\n#define _DFT(a, b, c, ...) \\\n mod_t r, u, *x0, *x1; \\\
+    \n for (int a= n, b= 1, s, i; a>>= 1; b<<= 1) \\\n  for (s= 0, r= I, x0= x;; r*=\
+    \ c[BSF(, s)], x0= x1 + p) { \\\n   for (x1= x0 + (i= p); i--;) __VA_ARGS__; \\\
+    \n   if (++s == e) break; \\\n  }\n ST inline void dft(int n, mod_t x[]) { _DFT(p,\
+    \ e, r2, x1[i]= x0[i] - (u= r * x1[i]), x0[i]+= u); }\n ST inline void idft(int\
+    \ n, mod_t x[]) {\n  _DFT(e, p, ir2, u= x0[i] - x1[i], x0[i]+= x1[i], x1[i]= r\
+    \ * u)\n  for (const mod_t iv= I / n; n--;) x[n]*= iv;\n }\n#undef _DFT\n ST inline\
+    \ void even_dft(int n, mod_t x[]) {\n  for (int i= 0, j= 0; i < n; i+= 2) x[j++]=\
+    \ iv2 * (x[i] + x[i + 1]);\n }\n ST inline void odd_dft(int n, mod_t x[], mod_t\
+    \ r= iv2) {\n  for (int i= 0, j= 0;; r*= ir2[BSF(, ++j)])\n   if (x[j]= r * (x[i]\
+    \ - x[i + 1]); (i+= 2) == n) break;\n }\n ST inline void dft_doubling(int n, mod_t\
+    \ x[], int i= 0) {\n  mod_t k= I, t= rt[BSF(, n << 1)];\n  for (copy_n(x, n, x\
+    \ + n), idft(n, x + n); i < n; ++i) x[n + i]*= k, k*= t;\n  dft(n, x + n);\n }\n\
+    protected:\n ST CE u64 md= mod_t::mod();\n static_assert(md & 1);\n static_assert(is_prime(md));\n\
+    \ ST CE u8 E= BSF(ll, md - 1);\n ST CE mod_t w= [](u8 e) {\n  for (mod_t r= 2;;\
+    \ r+= 1)\n   if (auto s= r.pow((md - 1) / 2); s != 1 && s * s == 1) return r.pow((md\
+    \ - 1) >> e);\n  return mod_t();\n }(E);\n static_assert(w != mod_t());\n ST CE\
+    \ mod_t I= 1, iv2= (md + 1) / 2, iw= w.pow((1ULL << E) - 1);\n ST CE auto roots(mod_t\
+    \ w) {\n  array<mod_t, E + 1> x= {};\n  for (u8 e= E; e; w*= w) x[e--]= w;\n \
+    \ return x[0]= w, x;\n }\n TP<u32 N> ST CE auto ras(const array<mod_t, E + 1>&\
+    \ rt, const array<mod_t, E + 1>& irt, int i= N) {\n  array<mod_t, E + 1 - N> x=\
+    \ {};\n  for (mod_t ro= 1; i <= E; ro*= irt[i++]) x[i - N]= rt[i] * ro;\n  return\
+    \ x;\n }\n ST CE auto rt= roots(w), irt= roots(iw);\n ST CE auto r2= ras<2>(rt,\
+    \ irt), ir2= ras<2>(irt, rt);\n};\nTP<class T, u8 t, class B> struct NI: public\
+    \ B {\n using B::B;\n#define FUNC(op, name, HG, ...) \\\n inline void name(__VA_ARGS__)\
+    \ { \\\n  HG(op, 1); \\\n  if CE (t > 1) HG(op, 2); \\\n  if CE (t > 2) HG(op,\
+    \ 3); \\\n  if CE (t > 3) HG(op, 4); \\\n  if CE (t > 4) HG(op, 5); \\\n }\n#define\
     \ REP for (int i= b; i < e; ++i)\n#define DFT(fft, _) B::ntt##_::fft(e - b, this->dt##_\
     \ + b)\n#define ZEROS(op, _) fill_n(this->dt##_ + b, e - b, typename B::m##_())\n\
     #define SET(op, _) copy(x + b, x + e, this->dt##_ + b)\n#define SET_S(op, _) this->dt##_[i]=\
@@ -285,38 +289,38 @@ data:
     #define IV4 ST CE m4 iv43= m4(1) / m3::mod(), iv42= iv43 / m2::mod(), iv41= iv42\
     \ / m1::mod();\n#define IV5 ST CE m5 iv54= m5(1) / m4::mod(), iv53= iv54 / m3::mod(),\
     \ iv52= iv53 / m2::mod(), iv51= iv52 / m1::mod();\nTP<u8 t, u64 M1, u32 M2, u32\
-    \ M3, u32 M4, u32 M5, u32 LM, bool v> struct NB { ARR(1) };\nTP<u64 M1, u32 M2,\
-    \ u32 M3, u32 M4, u32 M5, u32 LM> struct NB<2, M1, M2, M3, M4, M5, LM, 0> { ARR(1)\
-    \ ARR(2) IV2 };\nTP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<3,\
-    \ M1, M2, M3, M4, M5, LM, 0> { ARR(1) ARR(2) ARR(3) IV2 IV3 };\nTP<u64 M1, u32\
-    \ M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<4, M1, M2, M3, M4, M5, LM, 0>\
-    \ { ARR(1) ARR(2) ARR(3) ARR(4) IV2 IV3 IV4 };\nTP<u64 M1, u32 M2, u32 M3, u32\
-    \ M4, u32 M5, u32 LM> struct NB<5, M1, M2, M3, M4, M5, LM, 0> { ARR(1) ARR(2)\
-    \ ARR(3) ARR(4) ARR(5) IV2 IV3 IV4 IV5 };\n#undef ARR\n#define VC(_) \\\n using\
-    \ m##_= ModInt<M##_>; \\\n using ntt##_= NTT<m##_>; \\\n vector<m##_> bf##_; \\\
-    \n m##_* dt##_;\n#define RS resize\nTP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5,\
-    \ u32 LM> struct NB<1, M1, M2, M3, M4, M5, LM, 1> {\n NB(): dt1(bf1.data()) {}\n\
-    \ void RS(int n) { bf1.RS(n), dt1= bf1.data(); }\n u32 size() const { return bf1.size();\
-    \ }\n VC(1)\n};\nTP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<2,\
-    \ M1, M2, M3, M4, M5, LM, 1> {\n NB(): dt1(bf1.data()), dt2(bf2.data()) {}\n void\
-    \ RS(int n) { bf1.RS(n), dt1= bf1.data(), bf2.RS(n), dt2= bf2.data(); }\n u32\
-    \ size() const { return bf1.size(); }\n VC(1) VC(2) IV2\n};\nTP<u64 M1, u32 M2,\
-    \ u32 M3, u32 M4, u32 M5, u32 LM> struct NB<3, M1, M2, M3, M4, M5, LM, 1> {\n\
-    \ NB(): dt1(bf1.data()), dt2(bf2.data()), dt3(bf3.data()) {}\n void RS(int n)\
-    \ { bf1.RS(n), dt1= bf1.data(), bf2.RS(n), dt2= bf2.data(), bf3.RS(n), dt3= bf3.data();\
-    \ }\n u32 size() const { return bf1.size(); }\n VC(1) VC(2) VC(3) IV2 IV3\n};\n\
+    \ M3, u32 M4, u32 M5, u32 LM, bool v> struct NB {\n ARR(1)\n};\nTP<u64 M1, u32\
+    \ M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<2, M1, M2, M3, M4, M5, LM, 0>\
+    \ {\n ARR(1) ARR(2) IV2\n};\nTP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, u32 LM>\
+    \ struct NB<3, M1, M2, M3, M4, M5, LM, 0> {\n ARR(1) ARR(2) ARR(3) IV2 IV3\n};\n\
     TP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<4, M1, M2, M3, M4,\
-    \ M5, LM, 1> {\n NB(): dt1(bf1.data()), dt2(bf2.data()), dt3(bf3.data()), dt4(bf4.data())\
-    \ {}\n void RS(int n) { bf1.RS(n), dt1= bf1.data(), bf2.RS(n), dt2= bf2.data(),\
-    \ bf3.RS(n), dt3= bf3.data(), bf4.RS(n), dt4= bf4.data(); }\n u32 size() const\
-    \ { return bf1.size(); }\n VC(1) VC(2) VC(3) VC(4) IV2 IV3 IV4\n};\nTP<u64 M1,\
-    \ u32 M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<5, M1, M2, M3, M4, M5, LM,\
-    \ 1> {\n NB(): dt1(bf1.data()), dt2(bf2.data()), dt3(bf3.data()), dt4(bf4.data()),\
-    \ dt5(bf5.data()) {}\n void RS(int n) { bf1.RS(n), dt1= bf1.data(), bf2.RS(n),\
-    \ dt2= bf2.data(), bf3.RS(n), dt3= bf3.data(), bf4.RS(n), dt4= bf4.data(), bf5.RS(n),\
-    \ dt5= bf5.data(); }\n u32 size() const { return bf1.size(); }\n VC(1) VC(2) VC(3)\
-    \ VC(4) VC(5) IV2 IV3 IV4 IV5\n};\n#undef VC\n#undef IV2\n#undef IV3\n#undef IV4\n\
-    #undef IV5\nTP<class T, u32 LM> CE bool is_nttfriend() {\n if CE (!is_staticmodint_v<T>)\
+    \ M5, LM, 0> {\n ARR(1) ARR(2) ARR(3) ARR(4) IV2 IV3 IV4\n};\nTP<u64 M1, u32 M2,\
+    \ u32 M3, u32 M4, u32 M5, u32 LM> struct NB<5, M1, M2, M3, M4, M5, LM, 0> {\n\
+    \ ARR(1) ARR(2) ARR(3) ARR(4) ARR(5) IV2 IV3 IV4 IV5\n};\n#undef ARR\n#define\
+    \ VC(_) \\\n using m##_= ModInt<M##_>; \\\n using ntt##_= NTT<m##_>; \\\n vector<m##_>\
+    \ bf##_; \\\n m##_* dt##_;\n#define RS resize\nTP<u64 M1, u32 M2, u32 M3, u32\
+    \ M4, u32 M5, u32 LM> struct NB<1, M1, M2, M3, M4, M5, LM, 1> {\n NB(): dt1(bf1.data())\
+    \ {}\n void RS(int n) { bf1.RS(n), dt1= bf1.data(); }\n u32 size() const { return\
+    \ bf1.size(); }\n VC(1)\n};\nTP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, u32 LM>\
+    \ struct NB<2, M1, M2, M3, M4, M5, LM, 1> {\n NB(): dt1(bf1.data()), dt2(bf2.data())\
+    \ {}\n void RS(int n) { bf1.RS(n), dt1= bf1.data(), bf2.RS(n), dt2= bf2.data();\
+    \ }\n u32 size() const { return bf1.size(); }\n VC(1) VC(2) IV2\n};\nTP<u64 M1,\
+    \ u32 M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<3, M1, M2, M3, M4, M5, LM,\
+    \ 1> {\n NB(): dt1(bf1.data()), dt2(bf2.data()), dt3(bf3.data()) {}\n void RS(int\
+    \ n) { bf1.RS(n), dt1= bf1.data(), bf2.RS(n), dt2= bf2.data(), bf3.RS(n), dt3=\
+    \ bf3.data(); }\n u32 size() const { return bf1.size(); }\n VC(1) VC(2) VC(3)\
+    \ IV2 IV3\n};\nTP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<4,\
+    \ M1, M2, M3, M4, M5, LM, 1> {\n NB(): dt1(bf1.data()), dt2(bf2.data()), dt3(bf3.data()),\
+    \ dt4(bf4.data()) {}\n void RS(int n) { bf1.RS(n), dt1= bf1.data(), bf2.RS(n),\
+    \ dt2= bf2.data(), bf3.RS(n), dt3= bf3.data(), bf4.RS(n), dt4= bf4.data(); }\n\
+    \ u32 size() const { return bf1.size(); }\n VC(1) VC(2) VC(3) VC(4) IV2 IV3 IV4\n\
+    };\nTP<u64 M1, u32 M2, u32 M3, u32 M4, u32 M5, u32 LM> struct NB<5, M1, M2, M3,\
+    \ M4, M5, LM, 1> {\n NB(): dt1(bf1.data()), dt2(bf2.data()), dt3(bf3.data()),\
+    \ dt4(bf4.data()), dt5(bf5.data()) {}\n void RS(int n) { bf1.RS(n), dt1= bf1.data(),\
+    \ bf2.RS(n), dt2= bf2.data(), bf3.RS(n), dt3= bf3.data(), bf4.RS(n), dt4= bf4.data(),\
+    \ bf5.RS(n), dt5= bf5.data(); }\n u32 size() const { return bf1.size(); }\n VC(1)\
+    \ VC(2) VC(3) VC(4) VC(5) IV2 IV3 IV4 IV5\n};\n#undef VC\n#undef IV2\n#undef IV3\n\
+    #undef IV4\n#undef IV5\nTP<class T, u32 LM> CE bool is_nttfriend() {\n if CE (!is_staticmodint_v<T>)\
     \ return 0;\n else return (T::mod() & is_prime(T::mod())) && LM <= (1ULL << BSF(ll,\
     \ T::mod() - 1));\n}\nTP<class T, enable_if_t<is_arithmetic_v<T>, nullptr_t> =\
     \ nullptr> CE u64 mv() { return numeric_limits<T>::max(); }\nTP<class T, enable_if_t<is_staticmodint_v<T>,\
@@ -334,12 +338,12 @@ data:
     \ 0, 0, 0, 0, LM, v>, NB<nttarr_type<T, LM>, MOD1, MOD2, MOD3, MOD4, MOD5, LM,\
     \ v>>>;\n#undef CE\n#undef ST\n#undef TP\n}\nusing math_internal::is_nttfriend,\
     \ math_internal::nttarr_type, math_internal::nttarr_cat, math_internal::NTT, math_internal::NTTArray;\n\
-    template <class T, size_t LM, int id= 0> struct GlobalNTTArray { static inline\
-    \ NTTArray<T, LM, 0> bf; };\ntemplate <class T, size_t LM, size_t LM2, int id=\
-    \ 0> struct GlobalNTTArray2D { static inline NTTArray<T, LM, 0> bf[LM2]; };\n\
-    template <class T, size_t LM, int id= 0> struct GlobalArray { static inline T\
-    \ bf[LM]; };\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1, n|=\
-    \ n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 8 \"src/FFT/sample_points_shift.hpp\"\
+    template <class T, size_t LM, int id= 0> struct GlobalNTTArray {\n static inline\
+    \ NTTArray<T, LM, 0> bf;\n};\ntemplate <class T, size_t LM, size_t LM2, int id=\
+    \ 0> struct GlobalNTTArray2D {\n static inline NTTArray<T, LM, 0> bf[LM2];\n};\n\
+    template <class T, size_t LM, int id= 0> struct GlobalArray {\n static inline\
+    \ T bf[LM];\n};\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1,\
+    \ n|= n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n#line 8 \"src/FFT/sample_points_shift.hpp\"\
     \ntemplate <class mod_t, size_t LM= 1 << 24> std::vector<mod_t> sample_points_shift(const\
     \ std::vector<mod_t>& y, mod_t c, int m= 1) {\n assert(m <= mod_t::mod()), assert(y.size()\
     \ <= mod_t::mod());\n static constexpr int TH= (int[]){45, 32, 75, 130, 180, 260}[nttarr_cat<mod_t,\
@@ -367,43 +371,44 @@ data:
     \ nc1 + 1, bf);\n  else f(k, nc1 + 1 - k, std::copy_n(y.begin(), k, bf));\n }\
     \ else f(c, m, p);\n return std::vector(p, p + m);\n}\n#line 10 \"test/yosupo/sum_of_exponential_times_polynomial.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n long long r,\
-    \ d, n;\n cin >> r >> d >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n  return\
-    \ 0;\n }\n if (r == 0) {\n  cout << (d ? 0 : 1) << '\\n';\n  return 0;\n }\n vector<Mint>\
-    \ sum(d + 2), rpow(d + 2), pd= Sieve<>::pow_table<Mint>(d + 2, d);\n rpow[0]=\
-    \ 1, sum[0]= rpow[0] * pd[0];\n for (int i= 1; i <= d + 1; i++) rpow[i]= rpow[i\
-    \ - 1] * r;\n for (int i= 1; i <= d + 1; i++) sum[i]= sum[i - 1] + rpow[i] * pd[i];\n\
-    \ Mint ans= 0;\n if (r == 1) ans= sample_points_shift<Mint>(sum, n)[0];\n else\
-    \ {\n  for (int i= 0; i <= d; i++) {\n   Mint tmp= C::nCr(d + 1, i + 1) * rpow[d\
-    \ - i] * sum[i];\n   ans+= (d - i) & 1 ? -tmp : tmp;\n  }\n  ans/= Mint(1 - r).pow(d\
-    \ + 1);\n  vector<Mint> y(d + 1);\n  Mint rinv= Mint(1) / r, rinvpow= 1;\n  for\
-    \ (int i= 0; i <= d; i++) {\n   y[i]= Mint(sum[i] - ans) * rinvpow;\n   rinvpow*=\
-    \ rinv;\n  }\n  ans+= Mint(r).pow(n) * sample_points_shift<Mint>(y, n)[0];\n }\n\
-    \ cout << ans << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
-    \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
-    \ <iostream>\n#include <vector>\n#include \"src/Math/Combination.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\n#include \"src/NumberTheory/Sieve.hpp\"\n#include \"\
-    src/FFT/sample_points_shift.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n using C= Combination<Mint>;\n\
-    \ long long r, d, n;\n cin >> r >> d >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n\
+    \ using Mint= ModInt<998244353>;\n using F= FactorialPrecalculation<Mint>;\n long\
+    \ long r, d, n;\n cin >> r >> d >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n\
     \  return 0;\n }\n if (r == 0) {\n  cout << (d ? 0 : 1) << '\\n';\n  return 0;\n\
     \ }\n vector<Mint> sum(d + 2), rpow(d + 2), pd= Sieve<>::pow_table<Mint>(d + 2,\
     \ d);\n rpow[0]= 1, sum[0]= rpow[0] * pd[0];\n for (int i= 1; i <= d + 1; i++)\
     \ rpow[i]= rpow[i - 1] * r;\n for (int i= 1; i <= d + 1; i++) sum[i]= sum[i -\
     \ 1] + rpow[i] * pd[i];\n Mint ans= 0;\n if (r == 1) ans= sample_points_shift<Mint>(sum,\
-    \ n)[0];\n else {\n  for (int i= 0; i <= d; i++) {\n   Mint tmp= C::nCr(d + 1,\
+    \ n)[0];\n else {\n  for (int i= 0; i <= d; i++) {\n   Mint tmp= F::nCr(d + 1,\
     \ i + 1) * rpow[d - i] * sum[i];\n   ans+= (d - i) & 1 ? -tmp : tmp;\n  }\n  ans/=\
     \ Mint(1 - r).pow(d + 1);\n  vector<Mint> y(d + 1);\n  Mint rinv= Mint(1) / r,\
     \ rinvpow= 1;\n  for (int i= 0; i <= d; i++) {\n   y[i]= Mint(sum[i] - ans) *\
     \ rinvpow;\n   rinvpow*= rinv;\n  }\n  ans+= Mint(r).pow(n) * sample_points_shift<Mint>(y,\
-    \ n)[0];\n }\n cout << ans << '\\n';\n return 0;\n}"
+    \ n)[0];\n }\n cout << ans << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
+    \n/** @see https://min-25.hatenablog.com/entry/2015/04/24/031413\n */\n#include\
+    \ <iostream>\n#include <vector>\n#include \"src/Math/FactorialPrecalculation.hpp\"\
+    \n#include \"src/Math/ModInt.hpp\"\n#include \"src/NumberTheory/Sieve.hpp\"\n\
+    #include \"src/FFT/sample_points_shift.hpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ using F= FactorialPrecalculation<Mint>;\n long long r, d, n;\n cin >> r >> d\
+    \ >> n;\n if (--n < 0) {\n  cout << 0 << endl;\n  return 0;\n }\n if (r == 0)\
+    \ {\n  cout << (d ? 0 : 1) << '\\n';\n  return 0;\n }\n vector<Mint> sum(d + 2),\
+    \ rpow(d + 2), pd= Sieve<>::pow_table<Mint>(d + 2, d);\n rpow[0]= 1, sum[0]= rpow[0]\
+    \ * pd[0];\n for (int i= 1; i <= d + 1; i++) rpow[i]= rpow[i - 1] * r;\n for (int\
+    \ i= 1; i <= d + 1; i++) sum[i]= sum[i - 1] + rpow[i] * pd[i];\n Mint ans= 0;\n\
+    \ if (r == 1) ans= sample_points_shift<Mint>(sum, n)[0];\n else {\n  for (int\
+    \ i= 0; i <= d; i++) {\n   Mint tmp= F::nCr(d + 1, i + 1) * rpow[d - i] * sum[i];\n\
+    \   ans+= (d - i) & 1 ? -tmp : tmp;\n  }\n  ans/= Mint(1 - r).pow(d + 1);\n  vector<Mint>\
+    \ y(d + 1);\n  Mint rinv= Mint(1) / r, rinvpow= 1;\n  for (int i= 0; i <= d; i++)\
+    \ {\n   y[i]= Mint(sum[i] - ans) * rinvpow;\n   rinvpow*= rinv;\n  }\n  ans+=\
+    \ Mint(r).pow(n) * sample_points_shift<Mint>(y, n)[0];\n }\n cout << ans << '\\\
+    n';\n return 0;\n}"
   dependsOn:
-  - src/Math/Combination.hpp
+  - src/Math/FactorialPrecalculation.hpp
+  - src/Internal/modint_traits.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
-  - src/Internal/modint_traits.hpp
   - src/NumberTheory/Sieve.hpp
   - src/FFT/sample_points_shift.hpp
   - src/FFT/NTT.hpp
@@ -411,8 +416,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2023-11-25 18:44:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
 layout: document

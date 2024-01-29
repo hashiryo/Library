@@ -9,18 +9,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.enum_quo.test.cpp
     title: test/atcoder/abc179_c.enum_quo.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/enumerate_quotients.test.cpp
     title: test/yosupo/enumerate_quotients.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1260.test.cpp
     title: test/yukicoder/1260.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1573.enum_quo.test.cpp
     title: test/yukicoder/1573.enum_quo.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/enumerate_quotients.hpp\"\n#include <vector>\n\
@@ -44,13 +44,13 @@ data:
   path: src/NumberTheory/enumerate_quotients.hpp
   requiredBy: []
   timestamp: '2023-11-25 18:44:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/enumerate_quotients.test.cpp
   - test/yukicoder/1573.enum_quo.test.cpp
   - test/yukicoder/1260.test.cpp
-  - test/atcoder/abc179_c.enum_quo.test.cpp
+  - test/yosupo/enumerate_quotients.test.cpp
   - test/atcoder/abc172_d.enum_quo.test.cpp
+  - test/atcoder/abc179_c.enum_quo.test.cpp
 documentation_of: src/NumberTheory/enumerate_quotients.hpp
 layout: document
 title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"

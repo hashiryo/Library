@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/Automaton.hpp
     title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc135/tasks/abc135_d
@@ -164,9 +164,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -184,17 +184,13 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 6 \"test/atcoder/abc135_d.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint=\
-    \ ModInt<int(1e9 + 7)>;\n string S;\n cin >> S;\n int n= S.length();\n vector\
-    \ alp= {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};\n auto tr_s= [&](int s, int c) {\n  if\
-    \ (S[s] == '?' || S[s] == c + '0') return s + 1;\n  return -1;\n };\n auto ac_s=\
-    \ [](int) { return true; };\n Automaton dfa_s(alp, 0, tr_s, ac_s, -1);\n auto\
-    \ tr_13= [](int s, int c) { return (s * 10 + c) % 13; };\n auto ac_13= [](int\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 6 \"test/atcoder/abc135_d.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<int(1e9 + 7)>;\n string S;\n cin >> S;\n int n= S.length();\n\
+    \ vector alp= {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};\n auto tr_s= [&](int s, int c) {\n\
+    \  if (S[s] == '?' || S[s] == c + '0') return s + 1;\n  return -1;\n };\n auto\
+    \ ac_s= [](int) { return true; };\n Automaton dfa_s(alp, 0, tr_s, ac_s, -1);\n\
+    \ auto tr_13= [](int s, int c) { return (s * 10 + c) % 13; };\n auto ac_13= [](int\
     \ s) { return s == 5; };\n Automaton dfa_13(alp, 0, tr_13, ac_13);\n auto dfa=\
     \ dfa_s & dfa_13;\n cout << dfa.num<Mint>(n) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc135/tasks/abc135_d\"\n#include\
@@ -217,8 +213,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc135_d.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc135_d.test.cpp
 layout: document

@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/counting_primes.test.cpp
     title: test/yosupo/counting_primes.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\n#include\
@@ -150,12 +150,12 @@ data:
   path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
   requiredBy: []
   timestamp: '2023-11-27 11:00:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/counting_primes.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/atcoder/abc172_d.mul_sum.test.cpp
+  - test/yosupo/counting_primes.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
+  - test/atcoder/abc172_d.mul_sum.test.cpp
 documentation_of: src/NumberTheory/ExtendedEratosthenesSieve.hpp
 layout: document
 title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"

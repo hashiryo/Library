@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   - icon: ':heavy_check_mark:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
   _extendedRequiredBy: []

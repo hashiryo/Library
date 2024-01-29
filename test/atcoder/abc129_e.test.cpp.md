@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/Automaton.hpp
     title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
   _extendedRequiredBy: []
@@ -164,9 +164,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -184,18 +184,15 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 8 \"test/atcoder/abc129_e.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint=\
-    \ ModInt<int(1e9 + 7)>;\n string L;\n cin >> L;\n int n= L.length();\n using symbol_t=\
-    \ array<bool, 2>;\n vector<symbol_t> alp= {{0, 0}, {0, 1}, {1, 0}};\n auto tr=\
-    \ [&](int s, symbol_t c) {\n  if (s >= n) return s;\n  bool d= L[s] - '0', e=\
-    \ c[0] ^ c[1];\n  if (e > d) return n + 1;\n  if (e < d) return n;\n  return s\
-    \ + 1;\n };\n auto ac= [&](int s) { return true; };\n Automaton dfa(alp, 0, tr,\
-    \ ac, n + 1);\n cout << dfa.num<Mint>(n) << '\\n';\n return 0;\n}\n"
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 8 \"test/atcoder/abc129_e.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<int(1e9 + 7)>;\n string L;\n cin >> L;\n int n= L.length();\n\
+    \ using symbol_t= array<bool, 2>;\n vector<symbol_t> alp= {{0, 0}, {0, 1}, {1,\
+    \ 0}};\n auto tr= [&](int s, symbol_t c) {\n  if (s >= n) return s;\n  bool d=\
+    \ L[s] - '0', e= c[0] ^ c[1];\n  if (e > d) return n + 1;\n  if (e < d) return\
+    \ n;\n  return s + 1;\n };\n auto ac= [&](int s) { return true; };\n Automaton\
+    \ dfa(alp, 0, tr, ac, n + 1);\n cout << dfa.num<Mint>(n) << '\\n';\n return 0;\n\
+    }\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc129/tasks/abc129_e\"\n#include\
     \ <iostream>\n#include <string>\n#include <vector>\n#include <array>\n#include\
     \ \"src/Misc/Automaton.hpp\"\n#include \"src/Math/ModInt.hpp\"\nusing namespace\
@@ -215,7 +212,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc129_e.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
+  timestamp: '2024-01-29 15:51:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc129_e.test.cpp

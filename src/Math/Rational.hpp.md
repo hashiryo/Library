@@ -162,12 +162,12 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1501.test.cpp
-  - test/aoj/1242.rational.test.cpp
-  - test/aoj/2003.rational.test.cpp
-  - test/aoj/0350.test.cpp
+  - test/unit_test/constexpr_rational.test.cpp
   - test/aoj/2009.rational.test.cpp
   - test/aoj/2159.rational.test.cpp
-  - test/unit_test/constexpr_rational.test.cpp
+  - test/aoj/0350.test.cpp
+  - test/aoj/2003.rational.test.cpp
+  - test/aoj/1242.rational.test.cpp
 documentation_of: src/Math/Rational.hpp
 layout: document
 title: "\u6709\u7406\u6570 $\\mathbb{Q}$"

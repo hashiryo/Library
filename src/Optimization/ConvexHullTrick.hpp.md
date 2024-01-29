@@ -97,10 +97,10 @@ data:
   timestamp: '2023-10-17 01:28:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/line_add_get_min.CHT.test.cpp
-  - test/yukicoder/2458.CHT.test.cpp
-  - test/yukicoder/2012.test.cpp
   - test/yukicoder/1297.CHT.test.cpp
+  - test/yukicoder/2012.test.cpp
+  - test/yukicoder/2458.CHT.test.cpp
+  - test/yosupo/line_add_get_min.CHT.test.cpp
   - test/aoj/2725.CHT.test.cpp
 documentation_of: src/Optimization/ConvexHullTrick.hpp
 layout: document

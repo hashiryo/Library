@@ -8,6 +8,9 @@ data:
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
+    path: src/Math/FactorialPrecalculation.hpp
+    title: src/Math/FactorialPrecalculation.hpp
+  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
@@ -16,17 +19,17 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc222/tasks/abc222_h
@@ -91,9 +94,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -111,12 +114,25 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/Math/sparse_fps.hpp\"\n#include <vector>\n\
-    #include <cstdint>\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Math/sparse_fps.hpp\"\
+    \n#include <cstdint>\n#line 3 \"src/Math/FactorialPrecalculation.hpp\"\n#include\
+    \ <vector>\n#line 5 \"src/Math/FactorialPrecalculation.hpp\"\ntemplate <class\
+    \ mod_t> class FactorialPrecalculation {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static inline std::vector<mod_t> iv, fct, fiv;\npublic:\n static void reset()\
+    \ { iv.clear(), fct.clear(), fiv.clear(); }\n static inline mod_t inv(int n) {\n\
+    \  assert(0 < n);\n  if (int k= iv.size(); k <= n) {\n   if (iv.resize(n + 1);\
+    \ !k) iv[1]= 1, k= 2;\n   for (int mod= mod_t::mod(), q; k <= n; ++k) q= (mod\
+    \ + k - 1) / k, iv[k]= iv[k * q - mod] * q;\n  }\n  return iv[n];\n }\n static\
+    \ inline mod_t fact(int n) {\n  assert(0 <= n);\n  if (int k= fct.size(); k <=\
+    \ n) {\n   if (fct.resize(n + 1); !k) fct[0]= 1, k= 1;\n   for (; k <= n; ++k)\
+    \ fct[k]= fct[k - 1] * k;\n  }\n  return fct[n];\n }\n static inline mod_t finv(int\
+    \ n) {\n  assert(0 <= n);\n  if (int k= fiv.size(); k <= n) {\n   if (fiv.resize(n\
+    \ + 1); !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
+    \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
+    \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
+    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
+    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
+    \ + r - 1, r); }\n};\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -141,102 +157,100 @@ data:
     \ (a <= 1 || p == 2) return a;\n if (p < (1 << 30)) return inner_sqrt<u32, MP_Mo<u32,\
     \ u64, 32, 31>>(a, p);\n if (p < (1ll << 62)) return inner_sqrt<u64, MP_Mo<u64,\
     \ u128, 64, 63>>(a, p);\n return inner_sqrt<u64, MP_D2B1>(a, p);\n}\n}\nusing\
-    \ math_internal::mod_sqrt;\n#line 6 \"src/Math/sparse_fps.hpp\"\ntemplate <class\
-    \ K> std::vector<K> sparse_inv(const std::vector<K> &f, int n) {\n assert(f[0]\
-    \ != K(0));\n std::vector<std::pair<int, K>> dat;\n for (int i= 1, ed= std::min<int>(n,\
-    \ f.size()); i < ed; ++i)\n  if (f[i] != K(0)) dat.emplace_back(i, f[i]);\n std::vector<K>\
-    \ ret(n);\n const K iv= ret[0]= K(1) / f[0];\n for (int i= 1; i < n; ret[i++]*=\
-    \ iv)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   ret[i]-= ret[i -\
-    \ j] * v;\n  }\n return ret;\n}\ntemplate <class K> std::vector<K> sparse_div(std::vector<K>\
-    \ f, const std::vector<K> &g, int n) {\n assert(g[0] != K(0));\n std::vector<std::pair<int,\
-    \ K>> dat;\n for (int i= 1, ed= std::min<int>(n, g.size()); i < ed; ++i)\n  if\
-    \ (g[i] != K(0)) dat.emplace_back(i, g[i]);\n f.resize(n);\n const K iv= K(1)\
-    \ / g[0];\n for (int i= 0; i < n; f[i++]*= iv)\n  for (auto &&[j, v]: dat) {\n\
-    \   if (i < j) break;\n   f[i]-= f[i - j] * v;\n  }\n return f;\n}\ntemplate <class\
-    \ mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sparse_log(const std::vector<mod_t>\
-    \ &f, int n) {\n assert(f[0] == mod_t(1));\n std::vector<mod_t> df(n - 1);\n for\
-    \ (int i= 1, ed= std::min<int>(n, f.size()); i < ed; ++i) df[i - 1]+= f[i] * i;\n\
-    \ df= sparse_div(df, f, n - 1);\n std::vector<mod_t> ret(n);\n for (int i= n;\
-    \ --i;) ret[i]= df[i - 1] * get_inv<mod_t, LM>(i);\n return ret;\n}\ntemplate\
-    \ <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sparse_exp(const std::vector<mod_t>\
-    \ &f, int n) {\n assert(f[0] == mod_t(0));\n std::vector<std::pair<int, mod_t>>\
-    \ dat;\n for (int i= 1, ed= std::min<int>(n, f.size()); i < ed; ++i)\n  if (f[i]\
-    \ != mod_t(0)) dat.emplace_back(i - 1, f[i] * i);\n std::vector<mod_t> ret(n);\n\
-    \ ret[0]= 1;\n for (int i= 1; i < n; ret[i]*= get_inv<mod_t, LM>(i), ++i)\n  for\
-    \ (auto &&[j, v]: dat) {\n   if (i <= j) break;\n   ret[i]+= ret[i - 1 - j] *\
-    \ v;\n  }\n return ret;\n}\ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t>\
-    \ sparse_pow(const std::vector<mod_t> &f, uint64_t k, int n) {\n std::vector<mod_t>\
-    \ ret(n);\n if (k == 0) return ret[0]= 1, ret;\n int cnt= 0, ed= std::min<int>(n,\
-    \ f.size());\n while (cnt < ed && f[cnt] == mod_t(0)) cnt++;\n const __int128_t\
-    \ ofs= (__int128_t)k * cnt, sz= n - ofs;\n if (sz <= 0) return ret;\n std::vector<std::pair<int,\
-    \ mod_t>> dat;\n for (int i= cnt + 1; i < ed; ++i)\n  if (f[i] != mod_t(0)) dat.emplace_back(i\
-    \ - cnt, f[i]);\n mod_t *bf= ret.data() + k * cnt, mk= k, iv= mod_t(1) / f[cnt];\n\
-    \ bf[0]= f[cnt].pow(k);\n for (int i= 1; i < sz; bf[i]*= get_inv<mod_t, LM>(i)\
-    \ * iv, ++i)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   bf[i]+= v\
-    \ * (mk * j - (i - j)) * bf[i - j];\n  }\n return ret;\n}\ntemplate <class mod_t,\
-    \ std::size_t LM= 1 << 24> std::vector<mod_t> sparse_sqrt(const std::vector<mod_t>\
-    \ &f, int n) {\n std::vector<mod_t> ret(n);\n int cnt= 0, ed= std::min<int>(n,\
-    \ f.size());\n while (cnt < ed && f[cnt] == mod_t(0)) cnt++;\n if (cnt == ed)\
-    \ return ret;\n if (cnt & 1) return {};  // no solution\n const int ofs= cnt >>\
-    \ 1, sz= n - ofs;\n std::vector<std::pair<int, mod_t>> dat;\n for (int i= cnt\
-    \ + 1; i < ed; ++i)\n  if (f[i] != mod_t(0)) dat.emplace_back(i - cnt, f[i]);\n\
-    \ mod_t *bf= ret.data() + ofs, mk= mod_t(1) / 2, iv= mod_t(1) / f[cnt];\n bf[0]=\
-    \ mod_sqrt(f[cnt].val(), mod_t::mod());\n if (bf[0] * bf[0] != f[cnt]) return\
-    \ {};  // no solution\n for (int i= 1; i < sz; bf[i]*= get_inv<mod_t, LM>(i) *\
-    \ iv, ++i)\n  for (auto &&[j, v]: dat) {\n   if (i < j) break;\n   bf[i]+= v *\
-    \ (mk * j - (i - j)) * bf[i - j];\n  }\n return ret;\n}\n// F'/F = f(x)/g(x),\
-    \ F[0]=1\ntemplate <class mod_t, std::size_t LM= 1 << 24> std::vector<mod_t> sparse_log_differentiation(const\
-    \ std::vector<mod_t> &f, const std::vector<mod_t> &g, int n) {\n assert(g[0] ==\
-    \ mod_t(1));\n std::vector<std::pair<int, mod_t>> dat_f, dat_g;\n for (int i=\
-    \ 0, ed= std::min<int>(f.size(), n); i < ed; ++i)\n  if (f[i] != mod_t(0)) dat_f.emplace_back(i,\
-    \ f[i]);\n for (int i= 1, ed= std::min<int>(g.size(), n); i < ed; ++i)\n  if (g[i]\
-    \ != mod_t(0)) dat_g.emplace_back(i, g[i]);\n std::vector<mod_t> ret(n), d(n -\
-    \ 1);\n ret[0]= 1;\n for (int i= 0; i < n - 1; ++i) {\n  for (auto &&[j, v]: dat_g)\
-    \ {\n   if (i < j) break;\n   d[i]-= v * d[i - j];\n  }\n  for (auto &&[j, v]:\
-    \ dat_f) {\n   if (i < j) break;\n   d[i]+= v * ret[i - j];\n  }\n  ret[i + 1]=\
-    \ d[i] * get_inv<mod_t, LM>(i + 1);\n }\n return ret;\n}\ntemplate <class mod_t,\
-    \ std::size_t LM= 1 << 24>  // exp(f/g)\nstd::vector<mod_t> sparse_exp_of_div(const\
-    \ std::vector<mod_t> &f, const std::vector<mod_t> &g, int n) {\n assert(f[0] ==\
-    \ mod_t(0)), assert(g[0] == mod_t(1));\n std::vector<std::pair<int, mod_t>> dat_f,\
-    \ dat_g;\n for (int i= 1, ed= std::min<int>(f.size(), n); i < ed; ++i)\n  if (f[i]\
-    \ != mod_t(0)) dat_f.emplace_back(i, f[i]);\n for (int i= 0, ed= std::min<int>(g.size(),\
-    \ n); i < ed; ++i)\n  if (g[i] != mod_t(0)) dat_g.emplace_back(i, g[i]);\n std::vector<mod_t>\
-    \ a(f.size() + g.size() - 2), b(2 * g.size() - 1);\n for (auto &&[i, x]: dat_f)\n\
-    \  for (auto &&[j, y]: dat_g)\n   if (i || j) a[i + j - 1]+= x * y * (i - j);\n\
-    \ for (auto &&[i, x]: dat_g)\n  for (auto &&[j, y]: dat_g) b[i + j]+= x * y; \
-    \ // a = f'g-fg', b = g^2\n return sparse_log_differentiation<mod_t, LM>(a, b,\
-    \ n);\n}\ntemplate <class mod_t, std::size_t LM= 1 << 24>  // (f/g)^k\nstd::vector<mod_t>\
-    \ sparse_pow_of_div(const std::vector<mod_t> &f, const std::vector<mod_t> &g,\
-    \ uint64_t k, int n) {\n assert(f[0] == mod_t(1)), assert(g[0] == mod_t(1));\n\
-    \ std::vector<std::pair<int, mod_t>> dat_f, dat_g;\n for (int i= 0, ed= std::min<int>(f.size(),\
-    \ n); i < ed; ++i)\n  if (f[i] != mod_t(0)) dat_f.emplace_back(i, f[i]);\n for\
-    \ (int i= 0, ed= std::min<int>(g.size(), n); i < ed; ++i)\n  if (g[i] != mod_t(0))\
-    \ dat_g.emplace_back(i, g[i]);\n std::vector<mod_t> a(f.size() + g.size() - 2),\
-    \ b(2 * g.size() - 1);\n for (auto &&[i, x]: dat_f)\n  for (auto &&[j, y]: dat_g)\n\
-    \   if (i || j) a[i + j - 1]+= x * y * (i - j) * k;\n for (auto &&[i, x]: dat_f)\n\
-    \  for (auto &&[j, y]: dat_g) b[i + j]+= x * y;  // a = k(f'g-fg'), b = fg\n return\
-    \ sparse_log_differentiation<mod_t, LM>(a, b, n);\n}\n#line 5 \"test/atcoder/abc222_h.sparse_FPS.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto F= sparse_pow<Mint>({1,\
-    \ 3, 1}, 2 * N, N);\n cout << F[N - 1] / N << '\\n';\n return 0;\n}\n"
+    \ math_internal::mod_sqrt;\n#line 5 \"src/Math/sparse_fps.hpp\"\nnamespace sfps\
+    \ {\nnamespace sfps_internal {\nusing namespace std;\ntemplate <class K> using\
+    \ Dat= vector<pair<int, K>>;\ntemplate <class K> Dat<K> to_sfps(const vector<K>&\
+    \ f, int b, int N) {\n Dat<K> p;\n for (int e= min<int>(N + 1, f.size()); b <\
+    \ e; ++b)\n  if (f[b] != K(0)) p.emplace_back(b, f[b]);\n return p;\n}\n// f/g,\
+    \ O(N S_g)\ntemplate <class K> vector<K> div(vector<K> f, const vector<K>& g,\
+    \ int N) {\n assert(g[0] != K(0)), f.resize(N + 1);\n auto p= to_sfps(g, 1, N);\n\
+    \ const K iv= K(1) / g[0];\n for (int i= 0; i <= N; f[i++]*= iv)\n  for (auto&&\
+    \ [j, v]: p) {\n   if (i < j) break;\n   f[i]-= f[i - j] * v;\n  }\n return f;\n\
+    }\ntemplate <class mod_t> void pw_mul_pw(mod_t* f, const Dat<mod_t>& p, const\
+    \ Dat<mod_t>& q, mod_t a, mod_t b, int N) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ vector<mod_t> x(N + 1), y(N);\n f[0]= 1;\n for (int i= 0, k= 1; i < N; i= k++,\
+    \ f[i]*= FactorialPrecalculation<mod_t>::inv(i)) {\n  for (auto&& [j, v]: q) {\n\
+    \   if (i < j) break;\n   y[i]+= f[i - j] * v;\n  }\n  (y[i]+= f[i])*= a;\n  for\
+    \ (auto&& [j, v]: p) {\n   if (k < j) break;\n   x[k]+= v * (y[k - j] * j - x[k\
+    \ - j]);\n  }\n  f[k]= x[k];\n  for (auto&& [j, v]: q) {\n   if (k < j) break;\n\
+    \   f[k]+= v * (b * j - k) * f[k - j];\n  }\n }\n}\ntemplate <class K> int mn_dg(const\
+    \ vector<K>& f) {\n for (int z= 0, e= f.size(); z < e; ++z)\n  if (f[z] != K(0))\
+    \ return z;\n return -1;\n}\ntemplate <class mod_t> mod_t pw(mod_t a, int64_t\
+    \ k) { return k < 0 ? mod_t(1) / a.pow(-k) : a.pow(k); }\n// f^k (k can be negative),\
+    \ O(N S_f)\ntemplate <class mod_t> vector<mod_t> pow(const vector<mod_t>& f, int64_t\
+    \ k, int N) {\n vector<mod_t> F(N + 1);\n if (!k) return F[0]= 1, F;\n int x=\
+    \ mn_dg(f);\n assert(!(x < 0 && k < 0));\n if (x < 0) return F;\n auto o= __int128_t(x)\
+    \ * k;\n if (o > N) return F;\n mod_t p0= f[x], ip= mod_t(1) / p0, a= pw(p0, k);\n\
+    \ auto p= to_sfps(f, x + 1, N - o + x);\n for (auto& [j, v]: p) v*= ip, j-= x;\n\
+    \ pw_mul_pw<mod_t>(F.data() + o, p, {}, k, 0, N - o);\n for (int i= o; i <= N;\
+    \ ++i) F[i]*= a;\n return F;\n}\n// f^k g^l (k, l can be negative), O(N(S_f+S_g))\n\
+    template <class mod_t> vector<mod_t> pow_mul_pow(const vector<mod_t>& f, int64_t\
+    \ k, const vector<mod_t>& g, int64_t l, int N) {\n if (!k) return pow(g, l, N);\n\
+    \ if (!l) return pow(f, k, N);\n int x= mn_dg(f), y= mn_dg(g);\n vector<mod_t>\
+    \ F(N + 1);\n assert(!(x < 0 && k < 0)), assert(!(y < 0 && l < 0));\n if (x <\
+    \ 0 || y < 0) return F;\n auto o= __int128_t(x) * k + __int128_t(y) * l;\n if\
+    \ (assert(o >= 0); o > N) return F;\n mod_t p0= f[x], q0= g[y], ip= mod_t(1) /\
+    \ p0, iq= mod_t(1) / q0, a= pw(p0, k) * pw(q0, l);\n auto p= to_sfps(f, x + 1,\
+    \ N - o + x), q= to_sfps(g, y + 1, N - o + y);\n for (auto& [j, v]: p) v*= ip,\
+    \ j-= x;\n for (auto& [j, v]: q) v*= iq, j-= y;\n pw_mul_pw<mod_t>(F.data() +\
+    \ o, p, q, k, l + 1, N - o);\n for (int i= o; i <= N; ++i) F[i]*= a;\n return\
+    \ F;\n}\n// \u221A(f/g), O(N(S_f+S_g))\ntemplate <class mod_t> vector<mod_t> sqrt_of_div(const\
+    \ vector<mod_t>& f, const vector<mod_t>& g, int N) {\n int x= mn_dg(f), y= mn_dg(g),\
+    \ o= (x - y) >> 1;\n vector<mod_t> F(N + 1);\n if (assert(y >= 0); x < 0) return\
+    \ F;\n if (assert(x >= y); (x - y) & 1) return {};  // no solution\n mod_t p0=\
+    \ f[x], ip= mod_t(1) / p0, iq= mod_t(1) / g[y], a= mod_sqrt(p0 * iq, mod_t::mod()),\
+    \ i2= mod_t(1) / 2;\n auto p= to_sfps(f, x + 1, N - o + x), q= to_sfps(g, y +\
+    \ 1, N - o + y);\n for (auto& [j, v]: p) v*= ip, j-= x;\n for (auto& [j, v]: q)\
+    \ v*= iq, j-= y;\n pw_mul_pw<mod_t>(F.data() + o, p, q, i2, -i2 + 1, N - o);\n\
+    \ for (int i= o; i <= N; ++i) F[i]*= a;\n return F;\n}\n// log(f), O(N S_f)\n\
+    template <class mod_t> vector<mod_t> log(vector<mod_t> f, int N) {\n assert(f[0]\
+    \ == mod_t(1));\n auto p= to_sfps(f, 1, N);\n f.resize(N + 1);\n for (int i= 1;\
+    \ i <= N; ++i, f[i]*= i)\n  for (auto&& [j, v]: p) {\n   if (i <= j) break;\n\
+    \   f[i]-= f[i - j] * v;\n  }\n for (int i= 2; i <= N; ++i) f[i]*= FactorialPrecalculation<mod_t>::inv(i);\n\
+    \ return f[0]= 0, f;\n}\n// exp(f/g), O(N(S_f+S_g))\ntemplate <class mod_t> vector<mod_t>\
+    \ exp_of_div(const vector<mod_t>& f, const vector<mod_t>& g, int N) {\n int x=\
+    \ mn_dg(f), y= mn_dg(g);\n assert(y >= 0), assert(x < 0 || x > y);\n auto p= to_sfps(f,\
+    \ 0, N + y), q= to_sfps(g, y + 1, N + y);\n mod_t iv= mod_t(1) / g[y];\n for (auto&\
+    \ [j, v]: p) v*= iv, j-= y;\n for (auto& [j, v]: q) v*= iv, j-= y;\n vector<mod_t>\
+    \ F(N + 1), dF(N), a(N), b(N);\n F[0]= 1;\n for (int i= 0; i < N; ++i) {\n  for\
+    \ (auto&& [j, v]: p) {\n   if (i < j) break;\n   b[i]+= v * F[i - j];\n  }\n \
+    \ for (auto&& [j, v]: q) {\n   if (i < j) break;\n   a[i]-= v * (a[i - j] + b[i\
+    \ + 1 - j] * j);\n   dF[i]-= v * dF[i - j];\n  }\n  for (auto&& [j, v]: p) {\n\
+    \   if (i + 1 < j) break;\n   dF[i]+= v * j * F[i + 1 - j];\n  }\n  F[i + 1]=\
+    \ (dF[i]+= a[i]) * FactorialPrecalculation<mod_t>::inv(i + 1);\n }\n return F;\n\
+    }\n}\nusing sfps_internal::div, sfps_internal::pow, sfps_internal::pow_mul_pow,\
+    \ sfps_internal::pow_mul_pow, sfps_internal::sqrt_of_div, sfps_internal::log,\
+    \ sfps_internal::exp_of_div;\n// 1/f, O(N S_f)\ntemplate <class K> std::vector<K>\
+    \ inv(const std::vector<K>& f, int N) { return div<K>({1}, f, N); }\n// (f/g)^k\
+    \ (k can be negative), O(N(S_f+S_g))\ntemplate <class mod_t> std::vector<mod_t>\
+    \ pow_of_div(const std::vector<mod_t>& f, const std::vector<mod_t>& g, int64_t\
+    \ k, int N) { return pow_mul_pow(f, k, g, -k, N); }\n// \u221Af, O(N S_f)\ntemplate\
+    \ <class mod_t> std::vector<mod_t> sqrt(const std::vector<mod_t>& f, int N) {\
+    \ return sqrt_of_div<mod_t>(f, {1}, N); }\n// exp(f), O(N S_f)\ntemplate <class\
+    \ mod_t> std::vector<mod_t> exp(const std::vector<mod_t>& f, int N) { return exp_of_div<mod_t>(f,\
+    \ {1}, N); }\n}\n#line 5 \"test/atcoder/abc222_h.sparse_FPS.test.cpp\"\nusing\
+    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using\
+    \ Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto F= sfps::pow<Mint>({1,\
+    \ 3, 1}, 2 * N, N - 1);\n cout << F[N - 1] / N << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc222/tasks/abc222_h\"\n#include\
     \ <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto F= sparse_pow<Mint>({1,\
-    \ 3, 1}, 2 * N, N);\n cout << F[N - 1] / N << '\\n';\n return 0;\n}"
+    \ using Mint= ModInt<998244353>;\n int N;\n cin >> N;\n auto F= sfps::pow<Mint>({1,\
+    \ 3, 1}, 2 * N, N - 1);\n cout << F[N - 1] / N << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
   - src/Math/sparse_fps.hpp
+  - src/Math/FactorialPrecalculation.hpp
   - src/Math/mod_sqrt.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: true
   path: test/atcoder/abc222_h.sparse_FPS.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc222_h.sparse_FPS.test.cpp
 layout: document

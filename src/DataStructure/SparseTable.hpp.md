@@ -47,9 +47,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yosupo/staticrmq.SparseTable.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
   - test/aoj/DSL_3_D.sparsetable.test.cpp
   - test/aoj/2644.test.cpp
-  - test/atcoder/abc141_e.SuffixTree.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document
 title: Sparse-Table

@@ -12,15 +12,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_7_A.clique.test.cpp
     title: test/aoj/GRL_7_A.clique.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/enumerate_cliques.test.cpp
     title: test/yosupo/enumerate_cliques.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/maximum_independent_set.test.cpp
     title: test/yosupo/maximum_independent_set.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/CliqueProblem.hpp\"\n#include <vector>\n#include\
@@ -129,13 +129,13 @@ data:
   path: src/Graph/CliqueProblem.hpp
   requiredBy: []
   timestamp: '2023-11-20 23:40:07+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/enumerate_cliques.test.cpp
   - test/yosupo/maximum_independent_set.test.cpp
+  - test/yosupo/enumerate_cliques.test.cpp
   - test/aoj/3168.clique.test.cpp
-  - test/aoj/GRL_7_A.clique.test.cpp
   - test/aoj/2306.test.cpp
+  - test/aoj/GRL_7_A.clique.test.cpp
 documentation_of: src/Graph/CliqueProblem.hpp
 layout: document
 title: "\u30AF\u30EA\u30FC\u30AF\u554F\u984C"

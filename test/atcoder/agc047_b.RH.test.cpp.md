@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/CartesianProduct.hpp
     title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\\
       times\\cdots\\times K_n$)"
@@ -17,17 +17,17 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/String/RollingHash.hpp
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/agc047/tasks/agc047_b
@@ -147,9 +147,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -167,27 +167,23 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/Misc/rng.hpp\"\n#include <random>\n#include\
-    \ <cstdint>\nuint64_t rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
-    \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
-    \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
-    #line 10 \"test/atcoder/agc047_b.RH.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
-    \ using K= CartesianProduct<Mint, Mint>;\n using RH= RollingHash<K>;\n RH::init({rng(),\
-    \ rng()});\n int N;\n cin >> N;\n vector<string> S(N);\n for (int i= 0; i < N;\
-    \ ++i) cin >> S[i];\n vector<RH> rh(N);\n for (int i= 0; i < N; ++i) rh[i]= RH(S[i]);\n\
-    \ map<K, vector<int>> mp;\n for (int i= 0; i < N; ++i) {\n  int c= S[i][0] - 'a';\n\
-    \  K h= rh[i].sub(1).hash();\n  auto &v= mp[h];\n  if (v.empty()) v.resize(26);\n\
-    \  v[c]++;\n }\n long long ans= 0;\n for (int i= 0; i < N; ++i) {\n  int n= S[i].length();\n\
-    \  bool used[26];\n  fill_n(used, 26, false);\n  for (int j= 0; j < n; ++j) {\n\
-    \   used[S[i][j] - 'a']= true;\n   K h= rh[i].sub(j + 1).hash();\n   for (int\
-    \ k= 0; k < 26; ++k)\n    if (used[k])\n     if (auto it= mp.find(h); it != mp.end())\
-    \ ans+= it->second[k];\n  }\n }\n ans-= N;\n cout << ans << '\\n';\n return 0;\n\
-    }\n"
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Misc/rng.hpp\"\
+    \n#include <random>\n#include <cstdint>\nuint64_t rng() {\n static uint64_t x=\
+    \ 10150724397891781847ULL * std::random_device{}();\n return x^= x << 7, x^= x\
+    \ >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
+    \ l, int64_t r) { return l + rng() % (r - l); }\n#line 10 \"test/atcoder/agc047_b.RH.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<998244353>;\n using K= CartesianProduct<Mint, Mint>;\n using\
+    \ RH= RollingHash<K>;\n RH::init({rng(), rng()});\n int N;\n cin >> N;\n vector<string>\
+    \ S(N);\n for (int i= 0; i < N; ++i) cin >> S[i];\n vector<RH> rh(N);\n for (int\
+    \ i= 0; i < N; ++i) rh[i]= RH(S[i]);\n map<K, vector<int>> mp;\n for (int i= 0;\
+    \ i < N; ++i) {\n  int c= S[i][0] - 'a';\n  K h= rh[i].sub(1).hash();\n  auto\
+    \ &v= mp[h];\n  if (v.empty()) v.resize(26);\n  v[c]++;\n }\n long long ans= 0;\n\
+    \ for (int i= 0; i < N; ++i) {\n  int n= S[i].length();\n  bool used[26];\n  fill_n(used,\
+    \ 26, false);\n  for (int j= 0; j < n; ++j) {\n   used[S[i][j] - 'a']= true;\n\
+    \   K h= rh[i].sub(j + 1).hash();\n   for (int k= 0; k < 26; ++k)\n    if (used[k])\n\
+    \     if (auto it= mp.find(h); it != mp.end()) ans+= it->second[k];\n  }\n }\n\
+    \ ans-= N;\n cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/agc047/tasks/agc047_b\"\n#include\
     \ <iostream>\n#include <vector>\n#include <string>\n#include <map>\n#include \"\
     src/String/RollingHash.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\n#include\
@@ -215,8 +211,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/agc047_b.RH.test.cpp
   requiredBy: []
-  timestamp: '2023-11-17 14:39:53+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/agc047_b.RH.test.cpp
 layout: document

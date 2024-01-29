@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
   - icon: ':heavy_check_mark:'
@@ -262,8 +262,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/2361.SuffixTree.test.cpp
-  - test/atcoder/abc141_e.SuffixTree.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
 documentation_of: src/String/SuffixTree.hpp
 layout: document
 title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"

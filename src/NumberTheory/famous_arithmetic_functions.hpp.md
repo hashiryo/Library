@@ -12,18 +12,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
     title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/644.test.cpp
     title: test/yukicoder/644.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\n#include\
@@ -86,12 +86,12 @@ data:
   path: src/NumberTheory/famous_arithmetic_functions.hpp
   requiredBy: []
   timestamp: '2023-11-25 22:39:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/644.test.cpp
+  - test/yukicoder/1019.numth.test.cpp
   - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/yukicoder/1019.numth.test.cpp
-  - test/yukicoder/644.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
 documentation_of: src/NumberTheory/famous_arithmetic_functions.hpp

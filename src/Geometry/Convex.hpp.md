@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Line.hpp
     title: "\u76F4\u7DDA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Point.hpp
     title: "\u70B9"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Polygon.hpp
     title: "\u591A\u89D2\u5F62"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Geometry/Segment.hpp
     title: "\u7DDA\u5206"
   _extendedRequiredBy: []
@@ -313,12 +313,12 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/0253.test.cpp
-  - test/aoj/0342.test.cpp
-  - test/aoj/CGL_4_A.test.cpp
-  - test/aoj/CGL_4_C.test.cpp
-  - test/aoj/1050.test.cpp
-  - test/aoj/2626.test.cpp
   - test/aoj/CGL_4_B.test.cpp
+  - test/aoj/CGL_4_C.test.cpp
+  - test/aoj/0342.test.cpp
+  - test/aoj/1050.test.cpp
+  - test/aoj/CGL_4_A.test.cpp
+  - test/aoj/2626.test.cpp
   - test/aoj/3049.test.cpp
   - test/aoj/1267.test.cpp
 documentation_of: src/Geometry/Convex.hpp

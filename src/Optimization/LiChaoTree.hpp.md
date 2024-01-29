@@ -38,7 +38,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1867.test.cpp
     title: test/yukicoder/1867.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
   - icon: ':heavy_check_mark:'
@@ -191,24 +191,24 @@ data:
   timestamp: '2023-11-27 13:00:48+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/line_add_get_min.LiCT.test.cpp
-  - test/yosupo/segment_add_get_min.test.cpp
-  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - test/yukicoder/705.LiCT.test.cpp
+  - test/yukicoder/1297.LiCT.1.test.cpp
+  - test/yukicoder/704.LiCT.test.cpp
+  - test/yukicoder/2332.zalgo.test.cpp
+  - test/yukicoder/1297.LiCT.2.test.cpp
+  - test/yukicoder/2332.RH.test.cpp
   - test/yukicoder/952.LiCT.test.cpp
+  - test/yukicoder/913.LiCT.test.cpp
   - test/yukicoder/1867.test.cpp
   - test/yukicoder/703.LiCT.test.cpp
-  - test/yukicoder/2332.RH.test.cpp
-  - test/yukicoder/2332.zalgo.test.cpp
-  - test/yukicoder/704.LiCT.test.cpp
-  - test/yukicoder/913.LiCT.test.cpp
-  - test/yukicoder/1297.LiCT.1.test.cpp
-  - test/yukicoder/2458.LiCT.test.cpp
-  - test/yukicoder/1297.LiCT.2.test.cpp
+  - test/yukicoder/705.LiCT.test.cpp
   - test/yukicoder/409.LiCT.test.cpp
+  - test/yukicoder/2458.LiCT.test.cpp
+  - test/yosupo/segment_add_get_min.test.cpp
+  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
+  - test/yosupo/line_add_get_min.LiCT.test.cpp
   - test/aoj/3086.LiCT.test.cpp
-  - test/aoj/2725.LiCT.test.cpp
   - test/aoj/2603.LiCT.test.cpp
+  - test/aoj/2725.LiCT.test.cpp
 documentation_of: src/Optimization/LiChaoTree.hpp
 layout: document
 title: Li-Chao-Tree

@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/Automaton.hpp
     title: "\u6709\u9650\u30AA\u30FC\u30C8\u30DE\u30C8\u30F3"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc138/tasks/abc138_f
@@ -164,9 +164,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -184,18 +184,14 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 7 \"test/atcoder/abc138_f.test.cpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint=\
-    \ ModInt<int(1e9 + 7)>;\n int64_t L, R;\n cin >> L >> R;\n using symbol_t= array<bool,\
-    \ 2>;\n vector<symbol_t> alp= {{0, 0}, {0, 1}, {1, 1}};\n auto tr_le= [](int64_t\
-    \ s, symbol_t c) { return (s - c[1] + 2) / 2 - 1; };\n auto tr_ge= [](int64_t\
-    \ s, symbol_t c) { return (s - c[0] + 1) / 2; };\n auto ac= [](int64_t s) { return\
-    \ s == 0; };\n Automaton dfa_le(alp, R, tr_le, ac, int64_t(-1)), dfa_ge(alp, L,\
-    \ tr_ge, ac, int64_t(-1));\n auto tr_len= [](bool s, symbol_t c) {\n  if (c[0]\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 7 \"test/atcoder/abc138_f.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ using Mint= ModInt<int(1e9 + 7)>;\n int64_t L, R;\n cin >> L >> R;\n using symbol_t=\
+    \ array<bool, 2>;\n vector<symbol_t> alp= {{0, 0}, {0, 1}, {1, 1}};\n auto tr_le=\
+    \ [](int64_t s, symbol_t c) { return (s - c[1] + 2) / 2 - 1; };\n auto tr_ge=\
+    \ [](int64_t s, symbol_t c) { return (s - c[0] + 1) / 2; };\n auto ac= [](int64_t\
+    \ s) { return s == 0; };\n Automaton dfa_le(alp, R, tr_le, ac, int64_t(-1)), dfa_ge(alp,\
+    \ L, tr_ge, ac, int64_t(-1));\n auto tr_len= [](bool s, symbol_t c) {\n  if (c[0]\
     \ == 1 && c[1] == 1) s= 1;\n  if (c[0] != c[1]) s= 0;\n  return s;\n };\n auto\
     \ ac_len= [](bool s) { return s; };\n Automaton dfa_len(alp, true, tr_len, ac_len);\n\
     \ auto dfa= dfa_le & dfa_ge & dfa_len;\n cout << dfa.num<Mint>(60) << '\\n';\n\
@@ -222,8 +218,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc138_f.test.cpp
   requiredBy: []
-  timestamp: '2023-11-12 11:44:18+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc138_f.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
     title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
   - icon: ':question:'
@@ -16,14 +16,14 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/arc115/tasks/arc115_e
@@ -88,9 +88,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -108,15 +108,11 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 3 \"src/Misc/CartesianTree.hpp\"\n#include <array>\n\
-    class CartesianTree {\n std::vector<std::array<int, 2>> rg, ch;\n std::vector<int>\
-    \ par;\n int rt;\npublic:\n template <class Vec> CartesianTree(const Vec &a, bool\
-    \ is_min= 1): rg(a.size()), ch(a.size(), std::array{-1, -1}), par(a.size(), -1)\
-    \ {\n  const int n= a.size();\n  auto comp= [&](int l, int r) { return (is_min\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 3 \"src/Misc/CartesianTree.hpp\"\
+    \n#include <array>\nclass CartesianTree {\n std::vector<std::array<int, 2>> rg,\
+    \ ch;\n std::vector<int> par;\n int rt;\npublic:\n template <class Vec> CartesianTree(const\
+    \ Vec &a, bool is_min= 1): rg(a.size()), ch(a.size(), std::array{-1, -1}), par(a.size(),\
+    \ -1) {\n  const int n= a.size();\n  auto comp= [&](int l, int r) { return (is_min\
     \ ? a[l] < a[r] : a[l] > a[r]) || (a[l] == a[r] && l < r); };\n  int st[n], t=\
     \ 0;\n  for (int i= n; i--; rg[i][1]= (t ? st[t - 1] : n), st[t++]= i)\n   while\
     \ (t && comp(i, st[t - 1])) ch[i][1]= st[--t];\n  for (int i= t= 0; i < n; rg[i][0]=\
@@ -164,8 +160,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/arc115_e.test.cpp
   requiredBy: []
-  timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/arc115_e.test.cpp
 layout: document

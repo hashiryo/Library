@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':question:'
@@ -16,10 +16,9 @@ data:
   - icon: ':question:'
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/Combination.hpp
-    title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
-      mathbb{F}_p$)"
+  - icon: ':question:'
+    path: src/Math/FactorialPrecalculation.hpp
+    title: src/Math/FactorialPrecalculation.hpp
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -28,9 +27,9 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc160/tasks/abc160_f
@@ -95,9 +94,9 @@ data:
     \ CE MInt(__int128_t n): x(B::md.set((n < 0 ? ((n= (-n) % B::md.mod) ? B::md.mod\
     \ - n : n) : n % B::md.mod))) {}\n CE MInt operator-() const { return MInt() -\
     \ *this; }\n#define FUNC(name, op) \\\n CE MInt name const { \\\n  MInt ret; \\\
-    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt& r), B::md.plus(x,\
-    \ r.x))\n FUNC(operator-(const MInt& r), B::md.diff(x, r.x))\n FUNC(operator*(const\
-    \ MInt& r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
+    \n  return ret.x= op, ret; \\\n }\n FUNC(operator+(const MInt & r), B::md.plus(x,\
+    \ r.x))\n FUNC(operator-(const MInt & r), B::md.diff(x, r.x))\n FUNC(operator*(const\
+    \ MInt & r), B::md.mul(x, r.x))\n FUNC(pow(u64 k), math_internal::pow(x, k, B::md))\n\
     #undef FUNC\n CE MInt operator/(const MInt& r) const { return *this * r.inv();\
     \ }\n CE MInt& operator+=(const MInt& r) { return *this= *this + r; }\n CE MInt&\
     \ operator-=(const MInt& r) { return *this= *this - r; }\n CE MInt& operator*=(const\
@@ -115,34 +114,36 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
-    \ return dat[n];\n}\n#line 2 \"src/Math/Combination.hpp\"\ntemplate <class mint,\
-    \ std::size_t LIM= (1 << 24)> class Combination {\n static inline mint _fact[LIM],\
-    \ _finv[LIM];\n static inline int lim= 0;\n static inline void set(int sz) {\n\
-    \  if (lim > sz) return;\n  if (lim == 0) _fact[0]= 1, _finv[0]= 1, lim= 1;\n\
-    \  for (int i= lim; i <= sz; i++) _fact[i]= _fact[i - 1] * i;\n  _finv[sz]= mint(1)\
-    \ / _fact[sz];\n  for (int i= sz; i >= lim; i--) _finv[i - 1]= _finv[i] * i;\n\
-    \  lim= sz + 1;\n }\npublic:\n static inline mint fact(int n) { return set(n),\
-    \ n < 0 ? mint(0) : _fact[n]; }\n static inline mint finv(int n) { return set(n),\
-    \ n < 0 ? mint(0) : _finv[n]; }\n static mint nPr(int n, int r) { return fact(n)\
-    \ * finv(n - r); }\n static mint nCr(int n, int r) { return nPr(n, r) * finv(r);\
-    \ }\n static mint nHr(int n, int r) { return !r ? mint(1) : nCr(n + r - 1, r);\
-    \ }\n};\n#line 3 \"src/Graph/Tree.hpp\"\n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\
-    \n#include <array>\n#include <tuple>\n#include <numeric>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\
-    \n#include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
-    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
-    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
-    \ i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T>\
-    \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
-    \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
-    \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 10\
-    \ \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false> class\
-    \ Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 3 \"src/Math/FactorialPrecalculation.hpp\"\
+    \n#include <vector>\n#line 5 \"src/Math/FactorialPrecalculation.hpp\"\ntemplate\
+    \ <class mod_t> class FactorialPrecalculation {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static inline std::vector<mod_t> iv, fct, fiv;\npublic:\n static void reset()\
+    \ { iv.clear(), fct.clear(), fiv.clear(); }\n static inline mod_t inv(int n) {\n\
+    \  assert(0 < n);\n  if (int k= iv.size(); k <= n) {\n   if (iv.resize(n + 1);\
+    \ !k) iv[1]= 1, k= 2;\n   for (int mod= mod_t::mod(), q; k <= n; ++k) q= (mod\
+    \ + k - 1) / k, iv[k]= iv[k * q - mod] * q;\n  }\n  return iv[n];\n }\n static\
+    \ inline mod_t fact(int n) {\n  assert(0 <= n);\n  if (int k= fct.size(); k <=\
+    \ n) {\n   if (fct.resize(n + 1); !k) fct[0]= 1, k= 1;\n   for (; k <= n; ++k)\
+    \ fct[k]= fct[k - 1] * k;\n  }\n  return fct[n];\n }\n static inline mod_t finv(int\
+    \ n) {\n  assert(0 <= n);\n  if (int k= fiv.size(); k <= n) {\n   if (fiv.resize(n\
+    \ + 1); !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
+    \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
+    \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
+    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
+    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
+    \ + r - 1, r); }\n};\n#line 3 \"src/Graph/Tree.hpp\"\n#include <cstddef>\n#line\
+    \ 5 \"src/Graph/Tree.hpp\"\n#include <array>\n#include <tuple>\n#include <numeric>\n\
+    #line 3 \"src/DataStructure/CsrArray.hpp\"\n#include <iterator>\ntemplate <class\
+    \ T> struct ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray\
+    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
+    \ {}\n size_t size() const { return pos.size() - 1; }\n const ListRange<T> operator[](int\
+    \ i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n\
+    #line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false>\
+    \ class Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
     \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
     \ void> {\n  int to;\n  operator int() const { return to; }\n };\n using Edge=\
     \ Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t,\
@@ -234,41 +235,41 @@ data:
     \  dp[v]= f_ev(f[deg], v);\n }\n return RerootingData<T, C>(t, dp1, dp2, dp);\n\
     }\n#line 7 \"test/atcoder/abc160_f.test.cpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<int(1e9 + 7)>;\n\
-    \ using C= Combination<Mint>;\n int N;\n cin >> N;\n Tree tree(N);\n for (int\
-    \ i= 0; i < N - 1; ++i) {\n  int a, b;\n  cin >> a >> b;\n  tree.add_edge(--a,\
+    \ using F= FactorialPrecalculation<Mint>;\n int N;\n cin >> N;\n Tree tree(N);\n\
+    \ for (int i= 0; i < N - 1; ++i) {\n  int a, b;\n  cin >> a >> b;\n  tree.add_edge(--a,\
     \ --b);\n }\n tree.build();\n using Data= pair<int, Mint>;\n auto f_ee= [&](const\
-    \ Data &l, const Data &r) { return Data{l.first + r.first, C::nCr(l.first + r.first,\
+    \ Data &l, const Data &r) { return Data{l.first + r.first, F::nCr(l.first + r.first,\
     \ l.first) * l.second * r.second}; };\n auto f_ve= [&](const Data &d, int, auto)\
     \ { return d; };\n auto f_ev= [&](const Data &d, int) { return Data{d.first +\
     \ 1, d.second}; };\n auto dp= rerooting<Data>(tree, f_ee, f_ve, f_ev, Data{0,\
     \ 1});\n for (auto [_, x]: dp) cout << x << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc160/tasks/abc160_f\"\n#include\
     \ <iostream>\n#include <algorithm>\n#include \"src/Math/ModInt.hpp\"\n#include\
-    \ \"src/Math/Combination.hpp\"\n#include \"src/Graph/rerooting.hpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint=\
-    \ ModInt<int(1e9 + 7)>;\n using C= Combination<Mint>;\n int N;\n cin >> N;\n Tree\
-    \ tree(N);\n for (int i= 0; i < N - 1; ++i) {\n  int a, b;\n  cin >> a >> b;\n\
-    \  tree.add_edge(--a, --b);\n }\n tree.build();\n using Data= pair<int, Mint>;\n\
-    \ auto f_ee= [&](const Data &l, const Data &r) { return Data{l.first + r.first,\
-    \ C::nCr(l.first + r.first, l.first) * l.second * r.second}; };\n auto f_ve= [&](const\
-    \ Data &d, int, auto) { return d; };\n auto f_ev= [&](const Data &d, int) { return\
-    \ Data{d.first + 1, d.second}; };\n auto dp= rerooting<Data>(tree, f_ee, f_ve,\
-    \ f_ev, Data{0, 1});\n for (auto [_, x]: dp) cout << x << '\\n';\n return 0;\n\
-    }"
+    \ \"src/Math/FactorialPrecalculation.hpp\"\n#include \"src/Graph/rerooting.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ using Mint= ModInt<int(1e9 + 7)>;\n using F= FactorialPrecalculation<Mint>;\n\
+    \ int N;\n cin >> N;\n Tree tree(N);\n for (int i= 0; i < N - 1; ++i) {\n  int\
+    \ a, b;\n  cin >> a >> b;\n  tree.add_edge(--a, --b);\n }\n tree.build();\n using\
+    \ Data= pair<int, Mint>;\n auto f_ee= [&](const Data &l, const Data &r) { return\
+    \ Data{l.first + r.first, F::nCr(l.first + r.first, l.first) * l.second * r.second};\
+    \ };\n auto f_ve= [&](const Data &d, int, auto) { return d; };\n auto f_ev= [&](const\
+    \ Data &d, int) { return Data{d.first + 1, d.second}; };\n auto dp= rerooting<Data>(tree,\
+    \ f_ee, f_ve, f_ev, Data{0, 1});\n for (auto [_, x]: dp) cout << x << '\\n';\n\
+    \ return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
-  - src/Math/Combination.hpp
+  - src/Math/FactorialPrecalculation.hpp
   - src/Graph/rerooting.hpp
   - src/Graph/Tree.hpp
   - src/DataStructure/CsrArray.hpp
   isVerificationFile: true
   path: test/atcoder/abc160_f.test.cpp
   requiredBy: []
-  timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-01-29 15:51:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc160_f.test.cpp
 layout: document
