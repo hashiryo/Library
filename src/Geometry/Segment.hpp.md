@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Line.hpp
     title: "\u76F4\u7DDA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Point.hpp
     title: "\u70B9"
   _extendedRequiredBy:
@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/Convex.hpp
     title: "\u51F8\u591A\u89D2\u5F62"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Polygon.hpp
     title: "\u591A\u89D2\u5F62"
   - icon: ':heavy_check_mark:'
@@ -192,12 +192,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/CGL_7_I.test.cpp
     title: test/aoj/CGL_7_I.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_f.test.cpp
     title: test/atcoder/abc202_f.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Geometry/Segment.hpp\"\n#include <algorithm>\n#line\
@@ -412,7 +412,7 @@ data:
   - src/Geometry/Circle.hpp
   - src/Geometry/intersection_area.hpp
   timestamp: '2023-10-10 00:58:36+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2495.test.cpp
   - test/aoj/CGL_2_B.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Geometry/IncrementalConvexHull.hpp
     title: "\u524A\u9664\u306A\u3057\u52D5\u7684\u51F8\u5305"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Geometry/Point.hpp
     title: "\u70B9"
   _extendedRequiredBy: []
