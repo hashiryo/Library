@@ -436,9 +436,9 @@ data:
   timestamp: '2024-01-29 15:51:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/137.div_at.test.cpp
   - test/yukicoder/215.test.cpp
-  - test/yukicoder/215.Poly.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: src/FFT/bostan_mori.hpp
 layout: document

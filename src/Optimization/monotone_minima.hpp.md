@@ -44,8 +44,8 @@ data:
   verifiedWith:
   - test/yukicoder/952.monotone_minima.test.cpp
   - test/yukicoder/913.monotone_minima.test.cpp
-  - test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
   - test/aoj/2603.monotone_minima.test.cpp
+  - test/yosupo/min_plus_convolution_convex_arbitrary.monotone_minima.test.cpp
 documentation_of: src/Optimization/monotone_minima.hpp
 layout: document
 title: monotone minima

@@ -21,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc250_g.test.cpp
     title: test/atcoder/abc250_g.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc275_ex.test.cpp
+    title: test/atcoder/abc275_ex.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/arc123_d.test.cpp
     title: test/atcoder/arc123_d.test.cpp
@@ -33,9 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2114.test.cpp
     title: test/yukicoder/2114.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/PiecewiseLinearConvexfunction.hpp\"\n#include\
@@ -278,18 +281,19 @@ data:
   path: src/Optimization/PiecewiseLinearConvexfunction.hpp
   requiredBy: []
   timestamp: '2023-10-30 17:57:49+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1077.test.cpp
-  - test/yukicoder/1467.test.cpp
   - test/yukicoder/2114.test.cpp
-  - test/atcoder/abc217_h.test.cpp
-  - test/atcoder/arc123_d.test.cpp
-  - test/atcoder/abc250_g.test.cpp
-  - test/atcoder/abc127_f.test.cpp
-  - test/atcoder/abc250_g.conj.test.cpp
-  - test/aoj/0661.test.cpp
+  - test/yukicoder/1467.test.cpp
+  - test/yukicoder/1077.test.cpp
   - test/aoj/2865.test.cpp
+  - test/aoj/0661.test.cpp
+  - test/atcoder/abc250_g.conj.test.cpp
+  - test/atcoder/abc250_g.test.cpp
+  - test/atcoder/abc275_ex.test.cpp
+  - test/atcoder/abc217_h.test.cpp
+  - test/atcoder/abc127_f.test.cpp
+  - test/atcoder/arc123_d.test.cpp
 documentation_of: src/Optimization/PiecewiseLinearConvexfunction.hpp
 layout: document
 title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"

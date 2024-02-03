@@ -140,9 +140,9 @@ data:
     \ + 1); !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
     \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
     \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
-    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
-    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
-    \ + r - 1, r); }\n};\n#line 5 \"test/yosupo/binomial_coefficient_prime_mod.test.cpp\"\
+    \ inline mod_t nCr(int n, int r) { return r < 0 || n < r ? mod_t(0) : fact(n)\
+    \ * finv(n - r) * finv(r); }\n // [x^r] (1 - x)^{-n}\n static inline mod_t nHr(int\
+    \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};\n#line 5 \"test/yosupo/binomial_coefficient_prime_mod.test.cpp\"\
     \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ using Mint= ModInt_Runtime<int>;\n using F= FactorialPrecalculation<Mint>;\n\
     \ int T, m;\n cin >> T >> m;\n Mint::set_mod(m);\n while (T--) {\n  int n, k;\n\
@@ -163,7 +163,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/binomial_coefficient_prime_mod.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-03 19:27:26+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/binomial_coefficient_prime_mod.test.cpp

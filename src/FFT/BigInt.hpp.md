@@ -39,7 +39,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':x:'
@@ -472,14 +472,14 @@ data:
   timestamp: '2024-01-29 15:51:38+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/division_of_big_integers.test.cpp
-  - test/atcoder/abc136_d.test.cpp
   - test/aoj/NTL_2_C.test.cpp
+  - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_D.test.cpp
   - test/aoj/NTL_2_B.test.cpp
-  - test/aoj/NTL_2_F.test.cpp
-  - test/aoj/NTL_2_A.test.cpp
   - test/aoj/NTL_2_E.test.cpp
+  - test/aoj/NTL_2_F.test.cpp
+  - test/atcoder/abc136_d.test.cpp
+  - test/yosupo/division_of_big_integers.test.cpp
 documentation_of: src/FFT/BigInt.hpp
 layout: document
 title: "\u591A\u500D\u9577\u6574\u6570"

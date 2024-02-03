@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/PiecewiseLinearConvexfunction.hpp
     title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"
   _extendedRequiredBy: []

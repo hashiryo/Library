@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/ConvexHullTrick.hpp
     title: Convex-Hull-Trick
   - icon: ':question:'

@@ -272,10 +272,10 @@ data:
   verifiedWith:
   - test/yukicoder/1276.Dirichlet.test.cpp
   - test/yukicoder/1573.Dirichlet.test.cpp
-  - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
-  - test/atcoder/abc172_d.Dirichlet.test.cpp
-  - test/atcoder/arc116_c.Dirichlet.test.cpp
   - test/atcoder/abc179_c.Dirichlet.test.cpp
+  - test/atcoder/arc116_c.Dirichlet.test.cpp
+  - test/atcoder/abc172_d.Dirichlet.test.cpp
+  - test/yosupo/sum_of_totient_function.Dirichlet.test.cpp
 documentation_of: src/NumberTheory/DirichletSeries.hpp
 layout: document
 title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"

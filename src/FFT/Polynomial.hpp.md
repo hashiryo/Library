@@ -617,10 +617,10 @@ data:
   verifiedWith:
   - test/yukicoder/215.Poly.test.cpp
   - test/yosupo/division_of_Poly.test.cpp
-  - test/yosupo/comp_of_FPS.test.cpp
-  - test/yosupo/shift_of_FPS.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/inv_of_Poly.test.cpp
+  - test/yosupo/shift_of_FPS.test.cpp
+  - test/yosupo/comp_of_FPS.test.cpp
 documentation_of: src/FFT/Polynomial.hpp
 layout: document
 title: "\u591A\u9805\u5F0F"

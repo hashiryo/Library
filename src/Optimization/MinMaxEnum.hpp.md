@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/ConvexHullTrick.hpp
     title: Convex-Hull-Trick
   - icon: ':question:'
@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: src/Optimization/NetworkSimplex.hpp
     title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Optimization/fibonacci_search.hpp
     title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
   - icon: ':heavy_check_mark:'
@@ -69,9 +69,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc244_ex.test.cpp
+    title: test/atcoder/abc244_ex.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc305_ex.test.cpp
+    title: test/atcoder/abc305_ex.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/assignment.mcf.test.cpp
     title: test/yosupo/assignment.mcf.test.cpp
@@ -170,59 +176,61 @@ data:
   isVerificationFile: false
   path: src/Optimization/MinMaxEnum.hpp
   requiredBy:
-  - src/Optimization/NetworkSimplex.hpp
-  - src/Optimization/golden_search.hpp
-  - src/Optimization/ConvexHullTrick.hpp
-  - src/Optimization/fibonacci_search.hpp
   - src/Optimization/matroid_intersection.hpp
+  - src/Optimization/ConvexHullTrick.hpp
+  - src/Optimization/golden_search.hpp
   - src/Optimization/LiChaoTree.hpp
+  - src/Optimization/NetworkSimplex.hpp
+  - src/Optimization/fibonacci_search.hpp
   timestamp: '2023-08-10 14:03:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1297.CHT.test.cpp
-  - test/yukicoder/1615.MCF.test.cpp
-  - test/yukicoder/2012.test.cpp
-  - test/yukicoder/1297.LiCT.1.test.cpp
-  - test/yukicoder/2276.test.cpp
-  - test/yukicoder/421.matroid_intersection.test.cpp
-  - test/yukicoder/704.LiCT.test.cpp
-  - test/yukicoder/2332.zalgo.test.cpp
   - test/yukicoder/1297.LiCT.2.test.cpp
-  - test/yukicoder/2332.RH.test.cpp
-  - test/yukicoder/952.LiCT.test.cpp
-  - test/yukicoder/913.LiCT.test.cpp
-  - test/yukicoder/1867.test.cpp
-  - test/yukicoder/2458.CHT.test.cpp
-  - test/yukicoder/703.LiCT.test.cpp
-  - test/yukicoder/705.LiCT.test.cpp
-  - test/yukicoder/180.test.cpp
-  - test/yukicoder/421.weighted_matroid_intersection.test.cpp
   - test/yukicoder/409.LiCT.test.cpp
+  - test/yukicoder/2276.test.cpp
+  - test/yukicoder/705.LiCT.test.cpp
+  - test/yukicoder/703.LiCT.test.cpp
+  - test/yukicoder/952.LiCT.test.cpp
+  - test/yukicoder/1297.CHT.test.cpp
+  - test/yukicoder/2332.RH.test.cpp
+  - test/yukicoder/2458.CHT.test.cpp
+  - test/yukicoder/1615.MCF.test.cpp
+  - test/yukicoder/1297.LiCT.1.test.cpp
   - test/yukicoder/2458.LiCT.test.cpp
   - test/yukicoder/2309.test.cpp
-  - test/yosupo/segment_add_get_min.test.cpp
-  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
-  - test/yosupo/assignment.mcf.test.cpp
-  - test/yosupo/line_add_get_min.LiCT.test.cpp
-  - test/yosupo/line_add_get_min.CHT.test.cpp
-  - test/yosupo/min_cost_b_flow.test.cpp
-  - test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-  - test/atcoder/abc204_e.test.cpp
-  - test/atcoder/abc218_h.test.cpp
-  - test/atcoder/abc279_d.test.cpp
-  - test/aoj/1163.matroid_intersection.test.cpp
-  - test/aoj/GRL_6_B.test.cpp
-  - test/aoj/2972.test.cpp
-  - test/aoj/0323.test.cpp
-  - test/aoj/GRL_7_A.matroid_intersection.test.cpp
-  - test/aoj/3086.LiCT.test.cpp
+  - test/yukicoder/913.LiCT.test.cpp
+  - test/yukicoder/2012.test.cpp
+  - test/yukicoder/2332.zalgo.test.cpp
+  - test/yukicoder/180.test.cpp
+  - test/yukicoder/421.weighted_matroid_intersection.test.cpp
+  - test/yukicoder/421.matroid_intersection.test.cpp
+  - test/yukicoder/704.LiCT.test.cpp
+  - test/yukicoder/1867.test.cpp
   - test/aoj/2603.LiCT.test.cpp
-  - test/aoj/2725.LiCT.test.cpp
-  - test/aoj/2603.AlienDP.test.cpp
-  - test/aoj/2725.CHT.test.cpp
+  - test/aoj/2972.test.cpp
   - test/aoj/1605.weighted_matroid_intersection.test.cpp
+  - test/aoj/2725.LiCT.test.cpp
   - test/aoj/GRL_2_B.weighted_matroid_intersection.test.cpp
   - test/aoj/3044.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
+  - test/aoj/3086.LiCT.test.cpp
+  - test/aoj/GRL_6_B.test.cpp
+  - test/aoj/2725.CHT.test.cpp
+  - test/aoj/0323.test.cpp
+  - test/aoj/GRL_7_A.matroid_intersection.test.cpp
+  - test/aoj/1163.matroid_intersection.test.cpp
+  - test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
+  - test/atcoder/abc279_d.test.cpp
+  - test/atcoder/abc244_ex.test.cpp
+  - test/atcoder/abc305_ex.test.cpp
+  - test/atcoder/abc204_e.test.cpp
+  - test/atcoder/abc218_h.test.cpp
+  - test/yosupo/line_add_get_min.LiCT.test.cpp
+  - test/yosupo/min_plus_convolution_convex_arbitrary.LiCT.test.cpp
+  - test/yosupo/assignment.mcf.test.cpp
+  - test/yosupo/min_cost_b_flow.test.cpp
+  - test/yosupo/line_add_get_min.CHT.test.cpp
+  - test/yosupo/segment_add_get_min.test.cpp
 documentation_of: src/Optimization/MinMaxEnum.hpp
 layout: document
 title: "\u6700\u5927\u6700\u5C0F\u3092\u6307\u5B9A\u3059\u308B\u305F\u3081\u306E\u5217\

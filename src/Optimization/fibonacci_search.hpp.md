@@ -26,6 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc279_d.test.cpp
     title: test/atcoder/abc279_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc305_ex.test.cpp
+    title: test/atcoder/abc305_ex.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/180.test.cpp
     title: test/yukicoder/180.test.cpp
@@ -35,9 +38,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/2309.test.cpp
     title: test/yukicoder/2309.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Optimization/fibonacci_search.hpp\"\n#include <algorithm>\n\
@@ -88,16 +91,17 @@ data:
   path: src/Optimization/fibonacci_search.hpp
   requiredBy: []
   timestamp: '2023-10-29 17:46:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/2276.test.cpp
-  - test/yukicoder/180.test.cpp
   - test/yukicoder/2309.test.cpp
+  - test/yukicoder/180.test.cpp
+  - test/aoj/3044.test.cpp
+  - test/aoj/2603.AlienDP.test.cpp
+  - test/atcoder/abc279_d.test.cpp
+  - test/atcoder/abc305_ex.test.cpp
   - test/atcoder/abc204_e.test.cpp
   - test/atcoder/abc218_h.test.cpp
-  - test/atcoder/abc279_d.test.cpp
-  - test/aoj/2603.AlienDP.test.cpp
-  - test/aoj/3044.test.cpp
 documentation_of: src/Optimization/fibonacci_search.hpp
 layout: document
 title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"

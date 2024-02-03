@@ -158,11 +158,11 @@ data:
   timestamp: '2023-11-24 00:33:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1326.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
-  - test/yosupo/biconnected_components.test.cpp
-  - test/aoj/3022.test.cpp
+  - test/yukicoder/1326.test.cpp
   - test/aoj/GRL_3_A.test.cpp
+  - test/aoj/3022.test.cpp
+  - test/yosupo/biconnected_components.test.cpp
 documentation_of: src/Graph/BiConnectedComponents.hpp
 layout: document
 title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"

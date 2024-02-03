@@ -54,8 +54,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1270.test.cpp
-  - test/yosupo/static_range_inversions_query.mo.test.cpp
   - test/aoj/0425.test.cpp
+  - test/yosupo/static_range_inversions_query.mo.test.cpp
 documentation_of: src/Misc/Mo.hpp
 layout: document
 title: Mo's Algorithm

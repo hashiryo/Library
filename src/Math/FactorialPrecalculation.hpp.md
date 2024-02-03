@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_E.test.cpp
     title: test/aoj/DPL_5_E.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
   - icon: ':x:'
@@ -27,6 +27,9 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc236_ex.test.cpp
+    title: test/atcoder/abc236_ex.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
@@ -90,9 +93,9 @@ data:
     \ !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
     \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
     \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
-    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
-    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
-    \ + r - 1, r); }\n};\n"
+    \ inline mod_t nCr(int n, int r) { return r < 0 || n < r ? mod_t(0) : fact(n)\
+    \ * finv(n - r) * finv(r); }\n // [x^r] (1 - x)^{-n}\n static inline mod_t nHr(int\
+    \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};\n"
   code: "#pragma once\n#include <cassert>\n#include <vector>\n#include \"src/Internal/modint_traits.hpp\"\
     \ntemplate <class mod_t> class FactorialPrecalculation {\n static_assert(is_modint_v<mod_t>);\n\
     \ static inline std::vector<mod_t> iv, fct, fiv;\npublic:\n static void reset()\
@@ -107,37 +110,38 @@ data:
     \ + 1); !k) fiv[0]= 1, k= 1;\n   for (; k <= n; ++k) fiv[k]= fiv[k - 1] * inv(k);\n\
     \  }\n  return fiv[n];\n }\n static inline mod_t nPr(int n, int r) { return r\
     \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
-    \ inline mod_t nCr(int n, int r) { return nPr(n, r) * finv(r); }\n // [x^r] (1\
-    \ - x)^{-n}\n static inline mod_t nHr(int n, int r) { return !r ? mod_t(1) : nCr(n\
-    \ + r - 1, r); }\n};"
+    \ inline mod_t nCr(int n, int r) { return r < 0 || n < r ? mod_t(0) : fact(n)\
+    \ * finv(n - r) * finv(r); }\n // [x^r] (1 - x)^{-n}\n static inline mod_t nHr(int\
+    \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};"
   dependsOn:
   - src/Internal/modint_traits.hpp
   isVerificationFile: false
   path: src/Math/FactorialPrecalculation.hpp
   requiredBy:
   - src/Math/sparse_fps.hpp
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-03 19:27:26+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1533.test.cpp
   - test/yukicoder/310.test.cpp
+  - test/yukicoder/1533.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1939.test.cpp
-  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/aoj/DPL_5_F.test.cpp
+  - test/aoj/DPL_5_E.test.cpp
+  - test/aoj/DPL_5_B.test.cpp
+  - test/aoj/DPL_5_D.test.cpp
+  - test/atcoder/abc160_f.test.cpp
+  - test/atcoder/abc236_ex.test.cpp
+  - test/atcoder/abc222_h.sparse_FPS.test.cpp
+  - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yosupo/inv_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/binomial_coefficient_prime_mod.test.cpp
-  - test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - test/atcoder/abc160_f.test.cpp
-  - test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - test/aoj/DPL_5_B.test.cpp
-  - test/aoj/DPL_5_F.test.cpp
-  - test/aoj/DPL_5_D.test.cpp
-  - test/aoj/DPL_5_E.test.cpp
+  - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/inv_of_sparse_FPS.test.cpp
 documentation_of: src/Math/FactorialPrecalculation.hpp
 layout: document
 redirect_from:

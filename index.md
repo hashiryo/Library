@@ -229,7 +229,7 @@ data:
     - icon: ':question:'
       path: src/Graph/Tree.hpp
       title: "\u6728"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -316,9 +316,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Math/SemiRing.hpp
       title: "\u534A\u74B0"
-    - icon: ':question:'
-      path: src/Math/SetPowerSeries.hpp
-      title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     - icon: ':heavy_check_mark:'
       path: src/Math/StirlingNumber.hpp
       title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
@@ -354,6 +351,9 @@ data:
       path: src/Math/mod_tetration.hpp
       title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
         mathbb{Z}$)"
+    - icon: ':x:'
+      path: src/Math/set_power_series.hpp
+      title: src/Math/set_power_series.hpp
     - icon: ':x:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
@@ -393,7 +393,7 @@ data:
       title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   - name: src/Optimization
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/ConvexHullTrick.hpp
       title: Convex-Hull-Trick
     - icon: ':heavy_check_mark:'
@@ -413,13 +413,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/NetworkSimplex.hpp
       title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/PiecewiseLinearConvexfunction.hpp
       title: "\u533A\u5206\u7DDA\u5F62\u51F8\u95A2\u6570"
     - icon: ':heavy_check_mark:'
       path: src/Optimization/WeightedMatching.hpp
       title: "\u91CD\u307F\u4ED8\u304D\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/Optimization/fibonacci_search.hpp
       title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
     - icon: ':heavy_check_mark:'
@@ -678,7 +678,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2313.PushRelabel.test.cpp
       title: test/aoj/2313.PushRelabel.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/2345.test.cpp
       title: test/aoj/2345.test.cpp
     - icon: ':heavy_check_mark:'
@@ -966,7 +966,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_E.test.cpp
       title: test/aoj/DPL_5_E.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DPL_5_F.test.cpp
       title: test/aoj/DPL_5_F.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1091,19 +1091,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc133_f.PerArr.test.cpp
       title: test/atcoder/abc133_f.PerArr.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc135_d.test.cpp
       title: test/atcoder/abc135_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc135_f.RH.test.cpp
       title: test/atcoder/abc135_f.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc136_d.test.cpp
       title: test/atcoder/abc136_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc138_f.test.cpp
       title: test/atcoder/abc138_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc141_e.RH.test.cpp
       title: test/atcoder/abc141_e.RH.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1157,7 +1157,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc194_e.test.cpp
       title: test/atcoder/abc194_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1230,26 +1230,41 @@ data:
       path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
       title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
     - icon: ':x:'
+      path: test/atcoder/abc234_ex.KDT.test.cpp
+      title: test/atcoder/abc234_ex.KDT.test.cpp
+    - icon: ':x:'
       path: test/atcoder/abc234_g.test.cpp
       title: test/atcoder/abc234_g.test.cpp
     - icon: ':x:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc236_ex.test.cpp
+      title: test/atcoder/abc236_ex.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc241_e.test.cpp
       title: test/atcoder/abc241_e.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc244_ex.test.cpp
+      title: test/atcoder/abc244_ex.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.conj.test.cpp
       title: test/atcoder/abc250_g.conj.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc250_g.test.cpp
       title: test/atcoder/abc250_g.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc253_ex.test.cpp
+      title: test/atcoder/abc253_ex.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc256_d.test.cpp
       title: test/atcoder/abc256_d.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc256_ex.Beats.test.cpp
+      title: test/atcoder/abc256_ex.Beats.test.cpp
     - icon: ':x:'
       path: test/atcoder/abc256_f.DynSeg.test.cpp
       title: test/atcoder/abc256_f.DynSeg.test.cpp
@@ -1269,6 +1284,9 @@ data:
       path: test/atcoder/abc272_f.RH.test.cpp
       title: test/atcoder/abc272_f.RH.test.cpp
     - icon: ':x:'
+      path: test/atcoder/abc275_ex.test.cpp
+      title: test/atcoder/abc275_ex.test.cpp
+    - icon: ':x:'
       path: test/atcoder/abc276_g.sparse_FPS.test.cpp
       title: test/atcoder/abc276_g.sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1280,6 +1298,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc296_g.test.cpp
       title: test/atcoder/abc296_g.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc305_ex.test.cpp
+      title: test/atcoder/abc305_ex.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc309_f.KDT.3D.test.cpp
       title: test/atcoder/abc309_f.KDT.3D.test.cpp
@@ -1427,6 +1448,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yosupo/bipartitematching.test.cpp
       title: test/yosupo/bipartitematching.test.cpp
+    - icon: ':x:'
+      path: test/yosupo/bitwise_and_convolution.test.cpp
+      title: test/yosupo/bitwise_and_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/cartesian_tree.test.cpp
       title: test/yosupo/cartesian_tree.test.cpp
@@ -2026,7 +2050,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/2458.LiCT.test.cpp
       title: test/yukicoder/2458.LiCT.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/2507.test.cpp
       title: test/yukicoder/2507.test.cpp
     - icon: ':heavy_check_mark:'

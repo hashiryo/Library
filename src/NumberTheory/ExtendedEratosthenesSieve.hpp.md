@@ -152,10 +152,10 @@ data:
   timestamp: '2023-11-27 11:00:47+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/yosupo/counting_primes.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
+  - test/yosupo/counting_primes.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/NumberTheory/ExtendedEratosthenesSieve.hpp
 layout: document
 title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"

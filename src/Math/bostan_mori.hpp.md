@@ -68,8 +68,8 @@ data:
   timestamp: '2024-01-29 15:51:38+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/658.test.cpp
   - test/yukicoder/2122.test.cpp
+  - test/yukicoder/658.test.cpp
   - test/aoj/0168.test.cpp
 documentation_of: src/Math/bostan_mori.hpp
 layout: document
