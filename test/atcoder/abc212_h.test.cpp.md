@@ -1,10 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
-    path: src/Graph/UndirectedGraphSetPowerSeries.hpp
-    title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
-      \u7D1A\u6570)"
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
@@ -22,20 +18,20 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/arc105/tasks/arc105_f
+    PROBLEM: https://atcoder.jp/contests/abc212/tasks/abc212_h
     links:
-    - https://atcoder.jp/contests/arc105/tasks/arc105_f
-  bundledCode: "#line 1 \"test/atcoder/arc105_f.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/arc105/tasks/arc105_f\"\
-    \n// \u9023\u7D50\u4E8C\u90E8\u30B0\u30E9\u30D5\n#include <iostream>\n#line 2\
-    \ \"src/Math/mod_inv.hpp\"\n#include <type_traits>\n#include <cassert>\ntemplate\
-    \ <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
-    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
-    \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
+    - https://atcoder.jp/contests/abc212/tasks/abc212_h
+  bundledCode: "#line 1 \"test/atcoder/abc212_h.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc212/tasks/abc212_h\"\
+    \n#include <iostream>\n#include <algorithm>\n#line 2 \"src/Math/mod_inv.hpp\"\n\
+    #include <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline\
+    \ Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int\
+    \ x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a\
+    \ / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
     \ % mod : x % mod;\n}\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
     \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
     \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
@@ -109,17 +105,17 @@ data:
     \ u128, 64, 63>, MOD>>, conditional_t<MOD<(1u << 31), MInt<int, u32, SB<MP_Na,\
     \ MOD>>, conditional_t<MOD<(1ull << 32), MInt<i64, u32, SB<MP_Na, MOD>>, conditional_t<MOD\
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
-    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/Math/set_power_series.hpp\"\
-    \n#include <algorithm>\n#include <vector>\n#line 5 \"src/Math/set_power_series.hpp\"\
-    \nnamespace sps {\nnamespace sps_internal {\nusing namespace std;\n#define ZETA(s,\
-    \ l) \\\n if constexpr (!t) A[s + l]+= A[s]; \\\n else if constexpr (t == 1) A[s\
-    \ + l]-= A[s]; \\\n else if constexpr (t == 2) A[s]+= A[s + l]; \\\n else if constexpr\
-    \ (t == 3) A[s]-= A[s + l]; \\\n else tie(A[s], A[s + l])= make_pair(A[s] + A[s\
-    \ + l], A[s] - A[s + l]);\ntemplate <int t, class T> void rec(T A[], int l) {\n\
-    \ if (l > 127) {\n  l>>= 1, rec<t>(A, l), rec<t>(A + l, l);\n  for (int s= 0;\
-    \ s < l; ++s) ZETA(s, l);\n } else\n  for (int k= 1; k < l; k<<= 1)\n   for (int\
-    \ i= 0; i < l; i+= k + k)\n    for (int j= 0; j < k; ++j) ZETA(i + j, k);\n}\n\
-    #undef ZETA\n/*  f -> g s.t. g[S] = sum_{T subseteq S} f[T]  O(n 2^n) */\ntemplate\
+    \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 3 \"src/Math/set_power_series.hpp\"\
+    \n#include <vector>\n#line 5 \"src/Math/set_power_series.hpp\"\nnamespace sps\
+    \ {\nnamespace sps_internal {\nusing namespace std;\n#define ZETA(s, l) \\\n if\
+    \ constexpr (!t) A[s + l]+= A[s]; \\\n else if constexpr (t == 1) A[s + l]-= A[s];\
+    \ \\\n else if constexpr (t == 2) A[s]+= A[s + l]; \\\n else if constexpr (t ==\
+    \ 3) A[s]-= A[s + l]; \\\n else tie(A[s], A[s + l])= make_pair(A[s] + A[s + l],\
+    \ A[s] - A[s + l]);\ntemplate <int t, class T> void rec(T A[], int l) {\n if (l\
+    \ > 127) {\n  l>>= 1, rec<t>(A, l), rec<t>(A + l, l);\n  for (int s= 0; s < l;\
+    \ ++s) ZETA(s, l);\n } else\n  for (int k= 1; k < l; k<<= 1)\n   for (int i= 0;\
+    \ i < l; i+= k + k)\n    for (int j= 0; j < k; ++j) ZETA(i + j, k);\n}\n#undef\
+    \ ZETA\n/*  f -> g s.t. g[S] = sum_{T subseteq S} f[T]  O(n 2^n) */\ntemplate\
     \ <class T> void subset_zeta(vector<T>& f) { rec<0>(f.data(), f.size()); }\n/*\
     \  f -> g s.t. g[S] = sum_{S subseteq T} f[T]  O(n 2^n) */\ntemplate <class T>\
     \ void subset_mobius(vector<T>& f) { rec<1>(f.data(), f.size()); }\n/*  f -> g\
@@ -270,170 +266,38 @@ data:
     \ sps_internal::convolve, sps_internal::semi_relaxed_convolve, sps_internal::self_relaxed_convolve,\
     \ sps_internal::inv, sps_internal::div, sps_internal::exp, sps_internal::log,\
     \ sps_internal::egf_comp, sps_internal::poly_comp, sps_internal::egf_T;\n}\n#line\
-    \ 3 \"src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nclass UndirectedGraphSetPowerSeries\
-    \ {\n using u64= unsigned long long;\n template <class T> using Sps= std::vector<T>;\n\
-    \ template <class T> using Poly= std::vector<T>;\n const int n, N, m, o;\n std::vector<u64>\
-    \ adj;\n std::vector<int> es;\n template <class T> static inline T pow(T x, int\
-    \ k) {\n  for (T ret(1);; x*= x)\n   if (k& 1 ? ret*= x : 0; !(k>>= 1)) return\
-    \ ret;\n }\n template <class F> inline void bfs(int s, const F& f) const {\n \
-    \ for (int t= s, u, j; t;)\n   for (f(u= 1 << __builtin_ctz(t)); u;) j= __builtin_ctz(u),\
-    \ t^= 1 << j, u^= 1 << j, u|= es[j] & t;\n }\n template <class T, class G> static\
-    \ inline void transform_articulation(Sps<T>& f, const G& g) {\n  const int M=\
-    \ f.size() / 2;\n  Sps<T> tmp(M);\n  for (int I= M; I; I>>= 1) {\n   for (int\
-    \ t= 0; t < M; t+= I)\n    for (int u= I, t2= t << 1; u--;) tmp[t | u]= f[t2 |\
-    \ I | u];\n   tmp= g(tmp);\n   for (int t= 0; t < M; t+= I)\n    for (int u= I,\
-    \ t2= t << 1; u--;) f[t2 | I | u]= tmp[t | u];\n  }\n }\n template <class T, bool\
-    \ b> inline void transform_bridge(Sps<T>& f) const {\n  const int M= N / 2;\n\
-    \  Sps<T> tmp(M), tmp2;\n  for (int i= n, I= M; --i; I>>= 1) {\n   for (int t=\
-    \ 0; t < M; t+= I)\n    for (int u= I, t2= t << 1; u--;) tmp[t | u]= f[t2 | I\
-    \ | u];\n   tmp2.assign(M, 0);\n   for (int t= 0; t < M; t+= I)\n    for (int\
-    \ j= i, J= I, t2= t << 1; J>>= 1, j--;)\n     for (int s= J, J2= J * 2; s < I;\
-    \ s+= J2)\n      for (int u= s + J; u-- > s;) {\n       if constexpr (b) tmp2[t\
-    \ | u]+= f[t2 | u] * adj[i * m + j];\n       else tmp2[t | u]-= f[t2 | u] * adj[i\
-    \ * m + j];\n      }\n   tmp= sps::convolve(tmp, sps::exp(tmp2));\n   for (int\
-    \ t= 0; t < M; t+= I)\n    for (int u= I, t2= t << 1; u--;) f[t2 | I | u]= tmp[t\
-    \ | u];\n  }\n }\n template <class T> inline std::vector<T> cyc() const {\n  std::vector<T>\
-    \ cyc(1 << o);\n  for (int i= 0; i < o; ++i) {\n   int a= i + i, b= a + 1, K=\
-    \ a + 2, I= 1 << i;\n   std::vector<T> dp0(K << i);\n   dp0[a]= 1;\n   for (int\
-    \ s= 0; s < I; ++s) {\n    T* dp0s= dp0.data() + (s * K);\n    for (int u= s |\
-    \ I, S= u, j, j0, j1; S; S^= 1 << j) {\n     j= __builtin_ctz(S), j0= j + j, j1=\
-    \ j0 + 1;\n     const u64 *A0= adj.data() + (j0 * m), *A1= A0 + m;\n     T dp0s0=\
-    \ dp0s[j0], dp0s1= dp0s[j1];\n     cyc[u]+= dp0s0 * A0[b] + dp0s1 * A1[b];\n \
-    \    for (int U= I - 1 - s, k, k0, k1; U; U^= 1 << k) {\n      k= __builtin_ctz(U),\
-    \ k0= k + k, k1= k0 + 1;\n      dp0s[(K << k) + k0]+= dp0s0 * A0[k1] + dp0s1 *\
-    \ A1[k1], dp0s[(K << k) + k1]+= dp0s0 * A0[k0] + dp0s1 * A1[k0];\n     }\n   \
-    \ }\n   }\n  }\n  return cyc;\n }\n template <class T> inline std::pair<std::vector<T>,\
-    \ std::vector<T>> cyc_pth() const {\n  std::vector<T> cyc(1 << o), pth(1 << o);\n\
-    \  for (int i= 0; i < o; ++i) {\n   int a= i + i, b= a + 1, K= a + 2, I= 1 <<\
-    \ i;\n   std::vector<T> dp0(K << i), dp1(K << i);\n   dp0[a]= 1;\n   for (int\
-    \ s= 0; s < I; ++s) {\n    T *dp0s= dp0.data() + (s * K), *dp1s= dp1.data() +\
-    \ (s * K);\n    for (int j= 0; j < K; ++j) dp1s[b]+= dp0s[j];\n    for (int u=\
-    \ s | I, S= u, j, j0, j1; S; S^= 1 << j) {\n     j= __builtin_ctz(S), j0= j +\
-    \ j, j1= j0 + 1;\n     const u64 *A0= adj.data() + (j0 * m), *A1= A0 + m;\n  \
-    \   T dp0s0= dp0s[j0], dp0s1= dp0s[j1], dp1s0= dp1s[j0], dp1s1= dp1s[j1];\n  \
-    \   cyc[u]+= dp0s0 * A0[b] + dp0s1 * A1[b], pth[u]+= dp1s0 + dp1s1;\n     for\
-    \ (int U= I - 1 - s, k, k0, k1; U; U^= 1 << k) {\n      k= __builtin_ctz(U), k0=\
-    \ k + k, k1= k0 + 1;\n      dp0s[(K << k) + k0]+= dp0s0 * A0[k1] + dp0s1 * A1[k1],\
-    \ dp0s[(K << k) + k1]+= dp0s0 * A0[k0] + dp0s1 * A1[k0];\n      dp1s[(K << k)\
-    \ + k0]+= dp1s0 * A0[k1] + dp1s1 * A1[k1], dp1s[(K << k) + k1]+= dp1s0 * A0[k0]\
-    \ + dp1s1 * A1[k0];\n     }\n    }\n   }\n  }\n  return {cyc, pth};\n }\npublic:\n\
-    \ UndirectedGraphSetPowerSeries(int n): n(n), N(1 << n), m(n + (n & 1)), o(m /\
-    \ 2), adj(m * m), es(n) {}\n template <class Int> UndirectedGraphSetPowerSeries(const\
-    \ std::vector<std::vector<Int>>& g): n(g.size()), N(1 << n), m(n + (n & 1)), o(m\
-    \ / 2), adj(m * m), es(n) {\n  for (int i= n; i--;)\n   for (int j= i; j--;) assert(g[i][j]\
-    \ == g[j][i]);\n  for (int i= n; i--;)\n   for (int j= n; j--;) adj[i * m + j]=\
-    \ g[i][j];\n  for (int i= n; i--;)\n   for (int j= n; j--;) es[i]|= !(!(adj[i\
-    \ * m + j])) << j;\n }\n void add_edge(int u, int v, u64 cnt= 1) {\n  adj[u *\
-    \ m + v]= (adj[v * m + u]+= cnt), es[u]|= (1 << v), es[v]|= (1 << u);\n  if (!(adj[u\
-    \ * m + v])) es[u]^= (1 << v), es[v]^= (1 << u);\n }\n const auto operator[](int\
-    \ u) const { return adj.begin() + (u * m); }\n template <class T> static inline\
-    \ Sps<T> only_connected(const Sps<T>& f) { return sps::log(f); }\n template <class\
-    \ T> static inline Sps<T> disjoint_union(const Sps<T>& f) { return sps::exp(f);\
-    \ }\n template <class T> static inline Sps<T> only_biconnected(Sps<T> f) { return\
-    \ transform_articulation(f, sps::log<T>), f; }\n template <class T> static inline\
-    \ Sps<T> articulation_union(Sps<T> f) { return transform_articulation(f, sps::exp<T>),\
-    \ f; }\n template <class T> inline Sps<T> only_2edge_connected(Sps<T> f) const\
-    \ { return transform_bridge<T, false>(f), f; }\n template <class T> inline Sps<T>\
-    \ bridge_union(Sps<T> f) const { return transform_bridge<T, true>(f), f; }\n inline\
-    \ Sps<u64> edge_num() const {\n  Sps<u64> ret(N, 0);\n  for (int i= n; i--;)\n\
-    \   for (int j= i; j--;) ret[(1 << i) | (1 << j)]= adj[i * m + j];\n  return sps::subset_zeta(ret),\
-    \ ret;\n }\n inline Sps<int> connected_component_num() const {\n  Sps<int> ret(N,\
-    \ 0);\n  for (int s= N; s--;) bfs(s, [&](int) { ret[s]++; });\n  return ret;\n\
-    \ }\n inline Sps<u64> cycle_space_rank() const {\n  Sps<u64> e= edge_num(), ret(N,\
-    \ 0);\n  Sps<int> k= connected_component_num();\n  for (int s= N; s--;) ret[s]=\
-    \ e[s] + k[s] - __builtin_popcount(s);\n  return ret;\n }\n inline Sps<u64> odd_deg_num()\
-    \ const {\n  Sps<u64> ret(N, 0);\n  for (int i= n, I= N; I>>= 1, i--;)\n   for\
-    \ (int t= 0, I2= I << 1; t < N; t+= I2)\n    for (int u= I, cnt, v, j; u--; ret[t\
-    \ | I | u]+= cnt & 1)\n     for (cnt= 0, v= t | u; v; v^= 1 << j) cnt+= adj[i\
-    \ * m + (j= __builtin_ctz(v))];\n  return ret;\n }\n inline Sps<u64> selfloop_num()\
-    \ const {\n  Sps<u64> ret(N, 0);\n  for (int i= 0, I= 1; i < n; ++i, I<<= 1)\n\
-    \   for (int u= I; u--;) ret[I | u]= ret[u] + adj[i * m + i];\n  return ret;\n\
-    \ }\n template <class T, class Int> static inline Sps<T> space_size(const Sps<Int>&\
-    \ rank) {\n  Sps<T> ret(rank.size());\n  for (int s= rank.size(); s--;) ret[s]=\
-    \ pow<T>(2, rank[s]);\n  return ret;\n }\n template <class T> inline Sps<T> graph()\
-    \ const { return space_size<T>(edge_num()); }\n template <class T> inline Sps<T>\
-    \ cycle_space_size() const { return space_size<T>(cycle_space_rank()); }\n template\
-    \ <class T> inline Sps<T> connected_graph() const { return sps::log(graph<T>());\
-    \ }\n template <class T> inline Sps<T> eulerian_graph() const { return sps::log(cycle_space_size<T>());\
-    \ }\n template <class T> inline Sps<T> connected_biparate_graph() const {\n  Sps<T>\
-    \ tmp= graph<T>(), ret(N, 1);\n  for (int s= N; s--;) ret[s]/= tmp[s];\n  ret=\
-    \ sps::convolve(ret, ret);\n  for (int s= N; s--;) ret[s]*= tmp[s];\n  ret= sps::log(ret);\n\
-    \  for (int s= N; s--;) ret[s]/= 2;\n  return ret;\n }\n template <class T> inline\
-    \ Sps<T> tree() const {\n  Sps<int> e= edge_num();\n  Sps<T> ret= {0, 1};\n  ret.reserve(N);\n\
-    \  for (int I= 2; I < N; I<<= 1) {\n   Sps<T> g(ret);\n   for (int s= I; --s;)\
-    \ g[s]*= e[s | I] - e[s] - e[I];\n   g= sps::exp(g), std::copy(g.begin(), g.end(),\
-    \ std::back_inserter(ret));\n  }\n  return ret;\n }\n template <class T> inline\
-    \ Sps<T> forest() const { return sps::exp(tree<T>()); }\n template <class T> inline\
-    \ Sps<T> cycle_graph() const {\n  T dp[N][n - 1];\n  Sps<T> ret(N, 0);\n  for\
-    \ (int i= n, I= N; I>>= 1, --i;) {\n   for (int s= I; --s;) std::fill_n(dp[s],\
-    \ i, 0);\n   for (int j= i; j--;) dp[1 << j][j]= adj[i * m + j];\n   for (int\
-    \ s= 1; s < I; ++s)\n    for (int t= s, j, u, r, k; t; ret[s | I]+= dp[s][j] *\
-    \ adj[j * m + i])\n     for (t^= 1 << (j= __builtin_ctz(t)), u= r= s ^ (1 << j);\
-    \ u; dp[s][j]+= dp[r][k] * adj[k * m + j]) u^= 1 << (k= __builtin_ctz(u));\n \
-    \ }\n  for (int i= n; i--;)\n   for (int j= i; j--;) ret[(1 << i) | (1 << j)]-=\
-    \ adj[i * m + j];\n  for (int s= N; --s;) ret[s]/= 2;\n  return ret;\n }\n template\
-    \ <class T> inline Sps<T> biconnected_graph() const {\n  Sps<T> ret= connected_graph<T>();\n\
-    \  return transform_articulation(ret, sps::log<T>), ret;\n }\n template <class\
-    \ T> inline Sps<T> two_edge_connected_graph() const {\n  Sps<T> ret= connected_graph<T>();\n\
-    \  return transform_bridge<T, false>(ret), ret;\n }\n template <class T> inline\
-    \ Sps<T> cactus_graph() const {\n  auto ret= cycle_graph<T>();\n  for (int i=\
-    \ n; i--;)\n   for (int j= i; j--;) ret[(1 << i) | (1 << j)]+= adj[i * m + j];\n\
-    \  return transform_articulation(ret, sps::exp<T>), ret;\n }\n template <class\
-    \ T> inline Sps<T> acyclic_orientations() const {\n  auto k= connected_component_num();\n\
-    \  Sps<T> g(N, 0);\n  for (int s= N; --s;)\n   if (k[s] == __builtin_popcount(s))\
-    \ g[s]= k[s] & 1 ? -1 : 1;\n  return g[0]= 1, sps::inv(g);\n }\n template <class\
-    \ T> inline std::vector<T> colorings_using_exactly_k_colors_num() const {\n  if\
-    \ (n == 0) return {0};  // impossible in any number of ways\n  auto k= connected_component_num();\n\
-    \  std::vector<T> indep(N, 0);\n  for (int s= N; --s;) indep[s]= k[s] == __builtin_popcount(s);\n\
-    \  return sps::egf_T(indep);\n }\n template <class T> inline Poly<T> chromatic_polynomial()\
-    \ const {\n  auto e= colorings_using_exactly_k_colors_num<T>();\n  if (e.back()\
-    \ == 0) return {0};\n  Poly<T> ret(n + 1, 0);\n  T tmp[n]= {1};\n  for (int i=\
-    \ 1, j; i < n; ++i)\n   for (j= i; j--; tmp[j]*= -i) ret[j + 1]+= tmp[j] * e[i],\
-    \ tmp[j + 1]+= tmp[j];\n  for (int j= n; j--;) ret[j + 1]+= tmp[j];\n  return\
-    \ ret;\n }\n template <class T> inline T tutte_polynomial(T x, T y) const {\n\
-    \  int sum[N], s, t, lim= 2, i, j;\n  T fum[10'000]= {0, 1};\n  std::vector<T>\
-    \ g= {0}, h;\n  for (g.reserve(N), h.reserve(N), i= 0; i < n; h= sps::exp(h),\
-    \ std::copy(h.begin(), h.end(), std::back_inserter(g)), ++i) {\n   for (sum[0]=\
-    \ j= 0; j < i; j++)\n    for (s= t= 1 << j; s--;) sum[s | t]= sum[s] + adj[i *\
-    \ m + j];\n   for (h.resize(s= 1 << i); s--; h[s]= g[s] * fum[sum[s]])\n    for\
-    \ (; lim <= sum[s]; lim++) fum[lim]= fum[lim - 1] * y + 1;\n  }\n  for (x-= 1,\
-    \ t= ~0, j= 0, i= n; i--;) j+= adj[i * m + i];\n  for (bfs((s= N) - 1, [&](int\
-    \ u) { t^= u; }); --s&= t;) g[s]*= x;\n  return sps::exp(g)[N - 1] * pow(y, j);\n\
-    \ }\n template <class T> inline T perfect_matching() const { return sps::exp(cyc<T>()).back();\
-    \ }\n template <class T> inline T all_matching() const {\n  auto [cyc, pth]= cyc_pth<T>();\n\
-    \  for (int s= cyc.size(); s--;) cyc[s]+= pth[s];\n  return sps::exp(cyc).back();\n\
-    \ }\n template <class T> std::vector<T> k_mathcing() const {\n  auto [cyc, pth]=\
-    \ cyc_pth<T>();\n  auto ret= sps::egf_T(pth, sps::exp(cyc));\n  return std::reverse(ret.begin(),\
-    \ ret.end()), ret.resize(n / 2 + 1), ret;\n }\n};\n#line 7 \"test/atcoder/arc105_f.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries\
-    \ g(N);\n for (int i= 0, a, b; i < M; i++) cin >> a >> b, g.add_edge(--a, --b);\n\
-    \ cout << g.connected_biparate_graph<Mint>().back() << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/arc105/tasks/arc105_f\"\n//\
-    \ \u9023\u7D50\u4E8C\u90E8\u30B0\u30E9\u30D5\n#include <iostream>\n#include \"\
-    src/Math/ModInt.hpp\"\n#include \"src/Math/set_power_series.hpp\"\n#include \"\
-    src/Graph/UndirectedGraphSetPowerSeries.hpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
-    \ int N, M;\n cin >> N >> M;\n UndirectedGraphSetPowerSeries g(N);\n for (int\
-    \ i= 0, a, b; i < M; i++) cin >> a >> b, g.add_edge(--a, --b);\n cout << g.connected_biparate_graph<Mint>().back()\
-    \ << '\\n';\n return 0;\n}\n"
+    \ 6 \"test/atcoder/abc212_h.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
+    \ constexpr int n= 1 << 16;\n int N, K;\n cin >> N >> K;\n vector<Mint> a(n);\n\
+    \ for (int i= 0, A; i < K; ++i) cin >> A, a[A]+= 1;\n sps::hadamard(a);\n for\
+    \ (auto &x: a) x= x == 1 ? N : (x.pow(N) - 1) / (x - 1) * x;\n sps::hadamard(a);\n\
+    \ Mint all= K == 1 ? N : (Mint(K).pow(N) - 1) / (K - 1) * K;\n cout << all - a[0]\
+    \ / n << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc212/tasks/abc212_h\"\n#include\
+    \ <iostream>\n#include <algorithm>\n#include \"src/Math/ModInt.hpp\"\n#include\
+    \ \"src/Math/set_power_series.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n constexpr int\
+    \ n= 1 << 16;\n int N, K;\n cin >> N >> K;\n vector<Mint> a(n);\n for (int i=\
+    \ 0, A; i < K; ++i) cin >> A, a[A]+= 1;\n sps::hadamard(a);\n for (auto &x: a)\
+    \ x= x == 1 ? N : (x.pow(N) - 1) / (x - 1) * x;\n sps::hadamard(a);\n Mint all=\
+    \ K == 1 ? N : (Mint(K).pow(N) - 1) / (K - 1) * K;\n cout << all - a[0] / n <<\
+    \ '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
   - src/Internal/modint_traits.hpp
   - src/Math/set_power_series.hpp
-  - src/Graph/UndirectedGraphSetPowerSeries.hpp
   isVerificationFile: true
-  path: test/atcoder/arc105_f.test.cpp
+  path: test/atcoder/abc212_h.test.cpp
   requiredBy: []
   timestamp: '2024-02-04 23:58:32+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/atcoder/arc105_f.test.cpp
+documentation_of: test/atcoder/abc212_h.test.cpp
 layout: document
 redirect_from:
-- /verify/test/atcoder/arc105_f.test.cpp
-- /verify/test/atcoder/arc105_f.test.cpp.html
-title: test/atcoder/arc105_f.test.cpp
+- /verify/test/atcoder/abc212_h.test.cpp
+- /verify/test/atcoder/abc212_h.test.cpp.html
+title: test/atcoder/abc212_h.test.cpp
 ---

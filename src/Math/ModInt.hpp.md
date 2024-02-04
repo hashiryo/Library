@@ -161,6 +161,9 @@ data:
     path: test/atcoder/abc202_f.test.cpp
     title: test/atcoder/abc202_f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc212_h.test.cpp
+    title: test/atcoder/abc212_h.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
   - icon: ':heavy_check_mark:'
@@ -178,7 +181,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc235_f.test.cpp
     title: test/atcoder/abc235_f.test.cpp
   - icon: ':x:'
@@ -242,8 +245,8 @@ data:
     path: test/yosupo/bitwise_and_convolution.test.cpp
     title: test/yosupo/bitwise_and_convolution.test.cpp
   - icon: ':x:'
-    path: test/yosupo/bitwise_or_convolution.test.cpp
-    title: test/yosupo/bitwise_or_convolution.test.cpp
+    path: test/yosupo/bitwise_xor_convolution.test.cpp
+    title: test/yosupo/bitwise_xor_convolution.test.cpp
   - icon: ':x:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
@@ -461,6 +464,9 @@ data:
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1142.test.cpp
+    title: test/yukicoder/1142.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
   - icon: ':x:'
@@ -517,6 +523,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1750.test.cpp
     title: test/yukicoder/1750.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1753.test.cpp
+    title: test/yukicoder/1753.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1848.zalgo.test.cpp
     title: test/yukicoder/1848.zalgo.test.cpp
@@ -750,6 +759,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/unit_test/constexpr_modint.test.cpp
+  - test/yukicoder/1753.test.cpp
   - test/yukicoder/737.test.cpp
   - test/yukicoder/1339.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
@@ -789,6 +799,7 @@ data:
   - test/yukicoder/1750.test.cpp
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/650.LCT.test.cpp
+  - test/yukicoder/1142.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1649.Seg2D.test.cpp
   - test/yukicoder/665.test.cpp
@@ -853,6 +864,7 @@ data:
   - test/atcoder/abc230_h.test.cpp
   - test/atcoder/abc256_ex.Beats.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
+  - test/atcoder/abc212_h.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc129_e.test.cpp
   - test/atcoder/abc202_f.test.cpp
@@ -895,6 +907,7 @@ data:
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - test/yosupo/point_set_range_composite.SegTree.test.cpp
   - test/yosupo/exp_of_sparse_FPS.test.cpp
+  - test/yosupo/bitwise_xor_convolution.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/linear_equations.test.cpp
   - test/yosupo/subset_convolution.test.cpp
@@ -925,7 +938,6 @@ data:
   - test/yosupo/range_affine_range_sum.DynSeg.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
-  - test/yosupo/bitwise_or_convolution.test.cpp
   - test/yosupo/enumerate_cliques.test.cpp
   - test/yosupo/matrix_product.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp

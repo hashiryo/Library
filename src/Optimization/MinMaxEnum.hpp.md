@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: src/Optimization/ConvexHullTrick.hpp
     title: Convex-Hull-Trick
   - icon: ':question:'
@@ -69,7 +69,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
     title: test/atcoder/abc231_h.weighted_matroid_intersection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc244_ex.test.cpp
     title: test/atcoder/abc244_ex.test.cpp
   - icon: ':heavy_check_mark:'

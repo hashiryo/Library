@@ -229,7 +229,7 @@ data:
     - icon: ':question:'
       path: src/Graph/Tree.hpp
       title: "\u6728"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
@@ -349,7 +349,7 @@ data:
         mathbb{Z}$)"
     - icon: ':question:'
       path: src/Math/set_power_series.hpp
-      title: src/Math/set_power_series.hpp
+      title: "\u96C6\u5408\u51AA\u7D1A\u6570"
     - icon: ':question:'
       path: src/Math/sparse_fps.hpp
       title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
@@ -389,7 +389,7 @@ data:
       title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   - name: src/Optimization
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/ConvexHullTrick.hpp
       title: Convex-Hull-Trick
     - icon: ':heavy_check_mark:'
@@ -1153,7 +1153,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc194_e.test.cpp
       title: test/atcoder/abc194_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1169,12 +1169,15 @@ data:
       path: test/atcoder/abc208_e.test.cpp
       title: test/atcoder/abc208_e.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc212_h.test.cpp
+      title: test/atcoder/abc212_h.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SA.test.cpp
       title: test/atcoder/abc213_f.SA.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SuffixTree.test.cpp
       title: test/atcoder/abc213_f.SuffixTree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1231,7 +1234,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc234_g.test.cpp
       title: test/atcoder/abc234_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
     - icon: ':x:'
@@ -1243,7 +1246,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc241_e.test.cpp
       title: test/atcoder/abc241_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc244_ex.test.cpp
       title: test/atcoder/abc244_ex.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1448,8 +1451,8 @@ data:
       path: test/yosupo/bitwise_and_convolution.test.cpp
       title: test/yosupo/bitwise_and_convolution.test.cpp
     - icon: ':x:'
-      path: test/yosupo/bitwise_or_convolution.test.cpp
-      title: test/yosupo/bitwise_or_convolution.test.cpp
+      path: test/yosupo/bitwise_xor_convolution.test.cpp
+      title: test/yosupo/bitwise_xor_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yosupo/cartesian_tree.test.cpp
       title: test/yosupo/cartesian_tree.test.cpp
@@ -1831,6 +1834,9 @@ data:
       path: test/yukicoder/1124.test.cpp
       title: test/yukicoder/1124.test.cpp
     - icon: ':x:'
+      path: test/yukicoder/1142.test.cpp
+      title: test/yukicoder/1142.test.cpp
+    - icon: ':x:'
       path: test/yukicoder/1145.test.cpp
       title: test/yukicoder/1145.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1968,6 +1974,9 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1750.test.cpp
       title: test/yukicoder/1750.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1753.test.cpp
+      title: test/yukicoder/1753.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/180.test.cpp
       title: test/yukicoder/180.test.cpp
@@ -1986,6 +1995,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1868.test.cpp
       title: test/yukicoder/1868.test.cpp
+    - icon: ':x:'
+      path: test/yukicoder/1901.test.cpp
+      title: test/yukicoder/1901.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1907.test.cpp
       title: test/yukicoder/1907.test.cpp
