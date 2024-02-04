@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_f.Seg2D.test.cpp
     title: test/atcoder/abc228_f.Seg2D.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_ex.KDT.test.cpp
     title: test/atcoder/abc234_ex.KDT.test.cpp
   - icon: ':heavy_check_mark:'

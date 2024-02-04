@@ -227,10 +227,10 @@ data:
     \ n= __builtin_ctz(N);\n assert(!(N & (N - 1)));\n vector<T> F(n + 1);\n for (int\
     \ j= 0, e= P.size();; ++j, --e) {\n  for (int i= e; i--;) (F[j]*= f[0])+= P[i];\n\
     \  if (j == n || e <= 1) break;\n  for (int i= 1; i < e; ++i) P[i - 1]= P[i] *\
-    \ i;\n }\n return f[0]= 0, egf_comp(F, f);\n}\ntemplate <class T> vector<T> _egfT(T*\
-    \ b, T* h, int M, int n) {\n T *a, *d;\n vector<T> c(n + 1);\n int l= M;\n if\
-    \ (int i= __builtin_ctz(M); i > 10) {\n  vector<T> F((i + 1) << i), G((i + 1)\
-    \ << i);\n  for (int m, s; i > 10; fill_n(F.data(), (i + 1) << i, 0), rnk_zeta(h,\
+    \ i;\n }\n return f[0]= 0, egf_comp(F, f);\n}\ntemplate <class T> vector<T> _egfT(const\
+    \ T* b, T* h, int M, int n) {\n T *a, *d;\n vector<T> c(n + 1);\n int l= M;\n\
+    \ if (int i= __builtin_ctz(M); i > 10) {\n  vector<T> F((i + 1) << i), G((i +\
+    \ 1) << i);\n  for (int m, s; i > 10; fill_n(F.data(), (i + 1) << i, 0), rnk_zeta(h,\
     \ F.data(), i), cnv_(F.data(), G.data(), i + 1), rnk_mobius(F.data(), h, i), b-=\
     \ (l>>= 1), --i)\n   for (fill_n(G.data(), (i + 1) << i, 0), rnk_zeta(b, G.data(),\
     \ i), m= M; m > l; m>>= 1)\n    for (a= h + (m - l), fill_n(F.data(), (i + 1)\
@@ -239,7 +239,7 @@ data:
     \ __builtin_popcount(s)];\n }\n for (; l; cnv_na(h, b, h, l), b-= (l>>= 1))\n\
     \  for (int m= M, s, t; m > l; m>>= 1)\n   for (a= h + (m - l), d= a + (m - l),\
     \ s= l; s--;)\n    for (a[t= s]+= d[s] * b[0]; t; --t&= s) a[s]+= d[s ^ t] * b[t];\n\
-    \ for (int i= 1; i <= n; ++i) c[i]= h[(1 << (n - i)) - 1];\n return c;\n}\n//\
+    \ for (int i= 0; i <= n; ++i) c[i]= h[(1 << (n - i)) - 1];\n return c;\n}\n//\
     \ [X^{[n]}] f^k/k! for k=0,1,...,n , O(n^2 2^n)\ntemplate <class T> vector<T>\
     \ egf_T(vector<T> f) {\n const int N= f.size(), n= __builtin_ctz(N);\n assert(!(N\
     \ & (N - 1)));\n if (n == 0) return {1};\n if (n == 1) return {0, f[1]};\n return\
@@ -273,7 +273,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/exp_of_set_power_series.test.cpp
   requiredBy: []
-  timestamp: '2024-02-03 22:49:23+09:00'
+  timestamp: '2024-02-04 14:37:36+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/exp_of_set_power_series.test.cpp

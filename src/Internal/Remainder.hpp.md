@@ -200,10 +200,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc234_g.test.cpp
     title: test/atcoder/abc234_g.test.cpp
   - icon: ':x:'
@@ -284,6 +284,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/bitwise_and_convolution.test.cpp
     title: test/yosupo/bitwise_and_convolution.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/bitwise_or_convolution.test.cpp
+    title: test/yosupo/bitwise_or_convolution.test.cpp
   - icon: ':x:'
     path: test/yosupo/characteristic_polynomial.test.cpp
     title: test/yosupo/characteristic_polynomial.test.cpp
@@ -986,6 +989,7 @@ data:
   - test/yosupo/inv_of_sparse_FPS.test.cpp
   - test/yosupo/log_of_FPS.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
+  - test/yosupo/bitwise_or_convolution.test.cpp
   - test/yosupo/enumerate_cliques.test.cpp
   - test/yosupo/matrix_product.test.cpp
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
