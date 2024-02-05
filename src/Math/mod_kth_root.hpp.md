@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
@@ -18,12 +18,12 @@ data:
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/kth_root_mod.test.cpp
     title: test/yosupo/kth_root_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/mod_kth_root.hpp\"\n#include <vector>\n#include\
@@ -93,7 +93,7 @@ data:
     \ a, Int b) {\n if (a == 0 || b == 0) return a + b;\n int n= bsf(a), m= bsf(b),\
     \ s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n\
     \  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n return a << std::min(n,\
-    \ m);\n}\n#line 8 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
+    \ m);\n}\n#line 9 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
     \ <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg,\
     \ i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1];\
     \ bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t\
@@ -120,54 +120,46 @@ data:
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
-    \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
-    \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
-    \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (auto [q,\
-    \ e]: f)\n   if ((ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))) break;\n\
-    \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
-    \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
-    \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
-    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\nclass\
-    \ Divisors: public ConstexprArray<u64, 110600> {\n constexpr void init(const Factors\
-    \ &f) {\n  dat[sz++]= 1;\n  for (auto [p, e]: f) {\n   u64 pw= p;\n   size_t psz=\
-    \ sz;\n   for (uint16_t i= 1; i <= e; ++i, pw*= p)\n    for (size_t j= 0; j <\
-    \ psz; ++j) dat[sz++]= dat[j] * pw;\n  }\n }\npublic:\n constexpr Divisors()=\
-    \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
-    \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
-    \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
-    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
-    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
-    \ totient(Factors(n)); }\n#line 7 \"src/Math/mod_kth_root.hpp\"\nnamespace math_internal\
-    \ {\ntemplate <class Int, class MP> inline i64 peth_root(Int c, Int pi, int ei,\
-    \ const MP &md) {\n const Int p= md.mod;\n int t= 0;\n Int s= p - 1, pe= 1;\n\
-    \ while (s % pi == 0) s/= pi, ++t;\n for (int i= ei; i--;) pe*= pi;\n Int u= mod_inv(pe\
-    \ - s % pe, pe), ONE= md.set(1), z= pow(c, (s * u + 1) / pe, md), zpe= md.norm(pow(c,\
-    \ s * u, md));\n if (zpe == ONE) return z;\n Int ptm1= 1, vs= 0, bs= 0;\n for\
-    \ (int i= t; --i;) ptm1*= pi;\n for (Int v= md.set(2);; v= md.plus(v, ONE))\n\
-    \  if (vs= pow(v, s, md), bs= md.norm(pow(vs, ptm1, md)); bs != ONE) break;\n\
-    \ int size= 1 << __lg(int(sqrt(pi)) + 1), mask= size - 1, vsc[size];\n vector<int>\
-    \ os(size + 1);\n Int vf[size];\n Int x= ONE, vspe= pow(vs, pe, md);\n for (int\
-    \ i= 0; i < size; i++, x= md.mul(x, bs)) os[md.norm(x) & mask]++;\n for (int i=\
-    \ 1; i < size; i++) os[i]+= os[i - 1];\n x= ONE, os[size]= size;\n for (int i=\
-    \ 0, j= 0; i < size; i++, x= md.mul(x, bs)) vf[j= --os[md.norm(x) & mask]]= md.norm(x),\
-    \ vsc[j]= i;\n for (int vs_e= ei, td= 0, n= 0; zpe != ONE; z= md.mul(z, pow(vs,\
-    \ n, md)), zpe= md.norm(md.mul(zpe, pow(vspe, n, md)))) {\n  for (u= zpe, td=\
-    \ 0; u != ONE; td++) u= md.norm(pow(bs= u, pi, md));\n  for (int e= t - td; vs_e\
-    \ != e; vs_e++) vs= pow(vs, pi, md), vspe= pow(vspe, pi, md);\n  for (int tt=\
-    \ 0, upd= 1; upd; tt+= size, bs= md.mul(bs, x))\n   for (int m= (md.norm(bs) &\
-    \ mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs) == vf[i]) {\n    \
-    \ if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n    }\n }\n return\
-    \ z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int a, u64 k, Int p)\
-    \ {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp= (p - 1) / g, kk=\
-    \ (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) != md.set(1)) return\
-    \ -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]: Factors(g)) a= peth_root<Int>(a,\
-    \ pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64 a, u64 k, i64 p) {\n\
-    \ assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if (k == 0) return\
-    \ a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n if (p < (1 << 30)) return\
-    \ inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k, p);\n if (p < (1ll << 62))\
-    \ return inner_kth_root<i64, MP_Mo<u64, u128, 64, 63>>(a, k, p);\n return inner_kth_root<i64,\
-    \ MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\nusing math_internal::mod_kth_root;\n"
+    \ bubble_sort(dat, dat + sz); }\n};\n}  // namespace math_internal\nusing math_internal::Factors;\n\
+    constexpr uint64_t totient(const Factors &f) {\n uint64_t ret= 1, i= 0;\n for\
+    \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
+    constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
+    \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
+    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
+    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
+    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
+    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 7 \"src/Math/mod_kth_root.hpp\"\
+    \nnamespace math_internal {\ntemplate <class Int, class MP> inline i64 peth_root(Int\
+    \ c, Int pi, int ei, const MP &md) {\n const Int p= md.mod;\n int t= 0;\n Int\
+    \ s= p - 1, pe= 1;\n while (s % pi == 0) s/= pi, ++t;\n for (int i= ei; i--;)\
+    \ pe*= pi;\n Int u= mod_inv(pe - s % pe, pe), ONE= md.set(1), z= pow(c, (s * u\
+    \ + 1) / pe, md), zpe= md.norm(pow(c, s * u, md));\n if (zpe == ONE) return z;\n\
+    \ Int ptm1= 1, vs= 0, bs= 0;\n for (int i= t; --i;) ptm1*= pi;\n for (Int v= md.set(2);;\
+    \ v= md.plus(v, ONE))\n  if (vs= pow(v, s, md), bs= md.norm(pow(vs, ptm1, md));\
+    \ bs != ONE) break;\n int size= 1 << __lg(int(sqrt(pi)) + 1), mask= size - 1,\
+    \ vsc[size];\n vector<int> os(size + 1);\n Int vf[size];\n Int x= ONE, vspe= pow(vs,\
+    \ pe, md);\n for (int i= 0; i < size; i++, x= md.mul(x, bs)) os[md.norm(x) & mask]++;\n\
+    \ for (int i= 1; i < size; i++) os[i]+= os[i - 1];\n x= ONE, os[size]= size;\n\
+    \ for (int i= 0, j= 0; i < size; i++, x= md.mul(x, bs)) vf[j= --os[md.norm(x)\
+    \ & mask]]= md.norm(x), vsc[j]= i;\n for (int vs_e= ei, td= 0, n= 0; zpe != ONE;\
+    \ z= md.mul(z, pow(vs, n, md)), zpe= md.norm(md.mul(zpe, pow(vspe, n, md)))) {\n\
+    \  for (u= zpe, td= 0; u != ONE; td++) u= md.norm(pow(bs= u, pi, md));\n  for\
+    \ (int e= t - td; vs_e != e; vs_e++) vs= pow(vs, pi, md), vspe= pow(vspe, pi,\
+    \ md);\n  for (int tt= 0, upd= 1; upd; tt+= size, bs= md.mul(bs, x))\n   for (int\
+    \ m= (md.norm(bs) & mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs)\
+    \ == vf[i]) {\n     if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n\
+    \    }\n }\n return z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int\
+    \ a, u64 k, Int p) {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp=\
+    \ (p - 1) / g, kk= (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) !=\
+    \ md.set(1)) return -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]:\
+    \ Factors(g)) a= peth_root<Int>(a, pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64\
+    \ a, u64 k, i64 p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%=\
+    \ p;\n if (k == 0) return a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n\
+    \ if (p < (1 << 30)) return inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k,\
+    \ p);\n if (p < (1ll << 62)) return inner_kth_root<i64, MP_Mo<u64, u128, 64, 63>>(a,\
+    \ k, p);\n return inner_kth_root<i64, MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\n\
+    using math_internal::mod_kth_root;\n"
   code: "#pragma once\n#include <vector>\n#include <cmath>\n#include \"src/Math/mod_inv.hpp\"\
     \n#include \"src/Math/Factors.hpp\"\n#include \"src/Math/binary_gcd.hpp\"\nnamespace\
     \ math_internal {\ntemplate <class Int, class MP> inline i64 peth_root(Int c,\
@@ -209,8 +201,8 @@ data:
   isVerificationFile: false
   path: src/Math/mod_kth_root.hpp
   requiredBy: []
-  timestamp: '2023-11-11 11:24:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-02-05 18:28:29+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/kth_root_mod.test.cpp
 documentation_of: src/Math/mod_kth_root.hpp

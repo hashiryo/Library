@@ -9,7 +9,8 @@ data:
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
     path: src/Math/FactorialPrecalculation.hpp
-    title: src/Math/FactorialPrecalculation.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
+      mathbb{F}_p$)"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -27,9 +28,9 @@ data:
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc276/tasks/abc276_g
@@ -256,7 +257,7 @@ data:
   path: test/atcoder/abc276_g.sparse_FPS.test.cpp
   requiredBy: []
   timestamp: '2024-02-03 19:27:26+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc276_g.sparse_FPS.test.cpp
 layout: document

@@ -56,7 +56,8 @@ data:
     title: "\u884C\u5217\u306E\u6700\u5C0F\u591A\u9805\u5F0F"
   - icon: ':question:'
     path: src/Math/FactorialPrecalculation.hpp
-    title: src/Math/FactorialPrecalculation.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
+      mathbb{F}_p$)"
   - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
@@ -161,6 +162,9 @@ data:
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc179_d.test.cpp
+    title: test/atcoder/abc179_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_f.test.cpp
     title: test/atcoder/abc202_f.test.cpp
   - icon: ':heavy_check_mark:'
@@ -214,7 +218,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc272_f.RH.test.cpp
     title: test/atcoder/abc272_f.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -801,6 +805,7 @@ data:
   - test/atcoder/arc115_e.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc222_g.test.cpp
+  - test/atcoder/abc179_d.test.cpp
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp

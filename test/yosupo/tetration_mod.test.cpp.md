@@ -4,24 +4,24 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tetration_mod
@@ -30,7 +30,7 @@ data:
   bundledCode: "#line 1 \"test/yosupo/tetration_mod.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/tetration_mod\"\n#include <iostream>\n#line 2\
     \ \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n#line 5 \"\
-    src/Math/Factors.hpp\"\n#include <algorithm>\n#line 2 \"src/Internal/Remainder.hpp\"\
+    src/Math/Factors.hpp\"\n#include <algorithm>\n#include <vector>\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\n\
     using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\n\
     using u128= __uint128_t;\n#define CE constexpr\n#define IL inline\n#define NORM\
@@ -91,7 +91,7 @@ data:
     \ a, Int b) {\n if (a == 0 || b == 0) return a + b;\n int n= bsf(a), m= bsf(b),\
     \ s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n\
     \  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n return a << std::min(n,\
-    \ m);\n}\n#line 8 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
+    \ m);\n}\n#line 9 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
     \ <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg,\
     \ i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1];\
     \ bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t\
@@ -118,37 +118,28 @@ data:
     \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
     \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
     \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
-    \ bubble_sort(dat, dat + sz); }\n};\ntemplate <class Uint, class MP> constexpr\
-    \ Uint inner_primitive_root(Uint p) {\n const MP md(p);\n const auto f= Factors(p\
-    \ - 1);\n for (Uint ret= 2, one= md.set(1), ng= 0;; ret++) {\n  for (auto [q,\
-    \ e]: f)\n   if ((ng= (md.norm(pow(md.set(ret), (p - 1) / q, md)) == one))) break;\n\
-    \  if (!ng) return ret;\n }\n}\nconstexpr u64 primitive_root(u64 p) {\n if (assert(is_prime(p));\
-    \ p == 2) return 1;\n if (p < (1 << 30)) return inner_primitive_root<u32, MP_Mo<u32,\
-    \ u64, 32, 31>>(p);\n if (p < (1ull << 62)) return inner_primitive_root<u64, MP_Mo<u64,\
-    \ u128, 64, 63>>(p);\n return inner_primitive_root<u64, MP_D2B1>(p);\n}\nclass\
-    \ Divisors: public ConstexprArray<u64, 110600> {\n constexpr void init(const Factors\
-    \ &f) {\n  dat[sz++]= 1;\n  for (auto [p, e]: f) {\n   u64 pw= p;\n   size_t psz=\
-    \ sz;\n   for (uint16_t i= 1; i <= e; ++i, pw*= p)\n    for (size_t j= 0; j <\
-    \ psz; ++j) dat[sz++]= dat[j] * pw;\n  }\n }\npublic:\n constexpr Divisors()=\
-    \ default;\n constexpr Divisors(const Factors &f) { init(f), bubble_sort(dat,\
-    \ dat + sz); };\n constexpr Divisors(u64 n): Divisors(Factors(n)) {}\n};\n}  //\
-    \ namespace math_internal\nusing math_internal::Factors, math_internal::Divisors,\
-    \ math_internal::primitive_root;\nconstexpr uint64_t totient(const Factors &f)\
-    \ {\n uint64_t ret= 1, i= 0;\n for (auto [p, e]: f)\n  for (ret*= p - 1, i= e;\
-    \ --i;) ret*= p;\n return ret;\n}\nconstexpr auto totient(uint64_t n) { return\
-    \ totient(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\nnamespace math_internal\
-    \ {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n\
-    \ if (b == 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const\
-    \ auto [p, e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;)\
-    \ tmp*= p;\n  k*= tmp / binary_gcd(k, tmp);\n }\n auto mod= [m](u128 x) { return\
-    \ x < m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
-    \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
-    constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
-    \ m ? a - m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n\
-    #line 4 \"test/yosupo/tetration_mod.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int T;\n cin >> T;\n while (T--)\
-    \ {\n  int A, B, M;\n  cin >> A >> B >> M;\n  cout << mod_tetration(A, B, M) <<\
-    \ '\\n';\n }\n return 0;\n}\n"
+    \ bubble_sort(dat, dat + sz); }\n};\n}  // namespace math_internal\nusing math_internal::Factors;\n\
+    constexpr uint64_t totient(const Factors &f) {\n uint64_t ret= 1, i= 0;\n for\
+    \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
+    constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
+    \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
+    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
+    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
+    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
+    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\
+    \nnamespace math_internal {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a\
+    \ == 0) return (b ^ 1) & 1;\n if (b == 0 || m == 1) return 1;\n u64 ret= 1, k=\
+    \ 1, tmp= 1, i= 0;\n for (const auto [p, e]: Factors(m)) {\n  for (tmp= p - 1,\
+    \ i= e - (p == 2 && e > 3); --i;) tmp*= p;\n  k*= tmp / binary_gcd(k, tmp);\n\
+    \ }\n auto mod= [m](u128 x) { return x < m ? x : x % m + m; };\n for (k= rec(a,\
+    \ b - 1, k), a= mod(a);; a= mod(u128(a) * a))\n  if (k& 1 ? ret= mod(u128(ret)\
+    \ * a) : 0; !(k>>= 1)) return ret;\n}\nconstexpr u64 mod_tetration(u64 a, u64\
+    \ b, u64 m) { return (a= rec(a, b, m)) >= m ? a - m : a; }\n}  // namespace math_internal\n\
+    using math_internal::mod_tetration;\n#line 4 \"test/yosupo/tetration_mod.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ int T;\n cin >> T;\n while (T--) {\n  int A, B, M;\n  cin >> A >> B >> M;\n\
+    \  cout << mod_tetration(A, B, M) << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tetration_mod\"\n#include\
     \ <iostream>\n#include \"src/Math/mod_tetration.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int T;\n cin >> T;\n\
@@ -163,8 +154,8 @@ data:
   isVerificationFile: true
   path: test/yosupo/tetration_mod.test.cpp
   requiredBy: []
-  timestamp: '2023-11-11 11:24:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-05 18:28:29+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/tetration_mod.test.cpp
 layout: document

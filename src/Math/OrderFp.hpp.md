@@ -7,9 +7,6 @@ data:
   - icon: ':question:'
     path: src/Math/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/ModInt_Exp.hpp
-    title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
@@ -17,25 +14,27 @@ data:
     path: src/Math/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/unit_test/constexpr_orderfp.test.cpp
+    title: test/unit_test/constexpr_orderfp.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/primitive_root.test.cpp
+    title: test/yosupo/primitive_root.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/abc228/tasks/abc228_e
-    links:
-    - https://atcoder.jp/contests/abc228/tasks/abc228_e
-  bundledCode: "#line 1 \"test/atcoder/abc228_e.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc228/tasks/abc228_e\"\
-    \n#include <iostream>\n#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n\
-    #include <cassert>\n#line 5 \"src/Math/Factors.hpp\"\n#include <algorithm>\n#include\
-    \ <vector>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\n\
-    using namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing i64=\
-    \ long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n#define\
-    \ CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\
-    \n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { return l+=\
-    \ r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U\
-    \ r) const { return l-= r, l >> C ? l + (M) : l; }\n#define SGN(U) \\\n static\
+    links: []
+  bundledCode: "#line 2 \"src/Math/OrderFp.hpp\"\n#include <array>\n#line 2 \"src/Math/Factors.hpp\"\
+    \n#include <numeric>\n#include <cassert>\n#include <iostream>\n#include <algorithm>\n\
+    #include <vector>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
+    \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { return\
+    \ l+= r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l,\
+    \ U r) const { return l-= r, l >> C ? l + (M) : l; }\n#define SGN(U) \\\n static\
     \ CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\
     \n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
     \ B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE\
@@ -125,62 +124,77 @@ data:
     \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
     \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
     \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 3 \"src/Math/ModInt_Exp.hpp\"\
-    \ntemplate <uint64_t MOD> class ModInt_Exp {\n static_assert(MOD < 1uLL << 63,\
-    \ \"MOD must be smaller than 2^63\");\n using Uint= std::conditional_t < MOD<(1ull\
-    \ << 32), uint32_t, uint64_t>;\n using DUint= std::conditional_t<std::is_same_v<Uint,\
-    \ uint64_t>, __uint128_t, uint64_t>;\n using mod_t= ModInt_Exp;\n static constexpr\
-    \ inline Uint mod(DUint x) { return x < MOD * 2 ? Uint(x) : Uint(x % MOD) + MOD;\
-    \ }\n static constexpr inline Uint mul(Uint a, Uint b) { return mod(DUint(a) *\
-    \ b); }\n static constexpr inline Uint pow(Uint b, Uint k) {\n  for (Uint ret(1);;\
-    \ b= mul(b, b))\n   if (k & 1 ? ret= mul(ret, b) : 0; !(k>>= 1)) return ret;\n\
-    \ }\n static constexpr inline uint64_t f(uint64_t x) {\n  uint64_t ret= 1, i=\
-    \ 0, tmp= 1;\n  for (const auto &[p, e]: Factors(x)) {\n   for (tmp= p - 1, i=\
-    \ e - (p == 2 && e > 3); --i;) tmp*= p;\n   ret*= tmp / binary_gcd(ret, tmp);\n\
-    \  }\n  return ret;\n }\npublic:\n Uint a;\n ModInt_Exp<f(MOD)> b;\n constexpr\
-    \ ModInt_Exp()= default;\n constexpr ModInt_Exp(uint64_t x): a(mod(x)), b(x) {}\n\
-    \ constexpr ModInt_Exp(Uint a_, ModInt_Exp<f(MOD)> b_): a(a_), b(b_) {}\n constexpr\
-    \ Uint val() const { return a < MOD ? a : a - MOD; }\n constexpr mod_t &operator*=(const\
-    \ mod_t &r) { return a= mul(a, r.a), b*= r.b, *this; }\n constexpr mod_t &operator+=(const\
-    \ mod_t &r) { return a-= MOD & -((a+= r.a) >= MOD * 2), b+= r.b, *this; }\n constexpr\
-    \ mod_t operator*(const mod_t &r) const { return mod_t(*this)*= r; }\n constexpr\
-    \ mod_t operator+(const mod_t &r) const { return mod_t(*this)+= r; }\n constexpr\
-    \ mod_t pow(const mod_t &r) const { return mod_t{pow(a, r.b.a), b.pow(r.b)}; };\n\
-    };\ntemplate <> struct ModInt_Exp<1> {\n using mod_t= ModInt_Exp;\n bool a;\n\
-    \ constexpr ModInt_Exp(): a(0) {}\n constexpr ModInt_Exp(uint64_t x): a(x) {}\n\
-    \ constexpr uint32_t val() { return 0; }\n constexpr mod_t &operator*=(const mod_t\
-    \ &r) { return a&= r.a, *this; }\n constexpr mod_t &operator+=(const mod_t &r)\
-    \ { return a|= r.a, *this; }\n constexpr mod_t operator*(const mod_t &r) const\
-    \ { return mod_t(*this)*= r; }\n constexpr mod_t operator+(const mod_t &r) const\
-    \ { return mod_t(*this)+= r; }\n constexpr mod_t pow(const mod_t &r) const { return\
-    \ {a || !r.a}; };\n};\ntemplate <uint64_t MOD> std::ostream &operator<<(std::ostream\
-    \ &os, const ModInt_Exp<MOD> &r) { return os << r.val(); }\ntemplate <uint64_t\
-    \ MOD> std::istream &operator>>(std::istream &is, ModInt_Exp<MOD> &r) {\n uint64_t\
-    \ v;\n return is >> v, r= ModInt_Exp<MOD>(v), is;\n}\n#line 4 \"test/atcoder/abc228_e.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt_Exp<998244353>;\n Mint n, k, m;\n cin >> n >> k >> m;\n cout\
-    \ << m.pow(k.pow(n)) << endl;\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/abc228/tasks/abc228_e\"\n#include\
-    \ <iostream>\n#include \"src/Math/ModInt_Exp.hpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt_Exp<998244353>;\n\
-    \ Mint n, k, m;\n cin >> n >> k >> m;\n cout << m.pow(k.pow(n)) << endl;\n return\
-    \ 0;\n}"
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"src/Math/OrderFp.hpp\"\
+    \nnamespace math_internal {\nclass OrderFp {\n u64 p;\n std::array<u64, 17> prod;\n\
+    \ template <class Uint, class MP> constexpr Uint p_rt() const {\n  const MP md(p);\n\
+    \  for (Uint ret= 2, one= md.set(1), ng= 0, m= p - 1;; ++ret) {\n   Uint a= md.set(ret);\n\
+    \   for (auto [q, e]: factors)\n    if ((ng= (md.norm(pow(a, m / q, md)) == one)))\
+    \ break;\n   if (!ng) return ret;\n  }\n }\n template <class Uint, class MP> constexpr\
+    \ Uint ord_(u8 l, u8 r, Uint x, const MP &md) const {\n  Uint ret= 1;\n  if (r\
+    \ - l == 1) {\n   Uint one= md.set(1);\n   auto [q, e]= factors[l];\n   for (u8\
+    \ i= e; i--; ret*= q, x= pow(x, q, md))\n    if (x == one) break;\n   return ret;\n\
+    \  }\n  u8 m= (l + r) / 2;\n  return ord_(l, m, pow(x, prod[r] / prod[m], md),\
+    \ md) * ord_(m, r, pow(x, prod[m] / prod[l], md), md);\n }\n template <class Uint,\
+    \ class MP> constexpr Uint ord(Uint x) const {\n  const MP md(p);\n  return ord_(0,\
+    \ factors.size(), md.set(x), md);\n }\npublic:\n Factors factors;\n constexpr\
+    \ OrderFp(u64 p): p(p), prod({1}), factors(p - 1) {\n  assert(is_prime(p));\n\
+    \  for (u8 i= 0, d= factors.size(); i < d; ++i) {\n   auto [q, e]= factors[i];\n\
+    \   prod[i + 1]= prod[i];\n   for (u8 j= e; j--;) prod[i + 1]*= q;\n  }\n }\n\
+    \ constexpr u64 primitive_root() const {\n  if (p == 2) return 1;\n  if (p < (1\
+    \ << 30)) return p_rt<u32, MP_Mo<u32, u64, 32, 31>>();\n  if (p < (1ull << 62))\
+    \ return p_rt<u64, MP_Mo<u64, u128, 64, 63>>();\n  return p_rt<u64, MP_D2B1>();\n\
+    \ }\n constexpr u64 operator()(u64 x) const {\n  if (x%= p; !x) return 0;\n  if\
+    \ (x == 1) return 1;\n  if (p < (1 << 30)) return ord<u32, MP_Mo<u32, u64, 32,\
+    \ 31>>(x);\n  if (p < (1ull << 62)) return ord<u64, MP_Mo<u64, u128, 64, 63>>(x);\n\
+    \  return ord<u64, MP_D2B1>(x);\n }\n};\n}\nusing math_internal::OrderFp;\n"
+  code: "#pragma once\n#include <array>\n#include \"src/Math/Factors.hpp\"\nnamespace\
+    \ math_internal {\nclass OrderFp {\n u64 p;\n std::array<u64, 17> prod;\n template\
+    \ <class Uint, class MP> constexpr Uint p_rt() const {\n  const MP md(p);\n  for\
+    \ (Uint ret= 2, one= md.set(1), ng= 0, m= p - 1;; ++ret) {\n   Uint a= md.set(ret);\n\
+    \   for (auto [q, e]: factors)\n    if ((ng= (md.norm(pow(a, m / q, md)) == one)))\
+    \ break;\n   if (!ng) return ret;\n  }\n }\n template <class Uint, class MP> constexpr\
+    \ Uint ord_(u8 l, u8 r, Uint x, const MP &md) const {\n  Uint ret= 1;\n  if (r\
+    \ - l == 1) {\n   Uint one= md.set(1);\n   auto [q, e]= factors[l];\n   for (u8\
+    \ i= e; i--; ret*= q, x= pow(x, q, md))\n    if (x == one) break;\n   return ret;\n\
+    \  }\n  u8 m= (l + r) / 2;\n  return ord_(l, m, pow(x, prod[r] / prod[m], md),\
+    \ md) * ord_(m, r, pow(x, prod[m] / prod[l], md), md);\n }\n template <class Uint,\
+    \ class MP> constexpr Uint ord(Uint x) const {\n  const MP md(p);\n  return ord_(0,\
+    \ factors.size(), md.set(x), md);\n }\npublic:\n Factors factors;\n constexpr\
+    \ OrderFp(u64 p): p(p), prod({1}), factors(p - 1) {\n  assert(is_prime(p));\n\
+    \  for (u8 i= 0, d= factors.size(); i < d; ++i) {\n   auto [q, e]= factors[i];\n\
+    \   prod[i + 1]= prod[i];\n   for (u8 j= e; j--;) prod[i + 1]*= q;\n  }\n }\n\
+    \ constexpr u64 primitive_root() const {\n  if (p == 2) return 1;\n  if (p < (1\
+    \ << 30)) return p_rt<u32, MP_Mo<u32, u64, 32, 31>>();\n  if (p < (1ull << 62))\
+    \ return p_rt<u64, MP_Mo<u64, u128, 64, 63>>();\n  return p_rt<u64, MP_D2B1>();\n\
+    \ }\n constexpr u64 operator()(u64 x) const {\n  if (x%= p; !x) return 0;\n  if\
+    \ (x == 1) return 1;\n  if (p < (1 << 30)) return ord<u32, MP_Mo<u32, u64, 32,\
+    \ 31>>(x);\n  if (p < (1ull << 62)) return ord<u64, MP_Mo<u64, u128, 64, 63>>(x);\n\
+    \  return ord<u64, MP_D2B1>(x);\n }\n};\n}\nusing math_internal::OrderFp;"
   dependsOn:
-  - src/Math/ModInt_Exp.hpp
   - src/Math/Factors.hpp
   - src/Math/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
-  isVerificationFile: true
-  path: test/atcoder/abc228_e.test.cpp
+  isVerificationFile: false
+  path: src/Math/OrderFp.hpp
   requiredBy: []
   timestamp: '2024-02-05 18:28:29+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: test/atcoder/abc228_e.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/unit_test/constexpr_orderfp.test.cpp
+  - test/yosupo/primitive_root.test.cpp
+documentation_of: src/Math/OrderFp.hpp
 layout: document
-redirect_from:
-- /verify/test/atcoder/abc228_e.test.cpp
-- /verify/test/atcoder/abc228_e.test.cpp.html
-title: test/atcoder/abc228_e.test.cpp
+title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
 ---
+
+`constexpr` できる.
+
+## メンバ関数
+
+| 名前 | 概要 | 計算量  |
+| ---| --- | ---|
+| `OrderFp(p)` | コンストラクタ. <br> 引数の $p$ が素数でないと `assert` で落ちる. | $\mathcal{O} \left(p^{1/4}\right) $  |
+| `primitive_root()` | 素数 $p$ の原始根の一つを返す.| $\mathcal{O} \left((\log p)^2 \right) $ |
+| `operator()(x)` | $x$ の位数 $\mathrm{ord}_p(x)$ を返す. <br> $x\equiv 0 \ (\mathrm{mod} \ p)$ なら $0$ を返す. |  $\mathcal{O} \left( \log p \log \log p\right) $ |
+

@@ -25,12 +25,15 @@ data:
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc179_d.test.cpp
+    title: test/atcoder/abc179_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc236_ex.test.cpp
     title: test/atcoder/abc236_ex.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -134,6 +137,7 @@ data:
   - test/atcoder/abc236_ex.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - test/atcoder/abc179_d.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/binomial_coefficient_prime_mod.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp
@@ -144,8 +148,5 @@ data:
   - test/yosupo/inv_of_sparse_FPS.test.cpp
 documentation_of: src/Math/FactorialPrecalculation.hpp
 layout: document
-redirect_from:
-- /library/src/Math/FactorialPrecalculation.hpp
-- /library/src/Math/FactorialPrecalculation.hpp.html
-title: src/Math/FactorialPrecalculation.hpp
+title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\mathbb{F}_p$)"
 ---

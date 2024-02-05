@@ -16,9 +16,12 @@ data:
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc179_d.test.cpp
+    title: test/atcoder/abc179_d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':heavy_check_mark:'
@@ -162,6 +165,7 @@ data:
   - test/yukicoder/1939.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - test/atcoder/abc179_d.test.cpp
   - test/yosupo/sqrt_of_FPS.test.cpp
   - test/yosupo/pow_of_sparse_FPS.test.cpp
   - test/yosupo/sqrt_of_sparse_FPS.test.cpp

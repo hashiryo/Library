@@ -28,15 +28,15 @@ data:
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1939
+    PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_d
     links:
-    - https://yukicoder.me/problems/no/1939
-  bundledCode: "#line 1 \"test/yukicoder/1939.test.cpp\"\n#define PROBLEM \"https://yukicoder.me/problems/no/1939\"\
+    - https://atcoder.jp/contests/abc179/tasks/abc179_d
+  bundledCode: "#line 1 \"test/atcoder/abc179_d.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_d\"\
     \n#include <iostream>\n#include <vector>\n#line 2 \"src/Math/mod_inv.hpp\"\n#include\
     \ <type_traits>\n#include <cassert>\ntemplate <class Int> constexpr inline Int\
     \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
@@ -228,18 +228,20 @@ data:
     \ <class mod_t> std::vector<mod_t> sqrt(const std::vector<mod_t>& f, int N) {\
     \ return sqrt_of_div<mod_t>(f, {1}, N); }\n// exp(f), O(N S_f)\ntemplate <class\
     \ mod_t> std::vector<mod_t> exp(const std::vector<mod_t>& f, int N) { return exp_of_div<mod_t>(f,\
-    \ {1}, N); }\n}\n#line 6 \"test/yukicoder/1939.test.cpp\"\nusing namespace std;\n\
-    int main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint= ModInt<998244353>;\n\
-    \ int N, M;\n cin >> N >> M;\n std::vector<Mint> f(N + 1);\n f[0]= 1;\n for (int\
-    \ i= 0; i < M; i++) {\n  int l;\n  cin >> l;\n  f[l]= 1;\n }\n auto g= sfps::pow(f,\
-    \ N + 1, N);\n cout << g[N] / (N + 1) << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1939\"\n#include <iostream>\n\
-    #include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/sparse_fps.hpp\"\
-    \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n int N, M;\n cin >> N >> M;\n std::vector<Mint>\
-    \ f(N + 1);\n f[0]= 1;\n for (int i= 0; i < M; i++) {\n  int l;\n  cin >> l;\n\
-    \  f[l]= 1;\n }\n auto g= sfps::pow(f, N + 1, N);\n cout << g[N] / (N + 1) <<\
-    \ '\\n';\n return 0;\n}"
+    \ {1}, N); }\n}\n#line 6 \"test/atcoder/abc179_d.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ int N, K;\n cin >> N >> K;\n vector<Mint> num= {1, -1}, den(N + 2);\n den[0]=\
+    \ 1, den[1]= -1;\n for (int i= 0; i < K; ++i) {\n  int L, R;\n  cin >> L >> R;\n\
+    \  den[L]-= 1;\n  den[R + 1]+= 1;\n }\n cout << sfps::div(num, den, N - 1)[N -\
+    \ 1] << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_d\"\n#include\
+    \ <iostream>\n#include <vector>\n#include \"src/Math/ModInt.hpp\"\n#include \"\
+    src/Math/sparse_fps.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n int N, K;\n cin\
+    \ >> N >> K;\n vector<Mint> num= {1, -1}, den(N + 2);\n den[0]= 1, den[1]= -1;\n\
+    \ for (int i= 0; i < K; ++i) {\n  int L, R;\n  cin >> L >> R;\n  den[L]-= 1;\n\
+    \  den[R + 1]+= 1;\n }\n cout << sfps::div(num, den, N - 1)[N - 1] << '\\n';\n\
+    \ return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -250,15 +252,15 @@ data:
   - src/Math/mod_sqrt.hpp
   - src/Math/is_prime.hpp
   isVerificationFile: true
-  path: test/yukicoder/1939.test.cpp
+  path: test/atcoder/abc179_d.test.cpp
   requiredBy: []
-  timestamp: '2024-02-03 19:27:26+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-05 18:28:29+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yukicoder/1939.test.cpp
+documentation_of: test/atcoder/abc179_d.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/1939.test.cpp
-- /verify/test/yukicoder/1939.test.cpp.html
-title: test/yukicoder/1939.test.cpp
+- /verify/test/atcoder/abc179_d.test.cpp
+- /verify/test/atcoder/abc179_d.test.cpp.html
+title: test/atcoder/abc179_d.test.cpp
 ---
