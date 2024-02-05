@@ -42,13 +42,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_f.RH.test.cpp
     title: test/atcoder/abc135_f.RH.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc141_e.RH.test.cpp
     title: test/atcoder/abc141_e.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc150_f.RH.Nimber.test.cpp
     title: test/atcoder/abc150_f.RH.Nimber.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc272_f.RH.test.cpp
     title: test/atcoder/abc272_f.RH.test.cpp
   - icon: ':x:'

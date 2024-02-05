@@ -21,14 +21,14 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
   - icon: ':question:'
     path: src/NumberTheory/Sieve.hpp
     title: "\u7DDA\u5F62\u7BE9 \u4ED6"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -217,7 +217,7 @@ data:
     \ N= std::max(a.size(), b.size());\n  a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
     \ a;\n }\n};\n#line 4 \"src/FFT/sample_points_shift.hpp\"\n#include <numeric>\n\
-    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 3 \"src/Math/is_prime.hpp\"\
+    #line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n#line 3 \"src/NumberTheory/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
@@ -413,11 +413,11 @@ data:
   - src/NumberTheory/Sieve.hpp
   - src/FFT/sample_points_shift.hpp
   - src/FFT/NTT.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   isVerificationFile: true
   path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2024-02-03 19:27:26+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_exponential_times_polynomial.test.cpp

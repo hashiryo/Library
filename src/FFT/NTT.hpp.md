@@ -11,16 +11,16 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy:
   - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -85,13 +85,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
   - icon: ':x:'
@@ -272,7 +272,7 @@ data:
     \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
     \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
     \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
-    \ SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ SGN\n#undef CE\n}\n#line 3 \"src/NumberTheory/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -438,7 +438,7 @@ data:
     template <class T, size_t LM, int id= 0> struct GlobalArray {\n static inline\
     \ T bf[LM];\n};\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1,\
     \ n|= n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n"
-  code: "#pragma once\n#include <array>\n#include <limits>\n#include \"src/Math/is_prime.hpp\"\
+  code: "#pragma once\n#include <array>\n#include <limits>\n#include \"src/NumberTheory/is_prime.hpp\"\
     \n#include \"src/Math/ModInt.hpp\"\ntemplate <class mod_t, size_t LM> mod_t get_inv(int\
     \ n) {\n static_assert(is_modint_v<mod_t>);\n static const auto m= mod_t::mod();\n\
     \ static mod_t dat[LM];\n static int l= 1;\n if (l == 1) dat[l++]= 1;\n while\
@@ -557,7 +557,7 @@ data:
     \ T bf[LM];\n};\nconstexpr unsigned pw2(unsigned n) { return --n, n|= n >> 1,\
     \ n|= n >> 2, n|= n >> 4, n|= n >> 8, n|= n >> 16, ++n; }\n"
   dependsOn:
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -580,7 +580,7 @@ data:
   - src/FFT/extgcd.hpp
   - src/FFT/sample_points_shift.hpp
   - src/FFT/FormalPowerSeries.hpp
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1145.test.cpp

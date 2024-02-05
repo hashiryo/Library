@@ -15,22 +15,22 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_d
@@ -132,7 +132,7 @@ data:
     \ < 0 || n < r ? mod_t(0) : fact(n) * finv(n - r); }\n // [x^r] (1 + x)^n\n static\
     \ inline mod_t nCr(int n, int r) { return r < 0 || n < r ? mod_t(0) : fact(n)\
     \ * finv(n - r) * finv(r); }\n // [x^r] (1 - x)^{-n}\n static inline mod_t nHr(int\
-    \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};\n#line 3 \"src/Math/is_prime.hpp\"\
+    \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};\n#line 3 \"src/NumberTheory/is_prime.hpp\"\
     \nnamespace math_internal {\ntemplate <class Uint, class MP, u64... args> constexpr\
     \ bool miller_rabin(Uint n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n\
     \ - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a:\
@@ -250,12 +250,12 @@ data:
   - src/Math/sparse_fps.hpp
   - src/Math/FactorialPrecalculation.hpp
   - src/Math/mod_sqrt.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   isVerificationFile: true
   path: test/atcoder/abc179_d.test.cpp
   requiredBy: []
-  timestamp: '2024-02-05 18:28:29+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-05 22:57:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc179_d.test.cpp
 layout: document

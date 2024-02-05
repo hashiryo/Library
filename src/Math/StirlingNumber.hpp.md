@@ -5,19 +5,19 @@ data:
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
+    path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_1_small_p_large_n.test.cpp
     title: test/yosupo/stirling_1_small_p_large_n.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/StirlingNumber.hpp\"\n#include <vector>\n#include\
@@ -62,7 +62,7 @@ data:
     \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
     \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
     \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
-    \ SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ SGN\n#undef CE\n}\n#line 3 \"src/NumberTheory/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -98,11 +98,11 @@ data:
     \ (j > b) return 0;\n  return b == p - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j]\
     \ % p;\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <algorithm>\n#include <cassert>\n\
-    #include <cstdint>\n#include \"src/Math/is_prime.hpp\"\nclass StirlingNumber {\n\
-    \ const uint16_t p;\n std::vector<std::vector<uint16_t>> c, s1, s2;\n void buildS1()\
-    \ {\n  s1.resize(p), s1[0]= {1};\n  for (int i= 1, j, t; i < p; s1[i][i]= 1, i++)\n\
-    \   for (s1[i].resize(i + 1, 0), j= 1, t= p - i + 1; j < i; j++) s1[i][j]= (t\
-    \ * s1[i - 1][j] + s1[i - 1][j - 1]) % p;\n }\n void buildS2() {\n  s2.resize(p),\
+    #include <cstdint>\n#include \"src/NumberTheory/is_prime.hpp\"\nclass StirlingNumber\
+    \ {\n const uint16_t p;\n std::vector<std::vector<uint16_t>> c, s1, s2;\n void\
+    \ buildS1() {\n  s1.resize(p), s1[0]= {1};\n  for (int i= 1, j, t; i < p; s1[i][i]=\
+    \ 1, i++)\n   for (s1[i].resize(i + 1, 0), j= 1, t= p - i + 1; j < i; j++) s1[i][j]=\
+    \ (t * s1[i - 1][j] + s1[i - 1][j - 1]) % p;\n }\n void buildS2() {\n  s2.resize(p),\
     \ s2[0]= {1};\n  for (int i= 1, j; i < p; s2[i][i]= 1, i++)\n   for (s2[i].resize(i\
     \ + 1, 0), j= 1; j < i; j++) s2[i][j]= (j * s2[i - 1][j] + s2[i - 1][j - 1]) %\
     \ p;\n }\npublic:\n StirlingNumber(uint32_t p_, bool first= true, bool second=\
@@ -122,13 +122,13 @@ data:
     \ j= k % p, b= (n - i) - a * (p - 1);\n  if (j > b) return 0;\n  return b == p\
     \ - 1 && !j ? nCk(a, i - 1) : nCk(a, i) * s2[b][j] % p;\n }\n};"
   dependsOn:
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   isVerificationFile: false
   path: src/Math/StirlingNumber.hpp
   requiredBy: []
-  timestamp: '2023-11-24 18:27:47+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-02-05 22:57:52+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/stirling_2_small_p_large_n.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp

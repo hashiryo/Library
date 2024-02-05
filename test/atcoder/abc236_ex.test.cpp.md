@@ -130,21 +130,21 @@ data:
     \ * finv(n - r) * finv(r); }\n // [x^r] (1 - x)^{-n}\n static inline mod_t nHr(int\
     \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};\n#line 2 \"src/Math/set_power_series.hpp\"\
     \n#include <algorithm>\n#line 5 \"src/Math/set_power_series.hpp\"\nnamespace sps\
-    \ {\nnamespace sps_internal {\nusing namespace std;\n#define ZETA(s, l) \\\n if\
-    \ constexpr (!t) A[s + l]+= A[s]; \\\n else if constexpr (t == 1) A[s + l]-= A[s];\
-    \ \\\n else if constexpr (t == 2) A[s]+= A[s + l]; \\\n else if constexpr (t ==\
-    \ 3) A[s]-= A[s + l]; \\\n else tie(A[s], A[s + l])= make_pair(A[s] + A[s + l],\
-    \ A[s] - A[s + l]);\ntemplate <int t, class T> void rec(T A[], int l) {\n if (l\
-    \ > 127) {\n  l>>= 1, rec<t>(A, l), rec<t>(A + l, l);\n  for (int s= 0; s < l;\
-    \ ++s) ZETA(s, l);\n } else\n  for (int k= 1; k < l; k<<= 1)\n   for (int i= 0;\
-    \ i < l; i+= k + k)\n    for (int j= 0; j < k; ++j) ZETA(i + j, k);\n}\n#undef\
-    \ ZETA\n/*  f -> g s.t. g[S] = sum_{T subseteq S} f[T]  O(n 2^n) */\ntemplate\
+    \ {\nnamespace sps_internal {\nusing namespace std;\n#define _ZETA(s, l) \\\n\
+    \ if constexpr (!t) A[s + l]+= A[s]; \\\n else if constexpr (t == 1) A[s + l]-=\
+    \ A[s]; \\\n else if constexpr (t == 2) A[s]+= A[s + l]; \\\n else if constexpr\
+    \ (t == 3) A[s]-= A[s + l]; \\\n else tie(A[s], A[s + l])= make_pair(A[s] + A[s\
+    \ + l], A[s] - A[s + l]);\ntemplate <int t, class T> void rec(T A[], int l) {\n\
+    \ if (l > 127) {\n  l>>= 1, rec<t>(A, l), rec<t>(A + l, l);\n  for (int s= 0;\
+    \ s < l; ++s) _ZETA(s, l);\n } else\n  for (int k= 1; k < l; k<<= 1)\n   for (int\
+    \ i= 0; i < l; i+= k + k)\n    for (int j= 0; j < k; ++j) _ZETA(i + j, k);\n}\n\
+    #undef _ZETA\n/*  f -> g s.t. g[S] = sum_{T subseteq S} f[T]  O(n 2^n) */\ntemplate\
     \ <class T> void subset_zeta(vector<T>& f) { rec<0>(f.data(), f.size()); }\n/*\
-    \  f -> g s.t. g[S] = sum_{S subseteq T} f[T]  O(n 2^n) */\ntemplate <class T>\
+    \  f -> h s.t. f[S] = sum_{T subseteq S} h[T]  O(n 2^n) */\ntemplate <class T>\
     \ void subset_mobius(vector<T>& f) { rec<1>(f.data(), f.size()); }\n/*  f -> g\
-    \ s.t. f[S] = sum_{T subseteq S} g[T]  O(n 2^n) */\ntemplate <class T> void supset_zeta(vector<T>&\
-    \ f) { rec<2>(f.data(), f.size()); }\n/*  f -> g s.t. f[S] = sum_{S subseteq T}\
-    \ g[T]  O(n 2^n) */\ntemplate <class T> void supset_mobius(vector<T>& f) { rec<3>(f.data(),\
+    \ s.t. g[S] = sum_{S subseteq T} f[T]  O(n 2^n) */\ntemplate <class T> void supset_zeta(vector<T>&\
+    \ f) { rec<2>(f.data(), f.size()); }\n/*  f -> h s.t. f[S] = sum_{S subseteq T}\
+    \ h[T]  O(n 2^n) */\ntemplate <class T> void supset_mobius(vector<T>& f) { rec<3>(f.data(),\
     \ f.size()); }\n/* h[S] = sum_{U | T == S} f[U]g[T]  O(n 2^n) */\ntemplate <class\
     \ T> vector<T> or_convolve(vector<T> f, vector<T> g) {\n subset_zeta(f), subset_zeta(g);\n\
     \ for (int s= f.size(); s--;) f[s]*= g[s];\n return subset_mobius(f), f;\n}\n\
@@ -210,39 +210,39 @@ data:
     \ __builtin_popcount(s); c <= d && d <= 2 * c)\n    for (int e= d; e--;) a[s]+=\
     \ G[e << n | s] * F[s * (n + 1) + d - e];\n  for (rec<1>(a, 1 << n), s= 1 << n;\
     \ --s;)\n   if (__builtin_popcount(s) == d) phi(s, a[s]), h[s]= a[s];\n   else\
-    \ a[s]= 0;\n }\n}\n// h[S] = phi(S, sum_{T subsetneq S} h[T]f[S/T] )   O(n^2 2^n)\n\
-    template <class T, class P> vector<T> semi_relaxed_convolve(const vector<T>& f,\
-    \ T init, const P& phi) {\n const int N= f.size(), n= __builtin_ctz(N);\n assert(!(N\
-    \ & (N - 1)));\n vector<T> h(N);\n if (h[0]= init; n < 12) {\n  for (int s= 1,\
-    \ t; s < N; phi(s, h[s]), ++s)\n   for (t= s; t; --t&= s) h[s]+= h[s ^ t] * f[t];\n\
-    \ } else oncnv_(f.data(), h.data(), phi, n);\n return h;\n}\n// h[S] = phi(S,\
-    \ 1/2 sum_{empty neq T subseteq S} h[T]h[S/T] )   O(n^2 2^n)\ntemplate <class\
-    \ T, class P> vector<T> self_relaxed_convolve(const P& phi, int n) {\n const int\
-    \ e= min(n, 12);\n int i= 0, l= 1;\n vector<T> f(1 << n);\n for (int u= 1; i <\
-    \ e; l<<= 1, ++i)\n  for (int s= 0; s < l; phi(u, f[u]), ++s, ++u)\n   for (int\
-    \ t= s; t; --t&= s) f[u]+= f[u ^ t] * f[t];\n for (; i < n; l<<= 1, ++i)\n  phi(l,\
-    \ f[l]), oncnv_(\n                    f.data(), f.data() + l, [&](int s, T& x)\
-    \ { phi(s | l, x); }, i);\n return f;\n}\n// exp(f) , \"f[empty] = 0\" is required,\
-    \  O(n^2 2^n)\ntemplate <class T> vector<T> exp(const vector<T>& f) {\n const\
-    \ int N= f.size(), n= __builtin_ctz(N), e= min(n, 11);\n assert(!(N & (N - 1))),\
-    \ assert(f[0] == 0);\n vector<T> h(N);\n int i= 0, l= 1;\n for (h[0]= 1; i < e;\
-    \ l<<= 1, ++i) cnv_na(h.data(), f.data() + l, h.data() + l, l);\n for (; i < n;\
-    \ l<<= 1, ++i) {\n  vector<T> F((i + 1) << i), G((i + 1) << i);\n  rnk_zeta(h.data(),\
-    \ F.data(), i), rnk_zeta(f.data() + l, G.data(), i), cnv_(F.data(), G.data(),\
-    \ i + 1), rnk_mobius(F.data(), h.data() + l, i);\n }\n return h;\n}\n// log(f)\
-    \ , \"f[empty] = 1\" is required,  O(n^2 2^n)\ntemplate <class T> vector<T> log(const\
-    \ vector<T>& f) {\n const int N= f.size(), n= __builtin_ctz(N), e= min(n, 12);\n\
-    \ assert(!(N & (N - 1))), assert(f[0] == 1);\n vector<T> h= f;\n int i= 0, l=\
-    \ 1;\n for (; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(), l);\n if (i <\
-    \ n) {\n  vector<T> G(n << (n - 1));\n  rnk_zeta(f.data(), G.data(), n - 1);\n\
-    \  for (; i < n; l<<= 1, ++i) {\n   vector<T> F((i + 1) << i, 0);\n   if constexpr\
-    \ (is_floating_point_v<T>) {\n    fill_n(F.data(), l, h[l]= f[l]);\n    T* a=\
-    \ F.data() + l;\n    for (int m= l; m>>= 1;) h[l | m]= a[m]= f[l | m] - h[l] *\
-    \ f[m];\n    for (int d= 2, s; d <= i; ++d) {\n     for (rec<0>(a, l), a+= (s=\
-    \ l); --s;)\n      if (int c= __builtin_popcount(s); c <= d && d <= 2 * c)\n \
-    \      for (int e= d; e--;) a[s]+= F[e << i | s] * G[s * n + d - e];\n     for\
-    \ (rec<1>(a, l), s= l; --s;)\n      if (__builtin_popcount(s) == d) h[l | s]=\
-    \ a[s]= f[l | s] - a[s];\n      else a[s]= 0;\n    }\n   } else {\n    rnk_zeta(f.data()\
+    \ a[s]= 0;\n }\n}\n// h[S] = phi(S, sum_{T subsetneq S} h[T]f[S/T] )  O(n^2 2^n)\n\
+    // phi: [](int, T&x)\ntemplate <class T, class P> vector<T> semi_relaxed_convolve(const\
+    \ vector<T>& f, T init, const P& phi) {\n const int N= f.size(), n= __builtin_ctz(N);\n\
+    \ assert(!(N & (N - 1)));\n vector<T> h(N);\n if (h[0]= init; n < 12) {\n  for\
+    \ (int s= 1, t; s < N; phi(s, h[s]), ++s)\n   for (t= s; t; --t&= s) h[s]+= h[s\
+    \ ^ t] * f[t];\n } else oncnv_(f.data(), h.data(), phi, n);\n return h;\n}\n//\
+    \ h[S] = phi(S, 1/2 sum_{empty neq T subseteq S} h[T]h[S/T] )  O(n^2 2^n)\n//\
+    \ phi: [](int, T&x)\ntemplate <class T, class P> vector<T> self_relaxed_convolve(const\
+    \ P& phi, int n) {\n const int e= min(n, 12);\n int i= 0, l= 1;\n vector<T> f(1\
+    \ << n);\n for (int u= 1; i < e; l<<= 1, ++i)\n  for (int s= 0; s < l; phi(u,\
+    \ f[u]), ++s, ++u)\n   for (int t= s; t; --t&= s) f[u]+= f[u ^ t] * f[t];\n for\
+    \ (; i < n; l<<= 1, ++i)\n  phi(l, f[l]), oncnv_(\n                    f.data(),\
+    \ f.data() + l, [&](int s, T& x) { phi(s | l, x); }, i);\n return f;\n}\n// exp(f)\
+    \ , \"f[empty] = 0\" is required,  O(n^2 2^n)\ntemplate <class T> vector<T> exp(const\
+    \ vector<T>& f) {\n const int N= f.size(), n= __builtin_ctz(N), e= min(n, 11);\n\
+    \ assert(!(N & (N - 1))), assert(f[0] == 0);\n vector<T> h(N);\n int i= 0, l=\
+    \ 1;\n for (h[0]= 1; i < e; l<<= 1, ++i) cnv_na(h.data(), f.data() + l, h.data()\
+    \ + l, l);\n for (; i < n; l<<= 1, ++i) {\n  vector<T> F((i + 1) << i), G((i +\
+    \ 1) << i);\n  rnk_zeta(h.data(), F.data(), i), rnk_zeta(f.data() + l, G.data(),\
+    \ i), cnv_(F.data(), G.data(), i + 1), rnk_mobius(F.data(), h.data() + l, i);\n\
+    \ }\n return h;\n}\n// log(f) , \"f[empty] = 1\" is required,  O(n^2 2^n)\ntemplate\
+    \ <class T> vector<T> log(const vector<T>& f) {\n const int N= f.size(), n= __builtin_ctz(N),\
+    \ e= min(n, 12);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n vector<T> h= f;\n\
+    \ int i= 0, l= 1;\n for (; i < e; l<<= 1, ++i) div_na(h.data() + l, f.data(),\
+    \ l);\n if (i < n) {\n  vector<T> G(n << (n - 1));\n  rnk_zeta(f.data(), G.data(),\
+    \ n - 1);\n  for (; i < n; l<<= 1, ++i) {\n   vector<T> F((i + 1) << i, 0);\n\
+    \   if constexpr (is_floating_point_v<T>) {\n    fill_n(F.data(), l, h[l]= f[l]);\n\
+    \    T* a= F.data() + l;\n    for (int m= l; m>>= 1;) h[l | m]= a[m]= f[l | m]\
+    \ - h[l] * f[m];\n    for (int d= 2, s; d <= i; ++d) {\n     for (rec<0>(a, l),\
+    \ a+= (s= l); --s;)\n      if (int c= __builtin_popcount(s); c <= d && d <= 2\
+    \ * c)\n       for (int e= d; e--;) a[s]+= F[e << i | s] * G[s * n + d - e];\n\
+    \     for (rec<1>(a, l), s= l; --s;)\n      if (__builtin_popcount(s) == d) h[l\
+    \ | s]= a[s]= f[l | s] - a[s];\n      else a[s]= 0;\n    }\n   } else {\n    rnk_zeta(f.data()\
     \ + l, F.data(), i);\n    for (int s= l; s--;) {\n     T t, *a= F.data() + s *\
     \ (i + 1), *b= G.data() + s * n;\n     for (int d= 0, c= __builtin_popcount(s),\
     \ e; d++ < i; a[d]-= t)\n      for (t= 0, e= max(0, d - c); e < d; ++e) t+= a[e]\
@@ -292,26 +292,26 @@ data:
     \ 8 \"test/atcoder/abc236_ex.test.cpp\"\nusing namespace std;\nsigned main() {\n\
     \ cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n using\
     \ F= FactorialPrecalculation<Mint>;\n long long N, M;\n cin >> N >> M;\n long\
-    \ long D[N];\n for (int i= 0; i < N; ++i) cin >> D[i];\n long long S= 1 << N;\n\
-    \ long long f[S]= {1};\n for (int i= 0, I= 1; i < N; ++i, I<<= 1)\n  for (int\
-    \ s= 0; s < I; ++s) {\n   long long g= gcd(f[s], D[i]), a= D[i] / g;\n   f[s |\
-    \ I]= a <= M / f[s] ? a * f[s] : M + 1;\n  }\n vector<Mint> g(S);\n for (int s=\
-    \ 1; s < S; ++s) {\n  int n= __builtin_popcount(s);\n  Mint tmp= F::fact(n - 1)\
-    \ * (M / f[s]);\n  g[s]= n & 1 ? tmp : -tmp;\n }\n cout << sps::exp(g)[S - 1]\
-    \ << '\\n';\n return 0;\n}\n"
+    \ long S= 1 << N;\n long long D[N], f[S];\n for (int i= 0; i < N; ++i) cin >>\
+    \ D[i];\n f[0]= 1;\n for (int i= 0, I= 1; i < N; ++i, I<<= 1)\n  for (int s= 0;\
+    \ s < I; ++s) {\n   long long g= gcd(f[s], D[i]), a= D[i] / g;\n   f[s | I]= a\
+    \ <= M / f[s] ? a * f[s] : M + 1;\n  }\n vector<Mint> g(S);\n for (int s= 1; s\
+    \ < S; ++s) {\n  int n= __builtin_popcount(s);\n  Mint tmp= F::fact(n - 1) * (M\
+    \ / f[s]);\n  g[s]= n & 1 ? tmp : -tmp;\n }\n cout << sps::exp(g)[S - 1] << '\\\
+    n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc236/tasks/abc236_Ex\"\n\
     // https://atcoder.jp/contests/abc236/tasks/abc236_h\n#include <iostream>\n#include\
     \ <numeric>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/Math/FactorialPrecalculation.hpp\"\
     \n#include \"src/Math/set_power_series.hpp\"\nusing namespace std;\nsigned main()\
     \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
     \ using F= FactorialPrecalculation<Mint>;\n long long N, M;\n cin >> N >> M;\n\
-    \ long long D[N];\n for (int i= 0; i < N; ++i) cin >> D[i];\n long long S= 1 <<\
-    \ N;\n long long f[S]= {1};\n for (int i= 0, I= 1; i < N; ++i, I<<= 1)\n  for\
-    \ (int s= 0; s < I; ++s) {\n   long long g= gcd(f[s], D[i]), a= D[i] / g;\n  \
-    \ f[s | I]= a <= M / f[s] ? a * f[s] : M + 1;\n  }\n vector<Mint> g(S);\n for\
-    \ (int s= 1; s < S; ++s) {\n  int n= __builtin_popcount(s);\n  Mint tmp= F::fact(n\
-    \ - 1) * (M / f[s]);\n  g[s]= n & 1 ? tmp : -tmp;\n }\n cout << sps::exp(g)[S\
-    \ - 1] << '\\n';\n return 0;\n}"
+    \ long long S= 1 << N;\n long long D[N], f[S];\n for (int i= 0; i < N; ++i) cin\
+    \ >> D[i];\n f[0]= 1;\n for (int i= 0, I= 1; i < N; ++i, I<<= 1)\n  for (int s=\
+    \ 0; s < I; ++s) {\n   long long g= gcd(f[s], D[i]), a= D[i] / g;\n   f[s | I]=\
+    \ a <= M / f[s] ? a * f[s] : M + 1;\n  }\n vector<Mint> g(S);\n for (int s= 1;\
+    \ s < S; ++s) {\n  int n= __builtin_popcount(s);\n  Mint tmp= F::fact(n - 1) *\
+    \ (M / f[s]);\n  g[s]= n & 1 ? tmp : -tmp;\n }\n cout << sps::exp(g)[S - 1] <<\
+    \ '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -322,7 +322,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_ex.test.cpp
   requiredBy: []
-  timestamp: '2024-02-05 15:53:03+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc236_ex.test.cpp

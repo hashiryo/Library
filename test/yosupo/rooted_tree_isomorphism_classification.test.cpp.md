@@ -17,15 +17,15 @@ data:
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
-    path: src/Math/CartesianProduct.hpp
-    title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\\
-      times\\cdots\\times K_n$)"
-  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/Misc/Pointwise.hpp
+    title: "\u4F53\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\times\\cdots\\\
+      times K_n$)"
   - icon: ':question:'
     path: src/Misc/compress.hpp
     title: "\u5EA7\u6A19\u5727\u7E2E"
@@ -231,15 +231,15 @@ data:
     \ rng() {\n static uint64_t x= 10150724397891781847ULL * std::random_device{}();\n\
     \ return x^= x << 7, x^= x >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng()\
     \ % lim; }\nint64_t rng(int64_t l, int64_t r) { return l + rng() % (r - l); }\n\
-    #line 4 \"src/Math/CartesianProduct.hpp\"\n#include <utility>\ntemplate <class...\
-    \ Ks> struct CartesianProduct: std::tuple<Ks...> {\n static constexpr int N= sizeof...(Ks);\n\
-    \ using Self= CartesianProduct;\n using std::tuple<Ks...>::tuple;\n template <class\
-    \ T> CartesianProduct(const T &v) { fill(v, std::make_index_sequence<N>()); }\n\
-    \ template <class T, std::size_t... I> std::array<int, N> fill(const T &v, std::index_sequence<I...>)\
+    #line 4 \"src/Misc/Pointwise.hpp\"\n#include <utility>\ntemplate <class... Ks>\
+    \ struct Pointwise: std::tuple<Ks...> {\n static constexpr int N= sizeof...(Ks);\n\
+    \ using Self= Pointwise;\n using std::tuple<Ks...>::tuple;\n template <class T>\
+    \ Pointwise(const T &v) { fill(v, std::make_index_sequence<N>()); }\n template\
+    \ <class T, std::size_t... I> std::array<int, N> fill(const T &v, std::index_sequence<I...>)\
     \ { return {{(void(std::get<I>(*this)= v), 0)...}}; }\n#define HELPER(name, op)\
     \ \\\n template <std::size_t... I> std::array<int, N> name(const Self &y, std::index_sequence<I...>)\
     \ { return {{(void(std::get<I>(*this) op##= std::get<I>(y)), 0)...}}; } \\\n Self\
-    \ &operator op##=(const Self &r) { return name(r, std::make_index_sequence<N>()),\
+    \ &operator op##=(const Self & r) { return name(r, std::make_index_sequence<N>()),\
     \ *this; }\n HELPER(add_assign, +)\n HELPER(dif_assign, -)\n HELPER(mul_assign,\
     \ *)\n HELPER(div_assign, /)\n#undef HELPER\n Self operator+(const Self &r) const\
     \ { return Self(*this)+= r; }\n Self operator-(const Self &r) const { return Self(*this)-=\
@@ -248,27 +248,27 @@ data:
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N;\n cin >> N;\n Tree tree(N);\n for (int i= 1; i < N; ++i) {\n  int p;\n\
     \  cin >> p;\n  tree.add_edge(p, i);\n }\n tree.build(0);\n using Mint= ModInt<(1ll\
-    \ << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n using Data= pair<int,\
-    \ K>;\n vector<K> hash(N);\n for (auto& x: hash) x= {rng(2, Mint::mod() - 1),\
-    \ rng(2, Mint::mod() - 1)};\n auto f_ee= [&](const Data& l, const Data& r) { return\
-    \ Data{max(l.first, r.first), l.second * r.second}; };\n auto f_ve= [&](const\
-    \ Data& d, int, auto) { return Data{d.first, d.second + hash[d.first]}; };\n auto\
-    \ f_ev= [&](const Data& d, int) { return Data{d.first + 1, d.second}; };\n auto\
-    \ dp= rerooting<Data>(tree, f_ee, f_ve, f_ev, Data{0, K{1, 1}});\n vector<K> ans(N);\n\
-    \ for (int i= 0; i < N; ++i) ans[i]= dp.get(0, i).second;\n auto vec= ans;\n auto\
-    \ id= compress(vec);\n cout << vec.size() << '\\n';\n for (int i= 0; i < N; ++i)\
-    \ cout << id(ans[i]) << \" \\n\"[i == N - 1];\n return 0;\n}\n"
+    \ << 61) - 1>;\n using K= Pointwise<Mint, Mint>;\n using Data= pair<int, K>;\n\
+    \ vector<K> hash(N);\n for (auto& x: hash) x= {rng(2, Mint::mod() - 1), rng(2,\
+    \ Mint::mod() - 1)};\n auto f_ee= [&](const Data& l, const Data& r) { return Data{max(l.first,\
+    \ r.first), l.second * r.second}; };\n auto f_ve= [&](const Data& d, int, auto)\
+    \ { return Data{d.first, d.second + hash[d.first]}; };\n auto f_ev= [&](const\
+    \ Data& d, int) { return Data{d.first + 1, d.second}; };\n auto dp= rerooting<Data>(tree,\
+    \ f_ee, f_ve, f_ev, Data{0, K{1, 1}});\n vector<K> ans(N);\n for (int i= 0; i\
+    \ < N; ++i) ans[i]= dp.get(0, i).second;\n auto vec= ans;\n auto id= compress(vec);\n\
+    \ cout << vec.size() << '\\n';\n for (int i= 0; i < N; ++i) cout << id(ans[i])\
+    \ << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rooted_tree_isomorphism_classification\"\
     \n#include <iostream>\n#include \"src/Misc/compress.hpp\"\n#include \"src/Math/ModInt.hpp\"\
     \n#include \"src/Graph/rerooting.hpp\"\n#include \"src/Misc/rng.hpp\"\n#include\
-    \ \"src/Math/CartesianProduct.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ \"src/Misc/Pointwise.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
     \ ios::sync_with_stdio(0);\n int N;\n cin >> N;\n Tree tree(N);\n for (int i=\
     \ 1; i < N; ++i) {\n  int p;\n  cin >> p;\n  tree.add_edge(p, i);\n }\n tree.build(0);\n\
-    \ using Mint= ModInt<(1ll << 61) - 1>;\n using K= CartesianProduct<Mint, Mint>;\n\
-    \ using Data= pair<int, K>;\n vector<K> hash(N);\n for (auto& x: hash) x= {rng(2,\
-    \ Mint::mod() - 1), rng(2, Mint::mod() - 1)};\n auto f_ee= [&](const Data& l,\
-    \ const Data& r) { return Data{max(l.first, r.first), l.second * r.second}; };\n\
-    \ auto f_ve= [&](const Data& d, int, auto) { return Data{d.first, d.second + hash[d.first]};\
+    \ using Mint= ModInt<(1ll << 61) - 1>;\n using K= Pointwise<Mint, Mint>;\n using\
+    \ Data= pair<int, K>;\n vector<K> hash(N);\n for (auto& x: hash) x= {rng(2, Mint::mod()\
+    \ - 1), rng(2, Mint::mod() - 1)};\n auto f_ee= [&](const Data& l, const Data&\
+    \ r) { return Data{max(l.first, r.first), l.second * r.second}; };\n auto f_ve=\
+    \ [&](const Data& d, int, auto) { return Data{d.first, d.second + hash[d.first]};\
     \ };\n auto f_ev= [&](const Data& d, int) { return Data{d.first + 1, d.second};\
     \ };\n auto dp= rerooting<Data>(tree, f_ee, f_ve, f_ev, Data{0, K{1, 1}});\n vector<K>\
     \ ans(N);\n for (int i= 0; i < N; ++i) ans[i]= dp.get(0, i).second;\n auto vec=\
@@ -284,11 +284,11 @@ data:
   - src/Graph/Tree.hpp
   - src/DataStructure/CsrArray.hpp
   - src/Misc/rng.hpp
-  - src/Math/CartesianProduct.hpp
+  - src/Misc/Pointwise.hpp
   isVerificationFile: true
   path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/rooted_tree_isomorphism_classification.test.cpp

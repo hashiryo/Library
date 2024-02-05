@@ -17,11 +17,11 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -114,12 +114,12 @@ data:
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 3 \"src/FFT/convolve.hpp\"\
     \n#include <cmath>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include <limits>\n\
-    #line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class\
-    \ Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP\
-    \ md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1=\
-    \ md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n\
-    \   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i= s;\
-    \ p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
+    #line 3 \"src/NumberTheory/is_prime.hpp\"\nnamespace math_internal {\ntemplate\
+    \ <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n\
+    \ const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1),\
+    \ n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n;\
+    \ b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i=\
+    \ s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
     }\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1) return (n |\
     \ 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32, u64, 32, 31>,\
     \ 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64, MP_Mo<u64, u128,\
@@ -302,11 +302,11 @@ data:
   - src/Internal/modint_traits.hpp
   - src/FFT/convolve.hpp
   - src/FFT/NTT.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   isVerificationFile: true
   path: test/yosupo/convolution_large.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/convolution_large.test.cpp

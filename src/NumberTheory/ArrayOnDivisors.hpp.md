@@ -14,20 +14,18 @@ data:
     path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/abc335_g.test.cpp
+    title: test/atcoder/abc335_g.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
-    links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"test/unit_test/constexpr_factors.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n#line 2 \"\
-    src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n#line\
-    \ 5 \"src/NumberTheory/Factors.hpp\"\n#include <algorithm>\n#include <vector>\n\
-    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    links: []
+  bundledCode: "#line 2 \"src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include\
+    \ <cassert>\n#include <iostream>\n#include <algorithm>\n#include <vector>\n#line\
+    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing i64= long long;\n\
     using u64= unsigned long long;\nusing u128= __uint128_t;\n#define CE constexpr\n\
     #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
@@ -123,36 +121,95 @@ data:
     \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
     \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
     \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"test/unit_test/constexpr_factors.test.cpp\"\
-    \nusing namespace std;\nconstexpr auto f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size()\
-    \ == 3);\nstatic_assert(f[0].first == 2);\nstatic_assert(f[0].second == 2);\n\
-    static_assert(f[1].first == 3);\nstatic_assert(f[1].second == 1);\nstatic_assert(f[2].first\
-    \ == 5);\nstatic_assert(f[2].second == 1);\nconstexpr int n= totient(100);\nstatic_assert(n\
-    \ == 40);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int\
-    \ A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
-    #include \"src/NumberTheory/Factors.hpp\"\nusing namespace std;\nconstexpr auto\
-    \ f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size() == 3);\nstatic_assert(f[0].first\
-    \ == 2);\nstatic_assert(f[0].second == 2);\nstatic_assert(f[1].first == 3);\n\
-    static_assert(f[1].second == 1);\nstatic_assert(f[2].first == 5);\nstatic_assert(f[2].second\
-    \ == 1);\nconstexpr int n= totient(100);\nstatic_assert(n == 40);\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin >> A >> B;\n\
-    \ cout << A + B << '\\n';\n return 0;\n}"
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\
+    \ntemplate <class T> class ArrayOnDivisors {\n uint64_t n;\n uint8_t shift;\n\
+    \ std::vector<int> os, id;\n std::vector<std::pair<uint64_t, T>> dat;\n unsigned\
+    \ hash(uint64_t i) const { return (i * 11995408973635179863ULL) >> shift; }\n\
+    #define _UP for (int j= k; j < a; ++j)\n#define _DWN for (int j= a; j-- > k;)\n\
+    #define _OP(J, K, op) dat[i + J].second op##= dat[i + K].second\n#define _ZETA(op)\
+    \ \\\n int k= 1; \\\n for (auto [p, e]: factors) { \\\n  int a= k * (e + 1); \\\
+    \n  for (int i= 0, d= dat.size(); i < d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n\
+    \ Factors factors;\n template <class Uint> ArrayOnDivisors(uint64_t n, const Factors\
+    \ &factors, const std::vector<Uint> &divisors): n(n), shift(__builtin_clzll(divisors.size())\
+    \ - 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
+    \ factors(factors) {\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
+    \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
+    \ os.begin());\n  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]=\
+    \ i;\n }\n ArrayOnDivisors(uint64_t n, const Factors &factors): ArrayOnDivisors(n,\
+    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(uint64_t n): ArrayOnDivisors(n,\
+    \ Factors(n)) {}\n T &operator[](uint64_t i) {\n  assert(i && n % i == 0);\n \
+    \ for (unsigned a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]=\
+    \ dat[id[j]]; d == i) return v;\n  assert(0);\n }\n size_t size() const { return\
+    \ dat.size(); }\n auto begin() { return dat.begin(); }\n auto begin() const {\
+    \ return dat.begin(); }\n auto end() { return dat.begin() + os.back(); }\n auto\
+    \ end() const { return dat.begin() + os.back(); }\n /* f -> g s.t. g(n) = sum_{m|n}\
+    \ f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j, j - k, +)) }\n /* f -> h s.t.\
+    \ f(n) = sum_{m|n} h(m) */\n void divisor_mobius() { _ZETA(_DWN _OP(j, j - k,\
+    \ -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n void multiple_zeta() { _ZETA(_DWN\
+    \ _OP(j - k, j, +)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m) */\n void multiple_mobius()\
+    \ { _ZETA(_UP _OP(j - k, j, -)) }\n#undef _UP\n#undef _DWN\n#undef _OP\n#undef\
+    \ _ZETA\n};\n"
+  code: "#pragma once\n#include \"src/NumberTheory/Factors.hpp\"\ntemplate <class\
+    \ T> class ArrayOnDivisors {\n uint64_t n;\n uint8_t shift;\n std::vector<int>\
+    \ os, id;\n std::vector<std::pair<uint64_t, T>> dat;\n unsigned hash(uint64_t\
+    \ i) const { return (i * 11995408973635179863ULL) >> shift; }\n#define _UP for\
+    \ (int j= k; j < a; ++j)\n#define _DWN for (int j= a; j-- > k;)\n#define _OP(J,\
+    \ K, op) dat[i + J].second op##= dat[i + K].second\n#define _ZETA(op) \\\n int\
+    \ k= 1; \\\n for (auto [p, e]: factors) { \\\n  int a= k * (e + 1); \\\n  for\
+    \ (int i= 0, d= dat.size(); i < d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n Factors\
+    \ factors;\n template <class Uint> ArrayOnDivisors(uint64_t n, const Factors &factors,\
+    \ const std::vector<Uint> &divisors): n(n), shift(__builtin_clzll(divisors.size())\
+    \ - 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
+    \ factors(factors) {\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
+    \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
+    \ os.begin());\n  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]=\
+    \ i;\n }\n ArrayOnDivisors(uint64_t n, const Factors &factors): ArrayOnDivisors(n,\
+    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(uint64_t n): ArrayOnDivisors(n,\
+    \ Factors(n)) {}\n T &operator[](uint64_t i) {\n  assert(i && n % i == 0);\n \
+    \ for (unsigned a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]=\
+    \ dat[id[j]]; d == i) return v;\n  assert(0);\n }\n size_t size() const { return\
+    \ dat.size(); }\n auto begin() { return dat.begin(); }\n auto begin() const {\
+    \ return dat.begin(); }\n auto end() { return dat.begin() + os.back(); }\n auto\
+    \ end() const { return dat.begin() + os.back(); }\n /* f -> g s.t. g(n) = sum_{m|n}\
+    \ f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j, j - k, +)) }\n /* f -> h s.t.\
+    \ f(n) = sum_{m|n} h(m) */\n void divisor_mobius() { _ZETA(_DWN _OP(j, j - k,\
+    \ -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n void multiple_zeta() { _ZETA(_DWN\
+    \ _OP(j - k, j, +)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m) */\n void multiple_mobius()\
+    \ { _ZETA(_UP _OP(j - k, j, -)) }\n#undef _UP\n#undef _DWN\n#undef _OP\n#undef\
+    \ _ZETA\n};"
   dependsOn:
   - src/NumberTheory/Factors.hpp
   - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
-  isVerificationFile: true
-  path: test/unit_test/constexpr_factors.test.cpp
+  isVerificationFile: false
+  path: src/NumberTheory/ArrayOnDivisors.hpp
   requiredBy: []
   timestamp: '2024-02-05 22:57:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/unit_test/constexpr_factors.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/atcoder/abc335_g.test.cpp
+documentation_of: src/NumberTheory/ArrayOnDivisors.hpp
 layout: document
-redirect_from:
-- /verify/test/unit_test/constexpr_factors.test.cpp
-- /verify/test/unit_test/constexpr_factors.test.cpp.html
-title: test/unit_test/constexpr_factors.test.cpp
+title: "\u7D04\u6570\u914D\u5217"
 ---
+
+添字が整数 $N$ の約数のみの配列.\
+以下，$d(\cdot)$ を約数の個数を表す関数とする.
+
+## メンバ関数
+
+| 名前    | 概要  | 計算量    |
+| --- | --- | --- |
+| 1. `ArrayOnDivisors(N, f, d)` <br> 2. `ArrayOnDivisors(N, f)` <br> 3. `ArrayOnDivisors(N)` | コンストラクタ. <br> 1. 整数 $N$ とその[素因数分解](md/NumberTheory/Factors.md) $f$, 約数 $d$ を引数にする. <br> 2. 整数 $N$ とその素因数分解 $f$ を引数にする. <br> 3.  整数 $N$ を引数にする. | 1. $\mathcal{O}(d(N))$  <br> 2. $\mathcal{O}(d(N))$ <br> 3. $\mathcal{O}(N^{1/4})$  |
+|`operator[](i)`| 添字 $i$ の値を左参照値で返す. <br> $i$ が $N$ の約数でないなら `assert` で落ちる. ||
+|`size()`|配列のサイズを返す. つまり $d(N)$.||
+|`begin()`|(添字，値)のペアの列のイテレータ.||
+|`end()`|(添字，値)のペアの列のイテレータ.||
+|1. `divisor_zeta()` <br> 2. `divisor_zeta(add)`|約数ゼータ変換 $\sum_{m\vert n} a(m)$ を行う. <br> 2. 関数`add(T&a,T b)` を与える. |64bitの$N$ で高々 $2^{17}$ 程度|
+|1. `divisor_mobius()` <br> 2. `divisor_mobius(sub)`|約数メビウス変換 $\sum_{m\vert n}\mu(n/m)a(m)$ を行う. <br> 2. 関数`sub(T&a,T b)` を与える.|64bitの$N$ で高々 $2^{17}$ 程度|
+|1. `multiple_zeta()` <br> 2. `multiple_zeta(add)`|倍数ゼータ変換 $\sum_{n\vert m} a(m)$ を行う. <br> 2. 関数`add(T&a,T b)` を与える.|64bitの$N$ で高々 $2^{17}$ 程度|
+|1. `multiple_mobius()` <br> 2. `multiple_mobius(sub)`|倍数メビウス変換 $\sum_{n\vert m}\mu(m/n)a(m)$ を行う.  <br> 2. 関数`sub(T&a,T b)` を与える.|64bitの$N$ で高々 $2^{17}$ 程度|
+
+## 参考
+[https://maspypy.github.io/library/nt/array_on_divisors.hpp](https://maspypy.github.io/library/nt/array_on_divisors.hpp)

@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: src/FFT/BigInt.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/FFT/FormalPowerSeries.hpp
     title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
   - icon: ':x:'
@@ -57,31 +57,34 @@ data:
   - icon: ':x:'
     path: src/Math/BinomialCoefficient.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
-    path: src/Math/Factors.hpp
-    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: src/Math/ModInt_Exp.hpp
     title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
   - icon: ':x:'
-    path: src/Math/OrderFp.hpp
-    title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
-  - icon: ':heavy_check_mark:'
     path: src/Math/StirlingNumber.hpp
     title: "\u30B9\u30BF\u30FC\u30EA\u30F3\u30B0\u6570 ($\\mathbb{F}_p$)"
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
+  - icon: ':x:'
+    path: src/NumberTheory/ArrayOnDivisors.hpp
+    title: "\u7D04\u6570\u914D\u5217"
+  - icon: ':question:'
+    path: src/NumberTheory/Factors.hpp
+    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
+  - icon: ':x:'
+    path: src/NumberTheory/OrderFp.hpp
+    title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3072.test.cpp
@@ -107,34 +110,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_2_F.test.cpp
     title: test/aoj/NTL_2_F.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_d.test.cpp
     title: test/atcoder/abc179_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc230_h.test.cpp
     title: test/atcoder/abc230_h.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc276_g.sparse_FPS.test.cpp
     title: test/atcoder/abc276_g.sparse_FPS.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc335_g.test.cpp
+    title: test/atcoder/abc335_g.test.cpp
+  - icon: ':x:'
     path: test/unit_test/constexpr_factors.test.cpp
     title: test/unit_test/constexpr_factors.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/unit_test/constexpr_is_prime.test.cpp
     title: test/unit_test/constexpr_is_prime.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/unit_test/constexpr_mod_sqrt.test.cpp
     title: test/unit_test/constexpr_mod_sqrt.test.cpp
   - icon: ':x:'
@@ -233,7 +239,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/pow_of_sparse_FPS.test.cpp
     title: test/yosupo/pow_of_sparse_FPS.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/primarity_test.test.cpp
     title: test/yosupo/primarity_test.test.cpp
   - icon: ':x:'
@@ -251,7 +257,7 @@ data:
   - icon: ':x:'
     path: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/yosupo/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/sqrt_mod.test.cpp
     title: test/yosupo/sqrt_mod.test.cpp
   - icon: ':x:'
@@ -263,13 +269,13 @@ data:
   - icon: ':x:'
     path: test/yosupo/stirling_1.test.cpp
     title: test/yosupo/stirling_1.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_1_small_p_large_n.test.cpp
     title: test/yosupo/stirling_1_small_p_large_n.test.cpp
   - icon: ':x:'
     path: test/yosupo/stirling_2.test.cpp
     title: test/yosupo/stirling_2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/stirling_2_small_p_large_n.test.cpp
     title: test/yosupo/stirling_2_small_p_large_n.test.cpp
   - icon: ':x:'
@@ -305,9 +311,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/3030.test.cpp
-    title: test/yukicoder/3030.test.cpp
   - icon: ':x:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
@@ -375,9 +378,9 @@ data:
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
     }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
-    src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint, class\
-    \ MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n const\
-    \ Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
+    src/NumberTheory/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint,\
+    \ class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n\
+    \ const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
     \ - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b),\
     \ d, md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n\
     \     if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n\
@@ -401,17 +404,18 @@ data:
   dependsOn:
   - src/Internal/Remainder.hpp
   isVerificationFile: false
-  path: src/Math/is_prime.hpp
+  path: src/NumberTheory/is_prime.hpp
   requiredBy:
+  - src/NumberTheory/Factors.hpp
+  - src/NumberTheory/ArrayOnDivisors.hpp
+  - src/NumberTheory/OrderFp.hpp
   - src/Math/mod_tetration.hpp
   - src/Math/ModInt_Exp.hpp
   - src/Math/BinomialCoefficient.hpp
-  - src/Math/Factors.hpp
   - src/Math/mod_sqrt.hpp
   - src/Math/StirlingNumber.hpp
   - src/Math/sparse_fps.hpp
   - src/Math/mod_kth_root.hpp
-  - src/Math/OrderFp.hpp
   - src/FFT/bostan_mori.hpp
   - src/FFT/BigInt.hpp
   - src/FFT/fps_sqrt.hpp
@@ -428,7 +432,7 @@ data:
   - src/FFT/extgcd.hpp
   - src/FFT/sample_points_shift.hpp
   - src/FFT/FormalPowerSeries.hpp
-  timestamp: '2023-11-11 11:24:47+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/unit_test/constexpr_mod_sqrt.test.cpp
@@ -450,7 +454,6 @@ data:
   - test/yukicoder/215.test.cpp
   - test/yukicoder/1080.test.cpp
   - test/yukicoder/502.test.cpp
-  - test/yukicoder/3030.test.cpp
   - test/yukicoder/1939.test.cpp
   - test/aoj/3072.test.cpp
   - test/aoj/NTL_2_C.test.cpp
@@ -467,6 +470,7 @@ data:
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc179_d.test.cpp
+  - test/atcoder/abc335_g.test.cpp
   - test/yosupo/bernoulli.test.cpp
   - test/yosupo/log_of_FPS.FPS.test.cpp
   - test/yosupo/partition.MSET.test.cpp
@@ -513,7 +517,7 @@ data:
   - test/yosupo/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/yosupo/comp_of_FPS.test.cpp
   - test/yosupo/stirling_1_small_p_large_n.test.cpp
-documentation_of: src/Math/is_prime.hpp
+documentation_of: src/NumberTheory/is_prime.hpp
 layout: document
 title: "\u7D20\u6570\u5224\u5B9A"
 ---

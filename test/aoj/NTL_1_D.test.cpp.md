@@ -5,13 +5,13 @@ data:
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
-    path: src/Math/Factors.hpp
-    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
+    path: src/NumberTheory/Factors.hpp
+    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -24,15 +24,15 @@ data:
     links:
     - https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D
   bundledCode: "#line 1 \"test/aoj/NTL_1_D.test.cpp\"\n#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D\"\
-    \n#include <iostream>\n#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n\
-    #include <cassert>\n#line 5 \"src/Math/Factors.hpp\"\n#include <algorithm>\n#include\
-    \ <vector>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\n\
-    using namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing i64=\
-    \ long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n#define\
-    \ CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\
-    \n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { return l+=\
-    \ r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l, U\
-    \ r) const { return l-= r, l >> C ? l + (M) : l; }\n#define SGN(U) \\\n static\
+    \n#include <iostream>\n#line 2 \"src/NumberTheory/Factors.hpp\"\n#include <numeric>\n\
+    #include <cassert>\n#line 5 \"src/NumberTheory/Factors.hpp\"\n#include <algorithm>\n\
+    #include <vector>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
+    \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
+    \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
+    #define CE constexpr\n#define IL inline\n#define NORM \\\n if (n >= mod) n-= mod;\
+    \ \\\n return n\n#define PLUS(U, M) \\\n CE IL U plus(U l, U r) const { return\
+    \ l+= r, l < (M) ? l : l - (M); }\n#define DIFF(U, C, M) \\\n CE IL U diff(U l,\
+    \ U r) const { return l-= r, l >> C ? l + (M) : l; }\n#define SGN(U) \\\n static\
     \ CE IL U set(U n) { return n; } \\\n static CE IL U get(U n) { return n; } \\\
     \n static CE IL U norm(U n) { return n; }\ntemplate <class u_t, class du_t, u8\
     \ B, u8 A> struct MP_Mo {\n u_t mod;\n CE MP_Mo(): mod(0), iv(0), r2(0) {}\n CE\
@@ -67,9 +67,9 @@ data:
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
     }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
-    src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint, class\
-    \ MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n const\
-    \ Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
+    src/NumberTheory/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint,\
+    \ class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n\
+    \ const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
     \ - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b),\
     \ d, md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n\
     \     if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n\
@@ -86,22 +86,22 @@ data:
     \ constexpr Int binary_gcd(Int a, Int b) {\n if (a == 0 || b == 0) return a +\
     \ b;\n int n= bsf(a), m= bsf(b), s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int\
     \ d= a - b;\n  bool f= a > b;\n  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n\
-    \ }\n return a << std::min(n, m);\n}\n#line 9 \"src/Math/Factors.hpp\"\nnamespace\
-    \ math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg, T *ed)\
-    \ {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n\
-    \   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n\
-    }\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr size_t size()\
-    \ const { return sz; }\n constexpr auto &operator[](int i) const { return dat[i];\
-    \ }\n constexpr auto *begin() const { return dat; }\n constexpr auto *end() const\
-    \ { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend\
-    \ ostream &operator<<(ostream &os, const ConstexprArray &r) {\n  os << \"[\";\n\
-    \  for (size_t i= 0; i < r.sz; ++i) os << r[i] << \",]\"[i == r.sz - 1];\n  return\
-    \ os;\n }\n};\nclass Factors: public ConstexprArray<pair<u64, uint16_t>, 16> {\n\
-    \ template <class Uint, class MP> static constexpr Uint rho(Uint n, Uint c) {\n\
-    \  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x, x),\
-    \ c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z=\
-    \ 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x=\
-    \ y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q),\
+    \ }\n return a << std::min(n, m);\n}\n#line 9 \"src/NumberTheory/Factors.hpp\"\
+    \nnamespace math_internal {\ntemplate <class T> constexpr void bubble_sort(T *bg,\
+    \ T *ed) {\n for (int sz= ed - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j >\
+    \ i;)\n   if (auto tmp= bg[j - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]=\
+    \ tmp;\n}\ntemplate <class T, size_t _Nm> struct ConstexprArray {\n constexpr\
+    \ size_t size() const { return sz; }\n constexpr auto &operator[](int i) const\
+    \ { return dat[i]; }\n constexpr auto *begin() const { return dat; }\n constexpr\
+    \ auto *end() const { return dat + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t\
+    \ sz= 0;\n friend ostream &operator<<(ostream &os, const ConstexprArray &r) {\n\
+    \  os << \"[\";\n  for (size_t i= 0; i < r.sz; ++i) os << r[i] << \",]\"[i ==\
+    \ r.sz - 1];\n  return os;\n }\n};\nclass Factors: public ConstexprArray<pair<u64,\
+    \ uint16_t>, 16> {\n template <class Uint, class MP> static constexpr Uint rho(Uint\
+    \ n, Uint c) {\n  const MP md(n);\n  auto f= [&md, n, c](Uint x) { return md.plus(md.mul(x,\
+    \ x), c); };\n  const Uint m= 1LL << (__lg(n) / 5);\n  Uint x= 1, y= md.set(2),\
+    \ z= 1, q= md.set(1), g= 1;\n  for (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for\
+    \ (x= y, i= r; i--;) y= f(y);\n   for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q),\
     \ n), k+= m)\n    for (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y,\
     \ x));\n  }\n  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z,\
     \ x)), n);\n   } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
@@ -126,18 +126,18 @@ data:
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
     \ long long n;\n cin >> n;\n cout << totient(n) << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/library/6/NTL/1/NTL_1_D\"\
-    \n#include <iostream>\n#include \"src/Math/Factors.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n long long n;\n\
-    \ cin >> n;\n cout << totient(n) << '\\n';\n return 0;\n}\n"
+    \n#include <iostream>\n#include \"src/NumberTheory/Factors.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n long long\
+    \ n;\n cin >> n;\n cout << totient(n) << '\\n';\n return 0;\n}\n"
   dependsOn:
-  - src/Math/Factors.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/Factors.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
   isVerificationFile: true
   path: test/aoj/NTL_1_D.test.cpp
   requiredBy: []
-  timestamp: '2024-02-05 18:28:29+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/NTL_1_D.test.cpp

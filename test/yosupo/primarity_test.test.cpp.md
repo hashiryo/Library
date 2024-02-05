@@ -5,13 +5,13 @@ data:
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
+    path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/primality_test
@@ -59,7 +59,7 @@ data:
     \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
     \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
     \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
-    \ SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ SGN\n#undef CE\n}\n#line 3 \"src/NumberTheory/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -75,18 +75,18 @@ data:
     \ int Q;\n cin >> Q;\n while (Q--) {\n  long long N;\n  cin >> N;\n  cout << (is_prime(N)\
     \ ? \"Yes\" : \"No\") << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/primality_test\"\n#include\
-    \ <iostream>\n#include \"src/Math/is_prime.hpp\"\nusing namespace std;\nsigned\
-    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n while\
-    \ (Q--) {\n  long long N;\n  cin >> N;\n  cout << (is_prime(N) ? \"Yes\" : \"\
-    No\") << '\\n';\n }\n return 0;\n}"
+    \ <iostream>\n#include \"src/NumberTheory/is_prime.hpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int Q;\n cin >> Q;\n\
+    \ while (Q--) {\n  long long N;\n  cin >> N;\n  cout << (is_prime(N) ? \"Yes\"\
+    \ : \"No\") << '\\n';\n }\n return 0;\n}"
   dependsOn:
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   isVerificationFile: true
   path: test/yosupo/primarity_test.test.cpp
   requiredBy: []
-  timestamp: '2023-11-11 11:24:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-05 22:57:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/primarity_test.test.cpp
 layout: document

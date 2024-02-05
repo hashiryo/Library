@@ -7,9 +7,15 @@ data:
   - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
+  - icon: ':x:'
+    path: src/NumberTheory/ArrayOnDivisors.hpp
+    title: "\u7D04\u6570\u914D\u5217"
   - icon: ':question:'
     path: src/NumberTheory/Factors.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
+  - icon: ':x:'
+    path: src/NumberTheory/OrderFp.hpp
+    title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
   - icon: ':question:'
     path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
@@ -20,13 +26,13 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    PROBLEM: https://atcoder.jp/contests/abc335/tasks/abc335_g
     links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"test/unit_test/constexpr_factors.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n#line 2 \"\
-    src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n#line\
-    \ 5 \"src/NumberTheory/Factors.hpp\"\n#include <algorithm>\n#include <vector>\n\
+    - https://atcoder.jp/contests/abc335/tasks/abc335_g
+  bundledCode: "#line 1 \"test/atcoder/abc335_g.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/abc335/tasks/abc335_g\"\
+    \n#include <iostream>\n#line 2 \"src/NumberTheory/OrderFp.hpp\"\n#include <array>\n\
+    #line 2 \"src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
+    #line 5 \"src/NumberTheory/Factors.hpp\"\n#include <algorithm>\n#include <vector>\n\
     #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing i64= long long;\n\
     using u64= unsigned long long;\nusing u128= __uint128_t;\n#define CE constexpr\n\
@@ -123,36 +129,87 @@ data:
     \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
     \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
     \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"test/unit_test/constexpr_factors.test.cpp\"\
-    \nusing namespace std;\nconstexpr auto f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size()\
-    \ == 3);\nstatic_assert(f[0].first == 2);\nstatic_assert(f[0].second == 2);\n\
-    static_assert(f[1].first == 3);\nstatic_assert(f[1].second == 1);\nstatic_assert(f[2].first\
-    \ == 5);\nstatic_assert(f[2].second == 1);\nconstexpr int n= totient(100);\nstatic_assert(n\
-    \ == 40);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int\
-    \ A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
-    #include \"src/NumberTheory/Factors.hpp\"\nusing namespace std;\nconstexpr auto\
-    \ f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size() == 3);\nstatic_assert(f[0].first\
-    \ == 2);\nstatic_assert(f[0].second == 2);\nstatic_assert(f[1].first == 3);\n\
-    static_assert(f[1].second == 1);\nstatic_assert(f[2].first == 5);\nstatic_assert(f[2].second\
-    \ == 1);\nconstexpr int n= totient(100);\nstatic_assert(n == 40);\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin >> A >> B;\n\
-    \ cout << A + B << '\\n';\n return 0;\n}"
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"src/NumberTheory/OrderFp.hpp\"\
+    \nnamespace math_internal {\nclass OrderFp {\n u64 p;\n std::array<u64, 17> prod;\n\
+    \ template <class Uint, class MP> constexpr Uint p_rt() const {\n  const MP md(p);\n\
+    \  for (Uint ret= 2, one= md.set(1), ng= 0, m= p - 1;; ++ret) {\n   Uint a= md.set(ret);\n\
+    \   for (auto [q, e]: factors)\n    if ((ng= (md.norm(pow(a, m / q, md)) == one)))\
+    \ break;\n   if (!ng) return ret;\n  }\n }\n template <class Uint, class MP> constexpr\
+    \ Uint ord_(u8 l, u8 r, Uint x, const MP &md) const {\n  Uint ret= 1;\n  if (r\
+    \ - l == 1) {\n   Uint one= md.set(1);\n   auto [q, e]= factors[l];\n   for (u8\
+    \ i= e; i--; ret*= q, x= pow(x, q, md))\n    if (x == one) break;\n   return ret;\n\
+    \  }\n  u8 m= (l + r) / 2;\n  return ord_(l, m, pow(x, prod[r] / prod[m], md),\
+    \ md) * ord_(m, r, pow(x, prod[m] / prod[l], md), md);\n }\n template <class Uint,\
+    \ class MP> constexpr Uint ord(Uint x) const {\n  const MP md(p);\n  return ord_(0,\
+    \ factors.size(), md.set(x), md);\n }\npublic:\n Factors factors;\n constexpr\
+    \ OrderFp(u64 p): p(p), prod({1}), factors(p - 1) {\n  assert(is_prime(p));\n\
+    \  for (u8 i= 0, d= factors.size(); i < d; ++i) {\n   auto [q, e]= factors[i];\n\
+    \   prod[i + 1]= prod[i];\n   for (u8 j= e; j--;) prod[i + 1]*= q;\n  }\n }\n\
+    \ constexpr u64 primitive_root() const {\n  if (p == 2) return 1;\n  if (p < (1\
+    \ << 30)) return p_rt<u32, MP_Mo<u32, u64, 32, 31>>();\n  if (p < (1ull << 62))\
+    \ return p_rt<u64, MP_Mo<u64, u128, 64, 63>>();\n  return p_rt<u64, MP_D2B1>();\n\
+    \ }\n constexpr u64 operator()(u64 x) const {\n  if (x%= p; !x) return 0;\n  if\
+    \ (x == 1) return 1;\n  if (p < (1 << 30)) return ord<u32, MP_Mo<u32, u64, 32,\
+    \ 31>>(x);\n  if (p < (1ull << 62)) return ord<u64, MP_Mo<u64, u128, 64, 63>>(x);\n\
+    \  return ord<u64, MP_D2B1>(x);\n }\n};\n}\nusing math_internal::OrderFp;\n#line\
+    \ 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\ntemplate <class T> class ArrayOnDivisors\
+    \ {\n uint64_t n;\n uint8_t shift;\n std::vector<int> os, id;\n std::vector<std::pair<uint64_t,\
+    \ T>> dat;\n unsigned hash(uint64_t i) const { return (i * 11995408973635179863ULL)\
+    \ >> shift; }\n#define _UP for (int j= k; j < a; ++j)\n#define _DWN for (int j=\
+    \ a; j-- > k;)\n#define _OP(J, K, op) dat[i + J].second op##= dat[i + K].second\n\
+    #define _ZETA(op) \\\n int k= 1; \\\n for (auto [p, e]: factors) { \\\n  int a=\
+    \ k * (e + 1); \\\n  for (int i= 0, d= dat.size(); i < d; i+= a) op; \\\n  k=\
+    \ a; \\\n }\npublic:\n Factors factors;\n template <class Uint> ArrayOnDivisors(uint64_t\
+    \ n, const Factors &factors, const std::vector<Uint> &divisors): n(n), shift(__builtin_clzll(divisors.size())\
+    \ - 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
+    \ factors(factors) {\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
+    \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
+    \ os.begin());\n  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]=\
+    \ i;\n }\n ArrayOnDivisors(uint64_t n, const Factors &factors): ArrayOnDivisors(n,\
+    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(uint64_t n): ArrayOnDivisors(n,\
+    \ Factors(n)) {}\n T &operator[](uint64_t i) {\n  assert(i && n % i == 0);\n \
+    \ for (unsigned a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]=\
+    \ dat[id[j]]; d == i) return v;\n  assert(0);\n }\n size_t size() const { return\
+    \ dat.size(); }\n auto begin() { return dat.begin(); }\n auto begin() const {\
+    \ return dat.begin(); }\n auto end() { return dat.begin() + os.back(); }\n auto\
+    \ end() const { return dat.begin() + os.back(); }\n /* f -> g s.t. g(n) = sum_{m|n}\
+    \ f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j, j - k, +)) }\n /* f -> h s.t.\
+    \ f(n) = sum_{m|n} h(m) */\n void divisor_mobius() { _ZETA(_DWN _OP(j, j - k,\
+    \ -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n void multiple_zeta() { _ZETA(_DWN\
+    \ _OP(j - k, j, +)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m) */\n void multiple_mobius()\
+    \ { _ZETA(_UP _OP(j - k, j, -)) }\n#undef _UP\n#undef _DWN\n#undef _OP\n#undef\
+    \ _ZETA\n};\n#line 5 \"test/atcoder/abc335_g.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n long long N, P;\n\
+    \ cin >> N >> P;\n vector<long long> a(N);\n OrderFp ord(P);\n for (int i= 0;\
+    \ i < N; i++) {\n  long long A;\n  cin >> A;\n  a[i]= ord(A);\n }\n ArrayOnDivisors<long\
+    \ long> x(P - 1, ord.factors);\n for (int i= 0; i < N; ++i) ++x[a[i]];\n x.divisor_zeta();\n\
+    \ long long ans= 0;\n for (int i= 0; i < N; ++i) ans+= x[a[i]];\n cout << ans\
+    \ << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc335/tasks/abc335_g\"\n#include\
+    \ <iostream>\n#include \"src/NumberTheory/OrderFp.hpp\"\n#include \"src/NumberTheory/ArrayOnDivisors.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ long long N, P;\n cin >> N >> P;\n vector<long long> a(N);\n OrderFp ord(P);\n\
+    \ for (int i= 0; i < N; i++) {\n  long long A;\n  cin >> A;\n  a[i]= ord(A);\n\
+    \ }\n ArrayOnDivisors<long long> x(P - 1, ord.factors);\n for (int i= 0; i < N;\
+    \ ++i) ++x[a[i]];\n x.divisor_zeta();\n long long ans= 0;\n for (int i= 0; i <\
+    \ N; ++i) ans+= x[a[i]];\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
+  - src/NumberTheory/OrderFp.hpp
   - src/NumberTheory/Factors.hpp
   - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
+  - src/NumberTheory/ArrayOnDivisors.hpp
   isVerificationFile: true
-  path: test/unit_test/constexpr_factors.test.cpp
+  path: test/atcoder/abc335_g.test.cpp
   requiredBy: []
   timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/unit_test/constexpr_factors.test.cpp
+documentation_of: test/atcoder/abc335_g.test.cpp
 layout: document
 redirect_from:
-- /verify/test/unit_test/constexpr_factors.test.cpp
-- /verify/test/unit_test/constexpr_factors.test.cpp.html
-title: test/unit_test/constexpr_factors.test.cpp
+- /verify/test/atcoder/abc335_g.test.cpp
+- /verify/test/atcoder/abc335_g.test.cpp.html
+title: test/atcoder/abc335_g.test.cpp
 ---

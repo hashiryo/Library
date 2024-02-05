@@ -23,11 +23,11 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -120,21 +120,21 @@ data:
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/FFT/fps_exp.hpp\"\
     \n#include <cstdint>\n#line 2 \"src/FFT/NTT.hpp\"\n#include <array>\n#include\
-    \ <limits>\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate\
-    \ <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n\
-    \ const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1),\
-    \ n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint b= a % n;\
-    \ b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n    for (int i=\
-    \ s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n return 1;\n\
-    }\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1) return (n |\
-    \ 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32, u64, 32, 31>,\
-    \ 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64, MP_Mo<u64, u128,\
-    \ 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n return miller_rabin<u64,\
-    \ MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n}\n}\nusing\
-    \ math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\ntemplate <class mod_t,\
-    \ size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n static\
-    \ const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n if\
-    \ (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
+    \ <limits>\n#line 3 \"src/NumberTheory/is_prime.hpp\"\nnamespace math_internal\
+    \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
+    \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
+    \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
+    \ b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b), d, md)); p != one)\n   \
+    \ for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n     if (!(--i)) return 0;\n\
+    \ return 1;\n}\nconstexpr bool is_prime(u64 n) {\n if (n < 2 || n % 6 % 4 != 1)\
+    \ return (n | 1) == 3;\n if (n < (1 << 30)) return miller_rabin<u32, MP_Mo<u32,\
+    \ u64, 32, 31>, 2, 7, 61>(n);\n if (n < (1ull << 62)) return miller_rabin<u64,\
+    \ MP_Mo<u64, u128, 64, 63>, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
+    \ return miller_rabin<u64, MP_D2B1, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);\n\
+    }\n}\nusing math_internal::is_prime;\n#line 6 \"src/FFT/NTT.hpp\"\ntemplate <class\
+    \ mod_t, size_t LM> mod_t get_inv(int n) {\n static_assert(is_modint_v<mod_t>);\n\
+    \ static const auto m= mod_t::mod();\n static mod_t dat[LM];\n static int l= 1;\n\
+    \ if (l == 1) dat[l++]= 1;\n while (l <= n) dat[l++]= dat[m % l] * (m - m / l);\n\
     \ return dat[n];\n}\nnamespace math_internal {\n#define CE constexpr\n#define\
     \ ST static\n#define TP template\n#define BSF(_, n) __builtin_ctz##_(n)\nTP<class\
     \ mod_t> struct NTT {\n#define _DFT(a, b, c, ...) \\\n mod_t r, u, *x0, *x1; \\\
@@ -413,11 +413,11 @@ data:
   - src/FFT/fps_div.hpp
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   isVerificationFile: true
   path: test/yosupo/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sharp_p_subset_sum.test.cpp

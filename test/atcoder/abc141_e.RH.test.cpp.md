@@ -8,15 +8,15 @@ data:
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
-    path: src/Math/CartesianProduct.hpp
-    title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\\
-      times\\cdots\\times K_n$)"
-  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/Misc/Pointwise.hpp
+    title: "\u4F53\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\times\\cdots\\\
+      times K_n$)"
   - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
@@ -25,9 +25,9 @@ data:
     title: Rolling-Hash
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc141/tasks/abc141_e
@@ -35,29 +35,29 @@ data:
     - https://atcoder.jp/contests/abc141/tasks/abc141_e
   bundledCode: "#line 1 \"test/atcoder/abc141_e.RH.test.cpp\"\n#define PROBLEM \"\
     https://atcoder.jp/contests/abc141/tasks/abc141_e\"\n#include <iostream>\n#include\
-    \ <string>\n#include <set>\n#line 2 \"src/Math/CartesianProduct.hpp\"\n#include\
-    \ <tuple>\n#include <array>\n#include <utility>\ntemplate <class... Ks> struct\
-    \ CartesianProduct: std::tuple<Ks...> {\n static constexpr int N= sizeof...(Ks);\n\
-    \ using Self= CartesianProduct;\n using std::tuple<Ks...>::tuple;\n template <class\
-    \ T> CartesianProduct(const T &v) { fill(v, std::make_index_sequence<N>()); }\n\
-    \ template <class T, std::size_t... I> std::array<int, N> fill(const T &v, std::index_sequence<I...>)\
-    \ { return {{(void(std::get<I>(*this)= v), 0)...}}; }\n#define HELPER(name, op)\
-    \ \\\n template <std::size_t... I> std::array<int, N> name(const Self &y, std::index_sequence<I...>)\
-    \ { return {{(void(std::get<I>(*this) op##= std::get<I>(y)), 0)...}}; } \\\n Self\
-    \ &operator op##=(const Self &r) { return name(r, std::make_index_sequence<N>()),\
-    \ *this; }\n HELPER(add_assign, +)\n HELPER(dif_assign, -)\n HELPER(mul_assign,\
-    \ *)\n HELPER(div_assign, /)\n#undef HELPER\n Self operator+(const Self &r) const\
-    \ { return Self(*this)+= r; }\n Self operator-(const Self &r) const { return Self(*this)-=\
-    \ r; }\n Self operator*(const Self &r) const { return Self(*this)*= r; }\n Self\
-    \ operator/(const Self &r) const { return Self(*this)/= r; }\n};\n#line 2 \"src/String/RollingHash.hpp\"\
-    \n#include <vector>\n#line 5 \"src/String/RollingHash.hpp\"\n#include <cassert>\n\
-    template <class K, class Int= int> class RollingHash {\npublic:\n static inline\
-    \ std::vector<K> pw, hsh;\n static inline K bs;\n static inline std::vector<Int>\
-    \ str;\n static inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n\
-    \   for (pw.resize(n + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n\
-    \ RollingHash(int b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int\
-    \ ok, int ng, const C &check) {\n  for (int x; ng - ok > 1;) x= (ok + ng) / 2,\
-    \ (check(x) ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
+    \ <string>\n#include <set>\n#line 2 \"src/Misc/Pointwise.hpp\"\n#include <tuple>\n\
+    #include <array>\n#include <utility>\ntemplate <class... Ks> struct Pointwise:\
+    \ std::tuple<Ks...> {\n static constexpr int N= sizeof...(Ks);\n using Self= Pointwise;\n\
+    \ using std::tuple<Ks...>::tuple;\n template <class T> Pointwise(const T &v) {\
+    \ fill(v, std::make_index_sequence<N>()); }\n template <class T, std::size_t...\
+    \ I> std::array<int, N> fill(const T &v, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)=\
+    \ v), 0)...}}; }\n#define HELPER(name, op) \\\n template <std::size_t... I> std::array<int,\
+    \ N> name(const Self &y, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)\
+    \ op##= std::get<I>(y)), 0)...}}; } \\\n Self &operator op##=(const Self & r)\
+    \ { return name(r, std::make_index_sequence<N>()), *this; }\n HELPER(add_assign,\
+    \ +)\n HELPER(dif_assign, -)\n HELPER(mul_assign, *)\n HELPER(div_assign, /)\n\
+    #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
+    \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
+    \ Self &r) const { return Self(*this)*= r; }\n Self operator/(const Self &r) const\
+    \ { return Self(*this)/= r; }\n};\n#line 2 \"src/String/RollingHash.hpp\"\n#include\
+    \ <vector>\n#line 5 \"src/String/RollingHash.hpp\"\n#include <cassert>\ntemplate\
+    \ <class K, class Int= int> class RollingHash {\npublic:\n static inline std::vector<K>\
+    \ pw, hsh;\n static inline K bs;\n static inline std::vector<Int> str;\n static\
+    \ inline void set_pw(int n) {\n  if (int m= pw.size(); m <= n)\n   for (pw.resize(n\
+    \ + 1); m <= n; ++m) pw[m]= pw[m - 1] * bs;\n }\n int bg, n;\n RollingHash(int\
+    \ b, int n): bg(b), n(n) {}\n template <class C> static int bin_srch(int ok, int\
+    \ ng, const C &check) {\n  for (int x; ng - ok > 1;) x= (ok + ng) / 2, (check(x)\
+    \ ? ok : ng)= x;\n  return ok;\n }\n template <size_t I> static K concat(const\
     \ std::array<RollingHash, I> &v) {\n  K ret= 0;\n  for (int i= 0; i < I; ++i)\
     \ ret= ret * pw[v[i].n] + v[i].hash();\n  return ret;\n }\npublic:\n static void\
     \ init(K b) { bs= b, pw.assign(1, 1), hsh.assign(1, 0); }\n static K base_pow(int\
@@ -173,18 +173,18 @@ data:
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 9 \"test/atcoder/abc141_e.RH.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n using K= CartesianProduct<Mint, Mint>;\n using\
-    \ RH= RollingHash<K>;\n RH::init({rng(), rng()});\n int N;\n cin >> N;\n string\
-    \ S;\n cin >> S;\n RH rh(S);\n multiset<K> st;\n int ok= 0, ng= N / 2 + 1;\n while\
+    \ using Mint= ModInt<998244353>;\n using K= Pointwise<Mint, Mint>;\n using RH=\
+    \ RollingHash<K>;\n RH::init({rng(), rng()});\n int N;\n cin >> N;\n string S;\n\
+    \ cin >> S;\n RH rh(S);\n multiset<K> st;\n int ok= 0, ng= N / 2 + 1;\n while\
     \ (ng - ok > 1) {\n  int x= (ok + ng) / 2;\n  st.clear();\n  bool isok= false;\n\
     \  for (int i= x; i + x <= N; ++i) {\n   st.insert(rh.sub(i - x, x).hash());\n\
     \   isok|= st.count(rh.sub(i, x).hash());\n  }\n  (isok ? ok : ng)= x;\n }\n cout\
     \ << ok << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc141/tasks/abc141_e\"\n#include\
-    \ <iostream>\n#include <string>\n#include <set>\n#include \"src/Math/CartesianProduct.hpp\"\
+    \ <iostream>\n#include <string>\n#include <set>\n#include \"src/Misc/Pointwise.hpp\"\
     \n#include \"src/String/RollingHash.hpp\"\n#include \"src/Misc/rng.hpp\"\n#include\
     \ \"src/Math/ModInt.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n using K= CartesianProduct<Mint,\
+    \ ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n using K= Pointwise<Mint,\
     \ Mint>;\n using RH= RollingHash<K>;\n RH::init({rng(), rng()});\n int N;\n cin\
     \ >> N;\n string S;\n cin >> S;\n RH rh(S);\n multiset<K> st;\n int ok= 0, ng=\
     \ N / 2 + 1;\n while (ng - ok > 1) {\n  int x= (ok + ng) / 2;\n  st.clear();\n\
@@ -192,7 +192,7 @@ data:
     \ - x, x).hash());\n   isok|= st.count(rh.sub(i, x).hash());\n  }\n  (isok ? ok\
     \ : ng)= x;\n }\n cout << ok << '\\n';\n return 0;\n}"
   dependsOn:
-  - src/Math/CartesianProduct.hpp
+  - src/Misc/Pointwise.hpp
   - src/String/RollingHash.hpp
   - src/Misc/rng.hpp
   - src/Math/ModInt.hpp
@@ -202,8 +202,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc141_e.RH.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-05 22:57:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc141_e.RH.test.cpp
 layout: document

@@ -4,17 +4,17 @@ data:
   - icon: ':question:'
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
-  - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -63,7 +63,7 @@ data:
     \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
     \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
     \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
-    \ SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ SGN\n#undef CE\n}\n#line 3 \"src/NumberTheory/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -100,13 +100,13 @@ data:
     \ int A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}"
   dependsOn:
   - src/Math/mod_sqrt.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   isVerificationFile: true
   path: test/unit_test/constexpr_mod_sqrt.test.cpp
   requiredBy: []
-  timestamp: '2023-11-11 11:24:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-05 22:57:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/constexpr_mod_sqrt.test.cpp
 layout: document

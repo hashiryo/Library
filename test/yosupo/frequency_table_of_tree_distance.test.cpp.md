@@ -26,11 +26,11 @@ data:
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -87,9 +87,9 @@ data:
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
     }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
-    src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint, class\
-    \ MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n const\
-    \ Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
+    src/NumberTheory/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint,\
+    \ class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n\
+    \ const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
     \ - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b),\
     \ d, md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n\
     \     if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n\
@@ -532,7 +532,7 @@ data:
   - src/FFT/fps_div.hpp
   - src/FFT/fps_inv.hpp
   - src/FFT/NTT.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
@@ -541,7 +541,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/frequency_table_of_tree_distance.test.cpp

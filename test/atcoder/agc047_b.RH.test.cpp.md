@@ -8,15 +8,15 @@ data:
     path: src/Internal/modint_traits.hpp
     title: "modint\u3092\u6271\u3046\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':question:'
-    path: src/Math/CartesianProduct.hpp
-    title: "\u4EE3\u6570\u7CFB\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\\
-      times\\cdots\\times K_n$)"
-  - icon: ':question:'
     path: src/Math/ModInt.hpp
     title: ModInt
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/Misc/Pointwise.hpp
+    title: "\u4F53\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\times\\cdots\\\
+      times K_n$)"
   - icon: ':question:'
     path: src/Misc/rng.hpp
     title: "\u7591\u4F3C\u4E71\u6570"
@@ -74,17 +74,17 @@ data:
     \ + r.n + k] < str[l.bg + k];\n   if (k= lcp(r, l.sub(l.n - r.n)); k < r.n) return\
     \ str[r.bg + k] < str[l.bg + l.n - r.n + k];\n  }\n  return false;\n }\n std::string\
     \ to_str() const {  // for debug\n  std::string ret;\n  for (int i= bg; i < bg\
-    \ + n; ++i) ret+= (char)str[i];\n  return ret;\n }\n};\n#line 2 \"src/Math/CartesianProduct.hpp\"\
-    \n#include <tuple>\n#line 4 \"src/Math/CartesianProduct.hpp\"\n#include <utility>\n\
-    template <class... Ks> struct CartesianProduct: std::tuple<Ks...> {\n static constexpr\
-    \ int N= sizeof...(Ks);\n using Self= CartesianProduct;\n using std::tuple<Ks...>::tuple;\n\
-    \ template <class T> CartesianProduct(const T &v) { fill(v, std::make_index_sequence<N>());\
+    \ + n; ++i) ret+= (char)str[i];\n  return ret;\n }\n};\n#line 2 \"src/Misc/Pointwise.hpp\"\
+    \n#include <tuple>\n#line 4 \"src/Misc/Pointwise.hpp\"\n#include <utility>\ntemplate\
+    \ <class... Ks> struct Pointwise: std::tuple<Ks...> {\n static constexpr int N=\
+    \ sizeof...(Ks);\n using Self= Pointwise;\n using std::tuple<Ks...>::tuple;\n\
+    \ template <class T> Pointwise(const T &v) { fill(v, std::make_index_sequence<N>());\
     \ }\n template <class T, std::size_t... I> std::array<int, N> fill(const T &v,\
     \ std::index_sequence<I...>) { return {{(void(std::get<I>(*this)= v), 0)...}};\
     \ }\n#define HELPER(name, op) \\\n template <std::size_t... I> std::array<int,\
     \ N> name(const Self &y, std::index_sequence<I...>) { return {{(void(std::get<I>(*this)\
-    \ op##= std::get<I>(y)), 0)...}}; } \\\n Self &operator op##=(const Self &r) {\
-    \ return name(r, std::make_index_sequence<N>()), *this; }\n HELPER(add_assign,\
+    \ op##= std::get<I>(y)), 0)...}}; } \\\n Self &operator op##=(const Self & r)\
+    \ { return name(r, std::make_index_sequence<N>()), *this; }\n HELPER(add_assign,\
     \ +)\n HELPER(dif_assign, -)\n HELPER(mul_assign, *)\n HELPER(div_assign, /)\n\
     #undef HELPER\n Self operator+(const Self &r) const { return Self(*this)+= r;\
     \ }\n Self operator-(const Self &r) const { return Self(*this)-= r; }\n Self operator*(const\
@@ -173,8 +173,8 @@ data:
     \ >> 9;\n}\nuint64_t rng(uint64_t lim) { return rng() % lim; }\nint64_t rng(int64_t\
     \ l, int64_t r) { return l + rng() % (r - l); }\n#line 10 \"test/atcoder/agc047_b.RH.test.cpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using Mint= ModInt<998244353>;\n using K= CartesianProduct<Mint, Mint>;\n using\
-    \ RH= RollingHash<K>;\n RH::init({rng(), rng()});\n int N;\n cin >> N;\n vector<string>\
+    \ using Mint= ModInt<998244353>;\n using K= Pointwise<Mint, Mint>;\n using RH=\
+    \ RollingHash<K>;\n RH::init({rng(), rng()});\n int N;\n cin >> N;\n vector<string>\
     \ S(N);\n for (int i= 0; i < N; ++i) cin >> S[i];\n vector<RH> rh(N);\n for (int\
     \ i= 0; i < N; ++i) rh[i]= RH(S[i]);\n map<K, vector<int>> mp;\n for (int i= 0;\
     \ i < N; ++i) {\n  int c= S[i][0] - 'a';\n  K h= rh[i].sub(1).hash();\n  auto\
@@ -186,10 +186,10 @@ data:
     \ ans-= N;\n cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/agc047/tasks/agc047_b\"\n#include\
     \ <iostream>\n#include <vector>\n#include <string>\n#include <map>\n#include \"\
-    src/String/RollingHash.hpp\"\n#include \"src/Math/CartesianProduct.hpp\"\n#include\
-    \ \"src/Math/ModInt.hpp\"\n#include \"src/Misc/rng.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
-    \ using K= CartesianProduct<Mint, Mint>;\n using RH= RollingHash<K>;\n RH::init({rng(),\
+    src/String/RollingHash.hpp\"\n#include \"src/Misc/Pointwise.hpp\"\n#include \"\
+    src/Math/ModInt.hpp\"\n#include \"src/Misc/rng.hpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using Mint= ModInt<998244353>;\n\
+    \ using K= Pointwise<Mint, Mint>;\n using RH= RollingHash<K>;\n RH::init({rng(),\
     \ rng()});\n int N;\n cin >> N;\n vector<string> S(N);\n for (int i= 0; i < N;\
     \ ++i) cin >> S[i];\n vector<RH> rh(N);\n for (int i= 0; i < N; ++i) rh[i]= RH(S[i]);\n\
     \ map<K, vector<int>> mp;\n for (int i= 0; i < N; ++i) {\n  int c= S[i][0] - 'a';\n\
@@ -202,7 +202,7 @@ data:
     }"
   dependsOn:
   - src/String/RollingHash.hpp
-  - src/Math/CartesianProduct.hpp
+  - src/Misc/Pointwise.hpp
   - src/Math/ModInt.hpp
   - src/Math/mod_inv.hpp
   - src/Internal/Remainder.hpp
@@ -211,7 +211,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/agc047_b.RH.test.cpp
   requiredBy: []
-  timestamp: '2024-01-29 15:51:38+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/agc047_b.RH.test.cpp

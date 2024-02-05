@@ -8,62 +8,29 @@ data:
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
+    path: src/NumberTheory/Factors.hpp
+    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: src/Math/BinomialCoefficient.hpp
-    title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':heavy_check_mark:'
-    path: src/Math/ModInt_Exp.hpp
-    title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
-  - icon: ':x:'
-    path: src/Math/OrderFp.hpp
-    title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
-  - icon: ':x:'
-    path: src/Math/mod_kth_root.hpp
-    title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
-    path: src/Math/mod_tetration.hpp
-    title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
-      mathbb{Z}$)"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/NTL_1_D.test.cpp
-    title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc228_e.test.cpp
-    title: test/atcoder/abc228_e.test.cpp
   - icon: ':x:'
-    path: test/unit_test/constexpr_factors.test.cpp
-    title: test/unit_test/constexpr_factors.test.cpp
-  - icon: ':x:'
-    path: test/unit_test/constexpr_mod_tetration.test.cpp
-    title: test/unit_test/constexpr_mod_tetration.test.cpp
+    path: test/atcoder/abc335_g.test.cpp
+    title: test/atcoder/abc335_g.test.cpp
   - icon: ':x:'
     path: test/unit_test/constexpr_orderfp.test.cpp
     title: test/unit_test/constexpr_orderfp.test.cpp
   - icon: ':x:'
-    path: test/yosupo/binomial_coefficient.test.cpp
-    title: test/yosupo/binomial_coefficient.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/factorize.test.cpp
-    title: test/yosupo/factorize.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/kth_root_mod.test.cpp
-    title: test/yosupo/kth_root_mod.test.cpp
-  - icon: ':x:'
     path: test/yosupo/primitive_root.test.cpp
     title: test/yosupo/primitive_root.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/tetration_mod.test.cpp
-    title: test/yosupo/tetration_mod.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"src/Math/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
+  bundledCode: "#line 2 \"src/NumberTheory/OrderFp.hpp\"\n#include <array>\n#line\
+    \ 2 \"src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n\
     #include <iostream>\n#include <algorithm>\n#include <vector>\n#line 2 \"src/Internal/Remainder.hpp\"\
     \nnamespace math_internal {\nusing namespace std;\nusing u8= unsigned char;\n\
     using u32= unsigned;\nusing i64= long long;\nusing u64= unsigned long long;\n\
@@ -105,7 +72,7 @@ data:
     \ r;\n }\n};\ntemplate <class u_t, class MP> CE u_t pow(u_t x, u64 k, const MP\
     \ &md) {\n for (u_t ret= md.set(1);; x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret,\
     \ x) : 0; !(k>>= 1)) return ret;\n}\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef\
-    \ SGN\n#undef CE\n}\n#line 3 \"src/Math/is_prime.hpp\"\nnamespace math_internal\
+    \ SGN\n#undef CE\n}\n#line 3 \"src/NumberTheory/is_prime.hpp\"\nnamespace math_internal\
     \ {\ntemplate <class Uint, class MP, u64... args> constexpr bool miller_rabin(Uint\
     \ n) {\n const MP md(n);\n const Uint s= __builtin_ctzll(n - 1), d= n >> s, one=\
     \ md.set(1), n1= md.norm(md.set(n - 1));\n for (auto a: {args...})\n  if (Uint\
@@ -125,14 +92,14 @@ data:
     \ a, Int b) {\n if (a == 0 || b == 0) return a + b;\n int n= bsf(a), m= bsf(b),\
     \ s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n\
     \  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n return a << std::min(n,\
-    \ m);\n}\n#line 9 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
-    \ <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg,\
-    \ i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1];\
-    \ bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t\
-    \ _Nm> struct ConstexprArray {\n constexpr size_t size() const { return sz; }\n\
-    \ constexpr auto &operator[](int i) const { return dat[i]; }\n constexpr auto\
-    \ *begin() const { return dat; }\n constexpr auto *end() const { return dat +\
-    \ sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream\
+    \ m);\n}\n#line 9 \"src/NumberTheory/Factors.hpp\"\nnamespace math_internal {\n\
+    template <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed\
+    \ - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j\
+    \ - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T,\
+    \ size_t _Nm> struct ConstexprArray {\n constexpr size_t size() const { return\
+    \ sz; }\n constexpr auto &operator[](int i) const { return dat[i]; }\n constexpr\
+    \ auto *begin() const { return dat; }\n constexpr auto *end() const { return dat\
+    \ + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream\
     \ &os, const ConstexprArray &r) {\n  os << \"[\";\n  for (size_t i= 0; i < r.sz;\
     \ ++i) os << r[i] << \",]\"[i == r.sz - 1];\n  return os;\n }\n};\nclass Factors:\
     \ public ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class\
@@ -161,88 +128,85 @@ data:
     \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
     \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
     \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n"
-  code: "#pragma once\n#include <numeric>\n#include <cassert>\n#include <iostream>\n\
-    #include <algorithm>\n#include <vector>\n#include \"src/Math/is_prime.hpp\"\n\
-    #include \"src/Math/binary_gcd.hpp\"\nnamespace math_internal {\ntemplate <class\
-    \ T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg, i= 0;\
-    \ i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1]; bg[j\
-    \ - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t _Nm>\
-    \ struct ConstexprArray {\n constexpr size_t size() const { return sz; }\n constexpr\
-    \ auto &operator[](int i) const { return dat[i]; }\n constexpr auto *begin() const\
-    \ { return dat; }\n constexpr auto *end() const { return dat + sz; }\nprotected:\n\
-    \ T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream &os, const\
-    \ ConstexprArray &r) {\n  os << \"[\";\n  for (size_t i= 0; i < r.sz; ++i) os\
-    \ << r[i] << \",]\"[i == r.sz - 1];\n  return os;\n }\n};\nclass Factors: public\
-    \ ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class MP>\
-    \ static constexpr Uint rho(Uint n, Uint c) {\n  const MP md(n);\n  auto f= [&md,\
-    \ n, c](Uint x) { return md.plus(md.mul(x, x), c); };\n  const Uint m= 1LL <<\
-    \ (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z= 1, q= md.set(1), g= 1;\n  for\
-    \ (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x= y, i= r; i--;) y= f(y);\n  \
-    \ for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q), n), k+= m)\n    for\
-    \ (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y, x));\n  }\n\
-    \  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z, x)), n);\n \
-    \  } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
-    \ n) {\n  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n <\
-    \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
-    \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
-    \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
-    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
-    \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
-    \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
-    \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
-    \ bubble_sort(dat, dat + sz); }\n};\n}  // namespace math_internal\nusing math_internal::Factors;\n\
-    constexpr uint64_t totient(const Factors &f) {\n uint64_t ret= 1, i= 0;\n for\
-    \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
-    constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
-    \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n"
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"src/NumberTheory/OrderFp.hpp\"\
+    \nnamespace math_internal {\nclass OrderFp {\n u64 p;\n std::array<u64, 17> prod;\n\
+    \ template <class Uint, class MP> constexpr Uint p_rt() const {\n  const MP md(p);\n\
+    \  for (Uint ret= 2, one= md.set(1), ng= 0, m= p - 1;; ++ret) {\n   Uint a= md.set(ret);\n\
+    \   for (auto [q, e]: factors)\n    if ((ng= (md.norm(pow(a, m / q, md)) == one)))\
+    \ break;\n   if (!ng) return ret;\n  }\n }\n template <class Uint, class MP> constexpr\
+    \ Uint ord_(u8 l, u8 r, Uint x, const MP &md) const {\n  Uint ret= 1;\n  if (r\
+    \ - l == 1) {\n   Uint one= md.set(1);\n   auto [q, e]= factors[l];\n   for (u8\
+    \ i= e; i--; ret*= q, x= pow(x, q, md))\n    if (x == one) break;\n   return ret;\n\
+    \  }\n  u8 m= (l + r) / 2;\n  return ord_(l, m, pow(x, prod[r] / prod[m], md),\
+    \ md) * ord_(m, r, pow(x, prod[m] / prod[l], md), md);\n }\n template <class Uint,\
+    \ class MP> constexpr Uint ord(Uint x) const {\n  const MP md(p);\n  return ord_(0,\
+    \ factors.size(), md.set(x), md);\n }\npublic:\n Factors factors;\n constexpr\
+    \ OrderFp(u64 p): p(p), prod({1}), factors(p - 1) {\n  assert(is_prime(p));\n\
+    \  for (u8 i= 0, d= factors.size(); i < d; ++i) {\n   auto [q, e]= factors[i];\n\
+    \   prod[i + 1]= prod[i];\n   for (u8 j= e; j--;) prod[i + 1]*= q;\n  }\n }\n\
+    \ constexpr u64 primitive_root() const {\n  if (p == 2) return 1;\n  if (p < (1\
+    \ << 30)) return p_rt<u32, MP_Mo<u32, u64, 32, 31>>();\n  if (p < (1ull << 62))\
+    \ return p_rt<u64, MP_Mo<u64, u128, 64, 63>>();\n  return p_rt<u64, MP_D2B1>();\n\
+    \ }\n constexpr u64 operator()(u64 x) const {\n  if (x%= p; !x) return 0;\n  if\
+    \ (x == 1) return 1;\n  if (p < (1 << 30)) return ord<u32, MP_Mo<u32, u64, 32,\
+    \ 31>>(x);\n  if (p < (1ull << 62)) return ord<u64, MP_Mo<u64, u128, 64, 63>>(x);\n\
+    \  return ord<u64, MP_D2B1>(x);\n }\n};\n}\nusing math_internal::OrderFp;\n"
+  code: "#pragma once\n#include <array>\n#include \"src/NumberTheory/Factors.hpp\"\
+    \nnamespace math_internal {\nclass OrderFp {\n u64 p;\n std::array<u64, 17> prod;\n\
+    \ template <class Uint, class MP> constexpr Uint p_rt() const {\n  const MP md(p);\n\
+    \  for (Uint ret= 2, one= md.set(1), ng= 0, m= p - 1;; ++ret) {\n   Uint a= md.set(ret);\n\
+    \   for (auto [q, e]: factors)\n    if ((ng= (md.norm(pow(a, m / q, md)) == one)))\
+    \ break;\n   if (!ng) return ret;\n  }\n }\n template <class Uint, class MP> constexpr\
+    \ Uint ord_(u8 l, u8 r, Uint x, const MP &md) const {\n  Uint ret= 1;\n  if (r\
+    \ - l == 1) {\n   Uint one= md.set(1);\n   auto [q, e]= factors[l];\n   for (u8\
+    \ i= e; i--; ret*= q, x= pow(x, q, md))\n    if (x == one) break;\n   return ret;\n\
+    \  }\n  u8 m= (l + r) / 2;\n  return ord_(l, m, pow(x, prod[r] / prod[m], md),\
+    \ md) * ord_(m, r, pow(x, prod[m] / prod[l], md), md);\n }\n template <class Uint,\
+    \ class MP> constexpr Uint ord(Uint x) const {\n  const MP md(p);\n  return ord_(0,\
+    \ factors.size(), md.set(x), md);\n }\npublic:\n Factors factors;\n constexpr\
+    \ OrderFp(u64 p): p(p), prod({1}), factors(p - 1) {\n  assert(is_prime(p));\n\
+    \  for (u8 i= 0, d= factors.size(); i < d; ++i) {\n   auto [q, e]= factors[i];\n\
+    \   prod[i + 1]= prod[i];\n   for (u8 j= e; j--;) prod[i + 1]*= q;\n  }\n }\n\
+    \ constexpr u64 primitive_root() const {\n  if (p == 2) return 1;\n  if (p < (1\
+    \ << 30)) return p_rt<u32, MP_Mo<u32, u64, 32, 31>>();\n  if (p < (1ull << 62))\
+    \ return p_rt<u64, MP_Mo<u64, u128, 64, 63>>();\n  return p_rt<u64, MP_D2B1>();\n\
+    \ }\n constexpr u64 operator()(u64 x) const {\n  if (x%= p; !x) return 0;\n  if\
+    \ (x == 1) return 1;\n  if (p < (1 << 30)) return ord<u32, MP_Mo<u32, u64, 32,\
+    \ 31>>(x);\n  if (p < (1ull << 62)) return ord<u64, MP_Mo<u64, u128, 64, 63>>(x);\n\
+    \  return ord<u64, MP_D2B1>(x);\n }\n};\n}\nusing math_internal::OrderFp;"
   dependsOn:
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/Factors.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
   isVerificationFile: false
-  path: src/Math/Factors.hpp
-  requiredBy:
-  - src/Math/mod_tetration.hpp
-  - src/Math/ModInt_Exp.hpp
-  - src/Math/BinomialCoefficient.hpp
-  - src/Math/mod_kth_root.hpp
-  - src/Math/OrderFp.hpp
-  timestamp: '2024-02-05 18:28:29+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  path: src/NumberTheory/OrderFp.hpp
+  requiredBy: []
+  timestamp: '2024-02-05 22:57:52+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/unit_test/constexpr_orderfp.test.cpp
-  - test/unit_test/constexpr_mod_tetration.test.cpp
-  - test/unit_test/constexpr_factors.test.cpp
-  - test/aoj/NTL_1_D.test.cpp
-  - test/atcoder/abc228_e.test.cpp
-  - test/yosupo/kth_root_mod.test.cpp
+  - test/atcoder/abc335_g.test.cpp
   - test/yosupo/primitive_root.test.cpp
-  - test/yosupo/tetration_mod.test.cpp
-  - test/yosupo/factorize.test.cpp
-  - test/yosupo/binomial_coefficient.test.cpp
-documentation_of: src/Math/Factors.hpp
+documentation_of: src/NumberTheory/OrderFp.hpp
 layout: document
-title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
+title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
 ---
 
-## `Factors` クラス
+`constexpr` できる. \
+原始根を求める関数は同じ $p$ に対して繰り返し使うものでないので
 
-$n = p_1^{e_1}p_2^{e_2}\cdots p_k^{e_k}$ を素因数分解した 列 $( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を格納するクラス.\
-`constexpr` できる.
-| 名前 | 概要 | 計算量  |
+## メンバ
+
+| メンバ変数 | 概要 |
+| ---| --- |
+|`factors`| $p-1$ の[素因数分解](md/NumberTheory/Factors.md)|
+
+| メンバ関数 | 概要 | 計算量  |
 | ---| --- | ---|
-| `Factors(n)` |  コンストラクタ．  | $\mathcal{O} \left(n^{1/4}\right) $  |
+| `OrderFp(p)` | コンストラクタ. <br> 引数の $p$ が素数でないと `assert` で落ちる. | $\mathcal{O} \left(p^{1/4}\right) $  |
+| `primitive_root()` | 素数 $p$ の原始根の一つを返す.| $\mathcal{O} \left((\log p)^2 \right) $|
+| `operator()(x)` | $x$ の位数 $\mathrm{ord}_p(x)$ を返す. <br> $x\equiv 0 \ (\mathrm{mod} \ p)$ なら $0$ を返す. |  $\mathcal{O} \left( \log p \log \log p\right) $ |
 
-## その他関数
-
-| 名前 | 概要 | 計算量  |
-| ---| --- | ---|
-| 1. `totient(n)` <br> 2. `totient(f)`  | オイラーのトーシェント関数 $\phi(n)$ を計算する. <br> 1. $n$ を引数として与える. <br> 2. あらかじめ 素因数分解しておいて その列 $f = ( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を直接引数で与える. <br> `constexpr` でよべる.| 1. $\mathcal{O} \left(n^{1/4}\right) $ <br> 2. $\mathcal{O} \left(\sum_{i=1}^k e_i\right) $      |
-| 1. `enumerate_divisors(n)`<br> 2. `enumerate_divisors(f)` | $n$の約数列を返す. <br> 1. $n$ を引数として与える. <br> 2. あらかじめ 素因数分解しておいて その列 $f = ( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を直接引数で与える. <br> 大きさでソートしていない. (素因数について辞書順みたいな順) | 1. $\mathcal{O} \left(n^{1/4}\right) $ <br> 2. $\mathcal{O} \left(\prod_{i=1}^k (e_i+1)\right) $ |
-
+## 参考
+[https://twitter.com/_su1sen/status/1576146280795242497](https://twitter.com/_su1sen/status/1576146280795242497)

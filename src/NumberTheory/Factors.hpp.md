@@ -8,26 +8,70 @@ data:
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
-    path: src/NumberTheory/Factors.hpp
-    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
     path: src/NumberTheory/is_prime.hpp
     title: "\u7D20\u6570\u5224\u5B9A"
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: src/Math/BinomialCoefficient.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':x:'
+    path: src/Math/ModInt_Exp.hpp
+    title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
+  - icon: ':x:'
+    path: src/Math/mod_kth_root.hpp
+    title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
+  - icon: ':x:'
+    path: src/Math/mod_tetration.hpp
+    title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
+      mathbb{Z}$)"
+  - icon: ':x:'
+    path: src/NumberTheory/ArrayOnDivisors.hpp
+    title: "\u7D04\u6570\u914D\u5217"
+  - icon: ':x:'
+    path: src/NumberTheory/OrderFp.hpp
+    title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/NTL_1_D.test.cpp
+    title: test/aoj/NTL_1_D.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc228_e.test.cpp
+    title: test/atcoder/abc228_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc335_g.test.cpp
+    title: test/atcoder/abc335_g.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_factors.test.cpp
+    title: test/unit_test/constexpr_factors.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_mod_tetration.test.cpp
+    title: test/unit_test/constexpr_mod_tetration.test.cpp
+  - icon: ':x:'
+    path: test/unit_test/constexpr_orderfp.test.cpp
+    title: test/unit_test/constexpr_orderfp.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/binomial_coefficient.test.cpp
+    title: test/yosupo/binomial_coefficient.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/factorize.test.cpp
+    title: test/yosupo/factorize.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/kth_root_mod.test.cpp
+    title: test/yosupo/kth_root_mod.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/primitive_root.test.cpp
+    title: test/yosupo/primitive_root.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/tetration_mod.test.cpp
+    title: test/yosupo/tetration_mod.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _pathExtension: hpp
+  _verificationStatusIcon: ':question:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
-    links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"test/unit_test/constexpr_factors.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n#line 2 \"\
-    src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include <cassert>\n#line\
-    \ 5 \"src/NumberTheory/Factors.hpp\"\n#include <algorithm>\n#include <vector>\n\
-    #line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
+    links: []
+  bundledCode: "#line 2 \"src/NumberTheory/Factors.hpp\"\n#include <numeric>\n#include\
+    \ <cassert>\n#include <iostream>\n#include <algorithm>\n#include <vector>\n#line\
+    \ 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal {\nusing namespace\
     \ std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing i64= long long;\n\
     using u64= unsigned long long;\nusing u128= __uint128_t;\n#define CE constexpr\n\
     #define IL inline\n#define NORM \\\n if (n >= mod) n-= mod; \\\n return n\n#define\
@@ -123,36 +167,90 @@ data:
     \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
     \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
     \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"test/unit_test/constexpr_factors.test.cpp\"\
-    \nusing namespace std;\nconstexpr auto f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size()\
-    \ == 3);\nstatic_assert(f[0].first == 2);\nstatic_assert(f[0].second == 2);\n\
-    static_assert(f[1].first == 3);\nstatic_assert(f[1].second == 1);\nstatic_assert(f[2].first\
-    \ == 5);\nstatic_assert(f[2].second == 1);\nconstexpr int n= totient(100);\nstatic_assert(n\
-    \ == 40);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int\
-    \ A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
-    #include \"src/NumberTheory/Factors.hpp\"\nusing namespace std;\nconstexpr auto\
-    \ f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size() == 3);\nstatic_assert(f[0].first\
-    \ == 2);\nstatic_assert(f[0].second == 2);\nstatic_assert(f[1].first == 3);\n\
-    static_assert(f[1].second == 1);\nstatic_assert(f[2].first == 5);\nstatic_assert(f[2].second\
-    \ == 1);\nconstexpr int n= totient(100);\nstatic_assert(n == 40);\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin >> A >> B;\n\
-    \ cout << A + B << '\\n';\n return 0;\n}"
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n"
+  code: "#pragma once\n#include <numeric>\n#include <cassert>\n#include <iostream>\n\
+    #include <algorithm>\n#include <vector>\n#include \"src/NumberTheory/is_prime.hpp\"\
+    \n#include \"src/Math/binary_gcd.hpp\"\nnamespace math_internal {\ntemplate <class\
+    \ T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg, i= 0;\
+    \ i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1]; bg[j\
+    \ - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t _Nm>\
+    \ struct ConstexprArray {\n constexpr size_t size() const { return sz; }\n constexpr\
+    \ auto &operator[](int i) const { return dat[i]; }\n constexpr auto *begin() const\
+    \ { return dat; }\n constexpr auto *end() const { return dat + sz; }\nprotected:\n\
+    \ T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream &os, const\
+    \ ConstexprArray &r) {\n  os << \"[\";\n  for (size_t i= 0; i < r.sz; ++i) os\
+    \ << r[i] << \",]\"[i == r.sz - 1];\n  return os;\n }\n};\nclass Factors: public\
+    \ ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class MP>\
+    \ static constexpr Uint rho(Uint n, Uint c) {\n  const MP md(n);\n  auto f= [&md,\
+    \ n, c](Uint x) { return md.plus(md.mul(x, x), c); };\n  const Uint m= 1LL <<\
+    \ (__lg(n) / 5);\n  Uint x= 1, y= md.set(2), z= 1, q= md.set(1), g= 1;\n  for\
+    \ (Uint r= 1, i= 0; g == 1; r<<= 1) {\n   for (x= y, i= r; i--;) y= f(y);\n  \
+    \ for (Uint k= 0; k < r && g == 1; g= binary_gcd(md.get(q), n), k+= m)\n    for\
+    \ (z= y, i= min(m, r - k); i--;) y= f(y), q= md.mul(q, md.diff(y, x));\n  }\n\
+    \  if (g == n) do {\n    z= f(z), g= binary_gcd(md.get(md.diff(z, x)), n);\n \
+    \  } while (g == 1);\n  return g;\n }\n static constexpr u64 find_prime_factor(u64\
+    \ n) {\n  if (is_prime(n)) return n;\n  for (u64 i= 100; i--;)\n   if (n= n <\
+    \ (1 << 30) ? rho<u32, MP_Mo<u32, u64, 32, 31>>(n, i + 1) : n < (1ull << 62) ?\
+    \ rho<u64, MP_Mo<u64, u128, 64, 63>>(n, i + 1) : rho<u64, MP_D2B1>(n, i + 1);\
+    \ is_prime(n)) return n;\n  return 0;\n }\n constexpr void init(u64 n) {\n  for\
+    \ (u64 p= 2; p < 98 && p * p <= n; ++p)\n   if (n % p == 0)\n    for (dat[sz++].first=\
+    \ p; n % p == 0;) n/= p, ++dat[sz - 1].second;\n  for (u64 p= 0; n > 1; dat[sz++].first=\
+    \ p)\n   for (p= find_prime_factor(n); n % p == 0;) n/= p, ++dat[sz].second;\n\
+    \ }\npublic:\n constexpr Factors()= default;\n constexpr Factors(u64 n) { init(n),\
+    \ bubble_sort(dat, dat + sz); }\n};\n}  // namespace math_internal\nusing math_internal::Factors;\n\
+    constexpr uint64_t totient(const Factors &f) {\n uint64_t ret= 1, i= 0;\n for\
+    \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
+    constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
+    \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
+    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
+    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
+    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
+    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n"
   dependsOn:
-  - src/NumberTheory/Factors.hpp
   - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
-  isVerificationFile: true
-  path: test/unit_test/constexpr_factors.test.cpp
-  requiredBy: []
+  isVerificationFile: false
+  path: src/NumberTheory/Factors.hpp
+  requiredBy:
+  - src/NumberTheory/ArrayOnDivisors.hpp
+  - src/NumberTheory/OrderFp.hpp
+  - src/Math/mod_tetration.hpp
+  - src/Math/ModInt_Exp.hpp
+  - src/Math/BinomialCoefficient.hpp
+  - src/Math/mod_kth_root.hpp
   timestamp: '2024-02-05 22:57:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/unit_test/constexpr_factors.test.cpp
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - test/unit_test/constexpr_orderfp.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
+  - test/unit_test/constexpr_factors.test.cpp
+  - test/aoj/NTL_1_D.test.cpp
+  - test/atcoder/abc228_e.test.cpp
+  - test/atcoder/abc335_g.test.cpp
+  - test/yosupo/kth_root_mod.test.cpp
+  - test/yosupo/primitive_root.test.cpp
+  - test/yosupo/tetration_mod.test.cpp
+  - test/yosupo/factorize.test.cpp
+  - test/yosupo/binomial_coefficient.test.cpp
+documentation_of: src/NumberTheory/Factors.hpp
 layout: document
-redirect_from:
-- /verify/test/unit_test/constexpr_factors.test.cpp
-- /verify/test/unit_test/constexpr_factors.test.cpp.html
-title: test/unit_test/constexpr_factors.test.cpp
+title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
 ---
+
+## `Factors` クラス
+
+$n = p_1^{e_1}p_2^{e_2}\cdots p_k^{e_k}$ を素因数分解した 列 $( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を格納するクラス.\
+`constexpr` できる.
+| 名前 | 概要 | 計算量  |
+| ---| --- | ---|
+| `Factors(n)` |  コンストラクタ．  | $\mathcal{O} \left(n^{1/4}\right) $  |
+
+## その他関数
+
+| 名前 | 概要 | 計算量  |
+| ---| --- | ---|
+| 1. `totient(n)` <br> 2. `totient(f)`  | オイラーのトーシェント関数 $\phi(n)$ を計算する. <br> 1. $n$ を引数として与える. <br> 2. あらかじめ 素因数分解しておいて その列 $f = ( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を直接引数で与える. <br> `constexpr` でよべる.| 1. $\mathcal{O} \left(n^{1/4}\right) $ <br> 2. $\mathcal{O} \left(\sum_{i=1}^k e_i\right) $      |
+| 1. `enumerate_divisors(n)`<br> 2. `enumerate_divisors(f)` | $n$の約数列を返す. <br> 1. $n$ を引数として与える. <br> 2. あらかじめ 素因数分解しておいて その列 $f = ( (p_1,e_1), (p_2,e_2), \dots, (p_k,e_k) )$ を直接引数で与える. <br> 大きさでソートしていない. (素因数について辞書順みたいな順) | 1. $\mathcal{O} \left(n^{1/4}\right) $ <br> 2. $\mathcal{O} \left(\prod_{i=1}^k (e_i+1)\right) $ |
+

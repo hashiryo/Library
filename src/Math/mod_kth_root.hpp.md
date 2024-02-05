@@ -5,17 +5,17 @@ data:
     path: src/Internal/Remainder.hpp
     title: "\u5270\u4F59\u306E\u9AD8\u901F\u5316"
   - icon: ':question:'
-    path: src/Math/Factors.hpp
-    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
-  - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
   - icon: ':question:'
-    path: src/Math/is_prime.hpp
-    title: "\u7D20\u6570\u5224\u5B9A"
-  - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
+  - icon: ':question:'
+    path: src/NumberTheory/Factors.hpp
+    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
+  - icon: ':question:'
+    path: src/NumberTheory/is_prime.hpp
+    title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
@@ -31,8 +31,8 @@ data:
     \ <cassert>\ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod)\
     \ {\n static_assert(std::is_signed_v<Int>);\n Int x= 1, y= 0, b= mod;\n for (Int\
     \ q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b), z= a, a= b, b= z - b * q;\n\
-    \ return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 2 \"src/Math/Factors.hpp\"\
-    \n#include <numeric>\n#line 4 \"src/Math/Factors.hpp\"\n#include <iostream>\n\
+    \ return assert(a == 1), x < 0 ? mod - (-x) % mod : x % mod;\n}\n#line 2 \"src/NumberTheory/Factors.hpp\"\
+    \n#include <numeric>\n#line 4 \"src/NumberTheory/Factors.hpp\"\n#include <iostream>\n\
     #include <algorithm>\n#line 2 \"src/Internal/Remainder.hpp\"\nnamespace math_internal\
     \ {\nusing namespace std;\nusing u8= unsigned char;\nusing u32= unsigned;\nusing\
     \ i64= long long;\nusing u64= unsigned long long;\nusing u128= __uint128_t;\n\
@@ -74,9 +74,9 @@ data:
     \ u_t, class MP> CE u_t pow(u_t x, u64 k, const MP &md) {\n for (u_t ret= md.set(1);;\
     \ x= md.mul(x, x))\n  if (k & 1 ? ret= md.mul(ret, x) : 0; !(k>>= 1)) return ret;\n\
     }\n#undef NORM\n#undef PLUS\n#undef DIFF\n#undef SGN\n#undef CE\n}\n#line 3 \"\
-    src/Math/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint, class\
-    \ MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n const\
-    \ Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
+    src/NumberTheory/is_prime.hpp\"\nnamespace math_internal {\ntemplate <class Uint,\
+    \ class MP, u64... args> constexpr bool miller_rabin(Uint n) {\n const MP md(n);\n\
+    \ const Uint s= __builtin_ctzll(n - 1), d= n >> s, one= md.set(1), n1= md.norm(md.set(n\
     \ - 1));\n for (auto a: {args...})\n  if (Uint b= a % n; b)\n   if (Uint p= md.norm(pow(md.set(b),\
     \ d, md)); p != one)\n    for (int i= s; p != n1; p= md.norm(md.mul(p, p)))\n\
     \     if (!(--i)) return 0;\n return 1;\n}\nconstexpr bool is_prime(u64 n) {\n\
@@ -93,14 +93,14 @@ data:
     \ a, Int b) {\n if (a == 0 || b == 0) return a + b;\n int n= bsf(a), m= bsf(b),\
     \ s= 0;\n for (a>>= n, b>>= m; a != b;) {\n  Int d= a - b;\n  bool f= a > b;\n\
     \  s= bsf(d), b= f ? b : a, a= (f ? d : -d) >> s;\n }\n return a << std::min(n,\
-    \ m);\n}\n#line 9 \"src/Math/Factors.hpp\"\nnamespace math_internal {\ntemplate\
-    \ <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed - bg,\
-    \ i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j - 1];\
-    \ bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T, size_t\
-    \ _Nm> struct ConstexprArray {\n constexpr size_t size() const { return sz; }\n\
-    \ constexpr auto &operator[](int i) const { return dat[i]; }\n constexpr auto\
-    \ *begin() const { return dat; }\n constexpr auto *end() const { return dat +\
-    \ sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream\
+    \ m);\n}\n#line 9 \"src/NumberTheory/Factors.hpp\"\nnamespace math_internal {\n\
+    template <class T> constexpr void bubble_sort(T *bg, T *ed) {\n for (int sz= ed\
+    \ - bg, i= 0; i < sz; i++)\n  for (int j= sz; --j > i;)\n   if (auto tmp= bg[j\
+    \ - 1]; bg[j - 1] > bg[j]) bg[j - 1]= bg[j], bg[j]= tmp;\n}\ntemplate <class T,\
+    \ size_t _Nm> struct ConstexprArray {\n constexpr size_t size() const { return\
+    \ sz; }\n constexpr auto &operator[](int i) const { return dat[i]; }\n constexpr\
+    \ auto *begin() const { return dat; }\n constexpr auto *end() const { return dat\
+    \ + sz; }\nprotected:\n T dat[_Nm]= {};\n size_t sz= 0;\n friend ostream &operator<<(ostream\
     \ &os, const ConstexprArray &r) {\n  os << \"[\";\n  for (size_t i= 0; i < r.sz;\
     \ ++i) os << r[i] << \",]\"[i == r.sz - 1];\n  return os;\n }\n};\nclass Factors:\
     \ public ConstexprArray<pair<u64, uint16_t>, 16> {\n template <class Uint, class\
@@ -129,7 +129,7 @@ data:
     \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
     \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
     \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 7 \"src/Math/mod_kth_root.hpp\"\
+    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 6 \"src/Math/mod_kth_root.hpp\"\
     \nnamespace math_internal {\ntemplate <class Int, class MP> inline i64 peth_root(Int\
     \ c, Int pi, int ei, const MP &md) {\n const Int p= md.mod;\n int t= 0;\n Int\
     \ s= p - 1, pe= 1;\n while (s % pi == 0) s/= pi, ++t;\n for (int i= ei; i--;)\
@@ -161,47 +161,46 @@ data:
     \ k, p);\n return inner_kth_root<i64, MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\n\
     using math_internal::mod_kth_root;\n"
   code: "#pragma once\n#include <vector>\n#include <cmath>\n#include \"src/Math/mod_inv.hpp\"\
-    \n#include \"src/Math/Factors.hpp\"\n#include \"src/Math/binary_gcd.hpp\"\nnamespace\
-    \ math_internal {\ntemplate <class Int, class MP> inline i64 peth_root(Int c,\
-    \ Int pi, int ei, const MP &md) {\n const Int p= md.mod;\n int t= 0;\n Int s=\
-    \ p - 1, pe= 1;\n while (s % pi == 0) s/= pi, ++t;\n for (int i= ei; i--;) pe*=\
-    \ pi;\n Int u= mod_inv(pe - s % pe, pe), ONE= md.set(1), z= pow(c, (s * u + 1)\
-    \ / pe, md), zpe= md.norm(pow(c, s * u, md));\n if (zpe == ONE) return z;\n Int\
-    \ ptm1= 1, vs= 0, bs= 0;\n for (int i= t; --i;) ptm1*= pi;\n for (Int v= md.set(2);;\
-    \ v= md.plus(v, ONE))\n  if (vs= pow(v, s, md), bs= md.norm(pow(vs, ptm1, md));\
-    \ bs != ONE) break;\n int size= 1 << __lg(int(sqrt(pi)) + 1), mask= size - 1,\
-    \ vsc[size];\n vector<int> os(size + 1);\n Int vf[size];\n Int x= ONE, vspe= pow(vs,\
-    \ pe, md);\n for (int i= 0; i < size; i++, x= md.mul(x, bs)) os[md.norm(x) & mask]++;\n\
-    \ for (int i= 1; i < size; i++) os[i]+= os[i - 1];\n x= ONE, os[size]= size;\n\
-    \ for (int i= 0, j= 0; i < size; i++, x= md.mul(x, bs)) vf[j= --os[md.norm(x)\
-    \ & mask]]= md.norm(x), vsc[j]= i;\n for (int vs_e= ei, td= 0, n= 0; zpe != ONE;\
-    \ z= md.mul(z, pow(vs, n, md)), zpe= md.norm(md.mul(zpe, pow(vspe, n, md)))) {\n\
-    \  for (u= zpe, td= 0; u != ONE; td++) u= md.norm(pow(bs= u, pi, md));\n  for\
-    \ (int e= t - td; vs_e != e; vs_e++) vs= pow(vs, pi, md), vspe= pow(vspe, pi,\
-    \ md);\n  for (int tt= 0, upd= 1; upd; tt+= size, bs= md.mul(bs, x))\n   for (int\
-    \ m= (md.norm(bs) & mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs)\
-    \ == vf[i]) {\n     if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n\
-    \    }\n }\n return z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int\
-    \ a, u64 k, Int p) {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp=\
-    \ (p - 1) / g, kk= (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) !=\
-    \ md.set(1)) return -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]:\
-    \ Factors(g)) a= peth_root<Int>(a, pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64\
-    \ a, u64 k, i64 p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%=\
-    \ p;\n if (k == 0) return a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n\
-    \ if (p < (1 << 30)) return inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k,\
-    \ p);\n if (p < (1ll << 62)) return inner_kth_root<i64, MP_Mo<u64, u128, 64, 63>>(a,\
-    \ k, p);\n return inner_kth_root<i64, MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\n\
-    using math_internal::mod_kth_root;"
+    \n#include \"src/NumberTheory/Factors.hpp\"\nnamespace math_internal {\ntemplate\
+    \ <class Int, class MP> inline i64 peth_root(Int c, Int pi, int ei, const MP &md)\
+    \ {\n const Int p= md.mod;\n int t= 0;\n Int s= p - 1, pe= 1;\n while (s % pi\
+    \ == 0) s/= pi, ++t;\n for (int i= ei; i--;) pe*= pi;\n Int u= mod_inv(pe - s\
+    \ % pe, pe), ONE= md.set(1), z= pow(c, (s * u + 1) / pe, md), zpe= md.norm(pow(c,\
+    \ s * u, md));\n if (zpe == ONE) return z;\n Int ptm1= 1, vs= 0, bs= 0;\n for\
+    \ (int i= t; --i;) ptm1*= pi;\n for (Int v= md.set(2);; v= md.plus(v, ONE))\n\
+    \  if (vs= pow(v, s, md), bs= md.norm(pow(vs, ptm1, md)); bs != ONE) break;\n\
+    \ int size= 1 << __lg(int(sqrt(pi)) + 1), mask= size - 1, vsc[size];\n vector<int>\
+    \ os(size + 1);\n Int vf[size];\n Int x= ONE, vspe= pow(vs, pe, md);\n for (int\
+    \ i= 0; i < size; i++, x= md.mul(x, bs)) os[md.norm(x) & mask]++;\n for (int i=\
+    \ 1; i < size; i++) os[i]+= os[i - 1];\n x= ONE, os[size]= size;\n for (int i=\
+    \ 0, j= 0; i < size; i++, x= md.mul(x, bs)) vf[j= --os[md.norm(x) & mask]]= md.norm(x),\
+    \ vsc[j]= i;\n for (int vs_e= ei, td= 0, n= 0; zpe != ONE; z= md.mul(z, pow(vs,\
+    \ n, md)), zpe= md.norm(md.mul(zpe, pow(vspe, n, md)))) {\n  for (u= zpe, td=\
+    \ 0; u != ONE; td++) u= md.norm(pow(bs= u, pi, md));\n  for (int e= t - td; vs_e\
+    \ != e; vs_e++) vs= pow(vs, pi, md), vspe= pow(vspe, pi, md);\n  for (int tt=\
+    \ 0, upd= 1; upd; tt+= size, bs= md.mul(bs, x))\n   for (int m= (md.norm(bs) &\
+    \ mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs) == vf[i]) {\n    \
+    \ if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n    }\n }\n return\
+    \ z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int a, u64 k, Int p)\
+    \ {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp= (p - 1) / g, kk=\
+    \ (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) != md.set(1)) return\
+    \ -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]: Factors(g)) a= peth_root<Int>(a,\
+    \ pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64 a, u64 k, i64 p) {\n\
+    \ assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if (k == 0) return\
+    \ a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n if (p < (1 << 30)) return\
+    \ inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k, p);\n if (p < (1ll << 62))\
+    \ return inner_kth_root<i64, MP_Mo<u64, u128, 64, 63>>(a, k, p);\n return inner_kth_root<i64,\
+    \ MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\nusing math_internal::mod_kth_root;"
   dependsOn:
   - src/Math/mod_inv.hpp
-  - src/Math/Factors.hpp
-  - src/Math/is_prime.hpp
+  - src/NumberTheory/Factors.hpp
+  - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
   - src/Math/binary_gcd.hpp
   isVerificationFile: false
   path: src/Math/mod_kth_root.hpp
   requiredBy: []
-  timestamp: '2024-02-05 18:28:29+09:00'
+  timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/kth_root_mod.test.cpp
