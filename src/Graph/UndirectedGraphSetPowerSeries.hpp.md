@@ -6,16 +6,16 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2345.test.cpp
     title: test/aoj/2345.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc199_d.test.cpp
     title: test/atcoder/abc199_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_g.test.cpp
     title: test/atcoder/abc213_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc253_ex.test.cpp
     title: test/atcoder/abc253_ex.test.cpp
   - icon: ':x:'
@@ -29,7 +29,7 @@ data:
     title: test/yukicoder/2507.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/set_power_series.hpp\"\n#include <algorithm>\n\
@@ -87,10 +87,10 @@ data:
     \ h.data(), N), h;\n vector<T> F((n + 1) << n), G((n + 1) << n);\n return rnk_zeta(f.data(),\
     \ F.data(), n), rnk_zeta(g.data(), G.data(), n), cnv_(F.data(), G.data(), n +\
     \ 1), rnk_mobius(F.data(), h.data(), n), h;\n}\ntemplate <class T> void div_na(T\
-    \ f[], const T g[], int N) {\n for (int s= 1, t; s < N; ++s)\n  for (int t= s;\
-    \ t; --t&= s) f[s]-= f[s ^ t] * g[t];\n}\n// 1/f, \"f[empty] = 1\" is required,\
-    \ O(n^2 2^n)\ntemplate <class T> vector<T> inv(const vector<T>& f) {\n const int\
-    \ N= f.size(), n= __builtin_ctz(N);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n\
+    \ f[], const T g[], int N) {\n for (int s= 1; s < N; ++s)\n  for (int t= s; t;\
+    \ --t&= s) f[s]-= f[s ^ t] * g[t];\n}\n// 1/f, \"f[empty] = 1\" is required, O(n^2\
+    \ 2^n)\ntemplate <class T> vector<T> inv(const vector<T>& f) {\n const int N=\
+    \ f.size(), n= __builtin_ctz(N);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n\
     \ vector<T> h(N);\n if (n < 11) return h[0]= 1, div_na(h.data(), f.data(), N),\
     \ h;\n vector<T> F((n + 1) << n), G((n + 1) << n);\n rnk_zeta(f.data(), G.data(),\
     \ n);\n for (int s= N; s--;) {\n  T *a= F.data() + s * (n + 1), *b= G.data() +\
@@ -281,7 +281,7 @@ data:
     \ tmp= graph<T>(), ret(N, 1);\n  for (int s= N; s--;) ret[s]/= tmp[s];\n  ret=\
     \ sps::convolve(ret, ret);\n  for (int s= N; s--;) ret[s]*= tmp[s];\n  ret= sps::log(ret);\n\
     \  for (int s= N; s--;) ret[s]/= 2;\n  return ret;\n }\n template <class T> inline\
-    \ Sps<T> tree() const {\n  Sps<int> e= edge_num();\n  Sps<T> ret= {0, 1};\n  ret.reserve(N);\n\
+    \ Sps<T> tree() const {\n  Sps<u64> e= edge_num();\n  Sps<T> ret= {0, 1};\n  ret.reserve(N);\n\
     \  for (int I= 2; I < N; I<<= 1) {\n   Sps<T> g(ret);\n   for (int s= I; --s;)\
     \ g[s]*= e[s | I] - e[s] - e[I];\n   g= sps::exp(g), std::copy(g.begin(), g.end(),\
     \ std::back_inserter(ret));\n  }\n  return ret;\n }\n template <class T> inline\
@@ -416,7 +416,7 @@ data:
     \ tmp= graph<T>(), ret(N, 1);\n  for (int s= N; s--;) ret[s]/= tmp[s];\n  ret=\
     \ sps::convolve(ret, ret);\n  for (int s= N; s--;) ret[s]*= tmp[s];\n  ret= sps::log(ret);\n\
     \  for (int s= N; s--;) ret[s]/= 2;\n  return ret;\n }\n template <class T> inline\
-    \ Sps<T> tree() const {\n  Sps<int> e= edge_num();\n  Sps<T> ret= {0, 1};\n  ret.reserve(N);\n\
+    \ Sps<T> tree() const {\n  Sps<u64> e= edge_num();\n  Sps<T> ret= {0, 1};\n  ret.reserve(N);\n\
     \  for (int I= 2; I < N; I<<= 1) {\n   Sps<T> g(ret);\n   for (int s= I; --s;)\
     \ g[s]*= e[s | I] - e[s] - e[I];\n   g= sps::exp(g), std::copy(g.begin(), g.end(),\
     \ std::back_inserter(ret));\n  }\n  return ret;\n }\n template <class T> inline\
@@ -467,8 +467,8 @@ data:
   isVerificationFile: false
   path: src/Graph/UndirectedGraphSetPowerSeries.hpp
   requiredBy: []
-  timestamp: '2024-02-04 23:58:32+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-05 15:53:03+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/2507.test.cpp
   - test/aoj/2345.test.cpp

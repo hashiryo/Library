@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/UndirectedGraphSetPowerSeries.hpp
     title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
       \u7D1A\u6570)"
@@ -166,10 +166,10 @@ data:
     \ h;\n vector<T> F((n + 1) << n), G((n + 1) << n);\n return rnk_zeta(f.data(),\
     \ F.data(), n), rnk_zeta(g.data(), G.data(), n), cnv_(F.data(), G.data(), n +\
     \ 1), rnk_mobius(F.data(), h.data(), n), h;\n}\ntemplate <class T> void div_na(T\
-    \ f[], const T g[], int N) {\n for (int s= 1, t; s < N; ++s)\n  for (int t= s;\
-    \ t; --t&= s) f[s]-= f[s ^ t] * g[t];\n}\n// 1/f, \"f[empty] = 1\" is required,\
-    \ O(n^2 2^n)\ntemplate <class T> vector<T> inv(const vector<T>& f) {\n const int\
-    \ N= f.size(), n= __builtin_ctz(N);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n\
+    \ f[], const T g[], int N) {\n for (int s= 1; s < N; ++s)\n  for (int t= s; t;\
+    \ --t&= s) f[s]-= f[s ^ t] * g[t];\n}\n// 1/f, \"f[empty] = 1\" is required, O(n^2\
+    \ 2^n)\ntemplate <class T> vector<T> inv(const vector<T>& f) {\n const int N=\
+    \ f.size(), n= __builtin_ctz(N);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n\
     \ vector<T> h(N);\n if (n < 11) return h[0]= 1, div_na(h.data(), f.data(), N),\
     \ h;\n vector<T> F((n + 1) << n), G((n + 1) << n);\n rnk_zeta(f.data(), G.data(),\
     \ n);\n for (int s= N; s--;) {\n  T *a= F.data() + s * (n + 1), *b= G.data() +\
@@ -360,7 +360,7 @@ data:
     \ tmp= graph<T>(), ret(N, 1);\n  for (int s= N; s--;) ret[s]/= tmp[s];\n  ret=\
     \ sps::convolve(ret, ret);\n  for (int s= N; s--;) ret[s]*= tmp[s];\n  ret= sps::log(ret);\n\
     \  for (int s= N; s--;) ret[s]/= 2;\n  return ret;\n }\n template <class T> inline\
-    \ Sps<T> tree() const {\n  Sps<int> e= edge_num();\n  Sps<T> ret= {0, 1};\n  ret.reserve(N);\n\
+    \ Sps<T> tree() const {\n  Sps<u64> e= edge_num();\n  Sps<T> ret= {0, 1};\n  ret.reserve(N);\n\
     \  for (int I= 2; I < N; I<<= 1) {\n   Sps<T> g(ret);\n   for (int s= I; --s;)\
     \ g[s]*= e[s | I] - e[s] - e[I];\n   g= sps::exp(g), std::copy(g.begin(), g.end(),\
     \ std::back_inserter(ret));\n  }\n  return ret;\n }\n template <class T> inline\
@@ -429,7 +429,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/hafnian_of_matrix.test.cpp
   requiredBy: []
-  timestamp: '2024-02-04 23:58:32+09:00'
+  timestamp: '2024-02-05 15:53:03+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/hafnian_of_matrix.test.cpp

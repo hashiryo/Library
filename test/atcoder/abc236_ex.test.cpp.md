@@ -183,10 +183,10 @@ data:
     \ h;\n vector<T> F((n + 1) << n), G((n + 1) << n);\n return rnk_zeta(f.data(),\
     \ F.data(), n), rnk_zeta(g.data(), G.data(), n), cnv_(F.data(), G.data(), n +\
     \ 1), rnk_mobius(F.data(), h.data(), n), h;\n}\ntemplate <class T> void div_na(T\
-    \ f[], const T g[], int N) {\n for (int s= 1, t; s < N; ++s)\n  for (int t= s;\
-    \ t; --t&= s) f[s]-= f[s ^ t] * g[t];\n}\n// 1/f, \"f[empty] = 1\" is required,\
-    \ O(n^2 2^n)\ntemplate <class T> vector<T> inv(const vector<T>& f) {\n const int\
-    \ N= f.size(), n= __builtin_ctz(N);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n\
+    \ f[], const T g[], int N) {\n for (int s= 1; s < N; ++s)\n  for (int t= s; t;\
+    \ --t&= s) f[s]-= f[s ^ t] * g[t];\n}\n// 1/f, \"f[empty] = 1\" is required, O(n^2\
+    \ 2^n)\ntemplate <class T> vector<T> inv(const vector<T>& f) {\n const int N=\
+    \ f.size(), n= __builtin_ctz(N);\n assert(!(N & (N - 1))), assert(f[0] == 1);\n\
     \ vector<T> h(N);\n if (n < 11) return h[0]= 1, div_na(h.data(), f.data(), N),\
     \ h;\n vector<T> F((n + 1) << n), G((n + 1) << n);\n rnk_zeta(f.data(), G.data(),\
     \ n);\n for (int s= N; s--;) {\n  T *a= F.data() + s * (n + 1), *b= G.data() +\
@@ -321,7 +321,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc236_ex.test.cpp
   requiredBy: []
-  timestamp: '2024-02-04 23:58:32+09:00'
+  timestamp: '2024-02-05 15:53:03+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc236_ex.test.cpp
