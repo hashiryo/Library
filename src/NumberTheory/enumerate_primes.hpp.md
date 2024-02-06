@@ -1,0 +1,135 @@
+---
+data:
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: src/Internal/ListRange.hpp
+    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
+      \u3084\u3064"
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: src/NumberTheory/tables.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084gcd \u7573\
+      \u307F\u8FBC\u307F\u306A\u3069"
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/abc172_d.numth.test.cpp
+    title: test/atcoder/abc172_d.numth.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/agc038_c.numth.test.cpp
+    title: test/atcoder/agc038_c.numth.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+    title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+  - icon: ':x:'
+    path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+    title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/enumerate_primes.test.cpp
+    title: test/yosupo/enumerate_primes.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/gcd_convolution.test.cpp
+    title: test/yosupo/gcd_convolution.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/lcm_convolution.test.cpp
+    title: test/yosupo/lcm_convolution.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+    title: test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+    title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1019.numth.test.cpp
+    title: test/yukicoder/1019.numth.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/644.test.cpp
+    title: test/yukicoder/644.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/886.numth.test.cpp
+    title: test/yukicoder/886.numth.test.cpp
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
+  attributes:
+    links: []
+  bundledCode: "#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
+    #line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include <iterator>\n\
+    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n};\n#line 4 \"src/NumberTheory/enumerate_primes.hpp\"\
+    \nnamespace nt_internal {\nusing namespace std;\nvector<int> ps, lf;\nvoid sieve(int\
+    \ N) {\n static int n= 2, i= 1;\n if (n > N) return;\n if (lf.resize((N >> 1)\
+    \ + 1); n == 2) ps.push_back(n++);\n for (; n <= N; n+= 2, ++i) {\n  if (!lf[i])\
+    \ ps.push_back(lf[i]= n);\n  for (int j= 1, e= min(lf[i], N / n), k= ps.size();\
+    \ j < k && ps[j] <= e; ++j) lf[(ps[j] * n) >> 1]= ps[j];\n }\n}\nListRange<int>\
+    \ enumerate_primes(int N) {\n sieve(N);\n return {ps.cbegin(), upper_bound(ps.cbegin(),\
+    \ ps.cend(), N)};\n}\nint least_prime_factor(int n) { return n & 1 ? sieve(n),\
+    \ lf[(n >> 1)] : 2; }\n// f(p,e) := f(p^e)\ntemplate <class T, class F> vector<T>\
+    \ completely_multiplicative_table(int N, const F &f) {\n vector<T> ret(N + 1);\n\
+    \ sieve(N);\n for (int n= 3, i= 1; n <= N; n+= 2, ++i) ret[n]= lf[i] == n ? f(n,\
+    \ 1) : ret[lf[i]] * ret[n / lf[i]];\n if (int n= 4; 2 <= N)\n  for (T t= ret[2]=\
+    \ f(2, 1); n <= N; n+= 2) ret[n]= t * ret[n >> 1];\n return ret[1]= 1, ret;\n\
+    }\n}\nusing nt_internal::enumerate_primes, nt_internal::least_prime_factor, nt_internal::completely_multiplicative_table;\n\
+    // O(N log k / log N + N)\ntemplate <class T> static std::vector<T> pow_table(int\
+    \ N, uint64_t k) {\n if (k == 0) return std::vector<T>(N + 1, 1);\n auto f= [k](int\
+    \ p, int) {\n  T ret= 1, b= p;\n  for (auto e= k;; b*= b) {\n   if (e & 1) ret*=\
+    \ b;\n   if (!(e>>= 1)) return ret;\n  }\n };\n return completely_multiplicative_table<T>(N,\
+    \ f);\n}\n"
+  code: "#pragma once\n#include <algorithm>\n#include \"src/Internal/ListRange.hpp\"\
+    \nnamespace nt_internal {\nusing namespace std;\nvector<int> ps, lf;\nvoid sieve(int\
+    \ N) {\n static int n= 2, i= 1;\n if (n > N) return;\n if (lf.resize((N >> 1)\
+    \ + 1); n == 2) ps.push_back(n++);\n for (; n <= N; n+= 2, ++i) {\n  if (!lf[i])\
+    \ ps.push_back(lf[i]= n);\n  for (int j= 1, e= min(lf[i], N / n), k= ps.size();\
+    \ j < k && ps[j] <= e; ++j) lf[(ps[j] * n) >> 1]= ps[j];\n }\n}\nListRange<int>\
+    \ enumerate_primes(int N) {\n sieve(N);\n return {ps.cbegin(), upper_bound(ps.cbegin(),\
+    \ ps.cend(), N)};\n}\nint least_prime_factor(int n) { return n & 1 ? sieve(n),\
+    \ lf[(n >> 1)] : 2; }\n// f(p,e) := f(p^e)\ntemplate <class T, class F> vector<T>\
+    \ completely_multiplicative_table(int N, const F &f) {\n vector<T> ret(N + 1);\n\
+    \ sieve(N);\n for (int n= 3, i= 1; n <= N; n+= 2, ++i) ret[n]= lf[i] == n ? f(n,\
+    \ 1) : ret[lf[i]] * ret[n / lf[i]];\n if (int n= 4; 2 <= N)\n  for (T t= ret[2]=\
+    \ f(2, 1); n <= N; n+= 2) ret[n]= t * ret[n >> 1];\n return ret[1]= 1, ret;\n\
+    }\n}\nusing nt_internal::enumerate_primes, nt_internal::least_prime_factor, nt_internal::completely_multiplicative_table;\n\
+    // O(N log k / log N + N)\ntemplate <class T> static std::vector<T> pow_table(int\
+    \ N, uint64_t k) {\n if (k == 0) return std::vector<T>(N + 1, 1);\n auto f= [k](int\
+    \ p, int) {\n  T ret= 1, b= p;\n  for (auto e= k;; b*= b) {\n   if (e & 1) ret*=\
+    \ b;\n   if (!(e>>= 1)) return ret;\n  }\n };\n return completely_multiplicative_table<T>(N,\
+    \ f);\n}"
+  dependsOn:
+  - src/Internal/ListRange.hpp
+  isVerificationFile: false
+  path: src/NumberTheory/enumerate_primes.hpp
+  requiredBy:
+  - src/NumberTheory/tables.hpp
+  timestamp: '2024-02-06 21:31:00+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+  - test/yukicoder/886.numth.test.cpp
+  - test/yukicoder/644.test.cpp
+  - test/yukicoder/1019.numth.test.cpp
+  - test/atcoder/agc038_c.numth.test.cpp
+  - test/atcoder/abc172_d.numth.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/enumerate_primes.test.cpp
+  - test/yosupo/lcm_convolution.test.cpp
+  - test/yosupo/gcd_convolution.test.cpp
+documentation_of: src/NumberTheory/enumerate_primes.hpp
+layout: document
+title: "\u7D20\u6570\u306E\u5217\u6319"
+---
+線形篩による素数列挙の前処理 
+
+## 関数
+
+|名前|概要|計算量|
+|---|---|---|
+| `enumerate_primes(N)`| $N$ 以下のすべての素数を返す. <br> 返り値は [`ListRange<int>`](src/Internal/ListRange.hpp)|　$\mathcal{O}(N)$|
+|`least_primes_factor(n)`| $n$ の最小素因数を返す. ||
+|`completely_multiplicative_table<T>(N, f)`| 完全乗法的関数 $f$ の値が入ったテーブルを返す. <br> $f$ は素冪のもの `f(p,e)`$=f(p^e)$ を渡す(完全だけど).<br> サイズは $N+1$. |$\displaystyle\mathcal{O}\left(N + \frac{N\alpha}{\log N}\right)$ <br> ただし $f(p)$ の計算量を $\mathcal{O}(\alpha)$ とおいた.|
+|`pow_table<T>(N,k)`| $n^k$ の値が入ったテーブルを返す. <br> サイズは $N+1$. |$\displaystyle\mathcal{O}\left(N + \frac{N\log k}{\log N}\right)$|
+
+## 参考
+[https://37zigen.com/linear-sieve/](https://37zigen.com/linear-sieve/) 

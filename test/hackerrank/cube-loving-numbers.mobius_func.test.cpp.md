@@ -2,16 +2,21 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/NumberTheory/Sieve.hpp
-    title: "\u7DDA\u5F62\u7BE9 \u4ED6"
-  - icon: ':question:'
-    path: src/NumberTheory/famous_arithmetic_functions.hpp
-    title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
+    path: src/Internal/ListRange.hpp
+    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
+      \u3084\u3064"
+  - icon: ':x:'
+    path: src/NumberTheory/enumerate_primes.hpp
+    title: "\u7D20\u6570\u306E\u5217\u6319"
+  - icon: ':x:'
+    path: src/NumberTheory/tables.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084gcd \u7573\
+      \u307F\u8FBC\u307F\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers
@@ -19,135 +24,94 @@ data:
     - https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers
   bundledCode: "#line 1 \"test/hackerrank/cube-loving-numbers.mobius_func.test.cpp\"\
     \n#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
-    \n#include <iostream>\n#line 2 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\
-    \n#include <vector>\n#include <cstdint>\nnamespace famous_arithmetic_functions\
-    \ {\nnamespace mul {\ntemplate <class T> struct Totient {\n static constexpr T\
-    \ f(uint64_t p, short e) {\n  T ret= p - 1;\n  while (--e) ret*= p;\n  return\
-    \ ret;\n }\n static std::vector<T> poly() { return {-1, 1}; }\n};\ntemplate <class\
-    \ T> struct Moebius {\n static constexpr T f(uint64_t, short e) { return (e ==\
-    \ 0) - (e == 1); }\n static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
-    \ <class T> struct Liouville {\n static constexpr T f(uint64_t, short e) { return\
-    \ e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
-    \ <class T, uint64_t k> struct Divisor {\n static constexpr T f(uint64_t p, short\
-    \ e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t kk= k; kk; kk>>= 1,\
-    \ b*= b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <= e; i++, pkpw*= pk) ret+=\
-    \ pkpw;\n  return ret;\n }\n static std::vector<T> poly() {\n  std::vector<T>\
-    \ ret(k + 1, 0);\n  return ret[0]+= 1, ret[k]+= 1, ret;\n }\n};\ntemplate <class\
-    \ T> struct Dedekind {\n static constexpr T f(uint64_t p, short e) {\n  T ret=\
-    \ p + 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T>\
-    \ poly() { return {1, 1}; }\n};\n}  // namespace mul\nnamespace add {\ntemplate\
-    \ <class T> struct BigOmega {  // the total number of prime factors of n\n static\
-    \ constexpr T f(uint64_t, short e) { return e; }\n static std::vector<T> poly()\
-    \ { return {1}; }\n};\ntemplate <class T> struct LittleOmega {  // the total number\
-    \ of different prime factors of n\n static constexpr T f(uint64_t, short) { return\
-    \ 1; }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate <class T>\
-    \ struct Sopfr {  // the sum of primes dividing n counting multiplicity\n static\
-    \ constexpr T f(uint64_t p, short e) { return p * e; }\n static std::vector<T>\
-    \ poly() { return {0, 1}; }\n};\ntemplate <class T> struct Sopf {  // the sum\
-    \ of the distinct primes dividing n\n static constexpr T f(uint64_t p, short)\
-    \ { return p; }\n static std::vector<T> poly() { return {0, 1}; }\n};\n}  // namespace\
-    \ add\n}\n#line 3 \"src/NumberTheory/Sieve.hpp\"\n#include <algorithm>\n#include\
-    \ <map>\n#line 6 \"src/NumberTheory/Sieve.hpp\"\ntemplate <int LIM= 1 << 24> class\
-    \ Sieve {\n static inline int ps[LIM >> 4], lpf[LIM >> 1], lpfpw[LIM >> 1], psz=\
-    \ 0;\n static inline int8_t lpfe[LIM >> 1];\n static inline void sieve(int N)\
-    \ {  // O(N)\n  static int n= 2, i= 1;\n  if (n == 2) ps[psz++]= 2, n++;\n  for\
-    \ (; n <= N; n+= 2, i++) {\n   if (!lpf[i]) lpf[i]= ps[psz++]= n;\n   for (int\
-    \ j= 1, e= std::min(lpf[i], N / n); j < psz && ps[j] <= e; j++) lpf[(ps[j] * n)\
-    \ >> 1]= ps[j];\n  }\n }\n static inline void set_lpfe(int N) {  // O(N)\n  static\
-    \ int n= 3, i= 1;\n  if (N < n) return;\n  sieve(N), std::copy(lpf + i, lpf +\
-    \ (N >> 1) + 1, lpfpw + i);\n  for (std::fill(lpfe + i, lpfe + (N >> 1) + 1, 1);\
-    \ n <= N; n+= 2, i++)\n   if (int j= (n / lpf[i]) >> 1; lpf[i] == lpf[j]) lpfe[i]+=\
-    \ lpfe[j], lpfpw[i]*= lpfpw[j];\n }\npublic:\n static int least_prime_factor(int\
-    \ n) { return sieve(n), lpf[n]; }\n // O(log n)\n static std::map<int, short>\
-    \ factorize(int n) {\n  std::map<int, short> ret;\n  if (int t; !(n & 1)) ret[2]=\
-    \ t= __builtin_ctz(n), n>>= t;\n  if (int i= n >> 1; n > 1)\n   for (set_lpfe(n);\
-    \ n > 1; i= n >> 1) ret[lpf[i]]= lpfe[i], n/= lpfpw[i];\n  return ret;\n }\n //\
-    \ O(log n)\n static std::vector<int> divisors(int n) {\n  std::vector<int> ret=\
-    \ {1};\n  for (auto [p, e]: factorize(n))\n   for (std::size_t sz= ret.size(),\
-    \ pw= p; e--; pw*= p)\n    for (int i= sz - 1; i >= 0; i--) ret.push_back(ret[i]\
-    \ * pw);\n  return std::sort(ret.begin(), ret.end()), ret;\n }\n // O(N)\n static\
-    \ std::vector<int> get_primes(int N) { return sieve(N), std::vector<int>(ps, std::upper_bound(ps,\
-    \ ps + psz, N)); }\n template <class T, class F> static inline std::vector<T>\
-    \ completely_multiplicative_table(int N, const F &f) {\n  std::vector<T> ret(N\
-    \ + 1);\n  sieve(N);\n  for (int n= 3, i= 1; n <= N; n+= 2, i++) ret[n]= lpf[i]\
-    \ == n ? f(n, 1) : ret[lpf[i]] * ret[n / lpf[i]];\n  if (int n= 4; 2 <= N)\n \
-    \  for (ret[2]= f(2, 1); n <= N; n+= 2) ret[n]= ret[2] * ret[n >> 1];\n  return\
-    \ ret[1]= 1, ret;\n }\n template <class T, class F> static inline std::vector<T>\
-    \ multiplicative_table(int N, const F &f) {\n  std::vector<T> ret(N + 1);\n  set_lpfe(N);\n\
-    \  for (int n= 3, i= 1; n <= N; n+= 2, i++) ret[n]= lpfpw[i] == n ? f(lpf[i],\
-    \ lpfe[i]) : ret[lpfpw[i]] * ret[n / lpfpw[i]];\n  for (int n= 2, t; n <= N; n+=\
-    \ 2) t= __builtin_ctz(n), ret[n]= n & (n - 1) ? ret[n & -n] * ret[n >> t] : f(2,\
-    \ t);\n  return ret[1]= 1, ret;\n }\n // O(N log k / log N + N)\n template <class\
-    \ T> static std::vector<T> pow_table(int N, std::uint64_t k) {\n  if (k == 0)\
-    \ return std::vector<T>(N + 1, 1);\n  auto f= [k](int p, short) {\n   T ret= 1,\
-    \ b= p;\n   for (auto e= k;; b*= b)\n    if (e & 1 ? ret*= b, !(e>>= 1) : !(e>>=\
-    \ 1)) return ret;\n  };\n  return completely_multiplicative_table<T>(N, f);\n\
-    \ }\n // O(N log MOD / log N + N)\n template <class T> static std::vector<T> inv_table(int\
-    \ N) {\n  return completely_multiplicative_table<T>(N, [](int p, short) { return\
-    \ T(1) / p; });\n }\n // naive , O(N log N)\n template <class T> static std::vector<T>\
-    \ dirichlet_conv(const std::vector<T> &a, const std::vector<T> &b) {\n  std::size_t\
-    \ N= std::max(a.size(), b.size()) - 1, i, j;\n  std::vector<T> ret(N + 1, 0);\n\
-    \  for (i= a.size(); --i;)\n   for (j= std::min(b.size() - 1, N / i); j; j--)\
-    \ ret[i * j]+= a[i] * b[j];\n  return ret;\n }\n // a is multiplicative, O(N log\
-    \ log N)\n template <class T, class F> static std::vector<T> dirichlet_conv(const\
-    \ F &a, std::vector<T> b) {\n  std::size_t N= b.size() - 1, j= 0;\n  for (sieve(N),\
-    \ b.resize(N + 1, 0); j < psz && ps[j] <= N; j++)\n   for (int i= N / ps[j], n,\
-    \ m, e; i; i--)\n    for (b[n= ps[j] * i]+= a(ps[j], e= 1) * b[m= i]; m % ps[j]\
-    \ == 0;) b[n]+= a(ps[j], ++e) * b[m/= ps[j]];\n  return b;\n }\n // both a and\
-    \ b are multiplicative, O(N)\n template <class T, class F1, class F2> static std::vector<T>\
-    \ dirichlet_conv(const F1 &a, const F2 &b, std::size_t N) {\n  auto f= [&a, &b](int\
-    \ p, short e) {\n   T ret= a(p, e) + b(p, e);\n   for (int k= e; --k;) ret+= a(p,\
-    \ e - k) * b(p, k);\n   return ret;\n  };\n  return multiplicative_table<T>(N,\
-    \ f);\n }\n // f -> g s.t. g(n) = sum_{m|n} f(m), O(N log log N)\n template <typename\
-    \ T> static void divisor_zeta(std::vector<T> &f) {\n  std::size_t N= f.size(),\
-    \ i, j;\n  for (sieve(N), i= 0; i < psz && ps[i] < N; i++)\n   for (j= 1; ps[i]\
-    \ * j < N; j++) f[ps[i] * j]+= f[j];\n }\n // f -> h s.t. f(n) = sum_{m|n} h(m),\
-    \ O(N log log N)\n template <typename T> static void divisor_mobius(std::vector<T>\
-    \ &f) {\n  std::size_t N= f.size(), i, j;\n  for (sieve(N), i= 0; i < psz && ps[i]\
-    \ < N; i++)\n   for (j= (N - 1) / ps[i]; j; j--) f[ps[i] * j]-= f[j];\n }\n //\
-    \ O(N log log N)\n template <typename T> static std::vector<T> lcm_conv(std::vector<T>\
-    \ a, std::vector<T> b) {\n  std::size_t N= std::max(a.size(), b.size());\n  a.resize(N),\
-    \ b.resize(N), divisor_zeta(a), divisor_zeta(b);\n  for (; N--;) a[N]*= b[N];\n\
-    \  return divisor_mobius(a), a;\n }\n // both a and b are multiplicative, O(N)\n\
-    \ template <class T, class F1, class F2> static std::vector<T> lcm_conv(const\
-    \ F1 &a, const F2 &b, std::size_t N) {\n  auto f= [&a, &b](int p, short e) {\n\
-    \   T suma= 1, sumb= 1;\n   for (short k= 1; k < e; k++) suma+= a(p, k), sumb+=\
-    \ b(p, k);\n   return (a(p, e) + suma) * (b(p, e) + sumb) - suma * sumb;\n  };\n\
-    \  return multiplicative_table<T>(N, f);\n }\n // f -> g s.t. g(n) = sum_{n|m}\
-    \ f(m), O(N log log N)\n template <typename T> static void multiple_zeta(std::vector<T>\
-    \ &f) {\n  std::size_t N= f.size(), i, j;\n  for (sieve(N), i= 0; i < psz && ps[i]\
-    \ < N; i++)\n   for (j= (N - 1) / ps[i]; j; j--) f[j]+= f[ps[i] * j];\n }\n //\
-    \ f -> h s.t. f(n) = sum_{n|m} h(m), O(N log log N)\n template <typename T> static\
-    \ void multiple_mobius(std::vector<T> &f) {\n  std::size_t N= f.size(), i, j;\n\
-    \  for (sieve(N), i= 0; i < psz && ps[i] < N; i++)\n   for (j= 1; ps[i] * j <\
-    \ N; j++) f[j]-= f[ps[i] * j];\n }\n // O(N log log N)\n template <typename T>\
-    \ static std::vector<T> gcd_conv(std::vector<T> a, std::vector<T> b) {\n  std::size_t\
-    \ N= std::max(a.size(), b.size());\n  a.resize(N), b.resize(N), multiple_zeta(a),\
-    \ multiple_zeta(b);\n  for (; N--;) a[N]*= b[N];\n  return multiple_mobius(a),\
-    \ a;\n }\n};\n#line 5 \"test/hackerrank/cube-loving-numbers.mobius_func.test.cpp\"\
-    \n// \u30E1\u30D3\u30A6\u30B9\u95A2\u6570\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace famous_arithmetic_functions;\n\
-    \ int T;\n cin >> T;\n auto mu= Sieve<>::multiplicative_table<long long>(1'000'010,\
-    \ mul::Moebius<long long>::f);\n while (T--) {\n  long long N, ans= 0;\n  cin\
-    \ >> N;\n  for (long long x= 2; x * x * x <= N; x++) ans-= N / (x * x * x) * mu[x];\n\
-    \  cout << ans << '\\n';\n }\n return 0;\n}\n"
+    \n#include <iostream>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include\
+    \ <algorithm>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
+    \ <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
+    \ std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin() const\
+    \ { return bg; }\n Iterator end() const { return ed; }\n size_t size() const {\
+    \ return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
+    \ bg[i]; }\n};\n#line 4 \"src/NumberTheory/enumerate_primes.hpp\"\nnamespace nt_internal\
+    \ {\nusing namespace std;\nvector<int> ps, lf;\nvoid sieve(int N) {\n static int\
+    \ n= 2, i= 1;\n if (n > N) return;\n if (lf.resize((N >> 1) + 1); n == 2) ps.push_back(n++);\n\
+    \ for (; n <= N; n+= 2, ++i) {\n  if (!lf[i]) ps.push_back(lf[i]= n);\n  for (int\
+    \ j= 1, e= min(lf[i], N / n), k= ps.size(); j < k && ps[j] <= e; ++j) lf[(ps[j]\
+    \ * n) >> 1]= ps[j];\n }\n}\nListRange<int> enumerate_primes(int N) {\n sieve(N);\n\
+    \ return {ps.cbegin(), upper_bound(ps.cbegin(), ps.cend(), N)};\n}\nint least_prime_factor(int\
+    \ n) { return n & 1 ? sieve(n), lf[(n >> 1)] : 2; }\n// f(p,e) := f(p^e)\ntemplate\
+    \ <class T, class F> vector<T> completely_multiplicative_table(int N, const F\
+    \ &f) {\n vector<T> ret(N + 1);\n sieve(N);\n for (int n= 3, i= 1; n <= N; n+=\
+    \ 2, ++i) ret[n]= lf[i] == n ? f(n, 1) : ret[lf[i]] * ret[n / lf[i]];\n if (int\
+    \ n= 4; 2 <= N)\n  for (T t= ret[2]= f(2, 1); n <= N; n+= 2) ret[n]= t * ret[n\
+    \ >> 1];\n return ret[1]= 1, ret;\n}\n}\nusing nt_internal::enumerate_primes,\
+    \ nt_internal::least_prime_factor, nt_internal::completely_multiplicative_table;\n\
+    // O(N log k / log N + N)\ntemplate <class T> static std::vector<T> pow_table(int\
+    \ N, uint64_t k) {\n if (k == 0) return std::vector<T>(N + 1, 1);\n auto f= [k](int\
+    \ p, int) {\n  T ret= 1, b= p;\n  for (auto e= k;; b*= b) {\n   if (e & 1) ret*=\
+    \ b;\n   if (!(e>>= 1)) return ret;\n  }\n };\n return completely_multiplicative_table<T>(N,\
+    \ f);\n}\n#line 3 \"src/NumberTheory/tables.hpp\"\nnamespace nt_internal {\nvector<int>\
+    \ lfw;\nvector<char> lfe;\nvoid set_lfe(int N) {\n static int n= 3, i= 1;\n if\
+    \ (n > N) return;\n for (sieve(N), lfw.resize((N >> 1) + 1), copy(lf.begin() +\
+    \ i, lf.begin() + (N >> 1) + 1, lfw.begin() + i), lfe.resize((N >> 1) + 1, 1);\
+    \ n <= N; n+= 2, ++i)\n  if (int j= (n / lf[i]) >> 1; lf[i] == lf[j]) lfe[i]+=\
+    \ lfe[j], lfw[i]*= lfw[j];\n}\n// O(log n)\nvector<pair<int, short>> factorize(int\
+    \ n) {\n vector<pair<int, short>> ret;\n if (short t; !(n & 1)) ret.emplace_back(2,\
+    \ t= __builtin_ctz(n)), n>>= t;\n if (int i= n >> 1; n > 1)\n  for (set_lfe(n);\
+    \ n > 1; i= n >> 1) ret.emplace_back(lf[i], lfe[i]), n/= lfw[i];\n return ret;\n\
+    }\n// f(p,e) := f(p^e)\ntemplate <class T, class F> vector<T> multiplicative_table(int\
+    \ N, const F &f) {\n vector<T> ret(N + 1);\n set_lfe(N);\n for (int n= 3, i= 1;\
+    \ n <= N; n+= 2, ++i) ret[n]= lfw[i] == n ? f(lf[i], lfe[i]) : ret[lfw[i]] * ret[n\
+    \ / lfw[i]];\n for (int n= 2, t; n <= N; n+= 2) t= __builtin_ctz(n), ret[n]= n\
+    \ & (n - 1) ? ret[n & -n] * ret[n >> t] : f(2, t);\n return ret[1]= 1, ret;\n\
+    }\n// O(N)\ntemplate <class T= int> vector<T> mobius_table(int N) {\n vector<T>\
+    \ ret(N + 1);\n set_lfe(N), ret[1]= 1;\n for (int n= 3, i= 1; n <= N; n+= 2, ++i)\
+    \ ret[n]= lfw[i] == n ? -(lfe[i] == 1) : ret[lfw[i]] * ret[n / lfw[i]];\n for\
+    \ (int n= 2; n <= N; n+= 4) ret[n]= -ret[n >> 1];\n return ret;\n}\n// O(N)\n\
+    template <class T= int> vector<T> totient_table(int N) {\n vector<T> ret(N + 1);\n\
+    \ set_lfe(N), ret[1]= 1;\n for (int n= 3, i= 1; n <= N; n+= 2, ++i) ret[n]= lfw[i]\
+    \ == n ? lf[i] == n ? n - 1 : ret[n / lf[i]] * lf[i] : ret[lfw[i]] * ret[n / lfw[i]];\n\
+    \ for (int n= 2; n <= N; n+= 2) ret[n]= ret[n >> 1];\n return ret;\n}\n}\nusing\
+    \ nt_internal::factorize, nt_internal::multiplicative_table, nt_internal::mobius_table,\
+    \ nt_internal::totient_table;\n// f -> g s.t. g(n) = sum_{m|n} f(m), O(N log log\
+    \ N)\ntemplate <typename T> void divisor_zeta(std::vector<T> &a) {\n for (auto\
+    \ p: enumerate_primes(a.size() - 1))\n  for (int j= 1, e= a.size(); p * j < e;\
+    \ ++j) a[p * j]+= a[j];\n}\n// a -> h s.t. a(n) = sum_{m|n} h(m), O(N log log\
+    \ N)\ntemplate <typename T> void divisor_mobius(std::vector<T> &a) {\n for (auto\
+    \ p: enumerate_primes(a.size() - 1))\n  for (int j= (a.size() - 1) / p; j; --j)\
+    \ a[p * j]-= a[j];\n}\n// O(N log log N)\ntemplate <typename T> std::vector<T>\
+    \ lcm_convolve(std::vector<T> a, std::vector<T> b) {\n std::size_t N= std::max(a.size(),\
+    \ b.size());\n for (a.resize(N), b.resize(N), divisor_zeta(a), divisor_zeta(b);\
+    \ N--;) a[N]*= b[N];\n return divisor_mobius(a), a;\n}\n// a -> g s.t. g(n) =\
+    \ sum_{n|m} a(m), O(N log log N)\ntemplate <typename T> static void multiple_zeta(std::vector<T>\
+    \ &a) {\n for (auto p: enumerate_primes(a.size() - 1))\n  for (int j= (a.size()\
+    \ - 1) / p; j; --j) a[j]+= a[p * j];\n}\n// a -> h s.t. a(n) = sum_{n|m} h(m),\
+    \ O(N log log N)\ntemplate <typename T> static void multiple_mobius(std::vector<T>\
+    \ &a) {\n for (auto p: enumerate_primes(a.size() - 1))\n  for (int j= 1, e= a.size();\
+    \ p * j < e; ++j) a[j]-= a[p * j];\n}\n// O(N log log N)\ntemplate <typename T>\
+    \ static std::vector<T> gcd_convolve(std::vector<T> a, std::vector<T> b) {\n std::size_t\
+    \ N= std::max(a.size(), b.size());\n for (a.resize(N), b.resize(N), multiple_zeta(a),\
+    \ multiple_zeta(b); N--;) a[N]*= b[N];\n return multiple_mobius(a), a;\n}\n#line\
+    \ 4 \"test/hackerrank/cube-loving-numbers.mobius_func.test.cpp\"\n// \u30E1\u30D3\
+    \u30A6\u30B9\u95A2\u6570\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n int T;\n cin >> T;\n auto mu= mobius_table(1'000'010);\n\
+    \ while (T--) {\n  long long N, ans= 0;\n  cin >> N;\n  for (long long x= 2; x\
+    \ * x * x <= N; x++) ans-= N / (x * x * x) * mu[x];\n  cout << ans << '\\n';\n\
+    \ }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
-    \n#include <iostream>\n#include \"src/NumberTheory/famous_arithmetic_functions.hpp\"\
-    \n#include \"src/NumberTheory/Sieve.hpp\"\n// \u30E1\u30D3\u30A6\u30B9\u95A2\u6570\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using namespace famous_arithmetic_functions;\n int T;\n cin >> T;\n auto mu=\
-    \ Sieve<>::multiplicative_table<long long>(1'000'010, mul::Moebius<long long>::f);\n\
+    \n#include <iostream>\n#include \"src/NumberTheory/tables.hpp\"\n// \u30E1\u30D3\
+    \u30A6\u30B9\u95A2\u6570\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
+    \ ios::sync_with_stdio(false);\n int T;\n cin >> T;\n auto mu= mobius_table(1'000'010);\n\
     \ while (T--) {\n  long long N, ans= 0;\n  cin >> N;\n  for (long long x= 2; x\
     \ * x * x <= N; x++) ans-= N / (x * x * x) * mu[x];\n  cout << ans << '\\n';\n\
     \ }\n return 0;\n}"
   dependsOn:
-  - src/NumberTheory/famous_arithmetic_functions.hpp
-  - src/NumberTheory/Sieve.hpp
+  - src/NumberTheory/tables.hpp
+  - src/NumberTheory/enumerate_primes.hpp
+  - src/Internal/ListRange.hpp
   isVerificationFile: true
   path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   requiredBy: []
-  timestamp: '2023-11-25 22:39:19+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-06 21:31:00+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
 layout: document

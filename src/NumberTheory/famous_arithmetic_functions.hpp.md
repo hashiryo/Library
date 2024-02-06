@@ -3,24 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-    title: test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
   - icon: ':x:'
     path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1019.numth.test.cpp
-    title: test/yukicoder/1019.numth.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/644.test.cpp
-    title: test/yukicoder/644.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -88,9 +79,6 @@ data:
   timestamp: '2023-11-25 22:39:19+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - test/yukicoder/644.test.cpp
-  - test/yukicoder/1019.numth.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
