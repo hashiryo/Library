@@ -121,15 +121,15 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"src/Math/mod_inv.hpp\"\
-    \ntemplate <class Int> constexpr inline Int mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n\
-    \ Int x= 1, y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q=\
-    \ a / b), z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x)\
-    \ % mod : x % mod;\n}\n#line 5 \"src/Math/BinomialCoefficient.hpp\"\nclass BinomialCoefficient\
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n#line 4 \"src/Math/mod_inv.hpp\"\ntemplate <class Int> constexpr inline Int\
+    \ mod_inv(Int a, Int mod) {\n static_assert(std::is_signed_v<Int>);\n Int x= 1,\
+    \ y= 0, b= mod;\n for (Int q= 0, z= 0; b;) z= x, x= y, y= z - y * (q= a / b),\
+    \ z= a, a= b, b= z - b * q;\n return assert(a == 1), x < 0 ? mod - (-x) % mod\
+    \ : x % mod;\n}\n#line 5 \"src/Math/BinomialCoefficient.hpp\"\nclass BinomialCoefficient\
     \ {  // mod <= 1e6\n using i64= int64_t;\n struct ModPe {\n  ModPe()= default;\n\
     \  ModPe(int p, int e, std::size_t pre_size= 1 << 14): p(p), e(e), ppows(e + 1,\
     \ 1) {\n   for (int i= 1; i <= e; ++i) ppows[i]= ppows[i - 1] * p;\n   for (pp=\
@@ -206,7 +206,7 @@ data:
   isVerificationFile: false
   path: src/Math/BinomialCoefficient.hpp
   requiredBy: []
-  timestamp: '2024-02-05 22:57:52+09:00'
+  timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/binomial_coefficient.test.cpp

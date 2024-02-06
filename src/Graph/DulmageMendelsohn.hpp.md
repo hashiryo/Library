@@ -2,38 +2,35 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/CsrArray.hpp
-    title: "CSR\u5F62\u5F0F"
+    path: src/Internal/ListRange.hpp
+    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
+      \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1744.test.cpp
     title: test/yukicoder/1744.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1745.test.cpp
     title: test/yukicoder/1745.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/DulmageMendelsohn.hpp\"\n#include <array>\n#include\
-    \ <algorithm>\n#include <numeric>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\n\
-    #include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange {\n\
-    \ using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
-    \ i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T>\
-    \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
-    \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
-    \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 6\
-    \ \"src/Graph/DulmageMendelsohn.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
-    \ blg[2], mate[2], pos[2];\n std::vector<std::array<int, 2>> es;\npublic:\n DulmageMendelsohn(int\
-    \ L, int R): blg{std::vector(L, -3), std::vector(R, -3)} {}\n void add_edge(int\
-    \ l, int r) { es.push_back({l, r}); }\n void build() {\n  const int n[]= {(int)blg[0].size(),\
-    \ (int)blg[1].size()};\n  std::vector<int> g[2], rt, pre, que(std::max(n[0], n[1]));\n\
-    \  for (int b= 2; b--;) g[b].resize(es.size()), pos[b].resize(n[b] + 1), mate[b].assign(n[b],\
+    \ <algorithm>\n#include <numeric>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
+    \ <vector>\n#include <iterator>\ntemplate <class T> struct ListRange {\n using\
+    \ Iterator= typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator\
+    \ begin() const { return bg; }\n Iterator end() const { return ed; }\n size_t\
+    \ size() const { return std::distance(bg, ed); }\n const T &operator[](int i)\
+    \ const { return bg[i]; }\n};\n#line 6 \"src/Graph/DulmageMendelsohn.hpp\"\nclass\
+    \ DulmageMendelsohn {\n std::vector<int> blg[2], mate[2], pos[2];\n std::vector<std::array<int,\
+    \ 2>> es;\npublic:\n DulmageMendelsohn(int L, int R): blg{std::vector(L, -3),\
+    \ std::vector(R, -3)} {}\n void add_edge(int l, int r) { es.push_back({l, r});\
+    \ }\n void build() {\n  const int n[]= {(int)blg[0].size(), (int)blg[1].size()};\n\
+    \  std::vector<int> g[2], rt, pre, que(std::max(n[0], n[1]));\n  for (int b= 2;\
+    \ b--;) g[b].resize(es.size()), pos[b].resize(n[b] + 1), mate[b].assign(n[b],\
     \ -1);\n  for (auto [l, r]: es) ++pos[0][l], ++pos[1][r];\n  for (int b= 2; b--;)\
     \ std::partial_sum(pos[b].begin(), pos[b].end(), pos[b].begin());\n  for (auto\
     \ [l, r]: es) g[0][--pos[0][l]]= r, g[1][--pos[1][r]]= l;\n  int t= 0, k= 0;\n\
@@ -67,7 +64,7 @@ data:
     \ ListRange<int> right_block(int k) const { return {mate[1].cbegin() + pos[1][k],\
     \ mate[1].cbegin() + pos[1][k + 1]}; }\n};\n"
   code: "#pragma once\n#include <array>\n#include <algorithm>\n#include <numeric>\n\
-    #include \"src/DataStructure/CsrArray.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
+    #include \"src/Internal/ListRange.hpp\"\nclass DulmageMendelsohn {\n std::vector<int>\
     \ blg[2], mate[2], pos[2];\n std::vector<std::array<int, 2>> es;\npublic:\n DulmageMendelsohn(int\
     \ L, int R): blg{std::vector(L, -3), std::vector(R, -3)} {}\n void add_edge(int\
     \ l, int r) { es.push_back({l, r}); }\n void build() {\n  const int n[]= {(int)blg[0].size(),\
@@ -106,12 +103,12 @@ data:
     \ ListRange<int> right_block(int k) const { return {mate[1].cbegin() + pos[1][k],\
     \ mate[1].cbegin() + pos[1][k + 1]}; }\n};"
   dependsOn:
-  - src/DataStructure/CsrArray.hpp
+  - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/DulmageMendelsohn.hpp
   requiredBy: []
-  timestamp: '2023-04-15 19:40:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-02-06 20:21:12+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1744.test.cpp
   - test/yukicoder/1745.test.cpp

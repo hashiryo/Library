@@ -2,25 +2,26 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/CsrArray.hpp
-    title: "CSR\u5F62\u5F0F"
-  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
   - icon: ':question:'
+    path: src/Internal/ListRange.hpp
+    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
+      \u3084\u3064"
+  - icon: ':question:'
     path: src/Misc/CartesianTree.hpp
     title: Cartesian-Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc213/tasks/abc213_f
@@ -89,28 +90,23 @@ data:
     \ std::vector<std::vector<int>> dat;\n};\n#line 2 \"src/Graph/Tree.hpp\"\n#include\
     \ <type_traits>\n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n#include\
     \ <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#line 3 \"\
-    src/DataStructure/CsrArray.hpp\"\n#include <iterator>\ntemplate <class T> struct\
-    \ ListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator\
-    \ bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
+    src/Internal/ListRange.hpp\"\n#include <iterator>\ntemplate <class T> struct ListRange\
+    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
+    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
     \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
-    \ i) const { return bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T>\
-    \ csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n CsrArray(const\
-    \ std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p) {}\n size_t size()\
-    \ const { return pos.size() - 1; }\n const ListRange<T> operator[](int i) const\
-    \ { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 10\
-    \ \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false> class\
-    \ Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
-    \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
-    \ void> {\n  int to;\n  operator int() const { return to; }\n };\n using Edge=\
-    \ Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t,\
-    \ Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>, std::pair<int,\
-    \ int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int>\
-    \ P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n Tree(int n): P(n,\
-    \ -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>, void>\
-    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
-    \ <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void> add_edge(int\
-    \ u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u, c); }\n template\
-    \ <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \ i) const { return bg[i]; }\n};\n#line 10 \"src/Graph/Tree.hpp\"\ntemplate <class\
+    \ Cost= void, bool weight= false> class Tree {\n template <class D, class T> struct\
+    \ Edge_B {\n  int to;\n  T cost;\n  operator int() const { return to; }\n };\n\
+    \ template <class D> struct Edge_B<D, void> {\n  int to;\n  operator int() const\
+    \ { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>,\
+    \ std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
+    \ std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n\
+    \ std::vector<int> P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n\
+    \ Tree(int n): P(n, -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>,\
+    \ void> add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u);\
+    \ }\n template <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void>\
+    \ add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u,\
+    \ c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -237,13 +233,13 @@ data:
   - src/String/SuffixTree.hpp
   - src/String/SuffixArray.hpp
   - src/Graph/Tree.hpp
-  - src/DataStructure/CsrArray.hpp
+  - src/Internal/ListRange.hpp
   - src/Misc/CartesianTree.hpp
   isVerificationFile: true
   path: test/atcoder/abc213_f.SuffixTree.test.cpp
   requiredBy: []
-  timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-06 20:21:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc213_f.SuffixTree.test.cpp
 layout: document

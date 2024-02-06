@@ -24,7 +24,7 @@ data:
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/ArrayOnDivisors.hpp
     title: "\u7D04\u6570\u914D\u5217"
   - icon: ':x:'
@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc212_g.test.cpp
     title: test/atcoder/abc212_g.test.cpp
   - icon: ':x:'
@@ -175,11 +175,11 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n"
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n"
   code: "#pragma once\n#include <numeric>\n#include <cassert>\n#include <iostream>\n\
     #include <algorithm>\n#include <vector>\n#include \"src/NumberTheory/is_prime.hpp\"\
     \n#include \"src/Math/binary_gcd.hpp\"\nnamespace math_internal {\ntemplate <class\
@@ -214,11 +214,11 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n"
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n"
   dependsOn:
   - src/NumberTheory/is_prime.hpp
   - src/Internal/Remainder.hpp
@@ -232,7 +232,7 @@ data:
   - src/Math/ModInt_Exp.hpp
   - src/Math/BinomialCoefficient.hpp
   - src/Math/mod_kth_root.hpp
-  timestamp: '2024-02-05 22:57:52+09:00'
+  timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/unit_test/constexpr_orderfp.test.cpp

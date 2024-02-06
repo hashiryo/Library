@@ -123,24 +123,24 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 3 \"src/Math/mod_tetration.hpp\"\
-    \nnamespace math_internal {\nconstexpr u64 rec(u64 a, u64 b, u64 m) {\n if (a\
-    \ == 0) return (b ^ 1) & 1;\n if (b == 0 || m == 1) return 1;\n u64 ret= 1, k=\
-    \ 1, tmp= 1, i= 0;\n for (const auto [p, e]: Factors(m)) {\n  for (tmp= p - 1,\
-    \ i= e - (p == 2 && e > 3); --i;) tmp*= p;\n  k*= tmp / binary_gcd(k, tmp);\n\
-    \ }\n auto mod= [m](u128 x) { return x < m ? x : x % m + m; };\n for (k= rec(a,\
-    \ b - 1, k), a= mod(a);; a= mod(u128(a) * a))\n  if (k& 1 ? ret= mod(u128(ret)\
-    \ * a) : 0; !(k>>= 1)) return ret;\n}\nconstexpr u64 mod_tetration(u64 a, u64\
-    \ b, u64 m) { return (a= rec(a, b, m)) >= m ? a - m : a; }\n}  // namespace math_internal\n\
-    using math_internal::mod_tetration;\n#line 4 \"test/unit_test/constexpr_mod_tetration.test.cpp\"\
-    \nusing namespace std;\nconstexpr auto f= mod_tetration(2, 3, 1000000007);\nstatic_assert(f\
-    \ == 16);\nconstexpr auto g= mod_tetration(2, 10000, 998244353);\nstatic_assert(g\
-    \ == 220050301);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n#line 3 \"src/Math/mod_tetration.hpp\"\nnamespace math_internal {\nconstexpr\
+    \ u64 rec(u64 a, u64 b, u64 m) {\n if (a == 0) return (b ^ 1) & 1;\n if (b ==\
+    \ 0 || m == 1) return 1;\n u64 ret= 1, k= 1, tmp= 1, i= 0;\n for (const auto [p,\
+    \ e]: Factors(m)) {\n  for (tmp= p - 1, i= e - (p == 2 && e > 3); --i;) tmp*=\
+    \ p;\n  k*= tmp / binary_gcd(k, tmp);\n }\n auto mod= [m](u128 x) { return x <\
+    \ m ? x : x % m + m; };\n for (k= rec(a, b - 1, k), a= mod(a);; a= mod(u128(a)\
+    \ * a))\n  if (k& 1 ? ret= mod(u128(ret) * a) : 0; !(k>>= 1)) return ret;\n}\n\
+    constexpr u64 mod_tetration(u64 a, u64 b, u64 m) { return (a= rec(a, b, m)) >=\
+    \ m ? a - m : a; }\n}  // namespace math_internal\nusing math_internal::mod_tetration;\n\
+    #line 4 \"test/unit_test/constexpr_mod_tetration.test.cpp\"\nusing namespace std;\n\
+    constexpr auto f= mod_tetration(2, 3, 1000000007);\nstatic_assert(f == 16);\n\
+    constexpr auto g= mod_tetration(2, 10000, 998244353);\nstatic_assert(g == 220050301);\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin\
+    \ >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
     #include \"src/Math/mod_tetration.hpp\"\nusing namespace std;\nconstexpr auto\
     \ f= mod_tetration(2, 3, 1000000007);\nstatic_assert(f == 16);\nconstexpr auto\
@@ -156,7 +156,7 @@ data:
   isVerificationFile: true
   path: test/unit_test/constexpr_mod_tetration.test.cpp
   requiredBy: []
-  timestamp: '2024-02-05 22:57:52+09:00'
+  timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/constexpr_mod_tetration.test.cpp

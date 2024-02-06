@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: src/Math/binary_gcd.hpp
     title: Binary GCD
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/ArrayOnDivisors.hpp
     title: "\u7D04\u6570\u914D\u5217"
   - icon: ':question:'
@@ -125,16 +125,16 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"src/NumberTheory/OrderFp.hpp\"\
-    \nnamespace math_internal {\nclass OrderFp {\n u64 p;\n std::array<u64, 17> prod;\n\
-    \ template <class Uint, class MP> constexpr Uint p_rt() const {\n  const MP md(p);\n\
-    \  for (Uint ret= 2, one= md.set(1), ng= 0, m= p - 1;; ++ret) {\n   Uint a= md.set(ret);\n\
-    \   for (auto [q, e]: factors)\n    if ((ng= (md.norm(pow(a, m / q, md)) == one)))\
-    \ break;\n   if (!ng) return ret;\n  }\n }\n template <class Uint, class MP> constexpr\
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n#line 4 \"src/NumberTheory/OrderFp.hpp\"\nnamespace math_internal {\nclass\
+    \ OrderFp {\n u64 p;\n std::array<u64, 17> prod;\n template <class Uint, class\
+    \ MP> constexpr Uint p_rt() const {\n  const MP md(p);\n  for (Uint ret= 2, one=\
+    \ md.set(1), ng= 0, m= p - 1;; ++ret) {\n   Uint a= md.set(ret);\n   for (auto\
+    \ [q, e]: factors)\n    if ((ng= (md.norm(pow(a, m / q, md)) == one))) break;\n\
+    \   if (!ng) return ret;\n  }\n }\n template <class Uint, class MP> constexpr\
     \ Uint ord_(u8 l, u8 r, Uint x, const MP &md) const {\n  Uint ret= 1;\n  if (r\
     \ - l == 1) {\n   Uint one= md.set(1);\n   auto [q, e]= factors[l];\n   for (u8\
     \ i= e; i--; ret*= q, x= pow(x, q, md))\n    if (x == one) break;\n   return ret;\n\
@@ -219,7 +219,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc335_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-06 15:06:49+09:00'
+  timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc335_g.test.cpp

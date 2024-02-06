@@ -180,7 +180,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yosupo/set_xor_min.Patricia.test.cpp
     title: test/yosupo/set_xor_min.Patricia.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
   - icon: ':x:'

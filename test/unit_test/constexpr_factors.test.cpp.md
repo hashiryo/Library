@@ -119,17 +119,17 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 4 \"test/unit_test/constexpr_factors.test.cpp\"\
-    \nusing namespace std;\nconstexpr auto f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size()\
-    \ == 3);\nstatic_assert(f[0].first == 2);\nstatic_assert(f[0].second == 2);\n\
-    static_assert(f[1].first == 3);\nstatic_assert(f[1].second == 1);\nstatic_assert(f[2].first\
-    \ == 5);\nstatic_assert(f[2].second == 1);\nconstexpr int n= totient(100);\nstatic_assert(n\
-    \ == 40);\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int\
-    \ A, B;\n cin >> A >> B;\n cout << A + B << '\\n';\n return 0;\n}\n"
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n#line 4 \"test/unit_test/constexpr_factors.test.cpp\"\nusing namespace std;\n\
+    constexpr auto f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size() == 3);\nstatic_assert(f[0].first\
+    \ == 2);\nstatic_assert(f[0].second == 2);\nstatic_assert(f[1].first == 3);\n\
+    static_assert(f[1].second == 1);\nstatic_assert(f[2].first == 5);\nstatic_assert(f[2].second\
+    \ == 1);\nconstexpr int n= totient(100);\nstatic_assert(n == 40);\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int A, B;\n cin >> A >> B;\n\
+    \ cout << A + B << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n#include <iostream>\n\
     #include \"src/NumberTheory/Factors.hpp\"\nusing namespace std;\nconstexpr auto\
     \ f= Factors(2 * 2 * 3 * 5);\nstatic_assert(f.size() == 3);\nstatic_assert(f[0].first\
@@ -146,7 +146,7 @@ data:
   isVerificationFile: true
   path: test/unit_test/constexpr_factors.test.cpp
   requiredBy: []
-  timestamp: '2024-02-05 22:57:52+09:00'
+  timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/unit_test/constexpr_factors.test.cpp

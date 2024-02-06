@@ -129,44 +129,44 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 6 \"src/Math/mod_kth_root.hpp\"\
-    \nnamespace math_internal {\ntemplate <class Int, class MP> inline i64 peth_root(Int\
-    \ c, Int pi, int ei, const MP &md) {\n const Int p= md.mod;\n int t= 0;\n Int\
-    \ s= p - 1, pe= 1;\n while (s % pi == 0) s/= pi, ++t;\n for (int i= ei; i--;)\
-    \ pe*= pi;\n Int u= mod_inv(pe - s % pe, pe), ONE= md.set(1), z= pow(c, (s * u\
-    \ + 1) / pe, md), zpe= md.norm(pow(c, s * u, md));\n if (zpe == ONE) return z;\n\
-    \ Int ptm1= 1, vs= 0, bs= 0;\n for (int i= t; --i;) ptm1*= pi;\n for (Int v= md.set(2);;\
-    \ v= md.plus(v, ONE))\n  if (vs= pow(v, s, md), bs= md.norm(pow(vs, ptm1, md));\
-    \ bs != ONE) break;\n int size= 1 << __lg(int(sqrt(pi)) + 1), mask= size - 1,\
-    \ vsc[size];\n vector<int> os(size + 1);\n Int vf[size];\n Int x= ONE, vspe= pow(vs,\
-    \ pe, md);\n for (int i= 0; i < size; i++, x= md.mul(x, bs)) os[md.norm(x) & mask]++;\n\
-    \ for (int i= 1; i < size; i++) os[i]+= os[i - 1];\n x= ONE, os[size]= size;\n\
-    \ for (int i= 0, j= 0; i < size; i++, x= md.mul(x, bs)) vf[j= --os[md.norm(x)\
-    \ & mask]]= md.norm(x), vsc[j]= i;\n for (int vs_e= ei, td= 0, n= 0; zpe != ONE;\
-    \ z= md.mul(z, pow(vs, n, md)), zpe= md.norm(md.mul(zpe, pow(vspe, n, md)))) {\n\
-    \  for (u= zpe, td= 0; u != ONE; td++) u= md.norm(pow(bs= u, pi, md));\n  for\
-    \ (int e= t - td; vs_e != e; vs_e++) vs= pow(vs, pi, md), vspe= pow(vspe, pi,\
-    \ md);\n  for (int tt= 0, upd= 1; upd; tt+= size, bs= md.mul(bs, x))\n   for (int\
-    \ m= (md.norm(bs) & mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs)\
-    \ == vf[i]) {\n     if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n\
-    \    }\n }\n return z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int\
-    \ a, u64 k, Int p) {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp=\
-    \ (p - 1) / g, kk= (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) !=\
-    \ md.set(1)) return -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]:\
-    \ Factors(g)) a= peth_root<Int>(a, pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64\
-    \ a, u64 k, i64 p) {\n assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%=\
-    \ p;\n if (k == 0) return a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n\
-    \ if (p < (1 << 30)) return inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k,\
-    \ p);\n if (p < (1ll << 62)) return inner_kth_root<i64, MP_Mo<u64, u128, 64, 63>>(a,\
-    \ k, p);\n return inner_kth_root<i64, MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\n\
-    using math_internal::mod_kth_root;\n#line 4 \"test/yosupo/kth_root_mod.test.cpp\"\
-    \nusing namespace std;\nint main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ int T;\n cin >> T;\n while (T--) {\n  int K, Y, P;\n  cin >> K >> Y >> P;\n\
-    \  cout << mod_kth_root(Y, K, P) << '\\n';\n }\n return 0;\n}\n"
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n#line 6 \"src/Math/mod_kth_root.hpp\"\nnamespace math_internal {\ntemplate\
+    \ <class Int, class MP> inline i64 peth_root(Int c, Int pi, int ei, const MP &md)\
+    \ {\n const Int p= md.mod;\n int t= 0;\n Int s= p - 1, pe= 1;\n while (s % pi\
+    \ == 0) s/= pi, ++t;\n for (int i= ei; i--;) pe*= pi;\n Int u= mod_inv(pe - s\
+    \ % pe, pe), ONE= md.set(1), z= pow(c, (s * u + 1) / pe, md), zpe= md.norm(pow(c,\
+    \ s * u, md));\n if (zpe == ONE) return z;\n Int ptm1= 1, vs= 0, bs= 0;\n for\
+    \ (int i= t; --i;) ptm1*= pi;\n for (Int v= md.set(2);; v= md.plus(v, ONE))\n\
+    \  if (vs= pow(v, s, md), bs= md.norm(pow(vs, ptm1, md)); bs != ONE) break;\n\
+    \ int size= 1 << __lg(int(sqrt(pi)) + 1), mask= size - 1, vsc[size];\n vector<int>\
+    \ os(size + 1);\n Int vf[size];\n Int x= ONE, vspe= pow(vs, pe, md);\n for (int\
+    \ i= 0; i < size; i++, x= md.mul(x, bs)) os[md.norm(x) & mask]++;\n for (int i=\
+    \ 1; i < size; i++) os[i]+= os[i - 1];\n x= ONE, os[size]= size;\n for (int i=\
+    \ 0, j= 0; i < size; i++, x= md.mul(x, bs)) vf[j= --os[md.norm(x) & mask]]= md.norm(x),\
+    \ vsc[j]= i;\n for (int vs_e= ei, td= 0, n= 0; zpe != ONE; z= md.mul(z, pow(vs,\
+    \ n, md)), zpe= md.norm(md.mul(zpe, pow(vspe, n, md)))) {\n  for (u= zpe, td=\
+    \ 0; u != ONE; td++) u= md.norm(pow(bs= u, pi, md));\n  for (int e= t - td; vs_e\
+    \ != e; vs_e++) vs= pow(vs, pi, md), vspe= pow(vspe, pi, md);\n  for (int tt=\
+    \ 0, upd= 1; upd; tt+= size, bs= md.mul(bs, x))\n   for (int m= (md.norm(bs) &\
+    \ mask), i= os[m]; i < os[m + 1]; i++)\n    if (md.norm(bs) == vf[i]) {\n    \
+    \ if (upd= false, n= tt - vsc[i]; n < 0) n+= pi;\n     break;\n    }\n }\n return\
+    \ z;\n}\ntemplate <class Int, class MP> i64 inner_kth_root(Int a, u64 k, Int p)\
+    \ {\n const MP md(p);\n Int g= binary_gcd(k, (u64)p - 1), pp= (p - 1) / g, kk=\
+    \ (k / g) % pp;\n if (a= md.set(a); md.norm(pow(a, pp, md)) != md.set(1)) return\
+    \ -1;\n a= pow(a, mod_inv(kk, pp), md);\n for (auto [pi, ei]: Factors(g)) a= peth_root<Int>(a,\
+    \ pi, ei, md);\n return md.get(a);\n}\ni64 mod_kth_root(i64 a, u64 k, i64 p) {\n\
+    \ assert(p > 0), assert(a >= 0), assert(is_prime(p)), a%= p;\n if (k == 0) return\
+    \ a == 1 ? a : -1;\n if (a <= 1 || k <= 1) return a;\n if (p < (1 << 30)) return\
+    \ inner_kth_root<int, MP_Mo<u32, u64, 32, 31>>(a, k, p);\n if (p < (1ll << 62))\
+    \ return inner_kth_root<i64, MP_Mo<u64, u128, 64, 63>>(a, k, p);\n return inner_kth_root<i64,\
+    \ MP_D2B1>(a, k, p);\n}\n}  // namespace math_internal\nusing math_internal::mod_kth_root;\n\
+    #line 4 \"test/yosupo/kth_root_mod.test.cpp\"\nusing namespace std;\nint main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int T;\n cin >> T;\n while\
+    \ (T--) {\n  int K, Y, P;\n  cin >> K >> Y >> P;\n  cout << mod_kth_root(Y, K,\
+    \ P) << '\\n';\n }\n return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_root_mod\"\n#include\
     \ <iostream>\n#include \"src/Math/mod_kth_root.hpp\"\nusing namespace std;\nint\
     \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int T;\n cin >> T;\n\
@@ -182,7 +182,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/kth_root_mod.test.cpp
   requiredBy: []
-  timestamp: '2024-02-05 22:57:52+09:00'
+  timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/kth_root_mod.test.cpp

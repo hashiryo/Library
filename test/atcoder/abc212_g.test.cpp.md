@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: src/Math/mod_inv.hpp
     title: "\u9006\u5143 ($\\mathbb{Z}/m\\mathbb{Z}$)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/ArrayOnDivisors.hpp
     title: "\u7D04\u6570\u914D\u5217"
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc212/tasks/abc212_g
@@ -167,58 +167,58 @@ data:
     \ (auto [p, e]: f)\n  for (ret*= p - 1, i= e; --i;) ret*= p;\n return ret;\n}\n\
     constexpr auto totient(uint64_t n) { return totient(Factors(n)); }\ntemplate <class\
     \ Uint= uint64_t> std::vector<Uint> enumerate_divisors(const Factors &f) {\n int\
-    \ sz= 1;\n for (auto [p, e]: f) sz*= e + 1;\n std::vector<Uint> ret(sz, 1);\n\
-    \ sz= 1;\n for (auto [p, e]: f) {\n  int nxt= sz;\n  for (Uint pw= 1, i= e; pw*=\
-    \ p, i--;)\n   for (int j= 0; j < sz;) ret[nxt++]= ret[j++] * pw;\n  sz= nxt;\n\
-    \ }\n return ret;\n}\ntemplate <class Uint> std::vector<Uint> enumerate_divisors(Uint\
-    \ n) { return enumerate_divisors<Uint>(Factors(n)); }\n#line 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\
-    \ntemplate <class T> struct ArrayOnDivisors {\n uint64_t n;\n uint8_t shift;\n\
-    \ std::vector<int> os, id;\n std::vector<std::pair<uint64_t, T>> dat;\n unsigned\
-    \ hash(uint64_t i) const { return (i * 11995408973635179863ULL) >> shift; }\n\
-    #define _UP for (int j= k; j < a; ++j)\n#define _DWN for (int j= a; j-- > k;)\n\
-    #define _OP(J, K, op) dat[i + J].second op##= dat[i + K].second\n#define _FUN(J,\
-    \ K, name) name(dat[i + J].second, dat[i + K].second)\n#define _ZETA(op) \\\n\
-    \ int k= 1; \\\n for (auto [p, e]: factors) { \\\n  int a= k * (e + 1); \\\n \
-    \ for (int i= 0, d= dat.size(); i < d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n\
-    \ Factors factors;\n template <class Uint> ArrayOnDivisors(uint64_t n, const Factors\
-    \ &factors, const std::vector<Uint> &divisors): n(n), shift(__builtin_clzll(divisors.size())\
-    \ - 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
-    \ factors(factors) {\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
-    \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
-    \ os.begin());\n  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]=\
-    \ i;\n }\n ArrayOnDivisors(uint64_t n, const Factors &factors): ArrayOnDivisors(n,\
-    \ factors, enumerate_divisors(factors)) {}\n ArrayOnDivisors(uint64_t n): ArrayOnDivisors(n,\
-    \ Factors(n)) {}\n T &operator[](uint64_t i) {\n  assert(i && n % i == 0);\n \
-    \ for (unsigned a= hash(i), j= os[a]; j < os[a + 1]; ++j)\n   if (auto &[d, v]=\
-    \ dat[id[j]]; d == i) return v;\n  assert(0);\n }\n size_t size() const { return\
-    \ dat.size(); }\n auto begin() { return dat.begin(); }\n auto begin() const {\
-    \ return dat.begin(); }\n auto end() { return dat.begin() + os.back(); }\n auto\
-    \ end() const { return dat.begin() + os.back(); }\n /* f -> g s.t. g(n) = sum_{m|n}\
-    \ f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j, j - k, +)) }\n /* f -> h s.t.\
-    \ f(n) = sum_{m|n} h(m) */\n void divisor_mobius() { _ZETA(_DWN _OP(j, j - k,\
-    \ -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n void multiple_zeta() { _ZETA(_DWN\
-    \ _OP(j - k, j, +)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m) */\n void multiple_mobius()\
-    \ { _ZETA(_UP _OP(j - k, j, -)) }\n /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T&\
-    \ a, T b): a+=b */\n template <class F> void divisor_zeta(const F &add) { _ZETA(_UP\
-    \ _FUN(j, j - k, add)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b):\
-    \ a-=b */\n template <class F> void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j,\
-    \ j - k, sub)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b\
-    \ */\n template <class F> void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j\
-    \ - k, j, add)) }\n /* f -> h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b\
-    \ */\n template <class F> void multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j\
-    \ - k, j, sub)) }\n#undef _UP\n#undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e):\
-    \ multiplicative function of p^e\n template <typename F> void set_multiplicative(const\
-    \ F &f) {\n  int k= 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n  \
-    \ for (int m= k, d= 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second=\
-    \ dat[i++].second * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second=\
-    \ 1;\n  for (auto [p, e]: factors) {\n   uint64_t b= p - 1;\n   for (int m= k;\
-    \ e--; b*= p)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n\
-    \  }\n }\n void set_mobius() {\n  set_multiplicative([](auto, auto e) { return\
-    \ e == 1 ? -1 : 0; });\n }\n};\n#line 5 \"test/atcoder/abc212_g.test.cpp\"\nusing\
-    \ namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
-    \ using Mint= ModInt<998244353>;\n long long P;\n cin >> P;\n ArrayOnDivisors<Mint>\
-    \ a(P - 1);\n a.set_totient();\n Mint ans= 1;\n for (auto [d, phi]: a) ans+= phi\
-    \ * d;\n cout << ans << '\\n';\n return 0;\n}\n"
+    \ k= 1;\n for (auto [p, e]: f) k*= e + 1;\n std::vector<Uint> ret(k, 1);\n k=\
+    \ 1;\n for (auto [p, e]: f) {\n  int sz= k;\n  for (Uint pw= 1; pw*= p, e--;)\n\
+    \   for (int j= 0; j < sz;) ret[k++]= ret[j++] * pw;\n }\n return ret;\n}\ntemplate\
+    \ <class Uint> std::vector<Uint> enumerate_divisors(Uint n) { return enumerate_divisors<Uint>(Factors(n));\
+    \ }\n#line 3 \"src/NumberTheory/ArrayOnDivisors.hpp\"\ntemplate <class T> struct\
+    \ ArrayOnDivisors {\n uint64_t n;\n uint8_t shift;\n std::vector<int> os, id;\n\
+    \ std::vector<std::pair<uint64_t, T>> dat;\n unsigned hash(uint64_t i) const {\
+    \ return (i * 11995408973635179863ULL) >> shift; }\n#define _UP for (int j= k;\
+    \ j < a; ++j)\n#define _DWN for (int j= a; j-- > k;)\n#define _OP(J, K, op) dat[i\
+    \ + J].second op##= dat[i + K].second\n#define _FUN(J, K, name) name(dat[i + J].second,\
+    \ dat[i + K].second)\n#define _ZETA(op) \\\n int k= 1; \\\n for (auto [p, e]:\
+    \ factors) { \\\n  int a= k * (e + 1); \\\n  for (int i= 0, d= dat.size(); i <\
+    \ d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n Factors factors;\n template <class\
+    \ Uint> ArrayOnDivisors(uint64_t n, const Factors &factors, const std::vector<Uint>\
+    \ &divisors): n(n), shift(__builtin_clzll(divisors.size()) - 1), os((1 << (64\
+    \ - shift)) + 1), id(divisors.size()), dat(divisors.size()), factors(factors)\
+    \ {\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n  for (auto\
+    \ d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(), os.begin());\n\
+    \  for (int i= divisors.size(); i--;) id[--os[hash(divisors[i])]]= i;\n }\n ArrayOnDivisors(uint64_t\
+    \ n, const Factors &factors): ArrayOnDivisors(n, factors, enumerate_divisors(factors))\
+    \ {}\n ArrayOnDivisors(uint64_t n): ArrayOnDivisors(n, Factors(n)) {}\n T &operator[](uint64_t\
+    \ i) {\n  assert(i && n % i == 0);\n  for (unsigned a= hash(i), j= os[a]; j <\
+    \ os[a + 1]; ++j)\n   if (auto &[d, v]= dat[id[j]]; d == i) return v;\n  assert(0);\n\
+    \ }\n size_t size() const { return dat.size(); }\n auto begin() { return dat.begin();\
+    \ }\n auto begin() const { return dat.begin(); }\n auto end() { return dat.begin()\
+    \ + os.back(); }\n auto end() const { return dat.begin() + os.back(); }\n /* f\
+    \ -> g s.t. g(n) = sum_{m|n} f(m) */\n void divisor_zeta() { _ZETA(_UP _OP(j,\
+    \ j - k, +)) }\n /* f -> h s.t. f(n) = sum_{m|n} h(m) */\n void divisor_mobius()\
+    \ { _ZETA(_DWN _OP(j, j - k, -)) }\n /* f -> g s.t. g(n) = sum_{n|m} f(m) */\n\
+    \ void multiple_zeta() { _ZETA(_DWN _OP(j - k, j, +)) }\n /* f -> h s.t. f(n)\
+    \ = sum_{n|m} h(m) */\n void multiple_mobius() { _ZETA(_UP _OP(j - k, j, -)) }\n\
+    \ /* f -> g s.t. g(n) = sum_{m|n} f(m), add(T& a, T b): a+=b */\n template <class\
+    \ F> void divisor_zeta(const F &add) { _ZETA(_UP _FUN(j, j - k, add)) }\n /* f\
+    \ -> h s.t. f(n) = sum_{m|n} h(m), sub(T& a, T b): a-=b */\n template <class F>\
+    \ void divisor_mobius(const F &sub) { _ZETA(_UP _FUN(j, j - k, sub)) }\n /* f\
+    \ -> g s.t. g(n) = sum_{n|m} f(m), add(T& a, T b): a+=b */\n template <class F>\
+    \ void multiple_zeta(const F &add) { _ZETA(_UP _FUN(j - k, j, add)) }\n /* f ->\
+    \ h s.t. f(n) = sum_{n|m} h(m), sub(T& a, T b): a-=b */\n template <class F> void\
+    \ multiple_mobius(const F &sub) { _ZETA(_UP _FUN(j - k, j, sub)) }\n#undef _UP\n\
+    #undef _DWN\n#undef _OP\n#undef _ZETA\n // f(p,e): multiplicative function of\
+    \ p^e\n template <typename F> void set_multiplicative(const F &f) {\n  int k=\
+    \ 1;\n  dat[0].second= 1;\n  for (auto [p, e]: factors)\n   for (int m= k, d=\
+    \ 1; d <= e; ++d)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second\
+    \ * f(p, d);\n }\n void set_totient() {\n  int k= 1;\n  dat[0].second= 1;\n  for\
+    \ (auto [p, e]: factors) {\n   uint64_t b= p - 1;\n   for (int m= k; e--; b*=\
+    \ p)\n    for (int i= 0; i < m;) dat[k++].second= dat[i++].second * b;\n  }\n\
+    \ }\n void set_mobius() {\n  set_multiplicative([](auto, auto e) { return e ==\
+    \ 1 ? -1 : 0; });\n }\n};\n#line 5 \"test/atcoder/abc212_g.test.cpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using Mint=\
+    \ ModInt<998244353>;\n long long P;\n cin >> P;\n ArrayOnDivisors<Mint> a(P -\
+    \ 1);\n a.set_totient();\n Mint ans= 1;\n for (auto [d, phi]: a) ans+= phi * d;\n\
+    \ cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc212/tasks/abc212_g\"\n#include\
     \ <iostream>\n#include \"src/Math/ModInt.hpp\"\n#include \"src/NumberTheory/ArrayOnDivisors.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
@@ -237,8 +237,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc212_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-06 15:06:49+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-06 20:21:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc212_g.test.cpp
 layout: document

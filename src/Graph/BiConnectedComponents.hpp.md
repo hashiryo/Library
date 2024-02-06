@@ -2,11 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/DataStructure/CsrArray.hpp
-    title: "CSR\u5F62\u5F0F"
-  - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
+  - icon: ':question:'
+    path: src/Internal/ListRange.hpp
+    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
+      \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -15,37 +16,33 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yosupo/biconnected_components.test.cpp
     title: test/yosupo/biconnected_components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1326.test.cpp
     title: test/yukicoder/1326.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
     #include <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n\
-    #include <cassert>\n#line 2 \"src/DataStructure/CsrArray.hpp\"\n#include <vector>\n\
+    #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
     #include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
     \ std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin() const\
     \ { return bg; }\n Iterator end() const { return ed; }\n size_t size() const {\
     \ return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n};\ntemplate <class T> class CsrArray {\n std::vector<T> csr;\n std::vector<int>\
-    \ pos;\npublic:\n CsrArray()= default;\n CsrArray(const std::vector<T> &c, const\
-    \ std::vector<int> &p): csr(c), pos(p) {}\n size_t size() const { return pos.size()\
-    \ - 1; }\n const ListRange<T> operator[](int i) const { return {csr.cbegin() +\
-    \ pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n#line 10 \"src/Graph/Tree.hpp\"\n\
-    template <class Cost= void, bool weight= false> class Tree {\n template <class\
-    \ D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const {\
-    \ return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
-    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
-    \ using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
+    \ bg[i]; }\n};\n#line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool\
+    \ weight= false> class Tree {\n template <class D, class T> struct Edge_B {\n\
+    \  int to;\n  T cost;\n  operator int() const { return to; }\n };\n template <class\
+    \ D> struct Edge_B<D, void> {\n  int to;\n  operator int() const { return to;\
+    \ }\n };\n using Edge= Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>,\
+    \ std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
     \ std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n\
     \ std::vector<int> P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n\
     \ Tree(int n): P(n, -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>,\
@@ -151,12 +148,12 @@ data:
     \ [u, v]: es) ret.add_edge(u, v);\n  return ret.build(), ret;\n }\n};"
   dependsOn:
   - src/Graph/Tree.hpp
-  - src/DataStructure/CsrArray.hpp
+  - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/BiConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2023-11-24 00:33:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2024-02-06 20:21:12+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yukicoder/1326.test.cpp
