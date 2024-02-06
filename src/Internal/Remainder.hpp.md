@@ -69,17 +69,17 @@ data:
   - icon: ':x:'
     path: src/Math/mod_kth_root.hpp
     title: "k\u4E57\u6839 ($\\mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   - icon: ':x:'
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/sparse_fps.hpp
     title: "\u758E\u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/ArrayOnDivisors.hpp
     title: "\u7D04\u6570\u914D\u5217"
   - icon: ':question:'
@@ -176,24 +176,27 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc135_f.RH.test.cpp
     title: test/atcoder/abc135_f.RH.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc138_f.test.cpp
     title: test/atcoder/abc138_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc141_e.RH.test.cpp
     title: test/atcoder/abc141_e.RH.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_d.test.cpp
     title: test/atcoder/abc179_d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_f.test.cpp
     title: test/atcoder/abc202_f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc212_g.test.cpp
+    title: test/atcoder/abc212_g.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc212_h.test.cpp
     title: test/atcoder/abc212_h.test.cpp
@@ -594,6 +597,9 @@ data:
     path: test/yukicoder/1649.Seg2D.test.cpp
     title: test/yukicoder/1649.Seg2D.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1728.test.cpp
+    title: test/yukicoder/1728.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1740.test.cpp
     title: test/yukicoder/1740.test.cpp
   - icon: ':x:'
@@ -627,6 +633,9 @@ data:
     path: test/yukicoder/215.test.cpp
     title: test/yukicoder/215.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/2264.test.cpp
+    title: test/yukicoder/2264.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/2332.RH.test.cpp
     title: test/yukicoder/2332.RH.test.cpp
   - icon: ':x:'
@@ -641,6 +650,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2454.RH.test.cpp
     title: test/yukicoder/2454.RH.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2578.test.cpp
+    title: test/yukicoder/2578.test.cpp
   - icon: ':x:'
     path: test/yukicoder/3046.test.cpp
     title: test/yukicoder/3046.test.cpp
@@ -859,6 +871,7 @@ data:
   - test/yukicoder/1124.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/2454.RH.test.cpp
+  - test/yukicoder/2578.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/42.test.cpp
@@ -869,6 +882,7 @@ data:
   - test/yukicoder/650.LCT.test.cpp
   - test/yukicoder/1142.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
+  - test/yukicoder/2264.test.cpp
   - test/yukicoder/1649.Seg2D.test.cpp
   - test/yukicoder/665.test.cpp
   - test/yukicoder/3046.test.cpp
@@ -880,6 +894,7 @@ data:
   - test/yukicoder/1269.test.cpp
   - test/yukicoder/599.RH.test.cpp
   - test/yukicoder/502.test.cpp
+  - test/yukicoder/1728.test.cpp
   - test/yukicoder/644.test.cpp
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/1019.numth.test.cpp
@@ -929,6 +944,7 @@ data:
   - test/atcoder/abc323_g.test.cpp
   - test/atcoder/abc141_e.RH.test.cpp
   - test/atcoder/abc256_f.DynSeg.test.cpp
+  - test/atcoder/abc212_g.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc213_h.test.cpp
   - test/atcoder/abc230_h.test.cpp

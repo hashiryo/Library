@@ -108,7 +108,7 @@ title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
 ---
 
 引数の型が整数な単峰関数を対象. \
-引数の型が `long double` の単峰関数を対象にする場合は[黄金分割探索](golden_search.md) を使う.
+引数の型が `long double` の単峰関数を対象にする場合は[黄金分割探索](src/Optimization/golden_search.hppd) を使う.
 
 ## 関数
 

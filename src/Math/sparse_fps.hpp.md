@@ -11,7 +11,7 @@ data:
     path: src/Math/FactorialPrecalculation.hpp
     title: "\u4E8C\u9805\u4FC2\u6570 \u4ED6 (\u968E\u4E57\u524D\u8A08\u7B97) ($\\\
       mathbb{F}_p$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Math/mod_sqrt.hpp
     title: "\u5E73\u65B9\u6839 ($\\mathbb{F}_p$)"
   - icon: ':question:'
@@ -19,7 +19,7 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_d.test.cpp
     title: test/atcoder/abc179_d.test.cpp
   - icon: ':x:'
@@ -54,7 +54,7 @@ data:
     title: test/yukicoder/1939.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Math/sparse_fps.hpp\"\n#include <cstdint>\n#line 2 \"\
@@ -299,7 +299,7 @@ data:
   path: src/Math/sparse_fps.hpp
   requiredBy: []
   timestamp: '2024-02-05 22:57:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1533.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp

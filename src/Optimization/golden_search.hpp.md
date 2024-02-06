@@ -79,7 +79,7 @@ title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
 ---
 
 引数の型が `long double` の単峰関数が対象. \
-引数の型が整数な単峰関数を対象にする場合は[フィボナッチ探索](fibonacci_search.md) を使う.
+引数の型が整数な単峰関数を対象にする場合は[フィボナッチ探索](src/Optimization/fibonacci_search.hpp) を使う.
 
 ## 関数
 

@@ -24,7 +24,7 @@ data:
     path: src/Math/mod_tetration.hpp
     title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\
       mathbb{Z}$)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/ArrayOnDivisors.hpp
     title: "\u7D04\u6570\u914D\u5217"
   - icon: ':x:'
@@ -34,6 +34,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/NTL_1_D.test.cpp
     title: test/aoj/NTL_1_D.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc212_g.test.cpp
+    title: test/atcoder/abc212_g.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc228_e.test.cpp
     title: test/atcoder/abc228_e.test.cpp
@@ -64,6 +67,15 @@ data:
   - icon: ':x:'
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1728.test.cpp
+    title: test/yukicoder/1728.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2264.test.cpp
+    title: test/yukicoder/2264.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2578.test.cpp
+    title: test/yukicoder/2578.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -226,8 +238,12 @@ data:
   - test/unit_test/constexpr_orderfp.test.cpp
   - test/unit_test/constexpr_mod_tetration.test.cpp
   - test/unit_test/constexpr_factors.test.cpp
+  - test/yukicoder/2578.test.cpp
+  - test/yukicoder/2264.test.cpp
+  - test/yukicoder/1728.test.cpp
   - test/aoj/NTL_1_D.test.cpp
   - test/atcoder/abc228_e.test.cpp
+  - test/atcoder/abc212_g.test.cpp
   - test/atcoder/abc335_g.test.cpp
   - test/yosupo/kth_root_mod.test.cpp
   - test/yosupo/primitive_root.test.cpp
