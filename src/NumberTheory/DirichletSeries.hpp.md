@@ -6,10 +6,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc172_d.Dirichlet.test.cpp
     title: test/atcoder/abc172_d.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.Dirichlet.test.cpp
     title: test/atcoder/abc179_c.Dirichlet.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc239_ex.test.cpp
     title: test/atcoder/abc239_ex.test.cpp
   - icon: ':x:'
@@ -26,7 +26,7 @@ data:
     title: test/yukicoder/1573.Dirichlet.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/DirichletSeries.hpp\"\n#include <valarray>\n\
@@ -74,11 +74,11 @@ data:
     \ *this;\n }\n Self square() const {\n  Self ret(N);\n  size_t i, j, l= std::sqrt(K);\n\
     \  uint64_t n;\n  T tmp;\n  for (i= l; i; --i)\n   for (j= K / i; j > i; --j)\
     \ ret.x[i * j]+= x[i] * x[j];\n  ret.x+= ret.x;\n  for (i= l; i; --i) ret.x[i\
-    \ * i]+= x[i] * x[i];\n  for (l= L; l; ret.X[l]+= ret.X[l], ret.X[K + l--]-= tmp\
-    \ * tmp)\n   for (tmp= sum(i= std::sqrt(n= (double)N / l)); i; --i) ret.X[K +\
-    \ l]+= x[i] * sum((double)n / i);\n  for (size_t i= 1; i <= K; ++i) ret.X[i]=\
-    \ ret.X[i - 1] + ret.x[i];\n  return ret;\n }\n Self pow(uint64_t M) const {\n\
-    \  if (N / M > M)\n   for (auto ret= Self(N, true), b= *this;; b= b.square())\
+    \ * i]+= x[i] * x[i];\n  for (l= L; l; ret.X[K + l]+= ret.X[K + l], ret.X[K +\
+    \ l--]-= tmp * tmp)\n   for (tmp= sum(i= std::sqrt(n= (double)N / l)); i; --i)\
+    \ ret.X[K + l]+= x[i] * sum((double)n / i);\n  for (size_t i= 1; i <= K; ++i)\
+    \ ret.X[i]= ret.X[i - 1] + ret.x[i];\n  return ret;\n }\n Self pow(uint64_t M)\
+    \ const {\n  if (N / M > M)\n   for (auto ret= Self(N, true), b= *this;; b= b.square())\
     \ {\n    if (M & 1) ret*= b;\n    if (!(M>>= 1)) return ret;\n   }\n  size_t n=\
     \ 0, m, i, l, p= 2;\n  uint64_t e, j;\n  while (n <= M && (1ULL << n) <= N) ++n;\n\
     \  T pw[65]= {1}, b= x[1], tmp;\n  for (e= M - n + 1;; b*= b)\n   if (e & 1 ?\
@@ -116,19 +116,19 @@ data:
     \ ++i) ret.X[i]= ret.X[i - 1] + ret.x[i];\n return ret;\n}\n// n^2, zeta(s-2),\
     \ O(K+L)\ntemplate <class T> DirichletSeries<T> get_Id2(uint64_t N) {\n DirichletSeries<T>\
     \ ret(N);\n __uint128_t a, b, c;\n for (size_t l= ret.L; l; --l) a= (double)N\
-    \ / l, b= (a * (a + 1)) >> 1, c= (a + a + 1), ret.Xl[l]= c % 3 == 0 ? T(c / 3)\
-    \ * b : T(b / 3) * c;\n for (uint64_t i= ret.K; i; --i) ret.x[i]= i * i;\n for\
-    \ (size_t i= 1; i <= ret.K; ++i) ret.X[i]= ret.X[i - 1] + ret.x[i];\n return ret;\n\
-    }\n// number-of-divisors, zeta(s)zeta(s-1), O(N^(2/3)log^(1/3)N))\ntemplate <class\
-    \ T> DirichletSeries<T> get_d(uint64_t N) { return get_1<T>(N).square(); }\n//\
-    \ sum-of-divisors, zeta(s)zeta(s-2), function, O(N^(2/3)log^(1/3)N))\ntemplate\
+    \ / l, b= (a * (a + 1)) >> 1, c= (a + a + 1), ret.X[ret.K + l]= c % 3 == 0 ? T(c\
+    \ / 3) * b : T(b / 3) * c;\n for (uint64_t i= ret.K; i; --i) ret.x[i]= i * i;\n\
+    \ for (size_t i= 1; i <= ret.K; ++i) ret.X[i]= ret.X[i - 1] + ret.x[i];\n return\
+    \ ret;\n}\n// number-of-divisors, zeta(s)zeta(s-1), O(N^(2/3)log^(1/3)N))\ntemplate\
+    \ <class T> DirichletSeries<T> get_d(uint64_t N) { return get_1<T>(N).square();\
+    \ }\n// sum-of-divisors, zeta(s)zeta(s-2), function, O(N^(2/3)log^(1/3)N))\ntemplate\
     \ <class T> DirichletSeries<T> get_sigma(uint64_t N) { return get_1<T>(N) * get_Id<T>(N);\
     \ }\n// Euler's totient, zeta(s-1)/zeta(s), O(N^(2/3)log^(1/3)N))\ntemplate <class\
     \ T> DirichletSeries<T> get_phi(uint64_t N) { return get_Id<T>(N)/= get_1<T>(N);\
     \ }\ntemplate <class T>  // zeta(2s), O(K+L)\nDirichletSeries<T> get_1sq(uint64_t\
     \ N) {\n DirichletSeries<T> ret(N);\n for (size_t i= 1, e= ret.x.size(); i * i\
-    \ <= e; ++i) ret.x[i * i]= 1;\n for (size_t i= 1; i <= ret.K; ++i) ret.Xs[i]=\
-    \ ret.Xs[i - 1] + ret.x[i];\n for (size_t l= ret.Xl.size(); --l;) ret.Xl[l]= uint64_t(std::sqrt((double)N\
+    \ <= e; ++i) ret.x[i * i]= 1;\n for (size_t i= 1; i <= ret.K; ++i) ret.X[i]= ret.X[i\
+    \ - 1] + ret.x[i];\n for (size_t l= ret.L; l; --l) ret.X[ret.K + l]= uint64_t(std::sqrt((double)N\
     \ / l));\n return ret;\n}\n// Liouville, zeta(2s)/zeta(s), O(N^(2/3)log^(1/3)N))\n\
     template <class T> DirichletSeries<T> get_lambda(uint64_t N) { return get_1sq<T>(N)/=\
     \ get_1<T>(N); }\n// square-free, zeta(s)/zeta(2s), O(N^(2/3)log^(1/3)N))\ntemplate\
@@ -179,11 +179,11 @@ data:
     \ *this;\n }\n Self square() const {\n  Self ret(N);\n  size_t i, j, l= std::sqrt(K);\n\
     \  uint64_t n;\n  T tmp;\n  for (i= l; i; --i)\n   for (j= K / i; j > i; --j)\
     \ ret.x[i * j]+= x[i] * x[j];\n  ret.x+= ret.x;\n  for (i= l; i; --i) ret.x[i\
-    \ * i]+= x[i] * x[i];\n  for (l= L; l; ret.X[l]+= ret.X[l], ret.X[K + l--]-= tmp\
-    \ * tmp)\n   for (tmp= sum(i= std::sqrt(n= (double)N / l)); i; --i) ret.X[K +\
-    \ l]+= x[i] * sum((double)n / i);\n  for (size_t i= 1; i <= K; ++i) ret.X[i]=\
-    \ ret.X[i - 1] + ret.x[i];\n  return ret;\n }\n Self pow(uint64_t M) const {\n\
-    \  if (N / M > M)\n   for (auto ret= Self(N, true), b= *this;; b= b.square())\
+    \ * i]+= x[i] * x[i];\n  for (l= L; l; ret.X[K + l]+= ret.X[K + l], ret.X[K +\
+    \ l--]-= tmp * tmp)\n   for (tmp= sum(i= std::sqrt(n= (double)N / l)); i; --i)\
+    \ ret.X[K + l]+= x[i] * sum((double)n / i);\n  for (size_t i= 1; i <= K; ++i)\
+    \ ret.X[i]= ret.X[i - 1] + ret.x[i];\n  return ret;\n }\n Self pow(uint64_t M)\
+    \ const {\n  if (N / M > M)\n   for (auto ret= Self(N, true), b= *this;; b= b.square())\
     \ {\n    if (M & 1) ret*= b;\n    if (!(M>>= 1)) return ret;\n   }\n  size_t n=\
     \ 0, m, i, l, p= 2;\n  uint64_t e, j;\n  while (n <= M && (1ULL << n) <= N) ++n;\n\
     \  T pw[65]= {1}, b= x[1], tmp;\n  for (e= M - n + 1;; b*= b)\n   if (e & 1 ?\
@@ -221,19 +221,19 @@ data:
     \ ++i) ret.X[i]= ret.X[i - 1] + ret.x[i];\n return ret;\n}\n// n^2, zeta(s-2),\
     \ O(K+L)\ntemplate <class T> DirichletSeries<T> get_Id2(uint64_t N) {\n DirichletSeries<T>\
     \ ret(N);\n __uint128_t a, b, c;\n for (size_t l= ret.L; l; --l) a= (double)N\
-    \ / l, b= (a * (a + 1)) >> 1, c= (a + a + 1), ret.Xl[l]= c % 3 == 0 ? T(c / 3)\
-    \ * b : T(b / 3) * c;\n for (uint64_t i= ret.K; i; --i) ret.x[i]= i * i;\n for\
-    \ (size_t i= 1; i <= ret.K; ++i) ret.X[i]= ret.X[i - 1] + ret.x[i];\n return ret;\n\
-    }\n// number-of-divisors, zeta(s)zeta(s-1), O(N^(2/3)log^(1/3)N))\ntemplate <class\
-    \ T> DirichletSeries<T> get_d(uint64_t N) { return get_1<T>(N).square(); }\n//\
-    \ sum-of-divisors, zeta(s)zeta(s-2), function, O(N^(2/3)log^(1/3)N))\ntemplate\
+    \ / l, b= (a * (a + 1)) >> 1, c= (a + a + 1), ret.X[ret.K + l]= c % 3 == 0 ? T(c\
+    \ / 3) * b : T(b / 3) * c;\n for (uint64_t i= ret.K; i; --i) ret.x[i]= i * i;\n\
+    \ for (size_t i= 1; i <= ret.K; ++i) ret.X[i]= ret.X[i - 1] + ret.x[i];\n return\
+    \ ret;\n}\n// number-of-divisors, zeta(s)zeta(s-1), O(N^(2/3)log^(1/3)N))\ntemplate\
+    \ <class T> DirichletSeries<T> get_d(uint64_t N) { return get_1<T>(N).square();\
+    \ }\n// sum-of-divisors, zeta(s)zeta(s-2), function, O(N^(2/3)log^(1/3)N))\ntemplate\
     \ <class T> DirichletSeries<T> get_sigma(uint64_t N) { return get_1<T>(N) * get_Id<T>(N);\
     \ }\n// Euler's totient, zeta(s-1)/zeta(s), O(N^(2/3)log^(1/3)N))\ntemplate <class\
     \ T> DirichletSeries<T> get_phi(uint64_t N) { return get_Id<T>(N)/= get_1<T>(N);\
     \ }\ntemplate <class T>  // zeta(2s), O(K+L)\nDirichletSeries<T> get_1sq(uint64_t\
     \ N) {\n DirichletSeries<T> ret(N);\n for (size_t i= 1, e= ret.x.size(); i * i\
-    \ <= e; ++i) ret.x[i * i]= 1;\n for (size_t i= 1; i <= ret.K; ++i) ret.Xs[i]=\
-    \ ret.Xs[i - 1] + ret.x[i];\n for (size_t l= ret.Xl.size(); --l;) ret.Xl[l]= uint64_t(std::sqrt((double)N\
+    \ <= e; ++i) ret.x[i * i]= 1;\n for (size_t i= 1; i <= ret.K; ++i) ret.X[i]= ret.X[i\
+    \ - 1] + ret.x[i];\n for (size_t l= ret.L; l; --l) ret.X[ret.K + l]= uint64_t(std::sqrt((double)N\
     \ / l));\n return ret;\n}\n// Liouville, zeta(2s)/zeta(s), O(N^(2/3)log^(1/3)N))\n\
     template <class T> DirichletSeries<T> get_lambda(uint64_t N) { return get_1sq<T>(N)/=\
     \ get_1<T>(N); }\n// square-free, zeta(s)/zeta(2s), O(N^(2/3)log^(1/3)N))\ntemplate\
@@ -243,8 +243,8 @@ data:
   isVerificationFile: false
   path: src/NumberTheory/DirichletSeries.hpp
   requiredBy: []
-  timestamp: '2024-02-07 23:03:20+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-08 01:24:29+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc172_d.Dirichlet.test.cpp
   - test/atcoder/abc239_ex.test.cpp

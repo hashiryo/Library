@@ -377,7 +377,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/CumSumQuotient.hpp
       title: "\u7D04\u6570\u914D\u5217"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/NumberTheory/DirichletSeries.hpp
       title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
     - icon: ':question:'
@@ -1153,7 +1153,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc177_e.gcd_conv.test.cpp
       title: test/atcoder/abc177_e.gcd_conv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.Dirichlet.test.cpp
       title: test/atcoder/abc179_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1261,13 +1261,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc235_f.test.cpp
       title: test/atcoder/abc235_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_ex.test.cpp
       title: test/atcoder/abc236_ex.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc239_ex.test.cpp
       title: test/atcoder/abc239_ex.test.cpp
     - icon: ':x:'

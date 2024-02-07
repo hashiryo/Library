@@ -162,22 +162,22 @@ data:
     \ T sum(uint64_t i) const { return i > K ? X[K + double(N) / i] : X[i]; }\n};\n\
     #line 4 \"src/NumberTheory/sum_on_primes.hpp\"\ntemplate <class T> std::vector<CumSumQuotient<T>>\
     \ sums_of_powers_on_primes(uint64_t N, size_t D) {\n size_t K= std::sqrt(N);\n\
-    \ std::vector ret(D + 1, CumSumQuotient<T>(N));\n for (int n= 1, d= 0; n <= K;\
-    \ ++n, d= 0)\n  for (T prd= n; d <= D; prd*= (n + ++d)) ret[d].X[n]= prd / (d\
-    \ + 1);\n for (int n= 1, d= 0; n <= K; ++n, d= 0)\n  for (T prd= N / n; d <= D;\
-    \ prd*= ((N / n) + ++d)) ret[d].X[n + K]= prd / (d + 1);\n if (D >= 2) {\n  std::vector<T>\
-    \ stir(D + 1, 0);\n  stir[1]= 1;\n  for (size_t d= 2; d <= D; stir[d++]= 1) {\n\
-    \   for (size_t j= d; --j;) stir[j]= stir[j - 1] + stir[j] * (d - 1);\n   for\
-    \ (size_t j= 1; j < d; ++j) ret[d].X-= stir[j] * ret[j].X;\n  }\n }\n for (size_t\
-    \ d= 0; d <= D; ++d) ret[d].X-= 1;\n for (int p: enumerate_primes(K)) {\n  uint64_t\
-    \ q= uint64_t(p) * p, M= N / p;\n  T pw= 1;\n  for (size_t d= 0, t= K / p, u=\
-    \ std::min<uint64_t>(K, N / q); d <= D; ++d, pw*= p) {\n   auto &X= ret[d].X;\n\
-    \   T tk= X[p - 1];\n   for (size_t n= 1; n <= t; ++n) X[n + K]-= (X[n * p + K]\
-    \ - tk) * pw;\n   for (size_t n= t + 1; n <= u; ++n) X[n + K]-= (X[double(M) /\
-    \ n] - tk) * pw;\n   for (uint64_t n= K; n >= q; --n) X[n]-= (X[double(n) / p]\
-    \ - tk) * pw;\n  }\n }\n return ret;\n}\ntemplate <class T, class F> T additive_sum(const\
+    \ std::vector ret(D + 1, CumSumQuotient<T>(N));\n for (size_t n= 1, d= 0; n <=\
+    \ K; ++n, d= 0)\n  for (T prd= n; d <= D; prd*= (n + ++d)) ret[d].X[n]= prd /\
+    \ (d + 1);\n for (size_t n= 1, d= 0; n <= K; ++n, d= 0)\n  for (T prd= N / n;\
+    \ d <= D; prd*= ((N / n) + ++d)) ret[d].X[n + K]= prd / (d + 1);\n if (D >= 2)\
+    \ {\n  std::vector<T> stir(D + 1, 0);\n  stir[1]= 1;\n  for (size_t d= 2; d <=\
+    \ D; stir[d++]= 1) {\n   for (size_t j= d; --j;) stir[j]= stir[j - 1] + stir[j]\
+    \ * (d - 1);\n   for (size_t j= 1; j < d; ++j) ret[d].X-= stir[j] * ret[j].X;\n\
+    \  }\n }\n for (size_t d= 0; d <= D; ++d) ret[d].X-= 1;\n for (int p: enumerate_primes(K))\
+    \ {\n  uint64_t q= uint64_t(p) * p, M= N / p;\n  T pw= 1;\n  for (size_t d= 0,\
+    \ t= K / p, u= std::min<uint64_t>(K, N / q); d <= D; ++d, pw*= p) {\n   auto &X=\
+    \ ret[d].X;\n   T tk= X[p - 1];\n   for (size_t n= 1; n <= t; ++n) X[n + K]-=\
+    \ (X[n * p + K] - tk) * pw;\n   for (size_t n= t + 1; n <= u; ++n) X[n + K]-=\
+    \ (X[double(M) / n] - tk) * pw;\n   for (uint64_t n= K; n >= q; --n) X[n]-= (X[double(n)\
+    \ / p] - tk) * pw;\n  }\n }\n return ret;\n}\ntemplate <class T, class F> T additive_sum(const\
     \ CumSumQuotient<T> &P, const F &f) {\n T ret= P.sum();\n for (uint64_t d= 2,\
-    \ nN, nd; nN; d= nd) ret+= P(nN= double(P.N) / d) * ((nd= double(P.N) / nN + 1)\
+    \ nN, nd; nN= double(P.N) / d; d= nd) ret+= P(nN) * ((nd= double(P.N) / nN + 1)\
     \ - d);\n for (uint64_t p: enumerate_primes(P.K))\n  for (uint64_t pw= p * p,\
     \ e= 2; pw <= P.N; ++e, pw*= p) ret+= (f(p, e) - f(p, e - 1)) * (P.N / pw);\n\
     \ return ret;\n}\ntemplate <class T, class F> T multiplicative_sum(CumSumQuotient<T>\
@@ -216,7 +216,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-02-07 23:03:20+09:00'
+  timestamp: '2024-02-08 01:24:29+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

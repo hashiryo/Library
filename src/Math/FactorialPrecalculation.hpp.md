@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc236_ex.test.cpp
     title: test/atcoder/abc236_ex.test.cpp
   - icon: ':x:'
