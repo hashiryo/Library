@@ -3,18 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc179_c.mul_sum.test.cpp
-    title: test/atcoder/abc179_c.mul_sum.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-    title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\n#include\
@@ -77,11 +71,9 @@ data:
   path: src/NumberTheory/famous_arithmetic_functions.hpp
   requiredBy: []
   timestamp: '2023-11-25 22:39:19+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/NumberTheory/famous_arithmetic_functions.hpp
 layout: document
 title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"

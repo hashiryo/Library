@@ -21,7 +21,7 @@ data:
     title: "\u7D20\u6570\u5224\u5B9A"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_h.test.cpp
     title: test/atcoder/abc213_h.test.cpp
   - icon: ':x:'
@@ -50,7 +50,7 @@ data:
     title: test/yukicoder/963.FPS.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/FFT/FormalPowerSeries.hpp\"\n#include <vector>\n#include\
@@ -511,7 +511,7 @@ data:
   path: src/FFT/FormalPowerSeries.hpp
   requiredBy: []
   timestamp: '2024-02-05 22:57:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/963.FPS.test.cpp
   - test/atcoder/abc213_h.test.cpp

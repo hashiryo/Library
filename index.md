@@ -93,7 +93,7 @@ data:
     - icon: ':question:'
       path: src/FFT/BigInt.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/FFT/FormalPowerSeries.hpp
       title: "\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570"
     - icon: ':x:'
@@ -375,32 +375,35 @@ data:
       path: src/NumberTheory/ArrayOnDivisors.hpp
       title: "\u7D04\u6570\u914D\u5217"
     - icon: ':question:'
+      path: src/NumberTheory/CumSumQuotient.hpp
+      title: "\u7D04\u6570\u914D\u5217"
+    - icon: ':question:'
       path: src/NumberTheory/DirichletSeries.hpp
       title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
-    - icon: ':question:'
-      path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
-      title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"
     - icon: ':question:'
       path: src/NumberTheory/Factors.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3\u306A\u3069"
     - icon: ':x:'
       path: src/NumberTheory/OrderFp.hpp
       title: "\u539F\u59CB\u6839\u3068\u4F4D\u6570 $\\mathbb{F}_p^{\\times}$"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/NumberTheory/enumerate_primes.hpp
       title: "\u7D20\u6570\u306E\u5217\u6319"
     - icon: ':question:'
       path: src/NumberTheory/enumerate_quotients.hpp
       title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/NumberTheory/famous_arithmetic_functions.hpp
       title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
     - icon: ':question:'
       path: src/NumberTheory/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':x:'
+    - icon: ':question:'
+      path: src/NumberTheory/sum_on_primes.hpp
+      title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
+    - icon: ':question:'
       path: src/NumberTheory/tables.hpp
-      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084gcd \u7573\
+      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
         \u307F\u8FBC\u307F\u306A\u3069"
   - name: src/Optimization
     pages:
@@ -1144,19 +1147,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.mul_sum.test.cpp
       title: test/atcoder/abc172_d.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/atcoder/abc177_e.gcd_conv.test.cpp
+      title: test/atcoder/abc177_e.gcd_conv.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.Dirichlet.test.cpp
       title: test/atcoder/abc179_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1201,7 +1207,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_g.test.cpp
       title: test/atcoder/abc213_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_h.test.cpp
       title: test/atcoder/abc213_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1213,10 +1219,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc218_h.test.cpp
       title: test/atcoder/abc218_h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1498,7 +1504,7 @@ data:
     - icon: ':x:'
       path: test/yosupo/convolution_mod_2_64.test.cpp
       title: test/yosupo/convolution_mod_2_64.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yosupo/counting_primes.test.cpp
       title: test/yosupo/counting_primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1836,6 +1842,9 @@ data:
       title: test/yosupo/z_algorithm.test.cpp
   - name: test/yukicoder
     pages:
+    - icon: ':x:'
+      path: test/yukicoder/1006.test.cpp
+      title: test/yukicoder/1006.test.cpp
     - icon: ':x:'
       path: test/yukicoder/1019.numth.test.cpp
       title: test/yukicoder/1019.numth.test.cpp

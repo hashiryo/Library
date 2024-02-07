@@ -2,16 +2,23 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: src/NumberTheory/ExtendedEratosthenesSieve.hpp
-    title: "\u62E1\u5F35\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u7BE9"
+    path: src/Internal/ListRange.hpp
+    title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
+      \u3084\u3064"
   - icon: ':question:'
-    path: src/NumberTheory/famous_arithmetic_functions.hpp
-    title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
+    path: src/NumberTheory/CumSumQuotient.hpp
+    title: "\u7D04\u6570\u914D\u5217"
+  - icon: ':question:'
+    path: src/NumberTheory/enumerate_primes.hpp
+    title: "\u7D20\u6570\u306E\u5217\u6319"
+  - icon: ':question:'
+    path: src/NumberTheory/sum_on_primes.hpp
+    title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_c
@@ -19,115 +26,102 @@ data:
     - https://atcoder.jp/contests/abc179/tasks/abc179_c
   bundledCode: "#line 1 \"test/atcoder/abc179_c.mul_sum.test.cpp\"\n#define PROBLEM\
     \ \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n// O(N^(3/4)/logN))\n\
-    #include <iostream>\n#line 2 \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\
-    \n#include <vector>\n#include <algorithm>\n#include <tuple>\n#include <cmath>\n\
-    #include <cstdint>\n#include <cassert>\ntemplate <class T> struct PrimeSum {\n\
-    \ uint64_t N;\n size_t K;\n std::vector<T> Xs, Xl;\n PrimeSum(uint64_t N= 0):\
-    \ N(N), K(std::sqrt(N)), Xs(K + 1), Xl(K + 1) {}\n PrimeSum(uint64_t N, const\
-    \ std::vector<T> &s, const std::vector<T> &l): N(N), K(std::sqrt(N)), Xs(s), Xl(l)\
-    \ {}\n PrimeSum operator-() const {\n  auto Ys= Xs, Yl= Xl;\n  for (auto &x: Ys)\
-    \ x= -x;\n  for (auto &x: Yl) x= -x;\n  return PrimeSum(N, Ys, Yl);\n }\n PrimeSum\
-    \ &operator*=(T r) {\n  for (auto &x: Xs) x*= r;\n  for (auto &x: Xl) x*= r;\n\
-    \  return *this;\n }\n PrimeSum &operator+=(const PrimeSum &r) {\n  for (size_t\
-    \ i= K + 1; i--;) Xs[i]+= r.Xs[i];\n  for (size_t i= K + 1; i--;) Xl[i]+= r.Xl[i];\n\
-    \  return *this;\n }\n PrimeSum &operator-=(const PrimeSum &r) {\n  for (size_t\
-    \ i= K + 1; i--;) Xs[i]-= r.Xs[i];\n  for (size_t i= K + 1; i--;) Xl[i]-= r.Xl[i];\n\
-    \  return *this;\n }\n PrimeSum operator*(T r) const { return PrimeSum(*this)*=\
-    \ r; }\n friend PrimeSum operator*(T l, const PrimeSum &r) { return r * l; }\n\
-    \ PrimeSum operator+(const PrimeSum &r) const { return PrimeSum(*this)+= r; }\n\
-    \ PrimeSum operator-(const PrimeSum &r) const { return PrimeSum(*this)-= r; }\n\
-    \ inline T sum() const { return Xl[1]; }\n inline T sum(uint64_t n) const { return\
-    \ n <= K ? Xs[n] : Xl[N / n]; }\n void add(uint64_t p, T v) {\n  for (size_t i=\
-    \ p; i <= K; ++i) Xs[i]+= v;\n  for (size_t i= std::min<uint64_t>(N / p, K); i;\
-    \ --i) Xl[i]+= v;\n }\n};\ntemplate <class T> class ExtendedEratosthenesSieve\
-    \ {\n uint64_t N;\n size_t K;\npublic:\n std::vector<size_t> primes;\n std::vector<PrimeSum<T>>\
-    \ pwsum;\n ExtendedEratosthenesSieve(uint64_t N, size_t D): N(N), K(std::sqrt(N)),\
-    \ pwsum(D + 1) {\n  std::vector<std::vector<T>> s(D + 1, std::vector<T>(K + 1)),\
-    \ l(D + 1, std::vector<T>(K + 1));\n  for (int n= 1, d= 0; n <= K; ++n, d= 0)\n\
-    \   for (T prd= n; d <= D; prd*= (n + ++d)) s[d][n]= prd / (d + 1);\n  for (int\
-    \ n= 1, d= 0; n <= K; ++n, d= 0)\n   for (T prd= N / n; d <= D; prd*= ((N / n)\
-    \ + ++d)) l[d][n]= prd / (d + 1);\n  if (D >= 2) {\n   std::vector<T> stir(D +\
-    \ 1, 0);\n   stir[1]= 1;\n   for (size_t d= 2; d <= D; stir[d++]= 1) {\n    for\
-    \ (size_t j= d; --j;) stir[j]= stir[j - 1] + stir[j] * (d - 1);\n    for (size_t\
-    \ n= 1; n <= K; ++n)\n     for (size_t j= 1; j < d; ++j) s[d][n]-= stir[j] * s[j][n],\
-    \ l[d][n]-= stir[j] * l[j][n];\n   }\n  }\n  for (size_t d= 0; d <= D; ++d)\n\
-    \   for (size_t n= 1; n <= K; ++n) s[d][n]-= 1, l[d][n]-= 1;\n  for (size_t p=\
-    \ 2, d= 0; p <= K; ++p, d= 0)\n   if (s[0][p] != s[0][p - 1]) {\n    primes.emplace_back(p);\n\
-    \    uint64_t q= uint64_t(p) * p, M= N / p;\n    int t= K / p, u= std::min<uint64_t>(K,\
-    \ N / q);\n    for (T pw= 1; d <= D; ++d, pw*= p) {\n     T tk= s[d][p - 1];\n\
-    \     for (int n= 1; n <= t; ++n) l[d][n]-= (l[d][n * p] - tk) * pw;\n     for\
-    \ (int n= t + 1; n <= u; ++n) l[d][n]-= (s[d][M / n] - tk) * pw;\n     for (uint64_t\
-    \ n= K; n >= q; --n) s[d][n]-= (s[d][n / p] - tk) * pw;\n    }\n   }\n  for (size_t\
-    \ d= 0; d <= D; ++d) pwsum[d]= PrimeSum(N, s[d], l[d]);\n }\n template <class\
-    \ F> T additive_sum(const F &f, const PrimeSum<T> &X) const {\n  T ret= X.sum();\n\
-    \  for (uint64_t d= 2, nN, nd; nN; d= nd) ret+= X.sum(nN= N / d) * ((nd= N / nN\
-    \ + 1) - d);\n  for (uint64_t p: primes)\n   for (uint64_t pw= p * p, e= 2; pw\
-    \ <= N; ++e, pw*= p) ret+= (f(p, e) - f(p, e - 1)) * (N / pw);\n  return ret;\n\
-    \ }\n template <class F> T additive_sum(const F &f, const std::vector<T> &poly)\
-    \ const {\n  PrimeSum<T> X(N);\n  assert(poly.size() <= pwsum.size());\n  for\
-    \ (size_t d= poly.size(); d--;) X+= poly[d] * pwsum[d];\n  return additive_sum(f,\
-    \ X);\n }\n template <class F> T multiplicative_sum(const F &f, PrimeSum<T> X)\
-    \ const {\n  size_t psz= primes.size();\n  for (size_t j= psz; j--;) {\n   uint64_t\
-    \ p= primes[j], M= N / p, q= p * p;\n   size_t t= K / p, u= std::min<uint64_t>(K,\
-    \ N / q);\n   T tk= X.Xs[p - 1];\n   for (auto i= q; i <= K; ++i) X.Xs[i]+= (X.Xs[i\
-    \ / p] - tk) * f(p, 1);\n   for (size_t i= u; i > t; --i) X.Xl[i]+= (X.Xs[M /\
-    \ i] - tk) * f(p, 1);\n   for (size_t i= t; i; --i) X.Xl[i]+= (X.Xl[i * p] - tk)\
-    \ * f(p, 1);\n  }\n  for (auto n= K; n; --n) X.Xs[n]+= 1;\n  for (auto n= K; n;\
-    \ --n) X.Xl[n]+= 1;\n  auto dfs= [&](auto &rc, uint64_t n, size_t bg, T cf) ->\
-    \ T {\n   if (cf == T(0)) return T(0);\n   T ret= cf * X.sum(n);\n   for (auto\
-    \ i= bg; i < psz; ++i) {\n    uint64_t p= primes[i], q= p * p, nn= n / q;\n  \
-    \  if (!nn) break;\n    for (int e= 2; nn; nn/= p, ++e) ret+= rc(rc, nn, i + 1,\
-    \ cf * (f(p, e) - f(p, 1) * f(p, e - 1)));\n   }\n   return ret;\n  };\n  return\
-    \ dfs(dfs, N, 0, 1);\n }\n template <class F> T multiplicative_sum(const F &f,\
-    \ const std::vector<T> &poly) const {\n  PrimeSum<T> X(N);\n  assert(poly.size()\
-    \ <= pwsum.size());\n  for (size_t d= poly.size(); d--;) X+= poly[d] * pwsum[d];\n\
-    \  return multiplicative_sum(f, X);\n }\n};\n#line 4 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\
-    \nnamespace famous_arithmetic_functions {\nnamespace mul {\ntemplate <class T>\
-    \ struct Totient {\n static constexpr T f(uint64_t p, short e) {\n  T ret= p -\
-    \ 1;\n  while (--e) ret*= p;\n  return ret;\n }\n static std::vector<T> poly()\
-    \ { return {-1, 1}; }\n};\ntemplate <class T> struct Moebius {\n static constexpr\
-    \ T f(uint64_t, short e) { return (e == 0) - (e == 1); }\n static std::vector<T>\
-    \ poly() { return {-1}; }\n};\ntemplate <class T> struct Liouville {\n static\
-    \ constexpr T f(uint64_t, short e) { return e & 1 ? -1 : 1; }\n static std::vector<T>\
-    \ poly() { return {-1}; }\n};\ntemplate <class T, uint64_t k> struct Divisor {\n\
-    \ static constexpr T f(uint64_t p, short e) {\n  T ret= 0, pk= 1, pkpw= 1, b=\
-    \ p;\n  for (uint64_t kk= k; kk; kk>>= 1, b*= b)\n   if (kk & 1) pk*= b;\n  for\
-    \ (short i= 0; i <= e; i++, pkpw*= pk) ret+= pkpw;\n  return ret;\n }\n static\
-    \ std::vector<T> poly() {\n  std::vector<T> ret(k + 1, 0);\n  return ret[0]+=\
-    \ 1, ret[k]+= 1, ret;\n }\n};\ntemplate <class T> struct Dedekind {\n static constexpr\
-    \ T f(uint64_t p, short e) {\n  T ret= p + 1;\n  while (e-- > 1) ret*= p;\n  return\
-    \ ret;\n }\n static std::vector<T> poly() { return {1, 1}; }\n};\n}  // namespace\
-    \ mul\nnamespace add {\ntemplate <class T> struct BigOmega {  // the total number\
-    \ of prime factors of n\n static constexpr T f(uint64_t, short e) { return e;\
-    \ }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate <class T> struct\
-    \ LittleOmega {  // the total number of different prime factors of n\n static\
-    \ constexpr T f(uint64_t, short) { return 1; }\n static std::vector<T> poly()\
-    \ { return {1}; }\n};\ntemplate <class T> struct Sopfr {  // the sum of primes\
-    \ dividing n counting multiplicity\n static constexpr T f(uint64_t p, short e)\
-    \ { return p * e; }\n static std::vector<T> poly() { return {0, 1}; }\n};\ntemplate\
-    \ <class T> struct Sopf {  // the sum of the distinct primes dividing n\n static\
-    \ constexpr T f(uint64_t p, short) { return p; }\n static std::vector<T> poly()\
-    \ { return {0, 1}; }\n};\n}  // namespace add\n}\n#line 6 \"test/atcoder/abc179_c.mul_sum.test.cpp\"\
-    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ using namespace famous_arithmetic_functions;\n using D= mul::Divisor<long long,\
-    \ 0>;\n long long N;\n cin >> N;\n ExtendedEratosthenesSieve<long long> ees(N\
-    \ - 1, 0);\n cout << ees.multiplicative_sum(D::f, D::poly()) << '\\n';\n return\
-    \ 0;\n}\n"
+    #include <iostream>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include\
+    \ <algorithm>\n#include <cstdint>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include\
+    \ <vector>\n#include <iterator>\ntemplate <class T> struct ListRange {\n using\
+    \ Iterator= typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator\
+    \ begin() const { return bg; }\n Iterator end() const { return ed; }\n size_t\
+    \ size() const { return std::distance(bg, ed); }\n const T &operator[](int i)\
+    \ const { return bg[i]; }\n};\n#line 5 \"src/NumberTheory/enumerate_primes.hpp\"\
+    \nnamespace nt_internal {\nusing namespace std;\nvector<int> ps, lf;\nvoid sieve(int\
+    \ N) {\n static int n= 2;\n if (n > N) return;\n if (lf.resize((N + 1) >> 1);\
+    \ n == 2) ps.push_back(n++);\n int M= (N - 1) / 2;\n for (int j= 1, e= ps.size();\
+    \ j < e; ++j) {\n  int p= ps[j];\n  if (int64_t(p) * p > N) break;\n  for (auto\
+    \ k= int64_t(p) * max(n / p / 2 * 2 + 1, p) / 2; k <= M; k+= p) lf[k]+= p * !lf[k];\n\
+    \ }\n for (; n <= N; n+= 2)\n  if (!lf[n >> 1]) {\n   ps.push_back(lf[n >> 1]=\
+    \ n);\n   for (auto j= int64_t(n) * n / 2; j <= M; j+= n) lf[j]+= n * !lf[j];\n\
+    \  }\n}\nListRange<int> enumerate_primes() { return {ps.cbegin(), ps.cend()};\
+    \ }\nListRange<int> enumerate_primes(int N) {\n sieve(N);\n return {ps.cbegin(),\
+    \ upper_bound(ps.cbegin(), ps.cend(), N)};\n}\nint least_prime_factor(int n) {\
+    \ return n & 1 ? sieve(n), lf[(n >> 1)] : 2; }\n// f(p,e) := f(p^e)\ntemplate\
+    \ <class T, class F> vector<T> completely_multiplicative_table(int N, const F\
+    \ &f) {\n vector<T> ret(N + 1);\n sieve(N);\n for (int n= 3, i= 1; n <= N; n+=\
+    \ 2, ++i) ret[n]= lf[i] == n ? f(n, 1) : ret[lf[i]] * ret[n / lf[i]];\n if (int\
+    \ n= 4; 2 <= N)\n  for (T t= ret[2]= f(2, 1); n <= N; n+= 2) ret[n]= t * ret[n\
+    \ >> 1];\n return ret[1]= 1, ret;\n}\n}\nusing nt_internal::enumerate_primes,\
+    \ nt_internal::least_prime_factor, nt_internal::completely_multiplicative_table;\n\
+    // O(N log k / log N + N)\ntemplate <class T> static std::vector<T> pow_table(int\
+    \ N, uint64_t k) {\n if (k == 0) return std::vector<T>(N + 1, 1);\n auto f= [k](int\
+    \ p, int) {\n  T ret= 1, b= p;\n  for (auto e= k;; b*= b) {\n   if (e & 1) ret*=\
+    \ b;\n   if (!(e>>= 1)) return ret;\n  }\n };\n return completely_multiplicative_table<T>(N,\
+    \ f);\n}\n#line 3 \"src/NumberTheory/CumSumQuotient.hpp\"\n#include <valarray>\n\
+    template <class T> struct CumSumQuotient {\n uint64_t N;\n size_t K;\n std::valarray<T>\
+    \ X;\n CumSumQuotient(uint64_t N): N(N), K(std::sqrt(N)), X(K + K + 1) {}\n T\
+    \ &operator[](uint64_t i) { return i > K ? X[K + double(N) / i] : X[i]; }\n const\
+    \ T &operator()(uint64_t i) const { return i > K ? X[K + double(N) / i] : X[i];\
+    \ }\n CumSumQuotient &operator+=(const CumSumQuotient &r) { return X+= r.X, *this;\
+    \ }\n CumSumQuotient &operator-=(const CumSumQuotient &r) { return X-= r.X, *this;\
+    \ }\n CumSumQuotient &operator*=(T a) { return X*= a, *this; }\n CumSumQuotient\
+    \ operator-() const {\n  CumSumQuotient ret= *this;\n  return ret.X= -ret.X, ret;\n\
+    \ }\n CumSumQuotient operator+(const CumSumQuotient &r) const { return CumSumQuotient(*this)+=\
+    \ r; }\n CumSumQuotient operator-(const CumSumQuotient &r) const { return CumSumQuotient(*this)-=\
+    \ r; }\n CumSumQuotient operator*(T a) const { return CumSumQuotient(*this)*=\
+    \ a; }\n friend CumSumQuotient operator*(T a, const CumSumQuotient &x) { return\
+    \ x * a; }\n void add(uint64_t i, T v) {\n  for (size_t j= std::min<uint64_t>(N\
+    \ / i, K) + K; j >= i; --j) X[j]+= v;\n }\n T sum() const { return X[K + 1]; }\n\
+    };\n#line 4 \"src/NumberTheory/sum_on_primes.hpp\"\ntemplate <class T> std::vector<CumSumQuotient<T>>\
+    \ sums_of_powers_on_primes(uint64_t N, size_t D) {\n size_t K= std::sqrt(N);\n\
+    \ std::vector ret(D + 1, CumSumQuotient<T>(N));\n for (int n= 1, d= 0; n <= K;\
+    \ ++n, d= 0)\n  for (T prd= n; d <= D; prd*= (n + ++d)) ret[d].X[n]= prd / (d\
+    \ + 1);\n for (int n= 1, d= 0; n <= K; ++n, d= 0)\n  for (T prd= N / n; d <= D;\
+    \ prd*= ((N / n) + ++d)) ret[d].X[n + K]= prd / (d + 1);\n if (D >= 2) {\n  std::vector<T>\
+    \ stir(D + 1, 0);\n  stir[1]= 1;\n  for (size_t d= 2; d <= D; stir[d++]= 1) {\n\
+    \   for (size_t j= d; --j;) stir[j]= stir[j - 1] + stir[j] * (d - 1);\n   for\
+    \ (size_t j= 1; j < d; ++j) ret[d].X-= stir[j] * ret[j].X;\n  }\n }\n for (size_t\
+    \ d= 0; d <= D; ++d) ret[d].X-= 1;\n for (int p: enumerate_primes(K)) {\n  uint64_t\
+    \ q= uint64_t(p) * p, M= N / p;\n  T pw= 1;\n  for (size_t d= 0, t= K / p, u=\
+    \ std::min<uint64_t>(K, N / q); d <= D; ++d, pw*= p) {\n   auto &X= ret[d].X;\n\
+    \   T tk= X[p - 1];\n   for (size_t n= 1; n <= t; ++n) X[n + K]-= (X[n * p + K]\
+    \ - tk) * pw;\n   for (size_t n= t + 1; n <= u; ++n) X[n + K]-= (X[double(M) /\
+    \ n] - tk) * pw;\n   for (uint64_t n= K; n >= q; --n) X[n]-= (X[double(n) / p]\
+    \ - tk) * pw;\n  }\n }\n return ret;\n}\ntemplate <class T, class F> T additive_sum(const\
+    \ CumSumQuotient<T> &P, const F &f) {\n T ret= P.sum();\n for (uint64_t d= 2,\
+    \ nN, nd; nN; d= nd) ret+= P(nN= double(P.N) / d) * ((nd= double(P.N) / nN + 1)\
+    \ - d);\n for (uint64_t p: enumerate_primes(P.K))\n  for (uint64_t pw= p * p,\
+    \ e= 2; pw <= P.N; ++e, pw*= p) ret+= (f(p, e) - f(p, e - 1)) * (P.N / pw);\n\
+    \ return ret;\n}\ntemplate <class T, class F> T multiplicative_sum(CumSumQuotient<T>\
+    \ P, const F &f) {\n auto ps= enumerate_primes(P.K);\n size_t psz= ps.size();\n\
+    \ for (size_t j= psz; j--;) {\n  uint64_t p= ps[j], M= P.N / p, q= p * p;\n  size_t\
+    \ t= P.K / p, u= std::min<uint64_t>(P.K, P.N / q);\n  T tk= P.X[p - 1];\n  for\
+    \ (auto i= q; i <= P.K; ++i) P.X[i]+= (P.X[double(i) / p] - tk) * f(p, 1);\n \
+    \ for (size_t i= u; i > t; --i) P.X[i + P.K]+= (P.X[double(M) / i] - tk) * f(p,\
+    \ 1);\n  for (size_t i= t; i; --i) P.X[i + P.K]+= (P.X[i * p + P.K] - tk) * f(p,\
+    \ 1);\n }\n P.X+= 1;\n auto dfs= [&](auto &rc, uint64_t n, size_t bg, T cf) ->\
+    \ T {\n  if (cf == T(0)) return T(0);\n  T ret= cf * P(n);\n  for (auto i= bg;\
+    \ i < psz; ++i) {\n   uint64_t p= ps[i], q= p * p, nn= n / q;\n   if (!nn) break;\n\
+    \   for (int e= 2; nn; nn/= p, ++e) ret+= rc(rc, nn, i + 1, cf * (f(p, e) - f(p,\
+    \ 1) * f(p, e - 1)));\n  }\n  return ret;\n };\n return dfs(dfs, P.N, 0, 1);\n\
+    }\n#line 5 \"test/atcoder/abc179_c.mul_sum.test.cpp\"\nusing namespace std;\n\
+    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N;\n cin\
+    \ >> N;\n auto Ps= sums_of_powers_on_primes<long long>(N, 0);\n auto f= [](long\
+    \ long, short e) { return e + 1; };\n cout << multiplicative_sum(Ps[0], f) <<\
+    \ '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n//\
-    \ O(N^(3/4)/logN))\n#include <iostream>\n#include \"src/NumberTheory/ExtendedEratosthenesSieve.hpp\"\
-    \n#include \"src/NumberTheory/famous_arithmetic_functions.hpp\"\nusing namespace\
-    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n using namespace\
-    \ famous_arithmetic_functions;\n using D= mul::Divisor<long long, 0>;\n long long\
-    \ N;\n cin >> N;\n ExtendedEratosthenesSieve<long long> ees(N - 1, 0);\n cout\
-    \ << ees.multiplicative_sum(D::f, D::poly()) << '\\n';\n return 0;\n}"
+    \ O(N^(3/4)/logN))\n#include <iostream>\n#include \"src/NumberTheory/sum_on_primes.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ long long N;\n cin >> N;\n auto Ps= sums_of_powers_on_primes<long long>(N, 0);\n\
+    \ auto f= [](long long, short e) { return e + 1; };\n cout << multiplicative_sum(Ps[0],\
+    \ f) << '\\n';\n return 0;\n}"
   dependsOn:
-  - src/NumberTheory/ExtendedEratosthenesSieve.hpp
-  - src/NumberTheory/famous_arithmetic_functions.hpp
+  - src/NumberTheory/sum_on_primes.hpp
+  - src/NumberTheory/enumerate_primes.hpp
+  - src/Internal/ListRange.hpp
+  - src/NumberTheory/CumSumQuotient.hpp
   isVerificationFile: true
   path: test/atcoder/abc179_c.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2023-11-27 11:00:47+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-07 18:19:31+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.mul_sum.test.cpp
 layout: document

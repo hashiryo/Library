@@ -14,17 +14,17 @@ data:
       \u307F\u8FBC\u307F\u306A\u3069"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers
+    PROBLEM: https://atcoder.jp/contests/abc177/tasks/abc177_e
     links:
-    - https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers
-  bundledCode: "#line 1 \"test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp\"\
-    \n#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
-    \n#include <iostream>\n#include <vector>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\
+    - https://atcoder.jp/contests/abc177/tasks/abc177_e
+  bundledCode: "#line 1 \"test/atcoder/abc177_e.gcd_conv.test.cpp\"\n#define PROBLEM\
+    \ \"https://atcoder.jp/contests/abc177/tasks/abc177_e\"\n#include <iostream>\n\
+    #include <vector>\n#include <numeric>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\
     \n#include <algorithm>\n#include <cstdint>\n#line 3 \"src/Internal/ListRange.hpp\"\
     \n#include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator=\
     \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
@@ -93,34 +93,34 @@ data:
     \ static std::vector<T> gcd_convolve(std::vector<T> a, std::vector<T> b) {\n std::size_t\
     \ N= std::max(a.size(), b.size());\n for (a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b); N--;) a[N]*= b[N];\n return multiple_mobius(a), a;\n}\n#line\
-    \ 5 \"test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp\"\n// \u500D\
-    \u6570\u30E1\u30D3\u30A6\u30B9\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
-    \ ios::sync_with_stdio(false);\n int T;\n cin >> T;\n long long f[1'000'010];\n\
-    \ while (T--) {\n  long long N, a= 2, ans= 0;\n  cin >> N;\n  for (; a * a * a\
-    \ <= N; a++) f[a]= N / (a * a * a);\n  vector<long long> g(f, f + a);\n  multiple_mobius(g);\n\
-    \  for (; --a >= 2;) ans+= g[a];\n  cout << ans << '\\n';\n }\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
-    \n#include <iostream>\n#include <vector>\n#include \"src/NumberTheory/tables.hpp\"\
-    \n// \u500D\u6570\u30E1\u30D3\u30A6\u30B9\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int T;\n cin >> T;\n long long\
-    \ f[1'000'010];\n while (T--) {\n  long long N, a= 2, ans= 0;\n  cin >> N;\n \
-    \ for (; a * a * a <= N; a++) f[a]= N / (a * a * a);\n  vector<long long> g(f,\
-    \ f + a);\n  multiple_mobius(g);\n  for (; --a >= 2;) ans+= g[a];\n  cout << ans\
-    \ << '\\n';\n }\n return 0;\n}"
+    \ 6 \"test/atcoder/abc177_e.gcd_conv.test.cpp\"\nusing namespace std;\nsigned\
+    \ main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n long long N;\n cin >>\
+    \ N;\n vector<long long> a(1000'010);\n int g= 0;\n for (int i= 0, A; i < N; ++i)\
+    \ cin >> A, ++a[A], g= gcd(g, A);\n if (g != 1) return cout << \"not coprime\"\
+    \ << '\\n', 0;\n auto b= gcd_convolve(a, a);\n cout << (b[1] - a[1] == N * (N\
+    \ - 1) ? \"pairwise\" : \"setwise\") << \" coprime\" << '\\n';\n return 0;\n}\n"
+  code: "#define PROBLEM \"https://atcoder.jp/contests/abc177/tasks/abc177_e\"\n#include\
+    \ <iostream>\n#include <vector>\n#include <numeric>\n#include \"src/NumberTheory/tables.hpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n\
+    \ long long N;\n cin >> N;\n vector<long long> a(1000'010);\n int g= 0;\n for\
+    \ (int i= 0, A; i < N; ++i) cin >> A, ++a[A], g= gcd(g, A);\n if (g != 1) return\
+    \ cout << \"not coprime\" << '\\n', 0;\n auto b= gcd_convolve(a, a);\n cout <<\
+    \ (b[1] - a[1] == N * (N - 1) ? \"pairwise\" : \"setwise\") << \" coprime\" <<\
+    \ '\\n';\n return 0;\n}"
   dependsOn:
   - src/NumberTheory/tables.hpp
   - src/NumberTheory/enumerate_primes.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: true
-  path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+  path: test/atcoder/abc177_e.gcd_conv.test.cpp
   requiredBy: []
   timestamp: '2024-02-07 18:19:31+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+documentation_of: test/atcoder/abc177_e.gcd_conv.test.cpp
 layout: document
 redirect_from:
-- /verify/test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-- /verify/test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp.html
-title: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+- /verify/test/atcoder/abc177_e.gcd_conv.test.cpp
+- /verify/test/atcoder/abc177_e.gcd_conv.test.cpp.html
+title: test/atcoder/abc177_e.gcd_conv.test.cpp
 ---

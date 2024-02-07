@@ -32,12 +32,15 @@ data:
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':x:'
+  - icon: ':question:'
+    path: src/NumberTheory/sum_on_primes.hpp
+    title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
+  - icon: ':question:'
     path: src/NumberTheory/tables.hpp
-    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084gcd \u7573\
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
       \u307F\u8FBC\u307F\u306A\u3069"
   - icon: ':question:'
     path: src/String/SuffixTree.hpp
@@ -100,9 +103,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc172_d.mul_sum.test.cpp
+    title: test/atcoder/abc172_d.mul_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc177_e.gcd_conv.test.cpp
+    title: test/atcoder/abc177_e.gcd_conv.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc179_c.mul_sum.test.cpp
+    title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
@@ -112,10 +124,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
   - icon: ':x:'
@@ -146,6 +158,9 @@ data:
     path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
     title: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - icon: ':x:'
+    path: test/yosupo/counting_primes.test.cpp
+    title: test/yosupo/counting_primes.test.cpp
+  - icon: ':x:'
     path: test/yosupo/enumerate_primes.test.cpp
     title: test/yosupo/enumerate_primes.test.cpp
   - icon: ':x:'
@@ -170,6 +185,9 @@ data:
     path: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
     title: test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - icon: ':x:'
+    path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+    title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - icon: ':x:'
     path: test/yosupo/tree_path_composite_sum.test.cpp
     title: test/yosupo/tree_path_composite_sum.test.cpp
   - icon: ':x:'
@@ -178,6 +196,9 @@ data:
   - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1006.test.cpp
+    title: test/yukicoder/1006.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
@@ -295,6 +316,7 @@ data:
   - src/DataStructure/CsrArray.hpp
   - src/NumberTheory/tables.hpp
   - src/NumberTheory/enumerate_primes.hpp
+  - src/NumberTheory/sum_on_primes.hpp
   - src/String/SuffixTree.hpp
   - src/Geometry/SegmentArrangement.hpp
   - src/Math/TwoSatisfiability.hpp
@@ -324,6 +346,7 @@ data:
   - test/yukicoder/1326.test.cpp
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1494.test.cpp
+  - test/yukicoder/1006.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
   - test/yukicoder/1211.test.cpp
   - test/yukicoder/768.test.cpp
@@ -352,11 +375,14 @@ data:
   - test/atcoder/abc241_e.test.cpp
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc177_e.gcd_conv.test.cpp
+  - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/atcoder/abc202_e.test.cpp
   - test/atcoder/abc167_d.test.cpp
   - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
+  - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
   - test/atcoder/abc136_d.test.cpp
@@ -365,6 +391,7 @@ data:
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
   - test/yosupo/bipartitematching.bipatite_graph.test.cpp
+  - test/yosupo/counting_primes.test.cpp
   - test/yosupo/scc.test.cpp
   - test/yosupo/biconnected_components.test.cpp
   - test/yosupo/vertex_set_path_composite.HLD.test.cpp
@@ -375,6 +402,7 @@ data:
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/lcm_convolution.test.cpp
   - test/yosupo/gcd_convolution.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/Internal/ListRange.hpp
 layout: document
 title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\u3084\
