@@ -132,10 +132,10 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3168.clique.test.cpp
-  - test/aoj/GRL_7_A.clique.test.cpp
   - test/aoj/2306.test.cpp
-  - test/yosupo/maximum_independent_set.test.cpp
+  - test/aoj/GRL_7_A.clique.test.cpp
   - test/yosupo/enumerate_cliques.test.cpp
+  - test/yosupo/maximum_independent_set.test.cpp
 documentation_of: src/Graph/CliqueProblem.hpp
 layout: document
 title: "\u30AF\u30EA\u30FC\u30AF\u554F\u984C"

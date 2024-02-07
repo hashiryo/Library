@@ -144,9 +144,9 @@ data:
   timestamp: '2023-11-05 23:34:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/3170.test.cpp
   - test/hackerrank/library-query.SqrtDC.test.cpp
   - test/yukicoder/925.SqrtDC.test.cpp
-  - test/aoj/3170.test.cpp
   - test/yosupo/range_chmin_chmax_add_range_sum.SqrtDC.test.cpp
 documentation_of: src/DataStructure/SortedPerBucket.hpp
 layout: document

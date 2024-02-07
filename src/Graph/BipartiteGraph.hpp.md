@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/3168.bm.test.cpp
     title: test/aoj/3168.bm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.dm.test.cpp
     title: test/atcoder/abc223_g.dm.test.cpp
   - icon: ':x:'

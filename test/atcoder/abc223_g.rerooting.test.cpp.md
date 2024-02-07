@@ -13,9 +13,9 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc223/tasks/abc223_g
@@ -152,7 +152,7 @@ data:
   path: test/atcoder/abc223_g.rerooting.test.cpp
   requiredBy: []
   timestamp: '2024-02-06 20:21:12+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.rerooting.test.cpp
 layout: document

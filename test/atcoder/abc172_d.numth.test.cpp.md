@@ -8,9 +8,6 @@ data:
   - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':heavy_check_mark:'
-    path: src/NumberTheory/famous_arithmetic_functions.hpp
-    title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
   - icon: ':question:'
     path: src/NumberTheory/tables.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
@@ -96,53 +93,25 @@ data:
     \ static std::vector<T> gcd_convolve(std::vector<T> a, std::vector<T> b) {\n std::size_t\
     \ N= std::max(a.size(), b.size());\n for (a.resize(N), b.resize(N), multiple_zeta(a),\
     \ multiple_zeta(b); N--;) a[N]*= b[N];\n return multiple_mobius(a), a;\n}\n#line\
-    \ 4 \"src/NumberTheory/famous_arithmetic_functions.hpp\"\nnamespace famous_arithmetic_functions\
-    \ {\nnamespace mul {\ntemplate <class T> struct Totient {\n static constexpr T\
-    \ f(uint64_t p, short e) {\n  T ret= p - 1;\n  while (--e) ret*= p;\n  return\
-    \ ret;\n }\n static std::vector<T> poly() { return {-1, 1}; }\n};\ntemplate <class\
-    \ T> struct Moebius {\n static constexpr T f(uint64_t, short e) { return (e ==\
-    \ 0) - (e == 1); }\n static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
-    \ <class T> struct Liouville {\n static constexpr T f(uint64_t, short e) { return\
-    \ e & 1 ? -1 : 1; }\n static std::vector<T> poly() { return {-1}; }\n};\ntemplate\
-    \ <class T, uint64_t k> struct Divisor {\n static constexpr T f(uint64_t p, short\
-    \ e) {\n  T ret= 0, pk= 1, pkpw= 1, b= p;\n  for (uint64_t kk= k; kk; kk>>= 1,\
-    \ b*= b)\n   if (kk & 1) pk*= b;\n  for (short i= 0; i <= e; i++, pkpw*= pk) ret+=\
-    \ pkpw;\n  return ret;\n }\n static std::vector<T> poly() {\n  std::vector<T>\
-    \ ret(k + 1, 0);\n  return ret[0]+= 1, ret[k]+= 1, ret;\n }\n};\ntemplate <class\
-    \ T> struct Dedekind {\n static constexpr T f(uint64_t p, short e) {\n  T ret=\
-    \ p + 1;\n  while (e-- > 1) ret*= p;\n  return ret;\n }\n static std::vector<T>\
-    \ poly() { return {1, 1}; }\n};\n}  // namespace mul\nnamespace add {\ntemplate\
-    \ <class T> struct BigOmega {  // the total number of prime factors of n\n static\
-    \ constexpr T f(uint64_t, short e) { return e; }\n static std::vector<T> poly()\
-    \ { return {1}; }\n};\ntemplate <class T> struct LittleOmega {  // the total number\
-    \ of different prime factors of n\n static constexpr T f(uint64_t, short) { return\
-    \ 1; }\n static std::vector<T> poly() { return {1}; }\n};\ntemplate <class T>\
-    \ struct Sopfr {  // the sum of primes dividing n counting multiplicity\n static\
-    \ constexpr T f(uint64_t p, short e) { return p * e; }\n static std::vector<T>\
-    \ poly() { return {0, 1}; }\n};\ntemplate <class T> struct Sopf {  // the sum\
-    \ of the distinct primes dividing n\n static constexpr T f(uint64_t p, short)\
-    \ { return p; }\n static std::vector<T> poly() { return {0, 1}; }\n};\n}  // namespace\
-    \ add\n}\n#line 6 \"test/atcoder/abc172_d.numth.test.cpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
-    \ famous_arithmetic_functions;\n int N;\n cin >> N;\n auto d= multiplicative_table<long\
-    \ long>(N, mul::Divisor<int, 0>::f);\n long long ans= 0;\n for (long long i= 1;\
-    \ i <= N; i++) ans+= d[i] * i;\n cout << ans << '\\n';\n return 0;\n}\n"
+    \ 5 \"test/atcoder/abc172_d.numth.test.cpp\"\nusing namespace std;\nsigned main()\
+    \ {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N;\n cin >> N;\n auto d=\
+    \ multiplicative_table<long long>(N, [](long long, short e) { return e + 1; });\n\
+    \ long long ans= 0;\n for (long long i= 1; i <= N; i++) ans+= d[i] * i;\n cout\
+    \ << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc172/tasks/abc172_d\"\n//\
-    \ O(N)\n#include <iostream>\n#include \"src/NumberTheory/tables.hpp\"\n#include\
-    \ \"src/NumberTheory/famous_arithmetic_functions.hpp\"\nusing namespace std;\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n using namespace\
-    \ famous_arithmetic_functions;\n int N;\n cin >> N;\n auto d= multiplicative_table<long\
-    \ long>(N, mul::Divisor<int, 0>::f);\n long long ans= 0;\n for (long long i= 1;\
-    \ i <= N; i++) ans+= d[i] * i;\n cout << ans << '\\n';\n return 0;\n}"
+    \ O(N)\n#include <iostream>\n#include \"src/NumberTheory/tables.hpp\"\nusing namespace\
+    \ std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N;\n\
+    \ cin >> N;\n auto d= multiplicative_table<long long>(N, [](long long, short e)\
+    \ { return e + 1; });\n long long ans= 0;\n for (long long i= 1; i <= N; i++)\
+    \ ans+= d[i] * i;\n cout << ans << '\\n';\n return 0;\n}"
   dependsOn:
   - src/NumberTheory/tables.hpp
   - src/NumberTheory/enumerate_primes.hpp
   - src/Internal/ListRange.hpp
-  - src/NumberTheory/famous_arithmetic_functions.hpp
   isVerificationFile: true
   path: test/atcoder/abc172_d.numth.test.cpp
   requiredBy: []
-  timestamp: '2024-02-07 18:19:31+09:00'
+  timestamp: '2024-02-07 23:03:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc172_d.numth.test.cpp

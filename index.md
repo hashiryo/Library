@@ -299,7 +299,7 @@ data:
     - icon: ':question:'
       path: src/Math/ModInt.hpp
       title: ModInt
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: src/Math/ModInt_Exp.hpp
       title: "\u6307\u6570\u306B\u4E57\u305B\u3089\u308C\u308BModInt"
     - icon: ':question:'
@@ -377,7 +377,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/CumSumQuotient.hpp
       title: "\u7D04\u6570\u914D\u5217"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/NumberTheory/DirichletSeries.hpp
       title: "\u30C7\u30A3\u30EA\u30AF\u30EC\u7D1A\u6570"
     - icon: ':question:'
@@ -392,9 +392,6 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/enumerate_quotients.hpp
       title: "$\\lfloor N/i \\rfloor$ \u306E\u5217\u6319"
-    - icon: ':heavy_check_mark:'
-      path: src/NumberTheory/famous_arithmetic_functions.hpp
-      title: "\u6709\u540D\u306A\u6570\u8AD6\u7684\u95A2\u6570"
     - icon: ':question:'
       path: src/NumberTheory/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
@@ -1138,7 +1135,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc167_d.test.cpp
       title: test/atcoder/abc167_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc172_d.Dirichlet.test.cpp
       title: test/atcoder/abc172_d.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1156,7 +1153,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc177_e.gcd_conv.test.cpp
       title: test/atcoder/abc177_e.gcd_conv.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc179_c.Dirichlet.test.cpp
       title: test/atcoder/abc179_c.Dirichlet.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1228,19 +1225,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_g.test.cpp
       title: test/atcoder/abc222_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_h.sparse_FPS.test.cpp
       title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.dm.test.cpp
       title: test/atcoder/abc223_g.dm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.rerooting.test.cpp
       title: test/atcoder/abc223_g.rerooting.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_d.test.cpp
       title: test/atcoder/abc228_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc228_e.test.cpp
       title: test/atcoder/abc228_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1249,7 +1246,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc229_h.test.cpp
       title: test/atcoder/abc229_h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc230_h.test.cpp
       title: test/atcoder/abc230_h.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1270,6 +1267,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc236_g.test.cpp
       title: test/atcoder/abc236_g.test.cpp
+    - icon: ':x:'
+      path: test/atcoder/abc239_ex.test.cpp
+      title: test/atcoder/abc239_ex.test.cpp
     - icon: ':x:'
       path: test/atcoder/abc241_e.test.cpp
       title: test/atcoder/abc241_e.test.cpp

@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
   - icon: ':x:'
@@ -198,22 +198,22 @@ data:
   timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1075.test.cpp
-  - test/yukicoder/1418.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1718.test.cpp
-  - test/yukicoder/1976.test.cpp
-  - test/yukicoder/1333.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/1494.test.cpp
-  - test/yukicoder/768.test.cpp
-  - test/yukicoder/1295.test.cpp
   - test/aoj/1595.test.cpp
   - test/aoj/GRL_5_A.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc220_f.test.cpp
-  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/yukicoder/1494.test.cpp
+  - test/yukicoder/768.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1418.test.cpp
+  - test/yukicoder/1976.test.cpp
+  - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1295.test.cpp
+  - test/yukicoder/1718.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Graph/rerooting.hpp

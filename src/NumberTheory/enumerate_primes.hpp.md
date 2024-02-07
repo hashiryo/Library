@@ -134,24 +134,24 @@ data:
   timestamp: '2024-02-07 18:19:31+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - test/yukicoder/886.numth.test.cpp
-  - test/yukicoder/1006.test.cpp
-  - test/yukicoder/644.test.cpp
-  - test/yukicoder/1019.numth.test.cpp
-  - test/atcoder/abc177_e.gcd_conv.test.cpp
-  - test/atcoder/abc179_c.mul_sum.test.cpp
-  - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - test/yosupo/counting_primes.test.cpp
+  - test/atcoder/abc177_e.gcd_conv.test.cpp
+  - test/atcoder/agc038_c.numth.test.cpp
+  - test/atcoder/abc179_c.mul_sum.test.cpp
+  - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+  - test/yukicoder/644.test.cpp
+  - test/yukicoder/1006.test.cpp
+  - test/yukicoder/886.numth.test.cpp
+  - test/yukicoder/1019.numth.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/enumerate_primes.test.cpp
-  - test/yosupo/lcm_convolution.test.cpp
-  - test/yosupo/gcd_convolution.test.cpp
+  - test/yosupo/counting_primes.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/lcm_convolution.test.cpp
+  - test/yosupo/enumerate_primes.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/gcd_convolution.test.cpp
 documentation_of: src/NumberTheory/enumerate_primes.hpp
 layout: document
 title: "\u7D20\u6570\u306E\u5217\u6319"
@@ -164,8 +164,8 @@ title: "\u7D20\u6570\u306E\u5217\u6319"
 |---|---|---|
 | `enumerate_primes(N)`| $N$ 以下のすべての素数を返す. <br> 返り値は [`ListRange<int>`](src/Internal/ListRange.hpp)||
 |`least_primes_factor(n)`| $n$ の最小素因数を返す. ||
-|`completely_multiplicative_table<T>(N, f)`| 完全乗法的関数 $f$ の値が入ったテーブルを返す. <br> $f$ は素冪のもの `f(p,e)`$=f(p^e)$ を渡す(完全だけど).<br> サイズは $N+1$. |$\displaystyle\Omicron\left(N + \frac{N\alpha}{\log N}\right)$ <br> ただし $f(p)$ の計算量を $\Omicron(\alpha)$ とおいた.|
-|`pow_table<T>(N,k)`| $n^k$ の値が入ったテーブルを返す. <br> サイズは $N+1$. |$\displaystyle\Omicron\left(N + \frac{N\log k}{\log N}\right)$|
+|`completely_multiplicative_table<T>(N, f)`| 完全乗法的関数 $f$ の値が入ったテーブルを返す. <br> $f$ は素冪のもの `f(p,e)`$=f(p^e)$ を渡す(完全だけど).<br> サイズは $N+1$. |$\displaystyleO\left(N + \frac{N\alpha}{\log N}\right)$ <br> ただし $f(p)$ の計算量を $O(\alpha)$ とおいた.|
+|`pow_table<T>(N,k)`| $n^k$ の値が入ったテーブルを返す. <br> サイズは $N+1$. |$\displaystyleO\left(N + \frac{N\log k}{\log N}\right)$|
 
 ## 参考
 [https://37zigen.com/linear-sieve/](https://37zigen.com/linear-sieve/) 

@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_d.test.cpp
     title: test/atcoder/abc179_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_h.sparse_FPS.test.cpp
     title: test/atcoder/abc222_h.sparse_FPS.test.cpp
   - icon: ':x:'
@@ -301,16 +301,16 @@ data:
   timestamp: '2024-02-05 22:57:52+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc179_d.test.cpp
+  - test/atcoder/abc276_g.sparse_FPS.test.cpp
+  - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/yukicoder/1533.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
   - test/yukicoder/1939.test.cpp
-  - test/atcoder/abc222_h.sparse_FPS.test.cpp
-  - test/atcoder/abc276_g.sparse_FPS.test.cpp
-  - test/atcoder/abc179_d.test.cpp
-  - test/yosupo/pow_of_sparse_FPS.test.cpp
-  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
-  - test/yosupo/exp_of_sparse_FPS.test.cpp
   - test/yosupo/log_of_sparse_FPS.test.cpp
+  - test/yosupo/pow_of_sparse_FPS.test.cpp
+  - test/yosupo/exp_of_sparse_FPS.test.cpp
+  - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/inv_of_sparse_FPS.test.cpp
 documentation_of: src/Math/sparse_fps.hpp
 layout: document

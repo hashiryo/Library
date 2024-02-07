@@ -60,9 +60,9 @@ data:
     \ f);\n}\n#line 3 \"src/NumberTheory/CumSumQuotient.hpp\"\n#include <valarray>\n\
     template <class T> struct CumSumQuotient {\n uint64_t N;\n size_t K;\n std::valarray<T>\
     \ X;\n CumSumQuotient(uint64_t N): N(N), K(std::sqrt(N)), X(K + K + 1) {}\n T\
-    \ &operator[](uint64_t i) { return i > K ? X[K + double(N) / i] : X[i]; }\n const\
-    \ T &operator()(uint64_t i) const { return i > K ? X[K + double(N) / i] : X[i];\
-    \ }\n CumSumQuotient &operator+=(const CumSumQuotient &r) { return X+= r.X, *this;\
+    \ &operator[](uint64_t i) { return i > K ? X[K + double(N) / i] : X[i]; }\n T\
+    \ operator()(uint64_t i) const { return i > K ? X[K + double(N) / i] : X[i]; }\n\
+    \ CumSumQuotient &operator+=(const CumSumQuotient &r) { return X+= r.X, *this;\
     \ }\n CumSumQuotient &operator-=(const CumSumQuotient &r) { return X-= r.X, *this;\
     \ }\n CumSumQuotient &operator*=(T a) { return X*= a, *this; }\n CumSumQuotient\
     \ operator-() const {\n  CumSumQuotient ret= *this;\n  return ret.X= -ret.X, ret;\n\
@@ -72,7 +72,8 @@ data:
     \ a; }\n friend CumSumQuotient operator*(T a, const CumSumQuotient &x) { return\
     \ x * a; }\n void add(uint64_t i, T v) {\n  for (size_t j= std::min<uint64_t>(N\
     \ / i, K) + K; j >= i; --j) X[j]+= v;\n }\n T sum() const { return X[K + 1]; }\n\
-    };\n#line 4 \"src/NumberTheory/sum_on_primes.hpp\"\ntemplate <class T> std::vector<CumSumQuotient<T>>\
+    \ T sum(uint64_t i) const { return i > K ? X[K + double(N) / i] : X[i]; }\n};\n\
+    #line 4 \"src/NumberTheory/sum_on_primes.hpp\"\ntemplate <class T> std::vector<CumSumQuotient<T>>\
     \ sums_of_powers_on_primes(uint64_t N, size_t D) {\n size_t K= std::sqrt(N);\n\
     \ std::vector ret(D + 1, CumSumQuotient<T>(N));\n for (int n= 1, d= 0; n <= K;\
     \ ++n, d= 0)\n  for (T prd= n; d <= D; prd*= (n + ++d)) ret[d].X[n]= prd / (d\
@@ -146,11 +147,11 @@ data:
   isVerificationFile: false
   path: src/NumberTheory/sum_on_primes.hpp
   requiredBy: []
-  timestamp: '2024-02-07 18:19:31+09:00'
+  timestamp: '2024-02-07 23:03:20+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
+  - test/atcoder/abc179_c.mul_sum.test.cpp
   - test/yosupo/counting_primes.test.cpp
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/NumberTheory/sum_on_primes.hpp
@@ -182,9 +183,9 @@ $P(n)$ は[`CumSumQuotient<T>`](src/NumberTheory/CumSumQuotient.hpp) クラス�
 
 |関数名|概要|計算量|
 |---|---|---|
-|`sums_of_powers_on_primes<T>(N,D)`| $n\in \left\lbrace \left. \floor{\frac{N}{x}} \right \vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ までの <br> 素数上の $k$ 乗数の累積和 <br> $\displaystyle \sum_{\substack{p: \mathrm{prime} \\ p \leq n}} p^k$ <br>を $k=0,\dots,D$ まで計算したものを返す. <br> 特に $k=0$ は素数計数関数 $\pi(n)$ となる. <br> 返り値は`vector<CumSumQuotient<T>>`.|$\displaystyle\Omicron\left(\frac{DN^{3/4}}{\log N}\right)$|
-|`additive_sum(P,f)`|加法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyle\Omicron\left(\sqrt{N}\right)$|
-|`multiplicative_sum(P,f)`|乗法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyle\Omicron\left(\frac{DN^{3/4}}{\log N}\right)$|
+|`sums_of_powers_on_primes<T>(N,D)`| $n\in \left\lbrace \left. \floor{\frac{N}{x}} \right \vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ までの <br> 素数上の $k$ 乗数の累積和 <br> $\displaystyle \sum_{\substack{p: \mathrm{prime} \\ p \leq n}} p^k$ <br>を $k=0,\dots,D$ まで計算したものを返す. <br> 特に $k=0$ は素数計数関数 $\pi(n)$ となる. <br> 返り値は`vector<CumSumQuotient<T>>`.|$\displaystyleO\left(\frac{DN^{3/4}}{\log N}\right)$|
+|`additive_sum(P,f)`|加法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyleO\left(\sqrt{N}\right)$|
+|`multiplicative_sum(P,f)`|乗法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyleO\left(\frac{DN^{3/4}}{\log N}\right)$|
 
 ## 問題例
 [Xmas Contest 2019 D - Sum of (-1)^f(n)](https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d) \
