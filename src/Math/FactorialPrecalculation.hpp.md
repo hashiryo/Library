@@ -64,6 +64,12 @@ data:
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/125.multiple_mobius.test.cpp
+    title: test/yukicoder/125.multiple_mobius.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/125.phi.test.cpp
+    title: test/yukicoder/125.phi.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1533.test.cpp
     title: test/yukicoder/1533.test.cpp
   - icon: ':x:'
@@ -135,7 +141,9 @@ data:
   - test/atcoder/abc276_g.sparse_FPS.test.cpp
   - test/atcoder/abc222_h.sparse_FPS.test.cpp
   - test/yukicoder/1533.test.cpp
+  - test/yukicoder/125.phi.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
+  - test/yukicoder/125.multiple_mobius.test.cpp
   - test/yukicoder/1939.test.cpp
   - test/yukicoder/310.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp

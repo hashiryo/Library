@@ -158,6 +158,9 @@ data:
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc162_e.test.cpp
+    title: test/atcoder/abc162_e.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_d.test.cpp
     title: test/atcoder/abc179_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -196,7 +199,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc239_ex.test.cpp
     title: test/atcoder/abc239_ex.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc253_ex.test.cpp
     title: test/atcoder/abc253_ex.test.cpp
   - icon: ':heavy_check_mark:'
@@ -217,7 +220,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc270_g.test.cpp
     title: test/atcoder/abc270_g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc272_f.RH.test.cpp
     title: test/atcoder/abc272_f.RH.test.cpp
   - icon: ':x:'
@@ -488,6 +491,12 @@ data:
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/125.multiple_mobius.test.cpp
+    title: test/yukicoder/125.multiple_mobius.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/125.phi.test.cpp
+    title: test/yukicoder/125.phi.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1260.test.cpp
     title: test/yukicoder/1260.test.cpp
   - icon: ':x:'
@@ -726,6 +735,7 @@ data:
   - test/atcoder/abc256_f.SplayTree.test.cpp
   - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
+  - test/atcoder/abc162_e.test.cpp
   - test/atcoder/abc179_d.test.cpp
   - test/atcoder/abc239_ex.test.cpp
   - test/atcoder/abc213_h.test.cpp
@@ -752,6 +762,7 @@ data:
   - test/yukicoder/1124.test.cpp
   - test/yukicoder/685.test.cpp
   - test/yukicoder/315.test.cpp
+  - test/yukicoder/125.phi.test.cpp
   - test/yukicoder/1075.test.cpp
   - test/yukicoder/2454.RH.test.cpp
   - test/yukicoder/1907.test.cpp
@@ -780,6 +791,7 @@ data:
   - test/yukicoder/963.FPS.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/1269.test.cpp
+  - test/yukicoder/125.multiple_mobius.test.cpp
   - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/1600.KDT.test.cpp

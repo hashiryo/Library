@@ -68,6 +68,12 @@ data:
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/125.multiple_mobius.test.cpp
+    title: test/yukicoder/125.multiple_mobius.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/125.phi.test.cpp
+    title: test/yukicoder/125.phi.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1728.test.cpp
     title: test/yukicoder/1728.test.cpp
   - icon: ':x:'
@@ -242,7 +248,9 @@ data:
   - test/unit_test/constexpr_mod_tetration.test.cpp
   - test/unit_test/constexpr_factors.test.cpp
   - test/unit_test/constexpr_orderfp.test.cpp
+  - test/yukicoder/125.phi.test.cpp
   - test/yukicoder/2578.test.cpp
+  - test/yukicoder/125.multiple_mobius.test.cpp
   - test/yukicoder/1728.test.cpp
   - test/yukicoder/2264.test.cpp
   - test/yosupo/kth_root_mod.test.cpp

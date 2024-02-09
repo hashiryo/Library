@@ -300,6 +300,12 @@ data:
     path: test/yukicoder/1145.test.cpp
     title: test/yukicoder/1145.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/125.multiple_mobius.test.cpp
+    title: test/yukicoder/125.multiple_mobius.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/125.phi.test.cpp
+    title: test/yukicoder/125.phi.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/137.div_at.test.cpp
     title: test/yukicoder/137.div_at.test.cpp
   - icon: ':x:'
@@ -471,6 +477,7 @@ data:
   - test/unit_test/constexpr_orderfp.test.cpp
   - test/yukicoder/502.test.cpp
   - test/yukicoder/1533.test.cpp
+  - test/yukicoder/125.phi.test.cpp
   - test/yukicoder/963.test.cpp
   - test/yukicoder/215.Poly.test.cpp
   - test/yukicoder/1080.sparse_FPS.test.cpp
@@ -479,6 +486,7 @@ data:
   - test/yukicoder/665.test.cpp
   - test/yukicoder/42.test.cpp
   - test/yukicoder/963.FPS.test.cpp
+  - test/yukicoder/125.multiple_mobius.test.cpp
   - test/yukicoder/1728.test.cpp
   - test/yukicoder/1145.test.cpp
   - test/yukicoder/1939.test.cpp

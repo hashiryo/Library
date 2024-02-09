@@ -104,14 +104,14 @@ data:
     \ 1) * f(p, e - 1)));\n  }\n  return ret;\n };\n return dfs(dfs, P.N, 0, 1);\n\
     }\n#line 5 \"test/atcoder/abc179_c.mul_sum.test.cpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N;\n cin\
-    \ >> N;\n auto Ps= sums_of_powers_on_primes<long long>(N, 0);\n auto f= [](long\
+    \ >> N;\n auto Ps= sums_of_powers_on_primes<long long>(N - 1, 0);\n auto f= [](long\
     \ long, short e) { return e + 1; };\n cout << multiplicative_sum(Ps[0], f) <<\
     \ '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_c\"\n//\
     \ O(N^(3/4)/logN))\n#include <iostream>\n#include \"src/NumberTheory/sum_on_primes.hpp\"\
     \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
-    \ long long N;\n cin >> N;\n auto Ps= sums_of_powers_on_primes<long long>(N, 0);\n\
-    \ auto f= [](long long, short e) { return e + 1; };\n cout << multiplicative_sum(Ps[0],\
+    \ long long N;\n cin >> N;\n auto Ps= sums_of_powers_on_primes<long long>(N -\
+    \ 1, 0);\n auto f= [](long long, short e) { return e + 1; };\n cout << multiplicative_sum(Ps[0],\
     \ f) << '\\n';\n return 0;\n}"
   dependsOn:
   - src/NumberTheory/sum_on_primes.hpp
@@ -121,7 +121,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc179_c.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-02-08 01:24:29+09:00'
+  timestamp: '2024-02-09 15:18:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc179_c.mul_sum.test.cpp

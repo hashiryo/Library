@@ -74,7 +74,7 @@ title: "\u7D04\u6570\u914D\u5217"
 ---
 
 $\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}$
-
+$\newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}}$
 
 ## `CumSumQuotient<T>` クラス
 
@@ -82,7 +82,7 @@ $\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}$
 
 $
 \displaystyle
-S =\left\lbrace \left. \floor{\frac{N}{x}} \right \vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace
+S =\left\lbrace \floor{\frac{N}{x}} \relmiddle\vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace
 $
 
 の要素のみの配列.
@@ -117,8 +117,8 @@ $
 |メンバ関数|概要|
 |---|---|
 |`CumSumQuotient(N)`|コンストラクタ. $N$ を渡して構築. 要素はデフォルト値. |
-|`operator[](n)`| $F(n)$ の値を左参照で返す. <br> $n\in \left\lbrace \left. \floor{\frac{N}{x}} \right \vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ を想定.|
-|`operator()(n)`| $F(n)$ の値を返す. <br> $n\in \left\lbrace \left. \floor{\frac{N}{x}} \right \vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ を想定.|
+|`operator[](n)`| $F(n)$ の値を左参照で返す. <br> $n\in \left\lbrace \floor{\frac{N}{x}} \relmiddle\vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ を想定.|
+|`operator()(n)`| $F(n)$ の値を返す. <br> $n\in \left\lbrace \floor{\frac{N}{x}} \relmiddle\vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ を想定.|
 |`sum(n)`|$\displaystyle F(n)= \sum_{i=1}^n f(i)$ を返す.|
 |`sum()`|$\displaystyle F(N)= \sum_{i=1}^N f(i)$ を返す.　`sum(N)` と同じ．|
 |`add(i, v)`| $f(i)\leftarrow f(i)+v$|

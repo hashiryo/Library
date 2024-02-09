@@ -160,8 +160,8 @@ data:
     #define _FUN(J, K, name) name(dat[i + J].second, dat[i + K].second)\n#define _ZETA(op)\
     \ \\\n int k= 1; \\\n for (auto [p, e]: factors) { \\\n  int a= k * (e + 1); \\\
     \n  for (int i= 0, d= dat.size(); i < d; i+= a) op; \\\n  k= a; \\\n }\npublic:\n\
-    \ Factors factors;\n template <class Uint> ArrayOnDivisors(uint64_t N, const Factors\
-    \ &factors, const std::vector<Uint> &divisors): n(N), shift(__builtin_clzll(divisors.size())\
+    \ Factors factors;\n ArrayOnDivisors() {}\n template <class Uint> ArrayOnDivisors(uint64_t\
+    \ N, const Factors &factors, const std::vector<Uint> &divisors): n(N), shift(__builtin_clzll(divisors.size())\
     \ - 1), os((1 << (64 - shift)) + 1), id(divisors.size()), dat(divisors.size()),\
     \ factors(factors) {\n  for (int i= divisors.size(); i--;) dat[i].first= divisors[i];\n\
     \  for (auto d: divisors) ++os[hash(d)];\n  std::partial_sum(os.begin(), os.end(),\
@@ -219,7 +219,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc335_g.test.cpp
   requiredBy: []
-  timestamp: '2024-02-07 18:19:31+09:00'
+  timestamp: '2024-02-09 15:18:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc335_g.test.cpp

@@ -22,9 +22,9 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc253/tasks/abc253_Ex
@@ -434,7 +434,7 @@ data:
   path: test/atcoder/abc253_ex.test.cpp
   requiredBy: []
   timestamp: '2024-02-06 15:06:49+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc253_ex.test.cpp
 layout: document
