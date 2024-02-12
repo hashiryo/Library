@@ -37,9 +37,6 @@ data:
     path: test/yosupo/enumerate_palindromes.RH.test.cpp
     title: test/yosupo/enumerate_palindromes.RH.test.cpp
   - icon: ':x:'
-    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':x:'
     path: test/yosupo/z_algorithm.RH.test.cpp
     title: test/yosupo/z_algorithm.RH.test.cpp
   - icon: ':x:'
@@ -112,7 +109,6 @@ data:
   - test/yukicoder/765.RH.test.cpp
   - test/yosupo/enumerate_palindromes.RH.test.cpp
   - test/yosupo/z_algorithm.RH.test.cpp
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Misc/Pointwise.hpp
 layout: document
 title: "\u4F53\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\times\\cdots\\\

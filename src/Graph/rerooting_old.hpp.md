@@ -9,64 +9,10 @@ data:
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
       \u3084\u3064"
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/1595.test.cpp
-    title: test/aoj/1595.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/GRL_5_A.test.cpp
-    title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc160_f.test.cpp
-    title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc220_f.test.cpp
-    title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc222_f.test.cpp
-    title: test/atcoder/abc222_f.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc223_g.rerooting.test.cpp
-    title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - icon: ':x:'
-    path: test/yosupo/tree_path_composite_sum.test.cpp
-    title: test/yosupo/tree_path_composite_sum.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1075.test.cpp
-    title: test/yukicoder/1075.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1124.test.cpp
-    title: test/yukicoder/1124.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1295.test.cpp
-    title: test/yukicoder/1295.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1333.test.cpp
-    title: test/yukicoder/1333.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1418.test.cpp
-    title: test/yukicoder/1418.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1494.test.cpp
-    title: test/yukicoder/1494.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1718.test.cpp
-    title: test/yukicoder/1718.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1976.test.cpp
-    title: test/yukicoder/1976.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/768.test.cpp
-    title: test/yukicoder/768.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/922.test.cpp
-    title: test/yukicoder/922.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
@@ -156,7 +102,7 @@ data:
     \  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n \
     \ else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n\
     \  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n};\n#line\
-    \ 3 \"src/Graph/rerooting.hpp\"\ntemplate <class T, class C> class RerootingData\
+    \ 3 \"src/Graph/rerooting_old.hpp\"\ntemplate <class T, class C> class RerootingData\
     \ {\n Tree<C> &tree;\n std::vector<T> dp1, dp2, dp;\npublic:\n RerootingData(Tree<C>\
     \ &t, std::vector<T> &d1, std::vector<T> &d2, std::vector<T> &d): tree(t), dp1(d1),\
     \ dp2(d2), dp(d) {}\n T operator[](int v) const { return dp[v]; }\n auto begin()\
@@ -202,53 +148,15 @@ data:
   - src/Graph/Tree.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: false
-  path: src/Graph/rerooting.hpp
+  path: src/Graph/rerooting_old.hpp
   requiredBy: []
-  timestamp: '2024-02-12 20:44:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/aoj/1595.test.cpp
-  - test/aoj/GRL_5_A.test.cpp
-  - test/atcoder/abc223_g.rerooting.test.cpp
-  - test/atcoder/abc160_f.test.cpp
-  - test/atcoder/abc222_f.test.cpp
-  - test/atcoder/abc220_f.test.cpp
-  - test/yukicoder/1494.test.cpp
-  - test/yukicoder/768.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1075.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/1418.test.cpp
-  - test/yukicoder/1976.test.cpp
-  - test/yukicoder/1333.test.cpp
-  - test/yukicoder/1295.test.cpp
-  - test/yukicoder/1718.test.cpp
-  - test/yosupo/tree_path_composite_sum.test.cpp
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-documentation_of: src/Graph/rerooting.hpp
+  timestamp: '2024-02-12 22:28:27+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: src/Graph/rerooting_old.hpp
 layout: document
-title: "\u5168\u65B9\u4F4D\u6728DP"
+redirect_from:
+- /library/src/Graph/rerooting_old.hpp
+- /library/src/Graph/rerooting_old.hpp.html
+title: src/Graph/rerooting_old.hpp
 ---
-## `rerooting` の戻り値 ( RerootingData クラス )
-全方位木DPの値(型 : `T` )が入っている配列だと思って使う. (`operator[](int v)`, `begin()`, `end()` がある. )\
-`get(int root, int v)` :  頂点 root が根である場合の 頂点 v を根とする部分木のDP値
-
-## `rerooting` の引数
-`rerooting<T,U,C,F1,F2,F3>(Tree<C> tree, F1 f_ee, F2 f_ve, F3 f_ev, U unit)` について
-
-`tree` : 木 \
-`f_ee(U l, U r) -> U` : モノイド `U` の二項演算 \
-`f_ve(T d, int v, Edge e) -> U` : 頂点 e.to から 頂点 v への 遷移を考えていて、e.to の DPの値 (型 : `T` ) からモノイドの値 (型 : `U` )に変換 \
-`f_ev(U u, int v) -> T` : 頂点 v で fold 結果のモノイドの値 (型 : `U` )からDPの値(型 : `T` ) に変換 \
-`unit` : モノイド `U` の単位元
-
-## 問題例
-[AtCoder Regular Contest 097 F - Monochrome Cat](https://atcoder.jp/contests/arc097/tasks/arc097_d) \
-[AtCoder Regular Contest 022 C - ロミオとジュリエット](https://atcoder.jp/contests/arc022/tasks/arc022_3) \
-[AtCoder Regular Contest 028 C - 高橋王国の分割統治](https://atcoder.jp/contests/arc028/tasks/arc028_3) \
-[Educational DP Contest V - Subtree](https://atcoder.jp/contests/dp/tasks/dp_v) \
-[Typical DP Contest N - 木](https://atcoder.jp/contests/tdpc/tasks/tdpc_tree) \
-[square869120Contest #4 D - Driving on a Tree](https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_d)\
-[NJPC2017 E - 限界集落](https://atcoder.jp/contests/njpc2017/tasks/njpc2017_e)\
-[第二回全国統一プログラミング王決定戦本戦 D - 木、](https://atcoder.jp/contests/nikkei2019-2-final/tasks/nikkei2019_2_final_d) (根付き木ハッシュ) \
-[yukicoder No.1153 ねこちゃんゲーム](https://yukicoder.me/problems/no/1153) (sp judge)

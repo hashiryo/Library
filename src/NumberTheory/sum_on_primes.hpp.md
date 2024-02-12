@@ -5,7 +5,7 @@ data:
     path: src/Internal/ListRange.hpp
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
       \u3084\u3064"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/CumSumQuotient.hpp
     title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
   - icon: ':question:'
@@ -13,10 +13,10 @@ data:
     title: "\u7D20\u6570\u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':x:'
@@ -27,7 +27,7 @@ data:
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
@@ -157,7 +157,7 @@ data:
   path: src/NumberTheory/sum_on_primes.hpp
   requiredBy: []
   timestamp: '2024-02-12 20:44:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp

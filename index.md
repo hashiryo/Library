@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -239,9 +239,9 @@ data:
       path: src/Graph/UndirectedGraphSetPowerSeries.hpp
       title: "\u7121\u5411\u30B0\u30E9\u30D5\u6570\u3048\u4E0A\u3052(\u96C6\u5408\u51AA\
         \u7D1A\u6570)"
-    - icon: ':question:'
-      path: src/Graph/rerooting.hpp
-      title: "\u5168\u65B9\u4F4D\u6728DP"
+    - icon: ':warning:'
+      path: src/Graph/rerooting_old.hpp
+      title: src/Graph/rerooting_old.hpp
   - name: src/Internal
     pages:
     - icon: ':question:'
@@ -369,7 +369,7 @@ data:
       path: src/Misc/Pointwise.hpp
       title: "\u4F53\u3092\u4E26\u5217\u306B\u6271\u3046 ($K_1\\times K_2\\times\\\
         cdots\\times K_n$)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Misc/compress.hpp
       title: "\u5EA7\u6A19\u5727\u7E2E"
     - icon: ':question:'
@@ -380,7 +380,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/ArrayOnDivisors.hpp
       title: "\u7D04\u6570\u914D\u5217"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/NumberTheory/CumSumQuotient.hpp
       title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
     - icon: ':question:'
@@ -401,7 +401,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/NumberTheory/sum_on_primes.hpp
       title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
     - icon: ':question:'
@@ -632,7 +632,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1549.WM.test.cpp
       title: test/aoj/1549.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/1595.test.cpp
       title: test/aoj/1595.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1028,7 +1028,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_3_B.test.cpp
       title: test/aoj/GRL_3_B.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/GRL_5_A.test.cpp
       title: test/aoj/GRL_5_A.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1135,7 +1135,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc155_e.test.cpp
       title: test/atcoder/abc155_e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc160_f.test.cpp
       title: test/atcoder/abc160_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1150,16 +1150,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.enum_quo.test.cpp
       title: test/atcoder/abc172_d.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.mul_sum.test.cpp
       title: test/atcoder/abc172_d.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc177_e.gcd_conv.test.cpp
       title: test/atcoder/abc177_e.gcd_conv.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1168,7 +1168,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1186,7 +1186,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'

@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc174_f.WM.test.cpp
     title: test/atcoder/abc174_f.WM.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
   - icon: ':heavy_check_mark:'
@@ -40,9 +40,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/924.Seg2D.test.cpp
     title: test/yukicoder/924.Seg2D.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/WaveletMatrix.hpp\"\n#include <vector>\n\
@@ -118,7 +118,7 @@ data:
   requiredBy:
   - src/DataStructure/DQuery.hpp
   timestamp: '2023-11-16 23:12:35+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/1549.WM.test.cpp
   - test/aoj/2674.WM.test.cpp

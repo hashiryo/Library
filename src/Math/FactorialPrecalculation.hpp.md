@@ -22,9 +22,6 @@ data:
     path: test/aoj/DPL_5_F.test.cpp
     title: test/aoj/DPL_5_F.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc160_f.test.cpp
-    title: test/atcoder/abc160_f.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_d.test.cpp
     title: test/atcoder/abc179_d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -135,7 +132,6 @@ data:
   - test/aoj/DPL_5_B.test.cpp
   - test/aoj/DPL_5_F.test.cpp
   - test/aoj/DPL_5_D.test.cpp
-  - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc179_d.test.cpp
   - test/atcoder/abc236_ex.test.cpp
   - test/atcoder/abc276_g.sparse_FPS.test.cpp

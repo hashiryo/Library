@@ -6,7 +6,7 @@ data:
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
       \u3084\u3064"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   - icon: ':question:'
@@ -17,16 +17,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc177_e.gcd_conv.test.cpp
     title: test/atcoder/abc177_e.gcd_conv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':x:'

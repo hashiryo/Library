@@ -92,36 +92,39 @@ data:
     \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
     \ bool connected(int u, int v) const { return root(u) == root(v); }\n // u is\
     \ in v\n bool in_subtree(int u, int v) const { return L[v] <= L[u] && L[u] < R[v];\
-    \ }\n int subtree_size(int v) const { return R[v] - L[v]; }\n int lca(int u, int\
-    \ v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u, v);\n\
-    \   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const {\n  assert(0\
-    \ <= k && k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v]\
-    \ - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int u, int v, int k)\
-    \ const {\n  if (!k) return u;\n  if (u == v) return -1;\n  if (k == 1) return\
-    \ in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw=\
-    \ D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ?\
-    \ la(u, k) : la(v, d_uw + d_vw - k);\n }\n int depth(int v) const { return D[v];\
-    \ }\n int dist(int u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n\
-    \ // half-open interval\n std::array<int, 2> subtree(int v) const { return std::array{L[v],\
-    \ R[v]}; }\n // sequence of closed intervals\n template <bool edge= 0> std::vector<std::array<int,\
-    \ 2>> path(int u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n\
-    \  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/FunctionalGraph.hpp\"\nclass FunctionalGraph {\n std::vector<int>\
-    \ t, rt;\n HeavyLightDecomposition hld;\npublic:\n FunctionalGraph(const std::vector<int>\
-    \ &to): t(to) {\n  const int n= t.size();\n  rt.assign(n, -1);\n  for (int u,\
-    \ w, v= n; v--;)\n   if (rt[v] == -1) {\n    for (rt[v]= -2, w= t[v];; rt[w]=\
-    \ -2, w= t[w])\n     if (assert(0 <= w && w < n); rt[w] != -1) {\n      if (rt[w]\
-    \ != -2) w= rt[w];\n      break;\n     }\n    for (u= v; rt[u] == -2; u= t[u])\
-    \ rt[u]= w;\n   }\n  Graph tree(n + 1);\n  for (int v= n; v--;)\n   if (rt[v]\
-    \ == v) tree.add_edge(n, v);\n   else tree.add_edge(t[v], v);\n  tree.build(0),\
-    \ hld= HeavyLightDecomposition(tree, n);\n }\n template <class Int> std::enable_if_t<std::is_convertible_v<int,\
-    \ Int>, int> jump(int v, Int k) const {\n  int n= t.size(), d= hld.depth(v) -\
-    \ 1;\n  if (k <= d) return hld.jump(v, n, (int)k);\n  int b= t[v= rt[v]], l= (k-=\
-    \ d) % hld.depth(b);\n  if (l == 0) return v;\n  return hld.jump(b, n, l - 1);\n\
+    \ }\n int subtree_size(int v, int root= -1) const {\n  if (root == -1) return\
+    \ R[v] - L[v];\n  if (v == root) return size();\n  int x= jump(v, root, 1);\n\
+    \  return in_subtree(v, x) ? R[v] - L[v] : size() - R[x] + L[x];\n }\n int lca(int\
+    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
+    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
+    \ {\n  assert(0 <= k && k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n\
+    \   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int u, int\
+    \ v, int k) const {\n  if (!k) return u;\n  if (u == v) return -1;\n  if (k ==\
+    \ 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w= lca(u,\
+    \ v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ? -1 : k\
+    \ <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int depth(int v) const {\
+    \ return D[v]; }\n int dist(int u, int v) const { return D[u] + D[v] - D[lca(u,\
+    \ v)] * 2; }\n // half-open interval\n std::array<int, 2> subtree(int v) const\
+    \ { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n template\
+    \ <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const {\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n#line 3 \"src/Graph/FunctionalGraph.hpp\"\
+    \nclass FunctionalGraph {\n std::vector<int> t, rt;\n HeavyLightDecomposition\
+    \ hld;\npublic:\n FunctionalGraph(const std::vector<int> &to): t(to) {\n  const\
+    \ int n= t.size();\n  rt.assign(n, -1);\n  for (int u, w, v= n; v--;)\n   if (rt[v]\
+    \ == -1) {\n    for (rt[v]= -2, w= t[v];; rt[w]= -2, w= t[w])\n     if (assert(0\
+    \ <= w && w < n); rt[w] != -1) {\n      if (rt[w] != -2) w= rt[w];\n      break;\n\
+    \     }\n    for (u= v; rt[u] == -2; u= t[u]) rt[u]= w;\n   }\n  Graph tree(n\
+    \ + 1);\n  for (int v= n; v--;)\n   if (rt[v] == v) tree.add_edge(n, v);\n   else\
+    \ tree.add_edge(t[v], v);\n  tree.build(0), hld= HeavyLightDecomposition(tree,\
+    \ n);\n }\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
+    \ int> jump(int v, Int k) const {\n  int n= t.size(), d= hld.depth(v) - 1;\n \
+    \ if (k <= d) return hld.jump(v, n, (int)k);\n  int b= t[v= rt[v]], l= (k-= d)\
+    \ % hld.depth(b);\n  if (l == 0) return v;\n  return hld.jump(b, n, l - 1);\n\
     \ }\n // ((a_0,...,a_{i-1}) x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x\
     \ 1)\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
     \ std::array<std::pair<std::vector<int>, Int>, 3>> path(int v, Int k) const {\n\
@@ -161,7 +164,7 @@ data:
   isVerificationFile: false
   path: src/Graph/FunctionalGraph.hpp
   requiredBy: []
-  timestamp: '2024-02-12 20:44:02+09:00'
+  timestamp: '2024-02-12 22:28:27+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc241_e.test.cpp

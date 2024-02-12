@@ -92,25 +92,27 @@ data:
     \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
     \ bool connected(int u, int v) const { return root(u) == root(v); }\n // u is\
     \ in v\n bool in_subtree(int u, int v) const { return L[v] <= L[u] && L[u] < R[v];\
-    \ }\n int subtree_size(int v) const { return R[v] - L[v]; }\n int lca(int u, int\
-    \ v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u, v);\n\
-    \   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const {\n  assert(0\
-    \ <= k && k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v]\
-    \ - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int u, int v, int k)\
-    \ const {\n  if (!k) return u;\n  if (u == v) return -1;\n  if (k == 1) return\
-    \ in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw=\
-    \ D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ?\
-    \ la(u, k) : la(v, d_uw + d_vw - k);\n }\n int depth(int v) const { return D[v];\
-    \ }\n int dist(int u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n\
-    \ // half-open interval\n std::array<int, 2> subtree(int v) const { return std::array{L[v],\
-    \ R[v]}; }\n // sequence of closed intervals\n template <bool edge= 0> std::vector<std::array<int,\
-    \ 2>> path(int u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n\
-    \  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n"
+    \ }\n int subtree_size(int v, int root= -1) const {\n  if (root == -1) return\
+    \ R[v] - L[v];\n  if (v == root) return size();\n  int x= jump(v, root, 1);\n\
+    \  return in_subtree(v, x) ? R[v] - L[v] : size() - R[x] + L[x];\n }\n int lca(int\
+    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
+    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
+    \ {\n  assert(0 <= k && k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n\
+    \   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int u, int\
+    \ v, int k) const {\n  if (!k) return u;\n  if (u == v) return -1;\n  if (k ==\
+    \ 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w= lca(u,\
+    \ v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ? -1 : k\
+    \ <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int depth(int v) const {\
+    \ return D[v]; }\n int dist(int u, int v) const { return D[u] + D[v] - D[lca(u,\
+    \ v)] * 2; }\n // half-open interval\n std::array<int, 2> subtree(int v) const\
+    \ { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n template\
+    \ <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const {\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};\n"
   code: "#pragma once\n#include <array>\n#include <cassert>\n#include \"src/Graph/Graph.hpp\"\
     \nclass HeavyLightDecomposition {\n std::vector<int> P, PP, D, I, L, R;\npublic:\n\
     \ HeavyLightDecomposition() {}\n HeavyLightDecomposition(const Graph &tree, int\
@@ -133,25 +135,27 @@ data:
     \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
     \ bool connected(int u, int v) const { return root(u) == root(v); }\n // u is\
     \ in v\n bool in_subtree(int u, int v) const { return L[v] <= L[u] && L[u] < R[v];\
-    \ }\n int subtree_size(int v) const { return R[v] - L[v]; }\n int lca(int u, int\
-    \ v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u, v);\n\
-    \   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const {\n  assert(0\
-    \ <= k && k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v]\
-    \ - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int u, int v, int k)\
-    \ const {\n  if (!k) return u;\n  if (u == v) return -1;\n  if (k == 1) return\
-    \ in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw=\
-    \ D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ?\
-    \ la(u, k) : la(v, d_uw + d_vw - k);\n }\n int depth(int v) const { return D[v];\
-    \ }\n int dist(int u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n\
-    \ // half-open interval\n std::array<int, 2> subtree(int v) const { return std::array{L[v],\
-    \ R[v]}; }\n // sequence of closed intervals\n template <bool edge= 0> std::vector<std::array<int,\
-    \ 2>> path(int u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n\
-    \  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
-    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
-    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
-    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
-    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };"
+    \ }\n int subtree_size(int v, int root= -1) const {\n  if (root == -1) return\
+    \ R[v] - L[v];\n  if (v == root) return size();\n  int x= jump(v, root, 1);\n\
+    \  return in_subtree(v, x) ? R[v] - L[v] : size() - R[x] + L[x];\n }\n int lca(int\
+    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
+    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
+    \ {\n  assert(0 <= k && k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n\
+    \   if (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int jump(int u, int\
+    \ v, int k) const {\n  if (!k) return u;\n  if (u == v) return -1;\n  if (k ==\
+    \ 1) return in_subtree(v, u) ? la(v, D[v] - D[u] - 1) : P[u];\n  int w= lca(u,\
+    \ v), d_uw= D[u] - D[w], d_vw= D[v] - D[w];\n  return k > d_uw + d_vw ? -1 : k\
+    \ <= d_uw ? la(u, k) : la(v, d_uw + d_vw - k);\n }\n int depth(int v) const {\
+    \ return D[v]; }\n int dist(int u, int v) const { return D[u] + D[v] - D[lca(u,\
+    \ v)] * 2; }\n // half-open interval\n std::array<int, 2> subtree(int v) const\
+    \ { return std::array{L[v], R[v]}; }\n // sequence of closed intervals\n template\
+    \ <bool edge= 0> std::vector<std::array<int, 2>> path(int u, int v) const {\n\
+    \  std::vector<std::array<int, 2>> up, down;\n  while (PP[u] != PP[v]) {\n   if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}), v= P[PP[v]];\n\
+    \   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n  }\n  if\
+    \ (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n  else if (L[v]\
+    \ + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n  return up.insert(up.end(),\
+    \ down.rbegin(), down.rend()), up;\n }\n};"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
@@ -159,7 +163,7 @@ data:
   path: src/Graph/HeavyLightDecomposition.hpp
   requiredBy:
   - src/Graph/FunctionalGraph.hpp
-  timestamp: '2024-02-12 20:44:02+09:00'
+  timestamp: '2024-02-12 22:28:27+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/atcoder/abc241_e.test.cpp
@@ -177,7 +181,6 @@ title: "\u91CD\u8EFD\u5206\u89E3"
 ## 使い方 イメージ
 
 ```c++
-
 // Graph g を構築
 int n,m; cin>>n>>m;
 Graph g(n);
@@ -227,4 +230,4 @@ HL分解＋オイラーツアーで頂点集合を数列に \
 | `jump(u,v,k)`| 頂点 u から 頂点 v へ向けて 長さ k 移動した先の頂点を返す. <br>存在しないなら -1|
 | `dist(u,v)`| 頂点 u から 頂点 v までの辺の数を返す. <br> u と v が非連結の場合は未定義.|
 | `in_subtree(u,v)`| 頂点 v を根とする部分木に頂点 u が属するなら `true`, そうでないなら `false`.|
-| `subtree_size(v)`| 頂点 v を根とする部分木の頂点数を返す. |
+| `subtree_size(v, root=-1)`| 点 v を根とした部分木の頂点数を返す. <br> 第二引数を指定した場合，その点を全体の木の根とした場合になる．|
