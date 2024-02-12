@@ -135,7 +135,7 @@ data:
     \ * finv(n - r) * finv(r); }\n // [x^r] (1 - x)^{-n}\n static inline mod_t nHr(int\
     \ n, int r) { return !r ? mod_t(1) : nCr(n + r - 1, r); }\n};\n#line 3 \"src/Graph/Tree.hpp\"\
     \n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n#include <array>\n#include\
-    \ <tuple>\n#include <numeric>\n#line 3 \"src/Internal/ListRange.hpp\"\n#include\
+    \ <tuple>\n#include <numeric>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include\
     \ <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
     \ std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const { return\
     \ bg; }\n Iterator end() const { return ed; }\n size_t size() const { return std::distance(bg,\
@@ -274,7 +274,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc160_f.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc160_f.test.cpp

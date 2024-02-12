@@ -189,7 +189,7 @@ data:
     pages:
     - icon: ':question:'
       path: src/Graph/BiConnectedComponents.hpp
-      title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+      title: "\u30B0\u30E9\u30D5"
     - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteEdgeColoring.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
@@ -208,6 +208,12 @@ data:
     - icon: ':question:'
       path: src/Graph/FunctionalGraph.hpp
       title: "Functional\u30B0\u30E9\u30D5"
+    - icon: ':question:'
+      path: src/Graph/Graph.hpp
+      title: src/Graph/Graph.hpp
+    - icon: ':question:'
+      path: src/Graph/HeavyLightDecomposition.hpp
+      title: "\u91CD\u8EFD\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: src/Graph/IncrementalBridgeConnectivity.hpp
       title: "Incremental-Bridge-Connectivity (2\u8FBA\u9023\u7D50\u6210\u5206)"

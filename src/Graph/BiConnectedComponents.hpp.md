@@ -33,31 +33,32 @@ data:
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
     #include <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n\
     #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
-    #include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
-    \ std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const { return\
-    \ bg; }\n Iterator end() const { return ed; }\n size_t size() const { return std::distance(bg,\
-    \ ed); }\n T &operator[](int i) const { return bg[i]; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const ListRange &r) {\n  return os << '[' << r.bg[0],\
-    \ std::for_each(r.bg + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os\
-    \ << ']';\n }\n};\ntemplate <class T> struct ConstListRange {\n using Iterator=\
-    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
-    \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n friend std::ostream &operator<<(std::ostream &os, const ConstListRange\
-    \ &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const\
-    \ T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line 10 \"src/Graph/Tree.hpp\"\
-    \ntemplate <class Cost= void, bool weight= false> class Tree {\n template <class\
-    \ D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const {\
-    \ return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
-    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
-    \ using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
-    \ std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n\
-    \ std::vector<int> P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n\
-    \ Tree(int n): P(n, -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>,\
-    \ void> add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u);\
-    \ }\n template <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void>\
-    \ add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u,\
-    \ c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    #include <iostream>\n#include <iterator>\ntemplate <class T> struct ListRange\
+    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
+    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
+    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
+    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
+    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
+    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
+    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
+    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
+    \ 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false> class\
+    \ Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
+    \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
+    \ void> {\n  int to;\n  operator int() const { return to; }\n };\n using Edge=\
+    \ Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t,\
+    \ Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>, std::pair<int,\
+    \ int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int>\
+    \ P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n Tree(int n): P(n,\
+    \ -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>, void>\
+    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
+    \ <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void> add_edge(int\
+    \ u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u, c); }\n template\
+    \ <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -160,7 +161,7 @@ data:
   isVerificationFile: false
   path: src/Graph/BiConnectedComponents.hpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3022.test.cpp
@@ -170,18 +171,56 @@ data:
   - test/yosupo/biconnected_components.test.cpp
 documentation_of: src/Graph/BiConnectedComponents.hpp
 layout: document
-title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+title: "\u30B0\u30E9\u30D5"
 ---
 
-![bct.svg](https://github.com/hashiryo/Library/blob/master/img/bct.svg?raw=true)
+## 使い方
 
-[0, n)：もとの頂点 \
-[n, n + n_block)：block\
-$\mathrm{deg} > 1 $ $\rightarrow$ 関節点
+**構築例**
+```c++
+int n,m;cin>>n>>m; // n: 頂点数, m: 辺数
+Graph g(n);
+for(int i=0,u,v;i<m;++i)cin>>u>>v, g.add_edge(--u,--v);
+g.build(1); // 無向グラフ
+// g.build(0); // 有向グラフ
+```
+
+**グラフ探索例**
+```c++
+for(int v=0;v<n;++v)
+ for(int e: g(v)){ // 辺リスト
+  int u=g[e]-v; // 隣接頂点
+  /* do something */
+ }
+```
+
+## `Graph::Edge` クラス
+辺 $e=(s,d)$ を表すクラス．
+
+|メンバ変数|概要|
+|---|---|
+|`s`|辺の端点の一つ．有向辺なら始点を表す．|
+|`d`|辺の端点の一つ．有向辺なら終点を表す．|
+
+|||
+|---|---|
+|`operator-(Edge e, int v)`|辺 $e$ の端点のうち頂点 $v$ でない方を返す.|
 
 
-非再帰 [参考](https://nachiavivias.github.io/cp-library/column/2022/01.html)
-## 問題例
-[AtCoder Regular Contest 062 F - AtCoDeerくんとグラフ色塗り](https://atcoder.jp/contests/arc062/tasks/arc062_d)
-## 参考
-[https://twitter.com/noshi91/status/1529858538650374144?s=20&t=eznpFbuD9BDhfTb4PplFUg](https://twitter.com/noshi91/status/1529858538650374144?s=20&t=eznpFbuD9BDhfTb4PplFUg)
+## `Graph` クラス
+
+辺の配列と隣接リストの役割を担ったクラス. \
+**※`add_edge` (とコンストラクタと`build`) 以外の関数は `build` 関数が実行済みであることを前提とする**　\
+頂点は $0,\dots, n-1$ でラベル付けする.
+
+|名前|概要|
+|---|---|
+|`Graph(n)`|コンストラクタ. 頂点数 $n$ を与える.|
+|`add_edge(u,v)`|辺 $(u,v)$ を追加する. <br> 有向辺なら 第一引数を始点, 第二引数を終点とする.|
+|`build(undirect)`|隣接リストを構築する. <br> 引数が `true` なら追加された辺を無向辺とみなす.<br> 引数が `false` なら追加された辺を有向辺とみなす.|
+|`vertex_size()`|頂点の数を返す.|
+|`edge_size()`|辺の数を返す.|
+|`Edge& operator[](e)` <br> `const Edge& operator[](e)` | $e$ 番目の辺を返す. <br> 返り値は `Edge` クラスの参照.|
+|`begin()`|辺の配列のイテレータ.|
+|`end()`|辺の配列のイテレータ.|
+|`operator()(u)`| 頂点 $u$ から出る辺 (の番号) のリストを返す. <br> 返り値は [`ListRange<int>`](src/Internal/ListRange.hpp). |

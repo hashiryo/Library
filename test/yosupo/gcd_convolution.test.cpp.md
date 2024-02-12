@@ -37,7 +37,7 @@ data:
   bundledCode: "#line 1 \"test/yosupo/gcd_convolution.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/gcd_convolution\"\n#include <iostream>\n#include\
     \ <vector>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
-    #include <cstdint>\n#line 3 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
+    #include <cstdint>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
     template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
@@ -214,7 +214,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/gcd_convolution.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/gcd_convolution.test.cpp

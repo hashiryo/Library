@@ -27,11 +27,11 @@ data:
   bundledCode: "#line 1 \"test/yosupo/two_sat.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\
     \n#include <iostream>\n#include <string>\n#line 2 \"src/Graph/StronglyConnectedComponents.hpp\"\
     \n#include <algorithm>\n#include <numeric>\n#include <array>\n#line 2 \"src/Internal/ListRange.hpp\"\
-    \n#include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
-    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
+    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
+    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
     \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
     \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
     \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
@@ -108,7 +108,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/two_sat.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/two_sat.test.cpp

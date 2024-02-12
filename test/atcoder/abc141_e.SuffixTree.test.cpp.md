@@ -101,7 +101,7 @@ data:
     \ - l - 1);\n  return std::min(dat[k][l], dat[k][r - (1 << k)]);\n }\nprivate:\n\
     \ std::vector<std::vector<int>> dat;\n};\n#line 2 \"src/Graph/Tree.hpp\"\n#include\
     \ <type_traits>\n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n#include\
-    \ <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#line 3 \"\
+    \ <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#line 4 \"\
     src/Internal/ListRange.hpp\"\n#include <iterator>\ntemplate <class T> struct ListRange\
     \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
     \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
@@ -258,7 +258,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc141_e.SuffixTree.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc141_e.SuffixTree.test.cpp

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
-    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"
@@ -25,32 +25,33 @@ data:
     \ \"https://judge.yosupo.jp/problem/biconnected_components\"\n#include <iostream>\n\
     #line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n#include\
     \ <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n#include\
-    \ <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
-    \ <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
-    \ std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const { return\
-    \ bg; }\n Iterator end() const { return ed; }\n size_t size() const { return std::distance(bg,\
-    \ ed); }\n T &operator[](int i) const { return bg[i]; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const ListRange &r) {\n  return os << '[' << r.bg[0],\
-    \ std::for_each(r.bg + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os\
-    \ << ']';\n }\n};\ntemplate <class T> struct ConstListRange {\n using Iterator=\
-    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
-    \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n friend std::ostream &operator<<(std::ostream &os, const ConstListRange\
-    \ &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const\
-    \ T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line 10 \"src/Graph/Tree.hpp\"\
-    \ntemplate <class Cost= void, bool weight= false> class Tree {\n template <class\
-    \ D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const {\
-    \ return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
-    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
-    \ using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
-    \ std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n\
-    \ std::vector<int> P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n\
-    \ Tree(int n): P(n, -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>,\
-    \ void> add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u);\
-    \ }\n template <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void>\
-    \ add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u,\
-    \ c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    \ <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#line\
+    \ 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\ntemplate <class T> struct\
+    \ ListRange {\n using Iterator= typename std::vector<T>::iterator;\n Iterator\
+    \ bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
+    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
+    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
+    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
+    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
+    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
+    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
+    \ 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false> class\
+    \ Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
+    \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
+    \ void> {\n  int to;\n  operator int() const { return to; }\n };\n using Edge=\
+    \ Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t,\
+    \ Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>, std::pair<int,\
+    \ int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int>\
+    \ P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n Tree(int n): P(n,\
+    \ -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>, void>\
+    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
+    \ <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void> add_edge(int\
+    \ u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u, c); }\n template\
+    \ <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -150,7 +151,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/biconnected_components.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/biconnected_components.test.cpp

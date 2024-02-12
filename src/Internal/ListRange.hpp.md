@@ -10,7 +10,7 @@ data:
     title: "\u7DDA\u5206\u30A2\u30EC\u30F3\u30B8\u30E1\u30F3\u30C8"
   - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
-    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
+    title: "\u30B0\u30E9\u30D5"
   - icon: ':x:'
     path: src/Graph/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
@@ -20,6 +20,12 @@ data:
   - icon: ':question:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
+  - icon: ':question:'
+    path: src/Graph/Graph.hpp
+    title: src/Graph/Graph.hpp
+  - icon: ':question:'
+    path: src/Graph/HeavyLightDecomposition.hpp
+    title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':x:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
@@ -295,23 +301,23 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
-    \ <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
-    \ std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const { return\
-    \ bg; }\n Iterator end() const { return ed; }\n size_t size() const { return std::distance(bg,\
-    \ ed); }\n T &operator[](int i) const { return bg[i]; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const ListRange &r) {\n  return os << '[' << r.bg[0],\
-    \ std::for_each(r.bg + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os\
-    \ << ']';\n }\n};\ntemplate <class T> struct ConstListRange {\n using Iterator=\
-    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
+    \ <iostream>\n#include <iterator>\ntemplate <class T> struct ListRange {\n using\
+    \ Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin()\
     \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n friend std::ostream &operator<<(std::ostream &os, const ConstListRange\
-    \ &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const\
-    \ T &x) { os << \", \" << x; }), os << ']';\n }\n};\n"
-  code: "#pragma once\n#include <vector>\n#include <iterator>\ntemplate <class T>\
-    \ struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n Iterator\
-    \ bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
-    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
+    \ { return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
+    \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
+    \  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const T &x)\
+    \ { os << \", \" << x; }), os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
+    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
+    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
+    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
+    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \ const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
+    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n"
+  code: "#pragma once\n#include <vector>\n#include <iostream>\n#include <iterator>\n\
+    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
     \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
     \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
@@ -330,16 +336,18 @@ data:
   - src/Graph/Tree.hpp
   - src/Graph/BiConnectedComponents.hpp
   - src/Graph/rerooting.hpp
+  - src/Graph/Graph.hpp
   - src/Graph/DulmageMendelsohn.hpp
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/BipartiteGraph.hpp
+  - src/Graph/HeavyLightDecomposition.hpp
   - src/NumberTheory/tables.hpp
   - src/NumberTheory/enumerate_primes.hpp
   - src/NumberTheory/sum_on_primes.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1595.test.cpp

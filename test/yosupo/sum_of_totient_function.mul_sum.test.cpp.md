@@ -118,11 +118,11 @@ data:
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\
     \n#include <algorithm>\n#include <cstdint>\n#line 2 \"src/Internal/ListRange.hpp\"\
-    \n#include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
-    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \n#include <vector>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
+    template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
+    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
     \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
     \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
     \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
@@ -224,7 +224,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/sum_of_totient_function.mul_sum.test.cpp

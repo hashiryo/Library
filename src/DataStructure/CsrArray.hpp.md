@@ -49,24 +49,25 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
-    \ <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
-    \ std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const { return\
-    \ bg; }\n Iterator end() const { return ed; }\n size_t size() const { return std::distance(bg,\
-    \ ed); }\n T &operator[](int i) const { return bg[i]; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const ListRange &r) {\n  return os << '[' << r.bg[0],\
-    \ std::for_each(r.bg + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os\
-    \ << ']';\n }\n};\ntemplate <class T> struct ConstListRange {\n using Iterator=\
-    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
+    \ <iostream>\n#include <iterator>\ntemplate <class T> struct ListRange {\n using\
+    \ Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin()\
     \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n friend std::ostream &operator<<(std::ostream &os, const ConstListRange\
-    \ &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const\
-    \ T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line 3 \"src/DataStructure/CsrArray.hpp\"\
-    \ntemplate <class T> class CsrArray {\n std::vector<T> csr;\n std::vector<int>\
-    \ pos;\npublic:\n CsrArray()= default;\n CsrArray(const std::vector<T> &c, const\
-    \ std::vector<int> &p): csr(c), pos(p) {}\n size_t size() const { return pos.size()\
-    \ - 1; }\n const ConstListRange<T> operator[](int i) const { return {csr.cbegin()\
-    \ + pos[i], csr.cbegin() + pos[i + 1]}; }\n};\n"
+    \ { return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
+    \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
+    \  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const T &x)\
+    \ { os << \", \" << x; }), os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
+    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
+    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
+    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
+    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \ const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
+    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
+    \ 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray {\n\
+    \ std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
+    \ {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
+    \ operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i\
+    \ + 1]}; }\n};\n"
   code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\ntemplate <class T>\
     \ class CsrArray {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()=\
     \ default;\n CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c),\
@@ -81,7 +82,7 @@ data:
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/BipartiteGraph.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/3168.bm.test.cpp

@@ -115,7 +115,7 @@ data:
     \ <= (1ull << 41), MInt<i64, u64, SB<MP_Br2, MOD>>, MInt<i64, u64, SB<MP_D2B1,\
     \ MOD>>>>>>>;\n#undef CE\n}\nusing math_internal::ModInt;\n#line 3 \"src/Graph/Tree.hpp\"\
     \n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n#include <array>\n#include\
-    \ <tuple>\n#include <numeric>\n#line 3 \"src/Internal/ListRange.hpp\"\n#include\
+    \ <tuple>\n#include <numeric>\n#line 4 \"src/Internal/ListRange.hpp\"\n#include\
     \ <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
     \ std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const { return\
     \ bg; }\n Iterator end() const { return ed; }\n size_t size() const { return std::distance(bg,\
@@ -270,7 +270,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/vertex_set_path_composite.HLD.test.cpp

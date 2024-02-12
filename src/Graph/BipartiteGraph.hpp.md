@@ -26,11 +26,11 @@ data:
     links: []
   bundledCode: "#line 2 \"src/Graph/BipartiteGraph.hpp\"\n#include <array>\n#include\
     \ <algorithm>\n#include <numeric>\n#include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\
-    \n#include <vector>\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
-    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \n#include <vector>\n#include <iostream>\n#include <iterator>\ntemplate <class\
+    \ T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
+    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
     \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
     \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
     \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
@@ -175,7 +175,7 @@ data:
   isVerificationFile: false
   path: src/Graph/BipartiteGraph.hpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/aoj/3168.bm.test.cpp

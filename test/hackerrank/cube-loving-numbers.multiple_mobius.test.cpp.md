@@ -25,7 +25,7 @@ data:
   bundledCode: "#line 1 \"test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp\"\
     \n#define PROBLEM \"https://www.hackerrank.com/contests/university-codesprint-5/challenges/cube-loving-numbers\"\
     \n#include <iostream>\n#include <vector>\n#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\
-    \n#include <algorithm>\n#include <cstdint>\n#line 3 \"src/Internal/ListRange.hpp\"\
+    \n#include <algorithm>\n#include <cstdint>\n#line 4 \"src/Internal/ListRange.hpp\"\
     \n#include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator=\
     \ typename std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const\
     \ { return bg; }\n Iterator end() const { return ed; }\n size_t size() const {\
@@ -123,7 +123,7 @@ data:
   isVerificationFile: true
   path: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp

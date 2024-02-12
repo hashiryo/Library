@@ -25,7 +25,7 @@ data:
     \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 2 \"src/Graph/Tree.hpp\"\
     \n#include <type_traits>\n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n\
     #include <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#line\
-    \ 3 \"src/Internal/ListRange.hpp\"\n#include <iterator>\ntemplate <class T> struct\
+    \ 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\ntemplate <class T> struct\
     \ ListRange {\n using Iterator= typename std::vector<T>::iterator;\n Iterator\
     \ bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
     \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
@@ -156,7 +156,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc222_f.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc222_f.test.cpp

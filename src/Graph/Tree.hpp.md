@@ -8,10 +8,7 @@ data:
   _extendedRequiredBy:
   - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
-    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':question:'
-    path: src/Graph/FunctionalGraph.hpp
-    title: "Functional\u30B0\u30E9\u30D5"
+    title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Graph/rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
@@ -38,20 +35,11 @@ data:
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc136_d.test.cpp
-    title: test/atcoder/abc136_d.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc167_d.test.cpp
-    title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc179_e.test.cpp
-    title: test/atcoder/abc179_e.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
@@ -67,9 +55,6 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':x:'
-    path: test/atcoder/abc241_e.test.cpp
-    title: test/atcoder/abc241_e.test.cpp
   - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
@@ -95,17 +80,11 @@ data:
     path: test/yukicoder/1124.test.cpp
     title: test/yukicoder/1124.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/1211.test.cpp
-    title: test/yukicoder/1211.test.cpp
-  - icon: ':x:'
     path: test/yukicoder/1216.KDT.test.cpp
     title: test/yukicoder/1216.KDT.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1216.Seg2D.test.cpp
     title: test/yukicoder/1216.Seg2D.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1242.test.cpp
-    title: test/yukicoder/1242.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1295.test.cpp
     title: test/yukicoder/1295.test.cpp
@@ -134,9 +113,6 @@ data:
     path: test/yukicoder/1976.test.cpp
     title: test/yukicoder/1976.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/2122.test.cpp
-    title: test/yukicoder/2122.test.cpp
-  - icon: ':x:'
     path: test/yukicoder/2342.KDT.test.cpp
     title: test/yukicoder/2342.KDT.test.cpp
   - icon: ':x:'
@@ -159,31 +135,32 @@ data:
   bundledCode: "#line 2 \"src/Graph/Tree.hpp\"\n#include <type_traits>\n#include <cstddef>\n\
     #include <algorithm>\n#include <array>\n#include <tuple>\n#include <numeric>\n\
     #include <cassert>\n#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n\
-    #include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator= typename\
-    \ std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const { return\
-    \ bg; }\n Iterator end() const { return ed; }\n size_t size() const { return std::distance(bg,\
-    \ ed); }\n T &operator[](int i) const { return bg[i]; }\n friend std::ostream\
-    \ &operator<<(std::ostream &os, const ListRange &r) {\n  return os << '[' << r.bg[0],\
-    \ std::for_each(r.bg + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os\
-    \ << ']';\n }\n};\ntemplate <class T> struct ConstListRange {\n using Iterator=\
-    \ typename std::vector<T>::const_iterator;\n Iterator bg, ed;\n Iterator begin()\
-    \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
-    \ { return std::distance(bg, ed); }\n const T &operator[](int i) const { return\
-    \ bg[i]; }\n friend std::ostream &operator<<(std::ostream &os, const ConstListRange\
-    \ &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const\
-    \ T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line 10 \"src/Graph/Tree.hpp\"\
-    \ntemplate <class Cost= void, bool weight= false> class Tree {\n template <class\
-    \ D, class T> struct Edge_B {\n  int to;\n  T cost;\n  operator int() const {\
-    \ return to; }\n };\n template <class D> struct Edge_B<D, void> {\n  int to;\n\
-    \  operator int() const { return to; }\n };\n using Edge= Edge_B<void, Cost>;\n\
-    \ using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t, Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>,\
-    \ std::pair<int, int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n\
-    \ std::vector<int> P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n\
-    \ Tree(int n): P(n, -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>,\
-    \ void> add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u);\
-    \ }\n template <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void>\
-    \ add_edge(int u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u,\
-    \ c); }\n template <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
+    #include <iostream>\n#include <iterator>\ntemplate <class T> struct ListRange\
+    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
+    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
+    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
+    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
+    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
+    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
+    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
+    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
+    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
+    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
+    \ 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false> class\
+    \ Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
+    \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
+    \ void> {\n  int to;\n  operator int() const { return to; }\n };\n using Edge=\
+    \ Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t,\
+    \ Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>, std::pair<int,\
+    \ int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int>\
+    \ P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n Tree(int n): P(n,\
+    \ -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>, void>\
+    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
+    \ <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void> add_edge(int\
+    \ u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u, c); }\n template\
+    \ <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
     \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
     \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
     \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
@@ -322,9 +299,8 @@ data:
   requiredBy:
   - src/Graph/BiConnectedComponents.hpp
   - src/Graph/rerooting.hpp
-  - src/Graph/FunctionalGraph.hpp
   - src/String/SuffixTree.hpp
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1595.test.cpp
@@ -333,16 +309,12 @@ data:
   - test/aoj/GRL_3_A.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
-  - test/atcoder/abc241_e.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc202_e.test.cpp
   - test/atcoder/abc160_f.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc167_d.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
-  - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp
   - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yukicoder/1494.test.cpp
@@ -354,15 +326,12 @@ data:
   - test/yukicoder/1600.Seg2D.test.cpp
   - test/yukicoder/1418.test.cpp
   - test/yukicoder/1976.test.cpp
-  - test/yukicoder/1211.test.cpp
   - test/yukicoder/1216.KDT.test.cpp
-  - test/yukicoder/2122.test.cpp
   - test/yukicoder/2342.KDT.test.cpp
   - test/yukicoder/235.HLD.test.cpp
   - test/yukicoder/1600.KDT.test.cpp
   - test/yukicoder/1333.test.cpp
   - test/yukicoder/1295.test.cpp
-  - test/yukicoder/1242.test.cpp
   - test/yukicoder/2361.SuffixTree.test.cpp
   - test/yukicoder/1216.Seg2D.test.cpp
   - test/yukicoder/1718.test.cpp

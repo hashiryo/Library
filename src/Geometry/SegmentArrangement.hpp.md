@@ -210,7 +210,7 @@ data:
     \ static int quad(const P &p) {\n  if (int s= sgn(p.y); s) return s;\n  return\
     \ sgn(p.x) < 0 ? 2 : 0;\n }\npublic:\n bool operator()(const P &p, const P &q)\
     \ const {\n  if (int a= quad(p), b= quad(q); a != b) return a < b;\n  return cross(p,\
-    \ q) > 0;\n }\n};\n}\n#line 3 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
+    \ q) > 0;\n }\n};\n}\n#line 4 \"src/Internal/ListRange.hpp\"\n#include <iterator>\n\
     template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
@@ -307,7 +307,7 @@ data:
   isVerificationFile: false
   path: src/Geometry/SegmentArrangement.hpp
   requiredBy: []
-  timestamp: '2024-02-12 17:38:02+09:00'
+  timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2448.test.cpp
