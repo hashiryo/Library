@@ -5,7 +5,7 @@ data:
     path: src/DataStructure/DQuery.hpp
     title: "\u533A\u9593\u5185\u306E\u7A2E\u985E\u6570\u3092\u7B54\u3048\u308B\u30AF\
       \u30A8\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   _extendedRequiredBy: []

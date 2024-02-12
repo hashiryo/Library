@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/CumSumQuotient.hpp\"\n#include <cstdint>\n\
@@ -62,7 +62,7 @@ data:
   requiredBy:
   - src/NumberTheory/sum_on_primes.hpp
   timestamp: '2024-02-07 23:03:20+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
@@ -70,7 +70,7 @@ data:
   - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/NumberTheory/CumSumQuotient.hpp
 layout: document
-title: "\u7D04\u6570\u914D\u5217"
+title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
 ---
 
 $\newcommand{\floor}[1]{\left\lfloor{#1}\right\rfloor}$
