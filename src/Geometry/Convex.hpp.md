@@ -312,15 +312,15 @@ data:
   timestamp: '2023-10-10 00:58:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/CGL_4_A.test.cpp
-  - test/aoj/0342.test.cpp
   - test/aoj/CGL_4_B.test.cpp
-  - test/aoj/0253.test.cpp
-  - test/aoj/3049.test.cpp
-  - test/aoj/1267.test.cpp
-  - test/aoj/2626.test.cpp
-  - test/aoj/CGL_4_C.test.cpp
   - test/aoj/1050.test.cpp
+  - test/aoj/1267.test.cpp
+  - test/aoj/0253.test.cpp
+  - test/aoj/CGL_4_A.test.cpp
+  - test/aoj/3049.test.cpp
+  - test/aoj/0342.test.cpp
+  - test/aoj/CGL_4_C.test.cpp
+  - test/aoj/2626.test.cpp
 documentation_of: src/Geometry/Convex.hpp
 layout: document
 title: "\u51F8\u591A\u89D2\u5F62"

@@ -67,7 +67,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SortedPerBucket.hpp
       title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/SparseTable.hpp
       title: Sparse-Table
     - icon: ':question:'
@@ -470,7 +470,7 @@ data:
     - icon: ':question:'
       path: src/String/SuffixArray.hpp
       title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/String/SuffixTree.hpp
       title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
     - icon: ':question:'
@@ -1123,7 +1123,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc141_e.RH.test.cpp
       title: test/atcoder/abc141_e.RH.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc141_e.SuffixTree.test.cpp
       title: test/atcoder/abc141_e.SuffixTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1207,7 +1207,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SA.test.cpp
       title: test/atcoder/abc213_f.SA.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc213_f.SuffixTree.test.cpp
       title: test/atcoder/abc213_f.SuffixTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1228,7 +1228,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_f.test.cpp
       title: test/atcoder/abc222_f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1240,7 +1240,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.dm.test.cpp
       title: test/atcoder/abc223_g.dm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.rerooting.test.cpp
       title: test/atcoder/abc223_g.rerooting.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1279,7 +1279,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc239_ex.test.cpp
       title: test/atcoder/abc239_ex.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc241_e.test.cpp
       title: test/atcoder/abc241_e.test.cpp
     - icon: ':heavy_check_mark:'

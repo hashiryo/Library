@@ -15,6 +15,9 @@ data:
   - icon: ':question:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
+  - icon: ':x:'
+    path: src/String/SuffixTree.hpp
+    title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
@@ -25,6 +28,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc141_e.SuffixTree.test.cpp
+    title: test/atcoder/abc141_e.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
@@ -34,16 +40,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc213_f.SuffixTree.test.cpp
+    title: test/atcoder/abc213_f.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc222_f.test.cpp
     title: test/atcoder/abc222_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc223_g.rerooting.test.cpp
     title: test/atcoder/abc223_g.rerooting.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
   - icon: ':x:'
@@ -85,6 +94,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/2361.SuffixTree.test.cpp
+    title: test/yukicoder/2361.SuffixTree.test.cpp
   - icon: ':x:'
     path: test/yukicoder/768.test.cpp
     title: test/yukicoder/768.test.cpp
@@ -150,34 +162,38 @@ data:
   - src/Graph/Rerooting.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/HeavyLightDecomposition.hpp
+  - src/String/SuffixTree.hpp
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/1595.test.cpp
-  - test/aoj/GRL_5_A.test.cpp
-  - test/atcoder/abc241_e.test.cpp
-  - test/atcoder/abc223_g.rerooting.test.cpp
-  - test/atcoder/abc160_f.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc222_f.test.cpp
-  - test/atcoder/abc136_d.test.cpp
-  - test/atcoder/abc220_f.test.cpp
   - test/yukicoder/1494.test.cpp
-  - test/yukicoder/768.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1075.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/1418.test.cpp
-  - test/yukicoder/1976.test.cpp
   - test/yukicoder/1211.test.cpp
+  - test/yukicoder/1976.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
+  - test/yukicoder/2361.SuffixTree.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1418.test.cpp
   - test/yukicoder/1295.test.cpp
-  - test/yukicoder/1242.test.cpp
+  - test/yukicoder/1075.test.cpp
   - test/yukicoder/1718.test.cpp
-  - test/yosupo/tree_path_composite_sum.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1242.test.cpp
+  - test/yukicoder/768.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+  - test/yosupo/tree_path_composite_sum.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
+  - test/aoj/1595.test.cpp
+  - test/atcoder/abc213_f.SuffixTree.test.cpp
+  - test/atcoder/abc136_d.test.cpp
+  - test/atcoder/abc220_f.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/atcoder/abc160_f.test.cpp
 documentation_of: src/Graph/Graph.hpp
 layout: document
 title: "\u30B0\u30E9\u30D5"

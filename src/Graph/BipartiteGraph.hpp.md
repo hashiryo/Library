@@ -178,9 +178,9 @@ data:
   timestamp: '2024-02-13 18:06:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/bipartitematching.bipatite_graph.test.cpp
   - test/aoj/3168.bm.test.cpp
   - test/atcoder/abc223_g.dm.test.cpp
-  - test/yosupo/bipartitematching.bipatite_graph.test.cpp
 documentation_of: src/Graph/BipartiteGraph.hpp
 layout: document
 title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"

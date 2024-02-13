@@ -199,9 +199,9 @@ data:
   timestamp: '2023-11-02 17:27:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
   - test/aoj/2235.onlinedicon.test.cpp
   - test/aoj/2893.onlinedicon.test.cpp
-  - test/yosupo/dynamic_graph_vertex_add_component_sum.test.cpp
 documentation_of: src/DataStructure/OnlineDynamicConnectivity.hpp
 layout: document
 title: Online-Dynamic-Connectivity

@@ -16,9 +16,9 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc222/tasks/abc222_f
@@ -128,7 +128,7 @@ data:
     \ for (int i= 0; i < N; ++i) cin >> D[i];\n auto put_edge= [&](int v, int e, long\
     \ long d) { return max(d, D[g[e] - v]) + C[e]; };\n auto op= [&](long long l,\
     \ long long r) { return max(l, r); };\n auto put_vertex= [&](int, long long d)\
-    \ { return d; };\n for (long long x: Rerooting<long long>(g, put_edge, op, 0,\
+    \ { return d; };\n for (long long x: Rerooting<long long>(g, put_edge, op, 0ll,\
     \ put_vertex)) cout << x << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc222/tasks/abc222_f\"\n#include\
     \ <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/Graph/Graph.hpp\"\
@@ -139,8 +139,8 @@ data:
     \ cin >> D[i];\n auto put_edge= [&](int v, int e, long long d) { return max(d,\
     \ D[g[e] - v]) + C[e]; };\n auto op= [&](long long l, long long r) { return max(l,\
     \ r); };\n auto put_vertex= [&](int, long long d) { return d; };\n for (long long\
-    \ x: Rerooting<long long>(g, put_edge, op, 0, put_vertex)) cout << x << '\\n';\n\
-    \ return 0;\n}"
+    \ x: Rerooting<long long>(g, put_edge, op, 0ll, put_vertex)) cout << x << '\\\
+    n';\n return 0;\n}"
   dependsOn:
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
@@ -149,8 +149,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc222_f.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-13 18:33:09+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc222_f.test.cpp
 layout: document

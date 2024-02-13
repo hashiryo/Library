@@ -101,14 +101,14 @@ data:
   timestamp: '2023-01-25 13:39:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/880.Beats.test.cpp
+  - test/yukicoder/1270.test.cpp
+  - test/yukicoder/235.HLD.test.cpp
+  - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
+  - test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
   - test/aoj/0355.test.cpp
   - test/aoj/DSL_2_F.SegTree_Lazy.test.cpp
   - test/atcoder/abc256_ex.Beats.test.cpp
-  - test/yukicoder/1270.test.cpp
-  - test/yukicoder/880.Beats.test.cpp
-  - test/yukicoder/235.HLD.test.cpp
-  - test/yosupo/range_chmin_chmax_add_range_sum.test.cpp
-  - test/yosupo/range_affine_range_sum.SegTree_Lazy.test.cpp
 documentation_of: src/DataStructure/SegmentTree_Beats.hpp
 layout: document
 title: Segment-Tree Beats!

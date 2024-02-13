@@ -83,28 +83,28 @@ data:
   isVerificationFile: false
   path: src/DataStructure/UnionFind.hpp
   requiredBy:
+  - src/Graph/MinimumSpanningAborescense.hpp
   - src/Graph/BipartiteEdgeColoring.hpp
   - src/Graph/IncrementalBridgeConnectivity.hpp
-  - src/Graph/MinimumSpanningAborescense.hpp
   timestamp: '2023-01-21 15:27:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1600.Seg2D.test.cpp
+  - test/yukicoder/1303.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
+  - test/yukicoder/529.LCT.test.cpp
+  - test/yosupo/two_edge_connected_components.test.cpp
+  - test/yosupo/bipartite_edge_coloring.test.cpp
+  - test/yosupo/directedmst.test.cpp
+  - test/aoj/2893.test.cpp
   - test/aoj/GRL_3_B.test.cpp
+  - test/aoj/GRL_2_B.test.cpp
+  - test/aoj/3506.test.cpp
   - test/aoj/DSL_1_A.test.cpp
   - test/aoj/0342.test.cpp
-  - test/aoj/3506.test.cpp
-  - test/aoj/2893.test.cpp
+  - test/aoj/GRL_2_A.kruskal.test.cpp
   - test/aoj/2647.test.cpp
   - test/aoj/2559.LCT_Dual.test.cpp
-  - test/aoj/GRL_2_B.test.cpp
-  - test/aoj/GRL_2_A.kruskal.test.cpp
-  - test/yukicoder/529.LCT.test.cpp
-  - test/yukicoder/1600.Seg2D.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
-  - test/yukicoder/1303.test.cpp
-  - test/yosupo/two_edge_connected_components.test.cpp
-  - test/yosupo/directedmst.test.cpp
-  - test/yosupo/bipartite_edge_coloring.test.cpp
 documentation_of: src/DataStructure/UnionFind.hpp
 layout: document
 title: Union-Find

@@ -9,9 +9,6 @@ data:
   - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
-  - icon: ':question:'
-    path: src/String/SuffixTree.hpp
-    title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2270.DynSeg.test.cpp
@@ -26,14 +23,8 @@ data:
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc141_e.SuffixTree.test.cpp
-    title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc213_f.SuffixTree.test.cpp
-    title: test/atcoder/abc213_f.SuffixTree.test.cpp
   - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
@@ -67,9 +58,6 @@ data:
   - icon: ':x:'
     path: test/yukicoder/235.HLD.test.cpp
     title: test/yukicoder/235.HLD.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/2361.SuffixTree.test.cpp
-    title: test/yukicoder/2361.SuffixTree.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -241,29 +229,25 @@ data:
   path: src/Graph/Tree.hpp
   requiredBy:
   - src/Graph/BiConnectedComponents.hpp
-  - src/String/SuffixTree.hpp
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/3022.test.cpp
-  - test/aoj/GRL_3_A.test.cpp
+  - test/yukicoder/1216.KDT.test.cpp
+  - test/yukicoder/1600.Seg2D.test.cpp
+  - test/yukicoder/2342.KDT.test.cpp
+  - test/yukicoder/1600.KDT.test.cpp
+  - test/yukicoder/1216.Seg2D.test.cpp
+  - test/yukicoder/235.HLD.test.cpp
+  - test/yukicoder/1326.test.cpp
+  - test/yosupo/biconnected_components.test.cpp
+  - test/yosupo/vertex_set_path_composite.HLD.test.cpp
+  - test/yosupo/lca.HLD.test.cpp
+  - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/aoj/2667.HLD.test.cpp
   - test/aoj/2270.DynSeg.test.cpp
+  - test/aoj/GRL_3_A.test.cpp
+  - test/aoj/3022.test.cpp
   - test/atcoder/abc202_e.test.cpp
-  - test/atcoder/abc213_f.SuffixTree.test.cpp
-  - test/atcoder/abc141_e.SuffixTree.test.cpp
-  - test/hackerrank/bonnie-and-clyde.test.cpp
-  - test/yukicoder/1326.test.cpp
-  - test/yukicoder/1600.Seg2D.test.cpp
-  - test/yukicoder/1216.KDT.test.cpp
-  - test/yukicoder/2342.KDT.test.cpp
-  - test/yukicoder/235.HLD.test.cpp
-  - test/yukicoder/1600.KDT.test.cpp
-  - test/yukicoder/2361.SuffixTree.test.cpp
-  - test/yukicoder/1216.Seg2D.test.cpp
-  - test/yosupo/lca.HLD.test.cpp
-  - test/yosupo/vertex_set_path_composite.HLD.test.cpp
-  - test/yosupo/biconnected_components.test.cpp
 documentation_of: src/Graph/Tree.hpp
 layout: document
 title: "\u6728"

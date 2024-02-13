@@ -238,13 +238,13 @@ data:
   timestamp: '2024-02-09 15:18:21+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc212_g.test.cpp
-  - test/atcoder/abc335_g.test.cpp
-  - test/yukicoder/125.phi.test.cpp
   - test/yukicoder/2578.test.cpp
   - test/yukicoder/125.multiple_mobius.test.cpp
-  - test/yukicoder/1728.test.cpp
+  - test/yukicoder/125.phi.test.cpp
   - test/yukicoder/2264.test.cpp
+  - test/yukicoder/1728.test.cpp
+  - test/atcoder/abc335_g.test.cpp
+  - test/atcoder/abc212_g.test.cpp
 documentation_of: src/NumberTheory/ArrayOnDivisors.hpp
 layout: document
 title: "\u7D04\u6570\u914D\u5217"

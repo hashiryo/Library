@@ -9,15 +9,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_3_D.sparsetable.test.cpp
     title: test/aoj/DSL_3_D.sparsetable.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yosupo/staticrmq.SparseTable.test.cpp
     title: test/yosupo/staticrmq.SparseTable.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/DataStructure/SparseTable.hpp\"\n#include <vector>\n\
@@ -44,12 +44,12 @@ data:
   path: src/DataStructure/SparseTable.hpp
   requiredBy: []
   timestamp: '2023-11-17 21:21:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/2644.test.cpp
-  - test/aoj/DSL_3_D.sparsetable.test.cpp
-  - test/atcoder/abc141_e.SuffixTree.test.cpp
   - test/yosupo/staticrmq.SparseTable.test.cpp
+  - test/aoj/DSL_3_D.sparsetable.test.cpp
+  - test/aoj/2644.test.cpp
+  - test/atcoder/abc141_e.SuffixTree.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document
 title: Sparse-Table

@@ -1,12 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/SparseTable.hpp
     title: Sparse-Table
   - icon: ':question:'
-    path: src/Graph/Tree.hpp
-    title: "\u6728"
+    path: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
+  - icon: ':question:'
+    path: src/Graph/HeavyLightDecomposition.hpp
+    title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
@@ -17,14 +20,14 @@ data:
   - icon: ':question:'
     path: src/String/SuffixArray.hpp
     title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc141/tasks/abc141_e
@@ -99,94 +102,77 @@ data:
     \ {\n  if (i == j) return rnk.size() - i;\n  auto [l, r]= std::minmax(rnk[i],\
     \ rnk[j]);\n  if (r == l + 1) return dat[0][l];\n  int k= 31 - __builtin_clz(r\
     \ - l - 1);\n  return std::min(dat[k][l], dat[k][r - (1 << k)]);\n }\nprivate:\n\
-    \ std::vector<std::vector<int>> dat;\n};\n#line 2 \"src/Graph/Tree.hpp\"\n#include\
-    \ <type_traits>\n#include <cstddef>\n#line 5 \"src/Graph/Tree.hpp\"\n#include\
-    \ <array>\n#include <tuple>\n#include <numeric>\n#include <cassert>\n#line 4 \"\
-    src/Internal/ListRange.hpp\"\n#include <iterator>\ntemplate <class T> struct ListRange\
-    \ {\n using Iterator= typename std::vector<T>::iterator;\n Iterator bg, ed;\n\
-    \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
-    \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
-    \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
-    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
-    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
-    \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
-    \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
-    \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
-    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
-    #line 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false>\
-    \ class Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
-    \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
-    \ void> {\n  int to;\n  operator int() const { return to; }\n };\n using Edge=\
-    \ Edge_B<void, Cost>;\n using C= std::conditional_t<std::is_void_v<Cost>, std::nullptr_t,\
-    \ Cost>;\n std::vector<std::conditional_t<std::is_void_v<Cost>, std::pair<int,\
-    \ int>, std::tuple<int, int, Cost>>> es;\n std::vector<Edge> g;\n std::vector<int>\
-    \ P, PP, D, I, L, R, pos;\n std::vector<C> DW, W;\npublic:\n Tree(int n): P(n,\
-    \ -2) {}\n template <class T= Cost> std::enable_if_t<std::is_void_v<T>, void>\
-    \ add_edge(int u, int v) { es.emplace_back(u, v), es.emplace_back(v, u); }\n template\
-    \ <class T> std::enable_if_t<std::is_convertible_v<T, Cost>, void> add_edge(int\
-    \ u, int v, T c) { es.emplace_back(u, v, c), es.emplace_back(v, u, c); }\n template\
-    \ <class T, class U, std::enable_if_t<std::conjunction_v<std::is_convertible<T,\
-    \ Cost>, std::is_convertible<U, Cost>>, std::nullptr_t> = nullptr> void add_edge(int\
-    \ u, int v, T c, U d) /* c:u->v, d:v->u */ { es.emplace_back(u, v, c), es.emplace_back(v,\
-    \ u, d); }\n void build(int root= 0) {\n  size_t n= P.size();\n  I.resize(n),\
-    \ PP.resize(n), std::iota(PP.begin(), PP.end(), 0), D.assign(n, 0), L.assign(n,\
-    \ 0), R.assign(n, 0), pos.resize(n + 1), g.resize(es.size());\n  for (const auto\
-    \ &e: es) ++pos[std::get<0>(e)];\n  std::partial_sum(pos.begin(), pos.end(), pos.begin());\n\
-    \  if constexpr (std::is_void_v<Cost>)\n   for (const auto &[f, t]: es) g[--pos[f]]=\
-    \ {t};\n  else\n   for (const auto &[f, t, c]: es) g[--pos[f]]= {t, c};\n  auto\
-    \ f= [&, i= 0, v= 0, t= 0](int r) mutable {\n   for (P[r]= -1, I[t++]= r; i <\
-    \ t; ++i)\n    for (int u: operator[](v= I[i]))\n     if (P[v] != u) P[I[t++]=\
-    \ u]= v;\n  };\n  f(root);\n  for (size_t r= 0; r < n; ++r)\n   if (P[r] == -2)\
-    \ f(r);\n  std::vector<int> Z(n, 1), nx(n, -1);\n  for (int i= n, v; i--;) {\n\
-    \   if (P[v= I[i]] == -1) continue;\n   if (Z[P[v]]+= Z[v]; nx[P[v]] == -1) nx[P[v]]=\
-    \ v;\n   if (Z[nx[P[v]]] < Z[v]) nx[P[v]]= v;\n  }\n  for (int v: I)\n   if (nx[v]\
-    \ != -1) PP[nx[v]]= v;\n  for (int v: I)\n   if (P[v] != -1) PP[v]= PP[PP[v]],\
+    \ std::vector<std::vector<int>> dat;\n};\n#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\
+    \n#include <array>\n#include <cassert>\n#line 4 \"src/Internal/ListRange.hpp\"\
+    \n#include <iterator>\ntemplate <class T> struct ListRange {\n using Iterator=\
+    \ typename std::vector<T>::iterator;\n Iterator bg, ed;\n Iterator begin() const\
+    \ { return bg; }\n Iterator end() const { return ed; }\n size_t size() const {\
+    \ return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
+    \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
+    \  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i) os << (i ? \", \" : \"\
+    \") << r[i];\n  return os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
+    \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
+    \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
+    \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
+    \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
+    \ const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i <\
+    \ e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n#line\
+    \ 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s, d;\n Edge(int s= 0, int d=\
+    \ 0): s(s), d(d) {}\n Edge &operator--() { return --s, --d, *this; }\n int operator-(int\
+    \ v) const { return s ^ d ^ v; }\n friend std::istream &operator>>(std::istream\
+    \ &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend std::ostream &operator<<(std::ostream\
+    \ &os, const Edge &e) { return os << '(' << e.s << \", \" << e.d << ')'; }\n};\n\
+    struct Graph: public std::vector<Edge> {\n std::vector<int> c, p;\n using std::vector<Edge>::vector;\n\
+    \ void build(int n, bool direct) {\n  if (p.assign(n + 1, 0), c.resize(size()\
+    \ << !direct); direct) {\n   for (auto [u, v]: *this) ++p[u];\n   for (int i=\
+    \ 0; i < n; ++i) p[i + 1]+= p[i];\n   for (int i= size(); i--;) c[--p[(*this)[i].s]]=\
+    \ i;\n  } else {\n   for (auto [u, v]: *this) ++p[u], ++p[v];\n   for (int i=\
+    \ 0; i < n; ++i) p[i + 1]+= p[i];\n   for (int i= size(); i--;) c[--p[(*this)[i].s]]=\
+    \ i, c[--p[(*this)[i].d]]= i;\n  }\n }\n size_t edge_size() const { return size();\
+    \ }\n size_t vertex_size() const { return p.size() - 1; }\n ListRange<int> operator()(int\
+    \ u) { return {c.begin() + p[u], c.begin() + p[u + 1]}; }\n ConstListRange<int>\
+    \ operator()(int u) const { return {c.cbegin() + p[u], c.cbegin() + p[u + 1]};\
+    \ }\n};\n#line 5 \"src/Graph/HeavyLightDecomposition.hpp\"\nclass HeavyLightDecomposition\
+    \ {\n std::vector<int> P, PP, D, I, L, R;\npublic:\n HeavyLightDecomposition()\
+    \ {}\n HeavyLightDecomposition(const Graph &tree, int root= 0) {\n  const int\
+    \ n= tree.vertex_size();\n  P.assign(n, -2), PP.resize(n), D.resize(n), I.resize(n),\
+    \ L.resize(n), R.resize(n);\n  auto f= [&, i= 0, v= 0, t= 0](int r) mutable {\n\
+    \   for (P[r]= -1, I[t++]= r; i < t; ++i)\n    for (int e: tree(v= I[i]))\n  \
+    \   if (int u= tree[e] - v; P[v] != u) P[I[t++]= u]= v;\n  };\n  f(root);\n  for\
+    \ (int r= 0; r < n; ++r)\n   if (P[r] == -2) f(r);\n  std::vector<int> Z(n, 1),\
+    \ nx(n, -1);\n  for (int i= n, v; i--;) {\n   if (P[v= I[i]] == -1) continue;\n\
+    \   if (Z[P[v]]+= Z[v]; nx[P[v]] == -1) nx[P[v]]= v;\n   if (Z[nx[P[v]]] < Z[v])\
+    \ nx[P[v]]= v;\n  }\n  for (int v= n; v--;) PP[v]= v;\n  for (int v: I)\n   if\
+    \ (nx[v] != -1) PP[nx[v]]= v;\n  for (int v: I)\n   if (P[v] != -1) PP[v]= PP[PP[v]],\
     \ D[v]= D[P[v]] + 1;\n  for (int i= n; i--;) L[I[i]]= i;\n  for (int v: I) {\n\
-    \   int ir= R[v]= L[v] + Z[v];\n   for (int u: operator[](v))\n    if (u != P[v]\
-    \ && u != nx[v]) L[u]= ir-= Z[u];\n   if (nx[v] != -1) L[nx[v]]= L[v] + 1;\n \
-    \ }\n  if constexpr (weight) {\n   DW.resize(n), W.resize(n);\n   for (int v:\
-    \ I)\n    for (auto &[u, c]: operator[](v)) {\n     if (u != P[v]) DW[u]= DW[v]\
-    \ + c;\n     else W[v]= c;\n    }\n  }\n  for (int i= n; i--;) I[L[i]]= i;\n }\n\
-    \ size_t size() const { return P.size(); }\n ConstListRange<Edge> operator[](int\
-    \ v) const { return {g.cbegin() + pos[v], g.cbegin() + pos[v + 1]}; }\n int depth(int\
-    \ v) const { return D[v]; }\n C depth_w(int v) const {\n  static_assert(weight,\
-    \ \"\\'depth_w\\' is not available\");\n  return DW[v];\n }\n int to_seq(int v)\
-    \ const { return L[v]; }\n int to_node(int i) const { return I[i]; }\n int parent(int\
-    \ v) const { return P[v]; }\n int head(int v) const { return PP[v]; }\n int root(int\
-    \ v) const {\n  for (v= PP[v];; v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n\
-    \ bool connected(int u, int v) const { return root(u) == root(v); }\n int lca(int\
-    \ u, int v) const {\n  for (;; v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u,\
-    \ v);\n   if (PP[u] == PP[v]) return u;\n  }\n }\n int la(int v, int k) const\
-    \ {\n  assert(k <= D[v]);\n  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if\
-    \ (L[v] - k >= L[u= PP[v]]) return I[L[v] - k];\n }\n int la_w(int v, C w) const\
-    \ {\n  static_assert(weight, \"\\'la_w\\' is not available\");\n  for (C c;; w-=\
-    \ c) {\n   int u= PP[v];\n   if (c= DW[v] - DW[u] + W[u]; w < c) {\n    int ok=\
-    \ L[v], ng= L[u] - 1;\n    for (int m; ok - ng > 1;) m= (ok + ng) / 2, (DW[v]\
-    \ - DW[I[m]] <= w ? ok : ng)= m;\n    return I[ok];\n   }\n   if (v= P[u]; v ==\
-    \ -1) return u;\n  }\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
+    \   int ir= R[v]= L[v] + Z[v];\n   for (int e: tree(v))\n    if (int u= tree[e]\
+    \ - v; u != P[v] && u != nx[v]) L[u]= (ir-= Z[u]);\n   if (nx[v] != -1) L[nx[v]]=\
+    \ L[v] + 1;\n  }\n  for (int i= n; i--;) I[L[i]]= i;\n }\n int to_seq(int v) const\
+    \ { return L[v]; }\n int to_vertex(int i) const { return I[i]; }\n size_t size()\
+    \ const { return P.size(); }\n int parent(int v) const { return P[v]; }\n int\
+    \ head(int v) const { return PP[v]; }\n int root(int v) const {\n  for (v= PP[v];;\
+    \ v= PP[P[v]])\n   if (P[v] == -1) return v;\n }\n bool connected(int u, int v)\
+    \ const { return root(u) == root(v); }\n // u is in v\n bool in_subtree(int u,\
+    \ int v) const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
+    \ v) const { return R[v] - L[v]; }\n int lca(int u, int v) const {\n  for (;;\
+    \ v= P[PP[v]]) {\n   if (L[u] > L[v]) std::swap(u, v);\n   if (PP[u] == PP[v])\
+    \ return u;\n  }\n }\n int la(int v, int k) const {\n  assert(0 <= k && k <= D[v]);\n\
+    \  for (int u;; k-= L[v] - L[u] + 1, v= P[u])\n   if (L[v] - k >= L[u= PP[v]])\
+    \ return I[L[v] - k];\n }\n int jump(int u, int v, int k) const {\n  if (!k) return\
     \ u;\n  if (u == v) return -1;\n  if (k == 1) return in_subtree(v, u) ? la(v,\
     \ D[v] - D[u] - 1) : P[u];\n  int w= lca(u, v), d_uw= D[u] - D[w], d_vw= D[v]\
     \ - D[w];\n  return k > d_uw + d_vw ? -1 : k <= d_uw ? la(u, k) : la(v, d_uw +\
-    \ d_vw - k);\n }\n int jump_w(int u, int v, C w) const {\n  static_assert(weight,\
-    \ \"\\'jump_w\\' is not available\");\n  if (u == v) return u;\n  int z= lca(u,\
-    \ v);\n  C d_uz= DW[u] - DW[z], d_vz= DW[v] - DW[z];\n  return w >= d_uz + d_vz\
-    \ ? v : w <= d_uz ? la_w(u, w) : la_w(v, d_uz + d_vz - w);\n }\n int dist(int\
-    \ u, int v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n C dist_w(int u,\
-    \ int v) const {\n  static_assert(weight, \"\\'dist_w\\' is not available\");\n\
-    \  return DW[u] + DW[v] - DW[lca(u, v)] * 2;\n }\n // u is in v\n bool in_subtree(int\
-    \ u, int v) const { return L[v] <= L[u] && L[u] < R[v]; }\n int subtree_size(int\
-    \ v) const { return R[v] - L[v]; }\n // half-open interval\n std::array<int, 2>\
-    \ subtree(int v) const { return std::array{L[v], R[v]}; }\n // sequence of closed\
-    \ intervals\n template <bool edge= 0> std::vector<std::array<int, 2>> path(int\
-    \ u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n  while (PP[u]\
-    \ != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]], L[v]}),\
-    \ v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u= P[PP[u]];\n\
-    \  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge, L[v]});\n \
-    \ else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v] + edge});\n\
-    \  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n};\n#line\
-    \ 4 \"src/Misc/CartesianTree.hpp\"\nclass CartesianTree {\n std::vector<std::array<int,\
+    \ d_vw - k);\n }\n int depth(int v) const { return D[v]; }\n int dist(int u, int\
+    \ v) const { return D[u] + D[v] - D[lca(u, v)] * 2; }\n // half-open interval\n\
+    \ std::array<int, 2> subtree(int v) const { return std::array{L[v], R[v]}; }\n\
+    \ // sequence of closed intervals\n template <bool edge= 0> std::vector<std::array<int,\
+    \ 2>> path(int u, int v) const {\n  std::vector<std::array<int, 2>> up, down;\n\
+    \  while (PP[u] != PP[v]) {\n   if (L[u] < L[v]) down.emplace_back(std::array{L[PP[v]],\
+    \ L[v]}), v= P[PP[v]];\n   else up.emplace_back(std::array{L[u], L[PP[u]]}), u=\
+    \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
+    \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
+    \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
+    };\n#line 4 \"src/Misc/CartesianTree.hpp\"\nclass CartesianTree {\n std::vector<std::array<int,\
     \ 2>> rg, ch;\n std::vector<int> par;\n int rt;\npublic:\n template <class Vec>\
     \ CartesianTree(const Vec &a, bool is_min= 1): rg(a.size()), ch(a.size(), std::array{-1,\
     \ -1}), par(a.size(), -1) {\n  const int n= a.size();\n  auto comp= [&](int l,\
@@ -200,39 +186,39 @@ data:
     \ i) const { return ch[i]; }\n int parent(int i) const { return par[i]; }\n int\
     \ root() const { return rt; }\n // [l,r)\n std::array<int, 2> range(int i) const\
     \ { return rg[i]; }\n};\n#line 5 \"src/String/SuffixTree.hpp\"\nstruct SuffixTree\
-    \ {\n Tree<void> tree;\n std::vector<std::tuple<int, int, int, int>> node;\n std::vector<int>\
-    \ suf;\n template <class String> SuffixTree(const SuffixArray<String> &sa, const\
-    \ LCPArray &lcp): tree(1), suf(sa.size()) {\n  const int n= sa.size();\n  node.emplace_back(0,\
-    \ n, 0, 0);\n  if (n == 1) {\n   tree= Tree<void>(2), tree.add_edge(0, 1), tree.build(),\
-    \ node.emplace_back(0, 1, 0, 1), suf[0]= 1;\n   return;\n  }\n  std::vector<std::tuple<int,\
-    \ int>> es;\n  CartesianTree ct(lcp);\n  auto dfs= [&](auto dfs, int p, int idx,\
-    \ int h) -> void {\n   auto [l, r]= ct.range(idx);\n   ++r;\n   int hh= lcp[idx];\n\
-    \   if (h < hh) es.emplace_back(p, node.size()), p= node.size(), node.emplace_back(l,\
-    \ r, h, hh);\n   auto [lch, rch]= ct.children(idx);\n   if (lch == -1) {\n   \
-    \ if (hh < n - sa[idx]) es.emplace_back(p, node.size()), suf[sa[idx]]= node.size(),\
-    \ node.emplace_back(idx, idx + 1, hh, n - sa[idx]);\n    else suf[sa[idx]]= p;\n\
-    \   } else dfs(dfs, p, lch, hh);\n   if (rch == -1) {\n    if (hh < n - sa[idx\
-    \ + 1]) es.emplace_back(p, node.size()), suf[sa[idx + 1]]= node.size(), node.emplace_back(idx\
-    \ + 1, idx + 2, hh, n - sa[idx + 1]);\n    else suf[sa[idx + 1]]= p;\n   } else\
-    \ dfs(dfs, p, rch, hh);\n  };\n  if (int r= ct.root(); lcp[r] > 0) es.emplace_back(0,\
-    \ 1), node.emplace_back(0, n, 0, lcp[r]), dfs(dfs, 1, r, lcp[r]);\n  else dfs(dfs,\
-    \ 0, r, 0);\n  tree= Tree<void>(node.size());\n  for (auto [u, v]: es) tree.add_edge(u,\
-    \ v);\n  tree.build();\n }\n int size() const { return node.size(); }\n auto &operator[](int\
-    \ i) const { return node[i]; }\n auto begin() const { return node.begin(); }\n\
-    \ auto end() const { return node.end(); }\n int substr(int l) const { return suf[l];\
-    \ }\n int substr(int l, int n) const {\n  for (int v= suf[l], u, w;; v= w)\n \
-    \  if (u= tree.head(v), w= tree.parent(u); w == -1 || std::get<3>(node[w]) < n)\
-    \ {\n    int ok= tree.to_seq(v), ng= tree.to_seq(u) - 1;\n    for (int m; ok -\
-    \ ng > 1;) m= (ok + ng) / 2, (n <= std::get<3>(node[tree.to_node(m)]) ? ok : ng)=\
-    \ m;\n    return tree.to_node(ok);\n   }\n }\n template <class String> std::string\
-    \ debug_output(const SuffixArray<String> &sa) const {\n  std::string res= \"\\\
-    n\";\n  for (int i= 0; i < node.size(); ++i) {\n   auto [l, r, h, hh]= node[i];\n\
-    \   res+= std::to_string(i) + \": (\" + std::to_string(l) + \",\" + std::to_string(r)\
-    \ + \",\" + std::to_string(h) + \",\" + std::to_string(hh) + \") \";\n   res+=\
-    \ sa.s.substr(sa[l] + h, hh - h);\n   res+= \"\\n\";\n  }\n  for (int i= 0; i\
-    \ < sa.size(); ++i) {\n   res+= \" \" + sa.s.substr(sa[i]) + \"\\n\";\n  }\n \
-    \ return res;\n }\n};\n#line 6 \"test/atcoder/abc141_e.SuffixTree.test.cpp\"\n\
-    using namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
+    \ {\n Graph graph;\n HeavyLightDecomposition tree;\n std::vector<std::tuple<int,\
+    \ int, int, int>> node;\n std::vector<int> suf;\n template <class String> SuffixTree(const\
+    \ SuffixArray<String> &sa, const LCPArray &lcp): tree(1), suf(sa.size()) {\n \
+    \ const int n= sa.size();\n  node.emplace_back(0, n, 0, 0);\n  if (n == 1) {\n\
+    \   graph.emplace_back(0, 1), graph.build(2, 0), tree= HeavyLightDecomposition(graph),\
+    \ node.emplace_back(0, 1, 0, 1), suf[0]= 1;\n   return;\n  }\n  CartesianTree\
+    \ ct(lcp);\n  auto dfs= [&](auto dfs, int p, int idx, int h) -> void {\n   auto\
+    \ [l, r]= ct.range(idx);\n   ++r;\n   int hh= lcp[idx];\n   if (h < hh) graph.emplace_back(p,\
+    \ node.size()), p= node.size(), node.emplace_back(l, r, h, hh);\n   auto [lch,\
+    \ rch]= ct.children(idx);\n   if (lch == -1) {\n    if (hh < n - sa[idx]) graph.emplace_back(p,\
+    \ node.size()), suf[sa[idx]]= node.size(), node.emplace_back(idx, idx + 1, hh,\
+    \ n - sa[idx]);\n    else suf[sa[idx]]= p;\n   } else dfs(dfs, p, lch, hh);\n\
+    \   if (rch == -1) {\n    if (hh < n - sa[idx + 1]) graph.emplace_back(p, node.size()),\
+    \ suf[sa[idx + 1]]= node.size(), node.emplace_back(idx + 1, idx + 2, hh, n - sa[idx\
+    \ + 1]);\n    else suf[sa[idx + 1]]= p;\n   } else dfs(dfs, p, rch, hh);\n  };\n\
+    \  if (int r= ct.root(); lcp[r] > 0) graph.emplace_back(0, 1), node.emplace_back(0,\
+    \ n, 0, lcp[r]), dfs(dfs, 1, r, lcp[r]);\n  else dfs(dfs, 0, r, 0);\n  graph.build(node.size(),\
+    \ 0), tree= HeavyLightDecomposition(graph);\n }\n int size() const { return node.size();\
+    \ }\n auto &operator[](int i) const { return node[i]; }\n auto begin() const {\
+    \ return node.begin(); }\n auto end() const { return node.end(); }\n int substr(int\
+    \ l) const { return suf[l]; }\n int substr(int l, int n) const {\n  for (int v=\
+    \ suf[l], u, w;; v= w)\n   if (u= tree.head(v), w= tree.parent(u); w == -1 ||\
+    \ std::get<3>(node[w]) < n) {\n    int ok= tree.to_seq(v), ng= tree.to_seq(u)\
+    \ - 1;\n    for (int m; ok - ng > 1;) m= (ok + ng) / 2, (n <= std::get<3>(node[tree.to_vertex(m)])\
+    \ ? ok : ng)= m;\n    return tree.to_vertex(ok);\n   }\n }\n template <class String>\
+    \ std::string debug_output(const SuffixArray<String> &sa) const {\n  std::string\
+    \ res= \"\\n\";\n  for (int i= 0; i < node.size(); ++i) {\n   auto [l, r, h, hh]=\
+    \ node[i];\n   res+= std::to_string(i) + \": (\" + std::to_string(l) + \",\" +\
+    \ std::to_string(r) + \",\" + std::to_string(h) + \",\" + std::to_string(hh) +\
+    \ \") \";\n   res+= sa.s.substr(sa[l] + h, hh - h);\n   res+= \"\\n\";\n  }\n\
+    \  for (int i= 0; i < sa.size(); ++i) {\n   res+= \" \" + sa.s.substr(sa[i]) +\
+    \ \"\\n\";\n  }\n  return res;\n }\n};\n#line 6 \"test/atcoder/abc141_e.SuffixTree.test.cpp\"\
+    \nusing namespace std;\nsigned main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n\
     \ int N;\n cin >> N;\n string S;\n cin >> S;\n SuffixArray sa(S);\n LCPArray lcp(sa);\n\
     \ SuffixTree st(sa, lcp);\n SparseTable sa_mn(sa.sa, [&](int i, int j) { return\
     \ min(i, j); });\n SparseTable sa_mx(sa.sa, [&](int i, int j) { return max(i,\
@@ -252,14 +238,15 @@ data:
   - src/DataStructure/SparseTable.hpp
   - src/String/SuffixTree.hpp
   - src/String/SuffixArray.hpp
-  - src/Graph/Tree.hpp
+  - src/Graph/HeavyLightDecomposition.hpp
+  - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
   - src/Misc/CartesianTree.hpp
   isVerificationFile: true
   path: test/atcoder/abc141_e.SuffixTree.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-13 18:33:09+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc141_e.SuffixTree.test.cpp
 layout: document
