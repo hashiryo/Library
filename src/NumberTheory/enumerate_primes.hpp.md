@@ -6,7 +6,7 @@ data:
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
       \u3084\u3064"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   - icon: ':question:'
@@ -17,16 +17,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc177_e.gcd_conv.test.cpp
     title: test/atcoder/abc177_e.gcd_conv.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':x:'
@@ -146,25 +146,25 @@ data:
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1019.numth.test.cpp
+  - test/yukicoder/886.numth.test.cpp
+  - test/yukicoder/644.test.cpp
+  - test/yukicoder/1006.test.cpp
+  - test/yosupo/enumerate_primes.test.cpp
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/counting_primes.test.cpp
+  - test/yosupo/gcd_convolution.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
+  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
+  - test/yosupo/lcm_convolution.test.cpp
+  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
+  - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
+  - test/atcoder/agc038_c.numth.test.cpp
+  - test/atcoder/abc177_e.gcd_conv.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc172_d.numth.test.cpp
   - test/atcoder/abc162_e.test.cpp
-  - test/atcoder/abc177_e.gcd_conv.test.cpp
-  - test/atcoder/agc038_c.numth.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
-  - test/hackerrank/cube-loving-numbers.multiple_mobius.test.cpp
-  - test/hackerrank/cube-loving-numbers.mobius_func.test.cpp
-  - test/yukicoder/644.test.cpp
-  - test/yukicoder/1006.test.cpp
-  - test/yukicoder/886.numth.test.cpp
-  - test/yukicoder/1019.numth.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
-  - test/yosupo/counting_primes.test.cpp
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
-  - test/yosupo/lcm_convolution.test.cpp
-  - test/yosupo/enumerate_primes.test.cpp
-  - test/yosupo/sum_of_exponential_times_polynomial_limit.test.cpp
-  - test/yosupo/gcd_convolution.test.cpp
 documentation_of: src/NumberTheory/enumerate_primes.hpp
 layout: document
 title: "\u7D20\u6570\u306E\u5217\u6319"

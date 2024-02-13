@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
-    title: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
@@ -219,31 +219,31 @@ data:
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/1595.test.cpp
-  - test/aoj/GRL_5_A.test.cpp
-  - test/atcoder/abc241_e.test.cpp
-  - test/atcoder/abc223_g.rerooting.test.cpp
-  - test/atcoder/abc160_f.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc222_f.test.cpp
-  - test/atcoder/abc136_d.test.cpp
-  - test/atcoder/abc220_f.test.cpp
   - test/yukicoder/1494.test.cpp
-  - test/yukicoder/768.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1075.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/1418.test.cpp
-  - test/yukicoder/1976.test.cpp
   - test/yukicoder/1211.test.cpp
+  - test/yukicoder/1976.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1418.test.cpp
   - test/yukicoder/1295.test.cpp
-  - test/yukicoder/1242.test.cpp
+  - test/yukicoder/1075.test.cpp
   - test/yukicoder/1718.test.cpp
-  - test/yosupo/tree_path_composite_sum.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1242.test.cpp
+  - test/yukicoder/768.test.cpp
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+  - test/yosupo/tree_path_composite_sum.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
+  - test/aoj/1595.test.cpp
+  - test/atcoder/abc136_d.test.cpp
+  - test/atcoder/abc220_f.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc160_f.test.cpp
 documentation_of: src/Graph/HeavyLightDecomposition.hpp
 layout: document
 title: "\u91CD\u8EFD\u5206\u89E3"
@@ -287,7 +287,7 @@ HL分解＋オイラーツアーで頂点集合を数列に \
 
 | 名前 | 概要 |
 | --- | --- |
-| `HeavyLightDecomposition(g, root=0)` | コンストラクタ. 　[`Graph`](src/Graph/Graph.hpp) クラスの g と 根とする頂点 root を渡す. <br> g は親から子へ向かう有向辺さえあれば良い． |
+| `HeavyLightDecomposition(g, root=0)` | コンストラクタ. 　[`Graph`](Graph.hpp) クラスの g と 根とする頂点 root を渡す. <br> g は親から子へ向かう有向辺さえあれば良い． |
 | `size()`| 頂点数を返す.|
 | `path<edge=0>(u,v)` | 頂点 u から頂点 v へのパスを表す"**閉**"区間列を返す. <br> `edge`フラグが true なら LCA を含めないような区間列を返す. |
 | `subtree(v)` | 頂点 v を根とする部分木を表す"**半開**"区間を返す. |

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
-    title: "\u30B0\u30E9\u30D5"
+    title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
     path: src/Graph/Tree.hpp
     title: "\u6728"

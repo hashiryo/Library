@@ -5,7 +5,7 @@ data:
     path: src/Internal/ListRange.hpp
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
       \u3084\u3064"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/CumSumQuotient.hpp
     title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
   - icon: ':question:'
@@ -13,10 +13,10 @@ data:
     title: "\u7D20\u6570\u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':x:'
@@ -27,7 +27,7 @@ data:
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
@@ -157,12 +157,12 @@ data:
   path: src/NumberTheory/sum_on_primes.hpp
   requiredBy: []
   timestamp: '2024-02-13 11:50:07+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
+  - test/yosupo/counting_primes.test.cpp
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp
-  - test/yosupo/counting_primes.test.cpp
-  - test/yosupo/sum_of_totient_function.mul_sum.test.cpp
 documentation_of: src/NumberTheory/sum_on_primes.hpp
 layout: document
 title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
@@ -187,14 +187,14 @@ P(n) = \sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)
 $
 
 を利用することで $F(n)$ を計算する. \
-$P(n)$ は[`CumSumQuotient<T>`](src/NumberTheory/CumSumQuotient.hpp) クラスとして扱う.
+$P(n)$ は[`CumSumQuotient<T>` クラス](CumSumQuotient.hpp) として扱う.
 
 
 |関数名|概要|計算量|
 |---|---|---|
-|`sums_of_powers_on_primes<T>(N,D)`| $n\in \left\lbrace \left. \floor{\frac{N}{x}} \right \vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ までの <br> 素数上の $k$ 乗数の累積和 <br> $\displaystyle \sum_{\substack{p: \mathrm{prime} \\ p \leq n}} p^k$ <br>を $k=0,\dots,D$ まで計算したものを返す. <br> 特に $k=0$ は素数計数関数 $\pi(n)$ となる. <br> 返り値は`vector<CumSumQuotient<T>>`.|$\displaystyleO\left(\frac{DN^{3/4}}{\log N}\right)$|
-|`additive_sum(P,f)`|加法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyleO\left(\sqrt{N}\right)$|
-|`multiplicative_sum(P,f)`|乗法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyleO\left(\frac{DN^{3/4}}{\log N}\right)$|
+|`sums_of_powers_on_primes<T>(N,D)`| $n\in \left\lbrace \left. \floor{\frac{N}{x}} \right \vert x\in \mathbb{Z}, 1\leq x\leq N\right\rbrace$ までの <br> 素数上の $k$ 乗数の累積和 <br> $\displaystyle \sum_{\substack{p: \mathrm{prime} \\ p \leq n}} p^k$ <br>を $k=0,\dots,D$ まで計算したものを返す. <br> 特に $k=0$ は素数計数関数 $\pi(n)$ となる. <br> 返り値は`vector<CumSumQuotient<T>>`.|$\displaystyle O\left(\frac{DN^{3/4}}{\log N}\right)$|
+|`additive_sum(P,f)`|加法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyle O\left(\sqrt{N}\right)$|
+|`multiplicative_sum(P,f)`|乗法的関数 $f$ について累積和 $F(N)$ を返す. <br> $\displaystyle P(n)=\sum_{\substack{p: \mathrm{prime} \\ p \leq n}} f(p)$ を表す `CumSumQuotient<T>` クラスの `P` と $f(p^e)$ を表す `f(p,e)`を渡す．|$\displaystyle O\left(\frac{DN^{3/4}}{\log N}\right)$|
 
 ## 問題例
 [Xmas Contest 2019 D - Sum of (-1)^f(n)](https://atcoder.jp/contests/xmascon19/tasks/xmascon19_d) \

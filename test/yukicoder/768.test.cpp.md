@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
-    title: src/Graph/Graph.hpp
+    title: "\u30B0\u30E9\u30D5"
   - icon: ':question:'
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"

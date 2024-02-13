@@ -176,10 +176,10 @@ data:
   timestamp: '2023-08-10 14:03:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/GRL_6_B.test.cpp
   - test/yukicoder/1615.MCF.test.cpp
   - test/yosupo/min_cost_b_flow.test.cpp
   - test/yosupo/assignment.mcf.test.cpp
+  - test/aoj/GRL_6_B.test.cpp
 documentation_of: src/Optimization/NetworkSimplex.hpp
 layout: document
 title: "\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u5358\u4F53\u6CD5"

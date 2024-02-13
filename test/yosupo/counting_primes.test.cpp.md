@@ -5,13 +5,13 @@ data:
     path: src/Internal/ListRange.hpp
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
       \u3084\u3064"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/CumSumQuotient.hpp
     title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
   - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   _extendedRequiredBy: []

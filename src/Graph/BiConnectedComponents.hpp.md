@@ -164,60 +164,25 @@ data:
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/3022.test.cpp
-  - test/aoj/GRL_3_A.test.cpp
-  - test/hackerrank/bonnie-and-clyde.test.cpp
   - test/yukicoder/1326.test.cpp
   - test/yosupo/biconnected_components.test.cpp
+  - test/hackerrank/bonnie-and-clyde.test.cpp
+  - test/aoj/GRL_3_A.test.cpp
+  - test/aoj/3022.test.cpp
 documentation_of: src/Graph/BiConnectedComponents.hpp
 layout: document
-title: "\u30B0\u30E9\u30D5"
+title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
 ---
 
-## 使い方
+![bct.svg](https://github.com/hashiryo/Library/blob/master/img/bct.svg?raw=true)
 
-**構築例**
-```c++
-int n,m;cin>>n>>m; // n: 頂点数, m: 辺数
-Graph g(m);
-for(int i=0;i<m;++i)cin>>g[i],--g[i];
-g.build(n, 0); // 無向グラフ
-// g.build(n, 1); // 有向グラフ
-```
-
-**グラフ探索例**
-```c++
-for(int v=0;v<n;++v)
- for(int e: g(v)){ // 辺リスト
-  int u=g[e]-v; // 隣接頂点
-  /* do something */
- }
-```
-
-## `Edge` クラス
-辺 $e=(s,d)$ を表すクラス．
-
-|メンバ変数|概要|
-|---|---|
-|`s`|辺の端点の一つ．有向辺なら始点を表す．|
-|`d`|辺の端点の一つ．有向辺なら終点を表す．|
-
-|||
-|---|---|
-|`operator--()`| 辺の端点をデクリメント. (1-index の入力をスムーズに 0-indexにするために用意).|
-|`operator-(Edge e, int v)`|辺 $e$ の端点のうち頂点 $v$ でない方を返す.|
-|`operator>>(istream& is,Edge &e)`| `s d` のフォーマットの入力に対応.  |
+[0, n)：もとの頂点 \
+[n, n + n_block)：block\
+$\mathrm{deg} > 1 $ $\rightarrow$ 関節点
 
 
-## `Graph` クラス
-
-`vector<Edge>` を継承.\
-コンストラクタも `vector` . \
-辺の配列と隣接リストの役割を担ったクラス.
-
-|名前|概要|
-|---|---|
-|`build(direct)`|隣接リストを構築する. <br> 引数が `false` なら辺を無向辺とみなす.<br> 引数が `true` なら辺を有向辺とみなす.|
-|`vertex_size()`|頂点の数を返す. <br> **※`build` 関数が実行済みであることを前提とする**　|
-|`edge_size()`|辺の数を返す.|
-|`operator()(u)`| 頂点 $u$ から出る辺 (の番号) のリストを返す. <br> 返り値は [`ListRange<int>`](src/Internal/ListRange.hpp). <br> **※`build` 関数が実行済みであることを前提とする**　|
+非再帰 [参考](https://nachiavivias.github.io/cp-library/column/2022/01.html)
+## 問題例
+[AtCoder Regular Contest 062 F - AtCoDeerくんとグラフ色塗り](https://atcoder.jp/contests/arc062/tasks/arc062_d)
+## 参考
+[https://twitter.com/noshi91/status/1529858538650374144?s=20&t=eznpFbuD9BDhfTb4PplFUg](https://twitter.com/noshi91/status/1529858538650374144?s=20&t=eznpFbuD9BDhfTb4PplFUg)

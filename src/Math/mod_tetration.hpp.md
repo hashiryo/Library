@@ -153,8 +153,8 @@ data:
   timestamp: '2024-02-06 20:21:12+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/unit_test/constexpr_mod_tetration.test.cpp
   - test/yosupo/tetration_mod.test.cpp
+  - test/unit_test/constexpr_mod_tetration.test.cpp
 documentation_of: src/Math/mod_tetration.hpp
 layout: document
 title: "\u30C6\u30C8\u30EC\u30FC\u30B7\u30E7\u30F3 $a\\upuparrows b$ ($\\mathbb{Z}/m\\\

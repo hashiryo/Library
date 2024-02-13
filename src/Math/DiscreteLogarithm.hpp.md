@@ -100,12 +100,12 @@ data:
   timestamp: '2023-10-29 17:46:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/1339.test.cpp
+  - test/yukicoder/950.test.cpp
+  - test/yukicoder/261.test.cpp
+  - test/yosupo/discrete_logarithm_mod.test.cpp
   - test/atcoder/abc270_g.test.cpp
   - test/atcoder/abc222_g.test.cpp
-  - test/yukicoder/261.test.cpp
-  - test/yukicoder/950.test.cpp
-  - test/yukicoder/1339.test.cpp
-  - test/yosupo/discrete_logarithm_mod.test.cpp
 documentation_of: src/Math/DiscreteLogarithm.hpp
 layout: document
 title: "\u96E2\u6563\u5BFE\u6570"

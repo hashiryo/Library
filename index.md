@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -189,7 +189,7 @@ data:
     pages:
     - icon: ':question:'
       path: src/Graph/BiConnectedComponents.hpp
-      title: "\u30B0\u30E9\u30D5"
+      title: "2\u9802\u70B9\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteEdgeColoring.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
@@ -210,7 +210,7 @@ data:
       title: "Functional\u30B0\u30E9\u30D5"
     - icon: ':question:'
       path: src/Graph/Graph.hpp
-      title: src/Graph/Graph.hpp
+      title: "\u30B0\u30E9\u30D5"
     - icon: ':question:'
       path: src/Graph/HeavyLightDecomposition.hpp
       title: "\u91CD\u8EFD\u5206\u89E3"
@@ -380,7 +380,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/ArrayOnDivisors.hpp
       title: "\u7D04\u6570\u914D\u5217"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/NumberTheory/CumSumQuotient.hpp
       title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
     - icon: ':question:'
@@ -401,7 +401,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/NumberTheory/sum_on_primes.hpp
       title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
     - icon: ':question:'
@@ -1150,16 +1150,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.enum_quo.test.cpp
       title: test/atcoder/abc172_d.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.mul_sum.test.cpp
       title: test/atcoder/abc172_d.mul_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc177_e.gcd_conv.test.cpp
       title: test/atcoder/abc177_e.gcd_conv.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1168,7 +1168,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1186,7 +1186,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1207,7 +1207,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SA.test.cpp
       title: test/atcoder/abc213_f.SA.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SuffixTree.test.cpp
       title: test/atcoder/abc213_f.SuffixTree.test.cpp
     - icon: ':heavy_check_mark:'
