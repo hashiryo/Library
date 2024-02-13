@@ -58,13 +58,13 @@ data:
   timestamp: '2023-08-05 23:01:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1750.MinPoly.test.cpp
+  - test/aoj/2397.MinPoly.test.cpp
+  - test/aoj/2397.SparseMat.test.cpp
   - test/yukicoder/1750.SparseMat.test.cpp
+  - test/yukicoder/1750.MinPoly.test.cpp
   - test/yukicoder/310.test.cpp
   - test/yosupo/sparse_matrix_det.test.cpp
   - test/yosupo/find_linear_recurrence.test.cpp
-  - test/aoj/2397.SparseMat.test.cpp
-  - test/aoj/2397.MinPoly.test.cpp
 documentation_of: src/Math/berlekamp_massey.hpp
 layout: document
 title: Berlekamp-Massey

@@ -266,9 +266,9 @@ data:
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/2361.SuffixTree.test.cpp
   - test/atcoder/abc213_f.SuffixTree.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/yukicoder/2361.SuffixTree.test.cpp
 documentation_of: src/String/SuffixTree.hpp
 layout: document
 title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"

@@ -212,8 +212,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/519.test.cpp
-  - test/yosupo/general_weighted_matching.test.cpp
   - test/yosupo/assignment.WeightedMatching.test.cpp
+  - test/yosupo/general_weighted_matching.test.cpp
 documentation_of: src/Optimization/WeightedMatching.hpp
 layout: document
 title: "\u91CD\u307F\u4ED8\u304D\u30DE\u30C3\u30C1\u30F3\u30B0"

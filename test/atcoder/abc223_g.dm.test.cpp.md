@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
   - icon: ':question:'
@@ -13,9 +13,9 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc223/tasks/abc223_g
@@ -84,11 +84,11 @@ data:
     \ sp0.end(), sp0.begin()), std::partial_sum(sp1.begin(), sp1.end(), sp1.begin());\n\
     \  for (auto [u, v]: es_) dg0[--sp0[u]]= v, dg1[--sp1[v]]= u;\n  dag_[0]= {dg0,\
     \ sp0}, dag_[1]= {dg1, sp1};\n }\n const std::vector<std::array<int, 2>> &edges()\
-    \ const { return es; }\n bool color(int v) const { return col[v]; }\n const ListRange<int>\
-    \ left_vertices() const { return {ord.cbegin(), ord.cbegin() + l}; }\n const ListRange<int>\
+    \ const { return es; }\n bool color(int v) const { return col[v]; }\n ConstListRange<int>\
+    \ left_vertices() const { return {ord.cbegin(), ord.cbegin() + l}; }\n ConstListRange<int>\
     \ right_vertices() const { return {ord.cbegin() + l, ord.cend()}; }\n int match(int\
     \ v) const { return mate[v]; }\n int component_num() const { return pos.size()\
-    \ - 1; }\n int belong(int v) const { return blg[v]; }\n const ListRange<int> block(int\
+    \ - 1; }\n int belong(int v) const { return blg[v]; }\n ConstListRange<int> block(int\
     \ k) const { return {pre.cbegin() + pos[k], pre.cbegin() + pos[k + 1]}; }\n template\
     \ <bool rev> const CsrArray<int> &dag() { return dag_[rev]; }\n std::vector<std::array<int,\
     \ 2>> max_matching() const {\n  std::vector<std::array<int, 2>> ret;\n  for (int\
@@ -128,8 +128,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc223_g.dm.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-13 18:06:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc223_g.dm.test.cpp
 layout: document

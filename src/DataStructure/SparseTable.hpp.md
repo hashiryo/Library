@@ -46,10 +46,10 @@ data:
   timestamp: '2023-11-17 21:21:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yosupo/staticrmq.SparseTable.test.cpp
-  - test/aoj/DSL_3_D.sparsetable.test.cpp
   - test/aoj/2644.test.cpp
+  - test/aoj/DSL_3_D.sparsetable.test.cpp
   - test/atcoder/abc141_e.SuffixTree.test.cpp
+  - test/yosupo/staticrmq.SparseTable.test.cpp
 documentation_of: src/DataStructure/SparseTable.hpp
 layout: document
 title: Sparse-Table

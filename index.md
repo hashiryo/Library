@@ -193,7 +193,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Graph/BipartiteEdgeColoring.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u8FBA\u5F69\u8272"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/Graph/BipartiteGraph.hpp
       title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
     - icon: ':heavy_check_mark:'
@@ -863,7 +863,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/3112.SA.test.cpp
       title: test/aoj/3112.SA.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/3168.bm.test.cpp
       title: test/aoj/3168.bm.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1141,7 +1141,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc162_e.test.cpp
       title: test/atcoder/abc162_e.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc167_d.test.cpp
       title: test/atcoder/abc167_d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1174,7 +1174,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_d.test.cpp
       title: test/atcoder/abc179_d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_e.test.cpp
       title: test/atcoder/abc179_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1225,7 +1225,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc218_h.test.cpp
       title: test/atcoder/abc218_h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc220_f.test.cpp
       title: test/atcoder/abc220_f.test.cpp
     - icon: ':x:'
@@ -1237,7 +1237,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc222_h.sparse_FPS.test.cpp
       title: test/atcoder/abc222_h.sparse_FPS.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc223_g.dm.test.cpp
       title: test/atcoder/abc223_g.dm.test.cpp
     - icon: ':x:'

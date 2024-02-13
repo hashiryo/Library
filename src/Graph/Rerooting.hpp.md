@@ -22,7 +22,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
   - icon: ':x:'
@@ -206,30 +206,30 @@ data:
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc160_f.test.cpp
+  - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc220_f.test.cpp
   - test/yukicoder/1494.test.cpp
+  - test/yukicoder/768.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1418.test.cpp
   - test/yukicoder/1976.test.cpp
   - test/yukicoder/1333.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1418.test.cpp
   - test/yukicoder/1295.test.cpp
-  - test/yukicoder/1075.test.cpp
   - test/yukicoder/1718.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/768.test.cpp
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/tree_path_composite_sum.test.cpp
-  - test/aoj/GRL_5_A.test.cpp
-  - test/aoj/1595.test.cpp
-  - test/atcoder/abc220_f.test.cpp
-  - test/atcoder/abc223_g.rerooting.test.cpp
-  - test/atcoder/abc222_f.test.cpp
-  - test/atcoder/abc160_f.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Graph/Rerooting.hpp
 layout: document
 title: "\u5168\u65B9\u4F4D\u6728DP"
 ---
 
-![image of tree dp](../../img/rerooting.drawio.svg)
+![image of tree dp](https://github.com/hashiryo/Library/blob/master/img/rerooting.drawio.svg?raw=true)
 
 ## `Rerooting<T>` クラス
 全方位木DPの値(型 : `T` )が入っている配列だと思って使う. (`operator[](int v)`, `begin()`, `end()` がある. )
@@ -239,6 +239,7 @@ title: "\u5168\u65B9\u4F4D\u6728DP"
 Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, F1 put_edge, F2 op, U ui, F3 put_vertex) // (1)
 Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, HeavyLightDecomposition hld, F1 put_edge, F2 op, U ui, F3 put_vertex) // (2)
 ```
+
 |引数|概要|
 |---|---|
 |`Graph g`|[`Graph` クラス](Graph.hpp)|
@@ -249,6 +250,7 @@ Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, HeavyLightDecomposition hld, F1 put
 |`put_vertex(int v, U sum) -> T`| 頂点 v でモノイド `U` の総積をクラス `T` の値に変換|
 
 ### メンバ関数
+
 |名前|概要|
 |---|---|
 |`operator[](int v)`| 頂点 v についての全方位木DPの値を返す.|

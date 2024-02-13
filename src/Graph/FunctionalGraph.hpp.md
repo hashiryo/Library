@@ -16,10 +16,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
   - icon: ':x:'
@@ -124,13 +124,12 @@ data:
     \ x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x 1)\n template <class Int>\
     \ std::enable_if_t<std::is_convertible_v<int, Int>, std::array<std::pair<std::vector<int>,\
     \ Int>, 3>> path(int v, Int k) const {\n  std::array<std::pair<std::vector<int>,\
-    \ Int>, 3> ret;\n  int n= t.size(), d= hld.depth(v) - 1;\n  if (ret[0].second=\
-    \ 1; k <= d) {\n   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n \
-    \  return ret;\n  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n\
-    \  int b= t[v= rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k /\
-    \ c, ret[2].second= 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n\
-    \  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n\
-    };\n"
+    \ Int>, 3> ret;\n  int d= hld.depth(v) - 1;\n  if (ret[0].second= 1; k <= d) {\n\
+    \   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n   return ret;\n\
+    \  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n  int b= t[v=\
+    \ rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k / c, ret[2].second=\
+    \ 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n  for (int e=\
+    \ l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n};\n"
   code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\nclass FunctionalGraph\
     \ {\n std::vector<int> t, rt;\n HeavyLightDecomposition hld;\npublic:\n FunctionalGraph(const\
     \ std::vector<int> &to): t(to) {\n  const int n= t.size();\n  rt.assign(n, -1);\n\
@@ -146,13 +145,13 @@ data:
     \ }\n // ((a_0,...,a_{i-1}) x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x\
     \ 1)\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
     \ std::array<std::pair<std::vector<int>, Int>, 3>> path(int v, Int k) const {\n\
-    \  std::array<std::pair<std::vector<int>, Int>, 3> ret;\n  int n= t.size(), d=\
-    \ hld.depth(v) - 1;\n  if (ret[0].second= 1; k <= d) {\n   for (int e= k; e--;\
-    \ v= t[v]) ret[0].first.push_back(v);\n   return ret;\n  }\n  for (int e= d; e--;\
-    \ v= t[v]) ret[0].first.push_back(v);\n  int b= t[v= rt[v]], c= hld.depth(b),\
-    \ l= (k-= d) % c;\n  ret[1].second= k / c, ret[2].second= 1;\n  for (int e= c;\
-    \ e--; v= t[v]) ret[1].first.push_back(v);\n  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n\
-    \  return ret;\n }\n};"
+    \  std::array<std::pair<std::vector<int>, Int>, 3> ret;\n  int d= hld.depth(v)\
+    \ - 1;\n  if (ret[0].second= 1; k <= d) {\n   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n\
+    \   return ret;\n  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n\
+    \  int b= t[v= rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k /\
+    \ c, ret[2].second= 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n\
+    \  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n\
+    };"
   dependsOn:
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/Graph.hpp
@@ -160,16 +159,16 @@ data:
   isVerificationFile: false
   path: src/Graph/FunctionalGraph.hpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
+  timestamp: '2024-02-13 18:06:06+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc136_d.test.cpp
   - test/yukicoder/1211.test.cpp
   - test/yukicoder/2122.test.cpp
   - test/yukicoder/1242.test.cpp
-  - test/atcoder/abc136_d.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc241_e.test.cpp
 documentation_of: src/Graph/FunctionalGraph.hpp
 layout: document
 title: "Functional\u30B0\u30E9\u30D5"

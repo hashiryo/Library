@@ -16,9 +16,9 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc167/tasks/abc167_d
@@ -110,21 +110,22 @@ data:
     \ x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x 1)\n template <class Int>\
     \ std::enable_if_t<std::is_convertible_v<int, Int>, std::array<std::pair<std::vector<int>,\
     \ Int>, 3>> path(int v, Int k) const {\n  std::array<std::pair<std::vector<int>,\
-    \ Int>, 3> ret;\n  int n= t.size(), d= hld.depth(v) - 1;\n  if (ret[0].second=\
-    \ 1; k <= d) {\n   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n \
-    \  return ret;\n  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n\
-    \  int b= t[v= rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k /\
-    \ c, ret[2].second= 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n\
-    \  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n\
-    };\n#line 4 \"test/atcoder/abc167_d.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n long long K;\n cin >>\
-    \ N >> K;\n vector<int> A(N);\n for (int i= 0; i < N; ++i) cin >> A[i];\n cout\
+    \ Int>, 3> ret;\n  int d= hld.depth(v) - 1;\n  if (ret[0].second= 1; k <= d) {\n\
+    \   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n   return ret;\n\
+    \  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n  int b= t[v=\
+    \ rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k / c, ret[2].second=\
+    \ 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n  for (int e=\
+    \ l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n};\n#line 4\
+    \ \"test/atcoder/abc167_d.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n long long K;\n cin >> N >>\
+    \ K;\n vector<int> A(N);\n for (int i= 0; i < N; ++i) cin >> A[i], --A[i];\n cout\
     \ << FunctionalGraph(A).jump(0, K) + 1 << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc167/tasks/abc167_d\"\n#include\
     \ <iostream>\n#include \"src/Graph/FunctionalGraph.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n int N;\n long long\
     \ K;\n cin >> N >> K;\n vector<int> A(N);\n for (int i= 0; i < N; ++i) cin >>\
-    \ A[i];\n cout << FunctionalGraph(A).jump(0, K) + 1 << '\\n';\n return 0;\n}"
+    \ A[i], --A[i];\n cout << FunctionalGraph(A).jump(0, K) + 1 << '\\n';\n return\
+    \ 0;\n}"
   dependsOn:
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/HeavyLightDecomposition.hpp
@@ -133,8 +134,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc167_d.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-13 18:06:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc167_d.test.cpp
 layout: document

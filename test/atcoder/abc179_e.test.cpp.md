@@ -16,9 +16,9 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc179/tasks/abc179_e
@@ -110,24 +110,24 @@ data:
     \ x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x 1)\n template <class Int>\
     \ std::enable_if_t<std::is_convertible_v<int, Int>, std::array<std::pair<std::vector<int>,\
     \ Int>, 3>> path(int v, Int k) const {\n  std::array<std::pair<std::vector<int>,\
-    \ Int>, 3> ret;\n  int n= t.size(), d= hld.depth(v) - 1;\n  if (ret[0].second=\
-    \ 1; k <= d) {\n   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n \
-    \  return ret;\n  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n\
-    \  int b= t[v= rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k /\
-    \ c, ret[2].second= 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n\
-    \  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n\
-    };\n#line 4 \"test/atcoder/abc179_e.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N, X, M;\n cin >> N >>\
-    \ X >> M;\n vector<int> to(M);\n for (int i= 0; i < M; ++i) to[i]= i * i % M;\n\
-    \ auto [a, b, c]= FunctionalGraph(to).path(X, N);\n long long ans= 0;\n for (int\
-    \ x: b.first) ans+= x;\n ans*= b.second;\n for (int x: a.first) ans+= x;\n for\
-    \ (int x: c.first) ans+= x;\n cout << ans << '\\n';\n return 0;\n}\n"
+    \ Int>, 3> ret;\n  int d= hld.depth(v) - 1;\n  if (ret[0].second= 1; k <= d) {\n\
+    \   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n   return ret;\n\
+    \  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n  int b= t[v=\
+    \ rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k / c, ret[2].second=\
+    \ 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n  for (int e=\
+    \ l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n};\n#line 4\
+    \ \"test/atcoder/abc179_e.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n long long N, X, M;\n cin >> N >> X\
+    \ >> M;\n vector<int> to(M);\n for (long long i= 0; i < M; ++i) to[i]= i * i %\
+    \ M;\n auto [a, b, c]= FunctionalGraph(to).path(X, N);\n long long ans= 0;\n for\
+    \ (int x: b.first) ans+= x;\n ans*= b.second;\n for (int x: a.first) ans+= x;\n\
+    \ for (int x: c.first) ans+= x;\n cout << ans << '\\n';\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc179/tasks/abc179_e\"\n#include\
     \ <iostream>\n#include \"src/Graph/FunctionalGraph.hpp\"\nusing namespace std;\n\
     signed main() {\n cin.tie(0);\n ios::sync_with_stdio(0);\n long long N, X, M;\n\
-    \ cin >> N >> X >> M;\n vector<int> to(M);\n for (int i= 0; i < M; ++i) to[i]=\
-    \ i * i % M;\n auto [a, b, c]= FunctionalGraph(to).path(X, N);\n long long ans=\
-    \ 0;\n for (int x: b.first) ans+= x;\n ans*= b.second;\n for (int x: a.first)\
+    \ cin >> N >> X >> M;\n vector<int> to(M);\n for (long long i= 0; i < M; ++i)\
+    \ to[i]= i * i % M;\n auto [a, b, c]= FunctionalGraph(to).path(X, N);\n long long\
+    \ ans= 0;\n for (int x: b.first) ans+= x;\n ans*= b.second;\n for (int x: a.first)\
     \ ans+= x;\n for (int x: c.first) ans+= x;\n cout << ans << '\\n';\n return 0;\n\
     }"
   dependsOn:
@@ -138,8 +138,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc179_e.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2024-02-13 18:06:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc179_e.test.cpp
 layout: document

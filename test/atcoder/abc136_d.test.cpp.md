@@ -438,19 +438,18 @@ data:
     \ x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x 1)\n template <class Int>\
     \ std::enable_if_t<std::is_convertible_v<int, Int>, std::array<std::pair<std::vector<int>,\
     \ Int>, 3>> path(int v, Int k) const {\n  std::array<std::pair<std::vector<int>,\
-    \ Int>, 3> ret;\n  int n= t.size(), d= hld.depth(v) - 1;\n  if (ret[0].second=\
-    \ 1; k <= d) {\n   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n \
-    \  return ret;\n  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n\
-    \  int b= t[v= rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k /\
-    \ c, ret[2].second= 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n\
-    \  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n\
-    };\n#line 6 \"test/atcoder/abc136_d.test.cpp\"\nusing namespace std;\nsigned main()\
-    \ {\n cin.tie(0);\n ios::sync_with_stdio(0);\n string S;\n cin >> S;\n int N=\
-    \ S.length();\n vector<int> to(N);\n for (int i= 0; i < N; ++i) to[i]= S[i] ==\
-    \ 'L' ? i - 1 : i + 1;\n FunctionalGraph g(to);\n BigInt K(\"1\" + string(100,\
-    \ '0'));\n vector cnt(N, 0);\n for (int i= 0; i < N; ++i) ++cnt[g.jump(i, K)];\n\
-    \ for (int i= 0; i < N; ++i) cout << cnt[i] << \" \\n\"[i == N - 1];\n return\
-    \ 0;\n}\n"
+    \ Int>, 3> ret;\n  int d= hld.depth(v) - 1;\n  if (ret[0].second= 1; k <= d) {\n\
+    \   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n   return ret;\n\
+    \  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n  int b= t[v=\
+    \ rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k / c, ret[2].second=\
+    \ 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n  for (int e=\
+    \ l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n};\n#line 6\
+    \ \"test/atcoder/abc136_d.test.cpp\"\nusing namespace std;\nsigned main() {\n\
+    \ cin.tie(0);\n ios::sync_with_stdio(0);\n string S;\n cin >> S;\n int N= S.length();\n\
+    \ vector<int> to(N);\n for (int i= 0; i < N; ++i) to[i]= S[i] == 'L' ? i - 1 :\
+    \ i + 1;\n FunctionalGraph g(to);\n BigInt K(\"1\" + string(100, '0'));\n vector\
+    \ cnt(N, 0);\n for (int i= 0; i < N; ++i) ++cnt[g.jump(i, K)];\n for (int i= 0;\
+    \ i < N; ++i) cout << cnt[i] << \" \\n\"[i == N - 1];\n return 0;\n}\n"
   code: "#define PROBLEM \"https://atcoder.jp/contests/abc136/tasks/abc136_d\"\n#include\
     \ <iostream>\n#include <vector>\n#include \"src/FFT/BigInt.hpp\"\n#include \"\
     src/Graph/FunctionalGraph.hpp\"\nusing namespace std;\nsigned main() {\n cin.tie(0);\n\
@@ -474,7 +473,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc136_d.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 11:50:07+09:00'
+  timestamp: '2024-02-13 18:06:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/atcoder/abc136_d.test.cpp

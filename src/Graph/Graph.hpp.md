@@ -28,13 +28,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc220_f.test.cpp
     title: test/atcoder/abc220_f.test.cpp
   - icon: ':x:'
@@ -153,31 +153,31 @@ data:
   timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/yukicoder/1494.test.cpp
-  - test/yukicoder/1211.test.cpp
-  - test/yukicoder/1976.test.cpp
-  - test/yukicoder/2122.test.cpp
-  - test/yukicoder/1333.test.cpp
-  - test/yukicoder/1124.test.cpp
-  - test/yukicoder/1418.test.cpp
-  - test/yukicoder/1295.test.cpp
-  - test/yukicoder/1075.test.cpp
-  - test/yukicoder/1718.test.cpp
-  - test/yukicoder/922.test.cpp
-  - test/yukicoder/1242.test.cpp
-  - test/yukicoder/768.test.cpp
-  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
-  - test/yosupo/tree_path_composite_sum.test.cpp
-  - test/aoj/GRL_5_A.test.cpp
   - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
+  - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc160_f.test.cpp
+  - test/atcoder/abc179_e.test.cpp
+  - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc223_g.rerooting.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc222_f.test.cpp
-  - test/atcoder/abc241_e.test.cpp
-  - test/atcoder/abc160_f.test.cpp
+  - test/yukicoder/1494.test.cpp
+  - test/yukicoder/768.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1418.test.cpp
+  - test/yukicoder/1976.test.cpp
+  - test/yukicoder/1211.test.cpp
+  - test/yukicoder/2122.test.cpp
+  - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1295.test.cpp
+  - test/yukicoder/1242.test.cpp
+  - test/yukicoder/1718.test.cpp
+  - test/yosupo/tree_path_composite_sum.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Graph/Graph.hpp
 layout: document
 title: "\u30B0\u30E9\u30D5"
@@ -229,4 +229,4 @@ for(int v=0;v<n;++v)
 |`build(direct)`|隣接リストを構築する. <br> 引数が `false` なら辺を無向辺とみなす.<br> 引数が `true` なら辺を有向辺とみなす.|
 |`vertex_size()`|頂点の数を返す. <br> **※`build` 関数が実行済みであることを前提とする**　|
 |`edge_size()`|辺の数を返す.|
-|`operator()(u)`| 頂点 $u$ から出る辺 (の番号) のリストを返す. <br> 返り値は [`ListRange<int>`](src/Internal/ListRange.hpp). <br> **※`build` 関数が実行済みであることを前提とする**　|
+|`operator()(u)`| 頂点 $u$ から出る辺 (の番号) のリストを返す. <br> 返り値は [`ListRange<int>`](../Internal/ListRange.hpp). <br> **※`build` 関数が実行済みであることを前提とする**　|
