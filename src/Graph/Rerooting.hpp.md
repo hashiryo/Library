@@ -13,27 +13,60 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/1595.test.cpp
+    title: test/aoj/1595.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/atcoder/abc136_d.test.cpp
-    title: test/atcoder/abc136_d.test.cpp
+    path: test/aoj/GRL_5_A.test.cpp
+    title: test/aoj/GRL_5_A.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc160_f.test.cpp
+    title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'
-    path: test/atcoder/abc167_d.test.cpp
-    title: test/atcoder/abc167_d.test.cpp
+    path: test/atcoder/abc220_f.test.cpp
+    title: test/atcoder/abc220_f.test.cpp
   - icon: ':x:'
-    path: test/atcoder/abc179_e.test.cpp
-    title: test/atcoder/abc179_e.test.cpp
+    path: test/atcoder/abc222_f.test.cpp
+    title: test/atcoder/abc222_f.test.cpp
   - icon: ':x:'
-    path: test/atcoder/abc241_e.test.cpp
-    title: test/atcoder/abc241_e.test.cpp
+    path: test/atcoder/abc223_g.rerooting.test.cpp
+    title: test/atcoder/abc223_g.rerooting.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/1211.test.cpp
-    title: test/yukicoder/1211.test.cpp
+    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/1242.test.cpp
-    title: test/yukicoder/1242.test.cpp
+    path: test/yosupo/tree_path_composite_sum.test.cpp
+    title: test/yosupo/tree_path_composite_sum.test.cpp
   - icon: ':x:'
-    path: test/yukicoder/2122.test.cpp
-    title: test/yukicoder/2122.test.cpp
+    path: test/yukicoder/1075.test.cpp
+    title: test/yukicoder/1075.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1124.test.cpp
+    title: test/yukicoder/1124.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1295.test.cpp
+    title: test/yukicoder/1295.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1333.test.cpp
+    title: test/yukicoder/1333.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1418.test.cpp
+    title: test/yukicoder/1418.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1494.test.cpp
+    title: test/yukicoder/1494.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1718.test.cpp
+    title: test/yukicoder/1718.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1976.test.cpp
+    title: test/yukicoder/1976.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/768.test.cpp
+    title: test/yukicoder/768.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/922.test.cpp
+    title: test/yukicoder/922.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -109,79 +142,88 @@ data:
     \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
     \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
     \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/FunctionalGraph.hpp\"\nclass FunctionalGraph {\n std::vector<int>\
-    \ t, rt;\n HeavyLightDecomposition hld;\npublic:\n FunctionalGraph(const std::vector<int>\
-    \ &to): t(to) {\n  const int n= t.size();\n  rt.assign(n, -1);\n  for (int u,\
-    \ w, v= n; v--;)\n   if (rt[v] == -1) {\n    for (rt[v]= -2, w= t[v];; rt[w]=\
-    \ -2, w= t[w])\n     if (assert(0 <= w && w < n); rt[w] != -1) {\n      if (rt[w]\
-    \ != -2) w= rt[w];\n      break;\n     }\n    for (u= v; rt[u] == -2; u= t[u])\
-    \ rt[u]= w;\n   }\n  Graph g(n);\n  for (int v= n; v--;) g[v]= {(rt[v] == v ?\
-    \ n : t[v]), v};\n  g.build(n + 1, 1), hld= HeavyLightDecomposition(g, n);\n }\n\
-    \ template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>, int>\
-    \ jump(int v, Int k) const {\n  int n= t.size(), d= hld.depth(v) - 1;\n  if (k\
-    \ <= d) return hld.jump(v, n, (int)k);\n  int b= t[v= rt[v]], l= (k-= d) % hld.depth(b);\n\
-    \  if (l == 0) return v;\n  return hld.jump(b, n, l - 1);\n }\n // ((a_0,...,a_{i-1})\
-    \ x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x 1)\n template <class Int>\
-    \ std::enable_if_t<std::is_convertible_v<int, Int>, std::array<std::pair<std::vector<int>,\
-    \ Int>, 3>> path(int v, Int k) const {\n  std::array<std::pair<std::vector<int>,\
-    \ Int>, 3> ret;\n  int n= t.size(), d= hld.depth(v) - 1;\n  if (ret[0].second=\
-    \ 1; k <= d) {\n   for (int e= k; e--; v= t[v]) ret[0].first.push_back(v);\n \
-    \  return ret;\n  }\n  for (int e= d; e--; v= t[v]) ret[0].first.push_back(v);\n\
-    \  int b= t[v= rt[v]], c= hld.depth(b), l= (k-= d) % c;\n  ret[1].second= k /\
-    \ c, ret[2].second= 1;\n  for (int e= c; e--; v= t[v]) ret[1].first.push_back(v);\n\
-    \  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n  return ret;\n }\n\
-    };\n"
-  code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\nclass FunctionalGraph\
-    \ {\n std::vector<int> t, rt;\n HeavyLightDecomposition hld;\npublic:\n FunctionalGraph(const\
-    \ std::vector<int> &to): t(to) {\n  const int n= t.size();\n  rt.assign(n, -1);\n\
-    \  for (int u, w, v= n; v--;)\n   if (rt[v] == -1) {\n    for (rt[v]= -2, w= t[v];;\
-    \ rt[w]= -2, w= t[w])\n     if (assert(0 <= w && w < n); rt[w] != -1) {\n    \
-    \  if (rt[w] != -2) w= rt[w];\n      break;\n     }\n    for (u= v; rt[u] == -2;\
-    \ u= t[u]) rt[u]= w;\n   }\n  Graph g(n);\n  for (int v= n; v--;) g[v]= {(rt[v]\
-    \ == v ? n : t[v]), v};\n  g.build(n + 1, 1), hld= HeavyLightDecomposition(g,\
-    \ n);\n }\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
-    \ int> jump(int v, Int k) const {\n  int n= t.size(), d= hld.depth(v) - 1;\n \
-    \ if (k <= d) return hld.jump(v, n, (int)k);\n  int b= t[v= rt[v]], l= (k-= d)\
-    \ % hld.depth(b);\n  if (l == 0) return v;\n  return hld.jump(b, n, l - 1);\n\
-    \ }\n // ((a_0,...,a_{i-1}) x 1, (a_i,...,a_{j-1}) x loop_num, (a_j,...,a_m) x\
-    \ 1)\n template <class Int> std::enable_if_t<std::is_convertible_v<int, Int>,\
-    \ std::array<std::pair<std::vector<int>, Int>, 3>> path(int v, Int k) const {\n\
-    \  std::array<std::pair<std::vector<int>, Int>, 3> ret;\n  int n= t.size(), d=\
-    \ hld.depth(v) - 1;\n  if (ret[0].second= 1; k <= d) {\n   for (int e= k; e--;\
-    \ v= t[v]) ret[0].first.push_back(v);\n   return ret;\n  }\n  for (int e= d; e--;\
-    \ v= t[v]) ret[0].first.push_back(v);\n  int b= t[v= rt[v]], c= hld.depth(b),\
-    \ l= (k-= d) % c;\n  ret[1].second= k / c, ret[2].second= 1;\n  for (int e= c;\
-    \ e--; v= t[v]) ret[1].first.push_back(v);\n  for (int e= l; e--; v= t[v]) ret[2].first.push_back(v);\n\
-    \  return ret;\n }\n};"
+    };\n#line 3 \"src/Graph/Rerooting.hpp\"\ntemplate <class T> class Rerooting {\n\
+    \ const HeavyLightDecomposition &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n\
+    \ template <class U, class F1, class F2, class F3> Rerooting(const Graph &g, const\
+    \ HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op, const U &ui,\
+    \ const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
+    \ F1, int, int, T>, \"put_edge(int,int,T) is not invocable\");\n  static_assert(std::is_invocable_r_v<U,\
+    \ F2, U, U>, \"op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T,\
+    \ F3, int, U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
+    \  dp.resize(n), dp1.resize(n), dp2.resize(n);\n  for (int i= n, v; i--;) {\n\
+    \   U sum= ui;\n   for (int e: g(v= hld.to_vertex(i)))\n    if (int u= g[e] -\
+    \ v; u != hld.parent(v)) sum= op(sum, put_edge(v, e, dp1[u]));\n   dp1[v]= put_vertex(v,\
+    \ sum);\n  }\n  for (int i= 0, v; i < n; ++i) {\n   auto gv= g(v= hld.to_vertex(i));\n\
+    \   int dg= gv.size();\n   std::vector<U> f(dg + 1), b(dg + 1);\n   for (int j=\
+    \ 0, e, u; j < dg; ++j) u= g[e= gv[j]] - v, f[j + 1]= put_edge(v, e, u == hld.parent(v)\
+    \ ? dp2[v] : dp1[u]);\n   f[0]= b[dg]= ui;\n   for (int j= dg; j--;) b[j]= op(f[j\
+    \ + 1], b[j + 1]);\n   for (int j= 0; j < dg; ++j) f[j + 1]= op(f[j], f[j + 1]);\n\
+    \   for (int j= 0; j < dg; ++j)\n    if (int u= g[gv[j]] - v; u != hld.parent(v))\
+    \ dp2[u]= put_vertex(v, op(f[j], b[j + 1]));\n   dp[v]= put_vertex(v, f[dg]);\n\
+    \  }\n }\n template <class U, class F1, class F2, class F3> Rerooting(const Graph\
+    \ &g, const F1 &put_edge, const F2 &op, const U &ui, const F3 &put_vertex): Rerooting(g,\
+    \ HeavyLightDecomposition(g), put_edge, op, ui, put_vertex) {}\n const T &operator[](int\
+    \ v) const { return dp[v]; }\n auto begin() const { return dp.cbegin(); }\n auto\
+    \ end() const { return dp.cend(); }\n const T &operator()(int root, int v) const\
+    \ { return root == v ? dp[v] : hld.in_subtree(root, v) ? dp2[hld.jump(v, root,\
+    \ 1)] : dp1[v]; }\n};\n"
+  code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\ntemplate\
+    \ <class T> class Rerooting {\n const HeavyLightDecomposition &hld;\n std::vector<T>\
+    \ dp, dp1, dp2;\npublic:\n template <class U, class F1, class F2, class F3> Rerooting(const\
+    \ Graph &g, const HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op,\
+    \ const U &ui, const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
+    \ F1, int, int, T>, \"put_edge(int,int,T) is not invocable\");\n  static_assert(std::is_invocable_r_v<U,\
+    \ F2, U, U>, \"op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T,\
+    \ F3, int, U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
+    \  dp.resize(n), dp1.resize(n), dp2.resize(n);\n  for (int i= n, v; i--;) {\n\
+    \   U sum= ui;\n   for (int e: g(v= hld.to_vertex(i)))\n    if (int u= g[e] -\
+    \ v; u != hld.parent(v)) sum= op(sum, put_edge(v, e, dp1[u]));\n   dp1[v]= put_vertex(v,\
+    \ sum);\n  }\n  for (int i= 0, v; i < n; ++i) {\n   auto gv= g(v= hld.to_vertex(i));\n\
+    \   int dg= gv.size();\n   std::vector<U> f(dg + 1), b(dg + 1);\n   for (int j=\
+    \ 0, e, u; j < dg; ++j) u= g[e= gv[j]] - v, f[j + 1]= put_edge(v, e, u == hld.parent(v)\
+    \ ? dp2[v] : dp1[u]);\n   f[0]= b[dg]= ui;\n   for (int j= dg; j--;) b[j]= op(f[j\
+    \ + 1], b[j + 1]);\n   for (int j= 0; j < dg; ++j) f[j + 1]= op(f[j], f[j + 1]);\n\
+    \   for (int j= 0; j < dg; ++j)\n    if (int u= g[gv[j]] - v; u != hld.parent(v))\
+    \ dp2[u]= put_vertex(v, op(f[j], b[j + 1]));\n   dp[v]= put_vertex(v, f[dg]);\n\
+    \  }\n }\n template <class U, class F1, class F2, class F3> Rerooting(const Graph\
+    \ &g, const F1 &put_edge, const F2 &op, const U &ui, const F3 &put_vertex): Rerooting(g,\
+    \ HeavyLightDecomposition(g), put_edge, op, ui, put_vertex) {}\n const T &operator[](int\
+    \ v) const { return dp[v]; }\n auto begin() const { return dp.cbegin(); }\n auto\
+    \ end() const { return dp.cend(); }\n const T &operator()(int root, int v) const\
+    \ { return root == v ? dp[v] : hld.in_subtree(root, v) ? dp2[hld.jump(v, root,\
+    \ 1)] : dp1[v]; }\n};"
   dependsOn:
   - src/Graph/HeavyLightDecomposition.hpp
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
   isVerificationFile: false
-  path: src/Graph/FunctionalGraph.hpp
+  path: src/Graph/Rerooting.hpp
   requiredBy: []
   timestamp: '2024-02-13 10:42:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/atcoder/abc241_e.test.cpp
-  - test/atcoder/abc179_e.test.cpp
-  - test/atcoder/abc167_d.test.cpp
-  - test/atcoder/abc136_d.test.cpp
-  - test/yukicoder/1211.test.cpp
-  - test/yukicoder/2122.test.cpp
-  - test/yukicoder/1242.test.cpp
-documentation_of: src/Graph/FunctionalGraph.hpp
+  - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc160_f.test.cpp
+  - test/atcoder/abc222_f.test.cpp
+  - test/atcoder/abc220_f.test.cpp
+  - test/yukicoder/1494.test.cpp
+  - test/yukicoder/768.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1418.test.cpp
+  - test/yukicoder/1976.test.cpp
+  - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1295.test.cpp
+  - test/yukicoder/1718.test.cpp
+  - test/yosupo/tree_path_composite_sum.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+documentation_of: src/Graph/Rerooting.hpp
 layout: document
-title: "Functional\u30B0\u30E9\u30D5"
+redirect_from:
+- /library/src/Graph/Rerooting.hpp
+- /library/src/Graph/Rerooting.hpp.html
+title: src/Graph/Rerooting.hpp
 ---
-
-## メンバ関数
-
-| 名前 | 概要 | 計算量 |
-| --- | --- | --- |
-| `FunctionalGraph(to)` | コンストラクタ. <br> 各頂点の移動先を表す配列を渡す． <br> 引数は `vector<int>`. ||
-| `jump(v,k)`          | 頂点 v から k ステップ 進んだ先の頂点を返す.  | $\mathcal{O}(\log N)$ |
-| `path(v,k)`          | 頂点 v から k ステップ 進むときの頂点のパスを返す.<br> ただし パスは (サイクルに入るまで, サイクル, 余り) の3つに分解し, それぞれ何周するかの情報も持たせる. (1,3 番目の成分は 高々 1周) <br> 返り値は `array<pair<vector<int>,Int>,3>` | 出力に線形 |
-
-## 問題例
-[AtCoder Beginner Contest 030 D - へんてこ辞書](https://atcoder.jp/contests/abc030/tasks/abc030_d)

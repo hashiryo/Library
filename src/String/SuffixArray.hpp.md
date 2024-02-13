@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SA.test.cpp
     title: test/atcoder/abc213_f.SA.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'

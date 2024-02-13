@@ -9,9 +9,6 @@ data:
   - icon: ':question:'
     path: src/Graph/BiConnectedComponents.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':warning:'
-    path: src/Graph/rerooting_old.hpp
-    title: src/Graph/rerooting_old.hpp
   - icon: ':question:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
@@ -34,7 +31,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
   - icon: ':x:'
@@ -244,7 +241,6 @@ data:
   path: src/Graph/Tree.hpp
   requiredBy:
   - src/Graph/BiConnectedComponents.hpp
-  - src/Graph/rerooting_old.hpp
   - src/String/SuffixTree.hpp
   timestamp: '2024-02-12 20:44:02+09:00'
   verificationStatus: LIBRARY_SOME_WA

@@ -186,6 +186,9 @@ data:
     path: test/atcoder/abc141_e.RH.test.cpp
     title: test/atcoder/abc141_e.RH.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc160_f.test.cpp
+    title: test/atcoder/abc160_f.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc162_e.test.cpp
     title: test/atcoder/abc162_e.test.cpp
   - icon: ':heavy_check_mark:'
@@ -468,6 +471,9 @@ data:
     path: test/yosupo/range_affine_range_sum.WBT.test.cpp
     title: test/yosupo/range_affine_range_sum.WBT.test.cpp
   - icon: ':x:'
+    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+  - icon: ':x:'
     path: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
     title: test/yosupo/sharp_p_subset_sum.PSET.test.cpp
   - icon: ':x:'
@@ -525,6 +531,9 @@ data:
     path: test/yosupo/tetration_mod.test.cpp
     title: test/yosupo/tetration_mod.test.cpp
   - icon: ':x:'
+    path: test/yosupo/tree_path_composite_sum.test.cpp
+    title: test/yosupo/tree_path_composite_sum.test.cpp
+  - icon: ':x:'
     path: test/yosupo/vertex_set_path_composite.HLD.test.cpp
     title: test/yosupo/vertex_set_path_composite.HLD.test.cpp
   - icon: ':x:'
@@ -534,11 +543,17 @@ data:
     path: test/yukicoder/1019.numth.test.cpp
     title: test/yukicoder/1019.numth.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1075.test.cpp
+    title: test/yukicoder/1075.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/1080.sparse_FPS.test.cpp
     title: test/yukicoder/1080.sparse_FPS.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1080.test.cpp
     title: test/yukicoder/1080.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1124.test.cpp
+    title: test/yukicoder/1124.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1142.test.cpp
     title: test/yukicoder/1142.test.cpp
@@ -563,6 +578,9 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1303.test.cpp
     title: test/yukicoder/1303.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1333.test.cpp
+    title: test/yukicoder/1333.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1339.test.cpp
     title: test/yukicoder/1339.test.cpp
@@ -867,6 +885,7 @@ data:
   - test/atcoder/abc272_f.RH.test.cpp
   - test/atcoder/arc115_e.test.cpp
   - test/atcoder/abc256_f.SplayTree.test.cpp
+  - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc256_f.SegDual.test.cpp
   - test/atcoder/abc162_e.test.cpp
   - test/atcoder/abc179_d.test.cpp
@@ -898,9 +917,11 @@ data:
   - test/yukicoder/502.test.cpp
   - test/yukicoder/1533.test.cpp
   - test/yukicoder/1142.test.cpp
+  - test/yukicoder/1124.test.cpp
   - test/yukicoder/685.test.cpp
   - test/yukicoder/315.test.cpp
   - test/yukicoder/125.phi.test.cpp
+  - test/yukicoder/1075.test.cpp
   - test/yukicoder/2454.RH.test.cpp
   - test/yukicoder/1907.test.cpp
   - test/yukicoder/1573.Dirichlet.test.cpp
@@ -942,6 +963,7 @@ data:
   - test/yukicoder/886.numth.test.cpp
   - test/yukicoder/1303.test.cpp
   - test/yukicoder/737.test.cpp
+  - test/yukicoder/1333.test.cpp
   - test/yukicoder/1019.numth.test.cpp
   - test/yukicoder/1848.zalgo.test.cpp
   - test/yukicoder/3046.test.cpp
@@ -954,6 +976,7 @@ data:
   - test/yukicoder/803.test.cpp
   - test/yukicoder/1750.test.cpp
   - test/yosupo/polynomial_composite_set_power_series.test.cpp
+  - test/yosupo/tree_path_composite_sum.test.cpp
   - test/yosupo/sum_of_exponential_times_polynomial.test.cpp
   - test/yosupo/frequency_table_of_tree_distance.test.cpp
   - test/yosupo/characteristic_polynomial.test.cpp
@@ -1015,6 +1038,7 @@ data:
   - test/yosupo/tetration_mod.test.cpp
   - test/yosupo/binomial_coefficient.test.cpp
   - test/yosupo/pow_of_FPS.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
   - test/yosupo/convolution_mod_2_64.test.cpp
   - test/yosupo/sqrt_of_sparse_FPS.test.cpp
   - test/yosupo/hafnian_of_matrix.test.cpp

@@ -12,10 +12,22 @@ data:
   - icon: ':question:'
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
+  - icon: ':question:'
+    path: src/Graph/Rerooting.hpp
+    title: src/Graph/Rerooting.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/aoj/1595.test.cpp
+    title: test/aoj/1595.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_5_A.test.cpp
+    title: test/aoj/GRL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/atcoder/abc160_f.test.cpp
+    title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
@@ -23,8 +35,29 @@ data:
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
   - icon: ':x:'
+    path: test/atcoder/abc220_f.test.cpp
+    title: test/atcoder/abc220_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc222_f.test.cpp
+    title: test/atcoder/abc222_f.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/abc223_g.rerooting.test.cpp
+    title: test/atcoder/abc223_g.rerooting.test.cpp
+  - icon: ':x:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+    title: test/yosupo/rooted_tree_isomorphism_classification.test.cpp
+  - icon: ':x:'
+    path: test/yosupo/tree_path_composite_sum.test.cpp
+    title: test/yosupo/tree_path_composite_sum.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1075.test.cpp
+    title: test/yukicoder/1075.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1124.test.cpp
+    title: test/yukicoder/1124.test.cpp
   - icon: ':x:'
     path: test/yukicoder/1211.test.cpp
     title: test/yukicoder/1211.test.cpp
@@ -32,8 +65,32 @@ data:
     path: test/yukicoder/1242.test.cpp
     title: test/yukicoder/1242.test.cpp
   - icon: ':x:'
+    path: test/yukicoder/1295.test.cpp
+    title: test/yukicoder/1295.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1333.test.cpp
+    title: test/yukicoder/1333.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1418.test.cpp
+    title: test/yukicoder/1418.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1494.test.cpp
+    title: test/yukicoder/1494.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1718.test.cpp
+    title: test/yukicoder/1718.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/1976.test.cpp
+    title: test/yukicoder/1976.test.cpp
+  - icon: ':x:'
     path: test/yukicoder/2122.test.cpp
     title: test/yukicoder/2122.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/768.test.cpp
+    title: test/yukicoder/768.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/922.test.cpp
+    title: test/yukicoder/922.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -53,58 +110,74 @@ data:
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
     \ const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
     \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
-    \ 3 \"src/Graph/Graph.hpp\"\nstruct Graph {\n struct Edge {\n  int s, d;\n  int\
-    \ operator-(int v) const { return s ^ d ^ v; }\n  friend std::ostream &operator<<(std::ostream\
-    \ &os, const Edge &e) { return os << '(' << e.s << \", \" << e.d << ')'; }\n };\n\
-    \ size_t n;\n std::vector<Edge> es;\n std::vector<int> c, p;\n Graph(int n= 0):\
-    \ n(n) {}\n void add_edge(int u, int v) { es.push_back({u, v}); }\n void build(bool\
-    \ undirect) {\n  if (p.assign(n + 1, 0), c.resize(es.size() << undirect); undirect)\
-    \ {\n   for (auto [u, v]: es) ++p[u], ++p[v];\n   for (int i= 0; i < n; ++i) p[i\
-    \ + 1]+= p[i];\n   for (int i= es.size(); i--;) c[--p[es[i].s]]= i, c[--p[es[i].d]]=\
-    \ i;\n  } else {\n   for (auto [u, v]: es) ++p[u];\n   for (int i= 0; i < n; ++i)\
-    \ p[i + 1]+= p[i];\n   for (int i= es.size(); i--;) c[--p[es[i].s]]= i;\n  }\n\
-    \ }\n size_t edge_size() const { return es.size(); }\n size_t vertex_size() const\
-    \ { return n; }\n Edge &operator[](int e) { return es[e]; }\n const Edge &operator[](int\
-    \ e) const { return es[e]; }\n ListRange<int> operator()(int u) { return {c.begin()\
+    \ 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s, d;\n Edge(int s= 0, int d=\
+    \ 0): s(s), d(d) {}\n Edge &operator--() { return --s, --d, *this; }\n int operator-(int\
+    \ v) const { return s ^ d ^ v; }\n friend std::istream &operator>>(std::istream\
+    \ &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend std::ostream &operator<<(std::ostream\
+    \ &os, const Edge &e) { return os << '(' << e.s << \", \" << e.d << ')'; }\n};\n\
+    struct Graph: public std::vector<Edge> {\n std::vector<int> c, p;\n using std::vector<Edge>::vector;\n\
+    \ void build(int n, bool direct) {\n  if (p.assign(n + 1, 0), c.resize(size()\
+    \ << !direct); direct) {\n   for (auto [u, v]: *this) ++p[u];\n   for (int i=\
+    \ 0; i < n; ++i) p[i + 1]+= p[i];\n   for (int i= size(); i--;) c[--p[(*this)[i].s]]=\
+    \ i;\n  } else {\n   for (auto [u, v]: *this) ++p[u], ++p[v];\n   for (int i=\
+    \ 0; i < n; ++i) p[i + 1]+= p[i];\n   for (int i= size(); i--;) c[--p[(*this)[i].s]]=\
+    \ i, c[--p[(*this)[i].d]]= i;\n  }\n }\n size_t edge_size() const { return size();\
+    \ }\n size_t vertex_size() const { return p.size() - 1; }\n ListRange<int> operator()(int\
+    \ u) { return {c.begin() + p[u], c.begin() + p[u + 1]}; }\n ConstListRange<int>\
+    \ operator()(int u) const { return {c.cbegin() + p[u], c.cbegin() + p[u + 1]};\
+    \ }\n};\n"
+  code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\nstruct Edge {\n int\
+    \ s, d;\n Edge(int s= 0, int d= 0): s(s), d(d) {}\n Edge &operator--() { return\
+    \ --s, --d, *this; }\n int operator-(int v) const { return s ^ d ^ v; }\n friend\
+    \ std::istream &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d,\
+    \ is; }\n friend std::ostream &operator<<(std::ostream &os, const Edge &e) { return\
+    \ os << '(' << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
+    \ {\n std::vector<int> c, p;\n using std::vector<Edge>::vector;\n void build(int\
+    \ n, bool direct) {\n  if (p.assign(n + 1, 0), c.resize(size() << !direct); direct)\
+    \ {\n   for (auto [u, v]: *this) ++p[u];\n   for (int i= 0; i < n; ++i) p[i +\
+    \ 1]+= p[i];\n   for (int i= size(); i--;) c[--p[(*this)[i].s]]= i;\n  } else\
+    \ {\n   for (auto [u, v]: *this) ++p[u], ++p[v];\n   for (int i= 0; i < n; ++i)\
+    \ p[i + 1]+= p[i];\n   for (int i= size(); i--;) c[--p[(*this)[i].s]]= i, c[--p[(*this)[i].d]]=\
+    \ i;\n  }\n }\n size_t edge_size() const { return size(); }\n size_t vertex_size()\
+    \ const { return p.size() - 1; }\n ListRange<int> operator()(int u) { return {c.begin()\
     \ + p[u], c.begin() + p[u + 1]}; }\n ConstListRange<int> operator()(int u) const\
-    \ { return {c.cbegin() + p[u], c.cbegin() + p[u + 1]}; }\n auto begin() { return\
-    \ es.begin(); }\n auto begin() const { return es.cbegin(); }\n auto end() { return\
-    \ es.end(); }\n auto end() const { return es.cend(); }\n};\n"
-  code: "#pragma once\n#include \"src/Internal/ListRange.hpp\"\nstruct Graph {\n struct\
-    \ Edge {\n  int s, d;\n  int operator-(int v) const { return s ^ d ^ v; }\n  friend\
-    \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
-    \ << e.s << \", \" << e.d << ')'; }\n };\n size_t n;\n std::vector<Edge> es;\n\
-    \ std::vector<int> c, p;\n Graph(int n= 0): n(n) {}\n void add_edge(int u, int\
-    \ v) { es.push_back({u, v}); }\n void build(bool undirect) {\n  if (p.assign(n\
-    \ + 1, 0), c.resize(es.size() << undirect); undirect) {\n   for (auto [u, v]:\
-    \ es) ++p[u], ++p[v];\n   for (int i= 0; i < n; ++i) p[i + 1]+= p[i];\n   for\
-    \ (int i= es.size(); i--;) c[--p[es[i].s]]= i, c[--p[es[i].d]]= i;\n  } else {\n\
-    \   for (auto [u, v]: es) ++p[u];\n   for (int i= 0; i < n; ++i) p[i + 1]+= p[i];\n\
-    \   for (int i= es.size(); i--;) c[--p[es[i].s]]= i;\n  }\n }\n size_t edge_size()\
-    \ const { return es.size(); }\n size_t vertex_size() const { return n; }\n Edge\
-    \ &operator[](int e) { return es[e]; }\n const Edge &operator[](int e) const {\
-    \ return es[e]; }\n ListRange<int> operator()(int u) { return {c.begin() + p[u],\
-    \ c.begin() + p[u + 1]}; }\n ConstListRange<int> operator()(int u) const { return\
-    \ {c.cbegin() + p[u], c.cbegin() + p[u + 1]}; }\n auto begin() { return es.begin();\
-    \ }\n auto begin() const { return es.cbegin(); }\n auto end() { return es.end();\
-    \ }\n auto end() const { return es.cend(); }\n};"
+    \ { return {c.cbegin() + p[u], c.cbegin() + p[u + 1]}; }\n};"
   dependsOn:
   - src/Internal/ListRange.hpp
   isVerificationFile: false
   path: src/Graph/Graph.hpp
   requiredBy:
+  - src/Graph/Rerooting.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/HeavyLightDecomposition.hpp
-  timestamp: '2024-02-12 20:44:02+09:00'
+  timestamp: '2024-02-13 10:42:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/aoj/1595.test.cpp
+  - test/aoj/GRL_5_A.test.cpp
   - test/atcoder/abc241_e.test.cpp
+  - test/atcoder/abc223_g.rerooting.test.cpp
+  - test/atcoder/abc160_f.test.cpp
   - test/atcoder/abc179_e.test.cpp
   - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/abc222_f.test.cpp
   - test/atcoder/abc136_d.test.cpp
+  - test/atcoder/abc220_f.test.cpp
+  - test/yukicoder/1494.test.cpp
+  - test/yukicoder/768.test.cpp
+  - test/yukicoder/1124.test.cpp
+  - test/yukicoder/1075.test.cpp
+  - test/yukicoder/922.test.cpp
+  - test/yukicoder/1418.test.cpp
+  - test/yukicoder/1976.test.cpp
   - test/yukicoder/1211.test.cpp
   - test/yukicoder/2122.test.cpp
+  - test/yukicoder/1333.test.cpp
+  - test/yukicoder/1295.test.cpp
   - test/yukicoder/1242.test.cpp
+  - test/yukicoder/1718.test.cpp
+  - test/yosupo/tree_path_composite_sum.test.cpp
+  - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Graph/Graph.hpp
 layout: document
 redirect_from:
