@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
@@ -28,16 +28,16 @@ data:
     \ bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
     \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
-    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
-    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
+    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
+    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
     \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
-    \ 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray {\n\
-    \ std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
+    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
+    #line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray\
+    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
     \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
     \ {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
     \ operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i\
@@ -57,11 +57,11 @@ data:
     \ -1; p < k; ++p)\n     for (int v= csr[p], j= sep[v], u; j < sep[v + 1]; ++j)\n\
     \      if (dat[u= g[j]] >= 0) dat[u]= -1, csr[k++]= u;\n    pos.push_back(k);\n\
     \   }\n  for (int i= pos.size() - 1; i--;)\n   while (k > pos[i]) id[csr[--k]]=\
-    \ i;\n }\n int components_num() const { return pos.size() - 1; }\n const ListRange<int>\
+    \ i;\n }\n int components_num() const { return pos.size() - 1; }\n ConstListRange<int>\
     \ block(int k) const { return {csr.cbegin() + pos[k], csr.cbegin() + pos[k + 1]};\
-    \ }\n int belong(int i) const { return id[i]; }\n const CsrArray<int> dag() const\
-    \ {\n  std::vector<std::array<int, 2>> es_;\n  for (auto [s, d]: es)\n   if (s=\
-    \ id[s], d= id[d]; s != d) es_.push_back({s, d});\n  std::sort(es_.begin(), es_.end()),\
+    \ }\n int belong(int i) const { return id[i]; }\n CsrArray<int> dag() const {\n\
+    \  std::vector<std::array<int, 2>> es_;\n  for (auto [s, d]: es)\n   if (s= id[s],\
+    \ d= id[d]; s != d) es_.push_back({s, d});\n  std::sort(es_.begin(), es_.end()),\
     \ es_.erase(std::unique(es_.begin(), es_.end()), es_.end());\n  std::vector<int>\
     \ g(es_.size()), p(pos.size());\n  for (auto [s, d]: es_) ++p[s];\n  std::partial_sum(p.begin(),\
     \ p.end(), p.begin());\n  for (auto [s, d]: es_) g[--p[s]]= d;\n  return {g, p};\n\
@@ -99,7 +99,7 @@ data:
   isVerificationFile: false
   path: src/Math/TwoSatisfiability.hpp
   requiredBy: []
-  timestamp: '2024-02-12 20:44:02+09:00'
+  timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yosupo/two_sat.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   - icon: ':x:'
@@ -30,16 +30,16 @@ data:
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
-    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
-    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
+    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
+    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
     \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
-    \ 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray {\n\
-    \ std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
+    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
+    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
+    #line 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray\
+    \ {\n std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
     \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
     \ {}\n size_t size() const { return pos.size() - 1; }\n const ConstListRange<T>\
     \ operator[](int i) const { return {csr.cbegin() + pos[i], csr.cbegin() + pos[i\
@@ -127,7 +127,7 @@ data:
   isVerificationFile: true
   path: test/yosupo/bipartitematching.bipatite_graph.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 20:44:02+09:00'
+  timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yosupo/bipartitematching.bipatite_graph.test.cpp

@@ -13,7 +13,7 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
   - icon: ':heavy_check_mark:'
@@ -79,17 +79,17 @@ data:
     \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
     \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
     \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
-    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
-    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
+    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
+    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
     \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
-    \ 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s, d;\n Edge(int s= 0, int d=\
-    \ 0): s(s), d(d) {}\n Edge &operator--() { return --s, --d, *this; }\n int operator-(int\
-    \ v) const { return s ^ d ^ v; }\n friend std::istream &operator>>(std::istream\
+    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
+    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
+    #line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s, d;\n Edge(int s= 0, int\
+    \ d= 0): s(s), d(d) {}\n Edge &operator--() { return --s, --d, *this; }\n int\
+    \ operator-(int v) const { return s ^ d ^ v; }\n friend std::istream &operator>>(std::istream\
     \ &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend std::ostream &operator<<(std::ostream\
     \ &os, const Edge &e) { return os << '(' << e.s << \", \" << e.d << ')'; }\n};\n\
     struct Graph: public std::vector<Edge> {\n std::vector<int> c, p;\n using std::vector<Edge>::vector;\n\
@@ -142,14 +142,16 @@ data:
     \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
     \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
     \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/Rerooting.hpp\"\ntemplate <class T> class Rerooting {\n\
-    \ const HeavyLightDecomposition &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n\
-    \ template <class U, class F1, class F2, class F3> Rerooting(const Graph &g, const\
-    \ HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op, const U &ui,\
-    \ const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
-    \ F1, int, int, T>, \"put_edge(int,int,T) is not invocable\");\n  static_assert(std::is_invocable_r_v<U,\
-    \ F2, U, U>, \"op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T,\
-    \ F3, int, U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
+    };\n#line 3 \"src/Graph/Rerooting.hpp\"\n// put_edge(int v, int e, T t) -> U\n\
+    // op(U l, U r) -> U\n// ui(:U) is the identity element of op\n// put_vertex(int\
+    \ v, U sum) -> T\ntemplate <class T> class Rerooting {\n const HeavyLightDecomposition\
+    \ &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template <class U, class F1,\
+    \ class F2, class F3> Rerooting(const Graph &g, const HeavyLightDecomposition\
+    \ &hld, const F1 &put_edge, const F2 &op, const U &ui, const F3 &put_vertex):\
+    \ hld(hld) {\n  static_assert(std::is_invocable_r_v<U, F1, int, int, T>, \"put_edge(int,int,T)\
+    \ is not invocable\");\n  static_assert(std::is_invocable_r_v<U, F2, U, U>, \"\
+    op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T, F3, int,\
+    \ U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
     \  dp.resize(n), dp1.resize(n), dp2.resize(n);\n  for (int i= n, v; i--;) {\n\
     \   U sum= ui;\n   for (int e: g(v= hld.to_vertex(i)))\n    if (int u= g[e] -\
     \ v; u != hld.parent(v)) sum= op(sum, put_edge(v, e, dp1[u]));\n   dp1[v]= put_vertex(v,\
@@ -167,11 +169,13 @@ data:
     \ end() const { return dp.cend(); }\n const T &operator()(int root, int v) const\
     \ { return root == v ? dp[v] : hld.in_subtree(root, v) ? dp2[hld.jump(v, root,\
     \ 1)] : dp1[v]; }\n};\n"
-  code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\ntemplate\
-    \ <class T> class Rerooting {\n const HeavyLightDecomposition &hld;\n std::vector<T>\
-    \ dp, dp1, dp2;\npublic:\n template <class U, class F1, class F2, class F3> Rerooting(const\
-    \ Graph &g, const HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op,\
-    \ const U &ui, const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
+  code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\n// put_edge(int\
+    \ v, int e, T t) -> U\n// op(U l, U r) -> U\n// ui(:U) is the identity element\
+    \ of op\n// put_vertex(int v, U sum) -> T\ntemplate <class T> class Rerooting\
+    \ {\n const HeavyLightDecomposition &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n\
+    \ template <class U, class F1, class F2, class F3> Rerooting(const Graph &g, const\
+    \ HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op, const U &ui,\
+    \ const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
     \ F1, int, int, T>, \"put_edge(int,int,T) is not invocable\");\n  static_assert(std::is_invocable_r_v<U,\
     \ F2, U, U>, \"op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T,\
     \ F3, int, U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
@@ -199,7 +203,7 @@ data:
   isVerificationFile: false
   path: src/Graph/Rerooting.hpp
   requiredBy: []
-  timestamp: '2024-02-13 10:42:36+09:00'
+  timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1595.test.cpp
@@ -222,8 +226,44 @@ data:
   - test/yosupo/rooted_tree_isomorphism_classification.test.cpp
 documentation_of: src/Graph/Rerooting.hpp
 layout: document
-redirect_from:
-- /library/src/Graph/Rerooting.hpp
-- /library/src/Graph/Rerooting.hpp.html
-title: src/Graph/Rerooting.hpp
+title: "\u5168\u65B9\u4F4D\u6728DP"
 ---
+
+## `Rerooting<T>` クラス
+全方位木DPの値(型 : `T` )が入っている配列だと思って使う. (`operator[](int v)`, `begin()`, `end()` がある. )
+
+### コンストラクタ
+```c++
+Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, F1 put_edge, F2 op, U ui, F3 put_vertex) // (1)
+Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, HeavyLightDecomposition hld, F1 put_edge, F2 op, U ui, F3 put_vertex) // (2)
+```
+|引数|概要|
+|---|---|
+|`Graph g`|[グラフクラス](src/Graph/Graph.hpp)|
+|`HeavyLightDecomposition hld`|g を [重軽分解](src/Graph/HeavyLightDecomposition.hpp)したもの. <br> 省略できる (1). (ただし 内部で作ってる) |
+|`put_edge(int v, int e, T t) -> U`| 頂点 v と v から出る辺 e の情報によってクラス `T` の値 `t` をモノイド `U` の元に変換|
+|`op(U l, U r) -> U`|モノイド `U` の二項演算|
+|`U ui`|モノイド `U` の単位元|
+|`put_vertex(int v, U sum) -> T`| 頂点 v でモノイド `U` の総積をクラス `T` の値に変換|
+
+### メンバ関数
+|名前|概要|
+|---|---|
+|`operator[](int v)`| 頂点 v についての全方位木DPの値を返す.|
+|`begin()`|全方位木DPの値配列のイテレータ.|
+|`end()`|全方位木DPの値配列のイテレータ.|
+|`operator()(int root, int v)`|頂点 root が根である場合の 頂点 v を根とする部分木のDP値を返す.|
+
+## 問題例
+[AtCoder Regular Contest 097 F - Monochrome Cat](https://atcoder.jp/contests/arc097/tasks/arc097_d) \
+[AtCoder Regular Contest 022 C - ロミオとジュリエット](https://atcoder.jp/contests/arc022/tasks/arc022_3) \
+[AtCoder Regular Contest 028 C - 高橋王国の分割統治](https://atcoder.jp/contests/arc028/tasks/arc028_3) \
+[Educational DP Contest V - Subtree](https://atcoder.jp/contests/dp/tasks/dp_v) \
+[Typical DP Contest N - 木](https://atcoder.jp/contests/tdpc/tasks/tdpc_tree) \
+[square869120Contest #4 D - Driving on a Tree](https://atcoder.jp/contests/s8pc-4/tasks/s8pc_4_d)\
+[NJPC2017 E - 限界集落](https://atcoder.jp/contests/njpc2017/tasks/njpc2017_e)\
+[第二回全国統一プログラミング王決定戦本戦 D - 木、](https://atcoder.jp/contests/nikkei2019-2-final/tasks/nikkei2019_2_final_d) (根付き木ハッシュ) \
+[yukicoder No.1153 ねこちゃんゲーム](https://yukicoder.me/problems/no/1153) (sp judge)
+
+## 参考
+[https://trap.jp/post/1702/](https://trap.jp/post/1702/)

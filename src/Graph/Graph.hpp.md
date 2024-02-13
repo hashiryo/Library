@@ -14,9 +14,9 @@ data:
     title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
     path: src/Graph/Rerooting.hpp
-    title: src/Graph/Rerooting.hpp
+    title: "\u5168\u65B9\u4F4D\u6728DP"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
   - icon: ':heavy_check_mark:'
@@ -102,14 +102,14 @@ data:
     \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
     \ { return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
     \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
-    \  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const T &x)\
-    \ { os << \", \" << x; }), os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
+    \  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i) os << (i ? \", \" : \"\
+    \") << r[i];\n  return os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
     \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
     \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
     \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
+    \ const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i <\
+    \ e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n#line\
     \ 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s, d;\n Edge(int s= 0, int d=\
     \ 0): s(s), d(d) {}\n Edge &operator--() { return --s, --d, *this; }\n int operator-(int\
     \ v) const { return s ^ d ^ v; }\n friend std::istream &operator>>(std::istream\
@@ -150,7 +150,7 @@ data:
   - src/Graph/Rerooting.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/HeavyLightDecomposition.hpp
-  timestamp: '2024-02-13 10:42:36+09:00'
+  timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1595.test.cpp

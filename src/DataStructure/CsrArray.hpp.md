@@ -9,14 +9,14 @@ data:
   - icon: ':x:'
     path: src/Graph/BipartiteGraph.hpp
     title: "(\u6697\u9ED9\u7684\u306A)\u4E8C\u90E8\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':x:'
     path: src/Math/TwoSatisfiability.hpp
     title: 2-SAT
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
   - icon: ':x:'
@@ -45,7 +45,7 @@ data:
     title: test/yukicoder/1813.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
@@ -54,14 +54,14 @@ data:
     \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
     \ { return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
     \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
-    \  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const T &x)\
-    \ { os << \", \" << x; }), os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
+    \  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i) os << (i ? \", \" : \"\
+    \") << r[i];\n  return os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
     \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
     \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
     \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
+    \ const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i <\
+    \ e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n#line\
     \ 3 \"src/DataStructure/CsrArray.hpp\"\ntemplate <class T> class CsrArray {\n\
     \ std::vector<T> csr;\n std::vector<int> pos;\npublic:\n CsrArray()= default;\n\
     \ CsrArray(const std::vector<T> &c, const std::vector<int> &p): csr(c), pos(p)\
@@ -82,8 +82,8 @@ data:
   - src/Graph/StronglyConnectedComponents.hpp
   - src/Graph/BipartiteGraph.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-12 20:44:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-13 11:50:07+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/3168.bm.test.cpp
   - test/aoj/0366.test.cpp

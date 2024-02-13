@@ -5,7 +5,7 @@ data:
     path: src/Internal/ListRange.hpp
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
       \u3084\u3064"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/CumSumQuotient.hpp
     title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
   - icon: ':question:'
@@ -13,10 +13,10 @@ data:
     title: "\u7D20\u6570\u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':x:'
@@ -27,7 +27,7 @@ data:
     title: test/yosupo/sum_of_totient_function.mul_sum.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/NumberTheory/enumerate_primes.hpp\"\n#include <algorithm>\n\
@@ -37,15 +37,15 @@ data:
     \ Iterator begin() const { return bg; }\n Iterator end() const { return ed; }\n\
     \ size_t size() const { return std::distance(bg, ed); }\n T &operator[](int i)\
     \ const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
-    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
-    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
+    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
+    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
     \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
-    \ 5 \"src/NumberTheory/enumerate_primes.hpp\"\nnamespace nt_internal {\nusing\
+    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
+    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
+    #line 5 \"src/NumberTheory/enumerate_primes.hpp\"\nnamespace nt_internal {\nusing\
     \ namespace std;\nvector<int> ps, lf;\nvoid sieve(int N) {\n static int n= 2;\n\
     \ if (n > N) return;\n if (lf.resize((N + 1) >> 1); n == 2) ps.push_back(n++);\n\
     \ int M= (N - 1) / 2;\n for (int j= 1, e= ps.size(); j < e; ++j) {\n  int p= ps[j];\n\
@@ -156,8 +156,8 @@ data:
   isVerificationFile: false
   path: src/NumberTheory/sum_on_primes.hpp
   requiredBy: []
-  timestamp: '2024-02-12 20:44:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2024-02-13 11:50:07+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/atcoder/abc172_d.mul_sum.test.cpp
   - test/atcoder/abc179_c.mul_sum.test.cpp

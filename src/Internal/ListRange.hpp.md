@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/DataStructure/CsrArray.hpp
     title: "CSR\u5F62\u5F0F"
   - icon: ':heavy_check_mark:'
@@ -28,8 +28,8 @@ data:
     title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
     path: src/Graph/Rerooting.hpp
-    title: src/Graph/Rerooting.hpp
-  - icon: ':x:'
+    title: "\u5168\u65B9\u4F4D\u6728DP"
+  - icon: ':question:'
     path: src/Graph/StronglyConnectedComponents.hpp
     title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
   - icon: ':question:'
@@ -41,7 +41,7 @@ data:
   - icon: ':question:'
     path: src/NumberTheory/enumerate_primes.hpp
     title: "\u7D20\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':x:'
     path: src/NumberTheory/sum_on_primes.hpp
     title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
   - icon: ':question:'
@@ -55,7 +55,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/0273.test.cpp
     title: test/aoj/0273.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/0366.test.cpp
     title: test/aoj/0366.test.cpp
   - icon: ':heavy_check_mark:'
@@ -70,7 +70,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/1226.test.cpp
     title: test/aoj/1226.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
   - icon: ':heavy_check_mark:'
@@ -112,25 +112,25 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.mul_sum.test.cpp
     title: test/atcoder/abc172_d.mul_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc172_d.numth.test.cpp
     title: test/atcoder/abc172_d.numth.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc177_e.gcd_conv.test.cpp
     title: test/atcoder/abc177_e.gcd_conv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc179_c.mul_sum.test.cpp
     title: test/atcoder/abc179_c.mul_sum.test.cpp
   - icon: ':x:'
     path: test/atcoder/abc179_e.test.cpp
     title: test/atcoder/abc179_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc202_e.test.cpp
     title: test/atcoder/abc202_e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/atcoder/abc213_f.SuffixTree.test.cpp
     title: test/atcoder/abc213_f.SuffixTree.test.cpp
   - icon: ':x:'
@@ -306,27 +306,27 @@ data:
     \ const { return bg; }\n Iterator end() const { return ed; }\n size_t size() const\
     \ { return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
     \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
-    \  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const T &x)\
-    \ { os << \", \" << x; }), os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
+    \  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i) os << (i ? \", \" : \"\
+    \") << r[i];\n  return os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
     \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
     \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
     \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n"
+    \ const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i <\
+    \ e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n"
   code: "#pragma once\n#include <vector>\n#include <iostream>\n#include <iterator>\n\
     template <class T> struct ListRange {\n using Iterator= typename std::vector<T>::iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
-    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
-    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
+    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
+    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
     \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};"
+    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
+    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};"
   dependsOn: []
   isVerificationFile: false
   path: src/Internal/ListRange.hpp
@@ -347,7 +347,7 @@ data:
   - src/NumberTheory/sum_on_primes.hpp
   - src/String/SuffixTree.hpp
   - src/Math/TwoSatisfiability.hpp
-  timestamp: '2024-02-12 20:44:02+09:00'
+  timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/1595.test.cpp

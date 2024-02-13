@@ -12,7 +12,7 @@ data:
     - icon: ':question:'
       path: src/DataStructure/BinaryIndexedTree_RangeAdd.hpp
       title: "Binary-Indexed-Tree(\u533A\u9593\u52A0\u7B97)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/DataStructure/CsrArray.hpp
       title: "CSR\u5F62\u5F0F"
     - icon: ':heavy_check_mark:'
@@ -82,7 +82,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/UnionFind_Potential.hpp
       title: "Union-Find(\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: src/DataStructure/WaveletMatrix.hpp
       title: "Wavelet\u884C\u5217"
     - icon: ':question:'
@@ -231,8 +231,8 @@ data:
       title: "\u533A\u9593\u306B\u8FBA\u3092\u5F35\u308B\u30C6\u30AF"
     - icon: ':question:'
       path: src/Graph/Rerooting.hpp
-      title: src/Graph/Rerooting.hpp
-    - icon: ':x:'
+      title: "\u5168\u65B9\u4F4D\u6728DP"
+    - icon: ':question:'
       path: src/Graph/StronglyConnectedComponents.hpp
       title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3"
     - icon: ':question:'
@@ -380,7 +380,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/ArrayOnDivisors.hpp
       title: "\u7D04\u6570\u914D\u5217"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/NumberTheory/CumSumQuotient.hpp
       title: "$\\lfloor N/x \\rfloor$ \u306E\u914D\u5217"
     - icon: ':question:'
@@ -401,7 +401,7 @@ data:
     - icon: ':question:'
       path: src/NumberTheory/is_prime.hpp
       title: "\u7D20\u6570\u5224\u5B9A"
-    - icon: ':question:'
+    - icon: ':x:'
       path: src/NumberTheory/sum_on_primes.hpp
       title: "\u7D20\u6570\u4E0A\u306E\u7D2F\u7A4D\u548C"
     - icon: ':question:'
@@ -518,7 +518,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/0356.test.cpp
       title: test/aoj/0356.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/0366.test.cpp
       title: test/aoj/0366.test.cpp
     - icon: ':heavy_check_mark:'
@@ -632,7 +632,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/1549.WM.test.cpp
       title: test/aoj/1549.WM.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/1595.test.cpp
       title: test/aoj/1595.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1150,16 +1150,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc172_d.enum_quo.test.cpp
       title: test/atcoder/abc172_d.enum_quo.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc172_d.mul_sum.test.cpp
       title: test/atcoder/abc172_d.mul_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc172_d.numth.test.cpp
       title: test/atcoder/abc172_d.numth.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc174_f.WM.test.cpp
       title: test/atcoder/abc174_f.WM.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc177_e.gcd_conv.test.cpp
       title: test/atcoder/abc177_e.gcd_conv.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1168,7 +1168,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc179_c.enum_quo.test.cpp
       title: test/atcoder/abc179_c.enum_quo.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc179_c.mul_sum.test.cpp
       title: test/atcoder/abc179_c.mul_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1186,7 +1186,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc199_d.test.cpp
       title: test/atcoder/abc199_d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc202_e.test.cpp
       title: test/atcoder/abc202_e.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1207,7 +1207,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc213_f.SA.test.cpp
       title: test/atcoder/abc213_f.SA.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/atcoder/abc213_f.SuffixTree.test.cpp
       title: test/atcoder/abc213_f.SuffixTree.test.cpp
     - icon: ':heavy_check_mark:'

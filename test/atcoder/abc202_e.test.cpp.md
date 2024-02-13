@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: src/DataStructure/WaveletMatrix.hpp
     title: "Wavelet\u884C\u5217"
   - icon: ':question:'
@@ -13,9 +13,9 @@ data:
       \u3084\u3064"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://atcoder.jp/contests/abc202/tasks/abc202_e
@@ -30,14 +30,14 @@ data:
     \ { return bg; }\n Iterator end() const { return ed; }\n size_t size() const {\
     \ return std::distance(bg, ed); }\n T &operator[](int i) const { return bg[i];\
     \ }\n friend std::ostream &operator<<(std::ostream &os, const ListRange &r) {\n\
-    \  return os << '[' << r.bg[0], std::for_each(r.bg + 1, r.ed, [&os](const T &x)\
-    \ { os << \", \" << x; }), os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
+    \  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i) os << (i ? \", \" : \"\
+    \") << r[i];\n  return os << ']';\n }\n};\ntemplate <class T> struct ConstListRange\
     \ {\n using Iterator= typename std::vector<T>::const_iterator;\n Iterator bg,\
     \ ed;\n Iterator begin() const { return bg; }\n Iterator end() const { return\
     \ ed; }\n size_t size() const { return std::distance(bg, ed); }\n const T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
+    \ const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i <\
+    \ e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n#line\
     \ 10 \"src/Graph/Tree.hpp\"\ntemplate <class Cost= void, bool weight= false> class\
     \ Tree {\n template <class D, class T> struct Edge_B {\n  int to;\n  T cost;\n\
     \  operator int() const { return to; }\n };\n template <class D> struct Edge_B<D,\
@@ -165,8 +165,8 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc202_e.test.cpp
   requiredBy: []
-  timestamp: '2024-02-12 20:44:02+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2024-02-13 11:50:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc202_e.test.cpp
 layout: document

@@ -9,7 +9,7 @@ data:
     title: "\u91CD\u8EFD\u5206\u89E3"
   - icon: ':question:'
     path: src/Graph/Rerooting.hpp
-    title: src/Graph/Rerooting.hpp
+    title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "\u30A4\u30C6\u30EC\u30FC\u30BF\u3060\u3051\u6301\u3063\u3066\u304A\u304F\
@@ -31,17 +31,17 @@ data:
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n T &operator[](int\
     \ i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream &os,\
-    \ const ListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg + 1,\
-    \ r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\ntemplate\
-    \ <class T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
+    \ const ListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size(); i < e; ++i)\
+    \ os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\ntemplate <class\
+    \ T> struct ConstListRange {\n using Iterator= typename std::vector<T>::const_iterator;\n\
     \ Iterator bg, ed;\n Iterator begin() const { return bg; }\n Iterator end() const\
     \ { return ed; }\n size_t size() const { return std::distance(bg, ed); }\n const\
     \ T &operator[](int i) const { return bg[i]; }\n friend std::ostream &operator<<(std::ostream\
-    \ &os, const ConstListRange &r) {\n  return os << '[' << r.bg[0], std::for_each(r.bg\
-    \ + 1, r.ed, [&os](const T &x) { os << \", \" << x; }), os << ']';\n }\n};\n#line\
-    \ 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s, d;\n Edge(int s= 0, int d=\
-    \ 0): s(s), d(d) {}\n Edge &operator--() { return --s, --d, *this; }\n int operator-(int\
-    \ v) const { return s ^ d ^ v; }\n friend std::istream &operator>>(std::istream\
+    \ &os, const ConstListRange &r) {\n  os << '[';\n  for (int i= 0, e= r.size();\
+    \ i < e; ++i) os << (i ? \", \" : \"\") << r[i];\n  return os << ']';\n }\n};\n\
+    #line 3 \"src/Graph/Graph.hpp\"\nstruct Edge {\n int s, d;\n Edge(int s= 0, int\
+    \ d= 0): s(s), d(d) {}\n Edge &operator--() { return --s, --d, *this; }\n int\
+    \ operator-(int v) const { return s ^ d ^ v; }\n friend std::istream &operator>>(std::istream\
     \ &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend std::ostream &operator<<(std::ostream\
     \ &os, const Edge &e) { return os << '(' << e.s << \", \" << e.d << ')'; }\n};\n\
     struct Graph: public std::vector<Edge> {\n std::vector<int> c, p;\n using std::vector<Edge>::vector;\n\
@@ -95,14 +95,16 @@ data:
     \ P[PP[u]];\n  }\n  if (L[u] < L[v]) down.emplace_back(std::array{L[u] + edge,\
     \ L[v]});\n  else if (L[v] + edge <= L[u]) up.emplace_back(std::array{L[u], L[v]\
     \ + edge});\n  return up.insert(up.end(), down.rbegin(), down.rend()), up;\n }\n\
-    };\n#line 3 \"src/Graph/Rerooting.hpp\"\ntemplate <class T> class Rerooting {\n\
-    \ const HeavyLightDecomposition &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n\
-    \ template <class U, class F1, class F2, class F3> Rerooting(const Graph &g, const\
-    \ HeavyLightDecomposition &hld, const F1 &put_edge, const F2 &op, const U &ui,\
-    \ const F3 &put_vertex): hld(hld) {\n  static_assert(std::is_invocable_r_v<U,\
-    \ F1, int, int, T>, \"put_edge(int,int,T) is not invocable\");\n  static_assert(std::is_invocable_r_v<U,\
-    \ F2, U, U>, \"op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T,\
-    \ F3, int, U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
+    };\n#line 3 \"src/Graph/Rerooting.hpp\"\n// put_edge(int v, int e, T t) -> U\n\
+    // op(U l, U r) -> U\n// ui(:U) is the identity element of op\n// put_vertex(int\
+    \ v, U sum) -> T\ntemplate <class T> class Rerooting {\n const HeavyLightDecomposition\
+    \ &hld;\n std::vector<T> dp, dp1, dp2;\npublic:\n template <class U, class F1,\
+    \ class F2, class F3> Rerooting(const Graph &g, const HeavyLightDecomposition\
+    \ &hld, const F1 &put_edge, const F2 &op, const U &ui, const F3 &put_vertex):\
+    \ hld(hld) {\n  static_assert(std::is_invocable_r_v<U, F1, int, int, T>, \"put_edge(int,int,T)\
+    \ is not invocable\");\n  static_assert(std::is_invocable_r_v<U, F2, U, U>, \"\
+    op(U,U) is not invocable\");\n  static_assert(std::is_invocable_r_v<T, F3, int,\
+    \ U>, \"put_vertex(int,U) is not invocable\");\n  const int n= g.vertex_size();\n\
     \  dp.resize(n), dp1.resize(n), dp2.resize(n);\n  for (int i= n, v; i--;) {\n\
     \   U sum= ui;\n   for (int e: g(v= hld.to_vertex(i)))\n    if (int u= g[e] -\
     \ v; u != hld.parent(v)) sum= op(sum, put_edge(v, e, dp1[u]));\n   dp1[v]= put_vertex(v,\
@@ -146,7 +148,7 @@ data:
   isVerificationFile: true
   path: test/atcoder/abc220_f.test.cpp
   requiredBy: []
-  timestamp: '2024-02-13 10:42:36+09:00'
+  timestamp: '2024-02-13 11:50:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/atcoder/abc220_f.test.cpp
