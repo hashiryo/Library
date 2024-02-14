@@ -48,7 +48,7 @@ data:
     path: src/NumberTheory/tables.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u30C6\u30FC\u30D6\u30EB\u3084 gcd \u7573\
       \u307F\u8FBC\u307F\u306A\u3069"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
@@ -100,7 +100,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/atcoder/abc136_d.test.cpp
     title: test/atcoder/abc136_d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
   - icon: ':heavy_check_mark:'

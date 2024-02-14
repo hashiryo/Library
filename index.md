@@ -67,7 +67,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/DataStructure/SortedPerBucket.hpp
       title: "\u5178\u578B\u7684\u306A\u5E73\u65B9\u5206\u5272"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/DataStructure/SparseTable.hpp
       title: Sparse-Table
     - icon: ':question:'
@@ -436,7 +436,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: src/Optimization/WeightedMatching.hpp
       title: "\u91CD\u307F\u4ED8\u304D\u30DE\u30C3\u30C1\u30F3\u30B0"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: src/Optimization/fibonacci_search.hpp
       title: "\u30D5\u30A3\u30DC\u30CA\u30C3\u30C1\u63A2\u7D22"
     - icon: ':heavy_check_mark:'
@@ -470,7 +470,7 @@ data:
     - icon: ':question:'
       path: src/String/SuffixArray.hpp
       title: "Suffix Array (\u63A5\u5C3E\u8F9E\u914D\u5217)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: src/String/SuffixTree.hpp
       title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
     - icon: ':question:'
@@ -1123,7 +1123,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc141_e.RH.test.cpp
       title: test/atcoder/abc141_e.RH.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc141_e.SuffixTree.test.cpp
       title: test/atcoder/abc141_e.SuffixTree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1321,7 +1321,7 @@ data:
     - icon: ':x:'
       path: test/atcoder/abc275_ex.test.cpp
       title: test/atcoder/abc275_ex.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc276_g.sparse_FPS.test.cpp
       title: test/atcoder/abc276_g.sparse_FPS.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1333,7 +1333,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/atcoder/abc296_g.test.cpp
       title: test/atcoder/abc296_g.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/atcoder/abc305_ex.test.cpp
       title: test/atcoder/abc305_ex.test.cpp
     - icon: ':heavy_check_mark:'
