@@ -12,7 +12,7 @@ data:
   - icon: ':question:'
     path: src/Graph/HeavyLightDecomposition.hpp
     title: "\u91CD\u8EFD\u5206\u89E3"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':x:'
@@ -24,10 +24,13 @@ data:
     title: "\u4E00\u822C\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3\
       \u30B0"
   - icon: ':x:'
+    path: src/Graph/incidence_linear_system.hpp
+    title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
+  - icon: ':x:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
   - icon: ':x:'
@@ -39,7 +42,7 @@ data:
   - icon: ':x:'
     path: test/aoj/GRL_3_A.test.cpp
     title: test/aoj/GRL_3_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,10 +51,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
   - icon: ':x:'
@@ -72,6 +75,9 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc241_e.test.cpp
     title: test/atcoder/abc241_e.test.cpp
+  - icon: ':x:'
+    path: test/atcoder/arc106_b.test.cpp
+    title: test/atcoder/arc106_b.test.cpp
   - icon: ':x:'
     path: test/hackerrank/bonnie-and-clyde.test.cpp
     title: test/hackerrank/bonnie-and-clyde.test.cpp
@@ -161,11 +167,11 @@ data:
     \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
     \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
-    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): n(n), vector(m) {}\n size_t\
+    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
     \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
     \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
     \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
-    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int\
+    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t\
     \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
     \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
     \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
@@ -179,11 +185,11 @@ data:
     \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
     \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
-    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): n(n), vector(m) {}\n size_t\
+    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
     \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
     \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
     \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
-    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int\
+    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t\
     \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
     \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
     \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
@@ -201,8 +207,9 @@ data:
   - src/Graph/Rerooting.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/Graph/HeavyLightDecomposition.hpp
+  - src/Graph/incidence_linear_system.hpp
   - src/String/SuffixTree.hpp
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-15 15:29:25+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1494.test.cpp
@@ -235,6 +242,7 @@ data:
   - test/atcoder/abc136_d.test.cpp
   - test/atcoder/abc220_f.test.cpp
   - test/atcoder/abc167_d.test.cpp
+  - test/atcoder/arc106_b.test.cpp
   - test/atcoder/abc223_g.rerooting.test.cpp
   - test/atcoder/abc179_e.test.cpp
   - test/atcoder/abc222_f.test.cpp
@@ -275,7 +283,7 @@ for(int v=0;v<n;++v)
 
 |メンバ関数|概要|
 |---|---|
-|`to(v)`|端点のうち頂点 $v$ でない方を返す.|
+|`to(u)`|端点のうち頂点 $u$ でない方を返す.|
 |`operator--()`| 辺の端点をデクリメント. (1-index の入力をスムーズに 0-indexにするために用意).|
 
 |その他関数|概要|
@@ -290,13 +298,13 @@ for(int v=0;v<n;++v)
 
 |名前|概要|
 |---|---|
-|`Graph(n=0,m=0)`|コンストラクタ．頂点の数 n と 辺の数 m を渡す． <br> 辺はすべて (0,0) で初期化．|
+|`Graph(n=0,m=0)`|コンストラクタ．頂点の数 $n$ と 辺の数 $m$ を渡す． <br> 辺はすべて $(0,0)$ で初期化．|
 |`vertex_size()`|頂点の数を返す．|
 |`edge_size()`|辺の数を返す．|
 |`add_vertex()`|内部で頂点を 1 つ増やし，その頂点番号を返す．|
-|`add_edge(Edge e)` <br> `add_edge(s,d)`| 辺 e=(s,d) を追加し，その辺の番号を返す．|
-|`adjacency_vertex(direct)`|頂点 to 頂点の隣接リストを返す. <br> 引数が `true` なら辺を有向，`false` なら辺を無向とみなして構築. <br>返り値は[`CSRArray<int>` クラス](../Internal/ListRange.hpp)|
-|`adjacency_edge(direct)`|頂点 to 辺番号の隣接リストを返す. <br> 引数が `true` なら辺を有向，`false` なら辺を無向とみなして構築. <br>返り値は[`CSRArray<int>` クラス](../Internal/ListRange.hpp)|
+|`add_edge(Edge e)` <br> `add_edge(s,d)`| 辺 $e=(s,d)$ を追加し，その辺の番号を返す．|
+|`adjacency_vertex(direct)`|頂点 → 頂点の隣接リストを返す. <br> 引数が `true` なら辺を有向，`false` なら辺を無向とみなして構築. <br>返り値は[`CSRArray<int>` クラス](../Internal/ListRange.hpp)|
+|`adjacency_edge(direct)`|頂点 → 辺番号の隣接リストを返す. <br> 引数が `true` なら辺を有向，`false` なら辺を無向とみなして構築. <br>返り値は[`CSRArray<int>` クラス](../Internal/ListRange.hpp)|
 
 
 ## 参考

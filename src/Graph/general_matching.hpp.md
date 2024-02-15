@@ -45,11 +45,11 @@ data:
     \ &operator>>(std::istream &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend\
     \ std::ostream &operator<<(std::ostream &os, const Edge &e) { return os << '('\
     \ << e.s << \", \" << e.d << ')'; }\n};\nstruct Graph: public std::vector<Edge>\
-    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): n(n), vector(m) {}\n size_t\
+    \ {\n size_t n;\n Graph(size_t n= 0, size_t m= 0): vector(m), n(n) {}\n size_t\
     \ vertex_size() const { return n; }\n size_t edge_size() const { return size();\
     \ }\n size_t add_vertex() { return n++; }\n size_t add_edge(int s, int d) { return\
     \ emplace_back(s, d), size() - 1; }\n size_t add_edge(Edge e) { return add_edge(e.s,\
-    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (int\
+    \ e.d); }\n#define _ADJ_FOR(a, b) \\\n for (auto [u, v]: *this) a; \\\n for (size_t\
     \ i= 0; i < n; ++i) p[i + 1]+= p[i]; \\\n for (int i= size(); i--;) b;\n#define\
     \ _ADJ(a, b) \\\n vector<int> p(n + 1), c(size() << !direct); \\\n if (direct)\
     \ { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]= a) \\\n } else { \\\n  _ADJ_FOR((++p[u],\
@@ -108,7 +108,7 @@ data:
   isVerificationFile: false
   path: src/Graph/general_matching.hpp
   requiredBy: []
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-15 15:29:25+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yosupo/bipartitematching.matching.test.cpp
@@ -120,9 +120,9 @@ title: "\u4E00\u822C\u30B0\u30E9\u30D5\u306E\u6700\u5927\u30DE\u30C3\u30C1\u30F3
 ---
 GabowのEdmonds' Algorithm
 
-|関数名|概要|
-|---|---|
-|`generate_matching(CSRArray<int> adj)`<br>`generate_matching(Graph g)`| 無向グラフ g の最大マッチングの一例を返す.  <br> 引数は頂点 to 頂点の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) もしくは [`Graph`クラス](Graph.hpp) で無向グラフを渡す. <br> 返り値は `vector<Edge>`.|
+|関数名|概要|計算量|
+|---|---|---|
+|`generate_matching(CSRArray<int> adj)`<br>`generate_matching(Graph g)`| 無向グラフ g の最大マッチングの一例を返す.  <br> 引数は頂点 → 頂点の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) もしくは [`Graph`クラス](Graph.hpp) で無向グラフを渡す. <br> 返り値は `vector<Edge>`.|$O(nm \log n)$<br> ただし頂点数，辺数をそれぞれ $n,m$ とした． <br>はやい|
 
 ## 問題例
 [Chokudai SpeedRun 002 K - 種類数 β](https://atcoder.jp/contests/chokudai_S002/tasks/chokudai_S002_k) (二部マッチング, 頂点:2e5+4e5, 辺:4e5) 

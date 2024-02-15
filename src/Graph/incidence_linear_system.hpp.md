@@ -4,27 +4,23 @@ data:
   - icon: ':question:'
     path: src/Graph/Graph.hpp
     title: "\u30B0\u30E9\u30D5"
-  - icon: ':x:'
-    path: src/Graph/incidence_linear_system.hpp
-    title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
   - icon: ':question:'
     path: src/Internal/ListRange.hpp
     title: "CSR \u8868\u73FE\u3092\u7528\u3044\u305F\u4E8C\u6B21\u5143\u914D\u5217\
       \ \u4ED6"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/atcoder/arc106_b.test.cpp
+    title: test/atcoder/arc106_b.test.cpp
   _isVerificationFailed: true
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://atcoder.jp/contests/arc106/tasks/arc106_b
-    links:
-    - https://atcoder.jp/contests/arc106/tasks/arc106_b
-  bundledCode: "#line 1 \"test/atcoder/arc106_b.test.cpp\"\n#define PROBLEM \"https://atcoder.jp/contests/arc106/tasks/arc106_b\"\
-    \n#include <iostream>\n#include <vector>\n#include <algorithm>\n#line 4 \"src/Internal/ListRange.hpp\"\
-    \n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT, CT) \\\n\
-    \ template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
+    links: []
+  bundledCode: "#line 2 \"src/Internal/ListRange.hpp\"\n#include <vector>\n#include\
+    \ <iostream>\n#include <iterator>\n#include <type_traits>\n#define _LR(name, IT,\
+    \ CT) \\\n template <class T> struct name { \\\n  using Iterator= typename std::vector<T>::IT;\
     \ \\\n  Iterator bg, ed; \\\n  Iterator begin() const { return bg; } \\\n  Iterator\
     \ end() const { return ed; } \\\n  size_t size() const { return std::distance(bg,\
     \ ed); } \\\n  CT &operator[](int i) const { return bg[i]; } \\\n }\n_LR(ListRange,\
@@ -64,37 +60,38 @@ data:
     \ solution\n      break;\n     }\n     T tmp= b[p];\n     p= g[e].to(p);\n   \
     \  if constexpr (std::is_same_v<T, bool>) x[e]= tmp, b[p]= tmp ^ b[p];\n     else\
     \ x[e]= g[e].d == p ? -tmp : tmp, b[p]+= tmp;\n    } else if (int q= g[e= adje.dat[ei[p]++]].to(p);\
-    \ pre[q] == -2) pre[p= q]= e;\n   }\n return x;\n}\n#line 6 \"test/atcoder/arc106_b.test.cpp\"\
-    \nusing namespace std;\n// \u89E3\u7121\u3057\u306E\u5224\u5B9A\u306Everify\n\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, M;\n cin\
-    \ >> N >> M;\n vector<long long> a(N);\n for (int i= 0; i < N; i++) cin >> a[i];\n\
-    \ for (int i= 0, b; i < N; i++) cin >> b, a[i]-= b;\n Graph g(N, M);\n for (int\
-    \ i= 0; i < M; ++i) cin >> g[i], --g[i];\n if (M) cout << (incidence_linear_system(g,\
-    \ a).empty() ? \"No\" : \"Yes\") << '\\n';\n else cout << (all_of(begin(a), end(a),\
-    \ [](auto t) { return !t; }) ? \"Yes\" : \"No\") << '\\n';\n return 0;\n}\n"
-  code: "#define PROBLEM \"https://atcoder.jp/contests/arc106/tasks/arc106_b\"\n#include\
-    \ <iostream>\n#include <vector>\n#include <algorithm>\n#include \"src/Graph/incidence_linear_system.hpp\"\
-    \nusing namespace std;\n// \u89E3\u7121\u3057\u306E\u5224\u5B9A\u306Everify\n\n\
-    signed main() {\n cin.tie(0);\n ios::sync_with_stdio(false);\n int N, M;\n cin\
-    \ >> N >> M;\n vector<long long> a(N);\n for (int i= 0; i < N; i++) cin >> a[i];\n\
-    \ for (int i= 0, b; i < N; i++) cin >> b, a[i]-= b;\n Graph g(N, M);\n for (int\
-    \ i= 0; i < M; ++i) cin >> g[i], --g[i];\n if (M) cout << (incidence_linear_system(g,\
-    \ a).empty() ? \"No\" : \"Yes\") << '\\n';\n else cout << (all_of(begin(a), end(a),\
-    \ [](auto t) { return !t; }) ? \"Yes\" : \"No\") << '\\n';\n return 0;\n}"
+    \ pre[q] == -2) pre[p= q]= e;\n   }\n return x;\n}\n"
+  code: "#pragma once\n#include \"src/Graph/Graph.hpp\"\ntemplate <class T> std::vector<T>\
+    \ incidence_linear_system(const Graph &g, std::vector<T> b) {\n const int n= g.vertex_size();\n\
+    \ assert((int)b.size() == n);\n std::vector<T> x(g.edge_size());\n auto adje=\
+    \ g.adjecency_edge(0);\n std::vector<int> pre(n, -2), ei(adje.p.begin(), adje.p.begin()\
+    \ + n);\n for (int s= 0, p, e; s < n; ++s)\n  if (pre[s] == -2)\n   for (pre[p=\
+    \ s]= -1;;) {\n    if (ei[p] == adje.p[p + 1]) {\n     if (e= pre[p]; e < 0) {\n\
+    \      if (b[p] != T()) return {};  // no solution\n      break;\n     }\n   \
+    \  T tmp= b[p];\n     p= g[e].to(p);\n     if constexpr (std::is_same_v<T, bool>)\
+    \ x[e]= tmp, b[p]= tmp ^ b[p];\n     else x[e]= g[e].d == p ? -tmp : tmp, b[p]+=\
+    \ tmp;\n    } else if (int q= g[e= adje.dat[ei[p]++]].to(p); pre[q] == -2) pre[p=\
+    \ q]= e;\n   }\n return x;\n}"
   dependsOn:
-  - src/Graph/incidence_linear_system.hpp
   - src/Graph/Graph.hpp
   - src/Internal/ListRange.hpp
-  isVerificationFile: true
-  path: test/atcoder/arc106_b.test.cpp
+  isVerificationFile: false
+  path: src/Graph/incidence_linear_system.hpp
   requiredBy: []
   timestamp: '2024-02-15 15:29:25+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
-  verifiedWith: []
-documentation_of: test/atcoder/arc106_b.test.cpp
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/atcoder/arc106_b.test.cpp
+documentation_of: src/Graph/incidence_linear_system.hpp
 layout: document
-redirect_from:
-- /verify/test/atcoder/arc106_b.test.cpp
-- /verify/test/atcoder/arc106_b.test.cpp.html
-title: test/atcoder/arc106_b.test.cpp
+title: "\u63A5\u7D9A\u884C\u5217\u306E\u9023\u7ACB\u65B9\u7A0B\u5F0F"
 ---
+
+|関数名|概要|計算量|
+|---|---|---|
+|`incidence_linear_system<T>(g, b)`|有向グラフ $g$ の接続行列 $A$ と頂点数 $n$ の次元を持つベクトル $\boldsymbol{b}$ に対して <br> $\displaystyle A\boldsymbol{x}=\boldsymbol{b}$<br>を満たす辺数 $m$ の次元を持つベクトル $\boldsymbol{x}$ を一つ返す. <br> 解なしなら空集合を返す.|$O(n+m)$|
+
+## 問題例
+[AtCoder Beginner Contest 155 F - Perils in Parallel](https://atcoder.jp/contests/abc155/tasks/abc155_f) (sp judge)\
+[AtCoder Grand Contest 035 B - Even Degrees ](https://atcoder.jp/contests/agc035/tasks/agc035_b) (sp judge)\
+[CODE FESTIVAL 2017 Final E - Combination Lock](https://atcoder.jp/contests/cf17-final/tasks/cf17_final_e)

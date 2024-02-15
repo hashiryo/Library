@@ -12,17 +12,17 @@ data:
   - icon: ':question:'
     path: src/Graph/FunctionalGraph.hpp
     title: "Functional\u30B0\u30E9\u30D5"
-  - icon: ':x:'
+  - icon: ':question:'
     path: src/Graph/Rerooting.hpp
     title: "\u5168\u65B9\u4F4D\u6728DP"
   - icon: ':x:'
     path: src/String/SuffixTree.hpp
     title: "Suffix Tree (\u63A5\u5C3E\u8F9E\u6728)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
   - icon: ':heavy_check_mark:'
@@ -31,10 +31,10 @@ data:
   - icon: ':x:'
     path: test/atcoder/abc141_e.SuffixTree.test.cpp
     title: test/atcoder/abc141_e.SuffixTree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc167_d.test.cpp
     title: test/atcoder/abc167_d.test.cpp
   - icon: ':x:'
@@ -137,11 +137,11 @@ data:
     \ &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend std::ostream &operator<<(std::ostream\
     \ &os, const Edge &e) { return os << '(' << e.s << \", \" << e.d << ')'; }\n};\n\
     struct Graph: public std::vector<Edge> {\n size_t n;\n Graph(size_t n= 0, size_t\
-    \ m= 0): n(n), vector(m) {}\n size_t vertex_size() const { return n; }\n size_t\
+    \ m= 0): vector(m), n(n) {}\n size_t vertex_size() const { return n; }\n size_t\
     \ edge_size() const { return size(); }\n size_t add_vertex() { return n++; }\n\
     \ size_t add_edge(int s, int d) { return emplace_back(s, d), size() - 1; }\n size_t\
     \ add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define _ADJ_FOR(a, b) \\\n\
-    \ for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i) p[i + 1]+= p[i];\
+    \ for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n; ++i) p[i + 1]+= p[i];\
     \ \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n vector<int> p(n +\
     \ 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]=\
     \ a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]= a,\
@@ -239,7 +239,7 @@ data:
   - src/Graph/Rerooting.hpp
   - src/Graph/FunctionalGraph.hpp
   - src/String/SuffixTree.hpp
-  timestamp: '2024-02-15 14:27:01+09:00'
+  timestamp: '2024-02-15 15:29:25+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1494.test.cpp
@@ -314,7 +314,7 @@ HL分解＋オイラーツアーで頂点集合を数列に \
 
 | 名前 | 概要 |
 | --- | --- |
-| `HeavyLightDecomposition(CSRArray<int> adj, root=0)` <br> `HeavyLightDecomposition(Graph g, root=0)` | コンストラクタ. <br> 引数は頂点 to 頂点の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) adj または [`Graph` クラス](Graph.hpp) g，と根とする頂点 root を渡す. <br> 親から子へ向かう有向辺さえあれば良い． |
+| `HeavyLightDecomposition(CSRArray<int> adj, root=0)` <br> `HeavyLightDecomposition(Graph g, root=0)` | コンストラクタ. <br> 引数は頂点 → 頂点の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) adj または [`Graph` クラス](Graph.hpp) g，と根とする頂点 root を渡す. <br> 親から子へ向かう有向辺さえあれば良い． |
 | `size()`| 頂点数を返す.|
 | `path<edge=0>(u,v)` | 頂点 u から頂点 v へのパスを表す"**閉**"区間列を返す. <br> `edge`フラグが true なら LCA を含めないような区間列を返す. |
 | `subtree(v)` | 頂点 v を根とする部分木を表す"**半開**"区間を返す. |

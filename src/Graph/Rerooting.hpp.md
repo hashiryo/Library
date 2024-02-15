@@ -13,13 +13,13 @@ data:
       \ \u4ED6"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/1595.test.cpp
     title: test/aoj/1595.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_5_A.test.cpp
     title: test/aoj/GRL_5_A.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/atcoder/abc160_f.test.cpp
     title: test/atcoder/abc160_f.test.cpp
   - icon: ':x:'
@@ -69,7 +69,7 @@ data:
     title: test/yukicoder/922.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"src/Graph/HeavyLightDecomposition.hpp\"\n#include <array>\n\
@@ -95,11 +95,11 @@ data:
     \ &is, Edge &e) { return is >> e.s >> e.d, is; }\n friend std::ostream &operator<<(std::ostream\
     \ &os, const Edge &e) { return os << '(' << e.s << \", \" << e.d << ')'; }\n};\n\
     struct Graph: public std::vector<Edge> {\n size_t n;\n Graph(size_t n= 0, size_t\
-    \ m= 0): n(n), vector(m) {}\n size_t vertex_size() const { return n; }\n size_t\
+    \ m= 0): vector(m), n(n) {}\n size_t vertex_size() const { return n; }\n size_t\
     \ edge_size() const { return size(); }\n size_t add_vertex() { return n++; }\n\
     \ size_t add_edge(int s, int d) { return emplace_back(s, d), size() - 1; }\n size_t\
     \ add_edge(Edge e) { return add_edge(e.s, e.d); }\n#define _ADJ_FOR(a, b) \\\n\
-    \ for (auto [u, v]: *this) a; \\\n for (int i= 0; i < n; ++i) p[i + 1]+= p[i];\
+    \ for (auto [u, v]: *this) a; \\\n for (size_t i= 0; i < n; ++i) p[i + 1]+= p[i];\
     \ \\\n for (int i= size(); i--;) b;\n#define _ADJ(a, b) \\\n vector<int> p(n +\
     \ 1), c(size() << !direct); \\\n if (direct) { \\\n  _ADJ_FOR(++p[u], c[--p[(*this)[i].s]]=\
     \ a) \\\n } else { \\\n  _ADJ_FOR((++p[u], ++p[v]), (c[--p[(*this)[i].s]]= a,\
@@ -175,9 +175,9 @@ data:
     \ const U &ui, const F3 &put_vertex): Rerooting(g, g.adjacency_edge(0), hld, put_edge,\
     \ op, ui, put_vertex) {}\n template <class U, class F1, class F2, class F3> Rerooting(const\
     \ Graph &g, const F1 &put_edge, const F2 &op, const U &ui, const F3 &put_vertex):\
-    \ Rerooting(g, g.adjacency_edge(0), HeavyLightDecomposition(g), hld, put_edge,\
-    \ op, ui, put_vertex) {}\n const T &operator[](int v) const { return dp[v]; }\n\
-    \ auto begin() const { return dp.cbegin(); }\n auto end() const { return dp.cend();\
+    \ Rerooting(g, g.adjacency_edge(0), HeavyLightDecomposition(g), put_edge, op,\
+    \ ui, put_vertex) {}\n const T &operator[](int v) const { return dp[v]; }\n auto\
+    \ begin() const { return dp.cbegin(); }\n auto end() const { return dp.cend();\
     \ }\n const T &operator()(int root, int v) const { return root == v ? dp[v] :\
     \ hld.in_subtree(root, v) ? dp2[hld.jump(v, root, 1)] : dp1[v]; }\n};\n"
   code: "#pragma once\n#include \"src/Graph/HeavyLightDecomposition.hpp\"\n// put_edge(int\
@@ -208,9 +208,9 @@ data:
     \ const U &ui, const F3 &put_vertex): Rerooting(g, g.adjacency_edge(0), hld, put_edge,\
     \ op, ui, put_vertex) {}\n template <class U, class F1, class F2, class F3> Rerooting(const\
     \ Graph &g, const F1 &put_edge, const F2 &op, const U &ui, const F3 &put_vertex):\
-    \ Rerooting(g, g.adjacency_edge(0), HeavyLightDecomposition(g), hld, put_edge,\
-    \ op, ui, put_vertex) {}\n const T &operator[](int v) const { return dp[v]; }\n\
-    \ auto begin() const { return dp.cbegin(); }\n auto end() const { return dp.cend();\
+    \ Rerooting(g, g.adjacency_edge(0), HeavyLightDecomposition(g), put_edge, op,\
+    \ ui, put_vertex) {}\n const T &operator[](int v) const { return dp[v]; }\n auto\
+    \ begin() const { return dp.cbegin(); }\n auto end() const { return dp.cend();\
     \ }\n const T &operator()(int root, int v) const { return root == v ? dp[v] :\
     \ hld.in_subtree(root, v) ? dp2[hld.jump(v, root, 1)] : dp1[v]; }\n};"
   dependsOn:
@@ -220,8 +220,8 @@ data:
   isVerificationFile: false
   path: src/Graph/Rerooting.hpp
   requiredBy: []
-  timestamp: '2024-02-15 14:27:01+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2024-02-15 15:29:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1494.test.cpp
   - test/yukicoder/1976.test.cpp
@@ -262,7 +262,7 @@ Rerooting<T>::Rerooting<U,F1,F2,F3>(Graph g, CSRArray<int> adje,  HeavyLightDeco
 |引数|概要|
 |---|---|
 |`Graph g`|[`Graph` クラス](Graph.hpp)|
-|`CSRArray<int> adje`|頂点 to 辺の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) <br> 省略できる (1), (2). (ただし 内部で作ってる)|
+|`CSRArray<int> adje`|頂点 → 辺の隣接リスト([`CSRArray<int>`クラス](../Internal/ListRange.hpp)) <br> 省略できる (1), (2). (ただし 内部で作ってる)|
 |`HeavyLightDecomposition hld`|g を [重軽分解](HeavyLightDecomposition.hpp)したもの. <br> 省略できる (1), (3). (ただし 内部で作ってる) |
 |`put_edge(int v, int e, T t) -> U`| 頂点 v と v から出る辺 e の情報によってクラス `T` の値 `t` をモノイド `U` の元に変換|
 |`op(U l, U r) -> U`|モノイド `U` の二項演算|
